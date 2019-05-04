@@ -20,7 +20,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5224delta.pod
 
   Selected Bug Fixes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1477 in perl5224delta.pod
 
-    Fixed a crash with s///l where it thought it was dealing with UTF-8 when it wasn... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1513 in perl5224delta.pod
+    Fixed a crash with s///l where it thought it was dealing with UTF-8 when it wasn't. [perl #129038]|https://rt.perl.org/Ticket/Display.htm... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1513 in perl5224delta.pod
 
   Acknowledgements in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1685 in perl5224delta.pod
 

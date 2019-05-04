@@ -98,7 +98,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlfaq3.pod
 
     Is there an IDE or Windows Perl Editor? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9215 in perlfaq3.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 9604 in perlfaq3.pod
+      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 9604 in perlfaq3.pod
 
         Eclipse in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9613 in perlfaq3.pod
 
@@ -126,7 +126,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlfaq3.pod
 
         Zeus in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11684 in perlfaq3.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 12895 in perlfaq3.pod
+      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 12895 in perlfaq3.pod
 
         GNU Emacs in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12904 in perlfaq3.pod
 
@@ -136,13 +136,13 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlfaq3.pod
 
         Jed in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13088 in perlfaq3.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 13166 in perlfaq3.pod
+      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 13166 in perlfaq3.pod
 
         Vim in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13175 in perlfaq3.pod
 
         Vile in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13210 in perlfaq3.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 13340 in perlfaq3.pod
+      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 13340 in perlfaq3.pod
 
         MultiEdit in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13349 in perlfaq3.pod
 
@@ -150,13 +150,13 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlfaq3.pod
 
         ConTEXT in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13443 in perlfaq3.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 13954 in perlfaq3.pod
+      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 13954 in perlfaq3.pod
 
         bash in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13963 in perlfaq3.pod
 
         zsh in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14026 in perlfaq3.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 14262 in perlfaq3.pod
+      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 14262 in perlfaq3.pod
 
         BBEdit and TextWrangler in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14271 in perlfaq3.pod
 

@@ -10,15 +10,15 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlnumber.pod
 
   Numeric operators and numeric conversions in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3542 in perlnumber.pod
 
-    If the source number can be represented in the target form, that representation ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4266 in perlnumber.pod
+    If the source number can be represented in the target form, that representation is used. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4266 in perlnumber.pod
 
-    If the source number is outside of the limits representable in the target form, ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4365 in perlnumber.pod
+    If the source number is outside of the limits representable in the target form, a representation of the closest limit is used.  (Loss of ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4365 in perlnumber.pod
 
-    If the source number is between two numbers representable in the target form, a ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4528 in perlnumber.pod
+    If the source number is between two numbers representable in the target form, a representation of one of these numbers is used.  (Loss of... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4528 in perlnumber.pod
 
-    In native floating point --> native integer conversions the magnitude of the res... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4692 in perlnumber.pod
+    In native floating point --> native integer conversions the magnitude of the result is less than or equal to the magnitude of the source.... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4692 in perlnumber.pod
 
-    If the decimal string --> native integer conversion cannot be done without loss ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4872 in perlnumber.pod
+    If the decimal string --> native integer conversion cannot be done without loss of information, the result is compatible with the convers... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4872 in perlnumber.pod
 
   Flavors of Perl numeric operations in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 5449 in perlnumber.pod
 

@@ -20,21 +20,21 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlfaq2.pod
 
     Where can I get information on Perl? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3861 in perlfaq2.pod
 
-      * http://www.perl.org/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3915 in perlfaq2.pod
+      http://www.perl.org/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3915 in perlfaq2.pod
 
-      * http://perldoc.perl.org/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3948 in perlfaq2.pod
+      http://perldoc.perl.org/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3948 in perlfaq2.pod
 
-      * http://learn.perl.org/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3985 in perlfaq2.pod
+      http://learn.perl.org/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3985 in perlfaq2.pod
 
     What is perl.com? Perl Mongers? pm.org? perl.org? cpan.org? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4542 in perlfaq2.pod
 
-      * http://www.perl.org/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5303 in perlfaq2.pod
+      http://www.perl.org/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5303 in perlfaq2.pod
 
-      * http://learn.perl.org/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5336 in perlfaq2.pod
+      http://learn.perl.org/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5336 in perlfaq2.pod
 
-      * http://jobs.perl.org/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5371 in perlfaq2.pod
+      http://jobs.perl.org/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5371 in perlfaq2.pod
 
-      * http://lists.perl.org/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5405 in perlfaq2.pod
+      http://lists.perl.org/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5405 in perlfaq2.pod
 
     Where can I post questions? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5973 in perlfaq2.pod
 

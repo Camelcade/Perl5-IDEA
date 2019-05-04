@@ -16,95 +16,95 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlko.pod
 
       지원 인코딩 in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 3345 in perlko.pod
 
-        US-ASCII와 KS X 1001을 같이 쓰는 멀티바이트 인코딩으로 흔히 완성형이라고 불림. KS X 2901과 RFC 1557 참고. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3407 in perlko.pod
+        euc-kr  US-ASCII와 KS X 1001을 같이 쓰는 멀티바이트 인코딩으로 흔히 완성형이라고 불림. KS X 2901과 RFC 1557 참고. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3407 in perlko.pod
 
-        MS-Windows 9x/ME에서 쓰이는 확장 완성형. euc-kr에 8,822자의 한글 음절을 더한 것임. alias는 uhc, windows... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3504 in perlko.pod
+        cp949  MS-Windows 9x/ME에서 쓰이는 확장 완성형. euc-kr에 8,822자의 한글 음절을 더한 것임. alias는 uhc, windows-949, x-windows-949, ks_c_5601-1987. 맨 마지막 이름은 적절하... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3504 in perlko.pod
 
-        KS X 1001:1998 부록 3에서 규정한 조합형. 문자 레퍼토리는 cp949와 마찬가지로 US-ASCII와  KS X 1001에 8,822... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3699 in perlko.pod
+        johab  KS X 1001:1998 부록 3에서 규정한 조합형. 문자 레퍼토리는 cp949와 마찬가지로 US-ASCII와  KS X 1001에 8,822자의 한글 음절을 더한 것으로 인코딩 방식은 전혀 다름. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3699 in perlko.pod
 
-        RFC 1557에서 규정한 한국어 인터넷 메일 교환용 인코딩으로 US-ASCII와 KS X 1001을 레퍼토리로 하는 점에서 euc-kr과 같지... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3830 in perlko.pod
+        iso-2022-kr  RFC 1557에서 규정한 한국어 인터넷 메일 교환용 인코딩으로 US-ASCII와 KS X 1001을 레퍼토리로 하는 점에서 euc-kr과 같지만 인코딩 방식이 다름. 1997-8년 경까지 쓰였으나 더 이상 메일 교환에 쓰... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3830 in perlko.pod
 
-        KS X 1001(KS C 5601)을 GL(즉, MSB를 0으로 한 경우)에 놓았을 때의 인코딩. US-ASCII와 결합하지 않고 단독으로 쓰... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3986 in perlko.pod
+        ksc5601-raw  KS X 1001(KS C 5601)을 GL(즉, MSB를 0으로 한 경우)에 놓았을 때의 인코딩. US-ASCII와 결합하지 않고 단독으로 쓰이는 일은 X11 등에서 글꼴 인코딩(ksc5601.1987-0. '0'은 GL... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3986 in perlko.pod
 
       변환 예제 in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 4247 in perlko.pod
 
       모범 사례 in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 4749 in perlko.pod
 
-        * 소스 코드는 항상 UTF-8 인코딩으로 저장 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4893 in perlko.pod
+        소스 코드는 항상 UTF-8 인코딩으로 저장 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4893 in perlko.pod
 
-        * 소스 코드 상단에 use utf8; 프라그마 사용 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4927 in perlko.pod
+        소스 코드 상단에 use utf8; 프라그마 사용 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4927 in perlko.pod
 
-        * 소스 코드, 터미널, 운영체제, 데이터 인코딩을 분리해서 이해 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4967 in perlko.pod
+        소스 코드, 터미널, 운영체제, 데이터 인코딩을 분리해서 이해 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4967 in perlko.pod
 
-        * 입출력 파일 핸들에 명시적인 인코딩을 사용 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5011 in perlko.pod
+        입출력 파일 핸들에 명시적인 인코딩을 사용 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5011 in perlko.pod
 
-        * 중복(double) 인코딩을 주의 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5044 in perlko.pod
+        중복(double) 인코딩을 주의 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5044 in perlko.pod
 
       유니코드 및 한국어 인코딩 관련 자료 in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 5080 in perlko.pod
 
-        * perluniintro in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5118 in perlko.pod
+        perluniintro in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5118 in perlko.pod
 
-        * perlunicode in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5143 in perlko.pod
+        perlunicode in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5143 in perlko.pod
 
-        * Encode in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5167 in perlko.pod
+        Encode in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5167 in perlko.pod
 
-        * Encode::KR in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5186 in perlko.pod
+        Encode::KR in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5186 in perlko.pod
 
-        * encoding in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5209 in perlko.pod
+        encoding in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5209 in perlko.pod
 
-        유니코드 컨소시엄 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5230 in perlko.pod
+        http://www.unicode.org/  유니코드 컨소시엄 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5230 in perlko.pod
 
-        기본적으로 Unicode와 같은 ISO 표준인  ISO/IEC 10646 UCS(Universal Character Set)을 만드는 ISO/I... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5277 in perlko.pod
+        http://std.dkuug.dk/JTC1/SC2/WG2  기본적으로 Unicode와 같은 ISO 표준인  ISO/IEC 10646 UCS(Universal Character Set)을 만드는 ISO/IEC JTC1/SC2/WG2의 웹 페이지 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5277 in perlko.pod
 
-        유닉스/리눅스 사용자를 위한 UTF-8 및 유니코드 관련 FAQ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5426 in perlko.pod
+        http://www.cl.cam.ac.uk/~mgk25/unicode.html  유닉스/리눅스 사용자를 위한 UTF-8 및 유니코드 관련 FAQ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5426 in perlko.pod
 
-        유닉스/리눅스 사용자를 위한 UTF-8 및 유니코드 관련 FAQ의 한국어 번역 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5519 in perlko.pod
+        http://wiki.kldp.org/Translations/html/UTF8-Unicode-KLDP/UTF8-Unicode-KLDP.html  유닉스/리눅스 사용자를 위한 UTF-8 및 유니코드 관련 FAQ의 한국어 번역 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5519 in perlko.pod
 
   Perl 관련 자료 in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 5664 in perlko.pod
 
-    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 5712 in perlko.pod
+    null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 5712 in perlko.pod
 
-      Perl 공식 홈페이지 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5721 in perlko.pod
+      http://www.perl.org/  Perl 공식 홈페이지 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5721 in perlko.pod
 
-      O'Reilly의 Perl 웹 페이지 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5768 in perlko.pod
+      http://www.perl.com/  O'Reilly의 Perl 웹 페이지 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5768 in perlko.pod
 
-      CPAN - Comprehensive Perl Archive Network, 통합적 Perl 파일 보관 네트워크 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5823 in perlko.pod
+      http://www.cpan.org/  CPAN - Comprehensive Perl Archive Network, 통합적 Perl 파일 보관 네트워크 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5823 in perlko.pod
 
-      메타 CPAN in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5920 in perlko.pod
+      http://metacpan.org  메타 CPAN in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5920 in perlko.pod
 
-      Perl 메일링 리스트 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5961 in perlko.pod
+      http://lists.perl.org/  Perl 메일링 리스트 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5961 in perlko.pod
 
-      Perl 메타 블로그 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6010 in perlko.pod
+      http://blogs.perl.org/  Perl 메타 블로그 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6010 in perlko.pod
 
-      Perl 수도승들을 위한 수도원 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6058 in perlko.pod
+      http://www.perlmonks.org/  Perl 수도승들을 위한 수도원 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6058 in perlko.pod
 
-      아시아 지역 Perl 몽거스 모임 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6115 in perlko.pod
+      http://www.pm.org/groups/asia.html  아시아 지역 Perl 몽거스 모임 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6115 in perlko.pod
 
-      Perl 크리스마스 달력 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6182 in perlko.pod
+      http://www.perladvent.org/  Perl 크리스마스 달력 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6182 in perlko.pod
 
-    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 6292 in perlko.pod
+    null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 6292 in perlko.pod
 
-      한국 Perl 커뮤니티 공식 포털 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6301 in perlko.pod
+      http://perl.kr/  한국 Perl 커뮤니티 공식 포털 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6301 in perlko.pod
 
-      Perl 문서 한글화 프로젝트 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6349 in perlko.pod
+      http://doc.perl.kr/  Perl 문서 한글화 프로젝트 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6349 in perlko.pod
 
-      네이버 Perl 카페 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6399 in perlko.pod
+      http://cafe.naver.com/perlstudy.cafe  네이버 Perl 카페 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6399 in perlko.pod
 
-      한국 Perl 사용자 모임 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6461 in perlko.pod
+      http://www.perl.or.kr/  한국 Perl 사용자 모임 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6461 in perlko.pod
 
-      Seoul.pm Perl 크리스마스 달력 (2010 ~ 2012) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6512 in perlko.pod
+      http://advent.perl.kr  Seoul.pm Perl 크리스마스 달력 (2010 ~ 2012) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6512 in perlko.pod
 
-      GYPARK(Geunyoung Park)의 Perl 관련 한글 문서 저장소 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6584 in perlko.pod
+      http://gypark.pe.kr/wiki/Perl  GYPARK(Geunyoung Park)의 Perl 관련 한글 문서 저장소 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6584 in perlko.pod
 
-      Seoul.pm - 서울 Perl 몽거스 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6669 in perlko.pod
+      http://seoul.pm.org  Seoul.pm - 서울 Perl 몽거스 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6669 in perlko.pod
 
   라이센스 in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6733 in perlko.pod
 
   AUTHORS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6788 in perlko.pod
 
-    * Jarkko Hietaniemi <jhi@iki.fi> in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6811 in perlko.pod
+    Jarkko Hietaniemi <jhi@iki.fi> in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6811 in perlko.pod
 
-    * 신정식 <jshin@mailaps.org> in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6859 in perlko.pod
+    신정식 <jshin@mailaps.org> in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6859 in perlko.pod
 
-    * 김도형 <keedi@cpan.org> in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6900 in perlko.pod
+    김도형 <keedi@cpan.org> in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6900 in perlko.pod
 

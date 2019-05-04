@@ -28,31 +28,31 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5122delta.pod
 
   Utility Changes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2730 in perl5122delta.pod
 
-    perlbug now always gives the reporter a chance to change the email address it gu... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2761 in perl5122delta.pod
+    perlbug now always gives the reporter a chance to change the email address it guesses for them. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2761 in perl5122delta.pod
 
-    perlbug should no longer warn about uninitialized values when using the -d and -... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2870 in perl5122delta.pod
+    perlbug should no longer warn about uninitialized values when using the -d and -v options. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2870 in perl5122delta.pod
 
   Changes to Existing Documentation in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2987 in perl5122delta.pod
 
-    The existing policy on backward-compatibility and deprecation has been added to ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3036 in perl5122delta.pod
+    The existing policy on backward-compatibility and deprecation has been added to perlpolicy, along with definitions of terms like deprecat... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3036 in perl5122delta.pod
 
     perlfunc/srand's usage has been clarified. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3194 in perl5122delta.pod
 
-    The entry for perlfunc/die was reorganized to emphasize its role in the exceptio... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3250 in perl5122delta.pod
+    The entry for perlfunc/die was reorganized to emphasize its role in the exception mechanism. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3250 in perl5122delta.pod
 
-    Perl's INSTALL file has been clarified to explicitly state that Perl requires a ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3356 in perl5122delta.pod
+    Perl's INSTALL file has been clarified to explicitly state that Perl requires a C89 compliant ANSI C Compiler. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3356 in perl5122delta.pod
 
     IO::Socket's getsockopt() and setsockopt() have been documented. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3480 in perl5122delta.pod
 
     alarm()'s inability to interrupt blocking IO on Windows has been documented. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3564 in perl5122delta.pod
 
-    Math::TrulyRandom hasn't been updated since 1996 and has been removed as a recom... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3654 in perl5122delta.pod
+    Math::TrulyRandom hasn't been updated since 1996 and has been removed as a recommended solution for random number generation. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3654 in perl5122delta.pod
 
     perlrun has been updated to clarify the behaviour of octal flags to perl. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3793 in perl5122delta.pod
 
-    To ease user confusion, $# and $*, two special variables that were removed in ea... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3883 in perl5122delta.pod
+    To ease user confusion, $# and $*, two special variables that were removed in earlier versions of Perl have been documented. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3883 in perl5122delta.pod
 
-    The version of perlfaq shipped with the Perl core has been updated from the offi... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4024 in perl5122delta.pod
+    The version of perlfaq shipped with the Perl core has been updated from the official FAQ version, which is now maintained in the briandfo... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4024 in perl5122delta.pod
 
   Installation and Configuration Improvements in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4265 in perl5122delta.pod
 
@@ -62,49 +62,49 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5122delta.pod
 
     Compilation improvements in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4437 in perl5122delta.pod
 
-      An "incompatible operand types" error in ternary expressions when building with ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4477 in perl5122delta.pod
+      An "incompatible operand types" error in ternary expressions when building with clang has been fixed. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4477 in perl5122delta.pod
 
-      Perl now skips setuid File::Copy tests on partitions it detects to be mounted as... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4595 in perl5122delta.pod
+      Perl now skips setuid File::Copy tests on partitions it detects to be mounted as nosuid. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4595 in perl5122delta.pod
 
   Selected Bug Fixes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4707 in perl5122delta.pod
 
     A possible segfault in the T_PRTOBJ default typemap has been fixed. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4743 in perl5122delta.pod
 
-    A possible memory leak when using caller()|perlfunc/"caller EXPR" to set @DB::ar... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4824 in perl5122delta.pod
+    A possible memory leak when using caller()|perlfunc/"caller EXPR" to set @DB::args has been fixed. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4824 in perl5122delta.pod
 
     Several memory leaks when loading XS modules were fixed. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4939 in perl5122delta.pod
 
-    unpack() now handles scalar context correctly for %32H and %32u, fixing a potent... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5006 in perl5122delta.pod
+    unpack() now handles scalar context correctly for %32H and %32u, fixing a potential crash.  split() would crash because the third item on... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5006 in perl5122delta.pod
 
-    Perl now avoids using memory after calling free() in pp_require when there are C... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5412 in perl5122delta.pod
+    Perl now avoids using memory after calling free() in pp_require when there are CODEREFs in @INC. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5412 in perl5122delta.pod
 
-    A bug that could cause "Unknown error" messages when "call_sv(code, G_EVAL)" is ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5528 in perl5122delta.pod
+    A bug that could cause "Unknown error" messages when "call_sv(code, G_EVAL)" is called from an XS destructor has been fixed. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5528 in perl5122delta.pod
 
-    The implementation of the open $fh, '>' \$buffer feature now supports get/set ma... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5669 in perl5122delta.pod
+    The implementation of the open $fh, '>' \$buffer feature now supports get/set magic and thus tied buffers correctly. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5669 in perl5122delta.pod
 
-    The pp_getc, pp_tell, and pp_eof opcodes now make room on the stack for their re... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5803 in perl5122delta.pod
+    The pp_getc, pp_tell, and pp_eof opcodes now make room on the stack for their return values in cases where no argument was passed in. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5803 in perl5122delta.pod
 
-    When matching unicode strings under some conditions inappropriate backtracking w... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5956 in perl5122delta.pod
+    When matching unicode strings under some conditions inappropriate backtracking would result in a Malformed UTF-8 character (fatal) error.... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5956 in perl5122delta.pod
 
   Platform Specific Notes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6221 in perl5122delta.pod
 
     AIX in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6253 in perl5122delta.pod
 
-      README.aix has been updated with information about the XL C/C++ V11 compiler sui... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6272 in perl5122delta.pod
+      README.aix has been updated with information about the XL C/C++ V11 compiler suite. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6272 in perl5122delta.pod
 
     Windows in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6376 in perl5122delta.pod
 
-      When building Perl with the mingw64 x64 cross-compiler incpath, libpth, ldflags,... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6399 in perl5122delta.pod
+      When building Perl with the mingw64 x64 cross-compiler incpath, libpth, ldflags, lddlflags and ldflags_nolargefiles values in Config.pm a... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6399 in perl5122delta.pod
 
     VMS in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6734 in perl5122delta.pod
 
-      git_version.h is now installed on VMS. This was an oversight in v5.12.0 which ca... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6753 in perl5122delta.pod
+      git_version.h is now installed on VMS. This was an oversight in v5.12.0 which caused some extensions to fail to build. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6753 in perl5122delta.pod
 
       Several memory leaks in stat()|perlfunc/"stat FILEHANDLE" have been fixed. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6885 in perl5122delta.pod
 
       A memory leak in Perl_rename() due to a double allocation has been fixed. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6973 in perl5122delta.pod
 
-      A memory leak in vms_fid_to_name() (used by realpath() and realname()) has been ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7060 in perl5122delta.pod
+      A memory leak in vms_fid_to_name() (used by realpath() and realname()) has been fixed. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7060 in perl5122delta.pod
 
   Acknowledgements in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 7173 in perl5122delta.pod
 

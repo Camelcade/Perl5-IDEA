@@ -10,53 +10,53 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlsource.pod
 
     Core modules in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 814 in perlsource.pod
 
-      This directory contains pure-Perl modules which are only released as part of the... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1121 in perlsource.pod
+      lib/  This directory contains pure-Perl modules which are only released as part of the core. This directory contains all of the modules a... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1121 in perlsource.pod
 
-      Like lib/, this directory contains modules which are only released as part of th... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1316 in perlsource.pod
+      ext/  Like lib/, this directory contains modules which are only released as part of the core.  Unlike lib/, however, a module under ext/ ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1316 in perlsource.pod
 
-      This directory is for dual-life modules where the blead source is canonical. Not... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1753 in perlsource.pod
+      dist/  This directory is for dual-life modules where the blead source is canonical. Note that some modules in this directory may not yet ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1753 in perlsource.pod
 
-      This directory contains dual-life modules where the CPAN module is canonical. Do... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2028 in perlsource.pod
+      cpan/  This directory contains dual-life modules where the CPAN module is canonical. Do not patch these modules directly! Changes to thes... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2028 in perlsource.pod
 
     Tests in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2534 in perlsource.pod
 
-      Tests for core modules in the lib/ directory are right next to the module itself... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2720 in perlsource.pod
+      Module tests  Tests for core modules in the lib/ directory are right next to the module itself. For example, we have lib/strict.pm and li... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2720 in perlsource.pod
 
-      Tests for the absolute basic functionality of Perl. This includes if, basic file... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3023 in perlsource.pod
+      t/base/  Tests for the absolute basic functionality of Perl. This includes if, basic file reads and writes, simple regexes, etc. These ar... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3023 in perlsource.pod
 
-      Tests for basic control structures, if/else, while, subroutines, etc. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3261 in perlsource.pod
+      t/cmd/  Tests for basic control structures, if/else, while, subroutines, etc. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3261 in perlsource.pod
 
-      Tests for basic issues of how Perl parses and compiles itself. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3360 in perlsource.pod
+      t/comp/  Tests for basic issues of how Perl parses and compiles itself. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3360 in perlsource.pod
 
-      Tests for built-in IO functions, including command line arguments. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3444 in perlsource.pod
+      t/io/  Tests for built-in IO functions, including command line arguments. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3444 in perlsource.pod
 
-      Tests for perl's method resolution order implementations (see mro). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3530 in perlsource.pod
+      t/mro/  Tests for perl's method resolution order implementations (see mro). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3530 in perlsource.pod
 
-      Tests for perl's built in functions that don't fit into any of the other directo... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3621 in perlsource.pod
+      t/op/  Tests for perl's built in functions that don't fit into any of the other directories. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3621 in perlsource.pod
 
-      Tests for perl's built in functions which, like those in t/op/, do not fit into ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3726 in perlsource.pod
+      t/opbasic/  Tests for perl's built in functions which, like those in t/op/, do not fit into any of the other directories, but which, in a... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3726 in perlsource.pod
 
-      Tests for regex related functions or behaviour. (These used to live in t/op). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3991 in perlsource.pod
+      t/re/  Tests for regex related functions or behaviour. (These used to live in t/op). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3991 in perlsource.pod
 
-      Tests for features of how perl actually runs, including exit codes and handling ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4088 in perlsource.pod
+      t/run/  Tests for features of how perl actually runs, including exit codes and handling of PERL* environment variables. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4088 in perlsource.pod
 
-      Tests for the core support of Unicode. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4220 in perlsource.pod
+      t/uni/  Tests for the core support of Unicode. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4220 in perlsource.pod
 
-      Windows-specific tests. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4279 in perlsource.pod
+      t/win32/  Windows-specific tests. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4279 in perlsource.pod
 
-      Tests the state of the source tree for various common errors. For example, it te... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4325 in perlsource.pod
+      t/porting/  Tests the state of the source tree for various common errors. For example, it tests that everyone who is listed in the git lo... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4325 in perlsource.pod
 
-      The old home for the module tests, you shouldn't put anything new in here. There... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4526 in perlsource.pod
+      t/lib/  The old home for the module tests, you shouldn't put anything new in here. There are still some bits and pieces hanging around in... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4526 in perlsource.pod
 
     Documentation in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4749 in perlsource.pod
 
     Hacking tools and documentation in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5109 in perlsource.pod
 
-      These are scripts which will check the source things like ANSI C violations, POD... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5301 in perlsource.pod
+      check*  These are scripts which will check the source things like ANSI C violations, POD encoding issues, etc. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5301 in perlsource.pod
 
-      These files contain information on who maintains which modules. Run perl Porting... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5424 in perlsource.pod
+      Maintainers, Maintainers.pl, and Maintainers.pm  These files contain information on who maintains which modules. Run perl Porting/Maintai... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5424 in perlsource.pod
 
-      Tidies a pod file. It's a good idea to run this on a pod file you've patched. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5658 in perlsource.pod
+      podtidy  Tidies a pod file. It's a good idea to run this on a pod file you've patched. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5658 in perlsource.pod
 
     Build system in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5764 in perlsource.pod
 

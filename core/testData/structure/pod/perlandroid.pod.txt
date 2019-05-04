@@ -24,9 +24,9 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlandroid.pod
 
       Notes in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 6624 in perlandroid.pod
 
-        If you are targetting x86 Android, you will have to change $TARGETARCH-gcc to i6... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6645 in perlandroid.pod
+        If you are targetting x86 Android, you will have to change $TARGETARCH-gcc to i686-linux-android-gcc. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6645 in perlandroid.pod
 
-        On some older low-end devices -- think early 2.2 era -- some tests, particularly... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6763 in perlandroid.pod
+        On some older low-end devices -- think early 2.2 era -- some tests, particularly t/re/uniprops.t, may crash the phone, causing it to turn... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6763 in perlandroid.pod
 
   Native Builds in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6962 in perlandroid.pod
 

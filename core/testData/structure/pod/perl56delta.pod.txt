@@ -38,9 +38,9 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl56delta.pod
 
       pack() and unpack() "q" and "Q" formats in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9590 in perl56delta.pod
 
-      in basic arithmetics: + - * / % (NOTE: operating close to the limits of the inte... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9640 in perl56delta.pod
+      in basic arithmetics: + - * / % (NOTE: operating close to the limits of the integer values may produce surprising results) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9640 in perl56delta.pod
 
-      in bit arithmetics: & | ^ ~ << >> (NOTE: these used to be forced  to be 32 bits ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9773 in perl56delta.pod
+      in bit arithmetics: & | ^ ~ << >> (NOTE: these used to be forced  to be 32 bits wide but now operate on the full native width.) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9773 in perl56delta.pod
 
       vec() in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9911 in perl56delta.pod
 
@@ -310,7 +310,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl56delta.pod
 
     Supported platforms in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 57000 in perl56delta.pod
 
-      The Mach CThreads (NEXTSTEP, OPENSTEP) are now supported by the Thread extension... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 57037 in perl56delta.pod
+      The Mach CThreads (NEXTSTEP, OPENSTEP) are now supported by the Thread extension. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 57037 in perl56delta.pod
 
       GNU/Hurd is now supported. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 57129 in perl56delta.pod
 
@@ -668,7 +668,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl56delta.pod
 
       Unicode in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 103430 in perl56delta.pod
 
-      64-bit support in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 103445 in perl56delta.pod
+      -bit support in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 103445 in perl56delta.pod
 
       Lvalue subroutines in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 103467 in perl56delta.pod
 

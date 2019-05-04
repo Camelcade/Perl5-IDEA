@@ -8,7 +8,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlreapi.pod
 
     comp in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3111 in perlreapi.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 5159 in perlreapi.pod
+      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 5159 in perlreapi.pod
 
         /m - RXf_PMf_MULTILINE in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5168 in perlreapi.pod
 
@@ -22,11 +22,11 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlreapi.pod
 
         Character set in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5626 in perlreapi.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 6350 in perlreapi.pod
+      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 6350 in perlreapi.pod
 
         RXf_SPLIT in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6359 in perlreapi.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 7047 in perlreapi.pod
+      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 7047 in perlreapi.pod
 
         RXf_SKIPWHITE in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7056 in perlreapi.pod
 

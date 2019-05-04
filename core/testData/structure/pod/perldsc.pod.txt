@@ -4,15 +4,15 @@ Documentation in null; /perl5language.png -> POD file at 0 in perldsc.pod
 
   DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 108 in perldsc.pod
 
-    * arrays of arrays in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1601 in perldsc.pod
+    arrays of arrays in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1601 in perldsc.pod
 
-    * hashes of arrays in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1627 in perldsc.pod
+    hashes of arrays in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1627 in perldsc.pod
 
-    * arrays of hashes in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1653 in perldsc.pod
+    arrays of hashes in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1653 in perldsc.pod
 
-    * hashes of hashes in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1679 in perldsc.pod
+    hashes of hashes in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1679 in perldsc.pod
 
-    * more elaborate constructs in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1705 in perldsc.pod
+    more elaborate constructs in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1705 in perldsc.pod
 
   REFERENCES in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1836 in perldsc.pod
 

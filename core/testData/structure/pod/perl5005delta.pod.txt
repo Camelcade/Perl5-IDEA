@@ -16,11 +16,11 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5005delta.pod
 
     C Source Compatibility in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2334 in perl5005delta.pod
 
-      Core sources now require ANSI C compiler  An ANSI C compiler is now required to ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2479 in perl5005delta.pod
+      Core sources now require ANSI C compiler  An ANSI C compiler is now required to build perl.  See INSTALL. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2479 in perl5005delta.pod
 
-      All Perl global variables must now be referenced with an explicit prefix  All Pe... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2601 in perl5005delta.pod
+      All Perl global variables must now be referenced with an explicit prefix  All Perl global variables that are visible for use by extension... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2601 in perl5005delta.pod
 
-      Enabling threads has source compatibility issues  Perl built with threading enab... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3477 in perl5005delta.pod
+      Enabling threads has source compatibility issues  Perl built with threading enabled requires extensions to use the new dTHR macro to init... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3477 in perl5005delta.pod
 
     Binary Compatibility in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4183 in perl5005delta.pod
 

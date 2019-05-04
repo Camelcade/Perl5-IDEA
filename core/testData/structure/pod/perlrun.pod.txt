@@ -6,13 +6,13 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlrun.pod
 
   DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 567 in perlrun.pod
 
-    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 920 in perlrun.pod
+    null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 920 in perlrun.pod
 
-      1. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 929 in perlrun.pod
+      Specified line by line via -e or -E switches on the command line. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 929 in perlrun.pod
 
-      2. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1012 in perlrun.pod
+      Contained in the file specified by the first filename on the command line. (Note that systems supporting the #! notation invoke interpret... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1012 in perlrun.pod
 
-      3. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1204 in perlrun.pod
+      Passed in implicitly via standard input.  This works only if there are no filename arguments--to pass arguments to a STDIN-read program y... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1204 in perlrun.pod
 
     #! and quoting on non-Unix systems in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4510 in perlrun.pod
 

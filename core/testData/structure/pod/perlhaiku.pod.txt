@@ -10,11 +10,11 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlhaiku.pod
 
     Perl cannot be compiled with threading support ATM. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 769 in perlhaiku.pod
 
-    The cpan/Socket/t/socketpair.t test fails. More precisely: the subtests using da... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 831 in perlhaiku.pod
+    The cpan/Socket/t/socketpair.t test fails. More precisely: the subtests using datagram sockets fail. Unix datagram sockets aren't impleme... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 831 in perlhaiku.pod
 
-    A subtest of the cpan/Sys-Syslog/t/syslog.t test fails. This is due to Haiku not... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1000 in perlhaiku.pod
+    A subtest of the cpan/Sys-Syslog/t/syslog.t test fails. This is due to Haiku not implementing /dev/log support yet. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1000 in perlhaiku.pod
 
-    The tests dist/Net-Ping/t/450_service.t and dist/Net-Ping/t/510_ping_udp.t fail.... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1132 in perlhaiku.pod
+    The tests dist/Net-Ping/t/450_service.t and dist/Net-Ping/t/510_ping_udp.t fail. This is due to bugs in Haiku's network stack implementat... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1132 in perlhaiku.pod
 
   CONTACT in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1297 in perlhaiku.pod
 

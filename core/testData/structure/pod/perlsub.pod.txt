@@ -6,7 +6,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlsub.pod
 
   DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1605 in perlsub.pod
 
-    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 9770 in perlsub.pod
+    null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 9770 in perlsub.pod
 
       documented later in this document in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9777 in perlsub.pod
 
@@ -60,11 +60,11 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlsub.pod
 
     When to Still Use local() in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 45330 in perlsub.pod
 
-      1. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 45581 in perlsub.pod
+      You need to give a global variable a temporary value, especially $_.  The global variables, like @ARGV or the punctuation variables, must... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 45581 in perlsub.pod
 
-      2. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46168 in perlsub.pod
+      You need to create a local file or directory handle or a local function.  A function that needs a filehandle of its own must use local() ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46168 in perlsub.pod
 
-      3. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 47159 in perlsub.pod
+      You want to temporarily change just one element of an array or hash.  You can localize just one element of an aggregate.  Usually this is... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 47159 in perlsub.pod
 
     Pass by Reference in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 47517 in perlsub.pod
 

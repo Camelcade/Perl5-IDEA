@@ -10,9 +10,9 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlcygwin.pod
 
     Cygwin Configuration in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1166 in perlcygwin.pod
 
-      Set the PATH environment variable so that Configure finds the Cygwin versions of... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1731 in perlcygwin.pod
+      PATH  Set the PATH environment variable so that Configure finds the Cygwin versions of programs. Any not-needed Windows directories shoul... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1731 in perlcygwin.pod
 
-      If you do not have nroff (which is part of the groff package), Configure will no... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1933 in perlcygwin.pod
+      nroff  If you do not have nroff (which is part of the groff package), Configure will not prompt you to install man pages. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1933 in perlcygwin.pod
 
   CONFIGURE PERL ON CYGWIN in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2086 in perlcygwin.pod
 
@@ -20,41 +20,41 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlcygwin.pod
 
     Optional Libraries for Perl on Cygwin in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3104 in perlcygwin.pod
 
-      The crypt package distributed with Cygwin is a Linux compatible 56-bit DES crypt... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3443 in perlcygwin.pod
+      -lcrypt  The crypt package distributed with Cygwin is a Linux compatible 56-bit DES crypt port by Corinna Vinschen.  Alternatively, the c... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3443 in perlcygwin.pod
 
-      GDBM is available for Cygwin.  NOTE: The GDBM library only works on NTFS partiti... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3766 in perlcygwin.pod
+      -lgdbm_compat (use GDBM_File)  GDBM is available for Cygwin.  NOTE: The GDBM library only works on NTFS partitions. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3766 in perlcygwin.pod
 
-      BerkeleyDB is available for Cygwin.  NOTE: The BerkeleyDB library only completel... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3897 in perlcygwin.pod
+      -ldb (use DB_File)  BerkeleyDB is available for Cygwin.  NOTE: The BerkeleyDB library only completely works on NTFS partitions. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3897 in perlcygwin.pod
 
-      A port of SysV IPC is available for Cygwin.  NOTE: This has not been extensively... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4040 in perlcygwin.pod
+      cygserver (use IPC::SysV)  A port of SysV IPC is available for Cygwin.  NOTE: This has not been extensively tested.  In particular, d_sem... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4040 in perlcygwin.pod
 
-      Included with the standard Cygwin netrelease is the inetutils package which incl... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4503 in perlcygwin.pod
+      -lutil  Included with the standard Cygwin netrelease is the inetutils package which includes libutil.a. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4503 in perlcygwin.pod
 
     Configure-time Options for Perl on Cygwin in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4626 in perlcygwin.pod
 
-      Undefining this symbol forces Perl to be compiled statically. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4976 in perlcygwin.pod
+      -Uusedl  Undefining this symbol forces Perl to be compiled statically. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4976 in perlcygwin.pod
 
-      By default Perl does not use the malloc() included with the Perl source, because... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5059 in perlcygwin.pod
+      -Dusemymalloc  By default Perl does not use the malloc() included with the Perl source, because it was slower and not entirely thread-saf... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5059 in perlcygwin.pod
 
-      Undefining this symbol disables the PerlIO abstraction.  PerlIO is now the defau... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5290 in perlcygwin.pod
+      -Uuseperlio  Undefining this symbol disables the PerlIO abstraction.  PerlIO is now the default; it is not recommended to disable PerlIO. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5290 in perlcygwin.pod
 
-      Multiplicity is required when embedding Perl in a C program and using more than ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5440 in perlcygwin.pod
+      -Dusemultiplicity  Multiplicity is required when embedding Perl in a C program and using more than one interpreter instance.  This is onl... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5440 in perlcygwin.pod
 
-      By default Perl uses 64 bit integers.  If you want to use smaller 32 bit integer... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5658 in perlcygwin.pod
+      -Uuse64bitint  By default Perl uses 64 bit integers.  If you want to use smaller 32 bit integers, define this symbol. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5658 in perlcygwin.pod
 
-      gcc supports long doubles (12 bytes).  However, several additional long double m... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5788 in perlcygwin.pod
+      -Duselongdouble  gcc supports long doubles (12 bytes).  However, several additional long double math functions are necessary to use them ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5788 in perlcygwin.pod
 
-      Define this symbol if you want not-threaded faster perl. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6101 in perlcygwin.pod
+      -Uuseithreads  Define this symbol if you want not-threaded faster perl. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6101 in perlcygwin.pod
 
-      Cygwin uses 64-bit integers for internal size and position calculations, this wi... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6185 in perlcygwin.pod
+      -Duselargefiles  Cygwin uses 64-bit integers for internal size and position calculations, this will be correctly detected and defined by ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6185 in perlcygwin.pod
 
-      Use this to build perl outside of the source tree.  Details can be found in the ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6345 in perlcygwin.pod
+      -Dmksymlinks  Use this to build perl outside of the source tree.  Details can be found in the INSTALL document.  This is the recommended ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6345 in perlcygwin.pod
 
     Suspicious Warnings on Cygwin in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6536 in perlcygwin.pod
 
-      Win9x does not correctly report EOF with a non-blocking read on a closed pipe.  ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6649 in perlcygwin.pod
+      Win9x and d_eofnblk  Win9x does not correctly report EOF with a non-blocking read on a closed pipe.  You will see the following messages:... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6649 in perlcygwin.pod
 
-      The following error occurs because of the Cygwin #define of _LONG_DOUBLE:    Gue... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7129 in perlcygwin.pod
+      Compiler/Preprocessor defines  The following error occurs because of the Cygwin #define of _LONG_DOUBLE:    Guessing which symbols your C... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7129 in perlcygwin.pod
 
   MAKE ON CYGWIN in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 7507 in perlcygwin.pod
 
@@ -70,23 +70,23 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlcygwin.pod
 
     Script Portability on Cygwin in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10429 in perlcygwin.pod
 
-      Cygwin pathnames are separated by forward (/) slashes, Universal Naming Codes (/... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10771 in perlcygwin.pod
+      Pathnames  Cygwin pathnames are separated by forward (/) slashes, Universal Naming Codes (//UNC) are also supported Since cygwin-1.7 non-... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10771 in perlcygwin.pod
 
-      Since cygwin-1.7 textmounts are deprecated and strongly discouraged.  When a fil... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11398 in perlcygwin.pod
+      Text/Binary  Since cygwin-1.7 textmounts are deprecated and strongly discouraged.  When a file is opened it is in either text or binary m... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11398 in perlcygwin.pod
 
-      PerlIO overrides the default Cygwin Text/Binary behaviour.  A file will always b... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12172 in perlcygwin.pod
+      PerlIO  PerlIO overrides the default Cygwin Text/Binary behaviour.  A file will always be treated as binary, regardless of the mode of th... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12172 in perlcygwin.pod
 
-      The Cygwin stat(), lstat() and readlink() functions make the .exe extension tran... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12731 in perlcygwin.pod
+      .exe  The Cygwin stat(), lstat() and readlink() functions make the .exe extension transparent by looking for foo.exe when you ask for foo... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12731 in perlcygwin.pod
 
-      Cygwin processes have their own pid, which is different from the underlying wind... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13242 in perlcygwin.pod
+      Cygwin vs. Windows process ids  Cygwin processes have their own pid, which is different from the underlying windows pid.  Most posix comp... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13242 in perlcygwin.pod
 
-      Under Cygwin, $^E is the same as $!.  When using Win32 API Functions|Win32, use ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13653 in perlcygwin.pod
+      Cygwin vs. Windows errors  Under Cygwin, $^E is the same as $!.  When using Win32 API Functions|Win32, use Win32::GetLastError() to get t... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13653 in perlcygwin.pod
 
-      Using fork() or system() out to another perl after loading multiple dlls may res... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13828 in perlcygwin.pod
+      rebase errors on fork or system  Using fork() or system() out to another perl after loading multiple dlls may result on a DLL baseaddress... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13828 in perlcygwin.pod
 
-      On WinNT chown() can change a file's user and group IDs.  On Win9x chown() is a ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14975 in perlcygwin.pod
+      chown()  On WinNT chown() can change a file's user and group IDs.  On Win9x chown() is a no-op, although this is appropriate since there ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14975 in perlcygwin.pod
 
-      File locking using the F_GETLK command to fcntl() is a stub that returns ENOSYS.... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15152 in perlcygwin.pod
+      Miscellaneous  File locking using the F_GETLK command to fcntl() is a stub that returns ENOSYS.  Win9x can not rename() an open file (alt... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15152 in perlcygwin.pod
 
     Prebuilt methods: in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15706 in perlcygwin.pod
 

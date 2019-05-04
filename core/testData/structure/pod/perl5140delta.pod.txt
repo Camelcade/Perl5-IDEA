@@ -16,17 +16,17 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5140delta.pod
 
       \N{NAME} and charnames enhancements in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 2648 in perl5140delta.pod
 
-        \N{NAME} and charnames::vianame now know about the abbreviated character names l... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2708 in perl5140delta.pod
+        \N{NAME} and charnames::vianame now know about the abbreviated character names listed by Unicode, such as NBSP, SHY, LRO, ZWJ, etc.; all ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2708 in perl5140delta.pod
 
-        Unicode has several named character sequences, in which particular sequences of ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3027 in perl5140delta.pod
+        Unicode has several named character sequences, in which particular sequences of code points are given names.  \N{NAME} now recognizes these. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3027 in perl5140delta.pod
 
-        \N{NAME}, charnames::vianame, and charnames::viacode now know about every charac... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3187 in perl5140delta.pod
+        \N{NAME}, charnames::vianame, and charnames::viacode now know about every character in Unicode.  In earlier releases of Perl, they didn't... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3187 in perl5140delta.pod
 
-        It is now possible to override Perl's abbreviations with your own custom aliases... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3433 in perl5140delta.pod
+        It is now possible to override Perl's abbreviations with your own custom aliases. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3433 in perl5140delta.pod
 
-        You can now create a custom alias of the ordinal of a character, known by \N{NAM... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3525 in perl5140delta.pod
+        You can now create a custom alias of the ordinal of a character, known by \N{NAME}, charnames::vianame(), and charnames::viacode().  Prev... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3525 in perl5140delta.pod
 
-        The new function charnames::string_vianame() is a run-time version of \N{NAME}},... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3856 in perl5140delta.pod
+        The new function charnames::string_vianame() is a run-time version of \N{NAME}}, returning the string of characters whose Unicode name is... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3856 in perl5140delta.pod
 
       New warnings categories for problematic (non-)Unicode code points. in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 4231 in perl5140delta.pod
 
@@ -40,13 +40,13 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5140delta.pod
 
       /d, /l, /u, and /a modifiers in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 6866 in perl5140delta.pod
 
-        The /l modifier says to compile the regular expression as if it were in the scop... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7047 in perl5140delta.pod
+        The /l modifier says to compile the regular expression as if it were in the scope of use locale, even if it is not. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7047 in perl5140delta.pod
 
-        The /u modifier says to compile the regular expression as if it were in the scop... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7179 in perl5140delta.pod
+        The /u modifier says to compile the regular expression as if it were in the scope of a use feature 'unicode_strings' pragma. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7179 in perl5140delta.pod
 
-        The /d (default) modifier is used to override any use locale and use feature 'un... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7320 in perl5140delta.pod
+        The /d (default) modifier is used to override any use locale and use feature 'unicode_strings' pragmas in effect at the time of compiling... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7320 in perl5140delta.pod
 
-        The /a regular expression modifier restricts \s, \d and \w and the POSIX ([[:pos... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7501 in perl5140delta.pod
+        The /a regular expression modifier restricts \s, \d and \w and the POSIX ([[:posix:]]) character classes to the ASCII range.  Their compl... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7501 in perl5140delta.pod
 
       Non-destructive substitution in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 8169 in perl5140delta.pod
 
@@ -80,9 +80,9 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5140delta.pod
 
     Exception Handling in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13067 in perl5140delta.pod
 
-      When an exception is thrown inside an eval, the exception is no longer at risk o... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13218 in perl5140delta.pod
+      When an exception is thrown inside an eval, the exception is no longer at risk of being clobbered by destructor code running during unwin... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13218 in perl5140delta.pod
 
-      Warnings for warn can now be objects in the same way as exceptions for die.  If ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14892 in perl5140delta.pod
+      Warnings for warn can now be objects in the same way as exceptions for die.  If an object-based warning gets the default handling of writ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14892 in perl5140delta.pod
 
     Other Enhancements in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15302 in perl5140delta.pod
 
@@ -238,39 +238,39 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5140delta.pod
 
     New Modules and Pragmata in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 46249 in perl5140delta.pod
 
-      CPAN::Meta::YAML 0.003 has been added as a dual-life module.  It supports a subs... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46291 in perl5140delta.pod
+      CPAN::Meta::YAML 0.003 has been added as a dual-life module.  It supports a subset of YAML sufficient for reading and writing META.yml an... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46291 in perl5140delta.pod
 
-      CPAN::Meta version 2.110440 has been added as a dual-life module.  It provides a... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46628 in perl5140delta.pod
+      CPAN::Meta version 2.110440 has been added as a dual-life module.  It provides a standard library to read, interpret and write CPAN distr... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46628 in perl5140delta.pod
 
-      HTTP::Tiny 0.012 has been added as a dual-life module.  It is a very small, simp... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 47114 in perl5140delta.pod
+      HTTP::Tiny 0.012 has been added as a dual-life module.  It is a very small, simple HTTP/1.1 client designed for simple GET requests and f... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 47114 in perl5140delta.pod
 
-      JSON::PP 2.27105 has been added as a dual-life module to allow CPAN clients to r... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 47453 in perl5140delta.pod
+      JSON::PP 2.27105 has been added as a dual-life module to allow CPAN clients to read META.json files in CPAN distributions. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 47453 in perl5140delta.pod
 
-      Module::Metadata 1.000004 has been added as a dual-life module.  It gathers pack... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 47592 in perl5140delta.pod
+      Module::Metadata 1.000004 has been added as a dual-life module.  It gathers package and POD information from Perl module files.  It is a ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 47592 in perl5140delta.pod
 
-      Perl::OSType 1.002 has been added as a dual-life module.  It maps Perl operating... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 47940 in perl5140delta.pod
+      Perl::OSType 1.002 has been added as a dual-life module.  It maps Perl operating system names (like "dragonfly" or "MSWin32") to more gen... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 47940 in perl5140delta.pod
 
-      The following modules were added by the Unicode::Collate  upgrade.  See below fo... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48305 in perl5140delta.pod
+      The following modules were added by the Unicode::Collate  upgrade.  See below for details.  Unicode::Collate::CJK::Big5  Unicode::Collate... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48305 in perl5140delta.pod
 
-      Version::Requirements version 0.101020 has been added as a dual-life module.  It... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48613 in perl5140delta.pod
+      Version::Requirements version 0.101020 has been added as a dual-life module.  It provides a standard library to model and manipulates mod... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48613 in perl5140delta.pod
 
     Updated Modules and Pragma in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 48844 in perl5140delta.pod
 
       attributes has been upgraded from version 0.12 to 0.14. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48888 in perl5140delta.pod
 
-      Archive::Extract has been upgraded from version 0.38 to 0.48.  Updates since 0.3... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48957 in perl5140delta.pod
+      Archive::Extract has been upgraded from version 0.38 to 0.48.  Updates since 0.38 include: a safe print method that guards Archive::Extra... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48957 in perl5140delta.pod
 
-      Archive::Tar has been upgraded from version 1.54 to 1.76.  Important changes sin... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49350 in perl5140delta.pod
+      Archive::Tar has been upgraded from version 1.54 to 1.76.  Important changes since 1.54 include the following:    Compatibility with busy... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49350 in perl5140delta.pod
 
         Compatibility with busybox implementations of tar(1). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49481 in perl5140delta.pod
 
-        A fix so that write() and create_archive() close only filehandles they themselve... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49548 in perl5140delta.pod
+        A fix so that write() and create_archive() close only filehandles they themselves opened. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49548 in perl5140delta.pod
 
         A bug was fixed regarding the exit code of extract_archive. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49648 in perl5140delta.pod
 
-        The ptar(1) utility has a new option to allow safe creation of tarballs without ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49718 in perl5140delta.pod
+        The ptar(1) utility has a new option to allow safe creation of tarballs without world-writable files on Windows, allowing those archives ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49718 in perl5140delta.pod
 
-        A new ptargrep(1) utility for using regular expressions against  the contents of... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49892 in perl5140delta.pod
+        A new ptargrep(1) utility for using regular expressions against  the contents of files in a tar archive. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49892 in perl5140delta.pod
 
         pax extended headers are now skipped. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50010 in perl5140delta.pod
 
@@ -280,13 +280,13 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5140delta.pod
 
       AutoLoader has been upgraded from version 5.70 to 5.71. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50217 in perl5140delta.pod
 
-      The B module has been upgraded from version 1.23 to 1.29.  It no longer crashes ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50286 in perl5140delta.pod
+      The B module has been upgraded from version 1.23 to 1.29.  It no longer crashes when taking apart a y/// containing characters outside th... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50286 in perl5140delta.pod
 
-      B::Concise has been upgraded from version 0.78 to 0.83.  B::Concise marks rv2sv(... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50587 in perl5140delta.pod
+      B::Concise has been upgraded from version 0.78 to 0.83.  B::Concise marks rv2sv(), rv2av(), and rv2hv() ops with the new OPpDEREF flag as... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50587 in perl5140delta.pod
 
       B::Debug has been upgraded from version 1.12 to 1.16. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50832 in perl5140delta.pod
 
-      B::Deparse has been upgraded from version 0.96 to 1.03.  The deparsing of a next... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50899 in perl5140delta.pod
+      B::Deparse has been upgraded from version 0.96 to 1.03.  The deparsing of a nextstate op has changed when it has both a change of package... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50899 in perl5140delta.pod
 
       B::Lint has been upgraded from version 1.11_01 to 1.13. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51588 in perl5140delta.pod
 
@@ -296,75 +296,75 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5140delta.pod
 
       bignum has been upgraded from version 0.23 to 0.27. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51788 in perl5140delta.pod
 
-      Carp has been upgraded from version 1.15 to 1.20.  Carp now detects incomplete c... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51853 in perl5140delta.pod
+      Carp has been upgraded from version 1.15 to 1.20.  Carp now detects incomplete caller()|perlfunc/"caller EXPR" overrides and avoids using... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51853 in perl5140delta.pod
 
-      CGI has been upgraded from version 3.48 to 3.52.  This provides the following se... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52687 in perl5140delta.pod
+      CGI has been upgraded from version 3.48 to 3.52.  This provides the following security fixes: the MIME boundary in  multipart_init() is n... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52687 in perl5140delta.pod
 
-      Compress::Raw::Bzip2 has been upgraded from version 2.024 to 2.033.  It has been... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52922 in perl5140delta.pod
+      Compress::Raw::Bzip2 has been upgraded from version 2.024 to 2.033.  It has been updated to use bzip2(1) 1.0.6. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52922 in perl5140delta.pod
 
       Compress::Raw::Zlib has been upgraded from version 2.024 to 2.033. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53050 in perl5140delta.pod
 
-      constant has been upgraded from version 1.20 to 1.21.  Unicode constants work on... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53130 in perl5140delta.pod
+      constant has been upgraded from version 1.20 to 1.21.  Unicode constants work once more.  They have been broken since Perl 5.10.0 [CPAN R... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53130 in perl5140delta.pod
 
-      CPAN has been upgraded from version 1.94_56 to 1.9600.  Major highlights:  * muc... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53291 in perl5140delta.pod
+      CPAN has been upgraded from version 1.94_56 to 1.9600.  Major highlights:  much less configuration dialog hassle  support for META/MYMETA... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53291 in perl5140delta.pod
 
-        * much less configuration dialog hassle in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53387 in perl5140delta.pod
+        much less configuration dialog hassle in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53387 in perl5140delta.pod
 
-        * support for META/MYMETA.json in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53434 in perl5140delta.pod
+        support for META/MYMETA.json in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53434 in perl5140delta.pod
 
-        * support for local::lib in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53475 in perl5140delta.pod
+        support for local::lib in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53475 in perl5140delta.pod
 
-        * support for HTTP::Tiny to reduce the dependency on FTP sites in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53510 in perl5140delta.pod
+        support for HTTP::Tiny to reduce the dependency on FTP sites in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53510 in perl5140delta.pod
 
-        * automatic mirror selection in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53584 in perl5140delta.pod
+        automatic mirror selection in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53584 in perl5140delta.pod
 
-        * iron out all known bugs in configure_requires in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53620 in perl5140delta.pod
+        iron out all known bugs in configure_requires in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53620 in perl5140delta.pod
 
-        * support for distributions compressed with bzip2(1) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53675 in perl5140delta.pod
+        support for distributions compressed with bzip2(1) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53675 in perl5140delta.pod
 
-        * allow Foo/Bar.pm on the command line to mean Foo::Bar in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53738 in perl5140delta.pod
+        allow Foo/Bar.pm on the command line to mean Foo::Bar in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53738 in perl5140delta.pod
 
-      CPANPLUS has been upgraded from version 0.90 to 0.9103.  A change to cpanp-run-p... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53814 in perl5140delta.pod
+      CPANPLUS has been upgraded from version 0.90 to 0.9103.  A change to cpanp-run-perl resolves RT #55964|http://rt.cpan.org/Public/Bug/Disp... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53814 in perl5140delta.pod
 
       CPANPLUS::Dist::Build has been upgraded from version 0.46 to 0.54. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 54328 in perl5140delta.pod
 
-      Data::Dumper has been upgraded from version 2.125 to 2.130_02.  The indentation ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 54408 in perl5140delta.pod
+      Data::Dumper has been upgraded from version 2.125 to 2.130_02.  The indentation used to be off when $Data::Dumper::Terse was set.  This h... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 54408 in perl5140delta.pod
 
       DB_File has been upgraded from version 1.820 to 1.821. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 54787 in perl5140delta.pod
 
       DBM_Filter has been upgraded from version 0.03 to 0.04. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 54855 in perl5140delta.pod
 
-      Devel::DProf has been upgraded from version 20080331.00 to 20110228.00.  Merely ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 54924 in perl5140delta.pod
+      Devel::DProf has been upgraded from version 20080331.00 to 20110228.00.  Merely loading Devel::DProf now no longer triggers profiling to ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 54924 in perl5140delta.pod
 
       Devel::Peek has been upgraded from version 1.04 to 1.07. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 55402 in perl5140delta.pod
 
       Devel::SelfStubber has been upgraded from version 1.03 to 1.05. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 55472 in perl5140delta.pod
 
-      diagnostics has been upgraded from version 1.19 to 1.22.  It now renders pod lin... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 55549 in perl5140delta.pod
+      diagnostics has been upgraded from version 1.19 to 1.22.  It now renders pod links slightly better, and has been taught to find descripti... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 55549 in perl5140delta.pod
 
-      Digest::MD5 has been upgraded from version 2.39 to 2.51.  It is now safe to use ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 55767 in perl5140delta.pod
+      Digest::MD5 has been upgraded from version 2.39 to 2.51.  It is now safe to use this module in combination with threads. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 55767 in perl5140delta.pod
 
-      Digest::SHA has been upgraded from version 5.47 to 5.61.  shasum now more closel... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 55901 in perl5140delta.pod
+      Digest::SHA has been upgraded from version 5.47 to 5.61.  shasum now more closely mimics sha1sum(1)/md5sum(1).  addfile accepts all POSIX... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 55901 in perl5140delta.pod
 
       DirHandle has been upgraded from version 1.03 to 1.04. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56164 in perl5140delta.pod
 
       Dumpvalue has been upgraded from version 1.13 to 1.16. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56232 in perl5140delta.pod
 
-      DynaLoader has been upgraded from version 1.10 to 1.13.  It fixes a buffer overf... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56300 in perl5140delta.pod
+      DynaLoader has been upgraded from version 1.10 to 1.13.  It fixes a buffer overflow when passed a very long file name.  It no longer inhe... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56300 in perl5140delta.pod
 
-      Encode has been upgraded from version 2.39 to 2.42.  Now, all 66 Unicode non-cha... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56612 in perl5140delta.pod
+      Encode has been upgraded from version 2.39 to 2.42.  Now, all 66 Unicode non-characters are treated the same way U+FFFF has always been t... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56612 in perl5140delta.pod
 
       Env has been upgraded from version 1.01 to 1.02. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56869 in perl5140delta.pod
 
-      Errno has been upgraded from version 1.11 to 1.13.  The implementation of Errno ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56931 in perl5140delta.pod
+      Errno has been upgraded from version 1.11 to 1.13.  The implementation of Errno has been refactored to use about 55% less memory.  On som... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56931 in perl5140delta.pod
 
-      Exporter has been upgraded from version 5.64_01 to 5.64_03.  Exporter no longer ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 57288 in perl5140delta.pod
+      Exporter has been upgraded from version 5.64_01 to 5.64_03.  Exporter no longer overrides $SIG{__WARN__} [perl #74472] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 57288 in perl5140delta.pod
 
       ExtUtils::CBuilder has been upgraded from version 0.27 to 0.280203. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 57423 in perl5140delta.pod
 
       ExtUtils::Command has been upgraded from version 1.16 to 1.17. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 57504 in perl5140delta.pod
 
-      ExtUtils::Constant has been upgraded from 0.22 to 0.23.  The AUTOLOAD helper cod... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 57580 in perl5140delta.pod
+      ExtUtils::Constant has been upgraded from 0.22 to 0.23.  The AUTOLOAD helper code generated by ExtUtils::Constant::ProxySubs can now croa... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 57580 in perl5140delta.pod
 
       ExtUtils::Install has been upgraded from version 1.55 to 1.56. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 58068 in perl5140delta.pod
 
@@ -382,51 +382,51 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5140delta.pod
 
       File::Copy has been upgraded from version 2.17 to 2.21. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 58590 in perl5140delta.pod
 
-      File::DosGlob has been upgraded from version 1.01 to 1.04.  It allows patterns c... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 58659 in perl5140delta.pod
+      File::DosGlob has been upgraded from version 1.01 to 1.04.  It allows patterns containing literal parentheses: they no longer need to be ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 58659 in perl5140delta.pod
 
-      File::Fetch has been upgraded from version 0.24 to 0.32.  HTTP::Lite is now supp... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 58981 in perl5140delta.pod
+      File::Fetch has been upgraded from version 0.24 to 0.32.  HTTP::Lite is now supported for the "http" scheme.  The fetch(1) utility is sup... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 58981 in perl5140delta.pod
 
-      File::Find has been upgraded from version 1.15 to 1.19.  It improves handling of... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 59218 in perl5140delta.pod
+      File::Find has been upgraded from version 1.15 to 1.19.  It improves handling of backslashes on Windows, so that paths like C:\dir\/file ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 59218 in perl5140delta.pod
 
       File::Glob has been upgraded from version 1.07 to 1.12. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 59410 in perl5140delta.pod
 
-      File::Spec has been upgraded from version 3.31 to 3.33.  Several portability fix... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 59479 in perl5140delta.pod
+      File::Spec has been upgraded from version 3.31 to 3.33.  Several portability fixes were made in File::Spec::VMS: a colon is now recognize... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 59479 in perl5140delta.pod
 
-      File::stat has been upgraded from 1.02 to 1.05.  The -x and -X file test operato... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 59920 in perl5140delta.pod
+      File::stat has been upgraded from 1.02 to 1.05.  The -x and -X file test operators now work correctly when run by the superuser. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 59920 in perl5140delta.pod
 
       Filter::Simple has been upgraded from version 0.84 to 0.86. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 60068 in perl5140delta.pod
 
-      GDBM_File has been upgraded from 1.10 to 1.14.  This fixes a memory leak when DB... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 60141 in perl5140delta.pod
+      GDBM_File has been upgraded from 1.10 to 1.14.  This fixes a memory leak when DBM filters are used. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 60141 in perl5140delta.pod
 
-      Hash::Util has been upgraded from 0.07 to 0.11.  Hash::Util no longer emits spur... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 60254 in perl5140delta.pod
+      Hash::Util has been upgraded from 0.07 to 0.11.  Hash::Util no longer emits spurious "uninitialized" warnings when recursively locking ha... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 60254 in perl5140delta.pod
 
       Hash::Util::FieldHash has been upgraded from version 1.04 to 1.09. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 60454 in perl5140delta.pod
 
       I18N::Collate has been upgraded from version 1.01 to 1.02. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 60534 in perl5140delta.pod
 
-      I18N::Langinfo has been upgraded from version 0.03 to 0.08.  langinfo() now defa... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 60606 in perl5140delta.pod
+      I18N::Langinfo has been upgraded from version 0.03 to 0.08.  langinfo() now defaults to using $_ if there is no argument given, just as t... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 60606 in perl5140delta.pod
 
       I18N::LangTags has been upgraded from version 0.35 to 0.35_01. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 60796 in perl5140delta.pod
 
       if has been upgraded from version 0.05 to 0.0601. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 60872 in perl5140delta.pod
 
-      IO has been upgraded from version 1.25_02 to 1.25_04.  This version of IO includ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 60935 in perl5140delta.pod
+      IO has been upgraded from version 1.25_02 to 1.25_04.  This version of IO includes a new IO::Select, which now allows IO::Handle objects ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 60935 in perl5140delta.pod
 
-      IPC::Cmd has been upgraded from version 0.54 to 0.70.  Resolves an issue with sp... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 61228 in perl5140delta.pod
+      IPC::Cmd has been upgraded from version 0.54 to 0.70.  Resolves an issue with splitting Win32 command lines.  An argument consisting of t... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 61228 in perl5140delta.pod
 
-      IPC::Open3 has been upgraded from 1.05 to 1.09.  open3() now produces an error i... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 61439 in perl5140delta.pod
+      IPC::Open3 has been upgraded from 1.05 to 1.09.  open3() now produces an error if the exec call fails, allowing this condition to be dist... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 61439 in perl5140delta.pod
 
       IPC::SysV has been upgraded from version 2.01 to 2.03. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 61854 in perl5140delta.pod
 
       lib has been upgraded from version 0.62 to 0.63. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 61922 in perl5140delta.pod
 
-      Locale::Maketext has been upgraded from version 1.14 to 1.19.  Locale::Maketext ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 61984 in perl5140delta.pod
+      Locale::Maketext has been upgraded from version 1.14 to 1.19.  Locale::Maketext now supports external caches.  This upgrade also fixes an... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 61984 in perl5140delta.pod
 
       Log::Message has been upgraded from version 0.02 to 0.04. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 62354 in perl5140delta.pod
 
       Log::Message::Simple has been upgraded from version 0.06 to 0.08. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 62425 in perl5140delta.pod
 
-      Math::BigInt has been upgraded from version 1.89_01 to 1.994.  This fixes, among... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 62504 in perl5140delta.pod
+      Math::BigInt has been upgraded from version 1.89_01 to 1.994.  This fixes, among other things, incorrect results when computing binomial ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 62504 in perl5140delta.pod
 
       Math::BigInt::FastCalc has been upgraded from version 0.19 to 0.28. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 62764 in perl5140delta.pod
 
@@ -434,11 +434,11 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5140delta.pod
 
       Memoize has been upgraded from version 1.01_03 to 1.02. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 62919 in perl5140delta.pod
 
-      MIME::Base64 has been upgraded from 3.08 to 3.13.  Includes new functions to cal... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 62988 in perl5140delta.pod
+      MIME::Base64 has been upgraded from 3.08 to 3.13.  Includes new functions to calculate the length of encoded and decoded base64 strings. ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 62988 in perl5140delta.pod
 
-      Module::Build has been upgraded from version 0.3603 to 0.3800.  A notable change... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 63257 in perl5140delta.pod
+      Module::Build has been upgraded from version 0.3603 to 0.3800.  A notable change is the deprecation of several modules. Module::Build::Ve... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 63257 in perl5140delta.pod
 
-      Module::CoreList has been upgraded from version 2.29 to 2.47.  Besides listing t... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 63936 in perl5140delta.pod
+      Module::CoreList has been upgraded from version 2.29 to 2.47.  Besides listing the updated core modules of this release, it also stops li... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 63936 in perl5140delta.pod
 
       Module::Load has been upgraded from version 0.16 to 0.18. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 64281 in perl5140delta.pod
 
@@ -446,7 +446,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5140delta.pod
 
       The mro pragma has been upgraded from version 1.02 to 1.07. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 64436 in perl5140delta.pod
 
-      NDBM_File has been upgraded from version 1.08 to 1.12.  This fixes a memory leak... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 64509 in perl5140delta.pod
+      NDBM_File has been upgraded from version 1.08 to 1.12.  This fixes a memory leak when DBM filters are used. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 64509 in perl5140delta.pod
 
       Net::Ping has been upgraded from version 2.36 to 2.38. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 64630 in perl5140delta.pod
 
@@ -454,21 +454,21 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5140delta.pod
 
       Object::Accessor has been upgraded from version 0.36 to 0.38. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 64761 in perl5140delta.pod
 
-      ODBM_File has been upgraded from version 1.07 to 1.10.  This fixes a memory leak... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 64836 in perl5140delta.pod
+      ODBM_File has been upgraded from version 1.07 to 1.10.  This fixes a memory leak when DBM filters are used. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 64836 in perl5140delta.pod
 
       Opcode has been upgraded from version 1.15 to 1.18. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 64957 in perl5140delta.pod
 
-      The overload pragma has been upgraded from 1.10 to 1.13.  overload::Method can n... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 65022 in perl5140delta.pod
+      The overload pragma has been upgraded from 1.10 to 1.13.  overload::Method can now handle subroutines that are themselves blessed into ov... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 65022 in perl5140delta.pod
 
       Params::Check has been upgraded from version 0.26 to 0.28. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 65278 in perl5140delta.pod
 
       The parent pragma has been upgraded from version 0.223 to 0.225. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 65350 in perl5140delta.pod
 
-      Parse::CPAN::Meta has been upgraded from version 1.40 to 1.4401.  The latest Par... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 65428 in perl5140delta.pod
+      Parse::CPAN::Meta has been upgraded from version 1.40 to 1.4401.  The latest Parse::CPAN::Meta can now read YAML and JSON files using CPA... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 65428 in perl5140delta.pod
 
       PerlIO::encoding has been upgraded from version 0.12 to 0.14. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 65649 in perl5140delta.pod
 
-      PerlIO::scalar has been upgraded from 0.07 to 0.11.  A read() after a seek() bey... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 65724 in perl5140delta.pod
+      PerlIO::scalar has been upgraded from 0.07 to 0.11.  A read() after a seek() beyond the end of the string no longer thinks it has data to... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 65724 in perl5140delta.pod
 
       PerlIO::via has been upgraded from version 0.09 to 0.11. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 65895 in perl5140delta.pod
 
@@ -480,21 +480,21 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5140delta.pod
 
       Pod::Simple has been upgraded from version 3.13 to 3.16. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 66179 in perl5140delta.pod
 
-      POSIX has been upgraded from 1.19 to 1.24.  It now includes constants for POSIX ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 66249 in perl5140delta.pod
+      POSIX has been upgraded from 1.19 to 1.24.  It now includes constants for POSIX signal constants. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 66249 in perl5140delta.pod
 
-      The re pragma has been upgraded from version 0.11 to 0.18.  The use re '/flags' ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 66360 in perl5140delta.pod
+      The re pragma has been upgraded from version 0.11 to 0.18.  The use re '/flags' subpragma is new.  The regmust() function used to crash w... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 66360 in perl5140delta.pod
 
-      Safe has been upgraded from version 2.25 to 2.29.  Coderefs returned by reval() ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 66640 in perl5140delta.pod
+      Safe has been upgraded from version 2.25 to 2.29.  Coderefs returned by reval() and rdo() are now wrapped via wrap_code_refs() (5.12.1). ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 66640 in perl5140delta.pod
 
       SDBM_File has been upgraded from version 1.06 to 1.09. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 66921 in perl5140delta.pod
 
-      SelfLoader has been upgraded from 1.17 to 1.18.  It now works in taint mode [per... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 66989 in perl5140delta.pod
+      SelfLoader has been upgraded from 1.17 to 1.18.  It now works in taint mode [perl #72062]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 66989 in perl5140delta.pod
 
-      The sigtrap pragma has been upgraded from version 1.04 to 1.05.  It no longer tr... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67093 in perl5140delta.pod
+      The sigtrap pragma has been upgraded from version 1.04 to 1.05.  It no longer tries to modify read-only arguments when generating a backt... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67093 in perl5140delta.pod
 
-      Socket has been upgraded from version 1.87 to 1.94.  See /Improved IPv6 support ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67263 in perl5140delta.pod
+      Socket has been upgraded from version 1.87 to 1.94.  See /Improved IPv6 support above. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67263 in perl5140delta.pod
 
-      Storable has been upgraded from version 2.22 to 2.27.  Includes performance impr... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67366 in perl5140delta.pod
+      Storable has been upgraded from version 2.22 to 2.27.  Includes performance improvement for overloaded classes.  This adds support for se... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67366 in perl5140delta.pod
 
       Sys::Hostname has been upgraded from version 1.11 to 1.16. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67906 in perl5140delta.pod
 
@@ -504,9 +504,9 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5140delta.pod
 
       Test::Harness has been upgraded from version 3.17 to 3.23. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 68119 in perl5140delta.pod
 
-      Test::Simple has been upgraded from version 0.94 to 0.98.  Among many other thin... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 68191 in perl5140delta.pod
+      Test::Simple has been upgraded from version 0.94 to 0.98.  Among many other things, subtests without a plan or no_plan now have an implic... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 68191 in perl5140delta.pod
 
-      Thread::Semaphore has been upgraded from version 2.09 to 2.12.  It provides two ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 68380 in perl5140delta.pod
+      Thread::Semaphore has been upgraded from version 2.09 to 2.12.  It provides two new methods that give more control over the decrementing ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 68380 in perl5140delta.pod
 
       Thread::Queue has been upgraded from version 2.11 to 2.12. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 68575 in perl5140delta.pod
 
@@ -514,7 +514,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5140delta.pod
 
       The threads::shared pragma has been upgraded from version 1.32 to 1.37. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 68724 in perl5140delta.pod
 
-      Tie::Hash has been upgraded from version 1.03 to 1.04.  Calling Tie::Hash->TIEHA... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 68809 in perl5140delta.pod
+      Tie::Hash has been upgraded from version 1.03 to 1.04.  Calling Tie::Hash->TIEHASH() used to loop forever.  Now it croaks. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 68809 in perl5140delta.pod
 
       Tie::Hash::NamedCapture has been upgraded from version 0.06 to 0.08. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 68955 in perl5140delta.pod
 
@@ -526,19 +526,19 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5140delta.pod
 
       Time::Piece has been upgraded from version 1.15_01 to 1.20_01. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 69262 in perl5140delta.pod
 
-      Unicode::Collate has been upgraded from version 0.52_01 to 0.73.  Unicode::Colla... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 69338 in perl5140delta.pod
+      Unicode::Collate has been upgraded from version 0.52_01 to 0.73.  Unicode::Collate has been updated to use Unicode 6.0.0.  Unicode::Colla... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 69338 in perl5140delta.pod
 
       Unicode::Normalize has been upgraded from version 1.03 to 1.10. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 70659 in perl5140delta.pod
 
-      Unicode::UCD has been upgraded from version 0.27 to 0.32.  A new function, Unico... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 70736 in perl5140delta.pod
+      Unicode::UCD has been upgraded from version 0.27 to 0.32.  A new function, Unicode::UCD::num(), has been added.  This function returns th... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 70736 in perl5140delta.pod
 
         charinfo() in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 71134 in perl5140delta.pod
 
-          It is now updated to Unicode Version 6.0.0 with Corrigendum #8,  excepting that,... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 71161 in perl5140delta.pod
+          It is now updated to Unicode Version 6.0.0 with Corrigendum #8,  excepting that, just as with Perl 5.14, the code point at U+1F514 has no... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 71161 in perl5140delta.pod
 
-          Hangul syllable code points have the correct names, and their decompositions are... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 71318 in perl5140delta.pod
+          Hangul syllable code points have the correct names, and their decompositions are always output without requiring Lingua::KO::Hangul::Util... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 71318 in perl5140delta.pod
 
-          CJK (Chinese-Japanese-Korean) code points U+2A700 to U+2B734 and U+2B740 to U+2B... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 71486 in perl5140delta.pod
+          CJK (Chinese-Japanese-Korean) code points U+2A700 to U+2B734 and U+2B740 to U+2B81D are now properly handled. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 71486 in perl5140delta.pod
 
           Numeric values are now output for those CJK code points that have them. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 71606 in perl5140delta.pod
 
@@ -548,17 +548,17 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5140delta.pod
 
         charblock() in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 71932 in perl5140delta.pod
 
-      The version pragma has been upgraded from 0.82 to 0.88.  Because of a bug, now f... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 72089 in perl5140delta.pod
+      The version pragma has been upgraded from 0.82 to 0.88.  Because of a bug, now fixed, the is_strict() and is_lax() functions did not work... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 72089 in perl5140delta.pod
 
-      The warnings pragma has been upgraded from version 1.09 to 1.12.  Calling use wa... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 72264 in perl5140delta.pod
+      The warnings pragma has been upgraded from version 1.09 to 1.12.  Calling use warnings without arguments is now significantly more effici... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 72264 in perl5140delta.pod
 
-      The warnings::register pragma has been upgraded from version 1.01 to 1.02.  It i... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 72422 in perl5140delta.pod
+      The warnings::register pragma has been upgraded from version 1.01 to 1.02.  It is now possible to register warning categories other than ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 72422 in perl5140delta.pod
 
       XSLoader has been upgraded from version 0.10 to 0.13. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 72668 in perl5140delta.pod
 
-      VMS::DCLsym has been upgraded from version 1.03 to 1.05.  Two bugs have been fix... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 72735 in perl5140delta.pod
+      VMS::DCLsym has been upgraded from version 1.03 to 1.05.  Two bugs have been fixed [perl #84086]:  The symbol table name was lost when ty... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 72735 in perl5140delta.pod
 
-      The Win32 module has been upgraded from version 0.39 to 0.44.  This release has ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73194 in perl5140delta.pod
+      The Win32 module has been upgraded from version 0.39 to 0.44.  This release has several new functions: Win32::GetSystemMetrics(), Win32::... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73194 in perl5140delta.pod
 
       XS::Typemap has been upgraded from version 0.03 to 0.05. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73482 in perl5140delta.pod
 
@@ -602,15 +602,15 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5140delta.pod
 
       New descriptions in perldiag in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 76664 in perl5140delta.pod
 
-        Ambiguous use of %c resolved as operator %c|perldiag/"Ambiguous use of %c resolv... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 76769 in perl5140delta.pod
+        Ambiguous use of %c resolved as operator %c|perldiag/"Ambiguous use of %c resolved as operator %c" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 76769 in perl5140delta.pod
 
-        Ambiguous use of %c{%s} resolved to %c%s|perldiag/"Ambiguous use of %c{%s} resol... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 76881 in perl5140delta.pod
+        Ambiguous use of %c{%s} resolved to %c%s|perldiag/"Ambiguous use of %c{%s} resolved to %c%s" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 76881 in perl5140delta.pod
 
-        Ambiguous use of %c{%s[...]} resolved to %c%s[...]|perldiag/"Ambiguous use of %c... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 76987 in perl5140delta.pod
+        Ambiguous use of %c{%s[...]} resolved to %c%s[...]|perldiag/"Ambiguous use of %c{%s[...]} resolved to %c%s[...]" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 76987 in perl5140delta.pod
 
-        Ambiguous use of %c{%s{...}} resolved to %c%s{...}|perldiag/"Ambiguous use of %c... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 77113 in perl5140delta.pod
+        Ambiguous use of %c{%s{...}} resolved to %c%s{...}|perldiag/"Ambiguous use of %c{%s{...}} resolved to %c%s{...}" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 77113 in perl5140delta.pod
 
-        Ambiguous use of -%s resolved as -&%s()|perldiag/"Ambiguous use of -%s resolved ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 77239 in perl5140delta.pod
+        Ambiguous use of -%s resolved as -&%s()|perldiag/"Ambiguous use of -%s resolved as -&%s()" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 77239 in perl5140delta.pod
 
         Invalid strict version format (%s)|perldiag/"Invalid strict version format (%s)" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 77343 in perl5140delta.pod
 
@@ -670,59 +670,59 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5140delta.pod
 
     Changes to Existing Diagnostics in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 81563 in perl5140delta.pod
 
-      The "Variable $foo is not imported" warning that precedes a strict 'vars' error ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 81612 in perl5140delta.pod
+      The "Variable $foo is not imported" warning that precedes a strict 'vars' error has now been assigned the "misc" category, so that no war... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 81612 in perl5140delta.pod
 
-      warn() and die() now produce "Wide character" warnings when fed a character outs... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 81803 in perl5140delta.pod
+      warn() and die() now produce "Wide character" warnings when fed a character outside the byte range if STDERR is a byte-sized handle. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 81803 in perl5140delta.pod
 
-      The "Layer does not match this perl" error message has been replaced with these ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 81949 in perl5140delta.pod
+      The "Layer does not match this perl" error message has been replaced with these more helpful messages [perl #73754]:    PerlIO layer func... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 81949 in perl5140delta.pod
 
-        PerlIO layer function table size (%d) does not match size expected by this perl ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 82085 in perl5140delta.pod
+        PerlIO layer function table size (%d) does not match size expected by this perl (%d) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 82085 in perl5140delta.pod
 
         PerlIO layer instance size (%d) does not match size expected by this perl (%d) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 82180 in perl5140delta.pod
 
-      The "Found = in conditional" warning that is emitted when a constant is assigned... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 82276 in perl5140delta.pod
+      The "Found = in conditional" warning that is emitted when a constant is assigned to a variable in a condition is now withheld if the cons... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 82276 in perl5140delta.pod
 
-      Previously, if none of the gethostbyaddr(), gethostbyname() and gethostent() fun... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 82589 in perl5140delta.pod
+      Previously, if none of the gethostbyaddr(), gethostbyname() and gethostent() functions were implemented on a given platform, they would a... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 82589 in perl5140delta.pod
 
-      The warning message about unrecognized regular expression escapes passed through... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 82891 in perl5140delta.pod
+      The warning message about unrecognized regular expression escapes passed through has been changed to include any literal "{" following th... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 82891 in perl5140delta.pod
 
   Utility Changes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 83121 in perl5140delta.pod
 
     perlbug(1) in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 83145 in perl5140delta.pod
 
-      perlbug now looks in the EMAIL environment variable for a return address if the ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 83176 in perl5140delta.pod
+      perlbug now looks in the EMAIL environment variable for a return address if the REPLY-TO and REPLYTO variables are empty. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 83176 in perl5140delta.pod
 
-      perlbug did not previously generate a "From:" header, potentially resulting in d... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 83311 in perl5140delta.pod
+      perlbug did not previously generate a "From:" header, potentially resulting in dropped mail; it now includes that header. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 83311 in perl5140delta.pod
 
-      The user's address is now used as the Return-Path.  Many systems these days don'... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 83446 in perl5140delta.pod
+      The user's address is now used as the Return-Path.  Many systems these days don't have a valid Internet domain name, and perlbug@perl.org... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 83446 in perl5140delta.pod
 
-      perlbug now always gives the reporter a chance to change the email address it gu... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 83781 in perl5140delta.pod
+      perlbug now always gives the reporter a chance to change the email address it guesses for them (5.12.2). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 83781 in perl5140delta.pod
 
-      perlbug should no longer warn about uninitialized values when using the -d and -... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 83899 in perl5140delta.pod
+      perlbug should no longer warn about uninitialized values when using the -d and -v options (5.12.2). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 83899 in perl5140delta.pod
 
     perl5db.pl in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 84025 in perl5140delta.pod
 
-      The remote terminal works after forking and spawns new sessions, one per forked ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 84054 in perl5140delta.pod
+      The remote terminal works after forking and spawns new sessions, one per forked process. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 84054 in perl5140delta.pod
 
     ptargrep in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 84160 in perl5140delta.pod
 
-      ptargrep is a new utility to apply pattern matching to the contents of files  in... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 84189 in perl5140delta.pod
+      ptargrep is a new utility to apply pattern matching to the contents of files  in a tar archive.  It comes with Archive::Tar. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 84189 in perl5140delta.pod
 
   Configuration and Compilation in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 84337 in perl5140delta.pod
 
-    CCINCDIR and CCLIBDIR for the mingw64 cross-compiler are now correctly under $(C... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 84462 in perl5140delta.pod
+    CCINCDIR and CCLIBDIR for the mingw64 cross-compiler are now correctly under $(CCHOME)\mingw\include and \lib rather than immediately bel... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 84462 in perl5140delta.pod
 
     make test.valgrind has been adjusted to account for cpan/dist/ext separation. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 84788 in perl5140delta.pod
 
     On compilers that support it, -Wwrite-strings is now added to cflags by default. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 84882 in perl5140delta.pod
 
-    The Encode module can now (once again) be included in a static Perl build.  The ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 84976 in perl5140delta.pod
+    The Encode module can now (once again) be included in a static Perl build.  The special-case handling for this situation got broken in Pe... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 84976 in perl5140delta.pod
 
-    The previous default size of a PerlIO buffer (4096 bytes) has been increased to ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 85164 in perl5140delta.pod
+    The previous default size of a PerlIO buffer (4096 bytes) has been increased to the larger of 8192 bytes and your local BUFSIZ.  Benchmar... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 85164 in perl5140delta.pod
 
-    An "incompatible operand types" error in ternary expressions when building with ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 85735 in perl5140delta.pod
+    An "incompatible operand types" error in ternary expressions when building with clang has been fixed (5.12.2). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 85735 in perl5140delta.pod
 
-    Perl now skips setuid File::Copy tests on partitions it detects mounted as nosui... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 85859 in perl5140delta.pod
+    Perl now skips setuid File::Copy tests on partitions it detects mounted as nosuid (5.12.2). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 85859 in perl5140delta.pod
 
   Platform Support in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 85974 in perl5140delta.pod
 
@@ -740,7 +740,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5140delta.pod
 
       AIX in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 86544 in perl5140delta.pod
 
-        README.aix has been updated with information about the XL C/C++ V11 compiler sui... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 86563 in perl5140delta.pod
+        README.aix has been updated with information about the XL C/C++ V11 compiler suite (5.12.2). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 86563 in perl5140delta.pod
 
       ARM in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 86676 in perl5140delta.pod
 
@@ -750,7 +750,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5140delta.pod
 
         MakeMaker has been updated to build manpages on cygwin. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 86806 in perl5140delta.pod
 
-        Improved rebase behaviour  If a DLL is updated on cygwin the old imagebase addre... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 86875 in perl5140delta.pod
+        Improved rebase behaviour  If a DLL is updated on cygwin the old imagebase address is reused. This solves most rebase errors, especially ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 86875 in perl5140delta.pod
 
         Support for the standard cygwin dll prefix (needed for FFIs) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 87146 in perl5140delta.pod
 
@@ -758,23 +758,23 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5140delta.pod
 
       FreeBSD 7 in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 87259 in perl5140delta.pod
 
-        FreeBSD 7 no longer contains /usr/bin/objformat.  At build time, Perl now skips ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 87284 in perl5140delta.pod
+        FreeBSD 7 no longer contains /usr/bin/objformat.  At build time, Perl now skips the objformat check for versions 7 and higher and assumes... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 87284 in perl5140delta.pod
 
       HP-UX in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 87460 in perl5140delta.pod
 
-        Perl now allows -Duse64bitint without promoting to use64bitall on HP-UX (5.12.1)... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 87482 in perl5140delta.pod
+        Perl now allows -Duse64bitint without promoting to use64bitall on HP-UX (5.12.1). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 87482 in perl5140delta.pod
 
       IRIX in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 87587 in perl5140delta.pod
 
-        Conversion of strings to floating-point numbers is now more accurate on IRIX sys... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 87607 in perl5140delta.pod
+        Conversion of strings to floating-point numbers is now more accurate on IRIX systems [perl #32380]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 87607 in perl5140delta.pod
 
       Mac OS X in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 87724 in perl5140delta.pod
 
-        Early versions of Mac OS X (Darwin) had buggy implementations of the setregid(),... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 87748 in perl5140delta.pod
+        Early versions of Mac OS X (Darwin) had buggy implementations of the setregid(), setreuid(), setrgid(,) and setruid() functions, so Perl ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 87748 in perl5140delta.pod
 
       MirBSD in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 88058 in perl5140delta.pod
 
-        Previously if you built Perl with a shared libperl.so on MirBSD (the default con... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 88080 in perl5140delta.pod
+        Previously if you built Perl with a shared libperl.so on MirBSD (the default config), it would work up to the installation; however, once... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 88080 in perl5140delta.pod
 
       NetBSD in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 88348 in perl5140delta.pod
 
@@ -782,35 +782,35 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5140delta.pod
 
       OpenBSD in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 88465 in perl5140delta.pod
 
-        OpenBSD > 3.7 has a new malloc implementation which is mmap-based, and as such c... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 88488 in perl5140delta.pod
+        OpenBSD > 3.7 has a new malloc implementation which is mmap-based, and as such can release memory back to the OS; however, Perl's use of ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 88488 in perl5140delta.pod
 
       OpenVOS in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 88756 in perl5140delta.pod
 
-        Perl now builds again with OpenVOS (formerly known as Stratus VOS) [perl #78132]... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 88779 in perl5140delta.pod
+        Perl now builds again with OpenVOS (formerly known as Stratus VOS) [perl #78132] (5.12.3). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 88779 in perl5140delta.pod
 
       Solaris in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 88887 in perl5140delta.pod
 
-        DTrace is now supported on Solaris.  There used to be build failures, but these ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 88910 in perl5140delta.pod
+        DTrace is now supported on Solaris.  There used to be build failures, but these have been fixed [perl #73630] (5.12.3). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 88910 in perl5140delta.pod
 
       VMS in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 89047 in perl5140delta.pod
 
-        Extension building on older (pre 7.3-2) VMS systems was broken because configure... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 89066 in perl5140delta.pod
+        Extension building on older (pre 7.3-2) VMS systems was broken because configure.com hit the DCL symbol length limit of 1K.  We now work ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 89066 in perl5140delta.pod
 
         We fixed configuring and building Perl with -Uuseperlio (5.12.1). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 89298 in perl5140delta.pod
 
-        PerlIOUnix_open now honours the default permissions on VMS.  When perlio became ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 89377 in perl5140delta.pod
+        PerlIOUnix_open now honours the default permissions on VMS.  When perlio became the default and unix became the default bottom layer, the... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 89377 in perl5140delta.pod
 
-        The shortening of symbols longer than 31 characters in the core C sources and in... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 89982 in perl5140delta.pod
+        The shortening of symbols longer than 31 characters in the core C sources and in extensions is now by default done by the C compiler rath... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 89982 in perl5140delta.pod
 
-        Record-oriented files (record format variable or variable with fixed control) op... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 90362 in perl5140delta.pod
+        Record-oriented files (record format variable or variable with fixed control) opened for write by the perlio layer will now be line-buffe... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 90362 in perl5140delta.pod
 
-        git_version.h is now installed on VMS.  This was an oversight in v5.12.0 which c... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 90605 in perl5140delta.pod
+        git_version.h is now installed on VMS.  This was an oversight in v5.12.0 which caused some extensions to fail to build (5.12.2). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 90605 in perl5140delta.pod
 
-        Several memory leaks in stat()|perlfunc/"stat FILEHANDLE" have been fixed (5.12.... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 90747 in perl5140delta.pod
+        Several memory leaks in stat()|perlfunc/"stat FILEHANDLE" have been fixed (5.12.2). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 90747 in perl5140delta.pod
 
-        A memory leak in Perl_rename() due to a double allocation has been fixed (5.12.2... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 90844 in perl5140delta.pod
+        A memory leak in Perl_rename() due to a double allocation has been fixed (5.12.2). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 90844 in perl5140delta.pod
 
-        A memory leak in vms_fid_to_name() (used by realpath() and realname()> has been ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 90937 in perl5140delta.pod
+        A memory leak in vms_fid_to_name() (used by realpath() and realname()> has been fixed (5.12.2). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 90937 in perl5140delta.pod
 
       Windows in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 91050 in perl5140delta.pod
 
@@ -818,17 +818,17 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5140delta.pod
 
         Compilation with Visual Studio 2010 is now supported. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 91268 in perl5140delta.pod
 
-        When using old 32-bit compilers, the define _USE_32BIT_TIME_T is now set in $Con... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 91332 in perl5140delta.pod
+        When using old 32-bit compilers, the define _USE_32BIT_TIME_T is now set in $Config{ccflags}.  This improves portability when compiling X... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 91332 in perl5140delta.pod
 
-        $Config{gccversion} is now set correctly when Perl is built using the mingw64 co... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 91570 in perl5140delta.pod
+        $Config{gccversion} is now set correctly when Perl is built using the mingw64 compiler from http://mingw64.org [perl #73754]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 91570 in perl5140delta.pod
 
-        When building Perl with the mingw64 x64 cross-compiler incpath, libpth, ldflags,... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 91712 in perl5140delta.pod
+        When building Perl with the mingw64 x64 cross-compiler incpath, libpth, ldflags, lddlflags and ldflags_nolargefiles values in Config.pm a... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 91712 in perl5140delta.pod
 
-        The build process proceeds more smoothly with mingw and dmake when C:\MSYS\bin i... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 92049 in perl5140delta.pod
+        The build process proceeds more smoothly with mingw and dmake when C:\MSYS\bin is in the PATH, due to a Cwd fix. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 92049 in perl5140delta.pod
 
-        Support for building with Visual C++ 2010 is now underway, but is not yet comple... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 92178 in perl5140delta.pod
+        Support for building with Visual C++ 2010 is now underway, but is not yet complete.  See README.win32 or perlwin32 for more details. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 92178 in perl5140delta.pod
 
-        The option to use an externally-supplied crypt(), or to build with no crypt() at... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 92327 in perl5140delta.pod
+        The option to use an externally-supplied crypt(), or to build with no crypt() at all, has been removed.  Perl supplies its own crypt() im... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 92327 in perl5140delta.pod
 
   Internal Changes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 92617 in perl5140delta.pod
 
@@ -838,17 +838,17 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5140delta.pod
 
       New parsing functions in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 93065 in perl5140delta.pod
 
-        parse_stmtseq()|perlapi/parse_stmtseq parses a sequence of statements, up to clo... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 93345 in perl5140delta.pod
+        parse_stmtseq()|perlapi/parse_stmtseq parses a sequence of statements, up to closing brace or EOF. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 93345 in perl5140delta.pod
 
-        parse_fullstmt()|perlapi/parse_fullstmt parses a complete Perl statement, includ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 93457 in perl5140delta.pod
+        parse_fullstmt()|perlapi/parse_fullstmt parses a complete Perl statement, including optional label. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 93457 in perl5140delta.pod
 
         parse_barestmt()|perlapi/parse_barestmt parses a statement without a label. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 93570 in perl5140delta.pod
 
         parse_block()|perlapi/parse_block parses a code block. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 93659 in perl5140delta.pod
 
-        parse_label()|perlapi/parse_label parses a statement label, separate from statem... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 93727 in perl5140delta.pod
+        parse_label()|perlapi/parse_label parses a statement label, separate from statements. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 93727 in perl5140delta.pod
 
-        parse_fullexpr()|perlapi/parse_fullexpr, parse_listexpr()|perlapi/parse_listexpr... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 93826 in perl5140delta.pod
+        parse_fullexpr()|perlapi/parse_fullexpr, parse_listexpr()|perlapi/parse_listexpr, parse_termexpr()|perlapi/parse_termexpr, and parse_arit... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 93826 in perl5140delta.pod
 
       Hints hash API in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 94084 in perl5140delta.pod
 
@@ -934,94 +934,96 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5140delta.pod
 
     I/O in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 107367 in perl5140delta.pod
 
-      Perl no longer produces this warning:      $ perl -we 'open(my $f, ">", \my $x);... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 107388 in perl5140delta.pod
+      Perl no longer produces this warning:      $ perl -we 'open(my $f, ">", \my $x); binmode($f, "scalar")'
+    Use of uninitialized value in... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 107388 in perl5140delta.pod
 
-      Opening a glob reference via open($fh, ">", \*glob) no longer causes the glob to... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 107558 in perl5140delta.pod
+      Opening a glob reference via open($fh, ">", \*glob) no longer causes the glob to be corrupted when the filehandle is printed to.  This wo... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 107558 in perl5140delta.pod
 
-      PerlIO no longer crashes when called recursively, such as from a signal handler.... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 107794 in perl5140delta.pod
+      PerlIO no longer crashes when called recursively, such as from a signal handler.  Now it just leaks memory [perl #75556]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 107794 in perl5140delta.pod
 
-      Most I/O functions were not warning for unopened handles unless the "closed" and... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 107926 in perl5140delta.pod
+      Most I/O functions were not warning for unopened handles unless the "closed" and "unopened" warnings categories were both enabled.  Now o... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 107926 in perl5140delta.pod
 
-      There have been several fixes to PerlIO layers:  When binmode(FH, ":crlf") pushe... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 108178 in perl5140delta.pod
+      There have been several fixes to PerlIO layers:  When binmode(FH, ":crlf") pushes the :crlf layer on top of the stack, it no longer enabl... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 108178 in perl5140delta.pod
 
     Regular Expression Bug Fixes in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 108850 in perl5140delta.pod
 
-      The regular expression engine no longer loops when matching "\N{LATIN SMALL LIGA... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 108894 in perl5140delta.pod
+      The regular expression engine no longer loops when matching "\N{LATIN SMALL LIGATURE FF}" =~ /f+/i and similar expressions [perl #72998] ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 108894 in perl5140delta.pod
 
-      The trie runtime code should no longer allocate massive amounts of memory, fixin... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 109054 in perl5140delta.pod
+      The trie runtime code should no longer allocate massive amounts of memory, fixing #74484. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 109054 in perl5140delta.pod
 
       Syntax errors in (?{...}) blocks no longer cause panic messages [perl #2353]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 109154 in perl5140delta.pod
 
       A pattern like (?:(o){2})? no longer causes a "panic" error [perl #39233]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 109249 in perl5140delta.pod
 
-      A fatal error in regular expressions containing (.*?) when processing UTF-8 data... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 109337 in perl5140delta.pod
+      A fatal error in regular expressions containing (.*?) when processing UTF-8 data has been fixed [perl #75680] (5.12.2). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 109337 in perl5140delta.pod
 
-      An erroneous regular expression engine optimisation that caused regex verbs like... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 109470 in perl5140delta.pod
+      An erroneous regular expression engine optimisation that caused regex verbs like *COMMIT sometimes to be ignored has been removed. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 109470 in perl5140delta.pod
 
-      The regular expression bracketed character class [\8\9] was effectively the same... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 109614 in perl5140delta.pod
+      The regular expression bracketed character class [\8\9] was effectively the same as [89\000], incorrectly matching a NULL character.  It ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 109614 in perl5140delta.pod
 
-      A regular expression match in the right-hand side of a global substitution (s///... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 109973 in perl5140delta.pod
+      A regular expression match in the right-hand side of a global substitution (s///g) that is in the same scope will no longer cause match v... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 109973 in perl5140delta.pod
 
-      Several cases in which characters in the Latin-1 non-ASCII range (0x80 to 0xFF) ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 110325 in perl5140delta.pod
+      Several cases in which characters in the Latin-1 non-ASCII range (0x80 to 0xFF) used not to match themselves, or used to match both a cha... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 110325 in perl5140delta.pod
 
-      Matching a Unicode character against an alternation containing characters that h... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 110620 in perl5140delta.pod
+      Matching a Unicode character against an alternation containing characters that happened to match continuation bytes in the former's UTF8 ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 110620 in perl5140delta.pod
 
-      The trie optimisation was not taking empty groups into account, preventing "foo"... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 110866 in perl5140delta.pod
+      The trie optimisation was not taking empty groups into account, preventing "foo" from matching /\A(?:(?:)foo|bar|zot)\z/ [perl #78356]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 110866 in perl5140delta.pod
 
-      A pattern containing a + inside a lookahead would sometimes cause an incorrect m... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 111015 in perl5140delta.pod
+      A pattern containing a + inside a lookahead would sometimes cause an incorrect match failure in a global match (for example, /(?=(\S+))/g... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 111015 in perl5140delta.pod
 
-      A regular expression optimisation would sometimes cause a match with a {n,m} qua... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 111185 in perl5140delta.pod
+      A regular expression optimisation would sometimes cause a match with a {n,m} quantifier to fail when it should have matched [perl #79152]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 111185 in perl5140delta.pod
 
-      Case-insensitive matching in regular expressions compiled under use locale now w... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 111337 in perl5140delta.pod
+      Case-insensitive matching in regular expressions compiled under use locale now works much more sanely when the pattern or target string i... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 111337 in perl5140delta.pod
 
-      The (?|...) regular expression construct no longer crashes if the final branch h... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 112155 in perl5140delta.pod
+      The (?|...) regular expression construct no longer crashes if the final branch has more sets of capturing parentheses than any other bran... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 112155 in perl5140delta.pod
 
-      A bug has been fixed in the implementation of {...} quantifiers in regular expre... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 112445 in perl5140delta.pod
+      A bug has been fixed in the implementation of {...} quantifiers in regular expressions that prevented the code block in /((\w+)(?{ print ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 112445 in perl5140delta.pod
 
     Syntax/Parsing Bugs in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 112663 in perl5140delta.pod
 
-      when (scalar) {...} no longer crashes, but produces a syntax error [perl #74114]... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 112698 in perl5140delta.pod
+      when (scalar) {...} no longer crashes, but produces a syntax error [perl #74114] (5.12.1). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 112698 in perl5140delta.pod
 
-      A label right before a string eval (foo: eval $string) no longer causes the labe... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 112802 in perl5140delta.pod
+      A label right before a string eval (foo: eval $string) no longer causes the label to be associated also with the first statement inside t... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 112802 in perl5140delta.pod
 
-      The no 5.13.2 form of no no longer tries to turn on features or pragmata (like s... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 112984 in perl5140delta.pod
+      The no 5.13.2 form of no no longer tries to turn on features or pragmata (like strict) [perl #70075] (5.12.2). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 112984 in perl5140delta.pod
 
-      BEGIN {require 5.12.0} now behaves as documented, rather than behaving identical... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 113114 in perl5140delta.pod
+      BEGIN {require 5.12.0} now behaves as documented, rather than behaving identically to use 5.12.0.  Previously, require in a BEGIN block w... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 113114 in perl5140delta.pod
 
-      A regression introduced in Perl 5.12.0, making my $x = 3; $x = length(undef) res... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 113415 in perl5140delta.pod
+      A regression introduced in Perl 5.12.0, making my $x = 3; $x = length(undef) result in $x set to 3 has been fixed.  $x will now be undef ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 113415 in perl5140delta.pod
 
-      When strict "refs" mode is off, %{...} in rvalue context returns undef if its ar... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 113605 in perl5140delta.pod
+      When strict "refs" mode is off, %{...} in rvalue context returns undef if its argument is undefined.  An optimisation introduced in Perl ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 113605 in perl5140delta.pod
 
       Constant-folding used to cause    $text =~ ( 1 ? /phoo/ : /bear/)
- to turn into ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 113995 in perl5140delta.pod
+ to turn into    $text =~ /phoo/
+ at compile time.  Now it correctly ma... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 113995 in perl5140delta.pod
 
-      Parsing Perl code (either with string eval or by loading modules) from within a ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 114177 in perl5140delta.pod
+      Parsing Perl code (either with string eval or by loading modules) from within a UNITCHECK block no longer causes the interpreter to crash... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 114177 in perl5140delta.pod
 
-      String evals no longer fail after 2 billion scopes have been compiled [perl #833... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 114346 in perl5140delta.pod
+      String evals no longer fail after 2 billion scopes have been compiled [perl #83364]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 114346 in perl5140delta.pod
 
-      The parser no longer hangs when encountering certain Unicode characters, such as... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 114444 in perl5140delta.pod
+      The parser no longer hangs when encountering certain Unicode characters, such as U+387 [perl #74022]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 114444 in perl5140delta.pod
 
-      Defining a constant with the same name as one of Perl's special blocks (like INI... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 114556 in perl5140delta.pod
+      Defining a constant with the same name as one of Perl's special blocks (like INIT) stopped working in 5.12.0, but has now been fixed [per... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 114556 in perl5140delta.pod
 
-      A reference to a literal value used as a hash key ($hash{\"foo"}) used to be str... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 114717 in perl5140delta.pod
+      A reference to a literal value used as a hash key ($hash{\"foo"}) used to be stringified, even if the hash was tied [perl #79178]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 114717 in perl5140delta.pod
 
-      A closure containing an if statement followed by a constant or variable is no lo... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 114861 in perl5140delta.pod
+      A closure containing an if statement followed by a constant or variable is no longer treated as a constant [perl #63540]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 114861 in perl5140delta.pod
 
-      state can now be used with attributes.  It used to mean the same thing as my if ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 114996 in perl5140delta.pod
+      state can now be used with attributes.  It used to mean the same thing as my if any attributes were present [perl #68658]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 114996 in perl5140delta.pod
 
-      Expressions like @$a > 3 no longer cause $a to be mentioned in the "Use of unini... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 115135 in perl5140delta.pod
+      Expressions like @$a > 3 no longer cause $a to be mentioned in the "Use of uninitialized value in numeric gt" warning when $a is undefine... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 115135 in perl5140delta.pod
 
-      Accessing an element of a package array with a hard-coded number (as opposed to ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 115391 in perl5140delta.pod
+      Accessing an element of a package array with a hard-coded number (as opposed to an arbitrary expression) would crash if the array did not... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 115391 in perl5140delta.pod
 
-      The -C command-line option, when used on the shebang line, can now be followed b... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 115743 in perl5140delta.pod
+      The -C command-line option, when used on the shebang line, can now be followed by other options [perl #72434]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 115743 in perl5140delta.pod
 
-      The B module was returning B::OPs instead of B::LOGOPs for entertry [perl #80622... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 115867 in perl5140delta.pod
+      The B module was returning B::OPs instead of B::LOGOPs for entertry [perl #80622].  This was due to a bug in the Perl core, not in B itself. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 115867 in perl5140delta.pod
 
     Stashes, Globs and Method Lookup in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 116040 in perl5140delta.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 116470 in perl5140delta.pod
+      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 116470 in perl5140delta.pod
 
-        The following used to have erratic effects on method resolution, because the "is... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 116477 in perl5140delta.pod
+        The following used to have erratic effects on method resolution, because the "isa" caches were not reset or otherwise ended up listing th... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 116477 in perl5140delta.pod
 
           Aliasing packages by assigning to globs [perl #77358] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 116672 in perl5140delta.pod
 
@@ -1035,97 +1037,97 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5140delta.pod
 
           Sharing @ISA arrays between classes (via *Foo::ISA = \@Bar::ISA or *Foo::ISA = *Bar::ISA) [perl #77238] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 116980 in perl5140delta.pod
 
-        Typeglob assignments would crash if the glob's stash no longer existed, so long ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 117187 in perl5140delta.pod
+        Typeglob assignments would crash if the glob's stash no longer existed, so long as the glob assigned to were named ISA or the glob on eit... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 117187 in perl5140delta.pod
 
-        PL_isarev, which is accessible to Perl via mro::get_isarev is now updated proper... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 117388 in perl5140delta.pod
+        PL_isarev, which is accessible to Perl via mro::get_isarev is now updated properly when packages are deleted or removed from the @ISA of ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 117388 in perl5140delta.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 117747 in perl5140delta.pod
+      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 117747 in perl5140delta.pod
 
-        Some work has been done on the internal pointers that link between symbol tables... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 117755 in perl5140delta.pod
+        Some work has been done on the internal pointers that link between symbol tables (stashes), typeglobs, and subroutines.  This has the eff... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 117755 in perl5140delta.pod
 
-        Assigning a reference to a glob copy now assigns to a glob slot instead of overw... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 118092 in perl5140delta.pod
+        Assigning a reference to a glob copy now assigns to a glob slot instead of overwriting the glob with a scalar [perl #1804] [perl #77508]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 118092 in perl5140delta.pod
 
-        A bug when replacing the glob of a loop variable within the loop has been fixed ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 118240 in perl5140delta.pod
+        A bug when replacing the glob of a loop variable within the loop has been fixed [perl #21469].  This means the following code will no lon... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 118240 in perl5140delta.pod
 
-        Assigning a glob to a PVLV used to convert it to a plain string.  Now it works c... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 118441 in perl5140delta.pod
+        Assigning a glob to a PVLV used to convert it to a plain string.  Now it works correctly, and a PVLV can hold a glob.  This would happen ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 118441 in perl5140delta.pod
 
-        When trying to report Use of uninitialized value $Foo::BAR, crashes could occur ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 118861 in perl5140delta.pod
+        When trying to report Use of uninitialized value $Foo::BAR, crashes could occur if the glob holding the global variable in question had b... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 118861 in perl5140delta.pod
 
-        During the restoration of a localised typeglob on scope exit, any destructors ca... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 119171 in perl5140delta.pod
+        During the restoration of a localised typeglob on scope exit, any destructors called as a result would be able to see the typeglob in an ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 119171 in perl5140delta.pod
 
-        If a typeglob is freed while a subroutine attached to it is still referenced els... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 119787 in perl5140delta.pod
+        If a typeglob is freed while a subroutine attached to it is still referenced elsewhere, the subroutine is renamed to __ANON__ in the same... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 119787 in perl5140delta.pod
 
-        Subroutines and package variables inside a package whose name ends with :: can n... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 120324 in perl5140delta.pod
+        Subroutines and package variables inside a package whose name ends with :: can now be accessed with a fully qualified name. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 120324 in perl5140delta.pod
 
     Unicode in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 120468 in perl5140delta.pod
 
-      What has become known as "the Unicode Bug" is almost completely resolved in this... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 120491 in perl5140delta.pod
+      What has become known as "the Unicode Bug" is almost completely resolved in this release.  Under use feature 'unicode_strings' (which is ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 120491 in perl5140delta.pod
 
-        1 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 120829 in perl5140delta.pod
+        The now-deprecated, user-defined case-changing functions require utf8-encoded strings to operate.  The CPAN module Unicode::Casing has be... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 120829 in perl5140delta.pod
 
-        2 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 121089 in perl5140delta.pod
+        quotemeta() (and its in-line equivalent \Q) can also give different results depending on whether a string is encoded in UTF-8.  See perlu... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 121089 in perl5140delta.pod
 
-      Handling of Unicode non-character code points has changed. Previously they were ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 121275 in perl5140delta.pod
+      Handling of Unicode non-character code points has changed. Previously they were mostly considered illegal, except that in some place only... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 121275 in perl5140delta.pod
 
-      Case-insensitive "/i" regular expression matching of Unicode characters that mat... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 121735 in perl5140delta.pod
+      Case-insensitive "/i" regular expression matching of Unicode characters that match multiple characters now works much more as intended.  ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 121735 in perl5140delta.pod
 
       Naming a deprecated character in \N{NAME} no longer leaks memory. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 122809 in perl5140delta.pod
 
-      We fixed a bug that could cause \N{NAME} constructs followed by a single "." to ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 122891 in perl5140delta.pod
+      We fixed a bug that could cause \N{NAME} constructs followed by a single "." to be parsed incorrectly [perl #74978] (5.12.1). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 122891 in perl5140delta.pod
 
       chop now correctly handles characters above "\x{7fffffff}" [perl #73246]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 123036 in perl5140delta.pod
 
-      Passing to index an offset beyond the end of the string when the string is encod... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 123126 in perl5140delta.pod
+      Passing to index an offset beyond the end of the string when the string is encoded internally in UTF8 no longer causes panics [perl #75898]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 123126 in perl5140delta.pod
 
       warn() and die() now respect utf8-encoded scalars [perl #45549]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 123280 in perl5140delta.pod
 
-      Sometimes the UTF8 length cache would not be reset on a value returned by substr... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 123355 in perl5140delta.pod
+      Sometimes the UTF8 length cache would not be reset on a value returned by substr, causing length(substr($uni_string, ...)) to give wrong ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 123355 in perl5140delta.pod
 
     Ties, Overloading and Other Magic in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 123616 in perl5140delta.pod
 
-      Overloading now works properly in conjunction with tied variables.  What formerl... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 123665 in perl5140delta.pod
+      Overloading now works properly in conjunction with tied variables.  What formerly happened was that most ops checked their arguments for ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 123665 in perl5140delta.pod
 
-      Various instances of magic (like tie methods) being called on tied variables too... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 123978 in perl5140delta.pod
+      Various instances of magic (like tie methods) being called on tied variables too many or too few times have been fixed:    $tied->() did ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 123978 in perl5140delta.pod
 
         $tied->() did not always call FETCH [perl #8438]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 124115 in perl5140delta.pod
 
         Filetest operators and y/// and tr/// were calling FETCH too many times. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 124182 in perl5140delta.pod
 
-        The = operator used to ignore magic on its right-hand side if the scalar happene... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 124271 in perl5140delta.pod
+        The = operator used to ignore magic on its right-hand side if the scalar happened to hold a typeglob (if a typeglob was the last thing re... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 124271 in perl5140delta.pod
 
-        Dereference operators used to ignore magic if the argument was a reference alrea... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 124478 in perl5140delta.pod
+        Dereference operators used to ignore magic if the argument was a reference already (such as from a previous FETCH) [perl #72144]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 124478 in perl5140delta.pod
 
-        splice now calls set-magic (so changes made by splice @ISA are respected by meth... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 124618 in perl5140delta.pod
+        splice now calls set-magic (so changes made by splice @ISA are respected by method calls) [perl #78400]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 124618 in perl5140delta.pod
 
-        In-memory files created by open($fh, ">", \$buffer) were not calling FETCH/STORE... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 124739 in perl5140delta.pod
+        In-memory files created by open($fh, ">", \$buffer) were not calling FETCH/STORE at all [perl #43789] (5.12.2). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 124739 in perl5140delta.pod
 
         utf8::is_utf8() now respects get-magic (like $1) (5.12.1). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 124868 in perl5140delta.pod
 
-      Non-commutative binary operators used to swap their operands if the same tied sc... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 124947 in perl5140delta.pod
+      Non-commutative binary operators used to swap their operands if the same tied scalar was used for both operands and returned a different ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 124947 in perl5140delta.pod
 
-      String eval now detects taintedness of overloaded or tied arguments [perl #75716... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 125257 in perl5140delta.pod
+      String eval now detects taintedness of overloaded or tied arguments [perl #75716]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 125257 in perl5140delta.pod
 
-      String eval and regular expression matches against objects with string overloadi... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 125353 in perl5140delta.pod
+      String eval and regular expression matches against objects with string overloading no longer cause memory corruption or crashes [perl #77... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 125353 in perl5140delta.pod
 
       readline|perlfunc/"readline EXPR" now honors <> overloading on tied arguments. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 125509 in perl5140delta.pod
 
-      <expr> always respects overloading now if the expression is overloaded.  Because... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 125608 in perl5140delta.pod
+      <expr> always respects overloading now if the expression is overloaded.  Because "<> as glob" was parsed differently from "<> as filehand... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 125608 in perl5140delta.pod
 
-      The fallback behaviour of overloading on binary operators was asymmetric [perl #... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 126046 in perl5140delta.pod
+      The fallback behaviour of overloading on binary operators was asymmetric [perl #71286]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 126046 in perl5140delta.pod
 
-      Magic applied to variables in the main package no longer affects other packages.... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 126144 in perl5140delta.pod
+      Magic applied to variables in the main package no longer affects other packages. See /Magic variables outside the main package above [per... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 126144 in perl5140delta.pod
 
-      Sometimes magic (ties, taintedness, etc.) attached to variables could cause an o... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 126305 in perl5140delta.pod
+      Sometimes magic (ties, taintedness, etc.) attached to variables could cause an object to last longer than it should, or cause a crash if ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 126305 in perl5140delta.pod
 
-      DESTROY methods of objects implementing ties are no longer able to crash by acce... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 126543 in perl5140delta.pod
+      DESTROY methods of objects implementing ties are no longer able to crash by accessing the tied variable through a weak reference [perl #8... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 126543 in perl5140delta.pod
 
-      Fixed a regression of kill() when a match variable is used for the process ID to... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 126697 in perl5140delta.pod
+      Fixed a regression of kill() when a match variable is used for the process ID to kill [perl #75812]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 126697 in perl5140delta.pod
 
-      $AUTOLOAD used to remain tainted forever if it ever became tainted.  Now it is c... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 126808 in perl5140delta.pod
+      $AUTOLOAD used to remain tainted forever if it ever became tainted.  Now it is correctly untainted if an autoloaded method is called and ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 126808 in perl5140delta.pod
 
-      sprintf now dies when passed a tainted scalar for the format.  It did already di... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 126991 in perl5140delta.pod
+      sprintf now dies when passed a tainted scalar for the format.  It did already die for arbitrary expressions, but not for simple scalars [... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 126991 in perl5140delta.pod
 
-      lc, uc, lcfirst, and ucfirst no longer return untainted strings when the argumen... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 127155 in perl5140delta.pod
+      lc, uc, lcfirst, and ucfirst no longer return untainted strings when the argument is tainted.  This has been broken since perl 5.8.9 [per... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 127155 in perl5140delta.pod
 
     The Debugger in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 127332 in perl5140delta.pod
 
@@ -1133,143 +1135,143 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5140delta.pod
 
       Subroutine redefinition works once more in the debugger [perl #48332]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 127432 in perl5140delta.pod
 
-      When -d is used on the shebang (#!) line, the debugger now has access to the lin... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 127513 in perl5140delta.pod
+      When -d is used on the shebang (#!) line, the debugger now has access to the lines of the main program.  In the past, this sometimes work... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 127513 in perl5140delta.pod
 
-      A possible memory leak when using caller()|perlfunc/"caller EXPR" to set @DB::ar... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 127780 in perl5140delta.pod
+      A possible memory leak when using caller()|perlfunc/"caller EXPR" to set @DB::args has been fixed (5.12.2). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 127780 in perl5140delta.pod
 
-      Perl no longer stomps on $DB::single, $DB::trace, and $DB::signal  if these vari... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 127904 in perl5140delta.pod
+      Perl no longer stomps on $DB::single, $DB::trace, and $DB::signal  if these variables already have values when $^P is assigned to [perl #... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 127904 in perl5140delta.pod
 
-      #line directives in string evals were not properly updating the arrays of lines ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 128071 in perl5140delta.pod
+      #line directives in string evals were not properly updating the arrays of lines of code (@{"_< ..."}) that the debugger (or any debugging... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 128071 in perl5140delta.pod
 
     Threads in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 128471 in perl5140delta.pod
 
-      Perl no longer accidentally clones lexicals in scope within active stack frames ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 128494 in perl5140delta.pod
+      Perl no longer accidentally clones lexicals in scope within active stack frames in the parent when creating a child thread [perl #73086]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 128494 in perl5140delta.pod
 
-      Several memory leaks in cloning and freeing threaded Perl interpreters have been... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 128642 in perl5140delta.pod
+      Several memory leaks in cloning and freeing threaded Perl interpreters have been fixed [perl #77352]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 128642 in perl5140delta.pod
 
-      Creating a new thread when directory handles were open used to cause a crash, be... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 128754 in perl5140delta.pod
+      Creating a new thread when directory handles were open used to cause a crash, because the handles were not cloned, but simply passed to t... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 128754 in perl5140delta.pod
 
-      The typeglob *,, which holds the scalar variable $, (output field separator), ha... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 129157 in perl5140delta.pod
+      The typeglob *,, which holds the scalar variable $, (output field separator), had the wrong reference count in child threads. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 129157 in perl5140delta.pod
 
-      [perl #78494] When pipes are shared between threads, the close function (and any... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 129299 in perl5140delta.pod
+      [perl #78494] When pipes are shared between threads, the close function (and any implicit close, such as on thread exit) no longer blocks. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 129299 in perl5140delta.pod
 
-      Perl now does a timely cleanup of SVs that are cloned into a new thread but then... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 129451 in perl5140delta.pod
+      Perl now does a timely cleanup of SVs that are cloned into a new thread but then discovered to be orphaned (that is, their owners are not... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 129451 in perl5140delta.pod
 
     Scoping and Subroutines in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 129691 in perl5140delta.pod
 
-      Lvalue subroutines are again able to return copy-on-write scalars.  This had bee... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 129730 in perl5140delta.pod
+      Lvalue subroutines are again able to return copy-on-write scalars.  This had been broken since version 5.10.0 [perl #75656] (5.12.3). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 129730 in perl5140delta.pod
 
-      require no longer causes caller to return the wrong file name for the scope that... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 129874 in perl5140delta.pod
+      require no longer causes caller to return the wrong file name for the scope that called require and other scopes higher up that had the s... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 129874 in perl5140delta.pod
 
-      sort with a ($$)-prototyped comparison routine used to cause the value of @_ to ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 130059 in perl5140delta.pod
+      sort with a ($$)-prototyped comparison routine used to cause the value of @_ to leak out of the sort.  Taking a reference to @_ within th... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 130059 in perl5140delta.pod
 
-      Match variables (like $1) no longer persist between calls to a sort subroutine [... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 130271 in perl5140delta.pod
+      Match variables (like $1) no longer persist between calls to a sort subroutine [perl #76026]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 130271 in perl5140delta.pod
 
-      Iterating with foreach over an array returned by an lvalue sub now works [perl #... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 130378 in perl5140delta.pod
+      Iterating with foreach over an array returned by an lvalue sub now works [perl #23790]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 130378 in perl5140delta.pod
 
-      $@ is now localised during calls to binmode to prevent action at a distance [per... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 130479 in perl5140delta.pod
+      $@ is now localised during calls to binmode to prevent action at a distance [perl #78844]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 130479 in perl5140delta.pod
 
-      Calling a closure prototype (what is passed to an attribute handler for a closur... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 130586 in perl5140delta.pod
+      Calling a closure prototype (what is passed to an attribute handler for a closure) now results in a "Closure prototype called" error mess... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 130586 in perl5140delta.pod
 
-      Mentioning a read-only lexical variable from the enclosing scope in a string eva... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 130771 in perl5140delta.pod
+      Mentioning a read-only lexical variable from the enclosing scope in a string eval no longer causes the variable to become writable [perl ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 130771 in perl5140delta.pod
 
     Signals in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 130937 in perl5140delta.pod
 
       Within signal handlers, $! is now implicitly localized. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 130960 in perl5140delta.pod
 
-      CHLD signals are no longer unblocked after a signal handler is called if they we... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 131029 in perl5140delta.pod
+      CHLD signals are no longer unblocked after a signal handler is called if they were blocked before by POSIX::sigprocmask [perl #82040]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 131029 in perl5140delta.pod
 
-      A signal handler called within a signal handler could cause leaks or double-free... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 131177 in perl5140delta.pod
+      A signal handler called within a signal handler could cause leaks or double-frees.  Now fixed [perl #76248]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 131177 in perl5140delta.pod
 
     Miscellaneous Memory Leaks in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 131303 in perl5140delta.pod
 
       Several memory leaks when loading XS modules were fixed (5.12.2). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 131345 in perl5140delta.pod
 
-      substr()|perlfunc/"substr EXPR,OFFSET,LENGTH,REPLACEMENT", pos()|perlfunc/"index... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 131421 in perl5140delta.pod
+      substr()|perlfunc/"substr EXPR,OFFSET,LENGTH,REPLACEMENT", pos()|perlfunc/"index STR,SUBSTR,POSITION", keys()|perlfunc/"keys HASH", and v... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 131421 in perl5140delta.pod
 
-      The postincrement and postdecrement operators, ++ and --, used to cause leaks wh... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 131787 in perl5140delta.pod
+      The postincrement and postdecrement operators, ++ and --, used to cause leaks when used on references.  This has now been fixed. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 131787 in perl5140delta.pod
 
-      Nested map and grep blocks no longer leak memory when processing large lists [pe... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 131932 in perl5140delta.pod
+      Nested map and grep blocks no longer leak memory when processing large lists [perl #48004]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 131932 in perl5140delta.pod
 
       use VERSION and no VERSION no longer leak memory [perl #78436] [perl #69050]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 132040 in perl5140delta.pod
 
-      .= followed by <> or readline would leak memory if $/ contained characters beyon... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 132140 in perl5140delta.pod
+      .= followed by <> or readline would leak memory if $/ contained characters beyond the octet range and the scalar assigned to happened to ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 132140 in perl5140delta.pod
 
       eval 'BEGIN{die}' no longer leaks memory on non-threaded builds. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 132348 in perl5140delta.pod
 
     Memory Corruption and Crashes in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 132433 in perl5140delta.pod
 
-      glob() no longer crashes when %File::Glob:: is empty and CORE::GLOBAL::glob isn'... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 132478 in perl5140delta.pod
+      glob() no longer crashes when %File::Glob:: is empty and CORE::GLOBAL::glob isn't present [perl #75464] (5.12.2). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 132478 in perl5140delta.pod
 
-      readline() has been fixed when interrupted by signals so it no longer returns th... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 132608 in perl5140delta.pod
+      readline() has been fixed when interrupted by signals so it no longer returns the "same thing" as before or random memory. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 132608 in perl5140delta.pod
 
-      When assigning a list with duplicated keys to a hash, the assignment used to ret... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 132741 in perl5140delta.pod
+      When assigning a list with duplicated keys to a hash, the assignment used to return garbage and/or freed values:      @a = %h = (list wit... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 132741 in perl5140delta.pod
 
-      The mechanism for freeing objects in globs used to leave dangling pointers to fr... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 132952 in perl5140delta.pod
+      The mechanism for freeing objects in globs used to leave dangling pointers to freed SVs, meaning Perl users could see corrupted state dur... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 132952 in perl5140delta.pod
 
-      The interpreter no longer crashes when freeing deeply-nested arrays of arrays.  ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 133290 in perl5140delta.pod
+      The interpreter no longer crashes when freeing deeply-nested arrays of arrays.  Hashes have not been fixed yet [perl #44225]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 133290 in perl5140delta.pod
 
-      Concatenating long strings under use encoding no longer causes Perl to crash [pe... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 133426 in perl5140delta.pod
+      Concatenating long strings under use encoding no longer causes Perl to crash [perl #78674]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 133426 in perl5140delta.pod
 
-      Calling ->import on a class lacking an import method could corrupt the stack, re... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 133531 in perl5140delta.pod
+      Calling ->import on a class lacking an import method could corrupt the stack, resulting in strange behaviour.  For instance,    push @a, ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 133531 in perl5140delta.pod
 
       The recv function could crash when called with the MSG_TRUNC flag [perl #75082]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 133754 in perl5140delta.pod
 
-      formline no longer crashes when passed a tainted format picture.  It also taints... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 133848 in perl5140delta.pod
+      formline no longer crashes when passed a tainted format picture.  It also taints $^A now if its arguments are tainted [perl #79138]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 133848 in perl5140delta.pod
 
-      A bug in how we process filetest operations could cause a segfault. Filetests do... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 133997 in perl5140delta.pod
+      A bug in how we process filetest operations could cause a segfault. Filetests don't always expect an op on the stack, so we now use TOPs ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 133997 in perl5140delta.pod
 
-      unpack() now handles scalar context correctly for %32H and %32u, fixing a potent... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 134291 in perl5140delta.pod
+      unpack() now handles scalar context correctly for %32H and %32u, fixing a potential crash.  split() would crash because the third item on... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 134291 in perl5140delta.pod
 
     Fixes to Various Perl Operators in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 134652 in perl5140delta.pod
 
-      The &, |, and ^ bitwise operators no longer coerce read-only arguments [perl #20... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 134699 in perl5140delta.pod
+      The &, |, and ^ bitwise operators no longer coerce read-only arguments [perl #20661]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 134699 in perl5140delta.pod
 
-      Stringifying a scalar containing "-0.0" no longer has the effect of turning fals... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 134804 in perl5140delta.pod
+      Stringifying a scalar containing "-0.0" no longer has the effect of turning false into true [perl #45133]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 134804 in perl5140delta.pod
 
-      Some numeric operators were converting integers to floating point, resulting in ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 134921 in perl5140delta.pod
+      Some numeric operators were converting integers to floating point, resulting in loss of precision on 64-bit platforms [perl #77456]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 134921 in perl5140delta.pod
 
-      sprintf() was ignoring locales when called with constant arguments [perl #78632]... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 135064 in perl5140delta.pod
+      sprintf() was ignoring locales when called with constant arguments [perl #78632]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 135064 in perl5140delta.pod
 
-      Combining the vector (%v) flag and dynamic precision would cause sprintf to conf... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 135156 in perl5140delta.pod
+      Combining the vector (%v) flag and dynamic precision would cause sprintf to confuse the order of its arguments, making it  treat the stri... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 135156 in perl5140delta.pod
 
     Bugs Relating to the C API in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 135366 in perl5140delta.pod
 
-      The C-level lex_stuff_pvn function would sometimes cause a spurious syntax error... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 135408 in perl5140delta.pod
+      The C-level lex_stuff_pvn function would sometimes cause a spurious syntax error on the last line of the file if it lacked a final semico... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 135408 in perl5140delta.pod
 
-      The eval_sv and eval_pv C functions now set $@ correctly when there is a syntax ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 135586 in perl5140delta.pod
+      The eval_sv and eval_pv C functions now set $@ correctly when there is a syntax error and no G_KEEPERR flag, and never set it if the G_KE... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 135586 in perl5140delta.pod
 
-      The XS multicall API no longer causes subroutines to lose reference counts if ca... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 135784 in perl5140delta.pod
+      The XS multicall API no longer causes subroutines to lose reference counts if called via the multicall interface from within those very s... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 135784 in perl5140delta.pod
 
-      The SvPVbyte function available to XS modules now calls magic before downgrading... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 136097 in perl5140delta.pod
+      The SvPVbyte function available to XS modules now calls magic before downgrading the SV, to avoid warnings about wide characters [perl #7... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 136097 in perl5140delta.pod
 
-      The ref types in the typemap for XS bindings now support magical variables [perl... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 136254 in perl5140delta.pod
+      The ref types in the typemap for XS bindings now support magical variables [perl #72684]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 136254 in perl5140delta.pod
 
-      sv_catsv_flags no longer calls mg_get on its second argument (the source string)... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 136354 in perl5140delta.pod
+      sv_catsv_flags no longer calls mg_get on its second argument (the source string) if the flags passed to it do not include SV_GMAGIC.  So ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 136354 in perl5140delta.pod
 
-      my_strftime no longer leaks memory.  This fixes a memory leak in POSIX::strftime... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 136541 in perl5140delta.pod
+      my_strftime no longer leaks memory.  This fixes a memory leak in POSIX::strftime [perl #73520]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 136541 in perl5140delta.pod
 
-      XSUB.h now correctly redefines fgets under PERL_IMPLICIT_SYS [perl #55049] (5.12... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 136653 in perl5140delta.pod
+      XSUB.h now correctly redefines fgets under PERL_IMPLICIT_SYS [perl #55049] (5.12.1). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 136653 in perl5140delta.pod
 
-      XS code using fputc() or fputs() on Windows could cause an error due to their ar... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 136751 in perl5140delta.pod
+      XS code using fputc() or fputs() on Windows could cause an error due to their arguments being swapped [perl #72704] (5.12.1). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 136751 in perl5140delta.pod
 
       A possible segfault in the T_PTROBJ default typemap has been fixed (5.12.2). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 136887 in perl5140delta.pod
 
-      A bug that could cause "Unknown error" messages when call_sv(code, G_EVAL) is ca... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 136977 in perl5140delta.pod
+      A bug that could cause "Unknown error" messages when call_sv(code, G_EVAL) is called from an XS destructor has been fixed (5.12.2). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 136977 in perl5140delta.pod
 
   Known Problems in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 137129 in perl5140delta.pod
 
-    List::Util::first misbehaves in the presence of a lexical $_ (typically introduc... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 137304 in perl5140delta.pod
+    List::Util::first misbehaves in the presence of a lexical $_ (typically introduced by my $_ or implicitly by given).  The variable that g... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 137304 in perl5140delta.pod
 
-    readline() returns an empty string instead of a cached previous value when it is... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 137758 in perl5140delta.pod
+    readline() returns an empty string instead of a cached previous value when it is interrupted by a signal in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 137758 in perl5140delta.pod
 
-    The changes in prototype handling break Switch.  A patch has been sent upstream ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 137873 in perl5140delta.pod
+    The changes in prototype handling break Switch.  A patch has been sent upstream and will hopefully appear on CPAN soon. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 137873 in perl5140delta.pod
 
-    The upgrade to ExtUtils-MakeMaker-6.57_05 has caused some tests in the Module-In... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 138006 in perl5140delta.pod
+    The upgrade to ExtUtils-MakeMaker-6.57_05 has caused some tests in the Module-Install distribution on CPAN to fail. (Specifically, 02_mym... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 138006 in perl5140delta.pod
 
-    On VMS, Time::HiRes tests will fail due to a bug in the CRTL's implementation of... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 138370 in perl5140delta.pod
+    On VMS, Time::HiRes tests will fail due to a bug in the CRTL's implementation of setitimer: previous timer values would be cleared if a t... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 138370 in perl5140delta.pod
 
-    On VMS, there were a handful of Module::Build test failures we didn't get to bef... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 138704 in perl5140delta.pod
+    On VMS, there were a handful of Module::Build test failures we didn't get to before the release; please watch CPAN for updates. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 138704 in perl5140delta.pod
 
   Errata in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 138852 in perl5140delta.pod
 

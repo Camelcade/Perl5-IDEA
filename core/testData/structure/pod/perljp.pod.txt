@@ -7,9 +7,15 @@ Documentation in null; /perl5language.png -> POD file at 0 in perljp.pod
     About (jcode.pl|Jcode.pm|JPerl) in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2690 in perljp.pod
 
       入出力  以下の例はいづれもShift_JISの入力をEUC-JPに変換して出力します。    # jcode.pl
-  require "jcode.pl";... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3356 in perljp.pod
+  require "jcode.pl";
+  while(<>){
+    jcode::convert(*_, 'euc', 'sjis');
+    ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3356 in perljp.pod
 
-      Jperl 互換スクリプト  いわゆる"shebang"を変更するだけで、Jperl用のscriptのほとんどは変更なしに利用可能だと思われます。     #!... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3792 in perljp.pod
+      Jperl 互換スクリプト  いわゆる"shebang"を変更するだけで、Jperl用のscriptのほとんどは変更なしに利用可能だと思われます。     #!/path/to/jperl
+   ↓
+   #!/path/to/perl -Mencoding=euc-jp
+... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3792 in perljp.pod
 
     さらに詳しく in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3980 in perljp.pod
 

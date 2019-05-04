@@ -402,11 +402,11 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlapi.pod
 
     vverify in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 94924 in perlapi.pod
 
-      * The SV is an HV or a reference to an HV in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 95377 in perlapi.pod
+      The SV is an HV or a reference to an HV in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 95377 in perlapi.pod
 
-      * The hash contains a "version" key in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 95426 in perlapi.pod
+      The hash contains a "version" key in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 95426 in perlapi.pod
 
-      * The "version" key has a reference to an AV as its value in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 95469 in perlapi.pod
+      The "version" key has a reference to an AV as its value in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 95469 in perlapi.pod
 
   "Gimme" Values in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 95607 in perlapi.pod
 
@@ -656,15 +656,15 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlapi.pod
 
     Perl_langinfo in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 165682 in perlapi.pod
 
-      The reason it isn't quite a drop-in replacement is actually an advantage.  The o... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 166087 in perlapi.pod
+      The reason it isn't quite a drop-in replacement is actually an advantage.  The only difference is that it returns const char *, whereas p... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 166087 in perlapi.pod
 
-      It delivers the correct results for the RADIXCHAR and THOUSEP items, without you... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 166519 in perlapi.pod
+      It delivers the correct results for the RADIXCHAR and THOUSEP items, without you having to write extra code.  The reason for the extra co... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 166519 in perlapi.pod
 
-      The system function it replaces can have its static return buffer trashed, not o... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 167336 in perlapi.pod
+      The system function it replaces can have its static return buffer trashed, not only by a subesequent call to that function, but by a free... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 167336 in perlapi.pod
 
-      Its return buffer is per-thread, so it also is never overwritten by a call to th... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 167655 in perlapi.pod
+      Its return buffer is per-thread, so it also is never overwritten by a call to this function from another thread;  unlike the function it ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 167655 in perlapi.pod
 
-      But most importantly, it works on systems that don't have nl_langinfo, such as W... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 167812 in perlapi.pod
+      But most importantly, it works on systems that don't have nl_langinfo, such as Windows, hence makes your code more portable.  Of the fift... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 167812 in perlapi.pod
 
     Perl_setlocale in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 170256 in perlapi.pod
 

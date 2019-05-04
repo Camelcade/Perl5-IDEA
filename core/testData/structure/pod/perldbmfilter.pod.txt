@@ -6,7 +6,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perldbmfilter.pod
 
   DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 330 in perldbmfilter.pod
 
-    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 703 in perldbmfilter.pod
+    null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 703 in perldbmfilter.pod
 
       filter_store_key in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 712 in perldbmfilter.pod
 

@@ -32,31 +32,31 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlebcdic.pod
 
   SINGLE OCTET TABLES in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 15274 in perlebcdic.pod
 
-    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 16298 in perlebcdic.pod
+    null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 16298 in perlebcdic.pod
 
       recipe 0 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16307 in perlebcdic.pod
 
-    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 16571 in perlebcdic.pod
+    null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 16571 in perlebcdic.pod
 
       recipe 1 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16580 in perlebcdic.pod
 
-    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 17493 in perlebcdic.pod
+    null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 17493 in perlebcdic.pod
 
       recipe 2 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17502 in perlebcdic.pod
 
-    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 17738 in perlebcdic.pod
+    null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 17738 in perlebcdic.pod
 
       recipe 3 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17747 in perlebcdic.pod
 
-    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 35203 in perlebcdic.pod
+    null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 35203 in perlebcdic.pod
 
       recipe 4 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35212 in perlebcdic.pod
 
-    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 35599 in perlebcdic.pod
+    null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 35599 in perlebcdic.pod
 
       recipe 5 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35608 in perlebcdic.pod
 
-    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 35989 in perlebcdic.pod
+    null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 35989 in perlebcdic.pod
 
       recipe 6 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35998 in perlebcdic.pod
 
@@ -148,11 +148,11 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlebcdic.pod
 
   BUGS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 81543 in perlebcdic.pod
 
-    Not all shells will allow multiple -e string arguments to perl to be concatenate... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 81565 in perlebcdic.pod
+    Not all shells will allow multiple -e string arguments to perl to be concatenated together properly as recipes in this document 0, 2, 4, ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 81565 in perlebcdic.pod
 
-    There are a significant number of test failures in the CPAN modules shipped with... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 81745 in perlebcdic.pod
+    There are a significant number of test failures in the CPAN modules shipped with Perl v5.22 and 5.24.  These are only in modules not prim... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 81745 in perlebcdic.pod
 
-    In earlier Perl versions, when byte and character data were concatenated, the ne... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 82223 in perlebcdic.pod
+    In earlier Perl versions, when byte and character data were concatenated, the new string was sometimes created by decoding the byte strin... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 82223 in perlebcdic.pod
 
   SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 82452 in perlebcdic.pod
 

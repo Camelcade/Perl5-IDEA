@@ -76,7 +76,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl587delta.pod
 
     Test::Simple upgraded to version 0.54 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2708 in perl587delta.pod
 
-    Text::Wrap upgraded to version 2001.09293, to fix a bug when wrap() was called w... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2756 in perl587delta.pod
+    Text::Wrap upgraded to version 2001.09293, to fix a bug when wrap() was called with a non-space separator. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2756 in perl587delta.pod
 
     threads::shared upgraded to version 0.93 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2873 in perl587delta.pod
 
@@ -98,25 +98,25 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl587delta.pod
 
   Installation and Configuration Improvements in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3514 in perl587delta.pod
 
-    The Win32 "dmake" makefile.mk has been updated to make it compatible with the la... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3575 in perl587delta.pod
+    The Win32 "dmake" makefile.mk has been updated to make it compatible with the latest versions of dmake. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3575 in perl587delta.pod
 
-    PERL_MALLOC, DEBUG_MSTATS, PERL_HASH_SEED_EXPLICIT and NO_HASH_SEED should now w... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3689 in perl587delta.pod
+    PERL_MALLOC, DEBUG_MSTATS, PERL_HASH_SEED_EXPLICIT and NO_HASH_SEED should now work in Win32 makefiles. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3689 in perl587delta.pod
 
   Selected Bug Fixes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3822 in perl587delta.pod
 
-    The socket() function on Win32 has been fixed so that it is able to use transpor... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3858 in perl587delta.pod
+    The socket() function on Win32 has been fixed so that it is able to use transport providers which specify a protocol of 0 (meaning any pr... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3858 in perl587delta.pod
 
-    Another obscure bug involving substr and UTF-8 caused by bad internal offset cac... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4118 in perl587delta.pod
+    Another obscure bug involving substr and UTF-8 caused by bad internal offset caching has been identified and fixed. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4118 in perl587delta.pod
 
-    A bug involving the loading of UTF-8 tables by the regexp engine has been fixed ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4247 in perl587delta.pod
+    A bug involving the loading of UTF-8 tables by the regexp engine has been fixed - code such as "\x{100}" =~ /[[:print:]]/ will no longer ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4247 in perl587delta.pod
 
-    Case conversion operations such as uc on a long Unicode string could exhaust mem... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4419 in perl587delta.pod
+    Case conversion operations such as uc on a long Unicode string could exhaust memory. This has been fixed. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4419 in perl587delta.pod
 
-    index/rindex were buggy for some combinations of Unicode and non-Unicode data. T... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4538 in perl587delta.pod
+    index/rindex were buggy for some combinations of Unicode and non-Unicode data. This has been fixed. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4538 in perl587delta.pod
 
-    read (and presumably sysread) would expose the UTF-8 internals when reading from... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4654 in perl587delta.pod
+    read (and presumably sysread) would expose the UTF-8 internals when reading from a byte oriented file handle into a UTF-8 scalar. This ha... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4654 in perl587delta.pod
 
-    Several pack/unpack bug fixes:  *Checksums with b or B formats were broken.  *un... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4821 in perl587delta.pod
+    Several pack/unpack bug fixes:    Checksums with b or B formats were broken.    unpack checksums could overflow with the C format.    U0 ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4821 in perl587delta.pod
 
       Checksums with b or B formats were broken. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4877 in perl587delta.pod
 
@@ -130,13 +130,13 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl587delta.pod
 
       P/p pack formats used to only recognise literal undef in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5210 in perl587delta.pod
 
-    Using closures with ithreads could cause perl to crash. This was due to failure ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5294 in perl587delta.pod
+    Using closures with ithreads could cause perl to crash. This was due to failure to correctly lock internal OP structures, and has been fi... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5294 in perl587delta.pod
 
-    The return value of close now correctly reflects any file errors that occur whil... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5446 in perl587delta.pod
+    The return value of close now correctly reflects any file errors that occur while flushing the handle's data, instead of just giving fail... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5446 in perl587delta.pod
 
-    not() || 1 used to segfault. not() now behaves like not(0), which was the pre 5.... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5654 in perl587delta.pod
+    not() || 1 used to segfault. not() now behaves like not(0), which was the pre 5.6.0 behaviour. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5654 in perl587delta.pod
 
-    h2ph has various enhancements to cope with constructs in header files that used ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5768 in perl587delta.pod
+    h2ph has various enhancements to cope with constructs in header files that used to result in incorrect or invalid output. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5768 in perl587delta.pod
 
   New or Changed Diagnostics in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 5910 in perl587delta.pod
 

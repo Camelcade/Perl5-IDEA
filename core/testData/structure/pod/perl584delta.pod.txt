@@ -88,7 +88,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl584delta.pod
 
     Unnecessary assignment optimised away in    my $s = undef;
   my @a = ();
-  my %h... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4049 in perl584delta.pod
+  my %h = (); in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4049 in perl584delta.pod
 
     Optimised map in scalar context in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4146 in perl584delta.pod
 

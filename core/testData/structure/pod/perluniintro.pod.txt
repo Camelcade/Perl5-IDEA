@@ -26,41 +26,41 @@ Documentation in null; /perl5language.png -> POD file at 0 in perluniintro.pod
 
     Special Cases in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23473 in perluniintro.pod
 
-      Starting in Perl 5.28, it is illegal for bit operators, like ~, to operate on st... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23504 in perluniintro.pod
+      Starting in Perl 5.28, it is illegal for bit operators, like ~, to operate on strings containing code points above 255. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23504 in perluniintro.pod
 
-      The vec() function may produce surprising results if used on strings containing ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23637 in perluniintro.pod
+      The vec() function may produce surprising results if used on strings containing characters with ordinal values above 255. In such a case,... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23637 in perluniintro.pod
 
-      Peeking At Perl's Internal Encoding  Normal users of Perl should never care how ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24004 in perluniintro.pod
+      Peeking At Perl's Internal Encoding  Normal users of Perl should never care how Perl encodes any particular Unicode string (because the n... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24004 in perluniintro.pod
 
     Advanced Topics in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24997 in perluniintro.pod
 
-      String Equivalence  The question of string equivalence turns somewhat complicate... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25030 in perluniintro.pod
+      String Equivalence  The question of string equivalence turns somewhat complicated in Unicode: what do you mean by "equal"?  (Is LATIN CAP... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25030 in perluniintro.pod
 
-      String Collation  People like to see their strings nicely sorted--or as Unicode ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26011 in perluniintro.pod
+      String Collation  People like to see their strings nicely sorted--or as Unicode parlance goes, collated.  But again, what do you mean by ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26011 in perluniintro.pod
 
     Miscellaneous in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 26735 in perluniintro.pod
 
-      Character Ranges and Classes  Character ranges in regular expression bracketed c... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26766 in perluniintro.pod
+      Character Ranges and Classes  Character ranges in regular expression bracketed character classes ( e.g., /[a-z]/) and in the tr/// (also ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26766 in perluniintro.pod
 
-      String-To-Number Conversions  Unicode does define several other decimal--and num... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 27812 in perluniintro.pod
+      String-To-Number Conversions  Unicode does define several other decimal--and numeric--characters besides the familiar 0 to 9, such as the... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 27812 in perluniintro.pod
 
     Questions With Answers in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 28201 in perluniintro.pod
 
-      Will My Old Scripts Break?  Very probably not.  Unless you are generating Unicod... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28241 in perluniintro.pod
+      Will My Old Scripts Break?  Very probably not.  Unless you are generating Unicode characters somehow, old behaviour should be preserved. ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28241 in perluniintro.pod
 
-      How Do I Make My Scripts Work With Unicode?  Very little work should be needed s... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28695 in perluniintro.pod
+      How Do I Make My Scripts Work With Unicode?  Very little work should be needed since nothing changes until you generate Unicode data.  Th... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28695 in perluniintro.pod
 
-      How Do I Know Whether My String Is In Unicode?  You shouldn't have to care.  But... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29055 in perluniintro.pod
+      How Do I Know Whether My String Is In Unicode?  You shouldn't have to care.  But you may if your Perl is before 5.14.0 or you haven't spe... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29055 in perluniintro.pod
 
-      How Do I Find Out What Encoding a File Has?  You might try Encode::Guess, but it... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31050 in perluniintro.pod
+      How Do I Find Out What Encoding a File Has?  You might try Encode::Guess, but it has a number of limitations. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31050 in perluniintro.pod
 
-      How Do I Detect Data That's Not Valid In a Particular Encoding?  Use the Encode ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31173 in perluniintro.pod
+      How Do I Detect Data That's Not Valid In a Particular Encoding?  Use the Encode package to try converting it. For example,      use Encod... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31173 in perluniintro.pod
 
-      How Do I Convert Binary Data Into a Particular Encoding, Or Vice Versa?  This pr... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31973 in perluniintro.pod
+      How Do I Convert Binary Data Into a Particular Encoding, Or Vice Versa?  This probably isn't as useful as you might think. Normally, you ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31973 in perluniintro.pod
 
-      How Do I Display Unicode?  How Do I Input Unicode?  See http://www.alanwood.net/... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 34092 in perluniintro.pod
+      How Do I Display Unicode?  How Do I Input Unicode?  See http://www.alanwood.net/unicode/ and http://www.cl.cam.ac.uk/~mgk25/unicode.html in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 34092 in perluniintro.pod
 
-      How Does Unicode Work With Traditional Locales?  If your locale is a UTF-8 local... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 34245 in perluniintro.pod
+      How Does Unicode Work With Traditional Locales?  If your locale is a UTF-8 locale, starting in Perl v5.26, Perl works well for all catego... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 34245 in perluniintro.pod
 
     Hexadecimal Notation in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 35166 in perluniintro.pod
 
@@ -72,17 +72,17 @@ Documentation in null; /perl5language.png -> POD file at 0 in perluniintro.pod
 
       Unicode Glossary  http://www.unicode.org/glossary/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36444 in perluniintro.pod
 
-      Unicode Recommended Reading List  The Unicode Consortium has a list of articles ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36508 in perluniintro.pod
+      Unicode Recommended Reading List  The Unicode Consortium has a list of articles and books, some of which give a much more in depth treatm... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36508 in perluniintro.pod
 
-      Unicode Useful Resources  http://www.unicode.org/unicode/onlinedat/resources.htm... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36720 in perluniintro.pod
+      Unicode Useful Resources  http://www.unicode.org/unicode/onlinedat/resources.html in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36720 in perluniintro.pod
 
-      Unicode and Multilingual Support in HTML, Fonts, Web Browsers and Other Applicat... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36815 in perluniintro.pod
+      Unicode and Multilingual Support in HTML, Fonts, Web Browsers and Other Applications  http://www.alanwood.net/unicode/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36815 in perluniintro.pod
 
-      UTF-8 and Unicode FAQ for Unix/Linux  http://www.cl.cam.ac.uk/~mgk25/unicode.htm... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36947 in perluniintro.pod
+      UTF-8 and Unicode FAQ for Unix/Linux  http://www.cl.cam.ac.uk/~mgk25/unicode.html in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36947 in perluniintro.pod
 
       Legacy Character Sets  http://www.czyborra.com/ http://www.eki.ee/letter/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37042 in perluniintro.pod
 
-      You can explore various information from the Unicode data files using the Unicod... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37132 in perluniintro.pod
+      You can explore various information from the Unicode data files using the Unicode::UCD module. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37132 in perluniintro.pod
 
   UNICODE IN OLDER PERLS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 37247 in perluniintro.pod
 

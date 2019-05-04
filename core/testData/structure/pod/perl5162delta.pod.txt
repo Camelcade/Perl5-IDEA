@@ -14,7 +14,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5162delta.pod
 
   Configuration and Compilation in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 685 in perl5162delta.pod
 
-    * configuration should no longer be confused by ls colorization in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 732 in perl5162delta.pod
+    configuration should no longer be confused by ls colorization in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 732 in perl5162delta.pod
 
   Platform Support in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 810 in perl5162delta.pod
 
@@ -24,7 +24,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5162delta.pod
 
   Selected Bug Fixes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1075 in perl5162delta.pod
 
-    see [perl #114220] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1111 in perl5162delta.pod
+    fix /\h/ equivalence with /[\h]/  see [perl #114220] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1111 in perl5162delta.pod
 
   Known Problems in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1180 in perl5162delta.pod
 

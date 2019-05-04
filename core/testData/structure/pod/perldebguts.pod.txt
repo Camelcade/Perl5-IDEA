@@ -6,27 +6,27 @@ Documentation in null; /perl5language.png -> POD file at 0 in perldebguts.pod
 
   Debugger Internals in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 348 in perldebguts.pod
 
-    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 1034 in perldebguts.pod
+    null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 1034 in perldebguts.pod
 
-      Perl inserts the contents of $ENV{PERL5DB} (or BEGIN {require 'perl5db.pl'} if n... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1043 in perldebguts.pod
+      Perl inserts the contents of $ENV{PERL5DB} (or BEGIN {require 'perl5db.pl'} if not present) before the first line of your program. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1043 in perldebguts.pod
 
-      Each array @{"_<$filename"} holds the lines of $filename for a file compiled by ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1190 in perldebguts.pod
+      Each array @{"_<$filename"} holds the lines of $filename for a file compiled by Perl.  The same is also true for evaled strings that cont... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1190 in perldebguts.pod
 
-      Each hash %{"_<$filename"} contains breakpoints and actions keyed by line number... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1576 in perldebguts.pod
+      Each hash %{"_<$filename"} contains breakpoints and actions keyed by line number.  Individual entries (as opposed to the whole hash) are ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1576 in perldebguts.pod
 
-      Each scalar ${"_<$filename"} contains "_<$filename".  This is also the case for ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2033 in perldebguts.pod
+      Each scalar ${"_<$filename"} contains "_<$filename".  This is also the case for evaluated strings that contain subroutines, or which are ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2033 in perldebguts.pod
 
-      After each required file is compiled, but before it is executed, DB::postponed(*... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2274 in perldebguts.pod
+      After each required file is compiled, but before it is executed, DB::postponed(*{"_<$filename"}) is called if the subroutine DB::postpone... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2274 in perldebguts.pod
 
-      After each subroutine subname is compiled, the existence of $DB::postponed{subna... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2539 in perldebguts.pod
+      After each subroutine subname is compiled, the existence of $DB::postponed{subname} is checked.  If this key exists, DB::postponed(subnam... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2539 in perldebguts.pod
 
-      A hash %DB::sub is maintained, whose keys are subroutine names and whose values ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2756 in perldebguts.pod
+      A hash %DB::sub is maintained, whose keys are subroutine names and whose values have the form filename:startline-endline. filename has th... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2756 in perldebguts.pod
 
-      When the execution of your program reaches a point that can hold a breakpoint, t... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2973 in perldebguts.pod
+      When the execution of your program reaches a point that can hold a breakpoint, the DB::DB() subroutine is called if any of the variables ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2973 in perldebguts.pod
 
-      When execution of the program reaches a subroutine call, a call to &DB::sub(args... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3356 in perldebguts.pod
+      When execution of the program reaches a subroutine call, a call to &DB::sub(args) is made instead, with $DB::sub set to identify the call... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3356 in perldebguts.pod
 
-      When execution of the program uses goto to enter a non-XS subroutine and the 0x8... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4114 in perldebguts.pod
+      When execution of the program uses goto to enter a non-XS subroutine and the 0x80 bit is set in $^P, a call to &DB::goto is made, with $D... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4114 in perldebguts.pod
 
     Writing Your Own Debugger in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5174 in perldebguts.pod
 
@@ -34,31 +34,56 @@ Documentation in null; /perl5language.png -> POD file at 0 in perldebguts.pod
 
       Debugger Internal Variables in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 6646 in perldebguts.pod
 
-        @DB::dbline is an alias for @{"::_<current_file"}, which holds the lines of the ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6830 in perldebguts.pod
+        @DB::dbline is an alias for @{"::_<current_file"}, which holds the lines of the currently-selected file (compiled by Perl), either explic... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6830 in perldebguts.pod
 
-        %DB::dbline is an alias for %{"::_<current_file"}, which contains breakpoints an... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7181 in perldebguts.pod
+        %DB::dbline is an alias for %{"::_<current_file"}, which contains breakpoints and actions keyed by line number in the currently-selected ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7181 in perldebguts.pod
 
       Debugger Customization Functions in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 7658 in perldebguts.pod
 
-        See perldebug/"Configurable Options" for a description of options parsed by DB::... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7764 in perldebguts.pod
+        See perldebug/"Configurable Options" for a description of options parsed by DB::parse_options(string). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7764 in perldebguts.pod
 
-        DB::dump_trace(skip[,count]) skips the specified number of frames and returns a ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7883 in perldebguts.pod
+        DB::dump_trace(skip[,count]) skips the specified number of frames and returns a list containing information about the calling frames (all... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7883 in perldebguts.pod
 
-        DB::print_trace(FH, skip[, count[, short]]) prints formatted info about caller f... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8272 in perldebguts.pod
+        DB::print_trace(FH, skip[, count[, short]]) prints formatted info about caller frames.  The last two functions may be convenient as argum... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8272 in perldebguts.pod
 
   Frame Listing Output Examples in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 8659 in perldebguts.pod
 
-    1 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9872 in perldebguts.pod
+    entering main::BEGIN
+  entering Config::BEGIN
+   Package lib/Exporter.pm.
+   Package lib/Carp.pm.
+  Package lib/Config.pm.
+  entering Con... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9872 in perldebguts.pod
 
-    2 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10217 in perldebguts.pod
+    entering main::BEGIN
+  entering Config::BEGIN
+   Package lib/Exporter.pm.
+   Package lib/Carp.pm.
+  exited Config::BEGIN
+  Package lib/Co... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10217 in perldebguts.pod
 
-    3 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10704 in perldebguts.pod
+    in  $=main::BEGIN() from /dev/null:0
+  in  $=Config::BEGIN() from lib/Config.pm:2
+   Package lib/Exporter.pm.
+   Package lib/Carp.pm.
+  P... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10704 in perldebguts.pod
 
-    4 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11557 in perldebguts.pod
+    in  $=main::BEGIN() from /dev/null:0
+  in  $=Config::BEGIN() from lib/Config.pm:2
+   Package lib/Exporter.pm.
+   Package lib/Carp.pm.
+  o... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11557 in perldebguts.pod
 
-    5 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12788 in perldebguts.pod
+    in  $=main::BEGIN() from /dev/null:0
+  in  $=Config::BEGIN() from lib/Config.pm:2
+   Package lib/Exporter.pm.
+   Package lib/Carp.pm.
+  o... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12788 in perldebguts.pod
 
-    6 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13844 in perldebguts.pod
+    in  $=CODE(0x15eca4)() from /dev/null:0
+  in  $=CODE(0x182528)() from lib/Config.pm:2
+   Package lib/Exporter.pm.
+  out $=CODE(0x182528)(... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13844 in perldebguts.pod
 
   Debugging Regular Expressions in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 15188 in perldebguts.pod
 

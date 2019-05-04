@@ -24,13 +24,16 @@ Documentation in null; /perl5language.png -> POD file at 0 in perldos.pod
 
     Building Perl on DOS in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2521 in perldos.pod
 
-      Unpack the source package perl5.8*.tar.gz with djtarx. If you want to use long f... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2559 in perldos.pod
+      Unpack the source package perl5.8*.tar.gz with djtarx. If you want to use long file names under w95 and also to get Perl to pass all its ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2559 in perldos.pod
 
-      Create a "symlink" or copy your bash.exe to sh.exe in your ($DJDIR)/bin director... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2807 in perldos.pod
+      Create a "symlink" or copy your bash.exe to sh.exe in your ($DJDIR)/bin directory.          ln -s bash.exe sh.exe
+ [If you have the recom... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2807 in perldos.pod
 
-      If you have split.exe and gsplit.exe in your path, then rename  split.exe to djs... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3270 in perldos.pod
+      If you have split.exe and gsplit.exe in your path, then rename  split.exe to djsplit.exe, and gsplit.exe to split.exe. Copy or link gecho... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3270 in perldos.pod
 
-      Chdir to the djgpp subdirectory of perl toplevel and type the following commands... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3708 in perldos.pod
+      Chdir to the djgpp subdirectory of perl toplevel and type the following commands:          set FNCASE=y
+        configure.bat
+ This will ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3708 in perldos.pod
 
       Now you can compile Perl. Type:          make in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5680 in perldos.pod
 

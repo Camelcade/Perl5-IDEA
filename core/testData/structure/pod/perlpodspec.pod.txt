@@ -6,13 +6,13 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlpodspec.pod
 
   Pod Definitions in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1318 in perlpodspec.pod
 
-    A command paragraph (also called a "directive").  The first line of this paragra... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4819 in perlpodspec.pod
+    A command paragraph (also called a "directive").  The first line of this paragraph must match m/\A=[a-zA-Z]/.  Command paragraphs are typ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4819 in perlpodspec.pod
 
-    A verbatim paragraph.  The first line of this paragraph must be a literal space ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5776 in perlpodspec.pod
+    A verbatim paragraph.  The first line of this paragraph must be a literal space or tab, and this paragraph must not be inside a "=begin i... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5776 in perlpodspec.pod
 
-    An ordinary paragraph.  A paragraph is an ordinary paragraph if its first line m... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6342 in perlpodspec.pod
+    An ordinary paragraph.  A paragraph is an ordinary paragraph if its first line matches neither m/\A=[a-zA-Z]/ nor m/\A[ \t]/, and if it's... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6342 in perlpodspec.pod
 
-    A data paragraph.  This is a paragraph that is inside a "=begin identifier" ... ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6623 in perlpodspec.pod
+    A data paragraph.  This is a paragraph that is inside a "=begin identifier" ... "=end identifier" sequence where "identifier" does not be... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6623 in perlpodspec.pod
 
   Pod Commands in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 7849 in perlpodspec.pod
 
@@ -40,13 +40,13 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlpodspec.pod
 
   Pod Formatting Codes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 13843 in perlpodspec.pod
 
-    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 14156 in perlpodspec.pod
+    null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 14156 in perlpodspec.pod
 
-      A formatting code starts with a capital letter (just US-ASCII [A-Z]) followed by... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14163 in perlpodspec.pod
+      A formatting code starts with a capital letter (just US-ASCII [A-Z]) followed by a "<", any number of characters, and ending with the fir... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14163 in perlpodspec.pod
 
-      A formatting code starts with a capital letter (just US-ASCII [A-Z]) followed by... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14463 in perlpodspec.pod
+      A formatting code starts with a capital letter (just US-ASCII [A-Z]) followed by two or more "<"'s, one or more whitespace characters, an... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14463 in perlpodspec.pod
 
-    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 15904 in perlpodspec.pod
+    null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 15904 in perlpodspec.pod
 
       I<text> -- italic text in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15911 in perlpodspec.pod
 
@@ -68,83 +68,83 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlpodspec.pod
 
   Notes on Implementing Pod Processors in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 20020 in perlpodspec.pod
 
-    Pod formatters should tolerate lines in verbatim blocks that are of any length, ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20178 in perlpodspec.pod
+    Pod formatters should tolerate lines in verbatim blocks that are of any length, even if that means having to break them (possibly several... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20178 in perlpodspec.pod
 
-    Pod parsers must recognize all of the three well-known newline formats: CR, LF, ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20569 in perlpodspec.pod
+    Pod parsers must recognize all of the three well-known newline formats: CR, LF, and CRLF.  See perlport|perlport. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20569 in perlpodspec.pod
 
     Pod parsers should accept input lines that are of any length. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20699 in perlpodspec.pod
 
-    Since Perl recognizes a Unicode Byte Order Mark at the start of files as signali... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20771 in perlpodspec.pod
+    Since Perl recognizes a Unicode Byte Order Mark at the start of files as signaling that the file is Unicode encoded as in UTF-16 (whether... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20771 in perlpodspec.pod
 
-    The well known Unicode Byte Order Marks are as follows:  if the file begins with... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21524 in perlpodspec.pod
+    The well known Unicode Byte Order Marks are as follows:  if the file begins with the two literal byte values 0xFE 0xFF, this is the BOM f... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21524 in perlpodspec.pod
 
-    A naive, but often sufficient heuristic on ASCII platforms, for testing the firs... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22208 in perlpodspec.pod
+    A naive, but often sufficient heuristic on ASCII platforms, for testing the first highbit byte-sequence in a BOM-less file (whether in co... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22208 in perlpodspec.pod
 
-    Pod processors must treat a "=for [label] [content...]" paragraph as meaning the... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24086 in perlpodspec.pod
+    Pod processors must treat a "=for [label] [content...]" paragraph as meaning the same thing as a "=begin [label]" paragraph, content, and... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24086 in perlpodspec.pod
 
-    When rendering Pod to a format that allows comments (i.e., to nearly any format ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24417 in perlpodspec.pod
+    When rendering Pod to a format that allows comments (i.e., to nearly any format other than plaintext), a Pod formatter must insert commen... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24417 in perlpodspec.pod
 
-    Pod parsers may emit warnings or error messages ("Unknown E code E<zslig>!") to ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25374 in perlpodspec.pod
+    Pod parsers may emit warnings or error messages ("Unknown E code E<zslig>!") to STDERR (whether through printing to STDERR, or warning/ca... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25374 in perlpodspec.pod
 
-    In cases of exceptionally aberrant documents, Pod parsers may abort the parse.  ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25926 in perlpodspec.pod
+    In cases of exceptionally aberrant documents, Pod parsers may abort the parse.  Even then, using dieing/croaking is to be avoided; where ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25926 in perlpodspec.pod
 
-    In paragraphs where formatting codes (like E<...>, B<...>) are understood (i.e.,... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26235 in perlpodspec.pod
+    In paragraphs where formatting codes (like E<...>, B<...>) are understood (i.e., not verbatim paragraphs, but including ordinary paragrap... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26235 in perlpodspec.pod
 
-    Pod parsers should not, by default, try to coerce apostrophe (') and quote (") i... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 27039 in perlpodspec.pod
+    Pod parsers should not, by default, try to coerce apostrophe (') and quote (") into smart quotes (little 9's, 66's, 99's, etc), nor try t... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 27039 in perlpodspec.pod
 
-    When rendering Pod to a format that has two kinds of hyphens (-), one that's a n... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 27476 in perlpodspec.pod
+    When rendering Pod to a format that has two kinds of hyphens (-), one that's a non-breaking hyphen, and another that's a breakable hyphen... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 27476 in perlpodspec.pod
 
-    Pod formatters should make reasonable efforts to keep words of Perl code from be... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 27866 in perlpodspec.pod
+    Pod formatters should make reasonable efforts to keep words of Perl code from being broken across lines.  For example, "Foo::Bar" in some... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 27866 in perlpodspec.pod
 
-    Pod parsers should, by default, expand tabs in verbatim paragraphs as they are p... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28490 in perlpodspec.pod
+    Pod parsers should, by default, expand tabs in verbatim paragraphs as they are processed, before passing them to the formatter or other p... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28490 in perlpodspec.pod
 
-    Pod parsers should, by default, remove newlines from the end of ordinary and ver... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28702 in perlpodspec.pod
+    Pod parsers should, by default, remove newlines from the end of ordinary and verbatim paragraphs before passing them to the formatter.  F... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28702 in perlpodspec.pod
 
-    Pod parsers, when reporting errors, should make some effort to report an approxi... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29091 in perlpodspec.pod
+    Pod parsers, when reporting errors, should make some effort to report an approximate line number ("Nested E<>'s in Paragraph #52, near li... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29091 in perlpodspec.pod
 
-    Pod parsers, when processing a series of verbatim paragraphs one after another, ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29617 in perlpodspec.pod
+    Pod parsers, when processing a series of verbatim paragraphs one after another, should consider them to be one large verbatim paragraph t... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29617 in perlpodspec.pod
 
-    Pod formatters, where feasible, are advised to avoid splitting short verbatim pa... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30219 in perlpodspec.pod
+    Pod formatters, where feasible, are advised to avoid splitting short verbatim paragraphs (under twelve lines, say) across pages. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30219 in perlpodspec.pod
 
-    Pod parsers must treat a line with only spaces and/or tabs on it as a "blank lin... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30358 in perlpodspec.pod
+    Pod parsers must treat a line with only spaces and/or tabs on it as a "blank line" such as separates paragraphs.  (Some older parsers rec... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30358 in perlpodspec.pod
 
-    Authors of Pod formatters/processors should make every effort to avoid writing t... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30667 in perlpodspec.pod
+    Authors of Pod formatters/processors should make every effort to avoid writing their own Pod parser.  There are already several in CPAN, ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30667 in perlpodspec.pod
 
-    Characters in Pod documents may be conveyed either as literals, or by number in ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30921 in perlpodspec.pod
+    Characters in Pod documents may be conveyed either as literals, or by number in E<n> codes, or by an equivalent mnemonic, as in E<eacute>... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30921 in perlpodspec.pod
 
-    Be warned that some formatters cannot reliably render characters outside 32-126;... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31869 in perlpodspec.pod
+    Be warned that some formatters cannot reliably render characters outside 32-126; and many are able to handle 32-126 and 160-255, but noth... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31869 in perlpodspec.pod
 
-    Besides the well-known "E<lt>" and "E<gt>" codes for less-than and greater-than,... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32031 in perlpodspec.pod
+    Besides the well-known "E<lt>" and "E<gt>" codes for less-than and greater-than, Pod parsers must understand "E<sol>" for "/" (solidus, s... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32031 in perlpodspec.pod
 
-    Pod parsers should understand all "E<html>" codes as defined in the entity decla... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32664 in perlpodspec.pod
+    Pod parsers should understand all "E<html>" codes as defined in the entity declarations in the most recent XHTML specification at www.W3.... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32664 in perlpodspec.pod
 
-    Pod parsers must also support the XHTML codes "E<quot>" for character 34 (double... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 33544 in perlpodspec.pod
+    Pod parsers must also support the XHTML codes "E<quot>" for character 34 (doublequote, "), "E<amp>" for character 38 (ampersand, &), and ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 33544 in perlpodspec.pod
 
-    Note that in all cases of "E<whatever>", whatever (whether an htmlname, or a num... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 33747 in perlpodspec.pod
+    Note that in all cases of "E<whatever>", whatever (whether an htmlname, or a number in any base) must consist only of alphanumeric charac... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 33747 in perlpodspec.pod
 
-    Note that E<number> must not be interpreted as simply "codepoint number in the c... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 34738 in perlpodspec.pod
+    Note that E<number> must not be interpreted as simply "codepoint number in the current/native character set".  It always means only "the ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 34738 in perlpodspec.pod
 
-    If, surprisingly, the implementor of a Pod formatter can't find a satisfactory p... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36072 in perlpodspec.pod
+    If, surprisingly, the implementor of a Pod formatter can't find a satisfactory pre-existing table mapping from Unicode characters to esca... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36072 in perlpodspec.pod
 
-    It is up to individual Pod formatter to display good judgement when confronted w... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37988 in perlpodspec.pod
+    It is up to individual Pod formatter to display good judgement when confronted with an unrenderable character (which is distinct from an ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37988 in perlpodspec.pod
 
-    E<...> may freely appear in any formatting code (other than in another E<...> or... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39130 in perlpodspec.pod
+    E<...> may freely appear in any formatting code (other than in another E<...> or in an Z<>).  That is, "X<The E<euro>1,000,000 Solution>"... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39130 in perlpodspec.pod
 
-    Some Pod formatters output to formats that implement non-breaking spaces as an i... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39373 in perlpodspec.pod
+    Some Pod formatters output to formats that implement non-breaking spaces as an individual character (which I'll call "NBSP"), and others ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39373 in perlpodspec.pod
 
-    Some processors may find that the S<...> code is easiest to implement by replaci... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 40326 in perlpodspec.pod
+    Some processors may find that the S<...> code is easiest to implement by replacing each space in the parse tree under the content of the ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 40326 in perlpodspec.pod
 
-    Besides the NBSP character discussed above, implementors are reminded of the exi... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 41487 in perlpodspec.pod
+    Besides the NBSP character discussed above, implementors are reminded of the existence of the other "special" character in Latin-1, the "... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 41487 in perlpodspec.pod
 
-    If you think that you want to add a new command to Pod (like, say, a "=biblio" c... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 42788 in perlpodspec.pod
+    If you think that you want to add a new command to Pod (like, say, a "=biblio" command), consider whether you could get the same effect w... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 42788 in perlpodspec.pod
 
-    Throughout this document, "Pod" has been the preferred spelling for the name of ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43161 in perlpodspec.pod
+    Throughout this document, "Pod" has been the preferred spelling for the name of the documentation format.  One may also use "POD" or "pod... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43161 in perlpodspec.pod
 
   About L<...> Codes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 43522 in perlpodspec.pod
 
-    In parsing an L<...> code, Pod parsers must distinguish at least four attributes... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43782 in perlpodspec.pod
+    In parsing an L<...> code, Pod parsers must distinguish at least four attributes:  First:The link-text.  If there is none, this must be u... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43782 in perlpodspec.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 43878 in perlpodspec.pod
+      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 43878 in perlpodspec.pod
 
         First: in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43885 in perlpodspec.pod
 
@@ -154,55 +154,63 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlpodspec.pod
 
         Fourth: in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 44579 in perlpodspec.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 45014 in perlpodspec.pod
+      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 45014 in perlpodspec.pod
 
         Fifth: in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 45021 in perlpodspec.pod
 
         Sixth: in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 45274 in perlpodspec.pod
 
-    In case of L<...> codes with no "text|" part in them, older formatters have exhi... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48353 in perlpodspec.pod
+    In case of L<...> codes with no "text|" part in them, older formatters have exhibited great variation in actually displaying the link or ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48353 in perlpodspec.pod
 
-    Note that section names might contain markup.  I.e., if a section starts with:  ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48855 in perlpodspec.pod
+    Note that section names might contain markup.  I.e., if a section starts with:    =head2 About the C<-M> Operator
+ or with:    =item Abou... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48855 in perlpodspec.pod
 
-    Previous versions of perlpod distinguished L<name/"section"> links from L<name/i... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49433 in perlpodspec.pod
+    Previous versions of perlpod distinguished L<name/"section"> links from L<name/item> links (and their targets).  These have been merged s... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49433 in perlpodspec.pod
 
-    In a L<text|...> code, text may contain formatting codes for formatting or for E... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50432 in perlpodspec.pod
+    In a L<text|...> code, text may contain formatting codes for formatting or for E<...> escapes, as in:    L<B<ummE<234>stuff>|...>
+ For L<... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50432 in perlpodspec.pod
 
-    Note that Pod authors may use formatting codes inside the "text" part of "L<text... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51046 in perlpodspec.pod
+    Note that Pod authors may use formatting codes inside the "text" part of "L<text|name>" (and so on for L<text|/"sec">).  In other words, ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51046 in perlpodspec.pod
 
-    At time of writing, L<name> values are of two types: either the name of a Pod pa... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51453 in perlpodspec.pod
+    At time of writing, L<name> values are of two types: either the name of a Pod page like L<Foo::Bar> (which might be a real Perl module or... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51453 in perlpodspec.pod
 
-    Previous versions of perlpod allowed for a L<section> syntax (as in L<Object Att... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52274 in perlpodspec.pod
+    Previous versions of perlpod allowed for a L<section> syntax (as in L<Object Attributes>), which was not easily distinguishable from L<na... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52274 in perlpodspec.pod
 
   About =over...=back Regions in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 52991 in perlpodspec.pod
 
-    The non-zero numeric indentlevel in "=over indentlevel" ... "=back" is used for ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53230 in perlpodspec.pod
+    The non-zero numeric indentlevel in "=over indentlevel" ... "=back" is used for giving the formatter a clue as to how many "spaces" (ems,... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53230 in perlpodspec.pod
 
-    Authors of Pod formatters are reminded that "=over" ... "=back" may map to sever... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53877 in perlpodspec.pod
+    Authors of Pod formatters are reminded that "=over" ... "=back" may map to several different constructs in your output format.  For examp... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53877 in perlpodspec.pod
 
-    Each "=over" ... "=back" region should be one of the following:  *An "=over" ...... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 54199 in perlpodspec.pod
+    Each "=over" ... "=back" region should be one of the following:    An "=over" ... "=back" region containing only "=item *" commands, each... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 54199 in perlpodspec.pod
 
-      An "=over" ... "=back" region containing only "=item *" commands, each followed ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 54280 in perlpodspec.pod
+      An "=over" ... "=back" region containing only "=item *" commands, each followed by some number of ordinary/verbatim paragraphs, other nes... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 54280 in perlpodspec.pod
 
-      An "=over" ... "=back" region containing only m/\A=item\s+\d+\.?\s*\z/ paragraph... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 54756 in perlpodspec.pod
+      An "=over" ... "=back" region containing only m/\A=item\s+\d+\.?\s*\z/ paragraphs, each one (or each group of them) followed by some numb... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 54756 in perlpodspec.pod
 
-      An "=over" ... "=back" region containing only "=item [text]" commands, each one ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 55248 in perlpodspec.pod
+      An "=over" ... "=back" region containing only "=item [text]" commands, each one (or each group of them) followed by some number of ordina... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 55248 in perlpodspec.pod
 
-      An "=over" ... "=back" region containing no "=item" paragraphs at all, and conta... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 55665 in perlpodspec.pod
+      An "=over" ... "=back" region containing no "=item" paragraphs at all, and containing only some number of  ordinary/verbatim paragraphs, ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 55665 in perlpodspec.pod
 
-    Pod formatters must tolerate arbitrarily large amounts of text in the "=item tex... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56250 in perlpodspec.pod
+    Pod formatters must tolerate arbitrarily large amounts of text in the "=item text..." paragraph.  In practice, most such paragraphs are s... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56250 in perlpodspec.pod
 
-    Pod processors should tolerate "=item *" / "=item number" commands with no accom... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56890 in perlpodspec.pod
+    Pod processors should tolerate "=item *" / "=item number" commands with no accompanying paragraph.  The middle item is an example:    =ov... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56890 in perlpodspec.pod
 
-    No "=over" ... "=back" region can contain headings.  Processors may treat such a... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 57179 in perlpodspec.pod
+    No "=over" ... "=back" region can contain headings.  Processors may treat such a heading as an error. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 57179 in perlpodspec.pod
 
-    Note that an "=over" ... "=back" region should have some content.  That is, auth... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 57291 in perlpodspec.pod
+    Note that an "=over" ... "=back" region should have some content.  That is, authors should not have an empty region like this:    =over
 
-    Processors must tolerate an "=over" list that goes off the end of the document (... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 57561 in perlpodspec.pod
+... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 57291 in perlpodspec.pod
+
+    Processors must tolerate an "=over" list that goes off the end of the document (i.e., which has no matching "=back"), but they may warn a... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 57561 in perlpodspec.pod
 
     Authors of Pod formatters should note that this construct:    =item Neque
 
-  =it... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 57726 in perlpodspec.pod
+  =item Porro
+
+  =item Quisquam Est
+
+  Qui dolorem ipsum quia ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 57726 in perlpodspec.pod
 
   About Data Paragraphs and "=begin/=end" Regions in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 60098 in perlpodspec.pod
 

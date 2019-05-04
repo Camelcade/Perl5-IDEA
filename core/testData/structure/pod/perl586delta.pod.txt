@@ -10,7 +10,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl586delta.pod
 
   Modules and Pragmata in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 554 in perl586delta.pod
 
-    With the base pragma, an intermediate class with no fields used to messes up pri... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 592 in perl586delta.pod
+    With the base pragma, an intermediate class with no fields used to messes up private fields in the base class. This has been fixed. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 592 in perl586delta.pod
 
     Cwd upgraded to version 3.01 (as part of the new PathTools distribution) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 737 in perl586delta.pod
 
@@ -20,7 +20,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl586delta.pod
 
     Encode upgraded to version 2.08 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 959 in perl586delta.pod
 
-    ExtUtils::MakeMaker remains at version 6.17, as later stable releases currently ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1001 in perl586delta.pod
+    ExtUtils::MakeMaker remains at version 6.17, as later stable releases currently available on CPAN have some issues with core modules on s... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1001 in perl586delta.pod
 
     I18N::LangTags upgraded to version 0.35 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1168 in perl586delta.pod
 
@@ -30,7 +30,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl586delta.pod
 
     MIME::Base64 upgraded to version 3.05 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1314 in perl586delta.pod
 
-    POSIX::sigprocmask function can now retrieve the current signal mask without als... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1362 in perl586delta.pod
+    POSIX::sigprocmask function can now retrieve the current signal mask without also setting it. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1362 in perl586delta.pod
 
     Time::HiRes upgraded to version 1.65 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1466 in perl586delta.pod
 

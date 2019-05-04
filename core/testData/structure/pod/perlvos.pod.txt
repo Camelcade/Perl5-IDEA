@@ -8,13 +8,13 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlvos.pod
 
   INSTALLING PERL IN OPENVOS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1186 in perlvos.pod
 
-    1 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1230 in perlvos.pod
+    After you have built perl using the Configure script, ensure that you have modify and default write permission to >system>ported and all ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1230 in perlvos.pod
 
-    2 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1431 in perlvos.pod
+    While there are currently no architecture-specific extensions or modules distributed with perl, the following directories can be used to ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1431 in perlvos.pod
 
-    3 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1702 in perlvos.pod
+    Site-specific perl extensions and modules can be installed in one of two places.  Put architecture-independent files into:       >system>... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1702 in perlvos.pod
 
-    4 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2025 in perlvos.pod
+    You can examine the @INC variable from within a perl program to see the order in which Perl searches these directories. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2025 in perlvos.pod
 
   USING PERL IN OPENVOS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2162 in perlvos.pod
 

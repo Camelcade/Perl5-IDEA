@@ -70,7 +70,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5223delta.pod
 
       Test::Harness has been upgraded from version 3.35 to 3.35_01. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4725 in perl5223delta.pod
 
-      XSLoader has been upgraded from version 0.20 to 0.20_01, fixing a security hole ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4800 in perl5223delta.pod
+      XSLoader has been upgraded from version 0.20 to 0.20_01, fixing a security hole in which binary files could be loaded from a path outside... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4800 in perl5223delta.pod
 
   Documentation in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 5042 in perl5223delta.pod
 
@@ -82,11 +82,11 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5223delta.pod
 
       perlrun in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 5207 in perl5223delta.pod
 
-        The new -Di switch has been documented, and the documentation of PERLIO_DEBUG ha... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5235 in perl5223delta.pod
+        The new -Di switch has been documented, and the documentation of PERLIO_DEBUG has been updated. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5235 in perl5223delta.pod
 
   Testing in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 5354 in perl5223delta.pod
 
-    A new test script, t/run/switchDx.t, has been added to test that the new -Di swi... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5379 in perl5223delta.pod
+    A new test script, t/run/switchDx.t, has been added to test that the new -Di switch is working correctly. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5379 in perl5223delta.pod
 
   Selected Bug Fixes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 5508 in perl5223delta.pod
 

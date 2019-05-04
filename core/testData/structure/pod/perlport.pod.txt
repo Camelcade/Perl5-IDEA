@@ -54,15 +54,15 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlport.pod
 
       The djgpp environment for DOS, http://www.delorie.com/djgpp/ and perldos. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46090 in perlport.pod
 
-      The EMX environment for DOS, OS/2, etc. emx@iaehv.nl, ftp://hobbes.nmsu.edu/pub/... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46180 in perlport.pod
+      The EMX environment for DOS, OS/2, etc. emx@iaehv.nl, ftp://hobbes.nmsu.edu/pub/os2/dev/emx/  Also perlos2. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46180 in perlport.pod
 
-      Build instructions for Win32 in perlwin32, or under the Cygnus environment in pe... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46304 in perlport.pod
+      Build instructions for Win32 in perlwin32, or under the Cygnus environment in perlcygwin. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46304 in perlport.pod
 
       The Win32::* modules in Win32. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46410 in perlport.pod
 
       The ActiveState Pages, http://www.activestate.com/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46457 in perlport.pod
 
-      The Cygwin environment for Win32; README.cygwin (installed as perlcygwin), http:... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46521 in perlport.pod
+      The Cygwin environment for Win32; README.cygwin (installed as perlcygwin), http://www.cygwin.com/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46521 in perlport.pod
 
       The U/WIN environment for Win32, http://www.research.att.com/sw/tools/uwin/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46638 in perlport.pod
 
@@ -82,7 +82,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlport.pod
 
       README.vos (installed as perlvos) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52460 in perlport.pod
 
-      The VOS mailing list.  There is no specific mailing list for Perl on VOS.  You c... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52510 in perlport.pod
+      The VOS mailing list.  There is no specific mailing list for Perl on VOS.  You can contact the Stratus Technologies Customer Assistance C... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52510 in perlport.pod
 
       Stratus Technologies on the web at http://www.stratus.com in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52794 in perlport.pod
 
@@ -92,9 +92,9 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlport.pod
 
       perlos390, perlos400, perlbs2000, perlebcdic. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56671 in perlport.pod
 
-      The perl-mvs@perl.org list is for discussion of porting issues as well as genera... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56739 in perlport.pod
+      The perl-mvs@perl.org list is for discussion of porting issues as well as general usage issues for all EBCDIC Perls.  Send a message body... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56739 in perlport.pod
 
-      AS/400 Perl information at http://as400.rochester.ibm.com/ as well as on CPAN in... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56934 in perlport.pod
+      AS/400 Perl information at http://as400.rochester.ibm.com/ as well as on CPAN in the ports/ directory. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56934 in perlport.pod
 
     Acorn RISC OS in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 57060 in perlport.pod
 
@@ -102,7 +102,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlport.pod
 
       Amiga, README.amiga (installed as perlamiga). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 63270 in perlport.pod
 
-      A free perl5-based PERL.NLM for Novell Netware is available in precompiled binar... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 63332 in perlport.pod
+      A free perl5-based PERL.NLM for Novell Netware is available in precompiled binary and source code form from http://www.novell.com/ as wel... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 63332 in perlport.pod
 
       Plan 9, README.plan9 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 63498 in perlport.pod
 
@@ -310,7 +310,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlport.pod
 
     Cygwin in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 81134 in perlport.pod
 
-      ext/XS-APItest/t/call_checker.t - see https://rt.perl.org/Ticket/Display.html?id... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 81186 in perlport.pod
+      ext/XS-APItest/t/call_checker.t - see https://rt.perl.org/Ticket/Display.html?id=78502 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 81186 in perlport.pod
 
       dist/I18N-Collate/t/I18N-Collate.t in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 81289 in perlport.pod
 

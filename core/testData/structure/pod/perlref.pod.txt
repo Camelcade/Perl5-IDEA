@@ -8,29 +8,33 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlref.pod
 
     Making References in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2604 in perlref.pod
 
-      1. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2721 in perlref.pod
+      By using the backslash operator on a variable, subroutine, or value. (This works much like the & (address-of) operator in C.) This typica... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2721 in perlref.pod
 
-      2. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3634 in perlref.pod
+      A reference to an anonymous array can be created using square brackets:      $arrayref = [1, 2, ['a', 'b', 'c']];
+ Here we've created a r... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3634 in perlref.pod
 
-      3. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4670 in perlref.pod
+      A reference to an anonymous hash can be created using curly brackets:      $hashref = {
+        'Adam'  => 'Eve',
+        'Clyde' => 'Bon... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4670 in perlref.pod
 
-      4. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6352 in perlref.pod
+      A reference to an anonymous subroutine can be created by using sub without a subname:      $coderef = sub { print "Boink!\n" };
+ Note the... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6352 in perlref.pod
 
-      5. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8492 in perlref.pod
+      References are often returned by special subroutines called constructors.  Perl objects are just references to a special type of object t... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8492 in perlref.pod
 
-      6. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9494 in perlref.pod
+      References of the appropriate type can spring into existence if you dereference them in a context that assumes they exist.  Because we ha... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9494 in perlref.pod
 
-      7. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9736 in perlref.pod
+      A reference can be created by using a special syntax, lovingly known as the *foo{THING} syntax.  *foo{THING} returns a reference to the T... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9736 in perlref.pod
 
     Using References in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12455 in perlref.pod
 
-      1. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12705 in perlref.pod
+      Anywhere you'd put an identifier (or chain of identifiers) as part of a variable or subroutine name, you can replace the identifier with ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12705 in perlref.pod
 
-      2. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13574 in perlref.pod
+      Anywhere you'd put an identifier (or chain of identifiers) as part of a variable or subroutine name, you can replace the identifier with ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13574 in perlref.pod
 
-      3. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15026 in perlref.pod
+      Subroutine calls and lookups of individual array elements arise often enough that it gets cumbersome to use method 2.  As a form of synta... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15026 in perlref.pod
 
-      4. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16474 in perlref.pod
+      If a reference happens to be a reference to an object, then there are probably methods to access the things referred to, and you should p... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16474 in perlref.pod
 
     Circular References in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18915 in perlref.pod
 

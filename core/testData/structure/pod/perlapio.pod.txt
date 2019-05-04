@@ -6,13 +6,13 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlapio.pod
 
   DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2521 in perlapio.pod
 
-    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 3092 in perlapio.pod
+    null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 3092 in perlapio.pod
 
-      1. USE_STDIO in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3101 in perlapio.pod
+      USE_STDIO  All above are #define'd to stdio functions or are trivial wrapper functions which call stdio. In this case only PerlIO * is a ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3101 in perlapio.pod
 
-      2. USE_PERLIO in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3354 in perlapio.pod
+      USE_PERLIO  Introduced just after perl5.7.0, this is a re-implementation of the above abstraction which allows perl more control over how... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3354 in perlapio.pod
 
-    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 4426 in perlapio.pod
+    null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 4426 in perlapio.pod
 
       PerlIO_stdin(), PerlIO_stdout(), PerlIO_stderr() in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4435 in perlapio.pod
 

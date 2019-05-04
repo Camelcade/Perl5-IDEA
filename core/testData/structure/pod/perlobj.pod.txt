@@ -4,13 +4,13 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlobj.pod
 
   DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 187 in perlobj.pod
 
-    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 1038 in perlobj.pod
+    null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 1038 in perlobj.pod
 
-      1. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1047 in perlobj.pod
+      An object is simply a data structure that knows to which class it belongs. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1047 in perlobj.pod
 
-      2. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1133 in perlobj.pod
+      A class is simply a package. A class provides methods that expect to operate on objects. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1133 in perlobj.pod
 
-      3. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1233 in perlobj.pod
+      A method is simply a subroutine that expects a reference to an object (or a package name, for class methods) as the first argument. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1233 in perlobj.pod
 
     An Object is Simply a Data Structure in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1433 in perlobj.pod
 

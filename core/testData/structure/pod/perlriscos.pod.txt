@@ -6,19 +6,19 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlriscos.pod
 
   BUILD in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 515 in perlriscos.pod
 
-    1. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 793 in perlriscos.pod
+    $ ./Configure in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 793 in perlriscos.pod
 
-    2. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 822 in perlriscos.pod
+    Select the riscos hint file. The default answers for the rest of the questions are usually sufficient.  Note that, if you wish to run Con... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 822 in perlriscos.pod
 
-    3. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1161 in perlriscos.pod
+    $ make miniperl in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1161 in perlriscos.pod
 
-    4. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1192 in perlriscos.pod
+    This should build miniperl and then fail when it tries to run it. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1192 in perlriscos.pod
 
-    5. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1269 in perlriscos.pod
+    Copy the miniperl executable from the native build done earlier to replace the cross compiled miniperl. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1269 in perlriscos.pod
 
-    6. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1384 in perlriscos.pod
+    $ make in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1384 in perlriscos.pod
 
-    7. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1406 in perlriscos.pod
+    This will use miniperl to complete the rest of the build. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1406 in perlriscos.pod
 
   AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1482 in perlriscos.pod
 

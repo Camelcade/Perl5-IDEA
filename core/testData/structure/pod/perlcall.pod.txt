@@ -4,9 +4,9 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlcall.pod
 
   DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 57 in perlcall.pod
 
-    You have created an XSUB interface to an application's C API.  A fairly common f... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 492 in perlcall.pod
+    An Error Handler  You have created an XSUB interface to an application's C API.  A fairly common feature in applications is to allow you ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 492 in perlcall.pod
 
-    The classic example of where callbacks are used is when writing an event driven ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 805 in perlcall.pod
+    An Event-Driven Program  The classic example of where callbacks are used is when writing an event driven program, such as for an X11 appl... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 805 in perlcall.pod
 
   THE CALL_ FUNCTIONS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1585 in perlcall.pod
 
@@ -22,21 +22,21 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlcall.pod
 
     G_VOID in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4748 in perlcall.pod
 
-      1. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4845 in perlcall.pod
+      It indicates to the subroutine being called that it is executing in a void context (if it executes wantarray the result will be the undef... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4845 in perlcall.pod
 
-      2. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5009 in perlcall.pod
+      It ensures that nothing is actually returned from the subroutine. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5009 in perlcall.pod
 
     G_SCALAR in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5235 in perlcall.pod
 
-      1. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5411 in perlcall.pod
+      It indicates to the subroutine being called that it is executing in a scalar context (if it executes wantarray the result will be false). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5411 in perlcall.pod
 
-      2. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5563 in perlcall.pod
+      It ensures that only a scalar is actually returned from the subroutine. The subroutine can, of course,  ignore the wantarray and return a... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5563 in perlcall.pod
 
     G_ARRAY in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6594 in perlcall.pod
 
-      1. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6709 in perlcall.pod
+      It indicates to the subroutine being called that it is executing in a list context (if it executes wantarray the result will be true). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6709 in perlcall.pod
 
-      2. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6858 in perlcall.pod
+      It ensures that all items returned from the subroutine will be accessible when control returns from the call_* function. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6858 in perlcall.pod
 
     G_DISCARD in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7455 in perlcall.pod
 
@@ -44,13 +44,13 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlcall.pod
 
     G_EVAL in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9462 in perlcall.pod
 
-      If the call_* function returns normally, then the value returned is as specified... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10157 in perlcall.pod
+      If the call_* function returns normally, then the value returned is as specified in the previous sections. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10157 in perlcall.pod
 
       If G_DISCARD is specified, the return value will always be 0. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10277 in perlcall.pod
 
-      If G_ARRAY is specified and an error has occurred, the return value will always ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10349 in perlcall.pod
+      If G_ARRAY is specified and an error has occurred, the return value will always be 0. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10349 in perlcall.pod
 
-      If G_SCALAR is specified and an error has occurred, the return value will be 1 a... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10448 in perlcall.pod
+      If G_SCALAR is specified and an error has occurred, the return value will be 1 and the value on the top of the stack will be undef. This ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10448 in perlcall.pod
 
     G_KEEPERR in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10819 in perlcall.pod
 
@@ -60,47 +60,47 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlcall.pod
 
     No Parameters, Nothing Returned in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13772 in perlcall.pod
 
-      1. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14213 in perlcall.pod
+      Ignore dSP and PUSHMARK(SP) for now. They will be discussed in the next example. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14213 in perlcall.pod
 
-      2. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14311 in perlcall.pod
+      We aren't passing any parameters to PrintUID so G_NOARGS can be specified. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14311 in perlcall.pod
 
-      3. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14400 in perlcall.pod
+      We aren't interested in anything returned from PrintUID, so G_DISCARD is specified. Even if PrintUID was changed to return some value(s),... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14400 in perlcall.pod
 
-      4. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14661 in perlcall.pod
+      As call_pv is being used, the Perl subroutine is specified as a C string. In this case the subroutine name has been 'hard-wired' into the... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14661 in perlcall.pod
 
-      5. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14819 in perlcall.pod
+      Because we specified G_DISCARD, it is not necessary to check the value returned from call_pv. It will always be 0. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14819 in perlcall.pod
 
     Passing Parameters in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14955 in perlcall.pod
 
-      1. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15850 in perlcall.pod
+      Parameters are passed to the Perl subroutine using the Perl stack. This is the purpose of the code beginning with the line dSP and ending... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15850 in perlcall.pod
 
-      2. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16140 in perlcall.pod
+      If you are going to put something onto the Perl stack, you need to know where to put it. This is the purpose of the macro dSP--it declare... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16140 in perlcall.pod
 
-      3. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16658 in perlcall.pod
+      Any parameters to be pushed onto the stack should be bracketed by the PUSHMARK and PUTBACK macros.  The purpose of these two macros, in t... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16658 in perlcall.pod
 
-      4. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17649 in perlcall.pod
+      Next, we come to EXTEND and PUSHs. This is where the parameters actually get pushed onto the stack. In this case we are pushing a string ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17649 in perlcall.pod
 
-      5. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18058 in perlcall.pod
+      Because we created temporary values (by means of sv_2mortal() calls) we will have to tidy up the Perl stack and dispose of mortal SVs.  T... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18058 in perlcall.pod
 
-      6. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19006 in perlcall.pod
+      Finally, LeftString can now be called via the call_pv function. The only flag specified this time is G_DISCARD. Because we are passing 2 ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19006 in perlcall.pod
 
     Returning a Scalar in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19244 in perlcall.pod
 
-      1. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20203 in perlcall.pod
+      The only flag specified this time was G_SCALAR. That means that the @_ array will be created and that the value returned by Adder will st... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20203 in perlcall.pod
 
-      2. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20397 in perlcall.pod
+      The purpose of the macro SPAGAIN is to refresh the local copy of the stack pointer. This is necessary because it is possible that the mem... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20397 in perlcall.pod
 
-      3. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20830 in perlcall.pod
+      Although only a single value was expected to be returned from Adder, it is still good practice to check the return code from call_pv anyw... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20830 in perlcall.pod
 
-      4. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21299 in perlcall.pod
+      The POPi macro is used here to pop the return value from the stack. In this case we wanted an integer, so POPi was used.   Here is the co... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21299 in perlcall.pod
 
-      5. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22154 in perlcall.pod
+      The final PUTBACK is used to leave the Perl stack in a consistent state before exiting the function.  This is necessary because when we p... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22154 in perlcall.pod
 
     Returning a List of Values in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 22503 in perlcall.pod
 
-      1. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23480 in perlcall.pod
+      We wanted list context, so G_ARRAY was used. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23480 in perlcall.pod
 
-      2. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23536 in perlcall.pod
+      Not surprisingly POPi is used twice this time because we were retrieving 2 values from the stack. The important thing to note is that whe... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23536 in perlcall.pod
 
     Returning a List in Scalar Context in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23766 in perlcall.pod
 
@@ -108,11 +108,17 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlcall.pod
 
     Using G_EVAL in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 26356 in perlcall.pod
 
-      1. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 27562 in perlcall.pod
+      We want to be able to catch the die so we have used the G_EVAL flag.  Not specifying this flag would mean that the program would terminat... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 27562 in perlcall.pod
 
-      2. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 27782 in perlcall.pod
+      The code      err_tmp = ERRSV;
+    if (SvTRUE(err_tmp))
+    {
+        printf ("Uh oh - %s\n", SvPV_nolen(err_tmp));
+        POPs;
+    }
+ ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 27782 in perlcall.pod
 
-      3. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28331 in perlcall.pod
+      Note that the stack is popped using POPs in the block where SvTRUE(err_tmp) is true.  This is necessary because whenever a call_* functio... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28331 in perlcall.pod
 
     Using G_KEEPERR in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 28730 in perlcall.pod
 
@@ -122,7 +128,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlcall.pod
 
     Using call_method in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 35411 in perlcall.pod
 
-      A reference to the object for a virtual method or the name of the class for a st... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36442 in perlcall.pod
+      A reference to the object for a virtual method or the name of the class for a static method in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36442 in perlcall.pod
 
       The name of the method in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36544 in perlcall.pod
 
@@ -138,19 +144,22 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlcall.pod
 
     Strategies for Storing Callback Context Information in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 42545 in perlcall.pod
 
-      1. Ignore the problem - Allow only 1 callback in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51444 in perlcall.pod
+      Ignore the problem - Allow only 1 callback  For a lot of situations, like interfacing to an error handler, this may be a perfectly adequa... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51444 in perlcall.pod
 
-      2. Create a sequence of callbacks - hard wired limit in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51604 in perlcall.pod
+      Create a sequence of callbacks - hard wired limit  If it is impossible to tell from the parameters passed back from the C callback what t... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51604 in perlcall.pod
 
-      3. Use a parameter to map to the Perl callback in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51880 in perlcall.pod
+      Use a parameter to map to the Perl callback  A hash is an ideal mechanism to store the mapping between C and Perl. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51880 in perlcall.pod
 
     Alternate Stack Manipulation in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 52013 in perlcall.pod
 
-      1. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53450 in perlcall.pod
+      Notice that it was necessary to define the variable ax.  This is because the ST macro expects it to exist.  If we were in an XSUB it woul... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53450 in perlcall.pod
 
-      2. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53672 in perlcall.pod
+      The code          SPAGAIN;
+        SP -= count;
+        ax = (SP - PL_stack_base) + 1;
+ sets the stack up so that we can use the ST macro. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53672 in perlcall.pod
 
-      3. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53825 in perlcall.pod
+      Unlike the original coding of this example, the returned values are not accessed in reverse order.  So ST(0) refers to the first value re... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53825 in perlcall.pod
 
     Creating and Calling an Anonymous Subroutine in C in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 54052 in perlcall.pod
 

@@ -66,7 +66,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5144delta.pod
 
   Selected Bug Fixes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3549 in perl5144delta.pod
 
-    In Perl 5.14.0, $tainted ~~ @array stopped working properly.  Sometimes it would... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3585 in perl5144delta.pod
+    In Perl 5.14.0, $tainted ~~ @array stopped working properly.  Sometimes it would erroneously fail (when $tainted contained a string that ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3585 in perl5144delta.pod
 
   Known Problems in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3880 in perl5144delta.pod
 

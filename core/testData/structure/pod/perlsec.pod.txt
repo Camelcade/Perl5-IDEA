@@ -13,7 +13,9 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlsec.pod
       Arguments to print and syswrite are not checked for taintedness. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3505 in perlsec.pod
 
       Symbolic methods      $obj->$method(@args);
- and symbolic sub references      &{... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3589 in perlsec.pod
+ and symbolic sub references      &{$foo}(@args);
+    $foo->(@args);
+ are not checked for tai... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3589 in perlsec.pod
 
       Hash keys are never tainted. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4042 in perlsec.pod
 
@@ -33,7 +35,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlsec.pod
 
     Algorithmic Complexity Attacks in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21812 in perlsec.pod
 
-      Hash Algorithm - Hash algorithms like the one used in Perl are well known to be ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22100 in perlsec.pod
+      Hash Algorithm - Hash algorithms like the one used in Perl are well known to be vulnerable to collision attacks on their hash function. S... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22100 in perlsec.pod
 
         Hash Seed Randomization in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22952 in perlsec.pod
 
@@ -45,9 +47,9 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlsec.pod
 
         Alternative Hash Functions in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24369 in perlsec.pod
 
-      Regular expressions - Perl's regular expression engine is so called NFA (Non-det... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25952 in perlsec.pod
+      Regular expressions - Perl's regular expression engine is so called NFA (Non-deterministic Finite Automaton), which among other things me... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25952 in perlsec.pod
 
-      Sorting - the quicksort algorithm used in Perls before 5.8.0 to implement the so... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26483 in perlsec.pod
+      Sorting - the quicksort algorithm used in Perls before 5.8.0 to implement the sort() function was very easy to trick into misbehaving so ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26483 in perlsec.pod
 
     Using Sudo in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 26968 in perlsec.pod
 

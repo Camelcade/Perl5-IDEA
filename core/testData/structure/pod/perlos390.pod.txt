@@ -14,15 +14,16 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlos390.pod
 
     Configure Perl on OS/390 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4232 in perlos390.pod
 
-      A message of the form:   (I see you are using the Korn shell.  Some ksh's blow u... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4520 in perlos390.pod
+      A message of the form:   (I see you are using the Korn shell.  Some ksh's blow up on
+ Configure, mainly on older exotic systems.  If your... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4520 in perlos390.pod
 
-      Some of the parser default template files in /samples are needed in /etc. In par... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4742 in perlos390.pod
+      Some of the parser default template files in /samples are needed in /etc. In particular be sure that you at least copy /samples/yyparse.c... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4742 in perlos390.pod
 
-      This port will support dynamic loading, but it is not selected by default.  If y... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5352 in perlos390.pod
+      This port will support dynamic loading, but it is not selected by default.  If you would like to experiment with dynamic loading then be ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5352 in perlos390.pod
 
-      Do not turn on the compiler optimization flag "-O".  There is a bug in either th... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6188 in perlos390.pod
+      Do not turn on the compiler optimization flag "-O".  There is a bug in either the optimizer or perl that causes perl to not work correctl... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6188 in perlos390.pod
 
-      Some of the configuration files in /etc used by the networking APIs are either m... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6363 in perlos390.pod
+      Some of the configuration files in /etc used by the networking APIs are either missing or have the wrong names.  In particular, make sure... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6363 in perlos390.pod
 
     Build, Test, Install Perl on OS/390 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6899 in perlos390.pod
 
@@ -30,11 +31,14 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlos390.pod
 
     Testing Anomalies with Perl on OS/390 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8345 in perlos390.pod
 
-      A message of the form:   io/openpid...........CEE5210S The signal SIGHUP was rec... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8631 in perlos390.pod
+      A message of the form:   io/openpid...........CEE5210S The signal SIGHUP was received.
+ CEE5210S The signal SIGHUP was received.
+ CEE5210... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8631 in perlos390.pod
 
-      A message of the form:   lib/ftmp-security....File::Temp::_gettemp: Parent direc... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8932 in perlos390.pod
+      A message of the form:   lib/ftmp-security....File::Temp::_gettemp: Parent directory (/tmp/)
+ is not safe (sticky bit not set when world ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8932 in perlos390.pod
 
-      Out of Memory!  Recent perl test suite is quite memory hungry. In addition to th... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9475 in perlos390.pod
+      Out of Memory!  Recent perl test suite is quite memory hungry. In addition to the comments above on memory limitations it is also worth c... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9475 in perlos390.pod
 
     Installation Anomalies with Perl on OS/390 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10501 in perlos390.pod
 

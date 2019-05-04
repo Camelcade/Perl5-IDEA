@@ -54,7 +54,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlfaq.pod
 
       Is Perl difficult to learn? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2077 in perlfaq.pod
 
-      How does Perl compare with other languages like Java, Python, REXX, Scheme, or T... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2115 in perlfaq.pod
+      How does Perl compare with other languages like Java, Python, REXX, Scheme, or Tcl? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2115 in perlfaq.pod
 
       Can I do [task] in Perl? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2209 in perlfaq.pod
 
@@ -76,7 +76,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlfaq.pod
 
       I copied the Perl binary from one machine to another, but scripts don't work. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2807 in perlfaq.pod
 
-      I grabbed the sources and tried to compile but gdbm/dynamic loading/malloc/linki... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2895 in perlfaq.pod
+      I grabbed the sources and tried to compile but gdbm/dynamic loading/malloc/linking/... failed. How do I make it work? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2895 in perlfaq.pod
 
       What modules and extensions are available for Perl? What is CPAN? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3023 in perlfaq.pod
 
@@ -150,7 +150,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlfaq.pod
 
       Where can I learn about linking C with Perl? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5010 in perlfaq.pod
 
-      I've read perlembed, perlguts, etc., but I can't embed perl in my C program; wha... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5065 in perlfaq.pod
+      I've read perlembed, perlguts, etc., but I can't embed perl in my C program; what am I doing wrong? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5065 in perlfaq.pod
 
       When I tried to run my script, I got this message. What does it mean? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5175 in perlfaq.pod
 
@@ -158,13 +158,13 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlfaq.pod
 
     perlfaq4: Data Manipulation in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5291 in perlfaq.pod
 
-      Why am I getting long decimals (eg, 19.9499999999999) instead of the numbers I s... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5478 in perlfaq.pod
+      Why am I getting long decimals (eg, 19.9499999999999) instead of the numbers I should be getting (eg, 19.95)? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5478 in perlfaq.pod
 
       Why is int() broken? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5598 in perlfaq.pod
 
       Why isn't my octal data interpreted correctly? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5629 in perlfaq.pod
 
-      Does Perl have a round() function? What about ceil() and floor()? Trig functions... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5686 in perlfaq.pod
+      Does Perl have a round() function? What about ceil() and floor()? Trig functions? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5686 in perlfaq.pod
 
       How do I convert between numeric representations/bases/radixes? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5778 in perlfaq.pod
 
@@ -242,7 +242,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlfaq.pod
 
       How can I tell whether a certain element is contained in a list or array? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7880 in perlfaq.pod
 
-      How do I compute the difference of two arrays? How do I compute the intersection... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7964 in perlfaq.pod
+      How do I compute the difference of two arrays? How do I compute the intersection of two arrays? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7964 in perlfaq.pod
 
       How do I test whether two arrays or hashes are equal? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8070 in perlfaq.pod
 
@@ -294,7 +294,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlfaq.pod
 
       Why does passing a subroutine an undefined element in a hash create it? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9469 in perlfaq.pod
 
-      How can I make the Perl equivalent of a C structure/C++ class/hash or array of h... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9551 in perlfaq.pod
+      How can I make the Perl equivalent of a C structure/C++ class/hash or array of hashes or arrays? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9551 in perlfaq.pod
 
       How can I use a reference as a hash key? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9658 in perlfaq.pod
 
@@ -320,7 +320,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlfaq.pod
 
       How do I flush/unbuffer an output filehandle? Why must I do this? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10418 in perlfaq.pod
 
-      How do I change, delete, or insert a line in a file, or append to the beginning ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10494 in perlfaq.pod
+      How do I change, delete, or insert a line in a file, or append to the beginning of a file? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10494 in perlfaq.pod
 
       How do I count the number of lines in a file? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10595 in perlfaq.pod
 
@@ -334,7 +334,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlfaq.pod
 
       How can I manipulate fixed-record-length files? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10854 in perlfaq.pod
 
-      How can I make a filehandle local to a subroutine? How do I pass filehandles bet... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10912 in perlfaq.pod
+      How can I make a filehandle local to a subroutine? How do I pass filehandles between subroutines? How do I make an array of filehandles? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10912 in perlfaq.pod
 
       How can I use a filehandle indirectly? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11059 in perlfaq.pod
 
@@ -360,9 +360,9 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlfaq.pod
 
       Why can't I just open(FH, ">file.lock")? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11686 in perlfaq.pod
 
-      I still don't get locking. I just want to increment the number in the file. How ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11741 in perlfaq.pod
+      I still don't get locking. I just want to increment the number in the file. How can I do this? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11741 in perlfaq.pod
 
-      All I want to do is append a small amount of text to the end of a file. Do I sti... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11846 in perlfaq.pod
+      All I want to do is append a small amount of text to the end of a file. Do I still have to use locking? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11846 in perlfaq.pod
 
       How do I randomly update a binary file? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11960 in perlfaq.pod
 
@@ -390,7 +390,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlfaq.pod
 
       Why doesn't glob("*.*") get all the files? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12663 in perlfaq.pod
 
-      Why does Perl let me delete read-only files? Why does -i clobber protected files... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12716 in perlfaq.pod
+      Why does Perl let me delete read-only files? Why does -i clobber protected files? Isn't this a bug in Perl? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12716 in perlfaq.pod
 
       How do I select a random line from a file? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12837 in perlfaq.pod
 
@@ -404,17 +404,17 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlfaq.pod
 
     perlfaq6: Regular Expressions in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13101 in perlfaq.pod
 
-      How can I hope to use regular expressions without creating illegible and unmaint... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13612 in perlfaq.pod
+      How can I hope to use regular expressions without creating illegible and unmaintainable code? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13612 in perlfaq.pod
 
       I'm having trouble matching over more than one line. What's wrong? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13716 in perlfaq.pod
 
-      How can I pull out lines between two patterns that are themselves on different l... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13793 in perlfaq.pod
+      How can I pull out lines between two patterns that are themselves on different lines? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13793 in perlfaq.pod
 
       How do I match XML, HTML, or other nasty, ugly things with a regex? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13889 in perlfaq.pod
 
       I put a regular expression into $/ but it didn't work. What's wrong? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13967 in perlfaq.pod
 
-      How do I substitute case-insensitively on the LHS while preserving case on the R... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14046 in perlfaq.pod
+      How do I substitute case-insensitively on the LHS while preserving case on the RHS? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14046 in perlfaq.pod
 
       How can I make \w match national character sets? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14140 in perlfaq.pod
 
@@ -486,7 +486,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlfaq.pod
 
       How do I create a static variable? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16281 in perlfaq.pod
 
-      What's the difference between dynamic and lexical (static) scoping? Between loca... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16326 in perlfaq.pod
+      What's the difference between dynamic and lexical (static) scoping? Between local() and my()? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16326 in perlfaq.pod
 
       How can I access a dynamic variable while a similarly named lexical is in scope? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16430 in perlfaq.pod
 
@@ -554,7 +554,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlfaq.pod
 
       How can I do an atexit() or setjmp()/longjmp()? (Exception handling) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18577 in perlfaq.pod
 
-      Why doesn't my sockets program work under System V (Solaris)? What does the erro... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18656 in perlfaq.pod
+      Why doesn't my sockets program work under System V (Solaris)? What does the error message "Protocol not supported" mean? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18656 in perlfaq.pod
 
       How can I call my system's unique C functions from Perl? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18787 in perlfaq.pod
 
@@ -574,7 +574,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlfaq.pod
 
       How can I call backticks without shell processing? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19312 in perlfaq.pod
 
-      Why can't my script read from STDIN after I gave it EOF (^D on Unix, ^Z on MS-DO... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19373 in perlfaq.pod
+      Why can't my script read from STDIN after I gave it EOF (^D on Unix, ^Z on MS-DOS)? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19373 in perlfaq.pod
 
       How can I convert my shell script to perl? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19467 in perlfaq.pod
 
@@ -584,7 +584,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlfaq.pod
 
       Is there a way to hide perl's command line from programs such as "ps"? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19619 in perlfaq.pod
 
-      I {changed directory, modified my environment} in a perl script. How come the ch... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19700 in perlfaq.pod
+      I {changed directory, modified my environment} in a perl script. How come the change disappeared when I exited the script? How do I get m... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19700 in perlfaq.pod
 
       How do I close a process's filehandle without waiting for it to complete? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19872 in perlfaq.pod
 
@@ -612,7 +612,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlfaq.pod
 
       How do I keep my own module/library directory? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20516 in perlfaq.pod
 
-      How do I add the directory my program lives in to the module/library search path... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20573 in perlfaq.pod
+      How do I add the directory my program lives in to the module/library search path? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20573 in perlfaq.pod
 
       How do I add a directory to my include path (@INC) at runtime? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20665 in perlfaq.pod
 
@@ -642,7 +642,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlfaq.pod
 
       How do I put a password on my web pages? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21416 in perlfaq.pod
 
-      How do I make sure users can't enter values into a form that causes my CGI scrip... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21467 in perlfaq.pod
+      How do I make sure users can't enter values into a form that causes my CGI script to do bad things? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21467 in perlfaq.pod
 
       How do I parse a mail header? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21577 in perlfaq.pod
 

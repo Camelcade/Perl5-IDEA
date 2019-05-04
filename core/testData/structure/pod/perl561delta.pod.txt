@@ -50,7 +50,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl561delta.pod
 
       Unicode support in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6463 in perl561delta.pod
 
-      64-bit support in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7905 in perl561delta.pod
+      -bit support  Support for 64-bit platforms has been improved, but continues to be experimental.  The level of support varies greatly amon... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7905 in perl561delta.pod
 
       Compiler in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8064 in perl561delta.pod
 
@@ -72,11 +72,11 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl561delta.pod
 
       Minimizes use of temporary files. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10186 in perl561delta.pod
 
-      By default, does not link perl with libraries not used by it, such as the variou... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10230 in perl561delta.pod
+      By default, does not link perl with libraries not used by it, such as the various dbm libraries.  SunOS 4.x hints preserve behavior on th... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10230 in perl561delta.pod
 
       Support for pdp11-style memory models has been removed due to obsolescence. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10390 in perl561delta.pod
 
-      Building outside the source tree is supported on systems that have symbolic link... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10476 in perl561delta.pod
+      Building outside the source tree is supported on systems that have symbolic links. This is done by running      sh /path/to/source/Config... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10476 in perl561delta.pod
 
       Configure -S can be run non-interactively. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10741 in perl561delta.pod
 
@@ -84,7 +84,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl561delta.pod
 
     Bundled modules in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11751 in perl561delta.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 11815 in perl561delta.pod
+      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 11815 in perl561delta.pod
 
         B::Concise in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11822 in perl561delta.pod
 
@@ -94,7 +94,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl561delta.pod
 
         Pod::Text::Overstrike in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12086 in perl561delta.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 12245 in perl561delta.pod
+      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 12245 in perl561delta.pod
 
         CGI in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12252 in perl561delta.pod
 
@@ -136,37 +136,37 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl561delta.pod
 
     Platform-specific improvements in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13831 in perl561delta.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 13914 in perl561delta.pod
+      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 13914 in perl561delta.pod
 
         NCR MP-RAS in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13921 in perl561delta.pod
 
         NonStop-UX in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13939 in perl561delta.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 14958 in perl561delta.pod
+      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 14958 in perl561delta.pod
 
-        fork() emulation has been improved in various ways, but still continues to be ex... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14965 in perl561delta.pod
+        fork() emulation has been improved in various ways, but still continues to be experimental.  See perlfork for known bugs and caveats. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14965 in perl561delta.pod
 
-        %SIG has been enabled under USE_ITHREADS, but its use is completely unsupported ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15112 in perl561delta.pod
+        %SIG has been enabled under USE_ITHREADS, but its use is completely unsupported under all configurations. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15112 in perl561delta.pod
 
-        Borland C++ v5.5 is now a supported compiler that can build Perl. However, the g... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15228 in perl561delta.pod
+        Borland C++ v5.5 is now a supported compiler that can build Perl. However, the generated binaries continue to be incompatible with those ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15228 in perl561delta.pod
 
-        Non-blocking waits for child processes (or pseudo-processes) are supported via w... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15440 in perl561delta.pod
+        Non-blocking waits for child processes (or pseudo-processes) are supported via waitpid($pid, &POSIX::WNOHANG). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15440 in perl561delta.pod
 
         A memory leak in accept() has been fixed. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15564 in perl561delta.pod
 
-        wait(), waitpid() and backticks now return the correct exit status under Windows... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15616 in perl561delta.pod
+        wait(), waitpid() and backticks now return the correct exit status under Windows 9x. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15616 in perl561delta.pod
 
-        Trailing new %ENV entries weren't propagated to child processes.  This is now fi... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15711 in perl561delta.pod
+        Trailing new %ENV entries weren't propagated to child processes.  This is now fixed. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15711 in perl561delta.pod
 
-        Current directory entries in %ENV are now correctly propagated to child processe... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15806 in perl561delta.pod
+        Current directory entries in %ENV are now correctly propagated to child processes. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15806 in perl561delta.pod
 
         Duping socket handles with open(F, ">&MYSOCK") now works under Windows 9x. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15899 in perl561delta.pod
 
-        The makefiles now provide a single switch to bulk-enable all the features enable... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15984 in perl561delta.pod
+        The makefiles now provide a single switch to bulk-enable all the features enabled in ActiveState ActivePerl (a popular binary distribution). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15984 in perl561delta.pod
 
-        Win32::GetCwd() correctly returns C:\ instead of C: when at the drive root. Othe... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16135 in perl561delta.pod
+        Win32::GetCwd() correctly returns C:\ instead of C: when at the drive root. Other bugs in chdir() and Cwd::cwd() have also been fixed. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16135 in perl561delta.pod
 
-        fork() correctly returns undef and sets EAGAIN when it runs out of pseudo-proces... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16280 in perl561delta.pod
+        fork() correctly returns undef and sets EAGAIN when it runs out of pseudo-process handles. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16280 in perl561delta.pod
 
         ExtUtils::MakeMaker now uses $ENV{LIB} to search for libraries. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16381 in perl561delta.pod
 
@@ -210,9 +210,9 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl561delta.pod
 
       pack() and unpack() "q" and "Q" formats in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26144 in perl561delta.pod
 
-      in basic arithmetics: + - * / % (NOTE: operating close to the limits of the inte... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26194 in perl561delta.pod
+      in basic arithmetics: + - * / % (NOTE: operating close to the limits of the integer values may produce surprising results) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26194 in perl561delta.pod
 
-      in bit arithmetics: & | ^ ~ << >> (NOTE: these used to be forced  to be 32 bits ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26327 in perl561delta.pod
+      in bit arithmetics: & | ^ ~ << >> (NOTE: these used to be forced  to be 32 bits wide but now operate on the full native width.) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26327 in perl561delta.pod
 
       vec() in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26465 in perl561delta.pod
 
@@ -484,7 +484,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl561delta.pod
 
     Supported platforms in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 73894 in perl561delta.pod
 
-      The Mach CThreads (NEXTSTEP, OPENSTEP) are now supported by the Thread extension... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73931 in perl561delta.pod
+      The Mach CThreads (NEXTSTEP, OPENSTEP) are now supported by the Thread extension. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73931 in perl561delta.pod
 
       GNU/Hurd is now supported. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 74023 in perl561delta.pod
 
@@ -826,13 +826,13 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl561delta.pod
 
     Known test failures in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 117884 in perl561delta.pod
 
-      64-bit builds  Subtest #15 of lib/b.t may fail under 64-bit builds on platforms ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 117919 in perl561delta.pod
+      64-bit builds  Subtest #15 of lib/b.t may fail under 64-bit builds on platforms such as HP-UX PA64 and Linux IA64.  The issue is still be... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 117919 in perl561delta.pod
 
-      Failure of Thread tests  The subtests 19 and 20 of lib/thr5005.t test are known ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 118445 in perl561delta.pod
+      Failure of Thread tests  The subtests 19 and 20 of lib/thr5005.t test are known to fail due to fundamental problems in the 5.005 threadin... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 118445 in perl561delta.pod
 
-      NEXTSTEP 3.3 POSIX test failure  In NEXTSTEP 3.3p2 the implementation of the str... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 118770 in perl561delta.pod
+      NEXTSTEP 3.3 POSIX test failure  In NEXTSTEP 3.3p2 the implementation of the strftime(3) in the operating system libraries is buggy: the ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 118770 in perl561delta.pod
 
-      Tru64 (aka Digital UNIX, aka DEC OSF/1) lib/sdbm test failure with gcc  If compi... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 119083 in perl561delta.pod
+      Tru64 (aka Digital UNIX, aka DEC OSF/1) lib/sdbm test failure with gcc  If compiled with gcc 2.95 the lib/sdbm test will fail (dump core)... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 119083 in perl561delta.pod
 
     EBCDIC platforms not fully supported in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 119332 in perl561delta.pod
 
@@ -846,7 +846,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl561delta.pod
 
       Unicode in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 120947 in perl561delta.pod
 
-      64-bit support in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 120962 in perl561delta.pod
+      -bit support in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 120962 in perl561delta.pod
 
       Lvalue subroutines in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 120984 in perl561delta.pod
 

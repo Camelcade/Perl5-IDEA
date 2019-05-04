@@ -6,7 +6,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlwin32.pod
 
   DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 312 in perlwin32.pod
 
-    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 2017 in perlwin32.pod
+    null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 2017 in perlwin32.pod
 
       http://mingw.org in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2026 in perlwin32.pod
 
@@ -26,11 +26,11 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlwin32.pod
 
       Microsoft Visual C++ Toolkit 2003 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9425 in perlwin32.pod
 
-        cvtres.exe is required by link.exe when using a .res file.  It is actually insta... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11689 in perlwin32.pod
+        cvtres.exe is required by link.exe when using a .res file.  It is actually installed by the .NET Framework SDK, but into a location such ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11689 in perlwin32.pod
 
-        lib.exe is normally used to build libraries, but link.exe with the /lib option a... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11945 in perlwin32.pod
+        lib.exe is normally used to build libraries, but link.exe with the /lib option also works, so change win32/config.vc to use it instead:  ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11945 in perlwin32.pod
 
-        setargv.obj is required to build perlglob.exe (and perl.exe if the USE_SETARGV o... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12476 in perlwin32.pod
+        setargv.obj is required to build perlglob.exe (and perl.exe if the USE_SETARGV option is enabled).  The Platform SDK supplies this object... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12476 in perlwin32.pod
 
       Microsoft Platform SDK 64-bit Compiler in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13276 in perlwin32.pod
 
@@ -40,11 +40,11 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlwin32.pod
 
     Building in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14835 in perlwin32.pod
 
-      Make sure you are in the "win32" subdirectory under the perl toplevel. This dire... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14861 in perlwin32.pod
+      Make sure you are in the "win32" subdirectory under the perl toplevel. This directory contains a "Makefile" that will work with versions ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14861 in perlwin32.pod
 
-      Edit the makefile.mk (or Makefile, if you're using nmake) and change the values ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15205 in perlwin32.pod
+      Edit the makefile.mk (or Makefile, if you're using nmake) and change the values of INST_DRV and INST_TOP.   You can also enable various b... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15205 in perlwin32.pod
 
-      Type "dmake" (or "nmake" if you are using that make).  This should build everyth... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16873 in perlwin32.pod
+      Type "dmake" (or "nmake" if you are using that make).  This should build everything.  Specifically, it will create perl.exe, perl528.dll ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16873 in perlwin32.pod
 
     Testing Perl on Windows in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17933 in perlwin32.pod
 
@@ -74,11 +74,11 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlwin32.pod
 
     Running Perl Scripts in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 32174 in perlwin32.pod
 
-      1 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32576 in perlwin32.pod
+      There is a facility called "file extension associations".  This can be manipulated via the two commands "assoc" and "ftype" that come sta... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32576 in perlwin32.pod
 
-      2 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32877 in perlwin32.pod
+      Since file associations don't work everywhere, and there are reportedly bugs with file associations where it does work, the old method of... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32877 in perlwin32.pod
 
-      3 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 33798 in perlwin32.pod
+      Using "pl2bat" has a few problems:  the file name gets changed, so scripts that rely on $0 to find what they must do may not run properly... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 33798 in perlwin32.pod
 
     Miscellaneous Things in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 34975 in perlwin32.pod
 

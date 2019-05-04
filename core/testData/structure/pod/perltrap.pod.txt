@@ -6,12 +6,12 @@ Documentation in null; /perl5language.png -> POD file at 0 in perltrap.pod
 
     Awk Traps in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 376 in perltrap.pod
 
-      A Perl program executes only once, not once for each input line.  You can do an ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 471 in perltrap.pod
+      A Perl program executes only once, not once for each input line.  You can do an implicit loop with -n or -p. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 471 in perltrap.pod
 
       The English module, loaded via      use English;
- allows you to refer to special... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 596 in perltrap.pod
+ allows you to refer to special variables (like $/) with names (like $RS), as though the... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 596 in perltrap.pod
 
-      Semicolons are required after all simple statements in Perl (except at the end o... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 792 in perltrap.pod
+      Semicolons are required after all simple statements in Perl (except at the end of a block).  Newline is not a statement delimiter. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 792 in perltrap.pod
 
       Curly brackets are required on ifs and whiles. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 933 in perltrap.pod
 
@@ -25,28 +25,30 @@ Documentation in null; /perl5language.png -> POD file at 0 in perltrap.pod
 
       You have to decide whether you want to use string or numeric comparisons. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1286 in perltrap.pod
 
-      Reading an input line does not split it for you.  You get to split it to an arra... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1370 in perltrap.pod
+      Reading an input line does not split it for you.  You get to split it to an array yourself.  And the split() operator has different argum... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1370 in perltrap.pod
 
-      The current input line is normally in $_, not $0.  It generally does not have th... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1537 in perltrap.pod
+      The current input line is normally in $_, not $0.  It generally does not have the newline stripped.  ($0 is the name of the program execu... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1537 in perltrap.pod
 
-      $<digit> does not refer to fields--it refers to substrings matched by the last m... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1707 in perltrap.pod
+      $<digit> does not refer to fields--it refers to substrings matched by the last match pattern. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1707 in perltrap.pod
 
-      The print() statement does not add field and record separators unless you set $,... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1814 in perltrap.pod
+      The print() statement does not add field and record separators unless you set $, and $\.  You can set $OFS and $ORS if you're using the E... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1814 in perltrap.pod
 
       You must open your files before you print to them. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1982 in perltrap.pod
 
       The range operator is "..", not comma.  The comma operator works as in C. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2043 in perltrap.pod
 
-      The match operator is "=~", not "~".  ("~" is the one's complement operator, as ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2127 in perltrap.pod
+      The match operator is "=~", not "~".  ("~" is the one's complement operator, as in C.) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2127 in perltrap.pod
 
-      The exponentiation operator is "**", not "^".  "^" is the XOR operator, as in C.... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2224 in perltrap.pod
+      The exponentiation operator is "**", not "^".  "^" is the XOR operator, as in C.  (You know, one could get the feeling that awk is basica... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2224 in perltrap.pod
 
-      The concatenation operator is ".", not the null string.  (Using the null string ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2400 in perltrap.pod
+      The concatenation operator is ".", not the null string.  (Using the null string would render /pat/ /pat/ unparsable, because the third sl... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2400 in perltrap.pod
 
       The next, exit, and continue keywords work differently. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2748 in perltrap.pod
 
       The following variables work differently:        Awk	Perl
-      ARGC	scalar @ARG... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2823 in perltrap.pod
+      ARGC	scalar @ARGV (compare with $#ARGV)
+      ARGV[0]	$0
+      FILENAME	$... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2823 in perltrap.pod
 
       You cannot set $RS to a pattern, only a string. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3188 in perltrap.pod
 
@@ -58,91 +60,93 @@ Documentation in null; /perl5language.png -> POD file at 0 in perltrap.pod
 
       You must use elsif rather than else if. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3506 in perltrap.pod
 
-      The break and continue keywords from C become in Perl last and next, respectivel... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3562 in perltrap.pod
+      The break and continue keywords from C become in Perl last and next, respectively.  Unlike in C, these do not work within a do { } while ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3562 in perltrap.pod
 
-      The switch statement is called given/when and only available in perl 5.10 or new... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3770 in perltrap.pod
+      The switch statement is called given/when and only available in perl 5.10 or newer.  See perlsyn/"Switch Statements". in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3770 in perltrap.pod
 
       Variables begin with "$", "@" or "%" in Perl. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3907 in perltrap.pod
 
-      Comments begin with "#", not "/*" or "//".  Perl may interpret C/C++ comments as... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3963 in perltrap.pod
+      Comments begin with "#", not "/*" or "//".  Perl may interpret C/C++ comments as division operators, unterminated regular expressions or ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3963 in perltrap.pod
 
-      You can't take the address of anything, although a similar operator in Perl is t... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4135 in perltrap.pod
+      You can't take the address of anything, although a similar operator in Perl is the backslash, which creates a reference. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4135 in perltrap.pod
 
       ARGV must be capitalized.  $ARGV[0] is C's argv[1], and argv[0] ends up in $0. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4266 in perltrap.pod
 
-      System calls such as link(), unlink(), rename(), etc. return nonzero for success... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4370 in perltrap.pod
+      System calls such as link(), unlink(), rename(), etc. return nonzero for success, not 0. (system(), however, returns zero for success.) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4370 in perltrap.pod
 
-      Signal handlers deal with signal names, not numbers.  Use kill -l to find their ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4516 in perltrap.pod
+      Signal handlers deal with signal names, not numbers.  Use kill -l to find their names on your system. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4516 in perltrap.pod
 
     JavaScript Traps in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4638 in perltrap.pod
 
-      In Perl, binary + is always addition.  $string1 + $string2 converts both strings... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4741 in perltrap.pod
+      In Perl, binary + is always addition.  $string1 + $string2 converts both strings to numbers and then adds them.  To concatenate two strin... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4741 in perltrap.pod
 
-      The + unary operator doesn't do anything in Perl.  It exists to avoid syntactic ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4921 in perltrap.pod
+      The + unary operator doesn't do anything in Perl.  It exists to avoid syntactic ambiguities. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4921 in perltrap.pod
 
-      Unlike for...in, Perl's for (also spelled foreach) does not allow the left-hand ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5027 in perltrap.pod
+      Unlike for...in, Perl's for (also spelled foreach) does not allow the left-hand side to be an arbitrary expression.  It must be a variabl... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5027 in perltrap.pod
 
-      To iterate over the indices of an array, use foreach my $i (0 .. $#array) {}.  f... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5423 in perltrap.pod
+      To iterate over the indices of an array, use foreach my $i (0 .. $#array) {}.  foreach my $v (@array) {} iterates over the values. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5423 in perltrap.pod
 
       Perl requires braces following if, while, foreach, etc. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5570 in perltrap.pod
 
       In Perl, else if is spelled elsif. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5645 in perltrap.pod
 
-      ? : has higher precedence than assignment.  In JavaScript, one can write:      c... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5696 in perltrap.pod
+      ? : has higher precedence than assignment.  In JavaScript, one can write:      condition ? do_something() : variable = 3
+ and the variabl... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5696 in perltrap.pod
 
       Perl requires semicolons to separate statements. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5996 in perltrap.pod
 
-      Variables declared with my only affect code after the declaration. You cannot wr... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6055 in perltrap.pod
+      Variables declared with my only affect code after the declaration. You cannot write $x = 1; my $x; and expect the first assignment to aff... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6055 in perltrap.pod
 
-      my variables are scoped to the current block, not to the current function.  If y... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6499 in perltrap.pod
+      my variables are scoped to the current block, not to the current function.  If you write {my $x;} $x;, the second $x does not refer to th... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6499 in perltrap.pod
 
-      An object's members cannot be made accessible as variables.  The closest Perl eq... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6688 in perltrap.pod
+      An object's members cannot be made accessible as variables.  The closest Perl equivalent to with(object) { method() } is for, which can a... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6688 in perltrap.pod
 
-      The object or class on which a method is called is passed as one of the method's... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6907 in perltrap.pod
+      The object or class on which a method is called is passed as one of the method's arguments, not as a separate this value. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6907 in perltrap.pod
 
     Sed Traps in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7049 in perltrap.pod
 
-      A Perl program executes only once, not once for each input line.  You can do an ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7140 in perltrap.pod
+      A Perl program executes only once, not once for each input line.  You can do an implicit loop with -n or -p. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7140 in perltrap.pod
 
       Backreferences in substitutions use "$" rather than "\". in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7265 in perltrap.pod
 
-      The pattern matching metacharacters "(", ")", and "|" do not have backslashes in... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7332 in perltrap.pod
+      The pattern matching metacharacters "(", ")", and "|" do not have backslashes in front. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7332 in perltrap.pod
 
       The range operator is ..., rather than comma. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7430 in perltrap.pod
 
     Shell Traps in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7496 in perltrap.pod
 
-      The backtick operator does variable interpolation without regard to the presence... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7585 in perltrap.pod
+      The backtick operator does variable interpolation without regard to the presence of single quotes in the command. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7585 in perltrap.pod
 
       The backtick operator does no translation of the return value, unlike csh. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7709 in perltrap.pod
 
-      Shells (especially csh) do several levels of substitution on each command line. ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7797 in perltrap.pod
+      Shells (especially csh) do several levels of substitution on each command line.  Perl does substitution in only certain constructs such a... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7797 in perltrap.pod
 
-      Shells interpret scripts a little bit at a time.  Perl compiles the entire progr... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8012 in perltrap.pod
+      Shells interpret scripts a little bit at a time.  Perl compiles the entire program before executing it (except for BEGIN blocks, which ex... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8012 in perltrap.pod
 
       The arguments are available via @ARGV, not $1, $2, etc. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8186 in perltrap.pod
 
-      The environment is not automatically made available as separate scalar variables... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8252 in perltrap.pod
+      The environment is not automatically made available as separate scalar variables. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8252 in perltrap.pod
 
-      The shell's test uses "=", "!=", "<" etc for string comparisons and "-eq", "-ne"... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8344 in perltrap.pod
+      The shell's test uses "=", "!=", "<" etc for string comparisons and "-eq", "-ne", "-lt" etc for numeric comparisons. This is the reverse ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8344 in perltrap.pod
 
     Perl Traps in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8620 in perltrap.pod
 
-      Remember that many operations behave differently in a list context than they do ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8712 in perltrap.pod
+      Remember that many operations behave differently in a list context than they do in a scalar one.  See perldata for details. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8712 in perltrap.pod
 
-      Avoid barewords if you can, especially all lowercase ones. You can't tell by jus... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8849 in perltrap.pod
+      Avoid barewords if you can, especially all lowercase ones. You can't tell by just looking at it whether a bareword is a function or a str... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8849 in perltrap.pod
 
-      You cannot discern from mere inspection which builtins are unary operators (like... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9098 in perltrap.pod
+      You cannot discern from mere inspection which builtins are unary operators (like chop() and chdir()) and which are list operators (like p... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9098 in perltrap.pod
 
-      People have a hard time remembering that some functions default to $_, or @ARGV,... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9393 in perltrap.pod
+      People have a hard time remembering that some functions default to $_, or @ARGV, or whatever, but that others which you might expect to d... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9393 in perltrap.pod
 
-      The <FH> construct is not the name of the filehandle, it is a readline operation... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9547 in perltrap.pod
+      The <FH> construct is not the name of the filehandle, it is a readline operation on that handle.  The data read is assigned to $_ only if... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9547 in perltrap.pod
 
-      Remember not to use = when you need =~; these two constructs are quite different... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9841 in perltrap.pod
+      Remember not to use = when you need =~; these two constructs are quite different:      $x =  /foo/;
+    $x =~ /foo/; in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9841 in perltrap.pod
 
       The do {} construct isn't a real loop that you can use loop control on. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9974 in perltrap.pod
 
-      Use my() for local variables whenever you can get away with it (but see perlform... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10059 in perltrap.pod
+      Use my() for local variables whenever you can get away with it (but see perlform for where you can't). Using local() actually gives a loc... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10059 in perltrap.pod
 
-      If you localize an exported variable in a module, its exported value will not ch... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10315 in perltrap.pod
+      If you localize an exported variable in a module, its exported value will not change.  The local name becomes an alias to a new value but... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10315 in perltrap.pod
 

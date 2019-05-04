@@ -16,11 +16,11 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlvms.pod
 
     Installing dynamic extensions in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4740 in perlvms.pod
 
-      the [.Lib.Auto.Arch$PVersExtname] subdirectory of one of the directories in @INC... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5569 in perlvms.pod
+      the [.Lib.Auto.Arch$PVersExtname] subdirectory of one of the directories in @INC (where PVers is the version of Perl you're using, as sup... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5569 in perlvms.pod
 
       one of the directories in @INC, or in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5784 in perlvms.pod
 
-      a directory which the extensions Perl library module passes to the DynaLoader wh... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5832 in perlvms.pod
+      a directory which the extensions Perl library module passes to the DynaLoader when asking it to map the shareable image, or in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5832 in perlvms.pod
 
       Sys$Share or Sys$Library. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5966 in perlvms.pod
 

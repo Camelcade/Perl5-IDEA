@@ -40,21 +40,21 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlre.pod
 
         /d in null; /perl5language.png, null] -> PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 30370 in perlre.pod
 
-          1 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30530 in perlre.pod
+          the target string is encoded in UTF-8; or in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30530 in perlre.pod
 
-          2 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30582 in perlre.pod
+          the pattern is encoded in UTF-8; or in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30582 in perlre.pod
 
-          3 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30628 in perlre.pod
+          the pattern explicitly mentions a code point that is above 255 (say by \x{100}); or in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30628 in perlre.pod
 
-          4 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30725 in perlre.pod
+          the pattern uses a Unicode name (\N{...});  or in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30725 in perlre.pod
 
-          5 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30785 in perlre.pod
+          the pattern uses a Unicode property (\p{...} or \P{...}); or in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30785 in perlre.pod
 
-          6 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30862 in perlre.pod
+          the pattern uses a Unicode break (\b{...} or \B{...}); or in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30862 in perlre.pod
 
-          7 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30936 in perlre.pod
+          the pattern uses /(?[ ]) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30936 in perlre.pod
 
-          8 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30977 in perlre.pod
+          the pattern uses (*script_run: ...)|/Script Runs in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30977 in perlre.pod
 
         /a (and /aa) in null; /perl5language.png, null] -> PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 32102 in perlre.pod
 
@@ -156,7 +156,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlre.pod
 
       (?(condition)yes-pattern) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 83006 in perlre.pod
 
-        =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 83228 in perlre.pod
+        null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 83228 in perlre.pod
 
           an integer in parentheses in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 83237 in perlre.pod
 
@@ -166,7 +166,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlre.pod
 
           the special symbol (R) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 83506 in perlre.pod
 
-        =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 83885 in perlre.pod
+        null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 83885 in perlre.pod
 
           (1) (2) ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 83894 in perlre.pod
 

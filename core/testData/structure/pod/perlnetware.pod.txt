@@ -14,11 +14,11 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlnetware.pod
 
       Buildtype.bat in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1528 in perlnetware.pod
 
-        1. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1679 in perlnetware.pod
+        Typing "buildtype d on" at the command prompt causes the buildtype to be set to Debug type with D2 flag set. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1679 in perlnetware.pod
 
-        2. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1800 in perlnetware.pod
+        Typing "buildtype d off" or "buildtype d" at the command prompt causes the buildtype to be set to Debug type with D1 flag set. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1800 in perlnetware.pod
 
-        3. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1939 in perlnetware.pod
+        Typing "buildtype r" at the command prompt sets it to Release Build type. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1939 in perlnetware.pod
 
     Make in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2038 in perlnetware.pod
 
@@ -36,13 +36,14 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlnetware.pod
 
     Change to the extension directory where its source files are present. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4625 in perlnetware.pod
 
-    Run the following command at the command prompt:      perl -II<path to NetWare l... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4705 in perlnetware.pod
+    Run the following command at the command prompt:      perl -II<path to NetWare lib dir> -II<path to lib> Makefile.pl
+ Example:      perl ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4705 in perlnetware.pod
 
     nmake in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5108 in perlnetware.pod
 
-    nmake install  Install will copy the files into the Windows machine where NetWar... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5124 in perlnetware.pod
+    nmake install  Install will copy the files into the Windows machine where NetWare Perl is installed and these files may have to be copied... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5124 in perlnetware.pod
 
-    Note: Some modules downloaded from CPAN may require NetWare related API in order... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5949 in perlnetware.pod
+    Note: Some modules downloaded from CPAN may require NetWare related API in order to build on NetWare.  Other modules may however build sm... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5949 in perlnetware.pod
 
   ACKNOWLEDGEMENTS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6174 in perlnetware.pod
 

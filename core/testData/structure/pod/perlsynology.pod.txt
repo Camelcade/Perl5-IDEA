@@ -8,24 +8,24 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlsynology.pod
 
       DSM 5 in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 1697 in perlsynology.pod
 
-        =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 1926 in perlsynology.pod
+        null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 1926 in perlsynology.pod
 
-          Using your favourite browser open the DSM management page and start the Package ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1935 in perlsynology.pod
+          Using your favourite browser open the DSM management page and start the Package Center. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1935 in perlsynology.pod
 
           If you want to smoke test Perl, install Perl. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2033 in perlsynology.pod
 
           In Settings, add the following Package Sources:    http://www.cphub.net
-  http:/... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2092 in perlsynology.pod
+  http://packages.quadrat4.de in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2092 in perlsynology.pod
 
           Still in Settings, in Channel Update, select Beta Channel. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2204 in perlsynology.pod
 
-          Press Refresh. In the left panel the item "Community" will appear. Click it. Sel... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2273 in perlsynology.pod
+          Press Refresh. In the left panel the item "Community" will appear. Click it. Select "Bootstrap Installer Beta" and install it. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2273 in perlsynology.pod
 
-          Likewise, install "iPKGui Beta".  The application window should now show an icon... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2410 in perlsynology.pod
+          Likewise, install "iPKGui Beta".  The application window should now show an icon for iPKGui. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2410 in perlsynology.pod
 
-          Start iPKGui. Install the packages make, gcc and coreutils.  If you want to smok... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2513 in perlsynology.pod
+          Start iPKGui. Install the packages make, gcc and coreutils.  If you want to smoke test Perl, install patch. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2513 in perlsynology.pod
 
-        =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 3161 in perlsynology.pod
+        null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 3161 in perlsynology.pod
 
           On the DSM management page start the Control Panel. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3170 in perlsynology.pod
 
@@ -37,7 +37,9 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlsynology.pod
 
           Execute the following commands:    cd /lib
   ln -s libm.so.6 libm.so
-  ln -s lib... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3396 in perlsynology.pod
+  ln -s libcrypt.so.1 libcrypt.so
+  ln -s libdl.so.2 libdl.so
+  cd /... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3396 in perlsynology.pod
 
       DSM 6 in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 3801 in perlsynology.pod
 

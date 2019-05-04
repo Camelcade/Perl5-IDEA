@@ -42,7 +42,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlmodstyle.pod
 
       Document purpose, scope and target applications in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2526 in perlmodstyle.pod
 
-      Document each publically accessible method or subroutine, including params and r... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2584 in perlmodstyle.pod
+      Document each publically accessible method or subroutine, including params and return values in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2584 in perlmodstyle.pod
 
       Give examples of use in your documentation in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2687 in perlmodstyle.pod
 
@@ -58,7 +58,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlmodstyle.pod
 
       Include tests with your module in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3042 in perlmodstyle.pod
 
-      Choose a sensible and consistent version numbering scheme (X.YY is the common Pe... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3083 in perlmodstyle.pod
+      Choose a sensible and consistent version numbering scheme (X.YY is the common Perl module numbering scheme) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3083 in perlmodstyle.pod
 
       Increment the version number for every change, no matter how small in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3201 in perlmodstyle.pod
 
@@ -80,7 +80,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlmodstyle.pod
 
       Reflect the functionality of the module, not the implementation. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5451 in perlmodstyle.pod
 
-      Avoid starting a new top-level hierarchy, especially if a suitable hierarchy alr... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5526 in perlmodstyle.pod
+      Avoid starting a new top-level hierarchy, especially if a suitable hierarchy already exists under which you could place your module. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5526 in perlmodstyle.pod
 
     Get feedback before publishing in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5676 in perlmodstyle.pod
 
@@ -90,19 +90,19 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlmodstyle.pod
 
       The system being designed is large, or is likely to become large. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6830 in perlmodstyle.pod
 
-      The data can be aggregated into obvious structures, especially if there's a larg... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6906 in perlmodstyle.pod
+      The data can be aggregated into obvious structures, especially if there's a large amount of data in each aggregate. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6906 in perlmodstyle.pod
 
-      The various types of data aggregate form a natural hierarchy that facilitates th... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7032 in perlmodstyle.pod
+      The various types of data aggregate form a natural hierarchy that facilitates the use of inheritance and polymorphism. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7032 in perlmodstyle.pod
 
       You have a piece of data on which many different operations are applied. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7161 in perlmodstyle.pod
 
-      You need to perform the same general operations on related types of data, but wi... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7244 in perlmodstyle.pod
+      You need to perform the same general operations on related types of data, but with slight variations depending on the specific type of da... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7244 in perlmodstyle.pod
 
       It's likely you'll have to add new data types later. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7425 in perlmodstyle.pod
 
-      The typical interactions between pieces of data are best represented by operator... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7488 in perlmodstyle.pod
+      The typical interactions between pieces of data are best represented by operators. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7488 in perlmodstyle.pod
 
-      The implementation of individual components of the system is likely to change ov... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7581 in perlmodstyle.pod
+      The implementation of individual components of the system is likely to change over time. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7581 in perlmodstyle.pod
 
       The system design is already object-oriented. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7680 in perlmodstyle.pod
 
@@ -128,25 +128,25 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlmodstyle.pod
 
       Return an undefined value. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12012 in perlmodstyle.pod
 
-      set $Module::errstr or similar (errstr is a common name used by DBI and other po... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12049 in perlmodstyle.pod
+      set $Module::errstr or similar (errstr is a common name used by DBI and other popular modules; if you choose something else, be sure to d... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12049 in perlmodstyle.pod
 
       warn() or carp() a message to STDERR. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12223 in perlmodstyle.pod
 
-      croak() only when your module absolutely cannot figure out what to do.  (croak()... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12279 in perlmodstyle.pod
+      croak() only when your module absolutely cannot figure out what to do.  (croak() is a better version of die() for use within  modules, wh... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12279 in perlmodstyle.pod
 
-      As an alternative to the above, you may prefer to throw exceptions using  the Er... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12573 in perlmodstyle.pod
+      As an alternative to the above, you may prefer to throw exceptions using  the Error module. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12573 in perlmodstyle.pod
 
   DOCUMENTING YOUR MODULE in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 12990 in perlmodstyle.pod
 
     POD in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13022 in perlmodstyle.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 13350 in perlmodstyle.pod
+      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 13350 in perlmodstyle.pod
 
         A synopsis of the common uses of the module in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13359 in perlmodstyle.pod
 
         The purpose, scope and target applications of your module in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13413 in perlmodstyle.pod
 
-        Use of each publically accessible method or subroutine, including parameters and... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13481 in perlmodstyle.pod
+        Use of each publically accessible method or subroutine, including parameters and return values in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13481 in perlmodstyle.pod
 
         Examples of use in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13586 in perlmodstyle.pod
 
@@ -154,7 +154,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlmodstyle.pod
 
         A contact email address for the author/maintainer in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13653 in perlmodstyle.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 14535 in perlmodstyle.pod
+      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 14535 in perlmodstyle.pod
 
         NAME in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14544 in perlmodstyle.pod
 
@@ -162,7 +162,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlmodstyle.pod
 
         DESCRIPTION in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14579 in perlmodstyle.pod
 
-        One or more sections or subsections giving greater detail of available  methods ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14601 in perlmodstyle.pod
+        One or more sections or subsections giving greater detail of available  methods and routines and any other relevant information. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14601 in perlmodstyle.pod
 
         BUGS/CAVEATS/etc in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14740 in perlmodstyle.pod
 
@@ -174,7 +174,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlmodstyle.pod
 
     README, INSTALL, release notes, changelogs in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15142 in perlmodstyle.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 15477 in perlmodstyle.pod
+      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 15477 in perlmodstyle.pod
 
         perl Makefile.PL in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15486 in perlmodstyle.pod
 
@@ -184,7 +184,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlmodstyle.pod
 
         make install in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15539 in perlmodstyle.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 15615 in perlmodstyle.pod
+      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 15615 in perlmodstyle.pod
 
         perl Build.PL in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15624 in perlmodstyle.pod
 

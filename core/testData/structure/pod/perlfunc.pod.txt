@@ -184,7 +184,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlfunc.pod
 
             It can lose track of whether something should be encoded as UTF-8 or not. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 92913 in perlfunc.pod
 
-            Source filters activated within eval leak out into whichever file scope is curre... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 92997 in perlfunc.pod
+            Source filters activated within eval leak out into whichever file scope is currently being compiled.  To give an example with the CPAN mo... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 92997 in perlfunc.pod
 
         Block eval in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 95027 in perlfunc.pod
 
@@ -476,9 +476,9 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlfunc.pod
 
       pack TEMPLATE,LIST in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 198016 in perlfunc.pod
 
-        Each letter may optionally be followed by a number indicating the repeat count. ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 203668 in perlfunc.pod
+        Each letter may optionally be followed by a number indicating the repeat count.  A numeric repeat count may optionally be enclosed in bra... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 203668 in perlfunc.pod
 
-          =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 204189 in perlfunc.pod
+          null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 204189 in perlfunc.pod
 
             @, x, and X, where it is equivalent to 0. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 204196 in perlfunc.pod
 
@@ -486,57 +486,57 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlfunc.pod
 
             u, where it is equivalent to 1 (or 45, which here is equivalent). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 204327 in perlfunc.pod
 
-          =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 205324 in perlfunc.pod
+          null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 205324 in perlfunc.pod
 
             If the repeat count is 0, it's relative to the current position. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 205331 in perlfunc.pod
 
-            If the repeat count is *, the offset is relative to the start of the packed stri... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 205409 in perlfunc.pod
+            If the repeat count is *, the offset is relative to the start of the packed string. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 205409 in perlfunc.pod
 
-            And if it's an integer n, the offset is relative to the start of the nth innermo... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 205506 in perlfunc.pod
+            And if it's an integer n, the offset is relative to the start of the nth innermost ( ) group, or to the start of the string if n is bigge... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 205506 in perlfunc.pod
 
-        The a, A, and Z types gobble just one value, but pack it as a string of length c... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 205877 in perlfunc.pod
+        The a, A, and Z types gobble just one value, but pack it as a string of length count, padding with nulls or spaces as needed.  When unpac... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 205877 in perlfunc.pod
 
-        Likewise, the b and B formats pack a string that's that many bits long. Each suc... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 206417 in perlfunc.pod
+        Likewise, the b and B formats pack a string that's that many bits long. Each such format generates 1 bit of the result.  These are typica... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 206417 in perlfunc.pod
 
-        The h and H formats pack a string that many nybbles (4-bit groups, representable... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 207570 in perlfunc.pod
+        The h and H formats pack a string that many nybbles (4-bit groups, representable as hexadecimal digits, "0".."9" "a".."f") long.  For eac... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 207570 in perlfunc.pod
 
-        The p format packs a pointer to a null-terminated string.  You are responsible f... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 208997 in perlfunc.pod
+        The p format packs a pointer to a null-terminated string.  You are responsible for ensuring that the string is not a temporary value, as ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 208997 in perlfunc.pod
 
-        The / template character allows packing and unpacking of a sequence of items whe... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 209771 in perlfunc.pod
+        The / template character allows packing and unpacking of a sequence of items where the packed structure contains a packed item count foll... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 209771 in perlfunc.pod
 
-        The integer types s, S, l, and L may be followed by a ! modifier to specify nati... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 211842 in perlfunc.pod
+        The integer types s, S, l, and L may be followed by a ! modifier to specify native shorts or longs.  As shown in the example above, a bar... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 211842 in perlfunc.pod
 
-        The integer formats s, S, i, I, l, L, j, and J are inherently non-portable betwe... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 213079 in perlfunc.pod
+        The integer formats s, S, i, I, l, L, j, and J are inherently non-portable between processors and operating systems because they obey nat... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 213079 in perlfunc.pod
 
-        Also floating point numbers have endianness.  Usually (but not always) this agre... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 215063 in perlfunc.pod
+        Also floating point numbers have endianness.  Usually (but not always) this agrees with the integer endianness.  Even though most platfor... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 215063 in perlfunc.pod
 
-        Starting with Perl 5.10.0, integer and floating-point formats, along with the p ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 215692 in perlfunc.pod
+        Starting with Perl 5.10.0, integer and floating-point formats, along with the p and P formats and () groups, may all be followed by the >... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 215692 in perlfunc.pod
 
-          Exchanging signed integers between different platforms works only when all platf... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 216177 in perlfunc.pod
+          Exchanging signed integers between different platforms works only when all platforms store them in the same format.  Most platforms store... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 216177 in perlfunc.pod
 
-          The > or < modifiers can only be used on floating-point formats on big- or littl... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 216404 in perlfunc.pod
+          The > or < modifiers can only be used on floating-point formats on big- or little-endian machines.  Otherwise, attempting to use them rai... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 216404 in perlfunc.pod
 
-          Forcing big- or little-endian byte-order on floating-point values for data excha... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 216583 in perlfunc.pod
+          Forcing big- or little-endian byte-order on floating-point values for data exchange can work only if all platforms use the same binary re... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 216583 in perlfunc.pod
 
-          When using > or < on a () group, this affects all types inside the group that ac... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 217059 in perlfunc.pod
+          When using > or < on a () group, this affects all types inside the group that accept byte-order modifiers, including all subgroups.  It i... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 217059 in perlfunc.pod
 
-        Real numbers (floats and doubles) are in native machine format only. Due to the ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 217380 in perlfunc.pod
+        Real numbers (floats and doubles) are in native machine format only. Due to the multiplicity of floating-point formats and the lack of a ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 217380 in perlfunc.pod
 
-        Pack and unpack can operate in two modes: character mode (C0 mode) where the pac... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 218271 in perlfunc.pod
+        Pack and unpack can operate in two modes: character mode (C0 mode) where the packed string is processed per character, and UTF-8 byte mod... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 218271 in perlfunc.pod
 
-        You must yourself do any alignment or padding by inserting, for example, enough ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 219655 in perlfunc.pod
+        You must yourself do any alignment or padding by inserting, for example, enough "x"es while packing.  There is no way for pack|/pack TEMP... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 219655 in perlfunc.pod
 
-        A () group is a sub-TEMPLATE enclosed in parentheses.  A group may take a repeat... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 219985 in perlfunc.pod
+        A () group is a sub-TEMPLATE enclosed in parentheses.  A group may take a repeat count either as postfix, or for unpack|/unpack TEMPLATE,... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 219985 in perlfunc.pod
 
-        x and X accept the ! modifier to act as alignment commands: they jump forward or... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 220356 in perlfunc.pod
+        x and X accept the ! modifier to act as alignment commands: they jump forward or back to the closest position aligned at a multiple of co... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 220356 in perlfunc.pod
 
-        n, N, v and V accept the ! modifier to represent signed 16-/32-bit integers in b... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 220941 in perlfunc.pod
+        n, N, v and V accept the ! modifier to represent signed 16-/32-bit integers in big-/little-endian order. This is portable only when all p... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 220941 in perlfunc.pod
 
-        Comments can be embedded in a TEMPLATE using # through the end of line. White sp... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 221257 in perlfunc.pod
+        Comments can be embedded in a TEMPLATE using # through the end of line. White space can separate pack codes from each other, but modifier... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 221257 in perlfunc.pod
 
-        If TEMPLATE requires more arguments than pack|/pack TEMPLATE,LIST is given, pack... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 221667 in perlfunc.pod
+        If TEMPLATE requires more arguments than pack|/pack TEMPLATE,LIST is given, pack|/pack TEMPLATE,LIST assumes additional "" arguments.  If... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 221667 in perlfunc.pod
 
-        Attempting to pack the special floating point values Inf and NaN (infinity, also... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 221905 in perlfunc.pod
+        Attempting to pack the special floating point values Inf and NaN (infinity, also in negative, and not-a-number) into packed integer value... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 221905 in perlfunc.pod
 
       package NAMESPACE in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 224477 in perlfunc.pod
 
@@ -636,13 +636,13 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlfunc.pod
 
       require in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 254817 in perlfunc.pod
 
-        1 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 260419 in perlfunc.pod
+        A reference to a scalar, containing any initial source code to prepend to the file or generator output. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 260419 in perlfunc.pod
 
-        2 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 260533 in perlfunc.pod
+        A filehandle, from which the file will be read. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 260533 in perlfunc.pod
 
-        3 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 260591 in perlfunc.pod
+        A reference to a subroutine.  If there is no filehandle (previous item), then this subroutine is expected to generate one line of source ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 260591 in perlfunc.pod
 
-        4 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 261201 in perlfunc.pod
+        Optional state for the subroutine.  The state is passed in as $_[1]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 261201 in perlfunc.pod
 
       reset EXPR in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 262977 in perlfunc.pod
 
@@ -972,7 +972,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlfunc.pod
 
       perlsyn in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 398992 in perlfunc.pod
 
-        =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 399008 in perlfunc.pod
+        null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 399008 in perlfunc.pod
 
           else in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 399015 in perlfunc.pod
 
@@ -992,7 +992,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlfunc.pod
 
           elseif in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 399197 in perlfunc.pod
 
-        =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 399465 in perlfunc.pod
+        null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 399465 in perlfunc.pod
 
           default in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 399472 in perlfunc.pod
 

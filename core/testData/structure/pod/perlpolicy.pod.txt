@@ -8,23 +8,23 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlpolicy.pod
 
     Perl 5 Porters in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 302 in perlpolicy.pod
 
-      1 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2007 in perlpolicy.pod
+      Larry is always by definition right about how Perl should behave. This means he has final veto power on the core functionality. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2007 in perlpolicy.pod
 
-      2 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2145 in perlpolicy.pod
+      Larry is allowed to change his mind about any matter at a later date, regardless of whether he previously invoked Rule 1. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2145 in perlpolicy.pod
 
   MAINTENANCE AND SUPPORT in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2415 in perlpolicy.pod
 
-    We "officially" support the two most recent stable release series.  5.22.x and e... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3279 in perlpolicy.pod
+    We "officially" support the two most recent stable release series.  5.22.x and earlier are now out of support.  As of the release of 5.28... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3279 in perlpolicy.pod
 
-    To the best of our ability, we will attempt to fix critical issues in the two mo... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3538 in perlpolicy.pod
+    To the best of our ability, we will attempt to fix critical issues in the two most recent stable 5.x release series.  Fixes for the curre... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3538 in perlpolicy.pod
 
-    To the best of our ability, we will provide "critical" security patches / releas... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3763 in perlpolicy.pod
+    To the best of our ability, we will provide "critical" security patches / releases for any major version of Perl whose 5.x.0 release was ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3763 in perlpolicy.pod
 
-    We will not provide security updates or bug fixes for development releases of Pe... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4030 in perlpolicy.pod
+    We will not provide security updates or bug fixes for development releases of Perl. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4030 in perlpolicy.pod
 
-    We encourage vendors to ship the most recent supported release of Perl at the ti... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4124 in perlpolicy.pod
+    We encourage vendors to ship the most recent supported release of Perl at the time of their code freeze. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4124 in perlpolicy.pod
 
-    As a vendor, you may have a requirement to backport security fixes beyond our 3 ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4239 in perlpolicy.pod
+    As a vendor, you may have a requirement to backport security fixes beyond our 3 year support commitment.  We can provide limited support ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4239 in perlpolicy.pod
 
   BACKWARD COMPATIBILITY AND DEPRECATION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4707 in perlpolicy.pod
 
@@ -40,27 +40,27 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlpolicy.pod
 
   MAINTENANCE BRANCHES in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 10618 in perlpolicy.pod
 
-    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 11868 in perlpolicy.pod
+    null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 11868 in perlpolicy.pod
 
-      Patches that fix CVEs or security issues.  These changes should be passed using ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11875 in perlpolicy.pod
+      Patches that fix CVEs or security issues.  These changes should be passed using the security reporting mechanism rather than applied dire... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11875 in perlpolicy.pod
 
-      Patches that fix crashing bugs, assertion failures and memory corruption but whi... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12087 in perlpolicy.pod
+      Patches that fix crashing bugs, assertion failures and memory corruption but which do not otherwise change perl's functionality or negati... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12087 in perlpolicy.pod
 
-      Patches that fix regressions in perl's behavior relative to previous releases, n... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12259 in perlpolicy.pod
+      Patches that fix regressions in perl's behavior relative to previous releases, no matter how old the regression, since some people may up... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12259 in perlpolicy.pod
 
-      Patches that fix bugs in features that were new in the corresponding 5.x.0 stabl... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12466 in perlpolicy.pod
+      Patches that fix bugs in features that were new in the corresponding 5.x.0 stable release. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12466 in perlpolicy.pod
 
-      Patches that fix anything which prevents or seriously impacts the build or insta... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12567 in perlpolicy.pod
+      Patches that fix anything which prevents or seriously impacts the build or installation of perl. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12567 in perlpolicy.pod
 
-      Portability fixes, such as changes to Configure and the files in the hints/ fold... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12674 in perlpolicy.pod
+      Portability fixes, such as changes to Configure and the files in the hints/ folder. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12674 in perlpolicy.pod
 
       Minimal patches that fix platform-specific test failures. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12768 in perlpolicy.pod
 
-      Documentation updates that correct factual errors, explain significant bugs or d... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12836 in perlpolicy.pod
+      Documentation updates that correct factual errors, explain significant bugs or deficiencies in the current implementation, or fix broken ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12836 in perlpolicy.pod
 
-      Updates to dual-life modules should consist of minimal patches to fix crashing b... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12991 in perlpolicy.pod
+      Updates to dual-life modules should consist of minimal patches to fix crashing bugs or security issues (as above).  Any changes made to d... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12991 in perlpolicy.pod
 
-    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 13289 in perlpolicy.pod
+    null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 13289 in perlpolicy.pod
 
       Patches that break binary compatibility.  (Please talk to a pumpking.) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13296 in perlpolicy.pod
 
@@ -68,9 +68,9 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlpolicy.pod
 
       Patches that add new warnings or errors or deprecate features. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13424 in perlpolicy.pod
 
-      Ports of Perl to a new platform, architecture or OS release that involve changes... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13497 in perlpolicy.pod
+      Ports of Perl to a new platform, architecture or OS release that involve changes to the implementation. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13497 in perlpolicy.pod
 
-      New versions of dual-life modules should NOT be imported into maint. Those belon... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13611 in perlpolicy.pod
+      New versions of dual-life modules should NOT be imported into maint. Those belong in the next stable series. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13611 in perlpolicy.pod
 
     Getting changes into a maint branch in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13882 in perlpolicy.pod
 
@@ -78,11 +78,11 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlpolicy.pod
 
     A Social Contract about Artistic Control in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15682 in perlpolicy.pod
 
-      The version of the module in the Perl core should still be considered the work o... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17713 in perlpolicy.pod
+      The version of the module in the Perl core should still be considered the work of the original author.  All patches, bug reports, and so ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17713 in perlpolicy.pod
 
-      Patches may be applied by the pumpkin holder without the explicit cooperation of... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17963 in perlpolicy.pod
+      Patches may be applied by the pumpkin holder without the explicit cooperation of the module author if and only if they are very minor, ti... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17963 in perlpolicy.pod
 
-      The version of the module distributed with Perl should, whenever possible, be th... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18542 in perlpolicy.pod
+      The version of the module distributed with Perl should, whenever possible, be the latest version of the module as distributed by the auth... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18542 in perlpolicy.pod
 
   DOCUMENTATION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 21657 in perlpolicy.pod
 

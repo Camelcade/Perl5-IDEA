@@ -10,7 +10,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5184delta.pod
 
       Digest::SHA has been upgraded from 5.84_01 to 5.84_02. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 510 in perl5184delta.pod
 
-      perl5db.pl has been upgraded from version 1.39_10 to 1.39_11.  This fixes a cras... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 578 in perl5184delta.pod
+      perl5db.pl has been upgraded from version 1.39_10 to 1.39_11.  This fixes a crash in tab completion, where available. [perl #120827]  Als... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 578 in perl5184delta.pod
 
   Platform Support in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 816 in perl5184delta.pod
 
@@ -18,7 +18,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5184delta.pod
 
       Win32 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 882 in perl5184delta.pod
 
-        Introduced by perl #113536|https://rt.perl.org/Public/Bug/Display.html?id=113536... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 904 in perl5184delta.pod
+        Introduced by perl #113536|https://rt.perl.org/Public/Bug/Display.html?id=113536, a memory leak on every call to system and backticks (``... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 904 in perl5184delta.pod
 
   Selected Bug Fixes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1394 in perl5184delta.pod
 
@@ -26,13 +26,13 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5184delta.pod
 
     A segfault in Digest::SHA has been addressed.  [perl #121421] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1511 in perl5184delta.pod
 
-    perl can again be built with USE_64_BIT_INT, with Visual C 2003, 32 bit. [perl #... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1583 in perl5184delta.pod
+    perl can again be built with USE_64_BIT_INT, with Visual C 2003, 32 bit. [perl #120925] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1583 in perl5184delta.pod
 
     A leading { (brace) in formats is properly parsed again. [perl #119973] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1681 in perl5184delta.pod
 
-    Copy the values used to perturb hash iteration when cloning an interpreter.  Thi... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1763 in perl5184delta.pod
+    Copy the values used to perturb hash iteration when cloning an interpreter.  This was fairly harmless but caused valgrind to complain. [p... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1763 in perl5184delta.pod
 
-    In Perl v5.18 undef *_; goto &sub and local *_; goto &sub started crashing.  Thi... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1926 in perl5184delta.pod
+    In Perl v5.18 undef *_; goto &sub and local *_; goto &sub started crashing.  This has been fixed. [perl #119949] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1926 in perl5184delta.pod
 
   Acknowledgements in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2062 in perl5184delta.pod
 

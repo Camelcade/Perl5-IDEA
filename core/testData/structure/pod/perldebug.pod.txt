@@ -60,7 +60,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perldebug.pod
 
       v [line] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7070 in perldebug.pod
 
-      . in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7160 in perldebug.pod
+      Return the internal debugger pointer to the line last executed, and print out that line. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7160 in perldebug.pod
 
       f filename in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7282 in perldebug.pod
 
@@ -178,7 +178,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perldebug.pod
 
     Configurable Options in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19219 in perldebug.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 19414 in perldebug.pod
+      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 19414 in perldebug.pod
 
         recallCommand, ShellBang in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19424 in perldebug.pod
 
@@ -204,7 +204,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perldebug.pod
 
         windowSize in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23072 in perldebug.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 23270 in perldebug.pod
+      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 23270 in perldebug.pod
 
         arrayDepth, hashDepth in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23280 in perldebug.pod
 
@@ -228,7 +228,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perldebug.pod
 
         HistSize in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25089 in perldebug.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 25801 in perldebug.pod
+      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 25801 in perldebug.pod
 
         TTY in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25811 in perldebug.pod
 

@@ -6,17 +6,17 @@ Documentation in null; /perl5language.png -> POD file at 0 in perluniprops.pod
 
   Properties accessible through \p{} and \P{} in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2217 in perluniprops.pod
 
-    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 4049 in perluniprops.pod
+    null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 4049 in perluniprops.pod
 
       Single form (\p{name}) tighter rules: in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4067 in perluniprops.pod
 
-        * white space adjacent to a non-word character in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4191 in perluniprops.pod
+        white space adjacent to a non-word character in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4191 in perluniprops.pod
 
-        * underscores separating digits in numbers in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4245 in perluniprops.pod
+        underscores separating digits in numbers in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4245 in perluniprops.pod
 
       Compound form (\p{name=value} or \p{name:value}) tighter rules: in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4441 in perluniprops.pod
 
-    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 4952 in perluniprops.pod
+    null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 4952 in perluniprops.pod
 
       Stabilized in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4970 in perluniprops.pod
 
@@ -26,7 +26,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perluniprops.pod
 
       Discouraged in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6509 in perluniprops.pod
 
-    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 11402 in perluniprops.pod
+    null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 11402 in perluniprops.pod
 
       * is a wild-card in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11411 in perluniprops.pod
 

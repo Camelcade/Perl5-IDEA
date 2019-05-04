@@ -10,11 +10,11 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlce.pod
 
     General explanations on cross-compiling WinCE in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 927 in perlce.pod
 
-      miniperl is built. This is a single executable (without DLL), intended to run on... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 988 in perlce.pod
+      miniperl is built. This is a single executable (without DLL), intended to run on Win32, and it will facilitate remaining build process; a... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 988 in perlce.pod
 
-      After miniperl is built, configpm is invoked to create right Config.pm in right ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1336 in perlce.pod
+      After miniperl is built, configpm is invoked to create right Config.pm in right place and its corresponding Cross.pm.  Unlike Win32 build... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1336 in perlce.pod
 
-      During extensions build phase, a script ./win32/buildext.pl is invoked, which in... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2105 in perlce.pod
+      During extensions build phase, a script ./win32/buildext.pl is invoked, which in turn steps in ./ext subdirectories and performs a build ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2105 in perlce.pod
 
     CURRENT BUILD INSTRUCTIONS in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2381 in perlce.pod
 
@@ -22,23 +22,23 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlce.pod
 
       Tools & SDK in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 7668 in perlce.pod
 
-        * Microsoft Embedded Visual Tools in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7733 in perlce.pod
+        Microsoft Embedded Visual Tools in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7733 in perlce.pod
 
-        * Microsoft Visual C++ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7774 in perlce.pod
+        Microsoft Visual C++ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7774 in perlce.pod
 
-        * Rainer Keuchel's celib-sources in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7804 in perlce.pod
+        Rainer Keuchel's celib-sources in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7804 in perlce.pod
 
-        * Rainer Keuchel's console-sources in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7844 in perlce.pod
+        Rainer Keuchel's console-sources in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7844 in perlce.pod
 
       Make in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 7968 in perlce.pod
 
-        * go to ./win32 subdirectory in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8392 in perlce.pod
+        go to ./win32 subdirectory in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8392 in perlce.pod
 
-        * edit file ./win32/ce-helpers/compile.bat in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8431 in perlce.pod
+        edit file ./win32/ce-helpers/compile.bat in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8431 in perlce.pod
 
-        * run    compile.bat in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8484 in perlce.pod
+        run    compile.bat in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8484 in perlce.pod
 
-        * run    compile.bat dist in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8512 in perlce.pod
+        run    compile.bat dist in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8512 in perlce.pod
 
   Using Perl on WinCE in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 10721 in perlce.pod
 

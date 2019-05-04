@@ -28,29 +28,29 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlreguts.pod
 
       What regop is next? in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 8984 in perlreguts.pod
 
-        There is the "next regnode" from a given regnode, a value which is rarely useful... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9127 in perlreguts.pod
+        There is the "next regnode" from a given regnode, a value which is rarely useful except that sometimes it matches up in terms of value wi... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9127 in perlreguts.pod
 
-        There is the "next regop" from a given regop/regnode. This is the regop physical... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9354 in perlreguts.pod
+        There is the "next regop" from a given regop/regnode. This is the regop physically located after the current one, as determined by the si... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9354 in perlreguts.pod
 
-        There is the "regnext" from a given regop. This is the regop which is reached by... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9800 in perlreguts.pod
+        There is the "regnext" from a given regop. This is the regop which is reached by jumping forward by the value of NEXT_OFF(), or in a few ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9800 in perlreguts.pod
 
   Process Overview in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 10207 in perlreguts.pod
 
-    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 10330 in perlreguts.pod
+    null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 10330 in perlreguts.pod
 
       A. Compilation in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10339 in perlreguts.pod
 
-        1. Parsing for size in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10370 in perlreguts.pod
+        Parsing for size in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10370 in perlreguts.pod
 
-        2. Parsing for construction in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10397 in perlreguts.pod
+        Parsing for construction in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10397 in perlreguts.pod
 
-        3. Peep-hole optimisation and analysis in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10432 in perlreguts.pod
+        Peep-hole optimisation and analysis in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10432 in perlreguts.pod
 
       B. Execution in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10485 in perlreguts.pod
 
-        4. Start position and no-match optimisations in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10514 in perlreguts.pod
+        Start position and no-match optimisations in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10514 in perlreguts.pod
 
-        5. Program execution in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10566 in perlreguts.pod
+        Program execution in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10566 in perlreguts.pod
 
     Compilation in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10998 in perlreguts.pod
 
@@ -66,15 +66,15 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlreguts.pod
 
       Peep-hole Optimisation and Analysis in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 25601 in perlreguts.pod
 
-        * anchored fixed strings in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26780 in perlreguts.pod
+        anchored fixed strings in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26780 in perlreguts.pod
 
-        * floating fixed strings in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26812 in perlreguts.pod
+        floating fixed strings in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26812 in perlreguts.pod
 
-        * minimum and maximum length requirements in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26844 in perlreguts.pod
+        minimum and maximum length requirements in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26844 in perlreguts.pod
 
-        * start class in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26893 in perlreguts.pod
+        start class in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26893 in perlreguts.pod
 
-        * Beginning/End of line positions in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26914 in perlreguts.pod
+        Beginning/End of line positions in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26914 in perlreguts.pod
 
     Execution in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 28032 in perlreguts.pod
 

@@ -8,11 +8,11 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlos2.pod
 
     Target in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3510 in perlos2.pod
 
-      Some *nix programs use fork() a lot; with the mostly useful flavors of perl for ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3884 in perlos2.pod
+      Some *nix programs use fork() a lot; with the mostly useful flavors of perl for OS/2 (there are several built simultaneously) this is sup... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3884 in perlos2.pod
 
-      You need a separate perl executable perl__.exe (see /perl__.exe) if you want to ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4232 in perlos2.pod
+      You need a separate perl executable perl__.exe (see /perl__.exe) if you want to use PM code in your application (as Perl/Tk or OpenGL Per... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4232 in perlos2.pod
 
-      There is no simple way to access WPS objects. The only way I know is via OS2::RE... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4640 in perlos2.pod
+      There is no simple way to access WPS objects. The only way I know is via OS2::REXX and SOM extensions (see OS2::REXX, SOM). However, we d... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4640 in perlos2.pod
 
     Other OSes in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5204 in perlos2.pod
 
@@ -30,19 +30,19 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlos2.pod
 
     Starting OS/2 (and DOS) programs under Perl in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10145 in perlos2.pod
 
-      1 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10659 in perlos2.pod
+      One-argument system() (see perlfunc/system), exec() (see perlfunc/exec) with redirection or shell meta-characters; in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10659 in perlos2.pod
 
-      2 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10790 in perlos2.pod
+      Pipe-open (see perlfunc/open) with the command which contains redirection  or shell meta-characters; in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10790 in perlos2.pod
 
-      3 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10904 in perlos2.pod
+      Backticks `` (see perlop/"I/O Operators") with the command which contains redirection or shell meta-characters; in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10904 in perlos2.pod
 
-      4 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11032 in perlos2.pod
+      If the executable called by system()/exec()/pipe-open()/`` is a script with the "magic" #! line or extproc line which specifies shell; in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11032 in perlos2.pod
 
-      5 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11186 in perlos2.pod
+      If the executable called by system()/exec()/pipe-open()/`` is a script without "magic" line, and $ENV{EXECSHELL} is set to shell; in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11186 in perlos2.pod
 
-      6 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11332 in perlos2.pod
+      If the executable called by system()/exec()/pipe-open()/`` is not found (is not this remark obsolete?); in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11332 in perlos2.pod
 
-      7 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11449 in perlos2.pod
+      For globbing (see perlfunc/glob, perlop/"I/O Operators") (obsolete? Perl uses builtin globbing nowadays...). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11449 in perlos2.pod
 
   Frequently asked questions in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 14034 in perlos2.pod
 
@@ -50,9 +50,9 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlos2.pod
 
     I cannot run external programs in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14339 in perlos2.pod
 
-      Did you run your programs with -w switch? See  Starting OS/2 (and DOS) programs ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14387 in perlos2.pod
+      Did you run your programs with -w switch? See  Starting OS/2 (and DOS) programs under Perl. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14387 in perlos2.pod
 
-      Do you try to run internal shell commands, like `copy a b` (internal for cmd.exe... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14500 in perlos2.pod
+      Do you try to run internal shell commands, like `copy a b` (internal for cmd.exe), or `glob a*b` (internal for ksh)? You need to specify ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14500 in perlos2.pod
 
     I cannot embed perl into my program, or use perl.dll from my program. in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14784 in perlos2.pod
 
@@ -132,13 +132,13 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlos2.pod
 
     Testing in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31399 in perlos2.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 31741 in perlos2.pod
+      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 31741 in perlos2.pod
 
         A lot of bad free in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31750 in perlos2.pod
 
         Process terminated by SIGTERM/SIGINT in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31928 in perlos2.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 32763 in perlos2.pod
+      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 32763 in perlos2.pod
 
         op/fs.t in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32772 in perlos2.pod
 
@@ -148,7 +148,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlos2.pod
 
         op/stat.t in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 33076 in perlos2.pod
 
-          4 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 33131 in perlos2.pod
+          Checks atime and mtime of stat() - unfortunately, HPFS provides only 2sec time granularity (for compatibility with FAT?). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 33131 in perlos2.pod
 
     Installing the built perl in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 33286 in perlos2.pod
 
@@ -156,51 +156,54 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlos2.pod
 
   Building a binary distribution in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 34557 in perlos2.pod
 
-    1. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35193 in perlos2.pod
+    Fully build and test the Perl distribution.  Make sure that no tests are failing with test and aout_test targets; fix the bugs in Perl an... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35193 in perlos2.pod
 
-    2. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35504 in perlos2.pod
+    Fully install Perl, including installcmd target.  Copy the generated DLLs to LIBPATH; copy the numbered Perl executables (as in perl5.8.2... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35504 in perlos2.pod
 
-    3. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35887 in perlos2.pod
+    Make sure that CPAN.pm can download files from CPAN.  If not, you may need to manually install Net::FTP. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35887 in perlos2.pod
 
-    4. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36009 in perlos2.pod
+    Install the bundle Bundle::OS2_default   perl5.8.2 -MCPAN -e "install Bundle::OS2_default" < nul |& tee 00cpan_i_1
+ This may take a coupl... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36009 in perlos2.pod
 
-    5. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37665 in perlos2.pod
+    When satisfied with the results, rerun the installcmd target.  Now you can copy perl5.8.2.exe to perl.exe, and install the other OMF-buil... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37665 in perlos2.pod
 
-    6. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37884 in perlos2.pod
+    Change to the ./pod directory of the build tree, download the Perl logo CamelGrayBig.BMP, and run    ( perl2ipf > perl.ipf ) |& tee 00ipf... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37884 in perlos2.pod
 
-    7. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38161 in perlos2.pod
+    Now is the time to build statically linked executable perl_.exe which includes newly-installed via Bundle::OS2_default modules.  Doing te... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38161 in perlos2.pod
 
-    8. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 41156 in perlos2.pod
+    Make sure that the installed modules are actually installed in the location of the new Perl, and are not inherited from entries of @INC g... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 41156 in perlos2.pod
 
-    9. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 42419 in perlos2.pod
+    Now you can generate the binary distribution.  This is done by running the test of the CPAN distribution OS2::SoftInstaller.  Tune up the... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 42419 in perlos2.pod
 
-    10. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43161 in perlos2.pod
+    Share what you did with the other people.  Relax.  Enjoy fruits of your work. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43161 in perlos2.pod
 
-    11. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43251 in perlos2.pod
+    Brace yourself for thanks, bug reports, hate mail and spam coming as result of the previous step.  No good deed should remain unpunished! in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43251 in perlos2.pod
 
   Building custom .EXE files in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 43408 in perlos2.pod
 
     Making executables with a custom collection of statically loaded extensions in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 43611 in perlos2.pod
 
-      1. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43833 in perlos2.pod
+      Change to an empty directory, and create a placeholder <Makefile.PL>:    use ExtUtils::MakeMaker;
+  WriteMakefile NAME => 'dummy'; in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43833 in perlos2.pod
 
-      2. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43975 in perlos2.pod
+      Run it with the flavor of Perl (perl.exe or perl_.exe) you want to rebuild.    perl_ Makefile.PL in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43975 in perlos2.pod
 
-      3. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 44089 in perlos2.pod
+      Ask it to create new Perl executable:    make perl
+ (you may need to manually add PERLTYPE=-DPERL_CORE to this commandline on some versio... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 44089 in perlos2.pod
 
-      4. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 44419 in perlos2.pod
+      The previous step created perlmain.c which contains a list of newXS() calls near the end.  Removing unnecessary calls, and rerunning    m... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 44419 in perlos2.pod
 
     Making executables with a custom search-paths in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 44625 in perlos2.pod
 
-      1. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 45615 in perlos2.pod
+      Looks for Perl DLL in the directory $exedir/../dll; in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 45615 in perlos2.pod
 
-      2. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 45681 in perlos2.pod
+      Prepends the above directory to BEGINLIBPATH; in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 45681 in perlos2.pod
 
-      3. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 45741 in perlos2.pod
+      Fails if the Perl DLL found via BEGINLIBPATH is different from what was loaded on step 1; e.g., another process could have loaded it from... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 45741 in perlos2.pod
 
-      4. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46169 in perlos2.pod
+      Loads Perl library from $exedir/../dll/lib/. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46169 in perlos2.pod
 
-      5. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46228 in perlos2.pod
+      Uses Bourne shell from $exedir/../dll/sh/ksh.exe. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46228 in perlos2.pod
 
   Build FAQ in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 50792 in perlos2.pod
 
@@ -292,9 +295,9 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlos2.pod
 
     Misfeatures in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 60830 in perlos2.pod
 
-      Since flock(3) is present in EMX, but is not functional, it is  emulated by perl... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 60859 in perlos2.pod
+      Since flock(3) is present in EMX, but is not functional, it is  emulated by perl.  To disable the emulations, set environment variable US... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 60859 in perlos2.pod
 
-      Here is the list of things which may be "broken" on EMX (from EMX docs):  *The f... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 61028 in perlos2.pod
+      Here is the list of things which may be "broken" on EMX (from EMX docs):    The functions recvmsg(3), sendmsg(3), and socketpair(3) are n... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 61028 in perlos2.pod
 
         The functions recvmsg(3), sendmsg(3), and socketpair(3) are not implemented. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 61120 in perlos2.pod
 
@@ -306,13 +309,13 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlos2.pod
 
         waitpid(3):        WUNTRACED
 	      Not implemented.
-      waitpid() is not impl... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 61456 in perlos2.pod
+      waitpid() is not implemented for negative values of PID. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 61456 in perlos2.pod
 
       See /"Text-mode filehandles". in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 61661 in perlos2.pod
 
-      Unix-domain sockets on OS/2 live in a pseudo-file-system /sockets/.... To avoid ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 61704 in perlos2.pod
+      Unix-domain sockets on OS/2 live in a pseudo-file-system /sockets/.... To avoid a failure to create a socket with a name of a different f... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 61704 in perlos2.pod
 
-      Apparently, IBM used a compiler (for some period of time around '95?) which chan... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 62067 in perlos2.pod
+      Apparently, IBM used a compiler (for some period of time around '95?) which changes FP mask right and left.  This is not that bad for IBM... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 62067 in perlos2.pod
 
     Modifications in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 64038 in perlos2.pod
 
@@ -338,9 +341,9 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlos2.pod
 
       HMQ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 65791 in perlos2.pod
 
-        the extension needs an HMQ only because some API will not work otherwise. Use se... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 65834 in perlos2.pod
+        the extension needs an HMQ only because some API will not work otherwise. Use serve = 0 below. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 65834 in perlos2.pod
 
-        the extension needs an HMQ since it wants to engage in a PM event loop. Use serv... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 65945 in perlos2.pod
+        the extension needs an HMQ since it wants to engage in a PM event loop. Use serve = 1 below. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 65945 in perlos2.pod
 
       Treating errors reported by OS/2 API in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 66801 in perlos2.pod
 
@@ -406,31 +409,31 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlos2.pod
 
       find the old DLLs looking through the old @INC; in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 81920 in perlos2.pod
 
-      mangle the names according to the scheme of new perl and copy the DLLs to these ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 81978 in perlos2.pod
+      mangle the names according to the scheme of new perl and copy the DLLs to these names; in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 81978 in perlos2.pod
 
-      edit the internal LX tables of DLL to reflect the change of the name (probably n... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 82075 in perlos2.pod
+      edit the internal LX tables of DLL to reflect the change of the name (probably not needed for Perl extension DLLs, since the internally c... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 82075 in perlos2.pod
 
-      edit the internal IMPORT tables and change the name of the "old" perl????.dll to... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 82305 in perlos2.pod
+      edit the internal IMPORT tables and change the name of the "old" perl????.dll to the "new" perl????.dll. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 82305 in perlos2.pod
 
     DLL name mangling: 5.6.2 and beyond in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 82436 in perlos2.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 82649 in perlos2.pod
+      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 82649 in perlos2.pod
 
         Global DLLs in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 82656 in perlos2.pod
 
         specific DLLs in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 82764 in perlos2.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 83095 in perlos2.pod
+      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 83095 in perlos2.pod
 
         BEGINLIBPATH and ENDLIBPATH in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 83102 in perlos2.pod
 
         . from LIBPATH in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 83174 in perlos2.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 85220 in perlos2.pod
+      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 85220 in perlos2.pod
 
-        Old perl executable is started when a new executable is running has loaded an ex... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 85227 in perlos2.pod
+        Old perl executable is started when a new executable is running has loaded an extension compiled for the old executable (ouph!).  In this... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 85227 in perlos2.pod
 
-        A new executable loads an extension compiled for the old executable when an old ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 85632 in perlos2.pod
+        A new executable loads an extension compiled for the old executable when an old perl executable is running.  In this case the extension w... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 85632 in perlos2.pod
 
     DLL forwarder generation in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 86549 in perlos2.pod
 
@@ -438,9 +441,9 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlos2.pod
 
     Calls to external programs in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 87807 in perlos2.pod
 
-      External scripts may be called by their basename.  Perl will try the same extens... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 90242 in perlos2.pod
+      External scripts may be called by their basename.  Perl will try the same extensions as when processing -S command-line switch. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 90242 in perlos2.pod
 
-      External scripts starting with #! or extproc will be executed directly, without ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 90383 in perlos2.pod
+      External scripts starting with #! or extproc will be executed directly, without calling the shell, by calling the program specified on th... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 90383 in perlos2.pod
 
     Memory allocation in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 90570 in perlos2.pod
 

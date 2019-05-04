@@ -10,13 +10,13 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlretut.pod
 
     Using character classes in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13913 in perlretut.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 18308 in perlretut.pod
+      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 18308 in perlretut.pod
 
         \d matches a digit, not just [0-9] but also digits from non-roman scripts in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18317 in perlretut.pod
 
         \s matches a whitespace character, the set [\ \t\r\n\f] and others in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18407 in perlretut.pod
 
-        \w matches a word character (alphanumeric or '_'), not just [0-9a-zA-Z_] but als... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18490 in perlretut.pod
+        \w matches a word character (alphanumeric or '_'), not just [0-9a-zA-Z_] but also digits and characters from non-roman scripts in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18490 in perlretut.pod
 
         \D is a negated \d; it represents any other character than a digit, or [^\d] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18636 in perlretut.pod
 
@@ -24,19 +24,19 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlretut.pod
 
         \W is a negated \w; it represents any non-word character [^\w] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18820 in perlretut.pod
 
-        The period '.' matches any character but "\n" (unless the modifier /s is in effe... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18902 in perlretut.pod
+        The period '.' matches any character but "\n" (unless the modifier /s is in effect, as explained below). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18902 in perlretut.pod
 
-        \N, like the period, matches any character but "\n", but it does so regardless o... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19026 in perlretut.pod
+        \N, like the period, matches any character but "\n", but it does so regardless of whether the modifier /s is in effect. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19026 in perlretut.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 22940 in perlretut.pod
+      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 22940 in perlretut.pod
 
-        no modifiers: Default behavior.  '.' matches any character except "\n".  '^' mat... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22949 in perlretut.pod
+        no modifiers: Default behavior.  '.' matches any character except "\n".  '^' matches only at the beginning of the string and '$' matches ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22949 in perlretut.pod
 
-        s modifier (/s): Treat string as a single long line.  '.' matches any character,... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23156 in perlretut.pod
+        s modifier (/s): Treat string as a single long line.  '.' matches any character, even "\n".  '^' matches only at the beginning of the str... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23156 in perlretut.pod
 
-        m modifier (/m): Treat string as a set of multiple lines.  '.' matches any chara... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23386 in perlretut.pod
+        m modifier (/m): Treat string as a set of multiple lines.  '.' matches any character except "\n".  '^' and '$' are able to match at the s... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23386 in perlretut.pod
 
-        both s and m modifiers (/sm): Treat string as a single long line, but detect mul... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23594 in perlretut.pod
+        both s and m modifiers (/sm): Treat string as a single long line, but detect multiple lines.  '.' matches any character, even "\n".  '^' ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23594 in perlretut.pod
 
     Matching this or that in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 25380 in perlretut.pod
 
@@ -78,7 +78,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlretut.pod
 
     Matching repetitions in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 42660 in perlretut.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 43349 in perlretut.pod
+      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 43349 in perlretut.pod
 
         a? means: match 'a' 1 or 0 times in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43358 in perlretut.pod
 
@@ -92,35 +92,35 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlretut.pod
 
         a{n} means: match exactly n times in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43709 in perlretut.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 46450 in perlretut.pod
+      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 46450 in perlretut.pod
 
-        Principle 0: Taken as a whole, any regexp will be matched at the earliest possib... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46459 in perlretut.pod
+        Principle 0: Taken as a whole, any regexp will be matched at the earliest possible position in the string. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46459 in perlretut.pod
 
-        Principle 1: In an alternation a|b|c..., the leftmost alternative that allows a ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46576 in perlretut.pod
+        Principle 1: In an alternation a|b|c..., the leftmost alternative that allows a match for the whole regexp will be the one used. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46576 in perlretut.pod
 
-        Principle 2: The maximal matching quantifiers '?', '*', '+' and {n,m} will in ge... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46718 in perlretut.pod
+        Principle 2: The maximal matching quantifiers '?', '*', '+' and {n,m} will in general match as much of the string as possible while still... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46718 in perlretut.pod
 
-        Principle 3: If there are two or more elements in a regexp, the leftmost greedy ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46914 in perlretut.pod
+        Principle 3: If there are two or more elements in a regexp, the leftmost greedy quantifier, if any, will match as much of the string as p... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46914 in perlretut.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 49596 in perlretut.pod
+      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 49596 in perlretut.pod
 
         a?? means: match 'a' 0 or 1 times. Try 0 first, then 1. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49605 in perlretut.pod
 
-        a*? means: match 'a' 0 or more times, i.e., any number of times, but as few time... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49677 in perlretut.pod
+        a*? means: match 'a' 0 or more times, i.e., any number of times, but as few times as possible in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49677 in perlretut.pod
 
-        a+? means: match 'a' 1 or more times, i.e., at least once, but as few times as p... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49790 in perlretut.pod
+        a+? means: match 'a' 1 or more times, i.e., at least once, but as few times as possible in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49790 in perlretut.pod
 
-        a{n,m}? means: match at least n times, not more than m times, as few times as po... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49897 in perlretut.pod
+        a{n,m}? means: match at least n times, not more than m times, as few times as possible in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49897 in perlretut.pod
 
         a{n,}? means: match at least n times, but as few times as possible in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50003 in perlretut.pod
 
-        a{n}? means: match exactly n times.  Because we match exactly n times, a{n}? is ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50086 in perlretut.pod
+        a{n}? means: match exactly n times.  Because we match exactly n times, a{n}? is equivalent to a{n} and is just there for notational consi... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50086 in perlretut.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 52494 in perlretut.pod
+      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 52494 in perlretut.pod
 
-        Principle 3: If there are two or more elements in a regexp, the leftmost greedy ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52503 in perlretut.pod
+        Principle 3: If there are two or more elements in a regexp, the leftmost greedy (non-greedy) quantifier, if any, will match as much (litt... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52503 in perlretut.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 53326 in perlretut.pod
+      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 53326 in perlretut.pod
 
         0.  Start with the first letter in the string 't'. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53335 in perlretut.pod
 
@@ -138,11 +138,11 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlretut.pod
 
     Possessive quantifiers in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 55102 in perlretut.pod
 
-      a{n,m}+ means: match at least n times, not more than m times, as many times as p... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56118 in perlretut.pod
+      a{n,m}+ means: match at least n times, not more than m times, as many times as possible, and don't give anything up. a?+ is short for a{0... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56118 in perlretut.pod
 
-      a{n,}+ means: match at least n times, but as many times as possible, and don't g... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56285 in perlretut.pod
+      a{n,}+ means: match at least n times, but as many times as possible, and don't give anything up. a*+ is short for a{0,}+ and a++ is short... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56285 in perlretut.pod
 
-      a{n}+ means: match exactly n times.  It is just there for notational consistency... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56463 in perlretut.pod
+      a{n}+ means: match exactly n times.  It is just there for notational consistency. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56463 in perlretut.pod
 
     Building a regexp in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 57193 in perlretut.pod
 

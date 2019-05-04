@@ -10,23 +10,24 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlxstypemap.pod
 
     Sharing typemaps Between CPAN Distributions in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6772 in perlxstypemap.pod
 
-      Declare ExtUtils::Typemaps::Basic as a build-time dependency in Makefile.PL (use... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7325 in perlxstypemap.pod
+      Declare ExtUtils::Typemaps::Basic as a build-time dependency in Makefile.PL (use BUILD_REQUIRES), or in your Build.PL (use build_requires). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7325 in perlxstypemap.pod
 
-      Include the following line in the XS section of your XS file: (don't break the l... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7490 in perlxstypemap.pod
+      Include the following line in the XS section of your XS file: (don't break the line)    INCLUDE_COMMAND: $^X -MExtUtils::Typemaps::Cmd
+  ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7490 in perlxstypemap.pod
 
     Writing typemap Entries in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7701 in perlxstypemap.pod
 
       $var - the name of the input or output variable, eg. RETVAL for return values. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8471 in perlxstypemap.pod
 
-      $type - the raw C type of the parameter, any : replaced with _. e.g. for a type ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8563 in perlxstypemap.pod
+      $type - the raw C type of the parameter, any : replaced with _. e.g. for a type of Foo::Bar, $type is Foo__Bar in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8563 in perlxstypemap.pod
 
-      $ntype - the supplied type with * replaced with Ptr. e.g. for a type of Foo*, $n... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8702 in perlxstypemap.pod
+      $ntype - the supplied type with * replaced with Ptr. e.g. for a type of Foo*, $ntype is FooPtr in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8702 in perlxstypemap.pod
 
-      $arg - the stack entry, that the parameter is input from or output to, e.g. ST(0... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8825 in perlxstypemap.pod
+      $arg - the stack entry, that the parameter is input from or output to, e.g. ST(0) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8825 in perlxstypemap.pod
 
-      $argoff - the argument stack offset of the argument.  ie. 0 for the first argume... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8923 in perlxstypemap.pod
+      $argoff - the argument stack offset of the argument.  ie. 0 for the first argument, etc. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8923 in perlxstypemap.pod
 
-      $pname - the full name of the XSUB, with including the PACKAGE name, with any PR... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9025 in perlxstypemap.pod
+      $pname - the full name of the XSUB, with including the PACKAGE name, with any PREFIX stripped.  This is the non-ALIAS name. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9025 in perlxstypemap.pod
 
       $Package - the package specified by the most recent PACKAGE keyword. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9168 in perlxstypemap.pod
 

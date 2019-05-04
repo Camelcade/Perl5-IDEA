@@ -26,13 +26,13 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlfaq7.pod
 
     How do I adopt or take over a module already on CPAN? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6763 in perlfaq7.pod
 
-      Get a login for the Perl Authors Upload Server (PAUSE) if you don't already have... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7077 in perlfaq7.pod
+      Get a login for the Perl Authors Upload Server (PAUSE) if you don't already have one: http://pause.perl.org in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7077 in perlfaq7.pod
 
-      Write to modules@perl.org explaining what you did to contact the current maintai... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7198 in perlfaq7.pod
+      Write to modules@perl.org explaining what you did to contact the current maintainer. The PAUSE admins will also try to reach the maintainer. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7198 in perlfaq7.pod
 
-      Post a public message in a heavily trafficked site announcing your intention to ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7349 in perlfaq7.pod
+      Post a public message in a heavily trafficked site announcing your intention to take over the module. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7349 in perlfaq7.pod
 
-      Wait a bit. The PAUSE admins don't want to act too quickly in case the current m... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7461 in perlfaq7.pod
+      Wait a bit. The PAUSE admins don't want to act too quickly in case the current maintainer is on holiday. If there's no response to privat... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7461 in perlfaq7.pod
 
     How do I create a class? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7689 in perlfaq7.pod
 

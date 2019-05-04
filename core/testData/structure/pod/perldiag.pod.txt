@@ -1778,23 +1778,23 @@ Documentation in null; /perl5language.png -> POD file at 0 in perldiag.pod
 
     Unescaped left brace in regex is deprecated here (and will be fatal in Perl 5.32), passed through in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 241650 in perldiag.pod
 
-      as the first character in a pattern, or following ^ indicating to anchor the mat... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 243111 in perldiag.pod
+      as the first character in a pattern, or following ^ indicating to anchor the match to the beginning of a line. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 243111 in perldiag.pod
 
       as the first character following a | indicating alternation. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 243235 in perldiag.pod
 
       as the first character in a parenthesized grouping like   /foo({bar)/
- /foo(?:{b... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 243309 in perldiag.pod
+ /foo(?:{bar)/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 243309 in perldiag.pod
 
       as the first character following a quantifier   /\s*{/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 243404 in perldiag.pod
 
     Unescaped left brace in regex is illegal here in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 243777 in perldiag.pod
 
-      as the first character in a pattern, or following "^" indicating to anchor the m... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 245112 in perldiag.pod
+      as the first character in a pattern, or following "^" indicating to anchor the match to the beginning of a line. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 245112 in perldiag.pod
 
       as the first character following a "|" indicating alternation. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 245238 in perldiag.pod
 
       as the first character in a parenthesized grouping like   /foo({bar)/
- /foo(?:{b... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 245314 in perldiag.pod
+ /foo(?:{bar)/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 245314 in perldiag.pod
 
       as the first character following a quantifier   /\s*{/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 245409 in perldiag.pod
 

@@ -56,7 +56,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlguts.pod
 
     Localizing changes in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 61977 in perlguts.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 63197 in perlguts.pod
+      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 63197 in perlguts.pod
 
         SAVEINT(int i) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 63206 in perlguts.pod
 
@@ -88,7 +88,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlguts.pod
 
         SAVESTACK_POS() in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 65413 in perlguts.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 65775 in perlguts.pod
+      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 65775 in perlguts.pod
 
         SV* save_scalar(GV *gv) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 65784 in perlguts.pod
 
@@ -172,7 +172,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlguts.pod
 
   Internal Functions in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 105570 in perlguts.pod
 
-    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 106859 in perlguts.pod
+    null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 106859 in perlguts.pod
 
       A in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 106868 in perlguts.pod
 
@@ -180,7 +180,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlguts.pod
 
       d in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 107067 in perlguts.pod
 
-    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 107258 in perlguts.pod
+    null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 107258 in perlguts.pod
 
       s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 107267 in perlguts.pod
 
@@ -234,13 +234,13 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlguts.pod
 
     Is there anything else I need to know? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 123217 in perlguts.pod
 
-      There's no way to tell if a char * or U8 * string is UTF-8 or not.  But you can ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 123315 in perlguts.pod
+      There's no way to tell if a char * or U8 * string is UTF-8 or not.  But you can tell if an SV is to be treated as UTF-8 by calling DO_UTF... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 123315 in perlguts.pod
 
-      If a string is UTF-8, always use utf8_to_uvchr_buf to get at the value, unless U... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 123866 in perlguts.pod
+      If a string is UTF-8, always use utf8_to_uvchr_buf to get at the value, unless UTF8_IS_INVARIANT(*s) in which case you can use *s. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 123866 in perlguts.pod
 
-      When writing a character UV to a UTF-8 string, always use uvchr_to_utf8, unless ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 124019 in perlguts.pod
+      When writing a character UV to a UTF-8 string, always use uvchr_to_utf8, unless UVCHR_IS_INVARIANT(uv)) in which case you can use *s = uv. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 124019 in perlguts.pod
 
-      Mixing UTF-8 and non-UTF-8 strings is tricky.  Use bytes_to_utf8 to get a new st... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 124180 in perlguts.pod
+      Mixing UTF-8 and non-UTF-8 strings is tricky.  Use bytes_to_utf8 to get a new string which is UTF-8 encoded, and then combine them. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 124180 in perlguts.pod
 
   Custom Operators in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 124332 in perlguts.pod
 

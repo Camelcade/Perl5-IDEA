@@ -22,15 +22,15 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5143delta.pod
 
     Updated Modules and Pragmata in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1530 in perl5143delta.pod
 
-      PerlIO::scalar was updated to fix a bug in which opening a filehandle to a glob ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1576 in perl5143delta.pod
+      PerlIO::scalar was updated to fix a bug in which opening a filehandle to a glob copy caused assertion failures (under debugging) or hangs... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1576 in perl5143delta.pod
 
       ODBM_File and NDBM_File were updated to allow building on GNU/Hurd. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1773 in perl5143delta.pod
 
-      IPC::Open3 has been updated to fix a regression introduced in perl 5.12, which b... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1857 in perl5143delta.pod
+      IPC::Open3 has been updated to fix a regression introduced in perl 5.12, which broke IPC::Open3::open3($in, $out, $err, '-'). [perl #95748] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1857 in perl5143delta.pod
 
       Digest has been upgraded from version 1.16 to 1.16_01.  See /Security. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2013 in perl5143delta.pod
 
-      Module::CoreList has been updated to version 2.49_04 to add data for this releas... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2100 in perl5143delta.pod
+      Module::CoreList has been updated to version 2.49_04 to add data for this release. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2100 in perl5143delta.pod
 
     Removed Modules and Pragmata in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2203 in perl5143delta.pod
 
@@ -46,7 +46,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5143delta.pod
 
   Configuration and Compilation in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2423 in perl5143delta.pod
 
-    h2ph was updated to search correctly gcc include directories on platforms such a... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2470 in perl5143delta.pod
+    h2ph was updated to search correctly gcc include directories on platforms such as Debian with multi-architecture support. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2470 in perl5143delta.pod
 
     In Configure, the test for procselfexe was refactored into a loop. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2602 in perl5143delta.pod
 
@@ -74,19 +74,19 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5143delta.pod
 
   Bug Fixes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3660 in perl5143delta.pod
 
-    A regression has been fixed that was introduced in 5.14, in /i regular expressio... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3687 in perl5143delta.pod
+    A regression has been fixed that was introduced in 5.14, in /i regular expression matching, in which a match improperly fails if the patt... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3687 in perl5143delta.pod
 
-    In case-insensitive regular expression pattern matching, no longer on UTF-8 enco... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3986 in perl5143delta.pod
+    In case-insensitive regular expression pattern matching, no longer on UTF-8 encoded strings does the scan for the start of match only loo... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3986 in perl5143delta.pod
 
-    The sitecustomize support was made relocatableinc aware, so that -Dusesitecustom... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4229 in perl5143delta.pod
+    The sitecustomize support was made relocatableinc aware, so that -Dusesitecustomize and -Duserelocatableinc may be used together. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4229 in perl5143delta.pod
 
-    The smartmatch operator (~~) was changed so that the right-hand side takes prece... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4369 in perl5143delta.pod
+    The smartmatch operator (~~) was changed so that the right-hand side takes precedence during Any ~~ Object operations. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4369 in perl5143delta.pod
 
-    A bug has been fixed in the tainting support, in which an index() operation on a... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4504 in perl5143delta.pod
+    A bug has been fixed in the tainting support, in which an index() operation on a tainted constant would cause all other constants to beco... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4504 in perl5143delta.pod
 
-    A regression has been fixed that was introduced in perl 5.12, whereby tainting e... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4681 in perl5143delta.pod
+    A regression has been fixed that was introduced in perl 5.12, whereby tainting errors were not correctly propagated through die(). [perl ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4681 in perl5143delta.pod
 
-    A regression has been fixed that was introduced in perl 5.14, in which /[[:lower... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4840 in perl5143delta.pod
+    A regression has been fixed that was introduced in perl 5.14, in which /[[:lower:]]/i and /[[:upper:]]/i no longer matched the opposite c... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4840 in perl5143delta.pod
 
   Acknowledgements in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 5020 in perl5143delta.pod
 

@@ -18,14 +18,15 @@ package com.perl5.lang.pod.idea.structureView;
 
 import com.intellij.ide.structureView.StructureViewTreeElement;
 import com.intellij.ide.structureView.impl.common.PsiTreeElementBase;
-import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.navigation.ItemPresentation;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.perl5.PerlBundle;
 import com.perl5.PerlIcons;
-import com.perl5.lang.pod.parser.psi.*;
-import com.perl5.lang.pod.parser.psi.mixin.PodSectionItem;
-import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
+import com.perl5.lang.pod.parser.psi.PodFile;
+import com.perl5.lang.pod.parser.psi.PodSection;
+import com.perl5.lang.pod.parser.psi.PodSectionOver;
+import com.perl5.lang.pod.parser.psi.PodStructureElement;
 import com.perl5.lang.pod.psi.PsiCutSection;
 import com.perl5.lang.pod.psi.PsiPodSection;
 import org.jetbrains.annotations.NotNull;
@@ -37,9 +38,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by hurricup on 03.04.2016.
- */
 public class PodStructureViewElement extends PsiTreeElementBase<PsiElement> {
 
   public PodStructureViewElement(PsiElement element) {
@@ -56,31 +54,9 @@ public class PodStructureViewElement extends PsiTreeElementBase<PsiElement> {
     if (element instanceof PodFile) {
       return PerlBundle.message("pod.structure.view.file.title");
     }
-    else if (element instanceof PodTitledSection) {
-      String title = null;
-      if (element instanceof PodSectionItem && ((PodSectionItem)element).isBulleted()) {
-        PsiElement itemContent = ((PodSectionItem)element).getContentBlock();
-        if (itemContent != null) {
-          title = PodRenderUtil.renderPsiElementAsText(itemContent);
-          if (title.length() > 80) {
-            title = title.substring(0, 80) + "...";
-          }
-        }
-      }
-
-      if (title == null) {
-        title = ((PodTitledSection)element).getTitleText();
-      }
-      if (StringUtil.isNotEmpty(title)) {
-        return title;
-      }
+    else if (element instanceof ItemPresentation) {
+      return ((ItemPresentation)element).getPresentableText();
     }
-
-    PsiElement tag = element.getFirstChild();
-    if (tag != null) {
-      return tag.getText();
-    }
-
     return null;
   }
 

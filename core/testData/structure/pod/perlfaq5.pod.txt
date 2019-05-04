@@ -46,11 +46,11 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlfaq5.pod
 
     How can I lock a file? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 30575 in perlfaq5.pod
 
-      1 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30979 in perlfaq5.pod
+      Produces a fatal error if none of the three system calls (or their close equivalent) exists. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30979 in perlfaq5.pod
 
-      2 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31082 in perlfaq5.pod
+      lockf(3) does not provide shared locking, and requires that the filehandle be open for writing (or appending, or read/writing). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31082 in perlfaq5.pod
 
-      3 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31220 in perlfaq5.pod
+      Some versions of flock() can't lock files over a network (e.g. on NFS file systems), so you'd need to force the use of fcntl(2) when you ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31220 in perlfaq5.pod
 
     Why can't I just open(FH, ">file.lock")? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 32527 in perlfaq5.pod
 

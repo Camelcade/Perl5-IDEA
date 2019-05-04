@@ -10,7 +10,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl585delta.pod
 
   Modules and Pragmata in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 494 in perl585delta.pod
 
-    Carp improved to work nicely with Safe. Carp's message reporting should now be a... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 532 in perl585delta.pod
+    Carp improved to work nicely with Safe. Carp's message reporting should now be anomaly free - it will always print out line number inform... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 532 in perl585delta.pod
 
     CGI upgraded to version 3.05 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 686 in perl585delta.pod
 
@@ -34,7 +34,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl585delta.pod
 
     Scalar-List-Utils upgraded to version 1.14 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1126 in perl585delta.pod
 
-    Shell's documentation has been re-written, and its historical partial auto-quoti... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1179 in perl585delta.pod
+    Shell's documentation has been re-written, and its historical partial auto-quoting of command arguments can now be disabled. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1179 in perl585delta.pod
 
     Test upgraded to version 1.25 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1314 in perl585delta.pod
 
@@ -56,35 +56,36 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl585delta.pod
 
   Selected Bug Fixes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2219 in perl585delta.pod
 
-    The in-place sort optimisation introduced in 5.8.4 had a bug. For example, in co... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2255 in perl585delta.pod
+    The in-place sort optimisation introduced in 5.8.4 had a bug. For example, in code such as      @a = sort ($b, @a)
+ the result would omit... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2255 in perl585delta.pod
 
-    The optimisation for unnecessary assignments introduced in 5.8.4 could give spur... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2436 in perl585delta.pod
+    The optimisation for unnecessary assignments introduced in 5.8.4 could give spurious warnings. This has been fixed. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2436 in perl585delta.pod
 
-    Perl should now correctly detect and read BOM-marked and (BOMless) UTF-16 script... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2562 in perl585delta.pod
+    Perl should now correctly detect and read BOM-marked and (BOMless) UTF-16 scripts of either endianness. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2562 in perl585delta.pod
 
-    Creating a new thread when weak references exist was buggy, and would often caus... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2676 in perl585delta.pod
+    Creating a new thread when weak references exist was buggy, and would often cause warnings at interpreter destruction time. The known bug... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2676 in perl585delta.pod
 
-    Several obscure bugs involving manipulating Unicode strings with substr have bee... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2838 in perl585delta.pod
+    Several obscure bugs involving manipulating Unicode strings with substr have been fixed. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2838 in perl585delta.pod
 
-    Previously if Perl's file globbing function encountered a directory that it did ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2940 in perl585delta.pod
+    Previously if Perl's file globbing function encountered a directory that it did not have permission to open it would return immediately, ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2940 in perl585delta.pod
 
-    Thread creation time could vary wildly between identical runs. This was caused b... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3220 in perl585delta.pod
+    Thread creation time could vary wildly between identical runs. This was caused by a poor hashing algorithm in the thread cloning routines... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3220 in perl585delta.pod
 
-    The internals of the ithreads implementation were not checking if OS-level threa... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3395 in perl585delta.pod
+    The internals of the ithreads implementation were not checking if OS-level thread creation had failed. threads->create() now returns unde... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3395 in perl585delta.pod
 
   New or Changed Diagnostics in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3608 in perl585delta.pod
 
-    Perl -V has several improvements  *correctly outputs local patch names that cont... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3652 in perl585delta.pod
+    Perl -V has several improvements    correctly outputs local patch names that contain embedded code snippets or other characters that used... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3652 in perl585delta.pod
 
-      correctly outputs local patch names that contain embedded code snippets or other... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3704 in perl585delta.pod
+      correctly outputs local patch names that contain embedded code snippets or other characters that used to confuse it. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3704 in perl585delta.pod
 
       arguments to -V that look like regexps will give multiple lines of output. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3832 in perl585delta.pod
 
-      a trailing colon suppresses the linefeed and ';'  terminator, allowing embedding... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3918 in perl585delta.pod
+      a trailing colon suppresses the linefeed and ';'  terminator, allowing embedding of queries into shell commands. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3918 in perl585delta.pod
 
-      a leading colon removes the 'name=' part of the response, allowing mapping to an... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4041 in perl585delta.pod
+      a leading colon removes the 'name=' part of the response, allowing mapping to any name. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4041 in perl585delta.pod
 
-    When perl fails to find the specified script, it now outputs a second line sugge... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4146 in perl585delta.pod
+    When perl fails to find the specified script, it now outputs a second line suggesting that the user use the -S flag:      $ perl5.8.5 mis... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4146 in perl585delta.pod
 
   Changed Internals in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4414 in perl585delta.pod
 

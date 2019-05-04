@@ -158,47 +158,47 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5100delta.pod
 
     New modules in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 27253 in perl5100delta.pod
 
-      encoding::warnings, by Audrey Tang, is a module to emit warnings whenever an ASC... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 27282 in perl5100delta.pod
+      encoding::warnings, by Audrey Tang, is a module to emit warnings whenever an ASCII character string containing high-bit bytes is implicit... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 27282 in perl5100delta.pod
 
-      Module::CoreList, by Richard Clamp, is a small handy module that tells you what ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 27535 in perl5100delta.pod
+      Module::CoreList, by Richard Clamp, is a small handy module that tells you what versions of core modules ship with any versions of Perl 5... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 27535 in perl5100delta.pod
 
-      Math::BigInt::FastCalc is an XS-enabled, and thus faster, version of Math::BigIn... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 27739 in perl5100delta.pod
+      Math::BigInt::FastCalc is an XS-enabled, and thus faster, version of Math::BigInt::Calc. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 27739 in perl5100delta.pod
 
-      Compress::Zlib is an interface to the zlib compression library. It comes with a ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 27844 in perl5100delta.pod
+      Compress::Zlib is an interface to the zlib compression library. It comes with a bundled version of zlib, so having a working zlib is not ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 27844 in perl5100delta.pod
 
       IO::Zlib is an IO::-style interface to Compress::Zlib. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28066 in perl5100delta.pod
 
       Archive::Tar is a module to manipulate tar archives. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28140 in perl5100delta.pod
 
-      Digest::SHA is a module used to calculate many types of SHA digests, has been in... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28209 in perl5100delta.pod
+      Digest::SHA is a module used to calculate many types of SHA digests, has been included for SHA support in the CPAN module. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28209 in perl5100delta.pod
 
       ExtUtils::CBuilder and ExtUtils::ParseXS have been added. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28345 in perl5100delta.pod
 
-      Hash::Util::FieldHash, by Anno Siegel, has been added. This module provides supp... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28419 in perl5100delta.pod
+      Hash::Util::FieldHash, by Anno Siegel, has been added. This module provides support for field hashes: hashes that maintain an association... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28419 in perl5100delta.pod
 
-      Module::Build, by Ken Williams, has been added. It's an alternative to ExtUtils:... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28698 in perl5100delta.pod
+      Module::Build, by Ken Williams, has been added. It's an alternative to ExtUtils::MakeMaker to build and install perl modules. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28698 in perl5100delta.pod
 
-      Module::Load, by Jos Boumans, has been added. It provides a single interface to ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28840 in perl5100delta.pod
+      Module::Load, by Jos Boumans, has been added. It provides a single interface to load Perl modules and .pl files. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28840 in perl5100delta.pod
 
-      Module::Loaded, by Jos Boumans, has been added. It's used to mark modules as loa... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28969 in perl5100delta.pod
+      Module::Loaded, by Jos Boumans, has been added. It's used to mark modules as loaded or unloaded. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28969 in perl5100delta.pod
 
-      Package::Constants, by Jos Boumans, has been added. It's a simple helper to list... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29079 in perl5100delta.pod
+      Package::Constants, by Jos Boumans, has been added. It's a simple helper to list all constants declared in a given package. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29079 in perl5100delta.pod
 
-      Win32API::File, by Tye McQueen, has been added (for Windows builds). This module... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29216 in perl5100delta.pod
+      Win32API::File, by Tye McQueen, has been added (for Windows builds). This module provides low-level access to Win32 system API calls for ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29216 in perl5100delta.pod
 
-      Locale::Maketext::Simple, needed by CPANPLUS, is a simple wrapper around Locale:... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29378 in perl5100delta.pod
+      Locale::Maketext::Simple, needed by CPANPLUS, is a simple wrapper around Locale::Maketext::Lexicon. Note that Locale::Maketext::Lexicon i... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29378 in perl5100delta.pod
 
-      Params::Check implements a generic input parsing/checking mechanism. It is used ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29661 in perl5100delta.pod
+      Params::Check implements a generic input parsing/checking mechanism. It is used by CPANPLUS. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29661 in perl5100delta.pod
 
       Term::UI simplifies the task to ask questions at a terminal prompt. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29767 in perl5100delta.pod
 
       Object::Accessor provides an interface to create per-object accessors. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29848 in perl5100delta.pod
 
-      Module::Pluggable is a simple framework to create modules that accept pluggable ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29932 in perl5100delta.pod
+      Module::Pluggable is a simple framework to create modules that accept pluggable sub-modules. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29932 in perl5100delta.pod
 
-      Module::Load::Conditional provides simple ways to query and possibly load instal... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30038 in perl5100delta.pod
+      Module::Load::Conditional provides simple ways to query and possibly load installed modules. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30038 in perl5100delta.pod
 
-      Time::Piece provides an object oriented interface to time functions, overriding ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30144 in perl5100delta.pod
+      Time::Piece provides an object oriented interface to time functions, overriding the built-ins localtime() and gmtime(). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30144 in perl5100delta.pod
 
       IPC::Cmd helps to find and run external commands, possibly interactively. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30277 in perl5100delta.pod
 
@@ -206,13 +206,13 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5100delta.pod
 
       Log::Message and Log::Message::Simple are used by the log facility of CPANPLUS. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30439 in perl5100delta.pod
 
-      Archive::Extract is a generic archive extraction mechanism for .tar (plain, gzip... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30538 in perl5100delta.pod
+      Archive::Extract is a generic archive extraction mechanism for .tar (plain, gzipped or bzipped) or .zip files. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30538 in perl5100delta.pod
 
       CPANPLUS provides an API and a command-line tool to access the CPAN mirrors. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30668 in perl5100delta.pod
 
-      Pod::Escapes provides utilities that are useful in decoding Pod E<...> sequences... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30758 in perl5100delta.pod
+      Pod::Escapes provides utilities that are useful in decoding Pod E<...> sequences. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30758 in perl5100delta.pod
 
-      Pod::Simple is now the backend for several of the Pod-related modules included w... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30861 in perl5100delta.pod
+      Pod::Simple is now the backend for several of the Pod-related modules included with Perl. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30861 in perl5100delta.pod
 
     Selected Changes to Core Modules in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 30971 in perl5100delta.pod
 

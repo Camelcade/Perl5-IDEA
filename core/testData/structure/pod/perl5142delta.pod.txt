@@ -22,13 +22,13 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5142delta.pod
 
     Updated Modules and Pragmata in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1430 in perl5142delta.pod
 
-      CPAN has been upgraded from version 1.9600 to version 1.9600_01.  CPAN::Distribu... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1476 in perl5142delta.pod
+      CPAN has been upgraded from version 1.9600 to version 1.9600_01.  CPAN::Distribution has been upgraded from version 1.9602 to 1.9602_01. ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1476 in perl5142delta.pod
 
       Encode has been upgraded from version 2.42 to 2.42_01.  See /Security. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1990 in perl5142delta.pod
 
       File::Glob has been upgraded from version 1.12 to version 1.13.  See /Security. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2077 in perl5142delta.pod
 
-      PerlIO::scalar has been upgraded from version 0.11 to 0.11_01.  It fixes a probl... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2173 in perl5142delta.pod
+      PerlIO::scalar has been upgraded from version 0.11 to 0.11_01.  It fixes a problem with open my $fh, ">", \$scalar not working if $scalar... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2173 in perl5142delta.pod
 
     Removed Modules and Pragmata in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2368 in perl5142delta.pod
 
@@ -46,25 +46,25 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5142delta.pod
 
   Bug Fixes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2838 in perl5142delta.pod
 
-    In @INC filters (subroutines returned by subroutines in @INC), $_ used to misbeh... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2865 in perl5142delta.pod
+    In @INC filters (subroutines returned by subroutines in @INC), $_ used to misbehave: If returned from a subroutine, it would not be copie... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2865 in perl5142delta.pod
 
-    Perl 5.10.0 introduced some faulty logic that made "U*" in the middle of a pack ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3161 in perl5142delta.pod
+    Perl 5.10.0 introduced some faulty logic that made "U*" in the middle of a pack template equivalent to "U0" if the input string was empty... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3161 in perl5142delta.pod
 
-    caller no longer leaks memory when called from the DB package if @DB::args was a... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3346 in perl5142delta.pod
+    caller no longer leaks memory when called from the DB package if @DB::args was assigned to after the first call to caller.  Carp was trig... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3346 in perl5142delta.pod
 
-    utf8::decode had a nasty bug that would modify copy-on-write scalars' string buf... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3536 in perl5142delta.pod
+    utf8::decode had a nasty bug that would modify copy-on-write scalars' string buffers in place (i.e., skipping the copy).  This could resu... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3536 in perl5142delta.pod
 
-    Localising a tied variable used to make it read-only if it contained a copy-on-w... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3752 in perl5142delta.pod
+    Localising a tied variable used to make it read-only if it contained a copy-on-write string. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3752 in perl5142delta.pod
 
-    Elements of restricted hashes (see the fields pragma) containing copy-on-write v... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3855 in perl5142delta.pod
+    Elements of restricted hashes (see the fields pragma) containing copy-on-write values couldn't be deleted, nor could such hashes be clear... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3855 in perl5142delta.pod
 
-    Locking a hash element that is a glob copy no longer causes subsequent assignmen... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4025 in perl5142delta.pod
+    Locking a hash element that is a glob copy no longer causes subsequent assignment to it to corrupt the glob. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4025 in perl5142delta.pod
 
-    A panic involving the combination of the regular expression modifiers /aa introd... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4144 in perl5142delta.pod
+    A panic involving the combination of the regular expression modifiers /aa introduced in 5.14.0 and the \b escape sequence has been fixed ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4144 in perl5142delta.pod
 
   Known Problems in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4319 in perl5142delta.pod
 
-    PERL_GLOBAL_STRUCT is broken.  Since perl 5.14.0, building with -DPERL_GLOBAL_ST... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4436 in perl5142delta.pod
+    PERL_GLOBAL_STRUCT is broken.  Since perl 5.14.0, building with -DPERL_GLOBAL_STRUCT hasn't been possible. This means that perl currently... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4436 in perl5142delta.pod
 
   Acknowledgements in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4906 in perl5142delta.pod
 

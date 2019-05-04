@@ -6,7 +6,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlmodinstall.pod
 
     PREAMBLE in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 656 in perlmodinstall.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 1358 in perlmodinstall.pod
+      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 1358 in perlmodinstall.pod
 
         DECOMPRESS the file in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1367 in perlmodinstall.pod
 
@@ -16,28 +16,28 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlmodinstall.pod
 
         INSTALL the module. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1491 in perlmodinstall.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 2446 in perlmodinstall.pod
+      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 2446 in perlmodinstall.pod
 
-        If you're on a Unix or Unix-like system,  You can use Andreas Koenig's CPAN modu... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2455 in perlmodinstall.pod
+        If you're on a Unix or Unix-like system,  You can use Andreas Koenig's CPAN module ( http://www.cpan.org/modules/by-module/CPAN ) to auto... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2455 in perlmodinstall.pod
 
-        If you're running ActivePerl (Win95/98/2K/NT/XP, Linux, Solaris),  First, type p... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3817 in perlmodinstall.pod
+        If you're running ActivePerl (Win95/98/2K/NT/XP, Linux, Solaris),  First, type ppm from a shell and see whether ActiveState's PPM reposit... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3817 in perlmodinstall.pod
 
         If you're on the DJGPP port of DOS,     A. DECOMPRESS
- djtarx ( ftp://ftp.delori... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5224 in perlmodinstall.pod
+ djtarx ( ftp://ftp.delorie.com/pub/djgpp/current/v2/ ) will both uncompress and un... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5224 in perlmodinstall.pod
 
-        If you're on OS/2,  Get the EMX development suite and gzip/tar, from either Hobb... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5744 in perlmodinstall.pod
+        If you're on OS/2,  Get the EMX development suite and gzip/tar, from either Hobbes ( http://hobbes.nmsu.edu ) or Leo ( http://www.leo.org... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5744 in perlmodinstall.pod
 
-        If you're on VMS,  When downloading from CPAN, save your file with a .tgz extens... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5947 in perlmodinstall.pod
+        If you're on VMS,  When downloading from CPAN, save your file with a .tgz extension instead of .tar.gz.  All other periods in the filenam... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5947 in perlmodinstall.pod
 
-        If you're on MVS,  Introduce the .tar.gz file into an HFS as binary; don't trans... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7208 in perlmodinstall.pod
+        If you're on MVS,  Introduce the .tar.gz file into an HFS as binary; don't translate from ASCII to EBCDIC.  A. DECOMPRESS  Decompress the... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7208 in perlmodinstall.pod
 
   PORTABILITY in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 7760 in perlmodinstall.pod
 
-    Those that should, but don't.  These need to be fixed; consider contacting the a... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8119 in perlmodinstall.pod
+    Those that should, but don't.  These need to be fixed; consider contacting the author and possibly writing a patch. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8119 in perlmodinstall.pod
 
-    Those that need to be compiled, where the target platform doesn't have compilers... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8248 in perlmodinstall.pod
+    Those that need to be compiled, where the target platform doesn't have compilers readily available.  (These modules contain .xs or .c fil... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8248 in perlmodinstall.pod
 
-    Those that are targeted at a specific platform. (Such as the Win32:: modules.)  ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8615 in perlmodinstall.pod
+    Those that are targeted at a specific platform. (Such as the Win32:: modules.)  If the module is targeted specifically at a platform othe... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8615 in perlmodinstall.pod
 
   HEY in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 9188 in perlmodinstall.pod
 

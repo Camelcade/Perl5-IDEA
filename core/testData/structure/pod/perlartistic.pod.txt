@@ -26,11 +26,11 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlartistic.pod
 
     Conditions in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2258 in perlartistic.pod
 
-      1. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2284 in perlartistic.pod
+      You may make and give away verbatim copies of the source form of the Standard Version of this Package without restriction, provided that ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2284 in perlartistic.pod
 
-      2. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2512 in perlartistic.pod
+      You may apply bug fixes, portability fixes and other modifications derived from the Public Domain or from the Copyright Holder.  A Packag... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2512 in perlartistic.pod
 
-      3. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2733 in perlartistic.pod
+      You may otherwise modify your copy of this Package in any way, provided that you insert a prominent notice in each changed file stating h... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2733 in perlartistic.pod
 
         a) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2979 in perlartistic.pod
 
@@ -40,7 +40,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlartistic.pod
 
         d) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3678 in perlartistic.pod
 
-      4. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3760 in perlartistic.pod
+      You may distribute the programs of this Package in object code or executable form, provided that you do at least ONE of the following:  a... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3760 in perlartistic.pod
 
         a) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3913 in perlartistic.pod
 
@@ -50,15 +50,15 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlartistic.pod
 
         d) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4399 in perlartistic.pod
 
-      5. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4481 in perlartistic.pod
+      You may charge a reasonable copying fee for any distribution of this Package.  You may charge any fee you choose for support of this Pack... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4481 in perlartistic.pod
 
-      6. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5140 in perlartistic.pod
+      The scripts and library files supplied as input to or produced as output from the programs of this Package do not automatically fall unde... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5140 in perlartistic.pod
 
-      7. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5843 in perlartistic.pod
+      C subroutines (or comparably compiled subroutines in other languages) supplied by you and linked into this Package in order to emulate su... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5843 in perlartistic.pod
 
-      8. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6284 in perlartistic.pod
+      Aggregation of this Package with a commercial distribution is always permitted provided that the use of this Package is embedded; that is... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6284 in perlartistic.pod
 
-      9. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6622 in perlartistic.pod
+      The name of the Copyright Holder may not be used to endorse or promote products derived from this software without specific prior written... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6622 in perlartistic.pod
 
-      10. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6784 in perlartistic.pod
+      THIS PACKAGE IS PROVIDED "AS IS" AND WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6784 in perlartistic.pod
 

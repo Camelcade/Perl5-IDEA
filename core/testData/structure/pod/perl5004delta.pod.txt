@@ -190,9 +190,9 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5004delta.pod
 
       Made negative subscripts work with RECNO interface. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35179 in perl5004delta.pod
 
-      Changed the default flags from O_RDWR to O_CREAT|O_RDWR and the default mode fro... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35241 in perl5004delta.pod
+      Changed the default flags from O_RDWR to O_CREAT|O_RDWR and the default mode from 0640 to 0666. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35241 in perl5004delta.pod
 
-      Made DB_File automatically import the open() constants (O_RDWR, O_CREAT etc.) fr... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35347 in perl5004delta.pod
+      Made DB_File automatically import the open() constants (O_RDWR, O_CREAT etc.) from Fcntl, if available. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35347 in perl5004delta.pod
 
       Updated documentation. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35461 in perl5004delta.pod
 

@@ -28,9 +28,9 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlxstut.pod
 
     What's new here? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14750 in perlxstut.pod
 
-      We've made some changes to Makefile.PL.  In this case, we've specified an extra ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14784 in perlxstut.pod
+      We've made some changes to Makefile.PL.  In this case, we've specified an extra library to be linked into the extension's shared library,... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14784 in perlxstut.pod
 
-      The value of the function is not being passed back as the function's return valu... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15053 in perlxstut.pod
+      The value of the function is not being passed back as the function's return value, but by changing the value of the variable that was pas... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15053 in perlxstut.pod
 
     Input and Output Parameters in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15322 in perlxstut.pod
 
@@ -44,15 +44,15 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlxstut.pod
 
     What has happened here? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23227 in perlxstut.pod
 
-      In the .xs file, there's now a #include directive with the absolute path to the ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23415 in perlxstut.pod
+      In the .xs file, there's now a #include directive with the absolute path to the mylib.h header file.  We changed this to a relative path ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23415 in perlxstut.pod
 
-      There's now some new C code that's been added to the .xs file.  The purpose of t... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23625 in perlxstut.pod
+      There's now some new C code that's been added to the .xs file.  The purpose of the constant routine is to make the values that are #defin... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23625 in perlxstut.pod
 
-      The .pm file originally exported the name TESTVAL in the @EXPORT array. This cou... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23954 in perlxstut.pod
+      The .pm file originally exported the name TESTVAL in the @EXPORT array. This could lead to name clashes.  A good rule of thumb is that if... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23954 in perlxstut.pod
 
-      If our include file had contained #include directives, these would not have been... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24422 in perlxstut.pod
+      If our include file had contained #include directives, these would not have been processed by h2xs.  There is no good solution to this ri... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24422 in perlxstut.pod
 
-      We've also told Perl about the library that we built in the mylib subdirectory. ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24578 in perlxstut.pod
+      We've also told Perl about the library that we built in the mylib subdirectory.  That required only the addition of the MYEXTLIB variable... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24578 in perlxstut.pod
 
     Anatomy of .xs file in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 25183 in perlxstut.pod
 
@@ -72,31 +72,31 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlxstut.pod
 
     New Things in this Example in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 37528 in perlxstut.pod
 
-      The INIT: directive contains code that will be placed immediately after the argu... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37650 in perlxstut.pod
+      The INIT: directive contains code that will be placed immediately after the argument stack is decoded.  C does not allow variable declara... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37650 in perlxstut.pod
 
-      This routine also returns a different number of arguments depending on the succe... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38032 in perlxstut.pod
+      This routine also returns a different number of arguments depending on the success or failure of the call to statfs.  If there is an erro... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38032 in perlxstut.pod
 
-      When we want to place values to be returned to the caller onto the stack, we use... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38621 in perlxstut.pod
+      When we want to place values to be returned to the caller onto the stack, we use the series of macros that begin with "XPUSH".  There are... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38621 in perlxstut.pod
 
-      The values pushed onto the return stack of the XSUB are actually mortal SV's. Th... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39204 in perlxstut.pod
+      The values pushed onto the return stack of the XSUB are actually mortal SV's. They are made mortal so that once the values are copied by ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39204 in perlxstut.pod
 
-      If we were interested in performance, not in code compactness, in the success br... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39576 in perlxstut.pod
+      If we were interested in performance, not in code compactness, in the success branch we would not use XPUSHs macros, but PUSHs macros, an... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39576 in perlxstut.pod
 
     EXAMPLE 6 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 40204 in perlxstut.pod
 
     New Things in this Example in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 42138 in perlxstut.pod
 
-      This function does not use a typemap.  Instead, we declare it as accepting one S... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 42252 in perlxstut.pod
+      This function does not use a typemap.  Instead, we declare it as accepting one SV* (scalar) parameter, and returning an SV* value, and we... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 42252 in perlxstut.pod
 
-      When dealing with references, it is important to handle them with caution. The I... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 42588 in perlxstut.pod
+      When dealing with references, it is important to handle them with caution. The INIT: block first calls SvGETMAGIC(paths), in case paths i... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 42588 in perlxstut.pod
 
-      We manipulate several arrays in this XSUB.  Note that an array is represented in... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43346 in perlxstut.pod
+      We manipulate several arrays in this XSUB.  Note that an array is represented internally by an AV* pointer.  The functions and macros for... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43346 in perlxstut.pod
 
-      We are performing only one hash operation in this function, which is storing a n... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 44416 in perlxstut.pod
+      We are performing only one hash operation in this function, which is storing a new scalar under a key using hv_store.  A hash is represen... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 44416 in perlxstut.pod
 
-      To create a reference, we use the newRV_inc function.  Note that you can cast an... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 44745 in perlxstut.pod
+      To create a reference, we use the newRV_inc function.  Note that you can cast an AV* or an HV* to type SV* in this case (and many others)... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 44745 in perlxstut.pod
 
-      At this point, xsubpp is doing very little work - the differences between Mytest... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 45157 in perlxstut.pod
+      At this point, xsubpp is doing very little work - the differences between Mytest.xs and Mytest.c are minimal. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 45157 in perlxstut.pod
 
     EXAMPLE 7 (Coming Soon) in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 45284 in perlxstut.pod
 
@@ -106,13 +106,13 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlxstut.pod
 
     Troubleshooting these Examples in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 48709 in perlxstut.pod
 
-      In versions of 5.002 prior to the gamma version, the test script in Example 1 wi... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48898 in perlxstut.pod
+      In versions of 5.002 prior to the gamma version, the test script in Example 1 will not function properly.  You need to change the "use li... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48898 in perlxstut.pod
 
-      In versions of 5.002 prior to version 5.002b1h, the test.pl file was not automat... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49082 in perlxstut.pod
+      In versions of 5.002 prior to version 5.002b1h, the test.pl file was not automatically created by h2xs.  This means that you cannot say "... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49082 in perlxstut.pod
 
-      In versions 5.000 and 5.001, instead of using the above line, you will need to u... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49363 in perlxstut.pod
+      In versions 5.000 and 5.001, instead of using the above line, you will need to use the following line:  	BEGIN { unshift(@INC, "./blib") } in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49363 in perlxstut.pod
 
-      This document assumes that the executable named "perl" is Perl version 5. Some s... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49512 in perlxstut.pod
+      This document assumes that the executable named "perl" is Perl version 5. Some systems may have installed Perl version 5 as "perl5". in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49512 in perlxstut.pod
 
   See also in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 49662 in perlxstut.pod
 

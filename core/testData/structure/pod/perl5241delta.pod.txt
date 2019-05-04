@@ -68,7 +68,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5241delta.pod
 
       Test::Harness has been upgraded from version 3.36 to 3.36_01. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4644 in perl5241delta.pod
 
-      XSLoader has been upgraded from version 0.21 to 0.22, fixing a security hole in ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4719 in perl5241delta.pod
+      XSLoader has been upgraded from version 0.21 to 0.22, fixing a security hole in which binary files could be loaded from a path outside of... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4719 in perl5241delta.pod
 
   Documentation in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4958 in perl5241delta.pod
 
@@ -80,15 +80,15 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5241delta.pod
 
       perlrun in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 5123 in perl5241delta.pod
 
-        The new -Di switch has been documented, and the documentation of PERLIO_DEBUG ha... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5151 in perl5241delta.pod
+        The new -Di switch has been documented, and the documentation of PERLIO_DEBUG has been updated. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5151 in perl5241delta.pod
 
   Testing in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 5270 in perl5241delta.pod
 
-    A new test script, t/run/switchDx.t, has been added to test that the new -Di swi... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5295 in perl5241delta.pod
+    A new test script, t/run/switchDx.t, has been added to test that the new -Di switch is working correctly. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5295 in perl5241delta.pod
 
   Selected Bug Fixes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 5424 in perl5241delta.pod
 
-    The change to hashbang redirection introduced in Perl 5.24.0, whereby perl would... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5460 in perl5241delta.pod
+    The change to hashbang redirection introduced in Perl 5.24.0, whereby perl would redirect to another interpreter (Perl 6) if it found a h... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5460 in perl5241delta.pod
 
   Acknowledgements in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 5745 in perl5241delta.pod
 

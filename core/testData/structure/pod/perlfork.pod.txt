@@ -50,9 +50,9 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlfork.pod
 
   BUGS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 12226 in perlfork.pod
 
-    Having pseudo-process IDs be negative integers breaks down for the integer -1 be... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12248 in perlfork.pod
+    Having pseudo-process IDs be negative integers breaks down for the integer -1 because the wait() and waitpid() functions treat this numbe... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12248 in perlfork.pod
 
-    In certain cases, the OS-level handles created by the pipe(), socket(), and acce... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12622 in perlfork.pod
+    In certain cases, the OS-level handles created by the pipe(), socket(), and accept() operators are apparently not duplicated accurately i... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12622 in perlfork.pod
 
     This document may be incomplete in some respects. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12990 in perlfork.pod
 

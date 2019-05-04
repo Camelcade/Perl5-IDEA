@@ -24,7 +24,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5244delta.pod
 
   Selected Bug Fixes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1860 in perl5244delta.pod
 
-    The readpipe() built-in function now checks at compile time that it has only one... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1896 in perl5244delta.pod
+    The readpipe() built-in function now checks at compile time that it has only one parameter expression, and puts it in scalar context, thu... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1896 in perl5244delta.pod
 
   Acknowledgements in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2178 in perl5244delta.pod
 

@@ -40,13 +40,13 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlgit.pod
 
     Committing to blead in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24423 in perlgit.pod
 
-      Make sure you have a good commit message. See perlhack/Commit message for detail... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24691 in perlgit.pod
+      Make sure you have a good commit message. See perlhack/Commit message for details. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24691 in perlgit.pod
 
-      Run the test suite. You might not think that one typo fix would break a test fil... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24787 in perlgit.pod
+      Run the test suite. You might not think that one typo fix would break a test file. You'd be wrong. Here's an example of where not running... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24787 in perlgit.pod
 
-      If you don't run the full test suite, at least make test_porting. This will run ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25339 in perlgit.pod
+      If you don't run the full test suite, at least make test_porting. This will run basic sanity checks. To see which sanity checks, have a l... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25339 in perlgit.pod
 
-      If you make any changes that affect miniperl or core routines that have differen... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25510 in perlgit.pod
+      If you make any changes that affect miniperl or core routines that have different code paths for miniperl, be sure to run make minitest. ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25510 in perlgit.pod
 
     On merging and rebasing in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 25804 in perlgit.pod
 

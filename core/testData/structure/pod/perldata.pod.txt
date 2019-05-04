@@ -8,17 +8,17 @@ Documentation in null; /perl5language.png -> POD file at 0 in perldata.pod
 
     Identifier parsing in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4904 in perldata.pod
 
-      1. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7973 in perldata.pod
+      A sigil, followed solely by digits matching \p{POSIX_Digit}, like $0, $1, or $10000. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7973 in perldata.pod
 
-      2. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8081 in perldata.pod
+      A sigil followed by a single character matching the \p{POSIX_Punct} property, like $! or %+, except the character "{" doesn't work. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8081 in perldata.pod
 
-      3. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8236 in perldata.pod
+      A sigil, followed by a caret and any one of the characters [][A-Z^_?\], like $^V or $^]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8236 in perldata.pod
 
-      4. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8345 in perldata.pod
+      Similar to the above, a sigil, followed by bareword text in braces, where the first character is a caret.  The next character is any one ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8345 in perldata.pod
 
-      5. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8598 in perldata.pod
+      A sigil, followed by any single character in the range [\xA1-\xAC\xAE-\xFF] when not under "use utf8".  (Under "use utf8", the normal ide... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8598 in perldata.pod
 
-      6. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9481 in perldata.pod
+      This is a combination of the previous two forms.  It is valid only when not under "use utf8" (normal identifier rules apply when under "u... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9481 in perldata.pod
 
     Context in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10180 in perldata.pod
 

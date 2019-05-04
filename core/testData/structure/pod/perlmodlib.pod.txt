@@ -1198,7 +1198,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlmodlib.pod
 
   CPAN in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 42250 in perlmodlib.pod
 
-    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 42720 in perlmodlib.pod
+    null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 42720 in perlmodlib.pod
 
       Language Extensions and Documentation Tools in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 42727 in perlmodlib.pod
 
@@ -1422,21 +1422,21 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlmodlib.pod
 
     Guidelines for Module Creation in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 63197 in perlmodlib.pod
 
-      Do similar modules already exist in some form?  If so, please try to reuse the e... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 63245 in perlmodlib.pod
+      Do similar modules already exist in some form?  If so, please try to reuse the existing modules either in whole or by inheriting useful f... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 63245 in perlmodlib.pod
 
-      Try to design the new module to be easy to extend and reuse.  Try to use warning... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 63886 in perlmodlib.pod
+      Try to design the new module to be easy to extend and reuse.  Try to use warnings; (or use warnings qw(...);). Remember that you can add ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 63886 in perlmodlib.pod
 
-      Some simple style guidelines  The perlstyle manual supplied with Perl has many h... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 66076 in perlmodlib.pod
+      Some simple style guidelines  The perlstyle manual supplied with Perl has many helpful points.  Coding style is a matter of personal tast... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 66076 in perlmodlib.pod
 
-      Select what to export.  Do NOT export method names!  Do NOT export anything else... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67435 in perlmodlib.pod
+      Select what to export.  Do NOT export method names!  Do NOT export anything else by default without a good reason!  Exports pollute the n... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67435 in perlmodlib.pod
 
-      Select a name for the module.  This name should be as descriptive, accurate, and... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 68421 in perlmodlib.pod
+      Select a name for the module.  This name should be as descriptive, accurate, and complete as possible.  Avoid any risk of ambiguity. Alwa... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 68421 in perlmodlib.pod
 
-      Have you got it right?  How do you know that you've made the right decisions? Ha... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 70257 in perlmodlib.pod
+      Have you got it right?  How do you know that you've made the right decisions? Have you picked an interface design that will cause problem... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 70257 in perlmodlib.pod
 
-      README and other Additional Files.  It's well known that software developers usu... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 71189 in perlmodlib.pod
+      README and other Additional Files.  It's well known that software developers usually fully document the software they write. If, however,... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 71189 in perlmodlib.pod
 
-        =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 71494 in perlmodlib.pod
+        null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 71494 in perlmodlib.pod
 
           A description of the module/package/extension etc. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 71504 in perlmodlib.pod
 
@@ -1452,25 +1452,25 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlmodlib.pod
 
           Changes / enhancements you plan to make in the future. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 71830 in perlmodlib.pod
 
-        =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 72048 in perlmodlib.pod
+        null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 72048 in perlmodlib.pod
 
-          Adding a Copyright Notice.  How you choose to license your work is a personal de... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 72057 in perlmodlib.pod
+          Adding a Copyright Notice.  How you choose to license your work is a personal decision. The general mechanism is to assert your Copyright... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 72057 in perlmodlib.pod
 
-          Give the module a version/issue/release number.  To be fully compatible with the... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73002 in perlmodlib.pod
+          Give the module a version/issue/release number.  To be fully compatible with the Exporter and MakeMaker modules you should store your mod... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73002 in perlmodlib.pod
 
-          How to release and distribute a module.  If possible, register the module with C... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73644 in perlmodlib.pod
+          How to release and distribute a module.  If possible, register the module with CPAN. Follow the instructions and links on:     http://www... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73644 in perlmodlib.pod
 
-          Take care when changing a released module.  Always strive to remain compatible w... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 74130 in perlmodlib.pod
+          Take care when changing a released module.  Always strive to remain compatible with previous released versions. Otherwise try to add a me... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 74130 in perlmodlib.pod
 
     Guidelines for Converting Perl 4 Library Scripts into Modules in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 74384 in perlmodlib.pod
 
-      There is no requirement to convert anything.  If it ain't broke, don't fix it! P... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 74463 in perlmodlib.pod
+      There is no requirement to convert anything.  If it ain't broke, don't fix it! Perl 4 library scripts should continue to work with no pro... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 74463 in perlmodlib.pod
 
-      Consider the implications.  All Perl applications that make use of the script wi... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 74785 in perlmodlib.pod
+      Consider the implications.  All Perl applications that make use of the script will need to be changed (slightly) if the script is convert... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 74785 in perlmodlib.pod
 
-      Make the most of the opportunity.  If you are going to convert the script to a m... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 75023 in perlmodlib.pod
+      Make the most of the opportunity.  If you are going to convert the script to a module you can use the opportunity to redesign the interfa... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 75023 in perlmodlib.pod
 
-      The pl2pm utility will get you started.  This utility will read *.pl files (give... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 75265 in perlmodlib.pod
+      The pl2pm utility will get you started.  This utility will read *.pl files (given as parameters) and write corresponding *.pm files. The ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 75265 in perlmodlib.pod
 
         Adds the standard Module prologue lines in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 75459 in perlmodlib.pod
 
@@ -1484,13 +1484,13 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlmodlib.pod
 
       Complete applications rarely belong in the Perl Module Library. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 75911 in perlmodlib.pod
 
-      Many applications contain some Perl code that could be reused.  Help save the wo... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 75986 in perlmodlib.pod
+      Many applications contain some Perl code that could be reused.  Help save the world! Share your code in a form that makes it easy to reuse. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 75986 in perlmodlib.pod
 
       Break-out the reusable code into one or more separate module files. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 76137 in perlmodlib.pod
 
       Take the opportunity to reconsider and redesign the interfaces. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 76216 in perlmodlib.pod
 
-      In some cases the 'application' can then be reduced to a small  fragment of code... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 76291 in perlmodlib.pod
+      In some cases the 'application' can then be reduced to a small  fragment of code built on top of the reusable modules. In these cases the... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 76291 in perlmodlib.pod
 
   NOTE in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 76593 in perlmodlib.pod
 

@@ -30,18 +30,19 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlreftut.pod
 
   The Rest in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 15027 in perlreftut.pod
 
-    You can make references to anything, including scalars, functions, and other ref... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15354 in perlreftut.pod
+    You can make references to anything, including scalars, functions, and other references. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15354 in perlreftut.pod
 
-    In Use Rule 1|/Use Rule 1, you can omit the curly brackets whenever the thing in... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15453 in perlreftut.pod
+    In Use Rule 1|/Use Rule 1, you can omit the curly brackets whenever the thing inside them is an atomic scalar variable like $aref.  For e... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15453 in perlreftut.pod
 
     This doesn't copy the underlying array:          $aref2 = $aref1;
- You get two r... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15808 in perlreftut.pod
+ You get two references to the same array.  If you modify $aref1->[23] ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15808 in perlreftut.pod
 
-    To see if a variable contains a reference, use the ref|perlfunc/ref EXPR functio... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16364 in perlreftut.pod
+    To see if a variable contains a reference, use the ref|perlfunc/ref EXPR function.  It returns true if its argument is a reference.  Actu... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16364 in perlreftut.pod
 
-    If you try to use a reference like a string, you get strings like  	ARRAY(0x80f5... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16628 in perlreftut.pod
+    If you try to use a reference like a string, you get strings like  	ARRAY(0x80f5dec)   or    HASH(0x826afc0)
+ If you ever see a string th... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16628 in perlreftut.pod
 
-    You can use a string as if it were a reference.  If you use the string "foo" as ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17089 in perlreftut.pod
+    You can use a string as if it were a reference.  If you use the string "foo" as an array reference, it's taken to be a reference to the a... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17089 in perlreftut.pod
 
   Summary in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 17752 in perlreftut.pod
 

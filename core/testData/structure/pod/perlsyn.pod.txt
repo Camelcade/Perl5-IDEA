@@ -24,6 +24,16 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlsyn.pod
 
     Switch Statements in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23701 in perlsyn.pod
 
+      switch in null; /perl5language.png, null] -> PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 23727 in perlsyn.pod
+
+      case in null; /perl5language.png, null] -> PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 23737 in perlsyn.pod
+
+      given in null; /perl5language.png, null] -> PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 23745 in perlsyn.pod
+
+      when in null; /perl5language.png, null] -> PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 23754 in perlsyn.pod
+
+      default in null; /perl5language.png, null] -> PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 23762 in perlsyn.pod
+
     Goto in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 26766 in perlsyn.pod
 
     The Ellipsis Statement in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 28657 in perlsyn.pod
@@ -34,7 +44,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlsyn.pod
 
     Experimental Details on given and when in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 34102 in perlsyn.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 36237 in perlsyn.pod
+      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 36237 in perlsyn.pod
 
         1. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36246 in perlsyn.pod
 
@@ -52,7 +62,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlsyn.pod
 
         8. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37636 in perlsyn.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 38126 in perlsyn.pod
+      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 38126 in perlsyn.pod
 
         9. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38135 in perlsyn.pod
 
@@ -66,9 +76,9 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlsyn.pod
 
         An empty list as soon as an explicit break is encountered. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 41356 in perlsyn.pod
 
-        The value of the last evaluated expression of the successful when/default clause... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 41428 in perlsyn.pod
+        The value of the last evaluated expression of the successful when/default clause, if there happens to be one. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 41428 in perlsyn.pod
 
-        The value of the last evaluated expression of the given block if no condition is... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 41554 in perlsyn.pod
+        The value of the last evaluated expression of the given block if no condition is true. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 41554 in perlsyn.pod
 
       Switching in a loop in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 42222 in perlsyn.pod
 

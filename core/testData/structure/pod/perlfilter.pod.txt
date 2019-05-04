@@ -6,9 +6,9 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlfilter.pod
 
   CONCEPTS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 588 in perlfilter.pod
 
-    1. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1597 in perlfilter.pod
+    Although there can be any number of source streams in existence at any given time, only one will be active. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1597 in perlfilter.pod
 
-    2. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1716 in perlfilter.pod
+    Every source stream is associated with only one file. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1716 in perlfilter.pod
 
   USING FILTERS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2625 in perlfilter.pod
 

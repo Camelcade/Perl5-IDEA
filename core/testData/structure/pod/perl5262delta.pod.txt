@@ -34,7 +34,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5262delta.pod
 
       perluniprops in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 2138 in perl5262delta.pod
 
-        This has been updated to note that \p{Word} now includes code points matching th... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2171 in perl5262delta.pod
+        This has been updated to note that \p{Word} now includes code points matching the \p{Join_Control} property.  The change to the property ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2171 in perl5262delta.pod
 
   Platform Support in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2515 in perl5262delta.pod
 
@@ -44,25 +44,25 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5262delta.pod
 
   Selected Bug Fixes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2949 in perl5262delta.pod
 
-    The readpipe() built-in function now checks at compile time that it has only one... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2985 in perl5262delta.pod
+    The readpipe() built-in function now checks at compile time that it has only one parameter expression, and puts it in scalar context, thu... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2985 in perl5262delta.pod
 
-    Fixed a use after free bug in pp_list introduced in Perl 5.27.1. [perl #131954]|... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3260 in perl5262delta.pod
+    Fixed a use after free bug in pp_list introduced in Perl 5.27.1. [perl #131954]|https://rt.perl.org/Public/Bug/Display.html?id=131954 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3260 in perl5262delta.pod
 
-    Parsing a sub definition could cause a use after free if the sub keyword was fol... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3410 in perl5262delta.pod
+    Parsing a sub definition could cause a use after free if the sub keyword was followed by whitespace including newlines (and comments). [p... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3410 in perl5262delta.pod
 
-    The tokenizer now correctly adjusts a parse pointer when skipping whitespace in ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3633 in perl5262delta.pod
+    The tokenizer now correctly adjusts a parse pointer when skipping whitespace in an ${identifier} construct. [perl #131949]|https://rt.per... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3633 in perl5262delta.pod
 
-    Accesses to ${^LAST_FH} no longer assert after using any of a variety of I/O ope... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3828 in perl5262delta.pod
+    Accesses to ${^LAST_FH} no longer assert after using any of a variety of I/O operations on a non-glob. [perl #128263]|https://rt.perl.org... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3828 in perl5262delta.pod
 
-    sort now performs correct reference counting when aliasing $a and $b, thus avoid... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4016 in perl5262delta.pod
+    sort now performs correct reference counting when aliasing $a and $b, thus avoiding premature destruction and leakage of scalars if they ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4016 in perl5262delta.pod
 
-    Some convoluted kinds of regexp no longer cause an arithmetic overflow when comp... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4298 in perl5262delta.pod
+    Some convoluted kinds of regexp no longer cause an arithmetic overflow when compiled. [perl #131893]|https://rt.perl.org/Public/Bug/Displ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4298 in perl5262delta.pod
 
-    Fixed a duplicate symbol failure with -flto -mieee-fp builds.  pp.c defined _LIB... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4466 in perl5262delta.pod
+    Fixed a duplicate symbol failure with -flto -mieee-fp builds.  pp.c defined _LIB_VERSION which -lieee already defines. [perl #131786]|htt... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4466 in perl5262delta.pod
 
-    A NULL pointer dereference in the S_regmatch() function has been fixed. [perl #1... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4679 in perl5262delta.pod
+    A NULL pointer dereference in the S_regmatch() function has been fixed. [perl #132017]|https://rt.perl.org/Public/Bug/Display.html?id=132017 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4679 in perl5262delta.pod
 
-    Failures while compiling code within other constructs, such as with string inter... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4836 in perl5262delta.pod
+    Failures while compiling code within other constructs, such as with string interpolation and the right part of s///e now cause compilatio... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4836 in perl5262delta.pod
 
   Acknowledgements in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 5300 in perl5262delta.pod
 

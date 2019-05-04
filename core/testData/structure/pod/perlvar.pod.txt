@@ -14,19 +14,19 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlvar.pod
 
       $_ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3049 in perlvar.pod
 
-        The following functions use $_ as a default argument:  abs, alarm, chomp, chop, ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3434 in perlvar.pod
+        The following functions use $_ as a default argument:  abs, alarm, chomp, chop, chr, chroot, cos, defined, eval, evalbytes, exp, fc, glob... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3434 in perlvar.pod
 
         All file tests (-f, -d) except for -t, which defaults to STDIN. See perlfunc/-X in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3843 in perlvar.pod
 
-        The pattern matching operations m//, s/// and tr/// (aka y///) when used without... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3945 in perlvar.pod
+        The pattern matching operations m//, s/// and tr/// (aka y///) when used without an =~ operator. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3945 in perlvar.pod
 
-        The default iterator variable in a foreach loop if no other variable is supplied... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4067 in perlvar.pod
+        The default iterator variable in a foreach loop if no other variable is supplied. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4067 in perlvar.pod
 
         The implicit iterator variable in the grep() and map() functions. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4162 in perlvar.pod
 
         The implicit variable of given(). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4244 in perlvar.pod
 
-        The default place to put the next value or input record when a <FH>, readline, r... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4291 in perlvar.pod
+        The default place to put the next value or input record when a <FH>, readline, readdir or each operation's result is tested by itself as ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4291 in perlvar.pod
 
       @ARG in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4924 in perlvar.pod
 
@@ -198,7 +198,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlvar.pod
 
     Variables related to filehandles in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 43181 in perlvar.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 46286 in perlvar.pod
+      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 46286 in perlvar.pod
 
         $ARGV in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46295 in perlvar.pod
 
@@ -372,31 +372,31 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlvar.pod
 
       $^P in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 72994 in perlvar.pod
 
-        0x01 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73159 in perlvar.pod
+        Debug subroutine enter/exit. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73159 in perlvar.pod
 
-        0x02 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73201 in perlvar.pod
+        Line-by-line debugging.  Causes DB::DB() subroutine to be called for each statement executed.  Also causes saving source code lines (like... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73201 in perlvar.pod
 
-        0x04 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73363 in perlvar.pod
+        Switch off optimizations. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73363 in perlvar.pod
 
-        0x08 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73402 in perlvar.pod
+        Preserve more data for future interactive inspections. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73402 in perlvar.pod
 
-        0x10 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73470 in perlvar.pod
+        Keep info about source lines on which a subroutine is defined. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73470 in perlvar.pod
 
-        0x20 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73546 in perlvar.pod
+        Start with single-step on. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73546 in perlvar.pod
 
-        0x40 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73586 in perlvar.pod
+        Use subroutine address instead of name when reporting. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73586 in perlvar.pod
 
-        0x80 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73654 in perlvar.pod
+        Report goto &subroutine as well. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73654 in perlvar.pod
 
-        0x100 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73703 in perlvar.pod
+        Provide informative "file" names for evals based on the place they were compiled. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73703 in perlvar.pod
 
-        0x200 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73799 in perlvar.pod
+        Provide informative names to anonymous subroutines based on the place they were compiled. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73799 in perlvar.pod
 
-        0x400 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73903 in perlvar.pod
+        Save source code lines into @{"_<$filename"}. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73903 in perlvar.pod
 
-        0x800 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73966 in perlvar.pod
+        When saving source, include evals that generate no subroutines. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73966 in perlvar.pod
 
-        0x1000 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 74044 in perlvar.pod
+        When saving source, include source that did not compile. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 74044 in perlvar.pod
 
       ${^TAINT} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 74273 in perlvar.pod
 

@@ -34,7 +34,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlexperiment.pod
 
     Accepted features in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3319 in perlexperiment.pod
 
-      64-bit support in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3642 in perlexperiment.pod
+      -bit support  Introduced in Perl 5.005 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3642 in perlexperiment.pod
 
       die accepts a reference in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3690 in perlexperiment.pod
 

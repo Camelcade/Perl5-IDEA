@@ -50,21 +50,21 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5125delta.pod
 
     chop now correctly handles characters above "\x{7fffffff}" [perl #73246]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3375 in perl5125delta.pod
 
-    ($<,$>) = (...) stopped working properly in 5.12.0.  It is supposed to make a si... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3462 in perl5125delta.pod
+    ($<,$>) = (...) stopped working properly in 5.12.0.  It is supposed to make a single setreuid() call, rather than calling setruid() and s... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3462 in perl5125delta.pod
 
-    Fixed a regression of kill() when a match variable is used for the process ID to... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3722 in perl5125delta.pod
+    Fixed a regression of kill() when a match variable is used for the process ID to kill [perl #75812]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3722 in perl5125delta.pod
 
     UNIVERSAL::VERSION no longer leaks memory.  It started leaking in Perl 5.10.0. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3833 in perl5125delta.pod
 
-    The C-level my_strftime functions no longer leaks memory.  This fixes a memory l... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3925 in perl5125delta.pod
+    The C-level my_strftime functions no longer leaks memory.  This fixes a memory leak in POSIX::strftime [perl #73520]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3925 in perl5125delta.pod
 
-    caller no longer leaks memory when called from the DB package if @DB::args was a... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4059 in perl5125delta.pod
+    caller no longer leaks memory when called from the DB package if @DB::args was assigned to after the first call to caller.  Carp was trig... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4059 in perl5125delta.pod
 
-    Passing to index an offset beyond the end of the string when the string is encod... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4249 in perl5125delta.pod
+    Passing to index an offset beyond the end of the string when the string is encoded internally in UTF8 no longer causes panics [perl #75898]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4249 in perl5125delta.pod
 
-    Syntax errors in (?{...}) blocks in regular expressions no longer cause panic me... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4403 in perl5125delta.pod
+    Syntax errors in (?{...}) blocks in regular expressions no longer cause panic messages [perl #2353]. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4403 in perl5125delta.pod
 
-    Perl 5.10.0 introduced some faulty logic that made "U*" in the middle of a pack ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4521 in perl5125delta.pod
+    Perl 5.10.0 introduced some faulty logic that made "U*" in the middle of a pack template equivalent to "U0" if the input string was empty... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4521 in perl5125delta.pod
 
   Errata in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4713 in perl5125delta.pod
 

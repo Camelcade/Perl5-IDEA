@@ -86,13 +86,14 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlfaq8.pod
 
     Why can't my script read from STDIN after I gave it EOF (^D on Unix, ^Z on MS-DOS)? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31011 in perlfaq8.pod
 
-      1 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31434 in perlfaq8.pod
+      Try keeping around the seekpointer and go there, like this:      my $where = tell($log_fh);
+    seek($log_fh, $where, 0); in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31434 in perlfaq8.pod
 
-      2 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31566 in perlfaq8.pod
+      If that doesn't work, try seeking to a different part of the file and then back. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31566 in perlfaq8.pod
 
-      3 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31657 in perlfaq8.pod
+      If that doesn't work, try seeking to a different part of the file, reading something, and then seeking back. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31657 in perlfaq8.pod
 
-      4 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31776 in perlfaq8.pod
+      If that doesn't work, give up on your stdio package and use sysread. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31776 in perlfaq8.pod
 
     How can I convert my shell script to perl? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31862 in perlfaq8.pod
 
@@ -110,7 +111,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlfaq8.pod
 
     How do I fork a daemon process? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 35133 in perlfaq8.pod
 
-      Open /dev/tty and use the TIOCNOTTY ioctl on it. See tty(1) for details. Or bett... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35414 in perlfaq8.pod
+      Open /dev/tty and use the TIOCNOTTY ioctl on it. See tty(1) for details. Or better yet, you can just use the POSIX::setsid() function, so... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35414 in perlfaq8.pod
 
       Change directory to / in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35614 in perlfaq8.pod
 

@@ -54,9 +54,9 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlreref.pod
 
     perldebug/"Debugging Regular Expressions" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14580 in perlreref.pod
 
-    perluniintro, perlunicode, charnames and perllocale for details on regexes and i... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14635 in perlreref.pod
+    perluniintro, perlunicode, charnames and perllocale for details on regexes and internationalisation. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14635 in perlreref.pod
 
-    Mastering Regular Expressions by Jeffrey Friedl (http://oreilly.com/catalog/9780... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14758 in perlreref.pod
+    Mastering Regular Expressions by Jeffrey Friedl (http://oreilly.com/catalog/9780596528126/) for a thorough grounding and reference on the... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14758 in perlreref.pod
 
   THANKS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 14926 in perlreref.pod
 

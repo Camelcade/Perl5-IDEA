@@ -54,7 +54,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perltie.pod
 
     Tying Hashes in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15573 in perltie.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 17577 in perltie.pod
+      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 17577 in perltie.pod
 
         USER in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17586 in perltie.pod
 
@@ -64,7 +64,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perltie.pod
 
         LIST in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17752 in perltie.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 18282 in perltie.pod
+      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 18282 in perltie.pod
 
         TIEHASH classname, LIST in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18291 in perltie.pod
 

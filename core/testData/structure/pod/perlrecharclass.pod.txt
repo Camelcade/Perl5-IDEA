@@ -30,7 +30,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlrecharclass.po
 
       Whitespace in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 8770 in perlrecharclass.pod
 
-        =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 8848 in perlrecharclass.pod
+        null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 8848 in perlrecharclass.pod
 
           If the /a modifier is in effect ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8855 in perlrecharclass.pod
 
@@ -46,7 +46,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlrecharclass.po
 
               otherwise ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9617 in perlrecharclass.pod
 
-        =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 12937 in perlrecharclass.pod
+        null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 12937 in perlrecharclass.pod
 
           [1] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12946 in perlrecharclass.pod
 
@@ -58,11 +58,11 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlrecharclass.po
 
     Bracketed Character Classes in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17600 in perlrecharclass.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 18809 in perlrecharclass.pod
+      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 18809 in perlrecharclass.pod
 
-        When the class is to match caselessly under /i matching rules, and a character t... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18816 in perlrecharclass.pod
+        When the class is to match caselessly under /i matching rules, and a character that is explicitly mentioned inside the class matches a mu... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18816 in perlrecharclass.pod
 
-        Some names known to \N{...} refer to a sequence of multiple characters, instead ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20027 in perlrecharclass.pod
+        Some names known to \N{...} refer to a sequence of multiple characters, instead of the usual single character.  When one of these is incl... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20027 in perlrecharclass.pod
 
       Special Characters Inside a Bracketed Character Class in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 20993 in perlrecharclass.pod
 
@@ -76,7 +76,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlrecharclass.po
 
       POSIX Character Classes in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 31974 in perlrecharclass.pod
 
-        =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 35901 in perlrecharclass.pod
+        null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 35901 in perlrecharclass.pod
 
           [1] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35910 in perlrecharclass.pod
 
@@ -90,7 +90,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlrecharclass.po
 
           [6] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37644 in perlrecharclass.pod
 
-        =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 38564 in perlrecharclass.pod
+        null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 38564 in perlrecharclass.pod
 
           If the /a modifier, is in effect ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38571 in perlrecharclass.pod
 
@@ -120,9 +120,9 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlrecharclass.po
 
       Extended Bracketed Character Classes in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 41821 in perlrecharclass.pod
 
-        1 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46110 in perlrecharclass.pod
+        When compiled within the scope of use locale (or the /l regex modifier), this construct assumes that the execution-time locale will be a ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46110 in perlrecharclass.pod
 
-        2 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46530 in perlrecharclass.pod
+        Any user-defined property|perlunicode/"User-Defined Character Properties" used must be already defined by the time the regular expression... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46530 in perlrecharclass.pod
 
-        3 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46764 in perlrecharclass.pod
+        A regular expression that otherwise would compile using /d rules, and which uses this construct will instead use /u.  Thus this construct... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46764 in perlrecharclass.pod
 

@@ -22,19 +22,19 @@ Documentation in null; /perl5language.png -> POD file at 0 in perllocale.pod
 
   PREPARING TO USE LOCALES in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4531 in perllocale.pod
 
-    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 4827 in perllocale.pod
+    null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 4827 in perllocale.pod
 
-      Your operating system must support the locale system.  If it does, you should fi... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4836 in perllocale.pod
+      Your operating system must support the locale system.  If it does, you should find that the setlocale() function is a documented part of ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4836 in perllocale.pod
 
-      Definitions for locales that you use must be installed.  You, or your system adm... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5004 in perllocale.pod
+      Definitions for locales that you use must be installed.  You, or your system administrator, must make sure that this is the case. The ava... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5004 in perllocale.pod
 
-      Perl must believe that the locale system is supported.  If it does, perl -V:d_se... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5706 in perllocale.pod
+      Perl must believe that the locale system is supported.  If it does, perl -V:d_setlocale will say that the value for d_setlocale is define. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5706 in perllocale.pod
 
-    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 6141 in perllocale.pod
+    null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 6141 in perllocale.pod
 
-      1 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6150 in perllocale.pod
+      The locale-determining environment variables (see /"ENVIRONMENT") must be correctly set up at the time the application is started, either... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6150 in perllocale.pod
 
-      2 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6362 in perllocale.pod
+      The application must set its own locale using the method described in /The setlocale function. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6362 in perllocale.pod
 
   USING LOCALES in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6480 in perllocale.pod
 
@@ -42,31 +42,31 @@ Documentation in null; /perl5language.png -> POD file at 0 in perllocale.pod
 
       Not within the scope of "use locale" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8256 in perllocale.pod
 
-        The current locale is used when going outside of Perl with operations like syste... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8403 in perllocale.pod
+        The current locale is used when going outside of Perl with operations like system()|perlfunc/system LIST or qx//|perlop/qx/STRING/, if th... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8403 in perllocale.pod
 
-        Also Perl gives access to various C library functions through the POSIX module. ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8613 in perllocale.pod
+        Also Perl gives access to various C library functions through the POSIX module.  Some of those functions are always affected by the curre... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8613 in perllocale.pod
 
-        XS modules for all categories but LC_NUMERIC get the underlying locale, and henc... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9097 in perllocale.pod
+        XS modules for all categories but LC_NUMERIC get the underlying locale, and hence any C library functions they call will use that underly... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9097 in perllocale.pod
 
       Lingering effects of use locale in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9908 in perllocale.pod
 
-        The output format of a write()|perlfunc/write is determined by an earlier format... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10100 in perllocale.pod
+        The output format of a write()|perlfunc/write is determined by an earlier format declaration (perlfunc/format), so whether or not the out... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10100 in perllocale.pod
 
-        Regular expression patterns can be compiled using qr//|perlop/qr/STRING/msixpodu... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10386 in perllocale.pod
+        Regular expression patterns can be compiled using qr//|perlop/qr/STRING/msixpodualn with actual matching deferred to later.  Again, it is... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10386 in perllocale.pod
 
       Under "use locale"; in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10810 in perllocale.pod
 
         All the above operations in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10852 in perllocale.pod
 
-        Format declarations (perlfunc/format) and hence any subsequent write()s use LC_N... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10887 in perllocale.pod
+        Format declarations (perlfunc/format) and hence any subsequent write()s use LC_NUMERIC. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10887 in perllocale.pod
 
-        stringification and output use LC_NUMERIC. These include the results of print(),... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10997 in perllocale.pod
+        stringification and output use LC_NUMERIC. These include the results of print(), printf(), say(), and sprintf(). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10997 in perllocale.pod
 
-        The comparison operators (lt, le, cmp, ge, and gt) use LC_COLLATE.  sort() is al... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11138 in perllocale.pod
+        The comparison operators (lt, le, cmp, ge, and gt) use LC_COLLATE.  sort() is also affected if used without an explicit comparison functi... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11138 in perllocale.pod
 
-        Regular expressions and case-modification functions (uc(), lc(), ucfirst(), and ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11937 in perllocale.pod
+        Regular expressions and case-modification functions (uc(), lc(), ucfirst(), and lcfirst()) use LC_CTYPE in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11937 in perllocale.pod
 
-        The variables $!|perlvar/$ERRNO (and its synonyms $ERRNO and $OS_ERROR) and $^E|... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12069 in perllocale.pod
+        The variables $!|perlvar/$ERRNO (and its synonyms $ERRNO and $OS_ERROR) and $^E|perlvar/$EXTENDED_OS_ERROR (and its synonym $EXTENDED_OS_... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12069 in perllocale.pod
 
     The setlocale function in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15153 in perllocale.pod
 
@@ -106,43 +106,43 @@ Documentation in null; /perl5language.png -> POD file at 0 in perllocale.pod
 
   SECURITY in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 46469 in perllocale.pod
 
-    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 46943 in perllocale.pod
+    null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 46943 in perllocale.pod
 
-      Regular expression checks for safe file names or mail addresses using \w may be ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46952 in perllocale.pod
+      Regular expression checks for safe file names or mail addresses using \w may be spoofed by an LC_CTYPE locale that claims that characters... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46952 in perllocale.pod
 
-      String interpolation with case-mapping, as in, say, $dest = "C:\U$name.$ext", ma... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 47154 in perllocale.pod
+      String interpolation with case-mapping, as in, say, $dest = "C:\U$name.$ext", may produce dangerous results if a bogus LC_CTYPE case-mapp... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 47154 in perllocale.pod
 
-      A sneaky LC_COLLATE locale could result in the names of students with "D" grades... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 47331 in perllocale.pod
+      A sneaky LC_COLLATE locale could result in the names of students with "D" grades appearing ahead of those with "A"s. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 47331 in perllocale.pod
 
-      An application that takes the trouble to use information in LC_MONETARY may form... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 47461 in perllocale.pod
+      An application that takes the trouble to use information in LC_MONETARY may format debits as if they were credits and vice versa if that ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 47461 in perllocale.pod
 
-      The date and day names in dates formatted by strftime() could be manipulated to ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 47709 in perllocale.pod
+      The date and day names in dates formatted by strftime() could be manipulated to advantage by a malicious user able to subvert the LC_DATE... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 47709 in perllocale.pod
 
-    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 48675 in perllocale.pod
+    null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 48675 in perllocale.pod
 
-      Comparison operators (lt, le, ge, gt and cmp):  Scalar true/false (or less/equal... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48684 in perllocale.pod
+      Comparison operators (lt, le, ge, gt and cmp):  Scalar true/false (or less/equal/greater) result is never tainted. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48684 in perllocale.pod
 
-      Case-mapping interpolation (with \l, \L, \u, \U, or \F)  The result string conta... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48828 in perllocale.pod
+      Case-mapping interpolation (with \l, \L, \u, \U, or \F)  The result string containing interpolated material is tainted if a use locale fo... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48828 in perllocale.pod
 
-      Matching operator (m//):  Scalar true/false result never tainted.  All subpatter... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49040 in perllocale.pod
+      Matching operator (m//):  Scalar true/false result never tainted.  All subpatterns, either delivered as a list-context result or as $1 et... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49040 in perllocale.pod
 
-      Substitution operator (s///):  Has the same behavior as the match operator.  Als... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50264 in perllocale.pod
+      Substitution operator (s///):  Has the same behavior as the match operator.  Also, the left operand of =~ becomes tainted when a use loca... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50264 in perllocale.pod
 
-      Output formatting functions (printf() and write()):  Results are never tainted b... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50675 in perllocale.pod
+      Output formatting functions (printf() and write()):  Results are never tainted because otherwise even output from print, for example prin... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50675 in perllocale.pod
 
-      Case-mapping functions (lc(), lcfirst(), uc(), ucfirst()):  Results are tainted ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50891 in perllocale.pod
+      Case-mapping functions (lc(), lcfirst(), uc(), ucfirst()):  Results are tainted if a use locale form that includes LC_CTYPE is in effect. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50891 in perllocale.pod
 
-      POSIX locale-dependent functions (localeconv(), strcoll(), strftime(), strxfrm()... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51060 in perllocale.pod
+      POSIX locale-dependent functions (localeconv(), strcoll(), strftime(), strxfrm()):  Results are never tainted. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51060 in perllocale.pod
 
   ENVIRONMENT in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 52643 in perllocale.pod
 
-    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 52663 in perllocale.pod
+    null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 52663 in perllocale.pod
 
       PERL_SKIP_LOCALE_INIT in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52673 in perllocale.pod
 
       PERL_BADLANG in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53041 in perllocale.pod
 
-    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 54281 in perllocale.pod
+    null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 54281 in perllocale.pod
 
       LC_ALL in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 54291 in perllocale.pod
 
@@ -186,11 +186,11 @@ Documentation in null; /perl5language.png -> POD file at 0 in perllocale.pod
 
     Multi-threaded in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 70363 in perllocale.pod
 
-      An embedded perl needs to be started up while the global locale is in effect.  S... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 71142 in perllocale.pod
+      An embedded perl needs to be started up while the global locale is in effect.  See perlembed/Using embedded Perl with POSIX locales. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 71142 in perllocale.pod
 
-      It becomes more important for perl to know about all the possible locale categor... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 71288 in perllocale.pod
+      It becomes more important for perl to know about all the possible locale categories on the platform, even if they aren't apparently used ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 71288 in perllocale.pod
 
-      It is possible, though hard to do, to call POSIX::setlocale with a locale that i... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 71824 in perllocale.pod
+      It is possible, though hard to do, to call POSIX::setlocale with a locale that it doesn't recognize as syntactically legal, but actually ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 71824 in perllocale.pod
 
     Broken systems in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 72097 in perllocale.pod
 
