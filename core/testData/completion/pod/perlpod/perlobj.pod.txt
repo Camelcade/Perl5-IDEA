@@ -1,6 +1,6 @@
-Lookups: -E<gt>, ->; Text: Method Invocation; Tail: (->); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: -E<gt>, ->; Text: ->; Tail: (Method Invocation); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 7675 in perlobj.pod
-Lookups: @ISA; Text: A Class is Simply a Package; Tail: (@ISA); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: @ISA; Text: @ISA; Tail: (A Class is Simply a Package); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 5277 in perlobj.pod
 Lookups: A Class is Simply a Package; Text: A Class is Simply a Package; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5222 in perlobj.pod
@@ -18,11 +18,11 @@ Lookups: Class Names as Strings; Text: Class Names as Strings; Tail: null; Type:
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 20278 in perlobj.pod
 Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 187 in perlobj.pod
-Lookups: DESTROY; Text: Destructors; Tail: (DESTROY); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: DESTROY; Text: DESTROY; Tail: (Destructors); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 30334 in perlobj.pod
 Lookups: DOES($role); Text: DOES($role); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26766 in perlobj.pod
-Lookups: DOES; Text: DOES($role); Tail: (DOES); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: DOES; Text: DOES; Tail: (DOES($role)); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 26784 in perlobj.pod
 Lookups: Dereferencing Method Call; Text: Dereferencing Method Call; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 20870 in perlobj.pod
@@ -60,7 +60,7 @@ Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.p
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 124 in perlobj.pod
 Lookups: Non-Hash Objects; Text: Non-Hash Objects; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 33291 in perlobj.pod
-Lookups: OOP; Text: NAME; Tail: (OOP); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: OOP; Text: OOP; Tail: (NAME); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 146 in perlobj.pod
 Lookups: Objects Are Blessed; Variables Are Not; Text: Objects Are Blessed; Variables Are Not; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 4018 in perlobj.pod
@@ -68,75 +68,75 @@ Lookups: Pseudo-hashes; Text: Pseudo-hashes; Tail: null; Type: 2nd Heading; Icon
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 35169 in perlobj.pod
 Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 35496 in perlobj.pod
-Lookups: SUPER; Text: How SUPER is Resolved; Tail: (SUPER); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: SUPER; Text: SUPER; Tail: (How SUPER is Resolved); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 10924 in perlobj.pod
 Lookups: Subroutine References as Methods; Text: Subroutine References as Methods; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 20488 in perlobj.pod
 Lookups: The UNIVERSAL Class; Text: The UNIVERSAL Class; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 26144 in perlobj.pod
-Lookups: UNIVERSAL; Text: The UNIVERSAL Class; Tail: (UNIVERSAL); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: UNIVERSAL; Text: UNIVERSAL; Tail: (The UNIVERSAL Class); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 26171 in perlobj.pod
 Lookups: VERSION($need); Text: VERSION($need); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 27709 in perlobj.pod
-Lookups: VERSION; Text: VERSION($need); Tail: (VERSION); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: VERSION; Text: VERSION; Tail: (VERSION($need)); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 27730 in perlobj.pod
 Lookups: Writing Accessors; Text: Writing Accessors; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 17640 in perlobj.pod
 Lookups: Writing Constructors; Text: Writing Constructors; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15310 in perlobj.pod
-Lookups: accessor; Text: Writing Accessors; Tail: (accessor); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: accessor; Text: accessor; Tail: (Writing Accessors); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17665 in perlobj.pod
-Lookups: arrow; Text: Method Invocation; Tail: (arrow); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: arrow; Text: arrow; Tail: (Method Invocation); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 7666 in perlobj.pod
-Lookups: attribute; Text: Attributes; Tail: (attribute); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: attribute; Text: attribute; Tail: (Attributes); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 16542 in perlobj.pod
 Lookups: bless, blessed, and ref; Text: bless, blessed, and ref; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24403 in perlobj.pod
-Lookups: bless; Text: An Object is Simply a Data Structure; Tail: (bless); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: bless; Text: bless; Tail: (An Object is Simply a Data Structure); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 1487 in perlobj.pod
 Lookups: can($method); Text: can($method); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 27163 in perlobj.pod
-Lookups: can; Text: can($method); Tail: (can); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: can; Text: can; Tail: (can($method)); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 27182 in perlobj.pod
-Lookups: class; Text: A Class is Simply a Package; Tail: (class); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: class; Text: class; Tail: (A Class is Simply a Package); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 5257 in perlobj.pod
-Lookups: constructor; Text: An Object is Simply a Data Structure; Tail: (constructor); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: constructor; Text: constructor; Tail: (An Object is Simply a Data Structure); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 1496 in perlobj.pod
-Lookups: constructor; Text: Writing Constructors; Tail: (constructor); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: constructor; Text: constructor; Tail: (Writing Constructors); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 15338 in perlobj.pod
-Lookups: destructor; Text: Destructors; Tail: (destructor); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: destructor; Text: destructor; Tail: (Destructors); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 30320 in perlobj.pod
-Lookups: indirect object; Text: Indirect Object Syntax; Tail: (indirect object); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: indirect object; Text: indirect object; Tail: (Indirect Object Syntax); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 22747 in perlobj.pod
-Lookups: inheritance; Text: A Class is Simply a Package; Tail: (inheritance); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: inheritance; Text: inheritance; Tail: (A Class is Simply a Package); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 5285 in perlobj.pod
-Lookups: inheritance; Text: Inheritance; Tail: (inheritance); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: inheritance; Text: inheritance; Tail: (Inheritance); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 9261 in perlobj.pod
-Lookups: invocation; Text: Invoking Class Methods; Tail: (invocation); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: invocation; Text: invocation; Tail: (Invoking Class Methods); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 21656 in perlobj.pod
-Lookups: invocation; Text: Method Invocation; Tail: (invocation); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: invocation; Text: invocation; Tail: (Method Invocation); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 7642 in perlobj.pod
 Lookups: isa($class); Text: isa($class); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26546 in perlobj.pod
-Lookups: isa; Text: isa($class); Tail: (isa); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: isa; Text: isa; Tail: (isa($class)); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 26564 in perlobj.pod
-Lookups: method resolution order; Text: Method Resolution Order; Tail: (method resolution order); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: method resolution order; Text: method resolution order; Tail: (Method Resolution Order); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 12615 in perlobj.pod
-Lookups: method; Text: A Method is Simply a Subroutine; Tail: (method); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: method; Text: method; Tail: (A Method is Simply a Subroutine); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 6983 in perlobj.pod
-Lookups: method; Text: Method Call Variations; Tail: (method); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: method; Text: method; Tail: (Method Call Variations); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 18733 in perlobj.pod
-Lookups: method; Text: Method Invocation; Tail: (method); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: method; Text: method; Tail: (Method Invocation); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 7656 in perlobj.pod
-Lookups: mro; Text: Method Resolution Order; Tail: (mro); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: mro; Text: mro; Tail: (Method Resolution Order); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 12642 in perlobj.pod
-Lookups: multiple inheritance; Text: Multiple Inheritance; Tail: (multiple inheritance); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: multiple inheritance; Text: multiple inheritance; Tail: (Multiple Inheritance); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 12272 in perlobj.pod
-Lookups: new; Text: An Object is Simply a Data Structure; Tail: (new); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: new; Text: new; Tail: (An Object is Simply a Data Structure); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 1511 in perlobj.pod
-Lookups: object; Text: An Object is Simply a Data Structure; Tail: (object); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: object; Text: object; Tail: (An Object is Simply a Data Structure); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 1477 in perlobj.pod
-Lookups: object; Text: NAME; Tail: (object); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: object; Text: object; Tail: (NAME); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 136 in perlobj.pod
-Lookups: package; Text: A Class is Simply a Package; Tail: (package); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: package; Text: package; Tail: (A Class is Simply a Package); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 5266 in perlobj.pod

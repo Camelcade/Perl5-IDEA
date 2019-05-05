@@ -1,12 +1,12 @@
 Lookups: AUTHOR AND COPYRIGHT; Text: AUTHOR AND COPYRIGHT; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 49561 in perlfaq8.pod
-Lookups: BSD::Itimer; Text: How can I measure time under a second?; Tail: (BSD::Itimer); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: BSD::Itimer; Text: BSD::Itimer; Tail: (How can I measure time under a second?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17524 in perlfaq8.pod
-Lookups: BSD::Itimer; Text: How can I sleep() or alarm() for under a second?; Tail: (BSD::Itimer); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: BSD::Itimer; Text: BSD::Itimer; Tail: (How can I sleep() or alarm() for under a second?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17093 in perlfaq8.pod
-Lookups: BSD::Resource; Text: How do I set CPU limits?; Tail: (BSD::Resource); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: BSD::Resource; Text: BSD::Resource; Tail: (How do I set CPU limits?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 37741 in perlfaq8.pod
-Lookups: CPU; Text: How do I set CPU limits?; Tail: (CPU); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: CPU; Text: CPU; Tail: (How do I set CPU limits?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 37767 in perlfaq8.pod
 Lookups: Can I use perl to run a telnet or ftp session?; Text: Can I use perl to run a telnet or ftp session?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 32352 in perlfaq8.pod
@@ -104,9 +104,9 @@ Lookups: Screen; Text: Screen; Tail: null; Type: List Item; Icon: /perl5language
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1600 in perlfaq8.pod
 Lookups: Signals; Text: Signals; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13794 in perlfaq8.pod
-Lookups: Time::HiRes; Text: How can I measure time under a second?; Tail: (Time::HiRes); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: Time::HiRes; Text: Time::HiRes; Tail: (How can I measure time under a second?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17509 in perlfaq8.pod
-Lookups: Time::HiRes; Text: How can I sleep() or alarm() for under a second?; Tail: (Time::HiRes); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: Time::HiRes; Text: Time::HiRes; Tail: (How can I sleep() or alarm() for under a second?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17078 in perlfaq8.pod
 Lookups: Unix; Text: Unix; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 34433 in perlfaq8.pod
@@ -136,13 +136,13 @@ Lookups: Zombies; Text: Zombies; Tail: null; Type: List Item; Icon: /perl5langua
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14119 in perlfaq8.pod
 Lookups: end of line; Text: end of line; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8893 in perlfaq8.pod
-Lookups: exec; Text: How come exec() doesn't return?; Tail: (exec); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: exec; Text: exec; Tail: (How come exec() doesn't return?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 849 in perlfaq8.pod
 Lookups: flushing output; Text: flushing output; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9706 in perlfaq8.pod
-Lookups: fork; Text: How come exec() doesn't return?; Tail: (fork); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: fork; Text: fork; Tail: (How come exec() doesn't return?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 867 in perlfaq8.pod
-Lookups: limit; Text: How do I set CPU limits?; Tail: (limit); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: limit; Text: limit; Tail: (How do I set CPU limits?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 37758 in perlfaq8.pod
 Lookups: lockfiles; Text: lockfiles; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8299 in perlfaq8.pod
@@ -150,19 +150,19 @@ Lookups: non-blocking input; Text: non-blocking input; Tail: null; Type: List It
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10586 in perlfaq8.pod
 Lookups: open mode; Text: open mode; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8501 in perlfaq8.pod
-Lookups: open; Text: How come exec() doesn't return?; Tail: (open); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: open; Text: open; Tail: (How come exec() doesn't return?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 875 in perlfaq8.pod
-Lookups: pipe; Text: How come exec() doesn't return?; Tail: (pipe); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: pipe; Text: pipe; Tail: (How come exec() doesn't return?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 883 in perlfaq8.pod
-Lookups: select; Text: How can I measure time under a second?; Tail: (select); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: select; Text: select; Tail: (How can I measure time under a second?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17548 in perlfaq8.pod
-Lookups: select; Text: How can I sleep() or alarm() for under a second?; Tail: (select); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: select; Text: select; Tail: (How can I sleep() or alarm() for under a second?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17117 in perlfaq8.pod
-Lookups: sleep; Text: How can I measure time under a second?; Tail: (sleep); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: sleep; Text: sleep; Tail: (How can I measure time under a second?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17539 in perlfaq8.pod
-Lookups: sleep; Text: How can I sleep() or alarm() for under a second?; Tail: (sleep); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: sleep; Text: sleep; Tail: (How can I sleep() or alarm() for under a second?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17108 in perlfaq8.pod
-Lookups: system; Text: How come exec() doesn't return?; Tail: (system); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: system; Text: system; Tail: (How come exec() doesn't return?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 857 in perlfaq8.pod
 Lookups: the PERL5LIB environment variable; Text: the PERL5LIB environment variable; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48075 in perlfaq8.pod

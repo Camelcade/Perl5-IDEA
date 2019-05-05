@@ -1,4 +1,4 @@
-Lookups: -i; Text: How can I use Perl's -i option from within a program?; Tail: (-i); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: -i; Text: -i; Tail: (How can I use Perl's -i option from within a program?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 11713 in perlfaq5.pod
 Lookups: AUTHOR AND COPYRIGHT; Text: AUTHOR AND COPYRIGHT; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 54941 in perlfaq5.pod
@@ -6,9 +6,9 @@ Lookups: All I want to do is append a small amount of text to the end of a file.
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 34486 in perlfaq5.pod
 Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 77 in perlfaq5.pod
-Lookups: File::Copy; Text: How can I copy a file?; Tail: (File::Copy); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: File::Copy; Text: File::Copy; Tail: (How can I copy a file?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 12603 in perlfaq5.pod
-Lookups: File::Tail; Text: How do I do a tail -f in perl?; Tail: (File::Tail); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: File::Tail; Text: File::Tail; Tail: (How do I do a tail -f in perl?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 46315 in perlfaq5.pod
 Lookups: How can I copy a file?; Text: How can I copy a file?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12551 in perlfaq5.pod
@@ -80,13 +80,13 @@ Lookups: How do I traverse a directory tree?; Text: How do I traverse a director
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 52810 in perlfaq5.pod
 Lookups: I still don't get locking. I just want to increment the number in the file. How can I do this?; Text: I still don't get locking. I just want to increment the number in the file. How can I do this?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 33343 in perlfaq5.pod
-Lookups: IO::Handle; Text: How do I do a tail -f in perl?; Tail: (IO::Handle); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: IO::Handle; Text: IO::Handle; Tail: (How do I do a tail -f in perl?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 46301 in perlfaq5.pod
-Lookups: IO::String; Text: How can I open a filehandle to a string?; Tail: (IO::String); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: IO::String; Text: IO::String; Tail: (How can I open a filehandle to a string?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 23340 in perlfaq5.pod
 Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlfaq5.pod
-Lookups: POSIX; Text: How do I close a file descriptor by number?; Tail: (POSIX); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: POSIX; Text: POSIX; Tail: (How do I close a file descriptor by number?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 47834 in perlfaq5.pod
 Lookups: VERSION; Text: VERSION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 43 in perlfaq5.pod
@@ -102,135 +102,135 @@ Lookups: Why does Perl let me delete read-only files? Why does -i clobber protec
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 49821 in perlfaq5.pod
 Lookups: Why doesn't glob("*.*") get all the files?; Text: Why doesn't glob("*.*") get all the files?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 49460 in perlfaq5.pod
-Lookups: append; Text: All I want to do is append a small amount of text to the end of a file. Do I still have to use locking?; Tail: (append); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: append; Text: append; Tail: (All I want to do is append a small amount of text to the end of a file. Do I still have to use locking?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 34597 in perlfaq5.pod
-Lookups: argument list too long; Text: Why do I sometimes get an "Argument list too long" when I use <*>?; Tail: (argument list too long); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: argument list too long; Text: argument list too long; Tail: (Why do I sometimes get an "Argument list too long" when I use <*>?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 28733 in perlfaq5.pod
-Lookups: autoflush; Text: How do I flush/unbuffer an output filehandle? Why must I do this?; Tail: (autoflush); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: autoflush; Text: autoflush; Tail: (How do I flush/unbuffer an output filehandle? Why must I do this?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 295 in perlfaq5.pod
-Lookups: buffer; Text: How do I flush/unbuffer an output filehandle? Why must I do this?; Tail: (buffer); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: buffer; Text: buffer; Tail: (How do I flush/unbuffer an output filehandle? Why must I do this?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 273 in perlfaq5.pod
-Lookups: clearerr; Text: How do I do a tail -f in perl?; Tail: (clearerr); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: clearerr; Text: clearerr; Tail: (How do I do a tail -f in perl?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 46329 in perlfaq5.pod
-Lookups: clobber; Text: How come when I open a file read-write it wipes it out?; Tail: (clobber); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: clobber; Text: clobber; Tail: (How come when I open a file read-write it wipes it out?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 26010 in perlfaq5.pod
-Lookups: clobbering; Text: How come when I open a file read-write it wipes it out?; Tail: (clobbering); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: clobbering; Text: clobbering; Tail: (How come when I open a file read-write it wipes it out?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 26035 in perlfaq5.pod
-Lookups: close; Text: How do I close a file descriptor by number?; Tail: (close); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: close; Text: close; Tail: (How do I close a file descriptor by number?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 47843 in perlfaq5.pod
-Lookups: copy; Text: How can I copy a file?; Tail: (copy); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: copy; Text: copy; Tail: (How can I copy a file?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 12581 in perlfaq5.pod
-Lookups: counter; Text: I still don't get locking. I just want to increment the number in the file. How can I do this?; Tail: (counter); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: counter; Text: counter; Tail: (I still don't get locking. I just want to increment the number in the file. How can I do this?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 33445 in perlfaq5.pod
-Lookups: dup; Text: How do I dup() a filehandle in Perl?; Tail: (dup); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: dup; Text: dup; Tail: (How do I dup() a filehandle in Perl?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 47176 in perlfaq5.pod
-Lookups: file, append; Text: All I want to do is append a small amount of text to the end of a file. Do I still have to use locking?; Tail: (file, append); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: file, append; Text: file, append; Tail: (All I want to do is append a small amount of text to the end of a file. Do I still have to use locking?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 34607 in perlfaq5.pod
-Lookups: file, binary patch; Text: How do I randomly update a binary file?; Tail: (file, binary patch); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: file, binary patch; Text: file, binary patch; Tail: (How do I randomly update a binary file?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 36215 in perlfaq5.pod
-Lookups: file, closing file descriptors; Text: How do I close a file descriptor by number?; Tail: (file, closing file descriptors); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: file, closing file descriptors; Text: file, closing file descriptors; Tail: (How do I close a file descriptor by number?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 47800 in perlfaq5.pod
-Lookups: file, copy; Text: How can I copy a file?; Tail: (file, copy); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: file, copy; Text: file, copy; Tail: (How can I copy a file?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 12589 in perlfaq5.pod
-Lookups: file, counter; Text: I still don't get locking. I just want to increment the number in the file. How can I do this?; Tail: (file, counter); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: file, counter; Text: file, counter; Tail: (I still don't get locking. I just want to increment the number in the file. How can I do this?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 33456 in perlfaq5.pod
-Lookups: file, counting lines; Text: How do I count the number of lines in a file?; Tail: (file, counting lines); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: file, counting lines; Text: file, counting lines; Tail: (How do I count the number of lines in a file?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 8314 in perlfaq5.pod
-Lookups: file, editing; Text: How do I change, delete, or insert a line in a file, or append to the beginning of a file?; Tail: (file, editing); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: file, editing; Text: file, editing; Tail: (How do I change, delete, or insert a line in a file, or append to the beginning of a file?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 3065 in perlfaq5.pod
-Lookups: file, fixed-length records; Text: How can I manipulate fixed-record-length files?; Tail: (file, fixed-length records); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: file, fixed-length records; Text: file, fixed-length records; Tail: (How can I manipulate fixed-record-length files?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 15070 in perlfaq5.pod
-Lookups: file, lock; Text: How can I lock a file?; Tail: (file, lock); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: file, lock; Text: file, lock; Tail: (How can I lock a file?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 30613 in perlfaq5.pod
-Lookups: file, reading by paragraphs; Text: How can I read in a file by paragraphs?; Tail: (file, reading by paragraphs); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: file, reading by paragraphs; Text: file, reading by paragraphs; Tail: (How can I read in a file by paragraphs?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 42012 in perlfaq5.pod
-Lookups: file, reading one character at a time; Text: How can I read a single character from a file? From the keyboard?; Tail: (file, reading one character at a time); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: file, reading one character at a time; Text: file, reading one character at a time; Tail: (How can I read a single character from a file? From the keyboard?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 42500 in perlfaq5.pod
-Lookups: file, rename; Text: How can I reliably rename a file?; Tail: (file, rename); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: file, rename; Text: file, rename; Tail: (How can I reliably rename a file?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 30104 in perlfaq5.pod
-Lookups: file, selecting a random line; Text: How do I select a random line from a file?; Tail: (file, selecting a random line); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: file, selecting a random line; Text: file, selecting a random line; Tail: (How do I select a random line from a file?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 50646 in perlfaq5.pod
-Lookups: file, slurping; Text: How can I read in an entire file all at once?; Tail: (file, slurping); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: file, slurping; Text: file, slurping; Tail: (How can I read in an entire file all at once?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 39613 in perlfaq5.pod
-Lookups: file, temporary; Text: How do I make a temporary file name?; Tail: (file, temporary); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: file, temporary; Text: file, temporary; Tail: (How do I make a temporary file name?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 13179 in perlfaq5.pod
-Lookups: file, timestamp; Text: How do I get a file's timestamp in perl?; Tail: (file, timestamp); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: file, timestamp; Text: file, timestamp; Tail: (How do I get a file's timestamp in perl?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 37037 in perlfaq5.pod
-Lookups: file, timestamp; Text: How do I set a file's timestamp in perl?; Tail: (file, timestamp); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: file, timestamp; Text: file, timestamp; Tail: (How do I set a file's timestamp in perl?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 38320 in perlfaq5.pod
-Lookups: file; Text: How do I delete the last N lines from a file?; Tail: (file); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: file; Text: file; Tail: (How do I delete the last N lines from a file?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 10050 in perlfaq5.pod
-Lookups: filehandle, indirect; Text: How can I use a filehandle indirectly?; Tail: (filehandle, indirect); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: filehandle, indirect; Text: filehandle, indirect; Tail: (How can I use a filehandle indirectly?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17725 in perlfaq5.pod
-Lookups: filehandle, local; Text: How can I make a filehandle local to a subroutine? How do I pass filehandles between subroutines? How do I make an array of filehandles?; Tail: (filehandle, local); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: filehandle, local; Text: filehandle, local; Tail: (How can I make a filehandle local to a subroutine? How do I pass filehandles between subroutines? How do I make an array of filehandles?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 16368 in perlfaq5.pod
-Lookups: filehandle, passing; Text: How can I make a filehandle local to a subroutine? How do I pass filehandles between subroutines? How do I make an array of filehandles?; Tail: (filehandle, passing); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: filehandle, passing; Text: filehandle, passing; Tail: (How can I make a filehandle local to a subroutine? How do I pass filehandles between subroutines? How do I make an array of filehandles?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 16389 in perlfaq5.pod
-Lookups: filehandle, reference; Text: How can I make a filehandle local to a subroutine? How do I pass filehandles between subroutines? How do I make an array of filehandles?; Tail: (filehandle, reference); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: filehandle, reference; Text: filehandle, reference; Tail: (How can I make a filehandle local to a subroutine? How do I pass filehandles between subroutines? How do I make an array of filehandles?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 16412 in perlfaq5.pod
-Lookups: filehandle; Text: How can I open a filehandle to a string?; Tail: (filehandle); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: filehandle; Text: filehandle; Tail: (How can I open a filehandle to a string?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 23354 in perlfaq5.pod
-Lookups: filename, DOS issues; Text: Why can't I use "C:\temp\foo" in DOS paths? Why doesn't `C:\temp\foo.exe` work?; Tail: (filename, DOS issues); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: filename, DOS issues; Text: filename, DOS issues; Tail: (Why can't I use "C:\temp\foo" in DOS paths? Why doesn't `C:\temp\foo.exe` work?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 48697 in perlfaq5.pod
-Lookups: filename, special characters; Text: How can I open a file with a leading ">" or trailing blanks?; Tail: (filename, special characters); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: filename, special characters; Text: filename, special characters; Tail: (How can I open a file with a leading ">" or trailing blanks?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 29399 in perlfaq5.pod
-Lookups: fixed-length; Text: How can I manipulate fixed-record-length files?; Tail: (fixed-length); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: fixed-length; Text: fixed-length; Tail: (How can I manipulate fixed-record-length files?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 15054 in perlfaq5.pod
-Lookups: flock; Text: How can I lock a file?; Tail: (flock); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: flock; Text: flock; Tail: (How can I lock a file?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 30627 in perlfaq5.pod
-Lookups: flush; Text: How do I flush/unbuffer an output filehandle? Why must I do this?; Tail: (flush); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: flush; Text: flush; Tail: (How do I flush/unbuffer an output filehandle? Why must I do this?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 264 in perlfaq5.pod
-Lookups: footer; Text: How can I set up a footer format to be used with write()?; Tail: (footer); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: footer; Text: footer; Tail: (How can I set up a footer format to be used with write()?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 21542 in perlfaq5.pod
-Lookups: getc; Text: How can I read a single character from a file? From the keyboard?; Tail: (getc); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: getc; Text: getc; Tail: (How can I read a single character from a file? From the keyboard?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 42492 in perlfaq5.pod
-Lookups: glob; Text: Why doesn't glob("*.*") get all the files?; Tail: (glob); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: glob; Text: glob; Tail: (Why doesn't glob("*.*") get all the files?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 49510 in perlfaq5.pod
-Lookups: in-place; Text: How can I use Perl's -i option from within a program?; Tail: (in-place); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: in-place; Text: in-place; Tail: (How can I use Perl's -i option from within a program?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 11719 in perlfaq5.pod
-Lookups: line; Text: How do I count the number of lines in a file?; Tail: (line); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: line; Text: line; Tail: (How do I count the number of lines in a file?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 8347 in perlfaq5.pod
-Lookups: lines; Text: How do I count the number of lines in a file?; Tail: (lines); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: lines; Text: lines; Tail: (How do I count the number of lines in a file?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 8338 in perlfaq5.pod
-Lookups: lines; Text: How do I delete the last N lines from a file?; Tail: (lines); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: lines; Text: lines; Tail: (How do I delete the last N lines from a file?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 10041 in perlfaq5.pod
-Lookups: lock, lockfile race condition; Text: Why can't I just open(FH, ">file.lock")?; Tail: (lock, lockfile race condition); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: lock, lockfile race condition; Text: lock, lockfile race condition; Tail: (Why can't I just open(FH, ">file.lock")?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 32579 in perlfaq5.pod
-Lookups: lock; Text: How can I lock a file?; Tail: (lock); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: lock; Text: lock; Tail: (How can I lock a file?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 30605 in perlfaq5.pod
-Lookups: move; Text: How can I reliably rename a file?; Tail: (move); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: move; Text: move; Tail: (How can I reliably rename a file?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 30096 in perlfaq5.pod
-Lookups: mv; Text: How can I reliably rename a file?; Tail: (mv); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: mv; Text: mv; Tail: (How can I reliably rename a file?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 30090 in perlfaq5.pod
-Lookups: number, commify; Text: How can I output my numbers with commas added?; Tail: (number, commify); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: number, commify; Text: number, commify; Tail: (How can I output my numbers with commas added?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 24064 in perlfaq5.pod
-Lookups: open; Text: How can I open a filehandle to a string?; Tail: (open); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: open; Text: open; Tail: (How can I open a filehandle to a string?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 23332 in perlfaq5.pod
-Lookups: print, to multiple files; Text: How do I print to more than one file at once?; Tail: (print, to multiple files); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: print, to multiple files; Text: print, to multiple files; Tail: (How do I print to more than one file at once?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 39251 in perlfaq5.pod
-Lookups: read-write; Text: How come when I open a file read-write it wipes it out?; Tail: (read-write); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: read-write; Text: read-write; Tail: (How come when I open a file read-write it wipes it out?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 26021 in perlfaq5.pod
-Lookups: rename; Text: How can I reliably rename a file?; Tail: (rename); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: rename; Text: rename; Tail: (How can I reliably rename a file?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 30080 in perlfaq5.pod
-Lookups: slurp; Text: How can I read in an entire file all at once?; Tail: (slurp); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: slurp; Text: slurp; Tail: (How can I read in an entire file all at once?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 39604 in perlfaq5.pod
-Lookups: string; Text: How can I open a filehandle to a string?; Tail: (string); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: string; Text: string; Tail: (How can I open a filehandle to a string?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 23322 in perlfaq5.pod
-Lookups: tail; Text: How do I do a tail -f in perl?; Tail: (tail); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: tail; Text: tail; Tail: (How do I do a tail -f in perl?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 46293 in perlfaq5.pod
-Lookups: tilde expansion; Text: How can I translate tildes (~) in a filename?; Tail: (tilde expansion); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: tilde expansion; Text: tilde expansion; Tail: (How can I translate tildes (~) in a filename?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 25267 in perlfaq5.pod
-Lookups: tilde; Text: How can I translate tildes (~) in a filename?; Tail: (tilde); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: tilde; Text: tilde; Tail: (How can I translate tildes (~) in a filename?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 25258 in perlfaq5.pod
-Lookups: timestamp; Text: How do I get a file's timestamp in perl?; Tail: (timestamp); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: timestamp; Text: timestamp; Tail: (How do I get a file's timestamp in perl?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 37024 in perlfaq5.pod
-Lookups: timestamp; Text: How do I set a file's timestamp in perl?; Tail: (timestamp); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: timestamp; Text: timestamp; Tail: (How do I set a file's timestamp in perl?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 38307 in perlfaq5.pod
-Lookups: truncate; Text: How come when I open a file read-write it wipes it out?; Tail: (truncate); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: truncate; Text: truncate; Tail: (How come when I open a file read-write it wipes it out?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 26049 in perlfaq5.pod
-Lookups: truncating; Text: How come when I open a file read-write it wipes it out?; Tail: (truncating); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: truncating; Text: truncating; Tail: (How come when I open a file read-write it wipes it out?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 26061 in perlfaq5.pod
-Lookups: unbuffer; Text: How do I flush/unbuffer an output filehandle? Why must I do this?; Tail: (unbuffer); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: unbuffer; Text: unbuffer; Tail: (How do I flush/unbuffer an output filehandle? Why must I do this?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 283 in perlfaq5.pod
-Lookups: write, into a string; Text: How can I write() into a string?; Tail: (write, into a string); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: write, into a string; Text: write, into a string; Tail: (How can I write() into a string?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 21717 in perlfaq5.pod

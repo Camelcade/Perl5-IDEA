@@ -1,4 +1,4 @@
-Lookups: -E<gt>, ->; Text: Speaking of things like @{$AoA[$i]}, the following are actually the same thing:; Tail: (->); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: -E<gt>, ->; Text: ->; Tail: (Speaking of things like @{$AoA[$i]}, the following are actually the same thing:); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 9454 in perldsc.pod
 Lookups: ARRAYS OF ARRAYS; Text: ARRAYS OF ARRAYS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 12307 in perldsc.pod
@@ -14,13 +14,13 @@ Lookups: Access and Printing of an ARRAY OF ARRAYS; Text: Access and Printing of
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12880 in perldsc.pod
 Lookups: Access and Printing of an ARRAY OF HASHES; Text: Access and Printing of an ARRAY OF HASHES; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16598 in perldsc.pod
-Lookups: AoA, debugging; Text: DEBUGGING; Tail: (AoA, debugging); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: AoA, debugging; Text: AoA, debugging; Tail: (DEBUGGING); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 11381 in perldsc.pod
-Lookups: AoA; Text: ARRAYS OF ARRAYS; Tail: (AoA); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: AoA; Text: AoA; Tail: (ARRAYS OF ARRAYS); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 12350 in perldsc.pod
-Lookups: AoH, debugging; Text: DEBUGGING; Tail: (AoH, debugging); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: AoH, debugging; Text: AoH, debugging; Tail: (DEBUGGING); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 11417 in perldsc.pod
-Lookups: AoH; Text: ARRAYS OF HASHES; Tail: (AoH); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: AoH; Text: AoH; Tail: (ARRAYS OF HASHES); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 15454 in perldsc.pod
 Lookups: CAVEAT ON PRECEDENCE; Text: CAVEAT ON PRECEDENCE; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 9286 in perldsc.pod
@@ -60,13 +60,13 @@ Lookups: HASHES OF ARRAYS; Text: HASHES OF ARRAYS; Tail: null; Type: 1st Heading
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 13371 in perldsc.pod
 Lookups: HASHES OF HASHES; Text: HASHES OF HASHES; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 17280 in perldsc.pod
-Lookups: HoA, debugging; Text: DEBUGGING; Tail: (HoA, debugging); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: HoA, debugging; Text: HoA, debugging; Tail: (DEBUGGING); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 11399 in perldsc.pod
-Lookups: HoA; Text: HASHES OF ARRAYS; Tail: (HoA); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: HoA; Text: HoA; Tail: (HASHES OF ARRAYS); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 13413 in perldsc.pod
-Lookups: HoH, debugging; Text: DEBUGGING; Tail: (HoH, debugging); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: HoH, debugging; Text: HoH, debugging; Tail: (DEBUGGING); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 11435 in perldsc.pod
-Lookups: HoH; Text: HASHES OF HASHES; Tail: (HoH); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: HoH; Text: HoH; Tail: (HASHES OF HASHES); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17322 in perldsc.pod
 Lookups: MORE ELABORATE RECORDS; Text: MORE ELABORATE RECORDS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 20403 in perldsc.pod
@@ -78,55 +78,55 @@ Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: 1st Heading; Icon: /perl5la
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 25494 in perldsc.pod
 Lookups: WHY YOU SHOULD ALWAYS use strict; Text: WHY YOU SHOULD ALWAYS use strict; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 10424 in perldsc.pod
-Lookups: []; Text: The problem is that both rp and dp are pointers to the same location in memory!  In C, you'd have to remember to malloc() yourself some n...; Tail: ([]); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: []; Text: []; Tail: (The problem is that both rp and dp are pointers to the same location in memory!  In C, you'd have to remember to malloc() yourself some n...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 6291 in perldsc.pod
-Lookups: array of arrays, debugging; Text: DEBUGGING; Tail: (array of arrays, debugging); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: array of arrays, debugging; Text: array of arrays, debugging; Tail: (DEBUGGING); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 11453 in perldsc.pod
-Lookups: array of arrays; Text: ARRAYS OF ARRAYS; Tail: (array of arrays); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: array of arrays; Text: array of arrays; Tail: (ARRAYS OF ARRAYS); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 12331 in perldsc.pod
-Lookups: array of hashes, debugging; Text: DEBUGGING; Tail: (array of hashes, debugging); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: array of hashes, debugging; Text: array of hashes, debugging; Tail: (DEBUGGING); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 11512 in perldsc.pod
-Lookups: array of hashes; Text: ARRAYS OF HASHES; Tail: (array of hashes); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: array of hashes; Text: array of hashes; Tail: (ARRAYS OF HASHES); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 15435 in perldsc.pod
-Lookups: array, multidimensional; Text: The most important thing to understand about all data structures in Perl--including multidimensional arrays--is that even though they mig...; Tail: (array, multidimensional); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: array, multidimensional; Text: array, multidimensional; Tail: (The most important thing to understand about all data structures in Perl--including multidimensional arrays--is that even though they mig...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 2355 in perldsc.pod
-Lookups: complex data structure, debugging; Text: DEBUGGING; Tail: (complex data structure, debugging); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: complex data structure, debugging; Text: complex data structure, debugging; Tail: (DEBUGGING); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 11344 in perldsc.pod
-Lookups: complex data structure; Text: NAME; Tail: (complex data structure); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: complex data structure; Text: complex data structure; Tail: (NAME); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 30 in perldsc.pod
-Lookups: data structure, debugging; Text: DEBUGGING; Tail: (data structure, debugging); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: data structure, debugging; Text: data structure, debugging; Tail: (DEBUGGING); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 11315 in perldsc.pod
-Lookups: data structure; Text: NAME; Tail: (data structure); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: data structure; Text: data structure; Tail: (NAME); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 12 in perldsc.pod
-Lookups: dereference, precedence; Text: CAVEAT ON PRECEDENCE; Tail: (dereference, precedence); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: dereference, precedence; Text: dereference, precedence; Tail: (CAVEAT ON PRECEDENCE); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 9314 in perldsc.pod
-Lookups: dereference; Text: REFERENCES; Tail: (dereference); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: dereference; Text: dereference; Tail: (REFERENCES); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 1867 in perldsc.pod
-Lookups: dereferencing, precedence; Text: CAVEAT ON PRECEDENCE; Tail: (dereferencing, precedence); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: dereferencing, precedence; Text: dereferencing, precedence; Tail: (CAVEAT ON PRECEDENCE); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 9341 in perldsc.pod
-Lookups: dereferencing; Text: REFERENCES; Tail: (dereferencing); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: dereferencing; Text: dereferencing; Tail: (REFERENCES); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 1882 in perldsc.pod
-Lookups: hash of arrays, debugging; Text: DEBUGGING; Tail: (hash of arrays, debugging); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: hash of arrays, debugging; Text: hash of arrays, debugging; Tail: (DEBUGGING); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 11483 in perldsc.pod
-Lookups: hash of arrays; Text: HASHES OF ARRAYS; Tail: (hash of arrays); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: hash of arrays; Text: hash of arrays; Tail: (HASHES OF ARRAYS); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 13395 in perldsc.pod
-Lookups: hash of hashes, debugging; Text: DEBUGGING; Tail: (hash of hashes, debugging); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: hash of hashes, debugging; Text: hash of hashes, debugging; Tail: (DEBUGGING); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 11542 in perldsc.pod
-Lookups: hash of hashes; Text: HASHES OF HASHES; Tail: (hash of hashes); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: hash of hashes; Text: hash of hashes; Tail: (HASHES OF HASHES); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17304 in perldsc.pod
-Lookups: multidimensional array; Text: The most important thing to understand about all data structures in Perl--including multidimensional arrays--is that even though they mig...; Tail: (multidimensional array); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: multidimensional array; Text: multidimensional array; Tail: (The most important thing to understand about all data structures in Perl--including multidimensional arrays--is that even though they mig...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 2329 in perldsc.pod
-Lookups: pointer; Text: REFERENCES; Tail: (pointer); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: pointer; Text: pointer; Tail: (REFERENCES); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 1899 in perldsc.pod
-Lookups: record; Text: MORE ELABORATE RECORDS; Tail: (record); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: record; Text: record; Tail: (MORE ELABORATE RECORDS); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 20433 in perldsc.pod
-Lookups: reference; Text: REFERENCES; Tail: (reference); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: reference; Text: reference; Tail: (REFERENCES); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 1854 in perldsc.pod
-Lookups: struct; Text: MORE ELABORATE RECORDS; Tail: (struct); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: struct; Text: struct; Tail: (MORE ELABORATE RECORDS); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 20456 in perldsc.pod
-Lookups: struct; Text: NAME; Tail: (struct); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: struct; Text: struct; Tail: (NAME); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 56 in perldsc.pod
-Lookups: structure; Text: MORE ELABORATE RECORDS; Tail: (structure); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: structure; Text: structure; Tail: (MORE ELABORATE RECORDS); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 20443 in perldsc.pod
-Lookups: {}; Text: The problem is that both rp and dp are pointers to the same location in memory!  In C, you'd have to remember to malloc() yourself some n...; Tail: ({}); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: {}; Text: {}; Tail: (The problem is that both rp and dp are pointers to the same location in memory!  In C, you'd have to remember to malloc() yourself some n...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 6297 in perldsc.pod

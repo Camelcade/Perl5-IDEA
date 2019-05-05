@@ -1,6 +1,6 @@
 Lookups: "Gimme" Values; Text: "Gimme" Values; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 95607 in perlapi.pod
-Lookups: API; Text: DESCRIPTION; Tail: (API); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: API; Text: API; Tail: (DESCRIPTION); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 314 in perlapi.pod
 Lookups: AUTHORS; Text: AUTHORS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 474594 in perlapi.pod
@@ -266,7 +266,7 @@ Lookups: PadnamelistREFCNT_dec; Text: PadnamelistREFCNT_dec; Tail: null; Type: L
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 279889 in perlapi.pod
 Lookups: Per-Interpreter Variables; Text: Per-Interpreter Variables; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 282784 in perlapi.pod
-Lookups: Perl API; Text: DESCRIPTION; Tail: (Perl API); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: Perl API; Text: Perl API; Tail: (DESCRIPTION); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 302 in perlapi.pod
 Lookups: PerlIO_clearerr; Text: PerlIO_clearerr; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 462600 in perlapi.pod
@@ -348,7 +348,7 @@ Lookups: amagic_deref_call; Text: amagic_deref_call; Tail: null; Type: List Item
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 463582 in perlapi.pod
 Lookups: any_dup; Text: any_dup; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 463628 in perlapi.pod
-Lookups: api; Text: DESCRIPTION; Tail: (api); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: api; Text: api; Tail: (DESCRIPTION); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 321 in perlapi.pod
 Lookups: atfork_lock; Text: atfork_lock; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 463654 in perlapi.pod

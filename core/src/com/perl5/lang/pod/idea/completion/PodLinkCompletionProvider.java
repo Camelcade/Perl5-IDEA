@@ -161,34 +161,30 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
           if (!((PodFormatterX)o).isMeaningful()) {
             return;
           }
-          String lookupText = ((PodFormatterX)o).getTitleText();
-          if (StringUtil.isEmpty(lookupText)) {
+          String indexTitle = ((PodFormatterX)o).getTitleText();
+          if (StringUtil.isEmpty(indexTitle)) {
             return;
           }
           PsiElement indexTarget = ((PodFormatterX)o).getIndexTarget();
-          String presentableText;
+          String targetPresentableText;
           if (indexTarget instanceof PodFile) {
-            presentableText = cleanItemText(((PodFile)indexTarget).getPodLinkText());
+            targetPresentableText = cleanItemText(((PodFile)indexTarget).getPodLinkText());
           }
           else if (indexTarget instanceof PodCompositeElement) {
-            presentableText = cleanItemText(((PodCompositeElement)indexTarget).getPresentableText());
+            targetPresentableText = cleanItemText(((PodCompositeElement)indexTarget).getPresentableText());
           }
           else {
             LOG.warn("Unhandled index target: " + indexTarget);
             return;
           }
-          String tailText;
-          if (presentableText == null) {
-            presentableText = lookupText;
-            tailText = null;
-          }
-          else {
-            tailText = "(" + lookupText + ")";
+          String tailText = null;
+          if (targetPresentableText != null) {
+            tailText = "(" + targetPresentableText + ")";
           }
           result.addElement(
-            LookupElementBuilder.create(o, escapeTitle(lookupText))
-              .withLookupString(lookupText)
-              .withPresentableText(presentableText)
+            LookupElementBuilder.create(o, escapeTitle(indexTitle))
+              .withLookupString(indexTitle)
+              .withPresentableText(indexTitle)
               .withTailText(tailText)
               .withTypeText(UsageViewUtil.getType(o))
               .withIcon(PerlIcons.POD_FILE)

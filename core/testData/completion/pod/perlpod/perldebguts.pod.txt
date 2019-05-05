@@ -1,4 +1,4 @@
-Lookups: &DB::lsub; Text: If the call is to an lvalue subroutine, and &DB::lsub is defined &DB::lsub(args) is called instead, otherwise falling back to &DB::sub(ar...; Tail: (&DB::lsub); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: &DB::lsub; Text: &DB::lsub; Tail: (If the call is to an lvalue subroutine, and &DB::lsub is defined &DB::lsub(args) is called instead, otherwise falling back to &DB::sub(ar...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 3944 in perldebguts.pod
 Lookups: Compile-time Output; Text: Compile-time Output; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15533 in perldebguts.pod

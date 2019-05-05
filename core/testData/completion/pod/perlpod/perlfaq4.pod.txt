@@ -1,8 +1,8 @@
 Lookups: AUTHOR AND COPYRIGHT; Text: AUTHOR AND COPYRIGHT; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 88887 in perlfaq4.pod
-Lookups: Algorithm::Loops; Text: How do I permute N elements of a list?; Tail: (Algorithm::Loops); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: Algorithm::Loops; Text: Algorithm::Loops; Tail: (How do I permute N elements of a list?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 59631 in perlfaq4.pod
-Lookups: Array::Iterator::Circular; Text: How do I handle circular lists?; Tail: (Array::Iterator::Circular); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: Array::Iterator::Circular; Text: Array::Iterator::Circular; Tail: (How do I handle circular lists?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 55962 in perlfaq4.pod
 Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 77 in perlfaq4.pod
@@ -18,15 +18,15 @@ Lookups: Data: Numbers; Text: Data: Numbers; Tail: null; Type: 1st Heading; Icon
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 236 in perlfaq4.pod
 Lookups: Data: Strings; Text: Data: Strings; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 20351 in perlfaq4.pod
-Lookups: Date::Calc; Text: How do I find yesterday's date?; Tail: (Date::Calc); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: Date::Calc; Text: Date::Calc; Tail: (How do I find yesterday's date?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17416 in perlfaq4.pod
-Lookups: DateTime; Text: How do I find yesterday's date?; Tail: (DateTime); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: DateTime; Text: DateTime; Tail: (How do I find yesterday's date?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17404 in perlfaq4.pod
 Lookups: Does Perl have a Year 2000 or 2038 problem? Is Perl Y2K compliant?; Text: Does Perl have a Year 2000 or 2038 problem? Is Perl Y2K compliant?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19467 in perlfaq4.pod
 Lookups: Does Perl have a round() function? What about ceil() and floor()? Trig functions?; Text: Does Perl have a round() function? What about ceil() and floor()? Trig functions?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3230 in perlfaq4.pod
-Lookups: Fischer-Krause; Text: How do I permute N elements of a list?; Tail: (Fischer-Krause); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: Fischer-Krause; Text: Fischer-Krause; Tail: (How do I permute N elements of a list?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 59695 in perlfaq4.pod
 Lookups: How can I access or change N characters of a string?; Text: How can I access or change N characters of a string?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 25712 in perlfaq4.pod
@@ -166,15 +166,15 @@ Lookups: How do I validate input?; Text: How do I validate input?; Tail: null; T
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20373 in perlfaq4.pod
 Lookups: How do I verify a credit card checksum?; Text: How do I verify a credit card checksum?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 88454 in perlfaq4.pod
-Lookups: Knuth; Text: How do I permute N elements of a list?; Tail: (Knuth); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: Knuth; Text: Knuth; Tail: (How do I permute N elements of a list?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 59651 in perlfaq4.pod
-Lookups: List::Permutor; Text: How do I permute N elements of a list?; Tail: (List::Permutor); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: List::Permutor; Text: List::Permutor; Tail: (How do I permute N elements of a list?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 59602 in perlfaq4.pod
 Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlfaq4.pod
-Lookups: Text::Autoformat; Text: How do I capitalize all the words on one line?; Tail: (Text::Autoformat); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: Text::Autoformat; Text: Text::Autoformat; Tail: (How do I capitalize all the words on one line?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 28328 in perlfaq4.pod
-Lookups: The Art of Computer Programming; Text: How do I permute N elements of a list?; Tail: (The Art of Computer Programming); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: The Art of Computer Programming; Text: The Art of Computer Programming; Tail: (How do I permute N elements of a list?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 59660 in perlfaq4.pod
 Lookups: There (probably) should be a semicolon at the end of the opening token; Text: There (probably) should be a semicolon at the end of the opening token; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 40189 in perlfaq4.pod
@@ -182,11 +182,11 @@ Lookups: There must be no space after the << part., There must be no space after
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 40132 in perlfaq4.pod
 Lookups: There needs to be at least a line separator after the end token.; Text: There needs to be at least a line separator after the end token.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 40329 in perlfaq4.pod
-Lookups: Tie::Cycle; Text: How do I handle circular lists?; Tail: (Tie::Cycle); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: Tie::Cycle; Text: Tie::Cycle; Tail: (How do I handle circular lists?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 55948 in perlfaq4.pod
-Lookups: Time::Local; Text: How do I find yesterday's date?; Tail: (Time::Local); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: Time::Local; Text: Time::Local; Tail: (How do I find yesterday's date?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17430 in perlfaq4.pod
-Lookups: Today_and_Now; Text: How do I find yesterday's date?; Tail: (Today_and_Now); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: Today_and_Now; Text: Today_and_Now; Tail: (How do I find yesterday's date?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17476 in perlfaq4.pod
 Lookups: VERSION; Text: VERSION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 43 in perlfaq4.pod
@@ -220,39 +220,39 @@ Lookups: Why isn't my octal data interpreted correctly?; Text: Why isn't my octa
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1722 in perlfaq4.pod
 Lookups: You can't (easily) have any space in front of the tag.; Text: You can't (easily) have any space in front of the tag.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 40267 in perlfaq4.pod
-Lookups: array; Text: How do I handle circular lists?; Tail: (array); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: array; Text: array; Tail: (How do I handle circular lists?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 55939 in perlfaq4.pod
-Lookups: capitalize; Text: How do I capitalize all the words on one line?; Tail: (capitalize); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: capitalize; Text: capitalize; Tail: (How do I capitalize all the words on one line?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 28348 in perlfaq4.pod
-Lookups: case, sentence; Text: How do I capitalize all the words on one line?; Tail: (case, sentence); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: case, sentence; Text: case, sentence; Tail: (How do I capitalize all the words on one line?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 28377 in perlfaq4.pod
-Lookups: case, title; Text: How do I capitalize all the words on one line?; Tail: (case, title); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: case, title; Text: case, title; Tail: (How do I capitalize all the words on one line?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 28362 in perlfaq4.pod
-Lookups: circular; Text: How do I handle circular lists?; Tail: (circular); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: circular; Text: circular; Tail: (How do I handle circular lists?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 55927 in perlfaq4.pod
-Lookups: cycle; Text: How do I handle circular lists?; Tail: (cycle); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: cycle; Text: cycle; Tail: (How do I handle circular lists?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 55991 in perlfaq4.pod
-Lookups: date; Text: How do I find yesterday's date?; Tail: (date); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: date; Text: date; Tail: (How do I find yesterday's date?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17383 in perlfaq4.pod
-Lookups: day; Text: How do I find yesterday's date?; Tail: (day); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: day; Text: day; Tail: (How do I find yesterday's date?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17469 in perlfaq4.pod
-Lookups: daylight saving time; Text: How do I find yesterday's date?; Tail: (daylight saving time); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: daylight saving time; Text: daylight saving time; Tail: (How do I find yesterday's date?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17445 in perlfaq4.pod
-Lookups: hash tie sort DB_File Tie::IxHash; Text: How can I always keep my hash sorted?; Tail: (hash tie sort DB_File Tie::IxHash); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: hash tie sort DB_File Tie::IxHash; Text: hash tie sort DB_File Tie::IxHash; Tail: (How can I always keep my hash sorted?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 74536 in perlfaq4.pod
-Lookups: hash; Text: How do I merge two hashes?; Tail: (hash); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: hash; Text: hash; Tail: (How do I merge two hashes?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 69158 in perlfaq4.pod
-Lookups: localtime; Text: How do I find yesterday's date?; Tail: (localtime); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: localtime; Text: localtime; Tail: (How do I find yesterday's date?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17493 in perlfaq4.pod
-Lookups: merge; Text: How do I merge two hashes?; Tail: (merge); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: merge; Text: merge; Tail: (How do I merge two hashes?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 69166 in perlfaq4.pod
-Lookups: modulus; Text: How do I handle circular lists?; Tail: (modulus); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: modulus; Text: modulus; Tail: (How do I handle circular lists?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 56000 in perlfaq4.pod
-Lookups: permute; Text: How do I permute N elements of a list?; Tail: (permute); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: permute; Text: permute; Tail: (How do I permute N elements of a list?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 59620 in perlfaq4.pod
-Lookups: slice, hash; Text: How do I merge two hashes?; Tail: (slice, hash); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: slice, hash; Text: slice, hash; Tail: (How do I merge two hashes?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 69175 in perlfaq4.pod
-Lookups: timelocal; Text: How do I find yesterday's date?; Tail: (timelocal); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: timelocal; Text: timelocal; Tail: (How do I find yesterday's date?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17506 in perlfaq4.pod
-Lookups: yesterday; Text: How do I find yesterday's date?; Tail: (yesterday); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: yesterday; Text: yesterday; Tail: (How do I find yesterday's date?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17391 in perlfaq4.pod

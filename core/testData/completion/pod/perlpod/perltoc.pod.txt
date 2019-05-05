@@ -1,7 +1,17 @@
+Lookups: !~; Text: !~; Tail: (Binding Operators); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 41118 in perltoc.pod
+Lookups: ""; Text: ""; Tail: (Quote and Quote-like Operators); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 43291 in perltoc.pod
+Lookups: ""; Text: ""; Tail: (q/STRING/    , 'STRING', qq/STRING/    , "STRING", qx/STRING/    , `STRING`, qw/STRING/   , tr/SEARCHLIST/REPLACEMENTLIST/cdsr      , y/S...); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 44200 in perltoc.pod
 Lookups: "$!" text is now in English outside the scope of use locale; Text: "$!" text is now in English outside the scope of use locale; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 234655 in perltoc.pod
 Lookups: "$!" text will be returned in UTF-8 when appropriate; Text: "$!" text will be returned in UTF-8 when appropriate; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 234728 in perltoc.pod
+Lookups: "; Text: "; Tail: (Quote and Quote-like Operators); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 43286 in perltoc.pod
+Lookups: "; Text: "; Tail: (q/STRING/    , 'STRING', qq/STRING/    , "STRING", qx/STRING/    , `STRING`, qw/STRING/   , tr/SEARCHLIST/REPLACEMENTLIST/cdsr      , y/S...); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 44195 in perltoc.pod
 Lookups: "Escaped" colons and relative paths in PATH; Text: "Escaped" colons and relative paths in PATH; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 226741 in perltoc.pod
 Lookups: "Escaped" colons and relative paths in PATH; Text: "Escaped" colons and relative paths in PATH; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -30,79 +40,93 @@ Lookups: # Variables; Text: # Variables; Tail: null; Type: List Item; Icon: /per
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 382501 in perltoc.pod
 Lookups: #! and quoting on non-Unix systems; Text: #! and quoting on non-Unix systems; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1788 in perltoc.pod
-Lookups: #!; Text: #! and quoting on non-Unix systems; Tail: (#!); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: #!; Text: #!; Tail: (#! and quoting on non-Unix systems); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 1841 in perltoc.pod
-Lookups: #; Text: Comments; Tail: (#); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: #; Text: #; Tail: (Comments); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 38725 in perltoc.pod
-Lookups: #; Text: Numeric Fields; Tail: (#); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: #; Text: #; Tail: (Numeric Fields); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 82394 in perltoc.pod
-Lookups: #; Text: Plain Old Comments (Not!); Tail: (#); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: #; Text: #; Tail: (Plain Old Comments (Not!)); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 39703 in perltoc.pod
 Lookups: #p5p on IRC; Text: #p5p on IRC; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 204558 in perltoc.pod
-Lookups: $!; Text: ${^CHILD_ERROR_NATIVE} , $EXTENDED_OS_ERROR, $^E  , $EXCEPTIONS_BEING_CAUGHT, $^S  , $WARNING, $^W  , ${^WARNING_BITS} , $OS_ERROR, $ERRN...; Tail: ($!); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $!; Text: $!; Tail: (${^CHILD_ERROR_NATIVE} , $EXTENDED_OS_ERROR, $^E  , $EXCEPTIONS_BEING_CAUGHT, $^S  , $WARNING, $^W  , ${^WARNING_BITS} , $OS_ERROR, $ERRN...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 74092 in perltoc.pod
-Lookups: $"; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: ($"); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $"; Text: $"; Tail: ($ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 70249 in perltoc.pod
-Lookups: $#; Text: $# , $* , $[; Tail: ($#); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $#; Text: $#; Tail: ($# , $* , $[); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 74858 in perltoc.pod
 Lookups: $$ and getppid() no longer emulate POSIX semantics under LinuxThreads; Text: $$ and getppid() no longer emulate POSIX semantics under LinuxThreads; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 249348 in perltoc.pod
 Lookups: $$ no longer caches PID; Text: $$ no longer caches PID; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 249314 in perltoc.pod
-Lookups: $$; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: ($$); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $$; Text: $$; Tail: ($ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 70297 in perltoc.pod
-Lookups: $%; Text: $ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...; Tail: ($%); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $%; Text: $%; Tail: ($ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 73307 in perltoc.pod
-Lookups: $&; Text: $<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...; Tail: ($&); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $&; Text: $&; Tail: ($<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 71363 in perltoc.pod
-Lookups: $'; Text: $<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...; Tail: ($'); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $&; Text: $&; Tail: (Why does using $&, $`, or $' slow my program down?); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 30727 in perltoc.pod
+Lookups: $'; Text: $'; Tail: ($<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 71505 in perltoc.pod
-Lookups: $'; Text: $<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...; Tail: ($'); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $'; Text: $'; Tail: ($<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 71580 in perltoc.pod
-Lookups: $(; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: ($(); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $'; Text: $'; Tail: (Why does using $&, $`, or $' slow my program down?); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 30747 in perltoc.pod
+Lookups: $(; Text: $(; Tail: ($ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 70394 in perltoc.pod
-Lookups: $); Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: ($)); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $); Text: $); Tail: ($ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 70458 in perltoc.pod
-Lookups: $*; Text: $# , $* , $[; Tail: ($*); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $*; Text: $*; Tail: ($# , $* , $[); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 74868 in perltoc.pod
-Lookups: $+; Text: $<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...; Tail: ($+); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $+; Text: $+; Tail: ($<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 71623 in perltoc.pod
 Lookups: $, flexibility; Text: $, flexibility; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 262759 in perltoc.pod
-Lookups: $,; Text: $ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...; Tail: ($,); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $,; Text: $,; Tail: ($ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 72598 in perltoc.pod
-Lookups: $-; Text: $ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...; Tail: ($-); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $-; Text: $-; Tail: ($ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 73393 in perltoc.pod
-Lookups: $.; Text: $ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...; Tail: ($.); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $.; Text: $.; Tail: ($ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 72703 in perltoc.pod
-Lookups: $/, $E<sol>; Text: $ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...; Tail: ($/); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $/, $E<sol>; Text: $/; Tail: ($ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 72831 in perltoc.pod
+Lookups: $/, $E<sol>; Text: $/; Tail: (-0[octal/hexadecimal]  , -a  , -C [number/list] , -c , -d  , -dt, -d:MOD[=bar,baz]  , -dt:MOD[=bar,baz], -Dletters   , -Dnumber, -e comma...); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 2038 in perltoc.pod
+Lookups: $/, $E<sol>; Text: $/; Tail: (-0[octal/hexadecimal]  , -a  , -C [number/list] , -c , -d  , -dt, -d:MOD[=bar,baz]  , -dt:MOD[=bar,baz], -Dletters   , -Dnumber, -e comma...); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 2508 in perltoc.pod
+Lookups: $/, $E<sol>; Text: $/; Tail: (-X FILEHANDLE  , -X EXPR, -X DIRHANDLE, -X, abs VALUE  , abs, accept NEWSOCKET,GENERICSOCKET , alarm SECONDS   , alarm, atan2 Y,X    , bi...); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 49301 in perltoc.pod
+Lookups: $/, regexes in, $E<sol>, regexes in; Text: $/, regexes in; Tail: (I put a regular expression into $/ but it didn't work. What's wrong?); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 29147 in perltoc.pod
 Lookups: $0 assignments; Text: $0 assignments; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 132017 in perltoc.pod
-Lookups: $0; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: ($0); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $0; Text: $0; Tail: ($ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 70345 in perltoc.pod
-Lookups: $1; Text: $<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...; Tail: ($1); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $1; Text: $1; Tail: ($<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 71278 in perltoc.pod
-Lookups: $2; Text: $<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...; Tail: ($2); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $2; Text: $2; Tail: ($<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 71284 in perltoc.pod
-Lookups: $3; Text: $<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...; Tail: ($3); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $3; Text: $3; Tail: ($<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 71290 in perltoc.pod
-Lookups: $:; Text: $ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...; Tail: ($:); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $:; Text: $:; Tail: ($ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 73503 in perltoc.pod
-Lookups: $;; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: ($;); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $;; Text: $;; Tail: ($ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 70663 in perltoc.pod
-Lookups: $=; Text: $ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...; Tail: ($=); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $=; Text: $=; Tail: ($ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 73606 in perltoc.pod
-Lookups: $?; Text: ${^CHILD_ERROR_NATIVE} , $EXTENDED_OS_ERROR, $^E  , $EXCEPTIONS_BEING_CAUGHT, $^S  , $WARNING, $^W  , ${^WARNING_BITS} , $OS_ERROR, $ERRN...; Tail: ($?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $?; Text: $?; Tail: (${^CHILD_ERROR_NATIVE} , $EXTENDED_OS_ERROR, $^E  , $EXCEPTIONS_BEING_CAUGHT, $^S  , $WARNING, $^W  , ${^WARNING_BITS} , $OS_ERROR, $ERRN...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 74191 in perltoc.pod
-Lookups: $@; Text: ${^CHILD_ERROR_NATIVE} , $EXTENDED_OS_ERROR, $^E  , $EXCEPTIONS_BEING_CAUGHT, $^S  , $WARNING, $^W  , ${^WARNING_BITS} , $OS_ERROR, $ERRN...; Tail: ($@); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $@; Text: $@; Tail: (${^CHILD_ERROR_NATIVE} , $EXTENDED_OS_ERROR, $^E  , $EXCEPTIONS_BEING_CAUGHT, $^S  , $WARNING, $^W  , ${^WARNING_BITS} , $OS_ERROR, $ERRN...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 74230 in perltoc.pod
-Lookups: $ACCUMULATOR; Text: $ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...; Tail: ($ACCUMULATOR); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $@; Text: $@; Tail: (-X FILEHANDLE  , -X EXPR, -X DIRHANDLE, -X, abs VALUE  , abs, accept NEWSOCKET,GENERICSOCKET , alarm SECONDS   , alarm, atan2 Y,X    , bi...); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 50078 in perltoc.pod
+Lookups: $ACCUMULATOR; Text: $ACCUMULATOR; Tail: ($ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 73147 in perltoc.pod
-Lookups: $ARG; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: ($ARG); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $ARG; Text: $ARG; Tail: ($ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 70196 in perltoc.pod
-Lookups: $ARGV; Text: $ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...; Tail: ($ARGV); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $ARGV; Text: $ARGV; Tail: ($ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 72460 in perltoc.pod
 Lookups: $AUTOLOAD can now be tainted; Text: $AUTOLOAD can now be tainted; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 273225 in perltoc.pod
@@ -132,11 +156,11 @@ Lookups: $Archive::Tar::error; Text: $Archive::Tar::error; Tail: null; Type: Lis
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 374364 in perltoc.pod
 Lookups: $B::overlay; Text: $B::overlay; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 381494 in perltoc.pod
-Lookups: $BASETIME; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: ($BASETIME); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $BASETIME; Text: $BASETIME; Tail: ($ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 71010 in perltoc.pod
-Lookups: $CHILD_ERROR; Text: ${^CHILD_ERROR_NATIVE} , $EXTENDED_OS_ERROR, $^E  , $EXCEPTIONS_BEING_CAUGHT, $^S  , $WARNING, $^W  , ${^WARNING_BITS} , $OS_ERROR, $ERRN...; Tail: ($CHILD_ERROR); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $CHILD_ERROR; Text: $CHILD_ERROR; Tail: (${^CHILD_ERROR_NATIVE} , $EXTENDED_OS_ERROR, $^E  , $EXCEPTIONS_BEING_CAUGHT, $^S  , $WARNING, $^W  , ${^WARNING_BITS} , $OS_ERROR, $ERRN...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 74197 in perltoc.pod
-Lookups: $COMPILING; Text: $COMPILING, $^C  , $DEBUGGING, $^D  , ${^ENCODING} , ${^GLOBAL_PHASE} , CONSTRUCT, START, CHECK, INIT, RUN, END, DESTRUCT, $^H , %^H , ${...; Tail: ($COMPILING); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $COMPILING; Text: $COMPILING; Tail: ($COMPILING, $^C  , $DEBUGGING, $^D  , ${^ENCODING} , ${^GLOBAL_PHASE} , CONSTRUCT, START, CHECK, INIT, RUN, END, DESTRUCT, $^H , %^H , ${...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 74325 in perltoc.pod
 Lookups: $Carp::CarpLevel; Text: $Carp::CarpLevel; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 404330 in perltoc.pod
@@ -150,45 +174,45 @@ Lookups: $Carp::RefArgFormatter; Text: $Carp::RefArgFormatter; Tail: null; Type:
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 404233 in perltoc.pod
 Lookups: $Carp::Verbose; Text: $Carp::Verbose; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 404211 in perltoc.pod
-Lookups: $DEBUGGING; Text: $COMPILING, $^C  , $DEBUGGING, $^D  , ${^ENCODING} , ${^GLOBAL_PHASE} , CONSTRUCT, START, CHECK, INIT, RUN, END, DESTRUCT, $^H , %^H , ${...; Tail: ($DEBUGGING); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $DEBUGGING; Text: $DEBUGGING; Tail: ($COMPILING, $^C  , $DEBUGGING, $^D  , ${^ENCODING} , ${^GLOBAL_PHASE} , CONSTRUCT, START, CHECK, INIT, RUN, END, DESTRUCT, $^H , %^H , ${...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 74363 in perltoc.pod
-Lookups: $E<gt>, $>; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: ($>); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $E<gt>, $>; Text: $>; Tail: ($ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 70587 in perltoc.pod
-Lookups: $E<lt>, $<; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: ($<); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $E<lt>, $<; Text: $<; Tail: ($ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 70521 in perltoc.pod
 Lookups: $E<lt>, $E<gt>, $( and $) are no longer cached, $<, $>, $( and $) are no longer cached; Text: $<, $>, $( and $) are no longer cached; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 249431 in perltoc.pod
-Lookups: $EFFECTIVE_GROUP_ID; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: ($EFFECTIVE_GROUP_ID); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $EFFECTIVE_GROUP_ID; Text: $EFFECTIVE_GROUP_ID; Tail: ($ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 70473 in perltoc.pod
-Lookups: $EFFECTIVE_USER_ID; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: ($EFFECTIVE_USER_ID); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $EFFECTIVE_USER_ID; Text: $EFFECTIVE_USER_ID; Tail: ($ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 70606 in perltoc.pod
-Lookups: $EGID; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: ($EGID); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $EGID; Text: $EGID; Tail: ($ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 70464 in perltoc.pod
 Lookups: $ENV{PWD}; Text: $ENV{PWD}; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 429964 in perltoc.pod
-Lookups: $ERRNO; Text: ${^CHILD_ERROR_NATIVE} , $EXTENDED_OS_ERROR, $^E  , $EXCEPTIONS_BEING_CAUGHT, $^S  , $WARNING, $^W  , ${^WARNING_BITS} , $OS_ERROR, $ERRN...; Tail: ($ERRNO); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $ERRNO; Text: $ERRNO; Tail: (${^CHILD_ERROR_NATIVE} , $EXTENDED_OS_ERROR, $^E  , $EXCEPTIONS_BEING_CAUGHT, $^S  , $WARNING, $^W  , ${^WARNING_BITS} , $OS_ERROR, $ERRN...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 74098 in perltoc.pod
-Lookups: $EUID; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: ($EUID); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $EUID; Text: $EUID; Tail: ($ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 70597 in perltoc.pod
-Lookups: $EVAL_ERROR; Text: ${^CHILD_ERROR_NATIVE} , $EXTENDED_OS_ERROR, $^E  , $EXCEPTIONS_BEING_CAUGHT, $^S  , $WARNING, $^W  , ${^WARNING_BITS} , $OS_ERROR, $ERRN...; Tail: ($EVAL_ERROR); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $EVAL_ERROR; Text: $EVAL_ERROR; Tail: (${^CHILD_ERROR_NATIVE} , $EXTENDED_OS_ERROR, $^E  , $EXCEPTIONS_BEING_CAUGHT, $^S  , $WARNING, $^W  , ${^WARNING_BITS} , $OS_ERROR, $ERRN...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 74236 in perltoc.pod
-Lookups: $EXCEPTIONS_BEING_CAUGHT; Text: ${^CHILD_ERROR_NATIVE} , $EXTENDED_OS_ERROR, $^E  , $EXCEPTIONS_BEING_CAUGHT, $^S  , $WARNING, $^W  , ${^WARNING_BITS} , $OS_ERROR, $ERRN...; Tail: ($EXCEPTIONS_BEING_CAUGHT); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $EXCEPTIONS_BEING_CAUGHT; Text: $EXCEPTIONS_BEING_CAUGHT; Tail: (${^CHILD_ERROR_NATIVE} , $EXTENDED_OS_ERROR, $^E  , $EXCEPTIONS_BEING_CAUGHT, $^S  , $WARNING, $^W  , ${^WARNING_BITS} , $OS_ERROR, $ERRN...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 73969 in perltoc.pod
-Lookups: $EXECUTABLE_NAME; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: ($EXECUTABLE_NAME); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $EXECUTABLE_NAME; Text: $EXECUTABLE_NAME; Tail: ($ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 71182 in perltoc.pod
-Lookups: $EXTENDED_OS_ERROR; Text: ${^CHILD_ERROR_NATIVE} , $EXTENDED_OS_ERROR, $^E  , $EXCEPTIONS_BEING_CAUGHT, $^S  , $WARNING, $^W  , ${^WARNING_BITS} , $OS_ERROR, $ERRN...; Tail: ($EXTENDED_OS_ERROR); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $EXTENDED_OS_ERROR; Text: $EXTENDED_OS_ERROR; Tail: (${^CHILD_ERROR_NATIVE} , $EXTENDED_OS_ERROR, $^E  , $EXCEPTIONS_BEING_CAUGHT, $^S  , $WARNING, $^W  , ${^WARNING_BITS} , $OS_ERROR, $ERRN...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 73909 in perltoc.pod
-Lookups: $FORMAT_FORMFEED; Text: $ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...; Tail: ($FORMAT_FORMFEED); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $FORMAT_FORMFEED; Text: $FORMAT_FORMFEED; Tail: ($ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 73228 in perltoc.pod
-Lookups: $FORMAT_LINES_LEFT; Text: $ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...; Tail: ($FORMAT_LINES_LEFT); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $FORMAT_LINES_LEFT; Text: $FORMAT_LINES_LEFT; Tail: ($ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 73399 in perltoc.pod
-Lookups: $FORMAT_LINES_PER_PAGE; Text: $ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...; Tail: ($FORMAT_LINES_PER_PAGE); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $FORMAT_LINES_PER_PAGE; Text: $FORMAT_LINES_PER_PAGE; Tail: ($ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 73612 in perltoc.pod
-Lookups: $FORMAT_NAME; Text: $ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...; Tail: ($FORMAT_NAME); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $FORMAT_NAME; Text: $FORMAT_NAME; Tail: ($ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 73768 in perltoc.pod
-Lookups: $FORMAT_PAGE_NUMBER; Text: $ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...; Tail: ($FORMAT_PAGE_NUMBER); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $FORMAT_PAGE_NUMBER; Text: $FORMAT_PAGE_NUMBER; Tail: ($ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 73313 in perltoc.pod
-Lookups: $FORMAT_TOP_NAME; Text: $ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...; Tail: ($FORMAT_TOP_NAME); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $FORMAT_TOP_NAME; Text: $FORMAT_TOP_NAME; Tail: ($ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 73697 in perltoc.pod
 Lookups: $File::Fetch::BLACKLIST; Text: $File::Fetch::BLACKLIST; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 472967 in perltoc.pod
@@ -206,13 +230,15 @@ Lookups: $File::Fetch::USER_AGENT; Text: $File::Fetch::USER_AGENT; Tail: null; T
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 472820 in perltoc.pod
 Lookups: $File::Fetch::WARN; Text: $File::Fetch::WARN; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 472914 in perltoc.pod
-Lookups: $GID; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: ($GID); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $GID; Text: $GID; Tail: ($ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 70400 in perltoc.pod
-Lookups: $INPLACE_EDIT; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: ($INPLACE_EDIT); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $INPLACE_EDIT; Text: $INPLACE_EDIT; Tail: ($ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 70898 in perltoc.pod
-Lookups: $INPUT_LINE_NUMBER; Text: $ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...; Tail: ($INPUT_LINE_NUMBER); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $INPUT_LINE_NUMBER; Text: $INPUT_LINE_NUMBER; Tail: ($ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 72716 in perltoc.pod
-Lookups: $INPUT_RECORD_SEPARATOR; Text: $ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...; Tail: ($INPUT_RECORD_SEPARATOR); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $INPUT_RECORD_SEPARATOR, regexes in; Text: $INPUT_RECORD_SEPARATOR, regexes in; Tail: (I put a regular expression into $/ but it didn't work. What's wrong?); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 29165 in perltoc.pod
+Lookups: $INPUT_RECORD_SEPARATOR; Text: $INPUT_RECORD_SEPARATOR; Tail: ($ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 72844 in perltoc.pod
 Lookups: $IPC::Cmd::ALLOW_NULL_ARGS; Text: $IPC::Cmd::ALLOW_NULL_ARGS; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 527594 in perltoc.pod
@@ -226,16 +252,18 @@ Lookups: $IPC::Cmd::VERBOSE; Text: $IPC::Cmd::VERBOSE; Tail: null; Type: List It
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 527455 in perltoc.pod
 Lookups: $IPC::Cmd::WARN; Text: $IPC::Cmd::WARN; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 527543 in perltoc.pod
-Lookups: $LAST_PAREN_MATCH; Text: $<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...; Tail: ($LAST_PAREN_MATCH); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $LAST_PAREN_MATCH; Text: $LAST_PAREN_MATCH; Tail: ($<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 71629 in perltoc.pod
-Lookups: $LAST_REGEXP_CODE_RESULT; Text: $<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...; Tail: ($LAST_REGEXP_CODE_RESULT); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $LAST_REGEXP_CODE_RESULT; Text: $LAST_REGEXP_CODE_RESULT; Tail: ($<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 72301 in perltoc.pod
-Lookups: $LAST_SUBMATCH_RESULT; Text: $<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...; Tail: ($LAST_SUBMATCH_RESULT); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $LAST_SUBMATCH_RESULT; Text: $LAST_SUBMATCH_RESULT; Tail: ($<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 71685 in perltoc.pod
-Lookups: $LIST_SEPARATOR; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: ($LIST_SEPARATOR); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $LIST_SEPARATOR; Text: $LIST_SEPARATOR; Tail: ($ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 70255 in perltoc.pod
-Lookups: $MATCH; Text: $<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...; Tail: ($MATCH); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $MATCH; Text: $MATCH; Tail: ($<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 71369 in perltoc.pod
+Lookups: $MATCH; Text: $MATCH; Tail: (Why does using $&, $`, or $' slow my program down?); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 30717 in perltoc.pod
 Lookups: $Module::Load::Conditional::CACHE; Text: $Module::Load::Conditional::CACHE; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 567768 in perltoc.pod
 Lookups: $Module::Load::Conditional::CHECK_INC_HASH; Text: $Module::Load::Conditional::CHECK_INC_HASH; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -250,41 +278,45 @@ Lookups: $Module::Load::Conditional::FORCE_SAFE_INC; Text: $Module::Load::Condit
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 567718 in perltoc.pod
 Lookups: $Module::Load::Conditional::VERBOSE; Text: $Module::Load::Conditional::VERBOSE; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 567577 in perltoc.pod
-Lookups: $NR; Text: $ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...; Tail: ($NR); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $NR; Text: $NR; Tail: ($ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 72709 in perltoc.pod
-Lookups: $OFS; Text: $ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...; Tail: ($OFS); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $OFS; Text: $OFS; Tail: ($ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 72604 in perltoc.pod
-Lookups: $OLD_PERL_VERSION; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: ($OLD_PERL_VERSION); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $OLD_PERL_VERSION; Text: $OLD_PERL_VERSION; Tail: ($ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 70766 in perltoc.pod
-Lookups: $ORS; Text: $ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...; Tail: ($ORS); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $ORS; Text: $ORS; Tail: ($ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 72958 in perltoc.pod
-Lookups: $OSNAME; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: ($OSNAME); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $OSNAME; Text: $OSNAME; Tail: ($ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 70962 in perltoc.pod
-Lookups: $OS_ERROR; Text: ${^CHILD_ERROR_NATIVE} , $EXTENDED_OS_ERROR, $^E  , $EXCEPTIONS_BEING_CAUGHT, $^S  , $WARNING, $^W  , ${^WARNING_BITS} , $OS_ERROR, $ERRN...; Tail: ($OS_ERROR); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $OS_ERROR; Text: $OS_ERROR; Tail: (${^CHILD_ERROR_NATIVE} , $EXTENDED_OS_ERROR, $^E  , $EXCEPTIONS_BEING_CAUGHT, $^S  , $WARNING, $^W  , ${^WARNING_BITS} , $OS_ERROR, $ERRN...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 74108 in perltoc.pod
-Lookups: $OUTPUT_AUTOFLUSH; Text: $ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...; Tail: ($OUTPUT_AUTOFLUSH); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $OUTPUT_AUTOFLUSH; Text: $OUTPUT_AUTOFLUSH; Tail: ($ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 73072 in perltoc.pod
-Lookups: $OUTPUT_FIELD_SEPARATOR; Text: $ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...; Tail: ($OUTPUT_FIELD_SEPARATOR); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $OUTPUT_FIELD_SEPARATOR; Text: $OUTPUT_FIELD_SEPARATOR; Tail: ($ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 72612 in perltoc.pod
-Lookups: $OUTPUT_RECORD_SEPARATOR; Text: $ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...; Tail: ($OUTPUT_RECORD_SEPARATOR); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $OUTPUT_RECORD_SEPARATOR; Text: $OUTPUT_RECORD_SEPARATOR; Tail: ($ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 72966 in perltoc.pod
 Lookups: $PERL5OPT environment variable; Text: $PERL5OPT environment variable; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 317265 in perltoc.pod
-Lookups: $PERLDB; Text: $COMPILING, $^C  , $DEBUGGING, $^D  , ${^ENCODING} , ${^GLOBAL_PHASE} , CONSTRUCT, START, CHECK, INIT, RUN, END, DESTRUCT, $^H , %^H , ${...; Tail: ($PERLDB); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $PERLDB; Text: $PERLDB; Tail: ($COMPILING, $^C  , $DEBUGGING, $^D  , ${^ENCODING} , ${^GLOBAL_PHASE} , CONSTRUCT, START, CHECK, INIT, RUN, END, DESTRUCT, $^H , %^H , ${...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 74563 in perltoc.pod
-Lookups: $PERL_VERSION; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: ($PERL_VERSION); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $PERL_VERSION; Text: $PERL_VERSION; Tail: ($ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 71050 in perltoc.pod
-Lookups: $PID; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: ($PID); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $PID; Text: $PID; Tail: ($ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 70303 in perltoc.pod
-Lookups: $POSTMATCH; Text: $<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...; Tail: ($POSTMATCH); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $POSTMATCH; Text: $POSTMATCH; Tail: ($<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 71511 in perltoc.pod
-Lookups: $POSTMATCH; Text: $<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...; Tail: ($POSTMATCH); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $POSTMATCH; Text: $POSTMATCH; Tail: ($<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 71586 in perltoc.pod
-Lookups: $PREMATCH; Text: $<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...; Tail: ($PREMATCH); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $POSTMATCH; Text: $POSTMATCH; Tail: (Why does using $&, $`, or $' slow my program down?); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 30733 in perltoc.pod
+Lookups: $PREMATCH; Text: $PREMATCH; Tail: ($<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 71424 in perltoc.pod
-Lookups: $PROCESS_ID; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: ($PROCESS_ID); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $PREMATCH; Text: $PREMATCH; Tail: (Why does using $&, $`, or $' slow my program down?); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 30753 in perltoc.pod
+Lookups: $PROCESS_ID; Text: $PROCESS_ID; Tail: ($ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 70311 in perltoc.pod
-Lookups: $PROGRAM_NAME; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: ($PROGRAM_NAME); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $PROGRAM_NAME; Text: $PROGRAM_NAME; Tail: ($ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 70351 in perltoc.pod
 Lookups: $Params::Check::ALLOW_UNKNOWN; Text: $Params::Check::ALLOW_UNKNOWN; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 586163 in perltoc.pod
@@ -306,69 +338,73 @@ Lookups: $Params::Check::VERBOSE; Text: $Params::Check::VERBOSE; Tail: null; Typ
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 586097 in perltoc.pod
 Lookups: $Params::Check::WARNINGS_FATAL; Text: $Params::Check::WARNINGS_FATAL; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 586405 in perltoc.pod
-Lookups: $REAL_GROUP_ID; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: ($REAL_GROUP_ID); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $REAL_GROUP_ID; Text: $REAL_GROUP_ID; Tail: ($ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 70408 in perltoc.pod
-Lookups: $REAL_USER_ID; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: ($REAL_USER_ID); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $REAL_USER_ID; Text: $REAL_USER_ID; Tail: ($ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 70539 in perltoc.pod
-Lookups: $RS; Text: $ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...; Tail: ($RS); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $RS, regexes in; Text: $RS, regexes in; Tail: (I put a regular expression into $/ but it didn't work. What's wrong?); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 29204 in perltoc.pod
+Lookups: $RS; Text: $RS; Tail: ($ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 72837 in perltoc.pod
-Lookups: $SUBSEP; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: ($SUBSEP); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $SUBSEP; Text: $SUBSEP; Tail: ($ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 70669 in perltoc.pod
-Lookups: $SYSTEM_FD_MAX; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: ($SYSTEM_FD_MAX); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $SYSTEM_FD_MAX; Text: $SYSTEM_FD_MAX; Tail: ($ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 70815 in perltoc.pod
-Lookups: $UID; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: ($UID); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $UID; Text: $UID; Tail: ($ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 70531 in perltoc.pod
-Lookups: $WARNING; Text: ${^CHILD_ERROR_NATIVE} , $EXTENDED_OS_ERROR, $^E  , $EXCEPTIONS_BEING_CAUGHT, $^S  , $WARNING, $^W  , ${^WARNING_BITS} , $OS_ERROR, $ERRN...; Tail: ($WARNING); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $WARNING; Text: $WARNING; Tail: (${^CHILD_ERROR_NATIVE} , $EXTENDED_OS_ERROR, $^E  , $EXCEPTIONS_BEING_CAUGHT, $^S  , $WARNING, $^W  , ${^WARNING_BITS} , $OS_ERROR, $ERRN...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 74019 in perltoc.pod
-Lookups: $[; Text: $# , $* , $[; Tail: ($[); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $[; Text: $[; Tail: ($# , $* , $[); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 74878 in perltoc.pod
-Lookups: $\; Text: $ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...; Tail: ($\); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $\; Text: $\; Tail: ($ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 72952 in perltoc.pod
-Lookups: $]; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: ($]); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $\; Text: $\; Tail: (-0[octal/hexadecimal]  , -a  , -C [number/list] , -c , -d  , -dt, -d:MOD[=bar,baz]  , -dt:MOD[=bar,baz], -Dletters   , -Dnumber, -e comma...); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 2514 in perltoc.pod
+Lookups: $]; Text: $]; Tail: ($ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 70760 in perltoc.pod
-Lookups: $^; Text: $ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...; Tail: ($^); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $^; Text: $^; Tail: ($ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 73691 in perltoc.pod
-Lookups: $^A; Text: $ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...; Tail: ($^A); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $^A; Text: $^A; Tail: ($ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 73140 in perltoc.pod
-Lookups: $^C; Text: $COMPILING, $^C  , $DEBUGGING, $^D  , ${^ENCODING} , ${^GLOBAL_PHASE} , CONSTRUCT, START, CHECK, INIT, RUN, END, DESTRUCT, $^H , %^H , ${...; Tail: ($^C); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $^C; Text: $^C; Tail: ($COMPILING, $^C  , $DEBUGGING, $^D  , ${^ENCODING} , ${^GLOBAL_PHASE} , CONSTRUCT, START, CHECK, INIT, RUN, END, DESTRUCT, $^H , %^H , ${...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 74318 in perltoc.pod
-Lookups: $^CHILD_ERROR_NATIVE; Text: ${^CHILD_ERROR_NATIVE} , $EXTENDED_OS_ERROR, $^E  , $EXCEPTIONS_BEING_CAUGHT, $^S  , $WARNING, $^W  , ${^WARNING_BITS} , $OS_ERROR, $ERRN...; Tail: ($^CHILD_ERROR_NATIVE); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $^CHILD_ERROR_NATIVE; Text: $^CHILD_ERROR_NATIVE; Tail: (${^CHILD_ERROR_NATIVE} , $EXTENDED_OS_ERROR, $^E  , $EXCEPTIONS_BEING_CAUGHT, $^S  , $WARNING, $^W  , ${^WARNING_BITS} , $OS_ERROR, $ERRN...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 73853 in perltoc.pod
-Lookups: $^D; Text: $COMPILING, $^C  , $DEBUGGING, $^D  , ${^ENCODING} , ${^GLOBAL_PHASE} , CONSTRUCT, START, CHECK, INIT, RUN, END, DESTRUCT, $^H , %^H , ${...; Tail: ($^D); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $^D; Text: $^D; Tail: ($COMPILING, $^C  , $DEBUGGING, $^D  , ${^ENCODING} , ${^GLOBAL_PHASE} , CONSTRUCT, START, CHECK, INIT, RUN, END, DESTRUCT, $^H , %^H , ${...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 74356 in perltoc.pod
 Lookups: $^E is meaningful on Win32; Text: $^E is meaningful on Win32; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 314154 in perltoc.pod
-Lookups: $^E; Text: ${^CHILD_ERROR_NATIVE} , $EXTENDED_OS_ERROR, $^E  , $EXCEPTIONS_BEING_CAUGHT, $^S  , $WARNING, $^W  , ${^WARNING_BITS} , $OS_ERROR, $ERRN...; Tail: ($^E); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $^E; Text: $^E; Tail: (${^CHILD_ERROR_NATIVE} , $EXTENDED_OS_ERROR, $^E  , $EXCEPTIONS_BEING_CAUGHT, $^S  , $WARNING, $^W  , ${^WARNING_BITS} , $OS_ERROR, $ERRN...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 73902 in perltoc.pod
-Lookups: $^F; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: ($^F); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $^F; Text: $^F; Tail: ($ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 70808 in perltoc.pod
 Lookups: $^H and %^H; Text: $^H and %^H; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 276532 in perltoc.pod
-Lookups: $^H; Text: $COMPILING, $^C  , $DEBUGGING, $^D  , ${^ENCODING} , ${^GLOBAL_PHASE} , CONSTRUCT, START, CHECK, INIT, RUN, END, DESTRUCT, $^H , %^H , ${...; Tail: ($^H); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $^H; Text: $^H; Tail: ($COMPILING, $^C  , $DEBUGGING, $^D  , ${^ENCODING} , ${^GLOBAL_PHASE} , CONSTRUCT, START, CHECK, INIT, RUN, END, DESTRUCT, $^H , %^H , ${...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 74501 in perltoc.pod
-Lookups: $^I; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: ($^I); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $^I; Text: $^I; Tail: ($ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 70891 in perltoc.pod
-Lookups: $^L; Text: $ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...; Tail: ($^L); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $^L; Text: $^L; Tail: ($ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 73221 in perltoc.pod
-Lookups: $^M; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: ($^M); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $^M; Text: $^M; Tail: ($ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 70934 in perltoc.pod
-Lookups: $^N; Text: $<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...; Tail: ($^N); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $^N; Text: $^N; Tail: ($<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 71678 in perltoc.pod
-Lookups: $^O; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: ($^O); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $^O; Text: $^O; Tail: ($ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 70955 in perltoc.pod
-Lookups: $^P; Text: $COMPILING, $^C  , $DEBUGGING, $^D  , ${^ENCODING} , ${^GLOBAL_PHASE} , CONSTRUCT, START, CHECK, INIT, RUN, END, DESTRUCT, $^H , %^H , ${...; Tail: ($^P); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $^P; Text: $^P; Tail: ($COMPILING, $^C  , $DEBUGGING, $^D  , ${^ENCODING} , ${^GLOBAL_PHASE} , CONSTRUCT, START, CHECK, INIT, RUN, END, DESTRUCT, $^H , %^H , ${...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 74556 in perltoc.pod
-Lookups: $^R; Text: $<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...; Tail: ($^R); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $^R; Text: $^R; Tail: ($<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 72294 in perltoc.pod
-Lookups: $^S; Text: ${^CHILD_ERROR_NATIVE} , $EXTENDED_OS_ERROR, $^E  , $EXCEPTIONS_BEING_CAUGHT, $^S  , $WARNING, $^W  , ${^WARNING_BITS} , $OS_ERROR, $ERRN...; Tail: ($^S); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $^S; Text: $^S; Tail: (${^CHILD_ERROR_NATIVE} , $EXTENDED_OS_ERROR, $^E  , $EXCEPTIONS_BEING_CAUGHT, $^S  , $WARNING, $^W  , ${^WARNING_BITS} , $OS_ERROR, $ERRN...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 73962 in perltoc.pod
-Lookups: $^T; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: ($^T); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $^T; Text: $^T; Tail: ($ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 71003 in perltoc.pod
 Lookups: $^V is now a version object instead of a v-string; Text: $^V is now a version object instead of a v-string; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 273136 in perltoc.pod
-Lookups: $^V; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: ($^V); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $^V; Text: $^V; Tail: ($ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 71043 in perltoc.pod
-Lookups: $^W; Text: ${^CHILD_ERROR_NATIVE} , $EXTENDED_OS_ERROR, $^E  , $EXCEPTIONS_BEING_CAUGHT, $^S  , $WARNING, $^W  , ${^WARNING_BITS} , $OS_ERROR, $ERRN...; Tail: ($^W); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $^W; Text: $^W; Tail: (${^CHILD_ERROR_NATIVE} , $EXTENDED_OS_ERROR, $^E  , $EXCEPTIONS_BEING_CAUGHT, $^S  , $WARNING, $^W  , ${^WARNING_BITS} , $OS_ERROR, $ERRN...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 74012 in perltoc.pod
 Lookups: $^X doesn't always contain a full path in FreeBSD; Text: $^X doesn't always contain a full path in FreeBSD; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 330878 in perltoc.pod
@@ -376,17 +412,19 @@ Lookups: $^X variables may now have names longer than one character; Text: $^X v
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 293625 in perltoc.pod
 Lookups: $^X variables may now have names longer than one character; Text: $^X variables may now have names longer than one character; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 304386 in perltoc.pod
-Lookups: $^X; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: ($^X); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $^X; Text: $^X; Tail: ($ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 71175 in perltoc.pod
-Lookups: $_; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: ($_); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $_; Text: $_; Tail: ($ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 70190 in perltoc.pod
-Lookups: $`; Text: $<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...; Tail: ($`); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $`; Text: $`; Tail: ($<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 71418 in perltoc.pod
-Lookups: $`; Text: $<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...; Tail: ($`); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $`; Text: $`; Tail: ($<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 71467 in perltoc.pod
+Lookups: $`; Text: $`; Tail: (Why does using $&, $`, or $' slow my program down?); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 30766 in perltoc.pod
 Lookups: $a and $b warnings exemption; Text: $a and $b warnings exemption; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 239042 in perltoc.pod
-Lookups: $a; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: ($a); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $a; Text: $a; Tail: ($ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 70711 in perltoc.pod
 Lookups: $addr = $peer-E<gt>peeraddr, $addr = $peer->peeraddr; Text: $addr = $peer->peeraddr; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 513190 in perltoc.pod
@@ -400,7 +438,7 @@ Lookups: $addr = IO::Socket::IP-E<gt>join_addr( $host, $port ), $addr = IO::Sock
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 513457 in perltoc.pod
 Lookups: $address = inet_pton $family, $string; Text: $address = inet_pton $family, $string; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 625992 in perltoc.pod
-Lookups: $b; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: ($b); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $b; Text: $b; Tail: ($ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 70717 in perltoc.pod
 Lookups: $bool = $file->chmod $mode), $bool = $file-E<gt>chmod $mode); Text: $bool = $file->chmod $mode); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 376596 in perltoc.pod
@@ -476,7 +514,7 @@ Lookups: $db-E<gt>Filter_Pop(), $db->Filter_Pop(); Text: $db->Filter_Pop(); Tail
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 431061 in perltoc.pod
 Lookups: $db-E<gt>Filter_Push() E<sol> $db-E<gt>Filter_Key_Push() E<sol> $db-E<gt>Filter_Value_Push(), $db->Filter_Push() / $db->Filter_Key_Push() / $db->Filter_Value_Push(); Text: $db->Filter_Push() / $db->Filter_Key_Push() / $db->Filter_Value_Push(); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 430934 in perltoc.pod
-Lookups: $digits; Text: $<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...; Tail: ($digits); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $digits; Text: $digits; Tail: ($<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 71296 in perltoc.pod
 Lookups: $family = sockaddr_family $sockaddr; Text: $family = sockaddr_family $sockaddr; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 624741 in perltoc.pod
@@ -696,75 +734,79 @@ Lookups: $thr->wantarray(), $thr-E<gt>wantarray(); Text: $thr->wantarray(); Tail
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 363157 in perltoc.pod
 Lookups: $where = $ff-E<gt>fetch( [to =E<gt> E<sol>myE<sol>outputE<sol>dirE<sol> E<verbar> \$scalar] ), $where = $ff->fetch( [to => /my/output/dir/ | \$scalar] ); Text: $where = $ff->fetch( [to => /my/output/dir/ | \$scalar] ); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 472612 in perltoc.pod
-Lookups: ${^ENCODING}; Text: $COMPILING, $^C  , $DEBUGGING, $^D  , ${^ENCODING} , ${^GLOBAL_PHASE} , CONSTRUCT, START, CHECK, INIT, RUN, END, DESTRUCT, $^H , %^H , ${...; Tail: (${^ENCODING}); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: ${^ENCODING}; Text: ${^ENCODING}; Tail: ($COMPILING, $^C  , $DEBUGGING, $^D  , ${^ENCODING} , ${^GLOBAL_PHASE} , CONSTRUCT, START, CHECK, INIT, RUN, END, DESTRUCT, $^H , %^H , ${...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 74391 in perltoc.pod
-Lookups: ${^GLOBAL_PHASE}; Text: $COMPILING, $^C  , $DEBUGGING, $^D  , ${^ENCODING} , ${^GLOBAL_PHASE} , CONSTRUCT, START, CHECK, INIT, RUN, END, DESTRUCT, $^H , %^H , ${...; Tail: (${^GLOBAL_PHASE}); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: ${^GLOBAL_PHASE}; Text: ${^GLOBAL_PHASE}; Tail: ($COMPILING, $^C  , $DEBUGGING, $^D  , ${^ENCODING} , ${^GLOBAL_PHASE} , CONSTRUCT, START, CHECK, INIT, RUN, END, DESTRUCT, $^H , %^H , ${...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 74425 in perltoc.pod
-Lookups: ${^LAST_FH}; Text: $ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...; Tail: (${^LAST_FH}); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: ${^LAST_FH}; Text: ${^LAST_FH}; Tail: ($ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 73106 in perltoc.pod
 Lookups: ${^LAST_FH}; Text: ${^LAST_FH}; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 242698 in perltoc.pod
-Lookups: ${^MATCH}; Text: $<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...; Tail: (${^MATCH}); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: ${^MATCH}; Text: ${^MATCH}; Tail: ($<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 71390 in perltoc.pod
-Lookups: ${^OPEN}; Text: $COMPILING, $^C  , $DEBUGGING, $^D  , ${^ENCODING} , ${^GLOBAL_PHASE} , CONSTRUCT, START, CHECK, INIT, RUN, END, DESTRUCT, $^H , %^H , ${...; Tail: (${^OPEN}); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: ${^OPEN}; Text: ${^OPEN}; Tail: ($COMPILING, $^C  , $DEBUGGING, $^D  , ${^ENCODING} , ${^GLOBAL_PHASE} , CONSTRUCT, START, CHECK, INIT, RUN, END, DESTRUCT, $^H , %^H , ${...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 74530 in perltoc.pod
-Lookups: ${^POSTMATCH}; Text: $<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...; Tail: (${^POSTMATCH}); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: ${^POSTMATCH}; Text: ${^POSTMATCH}; Tail: ($<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 71525 in perltoc.pod
-Lookups: ${^POSTMATCH}; Text: $<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...; Tail: (${^POSTMATCH}); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: ${^POSTMATCH}; Text: ${^POSTMATCH}; Tail: ($<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 71563 in perltoc.pod
-Lookups: ${^PREMATCH}; Text: $<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...; Tail: (${^PREMATCH}); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: ${^PREMATCH}; Text: ${^PREMATCH}; Tail: ($<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 71437 in perltoc.pod
-Lookups: ${^PREMATCH}; Text: $<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...; Tail: (${^PREMATCH}); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: ${^PREMATCH}; Text: ${^PREMATCH}; Tail: ($<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 71473 in perltoc.pod
-Lookups: ${^RE_DEBUG_FLAGS}; Text: $<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...; Tail: (${^RE_DEBUG_FLAGS}); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: ${^RE_DEBUG_FLAGS}; Text: ${^RE_DEBUG_FLAGS}; Tail: ($<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 72349 in perltoc.pod
-Lookups: ${^RE_TRIE_MAXBUF}; Text: $<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...; Tail: (${^RE_TRIE_MAXBUF}); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: ${^RE_TRIE_MAXBUF}; Text: ${^RE_TRIE_MAXBUF}; Tail: ($<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 72391 in perltoc.pod
-Lookups: ${^SAFE_LOCALES}; Text: $COMPILING, $^C  , $DEBUGGING, $^D  , ${^ENCODING} , ${^GLOBAL_PHASE} , CONSTRUCT, START, CHECK, INIT, RUN, END, DESTRUCT, $^H , %^H , ${...; Tail: (${^SAFE_LOCALES}); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: ${^SAFE_LOCALES}; Text: ${^SAFE_LOCALES}; Tail: ($COMPILING, $^C  , $DEBUGGING, $^D  , ${^ENCODING} , ${^GLOBAL_PHASE} , CONSTRUCT, START, CHECK, INIT, RUN, END, DESTRUCT, $^H , %^H , ${...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 74700 in perltoc.pod
-Lookups: ${^TAINT}; Text: $COMPILING, $^C  , $DEBUGGING, $^D  , ${^ENCODING} , ${^GLOBAL_PHASE} , CONSTRUCT, START, CHECK, INIT, RUN, END, DESTRUCT, $^H , %^H , ${...; Tail: (${^TAINT}); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: ${^TAINT}; Text: ${^TAINT}; Tail: ($COMPILING, $^C  , $DEBUGGING, $^D  , ${^ENCODING} , ${^GLOBAL_PHASE} , CONSTRUCT, START, CHECK, INIT, RUN, END, DESTRUCT, $^H , %^H , ${...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 74669 in perltoc.pod
-Lookups: ${^UNICODE}; Text: $COMPILING, $^C  , $DEBUGGING, $^D  , ${^ENCODING} , ${^GLOBAL_PHASE} , CONSTRUCT, START, CHECK, INIT, RUN, END, DESTRUCT, $^H , %^H , ${...; Tail: (${^UNICODE}); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: ${^UNICODE}; Text: ${^UNICODE}; Tail: ($COMPILING, $^C  , $DEBUGGING, $^D  , ${^ENCODING} , ${^GLOBAL_PHASE} , CONSTRUCT, START, CHECK, INIT, RUN, END, DESTRUCT, $^H , %^H , ${...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 74733 in perltoc.pod
-Lookups: ${^UTF8CACHE}; Text: $COMPILING, $^C  , $DEBUGGING, $^D  , ${^ENCODING} , ${^GLOBAL_PHASE} , CONSTRUCT, START, CHECK, INIT, RUN, END, DESTRUCT, $^H , %^H , ${...; Tail: (${^UTF8CACHE}); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: ${^UTF8CACHE}; Text: ${^UTF8CACHE}; Tail: ($COMPILING, $^C  , $DEBUGGING, $^D  , ${^ENCODING} , ${^GLOBAL_PHASE} , CONSTRUCT, START, CHECK, INIT, RUN, END, DESTRUCT, $^H , %^H , ${...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 74763 in perltoc.pod
-Lookups: ${^UTF8LOCALE}; Text: $COMPILING, $^C  , $DEBUGGING, $^D  , ${^ENCODING} , ${^GLOBAL_PHASE} , CONSTRUCT, START, CHECK, INIT, RUN, END, DESTRUCT, $^H , %^H , ${...; Tail: (${^UTF8LOCALE}); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: ${^UTF8LOCALE}; Text: ${^UTF8LOCALE}; Tail: ($COMPILING, $^C  , $DEBUGGING, $^D  , ${^ENCODING} , ${^GLOBAL_PHASE} , CONSTRUCT, START, CHECK, INIT, RUN, END, DESTRUCT, $^H , %^H , ${...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 74796 in perltoc.pod
-Lookups: ${^WARNING_BITS}; Text: ${^CHILD_ERROR_NATIVE} , $EXTENDED_OS_ERROR, $^E  , $EXCEPTIONS_BEING_CAUGHT, $^S  , $WARNING, $^W  , ${^WARNING_BITS} , $OS_ERROR, $ERRN...; Tail: (${^WARNING_BITS}); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: ${^WARNING_BITS}; Text: ${^WARNING_BITS}; Tail: (${^CHILD_ERROR_NATIVE} , $EXTENDED_OS_ERROR, $^E  , $EXCEPTIONS_BEING_CAUGHT, $^S  , $WARNING, $^W  , ${^WARNING_BITS} , $OS_ERROR, $ERRN...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 74049 in perltoc.pod
-Lookups: ${^WIN32_SLOPPY_STAT}; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: (${^WIN32_SLOPPY_STAT}); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: ${^WIN32_SLOPPY_STAT}; Text: ${^WIN32_SLOPPY_STAT}; Tail: ($ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 71090 in perltoc.pod
-Lookups: $|, $E<verbar>; Text: $ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...; Tail: ($|); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $|, $E<verbar>; Text: $|; Tail: ($ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 73044 in perltoc.pod
-Lookups: $~; Text: $ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...; Tail: ($~); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $~; Text: $~; Tail: ($ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 73762 in perltoc.pod
 Lookups: %! is transparently tied to the Errno module; Text: %! is transparently tied to the Errno module; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 313977 in perltoc.pod
-Lookups: %!; Text: ${^CHILD_ERROR_NATIVE} , $EXTENDED_OS_ERROR, $^E  , $EXCEPTIONS_BEING_CAUGHT, $^S  , $WARNING, $^W  , ${^WARNING_BITS} , $OS_ERROR, $ERRN...; Tail: (%!); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: %!; Text: %!; Tail: (${^CHILD_ERROR_NATIVE} , $EXTENDED_OS_ERROR, $^E  , $EXCEPTIONS_BEING_CAUGHT, $^S  , $WARNING, $^W  , ${^WARNING_BITS} , $OS_ERROR, $ERRN...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 74144 in perltoc.pod
 Lookups: %+ and %- use less memory; Text: %+ and %- use less memory; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 256410 in perltoc.pod
-Lookups: %+; Text: $<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...; Tail: (%+); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: %+; Text: %+; Tail: ($<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 71792 in perltoc.pod
-Lookups: %-; Text: $<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...; Tail: (%-); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: %-; Text: %-; Tail: ($<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 72257 in perltoc.pod
+Lookups: %::; Text: %::; Tail: (Symbol Tables); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 107695 in perltoc.pod
+Lookups: %=; Text: %=; Tail: (Assignment Operators); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 42608 in perltoc.pod
 Lookups: %Carp::CarpInternal; Text: %Carp::CarpInternal; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 404303 in perltoc.pod
 Lookups: %Carp::Internal; Text: %Carp::Internal; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 404280 in perltoc.pod
-Lookups: %ENV; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: (%ENV); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: %ENV; Text: %ENV; Tail: ($ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 70729 in perltoc.pod
-Lookups: %ERRNO; Text: ${^CHILD_ERROR_NATIVE} , $EXTENDED_OS_ERROR, $^E  , $EXCEPTIONS_BEING_CAUGHT, $^S  , $WARNING, $^W  , ${^WARNING_BITS} , $OS_ERROR, $ERRN...; Tail: (%ERRNO); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: %ERRNO; Text: %ERRNO; Tail: (${^CHILD_ERROR_NATIVE} , $EXTENDED_OS_ERROR, $^E  , $EXCEPTIONS_BEING_CAUGHT, $^S  , $WARNING, $^W  , ${^WARNING_BITS} , $OS_ERROR, $ERRN...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 74163 in perltoc.pod
-Lookups: %INC; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: (%INC); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: %INC; Text: %INC; Tail: ($ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 70863 in perltoc.pod
-Lookups: %LAST_PAREN_MATCH; Text: $<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...; Tail: (%LAST_PAREN_MATCH); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: %LAST_PAREN_MATCH; Text: %LAST_PAREN_MATCH; Tail: ($<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 71798 in perltoc.pod
-Lookups: %OS_ERROR; Text: ${^CHILD_ERROR_NATIVE} , $EXTENDED_OS_ERROR, $^E  , $EXCEPTIONS_BEING_CAUGHT, $^S  , $WARNING, $^W  , ${^WARNING_BITS} , $OS_ERROR, $ERRN...; Tail: (%OS_ERROR); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: %OS_ERROR; Text: %OS_ERROR; Tail: (${^CHILD_ERROR_NATIVE} , $EXTENDED_OS_ERROR, $^E  , $EXCEPTIONS_BEING_CAUGHT, $^S  , $WARNING, $^W  , ${^WARNING_BITS} , $OS_ERROR, $ERRN...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 74150 in perltoc.pod
-Lookups: %SIG; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: (%SIG); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: %SIG; Text: %SIG; Tail: ($ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 70979 in perltoc.pod
-Lookups: %^H; Text: $COMPILING, $^C  , $DEBUGGING, $^D  , ${^ENCODING} , ${^GLOBAL_PHASE} , CONSTRUCT, START, CHECK, INIT, RUN, END, DESTRUCT, $^H , %^H , ${...; Tail: (%^H); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: %^H; Text: %^H; Tail: ($COMPILING, $^C  , $DEBUGGING, $^D  , ${^ENCODING} , ${^GLOBAL_PHASE} , CONSTRUCT, START, CHECK, INIT, RUN, END, DESTRUCT, $^H , %^H , ${...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 74513 in perltoc.pod
 Lookups: %bits; Text: %bits; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 384384 in perltoc.pod
@@ -772,20 +814,44 @@ Lookups: %defines; Text: %defines; Tail: null; Type: List Item; Icon: /perl5lang
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 384400 in perltoc.pod
 Lookups: %labels; Text: %labels; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 384419 in perltoc.pod
+Lookups: %main::; Text: %main::; Tail: (Symbol Tables); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 107702 in perltoc.pod
 Lookups: %ops_using; Text: %ops_using; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 384437 in perltoc.pod
 Lookups: %options; Text: %options; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 473542 in perltoc.pod
 Lookups: %s argument is not a HASH or ARRAY element or a subroutine; Text: %s argument is not a HASH or ARRAY element or a subroutine; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 278526 in perltoc.pod
-Lookups: %{^CAPTURE_ALL}; Text: $<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...; Tail: (%{^CAPTURE_ALL}); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: %{^CAPTURE_ALL}; Text: %{^CAPTURE_ALL}; Tail: ($<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 72234 in perltoc.pod
-Lookups: %{^CAPTURE}; Text: $<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...; Tail: (%{^CAPTURE}); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: %{^CAPTURE}; Text: %{^CAPTURE}; Tail: ($<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 71819 in perltoc.pod
 Lookups: & and \& prototypes accepts only subs; Text: & and \& prototypes accepts only subs; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 233942 in perltoc.pod
+Lookups: &&; Text: &&; Tail: (C-style Logical And); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 42117 in perltoc.pod
+Lookups: &&=; Text: &&=; Tail: (Assignment Operators); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 42550 in perltoc.pod
+Lookups: &.; Text: &.; Tail: (Bitwise String Operators); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 45361 in perltoc.pod
+Lookups: &.=; Text: &.=; Tail: (Assignment Operators); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 42626 in perltoc.pod
+Lookups: &; Text: &; Tail: (Bitwise And); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 41960 in perltoc.pod
+Lookups: &; Text: &; Tail: (C Operators Missing From Perl); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 43088 in perltoc.pod
+Lookups: &=; Text: &=; Tail: (Assignment Operators); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 42531 in perltoc.pod
+Lookups: ''; Text: ''; Tail: (Quote and Quote-like Operators); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 43280 in perltoc.pod
+Lookups: ''; Text: ''; Tail: (q/STRING/    , 'STRING', qq/STRING/    , "STRING", qx/STRING/    , `STRING`, qw/STRING/   , tr/SEARCHLIST/REPLACEMENTLIST/cdsr      , y/S...); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 44132 in perltoc.pod
 Lookups: '/flags' mode, 'E<sol>flags' mode; Text: '/flags' mode; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 360934 in perltoc.pod
+Lookups: '; Text: '; Tail: (Quote and Quote-like Operators); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 43275 in perltoc.pod
+Lookups: '; Text: '; Tail: (q/STRING/    , 'STRING', qq/STRING/    , "STRING", qx/STRING/    , `STRING`, qw/STRING/   , tr/SEARCHLIST/REPLACEMENTLIST/cdsr      , y/S...); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 44127 in perltoc.pod
 Lookups: 'Debug' mode; Text: 'Debug' mode; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 360975 in perltoc.pod
 Lookups: 'debug' mode; Text: 'debug' mode; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -844,58 +910,98 @@ Lookups: ($z, $status) = new Compress::Raw::Bunzip2 $appendOutput, $consumeInput
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 405436 in perltoc.pod
 Lookups: ($z, $status) = new Compress::Raw::Bzip2 $appendOutput, $blockSize100k, $workfactor;; Text: ($z, $status) = new Compress::Raw::Bzip2 $appendOutput, $blockSize100k, $workfactor;; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 405109 in perltoc.pod
-Lookups: (?!); Text: (?#text) , (?adlupimnsx-imnsx), (?^alupimnsx)  , (?:pattern) , (?adluimnsx-imnsx:pattern), (?^aluimnsx:pattern) , (?|pattern)  , Lookarou...; Tail: ((?!)); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: (*:NAME); Text: (*:NAME); Tail: (Verbs, (*PRUNE) (*PRUNE:NAME)  , (*SKIP) (*SKIP:NAME) , (*MARK:NAME) (*:NAME)   , (*THEN) (*THEN:NAME), (*COMMIT) (*COMMIT:args) , (*FAIL...); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 78242 in perltoc.pod
+Lookups: (*ACCEPT); Text: (*ACCEPT); Tail: (Verbs, (*PRUNE) (*PRUNE:NAME)  , (*SKIP) (*SKIP:NAME) , (*MARK:NAME) (*:NAME)   , (*THEN) (*THEN:NAME), (*COMMIT) (*COMMIT:args) , (*FAIL...); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 78412 in perltoc.pod
+Lookups: (*COMMIT); Text: (*COMMIT); Tail: (Verbs, (*PRUNE) (*PRUNE:NAME)  , (*SKIP) (*SKIP:NAME) , (*MARK:NAME) (*:NAME)   , (*THEN) (*THEN:NAME), (*COMMIT) (*COMMIT:args) , (*FAIL...); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 78314 in perltoc.pod
+Lookups: (*F); Text: (*F); Tail: (Verbs, (*PRUNE) (*PRUNE:NAME)  , (*SKIP) (*SKIP:NAME) , (*MARK:NAME) (*:NAME)   , (*THEN) (*THEN:NAME), (*COMMIT) (*COMMIT:args) , (*FAIL...); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 78373 in perltoc.pod
+Lookups: (*FAIL); Text: (*FAIL); Tail: (Verbs, (*PRUNE) (*PRUNE:NAME)  , (*SKIP) (*SKIP:NAME) , (*MARK:NAME) (*:NAME)   , (*THEN) (*THEN:NAME), (*COMMIT) (*COMMIT:args) , (*FAIL...); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 78362 in perltoc.pod
+Lookups: (*MARK); Text: (*MARK); Tail: (Verbs, (*PRUNE) (*PRUNE:NAME)  , (*SKIP) (*SKIP:NAME) , (*MARK:NAME) (*:NAME)   , (*THEN) (*THEN:NAME), (*COMMIT) (*COMMIT:args) , (*FAIL...); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 78215 in perltoc.pod
+Lookups: (*MARK:NAME); Text: (*MARK:NAME); Tail: (Verbs, (*PRUNE) (*PRUNE:NAME)  , (*SKIP) (*SKIP:NAME) , (*MARK:NAME) (*:NAME)   , (*THEN) (*THEN:NAME), (*COMMIT) (*COMMIT:args) , (*FAIL...); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 78226 in perltoc.pod
+Lookups: (*PRUNE); Text: (*PRUNE); Tail: (Verbs, (*PRUNE) (*PRUNE:NAME)  , (*SKIP) (*SKIP:NAME) , (*MARK:NAME) (*:NAME)   , (*THEN) (*THEN:NAME), (*COMMIT) (*COMMIT:args) , (*FAIL...); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 78118 in perltoc.pod
+Lookups: (*PRUNE:NAME); Text: (*PRUNE:NAME); Tail: (Verbs, (*PRUNE) (*PRUNE:NAME)  , (*SKIP) (*SKIP:NAME) , (*MARK:NAME) (*:NAME)   , (*THEN) (*THEN:NAME), (*COMMIT) (*COMMIT:args) , (*FAIL...); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 78130 in perltoc.pod
+Lookups: (*SKIP); Text: (*SKIP); Tail: (Verbs, (*PRUNE) (*PRUNE:NAME)  , (*SKIP) (*SKIP:NAME) , (*MARK:NAME) (*:NAME)   , (*THEN) (*THEN:NAME), (*COMMIT) (*COMMIT:args) , (*FAIL...); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 78175 in perltoc.pod
+Lookups: (*atomic; Text: (*atomic; Tail: ((?#text) , (?adlupimnsx-imnsx), (?^alupimnsx)  , (?:pattern) , (?adluimnsx-imnsx:pattern), (?^aluimnsx:pattern) , (?|pattern)  , Lookarou...); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 77821 in perltoc.pod
+Lookups: (*atomic_script_run:...); Text: (*atomic_script_run:...); Tail: (Script Runs); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 77998 in perltoc.pod
+Lookups: (*negative_lookahead; Text: (*negative_lookahead; Tail: ((?#text) , (?adlupimnsx-imnsx), (?^alupimnsx)  , (?:pattern) , (?adluimnsx-imnsx:pattern), (?^aluimnsx:pattern) , (?|pattern)  , Lookarou...); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 76311 in perltoc.pod
+Lookups: (*negative_lookbehind; Text: (*negative_lookbehind; Tail: ((?#text) , (?adlupimnsx-imnsx), (?^alupimnsx)  , (?:pattern) , (?adluimnsx-imnsx:pattern), (?^aluimnsx:pattern) , (?|pattern)  , Lookarou...); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 76647 in perltoc.pod
+Lookups: (*nla; Text: (*nla; Tail: ((?#text) , (?adlupimnsx-imnsx), (?^alupimnsx)  , (?:pattern) , (?adluimnsx-imnsx:pattern), (?^aluimnsx:pattern) , (?|pattern)  , Lookarou...); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 76302 in perltoc.pod
+Lookups: (*nlb; Text: (*nlb; Tail: ((?#text) , (?adlupimnsx-imnsx), (?^alupimnsx)  , (?:pattern) , (?adluimnsx-imnsx:pattern), (?^aluimnsx:pattern) , (?|pattern)  , Lookarou...); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 76638 in perltoc.pod
+Lookups: (*pla; Text: (*pla; Tail: ((?#text) , (?adlupimnsx-imnsx), (?^alupimnsx)  , (?:pattern) , (?adluimnsx-imnsx:pattern), (?^aluimnsx:pattern) , (?|pattern)  , Lookarou...); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 76145 in perltoc.pod
+Lookups: (*plb; Text: (*plb; Tail: ((?#text) , (?adlupimnsx-imnsx), (?^alupimnsx)  , (?:pattern) , (?adluimnsx-imnsx:pattern), (?^aluimnsx:pattern) , (?|pattern)  , Lookarou...); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 76469 in perltoc.pod
+Lookups: (*positive_lookahead; Text: (*positive_lookahead; Tail: ((?#text) , (?adlupimnsx-imnsx), (?^alupimnsx)  , (?:pattern) , (?adluimnsx-imnsx:pattern), (?^aluimnsx:pattern) , (?|pattern)  , Lookarou...); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 76154 in perltoc.pod
+Lookups: (*positive_lookbehind; Text: (*positive_lookbehind; Tail: ((?#text) , (?adlupimnsx-imnsx), (?^alupimnsx)  , (?:pattern) , (?adluimnsx-imnsx:pattern), (?^aluimnsx:pattern) , (?|pattern)  , Lookarou...); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 76478 in perltoc.pod
+Lookups: (*script_run:...); Text: (*script_run:...); Tail: (Script Runs); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 77965 in perltoc.pod
+Lookups: (?!); Text: (?!); Tail: ((?#text) , (?adlupimnsx-imnsx), (?^alupimnsx)  , (?:pattern) , (?adluimnsx-imnsx:pattern), (?^aluimnsx:pattern) , (?|pattern)  , Lookarou...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 76294 in perltoc.pod
-Lookups: (?#); Text: (?#text) , (?adlupimnsx-imnsx), (?^alupimnsx)  , (?:pattern) , (?adluimnsx-imnsx:pattern), (?^aluimnsx:pattern) , (?|pattern)  , Lookarou...; Tail: ((?#)); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: (?#); Text: (?#); Tail: ((?#text) , (?adlupimnsx-imnsx), (?^alupimnsx)  , (?:pattern) , (?adluimnsx-imnsx:pattern), (?^aluimnsx:pattern) , (?|pattern)  , Lookarou...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 75773 in perltoc.pod
-Lookups: (?(); Text: (?#text) , (?adlupimnsx-imnsx), (?^alupimnsx)  , (?:pattern) , (?adluimnsx-imnsx:pattern), (?^aluimnsx:pattern) , (?|pattern)  , Lookarou...; Tail: ((?()); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: (?&NAME); Text: (?&NAME); Tail: ((?#text) , (?adlupimnsx-imnsx), (?^alupimnsx)  , (?:pattern) , (?adluimnsx-imnsx:pattern), (?^aluimnsx:pattern) , (?|pattern)  , Lookarou...); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 77333 in perltoc.pod
+Lookups: (?'NAME'); Text: (?'NAME'); Tail: ((?#text) , (?adlupimnsx-imnsx), (?^alupimnsx)  , (?:pattern) , (?adluimnsx-imnsx:pattern), (?^aluimnsx:pattern) , (?|pattern)  , Lookarou...); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 76784 in perltoc.pod
+Lookups: (?(); Text: (?(); Tail: ((?#text) , (?adlupimnsx-imnsx), (?^alupimnsx)  , (?:pattern) , (?adluimnsx-imnsx:pattern), (?^aluimnsx:pattern) , (?|pattern)  , Lookarou...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 77386 in perltoc.pod
-Lookups: (?); Text: (?#text) , (?adlupimnsx-imnsx), (?^alupimnsx)  , (?:pattern) , (?adluimnsx-imnsx:pattern), (?^aluimnsx:pattern) , (?|pattern)  , Lookarou...; Tail: ((?)); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: (?); Text: (?); Tail: ((?#text) , (?adlupimnsx-imnsx), (?^alupimnsx)  , (?:pattern) , (?adluimnsx-imnsx:pattern), (?^aluimnsx:pattern) , (?|pattern)  , Lookarou...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 75823 in perltoc.pod
-Lookups: (?0); Text: (?#text) , (?adlupimnsx-imnsx), (?^alupimnsx)  , (?:pattern) , (?adluimnsx-imnsx:pattern), (?^aluimnsx:pattern) , (?|pattern)  , Lookarou...; Tail: ((?0)); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: (?+1); Text: (?+1); Tail: ((?#text) , (?adlupimnsx-imnsx), (?^alupimnsx)  , (?:pattern) , (?adluimnsx-imnsx:pattern), (?^aluimnsx:pattern) , (?|pattern)  , Lookarou...); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 77162 in perltoc.pod
+Lookups: (?+PARNO); Text: (?+PARNO); Tail: ((?#text) , (?adlupimnsx-imnsx), (?^alupimnsx)  , (?:pattern) , (?adluimnsx-imnsx:pattern), (?^aluimnsx:pattern) , (?|pattern)  , Lookarou...); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 77184 in perltoc.pod
+Lookups: (?-1); Text: (?-1); Tail: ((?#text) , (?adlupimnsx-imnsx), (?^alupimnsx)  , (?:pattern) , (?adluimnsx-imnsx:pattern), (?^aluimnsx:pattern) , (?|pattern)  , Lookarou...); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 77153 in perltoc.pod
+Lookups: (?-PARNO); Text: (?-PARNO); Tail: ((?#text) , (?adlupimnsx-imnsx), (?^alupimnsx)  , (?:pattern) , (?adluimnsx-imnsx:pattern), (?^aluimnsx:pattern) , (?|pattern)  , Lookarou...); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 77171 in perltoc.pod
+Lookups: (?0); Text: (?0); Tail: ((?#text) , (?adlupimnsx-imnsx), (?^alupimnsx)  , (?:pattern) , (?adluimnsx-imnsx:pattern), (?^aluimnsx:pattern) , (?|pattern)  , Lookarou...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 77145 in perltoc.pod
-Lookups: (?1); Text: (?#text) , (?adlupimnsx-imnsx), (?^alupimnsx)  , (?:pattern) , (?adluimnsx-imnsx:pattern), (?^aluimnsx:pattern) , (?|pattern)  , Lookarou...; Tail: ((?1)); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: (?1); Text: (?1); Tail: ((?#text) , (?adlupimnsx-imnsx), (?^alupimnsx)  , (?:pattern) , (?adluimnsx-imnsx:pattern), (?^aluimnsx:pattern) , (?|pattern)  , Lookarou...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 77129 in perltoc.pod
-Lookups: (?:); Text: (?#text) , (?adlupimnsx-imnsx), (?^alupimnsx)  , (?:pattern) , (?adluimnsx-imnsx:pattern), (?^aluimnsx:pattern) , (?|pattern)  , Lookarou...; Tail: ((?:)); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: (?:); Text: (?:); Tail: ((?#text) , (?adlupimnsx-imnsx), (?^alupimnsx)  , (?:pattern) , (?adluimnsx-imnsx:pattern), (?^aluimnsx:pattern) , (?|pattern)  , Lookarou...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 75854 in perltoc.pod
-Lookups: (?=); Text: (?#text) , (?adlupimnsx-imnsx), (?^alupimnsx)  , (?:pattern) , (?adluimnsx-imnsx:pattern), (?^aluimnsx:pattern) , (?|pattern)  , Lookarou...; Tail: ((?=)); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: (?=); Text: (?=); Tail: ((?#text) , (?adlupimnsx-imnsx), (?^alupimnsx)  , (?:pattern) , (?adluimnsx-imnsx:pattern), (?^aluimnsx:pattern) , (?|pattern)  , Lookarou...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 76137 in perltoc.pod
-Lookups: @+; Text: $<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...; Tail: (@+); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 71731 in perltoc.pod
-Lookups: @-; Text: $<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...; Tail: (@-); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 71542 in perltoc.pod
-Lookups: @-; Text: $<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...; Tail: (@-); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 71857 in perltoc.pod
-Lookups: @ARG; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: (@ARG); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 70220 in perltoc.pod
-Lookups: @ARGV; Text: $ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...; Tail: (@ARGV); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 72476 in perltoc.pod
-Lookups: @F; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: (@F); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 70837 in perltoc.pod
-Lookups: @INC; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: (@INC); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 70849 in perltoc.pod
-Lookups: @ISA; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: (@ISA); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 70921 in perltoc.pod
-Lookups: @LAST_MATCH_END; Text: $<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...; Tail: (@LAST_MATCH_END); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 71737 in perltoc.pod
-Lookups: @LAST_MATCH_START; Text: $<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...; Tail: (@LAST_MATCH_START); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 71863 in perltoc.pod
-Lookups: @^CAPTURE; Text: $<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...; Tail: (@^CAPTURE); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 71338 in perltoc.pod
-Lookups: @_; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: (@_); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 70214 in perltoc.pod
-Lookups: @{^CAPTURE}; Text: $<digits> ($1, $2, ...)    , @{^CAPTURE}  , $MATCH, $&  , ${^MATCH} , $PREMATCH, $`   , ${^PREMATCH}  , $POSTMATCH, $'    , ${^POSTMATCH}...; Tail: (@{^CAPTURE}); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 71323 in perltoc.pod
+Lookups: (?>pattern), (?E<gt>pattern); Text: (?>pattern); Tail: ((?#text) , (?adlupimnsx-imnsx), (?^alupimnsx)  , (?:pattern) , (?adluimnsx-imnsx:pattern), (?^aluimnsx:pattern) , (?|pattern)  , Lookarou...); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 77802 in perltoc.pod
+Lookups: (??{}); Text: (??{}); Tail: ((?#text) , (?adlupimnsx-imnsx), (?^alupimnsx)  , (?:pattern) , (?adluimnsx-imnsx:pattern), (?^aluimnsx:pattern) , (?|pattern)  , Lookarou...); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 76969 in perltoc.pod
+Lookups: (?E<lt>!), (?<!); Text: (?<!); Tail: ((?#text) , (?adlupimnsx-imnsx), (?^alupimnsx)  , (?:pattern) , (?adluimnsx-imnsx:pattern), (?^aluimnsx:pattern) , (?|pattern)  , Lookarou...); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 76629 in perltoc.pod
+Lookups: (?E<lt>=), (?<=); Text: (?<=); Tail: ((?#text) , (?adlupimnsx-imnsx), (?^alupimnsx)  , (?:pattern) , (?adluimnsx-imnsx:pattern), (?^aluimnsx:pattern) , (?|pattern)  , Lookarou...); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 76460 in perltoc.pod
+Lookups: (?E<lt>NAMEE<gt>), (?<NAME>); Text: (?<NAME>); Tail: ((?#text) , (?adlupimnsx-imnsx), (?^alupimnsx)  , (?:pattern) , (?adluimnsx-imnsx:pattern), (?^aluimnsx:pattern) , (?|pattern)  , Lookarou...); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 76767 in perltoc.pod
+Lookups: (?PARNO); Text: (?PARNO); Tail: ((?#text) , (?adlupimnsx-imnsx), (?^alupimnsx)  , (?:pattern) , (?adluimnsx-imnsx:pattern), (?^aluimnsx:pattern) , (?|pattern)  , Lookarou...); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 77117 in perltoc.pod
+Lookups: (?[...]) operators now follow standard Perl precedence; Text: (?[...]) operators now follow standard Perl precedence; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 234513 in perltoc.pod
+Lookups: (?^); Text: (?^); Tail: ((?#text) , (?adlupimnsx-imnsx), (?^alupimnsx)  , (?:pattern) , (?adluimnsx-imnsx:pattern), (?^aluimnsx:pattern) , (?|pattern)  , Lookarou...); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 75830 in perltoc.pod
+Lookups: (?^:); Text: (?^:); Tail: ((?#text) , (?adlupimnsx-imnsx), (?^alupimnsx)  , (?:pattern) , (?adluimnsx-imnsx:pattern), (?^aluimnsx:pattern) , (?|pattern)  , Lookarou...); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 75918 in perltoc.pod
 Lookups: A list of tailorable locales; Text: A list of tailorable locales; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 702066 in perltoc.pod
 Lookups: A list of variant codes and their aliases; Text: A list of variant codes and their aliases; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 702102 in perltoc.pod
-Lookups: A; Text: A; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 124774 in perltoc.pod
-Lookups: ARGV; Text: $ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...; Tail: (ARGV); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 72491 in perltoc.pod
-Lookups: ARGVOUT; Text: $ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...; Tail: (ARGVOUT); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 72508 in perltoc.pod
 Lookups: AUTHOR; Text: AUTHOR; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 708081 in perltoc.pod
 Lookups: AUTHOR; Text: AUTHOR; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -954,16 +1060,6 @@ Lookups: Decomposition and Composition; Text: Decomposition and Composition; Tai
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 702941 in perltoc.pod
 Lookups: EXPORT; Text: EXPORT; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 704468 in perltoc.pod
-Lookups: F; Text: F; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 126863 in perltoc.pod
-Lookups: FORMAT; Text: FORMAT; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 396562 in perltoc.pod
-Lookups: FORMAT; Text: FORMAT; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 397433 in perltoc.pod
-Lookups: FORMAT; Text: FORMAT; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 398326 in perltoc.pod
-Lookups: FORMAT_LINE_BREAK_CHARACTERS; Text: $ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...; Tail: (FORMAT_LINE_BREAK_CHARACTERS); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 73509 in perltoc.pod
 Lookups: HISTORY; Text: HISTORY; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 707222 in perltoc.pod
 Lookups: INSTALL; Text: INSTALL; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -994,10 +1090,6 @@ Lookups: Quick Check; Text: Quick Check; Tail: null; Type: List Item; Icon: /per
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 703420 in perltoc.pod
 Lookups: Reference; Text: Reference; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 702261 in perltoc.pod
-Lookups: S; Text: I<text> -- italic text    , B<text> -- bold text    , C<code> -- code text    , L<name> -- a hyperlink    , E<escape> -- a character esca...; Tail: (S); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 62653 in perltoc.pod
-Lookups: S; Text: S; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 129768 in perltoc.pod
 Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 701331 in perltoc.pod
 Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -1008,8 +1100,6 @@ Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: List Item; Icon: /perl5lang
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 704644 in perltoc.pod
 Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 707753 in perltoc.pod
-Lookups: SUBSCRIPT_SEPARATOR; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: (SUBSCRIPT_SEPARATOR); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 70680 in perltoc.pod
 Lookups: SYNOPSIS; Text: SYNOPSIS; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 701282 in perltoc.pod
 Lookups: SYNOPSIS; Text: SYNOPSIS; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -1052,40 +1142,8 @@ Lookups: VERSION; Text: VERSION; Tail: null; Type: List Item; Icon: /perl5langua
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 707334 in perltoc.pod
 Lookups: XSLoader - Dynamically load C libraries into Perl code; Text: XSLoader - Dynamically load C libraries into Perl code; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 707262 in perltoc.pod
-Lookups: \; Text: 1.  , 2.        , 3.         , 4.       , 5.  , 6. , 7.; Tail: (\); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 80954 in perltoc.pod
-Lookups: \K; Text: (?#text) , (?adlupimnsx-imnsx), (?^alupimnsx)  , (?:pattern) , (?adluimnsx-imnsx:pattern), (?^aluimnsx:pattern) , (?|pattern)  , Lookarou...; Tail: (\K); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 76552 in perltoc.pod
-Lookups: a; Text: a; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 410332 in perltoc.pod
-Lookups: abandon_output_fh; Text: $parser->abandon_output_fh(), $parser->abandon_output_string(), $parser->accept_code( @codes ), $parser->accept_codes( @codes ), $parser-...; Tail: (abandon_output_fh); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 604152 in perltoc.pod
-Lookups: abandon_output_string; Text: $parser->abandon_output_fh(), $parser->abandon_output_string(), $parser->accept_code( @codes ), $parser->accept_codes( @codes ), $parser-...; Tail: (abandon_output_string); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 604213 in perltoc.pod
-Lookups: accept_code; Text: $parser->abandon_output_fh(), $parser->abandon_output_string(), $parser->accept_code( @codes ), $parser->accept_codes( @codes ), $parser-...; Tail: (accept_code); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 604276 in perltoc.pod
-Lookups: accept_codes; Text: $parser->abandon_output_fh(), $parser->abandon_output_string(), $parser->accept_code( @codes ), $parser->accept_codes( @codes ), $parser-...; Tail: (accept_codes); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 604330 in perltoc.pod
-Lookups: accept_directive_as_data; Text: $parser->abandon_output_fh(), $parser->abandon_output_string(), $parser->accept_code( @codes ), $parser->accept_codes( @codes ), $parser-...; Tail: (accept_directive_as_data); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 604402 in perltoc.pod
-Lookups: accept_directive_as_processed; Text: $parser->abandon_output_fh(), $parser->abandon_output_string(), $parser->accept_code( @codes ), $parser->accept_codes( @codes ), $parser-...; Tail: (accept_directive_as_processed); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 604491 in perltoc.pod
-Lookups: accept_directive_as_verbatim; Text: $parser->abandon_output_fh(), $parser->abandon_output_string(), $parser->accept_code( @codes ), $parser->accept_codes( @codes ), $parser-...; Tail: (accept_directive_as_verbatim); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 604584 in perltoc.pod
-Lookups: accept_target; Text: $parser->abandon_output_fh(), $parser->abandon_output_string(), $parser->accept_code( @codes ), $parser->accept_codes( @codes ), $parser-...; Tail: (accept_target); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 604658 in perltoc.pod
-Lookups: accept_target_as_text; Text: $parser->abandon_output_fh(), $parser->abandon_output_string(), $parser->accept_code( @codes ), $parser->accept_codes( @codes ), $parser-...; Tail: (accept_target_as_text); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 604725 in perltoc.pod
-Lookups: accept_targets; Text: $parser->abandon_output_fh(), $parser->abandon_output_string(), $parser->accept_code( @codes ), $parser->accept_codes( @codes ), $parser-...; Tail: (accept_targets); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 604793 in perltoc.pod
-Lookups: accept_targets_as_text; Text: $parser->abandon_output_fh(), $parser->abandon_output_string(), $parser->accept_code( @codes ), $parser->accept_codes( @codes ), $parser-...; Tail: (accept_targets_as_text); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 604862 in perltoc.pod
 Lookups: all_casefolds(); Text: all_casefolds(); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 706024 in perltoc.pod
-Lookups: any_errata_seen; Text: $parser->abandon_output_fh(), $parser->abandon_output_string(), $parser->accept_code( @codes ), $parser->accept_codes( @codes ), $parser-...; Tail: (any_errata_seen); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 604922 in perltoc.pod
-Lookups: autoflush; Text: $ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...; Tail: (autoflush); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 73050 in perltoc.pod
 Lookups: bidi_types(); Text: bidi_types(); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 705768 in perltoc.pod
 Lookups: casefold(); Text: casefold(); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -1112,44 +1170,16 @@ Lookups: code point argument; Text: code point argument; Tail: null; Type: List 
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 705087 in perltoc.pod
 Lookups: compexcl(); Text: compexcl(); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 705807 in perltoc.pod
-Lookups: detected_encoding; Text: $parser->abandon_output_fh(), $parser->abandon_output_string(), $parser->accept_code( @codes ), $parser->accept_codes( @codes ), $parser-...; Tail: (detected_encoding); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 605022 in perltoc.pod
-Lookups: encoding; Text: $parser->abandon_output_fh(), $parser->abandon_output_string(), $parser->accept_code( @codes ), $parser->accept_codes( @codes ), $parser-...; Tail: (encoding); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 605070 in perltoc.pod
-Lookups: errata_seen; Text: $parser->abandon_output_fh(), $parser->abandon_output_string(), $parser->accept_code( @codes ), $parser->accept_codes( @codes ), $parser-...; Tail: (errata_seen); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 604971 in perltoc.pod
-Lookups: f; Text: f; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 420670 in perltoc.pod
-Lookups: flush; Text: $ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...; Tail: (flush); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 73063 in perltoc.pod
 Lookups: general_categories(); Text: general_categories(); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 705721 in perltoc.pod
 Lookups: h2ph; Text: h2ph; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 707963 in perltoc.pod
 Lookups: h2xs; Text: h2xs; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 707975 in perltoc.pod
-Lookups: h; Text: h; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 421550 in perltoc.pod
-Lookups: hash; Text: -X FILEHANDLE  , -X EXPR, -X DIRHANDLE, -X, abs VALUE  , abs, accept NEWSOCKET,GENERICSOCKET , alarm SECONDS   , alarm, atan2 Y,X    , bi...; Tail: (hash); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 49767 in perltoc.pod
-Lookups: hash; Text: Functions for SCALARs or strings   , Regular expressions and pattern matching   , Numeric functions    , Functions for real @ARRAYs , Fun...; Tail: (hash); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 47434 in perltoc.pod
-Lookups: hash; Text: How do I merge two hashes?; Tail: (hash); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 22900 in perltoc.pod
-Lookups: hashbang; Text: #! and quoting on non-Unix systems; Tail: (hashbang); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 1829 in perltoc.pod
-Lookups: l; Text: l; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 423793 in perltoc.pod
-Lookups: line number; Text: $ARGV , @ARGV , ARGV , ARGVOUT , IO::Handle->output_field_separator( EXPR ), $OUTPUT_FIELD_SEPARATOR, $OFS, $,   , HANDLE->input_line_num...; Tail: (line number); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 72738 in perltoc.pod
 Lookups: namedseq(); Text: namedseq(); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 706156 in perltoc.pod
 Lookups: num(); Text: num(); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 706193 in perltoc.pod
-Lookups: p; Text: p; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 425191 in perltoc.pod
-Lookups: parse_from_file; Text: $parser->abandon_output_fh(), $parser->abandon_output_string(), $parser->accept_code( @codes ), $parser->accept_codes( @codes ), $parser-...; Tail: (parse_from_file); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 605130 in perltoc.pod
 Lookups: perlbug; Text: perlbug; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 707987 in perltoc.pod
 Lookups: pl2pm; Text: pl2pm; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -1168,39 +1198,9 @@ Lookups: prop_value_aliases(); Text: prop_value_aliases(); Tail: null; Type: Lis
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 706306 in perltoc.pod
 Lookups: prop_values(); Text: prop_values(); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 706266 in perltoc.pod
-Lookups: s; Text: Quote and Quote-like Operators; Tail: (s); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 43264 in perltoc.pod
-Lookups: s; Text: qr/STRING/msixpodualn       , m/PATTERN/msixpodualngc              , /PATTERN/msixpodualngc, The empty pattern //, Matching in list conte...; Tail: (s); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 43889 in perltoc.pod
-Lookups: s; Text: s; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 425972 in perltoc.pod
-Lookups: scream; Text: $parser->abandon_output_fh(), $parser->abandon_output_string(), $parser->accept_code( @codes ), $parser->accept_codes( @codes ), $parser-...; Tail: (scream); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 605191 in perltoc.pod
 Lookups: search_invlist(); Text: search_invlist(); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 706592 in perltoc.pod
-Lookups: sitecustomize.pl; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: (sitecustomize.pl); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 71132 in perltoc.pod
-Lookups: sitecustomize; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: (sitecustomize); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 71115 in perltoc.pod
-Lookups: sitecustomize; Text: -0[octal/hexadecimal]  , -a  , -C [number/list] , -c , -d  , -dt, -d:MOD[=bar,baz]  , -dt:MOD[=bar,baz], -Dletters   , -Dnumber, -e comma...; Tail: (sitecustomize); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 2339 in perltoc.pod
 Lookups: splain; Text: splain; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 708046 in perltoc.pod
-Lookups: unaccept_code; Text: $parser->abandon_output_fh(), $parser->abandon_output_string(), $parser->accept_code( @codes ), $parser->accept_codes( @codes ), $parser-...; Tail: (unaccept_code); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 605241 in perltoc.pod
-Lookups: unaccept_codes; Text: $parser->abandon_output_fh(), $parser->abandon_output_string(), $parser->accept_code( @codes ), $parser->accept_codes( @codes ), $parser-...; Tail: (unaccept_codes); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 605299 in perltoc.pod
-Lookups: unaccept_directive; Text: $parser->abandon_output_fh(), $parser->abandon_output_string(), $parser->accept_code( @codes ), $parser->accept_codes( @codes ), $parser-...; Tail: (unaccept_directive); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 605367 in perltoc.pod
-Lookups: unaccept_directives; Text: $parser->abandon_output_fh(), $parser->abandon_output_string(), $parser->accept_code( @codes ), $parser->accept_codes( @codes ), $parser-...; Tail: (unaccept_directives); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 605440 in perltoc.pod
-Lookups: unaccept_target; Text: $parser->abandon_output_fh(), $parser->abandon_output_string(), $parser->accept_code( @codes ), $parser->accept_codes( @codes ), $parser-...; Tail: (unaccept_target); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 605507 in perltoc.pod
-Lookups: unaccept_targets; Text: $parser->abandon_output_fh(), $parser->abandon_output_string(), $parser->accept_code( @codes ), $parser->accept_codes( @codes ), $parser-...; Tail: (unaccept_targets); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 605571 in perltoc.pod
-Lookups: version_report; Text: $parser->abandon_output_fh(), $parser->abandon_output_string(), $parser->accept_code( @codes ), $parser->accept_codes( @codes ), $parser-...; Tail: (version_report); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 605624 in perltoc.pod
-Lookups: whine; Text: $parser->abandon_output_fh(), $parser->abandon_output_string(), $parser->accept_code( @codes ), $parser->accept_codes( @codes ), $parser-...; Tail: (whine); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 605683 in perltoc.pod
 Lookups: xsubpp; Text: xsubpp; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 708060 in perltoc.pod

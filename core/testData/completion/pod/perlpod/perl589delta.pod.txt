@@ -6,7 +6,7 @@ Lookups: %s argument is not a HASH or ARRAY element or a subroutine; Text: %s ar
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 41523 in perl589delta.pod
 Lookups: -D option enhancements; Text: -D option enhancements; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4318 in perl589delta.pod
-Lookups: ...; Text: New Documentation; Tail: (...); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: ...; Text: ...; Tail: (New Documentation); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 20364 in perl589delta.pod
 Lookups: Acknowledgements; Text: Acknowledgements; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 51119 in perl589delta.pod
