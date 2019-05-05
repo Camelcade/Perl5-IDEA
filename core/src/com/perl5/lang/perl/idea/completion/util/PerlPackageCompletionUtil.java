@@ -101,7 +101,7 @@ public class PerlPackageCompletionUtil {
       .withTailText("...");
   }
 
-  public static void fillWithAllPackageNames(@NotNull PsiElement element, @NotNull final CompletionResultSet result) {
+  public static void fillWithAllNamespacesNames(@NotNull PsiElement element, @NotNull final CompletionResultSet result) {
     final Project project = element.getProject();
     GlobalSearchScope resolveScope = element.getResolveScope();
 
@@ -111,7 +111,7 @@ public class PerlPackageCompletionUtil {
     });
 
     result.addElement(PerlPackageCompletionUtil.getPackageLookupElement(null, __PACKAGE__, PACKAGE_GUTTER_ICON));
-    for (String packageName : PerlPackageUtil.getDefinedPackageNames(project)) {
+    for (String packageName : PerlPackageUtil.getKnownNamespaceNames(project)) {
       PerlPackageUtil.processNamespaces(packageName, project, resolveScope, namespace -> {
         String name = namespace.getNamespaceName();
         if (StringUtil.isNotEmpty(name)) {
@@ -125,7 +125,7 @@ public class PerlPackageCompletionUtil {
     }
   }
 
-  public static void fillWithAllPackageNamesWithAutocompletion(@NotNull PsiElement element, @NotNull final CompletionResultSet result) {
+  public static void fillWithAllNamespacesNamesWithAutocompletion(@NotNull PsiElement element, @NotNull final CompletionResultSet result) {
     final Project project = element.getProject();
     final String prefix = result.getPrefixMatcher().getPrefix();
     GlobalSearchScope resolveScope = element.getResolveScope();
@@ -135,7 +135,7 @@ public class PerlPackageCompletionUtil {
       return true;
     });
 
-    for (String packageName : PerlPackageUtil.getDefinedPackageNames(project)) {
+    for (String packageName : PerlPackageUtil.getKnownNamespaceNames(project)) {
       PerlPackageUtil.processNamespaces(packageName, project, resolveScope, namespace ->
       {
         String name = namespace.getNamespaceName();
@@ -190,7 +190,7 @@ public class PerlPackageCompletionUtil {
     }
   }
 
-  public static void fillWithPackageNameSuggestions(@NotNull PsiElement element, @NotNull final CompletionResultSet result) {
+  public static void fillWithNamespaceNameSuggestions(@NotNull PsiElement element, @NotNull final CompletionResultSet result) {
     PsiFile file = element.getContainingFile().getOriginalFile();
 
     VirtualFile virtualFile = file.getViewProvider().getVirtualFile();

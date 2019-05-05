@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,7 +48,7 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
   @NotNull
   protected final PerlValue myDeclaredValue;
   @Nullable
-  protected final String myPackageName;
+  protected final String myNamespaceName;
 
   protected final boolean myIsLexical;
   protected final boolean myIsLocal;
@@ -56,7 +56,7 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
 
   protected PerlImplicitVariableDeclaration(@NotNull PsiManager manager,
                                             @NotNull String variableNameWithSigil,
-                                            @Nullable String packageName,
+                                            @Nullable String namespaceName,
                                             @Nullable String variableClass,
                                             boolean isLexical,
                                             boolean isLocal,
@@ -86,7 +86,7 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
       myIsLexical = isLexical;
       myIsLocal = isLocal;
       myIsInvocant = isInvocant;
-      myPackageName = packageName;
+      myNamespaceName = namespaceName;
     }
     else {
       throw new RuntimeException("Incorrect variable name, should start from sigil: " + variableNameWithSigil);
@@ -113,7 +113,7 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
   @Nullable
   @Override
   public String getExplicitNamespaceName() {
-    return myPackageName;
+    return myNamespaceName;
   }
 
   @Override
@@ -312,7 +312,7 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
     if (!myDeclaredValue.equals(that.myDeclaredValue)) {
       return false;
     }
-    return myPackageName != null ? myPackageName.equals(that.myPackageName) : that.myPackageName == null;
+    return myNamespaceName != null ? myNamespaceName.equals(that.myNamespaceName) : that.myNamespaceName == null;
   }
 
   @Override
@@ -321,7 +321,7 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
     result = 31 * result + (myVariableType != null ? myVariableType.hashCode() : 0);
     result = 31 * result + myVariableName.hashCode();
     result = 31 * result + myDeclaredValue.hashCode();
-    result = 31 * result + (myPackageName != null ? myPackageName.hashCode() : 0);
+    result = 31 * result + (myNamespaceName != null ? myNamespaceName.hashCode() : 0);
     result = 31 * result + (myIsLexical ? 1 : 0);
     result = 31 * result + (myIsLocal ? 1 : 0);
     result = 31 * result + (myIsInvocant ? 1 : 0);

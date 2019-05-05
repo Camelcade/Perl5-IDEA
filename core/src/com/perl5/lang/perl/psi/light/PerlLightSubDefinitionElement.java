@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,7 +41,7 @@ import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
 public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement> extends PerlDelegatingLightNamedElement<Delegate>
   implements PerlSubDefinitionElement {
   @Nullable
-  private final String myPackageName;
+  private final String myNamespaceName;
   @NotNull
   private final AtomicNullableLazyValue<PerlSubAnnotations> myAnnotationsProvider;
   @NotNull
@@ -56,13 +56,13 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
                                        @NotNull String name,
                                        @NotNull IStubElementType elementType,
                                        @Nullable PsiElement nameIdentifier,
-                                       @Nullable String packageName,
+                                       @Nullable String namespaceName,
                                        @Nullable PerlSubAnnotations annotations,
                                        @NotNull List<PerlSubArgument> subArguments,
                                        @NotNull AtomicNotNullLazyValue<PerlValue> returnValueFromCodeProvider,
                                        @Nullable PsiPerlBlock subDefinitionBody) {
     super(delegate, name, elementType, nameIdentifier);
-    myPackageName = packageName;
+    myNamespaceName = namespaceName;
     myAnnotationsProvider = AtomicNullableLazyValue.createValue(() -> annotations);
     mySubArgumentsProvider = AtomicNotNullLazyValue.createValue(() -> subArguments);
     myReturnValueFromCodeProvider = returnValueFromCodeProvider;
@@ -73,10 +73,10 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
                                        @NotNull String name,
                                        @NotNull IStubElementType elementType,
                                        @NotNull PsiElement nameIdentifier,
-                                       @Nullable String packageName,
+                                       @Nullable String namespaceName,
                                        @NotNull PerlSubExpr elementSub) {
     super(delegate, name, elementType, nameIdentifier);
-    myPackageName = packageName;
+    myNamespaceName = namespaceName;
     mySubDefinitionBody = elementSub.getBlock();
     myAnnotationsProvider = AtomicNullableLazyValue.createValue(
       () -> PerlSubAnnotations.computeForLightElement(delegate, nameIdentifier));
@@ -90,11 +90,11 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
                                        @NotNull String subName,
                                        @NotNull IStubElementType elementType,
                                        @NotNull PsiElement nameIdentifier,
-                                       @Nullable String packageName,
+                                       @Nullable String namespaceName,
                                        @NotNull List<PerlSubArgument> subArguments,
                                        @Nullable PerlSubAnnotations annotations,
                                        @NotNull AtomicNotNullLazyValue<PerlValue> returnValueFromCodeProvider) {
-    this(delegate, subName, elementType, nameIdentifier, packageName, annotations, subArguments, returnValueFromCodeProvider, null);
+    this(delegate, subName, elementType, nameIdentifier, namespaceName, annotations, subArguments, returnValueFromCodeProvider, null);
   }
 
   @Deprecated
@@ -102,15 +102,15 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
                                        @NotNull String subName,
                                        @NotNull IStubElementType elementType,
                                        @NotNull PsiElement nameIdentifier,
-                                       @Nullable String packageName,
+                                       @Nullable String namespaceName,
                                        @NotNull List<PerlSubArgument> subArguments,
                                        @Nullable PerlSubAnnotations annotations) {
-    this(delegate, subName, elementType, nameIdentifier, packageName, subArguments, annotations, UNKNOWN_VALUE_PROVIDER);
+    this(delegate, subName, elementType, nameIdentifier, namespaceName, subArguments, annotations, UNKNOWN_VALUE_PROVIDER);
   }
 
   public PerlLightSubDefinitionElement(@NotNull Delegate delegate, @NotNull PerlSubDefinitionStub stub) {
     super(delegate, stub.getSubName(), stub.getStubType());
-    myPackageName = stub.getNamespaceName();
+    myNamespaceName = stub.getNamespaceName();
     mySubArgumentsProvider = AtomicNotNullLazyValue.createValue(stub::getSubArgumentsList);
     myAnnotationsProvider = AtomicNullableLazyValue.createValue(stub::getAnnotations);
     myReturnValueFromCodeProvider = AtomicNotNullLazyValue.createValue(stub::getReturnValueFromCode);
@@ -124,7 +124,7 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
   @Nullable
   @Override
   public String getNamespaceName() {
-    return myPackageName;
+    return myNamespaceName;
   }
 
   @NotNull
@@ -147,7 +147,7 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
   @Nullable
   @Override
   public String getExplicitNamespaceName() {
-    return myPackageName;
+    return myNamespaceName;
   }
 
   @Override

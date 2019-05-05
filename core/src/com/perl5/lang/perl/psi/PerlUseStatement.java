@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,9 +25,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-/**
- * Created by hurricup on 31.05.2015.
- */
 public interface PerlUseStatement extends StubBasedPsiElement<PerlUseStatementStub>, PerlNamespaceElementContainer, PerlCompositeElement {
   String getPackageName();
 
@@ -48,6 +45,9 @@ public interface PerlUseStatement extends StubBasedPsiElement<PerlUseStatementSt
   @Nullable
   PsiPerlExpr getExpr();
 
+  /**
+   * @return a name of containing namespace
+   */
   @Nullable
-  String getOuterPackageName();
+  String getNamespaceName();
 }

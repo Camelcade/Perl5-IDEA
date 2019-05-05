@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -65,14 +65,14 @@ public class PerlGlobStubElementType extends IStubElementType<PerlGlobStub, PsiP
 
   @Override
   public void indexStub(@NotNull PerlGlobStub stub, @NotNull IndexSink sink) {
-    String name = stub.getPackageName() + PerlPackageUtil.PACKAGE_SEPARATOR + stub.getName();
+    String name = stub.getNamespaceName() + PerlPackageUtil.PACKAGE_SEPARATOR + stub.getName();
     sink.occurrence(PerlGlobsStubIndex.KEY, name);
-    sink.occurrence(PerlGlobsStubIndex.KEY, "*" + stub.getPackageName());
+    sink.occurrence(PerlGlobsStubIndex.KEY, "*" + stub.getNamespaceName());
   }
 
   @Override
   public void serialize(@NotNull PerlGlobStub stub, @NotNull StubOutputStream dataStream) throws IOException {
-    dataStream.writeName(stub.getPackageName());
+    dataStream.writeName(stub.getNamespaceName());
     dataStream.writeName(stub.getName());
     dataStream.writeBoolean(stub.isLeftSideOfAssignment());
   }

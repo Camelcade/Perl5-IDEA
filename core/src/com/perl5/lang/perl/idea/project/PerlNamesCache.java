@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,7 +38,7 @@ public class PerlNamesCache implements ProjectComponent {
   private final Thread myUpdaterThread = new Thread(myUpdaterRunner);
   private final Project myProject;
   private Set<String> myKnownSubs = Collections.emptySet();
-  private Set<String> myKnownPackages = Collections.emptySet();
+  private Set<String> myKnownNamespaces = Collections.emptySet();
   private final Runnable myCacheUpdaterWorker = new Runnable() {
     @Override
     public void run() {
@@ -50,10 +50,10 @@ public class PerlNamesCache implements ProjectComponent {
 
         Set<String> namespacesSet = new HashSet<>();
         namespacesSet.addAll(PerlPackageUtil.CORE_PACKAGES_ALL);
-        namespacesSet.addAll(PerlPackageUtil.getDefinedPackageNames(myProject));
+        namespacesSet.addAll(PerlPackageUtil.getKnownNamespaceNames(myProject));
 
         myKnownSubs = Collections.unmodifiableSet(subsSet);
-        myKnownPackages = Collections.unmodifiableSet(namespacesSet);
+        myKnownNamespaces = Collections.unmodifiableSet(namespacesSet);
       });
     }
   };
@@ -99,9 +99,9 @@ public class PerlNamesCache implements ProjectComponent {
     return myKnownSubs;
   }
 
-  public Set<String> getPackagesNamesSet() {
+  public Set<String> getNamespacesNamesSet() {
     myUpdaterRunner.update();
-    return myKnownPackages;
+    return myKnownNamespaces;
   }
 
   @NotNull

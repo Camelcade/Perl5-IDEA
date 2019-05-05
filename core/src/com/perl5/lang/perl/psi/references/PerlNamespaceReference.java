@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,9 +30,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by hurricup on 28.05.2015.
- */
 public class PerlNamespaceReference extends PerlCachingReference<PsiElement> {
   public PerlNamespaceReference(PsiElement psiElement) {
     super(psiElement);
@@ -43,7 +40,7 @@ public class PerlNamespaceReference extends PerlCachingReference<PsiElement> {
   }
 
   @NotNull
-  private String getPackageName() {
+  private String getNamspaceName() {
     if (myElement instanceof PerlNamespaceElement) {
       return ((PerlNamespaceElement)myElement).getCanonicalName();
     }
@@ -53,20 +50,20 @@ public class PerlNamespaceReference extends PerlCachingReference<PsiElement> {
   @NotNull
   @Override
   protected ResolveResult[] resolveInner(boolean incompleteCode) {
-    String packageName = getPackageName();
-    if (packageName.isEmpty()) {
-      packageName = PerlPackageUtil.MAIN_NAMESPACE_NAME;
+    String namespaceName = getNamspaceName();
+    if (namespaceName.isEmpty()) {
+      namespaceName = PerlPackageUtil.MAIN_NAMESPACE_NAME;
     }
 
     Project project = myElement.getProject();
     PerlBuiltInNamespaceDefinition builtInNamespaceDefinition =
-      PerlBuiltInNamespacesService.getInstance(project).getNamespaceDefinition(packageName);
+      PerlBuiltInNamespacesService.getInstance(project).getNamespaceDefinition(namespaceName);
     if (builtInNamespaceDefinition != null) {
       return PsiElementResolveResult.createResults(builtInNamespaceDefinition);
     }
 
     List<PsiElement> result = new ArrayList<>();
-    result.addAll(PerlPackageUtil.getNamespaceDefinitions(project, PerlPackageUtil.getCanonicalPackageName(packageName)));
+    result.addAll(PerlPackageUtil.getNamespaceDefinitions(project, PerlPackageUtil.getCanonicalNamespaceName(namespaceName)));
 
     return PsiElementResolveResult.createResults(result);
   }

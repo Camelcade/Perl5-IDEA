@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -57,7 +57,7 @@ public class PerlUseStatementStubElementType extends IStubElementType<PerlUseSta
   public PerlUseStatementStub createStub(@NotNull PerlUseStatement psi, StubElement parentStub) {
     return new PerlUseStatementStubImpl(
       parentStub,
-      psi.getOuterPackageName(),
+      psi.getNamespaceName(),
       psi.getPackageName(),
       psi.getImportParameters()
     );
@@ -71,7 +71,7 @@ public class PerlUseStatementStubElementType extends IStubElementType<PerlUseSta
 
   @Override
   public void serialize(@NotNull PerlUseStatementStub stub, @NotNull StubOutputStream dataStream) throws IOException {
-    dataStream.writeName(stub.getOuterPackageName());
+    dataStream.writeName(stub.getNamespaceName());
     dataStream.writeName(stub.getPackageName());
     PerlStubSerializationUtil.writeStringsList(dataStream, stub.getImportParameters());
   }
@@ -84,7 +84,7 @@ public class PerlUseStatementStubElementType extends IStubElementType<PerlUseSta
 
   @Override
   public void indexStub(@NotNull PerlUseStatementStub stub, @NotNull IndexSink sink) {
-    sink.occurrence(PerlUseStatementsIndex.KEY, stub.getOuterPackageName());
+    sink.occurrence(PerlUseStatementsIndex.KEY, stub.getNamespaceName());
   }
 
   @Override

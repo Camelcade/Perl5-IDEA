@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,24 +27,24 @@ import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class PerlSubStub<Psi extends PerlSubElement> extends StubBase<Psi> implements StubElement<Psi>, PerlSub {
-  private final String myPackageName;
+  private final String myNamespaceName;
   private final String mySubName;
   private final PerlSubAnnotations myAnnotations;
 
   public PerlSubStub(final StubElement parent,
-                     final String packageName,
+                     final String namespaceName,
                      final String subName,
                      PerlSubAnnotations annotations,
                      IStubElementType elementType) {
     super(parent, elementType);
-    myPackageName = packageName;
+    myNamespaceName = namespaceName;
     mySubName = subName;
     myAnnotations = annotations;
   }
 
   @Override
   public String getNamespaceName() {
-    return myPackageName;
+    return myNamespaceName;
   }
 
   @Override
@@ -65,7 +65,7 @@ public abstract class PerlSubStub<Psi extends PerlSubElement> extends StubBase<P
   @Nullable
   @Override
   public String getExplicitNamespaceName() {
-    return myPackageName;
+    return myNamespaceName;
   }
 
   @Override

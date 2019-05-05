@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,13 +24,13 @@ import org.jetbrains.annotations.NotNull;
  */
 public interface PerlSubNameElement extends PsiElement {
   /**
-   * Trying to get the package name from explicit specification or by traversing
+   * Trying to get the namespace name from explicit specification or by traversing
    *
    * @return package name for current element
    * @deprecated containing method should be used
    */
   @Deprecated
-  String getPackageName();
+  String getNamespaceName();
 
   /**
    * Returns fullname package::element

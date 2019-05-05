@@ -25,15 +25,15 @@ import java.util.List;
 
 public class PerlUseStatementStubImpl extends StubBase<PerlUseStatement> implements PerlUseStatementStub {
   private final String myPackageName;
-  private final String myOuterPackageName;
+  private final String myNamespaceName;
   private final List<String> myImportOptions;
 
-  public PerlUseStatementStubImpl(StubElement parent, String outerPackageName, String packageName, List<String> importOptions) {
+  public PerlUseStatementStubImpl(StubElement parent, String namespaceName, String packageName, List<String> importOptions) {
     super(parent, PerlStubElementTypes.PERL_USE_STATEMENT);
     assert packageName != null;
-    assert outerPackageName != null;
+    assert namespaceName != null;
     this.myPackageName = packageName;
-    this.myOuterPackageName = outerPackageName;
+    this.myNamespaceName = namespaceName;
     this.myImportOptions = importOptions;
   }
 
@@ -43,8 +43,8 @@ public class PerlUseStatementStubImpl extends StubBase<PerlUseStatement> impleme
   }
 
   @Override
-  public String getOuterPackageName() {
-    return myOuterPackageName;
+  public String getNamespaceName() {
+    return myNamespaceName;
   }
 
   @Override
@@ -56,7 +56,7 @@ public class PerlUseStatementStubImpl extends StubBase<PerlUseStatement> impleme
   public String toString() {
     return super.toString() + "\n" +
            "\tPackage name: " + myPackageName + "\n" +
-           "\tOuter package name: " + myOuterPackageName + "\n" +
+           "\tOuter package name: " + myNamespaceName + "\n" +
            "\tImport options: " + myImportOptions
       ;
   }

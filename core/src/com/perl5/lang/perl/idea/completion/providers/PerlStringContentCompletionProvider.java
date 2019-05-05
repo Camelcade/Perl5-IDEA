@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -78,7 +78,7 @@ public class PerlStringContentCompletionProvider extends CompletionProvider<Comp
     else if (STRING_CONTENT_IN_LIST_OR_STRING_START.accepts(element))    // begin of string or qw element
     {
       PerlStringCompletionUtil.fillWithRefTypes(result);
-      PerlPackageCompletionUtil.fillWithAllPackageNames(element, result);
+      PerlPackageCompletionUtil.fillWithAllNamespacesNames(element, result);
     }
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,11 +39,11 @@ public class PerlPackageCompletionProvider extends CompletionProvider<Completion
 
     if (NAMESPACE_IN_DEFINITION_PATTERN.accepts(element)) // package Foo
     {
-      PerlPackageCompletionUtil.fillWithPackageNameSuggestions(element, result);
+      PerlPackageCompletionUtil.fillWithNamespaceNameSuggestions(element, result);
     }
     else if (NAMESPACE_IN_VARIABLE_DECLARATION_PATTERN.accepts(element)) // my Foo::Bar
     {
-      PerlPackageCompletionUtil.fillWithAllPackageNames(element, result);
+      PerlPackageCompletionUtil.fillWithAllNamespacesNames(element, result);
     }
     else if (NAMESPACE_IN_ANNOTATION_PATTERN.accepts(element)) // #@returns / #@type
     {
@@ -53,7 +53,7 @@ public class PerlPackageCompletionProvider extends CompletionProvider<Completion
       result.addElement(LookupElementBuilder.create("HashRef")
                           .withInsertHandler(PerlInsertHandlers.ARRAY_ELEMENT_INSERT_HANDLER)
                           .withTailText("[]"));
-      PerlPackageCompletionUtil.fillWithAllPackageNames(element, result);
+      PerlPackageCompletionUtil.fillWithAllNamespacesNames(element, result);
     }
     else if (NAMESPACE_IN_USE_PATTERN.accepts(element)) // use/no/require
     {
@@ -62,7 +62,7 @@ public class PerlPackageCompletionProvider extends CompletionProvider<Completion
     }
     else // fallback
     {
-      PerlPackageCompletionUtil.fillWithAllPackageNames(element, result);
+      PerlPackageCompletionUtil.fillWithAllNamespacesNames(element, result);
     }
   }
 }

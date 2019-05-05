@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -113,7 +113,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
   @Nullable
   private Project myProject;
   private AtomicNotNullLazyValue<Set<String>> mySubNamesProvider;
-  private AtomicNotNullLazyValue<Set<String>> myPackageNamesProvider;
+  private AtomicNotNullLazyValue<Set<String>> myNamespaceNamesProvider;
   private PerlImplicitDeclarationsService myImplicitSubsService;
   private Set<String> myLocalPackages = new THashSet<>();
 
@@ -380,9 +380,9 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
       return PerlNamesCache.getInstance(myProject).getSubsNamesSet();
     });
 
-    myPackageNamesProvider = AtomicNotNullLazyValue.createValue(() -> {
+    myNamespaceNamesProvider = AtomicNotNullLazyValue.createValue(() -> {
       assert myProject != null;
-      return PerlNamesCache.getInstance(myProject).getPackagesNamesSet();
+      return PerlNamesCache.getInstance(myProject).getNamespacesNamesSet();
     });
     myLocalPackages.clear();
 
@@ -466,7 +466,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
         String canonicalName = PerlPackageUtil.getCanonicalName(tokenText);
         if (!StringUtil.containsChar(canonicalName, ':')) {
           if (StringUtil.isCapitalized(canonicalName) &&
-              (myPackageNamesProvider.getValue().contains(canonicalName) || myLocalPackages.contains(canonicalName))) {
+              (myNamespaceNamesProvider.getValue().contains(canonicalName) || myLocalPackages.contains(canonicalName))) {
             tokenType = PACKAGE;
           }
           else {
@@ -482,7 +482,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
         else if (mySubNamesProvider.getValue().contains(canonicalName)) {
           tokenType = QUALIFYING_PACKAGE;
         }
-        else if (myPackageNamesProvider.getValue().contains(canonicalName) || myLocalPackages.contains(canonicalName)) {
+        else if (myNamespaceNamesProvider.getValue().contains(canonicalName) || myLocalPackages.contains(canonicalName)) {
           tokenType = PACKAGE;
         }
         else {
@@ -984,7 +984,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
   }
 
   protected IElementType registerPackage(IElementType tokenType) {
-    myLocalPackages.add(PerlPackageUtil.getCanonicalPackageName(yytext().toString()));
+    myLocalPackages.add(PerlPackageUtil.getCanonicalNamespaceName(yytext().toString()));
     return tokenType;
   }
 

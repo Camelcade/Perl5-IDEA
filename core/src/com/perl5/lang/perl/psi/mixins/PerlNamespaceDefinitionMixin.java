@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -357,11 +357,11 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
   public static class ParentNamespacesNamesCollector implements Processor<PsiElement> {
     private final List<String> parentNamespaces;
     private final List<PerlRuntimeParentsProvider> runtimeModifiers = new ArrayList<>();
-    private final String myPackageName;
+    private final String myNamespaceName;
 
-    public ParentNamespacesNamesCollector(List<String> parentNamespaces, String packageName) {
+    public ParentNamespacesNamesCollector(List<String> parentNamespaces, String namespaceName) {
       this.parentNamespaces = parentNamespaces;
-      myPackageName = packageName;
+      myNamespaceName = namespaceName;
     }
 
     @Override
@@ -389,7 +389,7 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
             PsiElement rightSide = assignExpr.getLastChild();
             if (rightSide != null) {
               String explicitPackageName = variable.getExplicitNamespaceName();
-              if (explicitPackageName == null || StringUtil.equals(explicitPackageName, myPackageName)) {
+              if (explicitPackageName == null || StringUtil.equals(explicitPackageName, myNamespaceName)) {
                 runtimeModifiers.add(new PerlRuntimeParentsProviderFromArray(assignExpr.getLastChild()));
               }
             }

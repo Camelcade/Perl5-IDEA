@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,18 +33,18 @@ public class PerlImplicitSubDefinition extends PerlImplicitElement implements Pe
   @NotNull
   private final String mySubName;
   @NotNull
-  private final String myPackageName;
+  private final String myNamespaceName;
   @NotNull
   private final List<PerlSubArgument> mySubArguments;
 
   public PerlImplicitSubDefinition(@NotNull PsiManager manager,
                                    @NotNull String subName,
-                                   @NotNull String packageName,
+                                   @NotNull String namespaceName,
                                    @NotNull List<PerlSubArgument> argumentList,
                                    @Nullable PsiElement parent) {
     super(manager, parent);
     mySubName = subName;
-    myPackageName = packageName;
+    myNamespaceName = namespaceName;
     mySubArguments = argumentList;
   }
 
@@ -67,7 +67,7 @@ public class PerlImplicitSubDefinition extends PerlImplicitElement implements Pe
   @NotNull
   @Override
   public String getExplicitNamespaceName() {
-    return myPackageName;
+    return myNamespaceName;
   }
 
   @Override

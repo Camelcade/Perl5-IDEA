@@ -118,7 +118,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
   public static final String CORE_GLOBAL_NAMESPACE = CORE_NAMESPACE_FULL + "GLOBAL";
 
   private static final Map<String, String> CANONICAL_NAMES_CACHE = new ConcurrentHashMap<>();
-  private static final Map<String, String> myFilePathsToPackageNameMap = new ConcurrentHashMap<>();
+  private static final Map<String, String> PATH_TO_PACKAGE_NAME_MAP = new ConcurrentHashMap<>();
 
   static {
     CORE_PACKAGES_ALL.addAll(CORE_PACKAGES);
@@ -131,7 +131,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
    */
   @Contract("null -> false")
   public static boolean isBuiltIn(@Nullable String packageName) {
-    return packageName != null && CORE_PACKAGES_ALL.contains(getCanonicalPackageName(packageName));
+    return packageName != null && CORE_PACKAGES_ALL.contains(getCanonicalNamespaceName(packageName));
   }
 
   /**
@@ -141,7 +141,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
    * @return result
    */
   public static boolean isPragma(String pacakgeName) {
-    return CORE_PACKAGES_PRAGMAS.contains(getCanonicalPackageName(pacakgeName));
+    return CORE_PACKAGES_PRAGMAS.contains(getCanonicalNamespaceName(pacakgeName));
   }
 
   /**
@@ -157,7 +157,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
       }
     }
 
-    return CORE_PACKAGES_DEPRECATED.contains(getCanonicalPackageName(packageName));
+    return CORE_PACKAGES_DEPRECATED.contains(getCanonicalNamespaceName(packageName));
   }
 
   @Contract("null->false")
@@ -188,7 +188,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
    * @param name package name
    * @return canonical package name
    */
-  public static String getCanonicalPackageName(@NotNull String name) {
+  public static String getCanonicalNamespaceName(@NotNull String name) {
     String canonicalName = getCanonicalName(name);
     return StringUtils.startsWith(canonicalName, MAIN_NAMESPACE_FULL) ?
            canonicalName.substring(MAIN_NAMESPACE_FULL.length()) : canonicalName;
@@ -227,7 +227,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
 
   @NotNull
   public static List<String> split(@Nullable String packageName) {
-    return packageName == null ? Collections.emptyList() : StringUtil.split(getCanonicalPackageName(packageName), PACKAGE_SEPARATOR);
+    return packageName == null ? Collections.emptyList() : StringUtil.split(getCanonicalNamespaceName(packageName), PACKAGE_SEPARATOR);
   }
 
   /**
@@ -336,7 +336,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
    * @return collection of package names
    * fixme process only from current project
    */
-  public static Collection<String> getDefinedPackageNames(Project project) {
+  public static Collection<String> getKnownNamespaceNames(Project project) {
     Collection<String> keys = StubIndex.getInstance().getAllKeys(PerlNamespaceIndex.KEY, project);
     keys.addAll(StubIndex.getInstance().getAllKeys(PerlLightNamespaceIndex.KEY, project));
     return keys;
@@ -413,12 +413,12 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
    * @return canonical package name
    */
   public static String getPackageNameByPath(final String packagePath) {
-    String result = myFilePathsToPackageNameMap.get(packagePath);
+    String result = PATH_TO_PACKAGE_NAME_MAP.get(packagePath);
 
     if (result == null) {
       String path = packagePath.replaceAll("\\\\", "/");
-      result = getCanonicalPackageName(StringUtils.join(path.replaceFirst("\\.pm$", "").split("/"), PACKAGE_SEPARATOR));
-      myFilePathsToPackageNameMap.put(packagePath, result);
+      result = getCanonicalNamespaceName(StringUtils.join(path.replaceFirst("\\.pm$", "").split("/"), PACKAGE_SEPARATOR));
+      PATH_TO_PACKAGE_NAME_MAP.put(packagePath, result);
     }
     return result;
   }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -78,7 +78,7 @@ public class PerlRenameNamespaceDefinitionProcessor extends PerlRenamePolyRefere
           }
 
           // rename file
-          String newPackageName = PerlPackageUtil.getCanonicalPackageName(newName);
+          String newPackageName = PerlPackageUtil.getCanonicalNamespaceName(newName);
           List<String> newPackageChunks = Arrays.asList(newPackageName.split(PerlPackageUtil.PACKAGE_SEPARATOR));
           String newFileName = newPackageChunks.get(newPackageChunks.size() - 1) + ".pm";
           file.setName(newFileName);

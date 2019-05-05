@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,7 +47,7 @@ public class PerlSubNameElementImpl extends PerlLeafPsiElementWithReferences imp
 
   @Nullable
   @Override
-  public String getPackageName() {
+  public String getNamespaceName() {
     PsiElement parent = getParent();
 
     if (parent instanceof PerlPackageMember) {
@@ -61,7 +61,7 @@ public class PerlSubNameElementImpl extends PerlLeafPsiElementWithReferences imp
   @Override
   @NotNull
   public String getCanonicalName() {
-    return getPackageName() + PerlPackageUtil.PACKAGE_SEPARATOR + getName();
+    return getNamespaceName() + PerlPackageUtil.PACKAGE_SEPARATOR + getName();
   }
 
   @Override

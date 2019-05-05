@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -53,7 +53,7 @@ public class PerlPackageSubCompletionProvider extends CompletionProvider<Complet
     result = result.withPrefixMatcher(new PlainPrefixMatcher(newPrefixMathcer));
 
     if (!((PsiPerlMethod)method).isObjectMethod()) {
-      PerlPackageCompletionUtil.fillWithAllPackageNamesWithAutocompletion(parameters.getPosition(), result);
+      PerlPackageCompletionUtil.fillWithAllNamespacesNamesWithAutocompletion(parameters.getPosition(), result);
     }
     else {
       if (!StringUtil.equals(PerlPackageUtil.SUPER_NAMESPACE_FULL, newPrefixMathcer)) {

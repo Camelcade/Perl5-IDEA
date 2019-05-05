@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -135,7 +135,7 @@ public abstract class PerlIntroduceTargetsHandler {
       return reportEmptyPlace();
     }
     else if (targetElement instanceof PsiPerlPackageExpr) {
-      return "'" + PerlPackageUtil.getCanonicalPackageName(StringUtil.notNullize(targetElement.getText())) + "'";
+      return "'" + PerlPackageUtil.getCanonicalNamespaceName(StringUtil.notNullize(targetElement.getText())) + "'";
     }
     else if (targetElement instanceof PsiPerlMatchRegex) {
       char openQuote = ((PsiPerlMatchRegex)targetElement).getOpenQuote();

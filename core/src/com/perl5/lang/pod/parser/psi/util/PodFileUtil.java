@@ -42,9 +42,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created by hurricup on 27.03.2016.
- */
 public class PodFileUtil {
   public static final String PM_OR_POD_EXTENSION_PATTERN = ".(" + PodFileType.EXTENSION + "|" + PerlFileTypePackage.EXTENSION + ")$";
 
@@ -118,7 +115,7 @@ public class PodFileUtil {
   }
 
   public static String getFilenameFromPackage(@NotNull String packageName) {
-    return StringUtil.join(PerlPackageUtil.getCanonicalPackageName(packageName).split(PerlPackageUtil.PACKAGE_SEPARATOR), "/") +
+    return StringUtil.join(PerlPackageUtil.getCanonicalNamespaceName(packageName).split(PerlPackageUtil.PACKAGE_SEPARATOR), "/") +
            "." +
            PodFileType.EXTENSION;
   }

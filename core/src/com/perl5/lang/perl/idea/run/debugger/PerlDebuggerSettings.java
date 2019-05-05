@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -83,25 +83,25 @@ public class PerlDebuggerSettings extends XDebuggerSettings<PerlDebuggerSettings
   @Tag("entry")
   public static class Item {
     @Attribute("package")
-    String packageName;
+    String namespaceName;
     @Attribute("expression")
     String renderExpression;
 
     public Item() {
     }
 
-    public Item(@NotNull String packageName, @NotNull String renderExpression) {
-      this.packageName = packageName;
+    public Item(@NotNull String namespaceName, @NotNull String renderExpression) {
+      this.namespaceName = namespaceName;
       this.renderExpression = renderExpression;
     }
 
     public Item(Item copy) {
-      this.packageName = copy.packageName;
+      this.namespaceName = copy.namespaceName;
       this.renderExpression = copy.renderExpression;
     }
 
     public boolean isValid() {
-      return StringUtil.isNotEmpty(packageName) && StringUtil.isNotEmpty(renderExpression);
+      return StringUtil.isNotEmpty(namespaceName) && StringUtil.isNotEmpty(renderExpression);
     }
 
     @Override
@@ -115,7 +115,7 @@ public class PerlDebuggerSettings extends XDebuggerSettings<PerlDebuggerSettings
 
       Item item = (Item)o;
 
-      if (packageName != null ? !packageName.equals(item.packageName) : item.packageName != null) {
+      if (namespaceName != null ? !namespaceName.equals(item.namespaceName) : item.namespaceName != null) {
         return false;
       }
       return renderExpression != null ? renderExpression.equals(item.renderExpression) : item.renderExpression == null;
@@ -123,7 +123,7 @@ public class PerlDebuggerSettings extends XDebuggerSettings<PerlDebuggerSettings
 
     @Override
     public int hashCode() {
-      int result = packageName != null ? packageName.hashCode() : 0;
+      int result = namespaceName != null ? namespaceName.hashCode() : 0;
       result = 31 * result + (renderExpression != null ? renderExpression.hashCode() : 0);
       return result;
     }
@@ -144,12 +144,12 @@ public class PerlDebuggerSettings extends XDebuggerSettings<PerlDebuggerSettings
     @Nullable
     @Override
     public String valueOf(Item item) {
-      return item.packageName;
+      return item.namespaceName;
     }
 
     @Override
     public void setValue(Item item, String value) {
-      item.packageName = value;
+      item.namespaceName = value;
     }
 
     @Override
@@ -214,7 +214,7 @@ public class PerlDebuggerSettings extends XDebuggerSettings<PerlDebuggerSettings
           int indexToEdit = -1;
 
           for (Item item : model.getItems()) {
-            if (StringUtil.isEmpty(item.packageName)) {
+            if (StringUtil.isEmpty(item.namespaceName)) {
               indexToEdit = model.indexOf(item);
               break;
             }

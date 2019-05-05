@@ -30,7 +30,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class PerlVariableDeclarationStub extends StubBase<PerlVariableDeclarationElement> implements PerlVariableDeclaration {
   @NotNull
-  private final String myPackageName;
+  private final String myNamespaceName;
   @NotNull
   private final String myVariableName;
   @NotNull
@@ -43,14 +43,14 @@ public class PerlVariableDeclarationStub extends StubBase<PerlVariableDeclaratio
   public PerlVariableDeclarationStub(
     StubElement parent,
     @NotNull IStubElementType elementType,
-    @NotNull String packageName,
+    @NotNull String namespaceName,
     @NotNull String variableName,
     @NotNull PerlValue declaredValue,
     @NotNull PerlVariableType variableType,
     @Nullable PerlVariableAnnotations variableAnnotations
   ) {
     super(parent, elementType);
-    myPackageName = packageName;
+    myNamespaceName = namespaceName;
     myVariableName = variableName;
     myDeclaredValue = declaredValue;
     myVariableType = variableType;
@@ -60,7 +60,7 @@ public class PerlVariableDeclarationStub extends StubBase<PerlVariableDeclaratio
   @NotNull
   @Override
   public String getExplicitNamespaceName() {
-    return myPackageName;
+    return myNamespaceName;
   }
 
   @NotNull
@@ -109,7 +109,7 @@ public class PerlVariableDeclarationStub extends StubBase<PerlVariableDeclaratio
   @Override
   public String toString() {
     return super.toString() + "\n" +
-           "\tNamespace name: " + myPackageName + "\n" +
+           "\tNamespace name: " + myNamespaceName + "\n" +
            "\tVariable name: " + myVariableName + "\n" +
            "\tVariable type: " + myVariableType + "\n" +
            "\tDeclared value: " + myDeclaredValue + "\n" +

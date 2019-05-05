@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,13 +56,13 @@ public abstract class PerlGlobVariableMixin extends PerlStubBasedPsiElementBase<
   public String getNamespaceName() {
     PerlGlobStub stub = getGreenStub();
     if (stub != null) {
-      return stub.getPackageName();
+      return stub.getNamespaceName();
     }
 
     String namespace = getExplicitNamespaceName();
 
     if (namespace == null) {
-      namespace = getContextPackageName();
+      namespace = getContextNamespaceName();
     }
 
     return namespace;
@@ -85,7 +85,7 @@ public abstract class PerlGlobVariableMixin extends PerlStubBasedPsiElementBase<
   }
 
   @Nullable
-  protected String getContextPackageName() {
+  protected String getContextNamespaceName() {
     return PerlPackageUtil.getContextNamespaceName(this);
   }
 
@@ -99,7 +99,7 @@ public abstract class PerlGlobVariableMixin extends PerlStubBasedPsiElementBase<
 
     String variableNameText = variableNameElement.getText();
     int delimiterIndex = variableNameText.lastIndexOf(':');
-    return delimiterIndex == -1 ? null : PerlPackageUtil.getCanonicalPackageName(variableNameText.substring(0, delimiterIndex + 1));
+    return delimiterIndex == -1 ? null : PerlPackageUtil.getCanonicalNamespaceName(variableNameText.substring(0, delimiterIndex + 1));
   }
 
   @Override

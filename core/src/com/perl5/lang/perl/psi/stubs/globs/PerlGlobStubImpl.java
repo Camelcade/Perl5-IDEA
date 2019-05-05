@@ -22,38 +22,38 @@ import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
 import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
 
 public class PerlGlobStubImpl extends StubBase<PsiPerlGlobVariable> implements PerlGlobStub {
-  private final String packageName;
-  private final String variableName;
-  private final boolean isLeftSideOfAssignment;
+  private final String myNamespaceName;
+  private final String myVariableName;
+  private final boolean myIsLeftSideOfAssignment;
 
-  public PerlGlobStubImpl(final StubElement parent, final String packageName, final String variableName, boolean isLeftSideOfAssignment) {
+  public PerlGlobStubImpl(final StubElement parent, final String namespaceName, final String variableName, boolean isLeftSideOfAssignment) {
     super(parent, PerlStubElementTypes.PERL_GLOB);
-    this.packageName = packageName;
-    this.variableName = variableName;
-    this.isLeftSideOfAssignment = isLeftSideOfAssignment;
+    myNamespaceName = namespaceName;
+    myVariableName = variableName;
+    myIsLeftSideOfAssignment = isLeftSideOfAssignment;
   }
 
   @Override
-  public String getPackageName() {
-    return packageName;
+  public String getNamespaceName() {
+    return myNamespaceName;
   }
 
   @Override
   public String getName() {
-    return variableName;
+    return myVariableName;
   }
 
   @Override
   public boolean isLeftSideOfAssignment() {
-    return isLeftSideOfAssignment;
+    return myIsLeftSideOfAssignment;
   }
 
   @Override
   public String toString() {
     return super.toString() + "\n" +
-           "\tNamespace name: " + packageName + "\n" +
-           "\tVariable name: " + variableName + "\n" +
-           "\tIs left side: " + isLeftSideOfAssignment + "\n"
+           "\tNamespace name: " + myNamespaceName + "\n" +
+           "\tVariable name: " + myVariableName + "\n" +
+           "\tIs left side: " + myIsLeftSideOfAssignment + "\n"
       ;
   }
 }
