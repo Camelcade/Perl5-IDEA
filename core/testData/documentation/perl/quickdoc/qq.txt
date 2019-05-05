@@ -240,4 +240,10 @@ interpolate a variable literally.</p>
 multiple levels of interpolation.  In particular, contrary to the
 expectations of shell programmers, back-quotes do <i>NOT</i> interpolate
 within double quotes, nor do single quotes impede evaluation of
-variables when used within double quotes.</p>
+variables when used within double quotes.</p><hr><p><a href="psi_element://pod%3A%3Aperlop">pod::perlop</a>: <a href="psi_element://pod%3A%3Aperlop%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlop%2FQuote-Like+Operators">Quote-Like Operators</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;"><code>qq/<i>STRING</i>/</code>
+   </dt>
+<dt style="padding-bottom:4px;font-weight:bold;">&quot;<i>STRING</i>&quot;</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">A double-quoted, interpolated string.</p>
+<div style="padding-bottom: 10px;"><pre><code>    $_ .= qq
+     (*** The previous line contains the naughty word &quot;$1&quot;.\n)
+		if /\b(tcl|java|python)\b/i;      # :-)
+    $baz = &quot;\n&quot;;		# a one-character string</code></pre></div></dd></dl>

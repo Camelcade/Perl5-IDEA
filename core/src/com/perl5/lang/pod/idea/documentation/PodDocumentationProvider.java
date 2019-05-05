@@ -25,22 +25,24 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
+import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.documentation.PerlDocUtil;
 import com.perl5.lang.perl.documentation.PerlDocumentationProviderBase;
 import com.perl5.lang.perl.psi.PerlFile;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.lexer.PodElementTypes;
 import com.perl5.lang.pod.lexer.PodTokenSets;
-import com.perl5.lang.pod.parser.psi.PodCompositeElement;
-import com.perl5.lang.pod.parser.psi.PodFile;
-import com.perl5.lang.pod.parser.psi.PodLinkDescriptor;
-import com.perl5.lang.pod.parser.psi.PodSection;
+import com.perl5.lang.pod.parser.psi.*;
 import com.perl5.lang.pod.parser.psi.impl.PodFileImpl;
 import com.perl5.lang.pod.parser.psi.mixin.PodFormatterX;
+import com.perl5.lang.pod.psi.PsiPodFormatIndex;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.net.URLDecoder;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class PodDocumentationProvider extends PerlDocumentationProviderBase implements PodElementTypes {
   private static final Logger LOG = Logger.getInstance(PodDocumentationProvider.class);
@@ -109,11 +111,27 @@ public class PodDocumentationProvider extends PerlDocumentationProviderBase impl
       return StringUtil.nullize(PerlDocUtil.renderPodFile((PodFileImpl)element));
     }
     else if (element instanceof PodFormatterX) {
-      return doGenerateDoc(((PodFormatterX)element).getIndexTarget());
+      return generateDocByIndex((PodFormatterX)element);
     }
     else if (element instanceof PodSection) {
       return PerlDocUtil.renderElement((PodSection)element);
     }
     return null;
+  }
+
+  @Nullable
+  private static String generateDocByIndex(@NotNull PodFormatterX element) {
+    String indexText = element.getPresentableText();
+    List<PsiElement> targets = new ArrayList<>();
+    element.getContainingFile().accept(new PodStubsAwareRecursiveVisitor() {
+      @Override
+      public void visitPodFormatIndex(@NotNull PsiPodFormatIndex o) {
+        assert o instanceof PodFormatterX;
+        if (StringUtil.equals(indexText, ((PodFormatterX)o).getPresentableText())) {
+          ContainerUtil.addIfNotNull(targets, ((PodFormatterX)o).getIndexTarget());
+        }
+      }
+    });
+    return targets.stream().map(PodDocumentationProvider::doGenerateDoc).collect(Collectors.joining("<hr>"));
   }
 }

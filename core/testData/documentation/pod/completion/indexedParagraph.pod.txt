@@ -8,4 +8,12 @@ names beginning with $ or @, followed by an optional bracketed
 expression as a subscript.)  The following code segment prints out &quot;The
 price is $100.&quot;</p>
 <div style="padding-bottom: 10px;"><pre><code>    $Price = '$100';	# not interpolated
-    print &quot;The price is $Price.\n&quot;;	# interpolated</code></pre></div>
+    print &quot;The price is $Price.\n&quot;;	# interpolated</code></pre></div><hr><p><a href="psi_element://pod%3A%3Aperldata">pod::perldata</a>: <a href="psi_element://pod%3A%3Aperldata%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperldata%2FScalar+value+constructors">Scalar value constructors</a></p><p style="padding-bottom: 10px;">As in some shells, you can enclose the variable name in braces to
+disambiguate it from following alphanumerics (and underscores).
+You must also do
+this when interpolating a variable into a string to separate the
+variable name from a following double-colon or an apostrophe, since
+these would be otherwise treated as a package separator:</p>
+<div style="padding-bottom: 10px;"><pre><code>    $who = &quot;Larry&quot;;
+    print PASSWD &quot;${who}::0:0:Superuser:/:/bin/perl\n&quot;;
+    print &quot;We use ${who}speak when ${who}'s here.\n&quot;;</code></pre></div>
