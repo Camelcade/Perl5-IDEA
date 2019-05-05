@@ -18,9 +18,10 @@ package com.perl5.lang.perl.psi;
 
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiRecursiveVisitor;
 import org.jetbrains.annotations.NotNull;
 
-public class PerlRecursiveVisitor extends PerlVisitor {
+public class PerlRecursiveVisitor extends PerlVisitor implements PsiRecursiveVisitor {
   @Override
   public void visitElement(@NotNull PsiElement element) {
     ProgressManager.checkCanceled();

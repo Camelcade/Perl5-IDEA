@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,12 +17,10 @@
 package com.perl5.lang.tt2.psi;
 
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiRecursiveVisitor;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 14.06.2016.
- */
-public class TemplateToolkitRecursiveVisitor extends TemplateToolkitVisitor {
+public class TemplateToolkitRecursiveVisitor extends TemplateToolkitVisitor implements PsiRecursiveVisitor {
   @Override
   public void visitElement(@NotNull PsiElement element) {
     element.acceptChildren(this);
