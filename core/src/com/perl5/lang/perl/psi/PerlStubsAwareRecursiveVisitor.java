@@ -16,11 +16,7 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.stubs.StubElement;
-import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -29,24 +25,8 @@ import org.jetbrains.annotations.NotNull;
 public class PerlStubsAwareRecursiveVisitor extends PerlRecursiveVisitor {
   @Override
   public void visitElement(@NotNull PsiElement element) {
-    if (!tryUseStubs(element, this)) {
+    if (!PsiStubsAwareRecursiveVisitor.tryUseStubs(element, this)) {
       super.visitElement(element);
     }
-  }
-
-  public static boolean tryUseStubs(@NotNull PsiElement element, @NotNull PsiElementVisitor visitor) {
-    StubElement<?> stubElement = PerlPsiUtil.getStubFromElement(element);
-
-    if (stubElement == null) {
-      return false;
-    }
-    ProgressManager.checkCanceled();
-    for (StubElement childrenStub : stubElement.getChildrenStubs()) {
-      PsiElement psi = childrenStub.getPsi();
-      if (psi != null) {
-        psi.accept(visitor);
-      }
-    }
-    return true;
   }
 }

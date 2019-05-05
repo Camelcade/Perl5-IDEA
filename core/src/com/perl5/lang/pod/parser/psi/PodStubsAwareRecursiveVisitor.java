@@ -19,7 +19,7 @@ package com.perl5.lang.pod.parser.psi;
 import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 
-import static com.perl5.lang.perl.psi.PerlStubsAwareRecursiveVisitor.tryUseStubs;
+import static com.perl5.lang.perl.psi.PsiStubsAwareRecursiveVisitor.tryUseStubs;
 
 /**
  * Recursive visitor that may visit psi built over ast or stubs

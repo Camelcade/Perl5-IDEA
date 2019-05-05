@@ -33,10 +33,7 @@ import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlHeredocOpener;
-import com.perl5.lang.perl.psi.PerlHeredocTerminatorElement;
-import com.perl5.lang.perl.psi.PerlVariable;
-import com.perl5.lang.perl.psi.PsiPerlStatementModifier;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.pod.PodLanguage;
@@ -266,12 +263,17 @@ public class PerlDocUtil implements PerlElementTypes {
 
     final List<PodCompositeElement> result = new ArrayList<>();
 
-    PsiTreeUtil.processElements(psiFile, element -> {
-      if (pattern.accepts(element)) {
-        result.add((PodCompositeElement)element);
-        return false;
+    psiFile.accept(new PsiStubsAwareRecursiveVisitor() {
+      @Override
+      public void visitElement(PsiElement element) {
+        if (pattern.accepts(element)) {
+          result.add((PodCompositeElement)element);
+          stop();
+        }
+        else {
+          super.visitElement(element);
+        }
       }
-      return true;
     });
 
     return result.isEmpty() ? null : result.get(0);

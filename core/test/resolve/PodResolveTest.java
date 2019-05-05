@@ -116,11 +116,6 @@ public class PodResolveTest extends PodLightTestCase {
     doTestResolveWithoutInit(false);
   }
 
-  @Override
-  protected boolean restrictFilesParsing() {
-    return false;
-  }
-
   private void doTest() {
     doTestResolve();
   }
