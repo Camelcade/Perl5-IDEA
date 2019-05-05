@@ -146,36 +146,10 @@ Lookups: b subname [condition]; Text: b subname [condition]; Tail: null; Type: L
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9743 in perldebug.pod
 Lookups: b; Text: b; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8694 in perldebug.pod
-Lookups: backtrace; Text: backtrace; Tail: (Stack backtrace); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 29481 in perldebug.pod
 Lookups: backtrace; Text: backtrace; Tail: (T); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 5717 in perldebug.pod
-Lookups: breakpoint; Text: breakpoint; Tail: (B *); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 10584 in perldebug.pod
-Lookups: breakpoint; Text: breakpoint; Tail: (B line); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 10487 in perldebug.pod
-Lookups: breakpoint; Text: breakpoint; Tail: (b [file]:[line] [condition]); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 9302 in perldebug.pod
-Lookups: breakpoint; Text: breakpoint; Tail: (b [line] [condition]); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 8800 in perldebug.pod
-Lookups: breakpoint; Text: breakpoint; Tail: (b compile subname); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 10337 in perldebug.pod
-Lookups: breakpoint; Text: breakpoint; Tail: (b load filename); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 10143 in perldebug.pod
-Lookups: breakpoint; Text: breakpoint; Tail: (b postpone subname [condition]); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 10015 in perldebug.pod
-Lookups: breakpoint; Text: breakpoint; Tail: (b subname [condition]); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 9771 in perldebug.pod
 Lookups: breakpoint; Text: breakpoint; Tail: (b); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 8702 in perldebug.pod
-Lookups: breakpoint; Text: breakpoint; Tail: (disable [file]:[line]); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 10685 in perldebug.pod
-Lookups: breakpoint; Text: breakpoint; Tail: (disable [line]); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 10919 in perldebug.pod
-Lookups: breakpoint; Text: breakpoint; Tail: (enable [file]:[line]); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 11211 in perldebug.pod
-Lookups: breakpoint; Text: breakpoint; Tail: (enable [line]); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 11356 in perldebug.pod
 Lookups: c [lineE<verbar>sub], c [line|sub]; Text: c [line|sub]; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6505 in perldebug.pod
 Lookups: command; Text: command; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -186,12 +160,8 @@ Lookups: debug; Text: debug; Tail: (NAME); Type: Index; Icon: /perl5language.png
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 12 in perldebug.pod
 Lookups: debugger command, !!; Text: debugger command, !!; Tail: (!! cmd); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 15993 in perldebug.pod
-Lookups: debugger command, !; Text: debugger command, !; Tail: (! -number); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 15807 in perldebug.pod
 Lookups: debugger command, !; Text: debugger command, !; Tail: (! number); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 15706 in perldebug.pod
-Lookups: debugger command, !; Text: debugger command, !; Tail: (! pattern); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 15881 in perldebug.pod
 Lookups: debugger command, -; Text: debugger command, -; Tail: (-); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 7014 in perldebug.pod
 Lookups: debugger command, .; Text: debugger command, .; Tail: (Return the internal debugger pointer to the line last executed, and print out that line.); Type: Index; Icon: /perl5language.png; Type Icon: null
@@ -200,28 +170,16 @@ Lookups: debugger command, <<, debugger command, E<lt>E<lt>; Text: debugger comm
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 14134 in perldebug.pod
 Lookups: debugger command, =; Text: debugger command, =; Tail: (= [alias value]); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17581 in perldebug.pod
-Lookups: debugger command, >, debugger command, E<gt>; Text: debugger command, >; Tail: (> *); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 14674 in perldebug.pod
 Lookups: debugger command, >, debugger command, E<gt>; Text: debugger command, >; Tail: (> ?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 14309 in perldebug.pod
-Lookups: debugger command, >, debugger command, E<gt>; Text: debugger command, >; Tail: (> command); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 14397 in perldebug.pod
 Lookups: debugger command, >>, debugger command, E<gt>E<gt>; Text: debugger command, >>; Tail: (>> command); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 14765 in perldebug.pod
-Lookups: debugger command, A; Text: debugger command, A; Tail: (A *); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 12151 in perldebug.pod
 Lookups: debugger command, A; Text: debugger command, A; Tail: (A line); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 12074 in perldebug.pod
-Lookups: debugger command, B; Text: debugger command, B; Tail: (B *); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 10598 in perldebug.pod
 Lookups: debugger command, B; Text: debugger command, B; Tail: (B line); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 10501 in perldebug.pod
-Lookups: debugger command, E<lt>, debugger command, <; Text: debugger command, <; Tail: (< *); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 14044 in perldebug.pod
 Lookups: debugger command, E<lt>, debugger command, <; Text: debugger command, <; Tail: (< ?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 13775 in perldebug.pod
-Lookups: debugger command, E<lt>, debugger command, <; Text: debugger command, <; Tail: (< [ command ]); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 13870 in perldebug.pod
 Lookups: debugger command, E<verbar>, debugger command, |; Text: debugger command, |; Tail: (|dbcmd); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17362 in perldebug.pod
 Lookups: debugger command, E<verbar>E<verbar>, debugger command, ||; Text: debugger command, ||; Tail: (||dbcmd); Type: Index; Icon: /perl5language.png; Type Icon: null
@@ -240,8 +198,6 @@ Lookups: debugger command, T; Text: debugger command, T; Tail: (T); Type: Index;
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 5694 in perldebug.pod
 Lookups: debugger command, V; Text: debugger command, V; Tail: (V [pkg [vars]]); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 4647 in perldebug.pod
-Lookups: debugger command, W; Text: debugger command, W; Tail: (W *); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 12440 in perldebug.pod
 Lookups: debugger command, W; Text: debugger command, W; Tail: (W expr); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 12381 in perldebug.pod
 Lookups: debugger command, X; Text: debugger command, X; Tail: (X [vars]); Type: Index; Icon: /perl5language.png; Type Icon: null
@@ -250,30 +206,12 @@ Lookups: debugger command, ^D; Text: debugger command, ^D; Tail: (q or ^D); Type
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 16635 in perldebug.pod
 Lookups: debugger command, a; Text: debugger command, a; Tail: (a [line] command); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 11556 in perldebug.pod
-Lookups: debugger command, b; Text: debugger command, b; Tail: (b [file]:[line] [condition]); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 9316 in perldebug.pod
-Lookups: debugger command, b; Text: debugger command, b; Tail: (b [line] [condition]); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 8814 in perldebug.pod
-Lookups: debugger command, b; Text: debugger command, b; Tail: (b compile subname); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 10351 in perldebug.pod
-Lookups: debugger command, b; Text: debugger command, b; Tail: (b load filename); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 10157 in perldebug.pod
-Lookups: debugger command, b; Text: debugger command, b; Tail: (b postpone subname [condition]); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 10029 in perldebug.pod
-Lookups: debugger command, b; Text: debugger command, b; Tail: (b subname [condition]); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 9785 in perldebug.pod
 Lookups: debugger command, b; Text: debugger command, b; Tail: (b); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 8716 in perldebug.pod
 Lookups: debugger command, c; Text: debugger command, c; Tail: (c [line|sub]); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 6524 in perldebug.pod
 Lookups: debugger command, disable; Text: debugger command, disable; Tail: (disable [file]:[line]); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 10699 in perldebug.pod
-Lookups: debugger command, disable; Text: debugger command, disable; Tail: (disable [line]); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 10933 in perldebug.pod
-Lookups: debugger command, disable; Text: debugger command, disable; Tail: (enable [file]:[line]); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 11225 in perldebug.pod
-Lookups: debugger command, disable; Text: debugger command, disable; Tail: (enable [line]); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 11370 in perldebug.pod
 Lookups: debugger command, f; Text: debugger command, f; Tail: (f filename); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 7299 in perldebug.pod
 Lookups: debugger command, h; Text: debugger command, h; Tail: (h); Type: Index; Icon: /perl5language.png; Type Icon: null
@@ -286,12 +224,6 @@ Lookups: debugger command, man; Text: debugger command, man; Tail: (man [manpage
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 18172 in perldebug.pod
 Lookups: debugger command, n; Text: debugger command, n; Tail: (n [expr]); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 6070 in perldebug.pod
-Lookups: debugger command, o; Text: debugger command, o; Tail: (o anyoption? ...); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 12670 in perldebug.pod
-Lookups: debugger command, o; Text: debugger command, o; Tail: (o booloption ...); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 12572 in perldebug.pod
-Lookups: debugger command, o; Text: debugger command, o; Tail: (o option=value ...); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 12764 in perldebug.pod
 Lookups: debugger command, o; Text: debugger command, o; Tail: (o); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 12503 in perldebug.pod
 Lookups: debugger command, p; Text: debugger command, p; Tail: (p expr); Type: Index; Icon: /perl5language.png; Type Icon: null
@@ -304,8 +236,6 @@ Lookups: debugger command, s; Text: debugger command, s; Tail: (s [expr]); Type:
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 5832 in perldebug.pod
 Lookups: debugger command, source; Text: debugger command, source; Tail: (source file); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 16312 in perldebug.pod
-Lookups: debugger command, t; Text: debugger command, t; Tail: (t [n] expr); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 8438 in perldebug.pod
 Lookups: debugger command, t; Text: debugger command, t; Tail: (t [n]); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 8218 in perldebug.pod
 Lookups: debugger command, v; Text: debugger command, v; Tail: (v [line]); Type: Index; Icon: /perl5language.png; Type Icon: null
@@ -316,8 +246,6 @@ Lookups: debugger command, x; Text: debugger command, x; Tail: (x [maxdepth] exp
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 4023 in perldebug.pod
 Lookups: debugger command, y; Text: debugger command, y; Tail: (y [level [vars]]); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 5228 in perldebug.pod
-Lookups: debugger command, {; Text: debugger command, {; Tail: ({ *); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 15439 in perldebug.pod
 Lookups: debugger command, {; Text: debugger command, {; Tail: ({ ?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 14999 in perldebug.pod
 Lookups: debugger command, {{; Text: debugger command, {{; Tail: ({{ command); Type: Index; Icon: /perl5language.png; Type Icon: null
@@ -398,12 +326,6 @@ Lookups: disable [line]; Text: disable [line]; Tail: null; Type: List Item; Icon
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10898 in perldebug.pod
 Lookups: disable; Text: disable; Tail: (disable [file]:[line]); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 10728 in perldebug.pod
-Lookups: disable; Text: disable; Tail: (disable [line]); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 10962 in perldebug.pod
-Lookups: disable; Text: disable; Tail: (enable [file]:[line]); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 11254 in perldebug.pod
-Lookups: disable; Text: disable; Tail: (enable [line]); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 11399 in perldebug.pod
 Lookups: dumpDepth; Text: dumpDepth; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23419 in perldebug.pod
 Lookups: enable [file]:[line]; Text: enable [file]:[line]; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -494,8 +416,6 @@ Lookups: signalLevel, warnLevel, dieLevel; Text: signalLevel, warnLevel, dieLeve
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20156 in perldebug.pod
 Lookups: source file; Text: source file; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16294 in perldebug.pod
-Lookups: stack, backtrace; Text: stack, backtrace; Tail: (Stack backtrace); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 29494 in perldebug.pod
 Lookups: stack, backtrace; Text: stack, backtrace; Tail: (T); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 5730 in perldebug.pod
 Lookups: step; Text: step; Tail: (s [expr]); Type: Index; Icon: /perl5language.png; Type Icon: null

@@ -156,8 +156,6 @@ Lookups: file, temporary; Text: file, temporary; Tail: (How do I make a temporar
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 13179 in perlfaq5.pod
 Lookups: file, timestamp; Text: file, timestamp; Tail: (How do I get a file's timestamp in perl?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 37037 in perlfaq5.pod
-Lookups: file, timestamp; Text: file, timestamp; Tail: (How do I set a file's timestamp in perl?); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 38320 in perlfaq5.pod
 Lookups: file; Text: file; Tail: (How do I delete the last N lines from a file?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 10050 in perlfaq5.pod
 Lookups: filehandle, indirect; Text: filehandle, indirect; Tail: (How can I use a filehandle indirectly?); Type: Index; Icon: /perl5language.png; Type Icon: null
@@ -192,8 +190,6 @@ Lookups: line; Text: line; Tail: (How do I count the number of lines in a file?)
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 8347 in perlfaq5.pod
 Lookups: lines; Text: lines; Tail: (How do I count the number of lines in a file?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 8338 in perlfaq5.pod
-Lookups: lines; Text: lines; Tail: (How do I delete the last N lines from a file?); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 10041 in perlfaq5.pod
 Lookups: lock, lockfile race condition; Text: lock, lockfile race condition; Tail: (Why can't I just open(FH, ">file.lock")?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 32579 in perlfaq5.pod
 Lookups: lock; Text: lock; Tail: (How can I lock a file?); Type: Index; Icon: /perl5language.png; Type Icon: null
@@ -224,8 +220,6 @@ Lookups: tilde; Text: tilde; Tail: (How can I translate tildes (~) in a filename
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 25258 in perlfaq5.pod
 Lookups: timestamp; Text: timestamp; Tail: (How do I get a file's timestamp in perl?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 37024 in perlfaq5.pod
-Lookups: timestamp; Text: timestamp; Tail: (How do I set a file's timestamp in perl?); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 38307 in perlfaq5.pod
 Lookups: truncate; Text: truncate; Tail: (How come when I open a file read-write it wipes it out?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 26049 in perlfaq5.pod
 Lookups: truncating; Text: truncating; Tail: (How come when I open a file read-write it wipes it out?); Type: Index; Icon: /perl5language.png; Type Icon: null

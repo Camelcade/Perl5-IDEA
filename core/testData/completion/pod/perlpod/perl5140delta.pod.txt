@@ -26,8 +26,6 @@ Lookups: ?PATTERN?; Text: ?PATTERN?; Tail: null; Type: 2nd Heading; Icon: /perl5
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 37640 in perl5140delta.pod
 Lookups: @_ uses less memory; Text: @_ uses less memory; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 43164 in perl5140delta.pod
-Lookups: AIX; Text: AIX; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 86544 in perl5140delta.pod
 Lookups: AIX; Text: AIX; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 86030 in perl5140delta.pod
 Lookups: ARM; Text: ARM; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
@@ -398,8 +396,6 @@ Lookups: Unicode Version 6.0 is now supported (mostly); Text: Unicode Version 6.
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 740 in perl5140delta.pod
 Lookups: Unicode database files not installed; Text: Unicode database files not installed; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 5742 in perl5140delta.pod
-Lookups: Unicode; Text: Unicode; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 120468 in perl5140delta.pod
 Lookups: Unicode; Text: Unicode; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 724 in perl5140delta.pod
 Lookups: Updated Modules and Pragma; Text: Updated Modules and Pragma; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null

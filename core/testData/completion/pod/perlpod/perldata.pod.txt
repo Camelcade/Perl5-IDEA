@@ -70,8 +70,6 @@ Lookups: __SUB__; Text: __SUB__; Tail: (The special literals __FILE__, __LINE__,
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 27375 in perldata.pod
 Lookups: array, interpolation; Text: array, interpolation; Tail: (Array Interpolation); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 30139 in perldata.pod
-Lookups: array, length; Text: array, length; Tail: (If you evaluate an array in scalar context, it returns the length of the array.  (Note that this is not true of lists, which return the l...); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17620 in perldata.pod
 Lookups: array, length; Text: array, length; Tail: (The length of an array is a scalar value.  You may find the length of array @days by evaluating $#days, as in csh.  However, this isn't t...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 16968 in perldata.pod
 Lookups: array, slice; Text: array, slice; Tail: (Slices); Type: Index; Icon: /perl5language.png; Type Icon: null
@@ -122,8 +120,6 @@ Lookups: identifiers; Text: identifiers; Tail: (Identifier parsing); Type: Index
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 4930 in perldata.pod
 Lookups: interpolation, array; Text: interpolation, array; Tail: (Array Interpolation); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 30163 in perldata.pod
-Lookups: interpolation; Text: interpolation; Tail: (As in some shells, you can enclose the variable name in braces to disambiguate it from following alphanumerics (and underscores). You mus...); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 22787 in perldata.pod
 Lookups: interpolation; Text: interpolation; Tail: (You can also embed newlines directly in your strings, i.e., they can end on a different line than they begin.  This is nice, but if you f...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 21973 in perldata.pod
 Lookups: line; Text: line; Tail: (The special literals __FILE__, __LINE__, and __PACKAGE__ represent the current filename, line number, and package name at that point in y...); Type: Index; Icon: /perl5language.png; Type Icon: null
@@ -156,8 +152,6 @@ Lookups: scalar, literal; Text: scalar, literal; Tail: (Scalar value constructor
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 19090 in perldata.pod
 Lookups: scalar; Text: scalar; Tail: (Scalar values are always named with '$', even when referring to a scalar that is part of an array or a hash.  The '$' symbol works semant...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 2249 in perldata.pod
-Lookups: scalar; Text: scalar; Tail: (Scalar values); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 12658 in perldata.pod
 Lookups: slice; Text: slice; Tail: (Slices); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 42087 in perldata.pod
 Lookups: special literal; Text: special literal; Tail: (Special Literals); Type: Index; Icon: /perl5language.png; Type Icon: null

@@ -290,8 +290,6 @@ Lookups: Long doubles; Text: Long doubles; Tail: null; Type: 2nd Heading; Icon: 
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13536 in perl56delta.pod
 Lookups: Lvalue subroutines; Text: Lvalue subroutines; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18087 in perl56delta.pod
-Lookups: Lvalue subroutines; Text: Lvalue subroutines; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 103467 in perl56delta.pod
 Lookups: Lvalue subs returning %s not implemented yet; Text: Lvalue subs returning %s not implemented yet; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 80942 in perl56delta.pod
 Lookups: Math::BigInt; Text: Math::BigInt; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -506,12 +504,8 @@ Lookups: Version number must be a constant number; Text: Version number must be 
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 88832 in perl56delta.pod
 Lookups: Weak references; Text: Weak references; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16936 in perl56delta.pod
-Lookups: Weak references; Text: Weak references; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 103493 in perl56delta.pod
 Lookups: Where possible, buffered data discarded from duped input filehandle; Text: Where possible, buffered data discarded from duped input filehandle; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21687 in perl56delta.pod
-Lookups: Win32; Text: Win32; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 58993 in perl56delta.pod
 Lookups: Win32; Text: Win32; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46126 in perl56delta.pod
 Lookups: Writing "$$1" to mean "${$}1" is unsupported; Text: Writing "$$1" to mean "${$}1" is unsupported; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null

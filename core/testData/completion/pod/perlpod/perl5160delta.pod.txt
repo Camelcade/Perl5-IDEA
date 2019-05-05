@@ -130,8 +130,6 @@ Lookups: OpenVOS; Text: OpenVOS; Tail: null; Type: 3d Heading; Icon: /perl5langu
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 70257 in perl5160delta.pod
 Lookups: Other Changes; Text: Other Changes; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16551 in perl5160delta.pod
-Lookups: Other Changes; Text: Other Changes; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 57332 in perl5160delta.pod
 Lookups: Other Future Deprecations; Text: Other Future Deprecations; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21980 in perl5160delta.pod
 Lookups: Other is_utf8_foo() functions, as well as utf8_to_foo(), etc.; Text: Other is_utf8_foo() functions, as well as utf8_to_foo(), etc.; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null

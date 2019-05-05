@@ -1,9 +1,5 @@
 Lookups: &; Text: &; Tail: (A subroutine may be called using an explicit & prefix.  The & is optional in modern Perl, as are parentheses if the subroutine has been p...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 7960 in perlsub.pod
-Lookups: &; Text: &; Tail: (Not only does the & form make the argument list optional, it also disables any prototype checking on arguments you do provide.  This is p...); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 8814 in perlsub.pod
-Lookups: &; Text: &; Tail: (The interesting thing about & is that you can generate new syntax with it, provided it's in the initial position:); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 56249 in perlsub.pod
 Lookups: *; Text: *; Tail: (Passing Symbol Table Entries (typeglobs)); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 43454 in perlsub.pod
 Lookups: @_; Text: @_; Tail: (Any arguments passed in show up in the array @_. (They may also show up in lexical variables introduced by a signature; see /Signatures b...); Type: Index; Icon: /perl5language.png; Type Icon: null
@@ -78,12 +74,8 @@ Lookups: built-in; Text: built-in; Tail: (Overriding Built-in Functions); Type: 
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 64305 in perlsub.pod
 Lookups: call-by-reference; Text: call-by-reference; Tail: (Because the assignment copies the values, this also has the effect of turning call-by-reference into call-by-value.  Otherwise a function...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 5852 in perlsub.pod
-Lookups: call-by-reference; Text: call-by-reference; Tail: (You aren't allowed to modify constants in this way, of course.  If an argument were actually literal and you tried to change it, you'd ta...); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 6201 in perlsub.pod
 Lookups: call-by-value; Text: call-by-value; Tail: (Because the assignment copies the values, this also has the effect of turning call-by-reference into call-by-value.  Otherwise a function...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 5873 in perlsub.pod
-Lookups: call-by-value; Text: call-by-value; Tail: (You aren't allowed to modify constants in this way, of course.  If an argument were actually literal and you tried to change it, you'd ta...); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 6222 in perlsub.pod
 Lookups: call; Text: call; Tail: (To call subroutines:); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 1369 in perlsub.pod
 Lookups: closure; Text: closure; Tail: (Persistent Private Variables); Type: Index; Icon: /perl5language.png; Type Icon: null
@@ -114,12 +106,8 @@ Lookups: eval, scope of; Text: eval, scope of; Tail: (An eval(), however, can se
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 21195 in perlsub.pod
 Lookups: for; Text: for; Tail: (The foreach loop defaults to scoping its index variable dynamically in the manner of local.  However, if the index variable is prefixed w...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 23764 in perlsub.pod
-Lookups: for; Text: for; Tail: (the scope of $i extends to the end of the loop, but not beyond it, rendering the value of $i inaccessible within some_function().); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 23974 in perlsub.pod
 Lookups: foreach; Text: foreach; Tail: (The foreach loop defaults to scoping its index variable dynamically in the manner of local.  However, if the index variable is prefixed w...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 23753 in perlsub.pod
-Lookups: foreach; Text: foreach; Tail: (the scope of $i extends to the end of the loop, but not beyond it, rendering the value of $i inaccessible within some_function().); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 23963 in perlsub.pod
 Lookups: formal parameter; Text: formal parameter; Tail: (Aside from an experimental facility (see /Signatures below), Perl does not have named formal parameters.  In practice all you do is assig...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 4837 in perlsub.pod
 Lookups: function; Text: function; Tail: (NAME); Type: Index; Icon: /perl5language.png; Type Icon: null
@@ -138,30 +126,20 @@ Lookups: lexical; Text: lexical; Tail: (Private Variables via my()); Type: Index
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 19284 in perlsub.pod
 Lookups: local, array element; Text: local, array element; Tail: (Localization of elements of composite types); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 36077 in perlsub.pod
-Lookups: local, array element; Text: local, array element; Tail: (Localized deletion of elements of composite types); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 37695 in perlsub.pod
 Lookups: local, composite type element; Text: local, composite type element; Tail: (Localization of elements of composite types); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 36044 in perlsub.pod
-Lookups: local, composite type element; Text: local, composite type element; Tail: (Localized deletion of elements of composite types); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 37662 in perlsub.pod
 Lookups: local, context; Text: local, context; Tail: (Grammatical note on local()); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 33877 in perlsub.pod
 Lookups: local, glob; Text: local, glob; Tail: (Localization of globs); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 35504 in perlsub.pod
 Lookups: local, hash element; Text: local, hash element; Tail: (Localization of elements of composite types); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 36101 in perlsub.pod
-Lookups: local, hash element; Text: local, hash element; Tail: (Localized deletion of elements of composite types); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 37719 in perlsub.pod
 Lookups: local, special variable; Text: local, special variable; Tail: (Localization of special variables); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 34291 in perlsub.pod
 Lookups: local, tie; Text: local, tie; Tail: (WARNING: Localization of tied arrays and hashes does not currently work as described. This will be fixed in a future release of Perl; in ...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 35460 in perlsub.pod
-Lookups: local; Text: local; Tail: (Temporary Values via local()); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 31132 in perlsub.pod
 Lookups: local; Text: local; Tail: (Unlike dynamic variables created by the local operator, lexical variables declared with my are totally hidden from the outside world, inc...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 20643 in perlsub.pod
-Lookups: local; Text: local; Tail: (When to Still Use local()); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 45363 in perlsub.pod
 Lookups: lvalue; Text: lvalue; Tail: (Lvalue subroutines); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 38781 in perlsub.pod
 Lookups: my sub; Text: my sub; Tail: (Lexical Subroutines); Type: Index; Icon: /perl5language.png; Type Icon: null
@@ -238,8 +216,6 @@ Lookups: variable, lexical; Text: variable, lexical; Tail: (Private Variables vi
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 19263 in perlsub.pod
 Lookups: variable, local; Text: variable, local; Tail: (Temporary Values via local()); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 31176 in perlsub.pod
-Lookups: variable, local; Text: variable, local; Tail: (When to Still Use local()); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 45372 in perlsub.pod
 Lookups: variable, persistent; Text: variable, persistent; Tail: (Persistent Private Variables); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 26674 in perlsub.pod
 Lookups: variable, static; Text: variable, static; Tail: (Persistent Private Variables); Type: Index; Icon: /perl5language.png; Type Icon: null

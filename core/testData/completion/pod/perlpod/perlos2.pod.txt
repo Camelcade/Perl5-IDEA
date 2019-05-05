@@ -192,12 +192,8 @@ Lookups: PDF files; Text: PDF files; Tail: null; Type: 2nd Heading; Icon: /perl5
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 25435 in perlos2.pod
 Lookups: PERLLIB_PREFIX; Text: PERLLIB_PREFIX; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 79111 in perlos2.pod
-Lookups: PERL_BADFREE; Text: PERL_BADFREE; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 80083 in perlos2.pod
 Lookups: PERL_BADFREE; Text: PERL_BADFREE; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17913 in perlos2.pod
-Lookups: PERL_BADLANG; Text: PERL_BADLANG; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 79974 in perlos2.pod
 Lookups: PERL_BADLANG; Text: PERL_BADLANG; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17749 in perlos2.pod
 Lookups: PERL_SH_DIR; Text: PERL_SH_DIR; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
@@ -218,8 +214,6 @@ Lookups: Prebuilt methods:; Text: Prebuilt methods:; Tail: null; Type: 2nd Headi
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 55079 in perlos2.pod
 Lookups: Prebuilt variables:; Text: Prebuilt variables:; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 59973 in perlos2.pod
-Lookups: Prerequisites; Text: Prerequisites; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 26593 in perlos2.pod
 Lookups: Prerequisites; Text: Prerequisites; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5717 in perlos2.pod
 Lookups: Priorities; Text: Priorities; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null

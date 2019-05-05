@@ -14,28 +14,16 @@ Lookups: Digits; Text: Digits; Tail: null; Type: 3d Heading; Icon: /perl5languag
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 4061 in perlrecharclass.pod
 Lookups: Examples; Text: Examples; Tail: null; Type: 4th Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 16328 in perlrecharclass.pod
-Lookups: Examples; Text: Examples; Tail: null; Type: 4th Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 40991 in perlrecharclass.pod
 Lookups: Extended Bracketed Character Classes; Text: Extended Bracketed Character Classes; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 41821 in perlrecharclass.pod
 Lookups: For code points above 255 ...; Text: For code points above 255 ...; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38733 in perlrecharclass.pod
-Lookups: For code points above 255 ...; Text: For code points above 255 ...; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7416 in perlrecharclass.pod
-Lookups: For code points above 255 ...; Text: For code points above 255 ...; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9203 in perlrecharclass.pod
-Lookups: For code points below 256 ...; Text: For code points below 256 ...; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38835 in perlrecharclass.pod
 Lookups: For code points below 256 ...; Text: For code points below 256 ...; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7796 in perlrecharclass.pod
-Lookups: For code points below 256 ...; Text: For code points below 256 ...; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9334 in perlrecharclass.pod
 Lookups: If the /a modifier, is in effect ..., If the E<sol>a modifier, is in effect ...; Text: If the /a modifier, is in effect ...; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38571 in perlrecharclass.pod
 Lookups: If the E<sol>a modifier is in effect ..., If the /a modifier is in effect ...; Text: If the /a modifier is in effect ...; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7295 in perlrecharclass.pod
-Lookups: If the E<sol>a modifier is in effect ..., If the /a modifier is in effect ...; Text: If the /a modifier is in effect ...; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8855 in perlrecharclass.pod
 Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlrecharclass.pod
 Lookups: Negation of POSIX character classes; Text: Negation of POSIX character classes; Tail: null; Type: 4th Heading; Icon: /perl5language.png; Type Icon: null
@@ -56,12 +44,8 @@ Lookups: Word characters; Text: Word characters; Tail: null; Type: 3d Heading; I
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 6814 in perlrecharclass.pod
 Lookups: [1]; Text: [1]; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12946 in perlrecharclass.pod
-Lookups: [1]; Text: [1]; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35910 in perlrecharclass.pod
 Lookups: [2]; Text: [2]; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13079 in perlrecharclass.pod
-Lookups: [2]; Text: [2]; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35971 in perlrecharclass.pod
 Lookups: [3]; Text: [3]; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36348 in perlrecharclass.pod
 Lookups: [4]; Text: [4]; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -78,8 +62,6 @@ Lookups: \H; Text: \H; Tail: (Backslash sequences); Type: Index; Icon: /perl5lan
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 1959 in perlrecharclass.pod
 Lookups: \N; Text: \N; Tail: (Backslash sequences); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 1935 in perlrecharclass.pod
-Lookups: \N; Text: \N; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 3246 in perlrecharclass.pod
 Lookups: \P; Text: \P; Tail: (Backslash sequences); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 1929 in perlrecharclass.pod
 Lookups: \S; Text: \S; Tail: (Backslash sequences); Type: Index; Icon: /perl5language.png; Type Icon: null
@@ -94,8 +76,6 @@ Lookups: \h; Text: \h; Tail: (Backslash sequences); Type: Index; Icon: /perl5lan
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 1953 in perlrecharclass.pod
 Lookups: \p; Text: \p; Tail: (Backslash sequences); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 1923 in perlrecharclass.pod
-Lookups: \p; Text: \p; Tail: (POSIX Character Classes); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 32024 in perlrecharclass.pod
 Lookups: \p{}; Text: \p{}; Tail: (POSIX Character Classes); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 32030 in perlrecharclass.pod
 Lookups: \s; Text: \s; Tail: (Backslash sequences); Type: Index; Icon: /perl5language.png; Type Icon: null
@@ -110,20 +90,12 @@ Lookups: alpha; Text: alpha; Tail: (POSIX Character Classes); Type: Index; Icon:
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 32038 in perlrecharclass.pod
 Lookups: ascii; Text: ascii; Tail: (POSIX Character Classes); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 32056 in perlrecharclass.pod
-Lookups: ascii; Text: ascii; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39089 in perlrecharclass.pod
 Lookups: blank; Text: blank; Tail: (POSIX Character Classes); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 32065 in perlrecharclass.pod
-Lookups: blank; Text: blank; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39229 in perlrecharclass.pod
 Lookups: character class, negation; Text: character class, negation; Tail: (Negation of POSIX character classes); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 40071 in perlrecharclass.pod
-Lookups: character class; Text: character class; Tail: (Extended Bracketed Character Classes); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 41865 in perlrecharclass.pod
 Lookups: character class; Text: character class; Tail: (NAME); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 12 in perlrecharclass.pod
-Lookups: character class; Text: character class; Tail: (POSIX Character Classes); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 32005 in perlrecharclass.pod
 Lookups: cntrl; Text: cntrl; Tail: (POSIX Character Classes); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 32074 in perlrecharclass.pod
 Lookups: digit; Text: digit; Tail: (POSIX Character Classes); Type: Index; Icon: /perl5language.png; Type Icon: null
@@ -131,31 +103,13 @@ Lookups: digit; Text: digit; Tail: (POSIX Character Classes); Type: Index; Icon:
 Lookups: graph; Text: graph; Tail: (POSIX Character Classes); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 32092 in perlrecharclass.pod
 Lookups: if locale rules are in effect ...; Text: if locale rules are in effect ...; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38879 in perlrecharclass.pod
-Lookups: if locale rules are in effect ...; Text: if locale rules are in effect ...; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7840 in perlrecharclass.pod
-Lookups: if locale rules are in effect ...; Text: if locale rules are in effect ...; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9378 in perlrecharclass.pod
-Lookups: if, instead, Unicode rules are in effect ...; Text: if, instead, Unicode rules are in effect ...; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39378 in perlrecharclass.pod
 Lookups: if, instead, Unicode rules are in effect ...; Text: if, instead, Unicode rules are in effect ...; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7994 in perlrecharclass.pod
-Lookups: if, instead, Unicode rules are in effect ...; Text: if, instead, Unicode rules are in effect ...; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9482 in perlrecharclass.pod
 Lookups: lower; Text: lower; Tail: (POSIX Character Classes); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 32101 in perlrecharclass.pod
 Lookups: otherwise ...; Text: otherwise ...; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38705 in perlrecharclass.pod
-Lookups: otherwise ...; Text: otherwise ...; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39495 in perlrecharclass.pod
-Lookups: otherwise ...; Text: otherwise ...; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7388 in perlrecharclass.pod
-Lookups: otherwise ...; Text: otherwise ...; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8095 in perlrecharclass.pod
-Lookups: otherwise ...; Text: otherwise ...; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9175 in perlrecharclass.pod
-Lookups: otherwise ...; Text: otherwise ...; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9617 in perlrecharclass.pod
 Lookups: print; Text: print; Tail: (POSIX Character Classes); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 32110 in perlrecharclass.pod
 Lookups: punct; Text: punct; Tail: (POSIX Character Classes); Type: Index; Icon: /perl5language.png; Type Icon: null
@@ -170,9 +124,5 @@ Lookups: whitespace; Text: whitespace; Tail: (Backslash sequences); Type: Index;
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 1973 in perlrecharclass.pod
 Lookups: word; Text: word; Tail: (Backslash sequences); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 1965 in perlrecharclass.pod
-Lookups: word; Text: word; Tail: (POSIX Character Classes); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 32146 in perlrecharclass.pod
-Lookups: word; Text: word; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38985 in perlrecharclass.pod
 Lookups: xdigit; Text: xdigit; Tail: (POSIX Character Classes); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 32154 in perlrecharclass.pod

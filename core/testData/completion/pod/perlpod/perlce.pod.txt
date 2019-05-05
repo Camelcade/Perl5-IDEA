@@ -17,8 +17,6 @@ Lookups: CONSOLEFONTSIZE; Text: CONSOLEFONTSIZE; Tail: null; Type: List Item; Ic
 Lookups: CURRENT BUILD INSTRUCTIONS; Text: CURRENT BUILD INSTRUCTIONS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2381 in perlce.pod
 Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10749 in perlce.pod
-Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 751 in perlce.pod
 Lookups: Daniel Dragan; Text: Daniel Dragan; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14513 in perlce.pod

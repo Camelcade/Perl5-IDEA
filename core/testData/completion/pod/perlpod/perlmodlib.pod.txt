@@ -124,8 +124,6 @@ Lookups: CPAN::Tarzip; Text: CPAN::Tarzip; Tail: null; Type: List Item; Icon: /p
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8673 in perlmodlib.pod
 Lookups: CPAN::Version; Text: CPAN::Version; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8740 in perlmodlib.pod
-Lookups: CPAN; Text: CPAN; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 42250 in perlmodlib.pod
 Lookups: CPAN; Text: CPAN; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6811 in perlmodlib.pod
 Lookups: California; Text: California; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null

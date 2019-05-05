@@ -118,11 +118,13 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
 
   protected static void addSectionsCompletions(@NotNull final CompletionResultSet result, PsiFile targetFile) {
     if (targetFile != null) {
+      Set<String> distinctString = new HashSet<>();
+
       targetFile.accept(new PodStubsAwareRecursiveVisitor() {
         @Override
         public void visitTargetableSection(PodTitledSection o) {
           String title = cleanItemText(o.getTitleText());
-          if (title != null) {
+          if (title != null && distinctString.add(title)) {
             result.addElement(LookupElementBuilder.create(o, escapeTitle(title))
                                 .withLookupString(title)
                                 .withPresentableText(title)
@@ -162,7 +164,7 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
             return;
           }
           String indexTitle = ((PodFormatterX)o).getTitleText();
-          if (StringUtil.isEmpty(indexTitle)) {
+          if (StringUtil.isEmpty(indexTitle) || !distinctString.add(indexTitle)) {
             return;
           }
           PsiElement indexTarget = ((PodFormatterX)o).getIndexTarget();

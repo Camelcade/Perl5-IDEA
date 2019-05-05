@@ -50,8 +50,6 @@ Lookups: PeerPort; Text: PeerPort; Tail: null; Type: List Item; Icon: /perl5lang
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51958 in perlipc.pod
 Lookups: Proto; Text: Proto; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51155 in perlipc.pod
-Lookups: Proto; Text: Proto; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 59127 in perlipc.pod
 Lookups: Restartable system calls; Text: Restartable system calls; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13244 in perlipc.pod
 Lookups: Reuse; Text: Reuse; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null

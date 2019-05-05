@@ -8,8 +8,6 @@ Lookups: -X; Text: -X; Tail: null; Type: List Item; Icon: /perl5language.png; Ty
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 64504 in perlport.pod
 Lookups: AIX; Text: AIX; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 80966 in perlport.pod
-Lookups: AIX; Text: AIX; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 81952 in perlport.pod
 Lookups: AT&T 3b1; Text: AT&T 3b1; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 82408 in perlport.pod
 Lookups: AUTHORS / CONTRIBUTORS, AUTHORS E<sol> CONTRIBUTORS; Text: AUTHORS / CONTRIBUTORS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null

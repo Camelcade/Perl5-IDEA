@@ -348,8 +348,6 @@ Lookups: VMS; Text: VMS; Tail: null; Type: List Item; Icon: /perl5language.png; 
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25929 in perl5101delta.pod
 Lookups: Win32; Text: Win32; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19847 in perl5101delta.pod
-Lookups: Win32; Text: Win32; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25792 in perl5101delta.pod
 Lookups: Win32API::File; Text: Win32API::File; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19900 in perl5101delta.pod
 Lookups: XSLoader; Text: XSLoader; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -388,8 +386,6 @@ Lookups: h2xs; Text: h2xs; Tail: null; Type: List Item; Icon: /perl5language.png
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20165 in perl5101delta.pod
 Lookups: lib; Text: lib; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10728 in perl5101delta.pod
-Lookups: lib; Text: lib; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15443 in perl5101delta.pod
 Lookups: open; Text: open; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10781 in perl5101delta.pod
 Lookups: overload; Text: overload; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -412,8 +408,6 @@ Lookups: perlrepository; Text: perlrepository; Tail: null; Type: List Item; Icon
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21245 in perl5101delta.pod
 Lookups: perlthanks; Text: perlthanks; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20550 in perl5101delta.pod
-Lookups: perlthanks; Text: perlthanks; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21357 in perl5101delta.pod
 Lookups: t/io/perlio.t, tE<sol>ioE<sol>perlio.t; Text: t/io/perlio.t; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38495 in perl5101delta.pod
 Lookups: t/io/perlio_fail.t, tE<sol>ioE<sol>perlio_fail.t; Text: t/io/perlio_fail.t; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null

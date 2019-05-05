@@ -10,14 +10,10 @@ Lookups: Category LC_COLLATE: Collation: Text Comparisons and Sorting; Text: Cat
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 33811 in perllocale.pod
 Lookups: Category LC_COLLATE: Collation; Text: Category LC_COLLATE: Collation; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3697 in perllocale.pod
-Lookups: Category LC_CTYPE: Character Types; Text: Category LC_CTYPE: Character Types; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 39119 in perllocale.pod
 Lookups: Category LC_CTYPE: Character Types; Text: Category LC_CTYPE: Character Types; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3867 in perllocale.pod
 Lookups: Category LC_MESSAGES: Error and other messages; Text: Category LC_MESSAGES: Error and other messages; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3496 in perllocale.pod
-Lookups: Category LC_MONETARY: Formatting of monetary amounts; Text: Category LC_MONETARY: Formatting of monetary amounts; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 44345 in perllocale.pod
 Lookups: Category LC_MONETARY: Formatting of monetary amounts; Text: Category LC_MONETARY: Formatting of monetary amounts; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3226 in perllocale.pod
 Lookups: Category LC_NUMERIC: Numeric Formatting; Text: Category LC_NUMERIC: Numeric Formatting; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
@@ -82,8 +78,6 @@ Lookups: NOTES; Text: NOTES; Tail: null; Type: 1st Heading; Icon: /perl5language
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 56820 in perllocale.pod
 Lookups: Not within the scope of "use locale"; Text: Not within the scope of "use locale"; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8256 in perllocale.pod
-Lookups: Other categories; Text: Other categories; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 46000 in perllocale.pod
 Lookups: Other categories; Text: Other categories; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3980 in perllocale.pod
 Lookups: PERL_BADLANG; Text: PERL_BADLANG; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null

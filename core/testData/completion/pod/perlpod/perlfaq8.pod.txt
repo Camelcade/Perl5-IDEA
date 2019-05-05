@@ -1,7 +1,5 @@
 Lookups: AUTHOR AND COPYRIGHT; Text: AUTHOR AND COPYRIGHT; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 49561 in perlfaq8.pod
-Lookups: BSD::Itimer; Text: BSD::Itimer; Tail: (How can I measure time under a second?); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17524 in perlfaq8.pod
 Lookups: BSD::Itimer; Text: BSD::Itimer; Tail: (How can I sleep() or alarm() for under a second?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17093 in perlfaq8.pod
 Lookups: BSD::Resource; Text: BSD::Resource; Tail: (How do I set CPU limits?); Type: Index; Icon: /perl5language.png; Type Icon: null
@@ -104,8 +102,6 @@ Lookups: Screen; Text: Screen; Tail: null; Type: List Item; Icon: /perl5language
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1600 in perlfaq8.pod
 Lookups: Signals; Text: Signals; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13794 in perlfaq8.pod
-Lookups: Time::HiRes; Text: Time::HiRes; Tail: (How can I measure time under a second?); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17509 in perlfaq8.pod
 Lookups: Time::HiRes; Text: Time::HiRes; Tail: (How can I sleep() or alarm() for under a second?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17078 in perlfaq8.pod
 Lookups: Unix; Text: Unix; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -154,12 +150,8 @@ Lookups: open; Text: open; Tail: (How come exec() doesn't return?); Type: Index;
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 875 in perlfaq8.pod
 Lookups: pipe; Text: pipe; Tail: (How come exec() doesn't return?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 883 in perlfaq8.pod
-Lookups: select; Text: select; Tail: (How can I measure time under a second?); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17548 in perlfaq8.pod
 Lookups: select; Text: select; Tail: (How can I sleep() or alarm() for under a second?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17117 in perlfaq8.pod
-Lookups: sleep; Text: sleep; Tail: (How can I measure time under a second?); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17539 in perlfaq8.pod
 Lookups: sleep; Text: sleep; Tail: (How can I sleep() or alarm() for under a second?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17108 in perlfaq8.pod
 Lookups: system; Text: system; Tail: (How come exec() doesn't return?); Type: Index; Icon: /perl5language.png; Type Icon: null

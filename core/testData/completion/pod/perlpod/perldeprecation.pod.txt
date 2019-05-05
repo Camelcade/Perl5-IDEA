@@ -67,8 +67,6 @@ Lookups: Use of *glob{FILEHANDLE}; Text: Use of *glob{FILEHANDLE}; Tail: null; T
 Lookups: Use of \N{}; Text: Use of \N{}; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 14535 in perldeprecation.pod
 Lookups: Use of code points over 0xFF in string bitwise operators; Text: Use of code points over 0xFF in string bitwise operators; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 16708 in perldeprecation.pod
-Lookups: Use of code points over 0xFF in string bitwise operators; Text: Use of code points over 0xFF in string bitwise operators; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 2017 in perldeprecation.pod
 Lookups: Use of comma-less variable list in formats.; Text: Use of comma-less variable list in formats.; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 14294 in perldeprecation.pod

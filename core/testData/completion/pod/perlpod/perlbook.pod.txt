@@ -20,8 +20,6 @@ Lookups: Higher-Order Perl; Text: Higher-Order Perl; Tail: null; Type: List Item
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5231 in perlbook.pod
 Lookups: Intermediate Perl (the "Alpaca Book"); Text: Intermediate Perl (the "Alpaca Book"); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1815 in perlbook.pod
-Lookups: Intermediate Perl (the "Alpaca Book"); Text: Intermediate Perl (the "Alpaca Book"); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3255 in perlbook.pod
 Lookups: Learning Perl  (the "Llama Book"); Text: Learning Perl  (the "Llama Book"); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1413 in perlbook.pod
 Lookups: Learning Perl (the "Llama Book"); Text: Learning Perl (the "Llama Book"); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null

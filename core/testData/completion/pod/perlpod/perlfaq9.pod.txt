@@ -6,14 +6,10 @@ Lookups: CGI; Text: CGI; Tail: (Which web framework should I use?); Type: Index;
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 758 in perlfaq9.pod
 Lookups: Catalyst; Text: Catalyst; Tail: (Which web framework should I use?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 765 in perlfaq9.pod
-Lookups: Catalyst; Text: Catalyst; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1247 in perlfaq9.pod
 Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 85 in perlfaq9.pod
 Lookups: Dancer; Text: Dancer; Tail: (Which web framework should I use?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 777 in perlfaq9.pod
-Lookups: Dancer; Text: Dancer; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1483 in perlfaq9.pod
 Lookups: Email::Sender::Transport::SMTP::TLS; Text: Email::Sender::Transport::SMTP::TLS; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11804 in perlfaq9.pod
 Lookups: Email::Sender::Transport::SMTP; Text: Email::Sender::Transport::SMTP; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null

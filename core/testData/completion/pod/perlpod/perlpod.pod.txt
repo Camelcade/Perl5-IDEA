@@ -1,7 +1,5 @@
 Lookups: =back; Text: =back; Tail: (=over indentlevel); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 3179 in perlpod.pod
-Lookups: =back; Text: =back; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3241 in perlpod.pod
 Lookups: =begin formatname; Text: =begin formatname; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5731 in perlpod.pod
 Lookups: =begin; Text: =begin; Tail: (=begin formatname); Type: Index; Icon: /perl5language.png; Type Icon: null
@@ -110,8 +108,6 @@ Lookups: POD, formatting code, escape; Text: POD, formatting code, escape; Tail:
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 12754 in perlpod.pod
 Lookups: POD, formatting code, escaping with multiple brackets; Text: POD, formatting code, escaping with multiple brackets; Tail: (A more readable, and perhaps more "plain" way is to use an alternate set of delimiters that doesn't require a single ">" to be escaped. D...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 16447 in perlpod.pod
-Lookups: POD, formatting code, escaping with multiple brackets; Text: POD, formatting code, escaping with multiple brackets; Tail: (In fact, you can use as many repeated angle-brackets as you like so long as you have the same number of them in the opening and closing d...); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 16893 in perlpod.pod
 Lookups: POD, formatting code, filename; Text: POD, formatting code, filename; Tail: (F<filename> -- used for filenames); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 14127 in perlpod.pod
 Lookups: POD, formatting code, hyperlink; Text: POD, formatting code, hyperlink; Tail: (L<name> -- a hyperlink); Type: Index; Icon: /perl5language.png; Type Icon: null

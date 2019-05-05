@@ -162,16 +162,12 @@ Lookups: \p{All} has been expanded to match all possible code points; Text: \p{A
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10420 in perl5200delta.pod
 Lookups: \p{}, \P{} matching has changed for non-Unicode code points.; Text: \p{}, \P{} matching has changed for non-Unicode code points.; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9264 in perl5200delta.pod
-Lookups: a2p; Text: a2p; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 50240 in perl5200delta.pod
 Lookups: a2p; Text: a2p; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17947 in perl5200delta.pod
 Lookups: bisect.pl; Text: bisect.pl; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 50410 in perl5200delta.pod
 Lookups: do can no longer be used to call subroutines; Text: do can no longer be used to call subroutines; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7338 in perl5200delta.pod
-Lookups: find2perl; Text: find2perl; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 51385 in perl5200delta.pod
 Lookups: find2perl; Text: find2perl; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17913 in perl5200delta.pod
 Lookups: inc::latest; Text: inc::latest; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null

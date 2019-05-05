@@ -96,8 +96,6 @@ Lookups: dataset access; Text: dataset access; Tail: null; Type: List Item; Icon
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 80724 in perlebcdic.pod
 Lookups: iconv; Text: iconv; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 57689 in perlebcdic.pod
-Lookups: iconv; Text: iconv; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 80913 in perlebcdic.pod
 Lookups: locales; Text: locales; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 81052 in perlebcdic.pod
 Lookups: ord(); Text: ord(); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null

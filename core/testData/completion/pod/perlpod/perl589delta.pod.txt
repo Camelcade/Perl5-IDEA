@@ -72,8 +72,6 @@ Lookups: New or Changed Diagnostics; Text: New or Changed Diagnostics; Tail: nul
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 40414 in perl589delta.pod
 Lookups: Notice; Text: Notice; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 163 in perl589delta.pod
-Lookups: OSE<sol>2, OS/2; Text: OS/2; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 50468 in perl589delta.pod
 Lookups: OSE<sol>2, OS/2; Text: OS/2; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 37109 in perl589delta.pod
 Lookups: Obituary; Text: Obituary; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
@@ -124,26 +122,14 @@ Lookups: Unrecognized character '%s' in column %d; Text: Unrecognized character 
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 41884 in perl589delta.pod
 Lookups: Updated Modules; Text: Updated Modules; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6633 in perl589delta.pod
-Lookups: Updated Modules; Text: Updated Modules; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 50008 in perl589delta.pod
-Lookups: Updated Modules; Text: Updated Modules; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 50481 in perl589delta.pod
-Lookups: Updated Modules; Text: Updated Modules; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 50731 in perl589delta.pod
 Lookups: Utility Changes; Text: Utility Changes; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 19004 in perl589delta.pod
-Lookups: VMS; Text: VMS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 50719 in perl589delta.pod
 Lookups: VMS; Text: VMS; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 29074 in perl589delta.pod
-Lookups: VMS; Text: VMS; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 37670 in perl589delta.pod
 Lookups: Win32; Text: Win32; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 49848 in perl589delta.pod
 Lookups: Windows; Text: Windows; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 29622 in perl589delta.pod
-Lookups: Windows; Text: Windows; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 38063 in perl589delta.pod
 Lookups: XS-assisted SWASHGET; Text: XS-assisted SWASHGET; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4589 in perl589delta.pod
 Lookups: Your machine doesn't support dump/undump., Your machine doesn't support dumpE<sol>undump.; Text: Your machine doesn't support dump/undump.; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null

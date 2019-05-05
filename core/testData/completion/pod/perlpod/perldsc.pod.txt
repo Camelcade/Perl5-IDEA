@@ -122,8 +122,6 @@ Lookups: record; Text: record; Tail: (MORE ELABORATE RECORDS); Type: Index; Icon
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 20433 in perldsc.pod
 Lookups: reference; Text: reference; Tail: (REFERENCES); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 1854 in perldsc.pod
-Lookups: struct; Text: struct; Tail: (MORE ELABORATE RECORDS); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 20456 in perldsc.pod
 Lookups: struct; Text: struct; Tail: (NAME); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 56 in perldsc.pod
 Lookups: structure; Text: structure; Tail: (MORE ELABORATE RECORDS); Type: Index; Icon: /perl5language.png; Type Icon: null

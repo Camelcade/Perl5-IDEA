@@ -10,8 +10,6 @@ Lookups: Basics; Text: Basics; Tail: null; Type: List Item; Icon: /perl5language
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 427 in perlfaq3.pod
 Lookups: CamelBones; Text: CamelBones; Tail: (How can I write a GUI (X, Tk, Gtk, etc.) in Perl?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 15829 in perlfaq3.pod
-Lookups: CamelBones; Text: CamelBones; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17628 in perlfaq3.pod
 Lookups: Can I write useful Perl programs on the command line?; Text: Can I write useful Perl programs on the command line?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31825 in perlfaq3.pod
 Lookups: ConTEXT; Text: ConTEXT; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -114,8 +112,6 @@ Lookups: PerlBuilder; Text: PerlBuilder; Tail: null; Type: List Item; Icon: /per
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11289 in perlfaq3.pod
 Lookups: Qt; Text: Qt; Tail: (How can I write a GUI (X, Tk, Gtk, etc.) in Perl?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 15843 in perlfaq3.pod
-Lookups: Qt; Text: Qt; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18101 in perlfaq3.pod
 Lookups: Regexes; Text: Regexes; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1506 in perlfaq3.pod
 Lookups: SlickEdit; Text: SlickEdit; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -124,8 +120,6 @@ Lookups: Tie large variables to disk; Text: Tie large variables to disk; Tail: n
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23264 in perlfaq3.pod
 Lookups: Tk; Text: Tk; Tail: (How can I write a GUI (X, Tk, Gtk, etc.) in Perl?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 15789 in perlfaq3.pod
-Lookups: Tk; Text: Tk; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16022 in perlfaq3.pod
 Lookups: Use map and grep selectively; Text: Use map and grep selectively; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21969 in perlfaq3.pod
 Lookups: VERSION; Text: VERSION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
@@ -158,8 +152,6 @@ Lookups: Win32::GUI; Text: Win32::GUI; Tail: null; Type: List Item; Icon: /perl5
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17268 in perlfaq3.pod
 Lookups: Wx; Text: Wx; Tail: (How can I write a GUI (X, Tk, Gtk, etc.) in Perl?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 15795 in perlfaq3.pod
-Lookups: Wx; Text: Wx; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16359 in perlfaq3.pod
 Lookups: WxWidgets; Text: WxWidgets; Tail: (How can I write a GUI (X, Tk, Gtk, etc.) in Perl?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 15801 in perlfaq3.pod
 Lookups: XEmacs; Text: XEmacs; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -193,21 +185,15 @@ Lookups: perllocale - Perl locale handling (internationalization and localizatio
 Lookups: perllol - Manipulating arrays of arrays in Perl; Text: perllol - Manipulating arrays of arrays in Perl; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1218 in perlfaq3.pod
 Lookups: perlmod - Perl modules (packages and symbol tables); Text: perlmod - Perl modules (packages and symbol tables); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1357 in perlfaq3.pod
-Lookups: perlmod - Perl modules (packages and symbol tables); Text: perlmod - Perl modules (packages and symbol tables); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 951 in perlfaq3.pod
 Lookups: perlmodlib - constructing new Perl modules and finding existing ones; Text: perlmodlib - constructing new Perl modules and finding existing ones; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1419 in perlfaq3.pod
 Lookups: perlobj - Perl objects; Text: perlobj - Perl objects; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1013 in perlfaq3.pod
 Lookups: perlop - Perl operators and precedence; Text: perlop - Perl operators and precedence; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1619 in perlfaq3.pod
-Lookups: perlop - Perl operators and precedence; Text: perlop - Perl operators and precedence; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 566 in perlfaq3.pod
 Lookups: perlre - Perl regular expressions; Text: perlre - Perl regular expressions; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1530 in perlfaq3.pod
-Lookups: perlref - Perl references and nested data structures; Text: perlref - Perl references and nested data structures; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1155 in perlfaq3.pod
 Lookups: perlref - Perl references and nested data structures; Text: perlref - Perl references and nested data structures; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 888 in perlfaq3.pod
 Lookups: perlrun - how to execute the Perl interpreter; Text: perlrun - how to execute the Perl interpreter; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
