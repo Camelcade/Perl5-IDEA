@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,9 +33,7 @@ import java.util.List;
 
 import static com.intellij.lang.parser.GeneratedParserUtilBase.consumeToken;
 
-/**
- * Created by hurricup on 25.11.2015.
- */
+
 public class MooseParserExtension extends PerlParserExtension implements MooseElementTypes, PerlElementTypes {
   protected static final THashMap<String, IElementType> TOKENS_MAP = new THashMap<>();
   protected static final THashMap<IElementType, IElementType> RESERVED_TO_STATEMENT_MAP = new THashMap<>();

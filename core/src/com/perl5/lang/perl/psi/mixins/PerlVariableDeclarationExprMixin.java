@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,9 +22,7 @@ import com.perl5.lang.perl.psi.PerlVariableDeclarationExpr;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * Created by hurricup on 01.06.2015.
- */
+
 public abstract class PerlVariableDeclarationExprMixin extends PerlCompositeElementImpl implements PerlVariableDeclarationExpr {
   public PerlVariableDeclarationExprMixin(ASTNode node) {
     super(node);

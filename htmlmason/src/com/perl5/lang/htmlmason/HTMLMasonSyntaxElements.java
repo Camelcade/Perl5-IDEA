@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,9 +21,7 @@ import gnu.trove.THashSet;
 import java.util.Arrays;
 import java.util.Set;
 
-/**
- * Created by hurricup on 05.03.2016.
- */
+
 public interface HTMLMasonSyntaxElements {
   String COMPONENT_SLUG_SELF = "SELF";
   String COMPONENT_SLUG_PARENT = "PARENT";

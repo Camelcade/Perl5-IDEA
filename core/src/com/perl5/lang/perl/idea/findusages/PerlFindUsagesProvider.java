@@ -19,9 +19,7 @@ package com.perl5.lang.perl.idea.findusages;
 import com.intellij.lang.cacheBuilder.WordsScanner;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * Created by hurricup on 24.05.2015.
- */
+
 public class PerlFindUsagesProvider extends PerlFindUsagesProviderBase {
   @Nullable
   @Override

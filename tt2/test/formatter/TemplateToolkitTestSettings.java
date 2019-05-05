@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,9 +19,7 @@ package formatter;
 import com.intellij.openapi.project.Project;
 import com.perl5.lang.tt2.idea.settings.TemplateToolkitSettings;
 
-/**
- * Created by hurricup on 16.07.2016.
- */
+
 public class TemplateToolkitTestSettings {
   private final Project myProject;
 

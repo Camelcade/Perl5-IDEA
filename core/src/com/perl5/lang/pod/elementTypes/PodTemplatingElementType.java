@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,9 +24,7 @@ import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.lexer.PodElementTypes;
 import org.jetbrains.annotations.NonNls;
 
-/**
- * Created by hurricup on 31.03.2016.
- */
+
 public class PodTemplatingElementType extends TemplateDataElementType implements PerlElementTypes, PodElementTypes {
   public PodTemplatingElementType(@NonNls String debugName, Language language) {
     super(debugName, language, POD, POD_OUTER);

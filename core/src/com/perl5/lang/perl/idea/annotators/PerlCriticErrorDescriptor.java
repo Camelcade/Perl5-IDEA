@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,9 +21,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by hurricup on 16.04.2016.
- */
+
 public class PerlCriticErrorDescriptor {
   public static final Pattern PERL_CRITIC_MESSAGE_PATTERN = Pattern.compile("(.+?) at line (\\d+), column (\\d+)\\.\\s*( .+)");
   private final int myLine;

@@ -36,9 +36,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
 
-/**
- * Created by hurricup on 09.08.2015.
- */
+
 public interface PerlFile
   extends PsiFile, PerlLexicalScope, PerlNamespaceDefinitionElement, PerlLabelScope, ItemPresentation, PodLinkTarget, PerlDieScope {
   /**

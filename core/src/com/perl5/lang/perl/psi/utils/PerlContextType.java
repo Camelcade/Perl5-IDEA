@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,9 +28,7 @@ import org.jetbrains.annotations.Nullable;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.VARIABLE_DECLARATIONS;
 
-/**
- * Created by hurricup on 27.06.2016.
- */
+
 public enum PerlContextType {
   VOID,
   SCALAR,

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,9 +20,7 @@ import com.intellij.lang.cacheBuilder.WordsScanner;
 import com.perl5.lang.perl.idea.findusages.PerlFindUsagesProvider;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * Created by hurricup on 20.12.2015.
- */
+
 public class MasonTemplatingFindUsagesProvider extends PerlFindUsagesProvider {
 
   @Nullable

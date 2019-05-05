@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,9 +20,7 @@ import com.intellij.lang.Language;
 import com.perl5.lang.mason2.Mason2TemplatingLanguage;
 import com.perl5.lang.perl.idea.hierarchy.namespace.PerlTypeHierarchyProvider;
 
-/**
- * Created by hurricup on 09.01.2016.
- */
+
 public class MasonTemplatingTypeHierarchyProvider extends PerlTypeHierarchyProvider {
   @Override
   protected Language getLanguage() {

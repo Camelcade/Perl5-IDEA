@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,9 +20,7 @@ import com.intellij.openapi.util.KeyedExtensionCollector;
 import com.intellij.util.KeyedLazyInstanceEP;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
 
-/**
- * Created by hurricup on 18.08.2015.
- */
+
 public class PerlPackageProcessorEP extends KeyedLazyInstanceEP<PerlPackageProcessor> {
   public static final KeyedExtensionCollector<PerlPackageProcessor, String> EP =
     new KeyedExtensionCollector<>("com.perl5.packageProcessor");

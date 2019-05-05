@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,9 +23,7 @@ import com.intellij.psi.tree.TokenSet;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 28.12.2015.
- */
+
 public class Mason2ParserImpl extends PerlParserImpl implements MasonParser {
   protected static final TokenSet BAD_CHARACTER_FORBIDDEN_TOKENS = TokenSet.orSet(
     PerlParserImpl.BAD_CHARACTER_FORBIDDEN_TOKENS, TokenSet.create(

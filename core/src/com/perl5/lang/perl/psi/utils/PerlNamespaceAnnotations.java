@@ -27,9 +27,7 @@ import org.jetbrains.annotations.Nullable;
 import java.io.IOException;
 import java.util.List;
 
-/**
- * Created by hurricup on 08.08.2016.
- */
+
 public class PerlNamespaceAnnotations {
   private static final byte IS_DEPRECATED = 0x01;
 

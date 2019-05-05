@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -69,9 +69,7 @@ import static com.perl5.PerlBundle.PATH_TO_BUNDLE;
 import static com.perl5.lang.perl.idea.run.debugger.PerlDebugProfileState.DEBUG_PACKAGE;
 import static com.perl5.lang.perl.idea.run.debugger.protocol.PerlDebuggingEventReady.MODULE_VERSION_PREFIX;
 
-/**
- * Created by hurricup on 04.05.2016.
- */
+
 public class PerlDebugThread extends Thread {
   static final boolean DEV_MODE = false;
   private static final Logger LOG = Logger.getInstance(PerlDebugThread.class);

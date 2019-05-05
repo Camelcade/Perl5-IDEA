@@ -20,9 +20,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by hurricup on 26.03.2016.
- */
+
 public class PodSyntaxElements {
   public static final String FORMAT_ROFF = "roff";
   public static final String FORMAT_MAN = "man";

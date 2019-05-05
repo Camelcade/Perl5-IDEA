@@ -29,7 +29,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 27.03.2016.
  * Builds pod link from the string
  */
 public class PodLinkDescriptor {

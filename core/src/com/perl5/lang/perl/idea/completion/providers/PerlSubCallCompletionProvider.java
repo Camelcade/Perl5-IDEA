@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,9 +34,7 @@ import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 01.06.2015.
- */
+
 public class PerlSubCallCompletionProvider extends CompletionProvider<CompletionParameters> {
   public void addCompletions(@NotNull CompletionParameters parameters,
                              @NotNull ProcessingContext context,

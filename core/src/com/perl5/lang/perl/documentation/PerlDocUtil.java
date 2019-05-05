@@ -57,9 +57,7 @@ import static com.perl5.lang.perl.util.PerlSubUtil.SUB_AUTOLOAD;
 import static com.perl5.lang.perl.util.PerlSubUtil.SUB_DESTROY;
 import static com.perl5.lang.pod.PodSearchHelper.PERL_FUNC_FILE_NAME;
 
-/**
- * Created by hurricup on 26.03.2016.
- */
+
 public class PerlDocUtil implements PerlElementTypes {
   static final PodLinkDescriptor SWITCH_DOC_LINK = PodLinkDescriptor.create("perlsyn", "Switch Statements");
   static final PodLinkDescriptor SPECIAL_LITERALS_LINK = PodLinkDescriptor.create("perldata", "Special Literals");

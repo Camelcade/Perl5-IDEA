@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,10 @@ import com.intellij.util.Processor;
 import com.intellij.util.SmartList;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PerlStringList;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
+import com.perl5.lang.perl.psi.PsiPerlCommaSequenceExpr;
+import com.perl5.lang.perl.psi.PsiPerlParenthesisedExpr;
 import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariablesStubIndex;
 import org.jetbrains.annotations.NotNull;
@@ -33,9 +36,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
-/**
- * Created by hurricup on 19.04.2015.
- */
+
 public class PerlArrayUtil implements PerlElementTypes {
   public static final HashSet<String> BUILT_IN = new HashSet<>(Arrays.asList(
     "+",

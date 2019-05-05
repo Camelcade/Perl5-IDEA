@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,9 +23,7 @@ import com.perl5.lang.perl.psi.*;
 
 import static com.intellij.patterns.PlatformPatterns.psiElement;
 
-/**
- * Created by hurricup on 31.05.2015.
- */
+
 public interface PerlElementPatterns extends PerlElementTypes {
   PsiElementPattern.Capture<PsiElement> WHITE_SPACE_AND_COMMENTS = psiElement().whitespaceCommentOrError();
 

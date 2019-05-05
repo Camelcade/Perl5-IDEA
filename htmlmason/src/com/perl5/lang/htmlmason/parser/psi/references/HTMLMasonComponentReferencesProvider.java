@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,9 +32,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by hurricup on 19.03.2016.
- */
+
 public class HTMLMasonComponentReferencesProvider extends PsiReferenceProvider implements HTMLMasonSyntaxElements {
   public static final Pattern METHOD_CALL_PATTERN = Pattern.compile("(.+?):([\\w._-]+\\s*)?");
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,9 +22,7 @@ import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
 import com.perl5.lang.perl.lexer.adapters.PerlMergingLexerAdapter;
 import com.perl5.lang.perl.lexer.adapters.PerlTemplatingMergingLexerAdapter;
 
-/**
- * Created by hurricup on 05.03.2016.
- */
+
 public class HTMLMasonLexerAdapter extends PerlTemplatingMergingLexerAdapter implements HTMLMasonElementTypes {
   private final static TokenSet TOKENS_TO_MERGE = TokenSet.orSet(
     PerlMergingLexerAdapter.TOKENS_TO_MERGE,

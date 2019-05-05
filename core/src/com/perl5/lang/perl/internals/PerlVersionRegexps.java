@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,6 @@ package com.perl5.lang.perl.internals;
 import java.util.regex.Pattern;
 
 /**
- * Created by hurricup on 07.09.2015.
  * regexps taken from verion/regex.pm original names are kept, but in camelcase
  */
 public interface PerlVersionRegexps {

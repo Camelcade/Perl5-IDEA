@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,9 +21,7 @@ import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
 import com.perl5.lang.perl.util.PerlDebugUtil;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 07.05.2016.
- */
+
 public abstract class PerlDebuggingEventBreakpointBase extends PerlDebuggingEventBase implements PerlDebuggingEventBreakpoint {
   private String path;
   private int line;

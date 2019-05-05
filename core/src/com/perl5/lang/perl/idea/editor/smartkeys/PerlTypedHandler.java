@@ -51,9 +51,7 @@ import org.jetbrains.annotations.Nullable;
 
 import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
 
-/**
- * Created by hurricup on 25.07.2015.
- */
+
 public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlElementTypes {
   // these chars are automatically closed by IDEA and we can't control this
   private static final String HANDLED_BY_BRACE_MATCHER = "{([";

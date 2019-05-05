@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,9 +28,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by evstigneev on 19.08.2015.
- */
+
 public class FeatureProcessor extends PerlPragmaProcessorBase implements PerlPackageOptionsProvider, PerlFeaturesProvider {
   protected static final HashMap<String, String> OPTIONS = new HashMap<>();
   protected static final HashMap<String, String> OPTIONS_BUNDLES = new HashMap<>();

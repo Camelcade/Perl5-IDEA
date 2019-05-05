@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,9 +21,7 @@ import com.perl5.lang.embedded.EmbeddedPerlLanguage;
 import com.perl5.lang.embedded.EmbeddedPerlParserDefinition;
 import com.perl5.lang.embedded.psi.EmbeddedPerlFileViewProviderFactory;
 
-/**
- * Created by hurricup on 05.03.2016.
- */
+
 public class EmbeddedPerlParserTest extends PerlParserTestBase {
   public EmbeddedPerlParserTest() {
     super("", "thtml", new EmbeddedPerlParserDefinition());

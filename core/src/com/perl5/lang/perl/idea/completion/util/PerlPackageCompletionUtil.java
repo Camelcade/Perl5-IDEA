@@ -48,9 +48,7 @@ import java.util.Map;
 import static com.perl5.PerlIcons.PACKAGE_GUTTER_ICON;
 import static com.perl5.lang.perl.util.PerlPackageUtil.__PACKAGE__;
 
-/**
- * Created by hurricup on 25.07.2015.
- */
+
 public class PerlPackageCompletionUtil {
   public static final InsertHandler<LookupElement> COMPLETION_REOPENER = (context, item) -> {
     if (context.getCompletionChar() != Lookup.AUTO_INSERT_SELECT_CHAR) {

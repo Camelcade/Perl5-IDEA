@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,9 +33,7 @@ import java.util.Set;
 
 import static com.perl5.lang.perl.util.PerlSubUtil.SUB_DESTROY;
 
-/**
- * Created by hurricup on 14.08.2015.
- */
+
 public class PerlUnusedSubInspection extends PerlInspection {
   public static final Set<String> EXCLUSIONS = new THashSet<>(Arrays.asList(
     "BEGIN",

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,9 +20,7 @@ import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.parser.elementTypes.PerlElementTypeEx;
 import com.perl5.lang.perl.parser.perlswitch.psi.*;
 
-/**
- * Created by hurricup on 15.12.2015.
- */
+
 public interface PerlSwitchElementTypes {
   IElementType SWITCH_COMPOUND = new PerlElementTypeEx("SWITCH_COMPOUND", PerlSwitchCompoundStatementImpl.class) ;
   IElementType SWITCH_CONDITION = new PerlElementTypeEx("SWITCH_CONDITION", PerlSwitchConditionImpl.class);

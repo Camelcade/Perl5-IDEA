@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,9 +22,7 @@ import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.mason2.elementType.Mason2ElementTypes;
 import com.perl5.lang.mason2.psi.Mason2TemplatingFileViewProvider;
 
-/**
- * Created by hurricup on 16.03.2016.
- */
+
 public class Mason2TemplateLanguageErrorFilter extends TemplateLanguageErrorFilter implements Mason2ElementTypes {
   private static final TokenSet START_TOKENS = TokenSet.create(
     MASON_BLOCK_OPENER,

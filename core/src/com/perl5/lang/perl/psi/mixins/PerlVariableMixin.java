@@ -44,9 +44,7 @@ import java.util.List;
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
 import static com.perl5.lang.perl.util.PerlPackageUtil.MAIN_NAMESPACE_NAME;
 
-/**
- * Created by hurricup on 24.05.2015.
- */
+
 public abstract class PerlVariableMixin extends PerlCompositeElementImpl implements PerlElementTypes, PerlVariable {
   public PerlVariableMixin(ASTNode node) {
     super(node);

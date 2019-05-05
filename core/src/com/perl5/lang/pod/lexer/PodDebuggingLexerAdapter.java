@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,9 +19,7 @@ package com.perl5.lang.pod.lexer;
 import com.intellij.lexer.FlexAdapter;
 import com.intellij.openapi.project.Project;
 
-/**
- * Created by hurricup on 25.03.2016.
- */
+
 public class PodDebuggingLexerAdapter extends FlexAdapter {
   public PodDebuggingLexerAdapter(Project project) {
     super(new PodDebuggingLexer((java.io.Reader)null));

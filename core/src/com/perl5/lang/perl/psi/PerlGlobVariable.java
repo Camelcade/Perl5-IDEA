@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,9 +21,7 @@ import com.perl5.lang.perl.psi.properties.PerlIdentifierOwner;
 import com.perl5.lang.perl.psi.properties.PerlPackageMember;
 import com.perl5.lang.perl.psi.properties.PerlVariableNameElementContainer;
 
-/**
- * Created by hurricup on 25.05.2015.
- */
+
 public interface PerlGlobVariable extends PsiElement, PerlPackageMember, PerlVariableNameElementContainer, PerlIdentifierOwner {
   /**
    * Checks if this typeglob is left part of assignment

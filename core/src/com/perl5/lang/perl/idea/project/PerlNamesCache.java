@@ -30,9 +30,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created by hurricup on 04.09.2015.
- */
+
 public class PerlNamesCache implements ProjectComponent {
   private final NamesCacheUpdater myUpdaterRunner = new NamesCacheUpdater();
   private final Thread myUpdaterThread = new Thread(myUpdaterRunner);

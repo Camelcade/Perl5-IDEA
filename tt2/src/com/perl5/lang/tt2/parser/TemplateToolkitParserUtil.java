@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,9 +28,7 @@ import com.perl5.lang.tt2.TemplateToolkitParserDefinition;
 import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
 import com.perl5.lang.tt2.lexer.TemplateToolkitSyntaxElements;
 
-/**
- * Created by hurricup on 05.06.2016.
- */
+
 @SuppressWarnings("Duplicates")
 public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implements TemplateToolkitElementTypes {
   public static final TokenSet OPEN_QUOTES = TokenSet.create(

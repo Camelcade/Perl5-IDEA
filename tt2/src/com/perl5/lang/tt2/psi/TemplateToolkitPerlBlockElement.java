@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,8 +18,6 @@ package com.perl5.lang.tt2.psi;
 
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
 
-/**
- * Created by hurricup on 11.06.2016.
- */
+
 public interface TemplateToolkitPerlBlockElement extends TemplateToolkitCompositeElement, PerlImplicitVariablesProvider {
 }

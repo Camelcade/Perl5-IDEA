@@ -24,9 +24,6 @@ import com.perl5.lang.pod.parser.psi.PodSectionTitle;
 import static com.intellij.patterns.PlatformPatterns.psiElement;
 
 
-/**
- * Created by hurricup on 05.04.2016.
- */
 public interface PodElementPatterns extends PodElementTypes {
   PsiElementPattern.Capture<PsiElement> LINK_IDENTIFIER =
     psiElement().withSuperParent(2, psiElement(FORMATTING_SECTION_CONTENT).withParent(psiElement(POD_FORMAT_LINK)));

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,9 +26,7 @@ import com.perl5.lang.perl.psi.PsiPerlStatement;
 
 import static com.intellij.patterns.PlatformPatterns.psiElement;
 
-/**
- * Created by hurricup on 15.01.2016.
- */
+
 public interface PerlSwitchElementPatterns extends PerlElementPatterns {
   PsiElementPattern.Capture<PsiPerlStatement> STATEMENT_IN_SWITCH =
     psiElement(PsiPerlStatement.class).withParent(

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,9 +24,7 @@ import com.perl5.lang.perl.idea.inspections.*;
 import com.perl5.lang.perl.parser.moose.idea.inspections.MooseMultiAttributeAccessorInspection;
 import com.perl5.lang.perl.psi.PerlFile;
 
-/**
- * Created by hurricup on 09.11.2016.
- */
+
 public class PerlAnnotatorTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {

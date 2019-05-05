@@ -38,9 +38,7 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
-/**
- * Created by hurricup on 25.05.2015.
- */
+
 public abstract class PerlGlobVariableMixin extends PerlStubBasedPsiElementBase<PerlGlobStub>
   implements PsiPerlGlobVariable, PerlElementTypes {
   public PerlGlobVariableMixin(@NotNull ASTNode node) {

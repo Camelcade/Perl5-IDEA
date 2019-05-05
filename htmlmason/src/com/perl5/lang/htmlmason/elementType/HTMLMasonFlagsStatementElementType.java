@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,9 +32,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
-/**
- * Created by hurricup on 10.03.2016.
- */
+
 public class HTMLMasonFlagsStatementElementType extends IStubElementType<HTMLMasonFlagsStatementStub, HTMLMasonFlagsStatement>
   implements PsiElementProvider {
   public HTMLMasonFlagsStatementElementType(@NotNull @NonNls String debugName) {

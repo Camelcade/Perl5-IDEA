@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,9 +25,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by hurricup on 18.08.2015.
- */
+
 public class ParentProcessor extends BaseProcessor implements PerlPackageOptionsProvider {
   protected static final Map<String, String> OPTIONS = new HashMap<>();
 

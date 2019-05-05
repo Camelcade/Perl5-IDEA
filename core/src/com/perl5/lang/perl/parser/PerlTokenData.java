@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,6 @@ package com.perl5.lang.perl.parser;
 import com.intellij.psi.tree.IElementType;
 
 /**
- * Created by hurricup on 07.05.2015.
  * represents token data - type and text
  */
 public class PerlTokenData {

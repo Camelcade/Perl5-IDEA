@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,7 @@
 
 package com.perl5.lang.mojolicious;
 
-/**
- * Created by hurricup on 26.12.2015.
- */
+
 public interface MojoliciousSyntaxElements {
   String KEYWORD_MOJO_BLOCK_OPENER = "<%";
   String KEYWORD_MOJO_BLOCK_CLOSER = "%>";

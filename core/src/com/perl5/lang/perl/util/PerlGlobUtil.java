@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,9 +31,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 
-/**
- * Created by hurricup on 19.04.2015.
- */
+
 public class PerlGlobUtil implements PerlElementTypes {
   public static final HashSet<String> BUILT_IN = new HashSet<>(Arrays.asList(
     "ARGV",

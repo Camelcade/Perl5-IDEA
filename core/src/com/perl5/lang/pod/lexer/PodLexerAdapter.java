@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,9 +20,7 @@ import com.intellij.lexer.FlexAdapter;
 import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * Created by hurricup on 21.04.2015.
- */
+
 public class PodLexerAdapter extends FlexAdapter {
   public PodLexerAdapter(@Nullable Project project) {
     super(new PodLexer(null));

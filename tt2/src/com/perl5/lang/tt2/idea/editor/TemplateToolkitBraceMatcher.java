@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,9 +24,7 @@ import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * Created by hurricup on 05.06.2016.
- */
+
 public class TemplateToolkitBraceMatcher implements PairedBraceMatcher, TemplateToolkitElementTypes {
   private static final BracePair[] PAIRS = new BracePair[]{
     new BracePair(TT2_OPEN_TAG, TT2_CLOSE_TAG, true),

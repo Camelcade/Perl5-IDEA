@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,9 +26,7 @@ import com.perl5.lang.htmlmason.parser.psi.HTMLMasonCompositeElement;
 import com.perl5.lang.perl.psi.PerlStubBasedPsiElementBase;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 19.03.2016.
- */
+
 public abstract class HTMLMasonStubBasedElement<T extends StubElement> extends PerlStubBasedPsiElementBase<T>
   implements HTMLMasonCompositeElement {
   public HTMLMasonStubBasedElement(@NotNull T stub, @NotNull IStubElementType nodeType) {

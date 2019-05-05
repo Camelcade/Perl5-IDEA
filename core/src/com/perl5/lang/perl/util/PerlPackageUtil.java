@@ -69,9 +69,7 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
 
-/**
- * Created by hurricup on 24.04.2015.
- */
+
 public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
   public static final String PACKAGE_SEPARATOR = "::";
   public static final String PACKAGE_DEREFERENCE = "->";

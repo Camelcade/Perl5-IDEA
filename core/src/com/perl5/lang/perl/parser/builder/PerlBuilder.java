@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,6 @@ import com.perl5.lang.perl.parser.PerlParserImpl;
 import com.perl5.lang.perl.parser.PerlTokenData;
 
 /**
- * Created by hurricup on 04.05.2015.
  * This wrapper created to be able to store per-parsing data like pragmas, warnings and variables ?
  */
 public class PerlBuilder extends GeneratedParserUtilBase.Builder implements PerlElementTypes {

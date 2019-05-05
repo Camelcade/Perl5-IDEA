@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,9 +20,7 @@ import com.intellij.lang.Language;
 import com.intellij.psi.templateLanguages.TemplateLanguage;
 import com.perl5.lang.perl.PerlLanguage;
 
-/**
- * Created by hurricup on 21.07.2015.
- */
+
 public class MojoliciousLanguage extends Language implements TemplateLanguage {
   public static final MojoliciousLanguage INSTANCE = new MojoliciousLanguage();
 

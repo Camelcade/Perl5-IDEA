@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,9 +28,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Collection;
 
-/**
- * Created by hurricup on 12.03.2016.
- */
+
 public class HTMLMasonSubTypeHierarchyStructure extends PerlSubTypesHierarchyTreeStructure {
   public HTMLMasonSubTypeHierarchyStructure(@NotNull PsiElement element) {
     this(element.getProject(), new HTMLMasonHierarchyNodeDescriptor(null, element, true));

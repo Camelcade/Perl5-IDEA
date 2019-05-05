@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -52,9 +52,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.File;
 import java.io.IOException;
 
-/**
- * Created by hurricup on 28.02.2016.
- */
+
 public abstract class PerlParserTestBase extends ParsingTestCase {
   public PerlParserTestBase() {
     this("", PerlFileTypeScript.EXTENSION_PL, new PerlParserDefinition());

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,9 +26,7 @@ import com.perl5.lang.perl.parser.moose.stubs.augment.PerlMooseAugmentStatementE
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 27.12.2015.
- */
+
 public interface MooseElementTypes {
   IElementType RESERVED_INNER = new PerlTokenTypeEx("inner", PerlMooseKeywordSubNameElementImpl.class);
   IElementType RESERVED_SUPER = new PerlTokenTypeEx("super", PerlMooseKeywordSubNameElementImpl.class);

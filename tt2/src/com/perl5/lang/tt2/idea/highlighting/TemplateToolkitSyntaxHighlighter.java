@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,9 +29,7 @@ import org.jetbrains.annotations.NotNull;
 
 import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributesKey;
 
-/**
- * Created by hurricup on 05.06.2016.
- */
+
 public class TemplateToolkitSyntaxHighlighter extends SyntaxHighlighterBase implements TemplateToolkitElementTypes {
   public static final TextAttributesKey TT2_NUMBER_KEY = createTextAttributesKey("TT2_NUMBER", PerlSyntaxHighlighter.PERL_NUMBER);
   public static final TextAttributesKey TT2_MARKER_KEY = createTextAttributesKey("TT2_MARKER", PerlSyntaxHighlighter.EMBED_MARKER_KEY);

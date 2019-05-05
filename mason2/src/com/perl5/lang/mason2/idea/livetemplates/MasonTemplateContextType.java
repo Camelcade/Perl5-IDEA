@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,9 +21,7 @@ import com.perl5.lang.htmlmason.idea.livetemplates.AbstractMasonTemplateContextT
 import com.perl5.lang.mason2.psi.impl.MasonTemplatingFileImpl;
 import com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType;
 
-/**
- * Created by hurricup on 10.01.2016.
- */
+
 public class MasonTemplateContextType extends AbstractMasonTemplateContextType {
   public MasonTemplateContextType() {
     super("PERL5_MASON", "&Mason2 template", PerlTemplateContextType.Generic.class);

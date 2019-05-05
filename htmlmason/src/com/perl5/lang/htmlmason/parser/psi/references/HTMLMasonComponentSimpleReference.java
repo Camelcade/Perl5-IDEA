@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,9 +26,7 @@ import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
 import com.perl5.lang.perl.psi.PerlString;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 19.03.2016.
- */
+
 public class HTMLMasonComponentSimpleReference extends HTMLMasonStringReference {
   public HTMLMasonComponentSimpleReference(@NotNull PerlString element, TextRange textRange) {
     super(element, textRange);

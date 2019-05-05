@@ -32,9 +32,7 @@ import java.io.IOException;
 import static com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil.readString;
 import static com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil.readStringsList;
 
-/**
- * Created by hurricup on 20.08.2015.
- */
+
 public class PerlUseStatementStubElementType extends IStubElementType<PerlUseStatementStub, PerlUseStatement>
   implements PsiElementProvider {
   public PerlUseStatementStubElementType(String debugName) {

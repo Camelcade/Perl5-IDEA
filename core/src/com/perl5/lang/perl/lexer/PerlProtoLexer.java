@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,9 +27,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * Created by hurricup on 24.03.2016.
- */
+
 public abstract class PerlProtoLexer implements FlexLexer {
   protected final LinkedList<CustomToken> preparsedTokensList = new LinkedList<>();
   protected final IntStack stateStack = new IntStack();

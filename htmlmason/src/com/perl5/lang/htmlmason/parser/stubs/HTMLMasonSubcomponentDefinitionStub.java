@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,8 +19,6 @@ package com.perl5.lang.htmlmason.parser.stubs;
 import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonSubcomponentDefitnition;
 
-/**
- * Created by hurricup on 19.03.2016.
- */
+
 public interface HTMLMasonSubcomponentDefinitionStub extends StubElement<HTMLMasonSubcomponentDefitnition>, HTMLMasonNamedElementStubBase {
 }

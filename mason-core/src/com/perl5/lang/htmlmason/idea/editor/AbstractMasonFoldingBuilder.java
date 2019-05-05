@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,9 +23,7 @@ import com.perl5.lang.perl.idea.folding.PerlFoldingBuilder;
 
 import java.util.List;
 
-/**
- * Created by hurricup on 09.03.2016.
- */
+
 public abstract class AbstractMasonFoldingBuilder extends PerlFoldingBuilder {
   public static void foldElement(PsiElement element, List<FoldingDescriptor> myDescriptors, Document myDocument) {
     PsiElement firstChild = element.getFirstChild();

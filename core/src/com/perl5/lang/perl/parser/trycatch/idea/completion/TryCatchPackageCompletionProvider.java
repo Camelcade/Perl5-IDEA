@@ -23,9 +23,7 @@ import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionUtil;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 17.04.2016.
- */
+
 public class TryCatchPackageCompletionProvider extends CompletionProvider<CompletionParameters> {
   @Override
   protected void addCompletions(@NotNull CompletionParameters parameters,

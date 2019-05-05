@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,9 +30,7 @@ import com.perl5.lang.tt2.psi.TemplateToolkitString;
 import com.perl5.lang.tt2.psi.mixins.TemplateToolkitStringMixin;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 16.06.2016.
- */
+
 public class TemplateToolkitBlocksCompletionProvider extends CompletionProvider<CompletionParameters> {
   @Override
   protected void addCompletions(@NotNull CompletionParameters parameters,

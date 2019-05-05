@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,9 +23,7 @@ import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 06.03.2016.
- */
+
 public class HTMLMasonBraceMatcher implements PairedBraceMatcher, HTMLMasonElementTypes {
   private static final BracePair[] PAIRS = new BracePair[]{
     new BracePair(HTML_MASON_BLOCK_OPENER, HTML_MASON_BLOCK_CLOSER, false),

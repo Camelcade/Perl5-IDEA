@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,9 +23,7 @@ import com.intellij.openapi.vfs.VirtualFileManager;
 import com.perl5.lang.mason2.idea.vfs.MasonVirtualFileListener;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 09.01.2016.
- */
+
 public class MasonProjectComponent implements ProjectComponent {
   private final Project myProject;
   private final VirtualFileListener myFileListener;

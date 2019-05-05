@@ -43,9 +43,7 @@ import java.util.*;
 
 import static com.perl5.lang.perl.parser.PerlParserUtil.IDENTIFIER_PATTERN;
 
-/**
- * Created by hurricup on 24.01.2016.
- */
+
 public class PerlStringCompletionUtil implements PerlElementPatterns {
   public static final String[] REF_TYPES = new String[]{
     "SCALAR",

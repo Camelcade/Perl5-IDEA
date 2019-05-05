@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,9 +32,6 @@ import java.util.Map;
 import static com.perl5.lang.htmlmason.lexer.HTMLMasonLexer.*;
 
 
-/**
- * Created by hurricup on 29.10.2016.
- */
 public abstract class HTMLMasonBaseLexer extends PerlTemplatingLexer implements HTMLMasonElementTypes, PerlElementTypes {
   private final CommentEndCalculator COMMENT_END_CALCULATOR = commentText ->
   {

@@ -21,9 +21,7 @@ import com.perl5.lang.pod.lexer.PodElementTypes;
 import com.perl5.lang.pod.parser.psi.mixin.PodSectionItem;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * Created by hurricup on 26.03.2016.
- */
+
 public interface PodOverSectionContent extends PsiElement, PodElementTypes {
   /**
    * Checks if first element is bulleted, according to http://perldoc.perl.org/perlpodspec.html#About-%3dover...%3dback-Regions

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,9 +23,7 @@ import com.perl5.lang.pod.PodParserDefinition;
 import com.perl5.lang.pod.lexer.PodElementTypes;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 26.03.2016.
- */
+
 public class PodParserUtil extends GeneratedParserUtilBase implements PodElementTypes {
   public static boolean completeOrReport(PsiBuilder b, int l, @NotNull IElementType targetElement, @NotNull String message) {
     if (b.getTokenType() == targetElement) {

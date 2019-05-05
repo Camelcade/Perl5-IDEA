@@ -27,9 +27,7 @@ import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * Created by hurricup on 24.05.2015.
- */
+
 public class PerlSubNameElementImpl extends PerlLeafPsiElementWithReferences implements PerlSubNameElement {
   public PerlSubNameElementImpl(@NotNull IElementType type, CharSequence text) {
     super(type, text);

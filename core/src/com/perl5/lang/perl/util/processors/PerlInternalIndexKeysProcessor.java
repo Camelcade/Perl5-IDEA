@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,9 +19,7 @@ package com.perl5.lang.perl.util.processors;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.Processor;
 
-/**
- * Created by hurricup on 17.08.2015.
- */
+
 public class PerlInternalIndexKeysProcessor implements Processor<String> {
   @Override
   public boolean process(String string) {

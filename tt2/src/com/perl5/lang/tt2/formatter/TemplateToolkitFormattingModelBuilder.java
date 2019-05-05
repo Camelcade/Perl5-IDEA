@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,7 +45,6 @@ import static com.perl5.lang.tt2.lexer.TemplateToolkitSyntaxElements.ALL_OPERATO
 import static com.perl5.lang.tt2.lexer.TemplateToolkitSyntaxElements.KEYWORDS_TOKENSET;
 
 /**
- * Created by hurricup on 10.07.2016.
  * based on handlebars plugin formatter
  */
 public class TemplateToolkitFormattingModelBuilder extends TemplateLanguageFormattingModelBuilder implements TemplateToolkitElementTypes {

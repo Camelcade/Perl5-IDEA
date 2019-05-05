@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,9 +22,7 @@ import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.perl5.lang.perl.PerlLanguage;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * Created by hurricup on 03.09.2015.
- */
+
 public class PerlCodeStyleConfigurable extends CodeStyleAbstractConfigurable {
   public PerlCodeStyleConfigurable(CodeStyleSettings settings, CodeStyleSettings cloneSettings) {
     super(settings, cloneSettings, PerlLanguage.INSTANCE.getDisplayName());

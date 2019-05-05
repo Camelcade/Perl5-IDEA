@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,9 +23,7 @@ import com.perl5.lang.perl.psi.mro.PerlMroType;
 
 import java.util.List;
 
-/**
- * Created by evstigneev on 21.08.2015.
- */
+
 public class MroProcessor extends PerlPragmaProcessorBase implements PerlMroProvider {
   @Override
   public PerlMroType getMroType(PerlUseStatement useStatement) {

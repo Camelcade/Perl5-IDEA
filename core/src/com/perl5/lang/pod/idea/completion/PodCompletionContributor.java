@@ -32,9 +32,7 @@ import org.jetbrains.annotations.NotNull;
 import java.nio.charset.Charset;
 import java.util.Collections;
 
-/**
- * Created by hurricup on 16.04.2016.
- */
+
 public class PodCompletionContributor extends CompletionContributor implements PodElementPatterns {
   public PodCompletionContributor() {
     extend(

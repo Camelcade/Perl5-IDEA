@@ -31,9 +31,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
-/**
- * Created by hurricup on 25.05.2015.
- */
+
 public class PerlGlobStubElementType extends IStubElementType<PerlGlobStub, PsiPerlGlobVariable> implements PsiElementProvider {
 
   public PerlGlobStubElementType(String name) {

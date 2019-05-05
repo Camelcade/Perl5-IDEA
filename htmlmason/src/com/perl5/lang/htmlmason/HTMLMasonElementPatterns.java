@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,9 +28,7 @@ import com.perl5.lang.perl.psi.*;
 import static com.intellij.patterns.PlatformPatterns.psiElement;
 import static com.intellij.patterns.PlatformPatterns.psiFile;
 
-/**
- * Created by hurricup on 08.03.2016.
- */
+
 public interface HTMLMasonElementPatterns extends HTMLMasonElementTypes, PerlElementTypes {
   PsiElementPattern.Capture<PsiElement> ATTR_OR_ARG_ELEMENT_PATTERN = psiElement().andOr(
     psiElement().inside(psiElement(HTML_MASON_ATTR_BLOCK)),

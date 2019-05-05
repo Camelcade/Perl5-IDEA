@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,9 +25,7 @@ import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 03.01.2016.
- */
+
 public class MasonOverrideElementType extends PerlMooseOverrideElementType {
   public MasonOverrideElementType(String name) {
     super(name, Mason2TemplatingLanguage.INSTANCE);

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,9 +27,7 @@ import com.perl5.lang.pod.filetypes.PodFileType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * Created by hurricup on 02.04.2016.
- */
+
 public class PerlEditorHighlighter extends LayeredLexerEditorHighlighter implements PerlElementTypes {
   public PerlEditorHighlighter(@Nullable final Project project,
                                @Nullable final VirtualFile virtualFile,

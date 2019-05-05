@@ -32,9 +32,7 @@ import java.util.List;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.TAG_PACKAGE;
 
-/**
- * Created by hurricup on 25.05.2015.
- */
+
 public class PerlNamespaceElementImpl extends PerlLeafPsiElementWithReferences implements PerlNamespaceElement {
   public PerlNamespaceElementImpl(@NotNull IElementType type, CharSequence text) {
     super(type, text);

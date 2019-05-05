@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,9 +23,7 @@ import com.perl5.lang.perl.parser.elementTypes.PerlNestedCallElementType;
 import com.perl5.lang.perl.parser.elementTypes.PerlTokenType;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlLightSubDefinitionElementType;
 
-/**
- * Created by hurricup on 21.01.2016.
- */
+
 public interface ClassAccessorElementTypes {
   IElementType CLASS_ACCESSOR_FBP = new PerlNestedCallElementType("CLASS_ACCESSOR_FBP");
   IStubElementType CLASS_ACCESSOR_METHOD = new PerlLightSubDefinitionElementType("CLASS_ACCESSOR_METHOD");

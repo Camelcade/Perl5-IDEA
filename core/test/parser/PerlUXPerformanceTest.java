@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,9 +35,7 @@ import org.junit.experimental.categories.Category;
 
 import java.util.Collections;
 
-/**
- * Created by hurricup on 07.10.2016.
- */
+
 @Category(Performance.class)
 public class PerlUXPerformanceTest extends PerlLightTestCase {
   public void testEnterTyping() {

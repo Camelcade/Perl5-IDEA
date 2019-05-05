@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,9 +19,7 @@ package com.perl5.lang.mason2;
 import com.intellij.lang.Language;
 import com.perl5.lang.perl.PerlLanguage;
 
-/**
- * Created by hurricup on 20.12.2015.
- */
+
 public class Mason2Language extends Language {
   public static final Mason2Language INSTANCE = new Mason2Language();
 

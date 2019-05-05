@@ -36,9 +36,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * Created by hurricup on 29.05.2015.
- */
+
 public class PerlRenameNamespaceDefinitionProcessor extends PerlRenamePolyReferencedElementProcessor {
   @Override
   public boolean canProcessElement(@NotNull PsiElement element) {

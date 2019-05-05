@@ -31,9 +31,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by hurricup on 10.04.2016.
- */
+
 public class PodLinkToSectionReference extends PerlCachingReference<PodFormatterL> {
   public PodLinkToSectionReference(PodFormatterL element, TextRange range) {
     super(element, range);

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,9 +26,7 @@ import com.perl5.lang.tt2.lexer.TemplateToolkitSyntaxElements;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * Created by hurricup on 12.06.2016.
- */
+
 public class TemplateToolkitPsiUtil {
   @Nullable
   public static PsiElement getPrevSignificantSibling(PsiElement element) {

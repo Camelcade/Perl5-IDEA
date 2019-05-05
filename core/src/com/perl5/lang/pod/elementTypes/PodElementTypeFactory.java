@@ -27,9 +27,7 @@ import com.perl5.lang.pod.parser.psi.stubs.PodSectionStub;
 import com.perl5.lang.pod.psi.impl.*;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 26.03.2016.
- */
+
 public class PodElementTypeFactory {
   private static final Logger LOG = Logger.getInstance(PodElementTypeFactory.class);
   public static IElementType getTokenType(String debugName) {

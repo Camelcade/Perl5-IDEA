@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,9 +19,7 @@ package com.perl5.lang.htmlmason.parser.psi;
 import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
 
-/**
- * Created by hurricup on 20.03.2016.
- */
+
 public interface HTMLMasonFile
   extends HTMLMasonElementTypes, PerlImplicitVariablesProvider, HTMLMasonArgsContainer, HTMLMasonParametrizedEntity {
 }

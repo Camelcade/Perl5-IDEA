@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,9 +23,7 @@ import com.intellij.psi.scope.PsiScopeProcessor;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 13.03.2016.
- */
+
 public class HTMLMasonCompositeElementImpl extends PerlCompositeElementImpl {
   public HTMLMasonCompositeElementImpl(@NotNull ASTNode node) {
     super(node);

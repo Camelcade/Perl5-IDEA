@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,9 +23,7 @@ import com.perl5.lang.perl.idea.formatter.PerlFormattingContext;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlFormattingBlock;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 08.03.2016.
- */
+
 public class HTMLMasonFormattingBlock extends PerlFormattingBlock implements HTMLMasonElementTypes, HTMLMasonElementPatterns {
   public HTMLMasonFormattingBlock(@NotNull ASTNode node, @NotNull PerlFormattingContext context
   ) {

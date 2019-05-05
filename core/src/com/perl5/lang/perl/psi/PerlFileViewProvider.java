@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,9 +38,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created by hurricup on 30.03.2016.
- */
+
 public class PerlFileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvider
   implements TemplateLanguageFileViewProvider, PerlElementTypes {
   private static final Set<Language> myLanguages = new THashSet<>(Arrays.asList(

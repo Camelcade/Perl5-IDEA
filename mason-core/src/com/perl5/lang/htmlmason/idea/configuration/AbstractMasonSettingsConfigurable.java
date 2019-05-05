@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,9 +38,7 @@ import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableModel;
 import java.util.regex.Pattern;
 
-/**
- * Created by hurricup on 05.03.2016.
- */
+
 public abstract class AbstractMasonSettingsConfigurable implements Configurable {
   protected static final Pattern VARIABLE_CHECK_PATTERN = Pattern.compile(
     "[$@%]" + PerlParserUtil.IDENTIFIER_PATTERN

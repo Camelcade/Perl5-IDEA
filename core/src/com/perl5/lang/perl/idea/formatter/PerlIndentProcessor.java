@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,9 +45,7 @@ import static com.perl5.lang.perl.idea.formatter.PerlFormattingContext.BLOCK_OPE
 import static com.perl5.lang.perl.lexer.PerlTokenSets.HEREDOC_BODIES_TOKENSET;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.VARIABLE_DECLARATIONS;
 
-/**
- * Created by hurricup on 03.09.2015.
- */
+
 public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementTypes {
   public static final PerlIndentProcessor INSTANCE = new PerlIndentProcessor();
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,9 +19,7 @@ package resolve;
 import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings;
 import com.perl5.lang.mason2.idea.configuration.VariableDescription;
 
-/**
- * Created by hurricup on 13.03.2016.
- */
+
 public class HTMLMasonArgsDefVariablesResolveTest extends HTMLMasonBlockVariablesResolveTestCase {
   protected String getTestDataPath() {
     return "testData/resolve/args_def";

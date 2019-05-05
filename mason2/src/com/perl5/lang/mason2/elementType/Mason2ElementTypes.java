@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,9 +29,7 @@ import com.perl5.lang.perl.psi.stubs.PerlFileElementType;
 import com.perl5.lang.pod.elementTypes.PodTemplatingElementType;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 21.12.2015.
- */
+
 public interface Mason2ElementTypes extends Mason2SyntaxElements {
   IElementType MASON_TEMPLATE_BLOCK_HTML = new MasonTemplatingTokenType("MASON_TEMPLATE_BLOCK_HTML");
   IElementType MASON_OUTER_ELEMENT_TYPE = new MasonTemplatingTokenType("MASON_OUTER_ELEMENT_TYPE");

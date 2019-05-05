@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,9 +19,7 @@ package com.perl5.lang.perl.idea.run.debugger.protocol;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 
-/**
- * Created by hurricup on 11.05.2016.
- */
+
 public abstract class PerlDebuggingTransactionHandler {
   public abstract void run(JsonObject eventObject, JsonDeserializationContext jsonDeserializationContext);
 }

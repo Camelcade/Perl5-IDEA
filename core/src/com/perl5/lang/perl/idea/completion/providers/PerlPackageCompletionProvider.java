@@ -27,9 +27,7 @@ import com.perl5.lang.perl.idea.completion.PerlInsertHandlers;
 import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionUtil;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 03.03.2016.
- */
+
 public class PerlPackageCompletionProvider extends CompletionProvider<CompletionParameters> implements PerlElementPatterns {
   @Override
   protected void addCompletions(@NotNull CompletionParameters parameters,

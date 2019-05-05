@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,9 +27,7 @@ import com.perl5.lang.mason2.psi.impl.MasonTemplatingFileImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * Created by hurricup on 07.07.2016.
- */
+
 public class MasonLiveTemplatesProcessor extends AbstractMasonLiveTemplateProcessor {
   @Override
   protected boolean isMyFile(PsiFile file) {

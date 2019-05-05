@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,9 +29,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.regex.Pattern;
 
-/**
- * Created by hurricup on 04.09.2015.
- */
+
 public class PerlIndentionSuppresor implements TemplateOptionalProcessor {
   // pattern for getting marker
   public static final Pattern HEREDOC_OPENER_PATTERN = Pattern.compile("<<(.+?)");

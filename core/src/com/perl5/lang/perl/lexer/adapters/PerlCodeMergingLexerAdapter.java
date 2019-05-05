@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,7 +31,6 @@ import org.jetbrains.annotations.Nullable;
 import java.io.IOException;
 
 /**
- * Created by hurricup on 16.10.2016.
  * First level adapter, working above Flex lexer. Merges code blocks into LP_CODE_BLOCK tokens
  * fixme would be better to use lookahead adapter here; currently small code blocks may be lexed twice
  */

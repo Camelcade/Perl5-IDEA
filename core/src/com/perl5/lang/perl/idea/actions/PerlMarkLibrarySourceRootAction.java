@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,9 +18,7 @@ package com.perl5.lang.perl.idea.actions;
 
 import com.perl5.lang.perl.idea.modules.PerlLibrarySourceRootType;
 
-/**
- * Created by hurricup on 29.08.2015.
- */
+
 public class PerlMarkLibrarySourceRootAction extends PerlMarkSourceRootAction {
   public PerlMarkLibrarySourceRootAction() {
     super(PerlLibrarySourceRootType.INSTANCE);

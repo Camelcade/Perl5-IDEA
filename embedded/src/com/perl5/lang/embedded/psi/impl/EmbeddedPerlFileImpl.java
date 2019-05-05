@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,9 +23,7 @@ import com.perl5.lang.embedded.filetypes.EmbeddedPerlFileType;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 18.05.2015.
- */
+
 public class EmbeddedPerlFileImpl extends PerlFileImpl {
   public EmbeddedPerlFileImpl(@NotNull FileViewProvider viewProvider) {
     super(viewProvider, EmbeddedPerlLanguage.INSTANCE);

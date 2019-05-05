@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,9 +36,7 @@ import com.perl5.lang.perl.psi.properties.PerlLoop;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by ELI-HOME on 01-Jun-15.
- */
+
 public abstract class PerlTemplateContextType extends TemplateContextType {
   protected PerlTemplateContextType(@NotNull String id,
                                     @NotNull String presentableName,

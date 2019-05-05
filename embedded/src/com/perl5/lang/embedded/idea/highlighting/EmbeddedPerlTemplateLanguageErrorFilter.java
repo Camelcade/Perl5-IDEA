@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,9 +22,7 @@ import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes;
 import com.perl5.lang.embedded.psi.EmbeddedPerlFileViewProvider;
 
-/**
- * Created by hurricup on 16.03.2016.
- */
+
 public class EmbeddedPerlTemplateLanguageErrorFilter extends TemplateLanguageErrorFilter implements EmbeddedPerlElementTypes {
   private static final TokenSet START_TOKENS = TokenSet.create(
     EMBED_MARKER_OPEN,

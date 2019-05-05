@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,9 +21,7 @@ import com.intellij.psi.LiteralTextEscaper;
 import com.perl5.lang.perl.psi.mixins.Perl5RegexpMixin;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 30.11.2016.
- */
+
 public class Perl5RegexpLiteralEscaper extends LiteralTextEscaper<Perl5RegexpMixin> {
   public Perl5RegexpLiteralEscaper(@NotNull Perl5RegexpMixin host) {
     super(host);

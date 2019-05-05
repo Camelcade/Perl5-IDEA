@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,9 +27,7 @@ import com.perl5.lang.pod.parser.psi.PodVisitor;
 import com.perl5.lang.pod.psi.PsiItemSection;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 10.04.2016.
- */
+
 public class PodOverlessItemInspection extends LocalInspectionTool {
   @NotNull
   @Override

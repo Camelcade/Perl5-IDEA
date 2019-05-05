@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,7 @@
 
 package com.perl5.lang.perl.idea;
 
-/**
- * Created by hurricup on 02.06.2016.
- */
+
 public interface PerlPathMacros {
   String PERL5_APP_SETTINGS_FILE = "perl5.xml";
 

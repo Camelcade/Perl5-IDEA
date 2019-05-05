@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,9 +19,7 @@ package com.perl5.lang.mason2.idea.livetemplates;
 import com.intellij.codeInsight.template.impl.DefaultLiveTemplatesProvider;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * Created by hurricup on 10.01.2016.
- */
+
 public class MasonLivetemplatesProvider implements DefaultLiveTemplatesProvider {
   public static final String[] TEMPLATES = new String[]{
     "/liveTemplates/Perl5Mason2"

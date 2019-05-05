@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,9 +21,7 @@ import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * Created by hurricup on 07.06.2015.
- */
+
 public interface PerlDerefExpression extends PsiPerlExpr, PerlValuableEntity {
   /**
    * @return previous meaningful element of dereference chain. Returns null if this is a first element

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,9 +22,7 @@ import com.perl5.lang.embedded.EmbeddedPerlLanguage;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.pod.elementTypes.PodTemplatingElementType;
 
-/**
- * Created by hurricup on 19.05.2015.
- */
+
 public interface EmbeddedPerlElementTypes extends PerlElementTypes {
   IElementType EMBED_TEMPLATE_BLOCK_HTML = new EmbeddedPerlTokenType("EMBED_TEMPLATE_BLOCK_HTML");
   IElementType EMBED_OUTER_ELEMENT_TYPE = new EmbeddedPerlTokenType("EMBED_OUTER_ELEMENT_TYPE");

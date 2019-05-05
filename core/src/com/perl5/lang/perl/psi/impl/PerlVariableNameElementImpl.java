@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,9 +22,7 @@ import com.perl5.lang.perl.psi.PerlVariableNameElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 25.05.2015.
- */
+
 public class PerlVariableNameElementImpl extends PerlLeafPsiElementWithReferences implements PerlVariableNameElement {
   public PerlVariableNameElementImpl(@NotNull IElementType type, CharSequence text) {
     super(type, text);

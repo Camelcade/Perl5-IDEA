@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,9 +19,7 @@ package parser;
 import com.perl5.lang.mojolicious.MojoliciousParserDefinition;
 import com.perl5.lang.mojolicious.filetypes.MojoliciousFileType;
 
-/**
- * Created by hurricup on 04.03.2016.
- */
+
 public class MojoliciousParserTest extends MojoliciousParserTestBase {
   public MojoliciousParserTest() {
     super("", MojoliciousFileType.MOJO_DEFAULT_EXTENSION, new MojoliciousParserDefinition());

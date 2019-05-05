@@ -37,9 +37,7 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 import java.util.List;
 
-/**
- * Created by hurricup on 17.01.2016.
- */
+
 public class PerlImplicitVariableDeclaration extends PerlImplicitElement
   implements PerlVariable, PerlVariableNameElement, PerlVariableDeclarationElement {
   protected final PerlVariableType myVariableType;

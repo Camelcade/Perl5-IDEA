@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,9 +20,7 @@ import com.intellij.openapi.util.Comparing;
 import com.perl5.lang.perl.psi.PerlVariable;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * Created by hurricup on 08.08.2016.
- */
+
 public class PerlVariableUtil {
   /**
    * Compares two variables by actual type, packageName and name. They can be from different declarations

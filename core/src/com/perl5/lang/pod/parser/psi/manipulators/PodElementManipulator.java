@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,8 +19,6 @@ package com.perl5.lang.pod.parser.psi.manipulators;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.idea.manipulators.PerlTextContainerManipulator;
 
-/**
- * Created by hurricup on 10.04.2016.
- */
+
 public class PodElementManipulator extends PerlTextContainerManipulator<PsiElement> {
 }

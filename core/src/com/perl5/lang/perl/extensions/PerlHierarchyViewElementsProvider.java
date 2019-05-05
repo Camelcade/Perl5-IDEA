@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Created by hurricup on 23.01.2016.
  * Implement this interface to declarations, which provides their own TreeView elements
  * Useful for multi-declarations, like best practice Class::Accessor accessors/mutators
  */

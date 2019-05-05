@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,9 +24,7 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
-/**
- * Created by hurricup on 26.05.2015.
- */
+
 public class PerlFileTypeTest extends PurePerlFileType {
   public static final FileType INSTANCE = new PerlFileTypeTest();
   public static final String EXTENSION = "t";

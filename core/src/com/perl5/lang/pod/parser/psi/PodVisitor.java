@@ -21,9 +21,7 @@ import com.intellij.psi.PsiElement;
 import com.perl5.lang.pod.psi.*;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 27.03.2016.
- */
+
 public class PodVisitor extends PsiPodVisitorGenerated {
   @Override
   public void visitElement(@NotNull PsiElement o) {

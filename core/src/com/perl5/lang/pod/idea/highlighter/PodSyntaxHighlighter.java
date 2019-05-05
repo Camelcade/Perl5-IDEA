@@ -35,9 +35,7 @@ import java.util.Map;
 import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributesKey;
 import static com.perl5.lang.pod.lexer.PodElementTypesGenerated.*;
 
-/**
- * Created by hurricup on 21.04.2015.
- */
+
 public class PodSyntaxHighlighter extends SyntaxHighlighterBase {
   public static final TextAttributesKey POD_TAG_KEY = createTextAttributesKey("POD_TAG", DefaultLanguageHighlighterColors.DOC_COMMENT_TAG);
   public static final TextAttributesKey POD_FORMATTER_TAG_KEY =

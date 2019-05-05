@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,9 +39,7 @@ import javax.swing.*;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.SUB_NAME;
 
-/**
- * Created by hurricup on 05.06.2015.
- */
+
 public abstract class PerlSubBase<Stub extends PerlSubStub> extends PerlStubBasedPsiElementBase<Stub>
   implements PerlSubElement,
              StubBasedPsiElement<Stub>,

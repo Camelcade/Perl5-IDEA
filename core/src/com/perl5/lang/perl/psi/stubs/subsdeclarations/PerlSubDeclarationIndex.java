@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,9 +26,7 @@ import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
 import com.perl5.lang.perl.psi.stubs.PerlStubIndexBase;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 05.06.2015.
- */
+
 public class PerlSubDeclarationIndex extends PerlStubIndexBase<PerlSubDeclarationElement> {
   public static final int VERSION = 6;
   public static final StubIndexKey<String, PerlSubDeclarationElement> KEY = StubIndexKey.createIndexKey("perl.sub.declaration");

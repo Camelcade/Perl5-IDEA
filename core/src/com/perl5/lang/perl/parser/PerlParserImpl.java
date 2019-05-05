@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,9 +25,7 @@ import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 28.12.2015.
- */
+
 public class PerlParserImpl extends PerlParserGenerated implements PerlParser {
   public static final PsiParser INSTANCE = new PerlParserImpl();
 

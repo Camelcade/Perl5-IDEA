@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,7 +32,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Collection;
 
 /**
- * Created by hurricup on 07.04.2016.
  * fixme shouldn't we extend PerlVariableInplaceRenamer?
  */
 public class PerlMemberInplaceRenamer extends MemberInplaceRenamer {

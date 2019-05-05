@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,9 +34,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * Created by hurricup on 06.03.2016.
- */
+
 public class HTMLMasonFoldingBuilder extends AbstractMasonFoldingBuilder implements HTMLMasonElementTypes {
   protected static final TokenSet COMMENT_EXCLUDED_TOKENS = TokenSet.orSet(
     PerlFoldingBuilder.COMMENT_EXCLUDED_TOKENS,

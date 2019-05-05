@@ -45,9 +45,7 @@ import org.jetbrains.annotations.Nullable;
 
 import static com.perl5.lang.pod.lexer.PodTokenSets.FORMAT_ACCEPTING_COMMANDS;
 
-/**
- * Created by hurricup on 14.04.2016.
- */
+
 public class PodTypedHandler extends PerlTypedHandlerDelegate implements PodElementTypes {
   private static final String POD_COMMANDS = "IBCLEFSXZ";
   private static final TokenSet POD_COMMANDS_TOKENSET = TokenSet.create(

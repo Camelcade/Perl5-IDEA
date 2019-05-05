@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,9 +19,7 @@ package com.perl5.lang.htmlmason.idea.configuration;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
 
-/**
- * Created by hurricup on 11.03.2016.
- */
+
 public enum HTMLMasonCustomTagRole implements HTMLMasonElementTypes {
   PERL("as <%perl>", true, HTML_MASON_PERL_OPENER, HTML_MASON_PERL_CLOSER),
   METHOD("as <%method>", false, HTML_MASON_METHOD_OPENER, HTML_MASON_METHOD_CLOSER),

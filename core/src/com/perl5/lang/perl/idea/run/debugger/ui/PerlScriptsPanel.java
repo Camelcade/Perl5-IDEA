@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,9 +45,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-/**
- * Created by hurricup on 14.05.2016.
- */
+
 public class PerlScriptsPanel extends JPanel {
   private static final Comparator<PerlLoadedFileDescriptor> compareEntries =
     (o1, o2) -> StringUtil.compare(o1.getPresentableName(), o2.getPresentableName(), false);

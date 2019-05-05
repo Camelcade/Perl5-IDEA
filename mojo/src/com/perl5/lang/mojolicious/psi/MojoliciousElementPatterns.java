@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,9 +21,7 @@ import com.perl5.lang.mojolicious.MojoliciousElementTypes;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 
-/**
- * Created by hurricup on 23.04.2016.
- */
+
 public interface MojoliciousElementPatterns extends MojoliciousElementTypes, PerlElementPatterns {
   PsiElementPattern.Capture<PerlSubNameElement> MOJO_HELPER_USAGE =
     SUB_NAME_PATTERN.and(IN_STATIC_METHOD_PATTERN).and(com.perl5.lang.mojolicious.MojoliciousElementPatterns.IN_MOJOLICIOUS_FILE);

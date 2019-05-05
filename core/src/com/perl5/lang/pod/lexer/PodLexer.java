@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,9 +25,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.io.Reader;
 
-/**
- * Created by hurricup on 22.03.2016.
- */
+
 @SuppressWarnings("ALL")
 public class PodLexer extends PodLexerGenerated {
   private static final Logger LOG = Logger.getInstance(PodLexer.class);

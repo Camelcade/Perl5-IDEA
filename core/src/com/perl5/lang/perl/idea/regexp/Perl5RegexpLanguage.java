@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,9 +19,7 @@ package com.perl5.lang.perl.idea.regexp;
 import com.intellij.lang.Language;
 import org.intellij.lang.regexp.RegExpLanguage;
 
-/**
- * Created by hurricup on 30.11.2016.
- */
+
 public class Perl5RegexpLanguage extends Language {
   public static final Perl5RegexpLanguage INSTANCE = new Perl5RegexpLanguage();
 

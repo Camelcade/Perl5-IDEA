@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,9 +21,7 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.perl.psi.PerlNoStatement;
 import com.perl5.lang.perl.psi.stubs.imports.PerlUseStatementStub;
 
-/**
- * Created by hurricup on 26.01.2016.
- */
+
 public abstract class PerlNoStatementMixin extends PerlUseStatementMixin implements PerlNoStatement {
   public PerlNoStatementMixin(ASTNode node) {
     super(node);

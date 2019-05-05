@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,9 +47,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
-/**
- * Created by hurricup on 15.08.2015.
- */
+
 public abstract class PerlStructureViewElement extends PsiTreeElementBase<PsiElement> implements SortableTreeElement {
   protected boolean myIsInherited;
   @Nullable

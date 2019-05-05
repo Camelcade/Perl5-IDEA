@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,9 +26,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created by hurricup on 08.08.2015.
- */
+
 public class PerlMroC3 extends PerlMro {
   public static final PerlMro INSTANCE = new PerlMroC3();
 

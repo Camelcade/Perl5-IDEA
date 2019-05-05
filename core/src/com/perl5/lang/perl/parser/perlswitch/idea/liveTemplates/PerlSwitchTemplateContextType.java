@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,9 +21,7 @@ import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType;
 import com.perl5.lang.perl.parser.perlswitch.PerlSwitchElementPatterns;
 
-/**
- * Created by hurricup on 15.01.2016.
- */
+
 public class PerlSwitchTemplateContextType extends PerlTemplateContextType.Prefix {
   public PerlSwitchTemplateContextType() {
     super("PERL5_INSIDE_SWITCH", PerlBundle.message("perl.template.context.switch"));

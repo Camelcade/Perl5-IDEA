@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,9 +21,7 @@ import gnu.trove.THashMap;
 
 import java.util.Map;
 
-/**
- * Created by hurricup on 03.06.2015.
- */
+
 public class PerlAnnotations implements PerlElementTypes {
   public static final Map<String, IElementType> TOKENS_MAP = new THashMap<>();
 

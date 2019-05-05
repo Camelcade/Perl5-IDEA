@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,9 +42,7 @@ import java.util.concurrent.TimeUnit;
 
 import static com.perl5.lang.perl.util.PerlPluginUtil.getPlugin;
 
-/**
- * Created by hurricup on 23.11.2016.
- */
+
 public class PerlUpdateComponent implements BaseComponent, Disposable {
   private static final String KEY = "perl.last.update.timestamp";
 

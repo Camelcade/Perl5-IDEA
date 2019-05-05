@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,9 +18,7 @@ package formatter;
 
 import base.TemplateToolkitLightTestCase;
 
-/**
- * Created by hurricup on 11.07.2016.
- */
+
 public class TemplateToolkitFormatterTest extends TemplateToolkitLightTestCase {
   TemplateToolkitTestSettings myTestSettings;
 

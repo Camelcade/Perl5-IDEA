@@ -23,9 +23,7 @@ import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * Created by hurricup on 22.01.2016.
- */
+
 public class PerlMooseKeywordElementImpl extends PerlSubNameElementImpl implements PerlMooseKeywordElement {
   public PerlMooseKeywordElementImpl(@NotNull IElementType type, CharSequence text) {
     super(type, text);

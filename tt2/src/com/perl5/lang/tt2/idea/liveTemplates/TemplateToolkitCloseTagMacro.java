@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,9 +23,7 @@ import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.tt2.idea.settings.TemplateToolkitSettings;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * Created by hurricup on 13.06.2016.
- */
+
 public class TemplateToolkitCloseTagMacro extends TemplateToolkitOpenTagMacro {
   @Override
   public String getName() {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,9 +23,7 @@ import com.perl5.lang.perl.psi.impl.PerlSubNameElementImpl;
 import com.perl5.lang.perl.psi.references.PerlSubReferenceSuper;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 28.01.2016.
- */
+
 public class MasonMethodModifierNameImpl extends PerlSubNameElementImpl implements MasonMethodModifierName {
   public MasonMethodModifierNameImpl(@NotNull IElementType type, CharSequence text) {
     super(type, text);

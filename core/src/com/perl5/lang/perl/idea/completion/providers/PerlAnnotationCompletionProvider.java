@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,9 +29,7 @@ import java.util.HashSet;
 
 import static com.perl5.lang.perl.lexer.PerlAnnotations.TOKENS_MAP;
 
-/**
- * Created by hurricup on 03.06.2015.
- */
+
 public class PerlAnnotationCompletionProvider extends CompletionProvider<CompletionParameters> {
   public static final HashSet<LookupElementBuilder> ANNOTATIONS_LOOKUP_ELEMENTS = new HashSet<>();
 

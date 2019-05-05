@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,9 +22,7 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTemplatingLexer;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * Created by hurricup on 28.10.2016.
- */
+
 public abstract class Mason2TemplatingLexerBase extends PerlTemplatingLexer implements Mason2ElementTypes, PerlElementTypes {
   private final CommentEndCalculator COMMENT_END_CALCULATOR = commentText ->
   {

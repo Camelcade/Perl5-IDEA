@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,9 +23,7 @@ import com.perl5.lang.perl.parser.moose.MooseElementTypes;
 import static com.perl5.lang.perl.parser.MooseParserExtension.MOOSE_RESERVED_TOKENSET;
 import static com.perl5.lang.perl.parser.PerlParserUtil.CLOSE_QUOTES;
 
-/**
- * Created by hurricup on 23.10.2016.
- */
+
 public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
   /**
    * Quote openers with three or four quotes

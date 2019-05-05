@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,9 +29,7 @@ import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.parser.MojoliciousParser;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 21.07.2015.
- */
+
 public class MojoliciousParserDefinition extends PerlParserDefinition implements MojoliciousElementTypes {
   public static final TokenSet COMMENTS = TokenSet.orSet(PerlParserDefinition.COMMENTS,
                                                          TokenSet.create(

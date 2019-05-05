@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,9 +19,7 @@ package unit.perl;
 import com.perl5.lang.perl.internals.PerlVersion;
 import junit.framework.TestCase;
 
-/**
- * Created by hurricup on 07.09.2015.
- */
+
 public class PerlVersionUnitTest extends TestCase {
   public void testComparable() {
     PerlVersion version510 = new PerlVersion("v5.10");

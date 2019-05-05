@@ -32,9 +32,7 @@ import com.perl5.lang.perl.psi.PsiPerlHashIndex;
 import com.perl5.lang.perl.util.PerlInjectionUtil;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 24.01.2016.
- */
+
 public class PerlStringContentCompletionProvider extends CompletionProvider<CompletionParameters> implements PerlElementPatterns {
   @Override
   protected void addCompletions(@NotNull CompletionParameters parameters,

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,9 +23,7 @@ import com.intellij.openapi.project.Project;
 import com.perl5.PerlIcons;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 09.05.2016.
- */
+
 public class PerlRemoteDebuggingConfigurationType extends ConfigurationTypeBase {
   public PerlRemoteDebuggingConfigurationType() {
     super("#PerlRemoteDebuggingConfigurationType", "Perl Remote Debugging", "", PerlIcons.PERL_LANGUAGE_ICON);

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,9 +24,7 @@ import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
 import com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 08.03.2016.
- */
+
 public class HTMLMasonTemplateContextType extends TemplateContextType implements HTMLMasonElementPatterns {
   public HTMLMasonTemplateContextType() {
     super("PERL5_HTML_MASON", "&HTML::Mason template", PerlTemplateContextType.Generic.class);

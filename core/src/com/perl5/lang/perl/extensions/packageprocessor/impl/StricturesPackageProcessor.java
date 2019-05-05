@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,9 +20,7 @@ import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessorBase;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlStrictProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlWarningsProvider;
 
-/**
- * Created by hurricup on 23.06.2016.
- */
+
 public class StricturesPackageProcessor extends PerlPackageProcessorBase implements
                                                                          PerlWarningsProvider,
                                                                          PerlStrictProvider {

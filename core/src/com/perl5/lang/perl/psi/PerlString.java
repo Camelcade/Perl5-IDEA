@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,9 +34,7 @@ import java.util.regex.Pattern;
 
 import static com.perl5.lang.perl.parser.PerlParserUtil.AMBIGUOUS_PACKAGE_PATTERN;
 
-/**
- * Created by hurricup on 08.08.2015.
- */
+
 public interface PerlString extends PerlQuoted, PerlValuableEntity  {
   String FILE_PATH_PATTERN_TEXT = "\\.?[\\p{L}\\d\\-_]+(?:\\.[\\p{L}\\d\\-_]*)*";
   String FILE_PATH_DELIMITER_PATTERN_TEXT = "(?:\\\\+|/+)";

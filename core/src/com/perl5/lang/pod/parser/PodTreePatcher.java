@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,9 +24,7 @@ import com.intellij.psi.templateLanguages.SimpleTreePatcher;
 import com.perl5.lang.pod.lexer.PodElementTypes;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 30.03.2016.
- */
+
 public class PodTreePatcher extends SimpleTreePatcher implements PodElementTypes {
   @Override
   public void insert(@NotNull CompositeElement parent, TreeElement anchorBefore, @NotNull OuterLanguageElement toInsert) {

@@ -23,9 +23,7 @@ import com.perl5.lang.pod.parser.psi.PodSectionItemTitle;
 import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 26.03.2016.
- */
+
 public class PodSectionItemTitleMixin extends PodCompositeElementMixin implements PodSectionItemTitle {
   public PodSectionItemTitleMixin(@NotNull ASTNode node) {
     super(node);

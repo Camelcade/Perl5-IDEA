@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,9 +19,7 @@ package com.perl5.lang.perl.parser.moose.stubs.augment;
 import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseAugmentStatement;
 
-/**
- * Created by hurricup on 25.01.2016.
- */
+
 public interface PerlMooseAugmentStatementStub extends StubElement<PerlMooseAugmentStatement> {
   /**
    * Returns augmented method name

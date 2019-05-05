@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,9 +20,7 @@ import gnu.trove.THashMap;
 
 import java.util.Map;
 
-/**
- * Created by hurricup on 18.05.2016.
- */
+
 public class PerlDebugOptionsSets {
   public static final Map<String, String> STARTUP_OPTIONS = new THashMap<>();
   public static final Map<String, String> ROLE_OPTIONS = new THashMap<>();

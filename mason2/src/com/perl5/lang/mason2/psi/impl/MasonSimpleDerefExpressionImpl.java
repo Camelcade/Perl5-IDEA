@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,9 +19,7 @@ package com.perl5.lang.mason2.psi.impl;
 import com.intellij.lang.ASTNode;
 import com.perl5.lang.perl.psi.impl.PsiPerlDerefExprImpl;
 
-/**
- * Created by hurricup on 08.01.2016.
- */
+
 public class MasonSimpleDerefExpressionImpl extends PsiPerlDerefExprImpl {
   public MasonSimpleDerefExpressionImpl(ASTNode node) {
     super(node);

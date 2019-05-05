@@ -19,9 +19,7 @@ package com.perl5.lang.perl.psi;
 import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 31.05.2015.
- */
+
 public interface PerlSubNameElement extends PsiElement {
   /**
    * Trying to get the namespace name from explicit specification or by traversing

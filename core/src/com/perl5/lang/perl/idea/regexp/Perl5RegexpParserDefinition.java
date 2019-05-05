@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,9 +29,7 @@ import java.util.EnumSet;
 
 import static org.intellij.lang.regexp.RegExpCapability.POSIX_BRACKET_EXPRESSIONS;
 
-/**
- * Created by hurricup on 30.11.2016.
- */
+
 public class Perl5RegexpParserDefinition extends RegExpParserDefinition {
   private static final IFileElementType PERL5_REGEXP_FILE = new IFileElementType("PERL5_REGEXP_FILE", Perl5RegexpLanguage.INSTANCE);
   private final EnumSet<RegExpCapability> CAPABILITIES = EnumSet.of(

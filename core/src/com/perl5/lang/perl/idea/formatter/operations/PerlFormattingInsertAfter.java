@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,9 +19,7 @@ package com.perl5.lang.perl.idea.formatter.operations;
 import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 15.11.2015.
- */
+
 public class PerlFormattingInsertAfter implements PerlFormattingOperation {
   private final PsiElement myAnchor;
   private final PsiElement myFromElement;

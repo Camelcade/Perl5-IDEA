@@ -46,9 +46,7 @@ import java.util.regex.Pattern;
 
 import static com.perl5.lang.perl.lexer.PerlLexer.*;
 
-/**
- * Created by hurricup on 10.08.2015.
- */
+
 public abstract class PerlBaseLexer extends PerlProtoLexer
   implements PerlElementTypes,
              PerlSwitchElementTypes,

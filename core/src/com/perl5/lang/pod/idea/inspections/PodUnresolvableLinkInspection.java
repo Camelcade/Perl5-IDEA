@@ -30,9 +30,7 @@ import com.perl5.lang.pod.parser.psi.references.PodLinkToSectionReference;
 import com.perl5.lang.pod.psi.PsiPodFormatLink;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 10.04.2016.
- */
+
 public class PodUnresolvableLinkInspection extends LocalInspectionTool {
   @NotNull
   @Override

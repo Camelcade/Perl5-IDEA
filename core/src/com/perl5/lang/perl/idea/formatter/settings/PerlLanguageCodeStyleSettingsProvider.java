@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,9 +34,7 @@ import static com.intellij.psi.codeStyle.LanguageCodeStyleSettingsProvider.Setti
 import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.BRACE_PLACEMENT_OPTIONS;
 import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.*;
 
-/**
- * Created by hurricup on 03.09.2015.
- */
+
 public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSettingsProvider {
   private static final String GROUP_QW = PerlBundle.message("perl.qw.list");
   private static final String GROUP_QUOTATION = PerlBundle.message("perl.formatting.group.optional.quotation");

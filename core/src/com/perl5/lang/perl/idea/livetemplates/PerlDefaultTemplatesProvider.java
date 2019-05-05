@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,6 @@ import com.intellij.codeInsight.template.impl.DefaultLiveTemplatesProvider;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by ELI-HOME on 01-Jun-15.
  * makes sure the file liveTemplates/perl.xml will be added to the live templates list
  */
 public class PerlDefaultTemplatesProvider implements DefaultLiveTemplatesProvider {

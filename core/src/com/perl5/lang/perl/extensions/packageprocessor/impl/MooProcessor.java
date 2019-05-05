@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,9 +19,7 @@ package com.perl5.lang.perl.extensions.packageprocessor.impl;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by hurricup on 25.11.2015.
- */
+
 public class MooProcessor extends MooseProcessor {
   public static final String MOO_OBJECT = "Moo::Object";
   protected static final List<String> LOADED_CLASSES = Collections.singletonList(MOO_OBJECT);

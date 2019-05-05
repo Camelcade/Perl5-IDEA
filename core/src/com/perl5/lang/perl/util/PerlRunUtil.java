@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -71,9 +71,7 @@ import java.io.File;
 import java.util.*;
 import java.util.stream.Stream;
 
-/**
- * Created by hurricup on 26.04.2016.
- */
+
 public class PerlRunUtil {
   public static final String PERL_I = "-I";
   public static final String PERL_LE = "-le";

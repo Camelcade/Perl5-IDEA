@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,9 +24,7 @@ import com.perl5.lang.perl.parser.moose.psi.PerlMoosePsiUtil;
 import com.perl5.lang.perl.psi.impl.PsiPerlStatementImpl;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * Created by hurricup on 26.11.2015.
- */
+
 public class PerlMooseMethodModifierImpl extends PsiPerlStatementImpl implements PerlMooseMethodModifier {
   public PerlMooseMethodModifierImpl(ASTNode node) {
     super(node);

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,6 @@ import com.perl5.lang.perl.psi.stubs.PerlStubIndexBase;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 10.03.2016.
  * Index used to handle parent-to-child hierarchy resolution
  */
 public class HTMLMasonFlagsStubIndex extends PerlStubIndexBase<HTMLMasonFlagsStatement> {

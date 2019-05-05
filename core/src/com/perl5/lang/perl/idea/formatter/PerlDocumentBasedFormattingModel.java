@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,9 +33,7 @@ import org.jetbrains.annotations.NotNull;
 
 import static com.perl5.lang.perl.lexer.PerlTokenSets.HEREDOC_BODIES_TOKENSET;
 
-/**
- * Created by hurricup on 22.05.2017.
- */
+
 public class PerlDocumentBasedFormattingModel extends DocumentBasedFormattingModel implements
                                                                                    FormattingModelWithShiftIndentInsideDocumentRange {
   private final CommonCodeStyleSettings.IndentOptions myIndentOptions;

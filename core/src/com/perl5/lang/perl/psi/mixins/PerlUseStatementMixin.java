@@ -32,9 +32,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by hurricup on 31.05.2015.
- */
+
 public abstract class PerlUseStatementMixin extends PerlStubBasedPsiElementBase<PerlUseStatementStub> implements PsiPerlUseStatement {
   public PerlUseStatementMixin(ASTNode node) {
     super(node);

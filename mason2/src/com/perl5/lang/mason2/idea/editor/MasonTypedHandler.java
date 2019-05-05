@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,9 +32,7 @@ import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 07.01.2016.
- */
+
 public class MasonTypedHandler extends TypedHandlerDelegate implements Mason2ElementTypes, XmlTokenType, PerlElementTypes {
   private static final THashMap<String, String> SIMPLE_COMPLETION_MAP = new THashMap<>();
 

@@ -19,9 +19,7 @@ package com.perl5.lang.pod.idea.livetemplates;
 import com.intellij.codeInsight.template.impl.DefaultLiveTemplatesProvider;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * Created by hurricup on 04.04.2016.
- */
+
 public class PodDefaultLiveTemplatesProvider implements DefaultLiveTemplatesProvider {
   static final String POD_GROUP = "Perl5: POD";
 

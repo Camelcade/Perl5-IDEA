@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,9 +24,7 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * Created by hurricup on 15.12.2015.
- */
+
 public class PerlSwitchParserExtensionImpl extends PerlParserExtension implements PerlSwitchParserExtension, PerlElementTypes {
   protected static final TokenSet BARE_REGEX_PREFIX_TOKEN_SET = TokenSet.create(
     RESERVED_CASE

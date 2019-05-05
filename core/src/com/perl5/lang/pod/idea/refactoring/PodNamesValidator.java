@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,9 +20,7 @@ import com.intellij.lang.refactoring.NamesValidator;
 import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 10.04.2016.
- */
+
 public class PodNamesValidator implements NamesValidator {
   @Override
   public boolean isKeyword(@NotNull String name, Project project) {

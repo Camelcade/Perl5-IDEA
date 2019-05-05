@@ -26,7 +26,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 27.03.2016.
  * Pattern for searching through the pod documentation
  */
 public class PodDocumentPattern {

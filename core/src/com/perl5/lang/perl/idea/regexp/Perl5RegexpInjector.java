@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,9 +30,7 @@ import java.util.List;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.REGEX_TOKEN;
 
-/**
- * Created by hurricup on 30.11.2016.
- */
+
 public class Perl5RegexpInjector implements MultiHostInjector {
   private static final List<? extends Class<? extends PsiElement>> ELEMENTS_TO_INJECT =
     Collections.singletonList(PsiPerlPerlRegexImpl.class);

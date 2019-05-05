@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,9 +27,7 @@ import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * Created by hurricup on 08.05.2016.
- */
+
 public class PerlDebuggerEditorsProvider extends XDebuggerEditorsProviderBase {
   public static final PerlDebuggerEditorsProvider INSTANCE = new PerlDebuggerEditorsProvider();
 

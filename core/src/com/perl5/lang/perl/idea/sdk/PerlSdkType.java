@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -57,9 +57,7 @@ import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-/**
- * Created by ELI-HOME on 04-Jun-15.
- */
+
 public class PerlSdkType extends SdkType {
   private static final Logger LOG = Logger.getInstance(PerlSdkType.class);
   public static final String PERL_SDK_TYPE_ID = "Perl5 Interpreter";

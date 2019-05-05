@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,9 +25,7 @@ import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import java.util.Arrays;
 import java.util.HashSet;
 
-/**
- * Created by hurricup on 14.08.2015.
- */
+
 public class PerlUnusedGlobalVariableInspection extends PerlVariableInspectionBase {
   public static final HashSet<String> EXCLUSIONS = new HashSet<>(Arrays.asList(
     "@ISA",

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,9 +43,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
-/**
- * Created by hurricup on 19.04.2015.
- */
+
 public class PerlSubUtil implements PerlElementTypes {
   public static final String SUB_AUTOLOAD = "AUTOLOAD";
   public static final String SUB_DESTROY = "DESTROY";

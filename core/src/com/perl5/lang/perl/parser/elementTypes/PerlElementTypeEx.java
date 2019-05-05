@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,9 +26,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.function.Function;
 
-/**
- * Created by hurricup on 19.01.2016.
- */
+
 public class PerlElementTypeEx extends PerlElementType implements PsiElementProvider {
   private final Function<ASTNode, PsiElement> myInstanceFactory;
 

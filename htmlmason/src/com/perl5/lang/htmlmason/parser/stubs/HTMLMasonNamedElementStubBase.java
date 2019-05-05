@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,7 @@
 
 package com.perl5.lang.htmlmason.parser.stubs;
 
-/**
- * Created by hurricup on 19.03.2016.
- */
+
 public interface HTMLMasonNamedElementStubBase {
   String getName();
 }

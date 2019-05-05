@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.idea.formatter.operations;
 
 /**
- * Created by hurricup on 15.11.2015.
  * Interface represents an operation with psi tree like add/remove/wrap/unwrap
  */
 public interface PerlFormattingOperation {

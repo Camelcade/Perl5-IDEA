@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -57,9 +57,7 @@ import java.util.function.Function;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
 
-/**
- * Created by hurricup on 12.06.2015.
- */
+
 public class PerlNameSuggestionProvider implements NameSuggestionProvider {
   private static final Logger LOG = Logger.getInstance(PerlNameSuggestionProvider.class);
   private static final String EXPRESSION = "expression";

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,9 +28,7 @@ import java.util.Map;
 
 import static com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter.PERL_SUB_DEFINITION;
 
-/**
- * Created by hurricup on 23.04.2016.
- */
+
 public class MojoParserExtension extends PerlParserExtensionBase implements MojoliciousElementTypes {
   protected static final Map<String, IElementType> TOKENS_MAP = Collections.singletonMap(
     KEYWORD_MOJO_HELPER_METHOD, MOJO_HELPER_METHOD

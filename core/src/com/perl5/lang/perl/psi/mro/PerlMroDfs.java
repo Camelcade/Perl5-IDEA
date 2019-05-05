@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,6 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Created by hurricup on 15.06.2015.
  * Class represents default Perl's MRO.
  * In other words, it knows how to find sub definition and/or declaration
  */

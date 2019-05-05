@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,6 @@ import com.perl5.lang.perl.lexer.adapters.PerlMergingLexerAdapter;
 import com.perl5.lang.perl.lexer.adapters.PerlTemplatingMergingLexerAdapter;
 
 /**
- * Created by hurricup on 21.07.2015.
  * Copy-pasted FlexAdapter because of private variables and no setters
  */
 public class MojoliciousLexerAdapter extends PerlTemplatingMergingLexerAdapter implements MojoliciousElementTypes {

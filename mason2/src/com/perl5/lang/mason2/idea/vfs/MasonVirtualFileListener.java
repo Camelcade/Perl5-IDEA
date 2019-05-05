@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,9 +29,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created by hurricup on 09.01.2016.
- */
+
 public class MasonVirtualFileListener implements VirtualFileListener {
   public static final Key<Boolean> FORCE_REINDEX = new Key<>("Force re-indexing");
 

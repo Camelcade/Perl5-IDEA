@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,9 +20,7 @@ import com.intellij.openapi.fileTypes.FileTypeConsumer;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeFactoryBase;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 20.12.2015.
- */
+
 public class Mason2FileTypeFactory extends PerlFileTypeFactoryBase {
   public static final String TOP_LEVEL_COMPONENT_EXTENSION = "mc";
   public static final String INTERNAL_COMPONENT_EXTENSION = "mi";

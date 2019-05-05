@@ -31,9 +31,7 @@ import com.perl5.lang.perl.psi.PsiPerlMethod;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 24.07.2015.
- */
+
 public class PerlPackageSubCompletionProvider extends CompletionProvider<CompletionParameters> {
   private static final Logger LOG = Logger.getInstance(PerlPackageSubCompletionProvider.class);
 

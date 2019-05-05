@@ -22,9 +22,7 @@ import com.perl5.lang.perl.idea.project.PerlNamesCache;
 import com.perl5.lang.perl.internals.PerlVersion;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 04.03.2016.
- */
+
 public class PerlCompletionTest extends PerlLightTestCase {
 
   @Override

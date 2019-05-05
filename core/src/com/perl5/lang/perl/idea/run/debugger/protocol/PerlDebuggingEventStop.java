@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,9 +19,7 @@ package com.perl5.lang.perl.idea.run.debugger.protocol;
 import com.intellij.xdebugger.frame.XSuspendContext;
 import com.perl5.lang.perl.idea.run.debugger.PerlSuspendContext;
 
-/**
- * Created by hurricup on 05.05.2016.
- */
+
 public class PerlDebuggingEventStop extends PerlDebuggingEventBase implements PerlDebuggingEvent {
   private PerlStackFrameDescriptor[] frames;
 

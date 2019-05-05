@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,9 +21,7 @@ import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.psi.PerlFileViewProviderFactory;
 
-/**
- * Created by hurricup on 31.01.2016.
- */
+
 public class PerlParserTest extends PerlParserTestBase {
   @Override
   protected String getTestDataPath() {

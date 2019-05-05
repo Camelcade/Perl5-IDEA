@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,9 +19,7 @@ package com.perl5.lang.perl.idea.run.debugger.protocol;
 import com.intellij.openapi.util.text.StringUtil;
 import com.perl5.PerlBundle;
 
-/**
- * Created by hurricup on 08.05.2016.
- */
+
 public class PerlDebuggingEventReady extends PerlDebuggingEventBase {
   public static final String MODULE_VERSION_PREFIX = PerlBundle.message("perl.debugger.version.prefix");
   private static final String MODULE_VERSION_PREFIX_V = "v" + MODULE_VERSION_PREFIX;

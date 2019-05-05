@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,9 +33,7 @@ import java.util.List;
 
 import static com.perl5.lang.perl.util.PerlScalarUtil.DEFAULT_SELF_SCALAR_NAME;
 
-/**
- * Created by hurricup on 10.11.2015.
- */
+
 public abstract class PerlMethodDefinitionMixin extends PerlSubDefinitionBase implements PerlMethodDefinition {
   protected List<PerlVariableDeclarationElement> myImplicitVariables;
 

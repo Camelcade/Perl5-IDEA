@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,9 +23,7 @@ import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.mojolicious.MojoliciousElementTypes;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 22.12.2015.
- */
+
 public class MojoBraceMatcher implements PairedBraceMatcher, MojoliciousElementTypes {
   private static final BracePair[] PAIRS = new BracePair[]{
     new BracePair(MOJO_BLOCK_OPENER, MOJO_BLOCK_CLOSER, false),

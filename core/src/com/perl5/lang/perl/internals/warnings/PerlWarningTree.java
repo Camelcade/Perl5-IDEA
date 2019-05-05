@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 /**
- * Created by hurricup on 23.08.2015.
  * taken from regen/warnings.pl, up to date with origin/maint-5.22
  */
 public class PerlWarningTree {
