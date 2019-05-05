@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,7 +38,7 @@ public class PerlDeprecatedInspection extends PerlInspection {
         PsiElement container = o.getParent();
 
         if (!(container instanceof PerlSubElement)) {
-          PerlResolveUtil.processElementReferencesResolveResults((psiElement, reference) -> {
+          PerlResolveUtil.processResolveTargets((psiElement, reference) -> {
             if (psiElement instanceof PerlDeprecatable && ((PerlDeprecatable)psiElement).isDeprecated()) {
               markDeprecated(holder, o, PerlBundle.message("perl.deprecated.sub"));
               return false;
@@ -58,7 +58,7 @@ public class PerlDeprecatedInspection extends PerlInspection {
             }
           }
 
-          PerlResolveUtil.processElementReferencesResolveResults((psiElement, reference) -> {
+          PerlResolveUtil.processResolveTargets((psiElement, reference) -> {
             String message = null;
             if (psiElement instanceof PerlNamespaceDefinitionElement &&
                 ((PerlNamespaceDefinitionElement)psiElement).isDeprecated()) {

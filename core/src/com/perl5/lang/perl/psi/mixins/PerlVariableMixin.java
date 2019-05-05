@@ -19,9 +19,11 @@ package com.perl5.lang.perl.psi.mixins;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.util.Pair;
+import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.*;
+import com.intellij.psi.PsiDocumentManager;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ObjectUtils;
@@ -160,25 +162,16 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
       return false;
     }
 
-    // fixme this been used already
-    for (PsiReference reference : variableNameElement.getReferences()) {
-      if (reference instanceof PsiPolyVariantReference) {
-        for (ResolveResult resolveResult : ((PsiPolyVariantReference)reference).multiResolve(false)) {
-          PsiElement targetElement = resolveResult.getElement();
-          if (targetElement instanceof PerlVariableDeclarationElement && ((PerlVariableDeclarationElement)targetElement).isDeprecated()) {
-            return true;
-          }
-        }
+    Ref<Boolean> resultRef = Ref.create();
+    PerlResolveUtil.processResolveTargets((targetElement, __) -> {
+      if (targetElement instanceof PerlVariableDeclarationElement && ((PerlVariableDeclarationElement)targetElement).isDeprecated()) {
+        resultRef.set(true);
+        return false;
       }
-      else {
-        PsiElement targetElement = reference.resolve();
-        if (targetElement instanceof PerlVariableDeclarationElement && ((PerlVariableDeclarationElement)targetElement).isDeprecated()) {
-          return true;
-        }
-      }
-    }
+      return true;
+    }, variableNameElement);
 
-    return false;
+    return !resultRef.isNull();
   }
 
   @Override
@@ -209,24 +202,16 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
       return null;
     }
 
-    for (PsiReference psiReference : variableNameElement.getReferences()) {
-      if (psiReference instanceof PsiPolyVariantReference) {
-        for (ResolveResult resolveResult : ((PsiPolyVariantReference)psiReference).multiResolve(false)) {
-          PsiElement element = resolveResult.getElement();
-          if (element instanceof PerlVariableDeclarationElement) {
-            return (PerlVariableDeclarationElement)element;
-          }
-        }
+    Ref<PerlVariableDeclarationElement> resultRef = Ref.create();
+    PerlResolveUtil.processResolveTargets((target, __) -> {
+      if (target instanceof PerlVariableDeclarationElement) {
+        resultRef.set((PerlVariableDeclarationElement)target);
+        return false;
       }
-      else {
-        PsiElement target = psiReference.resolve();
-        if (target != null) {
-          return (PerlVariableDeclarationElement)target;
-        }
-      }
-    }
+      return true;
+    }, variableNameElement);
 
-    return null;
+    return resultRef.get();
   }
 
   private boolean processContainingNamespaceItems(@NotNull Processor<String> processor) {

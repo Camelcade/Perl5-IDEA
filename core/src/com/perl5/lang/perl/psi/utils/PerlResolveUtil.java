@@ -38,6 +38,7 @@ import com.perl5.lang.perl.psi.impl.PerlBuiltInVariable;
 import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.references.scopes.PerlVariableDeclarationSearcher;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -119,21 +120,17 @@ public class PerlResolveUtil {
   }
 
   /**
-   * Processing all targets of all references of all elements
-   *
-   * @param processor processor
-   * @param elements  references sources
-   * @return processor result
+   * Processing all targets of all references of all {@code sourceElements}
    */
   @SuppressWarnings("UnusedReturnValue")
-  public static boolean processElementReferencesResolveResults(@NotNull PairProcessor<PsiElement, PsiReference> processor,
-                                                               PsiElement... elements) {
-    if (elements == null || elements.length == 0) {
+  public static boolean processResolveTargets(@NotNull PairProcessor<PsiElement, PsiReference> processor,
+                                              PsiElement... sourceElements) {
+    if (sourceElements == null || sourceElements.length == 0) {
       return true;
     }
 
-    for (PsiElement element : elements) {
-      if (!processResolveElements(processor, element.getReferences())) {
+    for (PsiElement element : sourceElements) {
+      if (!processResolveTargets(processor, element.getReferences())) {
         return false;
       }
     }
@@ -143,14 +140,10 @@ public class PerlResolveUtil {
 
 
   /**
-   * Processing target elements of array of references
-   *
-   * @param processor  processor
-   * @param references references to iterate
-   * @return processor result
+   * Processing target elements of {@code references}
    */
-  public static boolean processResolveElements(@NotNull PairProcessor<PsiElement, PsiReference> processor,
-                                               @Nullable PsiReference... references) {
+  public static boolean processResolveTargets(@NotNull PairProcessor<PsiElement, PsiReference> processor,
+                                              @Nullable PsiReference... references) {
     if (references == null || references.length == 0) {
       return true;
     }
@@ -329,5 +322,37 @@ public class PerlResolveUtil {
     });
 
     return valueBuilder.build();
+  }
+
+  /**
+   * @return true iff {@code reference} is not null and has at least one target
+   */
+  @Contract("null->false")
+  public static boolean isResolvable(@Nullable PsiReference reference) {
+    if (reference == null) {
+      return false;
+    }
+
+    if (reference instanceof PsiPolyVariantReference) {
+      return ((PsiPolyVariantReference)reference).multiResolve(false).length > 0;
+    }
+    return reference.resolve() != null;
+  }
+
+  /**
+   * @return true iff {@code psiElement} not null, has at least one resolvable reference
+   * @see #isResolvable(PsiReference)
+   */
+  @Contract("null -> false")
+  public static boolean isResolvable(@Nullable PsiElement psiElement) {
+    if (psiElement == null) {
+      return false;
+    }
+    for (PsiReference reference : psiElement.getReferences()) {
+      if (isResolvable(reference)) {
+        return true;
+      }
+    }
+    return false;
   }
 }

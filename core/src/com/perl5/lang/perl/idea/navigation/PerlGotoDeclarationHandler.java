@@ -20,7 +20,8 @@ import com.intellij.codeInsight.navigation.actions.GotoDeclarationHandler;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
-import com.intellij.psi.*;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFileSystemItem;
 import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.perl5.lang.perl.psi.*;
@@ -43,24 +44,12 @@ public class PerlGotoDeclarationHandler implements GotoDeclarationHandler {
     int offsetInElement = offset - sourceElement.getNode().getStartOffset();
 
     ArrayList<PsiElement> result = new ArrayList<>();
-    for (PsiReference reference : sourceElement.getReferences()) {
+    PerlResolveUtil.processResolveTargets((element, reference) -> {
       if (reference.getRangeInElement().contains(offsetInElement)) {
-        if (reference instanceof PsiPolyVariantReference) {
-          for (ResolveResult resolveResult : ((PsiPolyVariantReference)reference).multiResolve(false)) {
-            PsiElement element = resolveResult.getElement();
-            if (element != null) {
-              result.add(element);
-            }
-          }
-        }
-        else {
-          PsiElement element = reference.resolve();
-          if (element != null) {
-            result.add(element);
-          }
-        }
+        result.add(element);
       }
-    }
+      return true;
+    }, sourceElement);
 
     // add shadowed variables declaration
     if (sourceElement instanceof PerlVariableNameElement) {

@@ -19,12 +19,11 @@ package com.perl5.lang.perl.idea.inspections;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.PsiPolyVariantReference;
-import com.intellij.psi.PsiReference;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.PerlVariableNameElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
+import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import org.jetbrains.annotations.NotNull;
 
 
@@ -44,15 +43,7 @@ public class PerlUnresolvedVariableInspection extends PerlInspection {
 
         PerlVariableNameElement variableNameElement = variable.getVariableNameElement();
 
-        if (variableNameElement != null) {
-          for (PsiReference reference : variableNameElement.getReferences()) {
-            if (reference instanceof PsiPolyVariantReference && ((PsiPolyVariantReference)reference).multiResolve(false).length > 0
-                || reference.resolve() != null
-              ) {
-              return;
-            }
-          }
-
+        if (!PerlResolveUtil.isResolvable(variableNameElement)) {
           registerProblem(holder, variableNameElement, "Unable to find variable declaration.");
         }
       }

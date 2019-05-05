@@ -26,6 +26,7 @@ import com.intellij.psi.*;
 import com.intellij.refactoring.rename.inplace.MemberInplaceRenamer;
 import com.perl5.lang.perl.parser.PerlIdentifierRangeProvider;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
+import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -54,17 +55,10 @@ public class PerlMemberInplaceRenamer extends MemberInplaceRenamer {
   @Override
   protected boolean appendAdditionalElement(Collection<PsiReference> refs, Collection<Pair<PsiElement, TextRange>> stringUsages) {
     boolean b = super.appendAdditionalElement(refs, stringUsages);
-
-    for (PsiReference ref : refs) {
-      if (ref instanceof PsiPolyVariantReference) {
-        for (ResolveResult resolveResult : ((PsiPolyVariantReference)ref).multiResolve(false)) {
-          appendAdditionalElement(resolveResult.getElement(), stringUsages);
-        }
-      }
-      else {
-        appendAdditionalElement(ref.resolve(), stringUsages);
-      }
-    }
+    PerlResolveUtil.processResolveTargets((target, __) -> {
+      appendAdditionalElement(target, stringUsages);
+      return true;
+    }, refs.toArray(PsiReference.EMPTY_ARRAY));
 
     return b;
   }

@@ -18,7 +18,6 @@ package com.perl5.lang.perl.idea.inspections;
 
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.PsiPolyVariantReference;
 import com.intellij.psi.PsiReference;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
@@ -27,9 +26,8 @@ import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
-import org.jetbrains.annotations.Contract;
+import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 
 public class PerlUnresolvedSubInspection extends PerlInspection implements PerlElementPatterns {
@@ -40,7 +38,7 @@ public class PerlUnresolvedSubInspection extends PerlInspection implements PerlE
       @Override
       public void visitStringContentElement(@NotNull PerlStringContentElementImpl o) {
         if (EXPORT_ASSIGNED_STRING_CONTENT.accepts(o)) {
-          if (!isResolvable(o.getReference())) {
+          if (!PerlResolveUtil.isResolvable(o.getReference())) {
             registerProblem(holder, o, PerlBundle.message("perl.inspection.no.exported.entity"));
           }
         }
@@ -59,24 +57,12 @@ public class PerlUnresolvedSubInspection extends PerlInspection implements PerlE
         }
 
         for (PsiReference reference : subNameElement.getReferences()) {
-          if (isResolvable(reference)) {
+          if (PerlResolveUtil.isResolvable(reference)) {
             return;
           }
         }
         registerProblem(holder, subNameElement, PerlBundle.message("perl.inspection.no.sub.definition"));
       }
     };
-  }
-
-  @Contract("null->false")
-  private static boolean isResolvable(@Nullable PsiReference reference) {
-    if (reference == null) {
-      return false;
-    }
-
-    if (reference instanceof PsiPolyVariantReference) {
-      return ((PsiPolyVariantReference)reference).multiResolve(false).length > 0;
-    }
-    return reference.resolve() != null;
   }
 }

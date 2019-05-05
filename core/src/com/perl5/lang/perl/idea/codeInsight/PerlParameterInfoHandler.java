@@ -18,10 +18,8 @@ package com.perl5.lang.perl.idea.codeInsight;
 
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.lang.parameterInfo.*;
+import com.intellij.openapi.util.Ref;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiPolyVariantReference;
-import com.intellij.psi.PsiReference;
-import com.intellij.psi.ResolveResult;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ArrayUtil;
@@ -34,6 +32,7 @@ import com.perl5.lang.perl.psi.impl.PsiPerlCommaSequenceExprImpl;
 import com.perl5.lang.perl.psi.impl.PsiPerlParenthesisedExprImpl;
 import com.perl5.lang.perl.psi.mixins.PerlMethodMixin;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
+import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -185,23 +184,19 @@ public class PerlParameterInfoHandler implements ParameterInfoHandler<PsiPerlCal
           break;
         }
 
-        PerlParameterInfo[] parameterInfos;
+        Ref<PerlParameterInfo[]> parameterInfoRef = Ref.create();
 
-        for (PsiReference reference : subNameElement.getReferences()) {
-          if (reference instanceof PsiPolyVariantReference) {
-            for (ResolveResult resolveResult : ((PsiPolyVariantReference)reference).multiResolve(false)) {
-              parameterInfos = getTargetParameterInfo(resolveResult.getElement());
-              if (parameterInfos != null) {
-                return parameterInfos;
-              }
-            }
+        PerlResolveUtil.processResolveTargets((target, reference) -> {
+          PerlParameterInfo[] parameterInfos = getTargetParameterInfo(target);
+          if (parameterInfos != null) {
+            parameterInfoRef.set(parameterInfos);
+            return false;
           }
-          else {
-            parameterInfos = getTargetParameterInfo(reference.resolve());
-            if (parameterInfos != null) {
-              return parameterInfos;
-            }
-          }
+          return true;
+        }, subNameElement);
+
+        if (!parameterInfoRef.isNull()) {
+          return parameterInfoRef.get();
         }
       }
       run = run.getPrevSibling();
