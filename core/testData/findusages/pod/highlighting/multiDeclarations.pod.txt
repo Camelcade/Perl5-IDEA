@@ -1,0 +1,277 @@
+=head1 <WRITE>te<caret>st1</WRITE>
+
+=head2 <WRITE>test1</WRITE>
+
+=head3 <WRITE>test1</WRITE>
+
+
+L</<READ>test1</READ>>
+
+something
+X<<WRITE>test1</WRITE>>
+
+L<Titled|/<READ>test1</READ>>
+
+L<perlop/qq>
+
+=over 1
+
+=item <WRITE>test1</WRITE>
+
+=back
+
+Some paragraph text
+X<<WRITE>test1</WRITE>>
+
+X<<WRITE>test1</WRITE>>
+Some after paragraph
+
+=cut
+
+===============================================================
+=head1 <WRITE>test1</WRITE>
+
+=head2 <WRITE>te<caret>st1</WRITE>
+
+=head3 <WRITE>test1</WRITE>
+
+
+L</<READ>test1</READ>>
+
+something
+X<<WRITE>test1</WRITE>>
+
+L<Titled|/<READ>test1</READ>>
+
+L<perlop/qq>
+
+=over 1
+
+=item <WRITE>test1</WRITE>
+
+=back
+
+Some paragraph text
+X<<WRITE>test1</WRITE>>
+
+X<<WRITE>test1</WRITE>>
+Some after paragraph
+
+=cut
+
+===============================================================
+=head1 <WRITE>test1</WRITE>
+
+=head2 <WRITE>test1</WRITE>
+
+=head3 <WRITE>te<caret>st1</WRITE>
+
+
+L</<READ>test1</READ>>
+
+something
+X<<WRITE>test1</WRITE>>
+
+L<Titled|/<READ>test1</READ>>
+
+L<perlop/qq>
+
+=over 1
+
+=item <WRITE>test1</WRITE>
+
+=back
+
+Some paragraph text
+X<<WRITE>test1</WRITE>>
+
+X<<WRITE>test1</WRITE>>
+Some after paragraph
+
+=cut
+
+===============================================================
+=head1 <WRITE>test1</WRITE>
+
+=head2 <WRITE>test1</WRITE>
+
+=head3 <WRITE>test1</WRITE>
+
+
+L</<READ>te<caret>st1</READ>>
+
+something
+X<<WRITE>test1</WRITE>>
+
+L<Titled|/<READ>test1</READ>>
+
+L<perlop/qq>
+
+=over 1
+
+=item <WRITE>test1</WRITE>
+
+=back
+
+Some paragraph text
+X<<WRITE>test1</WRITE>>
+
+X<<WRITE>test1</WRITE>>
+Some after paragraph
+
+=cut
+
+===============================================================
+=head1 <WRITE>test1</WRITE>
+
+=head2 <WRITE>test1</WRITE>
+
+=head3 <WRITE>test1</WRITE>
+
+
+L</<READ>test1</READ>>
+
+something
+X<<WRITE>tes<caret>t1</WRITE>>
+
+L<Titled|/<READ>test1</READ>>
+
+L<perlop/qq>
+
+=over 1
+
+=item <WRITE>test1</WRITE>
+
+=back
+
+Some paragraph text
+X<<WRITE>test1</WRITE>>
+
+X<<WRITE>test1</WRITE>>
+Some after paragraph
+
+=cut
+
+===============================================================
+=head1 <WRITE>test1</WRITE>
+
+=head2 <WRITE>test1</WRITE>
+
+=head3 <WRITE>test1</WRITE>
+
+
+L</<READ>test1</READ>>
+
+something
+X<<WRITE>test1</WRITE>>
+
+L<Titled|/<READ>te<caret>st1</READ>>
+
+L<perlop/qq>
+
+=over 1
+
+=item <WRITE>test1</WRITE>
+
+=back
+
+Some paragraph text
+X<<WRITE>test1</WRITE>>
+
+X<<WRITE>test1</WRITE>>
+Some after paragraph
+
+=cut
+
+===============================================================
+=head1 <WRITE>test1</WRITE>
+
+=head2 <WRITE>test1</WRITE>
+
+=head3 <WRITE>test1</WRITE>
+
+
+L</<READ>test1</READ>>
+
+something
+X<<WRITE>test1</WRITE>>
+
+L<Titled|/<READ>test1</READ>>
+
+L<perlop/qq>
+
+=over 1
+
+=item <WRITE>tes<caret>t1</WRITE>
+
+=back
+
+Some paragraph text
+X<<WRITE>test1</WRITE>>
+
+X<<WRITE>test1</WRITE>>
+Some after paragraph
+
+=cut
+
+===============================================================
+=head1 <WRITE>test1</WRITE>
+
+=head2 <WRITE>test1</WRITE>
+
+=head3 <WRITE>test1</WRITE>
+
+
+L</<READ>test1</READ>>
+
+something
+X<<WRITE>test1</WRITE>>
+
+L<Titled|/<READ>test1</READ>>
+
+L<perlop/qq>
+
+=over 1
+
+=item <WRITE>test1</WRITE>
+
+=back
+
+Some paragraph text
+X<<WRITE>tes<caret>t1</WRITE>>
+
+X<<WRITE>test1</WRITE>>
+Some after paragraph
+
+=cut
+
+===============================================================
+=head1 <WRITE>test1</WRITE>
+
+=head2 <WRITE>test1</WRITE>
+
+=head3 <WRITE>test1</WRITE>
+
+
+L</<READ>test1</READ>>
+
+something
+X<<WRITE>test1</WRITE>>
+
+L<Titled|/<READ>test1</READ>>
+
+L<perlop/qq>
+
+=over 1
+
+=item <WRITE>test1</WRITE>
+
+=back
+
+Some paragraph text
+X<<WRITE>test1</WRITE>>
+
+X<<WRITE>tes<caret>t1</WRITE>>
+Some after paragraph
+
+=cut

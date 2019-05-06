@@ -83,8 +83,8 @@ public class PodLinkToSectionReference extends PerlCachingReference<PodFormatter
    * @return list of all section synonymous to {@link titledSection}
    */
   @NotNull
-  public static List<PsiElement> getAllSynonymousSections(@NotNull PodTitledSection titledSection) {
-    List<PsiElement> result = new ArrayList<>();
+  public static List<PodTitledSection> getAllSynonymousSections(@NotNull PodTitledSection titledSection) {
+    List<PodTitledSection> result = new ArrayList<>();
     String titleText = titledSection.getTitleText();
     titledSection.getContainingFile().accept(new PodStubsAwareRecursiveVisitor() {
       @Override

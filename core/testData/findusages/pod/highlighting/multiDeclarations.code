@@ -1,0 +1,29 @@
+=head1 te<caret>st1
+
+=head2 te<caret>st1
+
+=head3 te<caret>st1
+
+
+L</te<caret>st1>
+
+something
+X<tes<caret>t1>
+
+L<Titled|/te<caret>st1>
+
+L<perlop/qq>
+
+=over 1
+
+=item tes<caret>t1
+
+=back
+
+Some paragraph text
+X<tes<caret>t1>
+
+X<tes<caret>t1>
+Some after paragraph
+
+=cut
