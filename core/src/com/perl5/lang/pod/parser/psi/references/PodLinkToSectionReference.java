@@ -47,36 +47,37 @@ public class PodLinkToSectionReference extends PerlCachingReference<PodFormatter
     PodFormatterL podLink = getElement();
     PodLinkDescriptor descriptor = podLink.getLinkDescriptor();
 
-    if (descriptor != null && !descriptor.isUrl() && descriptor.getSection() != null) {
-      List<PsiFile> targetFiles = new ArrayList<>();
+    if (descriptor == null || descriptor.isUrl() || descriptor.getSection() == null) {
+      return ResolveResult.EMPTY_ARRAY;
+    }
+    List<PsiFile> targetFiles = new ArrayList<>();
 
-      if (descriptor.getName() != null && !descriptor.isSameFile()) {
-        for (PsiReference reference : podLink.getReferences()) {
-          if (reference instanceof PodLinkToFileReference) {
-            for (ResolveResult resolveResult : ((PodLinkToFileReference)reference).multiResolve(false)) {
-              targetFiles.add((PsiFile)resolveResult.getElement());
-            }
+    if (descriptor.getName() != null && !descriptor.isSameFile()) {
+      for (PsiReference reference : podLink.getReferences()) {
+        if (reference instanceof PodLinkToFileReference) {
+          for (ResolveResult resolveResult : ((PodLinkToFileReference)reference).multiResolve(false)) {
+            targetFiles.add((PsiFile)resolveResult.getElement());
           }
         }
-      }
-      else {
-        targetFiles.add(podLink.getContainingFile());
-      }
-
-      if (!targetFiles.isEmpty()) {
-        List<ResolveResult> results = new ArrayList<>();
-        PodDocumentPattern searchPattern = PodDocumentPattern.exactAnythingPattern(descriptor.getSection());
-        for (PsiFile file : targetFiles) {
-          PodCompositeElement podCompositeElement = PerlDocUtil.searchPodElement(file, searchPattern);
-          if (podCompositeElement != null) {
-            results.add(new PsiElementResolveResult(podCompositeElement));
-          }
-        }
-        return results.toArray(ResolveResult.EMPTY_ARRAY);
       }
     }
+    else {
+      targetFiles.add(podLink.getContainingFile());
+    }
 
-    return ResolveResult.EMPTY_ARRAY;
+    if (targetFiles.isEmpty()) {
+      return ResolveResult.EMPTY_ARRAY;
+    }
+
+    List<ResolveResult> results = new ArrayList<>();
+    PodDocumentPattern searchPattern = PodDocumentPattern.exactAnythingPattern(descriptor.getSection());
+    for (PsiFile file : targetFiles) {
+      PodCompositeElement podCompositeElement = PerlDocUtil.searchPodElement(file, searchPattern);
+      if (podCompositeElement != null) {
+        results.add(new PsiElementResolveResult(podCompositeElement));
+      }
+    }
+    return results.toArray(ResolveResult.EMPTY_ARRAY);
   }
 
   /**
