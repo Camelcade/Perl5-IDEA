@@ -31,6 +31,12 @@ public class PodFindUsagesTest extends PodLightTestCase {
     myFixture.copyFileToProject("Test.pm");
   }
 
+  public void testMultiDeclarationsFirst() {doTest();}
+
+  public void testMultiDeclarationsSecond() {doTest();}
+
+  public void testMultiDeclarationsUsage() {doTest();}
+
   public void testNameBare() {doTest();}
 
   public void testNameWithSection() {doTest();}

@@ -20,11 +20,14 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.*;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.documentation.PerlDocUtil;
 import com.perl5.lang.perl.psi.references.PerlCachingReference;
-import com.perl5.lang.pod.parser.psi.*;
+import com.perl5.lang.pod.parser.psi.PodElementFactory;
+import com.perl5.lang.pod.parser.psi.PodLinkDescriptor;
+import com.perl5.lang.pod.parser.psi.PodStubsAwareRecursiveVisitor;
+import com.perl5.lang.pod.parser.psi.PodTitledSection;
 import com.perl5.lang.pod.parser.psi.mixin.PodFormatterL;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +50,8 @@ public class PodLinkToSectionReference extends PerlCachingReference<PodFormatter
     PodFormatterL podLink = getElement();
     PodLinkDescriptor descriptor = podLink.getLinkDescriptor();
 
-    if (descriptor == null || descriptor.isUrl() || descriptor.getSection() == null) {
+    String sectionTitle = descriptor == null ? null : descriptor.getSection();
+    if (sectionTitle == null || descriptor.isUrl()) {
       return ResolveResult.EMPTY_ARRAY;
     }
     List<PsiFile> targetFiles = new ArrayList<>();
@@ -69,15 +73,29 @@ public class PodLinkToSectionReference extends PerlCachingReference<PodFormatter
       return ResolveResult.EMPTY_ARRAY;
     }
 
-    List<ResolveResult> results = new ArrayList<>();
-    PodDocumentPattern searchPattern = PodDocumentPattern.exactAnythingPattern(descriptor.getSection());
+    List<PsiElement> results = new ArrayList<>();
     for (PsiFile file : targetFiles) {
-      PodCompositeElement podCompositeElement = PerlDocUtil.searchPodElement(file, searchPattern);
-      if (podCompositeElement != null) {
-        results.add(new PsiElementResolveResult(podCompositeElement));
+      file.accept(new PodStubsAwareRecursiveVisitor() {
+        @Override
+        public void visitTargetableSection(PodTitledSection o) {
+          if (StringUtil.equals(sectionTitle, o.getTitleText())) {
+            results.add(o);
+          }
+          super.visitTargetableSection(o);
+        }
+      });
+      if (!results.isEmpty()) {
+        break;
       }
     }
-    return results.toArray(ResolveResult.EMPTY_ARRAY);
+    return PsiElementResolveResult.createResults(results);
+  }
+
+  @Nullable
+  @Override
+  public PsiElement resolve() {
+    ResolveResult[] results = multiResolve(false);
+    return results.length > 0 ? results[0].getElement() : null;
   }
 
   /**

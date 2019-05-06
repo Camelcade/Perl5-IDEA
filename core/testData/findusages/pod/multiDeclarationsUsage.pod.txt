@@ -1,0 +1,20 @@
+Target: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in multiDeclarationsUsage.pod
+Total usages: 2
+	PsiPodFormatLinkImpl(Perl5 POD: POD_FORMAT_LINK) at 43 in multiDeclarationsUsage.pod, via: PodLinkToSectionReference at (46,51); text in range: 'test1' => 7 results:
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in multiDeclarationsUsage.pod
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14 in multiDeclarationsUsage.pod
+	PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 28 in multiDeclarationsUsage.pod
+	PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 64 in multiDeclarationsUsage.pod
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 115 in multiDeclarationsUsage.pod
+	PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 155 in multiDeclarationsUsage.pod
+	PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 165 in multiDeclarationsUsage.pod
+
+	PsiPodFormatLinkImpl(Perl5 POD: POD_FORMAT_LINK) at 74 in multiDeclarationsUsage.pod, via: PodLinkToSectionReference at (84,89); text in range: 'test1' => 7 results:
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in multiDeclarationsUsage.pod
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14 in multiDeclarationsUsage.pod
+	PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 28 in multiDeclarationsUsage.pod
+	PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 64 in multiDeclarationsUsage.pod
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 115 in multiDeclarationsUsage.pod
+	PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 155 in multiDeclarationsUsage.pod
+	PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 165 in multiDeclarationsUsage.pod
+

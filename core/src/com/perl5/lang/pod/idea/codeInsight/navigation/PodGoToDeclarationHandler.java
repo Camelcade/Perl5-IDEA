@@ -21,8 +21,9 @@ import com.intellij.codeInsight.navigation.actions.GotoDeclarationHandler;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
+import com.intellij.psi.ResolveResult;
+import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.pod.PodLanguage;
-import com.perl5.lang.pod.parser.psi.PodTitledSection;
 import com.perl5.lang.pod.parser.psi.references.PodLinkToSectionReference;
 import org.jetbrains.annotations.Nullable;
 
@@ -39,15 +40,7 @@ public class PodGoToDeclarationHandler implements GotoDeclarationHandler {
       return null;
     }
 
-    PsiElement targetSection = reference.resolve();
-    if (targetSection == null) {
-      return null;
-    }
-
-    if (!(targetSection instanceof PodTitledSection)) {
-      return new PsiElement[]{targetSection};
-    }
-
-    return PodLinkToSectionReference.getAllSynonymousSections(((PodTitledSection)targetSection)).toArray(PsiElement.EMPTY_ARRAY);
+    return ContainerUtil.map(((PodLinkToSectionReference)reference).multiResolve(false), ResolveResult::getElement)
+      .toArray(PsiElement.EMPTY_ARRAY);
   }
 }
