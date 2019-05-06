@@ -2,4 +2,4 @@
 $<READ>main</READ>::var;
 @<READ>main</READ>::var;
 %<READ>main</READ>::var;
-*<READ>m<caret>ain</READ>::some;
+*<READ>main</READ>::some;

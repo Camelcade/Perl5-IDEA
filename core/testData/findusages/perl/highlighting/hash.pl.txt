@@ -1,7 +1,7 @@
 my %<WRITE>hash</WRITE>;
 
 say %<READ>hash</READ>;
-say $<READ>h<caret>ash</READ>{1};
+say $<READ>hash</READ>{1};
 say $<READ>hash</READ>{1,2};
 %<WRITE>hash</WRITE> = ();
 $<WRITE>hash</WRITE>{1} = 2;

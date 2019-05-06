@@ -1,4 +1,4 @@
-my @<WRITE>arr<caret>ay</WRITE>;
+my @<WRITE>array</WRITE>;
 
 say @<READ>array</READ>;
 say $<READ>array</READ>[1];

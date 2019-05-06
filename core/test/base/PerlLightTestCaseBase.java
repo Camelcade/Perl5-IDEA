@@ -986,9 +986,9 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     initWithFileSmartWithoutErrors();
 
     List<Integer> caretsOffsets = getAndRemoveCarets();
-    StringBuilder sb = new StringBuilder();
     HighlightManager highlightManager = HighlightManager.getInstance(getProject());
     Editor editor = getEditor();
+    String result = "";
 
     for (Integer caretOffset : caretsOffsets) {
       editor.getCaretModel().moveToOffset(caretOffset);
@@ -996,7 +996,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
       List<RangeHighlighter> highlighters = Arrays.asList(editor.getMarkupModel().getAllHighlighters());
       ContainerUtil.sort(highlighters, Comparator.comparingInt(RangeMarker::getStartOffset));
 
-      List<Pair<Integer, String>> macroses = addCaretsMacroses(new ArrayList<>());
+      List<Pair<Integer, String>> macroses = new ArrayList<>();
 
       for (RangeHighlighter highlighter : highlighters) {
         TextAttributes attributes = highlighter.getTextAttributes();
@@ -1018,13 +1018,16 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
         macroses.add(Pair.create(highlighter.getEndOffset(), "</" + type + ">"));
         highlightManager.removeSegmentHighlighter(editor, highlighter);
       }
-      if (sb.length() > 0) {
-        sb.append("\n===============================================================\n");
+      String textWithMacroses = getEditorTextWithMacroses(macroses);
+      if (result.isEmpty()) {
+        result = textWithMacroses;
       }
-      sb.append(getEditorTextWithMacroses(macroses));
+      else {
+        assertEquals("Caret offset: " + caretOffset, result, textWithMacroses);
+      }
     }
 
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), result);
   }
 
   protected void testFoldingRegions(@NotNull String verificationFileName, LanguageFileType fileType) {

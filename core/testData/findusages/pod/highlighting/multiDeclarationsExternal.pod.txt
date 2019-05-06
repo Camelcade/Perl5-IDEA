@@ -1,42 +1,9 @@
 
-L<perlop/<READ>q<caret>q</READ>>
-
-L<Titled|perlop/<READ>qq</READ>>
-
-L<perlop/"<READ>qq</READ>">
-
-L<Titled|perlop/"<READ>qq</READ>">
-
-
-===============================================================
-
-L<perlop/<READ>qq</READ>>
-
-L<Titled|perlop/<READ>q<caret>q</READ>>
-
-L<perlop/"<READ>qq</READ>">
-
-L<Titled|perlop/"<READ>qq</READ>">
-
-
-===============================================================
-
-L<perlop/<READ>qq</READ>>
-
-L<Titled|perlop/<READ>qq</READ>>
-
-L<perlop/"<READ>q<caret>q</READ>">
-
-L<Titled|perlop/"<READ>qq</READ>">
-
-
-===============================================================
-
 L<perlop/<READ>qq</READ>>
 
 L<Titled|perlop/<READ>qq</READ>>
 
 L<perlop/"<READ>qq</READ>">
 
-L<Titled|perlop/"<READ>q<caret>q</READ>">
+L<Titled|perlop/"<READ>qq</READ>">
 

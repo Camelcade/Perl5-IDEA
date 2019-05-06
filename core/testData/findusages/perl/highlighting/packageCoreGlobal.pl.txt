@@ -4,4 +4,4 @@ $<READ>CORE::GLOBAL</READ>::something;
 $<READ>CORE::GLOBAL</READ>::var;
 @<READ>CORE::GLOBAL</READ>::var;
 %<READ>CORE::GLOBAL</READ>::var;
-*<READ>CORE::G<caret>LOBAL</READ>::some;
+*<READ>CORE::GLOBAL</READ>::some;

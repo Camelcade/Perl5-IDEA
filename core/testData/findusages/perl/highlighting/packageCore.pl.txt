@@ -4,4 +4,4 @@ $<READ>CORE</READ>::something;
 $<READ>CORE</READ>::var;
 @<READ>CORE</READ>::var;
 %<READ>CORE</READ>::var;
-*<READ>C<caret>ORE</READ>::some;
+*<READ>CORE</READ>::some;

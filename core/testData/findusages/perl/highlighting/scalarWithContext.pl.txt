@@ -1,6 +1,6 @@
 my $<WRITE>var</WRITE> = 1;
 say $<READ>var</READ>;
-$<WRITE>v<caret>ar</WRITE>++;
+$<WRITE>var</WRITE>++;
 ++$<WRITE>var</WRITE>;
 $<WRITE>var</WRITE> = 1;
 $<WRITE>var</WRITE>--;

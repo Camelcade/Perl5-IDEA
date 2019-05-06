@@ -12,7 +12,7 @@ say $<READ>ARGV</READ>[1];
 
 say @<READ>ARGV</READ>;
 say @<READ>ARGV</READ>[1,2,3];
-say $<READ>A<caret>RGV</READ>[1];
+say $<READ>ARGV</READ>[1];
 
 {
    state @ARGV;

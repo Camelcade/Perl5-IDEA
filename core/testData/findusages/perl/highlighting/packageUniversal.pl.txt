@@ -2,5 +2,5 @@
 $<READ>UNIVERSAL</READ>::var;
 @<READ>UNIVERSAL</READ>::var;
 %<READ>UNIVERSAL</READ>::var;
-*<READ>UNI<caret>VERSAL</READ>::some;
+*<READ>UNIVERSAL</READ>::some;
 

@@ -24,7 +24,7 @@ say ${<READ>^ENCODING</READ>};
     say ${^ENCODING};
 }
 
-say ${<READ>^ENCO<caret>DING</READ>};
+say ${<READ>^ENCODING</READ>};
 
 local ${^ENCODING};
 say ${^ENCODING};

@@ -20,7 +20,7 @@ say $<READ>INC</READ>{bla};
 }
 
 say %<READ>INC</READ>;
-say @<READ>I<caret>NC</READ>{qw/test bla/};
+say @<READ>INC</READ>{qw/test bla/};
 say $<READ>INC</READ>{bla};
 {
     our %INC;

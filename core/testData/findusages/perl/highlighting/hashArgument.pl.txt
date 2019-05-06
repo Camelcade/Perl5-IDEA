@@ -1,4 +1,4 @@
-my %<WRITE>ha<caret>sh</WRITE>;
+my %<WRITE>hash</WRITE>;
 my @keys;
 
 delete @<WRITE>hash</WRITE>{1};

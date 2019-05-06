@@ -1,0 +1,20 @@
+sub subname {
+    {
+        <READ>return</READ> if $a;
+        <READ>die</READ> if $a;
+        <READ>croak</READ> if $a;
+        <READ>confess</READ> if $a;
+        <READ>exit</READ> if $a;
+        last if $a;
+        next if $a;
+        redo if $a;
+    }
+    <READ>return</READ> if $a;
+    <READ>die</READ> if $a;
+    <READ>croak</READ> if $a;
+    <READ>confess</READ> if $a;
+    <READ>exit</READ> if $a;
+    <READ>last</READ> if $a;
+    <READ>next</READ> if $a;
+    <READ>redo</READ> if <READ>$a</READ>;
+}

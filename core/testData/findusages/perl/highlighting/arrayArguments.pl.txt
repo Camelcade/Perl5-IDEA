@@ -1,4 +1,4 @@
-my @<WRITE>arr<caret>ay</WRITE>;
+my @<WRITE>array</WRITE>;
 
 push @<WRITE>array</WRITE>,
         @<READ>array</READ>;

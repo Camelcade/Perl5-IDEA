@@ -1,5 +1,5 @@
 my %hash;
-my @<WRITE>ke<caret>ys</WRITE>;
+my @<WRITE>keys</WRITE>;
 
 delete @hash{1};
 delete @hash{@<READ>keys</READ>};
