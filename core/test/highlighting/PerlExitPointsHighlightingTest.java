@@ -14,22 +14,29 @@
  * limitations under the License.
  */
 
-package findUsages;
+package highlighting;
 
-import base.PodLightTestCase;
+import base.PerlLightTestCase;
 
-public class PodFindUsagesHighlightingTest extends PodLightTestCase {
+public class PerlExitPointsHighlightingTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
-    return "testData/findusages/pod/highlighting";
+    return "testData/highlighting/perl/exitPoints";
   }
 
-  public void testMultiDeclarations() {doTest();}
+  public void testNextLastRedo() {doTest();}
 
-  public void testMultiDeclarationsExternal() {
-    withPerlPod();
-    doTest();
-  }
+  public void testNextLastRedoOutbreak() {doTest();}
+
+  public void testAnonSubNested() {doTest();}
+
+  public void testDoNested() {doTest();}
+
+  public void testEvalNested() {doTest();}
+
+  public void testSortNested() {doTest();}
+
+  public void testSubWithNestedEntities() {doTest();}
 
   private void doTest() {doTestUsagesHighlighting();}
 }

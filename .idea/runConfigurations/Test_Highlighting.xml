@@ -1,10 +1,10 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Test Perl Highlighter" type="GradleRunConfiguration" factoryName="Gradle" folderName="Perl Tests (Unit)">
+  <configuration default="false" name="Test Highlighting" type="GradleRunConfiguration" factoryName="Gradle" folderName="Cross-plugin">
     <ExternalSystemSettings>
       <option name="executionName" />
       <option name="externalProjectPath" value="$PROJECT_DIR$" />
       <option name="externalSystemIdString" value="GRADLE" />
-      <option name="scriptParameters" value="-Pruntest=editor/PerlSyntaxHighlightingTest" />
+      <option name="scriptParameters" value="-Pruntest=highlighting/*" />
       <option name="taskDescriptions">
         <list />
       </option>

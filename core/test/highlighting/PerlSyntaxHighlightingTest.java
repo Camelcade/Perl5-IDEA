@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package editor;
+package highlighting;
 
 import base.PerlLightTestCase;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
@@ -23,7 +23,7 @@ public class PerlSyntaxHighlightingTest extends PerlLightTestCase {
 
   @Override
   protected String getTestDataPath() {
-    return "testData/highlighting/syntax/perl";
+    return "testData/highlighting/perl/syntax";
   }
 
   public void testSpliceExpr() {doTest();}

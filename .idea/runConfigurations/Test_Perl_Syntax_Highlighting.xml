@@ -1,10 +1,10 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Test Perl Exit Points Highlighting" type="GradleRunConfiguration" factoryName="Gradle" folderName="Perl Tests">
+  <configuration default="false" name="Test Perl Syntax Highlighting" type="GradleRunConfiguration" factoryName="Gradle" folderName="Perl Tests (Unit)">
     <ExternalSystemSettings>
       <option name="executionName" />
       <option name="externalProjectPath" value="$PROJECT_DIR$" />
       <option name="externalSystemIdString" value="GRADLE" />
-      <option name="scriptParameters" value="-Pruntest=highlighting/PerlExitPointsHighlightingTest" />
+      <option name="scriptParameters" value="-Pruntest=highlighting/PerlSyntaxHighlightingTest" />
       <option name="taskDescriptions">
         <list />
       </option>

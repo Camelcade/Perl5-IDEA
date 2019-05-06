@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package findUsages;
+package highlighting;
 
 import base.PerlLightTestCase;
 
 public class PerlFindUsagesHighlightingTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
-    return "testData/findusages/perl/highlighting";
+    return "testData/highlighting/perl/usages";
   }
 
   public void testHashArgument() {doTest();}
