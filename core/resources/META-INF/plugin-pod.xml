@@ -66,6 +66,7 @@
     <fileStructureGroupRuleProvider implementation="com.perl5.lang.pod.idea.findusages.PodFileStructureGroupRuleProvider"/>
     <stubElementTypeHolder class="com.perl5.lang.pod.lexer.PodElementTypes"/>
     <targetElementEvaluator language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.codeInsight.PodTargetElementEvaluator"/>
+    <gotoDeclarationHandler implementation="com.perl5.lang.pod.idea.codeInsight.navigation.PodGoToDeclarationHandler"/>
 
     <lang.namesValidator language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.refactoring.PodNamesValidator"/>
     <referencesSearch implementation="com.perl5.lang.pod.parser.psi.references.PodReferencesSearch"/>

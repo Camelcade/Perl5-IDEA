@@ -17,14 +17,12 @@
 package com.perl5.lang.pod.parser.psi.references;
 
 import com.intellij.openapi.util.TextRange;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.*;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.documentation.PerlDocUtil;
 import com.perl5.lang.perl.psi.references.PerlCachingReference;
-import com.perl5.lang.pod.parser.psi.PodCompositeElement;
-import com.perl5.lang.pod.parser.psi.PodDocumentPattern;
-import com.perl5.lang.pod.parser.psi.PodElementFactory;
-import com.perl5.lang.pod.parser.psi.PodLinkDescriptor;
+import com.perl5.lang.pod.parser.psi.*;
 import com.perl5.lang.pod.parser.psi.mixin.PodFormatterL;
 import org.jetbrains.annotations.NotNull;
 
@@ -79,5 +77,24 @@ public class PodLinkToSectionReference extends PerlCachingReference<PodFormatter
     }
 
     return ResolveResult.EMPTY_ARRAY;
+  }
+
+  /**
+   * @return list of all section synonymous to {@link titledSection}
+   */
+  @NotNull
+  public static List<PsiElement> getAllSynonymousSections(@NotNull PodTitledSection titledSection) {
+    List<PsiElement> result = new ArrayList<>();
+    String titleText = titledSection.getTitleText();
+    titledSection.getContainingFile().accept(new PodStubsAwareRecursiveVisitor() {
+      @Override
+      public void visitTargetableSection(PodTitledSection o) {
+        if (StringUtil.equals(titleText, o.getTitleText())) {
+          result.add(o);
+        }
+        super.visitTargetableSection(o);
+      }
+    });
+    return result;
   }
 }

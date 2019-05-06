@@ -31,6 +31,7 @@ import com.intellij.codeInsight.hint.ShowParameterInfoHandler;
 import com.intellij.codeInsight.intention.IntentionAction;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementPresentation;
+import com.intellij.codeInsight.navigation.actions.GotoDeclarationAction;
 import com.intellij.codeInsight.template.impl.LiveTemplateCompletionContributor;
 import com.intellij.codeInsight.template.impl.LiveTemplateLookupElementImpl;
 import com.intellij.codeInsight.template.impl.TemplateManagerImpl;
@@ -2186,6 +2187,20 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
       if (stub != null) {
         sb.append(DebugUtil.stubTreeToString(stub));
       }
+    }
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+  }
+
+  protected void doTestGoToDeclarationTargets() {
+    initWithFileSmartWithoutErrors();
+    addVirtualFileFilter();
+    PsiElement[] targetElements =
+      GotoDeclarationAction.findAllTargetElements(getProject(), getEditor(), getEditor().getCaretModel().getOffset());
+    StringBuilder sb = new StringBuilder();
+    sb.append("Total elements: ").append(targetElements.length).append("\n");
+    removeVirtualFileFilter();
+    for (PsiElement element : targetElements) {
+      sb.append("\t").append(serializePsiElement(element)).append("\n");
     }
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
   }

@@ -39,6 +39,11 @@ public class PodVisitor extends PsiPodVisitorGenerated {
   }
 
   @Override
+  public void visitPodFormatIndex(@NotNull PsiPodFormatIndex o) {
+    visitTargetableSection((PodTitledSection)o);
+  }
+
+  @Override
   public void visitHead1Section(@NotNull PsiHead1Section o) {
     visitTargetableSection((PodTitledSection)o);
   }
