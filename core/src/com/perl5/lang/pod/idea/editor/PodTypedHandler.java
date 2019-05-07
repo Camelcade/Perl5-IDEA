@@ -32,6 +32,7 @@ import com.intellij.psi.TokenType;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.idea.editor.smartkeys.PerlTypedHandlerDelegate;
@@ -39,7 +40,9 @@ import com.perl5.lang.perl.psi.utils.PerlEditorUtils;
 import com.perl5.lang.pod.lexer.PodElementTypes;
 import com.perl5.lang.pod.lexer.PodTokenSets;
 import com.perl5.lang.pod.parser.psi.PodElementFactory;
+import com.perl5.lang.pod.psi.PsiLinkSection;
 import com.perl5.lang.pod.psi.PsiLinkText;
+import com.perl5.lang.pod.psi.PsiPodFormatLink;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -166,16 +169,29 @@ public class PodTypedHandler extends PerlTypedHandlerDelegate implements PodElem
     IElementType parentType = PsiUtilCore.getElementType(elementParent);
 
     return typedChar == '=' && isCommandPosition(editor, elementType, elementChars) ||
-           typedChar == ':' &&
-           elementNode != null &&
+           typedChar == ':' && elementNode != null &&
            PerlEditorUtils.isPreviousToken(editor, elementNode.getStartOffset(), FORMAT_ACCEPTING_COMMANDS) ||
            typedChar == ' ' && PodTokenSets.POD_COMMANDS_TOKENSET.contains(elementType) ||
            typedChar == '<' && elementType == POD_IDENTIFIER && StringUtil.equals("L", elementChars) ||
            typedChar == '|' && parentType == LINK_NAME ||
            typedChar == '/' && (parentType == LINK_NAME ||
                                 elementType == POD_ANGLE_LEFT && parentType == POD_FORMAT_LINK ||
-                                elementType == POD_PIPE && element.getPrevSibling() instanceof PsiLinkText)
+                                elementType == POD_PIPE && element.getPrevSibling() instanceof PsiLinkText) ||
+           isInsideSection(element)
       ;
+  }
+
+  /**
+   * @return true iff element shows us that we are in pod section link position
+   */
+  private boolean isInsideSection(@Nullable PsiElement element) {
+    if (element == null) {
+      return false;
+    }
+    if (PsiUtilCore.getElementType(element) == POD_DIV && PsiTreeUtil.getParentOfType(element, PsiPodFormatLink.class) != null) {
+      return true;
+    }
+    return PsiTreeUtil.getParentOfType(element, PsiLinkSection.class) != null;
   }
 
   /**

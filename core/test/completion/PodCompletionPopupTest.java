@@ -89,6 +89,10 @@ public class PodCompletionPopupTest extends PerlCompletionPopupTestCase {
 
   public void testCommandAfterCommandWrong() {doTestNegative("=head1 test\n<caret>", "=");}
 
+  public void testLinkSectionAnyKeyStart() {doTest("L<perlpod/<caret>>", "=");}
+
+  public void testLinkSectionAnyKeyContinue() {doTest("L<perlvar/$<caret>>", "'");}
+
   @Override
   protected void doTest(@NotNull String initial, @NotNull String toType) {
     myFixture.copyFileToProject("test.pm");
