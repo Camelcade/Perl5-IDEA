@@ -1,4 +1,20 @@
 # scalar
+if (${somesub()} != 0) {}
+elsif (${somesub()} != 0) {}
+say if ${somesub()} != 0;
+unless (${somesub()} != 0) {}
+say unless ${somesub()} != 0;
+while (${somesub()} != 0) {}
+say while ${somesub()} != 0;
+until (${somesub()} != 0) {}
+say until ${somesub()} != 0;
+say for ${somesub()};
+for (${somesub()}) {}
+for (; ${somesub()} != 0;) {}
+when (${somesub()}) {}
+given (${somesub()}) {}
+
+# negated scalar
 if (${somesub()} == 0) {}
 elsif (${somesub()} == 0) {}
 say if ${somesub()} == 0;
@@ -8,57 +24,41 @@ while (${somesub()} == 0) {}
 say while ${somesub()} == 0;
 until (${somesub()} == 0) {}
 say until ${somesub()} == 0;
-say for ${somesub()};
-for (${somesub()}) {}
-for (; ${somesub()} == 0;) {}
-when (${somesub()}) {}
-given (${somesub()}) {}
-
-# negated scalar
-if (${somesub()} != 0) {}
-elsif (${somesub()} != 0) {}
-say if ${somesub()} != 0;
-unless (${somesub()} != 0) {}
-say unless ${somesub()} != 0;
-while (${somesub()} != 0) {}
-say while ${somesub()} != 0;
-until (${somesub()} != 0) {}
-say until ${somesub()} != 0;
 say for !${somesub()};
 for (!${somesub()}) {}
-for (; ${somesub()} != 0;) {}
+for (; ${somesub()} == 0;) {}
 when (!${somesub()}) {}
 given (!${somesub()}) {}
 
 # negated scalar
-if (${somesub()} != 0) {}
-elsif (${somesub()} != 0) {}
-say if ${somesub()} != 0;
-unless (${somesub()} != 0) {}
-say unless ${somesub()} != 0;
-while (${somesub()} != 0) {}
-say while ${somesub()} != 0;
-until (${somesub()} != 0) {}
-say until ${somesub()} != 0;
+if (${somesub()} == 0) {}
+elsif (${somesub()} == 0) {}
+say if ${somesub()} == 0;
+unless (${somesub()} == 0) {}
+say unless ${somesub()} == 0;
+while (${somesub()} == 0) {}
+say while ${somesub()} == 0;
+until (${somesub()} == 0) {}
+say until ${somesub()} == 0;
 say for !(${somesub()});
 for (!(${somesub()})) {}
-for (; ${somesub()} != 0;) {}
+for (; ${somesub()} == 0;) {}
 when (!(${somesub()})) {}
 given (!(${somesub()})) {}
 
 # negated scalar lp
-if (${somesub()} != 0) {}
-elsif (${somesub()} != 0) {}
-say if ${somesub()} != 0;
-unless (${somesub()} != 0) {}
-say unless ${somesub()} != 0;
-while (${somesub()} != 0) {}
-say while ${somesub()} != 0;
-until (${somesub()} != 0) {}
-say until ${somesub()} != 0;
+if (${somesub()} == 0) {}
+elsif (${somesub()} == 0) {}
+say if ${somesub()} == 0;
+unless (${somesub()} == 0) {}
+say unless ${somesub()} == 0;
+while (${somesub()} == 0) {}
+say while ${somesub()} == 0;
+until (${somesub()} == 0) {}
+say until ${somesub()} == 0;
 say for not ${somesub()};
 for (not ${somesub()}) {}
-for (; ${somesub()} != 0;) {}
+for (; ${somesub()} == 0;) {}
 when (not ${somesub()}) {}
 given (not ${somesub()}) {}
 

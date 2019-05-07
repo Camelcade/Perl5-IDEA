@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -210,7 +210,7 @@ public class PerlTruthinessInspection extends PerlInspection {
     @NotNull
     @Override
     protected String getReplacementText(@NotNull String baseText, boolean isNegated) {
-      return isNegated ? baseText + " != 0" : baseText + " == 0";
+      return isNegated ? baseText + " == 0" : baseText + " != 0";
     }
   }
 
@@ -227,7 +227,7 @@ public class PerlTruthinessInspection extends PerlInspection {
     @NotNull
     @Override
     protected String getReplacementText(@NotNull String baseText, boolean isNegated) {
-      return isNegated ? baseText + " ne ''" : baseText + " eq ''";
+      return isNegated ? baseText + " eq ''" : baseText + " ne ''";
     }
   }
 }
