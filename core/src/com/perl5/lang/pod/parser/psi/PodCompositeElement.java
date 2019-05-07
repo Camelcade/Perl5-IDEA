@@ -43,16 +43,10 @@ public interface PodCompositeElement extends PsiElement, PodRenderableElement, I
     return parent instanceof PodCompositeElement ? ((PodCompositeElement)parent).getListLevel() : 0;
   }
 
-  /**
-   * @return true iff element is a heading
-   */
   default boolean isHeading() {
     return false;
   }
 
-  /**
-   * @return heading level
-   */
   default int getHeadingLevel() {
     return 0;
   }
