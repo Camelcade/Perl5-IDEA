@@ -1,4 +1,4 @@
-<p><a href="psi_element://pod%3A%3Aperlsub">pod::perlsub</a>: <a href="psi_element://pod%3A%3Aperlsub%2FDESCRIPTION">DESCRIPTION</a></p><h2>Autoloading
+<p><a href="psi_element://perlsub">perlsub</a>: <a href="psi_element://perlsub%2FDESCRIPTION">DESCRIPTION</a></p><h2>Autoloading
  </h2><p style="padding-bottom: 10px;">If you call a subroutine that is undefined, you would ordinarily
 get an immediate, fatal error complaining that the subroutine doesn't
 exist.  (Likewise for subroutines being used as methods, when the

@@ -83,12 +83,6 @@ public abstract class PodStubBasedTitledSection extends PodStubBasedSection impl
 
   @Nullable
   @Override
-  public String getLocationString() {
-    return "Element location";
-  }
-
-  @Nullable
-  @Override
   public Icon getIcon(boolean unused) {
     return getContainingFile().getIcon(0);
   }

@@ -1,4 +1,4 @@
-<ul style="margin-left: 7px;margin-top:0px;margin-bottom:0px;"><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://pod%3A%3Aperlvar%2FNAME">NAME</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://pod%3A%3Aperlvar%2FDESCRIPTION">DESCRIPTION</a></li><ul style="margin-left: 20px;margin-top:0px;margin-bottom:0px;"><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://pod%3A%3Aperlvar%2FThe+Syntax+of+Variable+Names">The Syntax of Variable Names</a></li></ul><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://pod%3A%3Aperlvar%2FSPECIAL+VARIABLES">SPECIAL VARIABLES</a></li><ul style="margin-left: 20px;margin-top:0px;margin-bottom:0px;"><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://pod%3A%3Aperlvar%2FGeneral+Variables">General Variables</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://pod%3A%3Aperlvar%2FVariables+related+to+regular+expressions">Variables related to regular expressions</a></li><ul style="margin-left: 20px;margin-top:0px;margin-bottom:0px;"><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://pod%3A%3Aperlvar%2FPerformance+issues">Performance issues</a></li></ul><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://pod%3A%3Aperlvar%2FVariables+related+to+filehandles">Variables related to filehandles</a></li><ul style="margin-left: 20px;margin-top:0px;margin-bottom:0px;"><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://pod%3A%3Aperlvar%2FVariables+related+to+formats">Variables related to formats</a></li></ul><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://pod%3A%3Aperlvar%2FError+Variables">Error Variables</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://pod%3A%3Aperlvar%2FVariables+related+to+the+interpreter+state">Variables related to the interpreter state</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://pod%3A%3Aperlvar%2FDeprecated+and+removed+variables">Deprecated and removed variables</a></li></ul></ul><h1>NAME</h1><p style="padding-bottom: 10px;">perlvar - Perl predefined variables</p>
+<ul style="margin-left: 7px;margin-top:0px;margin-bottom:0px;"><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://perlvar%2FNAME">NAME</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://perlvar%2FDESCRIPTION">DESCRIPTION</a></li><ul style="margin-left: 20px;margin-top:0px;margin-bottom:0px;"><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://perlvar%2FThe+Syntax+of+Variable+Names">The Syntax of Variable Names</a></li></ul><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://perlvar%2FSPECIAL+VARIABLES">SPECIAL VARIABLES</a></li><ul style="margin-left: 20px;margin-top:0px;margin-bottom:0px;"><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://perlvar%2FGeneral+Variables">General Variables</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://perlvar%2FVariables+related+to+regular+expressions">Variables related to regular expressions</a></li><ul style="margin-left: 20px;margin-top:0px;margin-bottom:0px;"><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://perlvar%2FPerformance+issues">Performance issues</a></li></ul><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://perlvar%2FVariables+related+to+filehandles">Variables related to filehandles</a></li><ul style="margin-left: 20px;margin-top:0px;margin-bottom:0px;"><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://perlvar%2FVariables+related+to+formats">Variables related to formats</a></li></ul><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://perlvar%2FError+Variables">Error Variables</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://perlvar%2FVariables+related+to+the+interpreter+state">Variables related to the interpreter state</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://perlvar%2FDeprecated+and+removed+variables">Deprecated and removed variables</a></li></ul></ul><h1>NAME</h1><p style="padding-bottom: 10px;">perlvar - Perl predefined variables</p>
 <h1>DESCRIPTION</h1><h2>The Syntax of Variable Names</h2><p style="padding-bottom: 10px;">Variable names in Perl can have several formats.  Usually, they
 must begin with a letter or underscore, in which case they can be
 arbitrarily long (up to an internal limit of 251 characters) and
@@ -300,7 +300,7 @@ representation can sometimes lead to incorrect comparisons for some
 numbers on some architectures.</p>
 <p style="padding-bottom: 10px;">See also the documentation of <code>use VERSION</code> and <code>require VERSION</code>
 for a convenient way to fail if the running Perl interpreter is too old.</p>
-<p style="padding-bottom: 10px;">See <a href="psi_element://pod%3A%3Aperlvar%2F%24%5EV">$^V</a> for a representation of the Perl version as a <a href="psi_element://version" style="color:red">version</a>
+<p style="padding-bottom: 10px;">See <a href="psi_element://perlvar%2F%24%5EV">$^V</a> for a representation of the Perl version as a <a href="psi_element://version" style="color:red">version</a>
 object, which allows more flexible string comparisons.</p>
 <p style="padding-bottom: 10px;">The main advantage of <code>$]</code> over <code>$^V</code> is that it works the same on any
 version of Perl.  The disadvantages are that it can't easily be compared
@@ -491,7 +491,7 @@ conversion, which works for both v-strings or version objects:</p>
 <div style="padding-bottom: 10px;"><pre><code>    printf &quot;version is v%vd\n&quot;, $^V;  # Perl's version</code></pre></div>
 <p style="padding-bottom: 10px;">See the documentation of <code>use VERSION</code> and <code>require VERSION</code>
 for a convenient way to fail if the running Perl interpreter is too old.</p>
-<p style="padding-bottom: 10px;">See also <code><a href="psi_element://pod%3A%3Aperlvar%2F%24%5D">$]</a></code> for a decimal representation of the Perl version.</p>
+<p style="padding-bottom: 10px;">See also <code><a href="psi_element://perlvar%2F%24%5D">$]</a></code> for a decimal representation of the Perl version.</p>
 <p style="padding-bottom: 10px;">The main advantage of <code>$^V</code> over <code>$]</code> is that, for Perl v5.10.0 or
 later, it overloads operators, allowing easy comparison against other
 version representations (e.g. decimal, literal v-string, &quot;v1.2.3&quot;, or
@@ -644,7 +644,7 @@ is equivalent to $2, etc.</p>
         print join &quot;-&quot;, @{^CAPTURE};
     }</code></pre></div>
 <p style="padding-bottom: 10px;">should output &quot;f-o-a-l&quot;.</p>
-<p style="padding-bottom: 10px;">See also <a href="psi_element://pod%3A%3Aperlvar%2F%24digits">$<i>digits</i></a>, <a href="psi_element://pod%3A%3Aperlvar%2F%25%7B%5ECAPTURE%7D">%{^CAPTURE}</a> and <a href="psi_element://pod%3A%3Aperlvar%2F%25%7B%5ECAPTURE_ALL%7D">%{^CAPTURE_ALL}</a>.</p>
+<p style="padding-bottom: 10px;">See also <a href="psi_element://perlvar%2F%24digits">$<i>digits</i></a>, <a href="psi_element://perlvar%2F%25%7B%5ECAPTURE%7D">%{^CAPTURE}</a> and <a href="psi_element://perlvar%2F%25%7B%5ECAPTURE_ALL%7D">%{^CAPTURE_ALL}</a>.</p>
 <p style="padding-bottom: 10px;">Note that unlike most other regex magic variables there is no single
 letter equivalent to <code>@{^CAPTURE}</code>.</p>
 <p style="padding-bottom: 10px;">This variable was added in 5.25.7</p></dd>
@@ -653,13 +653,13 @@ letter equivalent to <code>@{^CAPTURE}</code>.</p>
  </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The string matched by the last successful pattern match (not counting
 any matches hidden within a BLOCK or <code>eval()</code> enclosed by the current
 BLOCK).</p>
-<p style="padding-bottom: 10px;">See <a href="psi_element://pod%3A%3Aperlvar%2FPerformance+issues">Performance issues</a> above for the serious performance implications
+<p style="padding-bottom: 10px;">See <a href="psi_element://perlvar%2FPerformance+issues">Performance issues</a> above for the serious performance implications
 of using this variable (even once) in your code.</p>
 <p style="padding-bottom: 10px;">This variable is read-only and dynamically-scoped.</p>
 <p style="padding-bottom: 10px;">Mnemonic: like <code>&amp;</code> in some editors.</p></dd>
 <dt style="padding-bottom:4px;font-weight:bold;">${^MATCH}</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">This is similar to <code>$&amp;</code> (<code>$MATCH</code>) except that it does not incur the
 performance penalty associated with that variable.</p>
-<p style="padding-bottom: 10px;">See <a href="psi_element://pod%3A%3Aperlvar%2FPerformance+issues">Performance issues</a> above.</p>
+<p style="padding-bottom: 10px;">See <a href="psi_element://perlvar%2FPerformance+issues">Performance issues</a> above.</p>
 <p style="padding-bottom: 10px;">In Perl v5.18 and earlier, it is only guaranteed
 to return a defined value when the pattern was compiled or executed with
 the <code>/p</code> modifier.  In Perl v5.20, the <code>/p</code> modifier does nothing, so
@@ -671,14 +671,14 @@ the <code>/p</code> modifier.  In Perl v5.20, the <code>/p</code> modifier does 
   </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The string preceding whatever was matched by the last successful
 pattern match, not counting any matches hidden within a BLOCK or <code>eval</code>
 enclosed by the current BLOCK.</p>
-<p style="padding-bottom: 10px;">See <a href="psi_element://pod%3A%3Aperlvar%2FPerformance+issues">Performance issues</a> above for the serious performance implications
+<p style="padding-bottom: 10px;">See <a href="psi_element://perlvar%2FPerformance+issues">Performance issues</a> above for the serious performance implications
 of using this variable (even once) in your code.</p>
 <p style="padding-bottom: 10px;">This variable is read-only and dynamically-scoped.</p>
 <p style="padding-bottom: 10px;">Mnemonic: <code>`</code> often precedes a quoted string.</p></dd>
 <dt style="padding-bottom:4px;font-weight:bold;">${^PREMATCH}
  </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">This is similar to <code>$`</code> ($PREMATCH) except that it does not incur the
 performance penalty associated with that variable.</p>
-<p style="padding-bottom: 10px;">See <a href="psi_element://pod%3A%3Aperlvar%2FPerformance+issues">Performance issues</a> above.</p>
+<p style="padding-bottom: 10px;">See <a href="psi_element://perlvar%2FPerformance+issues">Performance issues</a> above.</p>
 <p style="padding-bottom: 10px;">In Perl v5.18 and earlier, it is only guaranteed
 to return a defined value when the pattern was compiled or executed with
 the <code>/p</code> modifier.  In Perl v5.20, the <code>/p</code> modifier does nothing, so
@@ -693,14 +693,14 @@ enclosed by the current BLOCK).  Example:</p>
 <div style="padding-bottom: 10px;"><pre><code>    local $_ = 'abcdefghi';
     /def/;
     print &quot;$`:$&amp;:$'\n&quot;;  	# prints abc:def:ghi</code></pre></div>
-<p style="padding-bottom: 10px;">See <a href="psi_element://pod%3A%3Aperlvar%2FPerformance+issues">Performance issues</a> above for the serious performance implications
+<p style="padding-bottom: 10px;">See <a href="psi_element://perlvar%2FPerformance+issues">Performance issues</a> above for the serious performance implications
 of using this variable (even once) in your code.</p>
 <p style="padding-bottom: 10px;">This variable is read-only and dynamically-scoped.</p>
 <p style="padding-bottom: 10px;">Mnemonic: <code>'</code> often follows a quoted string.</p></dd>
 <dt style="padding-bottom:4px;font-weight:bold;">${^POSTMATCH}
   </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">This is similar to <code>$'</code> (<code>$POSTMATCH</code>) except that it does not incur the
 performance penalty associated with that variable.</p>
-<p style="padding-bottom: 10px;">See <a href="psi_element://pod%3A%3Aperlvar%2FPerformance+issues">Performance issues</a> above.</p>
+<p style="padding-bottom: 10px;">See <a href="psi_element://perlvar%2FPerformance+issues">Performance issues</a> above.</p>
 <p style="padding-bottom: 10px;">In Perl v5.18 and earlier, it is only guaranteed
 to return a defined value when the pattern was compiled or executed with
 the <code>/p</code> modifier.  In Perl v5.20, the <code>/p</code> modifier does nothing, so
@@ -920,7 +920,7 @@ changes to the special variables.</p>
 <dt style="padding-bottom:4px;font-weight:bold;">@ARGV</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The array <code>@ARGV</code> contains the command-line arguments intended for
 the script.  <code>$#ARGV</code> is generally the number of arguments minus
 one, because <code>$ARGV[0]</code> is the first argument, <i>not</i> the program's
-command name itself.  See <a href="psi_element://pod%3A%3Aperlvar%2F%240">$0</a> for the command name.</p></dd>
+command name itself.  See <a href="psi_element://perlvar%2F%240">$0</a> for the command name.</p></dd>
 <dt style="padding-bottom:4px;font-weight:bold;">ARGV</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The special filehandle that iterates over command-line filenames in
 <code>@ARGV</code>.  Usually written as the null filehandle in the angle operator
 <code>&lt;&gt;</code>.  Note that currently <code>ARGV</code> only has its magical effect
@@ -1009,7 +1009,7 @@ same filehandle.  Record mode mixes with line mode only when the
 same buffering layer is in use for both modes.</p>
 <p style="padding-bottom: 10px;">You cannot call <code>input_record_separator()</code> on a handle, only as a
 static method.  See <a href="psi_element://IO%3A%3AHandle" style="color:red">IO::Handle</a>.</p>
-<p style="padding-bottom: 10px;">See also <a href="psi_element://perlport%2FNewlines">Newlines in perlport</a>.  Also see <a href="psi_element://pod%3A%3Aperlvar%2F%24.">$.</a>.</p>
+<p style="padding-bottom: 10px;">See also <a href="psi_element://perlport%2FNewlines">Newlines in perlport</a>.  Also see <a href="psi_element://perlvar%2F%24.">$.</a>.</p>
 <p style="padding-bottom: 10px;">Mnemonic: / delimits line boundaries when quoting poetry.</p></dd>
 <dt style="padding-bottom:4px;font-weight:bold;">IO::Handle-&gt;output_record_separator( EXPR )</dt>
 <dt style="padding-bottom:4px;font-weight:bold;">$OUTPUT_RECORD_SEPARATOR</dt>
@@ -1152,7 +1152,7 @@ same as <code>$?</code> when the pragma <code>use vmsish 'status'</code> is in e
 <dt style="padding-bottom:4px;font-weight:bold;">$EXTENDED_OS_ERROR</dt>
 <dt style="padding-bottom:4px;font-weight:bold;">$^E
  </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Error information specific to the current operating system.  At the
-moment, this differs from <code><a href="psi_element://pod%3A%3Aperlvar%2F%24%21">$!</a></code> under only VMS, OS/2, and Win32 (and
+moment, this differs from <code><a href="psi_element://perlvar%2F%24%21">$!</a></code> under only VMS, OS/2, and Win32 (and
 for MacPerl).  On all other platforms, <code>$^E</code> is always just the same
 as <code>$!</code>.</p>
 <p style="padding-bottom: 10px;">Under VMS, <code>$^E</code> provides the VMS status value from the last system
@@ -1166,7 +1166,7 @@ by the Win32 call <code>GetLastError()</code> which describes the last error
 from within the Win32 API.  Most Win32-specific code will report errors
 via <code>$^E</code>.  ANSI C and Unix-like calls set <code>errno</code> and so most
 portable Perl code will report errors via <code>$!</code>.</p>
-<p style="padding-bottom: 10px;">Caveats mentioned in the description of <code><a href="psi_element://pod%3A%3Aperlvar%2F%24%21">$!</a></code> generally apply to
+<p style="padding-bottom: 10px;">Caveats mentioned in the description of <code><a href="psi_element://perlvar%2F%24%21">$!</a></code> generally apply to
 <code>$^E</code>, also.</p>
 <p style="padding-bottom: 10px;">This variable was added in Perl 5.003.</p>
 <p style="padding-bottom: 10px;">Mnemonic: Extra error explanation.</p></dd>
@@ -1236,7 +1236,7 @@ specific true value is not guaranteed, but in the past has generally
 been the numeric value of <code>$!</code>.  To check if a particular key is
 meaningful on your system, use <code>exists $!{the_key}</code>; for a list of legal
 keys, use <code>keys %!</code>.  See <a href="psi_element://Errno" style="color:red">Errno</a> for more information, and also see
-<a href="psi_element://pod%3A%3Aperlvar%2F%24%21">$!</a>.</p>
+<a href="psi_element://perlvar%2F%24%21">$!</a>.</p>
 <p style="padding-bottom: 10px;">This variable was added in Perl 5.005.</p></dd>
 <dt style="padding-bottom:4px;font-weight:bold;">$CHILD_ERROR</dt>
 <dt style="padding-bottom:4px;font-weight:bold;">$?
@@ -1270,7 +1270,7 @@ catches syntax errors and other compile time exceptions.</p>
 <p style="padding-bottom: 10px;">If no error occurs, <code>eval</code> sets <code>$@</code> to the empty string.</p>
 <p style="padding-bottom: 10px;">Warning messages are not collected in this variable.  You can, however,
 set up a routine to process warnings by setting <code>$SIG{__WARN__}</code> as
-described in <a href="psi_element://pod%3A%3Aperlvar%2F%25SIG">%SIG</a>.</p>
+described in <a href="psi_element://perlvar%2F%25SIG">%SIG</a>.</p>
 <p style="padding-bottom: 10px;">Mnemonic: Where was the error &quot;at&quot;?</p></dd></dl>
 <h2>Variables related to the interpreter state</h2><p style="padding-bottom: 10px;">These variables provide information about the current interpreter state.</p>
 <dl><dt style="padding-bottom:4px;font-weight:bold;">$COMPILING</dt>

@@ -103,7 +103,7 @@ public class PodFileImpl extends PsiFileBase implements PodFile {
   }
 
   /**
-   * Returns POD file normalized package name (with optionally trimmed {@code pods::})
+   * Returns POD file normalized package name (with optionally trimmed {@code pod::})
    *
    * @return POD package name or null if this is a script file file or smth
    */
@@ -113,10 +113,7 @@ public class PodFileImpl extends PsiFileBase implements PodFile {
     if (StringUtil.isEmpty(packageName)) {
       return null;
     }
-    if (StringUtil.startsWith(packageName, "pods::")) {
-      return packageName.substring(6);
-    }
-    return packageName;
+    return StringUtil.trimStart(packageName, "pod::");
   }
 
   @Nullable

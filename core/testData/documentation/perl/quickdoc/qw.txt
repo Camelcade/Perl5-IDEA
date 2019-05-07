@@ -1,4 +1,4 @@
-<p><a href="psi_element://pod%3A%3Aperlop">pod::perlop</a>: <a href="psi_element://pod%3A%3Aperlop%2FDESCRIPTION">DESCRIPTION</a></p><h2>Quote and Quote-like Operators
+<p><a href="psi_element://perlop">perlop</a>: <a href="psi_element://perlop%2FDESCRIPTION">DESCRIPTION</a></p><h2>Quote and Quote-like Operators
       
           
  </h2><p style="padding-bottom: 10px;">While we usually think of quotes as literal values, in Perl they
@@ -61,7 +61,7 @@ and in transliterations:
     \o{23072}    [6,8]  octal char        (example: SMILEY)
     \033         [7,8]  restricted range octal char  (example: ESC)</code></pre></div>
 <dl><dt style="padding-bottom:4px;font-weight:bold;">[1]</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The result is the character specified by the hexadecimal number between
-the braces.  See <a href="psi_element://pod%3A%3Aperlop%2F%5B8%5D">[8]</a> below for details on which character.</p>
+the braces.  See <a href="psi_element://perlop%2F%5B8%5D">[8]</a> below for details on which character.</p>
 <p style="padding-bottom: 10px;">Only hexadecimal digits are valid between the braces.  If an invalid
 character is encountered, a warning will be issued and the invalid
 character and all subsequent characters (valid or invalid) within the
@@ -70,7 +70,7 @@ braces will be discarded.</p>
 the NULL character (<code>\x{00}</code>).  However, an explicit empty brace (<code>\x{}</code>)
 will not cause a warning (currently).</p></dd>
 <dt style="padding-bottom:4px;font-weight:bold;">[2]</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The result is the character specified by the hexadecimal number in the range
-0x00 to 0xFF.  See <a href="psi_element://pod%3A%3Aperlop%2F%5B8%5D">[8]</a> below for details on which character.</p>
+0x00 to 0xFF.  See <a href="psi_element://perlop%2F%5B8%5D">[8]</a> below for details on which character.</p>
 <p style="padding-bottom: 10px;">Only hexadecimal digits are valid following <code>\x</code>.  When <code>\x</code> is followed
 by fewer than two valid digits, any valid digits will be zero-padded.  This
 means that <code>\x7</code> will be interpreted as <code>\x07</code>, and a lone <code>&quot;\x&quot;</code> will be
@@ -125,14 +125,14 @@ xor'ing with the seventh bit, which is 64, and a warning raised if
 enabled.  Using the non-allowed characters generates a fatal error.</p>
 <p style="padding-bottom: 10px;">To get platform independent controls, you can use <code>\N{...}</code>.</p></dd>
 <dt style="padding-bottom:4px;font-weight:bold;">[6]</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The result is the character specified by the octal number between the braces.
-See <a href="psi_element://pod%3A%3Aperlop%2F%5B8%5D">[8]</a> below for details on which character.</p>
+See <a href="psi_element://perlop%2F%5B8%5D">[8]</a> below for details on which character.</p>
 <p style="padding-bottom: 10px;">If a character that isn't an octal digit is encountered, a warning is raised,
 and the value is based on the octal digits before it, discarding it and all
 following characters up to the closing brace.  It is a fatal error if there are
 no octal digits at all.</p></dd>
 <dt style="padding-bottom:4px;font-weight:bold;">[7]</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The result is the character specified by the three-digit octal number in the
 range 000 to 777 (but best to not use above 077, see next paragraph).  See
-<a href="psi_element://pod%3A%3Aperlop%2F%5B8%5D">[8]</a> below for details on which character.</p>
+<a href="psi_element://perlop%2F%5B8%5D">[8]</a> below for details on which character.</p>
 <p style="padding-bottom: 10px;">Some contexts allow 2 or even 1 digit, but any usage without exactly
 three digits, the first being a zero, may give unintended results.  (For
 example, in a regular expression it may be confused with a backreference;
@@ -240,7 +240,7 @@ interpolate a variable literally.</p>
 multiple levels of interpolation.  In particular, contrary to the
 expectations of shell programmers, back-quotes do <i>NOT</i> interpolate
 within double quotes, nor do single quotes impede evaluation of
-variables when used within double quotes.</p><hr><p><a href="psi_element://pod%3A%3Aperlop">pod::perlop</a>: <a href="psi_element://pod%3A%3Aperlop%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlop%2FQuote-Like+Operators">Quote-Like Operators</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;"><code>qw/<i>STRING</i>/</code>
+variables when used within double quotes.</p><hr><p><a href="psi_element://perlop">perlop</a>: <a href="psi_element://perlop%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://perlop%2FQuote-Like+Operators">Quote-Like Operators</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;"><code>qw/<i>STRING</i>/</code>
   </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Evaluates to a list of the words extracted out of <i>STRING</i>, using embedded
 whitespace as the word delimiters.  It can be understood as being roughly
 equivalent to:</p>

@@ -1,4 +1,4 @@
-<p><a href="psi_element://pod%3A%3Aperlmod">pod::perlmod</a>: <a href="psi_element://pod%3A%3Aperlmod%2FDESCRIPTION">DESCRIPTION</a></p><h2>BEGIN, UNITCHECK, CHECK, INIT and END
+<p><a href="psi_element://perlmod">perlmod</a>: <a href="psi_element://perlmod%2FDESCRIPTION">DESCRIPTION</a></p><h2>BEGIN, UNITCHECK, CHECK, INIT and END
     </h2><p style="padding-bottom: 10px;">Five specially named code blocks are executed at the beginning and at
 the end of a running Perl program.  These are the <code>BEGIN</code>,
 <code>UNITCHECK</code>, <code>CHECK</code>, <code>INIT</code>, and <code>END</code> blocks.</p>

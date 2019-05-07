@@ -1,4 +1,4 @@
-<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">eval EXPR
+<p><a href="psi_element://perlfunc">perlfunc</a>: <a href="psi_element://perlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://perlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">eval EXPR
      
  </dt>
 <dt style="padding-bottom:4px;font-weight:bold;">eval BLOCK</dt>
@@ -26,28 +26,28 @@ often is used to check if a given feature is available.</p>
 evaluated inside the mini-program; a return statement may also be used, just
 as with subroutines.  The expression providing the return value is evaluated
 in void, scalar, or list context, depending on the context of the
-<code>eval</code> itself.  See <a href="psi_element://pod%3A%3Aperlfunc%2Fwantarray"><code>wantarray</code></a> for more
+<code>eval</code> itself.  See <a href="psi_element://perlfunc%2Fwantarray"><code>wantarray</code></a> for more
 on how the evaluation context can be determined.</p>
-<p style="padding-bottom: 10px;">If there is a syntax error or runtime error, or a <a href="psi_element://pod%3A%3Aperlfunc%2Fdie+LIST"><code>die</code></a>
+<p style="padding-bottom: 10px;">If there is a syntax error or runtime error, or a <a href="psi_element://perlfunc%2Fdie+LIST"><code>die</code></a>
 statement is executed, <code>eval</code> returns
-<a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR"><code>undef</code></a> in scalar context, or an empty list in list
+<a href="psi_element://perlfunc%2Fundef+EXPR"><code>undef</code></a> in scalar context, or an empty list in list
 context, and <a href="psi_element://perlvar%2F%24%40"><code>$@</code></a> is set to the error message.  (Prior to
-5.16, a bug caused <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR"><code>undef</code></a> to be returned in list
+5.16, a bug caused <a href="psi_element://perlfunc%2Fundef+EXPR"><code>undef</code></a> to be returned in list
 context for syntax errors, but not for runtime errors.) If there was no
 error, <a href="psi_element://perlvar%2F%24%40"><code>$@</code></a> is set to the empty string.  A control flow
-operator like <a href="psi_element://pod%3A%3Aperlfunc%2Flast+LABEL"><code>last</code></a> or <a href="psi_element://pod%3A%3Aperlfunc%2Fgoto+LABEL"><code>goto</code></a> can
+operator like <a href="psi_element://perlfunc%2Flast+LABEL"><code>last</code></a> or <a href="psi_element://perlfunc%2Fgoto+LABEL"><code>goto</code></a> can
 bypass the setting of <a href="psi_element://perlvar%2F%24%40"><code>$@</code></a>.  Beware that using
 <code>eval</code> neither silences Perl from printing warnings to
 STDERR, nor does it stuff the text of warning messages into
 <a href="psi_element://perlvar%2F%24%40"><code>$@</code></a>.  To do either of those, you have to use the
 <a href="psi_element://perlvar%2F%25SIG"><code>$SIG{__WARN__}</code></a> facility, or turn off warnings inside
 the BLOCK or EXPR using <span style="white-space: nowrap;"><code>no warnings 'all'</code></span>.  See
-<a href="psi_element://pod%3A%3Aperlfunc%2Fwarn+LIST"><code>warn</code></a>, <a href="psi_element://perlvar">perlvar</a>, and <a href="psi_element://warnings" style="color:red">warnings</a>.</p>
+<a href="psi_element://perlfunc%2Fwarn+LIST"><code>warn</code></a>, <a href="psi_element://perlvar">perlvar</a>, and <a href="psi_element://warnings" style="color:red">warnings</a>.</p>
 <p style="padding-bottom: 10px;">Note that, because <code>eval</code> traps otherwise-fatal errors,
 it is useful for determining whether a particular feature (such as
-<a href="psi_element://pod%3A%3Aperlfunc%2Fsocket+SOCKET%2CDOMAIN%2CTYPE%2CPROTOCOL"><code>socket</code></a> or
-<a href="psi_element://pod%3A%3Aperlfunc%2Fsymlink+OLDFILE%2CNEWFILE"><code>symlink</code></a>) is implemented.  It is also
-Perl's exception-trapping mechanism, where the <a href="psi_element://pod%3A%3Aperlfunc%2Fdie+LIST"><code>die</code></a>
+<a href="psi_element://perlfunc%2Fsocket+SOCKET%2CDOMAIN%2CTYPE%2CPROTOCOL"><code>socket</code></a> or
+<a href="psi_element://perlfunc%2Fsymlink+OLDFILE%2CNEWFILE"><code>symlink</code></a>) is implemented.  It is also
+Perl's exception-trapping mechanism, where the <a href="psi_element://perlfunc%2Fdie+LIST"><code>die</code></a>
 operator is used to raise exceptions.</p>
 <p style="padding-bottom: 10px;">Before Perl 5.14, the assignment to <a href="psi_element://perlvar%2F%24%40"><code>$@</code></a> occurred before
 restoration
@@ -86,7 +86,7 @@ behavior.</p>
 <p style="padding-bottom: 10px;">Any <span style="white-space: nowrap;"><code>use utf8</code></span> or <span style="white-space: nowrap;"><code>no utf8</code></span> declarations within the string have
 no effect, and source filters are forbidden.  (<code>unicode_strings</code>,
 however, can appear within the string.)  See also the
-<a href="psi_element://pod%3A%3Aperlfunc%2Fevalbytes+EXPR"><code>evalbytes</code></a> operator, which works properly with
+<a href="psi_element://perlfunc%2Fevalbytes+EXPR"><code>evalbytes</code></a> operator, which works properly with
 source filters.</p>
 <p style="padding-bottom: 10px;">Variables defined outside the <code>eval</code> and used inside it retain their
 original UTF-8ness.  Everything inside the string follows the normal
@@ -105,7 +105,7 @@ scope is currently being compiled.  To give an example with the CPAN module
 <a href="psi_element://Semi%3A%3ASemicolons" style="color:red">Semi::Semicolons</a>:</p>
 <div style="padding-bottom: 10px;"><pre><code> BEGIN { eval &quot;use Semi::Semicolons; # not filtered&quot; }
  # filtered here!</code></pre></div>
-<p style="padding-bottom: 10px;"><a href="psi_element://pod%3A%3Aperlfunc%2Fevalbytes+EXPR"><code>evalbytes</code></a> fixes that to work the way one would
+<p style="padding-bottom: 10px;"><a href="psi_element://perlfunc%2Fevalbytes+EXPR"><code>evalbytes</code></a> fixes that to work the way one would
 expect:</p>
 <div style="padding-bottom: 10px;"><pre><code> use feature &quot;evalbytes&quot;;
  BEGIN { evalbytes &quot;use Semi::Semicolons; # filtered&quot; }
@@ -170,7 +170,7 @@ as this example shows:</p>
     eval { local $SIG{'__DIE__'}; $answer = $a / $b; };
     warn $@ if $@;</code></pre></div>
 <p style="padding-bottom: 10px;">This is especially significant, given that <code>__DIE__</code> hooks can call
-<a href="psi_element://pod%3A%3Aperlfunc%2Fdie+LIST"><code>die</code></a> again, which has the effect of changing their error
+<a href="psi_element://perlfunc%2Fdie+LIST"><code>die</code></a> again, which has the effect of changing their error
 messages:</p>
 <div style="padding-bottom: 10px;"><pre><code>    # __DIE__ hooks may modify error messages
     {
@@ -182,6 +182,6 @@ messages:</p>
 <p style="padding-bottom: 10px;">Because this promotes action at a distance, this counterintuitive behavior
 may be fixed in a future release.</p>
 <p style="padding-bottom: 10px;"><code>eval BLOCK</code> does <i>not</i> count as a loop, so the loop control statements
-<a href="psi_element://pod%3A%3Aperlfunc%2Fnext+LABEL"><code>next</code></a>, <a href="psi_element://pod%3A%3Aperlfunc%2Flast+LABEL"><code>last</code></a>, or
-<a href="psi_element://pod%3A%3Aperlfunc%2Fredo+LABEL"><code>redo</code></a> cannot be used to leave or restart the block.</p>
+<a href="psi_element://perlfunc%2Fnext+LABEL"><code>next</code></a>, <a href="psi_element://perlfunc%2Flast+LABEL"><code>last</code></a>, or
+<a href="psi_element://perlfunc%2Fredo+LABEL"><code>redo</code></a> cannot be used to leave or restart the block.</p>
 <p style="padding-bottom: 10px;">The final semicolon, if any, may be omitted from within the BLOCK.</p></dd></dl></dd></dl>

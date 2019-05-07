@@ -1,13 +1,13 @@
-<ul style="margin-left: 7px;margin-top:0px;margin-bottom:0px;"><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://pod%3A%3Aperlpod%2FNAME">NAME</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://pod%3A%3Aperlpod%2FDESCRIPTION">DESCRIPTION</a></li><ul style="margin-left: 20px;margin-top:0px;margin-bottom:0px;"><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://pod%3A%3Aperlpod%2FOrdinary+Paragraph">Ordinary Paragraph</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://pod%3A%3Aperlpod%2FVerbatim+Paragraph">Verbatim Paragraph</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://pod%3A%3Aperlpod%2FCommand+Paragraph">Command Paragraph</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://pod%3A%3Aperlpod%2FFormatting+Codes">Formatting Codes</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://pod%3A%3Aperlpod%2FThe+Intent">The Intent</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://pod%3A%3Aperlpod%2FEmbedding+Pods+in+Perl+Modules">Embedding Pods in Perl Modules</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://pod%3A%3Aperlpod%2FHints+for+Writing+Pod">Hints for Writing Pod</a></li></ul><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://pod%3A%3Aperlpod%2FSEE+ALSO">SEE ALSO</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://pod%3A%3Aperlpod%2FAUTHOR">AUTHOR</a></li></ul><h1>NAME
+<ul style="margin-left: 7px;margin-top:0px;margin-bottom:0px;"><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://perlpod%2FNAME">NAME</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://perlpod%2FDESCRIPTION">DESCRIPTION</a></li><ul style="margin-left: 20px;margin-top:0px;margin-bottom:0px;"><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://perlpod%2FOrdinary+Paragraph">Ordinary Paragraph</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://perlpod%2FVerbatim+Paragraph">Verbatim Paragraph</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://perlpod%2FCommand+Paragraph">Command Paragraph</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://perlpod%2FFormatting+Codes">Formatting Codes</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://perlpod%2FThe+Intent">The Intent</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://perlpod%2FEmbedding+Pods+in+Perl+Modules">Embedding Pods in Perl Modules</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://perlpod%2FHints+for+Writing+Pod">Hints for Writing Pod</a></li></ul><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://perlpod%2FSEE+ALSO">SEE ALSO</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://perlpod%2FAUTHOR">AUTHOR</a></li></ul><h1>NAME
  </h1><p style="padding-bottom: 10px;">perlpod - the Plain Old Documentation format</p>
 <h1>DESCRIPTION</h1><p style="padding-bottom: 10px;">Pod is a simple-to-use markup language used for writing documentation
 for Perl, Perl programs, and Perl modules.</p>
 <p style="padding-bottom: 10px;">Translators are available for converting Pod to various formats
 like plain text, HTML, man pages, and more.</p>
 <p style="padding-bottom: 10px;">Pod markup consists of three basic kinds of paragraphs:
-<a href="psi_element://pod%3A%3Aperlpod%2FOrdinary+Paragraph">ordinary</a>,
-<a href="psi_element://pod%3A%3Aperlpod%2FVerbatim+Paragraph">verbatim</a>, and 
-<a href="psi_element://pod%3A%3Aperlpod%2FCommand+Paragraph">command</a>.</p>
+<a href="psi_element://perlpod%2FOrdinary+Paragraph">ordinary</a>,
+<a href="psi_element://perlpod%2FVerbatim+Paragraph">verbatim</a>, and 
+<a href="psi_element://perlpod%2FCommand+Paragraph">command</a>.</p>
 
 <h2>Ordinary Paragraph</h2><p style="padding-bottom: 10px;">Most paragraphs in your documentation will be ordinary blocks
 of text, like this one.  You can simply type in your text without
@@ -17,7 +17,7 @@ like being rewrapped, probably put into a proportionally spaced
 font, and maybe even justified.</p>
 <p style="padding-bottom: 10px;">You can use formatting codes in ordinary paragraphs, for <B>bold</B>,
 <i>italic</i>, <code>code-style</code>, <a href="psi_element://perlfaq">hyperlinks</a>, and more.  Such
-codes are explained in the &quot;<a href="psi_element://pod%3A%3Aperlpod%2FFormatting+Codes">Formatting Codes</a>&quot;
+codes are explained in the &quot;<a href="psi_element://perlpod%2FFormatting+Codes">Formatting Codes</a>&quot;
 section, below.</p>
 
 <h2>Verbatim Paragraph
@@ -64,7 +64,7 @@ heading.  For example:</p>
 The text in these heading commands can use formatting codes, as seen here:</p>
 <div style="padding-bottom: 10px;"><pre><code>  =head2 Possible Values for C&lt;$/&gt;</code></pre></div>
 <p style="padding-bottom: 10px;">Such commands are explained in the
-&quot;<a href="psi_element://pod%3A%3Aperlpod%2FFormatting+Codes">Formatting Codes</a>&quot; section, below.</p></dd>
+&quot;<a href="psi_element://perlpod%2FFormatting+Codes">Formatting Codes</a>&quot; section, below.</p></dd>
 <dt style="padding-bottom:4px;font-weight:bold;"><code>=over <i>indentlevel</i></code>
      </dt>
 <dt style="padding-bottom:4px;font-weight:bold;"><code>=item <i>stuff...</i></code></dt>
@@ -80,7 +80,7 @@ you provide.)  In the <i>stuff</i> in <code>=item <i>stuff...</i></code>, you ma
 use formatting codes, as seen here:</p>
 <div style="padding-bottom: 10px;"><pre><code>  =item Using C&lt;$|&gt; to Control Buffering</code></pre></div>
 <p style="padding-bottom: 10px;">Such commands are explained in the
-&quot;<a href="psi_element://pod%3A%3Aperlpod%2FFormatting+Codes">Formatting Codes</a>&quot; section, below.</p>
+&quot;<a href="psi_element://perlpod%2FFormatting+Codes">Formatting Codes</a>&quot; section, below.</p>
 <p style="padding-bottom: 10px;">Note also that there are some basic rules to using &quot;=over&quot; ...
 &quot;=back&quot; regions:</p>
 <ul><li>

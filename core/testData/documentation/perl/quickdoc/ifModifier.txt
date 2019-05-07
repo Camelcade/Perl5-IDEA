@@ -1,4 +1,4 @@
-<p><a href="psi_element://pod%3A%3Aperlsyn">pod::perlsyn</a>: <a href="psi_element://pod%3A%3Aperlsyn%2FDESCRIPTION">DESCRIPTION</a></p><h2>Statement Modifiers
+<p><a href="psi_element://perlsyn">perlsyn</a>: <a href="psi_element://perlsyn%2FDESCRIPTION">DESCRIPTION</a></p><h2>Statement Modifiers
     
    </h2><p style="padding-bottom: 10px;">Any simple statement may optionally be followed by a <i>SINGLE</i> modifier,
 just before the terminating semicolon (or block ending).  The possible
@@ -81,4 +81,4 @@ a <code>next</code> from inside a <code>foreach</code> and <code>break</code> fr
 <p style="padding-bottom: 10px;">Under the current implementation, the <code>foreach</code> loop can be
 anywhere within the <code>when</code> modifier's dynamic scope, but must be
 within the <code>given</code> block's lexical scope.  This restriction may
-be relaxed in a future release.  See <a href="psi_element://pod%3A%3Aperlsyn%2FSwitch+Statements">Switch Statements</a> below.</p>
+be relaxed in a future release.  See <a href="psi_element://perlsyn%2FSwitch+Statements">Switch Statements</a> below.</p>

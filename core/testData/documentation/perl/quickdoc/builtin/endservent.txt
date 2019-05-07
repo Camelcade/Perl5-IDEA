@@ -1,4 +1,4 @@
-<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">endservent</dt><dd style="padding-top:6px;">
+<p><a href="psi_element://perlfunc">perlfunc</a>: <a href="psi_element://perlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://perlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">endservent</dt><dd style="padding-top:6px;">
 <p style="padding-bottom: 10px;">These routines are the same as their counterparts in the
 system C library.  In list context, the return values from the
 various get routines are as follows:</p>
@@ -76,9 +76,9 @@ you can write this:</p>
     if (defined $packed_ip) {
         $ip_address = inet_ntoa($packed_ip);
     }</code></pre></div>
-<p style="padding-bottom: 10px;">Make sure <a href="psi_element://pod%3A%3Aperlfunc%2Fgethostbyname+NAME"><code>gethostbyname</code></a> is called in SCALAR
+<p style="padding-bottom: 10px;">Make sure <a href="psi_element://perlfunc%2Fgethostbyname+NAME"><code>gethostbyname</code></a> is called in SCALAR
 context and that its return value is checked for definedness.</p>
-<p style="padding-bottom: 10px;">The <a href="psi_element://pod%3A%3Aperlfunc%2Fgetprotobynumber+NUMBER"><code>getprotobynumber</code></a> function, even
+<p style="padding-bottom: 10px;">The <a href="psi_element://perlfunc%2Fgetprotobynumber+NUMBER"><code>getprotobynumber</code></a> function, even
 though it only takes one argument, has the precedence of a list
 operator, so beware:</p>
 <div style="padding-bottom: 10px;"><pre><code>    getprotobynumber $number eq 'icmp'   # WRONG

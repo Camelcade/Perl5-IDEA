@@ -1,4 +1,4 @@
-<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">reverse LIST
+<p><a href="psi_element://perlfunc">perlfunc</a>: <a href="psi_element://perlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://perlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">reverse LIST
   </dt><dd style="padding-top:6px;">
 <p style="padding-bottom: 10px;">In list context, returns a list value consisting of the elements
 of LIST in the opposite order.  In scalar context, concatenates the
@@ -7,7 +7,7 @@ in the opposite order.</p>
 <div style="padding-bottom: 10px;"><pre><code>    print join(&quot;, &quot;, reverse &quot;world&quot;, &quot;Hello&quot;); # Hello, world
 
     print scalar reverse &quot;dlrow ,&quot;, &quot;olleH&quot;;    # Hello, world</code></pre></div>
-<p style="padding-bottom: 10px;">Used without arguments in scalar context, <a href="psi_element://pod%3A%3Aperlfunc%2Freverse+LIST"><code>reverse</code></a>
+<p style="padding-bottom: 10px;">Used without arguments in scalar context, <a href="psi_element://perlfunc%2Freverse+LIST"><code>reverse</code></a>
 reverses <a href="psi_element://perlvar%2F%24_"><code>$_</code></a>.</p>
 <div style="padding-bottom: 10px;"><pre><code>    $_ = &quot;dlrow ,olleH&quot;;
     print reverse;                         # No output, list context

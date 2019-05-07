@@ -1,17 +1,17 @@
-<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">exec LIST
+<p><a href="psi_element://perlfunc">perlfunc</a>: <a href="psi_element://perlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://perlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">exec LIST
  </dt>
 <dt style="padding-bottom:4px;font-weight:bold;">exec PROGRAM LIST</dt><dd style="padding-top:6px;">
-<p style="padding-bottom: 10px;">The <a href="psi_element://pod%3A%3Aperlfunc%2Fexec+LIST"><code>exec</code></a> function executes a system command <i>and never
-returns</i>; use <a href="psi_element://pod%3A%3Aperlfunc%2Fsystem+LIST"><code>system</code></a> instead of <a href="psi_element://pod%3A%3Aperlfunc%2Fexec+LIST"><code>exec</code></a>
+<p style="padding-bottom: 10px;">The <a href="psi_element://perlfunc%2Fexec+LIST"><code>exec</code></a> function executes a system command <i>and never
+returns</i>; use <a href="psi_element://perlfunc%2Fsystem+LIST"><code>system</code></a> instead of <a href="psi_element://perlfunc%2Fexec+LIST"><code>exec</code></a>
 if you want it to return.  It fails and
 returns false only if the command does not exist <i>and</i> it is executed
 directly instead of via your system's command shell (see below).</p>
-<p style="padding-bottom: 10px;">Since it's a common mistake to use <a href="psi_element://pod%3A%3Aperlfunc%2Fexec+LIST"><code>exec</code></a> instead of
-<a href="psi_element://pod%3A%3Aperlfunc%2Fsystem+LIST"><code>system</code></a>, Perl warns you if <a href="psi_element://pod%3A%3Aperlfunc%2Fexec+LIST"><code>exec</code></a> is
+<p style="padding-bottom: 10px;">Since it's a common mistake to use <a href="psi_element://perlfunc%2Fexec+LIST"><code>exec</code></a> instead of
+<a href="psi_element://perlfunc%2Fsystem+LIST"><code>system</code></a>, Perl warns you if <a href="psi_element://perlfunc%2Fexec+LIST"><code>exec</code></a> is
 called in void context and if there is a following statement that isn't
-<a href="psi_element://pod%3A%3Aperlfunc%2Fdie+LIST"><code>die</code></a>, <a href="psi_element://pod%3A%3Aperlfunc%2Fwarn+LIST"><code>warn</code></a>, or <a href="psi_element://pod%3A%3Aperlfunc%2Fexit+EXPR"><code>exit</code></a> (if
+<a href="psi_element://perlfunc%2Fdie+LIST"><code>die</code></a>, <a href="psi_element://perlfunc%2Fwarn+LIST"><code>warn</code></a>, or <a href="psi_element://perlfunc%2Fexit+EXPR"><code>exit</code></a> (if
 <a href="psi_element://warnings" style="color:red">warnings</a> are enabled--but you always do that, right?).  If you
-<i>really</i> want to follow an <a href="psi_element://pod%3A%3Aperlfunc%2Fexec+LIST"><code>exec</code></a> with some other
+<i>really</i> want to follow an <a href="psi_element://perlfunc%2Fexec+LIST"><code>exec</code></a> with some other
 statement, you can use one of these styles to avoid the warning:</p>
 <div style="padding-bottom: 10px;"><pre><code>    exec ('foo')   or print STDERR &quot;couldn't exec foo: $!&quot;;
     { exec ('foo') }; print STDERR &quot;couldn't exec foo: $!&quot;;</code></pre></div>
@@ -37,9 +37,9 @@ is only a single scalar in the list.)  Example:</p>
 <p style="padding-bottom: 10px;">When the arguments get executed via the system shell, results are
 subject to its quirks and capabilities.  See <a href="psi_element://perlop%2F%60STRING%60">`STRING` in perlop</a>
 for details.</p>
-<p style="padding-bottom: 10px;">Using an indirect object with <a href="psi_element://pod%3A%3Aperlfunc%2Fexec+LIST"><code>exec</code></a> or
-<a href="psi_element://pod%3A%3Aperlfunc%2Fsystem+LIST"><code>system</code></a> is also more secure.  This usage (which also
-works fine with <a href="psi_element://pod%3A%3Aperlfunc%2Fsystem+LIST"><code>system</code></a>) forces
+<p style="padding-bottom: 10px;">Using an indirect object with <a href="psi_element://perlfunc%2Fexec+LIST"><code>exec</code></a> or
+<a href="psi_element://perlfunc%2Fsystem+LIST"><code>system</code></a> is also more secure.  This usage (which also
+works fine with <a href="psi_element://perlfunc%2Fsystem+LIST"><code>system</code></a>) forces
 interpretation of the arguments as a multivalued list, even if the
 list had just one argument.  That way you're safe from the shell
 expanding wildcards or splitting up words with whitespace in them.</p>
@@ -61,6 +61,6 @@ To be safe, you may need to set <a href="psi_element://perlvar%2F%24%7C"><code>$
 (<code>$AUTOFLUSH</code> in <a href="psi_element://English" style="color:red">English</a>) or call the <code>autoflush</code> method of
 <a href="psi_element://IO%3A%3AHandle%2FMETHODS" style="color:red"><code>IO::Handle</code></a> on any open handles to avoid lost
 output.</p>
-<p style="padding-bottom: 10px;">Note that <a href="psi_element://pod%3A%3Aperlfunc%2Fexec+LIST"><code>exec</code></a> will not call your <code>END</code> blocks, nor
+<p style="padding-bottom: 10px;">Note that <a href="psi_element://perlfunc%2Fexec+LIST"><code>exec</code></a> will not call your <code>END</code> blocks, nor
 will it invoke <code>DESTROY</code> methods on your objects.</p>
 <p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Fexec">exec in perlport</a>.</p></dd></dl>

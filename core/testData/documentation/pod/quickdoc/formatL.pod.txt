@@ -1,4 +1,4 @@
-<p><a href="psi_element://pod%3A%3Aperlpod">pod::perlpod</a>: <a href="psi_element://pod%3A%3Aperlpod%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlpod%2FFormatting+Codes">Formatting Codes</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;"><code>L&lt;name&gt;</code> -- a hyperlink
+<p><a href="psi_element://perlpod">perlpod</a>: <a href="psi_element://perlpod%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://perlpod%2FFormatting+Codes">Formatting Codes</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;"><code>L&lt;name&gt;</code> -- a hyperlink
    </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">There are various syntaxes, listed below.  In the syntaxes given,
 <code>text</code>, <code>name</code>, and <code>section</code> cannot contain the characters
 '/' and '|'; and any '&lt;' or '&gt;' should be matched.</p>

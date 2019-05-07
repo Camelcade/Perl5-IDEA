@@ -1,3 +1,5 @@
 Total elements: 2
 	PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 53823 in perlop.pod
+		qq in perlop; /perl5language.png, null]
 	PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 88241 in perlop.pod
+		qq in perlop; /perl5language.png, null]

@@ -1,4 +1,4 @@
-<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">package NAMESPACE</dt>
+<p><a href="psi_element://perlfunc">perlfunc</a>: <a href="psi_element://perlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://perlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">package NAMESPACE</dt>
 <dt style="padding-bottom:4px;font-weight:bold;">package NAMESPACE VERSION
    </dt>
 <dt style="padding-bottom:4px;font-weight:bold;">package NAMESPACE BLOCK</dt>
@@ -8,20 +8,20 @@
 given namespace.  The scope of the package declaration is either the
 supplied code BLOCK or, in the absence of a BLOCK, from the declaration
 itself through the end of current scope (the enclosing block, file, or
-<a href="psi_element://pod%3A%3Aperlfunc%2Feval+EXPR"><code>eval</code></a>).  That is, the forms without a BLOCK are
+<a href="psi_element://perlfunc%2Feval+EXPR"><code>eval</code></a>).  That is, the forms without a BLOCK are
 operative through the end of the current scope, just like the
-<a href="psi_element://pod%3A%3Aperlfunc%2Fmy+VARLIST"><code>my</code></a>, <a href="psi_element://pod%3A%3Aperlfunc%2Fstate+VARLIST"><code>state</code></a>, and
-<a href="psi_element://pod%3A%3Aperlfunc%2Four+VARLIST"><code>our</code></a> operators.  All unqualified dynamic identifiers
+<a href="psi_element://perlfunc%2Fmy+VARLIST"><code>my</code></a>, <a href="psi_element://perlfunc%2Fstate+VARLIST"><code>state</code></a>, and
+<a href="psi_element://perlfunc%2Four+VARLIST"><code>our</code></a> operators.  All unqualified dynamic identifiers
 in this scope will be in the given namespace, except where overridden by
-another <a href="psi_element://pod%3A%3Aperlfunc%2Fpackage+NAMESPACE"><code>package</code></a> declaration or
+another <a href="psi_element://perlfunc%2Fpackage+NAMESPACE"><code>package</code></a> declaration or
 when they're one of the special identifiers that qualify into <code>main::</code>,
 like <code>STDOUT</code>, <code>ARGV</code>, <code>ENV</code>, and the punctuation variables.</p>
 <p style="padding-bottom: 10px;">A package statement affects dynamic variables only, including those
-you've used <a href="psi_element://pod%3A%3Aperlfunc%2Flocal+EXPR"><code>local</code></a> on, but <i>not</i> lexically-scoped
-variables, which are created with <a href="psi_element://pod%3A%3Aperlfunc%2Fmy+VARLIST"><code>my</code></a>,
-<a href="psi_element://pod%3A%3Aperlfunc%2Fstate+VARLIST"><code>state</code></a>, or <a href="psi_element://pod%3A%3Aperlfunc%2Four+VARLIST"><code>our</code></a>.  Typically it
+you've used <a href="psi_element://perlfunc%2Flocal+EXPR"><code>local</code></a> on, but <i>not</i> lexically-scoped
+variables, which are created with <a href="psi_element://perlfunc%2Fmy+VARLIST"><code>my</code></a>,
+<a href="psi_element://perlfunc%2Fstate+VARLIST"><code>state</code></a>, or <a href="psi_element://perlfunc%2Four+VARLIST"><code>our</code></a>.  Typically it
 would be the first declaration in a file included by
-<a href="psi_element://pod%3A%3Aperlfunc%2Frequire+VERSION"><code>require</code></a> or <a href="psi_element://pod%3A%3Aperlfunc%2Fuse+Module+VERSION+LIST"><code>use</code></a>.
+<a href="psi_element://perlfunc%2Frequire+VERSION"><code>require</code></a> or <a href="psi_element://perlfunc%2Fuse+Module+VERSION+LIST"><code>use</code></a>.
 You can switch into a
 package in more than one place, since this only determines which default
 symbol table the compiler uses for the rest of that block.  You can refer to
@@ -31,7 +31,7 @@ or <code>ThatPack::INPUT_HANDLE</code>.  If package name is omitted, the <code>m
 package as assumed.  That is, <code>$::sail</code> is equivalent to
 <code>$main::sail</code> (as well as to <code>$main'sail</code>, still seen in ancient
 code, mostly from Perl 4).</p>
-<p style="padding-bottom: 10px;">If VERSION is provided, <a href="psi_element://pod%3A%3Aperlfunc%2Fpackage+NAMESPACE"><code>package</code></a> sets the
+<p style="padding-bottom: 10px;">If VERSION is provided, <a href="psi_element://perlfunc%2Fpackage+NAMESPACE"><code>package</code></a> sets the
 <code>$VERSION</code> variable in the given
 namespace to a <a href="psi_element://version" style="color:red">version</a> object with the VERSION provided.  VERSION must be a
 &quot;strict&quot; style version number as defined by the <a href="psi_element://version" style="color:red">version</a> module: a positive

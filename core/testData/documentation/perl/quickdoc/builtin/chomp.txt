@@ -1,8 +1,8 @@
-<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">chomp VARIABLE
+<p><a href="psi_element://perlfunc">perlfunc</a>: <a href="psi_element://perlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://perlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">chomp VARIABLE
     </dt>
 <dt style="padding-bottom:4px;font-weight:bold;">chomp( LIST )</dt>
 <dt style="padding-bottom:4px;font-weight:bold;">chomp</dt><dd style="padding-top:6px;">
-<p style="padding-bottom: 10px;">This safer version of <a href="psi_element://pod%3A%3Aperlfunc%2Fchop+VARIABLE"><code>chop</code></a> removes any trailing
+<p style="padding-bottom: 10px;">This safer version of <a href="psi_element://perlfunc%2Fchop+VARIABLE"><code>chop</code></a> removes any trailing
 string that corresponds to the current value of
 <a href="psi_element://perlvar%2F%24%2F"><code>$/</code></a> (also known as <code>$INPUT_RECORD_SEPARATOR</code>
 in the <a href="psi_element://English" style="color:red"><code>English</code></a> module).  It returns the total
@@ -12,7 +12,7 @@ that the final record may be missing its newline.  When in paragraph
 mode (<code>$/ = ''</code>), it removes all trailing newlines from the string.
 When in slurp mode (<code>$/ = undef</code>) or fixed-length record mode
 (<a href="psi_element://perlvar%2F%24%2F"><code>$/</code></a> is a reference to an integer or the like;
-see <a href="psi_element://perlvar">perlvar</a>), <a href="psi_element://pod%3A%3Aperlfunc%2Fchomp+VARIABLE"><code>chomp</code></a> won't remove anything.
+see <a href="psi_element://perlvar">perlvar</a>), <a href="psi_element://perlfunc%2Fchomp+VARIABLE"><code>chomp</code></a> won't remove anything.
 If VARIABLE is omitted, it chomps <a href="psi_element://perlvar%2F%24_"><code>$_</code></a>.  Example:</p>
 <div style="padding-bottom: 10px;"><pre><code>    while (&lt;&gt;) {
         chomp;  # avoid \n on last field
@@ -20,7 +20,7 @@ If VARIABLE is omitted, it chomps <a href="psi_element://perlvar%2F%24_"><code>$
         # ...
     }</code></pre></div>
 <p style="padding-bottom: 10px;">If VARIABLE is a hash, it chomps the hash's values, but not its keys,
-resetting the <a href="psi_element://pod%3A%3Aperlfunc%2Feach+HASH"><code>each</code></a> iterator in the process.</p>
+resetting the <a href="psi_element://perlfunc%2Feach+HASH"><code>each</code></a> iterator in the process.</p>
 <p style="padding-bottom: 10px;">You can actually chomp anything that's an lvalue, including an assignment:</p>
 <div style="padding-bottom: 10px;"><pre><code>    chomp(my $cwd = `pwd`);
     chomp(my $answer = &lt;STDIN&gt;);</code></pre></div>

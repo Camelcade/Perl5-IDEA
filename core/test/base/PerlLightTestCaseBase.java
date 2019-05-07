@@ -2204,6 +2204,9 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     removeVirtualFileFilter();
     for (PsiElement element : targetElements) {
       sb.append("\t").append(serializePsiElement(element)).append("\n");
+      if (element instanceof NavigationItem) {
+        sb.append("\t\t").append(serializePresentation(((NavigationItem)element).getPresentation())).append("\n");
+      }
     }
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
   }

@@ -1,4 +1,4 @@
-<p><a href="psi_element://pod%3A%3Aperlsyn">pod::perlsyn</a>: <a href="psi_element://pod%3A%3Aperlsyn%2FDESCRIPTION">DESCRIPTION</a></p><h2>Compound Statements
+<p><a href="psi_element://perlsyn">perlsyn</a>: <a href="psi_element://perlsyn%2FDESCRIPTION">DESCRIPTION</a></p><h2>Compound Statements
     
          </h2><p style="padding-bottom: 10px;">In Perl, a sequence of statements that defines a scope is called a block.
 Sometimes a block is delimited by the file containing it (in the case
@@ -46,7 +46,7 @@ liberally, not only when Perl would otherwise guess incorrectly.</p>
 
     PHASE BLOCK</code></pre></div>
 <p style="padding-bottom: 10px;">The experimental <code>given</code> statement is <i>not automatically enabled</i>; see
-<a href="psi_element://pod%3A%3Aperlsyn%2FSwitch+Statements">Switch Statements</a> below for how to do so, and the attendant caveats.</p>
+<a href="psi_element://perlsyn%2FSwitch+Statements">Switch Statements</a> below for how to do so, and the attendant caveats.</p>
 <p style="padding-bottom: 10px;">Unlike in C and Pascal, in Perl these are all defined in terms of BLOCKs,
 not statements.  This means that the curly brackets are <i>required</i>--no
 dangling statements allowed.  If you want to write conditionals without
