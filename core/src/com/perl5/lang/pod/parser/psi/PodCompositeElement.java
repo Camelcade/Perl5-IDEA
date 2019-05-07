@@ -67,16 +67,15 @@ public interface PodCompositeElement extends PsiElement, PodRenderableElement, I
   @Override
   default String getLocationString() {
     PsiFile file = getContainingFile();
-    if (file != null) {
-      ItemPresentation presentation = file.getPresentation();
-      if (presentation != null) {
-        String filePresentableText = presentation.getPresentableText();
-        if (StringUtil.isNotEmpty(filePresentableText)) {
-          return filePresentableText;
-        }
-      }
+    if (file == null) {
+      return null;
     }
-    return null;
+    ItemPresentation presentation = file.getPresentation();
+    if (presentation == null) {
+      return null;
+    }
+    String filePresentableText = presentation.getPresentableText();
+    return StringUtil.isNotEmpty(filePresentableText) ? filePresentableText : null;
   }
 
   @Nullable
