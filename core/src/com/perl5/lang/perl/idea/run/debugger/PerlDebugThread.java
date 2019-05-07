@@ -142,6 +142,14 @@ public class PerlDebugThread extends Thread {
     int debugPort = myDebugProfileState.getDebugPort();
     String debugName = debugHost + ":" + debugPort;
     if (myPerlDebugOptions.getPerlRole().equals(PerlDebugOptions.ROLE_SERVER)) {
+      while (!myStop && !PerlDebugProfileStateBase.isReadyForConnection(myExecutionResult.getProcessHandler())) {
+        print("perl.debug.waiting.start");
+        Thread.sleep(1000);
+      }
+
+      if (myStop) {
+        return;
+      }
       print("perl.debug.connecting.to", debugName);
       for (int i = 1; i < 11 && !myStop; i++) {
         try {
