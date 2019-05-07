@@ -17,24 +17,31 @@
 package com.perl5.lang.pod.parser.psi.mixin;
 
 import com.intellij.lang.ASTNode;
-import com.perl5.lang.pod.parser.psi.PodOverSectionContent;
 import com.perl5.lang.pod.parser.psi.PodRenderingContext;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class PodOverSectionContentMixin extends PodCompositeElementMixin implements PodOverSectionContent {
-  public PodOverSectionContentMixin(@NotNull ASTNode node) {
+public class PodOverSectionContent extends PodCompositeElementMixin {
+  public PodOverSectionContent(@NotNull ASTNode node) {
     super(node);
   }
 
-  @Override
+  /**
+   * Checks if first element is bulleted, according to http://perldoc.perl.org/perlpodspec.html#About-%3dover...%3dback-Regions
+   *
+   * @return true if list should be bulleted
+   */
   public boolean isBulleted() {
     PodSectionItem firstItem = getFirstItem();
     return firstItem != null && firstItem.isBulleted();
   }
 
+  /**
+   * Returns first list item
+   *
+   * @return item or null if not any
+   */
   @Nullable
-  @Override
   public PodSectionItem getFirstItem() {
     return findChildByClass(PodSectionItem.class);
   }

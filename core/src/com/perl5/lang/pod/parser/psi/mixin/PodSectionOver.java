@@ -14,10 +14,15 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.pod.parser.psi;
+package com.perl5.lang.pod.parser.psi.mixin;
 
-import com.intellij.psi.PsiElement;
+import com.intellij.lang.ASTNode;
+import com.perl5.lang.pod.parser.psi.PodStructureElement;
+import org.jetbrains.annotations.NotNull;
 
 
-public interface PodSectionOver extends PsiElement, PodStructureElement {
+public class PodSectionOver extends PodSectionMixin implements PodStructureElement {
+  public PodSectionOver(@NotNull ASTNode node) {
+    super(node);
+  }
 }

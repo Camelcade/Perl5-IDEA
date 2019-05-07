@@ -22,8 +22,8 @@ import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.lang.pod.parser.psi.PodSectionOver;
 import com.perl5.lang.pod.parser.psi.PodVisitor;
+import com.perl5.lang.pod.parser.psi.mixin.PodSectionOver;
 import com.perl5.lang.pod.psi.PsiItemSection;
 import org.jetbrains.annotations.NotNull;
 

@@ -33,8 +33,8 @@
   mixin("pod_verbatim_paragraph")="com.perl5.lang.pod.parser.psi.mixin.PodSectionVerbatimParagraphMixin"
   mixin("unknown_section")="com.perl5.lang.pod.parser.psi.mixin.PodUnknownSectionMixIn"
 
-  mixin("over_section")="com.perl5.lang.pod.parser.psi.mixin.PodSectionOverMixin"
-  mixin("over_section_content")="com.perl5.lang.pod.parser.psi.mixin.PodOverSectionContentMixin"
+  mixin("over_section")="com.perl5.lang.pod.parser.psi.mixin.PodSectionOver"
+  mixin("over_section_content")="com.perl5.lang.pod.parser.psi.mixin.PodOverSectionContent"
   mixin("item_section")="com.perl5.lang.pod.parser.psi.mixin.PodSectionItem"
   mixin("begin_section|for_section")="com.perl5.lang.pod.parser.psi.mixin.PodSectionFormattedMixin"
 

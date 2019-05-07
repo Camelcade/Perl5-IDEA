@@ -29,7 +29,7 @@ import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.lexer.PodElementTypes;
-import com.perl5.lang.pod.parser.psi.PodOverSectionContent;
+import com.perl5.lang.pod.parser.psi.mixin.PodOverSectionContent;
 import com.perl5.lang.pod.parser.psi.mixin.PodSectionItem;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
