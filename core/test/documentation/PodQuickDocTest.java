@@ -31,6 +31,8 @@ public class PodQuickDocTest extends PodLightTestCase {
     return "testData/documentation/pod/quickdoc";
   }
 
+  public void testVariousItems() {doTest();}
+
   public void testHeader1() {doTest();}
 
   public void testIndexContent() {doTest();}

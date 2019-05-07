@@ -1,0 +1,114 @@
+=head1 Lists rendering
+
+=head2 Numbered list
+
+=over 1
+
+=item 1
+
+First item
+
+=item 2
+
+Second item
+
+=back
+
+=head2 Numbered list same line
+
+=over 1
+
+=item 1 First item
+
+Some description
+
+=item 2 Second item
+
+Item description
+
+=back
+
+=head2 Numbered list with periods
+
+=over 1
+
+=item 1.
+
+First item
+
+=item 2.
+
+Second item
+
+=back
+
+=head2 Numbered list with periods same line
+
+=over 1
+
+=item 1. First item
+
+Some description
+
+=item 2. Second item
+
+Item description
+
+=back
+
+=head2 Explicitly bulleted list
+
+=over 1
+
+=item *
+
+First item
+
+=item *
+
+Second item
+
+=back
+
+=head2 Explicitly bulleted list same line
+
+=over 1
+
+=item * First item
+
+Item description
+
+=item * Second item
+
+Item description
+
+=back
+
+=head2 Implicitly bulleted list
+
+=over 1
+
+=item
+
+First item
+
+=item
+
+Second item
+
+=back
+
+=head2 Definitions list
+
+=over 1
+
+=item term1
+
+First item
+
+=item term2
+
+Second item
+
+=back
+

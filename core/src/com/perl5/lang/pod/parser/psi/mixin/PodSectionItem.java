@@ -107,20 +107,19 @@ public class PodSectionItem extends PodTitledSectionMixin {
   }
 
   /**
-   * Check if this item container is bulleted
-   *
-   * @return true if yep
+   * @return true iff item should be rendered with {@code <li>..</li>} tags
    */
-  public boolean isContainerBulleted() {
+  private boolean isRenderAsListItem() {
     PsiElement container = getParent();
-    return !(container instanceof PodOverSectionContent) || ((PodOverSectionContent)container).isBulleted();
+    return container instanceof PodOverSectionContent &&
+           (((PodOverSectionContent)container).isBulleted() || ((PodOverSectionContent)container).isNumbered());
   }
 
   @Override
   public void renderElementAsHTML(StringBuilder builder, PodRenderingContext context) {
-    boolean isBulleted = isContainerBulleted();
+    boolean isListItem = isRenderAsListItem();
 
-    if (isBulleted) {
+    if (isListItem) {
       builder.append("<li>");
       super.renderElementAsHTML(builder, context);
       builder.append("</li>");

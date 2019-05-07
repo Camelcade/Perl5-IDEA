@@ -17,6 +17,7 @@
 package com.perl5.lang.pod.parser.psi.mixin;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.util.ObjectUtils;
 import com.perl5.lang.pod.parser.psi.PodRenderingContext;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -27,13 +28,21 @@ public class PodOverSectionContent extends PodCompositeElementMixin {
   }
 
   /**
-   * Checks if first element is bulleted, according to http://perldoc.perl.org/perlpodspec.html#About-%3dover...%3dback-Regions
-   *
-   * @return true if list should be bulleted
+   * @return true iff first child is an item and it's bulleted
+   * @see <a href="http://perldoc.perl.org/perlpodspec.html#About-%3dover...%3dback-Regions">http://perldoc.perl.org/perlpodspec.html#About-%3dover...%3dback-Regions</a>
    */
   public boolean isBulleted() {
     PodSectionItem firstItem = getFirstItem();
     return firstItem != null && firstItem.isBulleted();
+  }
+
+  /**
+   * @return true iff first child is an item and it's numbered
+   * @see <a href="http://perldoc.perl.org/perlpodspec.html#About-%3dover...%3dback-Regions">http://perldoc.perl.org/perlpodspec.html#About-%3dover...%3dback-Regions</a>
+   */
+  public boolean isNumbered() {
+    PodSectionItem firstItem = getFirstItem();
+    return firstItem != null && firstItem.isNumbered();
   }
 
   /**
@@ -43,28 +52,30 @@ public class PodOverSectionContent extends PodCompositeElementMixin {
    */
   @Nullable
   public PodSectionItem getFirstItem() {
-    return findChildByClass(PodSectionItem.class);
+    return ObjectUtils.tryCast(getFirstChild(), PodSectionItem.class);
   }
 
   @Override
   public void renderElementAsHTML(StringBuilder builder, PodRenderingContext context) {
     boolean isBulleted = isBulleted();
 
+    String closeTag;
     if (isBulleted) {
       builder.append("<ul>");
+      closeTag = "</ul>";
+    }
+    else if (isNumbered()) {
+      builder.append("<ol>");
+      closeTag = "</ol>";
     }
     else {
       builder.append("<dl>");
+      closeTag = "</dl>";
     }
 
     super.renderElementAsHTML(builder, context);
 
-    if (isBulleted) {
-      builder.append("</ul>");
-    }
-    else {
-      builder.append("</dl>");
-    }
+    builder.append(closeTag);
   }
 
   @Override

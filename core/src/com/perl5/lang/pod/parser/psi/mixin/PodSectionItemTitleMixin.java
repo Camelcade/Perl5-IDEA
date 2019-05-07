@@ -17,34 +17,12 @@
 package com.perl5.lang.pod.parser.psi.mixin;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.perl5.lang.pod.parser.psi.PodRenderingContext;
 import com.perl5.lang.pod.parser.psi.PodSectionItemTitle;
-import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
 import org.jetbrains.annotations.NotNull;
 
 
 public class PodSectionItemTitleMixin extends PodCompositeElementMixin implements PodSectionItemTitle {
   public PodSectionItemTitleMixin(@NotNull ASTNode node) {
     super(node);
-  }
-
-  protected boolean isItemBulleted() {
-    PsiElement parent = getParent();
-    return !(parent instanceof PodSectionItem) || ((PodSectionItem)parent).isContainerBulleted();
-  }
-
-  @Override
-  public void renderElementAsHTML(StringBuilder builder, PodRenderingContext context) {
-    if (isItemBulleted()) {
-      PsiElement firstChild = getFirstChild();
-      if (firstChild != null && firstChild.getNode().getElementType() == POD_ASTERISK) {
-        firstChild = firstChild.getNextSibling();
-      }
-      PodRenderUtil.renderPsiRangeAsHTML(firstChild, null, builder, context);
-    }
-    else {
-      super.renderElementAsHTML(builder, context);
-    }
   }
 }
