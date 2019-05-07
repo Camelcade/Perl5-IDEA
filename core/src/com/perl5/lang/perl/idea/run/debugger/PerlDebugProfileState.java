@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,8 +18,13 @@ package com.perl5.lang.perl.idea.run.debugger;
 
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.RunProfile;
+import com.intellij.execution.process.ProcessAdapter;
+import com.intellij.execution.process.ProcessEvent;
 import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.runners.ExecutionEnvironment;
+import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.util.Key;
+import com.intellij.openapi.util.text.StringUtil;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.execution.PortMapping;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
@@ -34,11 +39,27 @@ import java.util.*;
  * For execution and debugging
  */
 public class PerlDebugProfileState extends PerlDebugProfileStateBase {
+  private static final Logger LOG = Logger.getInstance(PerlDebugProfileState.class);
   public static final String DEBUG_PACKAGE = "Devel::Camelcadedb";
   public static final String DEBUG_ARGUMENT = "-d:Camelcadedb";
   public static final String PERL5_DEBUG_HOST = "PERL5_DEBUG_HOST";
   public static final String PERL5_DEBUG_PORT = "PERL5_DEBUG_PORT";
   public static final String PERL5_DEBUG_ROLE = "PERL5_DEBUG_ROLE";
+  private static final ProcessAdapter READY_PROCESS_MARKER = new ProcessAdapter() {
+    @Override
+    public void onTextAvailable(@NotNull ProcessEvent event, @NotNull Key outputType) {
+      if (LOG.isDebugEnabled()) {
+        LOG.debug(outputType + ": " + event.getText());
+      }
+      if (StringUtil.startsWith(event.getText(), "Listening for the IDE connection at")) {
+        LOG.debug("Marking as ready and removing listener");
+        ProcessHandler processHandler = event.getProcessHandler();
+        markAsReady(processHandler);
+        processHandler.removeProcessListener(READY_PROCESS_MARKER);
+      }
+    }
+  };
+
   @Nullable
   private PerlHostData myHostData;
 
@@ -54,7 +75,7 @@ public class PerlDebugProfileState extends PerlDebugProfileStateBase {
   @NotNull
   @Override
   protected ProcessHandler startProcess() throws ExecutionException {
-    ProcessHandler process = super.startProcess();
+    ProcessHandler processHandler = super.startProcess();
     RunProfile runProfile = getEnvironment().getRunProfile();
     if (runProfile instanceof GenericPerlRunConfiguration) {
       myHostData = PerlHostData.notNullFrom(((GenericPerlRunConfiguration)runProfile).getEffectiveSdk());
@@ -62,7 +83,8 @@ public class PerlDebugProfileState extends PerlDebugProfileStateBase {
     else {
       myHostData = PerlHostHandler.getDefaultHandler().createData();
     }
-    return process;
+    processHandler.addProcessListener(READY_PROCESS_MARKER);
+    return processHandler;
   }
 
   @NotNull
