@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -64,7 +64,7 @@ public abstract class InstallPerlHandler {
     }
     PerlVersionManagerAdapter vmAdapter = createAdapter(myVersionManagerPath, hostData);
     PerlRunUtil.setProgressText(PerlBundle.message("perl.vm.fetching.available.perls"));
-    List<String> distributionsList = vmAdapter.getAvailableDistributionsList();
+    List<String> distributionsList = vmAdapter.getInstallableDistributionsList();
     if (distributionsList == null) {
       return;
     }

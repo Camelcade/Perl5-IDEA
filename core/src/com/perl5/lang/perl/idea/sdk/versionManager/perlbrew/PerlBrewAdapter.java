@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.sdk.versionManager.perlbrew;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.intellij.execution.process.ProcessListener;
 import com.intellij.execution.process.ProcessOutput;
 import com.intellij.openapi.project.Project;
@@ -94,12 +95,15 @@ class PerlBrewAdapter extends PerlVersionManagerAdapter {
    * @return list of {@code perlbrew list} items trimmed or null if error happened
    */
   @Nullable
-  protected List<String> getDistributionsList() {
-    List<String> output = getOutput(PERLBREW_LIST);
-    if (output == null) {
-      return null;
-    }
-    return ContainerUtil.map(output, it -> it.replaceAll("\\(.+?\\)", "").trim());
+  protected List<String> getInstalledDistributionsList() {
+    return parseInstalledDistributionsList(getOutput(PERLBREW_LIST));
+  }
+
+  @Nullable
+  @Override
+  protected List<String> getInstallableDistributionsList() {
+    List<String> rawAvailable = getOutput(PERLBREW_AVAILABLE);
+    return parseInstallableDistributionsList(rawAvailable);
   }
 
   public void installPerl(@NotNull Project project,
@@ -121,14 +125,25 @@ class PerlBrewAdapter extends PerlVersionManagerAdapter {
     return PERLBREW_ICON;
   }
 
-  @Nullable
-  @Override
-  protected List<String> getAvailableDistributionsList() {
-    List<String> rawAvailable = getOutput(PERLBREW_AVAILABLE);
-    if (rawAvailable == null) {
+  /**
+   * @return list of installed perls parsed from the output of {@code perlbrew list}
+   */
+  @VisibleForTesting
+  @Contract("null->null; !null->!null")
+  public static List<String> parseInstalledDistributionsList(@Nullable List<String> output) {
+    return output == null ? null : ContainerUtil.map(output, it -> it.replaceAll("\\(.+?\\)", "").trim());
+  }
+
+  /**
+   * @return list of distributions available for installation parsed from {@code perlbrew available} command output lines
+   */
+  @VisibleForTesting
+  @Contract("null->null;!null->!null")
+  public static List<String> parseInstallableDistributionsList(@Nullable List<String> output) {
+    if (output == null) {
       return null;
     }
-    return rawAvailable.stream().map(String::trim).filter(StringUtil::isNotEmpty).collect(Collectors.toList());
+    return output.stream().map(String::trim).filter(StringUtil::isNotEmpty).collect(Collectors.toList());
   }
 
   @NotNull
