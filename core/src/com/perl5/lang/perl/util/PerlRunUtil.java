@@ -75,7 +75,7 @@ import java.util.stream.Stream;
 public class PerlRunUtil {
   public static final String PERL_I = "-I";
   public static final String PERL_LE = "-le";
-  public static final String PERL_CTRL_X = "print $^X";
+  public static final String PERL_CTRL_X = "print eval chr(0x24).q{^X}";
   public static final String PERL5OPT = "PERL5OPT";
   private static final Logger LOG = Logger.getInstance(PerlRunUtil.class);
   private static final String MISSING_MODULE_PREFIX = "(you may need to install the ";
