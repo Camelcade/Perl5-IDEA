@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.sdk.versionManager.plenv;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.intellij.execution.process.ProcessListener;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
@@ -79,23 +80,36 @@ class PlenvAdapter extends PerlVersionManagerAdapter {
 
   @Nullable
   @Override
-  protected List<String> getAvailableDistributionsList() {
-    List<String> versions = getOutput(PLENV_INSTALL, "-l");
-    if (versions == null) {
-      return null;
-    }
-    return versions.stream()
+  protected List<String> getInstallableDistributionsList() {
+    return parseInstallableDistributionsList(getOutput(PLENV_INSTALL, "-l"));
+  }
+
+  @Nullable
+  @Override
+  protected List<String> getInstalledDistributionsList() {
+    return parseInstalledDistributionsList(getOutput(PLENV_VERSIONS));
+  }
+
+  /**
+   * @return list of distributions, available for installations, parsed from {@code plenv install -l} output lines
+   */
+  @VisibleForTesting
+  @Contract("null->null; !null->!null")
+  public static List<String> parseInstallableDistributionsList(@Nullable List<String> output) {
+    return output == null ? null : output.stream()
       .map(String::trim)
       .filter(StringUtil::isNotEmpty)
       .filter(it -> !StringUtil.contains(it, "Available"))
       .collect(Collectors.toList());
   }
 
-  @Nullable
-  @Override
-  protected List<String> getDistributionsList() {
-    List<String> rawVersions = getOutput(PLENV_VERSIONS);
-    return rawVersions == null ? null : rawVersions.stream()
+  /**
+   * @return list of installed perl versions, parsed from {@code plenv versions} output lines
+   */
+  @VisibleForTesting
+  @Contract("null->null; !null->!null")
+  public static List<String> parseInstalledDistributionsList(@Nullable List<String> output) {
+    return output == null ? null : output.stream()
       .filter(it -> !StringUtil.contains(it, "system"))
       .map(String::trim)
       .collect(Collectors.toList());

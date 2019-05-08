@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -117,16 +117,17 @@ public abstract class PerlVersionManagerAdapter {
                                    @Nullable ProcessListener processListener);
 
   /**
-   * @return list of installed distributions
+   * @return list of installed perl distributions
+   * @apiNote returned items format is version-manager specific, for perlbrew it may be a {@code version@library}
    */
   @Nullable
-  protected abstract List<String> getDistributionsList();
+  protected abstract List<String> getInstalledDistributionsList();
 
   /**
-   * @return list of available distributions
+   * @return list of perls available for installation
    */
   @Nullable
-  protected abstract List<String> getAvailableDistributionsList();
+  protected abstract List<String> getInstallableDistributionsList();
 
   @Nullable
   protected List<String> getOutput(@NotNull List<String> parameters) {

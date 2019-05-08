@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -71,7 +71,7 @@ class BerryBrewAdapter extends PerlVersionManagerAdapter {
 
   @Nullable
   @Override
-  protected List<String> getDistributionsList() {
+  protected List<String> getInstalledDistributionsList() {
     List<String> output = getOutput("list");
     if (output == null) {
       return null;
@@ -81,7 +81,7 @@ class BerryBrewAdapter extends PerlVersionManagerAdapter {
 
   @Nullable
   @Override
-  protected List<String> getAvailableDistributionsList() {
+  protected List<String> getInstallableDistributionsList() {
     List<String> output = getOutput(BERRYREW_AVAILABLE);
     if (output == null) {
       return null;
