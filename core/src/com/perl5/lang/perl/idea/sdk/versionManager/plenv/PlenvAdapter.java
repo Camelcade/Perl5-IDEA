@@ -36,7 +36,8 @@ import java.util.stream.Collectors;
 
 import static com.perl5.PerlIcons.PLENV_ICON;
 
-class PlenvAdapter extends PerlVersionManagerAdapter {
+@VisibleForTesting
+public class PlenvAdapter extends PerlVersionManagerAdapter {
   static final String PLENV_VERSION = "PLENV_VERSION";
   static final String PLENV_EXEC = "exec";
   static final String PLENV_INSTALL_CPANM = "install-cpanm";
@@ -111,7 +112,7 @@ class PlenvAdapter extends PerlVersionManagerAdapter {
   public static List<String> parseInstalledDistributionsList(@Nullable List<String> output) {
     return output == null ? null : output.stream()
       .filter(it -> !StringUtil.contains(it, "system"))
-      .map(String::trim)
+      .map(it -> it.replaceAll("\\(.+?\\)", "").replaceAll("^\\s*\\**\\s*", "").trim())
       .collect(Collectors.toList());
   }
 
