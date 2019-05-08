@@ -17,8 +17,11 @@
 package documentation;
 
 import base.PerlLightTestCase;
+import categories.Heavy;
 import org.jetbrains.annotations.NotNull;
+import org.junit.experimental.categories.Category;
 
+@Category(Heavy.class)
 public class PerlQuickDocLinksFollowingTest extends PerlLightTestCase {
   @Override
   protected void setUp() throws Exception {

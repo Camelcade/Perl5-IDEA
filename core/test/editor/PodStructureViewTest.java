@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,11 +17,14 @@
 package editor;
 
 import base.PodLightTestCase;
+import categories.Heavy;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.testFramework.EditorTestUtil;
+import org.junit.experimental.categories.Category;
 
 import java.io.IOException;
 
+@Category(Heavy.class)
 public class PodStructureViewTest extends PodLightTestCase {
   @Override
   protected String getTestDataPath() {

@@ -17,6 +17,7 @@
 package completion;
 
 import base.PodLightTestCase;
+import categories.Heavy;
 import com.intellij.codeInsight.TargetElementUtil;
 import com.intellij.codeInsight.completion.CompletionType;
 import com.intellij.codeInsight.lookup.Lookup;
@@ -28,6 +29,7 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.intellij.usageView.UsageInfo;
 import org.jetbrains.annotations.NotNull;
+import org.junit.experimental.categories.Category;
 
 import java.util.*;
 
@@ -38,6 +40,7 @@ import java.util.*;
  * <li>Checks if target usages contains inserted element</li>
  * </ul>
  */
+@Category(Heavy.class)
 public class PodCompletionComplexTest extends PodLightTestCase {
   private static final Logger LOG = Logger.getInstance(PodCompletionComplexTest.class);
 
