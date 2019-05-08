@@ -59,6 +59,7 @@ import com.intellij.ide.util.treeView.smartTree.*;
 import com.intellij.injected.editor.EditorWindow;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
+import com.intellij.lang.LanguageDocumentation;
 import com.intellij.lang.LanguageStructureViewBuilder;
 import com.intellij.lang.documentation.DocumentationProvider;
 import com.intellij.lang.documentation.DocumentationProviderEx;
@@ -191,6 +192,8 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.*;
 import java.util.function.BiPredicate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestCase {
@@ -1905,8 +1908,11 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     return mostRelevantElement;
   }
 
+  private static final Pattern LINK_PATTERN = Pattern.compile("<a href=\"psi_element://([^\"]+?)\"[^>]*>(.+?)</a>");
+
   protected void doTestQuickDocWithoutInit() {
     List<Integer> caretsOffsets = getAndRemoveCarets();
+    CaretModel caretModel = getEditor().getCaretModel();
     StringBuilder sb = new StringBuilder();
     for (int i = 0; i < caretsOffsets.size(); i++) {
       Integer caretOffset = caretsOffsets.get(i);
@@ -1914,20 +1920,10 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
         sb.append(SEPARATOR).append("Caret #").append(i).append(" at: ").append(caretOffset)
           .append(SEPARATOR_NEW_LINE_AFTER);
       }
-      Editor editor = getEditor();
-      PsiFile file = getFile();
-      editor.getCaretModel().moveToOffset(caretOffset);
-      PsiElement elementAtCaret = file != null ? file.findElementAt(editor.getCaretModel().getOffset()) : null;
-      assertNotNull(elementAtCaret);
-      PsiElement targetElement = DocumentationManager.getInstance(getProject()).findTargetElement(editor, file);
-      assertNotNull(targetElement);
-      DocumentationProvider documentationProvider = DocumentationManager.getProviderFromElement(targetElement, elementAtCaret);
-      assertInstanceOf(documentationProvider, DocumentationProviderEx.class);
-      String generatedDoc = documentationProvider.generateDoc(targetElement, elementAtCaret);
-      assertNotNull(generatedDoc);
-      sb.append(generatedDoc).append("\n");
+      caretModel.moveToOffset(caretOffset);
+      Pair<PsiElement, String> targetAndDocumentation = getContextAndDocumentationAtCaret();
+      sb.append(targetAndDocumentation.second).append("\n");
     }
-
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
   }
 
@@ -2210,4 +2206,79 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     }
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
   }
+
+  /**
+   * Computes target element for the quickdoc and generates it
+   *
+   * @return pair of target element and generated documentation
+   */
+  @NotNull
+  protected Pair<PsiElement, String> getContextAndDocumentationAtCaret() {
+    Editor editor = getEditor();
+    PsiFile file = getFile();
+    PsiElement elementAtCaret = file != null ? file.findElementAt(editor.getCaretModel().getOffset()) : null;
+    assertNotNull(elementAtCaret);
+    PsiElement targetElement = DocumentationManager.getInstance(getProject()).findTargetElement(editor, file);
+    assertNotNull(targetElement);
+    DocumentationProvider documentationProvider = DocumentationManager.getProviderFromElement(targetElement, elementAtCaret);
+    assertInstanceOf(documentationProvider, DocumentationProviderEx.class);
+    String generatedDoc = documentationProvider.generateDoc(targetElement, elementAtCaret);
+    assertNotNull(generatedDoc);
+    return Pair.create(targetElement, generatedDoc);
+  }
+
+  protected void doTestDocumentationLinksWithoutInit() {
+    Pair<PsiElement, String> targetAndDocumentation = getContextAndDocumentationAtCaret();
+    PsiElement targetElement = targetAndDocumentation.first;
+    assertNotNull(targetElement);
+    String documentation = targetAndDocumentation.second;
+    assertNotNull(documentation);
+
+    addVirtualFileFilter();
+    Matcher matcher = LINK_PATTERN.matcher(documentation);
+    List<Trinity<String, String, PsiElement>> links = new ArrayList<>();
+    while (matcher.find()) {
+      links.add(Trinity.create(matcher.group(1), matcher.group(2), getLinkTarget(targetElement, matcher.group(1))));
+    }
+    removeVirtualFileFilter();
+
+    StringBuilder sb = new StringBuilder(serializePsiElement(targetElement)).append("\n\n");
+    for (Trinity<String, String, PsiElement> link : links) {
+      sb.append(StringUtil.stripHtml(link.second, false)).append(": ").append(link.first).append("\n");
+      sb.append("\t").append(serializePsiElement(link.third)).append("\n");
+    }
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+  }
+
+
+  /**
+   * Part of {@link DocumentationManager#navigateByLink(com.intellij.codeInsight.documentation.DocumentationComponent, java.lang.String)}
+   */
+  @Nullable
+  private PsiElement getLinkTarget(@NotNull PsiElement psiElement, @NotNull String refText) {
+    PsiManager manager = psiElement.getManager();
+    DocumentationProvider provider = DocumentationManager.getProviderFromElement(psiElement);
+    PsiElement targetElement = provider.getDocumentationElementForLink(manager, refText, psiElement);
+    if (targetElement == null) {
+      for (DocumentationProvider documentationProvider : DocumentationProvider.EP_NAME.getExtensionList()) {
+        targetElement = documentationProvider.getDocumentationElementForLink(manager, refText, psiElement);
+        if (targetElement != null) {
+          break;
+        }
+      }
+    }
+    if (targetElement == null) {
+      for (Language language : Language.getRegisteredLanguages()) {
+        DocumentationProvider documentationProvider = LanguageDocumentation.INSTANCE.forLanguage(language);
+        if (documentationProvider != null) {
+          targetElement = documentationProvider.getDocumentationElementForLink(manager, refText, psiElement);
+          if (targetElement != null) {
+            break;
+          }
+        }
+      }
+    }
+    return targetElement;
+  }
+
 }

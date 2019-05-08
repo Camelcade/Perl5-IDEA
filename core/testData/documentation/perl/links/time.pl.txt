@@ -1,0 +1,22 @@
+PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 354921 in perlfunc.pod
+
+perlfunc: perlfunc
+	POD file at 0 in perlfunc.pod
+DESCRIPTION: perlfunc%2FDESCRIPTION
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 60 in perlfunc.pod
+Alphabetical Listing of Perl Functions: perlfunc%2FAlphabetical+Listing+of+Perl+Functions
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21142 in perlfunc.pod
+gmtime: perlfunc%2Fgmtime+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 137428 in perlfunc.pod
+localtime: perlfunc%2Flocaltime+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 160587 in perlfunc.pod
+Time::HiRes: Time%3A%3AHiRes
+	POD file at 0 in perlfunc.pod
+gettimeofday(2): gettimeofday%282%29
+	POD file at 0 in perlfunc.pod
+syscall: perlfunc%2Fsyscall+NUMBER%2C+LIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 334861 in perlfunc.pod
+perlfaq8: perlfaq8
+	POD file at 0 in perlfaq8.pod
+DateTime: DateTime
+	POD file at 0 in perlfunc.pod

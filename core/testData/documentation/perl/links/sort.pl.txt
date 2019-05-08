@@ -1,0 +1,34 @@
+PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 288635 in perlfunc.pod
+
+perlfunc: perlfunc
+	POD file at 0 in perlfunc.pod
+DESCRIPTION: perlfunc%2FDESCRIPTION
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 60 in perlfunc.pod
+Alphabetical Listing of Perl Functions: perlfunc%2FAlphabetical+Listing+of+Perl+Functions
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21142 in perlfunc.pod
+sort: perlfunc%2Fsort+SUBNAME+LIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 288635 in perlfunc.pod
+sort: perlfunc%2Fsort+SUBNAME+LIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 288635 in perlfunc.pod
+@_: perlvar%2F%40_
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4936 in perlvar.pod
+perlsyn: perlsyn
+	POD file at 0 in perlsyn.pod
+goto: perlfunc%2Fgoto+LABEL
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 137876 in perlfunc.pod
+use locale: locale
+	POD file at 0 in perlfunc.pod
+perllocale: perllocale
+	POD file at 0 in perllocale.pod
+sort: perlfunc%2Fsort+SUBNAME+LIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 288635 in perlfunc.pod
+sort: perlfunc%2Fsort+SUBNAME+LIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 288635 in perlfunc.pod
+map: perlfunc%2Fmap+BLOCK+LIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 165481 in perlfunc.pod
+grep: perlfunc%2Fgrep+BLOCK+LIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 141025 in perlfunc.pod
+sort: sort
+	POD file at 0 in perlfunc.pod
+undef: perlfunc%2Fundef+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 360174 in perlfunc.pod

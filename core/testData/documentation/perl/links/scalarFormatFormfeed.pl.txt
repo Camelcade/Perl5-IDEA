@@ -1,0 +1,12 @@
+Built-in: $FORMAT_FORMFEED
+
+perlvar: perlvar
+	null
+SPECIAL VARIABLES: perlvar%2FSPECIAL+VARIABLES
+	null
+Variables related to filehandles: perlvar%2FVariables+related+to+filehandles
+	null
+Variables related to formats: perlvar%2FVariables+related+to+formats
+	null
+IO::Handle: IO%3A%3AHandle
+	null

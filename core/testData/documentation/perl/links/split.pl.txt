@@ -1,0 +1,30 @@
+PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 298802 in perlfunc.pod
+
+perlfunc: perlfunc
+	POD file at 0 in perlfunc.pod
+DESCRIPTION: perlfunc%2FDESCRIPTION
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 60 in perlfunc.pod
+Alphabetical Listing of Perl Functions: perlfunc%2FAlphabetical+Listing+of+Perl+Functions
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21142 in perlfunc.pod
+$_: perlvar%2F%24_
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3049 in perlvar.pod
+split: perlfunc%2Fsplit+%2FPATTERN%2F%2CEXPR%2CLIMIT
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 298802 in perlfunc.pod
+match operator: perlop%2Fm%2FPATTERN%2Fmsixpodualngc
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 71301 in perlop.pod
+multiline modifier: perlreref%2FOPERATORS
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 245 in perlreref.pod
+qr/STRING/msixpodualn in perlop: perlop%2Fqr%2FSTRING%2Fmsixpodualn
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67636 in perlop.pod
+split: perlfunc%2Fsplit+%2FPATTERN%2F%2CEXPR%2CLIMIT
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 298802 in perlfunc.pod
+&quot;use feature 'unicode_strings&quot;: feature%2FThe+%27unicode_strings%27+feature
+	null
+The &quot;Unicode Bug&quot; in perlunicode: perlunicode%2FThe+%22Unicode+Bug%22
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 69583 in perlunicode.pod
+capturing groups: perlretut%2FGrouping+things+and+hierarchical+matching
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 26884 in perlretut.pod
+backreferences: perlretut%2FBackreferences
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 33686 in perlretut.pod
+undef: perlfunc%2Fundef+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 360174 in perlfunc.pod

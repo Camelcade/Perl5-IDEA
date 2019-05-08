@@ -1,0 +1,34 @@
+PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56635 in perlfunc.pod
+
+perlfunc: perlfunc
+	POD file at 0 in perlfunc.pod
+DESCRIPTION: perlfunc%2FDESCRIPTION
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 60 in perlfunc.pod
+Alphabetical Listing of Perl Functions: perlfunc%2FAlphabetical+Listing+of+Perl+Functions
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21142 in perlfunc.pod
+crypt(3): crypt%283%29
+	POD file at 0 in perlfunc.pod
+crypt: perlfunc%2Fcrypt+PLAINTEXT%2CSALT
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56635 in perlfunc.pod
+crypt: perlfunc%2Fcrypt+PLAINTEXT%2CSALT
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56635 in perlfunc.pod
+crypt: perlfunc%2Fcrypt+PLAINTEXT%2CSALT
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56635 in perlfunc.pod
+crypt: perlfunc%2Fcrypt+PLAINTEXT%2CSALT
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56635 in perlfunc.pod
+crypt: perlfunc%2Fcrypt+PLAINTEXT%2CSALT
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56635 in perlfunc.pod
+crypt: perlfunc%2Fcrypt+PLAINTEXT%2CSALT
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56635 in perlfunc.pod
+Digest: Digest
+	POD file at 0 in perlfunc.pod
+crypt: perlfunc%2Fcrypt+PLAINTEXT%2CSALT
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56635 in perlfunc.pod
+crypt: perlfunc%2Fcrypt+PLAINTEXT%2CSALT
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56635 in perlfunc.pod
+crypt: perlfunc%2Fcrypt+PLAINTEXT%2CSALT
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56635 in perlfunc.pod
+Wide character in crypt: perldiag%2FWide+character+in+%25s
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 287012 in perldiag.pod
+crypt in perlport: perlport%2Fcrypt
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67473 in perlport.pod

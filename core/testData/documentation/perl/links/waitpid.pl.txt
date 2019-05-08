@@ -1,0 +1,24 @@
+PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 391776 in perlfunc.pod
+
+perlfunc: perlfunc
+	POD file at 0 in perlfunc.pod
+DESCRIPTION: perlfunc%2FDESCRIPTION
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 60 in perlfunc.pod
+Alphabetical Listing of Perl Functions: perlfunc%2FAlphabetical+Listing+of+Perl+Functions
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21142 in perlfunc.pod
+WNOHANG: POSIX%2FWNOHANG
+	null
+$?: perlvar%2F%24%3F
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 63754 in perlvar.pod
+${^CHILD_ERROR_NATIVE}: perlvar%2F%24%7B%5ECHILD_ERROR_NATIVE%7D
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 58914 in perlvar.pod
+WAIT in POSIX: POSIX%2FWAIT
+	null
+waitpid(2): waitpid%282%29
+	POD file at 0 in perlfunc.pod
+wait4(2): wait4%282%29
+	POD file at 0 in perlfunc.pod
+perlipc: perlipc
+	POD file at 0 in perlipc.pod
+waitpid in perlport: perlport%2Fwaitpid
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 80503 in perlport.pod

@@ -1,0 +1,20 @@
+Built-in: %SIG
+
+perlvar: perlvar
+	null
+SPECIAL VARIABLES: perlvar%2FSPECIAL+VARIABLES
+	null
+General Variables: perlvar%2FGeneral+Variables
+	null
+perlipc: perlipc
+	null
+perlipc: perlipc
+	null
+die in perlfunc: perlfunc%2Fdie
+	null
+warn in perlfunc: perlfunc%2Fwarn
+	null
+eval in perlfunc: perlfunc%2Feval
+	null
+warnings: warnings
+	null

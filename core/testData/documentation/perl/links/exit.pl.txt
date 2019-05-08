@@ -1,0 +1,26 @@
+PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 104990 in perlfunc.pod
+
+perlfunc: perlfunc
+	POD file at 0 in perlfunc.pod
+DESCRIPTION: perlfunc%2FDESCRIPTION
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 60 in perlfunc.pod
+Alphabetical Listing of Perl Functions: perlfunc%2FAlphabetical+Listing+of+Perl+Functions
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21142 in perlfunc.pod
+die: perlfunc%2Fdie+LIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 69461 in perlfunc.pod
+exit: perlfunc%2Fexit+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 104990 in perlfunc.pod
+die: perlfunc%2Fdie+LIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 69461 in perlfunc.pod
+eval: perlfunc%2Feval+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 87328 in perlfunc.pod
+exit: perlfunc%2Fexit+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 104990 in perlfunc.pod
+$?: perlvar%2F%24%3F
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 63754 in perlvar.pod
+POSIX::_exit($status): POSIX%2F_exit
+	null
+perlmod: perlmod
+	POD file at 0 in perlmod.pod
+exit in perlport: perlport%2Fexit
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 68093 in perlport.pod

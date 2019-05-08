@@ -1,0 +1,40 @@
+PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 336882 in perlfunc.pod
+
+perlfunc: perlfunc
+	POD file at 0 in perlfunc.pod
+DESCRIPTION: perlfunc%2FDESCRIPTION
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 60 in perlfunc.pod
+Alphabetical Listing of Perl Functions: perlfunc%2FAlphabetical+Listing+of+Perl+Functions
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21142 in perlfunc.pod
+open(2): open%282%29
+	POD file at 0 in perlfunc.pod
+undef: perlfunc%2Fundef+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 360174 in perlfunc.pod
+Fcntl: Fcntl
+	POD file at 0 in perlfunc.pod
+open(2): open%282%29
+	POD file at 0 in perlfunc.pod
+open: perlfunc%2Fopen+FILEHANDLE%2CEXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 176323 in perlfunc.pod
+sysopen: perlfunc%2Fsysopen+FILEHANDLE%2CFILENAME%2CMODE
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 336882 in perlfunc.pod
+umask: perlfunc%2Fumask+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 357998 in perlfunc.pod
+sysopen: perlfunc%2Fsysopen+FILEHANDLE%2CFILENAME%2CMODE
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 336882 in perlfunc.pod
+sysopen: perlfunc%2Fsysopen+FILEHANDLE%2CFILENAME%2CMODE
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 336882 in perlfunc.pod
+umask: perlfunc%2Fumask+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 357998 in perlfunc.pod
+sysopen: perlfunc%2Fsysopen+FILEHANDLE%2CFILENAME%2CMODE
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 336882 in perlfunc.pod
+fdopen(3): fdopen%283%29
+	POD file at 0 in perlfunc.pod
+fdopen(3): fdopen%283%29
+	POD file at 0 in perlfunc.pod
+POSIX::open: POSIX%2Fopen
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 176323 in perlfunc.pod
+perlopentut: perlopentut
+	POD file at 0 in perlopentut.pod
+sysopen in perlport: perlport%2Fsysopen
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 76803 in perlport.pod

@@ -1,0 +1,10 @@
+Built-in: $FORMAT_TOP_NAME
+
+perlvar: perlvar
+	null
+SPECIAL VARIABLES: perlvar%2FSPECIAL+VARIABLES
+	null
+Variables related to filehandles: perlvar%2FVariables+related+to+filehandles
+	null
+Variables related to formats: perlvar%2FVariables+related+to+formats
+	null

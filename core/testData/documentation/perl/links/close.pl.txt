@@ -1,0 +1,30 @@
+PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51385 in perlfunc.pod
+
+perlfunc: perlfunc
+	POD file at 0 in perlfunc.pod
+DESCRIPTION: perlfunc%2FDESCRIPTION
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 60 in perlfunc.pod
+Alphabetical Listing of Perl Functions: perlfunc%2FAlphabetical+Listing+of+Perl+Functions
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21142 in perlfunc.pod
+open: perlfunc%2Fopen+FILEHANDLE%2CEXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 176323 in perlfunc.pod
+open: perlfunc%2Fopen+FILEHANDLE%2CEXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 176323 in perlfunc.pod
+open: perlfunc%2Fopen+FILEHANDLE%2CEXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 176323 in perlfunc.pod
+close: perlfunc%2Fclose+FILEHANDLE
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51385 in perlfunc.pod
+$.: perlvar%2F%24.
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48021 in perlvar.pod
+open: perlfunc%2Fopen+FILEHANDLE%2CEXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 176323 in perlfunc.pod
+close: perlfunc%2Fclose+FILEHANDLE
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51385 in perlfunc.pod
+$!: perlvar%2F%24%21
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 61818 in perlvar.pod
+$?: perlvar%2F%24%3F
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 63754 in perlvar.pod
+${^CHILD_ERROR_NATIVE}: perlvar%2F%24%7B%5ECHILD_ERROR_NATIVE%7D
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 58914 in perlvar.pod
+close: perlfunc%2Fclose+FILEHANDLE
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51385 in perlfunc.pod

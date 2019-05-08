@@ -1,0 +1,14 @@
+Built-in: $RS
+
+perlvar: perlvar
+	null
+SPECIAL VARIABLES: perlvar%2FSPECIAL+VARIABLES
+	null
+Variables related to filehandles: perlvar%2FVariables+related+to+filehandles
+	null
+IO::Handle: IO%3A%3AHandle
+	null
+Newlines in perlport: perlport%2FNewlines
+	null
+$.: perlvar%2F%24.
+	null

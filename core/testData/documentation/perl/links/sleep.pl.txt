@@ -1,0 +1,32 @@
+PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 285375 in perlfunc.pod
+
+perlfunc: perlfunc
+	POD file at 0 in perlfunc.pod
+DESCRIPTION: perlfunc%2FDESCRIPTION
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 60 in perlfunc.pod
+Alphabetical Listing of Perl Functions: perlfunc%2FAlphabetical+Listing+of+Perl+Functions
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21142 in perlfunc.pod
+alarm: perlfunc%2Falarm+SECONDS
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29010 in perlfunc.pod
+sleep: perlfunc%2Fsleep+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 285375 in perlfunc.pod
+sleep: perlfunc%2Fsleep+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 285375 in perlfunc.pod
+alarm: perlfunc%2Falarm+SECONDS
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29010 in perlfunc.pod
+Time::HiRes: Time%3A%3AHiRes
+	POD file at 0 in perlfunc.pod
+usleep: Time%3A%3AHiRes%2Fusleep+%28+%24useconds+%29
+	null
+select: perlfunc%2Fselect+RBITS%2CWBITS%2CEBITS%2CTIMEOUT
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 273653 in perlfunc.pod
+syscall: perlfunc%2Fsyscall+NUMBER%2C+LIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 334861 in perlfunc.pod
+setitimer(2): setitimer%282%29
+	POD file at 0 in perlfunc.pod
+perlfaq8: perlfaq8
+	POD file at 0 in perlfaq8.pod
+POSIX: POSIX
+	POD file at 0 in perlfunc.pod
+pause: POSIX%2Fpause
+	PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 285401 in perlfunc.pod

@@ -1,0 +1,72 @@
+PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 87328 in perlfunc.pod
+
+perlfunc: perlfunc
+	POD file at 0 in perlfunc.pod
+DESCRIPTION: perlfunc%2FDESCRIPTION
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 60 in perlfunc.pod
+Alphabetical Listing of Perl Functions: perlfunc%2FAlphabetical+Listing+of+Perl+Functions
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21142 in perlfunc.pod
+$_: perlvar%2F%24_
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3049 in perlvar.pod
+wantarray: perlfunc%2Fwantarray
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 393366 in perlfunc.pod
+die: perlfunc%2Fdie+LIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 69461 in perlfunc.pod
+undef: perlfunc%2Fundef+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 360174 in perlfunc.pod
+$@: perlvar%2F%24%40
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 65003 in perlvar.pod
+undef: perlfunc%2Fundef+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 360174 in perlfunc.pod
+$@: perlvar%2F%24%40
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 65003 in perlvar.pod
+last: perlfunc%2Flast+LABEL
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 154434 in perlfunc.pod
+goto: perlfunc%2Fgoto+LABEL
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 137876 in perlfunc.pod
+$@: perlvar%2F%24%40
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 65003 in perlvar.pod
+$@: perlvar%2F%24%40
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 65003 in perlvar.pod
+$SIG{__WARN__}: perlvar%2F%25SIG
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20145 in perlvar.pod
+warn: perlfunc%2Fwarn+LIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 394112 in perlfunc.pod
+perlvar: perlvar
+	POD file at 0 in perlvar.pod
+warnings: warnings
+	POD file at 0 in perlfunc.pod
+socket: perlfunc%2Fsocket+SOCKET%2CDOMAIN%2CTYPE%2CPROTOCOL
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 286884 in perlfunc.pod
+symlink: perlfunc%2Fsymlink+OLDFILE%2CNEWFILE
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 334421 in perlfunc.pod
+die: perlfunc%2Fdie+LIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 69461 in perlfunc.pod
+$@: perlvar%2F%24%40
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 65003 in perlvar.pod
+&quot;unicode_eval&quot; feature: feature%2FThe+%27unicode_eval%27+and+%27evalbytes%27+features
+	null
+use utf8: utf8
+	POD file at 0 in perlfunc.pod
+'unicode_strings&quot; feature: feature%2FThe+%27unicode_strings%27+feature
+	null
+evalbytes: perlfunc%2Fevalbytes+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 97000 in perlfunc.pod
+Semi::Semicolons: Semi%3A%3ASemicolons
+	POD file at 0 in perlfunc.pod
+evalbytes: perlfunc%2Fevalbytes+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 97000 in perlfunc.pod
+use locale: locale
+	POD file at 0 in perlfunc.pod
+$@: perlvar%2F%24%40
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 65003 in perlvar.pod
+perlrun: perlrun
+	POD file at 0 in perlrun.pod
+die: perlfunc%2Fdie+LIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 69461 in perlfunc.pod
+next: perlfunc%2Fnext+LABEL
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 173212 in perlfunc.pod
+last: perlfunc%2Flast+LABEL
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 154434 in perlfunc.pod
+redo: perlfunc%2Fredo+LABEL
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 249557 in perlfunc.pod

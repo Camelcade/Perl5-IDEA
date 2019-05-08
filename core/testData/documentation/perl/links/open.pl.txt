@@ -1,0 +1,118 @@
+PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 176323 in perlfunc.pod
+
+perlfunc: perlfunc
+	POD file at 0 in perlfunc.pod
+DESCRIPTION: perlfunc%2FDESCRIPTION
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 60 in perlfunc.pod
+Alphabetical Listing of Perl Functions: perlfunc%2FAlphabetical+Listing+of+Perl+Functions
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21142 in perlfunc.pod
+open: perlfunc%2Fopen+FILEHANDLE%2CEXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 176323 in perlfunc.pod
+perlopentut: perlopentut
+	POD file at 0 in perlopentut.pod
+perlrun: perlrun
+	POD file at 0 in perlrun.pod
+umask: perlfunc%2Fumask+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 357998 in perlfunc.pod
+fopen(3): fopen%283%29
+	POD file at 0 in perlfunc.pod
+open: perlfunc%2Fopen+FILEHANDLE%2CEXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 176323 in perlfunc.pod
+Using open() for IPC in perlipc: perlipc%2FUsing+open%28%29+for+IPC
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 16978 in perlipc.pod
+open: perlfunc%2Fopen+FILEHANDLE%2CEXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 176323 in perlfunc.pod
+IPC::Open2: IPC%3A%3AOpen2
+	POD file at 0 in perlfunc.pod
+IPC::Open3: IPC%3A%3AOpen3
+	POD file at 0 in perlfunc.pod
+Bidirectional Communication with Another Process in perlipc: perlipc%2FBidirectional+Communication+with+Another+Process
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 30647 in perlipc.pod
+open: perlfunc%2Fopen+FILEHANDLE%2CEXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 176323 in perlfunc.pod
+open: open
+	POD file at 0 in perlfunc.pod
+PerlIO: PerlIO
+	POD file at 0 in perlfunc.pod
+perluniintro: perluniintro
+	POD file at 0 in perluniintro.pod
+perlvar: perlvar
+	POD file at 0 in perlvar.pod
+open: open
+	POD file at 0 in perlfunc.pod
+open: perlfunc%2Fopen+FILEHANDLE%2CEXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 176323 in perlfunc.pod
+binmode: perlfunc%2Fbinmode+FILEHANDLE%2C+LAYER
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32192 in perlfunc.pod
+open: perlfunc%2Fopen+FILEHANDLE%2CEXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 176323 in perlfunc.pod
+die: perlfunc%2Fdie+LIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 69461 in perlfunc.pod
+die: perlfunc%2Fdie+LIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 69461 in perlfunc.pod
+my: perlfunc%2Fmy+VARLIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 172194 in perlfunc.pod
+my: perlfunc%2Fmy+VARLIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 172194 in perlfunc.pod
+state: perlfunc%2Fstate+VARLIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 328320 in perlfunc.pod
+undef: perlfunc%2Fundef+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 360174 in perlfunc.pod
+seek: perlfunc%2Fseek+FILEHANDLE%2CPOSITION%2CWHENCE
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 269555 in perlfunc.pod
+perliol: perliol
+	POD file at 0 in perliol.pod
+dup(2): dup%282%29
+	POD file at 0 in perlfunc.pod
+fdopen(3): fdopen%283%29
+	POD file at 0 in perlfunc.pod
+dup(2): dup%282%29
+	POD file at 0 in perlfunc.pod
+flock: perlfunc%2Fflock+FILEHANDLE%2COPERATION
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 112652 in perlfunc.pod
+fdopen(3): fdopen%283%29
+	POD file at 0 in perlfunc.pod
+fdopen(3): fdopen%283%29
+	POD file at 0 in perlfunc.pod
+open: perlfunc%2Fopen+FILEHANDLE%2CEXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 176323 in perlfunc.pod
+fork: perlfunc%2Ffork
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 116703 in perlfunc.pod
+open: perlfunc%2Fopen+FILEHANDLE%2CEXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 176323 in perlfunc.pod
+fork: perlfunc%2Ffork
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 116703 in perlfunc.pod
+Safe Pipe Opens in perlipc: perlipc%2FSafe+Pipe+Opens
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 22106 in perlipc.pod
+perlport: perlport
+	POD file at 0 in perlport.pod
+$&verbar;: perlvar%2F%24%7C
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52507 in perlvar.pod
+English: English
+	POD file at 0 in perlfunc.pod
+IO::Handle: IO%3A%3AHandle%2FMETHODS
+	null
+$^F: perlvar%2F%24%5EF
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15683 in perlvar.pod
+$^F in perlvar: perlvar%2F%24%5EF
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15683 in perlvar.pod
+$?: perlvar%2F%24%3F
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 63754 in perlvar.pod
+${^CHILD_ERROR_NATIVE}: perlvar%2F%24%7B%5ECHILD_ERROR_NATIVE%7D
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 58914 in perlvar.pod
+open: perlfunc%2Fopen+FILEHANDLE%2CEXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 176323 in perlfunc.pod
+open: perlfunc%2Fopen+FILEHANDLE%2CEXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 176323 in perlfunc.pod
+open(2): open%282%29
+	POD file at 0 in perlfunc.pod
+sysopen: perlfunc%2Fsysopen+FILEHANDLE%2CFILENAME%2CMODE
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 336882 in perlfunc.pod
+open: perlfunc%2Fopen+FILEHANDLE%2CEXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 176323 in perlfunc.pod
+fopen(3): fopen%283%29
+	POD file at 0 in perlfunc.pod
+seek: perlfunc%2Fseek+FILEHANDLE%2CPOSITION%2CWHENCE
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 269555 in perlfunc.pod
+open in perlport: perlport%2Fopen
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73911 in perlport.pod

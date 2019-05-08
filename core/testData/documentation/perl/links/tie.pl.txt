@@ -1,0 +1,46 @@
+PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 351482 in perlfunc.pod
+
+perlfunc: perlfunc
+	POD file at 0 in perlfunc.pod
+DESCRIPTION: perlfunc%2FDESCRIPTION
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 60 in perlfunc.pod
+Alphabetical Listing of Perl Functions: perlfunc%2FAlphabetical+Listing+of+Perl+Functions
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21142 in perlfunc.pod
+dbm_open(3): dbm_open%283%29
+	POD file at 0 in perlfunc.pod
+tie: perlfunc%2Ftie+VARIABLE%2CCLASSNAME%2CLIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 351482 in perlfunc.pod
+keys: perlfunc%2Fkeys+HASH
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 147852 in perlfunc.pod
+values: perlfunc%2Fvalues+HASH
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 374638 in perlfunc.pod
+each: perlfunc%2Feach+HASH
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 80302 in perlfunc.pod
+perltie: perltie
+	POD file at 0 in perltie.pod
+Tie::Hash: Tie%3A%3AHash
+	POD file at 0 in perlfunc.pod
+Tie::Array: Tie%3A%3AArray
+	POD file at 0 in perlfunc.pod
+Tie::Scalar: Tie%3A%3AScalar
+	POD file at 0 in perlfunc.pod
+Tie::Handle: Tie%3A%3AHandle
+	POD file at 0 in perlfunc.pod
+dbmopen: perlfunc%2Fdbmopen+HASH%2CDBNAME%2CMASK
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 60678 in perlfunc.pod
+tie: perlfunc%2Ftie+VARIABLE%2CCLASSNAME%2CLIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 351482 in perlfunc.pod
+use: perlfunc%2Fuse+Module+VERSION+LIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 365911 in perlfunc.pod
+require: perlfunc%2Frequire+VERSION
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 254763 in perlfunc.pod
+DB_File: DB_File
+	POD file at 0 in perlfunc.pod
+Config: Config
+	POD file at 0 in perlfunc.pod
+tie: perlfunc%2Ftie+VARIABLE%2CCLASSNAME%2CLIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 351482 in perlfunc.pod
+perltie: perltie
+	POD file at 0 in perltie.pod
+tied: perlfunc%2Ftied+VARIABLE
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 354558 in perlfunc.pod

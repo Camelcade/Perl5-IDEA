@@ -1,0 +1,22 @@
+PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 396272 in perlfunc.pod
+
+perlfunc: perlfunc
+	POD file at 0 in perlfunc.pod
+DESCRIPTION: perlfunc%2FDESCRIPTION
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 60 in perlfunc.pod
+Alphabetical Listing of Perl Functions: perlfunc%2FAlphabetical+Listing+of+Perl+Functions
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21142 in perlfunc.pod
+select: perlfunc%2Fselect+FILEHANDLE
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 272541 in perlfunc.pod
+$~: perlvar%2F%24%7E
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56304 in perlvar.pod
+$^: perlvar%2F%24%5E
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15683 in perlvar.pod
+$-: perlvar%2F%24-
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 54955 in perlvar.pod
+select: perlfunc%2Fselect+FILEHANDLE
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 272541 in perlfunc.pod
+perlform: perlform
+	POD file at 0 in perlform.pod
+read: perlfunc%2Fread+FILEHANDLE%2CSCALAR%2CLENGTH%2COFFSET
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 241537 in perlfunc.pod

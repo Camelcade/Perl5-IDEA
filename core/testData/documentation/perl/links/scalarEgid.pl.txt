@@ -1,0 +1,8 @@
+Built-in: $EGID
+
+perlvar: perlvar
+	null
+SPECIAL VARIABLES: perlvar%2FSPECIAL+VARIABLES
+	null
+General Variables: perlvar%2FGeneral+Variables
+	null

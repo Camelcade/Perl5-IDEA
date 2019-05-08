@@ -1,0 +1,12 @@
+Built-in: %LAST_PAREN_MATCH
+
+perlvar: perlvar
+	null
+SPECIAL VARIABLES: perlvar%2FSPECIAL+VARIABLES
+	null
+Variables related to regular expressions: perlvar%2FVariables+related+to+regular+expressions
+	null
+Performance issues: perlvar%2FPerformance+issues
+	null
+Tie::Hash::NamedCapture: Tie%3A%3AHash%3A%3ANamedCapture
+	null

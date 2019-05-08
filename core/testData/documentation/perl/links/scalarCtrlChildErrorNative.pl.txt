@@ -1,0 +1,10 @@
+Built-in: $^CHILD_ERROR_NATIVE
+
+perlvar: perlvar
+	null
+SPECIAL VARIABLES: perlvar%2FSPECIAL+VARIABLES
+	null
+Error Variables: perlvar%2FError+Variables
+	null
+POSIX: POSIX
+	null

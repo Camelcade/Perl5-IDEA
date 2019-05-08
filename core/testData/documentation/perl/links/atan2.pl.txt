@@ -1,0 +1,14 @@
+PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31355 in perlfunc.pod
+
+perlfunc: perlfunc
+	POD file at 0 in perlfunc.pod
+DESCRIPTION: perlfunc%2FDESCRIPTION
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 60 in perlfunc.pod
+Alphabetical Listing of Perl Functions: perlfunc%2FAlphabetical+Listing+of+Perl+Functions
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21142 in perlfunc.pod
+Math::Trig::tan: Math%3A%3ATrig%2Ftan
+	PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 31394 in perlfunc.pod
+atan2(3): atan2%283%29
+	POD file at 0 in perlfunc.pod
+atan2 in perlport: perlport%2Fatan2
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 65790 in perlport.pod

@@ -1,0 +1,34 @@
+PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 109322 in perlfunc.pod
+
+perlfunc: perlfunc
+	POD file at 0 in perlfunc.pod
+DESCRIPTION: perlfunc%2FDESCRIPTION
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 60 in perlfunc.pod
+Alphabetical Listing of Perl Functions: perlfunc%2FAlphabetical+Listing+of+Perl+Functions
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21142 in perlfunc.pod
+fcntl(2): fcntl%282%29
+	POD file at 0 in perlfunc.pod
+ioctl: perlfunc%2Fioctl+FILEHANDLE%2CFUNCTION%2CSCALAR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 145387 in perlfunc.pod
+defined: perlfunc%2Fdefined+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 63004 in perlfunc.pod
+fcntl: perlfunc%2Ffcntl+FILEHANDLE%2CFUNCTION%2CSCALAR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 109322 in perlfunc.pod
+ioctl: perlfunc%2Fioctl+FILEHANDLE%2CFUNCTION%2CSCALAR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 145387 in perlfunc.pod
+Argument &quot;...&quot; isn't numeric: perldiag%2FArgument+%22%25s%22+isn%27t+numeric%25s
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7844 in perldiag.pod
+warnings: warnings
+	POD file at 0 in perlfunc.pod
+fcntl: perlfunc%2Ffcntl+FILEHANDLE%2CFUNCTION%2CSCALAR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 109322 in perlfunc.pod
+fcntl(2): fcntl%282%29
+	POD file at 0 in perlfunc.pod
+Fcntl: Fcntl
+	POD file at 0 in perlfunc.pod
+fcntl(2): fcntl%282%29
+	POD file at 0 in perlfunc.pod
+$&verbar;: perlvar%2F%24%7C
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52507 in perlvar.pod
+fcntl in perlport: perlport%2Ffcntl
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 69246 in perlport.pod

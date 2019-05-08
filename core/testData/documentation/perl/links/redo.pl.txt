@@ -1,0 +1,30 @@
+PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 249557 in perlfunc.pod
+
+perlfunc: perlfunc
+	POD file at 0 in perlfunc.pod
+DESCRIPTION: perlfunc%2FDESCRIPTION
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 60 in perlfunc.pod
+Alphabetical Listing of Perl Functions: perlfunc%2FAlphabetical+Listing+of+Perl+Functions
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21142 in perlfunc.pod
+redo: perlfunc%2Fredo+LABEL
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 249557 in perlfunc.pod
+continue: perlfunc%2Fcontinue+BLOCK
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 54292 in perlfunc.pod
+redo: perlfunc%2Fredo+LABEL
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 249557 in perlfunc.pod
+grep: perlfunc%2Fgrep+BLOCK+LIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 141025 in perlfunc.pod
+map: perlfunc%2Fmap+BLOCK+LIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 165481 in perlfunc.pod
+redo: perlfunc%2Fredo+LABEL
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 249557 in perlfunc.pod
+continue: perlfunc%2Fcontinue+BLOCK
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 54292 in perlfunc.pod
+last: perlfunc%2Flast+LABEL
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 154434 in perlfunc.pod
+next: perlfunc%2Fnext+LABEL
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 173212 in perlfunc.pod
+redo: perlfunc%2Fredo+LABEL
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 249557 in perlfunc.pod
+redo: perlfunc%2Fredo+LABEL
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 249557 in perlfunc.pod

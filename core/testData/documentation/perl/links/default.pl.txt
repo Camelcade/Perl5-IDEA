@@ -1,0 +1,6 @@
+PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23701 in perlsyn.pod
+
+perlsyn: perlsyn
+	POD file at 0 in perlsyn.pod
+DESCRIPTION: perlsyn%2FDESCRIPTION
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 46 in perlsyn.pod

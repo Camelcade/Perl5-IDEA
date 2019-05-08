@@ -1,0 +1,10 @@
+Built-in: @ARGV
+
+perlvar: perlvar
+	null
+SPECIAL VARIABLES: perlvar%2FSPECIAL+VARIABLES
+	null
+Variables related to filehandles: perlvar%2FVariables+related+to+filehandles
+	null
+$0: perlvar%2F%240
+	null

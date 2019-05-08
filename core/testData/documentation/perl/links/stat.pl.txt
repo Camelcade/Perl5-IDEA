@@ -1,0 +1,34 @@
+PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 322699 in perlfunc.pod
+
+perlfunc: perlfunc
+	POD file at 0 in perlfunc.pod
+DESCRIPTION: perlfunc%2FDESCRIPTION
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 60 in perlfunc.pod
+Alphabetical Listing of Perl Functions: perlfunc%2FAlphabetical+Listing+of+Perl+Functions
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21142 in perlfunc.pod
+$_: perlvar%2F%24_
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3049 in perlvar.pod
+stat: perlfunc%2Fstat+FILEHANDLE
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 322699 in perlfunc.pod
+Files and Filesystems in perlport: perlport%2FFiles+and+Filesystems
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11324 in perlport.pod
+stat: perlfunc%2Fstat+FILEHANDLE
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 322699 in perlfunc.pod
+stat: perlfunc%2Fstat+FILEHANDLE
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 322699 in perlfunc.pod
+lstat: perlfunc%2Flstat+FILEHANDLE
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 164730 in perlfunc.pod
+stat: perlfunc%2Fstat+FILEHANDLE
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 322699 in perlfunc.pod
+File::stat: File%3A%3Astat
+	POD file at 0 in perlfunc.pod
+Fcntl: Fcntl
+	POD file at 0 in perlfunc.pod
+chmod(2): chmod%282%29
+	POD file at 0 in perlfunc.pod
+stat(2): stat%282%29
+	POD file at 0 in perlfunc.pod
+lstat: perlfunc%2Flstat+FILEHANDLE
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 164730 in perlfunc.pod
+stat in perlport: perlport%2Fstat
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 75473 in perlport.pod

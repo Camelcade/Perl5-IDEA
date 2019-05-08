@@ -1,0 +1,32 @@
+PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 106653 in perlfunc.pod
+
+perlfunc: perlfunc
+	POD file at 0 in perlfunc.pod
+DESCRIPTION: perlfunc%2FDESCRIPTION
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 60 in perlfunc.pod
+Alphabetical Listing of Perl Functions: perlfunc%2FAlphabetical+Listing+of+Perl+Functions
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21142 in perlfunc.pod
+casefold() in Unicode::UCD: Unicode%3A%3AUCD%2Fcasefold%28%29
+	null
+prop_invmap() in Unicode::UCD: Unicode%3A%3AUCD%2Fprop_invmap%28%29
+	null
+$_: perlvar%2F%24_
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3049 in perlvar.pod
+&quot;use feature 'unicode_strings&quot;: feature%2FThe+%27unicode_strings%27+feature
+	null
+lc: perlfunc%2Flc+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 155939 in perlfunc.pod
+fc: perlfunc%2Ffc+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 106653 in perlfunc.pod
+use locale: locale
+	POD file at 0 in perlfunc.pod
+lc: perlfunc%2Flc+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 155939 in perlfunc.pod
+Unicode::Casing: Unicode%3A%3ACasing
+	POD file at 0 in perlfunc.pod
+fc: perlfunc%2Ffc+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 106653 in perlfunc.pod
+&quot;fc&quot; feature: feature%2FThe+%27fc%27+feature
+	null
+&quot;fc&quot; feature: feature%2FThe+%27fc%27+feature
+	null

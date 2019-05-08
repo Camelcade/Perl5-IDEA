@@ -1,0 +1,8 @@
+Built-in: $*
+
+perlvar: perlvar
+	null
+SPECIAL VARIABLES: perlvar%2FSPECIAL+VARIABLES
+	null
+Deprecated and removed variables: perlvar%2FDeprecated+and+removed+variables
+	null

@@ -1,0 +1,26 @@
+PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 172194 in perlfunc.pod
+
+perlfunc: perlfunc
+	POD file at 0 in perlfunc.pod
+DESCRIPTION: perlfunc%2FDESCRIPTION
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 60 in perlfunc.pod
+Alphabetical Listing of Perl Functions: perlfunc%2FAlphabetical+Listing+of+Perl+Functions
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21142 in perlfunc.pod
+my: perlfunc%2Fmy+VARLIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 172194 in perlfunc.pod
+eval: perlfunc%2Feval+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 87328 in perlfunc.pod
+use constant: constant
+	POD file at 0 in perlfunc.pod
+__PACKAGE__: perlfunc%2F__PACKAGE__
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 227077 in perlfunc.pod
+fields: fields
+	POD file at 0 in perlfunc.pod
+attributes: attributes
+	POD file at 0 in perlfunc.pod
+Attribute::Handlers: Attribute%3A%3AHandlers
+	POD file at 0 in perlfunc.pod
+Private Variables via my() in perlsub: perlsub%2FPrivate+Variables+via+my%28%29
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19223 in perlsub.pod
+undef: perlfunc%2Fundef+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 360174 in perlfunc.pod

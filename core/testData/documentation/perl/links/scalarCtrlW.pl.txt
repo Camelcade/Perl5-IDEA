@@ -1,0 +1,10 @@
+Built-in: $^W
+
+perlvar: perlvar
+	null
+SPECIAL VARIABLES: perlvar%2FSPECIAL+VARIABLES
+	null
+Error Variables: perlvar%2FError+Variables
+	null
+warnings: warnings
+	null

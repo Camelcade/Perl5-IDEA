@@ -1,0 +1,18 @@
+PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 159810 in perlfunc.pod
+
+perlfunc: perlfunc
+	POD file at 0 in perlfunc.pod
+DESCRIPTION: perlfunc%2FDESCRIPTION
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 60 in perlfunc.pod
+Alphabetical Listing of Perl Functions: perlfunc%2FAlphabetical+Listing+of+Perl+Functions
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21142 in perlfunc.pod
+my: perlfunc%2Fmy+VARLIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 172194 in perlfunc.pod
+local: perlfunc%2Flocal+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 159810 in perlfunc.pod
+Private Variables via my() in perlsub: perlsub%2FPrivate+Variables+via+my%28%29
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19223 in perlsub.pod
+Temporary Values via local() in perlsub: perlsub%2FTemporary+Values+via+local%28%29
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31096 in perlsub.pod
+Localized deletion of elements of composite types in perlsub: perlsub%2FLocalized+deletion+of+elements+of+composite+types
+	PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 37595 in perlsub.pod

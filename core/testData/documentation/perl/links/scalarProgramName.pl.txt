@@ -1,0 +1,8 @@
+Built-in: $PROGRAM_NAME
+
+perlvar: perlvar
+	null
+SPECIAL VARIABLES: perlvar%2FSPECIAL+VARIABLES
+	null
+General Variables: perlvar%2FGeneral+Variables
+	null

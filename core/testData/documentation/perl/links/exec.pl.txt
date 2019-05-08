@@ -1,0 +1,54 @@
+PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 98472 in perlfunc.pod
+
+perlfunc: perlfunc
+	POD file at 0 in perlfunc.pod
+DESCRIPTION: perlfunc%2FDESCRIPTION
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 60 in perlfunc.pod
+Alphabetical Listing of Perl Functions: perlfunc%2FAlphabetical+Listing+of+Perl+Functions
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21142 in perlfunc.pod
+exec: perlfunc%2Fexec+LIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 98472 in perlfunc.pod
+system: perlfunc%2Fsystem+LIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 344095 in perlfunc.pod
+exec: perlfunc%2Fexec+LIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 98472 in perlfunc.pod
+exec: perlfunc%2Fexec+LIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 98472 in perlfunc.pod
+system: perlfunc%2Fsystem+LIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 344095 in perlfunc.pod
+exec: perlfunc%2Fexec+LIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 98472 in perlfunc.pod
+die: perlfunc%2Fdie+LIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 69461 in perlfunc.pod
+warn: perlfunc%2Fwarn+LIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 394112 in perlfunc.pod
+exit: perlfunc%2Fexit+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 104990 in perlfunc.pod
+warnings: warnings
+	POD file at 0 in perlfunc.pod
+exec: perlfunc%2Fexec+LIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 98472 in perlfunc.pod
+execvp(3): execvp%283%29
+	POD file at 0 in perlfunc.pod
+`STRING` in perlop: perlop%2F%60STRING%60
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 88549 in perlop.pod
+exec: perlfunc%2Fexec+LIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 98472 in perlfunc.pod
+system: perlfunc%2Fsystem+LIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 344095 in perlfunc.pod
+system: perlfunc%2Fsystem+LIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 344095 in perlfunc.pod
+$?: perlvar%2F%24%3F
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 63754 in perlvar.pod
+perlport: perlport
+	POD file at 0 in perlport.pod
+$&verbar;: perlvar%2F%24%7C
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52507 in perlvar.pod
+English: English
+	POD file at 0 in perlfunc.pod
+IO::Handle: IO%3A%3AHandle%2FMETHODS
+	null
+exec: perlfunc%2Fexec+LIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 98472 in perlfunc.pod
+exec in perlport: perlport%2Fexec
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67812 in perlport.pod

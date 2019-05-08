@@ -1,0 +1,32 @@
+PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 85106 in perlfunc.pod
+
+perlfunc: perlfunc
+	POD file at 0 in perlfunc.pod
+DESCRIPTION: perlfunc%2FDESCRIPTION
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 60 in perlfunc.pod
+Alphabetical Listing of Perl Functions: perlfunc%2FAlphabetical+Listing+of+Perl+Functions
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21142 in perlfunc.pod
+eof: perlfunc%2Feof+FILEHANDLE
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 85106 in perlfunc.pod
+eof(): perlfunc%2Feof+FILEHANDLE
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 85106 in perlfunc.pod
+eof(): perlfunc%2Feof+FILEHANDLE
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 85106 in perlfunc.pod
+@ARGV: perlvar%2F%40ARGV
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46385 in perlvar.pod
+eof(): perlfunc%2Feof+FILEHANDLE
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 85106 in perlfunc.pod
+@ARGV: perlvar%2F%40ARGV
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46385 in perlvar.pod
+@ARGV: perlvar%2F%40ARGV
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46385 in perlvar.pod
+I/O Operators in perlop: perlop%2FI%2FO+Operators
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 119870 in perlop.pod
+eof: perlfunc%2Feof+FILEHANDLE
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 85106 in perlfunc.pod
+eof(): perlfunc%2Feof+FILEHANDLE
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 85106 in perlfunc.pod
+eof: perlfunc%2Feof+FILEHANDLE
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 85106 in perlfunc.pod
+undef: perlfunc%2Fundef+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 360174 in perlfunc.pod

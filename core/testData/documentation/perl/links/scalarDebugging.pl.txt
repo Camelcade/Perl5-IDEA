@@ -1,0 +1,14 @@
+Built-in: $DEBUGGING
+
+perlvar: perlvar
+	null
+SPECIAL VARIABLES: perlvar%2FSPECIAL+VARIABLES
+	null
+Variables related to the interpreter state: perlvar%2FVariables+related+to+the+interpreter+state
+	null
+command-line equivalent: perlrun%2F-Dletters
+	null
+-Dnumber in perlrun: perlrun%2F-Dnumber
+	null
+Debugger Internals in perldebguts: perldebguts%2FDebugger+Internals
+	null

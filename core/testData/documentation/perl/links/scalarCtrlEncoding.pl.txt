@@ -1,0 +1,10 @@
+Built-in: $^ENCODING
+
+perlvar: perlvar
+	null
+SPECIAL VARIABLES: perlvar%2FSPECIAL+VARIABLES
+	null
+Variables related to the interpreter state: perlvar%2FVariables+related+to+the+interpreter+state
+	null
+Filter::Encoding: Filter%3A%3AEncoding
+	null

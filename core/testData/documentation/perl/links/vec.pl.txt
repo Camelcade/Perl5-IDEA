@@ -1,0 +1,22 @@
+PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 377360 in perlfunc.pod
+
+perlfunc: perlfunc
+	POD file at 0 in perlfunc.pod
+DESCRIPTION: perlfunc%2FDESCRIPTION
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 60 in perlfunc.pod
+Alphabetical Listing of Perl Functions: perlfunc%2FAlphabetical+Listing+of+Perl+Functions
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21142 in perlfunc.pod
+pack: perlfunc%2Fpack+TEMPLATE%2CLIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 198016 in perlfunc.pod
+unpack: perlfunc%2Funpack+TEMPLATE%2CEXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 362418 in perlfunc.pod
+pack: perlfunc%2Fpack+TEMPLATE%2CLIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 198016 in perlfunc.pod
+vec: perlfunc%2Fvec+EXPR%2COFFSET%2CBITS
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 377360 in perlfunc.pod
+vec: perlfunc%2Fvec+EXPR%2COFFSET%2CBITS
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 377360 in perlfunc.pod
+vec: perlfunc%2Fvec+EXPR%2COFFSET%2CBITS
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 377360 in perlfunc.pod
+Bitwise String Operators in perlop: perlop%2FBitwise+String+Operators
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 131659 in perlop.pod

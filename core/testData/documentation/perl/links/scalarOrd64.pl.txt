@@ -1,0 +1,10 @@
+Built-in: $@
+
+perlvar: perlvar
+	null
+SPECIAL VARIABLES: perlvar%2FSPECIAL+VARIABLES
+	null
+Error Variables: perlvar%2FError+Variables
+	null
+%SIG: perlvar%2F%25SIG
+	null

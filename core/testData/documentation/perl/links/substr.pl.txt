@@ -1,0 +1,20 @@
+PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 331028 in perlfunc.pod
+
+perlfunc: perlfunc
+	POD file at 0 in perlfunc.pod
+DESCRIPTION: perlfunc%2FDESCRIPTION
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 60 in perlfunc.pod
+Alphabetical Listing of Perl Functions: perlfunc%2FAlphabetical+Listing+of+Perl+Functions
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21142 in perlfunc.pod
+substr: perlfunc%2Fsubstr+EXPR%2COFFSET%2CLENGTH%2CREPLACEMENT
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 331028 in perlfunc.pod
+sprintf: perlfunc%2Fsprintf+FORMAT%2C+LIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 305912 in perlfunc.pod
+substr: perlfunc%2Fsubstr+EXPR%2COFFSET%2CLENGTH%2CREPLACEMENT
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 331028 in perlfunc.pod
+substr: perlfunc%2Fsubstr+EXPR%2COFFSET%2CLENGTH%2CREPLACEMENT
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 331028 in perlfunc.pod
+splice: perlfunc%2Fsplice+ARRAY%2COFFSET%2CLENGTH%2CLIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 296991 in perlfunc.pod
+substr: perlfunc%2Fsubstr+EXPR%2COFFSET%2CLENGTH%2CREPLACEMENT
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 331028 in perlfunc.pod

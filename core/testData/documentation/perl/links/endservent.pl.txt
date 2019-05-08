@@ -1,0 +1,42 @@
+PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 126823 in perlfunc.pod
+
+perlfunc: perlfunc
+	POD file at 0 in perlfunc.pod
+DESCRIPTION: perlfunc%2FDESCRIPTION
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 60 in perlfunc.pod
+Alphabetical Listing of Perl Functions: perlfunc%2FAlphabetical+Listing+of+Perl+Functions
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21142 in perlfunc.pod
+perlsec: perlsec
+	POD file at 0 in perlsec.pod
+getpwnam(3): getpwnam%283%29
+	POD file at 0 in perlfunc.pod
+Config: Config
+	POD file at 0 in perlfunc.pod
+shadow(3): shadow%283%29
+	POD file at 0 in perlfunc.pod
+$?: perlvar%2F%24%3F
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 63754 in perlvar.pod
+gethostbyname: perlfunc%2Fgethostbyname+NAME
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 124855 in perlfunc.pod
+getprotobynumber: perlfunc%2Fgetprotobynumber+NUMBER
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 125506 in perlfunc.pod
+File::stat: File%3A%3Astat
+	POD file at 0 in perlfunc.pod
+Net::hostent: Net%3A%3Ahostent
+	POD file at 0 in perlfunc.pod
+Net::netent: Net%3A%3Anetent
+	POD file at 0 in perlfunc.pod
+Net::protoent: Net%3A%3Aprotoent
+	POD file at 0 in perlfunc.pod
+Net::servent: Net%3A%3Aservent
+	POD file at 0 in perlfunc.pod
+Time::gmtime: Time%3A%3Agmtime
+	POD file at 0 in perlfunc.pod
+Time::localtime: Time%3A%3Alocaltime
+	POD file at 0 in perlfunc.pod
+User::grent: User%3A%3Agrent
+	POD file at 0 in perlfunc.pod
+getpwnam in perlport: perlport%2Fgetpwnam
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 69835 in perlport.pod
+endservent in perlport: perlport%2Fendservent
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 71414 in perlport.pod

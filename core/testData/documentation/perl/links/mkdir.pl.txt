@@ -1,0 +1,22 @@
+PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 168638 in perlfunc.pod
+
+perlfunc: perlfunc
+	POD file at 0 in perlfunc.pod
+DESCRIPTION: perlfunc%2FDESCRIPTION
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 60 in perlfunc.pod
+Alphabetical Listing of Perl Functions: perlfunc%2FAlphabetical+Listing+of+Perl+Functions
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21142 in perlfunc.pod
+umask: perlfunc%2Fumask+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 357998 in perlfunc.pod
+$!: perlvar%2F%24%21
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 61818 in perlvar.pod
+$_: perlvar%2F%24_
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3049 in perlvar.pod
+umask: perlfunc%2Fumask+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 357998 in perlfunc.pod
+umask: perlfunc%2Fumask+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 357998 in perlfunc.pod
+make_path: File%3A%3APath%2Fmake_path%28+%24dir1%2C+%24dir2%2C+....+%29
+	null
+File::Path: File%3A%3APath
+	POD file at 0 in perlfunc.pod

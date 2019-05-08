@@ -1,0 +1,10 @@
+Built-in: $CHILD_ERROR
+
+perlvar: perlvar
+	null
+SPECIAL VARIABLES: perlvar%2FSPECIAL+VARIABLES
+	null
+Error Variables: perlvar%2FError+Variables
+	null
+$? in perlvms: perlvms%2F%24%3F
+	null

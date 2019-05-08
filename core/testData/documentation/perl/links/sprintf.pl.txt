@@ -1,0 +1,46 @@
+PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 305912 in perlfunc.pod
+
+perlfunc: perlfunc
+	POD file at 0 in perlfunc.pod
+DESCRIPTION: perlfunc%2FDESCRIPTION
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 60 in perlfunc.pod
+Alphabetical Listing of Perl Functions: perlfunc%2FAlphabetical+Listing+of+Perl+Functions
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21142 in perlfunc.pod
+printf: perlfunc%2Fprintf+FILEHANDLE+FORMAT%2C+LIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 232247 in perlfunc.pod
+sprintf: perlfunc%2Fsprintf+FORMAT%2C+LIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 305912 in perlfunc.pod
+sprintf(3): sprintf%283%29
+	POD file at 0 in perlfunc.pod
+printf(3): printf%283%29
+	POD file at 0 in perlfunc.pod
+sprintf: perlfunc%2Fsprintf+FORMAT%2C+LIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 305912 in perlfunc.pod
+sprintf(3): sprintf%283%29
+	POD file at 0 in perlfunc.pod
+sprintf(3): sprintf%283%29
+	POD file at 0 in perlfunc.pod
+printf: perlfunc%2Fprintf+FILEHANDLE+FORMAT%2C+LIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 232247 in perlfunc.pod
+sprintf: perlfunc%2Fsprintf+FORMAT%2C+LIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 305912 in perlfunc.pod
+sprintf: perlfunc%2Fsprintf+FORMAT%2C+LIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 305912 in perlfunc.pod
+printf: warnings
+	POD file at 0 in perlfunc.pod
+Config: Config
+	POD file at 0 in perlfunc.pod
+Config: Config
+	POD file at 0 in perlfunc.pod
+Config: Config
+	POD file at 0 in perlfunc.pod
+sprintf: perlfunc%2Fsprintf+FORMAT%2C+LIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 305912 in perlfunc.pod
+use locale: locale
+	POD file at 0 in perlfunc.pod
+POSIX::setlocale: POSIX%2Fsetlocale
+	null
+perllocale: perllocale
+	POD file at 0 in perllocale.pod
+POSIX: POSIX
+	POD file at 0 in perlfunc.pod

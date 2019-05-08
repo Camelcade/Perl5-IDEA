@@ -1,0 +1,36 @@
+PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21196 in perlfunc.pod
+
+perlfunc: perlfunc
+	POD file at 0 in perlfunc.pod
+DESCRIPTION: perlfunc%2FDESCRIPTION
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 60 in perlfunc.pod
+Alphabetical Listing of Perl Functions: perlfunc%2FAlphabetical+Listing+of+Perl+Functions
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21142 in perlfunc.pod
+$_: perlvar%2F%24_
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3049 in perlvar.pod
+undef: perlfunc%2Fundef+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 360174 in perlfunc.pod
+$!: perlvar%2F%24%21
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 61818 in perlvar.pod
+stat: perlfunc%2Fstat+FILEHANDLE
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 322699 in perlfunc.pod
+filetest: filetest
+	POD file at 0 in perlfunc.pod
+stat: perlfunc%2Fstat+FILEHANDLE
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 322699 in perlfunc.pod
+access(2): access%282%29
+	POD file at 0 in perlfunc.pod
+filetest: filetest
+	POD file at 0 in perlfunc.pod
+stat: perlfunc%2Fstat+FILEHANDLE
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 322699 in perlfunc.pod
+lstat: perlfunc%2Flstat+FILEHANDLE
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 164730 in perlfunc.pod
+stat: perlfunc%2Fstat+FILEHANDLE
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 322699 in perlfunc.pod
+lstat: perlfunc%2Flstat+FILEHANDLE
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 164730 in perlfunc.pod
+lstat: perlfunc%2Flstat+FILEHANDLE
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 164730 in perlfunc.pod
+-X in perlport: perlport%2F-X
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 64504 in perlport.pod

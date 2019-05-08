@@ -1,0 +1,18 @@
+PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 253987 in perlfunc.pod
+
+perlfunc: perlfunc
+	POD file at 0 in perlfunc.pod
+DESCRIPTION: perlfunc%2FDESCRIPTION
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 60 in perlfunc.pod
+Alphabetical Listing of Perl Functions: perlfunc%2FAlphabetical+Listing+of+Perl+Functions
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21142 in perlfunc.pod
+perlport: perlport
+	POD file at 0 in perlport.pod
+rename(2): rename%282%29
+	POD file at 0 in perlfunc.pod
+move: File%3A%3ACopy%2Fmove
+	PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 254026 in perlfunc.pod
+File::Copy: File%3A%3ACopy
+	POD file at 0 in perlfunc.pod
+rename in perlport: perlport%2Frename
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 74153 in perlport.pod

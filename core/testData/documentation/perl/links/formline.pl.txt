@@ -1,0 +1,36 @@
+PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 119236 in perlfunc.pod
+
+perlfunc: perlfunc
+	POD file at 0 in perlfunc.pod
+DESCRIPTION: perlfunc%2FDESCRIPTION
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 60 in perlfunc.pod
+Alphabetical Listing of Perl Functions: perlfunc%2FAlphabetical+Listing+of+Perl+Functions
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21142 in perlfunc.pod
+format: perlfunc%2Fformat
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 118792 in perlfunc.pod
+perlform: perlform
+	POD file at 0 in perlform.pod
+$^A: perlvar%2F%24%5EA
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53973 in perlvar.pod
+English: English
+	POD file at 0 in perlfunc.pod
+write: perlfunc%2Fwrite+FILEHANDLE
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 396272 in perlfunc.pod
+$^A: perlvar%2F%24%5EA
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53973 in perlvar.pod
+$^A: perlvar%2F%24%5EA
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53973 in perlvar.pod
+$^A: perlvar%2F%24%5EA
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53973 in perlvar.pod
+formline: perlfunc%2Fformline+PICTURE%2CLIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 119236 in perlfunc.pod
+formline: perlfunc%2Fformline+PICTURE%2CLIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 119236 in perlfunc.pod
+format: perlfunc%2Fformat
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 118792 in perlfunc.pod
+formline: perlfunc%2Fformline+PICTURE%2CLIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 119236 in perlfunc.pod
+perlform: perlform
+	POD file at 0 in perlform.pod
+write: perlfunc%2Fwrite+FILEHANDLE
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 396272 in perlfunc.pod

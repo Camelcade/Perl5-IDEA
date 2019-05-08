@@ -1,0 +1,12 @@
+Built-in: %OS_ERROR
+
+perlvar: perlvar
+	null
+SPECIAL VARIABLES: perlvar%2FSPECIAL+VARIABLES
+	null
+Error Variables: perlvar%2FError+Variables
+	null
+Errno: Errno
+	null
+$!: perlvar%2F%24%21
+	null

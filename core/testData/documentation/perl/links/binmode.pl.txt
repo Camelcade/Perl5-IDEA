@@ -1,0 +1,64 @@
+PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32192 in perlfunc.pod
+
+perlfunc: perlfunc
+	POD file at 0 in perlfunc.pod
+DESCRIPTION: perlfunc%2FDESCRIPTION
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 60 in perlfunc.pod
+Alphabetical Listing of Perl Functions: perlfunc%2FAlphabetical+Listing+of+Perl+Functions
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21142 in perlfunc.pod
+undef: perlfunc%2Fundef+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 360174 in perlfunc.pod
+$!: perlvar%2F%24%21
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 61818 in perlvar.pod
+binmode: perlfunc%2Fbinmode+FILEHANDLE%2C+LAYER
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32192 in perlfunc.pod
+binmode: perlfunc%2Fbinmode+FILEHANDLE%2C+LAYER
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32192 in perlfunc.pod
+PerlIO: PerlIO
+	POD file at 0 in perlfunc.pod
+perlrun: perlrun
+	POD file at 0 in perlrun.pod
+open: open
+	POD file at 0 in perlfunc.pod
+binmode: perlfunc%2Fbinmode+FILEHANDLE%2C+LAYER
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32192 in perlfunc.pod
+PerlIO::encoding: PerlIO%3A%3Aencoding
+	POD file at 0 in perlfunc.pod
+binmode: perlfunc%2Fbinmode+FILEHANDLE%2C+LAYER
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32192 in perlfunc.pod
+open: perlfunc%2Fopen+FILEHANDLE%2CEXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 176323 in perlfunc.pod
+binmode: perlfunc%2Fbinmode+FILEHANDLE%2C+LAYER
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32192 in perlfunc.pod
+binmode: perlfunc%2Fbinmode+FILEHANDLE%2C+LAYER
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32192 in perlfunc.pod
+binmode: perlfunc%2Fbinmode+FILEHANDLE%2C+LAYER
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32192 in perlfunc.pod
+binmode: perlfunc%2Fbinmode+FILEHANDLE%2C+LAYER
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32192 in perlfunc.pod
+binmode: perlfunc%2Fbinmode+FILEHANDLE%2C+LAYER
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32192 in perlfunc.pod
+readline: perlfunc%2Freadline+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 244762 in perlfunc.pod
+print: perlfunc%2Fprint+FILEHANDLE+LIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 230160 in perlfunc.pod
+read: perlfunc%2Fread+FILEHANDLE%2CSCALAR%2CLENGTH%2COFFSET
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 241537 in perlfunc.pod
+seek: perlfunc%2Fseek+FILEHANDLE%2CPOSITION%2CWHENCE
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 269555 in perlfunc.pod
+sysread: perlfunc%2Fsysread+FILEHANDLE%2CSCALAR%2CLENGTH%2COFFSET
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 340196 in perlfunc.pod
+syswrite: perlfunc%2Fsyswrite+FILEHANDLE%2CSCALAR%2CLENGTH%2COFFSET
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 347768 in perlfunc.pod
+tell: perlfunc%2Ftell+FILEHANDLE
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 349594 in perlfunc.pod
+perlport: perlport
+	POD file at 0 in perlport.pod
+$/: perlvar%2F%24%2F
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49401 in perlvar.pod
+$\: perlvar%2F%24%5C
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51994 in perlvar.pod
+perlvar: perlvar
+	POD file at 0 in perlvar.pod
+binmode in perlport: perlport%2Fbinmode
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 66284 in perlport.pod

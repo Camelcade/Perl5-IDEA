@@ -1,0 +1,14 @@
+Built-in: $ACCUMULATOR
+
+perlvar: perlvar
+	null
+SPECIAL VARIABLES: perlvar%2FSPECIAL+VARIABLES
+	null
+Variables related to filehandles: perlvar%2FVariables+related+to+filehandles
+	null
+Variables related to formats: perlvar%2FVariables+related+to+formats
+	null
+perlform: perlform
+	null
+formline PICTURE,LIST in perlfunc: perlfunc%2Fformline+PICTURE%2CLIST
+	null

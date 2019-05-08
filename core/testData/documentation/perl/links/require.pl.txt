@@ -1,0 +1,54 @@
+PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 254763 in perlfunc.pod
+
+perlfunc: perlfunc
+	POD file at 0 in perlfunc.pod
+DESCRIPTION: perlfunc%2FDESCRIPTION
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 60 in perlfunc.pod
+Alphabetical Listing of Perl Functions: perlfunc%2FAlphabetical+Listing+of+Perl+Functions
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21142 in perlfunc.pod
+$_: perlvar%2F%24_
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3049 in perlvar.pod
+$^V: perlvar%2F%24%5EV
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24464 in perlvar.pod
+English: English
+	POD file at 0 in perlfunc.pod
+$]: perlvar%2F%24%5D
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14057 in perlvar.pod
+use: perlfunc%2Fuse+Module+VERSION+LIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 365911 in perlfunc.pod
+require: perlfunc%2Frequire+VERSION
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 254763 in perlfunc.pod
+eval: perlfunc%2Feval+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 87328 in perlfunc.pod
+require: perlfunc%2Frequire+VERSION
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 254763 in perlfunc.pod
+@INC: perlvar%2F%40INC
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16512 in perlvar.pod
+@INC: perlvar%2F%40INC
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16512 in perlvar.pod
+require: perlfunc%2Frequire+VERSION
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 254763 in perlfunc.pod
+require: perlfunc%2Frequire+VERSION
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 254763 in perlfunc.pod
+@INC: perlvar%2F%40INC
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16512 in perlvar.pod
+@INC: perlvar%2F%40INC
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16512 in perlvar.pod
+$_: perlvar%2F%24_
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3049 in perlvar.pod
+$_: perlvar%2F%24_
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3049 in perlvar.pod
+undef: perlfunc%2Fundef+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 360174 in perlfunc.pod
+require: perlfunc%2Frequire+VERSION
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 254763 in perlfunc.pod
+@INC: perlvar%2F%40INC
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16512 in perlvar.pod
+%INC: perlvar%2F%25INC
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17442 in perlvar.pod
+%INC in perlvar: perlvar%2F%25INC
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17442 in perlvar.pod
+use: perlfunc%2Fuse+Module+VERSION+LIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 365911 in perlfunc.pod
+perlmod: perlmod
+	POD file at 0 in perlmod.pod

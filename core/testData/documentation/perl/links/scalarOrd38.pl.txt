@@ -1,0 +1,12 @@
+Built-in: $&
+
+perlvar: perlvar
+	null
+SPECIAL VARIABLES: perlvar%2FSPECIAL+VARIABLES
+	null
+Variables related to regular expressions: perlvar%2FVariables+related+to+regular+expressions
+	null
+Performance issues: perlvar%2FPerformance+issues
+	null
+Performance issues: perlvar%2FPerformance+issues
+	null

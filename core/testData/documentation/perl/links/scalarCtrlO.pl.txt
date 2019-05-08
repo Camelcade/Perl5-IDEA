@@ -1,0 +1,18 @@
+Built-in: $^O
+
+perlvar: perlvar
+	null
+SPECIAL VARIABLES: perlvar%2FSPECIAL+VARIABLES
+	null
+General Variables: perlvar%2FGeneral+Variables
+	null
+PLATFORMS in perlport: perlport%2FPLATFORMS
+	null
+Config: Config
+	null
+perlrun: perlrun
+	null
+Win32: Win32
+	null
+perlport: perlport
+	null

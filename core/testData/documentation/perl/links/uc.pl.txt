@@ -1,0 +1,14 @@
+PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 357030 in perlfunc.pod
+
+perlfunc: perlfunc
+	POD file at 0 in perlfunc.pod
+DESCRIPTION: perlfunc%2FDESCRIPTION
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 60 in perlfunc.pod
+Alphabetical Listing of Perl Functions: perlfunc%2FAlphabetical+Listing+of+Perl+Functions
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21142 in perlfunc.pod
+ucfirst: perlfunc%2Fucfirst+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 357532 in perlfunc.pod
+$_: perlvar%2F%24_
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3049 in perlvar.pod
+lc: perlfunc%2Flc+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 155939 in perlfunc.pod

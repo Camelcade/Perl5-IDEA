@@ -1,0 +1,32 @@
+PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 269555 in perlfunc.pod
+
+perlfunc: perlfunc
+	POD file at 0 in perlfunc.pod
+DESCRIPTION: perlfunc%2FDESCRIPTION
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 60 in perlfunc.pod
+Alphabetical Listing of Perl Functions: perlfunc%2FAlphabetical+Listing+of+Perl+Functions
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21142 in perlfunc.pod
+fseek(3): fseek%283%29
+	POD file at 0 in perlfunc.pod
+Fcntl: Fcntl
+	POD file at 0 in perlfunc.pod
+seek: perlfunc%2Fseek+FILEHANDLE%2CPOSITION%2CWHENCE
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 269555 in perlfunc.pod
+tell: perlfunc%2Ftell+FILEHANDLE
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 349594 in perlfunc.pod
+sysseek: perlfunc%2Fsysseek+FILEHANDLE%2CPOSITION%2CWHENCE
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 342101 in perlfunc.pod
+sysread: perlfunc%2Fsysread+FILEHANDLE%2CSCALAR%2CLENGTH%2COFFSET
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 340196 in perlfunc.pod
+syswrite: perlfunc%2Fsyswrite+FILEHANDLE%2CSCALAR%2CLENGTH%2COFFSET
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 347768 in perlfunc.pod
+seek: perlfunc%2Fseek+FILEHANDLE%2CPOSITION%2CWHENCE
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 269555 in perlfunc.pod
+sysseek: perlfunc%2Fsysseek+FILEHANDLE%2CPOSITION%2CWHENCE
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 342101 in perlfunc.pod
+clearerr(3): clearerr%283%29
+	POD file at 0 in perlfunc.pod
+seek: perlfunc%2Fseek+FILEHANDLE%2CPOSITION%2CWHENCE
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 269555 in perlfunc.pod
+seek: perlfunc%2Fseek+FILEHANDLE%2CPOSITION%2CWHENCE
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 269555 in perlfunc.pod

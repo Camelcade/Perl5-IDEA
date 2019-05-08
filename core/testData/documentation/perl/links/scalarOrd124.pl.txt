@@ -1,0 +1,14 @@
+Built-in: $|
+
+perlvar: perlvar
+	null
+SPECIAL VARIABLES: perlvar%2FSPECIAL+VARIABLES
+	null
+Variables related to filehandles: perlvar%2FVariables+related+to+filehandles
+	null
+getc in perlfunc: perlfunc%2Fgetc
+	null
+select in perlfunc: perlfunc%2Fselect
+	null
+IO::Handle: IO%3A%3AHandle
+	null

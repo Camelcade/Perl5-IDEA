@@ -1,0 +1,24 @@
+PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 334861 in perlfunc.pod
+
+perlfunc: perlfunc
+	POD file at 0 in perlfunc.pod
+DESCRIPTION: perlfunc%2FDESCRIPTION
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 60 in perlfunc.pod
+Alphabetical Listing of Perl Functions: perlfunc%2FAlphabetical+Listing+of+Perl+Functions
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21142 in perlfunc.pod
+syscall: perlfunc%2Fsyscall+NUMBER%2C+LIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 334861 in perlfunc.pod
+syswrite: perlfunc%2Fsyswrite+FILEHANDLE%2CSCALAR%2CLENGTH%2COFFSET
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 347768 in perlfunc.pod
+syscall: perlfunc%2Fsyscall+NUMBER%2C+LIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 334861 in perlfunc.pod
+$!: perlvar%2F%24%21
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 61818 in perlvar.pod
+$!: perlvar%2F%24%21
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 61818 in perlvar.pod
+syscall: perlfunc%2Fsyscall+NUMBER%2C+LIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 334861 in perlfunc.pod
+pipe: perlfunc%2Fpipe+READHANDLE%2CWRITEHANDLE
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 227233 in perlfunc.pod
+syscall in perlport: perlport%2Fsyscall
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 76740 in perlport.pod

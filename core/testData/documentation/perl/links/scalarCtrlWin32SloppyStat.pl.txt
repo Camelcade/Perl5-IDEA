@@ -1,0 +1,10 @@
+Built-in: $^WIN32_SLOPPY_STAT
+
+perlvar: perlvar
+	null
+SPECIAL VARIABLES: perlvar%2FSPECIAL+VARIABLES
+	null
+General Variables: perlvar%2FGeneral+Variables
+	null
+perlrun: perlrun%2FCommand+Switches
+	null

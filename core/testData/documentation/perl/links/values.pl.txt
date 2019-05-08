@@ -1,0 +1,34 @@
+PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 374638 in perlfunc.pod
+
+perlfunc: perlfunc
+	POD file at 0 in perlfunc.pod
+DESCRIPTION: perlfunc%2FDESCRIPTION
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 60 in perlfunc.pod
+Alphabetical Listing of Perl Functions: perlfunc%2FAlphabetical+Listing+of+Perl+Functions
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21142 in perlfunc.pod
+each: perlfunc%2Feach+HASH
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 80302 in perlfunc.pod
+keys: perlfunc%2Fkeys+HASH
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 147852 in perlfunc.pod
+keys: perlfunc%2Fkeys+HASH
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 147852 in perlfunc.pod
+values: perlfunc%2Fvalues+HASH
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 374638 in perlfunc.pod
+each: perlfunc%2Feach+HASH
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 80302 in perlfunc.pod
+Algorithmic Complexity Attacks in perlsec: perlsec%2FAlgorithmic+Complexity+Attacks
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21812 in perlsec.pod
+values: perlfunc%2Fvalues+HASH
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 374638 in perlfunc.pod
+each: perlfunc%2Feach+HASH
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 80302 in perlfunc.pod
+values: perlfunc%2Fvalues+HASH
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 374638 in perlfunc.pod
+values: perlfunc%2Fvalues+HASH
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 374638 in perlfunc.pod
+keys: perlfunc%2Fkeys+HASH
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 147852 in perlfunc.pod
+each: perlfunc%2Feach+HASH
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 80302 in perlfunc.pod
+sort: perlfunc%2Fsort+SUBNAME+LIST
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 288635 in perlfunc.pod

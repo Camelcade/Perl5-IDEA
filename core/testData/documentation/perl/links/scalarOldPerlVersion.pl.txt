@@ -1,0 +1,12 @@
+Built-in: $OLD_PERL_VERSION
+
+perlvar: perlvar
+	null
+SPECIAL VARIABLES: perlvar%2FSPECIAL+VARIABLES
+	null
+General Variables: perlvar%2FGeneral+Variables
+	null
+$^V: perlvar%2F%24%5EV
+	null
+version: version
+	null

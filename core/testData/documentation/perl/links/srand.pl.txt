@@ -1,0 +1,42 @@
+PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 320236 in perlfunc.pod
+
+perlfunc: perlfunc
+	POD file at 0 in perlfunc.pod
+DESCRIPTION: perlfunc%2FDESCRIPTION
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 60 in perlfunc.pod
+Alphabetical Listing of Perl Functions: perlfunc%2FAlphabetical+Listing+of+Perl+Functions
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21142 in perlfunc.pod
+rand: perlfunc%2Frand+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 240188 in perlfunc.pod
+rand: perlfunc%2Frand+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 240188 in perlfunc.pod
+rand: perlfunc%2Frand+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 240188 in perlfunc.pod
+srand: perlfunc%2Fsrand+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 320236 in perlfunc.pod
+srand: perlfunc%2Fsrand+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 320236 in perlfunc.pod
+rand: perlfunc%2Frand+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 240188 in perlfunc.pod
+srand: perlfunc%2Fsrand+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 320236 in perlfunc.pod
+srand: perlfunc%2Fsrand+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 320236 in perlfunc.pod
+fork: perlfunc%2Ffork
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 116703 in perlfunc.pod
+srand: perlfunc%2Fsrand+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 320236 in perlfunc.pod
+srand: perlfunc%2Fsrand+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 320236 in perlfunc.pod
+srand: perlfunc%2Fsrand+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 320236 in perlfunc.pod
+rand: perlfunc%2Frand+EXPR
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 240188 in perlfunc.pod
+Data::Entropy: Data%3A%3AEntropy
+	POD file at 0 in perlfunc.pod
+Crypt::Random: Crypt%3A%3ARandom
+	POD file at 0 in perlfunc.pod
+Math::Random::Secure: Math%3A%3ARandom%3A%3ASecure
+	POD file at 0 in perlfunc.pod
+Math::TrulyRandom: Math%3A%3ATrulyRandom
+	POD file at 0 in perlfunc.pod
