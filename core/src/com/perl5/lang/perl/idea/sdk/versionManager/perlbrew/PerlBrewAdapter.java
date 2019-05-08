@@ -42,7 +42,8 @@ import static com.perl5.PerlIcons.PERLBREW_ICON;
 /**
  * Api to the perlbrew cli
  */
-class PerlBrewAdapter extends PerlVersionManagerAdapter {
+@VisibleForTesting
+public class PerlBrewAdapter extends PerlVersionManagerAdapter {
   static final String PERLBREW_ROOT = "PERLBREW_ROOT";
   static final String PERLBREW_HOME = "PERLBREW_HOME";
   static final String PERLBREW_PATH = "PERLBREW_PATH";
@@ -131,7 +132,7 @@ class PerlBrewAdapter extends PerlVersionManagerAdapter {
   @VisibleForTesting
   @Contract("null->null; !null->!null")
   public static List<String> parseInstalledDistributionsList(@Nullable List<String> output) {
-    return output == null ? null : ContainerUtil.map(output, it -> it.replaceAll("\\(.+?\\)", "").trim());
+    return output == null ? null : ContainerUtil.map(output, it -> it.replaceAll("\\(.+?\\)", "").replaceAll("^\\s*\\**\\s*", "").trim());
   }
 
   /**
