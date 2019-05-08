@@ -37,7 +37,6 @@ import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.pod.PodLanguage;
-import com.perl5.lang.pod.PodSearchHelper;
 import com.perl5.lang.pod.parser.psi.*;
 import com.perl5.lang.pod.parser.psi.impl.PodFileImpl;
 import com.perl5.lang.pod.parser.psi.mixin.PodSectionItem;
@@ -55,10 +54,12 @@ import java.util.Map;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
 import static com.perl5.lang.perl.util.PerlSubUtil.SUB_AUTOLOAD;
 import static com.perl5.lang.perl.util.PerlSubUtil.SUB_DESTROY;
-import static com.perl5.lang.pod.PodSearchHelper.PERL_FUNC_FILE_NAME;
 
 
 public class PerlDocUtil implements PerlElementTypes {
+  public static final String PERL_VAR_FILE_NAME = "perlvar.pod";
+  public static final String PERL_FUNC_FILE_NAME = "perlfunc.pod";
+  public static final String PERL_OP_FILE_NAME = "perlop.pod";
   static final PodLinkDescriptor SWITCH_DOC_LINK = PodLinkDescriptor.create("perlsyn", "Switch Statements");
   static final PodLinkDescriptor SPECIAL_LITERALS_LINK = PodLinkDescriptor.create("perldata", "Special Literals");
   private static final PodLinkDescriptor MODIFIERS_DOC_LINK = PodLinkDescriptor.create("perlsyn", "Statement Modifiers");
@@ -161,7 +162,7 @@ public class PerlDocUtil implements PerlElementTypes {
           pattern = PodDocumentPattern.itemPattern(text).withExactMatch();
         }
 
-        return searchPodElementInFile(project, PodSearchHelper.PERL_VAR_FILE_NAME, pattern);
+        return searchPodElementInFile(project, PERL_VAR_FILE_NAME, pattern);
       }
     }
 
@@ -235,7 +236,7 @@ public class PerlDocUtil implements PerlElementTypes {
       pattern.withIndexPattern("?:");
     }
 
-    return searchPodElementInFile(project, PodSearchHelper.PERL_OP_FILE_NAME, pattern);
+    return searchPodElementInFile(project, PERL_OP_FILE_NAME, pattern);
   }
 
   protected static PodCompositeElement searchPodElementInFile(Project project, String fileName, PodDocumentPattern pattern) {
