@@ -19,10 +19,12 @@ package com.perl5.lang.pod.parser.psi.mixin;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubElement;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.pod.idea.completion.PodLinkCompletionProvider;
 import com.perl5.lang.pod.parser.psi.*;
 import com.perl5.lang.pod.parser.psi.stubs.PodSectionStub;
 import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
@@ -77,6 +79,12 @@ public class PodFormatterX extends PodStubBasedTitledSection implements PodForma
 
   @Override
   public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException {
+    PsiElement nameIdentifier = getNameIdentifier();
+    if (nameIdentifier == null) {
+      return this;
+    }
+    ElementManipulators.getManipulator(nameIdentifier).handleContentChange(
+      nameIdentifier, PodLinkCompletionProvider.escapeTitle(PodElementFactory.getHeaderText(getProject(), name)));
     return this;
   }
 

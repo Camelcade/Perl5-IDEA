@@ -21,6 +21,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.*;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.references.PerlCachingReference;
+import com.perl5.lang.pod.idea.completion.PodLinkCompletionProvider;
 import com.perl5.lang.pod.parser.psi.PodElementFactory;
 import com.perl5.lang.pod.parser.psi.PodLinkDescriptor;
 import com.perl5.lang.pod.parser.psi.PodStubsAwareRecursiveVisitor;
@@ -41,7 +42,8 @@ public class PodLinkToSectionReference extends PerlCachingReference<PodFormatter
 
   @Override
   public PsiElement handleElementRename(@NotNull String newElementName) throws IncorrectOperationException {
-    return super.handleElementRename(PodElementFactory.getHeaderText(myElement.getProject(), newElementName));
+    return super.handleElementRename(
+      PodLinkCompletionProvider.escapeTitle(PodElementFactory.getHeaderText(myElement.getProject(), newElementName)));
   }
 
   @NotNull

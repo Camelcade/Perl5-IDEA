@@ -1,0 +1,4 @@
+=head3 new >> C<name> << here
+X<zero index>X<first index>X<second index>
+
+L<Titled|/new E<gt>E<gt> name E<lt>E<lt> here>

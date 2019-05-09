@@ -1,0 +1,4 @@
+=head1 new >> name
+X<some index>
+
+L<Titled|/new E<gt>E<gt> name>

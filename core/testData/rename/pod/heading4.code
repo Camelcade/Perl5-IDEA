@@ -1,0 +1,5 @@
+=head4 Some old nameX<zero index>
+X<first index>
+X<second index>
+
+L<Titled|/Some<caret> old name>

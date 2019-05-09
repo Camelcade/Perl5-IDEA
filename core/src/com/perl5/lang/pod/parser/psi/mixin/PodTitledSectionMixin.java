@@ -21,8 +21,10 @@ import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.pod.parser.psi.PodRecursiveVisitor;
 import com.perl5.lang.pod.parser.psi.stubs.PodSectionStub;
 import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
+import com.perl5.lang.pod.psi.PsiPodFormatIndex;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -58,9 +60,21 @@ public class PodTitledSectionMixin extends PodStubBasedTitledSection {
   @Override
   public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException {
     PsiElement nameIdentifier = getNameIdentifier();
-    if (nameIdentifier != null) {
-      ElementManipulators.getManipulator(nameIdentifier).handleContentChange(nameIdentifier, name);
+    if (nameIdentifier == null) {
+      return this;
     }
+    StringBuilder indexes = new StringBuilder();
+    nameIdentifier.accept(new PodRecursiveVisitor() {
+      @Override
+      public void visitPodFormatIndex(@NotNull PsiPodFormatIndex o) {
+        indexes.append(o.getText());
+      }
+    });
+    if (indexes.length() > 0) {
+      name = name + "\n" + indexes;
+    }
+
+    ElementManipulators.getManipulator(nameIdentifier).handleContentChange(nameIdentifier, name);
     return this;
   }
 

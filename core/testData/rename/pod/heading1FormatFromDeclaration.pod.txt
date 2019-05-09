@@ -1,0 +1,4 @@
+=head1 new C<name>
+
+
+L<Titled|/new name>
