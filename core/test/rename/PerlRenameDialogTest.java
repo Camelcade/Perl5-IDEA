@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,18 +16,20 @@
 
 package rename;
 
+import base.PerlLightTestCase;
+
 // following tests are not working in inline test
-public class PerlRenameDialogTest extends PerlRenameTestCase {
+public class PerlRenameDialogTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/rename/perl";
   }
 
-  public void testClassAccessorFbp() {doTest();}
+  public void testClassAccessorFbp() {doTestRename();}
 
-  public void testExceptionClassFieldField() {doTest();}
+  public void testExceptionClassFieldField() {doTestRename();}
 
-  public void testClassAccessorFbpRo() {doTest();}
+  public void testClassAccessorFbpRo() {doTestRename();}
 
-  public void testClassAccessorFbpWo() {doTest();}
+  public void testClassAccessorFbpWo() {doTestRename();}
 }

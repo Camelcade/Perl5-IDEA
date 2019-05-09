@@ -17,102 +17,104 @@
 package rename;
 
 
-public class PerlRenameTest extends PerlRenameTestCase {
+import base.PerlLightTestCase;
+
+public class PerlRenameTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/rename/perl";
   }
 
-  public void testPackageTag() {doTest();}
+  public void testPackageTag() {doTestRename();}
 
-  public void testAccessorModification() {doTest();}
+  public void testAccessorModification() {doTestRename();}
 
-  public void testMojoAttrs() {doTest();}
+  public void testMojoAttrs() {doTestRename();}
 
-  public void testClassAccessorSimple() {doTest();}
+  public void testClassAccessorSimple() {doTestRename();}
 
-  public void testClassAccessorSimpleRo() {doTest();}
+  public void testClassAccessorSimpleRo() {doTestRename();}
 
-  public void testClassAccessorSimpleWo() {doTest();}
+  public void testClassAccessorSimpleWo() {doTestRename();}
 
-  public void testExceptionClassFieldMethod() {doTest();}
+  public void testExceptionClassFieldMethod() {doTestRename();}
 
-  public void testExceptionClassFieldStatic() {doTest();}
+  public void testExceptionClassFieldStatic() {doTestRename();}
 
-  public void testExceptionClassAliasLocal() {doTest();}
+  public void testExceptionClassAliasLocal() {doTestRename();}
 
-  public void testExceptionClassAliasStatic() {doTest();}
+  public void testExceptionClassAliasStatic() {doTestRename();}
 
-  public void testExceptionClassAliasMethod() {doTest();}
+  public void testExceptionClassAliasMethod() {doTestRename();}
 
-  public void testConstantBare() {doTest();}
+  public void testConstantBare() {doTestRename();}
 
-  public void testConstantSQ() {doTest();}
+  public void testConstantSQ() {doTestRename();}
 
-  public void testConstantDQ() {doTest();}
+  public void testConstantDQ() {doTestRename();}
 
-  public void testConstantQQ() {doTest();}
+  public void testConstantQQ() {doTestRename();}
 
-  public void testConstantQ() {doTest();}
+  public void testConstantQ() {doTestRename();}
 
-  public void testConstantQW() {doTest();}
+  public void testConstantQW() {doTestRename();}
 
-  public void testExceptionClassSQ() {doTest();}
+  public void testExceptionClassSQ() {doTestRename();}
 
-  public void testExceptionClassDQ() {doTest();}
+  public void testExceptionClassDQ() {doTestRename();}
 
-  public void testExceptionClassQW() {doTest();}
+  public void testExceptionClassQW() {doTestRename();}
 
-  public void testExceptionClassBare() {doTest();}
+  public void testExceptionClassBare() {doTestRename();}
 
-  public void testExceptionClassQ() {doTest();}
+  public void testExceptionClassQ() {doTestRename();}
 
-  public void testExceptionClassQQ() {doTest();}
+  public void testExceptionClassQQ() {doTestRename();}
 
-  public void testHeredocBare() {doTest();}
+  public void testHeredocBare() {doTestRename();}
 
-  public void testHeredocDQ() {doTest();}
+  public void testHeredocDQ() {doTestRename();}
 
-  public void testHeredocDQSpaced() {doTest();}
+  public void testHeredocDQSpaced() {doTestRename();}
 
-  public void testHeredocEscaped() {doTest();}
+  public void testHeredocEscaped() {doTestRename();}
 
-  public void testHeredocIndented() {doTest();}
+  public void testHeredocIndented() {doTestRename();}
 
-  public void testHeredocSQ() {doTest();}
+  public void testHeredocSQ() {doTestRename();}
 
-  public void testHeredocSQSpaced() {doTest();}
+  public void testHeredocSQSpaced() {doTestRename();}
 
-  public void testHeredocXQ() {doTest();}
+  public void testHeredocXQ() {doTestRename();}
 
-  public void testHeredocXQSpaced() {doTest();}
+  public void testHeredocXQSpaced() {doTestRename();}
 
   public void testGlobRename() {
-    doTest();
+    doTestRename();
   }
 
   public void testLexicalVariable() {
-    doTest();
+    doTestRename();
   }
 
   public void testMultiVariable() {
-    doTest();
+    doTestRename();
   }
 
   public void testLabelRename() {
-    doTest();
+    doTestRename();
   }
 
   public void testPackageName() {
-    doTest("Foo::Bar::Moo");
+    doTestRename("Foo::Bar::Moo");
   }
 
   public void testMultiPackage() {
-    doTest("Foo::Bar::Boo");
+    doTestRename("Foo::Bar::Boo");
   }
 
   public void testPackageRanges() {
-    doTest("Some::Other::Package");
+    doTestRename("Some::Other::Package");
   }
 
 }

@@ -2281,4 +2281,17 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     return targetElement;
   }
 
+  protected void doTestRename() {
+    doTestRename("NewName");
+  }
+
+  protected void doTestRename(@NotNull String newName) {
+    initWithFileSmart();
+    doRenameAtCaret(newName);
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getFile().getText());
+  }
+
+  protected void doRenameAtCaret(@NotNull String newName) {
+    myFixture.renameElementAtCaret(newName);
+  }
 }
