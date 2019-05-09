@@ -19,10 +19,9 @@ package com.perl5.lang.pod.parser.psi.references;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementResolveResult;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.ResolveResult;
+import com.intellij.psi.*;
+import com.intellij.psi.search.searches.ReferencesSearch;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
@@ -30,11 +29,14 @@ import com.perl5.lang.perl.psi.references.PerlCachingReference;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
+import com.perl5.lang.pod.parser.psi.PodTitledSection;
 import com.perl5.lang.pod.parser.psi.impl.PodIdentifierImpl;
 import com.perl5.lang.pod.parser.psi.util.PodFileUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class PodSubReference extends PerlCachingReference<PodIdentifierImpl> {
@@ -44,7 +46,17 @@ public class PodSubReference extends PerlCachingReference<PodIdentifierImpl> {
 
   @Override
   public PsiElement handleElementRename(@NotNull String newElementName) throws IncorrectOperationException {
-    return myElement;
+    PodTitledSection titledSection = PsiTreeUtil.getParentOfType(myElement, PodTitledSection.class);
+    Collection<PsiReference> references =
+      titledSection != null ? ReferencesSearch.search(titledSection).findAll() : Collections.emptyList();
+    PsiElement replacement = (PsiElement)myElement.replaceWithText(newElementName);
+    if (!references.isEmpty() && titledSection.isValid()) {
+      String newTitle = titledSection.getTitleText();
+      if (StringUtil.isNotEmpty(newTitle)) {
+        references.forEach(it -> it.handleElementRename(newTitle));
+      }
+    }
+    return replacement;
   }
 
   @NotNull

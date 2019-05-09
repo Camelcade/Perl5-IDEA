@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright 2015 Alexandr Evstigneev
+  ~ Copyright 2015-2019 Alexandr Evstigneev
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -376,12 +376,10 @@
     <renameHandler implementation="com.perl5.lang.perl.idea.refactoring.rename.PerlMemberInplaceRenameHandler"
                    order="first"/>
 
-    <renamePsiElementProcessor
-        implementation="com.perl5.lang.perl.idea.refactoring.rename.PerlDefaultRenameProcessor"/>
-    <renamePsiElementProcessor
-        implementation="com.perl5.lang.perl.idea.refactoring.rename.PerlRenameNamespaceDefinitionProcessor"/>
-    <renamePsiElementProcessor
-        implementation="com.perl5.lang.perl.idea.refactoring.rename.PerlRenameFileProcessor"/>
+    <renamePsiElementProcessor implementation="com.perl5.lang.perl.idea.refactoring.rename.PerlRenameSubProcessor"/>
+    <renamePsiElementProcessor implementation="com.perl5.lang.perl.idea.refactoring.rename.PerlDefaultRenameProcessor"/>
+    <renamePsiElementProcessor implementation="com.perl5.lang.perl.idea.refactoring.rename.PerlRenameNamespaceDefinitionProcessor"/>
+    <renamePsiElementProcessor implementation="com.perl5.lang.perl.idea.refactoring.rename.PerlRenameFileProcessor"/>
     <!-- following processors are alternative to VirtualFileWatcher -->
     <!--<renamePsiElementProcessor-->
     <!--implementation="com.perl5.lang.perl.idea.refactoring.move.PerlRenameDirectoryProcessor"/>-->

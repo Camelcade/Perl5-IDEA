@@ -22,11 +22,18 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
+import com.intellij.psi.search.SearchScope;
+import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.refactoring.rename.inplace.MemberInplaceRenamer;
 import com.perl5.lang.perl.parser.PerlIdentifierRangeProvider;
+import com.perl5.lang.perl.psi.PerlSubElement;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * fixme shouldn't we extend PerlVariableInplaceRenamer?
@@ -55,6 +62,21 @@ public class PerlMemberInplaceRenamer extends MemberInplaceRenamer {
     return namedElement instanceof PerlIdentifierRangeProvider
            ? ((PerlIdentifierRangeProvider)namedElement).getRangeInIdentifier()
            : ElementManipulators.getValueTextRange(element);
+  }
+
+  @Override
+  protected Collection<PsiReference> collectRefs(SearchScope referencesSearchScope) {
+    Set<PsiReference> references = new HashSet<>(super.collectRefs(referencesSearchScope));
+
+    if (myElementToRename instanceof PerlSubElement) {
+      for (PsiElement relatedItem : PerlRenameSubProcessor.computeRelatedItems((PerlSubElement)myElementToRename)) {
+        if (!relatedItem.equals(myElementToRename)) {
+          references.addAll(ReferencesSearch.search(relatedItem, referencesSearchScope).findAll());
+        }
+      }
+    }
+
+    return references;
   }
 
   @Nullable

@@ -1,4 +1,4 @@
-=head1 new_method_name() - here we go
+=head1 new_method_name() - C<here we go>
 X<method index>
 
 Method data

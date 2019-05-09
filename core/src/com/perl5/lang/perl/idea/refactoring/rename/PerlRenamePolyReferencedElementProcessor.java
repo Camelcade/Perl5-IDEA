@@ -17,27 +17,17 @@
 package com.perl5.lang.perl.idea.refactoring.rename;
 
 import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.*;
 import com.intellij.psi.search.SearchScope;
 import com.intellij.psi.search.searches.ReferencesSearch;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.refactoring.rename.PsiElementRenameHandler;
 import com.intellij.refactoring.rename.RenamePsiElementProcessor;
-import com.perl5.PerlIcons;
-import com.perl5.lang.perl.parser.Class.Accessor.psi.impl.PerlClassAccessorMethod;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
-import com.perl5.lang.perl.psi.PerlSubElement;
-import com.perl5.lang.perl.util.PerlSubUtil;
-import com.perl5.lang.pod.PodLanguage;
-import com.perl5.lang.pod.parser.psi.PodTitledSection;
-import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
-import java.util.Set;
 
 
 public abstract class PerlRenamePolyReferencedElementProcessor extends RenamePsiElementProcessor {
@@ -64,49 +54,8 @@ public abstract class PerlRenamePolyReferencedElementProcessor extends RenamePsi
             }
           }
         }
-        processDocReference(currentBaseName, newName, reference, allRenames);
       }
-
-      if (element instanceof PerlSubElement && ((PerlSubElement)element).isMethod()) {
-        for (PerlSubElement overridingSub : PerlSubUtil.collectOverridingSubs((PerlSubElement)element)) {
-          allRenames.put(overridingSub, newName);
-        }
-      }
-
-      // following is the hack until #1730 is fixed
-      Set<PsiElement> allElements = new THashSet<>(allRenames.keySet());
-      allElements.stream()
-        .filter(e -> e instanceof PerlClassAccessorMethod)
-        .forEach(e -> {
-          PerlClassAccessorMethod pairedMethod = ((PerlClassAccessorMethod)e).getPairedMethod();
-          if (pairedMethod != null && allRenames.containsKey(e)) {
-            allRenames.remove(pairedMethod);
-          }
-        });
-
     }
-  }
-
-  private void processDocReference(String currentBaseName, String newName, PsiReference reference, Map<PsiElement, String> allRenames) {
-    PsiElement sourceElement = reference.getElement();
-    if (!sourceElement.getLanguage().isKindOf(PodLanguage.INSTANCE)) {
-      return;
-    }
-    PodTitledSection titledSection = PsiTreeUtil.getParentOfType(sourceElement, PodTitledSection.class);
-    if (titledSection == null) {
-      return;
-    }
-    PsiElement titleElement = titledSection.getTitleElement();
-    if (titleElement == null || !titleElement.getTextRange().contains(sourceElement.getTextRange())) {
-      return;
-    }
-
-    String titleText = titledSection.getTitleText();
-    if (titleText == null || !titleText.startsWith(currentBaseName)) {
-      return;
-    }
-
-    allRenames.put(titledSection, titleText.replace(currentBaseName, newName));
   }
 
   @Nullable
@@ -115,30 +64,6 @@ public abstract class PerlRenamePolyReferencedElementProcessor extends RenamePsi
     if (PsiElementRenameHandler.isVetoed(element)) {
       return null;
     }
-
-    if (element instanceof PerlSubElement && ((PerlSubElement)element).isMethod()) {
-      return suggestSuperMethod((PerlSubElement)element);
-    }
-
     return super.substituteElementToRename(element, editor);
-  }
-
-  @NotNull
-  private PsiElement suggestSuperMethod(@NotNull PerlSubElement subBase) {
-    PerlSubElement topLevelSuperMethod = subBase.getTopmostSuperMethod();
-    String canonicalName = topLevelSuperMethod.getCanonicalName();
-
-    if (topLevelSuperMethod == subBase || canonicalName == null) {
-      return subBase;
-    }
-
-    int dialogResult = Messages.showOkCancelDialog(
-      "This method overrides SUPER method: " + canonicalName + ".",
-      "Method Rename",
-      "Rename SUPER method",
-      "Rename this one",
-      PerlIcons.PERL_LANGUAGE_ICON);
-
-    return dialogResult == Messages.OK ? topLevelSuperMethod : subBase;
   }
 }
