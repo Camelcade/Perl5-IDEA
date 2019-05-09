@@ -1,0 +1,20 @@
+=head1 <WRITE>somemethod()
+X<method index></WRITE>
+
+Method data
+
+=cut
+
+sub somemethod(){
+    my $self = shift;
+}
+
+
+__DATA__
+
+=pod
+
+L<Ref To Method|/<READ>somemethod()</READ>>
+
+L</<READ>somemethod()</READ>>
+

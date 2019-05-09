@@ -26,6 +26,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.search.LocalSearchScope;
 import com.intellij.psi.search.searches.ReferencesSearch;
+import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.Consumer;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.parser.psi.PodTitledSection;
@@ -35,6 +36,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import static com.intellij.codeInsight.TargetElementUtil.ELEMENT_NAME_ACCEPTED;
 import static com.intellij.codeInsight.TargetElementUtil.REFERENCED_ELEMENT_ACCEPTED;
@@ -71,7 +73,7 @@ public class PodUsagesHighlightingFactory extends HighlightUsagesHandlerFactoryB
         if (allTargetSections.isEmpty()) {
           return;
         }
-        if (targetElement.getContainingFile().equals(file)) {
+        if (Objects.equals(PsiUtilCore.getVirtualFile(targetElement), PsiUtilCore.getVirtualFile(file))) {
           List<TextRange> writeUsages = getWriteUsages();
           for (PodTitledSection titledSection : allTargetSections) {
             PsiElement titleElement = titledSection.getTitleElement();

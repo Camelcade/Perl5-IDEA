@@ -1,0 +1,21 @@
+=head1 somemethod()
+X<method index>
+
+Method data
+
+=cut
+
+sub somemethod{
+    my $self = shift;
+}
+
+so<caret>memethod();
+
+__DATA__
+
+=pod
+
+L<Ref To Method|/somemethod()>
+
+L</somemethod()>
+
