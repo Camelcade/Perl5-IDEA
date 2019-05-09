@@ -1,0 +1,21 @@
+=head1 somemethod() - C<here we go>
+X<method index>
+
+Method data
+
+=cut
+
+sub somemethod(){
+    my $self = shift;
+}
+
+someme<caret>thod();
+
+__DATA__
+
+=pod
+
+L<Ref To Method|/somemethod() - C<here we go>>
+
+L</somemethod() - C<here we go>>
+

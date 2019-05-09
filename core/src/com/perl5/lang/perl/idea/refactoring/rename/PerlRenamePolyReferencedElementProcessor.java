@@ -31,6 +31,7 @@ import com.perl5.lang.perl.psi.PerlGlobVariable;
 import com.perl5.lang.perl.psi.PerlSubElement;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import com.perl5.lang.pod.PodLanguage;
+import com.perl5.lang.pod.parser.psi.PodTitledSection;
 import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -88,19 +89,24 @@ public abstract class PerlRenamePolyReferencedElementProcessor extends RenamePsi
 
   private void processDocReference(String currentBaseName, String newName, PsiReference reference, Map<PsiElement, String> allRenames) {
     PsiElement sourceElement = reference.getElement();
-    if (sourceElement.getLanguage().isKindOf(PodLanguage.INSTANCE)) {
-      PsiNameIdentifierOwner identifierOwner = PsiTreeUtil.getParentOfType(sourceElement, PsiNameIdentifierOwner.class);
-      if (identifierOwner != null) {
-        PsiElement nameIdentifier = identifierOwner.getNameIdentifier();
-        if (nameIdentifier != null && nameIdentifier.getTextRange().contains(sourceElement.getTextRange())) {
-          String currentName = identifierOwner.getName();
-          if (currentName != null) {
-            String newSectionName = currentName.replace(currentBaseName, newName);
-            allRenames.put(identifierOwner, newSectionName);
-          }
-        }
-      }
+    if (!sourceElement.getLanguage().isKindOf(PodLanguage.INSTANCE)) {
+      return;
     }
+    PodTitledSection titledSection = PsiTreeUtil.getParentOfType(sourceElement, PodTitledSection.class);
+    if (titledSection == null) {
+      return;
+    }
+    PsiElement titleElement = titledSection.getTitleElement();
+    if (titleElement == null || !titleElement.getTextRange().contains(sourceElement.getTextRange())) {
+      return;
+    }
+
+    String titleText = titledSection.getTitleText();
+    if (titleText == null || !titleText.startsWith(currentBaseName)) {
+      return;
+    }
+
+    allRenames.put(titledSection, titleText.replace(currentBaseName, newName));
   }
 
   @Nullable

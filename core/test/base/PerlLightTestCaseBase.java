@@ -122,6 +122,7 @@ import com.intellij.refactoring.rename.inplace.VariableInplaceRenameHandler;
 import com.intellij.refactoring.util.NonCodeSearchDescriptionLocation;
 import com.intellij.testFramework.MapDataContext;
 import com.intellij.testFramework.UsefulTestCase;
+import com.intellij.testFramework.fixtures.CodeInsightTestUtil;
 import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.intellij.testFramework.utils.parameterInfo.MockCreateParameterInfoContext;
@@ -159,6 +160,7 @@ import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceVariableHandler;
 import com.perl5.lang.perl.idea.refactoring.introduce.occurrence.PerlIntroduceTargetOccurrencesCollector;
 import com.perl5.lang.perl.idea.refactoring.introduce.target.PerlIntroduceTargetsHandler;
+import com.perl5.lang.perl.idea.refactoring.rename.PerlMemberInplaceRenameHandler;
 import com.perl5.lang.perl.idea.sdk.PerlSdkAdditionalData;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostHandler;
@@ -2291,7 +2293,17 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getFile().getText());
   }
 
+  protected void doTestRenameInplace(@NotNull String newName) {
+    initWithFileSmartWithoutErrors();
+    doInplaceRenameAtCaret(newName);
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getFile().getText());
+  }
+
   protected void doRenameAtCaret(@NotNull String newName) {
     myFixture.renameElementAtCaret(newName);
+  }
+
+  protected void doInplaceRenameAtCaret(@NotNull String newName) {
+    CodeInsightTestUtil.doInlineRename(new PerlMemberInplaceRenameHandler(), newName, myFixture);
   }
 }

@@ -44,7 +44,7 @@ public class PodSubReference extends PerlCachingReference<PodIdentifierImpl> {
 
   @Override
   public PsiElement handleElementRename(@NotNull String newElementName) throws IncorrectOperationException {
-    return (PsiElement)myElement.replaceWithText(newElementName);
+    return myElement;
   }
 
   @NotNull

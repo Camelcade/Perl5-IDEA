@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,14 +16,11 @@
 
 package rename;
 
-import com.intellij.testFramework.fixtures.CodeInsightTestUtil;
-import com.perl5.lang.perl.idea.refactoring.rename.PerlMemberInplaceRenameHandler;
 import org.jetbrains.annotations.NotNull;
 
 public class MojoInlinePerlRenameTest extends MojoPerlRenameTest {
   @Override
   protected void doRenameAtCaret(@NotNull String newName) {
-    CodeInsightTestUtil.doInlineRename(new PerlMemberInplaceRenameHandler(), newName, myFixture);
+    doInplaceRenameAtCaret(newName);
   }
-
 }

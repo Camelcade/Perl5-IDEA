@@ -1,0 +1,21 @@
+package Bla::Bla;
+
+sub some_new_name {
+    my ($self) = @_;
+
+}
+
+=pod
+
+sometest text here
+
+=cut
+
+sub somemethod2 {
+    my ($self) = @_;
+
+}
+
+
+
+some_new_name;

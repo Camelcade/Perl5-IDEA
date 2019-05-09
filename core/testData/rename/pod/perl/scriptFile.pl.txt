@@ -1,0 +1,21 @@
+=head1 new >> C<name> << here
+X<method index>
+
+Method data
+
+=cut
+
+sub somemethod(){
+    my $self = shift;
+}
+
+somemethod();
+
+__DATA__
+
+=pod
+
+L<Ref To Method|/new E<gt>E<gt> name E<lt>E<lt> here>
+
+L</new E<gt>E<gt> name E<lt>E<lt> here>
+

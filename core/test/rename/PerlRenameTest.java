@@ -117,4 +117,8 @@ public class PerlRenameTest extends PerlLightTestCase {
     doTestRename("Some::Other::Package");
   }
 
+  public void testBrokenTemplate() {
+    myFixture.copyFileToProject("TestFirst.pm");
+    doTestRename("some_new_name");
+  }
 }

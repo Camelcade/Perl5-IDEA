@@ -19,18 +19,14 @@ package com.perl5.lang.perl.idea.refactoring.rename;
 import com.intellij.codeInsight.TargetElementUtil;
 import com.intellij.lang.injection.InjectedLanguageManager;
 import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
 import com.intellij.refactoring.rename.inplace.MemberInplaceRenamer;
 import com.perl5.lang.perl.parser.PerlIdentifierRangeProvider;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
-import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Collection;
 
 /**
  * fixme shouldn't we extend PerlVariableInplaceRenamer?
@@ -50,33 +46,6 @@ public class PerlMemberInplaceRenamer extends MemberInplaceRenamer {
     PsiFile topLevelFile = manager.getTopLevelFile(containingFile);
     PsiFile topLevelFile1 = manager.getTopLevelFile(currentFile);
     return topLevelFile == null || topLevelFile1 == null || topLevelFile.getViewProvider() != topLevelFile1.getViewProvider();
-  }
-
-  @Override
-  protected boolean appendAdditionalElement(Collection<PsiReference> refs, Collection<Pair<PsiElement, TextRange>> stringUsages) {
-    boolean b = super.appendAdditionalElement(refs, stringUsages);
-    PerlResolveUtil.processResolveTargets((target, __) -> {
-      appendAdditionalElement(target, stringUsages);
-      return true;
-    }, refs.toArray(PsiReference.EMPTY_ARRAY));
-
-    return b;
-  }
-
-  private void appendAdditionalElement(@Nullable PsiElement psiElement, Collection<Pair<PsiElement, TextRange>> stringUsages) {
-    if (psiElement == null || psiElement.equals(myElementToRename) || !(psiElement instanceof PsiNameIdentifierOwner)) {
-      return;
-    }
-
-    PsiElement nameIdentifier = ((PsiNameIdentifierOwner)psiElement).getNameIdentifier();
-    if (nameIdentifier == null) {
-      return;
-    }
-
-    TextRange rangeToRename = psiElement instanceof PerlIdentifierRangeProvider
-                              ? ((PerlIdentifierRangeProvider)psiElement).getRangeInIdentifier()
-                              : ElementManipulators.getValueTextRange(nameIdentifier);
-    stringUsages.add(Pair.create(nameIdentifier, rangeToRename));
   }
 
   @NotNull

@@ -1,0 +1,21 @@
+=head1 new_method_name()
+X<method index>
+
+Method data
+
+=cut
+
+sub new_method_name(){
+    my $self = shift;
+}
+
+new_method_name();
+
+__DATA__
+
+=pod
+
+L<Ref To Method|/new_method_name()>
+
+L</new_method_name()>
+
