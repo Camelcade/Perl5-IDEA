@@ -40,13 +40,17 @@ public class PodRenameTest extends PodLightTestCase {
 
   public void testHeading1AnglesIndex() {doTest("new >> name", true);}
 
-  public void testHeading2() {doTest("new >> C<name> << here", true);}
+  public void testHeading2() {doTest();}
 
-  public void testHeading3() {doTest("new >> C<name> << here", true);}
+  public void testHeading3() {doTest();}
 
-  public void testHeading4() {doTest("new >> C<name> << here", true);}
+  public void testHeading4() {doTest();}
 
   public void testIndex() {doTest("some >> data << index", true);}
+
+  public void testItemNormal() {doTest();}
+
+  private void doTest() { doTest("new >> C<name> << here", true); }
 
   private void doTest(boolean checkReference) {doTest("NewName", checkReference);}
 

@@ -1,0 +1,9 @@
+=over
+
+=item Some old nameX<zero index>
+X<first index>
+X<second index>
+
+=back
+
+L<Titled|/Some <caret>old name>
