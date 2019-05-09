@@ -33,7 +33,7 @@ import java.util.Arrays;
 import java.util.List;
 
 class BerryBrewAdapter extends PerlVersionManagerAdapter {
-  private static final String BERRYREW_AVAILABLE = "available";
+  private static final String BERRYBREW_AVAILABLE = "available";
   private static final String BERRYBREW_INSTALL = "install";
   static final String BERRYBREW_EXEC = "exec";
   static final String BERRYBREW_WITH = "--with";
@@ -82,7 +82,7 @@ class BerryBrewAdapter extends PerlVersionManagerAdapter {
   @Nullable
   @Override
   protected List<String> getInstallableDistributionsList() {
-    List<String> output = getOutput(BERRYREW_AVAILABLE);
+    List<String> output = getOutput(BERRYBREW_AVAILABLE);
     if (output == null) {
       return null;
     }

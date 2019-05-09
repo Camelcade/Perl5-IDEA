@@ -81,8 +81,8 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
 
   private String myPerlParameters = "";
   private String myWorkingDirectory;
-  private Map<String, String> myEnvs = new HashMap<>();
-  private boolean myPassParentEnvs = true;
+  private Map<String, String> myEnvironments = new HashMap<>();
+  private boolean myPassParentEnvironments = true;
   private String myConsoleCharset;
   private boolean myUseAlternativeSdk;
   private String myAlternativeSdkName;
@@ -247,22 +247,22 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
   @NotNull
   @Override
   public Map<String, String> getEnvs() {
-    return myEnvs;
+    return myEnvironments;
   }
 
   @Override
   public void setEnvs(@NotNull Map<String, String> map) {
-    myEnvs = map;
+    myEnvironments = map;
   }
 
   @Override
   public boolean isPassParentEnvs() {
-    return myPassParentEnvs;
+    return myPassParentEnvironments;
   }
 
   @Override
   public void setPassParentEnvs(boolean b) {
-    myPassParentEnvs = b;
+    myPassParentEnvironments = b;
   }
 
   public String getPerlParameters() {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -126,7 +126,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
     HTMLMasonSettings settings = HTMLMasonSettings.getInstance(getProject());
     VirtualFile parentFile = null;
 
-    if (parentComponentPath == null) // autohandler
+    if (parentComponentPath == null) // auto-handler
     {
       VirtualFile containingFile = getComponentVirtualFile();
       if (containingFile != null) {
@@ -215,9 +215,9 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
           }
         }
 
-        // implicit autohandled children
+        // implicit auto-handled children
         if (StringUtil.equals(containingFile.getName(), settings.autoHandlerName)) {
-          collectAuthoHandledFiles(PsiManager.getInstance(project), containingFile.getParent(), result, settings.autoHandlerName, null);
+          collectAutoHandledFiles(PsiManager.getInstance(project), containingFile.getParent(), result, settings.autoHandlerName, null);
         }
       }
     }
@@ -225,7 +225,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
     return result;
   }
 
-  protected void collectAuthoHandledFiles(
+  protected void collectAutoHandledFiles(
     PsiManager manager,
     VirtualFile dir,
     List<HTMLMasonFileImpl> result,
@@ -239,12 +239,12 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
       }
       else // non-first iteration
       {
-        VirtualFile autohandlerVirtualFile = dir.findChild(autoHandlerName);
-        if (autohandlerVirtualFile != null) {
-          PsiFile autohandlerPsiFile = manager.findFile(autohandlerVirtualFile);
-          if (autohandlerPsiFile instanceof HTMLMasonFileImpl &&
-              this.equals(((HTMLMasonFileImpl)autohandlerPsiFile).getParentComponent())) {
-            result.add((HTMLMasonFileImpl)autohandlerPsiFile);
+        VirtualFile autoHandlerVirtualFile = dir.findChild(autoHandlerName);
+        if (autoHandlerVirtualFile != null) {
+          PsiFile autoHandlerPsiFile = manager.findFile(autoHandlerVirtualFile);
+          if (autoHandlerPsiFile instanceof HTMLMasonFileImpl &&
+              this.equals(((HTMLMasonFileImpl)autoHandlerPsiFile).getParentComponent())) {
+            result.add((HTMLMasonFileImpl)autoHandlerPsiFile);
           }
           return;
         }
@@ -255,9 +255,9 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
       // all iterations
       for (VirtualFile file : dir.getChildren()) {
         if (file.isDirectory() && !recursionMap.contains(file)) {
-          collectAuthoHandledFiles(manager, file, result, autoHandlerName, recursionMap);
+          collectAutoHandledFiles(manager, file, result, autoHandlerName, recursionMap);
         }
-        else if (!StringUtil.equals(file.getName(), autoHandlerName)) // non-autohandler file
+        else if (!StringUtil.equals(file.getName(), autoHandlerName)) // non auto-handler file
         {
           PsiFile psiFile = manager.findFile(file);
           if (psiFile instanceof HTMLMasonFileImpl && this.equals(((HTMLMasonFileImpl)psiFile).getParentComponent())) {

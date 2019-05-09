@@ -78,7 +78,7 @@ public class HTMLMasonLineMarkerProvider extends RelatedItemLineMarkerProvider i
           NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
             .create(AllIcons.Gutter.OverridenMethod)
             .setTargets(methodDefinitions)
-            .setTooltipText("Overriden methods");
+            .setTooltipText("Overridden methods");
 
           result.add(builder.createLineMarkerInfo(element));
         }

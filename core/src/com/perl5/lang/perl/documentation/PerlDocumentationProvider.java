@@ -114,7 +114,7 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
   }
 
   /**
-   * @return a documenation element related to the perl element pointed by the current editor with caret on declaration or reference
+   * @return a documentation element related to the perl element pointed by the current editor with caret on declaration or reference
    */
   @Nullable
   public static PsiElement findDocumentation(@NotNull Editor editor) {

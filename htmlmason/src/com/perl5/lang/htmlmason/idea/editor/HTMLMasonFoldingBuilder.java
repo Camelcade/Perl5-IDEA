@@ -111,15 +111,6 @@ public class HTMLMasonFoldingBuilder extends AbstractMasonFoldingBuilder impleme
     return COMMENT_EXCLUDED_TOKENS;
   }
 
-/*
-        @Nullable
-	@Override
-	protected IElementType getTemplateBlockElementType()
-	{
-		return HTML_MASON_TEMPLATE_BLOCK_HTML;
-	}
-*/
-
   public static class HTMLMasonFoldingRegionsCollector extends HTMLMasonRecursiveVisitor {
     protected final Document myDocument;
     protected List<FoldingDescriptor> myDescriptors;

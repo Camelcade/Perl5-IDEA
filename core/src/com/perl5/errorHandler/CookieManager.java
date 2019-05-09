@@ -27,12 +27,12 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * CookieManager is a simple utilty for handling cookies when working
+ * CookieManager is a simple utility for handling cookies when working
  * with <code>java.net.URL</code> and <code>java.net.URLConnection</code>
  * objects.
  * <p/>
  * <code>
- * Cookiemanager cm = new CookieManager();
+ * CookieManager cm = new CookieManager();
  * URL url = new URL("http://www.hccp.org/test/cookieTest.jsp");
  * <p/>
  * . . .
@@ -133,7 +133,7 @@ public class CookieManager {
 
   /**
    * Prior to opening a URLConnection, calling this method will set all
-   * unexpired cookies that match the path or subpaths for thi underlying URL
+   * unexpired cookies that match the path or SubPaths for thi underlying URL
    * <p/>
    * The connection MUST NOT have been opened
    * method or an IOException will be thrown.

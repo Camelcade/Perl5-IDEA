@@ -37,7 +37,7 @@ public class EmbeddedPerlBraceMatcher implements PairedBraceMatcher, EmbeddedPer
   }
 
   @Override
-  public boolean isPairedBracesAllowedBeforeType(@NotNull IElementType lbraceType, @Nullable IElementType contextType) {
+  public boolean isPairedBracesAllowedBeforeType(@NotNull IElementType leftBraceType, @Nullable IElementType contextType) {
     return true;
   }
 

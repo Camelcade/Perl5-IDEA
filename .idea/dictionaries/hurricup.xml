@@ -1,22 +1,41 @@
 <component name="ProjectDictionaryState">
   <dictionary name="hurricup">
     <words>
+      <w>akhtar</w>
       <w>bareword</w>
+      <w>berrybrew</w>
       <w>camelcade</w>
       <w>camelcadedb</w>
+      <w>cpan</w>
       <w>cpanfile</w>
+      <w>cpanm</w>
       <w>cpanminus</w>
       <w>deparse</w>
+      <w>embeddedperl</w>
       <w>evals</w>
       <w>evstigneev</w>
+      <w>flowx</w>
+      <w>growx</w>
       <w>heredoc</w>
       <w>hurricup</w>
       <w>mojolicious</w>
       <w>numify</w>
       <w>perlbrew</w>
+      <w>perldata</w>
+      <w>perlretut</w>
+      <w>phtml</w>
       <w>plenv</w>
+      <w>pushx</w>
+      <w>quickfix</w>
+      <w>shrinkx</w>
       <w>sigil</w>
+      <w>subblocks</w>
+      <w>subcomponent</w>
+      <w>sylvanaar</w>
+      <w>thtml</w>
+      <w>tokenset</w>
       <w>truthiness</w>
+      <w>yyyy</w>
     </words>
   </dictionary>
 </component>

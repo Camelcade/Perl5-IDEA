@@ -123,13 +123,13 @@ public class HTMLMasonComponentReference extends HTMLMasonStringReference {
     final PsiFile file = getElement().getContainingFile();
 
     if (file instanceof HTMLMasonFileImpl) {
-      for (HTMLMasonCompositeElement subcomponentDefitnition : ((HTMLMasonFileImpl)file).getSubComponentsDefinitions()) {
-        assert subcomponentDefitnition instanceof HTMLMasonSubcomponentDefitnition;
-        if (StringUtil.equals(((HTMLMasonSubcomponentDefitnition)subcomponentDefitnition).getName(), nameOrPath)) {
+      for (HTMLMasonCompositeElement subcontinentDefinition : ((HTMLMasonFileImpl)file).getSubComponentsDefinitions()) {
+        assert subcontinentDefinition instanceof HTMLMasonSubcomponentDefitnition;
+        if (StringUtil.equals(((HTMLMasonSubcomponentDefitnition)subcontinentDefinition).getName(), nameOrPath)) {
           if (result == null) {
             result = new ArrayList<>();
           }
-          result.add(new PsiElementResolveResult(subcomponentDefitnition));
+          result.add(new PsiElementResolveResult(subcontinentDefinition));
         }
       }
     }

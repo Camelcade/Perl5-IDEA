@@ -45,20 +45,20 @@ public abstract class AbstractMasonSettingsConfigurable implements Configurable 
   );
 
   protected final Project myProject;
-  protected final String windowTitile;
+  protected final String windowTitle;
 
   protected ListTableModel<VariableDescription> globalsModel;
   protected JBTable globalsTable;
 
-  public AbstractMasonSettingsConfigurable(Project myProject, String windowTitile) {
+  public AbstractMasonSettingsConfigurable(Project myProject, String windowTitle) {
     this.myProject = myProject;
-    this.windowTitile = windowTitile;
+    this.windowTitle = windowTitle;
   }
 
   @Nls
   @Override
   public String getDisplayName() {
-    return windowTitile;
+    return windowTitle;
   }
 
   @Nullable

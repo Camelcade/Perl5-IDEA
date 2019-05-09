@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -121,7 +121,7 @@ public class CompoundToStatementIntention extends PsiElementBaseIntentionAction 
       }
     }
 
-    // replacing variables instatement to $_
+    // replacing variables in statement to $_
     if (variableExpression instanceof PerlVariable) {
       TextRange statementExprTextRange = statementExpr.getTextRange();
       PerlVariable finalVariable = (PerlVariable)variableExpression;
@@ -224,9 +224,9 @@ public class CompoundToStatementIntention extends PsiElementBaseIntentionAction 
    * @return expression text or null if no statement or statement has modifier
    */
   @NotNull
-  private static PsiPerlExpr getStatementExpression(@NotNull PerlConvertableCompound convertableCompound)
+  private static PsiPerlExpr getStatementExpression(@NotNull PerlConvertableCompound convertibleCompound)
     throws IncorrectOperationException {
-    PsiPerlBlock block = convertableCompound.getBlock();
+    PsiPerlBlock block = convertibleCompound.getBlock();
     if (block == null) {
       error("perl.intention.convert.to.statement.error.no.block");
     }
@@ -250,7 +250,7 @@ public class CompoundToStatementIntention extends PsiElementBaseIntentionAction 
   }
 
   /**
-   * @return convertable compound statement wrapping element under cursor
+   * @return convertible compound statement wrapping element under cursor
    */
   @Nullable
   private static PerlConvertableCompound getCompound(@NotNull PsiElement elementAtCursor) {

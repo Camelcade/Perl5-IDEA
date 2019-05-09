@@ -43,12 +43,12 @@ public interface HTMLMasonElementPatterns extends HTMLMasonElementTypes, PerlEle
         )
     );
 
-  // this is for corrupterd <%identifier
+  // this is for corrupted <%identifier
   PsiElementPattern.Capture<PsiElement> HTML_MASON_TEMPLATE_CONTEXT_PATTERN_BROKEN =
     psiElement(IDENTIFIER).afterLeaf(psiElement(HTML_MASON_BLOCK_OPENER)
     );
 
-  PsiElementPattern.Capture<PerlString> HTML_MASON_COMPONENT_CALEE =
+  PsiElementPattern.Capture<PerlString> HTML_MASON_COMPONENT_CALLEE =
     psiElement(PerlString.class)
       .inFile(psiFile(HTMLMasonFileImpl.class))
       .withParent(psiElement(HTML_MASON_CALL_STATEMENT))
@@ -69,7 +69,7 @@ public interface HTMLMasonElementPatterns extends HTMLMasonElementTypes, PerlEle
 
   PsiElementPattern.Capture<PerlStringContentElement> HTML_MASON_COMPONENT_COMPLETION =
     psiElement(PerlStringContentElement.class).andOr(
-      psiElement().withParent(HTML_MASON_COMPONENT_CALEE),
+      psiElement().withParent(HTML_MASON_COMPONENT_CALLEE),
       psiElement().withParent(HTML_MASON_FLAGS_PARENT)
     );
 }

@@ -26,7 +26,7 @@ public class HTMLMasonReferencesContributor extends PsiReferenceContributor impl
   @Override
   public void registerReferenceProviders(@NotNull PsiReferenceRegistrar registrar) {
     registrar.registerReferenceProvider(
-      HTML_MASON_COMPONENT_CALEE,
+      HTML_MASON_COMPONENT_CALLEE,
       new HTMLMasonComponentReferencesProvider()
     );
     registrar.registerReferenceProvider(

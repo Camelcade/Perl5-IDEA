@@ -51,7 +51,7 @@ public class HTMLMasonBraceMatcher implements PairedBraceMatcher, HTMLMasonEleme
   }
 
   @Override
-  public boolean isPairedBracesAllowedBeforeType(@NotNull IElementType lbraceType, IElementType contextType) {
+  public boolean isPairedBracesAllowedBeforeType(@NotNull IElementType leftBraceType, IElementType contextType) {
     return true;
   }
 

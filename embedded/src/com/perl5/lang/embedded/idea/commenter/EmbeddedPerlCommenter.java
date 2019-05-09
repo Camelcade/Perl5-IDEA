@@ -138,7 +138,7 @@ public class EmbeddedPerlCommenter implements Commenter, SelfManagingCommenter<E
 
   static class EmbeddedPerlCommenterDataHolder extends com.intellij.codeInsight.generation.CommenterDataHolder {
     protected int start;    // context-dependent start line or selection start
-    protected int end;        // context-dependent end line or selectionend
+    protected int end;        // context-dependent end line or selection end
     protected Document document;
     protected PsiFile file;
 
