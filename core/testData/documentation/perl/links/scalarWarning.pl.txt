@@ -1,10 +1,10 @@
-Built-in: $WARNING
+PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 61232 in perlvar.pod
 
 perlvar: perlvar
-	null
+	POD file at 0 in perlvar.pod
 SPECIAL VARIABLES: perlvar%2FSPECIAL+VARIABLES
-	null
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2173 in perlvar.pod
 Error Variables: perlvar%2FError+Variables
-	null
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 56601 in perlvar.pod
 warnings: warnings
-	null
+	POD file at 0 in perlvar.pod

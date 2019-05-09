@@ -1,12 +1,12 @@
-Built-in: $INPUT_LINE_NUMBER
+PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 47984 in perlvar.pod
 
 perlvar: perlvar
-	null
+	POD file at 0 in perlvar.pod
 SPECIAL VARIABLES: perlvar%2FSPECIAL+VARIABLES
-	null
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2173 in perlvar.pod
 Variables related to filehandles: perlvar%2FVariables+related+to+filehandles
-	null
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 43181 in perlvar.pod
 I/O Operators in perlop: perlop%2FI%2FO+Operators
-	null
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 119870 in perlop.pod
 eof in perlfunc: perlfunc%2Feof
-	null
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 85106 in perlfunc.pod

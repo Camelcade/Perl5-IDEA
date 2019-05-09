@@ -1,10 +1,10 @@
-Built-in: $ARG
+PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3037 in perlvar.pod
 
 perlvar: perlvar
-	null
+	POD file at 0 in perlvar.pod
 SPECIAL VARIABLES: perlvar%2FSPECIAL+VARIABLES
-	null
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2173 in perlvar.pod
 General Variables: perlvar%2FGeneral+Variables
-	null
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3002 in perlvar.pod
 -X in perlfunc: perlfunc%2F-X
-	null
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21196 in perlfunc.pod

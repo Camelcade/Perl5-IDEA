@@ -1,14 +1,14 @@
-Built-in: $RS
+PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49390 in perlvar.pod
 
 perlvar: perlvar
-	null
+	POD file at 0 in perlvar.pod
 SPECIAL VARIABLES: perlvar%2FSPECIAL+VARIABLES
-	null
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2173 in perlvar.pod
 Variables related to filehandles: perlvar%2FVariables+related+to+filehandles
-	null
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 43181 in perlvar.pod
 IO::Handle: IO%3A%3AHandle
-	null
+	POD file at 0 in perlvar.pod
 Newlines in perlport: perlport%2FNewlines
-	null
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3653 in perlport.pod
 $.: perlvar%2F%24.
-	null
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48021 in perlvar.pod

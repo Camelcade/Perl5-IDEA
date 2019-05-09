@@ -1,10 +1,10 @@
-Built-in: @ARGV
+PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46385 in perlvar.pod
 
 perlvar: perlvar
-	null
+	POD file at 0 in perlvar.pod
 SPECIAL VARIABLES: perlvar%2FSPECIAL+VARIABLES
-	null
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2173 in perlvar.pod
 Variables related to filehandles: perlvar%2FVariables+related+to+filehandles
-	null
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 43181 in perlvar.pod
 $0: perlvar%2F%240
-	null
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6796 in perlvar.pod

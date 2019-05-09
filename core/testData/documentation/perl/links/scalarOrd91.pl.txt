@@ -1,14 +1,14 @@
-Built-in: $[
+PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 77386 in perlvar.pod
 
 perlvar: perlvar
-	null
+	POD file at 0 in perlvar.pod
 SPECIAL VARIABLES: perlvar%2FSPECIAL+VARIABLES
-	null
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2173 in perlvar.pod
 Deprecated and removed variables: perlvar%2FDeprecated+and+removed+variables
-	null
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 76176 in perlvar.pod
 strict: strict
-	null
+	POD file at 0 in perlvar.pod
 arybase: arybase
-	null
+	POD file at 0 in perlvar.pod
 arybase: arybase
-	null
+	POD file at 0 in perlvar.pod

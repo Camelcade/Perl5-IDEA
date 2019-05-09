@@ -2223,7 +2223,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     DocumentationProvider documentationProvider = DocumentationManager.getProviderFromElement(targetElement, elementAtCaret);
     assertInstanceOf(documentationProvider, DocumentationProviderEx.class);
     String generatedDoc = documentationProvider.generateDoc(targetElement, elementAtCaret);
-    assertNotNull(generatedDoc);
+    assertNotNull("No documentation for: " + targetElement + "; " + elementAtCaret, generatedDoc);
     return Pair.create(targetElement, generatedDoc);
   }
 

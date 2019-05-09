@@ -27,6 +27,7 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.documentation.PerlDocUtil;
+import com.perl5.lang.perl.documentation.PerlDocumentationProvider;
 import com.perl5.lang.perl.documentation.PerlDocumentationProviderBase;
 import com.perl5.lang.perl.psi.PerlFile;
 import com.perl5.lang.pod.PodLanguage;
@@ -43,6 +44,8 @@ import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.POD;
 
 public class PodDocumentationProvider extends PerlDocumentationProviderBase implements PodElementTypes {
   private static final Logger LOG = Logger.getInstance(PodDocumentationProvider.class);
@@ -85,7 +88,7 @@ public class PodDocumentationProvider extends PerlDocumentationProviderBase impl
       return PerlDocUtil.resolveDoc("perlpod", contextElement.getText(), contextElement, true);
     }
 
-    return super.getCustomDocumentationElement(editor, file, contextElement);
+    return PerlDocumentationProvider.findDocumentation(editor);
   }
 
   @Nullable
@@ -115,6 +118,9 @@ public class PodDocumentationProvider extends PerlDocumentationProviderBase impl
     }
     else if (element instanceof PodSection) {
       return PerlDocUtil.renderElement((PodSection)element);
+    }
+    else if (PsiUtilCore.getElementType(element) == POD) {
+      return PerlDocUtil.renderPodElement(element);
     }
     return null;
   }

@@ -1,8 +1,8 @@
-Built-in: $^H
+PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 70296 in perlvar.pod
 
 perlvar: perlvar
-	null
+	POD file at 0 in perlvar.pod
 SPECIAL VARIABLES: perlvar%2FSPECIAL+VARIABLES
-	null
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2173 in perlvar.pod
 Variables related to the interpreter state: perlvar%2FVariables+related+to+the+interpreter+state
-	null
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 65590 in perlvar.pod

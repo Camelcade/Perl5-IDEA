@@ -1,10 +1,10 @@
-Built-in: $FORMAT_PAGE_NUMBER
+PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 54713 in perlvar.pod
 
 perlvar: perlvar
-	null
+	POD file at 0 in perlvar.pod
 SPECIAL VARIABLES: perlvar%2FSPECIAL+VARIABLES
-	null
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2173 in perlvar.pod
 Variables related to filehandles: perlvar%2FVariables+related+to+filehandles
-	null
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 43181 in perlvar.pod
 Variables related to formats: perlvar%2FVariables+related+to+formats
-	null
+	PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 53773 in perlvar.pod

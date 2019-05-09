@@ -1,14 +1,14 @@
-Built-in: $DEBUGGING
+PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 66113 in perlvar.pod
 
 perlvar: perlvar
-	null
+	POD file at 0 in perlvar.pod
 SPECIAL VARIABLES: perlvar%2FSPECIAL+VARIABLES
-	null
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2173 in perlvar.pod
 Variables related to the interpreter state: perlvar%2FVariables+related+to+the+interpreter+state
-	null
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 65590 in perlvar.pod
 command-line equivalent: perlrun%2F-Dletters
-	null
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14431 in perlrun.pod
 -Dnumber in perlrun: perlrun%2F-Dnumber
-	null
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14488 in perlrun.pod
 Debugger Internals in perldebguts: perldebguts%2FDebugger+Internals
-	null
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 348 in perldebguts.pod
