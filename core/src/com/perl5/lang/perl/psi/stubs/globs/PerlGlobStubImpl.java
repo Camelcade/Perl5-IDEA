@@ -53,7 +53,7 @@ public class PerlGlobStubImpl extends StubBase<PsiPerlGlobVariable> implements P
     return super.toString() + "\n" +
            "\tNamespace name: " + myNamespaceName + "\n" +
            "\tVariable name: " + myVariableName + "\n" +
-           "\tIs left side: " + myIsLeftSideOfAssignment + "\n"
+           "\tIs left side: " + myIsLeftSideOfAssignment
       ;
   }
 }

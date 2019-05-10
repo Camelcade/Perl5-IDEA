@@ -33,4 +33,9 @@ public class PerlRuntimeImportStubImpl extends StubBase<PerlDoExpr> implements P
   public String getImportPath() {
     return myRelativePath;
   }
+
+  @Override
+  public String toString() {
+    return super.toString() + "\n\tPath: " + myRelativePath;
+  }
 }

@@ -1,0 +1,36 @@
+Language: Perl5
+PerlFileStub
+	Name: main
+	Mro: DFS
+	Parents: []
+	@EXPORT: []
+	@EXPORT_OK: []
+	@EXPORT_TAGS: {}
+	Annotations: null
+	Type: Perl5
+  USE_STATEMENT:PerlUseStatementStubImpl
+	Package name: Exception::Class
+	Outer package name: main
+	Import options: null
+    Class::Exception wrapper:PerlPolyNamedElementStub
+	Light elements: 2
+	LIGHT_NAMESPACE_DEFINITION:PerlLightNamespaceDefinitionStub
+	Name: Exception1
+	Mro: DFS
+	Parents: [Exception::Class::Base]
+	@EXPORT: []
+	@EXPORT_OK: []
+	@EXPORT_TAGS: {}
+	Annotations: null
+	LIGHT_NAMESPACE_DEFINITION:PerlLightNamespaceDefinitionStub
+	Name: Exception2
+	Mro: DFS
+	Parents: [Exception::Class::Base]
+	@EXPORT: []
+	@EXPORT_OK: []
+	@EXPORT_TAGS: {}
+	Annotations: null
+
+----------
+Language: Perl5 POD
+PsiFileStubImpl

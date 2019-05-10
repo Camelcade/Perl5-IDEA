@@ -33,4 +33,9 @@ public class PerlMooseAugmentStatementStubImpl extends StubBase<PerlMooseAugment
   public String getSubName() {
     return mySubName;
   }
+
+  @Override
+  public String toString() {
+    return super.toString() + "\n\tSub name: " + mySubName;
+  }
 }

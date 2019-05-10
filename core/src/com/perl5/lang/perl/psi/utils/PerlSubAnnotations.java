@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.psi.utils;
 
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
@@ -201,5 +202,24 @@ public class PerlSubAnnotations {
     }
 
     return tryToFindAnnotations(baseElements);
+  }
+
+  @Override
+  public String toString() {
+    List<String> result = new ArrayList<>();
+    if (isMethod()) {
+      result.add("method");
+    }
+    if (isAbstract()) {
+      result.add("abstract");
+    }
+    if (isDeprecated()) {
+      result.add("deprecated");
+    }
+    if (isOverride()) {
+      result.add("override");
+    }
+    result.add("returns: " + myReturnValue);
+    return StringUtil.join(result, "; ");
   }
 }

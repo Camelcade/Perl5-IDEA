@@ -56,4 +56,11 @@ public class PerlSubDefinitionStub extends PerlSubStub<PerlSubDefinitionElement>
   public List<PerlSubArgument> getSubArgumentsList() {
     return myArguments;
   }
+
+  @Override
+  public String toString() {
+    return super.toString() + "\n" +
+           "\tArguments: " + myArguments + "\n" +
+           "\tReturn value: " + myReturnValueFromCode;
+  }
 }

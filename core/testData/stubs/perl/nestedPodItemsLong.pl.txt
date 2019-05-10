@@ -9,6 +9,11 @@ PerlFileStub
 	Annotations: null
 	Type: Perl5
   SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: main
+	Sub name: something
+	Annotations: null
+	Arguments: []
+	Return value: UNKNOWN_VALUE
 
 ----------
 Language: Perl5 POD

@@ -1,0 +1,16 @@
+Language: Perl5
+PerlFileStub
+	Name: main
+	Mro: DFS
+	Parents: []
+	@EXPORT: []
+	@EXPORT_OK: []
+	@EXPORT_TAGS: {}
+	Annotations: null
+	Type: Perl5
+  MOOSE_STATEMENT_AUGMENT:PerlMooseAugmentStatementStubImpl
+	Sub name: name
+
+----------
+Language: Perl5 POD
+PsiFileStubImpl

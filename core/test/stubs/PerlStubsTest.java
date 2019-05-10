@@ -25,6 +25,26 @@ public class PerlStubsTest extends PerlLightTestCase {
     return "testData/stubs/perl";
   }
 
+  public void testExceptionClass_pl() {doTest();}
+
+  public void testAugment_pl() {doTest();}
+
+  public void testDoRequire_pl() {doTest();}
+
+  public void testSubDeclaration_pl() {doTest();}
+
+  public void testSubDefinition_pl() {doTest();}
+
+  public void testMethodDefinition_pl() {doTest();}
+
+  public void testFuncDefinition_pl() {doTest();}
+
+  public void testClassAccessor_pl() {doTest();}
+
+  public void testMooseAttr_pl() {doTest();}
+
+  public void testConstants_pl() {doTest();}
+
   public void testNamespace_pl() {
     doTest();
   }

@@ -91,6 +91,12 @@ public class PerlSubArgument {
     return StringUtil.isNotEmpty(myVariableClass) ? myVariableClass + " " + shortName : shortName;
   }
 
+  @Override
+  public String toString() {
+    String toString = toStringLong();
+    return myIsOptional ? "[" + toString + "]" : toString;
+  }
+
   private void serialize(@NotNull StubOutputStream dataStream) throws IOException {
     dataStream.writeName(myArgumentType.toString());
     dataStream.writeName(myArgumentName);

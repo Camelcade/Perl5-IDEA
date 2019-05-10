@@ -82,4 +82,12 @@ public abstract class PerlSubStub<Psi extends PerlSubElement> extends StubBase<P
   public boolean isXSub() {
     throw new IncorrectOperationException();
   }
+
+  @Override
+  public String toString() {
+    return super.toString() + "\n" +
+           "\tNamespace name: " + myNamespaceName + "\n" +
+           "\tSub name: " + mySubName + "\n" +
+           "\tAnnotations: " + myAnnotations;
+  }
 }

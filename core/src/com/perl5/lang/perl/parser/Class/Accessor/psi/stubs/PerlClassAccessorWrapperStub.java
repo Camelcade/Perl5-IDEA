@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,5 +36,11 @@ public class PerlClassAccessorWrapperStub extends PerlPolyNamedElementStub {
 
   public boolean isFollowBestPractice() {
     return myIsFollowBestPractice;
+  }
+
+  @Override
+  public String toString() {
+    return super.toString() + "\n" +
+           "\tFollow best practice: " + myIsFollowBestPractice;
   }
 }

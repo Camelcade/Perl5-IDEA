@@ -1,0 +1,35 @@
+Language: Perl5
+PerlFileStub
+	Name: main
+	Mro: DFS
+	Parents: []
+	@EXPORT: []
+	@EXPORT_OK: []
+	@EXPORT_TAGS: {}
+	Annotations: null
+	Type: Perl5
+  ATTRIBUTE_WRAPPER:PerlMooseAttributeWrapperStub
+	Light elements: 3
+	LIGHT_ATTRIBUTE:PerlLightSubDefinitionStub
+	Namespace name: main
+	Sub name: test57
+	Annotations: null
+	Arguments: []
+	Return value: UNKNOWN_VALUE
+	LIGHT_METHOD_DEFINITION:PerlLightSubDefinitionStub
+	Namespace name: main
+	Sub name: test59
+	Annotations: null
+	Arguments: []
+	Return value: UNKNOWN_VALUE
+	LIGHT_METHOD_DEFINITION:PerlLightSubDefinitionStub
+	Namespace name: main
+	Sub name: test60
+	Annotations: null
+	Arguments: []
+	Return value: UNKNOWN_VALUE
+	Attribute names: [test56]
+
+----------
+Language: Perl5 POD
+PsiFileStubImpl

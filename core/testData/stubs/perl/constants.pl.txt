@@ -1,0 +1,52 @@
+Language: Perl5
+PerlFileStub
+	Name: main
+	Mro: DFS
+	Parents: []
+	@EXPORT: []
+	@EXPORT_OK: []
+	@EXPORT_TAGS: {}
+	Annotations: null
+	Type: Perl5
+  NAMESPACE:PerlNamespaceDefinitionStub
+	Name: Foo::Bar
+	Mro: DFS
+	Parents: []
+	@EXPORT: []
+	@EXPORT_OK: []
+	@EXPORT_TAGS: {}
+	Annotations: null
+    USE_STATEMENT:PerlUseStatementStubImpl
+	Package name: constant
+	Outer package name: Foo::Bar
+	Import options: null
+      CONSTANT_WRAPPER:PerlPolyNamedElementStub
+	Light elements: 1
+	LIGHT_SUB_DEFINITION:PerlLightSubDefinitionStub
+	Namespace name: Foo::Bar
+	Sub name: SINGLE_CONST
+	Annotations: null
+	Arguments: []
+	Return value: 1
+    USE_STATEMENT:PerlUseStatementStubImpl
+	Package name: constant
+	Outer package name: Foo::Bar
+	Import options: null
+      CONSTANT_WRAPPER:PerlPolyNamedElementStub
+	Light elements: 2
+	LIGHT_SUB_DEFINITION:PerlLightSubDefinitionStub
+	Namespace name: Foo::Bar
+	Sub name: MULTICONST1
+	Annotations: null
+	Arguments: []
+	Return value: 1
+	LIGHT_SUB_DEFINITION:PerlLightSubDefinitionStub
+	Namespace name: Foo::Bar
+	Sub name: MULTICONST2
+	Annotations: null
+	Arguments: []
+	Return value: 2
+
+----------
+Language: Perl5 POD
+PsiFileStubImpl

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,12 +16,14 @@
 
 package com.perl5.lang.perl.psi.stubs;
 
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.perl.psi.PerlPolyNamedElement;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PerlPolyNamedElementStub extends StubBase<PerlPolyNamedElement> {
@@ -38,5 +40,16 @@ public class PerlPolyNamedElementStub extends StubBase<PerlPolyNamedElement> {
   @NotNull
   public List<StubElement> getLightNamedElementsStubs() {
     return myLightNamedElementsStubs;
+  }
+
+  @Override
+  public String toString() {
+    List<String> chunks = new ArrayList<>();
+    chunks.add(super.toString());
+    chunks.add("\tLight elements: " + myLightNamedElementsStubs.size());
+    for (StubElement lightNamedElementsStub : myLightNamedElementsStubs) {
+      chunks.add("\t" + lightNamedElementsStub);
+    }
+    return StringUtil.join(chunks, "\n");
   }
 }

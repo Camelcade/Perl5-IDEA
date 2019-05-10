@@ -1,0 +1,22 @@
+Language: Perl5
+PerlFileStub
+	Name: main
+	Mro: DFS
+	Parents: []
+	@EXPORT: []
+	@EXPORT_OK: []
+	@EXPORT_TAGS: {}
+	Annotations: null
+	Type: Perl5
+  PERL_DO_EXPR:PerlRuntimeImportStubImpl
+	Path: some/file.pl
+  PERL_REQUIRE_EXPR:PerlRuntimeImportStubImpl
+	Path: some/oher/file.pl
+  PERL_REQUIRE_EXPR:PerlRuntimeImportStubImpl
+	Path: null
+  PERL_DO_EXPR:PerlRuntimeImportStubImpl
+	Path: null
+
+----------
+Language: Perl5 POD
+PsiFileStubImpl

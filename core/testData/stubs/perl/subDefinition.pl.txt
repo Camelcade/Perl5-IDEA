@@ -1,0 +1,20 @@
+Language: Perl5
+PerlFileStub
+	Name: main
+	Mro: DFS
+	Parents: []
+	@EXPORT: []
+	@EXPORT_OK: []
+	@EXPORT_TAGS: {}
+	Annotations: null
+	Type: Perl5
+  SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: main
+	Sub name: somesub
+	Annotations: deprecated; returns: Foo::Bar
+	Arguments: [$self, $somevar]
+	Return value: 42
+
+----------
+Language: Perl5 POD
+PsiFileStubImpl

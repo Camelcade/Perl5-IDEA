@@ -1,0 +1,82 @@
+Language: Perl5
+PerlFileStub
+	Name: main
+	Mro: DFS
+	Parents: []
+	@EXPORT: []
+	@EXPORT_OK: []
+	@EXPORT_TAGS: {}
+	Annotations: null
+	Type: Perl5
+  NAMESPACE:PerlNamespaceDefinitionStub
+	Name: Foo::Bar
+	Mro: DFS
+	Parents: []
+	@EXPORT: []
+	@EXPORT_OK: []
+	@EXPORT_TAGS: {}
+	Annotations: null
+    CLASS_ACCESSOR_WRAPPER_RO:PerlClassAccessorWrapperStub
+	Light elements: 1
+	CLASS_ACCESSOR_METHOD:PerlLightSubDefinitionStub
+	Namespace name: Foo::Bar
+	Sub name: ro_one
+	Annotations: null
+	Arguments: [$self, [$new_value]]
+	Return value: UNKNOWN_VALUE
+	Follow best practice: false
+    CLASS_ACCESSOR_WRAPPER_WO:PerlClassAccessorWrapperStub
+	Light elements: 1
+	CLASS_ACCESSOR_METHOD:PerlLightSubDefinitionStub
+	Namespace name: Foo::Bar
+	Sub name: wo_one
+	Annotations: null
+	Arguments: [$self, [$new_value]]
+	Return value: UNKNOWN_VALUE
+	Follow best practice: false
+    CLASS_ACCESSOR_WRAPPER:PerlClassAccessorWrapperStub
+	Light elements: 1
+	CLASS_ACCESSOR_METHOD:PerlLightSubDefinitionStub
+	Namespace name: Foo::Bar
+	Sub name: rw_one
+	Annotations: null
+	Arguments: [$self, [$new_value]]
+	Return value: UNKNOWN_VALUE
+	Follow best practice: false
+    CLASS_ACCESSOR_WRAPPER_RO:PerlClassAccessorWrapperStub
+	Light elements: 1
+	CLASS_ACCESSOR_METHOD:PerlLightSubDefinitionStub
+	Namespace name: Foo::Bar
+	Sub name: get_ro_one1
+	Annotations: null
+	Arguments: []
+	Return value: UNKNOWN_VALUE
+	Follow best practice: true
+    CLASS_ACCESSOR_WRAPPER_WO:PerlClassAccessorWrapperStub
+	Light elements: 1
+	CLASS_ACCESSOR_METHOD:PerlLightSubDefinitionStub
+	Namespace name: Foo::Bar
+	Sub name: set_wo_one1
+	Annotations: null
+	Arguments: [$self, $new_value]
+	Return value: UNKNOWN_VALUE
+	Follow best practice: true
+    CLASS_ACCESSOR_WRAPPER:PerlClassAccessorWrapperStub
+	Light elements: 2
+	CLASS_ACCESSOR_METHOD:PerlLightSubDefinitionStub
+	Namespace name: Foo::Bar
+	Sub name: get_rw_one1
+	Annotations: null
+	Arguments: []
+	Return value: UNKNOWN_VALUE
+	CLASS_ACCESSOR_METHOD:PerlLightSubDefinitionStub
+	Namespace name: Foo::Bar
+	Sub name: set_rw_one1
+	Annotations: null
+	Arguments: [$self, $new_value]
+	Return value: UNKNOWN_VALUE
+	Follow best practice: true
+
+----------
+Language: Perl5 POD
+PsiFileStubImpl
