@@ -1,0 +1,27 @@
+1. Surround with B<...> (bold) (null)
+----------
+This blaB<<<< is <<< a bla<caret> >>>>text
+----------
+2. Surround with C<...> (code) (null)
+----------
+This blaC<<<< is <<< a bla<caret> >>>>text
+----------
+3. Surround with F<...> (filename) (null)
+----------
+This blaF<<<< is <<< a bla<caret> >>>>text
+----------
+4. Surround with X<...> (index) (null)
+----------
+This blaX<<<< is <<< a bla<caret> >>>>text
+----------
+5. Surround with I<...> (italic) (null)
+----------
+This blaI<<<< is <<< a bla<caret> >>>>text
+----------
+6. Surround with L<...> (link) (null)
+----------
+This blaL<<<< is <<< a bla|<caret> >>>>text
+----------
+7. Surround with S<...> (non-breaking spaces) (null)
+----------
+This blaS<<<< is <<< a bla<caret> >>>>text

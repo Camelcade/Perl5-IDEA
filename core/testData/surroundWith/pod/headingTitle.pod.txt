@@ -1,0 +1,27 @@
+1. Surround with B<...> (bold) (null)
+----------
+=head1 B<Title text<caret>>
+----------
+2. Surround with C<...> (code) (null)
+----------
+=head1 C<Title text<caret>>
+----------
+3. Surround with F<...> (filename) (null)
+----------
+=head1 F<Title text<caret>>
+----------
+4. Surround with X<...> (index) (null)
+----------
+=head1 X<Title text<caret>>
+----------
+5. Surround with I<...> (italic) (null)
+----------
+=head1 I<Title text<caret>>
+----------
+6. Surround with L<...> (link) (null)
+----------
+=head1 L<Title text|<caret>>
+----------
+7. Surround with S<...> (non-breaking spaces) (null)
+----------
+=head1 S<Title text<caret>>

@@ -17,6 +17,7 @@
 package com.perl5.lang.pod.idea.livetemplates;
 
 import com.intellij.codeInsight.template.impl.TemplatePreprocessor;
+import com.intellij.openapi.application.WriteAction;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.psi.PsiFile;
@@ -46,6 +47,7 @@ public class PodLiveTemplatesNewLinesPreprocessor implements TemplatePreprocesso
       return;
     }
 
-    document.deleteString(caretOffset, caretOffset + editorNewlines - 1);
+    int endOffset = caretOffset + editorNewlines - 1;
+    WriteAction.run(() -> document.deleteString(caretOffset, endOffset));
   }
 }

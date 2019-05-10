@@ -24,6 +24,7 @@ import com.intellij.codeInsight.controlflow.ControlFlow;
 import com.intellij.codeInsight.controlflow.Instruction;
 import com.intellij.codeInsight.documentation.DocumentationManager;
 import com.intellij.codeInsight.editorActions.SelectWordHandler;
+import com.intellij.codeInsight.generation.surroundWith.SurroundWithHandler;
 import com.intellij.codeInsight.highlighting.BraceMatchingUtil;
 import com.intellij.codeInsight.highlighting.HighlightManager;
 import com.intellij.codeInsight.highlighting.actions.HighlightUsagesAction;
@@ -69,12 +70,10 @@ import com.intellij.lexer.Lexer;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.navigation.NavigationItem;
 import com.intellij.openapi.Disposable;
-import com.intellij.openapi.actionSystem.ActionManager;
-import com.intellij.openapi.actionSystem.CommonDataKeys;
-import com.intellij.openapi.actionSystem.DataContext;
-import com.intellij.openapi.actionSystem.IdeActions;
+import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.application.ReadAction;
 import com.intellij.openapi.application.WriteAction;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.editor.*;
@@ -194,6 +193,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.*;
 import java.util.function.BiPredicate;
+import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -2305,5 +2305,44 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
 
   protected void doInplaceRenameAtCaret(@NotNull String newName) {
     CodeInsightTestUtil.doInlineRename(new PerlMemberInplaceRenameHandler(), newName, myFixture);
+  }
+
+  protected void doTestSurrounders(Predicate<String> namePredicate, boolean shouldHaveSurrounders) {
+    initWithFileSmartWithoutErrors();
+    List<AnAction> actions = ReadAction.compute(() -> SurroundWithHandler.buildSurroundActions(getProject(), getEditor(), getFile(), null));
+    if (actions == null) {
+      if (shouldHaveSurrounders) {
+        fail("No surounders found");
+      }
+      return;
+    }
+
+    List<String> actionNames = actions.stream().map(AnAction::toString).filter(namePredicate).collect(Collectors.toList());
+    if (actionNames.isEmpty()) {
+      if (shouldHaveSurrounders) {
+        fail("No suitable surrounders found: " + actions);
+      }
+      return;
+    }
+
+    assertTrue("Should not have surrounders, but got: " + actionNames, shouldHaveSurrounders);
+
+    StringBuilder sb = new StringBuilder();
+    for (String actionName : actionNames) {
+      if (sb.length() > 0) {
+        initWithFileSmartWithoutErrors();
+        sb.append(SEPARATOR_NEWLINES);
+      }
+      sb.append(actionName).append(SEPARATOR_NEWLINES);
+      List<AnAction> actionsList = ReadAction.compute(
+        () -> SurroundWithHandler.buildSurroundActions(getProject(), getEditor(), getFile(), null));
+      assertNotNull(actionsList);
+      AnAction anAction = ContainerUtil.find(actionsList, it -> it.toString().equals(actionName));
+      assertNotNull("No action: " + actionName, anAction);
+      ApplicationManager.getApplication().invokeAndWait(() -> myFixture.testAction(anAction));
+      sb.append(ReadAction.compute(this::getEditorTextWithCaretsAndSelections));
+    }
+
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
   }
 }

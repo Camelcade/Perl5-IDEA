@@ -74,6 +74,7 @@
     <lang.elementManipulator forClass="com.perl5.lang.pod.parser.psi.PodCompositeElement" order="first"
                              implementationClass="com.perl5.lang.pod.parser.psi.manipulators.PodElementManipulator"/>
 
+    <lang.surroundDescriptor language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.surroundWith.PodSurroundDescriptor"/>
   </extensions>
 
 </idea-plugin>

@@ -17,6 +17,7 @@
 package completion;
 
 import base.PerlCompletionPopupTestCase;
+import com.intellij.codeInsight.lookup.LookupManager;
 import com.perl5.lang.pod.filetypes.PodFileType;
 import org.jetbrains.annotations.NotNull;
 
@@ -35,6 +36,13 @@ public class PodCompletionPopupTest extends PerlCompletionPopupTestCase {
   protected void setUp() throws Exception {
     super.setUp();
     withPerlPod();
+  }
+
+  public void testSurroundWithLinkPopup() {
+    doTestSurrounders(it -> it.contains("Surround with L<...>"), true);
+    myTester.joinAutopopup();
+    myTester.joinCompletion();
+    assertNotNull(LookupManager.getActiveLookup(getEditor()));
   }
 
   public void testSpaceHeader1() {doTest("=head1<caret>", " ");}
