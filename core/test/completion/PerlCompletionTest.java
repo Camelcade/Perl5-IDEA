@@ -18,6 +18,7 @@ package completion;
 
 import base.PerlLightTestCase;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.lang.perl.idea.project.PerlNamesCache;
 import com.perl5.lang.perl.internals.PerlVersion;
 import org.jetbrains.annotations.NotNull;
@@ -34,6 +35,18 @@ public class PerlCompletionTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/completion/perl";
+  }
+
+  public void testIssue2024() {
+    String fileName = "MyCustomPackage.pm";
+    VirtualFile package1 = myFixture.copyFileToProject(fileName, "lib/" + fileName);
+    assertNotNull(package1);
+    markAsLibRoot(package1.getParent(), true);
+    VirtualFile package2 = myFixture.copyFileToProject(fileName, "lib/something/lib/" + fileName);
+    assertNotNull(package2);
+    markAsLibRoot(package2.getParent(), true);
+    initWithTextSmart("use <caret>");
+    doTestCompletionCheck("", (element, __) -> element.getLookupString().contains("MyCustomPackage"));
   }
 
   public void testPodLiveTemplates() {

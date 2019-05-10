@@ -532,14 +532,23 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
   public static boolean processIncFilesForPsiElement(@NotNull PsiElement element,
                                                      @NotNull ClassRootVirtualFileProcessor processor,
                                                      @NotNull FileType fileType) {
-    for (VirtualFile classRoot : getIncDirsForPsiElement(element)) {
-      if (!FileTypeIndex.processFiles(fileType,
-                                      virtualFile -> {
-                                        ProgressManager.checkCanceled();
-                                        return processor.process(virtualFile, classRoot);
-                                      },
-                                      GlobalSearchScopesCore.directoryScope(element.getProject(), classRoot, true))
-        ) {
+    List<VirtualFile> incDirsForPsiElement = getIncDirsForPsiElement(element);
+    Project project = element.getProject();
+    for (VirtualFile incDir : incDirsForPsiElement) {
+      GlobalSearchScope searchScope = GlobalSearchScopesCore.directoryScope(project, incDir, true);
+      for (VirtualFile otherIncDir : incDirsForPsiElement) {
+        if (VfsUtil.isAncestor(incDir, otherIncDir, true)) {
+          searchScope = searchScope.intersectWith(
+            GlobalSearchScope.notScope(GlobalSearchScopesCore.directoryScope(project, otherIncDir, true)));
+        }
+      }
+
+      if (!FileTypeIndex.processFiles(
+        fileType, virtualFile -> {
+          ProgressManager.checkCanceled();
+          return processor.process(virtualFile, incDir);
+        },
+        searchScope)) {
         return false;
       }
     }
