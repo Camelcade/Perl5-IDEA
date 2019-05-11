@@ -1,0 +1,3 @@
+Matching value:
+	[--help]
+Completion items:

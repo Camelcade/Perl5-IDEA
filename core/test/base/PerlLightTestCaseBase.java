@@ -44,6 +44,10 @@ import com.intellij.execution.configurations.PathEnvironmentVariableUtil;
 import com.intellij.execution.impl.EditorHyperlinkSupport;
 import com.intellij.execution.util.ExecUtil;
 import com.intellij.ide.DataManager;
+import com.intellij.ide.actions.runAnything.activity.RunAnythingProvider;
+import com.intellij.ide.actions.runAnything.groups.RunAnythingHelpGroup;
+import com.intellij.ide.actions.runAnything.items.RunAnythingHelpItem;
+import com.intellij.ide.actions.runAnything.items.RunAnythingItem;
 import com.intellij.ide.hierarchy.*;
 import com.intellij.ide.hierarchy.actions.BrowseHierarchyActionBase;
 import com.intellij.ide.structureView.StructureView;
@@ -71,6 +75,7 @@ import com.intellij.navigation.ItemPresentation;
 import com.intellij.navigation.NavigationItem;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.actionSystem.*;
+import com.intellij.openapi.actionSystem.impl.SimpleDataContext;
 import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.ReadAction;
@@ -2344,5 +2349,50 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     }
 
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+  }
+
+  protected <V, T extends RunAnythingProvider<V>> void doTestRunAnythingHelpGroup(@NotNull RunAnythingHelpGroup<T> helpGroup) {
+    DataContext dataContext = SimpleDataContext.getProjectContext(getProject());
+    List<RunAnythingItem> helpItems = new ArrayList<>(helpGroup.getGroupItems(dataContext, ""));
+    StringBuilder sb = new StringBuilder();
+    sb.append("Help items:\n");
+    helpItems.sort(Comparator.comparing(RunAnythingItem::getCommand));
+    helpItems.forEach(it -> sb.append("\t").append(serializeRunAnythingItem(it)).append("\n"));
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+  }
+
+  protected <V, T extends RunAnythingProvider<V>> void doTestRunAnythingProvider(@NotNull String pattern,
+                                                                                 @NotNull T provider) {
+    DataContext dataContext = SimpleDataContext.getProjectContext(getProject());
+    List<RunAnythingItem> completionItems = ContainerUtil.map(provider.getValues(dataContext, pattern),
+                                                              it -> provider.getMainListItem(dataContext, it));
+    V matchingValue = provider.findMatchingValue(dataContext, pattern);
+    StringBuilder sb = new StringBuilder();
+    sb.append("Matching value:\n\t").append(matchingValue).append("\n");
+
+    sb.append("Completion items:\n");
+    completionItems.sort(Comparator.comparing(RunAnythingItem::getCommand));
+    completionItems.forEach(it -> sb.append("\t").append(serializeRunAnythingItem(it)).append("\n"));
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+  }
+
+  @NotNull
+  protected String serializeRunAnythingItem(@Nullable RunAnythingItem runAnythingItem) {
+    if (runAnythingItem == null) {
+      return "null";
+    }
+
+    String result = "[" + runAnythingItem.getCommand() + "]";
+
+    if (runAnythingItem instanceof RunAnythingHelpItem) {
+      String placeHolder = ReflectionUtil.getField(RunAnythingHelpItem.class, runAnythingItem, String.class, "myPlaceholder");
+      String description = ReflectionUtil.getField(RunAnythingHelpItem.class, runAnythingItem, String.class, "myDescription");
+      Icon icon = ReflectionUtil.getField(RunAnythingHelpItem.class, runAnythingItem, Icon.class, "myIcon");
+      result = "[" + placeHolder + "]; " +
+               "[" + description + "]; " +
+               icon + "; " +
+               result;
+    }
+    return result;
   }
 }

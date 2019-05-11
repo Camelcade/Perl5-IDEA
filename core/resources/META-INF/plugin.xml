@@ -420,6 +420,9 @@
 
     <vetoRenameCondition implementation="com.perl5.lang.perl.parser.Exception.Class.ide.refactoring.PerlRenamingVetoCondition"/>
 
+    <runAnything.helpGroup implementation="com.perl5.lang.perl.idea.actions.runAnything.PerlRunAnythingHelpGroup"/>
+    <runAnything.executionProvider implementation="com.perl5.lang.perl.idea.actions.runAnything.PerlRunAnythingProvider"/>
+
     <stubIndex implementation="com.perl5.lang.perl.psi.stubs.variables.PerlScalarsStubIndex"/>
     <stubIndex implementation="com.perl5.lang.perl.psi.stubs.variables.PerlArraysStubIndex"/>
     <stubIndex implementation="com.perl5.lang.perl.psi.stubs.variables.PerlHashesStubIndex"/>

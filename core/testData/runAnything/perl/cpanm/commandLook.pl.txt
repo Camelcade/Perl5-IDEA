@@ -1,0 +1,5 @@
+Matching value:
+	[--look]
+Completion items:
+	[--quiet]; [Turns off the most output]; /icons/perl5language.png; [cpanm --quiet --look]
+	[--verbose]; [Turns on chatty output]; /icons/perl5language.png; [cpanm --verbose --look]

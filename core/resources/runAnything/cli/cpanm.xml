@@ -1,0 +1,92 @@
+<!--
+  ~ Copyright 2015-2019 Alexandr Evstigneev
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<xml>
+  <general completionGroupName="Cpanminus options" helpGroupName="Cpanminus" optionsFirst="true" command="cpanm"/>
+  <options>
+    <option value="--verbose" alias="-v" description="Turns on chatty output"/>
+    <option value="--quiet" alias="-q" description="Turns off the most output"/>
+    <option value="--interactive" description="Turns on interactive configure (required for Task:: modules)"/>
+    <option value="--force" alias="-f" description="Force install"/>
+    <option value="--notest" alias="-n" description="Do not run unit tests"/>
+    <option value="--test-only" description="Run tests only, do not install"/>
+    <option value="--sudo" alias="-S" description="sudo to run install commands"/>
+    <option value="--installdeps" description="Only install dependencies"/>
+    <option value="--showdeps" description="Only display direct dependencies"/>
+    <option value="--reinstall" description="Reinstall the distribution even if you already have the latest version installed"/>
+    <option value="--mirror" parameterPlaceholder="url"
+            description="Specify the base URL for the mirror (e.g. http://cpan.cpantesters.org/)"/>
+    <option value="--mirror-only" parameterPlaceholder="url" description="Use the mirror's index file instead of the CPAN Meta DB"/>
+    <option value="--from" alias="-M" parameterPlaceholder="url" description="Use only this mirror base URL and its index file"/>
+    <option value="--prompt" description="Prompt when configure/build/test fails"/>
+    <option value="--local-lib" parameterPlaceholder="path" description="Specify the install base to install modules"/>
+    <option value="--local-lib-contained" parameterPlaceholder="path"
+            description="Specify the install base to install all non-core modules"/>
+    <option value="--self-contained" description="Install all non-core modules, even if they're already installed."/>
+    <option value="--auto-cleanup" parameterPlaceholder="days"
+            description="Number of days that cpanm's work directories expire in. Defaults to 7"/>
+  </options>
+  <commands>
+    <command value="" parameterPlaceholder="modules" description="Install perl modules by name, path or url">
+      <options>
+        <option value="--verbose"/>
+        <option value="--quiet"/>
+        <option value="--interactive"/>
+        <option value="--force"/>
+        <option value="--notest"/>
+        <option value="--test-only"/>
+        <option value="--sudo"/>
+        <option value="--installdeps"/>
+        <option value="--showdeps"/>
+        <option value="--reinstall"/>
+        <option value="--mirror"/>
+        <option value="--mirror-only"/>
+        <option value="--from"/>
+        <option value="--prompt"/>
+        <option value="--local-lib"/>
+        <option value="--local-lib-contained"/>
+        <option value="--self-contained"/>
+        <option value="--auto-cleanup"/>
+      </options>
+    </command>
+    <command value="--self-upgrade" description="Upgrades itself">
+      <options>
+        <option value="--verbose"/>
+        <option value="--quiet"/>
+      </options>
+    </command>
+    <command value="--info" parameterPlaceholder="modules" description="Displays distribution info on CPAN">
+      <options>
+        <option value="--verbose"/>
+        <option value="--quiet"/>
+      </options>
+    </command>
+    <command value="--look" parameterPlaceholder="module" description="Opens the distribution with your SHELL">
+      <options>
+        <option value="--verbose"/>
+        <option value="--quiet"/>
+      </options>
+    </command>
+    <command value="--uninstall" parameterPlaceholder="modules" alias="-U" description="Uninstalls the modules (EXPERIMENTAL)">
+      <options>
+        <option value="--verbose"/>
+        <option value="--quiet"/>
+      </options>
+    </command>
+    <command value="--version" alias="-V" description="Displays software version"/>
+    <command value="--help" alias="-h" description="Displays help"/>
+  </commands>
+</xml>

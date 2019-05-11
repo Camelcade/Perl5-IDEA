@@ -1,0 +1,5 @@
+Matching value:
+	[--self-upgrade]
+Completion items:
+	[--quiet]; [Turns off the most output]; /icons/perl5language.png; [cpanm --quiet --self-upgrade]
+	[--verbose]; [Turns on chatty output]; /icons/perl5language.png; [cpanm --verbose --self-upgrade]
