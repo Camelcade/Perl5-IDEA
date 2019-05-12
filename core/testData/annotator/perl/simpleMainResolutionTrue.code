@@ -1,25 +1,26 @@
-__PACKAGE__->mk_accessors( qw/testsub/ );
+sub somesub{}
+
+method somemethod{}
+
+func somefunc{}
+
+has someattr => (is => 'rw');
+
+__PACKAGE__->mk_accessors( qw/testaccessor/ );
+
 use Exception::Class 'SOmething' => {
-        alias => 'testsub'
-    };
-has 'testsub';
-has testsub => is => 'rw';
-has something => qw/
-        is       rw
-        accessor testsub
-        /;
-has other   => qw/
-        is        rw
-        reader    testsub
-        writer    testsub
-        clearer   testsub
-        predicate testsub
-        /,
-    handles => [ qw/testsub/ ];
+    alias => 'testalias'
+};
 
-has [qw/dupes blabla/] => is => 'rw', reader => 'something';
+use constant testconstant => 42;
 
-use constant testsub => 42;
+has otherattr   => qw/
+    is        rw
+    reader    testreader
+    writer    testwriter
+    clearer   testclearer
+    predicate testpredicate
+/,
+    handles => [ qw/testhandles/ ];
 
-sub testsub {}
-
+has [qw/dupes blabla/] => is => 'rw';

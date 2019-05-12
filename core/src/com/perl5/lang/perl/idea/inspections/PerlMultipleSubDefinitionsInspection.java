@@ -20,6 +20,7 @@ import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.search.GlobalSearchScope;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
@@ -39,10 +40,16 @@ public class PerlMultipleSubDefinitionsInspection extends PerlInspection {
         String name = "Sub";
 
         String canonicalName = o.getCanonicalName();
-        if (PerlSubUtil.getSubDefinitions(project, canonicalName, GlobalSearchScope.projectScope(project)).size() > 1) {
-          if (!PerlPackageUtil.isMain(o.getNamespaceName()) || !PerlSharedSettings.getInstance(project).SIMPLE_MAIN_RESOLUTION) {
-            registerProblem(holder, o.getNameIdentifier(), String.format("Multiple %ss definitions found", name.toLowerCase()));
-          }
+        GlobalSearchScope searchScope;
+        if (PerlPackageUtil.isMain(o.getNamespaceName()) && PerlSharedSettings.getInstance(project).SIMPLE_MAIN_RESOLUTION) {
+          searchScope = GlobalSearchScope.fileScope(o.getContainingFile());
+        }
+        else {
+          searchScope = GlobalSearchScope.projectScope(project);
+        }
+        if (PerlSubUtil.getSubDefinitions(project, canonicalName, searchScope).size() > 1) {
+          registerProblem(holder, o.getNameIdentifier(),
+                          PerlBundle.message("perl.inspection.multiple.sub.declarations", name.toLowerCase()));
         }
         super.visitPerlSubDefinitionElement(o);
       }

@@ -136,6 +136,7 @@ public class PerlAnnotatorTest extends PerlLightTestCase {
   public void testSimpleMainResolutionFalse() {doTestSimpleMainResolution(false);}
 
   private void doTestSimpleMainResolution(boolean optionValue) {
+    myFixture.copyFileToProject("simpleMainResolutionDupe.pl");
     PerlSharedSettings.getInstance(getProject()).SIMPLE_MAIN_RESOLUTION = optionValue;
     doInspectionTest(PerlMultipleSubDefinitionsInspection.class);
   }

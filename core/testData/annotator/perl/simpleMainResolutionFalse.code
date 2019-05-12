@@ -1,25 +1,26 @@
-__PACKAGE__->mk_accessors( qw/<warning descr="Multiple subs definitions found">testsub</warning>/ );
+sub <warning descr="Multiple subs definitions found">somesub</warning>{}
+
+method <warning descr="Multiple subs definitions found">somemethod</warning>{}
+
+func <warning descr="Multiple subs definitions found">somefunc</warning>{}
+
+has <warning descr="Multiple subs definitions found">someattr</warning> => (is => 'rw');
+
+__PACKAGE__->mk_accessors( qw/<warning descr="Multiple subs definitions found">testaccessor</warning>/ );
+
 use Exception::Class 'SOmething' => {
-        alias => '<warning descr="Multiple subs definitions found">testsub</warning>'
-    };
-has '<warning descr="Multiple subs definitions found">testsub</warning>';
-has <warning descr="Multiple subs definitions found">testsub</warning> => is => 'rw';
-has something => qw/
-        is       rw
-        accessor <warning descr="Multiple subs definitions found">testsub</warning>
-        /;
-has other   => qw/
-        is        rw
-        reader    <warning descr="Multiple subs definitions found">testsub</warning>
-        writer    <warning descr="Multiple subs definitions found">testsub</warning>
-        clearer   <warning descr="Multiple subs definitions found">testsub</warning>
-        predicate <warning descr="Multiple subs definitions found">testsub</warning>
-        /,
-    handles => [ qw/<warning descr="Multiple subs definitions found">testsub</warning>/ ];
+    alias => '<warning descr="Multiple subs definitions found">testalias</warning>'
+};
 
-has [qw/dupes blabla/] => is => 'rw', reader => 'something';
+use constant <warning descr="Multiple subs definitions found">testconstant</warning> => 42;
 
-use constant <warning descr="Multiple subs definitions found">testsub</warning> => 42;
+has <warning descr="Multiple subs definitions found">otherattr</warning>   => qw/
+    is        rw
+    reader    <warning descr="Multiple subs definitions found">testreader</warning>
+    writer    <warning descr="Multiple subs definitions found">testwriter</warning>
+    clearer   <warning descr="Multiple subs definitions found">testclearer</warning>
+    predicate <warning descr="Multiple subs definitions found">testpredicate</warning>
+/,
+    handles => [ qw/<warning descr="Multiple subs definitions found">testhandles</warning>/ ];
 
-sub <warning descr="Multiple subs definitions found">testsub</warning> {}
-
+has [qw/<warning descr="Multiple subs definitions found">dupes</warning> <warning descr="Multiple subs definitions found">blabla</warning>/] => is => 'rw';
