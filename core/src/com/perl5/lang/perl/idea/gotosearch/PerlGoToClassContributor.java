@@ -54,11 +54,13 @@ public class PerlGoToClassContributor implements ChooseByNameContributor, GotoCl
   @NotNull
   @Override
   public NavigationItem[] getItemsByName(String packageName, String searchTerm, Project project, boolean includeNonProjectItems) {
+    if (PerlPackageUtil.MAIN_NAMESPACE_NAME.equals(packageName)) {
+      return NavigationItem.EMPTY_NAVIGATION_ITEM_ARRAY;
+    }
     Collection<PerlNamespaceDefinitionElement> result = PerlPackageUtil.getNamespaceDefinitions(
       project,
       (includeNonProjectItems ? GlobalSearchScope.allScope(project) : GlobalSearchScope.projectScope(project)), packageName
     );
-    //noinspection SuspiciousToArrayCall
-    return result.toArray(new NavigationItem[result.size()]);
+    return result.toArray(NavigationItem.EMPTY_NAVIGATION_ITEM_ARRAY);
   }
 }

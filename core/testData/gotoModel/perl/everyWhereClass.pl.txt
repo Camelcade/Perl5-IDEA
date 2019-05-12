@@ -36,15 +36,3 @@ MyTest::Something in Something.pm; /package_gutter_icon.png; null
 ----------
 TestPackage
 TestPackage in TestPackage.pm; /package_gutter_icon.png; null
-----------
-main
-Mojolicious::Controller in Mojolicious; /perl5.png
-Mojolicious::Plugin::DefaultHelpers in Mojolicious/Plugin; /perl5.png
-Mojolicious::Plugin::TagHelpers in Mojolicious/Plugin; /perl5.png
-MyTest::ClassAccessor in MyTest; /perl5.png
-MyTest::Constants in MyTest; /perl5.png
-MyTest::Exceptions in MyTest; /perl5.png
-MyTest::Some::Package in MyTest/Some; /perl5.png
-MyTest::Something in MyTest; /perl5.png
-TestPackage.pm in lib; /perl5.png
-test_script.pl in scripts; /perl5classic.png
