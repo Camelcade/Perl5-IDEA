@@ -85,9 +85,8 @@ public class PerlDeprecatedInspection extends PerlInspection {
         }
       }
 
-
       @Override
-      public void visitPerlSubDefinitionElement(@NotNull PerlSubDefinitionElement o) {
+      public void visitPerlSubElement(@NotNull PerlSubElement o) {
         if (o.isDeprecated()) {
           PsiElement nameIdentifier = o.getNameIdentifier();
           if (nameIdentifier != null) {
@@ -95,7 +94,6 @@ public class PerlDeprecatedInspection extends PerlInspection {
           }
         }
       }
-
 
       @Override
       public void visitPerlNamespaceDefinitionWithIdentifier(@NotNull PerlNamespaceDefinitionWithIdentifier o) {

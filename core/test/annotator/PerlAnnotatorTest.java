@@ -186,6 +186,8 @@ public class PerlAnnotatorTest extends PerlLightTestCase {
 
   public void testNamespaceDeprecation() {doDeprecationTest();}
 
+  public void testSubDeclarationDeprecation() {doDeprecationTest();}
+
   public void testMojoAttrsDeprecation() {doDeprecationTest();}
 
   public void testConstants() {

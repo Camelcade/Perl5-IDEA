@@ -132,8 +132,17 @@ public class PerlVisitor extends PsiPerlVisitor {
     visitPerlSubDefinitionElement(o);
   }
 
-  public void visitSubDeclarationElement(@NotNull PerlSubDeclarationElement o) {
+  @Override
+  public void visitPerlSubDefinitionElement(@NotNull PerlSubDefinitionElement o) {
+    visitPerlSubElement(o);
+  }
+
+  public void visitPerlSubElement(@NotNull PerlSubElement o) {
     visitElement(o);
+  }
+
+  public void visitSubDeclarationElement(@NotNull PerlSubDeclarationElement o) {
+    visitPerlSubElement(o);
   }
 
   @Override

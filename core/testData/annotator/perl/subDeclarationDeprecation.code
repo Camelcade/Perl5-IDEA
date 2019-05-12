@@ -1,0 +1,5 @@
+#@deprecated
+sub <warning descr="This sub is deprecated">sub_declaration</warning>;
+
+<warning descr="This sub is deprecated">sub_declaration</warning>();
+
