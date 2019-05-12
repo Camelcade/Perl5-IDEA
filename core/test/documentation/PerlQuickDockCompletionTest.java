@@ -17,6 +17,7 @@
 package documentation;
 
 import base.PerlLightTestCase;
+import org.jetbrains.annotations.NotNull;
 
 public class PerlQuickDockCompletionTest extends PerlLightTestCase {
 
@@ -25,8 +26,38 @@ public class PerlQuickDockCompletionTest extends PerlLightTestCase {
     return "testData/documentation/perl/completion";
   }
 
-  public void testMojoliciousController() {
-    initWithTextSmart("use <caret>");
-    doTestCompletionQuickDoc("Mojolicious::Controller");
+  public void testSubDefinition() {
+    myFixture.copyFileToProject("test.pm");
+    doTest("test::-><caret>", "somesub");
   }
+
+  public void testMethod() {
+    myFixture.copyFileToProject("test.pm");
+    doTest("test::-><caret>", "somemethod");
+  }
+
+  public void testFunc() {
+    myFixture.copyFileToProject("test.pm");
+    doTest("test::-><caret>", "somefunc");
+  }
+
+  public void testAttr() {
+    myFixture.copyFileToProject("test.pm");
+    doTest("test::-><caret>", "someattr");
+  }
+
+  public void testPackage() {
+    myFixture.copyFileToProject("test.pm");
+    doTest("<caret>", "test");
+  }
+
+  public void testMojoliciousController() {
+    doTest("use <caret>", "Mojolicious::Controller");
+  }
+
+  private void doTest(@NotNull String initialText, @NotNull String completionItem) {
+    initWithTextSmart(initialText);
+    doTestCompletionQuickDoc(completionItem);
+  }
+
 }
