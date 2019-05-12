@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,9 +33,7 @@ import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurable;
 import com.perl5.lang.perl.internals.PerlVersion;
-import com.perl5.lang.perl.psi.PerlVisitor;
-import com.perl5.lang.perl.psi.PsiPerlAttributes;
-import com.perl5.lang.perl.psi.PsiPerlSubSignature;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.Nls;
@@ -56,6 +54,10 @@ public class PerlSubSignaturesInspection extends PerlInspection {
     return new PerlVisitor() {
       @Override
       public void visitSubSignature(@NotNull PsiPerlSubSignature o) {
+        if (o instanceof PsiPerlFuncSignatureContent || o instanceof PsiPerlMethodSignatureContent) {
+          return;
+        }
+
         PerlVersion selectedVersion = PerlSharedSettings.getInstance(holder.getProject()).getTargetPerlVersion();
         if (selectedVersion.lesserThan(V5_20)) {
           registerProblem(

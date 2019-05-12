@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,6 +29,10 @@ public class PerlSubSignaturesInspectionTest extends PerlLightTestCase {
   protected String getTestDataPath() {
     return "testData/annotator/perl/sub.signatures";
   }
+
+  public void testMethod() {doTest(V5_10);}
+
+  public void testFunc() {doTest(V5_10);}
 
   public void testV516() {doTest(V5_16);}
 

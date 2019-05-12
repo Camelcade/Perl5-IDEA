@@ -1,0 +1,3 @@
+func somefunc($thing, $else){
+
+}
