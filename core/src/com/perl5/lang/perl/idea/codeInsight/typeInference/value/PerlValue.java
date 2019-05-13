@@ -233,7 +233,7 @@ public abstract class PerlValue {
    */
   @NotNull
   public final PerlValue getReference() {
-    return isUnknown() ? UNKNOWN_VALUE : convert(PerlValue::createReference);
+    return convert(PerlValue::createReference);
   }
 
   @NotNull
@@ -249,7 +249,7 @@ public abstract class PerlValue {
     if (arrayIndex.isUnknown() || arrayIndex.isUndef()) {
       return UNKNOWN_VALUE;
     }
-    return convert(it -> createArrayElement(arrayIndex));
+    return convert(it -> it.createArrayElement(arrayIndex));
   }
 
   @NotNull
