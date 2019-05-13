@@ -220,16 +220,16 @@ public final class PerlValuesManager {
       return PerlArrayValue.builder().addPsiElements(PerlArrayUtil.collectListElements(element)).build();
     }
     else if (elementType == ANON_ARRAY) {
-      return PerlReferenceValue.create(PerlArrayValue.builder().addPsiElements(Arrays.asList(element.getChildren())).build());
+      return (PerlArrayValue.builder().addPsiElements(Arrays.asList(element.getChildren())).build()).getReference();
     }
     else if (elementType == ANON_HASH) {
-      return PerlReferenceValue.create(PerlMapValue.builder().addPsiElements(Arrays.asList(element.getChildren())).build());
+      return (PerlMapValue.builder().addPsiElements(Arrays.asList(element.getChildren())).build()).getReference();
     }
     else if (elementType == NUMBER_CONSTANT) {
       return PerlScalarValue.create(element.getText());
     }
     else if (element instanceof PsiPerlRefExpr) {
-      return PerlReferenceValue.create(((PsiPerlRefExpr)element).getExpr());
+      return from(((PsiPerlRefExpr)element).getExpr()).getReference();
     }
     else if (element instanceof PsiPerlHashElement) {
       return from(((PsiPerlHashElement)element).getExpr()).getHashElement(

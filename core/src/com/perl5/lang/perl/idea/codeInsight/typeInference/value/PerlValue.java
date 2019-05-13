@@ -229,6 +229,19 @@ public abstract class PerlValue {
   }
 
   /**
+   * @return a value representing reference to the current element
+   */
+  @NotNull
+  public final PerlValue getReference() {
+    return isUnknown() ? UNKNOWN_VALUE : convert(PerlValue::createReference);
+  }
+
+  @NotNull
+  protected PerlValue createReference() {
+    return new PerlReferenceValue(this);
+  }
+
+  /**
    * @return a value representing array element from current value. Deterministic if possible
    */
   @NotNull
