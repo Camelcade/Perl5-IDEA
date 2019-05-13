@@ -33,6 +33,7 @@ import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlControlFlowBuilder;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlOneOfValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlBuiltInVariable;
 import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
@@ -317,7 +318,7 @@ public class PerlResolveUtil {
       if (element == null) {
         return NEXT;
       }
-      valueBuilder.addVariant(PerlValue.from(element));
+      valueBuilder.addVariant(PerlValuesManager.from(element));
       return CONTINUE;
     });
 

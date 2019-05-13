@@ -27,7 +27,7 @@ import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.psi.*;
@@ -72,7 +72,7 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
       return getQuickNavigateInfo(element, originalElement.getParent());
     }
     if (originalElement instanceof PerlValuableEntity) {
-      return PerlValue.from(originalElement.getOriginalElement()).getPresentableText();
+      return PerlValuesManager.from(originalElement.getOriginalElement()).getPresentableText();
     }
     return super.getQuickNavigateInfo(element, originalElement);
   }

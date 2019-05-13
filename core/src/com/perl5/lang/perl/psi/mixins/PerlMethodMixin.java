@@ -21,10 +21,7 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.containers.ContainerUtil;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlCallObjectValue;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlCallStaticValue;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlScalarValue;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.*;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
@@ -75,7 +72,7 @@ public abstract class PerlMethodMixin extends PerlCompositeElementImpl implement
 
     List<PerlValue> callArguments;
     if (parentElement instanceof PerlMethodContainer) {
-      callArguments = ContainerUtil.map(((PerlMethodContainer)parentElement).getCallArgumentsList(), PerlValue::from);
+      callArguments = ContainerUtil.map(((PerlMethodContainer)parentElement).getCallArgumentsList(), PerlValuesManager::from);
     }
     else {
       // these are sort and code variable
@@ -106,7 +103,7 @@ public abstract class PerlMethodMixin extends PerlCompositeElementImpl implement
           subNameValue, callArguments, isSuper);
       }
       else if (previousValue instanceof PerlValuableEntity) {
-        PerlValue previousElementValue = PerlValue.from(previousValue);
+        PerlValue previousElementValue = PerlValuesManager.from(previousValue);
         return new PerlCallObjectValue(
           previousElementValue == UNKNOWN_VALUE ? PerlPackageUtil.UNIVERSAL_VALUE : previousElementValue, subNameValue, callArguments,
           isSuper);

@@ -35,6 +35,7 @@ import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.PerlNamesValidator;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlCallValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
 import com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
@@ -505,7 +506,7 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
     if (valuableEntity == null) {
       return Collections.emptyList();
     }
-    return getVariantsFromPerlValueNamespaces(valuableEntity, PerlValue.from(valuableEntity));
+    return getVariantsFromPerlValueNamespaces(valuableEntity, PerlValuesManager.from(valuableEntity));
   }
 
   @NotNull

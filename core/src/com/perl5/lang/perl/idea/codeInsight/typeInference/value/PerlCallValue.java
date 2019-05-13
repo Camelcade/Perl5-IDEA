@@ -324,6 +324,6 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
   @Nullable
   @Contract("null->null")
   public static PerlCallValue from(@Nullable PsiElement element) {
-    return ObjectUtils.tryCast(PerlValue.from(element), PerlCallValue.class);
+    return ObjectUtils.tryCast(PerlValuesManager.from(element), PerlCallValue.class);
   }
 }

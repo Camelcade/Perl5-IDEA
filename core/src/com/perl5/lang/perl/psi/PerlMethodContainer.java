@@ -19,6 +19,7 @@ package com.perl5.lang.perl.psi;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
 import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
 import com.perl5.lang.perl.util.PerlArrayUtil;
 import org.jetbrains.annotations.NotNull;
@@ -37,7 +38,7 @@ public interface PerlMethodContainer extends PsiElement, PerlValuableEntity {
   @NotNull
   @Override
   default PerlValue computePerlValue() {
-    return PerlValue.from(getMethod());
+    return PerlValuesManager.from(getMethod());
   }
 
   @Nullable

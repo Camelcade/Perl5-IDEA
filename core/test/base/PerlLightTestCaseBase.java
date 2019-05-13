@@ -149,6 +149,7 @@ import com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings;
 import com.perl5.lang.perl.idea.codeInsight.PerlParameterInfo;
 import com.perl5.lang.perl.idea.codeInsight.controlFlow.*;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
 import com.perl5.lang.perl.idea.completion.PerlStringCompletionCache;
 import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
@@ -1943,7 +1944,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     PerlValuableEntity element = getElementAtCaret(PerlValuableEntity.class);
     assertNotNull(element);
     StringBuilder sb = new StringBuilder();
-    PerlValue elementValue = PerlValue.from(element);
+    PerlValue elementValue = PerlValuesManager.from(element);
     sb.append(getEditorTextWithCaretsAndSelections().trim())
       .append(SEPARATOR_NEWLINES)
       .append(element.getText()).append("\n")

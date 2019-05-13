@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
 import com.perl5.lang.perl.psi.PsiPerlParenthesisedExpr;
 import com.perl5.lang.perl.psi.impl.PsiPerlExprImpl;
 import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
@@ -31,6 +32,6 @@ public abstract class PerlParenthesizedExpressionMixin extends PsiPerlExprImpl i
   @NotNull
   @Override
   public PerlValue computePerlValue() {
-    return PerlValue.from(getExpr());
+    return PerlValuesManager.from(getExpr());
   }
 }

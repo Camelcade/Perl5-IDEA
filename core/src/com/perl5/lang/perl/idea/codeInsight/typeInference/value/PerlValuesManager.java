@@ -16,24 +16,42 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
+import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.util.RecursionManager;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
+import com.intellij.psi.util.CachedValueProvider;
+import com.intellij.psi.util.CachedValuesManager;
+import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.containers.WeakInterner;
+import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
+import com.perl5.lang.perl.util.PerlArrayUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.*;
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 
 /**
- * Manages {@link PerlValue} serialization and deserialization, manages serialization ID
+ * Manages {@link PerlValue} creation, serialization and deserialization, manages serialization ID
  * We could implement something like PerlValueElementType but this thing is not supported to be extendable, so good for now
  */
 public final class PerlValuesManager {
+  private static final Logger LOG = Logger.getInstance(PerlValuesManager.class);
+  private static final TokenSet ONE_OF_VALUES = TokenSet.create(
+    AND_EXPR, OR_EXPR, LP_AND_EXPR, LP_OR_XOR_EXPR, PARENTHESISED_EXPR
+  );
+  private static final TokenSet LIST_VALUES = TokenSet.create(
+    STRING_LIST, COMMA_SEQUENCE_EXPR
+  );
+
   private static int id = 0;
   // special values
   static final int UNKNOWN_ID = id++;
@@ -156,5 +174,85 @@ public final class PerlValuesManager {
     for (PerlValue element : elements) {
       element.serialize(dataStream);
     }
+  }
+
+  /**
+   * @return a value for {@code element} or {@link PerlValues#UNKNOWN_VALUE} if element is null/not valuable.
+   */
+  @NotNull
+  public static PerlValue from(@Nullable PsiElement element) {
+    if (element == null) {
+      return UNKNOWN_VALUE;
+    }
+    if (!element.isValid()) {
+      LOG.error("Attempt to compute value from invalid element");
+      return UNKNOWN_VALUE;
+    }
+    element = element.getOriginalElement();
+    if (element instanceof PerlReturnExpr) {
+      PsiPerlExpr expr = ((PerlReturnExpr)element).getReturnValueExpr();
+      return expr == null ? UNDEF_VALUE : from(expr);
+    }
+    else if (element instanceof PerlValuableEntity) {
+      return from((PerlValuableEntity)element);
+    }
+
+    IElementType elementType = PsiUtilCore.getElementType(element);
+    if (elementType == UNDEF_EXPR) {
+      return UNDEF_VALUE;
+    }
+    else if (elementType == SCALAR_EXPR) {
+      PsiElement[] children = element.getChildren();
+      return children.length == 0 ? UNKNOWN_VALUE : from(children[0]).getScalarRepresentation();
+    }
+    else if (elementType == TERNARY_EXPR) {
+      PerlOneOfValue.Builder builder = PerlOneOfValue.builder();
+      PsiElement[] children = element.getChildren();
+      for (int i = 1; i < children.length; i++) {
+        builder.addVariant(children[i]);
+      }
+      return builder.build();
+    }
+    else if (ONE_OF_VALUES.contains(elementType)) {
+      return PerlOneOfValue.builder().addVariants(element.getChildren()).build();
+    }
+    else if (LIST_VALUES.contains(elementType)) {
+      return PerlArrayValue.builder().addPsiElements(PerlArrayUtil.collectListElements(element)).build();
+    }
+    else if (elementType == ANON_ARRAY) {
+      return PerlReferenceValue.create(PerlArrayValue.builder().addPsiElements(Arrays.asList(element.getChildren())).build());
+    }
+    else if (elementType == ANON_HASH) {
+      return PerlReferenceValue.create(PerlMapValue.builder().addPsiElements(Arrays.asList(element.getChildren())).build());
+    }
+    else if (elementType == NUMBER_CONSTANT) {
+      return PerlScalarValue.create(element.getText());
+    }
+    else if (element instanceof PsiPerlRefExpr) {
+      return PerlReferenceValue.create(((PsiPerlRefExpr)element).getExpr());
+    }
+    else if (element instanceof PsiPerlHashElement) {
+      return from(((PsiPerlHashElement)element).getExpr()).getHashElement(
+        from(((PsiPerlHashElement)element).getHashIndex().getExpr()));
+    }
+    else if (element instanceof PsiPerlArrayElement) {
+      return from(((PsiPerlArrayElement)element).getExpr()).getArrayElement(
+        from(((PsiPerlArrayElement)element).getArrayIndex().getExpr()));
+    }
+    return UNKNOWN_VALUE;
+  }
+
+  @NotNull
+  private static PerlValue from(@NotNull PerlValuableEntity element) {
+    return CachedValuesManager.getCachedValue(
+      element, () -> {
+        //noinspection deprecation
+        PerlValue computedValue = RecursionManager.doPreventingRecursion(element, true, element::computePerlValue);
+        if (computedValue == null) {
+          LOG.error("Recursion while computing value of " + element + " from " + PsiUtilCore.getVirtualFile(element));
+          computedValue = UNKNOWN_VALUE;
+        }
+        return CachedValueProvider.Result.create(intern(computedValue), element.getContainingFile());
+      });
   }
 }
