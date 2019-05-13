@@ -27,6 +27,38 @@ public class PerlValuesTest extends PerlLightTestCase {
     return "testData/unit/perl/perlValues";
   }
 
+  public void testArrayElement() {
+    doTest();
+  }
+
+  public void testArrayElementUndef() {
+    doTest();
+  }
+
+  public void testArrayElementUnknown() {
+    doTest();
+  }
+
+  public void testArrayElementFirst() {
+    doTest();
+  }
+
+  public void testArrayElementFirstNegative() {
+    doTest();
+  }
+
+  public void testArrayElementNegative() {
+    doTest();
+  }
+
+  public void testArrayElementOOB() {
+    doTest();
+  }
+
+  public void testArrayElementOOBNegative() {
+    doTest();
+  }
+
   public void testVariableAnnotationVariant() {
     // fixme this behviour is questionable, see commit message
     doTest();

@@ -1,0 +1,15 @@
+sub ext<caret>ract{
+  return $_[$_[0]];
+}
+
+$var = extract(2, 1,42);
+
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 62 in arrayElement.pl
+scalar main::extract(2, 1, 42)
+----------
+Resolved
+----------
+42

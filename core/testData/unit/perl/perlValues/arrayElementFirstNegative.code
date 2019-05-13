@@ -1,0 +1,7 @@
+sub ext<caret>ract{
+  return $_[$_[0]];
+}
+
+$var = extract(-3, 1,42);
+
+$v<caret>ar;

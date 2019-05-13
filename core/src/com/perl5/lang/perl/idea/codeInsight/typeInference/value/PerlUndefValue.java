@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,8 @@ import com.perl5.lang.perl.lexer.PerlBaseLexer;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
+
 final class PerlUndefValue extends PerlSpecialValue {
   static final PerlUndefValue INSTANCE = new PerlUndefValue();
 
@@ -29,6 +31,12 @@ final class PerlUndefValue extends PerlSpecialValue {
   @Override
   protected boolean computeIsDeterministic() {
     return true;
+  }
+
+  @NotNull
+  @Override
+  public PerlValue createArrayElement(@NotNull PerlValue arrayIndex) {
+    return UNKNOWN_VALUE;
   }
 
   @NotNull

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,10 +28,7 @@ import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.psi.PerlAssignExpression.PerlAssignValueDescriptor;
-import com.perl5.lang.perl.psi.PerlReturnExpr;
-import com.perl5.lang.perl.psi.PsiPerlExpr;
-import com.perl5.lang.perl.psi.PsiPerlHashElement;
-import com.perl5.lang.perl.psi.PsiPerlRefExpr;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import com.perl5.lang.perl.util.PerlArrayUtil;
@@ -237,6 +234,22 @@ public abstract class PerlValue {
     return toString();
   }
 
+  /**
+   * @return a value representing array element from current value. Deterministic if possible
+   */
+  @NotNull
+  public final PerlValue getArrayElement(@NotNull PerlValue arrayIndex) {
+    if (arrayIndex.isEmpty() || arrayIndex == UNDEF_VALUE) {
+      return UNKNOWN_VALUE;
+    }
+    return createArrayElement(arrayIndex);
+  }
+
+  @NotNull
+  protected PerlValue createArrayElement(@NotNull PerlValue arrayIndex) {
+    return new PerlArrayElementValue(this, arrayIndex);
+  }
+
   @Override
   public final int hashCode() {
     return myHashCode != 0 ? myHashCode : (myHashCode = computeHashCode());
@@ -371,7 +384,10 @@ public abstract class PerlValue {
       PerlValue keyValue = PerlValue.from(((PsiPerlHashElement)element).getHashIndex().getExpr());
       return PerlHashElementValue.create(hashValue, keyValue);
     }
-
+    else if (element instanceof PsiPerlArrayElement) {
+      return PerlValue.from(((PsiPerlArrayElement)element).getExpr()).getArrayElement(
+        PerlValue.from(((PsiPerlArrayElement)element).getArrayIndex().getExpr()));
+    }
     return UNKNOWN_VALUE;
   }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,10 +21,18 @@ import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
+
 final class PerlUnknownValue extends PerlSpecialValue {
   static final PerlUnknownValue INSTANCE = new PerlUnknownValue();
 
   private PerlUnknownValue() {
+  }
+
+  @NotNull
+  @Override
+  public PerlValue createArrayElement(@NotNull PerlValue arrayIndex) {
+    return UNKNOWN_VALUE;
   }
 
   @Nullable
