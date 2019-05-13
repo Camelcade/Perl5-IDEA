@@ -667,13 +667,13 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     StringBuilder sb = new StringBuilder();
     PsiElement sourceElement = reference.getElement();
 
-    ResolveResult[] resolveResults;
+    List<ResolveResult> resolveResults;
     if (reference instanceof PsiPolyVariantReference) {
-      resolveResults = ((PsiPolyVariantReference)reference).multiResolve(false);
+      resolveResults = Arrays.asList(((PsiPolyVariantReference)reference).multiResolve(false));
     }
     else {
       PsiElement target = reference.resolve();
-      resolveResults = target == null ? PsiElementResolveResult.EMPTY_ARRAY : PsiElementResolveResult.createResults(target);
+      resolveResults = target == null ? Collections.emptyList() : Collections.singletonList(new PsiElementResolveResult(target));
     }
 
     TextRange referenceRange = reference.getRangeInElement();
@@ -688,9 +688,12 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
       .append(referenceRange.subSequence(sourceElementText))
       .append("'")
       .append(" => ")
-      .append(resolveResults.length)
+      .append(resolveResults.size())
       .append(" results:")
       .append('\n');
+
+    //noinspection ConstantConditions
+    resolveResults.sort(Comparator.comparing(it -> Objects.requireNonNull(PsiUtilCore.getVirtualFile(it.getElement())).getPath()));
 
     for (ResolveResult result : resolveResults) {
       if (!result.isValidResult()) {
