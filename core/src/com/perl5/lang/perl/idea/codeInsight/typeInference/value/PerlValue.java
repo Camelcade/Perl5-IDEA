@@ -109,6 +109,10 @@ public abstract class PerlValue {
     return this == UNKNOWN_VALUE;
   }
 
+  public final boolean isUndef() {
+    return this == UNDEF_VALUE;
+  }
+
   /**
    * @return true iff this type can represent a {@code namespaceName}
    */
@@ -229,7 +233,7 @@ public abstract class PerlValue {
    */
   @NotNull
   public final PerlValue getArrayElement(@NotNull PerlValue arrayIndex) {
-    if (arrayIndex.isUnknown() || arrayIndex == UNDEF_VALUE) {
+    if (arrayIndex.isUnknown() || arrayIndex.isUndef()) {
       return UNKNOWN_VALUE;
     }
     return convert(it -> createArrayElement(arrayIndex));
@@ -245,7 +249,7 @@ public abstract class PerlValue {
    */
   @NotNull
   public final PerlValue getHashElement(@NotNull PerlValue hashKey) {
-    if (hashKey.isUnknown() || hashKey == UNDEF_VALUE) {
+    if (hashKey.isUnknown() || hashKey.isUndef()) {
       return UNKNOWN_VALUE;
     }
     return convert(hash -> hash.createHashElement(hashKey));
