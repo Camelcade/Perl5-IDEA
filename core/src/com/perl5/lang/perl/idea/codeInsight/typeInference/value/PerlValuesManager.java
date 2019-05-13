@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -74,7 +74,7 @@ public final class PerlValuesManager {
   static final int WANTARRAY_ID = id++;
 
   // MUST stay here. Automatically changes on new element creation
-  public static final int VERSION = id;
+  public static final int VERSION = id++;
 
   private static final WeakInterner<PerlValue> INTERNER = new WeakInterner<>();
 

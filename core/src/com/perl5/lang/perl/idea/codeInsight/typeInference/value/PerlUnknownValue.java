@@ -35,6 +35,12 @@ final class PerlUnknownValue extends PerlSpecialValue {
     return UNKNOWN_VALUE;
   }
 
+  @NotNull
+  @Override
+  protected PerlValue createHashElement(@NotNull PerlValue hashKey) {
+    return UNKNOWN_VALUE;
+  }
+
   @Nullable
   @Override
   protected PerlContextType getContextType() {

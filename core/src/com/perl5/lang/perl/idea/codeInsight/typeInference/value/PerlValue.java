@@ -242,12 +242,28 @@ public abstract class PerlValue {
     if (arrayIndex.isEmpty() || arrayIndex == UNDEF_VALUE) {
       return UNKNOWN_VALUE;
     }
-    return createArrayElement(arrayIndex);
+    return convert(it -> createArrayElement(arrayIndex));
   }
 
   @NotNull
   protected PerlValue createArrayElement(@NotNull PerlValue arrayIndex) {
     return new PerlArrayElementValue(this, arrayIndex);
+  }
+
+  /**
+   * @return a value representing hash element from current value. Deterministic if possible
+   */
+  @NotNull
+  public final PerlValue getHashElement(@NotNull PerlValue hashKey) {
+    if (hashKey.isEmpty() || hashKey == UNDEF_VALUE) {
+      return UNKNOWN_VALUE;
+    }
+    return convert(hash -> hash.createHashElement(hashKey));
+  }
+
+  @NotNull
+  protected PerlValue createHashElement(@NotNull PerlValue hashKey) {
+    return new PerlHashElementValue(this, hashKey);
   }
 
   @Override
@@ -380,9 +396,8 @@ public abstract class PerlValue {
       return PerlReferenceValue.create(((PsiPerlRefExpr)element).getExpr());
     }
     else if (element instanceof PsiPerlHashElement) {
-      PerlValue hashValue = PerlValue.from(((PsiPerlHashElement)element).getExpr());
-      PerlValue keyValue = PerlValue.from(((PsiPerlHashElement)element).getHashIndex().getExpr());
-      return PerlHashElementValue.create(hashValue, keyValue);
+      return PerlValue.from(((PsiPerlHashElement)element).getExpr()).getHashElement(
+        PerlValue.from(((PsiPerlHashElement)element).getHashIndex().getExpr()));
     }
     else if (element instanceof PsiPerlArrayElement) {
       return PerlValue.from(((PsiPerlArrayElement)element).getExpr()).getArrayElement(

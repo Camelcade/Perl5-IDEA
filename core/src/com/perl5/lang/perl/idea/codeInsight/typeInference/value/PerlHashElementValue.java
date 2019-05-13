@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,9 +27,8 @@ import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager.HASH_ELEMENT_VALUE;
 
 public final class PerlHashElementValue extends PerlParametrizedOperationValue {
-  private PerlHashElementValue(@NotNull PerlValue baseValue,
-                               @NotNull PerlValue parameter) {
-    super(baseValue, parameter);
+  PerlHashElementValue(@NotNull PerlValue hashValue, @NotNull PerlValue keyValue) {
+    super(hashValue, keyValue);
   }
 
   PerlHashElementValue(@NotNull StubInputStream dataStream) throws IOException {
@@ -68,26 +67,5 @@ public final class PerlHashElementValue extends PerlParametrizedOperationValue {
   @Override
   public String toString() {
     return "HashItem: " + getBaseValue() + "{" + getParameter() + "}";
-  }
-
-  @NotNull
-  public static PerlValue create(@NotNull PerlValue hashValue, @NotNull PerlValue key) {
-    if (hashValue.isEmpty() || key.isEmpty()) {
-      return UNKNOWN_VALUE;
-    }
-
-    return hashValue.convert(hash -> {
-      if (hash instanceof PerlHashValue) {
-        return key.convert(((PerlHashValue)hash)::get);
-      }
-      else if (hash instanceof PerlDeferredHashValue) {
-        PerlValue element = key.convertStrict(((PerlDeferredHashValue)hash)::tryGet);
-        if (!element.isEmpty()) {
-          return element;
-        }
-      }
-
-      return new PerlHashElementValue(hash, key);
-    });
   }
 }
