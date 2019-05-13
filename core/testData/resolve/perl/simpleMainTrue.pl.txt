@@ -1,0 +1,8 @@
+PerlSubReference at (41,48); text in range: 'somesub' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::somesub at 0 in simpleMain.pl
+
+PerlSubReference at (52,64); text in range: 'someothersub' => 0 results:
+
+PerlSubReference at (68,83); text in range: 'somedeclaration' => 1 results:
+	PsiPerlSubDeclarationImpl(SUB_DECLARATION)@main::somedeclaration at 17 in simpleMain.pl
+

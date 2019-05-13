@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -100,7 +100,7 @@ public final class PerlCallObjectValue extends PerlCallValue {
       for (String currentNamespaceName : PerlMro.getLinearISA(project, searchScope, contextNamespace, myIsSuper)) {
         ProcessingContext processingContext = new ProcessingContext();
         processingContext.processBuiltIns = false;
-        if (!processItemsInNamespace(project, searchScope, subNames, processor, currentNamespaceName, processingContext)) {
+        if (!processItemsInNamespace(project, searchScope, subNames, processor, currentNamespaceName, processingContext, contextElement)) {
           return false;
         }
         if (!processingContext.processAutoload) { // marker that we've got at least one result

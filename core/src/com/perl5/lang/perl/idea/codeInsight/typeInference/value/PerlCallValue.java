@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.RecursionManager;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubInputStream;
@@ -28,6 +29,7 @@ import com.intellij.util.ObjectUtils;
 import com.intellij.util.Processor;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
+import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.PerlSubElement;
@@ -244,17 +246,25 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
                                                    @NotNull Set<String> subNames,
                                                    @NotNull Processor<? super PsiNamedElement> processor,
                                                    @NotNull String namespaceName,
-                                                   @NotNull ProcessingContext processingContext) {
+                                                   @NotNull ProcessingContext processingContext,
+                                                   @Nullable PsiElement contextElement) {
+    PsiFile contextFile = contextElement == null ? null : contextElement.getContainingFile().getOriginalFile();
     Processor<PsiNamedElement> processorWrapper = it -> {
       processingContext.processBuiltIns = false;
       processingContext.processAutoload = false;
       return processor.process(it);
     };
 
-    // fixme simple main resolution
-    // declared subs
+    GlobalSearchScope subsEffectiveScope;
+    if (PerlPackageUtil.MAIN_NAMESPACE_NAME.equals(namespaceName) &&
+        PerlSharedSettings.getInstance(project).SIMPLE_MAIN_RESOLUTION && contextFile != null) {
+      subsEffectiveScope = GlobalSearchScope.fileScope(contextFile);
+    }
+    else {
+      subsEffectiveScope = searchScope;
+    }
     for (String subName : subNames) {
-      if (!PerlSubUtil.processRelatedItems(project, searchScope, PerlPackageUtil.join(namespaceName, subName), processorWrapper)) {
+      if (!PerlSubUtil.processRelatedItems(project, subsEffectiveScope, PerlPackageUtil.join(namespaceName, subName), processorWrapper)) {
         return false;
       }
     }

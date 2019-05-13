@@ -17,6 +17,7 @@
 package resolve;
 
 import base.PerlLightTestCase;
+import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.internals.PerlVersion;
 
 
@@ -24,6 +25,17 @@ public class PerlResolveTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/resolve/perl";
+  }
+
+  public void testSimpleMainTrue() {doTestSimpleMain(true);}
+
+  public void testSimpleMainFalse() {doTestSimpleMain(false);}
+
+  private void doTestSimpleMain(boolean value) {
+    myFixture.copyFileToProject("simpleMain2.pl");
+    initWithFileSmartWithoutErrors("simpleMain");
+    PerlSharedSettings.getInstance(getProject()).SIMPLE_MAIN_RESOLUTION = value;
+    checkSerializedReferencesWithFile();
   }
 
   public void testLog4perl() {

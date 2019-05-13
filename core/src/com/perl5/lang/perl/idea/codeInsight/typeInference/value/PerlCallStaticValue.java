@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -90,12 +90,10 @@ public final class PerlCallStaticValue extends PerlCallValue {
                                        @NotNull Set<String> namespaceNames,
                                        @NotNull Set<String> subNames,
                                        @NotNull Processor<? super PsiNamedElement> processor) {
-
     for (String contextNamespace : namespaceNames) {
       ProcessingContext processingContext = new ProcessingContext();
       processingContext.processBuiltIns = !myHasExplicitNamespace;
-
-      if (!processItemsInNamespace(project, searchScope, subNames, processor, contextNamespace, processingContext)) {
+      if (!processItemsInNamespace(project, searchScope, subNames, processor, contextNamespace, processingContext, contextElement)) {
         return false;
       }
     }

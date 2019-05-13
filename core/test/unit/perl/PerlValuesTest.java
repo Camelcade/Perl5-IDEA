@@ -18,6 +18,7 @@ package unit.perl;
 
 import base.PerlLightTestCase;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
+import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 
 
 public class PerlValuesTest extends PerlLightTestCase {
@@ -66,6 +67,7 @@ public class PerlValuesTest extends PerlLightTestCase {
   public void testSubExtractorIndirect() {doTest();}
 
   public void testSubExtractorIndirectOtherFile() {
+    PerlSharedSettings.getInstance(getProject()).SIMPLE_MAIN_RESOLUTION = false;
     myFixture.copyFileToProject("extractorFunctions.pl");
     CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
     doTest();

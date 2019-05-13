@@ -1,0 +1,9 @@
+sub somesub{
+
+}
+
+sub somedeclaration();
+
+somesub();
+someothersub();
+somedeclaration();
