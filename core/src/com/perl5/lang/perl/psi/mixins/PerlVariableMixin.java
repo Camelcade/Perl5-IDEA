@@ -97,7 +97,7 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
     }
 
     PerlValue inferredValue = PerlResolveUtil.inferVariableValue(this);
-    if (!inferredValue.isEmpty()) {
+    if (!inferredValue.isUnknown()) {
       return inferredValue;
     }
 

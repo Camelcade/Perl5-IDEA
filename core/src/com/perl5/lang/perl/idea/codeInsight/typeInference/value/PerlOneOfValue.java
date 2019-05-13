@@ -156,7 +156,7 @@ public final class PerlOneOfValue extends PerlValue implements Iterable<PerlValu
     Builder builder = builder();
     for (PerlValue variant : myVariants) {
       PerlValue convertedValue = converter.apply(variant);
-      if (convertedValue.isEmpty()) {
+      if (convertedValue.isUnknown()) {
         return UNKNOWN_VALUE;
       }
       builder.addVariant(convertedValue);

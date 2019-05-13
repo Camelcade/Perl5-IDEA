@@ -109,7 +109,7 @@ public class PerlVariableDeclarationElementMixin extends PerlStubBasedPsiElement
   @Override
   public PerlValue getDeclaredValue() {
     PerlValue valueFromAnnotations = PerlVariableDeclarationElement.super.getDeclaredValue();
-    if (!valueFromAnnotations.isEmpty()) {
+    if (!valueFromAnnotations.isUnknown()) {
       return valueFromAnnotations;
     }
     return getPsiDeclaredValue();

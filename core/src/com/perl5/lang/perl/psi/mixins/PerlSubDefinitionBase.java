@@ -81,7 +81,7 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
   @Override
   public PerlValue getReturnValueFromCode() {
     PerlValue returnValue = PerlSubDefinitionElement.super.getReturnValueFromCode();
-    if (!returnValue.isEmpty()) {
+    if (!returnValue.isUnknown()) {
       return returnValue;
     }
     PerlSubDefinitionStub greenStub = getGreenStub();

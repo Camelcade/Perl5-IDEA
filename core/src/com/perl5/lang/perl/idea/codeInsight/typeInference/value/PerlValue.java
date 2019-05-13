@@ -72,7 +72,7 @@ public abstract class PerlValue {
    */
   @NotNull
   public final PerlValue resolve(@NotNull PsiElement contextElement, @NotNull Map<PerlValue, PerlValue> substitutions) {
-    if (isEmpty() || isDeterministic()) {
+    if (isUnknown() || isDeterministic()) {
       return this;
     }
     PerlValue substitution = substitutions.get(this);
@@ -105,7 +105,7 @@ public abstract class PerlValue {
     return Collections.emptySet();
   }
 
-  public final boolean isEmpty() {
+  public final boolean isUnknown() {
     return this == UNKNOWN_VALUE;
   }
 
@@ -147,7 +147,7 @@ public abstract class PerlValue {
    */
   @NotNull
   public final PerlValue getScalarRepresentation() {
-    if (isEmpty()) {
+    if (isUnknown()) {
       return UNKNOWN_VALUE;
     }
     if (getContextType() == PerlContextType.SCALAR) {
@@ -229,7 +229,7 @@ public abstract class PerlValue {
    */
   @NotNull
   public final PerlValue getArrayElement(@NotNull PerlValue arrayIndex) {
-    if (arrayIndex.isEmpty() || arrayIndex == UNDEF_VALUE) {
+    if (arrayIndex.isUnknown() || arrayIndex == UNDEF_VALUE) {
       return UNKNOWN_VALUE;
     }
     return convert(it -> createArrayElement(arrayIndex));
@@ -245,7 +245,7 @@ public abstract class PerlValue {
    */
   @NotNull
   public final PerlValue getHashElement(@NotNull PerlValue hashKey) {
-    if (hashKey.isEmpty() || hashKey == UNDEF_VALUE) {
+    if (hashKey.isUnknown() || hashKey == UNDEF_VALUE) {
       return UNKNOWN_VALUE;
     }
     return convert(hash -> hash.createHashElement(hashKey));
@@ -269,7 +269,7 @@ public abstract class PerlValue {
    * @return true iff {@code type}is null or {@link PerlValues#UNKNOWN_VALUE}
    */
   @Contract("null->true")
-  public static boolean isEmpty(@Nullable PerlValue type) {
+  public static boolean isUnknown(@Nullable PerlValue type) {
     return type == null || type == UNKNOWN_VALUE;
   }
 
@@ -278,7 +278,7 @@ public abstract class PerlValue {
    */
   @Contract("null->false")
   public static boolean isNotEmpty(@Nullable PerlValue type) {
-    return !isEmpty(type);
+    return !isUnknown(type);
   }
 
   @NotNull
@@ -316,7 +316,7 @@ public abstract class PerlValue {
    */
   @NotNull
   public static AtomicNotNullLazyValue<PerlValue> lazy(@NotNull PerlValue value) {
-    return value.isEmpty() ? UNKNOWN_VALUE_PROVIDER : AtomicNotNullLazyValue.createValue(() -> value);
+    return value.isUnknown() ? UNKNOWN_VALUE_PROVIDER : AtomicNotNullLazyValue.createValue(() -> value);
   }
 
   /**

@@ -39,7 +39,7 @@ public final class PerlDeferredHashValue extends PerlMapValue {
   @Override
   protected PerlValue createHashElement(@NotNull PerlValue hashKey) {
     PerlValue element = hashKey.convertStrict(this::tryGet);
-    return !element.isEmpty() ? element : super.createHashElement(hashKey);
+    return !element.isUnknown() ? element : super.createHashElement(hashKey);
   }
 
   /**
@@ -47,7 +47,7 @@ public final class PerlDeferredHashValue extends PerlMapValue {
    */
   @NotNull
   public PerlValue tryGet(@NotNull PerlValue key) {
-    if (key.isEmpty()) {
+    if (key.isUnknown()) {
       return UNKNOWN_VALUE;
     }
     List<PerlValue> elements = getElements();

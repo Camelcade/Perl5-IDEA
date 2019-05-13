@@ -79,7 +79,7 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator {
           code.append("#@method\n");
         }
         PerlValue returnValue = annotations.getReturnValue();
-        if (!returnValue.isEmpty()) {
+        if (!returnValue.isUnknown()) {
           code.append("#@returns ");
           code.append(returnValue.toCode());
           code.append("\n");
