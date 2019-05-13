@@ -242,7 +242,7 @@ public abstract class PerlValue {
   }
 
   /**
-   * @return a value representing array element from current value. Deterministic if possible
+   * @return a value representing array element from current value.
    */
   @NotNull
   public final PerlValue getArrayElement(@NotNull PerlValue arrayIndex) {
@@ -258,7 +258,7 @@ public abstract class PerlValue {
   }
 
   /**
-   * @return a value representing hash element from current value. Deterministic if possible
+   * @return a value representing hash element from current value.
    */
   @NotNull
   public final PerlValue getHashElement(@NotNull PerlValue hashKey) {
