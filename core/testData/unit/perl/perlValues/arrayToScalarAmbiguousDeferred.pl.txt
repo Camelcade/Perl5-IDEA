@@ -12,5 +12,5 @@ Array(one, two, three)]
 ----------
 Resolved
 ----------
-scalar OneOf[Array(Value unknown),
-Array(one, two, three)]
+OneOf[3,
+scalar Array(Value unknown)]

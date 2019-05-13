@@ -1,0 +1,23 @@
+if( $a ){
+  @array = qw/one two/;
+  $index = 1;
+}
+else{
+  @array = qw/three four/;
+  $index = 2;
+}
+
+$var = $array[$index];
+
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 124 in arrayElementOneOf.pl
+OneOf[ArrayItem: Array: [one, two][OneOf: [1, 2]],
+ArrayItem: Array: [three, four][OneOf: [1, 2]]]
+----------
+Resolved
+----------
+OneOf[four,
+two,
+undef]

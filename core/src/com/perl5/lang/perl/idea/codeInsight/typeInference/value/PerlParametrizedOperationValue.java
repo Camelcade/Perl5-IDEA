@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,7 +50,8 @@ abstract class PerlParametrizedOperationValue extends PerlOperationValue {
   final protected PerlValue computeResolve(@NotNull PsiElement contextElement,
                                            @NotNull PerlValue resolvedBaseValue,
                                            @NotNull Map<PerlValue, PerlValue> substitutions) {
-    return computeResolve(contextElement, resolvedBaseValue, myParameter.resolve(contextElement, substitutions), substitutions);
+    return myParameter.resolve(contextElement, substitutions).convert(
+      it -> computeResolve(contextElement, resolvedBaseValue, it, substitutions));
   }
 
   @NotNull

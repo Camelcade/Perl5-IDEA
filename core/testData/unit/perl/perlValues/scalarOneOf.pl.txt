@@ -1,0 +1,24 @@
+sub producer{
+  return @_;
+}
+
+if( $a ){
+  @array = producer qw/one two/;
+}
+else{
+  @array = producer qw/three four five/;
+}
+
+$var = scalar @array;
+
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 148 in scalarOneOf.pl
+scalar OneOf[Array(main::producer(one, two)),
+Array(main::producer(three, four, five))]
+----------
+Resolved
+----------
+OneOf[2,
+3]
