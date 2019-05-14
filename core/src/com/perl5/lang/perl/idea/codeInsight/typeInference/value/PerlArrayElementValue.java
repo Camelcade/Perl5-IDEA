@@ -56,7 +56,7 @@ public final class PerlArrayElementValue extends PerlParametrizedOperationValue 
       return UNKNOWN_VALUE;
     }
     List<PerlValue> arrayElements = ((PerlListValue)resolvedArrayValue).getElements();
-    if (Math.abs(indexValue) >= arrayElements.size()) {
+    if (indexValue >= arrayElements.size() || indexValue < -arrayElements.size()) {
       return UNDEF_VALUE;
     }
     return indexValue > -1 ? arrayElements.get(indexValue) : arrayElements.get(arrayElements.size() + indexValue);

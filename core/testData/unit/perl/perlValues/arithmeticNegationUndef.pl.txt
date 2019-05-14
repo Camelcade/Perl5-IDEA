@@ -1,0 +1,15 @@
+sub negate{
+  return -$_[$_[0]];
+}
+
+my $var = negate(2, undef);
+
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 65 in arithmeticNegationUndef.pl
+scalar main::negate(2, undef)
+----------
+Resolved
+----------
+Value unknown

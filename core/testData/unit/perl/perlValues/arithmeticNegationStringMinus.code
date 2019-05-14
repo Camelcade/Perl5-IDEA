@@ -1,0 +1,7 @@
+sub negate{
+  return -$_[$_[0]];
+}
+
+my $var = negate(2, undef, "-text");
+
+$v<caret>ar;

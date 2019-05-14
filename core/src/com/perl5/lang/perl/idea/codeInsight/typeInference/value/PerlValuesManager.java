@@ -80,6 +80,10 @@ public final class PerlValuesManager {
   static final int HASH_CAST_ID = id++;
   static final int DELETE_ID = id++;
 
+  static final int ARITHMETIC_NEGATION = id++;
+  static final int LOGICAL_NEGATION = id++;
+  static final int BITWISE_NEGATION = id++;
+
   static final int REFERENCE_ID = id++;
   static final int BLESSED_ID = id++;
 
@@ -152,6 +156,9 @@ public final class PerlValuesManager {
     }
     else if (valueId == HASH_ELEMENT_VALUE) {
       return new PerlHashElementValue(dataStream);
+    }
+    else if (valueId == ARITHMETIC_NEGATION) {
+      return new PerlArithmeticNegationValue(dataStream);
     }
     throw new RuntimeException("Don't know how to deserialize a value: " + valueId);
   }
@@ -227,6 +234,16 @@ public final class PerlValuesManager {
     }
     else if (elementType == NUMBER_CONSTANT) {
       return PerlScalarValue.create(element.getText());
+    }
+    else if (element instanceof PsiPerlPrefixUnaryExpr) {
+      PsiPerlExpr target = ((PsiPerlPrefixUnaryExpr)element).getExpr();
+      IElementType firstChildElementType = PsiUtilCore.getElementType(element.getFirstChild());
+      if (firstChildElementType == OPERATOR_MINUS) {
+        return from(target).getArithmeticNegation();
+      }
+      else if (firstChildElementType == OPERATOR_PLUS) {
+        return from(target);
+      }
     }
     else if (element instanceof PsiPerlRefExpr) {
       return from(((PsiPerlRefExpr)element).getExpr()).getReference();

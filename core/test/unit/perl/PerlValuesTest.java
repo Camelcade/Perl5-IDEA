@@ -27,6 +27,18 @@ public class PerlValuesTest extends PerlLightTestCase {
     return "testData/unit/perl/perlValues";
   }
 
+  public void testArithmeticNegation() {doTest();}
+
+  public void testArithmeticNegationDouble() {doTest();}
+
+  public void testArithmeticNegationString() {doTest();}
+
+  public void testArithmeticNegationStringMinus() {doTest();}
+
+  public void testArithmeticNegationStringPlus() {doTest();}
+
+  public void testArithmeticNegationUndef() {doTest();}
+
   public void testScalarOneOf() {doTest();}
 
   public void testArrayElementOneOf() { doTest(); }

@@ -1,0 +1,5 @@
+sub so<caret>me{
+  return +$_[$_[0]];
+}
+----------
+ArrayItem: SUB_ARGUMENTS[ArrayItem: SUB_ARGUMENTS[0]]

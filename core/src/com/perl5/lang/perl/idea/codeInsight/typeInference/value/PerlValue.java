@@ -258,6 +258,19 @@ public abstract class PerlValue {
   }
 
   /**
+   * @return a value representing arithmetic negation of current value.
+   */
+  @NotNull
+  public final PerlValue getArithmeticNegation() {
+    return convert(PerlValue::createArithmeticNegation);
+  }
+
+  @NotNull
+  protected PerlValue createArithmeticNegation() {
+    return new PerlArithmeticNegationValue(this);
+  }
+
+  /**
    * @return a value representing hash element from current value.
    */
   @NotNull

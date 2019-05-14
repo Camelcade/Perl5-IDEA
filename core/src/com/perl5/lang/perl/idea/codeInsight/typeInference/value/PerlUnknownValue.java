@@ -43,6 +43,12 @@ final class PerlUnknownValue extends PerlSpecialValue {
 
   @NotNull
   @Override
+  protected PerlValue createArithmeticNegation() {
+    return UNKNOWN_VALUE;
+  }
+
+  @NotNull
+  @Override
   protected PerlValue createReference() {
     return UNKNOWN_VALUE;
   }
