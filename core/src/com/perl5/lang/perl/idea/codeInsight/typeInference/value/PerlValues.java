@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,7 +38,5 @@ public interface PerlValues {
   /**
    * Handy predefined value, that return first argument
    */
-  PerlValue RETURN_FIRST_ARGUMENT_VALUE = PerlValuesManager.intern(PerlArrayElementValue.create(
-    ARGUMENTS_VALUE, PerlScalarValue.create("0")
-  ));
+  PerlValue RETURN_FIRST_ARGUMENT_VALUE = PerlValuesManager.intern(ARGUMENTS_VALUE.getArrayElement(PerlScalarValue.create("0")));
 }
