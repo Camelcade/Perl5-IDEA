@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,10 +24,14 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public final class PerlArrayValue extends PerlListValue {
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNDEF_VALUE;
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
+
+public final class PerlArrayValue extends PerlListValue implements Iterable<PerlValue> {
   private static final Logger LOG = Logger.getInstance(PerlArrayValue.class);
   public static final PerlArrayValue EMPTY_ARRAY = PerlValuesManager.intern(new PerlArrayValue(Collections.emptyList()));
 
@@ -42,6 +46,31 @@ public final class PerlArrayValue extends PerlListValue {
   @Override
   protected boolean computeIsDeterministic() {
     return isDeterministic(getElements());
+  }
+
+  @NotNull
+  @Override
+  public Iterator iterator() {
+    return getElements().iterator();
+  }
+
+  @NotNull
+  public PerlValue get(@NotNull PerlValue indexValue) {
+    if (!(indexValue instanceof PerlScalarValue) || !isDeterministic()) {
+      return UNKNOWN_VALUE;
+    }
+    int index;
+    try {
+      index = Integer.valueOf(((PerlScalarValue)indexValue).getValue());
+    }
+    catch (NumberFormatException ignore) {
+      return UNKNOWN_VALUE;
+    }
+    List<PerlValue> arrayElements = getElements();
+    if (index >= arrayElements.size() || index < -arrayElements.size()) {
+      return UNDEF_VALUE;
+    }
+    return index > -1 ? arrayElements.get(index) : arrayElements.get(arrayElements.size() + index);
   }
 
   @NotNull
