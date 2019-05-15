@@ -1,0 +1,13 @@
+@array = qw/ one two three four/;
+
+@other = @array[0, -2, 2];
+
+@ot<caret>her;
+----------
+@other
+PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 63 in arraySliceMulti.pl
+Array(ArraySlice: Array: [one, two, three, four][Array: [0, -2, 2]])
+----------
+Resolved
+----------
+Array(one, three, three)

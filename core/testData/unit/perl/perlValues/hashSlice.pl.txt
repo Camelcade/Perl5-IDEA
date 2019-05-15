@@ -1,0 +1,13 @@
+%hash = qw/ one two three four/;
+
+@other = @hash{one};
+
+@ot<caret>her;
+----------
+@other
+PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 56 in hashSlice.pl
+Array(HashSlice: Hash: [one, two, three, four]{one})
+----------
+Resolved
+----------
+Array(two)

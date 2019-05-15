@@ -1,0 +1,5 @@
+sub so<caret>me{
+  @_[$_[0], $_[-1]];
+}
+----------
+ArraySlice: SUB_ARGUMENTS[Array: [ArrayItem: SUB_ARGUMENTS[0], ArrayItem: SUB_ARGUMENTS[-1]]]

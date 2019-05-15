@@ -1,0 +1,12 @@
+if( $a ){
+  @array = qw/ one two three four/;
+  @indexes = (0, -2, 2);
+}
+else{
+  @array = qw/ five six/;
+  @indexes = (1);
+}
+
+@other = @array[@indexes];
+
+@ot<caret>her;

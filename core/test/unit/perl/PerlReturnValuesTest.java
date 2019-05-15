@@ -25,6 +25,14 @@ public class PerlReturnValuesTest extends PerlLightTestCase {
     return "testData/unit/perl/returnValues";
   }
 
+  public void testArraySliceSingle() {doTest();}
+
+  public void testArraySliceMulti() {doTest();}
+
+  public void testHashSliceSingle() {doTest();}
+
+  public void testHashSliceMulti() {doTest();}
+
   public void testArithmeticNegation() {doTest();}
 
   public void testArithmeticNegationDouble() {doTest();}

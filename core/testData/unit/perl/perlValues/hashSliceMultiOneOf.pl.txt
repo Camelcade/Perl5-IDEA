@@ -1,0 +1,23 @@
+if( $a ){
+  %hash = qw/ one two three four five six/;
+  @keys = qw/one three/;
+}
+else{
+  %hash = qw/ one 1 three 3 five 6/;
+  @keys = qw/five one/;
+}
+
+@other = @hash{@keys};
+
+@ot<caret>her;
+----------
+@other
+PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 175 in hashSliceMultiOneOf.pl
+Array(HashSlice: OneOf: [Hash: [one, 1, three, 3, five, 6], Hash: [one, two, three, four, five, six]]{OneOf: [Array: [five, one], Array: [one, three]]})
+----------
+Resolved
+----------
+Array(OneOf[Array(1, 3),
+Array(6, 1),
+Array(six, two),
+Array(two, four)])

@@ -1,0 +1,23 @@
+if( $a ){
+  @array = qw/ one two three four/;
+  @indexes = (0, -2, 2);
+}
+else{
+  @array = qw/ five six/;
+  @indexes = (1);
+}
+
+@other = @array[@indexes];
+
+@ot<caret>her;
+----------
+@other
+PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 154 in arraySliceMultiOneOf.pl
+Array(ArraySlice: OneOf: [Array: [five, six], Array: [one, two, three, four]][OneOf: [Array: [0, -2, 2], Array: [1]]])
+----------
+Resolved
+----------
+Array(OneOf[Array(five, five, undef),
+Array(one, three, three),
+Array(six),
+Array(two)])

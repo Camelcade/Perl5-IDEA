@@ -1,0 +1,5 @@
+@array = qw/ one two three four/;
+
+@other = @array[0, -2, 2];
+
+@ot<caret>her;

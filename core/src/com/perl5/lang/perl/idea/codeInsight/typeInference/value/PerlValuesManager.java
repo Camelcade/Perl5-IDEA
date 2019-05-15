@@ -160,6 +160,12 @@ public final class PerlValuesManager {
     else if (valueId == ARITHMETIC_NEGATION) {
       return new PerlArithmeticNegationValue(dataStream);
     }
+    else if (valueId == ARRAY_SLICE_ID) {
+      return new PerlArraySliceValue(dataStream);
+    }
+    else if (valueId == HASH_SLICE_ID) {
+      return new PerlHashSliceValue(dataStream);
+    }
     throw new RuntimeException("Don't know how to deserialize a value: " + valueId);
   }
 
@@ -255,6 +261,16 @@ public final class PerlValuesManager {
     else if (element instanceof PsiPerlArrayElement) {
       return from(((PsiPerlArrayElement)element).getExpr()).getArrayElement(
         from(((PsiPerlArrayElement)element).getArrayIndex().getExpr()));
+    }
+    else if (element instanceof PsiPerlHashSlice) {
+      return from(((PsiPerlHashSlice)element).getExpr()).getHashSlice(
+        from(((PsiPerlHashSlice)element).getHashIndex().getExpr())
+      );
+    }
+    else if (element instanceof PsiPerlArraySlice) {
+      return from(((PsiPerlArraySlice)element).getExpr()).getArraySlice(
+        from(((PsiPerlArraySlice)element).getArrayIndex().getExpr())
+      );
     }
     return UNKNOWN_VALUE;
   }

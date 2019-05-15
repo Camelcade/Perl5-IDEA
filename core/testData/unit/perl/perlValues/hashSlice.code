@@ -1,0 +1,5 @@
+%hash = qw/ one two three four/;
+
+@other = @hash{one};
+
+@ot<caret>her;

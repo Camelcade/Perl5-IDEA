@@ -47,6 +47,18 @@ final class PerlUndefValue extends PerlSpecialValue {
 
   @NotNull
   @Override
+  protected PerlValue createArraySlice(@NotNull PerlValue indexesValue) {
+    return UNKNOWN_VALUE;
+  }
+
+  @NotNull
+  @Override
+  protected PerlValue createHashSlice(@NotNull PerlValue keysValue) {
+    return UNKNOWN_VALUE;
+  }
+
+  @NotNull
+  @Override
   protected PerlValue createHashElement(@NotNull PerlValue hashKey) {
     return UNKNOWN_VALUE;
   }

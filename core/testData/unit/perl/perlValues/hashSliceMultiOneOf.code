@@ -1,0 +1,12 @@
+if( $a ){
+  %hash = qw/ one two three four five six/;
+  @keys = qw/one three/;
+}
+else{
+  %hash = qw/ one 1 three 3 five 6/;
+  @keys = qw/five one/;
+}
+
+@other = @hash{@keys};
+
+@ot<caret>her;

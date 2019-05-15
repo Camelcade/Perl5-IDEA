@@ -49,6 +49,18 @@ final class PerlUnknownValue extends PerlSpecialValue {
 
   @NotNull
   @Override
+  protected PerlValue createArraySlice(@NotNull PerlValue indexesValue) {
+    return UNKNOWN_VALUE;
+  }
+
+  @NotNull
+  @Override
+  protected PerlValue createHashSlice(@NotNull PerlValue keysValue) {
+    return UNKNOWN_VALUE;
+  }
+
+  @NotNull
+  @Override
   protected PerlValue createReference() {
     return UNKNOWN_VALUE;
   }
