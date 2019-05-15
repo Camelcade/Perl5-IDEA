@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubInputStream;
@@ -146,6 +147,7 @@ public final class PerlOneOfValue extends PerlValue implements Iterable<PerlValu
 
   @Override
   public PerlValue convert(@NotNull Function<PerlValue, PerlValue> converter) {
+    ProgressManager.checkCanceled();
     Builder builder = builder();
     myVariants.forEach(it -> builder.addVariant(converter.apply(it)));
     return builder.build();
@@ -153,6 +155,7 @@ public final class PerlOneOfValue extends PerlValue implements Iterable<PerlValu
 
   @Override
   public PerlValue convertStrict(@NotNull Function<PerlValue, PerlValue> converter) {
+    ProgressManager.checkCanceled();
     Builder builder = builder();
     for (PerlValue variant : myVariants) {
       PerlValue convertedValue = converter.apply(variant);
