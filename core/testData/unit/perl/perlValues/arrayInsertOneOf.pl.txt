@@ -1,0 +1,20 @@
+if( $a ){
+  @array = qw/one/;
+}
+else{
+  @array = qw/three four/;
+}
+
+@result = ('five', @array => 6);
+
+@re<caret>sult;
+----------
+@result
+PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 102 in arrayInsertOneOf.pl
+Array(five, OneOf[Array(one),
+Array(three, four)], 6)
+----------
+Resolved
+----------
+Array(five, OneOf[Array(one),
+Array(three, four)], 6)

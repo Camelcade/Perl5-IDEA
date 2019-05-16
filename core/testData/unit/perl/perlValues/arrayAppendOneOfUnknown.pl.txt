@@ -1,0 +1,20 @@
+if( $a ){
+  @array = Foo::Bar::->baz();
+}
+else{
+  @array = qw/three four/;
+}
+
+@result = (five => 6, @array);
+
+@re<caret>sult;
+----------
+@result
+PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 110 in arrayAppendOneOfUnknown.pl
+Array(five, 6, OneOf[Array(Foo::Bar->baz()),
+Array(three, four)])
+----------
+Resolved
+----------
+Array(five, 6, OneOf[Array(Value unknown),
+Array(three, four)])

@@ -1,0 +1,10 @@
+if( $a ){
+  @array = qw/one/;
+}
+else{
+  @array = qw/three four/;
+}
+
+@result = ('five', @array => 6);
+
+@re<caret>sult;
