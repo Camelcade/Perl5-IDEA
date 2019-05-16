@@ -19,4 +19,6 @@ ArrayItem: Array: [ArraySlice: OneOf: [Array: [five, six], Array: [one, two, thr
 ----------
 Resolved
 ----------
-undef
+OneOf[five,
+three,
+undef]

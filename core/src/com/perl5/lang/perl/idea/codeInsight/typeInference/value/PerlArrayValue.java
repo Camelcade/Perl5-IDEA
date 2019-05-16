@@ -19,13 +19,12 @@ package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubInputStream;
+import com.intellij.util.SmartList;
 import com.perl5.PerlBundle;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNDEF_VALUE;
@@ -66,11 +65,38 @@ public final class PerlArrayValue extends PerlListValue implements Iterable<Perl
     catch (NumberFormatException ignore) {
       return UNKNOWN_VALUE;
     }
-    List<PerlValue> arrayElements = getElements();
-    if (index >= arrayElements.size() || index < -arrayElements.size()) {
-      return UNDEF_VALUE;
+
+    return doComputeGet(index < 0 ? getElements().size() - 1 : 0,
+                        new ElementSearchState(index, index < 0 ? -1 : 0, index < 0 ? -1 : 1)).buildValue();
+  }
+
+  /**
+   * Attempts to collect all variants of element at {@code targetIndex}. This method is recursive.
+   *
+   * @param realElementOffset current element offset in {@link #getElements()}
+   * @return adjusted search state
+   */
+  @NotNull
+  private ElementSearchState doComputeGet(int realElementOffset, @NotNull ElementSearchState searchState) {
+    List<PerlValue> elements = getElements();
+
+    if (searchState.myStep < 0) {
+      for (int i = realElementOffset; i >= 0; i--) {
+        if (searchState.isFinished()) {
+          return searchState;
+        }
+        searchState.processValue(elements.get(i));
+      }
     }
-    return index > -1 ? arrayElements.get(index) : arrayElements.get(arrayElements.size() + index);
+    else {
+      for (int i = realElementOffset; i < elements.size(); i++) {
+        if (searchState.isFinished()) {
+          return searchState;
+        }
+        searchState.processValue(elements.get(i));
+      }
+    }
+    return searchState;
   }
 
   @NotNull
@@ -121,6 +147,99 @@ public final class PerlArrayValue extends PerlListValue implements Iterable<Perl
 
     PerlArrayValue build() {
       return myElements.isEmpty() ? EMPTY_ARRAY : new PerlArrayValue(myElements);
+    }
+  }
+
+  private static class ElementSearchState {
+    private final int myStep;
+    @NotNull
+    private Set<PerlValue> myFoundValues = new HashSet<>();
+    @NotNull
+    private Set<Integer> myReachedOffsets = new HashSet<>();
+    @NotNull
+    private Integer myTargetOffset;
+
+    public ElementSearchState(int targetOffset, int virtualOffset, int step) {
+      myTargetOffset = targetOffset;
+      myReachedOffsets.add(virtualOffset);
+      this.myStep = step;
+    }
+
+    private ElementSearchState(@NotNull ElementSearchState state) {
+      myReachedOffsets.addAll(state.myReachedOffsets);
+      myTargetOffset = state.myTargetOffset;
+      myStep = state.myStep;
+    }
+
+    public boolean isFinished() {
+      return myReachedOffsets.isEmpty();
+    }
+
+    public void processValue(@NotNull PerlValue value) {
+      if (value.isUnknown()) {
+        addValue(UNKNOWN_VALUE);
+        myReachedOffsets.clear();
+      }
+      else if (value instanceof PerlScalarValue || value.isUndef()) {
+        SmartList<Integer> newOffsets = new SmartList<>();
+        for (Integer offset : myReachedOffsets) {
+          if (offset.equals(myTargetOffset)) {
+            addValue(value);
+          }
+          else {
+            newOffsets.add(offset + myStep);
+          }
+        }
+        myReachedOffsets.clear();
+        myReachedOffsets.addAll(newOffsets);
+      }
+      else if (value instanceof PerlArrayValue) {
+        ((PerlArrayValue)value).doComputeGet(0, this);
+      }
+      else if (value instanceof PerlOneOfValue) {
+        List<ElementSearchState> states = new SmartList<>();
+        ((PerlOneOfValue)value).forEach(it -> {
+          ElementSearchState childState = new ElementSearchState(this);
+          childState.processValue(it);
+          states.add(childState);
+        });
+        myReachedOffsets.clear();
+        states.forEach(it -> {
+          myReachedOffsets.addAll(it.myReachedOffsets);
+          myFoundValues.addAll(it.myFoundValues);
+        });
+      }
+    }
+
+    @NotNull
+    public Set<Integer> getOffsets() {
+      return Collections.unmodifiableSet(myReachedOffsets);
+    }
+
+    public void setOffsets(@NotNull Collection<Integer> offsets) {
+      myReachedOffsets.clear();
+      myReachedOffsets.addAll(offsets);
+    }
+
+    public void addValue(@NotNull PerlValue value) {
+      myFoundValues.add(value);
+    }
+
+    @NotNull
+    public PerlValue buildValue() {
+      if (myFoundValues.size() == 1 && myReachedOffsets.isEmpty()) {
+        return myFoundValues.iterator().next();
+      }
+      if (myFoundValues.isEmpty() && !myReachedOffsets.isEmpty()) {
+        return UNDEF_VALUE;
+      }
+
+      PerlOneOfValue.Builder resultBuilder = PerlOneOfValue.builder();
+      myFoundValues.forEach(resultBuilder::addVariant);
+      if (!myReachedOffsets.isEmpty()) {
+        resultBuilder.addVariant(UNDEF_VALUE);
+      }
+      return resultBuilder.build();
     }
   }
 }
