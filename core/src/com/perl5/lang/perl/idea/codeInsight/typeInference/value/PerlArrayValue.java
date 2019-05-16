@@ -50,7 +50,7 @@ public final class PerlArrayValue extends PerlListValue implements Iterable<Perl
 
   @NotNull
   @Override
-  public Iterator iterator() {
+  public Iterator<PerlValue> iterator() {
     return getElements().iterator();
   }
 
