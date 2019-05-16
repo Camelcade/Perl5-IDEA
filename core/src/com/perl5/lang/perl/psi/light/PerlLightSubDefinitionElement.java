@@ -24,6 +24,7 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimpleDynamicLocation;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
@@ -220,7 +221,7 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
   }
 
   public void setReturnValueFromCode(@NotNull PerlValue returnValueFromCode) {
-    myReturnValueFromCodeProvider = PerlValue.lazy(returnValueFromCode);
+    myReturnValueFromCodeProvider = PerlValuesManager.lazy(returnValueFromCode);
   }
 
   @Nullable

@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.openapi.util.RecursionManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubInputStream;
@@ -29,7 +30,9 @@ import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.containers.WeakInterner;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
+import com.perl5.lang.perl.psi.utils.PerlContextType;
 import com.perl5.lang.perl.util.PerlArrayUtil;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -287,5 +290,70 @@ public final class PerlValuesManager {
         }
         return CachedValueProvider.Result.create(intern(computedValue), element.getContainingFile());
       });
+  }
+
+  /**
+   * @return true iff {@code type}is null or {@link PerlValues#UNKNOWN_VALUE}
+   */
+  @Contract("null->true")
+  public static boolean isUnknown(@Nullable PerlValue type) {
+    return type == null || type == UNKNOWN_VALUE;
+  }
+
+  /**
+   * @return true iff {@code} type is not empty and not {@link PerlValues#UNKNOWN_VALUE}
+   */
+  @Contract("null->false")
+  public static boolean isNotEmpty(@Nullable PerlValue type) {
+    return !isUnknown(type);
+  }
+
+  @NotNull
+  public static PerlValue from(@NotNull PsiElement target,
+                               @Nullable PerlAssignExpression.PerlAssignValueDescriptor assignValueDescriptor) {
+    if (assignValueDescriptor == null) {
+      return UNKNOWN_VALUE;
+    }
+    List<PsiElement> elements = assignValueDescriptor.getElements();
+    PerlContextType targetContextType = PerlContextType.from(target);
+    if (targetContextType == PerlContextType.SCALAR) {
+      // fixme otherwise we should createa list/extract subelement
+      if (elements.size() == 1) {
+        if ((PerlContextType.from(elements.get(0)) == PerlContextType.SCALAR || assignValueDescriptor.getStartIndex() == -1)) {
+          return from(elements.get(0)).getScalarRepresentation();
+        }
+      }
+      else if (elements.size() > 1) {
+        LOG.error("Can't be: " + target + "; " + assignValueDescriptor);
+      }
+    }
+    else if (targetContextType == PerlContextType.LIST &&
+             assignValueDescriptor.getStartIndex() == 0) {
+      IElementType elementType = PsiUtilCore.getElementType(target);
+      if (elementType == HASH_VARIABLE || elementType == HASH_CAST_EXPR) {
+        return PerlMapValue.builder().addPsiElements(elements).build();
+      }
+      return PerlArrayValue.builder().addPsiElements(elements).build();
+    }
+    return UNKNOWN_VALUE;
+  }
+
+  /**
+   * @return {@code value} wrapped with atomic producer
+   */
+  @NotNull
+  public static AtomicNotNullLazyValue<PerlValue> lazy(@NotNull PerlValue value) {
+    return value.isUnknown() ? UNKNOWN_VALUE_PROVIDER : AtomicNotNullLazyValue.createValue(() -> value);
+  }
+
+  /**
+   * @return lazy-computable value for the {@code element}
+   */
+  @NotNull
+  public static AtomicNotNullLazyValue<PerlValue> lazy(@Nullable PsiElement element) {
+    if (element == null) {
+      return UNKNOWN_VALUE_PROVIDER;
+    }
+    return AtomicNotNullLazyValue.createValue(() -> from(element));
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -119,7 +119,7 @@ public final class PerlScalarValue extends PerlValue {
 
   @NotNull
   public static AtomicNotNullLazyValue<PerlValue> createLazy(@Nullable String value) {
-    return PerlValue.lazy(create(value));
+    return PerlValuesManager.lazy(create(value));
   }
 
   @NotNull

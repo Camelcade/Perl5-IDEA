@@ -512,7 +512,7 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
   @NotNull
   private static Collection<String> getVariantsFromPerlValueNamespaces(@NotNull PerlValuableEntity valuableEntity,
                                                                        @Nullable PerlValue perlValue) {
-    if (PerlValue.isUnknown(perlValue)) {
+    if (PerlValuesManager.isUnknown(perlValue)) {
       return Collections.emptyList();
     }
     Set<String> result = new LinkedHashSet<>();

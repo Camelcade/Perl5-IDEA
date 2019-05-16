@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,6 +27,7 @@ import com.intellij.util.ObjectUtils;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlScalarValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
 import com.perl5.lang.perl.parser.moose.stubs.PerlMooseAttributeWrapperStub;
 import com.perl5.lang.perl.psi.PerlSubExpr;
 import com.perl5.lang.perl.psi.PerlVisitor;
@@ -150,7 +151,7 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlMoos
     for (PsiElement identifier : lists.first) {
       AtomicNotNullLazyValue<PerlValue> valueProvider =
         subExpr != null ? PerlResolveUtil.computeReturnValueFromControlFlowLazy(subExpr) :
-        argument != null ? PerlValue.lazy(argument) : PerlScalarValue.createLazy(namespaceName);
+        argument != null ? PerlValuesManager.lazy(argument) : PerlScalarValue.createLazy(namespaceName);
       PerlLightMethodDefinitionElement<PerlMooseAttributeWrapper> newMethod = new PerlLightMethodDefinitionElement<>(
         this,
         ElementManipulators.getValueText(identifier),

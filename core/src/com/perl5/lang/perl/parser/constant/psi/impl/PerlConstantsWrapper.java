@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
 import com.perl5.lang.perl.parser.constant.psi.light.PerlLightConstantDefinitionElement;
 import com.perl5.lang.perl.psi.PsiPerlAnonHash;
 import com.perl5.lang.perl.psi.impl.PerlPolyNamedElementBase;
@@ -75,7 +75,7 @@ public class PerlConstantsWrapper extends PerlPolyNamedElementBase<PerlPolyNamed
           PerlPackageUtil.getContextNamespaceName(this),
           Collections.emptyList(),
           PerlSubAnnotations.tryToFindAnnotations(keyElement, getParent()),
-          PerlValue.lazy(valElement)
+          PerlValuesManager.lazy(valElement)
         ));
       }
 

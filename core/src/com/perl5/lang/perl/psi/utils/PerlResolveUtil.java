@@ -272,7 +272,7 @@ public class PerlResolveUtil {
           lexicalDeclaration != null &&
           (Objects.equals(lexicalDeclaration, assigneeDeclaration) || Objects.equals(lexicalDeclaration, assignee.getParent()))
       ) {
-        valueBuilder.addVariant(PerlValue.from(assignee, ((PerlAssignInstruction)currentInstruction).getRightSide()));
+        valueBuilder.addVariant(PerlValuesManager.from(assignee, ((PerlAssignInstruction)currentInstruction).getRightSide()));
       }
       return CONTINUE;
     });
