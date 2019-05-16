@@ -108,17 +108,19 @@ abstract class PerlListValue extends PerlValue {
     }
 
     public Self addPsiElements(@NotNull List<PsiElement> psiElements) {
-      return addElements(ContainerUtil.map(psiElements, PerlValuesManager::from));
+      psiElements.forEach(it -> addElement(PerlValuesManager.from(it)));
+      //noinspection unchecked
+      return (Self)this;
     }
 
     public Self addElements(@NotNull List<PerlValue> elements) {
-      elements.forEach(it -> myElements.addAll(it.getListRepresentation()));
+      elements.forEach(this::addElement);
       //noinspection unchecked
       return (Self)this;
     }
 
     public Self addElement(@NotNull PerlValue element) {
-      myElements.add(element);
+      myElements.addAll(element.getListRepresentation());
       //noinspection unchecked
       return (Self)this;
     }
