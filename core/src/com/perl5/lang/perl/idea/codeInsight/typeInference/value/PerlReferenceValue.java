@@ -53,6 +53,16 @@ public final class PerlReferenceValue extends PerlOperationValue {
 
   @NotNull
   @Override
+  protected PerlValue createScalarDereference() {
+    PerlValue value = getBaseValue();
+    if (value instanceof PerlScalarValue || value.isUndef() || value instanceof PerlReferenceValue) {
+      return value;
+    }
+    return super.createScalarDereference();
+  }
+
+  @NotNull
+  @Override
   public Set<String> getNamespaceNames() {
     return getTarget() instanceof PerlBlessedValue ? getTarget().getNamespaceNames() : Collections.emptySet();
   }

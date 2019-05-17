@@ -26,6 +26,8 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.util.*;
 
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
+
 abstract class PerlListValue extends PerlValue {
   @NotNull
   private final List<PerlValue> myElements;
@@ -63,6 +65,12 @@ abstract class PerlListValue extends PerlValue {
   @NotNull
   public final List<PerlValue> getElements() {
     return myElements;
+  }
+
+  @NotNull
+  @Override
+  protected PerlValue createScalarDereference() {
+    return UNKNOWN_VALUE;
   }
 
   @Override

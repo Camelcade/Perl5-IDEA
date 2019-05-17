@@ -1,0 +1,7 @@
+sub resolve{
+  return ${$_[0]};
+}
+
+$base = 42;
+$var = resolve \$base;
+$v<caret>ar;

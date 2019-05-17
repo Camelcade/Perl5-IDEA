@@ -31,6 +31,7 @@ import com.intellij.util.containers.WeakInterner;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.util.PerlArrayUtil;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -62,7 +63,7 @@ public final class PerlValuesManager {
   static final int ARGUMENTS_ID = id++;
   // primitives
   static final int SCALAR_ID = id++;
-  static final int SCALAR_CAST_ID = id++;
+  static final int SCALAR_DEREFERENCE_ID = id++;
   static final int SCALAR_CONTEXT_ID = id++;
   static final int STRINGIFY_ID = id++;
   static final int NUMIFY_ID = id++;
@@ -169,6 +170,9 @@ public final class PerlValuesManager {
     else if (valueId == HASH_SLICE_ID) {
       return new PerlHashSliceValue(dataStream);
     }
+    else if (valueId == SCALAR_DEREFERENCE_ID) {
+      return new PerlScalarDereferenceValue(dataStream);
+    }
     throw new RuntimeException("Don't know how to deserialize a value: " + valueId);
   }
 
@@ -274,6 +278,13 @@ public final class PerlValuesManager {
       return from(((PsiPerlArraySlice)element).getExpr()).getArraySlice(
         from(((PsiPerlArraySlice)element).getArrayIndex().getExpr())
       );
+    }
+    else if (element instanceof PsiPerlScalarCastExpr) {
+      PsiPerlExpr expr = ((PsiPerlScalarCastExpr)element).getExpr();
+      if (expr == null) {
+        expr = PerlPsiUtil.getSingleBlockExpression(((PsiPerlScalarCastExpr)element).getBlock());
+      }
+      return from(expr).getScalarDereference();
     }
     return UNKNOWN_VALUE;
   }

@@ -1,0 +1,10 @@
+$var = ${${\\"test"}};
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 23 in scalarDerefInplaceDeep.pl
+test
+----------
+Resolved
+----------
+test

@@ -1,0 +1,6 @@
+sub resolve{
+  return ${$_[0]};
+}
+
+$var = resolve \"test";
+$v<caret>ar;

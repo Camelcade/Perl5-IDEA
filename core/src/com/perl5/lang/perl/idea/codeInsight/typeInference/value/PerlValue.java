@@ -236,6 +236,19 @@ public abstract class PerlValue {
   }
 
   /**
+   * @return a value representing scalar dereference of the current element
+   */
+  @NotNull
+  public final PerlValue getScalarDereference() {
+    return convert(PerlValue::createScalarDereference);
+  }
+
+  @NotNull
+  protected PerlValue createScalarDereference() {
+    return new PerlScalarDereferenceValue(this);
+  }
+
+  /**
    * @return a value representing an array slice of current element
    */
   @NotNull

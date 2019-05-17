@@ -65,6 +65,12 @@ final class PerlUndefValue extends PerlSpecialValue {
 
   @NotNull
   @Override
+  protected PerlValue createScalarDereference() {
+    return UNKNOWN_VALUE;
+  }
+
+  @NotNull
+  @Override
   protected PerlContextType getContextType() {
     return PerlContextType.SCALAR;
   }

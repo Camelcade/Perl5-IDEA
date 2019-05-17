@@ -61,6 +61,12 @@ final class PerlUnknownValue extends PerlSpecialValue {
 
   @NotNull
   @Override
+  protected PerlValue createScalarDereference() {
+    return UNKNOWN_VALUE;
+  }
+
+  @NotNull
+  @Override
   protected PerlValue createReference() {
     return UNKNOWN_VALUE;
   }

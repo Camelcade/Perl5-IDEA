@@ -843,7 +843,7 @@ public class PerlPsiUtil implements PerlElementTypes {
    * @return if {@code block} contains only single statement with single expression, returns it. False otherwise.
    */
   @Nullable
-  private static PsiPerlExpr getSingleBlockExpression(@Nullable PsiPerlBlock block) {
+  public static PsiPerlExpr getSingleBlockExpression(@Nullable PsiPerlBlock block) {
     if (block == null) {
       return null;
     }

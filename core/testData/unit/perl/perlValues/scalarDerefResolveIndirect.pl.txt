@@ -1,0 +1,15 @@
+sub resolve{
+  return ${$_[0]};
+}
+
+$base = 42;
+$var = resolve \$base;
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 70 in scalarDerefResolveIndirect.pl
+scalar main::resolve(Ref[42])
+----------
+Resolved
+----------
+Value unknown

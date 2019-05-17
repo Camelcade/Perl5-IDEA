@@ -1,0 +1,14 @@
+sub resolve{
+  return ${$_[0]};
+}
+
+$var = resolve \"test";
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 59 in scalarDerefResolve.pl
+scalar main::resolve(Ref[test])
+----------
+Resolved
+----------
+Value unknown

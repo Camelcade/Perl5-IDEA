@@ -1,0 +1,11 @@
+$base = \42;
+$var = ${$base};
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 30 in scalarDerefInplaceIndirect.pl
+42
+----------
+Resolved
+----------
+42
