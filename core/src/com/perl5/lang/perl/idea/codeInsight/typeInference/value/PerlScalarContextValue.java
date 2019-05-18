@@ -24,6 +24,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
+import java.util.List;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager.SCALAR_CONTEXT_ID;
@@ -68,10 +69,12 @@ public class PerlScalarContextValue extends PerlOperationValue {
       return null;
     }
     if (targetValue instanceof PerlArrayValue) {
-      return PerlScalarValue.create(((PerlArrayValue)targetValue).getElements().size());
+      List<PerlValue> arrayElements = ((PerlArrayValue)targetValue).getElements();
+      return arrayElements.indexOf(UNKNOWN_VALUE) < 0 ? PerlScalarValue.create(arrayElements.size()) : UNKNOWN_VALUE;
     }
     else if (targetValue instanceof PerlHashValue) {
-      return PerlScalarValue.create(((PerlHashValue)targetValue).getMap().size());
+      return ((PerlHashValue)targetValue).getElements().indexOf(UNKNOWN_VALUE) < 0 ?
+             PerlScalarValue.create(((PerlHashValue)targetValue).getMap().size()) : UNKNOWN_VALUE;
     }
     return null;
   }

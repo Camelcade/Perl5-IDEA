@@ -44,6 +44,11 @@ final class PerlUnknownValue extends PerlSpecialValue {
     return PerlValuesManager.UNKNOWN_ID;
   }
 
+  @Override
+  protected boolean computeIsDeterministic() {
+    return true;
+  }
+
   @NotNull
   @Override
   public String getPresentableText() {
