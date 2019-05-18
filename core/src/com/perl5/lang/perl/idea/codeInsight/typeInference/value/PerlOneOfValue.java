@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubInputStream;
@@ -30,7 +29,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.*;
-import java.util.function.Function;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
 
@@ -94,7 +92,7 @@ public final class PerlOneOfValue extends PerlValue implements Iterable<PerlValu
   @Override
   protected PerlValue computeScalarRepresentation() {
     LOG.assertTrue(isDeterministic());
-    return convert(PerlValue::computeScalarRepresentation);
+    return PerlValuesBuilder.convert(this, PerlValue::computeScalarRepresentation);
   }
 
   @NotNull
@@ -142,36 +140,7 @@ public final class PerlOneOfValue extends PerlValue implements Iterable<PerlValu
   @NotNull
   @Override
   PerlValue computeResolve(@NotNull PerlValueResolver resolver) {
-    return convert(resolver::resolve);
-  }
-
-  @NotNull
-  public PerlValue convert(@NotNull Function<PerlValue, PerlValue> converter) {
-    ProgressManager.checkCanceled();
-    Builder builder = builder();
-    myVariants.forEach(it -> builder.addVariant(converter.apply(it)));
-    return builder.build();
-  }
-
-  /**
-   * Works the same way as {@link #convert(Function)}, but returns {@link PerlValues#UNKNOWN_VALUE} if
-   * converter returned {@code UNKNOWN_VALUE} at least once.
-   *
-   * @see PerlHashElementValue#create(com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue, com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue)
-   * @see PerlOneOfValue#convertStrict(Function)
-   */
-  @NotNull
-  public PerlValue convertStrict(@NotNull Function<PerlValue, PerlValue> converter) {
-    ProgressManager.checkCanceled();
-    Builder builder = builder();
-    for (PerlValue variant : myVariants) {
-      PerlValue convertedValue = converter.apply(variant);
-      if (convertedValue.isUnknown()) {
-        return UNKNOWN_VALUE;
-      }
-      builder.addVariant(convertedValue);
-    }
-    return builder.build();
+    return PerlValuesBuilder.convert(this, resolver::resolve);
   }
 
   @Override
