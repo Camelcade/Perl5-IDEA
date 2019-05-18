@@ -17,8 +17,10 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.psi.stubs.StubInputStream;
+import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 
@@ -36,14 +38,23 @@ public class PerlScalarDereferenceValue extends PerlOperationValue {
 
   @NotNull
   @Override
-  protected PerlValue computeResolve(@NotNull PerlValue resolvedBaseValue, @NotNull PerlValueResolver resolver) {
-    if (resolvedBaseValue instanceof PerlReferenceValue) {
-      PerlValue target = ((PerlReferenceValue)resolvedBaseValue).getTarget();
-      if (target instanceof PerlScalarValue || target.isUndef() || target instanceof PerlReferenceValue) {
-        return target;
+  protected PerlValue computeResolve(@NotNull PerlValue resolvedReference, @NotNull PerlValueResolver resolver) {
+    return doComputeStrictResolve(resolvedReference);
+  }
+
+  private static PerlValue doComputeStrictResolve(@NotNull PerlValue referenceValue) {
+    return ObjectUtils.notNull(doComputeResolve(referenceValue), UNKNOWN_VALUE);
+  }
+
+  @Nullable
+  private static PerlValue doComputeResolve(@NotNull PerlValue referenceValue) {
+    if (referenceValue instanceof PerlReferenceValue) {
+      PerlValue referenceTarget = ((PerlReferenceValue)referenceValue).getTarget();
+      if (referenceTarget.getContextType() == PerlContextType.SCALAR) {
+        return referenceTarget;
       }
     }
-    return UNKNOWN_VALUE;
+    return null;
   }
 
   @Override
@@ -58,17 +69,11 @@ public class PerlScalarDereferenceValue extends PerlOperationValue {
 
   @NotNull
   public static PerlValue create(@NotNull PerlValue referenceValue) {
-    if (referenceValue.isUndef() || referenceValue.isUnknown() || referenceValue instanceof PerlListValue) {
-      return UNKNOWN_VALUE;
+    if (referenceValue.isDeterministic()) {
+      return PerlValuesBuilder.convert(referenceValue, PerlScalarDereferenceValue::doComputeStrictResolve);
     }
 
-    if (referenceValue instanceof PerlReferenceValue) {
-      PerlValue value = ((PerlReferenceValue)referenceValue).getBaseValue();
-      if (value.getContextType() == PerlContextType.SCALAR) {
-        return value;
-      }
-    }
-
-    return new PerlScalarDereferenceValue(referenceValue);
+    PerlValue resolvedValue = doComputeResolve(referenceValue);
+    return resolvedValue != null ? resolvedValue : new PerlScalarDereferenceValue(referenceValue);
   }
 }
