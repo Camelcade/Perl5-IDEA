@@ -240,10 +240,10 @@ public final class PerlValuesManager {
       return PerlArrayValue.builder().addPsiElements(PerlArrayUtil.collectListElements(element)).build();
     }
     else if (elementType == ANON_ARRAY) {
-      return (PerlArrayValue.builder().addPsiElements(Arrays.asList(element.getChildren())).build()).getReference();
+      return PerlReferenceValue.create(PerlArrayValue.builder().addPsiElements(Arrays.asList(element.getChildren())).build());
     }
     else if (elementType == ANON_HASH) {
-      return (PerlMapValue.builder().addPsiElements(Arrays.asList(element.getChildren())).build()).getReference();
+      return PerlReferenceValue.create(PerlMapValue.builder().addPsiElements(Arrays.asList(element.getChildren())).build());
     }
     else if (elementType == NUMBER_CONSTANT) {
       return PerlScalarValue.create(element.getText());
@@ -259,7 +259,7 @@ public final class PerlValuesManager {
       }
     }
     else if (element instanceof PsiPerlRefExpr) {
-      return from(((PsiPerlRefExpr)element).getExpr()).getReference();
+      return PerlReferenceValue.create(from(((PsiPerlRefExpr)element).getExpr()));
     }
     else if (element instanceof PsiPerlHashElement) {
       return from(((PsiPerlHashElement)element).getExpr()).getHashElement(

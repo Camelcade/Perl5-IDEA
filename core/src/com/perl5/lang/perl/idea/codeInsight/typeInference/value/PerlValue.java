@@ -188,19 +188,6 @@ public abstract class PerlValue {
   }
 
   /**
-   * @return a value representing reference to the current element
-   */
-  @NotNull
-  public final PerlValue getReference() {
-    return PerlValuesBuilder.convert(this, PerlValue::createReference);
-  }
-
-  @NotNull
-  protected PerlValue createReference() {
-    return new PerlReferenceValue(this);
-  }
-
-  /**
    * @return a value representing scalar dereference of the current element
    */
   @NotNull

@@ -89,4 +89,9 @@ public final class PerlReferenceValue extends PerlOperationValue {
   public String getPresentableText() {
     return PerlBundle.message("perl.value.reference.presentable", getBaseValue().getPresentableText());
   }
+
+  @NotNull
+  public static PerlValue create(@NotNull PerlValue referent) {
+    return PerlValuesBuilder.convert(referent, it -> referent.isUnknown() ? referent : new PerlReferenceValue(referent));
+  }
 }

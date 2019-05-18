@@ -69,12 +69,6 @@ final class PerlUnknownValue extends PerlSpecialValue {
     return this;
   }
 
-  @NotNull
-  @Override
-  protected PerlValue createReference() {
-    return this;
-  }
-
   @Nullable
   @Override
   protected PerlContextType getContextType() {
