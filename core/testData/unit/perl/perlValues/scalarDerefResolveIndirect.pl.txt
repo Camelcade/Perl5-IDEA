@@ -12,4 +12,4 @@ scalar main::resolve(Ref[42])
 ----------
 Resolved
 ----------
-Value unknown
+42

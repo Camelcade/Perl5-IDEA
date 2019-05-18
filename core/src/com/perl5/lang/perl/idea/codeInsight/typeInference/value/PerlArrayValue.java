@@ -20,6 +20,7 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.util.SmartList;
 import com.perl5.PerlBundle;
+import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -160,7 +161,7 @@ public final class PerlArrayValue extends PerlListValue implements Iterable<Perl
         addValue(UNKNOWN_VALUE);
         myReachedOffsets.clear();
       }
-      else if (value instanceof PerlScalarValue || value.isUndef()) {
+      else if (value.getContextType() == PerlContextType.SCALAR) {
         SmartList<Integer> newOffsets = new SmartList<>();
         for (Integer offset : myReachedOffsets) {
           if (offset.equals(myTargetOffset)) {
