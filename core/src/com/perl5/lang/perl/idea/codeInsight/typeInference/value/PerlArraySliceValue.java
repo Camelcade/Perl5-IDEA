@@ -72,4 +72,12 @@ public class PerlArraySliceValue extends PerlParametrizedOperationValue {
   public String toString() {
     return "ArraySlice: " + getBaseValue() + "[" + getParameter() + "]";
   }
+
+  @NotNull
+  public static PerlValue create(@NotNull PerlValue arrayValue, @NotNull PerlValue indexValue) {
+    if (arrayValue.isUndef() || arrayValue.isUnknown() || indexValue.isUndef() || indexValue.isUnknown()) {
+      return UNKNOWN_VALUE;
+    }
+    return new PerlArraySliceValue(arrayValue, indexValue);
+  }
 }

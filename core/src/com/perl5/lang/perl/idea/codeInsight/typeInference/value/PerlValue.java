@@ -200,22 +200,6 @@ public abstract class PerlValue {
     return new PerlScalarDereferenceValue(this);
   }
 
-  /**
-   * @return a value representing an array slice of current element
-   */
-  @NotNull
-  public final PerlValue getArraySlice(@NotNull PerlValue indexesValue) {
-    if (indexesValue.isUndef() || indexesValue.isUnknown()) {
-      return UNKNOWN_VALUE;
-    }
-    return createArraySlice(indexesValue);
-  }
-
-  @NotNull
-  protected PerlValue createArraySlice(@NotNull PerlValue indexesValue) {
-    return new PerlArraySliceValue(this, indexesValue);
-  }
-
   @Override
   public final int hashCode() {
     return myHashCode != 0 ? myHashCode : (myHashCode = computeHashCode());
