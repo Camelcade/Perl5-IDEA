@@ -25,7 +25,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.Collections;
-import java.util.List;
 import java.util.Set;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue.PerlValueType.DEFERRED;
@@ -121,11 +120,6 @@ public abstract class PerlValue {
    */
   @Nullable
   protected abstract PerlContextType getContextType();
-
-  @NotNull
-  public List<PerlValue> getListRepresentation() {
-    return Collections.singletonList(this);
-  }
 
   /**
    * @return true iff this value is deterministic and don't need to be computed

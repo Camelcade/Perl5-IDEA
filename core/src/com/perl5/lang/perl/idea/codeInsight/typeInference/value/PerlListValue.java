@@ -128,7 +128,15 @@ abstract class PerlListValue extends PerlValue {
     }
 
     public Self addElement(@NotNull PerlValue element) {
-      myElements.addAll(element.getListRepresentation());
+      if (element instanceof PerlArrayValue) {
+        myElements.addAll(((PerlArrayValue)element).getElements());
+      }
+      else if (element instanceof PerlHashValue) {
+        myElements.addAll(((PerlHashValue)element).getElements());
+      }
+      else {
+        myElements.add(element);
+      }
       //noinspection unchecked
       return (Self)this;
     }

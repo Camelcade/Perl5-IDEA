@@ -59,12 +59,6 @@ public class PerlHashValue extends PerlMapValue {
     return myMap;
   }
 
-  @NotNull
-  @Override
-  public List<PerlValue> getListRepresentation() {
-    return getElements();
-  }
-
   /**
    * @return a value for the {@code key}
    */

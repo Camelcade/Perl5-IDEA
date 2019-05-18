@@ -93,12 +93,6 @@ public final class PerlArrayValue extends PerlListValue implements Iterable<Perl
     return searchState;
   }
 
-  @NotNull
-  @Override
-  public List<PerlValue> getListRepresentation() {
-    return getElements();
-  }
-
   @Override
   protected int getSerializationId() {
     return PerlValuesManager.ARRAY_ID;
