@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.psi.stubs.StubInputStream;
 import com.perl5.PerlBundle;
+import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -51,7 +52,7 @@ public final class PerlReferenceValue extends PerlOperationValue {
   @Override
   protected PerlValue createScalarDereference() {
     PerlValue value = getBaseValue();
-    if (value instanceof PerlScalarValue || value.isUndef() || value instanceof PerlReferenceValue) {
+    if (value.getContextType() == PerlContextType.SCALAR) {
       return value;
     }
     return super.createScalarDereference();

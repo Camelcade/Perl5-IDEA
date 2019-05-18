@@ -17,7 +17,9 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.psi.stubs.StubInputStream;
+import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 
@@ -32,6 +34,12 @@ public class PerlArraySliceValue extends PerlParametrizedOperationValue {
 
   PerlArraySliceValue(@NotNull StubInputStream dataStream) throws IOException {
     super(dataStream);
+  }
+
+  @Nullable
+  @Override
+  protected PerlContextType getContextType() {
+    return PerlContextType.LIST;
   }
 
   @NotNull
