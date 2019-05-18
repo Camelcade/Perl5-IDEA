@@ -95,13 +95,6 @@ public final class PerlArrayValue extends PerlListValue implements Iterable<Perl
 
   @NotNull
   @Override
-  protected PerlValue computeScalarRepresentation() {
-    LOG.assertTrue(isDeterministic());
-    return PerlScalarValue.create(Integer.toString(getElements().size()));
-  }
-
-  @NotNull
-  @Override
   public List<PerlValue> getListRepresentation() {
     return getElements();
   }

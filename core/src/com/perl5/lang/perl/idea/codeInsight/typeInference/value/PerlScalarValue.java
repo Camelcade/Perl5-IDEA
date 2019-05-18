@@ -133,6 +133,11 @@ public final class PerlScalarValue extends PerlValue {
     return value == null ? UNKNOWN_VALUE : PerlValuesManager.intern(new PerlScalarValue(value));
   }
 
+  @NotNull
+  public static PerlValue create(int value) {
+    return new PerlScalarValue(String.valueOf(value));
+  }
+
   @Override
   public String toString() {
     return myValue;

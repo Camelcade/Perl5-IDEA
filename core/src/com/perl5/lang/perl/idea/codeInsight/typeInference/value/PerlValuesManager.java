@@ -223,7 +223,7 @@ public final class PerlValuesManager {
     }
     else if (elementType == SCALAR_EXPR) {
       PsiElement[] children = element.getChildren();
-      return children.length == 0 ? UNKNOWN_VALUE : from(children[0]).getScalarRepresentation();
+      return children.length == 0 ? UNKNOWN_VALUE : PerlScalarContextValue.create(from(children[0]));
     }
     else if (elementType == TERNARY_EXPR) {
       PerlOneOfValue.Builder builder = PerlOneOfValue.builder();
@@ -330,7 +330,7 @@ public final class PerlValuesManager {
       // fixme otherwise we should createa list/extract subelement
       if (elements.size() == 1) {
         if ((PerlContextType.from(elements.get(0)) == PerlContextType.SCALAR || assignValueDescriptor.getStartIndex() == -1)) {
-          return from(elements.get(0)).getScalarRepresentation();
+          return PerlScalarContextValue.create(from(elements.get(0)));
         }
       }
       else if (elements.size() > 1) {

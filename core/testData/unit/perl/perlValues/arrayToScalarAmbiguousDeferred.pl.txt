@@ -12,5 +12,4 @@ Array(one, two, three)]
 ----------
 Resolved
 ----------
-OneOf[3,
-scalar Array(Value unknown)]
+3

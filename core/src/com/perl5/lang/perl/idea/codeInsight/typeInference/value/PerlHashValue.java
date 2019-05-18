@@ -46,16 +46,6 @@ public class PerlHashValue extends PerlMapValue {
     super(dataStream);
   }
 
-  /**
-   * @return a size of the supporting map
-   * @implNote perl version works differently, returns the number of buckets allocated in hash.
-   */
-  @NotNull
-  @Override
-  protected PerlValue computeScalarRepresentation() {
-    return PerlScalarValue.create(Integer.toString(getMap().size()));
-  }
-
   @NotNull
   public Map<PerlValue, PerlValue> getMap() {
     if (myMap == null) {

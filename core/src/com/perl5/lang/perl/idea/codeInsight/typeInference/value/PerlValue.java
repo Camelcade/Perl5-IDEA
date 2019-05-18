@@ -41,7 +41,6 @@ public abstract class PerlValue {
   // transient cached values
   private volatile int myHashCode = 0;
   private volatile PerlValueType myValueDeterminism = null;
-  private volatile PerlValue myScalarRepresentation = null;
 
   protected PerlValue() {
   }
@@ -123,34 +122,9 @@ public abstract class PerlValue {
   @Nullable
   protected abstract PerlContextType getContextType();
 
-  /**
-   * @return the scalar representation of the value
-   */
-  @NotNull
-  public final PerlValue getScalarRepresentation() {
-    if (isUnknown()) {
-      return UNKNOWN_VALUE;
-    }
-    if (getContextType() == PerlContextType.SCALAR) {
-      return this;
-    }
-    if (isDeterministic()) {
-      if (myScalarRepresentation == null) {
-        myScalarRepresentation = computeScalarRepresentation();
-      }
-      return myScalarRepresentation;
-    }
-    return new PerlScalarContextValue(this);
-  }
-
   @NotNull
   public List<PerlValue> getListRepresentation() {
     return Collections.singletonList(this);
-  }
-
-  @NotNull
-  protected PerlValue computeScalarRepresentation() {
-    throw new RuntimeException("This method must be implemented for determined non-scalar values");
   }
 
   /**

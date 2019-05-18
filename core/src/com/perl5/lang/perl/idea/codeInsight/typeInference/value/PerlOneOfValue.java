@@ -90,13 +90,6 @@ public final class PerlOneOfValue extends PerlValue implements Iterable<PerlValu
 
   @NotNull
   @Override
-  protected PerlValue computeScalarRepresentation() {
-    LOG.assertTrue(isDeterministic());
-    return PerlValuesBuilder.convert(this, PerlValue::computeScalarRepresentation);
-  }
-
-  @NotNull
-  @Override
   public Set<String> getNamespaceNames() {
     if (myVariants.isEmpty()) {
       return Collections.emptySet();

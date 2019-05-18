@@ -23,6 +23,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager.SCALAR_CONTEXT_ID;
 
 public class PerlScalarContextValue extends PerlOperationValue {
@@ -45,7 +46,22 @@ public class PerlScalarContextValue extends PerlOperationValue {
   @NotNull
   @Override
   protected PerlValue computeResolve(@NotNull PerlValue resolvedTarget, @NotNull PerlValueResolver resolver) {
-    return resolvedTarget.getScalarRepresentation();
+    return resolvedTarget.isDeterministic() ? computeDeterministicResolve(resolvedTarget) : UNKNOWN_VALUE;
+  }
+
+  @NotNull
+  private static PerlValue computeDeterministicResolve(@NotNull PerlValue resolvedTarget) {
+    LOG.assertTrue(resolvedTarget.isDeterministic(), "Value should be deterministic");
+    if (resolvedTarget.getContextType() == PerlContextType.SCALAR) {
+      return resolvedTarget;
+    }
+    if (resolvedTarget instanceof PerlArrayValue) {
+      return PerlScalarValue.create(((PerlArrayValue)resolvedTarget).getElements().size());
+    }
+    else if (resolvedTarget instanceof PerlHashValue) {
+      return PerlScalarValue.create(((PerlHashValue)resolvedTarget).getMap().size());
+    }
+    return UNKNOWN_VALUE;
   }
 
   @Override
@@ -62,5 +78,17 @@ public class PerlScalarContextValue extends PerlOperationValue {
   @Override
   public String getPresentableText() {
     return "scalar " + getBaseValue().getPresentableText();
+  }
+
+  @NotNull
+  public static PerlValue create(@NotNull PerlValue baseValue) {
+    if (baseValue.isUnknown()) {
+      return UNKNOWN_VALUE;
+    }
+    if (baseValue.getContextType() == PerlContextType.SCALAR) {
+      return baseValue;
+    }
+    return baseValue.isDeterministic() ? PerlValuesBuilder.convert(baseValue, PerlScalarContextValue::computeDeterministicResolve)
+                                       : new PerlScalarContextValue(baseValue);
   }
 }
