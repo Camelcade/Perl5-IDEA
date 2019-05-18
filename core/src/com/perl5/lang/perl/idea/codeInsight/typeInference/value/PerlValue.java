@@ -233,22 +233,6 @@ public abstract class PerlValue {
   }
 
   /**
-   * @return a value representing array element from current value.
-   */
-  @NotNull
-  public final PerlValue getArrayElement(@NotNull PerlValue arrayIndex) {
-    if (arrayIndex.isUnknown() || arrayIndex.isUndef()) {
-      return UNKNOWN_VALUE;
-    }
-    return PerlValuesBuilder.convert(this, it -> it.createArrayElement(arrayIndex));
-  }
-
-  @NotNull
-  protected PerlValue createArrayElement(@NotNull PerlValue arrayIndex) {
-    return new PerlArrayElementValue(this, arrayIndex);
-  }
-
-  /**
    * @return a value representing hash element from current value.
    */
   @NotNull

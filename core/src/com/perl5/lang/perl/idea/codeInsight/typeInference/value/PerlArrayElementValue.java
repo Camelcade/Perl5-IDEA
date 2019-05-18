@@ -59,4 +59,11 @@ public final class PerlArrayElementValue extends PerlParametrizedOperationValue 
   public String toString() {
     return "ArrayItem: " + getBaseValue() + "[" + getParameter() + "]";
   }
+
+  public static PerlValue create(@NotNull PerlValue listValue, @NotNull PerlValue indexValue) {
+    if (listValue.isUnknown() || listValue.isUndef() || indexValue.isUnknown() || indexValue.isUndef()) {
+      return UNKNOWN_VALUE;
+    }
+    return new PerlArrayElementValue(listValue, indexValue);
+  }
 }

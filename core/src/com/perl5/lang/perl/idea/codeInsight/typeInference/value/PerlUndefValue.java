@@ -41,12 +41,6 @@ final class PerlUndefValue extends PerlSpecialValue {
 
   @NotNull
   @Override
-  public PerlValue createArrayElement(@NotNull PerlValue arrayIndex) {
-    return UNKNOWN_VALUE;
-  }
-
-  @NotNull
-  @Override
   protected PerlValue createArraySlice(@NotNull PerlValue indexesValue) {
     return UNKNOWN_VALUE;
   }

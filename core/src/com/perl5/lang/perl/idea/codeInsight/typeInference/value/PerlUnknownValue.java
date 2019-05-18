@@ -35,12 +35,6 @@ final class PerlUnknownValue extends PerlSpecialValue {
 
   @NotNull
   @Override
-  public PerlValue createArrayElement(@NotNull PerlValue arrayIndex) {
-    return this;
-  }
-
-  @NotNull
-  @Override
   protected PerlValue createHashElement(@NotNull PerlValue hashKey) {
     return this;
   }

@@ -266,8 +266,9 @@ public final class PerlValuesManager {
         from(((PsiPerlHashElement)element).getHashIndex().getExpr()));
     }
     else if (element instanceof PsiPerlArrayElement) {
-      return from(((PsiPerlArrayElement)element).getExpr()).getArrayElement(
-        from(((PsiPerlArrayElement)element).getArrayIndex().getExpr()));
+      return PerlArrayElementValue.create(
+        from(((PsiPerlArrayElement)element).getExpr()), from(((PsiPerlArrayElement)element).getArrayIndex().getExpr())
+      );
     }
     else if (element instanceof PsiPerlHashSlice) {
       return from(((PsiPerlHashSlice)element).getExpr()).getHashSlice(

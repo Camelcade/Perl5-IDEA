@@ -35,8 +35,8 @@ public class PerlValues {
   /**
    * Handy predefined value, that return first argument
    */
-  public static final PerlValue RETURN_FIRST_ARGUMENT_VALUE =
-    PerlValuesManager.intern(ARGUMENTS_VALUE.getArrayElement(PerlScalarValue.create("0")));
+  public static final PerlValue RETURN_FIRST_ARGUMENT_VALUE = PerlValuesManager.intern(
+    PerlArrayElementValue.create(ARGUMENTS_VALUE, PerlScalarValue.create("0")));
 
   private PerlValues() {
   }
