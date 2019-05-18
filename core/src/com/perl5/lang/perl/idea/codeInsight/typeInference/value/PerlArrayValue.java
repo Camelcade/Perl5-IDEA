@@ -41,11 +41,6 @@ public final class PerlArrayValue extends PerlListValue implements Iterable<Perl
     super(dataStream);
   }
 
-  @Override
-  protected boolean computeIsDeterministic() {
-    return isDeterministic(getElements());
-  }
-
   @NotNull
   @Override
   public Iterator<PerlValue> iterator() {

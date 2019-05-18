@@ -65,4 +65,12 @@ public final class PerlHashElementValue extends PerlParametrizedOperationValue {
   public String toString() {
     return "HashItem: " + getBaseValue() + "{" + getParameter() + "}";
   }
+
+  @NotNull
+  public static PerlValue create(@NotNull PerlValue hashValue, @NotNull PerlValue keyValue) {
+    if (hashValue.isUnknown() || hashValue.isUndef() || keyValue.isUnknown() || keyValue.isUndef()) {
+      return UNKNOWN_VALUE;
+    }
+    return new PerlHashElementValue(hashValue, keyValue);
+  }
 }

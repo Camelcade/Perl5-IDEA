@@ -49,6 +49,11 @@ abstract class PerlListValue extends PerlValue {
     PerlValuesManager.writeCollection(dataStream, myElements);
   }
 
+  @Override
+  protected boolean computeIsDeterministic() {
+    return isDeterministic(getElements());
+  }
+
   @NotNull
   @Override
   final PerlValue computeResolve(@NotNull PerlValueResolver resolver) {

@@ -46,17 +46,6 @@ public class PerlHashValue extends PerlMapValue {
     super(dataStream);
   }
 
-  @Override
-  protected boolean computeIsDeterministic() {
-    return true;
-  }
-
-  @NotNull
-  @Override
-  protected PerlValue createHashElement(@NotNull PerlValue hashKey) {
-    return PerlValuesBuilder.convert(hashKey, this::get);
-  }
-
   /**
    * @return a size of the supporting map
    * @implNote perl version works differently, returns the number of buckets allocated in hash.

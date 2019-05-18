@@ -232,22 +232,6 @@ public abstract class PerlValue {
     return new PerlHashSliceValue(this, keysValue);
   }
 
-  /**
-   * @return a value representing hash element from current value.
-   */
-  @NotNull
-  public final PerlValue getHashElement(@NotNull PerlValue hashKey) {
-    if (hashKey.isUnknown() || hashKey.isUndef()) {
-      return UNKNOWN_VALUE;
-    }
-    return PerlValuesBuilder.convert(this, it -> it.createHashElement(hashKey));
-  }
-
-  @NotNull
-  protected PerlValue createHashElement(@NotNull PerlValue hashKey) {
-    return new PerlHashElementValue(this, hashKey);
-  }
-
   @Override
   public final int hashCode() {
     return myHashCode != 0 ? myHashCode : (myHashCode = computeHashCode());

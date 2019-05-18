@@ -9,7 +9,7 @@ $v<caret>ar;
 ----------
 $var
 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 68 in hashElement.pl
-two
+HashItem: Hash: [one, two, three, four]{one}
 ----------
 Resolved
 ----------

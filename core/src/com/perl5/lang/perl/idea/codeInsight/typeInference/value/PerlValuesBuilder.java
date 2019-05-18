@@ -22,7 +22,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.function.Function;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlOneOfValue.builder;
-import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
 
 public final class PerlValuesBuilder {
   /**
@@ -38,28 +37,4 @@ public final class PerlValuesBuilder {
     ((PerlOneOfValue)baseValue).forEach(it -> builder.addVariant(converter.apply(it)));
     return builder.build();
   }
-
-  /**
-   * Works the same way as {@link #convert(Function)}, but returns {@link PerlValues#UNKNOWN_VALUE} if
-   * converter returned {@code UNKNOWN_VALUE} at least once.
-   *
-   * @see PerlHashElementValue#create(com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue, com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue)
-   */
-  @NotNull
-  public static PerlValue convertStrict(@NotNull PerlValue baseValue, @NotNull Function<PerlValue, PerlValue> converter) {
-    if (!(baseValue instanceof PerlOneOfValue)) {
-      return converter.apply(baseValue);
-    }
-    ProgressManager.checkCanceled();
-    PerlOneOfValue.Builder builder = builder();
-    for (PerlValue variant : (PerlOneOfValue)baseValue) {
-      PerlValue convertedValue = converter.apply(variant);
-      if (convertedValue.isUnknown()) {
-        return UNKNOWN_VALUE;
-      }
-      builder.addVariant(convertedValue);
-    }
-    return builder.build();
-  }
-
 }

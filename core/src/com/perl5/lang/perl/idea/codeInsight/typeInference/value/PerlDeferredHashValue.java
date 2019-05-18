@@ -35,13 +35,6 @@ public final class PerlDeferredHashValue extends PerlMapValue {
     super(dataStream);
   }
 
-  @NotNull
-  @Override
-  protected PerlValue createHashElement(@NotNull PerlValue hashKey) {
-    PerlValue element = PerlValuesBuilder.convertStrict(hashKey, this::tryGet);
-    return !element.isUnknown() ? element : super.createHashElement(hashKey);
-  }
-
   /**
    * @return attempts to find a key in the deferred map by iterating the most recently added scalar values
    */

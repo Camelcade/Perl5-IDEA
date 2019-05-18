@@ -53,12 +53,6 @@ final class PerlUndefValue extends PerlSpecialValue {
 
   @NotNull
   @Override
-  protected PerlValue createHashElement(@NotNull PerlValue hashKey) {
-    return UNKNOWN_VALUE;
-  }
-
-  @NotNull
-  @Override
   protected PerlValue createScalarDereference() {
     return UNKNOWN_VALUE;
   }

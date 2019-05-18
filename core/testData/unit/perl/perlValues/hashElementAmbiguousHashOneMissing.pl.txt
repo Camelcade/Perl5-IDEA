@@ -16,8 +16,7 @@ $v<caret>ar;
 ----------
 $var
 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 132 in hashElementAmbiguousHashOneMissing.pl
-OneOf[two,
-undef]
+HashItem: OneOf: [Hash: [one, two, three, four], Hash: [three, blo]]{one}
 ----------
 Resolved
 ----------
