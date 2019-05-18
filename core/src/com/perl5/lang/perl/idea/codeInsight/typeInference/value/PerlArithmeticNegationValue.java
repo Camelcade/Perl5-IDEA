@@ -37,12 +37,6 @@ public class PerlArithmeticNegationValue extends PerlOperationValue {
 
   @NotNull
   @Override
-  protected PerlValue createArithmeticNegation() {
-    return getBaseValue();
-  }
-
-  @NotNull
-  @Override
   protected PerlValue computeResolve(@NotNull PerlValue resolvedBaseValue, @NotNull PerlValueResolver resolver) {
     if (!(resolvedBaseValue instanceof PerlScalarValue)) {
       return UNKNOWN_VALUE;
@@ -69,5 +63,18 @@ public class PerlArithmeticNegationValue extends PerlOperationValue {
   @Override
   public String toString() {
     return "-" + getBaseValue();
+  }
+
+  @NotNull
+  public static PerlValue create(@NotNull PerlValue baseValue) {
+    return PerlValuesBuilder.convert(baseValue, it -> {
+      if (it.isUnknown() || it.isUndef()) {
+        return UNKNOWN_VALUE;
+      }
+      if (it instanceof PerlArithmeticNegationValue) {
+        return ((PerlArithmeticNegationValue)it).getBaseValue();
+      }
+      return new PerlArithmeticNegationValue(it);
+    });
   }
 }

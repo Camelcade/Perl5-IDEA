@@ -47,12 +47,6 @@ final class PerlUnknownValue extends PerlSpecialValue {
 
   @NotNull
   @Override
-  protected PerlValue createArithmeticNegation() {
-    return this;
-  }
-
-  @NotNull
-  @Override
   protected PerlValue createArraySlice(@NotNull PerlValue indexesValue) {
     return this;
   }

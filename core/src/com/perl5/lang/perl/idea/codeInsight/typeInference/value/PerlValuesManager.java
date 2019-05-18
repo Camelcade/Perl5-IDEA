@@ -252,7 +252,7 @@ public final class PerlValuesManager {
       PsiPerlExpr target = ((PsiPerlPrefixUnaryExpr)element).getExpr();
       IElementType firstChildElementType = PsiUtilCore.getElementType(element.getFirstChild());
       if (firstChildElementType == OPERATOR_MINUS) {
-        return from(target).getArithmeticNegation();
+        return PerlArithmeticNegationValue.create(from(target));
       }
       else if (firstChildElementType == OPERATOR_PLUS) {
         return from(target);
