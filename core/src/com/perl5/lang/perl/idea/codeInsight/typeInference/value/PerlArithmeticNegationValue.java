@@ -16,9 +16,12 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.stubs.StubInputStream;
+import com.intellij.util.ObjectUtils;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 
@@ -26,8 +29,13 @@ import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager.ARITHMETIC_NEGATION;
 
 public class PerlArithmeticNegationValue extends PerlOperationValue {
+  private static final Logger LOG = Logger.getInstance(PerlArithmeticNegationValue.class);
+
   PerlArithmeticNegationValue(@NotNull PerlValue baseValue) {
     super(baseValue);
+    if (baseValue.isDeterministic()) {
+      LOG.error("Deterministic values should be resolved in-place: " + baseValue);
+    }
   }
 
   PerlArithmeticNegationValue(@NotNull StubInputStream dataStream)
@@ -38,10 +46,23 @@ public class PerlArithmeticNegationValue extends PerlOperationValue {
   @NotNull
   @Override
   protected PerlValue computeResolve(@NotNull PerlValue resolvedBaseValue, @NotNull PerlValueResolver resolver) {
-    if (!(resolvedBaseValue instanceof PerlScalarValue)) {
-      return UNKNOWN_VALUE;
+    return doComputeStrictResolve(resolvedBaseValue);
+  }
+
+  @NotNull
+  private static PerlValue doComputeStrictResolve(@NotNull PerlValue target) {
+    return ObjectUtils.notNull(doComputeResolve(target), UNKNOWN_VALUE);
+  }
+
+  @Nullable
+  private static PerlValue doComputeResolve(@NotNull PerlValue target) {
+    if (target instanceof PerlArithmeticNegationValue) {
+      return ((PerlArithmeticNegationValue)target).getBaseValue();
     }
-    String value = ((PerlScalarValue)resolvedBaseValue).getValue();
+    if (!(target instanceof PerlScalarValue) || !target.isDeterministic()) {
+      return null;
+    }
+    String value = ((PerlScalarValue)target).getValue();
     if (StringUtil.isEmpty(value)) {
       return UNKNOWN_VALUE;
     }
@@ -67,12 +88,11 @@ public class PerlArithmeticNegationValue extends PerlOperationValue {
 
   @NotNull
   public static PerlValue create(@NotNull PerlValue baseValue) {
-    if (baseValue.isUnknown() || baseValue.isUndef()) {
-      return UNKNOWN_VALUE;
+    if (baseValue.isDeterministic()) {
+      return PerlValuesBuilder.convert(baseValue, PerlArithmeticNegationValue::doComputeStrictResolve);
     }
-    if (baseValue instanceof PerlArithmeticNegationValue) {
-      return ((PerlArithmeticNegationValue)baseValue).getBaseValue();
-    }
-    return new PerlArithmeticNegationValue(baseValue);
+
+    PerlValue resolvedValue = doComputeResolve(baseValue);
+    return resolvedValue != null ? resolvedValue : new PerlArithmeticNegationValue(baseValue);
   }
 }
