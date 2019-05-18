@@ -92,6 +92,6 @@ public final class PerlReferenceValue extends PerlOperationValue {
 
   @NotNull
   public static PerlValue create(@NotNull PerlValue referent) {
-    return PerlValuesBuilder.convert(referent, it -> referent.isUnknown() ? referent : new PerlReferenceValue(referent));
+    return referent.isUnknown() ? referent : new PerlReferenceValue(referent);
   }
 }

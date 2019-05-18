@@ -67,14 +67,12 @@ public class PerlArithmeticNegationValue extends PerlOperationValue {
 
   @NotNull
   public static PerlValue create(@NotNull PerlValue baseValue) {
-    return PerlValuesBuilder.convert(baseValue, it -> {
-      if (it.isUnknown() || it.isUndef()) {
-        return UNKNOWN_VALUE;
-      }
-      if (it instanceof PerlArithmeticNegationValue) {
-        return ((PerlArithmeticNegationValue)it).getBaseValue();
-      }
-      return new PerlArithmeticNegationValue(it);
-    });
+    if (baseValue.isUnknown() || baseValue.isUndef()) {
+      return UNKNOWN_VALUE;
+    }
+    if (baseValue instanceof PerlArithmeticNegationValue) {
+      return ((PerlArithmeticNegationValue)baseValue).getBaseValue();
+    }
+    return new PerlArithmeticNegationValue(baseValue);
   }
 }
