@@ -18,8 +18,10 @@ package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.stubs.StubInputStream;
+import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 
@@ -46,22 +48,32 @@ public class PerlScalarContextValue extends PerlOperationValue {
   @NotNull
   @Override
   protected PerlValue computeResolve(@NotNull PerlValue resolvedTarget, @NotNull PerlValueResolver resolver) {
-    return resolvedTarget.isDeterministic() ? computeDeterministicResolve(resolvedTarget) : UNKNOWN_VALUE;
+    return doComputeStrictResolve(resolvedTarget);
   }
 
   @NotNull
-  private static PerlValue computeDeterministicResolve(@NotNull PerlValue resolvedTarget) {
-    LOG.assertTrue(resolvedTarget.isDeterministic(), "Value should be deterministic");
-    if (resolvedTarget.getContextType() == PerlContextType.SCALAR) {
-      return resolvedTarget;
+  private static PerlValue doComputeStrictResolve(@NotNull PerlValue resolvedTarget) {
+    return ObjectUtils.notNull(doComputeResolve(resolvedTarget), UNKNOWN_VALUE);
+  }
+
+  @Nullable
+  private static PerlValue doComputeResolve(@NotNull PerlValue targetValue) {
+    if (targetValue.isUnknown()) {
+      return UNKNOWN_VALUE;
     }
-    if (resolvedTarget instanceof PerlArrayValue) {
-      return PerlScalarValue.create(((PerlArrayValue)resolvedTarget).getElements().size());
+    if (targetValue.getContextType() == PerlContextType.SCALAR) {
+      return targetValue;
     }
-    else if (resolvedTarget instanceof PerlHashValue) {
-      return PerlScalarValue.create(((PerlHashValue)resolvedTarget).getMap().size());
+    if (!targetValue.isDeterministic()) {
+      return null;
     }
-    return UNKNOWN_VALUE;
+    if (targetValue instanceof PerlArrayValue) {
+      return PerlScalarValue.create(((PerlArrayValue)targetValue).getElements().size());
+    }
+    else if (targetValue instanceof PerlHashValue) {
+      return PerlScalarValue.create(((PerlHashValue)targetValue).getMap().size());
+    }
+    return null;
   }
 
   @Override
@@ -82,13 +94,11 @@ public class PerlScalarContextValue extends PerlOperationValue {
 
   @NotNull
   public static PerlValue create(@NotNull PerlValue baseValue) {
-    if (baseValue.isUnknown()) {
-      return UNKNOWN_VALUE;
+    if (baseValue.isDeterministic()) {
+      return PerlValuesBuilder.convert(baseValue, PerlScalarContextValue::doComputeStrictResolve);
     }
-    if (baseValue.getContextType() == PerlContextType.SCALAR) {
-      return baseValue;
-    }
-    return baseValue.isDeterministic() ? PerlValuesBuilder.convert(baseValue, PerlScalarContextValue::computeDeterministicResolve)
-                                       : new PerlScalarContextValue(baseValue);
+
+    PerlValue resolvedValue = doComputeResolve(baseValue);
+    return resolvedValue != null ? resolvedValue : new PerlScalarContextValue(baseValue);
   }
 }
