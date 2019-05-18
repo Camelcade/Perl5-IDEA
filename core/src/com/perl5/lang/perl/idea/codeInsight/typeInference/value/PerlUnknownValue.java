@@ -33,12 +33,6 @@ final class PerlUnknownValue extends PerlSpecialValue {
     return this;
   }
 
-  @NotNull
-  @Override
-  protected PerlValue createScalarDereference() {
-    return this;
-  }
-
   @Nullable
   @Override
   protected PerlContextType getContextType() {

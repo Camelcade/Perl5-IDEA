@@ -187,19 +187,6 @@ public abstract class PerlValue {
     return toString();
   }
 
-  /**
-   * @return a value representing scalar dereference of the current element
-   */
-  @NotNull
-  public final PerlValue getScalarDereference() {
-    return PerlValuesBuilder.convert(this, PerlValue::createScalarDereference);
-  }
-
-  @NotNull
-  protected PerlValue createScalarDereference() {
-    return new PerlScalarDereferenceValue(this);
-  }
-
   @Override
   public final int hashCode() {
     return myHashCode != 0 ? myHashCode : (myHashCode = computeHashCode());

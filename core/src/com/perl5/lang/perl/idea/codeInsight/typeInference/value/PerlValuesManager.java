@@ -283,7 +283,7 @@ public final class PerlValuesManager {
       if (expr == null) {
         expr = PerlPsiUtil.getSingleBlockExpression(((PsiPerlScalarCastExpr)element).getBlock());
       }
-      return from(expr).getScalarDereference();
+      return PerlScalarDereferenceValue.create(from(expr));
     }
     return UNKNOWN_VALUE;
   }

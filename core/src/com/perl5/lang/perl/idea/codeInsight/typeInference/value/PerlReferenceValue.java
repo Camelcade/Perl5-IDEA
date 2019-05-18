@@ -18,7 +18,6 @@ package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.psi.stubs.StubInputStream;
 import com.perl5.PerlBundle;
-import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -46,16 +45,6 @@ public final class PerlReferenceValue extends PerlOperationValue {
   protected PerlValue computeResolve(@NotNull PerlValue resolvedTarget, @NotNull PerlValueResolver resolver) {
     // fixme casts dereferences should be here
     return resolvedTarget.equals(getTarget()) ? this : new PerlReferenceValue(resolvedTarget);
-  }
-
-  @NotNull
-  @Override
-  protected PerlValue createScalarDereference() {
-    PerlValue value = getBaseValue();
-    if (value.getContextType() == PerlContextType.SCALAR) {
-      return value;
-    }
-    return super.createScalarDereference();
   }
 
   @NotNull

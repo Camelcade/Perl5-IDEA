@@ -20,8 +20,6 @@ import com.perl5.lang.perl.lexer.PerlBaseLexer;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 
-import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
-
 final class PerlUndefValue extends PerlSpecialValue {
   static final PerlUndefValue INSTANCE = new PerlUndefValue();
 
@@ -37,12 +35,6 @@ final class PerlUndefValue extends PerlSpecialValue {
   @Override
   PerlValue computeResolve(@NotNull PerlValueResolver resolver) {
     return this;
-  }
-
-  @NotNull
-  @Override
-  protected PerlValue createScalarDereference() {
-    return UNKNOWN_VALUE;
   }
 
   @NotNull

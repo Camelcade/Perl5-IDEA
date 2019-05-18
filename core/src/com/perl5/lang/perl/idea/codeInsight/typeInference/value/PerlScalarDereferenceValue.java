@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.psi.stubs.StubInputStream;
+import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -53,5 +54,21 @@ public class PerlScalarDereferenceValue extends PerlOperationValue {
   @Override
   public String toString() {
     return "ScalarDeref: " + getBaseValue();
+  }
+
+  @NotNull
+  public static PerlValue create(@NotNull PerlValue referenceValue) {
+    if (referenceValue.isUndef() || referenceValue.isUnknown() || referenceValue instanceof PerlListValue) {
+      return UNKNOWN_VALUE;
+    }
+
+    if (referenceValue instanceof PerlReferenceValue) {
+      PerlValue value = ((PerlReferenceValue)referenceValue).getBaseValue();
+      if (value.getContextType() == PerlContextType.SCALAR) {
+        return value;
+      }
+    }
+
+    return new PerlScalarDereferenceValue(referenceValue);
   }
 }
