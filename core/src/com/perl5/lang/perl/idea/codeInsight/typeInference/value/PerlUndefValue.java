@@ -47,12 +47,6 @@ final class PerlUndefValue extends PerlSpecialValue {
 
   @NotNull
   @Override
-  protected PerlValue createHashSlice(@NotNull PerlValue keysValue) {
-    return UNKNOWN_VALUE;
-  }
-
-  @NotNull
-  @Override
   protected PerlValue createScalarDereference() {
     return UNKNOWN_VALUE;
   }

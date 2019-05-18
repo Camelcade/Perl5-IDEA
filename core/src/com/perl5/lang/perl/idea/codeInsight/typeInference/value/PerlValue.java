@@ -216,22 +216,6 @@ public abstract class PerlValue {
     return new PerlArraySliceValue(this, indexesValue);
   }
 
-  /**
-   * @return a value representing a hash slice of the current element
-   */
-  @NotNull
-  public final PerlValue getHashSlice(@NotNull PerlValue keysValue) {
-    if (keysValue.isUndef() || keysValue.isUnknown()) {
-      return UNKNOWN_VALUE;
-    }
-    return createHashSlice(keysValue);
-  }
-
-  @NotNull
-  protected PerlValue createHashSlice(@NotNull PerlValue keysValue) {
-    return new PerlHashSliceValue(this, keysValue);
-  }
-
   @Override
   public final int hashCode() {
     return myHashCode != 0 ? myHashCode : (myHashCode = computeHashCode());

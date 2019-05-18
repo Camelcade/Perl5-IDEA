@@ -41,12 +41,6 @@ final class PerlUnknownValue extends PerlSpecialValue {
 
   @NotNull
   @Override
-  protected PerlValue createHashSlice(@NotNull PerlValue keysValue) {
-    return this;
-  }
-
-  @NotNull
-  @Override
   protected PerlValue createScalarDereference() {
     return this;
   }

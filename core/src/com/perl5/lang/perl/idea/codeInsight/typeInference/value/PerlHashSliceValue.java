@@ -70,4 +70,12 @@ public class PerlHashSliceValue extends PerlParametrizedOperationValue {
   public String toString() {
     return "HashSlice: " + getBaseValue() + "{" + getParameter() + "}";
   }
+
+  @NotNull
+  public static PerlValue create(@NotNull PerlValue hashValue, @NotNull PerlValue indexValue) {
+    if (hashValue.isUndef() || hashValue.isUnknown() || indexValue.isUndef() || indexValue.isUnknown()) {
+      return UNKNOWN_VALUE;
+    }
+    return new PerlHashSliceValue(hashValue, indexValue);
+  }
 }
