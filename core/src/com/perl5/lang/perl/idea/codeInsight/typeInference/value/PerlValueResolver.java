@@ -20,12 +20,12 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.util.Function;
 import com.intellij.util.ObjectUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
+import java.util.function.Function;
 
 public abstract class PerlValueResolver {
   @NotNull
@@ -73,14 +73,8 @@ public abstract class PerlValueResolver {
   }
 
   @NotNull
-  public PerlValue resolve(@NotNull PerlValue unresolvedParameter, @NotNull PerlValueConverter converter) {
-    PerlValue resolvedParameter = resolve(unresolvedParameter);
-    if (resolvedParameter instanceof PerlOneOfValue) {
-      return ((PerlOneOfValue)resolvedParameter).convert(converter::fun);
-    }
-    else {
-      return converter.fun(resolvedParameter);
-    }
+  public PerlValue resolve(@NotNull PerlValue unresolvedParameter, @NotNull Function<PerlValue, PerlValue> converter) {
+    return PerlValuesBuilder.convert(resolve(unresolvedParameter), converter);
   }
 
   @Override
@@ -105,11 +99,5 @@ public abstract class PerlValueResolver {
     int result = myResolveScope.hashCode();
     result = 31 * result + (myContextFile != null ? myContextFile.hashCode() : 0);
     return result;
-  }
-
-  /**
-   * Describes value resolve step.
-   */
-  public interface PerlValueConverter extends Function<PerlValue, PerlValue> {
   }
 }
