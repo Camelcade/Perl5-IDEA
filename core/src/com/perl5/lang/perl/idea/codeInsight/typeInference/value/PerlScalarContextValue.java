@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,13 +17,11 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubInputStream;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
-import java.util.Map;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager.SCALAR_CONTEXT_ID;
 
@@ -46,9 +44,7 @@ public class PerlScalarContextValue extends PerlOperationValue {
 
   @NotNull
   @Override
-  protected PerlValue computeResolve(@NotNull PsiElement contextElement,
-                                     @NotNull PerlValue resolvedTarget,
-                                     @NotNull Map<PerlValue, PerlValue> substitutions) {
+  protected PerlValue computeResolve(@NotNull PerlValue resolvedTarget, @NotNull PerlValueResolver resolver) {
     return resolvedTarget.getScalarRepresentation();
   }
 

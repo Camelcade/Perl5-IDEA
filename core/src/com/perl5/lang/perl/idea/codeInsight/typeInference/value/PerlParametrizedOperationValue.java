@@ -16,13 +16,11 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
-import java.util.Map;
 
 abstract class PerlParametrizedOperationValue extends PerlOperationValue {
   @NotNull
@@ -47,18 +45,14 @@ abstract class PerlParametrizedOperationValue extends PerlOperationValue {
 
   @NotNull
   @Override
-  final protected PerlValue computeResolve(@NotNull PsiElement contextElement,
-                                           @NotNull PerlValue resolvedBaseValue,
-                                           @NotNull Map<PerlValue, PerlValue> substitutions) {
-    return myParameter.resolve(contextElement, substitutions).convert(
-      it -> computeResolve(contextElement, resolvedBaseValue, it, substitutions));
+  final protected PerlValue computeResolve(@NotNull PerlValue resolvedBaseValue, @NotNull PerlValueResolver resolver) {
+    return resolver.resolve(myParameter, it -> computeResolve(resolvedBaseValue, it, resolver));
   }
 
   @NotNull
-  protected abstract PerlValue computeResolve(@NotNull PsiElement contextElement,
-                                              @NotNull PerlValue resolvedBaseValue,
+  protected abstract PerlValue computeResolve(@NotNull PerlValue resolvedBaseValue,
                                               @NotNull PerlValue resolvedParameter,
-                                              @NotNull Map<PerlValue, PerlValue> substitutions);
+                                              @NotNull PerlValueResolver resolver);
 
   @NotNull
   protected final PerlValue getParameter() {

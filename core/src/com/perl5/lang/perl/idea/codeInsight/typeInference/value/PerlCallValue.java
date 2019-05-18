@@ -44,7 +44,6 @@ import org.jetbrains.annotations.Nullable;
 import java.io.IOException;
 import java.util.*;
 
-import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.ARGUMENTS_VALUE;
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
 import static com.perl5.lang.perl.util.PerlSubUtil.SUB_AUTOLOAD;
 
@@ -69,10 +68,9 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
 
   @NotNull
   @Override
-  protected final PerlValue computeResolve(@NotNull PsiElement contextElement,
-                                           @NotNull PerlValue resolvedNamespaceValue,
-                                           @NotNull PerlValue resolvedSubNameValue,
-                                           @NotNull Map<PerlValue, PerlValue> substitutions) {
+  protected PerlValue computeResolve(@NotNull PerlValue resolvedNamespaceValue,
+                                     @NotNull PerlValue resolvedSubNameValue,
+                                     @NotNull PerlValueResolver resolver) {
     Set<String> subNames = resolvedSubNameValue.getSubNames();
     if (subNames.isEmpty()) {
       return UNKNOWN_VALUE;
@@ -86,19 +84,18 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
       return UNKNOWN_VALUE;
     }
 
-    List<PerlValue> resolvedArguments = computeResolvedArguments(resolvedNamespaceValue, contextElement, substitutions);
+    List<PerlValue> resolvedArguments = computeResolvedArguments(resolvedNamespaceValue, resolver);
     PerlArrayValue argumentsValue =
       resolvedArguments.isEmpty() ? PerlArrayValue.EMPTY_ARRAY : PerlArrayValue.builder().addElements(resolvedArguments).build();
-    Map<PerlValue, PerlValue> innerSubstitutions = Collections.singletonMap(ARGUMENTS_VALUE, argumentsValue);
 
-    GlobalSearchScope resolveScope = contextElement.getResolveScope();
+    GlobalSearchScope resolveScope = resolver.getResolveScope();
     PerlOneOfValue.Builder builder = PerlOneOfValue.builder();
     RecursionManager.doPreventingRecursion(
-      new Object[]{resolveScope, resolvedNamespaceValue, resolvedSubNameValue, innerSubstitutions}, true, () -> {
+      new Object[]{resolveScope, resolvedNamespaceValue, resolvedSubNameValue, argumentsValue}, true, () -> {
         processCallTargets(
-          contextElement.getProject(), resolveScope, contextElement, namespaceNames, subNames, it -> {
+          resolver.getProject(), resolveScope, resolver.getContextFile(), namespaceNames, subNames, it -> {
             if (it instanceof PerlSubElement) {
-              builder.addVariant(((PerlSubElement)it).getReturnValue().resolve(it, innerSubstitutions));
+              builder.addVariant(new PerlSubValueResolver(it, argumentsValue).resolve(((PerlSubElement)it).getReturnValue()));
             }
             return true;
           });
@@ -112,9 +109,8 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
    */
   @NotNull
   protected List<PerlValue> computeResolvedArguments(@NotNull PerlValue resolvedNamespaceValue,
-                                                     @NotNull PsiElement contextElement,
-                                                     @NotNull Map<PerlValue, PerlValue> substitutions) {
-    return ContainerUtil.map(myArguments, it -> it.resolve(contextElement, substitutions));
+                                                     @NotNull PerlValueResolver valueResolver) {
+    return ContainerUtil.map(myArguments, valueResolver::resolve);
   }
 
   @Override
@@ -159,7 +155,7 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
    */
   protected abstract boolean processCallTargets(@NotNull Project project,
                                                 @NotNull GlobalSearchScope searchScope,
-                                                @NotNull PsiElement contextElement,
+                                                @Nullable PsiElement contextElement,
                                                 @NotNull Set<String> namespaceNames,
                                                 @NotNull Set<String> subNames,
                                                 @NotNull Processor<? super PsiNamedElement> processor);

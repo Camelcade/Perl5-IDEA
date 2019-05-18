@@ -21,8 +21,6 @@ import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
-
 final class PerlUnknownValue extends PerlSpecialValue {
   static final PerlUnknownValue INSTANCE = new PerlUnknownValue();
 
@@ -31,44 +29,50 @@ final class PerlUnknownValue extends PerlSpecialValue {
 
   @NotNull
   @Override
+  PerlValue computeResolve(@NotNull PerlValueResolver resolver) {
+    return this;
+  }
+
+  @NotNull
+  @Override
   public PerlValue createArrayElement(@NotNull PerlValue arrayIndex) {
-    return UNKNOWN_VALUE;
+    return this;
   }
 
   @NotNull
   @Override
   protected PerlValue createHashElement(@NotNull PerlValue hashKey) {
-    return UNKNOWN_VALUE;
+    return this;
   }
 
   @NotNull
   @Override
   protected PerlValue createArithmeticNegation() {
-    return UNKNOWN_VALUE;
+    return this;
   }
 
   @NotNull
   @Override
   protected PerlValue createArraySlice(@NotNull PerlValue indexesValue) {
-    return UNKNOWN_VALUE;
+    return this;
   }
 
   @NotNull
   @Override
   protected PerlValue createHashSlice(@NotNull PerlValue keysValue) {
-    return UNKNOWN_VALUE;
+    return this;
   }
 
   @NotNull
   @Override
   protected PerlValue createScalarDereference() {
-    return UNKNOWN_VALUE;
+    return this;
   }
 
   @NotNull
   @Override
   protected PerlValue createReference() {
-    return UNKNOWN_VALUE;
+    return this;
   }
 
   @Nullable

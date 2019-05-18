@@ -38,7 +38,7 @@ public final class PerlDeferredHashValue extends PerlMapValue {
   @NotNull
   @Override
   protected PerlValue createHashElement(@NotNull PerlValue hashKey) {
-    PerlValue element = hashKey.convertStrict(this::tryGet);
+    PerlValue element = hashKey instanceof PerlOneOfValue ? ((PerlOneOfValue)hashKey).convertStrict(this::tryGet) : tryGet(hashKey);
     return !element.isUnknown() ? element : super.createHashElement(hashKey);
   }
 

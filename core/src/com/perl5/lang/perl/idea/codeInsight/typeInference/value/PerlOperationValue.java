@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
@@ -24,7 +23,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
-import java.util.Map;
 
 /**
  * Represents non-mutation operation value on some base value. E.g. item, slice, keys, scalar
@@ -58,16 +56,15 @@ abstract class PerlOperationValue extends PerlValue {
     myBaseValue.serialize(dataStream);
   }
 
+  @NotNull
   @Override
-  final PerlValue computeResolve(@NotNull PsiElement contextElement,
-                                 @NotNull Map<PerlValue, PerlValue> substitutions) {
-    return myBaseValue.resolve(contextElement, substitutions).convert(it -> computeResolve(contextElement, it, substitutions));
+  final PerlValue computeResolve(@NotNull PerlValueResolver resolver) {
+    return resolver.resolve(myBaseValue, it -> computeResolve(it, resolver));
   }
 
   @NotNull
-  protected abstract PerlValue computeResolve(@NotNull PsiElement contextElement,
-                                              @NotNull PerlValue resolvedBaseValue,
-                                              @NotNull Map<PerlValue, PerlValue> substitutions);
+  protected abstract PerlValue computeResolve(@NotNull PerlValue resolvedBaseValue,
+                                              @NotNull PerlValueResolver resolver);
 
   @Override
   public boolean equals(Object o) {

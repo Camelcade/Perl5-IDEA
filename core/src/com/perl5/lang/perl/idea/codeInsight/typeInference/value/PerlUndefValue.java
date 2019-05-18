@@ -35,6 +35,12 @@ final class PerlUndefValue extends PerlSpecialValue {
 
   @NotNull
   @Override
+  PerlValue computeResolve(@NotNull PerlValueResolver resolver) {
+    return this;
+  }
+
+  @NotNull
+  @Override
   public PerlValue createArrayElement(@NotNull PerlValue arrayIndex) {
     return UNKNOWN_VALUE;
   }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubInputStream;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
@@ -24,7 +23,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
-import java.util.Map;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager.BLESSED_ID;
 
@@ -49,10 +47,9 @@ public final class PerlBlessedValue extends PerlParametrizedOperationValue {
 
   @NotNull
   @Override
-  protected PerlValue computeResolve(@NotNull PsiElement contextElement,
-                                     @NotNull PerlValue resolvedValue,
+  protected PerlValue computeResolve(@NotNull PerlValue resolvedValue,
                                      @NotNull PerlValue resolvedBless,
-                                     @NotNull Map<PerlValue, PerlValue> substitutions) {
+                                     @NotNull PerlValueResolver resolver) {
     return new PerlBlessedValue(resolvedValue, resolvedBless);
   }
 

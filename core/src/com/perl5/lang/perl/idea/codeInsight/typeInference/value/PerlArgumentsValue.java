@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,14 +16,10 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
-import com.intellij.psi.PsiElement;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Map;
-
-import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager.ARGUMENTS_ID;
 
 /**
@@ -35,10 +31,10 @@ final class PerlArgumentsValue extends PerlSpecialValue {
   private PerlArgumentsValue() {
   }
 
+  @NotNull
   @Override
-  PerlValue computeResolve(@NotNull PsiElement contextElement,
-                           @NotNull Map<PerlValue, PerlValue> substitutions) {
-    return UNKNOWN_VALUE;
+  PerlValue computeResolve(@NotNull PerlValueResolver resolver) {
+    throw new RuntimeException("This value supposed to be substituted");
   }
 
   @NotNull

@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
@@ -27,9 +26,7 @@ import org.jetbrains.annotations.Nullable;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
-import java.util.function.Function;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue.PerlValueType.DEFERRED;
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue.PerlValueType.DETERMINISTIC;
@@ -40,7 +37,6 @@ import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
  * Parent for all perl values
  */
 public abstract class PerlValue {
-  private static final Logger LOG = Logger.getInstance(PerlValue.class);
 
   // transient cached values
   private volatile int myHashCode = 0;
@@ -61,24 +57,13 @@ public abstract class PerlValue {
     return Collections.emptySet();
   }
 
+
   /**
-   * @return a current value resolved in the context of the {@code project}.
+   * @return a current value resolved in the context of the {@code contextElement}.
    */
   @NotNull
-  public final PerlValue resolve(@NotNull PsiElement contextElement, @NotNull Map<PerlValue, PerlValue> substitutions) {
-    if (isUnknown() || isDeterministic()) {
-      return this;
-    }
-    PerlValue substitution = substitutions.get(this);
-    if (substitution != null) {
-      return substitution;
-    }
-    return PerlValuesCacheService.getInstance(contextElement.getProject()).getResolvedValue(this, contextElement, substitutions);
-  }
-
-  @NotNull
   public final PerlValue resolve(@NotNull PsiElement contextElement) {
-    return resolve(contextElement, Collections.emptyMap());
+    return new PerlSimpleValueResolver(contextElement).resolve(this);
   }
 
   /**
@@ -86,10 +71,8 @@ public abstract class PerlValue {
    * @apiNote DO NOT use this method directly, use {@link #resolve(PsiElement)} (Project)}
    * @implSpec feel free to use indexes, resolve and any heavy activity you need
    */
-  PerlValue computeResolve(@NotNull PsiElement contextElement,
-                           @NotNull Map<PerlValue, PerlValue> substitutions) {
-    throw new RuntimeException("Not implemented resolve in " + this);
-  }
+  @NotNull
+  abstract PerlValue computeResolve(@NotNull PerlValueResolver resolver);
 
   /**
    * @return set of sub names which may be represented by the current value
@@ -197,24 +180,6 @@ public abstract class PerlValue {
   }
 
   /**
-   * @return a value computed by {@code converter} from the current value
-   */
-  public PerlValue convert(@NotNull Function<PerlValue, PerlValue> converter) {
-    return converter.apply(this);
-  }
-
-  /**
-   * Works the same way as {@link #convert(Function)}, but returns {@link PerlValues#UNKNOWN_VALUE} if
-   * converter returned {@code UNKNOWN_VALUE} at least once.
-   *
-   * @see PerlHashElementValue#create(com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue, com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue)
-   * @see PerlOneOfValue#convertStrict(Function)
-   */
-  public PerlValue convertStrict(@NotNull Function<PerlValue, PerlValue> converter) {
-    return convert(converter);
-  }
-
-  /**
    * @return presentable text for tooltips
    */
   @NotNull
@@ -227,7 +192,7 @@ public abstract class PerlValue {
    */
   @NotNull
   public final PerlValue getReference() {
-    return convert(PerlValue::createReference);
+    return PerlValuesBuilder.convert(this, PerlValue::createReference);
   }
 
   @NotNull
@@ -240,7 +205,7 @@ public abstract class PerlValue {
    */
   @NotNull
   public final PerlValue getScalarDereference() {
-    return convert(PerlValue::createScalarDereference);
+    return PerlValuesBuilder.convert(this, PerlValue::createScalarDereference);
   }
 
   @NotNull
@@ -288,7 +253,7 @@ public abstract class PerlValue {
     if (arrayIndex.isUnknown() || arrayIndex.isUndef()) {
       return UNKNOWN_VALUE;
     }
-    return convert(it -> it.createArrayElement(arrayIndex));
+    return PerlValuesBuilder.convert(this, it -> it.createArrayElement(arrayIndex));
   }
 
   @NotNull
@@ -301,7 +266,7 @@ public abstract class PerlValue {
    */
   @NotNull
   public final PerlValue getArithmeticNegation() {
-    return convert(PerlValue::createArithmeticNegation);
+    return PerlValuesBuilder.convert(this, PerlValue::createArithmeticNegation);
   }
 
   @NotNull
@@ -317,7 +282,7 @@ public abstract class PerlValue {
     if (hashKey.isUnknown() || hashKey.isUndef()) {
       return UNKNOWN_VALUE;
     }
-    return convert(hash -> hash.createHashElement(hashKey));
+    return PerlValuesBuilder.convert(this, it -> it.createHashElement(hashKey));
   }
 
   @NotNull

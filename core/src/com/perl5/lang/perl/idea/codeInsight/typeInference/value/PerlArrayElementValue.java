@@ -16,12 +16,10 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubInputStream;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
-import java.util.Map;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager.ARRAY_ELEMENT_ID;
@@ -37,10 +35,9 @@ public final class PerlArrayElementValue extends PerlParametrizedOperationValue 
 
   @NotNull
   @Override
-  protected PerlValue computeResolve(@NotNull PsiElement contextElement,
-                                     @NotNull PerlValue resolvedArrayValue,
+  protected PerlValue computeResolve(@NotNull PerlValue resolvedArrayValue,
                                      @NotNull PerlValue resolvedIndexValue,
-                                     @NotNull Map<PerlValue, PerlValue> substitutions) {
+                                     @NotNull PerlValueResolver resolver) {
     return resolvedArrayValue instanceof PerlArrayValue ? ((PerlArrayValue)resolvedArrayValue).get(resolvedIndexValue) : UNKNOWN_VALUE;
   }
 

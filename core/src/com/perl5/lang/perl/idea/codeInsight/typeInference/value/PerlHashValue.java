@@ -54,7 +54,7 @@ public class PerlHashValue extends PerlMapValue {
   @NotNull
   @Override
   protected PerlValue createHashElement(@NotNull PerlValue hashKey) {
-    return hashKey.convert(this::get);
+    return PerlValuesBuilder.convert(hashKey, this::get);
   }
 
   /**

@@ -24,7 +24,10 @@ import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
 
@@ -46,14 +49,14 @@ abstract class PerlListValue extends PerlValue {
     PerlValuesManager.writeCollection(dataStream, myElements);
   }
 
+  @NotNull
   @Override
-  final PerlValue computeResolve(@NotNull PsiElement contextElement,
-                                 @NotNull Map<PerlValue, PerlValue> substitutions) {
-    return computeResolve(contextElement, ContainerUtil.map(myElements, it -> it.resolve(contextElement, substitutions)));
+  final PerlValue computeResolve(@NotNull PerlValueResolver resolver) {
+    return computeResolve(resolver, ContainerUtil.map(myElements, resolver::resolve));
   }
 
   @NotNull
-  protected abstract PerlValue computeResolve(@NotNull PsiElement contextElement,
+  protected abstract PerlValue computeResolve(@NotNull PerlValueResolver resolver,
                                               @NotNull List<PerlValue> resolvedElements);
 
   @NotNull

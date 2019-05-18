@@ -139,13 +139,13 @@ public final class PerlOneOfValue extends PerlValue implements Iterable<PerlValu
     return false;
   }
 
+  @NotNull
   @Override
-  PerlValue computeResolve(@NotNull PsiElement contextElement,
-                           @NotNull Map<PerlValue, PerlValue> substitutions) {
-    return convert(it -> it.resolve(contextElement, substitutions));
+  PerlValue computeResolve(@NotNull PerlValueResolver resolver) {
+    return convert(resolver::resolve);
   }
 
-  @Override
+  @NotNull
   public PerlValue convert(@NotNull Function<PerlValue, PerlValue> converter) {
     ProgressManager.checkCanceled();
     Builder builder = builder();
@@ -153,7 +153,14 @@ public final class PerlOneOfValue extends PerlValue implements Iterable<PerlValu
     return builder.build();
   }
 
-  @Override
+  /**
+   * Works the same way as {@link #convert(Function)}, but returns {@link PerlValues#UNKNOWN_VALUE} if
+   * converter returned {@code UNKNOWN_VALUE} at least once.
+   *
+   * @see PerlHashElementValue#create(com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue, com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue)
+   * @see PerlOneOfValue#convertStrict(Function)
+   */
+  @NotNull
   public PerlValue convertStrict(@NotNull Function<PerlValue, PerlValue> converter) {
     ProgressManager.checkCanceled();
     Builder builder = builder();

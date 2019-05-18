@@ -49,6 +49,12 @@ public final class PerlScalarValue extends PerlValue {
 
   @NotNull
   @Override
+  PerlValue computeResolve(@NotNull PerlValueResolver resolver) {
+    return this;
+  }
+
+  @NotNull
+  @Override
   protected final PerlContextType getContextType() {
     return PerlContextType.SCALAR;
   }

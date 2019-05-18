@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubInputStream;
 import com.perl5.PerlBundle;
 import org.jetbrains.annotations.NotNull;
@@ -24,7 +23,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.Collections;
-import java.util.Map;
 import java.util.Set;
 
 public final class PerlReferenceValue extends PerlOperationValue {
@@ -44,9 +42,7 @@ public final class PerlReferenceValue extends PerlOperationValue {
 
   @NotNull
   @Override
-  protected PerlValue computeResolve(@NotNull PsiElement contextElement,
-                                     @NotNull PerlValue resolvedTarget,
-                                     @NotNull Map<PerlValue, PerlValue> substitutions) {
+  protected PerlValue computeResolve(@NotNull PerlValue resolvedTarget, @NotNull PerlValueResolver resolver) {
     // fixme casts dereferences should be here
     return resolvedTarget.equals(getTarget()) ? this : new PerlReferenceValue(resolvedTarget);
   }

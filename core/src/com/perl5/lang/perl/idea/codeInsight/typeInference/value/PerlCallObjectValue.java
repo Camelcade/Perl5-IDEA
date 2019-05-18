@@ -31,7 +31,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 public final class PerlCallObjectValue extends PerlCallValue {
@@ -58,11 +57,8 @@ public final class PerlCallObjectValue extends PerlCallValue {
 
   @NotNull
   @Override
-  protected List<PerlValue> computeResolvedArguments(@NotNull PerlValue resolvedNamespaceValue,
-                                                     @NotNull PsiElement contextElement,
-                                                     @NotNull Map<PerlValue, PerlValue> substitutions) {
-    return ContainerUtil.prepend(super.computeResolvedArguments(resolvedNamespaceValue, contextElement, substitutions),
-                                 resolvedNamespaceValue);
+  protected List<PerlValue> computeResolvedArguments(@NotNull PerlValue resolvedNamespaceValue, @NotNull PerlValueResolver valueResolver) {
+    return ContainerUtil.prepend(super.computeResolvedArguments(resolvedNamespaceValue, valueResolver), resolvedNamespaceValue);
   }
 
   @Override
@@ -93,7 +89,8 @@ public final class PerlCallObjectValue extends PerlCallValue {
   @Override
   protected boolean processCallTargets(@NotNull Project project,
                                        @NotNull GlobalSearchScope searchScope,
-                                       @Nullable PsiElement contextElement, @NotNull Set<String> namespaceNames,
+                                       @Nullable PsiElement contextElement,
+                                       @NotNull Set<String> namespaceNames,
                                        @NotNull Set<String> subNames,
                                        @NotNull Processor<? super PsiNamedElement> processor) {
     for (String contextNamespace : namespaceNames) {

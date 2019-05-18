@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.util.SmartList;
 import com.perl5.PerlBundle;
@@ -131,8 +130,7 @@ public final class PerlArrayValue extends PerlListValue implements Iterable<Perl
 
   @NotNull
   @Override
-  protected PerlValue computeResolve(@NotNull PsiElement contextElement,
-                                     @NotNull List<PerlValue> resolvedElements) {
+  protected PerlValue computeResolve(@NotNull PerlValueResolver resolver, @NotNull List<PerlValue> resolvedElements) {
     return builder().addElements(resolvedElements).build();
   }
 
