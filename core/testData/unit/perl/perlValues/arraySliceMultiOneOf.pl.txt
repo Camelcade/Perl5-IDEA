@@ -13,7 +13,10 @@ else{
 ----------
 @other
 PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 154 in arraySliceMultiOneOf.pl
-Array(ArraySlice: OneOf: [Array: [five, six], Array: [one, two, three, four]][OneOf: [Array: [0, -2, 2], Array: [1]]])
+Array(OneOf[Array(five, five, undef),
+Array(one, three, three),
+Array(six),
+Array(two)])
 ----------
 Resolved
 ----------

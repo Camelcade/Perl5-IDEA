@@ -1,0 +1,16 @@
+sub get_indexes{
+  return (0, -2, 2);
+}
+@array = qw/ one two three four/;
+
+@other = @array[get_indexes()];
+
+@ot<caret>her;
+----------
+@other
+PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 108 in arraySliceMultiAllDeferred.pl
+Array(ArraySlice: Array: [one, two, three, four][main::get_indexes()])
+----------
+Resolved
+----------
+Array(one, three, three)

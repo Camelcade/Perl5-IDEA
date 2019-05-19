@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 import com.intellij.openapi.progress.ProgressManager;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlOneOfValue.builder;
@@ -28,7 +29,7 @@ public final class PerlValuesBuilder {
    * @return converts {@code baseValue} with {@code converter}. Handles cases with {@link PerlOneOfValue}
    */
   @NotNull
-  public static PerlValue convert(@NotNull PerlValue baseValue, Function<PerlValue, PerlValue> converter) {
+  public static PerlValue convert(@NotNull PerlValue baseValue, @NotNull Function<PerlValue, PerlValue> converter) {
     if (!(baseValue instanceof PerlOneOfValue)) {
       return converter.apply(baseValue);
     }
@@ -36,5 +37,11 @@ public final class PerlValuesBuilder {
     PerlOneOfValue.Builder builder = builder();
     ((PerlOneOfValue)baseValue).forEach(it -> builder.addVariant(converter.apply(it)));
     return builder.build();
+  }
+
+  @NotNull
+  public static PerlValue convert(@NotNull PerlValue baseValue, @NotNull PerlValue parameterValue,
+                                  @NotNull BiFunction<PerlValue, PerlValue, PerlValue> converter) {
+    return convert(baseValue, first -> convert(parameterValue, second -> converter.apply(first, second)));
   }
 }

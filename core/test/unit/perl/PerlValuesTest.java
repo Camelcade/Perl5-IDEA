@@ -59,7 +59,11 @@ public class PerlValuesTest extends PerlLightTestCase {
 
   public void testArraySliceMultiAll() {doTest();}
 
+  public void testArraySliceMultiAllDeferred() {doTest();}
+
   public void testArraySliceMultiOneOf() {doTest();}
+
+  public void testArraySliceMultiOneOfDeferred() {doTest();}
 
   public void testArithmeticNegation() {doTest();}
 

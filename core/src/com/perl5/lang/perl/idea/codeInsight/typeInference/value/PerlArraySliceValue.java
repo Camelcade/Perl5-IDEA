@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.psi.stubs.StubInputStream;
+import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -27,9 +28,15 @@ import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager.ARRAY_SLICE_ID;
 
 public class PerlArraySliceValue extends PerlParametrizedOperationValue {
+
   PerlArraySliceValue(@NotNull PerlValue arrayValue,
                       @NotNull PerlValue indexesValue) {
     super(arrayValue, indexesValue);
+    if (arrayValue.isDeterministic() && indexesValue.isDeterministic()) {
+      LOG.error("Bot array and indexes are deterministic and should be computed in-place: " +
+                "array=" + arrayValue + "; " +
+                "indexes=" + indexesValue);
+    }
   }
 
   PerlArraySliceValue(@NotNull StubInputStream dataStream) throws IOException {
@@ -47,18 +54,29 @@ public class PerlArraySliceValue extends PerlParametrizedOperationValue {
   protected PerlValue computeResolve(@NotNull PerlValue resolvedArrayValue,
                                      @NotNull PerlValue resolvedIndexesValue,
                                      @NotNull PerlValueResolver resolver) {
-    if (!(resolvedArrayValue instanceof PerlArrayValue)) {
-      return UNKNOWN_VALUE;
+    return computeStrictResolve(resolvedArrayValue, resolvedIndexesValue);
+  }
+
+  @NotNull
+  private static PerlValue computeStrictResolve(@NotNull PerlValue resolvedArrayValue,
+                                                @NotNull PerlValue resolvedIndexesValue) {
+    return ObjectUtils.notNull(computeResolve(resolvedArrayValue, resolvedIndexesValue), UNKNOWN_VALUE);
+  }
+
+  private static PerlValue computeResolve(@NotNull PerlValue arrayValue,
+                                          @NotNull PerlValue indexValue) {
+    if (!(arrayValue instanceof PerlArrayValue)) {
+      return null;
     }
     PerlArrayValue.Builder builder = PerlArrayValue.builder();
-    if (resolvedIndexesValue instanceof PerlArrayValue) {
-      ((PerlArrayValue)resolvedIndexesValue).forEach(key -> builder.addElement(((PerlArrayValue)resolvedArrayValue).get(key)));
+    if (indexValue instanceof PerlArrayValue) {
+      ((PerlArrayValue)indexValue).forEach(key -> builder.addElement(((PerlArrayValue)arrayValue).get(key)));
     }
-    else if (resolvedIndexesValue instanceof PerlScalarValue) {
-      builder.addElement(((PerlArrayValue)resolvedArrayValue).get(resolvedIndexesValue));
+    else if (indexValue instanceof PerlScalarValue) {
+      builder.addElement(((PerlArrayValue)arrayValue).get(indexValue));
     }
     else {
-      return UNKNOWN_VALUE;
+      return null;
     }
     return builder.build();
   }
@@ -75,9 +93,10 @@ public class PerlArraySliceValue extends PerlParametrizedOperationValue {
 
   @NotNull
   public static PerlValue create(@NotNull PerlValue arrayValue, @NotNull PerlValue indexValue) {
-    if (arrayValue.isUndef() || arrayValue.isUnknown() || indexValue.isUndef() || indexValue.isUnknown()) {
-      return UNKNOWN_VALUE;
+    if (arrayValue.isDeterministic() && indexValue.isDeterministic()) {
+      return PerlValuesBuilder.convert(arrayValue, indexValue, PerlArraySliceValue::computeStrictResolve);
     }
-    return new PerlArraySliceValue(arrayValue, indexValue);
+    PerlValue resolvedValue = computeResolve(arrayValue, indexValue);
+    return resolvedValue != null ? resolvedValue : new PerlArraySliceValue(arrayValue, indexValue);
   }
 }

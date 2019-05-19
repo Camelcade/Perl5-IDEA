@@ -1,0 +1,20 @@
+sub get_list{
+  return qw/ one two three four/;
+}
+
+sub get_indexes{
+  return (1);
+}
+
+if( $a ){
+  @array = get_list;
+  @indexes = (0, -2, 2);
+}
+else{
+  @array = qw/ five six/;
+  @indexes = get_indexes;
+}
+
+@other = @array[@indexes];
+
+@ot<caret>her;

@@ -1,0 +1,31 @@
+sub get_list{
+  return qw/ one two three four/;
+}
+
+sub get_indexes{
+  return (1);
+}
+
+if( $a ){
+  @array = get_list;
+  @indexes = (0, -2, 2);
+}
+else{
+  @array = qw/ five six/;
+  @indexes = get_indexes;
+}
+
+@other = @array[@indexes];
+
+@ot<caret>her;
+----------
+@other
+PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 232 in arraySliceMultiOneOfDeferred.pl
+Array(ArraySlice: OneOf: [Array: [five, six], Array: [main::get_list()]][OneOf: [Array: [0, -2, 2], Array: [main::get_indexes()]]])
+----------
+Resolved
+----------
+Array(OneOf[Array(five, five, undef),
+Array(one, three, three),
+Array(six),
+Array(two)])

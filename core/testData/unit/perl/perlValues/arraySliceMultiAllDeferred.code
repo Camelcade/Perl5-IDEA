@@ -1,0 +1,8 @@
+sub get_indexes{
+  return (0, -2, 2);
+}
+@array = qw/ one two three four/;
+
+@other = @array[get_indexes()];
+
+@ot<caret>her;

@@ -6,7 +6,7 @@
 ----------
 @other
 PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 56 in arraySlice.pl
-Array(ArraySlice: Array: [one, two, three, four][0])
+Array(one)
 ----------
 Resolved
 ----------
