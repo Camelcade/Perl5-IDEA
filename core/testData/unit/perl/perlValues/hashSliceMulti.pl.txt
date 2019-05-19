@@ -6,7 +6,7 @@
 ----------
 @other
 PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 75 in hashSliceMulti.pl
-Array(HashSlice: Hash: [one, two, three, four, five, six]{Array: [one, three]})
+Array(two, four)
 ----------
 Resolved
 ----------

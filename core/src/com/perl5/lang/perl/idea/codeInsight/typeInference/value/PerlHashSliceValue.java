@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.psi.stubs.StubInputStream;
+import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -30,6 +31,11 @@ public class PerlHashSliceValue extends PerlParametrizedOperationValue {
   public PerlHashSliceValue(@NotNull PerlValue hashValue,
                             @NotNull PerlValue keysValue) {
     super(hashValue, keysValue);
+    if (hashValue.isDeterministic() && keysValue.isDeterministic()) {
+      LOG.error("Both hash and keys are deterministic and should be computed in-place: " +
+                "hash=" + hashValue + "; " +
+                "keys=" + keysValue);
+    }
   }
 
   public PerlHashSliceValue(@NotNull StubInputStream dataStream) throws IOException {
@@ -47,8 +53,20 @@ public class PerlHashSliceValue extends PerlParametrizedOperationValue {
   protected PerlValue computeResolve(@NotNull PerlValue resolvedHashValue,
                                      @NotNull PerlValue resolvedKeysValue,
                                      @NotNull PerlValueResolver resolver) {
+    return computeStrictResolve(resolvedHashValue, resolvedKeysValue);
+  }
+
+  @NotNull
+  private static PerlValue computeStrictResolve(@NotNull PerlValue resolvedHashValue,
+                                                @NotNull PerlValue resolvedKeysValue) {
+    return ObjectUtils.notNull(computeResolve(resolvedHashValue, resolvedKeysValue), UNKNOWN_VALUE);
+  }
+
+  @Nullable
+  private static PerlValue computeResolve(@NotNull PerlValue resolvedHashValue,
+                                          @NotNull PerlValue resolvedKeysValue) {
     if (!(resolvedHashValue instanceof PerlHashValue)) {
-      return UNKNOWN_VALUE;
+      return null;
     }
 
     PerlArrayValue.Builder builder = PerlArrayValue.builder();
@@ -72,10 +90,12 @@ public class PerlHashSliceValue extends PerlParametrizedOperationValue {
   }
 
   @NotNull
-  public static PerlValue create(@NotNull PerlValue hashValue, @NotNull PerlValue indexValue) {
-    if (hashValue.isUndef() || hashValue.isUnknown() || indexValue.isUndef() || indexValue.isUnknown()) {
-      return UNKNOWN_VALUE;
+  public static PerlValue create(@NotNull PerlValue hashValue, @NotNull PerlValue keysValue) {
+    if (hashValue.isDeterministic() && keysValue.isDeterministic()) {
+      return PerlValuesBuilder.convert(hashValue, keysValue, PerlHashSliceValue::computeStrictResolve);
     }
-    return new PerlHashSliceValue(hashValue, indexValue);
+
+    PerlValue resolvedValue = computeResolve(hashValue, keysValue);
+    return !PerlValue.isUnknown(resolvedValue) ? resolvedValue : new PerlHashSliceValue(hashValue, keysValue);
   }
 }

@@ -86,6 +86,13 @@ public abstract class PerlValue {
     return this == UNKNOWN_VALUE;
   }
 
+  /**
+   * @return true iff {@code value} is null or {@link PerlValues#UNKNOWN_VALUE}
+   */
+  public static boolean isUnknown(@Nullable PerlValue value) {
+    return value == null || value.isUnknown();
+  }
+
   public final boolean isUndef() {
     return this == UNDEF_VALUE;
   }

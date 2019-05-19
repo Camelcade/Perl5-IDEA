@@ -53,6 +53,8 @@ public class PerlValuesTest extends PerlLightTestCase {
 
   public void testHashSliceMultiOneOf() {doTest();}
 
+  public void testHashSliceMultiOneOfDeferred() {doTest();}
+
   public void testArraySlice() {doTest();}
 
   public void testArraySliceMulti() {doTest();}
