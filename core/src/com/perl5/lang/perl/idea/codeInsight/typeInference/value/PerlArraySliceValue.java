@@ -97,6 +97,6 @@ public class PerlArraySliceValue extends PerlParametrizedOperationValue {
       return PerlValuesBuilder.convert(arrayValue, indexValue, PerlArraySliceValue::computeStrictResolve);
     }
     PerlValue resolvedValue = computeResolve(arrayValue, indexValue);
-    return resolvedValue != null ? resolvedValue : new PerlArraySliceValue(arrayValue, indexValue);
+    return !PerlValue.isUnknown(resolvedValue) ? resolvedValue : new PerlArraySliceValue(arrayValue, indexValue);
   }
 }

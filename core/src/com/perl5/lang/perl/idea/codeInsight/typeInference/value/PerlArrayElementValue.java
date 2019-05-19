@@ -85,6 +85,6 @@ public final class PerlArrayElementValue extends PerlParametrizedOperationValue 
       return PerlValuesBuilder.convert(arrayValue, indexValue, PerlArrayElementValue::computeStrictResolve);
     }
     PerlValue resolvedValue = computeResolve(arrayValue, indexValue);
-    return resolvedValue != null ? resolvedValue : new PerlArrayElementValue(arrayValue, indexValue);
+    return !PerlValue.isUnknown(resolvedValue) ? resolvedValue : new PerlArrayElementValue(arrayValue, indexValue);
   }
 }
