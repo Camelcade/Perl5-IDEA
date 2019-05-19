@@ -1,0 +1,5 @@
+package Mojolicious::Controller;
+
+$var = bless {};
+
+$var->cookie;

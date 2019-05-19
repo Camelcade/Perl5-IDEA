@@ -1,0 +1,6 @@
+sub blessya{
+  return bless $_[0], $_[1];
+}
+
+$var = blessya +{}, 'Foo::Bar';
+$v<caret>ar;

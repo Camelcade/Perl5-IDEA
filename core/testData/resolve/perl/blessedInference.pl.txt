@@ -1,0 +1,10 @@
+PerlVariableReference at (1,4); text in range: 'var' => 0 results:
+
+PerlNamespaceReference at (18,41); text in range: 'Mojolicious::Controller' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Mojolicious::Controller at 0 in Controller.pm
+
+PerlVariableReference at (46,49); text in range: 'var' => 0 results:
+
+PerlSubReference at (51,57); text in range: 'cookie' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Controller::cookie($self, $name) at 1026 in Controller.pm
+

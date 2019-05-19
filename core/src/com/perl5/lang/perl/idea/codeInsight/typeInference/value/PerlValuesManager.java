@@ -33,6 +33,7 @@ import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.util.PerlArrayUtil;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -100,7 +101,7 @@ public final class PerlValuesManager {
   static final int WANTARRAY_ID = id++;
 
   // MUST stay here. Automatically changes on new element creation
-  public static final int VERSION = id++;
+  public static final int VERSION = id += 2;
 
   private static final WeakInterner<PerlValue> INTERNER = new WeakInterner<>();
 
@@ -284,6 +285,12 @@ public final class PerlValuesManager {
         expr = PerlPsiUtil.getSingleBlockExpression(((PsiPerlScalarCastExpr)element).getBlock());
       }
       return PerlScalarDereferenceValue.create(from(expr));
+    }
+    else if (element instanceof PsiPerlBlessExpr) {
+      PerlValue targetValue = from(((PsiPerlBlessExpr)element).getReferenceExpression());
+      PsiElement blessExpression = ((PsiPerlBlessExpr)element).getBlessExpression();
+      PerlValue blessValue = blessExpression != null ? from(blessExpression) : PerlPackageUtil.getContextType(element);
+      return PerlBlessedValue.create(targetValue, blessValue);
     }
     return UNKNOWN_VALUE;
   }

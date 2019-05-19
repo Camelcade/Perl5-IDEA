@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.psi.stubs.StubInputStream;
+import com.intellij.util.ObjectUtils;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
@@ -24,11 +25,12 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager.BLESSED_ID;
 
 public final class PerlBlessedValue extends PerlParametrizedOperationValue {
-  PerlBlessedValue(@NotNull PerlValue value, @NotNull PerlValue bless) {
-    super(value, bless);
+  PerlBlessedValue(@NotNull PerlValue targetValue, @NotNull PerlValue blessValue) {
+    super(targetValue, blessValue);
   }
 
   PerlBlessedValue(@NotNull StubInputStream dataStream) throws IOException {
@@ -41,7 +43,7 @@ public final class PerlBlessedValue extends PerlParametrizedOperationValue {
   }
 
   @NotNull
-  public PerlValue getValue() {
+  public PerlValue getTarget() {
     return getBaseValue();
   }
 
@@ -50,7 +52,24 @@ public final class PerlBlessedValue extends PerlParametrizedOperationValue {
   protected PerlValue computeResolve(@NotNull PerlValue resolvedValue,
                                      @NotNull PerlValue resolvedBless,
                                      @NotNull PerlValueResolver resolver) {
-    return new PerlBlessedValue(resolvedValue, resolvedBless);
+    return computeStrictResolve(resolvedValue, resolvedBless);
+  }
+
+  @NotNull
+  @Override
+  protected PerlContextType getContextType() {
+    return PerlContextType.SCALAR;
+  }
+
+  @NotNull
+  @Override
+  public String getPresentableText() {
+    return PerlBundle.message("perl.value.presentable.blessed", getTarget(), getParameter());
+  }
+
+  @Override
+  public String toString() {
+    return "Bless " + getTarget() + " with " + getBless();
   }
 
   @Override
@@ -58,15 +77,28 @@ public final class PerlBlessedValue extends PerlParametrizedOperationValue {
     return BLESSED_ID;
   }
 
+  @NotNull
+  private static PerlValue computeStrictResolve(@NotNull PerlValue resolvedValue,
+                                                @NotNull PerlValue resolvedBless) {
+    return ObjectUtils.notNull(computeResolve(resolvedValue, resolvedBless), UNKNOWN_VALUE);
+  }
+
   @Nullable
-  @Override
-  protected PerlContextType getContextType() {
-    return getValue().getContextType();
+  private static PerlValue computeResolve(@NotNull PerlValue resolvedValue,
+                                          @NotNull PerlValue resolvedBless) {
+    if (resolvedValue instanceof PerlReferenceValue) {
+      return PerlReferenceValue.create(((PerlReferenceValue)resolvedValue).getTarget(), resolvedBless);
+    }
+    return null;
   }
 
   @NotNull
-  @Override
-  public String getPresentableText() {
-    return PerlBundle.message("perl.value.presentable.blessed", getValue(), getBless());
+  public static PerlValue create(@NotNull PerlValue targetValue, @NotNull PerlValue blessValue) {
+    if (targetValue.isDeterministic()) {
+      return PerlValuesBuilder.convert(targetValue, blessValue, PerlBlessedValue::computeStrictResolve);
+    }
+    PerlValue resolvedValue = computeResolve(targetValue, blessValue);
+    return PerlValue.isUnknown(resolvedValue) ? new PerlBlessedValue(targetValue, blessValue) : resolvedValue;
   }
+
 }

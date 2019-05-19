@@ -1,0 +1,8 @@
+sub blessya{
+  return bless $_[0];
+}
+
+package Foo::Bar;
+
+$var = main::blessya +{};
+$v<caret>ar;

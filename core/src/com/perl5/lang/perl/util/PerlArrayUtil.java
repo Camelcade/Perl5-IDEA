@@ -115,9 +115,27 @@ public class PerlArrayUtil implements PerlElementTypes {
     return collectListElements(rootElement, new ArrayList<>());
   }
 
+  /**
+   * @return list of all children of {@code parentElement} with flattened sequence expressions
+   */
+  @NotNull
+  public static List<PsiElement> collectChildrenList(@Nullable PsiElement parentElement) {
+    if (parentElement == null) {
+      return Collections.emptyList();
+    }
+    PsiElement[] children = parentElement.getChildren();
+    if (children.length == 0) {
+      return Collections.emptyList();
+    }
+    List<PsiElement> result = new ArrayList<>();
+    for (PsiElement child : children) {
+      PerlArrayUtil.collectListElements(child, result);
+    }
+    return result;
+  }
 
   @NotNull
-  private static List<PsiElement> collectListElements(@Nullable PsiElement rootElement, @NotNull List<PsiElement> result) {
+  public static List<PsiElement> collectListElements(@Nullable PsiElement rootElement, @NotNull List<PsiElement> result) {
     if (rootElement == null || PerlParserDefinition.COMMENTS.contains(PsiUtilCore.getElementType(rootElement))) {
       return result;
     }

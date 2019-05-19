@@ -1,0 +1,12 @@
+package Foo::Bar;
+
+$var = bless {};
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 36 in blessContext.pl
+Ref[Hash(), blessed with Foo::Bar]
+----------
+Resolved
+----------
+Ref[Hash(), blessed with Foo::Bar]

@@ -27,6 +27,10 @@ public class PerlResolveTest extends PerlLightTestCase {
     return "testData/resolve/perl";
   }
 
+  public void testBlessedInference() {doTest();}
+
+  public void testBlessedInferenceContext() {doTest();}
+
   public void testSimpleMainTrue() {doTestSimpleMain(true);}
 
   public void testSimpleMainFalse() {doTestSimpleMain(false);}

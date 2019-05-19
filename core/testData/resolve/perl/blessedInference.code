@@ -1,0 +1,3 @@
+$var = bless {}, 'Mojolicious::Controller';
+
+$var->cookie;

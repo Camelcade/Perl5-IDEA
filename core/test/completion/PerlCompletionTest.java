@@ -49,6 +49,10 @@ public class PerlCompletionTest extends PerlLightTestCase {
     doTestCompletionCheck("", (element, __) -> element.getLookupString().contains("MyCustomPackage"));
   }
 
+  public void testBlessedInference() {doTest();}
+
+  public void testBlessedInferenceContext() {doTest();}
+
   public void testPodLiveTemplates() {
     doTest();
   }

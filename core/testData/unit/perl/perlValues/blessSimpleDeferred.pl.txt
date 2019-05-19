@@ -1,0 +1,14 @@
+sub blessya{
+  return bless $_[0], $_[1];
+}
+
+$var = blessya +{}, 'Foo::Bar';
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 77 in blessSimpleDeferred.pl
+scalar main::blessya(Ref[Hash()], Foo::Bar)
+----------
+Resolved
+----------
+Ref[Hash(), blessed with Foo::Bar]

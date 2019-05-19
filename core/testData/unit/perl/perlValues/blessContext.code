@@ -1,0 +1,4 @@
+package Foo::Bar;
+
+$var = bless {};
+$v<caret>ar;

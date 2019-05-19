@@ -22,13 +22,14 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.Set;
 
-public final class PerlReferenceValue extends PerlOperationValue {
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNDEF_VALUE;
 
-  PerlReferenceValue(@NotNull PerlValue referrent) {
-    super(referrent);
+public final class PerlReferenceValue extends PerlParametrizedOperationValue {
+  public PerlReferenceValue(@NotNull PerlValue reference,
+                            @NotNull PerlValue bless) {
+    super(reference, bless);
   }
 
   PerlReferenceValue(@NotNull StubInputStream dataStream) throws IOException {
@@ -42,25 +43,29 @@ public final class PerlReferenceValue extends PerlOperationValue {
 
   @NotNull
   @Override
-  protected PerlValue computeResolve(@NotNull PerlValue resolvedTarget, @NotNull PerlValueResolver resolver) {
+  protected PerlValue computeResolve(@NotNull PerlValue resolvedTarget,
+                                     @NotNull PerlValue resolvedBless,
+                                     @NotNull PerlValueResolver resolver) {
     // fixme casts dereferences should be here
-    return resolvedTarget.equals(getTarget()) ? this : new PerlReferenceValue(resolvedTarget);
+    return resolvedTarget.equals(getTarget()) && resolvedBless.equals(getBless())
+           ? this
+           : new PerlReferenceValue(resolvedTarget, resolvedBless);
   }
 
   @NotNull
   @Override
   public Set<String> getNamespaceNames() {
-    return getTarget() instanceof PerlBlessedValue ? getTarget().getNamespaceNames() : Collections.emptySet();
+    return getBless().getNamespaceNames();
   }
 
   @Override
   public boolean canRepresentNamespace(@Nullable String namespaceName) {
-    return getTarget() instanceof PerlBlessedValue && getTarget().canRepresentNamespace(namespaceName);
+    return getBless().canRepresentNamespace(namespaceName);
   }
 
   @Override
   protected boolean computeIsDeterministic() {
-    return getBaseValue().isDeterministic();
+    return getBaseValue().isDeterministic() && getBless().isDeterministic();
   }
 
   @NotNull
@@ -68,19 +73,33 @@ public final class PerlReferenceValue extends PerlOperationValue {
     return getBaseValue();
   }
 
+  @NotNull
+  public PerlValue getBless() {
+    return getParameter();
+  }
+
   @Override
   public String toString() {
-    return "Reference to: " + getBaseValue();
+    PerlValue bless = getBless();
+    String baseName = "Reference to: " + getTarget();
+    return bless.isUndef() ? baseName : baseName + " blessed with " + bless;
   }
 
   @NotNull
   @Override
   public String getPresentableText() {
-    return PerlBundle.message("perl.value.reference.presentable", getBaseValue().getPresentableText());
+    return getBless().isUndef() ? PerlBundle.message("perl.value.reference.presentable", getTarget().getPresentableText()) :
+           PerlBundle
+             .message("perl.value.reference.blessed.presentable", getTarget().getPresentableText(), getBless().getPresentableText());
   }
 
   @NotNull
   public static PerlValue create(@NotNull PerlValue referent) {
-    return referent.isUnknown() ? referent : new PerlReferenceValue(referent);
+    return create(referent, UNDEF_VALUE);
+  }
+
+  @NotNull
+  public static PerlValue create(@NotNull PerlValue referent, @NotNull PerlValue bless) {
+    return referent.isUnknown() ? referent : new PerlReferenceValue(referent, bless);
   }
 }

@@ -1,0 +1,7 @@
+PerlVariableReference at (35,38); text in range: 'var' => 0 results:
+
+PerlVariableReference at (53,56); text in range: 'var' => 0 results:
+
+PerlSubReference at (58,64); text in range: 'cookie' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Controller::cookie($self, $name) at 1026 in Controller.pm
+

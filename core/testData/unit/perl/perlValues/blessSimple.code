@@ -1,0 +1,2 @@
+$var = bless {}, 'Foo::Bar';
+$v<caret>ar;
