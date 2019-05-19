@@ -3,4 +3,4 @@ sub so<caret>me{
   @kwargs{@_[0]};
 }
 ----------
-HashSlice: Hash: [SUB_ARGUMENTS]{ArraySlice: SUB_ARGUMENTS[0]}
+HashSlice: Hash: [SUB_ARGUMENTS]{ArraySlice: SUB_ARGUMENTS[Array: [0]]}

@@ -72,9 +72,6 @@ public class PerlArraySliceValue extends PerlParametrizedOperationValue {
     if (indexValue instanceof PerlArrayValue) {
       ((PerlArrayValue)indexValue).forEach(key -> builder.addElement(((PerlArrayValue)arrayValue).get(key)));
     }
-    else if (indexValue instanceof PerlScalarValue) {
-      builder.addElement(((PerlArrayValue)arrayValue).get(indexValue));
-    }
     else {
       return null;
     }

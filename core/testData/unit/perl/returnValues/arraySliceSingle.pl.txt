@@ -2,4 +2,4 @@ sub so<caret>me{
   @_[$_[0]];
 }
 ----------
-ArraySlice: SUB_ARGUMENTS[ArrayItem: SUB_ARGUMENTS[0]]
+ArraySlice: SUB_ARGUMENTS[Array: [ArrayItem: SUB_ARGUMENTS[0]]]

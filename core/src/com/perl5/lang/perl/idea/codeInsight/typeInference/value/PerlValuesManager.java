@@ -272,11 +272,11 @@ public final class PerlValuesManager {
     }
     else if (element instanceof PsiPerlHashSlice) {
       return PerlHashSliceValue.create(
-        from(((PsiPerlHashSlice)element).getExpr()), from(((PsiPerlHashSlice)element).getHashIndex().getExpr()));
+        from(((PsiPerlHashSlice)element).getExpr()), listContext(from(((PsiPerlHashSlice)element).getHashIndex().getExpr())));
     }
     else if (element instanceof PsiPerlArraySlice) {
       return PerlArraySliceValue.create(
-        from(((PsiPerlArraySlice)element).getExpr()), from(((PsiPerlArraySlice)element).getArrayIndex().getExpr()));
+        from(((PsiPerlArraySlice)element).getExpr()), listContext(from(((PsiPerlArraySlice)element).getArrayIndex().getExpr())));
     }
     else if (element instanceof PsiPerlScalarCastExpr) {
       PsiPerlExpr expr = ((PsiPerlScalarCastExpr)element).getExpr();
@@ -286,6 +286,14 @@ public final class PerlValuesManager {
       return PerlScalarDereferenceValue.create(from(expr));
     }
     return UNKNOWN_VALUE;
+  }
+
+  /**
+   * @return when {@code value} has list context, returns it. Wraps in array otherwise
+   */
+  @NotNull
+  private static PerlValue listContext(@NotNull PerlValue value) {
+    return value.getContextType() == PerlContextType.LIST ? value : PerlArrayValue.builder().addElement(value).build();
   }
 
   @NotNull

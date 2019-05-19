@@ -74,7 +74,7 @@ public class PerlHashSliceValue extends PerlParametrizedOperationValue {
       ((PerlArrayValue)resolvedKeysValue).forEach(key -> builder.addElement(((PerlHashValue)resolvedHashValue).get(key)));
     }
     else {
-      builder.addElement(((PerlHashValue)resolvedHashValue).get(resolvedKeysValue));
+      return null;
     }
     return builder.build();
   }
