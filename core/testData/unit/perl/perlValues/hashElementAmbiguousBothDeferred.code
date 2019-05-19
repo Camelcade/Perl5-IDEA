@@ -1,0 +1,27 @@
+sub get_list{
+  @_;
+}
+
+sub get_key{
+  $_[0];
+}
+
+if( $a ){
+  %hash = get_list(
+    one => 'two',
+    three => 'four'
+  );
+  $key = 'one';
+}
+else{
+  %hash = (
+    one => 'bla',
+    three => 'blo',
+    four => 42
+  );
+  $key = get_key 'four'
+}
+
+$var = $hash{$key};
+
+$v<caret>ar;

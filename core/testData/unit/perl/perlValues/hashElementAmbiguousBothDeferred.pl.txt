@@ -1,0 +1,38 @@
+sub get_list{
+  @_;
+}
+
+sub get_key{
+  $_[0];
+}
+
+if( $a ){
+  %hash = get_list(
+    one => 'two',
+    three => 'four'
+  );
+  $key = 'one';
+}
+else{
+  %hash = (
+    one => 'bla',
+    three => 'blo',
+    four => 42
+  );
+  $key = get_key 'four'
+}
+
+$var = $hash{$key};
+
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 263 in hashElementAmbiguousBothDeferred.pl
+HashItem: OneOf: [Hash: [main::get_list(one, two, three, four)], Hash: [one, bla, three, blo, four, 42]]{OneOf: [one, scalar main::get_key(four)]}
+----------
+Resolved
+----------
+OneOf[42,
+bla,
+two,
+undef]

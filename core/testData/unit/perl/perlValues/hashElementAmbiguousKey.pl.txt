@@ -11,7 +11,8 @@ $v<caret>ar;
 ----------
 $var
 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 98 in hashElementAmbiguousKey.pl
-HashItem: Hash: [one, two, three, four]{OneOf: [one, three]}
+OneOf[four,
+two]
 ----------
 Resolved
 ----------

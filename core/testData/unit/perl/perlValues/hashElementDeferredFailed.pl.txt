@@ -10,7 +10,7 @@ $v<caret>ar;
 ----------
 $var
 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 83 in hashElementDeferredFailed.pl
-HashItem: Hash: [one, two, UNKNOWN_VALUE, three, four]{one}
+Value unknown
 ----------
 Resolved
 ----------

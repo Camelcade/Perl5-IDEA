@@ -9,7 +9,7 @@ $v<caret>ar;
 ----------
 $var
 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 86 in hashElementDeferredKey.pl
-HashItem: Hash: [one, two, three, four]{Foo::Bar->get_key()}
+undef
 ----------
 Resolved
 ----------

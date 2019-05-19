@@ -17,7 +17,9 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.psi.stubs.StubInputStream;
+import com.intellij.util.ObjectUtils;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 
@@ -27,6 +29,11 @@ import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
 public final class PerlHashElementValue extends PerlParametrizedOperationValue {
   PerlHashElementValue(@NotNull PerlValue hashValue, @NotNull PerlValue keyValue) {
     super(hashValue, keyValue);
+    if (hashValue.isDeterministic() && keyValue.isDeterministic()) {
+      LOG.error("Bot hash and key are deterministic and should be computed in-place: " +
+                "hash=" + hashValue + "; " +
+                "key=" + keyValue);
+    }
   }
 
   PerlHashElementValue(@NotNull StubInputStream dataStream) throws IOException {
@@ -43,13 +50,28 @@ public final class PerlHashElementValue extends PerlParametrizedOperationValue {
   protected PerlValue computeResolve(@NotNull PerlValue resolvedHashValue,
                                      @NotNull PerlValue resolvedKeyValue,
                                      @NotNull PerlValueResolver resolver) {
-    if (resolvedHashValue instanceof PerlHashValue) {
-      return ((PerlHashValue)resolvedHashValue).get(resolvedKeyValue);
+    return computeStrictResolve(resolvedHashValue, resolvedKeyValue);
+  }
+
+  @NotNull
+  private static PerlValue computeStrictResolve(@NotNull PerlValue hashValue,
+                                                @NotNull PerlValue keyValue) {
+    return ObjectUtils.notNull(computeResolve(hashValue, keyValue), UNKNOWN_VALUE);
+  }
+
+  @Nullable
+  private static PerlValue computeResolve(@NotNull PerlValue hashValue,
+                                          @NotNull PerlValue keyValue) {
+    if (keyValue.isUnknown() || keyValue.isUndef()) {
+      return null;
     }
-    else if (resolvedHashValue instanceof PerlDeferredHashValue) {
-      return ((PerlDeferredHashValue)resolvedHashValue).tryGet(resolvedKeyValue);
+    if (hashValue instanceof PerlHashValue) {
+      return ((PerlHashValue)hashValue).get(keyValue);
     }
-    return UNKNOWN_VALUE;
+    else if (hashValue instanceof PerlDeferredHashValue) {
+      return ((PerlDeferredHashValue)hashValue).tryGet(keyValue);
+    }
+    return null;
   }
 
   public PerlValue getHash() {
@@ -68,9 +90,10 @@ public final class PerlHashElementValue extends PerlParametrizedOperationValue {
 
   @NotNull
   public static PerlValue create(@NotNull PerlValue hashValue, @NotNull PerlValue keyValue) {
-    if (hashValue.isUnknown() || hashValue.isUndef() || keyValue.isUnknown() || keyValue.isUndef()) {
-      return UNKNOWN_VALUE;
+    if (hashValue.isDeterministic() && keyValue.isDeterministic()) {
+      return PerlValuesBuilder.convert(hashValue, keyValue, PerlHashElementValue::computeStrictResolve);
     }
-    return new PerlHashElementValue(hashValue, keyValue);
+    PerlValue resolvedValue = computeResolve(hashValue, keyValue);
+    return PerlValue.isUnknown(resolvedValue) ? new PerlHashElementValue(hashValue, keyValue) : resolvedValue;
   }
 }

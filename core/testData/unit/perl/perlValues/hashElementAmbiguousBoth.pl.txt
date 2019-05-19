@@ -20,7 +20,10 @@ $v<caret>ar;
 ----------
 $var
 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 199 in hashElementAmbiguousBoth.pl
-HashItem: OneOf: [Hash: [one, bla, three, blo, four, 42], Hash: [one, two, three, four]]{OneOf: [four, one]}
+OneOf[42,
+bla,
+two,
+undef]
 ----------
 Resolved
 ----------

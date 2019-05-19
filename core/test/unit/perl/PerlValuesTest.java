@@ -193,6 +193,8 @@ public class PerlValuesTest extends PerlLightTestCase {
 
   public void testHashElementAmbiguousBoth() {doTest();}
 
+  public void testHashElementAmbiguousBothDeferred() {doTest();}
+
   public void testHashElementAmbiguousKey() {doTest();}
 
   public void testHashElementAmbiguousKeyOneMissing() {doTest();}
