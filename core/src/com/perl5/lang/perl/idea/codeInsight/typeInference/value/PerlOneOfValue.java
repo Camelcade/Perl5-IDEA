@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubInputStream;
@@ -33,7 +32,6 @@ import java.util.*;
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
 
 public final class PerlOneOfValue extends PerlValue implements Iterable<PerlValue> {
-  private static final Logger LOG = Logger.getInstance(PerlOneOfValue.class);
   @NotNull
   private final Set<PerlValue> myVariants;
 

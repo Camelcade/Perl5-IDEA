@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.util.SmartList;
 import com.perl5.PerlBundle;
@@ -31,7 +30,6 @@ import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
 
 public final class PerlArrayValue extends PerlListValue implements Iterable<PerlValue> {
-  private static final Logger LOG = Logger.getInstance(PerlArrayValue.class);
   public static final PerlArrayValue EMPTY_ARRAY = PerlValuesManager.intern(new PerlArrayValue(Collections.emptyList()));
 
   private PerlArrayValue(@NotNull List<PerlValue> elements) {

@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.util.ObjectUtils;
@@ -29,8 +28,6 @@ import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager.ARITHMETIC_NEGATION;
 
 public class PerlArithmeticNegationValue extends PerlOperationValue {
-  private static final Logger LOG = Logger.getInstance(PerlArithmeticNegationValue.class);
-
   PerlArithmeticNegationValue(@NotNull PerlValue baseValue) {
     super(baseValue);
     if (baseValue.isDeterministic()) {

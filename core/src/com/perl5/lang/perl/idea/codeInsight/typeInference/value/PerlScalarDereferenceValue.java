@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
@@ -29,7 +28,6 @@ import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager.SCALAR_DEREFERENCE_ID;
 
 public class PerlScalarDereferenceValue extends PerlOperationValue {
-  private static final Logger LOG = Logger.getInstance(PerlScalarDereferenceValue.class);
   public PerlScalarDereferenceValue(@NotNull PerlValue referenceValue) {
     super(referenceValue);
     if (referenceValue.isDeterministic()) {

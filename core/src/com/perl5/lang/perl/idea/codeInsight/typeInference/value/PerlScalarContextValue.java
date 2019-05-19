@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
@@ -30,7 +29,6 @@ import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager.SCALAR_CONTEXT_ID;
 
 public class PerlScalarContextValue extends PerlOperationValue {
-  private static final Logger LOG = Logger.getInstance(PerlScalarContextValue.class);
 
   PerlScalarContextValue(@NotNull PerlValue baseValue) {
     super(baseValue);

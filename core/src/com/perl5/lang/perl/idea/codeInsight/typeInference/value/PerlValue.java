@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
@@ -36,6 +37,7 @@ import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
  * Parent for all perl values
  */
 public abstract class PerlValue {
+  protected static final Logger LOG = Logger.getInstance(PerlValue.class);
 
   // transient cached values
   private volatile int myHashCode = 0;
