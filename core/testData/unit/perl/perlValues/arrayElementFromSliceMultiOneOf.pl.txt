@@ -15,7 +15,9 @@ $v<caret>ar;
 ----------
 $var
 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 173 in arrayElementFromSliceMultiOneOf.pl
-ArrayItem: Array: [OneOf: [Array: [five, five, UNDEF_VALUE], Array: [one, three, three], Array: [six], Array: [two]]][1]
+OneOf[five,
+three,
+undef]
 ----------
 Resolved
 ----------

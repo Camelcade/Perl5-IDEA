@@ -81,6 +81,8 @@ public class PerlValuesTest extends PerlLightTestCase {
 
   public void testArrayElementOneOf() { doTest(); }
 
+  public void testArrayElementOneOfDeferred() { doTest(); }
+
   public void testArrayElement() { doTest(); }
 
   public void testArrayElementUndef() { doTest(); }

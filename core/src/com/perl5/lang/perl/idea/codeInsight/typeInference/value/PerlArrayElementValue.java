@@ -17,7 +17,9 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.psi.stubs.StubInputStream;
+import com.intellij.util.ObjectUtils;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 
@@ -25,8 +27,13 @@ import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager.ARRAY_ELEMENT_ID;
 
 public final class PerlArrayElementValue extends PerlParametrizedOperationValue {
-  PerlArrayElementValue(@NotNull PerlValue baseValue, @NotNull PerlValue index) {
-    super(baseValue, index);
+  PerlArrayElementValue(@NotNull PerlValue arrayValue, @NotNull PerlValue indexValue) {
+    super(arrayValue, indexValue);
+    if (arrayValue.isDeterministic() && indexValue.isDeterministic()) {
+      LOG.error("Bot array and index are deterministic and should be computed in-place: " +
+                "array=" + arrayValue + "; " +
+                "index=" + indexValue);
+    }
   }
 
   PerlArrayElementValue(@NotNull StubInputStream dataStream) throws IOException {
@@ -38,7 +45,19 @@ public final class PerlArrayElementValue extends PerlParametrizedOperationValue 
   protected PerlValue computeResolve(@NotNull PerlValue resolvedArrayValue,
                                      @NotNull PerlValue resolvedIndexValue,
                                      @NotNull PerlValueResolver resolver) {
-    return resolvedArrayValue instanceof PerlArrayValue ? ((PerlArrayValue)resolvedArrayValue).get(resolvedIndexValue) : UNKNOWN_VALUE;
+    return computeStrictResolve(resolvedArrayValue, resolvedIndexValue);
+  }
+
+  @NotNull
+  private static PerlValue computeStrictResolve(@NotNull PerlValue resolvedArrayValue,
+                                                @NotNull PerlValue resolvedIndexValue) {
+    return ObjectUtils.notNull(computeResolve(resolvedArrayValue, resolvedIndexValue), UNKNOWN_VALUE);
+  }
+
+  @Nullable
+  private static PerlValue computeResolve(@NotNull PerlValue resolvedArrayValue,
+                                          @NotNull PerlValue resolvedIndexValue) {
+    return resolvedArrayValue instanceof PerlArrayValue ? ((PerlArrayValue)resolvedArrayValue).get(resolvedIndexValue) : null;
   }
 
   @Override
@@ -61,10 +80,11 @@ public final class PerlArrayElementValue extends PerlParametrizedOperationValue 
   }
 
   @NotNull
-  public static PerlValue create(@NotNull PerlValue listValue, @NotNull PerlValue indexValue) {
-    if (listValue.isUnknown() || listValue.isUndef() || indexValue.isUnknown() || indexValue.isUndef()) {
-      return UNKNOWN_VALUE;
+  public static PerlValue create(@NotNull PerlValue arrayValue, @NotNull PerlValue indexValue) {
+    if (arrayValue.isDeterministic() && indexValue.isDeterministic()) {
+      return PerlValuesBuilder.convert(arrayValue, indexValue, PerlArrayElementValue::computeStrictResolve);
     }
-    return new PerlArrayElementValue(listValue, indexValue);
+    PerlValue resolvedValue = computeResolve(arrayValue, indexValue);
+    return resolvedValue != null ? resolvedValue : new PerlArrayElementValue(arrayValue, indexValue);
   }
 }

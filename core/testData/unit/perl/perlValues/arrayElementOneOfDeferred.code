@@ -1,0 +1,20 @@
+sub get_list{
+  return @_;
+}
+
+sub get_index{
+  return $_[0];
+}
+
+if( $a ){
+  @array = get_list(qw/one two/);
+  $index = 1;
+}
+else{
+  @array = qw/three four/;
+  $index = get_index(2);
+}
+
+$var = $array[$index];
+
+$v<caret>ar;
