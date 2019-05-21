@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,16 @@
  * limitations under the License.
  */
 
-package editor.liveTemplates;
+package liveTemplates;
 
-public class PerlLiveTemplatesTest extends PerlLiveTemplatesTestCase {
+import base.HTMLMasonLightTestCase;
+import org.jetbrains.annotations.NotNull;
+
+public class HTMLMasonLiveTemplateTest extends HTMLMasonLightTestCase {
+  @Override
+  protected String getTestDataPath() {
+    return "testData/liveTemplates";
+  }
 
   public void testSayStdout() {doTest("sout"); }
 
@@ -27,8 +34,6 @@ public class PerlLiveTemplatesTest extends PerlLiveTemplatesTestCase {
   public void testPrintStderr() {doTest("perr"); }
 
   public void testConst() {doTest("cons");}
-
-  public void testContinue() {doTest("cont");}
 
   public void testDo() {doTest("do");}
 
@@ -73,4 +78,8 @@ public class PerlLiveTemplatesTest extends PerlLiveTemplatesTestCase {
   public void testUseVersion() {doTest("uv");}
 
   public void testWhile() {doTest("wh");}
+
+  protected void doTest(@NotNull String textToType) {
+    doLiveTemplateBulkTest(textToType);
+  }
 }

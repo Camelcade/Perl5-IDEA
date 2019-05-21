@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package editor.liveTemplates;
+package liveTemplates;
 
 import base.PerlCompletionPopupTestCase;
 import com.perl5.lang.pod.filetypes.PodFileType;

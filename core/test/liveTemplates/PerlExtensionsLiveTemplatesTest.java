@@ -14,21 +14,10 @@
  * limitations under the License.
  */
 
-package editor.liveTemplates;
+package liveTemplates;
 
-public class PerlWithPodLiveTemplatesTest extends PerlLiveTemplatesTestCase {
-  @Override
-  protected String getTestDataPath() {
-    return "testData/liveTemplates/perl/pod";
-  }
+public class PerlExtensionsLiveTemplatesTest extends PerlLiveTemplatesTestCase {
+  public void testMethod() {doTest("me");}
 
-  public void testHeaderTop() {doTest();}
-
-  public void testHeaderTopTrimming() {doTest();}
-
-  public void testHeaderNested() {doTest();}
-
-  public void testOverTop() {doTest();}
-
-  public void testOverNested() {doTest();}
+  public void testFunc() {doTest("fu");}
 }

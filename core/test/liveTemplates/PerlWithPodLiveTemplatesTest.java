@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,10 +14,21 @@
  * limitations under the License.
  */
 
-package editor.liveTemplates;
+package liveTemplates;
 
-public class PerlExtensionsLiveTemplatesTest extends PerlLiveTemplatesTestCase {
-  public void testMethod() {doTest("me");}
+public class PerlWithPodLiveTemplatesTest extends PerlLiveTemplatesTestCase {
+  @Override
+  protected String getTestDataPath() {
+    return "testData/liveTemplates/perl/pod";
+  }
 
-  public void testFunc() {doTest("fu");}
+  public void testHeaderTop() {doTest();}
+
+  public void testHeaderTopTrimming() {doTest();}
+
+  public void testHeaderNested() {doTest();}
+
+  public void testOverTop() {doTest();}
+
+  public void testOverNested() {doTest();}
 }

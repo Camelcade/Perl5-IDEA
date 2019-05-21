@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +14,22 @@
  * limitations under the License.
  */
 
-package editor.liveTemplates;
+package liveTemplates;
 
-import com.intellij.openapi.util.io.FileUtil;
+import base.PerlLightTestCase;
+import org.jetbrains.annotations.NotNull;
 
-public class PerlTryCatchLiveTemplatesTest extends PerlLiveTemplatesTestCase {
+public abstract class PerlLiveTemplatesTestCase extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
-    return FileUtil.join(super.getTestDataPath(), "trycatch");
+    return "testData/liveTemplates/perl";
   }
 
-  public void testTry() {doTest("tr");}
+  protected void doTest(@NotNull String textToType) {
+    doLiveTemplateBulkTest(textToType);
+  }
 
-  public void testCatch() {doTest("ca");}
+  protected void doTest() {
+    doLiveTemplateTest();
+  }
 }

@@ -14,16 +14,9 @@
  * limitations under the License.
  */
 
-package editor;
+package liveTemplates;
 
-import base.Mason2TopLevelComponentTestCase;
-import org.jetbrains.annotations.NotNull;
-
-public class Mason2LiveTemplateTest extends Mason2TopLevelComponentTestCase {
-  @Override
-  protected String getTestDataPath() {
-    return "testData/liveTemplates/mc";
-  }
+public class PerlLiveTemplatesTest extends PerlLiveTemplatesTestCase {
 
   public void testSayStdout() {doTest("sout"); }
 
@@ -34,6 +27,8 @@ public class Mason2LiveTemplateTest extends Mason2TopLevelComponentTestCase {
   public void testPrintStderr() {doTest("perr"); }
 
   public void testConst() {doTest("cons");}
+
+  public void testContinue() {doTest("cont");}
 
   public void testDo() {doTest("do");}
 
@@ -78,8 +73,4 @@ public class Mason2LiveTemplateTest extends Mason2TopLevelComponentTestCase {
   public void testUseVersion() {doTest("uv");}
 
   public void testWhile() {doTest("wh");}
-
-  protected void doTest(@NotNull String textToType) {
-    doLiveTemplateBulkTest(textToType);
-  }
 }

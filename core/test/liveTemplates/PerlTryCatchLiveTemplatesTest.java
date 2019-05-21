@@ -14,22 +14,17 @@
  * limitations under the License.
  */
 
-package editor.liveTemplates;
+package liveTemplates;
 
-import base.PerlLightTestCase;
-import org.jetbrains.annotations.NotNull;
+import com.intellij.openapi.util.io.FileUtil;
 
-public abstract class PerlLiveTemplatesTestCase extends PerlLightTestCase {
+public class PerlTryCatchLiveTemplatesTest extends PerlLiveTemplatesTestCase {
   @Override
   protected String getTestDataPath() {
-    return "testData/liveTemplates/perl";
+    return FileUtil.join(super.getTestDataPath(), "trycatch");
   }
 
-  protected void doTest(@NotNull String textToType) {
-    doLiveTemplateBulkTest(textToType);
-  }
+  public void testTry() {doTest("tr");}
 
-  protected void doTest() {
-    doLiveTemplateTest();
-  }
+  public void testCatch() {doTest("ca");}
 }

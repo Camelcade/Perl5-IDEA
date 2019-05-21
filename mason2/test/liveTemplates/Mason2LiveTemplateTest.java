@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package editor;
+package liveTemplates;
 
-import base.MojoLightTestCase;
+import base.Mason2TopLevelComponentTestCase;
 import org.jetbrains.annotations.NotNull;
 
-public class MojoLiveTemplatesTest extends MojoLightTestCase {
+public class Mason2LiveTemplateTest extends Mason2TopLevelComponentTestCase {
   @Override
   protected String getTestDataPath() {
-    return "testData/liveTemplates";
+    return "testData/liveTemplates/mc";
   }
 
   public void testSayStdout() {doTest("sout"); }

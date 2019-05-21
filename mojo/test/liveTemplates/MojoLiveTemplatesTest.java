@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package editor;
+package liveTemplates;
 
-import base.HTMLMasonLightTestCase;
+import base.MojoLightTestCase;
 import org.jetbrains.annotations.NotNull;
 
-public class HTMLMasonLiveTemplateTest extends HTMLMasonLightTestCase {
+public class MojoLiveTemplatesTest extends MojoLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/liveTemplates";

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package editor.liveTemplates;
+package liveTemplates;
 
 import base.PodLightTestCase;
 import org.jetbrains.annotations.NotNull;
