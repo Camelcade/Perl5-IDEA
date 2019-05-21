@@ -355,7 +355,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
    * @apiNote adding modules is not allowed in the light tests
    */
   protected void addContentEntry(@NotNull VirtualFile contentRootFile) {
-    ModuleRootManager moduleRootManager = ModuleRootManager.getInstance(myModule);
+    ModuleRootManager moduleRootManager = ModuleRootManager.getInstance(getModule());
     assertNotNull(moduleRootManager);
     ModifiableRootModel modifiableModel = moduleRootManager.getModifiableModel();
     modifiableModel.addContentEntry(contentRootFile);
@@ -1621,7 +1621,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   protected void doLineCommenterTest() {
     initWithFileSmart();
     MultiCaretCodeInsightAction action = (MultiCaretCodeInsightAction)ActionManager.getInstance().getAction(IdeActions.ACTION_COMMENT_LINE);
-    action.actionPerformedImpl(myModule.getProject(), myFixture.getEditor());
+    action.actionPerformedImpl(getProject(), myFixture.getEditor());
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithCaretsAndSelections());
   }
 

@@ -25,6 +25,7 @@ public class Mason2LiveTemplateTest extends Mason2TopLevelComponentTestCase {
     return "testData/liveTemplates/mc";
   }
 
+  /*
   public void testSayStdout() {doTest("sout"); }
 
   public void testSayStderr() {doTest("serr"); }
@@ -50,9 +51,11 @@ public class Mason2LiveTemplateTest extends Mason2TopLevelComponentTestCase {
   public void testFor() {doTest("fo");}
 
   public void testGiven() {doTest("gi");}
+  */
 
   public void testGrep() {doTest("gr");}
 
+  /*
   public void testIf() {doTest("if");}
 
   public void testMap() {doTest("ma");}
@@ -78,6 +81,7 @@ public class Mason2LiveTemplateTest extends Mason2TopLevelComponentTestCase {
   public void testUseVersion() {doTest("uv");}
 
   public void testWhile() {doTest("wh");}
+  */
 
   protected void doTest(@NotNull String textToType) {
     doLiveTemplateBulkTest(textToType);
