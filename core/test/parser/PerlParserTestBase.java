@@ -18,6 +18,9 @@ package parser;
 
 import com.intellij.lang.LanguageParserDefinitions;
 import com.intellij.lang.ParserDefinition;
+import com.intellij.lang.html.HTMLLanguage;
+import com.intellij.lang.html.HTMLParserDefinition;
+import com.intellij.lexer.EmbeddedTokenTypesProvider;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.CharsetToolkit;
@@ -113,6 +116,9 @@ public abstract class PerlParserTestBase extends ParsingTestCase {
 
     addExplicitExtension(LanguageParserDefinitions.INSTANCE, PerlLanguage.INSTANCE, new PerlParserDefinition());
     addExplicitExtension(LanguageParserDefinitions.INSTANCE, PodLanguage.INSTANCE, new PodParserDefinition());
+
+    registerExtensionPoint(EmbeddedTokenTypesProvider.EXTENSION_POINT_NAME, EmbeddedTokenTypesProvider.class);
+    addExplicitExtension(LanguageParserDefinitions.INSTANCE, HTMLLanguage.INSTANCE, new HTMLParserDefinition());
 
     registerComponentInstance(myProject, PerlNamesCache.class, new PerlNamesCache(myProject));
 
