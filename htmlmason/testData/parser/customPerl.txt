@@ -1,3 +1,11 @@
+Subtree: HTML (HTML)
+HtmlFile:customPerl.mas
+  HTML_DOCUMENT
+    XML_PROLOG
+      <empty list>
+  PsiElement(HTML::Mason: HTML_MASON_OUTER_ELEMENT_TYPE)('<%perl>\nsay 'this is a perl';\n</%perl>\n\n<%customperl>\n    say 'this is a perl';\n</%customperl>')
+--------------------------------------------------------------------------------
+Subtree: HTML::Mason Templating Language (HTML::Mason Templating Language)
 HTML::Mason component
   PsiComment(HTML::Mason: <%perl>)('<%perl>')
   PsiPerlStatementImpl(Perl5: STATEMENT)
@@ -19,3 +27,8 @@ HTML::Mason component
         PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
     PsiElement(Perl5: ;)(';')
   PsiComment(HTML::Mason: </%perl>)('</%customperl>')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('<%perl>\nsay 'this is a perl';\n</%perl>\n\n<%customperl>\n    say 'this is a perl';\n</%customperl>')
+--------------------------------------------------------------------------------

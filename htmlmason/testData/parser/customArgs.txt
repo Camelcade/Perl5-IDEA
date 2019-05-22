@@ -1,3 +1,11 @@
+Subtree: HTML (HTML)
+HtmlFile:customArgs.mas
+  HTML_DOCUMENT
+    XML_PROLOG
+      <empty list>
+  PsiElement(HTML::Mason: HTML_MASON_OUTER_ELEMENT_TYPE)('<%args>\n    $var1\n    $var => $var1\n</%args>\n\n<%customargs>\n    $var1\n    $var => $var1\n</%customargs>')
+--------------------------------------------------------------------------------
+Subtree: HTML::Mason Templating Language (HTML::Mason Templating Language)
 HTML::Mason component
   HTMLMasonArgsBlockImpl(HTML_MASON_ARGS_BLOCK)
     PsiElement(HTML::Mason: <%args>)('<%args>')
@@ -29,3 +37,8 @@ HTML::Mason component
       PsiElement(Perl5: $$)('$')
       PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('var1')
     PsiElement(HTML::Mason: </%args>)('</%customargs>')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('<%args>\n    $var1\n    $var => $var1\n</%args>\n\n<%customargs>\n    $var1\n    $var => $var1\n</%customargs>')
+--------------------------------------------------------------------------------

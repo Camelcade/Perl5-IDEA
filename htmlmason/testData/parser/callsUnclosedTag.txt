@@ -1,3 +1,19 @@
+Subtree: HTML (HTML)
+HtmlFile:callsUnclosedTag.mas
+  HTML_DOCUMENT
+    XML_PROLOG
+      <empty list>
+    PsiElement(HTML::Mason: HTML_MASON_OUTER_ELEMENT_TYPE)('<&| "outer" &>\n    ')
+    PsiElement(XML_DATA_CHARACTERS)('Hello')
+    PsiElement(XML_WHITE_SPACE)('\n     ')
+    PsiElement(XML_DATA_CHARACTERS)('my')
+    PsiElement(HTML::Mason: HTML_MASON_OUTER_ELEMENT_TYPE)(' <% $name %>\n     ')
+    PsiElement(XML_DATA_CHARACTERS)('is')
+    PsiElement(XML_WHITE_SPACE)(' ')
+    PsiElement(XML_DATA_CHARACTERS)('someone')
+  PsiElement(HTML::Mason: HTML_MASON_OUTER_ELEMENT_TYPE)('\n</&')
+--------------------------------------------------------------------------------
+Subtree: HTML::Mason Templating Language (HTML::Mason Templating Language)
 HTML::Mason component
   PerlCompositeElementImpl(HTML::Mason: HTML_MASON_CALL_STATEMENT)
     PsiElement(HTML::Mason: <&|)('<&|')
@@ -19,3 +35,8 @@ HTML::Mason component
     PsiElement(HTML::Mason: </&)('</&')
     PsiErrorElement:Incomplete close tag
       <empty list>
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('<&| "outer" &>\n    Hello\n     my <% $name %>\n     is someone\n</&')
+--------------------------------------------------------------------------------

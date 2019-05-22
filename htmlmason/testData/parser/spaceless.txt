@@ -1,3 +1,11 @@
+Subtree: HTML (HTML)
+HtmlFile:spaceless.mas
+  HTML_DOCUMENT
+    XML_PROLOG
+      <empty list>
+  PsiElement(HTML::Mason: HTML_MASON_OUTER_ELEMENT_TYPE)('<%$a%>\n<&something&>\n<&|something&></&>\n<&|something&></&something>')
+--------------------------------------------------------------------------------
+Subtree: HTML::Mason Templating Language (HTML::Mason Templating Language)
 HTML::Mason component
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiElement(HTML::Mason: <%)('<%')
@@ -32,3 +40,8 @@ HTML::Mason component
     PsiPerlStringBareImpl(Perl5: STRING_BARE)
       PerlStringContentElementImpl(Perl5: STRING_CONTENT)('something')
     PsiElement(HTML::Mason: >)('>')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('<%$a%>\n<&something&>\n<&|something&></&>\n<&|something&></&something>')
+--------------------------------------------------------------------------------

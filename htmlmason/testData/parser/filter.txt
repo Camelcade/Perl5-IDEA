@@ -1,3 +1,21 @@
+Subtree: HTML (HTML)
+HtmlFile:filter.mas
+  HTML_DOCUMENT
+    XML_PROLOG
+      <empty list>
+    HTML_TAG
+      PsiElement(XML_START_TAG_START)('<')
+      PsiElement(XML_NAME)('html')
+      PsiElement(XML_TAG_END)('>')
+      XML_TEXT
+        PsiElement(HTML::Mason: HTML_MASON_OUTER_ELEMENT_TYPE)('\n\n<%filter>\ntr/a-z/A-Z/\n</%filter>\n')
+        PsiElement(XML_DATA_CHARACTERS)('Some')
+      PsiElement(HTML::Mason: HTML_MASON_OUTER_ELEMENT_TYPE)('\n\n<%filter>\nmy $uri = $r->uri;\n    s{<a href="$uri/?">(.*?)</a>} {<b>$1</b>}i;\n</%filter>\n\n\n')
+      PsiElement(XML_END_TAG_START)('</')
+      PsiElement(XML_NAME)('html')
+      PsiElement(XML_TAG_END)('>')
+--------------------------------------------------------------------------------
+Subtree: HTML::Mason Templating Language (HTML::Mason Templating Language)
 HTML::Mason component
   PsiComment(HTML::Mason: HTML_MASON_TEMPLATE_BLOCK_HTML)('<html>')
   HTMLMasonFilterBlockImpl(HTML::Mason: HTML_MASON_FILTER_BLOCK)
@@ -58,3 +76,8 @@ HTML::Mason component
       PsiElement(Perl5: ;)(';')
     PsiElement(HTML::Mason: </%filter>)('</%filter>')
   PsiComment(HTML::Mason: HTML_MASON_TEMPLATE_BLOCK_HTML)('</html>')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('<html>\n\n<%filter>\ntr/a-z/A-Z/\n</%filter>\nSome\n\n<%filter>\nmy $uri = $r->uri;\n    s{<a href="$uri/?">(.*?)</a>} {<b>$1</b>}i;\n</%filter>\n\n\n</html>')
+--------------------------------------------------------------------------------

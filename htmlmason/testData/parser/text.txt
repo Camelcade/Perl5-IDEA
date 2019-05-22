@@ -1,3 +1,18 @@
+Subtree: HTML (HTML)
+HtmlFile:text.mas
+  HTML_DOCUMENT
+    XML_PROLOG
+      <empty list>
+    HTML_TAG
+      PsiElement(XML_START_TAG_START)('<')
+      PsiElement(XML_NAME)('html')
+      PsiElement(XML_TAG_END)('>')
+      PsiElement(HTML::Mason: HTML_MASON_OUTER_ELEMENT_TYPE)('\n\n<%text>\n% This is an example of a Perl line.\n<% This is an example of an expression block. %>\n</%text>\n\n')
+      PsiElement(XML_END_TAG_START)('</')
+      PsiElement(XML_NAME)('html')
+      PsiElement(XML_TAG_END)('>')
+--------------------------------------------------------------------------------
+Subtree: HTML::Mason Templating Language (HTML::Mason Templating Language)
 HTML::Mason component
   PsiComment(HTML::Mason: HTML_MASON_TEMPLATE_BLOCK_HTML)('<html>')
   PerlCompositeElementImpl(HTML::Mason: HTML_MASON_TEXT_BLOCK)
@@ -5,3 +20,8 @@ HTML::Mason component
     PerlStringContentElementImpl(Perl5: STRING_CONTENT)('\n% This is an example of a Perl line.\n<% This is an example of an expression block. %>\n')
     PsiElement(HTML::Mason: </%text>)('</%text>')
   PsiComment(HTML::Mason: HTML_MASON_TEMPLATE_BLOCK_HTML)('</html>')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('<html>\n\n<%text>\n% This is an example of a Perl line.\n<% This is an example of an expression block. %>\n</%text>\n\n</html>')
+--------------------------------------------------------------------------------

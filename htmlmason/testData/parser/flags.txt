@@ -1,3 +1,18 @@
+Subtree: HTML (HTML)
+HtmlFile:flags.mas
+  HTML_DOCUMENT
+    XML_PROLOG
+      <empty list>
+    HTML_TAG
+      PsiElement(XML_START_TAG_START)('<')
+      PsiElement(XML_NAME)('html')
+      PsiElement(XML_TAG_END)('>')
+      PsiElement(HTML::Mason: HTML_MASON_OUTER_ELEMENT_TYPE)('\n<%flags>\n    inherit=>'/site_handler'\n</%flags>\n\n')
+      PsiElement(XML_END_TAG_START)('</')
+      PsiElement(XML_NAME)('html')
+      PsiElement(XML_TAG_END)('>')
+--------------------------------------------------------------------------------
+Subtree: HTML::Mason Templating Language (HTML::Mason Templating Language)
 HTML::Mason component
   PsiComment(HTML::Mason: HTML_MASON_TEMPLATE_BLOCK_HTML)('<html>')
   HTMLMasonFlagsStatementImpl(HTML_MASON_FLAGS_STATEMENT)
@@ -12,3 +27,8 @@ HTML::Mason component
         PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
     PsiElement(HTML::Mason: </%flags>)('</%flags>')
   PsiComment(HTML::Mason: HTML_MASON_TEMPLATE_BLOCK_HTML)('</html>')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('<html>\n<%flags>\n    inherit=>'/site_handler'\n</%flags>\n\n</html>')
+--------------------------------------------------------------------------------

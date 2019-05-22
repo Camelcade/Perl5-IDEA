@@ -35,6 +35,16 @@ public class HTMLMasonParserTest extends PerlParserTestBase {
     return "testData/parser";
   }
 
+  @Override
+  protected boolean allTreesInSingleFile() {
+    return true;
+  }
+
+  @Override
+  protected boolean checkAllPsiRoots() {
+    return true;
+  }
+
   private void addCustomTag(String text, HTMLMasonCustomTagRole role) {
     HTMLMasonSettings settings = HTMLMasonSettings.getInstance(getProject());
     settings.customTags.add(new HTMLMasonCustomTag(text, role));

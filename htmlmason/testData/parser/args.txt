@@ -1,3 +1,36 @@
+Subtree: HTML (HTML)
+HtmlFile:args.mas
+  HTML_DOCUMENT
+    XML_PROLOG
+      <empty list>
+    HTML_TAG
+      PsiElement(XML_START_TAG_START)('<')
+      PsiElement(XML_NAME)('html')
+      PsiElement(XML_TAG_END)('>')
+      HTML_TAG
+        PsiElement(HTML::Mason: HTML_MASON_OUTER_ELEMENT_TYPE)('\n\n<%args>\n$abs\n    @b       # a comment\n    %c\n\n    # another comment\n    $d => 5\n    %h1 => {somevar => 42}\n    $e => $d * 2\n    %h1 => {somevar => 42}\n    @f => ('foo', 'baz')\n    %h1 => {somevar => 42}\n    %g => (joe => 1, bob => 2)\n    %h => {somevar => 42}\n</%args>\n\n')
+        PsiElement(XML_START_TAG_START)('<')
+        PsiElement(XML_NAME)('a')
+        XML_ATTRIBUTE
+          PsiElement(XML_NAME)('href')
+          PsiElement(XML_EQ)('=')
+          XML_ATTRIBUTE_VALUE
+            PsiElement(XML_ATTRIBUTE_VALUE_START_DELIMITER)('"')
+            PsiElement(XML_ATTRIBUTE_VALUE_TOKEN)('http://www.')
+            PsiElement(HTML::Mason: HTML_MASON_OUTER_ELEMENT_TYPE)('<% $site %>')
+            PsiElement(XML_ATTRIBUTE_VALUE_TOKEN)('.com')
+            PsiElement(XML_ATTRIBUTE_VALUE_END_DELIMITER)('"')
+        PsiElement(XML_TAG_END)('>')
+        PsiElement(HTML::Mason: HTML_MASON_OUTER_ELEMENT_TYPE)('<% $label %>')
+        PsiElement(XML_END_TAG_START)('</')
+        PsiElement(XML_NAME)('a')
+        PsiElement(XML_TAG_END)('>')
+      PsiElement(HTML::Mason: HTML_MASON_OUTER_ELEMENT_TYPE)('\n\n<%args>\n    $site\n\t$label => ucfirst( $site )\n</%args>\n\n\n% say 'hi';\n\n\n<%args>\n$site\n    $label=>ucfirst($site)\n</%args>\n\n\n<%args>\n$site\n$label=>ucfirst($site)\n</%args>\n\n<%args>\n$article_id\n</%args>\n')
+      PsiElement(XML_END_TAG_START)('</')
+      PsiElement(XML_NAME)('html')
+      PsiElement(XML_TAG_END)('>')
+--------------------------------------------------------------------------------
+Subtree: HTML::Mason Templating Language (HTML::Mason Templating Language)
 HTML::Mason component
   PsiComment(HTML::Mason: HTML_MASON_TEMPLATE_BLOCK_HTML)('<html>')
   HTMLMasonArgsBlockImpl(HTML_MASON_ARGS_BLOCK)
@@ -225,3 +258,8 @@ HTML::Mason component
         PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('article_id')
     PsiElement(HTML::Mason: </%args>)('</%args>')
   PsiComment(HTML::Mason: HTML_MASON_TEMPLATE_BLOCK_HTML)('</html>')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('<html>\n\n<%args>\n$abs\n    @b       # a comment\n    %c\n\n    # another comment\n    $d => 5\n    %h1 => {somevar => 42}\n    $e => $d * 2\n    %h1 => {somevar => 42}\n    @f => ('foo', 'baz')\n    %h1 => {somevar => 42}\n    %g => (joe => 1, bob => 2)\n    %h => {somevar => 42}\n</%args>\n\n<a href="http://www.<% $site %>.com"><% $label %></a>\n\n<%args>\n    $site\n\t$label => ucfirst( $site )\n</%args>\n\n\n% say 'hi';\n\n\n<%args>\n$site\n    $label=>ucfirst($site)\n</%args>\n\n\n<%args>\n$site\n$label=>ucfirst($site)\n</%args>\n\n<%args>\n$article_id\n</%args>\n</html>')
+--------------------------------------------------------------------------------

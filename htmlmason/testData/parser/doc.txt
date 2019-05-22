@@ -1,6 +1,26 @@
+Subtree: HTML (HTML)
+HtmlFile:doc.mas
+  HTML_DOCUMENT
+    XML_PROLOG
+      <empty list>
+    HTML_TAG
+      PsiElement(XML_START_TAG_START)('<')
+      PsiElement(XML_NAME)('html')
+      PsiElement(XML_TAG_END)('>')
+      PsiElement(HTML::Mason: HTML_MASON_OUTER_ELEMENT_TYPE)('\n\n\n<%doc>\n\n<&| /path/to/comp &> this is the content </&>\n<&| comp, arg1 => 'hi' &> filters can take arguments </&>\n<&| comp &> content can include <% "tags" %> of all kinds </&>\n<&| comp1 &> nesting is also <&| comp2 &> OK </&> </&>\n<&| SELF:method1 &> subcomponents can be filters </&>\n\n<&| "outer" &>\n <&| /inner/comp, arg=>'this' &>\n   <&| .mycomp &>\n      Yada yada yada\n   </& .mycomp >\n </& /inner/comp >\n</&>\n\n% my $var;\n<ol>\n<&| list_items , list => \@items, var => \$var &>\n<li> <% $var %></li>\n</&>\n</ol>\n\n</%doc>\n\n\n')
+      PsiElement(XML_END_TAG_START)('</')
+      PsiElement(XML_NAME)('html')
+      PsiElement(XML_TAG_END)('>')
+--------------------------------------------------------------------------------
+Subtree: HTML::Mason Templating Language (HTML::Mason Templating Language)
 HTML::Mason component
   PsiComment(HTML::Mason: HTML_MASON_TEMPLATE_BLOCK_HTML)('<html>')
   PsiElement(HTML::Mason: <%doc>)('<%doc>')
   PsiComment(Perl5: COMMENT_BLOCK)('\n\n<&| /path/to/comp &> this is the content </&>\n<&| comp, arg1 => 'hi' &> filters can take arguments </&>\n<&| comp &> content can include <% "tags" %> of all kinds </&>\n<&| comp1 &> nesting is also <&| comp2 &> OK </&> </&>\n<&| SELF:method1 &> subcomponents can be filters </&>\n\n<&| "outer" &>\n <&| /inner/comp, arg=>'this' &>\n   <&| .mycomp &>\n      Yada yada yada\n   </& .mycomp >\n </& /inner/comp >\n</&>\n\n% my $var;\n<ol>\n<&| list_items , list => \@items, var => \$var &>\n<li> <% $var %></li>\n</&>\n</ol>\n\n')
   PsiElement(HTML::Mason: </%doc>)('</%doc>')
   PsiComment(HTML::Mason: HTML_MASON_TEMPLATE_BLOCK_HTML)('</html>')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('<html>\n\n\n<%doc>\n\n<&| /path/to/comp &> this is the content </&>\n<&| comp, arg1 => 'hi' &> filters can take arguments </&>\n<&| comp &> content can include <% "tags" %> of all kinds </&>\n<&| comp1 &> nesting is also <&| comp2 &> OK </&> </&>\n<&| SELF:method1 &> subcomponents can be filters </&>\n\n<&| "outer" &>\n <&| /inner/comp, arg=>'this' &>\n   <&| .mycomp &>\n      Yada yada yada\n   </& .mycomp >\n </& /inner/comp >\n</&>\n\n% my $var;\n<ol>\n<&| list_items , list => \@items, var => \$var &>\n<li> <% $var %></li>\n</&>\n</ol>\n\n</%doc>\n\n\n</html>')
+--------------------------------------------------------------------------------

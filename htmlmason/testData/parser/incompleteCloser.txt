@@ -1,2 +1,17 @@
+Subtree: HTML (HTML)
+HtmlFile:incompleteCloser.mas
+  HTML_DOCUMENT
+    XML_PROLOG
+      <empty list>
+    PsiErrorElement:Closing tag matches nothing
+      PsiElement(XML_END_TAG_START)('</')
+    PsiElement(XML_DATA_CHARACTERS)('%')
+--------------------------------------------------------------------------------
+Subtree: HTML::Mason Templating Language (HTML::Mason Templating Language)
 HTML::Mason component
   PsiComment(HTML::Mason: HTML_MASON_TEMPLATE_BLOCK_HTML)('</%')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('</%')
+--------------------------------------------------------------------------------

@@ -1,3 +1,29 @@
+Subtree: HTML (HTML)
+HtmlFile:customMethod.mas
+  HTML_DOCUMENT
+    XML_PROLOG
+      <empty list>
+    HTML_TAG
+      PsiElement(HTML::Mason: HTML_MASON_OUTER_ELEMENT_TYPE)('<%method some>\n')
+      PsiElement(XML_START_TAG_START)('<')
+      PsiElement(XML_NAME)('div')
+      PsiElement(XML_TAG_END)('>')
+      PsiElement(HTML::Mason: HTML_MASON_OUTER_ELEMENT_TYPE)('<% 'hi' %>')
+      PsiElement(XML_END_TAG_START)('</')
+      PsiElement(XML_NAME)('div')
+      PsiElement(XML_TAG_END)('>')
+    HTML_TAG
+      PsiElement(HTML::Mason: HTML_MASON_OUTER_ELEMENT_TYPE)('\n</%method>\n\n<%custommethod othermethod>\n    ')
+      PsiElement(XML_START_TAG_START)('<')
+      PsiElement(XML_NAME)('div')
+      PsiElement(XML_TAG_END)('>')
+      PsiElement(HTML::Mason: HTML_MASON_OUTER_ELEMENT_TYPE)('<% 'hi' %>')
+      PsiElement(XML_END_TAG_START)('</')
+      PsiElement(XML_NAME)('div')
+      PsiElement(XML_TAG_END)('>')
+  PsiElement(HTML::Mason: HTML_MASON_OUTER_ELEMENT_TYPE)('\n</%custommethod>')
+--------------------------------------------------------------------------------
+Subtree: HTML::Mason Templating Language (HTML::Mason Templating Language)
 HTML::Mason component
   HTMLMasonMethodDefinitionImpl(HTML_MASON_METHOD_DEFINITION)
     PsiElement(HTML::Mason: <%method)('<%method')
@@ -29,3 +55,8 @@ HTML::Mason component
         PsiElement(HTML::Mason: %>)('%>')
       PsiComment(HTML::Mason: HTML_MASON_TEMPLATE_BLOCK_HTML)('</div>')
     PsiElement(HTML::Mason: </%method>)('</%custommethod>')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('<%method some>\n<div><% 'hi' %></div>\n</%method>\n\n<%custommethod othermethod>\n    <div><% 'hi' %></div>\n</%custommethod>')
+--------------------------------------------------------------------------------

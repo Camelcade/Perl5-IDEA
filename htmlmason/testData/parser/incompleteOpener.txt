@@ -1,5 +1,18 @@
+Subtree: HTML (HTML)
+HtmlFile:incompleteOpener.mas
+  HTML_DOCUMENT
+    XML_PROLOG
+      <empty list>
+  PsiElement(HTML::Mason: HTML_MASON_OUTER_ELEMENT_TYPE)('<%')
+--------------------------------------------------------------------------------
+Subtree: HTML::Mason Templating Language (HTML::Mason Templating Language)
 HTML::Mason component
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiElement(HTML::Mason: <%)('<%')
     PsiErrorElement:Error
       <empty list>
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('<%')
+--------------------------------------------------------------------------------
