@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,5 +44,15 @@ public abstract class MojoliciousParserTestBase extends PerlParserTestBase {
   protected void registerParserExtensions() {
     super.registerParserExtensions();
     registerExtension(PerlParserExtension.EP_NAME, new MojoParserExtension());
+  }
+
+  @Override
+  protected boolean allTreesInSingleFile() {
+    return true;
+  }
+
+  @Override
+  protected boolean checkAllPsiRoots() {
+    return true;
   }
 }
