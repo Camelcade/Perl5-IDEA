@@ -33,13 +33,26 @@ public class Mason2TemplatingParserTest extends PerlParserTestBase {
     return "testData/parser/template";
   }
 
-
   public void testTestComponent() {
+    doTest(true);
+  }
+
+  public void testLiveTemplates() {
     doTest(true);
   }
 
   public void testIssue1077() {
     doTest(true);
+  }
+
+  @Override
+  protected boolean allTreesInSingleFile() {
+    return true;
+  }
+
+  @Override
+  protected boolean checkAllPsiRoots() {
+    return true;
   }
 
   @Override

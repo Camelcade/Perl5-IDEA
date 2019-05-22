@@ -1,0 +1,21 @@
+Subtree: HTML (HTML)
+HtmlFile:liveTemplates.mc
+  HTML_DOCUMENT
+    XML_PROLOG
+      <empty list>
+  PsiElement(Mason2: MASON_OUTER_ELEMENT_TYPE)('% \n\n<%  %>')
+--------------------------------------------------------------------------------
+Subtree: Mason2 Templating Language (Mason2 Templating Language)
+Mason2 template file
+  MasonNamespaceDefinitionImpl(MASON_PACKAGE)@null
+    PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
+      PsiComment(Mason2: %)('% ')
+      PsiElement(Perl5: ;)('\n')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiElement(Mason2: <% )('<% ')
+        PsiElement(Mason2:  %>)(' %>')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('% \n\n<%  %>')
+--------------------------------------------------------------------------------

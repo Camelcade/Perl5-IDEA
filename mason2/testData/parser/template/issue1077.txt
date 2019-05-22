@@ -1,3 +1,20 @@
+Subtree: HTML (HTML)
+HtmlFile:issue1077.mc
+  HTML_DOCUMENT
+    XML_PROLOG
+      <empty list>
+    HTML_TAG
+      PsiElement(XML_START_TAG_START)('<')
+      PsiElement(XML_NAME)('b')
+      PsiElement(XML_TAG_END)('>')
+      XML_TEXT
+        PsiElement(Mason2: MASON_OUTER_ELEMENT_TYPE)('<% $boomerang_sum %>')
+        PsiElement(XML_DATA_CHARACTERS)('%')
+      PsiElement(XML_END_TAG_START)('</')
+      PsiElement(XML_NAME)('b')
+      PsiElement(XML_TAG_END)('>')
+--------------------------------------------------------------------------------
+Subtree: Mason2 Templating Language (Mason2 Templating Language)
 Mason2 template file
   MasonNamespaceDefinitionImpl(MASON_PACKAGE)@null
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
@@ -9,3 +26,8 @@ Mason2 template file
           PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('boomerang_sum')
         PsiElement(Mason2:  %>)(' %>')
       PsiComment(Mason2: MASON_TEMPLATE_BLOCK_HTML)('%</b>')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('<b><% $boomerang_sum %>%</b>')
+--------------------------------------------------------------------------------
