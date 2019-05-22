@@ -45,6 +45,16 @@ public class EmbeddedPerlParserTest extends PerlParserTestBase {
   }
 
   @Override
+  protected boolean allTreesInSingleFile() {
+    return true;
+  }
+
+  @Override
+  protected boolean checkAllPsiRoots() {
+    return true;
+  }
+
+  @Override
   public void setUp() throws Exception {
     super.setUp();
     LanguageFileViewProviders.INSTANCE.addExplicitExtension(EmbeddedPerlLanguage.INSTANCE, new EmbeddedPerlFileViewProviderFactory());
