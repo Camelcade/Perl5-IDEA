@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PerlAnnotationContainerImpl(COMMENT_ANNOTATION)
     PsiPerlAnnotationTypeImpl(Perl5: ANNOTATION_TYPE)
@@ -87,3 +88,8 @@ Perl5
           PerlNamespaceElementImpl(Perl5: package::name)('UNIVERSAL')
           PsiElement(Perl5: ])(']')
         PsiElement(Perl5: ])(']')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('#@type *\n#@type ArrayRef[*]\n#@type HashRef[*]\n#@type HashRef[ArrayRef[*]]\n#@type ArrayRef[HashRef[*]]\n#@type UNIVERSAL\n#@type ArrayRef[UNIVERSAL]\n#@type HashRef[UNIVERSAL]\n#@type ArrayRef[HashRef[UNIVERSAL]]\n#@type HashRef[ArrayRef[UNIVERSAL]]')
+--------------------------------------------------------------------------------

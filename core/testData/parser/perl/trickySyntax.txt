@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlRegexExprImpl(Perl5: REGEX_EXPR)
@@ -504,3 +505,8 @@ Perl5
               PsiElement(Perl5: ,)(',')
             PsiElement(Perl5: ))(')')
     PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('$desc =~ s/{/\\{/g;\n$rest =~ /=> {$/;\n$text =~ s/{/{{/g;\ns/\bIM_ROUND\(/IM_ROUND_8(/g;\nm!\G(.*?<%[ ]*(?:\$(?:\.|self->))fl(?:oc)?(?:[ ]*\((.*?)\))?[ ]*{[ ]*%>(.*?)</%>)!sg;\nreturn '" . '.join('.', map {s/\\\\#\\{/#\\{/;\n        $_} @parts).'."';\n\nif ($str =~ s{($finder_regexp)([\[\{]?)}\n    <\n    if ($1 =~ tr/\{//) { substr($1, 0, ($1 =~ tr/#//) + 1)."{$replacement}$2" }\n    else { substr($1, 0, ($1 =~ tr/#//) + 1)."$replacement$2" }\n    >ge\n)\n{\n\n    # TODO do this without breaking encapsulation!\n    $node->{content} = $str;\n}\n\n__PACKAGE__->set_sql(Retrieve => <<'');\nSELECT __ESSENTIAL__\n    FROM   __TABLE__\n    WHERE  %s\n\nsub blah {\n    { 1     => 0 # SQL_CB_NULL\n        , 2 => 1 # SQL_CB_NON_NULL\n    }->{$_[0]->{ado_conn}->Properties->{'NULL Concatenation Behavior'}{Value}};\n}\n\nmy $request = $self->_oauth->request($type)->new(\n    version          => '1.0',\n    consumer_key     => $self->{consumer_key},\n    consumer_secret  => $self->{consumer_secret},\n    request_method   => 'GET',\n    signature_method => 'HMAC-SHA1',\n    timestamp        => time,\n    nonce            => time ^ $$ ^ int(rand 2 ** 32),\n    %params,\n);')
+--------------------------------------------------------------------------------

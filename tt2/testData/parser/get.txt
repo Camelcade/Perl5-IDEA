@@ -1,3 +1,45 @@
+Subtree: HTML (HTML)
+HtmlFile:get.tt
+  PsiElement(HTML_DOCUMENT)
+    PsiElement(XML_PROLOG)
+      <empty list>
+    HtmlTag:html
+      XmlToken:XML_START_TAG_START('<')
+      XmlToken:XML_NAME('html')
+      XmlToken:XML_TAG_END('>')
+      XmlText
+      HtmlTag:head
+        XmlToken:XML_START_TAG_START('<')
+        XmlToken:XML_NAME('head')
+        XmlToken:XML_TAG_END('>')
+        XmlToken:XML_END_TAG_START('</')
+        XmlToken:XML_NAME('head')
+        XmlToken:XML_TAG_END('>')
+      XmlText
+      HtmlTag:body
+        XmlToken:XML_START_TAG_START('<')
+        XmlToken:XML_NAME('body')
+        XmlToken:XML_TAG_END('>')
+        XmlText
+          PsiElement(TT2: TT2_OUTER)('[% GET foo %]\n%% GET foo\n[% foo %]\n%% foo\n[% bar.baz %]\n%% foo.bar\n[% bar.get.baz %]\n%% foo.get.bar\n[% bi.zb.10.ar.baz(10) %]\n%% bi.zb.10.ar.baz(10)\n[% template.title or default.title %]\n%% template.title or default.title\n[% score * 100 %]\n%% score * 100\n[% order.nitems ? checkout(order.total) : 'no items' %]\n%% order.nitems ? checkout(order.total) : 'no items'\n[% 15 / 6 %]')
+          XmlToken:XML_DATA_CHARACTERS('#')
+          XmlToken:XML_DATA_CHARACTERS('2.5')
+          PsiElement(TT2: TT2_OUTER)('%% 15 / 6\n[% 15 div 6 %]')
+          XmlToken:XML_DATA_CHARACTERS('#')
+          XmlToken:XML_DATA_CHARACTERS('2')
+          PsiElement(TT2: TT2_OUTER)('%% 15 div 6\n[% 15 mod 6 %]')
+          XmlToken:XML_DATA_CHARACTERS('#')
+          XmlToken:XML_DATA_CHARACTERS('3')
+        PsiElement(TT2: TT2_OUTER)('%% 15 mod 6\n')
+        XmlToken:XML_END_TAG_START('</')
+        XmlToken:XML_NAME('body')
+        XmlToken:XML_TAG_END('>')
+      XmlText
+      XmlToken:XML_END_TAG_START('</')
+      XmlToken:XML_NAME('html')
+      XmlToken:XML_TAG_END('>')
+--------------------------------------------------------------------------------
+Subtree: Template Toolkit 2 (Template Toolkit 2)
 Template Toolkit File
   PsiComment(TT2: TT2_HTML)('<html>\n<head></head>\n<body>\n')
   PsiElement(TT2: [%)('[%')
@@ -233,3 +275,4 @@ Template Toolkit File
       PsiTermExprImpl(TT2: TERM_EXPR)
         PsiElement(TT2: TT2_NUMBER_SIMPLE)('6')
   PsiComment(TT2: TT2_HTML)('</body>\n</html>')
+--------------------------------------------------------------------------------

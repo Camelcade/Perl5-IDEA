@@ -23,7 +23,6 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
-import com.intellij.testFramework.PlatformTestUtil;
 import gnu.trove.THashMap;
 import org.junit.experimental.categories.Category;
 
@@ -110,6 +109,7 @@ public class PerlParsingPerformanceTest extends PerlParserTestBase {
 
     final int iterations = 30;
 
+    /*
     PsiFile psiFile;
     for (int i = 0; i < iterations; i++) {
       psiFile = createPsiFile("test", testData);
@@ -128,6 +128,7 @@ public class PerlParsingPerformanceTest extends PerlParserTestBase {
       long length = System.currentTimeMillis() - start;
       System.err.println("Parsing done in " + length / iterations + " ms per iteration of " + time);
     }).assertTiming();
+    */
 
     //		analyzeFile(psiFile);
   }

@@ -433,7 +433,11 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   }
 
   public void initWithFile(String filename, String extension) throws IOException {
-    initWithFile(filename, extension, filename + (extension.isEmpty() ? "" : ".code"));
+    initWithFile(filename, extension, filename + (extension.isEmpty() ? "" : getRealDataFileExtension()));
+  }
+
+  protected String getRealDataFileExtension() {
+    return ".code";
   }
 
   public void initWithFile(String targetFileName, String targetFileExtension, String sourceFileNameWithExtension) throws IOException {
@@ -1051,7 +1055,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   protected void testFoldingRegions(@NotNull String verificationFileName, boolean doCheckCollapseStatus, LanguageFileType fileType) {
     String expectedContent;
     try {
-      expectedContent = FileUtil.loadFile(new File(getTestDataPath() + "/" + verificationFileName + ".code"));
+      expectedContent = FileUtil.loadFile(new File(getTestDataPath() + "/" + verificationFileName + getRealDataFileExtension()));
     }
     catch (IOException e) {
       throw new RuntimeException(e);
@@ -2160,7 +2164,8 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   public void initWithPerlTidy(@NotNull String targetName) {
     try {
       initWithFileContent(targetName, getFileExtension(),
-                          FileUtil.loadFile(new File("testData", "perlTidy.code"), CharsetToolkit.UTF8, true).trim());
+                          FileUtil.loadFile(new File("testData", "perlTidy" + getRealDataFileExtension()), CharsetToolkit.UTF8, true)
+                            .trim());
     }
     catch (IOException e) {
       throw new RuntimeException(e);

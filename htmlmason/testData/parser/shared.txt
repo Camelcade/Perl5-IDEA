@@ -1,16 +1,16 @@
 Subtree: HTML (HTML)
 HtmlFile:shared.mas
-  HTML_DOCUMENT
-    XML_PROLOG
+  PsiElement(HTML_DOCUMENT)
+    PsiElement(XML_PROLOG)
       <empty list>
-    HTML_TAG
-      PsiElement(XML_START_TAG_START)('<')
-      PsiElement(XML_NAME)('html')
-      PsiElement(XML_TAG_END)('>')
+    HtmlTag:html
+      XmlToken:XML_START_TAG_START('<')
+      XmlToken:XML_NAME('html')
+      XmlToken:XML_TAG_END('>')
       PsiElement(HTML::Mason: HTML_MASON_OUTER_ELEMENT_TYPE)('\n\n<%shared>\n# Fetch article from database\n    my $dbh = DBI::connect;\n    my $sth = $dbh->prepare("select * from articles where id = ?");\n    $sth->execute($article_id);\n    my ($headline, $date, $author, $body) = $sth->fetchrow_array;\n    # Massage the fields\n    $headline = uc($headline);\n    my ($year, $month, $day) = split('-', $date);\n    $date = "$month/$day";\n</%shared>\n\n')
-      PsiElement(XML_END_TAG_START)('</')
-      PsiElement(XML_NAME)('html')
-      PsiElement(XML_TAG_END)('>')
+      XmlToken:XML_END_TAG_START('</')
+      XmlToken:XML_NAME('html')
+      XmlToken:XML_TAG_END('>')
 --------------------------------------------------------------------------------
 Subtree: HTML::Mason Templating Language (HTML::Mason Templating Language)
 HTML::Mason component

@@ -1,2 +1,8 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiElement(Perl5: __END__)('__END__')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('__END__')
+--------------------------------------------------------------------------------

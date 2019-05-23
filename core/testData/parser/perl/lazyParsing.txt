@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlUseStatementImpl(USE_STATEMENT)
     PsiElement(Perl5: use)('use')
@@ -241,3 +242,8 @@ Perl5
         PerlStringContentElementImpl(Perl5: STRING_CONTENT_XQ)(' test string')
         PsiElement(Perl5: QUOTE_TICK_CLOSE)(')')
     PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('use strict;\n\n$a = 'test string';\n$a = "test $b string";\n\ntr/'//;\ntr/"//;\ntr/`//;\n\n$a = '';\n$a = "";\n$a = ``;\n\n$a = `test string`;\n\n$a = q();\n$a = q( test string );\n$a = q# test string #;\n$a = q # test string #;\n    ( test string);\n\n$a = qq();\n$a = qq ( test string );\n$a = qq# test string #;\n$a = qq # test string #;\n    ( test string);\n\n$a = qx();\n$a = qx ( test string );\n$a = qx# test string #;\n$a = qx # test string #;\n    ( test string);')
+--------------------------------------------------------------------------------

@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlRegexExprImpl(Perl5: REGEX_EXPR)
@@ -55,3 +56,8 @@ Perl5
           PsiElement(Perl5: /m)('s')
           PsiElement(Perl5: /m)('g')
     PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('$marked_segment=~s/(['"]$P['"]\s+)$EOS/$1/sg;\n$marked_segment=~s/(['"]$P["']\s+)$EOS/$1/sg;')
+--------------------------------------------------------------------------------

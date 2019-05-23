@@ -16,67 +16,151 @@
 
 package parser;
 
-import com.intellij.lang.LanguageParserDefinitions;
-import com.intellij.lang.ParserDefinition;
-import com.intellij.lang.html.HTMLLanguage;
-import com.intellij.lang.html.HTMLParserDefinition;
-import com.intellij.lexer.EmbeddedTokenTypesProvider;
-import com.intellij.openapi.application.ApplicationManager;
+import base.PerlLightTestCaseBase;
+import com.intellij.openapi.application.WriteAction;
 import com.intellij.openapi.util.io.FileUtil;
+import com.intellij.openapi.util.text.LineColumn;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.CharsetToolkit;
-import com.intellij.psi.templateLanguages.TemplateDataLanguageMappings;
-import com.intellij.psi.templateLanguages.TemplateDataLanguagePatterns;
-import com.intellij.testFramework.ParsingTestCase;
-import com.intellij.testFramework.TestDataFile;
-import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.PerlParserDefinition;
-import com.perl5.lang.perl.extensions.packageprocessor.impl.ConstantProcessor;
-import com.perl5.lang.perl.extensions.packageprocessor.impl.ExceptionClassProcessor;
-import com.perl5.lang.perl.extensions.packageprocessor.impl.VarsProcessor;
-import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
-import com.perl5.lang.perl.extensions.readonly.ReadonlyImplicitDeclarationsProvider;
-import com.perl5.lang.perl.extensions.typesStandard.TypesStandardImplicitDeclarationsProvider;
+import com.intellij.psi.PsiErrorElement;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiRecursiveElementVisitor;
+import com.intellij.psi.impl.DebugUtil;
+import com.intellij.psi.impl.source.tree.injected.InjectedLanguageManagerImpl;
+import com.intellij.testFramework.EditorTestUtil;
+import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
-import com.perl5.lang.perl.idea.EP.PerlPackageProcessorEP;
-import com.perl5.lang.perl.idea.application.PerlParserExtensions;
-import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
-import com.perl5.lang.perl.idea.project.PerlNamesCache;
-import com.perl5.lang.perl.parser.ClassAccessorParserExtension;
-import com.perl5.lang.perl.parser.MooseParserExtension;
-import com.perl5.lang.perl.parser.PerlSwitchParserExtensionImpl;
-import com.perl5.lang.perl.psi.references.PerlCoreDeclarationsProvider;
-import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsProvider;
-import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService;
-import com.perl5.lang.pod.PodLanguage;
-import com.perl5.lang.pod.PodParserDefinition;
-import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+
+import static com.intellij.testFramework.ParsingTestCase.*;
+import static java.util.Objects.requireNonNull;
 
 
-public abstract class PerlParserTestBase extends ParsingTestCase {
-  public PerlParserTestBase() {
-    this("", PerlFileTypeScript.EXTENSION_PL, new PerlParserDefinition());
+public abstract class PerlParserTestBase extends PerlLightTestCaseBase {
+  private static final List<String> REPLACES = Arrays.asList(
+    EditorTestUtil.CARET_TAG,
+    EditorTestUtil.SELECTION_START_TAG,
+    EditorTestUtil.SELECTION_END_TAG,
+    EditorTestUtil.BLOCK_SELECTION_START_TAG,
+    EditorTestUtil.BLOCK_SELECTION_END_TAG
+  );
+  private static final List<String> REPLACEMENTS = ContainerUtil.map(REPLACES, it -> it.replace(it.charAt(1), '_'));
+
+  @Override
+  protected void tearDown() throws Exception {
+    try {
+      PsiFile file = getFile();
+      if (file != null) {
+        InjectedLanguageManagerImpl.getInstanceImpl(getProject()).dropFileCaches(file);
+        WriteAction.run(file::delete);
+      }
+    }
+    finally {
+      super.tearDown();
+    }
   }
 
-  public PerlParserTestBase(@NonNls @NotNull String dataPath, @NotNull String fileExt, @NotNull ParserDefinition... definitions) {
-    super(dataPath, fileExt, true, definitions);
+  @NotNull
+  protected String myFileExt;
+  public PerlParserTestBase() {
+    this(PerlFileTypeScript.EXTENSION_PL);
+  }
+
+  public PerlParserTestBase(@NotNull String fileExt) {
+    myFileExt = fileExt;
   }
 
   @Override
+  public String getFileExtension() {
+    return myFileExt;
+  }
+
+  protected boolean allTreesInSingleFile() {
+    return true;
+  }
+
+  protected boolean checkAllPsiRoots() {
+    return true;
+  }
+
   protected void doTest(boolean checkErrors) {
-    super.doTest(true);
+    doTest(checkErrors, false);
     if (checkErrors) {
       doCheckErrors();
     }
   }
 
+  @Override
+  public void initWithFileContent(String filename, String extension, String content) {
+    super.initWithFileContent(filename, extension, StringUtil.replace(content, REPLACES, REPLACEMENTS).trim());
+  }
+
+  protected boolean includeRanges() {
+    return false;
+  }
+
+  protected void doTest(boolean checkResult, boolean ensureNoErrorElements) {
+    initWithFileSmart();
+    PsiFile psiFile = getFile();
+    String text = psiFile.getText();
+
+    ensureParsed(psiFile);
+    assertEquals("doc text mismatch", text, requireNonNull(psiFile.getViewProvider().getDocument()).getText());
+    ensureCorrectReparse(psiFile);
+    if (checkResult) {
+      doCheckResult(getAnswersDataPath(), psiFile, checkAllPsiRoots(), getTestName(true), skipSpaces(), includeRanges(),
+                    allTreesInSingleFile());
+      if (ensureNoErrorElements) {
+        ensureNoErrorElements();
+      }
+    }
+    else {
+      DebugUtil.psiToString(psiFile, skipSpaces(), includeRanges());
+    }
+  }
+
+  protected String getAnswersDataPath() {
+    return getTestDataPath();
+  }
+
+  protected void ensureNoErrorElements() {
+    getFile().accept(new PsiRecursiveElementVisitor() {
+      private static final int TAB_WIDTH = 8;
+
+      @Override
+      public void visitErrorElement(PsiErrorElement element) {
+        // Very dump approach since a corresponding Document is not available.
+        String text = getFile().getText();
+        String[] lines = StringUtil.splitByLinesKeepSeparators(text);
+
+        int offset = element.getTextOffset();
+        LineColumn position = StringUtil.offsetToLineColumn(text, offset);
+        int lineNumber = position != null ? position.line : -1;
+        int column = position != null ? position.column : 0;
+
+        String line = StringUtil.trimTrailing(lines[lineNumber]);
+        // Sanitize: expand indentation tabs, replace the rest with a single space
+        int numIndentTabs = StringUtil.countChars(line.subSequence(0, column), '\t', 0, true);
+        int indentedColumn = column + numIndentTabs * (TAB_WIDTH - 1);
+        String lineWithNoTabs = StringUtil.repeat(" ", numIndentTabs * TAB_WIDTH) + line.substring(numIndentTabs).replace('\t', ' ');
+        String errorUnderline = StringUtil.repeat(" ", indentedColumn) + StringUtil.repeat("^", Math.max(1, element.getTextLength()));
+
+        fail(String.format("Unexpected error element: %s:%d:%d\n\n%s\n%s\n%s",
+                           getFile().getName(), lineNumber + 1, column,
+                           lineWithNoTabs, errorUnderline, element.getErrorDescription()));
+      }
+    });
+  }
+
   protected void doCheckErrors() {
     assertFalse(
       "PsiFile contains error elements",
-      toParseTreeText(myFile, skipSpaces(), includeRanges()).contains("PsiErrorElement")
+      DebugUtil.psiToString(getFile(), skipSpaces(), includeRanges()).contains("PsiErrorElement")
     );
   }
 
@@ -94,7 +178,6 @@ public abstract class PerlParserTestBase extends ParsingTestCase {
     doTest(true);
   }
 
-  @Override
   protected boolean skipSpaces() {
     return true;
   }
@@ -106,58 +189,5 @@ public abstract class PerlParserTestBase extends ParsingTestCase {
     catch (IOException e) {
       throw new RuntimeException(e);
     }
-  }
-
-  @Override
-  public void setUp() throws Exception {
-    super.setUp();
-    registerApplicationService(TemplateDataLanguageMappings.class, new TemplateDataLanguageMappings(getProject()));
-    registerApplicationService(TemplateDataLanguagePatterns.class, new TemplateDataLanguagePatterns());
-
-    addExplicitExtension(LanguageParserDefinitions.INSTANCE, PerlLanguage.INSTANCE, new PerlParserDefinition());
-    addExplicitExtension(LanguageParserDefinitions.INSTANCE, PodLanguage.INSTANCE, new PodParserDefinition());
-
-    registerExtensionPoint(EmbeddedTokenTypesProvider.EXTENSION_POINT_NAME, EmbeddedTokenTypesProvider.class);
-    addExplicitExtension(LanguageParserDefinitions.INSTANCE, HTMLLanguage.INSTANCE, new HTMLParserDefinition());
-
-    registerComponentInstance(myProject, PerlNamesCache.class, new PerlNamesCache(myProject));
-
-    registerParserExtensions();
-
-    PerlParserExtensions parserExtensions = new PerlParserExtensions();
-    registerComponentInstance(ApplicationManager.getApplication(), PerlParserExtensions.class, parserExtensions);
-    parserExtensions.initComponent();
-
-    PerlPackageProcessorEP.EP.addExplicitExtension("constant", new ConstantProcessor());
-    PerlPackageProcessorEP.EP.addExplicitExtension("vars", new VarsProcessor());
-    PerlPackageProcessorEP.EP.addExplicitExtension("Exception::Class", new ExceptionClassProcessor());
-
-    myProject.registerService(PerlSharedSettings.class, new PerlSharedSettings(getProject()));
-
-    registerExtensionPoint(PerlImplicitDeclarationsProvider.EP_NAME, PerlImplicitDeclarationsProvider.class);
-    registerExtension(PerlImplicitDeclarationsProvider.EP_NAME, new PerlCoreDeclarationsProvider());
-    registerExtension(PerlImplicitDeclarationsProvider.EP_NAME, new TypesStandardImplicitDeclarationsProvider());
-    registerExtension(PerlImplicitDeclarationsProvider.EP_NAME, new ReadonlyImplicitDeclarationsProvider());
-
-    myProject.registerService(PerlImplicitDeclarationsService.class, new PerlImplicitDeclarationsService(getProject()));
-
-  }
-
-  protected void registerParserExtensions(){
-    registerExtensionPoint(PerlParserExtension.EP_NAME, PerlParserExtension.class);
-    registerExtension(PerlParserExtension.EP_NAME, new MooseParserExtension());
-    registerExtension(PerlParserExtension.EP_NAME, new PerlSwitchParserExtensionImpl());
-    registerExtension(PerlParserExtension.EP_NAME, new ClassAccessorParserExtension());
-
-  }
-
-  protected String loadFile(@NotNull @NonNls @TestDataFile String name) throws IOException {
-    String adjustedName = myFileExt.isEmpty() ? name.replace(".", "") : name.replace("." + myFileExt, ".code");
-    return FileUtil.loadFile(new File(myFullDataPath, adjustedName), CharsetToolkit.UTF8, true).trim();
-  }
-
-  @Override
-  protected boolean checkAllPsiRoots() {
-    return false;
   }
 }

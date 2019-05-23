@@ -16,10 +16,6 @@
 
 package parser;
 
-import com.intellij.psi.LanguageFileViewProviders;
-import com.perl5.lang.htmlmason.HTMLMasonFileViewProviderFactory;
-import com.perl5.lang.htmlmason.HTMLMasonLanguage;
-import com.perl5.lang.htmlmason.HTMLMasonParserDefinition;
 import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonCustomTag;
 import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonCustomTagRole;
 import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings;
@@ -27,22 +23,12 @@ import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings;
 
 public class HTMLMasonParserTest extends PerlParserTestBase {
   public HTMLMasonParserTest() {
-    super("", "mas", new HTMLMasonParserDefinition());
+    super("mas");
   }
 
   @Override
   protected String getTestDataPath() {
     return "testData/parser";
-  }
-
-  @Override
-  protected boolean allTreesInSingleFile() {
-    return true;
-  }
-
-  @Override
-  protected boolean checkAllPsiRoots() {
-    return true;
   }
 
   private void addCustomTag(String text, HTMLMasonCustomTagRole role) {
@@ -162,26 +148,5 @@ public class HTMLMasonParserTest extends PerlParserTestBase {
   public void testMasonSample() {
     doTest();
   }
-
-  public void testErrorFilter() throws Exception {
-    String name = "errorFilter";
-    String text = loadFile(name + "." + myFileExt);
-    myFile = createPsiFile(name, text);
-    ensureParsed(myFile);
-    //		List<PsiFile> allFiles = myFile.getViewProvider().getAllFiles();
-    //		assertEquals(3, allFiles.size());
-    // fixme this is not actually works we need to check annotations, not eror elements, they are still there, see #917
-    // see https://github.com/JetBrains/intellij-plugins/blob/master/handlebars/src/com/dmarcotte/handlebars/inspections/HbErrorFilter.java
-    //		assertFalse(
-    //				"PsiFile contains error elements",
-    //				toParseTreeText(allFiles.get(1), skipSpaces(), includeRanges()).contains("PsiErrorElement")
-    //		);
-  }
-
-  @Override
-  public void setUp() throws Exception {
-    super.setUp();
-    LanguageFileViewProviders.INSTANCE.addExplicitExtension(HTMLMasonLanguage.INSTANCE, new HTMLMasonFileViewProviderFactory());
-    getProject().registerService(HTMLMasonSettings.class, new HTMLMasonSettings(getProject()));
-  }
 }
+

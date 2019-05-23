@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
@@ -87,3 +88,8 @@ Perl5
           PerlStringContentElementImpl(Perl5: STRING_CONTENT)('SCALAR')
         PsiElement(Perl5: })('}')
     PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('$scalar;\n@array;\n*glob;\n%hash;\n\n$array[1];\n$hash{key};\n\n@array[1,2,3];\n@hash{qw/key two/};\n\n*glob{SCALAR};')
+--------------------------------------------------------------------------------

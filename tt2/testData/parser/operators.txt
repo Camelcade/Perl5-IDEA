@@ -1,3 +1,36 @@
+Subtree: HTML (HTML)
+HtmlFile:operators.tt
+  PsiElement(HTML_DOCUMENT)
+    PsiElement(XML_PROLOG)
+      <empty list>
+    HtmlTag:html
+      XmlToken:XML_START_TAG_START('<')
+      XmlToken:XML_NAME('html')
+      XmlToken:XML_TAG_END('>')
+      XmlText
+      HtmlTag:head
+        XmlToken:XML_START_TAG_START('<')
+        XmlToken:XML_NAME('head')
+        XmlToken:XML_TAG_END('>')
+        XmlToken:XML_END_TAG_START('</')
+        XmlToken:XML_NAME('head')
+        XmlToken:XML_TAG_END('>')
+      XmlText
+      HtmlTag:body
+        XmlToken:XML_START_TAG_START('<')
+        XmlToken:XML_NAME('body')
+        XmlToken:XML_TAG_END('>')
+        XmlText
+          PsiElement(TT2: TT2_OUTER)('[% foo %]\n%% foo\n[% foo = bar %]\n%% foo = bar\n[% foo == bar %]\n%% foo == bar\n[% foo != bar %]\n%% foo != bar\n[% foo < bar %]\n%% foo < bar\n[% foo <= bar %]\n%% foo <= bar\n[% foo > bar %]\n%% foo > bar\n[% foo >= bar %]\n%% foo >= bar\n[% foo && bar %]\n%% foo && bar\n[% foo and bar %]\n%% foo and bar\n[% foo AND bar %]\n%% foo AND bar\n[% foo || bar %]\n%% foo || bar\n[% foo or bar %]\n%% foo or bar\n[% foo OR bar %]\n%% foo OR bar\n[% !bar %]\n%% !bar\n[% not bar %]\n%% not bar\n[% NOT bar %]\n%% NOT bar\n[% foo ? bar : baz %]\n%% foo ? bar : baz\n[% foo + bar %]\n%% foo + bar\n[% foo - bar %]\n%% foo - bar\n[% foo * bar %]\n%% foo * bar\n[% foo / bar %]\n%% foo / bar\n[% foo div bar %]\n%% foo div bar\n[% foo DIV bar %]\n%% foo DIV bar\n[% foo % bar %]\n%% foo % bar\n[% foo mod bar %]\n%% foo mod bar\n[% foo MOD bar %]\n%% foo MOD bar\n[% copyright = '(C) Copyright' _ year _ ' ' _ author %]\n[% copyright = "(C) Copyright $year $author" %]\n%% copyright = '(C) Copyright' _ year _ ' ' _ author\n%% copyright = "(C) Copyright $year $author"\n')
+        XmlToken:XML_END_TAG_START('</')
+        XmlToken:XML_NAME('body')
+        XmlToken:XML_TAG_END('>')
+      XmlText
+      XmlToken:XML_END_TAG_START('</')
+      XmlToken:XML_NAME('html')
+      XmlToken:XML_TAG_END('>')
+--------------------------------------------------------------------------------
+Subtree: Template Toolkit 2 (Template Toolkit 2)
 Template Toolkit File
   PsiComment(TT2: TT2_HTML)('<html>\n<head></head>\n<body>\n')
   PsiElement(TT2: [%)('[%')
@@ -540,3 +573,4 @@ Template Toolkit File
         PsiElement(TT2: STRING_CONTENT)('author')
         PsiElement(TT2: DQ_CLOSE)('"')
   PsiComment(TT2: TT2_HTML)('\n</body>\n</html>')
+--------------------------------------------------------------------------------

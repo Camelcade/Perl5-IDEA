@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlSortExprImpl(Perl5: SORT_EXPR)
@@ -38,3 +39,8 @@ Perl5
         PsiElement(Perl5: $@)('@')
         PerlVariableNameElementImpl(Perl5: ARRAY_NAME)('list')
     PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('sort somesub @list;\nsort {$a <=> $b} @list;\nsort $a @list;')
+--------------------------------------------------------------------------------

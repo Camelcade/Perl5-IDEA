@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiComment(Perl5: COMMENT_LINE)('# Try::Tiny')
   PsiPerlStatementImpl(Perl5: STATEMENT)
@@ -617,3 +618,8 @@ Perl5
               PsiElement(Perl5: QUOTE_DOUBLE_CLOSE)('"')
           PsiElement(Perl5: ;)(';')
         PsiElement(Perl5: })('}')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('# Try::Tiny\ntry {\n    die "foo";\n} catch {\n    warn "caught error: $_"; # not $@\n};\n\n# just silence errors\ntry {\n    die "foo";\n};\n\nmy $x = try { die "foo" } catch { "bar" };\nmy $x = try { die "foo" } || "bar";\nmy $x = (try { die "foo" }) // "bar";\n\nmy $x = eval { die "foo" } || "bar";\n\nmy $x;\ntry { die 'foo' } finally { $x = 'bar' };\ntry { die 'foo' } catch { warn "Got a die: $_" } finally { $x = 'bar' };\n\nsay finally{ $var } if something;\n\ntry {\n    require Foo;\n} catch {\n    when (/^Can't locate .*?\.pm in \@INC/) { } # ignore\n    default { die $_ }\n};\n\nsub foo {\n    my ( $self, @args ) = @_;\n    try { $self->bar(@args) }\n}\n\nsub bar_in_place {\n    my $self = shift;\n    my $args = \@_;\n    try { $_ = $self->bar($_) for @$args }\n}\n\nsub parent_sub {\n    try {\n        die;\n    }\n    catch {\n        return;\n    };\n\n    say "this text WILL be displayed, even though an exception is thrown";\n}\n\nsub parent_sub {\n    my $success = try {\n        die;\n        1;\n    };\n    return unless $success;\n\n    say "This text WILL NEVER appear!";\n}\n# OR\nsub parent_sub_with_catch {\n    my $success = try {\n        die;\n        1;\n    }\n        catch {\n            # do something with $_\n            return undef; #see note\n        };\n    return unless $success;\n\n    say "This text WILL NEVER appear!";\n}')
+--------------------------------------------------------------------------------

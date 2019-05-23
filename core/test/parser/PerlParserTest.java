@@ -16,10 +16,7 @@
 
 package parser;
 
-import com.intellij.psi.LanguageFileViewProviders;
-import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
-import com.perl5.lang.perl.psi.PerlFileViewProviderFactory;
 
 
 public class PerlParserTest extends PerlParserTestBase {
@@ -434,7 +431,7 @@ public class PerlParserTest extends PerlParserTestBase {
 
   public void testPerlSwitch() {
     PerlSharedSettings.getInstance(getProject()).PERL_SWITCH_ENABLED = true;
-    //doTest();
+    doTest();
   }
 
   public void testInterpolatedHashArrayElements() {
@@ -482,10 +479,4 @@ public class PerlParserTest extends PerlParserTestBase {
   }
 
   public void testOperatorsAfterLoopControl() {doTest();}
-
-  @Override
-  public void setUp() throws Exception {
-    super.setUp();
-    LanguageFileViewProviders.INSTANCE.addExplicitExtension(PerlLanguage.INSTANCE, new PerlFileViewProviderFactory());
-  }
 }

@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
@@ -277,3 +278,8 @@ Perl5
               PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('var')
         PsiElement(Perl5: &})('}')
     PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('$var;\n$#var;\n@var;\n%var;\n*var;\n&var;\n\n$$var;\n$#$var;\n@$var;\n%$var;\n*$var;\n&$var;\n\n${var};\n$#{var};\n@{var};\n%{var};\n*{var};\n&{var};\n\n${$var};\n$#{$var};\n@{$var};\n%{$var};\n*{$var};\n&{$var};\n\n${$var + $var};\n$#{$var + $var};\n@{$var + $var};\n%{$var + $var};\n*{$var + $var};\n&{$var + $var};')
+--------------------------------------------------------------------------------

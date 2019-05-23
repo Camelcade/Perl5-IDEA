@@ -16,13 +16,12 @@
 
 package parser;
 
-import com.perl5.lang.mojolicious.MojoliciousParserDefinition;
 import com.perl5.lang.mojolicious.filetypes.MojoliciousFileType;
 
 
 public class MojoliciousParserTest extends MojoliciousParserTestBase {
   public MojoliciousParserTest() {
-    super("", MojoliciousFileType.MOJO_DEFAULT_EXTENSION, new MojoliciousParserDefinition());
+    super(MojoliciousFileType.MOJO_DEFAULT_EXTENSION);
   }
 
   @Override

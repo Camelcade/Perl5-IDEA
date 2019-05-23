@@ -16,15 +16,9 @@
 
 package parser;
 
-import com.intellij.psi.LanguageFileViewProviders;
-import com.perl5.lang.embedded.EmbeddedPerlLanguage;
-import com.perl5.lang.embedded.EmbeddedPerlParserDefinition;
-import com.perl5.lang.embedded.psi.EmbeddedPerlFileViewProviderFactory;
-
-
 public class EmbeddedPerlParserTest extends PerlParserTestBase {
   public EmbeddedPerlParserTest() {
-    super("", "thtml", new EmbeddedPerlParserDefinition());
+    super("thtml");
   }
 
   @Override
@@ -42,21 +36,5 @@ public class EmbeddedPerlParserTest extends PerlParserTestBase {
 
   public void testIncompletePerlBlock() {
     doTest();
-  }
-
-  @Override
-  protected boolean allTreesInSingleFile() {
-    return true;
-  }
-
-  @Override
-  protected boolean checkAllPsiRoots() {
-    return true;
-  }
-
-  @Override
-  public void setUp() throws Exception {
-    super.setUp();
-    LanguageFileViewProviders.INSTANCE.addExplicitExtension(EmbeddedPerlLanguage.INSTANCE, new EmbeddedPerlFileViewProviderFactory());
   }
 }

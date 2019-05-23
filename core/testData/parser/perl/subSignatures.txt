@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::foo
     PsiElement(Perl5: sub)('sub')
@@ -357,3 +358,8 @@ Perl5
               PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('right')
         PsiElement(Perl5: ;)(';')
       PsiElement(Perl5: })('}')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('sub foo ($left, $right) {\n    return $left + $right;\n}\n\nsub foo ($first, $, $third) {\n    return "first=$first, third=$third";\n}\n\nsub foo ($left, $right = 0) {\n    return $left + $right;\n}\n\nsub foo ($first_name, $surname, $nickname = $first_name) {\n    print "$first_name $surname is known as \"$nickname\"";\n}\n\nsub foo ($thing, $=) {\n    print $thing;\n}\n\nsub foo ($filter, @inputs) {\n    print $filter->($_) foreach @inputs;\n}\n\nsub foo ($thing, @) {\n    print $thing;\n}\n\nsub foo ($filter, %inputs) {\n    print $filter->($_, $inputs{$_}) foreach sort keys %inputs;\n}\n\nsub foo ($thing, %) {\n    print $thing;\n}\n\nsub foo () {\n    return 123;\n}\n\nsub foo ($left, $right) : prototype($$) {\n    return $left + $right;\n}')
+--------------------------------------------------------------------------------

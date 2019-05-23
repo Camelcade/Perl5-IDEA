@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlUseStatementImpl(USE_STATEMENT)
     PsiElement(Perl5: use)('use')
@@ -298,3 +299,8 @@ Perl5
         PsiElement(Perl5: ()('(')
         PsiElement(Perl5: ))(')')
     PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('use Test;\nuse JSON;\nuse version;\n\nsub { $exitcode = 0; version() };\nmy @b = split /\./, ${ref($_[1]) ? $_[1] : version($_[1])};\nTest( $class, $symbol, $code_ref, $attr, $args );\n\n$json = JSON()->new;\nsub Dump     () { YAML(Dump => @_)     };\n\nnew version();\nnew JSON();\nnew Test();\nnew\n    version();\nnew\n    JSON();\nnew\n    Test();\nnew #comment\n    version();\nnew #comment\n    JSON();\nnew #comment\n    Test();\nnew #@inject HTML\n    version();\nnew #@inject HTML\n    JSON();\nnew #@inject HTML\n    Test();')
+--------------------------------------------------------------------------------

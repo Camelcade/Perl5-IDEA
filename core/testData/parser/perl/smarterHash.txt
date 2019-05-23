@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlAssignExprImpl(Perl5: ASSIGN_EXPR)
@@ -971,3 +972,8 @@ Perl5
               PerlVariableNameElementImpl(Perl5: ARRAY_NAME)('bar')
     PsiElement(Perl5: ;)(';')
   PsiComment(Perl5: COMMENT_LINE)('# notall')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('$foo = reduce { defined($a)            ? $a :\n    $code->(local $_ = $b) ? $b :\n        undef } undef, @list; # first\n$foo = reduce { $a > $b ? $a : $b } 1..10;       # max\n$foo = reduce { $a gt $b ? $a : $b } 'A'..'Z';   # maxstr\n$foo = reduce { $a < $b ? $a : $b } 1..10;       # min\n$foo = reduce { $a lt $b ? $a : $b } 'aa'..'zz'; # minstr\n$foo = reduce { $a + $b } 1 .. 10;               # sum\n$foo = reduce { $a . $b } @bar;                  # concat\n$foo = reduce { $a || $code->(local $_ = $b) } 0, @bar;   # any\n$foo = reduce { $a && $code->(local $_ = $b) } 1, @bar;   # all\n$foo = reduce { $a && !$code->(local $_ = $b) } 1, @bar;  # none\n$foo = reduce { $a || !$code->(local $_ = $b) } 0, @bar;  # notall\n# Note that these implementations do not fully short-circuit\n\n$foo = reduce { defined($a)            ? $a :\n    $code->(local $_ = $b) ? $b :\n        undef }, undef, @list; # first\n$foo = reduce { $a > $b ? $a : $b }, 1..10;       # max\n$foo = reduce { $a gt $b ? $a : $b }, 'A'..'Z';   # maxstr\n$foo = reduce { $a < $b ? $a : $b }, 1..10;       # min\n$foo = reduce { $a lt $b ? $a : $b }, 'aa'..'zz'; # minstr\n$foo = reduce { $a + $b }, 1 .. 10;               # sum\n$foo = reduce { $a . $b }, @bar;                  # concat\n$foo = reduce { $a || $code->(local $_ = $b) }, 0, @bar;   # any\n$foo = reduce { $a && $code->(local $_ = $b) }, 1, @bar;   # all\n$foo = reduce { $a && !$code->(local $_ = $b) }, 1, @bar;  # none\n$foo = reduce { $a || !$code->(local $_ = $b) }, 0, @bar;  # notall')
+--------------------------------------------------------------------------------

@@ -16,16 +16,12 @@
 
 package parser;
 
-import com.intellij.psi.LanguageFileViewProviders;
-import com.perl5.lang.mason2.Mason2TemplatingLanguage;
-import com.perl5.lang.mason2.Mason2TemplatingParserDefinition;
 import com.perl5.lang.mason2.filetypes.Mason2FileTypeFactory;
-import com.perl5.lang.mason2.psi.Mason2TemplatingFileViewProviderFactory;
 
 
 public class Mason2TemplatingParserTest extends PerlParserTestBase {
   public Mason2TemplatingParserTest() {
-    super("", Mason2FileTypeFactory.TOP_LEVEL_COMPONENT_EXTENSION, new Mason2TemplatingParserDefinition());
+    super(Mason2FileTypeFactory.TOP_LEVEL_COMPONENT_EXTENSION);
   }
 
   @Override
@@ -45,20 +41,4 @@ public class Mason2TemplatingParserTest extends PerlParserTestBase {
     doTest(true);
   }
 
-  @Override
-  protected boolean allTreesInSingleFile() {
-    return true;
-  }
-
-  @Override
-  protected boolean checkAllPsiRoots() {
-    return true;
-  }
-
-  @Override
-  public void setUp() throws Exception {
-    super.setUp();
-    LanguageFileViewProviders.INSTANCE
-      .addExplicitExtension(Mason2TemplatingLanguage.INSTANCE, new Mason2TemplatingFileViewProviderFactory());
-  }
 }

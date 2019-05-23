@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlStringDqImpl(Perl5: STRING_DQ)
@@ -120,3 +121,8 @@ Perl5
         PsiElement(Perl5: regex)('[{:print:}]*\z')
       PsiElement(Perl5: r})('/')
     PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('"{injection_guard} attribute to ${class}->new()";\n"$self->\$builder()";\nqr/\A@$warn[^`]*\z/;\nqr/\A@$warn[:`]*\z/;\nqr/\A@$warn[\`]*\z/;\n$tmp =~ /(^|\|)${termpat}[:|]/s;\n" call to $clas s->meta->make _immutable\n";\nqr/\A@$warn[[:print:]]*\z/;\nqr/\A@$warn[{:print:}]*\z/;')
+--------------------------------------------------------------------------------

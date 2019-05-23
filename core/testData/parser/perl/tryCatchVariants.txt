@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiComment(Perl5: COMMENT_LINE)('# https://metacpan.org/pod/Try::Catch')
   PsiComment(Perl5: COMMENT_LINE)('# https://metacpan.org/pod/Try::Tiny')
@@ -599,3 +600,8 @@ Perl5
             PsiElement(Perl5: {)('{')
             PsiElement(Perl5: })('}')
     PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('# https://metacpan.org/pod/Try::Catch\n# https://metacpan.org/pod/Try::Tiny\ncatch();\n$obj->catch();\nfinally();\n$obj->finally();\n\ntry {};\n\ntry {}\nfinally {};\n\ntry {}\ncatch {}\nfinally {};\n\ntry {}\ncatch {}\ncatch {}\nfinally {};\n\ntry {}\nfinally {}\ncatch {};\n\n# https://metacpan.org/pod/Exception::Class::TryCatch\ncatch my $err and warn $err->error;\n\n# https://metacpan.org/pod/TryCatch\ntry {}\ncatch($err) {}\ncatch(TypeFoo $e) {}\ncatch (Dict[code => Int, message => Str] $err) {}\ncatch (Some::Class $e where {$_->code > 100} ) {}\ncatch (HTTPError $e where {$_->code >= 400 && $_->code <= 499} ) {\n    return "4XX error";\n}\ncatch (HTTPError $e) {\n    return "other http code";\n};\n\n# https://metacpan.org/pod/Error\nthrow Error::Simple("A simple error");\ntry {\n    do_some_stuff();\n    die "error!" if $condition;\n    throw Error::Simple "Oops!" if $other_condition;\n}\ncatch Error::IO with {\n    my $E = shift;\n    print STDERR "File ", $E->{'-file'}, " had a problem\n";\n}\nexcept {\n    my $E               = shift;\n    my $general_handler = sub {send_message $E->{-description}};\n    return {\n        UserException1 => $general_handler,\n        UserException2 => $general_handler\n    };\n}\notherwise {\n    print STDERR "Well I don't know what to say\n";\n}\nfinally {\n    close_the_garage_door_already(); # Should be reliable\n};                                   # Don't forget the trailing ; or you might be surprised\n\n# https://metacpan.org/source/BIGPRESH/Dancer-1.3202/lib/Dancer/Exception.pm\ntry{}\ncontinuation{}\ncatch{}\nfinally{};')
+--------------------------------------------------------------------------------

@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlBitwiseAndExprImpl(Perl5: BITWISE_AND_EXPR)
@@ -47,3 +48,8 @@ Perl5
           PsiPerlMethodImpl(Perl5: METHOD)
             PerlSubNameElementImpl(Perl5: subname)('somethong')
     PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('$a & ~$b;\n$a & ~substr;\n$a & ~identifier;\nidentifer & ~somethong;')
+--------------------------------------------------------------------------------

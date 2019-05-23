@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlSubCallExprImpl(Perl5: SUB_CALL_EXPR)
@@ -107,3 +108,8 @@ Perl5
         PerlSubNameElementImpl(Perl5: subname)('new')
         PerlNamespaceElementImpl(Perl5: package::name)('encoding')
     PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('new NEXT;\nnew bigrat;\nnew version;\nnew Win32;\nnew Memoize;\nnew experimental;\nnew bignum;\nnew bigint;\nnew autodie;\nnew Socket;\nnew DB_File;\nnew parent;\nnew Encode;\nnew Digest;\nnew Fatal;\nnew perlfaq;\nnew CPAN;\nnew encoding;')
+--------------------------------------------------------------------------------

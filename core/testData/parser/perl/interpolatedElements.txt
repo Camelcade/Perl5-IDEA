@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlVariableDeclarationLexicalImpl(Perl5: VARIABLE_DECLARATION_LEXICAL)
@@ -237,3 +238,8 @@ Perl5
         PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)(' test')
         PsiElement(Perl5: QUOTE_DOUBLE_CLOSE)('"')
     PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('my $scalar;\nmy @array;\nmy %hash;\n\nsay "test $scalar test";\nsay "test $scalar->{something}->{keys %hash}->{@array} test";\nsay "test ${say 'hi'}";\n\nsay "test @array test";\nsay "test @array[1,2,3] test";\nsay "test @array[keys %hash] test";\nsay "test $array[1] test";\nsay "test @{say 'hi'}";\n\nsay "test %hash test";\nsay "test @hash{1,2,3} test";\nsay "test $hash{123} test";')
+--------------------------------------------------------------------------------

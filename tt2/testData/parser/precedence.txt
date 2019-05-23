@@ -1,3 +1,36 @@
+Subtree: HTML (HTML)
+HtmlFile:precedence.tt
+  PsiElement(HTML_DOCUMENT)
+    PsiElement(XML_PROLOG)
+      <empty list>
+    HtmlTag:html
+      XmlToken:XML_START_TAG_START('<')
+      XmlToken:XML_NAME('html')
+      XmlToken:XML_TAG_END('>')
+      XmlText
+      HtmlTag:head
+        XmlToken:XML_START_TAG_START('<')
+        XmlToken:XML_NAME('head')
+        XmlToken:XML_TAG_END('>')
+        XmlToken:XML_END_TAG_START('</')
+        XmlToken:XML_NAME('head')
+        XmlToken:XML_TAG_END('>')
+      XmlText
+      HtmlTag:body
+        XmlToken:XML_START_TAG_START('<')
+        XmlToken:XML_NAME('body')
+        XmlToken:XML_TAG_END('>')
+        XmlText
+          PsiElement(TT2: TT2_OUTER)('[% foo %]\n%% foo\n\n[% !bar %]\n%% !bar\n[% not bar %]\n%% not bar\n\n[% foo.bar * bar / baz div bar % baz mod baz * !bar.zoo(123) / not baz %]\n%% foo.bar * bar / baz div bar % baz mod baz * !bar.zoo(123) / not baz\n\n[% foo.bar * bar /( baz div bar )% baz mod baz * !bar.zoo(123) / not baz %]\n%% foo.bar * bar / (baz div bar) % baz mod baz * !bar.zoo(123) / not baz\n\n[% foo + bar - baz * foo % !bar %]\n%% foo + bar - baz * foo % !bar\n\n[% foo + (bar - baz) * foo % !bar %]\n%% foo + (bar - baz) * foo % !bar\n\n[% foo + baz < bar * foo % !foo %]\n%% foo + baz < bar * foo % !foo\n\n[% foo + bar * !baz % zoo == bar % !foo * bar %]\n%% foo + bar * !baz % zoo == bar % !foo * bar\n\n[% foo.bar(123) * baz && bar + zoo.foo and some.else.call(123) %]\n%% foo.bar(123) * baz && bar + zoo.foo and some.else.call(123)\n\n[% foo.bar(123) * baz || bar and zoo.foo or some.else.call(123) %]\n%% foo.bar(123) * baz || bar and zoo.foo or some.else.call(123)\n\n[% foo < zoo.bar.some(123) ? bar mod zoo : baz + !foo %]\n%% foo < zoo.bar.some(123) ? bar mod zoo : baz + !foo\n')
+        XmlToken:XML_END_TAG_START('</')
+        XmlToken:XML_NAME('body')
+        XmlToken:XML_TAG_END('>')
+      XmlText
+      XmlToken:XML_END_TAG_START('</')
+      XmlToken:XML_NAME('html')
+      XmlToken:XML_TAG_END('>')
+--------------------------------------------------------------------------------
+Subtree: Template Toolkit 2 (Template Toolkit 2)
 Template Toolkit File
   PsiComment(TT2: TT2_HTML)('<html>\n<head></head>\n<body>\n')
   PsiElement(TT2: [%)('[%')
@@ -629,3 +662,4 @@ Template Toolkit File
           PsiIdentifierExprImpl(TT2: IDENTIFIER_EXPR)
             PsiElement(TT2: TT2_IDENTIFIER)('foo')
   PsiComment(TT2: TT2_HTML)('\n</body>\n</html>')
+--------------------------------------------------------------------------------

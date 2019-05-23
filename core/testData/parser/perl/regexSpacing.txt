@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlMatchRegexImpl(Perl5: MATCH_REGEX)
@@ -56,3 +57,8 @@ Perl5
       PsiPerlPerlRegexModifiersImpl(Perl5: PERL_REGEX_MODIFIERS)
         PsiElement(Perl5: /m)('x')
     PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('/some $pattern \$pattern test [^ g r   o # u p $pattern \$pattern ] \Qquoted $pattern  \$pattern # comment  tab\E  \# not comment blah/;\n\n/\n    some $pattern  test \$pattern\n        [^ g r   o # u p $pattern \$pattern ]\n        [some $pattern \$pattern [:alpha:] blah]\n        [some [[:alpha:]] blah]\n        [some [:^alpha:] blah]\n        [some [[:^alpha:]] blah]\n        \Qquoted $pattern \$pattern # comment  tab\E\n        # some comment\n        \# not comment blah\n    /x;')
+--------------------------------------------------------------------------------

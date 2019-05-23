@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlDerefExprImpl(Perl5: DEREF_EXPR)
@@ -71,3 +72,8 @@ Perl5
           PsiElement(Perl5: ,)(',')
         PsiElement(Perl5: ))(')')
     PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('$status_updater->(\n    stop        => scalar localtime(), # <= here is wrong alignment\n    done        => scalar(@$poll),\n    total       => scalar(@$poll),\n    in_progress => 0,\n    queued      => 0,\n    comment     => "poll complete",\n);')
+--------------------------------------------------------------------------------

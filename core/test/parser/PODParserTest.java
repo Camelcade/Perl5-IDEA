@@ -16,11 +16,9 @@
 
 package parser;
 
-import com.perl5.lang.pod.PodParserDefinition;
-
 public class PODParserTest extends PerlParserTestBase {
   public PODParserTest() {
-    super("", "pod", new PodParserDefinition());
+    super("pod");
   }
 
   @Override

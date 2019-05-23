@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlNextExprImpl(Perl5: NEXT_EXPR)
@@ -671,3 +672,8 @@ Perl5
             PsiElement(Perl5: IDENTIFIER)('switch')
         PsiElement(Perl5: ;)(';')
       PsiElement(Perl5: })('}')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('next unless ref($op) eq 'ARRAY';\nnext if ref($op) eq 'ARRAY';\nnext for ref($op) eq 'ARRAY';\nnext foreach ref($op) eq 'ARRAY';\nnext while ref($op) eq 'ARRAY';\nnext until ref($op) eq 'ARRAY';\nnext when ref($op) eq 'ARRAY';\n\nswitch: {\n    say 'something';\n    next switch;\n}\n\nlast unless ref($op) eq 'ARRAY';\nlast if ref($op) eq 'ARRAY';\nlast for ref($op) eq 'ARRAY';\nlast foreach ref($op) eq 'ARRAY';\nlast while ref($op) eq 'ARRAY';\nlast until ref($op) eq 'ARRAY';\nlast when ref($op) eq 'ARRAY';\n\nswitch: {\n    say 'something';\n    last switch;\n}\n\n\ngoto unless ref($op) eq 'ARRAY';\ngoto if ref($op) eq 'ARRAY';\ngoto for ref($op) eq 'ARRAY';\ngoto foreach ref($op) eq 'ARRAY';\ngoto while ref($op) eq 'ARRAY';\ngoto until ref($op) eq 'ARRAY';\ngoto when ref($op) eq 'ARRAY';\n\nswitch: {\n    say 'something';\n    goto switch;\n}\n\nredo unless ref($op) eq 'ARRAY';\nredo if ref($op) eq 'ARRAY';\nredo for ref($op) eq 'ARRAY';\nredo foreach ref($op) eq 'ARRAY';\nredo while ref($op) eq 'ARRAY';\nredo until ref($op) eq 'ARRAY';\nredo when ref($op) eq 'ARRAY';\n\nswitch: {\n    say 'something';\n    redo switch;\n}')
+--------------------------------------------------------------------------------

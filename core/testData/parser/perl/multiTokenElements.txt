@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiComment(Perl5: COMMENT_LINE)('# these are different nodes wrapped with same psi element')
   PsiPerlStatementImpl(Perl5: STATEMENT)
@@ -58,3 +59,8 @@ Perl5
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('something')
     PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('# these are different nodes wrapped with same psi element\nsleep 100;\nwarn 'something';\nwantarray;\nuse something;\nsome::foo;\nuse constant;\nuse vars;\nsomesubcustom();\nsub something{}\nsub something;')
+--------------------------------------------------------------------------------

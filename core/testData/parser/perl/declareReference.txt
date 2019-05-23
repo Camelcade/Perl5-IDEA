@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlAssignExprImpl(Perl5: ASSIGN_EXPR)
@@ -591,3 +592,8 @@ Perl5
               PerlVariableNameElementImpl(Perl5: HASH_NAME)('c')
         PsiElement(Perl5: ))(')')
     PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('my \$var1 = \$a;\nmy \@var1 = \@a;\nmy \%var1 = \%a;\nmy (\$var2) = \$a;\nmy (\@var2) = \@a;\nmy (\%var2) = \%a;\nmy (\$var3, \@var4, \%var5) = (\$a, \@b, \%c);\n\nour \$var1 = \$a;\nour \@var1 = \@a;\nour \%var1 = \%a;\nour (\$var2) = \$a;\nour (\@var2) = \@a;\nour (\%var2) = \%a;\nour (\$var3, \@var4, \%var5) = (\$a, \@b, \%c);\n\nstate \$var1 = \$a;\nstate \@var1 = \@a;\nstate \%var1 = \%a;\nstate (\$var2) = \$a;\nstate (\@var2) = \@a;\nstate (\%var2) = \%a;\nstate (\$var3, \@var4, \%var5) = (\$a, \@b, \%c);\n\nlocal \$var1 = \$a;\nlocal \@var1 = \@a;\nlocal \%var1 = \%a;\nlocal (\$var2) = \$a;\nlocal (\@var2) = \@a;\nlocal (\%var2) = \%a;\nlocal (\$var3, \@var4, \%var5) = (\$a, \@b, \%c);')
+--------------------------------------------------------------------------------

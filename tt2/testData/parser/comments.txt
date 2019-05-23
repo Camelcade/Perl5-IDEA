@@ -1,3 +1,38 @@
+Subtree: HTML (HTML)
+HtmlFile:comments.tt
+  PsiElement(HTML_DOCUMENT)
+    PsiElement(XML_PROLOG)
+      <empty list>
+    HtmlTag:html
+      XmlToken:XML_START_TAG_START('<')
+      XmlToken:XML_NAME('html')
+      XmlToken:XML_TAG_END('>')
+      XmlText
+      HtmlTag:head
+        XmlToken:XML_START_TAG_START('<')
+        XmlToken:XML_NAME('head')
+        XmlToken:XML_TAG_END('>')
+        XmlText
+          XmlToken:XML_DATA_CHARACTERS('http://template-toolkit.org/docs/manual/Variables.html')
+        XmlToken:XML_END_TAG_START('</')
+        XmlToken:XML_NAME('head')
+        XmlToken:XML_TAG_END('>')
+      XmlText
+      HtmlTag:body
+        XmlToken:XML_START_TAG_START('<')
+        XmlToken:XML_NAME('body')
+        XmlToken:XML_TAG_END('>')
+        XmlText
+          PsiElement(TT2: TT2_OUTER)('[% #line comment in block %]\n\n[%#\n    this entire directive is ignored no\n    matter how many lines it wraps onto\n%]\n\n[%#\n    this entire directive is ignored no\n    matter how 'many lines it wraps onto\n%]\n\n[%# this entire\n    "directive is ignored no\n    matter how many lines it wraps onto\n%]\n\n[% # this is a comment\n   theta = 20      # so is' this\n   rho   = 30      # <aol>me "too!</aol>\n   blah = 69       # same here\n   comment1 = '#notcomment' # this is\n   comment2 = "#notcomment too" # this is\n%]')
+        XmlToken:XML_END_TAG_START('</')
+        XmlToken:XML_NAME('body')
+        XmlToken:XML_TAG_END('>')
+      XmlText
+      XmlToken:XML_END_TAG_START('</')
+      XmlToken:XML_NAME('html')
+      XmlToken:XML_TAG_END('>')
+--------------------------------------------------------------------------------
+Subtree: Template Toolkit 2 (Template Toolkit 2)
 Template Toolkit File
   PsiComment(TT2: TT2_HTML)('<html>\n<head>http://template-toolkit.org/docs/manual/Variables.html</head>\n<body>\n\n')
   PsiElement(TT2: [%)('[%')
@@ -65,3 +100,4 @@ Template Toolkit File
   PsiComment(TT2: LINE_COMMENT)('# this is')
   PsiElement(TT2: %])('%]')
   PsiComment(TT2: TT2_HTML)('\n\n\n</body>\n</html>')
+--------------------------------------------------------------------------------

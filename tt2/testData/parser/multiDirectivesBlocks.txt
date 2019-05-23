@@ -1,3 +1,55 @@
+Subtree: HTML (HTML)
+HtmlFile:multiDirectivesBlocks.tt
+  PsiElement(HTML_DOCUMENT)
+    PsiElement(XML_PROLOG)
+      <empty list>
+    HtmlTag:html
+      XmlToken:XML_START_TAG_START('<')
+      XmlToken:XML_NAME('html')
+      XmlToken:XML_TAG_END('>')
+      XmlText
+      HtmlTag:head
+        XmlToken:XML_START_TAG_START('<')
+        XmlToken:XML_NAME('head')
+        XmlToken:XML_TAG_END('>')
+        XmlToken:XML_END_TAG_START('</')
+        XmlToken:XML_NAME('head')
+        XmlToken:XML_TAG_END('>')
+      XmlText
+      HtmlTag:body
+        XmlToken:XML_START_TAG_START('<')
+        XmlToken:XML_NAME('body')
+        XmlToken:XML_TAG_END('>')
+        XmlText
+          PsiElement(TT2: TT2_OUTER)('[% IF title;\n      INCLUDE header;\n   ELSE;\n      INCLUDE other/header  title="Some Other Title";\n   END\n%]\n\n[% FOREACH group IN grouplist;\n     # loop => group iterator\n     "Groups:\n" IF loop.first;\n\n     FOREACH user IN group.userlist;\n        # loop => user iterator\n        "$loop.count: $user.name\n";\n     END;\n\n     # loop => group iterator\n     "End of Groups\n" IF loop.last;\n   END\n%]\n\n[% USE CGI;\n   CGI.start_form;\n   CGI.checkbox_group( name   = 'colours',\n                       values = [ 'red' 'green' 'blue' ] );\n   CGI.popup_menu( name   = 'items',\n                   values = [ 'foo' 'bar' 'baz' ] );\n   CGI.end_form\n%]\n\n[% MACRO triple(n) PERL %]')
+          XmlToken:XML_DATA_CHARACTERS('my')
+          XmlToken:XML_DATA_CHARACTERS('$n')
+          XmlToken:XML_DATA_CHARACTERS('=')
+          XmlToken:XML_DATA_CHARACTERS('$stash->get('n');')
+          XmlToken:XML_DATA_CHARACTERS('print')
+          XmlToken:XML_DATA_CHARACTERS('$n')
+          XmlToken:XML_DATA_CHARACTERS('*')
+          XmlToken:XML_DATA_CHARACTERS('3;')
+          PsiElement(TT2: TT2_OUTER)('[% END -%]\n\n[% TRY;\n       INCLUDE myfile;\n       USE DBI(mydsn);\n       CALL somecode;\n   CATCH file;\n       "File Error! $error.info";\n   CATCH DBI;\n       INCLUDE database/error.html;\n   CATCH;\n       error;\n   END\n%]\n\n[% TRY %]')
+          XmlToken:XML_DATA_CHARACTERS('...')
+          PsiElement(TT2: TT2_OUTER)('[% CATCH DBI ;\n     INCLUDE database/error.html ;\n   CATCH DBI.connect ;\n     INCLUDE database/connect.html ;\n   CATCH ;\n     INCLUDE error.html ;\n   END\n%]\n\n[% TRY %]\n   [% foo %]\n[% CATCH myerr ;\n     "Error: $error" ;\n   END\n%]\n\n[% TRY %]')
+          XmlToken:XML_DATA_CHARACTERS('...')
+          PsiElement(TT2: TT2_OUTER)('[% CATCH myerror %]\n   [% error.info.errors.size or 'no';\n      error.info.errors.size == 1 ? ' error' : ' errors' %]')
+          XmlToken:XML_DATA_CHARACTERS('in')
+          PsiElement(TT2: TT2_OUTER)('[% error.info.module %]')
+          XmlToken:XML_DATA_CHARACTERS(':')
+          PsiElement(TT2: TT2_OUTER)('[% error.info.errors.join(', ') %]')
+          XmlToken:XML_DATA_CHARACTERS('.')
+          PsiElement(TT2: TT2_OUTER)('[% END %]')
+        XmlToken:XML_END_TAG_START('</')
+        XmlToken:XML_NAME('body')
+        XmlToken:XML_TAG_END('>')
+      XmlText
+      XmlToken:XML_END_TAG_START('</')
+      XmlToken:XML_NAME('html')
+      XmlToken:XML_TAG_END('>')
+--------------------------------------------------------------------------------
+Subtree: Template Toolkit 2 (Template Toolkit 2)
 Template Toolkit File
   PsiComment(TT2: TT2_HTML)('<html>\n<head></head>\n<body>\n')
   PsiIfBlockImpl(TT2: IF_BLOCK)
@@ -533,3 +585,4 @@ Template Toolkit File
       PsiElement(TT2: END)('END')
     PsiElement(TT2: %])('%]')
   PsiComment(TT2: TT2_HTML)('\n\n\n\n\n</body>\n</html>')
+--------------------------------------------------------------------------------

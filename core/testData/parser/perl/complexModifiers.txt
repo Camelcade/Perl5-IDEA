@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlReplacementRegexImpl(Perl5: REPLACEMENT_REGEX)
@@ -21,3 +22,8 @@ Perl5
         PsiElement(Perl5: /m)('x')
         PsiElement(Perl5: /m)('a')
     PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('s/asdf/'test'/eexxaaexa;')
+--------------------------------------------------------------------------------

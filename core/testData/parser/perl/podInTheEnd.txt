@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
@@ -14,3 +15,33 @@ Perl5
   PsiElement(Perl5: __END__)('__END__')
   PsiComment(Perl5: COMMENT_BLOCK)('\n\n')
   PsiElement(Perl5: POD)('=pod\n\nsome doc\n\n=cut\n\nother')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('say 'hi';\n\n')
+  PsiPodSectionImpl(Perl5 POD: POD_SECTION)
+    PsiElement(Perl5 POD: =pod)('=pod')
+  PsiElement(Perl5 POD: NL)('\n')
+  PsiPodParagraphImpl(Perl5 POD: POD_PARAGRAPH)
+    PodIdentifierImpl(Perl5 POD: identifier)('doc')
+    PsiElement(Perl5 POD: NL)('\n')
+  PsiCutSectionImpl(Perl5 POD: CUT_SECTION)
+    PsiElement(Perl5 POD: =cut)('=cut')
+    PsiSectionTitleImpl(Perl5 POD: SECTION_TITLE)
+      <empty list>
+  PsiElement(Perl5 POD: POD_OUTER)('\n\n__PACKAGE__\n__END__\n\n')
+  PsiPodSectionImpl(Perl5 POD: POD_SECTION)
+    PsiElement(Perl5 POD: =pod)('=pod')
+  PsiElement(Perl5 POD: NL)('\n')
+  PsiPodParagraphImpl(Perl5 POD: POD_PARAGRAPH)
+    PodIdentifierImpl(Perl5 POD: identifier)('some')
+    PodIdentifierImpl(Perl5 POD: identifier)('doc')
+    PsiElement(Perl5 POD: NL)('\n')
+  PsiCutSectionImpl(Perl5 POD: CUT_SECTION)
+    PsiElement(Perl5 POD: =cut)('=cut')
+    PsiSectionTitleImpl(Perl5 POD: SECTION_TITLE)
+      <empty list>
+    PsiElement(Perl5 POD: NL)('\n')
+  PsiPodParagraphImpl(Perl5 POD: POD_PARAGRAPH)
+    PodIdentifierImpl(Perl5 POD: identifier)('other')
+--------------------------------------------------------------------------------

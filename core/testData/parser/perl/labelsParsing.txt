@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlLabelDeclarationImpl(Perl5: LABEL_DECLARATION)
     PerlSubNameElementImpl(Perl5: subname)('LOOP')
@@ -426,3 +427,8 @@ Perl5
         PerlSubNameElementImpl(Perl5: subname)('loop3')
         PsiElement(Perl5: :)(':')
       PsiElement(Perl5: })('}')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('LOOP: {    say 'test';}\n{    say 'test';}\nLOOP1: {    say 'test';}\nBEGIN: { say 'test';}\nAUTOLOAD: { say 'test';}\nif: { say 'test';}\nmethod: { say 'test';}\nsub : lvalue { say 'test';}; # not allowed to be lable, don't know how to distinct, see #875\nfunc : { say 'test';}\nswitch : { say 'test';}\nuse : { say 'test';}\nand : { say 'test';}\nor: { say 'test';}\nxor :{ say 'test';}\nx: { say 'test';}\n__PACKAGE__: { say 'test';}\nconstant: { say 'test';}\nvars: { say 'test';}\neq: { say 'test';}\nne: { say 'test';}\ngt: { say 'test';}\nlt: { say 'test';}\nge: { say 'test';}\nmcp: { say 'test';}\nle: { say 'test';}\nnext LOOP;\nlast LOOP;\nredo LOOP;\ngoto LOOP;\n{\n    say 'test';\n    last:\n}\n{\n    loop1:;\n    loop3:\n}')
+--------------------------------------------------------------------------------

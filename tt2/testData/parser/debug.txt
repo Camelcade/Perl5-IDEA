@@ -1,3 +1,70 @@
+Subtree: HTML (HTML)
+HtmlFile:debug.tt
+  PsiElement(HTML_DOCUMENT)
+    PsiElement(XML_PROLOG)
+      <empty list>
+    HtmlTag:html
+      XmlToken:XML_START_TAG_START('<')
+      XmlToken:XML_NAME('html')
+      XmlToken:XML_TAG_END('>')
+      XmlText
+      HtmlTag:head
+        XmlToken:XML_START_TAG_START('<')
+        XmlToken:XML_NAME('head')
+        XmlToken:XML_TAG_END('>')
+        XmlText
+          XmlToken:XML_DATA_CHARACTERS('http://template-toolkit.org/docs/manual/Variables.html')
+        XmlToken:XML_END_TAG_START('</')
+        XmlToken:XML_NAME('head')
+        XmlToken:XML_TAG_END('>')
+      XmlText
+      HtmlTag:body
+        XmlToken:XML_START_TAG_START('<')
+        XmlToken:XML_NAME('body')
+        XmlToken:XML_TAG_END('>')
+        XmlText
+          PsiElement(TT2: TT2_OUTER)('[% DEBUG on %]')
+          XmlToken:XML_DATA_CHARACTERS('directive')
+          XmlToken:XML_DATA_CHARACTERS('debugging')
+          XmlToken:XML_DATA_CHARACTERS('is')
+          XmlToken:XML_DATA_CHARACTERS('on')
+          XmlToken:XML_DATA_CHARACTERS('(assuming')
+          XmlToken:XML_DATA_CHARACTERS('DEBUG')
+          XmlToken:XML_DATA_CHARACTERS('option')
+          XmlToken:XML_DATA_CHARACTERS('is')
+          XmlToken:XML_DATA_CHARACTERS('set')
+          XmlToken:XML_DATA_CHARACTERS('true)')
+          PsiElement(TT2: TT2_OUTER)('[% DEBUG off %]')
+          XmlToken:XML_DATA_CHARACTERS('directive')
+          XmlToken:XML_DATA_CHARACTERS('debugging')
+          XmlToken:XML_DATA_CHARACTERS('is')
+          XmlToken:XML_DATA_CHARACTERS('off')
+          PsiElement(TT2: TT2_OUTER)('[% DEBUG format '<!-- $file line $line : [% $text %] -->' %]\n\n%% DEBUG on\n')
+          XmlToken:XML_DATA_CHARACTERS('directive')
+          XmlToken:XML_DATA_CHARACTERS('debugging')
+          XmlToken:XML_DATA_CHARACTERS('is')
+          XmlToken:XML_DATA_CHARACTERS('on')
+          XmlToken:XML_DATA_CHARACTERS('(assuming')
+          XmlToken:XML_DATA_CHARACTERS('DEBUG')
+          XmlToken:XML_DATA_CHARACTERS('option')
+          XmlToken:XML_DATA_CHARACTERS('is')
+          XmlToken:XML_DATA_CHARACTERS('set')
+          XmlToken:XML_DATA_CHARACTERS('true)')
+          PsiElement(TT2: TT2_OUTER)('%% DEBUG off\n')
+          XmlToken:XML_DATA_CHARACTERS('directive')
+          XmlToken:XML_DATA_CHARACTERS('debugging')
+          XmlToken:XML_DATA_CHARACTERS('is')
+          XmlToken:XML_DATA_CHARACTERS('off')
+          PsiElement(TT2: TT2_OUTER)('%% DEBUG format '<!-- $file line $line : [% $text %] -->'\n')
+        XmlToken:XML_END_TAG_START('</')
+        XmlToken:XML_NAME('body')
+        XmlToken:XML_TAG_END('>')
+      XmlText
+      XmlToken:XML_END_TAG_START('</')
+      XmlToken:XML_NAME('html')
+      XmlToken:XML_TAG_END('>')
+--------------------------------------------------------------------------------
+Subtree: Template Toolkit 2 (Template Toolkit 2)
 Template Toolkit File
   PsiComment(TT2: TT2_HTML)('<html>\n<head>http://template-toolkit.org/docs/manual/Variables.html</head>\n<body>\n\n')
   PsiElement(TT2: [%)('[%')
@@ -94,3 +161,4 @@ Template Toolkit File
         PsiElement(TT2: STRING_CONTENT)('>')
         PsiElement(TT2: SQ_CLOSE)(''')
   PsiComment(TT2: TT2_HTML)('\n\n</body>\n</html>')
+--------------------------------------------------------------------------------

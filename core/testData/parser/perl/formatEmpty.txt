@@ -1,6 +1,12 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlFormatDefinitionImpl(Perl5: FORMAT_DEFINITION)
     PsiElement(Perl5: format)('format')
     PerlSubNameElementImpl(Perl5: subname)('SOME')
     PsiElement(Perl5: =)('=')
     PsiElement(Perl5: FORMAT_TERMINATOR)('.')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('format SOME =\n.')
+--------------------------------------------------------------------------------

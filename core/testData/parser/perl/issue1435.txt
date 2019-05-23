@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlMatchRegexImpl(Perl5: MATCH_REGEX)
@@ -284,3 +285,8 @@ Perl5
       PsiPerlPerlRegexModifiersImpl(Perl5: PERL_REGEX_MODIFIERS)
         PsiElement(Perl5: /m)('xx')
     PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('/$(/;\n/$)/;\n/${(}/;\n/${)}/;\n/[$(]/;\n/[$)]/;\n/[${(}]/;\n/[${)}]/;\n/some(thing|$)/;\n\n/$(/x;\n/$)/x;\n/${(}/x;\n/${)}/x;\n/[$(]/x;\n/[$)]/x;\n/[${(}]/x;\n/[${)}]/x;\n/some(thing|$)/x;\n\n/$(/xx;\n/$)/xx;\n/${(}/xx;\n/${)}/xx;\n/[$(]/xx;\n/[$)]/xx;\n/[${(}]/xx;\n/[${)}]/xx;\n/some(thing|$)/xx;')
+--------------------------------------------------------------------------------

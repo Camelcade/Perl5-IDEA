@@ -1,3 +1,19 @@
+Subtree: HTML (HTML)
+HtmlFile:issue1263.tt
+  PsiElement(HTML_DOCUMENT)
+    PsiElement(XML_PROLOG)
+      <empty list>
+    HtmlTag:html
+      XmlToken:XML_START_TAG_START('<')
+      XmlToken:XML_NAME('html')
+      XmlToken:XML_TAG_END('>')
+      XmlText
+        PsiElement(TT2: TT2_OUTER)('[% result = PROCESS footer %]\n[% SET result = PROCESS footer %]')
+      XmlToken:XML_END_TAG_START('</')
+      XmlToken:XML_NAME('html')
+      XmlToken:XML_TAG_END('>')
+--------------------------------------------------------------------------------
+Subtree: Template Toolkit 2 (Template Toolkit 2)
 Template Toolkit File
   PsiComment(TT2: TT2_HTML)('<html>\n')
   PsiElement(TT2: [%)('[%')
@@ -24,3 +40,4 @@ Template Toolkit File
           PsiElement(TT2: STRING_CONTENT)('footer')
   PsiElement(TT2: %])('%]')
   PsiComment(TT2: TT2_HTML)('\n</html>')
+--------------------------------------------------------------------------------

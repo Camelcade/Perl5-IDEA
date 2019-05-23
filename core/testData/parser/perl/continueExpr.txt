@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlContinueExprImpl(Perl5: CONTINUE_EXPR)
@@ -158,3 +159,8 @@ Perl5
             PsiElement(Perl5: ;)(';')
           PsiElement(Perl5: })('}')
       PsiElement(Perl5: })('}')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('continue;\ncontinue();\ngiven ($foo) {\n    when (undef) {\n        say '$foo is undefined';\n    }\n    when ("foo") {\n        say '$foo is the string "foo"';\n    }\n    when ([1,3,5,7,9]) {\n        say '$foo is an odd digit';\n        continue; # Fall through\n    }\n    when ($_ < 100) {\n        say '$foo is numerically less than 100';\n    }\n    when (\&complicated_check) {\n        say 'a complicated check for $foo is true';\n    }\n    default {\n        die q(I don't know what to do with $foo);\n    }\n}')
+--------------------------------------------------------------------------------

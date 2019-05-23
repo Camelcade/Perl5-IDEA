@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlNamedBlockImpl(Perl5: NAMED_BLOCK)
     PsiElement(Perl5: BLOCK_NAME)('BEGIN')
@@ -90,3 +91,8 @@ Perl5
             PsiElement(Perl5: QUOTE_DOUBLE_CLOSE)('"')
         PsiElement(Perl5: ;)(';')
       PsiElement(Perl5: })('}')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('BEGIN {\n    print "something";\n}\n\nUNITCHECK {\n    print "something";\n}\n\nCHECK {\n    print "something";\n}\n\nINIT {\n    print "something";\n}\n\nEND {\n    print "something";\n}\n\nAUTOLOAD {\n    print "something";\n}\n\nDESTROY {\n    print "something";\n}')
+--------------------------------------------------------------------------------

@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlSubCallExprImpl(Perl5: SUB_CALL_EXPR)
@@ -128,3 +129,8 @@ Perl5
                 PsiElement(Perl5: ;)(';')
               PsiElement(Perl5: })('}')
     PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('requires "Dancer2" => "[d2% dancer_version %2d]";\n\nrecommends "YAML"             => "0";\nrecommends "URL::Encode::XS"  => "0";\nrecommends "CGI::Deurl::XS"   => "0";\nrecommends "HTTP::Parser::XS" => "0";\n\non "test" => sub {\n    requires "Test::More"            => "0";\n    requires "HTTP::Request::Common" => "0";\n};')
+--------------------------------------------------------------------------------

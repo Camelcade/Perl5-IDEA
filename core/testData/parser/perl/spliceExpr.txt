@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlSpliceExprImpl(Perl5: SPLICE_EXPR)
@@ -196,3 +197,8 @@ Perl5
           PsiElement(Perl5: $$)('$')
           PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('y')
     PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('splice(@a,@a,0,$x,$y);\nsplice(@a,-1);\nsplice(@a,0,1);\nsplice(@a,0,0,$x,$y);\nsplice(@a,$i,1,$y);\n\nsplice @a,@a,0,$x,$y ;\nsplice @a,-1 ;\nsplice @a,0,1 ;\nsplice @a,0,0,$x,$y ;\nsplice @a,$i,1,$y ;')
+--------------------------------------------------------------------------------

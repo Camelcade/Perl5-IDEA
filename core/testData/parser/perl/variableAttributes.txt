@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlVariableDeclarationLexicalImpl(Perl5: VARIABLE_DECLARATION_LEXICAL)
@@ -827,3 +828,8 @@ Perl5
           PsiElement(Perl5: ()('(')
           PsiElement(Perl5: ))(')')
     PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('my $somevar: method;\nmy $someothervar: attr: otherattr: otherattr(withparams);\nmy Foo::Bar $somevar: method;\nmy Foo::Bar $someothervar: attr: otherattr: otherattr(withparams);\nmy ($somevar, $andanogher): method;\nmy ($someothervar, $othervar): attr: otherattr: otherattr(withparams);\nmy Foo::Bar ($somevar, $anothervar): method;\nmy Foo::Bar ($someothervar, $othervar): attr: otherattr: otherattr(withparams);\nforeach my Foo::Bar $someothervar: attr: otherattr: otherattr(withparams) (@list){}\nmy $disabled or dosomething();\nmy Foo::Bar $disabled or dosomething();\nmy ($disabled, $enabled) or dosomething();\nmy Foo::Bar ($disabled, $enabled) or dosomething();\n\nstate $somevar: method;\nstate $someothervar: attr: otherattr: otherattr(withparams);\nstate Foo::Bar $somevar: method;\nstate Foo::Bar $someothervar: attr: otherattr: otherattr(withparams);\nstate ($somevar, $andanogher): method;\nstate ($someothervar, $othervar): attr: otherattr: otherattr(withparams);\nstate Foo::Bar ($somevar, $anothervar): method;\nstate Foo::Bar ($someothervar, $othervar): attr: otherattr: otherattr(withparams);\nforeach state Foo::Bar $someothervar: attr: otherattr: otherattr(withparams) (@list){}\nstate $disabled or dosomething();\nstate Foo::Bar $disabled or dosomething();\nstate ($disabled, $enabled) or dosomething();\nstate Foo::Bar ($disabled, $enabled) or dosomething();\n\nour $somevar: method;\nour $someothervar: attr: otherattr: otherattr(withparams);\nour Foo::Bar $somevar: method;\nour Foo::Bar $someothervar: attr: otherattr: otherattr(withparams);\nour ($somevar, $andanogher): method;\nour ($someothervar, $othervar): attr: otherattr: otherattr(withparams);\nour Foo::Bar ($somevar, $anothervar): method;\nour Foo::Bar ($someothervar, $othervar): attr: otherattr: otherattr(withparams);\nforeach our Foo::Bar $someothervar: attr: otherattr: otherattr(withparams) (@list){}\nour $disabled or dosomething();\nour Foo::Bar $disabled or dosomething();\nour ($disabled, $enabled) or dosomething();\nour Foo::Bar ($disabled, $enabled) or dosomething();')
+--------------------------------------------------------------------------------

@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlSubCallExprImpl(Perl5: SUB_CALL_EXPR)
@@ -24,3 +25,8 @@ Perl5
       PsiPerlMethodImpl(Perl5: METHOD)
         PerlSubNameElementImpl(Perl5: subname)('helper')
     PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('mk_accessors;\nfollow_best_practice;\nmk_ro_accessors;\nmk_wo_accessors;\nhelper;')
+--------------------------------------------------------------------------------

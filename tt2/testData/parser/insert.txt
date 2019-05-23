@@ -1,3 +1,65 @@
+Subtree: HTML (HTML)
+HtmlFile:insert.tt
+  PsiElement(HTML_DOCUMENT)
+    PsiElement(XML_PROLOG)
+      <empty list>
+    HtmlTag:html
+      XmlToken:XML_START_TAG_START('<')
+      XmlToken:XML_NAME('html')
+      XmlToken:XML_TAG_END('>')
+      XmlText
+      HtmlTag:head
+        XmlToken:XML_START_TAG_START('<')
+        XmlToken:XML_NAME('head')
+        XmlToken:XML_TAG_END('>')
+        XmlText
+          XmlToken:XML_DATA_CHARACTERS('http://template-toolkit.org/docs/manual/Variables.html')
+        XmlToken:XML_END_TAG_START('</')
+        XmlToken:XML_NAME('head')
+        XmlToken:XML_TAG_END('>')
+      XmlText
+      HtmlTag:body
+        XmlToken:XML_START_TAG_START('<')
+        XmlToken:XML_NAME('body')
+        XmlToken:XML_TAG_END('>')
+        XmlText
+          PsiElement(TT2: TT2_OUTER)('[% INSERT myfile %]\n[% INSERT myfile -%]\n[% INSERT myfile-%]\n[% INSERT foo %]')
+          XmlToken:XML_DATA_CHARACTERS('#')
+          XmlToken:XML_DATA_CHARACTERS('looks')
+          XmlToken:XML_DATA_CHARACTERS('for')
+          XmlToken:XML_DATA_CHARACTERS('/here/foo')
+          XmlToken:XML_DATA_CHARACTERS('then')
+          XmlToken:XML_DATA_CHARACTERS('/there/foo')
+          PsiElement(TT2: TT2_OUTER)('[% INSERT /etc/passwd %]')
+          XmlToken:XML_DATA_CHARACTERS('#')
+          XmlToken:XML_DATA_CHARACTERS('file')
+          XmlToken:XML_DATA_CHARACTERS('error:')
+          XmlToken:XML_DATA_CHARACTERS('ABSOLUTE')
+          XmlToken:XML_DATA_CHARACTERS('not')
+          XmlToken:XML_DATA_CHARACTERS('set')
+          PsiElement(TT2: TT2_OUTER)('[% INSERT ../secret %]')
+          XmlToken:XML_DATA_CHARACTERS('#')
+          XmlToken:XML_DATA_CHARACTERS('file')
+          XmlToken:XML_DATA_CHARACTERS('error:')
+          XmlToken:XML_DATA_CHARACTERS('RELATIVE')
+          XmlToken:XML_DATA_CHARACTERS('not')
+          XmlToken:XML_DATA_CHARACTERS('set')
+          PsiElement(TT2: TT2_OUTER)('[% INSERT misc/legalese.txt            %]\n[% INSERT 'dos98/Program Files/stupid' %]\n[% language = 'en'\n   legalese = 'misc/legalese.txt'\n%]\n\n[% INSERT $legalese %]')
+          XmlToken:XML_DATA_CHARACTERS('#')
+          XmlToken:XML_DATA_CHARACTERS('misc/legalese.txt')
+          PsiElement(TT2: TT2_OUTER)('[% INSERT "$language/$legalese" %]')
+          XmlToken:XML_DATA_CHARACTERS('#')
+          XmlToken:XML_DATA_CHARACTERS('en/misc/legalese.txt')
+          PsiElement(TT2: TT2_OUTER)('[% INSERT legalese.txt + warning.txt %]')
+        XmlToken:XML_END_TAG_START('</')
+        XmlToken:XML_NAME('body')
+        XmlToken:XML_TAG_END('>')
+      XmlText
+      XmlToken:XML_END_TAG_START('</')
+      XmlToken:XML_NAME('html')
+      XmlToken:XML_TAG_END('>')
+--------------------------------------------------------------------------------
+Subtree: Template Toolkit 2 (Template Toolkit 2)
 Template Toolkit File
   PsiComment(TT2: TT2_HTML)('<html>\n<head>http://template-toolkit.org/docs/manual/Variables.html</head>\n<body>\n\n')
   PsiElement(TT2: [%)('[%')
@@ -126,3 +188,4 @@ Template Toolkit File
       PsiElement(TT2: STRING_CONTENT)('txt')
   PsiElement(TT2: %])('%]')
   PsiComment(TT2: TT2_HTML)('\n\n</body>\n</html>')
+--------------------------------------------------------------------------------

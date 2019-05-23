@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlSubCallExprImpl(Perl5: SUB_CALL_EXPR)
@@ -59,3 +60,8 @@ Perl5
                 PsiElement(Perl5: NUMBER)('1')
               PsiElement(Perl5: ))(')')
     PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('CORE::die Mojo::Exception->new(shift)\n    ->trace->inspect($self->unparsed, $self->code)->verbose(1);')
+--------------------------------------------------------------------------------

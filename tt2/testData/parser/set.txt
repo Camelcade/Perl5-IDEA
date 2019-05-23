@@ -1,3 +1,59 @@
+Subtree: HTML (HTML)
+HtmlFile:set.tt
+  PsiElement(HTML_DOCUMENT)
+    PsiElement(XML_PROLOG)
+      <empty list>
+    HtmlTag:html
+      XmlToken:XML_START_TAG_START('<')
+      XmlToken:XML_NAME('html')
+      XmlToken:XML_TAG_END('>')
+      XmlText
+      HtmlTag:head
+        XmlToken:XML_START_TAG_START('<')
+        XmlToken:XML_NAME('head')
+        XmlToken:XML_TAG_END('>')
+        XmlText
+          XmlToken:XML_DATA_CHARACTERS('http://template-toolkit.org/docs/manual/Variables.html')
+        XmlToken:XML_END_TAG_START('</')
+        XmlToken:XML_NAME('head')
+        XmlToken:XML_TAG_END('>')
+      XmlText
+      HtmlTag:body
+        XmlToken:XML_START_TAG_START('<')
+        XmlToken:XML_NAME('body')
+        XmlToken:XML_TAG_END('>')
+        XmlText
+          PsiElement(TT2: TT2_OUTER)('[% SET title = 'Hello World' %]\n[% title = 'Hello World' %]\n[% foo  = 'Foo'  %]')
+          XmlToken:XML_DATA_CHARACTERS('#')
+          XmlToken:XML_DATA_CHARACTERS('literal')
+          XmlToken:XML_DATA_CHARACTERS('value')
+          XmlToken:XML_DATA_CHARACTERS(''Foo'')
+          PsiElement(TT2: TT2_OUTER)('[% bar  =  foo   %]')
+          XmlToken:XML_DATA_CHARACTERS('#')
+          XmlToken:XML_DATA_CHARACTERS('value')
+          XmlToken:XML_DATA_CHARACTERS('of')
+          XmlToken:XML_DATA_CHARACTERS('variable')
+          XmlToken:XML_DATA_CHARACTERS(''foo'')
+          PsiElement(TT2: TT2_OUTER)('[% cost = '$100' %]')
+          XmlToken:XML_DATA_CHARACTERS('#')
+          XmlToken:XML_DATA_CHARACTERS('literal')
+          XmlToken:XML_DATA_CHARACTERS('value')
+          XmlToken:XML_DATA_CHARACTERS(''$100'')
+          PsiElement(TT2: TT2_OUTER)('[% item = "$bar: ${cost}.00" %]')
+          XmlToken:XML_DATA_CHARACTERS('#')
+          XmlToken:XML_DATA_CHARACTERS('value')
+          XmlToken:XML_DATA_CHARACTERS('"Foo:')
+          XmlToken:XML_DATA_CHARACTERS('$100.00"')
+          PsiElement(TT2: TT2_OUTER)('[% foo  = 'Foo'\n   bar  = foo\n   cost = '$100'\n   item = "$bar: ${cost}.00"\n%]\n[% ten    = 10\n   twenty = 20\n   thirty = twenty + ten\n   forty  = 2 * twenty\n   fifty  = 100 div 2\n   six    = twenty mod 7\n%]\n[% copyright = '(C) Copyright' _ year _ ' ' _ author %]\n[% copyright = "(C) Copyright $year $author" %]')
+        XmlToken:XML_END_TAG_START('</')
+        XmlToken:XML_NAME('body')
+        XmlToken:XML_TAG_END('>')
+      XmlText
+      XmlToken:XML_END_TAG_START('</')
+      XmlToken:XML_NAME('html')
+      XmlToken:XML_TAG_END('>')
+--------------------------------------------------------------------------------
+Subtree: Template Toolkit 2 (Template Toolkit 2)
 Template Toolkit File
   PsiComment(TT2: TT2_HTML)('<html>\n<head>http://template-toolkit.org/docs/manual/Variables.html</head>\n<body>\n')
   PsiElement(TT2: [%)('[%')
@@ -230,3 +286,4 @@ Template Toolkit File
         PsiElement(TT2: DQ_CLOSE)('"')
   PsiElement(TT2: %])('%]')
   PsiComment(TT2: TT2_HTML)('\n</body>\n</html>')
+--------------------------------------------------------------------------------

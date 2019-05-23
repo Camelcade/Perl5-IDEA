@@ -1,19 +1,18 @@
 Subtree: HTML (HTML)
 HtmlFile:perl.mas
-  HTML_DOCUMENT
-    XML_PROLOG
+  PsiElement(HTML_DOCUMENT)
+    PsiElement(XML_PROLOG)
       <empty list>
-    HTML_TAG
-      PsiElement(XML_START_TAG_START)('<')
-      PsiElement(XML_NAME)('html')
-      PsiElement(XML_TAG_END)('>')
-      XML_TEXT
-        PsiElement(XML_WHITE_SPACE)('\n')
-        PsiElement(XML_DATA_CHARACTERS)('Hi!')
+    HtmlTag:html
+      XmlToken:XML_START_TAG_START('<')
+      XmlToken:XML_NAME('html')
+      XmlToken:XML_TAG_END('>')
+      XmlText
+        XmlToken:XML_DATA_CHARACTERS('Hi!')
       PsiElement(HTML::Mason: HTML_MASON_OUTER_ELEMENT_TYPE)('\n<%perl>\nmy $noun = 'World';\nmy @time = localtime;\nsay 'something';  # comment\n</%perl>\n')
-      PsiElement(XML_END_TAG_START)('</')
-      PsiElement(XML_NAME)('html')
-      PsiElement(XML_TAG_END)('>')
+      XmlToken:XML_END_TAG_START('</')
+      XmlToken:XML_NAME('html')
+      XmlToken:XML_TAG_END('>')
 --------------------------------------------------------------------------------
 Subtree: HTML::Mason Templating Language (HTML::Mason Templating Language)
 HTML::Mason component

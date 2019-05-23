@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlLpAndExprImpl(Perl5: LP_AND_EXPR)
@@ -127,3 +128,8 @@ Perl5
         PsiElement(Perl5: $@)('@')
         PerlVariableNameElementImpl(Perl5: ARRAY_NAME)('ARGV')
     PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('$a = 2 and next and $b = die 'end' for @ARGV;\n$a = 2 and last and $b = die 'end' for @ARGV;\n$a = 2 and redo and $b = die 'end' for @ARGV;\n$a = 2 and goto and $b = die 'end' for @ARGV;')
+--------------------------------------------------------------------------------

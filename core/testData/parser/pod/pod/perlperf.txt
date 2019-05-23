@@ -3359,7 +3359,7 @@ POD file
               PsiElement(Perl5 POD: I)('I')
               PsiElement(Perl5 POD: <)('<')
               PsiFormattingSectionContentImpl(Perl5 POD: FORMATTING_SECTION_CONTENT)
-                PodIdentifierImpl(Perl5 POD: identifier)('block')
+                PodIdentifierImpl(Perl5 POD: identifier)('_lock')
               PsiElement(Perl5 POD: >)('>')
             PodIdentifierImpl(Perl5 POD: identifier)('or')
             PodIdentifierImpl(Perl5 POD: identifier)('a')

@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlSubDeclarationImpl(SUB_DECLARATION)@main::mysub1
     PsiElement(Perl5: my)('my')
@@ -83,3 +84,8 @@ Perl5
     PsiPerlBlockImpl(Perl5: BLOCK)
       PsiElement(Perl5: {)('{')
       PsiElement(Perl5: })('}')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('my sub mysub1;\nmy sub mysub2();\nstate sub statesub1;\nstate sub statesub2();\nour sub oursub1;\nour sub oursub2();\n\n\nmy sub mysub1{}\nmy sub mysub2(){}\nstate sub statesub1{}\nstate sub statesub2(){}\nour sub oursub1{}\nour sub oursub2(){}')
+--------------------------------------------------------------------------------

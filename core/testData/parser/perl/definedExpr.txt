@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlDefinedExprImpl(Perl5: DEFINED_EXPR)
@@ -60,3 +61,8 @@ Perl5
         PsiElement(Perl5: $$)('$')
         PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('something')
     PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('defined;\ndefined $var;\ndefined $var + 1;\ndefined $var, 1;\ndefined ($var) || 'something';\ndefined $var // $something;')
+--------------------------------------------------------------------------------

@@ -93,42 +93,42 @@ Embedded Perl file
 --------------------------------------------------------------------------------
 Subtree: HTML (HTML)
 HtmlFile:parserTest.thtml
-  HTML_DOCUMENT
-    XML_PROLOG
+  PsiElement(HTML_DOCUMENT)
+    PsiElement(XML_PROLOG)
       <empty list>
-    HTML_TAG
-      PsiElement(XML_START_TAG_START)('<')
-      PsiElement(XML_NAME)('html')
-      PsiElement(XML_TAG_END)('>')
-      PsiElement(XML_END_TAG_START)('</')
-      PsiElement(XML_NAME)('html')
-      PsiElement(XML_TAG_END)('>')
-    HTML_TAG
-      PsiElement(Embedded Perl5: EMBED_OUTER_ELEMENT_TYPE)('<?\nsay 'hi';\n?>\n\n\n')
-      PsiElement(XML_START_TAG_START)('<')
-      PsiElement(XML_NAME)('html')
-      PsiElement(XML_TAG_END)('>')
-      PsiElement(XML_END_TAG_START)('</')
-      PsiElement(XML_NAME)('html')
-      PsiElement(XML_TAG_END)('>')
-    HTML_TAG
-      PsiElement(Embedded Perl5: EMBED_OUTER_ELEMENT_TYPE)('\n\n\n<?\nuse strict; # comment\nuse warnings FATAL => 'all';\n\n?><? say 'hi'; #comment ?>\n\n<?\n\nsay 'blah';\n\n?>\n\n')
-      PsiElement(XML_START_TAG_START)('<')
-      PsiElement(XML_NAME)('html')
-      PsiElement(XML_TAG_END)('>')
-      HTML_TAG
-        PsiElement(Embedded Perl5: EMBED_OUTER_ELEMENT_TYPE)('\n<? say 'hi'; ?>\n\n<? foreach(@ARGV) { ?>\n\n    ')
-        PsiElement(XML_START_TAG_START)('<')
-        PsiElement(XML_NAME)('div')
-        PsiElement(XML_TAG_END)('>')
+    HtmlTag:html
+      XmlToken:XML_START_TAG_START('<')
+      XmlToken:XML_NAME('html')
+      XmlToken:XML_TAG_END('>')
+      XmlToken:XML_END_TAG_START('</')
+      XmlToken:XML_NAME('html')
+      XmlToken:XML_TAG_END('>')
+    PsiElement(Embedded Perl5: EMBED_OUTER_ELEMENT_TYPE)('<?\nsay 'hi';\n?>\n\n\n')
+    HtmlTag:html
+      XmlToken:XML_START_TAG_START('<')
+      XmlToken:XML_NAME('html')
+      XmlToken:XML_TAG_END('>')
+      XmlToken:XML_END_TAG_START('</')
+      XmlToken:XML_NAME('html')
+      XmlToken:XML_TAG_END('>')
+    PsiElement(Embedded Perl5: EMBED_OUTER_ELEMENT_TYPE)('\n\n\n<?\nuse strict; # comment\nuse warnings FATAL => 'all';\n\n?><? say 'hi'; #comment ?>\n\n<?\n\nsay 'blah';\n\n?>\n\n')
+    HtmlTag:html
+      XmlToken:XML_START_TAG_START('<')
+      XmlToken:XML_NAME('html')
+      XmlToken:XML_TAG_END('>')
+      PsiElement(Embedded Perl5: EMBED_OUTER_ELEMENT_TYPE)('\n<? say 'hi'; ?>\n\n<? foreach(@ARGV) { ?>\n\n    ')
+      HtmlTag:div
+        XmlToken:XML_START_TAG_START('<')
+        XmlToken:XML_NAME('div')
+        XmlToken:XML_TAG_END('>')
         PsiElement(Embedded Perl5: EMBED_OUTER_ELEMENT_TYPE)('\n    <? print $_; ?>\n\n    ')
-        PsiElement(XML_END_TAG_START)('</')
-        PsiElement(XML_NAME)('div')
-        PsiElement(XML_TAG_END)('>')
+        XmlToken:XML_END_TAG_START('</')
+        XmlToken:XML_NAME('div')
+        XmlToken:XML_TAG_END('>')
       PsiElement(Embedded Perl5: EMBED_OUTER_ELEMENT_TYPE)('\n\n    <? } ?>\n\n')
-      PsiElement(XML_END_TAG_START)('</')
-      PsiElement(XML_NAME)('html')
-      PsiElement(XML_TAG_END)('>')
+      XmlToken:XML_END_TAG_START('</')
+      XmlToken:XML_NAME('html')
+      XmlToken:XML_TAG_END('>')
 --------------------------------------------------------------------------------
 Subtree: Perl5 POD (Perl5 POD)
 POD file

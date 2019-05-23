@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlPowExprImpl(Perl5: POW_EXPR)
@@ -219,3 +220,8 @@ Perl5
         PsiElement(Perl5: $$)('$')
         PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('b')
     PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('$a ** $b;\n$a >= $b;\n$a <= $b;\n$a == $b;\n$a != $b;\n$a ~~ $b;\n$a **= $b;\n$a += $b;\n$a -= $b;\n$a *= $b;\n$a /= $b;\n$a %= $b;\n$a .= $b;\n$a x= $b;\n$a &= $b;\n$a != $b;\n$a ^= $b;\n$a <<= $b;\n$a >>= $b;\n$a &&= $b;\n$a ||= $b;\n$a //= $b;')
+--------------------------------------------------------------------------------

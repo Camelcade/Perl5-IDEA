@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlSubDefinitionImpl(SUB_DEFINITION)@asas::asdsad::adsa
     PsiElement(Perl5: sub)('sub')
@@ -94,3 +95,8 @@ Perl5
           PsiElement(Perl5: return)('return')
         PsiElement(Perl5: ;)(';')
       PsiElement(Perl5: })('}')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('sub asas::asdsad::adsa :prototype() :lvalue :method ($d) { # adasdsad\n    return;\n}\n\nsub asdsad :prototype() :lvalue\n    :method($d) {\n    # adasdsad\n    my $s = sub :prototype($$) ($a, $v) {\n        return;\n    };\n\n    return;\n}')
+--------------------------------------------------------------------------------

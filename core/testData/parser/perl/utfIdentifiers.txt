@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiComment(Perl5: COMMENT_LINE)('#!/usr/bin/perl')
   PsiComment(Perl5: COMMENT_LINE)('# Этот исходник посвящается программистам 1с приходящим на собеседование')
@@ -228,3 +229,8 @@ Perl5
                 PsiElement(Perl5: ()('(')
                 PsiElement(Perl5: ))(')')
         PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('#!/usr/bin/perl\n\n# Этот исходник посвящается программистам 1с приходящим на собеседование\n\nsub обождать_пять_менут\n{\n    foreach my $менута (0 .. 4)\n    {\n        say "Ожидаем $менута менуту";\n        обождать_менуту();\n    }\n}\n\nsub обождать_менуту\n{\n    my $время_начала = time;\n\n    while(time - $время_начала < 60){}\n}\n\nmy $раздватри;\nmy $_раздватри;\nmy $oneдватри;\nmy $_oneдватри;\n\npackage Foo;\nsub раздватри{}\nsub _раздватри{}\nsub oneразд123ватри{}\nsub _разд123one_ватри{}\n\npackage main;\n\nsay Foo::раздватри();\nsay Foo::_раздватри();\nsay Foo->раздватри();\nsay Foo->_раздватри();\nsay Foo::oneразд123ватри();\nsay Foo->oneразд123ватри();')
+--------------------------------------------------------------------------------

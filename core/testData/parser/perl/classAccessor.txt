@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiComment(Perl5: COMMENT_LINE)('#!/usr/bin/perl')
   PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Class::Accessor::Test
@@ -349,3 +350,8 @@ Perl5
               PsiElement(Perl5: ()('(')
               PsiElement(Perl5: ))(')')
         PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('#!/usr/bin/perl\npackage Class::Accessor::Test;\nuse strict;\nuse warnings FATAL => 'all';\n\nuse base qw(Class::Accessor);\nClass::Accessor::Test->mk_accessors(qw(simple_rw1 simple_other_rw ));\nClass::Accessor::Test->mk_ro_accessors(qw(simple_ro1 simple_other_ro ));\nClass::Accessor::Test->mk_wo_accessors(qw(simple_wo1 simple_other_wo));\n__PACKAGE__->mk_accessors(qw( simple_third_rw));\n__PACKAGE__->mk_ro_accessors(qw( simple_third_ro));\n__PACKAGE__->mk_wo_accessors(qw( simple_third_wo));\nClass::Accessor::Test->follow_best_practice;\nClass::Accessor::Test->mk_accessors(qw(fbp_rw1 ))->mk_accessors(qw(fbp_rw2 ));\nClass::Accessor::Test->mk_ro_accessors(qw(fbp_ro1 ))->mk_ro_accessors(qw(fbp_ro2 ));\nClass::Accessor::Test->mk_wo_accessors(qw(fbp_wo1 ))->mk_wo_accessors(qw(fbp_wo2 ));\n__PACKAGE__->mk_accessors(qw(fbp_rw3));\n__PACKAGE__->mk_ro_accessors(qw(fbp_ro3));\n__PACKAGE__->mk_wo_accessors(qw(fbp_wo3));\nClass::Accessor::Test->follow_best_practice();\nClass::Accessor::Test->mk_ro_accessors();\nClass::Accessor::Test->mk_wo_accessors();\nClass::Accessor::Test->mk_accessors();')
+--------------------------------------------------------------------------------

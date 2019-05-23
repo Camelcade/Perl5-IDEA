@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER)
@@ -19,3 +20,8 @@ Perl5
   PerlHeredocElementImpl(HEREDOC)
     PerlStringContentElementImpl(Perl5: STRING_CONTENT)('foo\nthis\nis\na test\n')
   PsiComment(Perl5: HEREDOC_END)('TEXT')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('<<\EOF;\nfoo\nEOF\n\n<<\TEXT;\nfoo\nthis\nis\na test\nTEXT')
+--------------------------------------------------------------------------------

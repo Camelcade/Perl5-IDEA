@@ -1,16 +1,16 @@
 Subtree: HTML (HTML)
 HtmlFile:escapedBlock.mas
-  HTML_DOCUMENT
-    XML_PROLOG
+  PsiElement(HTML_DOCUMENT)
+    PsiElement(XML_PROLOG)
       <empty list>
-    HTML_TAG
-      PsiElement(XML_START_TAG_START)('<')
-      PsiElement(XML_NAME)('html')
-      PsiElement(XML_TAG_END)('>')
+    HtmlTag:html
+      XmlToken:XML_START_TAG_START('<')
+      XmlToken:XML_NAME('html')
+      XmlToken:XML_TAG_END('>')
       PsiElement(HTML::Mason: HTML_MASON_OUTER_ELEMENT_TYPE)('\n\n<% $a + $b | nuh, test %>\n<% $a + $b | n,u,h, test %>\n<% $a | $b | n,u,h, test %>\n<% "test" | h %>\n<% $file_data |h %>\n<% $uri | u, n %>\n<% $uri | un %>\n<% $uri | hun %>\n<% $uri | hn %>\n\n\n')
-      PsiElement(XML_END_TAG_START)('</')
-      PsiElement(XML_NAME)('html')
-      PsiElement(XML_TAG_END)('>')
+      XmlToken:XML_END_TAG_START('</')
+      XmlToken:XML_NAME('html')
+      XmlToken:XML_TAG_END('>')
 --------------------------------------------------------------------------------
 Subtree: HTML::Mason Templating Language (HTML::Mason Templating Language)
 HTML::Mason component

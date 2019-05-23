@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
@@ -317,3 +318,8 @@ Perl5
             PsiElement(Perl5: ))(')')
         PsiElement(Perl5: ))(')')
     PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('print(somesub(     1, 2, 3   ));\nprint(somesub(        ));\nprint(somesub(     1    ));\n\nprint(OF somesub(     1, 2, 3   ));\nprint(OF somesub(        ));\nprint(OF somesub(     1    ));\n\nprintf(somesub(     1, 2, 3   ));\nprintf(somesub(        ));\nprintf(somesub(     1    ));\n\nprintf(OF somesub(     1, 2, 3   ));\nprintf(OF somesub(        ));\nprintf(OF somesub(     1    ));\n\n\nsay(somesub(     1, 2, 3   ));\nsay(somesub(        ));\nsay(somesub(     1    ));\n\nsay(OF somesub(     1, 2, 3   ));\nsay(OF somesub(        ));\nsay(OF somesub(     1    ));')
+--------------------------------------------------------------------------------

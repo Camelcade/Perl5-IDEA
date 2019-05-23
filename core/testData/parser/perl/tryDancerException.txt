@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiComment(Perl5: COMMENT_LINE)('# https://metacpan.org/pod/Dancer::Exception')
   PsiPerlStatementImpl(Perl5: STATEMENT)
@@ -155,3 +156,8 @@ Perl5
                 PsiElement(Perl5: ;)(';')
               PsiElement(Perl5: })('}')
       PsiElement(Perl5: })('}')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('# https://metacpan.org/pod/Dancer::Exception\n\nsay 'hi';\n\ntry {\n    do_stuff()\n}\ncatch {\n    # an exception was thrown\n    my ($exception) = @_;\n    if ($exception->does('DataProblem')) {\n        # handle the data problem\n        my $message = $exception->message();\n    }\n    else {\n        $exception->rethrow\n    }\n};\n\nsay 'hi';\n\nmy $var = try {};\n\n\n{\n    say 1;\n    try {\n        say 'bla';\n    }\n}')
+--------------------------------------------------------------------------------

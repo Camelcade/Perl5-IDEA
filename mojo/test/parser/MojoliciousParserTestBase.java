@@ -16,43 +16,10 @@
 
 package parser;
 
-import com.intellij.lang.ParserDefinition;
-import com.intellij.psi.LanguageFileViewProviders;
-import com.perl5.lang.mojolicious.MojoliciousLanguage;
-import com.perl5.lang.mojolicious.psi.MojoliciousFileViewProviderFactory;
-import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
-import com.perl5.lang.perl.parser.MojoParserExtension;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class MojoliciousParserTestBase extends PerlParserTestBase {
-  public MojoliciousParserTestBase() {
-  }
-
-  public MojoliciousParserTestBase(@NotNull String dataPath,
-                                   @NotNull String fileExt,
-                                   @NotNull ParserDefinition... definitions) {
-    super(dataPath, fileExt, definitions);
-  }
-
-  @Override
-  public void setUp() throws Exception {
-    super.setUp();
-    LanguageFileViewProviders.INSTANCE.addExplicitExtension(MojoliciousLanguage.INSTANCE, new MojoliciousFileViewProviderFactory());
-  }
-
-  @Override
-  protected void registerParserExtensions() {
-    super.registerParserExtensions();
-    registerExtension(PerlParserExtension.EP_NAME, new MojoParserExtension());
-  }
-
-  @Override
-  protected boolean allTreesInSingleFile() {
-    return true;
-  }
-
-  @Override
-  protected boolean checkAllPsiRoots() {
-    return true;
+  public MojoliciousParserTestBase(@NotNull String fileExt) {
+    super(fileExt);
   }
 }

@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiComment(Perl5: COMMENT_LINE)('#!/usr/bin/perl')
   PsiPerlUseStatementImpl(USE_STATEMENT)
@@ -394,3 +395,8 @@ Perl5
                     PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('bar')
                   PsiElement(Perl5: ))(')')
           PsiElement(Perl5: })('}')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('#!/usr/bin/perl\nuse strict;\nuse warnings FATAL => 'all';\n\n# -- a basic class -- #\npackage User;\nuse Method::Signatures::Simple;\n\nmethod new ($class: $name, $email) {\n    my $user = {\n        id    => new_id( 42 ),\n        name  => $name,\n        email => $email,\n    };\n    bless $user, $class;\n}\n\nfunc new_id ($seed) {\n    state $id = $seed;\n    $id++;\n}\n\nmethod name  { $self->{name};  }\nmethod email { $self->{email}; }\n1;\n\n\n# -- other features -- #\n# attributes\nmethod foo : lvalue\nsomething(withparams)\n: andotherattr()\n{ $self->{foo} }\nmethod foo($class: $name, $email) : lvalue something(withparams)\n: andotherattr()\n{ $self->{foo} }\n\nfunc foo : lvalue\nsomething(withparams)\n: andotherattr()\n{ $self->{foo} }\nfunc foo($name, $email) : lvalue something(withparams)\n: andotherattr()\n{ $self->{foo} }\n\n# change invocant name\nmethod foo ($bar) { $this->bar( $bar ) }\nmethod bar ($class: $bar) { $class->baz( $bar ) }')
+--------------------------------------------------------------------------------

@@ -1,3 +1,34 @@
+Subtree: HTML (HTML)
+HtmlFile:issue1262.tt
+  PsiElement(HTML_DOCUMENT)
+    PsiElement(XML_PROLOG)
+      <empty list>
+    HtmlTag:script
+      XmlToken:XML_START_TAG_START('<')
+      XmlToken:XML_NAME('script')
+      PsiElement(XML_ATTRIBUTE)
+        XmlToken:XML_NAME('type')
+        XmlToken:XML_EQ('=')
+        PsiElement(XML_ATTRIBUTE_VALUE)
+          XmlToken:XML_ATTRIBUTE_VALUE_START_DELIMITER('"')
+          XmlToken:XML_ATTRIBUTE_VALUE_TOKEN('text/javascript')
+          XmlToken:XML_ATTRIBUTE_VALUE_END_DELIMITER('"')
+      XmlToken:XML_TAG_END('>')
+      XmlText
+        XmlToken:XML_DATA_CHARACTERS('\n    ')
+        PsiElement(TT2: TT2_OUTER)('[% comments = 1 %]\n    [% IF comments # some comment here %]')
+        XmlToken:XML_DATA_CHARACTERS('\n     //javacript comment\n    ')
+        PsiElement(TT2: TT2_OUTER)('[% END %]')
+        XmlToken:XML_DATA_CHARACTERS('\n\n    function calculate(a){\n    ')
+        PsiElement(TT2: TT2_OUTER)('[% IF negative %]')
+        XmlToken:XML_DATA_CHARACTERS('\n        if( a < 0){\n            alert('Negative');\n            return false;\n        }\n    ')
+        PsiElement(TT2: TT2_OUTER)('[% END %]')
+        XmlToken:XML_DATA_CHARACTERS('\n        return a+10;\n    }\n\n')
+      XmlToken:XML_END_TAG_START('</')
+      XmlToken:XML_NAME('script')
+      XmlToken:XML_TAG_END('>')
+--------------------------------------------------------------------------------
+Subtree: Template Toolkit 2 (Template Toolkit 2)
 Template Toolkit File
   PsiComment(TT2: TT2_HTML)('<script type="text/javascript">\n    ')
   PsiElement(TT2: [%)('[%')
@@ -38,3 +69,4 @@ Template Toolkit File
       PsiElement(TT2: END)('END')
     PsiElement(TT2: %])('%]')
   PsiComment(TT2: TT2_HTML)('\n        return a+10;\n    }\n\n</script>')
+--------------------------------------------------------------------------------

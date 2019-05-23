@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlUseStatementImpl(USE_STATEMENT)
     PsiElement(Perl5: use)('use')
@@ -523,3 +524,8 @@ Perl5
               PsiElement(Perl5: ,)(',')
             PsiElement(Perl5: ))(')')
     PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('use Readonly;\n\n# Deep Read-only scalar\nReadonly::Scalar    $sca => $initial_value;\nReadonly::Scalar my $sca => $initial_value;\n\n# Deep Read-only array\nReadonly::Array    @arr => @values;\nReadonly::Array my @arr => @values;\n\n# Deep Read-only hash\nReadonly::Hash    %has => (key => value, key => value,);\nReadonly::Hash my %has => (key => value, key => value,);\n# or:\nReadonly::Hash    %has => {key => value, key => value,};\n\n# You can use the read-only variables like any regular variables:\nprint $sca;\n$something = $sca + $arr[2];\nnext if $has{$some_key};\n\n# But if you try to modify a value, your program will die:\n$sca = 7;\npush @arr, 'seven';\ndelete $has{key};\n# The error message is "Modification of a read-only value attempted"\n\n# Alternate form (Perl 5.8 and later)\nReadonly    $sca => $initial_value;\nReadonly my $sca => $initial_value;\nReadonly    @arr => @values;\nReadonly my @arr => @values;\nReadonly    %has => (key => value, key => value,);\nReadonly my %has => (key => value, key => value,);\nReadonly my $sca; # Implicit undef, readonly value\n\n# Alternate form (for Perls earlier than v5.8)\nReadonly    \$sca => $initial_value;\nReadonly \my $sca => $initial_value;\nReadonly    \@arr => @values;\nReadonly \my @arr => @values;\nReadonly    \%has => (key => value, key => value, );\nReadonly \my %has => (key => value, key => value, );')
+--------------------------------------------------------------------------------

@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlGotoExprImpl(Perl5: GOTO_EXPR)
@@ -511,3 +512,8 @@ Perl5
             PsiElement(Perl5: NUMBER)('3')
         PsiElement(Perl5: ))(')')
     PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('goto &Foo::Bar::something(1,2,3);\ngoto Foo::Bar::something(1,2,3);\ngoto &something(1,2,3);\ngoto something(1,2,3);\ngoto $something;\ngoto something;\ngoto &$something;\ngoto &$something(123);\n\nnext &Foo::Bar::something(1,2,3);\nnext Foo::Bar::something(1,2,3);\nnext &something(1,2,3);\nnext something(1,2,3);\nnext $something;\nnext something;\nnext &$something;\nnext &$something(123);\n\nlast &Foo::Bar::something(1,2,3);\nlast Foo::Bar::something(1,2,3);\nlast &something(1,2,3);\nlast something(1,2,3);\nlast $something;\nlast something;\nlast &$something;\nlast &$something(123);\n\nredo &Foo::Bar::something(1,2,3);\nredo Foo::Bar::something(1,2,3);\nredo &something(1,2,3);\nredo something(1,2,3);\nredo $something;\nredo something;\nredo &$something;\nredo &$something(123);\n\n&something(1,2,3);\nsomething(1,2,3);')
+--------------------------------------------------------------------------------

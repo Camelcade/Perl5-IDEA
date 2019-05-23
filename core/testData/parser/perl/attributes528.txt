@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::name
     PsiElement(Perl5: sub)('sub')
@@ -112,3 +113,8 @@ Perl5
               PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('right')
         PsiElement(Perl5: ;)(';')
       PsiElement(Perl5: })('}')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('sub name($sig) {}                      # with signature\nsub name :lvalue ($sig) {}            # with signature, attributes\nsub name :prototype($) ($sig) {}  # with signature, prototype\nsub foo :prototype($) { $_[0] }\nsub foo :prototype($$) ($left, $right) {\n    return $left + $right;\n}')
+--------------------------------------------------------------------------------

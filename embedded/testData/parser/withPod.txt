@@ -15,22 +15,22 @@ Embedded Perl file
 --------------------------------------------------------------------------------
 Subtree: HTML (HTML)
 HtmlFile:withPod.thtml
-  HTML_DOCUMENT
-    XML_PROLOG
+  PsiElement(HTML_DOCUMENT)
+    PsiElement(XML_PROLOG)
       <empty list>
-    HTML_TAG
-      PsiElement(XML_START_TAG_START)('<')
-      PsiElement(XML_NAME)('html')
-      PsiElement(XML_TAG_END)('>')
-      PsiElement(XML_END_TAG_START)('</')
-      PsiElement(XML_NAME)('html')
-      PsiElement(XML_TAG_END)('>')
+    HtmlTag:html
+      XmlToken:XML_START_TAG_START('<')
+      XmlToken:XML_NAME('html')
+      XmlToken:XML_TAG_END('>')
+      XmlToken:XML_END_TAG_START('</')
+      XmlToken:XML_NAME('html')
+      XmlToken:XML_TAG_END('>')
   PsiElement(Embedded Perl5: EMBED_OUTER_ELEMENT_TYPE)('<?\nsay 'hi';\n\n\n=pod\n\nthis is a pod\n\n=cut\n\n\n\n\n?>')
 --------------------------------------------------------------------------------
 Subtree: Perl5 POD (Perl5 POD)
 POD file
+  PsiElement(Perl5 POD: POD_OUTER)('<html></html><?\nsay 'hi';\n\n\n')
   PsiPodSectionImpl(Perl5 POD: POD_SECTION)
-    PsiElement(Perl5 POD: POD_OUTER)('<html></html><?\nsay 'hi';\n\n\n')
     PsiElement(Perl5 POD: =pod)('=pod')
   PsiElement(Perl5 POD: NL)('\n')
   PsiPodParagraphImpl(Perl5 POD: POD_PARAGRAPH)

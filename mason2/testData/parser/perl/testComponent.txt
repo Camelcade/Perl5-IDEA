@@ -1,3 +1,4 @@
+Subtree: Mason2 (Mason2)
 Mason2 pure perl file
   MasonNamespaceDefinitionImpl(MASON_PACKAGE)@null
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
@@ -78,3 +79,22 @@ Mason2 pure perl file
                 PerlVariableNameElementImpl(Perl5: ARRAY_NAME)('_')
             PsiElement(Perl5: ;)(';')
           PsiElement(Perl5: })('}')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('say 'Hi';\n\nsub blalba {\n\n}\nsay 42;\n\n$self->{'abc'}[0];\n\nsay 'hi';\n\nprint 'hi there';\n\n')
+  PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION)
+    PsiElement(Perl5 POD: =head3)('=head3')
+    PsiSectionTitleImpl(Perl5 POD: SECTION_TITLE)
+      PodIdentifierImpl(Perl5 POD: identifier)('test')
+      PodIdentifierImpl(Perl5 POD: identifier)('this')
+      PodIdentifierImpl(Perl5 POD: identifier)('is')
+      PodIdentifierImpl(Perl5 POD: identifier)('test')
+    PsiElement(Perl5 POD: NL)('\n')
+    PsiHead3SectionContentImpl(Perl5 POD: HEAD_3_SECTION_CONTENT)
+      PsiCutSectionImpl(Perl5 POD: CUT_SECTION)
+        PsiElement(Perl5 POD: =cut)('=cut')
+        PsiSectionTitleImpl(Perl5 POD: SECTION_TITLE)
+          <empty list>
+  PsiElement(Perl5 POD: POD_OUTER)('\nsub hi\n{\n    my ($self) = @_;\n\n}')
+--------------------------------------------------------------------------------

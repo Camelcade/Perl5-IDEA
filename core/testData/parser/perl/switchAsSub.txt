@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiComment(Perl5: COMMENT_LINE)('#!/usr/bin/env perl')
   PsiPerlUseStatementImpl(USE_STATEMENT)
@@ -177,3 +178,8 @@ Perl5
             PsiPerlMethodImpl(Perl5: METHOD)
               PerlSubNameElementImpl(Perl5: subname)('switch')
         PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('#!/usr/bin/env perl\n\nuse strict;\nuse warnings;\n\npackage Foo;\n\nsub new {\n    my $class = shift;\n    return bless {}, $class;\n}\n\nsub switch {\n    my $self = shift;\n    return 'bar';\n}\n\nmy $foo = Foo->new();\n\nmy $test = {\n    bar => $foo->switch,\n};\n\nprint $foo->switch();\nprint $foo->switch;\nprint $test->{bar};\nprint switch();\nprint switch;')
+--------------------------------------------------------------------------------

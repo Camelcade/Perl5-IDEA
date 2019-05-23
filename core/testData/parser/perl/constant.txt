@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiComment(Perl5: COMMENT_LINE)('#!/usr/bin/perl')
   PsiPerlUseStatementImpl(USE_STATEMENT)
@@ -151,3 +152,8 @@ Perl5
               PsiPerlMethodImpl(Perl5: METHOD)
                 PerlSubNameElementImpl(Perl5: subname)('array2')
     PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('#!/usr/bin/perl\nuse strict;\nuse warnings FATAL => 'all';\nuse v5.10;\n\nuse constant PI => 3.14;\n\nuse constant {\n    simple => 1,\n    'array' => qw( one two three ),\n    "array2" => ('four', 'five', 'six')\n};\n\n\n$a->{test};\nsay join ', ', (simple);\nsay join ', ', array;\nsay join ', ', array2;')
+--------------------------------------------------------------------------------

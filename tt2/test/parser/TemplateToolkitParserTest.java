@@ -16,12 +16,10 @@
 
 package parser;
 
-import com.perl5.lang.tt2.TemplateToolkitParserDefinition;
-
 
 public class TemplateToolkitParserTest extends PerlParserTestBase {
   public TemplateToolkitParserTest() {
-    super("", "tt", new TemplateToolkitParserDefinition());
+    super("tt");
   }
 
   @Override

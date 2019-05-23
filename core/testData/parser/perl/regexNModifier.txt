@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiComment(Perl5: COMMENT_LINE)('#!./perl')
   PsiPerlNamedBlockImpl(Perl5: NAMED_BLOCK)
@@ -760,3 +761,8 @@ Perl5
             PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
         PsiElement(Perl5: ))(')')
     PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('#!./perl\n\nBEGIN {\n    chdir 't' if -d 't';\n    @INC = '../lib';\n    require './test.pl';\n}\n\nuse strict;\nuse warnings;\n\nplan tests => 25;\n\n# Some /qr/ tests\nmy $re = qr/(.*) b c d/;\nok("a b c d" =~ /$re/n, "/n still matches");\nis($1, "a", "Outer /n doesn't affect inner qr//");\n\n$re = qr/(.*) b c d/n;\nok("a b c d" =~ /$re/, "qr//n matches");\nis($1, undef, "qr//n prevents capturing");\n\nok("a b c d" =~ $re, "qr// out of // matches");\nis($1, undef, "qr//n prevents capturing");\n\n# Some // tests\nok("a b c d" =~ /(a) b c d/n, "//n matches");\nis($1, undef, "/n prevents capture");\n\nok("a b c d" =~ /(a) (b) c d/n, "//n matches with multiple ()");\nis($1, undef, "/n prevents capture in \$1");\nis($2, undef, "/n prevents capture in \$2");\n\n# ?n\nok("a b c d" =~ /(?n:a) b c (d)/, "?n matches");\nis($1, 'd', "?n: blocked capture");\n\n# ?-n:()\nok("a b c d" =~ /(?-n:(a)) b c (d)/n, "?-n matches");\nis($1, 'a', "?-n:() disabled nocapture");\n\nok("a b c d" =~ /(?<a>.) (?<b>.) (.*)/n, "named capture...");\nis($1, 'a', "named capture allows $1 with /n");\nis($2, 'b', "named capture allows $2 with /n");\nis($3, undef, "(.*) didn't capture with /n");\n\nSKIP: {\n    skip "no %+ under miniperl", 2 if is_miniperl();\n    no strict 'refs';\n    is(${"+"}{a}, 'a', "\$+{a} is correct");\n    is(${"+"}{b}, 'b', "\$+{b} is correct");\n}\n\nis(qr/(what)/n,     '(?^n:(what))',\n  'qr//n stringified is correct');\n\nis(qr/(?n:what)/,   '(?^:(?n:what))',\n  'qr/(?n:...)/ stringified is correct');\n\nis(qr/(?-n:what)/,  '(?^:(?-n:what))',\n  'qr/(?-n:...)/ stringified is correct');\n\nis(qr/(?-n:what)/n, '(?^n:(?-n:what))',\n  'qr/(?-n:...)/n stringified is correct');')
+--------------------------------------------------------------------------------

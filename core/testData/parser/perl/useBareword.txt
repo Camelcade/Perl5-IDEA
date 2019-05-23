@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiComment(Perl5: COMMENT_LINE)('#!/usr/bin/perl')
   PsiPerlUseStatementImpl(USE_STATEMENT)
@@ -105,3 +106,8 @@ Perl5
     PerlNamespaceElementImpl(Perl5: package::name)('Mojo::Base')
     PerlVersionElementImpl(Perl5: VERSION_ELEMENT)('v5.10')
     PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('#!/usr/bin/perl\nuse Mojo::Base -base -otherbase;\nuse Mojo::Base -strict  -otherbase;\nuse Mojo::Base base  -otherbase;\nuse Mojo::Base strict  -otherbase;\nuse Mojo::Base v5.10 -base  -otherbase;\nuse Mojo::Base v5.10 -strict  -otherbase;\nuse Mojo::Base v5.10 base  -otherbase;\nuse Mojo::Base v5.10 strict  -otherbase;\nuse Mojo::Base v5.10;')
+--------------------------------------------------------------------------------

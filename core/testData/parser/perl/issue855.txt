@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlAssignExprImpl(Perl5: ASSIGN_EXPR)
@@ -73,3 +74,8 @@ Perl5
       PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('test')
     PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)(' string\n')
   PsiComment(Perl5: HEREDOC_END)('SQL')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('$a = <<'SQL';\n this is a $test string\nSQL\n\n$a = <<`SQL`;\n this is a $test string\nSQL\n\n$a = <<"SQL";\n this is a $test string\nSQL\n\n$a = <<SQL;\n this is a $test string\nSQL')
+--------------------------------------------------------------------------------

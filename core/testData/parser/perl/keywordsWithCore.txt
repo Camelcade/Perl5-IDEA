@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlIfCompoundImpl(Perl5: IF_COMPOUND)
     PsiElement(Perl5: if)('if')
@@ -701,3 +702,8 @@ Perl5
             PsiElement(Perl5: $$)('$')
             PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('var')
         PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('if($var){}\nelsif($var){}\nelse{$var}\n\ngiven ($var)\n{\n    when($var){}\n    default{}\n}\nwhile($var){} continue {}\nuntil($var){}\nfor(my $i; $i < 100; $i++){}\nforeach my $element (@list){}\n\nformat some =\n.\n\nsub subname{}\nsub{};\npackage Foo;\nuse warnings;\nno warnings;\nrequire warnings;\nundef;\nprint "some";\nprintf "pattern", $var;\nsay "some";\ngrep{}\n    map{};\nqw//;\nqq//;\nq//;\nqx//;\ntr///;\ny///;\ns///;\nqr//;\nm//;\nmy $var;\nour $var;\nlocal $var;\ndo{};\neval{};\ngoto LABEL;\nredo LABEL;\nnext LABEL;\nlast LABEL;\nreturn $var;\n\nCORE::if($var){}\nCORE::elsif($var){}\nCORE::else{$var}\n\nCORE::given ($var)\n{\n    CORE::when($var){}\n    CORE::default{}\n}\nCORE::while($var){} CORE::continue {}\nCORE::until($var){}\nCORE::for(CORE::my $i; $i < 100; $i++){}\nCORE::foreach CORE::my $element (@list){}\n\nCORE::format some =\n.\nCORE::sub subname{}\nCORE::sub{};\nCORE::package Foo;\nCORE::use warnings;\nCORE::no warnings;\nCORE::require warnings;\nCORE::undef;\nCORE::print "some";\nCORE::printf "pattern", $var;\nCORE::say "some";\nCORE::grep{};\nCORE::map{};\nCORE::qw//;\nCORE::qq//;\nCORE::q//;\nCORE::qx//;\nCORE::tr///;\nCORE::y///;\nCORE::s///;\nCORE::qr//;\nCORE::m//;\nCORE::my $var;\nCORE::our $var;\nCORE::local $var;\nCORE::do{};\nCORE::eval{};\nCORE::goto LABEL;\nCORE::redo LABEL;\nCORE::next LABEL;\nCORE::last LABEL;\nCORE::return $var;')
+--------------------------------------------------------------------------------

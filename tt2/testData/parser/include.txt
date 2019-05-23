@@ -1,3 +1,50 @@
+Subtree: HTML (HTML)
+HtmlFile:include.tt
+  PsiElement(HTML_DOCUMENT)
+    PsiElement(XML_PROLOG)
+      <empty list>
+    HtmlTag:html
+      XmlToken:XML_START_TAG_START('<')
+      XmlToken:XML_NAME('html')
+      XmlToken:XML_TAG_END('>')
+      XmlText
+      HtmlTag:head
+        XmlToken:XML_START_TAG_START('<')
+        XmlToken:XML_NAME('head')
+        XmlToken:XML_TAG_END('>')
+        XmlText
+          XmlToken:XML_DATA_CHARACTERS('http://template-toolkit.org/docs/manual/Variables.html')
+        XmlToken:XML_END_TAG_START('</')
+        XmlToken:XML_NAME('head')
+        XmlToken:XML_TAG_END('>')
+      XmlText
+      HtmlTag:body
+        XmlToken:XML_START_TAG_START('<')
+        XmlToken:XML_NAME('body')
+        XmlToken:XML_TAG_END('>')
+        XmlText
+          PsiElement(TT2: TT2_OUTER)('[% INCLUDE header %]\n[% myheader = 'my/misc/header' %]\n[% INCLUDE   myheader  %]')
+          XmlToken:XML_DATA_CHARACTERS('#')
+          XmlToken:XML_DATA_CHARACTERS(''myheader'')
+          PsiElement(TT2: TT2_OUTER)('[% INCLUDE  $myheader  %]')
+          XmlToken:XML_DATA_CHARACTERS('#')
+          XmlToken:XML_DATA_CHARACTERS(''my/misc/header'')
+          PsiElement(TT2: TT2_OUTER)('[% INCLUDE "$myheader" %]')
+          XmlToken:XML_DATA_CHARACTERS('#')
+          XmlToken:XML_DATA_CHARACTERS(''my/misc/header'')
+          PsiElement(TT2: TT2_OUTER)('[% title = 'Hello World' %]\n[% INCLUDE header %]\n[% INCLUDE table %]\n\n[% INCLUDE table title="Active Projects" %]\n\n[% INCLUDE table\n     title   = "Active Projects"\n     bgcolor = "80ff00"    # chartreuse\n     border  = 2\n%]\n[% foo = {\n       bar = 'Baz'\n   }\n%]\n\n[% INCLUDE somefile foo.bar='Boz' %]\n\n[% foo.bar %]')
+          XmlToken:XML_DATA_CHARACTERS('#')
+          XmlToken:XML_DATA_CHARACTERS('Boz')
+          PsiElement(TT2: TT2_OUTER)('[% INCLUDE html/header + "site/$header" + site/menu\n     title = "My Groovy Web Site"\n%]')
+        XmlToken:XML_END_TAG_START('</')
+        XmlToken:XML_NAME('body')
+        XmlToken:XML_TAG_END('>')
+      XmlText
+      XmlToken:XML_END_TAG_START('</')
+      XmlToken:XML_NAME('html')
+      XmlToken:XML_TAG_END('>')
+--------------------------------------------------------------------------------
+Subtree: Template Toolkit 2 (Template Toolkit 2)
 Template Toolkit File
   PsiComment(TT2: TT2_HTML)('<html>\n<head>http://template-toolkit.org/docs/manual/Variables.html</head>\n<body>\n\n')
   PsiElement(TT2: [%)('[%')
@@ -197,3 +244,4 @@ Template Toolkit File
         PsiElement(TT2: DQ_CLOSE)('"')
   PsiElement(TT2: %])('%]')
   PsiComment(TT2: TT2_HTML)('\n\n\n</body>\n</html>')
+--------------------------------------------------------------------------------

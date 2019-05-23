@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlEqualExprImpl(Perl5: EQUAL_EXPR)
@@ -349,3 +350,8 @@ Perl5
                   PsiElement(Perl5: })('}')
           PsiElement(Perl5: })('}')
     PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('$a eq'some::thing';\n$a lt'some::thing';\n$a gt'some::thing';\n$a le'some::thing';\n$a ge'some::thing';\n$a eq'some::thing';\n$a ne'some::thing';\n$a cmp'some::thing';\n\n$a eq'some::other::thing';\n$a lt'some::other::thing';\n$a gt'some::other::thing';\n$a le'some::other::thing';\n$a ge'some::other::thing';\n$a eq'some::other::thing';\n$a ne'some::other::thing';\n$a cmp'some::other::thing';\n\n*{$M.'is::e'}=sub{my($P,$e,$o)=@_;$o->{is}=sub{my($m,$n,%a)=@_;$a{is}or return$m;sub{$#_&&$a{is}eq'ro'&&caller ne'Mo::coerce'?die$n.' is ro':$m->(@_)}}};')
+--------------------------------------------------------------------------------

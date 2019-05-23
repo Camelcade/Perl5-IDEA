@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlReturnExprImpl(Perl5: RETURN_EXPR)
@@ -585,3 +586,8 @@ Perl5
       PsiPerlPerlRegexModifiersImpl(Perl5: PERL_REGEX_MODIFIERS)
         PsiElement(Perl5: /m)('xx')
     PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('return qr{(?{Regexp::Debugger::_report_event($regex_ID, $event_ID, pos()); \$^R })(?=)};\nreturn qr{(?>(?{local \$Regexp::Debugger::prevpos=pos})$construct(?{\n            if (defined \$Regexp::Debugger::prevpos && \$Regexp::Debugger::prevpos < pos){\n                Regexp::Debugger::_report_event($regex_ID, $event_ID, \$Regexp::Debugger::prevpos);\n                Regexp::Debugger::_report_event($regex_ID, $event_ID+1, pos());\n            }\$^R })|(?{\n                Regexp::Debugger::_report_event($regex_ID, $event_ID, pos());\n            \$^R\n            })(?!))};\nreturn qr{(??{Regexp::Debugger::_report_event($regex_ID, $event_ID, pos()); \$^R })(?=)};\nreturn qr{(?>(??{local \$Regexp::Debugger::prevpos=pos})$construct(??{\n            if (defined \$Regexp::Debugger::prevpos && \$Regexp::Debugger::prevpos < pos){\n                Regexp::Debugger::_report_event($regex_ID, $event_ID, \$Regexp::Debugger::prevpos);\n                Regexp::Debugger::_report_event($regex_ID, $event_ID+1, pos());\n            }\$^R })|(??{\n                Regexp::Debugger::_report_event($regex_ID, $event_ID, pos());\n            \$^R\n            })(?!))};\n/(?{say 123})/;\n/(?{say 123})/x;\n/(?{say 123})/xx;\ns/(?{say 123})//;\ns/(?{say 123})//x;\ns/(?{say 123})//xx;\nqr/(?{say 123})/;\nqr/(?{say 123})/x;\nqr/(?{say 123})/xx;')
+--------------------------------------------------------------------------------

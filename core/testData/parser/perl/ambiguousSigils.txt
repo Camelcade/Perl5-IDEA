@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlMulExprImpl(Perl5: MUL_EXPR)
@@ -794,3 +795,8 @@ Perl5
           PsiPerlMethodImpl(Perl5: METHOD)
             PerlSubNameElementImpl(Perl5: subname)(':')
     PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('identifier % identifier;\nidentifier %{identifier};\nidentifier % (identifier);\nidentifier % identifier;\nidentifier % ^A;\nidentifier % ";\nidentifier % ";\nidentifier % ';\nidentifier % [;\nidentifier % ];\nidentifier % `;\nidentifier % \;\nidentifier % !;\nidentifier % );\nidentifier % +;\nidentifier % ,;\nidentifier % -;\nidentifier % .;\nidentifier % /;\nidentifier % ;;\nidentifier % <;\nidentifier % =;\nidentifier % >;\nidentifier % |;\nidentifier % ~;\nidentifier % ?;\nidentifier % :;\nidentifier % ^;\n\nidentifier * identifier;\nidentifier *{identifier};\nidentifier * (identifier);\nidentifier * identifier;\nidentifier * ^A;\nidentifier * ";\nidentifier * ";\nidentifier * ';\nidentifier * [;\nidentifier * ];\nidentifier * `;\nidentifier * \;\nidentifier * !;\nidentifier * );\nidentifier * +;\nidentifier * ,;\nidentifier * -;\nidentifier * .;\nidentifier * /;\nidentifier * ;;\nidentifier * <;\nidentifier * =;\nidentifier * >;\nidentifier * |;\nidentifier * ~;\nidentifier * ?;\nidentifier * :;\nidentifier * ^;\n\n\nidentifier & identifier;\nidentifier &{identifier};\nidentifier & (identifier);\nidentifier & identifier;\nidentifier & ^A;\nidentifier & ";\nidentifier & ";\nidentifier & [;\nidentifier & ];\nidentifier & `;\nidentifier & \;\nidentifier & !;\nidentifier & );\nidentifier & +;\nidentifier & ,;\nidentifier & -;\nidentifier & .;\nidentifier & /;\nidentifier & ;;\nidentifier & <;\nidentifier & =;\nidentifier & >;\nidentifier & |;\nidentifier & ?;\nidentifier & ^;\nidentifier & ';\nidentifier & :;')
+--------------------------------------------------------------------------------

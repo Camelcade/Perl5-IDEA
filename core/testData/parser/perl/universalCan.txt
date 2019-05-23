@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlUseStatementImpl(USE_STATEMENT)
     PsiElement(Perl5: use)('use')
@@ -15,3 +16,8 @@ Perl5
           PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('a')
         PsiElement(Perl5: ))(')')
     PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('use UNIVERSAL::can;\n\nUNIVERSAL::can($a);')
+--------------------------------------------------------------------------------

@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlSubCallExprImpl(Perl5: SUB_CALL_EXPR)
@@ -24,3 +25,8 @@ Perl5
           PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
             PsiElement(Perl5: NUMBER)('1024')
     PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('-t $some;\n-t($some) + 1024;')
+--------------------------------------------------------------------------------

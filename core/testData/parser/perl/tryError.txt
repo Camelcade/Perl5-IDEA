@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiComment(Perl5: COMMENT_LINE)('# https://metacpan.org/pod/Error')
   PsiPerlStatementImpl(Perl5: STATEMENT)
@@ -221,3 +222,8 @@ Perl5
         PerlStringContentElementImpl(Perl5: STRING_CONTENT)('buy')
         PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
     PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('# https://metacpan.org/pod/Error\n\nsay 'hi';\n\ntry {\n    do_some_stuff();\n    die "error!" if $condition;\n    throw Error::Simple "Oops!" if $other_condition;\n}\ncatch Error::IO with {\n    my $E = shift;\n    print STDERR "File ", $E->{'-file'}, " had a problem\n";\n}\nexcept {\n    my $E               = shift;\n    my $general_handler = sub {send_message $E->{-description}};\n    return {\n        UserException1 => $general_handler,\n        UserException2 => $general_handler\n    };\n}\notherwise {\n    print STDERR "Well I don't know what to say\n";\n}\nfinally {\n    close_the_garage_door_already(); # Should be reliable\n};                                   # Don't forget the trailing ; or you might be surprised\n\nsay 'buy';')
+--------------------------------------------------------------------------------

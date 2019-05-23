@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlUseStatementImpl(USE_STATEMENT)
     PsiElement(Perl5: use)('use')
@@ -267,3 +268,8 @@ Perl5
         PsiElement(Perl5: })('}')
     PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)(' test\n')
   PsiComment(Perl5: HEREDOC_END)('EOM')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('use v5.10;\nuse strict;\n\nmy $abc = 123;\nmy $cde = 456;\nmy @cde = (789);\nmy $fgh = 'scalarhash';\nmy %fgh = (key => 'testval');\n\nsay "this $ abc test";\nsay <<EOM;\nthis $ abc test\nEOM\nsay "this $abc test";\nsay <<EOM;\nthis $abc test\nEOM\nsay "this $ cde [0] test";\nsay <<EOM;\nthis $ cde [0] test\nEOM\nsay "this $ cde[0] test";\nsay <<EOM;\nthis $ cde[0] test\nEOM\n\nsay "this $ fgh {key} test";\nsay <<EOM;\nthis $ fgh {key} test\nEOM\nsay "this $ fgh{key} test";\nsay <<EOM;\nthis $ fgh{key} test\nEOM')
+--------------------------------------------------------------------------------

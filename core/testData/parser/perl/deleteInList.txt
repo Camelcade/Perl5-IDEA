@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlCommaSequenceExprImpl(Perl5: COMMA_SEQUENCE_EXPR)
@@ -16,3 +17,8 @@ Perl5
       PsiPerlNextExprImpl(Perl5: NEXT_EXPR)
         PsiElement(Perl5: next)('next')
     PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('delete $hash{key}, next;')
+--------------------------------------------------------------------------------

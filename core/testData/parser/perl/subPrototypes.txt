@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlSubDeclarationImpl(SUB_DECLARATION)@main::mypush
     PsiElement(Perl5: sub)('sub')
@@ -455,3 +456,8 @@ Perl5
     PsiElement(Perl5: SUB_PROTOTYPE_TOKEN)('_$@')
     PsiElement(Perl5: ))(')')
     PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('sub mypush (\@@);\nsub mypush :prototype(\@@);\nsub mylink ($$); #\t   mylink $old, $new\nsub myvec ($$$); #\t   myvec $var, $offset, 1\nsub myindex ($$;$); #\t   myindex &getstring, "substr"\nsub mysyswrite ($$$;$); #  mysyswrite $buf, 0, length($buf) - $off, $off\nsub myreverse (@); #\t   myreverse $a, $b, $c\nsub myjoin ($@); #\t   myjoin ":", $a, $b, $c\nsub mypop (\@); #\t   mypop @array\nsub mysplice (\@$$@); #\t   mysplice @array, 0, 2, @pushme\nsub mykeys (\[%@]); #\t   mykeys %{$hashref}\nsub myopen (*;$); #\t   myopen HANDLE, $name\nsub mypipe (**); #\t   mypipe READHANDLE, WRITEHANDLE\nsub mygrep (&@); #\t   mygrep { /foo/ } $a, $b, $c\nsub myrand (;$); #\t   myrand 42\nsub mytime (); #\t   mytime\nsub myref (\[$@%&*]);\nsub mypush (+@) {\n    my $aref = shift;\n    die "Not an array or arrayref" unless ref $aref eq 'ARRAY';\n    push @$aref, @_;\n}\nsub mygetprotobynumber($;);\nsub try (&@) {\n    my ($try, $catch) = @_;\n    eval { &$try };\n    if ($@) {\n        local $_ = $@;\n        &$catch;\n    }\n}\nsub catch (&) { $_[0] }\nsub mygrep (&@) {\n    my $code = shift;\n    my @result;\n    foreach $_ (@_) {\n        push(@result, $_) if &$code;\n    }\n    @result;\n}\nsub func ($) {\n    my $n = shift;\n    print "you gave me $n\n";\n}\nsub foo($$);\nsub foo($$) {\n    foo 1, 2;\n}\nsub length (_);\nsub chr (_@);\nsub ord (_$@);')
+--------------------------------------------------------------------------------

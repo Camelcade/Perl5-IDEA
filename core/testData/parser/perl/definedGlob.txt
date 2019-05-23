@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlIfCompoundImpl(Perl5: IF_COMPOUND)
     PsiElement(Perl5: if)('if')
@@ -70,3 +71,8 @@ Perl5
             PsiElement(Perl5: ++)('++')
           PsiElement(Perl5: ;)(';')
         PsiElement(Perl5: })('}')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('if (defined $val && defined *ENTRY{HASH} && $key !~ /::/) {\n\t\t$result->{$pack}{HASHES}{$key}++;\n\t\t$gotone++;\n\t    }')
+--------------------------------------------------------------------------------

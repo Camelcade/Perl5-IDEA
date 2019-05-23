@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlReplacementRegexImpl(Perl5: REPLACEMENT_REGEX)
@@ -32,3 +33,8 @@ Perl5
         PsiElement(Perl5: regex)('as\n    dfa{\n    sdf(\n    asdf[       # this is a test\n    {{{{\n    }}(?#somecomment)\n    [[[[\n    ]]\n\n    ')
       PsiElement(Perl5: r})('/')
     PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('s/a\n    s   # this is a test\n    d[          # this is a test\n    f\n    a](?#somecomment)asdf\n    s\n    df/as\n    dfa{\n    sdf(\n    asdf[       # this is a test\n    {{{{\n    }}(?#somecomment)\n    [[[[\n    ]]\n\n    /x;\n\ns/a\n    s   # this is a test\n    d[          # this is a test\n    f\n    a](?#somecomment)\n    s\n    df/as\n    dfa{\n    sdf(\n    asdf[       # this is a test\n    {{{{\n    }}(?#somecomment)\n    [[[[\n    ]]\n\n    /;')
+--------------------------------------------------------------------------------

@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlAssignExprImpl(Perl5: ASSIGN_EXPR)
@@ -336,3 +337,8 @@ Perl5
         PsiElement(Perl5: regex)('1')
       PsiElement(Perl5: r})(''')
     PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('my $var1=$hash->{key}lt'1'?'str1':'str2';\nmy $var1=$hash->{key}gt'1'?'str1':'str2';\nmy $var1=$hash->{key}le'1'?'str1':'str2';\nmy $var1=$hash->{key}ge'1'?'str1':'str2';\nmy $var1=$hash->{key}eq'1'?'str1':'str2';\nmy $var1=$hash->{key}ne'1'?'str1':'str2';\nmy $var1=$hash->{key}cmp'1'?'str1':'str2';\ny'1'str1';\ntr'1'str1';\ns'1'str1';\nqw'1';\nqx'1';\nqq'1';\nq'1';\nqr'1';\nm'1';')
+--------------------------------------------------------------------------------

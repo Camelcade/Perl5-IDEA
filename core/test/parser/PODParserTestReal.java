@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,15 +16,9 @@
 
 package parser;
 
-import com.intellij.psi.PsiFile;
-import com.perl5.lang.pod.PodParserDefinition;
-import org.jetbrains.annotations.NotNull;
-
-import java.io.IOException;
-
 public class PODParserTestReal extends PerlParserTestBase {
   public PODParserTestReal() {
-    super("", "pod", new PodParserDefinition());
+    super("pod");
   }
 
   @Override
@@ -37,13 +31,8 @@ public class PODParserTestReal extends PerlParserTestBase {
   }
 
   @Override
-  protected String loadFile(@NotNull String name) throws IOException {
-    return loadFileDefault(myFullDataPath, name);
-  }
-
-  @Override
-  protected void checkResult(@NotNull String targetDataName, @NotNull PsiFile file) throws IOException {
-    doCheckResult(getAnswersDataPath(), file, checkAllPsiRoots(), targetDataName, skipSpaces(), includeRanges(), allTreesInSingleFile());
+  protected String getRealDataFileExtension() {
+    return ".pod";
   }
 
   public void testPerl() {doTest();}

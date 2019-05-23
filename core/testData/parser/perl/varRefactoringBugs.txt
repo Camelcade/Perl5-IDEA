@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlHashElementImpl(Perl5: HASH_ELEMENT)
@@ -101,3 +102,8 @@ Perl5
           PerlStringContentElementImpl(Perl5: STRING_CONTENT)('x1')
         PsiElement(Perl5: })('}')
     PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('$some{'Carp::Confess'};\n$1.(" " x 123);\nmy $x100 = "x" x 256;\n"0..$#{$v}  ";\n"0..$#{$v}  ";\n"0..$#v  ";\n$opts{x1};')
+--------------------------------------------------------------------------------

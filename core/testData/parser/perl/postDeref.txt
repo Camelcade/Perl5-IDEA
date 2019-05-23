@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlAssignExprImpl(Perl5: ASSIGN_EXPR)
@@ -233,3 +234,8 @@ Perl5
           PsiElement(Perl5: })('}')
     PsiElement(Perl5: ;)(';')
   PsiComment(Perl5: COMMENT_LINE)('# same as %$href{ ... }')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('$r = \@a;\n@b = $r->@*; # equivalent to @$r or @{ $r }\n$r = [ 1, [ 2, 3 ], 4 ];\n$r->[1]->@*;  # equivalent to @{ $r->[1] }\n\n$sref->$*;  # same as  ${ $sref }\n$aref->@*;  # same as  @{ $aref }\n$aref->$#*; # same as $#{ $aref }\n$href->%*;  # same as  %{ $href }\n$cref->&*;  # same as  &{ $cref }\n$gref->**;  # same as  *{ $gref }\n$gref->*{SCALAR}; # same as *{ $gref }{SCALAR}\n$aref->@[1,2,3];  # same as @$aref[ ... ]\n$href->@{qw/one two three/};  # same as @$href{ ... }\n$aref->%[1,2,3];  # same as %$aref[ ... ]\n$href->%{qw/one two three/};  # same as %$href{ ... }')
+--------------------------------------------------------------------------------

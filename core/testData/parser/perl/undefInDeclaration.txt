@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlVariableDeclarationLexicalImpl(Perl5: VARIABLE_DECLARATION_LEXICAL)
@@ -71,3 +72,8 @@ Perl5
           PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('var')
       PsiElement(Perl5: ))(')')
     PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('my($var1, undef, $var);\nour($var1, undef, $var);\nstate($var1, undef, $var);\nlocal($var1, undef, $var);')
+--------------------------------------------------------------------------------

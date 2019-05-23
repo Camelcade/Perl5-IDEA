@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlCommaSequenceExprImpl(Perl5: COMMA_SEQUENCE_EXPR)
@@ -38,3 +39,8 @@ Perl5
           PsiElement(Perl5: NUMBER)('1')
         PsiElement(Perl5: ))(')')
     PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('exit 1,2;\nexit;\nexit 1;\nexit 1 or 2;\nexit(1);')
+--------------------------------------------------------------------------------

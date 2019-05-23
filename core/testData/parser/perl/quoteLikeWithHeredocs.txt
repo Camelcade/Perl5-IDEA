@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlAssignExprImpl(Perl5: ASSIGN_EXPR)
@@ -352,3 +353,8 @@ Perl5
               PsiElement(Perl5: /m)('x')
         PsiElement(Perl5: ))(')')
     PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('my @arr = ( <<EOM, qq\nheredoc here\nEOM\n#comment\n(and string content));\n\nmy @arr = ( <<EOM, q\nheredoc here\nEOM\n#comment\n(and string content));\n\nmy @arr = ( <<EOM, qx\nheredoc here\nEOM\n#comment\n(and string content));\n\nmy @arr = ( <<EOM, qw\nheredoc here\nEOM\n        #comment\n        (and string content));\n\nmy @arr = ( <<EOM, m\nheredoc here\nEOM\n        #comment\n        (regexp match content));\n\nmy @arr = ( <<EOM, qr\nheredoc here\nEOM\n        #comment\n        (regexp match content));\n\nmy @arr = ( <<EOM, y\nheredoc here\nEOM\n        #comment\n        (match content)/replacement content/);\n\nmy @arr = ( <<EOM, tr\nheredoc here\nEOM\n        #comment\n        (match content)/replacement content/);\n\nmy @arr = ( <<EOM, s\nheredoc here\nEOM\n        #comment\n        (match content)/replacement content/);\n\nmy @arr = ( <<EOM, s\nheredoc here\nEOM\n        #comment\n        (match content)/replacement content/x);\n\nmy @arr = ( <<EOM, s\nheredoc here\nEOM\n        #comment\n        (match content)/say 'hi'/ex);')
+--------------------------------------------------------------------------------
