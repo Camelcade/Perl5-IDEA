@@ -33,12 +33,16 @@ public class PerlEditorUtils {
    */
   public static boolean isPreviousToken(@NotNull Editor editor, int offset, @NotNull TokenSet elementTypes) {
     HighlighterIterator highlighterIterator = ((EditorEx)editor).getHighlighter().createIterator(offset);
+    if (highlighterIterator.atEnd()) {
+      return false;
+    }
+    highlighterIterator.retreat();
     while (!highlighterIterator.atEnd()) {
-      highlighterIterator.retreat();
       IElementType tokenType = highlighterIterator.getTokenType();
       if (tokenType != TokenType.WHITE_SPACE) {
         return elementTypes.contains(tokenType);
       }
+      highlighterIterator.retreat();
     }
     return false;
   }

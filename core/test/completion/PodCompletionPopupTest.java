@@ -45,6 +45,8 @@ public class PodCompletionPopupTest extends PerlCompletionPopupTestCase {
     assertNotNull(LookupManager.getActiveLookup(getEditor()));
   }
 
+  public void testColonStart() {doTestNegative("<caret>sometext", ":");}
+
   public void testSpaceHeader1() {doTest("=head1<caret>", " ");}
 
   public void testSpaceHeader2() {doTest("=head2<caret>", " ");}
