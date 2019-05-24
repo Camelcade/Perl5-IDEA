@@ -20,6 +20,7 @@ import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager.ARGUMENTS_ID;
 
 /**
@@ -34,7 +35,7 @@ final class PerlArgumentsValue extends PerlSpecialValue {
   @NotNull
   @Override
   PerlValue computeResolve(@NotNull PerlValueResolver resolver) {
-    throw new RuntimeException("This value supposed to be substituted");
+    return UNKNOWN_VALUE;
   }
 
   @NotNull

@@ -1,0 +1,5 @@
+sub something{
+  $var = $_[0];
+
+  $v<caret>ar;
+}

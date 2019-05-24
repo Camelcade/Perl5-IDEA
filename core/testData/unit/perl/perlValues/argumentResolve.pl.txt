@@ -1,0 +1,13 @@
+sub something{
+  $var = $_[0];
+
+  $v<caret>ar;
+}
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 34 in argumentResolve.pl
+ArrayItem: SUB_ARGUMENTS[0]
+----------
+Resolved
+----------
+Value unknown
