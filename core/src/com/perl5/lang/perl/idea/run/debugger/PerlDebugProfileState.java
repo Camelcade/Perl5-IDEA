@@ -40,6 +40,7 @@ import java.util.*;
  */
 public class PerlDebugProfileState extends PerlDebugProfileStateBase {
   private static final Logger LOG = Logger.getInstance(PerlDebugProfileState.class);
+  private static final String PROCESS_START_MARKER_TEXT = "Listening for the IDE connection at";
   public static final String DEBUG_PACKAGE = "Devel::Camelcadedb";
   public static final String DEBUG_ARGUMENT = "-d:Camelcadedb";
   public static final String PERL5_DEBUG_HOST = "PERL5_DEBUG_HOST";
@@ -48,10 +49,12 @@ public class PerlDebugProfileState extends PerlDebugProfileStateBase {
   private static final ProcessAdapter READY_PROCESS_MARKER = new ProcessAdapter() {
     @Override
     public void onTextAvailable(@NotNull ProcessEvent event, @NotNull Key outputType) {
+      String eventText = event.getText();
       if (LOG.isDebugEnabled()) {
-        LOG.debug(outputType + ": " + event.getText());
+        LOG.debug(outputType + ": " + eventText);
       }
-      if (StringUtil.startsWith(event.getText(), "Listening for the IDE connection at")) {
+      if (StringUtil.startsWith(eventText, PROCESS_START_MARKER_TEXT) ||
+          StringUtil.startsWith(eventText, "##teamcity") && StringUtil.contains(eventText, PROCESS_START_MARKER_TEXT)) {
         LOG.debug("Marking as ready and removing listener");
         ProcessHandler processHandler = event.getProcessHandler();
         markAsReady(processHandler);
