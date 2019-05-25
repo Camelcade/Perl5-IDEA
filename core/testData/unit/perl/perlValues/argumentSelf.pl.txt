@@ -1,0 +1,13 @@
+sub something{
+  my $self = $_[0];
+
+  $se<caret>lf;
+}
+----------
+$self
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 38 in argumentSelf.pl
+main
+----------
+Resolved
+----------
+main

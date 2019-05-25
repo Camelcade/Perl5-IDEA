@@ -1,0 +1,5 @@
+sub something{
+  my Foo::Bar $var = $_[0];
+
+  $v<caret>ar;
+}

@@ -1,0 +1,5 @@
+sub something{
+  my $self = $_[0];
+
+  $se<caret>lf;
+}

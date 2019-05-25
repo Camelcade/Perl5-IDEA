@@ -29,6 +29,14 @@ public class PerlValuesTest extends PerlLightTestCase {
 
   public void testArgumentResolve() {doTest();}
 
+  public void testArgumentAnnotated() {doTest();}
+
+  public void testArgumentFirst() {doTest();}
+
+  public void testArgumentSelf() {doTest();}
+
+  public void testArgumentTyped() {doTest();}
+
   public void testBlessContext() {doTest();}
 
   public void testBlessContextDeferred() {doTest();}

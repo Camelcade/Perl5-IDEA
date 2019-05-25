@@ -1,0 +1,15 @@
+sub something{
+  #@type Foo::Bar
+  my $var = $_[0];
+
+  $v<caret>ar;
+}
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 55 in argumentAnnotated.pl
+OneOf[ArrayItem: SUB_ARGUMENTS[0],
+Foo::Bar]
+----------
+Resolved
+----------
+Foo::Bar
