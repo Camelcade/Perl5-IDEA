@@ -27,7 +27,7 @@ import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager.ARRAY_ELEMENT_ID;
 
 public final class PerlArrayElementValue extends PerlParametrizedOperationValue {
-  PerlArrayElementValue(@NotNull PerlValue arrayValue, @NotNull PerlValue indexValue) {
+  private PerlArrayElementValue(@NotNull PerlValue arrayValue, @NotNull PerlValue indexValue) {
     super(arrayValue, indexValue);
     if (arrayValue.isDeterministic() && indexValue.isDeterministic()) {
       LOG.error("Bot array and index are deterministic and should be computed in-place: " +
@@ -65,6 +65,7 @@ public final class PerlArrayElementValue extends PerlParametrizedOperationValue 
     return ARRAY_ELEMENT_ID;
   }
 
+  @NotNull
   public PerlValue getArray() {
     return getBaseValue();
   }
