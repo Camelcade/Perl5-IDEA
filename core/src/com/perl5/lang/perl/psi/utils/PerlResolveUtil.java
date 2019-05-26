@@ -25,6 +25,7 @@ import com.intellij.psi.*;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.PairProcessor;
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
@@ -187,10 +188,38 @@ public class PerlResolveUtil {
     String variableName = variable.getName();
     String namespaceName = variable.getExplicitNamespaceName();
     PerlVariableType actualType = variable.getActualType();
-    PsiElement finalStopElement = stopElement;
 
-    return getValueFromControlFlow(variable, namespaceName, variableName, actualType, lexicalDeclaration, finalStopElement);
+    return getValueFromControlFlow(variable, namespaceName, variableName, actualType, lexicalDeclaration, stopElement);
   }
+
+  @NotNull
+  public static PerlValue inferVariableValue(@NotNull PerlBuiltInVariable variable, @NotNull PsiElement contextElement) {
+    return getValueFromControlFlow(
+      contextElement,
+      variable.getNamespaceName(),
+      variable.getVariableName(),
+      variable.getActualType(),
+      null,
+      computeStopElement(variable, contextElement)
+    );
+  }
+
+  /**
+   * Computes stop element for resolving a built in variable. For {@code @_} it's a wrapping sub. For {@code $_} it may vary: wrapping
+   * iterator or smth.
+   */
+  @Nullable
+  private static PsiElement computeStopElement(@NotNull PerlBuiltInVariable variable, @NotNull PsiElement contextElement) {
+    if (!variable.getName().equals("_")) {
+      return null;
+    }
+    if (variable.getActualType() == PerlVariableType.ARRAY) {
+      // fixme this actually won't work, because this node is in the end of CFG
+      return PsiTreeUtil.getParentOfType(contextElement, PerlSubDefinitionElement.class, PerlSubExpr.class);
+    }
+    return null;
+  }
+
 
   /**
    * Building a control flow for the {@code element} and attempts to find a value of variable
