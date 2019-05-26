@@ -1,2 +1,2 @@
 print(<caret>);
-No element
+<[$file_handle]>, [@list]

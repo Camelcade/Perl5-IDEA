@@ -1,0 +1,13 @@
+my $var = shift;
+$var = shift @ARGV;
+$var = pop @ARGV;
+$var = pop;
+unshift @ARGV, @ARGV;
+push @ARGV, @ARGV;
+
+$var = shift();
+$var = shift(@ARGV);
+$var = pop(@ARGV);
+$var = pop();
+unshift(@ARGV, @ARGV);
+push(@ARGV, @ARGV);

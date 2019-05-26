@@ -722,6 +722,11 @@ delete_expr ::= 'delete' unary_expr {pin=1}
 splice_expr ::= 'splice' parse_list_expr {pin=1}
 bless_expr ::= 'bless' parse_list_expr {pin=1}
 
+array_unshift_expr ::= 'unshift' list_call_arguments {pin=1}
+array_push_expr ::= 'push' list_call_arguments {pin=1}
+array_shift_expr ::= 'shift' optional_unary_call_arguments {pin=1}
+array_pop_expr ::= 'pop' optional_unary_call_arguments {pin=1}
+
 private lnr_param ::= label_expr | expr // fixme scalar_expr ?
 private goto_param ::= label_expr | code_primitive  !'(' | expr
 
@@ -790,6 +795,7 @@ private parse_scalar_expr ::= <<parseExpressionLevel 3>>
 
 // Unary expression argument
 private unary_expr ::= <<parseExpressionLevel 12>>
+private optional_unary_expr ::= [unary_expr]
 
 private single_argument_expr ::= <<parseExpressionLevel 19>>
 
@@ -811,6 +817,10 @@ term_expr ::=
     | delete_expr
     | splice_expr
     | bless_expr
+    | array_shift_expr
+    | array_unshift_expr
+    | array_push_expr
+    | array_pop_expr
     | wantarray_expr
     | exit_expr
     | hash_variable
@@ -1104,6 +1114,9 @@ meta call_arguments ::= <<x1>>
 private default_parenthesised_call_arguments ::= <<parenthesised_call_arguments optional_expression>>
 meta parenthesised_call_arguments ::= <<parse_parenthesized_expression <<x1>>>> !'['
 private optional_expression ::= [expr]
+private meta any_call_arguments ::= <<parenthesised_call_arguments <<x1>>>> | <<call_arguments <<x1>>>>
+private list_call_arguments ::= <<any_call_arguments parse_list_expr>>
+private optional_unary_call_arguments ::= [<<parenthesised_call_arguments optional_unary_expr>> | <<call_arguments <<unary_expr>>>>]
 
 private regular_nested_call ::= <<nested_call regular_nested_call_tokens optional_expression>>
 private regular_nested_call_tokens ::= [QUALIFYING_PACKAGE] SUB_NAME

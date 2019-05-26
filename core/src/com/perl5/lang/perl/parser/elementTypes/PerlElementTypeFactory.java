@@ -297,6 +297,14 @@ public class PerlElementTypeFactory {
         return new PerlElementTypeEx(name, PsiPerlReplacementRegexImpl.class);
       case "RETURN_EXPR":
         return new PerlElementTypeEx(name, PsiPerlReturnExprImpl.class);
+      case "ARRAY_SHIFT_EXPR":
+        return new PerlElementTypeEx(name, PsiPerlArrayShiftExprImpl.class);
+      case "ARRAY_UNSHIFT_EXPR":
+        return new PerlElementTypeEx(name, PsiPerlArrayUnshiftExprImpl.class);
+      case "ARRAY_PUSH_EXPR":
+        return new PerlElementTypeEx(name, PsiPerlArrayPushExprImpl.class);
+      case "ARRAY_POP_EXPR":
+        return new PerlElementTypeEx(name, PsiPerlArrayPopExprImpl.class);
       case "SCALAR_EXPR":
         return new PerlElementTypeEx(name, PsiPerlScalarExprImpl.class);
       case "DELETE_EXPR":

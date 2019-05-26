@@ -26,6 +26,8 @@ public class PerlSyntaxHighlightingTest extends PerlLightTestCase {
     return "testData/highlighting/perl/syntax";
   }
 
+  public void testShiftLike() {doTest();}
+
   public void testSpliceExpr() {doTest();}
 
   public void testUndefInDeclaration() {doTest();}

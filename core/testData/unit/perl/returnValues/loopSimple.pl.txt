@@ -6,4 +6,4 @@
   $search_dir;
 }
 ----------
-OneOf: [scalar main::dirname(scalar main::shift()), scalar main::shift()]
+scalar main::dirname(UNKNOWN_VALUE)

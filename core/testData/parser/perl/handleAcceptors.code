@@ -23,7 +23,6 @@ somesub IF, blah;
 
 print OF(1,2,3);
 print sprintf "here we go";
-print Foo->method();
 print Foo::method();
 print Foo::->method();
 print method, "text";

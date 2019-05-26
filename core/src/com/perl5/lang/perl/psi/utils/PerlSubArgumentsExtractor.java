@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -94,8 +94,8 @@ public class PerlSubArgumentsExtractor implements Processor<PsiPerlStatement>, P
 
             if (SHIFT_PATTERN.accepts(rightSideElement)) // shift on the left side
             {
-              assert rightSideElement instanceof PsiPerlSubCallExpr;
-              PsiPerlCallArguments callArguments = ((PsiPerlSubCallExpr)rightSideElement).getCallArguments();
+              assert rightSideElement instanceof PsiPerlArrayShiftExpr;
+              PsiPerlCallArguments callArguments = ((PsiPerlArrayShiftExpr)rightSideElement).getCallArguments();
               List<PsiPerlExpr> argumentsList =
                 callArguments == null ? null : ((PsiPerlCallArgumentsImpl)callArguments).getArgumentsList();
               if (argumentsList == null || argumentsList.isEmpty() || ALL_ARGUMENTS_PATTERN.accepts(argumentsList.get(0))) {

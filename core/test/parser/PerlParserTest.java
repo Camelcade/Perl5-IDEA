@@ -25,6 +25,8 @@ public class PerlParserTest extends PerlParserTestBase {
     return "testData/parser/perl";
   }
 
+  public void testShiftPopPushUnshift() {doTest();}
+
   public void testCpanfile() {
     String ext = myFileExt;
     try {

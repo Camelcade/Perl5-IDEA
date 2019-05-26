@@ -24,6 +24,7 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ArrayUtil;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
@@ -31,6 +32,7 @@ import com.perl5.lang.perl.psi.impl.PsiPerlCallArgumentsImpl;
 import com.perl5.lang.perl.psi.impl.PsiPerlCommaSequenceExprImpl;
 import com.perl5.lang.perl.psi.impl.PsiPerlParenthesisedExprImpl;
 import com.perl5.lang.perl.psi.mixins.PerlMethodMixin;
+import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import org.jetbrains.annotations.NotNull;
@@ -168,7 +170,7 @@ public class PerlParameterInfoHandler implements ParameterInfoHandler<PsiPerlCal
 
   @Nullable
   private static PerlParameterInfo[] getTargetParameterInfo(@Nullable PsiElement target) {
-    if (target == null || !(target instanceof PerlSubDefinitionElement)) {
+    if (!(target instanceof PerlSubDefinitionElement)) {
       return null;
     }
     return PerlParameterInfo.wrapArguments(((PerlSubDefinitionElement)target).getSubArgumentsListWithoutSelf());
@@ -198,6 +200,9 @@ public class PerlParameterInfoHandler implements ParameterInfoHandler<PsiPerlCal
         if (!parameterInfoRef.isNull()) {
           return parameterInfoRef.get();
         }
+      }
+      else if (PerlTokenSets.CUSTOM_EXPR_KEYWORDS.contains(PsiUtilCore.getElementType(run))) {
+        return getTargetParameterInfo(PerlImplicitDeclarationsService.getInstance(run.getProject()).getCoreSub(run.getText()));
       }
       run = run.getPrevSibling();
     }

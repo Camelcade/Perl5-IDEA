@@ -1,2 +1,2 @@
 printf(<caret>);
-No element
+<[$file_handle]>, [$format], [@list]

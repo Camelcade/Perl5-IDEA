@@ -111,6 +111,20 @@ public class PerlFormatterSpacingTest extends PerlFormatterTestCase {
     doTestSingleSource("declarations");
   }
 
+  public void testShiftPopSpaceWithinTrue() {
+    getSettings().SPACE_WITHIN_METHOD_CALL_PARENTHESES = true;
+    doTestShiftLike();
+  }
+
+  public void testShiftPopSpaceWithinFalse() {
+    getSettings().SPACE_WITHIN_METHOD_CALL_PARENTHESES = false;
+    doTestShiftLike();
+  }
+
+  private void doTestShiftLike() {
+    doTestSingleSource("shiftLike");
+  }
+
   public void testPerlTidy() {
     initWithPerlTidy();
     assertNoErrorElements();

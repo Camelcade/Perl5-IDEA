@@ -239,20 +239,6 @@ Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
       PsiElement(Perl5: print)('print')
-      PsiPerlDerefExprImpl(Perl5: DEREF_EXPR)
-        PsiPerlPackageExprImpl(Perl5: PACKAGE_EXPR)
-          PerlNamespaceElementImpl(Perl5: package::name)('Foo')
-        PsiElement(Perl5: ->)('->')
-        PsiPerlNestedCallImpl(Perl5: NESTED_CALL)
-          PsiPerlMethodImpl(Perl5: METHOD)
-            PerlSubNameElementImpl(Perl5: subname)('method')
-          PsiPerlParenthesisedCallArgumentsImpl(Perl5: PARENTHESISED_CALL_ARGUMENTS)
-            PsiElement(Perl5: ()('(')
-            PsiElement(Perl5: ))(')')
-    PsiElement(Perl5: ;)(';')
-  PsiPerlStatementImpl(Perl5: STATEMENT)
-    PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
-      PsiElement(Perl5: print)('print')
       PsiPerlSubCallExprImpl(Perl5: SUB_CALL_EXPR)
         PsiPerlMethodImpl(Perl5: METHOD)
           PerlNamespaceElementImpl(Perl5: package::name::)('Foo::')
@@ -364,5 +350,5 @@ Perl5
 --------------------------------------------------------------------------------
 Subtree: Perl5 POD (Perl5 POD)
 POD file
-  PsiElement(Perl5 POD: POD_OUTER)('print sprintf "here we go";\n\nprint OF "something";\nsay OF "something";\nprintf OF "something";\n\nprint OF, "something";\nsay OF, "something";\nprintf OF, "something";\n\n\nclose STDERR;\nclose (STDERR);\nsyswrite(STDERR, 'Caught a SIG', 12);\nsyswrite STDERR, 'Caught a SIG', 12;\n\nopen (IF, 'something');\nopen IF, 'something';\nopen Foo::->method();\nopen Foo::method();\n\nsomesub IF, blah;\n\nprint OF(1,2,3);\nprint sprintf "here we go";\nprint Foo->method();\nprint Foo::method();\nprint Foo::->method();\nprint method, "text";\n\nopen STDERR, ">&" . fileno DEV_NULL\n\tor die "CheckLib: $! redirecting STDERR to null handle";\n\nprint STDERR qq(some text here);\nprint STDERR & name, " measured in $_[4]\n";')
+  PsiElement(Perl5 POD: POD_OUTER)('print sprintf "here we go";\n\nprint OF "something";\nsay OF "something";\nprintf OF "something";\n\nprint OF, "something";\nsay OF, "something";\nprintf OF, "something";\n\n\nclose STDERR;\nclose (STDERR);\nsyswrite(STDERR, 'Caught a SIG', 12);\nsyswrite STDERR, 'Caught a SIG', 12;\n\nopen (IF, 'something');\nopen IF, 'something';\nopen Foo::->method();\nopen Foo::method();\n\nsomesub IF, blah;\n\nprint OF(1,2,3);\nprint sprintf "here we go";\nprint Foo::method();\nprint Foo::->method();\nprint method, "text";\n\nopen STDERR, ">&" . fileno DEV_NULL\n\tor die "CheckLib: $! redirecting STDERR to null handle";\n\nprint STDERR qq(some text here);\nprint STDERR & name, " measured in $_[4]\n";')
 --------------------------------------------------------------------------------

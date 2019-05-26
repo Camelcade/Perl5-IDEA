@@ -148,6 +148,11 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
     RESERVED_UNDEF,
     RESERVED_RETURN,
 
+    RESERVED_SHIFT,
+    RESERVED_UNSHIFT,
+    RESERVED_PUSH,
+    RESERVED_POP,
+
     RESERVED_SCALAR,
     RESERVED_KEYS,
     RESERVED_VALUES,

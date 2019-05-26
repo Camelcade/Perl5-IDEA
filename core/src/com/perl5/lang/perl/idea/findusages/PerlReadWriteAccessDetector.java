@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,6 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
-import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.mixins.PerlCallArgumentsMixin;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
@@ -32,7 +31,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Set;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 
@@ -64,8 +62,8 @@ public class PerlReadWriteAccessDetector extends ReadWriteAccessDetector {
     HASH_ELEMENT, HASH_SLICE
   );
 
-  private static final Set<String> LIST_MODIFYING_SUBS = ContainerUtil.set(
-    "CORE::push", "CORE::pop", "CORE::unshift", "CORE::shift", "CORE::splice"
+  private static final TokenSet LIST_MODIFYING_EXPR = TokenSet.create(
+    SPLICE_EXPR, BLESS_EXPR, ARRAY_PUSH_EXPR, ARRAY_POP_EXPR, ARRAY_SHIFT_EXPR, ARRAY_UNSHIFT_EXPR
   );
 
   @Override
@@ -115,7 +113,7 @@ public class PerlReadWriteAccessDetector extends ReadWriteAccessDetector {
         firstArgument = children.length > 0 ? children[0] : null;
       }
 
-      if (firstArgument != null && PsiTreeUtil.isAncestor(firstArgument, originalElement, false)) {
+      if (PsiTreeUtil.isAncestor(firstArgument, originalElement, false)) {
         return getVariableAccess(parentExpression, originalElement);
       }
     }
@@ -146,25 +144,10 @@ public class PerlReadWriteAccessDetector extends ReadWriteAccessDetector {
     else if (parentExpressionType == DELETE_EXPR) {
       return Access.ReadWrite;
     }
-    else if (parentExpressionType == SPLICE_EXPR || parentExpressionType == BLESS_EXPR) {
+    else if (LIST_MODIFYING_EXPR.contains(parentExpressionType)) {
       List<PsiElement> children = PerlArrayUtil.collectListElements(expression);
       if (children.size() > 0 && PsiTreeUtil.isAncestor(children.get(0), originalElement, false)) {
         return Access.ReadWrite;
-      }
-    }
-    else if (parentExpression instanceof PsiPerlSubCallExpr) {
-      PsiPerlMethod method = ((PsiPerlSubCallExpr)parentExpression).getMethod();
-      if (method != null) {
-        PerlSubNameElement subNameElement = method.getSubNameElement();
-        if (subNameElement != null) {
-          for (PsiReference reference : subNameElement.getReferences()) {
-            PsiElement target = reference.resolve();
-            if (target instanceof PerlSubDefinitionElement &&
-                LIST_MODIFYING_SUBS.contains(((PerlSubDefinitionElement)target).getCanonicalName())) {
-              return Access.ReadWrite;
-            }
-          }
-        }
       }
     }
 
