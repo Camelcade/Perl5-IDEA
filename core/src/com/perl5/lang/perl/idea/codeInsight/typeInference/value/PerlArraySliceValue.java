@@ -93,7 +93,6 @@ public class PerlArraySliceValue extends PerlParametrizedOperationValue {
     if (arrayValue.isDeterministic() && indexValue.isDeterministic()) {
       return PerlValuesBuilder.convert(arrayValue, indexValue, PerlArraySliceValue::computeStrictResolve);
     }
-    PerlValue resolvedValue = computeResolve(arrayValue, indexValue);
-    return !PerlValue.isUnknown(resolvedValue) ? resolvedValue : new PerlArraySliceValue(arrayValue, indexValue);
+    return new PerlArraySliceValue(arrayValue, indexValue);
   }
 }

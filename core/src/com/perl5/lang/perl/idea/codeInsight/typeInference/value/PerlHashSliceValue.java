@@ -94,8 +94,6 @@ public class PerlHashSliceValue extends PerlParametrizedOperationValue {
     if (hashValue.isDeterministic() && keysValue.isDeterministic()) {
       return PerlValuesBuilder.convert(hashValue, keysValue, PerlHashSliceValue::computeStrictResolve);
     }
-
-    PerlValue resolvedValue = computeResolve(hashValue, keysValue);
-    return !PerlValue.isUnknown(resolvedValue) ? resolvedValue : new PerlHashSliceValue(hashValue, keysValue);
+    return new PerlHashSliceValue(hashValue, keysValue);
   }
 }
