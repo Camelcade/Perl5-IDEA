@@ -436,7 +436,7 @@
     implements("no_statement")="com.perl5.lang.perl.psi.PerlNoStatement"
     stubClass("no_statement")="com.perl5.lang.perl.psi.stubs.imports.PerlUseStatementStub"
 
-	mixin("call_arguments")="com.perl5.lang.perl.psi.mixins.PerlCallArgumentsMixin"
+	mixin("call_arguments")="com.perl5.lang.perl.psi.mixins.PerlCallArguments"
 	extends("parenthesised_call_arguments")=call_arguments
 
     extends("use_statement.*")=statement

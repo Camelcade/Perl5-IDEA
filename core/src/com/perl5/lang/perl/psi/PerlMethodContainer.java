@@ -20,7 +20,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
-import com.perl5.lang.perl.psi.mixins.PerlCallArgumentsMixin;
+import com.perl5.lang.perl.psi.mixins.PerlCallArguments;
 import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -52,6 +52,6 @@ public interface PerlMethodContainer extends PsiElement, PerlValuableEntity {
     if (callArguments == null) {
       return Collections.emptyList();
     }
-    return ((PerlCallArgumentsMixin)callArguments).getArgumentsList();
+    return ((PerlCallArguments)callArguments).getArgumentsList();
   }
 }

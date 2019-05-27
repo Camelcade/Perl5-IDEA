@@ -24,7 +24,7 @@ import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.mixins.PerlCallArgumentsMixin;
+import com.perl5.lang.perl.psi.mixins.PerlCallArguments;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.util.PerlArrayUtil;
 import org.jetbrains.annotations.NotNull;
@@ -106,7 +106,7 @@ public class PerlReadWriteAccessDetector extends ReadWriteAccessDetector {
     if (VARIABLE_FALL_THROUGH_ELEMENTS.contains(parentExpressionType)) {
       return getVariableAccess(parentExpression, originalElement);
     }
-    if (parentExpression instanceof PerlCallArgumentsMixin) {
+    if (parentExpression instanceof PerlCallArguments) {
       PsiElement firstArgument = expression;
       if (expression instanceof PsiPerlCommaSequenceExpr) {
         PsiElement[] children = expression.getChildren();

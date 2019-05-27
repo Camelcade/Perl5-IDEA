@@ -27,8 +27,8 @@ import java.util.Collections;
 import java.util.List;
 
 
-public class PerlCallArgumentsMixin extends PerlCompositeElementImpl {
-  public PerlCallArgumentsMixin(@NotNull ASTNode node) {
+public class PerlCallArguments extends PerlCompositeElementImpl {
+  public PerlCallArguments(@NotNull ASTNode node) {
     super(node);
   }
 

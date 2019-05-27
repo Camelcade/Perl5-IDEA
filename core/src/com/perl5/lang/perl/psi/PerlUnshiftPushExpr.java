@@ -17,7 +17,7 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.psi.mixins.PerlCallArgumentsMixin;
+import com.perl5.lang.perl.psi.mixins.PerlCallArguments;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -37,7 +37,7 @@ public interface PerlUnshiftPushExpr extends PsiPerlExpr {
     if (callArguments == null) {
       return null;
     }
-    List<PsiElement> argumentsList = ((PerlCallArgumentsMixin)callArguments).getArgumentsList();
+    List<PsiElement> argumentsList = ((PerlCallArguments)callArguments).getArgumentsList();
     return argumentsList.isEmpty() ? null : argumentsList.get(0);
   }
 
@@ -50,7 +50,7 @@ public interface PerlUnshiftPushExpr extends PsiPerlExpr {
     if (callArguments == null) {
       return Collections.emptyList();
     }
-    List<PsiElement> argumentsList = ((PerlCallArgumentsMixin)callArguments).getArgumentsList();
+    List<PsiElement> argumentsList = ((PerlCallArguments)callArguments).getArgumentsList();
     if (argumentsList.size() < 2) {
       return Collections.emptyList();
     }
