@@ -1,0 +1,12 @@
+@other = qw/one two three/;
+my @array = (1,2);
+unshift @array, @other;
+@ar<caret>ray;
+----------
+@array
+PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 71 in unshiftValueArrayNonEmpty.pl
+Array(one, two, three, 1, 2)
+----------
+Resolved
+----------
+Array(one, two, three, 1, 2)

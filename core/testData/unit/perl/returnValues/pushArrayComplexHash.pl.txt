@@ -1,0 +1,9 @@
+<caret>sub somesub{
+  my @array = @_;
+  my %kwargs = @_;
+  push @array, @_[1,2];
+  unshift @array, @kwargs{qw/key1 key2/};
+  @array;
+}
+----------
+Array: [HashSlice: Hash: [SUB_ARGUMENTS]{Array: [key1, key2]}, SUB_ARGUMENTS, ArraySlice: SUB_ARGUMENTS[Array: [1, 2]]]

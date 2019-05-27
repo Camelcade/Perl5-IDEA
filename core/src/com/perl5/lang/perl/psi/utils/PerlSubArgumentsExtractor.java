@@ -96,7 +96,7 @@ public class PerlSubArgumentsExtractor implements Processor<PsiPerlStatement>, P
             {
               assert rightSideElement instanceof PsiPerlArrayShiftExpr;
               PsiPerlCallArguments callArguments = ((PsiPerlArrayShiftExpr)rightSideElement).getCallArguments();
-              List<PsiPerlExpr> argumentsList =
+              List<PsiElement> argumentsList =
                 callArguments == null ? null : ((PsiPerlCallArgumentsImpl)callArguments).getArgumentsList();
               if (argumentsList == null || argumentsList.isEmpty() || ALL_ARGUMENTS_PATTERN.accepts(argumentsList.get(0))) {
                 addArgument = true;

@@ -1,0 +1,4 @@
+@other = qw/one two three/;
+my @array = (1,2,3);
+$var = push @array, @other;
+$v<caret>ar;

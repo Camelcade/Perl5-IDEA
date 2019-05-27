@@ -1,0 +1,6 @@
+sub somesub{
+  my @array = @_;
+  push @array, @_[1,2];
+  unshift @array, @array[-1,6];
+  @array;
+}

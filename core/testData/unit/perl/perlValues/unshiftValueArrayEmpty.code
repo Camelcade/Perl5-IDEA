@@ -1,0 +1,4 @@
+@other = qw//;
+my @array = (1,2);
+unshift @array, @other;
+@ar<caret>ray;

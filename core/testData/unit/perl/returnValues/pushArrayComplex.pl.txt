@@ -1,0 +1,8 @@
+<caret>sub somesub{
+  my @array = @_;
+  push @array, @_[1,2];
+  unshift @array, @array[-1,6];
+  @array;
+}
+----------
+Array: [ArraySlice: Array: [SUB_ARGUMENTS, ArraySlice: SUB_ARGUMENTS[Array: [1, 2]]][Array: [-1, 6]], SUB_ARGUMENTS, ArraySlice: SUB_ARGUMENTS[Array: [1, 2]]]

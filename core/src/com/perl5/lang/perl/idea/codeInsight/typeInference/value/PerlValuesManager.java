@@ -74,6 +74,8 @@ public final class PerlValuesManager {
   static final int ARRAY_SLICE_ID = id++;
   static final int ARRAY_CAST_ID = id++;
   static final int SPLICE_ID = id++;
+  static final int UNSHIFT_ID = id++;
+  static final int PUSH_ID = id++;
 
   static final int HASH_ID = id++;
   static final int HASH_ELEMENT_VALUE = id++;
@@ -173,6 +175,12 @@ public final class PerlValuesManager {
     }
     else if (valueId == SCALAR_DEREFERENCE_ID) {
       return new PerlScalarDereferenceValue(dataStream);
+    }
+    else if (valueId == UNSHIFT_ID) {
+      return new PerlUnshiftValue(dataStream);
+    }
+    else if (valueId == PUSH_ID) {
+      return new PerlPushValue(dataStream);
     }
     throw new RuntimeException("Don't know how to deserialize a value: " + valueId);
   }
@@ -291,6 +299,12 @@ public final class PerlValuesManager {
       PsiElement blessExpression = ((PsiPerlBlessExpr)element).getBlessExpression();
       PerlValue blessValue = blessExpression != null ? from(blessExpression) : PerlPackageUtil.getContextType(element);
       return PerlBlessedValue.create(targetValue, blessValue);
+    }
+    else if (element instanceof PsiPerlArrayUnshiftExpr) {
+      return PerlScalarContextValue.create(PerlUnshiftValue.create((PsiPerlArrayUnshiftExpr)element));
+    }
+    else if (element instanceof PsiPerlArrayPushExpr) {
+      return PerlScalarContextValue.create(PerlPushValue.create((PsiPerlArrayPushExpr)element));
     }
     return UNKNOWN_VALUE;
   }

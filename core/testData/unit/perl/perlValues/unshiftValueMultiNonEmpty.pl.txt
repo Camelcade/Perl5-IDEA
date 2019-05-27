@@ -1,0 +1,11 @@
+my @array = (1,2);
+unshift @array, 42, 69;
+@ar<caret>ray;
+----------
+@array
+PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 43 in unshiftValueMultiNonEmpty.pl
+Array(42, 69, 1, 2)
+----------
+Resolved
+----------
+Array(42, 69, 1, 2)

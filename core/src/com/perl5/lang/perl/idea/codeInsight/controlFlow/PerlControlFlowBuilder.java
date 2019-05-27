@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -392,6 +392,18 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
 
       TransparentInstruction anchor = startTransparentNode(o, "anchor");
       catchesTails.forEach(tail -> addEdge(tail, anchor));
+    }
+
+    @Override
+    public void visitArrayPushExpr(@NotNull PsiPerlArrayPushExpr o) {
+      acceptSafe(o.getCallArguments());
+      addNodeAndCheckPending(new PerlPushInstruction(PerlControlFlowBuilder.this, o));
+    }
+
+    @Override
+    public void visitArrayUnshiftExpr(@NotNull PsiPerlArrayUnshiftExpr o) {
+      acceptSafe(o.getCallArguments());
+      addNodeAndCheckPending(new PerlUnshiftInstruction(PerlControlFlowBuilder.this, o));
     }
 
     @Override

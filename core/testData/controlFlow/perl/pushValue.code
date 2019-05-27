@@ -1,0 +1,1 @@
+$var = push @ARGV, one => 42;

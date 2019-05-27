@@ -1,0 +1,11 @@
+my @array = (1,2);
+push @array, 42;
+@ar<caret>ray;
+----------
+@array
+PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 36 in pushValueNonEmpty.pl
+Array(1, 2, 42)
+----------
+Resolved
+----------
+Array(1, 2, 42)

@@ -17,11 +17,13 @@
 package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.PsiPerlExpr;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
+import com.perl5.lang.perl.util.PerlArrayUtil;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collections;
 import java.util.List;
 
 
@@ -31,7 +33,8 @@ public class PerlCallArgumentsMixin extends PerlCompositeElementImpl {
   }
 
   @NotNull
-  public List<PsiPerlExpr> getArgumentsList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PsiPerlExpr.class);
+  public List<PsiElement> getArgumentsList() {
+    PsiPerlExpr argumentExpression = findChildByClass(PsiPerlExpr.class);
+    return argumentExpression == null ? Collections.emptyList() : PerlArrayUtil.collectListElements(argumentExpression);
   }
 }

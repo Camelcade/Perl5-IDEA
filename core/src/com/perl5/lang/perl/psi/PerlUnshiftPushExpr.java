@@ -17,11 +17,7 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
 import com.perl5.lang.perl.psi.mixins.PerlCallArgumentsMixin;
-import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -29,29 +25,38 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * fixme find a better name. This is a basically PerlCallExpression
+ * Represents {@code unshift} and {@code push} expressions common logic
  */
-public interface PerlMethodContainer extends PsiElement, PerlValuableEntity {
+public interface PerlUnshiftPushExpr extends PsiPerlExpr {
+  /**
+   * @return element representing target of this operation, first argument
+   */
   @Nullable
-  PsiPerlMethod getMethod();
-
-  @NotNull
-  @Override
-  default PerlValue computePerlValue() {
-    return PerlValuesManager.from(getMethod());
+  default PsiElement getTarget() {
+    PsiPerlCallArguments callArguments = getCallArguments();
+    if (callArguments == null) {
+      return null;
+    }
+    List<PsiElement> argumentsList = ((PerlCallArgumentsMixin)callArguments).getArgumentsList();
+    return argumentsList.isEmpty() ? null : argumentsList.get(0);
   }
 
-  @Nullable
-  default PsiPerlCallArguments getCallArguments() {
-    return PsiTreeUtil.getChildOfType(this, PsiPerlCallArguments.class);
-  }
-
+  /**
+   * @return list of elements to push or unshift to the {@link #getTarget() target}
+   */
   @NotNull
-  default List<PsiElement> getCallArgumentsList() {
+  default List<PsiElement> getModification() {
     PsiPerlCallArguments callArguments = getCallArguments();
     if (callArguments == null) {
       return Collections.emptyList();
     }
-    return ((PerlCallArgumentsMixin)callArguments).getArgumentsList();
+    List<PsiElement> argumentsList = ((PerlCallArgumentsMixin)callArguments).getArgumentsList();
+    if (argumentsList.size() < 2) {
+      return Collections.emptyList();
+    }
+    return argumentsList.subList(1, argumentsList.size());
   }
+
+  @Nullable
+  PsiPerlCallArguments getCallArguments();
 }

@@ -722,8 +722,8 @@ delete_expr ::= 'delete' unary_expr {pin=1}
 splice_expr ::= 'splice' parse_list_expr {pin=1}
 bless_expr ::= 'bless' parse_list_expr {pin=1}
 
-array_unshift_expr ::= 'unshift' list_call_arguments {pin=1}
-array_push_expr ::= 'push' list_call_arguments {pin=1}
+array_unshift_expr ::= 'unshift' list_call_arguments {pin=1 implements="com.perl5.lang.perl.psi.PerlUnshiftPushExpr"}
+array_push_expr ::= 'push' list_call_arguments {pin=1 implements="com.perl5.lang.perl.psi.PerlUnshiftPushExpr"}
 array_shift_expr ::= 'shift' optional_unary_call_arguments {pin=1}
 array_pop_expr ::= 'pop' optional_unary_call_arguments {pin=1}
 

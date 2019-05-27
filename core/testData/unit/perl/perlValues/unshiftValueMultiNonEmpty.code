@@ -1,0 +1,3 @@
+my @array = (1,2);
+unshift @array, 42, 69;
+@ar<caret>ray;

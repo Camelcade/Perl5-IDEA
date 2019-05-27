@@ -1,0 +1,8 @@
+<caret>sub somesub{
+  my @array = @_;
+  push @array, qw/last one/;
+  unshift @array, qw/first one/;
+  @array;
+}
+----------
+Array: [first, one, SUB_ARGUMENTS, last, one]

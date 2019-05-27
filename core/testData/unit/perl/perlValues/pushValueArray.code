@@ -1,0 +1,4 @@
+@other = qw/one two three/;
+my @array = ();
+push @array, @other;
+@ar<caret>ray;

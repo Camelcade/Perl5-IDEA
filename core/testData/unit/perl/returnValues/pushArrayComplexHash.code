@@ -1,0 +1,7 @@
+sub somesub{
+  my @array = @_;
+  my %kwargs = @_;
+  push @array, @_[1,2];
+  unshift @array, @kwargs{qw/key1 key2/};
+  @array;
+}

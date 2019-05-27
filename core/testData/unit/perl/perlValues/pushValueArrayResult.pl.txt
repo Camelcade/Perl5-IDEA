@@ -1,0 +1,12 @@
+@other = qw/one two three/;
+my @array = (1,2,3);
+$var = push @array, @other;
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 77 in pushValueArrayResult.pl
+6
+----------
+Resolved
+----------
+6

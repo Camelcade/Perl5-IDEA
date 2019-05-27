@@ -29,8 +29,8 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.PairProcessor;
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
-import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlAssignInstruction;
 import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlControlFlowBuilder;
+import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlMutationInstruction;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlOneOfValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues;
@@ -263,7 +263,7 @@ public class PerlResolveUtil {
     }
     PerlOneOfValue.Builder valueBuilder = PerlOneOfValue.builder();
     ControlFlowUtil.iteratePrev(currentInstructionIndex, instructions, currentInstruction -> {
-      if (!(currentInstruction instanceof PerlAssignInstruction)) {
+      if (!(currentInstruction instanceof PerlMutationInstruction)) {
         PsiElement instructionElement = currentInstruction.getElement();
         if ((instructionElement instanceof PerlSubDefinitionElement || instructionElement instanceof PerlSubExpr) &&
             lexicalDeclaration instanceof PerlBuiltInVariable && "_".equals(variableName) && actualType == PerlVariableType.ARRAY) {
@@ -285,7 +285,7 @@ public class PerlResolveUtil {
       if (currentInstruction.num() > currentInstructionIndex) {
         return NEXT;
       }
-      PsiElement assignee = ((PerlAssignInstruction)currentInstruction).getLeftSide();
+      PsiElement assignee = ((PerlMutationInstruction)currentInstruction).getLeftSide();
       if (!(assignee instanceof PerlVariable) || ((PerlVariable)assignee).getActualType() != actualType) {
         return NEXT;
       }
@@ -301,7 +301,7 @@ public class PerlResolveUtil {
           lexicalDeclaration != null &&
           (Objects.equals(lexicalDeclaration, assigneeDeclaration) || Objects.equals(lexicalDeclaration, assignee.getParent()))
       ) {
-        valueBuilder.addVariant(PerlValuesManager.from(assignee, ((PerlAssignInstruction)currentInstruction).getRightSide()));
+        valueBuilder.addVariant(((PerlMutationInstruction)currentInstruction).createValue());
       }
       return CONTINUE;
     });

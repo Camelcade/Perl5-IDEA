@@ -1,0 +1,3 @@
+my @array = ();
+push @array, 42, 69;
+@ar<caret>ray;

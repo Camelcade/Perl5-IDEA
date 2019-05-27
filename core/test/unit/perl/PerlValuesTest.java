@@ -27,6 +27,38 @@ public class PerlValuesTest extends PerlLightTestCase {
     return "testData/unit/perl/perlValues";
   }
 
+  public void testPushValue() {doTest();}
+
+  public void testPushValueArrayEmpty() {doTest();}
+
+  public void testPushValueArray() {doTest();}
+
+  public void testPushValueArrayResult() {doTest();}
+
+  public void testPushValueMulti() {doTest();}
+
+  public void testPushValueNonEmpty() {doTest();}
+
+  public void testPushValueArrayNonEmpty() {doTest();}
+
+  public void testPushValueMultiNonEmpty() {doTest();}
+
+  public void testUnshiftValue() {doTest();}
+
+  public void testUnshiftValueArrayEmpty() {doTest();}
+
+  public void testUnshiftValueArray() {doTest();}
+
+  public void testUnshiftValueArrayResult() {doTest();}
+
+  public void testUnshiftValueMulti() {doTest();}
+
+  public void testUnshiftValueNonEmpty() {doTest();}
+
+  public void testUnshiftValueArrayNonEmpty() {doTest();}
+
+  public void testUnshiftValueMultiNonEmpty() {doTest();}
+  
   public void testArgumentResolve() {doTest();}
 
   public void testArgumentAnnotated() {doTest();}
