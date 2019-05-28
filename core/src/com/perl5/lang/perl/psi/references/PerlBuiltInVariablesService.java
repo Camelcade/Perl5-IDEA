@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,6 +35,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
+import java.util.Objects;
 
 public class PerlBuiltInVariablesService {
   private final PsiManager myPsiManager;
@@ -128,5 +129,21 @@ public class PerlBuiltInVariablesService {
   @NotNull
   public static PerlBuiltInVariablesService getInstance(@NotNull Project project) {
     return ServiceManager.getService(project, PerlBuiltInVariablesService.class);
+  }
+
+  /**
+   * @return {@code @_}
+   */
+  @NotNull
+  public static PerlBuiltInVariable getImplicitArray(@NotNull Project project) {
+    return Objects.requireNonNull(getInstance(project).getArray("_"));
+  }
+
+  /**
+   * @return {@code $_}
+   */
+  @NotNull
+  public static PerlBuiltInVariable getImplicitScalar(@NotNull Project project) {
+    return Objects.requireNonNull(getInstance(project).getScalar("_"));
   }
 }

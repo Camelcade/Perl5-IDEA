@@ -724,8 +724,8 @@ bless_expr ::= 'bless' parse_list_expr {pin=1}
 
 array_unshift_expr ::= 'unshift' list_call_arguments {pin=1 implements="com.perl5.lang.perl.psi.PerlUnshiftPushExpr"}
 array_push_expr ::= 'push' list_call_arguments {pin=1 implements="com.perl5.lang.perl.psi.PerlUnshiftPushExpr"}
-array_shift_expr ::= 'shift' optional_unary_call_arguments {pin=1}
-array_pop_expr ::= 'pop' optional_unary_call_arguments {pin=1}
+array_shift_expr ::= 'shift' optional_unary_call_arguments {pin=1 implements="com.perl5.lang.perl.psi.PerlShiftPopExpr"}
+array_pop_expr ::= 'pop' optional_unary_call_arguments {pin=1 implements="com.perl5.lang.perl.psi.PerlShiftPopExpr"}
 
 private lnr_param ::= label_expr | expr // fixme scalar_expr ?
 private goto_param ::= label_expr | code_primitive  !'(' | expr
