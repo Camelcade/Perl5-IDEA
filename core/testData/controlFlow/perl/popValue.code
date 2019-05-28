@@ -1,0 +1,4 @@
+$var = pop;
+$var = pop();
+$var = pop(@ARGV);
+$var = pop @ARGV;

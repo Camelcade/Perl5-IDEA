@@ -24,6 +24,10 @@ public class PerlControlFlowTest extends PerlLightTestCase {
     return "testData/controlFlow/perl";
   }
 
+  public void testPopValue() {doTest();}
+
+  public void testShiftValue() {doTest();}
+
   public void testPushValue() {doTest();}
 
   public void testPushValueParenthesized() {doTest();}
@@ -479,7 +483,6 @@ public class PerlControlFlowTest extends PerlLightTestCase {
   public void testTryExceptCatchFinally() {doTest();}
 
   public void testTryFinally() {doTest();}
-
 
   private void doTest() {doTestControlFlow();}
 }

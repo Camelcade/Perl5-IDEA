@@ -395,6 +395,16 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     }
 
     @Override
+    public void visitArrayPopExpr(@NotNull PsiPerlArrayPopExpr o) {
+      addNodeAndCheckPending(new PerlPopInstruction(PerlControlFlowBuilder.this, o));
+    }
+
+    @Override
+    public void visitArrayShiftExpr(@NotNull PsiPerlArrayShiftExpr o) {
+      addNodeAndCheckPending(new PerlShiftInstruction(PerlControlFlowBuilder.this, o));
+    }
+
+    @Override
     public void visitArrayPushExpr(@NotNull PsiPerlArrayPushExpr o) {
       acceptSafe(o.getCallArguments());
       addNodeAndCheckPending(new PerlPushInstruction(PerlControlFlowBuilder.this, o));

@@ -1,0 +1,4 @@
+$var = shift;
+$var = shift();
+$var = shift @ARGV;
+$var = shift(@ARGV);
