@@ -6,7 +6,7 @@ sub _filter_tables {
         try {
             1;
         }
-        catch {
+        catch {<caret>
             0;
         } or next TABLE;
 

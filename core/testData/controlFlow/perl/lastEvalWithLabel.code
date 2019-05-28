@@ -2,7 +2,7 @@
 sub ExceptionFunction {
     'sub start';
     eval {
-        'eval start';
+        'eval start';<caret>
         last SOMELABEL;
     };
     'sub end';

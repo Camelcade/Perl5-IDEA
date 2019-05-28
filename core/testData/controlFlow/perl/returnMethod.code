@@ -1,7 +1,7 @@
 1;
 method something{
   2;
-  return;
+  return;<caret>
   3;
 }
 4;

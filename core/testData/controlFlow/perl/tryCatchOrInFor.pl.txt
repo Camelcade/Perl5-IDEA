@@ -1,5 +1,4 @@
 0(1) element: null (InstructionImpl)
-1(2) element: Perl5 (InstructionImpl)
-2(3) element: PsiPerlUseStatementImpl(USE_STATEMENT) (InstructionImpl)
-3(4) element: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::_filter_tables (InstructionImpl)
-4() element: null (InstructionImpl)
+1(2) element: PsiPerlSubExprImpl(Perl5: SUB_EXPR) (InstructionImpl)
+2(3) element: PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT) (InstructionImpl)
+3() element: null (InstructionImpl)

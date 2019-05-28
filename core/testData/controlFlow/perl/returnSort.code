@@ -1,7 +1,7 @@
 1;
 sort {
   2;
-  return;
+  return;<caret>
   3;
 } @array;
 4;

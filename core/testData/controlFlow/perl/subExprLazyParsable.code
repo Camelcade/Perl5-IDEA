@@ -5,7 +5,7 @@ has 'name' => (
     default => sub {
         # lazy parasable block
         # lazy parasable block
-        # lazy parasable block
+        # lazy parasable block<caret>
         # lazy parasable block
         return $second;
     },

@@ -1,7 +1,7 @@
 say 'before';
 sub somesub{
   say 'sub-before';
-  redo;
+  redo;<caret>
   say 'sub-after';
 };
 say 'after';

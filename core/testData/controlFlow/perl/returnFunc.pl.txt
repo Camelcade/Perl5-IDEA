@@ -1,6 +1,6 @@
 0(1) element: null (InstructionImpl)
-1(2) element: Perl5 (InstructionImpl)
+1(2) element: PsiPerlFuncDefinitionImpl(FUNC_DEFINITION)@main::something (InstructionImpl)
 2(3) element: PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT) (InstructionImpl)
-3(4) element: PsiPerlFuncDefinitionImpl(FUNC_DEFINITION)@main::something (InstructionImpl)
+3(5) element: PsiPerlReturnExprImpl(Perl5: RETURN_EXPR) (InstructionImpl)
 4(5) element: PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT) (InstructionImpl)
 5() element: null (InstructionImpl)

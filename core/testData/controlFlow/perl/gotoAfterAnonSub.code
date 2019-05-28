@@ -1,7 +1,7 @@
 sub _worker_sequence_generator {
     'start';
     $self->{_last_jmp} = sub {
-      'sub start';
+      'sub start';<caret>
       goto _WORKER_SEQ_GEN__LAST;
       'sub end';
     };

@@ -1,7 +1,7 @@
 sub somesub{
     'hi';
     eval{
-        goto NEXT;
+        goto NEXT;<caret>
     };
     'buy';
 }

@@ -1,7 +1,7 @@
 1;
 sub something{
   2;
-  return;
+  return;<caret>
   3;
 }
 4;
