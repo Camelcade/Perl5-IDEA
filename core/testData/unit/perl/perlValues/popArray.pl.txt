@@ -1,0 +1,11 @@
+@array = qw/one two/;
+$var = pop @array;
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 41 in popArray.pl
+two
+----------
+Resolved
+----------
+two

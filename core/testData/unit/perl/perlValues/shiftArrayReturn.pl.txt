@@ -1,0 +1,14 @@
+sub myshift{
+  my @arr = @_[1, -1];
+  shift @arr;
+}
+$var = myshift qw/one two three/;
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 86 in shiftArrayReturn.pl
+scalar main::myshift(one, two, three)
+----------
+Resolved
+----------
+two

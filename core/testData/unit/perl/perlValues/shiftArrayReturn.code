@@ -1,0 +1,6 @@
+sub myshift{
+  my @arr = @_[1, -1];
+  shift @arr;
+}
+$var = myshift qw/one two three/;
+$v<caret>ar;

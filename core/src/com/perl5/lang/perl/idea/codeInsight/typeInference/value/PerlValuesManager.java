@@ -29,9 +29,11 @@ import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.containers.WeakInterner;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.impl.PerlBuiltInVariable;
 import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
+import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import com.perl5.lang.perl.util.PerlArrayUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.Contract;
@@ -306,7 +308,26 @@ public final class PerlValuesManager {
     else if (element instanceof PsiPerlArrayPushExpr) {
       return PerlScalarContextValue.create(PerlPushValue.create((PsiPerlArrayPushExpr)element));
     }
+    else if( element instanceof PsiPerlArrayShiftExpr){
+      return createShiftPopValue((PsiPerlArrayShiftExpr)element, FIRST_ELEMENT_INDEX_VALUE);
+    }
+    else if( element instanceof PsiPerlArrayPopExpr){
+      return createShiftPopValue((PsiPerlArrayPopExpr)element, LAST_ELEMENT_INDEX_VALUE);
+    }
     return UNKNOWN_VALUE;
+  }
+
+  @NotNull
+  private static PerlValue createShiftPopValue(@NotNull PerlShiftPopExpr shiftPopExpr, @NotNull PerlValue indexValue){
+    PsiElement target = shiftPopExpr.getTarget();
+    PerlValue targetValue;
+    if( target instanceof PerlBuiltInVariable){
+      targetValue = PerlResolveUtil.inferVariableValue((PerlBuiltInVariable)target, shiftPopExpr);
+    }
+    else{
+      targetValue = from(target);
+    }
+    return PerlArrayElementValue.create(targetValue, indexValue);
   }
 
   /**

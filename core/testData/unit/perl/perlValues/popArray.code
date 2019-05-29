@@ -1,0 +1,3 @@
+@array = qw/one two/;
+$var = pop @array;
+$v<caret>ar;

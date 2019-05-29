@@ -1,0 +1,11 @@
+@array = qw/one two/;
+$var = shift @array;
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 43 in shiftArray.pl
+one
+----------
+Resolved
+----------
+one

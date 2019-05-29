@@ -1,0 +1,14 @@
+sub mypop{
+  my @array = @_[-1,0];
+  pop @array;
+}
+$var = mypop qw/one two/;
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 77 in popArrayReturn.pl
+scalar main::mypop(one, two)
+----------
+Resolved
+----------
+one

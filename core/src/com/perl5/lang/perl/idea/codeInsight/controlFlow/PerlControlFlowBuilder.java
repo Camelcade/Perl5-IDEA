@@ -34,6 +34,7 @@ import com.intellij.util.ObjectUtils;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.PerlAssignExpression.PerlAssignValueDescriptor;
+import com.perl5.lang.perl.psi.impl.PerlBuiltInVariable;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlHeredocTerminatorElementImpl;
 import com.perl5.lang.perl.psi.mixins.PerlStatementMixin;
@@ -324,7 +325,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     }
 
     private void acceptSafe(@Nullable PsiElement o) {
-      if (o != null) {
+      if (o != null && !(o instanceof PerlBuiltInVariable)) {
         o.accept(this);
       }
     }
@@ -396,11 +397,13 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
 
     @Override
     public void visitArrayPopExpr(@NotNull PsiPerlArrayPopExpr o) {
+      acceptSafe(o.getTarget());
       addNodeAndCheckPending(new PerlPopInstruction(PerlControlFlowBuilder.this, o));
     }
 
     @Override
     public void visitArrayShiftExpr(@NotNull PsiPerlArrayShiftExpr o) {
+      acceptSafe(o.getTarget());
       addNodeAndCheckPending(new PerlShiftInstruction(PerlControlFlowBuilder.this, o));
     }
 

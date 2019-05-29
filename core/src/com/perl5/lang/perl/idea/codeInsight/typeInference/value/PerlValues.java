@@ -19,6 +19,9 @@ package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
 
 public class PerlValues {
+  public static final PerlValue FIRST_ELEMENT_INDEX_VALUE = PerlScalarValue.create(0);
+  public static final PerlValue LAST_ELEMENT_INDEX_VALUE = PerlScalarValue.create(-1);
+
   /**
    * Represents plain {@code undef}
    */
@@ -36,7 +39,7 @@ public class PerlValues {
    * Handy predefined value, that return first argument
    */
   public static final PerlValue RETURN_FIRST_ARGUMENT_VALUE = PerlValuesManager.intern(
-    PerlArrayElementValue.create(ARGUMENTS_VALUE, PerlScalarValue.create("0")));
+    PerlArrayElementValue.create(ARGUMENTS_VALUE, FIRST_ELEMENT_INDEX_VALUE));
 
   private PerlValues() {
   }

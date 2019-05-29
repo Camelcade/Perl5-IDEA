@@ -199,7 +199,7 @@ public class PerlResolveUtil {
       variable.getNamespaceName(),
       variable.getVariableName(),
       variable.getActualType(),
-      null,
+      variable,
       computeStopElement(variable, contextElement)
     );
   }
@@ -282,7 +282,7 @@ public class PerlResolveUtil {
         }
         return NEXT;
       }
-      if (currentInstruction.num() > currentInstructionIndex) {
+      if (currentInstruction.num() >= currentInstructionIndex) {
         return NEXT;
       }
       PsiElement assignee = ((PerlMutationInstruction)currentInstruction).getLeftSide();

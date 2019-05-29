@@ -1,0 +1,6 @@
+sub mypop{
+  my @array = @_[-1,0];
+  pop @array;
+}
+$var = mypop qw/one two/;
+$v<caret>ar;

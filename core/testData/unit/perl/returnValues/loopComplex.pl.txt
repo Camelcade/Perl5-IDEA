@@ -10,4 +10,4 @@
   $search_dir;
 }
 ----------
-scalar main::dirname(UNKNOWN_VALUE)
+OneOf: [ArrayItem: SUB_ARGUMENTS[0], scalar main::dirname(ArrayItem: SUB_ARGUMENTS[0])]

@@ -1,0 +1,5 @@
+<caret>sub somesub{
+  shift;
+}
+----------
+ArrayItem: SUB_ARGUMENTS[0]

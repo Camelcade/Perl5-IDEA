@@ -27,6 +27,14 @@ public class PerlValuesTest extends PerlLightTestCase {
     return "testData/unit/perl/perlValues";
   }
 
+  public void testShiftArray() {doTest();}
+
+  public void testPopArray() {doTest();}
+
+  public void testShiftArrayReturn() {doTest();}
+
+  public void testPopArrayReturn() {doTest();}
+
   public void testPushValue() {doTest();}
 
   public void testPushValueArrayEmpty() {doTest();}

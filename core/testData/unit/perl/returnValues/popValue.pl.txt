@@ -1,0 +1,5 @@
+<caret>sub somesub{
+  pop;
+}
+----------
+ArrayItem: SUB_ARGUMENTS[-1]
