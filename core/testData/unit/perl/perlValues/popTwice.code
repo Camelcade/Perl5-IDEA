@@ -1,0 +1,4 @@
+@array = qw/one two three/;
+pop @array;
+pop @array;
+@ar<caret>ray;

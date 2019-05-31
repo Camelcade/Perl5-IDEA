@@ -78,6 +78,7 @@ public final class PerlValuesManager {
   static final int SPLICE_ID = id++;
   static final int UNSHIFT_ID = id++;
   static final int PUSH_ID = id++;
+  static final int SUBLIST_ID = id++;
 
   static final int HASH_ID = id++;
   static final int HASH_ELEMENT_VALUE = id++;
@@ -183,6 +184,9 @@ public final class PerlValuesManager {
     }
     else if (valueId == PUSH_ID) {
       return new PerlPushValue(dataStream);
+    }
+    else if (valueId == SUBLIST_ID) {
+      return new PerlSublistValue(dataStream);
     }
     throw new RuntimeException("Don't know how to deserialize a value: " + valueId);
   }
@@ -319,6 +323,14 @@ public final class PerlValuesManager {
 
   @NotNull
   private static PerlValue createShiftPopValue(@NotNull PerlShiftPopExpr shiftPopExpr, @NotNull PerlValue indexValue){
+    return PerlArrayElementValue.create(createShiftPopArgumentValue(shiftPopExpr), indexValue);
+  }
+
+  /**
+   * @return value of the argument for shift/pop operations before operation been performed
+   */
+  @NotNull
+  public static PerlValue createShiftPopArgumentValue(@NotNull PerlShiftPopExpr shiftPopExpr) {
     PsiElement target = shiftPopExpr.getTarget();
     PerlValue targetValue;
     if( target instanceof PerlBuiltInVariable){
@@ -327,7 +339,7 @@ public final class PerlValuesManager {
     else{
       targetValue = from(target);
     }
-    return PerlArrayElementValue.create(targetValue, indexValue);
+    return targetValue;
   }
 
   /**

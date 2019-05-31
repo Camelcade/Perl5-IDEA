@@ -1,0 +1,6 @@
+sub somesub{
+  my @array = (1, Foo::Bar->something(), 2);
+  shift @array;
+  pop @array;
+  @ar<caret>ray;
+}

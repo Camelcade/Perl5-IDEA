@@ -1,0 +1,16 @@
+sub get_third{
+  my @arr = @_;
+  shift @arr;
+  shift @arr;
+  @arr;
+}
+@var = get_third qw/one two three four/;
+@v<caret>ar;
+----------
+@var
+PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 110 in shiftInSubDelegate.pl
+Array(main::get_third(one, two, three, four))
+----------
+Resolved
+----------
+Array(three, four)

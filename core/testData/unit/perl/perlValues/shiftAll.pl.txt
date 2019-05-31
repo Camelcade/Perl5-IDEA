@@ -1,0 +1,13 @@
+@array = qw/one two three/;
+shift @array;
+shift @array;
+shift @array;
+@ar<caret>ray;
+----------
+@array
+PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 70 in shiftAll.pl
+Array()
+----------
+Resolved
+----------
+Array()

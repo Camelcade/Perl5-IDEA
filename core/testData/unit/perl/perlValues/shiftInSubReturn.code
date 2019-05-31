@@ -1,0 +1,7 @@
+sub get_third{
+  shift;
+  shift;
+  return @_;
+}
+@var = get_third qw/one two three four/;
+@v<caret>ar;

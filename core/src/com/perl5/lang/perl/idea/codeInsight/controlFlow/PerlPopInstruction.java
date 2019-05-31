@@ -18,16 +18,16 @@ package com.perl5.lang.perl.idea.codeInsight.controlFlow;
 
 import com.intellij.codeInsight.controlflow.ControlFlowBuilder;
 import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlSublistValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
 import com.perl5.lang.perl.psi.PsiPerlArrayPopExpr;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
-
 public class PerlPopInstruction extends PerlMutationInstruction {
   public PerlPopInstruction(@NotNull ControlFlowBuilder builder,
-                            @Nullable PsiPerlArrayPopExpr element) {
+                            @NotNull PsiPerlArrayPopExpr element) {
     super(builder, element);
   }
 
@@ -41,7 +41,8 @@ public class PerlPopInstruction extends PerlMutationInstruction {
   @NotNull
   @Override
   public PerlValue createValue() {
-    return UNKNOWN_VALUE;
+    assert myElement != null;
+    return PerlSublistValue.createPopValue(PerlValuesManager.createShiftPopArgumentValue((PsiPerlArrayPopExpr)myElement));
   }
 
   @NotNull

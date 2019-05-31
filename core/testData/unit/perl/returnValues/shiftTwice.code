@@ -1,0 +1,5 @@
+sub mysub{
+  shift;
+  shift;
+  @_;
+}

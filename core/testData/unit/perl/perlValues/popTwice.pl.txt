@@ -1,0 +1,12 @@
+@array = qw/one two three/;
+pop @array;
+pop @array;
+@ar<caret>ray;
+----------
+@array
+PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 52 in popTwice.pl
+Array(one)
+----------
+Resolved
+----------
+Array(one)

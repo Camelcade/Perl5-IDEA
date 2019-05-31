@@ -1,0 +1,15 @@
+sub get_third{
+  shift;
+  pop;
+  @_;
+}
+@var = get_third qw/one two three four/;
+@v<caret>ar;
+----------
+@var
+PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 80 in shiftPopInSub.pl
+Array(main::get_third(one, two, three, four))
+----------
+Resolved
+----------
+Array(two, three)

@@ -1,0 +1,16 @@
+sub get_third{
+  pop;
+  pop;
+  my @array = @_;
+  @array;
+}
+@var = get_third qw/one two three four/;
+@v<caret>ar;
+----------
+@var
+PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 100 in popInSubProxy.pl
+Array(main::get_third(one, two, three, four))
+----------
+Resolved
+----------
+Array(one, two)

@@ -1,0 +1,8 @@
+sub get_third{
+  my @arr = @_;
+  pop @arr;
+  pop @arr;
+  @arr;
+}
+@var = get_third qw/one two three four/;
+@v<caret>ar;

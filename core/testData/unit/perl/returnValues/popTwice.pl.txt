@@ -1,0 +1,7 @@
+<caret>sub mysub{
+  pop;
+  pop;
+  @_;
+}
+----------
+Sublist (0;2) SUB_ARGUMENTS
