@@ -1,0 +1,11 @@
+$hashref = { qw/one two three four/};
+$hash = %$hashref;
+$ha<caret>sh;
+----------
+$hash
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 57 in hashDerefToScalar.pl
+2
+----------
+Resolved
+----------
+2

@@ -1,0 +1,3 @@
+$arr = [ qw/one two three/];
+$arr2 = @$arr;
+$a<caret>rr2;

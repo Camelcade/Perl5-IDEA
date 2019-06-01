@@ -1,0 +1,3 @@
+$hashref = { qw/one two three four/};
+$hash = %$hashref;
+$ha<caret>sh;

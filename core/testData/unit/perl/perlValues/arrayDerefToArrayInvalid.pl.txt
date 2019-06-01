@@ -1,0 +1,11 @@
+$arr = 'test';
+@arr = @$arr;
+@a<caret>rr;
+----------
+@arr
+PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 29 in arrayDerefToArrayInvalid.pl
+Array(Value unknown)
+----------
+Resolved
+----------
+Array(Value unknown)

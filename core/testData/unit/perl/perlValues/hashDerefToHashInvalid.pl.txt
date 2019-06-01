@@ -1,0 +1,11 @@
+$hashref = 'test';
+%hash = %$hashref;
+%ha<caret>sh;
+----------
+%hash
+PsiPerlHashVariableImpl(Perl5: HASH_VARIABLE) at 38 in hashDerefToHashInvalid.pl
+Hash(Value unknown)
+----------
+Resolved
+----------
+Hash(Value unknown)

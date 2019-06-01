@@ -1,0 +1,5 @@
+<caret>sub somesub{
+  %{shift()}
+}
+----------
+HashDeref: ArrayItem: SUB_ARGUMENTS[0]

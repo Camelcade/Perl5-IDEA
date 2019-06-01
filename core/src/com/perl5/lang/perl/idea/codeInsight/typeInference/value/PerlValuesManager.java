@@ -74,7 +74,7 @@ public final class PerlValuesManager {
   static final int ARRAY_ID = id++;
   static final int ARRAY_ELEMENT_ID = id++;
   static final int ARRAY_SLICE_ID = id++;
-  static final int ARRAY_CAST_ID = id++;
+  static final int ARRAY_DEREFERENCE_ID = id++;
   static final int SPLICE_ID = id++;
   static final int SUBLIST_ID = id++;
 
@@ -85,7 +85,7 @@ public final class PerlValuesManager {
   static final int KEYS_ID = id++;
   static final int VALUES_ID = id++;
   static final int EACH_ID = id++;
-  static final int HASH_CAST_ID = id++;
+  static final int HASH_DEREFERENCE_ID = id++;
   static final int DELETE_ID = id++;
 
   static final int ARITHMETIC_NEGATION = id++;
@@ -104,7 +104,7 @@ public final class PerlValuesManager {
   static final int WANTARRAY_ID = id++;
 
   // MUST stay here. Automatically changes on new element creation
-  public static final int VERSION = id += 2;
+  public static final int VERSION = id;
 
   private static final WeakInterner<PerlValue> INTERNER = new WeakInterner<>();
 
@@ -176,6 +176,12 @@ public final class PerlValuesManager {
     }
     else if (valueId == SCALAR_DEREFERENCE_ID) {
       return new PerlScalarDereferenceValue(dataStream);
+    }
+    else if (valueId == ARRAY_DEREFERENCE_ID) {
+      return new PerlArrayDereferenceValue(dataStream);
+    }
+    else if (valueId == HASH_DEREFERENCE_ID) {
+      return new PerlHashDereferenceValue(dataStream);
     }
     else if (valueId == SUBLIST_ID) {
       return new PerlSublistValue(dataStream);
@@ -291,6 +297,20 @@ public final class PerlValuesManager {
         expr = PerlPsiUtil.getSingleBlockExpression(((PsiPerlScalarCastExpr)element).getBlock());
       }
       return PerlScalarDereferenceValue.create(from(expr));
+    }
+    else if (element instanceof PsiPerlArrayCastExpr) {
+      PsiPerlExpr expr = ((PsiPerlArrayCastExpr)element).getExpr();
+      if (expr == null) {
+        expr = PerlPsiUtil.getSingleBlockExpression(((PsiPerlArrayCastExpr)element).getBlock());
+      }
+      return PerlArrayDereferenceValue.create(from(expr));
+    }
+    else if (element instanceof PsiPerlHashCastExpr) {
+      PsiPerlExpr expr = ((PsiPerlHashCastExpr)element).getExpr();
+      if (expr == null) {
+        expr = PerlPsiUtil.getSingleBlockExpression(((PsiPerlHashCastExpr)element).getBlock());
+      }
+      return PerlHashDereferenceValue.create(from(expr));
     }
     else if (element instanceof PsiPerlBlessExpr) {
       PerlValue targetValue = from(((PsiPerlBlessExpr)element).getReferenceExpression());

@@ -1,0 +1,3 @@
+$arr = 'test';
+@arr = @$arr;
+@a<caret>rr;

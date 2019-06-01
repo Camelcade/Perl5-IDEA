@@ -1,0 +1,13 @@
+$hashref = { qw/one two three four/};
+%hash = %$hashref;
+%ha<caret>sh;
+----------
+%hash
+PsiPerlHashVariableImpl(Perl5: HASH_VARIABLE) at 57 in hashDerefToHash.pl
+Hash(one => two,
+three => four)
+----------
+Resolved
+----------
+Hash(one => two,
+three => four)

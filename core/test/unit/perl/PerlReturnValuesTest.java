@@ -25,6 +25,10 @@ public class PerlReturnValuesTest extends PerlLightTestCase {
     return "testData/unit/perl/returnValues";
   }
 
+  public void testArrayDeref() {doTest();}
+
+  public void testHashDeref() {doTest();}
+
   public void testShiftPopMethodIncomplete() {doTest();}
 
   public void testShiftPopArgs() {doTest();}

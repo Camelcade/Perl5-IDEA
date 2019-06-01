@@ -1,0 +1,11 @@
+$arr = [ qw/one two three/];
+@arr = @$arr;
+@a<caret>rr;
+----------
+@arr
+PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 43 in arrayDerefToArray.pl
+Array(one, two, three)
+----------
+Resolved
+----------
+Array(one, two, three)

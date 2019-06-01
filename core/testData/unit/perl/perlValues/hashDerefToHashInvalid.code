@@ -1,0 +1,3 @@
+$hashref = 'test';
+%hash = %$hashref;
+%ha<caret>sh;

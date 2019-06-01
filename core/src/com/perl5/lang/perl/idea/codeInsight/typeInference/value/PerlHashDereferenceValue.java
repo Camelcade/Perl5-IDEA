@@ -25,24 +25,40 @@ import org.jetbrains.annotations.Nullable;
 import java.io.IOException;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
-import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager.SCALAR_DEREFERENCE_ID;
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager.HASH_DEREFERENCE_ID;
 
-public class PerlScalarDereferenceValue extends PerlOperationValue {
-  private PerlScalarDereferenceValue(@NotNull PerlValue referenceValue) {
+public class PerlHashDereferenceValue extends PerlOperationValue {
+  private PerlHashDereferenceValue(@NotNull PerlValue referenceValue) {
     super(referenceValue);
     if (referenceValue.isDeterministic()) {
       LOG.error("Deterministic values should be resolved in-place: " + referenceValue);
     }
   }
 
-  PerlScalarDereferenceValue(@NotNull StubInputStream dataStream) throws IOException {
+  PerlHashDereferenceValue(@NotNull StubInputStream dataStream) throws IOException {
     super(dataStream);
+  }
+
+  @Nullable
+  @Override
+  protected PerlContextType getContextType() {
+    return PerlContextType.LIST;
   }
 
   @NotNull
   @Override
   protected PerlValue computeResolve(@NotNull PerlValue resolvedReference, @NotNull PerlValueResolver resolver) {
     return doComputeStrictResolve(resolvedReference);
+  }
+
+  @Override
+  protected int getSerializationId() {
+    return HASH_DEREFERENCE_ID;
+  }
+
+  @Override
+  public String toString() {
+    return "HashDeref: " + getBaseValue();
   }
 
   private static PerlValue doComputeStrictResolve(@NotNull PerlValue referenceValue) {
@@ -53,30 +69,20 @@ public class PerlScalarDereferenceValue extends PerlOperationValue {
   private static PerlValue doComputeResolve(@NotNull PerlValue referenceValue) {
     if (referenceValue instanceof PerlReferenceValue) {
       PerlValue referenceTarget = ((PerlReferenceValue)referenceValue).getTarget();
-      if (referenceTarget.getContextType() == PerlContextType.SCALAR) {
+      if (referenceTarget instanceof PerlHashValue) {
         return referenceTarget;
       }
     }
     return null;
   }
 
-  @Override
-  protected int getSerializationId() {
-    return SCALAR_DEREFERENCE_ID;
-  }
-
-  @Override
-  public String toString() {
-    return "ScalarDeref: " + getBaseValue();
-  }
-
   @NotNull
   public static PerlValue create(@NotNull PerlValue referenceValue) {
     if (referenceValue.isDeterministic()) {
-      return PerlValuesBuilder.convert(referenceValue, PerlScalarDereferenceValue::doComputeStrictResolve);
+      return PerlValuesBuilder.convert(referenceValue, PerlHashDereferenceValue::doComputeStrictResolve);
     }
 
     PerlValue resolvedValue = doComputeResolve(referenceValue);
-    return resolvedValue != null ? resolvedValue : new PerlScalarDereferenceValue(referenceValue);
+    return resolvedValue != null ? resolvedValue : new PerlHashDereferenceValue(referenceValue);
   }
 }
