@@ -1,5 +1,5 @@
 sub somesub{
-  my @array = (Foo::Bar->something(), 2);
+  my @array = (Foo::Bar::->something(), 2);
   shift @array;
   pop @array;
   @ar<caret>ray;
