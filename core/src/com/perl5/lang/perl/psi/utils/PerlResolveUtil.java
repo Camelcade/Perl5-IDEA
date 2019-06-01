@@ -109,8 +109,8 @@ public class PerlResolveUtil {
    */
   @Nullable
   public static PerlVariableDeclarationElement getLexicalDeclaration(PerlVariable variable) {
-    if (variable instanceof PerlBuiltInVariable) {
-      return (PerlBuiltInVariable)variable;
+    if (variable instanceof PerlVariableDeclarationElement) {
+      return (PerlVariableDeclarationElement)variable;
     }
     if (variable.getExplicitNamespaceName() != null) {
       return null;
@@ -189,7 +189,7 @@ public class PerlResolveUtil {
     }
 
     String variableName = variable.getName();
-    String namespaceName = lexicalDeclaration instanceof PerlBuiltInVariable ? null : variable.getExplicitNamespaceName();
+    String namespaceName = variable.getExplicitNamespaceName();
     PerlVariableType actualType = variable.getActualType();
 
     return getValueFromControlFlow(variable, namespaceName, variableName, actualType, lexicalDeclaration, stopElement);
@@ -295,7 +295,7 @@ public class PerlResolveUtil {
       if (!Objects.equals(variableName, ((PerlVariable)assignee).getName())) {
         return NEXT;
       }
-      String explicitNamespaceName = assignee instanceof PerlBuiltInVariable ? null : ((PerlVariable)assignee).getExplicitNamespaceName();
+      String explicitNamespaceName = ((PerlVariable)assignee).getExplicitNamespaceName();
       if ((explicitNamespaceName != null || namespaceName != null) && !Objects.equals(namespaceName, explicitNamespaceName)) {
         return NEXT;
       }

@@ -19,11 +19,18 @@ package com.perl5.lang.perl.psi.impl;
 import com.intellij.psi.PsiManager;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class PerlBuiltInVariable extends PerlImplicitVariableDeclaration {
   public PerlBuiltInVariable(@NotNull PsiManager manager,
                              @NotNull String variableName) {
     super(manager, variableName, PerlPackageUtil.MAIN_NAMESPACE_NAME, null, false, false, false, null);
+  }
+
+  @Nullable
+  @Override
+  public String getExplicitNamespaceName() {
+    return null;
   }
 
   @Override
