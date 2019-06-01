@@ -1,0 +1,6 @@
+<caret>sub somemethod{
+  my $hash_ref = shift;
+  return $hash_ref->{shift()};
+}
+----------
+HashItem: HashDeref: ArrayItem: SUB_ARGUMENTS[0]{ArrayItem: Sublist (1;0) SUB_ARGUMENTS[0]}

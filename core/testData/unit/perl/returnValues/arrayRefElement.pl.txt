@@ -1,0 +1,6 @@
+<caret>sub somemethod{
+  my $array_ref = shift;
+  return $array_ref->[shift()];
+}
+----------
+ArrayItem: ArrayDeref: ArrayItem: SUB_ARGUMENTS[0][ArrayItem: Sublist (1;0) SUB_ARGUMENTS[0]]

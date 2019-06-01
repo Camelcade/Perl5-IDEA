@@ -1,0 +1,4 @@
+sub somemethod{
+  my $hash_ref = shift;
+  return $hash_ref->{shift()};
+}

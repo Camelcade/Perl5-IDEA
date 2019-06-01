@@ -91,7 +91,7 @@ public abstract class PerlMethodMixin extends PerlCompositeElementImpl implement
         return UNKNOWN_VALUE;
       }
 
-      PsiElement previousValue = ((PerlDerefExpression)derefExpression).getPreviousElement(parentElement.getPrevSibling());
+      PsiElement previousValue = ((PerlDerefExpression)derefExpression).getPreviousElement(parentElement);
       if (previousValue == null) { // first in chain
         return new PerlCallStaticValue(
           PerlScalarValue.create(PerlPackageUtil.getContextNamespaceName(this)), subNameValue, callArguments, false);

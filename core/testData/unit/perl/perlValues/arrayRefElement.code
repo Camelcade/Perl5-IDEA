@@ -1,0 +1,3 @@
+$array_ref = [qw/one two three/];
+$var = $array_ref->[1];
+$v<caret>ar;

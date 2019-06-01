@@ -261,6 +261,22 @@ public final class PerlValuesManager {
     else if (elementType == NUMBER_CONSTANT) {
       return PerlScalarValue.create(element.getText());
     }
+    else if (element instanceof PsiPerlHashIndex) {
+      PsiElement parent = element.getParent();
+      if (parent instanceof PsiPerlDerefExpr) {
+        return PerlHashElementValue.create(
+          PerlHashDereferenceValue.create(from(((PsiPerlDerefExpr)parent).getPreviousElement(element))),
+          from(((PsiPerlHashIndex)element).getExpr()));
+      }
+    }
+    else if (element instanceof PsiPerlArrayIndex) {
+      PsiElement parent = element.getParent();
+      if (parent instanceof PsiPerlDerefExpr) {
+        return PerlArrayElementValue.create(
+          PerlArrayDereferenceValue.create(from(((PsiPerlDerefExpr)parent).getPreviousElement(element))),
+          from(((PsiPerlArrayIndex)element).getExpr()));
+      }
+    }
     else if (element instanceof PsiPerlPrefixUnaryExpr) {
       PsiPerlExpr target = ((PsiPerlPrefixUnaryExpr)element).getExpr();
       IElementType firstChildElementType = PsiUtilCore.getElementType(element.getFirstChild());

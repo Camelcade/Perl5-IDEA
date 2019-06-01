@@ -1,0 +1,3 @@
+$hash_ref = {qw/one two three four/};
+$var = $hash_ref->{three};
+$v<caret>ar;

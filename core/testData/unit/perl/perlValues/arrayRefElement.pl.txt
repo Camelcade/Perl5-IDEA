@@ -1,0 +1,11 @@
+$array_ref = [qw/one two three/];
+$var = $array_ref->[1];
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 58 in arrayRefElement.pl
+two
+----------
+Resolved
+----------
+two

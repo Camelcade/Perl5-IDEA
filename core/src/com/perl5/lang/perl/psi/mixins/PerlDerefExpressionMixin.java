@@ -42,6 +42,7 @@ public abstract class PerlDerefExpressionMixin extends PsiPerlExprImpl implement
     if (currentElement == null) {
       return null;
     }
+    currentElement = currentElement.getPrevSibling();
     IElementType currentElementType;
     while (PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(currentElementType = PsiUtilCore.getElementType(currentElement))
            || currentElementType == OPERATOR_DEREFERENCE) {

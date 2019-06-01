@@ -1,0 +1,4 @@
+sub somemethod{
+  my $array_ref = shift;
+  return $array_ref->[shift()];
+}
