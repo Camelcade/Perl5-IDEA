@@ -104,7 +104,7 @@ public final class PerlValuesManager {
   static final int WANTARRAY_ID = id++;
 
   // MUST stay here. Automatically changes on new element creation
-  public static final int VERSION = id;
+  public static final int VERSION = id++;
 
   private static final WeakInterner<PerlValue> INTERNER = new WeakInterner<>();
 
@@ -217,17 +217,30 @@ public final class PerlValuesManager {
     if (element == null) {
       return UNKNOWN_VALUE;
     }
-    if (!element.isValid()) {
+    PsiElement finalElement = element.getOriginalElement();
+    if (!finalElement.isValid()) {
       LOG.error("Attempt to compute value from invalid element");
       return UNKNOWN_VALUE;
     }
-    element = element.getOriginalElement();
+    return CachedValuesManager.getCachedValue(
+      finalElement, () -> {
+        PerlValue computedValue = RecursionManager.doPreventingRecursion(finalElement, true, () -> computeValue(finalElement));
+        if (computedValue == null) {
+          LOG.error("Recursion while computing value of " + finalElement + " from " + PsiUtilCore.getVirtualFile(finalElement));
+          computedValue = UNKNOWN_VALUE;
+        }
+        return CachedValueProvider.Result.create(intern(computedValue), finalElement.getContainingFile());
+      });
+  }
+
+  @NotNull
+  private static PerlValue computeValue(@NotNull PsiElement element) {
     if (element instanceof PerlReturnExpr) {
       PsiPerlExpr expr = ((PerlReturnExpr)element).getReturnValueExpr();
       return expr == null ? UNDEF_VALUE : from(expr);
     }
     else if (element instanceof PerlValuableEntity) {
-      return from((PerlValuableEntity)element);
+      return ((PerlValuableEntity)element).computePerlValue();
     }
 
     IElementType elementType = PsiUtilCore.getElementType(element);
@@ -392,20 +405,6 @@ public final class PerlValuesManager {
   @NotNull
   private static PerlValue listContext(@NotNull PerlValue value) {
     return value.getContextType() == PerlContextType.LIST ? value : PerlArrayValue.builder().addElement(value).build();
-  }
-
-  @NotNull
-  private static PerlValue from(@NotNull PerlValuableEntity element) {
-    return CachedValuesManager.getCachedValue(
-      element, () -> {
-        //noinspection deprecation
-        PerlValue computedValue = RecursionManager.doPreventingRecursion(element, true, element::computePerlValue);
-        if (computedValue == null) {
-          LOG.error("Recursion while computing value of " + element + " from " + PsiUtilCore.getVirtualFile(element));
-          computedValue = UNKNOWN_VALUE;
-        }
-        return CachedValueProvider.Result.create(intern(computedValue), element.getContainingFile());
-      });
   }
 
   /**
