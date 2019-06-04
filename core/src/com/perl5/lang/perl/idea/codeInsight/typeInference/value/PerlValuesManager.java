@@ -76,6 +76,8 @@ public final class PerlValuesManager {
   static final int ARRAY_SLICE_ID = id++;
   static final int ARRAY_DEREFERENCE_ID = id++;
   static final int SPLICE_ID = id++;
+  static final int UNSHIFT_ID = id++;
+  static final int PUSH_ID = id++;
   static final int SUBLIST_ID = id++;
 
   static final int HASH_ID = id++;
@@ -176,6 +178,12 @@ public final class PerlValuesManager {
     }
     else if (valueId == SCALAR_DEREFERENCE_ID) {
       return new PerlScalarDereferenceValue(dataStream);
+    }
+    else if (valueId == UNSHIFT_ID) {
+      return new PerlUnshiftValue(dataStream);
+    }
+    else if (valueId == PUSH_ID) {
+      return new PerlPushValue(dataStream);
     }
     else if (valueId == ARRAY_DEREFERENCE_ID) {
       return new PerlArrayDereferenceValue(dataStream);
@@ -348,10 +356,10 @@ public final class PerlValuesManager {
       return PerlBlessedValue.create(targetValue, blessValue);
     }
     else if (element instanceof PsiPerlArrayUnshiftExpr) {
-      return PerlScalarContextValue.create(createUnshiftValue((PsiPerlArrayUnshiftExpr)element));
+      return PerlScalarContextValue.create(PerlUnshiftValue.create((PsiPerlArrayUnshiftExpr)element));
     }
     else if (element instanceof PsiPerlArrayPushExpr) {
-      return PerlScalarContextValue.create(createPushValue((PsiPerlArrayPushExpr)element));
+      return PerlScalarContextValue.create(PerlPushValue.create((PsiPerlArrayPushExpr)element));
     }
     else if( element instanceof PsiPerlArrayShiftExpr){
       return createShiftPopValue((PsiPerlArrayShiftExpr)element, FIRST_ELEMENT_INDEX_VALUE);
@@ -360,22 +368,6 @@ public final class PerlValuesManager {
       return createShiftPopValue((PsiPerlArrayPopExpr)element, LAST_ELEMENT_INDEX_VALUE);
     }
     return UNKNOWN_VALUE;
-  }
-
-  @NotNull
-  public static PerlValue createUnshiftValue(@NotNull PsiPerlArrayUnshiftExpr unshiftExpr) {
-    PerlArrayValue.Builder builder = PerlArrayValue.builder();
-    builder.addPsiElements(unshiftExpr.getModification());
-    builder.addElement(from(unshiftExpr.getTarget()));
-    return builder.build();
-  }
-
-  @NotNull
-  public static PerlValue createPushValue(@NotNull PsiPerlArrayPushExpr pushExpr) {
-    PerlArrayValue.Builder builder = PerlArrayValue.builder();
-    builder.addElement(from(pushExpr.getTarget()));
-    builder.addPsiElements(pushExpr.getModification());
-    return builder.build();
   }
 
   @NotNull

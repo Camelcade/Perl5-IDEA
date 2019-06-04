@@ -18,8 +18,8 @@ package com.perl5.lang.perl.idea.codeInsight.controlFlow;
 
 import com.intellij.codeInsight.controlflow.ControlFlowBuilder;
 import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlPushValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
 import com.perl5.lang.perl.psi.PsiPerlArrayPushExpr;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -41,7 +41,7 @@ public class PerlPushInstruction extends PerlMutationInstruction {
   @Override
   public PerlValue createValue() {
     assert myElement != null;
-    return PerlValuesManager.createPushValue((PsiPerlArrayPushExpr)myElement);
+    return PerlPushValue.create((PsiPerlArrayPushExpr)myElement);
   }
 
   @NotNull
