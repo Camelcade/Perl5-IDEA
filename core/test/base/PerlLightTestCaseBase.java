@@ -1970,9 +1970,10 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     PerlSubElement element = getElementAtCaret(PerlSubElement.class);
     assertNotNull(element);
     StringBuilder sb = new StringBuilder();
+    PerlValue returnValue = element.getReturnValue();
     sb.append(getEditorTextWithCaretsAndSelections().trim())
       .append(SEPARATOR_NEWLINES)
-      .append(element.getReturnValue());
+      .append(returnValue);
 
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
   }
