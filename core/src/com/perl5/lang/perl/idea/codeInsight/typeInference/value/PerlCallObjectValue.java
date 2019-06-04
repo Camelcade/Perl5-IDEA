@@ -20,8 +20,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.psi.stubs.StubInputStream;
-import com.intellij.psi.stubs.StubOutputStream;
 import com.intellij.util.Processor;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
@@ -44,15 +42,15 @@ public final class PerlCallObjectValue extends PerlCallValue {
     myIsSuper = isSuper;
   }
 
-  PerlCallObjectValue(@NotNull StubInputStream dataStream) throws IOException {
-    super(dataStream);
-    myIsSuper = dataStream.readBoolean();
+  PerlCallObjectValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
+    super(deserializer);
+    myIsSuper = deserializer.readBoolean();
   }
 
   @Override
-  protected void serializeData(@NotNull StubOutputStream dataStream) throws IOException {
-    super.serializeData(dataStream);
-    dataStream.writeBoolean(myIsSuper);
+  protected void serializeData(@NotNull PerlValueSerializer serializer) throws IOException {
+    super.serializeData(serializer);
+    serializer.writeBoolean(myIsSuper);
   }
 
   @NotNull

@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.psi.PerlUnshiftPushExpr;
 import com.perl5.lang.perl.psi.PsiPerlArrayUnshiftExpr;
@@ -42,8 +41,8 @@ public class PerlUnshiftValue extends PerlParametrizedOperationValue {
     }
   }
 
-  PerlUnshiftValue(@NotNull StubInputStream dataStream) throws IOException {
-    super(dataStream);
+  public PerlUnshiftValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
+    super(deserializer);
   }
 
   @NotNull

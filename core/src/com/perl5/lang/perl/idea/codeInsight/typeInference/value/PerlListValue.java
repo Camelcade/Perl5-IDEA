@@ -17,8 +17,6 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.stubs.StubInputStream;
-import com.intellij.psi.stubs.StubOutputStream;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
@@ -37,14 +35,14 @@ abstract class PerlListValue extends PerlValue {
     myElements = elements.isEmpty() ? Collections.emptyList() : Collections.unmodifiableList(elements);
   }
 
-  protected PerlListValue(@NotNull StubInputStream dataStream) throws IOException {
-    super(dataStream);
-    myElements = PerlValuesManager.readList(dataStream);
+  protected PerlListValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
+    super(deserializer);
+    myElements = deserializer.readValuesList();
   }
 
   @Override
-  protected void serializeData(@NotNull StubOutputStream dataStream) throws IOException {
-    PerlValuesManager.writeCollection(dataStream, myElements);
+  protected void serializeData(@NotNull PerlValueSerializer serializer) throws IOException {
+    serializer.writeValuesList(myElements);
   }
 
   @Override

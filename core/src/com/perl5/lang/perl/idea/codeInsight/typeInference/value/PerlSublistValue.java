@@ -16,8 +16,6 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
-import com.intellij.psi.stubs.StubInputStream;
-import com.intellij.psi.stubs.StubOutputStream;
 import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
@@ -42,17 +40,17 @@ public class PerlSublistValue extends PerlOperationValue {
     }
   }
 
-  PerlSublistValue(@NotNull StubInputStream dataStream) throws IOException {
-    super(dataStream);
-    myStartOffset = dataStream.readVarInt();
-    myEndOffset = dataStream.readVarInt();
+  public PerlSublistValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
+    super(deserializer);
+    myStartOffset = deserializer.readVarInt();
+    myEndOffset = deserializer.readVarInt();
   }
 
   @Override
-  protected void serializeData(@NotNull StubOutputStream dataStream) throws IOException {
-    super.serializeData(dataStream);
-    dataStream.writeVarInt(myStartOffset);
-    dataStream.writeVarInt(myEndOffset);
+  protected void serializeData(@NotNull PerlValueSerializer serializer) throws IOException {
+    super.serializeData(serializer);
+    serializer.writeVarInt(myStartOffset);
+    serializer.writeVarInt(myEndOffset);
   }
 
   @NotNull

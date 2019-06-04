@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
-import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.psi.PsiPerlArrayPushExpr;
 import org.jetbrains.annotations.NotNull;
@@ -38,8 +37,8 @@ public class PerlPushValue extends PerlParametrizedOperationValue {
     }
   }
 
-  PerlPushValue(@NotNull StubInputStream dataStream) throws IOException {
-    super(dataStream);
+  PerlPushValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
+    super(deserializer);
   }
 
   @NotNull

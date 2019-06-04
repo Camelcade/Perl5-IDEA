@@ -16,8 +16,6 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
-import com.intellij.psi.stubs.StubInputStream;
-import com.intellij.psi.stubs.StubOutputStream;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -35,9 +33,9 @@ abstract class PerlOperationValue extends PerlValue {
     myBaseValue = baseValue;
   }
 
-  public PerlOperationValue(@NotNull StubInputStream dataStream) throws IOException {
-    super(dataStream);
-    myBaseValue = PerlValuesManager.readValue(dataStream);
+  PerlOperationValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
+    super(deserializer);
+    myBaseValue = deserializer.readValue();
   }
 
   @Nullable
@@ -52,8 +50,8 @@ abstract class PerlOperationValue extends PerlValue {
   }
 
   @Override
-  protected void serializeData(@NotNull StubOutputStream dataStream) throws IOException {
-    myBaseValue.serialize(dataStream);
+  protected void serializeData(@NotNull PerlValueSerializer serializer) throws IOException {
+    serializer.writeValue(myBaseValue);
   }
 
   @NotNull

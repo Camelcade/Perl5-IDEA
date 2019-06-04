@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
-import com.intellij.psi.stubs.StubInputStream;
 import com.perl5.PerlBundle;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -32,8 +31,8 @@ public final class PerlReferenceValue extends PerlParametrizedOperationValue {
     super(reference, bless);
   }
 
-  PerlReferenceValue(@NotNull StubInputStream dataStream) throws IOException {
-    super(dataStream);
+  PerlReferenceValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
+    super(deserializer);
   }
 
   @Override

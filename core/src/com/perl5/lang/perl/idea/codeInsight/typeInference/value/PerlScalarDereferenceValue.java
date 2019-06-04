@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
-import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
@@ -35,8 +34,8 @@ public class PerlScalarDereferenceValue extends PerlOperationValue {
     }
   }
 
-  PerlScalarDereferenceValue(@NotNull StubInputStream dataStream) throws IOException {
-    super(dataStream);
+  PerlScalarDereferenceValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
+    super(deserializer);
   }
 
   @NotNull

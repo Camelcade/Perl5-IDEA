@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
-import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.util.SmartList;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
@@ -36,8 +35,8 @@ public final class PerlArrayValue extends PerlListValue implements Iterable<Perl
     super(elements);
   }
 
-  PerlArrayValue(@NotNull StubInputStream dataStream) throws IOException {
-    super(dataStream);
+  PerlArrayValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
+    super(deserializer);
   }
 
   @NotNull

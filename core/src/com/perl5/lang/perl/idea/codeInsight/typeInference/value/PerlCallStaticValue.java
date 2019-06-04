@@ -21,8 +21,6 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.psi.stubs.StubInputStream;
-import com.intellij.psi.stubs.StubOutputStream;
 import com.intellij.util.Processor;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.extensions.imports.PerlImportsProvider;
@@ -46,15 +44,15 @@ public final class PerlCallStaticValue extends PerlCallValue {
     myHasExplicitNamespace = hasExplicitNamespace;
   }
 
-  PerlCallStaticValue(@NotNull StubInputStream dataStream) throws IOException {
-    super(dataStream);
-    myHasExplicitNamespace = dataStream.readBoolean();
+  PerlCallStaticValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
+    super(deserializer);
+    myHasExplicitNamespace = deserializer.readBoolean();
   }
 
   @Override
-  protected void serializeData(@NotNull StubOutputStream dataStream) throws IOException {
-    super.serializeData(dataStream);
-    dataStream.writeBoolean(myHasExplicitNamespace);
+  protected void serializeData(@NotNull PerlValueSerializer serializer) throws IOException {
+    super.serializeData(serializer);
+    serializer.writeBoolean(myHasExplicitNamespace);
   }
 
   @Override

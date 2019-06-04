@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
-import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.util.ObjectUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -40,8 +39,8 @@ public class PerlHashValue extends PerlMapValue {
     super(elements);
   }
 
-  public PerlHashValue(@NotNull StubInputStream dataStream) throws IOException {
-    super(dataStream);
+  public PerlHashValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
+    super(deserializer);
   }
 
   @NotNull

@@ -18,8 +18,6 @@ package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.stubs.StubInputStream;
-import com.intellij.psi.stubs.StubOutputStream;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
@@ -39,9 +37,9 @@ public final class PerlOneOfValue extends PerlValue implements Iterable<PerlValu
     myVariants = Collections.unmodifiableSet(variants);
   }
 
-  PerlOneOfValue(@NotNull StubInputStream dataStream) throws IOException {
-    super(dataStream);
-    myVariants = Collections.unmodifiableSet(new HashSet<>(PerlValuesManager.readList(dataStream)));
+  PerlOneOfValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
+    super(deserializer);
+    myVariants = deserializer.readValuesSet();
   }
 
   @Nullable
@@ -77,8 +75,8 @@ public final class PerlOneOfValue extends PerlValue implements Iterable<PerlValu
   }
 
   @Override
-  protected void serializeData(@NotNull StubOutputStream dataStream) throws IOException {
-    PerlValuesManager.writeCollection(dataStream, myVariants);
+  protected void serializeData(@NotNull PerlValueSerializer serializer) throws IOException {
+    serializer.writeValuesList(myVariants);
   }
 
   @Override

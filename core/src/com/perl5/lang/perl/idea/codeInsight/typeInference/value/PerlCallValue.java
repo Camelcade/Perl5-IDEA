@@ -23,8 +23,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.psi.stubs.StubInputStream;
-import com.intellij.psi.stubs.StubOutputStream;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.Processor;
 import com.intellij.util.containers.ContainerUtil;
@@ -61,9 +59,9 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
     myArguments = Collections.unmodifiableList(new ArrayList<>(arguments));
   }
 
-  PerlCallValue(@NotNull StubInputStream dataStream) throws IOException {
-    super(dataStream);
-    myArguments = PerlValuesManager.readList(dataStream);
+  PerlCallValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
+    super(deserializer);
+    myArguments = deserializer.readValuesList();
   }
 
   @NotNull
@@ -114,9 +112,9 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
   }
 
   @Override
-  protected void serializeData(@NotNull StubOutputStream dataStream) throws IOException {
-    super.serializeData(dataStream);
-    PerlValuesManager.writeCollection(dataStream, myArguments);
+  protected void serializeData(@NotNull PerlValueSerializer serializer) throws IOException {
+    super.serializeData(serializer);
+    serializer.writeValuesList(myArguments);
   }
 
   @NotNull

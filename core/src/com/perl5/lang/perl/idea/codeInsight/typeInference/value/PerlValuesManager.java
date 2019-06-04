@@ -21,7 +21,6 @@ import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.openapi.util.RecursionManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubInputStream;
-import com.intellij.psi.stubs.StubOutputStream;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.CachedValueProvider;
@@ -41,7 +40,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.*;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
@@ -60,6 +60,7 @@ public final class PerlValuesManager {
   );
 
   private static int id = 0;
+  static final int DUPLICATE_ID = id++;
   // special values
   static final int UNKNOWN_ID = id++;
   static final int UNDEF_ID = id++;
@@ -106,115 +107,17 @@ public final class PerlValuesManager {
   static final int WANTARRAY_ID = id++;
 
   // MUST stay here. Automatically changes on new element creation
-  public static final int VERSION = id++;
+  public static final int VERSION = id;
 
   private static final WeakInterner<PerlValue> INTERNER = new WeakInterner<>();
 
   public static PerlValue readValue(@NotNull StubInputStream dataStream) throws IOException {
-    return intern(deserialize(dataStream));
+    return new PerlValueDeserializer(dataStream).readValue();
   }
 
-  public static <T extends PerlValue> T intern(T value) {
+  static <T extends PerlValue> T intern(T value) {
     //noinspection unchecked
     return (T)INTERNER.intern(value);
-  }
-
-  @NotNull
-  private static PerlValue deserialize(@NotNull StubInputStream dataStream) throws IOException {
-    final int valueId = dataStream.readVarInt();
-    if (valueId == UNKNOWN_ID) {
-      return UNKNOWN_VALUE;
-    }
-    else if (valueId == UNDEF_ID) {
-      return UNDEF_VALUE;
-    }
-    else if (valueId == ARGUMENTS_ID) {
-      return ARGUMENTS_VALUE;
-    }
-    else if (valueId == SCALAR_ID) {
-      return new PerlScalarValue(dataStream);
-    }
-    else if (valueId == SCALAR_CONTEXT_ID) {
-      return new PerlScalarContextValue(dataStream);
-    }
-    else if (valueId == ARRAY_ID) {
-      return new PerlArrayValue(dataStream);
-    }
-    else if (valueId == HASH_ID) {
-      return new PerlHashValue(dataStream);
-    }
-    else if (valueId == DEFERRED_HASH_ID) {
-      return new PerlDeferredHashValue(dataStream);
-    }
-    else if (valueId == REFERENCE_ID) {
-      return new PerlReferenceValue(dataStream);
-    }
-    else if (valueId == BLESSED_ID) {
-      return new PerlBlessedValue(dataStream);
-    }
-    else if (valueId == ONE_OF_ID) {
-      return new PerlOneOfValue(dataStream);
-    }
-    else if (valueId == CALL_OBJECT_ID) {
-      return new PerlCallObjectValue(dataStream);
-    }
-    else if (valueId == CALL_STATIC_ID) {
-      return new PerlCallStaticValue(dataStream);
-    }
-    else if (valueId == ARRAY_ELEMENT_ID) {
-      return new PerlArrayElementValue(dataStream);
-    }
-    else if (valueId == HASH_ELEMENT_VALUE) {
-      return new PerlHashElementValue(dataStream);
-    }
-    else if (valueId == ARITHMETIC_NEGATION) {
-      return new PerlArithmeticNegationValue(dataStream);
-    }
-    else if (valueId == ARRAY_SLICE_ID) {
-      return new PerlArraySliceValue(dataStream);
-    }
-    else if (valueId == HASH_SLICE_ID) {
-      return new PerlHashSliceValue(dataStream);
-    }
-    else if (valueId == SCALAR_DEREFERENCE_ID) {
-      return new PerlScalarDereferenceValue(dataStream);
-    }
-    else if (valueId == UNSHIFT_ID) {
-      return new PerlUnshiftValue(dataStream);
-    }
-    else if (valueId == PUSH_ID) {
-      return new PerlPushValue(dataStream);
-    }
-    else if (valueId == ARRAY_DEREFERENCE_ID) {
-      return new PerlArrayDereferenceValue(dataStream);
-    }
-    else if (valueId == HASH_DEREFERENCE_ID) {
-      return new PerlHashDereferenceValue(dataStream);
-    }
-    else if (valueId == SUBLIST_ID) {
-      return new PerlSublistValue(dataStream);
-    }
-    throw new RuntimeException("Don't know how to deserialize a value: " + valueId);
-  }
-
-  @NotNull
-  static List<PerlValue> readList(@NotNull StubInputStream dataStream) throws IOException {
-    int size = dataStream.readVarInt();
-    if (size == 0) {
-      return Collections.emptyList();
-    }
-    List<PerlValue> elements = new ArrayList<>(size);
-    for (int i = 0; i < size; i++) {
-      elements.add(readValue(dataStream));
-    }
-    return Collections.unmodifiableList(elements);
-  }
-
-  static void writeCollection(@NotNull StubOutputStream dataStream, @NotNull Collection<PerlValue> elements) throws IOException {
-    dataStream.writeVarInt(elements.size());
-    for (PerlValue element : elements) {
-      element.serialize(dataStream);
-    }
   }
 
   /**

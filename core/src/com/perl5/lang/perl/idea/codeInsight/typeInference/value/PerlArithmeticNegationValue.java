@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.util.ObjectUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -35,9 +34,8 @@ public class PerlArithmeticNegationValue extends PerlOperationValue {
     }
   }
 
-  PerlArithmeticNegationValue(@NotNull StubInputStream dataStream)
-    throws IOException {
-    super(dataStream);
+  PerlArithmeticNegationValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
+    super(deserializer);
   }
 
   @NotNull

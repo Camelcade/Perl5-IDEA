@@ -18,7 +18,6 @@ package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
@@ -46,7 +45,7 @@ public abstract class PerlValue {
   protected PerlValue() {
   }
 
-  protected PerlValue(@NotNull StubInputStream dataStream) throws IOException {
+  PerlValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
   }
 
   /**
@@ -118,11 +117,10 @@ public abstract class PerlValue {
    * Serializes this value data
    */
   public final void serialize(@NotNull StubOutputStream dataStream) throws IOException {
-    dataStream.writeVarInt(getSerializationId());
-    serializeData(dataStream);
+    new PerlValueSerializer(dataStream).writeValue(this);
   }
 
-  protected abstract void serializeData(@NotNull StubOutputStream dataStream) throws IOException;
+  protected abstract void serializeData(@NotNull PerlValueSerializer serializer) throws IOException;
 
   /**
    * @return a context type for this value. Or null if context can't be determined (can be any)

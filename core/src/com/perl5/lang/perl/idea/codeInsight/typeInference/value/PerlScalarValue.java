@@ -17,8 +17,6 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
-import com.intellij.psi.stubs.StubInputStream;
-import com.intellij.psi.stubs.StubOutputStream;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -42,9 +40,9 @@ public final class PerlScalarValue extends PerlValue {
     myValue = value;
   }
 
-  PerlScalarValue(@NotNull StubInputStream dataStream) throws IOException {
-    super(dataStream);
-    myValue = Objects.requireNonNull(dataStream.readNameString());
+  PerlScalarValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
+    super(deserializer);
+    myValue = Objects.requireNonNull(deserializer.readNameString());
   }
 
   @NotNull
@@ -60,8 +58,8 @@ public final class PerlScalarValue extends PerlValue {
   }
 
   @Override
-  protected void serializeData(@NotNull StubOutputStream dataStream) throws IOException {
-    dataStream.writeName(myValue);
+  protected void serializeData(@NotNull PerlValueSerializer serializer) throws IOException {
+    serializer.writeName(myValue);
   }
 
   @Override

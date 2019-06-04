@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
-import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.util.ObjectUtils;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
@@ -33,8 +32,8 @@ public final class PerlBlessedValue extends PerlParametrizedOperationValue {
     super(targetValue, blessValue);
   }
 
-  PerlBlessedValue(@NotNull StubInputStream dataStream) throws IOException {
-    super(dataStream);
+  PerlBlessedValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
+    super(deserializer);
   }
 
   @NotNull
