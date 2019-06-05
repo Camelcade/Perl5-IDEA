@@ -1,8 +1,5 @@
-import org.jetbrains.grammarkit.tasks.GenerateLexer
-import org.jetbrains.grammarkit.tasks.GenerateParser
-
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +13,9 @@ import org.jetbrains.grammarkit.tasks.GenerateParser
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+import org.jetbrains.grammarkit.tasks.GenerateLexer
+import org.jetbrains.grammarkit.tasks.GenerateParser
 
 def genRoot = file('gen')
 
@@ -38,7 +38,7 @@ idea{
 
 intellij{
   type 'IC'
-  plugins = [project(':perl5.core')]
+  plugins = [project(':perl5.core'), 'java']
 }
 
 dependencies{
