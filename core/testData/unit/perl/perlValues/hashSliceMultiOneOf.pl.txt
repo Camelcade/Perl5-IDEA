@@ -13,14 +13,14 @@ else{
 ----------
 @other
 PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 175 in hashSliceMultiOneOf.pl
-Array(OneOf[Array(1, 3),
+OneOf[Array(1, 3),
 Array(6, 1),
 Array(six, two),
-Array(two, four)])
+Array(two, four)]
 ----------
 Resolved
 ----------
-Array(OneOf[Array(1, 3),
+OneOf[Array(1, 3),
 Array(6, 1),
 Array(six, two),
-Array(two, four)])
+Array(two, four)]

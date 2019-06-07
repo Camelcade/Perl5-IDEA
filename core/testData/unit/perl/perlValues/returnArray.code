@@ -1,0 +1,7 @@
+sub get_list{
+  return qw/one two three/;
+}
+
+@var = get_list();
+
+@v<caret>ar;

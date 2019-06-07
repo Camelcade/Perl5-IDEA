@@ -1,0 +1,7 @@
+sub get_list{
+  return (42);
+}
+
+@var = get_list();
+
+@v<caret>ar;

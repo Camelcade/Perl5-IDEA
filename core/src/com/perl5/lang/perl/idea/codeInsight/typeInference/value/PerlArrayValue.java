@@ -123,8 +123,18 @@ public final class PerlArrayValue extends PerlListValue implements Iterable<Perl
     private Builder() {
     }
 
-    PerlArrayValue build() {
-      return myElements.isEmpty() ? EMPTY_ARRAY : new PerlArrayValue(myElements);
+    PerlValue build() {
+      if (myElements.isEmpty()) {
+        return EMPTY_ARRAY;
+      }
+      if (myElements.size() == 1) {
+        PerlValue firstElement = myElements.get(0);
+        // call element exception should be removed after taking call context into account
+        if (firstElement.getContextType() == PerlContextType.LIST && !(firstElement instanceof PerlCallValue)) {
+          return firstElement;
+        }
+      }
+      return new PerlArrayValue(myElements);
     }
   }
 

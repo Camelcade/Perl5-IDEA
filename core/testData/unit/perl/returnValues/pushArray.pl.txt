@@ -5,4 +5,4 @@
   @array;
 }
 ----------
-Unshift: [Array: [first, one], Push: [Array: [SUB_ARGUMENTS], Array: [last, one]]]
+Unshift: [Array: [first, one], Push: [SUB_ARGUMENTS, Array: [last, one]]]

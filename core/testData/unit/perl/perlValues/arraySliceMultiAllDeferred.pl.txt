@@ -9,7 +9,7 @@ sub get_indexes{
 ----------
 @other
 PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 108 in arraySliceMultiAllDeferred.pl
-Array(ArraySlice: Array: [one, two, three, four][main::get_indexes()])
+ArraySlice: Array: [one, two, three, four][main::get_indexes()]
 ----------
 Resolved
 ----------

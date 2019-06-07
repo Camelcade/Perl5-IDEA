@@ -83,8 +83,7 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
     }
 
     List<PerlValue> resolvedArguments = computeResolvedArguments(resolvedNamespaceValue, resolver);
-    PerlArrayValue argumentsValue =
-      resolvedArguments.isEmpty() ? PerlArrayValue.EMPTY_ARRAY : PerlArrayValue.builder().addElements(resolvedArguments).build();
+    PerlValue argumentsValue = PerlArrayValue.builder().addElements(resolvedArguments).build();
 
     GlobalSearchScope resolveScope = resolver.getResolveScope();
     PerlOneOfValue.Builder builder = PerlOneOfValue.builder();

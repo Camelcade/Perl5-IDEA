@@ -3,4 +3,4 @@
   return @args;
 }
 ----------
-Array: [SUB_ARGUMENTS]
+SUB_ARGUMENTS

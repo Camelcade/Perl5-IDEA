@@ -1,0 +1,13 @@
+sub get_list{
+  return qw/one two three/;
+}
+sub get_indexes{
+  return(2);
+}
+
+@array = get_list();
+@indexes = get_indexes();
+
+@var = @array[@indexes];
+
+@v<caret>ar;

@@ -1,0 +1,15 @@
+sub get_list{
+  return (42);
+}
+
+@var = get_list();
+
+@v<caret>ar;
+----------
+@var
+PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 52 in returnArraySingleElement.pl
+Array(main::get_list())
+----------
+Resolved
+----------
+Array(42)
