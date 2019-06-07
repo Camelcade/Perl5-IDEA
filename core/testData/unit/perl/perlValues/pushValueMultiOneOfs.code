@@ -1,0 +1,12 @@
+my @array = qw/one two three four/;
+push @array, 1 if $a;
+push @array, 2 if $a;
+push @array, 3 if $a;
+push @array, 4 if $a;
+push @array, 5 if $a;
+push @array, 6 if $a;
+push @array, 7 if $a;
+push @array, 8 if $a;
+push @array, 9 if $a;
+push @array, 10 if $a;
+@ar<caret>ray;
