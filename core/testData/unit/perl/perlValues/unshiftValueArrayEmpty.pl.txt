@@ -5,7 +5,7 @@ unshift @array, @other;
 ----------
 @array
 PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 58 in unshiftValueArrayEmpty.pl
-Unshift: [Array: [], Array: [1, 2]]
+Array(1, 2)
 ----------
 Resolved
 ----------

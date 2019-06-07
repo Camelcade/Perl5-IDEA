@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.function.BiFunction;
 
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlArrayValue.EMPTY_ARRAY;
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager.UNSHIFT_ID;
 
@@ -95,7 +96,15 @@ public class PerlUnshiftValue extends PerlParametrizedOperationValue {
     if (modification.isEmpty()) {
       return UNKNOWN_VALUE;
     }
-    return function.apply(PerlValuesManager.from(target), PerlArrayValue.builder().addPsiElements(modification).build());
+    PerlValue targetValue = PerlValuesManager.from(target);
+    PerlValue modificationValue = PerlArrayValue.builder().addPsiElements(modification).build();
+    if (targetValue == EMPTY_ARRAY) {
+      return modificationValue;
+    }
+    if (modificationValue == EMPTY_ARRAY) {
+      return targetValue;
+    }
+    return function.apply(targetValue, modificationValue);
   }
 
 
