@@ -35,9 +35,6 @@ public class PerlSublistValue extends PerlOperationValue {
     super(baseValue);
     myStartOffset = startOffset;
     myEndOffset = endOffset;
-    if (baseValue.isDeterministic()) {
-      LOG.error("Deterministic values should be computed in-place: " + baseValue);
-    }
   }
 
   public PerlSublistValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
@@ -146,15 +143,6 @@ public class PerlSublistValue extends PerlOperationValue {
 
   @NotNull
   public static PerlValue createShiftValue(@NotNull PerlValue listValue) {
-    if (listValue.isDeterministic()) {
-      return computeStrictResolve(listValue, 1, 0);
-    }
-
-    PerlValue resolvedValue = computeResolve(listValue, 1, 0);
-    if (resolvedValue != null) {
-      return resolvedValue;
-    }
-
     if (listValue instanceof PerlSublistValue) {
       return new PerlSublistValue(((PerlSublistValue)listValue).getBaseValue(),
                                   ((PerlSublistValue)listValue).getStartOffset() + 1,
@@ -165,15 +153,6 @@ public class PerlSublistValue extends PerlOperationValue {
 
   @NotNull
   public static PerlValue createPopValue(@NotNull PerlValue listValue) {
-    if (listValue.isDeterministic()) {
-      return computeStrictResolve(listValue, 0, 1);
-    }
-
-    PerlValue resolvedValue = computeResolve(listValue, 0, 1);
-    if (resolvedValue != null) {
-      return resolvedValue;
-    }
-
     if (listValue instanceof PerlSublistValue) {
       return new PerlSublistValue(((PerlSublistValue)listValue).getBaseValue(),
                                   ((PerlSublistValue)listValue).getStartOffset(),

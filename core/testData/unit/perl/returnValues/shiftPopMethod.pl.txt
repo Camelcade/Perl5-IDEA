@@ -5,4 +5,4 @@ sub somesub{
   @ar<caret>ray;
 }
 ----------
-Array: [Foo::Bar->something()]
+Sublist (1;1) Array: [1, Foo::Bar->something(), 2]

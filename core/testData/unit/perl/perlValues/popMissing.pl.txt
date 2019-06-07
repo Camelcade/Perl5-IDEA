@@ -7,7 +7,7 @@ pop @array;
 ----------
 @array
 PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 76 in popMissing.pl
-Value unknown
+Sublist (0;4) Array: [one, two, three]
 ----------
 Resolved
 ----------

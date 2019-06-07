@@ -4,7 +4,7 @@ shift @array;
 ----------
 @array
 PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 42 in shiftOnce.pl
-Array(two, three)
+Sublist (1;0) Array: [one, two, three]
 ----------
 Resolved
 ----------

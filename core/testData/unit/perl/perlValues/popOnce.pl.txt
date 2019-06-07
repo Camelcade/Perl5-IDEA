@@ -4,7 +4,7 @@ pop @array;
 ----------
 @array
 PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 40 in popOnce.pl
-Array(one, two)
+Sublist (0;1) Array: [one, two, three]
 ----------
 Resolved
 ----------

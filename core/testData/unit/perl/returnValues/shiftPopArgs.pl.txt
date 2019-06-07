@@ -5,4 +5,4 @@ sub somesub{
   @ar<caret>ray;
 }
 ----------
-SUB_ARGUMENTS
+Sublist (1;1) Array: [1, SUB_ARGUMENTS, 2]

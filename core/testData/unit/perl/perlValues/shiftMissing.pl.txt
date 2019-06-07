@@ -7,7 +7,7 @@ shift @array;
 ----------
 @array
 PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 84 in shiftMissing.pl
-Value unknown
+Sublist (4;0) Array: [one, two, three]
 ----------
 Resolved
 ----------
