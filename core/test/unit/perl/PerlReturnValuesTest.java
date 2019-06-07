@@ -25,6 +25,10 @@ public class PerlReturnValuesTest extends PerlLightTestCase {
     return "testData/unit/perl/returnValues";
   }
 
+  public void testMultiPushUnshift() {doTest();}
+
+  public void testMultiPushUnshiftKnown() {doTest();}
+
   public void testArrayRefElement() {doTest();}
 
   public void testHashRefElement() {doTest();}

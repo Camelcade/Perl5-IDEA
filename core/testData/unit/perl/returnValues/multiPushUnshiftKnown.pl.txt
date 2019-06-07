@@ -1,0 +1,10 @@
+<caret>sub somesub{
+  my @array = qw/one two three/;
+  push @array, 1 if $a;
+  push @array, 2 if $b;
+  unshift @array, 3 if $d;
+  unshift @array, 4 if $d;
+  @array;
+}
+----------
+OneOf: [Array: [one, two, three], Push: [Array: [one, two, three], Array: [1]], Push: [OneOf: [Array: [one, two, three], Push: [Array: [one, two, three], Array: [1]]], Array: [2]], Unshift: [Array: [3], OneOf: [Array: [one, two, three], Push: [Array: [one, two, three], Array: [1]], Push: [OneOf: [Array: [one, two, three], Push: [Array: [one, two, three], Array: [1]]], Array: [2]]]], Unshift: [Array: [4], OneOf: [Array: [one, two, three], Push: [Array: [one, two, three], Array: [1]], Push: [OneOf: [Array: [one, two, three], Push: [Array: [one, two, three], Array: [1]]], Array: [2]], Unshift: [Array: [3], OneOf: [Array: [one, two, three], Push: [Array: [one, two, three], Array: [1]], Push: [OneOf: [Array: [one, two, three], Push: [Array: [one, two, three], Array: [1]]], Array: [2]]]]]]]

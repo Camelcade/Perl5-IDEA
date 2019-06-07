@@ -129,6 +129,9 @@ public final class PerlArrayValue extends PerlListValue implements Iterable<Perl
       }
       if (myElements.size() == 1) {
         PerlValue firstElement = myElements.get(0);
+        if (firstElement.isUnknown()) {
+          return UNKNOWN_VALUE;
+        }
         // call element exception should be removed after taking call context into account
         if (firstElement.getContextType() == PerlContextType.LIST && !(firstElement instanceof PerlCallValue)) {
           return firstElement;

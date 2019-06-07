@@ -16,5 +16,4 @@ Array(three, four)])
 ----------
 Resolved
 ----------
-Array(five, 6, OneOf[Array(Value unknown),
-Array(three, four)])
+Array(five, 6, three, four)
