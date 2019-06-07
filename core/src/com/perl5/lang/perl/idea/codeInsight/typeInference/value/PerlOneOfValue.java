@@ -30,6 +30,8 @@ import java.util.*;
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
 
 public final class PerlOneOfValue extends PerlValue implements Iterable<PerlValue> {
+  private static final int MAX_VARIANTS_NUMBER = 1024;
+
   @NotNull
   private final Set<PerlValue> myVariants;
 
@@ -186,6 +188,9 @@ public final class PerlOneOfValue extends PerlValue implements Iterable<PerlValu
 
     public Builder addVariants(@NotNull PsiElement... elements) {
       for (PsiElement element : elements) {
+        if (myVariants.size() >= MAX_VARIANTS_NUMBER) {
+          break;
+        }
         addVariant(element);
       }
       return this;
@@ -201,9 +206,14 @@ public final class PerlOneOfValue extends PerlValue implements Iterable<PerlValu
       }
 
       if (variant instanceof PerlOneOfValue) {
-        myVariants.addAll(((PerlOneOfValue)variant).myVariants);
+        for (PerlValue value : ((PerlOneOfValue)variant).myVariants) {
+          if (myVariants.size() >= MAX_VARIANTS_NUMBER) {
+            break;
+          }
+          addVariant(value);
+        }
       }
-      else {
+      else if (myVariants.size() < MAX_VARIANTS_NUMBER) {
         myVariants.add(variant);
       }
       return this;
