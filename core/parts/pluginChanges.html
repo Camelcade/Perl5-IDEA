@@ -1,107 +1,20 @@
 <p>Updates:</p>
 <ul>
-  <li>Code insight:<br/>
-    Control flow graph is now computed for your sources, moving plugin to the next level of intelligence. For start:
+  <li>Plugin now understands Perl much better and can infer values of different operations and invocations. Therefore - resolve and
+    completion should be much better in many places. (Seriously, sometimes it's looks just like a magic.)
+  </li>
+  <li>Names suggester now taking inferred values into account when suggesting variable names.</li>
+  <li>Introduce variable action is now available for the perl code</li>
+  <li>Documentation
     <ul>
-      <li>Unreachable code inspection.</li>
-      <li>Exit points highlighting.</li>
+      <li>Pod support has been deeply re-worked and should be much better now</li>
+      <li>Quick-doc on built-ins</li>
+      <li>Quick-doc on completion elements</li>
+      <li>Better completion, livetemplates, smartkeys, resolve and refactoring for POD</li>
     </ul>
-  </li>
-  <li>Code navigation:
-    <ul>
-      <li>Grouping usages by the file structure, displaying usage context (sub, package or pod section), <a
-          href="https://github.com/Camelcade/Perl5-IDEA/issues/1919">#1919</a>.
-      </li>
-      <li>Grouping and filtering usages by the read/write access type, including list and hash modifying subs, <a
-          href="https://github.com/Camelcade/Perl5-IDEA/issues/1918">#1918</a>.
-      </li>
-      <li>Breadcrumbs for perl and pod files, including inline POD, by <a
-          href="https://github.com/Camelcade/Perl5-IDEA/issues/1875">@psewi-cpan</a>.
-      </li>
-    </ul>
-  </li>
-  <li>Tests running, by
-    <a href="https://github.com/Camelcade/Perl5-IDEA/issues/805">@dimentox</a> and <a
-        href="https://github.com/Camelcade/Perl5-IDEA/issues/1935">@tomk3003</a>
-    <ul>
-      <li><code>Run Configuration</code> to run tests using <code>prove</code> with default IDE tests result UI, (requires <a
-          href="https://metacpan.org/release/TAP-Formatter-Camelcade"><code>Tap::Formatter::Camelcade</code></a>).
-      </li>
-      <li>Diff window for a test failure output: got/expected.</li>
-      <li>Parallel tests running.</li>
-      <li>Debugging tests (parallel running suppressed).</li>
-      <li>Runing tests with coverage (parallel running suppressed).</li>
-    </ul>
-
-  </li>
-  <li>Debugger:
-    <ul>
-      <li>Debugger is now displays stringified objects representation if <code>""</code> operator is overloaded. Additionally, you may
-        specify
-        custom renderer for any package, using
-        <code>File | Settings | Build, Execution, Deployment | Debugger | Data Views | Perl5 Type Renderers</code> settings (requires <a
-            href="https://metacpan.org/pod/Devel::Camelcadedb">debugger module</a> 2019.1), by <a
-            href="https://github.com/Camelcade/Perl5-IDEA/issues/1750">@cdalvaro</a>.
-      </li>
-      <li>New option for the remote debugging: automatic reconnection. Allows to re-connect to the process until manually stopped, by <a
-          href="https://github.com/Camelcade/Perl5-IDEA/issues/1369">@djstauffer</a>.
-      </li>
-    </ul>
-  </li>
-  <li>Perl modules support:
-    <ul>
-      <li><code>Readonly</code> syntax support, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1415">@pJungler</a>.</li>
-      <li><code>Log::Log4perl</code> imports support, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1412">@giddel</a>.</li>
-      <li>Support for the <a href="https://metacpan.org/pod/Pod::Weaver">Pod::Weaver</a> syntax, by <a
-          href="https://github.com/Camelcade/Perl5-IDEA/issues/1839">@Zaitsev</a>.
-      </li>
-      <li>Improved resolve for <code>File::Spec::Functions</code> subs. Actual module has tricky exporting, binding OS-specific
-        implementation
-        in runtime. Plugin for now resolves to the Unix implementations from the <code>File::Spec::Unix</code>, by <a
-            href="https://github.com/Camelcade/Perl5-IDEA/issues/1393">@grakkpl</a>.
-      </li>
-      <li><a href="https://github.com/Camelcade/Bundle-Camelcade"><code>Bundle::Camelcade</code></a> module introduced. Installs all modules
-        that may may be required when working with the perl plugin. Going to be suggested for installation as alternative for particular
-        modules, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1946">#1946</a>.
-      </li>
-    </ul>
-
-  </li>
-  <li>Automatic injections can now be configured for strings and heredocs using java regular expressions in <code>File | Settings | Editor |
-    Language Injections</code>,
-    by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1878">@Christoffen</a>.
-  </li>
-  <li>Support for the POD in the <code>__END__</code> block, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1896">#1896</a>.</li>
-  <li>Support for interpolation in match regex with <code>(?{...})</code> and <code>(??{...})</code>, <a
-      href="https://github.com/Camelcade/Perl5-IDEA/issues/1906">#1906</a>.
-  </li>
-  <li>Truthiness inspection with quickfixes to add explicit <code>defined</code> or string/numeric equality check, by <a
-      href="https://github.com/Camelcade/Perl5-IDEA/issues/1715">@RickMeasham</a>.
   </li>
 </ul>
 <p>Fixes:</p>
-<li><code>Run Configuration</code> editor now looks less chaotic.</li>
-<li>Packages list in <code>Install package</code> action is now split by spaces, commas and semicolons, allowing to install arbitrary
-  version
-  with cpan, e.g. <code>HURRICUP/Devel-Camelcadedb-v2018.3.0.tar.gz</code>.
-</li>
-<li>Formatting and enter handling for code in replacement regex with <code>e</code> modifier, <a
-    href="https://github.com/Camelcade/Perl5-IDEA/issues/1915">#1915</a></li>
-<li>It's now possible to add perl with non-default <code>-v</code> response, by <a
-    href="https://github.com/Camelcade/Perl5-IDEA/issues/1879">@EdenOaksConsulting</a>.
-</li>
-<li>Better parsing for <code>Types::Standard</code> things, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1887">#1887</a>.</li>
-<li>Better parsing of different <code>try-catch</code> syntaxes.</li>
-<li>Minor parser improvements: <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1890">#1890</a>,
-  <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1891">#1891</a>,
-  <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1893">#1893</a>,
-  <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1894">#1894</a>,
-  <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1895">#1895</a>,
-  <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1901">#1901</a>,
-  <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1904">#1904</a>,
-  <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1905">#1905</a>,
-  <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1897">#1897</a>.
-</li>
 <ul>
 
 </ul>
