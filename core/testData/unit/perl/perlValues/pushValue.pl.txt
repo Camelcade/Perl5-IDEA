@@ -4,7 +4,7 @@ push @array, 42;
 ----------
 @array
 PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 33 in pushValue.pl
-Array(42)
+Push: [Array: [], Array: [42]]
 ----------
 Resolved
 ----------

@@ -6,4 +6,4 @@
   @array;
 }
 ----------
-Array: [HashSlice: Hash: [SUB_ARGUMENTS]{Array: [key1, key2]}, SUB_ARGUMENTS, ArraySlice: SUB_ARGUMENTS[Array: [1, 2]]]
+Unshift: [Array: [HashSlice: Hash: [SUB_ARGUMENTS]{Array: [key1, key2]}], Push: [Array: [SUB_ARGUMENTS], Array: [ArraySlice: SUB_ARGUMENTS[Array: [1, 2]]]]]

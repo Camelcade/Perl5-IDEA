@@ -4,7 +4,7 @@ push @array, 42, 69;
 ----------
 @array
 PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 37 in pushValueMulti.pl
-Array(42, 69)
+Push: [Array: [], Array: [42, 69]]
 ----------
 Resolved
 ----------

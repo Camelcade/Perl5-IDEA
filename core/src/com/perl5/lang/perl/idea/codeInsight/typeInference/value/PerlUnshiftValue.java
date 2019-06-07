@@ -20,6 +20,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.psi.PerlUnshiftPushExpr;
 import com.perl5.lang.perl.psi.PsiPerlArrayUnshiftExpr;
+import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -34,11 +35,6 @@ public class PerlUnshiftValue extends PerlParametrizedOperationValue {
   private PerlUnshiftValue(@NotNull PerlValue arrayValue,
                            @NotNull PerlValue prefixValue) {
     super(arrayValue, prefixValue);
-    if (arrayValue.isDeterministic() && prefixValue.isDeterministic()) {
-      LOG.error("Bot array and prefix are deterministic and should be computed in-place: " +
-                "array=" + arrayValue + "; " +
-                "prefix=" + prefixValue);
-    }
   }
 
   public PerlUnshiftValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
@@ -51,6 +47,12 @@ public class PerlUnshiftValue extends PerlParametrizedOperationValue {
                                      @NotNull PerlValue resolvedPrefixValue,
                                      @NotNull PerlValueResolver resolver) {
     return computeStrictResolve(resolvedArrayValue, resolvedPrefixValue);
+  }
+
+  @Nullable
+  @Override
+  protected PerlContextType getContextType() {
+    return PerlContextType.LIST;
   }
 
   @Override
@@ -98,11 +100,7 @@ public class PerlUnshiftValue extends PerlParametrizedOperationValue {
 
 
   public static PerlValue create(@NotNull PerlValue arrayValue, @NotNull PerlValue prefixValue) {
-    if (arrayValue.isDeterministic() && prefixValue.isDeterministic()) {
-      return PerlValuesBuilder.convert(arrayValue, prefixValue, PerlUnshiftValue::computeStrictResolve);
-    }
-    PerlValue resolvedValue = computeResolve(arrayValue, prefixValue);
-    return !PerlValue.isUnknown(resolvedValue) ? resolvedValue : new PerlUnshiftValue(arrayValue, prefixValue);
+    return new PerlUnshiftValue(arrayValue, prefixValue);
   }
 }
 

@@ -5,7 +5,7 @@ push @array, @other;
 ----------
 @array
 PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 68 in pushValueArrayNonEmpty.pl
-Array(1, 2, one, two, three)
+Push: [Array: [1, 2], Array: [one, two, three]]
 ----------
 Resolved
 ----------

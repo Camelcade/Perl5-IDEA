@@ -5,7 +5,7 @@ $v<caret>ar;
 ----------
 $var
 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 77 in pushValueArrayResult.pl
-6
+scalar Push: [Array: [1, 2, 3], Array: [one, two, three]]
 ----------
 Resolved
 ----------

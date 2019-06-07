@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.psi.PsiPerlArrayPushExpr;
+import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -30,11 +31,6 @@ public class PerlPushValue extends PerlParametrizedOperationValue {
   private PerlPushValue(@NotNull PerlValue arrayValue,
                         @NotNull PerlValue suffixValue) {
     super(arrayValue, suffixValue);
-    if (arrayValue.isDeterministic() && suffixValue.isDeterministic()) {
-      LOG.error("Bot array and suffix are deterministic and should be computed in-place: " +
-                "array=" + arrayValue + "; " +
-                "suffix=" + suffixValue);
-    }
   }
 
   PerlPushValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
@@ -59,6 +55,12 @@ public class PerlPushValue extends PerlParametrizedOperationValue {
     return "Push: [" + getBaseValue() + ", " + getParameter() + "]";
   }
 
+  @Nullable
+  @Override
+  protected PerlContextType getContextType() {
+    return PerlContextType.LIST;
+  }
+
   @NotNull
   private static PerlValue computeStrictResolve(@NotNull PerlValue resolvedArrayValue,
                                                 @NotNull PerlValue resolvedSuffixValue) {
@@ -81,11 +83,7 @@ public class PerlPushValue extends PerlParametrizedOperationValue {
 
   @NotNull
   public static PerlValue create(@NotNull PerlValue arrayValue, @NotNull PerlValue suffixValue) {
-    if (arrayValue.isDeterministic() && suffixValue.isDeterministic()) {
-      return PerlValuesBuilder.convert(arrayValue, suffixValue, PerlPushValue::computeStrictResolve);
-    }
-    PerlValue resolvedValue = computeResolve(arrayValue, suffixValue);
-    return !PerlValue.isUnknown(resolvedValue) ? resolvedValue : new PerlPushValue(arrayValue, suffixValue);
+    return new PerlPushValue(arrayValue, suffixValue);
   }
 }
 

@@ -4,7 +4,7 @@ unshift @array, 42;
 ----------
 @array
 PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 36 in unshiftValue.pl
-Array(42)
+Unshift: [Array: [42], Array: []]
 ----------
 Resolved
 ----------

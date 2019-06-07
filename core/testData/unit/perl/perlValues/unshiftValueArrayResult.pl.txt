@@ -5,7 +5,7 @@ $v<caret>ar;
 ----------
 $var
 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 80 in unshiftValueArrayResult.pl
-6
+scalar Unshift: [Array: [one, two, three], Array: [1, 2, 3]]
 ----------
 Resolved
 ----------
