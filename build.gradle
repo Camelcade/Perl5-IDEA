@@ -94,8 +94,7 @@ allprojects {
   }
 
   publishPlugin {
-    username = project.findProperty('jbRepoUser') ?: ''
-    password = project.findProperty('jbRepoPass') ?: ''
+    token = project.findProperty('jbToken') ?: ''
   }
 }
 
