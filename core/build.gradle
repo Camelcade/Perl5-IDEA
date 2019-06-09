@@ -24,10 +24,6 @@ sourceSets {
     java.srcDirs project.files('src', genRoot)
     resources.srcDir file('resources')
   }
-  test {
-    java.srcDir file('test')
-    resources.srcDirs file('testData')
-  }
 }
 
 idea {
@@ -85,17 +81,3 @@ compileJava {
   dependsOn generatePodLexer
 }
 
-prepareSandbox {
-  inputs.dir('scripts')
-  outputs.dir("$it.destinationDir/$intellij.pluginName/perl/")
-}
-
-project.afterEvaluate {
-  prepareSandbox.doLast {
-    def targetPath = "$it.destinationDir/$intellij.pluginName/perl/"
-    copy {
-      from 'scripts'
-      into targetPath
-    }
-  }
-}

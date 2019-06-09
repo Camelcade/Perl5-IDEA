@@ -38,12 +38,12 @@ idea{
 
 intellij{
   type 'IC'
-  plugins = [project(':perl5.core'), 'java']
+  plugins = [project(':perl5.plugin'), 'java']
 }
 
 dependencies{
   compileOnly project(":perl5.core")
-  testCompile project(":perl5.core").sourceSets.test.output
+  testCompile project(":perl5.plugin").sourceSets.test.output
 }
 
 apply plugin: 'org.jetbrains.grammarkit'

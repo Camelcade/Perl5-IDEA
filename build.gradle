@@ -34,6 +34,22 @@ repositories {
 def isCI = System.getenv("CI")
 def agentFiles = files('lib/org.jacoco.agent-0.8.1.jar')
 
+Set pluginProjectsNames = [
+  "perl5.plugin",
+  "perl5.transport.docker",
+  "perl5.transport.wsl",
+  "perl5.lang.tt2",
+  "perl5.lang.mojo",
+  "perl5.lang.embedded",
+  "perl5.lang.mason.framework",
+  "perl5.lang.mason.htmlmason",
+  "perl5.lang.mason.mason2"
+]
+
+def pluginProjects = allprojects.findAll {
+  return pluginProjectsNames.contains(it.name)
+}
+
 allprojects {
   apply plugin: 'jacoco'
   dependencies{
@@ -98,15 +114,16 @@ allprojects {
   }
 }
 
-
-subprojects {
-  patchPluginXml {
-    inputs.files(descriptionFile, changesFile)
-    pluginDescription(file(descriptionFile).text)
-    changeNotes(file(changesFile).text)
+pluginProjects.forEach {
+  def description = it.file(descriptionFile)
+  def changes = it.file(changesFile)
+  it.patchPluginXml {
+    inputs.files(description, changes)
+    pluginDescription(description.text)
+    changeNotes(changes.text)
   }
 
-  afterEvaluate {
+  it.afterEvaluate {
     coveralls.sourceDirs += it.sourceSets.main.java.srcDirs.findAll { file -> file.name == "src" }
   }
 }
@@ -161,7 +178,7 @@ intellij {
     alternativeIdePath = project.idea_path
   }
   plugins = ["PsiViewer:$psiViewerVersion", 'IntelliLang', 'coverage', 'Docker', 'remote-run', // would be nice to have transient plugins
-             project(':perl5.core'),
+             project(':perl5.plugin'),
              project(':perl5.transport.docker'),
              project(':perl5.transport.wsl'),
              project(':perl5.lang.tt2'),
@@ -189,5 +206,5 @@ sourceSets {
 }
 
 task publishAllPlugins {
-  subprojects.each { dependsOn("${it.name}:publishPlugin") }
+  pluginProjects.each { dependsOn("${it.name}:publishPlugin") }
 }

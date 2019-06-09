@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +15,12 @@
  */
 
 rootProject.name = 'perl5'
+include 'perl5.plugin'
+project(':perl5.plugin').projectDir = file('plugin')
 include 'perl5.core'
 project(':perl5.core').projectDir = file('core')
+include 'perl5.core.java'
+project(':perl5.core.java').projectDir = file('core/java')
 include 'perl5.transport.docker'
 project(':perl5.transport.docker').projectDir = file('docker')
 include 'perl5.transport.wsl'
