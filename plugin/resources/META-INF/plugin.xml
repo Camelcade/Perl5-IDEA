@@ -25,7 +25,7 @@
 
   <depends>com.intellij.modules.lang</depends>
   <depends optional="true" config-file="intellilang-deps.xml">org.intellij.intelliLang</depends>
-  <depends optional="true" config-file="java-deps.xml">com.intellij.modules.java</depends>
+  <depends optional="true" config-file="idea-deps.xml">com.intellij.modules.java</depends>
   <depends optional="true" config-file="coverage-deps.xml">com.intellij.modules.coverage</depends>
 
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="plugin-pod.xml" xpointer="xpointer(/idea-plugin/*)"/>
