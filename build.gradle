@@ -109,6 +109,10 @@ allprojects {
     }
   }
 
+  it.afterEvaluate {
+    coveralls.sourceDirs += it.sourceSets.main.java.srcDirs.findAll { file -> file.name == "src" }
+  }
+
   publishPlugin {
     token = project.findProperty('jbToken') ?: ''
   }
@@ -121,10 +125,6 @@ pluginProjects.forEach {
     inputs.files(description, changes)
     pluginDescription(description.text)
     changeNotes(changes.text)
-  }
-
-  it.afterEvaluate {
-    coveralls.sourceDirs += it.sourceSets.main.java.srcDirs.findAll { file -> file.name == "src" }
   }
 }
 

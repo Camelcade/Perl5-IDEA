@@ -32,6 +32,13 @@ sourceSets {
   }
 }
 
+jacocoTestReport{
+  sourceDirectories = files(sourceSets.main.java.srcDirs)
+  classDirectories = files(sourceSets.main.output)
+  additionalSourceDirs = files(project(':perl5.core').sourceSets.main.java.srcDirs)
+  additionalClassDirs = files(project(':perl5.core').sourceSets.main.output)
+}
+
 intellij {
   type 'IC'
   intellij.plugins = ["PsiViewer:$psiViewerVersion", 'IntelliLang', 'coverage', 'java']
