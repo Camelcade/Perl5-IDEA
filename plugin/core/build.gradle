@@ -34,7 +34,7 @@ idea {
 
 intellij {
   type 'IC'
-  intellij.plugins = ["PsiViewer:$psiViewerVersion", 'IntelliLang', 'coverage', 'java']
+  intellij.plugins = ["PsiViewer:$psiViewerVersion", 'java']
 }
 
 apply plugin: 'org.jetbrains.grammarkit'

@@ -21,6 +21,10 @@ include 'perl5.core'
 project(':perl5.core').projectDir = file('plugin/core')
 include 'perl5.core.idea'
 project(':perl5.core.idea').projectDir = file('plugin/core-idea')
+include 'perl5.core.coverage'
+project(':perl5.core.coverage').projectDir = file('plugin/coverage')
+include 'perl5.core.intelliLang'
+project(':perl5.core.intelliLang').projectDir = file('plugin/intelliLang')
 include 'perl5.transport.docker'
 project(':perl5.transport.docker').projectDir = file('docker')
 include 'perl5.transport.wsl'

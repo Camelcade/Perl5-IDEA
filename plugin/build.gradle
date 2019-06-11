@@ -20,6 +20,8 @@ import org.jetbrains.grammarkit.tasks.GenerateParser
 dependencies{
   compile project(":perl5.core")
   compile project(":perl5.core.idea")
+  compile project(":perl5.core.coverage")
+  compile project(":perl5.core.intelliLang")
 }
 
 sourceSets {

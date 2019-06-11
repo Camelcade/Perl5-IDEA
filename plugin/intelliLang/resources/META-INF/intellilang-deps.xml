@@ -20,6 +20,9 @@
     <injectionConfig config="perlInjections.xml"/>
   </extensions>
   <extensions defaultExtensionNs="com.intellij">
+    <languageInjector implementation="com.perl5.lang.perl.idea.intellilang.PerlStringLanguageInjector"/>
+    <multiHostInjector implementation="com.perl5.lang.perl.idea.intellilang.PerlHeredocLanguageInjector"
+                       order="first,before TemporaryPlacesInjector"/>
     <patterns.patternClass className="com.perl5.lang.perl.idea.intellilang.PerlInjectionPatterns" alias="perl5"/>
     <applicationService serviceImplementation="com.perl5.lang.perl.idea.intellilang.PerlTemporaryInjectedLanguageDetector"/>
   </extensions>

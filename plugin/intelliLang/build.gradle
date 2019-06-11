@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,11 +14,22 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.coverage;
+import org.jetbrains.grammarkit.tasks.GenerateLexer
+import org.jetbrains.grammarkit.tasks.GenerateParser
 
-import java.util.Map;
-
-class PerlFileData {
-  public String name;
-  public Map<Integer, PerlLineData> lines;
+sourceSets {
+  main {
+    java.srcDirs project.files('src')
+    resources.srcDir file('resources')
+  }
 }
+
+dependencies{
+  compileOnly project(":perl5.core")
+}
+
+intellij {
+  type 'IC'
+  intellij.plugins = ['IntelliLang']
+}
+
