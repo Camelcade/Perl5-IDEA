@@ -20,7 +20,6 @@ import org.jetbrains.grammarkit.tasks.GenerateParser
 sourceSets {
   main {
     java.srcDirs project.files('src')
-    resources.srcDir file('resources')
   }
 }
 
