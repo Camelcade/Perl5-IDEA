@@ -20,8 +20,6 @@ import com.intellij.ide.util.projectWizard.ModuleWizardStep;
 import com.intellij.ide.util.projectWizard.WizardContext;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.roots.ui.configuration.ModulesProvider;
-import com.intellij.openapi.ui.VerticalFlowLayout;
-import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SdkConfigurable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -34,8 +32,6 @@ public class PerlInterpreterSelectionStep extends ModuleWizardStep {
   private final WizardContext myWizardContext;
   @NotNull
   private final ModulesProvider myModulesProvider;
-  @NotNull
-  private final Perl5SdkConfigurable mySdkConfigurable;
   @Nullable
   private Sdk mySdk;
 
@@ -45,19 +41,21 @@ public class PerlInterpreterSelectionStep extends ModuleWizardStep {
     myBuilder = builder;
     myWizardContext = wizardContext;
     myModulesProvider = modulesProvider;
-    mySdkConfigurable = new Perl5SdkConfigurable(myBuilder, myWizardContext.getProject());
   }
 
   @Override
   public JComponent getComponent() {
-    JPanel panel = new JPanel(new VerticalFlowLayout());
-    panel.add(mySdkConfigurable.createComponent());
-    return panel;
+    return myBuilder.getPeer().getComponent();
   }
 
   @Override
   public void updateStep() {
-    mySdkConfigurable.reset();
+    myBuilder.getPeer().reset();
+  }
+
+  @Override
+  public void updateDataModel() {
+    myBuilder.getPeer().apply();
   }
 
   @Override
@@ -67,11 +65,6 @@ public class PerlInterpreterSelectionStep extends ModuleWizardStep {
 
   @Override
   public void disposeUIResources() {
-    mySdkConfigurable.disposeUIResources();
-  }
-
-  @Override
-  public void updateDataModel() {
-    mySdkConfigurable.apply();
+    myBuilder.getPeer().disposeUIResources();
   }
 }

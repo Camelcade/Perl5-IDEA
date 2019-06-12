@@ -22,21 +22,29 @@ import com.intellij.ide.util.projectWizard.WizardContext;
 import com.intellij.openapi.module.ModuleType;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.SdkTypeId;
 import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.roots.ui.configuration.ModulesProvider;
-import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SdkManipulator;
-import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5RealSdkWrapper;
-import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5SdkWrapper;
+import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.perl5.lang.perl.idea.modules.PerlModuleType;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class PerlModuleBuilder extends ModuleBuilder implements Perl5SdkManipulator {
-  @Nullable
-  private Sdk mySdk;
+public class PerlModuleBuilder extends ModuleBuilder {
+  @NotNull
+  private final AtomicNotNullLazyValue<PerlProjectGeneratorPeer> myPeerProvider =
+    AtomicNotNullLazyValue.createValue(PerlProjectGeneratorPeer::new);
+
+  @NotNull
+  public PerlProjectGeneratorPeer getPeer() {
+    return myPeerProvider.getValue();
+  }
+
+  @NotNull
+  public PerlProjectGenerationSettings getSettings() {
+    return getPeer().getSettings();
+  }
 
   @Override
   public ModuleType getModuleType() {
@@ -58,7 +66,7 @@ public class PerlModuleBuilder extends ModuleBuilder implements Perl5SdkManipula
   public Project createProject(String name, String path) {
     Project project = super.createProject(name, path);
     if (project != null) {
-      PerlProjectManager.getInstance(project).setProjectSdk(mySdk);
+      PerlProjectManager.getInstance(project).setProjectSdk(getSettings().getSdk());
     }
     return project;
   }
@@ -66,15 +74,5 @@ public class PerlModuleBuilder extends ModuleBuilder implements Perl5SdkManipula
   @Override
   public ModuleWizardStep[] createWizardSteps(@NotNull WizardContext wizardContext, @NotNull ModulesProvider modulesProvider) {
     return new ModuleWizardStep[]{new PerlInterpreterSelectionStep(this, wizardContext, modulesProvider)};
-  }
-
-  @Nullable
-  @Override
-  public Perl5SdkWrapper getCurrentSdkWrapper() {
-    return Perl5RealSdkWrapper.create(mySdk);
-  }
-
-  public void setSdk(@Nullable Sdk sdk) {
-    mySdk = sdk;
   }
 }
