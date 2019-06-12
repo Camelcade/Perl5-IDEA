@@ -19,12 +19,22 @@ package com.perl5.lang.perl.idea.configuration.module;
 import com.intellij.ide.util.projectWizard.ModuleBuilder;
 import com.intellij.openapi.module.ModuleType;
 import com.intellij.openapi.options.ConfigurationException;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.SdkTypeId;
 import com.intellij.openapi.roots.ModifiableRootModel;
+import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SdkManipulator;
+import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5RealSdkWrapper;
+import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5SdkWrapper;
 import com.perl5.lang.perl.idea.modules.PerlModuleType;
+import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-public class PerlModuleBuilder extends ModuleBuilder {
+public class PerlModuleBuilder extends ModuleBuilder implements Perl5SdkManipulator {
+  @Nullable
+  private Sdk mySdk;
+
   @Override
   public ModuleType getModuleType() {
     return PerlModuleType.getInstance();
@@ -38,5 +48,25 @@ public class PerlModuleBuilder extends ModuleBuilder {
   @Override
   public void setupRootModel(@NotNull ModifiableRootModel modifiableRootModel) throws ConfigurationException {
     doAddContentEntry(modifiableRootModel);
+  }
+
+  @Nullable
+  @Override
+  public Project createProject(String name, String path) {
+    Project project = super.createProject(name, path);
+    if (project != null) {
+      PerlProjectManager.getInstance(project).setProjectSdk(mySdk);
+    }
+    return project;
+  }
+
+  @Nullable
+  @Override
+  public Perl5SdkWrapper getCurrentSdkWrapper() {
+    return Perl5RealSdkWrapper.create(mySdk);
+  }
+
+  public void setSdk(@Nullable Sdk sdk) {
+    mySdk = sdk;
   }
 }

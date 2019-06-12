@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,16 @@
 
 package com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers;
 
+import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.ui.ColoredListCellRenderer;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public interface Perl5SdkWrapper {
   void customizeRenderer(@NotNull ColoredListCellRenderer<Perl5SdkWrapper> renderer);
+
+  @Nullable
+  default Sdk getSdk() {
+    return null;
+  }
 }

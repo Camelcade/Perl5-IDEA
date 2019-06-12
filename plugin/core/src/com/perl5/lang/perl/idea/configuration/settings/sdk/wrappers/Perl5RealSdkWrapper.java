@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import com.intellij.ui.ColoredListCellRenderer;
 import com.intellij.ui.SimpleTextAttributes;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -84,4 +85,9 @@ public class Perl5RealSdkWrapper implements Perl5SdkWrapper {
     renderer.append(", ");
   }
 
+  @Contract("null->null;!null->!null")
+  @Nullable
+  public static Perl5RealSdkWrapper create(@Nullable Sdk sdk) {
+    return sdk == null ? null : new Perl5RealSdkWrapper(sdk);
+  }
 }

@@ -23,6 +23,7 @@ import com.intellij.openapi.module.ModuleTypeManager;
 import com.intellij.openapi.roots.ui.configuration.ModulesProvider;
 import com.perl5.PerlBundle;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.idea.configuration.module.PerlInterpreterSelectionStep;
 import com.perl5.lang.perl.idea.configuration.module.PerlModuleBuilder;
 import org.jetbrains.annotations.NotNull;
 
@@ -63,7 +64,7 @@ public class PerlModuleType extends ModuleType<PerlModuleBuilder> {
   public ModuleWizardStep[] createWizardSteps(@NotNull WizardContext wizardContext,
                                               @NotNull final PerlModuleBuilder moduleBuilder,
                                               @NotNull ModulesProvider modulesProvider) {
-    return new ModuleWizardStep[]{};
+    return new ModuleWizardStep[]{new PerlInterpreterSelectionStep(moduleBuilder, wizardContext, modulesProvider)};
   }
 
   public static PerlModuleType getInstance() {
