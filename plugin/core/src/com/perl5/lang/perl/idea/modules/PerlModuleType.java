@@ -16,20 +16,17 @@
 
 package com.perl5.lang.perl.idea.modules;
 
-import com.intellij.ide.util.projectWizard.ModuleWizardStep;
-import com.intellij.ide.util.projectWizard.WizardContext;
+import com.intellij.ide.util.projectWizard.EmptyModuleBuilder;
+import com.intellij.ide.util.projectWizard.ModuleBuilder;
 import com.intellij.openapi.module.ModuleType;
 import com.intellij.openapi.module.ModuleTypeManager;
-import com.intellij.openapi.roots.ui.configuration.ModulesProvider;
 import com.perl5.PerlBundle;
 import com.perl5.PerlIcons;
-import com.perl5.lang.perl.idea.configuration.module.PerlInterpreterSelectionStep;
-import com.perl5.lang.perl.idea.configuration.module.PerlModuleBuilder;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 
-public class PerlModuleType extends ModuleType<PerlModuleBuilder> {
+public class PerlModuleType extends ModuleType<ModuleBuilder> {
   public static final String PERL_MODULE_TYPE_ID = "PERL5_MODULE";
 
   public PerlModuleType() {
@@ -38,8 +35,18 @@ public class PerlModuleType extends ModuleType<PerlModuleBuilder> {
 
   @NotNull
   @Override
-  public PerlModuleBuilder createModuleBuilder() {
-    return new PerlModuleBuilder();
+  public ModuleBuilder createModuleBuilder() {
+    return new EmptyModuleBuilder() {
+      @Override
+      protected boolean isAvailable() {
+        return false;
+      }
+
+      @Override
+      public ModuleType getModuleType() {
+        return PerlModuleType.this;
+      }
+    };
   }
 
   @NotNull
@@ -57,14 +64,6 @@ public class PerlModuleType extends ModuleType<PerlModuleBuilder> {
   @Override
   public Icon getNodeIcon(@Deprecated boolean isOpened) {
     return PerlIcons.PERL_LANGUAGE_ICON;
-  }
-
-  @NotNull
-  @Override
-  public ModuleWizardStep[] createWizardSteps(@NotNull WizardContext wizardContext,
-                                              @NotNull final PerlModuleBuilder moduleBuilder,
-                                              @NotNull ModulesProvider modulesProvider) {
-    return new ModuleWizardStep[]{new PerlInterpreterSelectionStep(moduleBuilder, wizardContext, modulesProvider)};
   }
 
   public static PerlModuleType getInstance() {

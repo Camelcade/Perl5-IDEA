@@ -16,9 +16,7 @@
 
 <idea-plugin>
     <extensions defaultExtensionNs="com.intellij">
-
-        <moduleType id="PERL5_MODULE" implementationClass="com.perl5.lang.perl.idea.modules.PerlModuleType"/>
-
+        <moduleBuilder builderClass="com.perl5.lang.perl.idea.configuration.module.PerlModuleBuilder"/>
         <moduleConfigurationEditorProvider
                 implementation="com.perl5.lang.perl.idea.configuration.module.PerlModuleConfigurationEditorProvider"
                 order="first"/>

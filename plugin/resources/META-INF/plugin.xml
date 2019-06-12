@@ -155,7 +155,7 @@
     <internalFileTemplate name="Perl5 package"/>
     <internalFileTemplate name="Perl5 script"/>
     <internalFileTemplate name="Perl5 test"/>
-
+    <moduleType id="PERL5_MODULE" implementationClass="com.perl5.lang.perl.idea.modules.PerlModuleType"/>
     <jps.plugin/>
 
     <lang.fileViewProviderFactory language="Perl5"

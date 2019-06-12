@@ -17,12 +17,15 @@
 package com.perl5.lang.perl.idea.configuration.module;
 
 import com.intellij.ide.util.projectWizard.ModuleBuilder;
+import com.intellij.ide.util.projectWizard.ModuleWizardStep;
+import com.intellij.ide.util.projectWizard.WizardContext;
 import com.intellij.openapi.module.ModuleType;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.SdkTypeId;
 import com.intellij.openapi.roots.ModifiableRootModel;
+import com.intellij.openapi.roots.ui.configuration.ModulesProvider;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SdkManipulator;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5RealSdkWrapper;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5SdkWrapper;
@@ -58,6 +61,11 @@ public class PerlModuleBuilder extends ModuleBuilder implements Perl5SdkManipula
       PerlProjectManager.getInstance(project).setProjectSdk(mySdk);
     }
     return project;
+  }
+
+  @Override
+  public ModuleWizardStep[] createWizardSteps(@NotNull WizardContext wizardContext, @NotNull ModulesProvider modulesProvider) {
+    return new ModuleWizardStep[]{new PerlInterpreterSelectionStep(this, wizardContext, modulesProvider)};
   }
 
   @Nullable
