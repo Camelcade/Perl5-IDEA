@@ -172,22 +172,34 @@ tasks.coveralls {
 }
 
 intellij {
-  type 'IU'
+  def pluginList = ["PsiViewer:$psiViewerVersion", 'IntelliLang', 'Docker', 'remote-run',
+                    project(':perl5.plugin'),
+                    project(':perl5.transport.docker'),
+                    project(':perl5.transport.wsl'),
+                    project(':perl5.lang.tt2'),
+                    project(':perl5.lang.mojo'),
+                    project(':perl5.lang.embedded'),
+                    project(':perl5.lang.mason.framework'),
+                    project(':perl5.lang.mason.htmlmason'),
+                    project(':perl5.lang.mason.mason2'),
+  ]
+
+  def runWith = project.hasProperty("runWith") ? project.property("runWith") : ""
+
+  if( runWith == 'PY'){
+    type 'PY'
+    version = pycharmVersion
+  }
+  else{
+    type 'IU'
+    pluginList.add('coverage')
+  }
   downloadSources Boolean.valueOf(downloadIdeaSource)
   if (project.hasProperty('idea_path')) {
     alternativeIdePath = project.idea_path
   }
-  plugins = ["PsiViewer:$psiViewerVersion", 'IntelliLang', 'coverage', 'Docker', 'remote-run', // would be nice to have transient plugins
-             project(':perl5.plugin'),
-             project(':perl5.transport.docker'),
-             project(':perl5.transport.wsl'),
-             project(':perl5.lang.tt2'),
-             project(':perl5.lang.mojo'),
-             project(':perl5.lang.embedded'),
-             project(':perl5.lang.mason.framework'),
-             project(':perl5.lang.mason.htmlmason'),
-             project(':perl5.lang.mason.mason2'),
-  ]
+
+  plugins = pluginList
 }
 
 runIde {
