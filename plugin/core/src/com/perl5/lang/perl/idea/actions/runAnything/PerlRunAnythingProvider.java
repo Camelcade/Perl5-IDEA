@@ -380,7 +380,7 @@ public class PerlRunAnythingProvider extends RunAnythingProviderBase<List<PerlRu
   @Nullable
   @Override
   public RunAnythingHelpItem getHelpItem(@NotNull DataContext dataContext) {
-    throw new RuntimeException("NYI");
+    return null;
   }
 
   @Nullable
