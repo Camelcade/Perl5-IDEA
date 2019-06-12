@@ -199,7 +199,6 @@ intellij {
     type 'IU'
     pluginList.addAll(['coverage', 'Docker', 'remote-run'])
   }
-  downloadSources Boolean.valueOf(downloadIdeaSource)
   if (project.hasProperty('idea_path')) {
     alternativeIdePath = project.idea_path
   }
