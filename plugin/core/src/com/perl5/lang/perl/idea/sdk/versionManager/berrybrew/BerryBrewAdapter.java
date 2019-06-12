@@ -50,13 +50,14 @@ class BerryBrewAdapter extends PerlVersionManagerAdapter {
     return getOutput(commandsList);
   }
 
-  public void installPerl(@NotNull Project project,
+  public void installPerl(@Nullable Project project,
                           @NotNull String distributionId,
                           @NotNull List<String> params,
                           @Nullable ProcessListener processListener) {
     runInstallInConsole(
       new PerlCommandLine(getVersionManagerPath(), BERRYBREW_INSTALL, distributionId)
         .withParameters(params)
+        .withHostData(getHostData())
         .withProject(project)
         .withProcessListener(processListener),
       distributionId

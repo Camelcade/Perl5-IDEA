@@ -60,13 +60,14 @@ public class PlenvAdapter extends PerlVersionManagerAdapter {
   }
 
   @Override
-  public void installPerl(@NotNull Project project,
+  public void installPerl(@Nullable Project project,
                           @NotNull String distributionId,
                           @NotNull List<String> params,
                           @Nullable ProcessListener processListener) {
     runInstallInConsole(
       new PerlCommandLine(getVersionManagerPath(), PLENV_INSTALL, distributionId)
         .withParameters(params)
+        .withHostData(getHostData())
         .withProject(project)
         .withProcessListener(processListener),
       distributionId

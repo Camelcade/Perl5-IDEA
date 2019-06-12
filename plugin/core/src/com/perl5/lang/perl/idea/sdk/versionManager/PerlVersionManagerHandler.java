@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,7 +49,7 @@ public abstract class PerlVersionManagerHandler<Data extends PerlVersionManagerD
    * Shows a UI to create an sdk for this version manager on the host described by the {@code hostHandler}
    * @param disposable any temporary things may be bound to the disposable which is going to be disposed by invoker
    */
-  public abstract void createSdkInteractively(@NotNull Project project,
+  public abstract void createSdkInteractively(@Nullable Project project,
                                               @NotNull PerlHostHandler<?, ?> hostHandler,
                                               @Nullable Consumer<Sdk> sdkConsumer,
                                               @NotNull Disposable disposable);

@@ -111,7 +111,7 @@ public abstract class PerlVersionManagerAdapter {
    * @param params          additional params
    * @param processListener optional process listener
    */
-  public abstract void installPerl(@NotNull Project project,
+  public abstract void installPerl(@Nullable Project project,
                                    @NotNull String distributionId,
                                    @NotNull List<String> params,
                                    @Nullable ProcessListener processListener);

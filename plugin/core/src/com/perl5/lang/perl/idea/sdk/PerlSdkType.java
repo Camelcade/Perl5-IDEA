@@ -96,7 +96,6 @@ public class PerlSdkType extends SdkType {
 
     try (PerlHostFileTransfer fileTransfer = hostData.getFileTransfer()) {
       Consumer<File> downloader = it -> syncAndCollectException(fileTransfer, it, pathsToRefresh, exceptions);
-      ;
       for (String hostPath : incPaths) {
         downloader.accept(new File(hostPath));
         downloader.accept(PerlRunUtil.findLibsBin(new File(hostPath)));
@@ -294,7 +293,7 @@ public class PerlSdkType extends SdkType {
                                      @NotNull PerlHostData hostData,
                                      @NotNull PerlVersionManagerData versionManagerData,
                                      @Nullable Consumer<Sdk> sdkConsumer,
-                                     @NotNull Project project) {
+                                     @Nullable Project project) {
     createSdk(interpreterPath, hostData, versionManagerData, sdk -> {
       PerlSdkTable.getInstance().addJdk(sdk);
       if (sdkConsumer != null) {

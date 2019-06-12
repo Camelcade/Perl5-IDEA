@@ -107,13 +107,14 @@ public class PerlBrewAdapter extends PerlVersionManagerAdapter {
     return parseInstallableDistributionsList(rawAvailable);
   }
 
-  public void installPerl(@NotNull Project project,
+  public void installPerl(@Nullable Project project,
                           @NotNull String distributionId,
                           @NotNull List<String> params,
                           @Nullable ProcessListener processListener) {
     runInstallInConsole(
       new PerlCommandLine(getVersionManagerPath(), PERLBREW_INSTALL, PERLBREW_VERBOSE, distributionId)
         .withParameters(params)
+        .withHostData(getHostData())
         .withProject(project)
         .withProcessListener(processListener),
       distributionId

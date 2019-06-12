@@ -79,7 +79,7 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
   }
 
   @Override
-  public void createSdkInteractively(@NotNull Project project,
+  public void createSdkInteractively(@Nullable Project project,
                                      @NotNull PerlHostHandler<?, ?> hostHandler,
                                      @Nullable Consumer<Sdk> sdkConsumer, @NotNull Disposable disposable) {
     hostHandler.chooseFileInteractively(
@@ -121,7 +121,7 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
 
   protected abstract PerlVersionManagerAdapter createAdapter(@NotNull String pathToVersionManager, @NotNull PerlHostData hostData);
 
-  private void createSdkInteractively(@NotNull Project project,
+  private void createSdkInteractively(@Nullable Project project,
                                       @Nullable String selectedPath,
                                       @Nullable PerlHostData perlHostData,
                                       @Nullable Consumer<Sdk> sdkConsumer) {
@@ -193,7 +193,7 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
   public void createInterpreter(@NotNull String distributionId,
                                 @NotNull PerlVersionManagerAdapter vmAdapter,
                                 @Nullable Consumer<Sdk> sdkConsumer,
-                                @NotNull Project project) {
+                                @Nullable Project project) {
     List<String> perlPath = vmAdapter.execWith(distributionId, "perl", PERL_LE, PERL_CTRL_X);
     if (perlPath == null || perlPath.size() != 1) {
       LOG.warn("Error getting perl location from interpreter. One line with path expected, got:\n" +

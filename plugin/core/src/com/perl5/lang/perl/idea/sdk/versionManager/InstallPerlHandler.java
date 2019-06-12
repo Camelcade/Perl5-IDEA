@@ -48,7 +48,7 @@ public abstract class InstallPerlHandler {
     myVersionManageHandler = versionManageHandler;
   }
 
-  void install(@NotNull PerlHostData hostData, @NotNull Project project) {
+  void install(@NotNull PerlHostData hostData, @Nullable Project project) {
     new Task.Modal(project, PerlBundle.message("perl.vm.installing.perl"), false) {
       @Override
       public void run(@NotNull ProgressIndicator indicator) {
@@ -58,7 +58,7 @@ public abstract class InstallPerlHandler {
     }.queue();
   }
 
-  void doInstall(@NotNull PerlHostData hostData, @NotNull Project project) {
+  void doInstall(@NotNull PerlHostData hostData, @Nullable Project project) {
     if (ApplicationManager.getApplication().isDispatchThread()) {
       throw new RuntimeException("Should not be invoked on EDT");
     }
@@ -88,7 +88,7 @@ public abstract class InstallPerlHandler {
             }
             myVersionManageHandler.createInterpreter(
               targetName, vmAdapter, sdk -> {
-                if (chooseInterpreter) {
+                if (chooseInterpreter && project != null) {
                   ApplicationManager.getApplication().invokeLater(
                     () -> PerlProjectManager.getInstance(project).setProjectSdk(sdk));
                 }
@@ -131,6 +131,9 @@ public abstract class InstallPerlHandler {
     public MyDialog(@Nullable Project project, @Nullable PerlInstallFormOptions optionsPanel, @NotNull List<String> distributions) {
       super(project, true, IdeModalityType.PROJECT);
       myForm = new PerlInstallForm(optionsPanel, this, distributions);
+      if (project == null) {
+        myForm.disableChooseCheckbox();
+      }
 
       setOKButtonText(PerlBundle.message("perl.vm.perlbrew.install.form.button"));
       setResizable(false);
