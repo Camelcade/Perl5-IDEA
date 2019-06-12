@@ -172,7 +172,7 @@ tasks.coveralls {
 }
 
 intellij {
-  def pluginList = ["PsiViewer:$psiViewerVersion", 'IntelliLang', 'Docker', 'remote-run',
+  def pluginList = ["PsiViewer:$psiViewerVersion", 'IntelliLang',
                     project(':perl5.plugin'),
                     project(':perl5.transport.docker'),
                     project(':perl5.transport.wsl'),
@@ -186,13 +186,18 @@ intellij {
 
   def runWith = project.hasProperty("runWith") ? project.property("runWith") : ""
 
-  if( runWith == 'PY'){
+  if( runWith == 'PC') {
+    type 'PC'
+    version = pycharmVersion
+  }
+  else if( runWith == 'PY'){
     type 'PY'
     version = pycharmVersion
+    pluginList.addAll(['Docker', 'remote-run'])
   }
   else{
     type 'IU'
-    pluginList.add('coverage')
+    pluginList.addAll(['coverage', 'Docker', 'remote-run'])
   }
   downloadSources Boolean.valueOf(downloadIdeaSource)
   if (project.hasProperty('idea_path')) {
