@@ -186,7 +186,11 @@ intellij {
 
   def runWith = project.hasProperty("runWith") ? project.property("runWith") : ""
 
-  if( runWith == 'PC') {
+  if( runWith == 'CL') {
+    type 'CL'
+    version = clionVersion
+  }
+  else if( runWith == 'PC') {
     type 'PC'
     version = pycharmVersion
   }
