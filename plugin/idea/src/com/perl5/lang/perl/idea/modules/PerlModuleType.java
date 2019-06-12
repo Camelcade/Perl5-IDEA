@@ -21,18 +21,15 @@ import com.intellij.ide.util.projectWizard.WizardContext;
 import com.intellij.openapi.module.ModuleType;
 import com.intellij.openapi.module.ModuleTypeManager;
 import com.intellij.openapi.roots.ui.configuration.ModulesProvider;
+import com.perl5.PerlBundle;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.configuration.module.PerlModuleBuilder;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 
-
 public class PerlModuleType extends ModuleType<PerlModuleBuilder> {
   public static final String PERL_MODULE_TYPE_ID = "PERL5_MODULE";
-  public static final String MODULE_NAME = "Perl5 module";
-  public static final String MODULE_DESCRIPTION = "Anything written in Perl5";
-  //	public static final String PERL5_GROUP = "Perl5";
 
   public PerlModuleType() {
     super(PERL_MODULE_TYPE_ID);
@@ -47,13 +44,13 @@ public class PerlModuleType extends ModuleType<PerlModuleBuilder> {
   @NotNull
   @Override
   public String getName() {
-    return MODULE_NAME;
+    return PerlBundle.message("perl.module.name");
   }
 
   @NotNull
   @Override
   public String getDescription() {
-    return MODULE_DESCRIPTION;
+    return PerlBundle.message("perl.module.description");
   }
 
   @Override
