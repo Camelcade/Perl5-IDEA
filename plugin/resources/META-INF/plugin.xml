@@ -157,7 +157,7 @@
     <internalFileTemplate name="Perl5 test"/>
 
     <moduleType id="PERL5_MODULE" implementationClass="com.perl5.lang.perl.idea.modules.PerlModuleType"/>
-    <directoryProjectGenerator implementation="com.perl5.lang.perl.idea.configuration.module.PerlProjectGenerator"/>
+    <!--    <directoryProjectGenerator implementation="com.perl5.lang.perl.idea.configuration.module.PerlProjectGenerator"/>-->
 
     <jps.plugin/>
 
