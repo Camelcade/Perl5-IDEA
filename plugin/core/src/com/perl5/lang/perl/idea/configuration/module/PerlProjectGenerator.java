@@ -18,10 +18,9 @@ package com.perl5.lang.perl.idea.configuration.module;
 
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.NotNullLazyValue;
+import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.platform.DirectoryProjectGeneratorBase;
-import com.intellij.platform.ProjectGeneratorPeer;
 import com.perl5.lang.perl.idea.modules.PerlModuleType;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import org.jetbrains.annotations.NotNull;
@@ -44,21 +43,22 @@ public class PerlProjectGenerator extends DirectoryProjectGeneratorBase<PerlProj
 
   @NotNull
   @Override
-  public NotNullLazyValue<ProjectGeneratorPeer<PerlProjectGenerationSettings>> createLazyPeer() {
-    return NotNullLazyValue.createValue(this::createPeer);
-  }
-
-  @NotNull
-  @Override
-  public ProjectGeneratorPeer<PerlProjectGenerationSettings> createPeer() {
+  public PerlProjectGeneratorPeer createPeer() {
     return new PerlProjectGeneratorPeer();
   }
 
   @Override
-  public void generateProject(@NotNull Project project,
-                              @NotNull VirtualFile baseDir,
-                              @NotNull PerlProjectGenerationSettings settings,
-                              @NotNull Module module) {
-    PerlProjectManager.getInstance(project).setProjectSdk(settings.getSdk());
+  public final void generateProject(@Nullable Project project,
+                                    @NotNull VirtualFile baseDir,
+                                    @NotNull PerlProjectGenerationSettings settings,
+                                    @NotNull Module module) {
+    configureModule(module, settings);
+  }
+
+  public void configureModule(@NotNull Module module, @NotNull PerlProjectGenerationSettings settings) {
+    Sdk sdk = settings.getSdk();
+    if (sdk != null) {
+      PerlProjectManager.getInstance(module.getProject()).setProjectSdk(sdk);
+    }
   }
 }

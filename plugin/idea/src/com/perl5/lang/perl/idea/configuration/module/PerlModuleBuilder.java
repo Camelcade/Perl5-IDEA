@@ -19,31 +19,52 @@ package com.perl5.lang.perl.idea.configuration.module;
 import com.intellij.ide.util.projectWizard.ModuleBuilder;
 import com.intellij.ide.util.projectWizard.ModuleWizardStep;
 import com.intellij.ide.util.projectWizard.WizardContext;
+import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleType;
 import com.intellij.openapi.options.ConfigurationException;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.SdkTypeId;
 import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.roots.ui.configuration.ModulesProvider;
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.perl5.lang.perl.idea.modules.PerlModuleType;
-import com.perl5.lang.perl.idea.project.PerlProjectManager;
+import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.swing.*;
 
 public class PerlModuleBuilder extends ModuleBuilder {
   @NotNull
   private final AtomicNotNullLazyValue<PerlProjectGeneratorPeer> myPeerProvider =
-    AtomicNotNullLazyValue.createValue(PerlProjectGeneratorPeer::new);
+    AtomicNotNullLazyValue.createValue(() -> getGenerator().createPeer());
 
   @NotNull
-  public PerlProjectGeneratorPeer getPeer() {
+  public final PerlProjectGeneratorPeer getPeer() {
     return myPeerProvider.getValue();
   }
 
   @NotNull
-  public PerlProjectGenerationSettings getSettings() {
+  public final PerlProjectGenerationSettings getSettings() {
     return getPeer().getSettings();
+  }
+
+  @Override
+  public final Icon getNodeIcon() {
+    return getGenerator().getLogo();
+  }
+
+  @Nls(capitalization = Nls.Capitalization.Title)
+  @Override
+  public final String getPresentableName() {
+    return getGenerator().getName();
+  }
+
+  /**
+   * @return generator paired with this builder. All work is delegated to the generator and it's peer. This builder is just a wrapper
+   * fixme this should just seek for existing generator, but seem they gonna be disabled for now
+   */
+  @NotNull
+  protected PerlProjectGenerator getGenerator() {
+    return new PerlProjectGenerator();
   }
 
   @Override
@@ -52,27 +73,32 @@ public class PerlModuleBuilder extends ModuleBuilder {
   }
 
   @Override
-  public boolean isSuitableSdkType(SdkTypeId sdkType) {
+  public final boolean isSuitableSdkType(SdkTypeId sdkType) {
     return false;
   }
 
   @Override
-  public void setupRootModel(@NotNull ModifiableRootModel modifiableRootModel) throws ConfigurationException {
+  public final void setupRootModel(@NotNull ModifiableRootModel modifiableRootModel) throws ConfigurationException {
     doAddContentEntry(modifiableRootModel);
   }
 
-  @Nullable
   @Override
-  public Project createProject(String name, String path) {
-    Project project = super.createProject(name, path);
-    if (project != null) {
-      PerlProjectManager.getInstance(project).setProjectSdk(getSettings().getSdk());
-    }
-    return project;
+  protected final void setProjectType(Module module) {
+    getGenerator().configureModule(module, getSettings());
   }
 
   @Override
-  public ModuleWizardStep[] createWizardSteps(@NotNull WizardContext wizardContext, @NotNull ModulesProvider modulesProvider) {
-    return new ModuleWizardStep[]{new PerlInterpreterSelectionStep(this, wizardContext, modulesProvider)};
+  public final ModuleWizardStep[] createWizardSteps(@NotNull WizardContext wizardContext, @NotNull ModulesProvider modulesProvider) {
+    if (!isStepAvailable(wizardContext, modulesProvider)) {
+      return ModuleWizardStep.EMPTY_ARRAY;
+    }
+    return new ModuleWizardStep[]{new PerlDelegatingModuleWizardStep(getPeer())};
+  }
+
+  /**
+   * @return true iff we should add a peer-based step
+   */
+  protected boolean isStepAvailable(@NotNull WizardContext wizardContext, @NotNull ModulesProvider modulesProvider) {
+    return wizardContext.getProject() == null;
   }
 }
