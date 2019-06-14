@@ -32,7 +32,6 @@ import com.intellij.util.ReflectionUtil;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.messages.MessageBus;
 import com.intellij.util.messages.Topic;
-import com.intellij.util.messages.impl.MessageListenerList;
 import com.perl5.lang.perl.idea.PerlPathMacros;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import org.jdom.Element;
@@ -54,11 +53,9 @@ public class PerlSdkTable extends ProjectJdkTable implements PersistentStateComp
 
   private final List<Sdk> myInterpretersList = new ArrayList<>();
   private final MessageBus myMessageBus;
-  private final MessageListenerList<Listener> myListenerList;
 
   public PerlSdkTable() {
     myMessageBus = ApplicationManager.getApplication().getMessageBus();
-    myListenerList = new MessageListenerList<>(myMessageBus, PERL_TABLE_TOPIC);
   }
 
   @Override
@@ -155,18 +152,6 @@ public class PerlSdkTable extends ProjectJdkTable implements PersistentStateComp
       // fire changes because after renaming JDK its name may match the associated jdk name of modules/project
       myMessageBus.syncPublisher(PERL_TABLE_TOPIC).jdkNameChanged(originalJdk, previousName);
     }
-  }
-
-  @SuppressWarnings("deprecation")
-  @Override
-  public void addListener(@NotNull Listener listener) {
-    myListenerList.add(listener);
-  }
-
-  @SuppressWarnings("deprecation")
-  @Override
-  public void removeListener(@NotNull Listener listener) {
-    myListenerList.remove(listener);
   }
 
   @NotNull
