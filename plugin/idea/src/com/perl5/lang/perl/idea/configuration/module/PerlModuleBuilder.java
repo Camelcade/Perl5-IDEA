@@ -92,6 +92,7 @@ public class PerlModuleBuilder extends ModuleBuilder {
     if (!isStepAvailable(wizardContext, modulesProvider)) {
       return ModuleWizardStep.EMPTY_ARRAY;
     }
+    getSettings().setProject(wizardContext.getProject());
     return new ModuleWizardStep[]{new PerlDelegatingModuleWizardStep(getPeer())};
   }
 

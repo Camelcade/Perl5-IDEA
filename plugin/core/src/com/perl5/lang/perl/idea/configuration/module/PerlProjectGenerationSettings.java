@@ -16,15 +16,19 @@
 
 package com.perl5.lang.perl.idea.configuration.module;
 
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SdkManipulator;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5RealSdkWrapper;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5SdkWrapper;
+import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import org.jetbrains.annotations.Nullable;
 
 public class PerlProjectGenerationSettings implements Perl5SdkManipulator {
   @Nullable
   private Sdk mySdk;
+  @Nullable
+  private Project myProject;
 
   @Nullable
   @Override
@@ -39,5 +43,17 @@ public class PerlProjectGenerationSettings implements Perl5SdkManipulator {
 
   public void setSdk(@Nullable Sdk sdk) {
     mySdk = sdk;
+  }
+
+  @Nullable
+  public Project getProject() {
+    return myProject;
+  }
+
+  public void setProject(@Nullable Project project) {
+    myProject = project;
+    if (mySdk == null) {
+      mySdk = PerlProjectManager.getSdk(myProject);
+    }
   }
 }
