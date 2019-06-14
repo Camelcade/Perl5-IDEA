@@ -33,7 +33,11 @@ public class PerlProjectGeneratorPeer extends GeneratorPeerImpl<PerlProjectGener
     () -> initializeComponent(super.getComponent()));
 
   public PerlProjectGeneratorPeer() {
-    super(new PerlProjectGenerationSettings(), new JPanel(new VerticalFlowLayout()));
+    this(new PerlProjectGenerationSettings());
+  }
+
+  public PerlProjectGeneratorPeer(@NotNull PerlProjectGenerationSettings settings) {
+    super(settings, new JPanel(new VerticalFlowLayout()));
     mySdkConfigurable = new Perl5SdkConfigurable(getSettings(), null);
   }
 
