@@ -100,6 +100,6 @@ public class PerlModuleBuilder extends ModuleBuilder {
    * @return true iff we should add a peer-based step
    */
   protected boolean isStepAvailable(@NotNull WizardContext wizardContext, @NotNull ModulesProvider modulesProvider) {
-    return wizardContext.getProject() == null;
+    return true;
   }
 }

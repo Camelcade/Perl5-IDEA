@@ -21,6 +21,7 @@ import com.intellij.openapi.ui.VerticalFlowLayout;
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.platform.GeneratorPeerImpl;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SdkConfigurable;
+import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -50,6 +51,7 @@ public class PerlProjectGeneratorPeer extends GeneratorPeerImpl<PerlProjectGener
   @NotNull
   protected JComponent initializeComponent(@NotNull JComponent component) {
     component.add(mySdkConfigurable.createComponent());
+    mySdkConfigurable.setEnabled(PerlProjectManager.getSdk(getSettings().getProject()) == null);
     return component;
   }
 
