@@ -114,6 +114,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
   public static final String CORE_NAMESPACE = "CORE";
   public static final String CORE_NAMESPACE_FULL = CORE_NAMESPACE + PACKAGE_SEPARATOR;
   public static final String CORE_GLOBAL_NAMESPACE = CORE_NAMESPACE_FULL + "GLOBAL";
+  public static final String DEFAULT_LIB_DIR = "lib";
 
   private static final Map<String, String> CANONICAL_NAMES_CACHE = new ConcurrentHashMap<>();
   private static final Map<String, String> PATH_TO_PACKAGE_NAME_MAP = new ConcurrentHashMap<>();
@@ -685,9 +686,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
 
     if (targetFile != null && targetFile.exists()) {
       PsiFile targetPsiFile = PsiManager.getInstance(psiFile.getProject()).findFile(targetFile);
-      if (targetPsiFile != null) {
-        return targetPsiFile;
-      }
+      return targetPsiFile;
     }
 
     return null;

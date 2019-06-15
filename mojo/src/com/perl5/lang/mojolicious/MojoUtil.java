@@ -30,7 +30,9 @@ import org.jetbrains.annotations.Nullable;
 
 public final class MojoUtil {
   public static final String MOJO_PACKAGE_NAME = "Mojolicious";
+  public static final String MOJO_PLUGIN_PACKAGE_NAME = "Mojolicious::Plugin";
   private static final String MOJO_SCRIPT_NAME = "mojo";
+  public static final String DEFAULT_TEMPLATES_DIR_NAME = "templates";
 
   private MojoUtil() {
   }
@@ -85,6 +87,14 @@ public final class MojoUtil {
   @Contract("null->false")
   public static boolean isMojoAvailable(@Nullable Module module) {
     return getMojoScript(module) != null;
+  }
+
+  /**
+   * @return iff mojolicious is available in the context of {@code project}
+   */
+  @Contract("null->false")
+  public static boolean isMojoAvailable(@Nullable Project project) {
+    return getMojoScript(project) != null;
   }
 
   /**

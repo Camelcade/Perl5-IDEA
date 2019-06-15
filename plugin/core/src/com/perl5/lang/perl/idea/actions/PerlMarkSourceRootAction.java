@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,8 @@ package com.perl5.lang.perl.idea.actions;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.Presentation;
 import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleUtilCore;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectBundle;
 import com.intellij.openapi.projectRoots.impl.PerlModuleExtension;
 import com.intellij.openapi.roots.ui.configuration.ModuleSourceRootEditHandler;
@@ -26,6 +28,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.lang.perl.idea.modules.PerlSourceRootType;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Locale;
@@ -58,7 +61,21 @@ public abstract class PerlMarkSourceRootAction extends PerlSourceRootAction {
   }
 
   @Override
-  protected void modifyRoots(@NotNull AnActionEvent e, @NotNull Module module, @NotNull VirtualFile[] files) {
+  protected final void modifyRoots(@NotNull AnActionEvent e, @NotNull Module module, @NotNull VirtualFile[] files) {
+    markRoot(module, files);
+  }
+
+  public final void markRoot(@NotNull Project project, @Nullable VirtualFile virtualFile) {
+    if (virtualFile == null || !virtualFile.isValid()) {
+      return;
+    }
+    Module module = ModuleUtilCore.findModuleForFile(virtualFile, project);
+    if (module != null) {
+      markRoot(module, virtualFile);
+    }
+  }
+
+  public final void markRoot(@NotNull Module module, @NotNull VirtualFile... files) {
     PerlModuleExtension modifiableModel = (PerlModuleExtension)PerlModuleExtension.getInstance(module).getModifiableModel(true);
     for (VirtualFile virtualFile : files) {
       modifiableModel.setRoot(virtualFile, myType);
