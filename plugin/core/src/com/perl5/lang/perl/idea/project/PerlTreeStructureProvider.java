@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,6 @@ import com.intellij.ide.util.treeView.AbstractTreeNode;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ui.configuration.ModuleSourceRootEditHandler;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.ui.SimpleTextAttributes;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.modules.PerlSourceRootType;
 import org.jetbrains.annotations.NotNull;
@@ -65,8 +64,7 @@ public class PerlTreeStructureProvider implements TreeStructureProvider {
           protected void updateImpl(@NotNull PresentationData data) {
             super.updateImpl(data);
             data.setIcon(handler.getRootIcon());
-            data.addText(virtualFile.getName(), SimpleTextAttributes.REGULAR_ATTRIBUTES);
-            data.addText(" " + handler.getRootTypeName(), SimpleTextAttributes.GRAY_ATTRIBUTES);
+            data.setLocationString(handler.getRootTypeName().toLowerCase());
           }
         };
       }
