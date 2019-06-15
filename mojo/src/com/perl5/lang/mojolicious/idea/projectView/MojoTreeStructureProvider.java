@@ -25,6 +25,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.mojolicious.model.MojoProject;
 import com.perl5.lang.mojolicious.model.MojoProjectManager;
+import com.twelvemonkeys.lang.StringUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
@@ -54,7 +55,9 @@ public class MojoTreeStructureProvider implements TreeStructureProvider {
         protected void updateImpl(@NotNull PresentationData data) {
           super.updateImpl(data);
           data.setIcon(mojoProject.getIcon());
-          data.setLocationString(mojoProject.getTypeName().toLowerCase());
+          if (StringUtil.isEmpty(data.getLocationString())) {
+            data.setLocationString(mojoProject.getTypeName().toLowerCase());
+          }
         }
       };
     });
