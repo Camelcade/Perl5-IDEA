@@ -65,6 +65,7 @@ import java.util.*;
 
 import static com.intellij.ProjectTopics.PROJECT_ROOTS;
 
+@SuppressWarnings("UnstableApiUsage")
 public class PerlProjectManager {
   @NotNull
   private final Project myProject;
@@ -116,7 +117,7 @@ public class PerlProjectManager {
     myAllModulesMapProvider = AtomicNotNullLazyValue.createValue(() -> {
       ImmutableMapBuilder<VirtualFile, PerlSourceRootType> builder = ContainerUtil.immutableMapBuilder();
       for (Module module : ModuleManager.getInstance(myProject).getModules()) {
-        PerlModuleExtension.getInstance(module).getRoots().forEach((key, value) -> builder.put(key, value));
+        PerlModuleExtension.getInstance(module).getRoots().forEach(builder::put);
       }
 
       return builder.build();
