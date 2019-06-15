@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import com.intellij.openapi.projectRoots.impl.PerlModuleExtension;
 import com.intellij.openapi.roots.ui.configuration.ModuleSourceRootEditHandler;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.IncorrectOperationException;
+import com.intellij.util.containers.ContainerUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.jps.model.JpsDummyElement;
 import org.jetbrains.jps.model.ex.JpsElementTypeWithDummyProperties;
@@ -46,7 +47,7 @@ public abstract class PerlSourceRootType extends JpsElementTypeWithDummyProperti
     for (Module module : ModuleManager.getInstance(project).getModules()) {
       result.addAll(getRoots(module));
     }
-    return result;
+    return ContainerUtil.filter(result, VirtualFile::isValid);
   }
 
   @NotNull

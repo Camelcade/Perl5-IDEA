@@ -43,8 +43,7 @@ import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.openapi.util.AtomicNullableLazyValue;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.openapi.vfs.VfsUtil;
-import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.vfs.*;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.containers.ContainerUtil.ImmutableMapBuilder;
 import com.intellij.util.containers.FactoryMap;
@@ -107,6 +106,22 @@ public class PerlProjectManager {
     connection.subscribe(PROJECT_ROOTS, new ModuleRootListener() {
       @Override
       public void rootsChanged(@NotNull ModuleRootEvent event) {
+        resetProjectCaches();
+      }
+    });
+    LocalFileSystem.getInstance().addVirtualFileListener(new VirtualFileListener() {
+      @Override
+      public void propertyChanged(@NotNull VirtualFilePropertyEvent event) {
+        resetProjectCaches();
+      }
+
+      @Override
+      public void fileDeleted(@NotNull VirtualFileEvent event) {
+        resetProjectCaches();
+      }
+
+      @Override
+      public void fileMoved(@NotNull VirtualFileMoveEvent event) {
         resetProjectCaches();
       }
     });
