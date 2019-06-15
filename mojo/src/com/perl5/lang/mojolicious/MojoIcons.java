@@ -16,17 +16,31 @@
 
 package com.perl5.lang.mojolicious;
 
+import com.intellij.icons.AllIcons;
+import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.openapi.util.IconLoader;
-import com.intellij.ui.LayeredIcon;
 import com.perl5.PerlIcons;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 
 public final class MojoIcons {
   public static final Icon MOJO_FILE = IconLoader.getIcon("/icons/mojolicious.png");
-  public static final Icon MOJO_MODIFIER = IconLoader.getIcon("/icons/mojo-modifier.png");
-  public static final Icon MOJO_ROOT = new LayeredIcon(PerlIcons.TEMPLATE_ROOT, MOJO_MODIFIER);
-  public static final Icon MOJO_LOGO = MOJO_FILE;
+  public static final Icon MOJO_LOGO = IconLoader.getIcon("/icons/mojolicious_color.png");
+  private static final AtomicNotNullLazyValue<Icon> MOJO_ROOT =
+    PerlIcons.createLazyIconWithModifier(PerlIcons.TEMPLATE_ROOT, MOJO_FILE);
+  private static final AtomicNotNullLazyValue<Icon> MOJO_PLUGIN_LOGO =
+    PerlIcons.createLazyIconWithModifier(AllIcons.Nodes.Plugin, MOJO_LOGO);
+
+  @NotNull
+  public static Icon pluginIcon() {
+    return MOJO_PLUGIN_LOGO.getValue();
+  }
+
+  @NotNull
+  public static Icon rootIcon() {
+    return MOJO_ROOT.getValue();
+  }
 
   private MojoIcons() {
   }
