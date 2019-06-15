@@ -41,6 +41,7 @@ import com.perl5.lang.mojolicious.idea.modules.MojoTemplateMarkSourceRootAction;
 import com.perl5.lang.perl.idea.actions.PerlMarkLibrarySourceRootAction;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -76,6 +77,12 @@ public class MojoProjectManager implements DumbService.DumbModeListener, MojoPro
       new PerlMarkLibrarySourceRootAction().markRoot(myProject, appRoot.findChild(PerlPackageUtil.DEFAULT_LIB_DIR));
       new MojoTemplateMarkSourceRootAction().markRoot(myProject, appRoot.findChild(MojoUtil.DEFAULT_TEMPLATES_DIR_NAME));
     });
+  }
+
+  @Contract("null->null")
+  @Nullable
+  public MojoProject getMojoProject(@Nullable VirtualFile root) {
+    return myModel.myProjectRoots.get(root);
   }
 
   @Override

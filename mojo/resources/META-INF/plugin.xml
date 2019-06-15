@@ -84,6 +84,8 @@
 
     <projectService serviceImplementation="com.perl5.lang.mojolicious.model.MojoProjectManager"/>
     <postStartupActivity implementation="com.perl5.lang.mojolicious.model.MojoProjectManager$Starter"/>
+
+    <treeStructureProvider implementation="com.perl5.lang.mojolicious.idea.projectView.MojoTreeStructureProvider"/>
   </extensions>
 
   <actions>
