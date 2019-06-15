@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright 2015-2018 Alexandr Evstigneev
+  ~ Copyright 2015-2019 Alexandr Evstigneev
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -81,9 +81,13 @@
   </extensions>
 
   <actions>
-    <action id="Mojo.newFile" class="com.perl5.lang.mojolicious.idea.ide.MojoCreateFileFromTemplateAction">
+    <group>
       <add-to-group group-id="NewGroup" relative-to-action="Perl5.NewFile" anchor="after"/>
-    </action>
+      <action id="Mojo.newFile" class="com.perl5.lang.mojolicious.idea.ide.MojoCreateFileFromTemplateAction"/>
+      <action id="perl5.mojo.generate.app" class="com.perl5.lang.mojolicious.idea.actions.MojoGenerateAppAction"/>
+      <action id="perl5.mojo.generate.lite.app" class="com.perl5.lang.mojolicious.idea.actions.MojoGenerateLiteAppAction"/>
+      <action id="perl5.mojo.generate.plugin" class="com.perl5.lang.mojolicious.idea.actions.MojoGeneratePluginAction"/>
+    </group>
   </actions>
 
 </idea-plugin>
