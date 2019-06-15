@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import com.perl5.lang.perl.idea.modules.PerlSourceRootType;
 import org.jetbrains.annotations.NotNull;
 
 public class HTMLMasonSourceRootType extends PerlSourceRootType {
-  public static HTMLMasonSourceRootType INSTANCE = new HTMLMasonSourceRootType();
+  public static final HTMLMasonSourceRootType INSTANCE = new HTMLMasonSourceRootType();
 
   @Override
   protected PerlSourceRootType getRootType() {
