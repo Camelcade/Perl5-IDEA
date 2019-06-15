@@ -19,20 +19,13 @@ package com.perl5.lang.perl.idea.actions;
 import com.intellij.openapi.actionSystem.ActionPlaces;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.projectRoots.Sdk;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 
 public abstract class PerlActionBase extends AnAction {
   protected boolean isEnabled(AnActionEvent event) {
     return PerlProjectManager.isPerlEnabled(event.getDataContext());
-  }
-
-  @Nullable
-  protected Sdk getPerlSdk(AnActionEvent event) {
-    return PerlProjectManager.getSdk(event.getProject());
   }
 
   @Override

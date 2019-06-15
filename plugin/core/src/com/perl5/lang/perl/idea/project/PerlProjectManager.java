@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -251,12 +251,11 @@ public class PerlProjectManager {
     return ServiceManager.getService(project, PerlProjectManager.class);
   }
 
+
+  @Contract("null->null")
   @Nullable
   public static Sdk getSdk(@Nullable Module module) {
-    if (module == null) {
-      return null;
-    }
-    return getInstance(module.getProject()).getProjectSdk();
+    return module == null ? null : getInstance(module.getProject()).getProjectSdk();
   }
 
   /**
@@ -288,12 +287,10 @@ public class PerlProjectManager {
     Notifications.Bus.notify(notification, project);
   }
 
+  @Contract("null->null")
   @Nullable
   public static Sdk getSdk(@Nullable Project project) {
-    if (project == null) {
-      return null;
-    }
-    return getInstance(project).getProjectSdk();
+    return project == null ? null : getInstance(project).getProjectSdk();
   }
 
   @Nullable
@@ -337,11 +334,6 @@ public class PerlProjectManager {
     return module == null ? getSdk(project) : getSdk(module);
   }
 
-  @Nullable
-  public static String getInterpreterPath(@NotNull Project project, @Nullable VirtualFile virtualFile) {
-    return getInterpreterPath(getSdk(project, virtualFile));
-  }
-
   public static boolean isPerlEnabled(@Nullable Project project) {
     return project != null && !project.isDisposed() && getInstance(project).getProjectSdk() != null;
   }
@@ -354,4 +346,9 @@ public class PerlProjectManager {
     return module != null && isPerlEnabled(module.getProject());
   }
 
+  @Contract("null->null")
+  @Nullable
+  public static Sdk getSdk(@Nullable AnActionEvent event) {
+    return event == null ? null : getSdk(event.getProject());
+  }
 }

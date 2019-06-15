@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,7 +42,7 @@ public class PerlBrewCreateLibraryAction extends PerlBrewActionBase implements D
 
   @Override
   public void actionPerformed(@NotNull AnActionEvent e) {
-    Sdk perlSdk = getPerlSdk(e);
+    Sdk perlSdk = PerlProjectManager.getSdk(e);
     PerlBrewData perlBrewData = ObjectUtils.tryCast(PerlVersionManagerData.from(perlSdk), PerlBrewData.class);
     if (perlBrewData == null) {
       return;

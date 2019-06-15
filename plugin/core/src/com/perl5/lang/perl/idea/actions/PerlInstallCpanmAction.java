@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -55,7 +55,7 @@ public class PerlInstallCpanmAction extends PerlActionBase {
 
   @Override
   public void actionPerformed(@NotNull AnActionEvent e) {
-    PerlVersionManagerData versionManagerData = PerlVersionManagerData.from(getPerlSdk(e));
+    PerlVersionManagerData versionManagerData = PerlVersionManagerData.from(PerlProjectManager.getSdk(e));
     if (versionManagerData != null) {
       versionManagerData.installCpanminus(getEventProject(e));
     }
