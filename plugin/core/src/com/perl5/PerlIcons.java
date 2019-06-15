@@ -17,7 +17,11 @@
 package com.perl5;
 
 
+import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.openapi.util.IconLoader;
+import com.intellij.ui.LayeredIcon;
+import com.intellij.util.IconUtil;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 
@@ -81,4 +85,40 @@ public class PerlIcons {
   public static final Icon GLOB_GUTTER_ICON = IconLoader.getIcon("/icons/glob_gutter_icon.png");
 
   public static final Icon PERL_TEST_CONFIGURATION = TEST_FILE;
+
+  /**
+   * @see #createIconWithModifier(Icon, Icon)
+   */
+  @NotNull
+  public static AtomicNotNullLazyValue<Icon> createLazyIconWithModifier(@NotNull Icon baseIcon, @NotNull Icon modifierIcon) {
+    return AtomicNotNullLazyValue.createValue(() -> createIconWithModifier(baseIcon, modifierIcon));
+  }
+
+  @NotNull
+  public static AtomicNotNullLazyValue<Icon> createLazyIconWithModifier(@NotNull Icon baseIcon,
+                                                                        @NotNull Icon modifierIcon,
+                                                                        float modifierScale) {
+    return AtomicNotNullLazyValue.createValue(() -> createIconWithModifier(baseIcon, modifierIcon, modifierScale));
+  }
+
+  @NotNull
+  public static Icon createIconWithModifier(@NotNull Icon baseIcon, @NotNull Icon modifierIcon) {
+    return createIconWithModifier(baseIcon, modifierIcon, 0.5f);
+  }
+
+  /**
+   * Creates an icon by combining {@code baseIcon} and scaled {@code modifierIcon}
+   *
+   * @apiNote modifier icon is scaled in {@code modifierScale} and put into right bottom corner of the base icon
+   */
+  @NotNull
+  private static Icon createIconWithModifier(@NotNull Icon baseIcon,
+                                             @NotNull Icon modifierIcon,
+                                             float modifierScale) {
+    LayeredIcon result = new LayeredIcon(2);
+    result.setIcon(baseIcon, 0);
+    Icon modifier = IconUtil.scale(modifierIcon, null, modifierScale);
+    result.setIcon(modifier, 1, baseIcon.getIconHeight() - modifier.getIconHeight(), baseIcon.getIconWidth() - modifier.getIconWidth());
+    return result;
+  }
 }
