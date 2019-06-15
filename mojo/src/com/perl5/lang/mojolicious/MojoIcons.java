@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,7 @@ public final class MojoIcons {
   public static final Icon MOJO_FILE = IconLoader.getIcon("/icons/mojolicious.png");
   public static final Icon MOJO_MODIFIER = IconLoader.getIcon("/icons/mojo-modifier.png");
   public static final Icon MOJO_ROOT = new LayeredIcon(PerlIcons.TEMPLATE_ROOT, MOJO_MODIFIER);
+  public static final Icon MOJO_LOGO = MOJO_FILE;
 
   private MojoIcons() {
   }
