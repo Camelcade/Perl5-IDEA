@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,8 +24,8 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiDirectory;
 import com.perl5.lang.mojolicious.MojoBundle;
 import com.perl5.lang.mojolicious.MojoIcons;
+import com.perl5.lang.mojolicious.MojoUtil;
 import com.perl5.lang.mojolicious.filetypes.MojoliciousFileType;
-import com.perl5.lang.perl.idea.project.PerlProjectManager;
 
 public class MojoCreateFileFromTemplateAction extends CreateFileFromTemplateAction implements DumbAware {
   public MojoCreateFileFromTemplateAction() {
@@ -35,7 +35,7 @@ public class MojoCreateFileFromTemplateAction extends CreateFileFromTemplateActi
   @Override
   protected void buildDialog(Project project, PsiDirectory directory, CreateFileFromTemplateDialog.Builder builder) {
     builder.setTitle(MojoBundle.message("action.new.file.builder.title"));
-    builder.addKind(MojoliciousFileType.INSTANCE.getDescription(), MojoIcons.MOJO_FILE, "Perl5 mojolicious");
+    builder.addKind(MojoliciousFileType.INSTANCE.getDescription(), MojoIcons.MOJO_FILE, MojoBundle.message("perl.file.kind.mojo"));
   }
 
   @Override
@@ -45,7 +45,7 @@ public class MojoCreateFileFromTemplateAction extends CreateFileFromTemplateActi
 
   @Override
   protected boolean isAvailable(DataContext dataContext) {
-    return PerlProjectManager.isPerlEnabled(dataContext) && super.isAvailable(dataContext);
+    return super.isAvailable(dataContext) && MojoUtil.isMojoAvailable(dataContext);
   }
 
 }
