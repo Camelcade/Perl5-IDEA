@@ -16,6 +16,7 @@
 
 package com.perl5.lang.mojolicious.model;
 
+import com.intellij.ide.projectView.ProjectView;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.ReadAction;
 import com.intellij.openapi.components.ServiceManager;
@@ -173,6 +174,11 @@ public class MojoProjectManager implements DumbService.DumbModeListener, MojoPro
     }
     createdProjects.forEach(projectListener::projectCreated);
     LOG.debug("Model updated");
+    ApplicationManager.getApplication().invokeLater(() -> {
+      if (!myProject.isDisposed() && !ApplicationManager.getApplication().isUnitTestMode()) {
+        ProjectView.getInstance(myProject).refresh();
+      }
+    });
   }
 
   /**
