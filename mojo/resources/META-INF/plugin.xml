@@ -29,6 +29,7 @@
   <extensions defaultExtensionNs="com.perl5">
     <parserExtension implementation="com.perl5.lang.perl.parser.MojoParserExtension"/>
     <importsProvider implementation="com.perl5.lang.mojolicious.extensions.MojoImplicitImportsProvider"/>
+    <settings.configurable.extension implementation="com.perl5.lang.mojolicious.idea.modules.MojoSettingsConfigurableExtension"/>
   </extensions>
 
   <extensions defaultExtensionNs="com.intellij">
@@ -78,6 +79,8 @@
         implementation="com.perl5.lang.mojolicious.idea.liveTemplates.MojoliciousLiveTemplateProcessor"/>
     <elementDescriptionProvider implementation="com.perl5.lang.mojolicious.psi.MojoElementDescriptionProvider" id="perl5.mojo"
                                 order="before perl5"/>
+    <projectStructure.sourceRootEditHandler
+        implementation="com.perl5.lang.mojolicious.idea.modules.MojoTemplateSourceRootEditHandler"/>
   </extensions>
 
   <actions>
@@ -87,6 +90,11 @@
       <action id="perl5.mojo.generate.app" class="com.perl5.lang.mojolicious.idea.actions.MojoGenerateAppAction"/>
       <action id="perl5.mojo.generate.lite.app" class="com.perl5.lang.mojolicious.idea.actions.MojoGenerateLiteAppAction"/>
       <action id="perl5.mojo.generate.plugin" class="com.perl5.lang.mojolicious.idea.actions.MojoGeneratePluginAction"/>
+    </group>
+
+    <group>
+      <add-to-group group-id="MarkRootGroup"/>
+      <action id="Perl.MarkMojoRoot" class="com.perl5.lang.mojolicious.idea.modules.MojoTemplateMarkSourceRootAction"/>
     </group>
   </actions>
 

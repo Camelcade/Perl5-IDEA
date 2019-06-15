@@ -19,6 +19,7 @@ package com.perl5.lang.mojolicious;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.actionSystem.DataContext;
+import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -62,11 +63,28 @@ public final class MojoUtil {
   }
 
   /**
+   * @return a mojo script virtual file for {@code module} if any
+   */
+  @Contract("null->null")
+  @Nullable
+  public static VirtualFile getMojoScript(@Nullable Module module) {
+    return getMojoScript(PerlProjectManager.getSdk(module));
+  }
+
+  /**
    * @return iff mojolicious is available in the context of {@code event}
    */
   @Contract("null->false")
   public static boolean isMojoAvailable(@Nullable AnActionEvent event) {
     return getMojoScript(event) != null;
+  }
+
+  /**
+   * @return iff mojolicious is available in the context of {@code module}
+   */
+  @Contract("null->false")
+  public static boolean isMojoAvailable(@Nullable Module module) {
+    return getMojoScript(module) != null;
   }
 
   /**
