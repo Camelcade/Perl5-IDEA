@@ -670,28 +670,29 @@
   </project-components>
 
   <actions>
-    <group id="Perl5.Tools" text="Perl5" popup="true" icon="/icons/perl5language.png">
+    <group id="perl5.tools" text="Perl5" popup="true" icon="/icons/perl5language.png">
       <add-to-group group-id="ToolsMenu" anchor="last"/>
-      <action id="perl5.intsall.cpanm" class="com.perl5.lang.perl.idea.actions.PerlInstallCpanmAction"/>
-      <action id="perl5.install.with.cpanm" class="com.perl5.lang.perl.idea.actions.PerlInstallPackagesWithCpanminusAction"/>
-      <action id="perl5.install.with.cpan" class="com.perl5.lang.perl.idea.actions.PerlInstallPackagesWithCpanAction"/>
       <action id="perl5.DeparseXSubs" class="com.perl5.lang.perl.idea.actions.PerlRegenerateXSubsAction"/>
       <action id="perl5.FormatWithPerlTidy" class="com.perl5.lang.perl.idea.actions.PerlFormatWithPerlTidyAction"/>
       <action id="perl5.DeparseFile" class="com.perl5.lang.perl.idea.actions.PerlDeparseFileAction"/>
-      <action id="perl5.install.perl" class="com.perl5.lang.perl.idea.sdk.versionManager.PerlInstallAction"/>
       <action id="perl5.sync.interpreter" class="com.perl5.lang.perl.idea.actions.PerlSynInterpreterAction"/>
+      <action id="perl5.perlbrew.createlib" class="com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewCreateLibraryAction"
+              icon="/icons/perlbrew.png"/>
+    </group>
+
+    <group id="perl5.install" text="Install" popup="true">
+      <add-to-group group-id="perl5.tools" anchor="last"/>
+      <action id="perl5.install.with.cpanm" class="com.perl5.lang.perl.idea.actions.PerlInstallPackagesWithCpanminusAction"/>
+      <action id="perl5.install.with.cpan" class="com.perl5.lang.perl.idea.actions.PerlInstallPackagesWithCpanAction"/>
+      <action id="perl5.intsall.cpanm" class="com.perl5.lang.perl.idea.actions.PerlInstallCpanmAction"/>
+      <action id="perl5.install.perl" class="com.perl5.lang.perl.idea.sdk.versionManager.PerlInstallAction"/>
+      <action id="perl5.perlbrew.install.patchperl"
+              class="com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewInstallPatchPerlAction" icon="/icons/perlbrew.png"/>
     </group>
 
     <action id="Perl5.NewFile" class="com.perl5.lang.perl.idea.actions.PerlFileFromTemplateAction">
       <add-to-group group-id="NewGroup" anchor="first"/>
     </action>
-
-    <group id="Perl5.Perlbrew" popup="true" text="Perlbrew" icon="/icons/perlbrew.png">
-      <add-to-group group-id="Perl5.Tools" anchor="last"/>
-      <action id="perl5.perlbrew.createlib" class="com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewCreateLibraryAction"/>
-      <action id="perl5.perlbrew.install.patchperl"
-              class="com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewInstallPatchPerlAction"/>
-    </group>
 
     <group>
       <add-to-group group-id="GenerateGroup" anchor="first"/>
@@ -708,8 +709,8 @@
 
     <group>
       <add-to-group group-id="MarkRootGroup"/>
-      <action id="Perl.MarkAsLibraryDirectory" class="com.perl5.lang.perl.idea.actions.PerlMarkLibrarySourceRootAction"/>
-      <action id="Perl.UnPerlRoot" class="com.perl5.lang.perl.idea.actions.PerlUnmarkSourceRootAction"/>
+      <action id="perl5.mark.library" class="com.perl5.lang.perl.idea.actions.PerlMarkLibrarySourceRootAction"/>
+      <action id="perl.unmark.library" class="com.perl5.lang.perl.idea.actions.PerlUnmarkSourceRootAction"/>
     </group>
 
   </actions>
