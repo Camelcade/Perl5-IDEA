@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,6 +32,7 @@ import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import com.pty4j.util.Pair;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -45,10 +46,10 @@ public abstract class PackageManagerAdapter {
   @NotNull
   private final Sdk mySdk;
 
-  @NotNull
+  @Nullable
   private final Project myProject;
 
-  public PackageManagerAdapter(@NotNull Sdk sdk, @NotNull Project project) {
+  public PackageManagerAdapter(@NotNull Sdk sdk, @Nullable Project project) {
     mySdk = sdk;
     myProject = project;
   }
@@ -75,7 +76,7 @@ public abstract class PackageManagerAdapter {
    */
   private void doInstall(@NotNull Collection<String> packageNames) {
     ApplicationManager.getApplication().assertIsDispatchThread();
-    if (myProject.isDisposed()) {
+    if (myProject != null && myProject.isDisposed()) {
       return;
     }
     VirtualFile script = PerlRunUtil.findLibraryScriptWithNotification(
@@ -120,13 +121,13 @@ public abstract class PackageManagerAdapter {
     if (!mySdk.equals(adapter.mySdk)) {
       return false;
     }
-    return myProject.equals(adapter.myProject);
+    return myProject != null ? myProject.equals(adapter.myProject) : adapter.myProject == null;
   }
 
   @Override
   public int hashCode() {
     int result = mySdk.hashCode();
-    result = 31 * result + myProject.hashCode();
+    result = 31 * result + (myProject != null ? myProject.hashCode() : 0);
     return result;
   }
 
@@ -135,9 +136,17 @@ public abstract class PackageManagerAdapter {
     return mySdk;
   }
 
-  @NotNull
-  public Project getProject() {
+  @Nullable
+  private Project getProject() {
     return myProject;
+  }
+
+  /**
+   * Creates an adapter, prefers cpanminus over cpan
+   */
+  @NotNull
+  public static PackageManagerAdapter create(@NotNull Sdk sdk, @Nullable Project project) {
+    return CpanminusAdapter.isAvailable(sdk) ? new CpanminusAdapter(sdk, project) : new CpanAdapter(sdk, project);
   }
 
   private static final class InstallUpdate extends Update {

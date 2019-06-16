@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,7 +38,7 @@ public class CpanminusAdapter extends PackageManagerAdapter {
   private static final String PACKAGE_PATH = PerlPackageUtil.getPackagePathByName(PACKAGE_NAME);
   public static final String SCRIPT_NAME = "cpanm";
 
-  public CpanminusAdapter(@NotNull Sdk sdk, @NotNull Project project) {
+  public CpanminusAdapter(@NotNull Sdk sdk, @Nullable Project project) {
     super(sdk, project);
   }
 
@@ -93,7 +93,7 @@ public class CpanminusAdapter extends PackageManagerAdapter {
 
   @Nullable
   public static AnAction createInstallAction(@NotNull Sdk sdk,
-                                             @NotNull Project project,
+                                             @Nullable Project project,
                                              @NotNull Collection<String> libraryNames,
                                              @Nullable Runnable actionCallback) {
     ApplicationManager.getApplication().assertReadAccessAllowed();

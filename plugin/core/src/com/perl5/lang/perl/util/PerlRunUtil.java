@@ -205,7 +205,7 @@ public class PerlRunUtil {
    */
   @Nullable
   public static VirtualFile findLibraryScriptWithNotification(@NotNull Sdk sdk,
-                                                              @NotNull Project project,
+                                                              @Nullable Project project,
                                                               @NotNull String scriptName,
                                                               @Nullable String libraryName) {
     VirtualFile scriptFile = findScript(sdk, scriptName);
@@ -243,7 +243,7 @@ public class PerlRunUtil {
   /**
    * Adds installation actions to the {@code notification} and shows it in the context of the {@code project}
    */
-  public static void addInstallActionsAndShow(@NotNull Project project,
+  public static void addInstallActionsAndShow(@Nullable Project project,
                                               @NotNull Sdk sdk,
                                               @NotNull Collection<String> packagesToInstall,
                                               @NotNull Notification notification) {
@@ -273,7 +273,7 @@ public class PerlRunUtil {
   }
 
 
-  private static void showMissingLibraryNotification(@NotNull Project project, @NotNull Sdk sdk, @NotNull String libraryName) {
+  private static void showMissingLibraryNotification(@Nullable Project project, @NotNull Sdk sdk, @NotNull String libraryName) {
     Notification notification = new Notification(
       PerlBundle.message("perl.missing.library.notification"),
       PerlBundle.message("perl.missing.library.notification.title", libraryName),

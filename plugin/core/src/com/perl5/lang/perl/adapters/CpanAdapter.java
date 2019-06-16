@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,12 +28,13 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
+import java.util.Objects;
 
 public class CpanAdapter extends PackageManagerAdapter {
   private static final String PACKAGE_NAME = "CPAN";
   public static final String SCRIPT_NAME = "cpan";
 
-  public CpanAdapter(@NotNull Sdk sdk, @NotNull Project project) {
+  public CpanAdapter(@NotNull Sdk sdk, @Nullable Project project) {
     super(sdk, project);
   }
 
@@ -57,7 +58,7 @@ public class CpanAdapter extends PackageManagerAdapter {
 
   @NotNull
   public static AnAction createInstallAction(@NotNull Sdk sdk,
-                                             @NotNull Project project,
+                                             @Nullable Project project,
                                              @NotNull Collection<String> libraryNames,
                                              @Nullable Runnable actionCallback) {
     return new DumbAwareAction(createInstallActionTitle(libraryNames, SCRIPT_NAME)) {
@@ -72,7 +73,7 @@ public class CpanAdapter extends PackageManagerAdapter {
    * Installs {@code libraryNames} into {@code sdk} and invoking a {@code callback} if any
    */
   public static void installModules(@NotNull Sdk sdk,
-                                    @NotNull Project project,
+                                    @Nullable Project project,
                                     @NotNull Collection<String> libraryNames,
                                     @Nullable Runnable actionCallback) {
     new CpanAdapter(sdk, project).install(libraryNames);
@@ -95,4 +96,10 @@ public class CpanAdapter extends PackageManagerAdapter {
     Sdk sdk = PerlProjectManager.getSdk(project);
     return sdk == null ? null : new CpanAdapter(sdk, project);
   }
+
+  @NotNull
+  public static CpanAdapter createNonNull(@NotNull Project project) {
+    return Objects.requireNonNull(create(project));
+  }
+
 }
