@@ -119,7 +119,8 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
       .findFirst().orElseGet(() -> hostData.findFileByName(getExecutableName()));
   }
 
-  protected abstract PerlVersionManagerAdapter createAdapter(@NotNull String pathToVersionManager, @NotNull PerlHostData hostData);
+  @NotNull
+  public abstract PerlVersionManagerAdapter createAdapter(@NotNull String pathToVersionManager, @NotNull PerlHostData hostData);
 
   private void createSdkInteractively(@Nullable Project project,
                                       @Nullable String selectedPath,

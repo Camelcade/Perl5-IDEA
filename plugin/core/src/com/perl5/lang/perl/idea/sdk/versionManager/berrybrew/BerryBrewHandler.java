@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,8 +47,9 @@ class BerryBrewHandler extends PerlRealVersionManagerHandler<BerryBrewData, Berr
     return "berrybrew.exe";
   }
 
+  @NotNull
   @Override
-  protected PerlVersionManagerAdapter createAdapter(@NotNull String pathToVersionManager, @NotNull PerlHostData hostData) {
+  public PerlVersionManagerAdapter createAdapter(@NotNull String pathToVersionManager, @NotNull PerlHostData hostData) {
     return new BerryBrewAdapter(pathToVersionManager, hostData);
   }
 
