@@ -49,7 +49,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class MojoProjectManager implements DumbService.DumbModeListener, MojoProjectListener {
+import static com.perl5.lang.mojolicious.model.MojoProjectListener.MOJO_PROJECT_TOPIC;
+
+public class MojoProjectManager {
   static final Logger LOG = Logger.getInstance(MojoProjectManager.class);
   @NotNull
   private final Project myProject;
@@ -64,19 +66,36 @@ public class MojoProjectManager implements DumbService.DumbModeListener, MojoPro
     myProject = project;
     myUpdateQueue = new MergingUpdateQueue("mojo model updating queue", 500, true, null, project, null, false);
     MessageBusConnection connection = myProject.getMessageBus().connect();
-    connection.subscribe(DumbService.DUMB_MODE, this);
-    connection.subscribe(MOJO_PROJECT_TOPIC, this);
-  }
-
-  @Override
-  public void applicationCreated(@NotNull MojoApp mojoApp) {
-    ApplicationManager.getApplication().invokeLater(() -> {
-      if (myProject.isDisposed() || !mojoApp.isValid()) {
-        return;
+    connection.subscribe(DumbService.DUMB_MODE, new DumbService.DumbModeListener() {
+      @Override
+      public void exitDumbMode() {
+        LOG.debug("Exiting dumb mode");
+        scheduleUpdate();
       }
-      VirtualFile appRoot = mojoApp.getRoot();
-      new PerlMarkLibrarySourceRootAction().markRoot(myProject, appRoot.findChild(PerlPackageUtil.DEFAULT_LIB_DIR));
-      new MojoTemplateMarkSourceRootAction().markRoot(myProject, appRoot.findChild(MojoUtil.DEFAULT_TEMPLATES_DIR_NAME));
+    });
+
+    connection.subscribe(MOJO_PROJECT_TOPIC, new MojoProjectListener() {
+      @Override
+      public void applicationCreated(@NotNull MojoApp mojoApp) {
+        ApplicationManager.getApplication().invokeLater(() -> {
+          if (myProject.isDisposed() || !mojoApp.isValid()) {
+            return;
+          }
+          VirtualFile appRoot = mojoApp.getRoot();
+          new PerlMarkLibrarySourceRootAction().markRoot(myProject, appRoot.findChild(PerlPackageUtil.DEFAULT_LIB_DIR));
+          new MojoTemplateMarkSourceRootAction().markRoot(myProject, appRoot.findChild(MojoUtil.DEFAULT_TEMPLATES_DIR_NAME));
+        });
+      }
+
+      @Override
+      public void pluginCreated(@NotNull MojoPlugin mojoPlugin) {
+        ApplicationManager.getApplication().invokeLater(() -> {
+          if (myProject.isDisposed() || !mojoPlugin.isValid()) {
+            return;
+          }
+          new PerlMarkLibrarySourceRootAction().markRoot(myProject, mojoPlugin.getRoot().findChild(PerlPackageUtil.DEFAULT_LIB_DIR));
+        });
+      }
     });
   }
 
@@ -86,28 +105,12 @@ public class MojoProjectManager implements DumbService.DumbModeListener, MojoPro
     return myModel.myProjectRoots.get(root);
   }
 
-  @Override
-  public void pluginCreated(@NotNull MojoPlugin mojoPlugin) {
-    ApplicationManager.getApplication().invokeLater(() -> {
-      if (myProject.isDisposed() || !mojoPlugin.isValid()) {
-        return;
-      }
-      new PerlMarkLibrarySourceRootAction().markRoot(myProject, mojoPlugin.getRoot().findChild(PerlPackageUtil.DEFAULT_LIB_DIR));
-    });
-  }
-
   /**
    * Queues model update
    */
   private void scheduleUpdate() {
     LOG.debug("Scheduling update");
     myUpdateQueue.queue(Update.create(this, this::updateModel));
-  }
-
-  @Override
-  public void exitDumbMode() {
-    LOG.debug("Exiting dumb mode");
-    scheduleUpdate();
   }
 
   /**
