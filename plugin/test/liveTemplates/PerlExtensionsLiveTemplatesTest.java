@@ -16,8 +16,12 @@
 
 package liveTemplates;
 
+
+import org.junit.Test;
 public class PerlExtensionsLiveTemplatesTest extends PerlLiveTemplatesTestCase {
+  @Test
   public void testMethod() {doTest("me");}
 
+  @Test
   public void testFunc() {doTest("fu");}
 }

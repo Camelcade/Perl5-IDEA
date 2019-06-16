@@ -21,19 +21,23 @@ import base.PerlLightTestCase;
 import com.intellij.codeInsight.TargetElementUtil;
 import com.intellij.psi.PsiReference;
 import org.jetbrains.annotations.NotNull;
-
+import org.junit.Test;
 public class PodPerlRenameTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/rename/pod/perl";
   }
 
+  @Test
   public void testScriptFile() {doTest();}
 
+  @Test
   public void testScriptFileMethod() {doTest("new_method_name", true, false);}
 
+  @Test
   public void testScriptFileMethodDropsFormatting() {doTest("new_method_name", true, false);}
 
+  @Test
   public void testScriptFileMethodInplace() {
     myFixture.copyFileToProject("scriptFileMethodInplace.pm");
     doTest("new_method_name", false, true);

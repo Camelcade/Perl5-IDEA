@@ -16,8 +16,9 @@
 
 package liveTemplates;
 
-import com.intellij.openapi.util.io.FileUtil;
 
+import com.intellij.openapi.util.io.FileUtil;
+import org.junit.Test;
 public class PerlMooseLiveTemplatesTest extends PerlLiveTemplatesTestCase {
 
   @Override
@@ -25,19 +26,27 @@ public class PerlMooseLiveTemplatesTest extends PerlLiveTemplatesTestCase {
     return FileUtil.join(super.getResultsTestDataPath(), "moose");
   }
 
+  @Test
   public void testExtends() {doTest("ex");}
 
+  @Test
   public void testWith() {doTest("wi");}
 
+  @Test
   public void testHas() {doTest("ha");}
 
+  @Test
   public void testBefore() {doTest("be");}
 
+  @Test
   public void testAfter() {doTest("af");}
 
+  @Test
   public void testAround() {doTest("ar");}
 
+  @Test
   public void testOverride() {doTest("ov");}
 
+  @Test
   public void testAugment() {doTest("au");}
 }

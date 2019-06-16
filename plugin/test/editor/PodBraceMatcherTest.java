@@ -16,8 +16,9 @@
 
 package editor;
 
-import base.PodLightTestCase;
 
+import base.PodLightTestCase;
+import org.junit.Test;
 public class PodBraceMatcherTest extends PodLightTestCase {
 
   @Override
@@ -25,16 +26,22 @@ public class PodBraceMatcherTest extends PodLightTestCase {
     return "testData/braceMatcher/pod";
   }
 
+  @Test
   public void testAngles() {doTest();}
 
+  @Test
   public void testBeginEnd() {doTest();}
 
+  @Test
   public void testBraces() {doTest();}
 
+  @Test
   public void testBrackets() {doTest();}
 
+  @Test
   public void testOverBack() {doTest();}
 
+  @Test
   public void testParens() {doTest();}
 
   private void doTest() {

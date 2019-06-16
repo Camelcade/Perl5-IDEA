@@ -16,11 +16,13 @@
 
 package editor;
 
+
 import base.PerlLightTestCase;
 import com.intellij.ide.util.gotoByName.FilteringGotoByModel;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import org.jetbrains.annotations.NotNull;
+import org.junit.Test;
 
 import java.io.File;
 
@@ -34,63 +36,78 @@ public class PerlGotoModelTest extends PerlLightTestCase {
     return "testData/gotoModel/perl";
   }
 
+  @Test
   public void testProjectFile() {
     doTestProject(getGoToFileModel());
   }
 
+  @Test
   public void testProjectClass() {
     doTestProject(getGoToClassModel());
   }
 
+  @Test
   public void testProjectSymbol() {
     doTestProject(getGoToSymbolModel());
   }
 
+  @Test
   public void testProjectWithLibFile() {
     doTestProjectWithLib(getGoToFileModel());
   }
 
+  @Test
   public void testProjectWithLibClass() {
     doTestProjectWithLib(getGoToClassModel());
   }
 
+  @Test
   public void testProjectWithLibSymbol() {
     doTestProjectWithLib(getGoToSymbolModel());
   }
 
+  @Test
   public void testLibraryFile() {
     doTestLibrary(getGoToFileModel());
   }
 
+  @Test
   public void testLibraryClass() {
     doTestLibrary(getGoToClassModel());
   }
 
+  @Test
   public void testLibrarySymbol() {
     doTestLibrary(getGoToSymbolModel());
   }
 
+  @Test
   public void testProjectSecondRootFile() {
     doTestProjectSecondRoot(getGoToFileModel());
   }
 
+  @Test
   public void testProjectSecondRootClass() {
     doTestProjectSecondRoot(getGoToClassModel());
   }
 
+  @Test
   public void testProjectSecondRootSymbol() {
     doTestProjectSecondRoot(getGoToSymbolModel());
   }
 
 
+  @Test
   public void testEveryWhereFile() {
     doTestEveryWhere(getGoToFileModel());
   }
 
+  @Test
   public void testEveryWhereClass() {
     doTestEveryWhere(getGoToClassModel());
   }
 
+  @Test
   public void testEveryWhereSymbol() {
     doTestEveryWhere(getGoToSymbolModel());
   }

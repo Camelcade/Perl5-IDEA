@@ -16,71 +16,86 @@
 
 package resolve;
 
+
 import base.PerlLightTestCase;
-
-
+import org.junit.Test;
 public class PerlLexicalVariableResolveTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/resolve/perl/variables";
   }
 
+  @Test
   public void testSimple() {
     doTestResolve();
   }
 
+  @Test
   public void testIfCondition() {
     doTestResolve();
   }
 
+  @Test
   public void testForIterator() {
     doTestResolve();
   }
 
+  @Test
   public void testForIteratorIterator() {
     doTestResolve();
   }
 
+  @Test
   public void testUseVars() {
     doTestResolve();
   }
 
+  @Test
   public void testIfElsifElse() {
     doTestResolve();
   }
 
+  @Test
   public void testSubSignature() {
     doTestResolve();
   }
 
+  @Test
   public void testMethodExplicitInvocant() {
     doTestResolve();
   }
 
+  @Test
   public void testVariableInInvocation() {
     doTestResolve();
   }
 
+  @Test
   public void testMethodImplicitInvocant() {
     doTestResolve();
   }
 
+  @Test
   public void testNegativeBlock() {
     doTestResolve();
   }
 
+  @Test
   public void testNegativeIfElse() {
     doTestResolve();
   }
 
+  @Test
   public void testSameStatementSimple() {
     doTestResolve();
   }
 
+  @Test
   public void testSameStatementMap() {
     doTestResolve();
   }
 
+  @Test
   public void testPackageLimitations() {
     doTestResolve();
   }

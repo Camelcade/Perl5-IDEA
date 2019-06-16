@@ -16,9 +16,10 @@
 
 package intellilang;
 
+
 import com.intellij.testFramework.UsefulTestCase;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
-
+import org.junit.Test;
 public class PerlHeredocEscaperTest extends PerlHeredocInjectionTestCase {
   private boolean myInjectWithInterpolation;
 
@@ -44,38 +45,55 @@ public class PerlHeredocEscaperTest extends PerlHeredocInjectionTestCase {
     }
   }
 
+  @Test
   public void testUnindentableEmpty() { doTest();}
 
+  @Test
   public void testUnindentableOneliner() { doTest();}
 
+  @Test
   public void testUnindentableMultiliner() { doTest();}
 
+  @Test
   public void testUnindentableWithInterpolation() { doTest();}
 
+  @Test
   public void testUnindentedEmpty() { doTest();}
 
+  @Test
   public void testUnindentedOneliner() { doTest();}
 
+  @Test
   public void testUnindentedMultiliner() { doTest();}
 
+  @Test
   public void testUnindentedWithInterpolation() { doTest();}
 
+  @Test
   public void testProperlyIndentedEmpty() { doTest();}
 
+  @Test
   public void testProperlyIndentedOneliner() { doTest();}
 
+  @Test
   public void testProperlyIndentedMultiliner() { doTest();}
 
+  @Test
   public void testProperlyIndentedMultilinerWithNewLines() { doTest();}
 
+  @Test
   public void testProperlyIndentedWithInterpolation() { doTest();}
 
+  @Test
   public void testImproperlyIndentedOneliner() { doTest();}
 
+  @Test
   public void testImproperlyIndentedMultiliner() { doTest();}
 
+  @Test
   public void testImproperlyIndentedMultilinerWithNewLines() { doTest();}
 
+  @Test
   public void testImproperlyIndentedWithInterpolation() { doTest();}
 
   private void doTest() {

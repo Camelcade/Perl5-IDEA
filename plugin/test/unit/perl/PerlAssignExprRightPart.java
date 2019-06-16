@@ -16,6 +16,7 @@
 
 package unit.perl;
 
+
 import base.PerlLightTestCase;
 import com.intellij.psi.PsiElement;
 import com.intellij.testFramework.UsefulTestCase;
@@ -23,9 +24,9 @@ import com.perl5.lang.perl.psi.PerlAssignExpression;
 import com.perl5.lang.perl.psi.PerlVariable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.junit.Test;
 
 import java.util.List;
-
 public class PerlAssignExprRightPart extends PerlLightTestCase {
 
   @Override
@@ -33,72 +34,103 @@ public class PerlAssignExprRightPart extends PerlLightTestCase {
     return "testData/unit/perl/assign/rightPart";
   }
 
+  @Test
   public void testAssignListToScalar() {doTest();}
 
+  @Test
   public void testAssignListToScalarMulti() {doTest();}
 
+  @Test
   public void testAssignListToScalarInList() {doTest();}
 
+  @Test
   public void testAssignHeredoc() {doTest();}
 
+  @Test
   public void testAssignHeredocMid() {doTest();}
 
+  @Test
   public void testAssignHeredocMidParallel() {doTest();}
 
+  @Test
   public void testAssignHeredocMidRightPart() {doTest();}
 
+  @Test
   public void testAssignChainScalar() {doTest();}
 
+  @Test
   public void testAssignChainScalarArray() {doTest();}
 
+  @Test
   public void testAssignChainScalarParallel() {doTest();}
 
+  @Test
   public void testAssignChainScalarParallelUndef() {doTest();}
 
+  @Test
   public void testAssignChainScalarParallelUndefMid() {doTest();}
 
+  @Test
   public void testAssignListInListContext() {doTest();}
 
+  @Test
   public void testAssignListInScalarContext() {doTest();}
 
+  @Test
   public void testAssignStringListInListContext() {doTest();}
 
+  @Test
   public void testAssignStringListInScalarContext() {doTest();}
 
+  @Test
   public void testAssignScalarEmpty() {doTest();}
 
+  @Test
   public void testAssignScalarFirst() {doTest();}
 
+  @Test
   public void testAssignScalarList() {doTest();}
 
+  @Test
   public void testAssignScalarListFirst() {doTest();}
 
+  @Test
   public void testAssignScalarListWithValues() {doTest();}
 
+  @Test
   public void testAssignScalarParensInside() {doTest();}
 
+  @Test
   public void testAssignScalarParensOutside() {doTest();}
 
+  @Test
   public void testAssignScalarSecond() {doTest();}
 
+  @Test
   public void testAssignScalarSecondParens() {doTest();}
 
+  @Test
   public void testAssignScalarSimple() {doTest();}
 
+  @Test
   public void testAssignScalarThird() {
     doTestRightPart(PerlVariable.class);
   }
 
+  @Test
   public void testDeclarationScalarThird() {
     doTestRightPart(PerlVariable.class);
   }
 
+  @Test
   public void testAssignScalarThirdShift() {doTest();}
 
+  @Test
   public void testAssignStringList() {
     doTestRightPart(PerlVariable.class);
   }
 
+  @Test
   public void testDeclarationStringList() {doTest();}
 
   private void doTest() {

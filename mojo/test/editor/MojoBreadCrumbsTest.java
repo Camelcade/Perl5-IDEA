@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,16 +16,19 @@
 
 package editor;
 
-import base.PerlLightTestCase;
 
+import base.PerlLightTestCase;
+import org.junit.Test;
 public class MojoBreadCrumbsTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/breadcrumbs";
   }
 
+  @Test
   public void testAttribute() {doTest();}
 
+  @Test
   public void testInFile() {doTest();}
 
   private void doTest() {

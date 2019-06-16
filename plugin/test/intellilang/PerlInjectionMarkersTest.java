@@ -16,6 +16,7 @@
 
 package intellilang;
 
+
 import base.PerlLightTestCase;
 import com.intellij.lang.html.HTMLLanguage;
 import com.intellij.openapi.util.Pair;
@@ -23,11 +24,11 @@ import com.intellij.util.FileContentUtil;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService;
+import org.junit.Test;
 
 import java.util.Collections;
 
 import static com.perl5.lang.perl.idea.intellilang.PerlDefaultInjectionMarkers.PERL5_MARKER;
-
 public class PerlInjectionMarkersTest extends PerlLightTestCase {
   private static final String TEST_MARKER = "_MYHTML";
 
@@ -36,6 +37,7 @@ public class PerlInjectionMarkersTest extends PerlLightTestCase {
     return "testData/intellilang/perl/injeciton_markers";
   }
 
+  @Test
   public void testCustomMarkerAddition() {
     PerlInjectionMarkersService markersService = PerlInjectionMarkersService.getInstance(getProject());
     assertNull(markersService.getLanguageByMarker(TEST_MARKER));
@@ -43,6 +45,7 @@ public class PerlInjectionMarkersTest extends PerlLightTestCase {
     assertEquals(HTMLLanguage.INSTANCE, markersService.getLanguageByMarker(TEST_MARKER));
   }
 
+  @Test
   public void testMarkerOverride() {
     PerlInjectionMarkersService markersService = PerlInjectionMarkersService.getInstance(getProject());
     assertEquals(PerlLanguage.INSTANCE, markersService.getLanguageByMarker(PERL5_MARKER));
@@ -52,6 +55,7 @@ public class PerlInjectionMarkersTest extends PerlLightTestCase {
     assertEquals(PerlLanguage.INSTANCE, markersService.getLanguageByMarker(PERL5_MARKER));
   }
 
+  @Test
   public void testMarkerCompletion() {
     PerlInjectionMarkersService markersService = PerlInjectionMarkersService.getInstance(getProject());
     markersService.setCustomMarkersMap(ContainerUtil.newHashMap(Pair.create(TEST_MARKER, HTMLLanguage.INSTANCE.getID())));
@@ -59,10 +63,12 @@ public class PerlInjectionMarkersTest extends PerlLightTestCase {
   }
 
 
+  @Test
   public void testAnnotated() {
     doFileTest();
   }
 
+  @Test
   public void testHereDoc() {
     doFileTest();
   }

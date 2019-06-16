@@ -16,19 +16,24 @@
 
 package editor;
 
-import base.PerlLightTestCase;
 
+import base.PerlLightTestCase;
+import org.junit.Test;
 public class PerlTypeHierarchyTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/typeHierarchy/perl";
   }
 
+  @Test
   public void testSuperClass() {doTestTypeHierarchy();}
 
+  @Test
   public void testSubClass() {doTestTypeHierarchy();}
 
+  @Test
   public void testClassNameObject() {doTestTypeHierarchy();}
 
+  @Test
   public void testClassNameStatic() {doTestTypeHierarchy();}
 }

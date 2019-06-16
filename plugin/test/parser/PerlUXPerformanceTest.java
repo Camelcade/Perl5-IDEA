@@ -16,6 +16,7 @@
 
 package parser;
 
+
 import base.PerlLightTestCase;
 import categories.Performance;
 import com.intellij.codeInsight.daemon.DaemonCodeAnalyzer;
@@ -31,6 +32,7 @@ import com.intellij.psi.impl.PsiModificationTrackerImpl;
 import com.intellij.testFramework.PlatformTestUtil;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.intellij.util.ArrayUtil;
+import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
 import java.util.Collections;
@@ -38,6 +40,7 @@ import java.util.Collections;
 
 @Category(Performance.class)
 public class PerlUXPerformanceTest extends PerlLightTestCase {
+  @Test
   public void testEnterTyping() {
     initWithPerlTidy();
     myFixture.getEditor().getCaretModel().moveToLogicalPosition(new LogicalPosition(65, 0));
@@ -57,6 +60,7 @@ public class PerlUXPerformanceTest extends PerlLightTestCase {
     }).assertTiming();
   }
 
+  @Test
   public void testHighlighting() {
     initWithPerlTidy();
     final PsiFile file = getFile();

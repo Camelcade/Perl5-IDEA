@@ -16,9 +16,11 @@
 
 package smartKeys;
 
+
 import com.perl5.lang.pod.filetypes.PodFileType;
 import editor.PerlSmartKeysTestCase;
 import org.jetbrains.annotations.NotNull;
+import org.junit.Test;
 
 public abstract class PodSmartKeysFormattersTestCase extends PerlSmartKeysTestCase {
   @Override
@@ -29,58 +31,72 @@ public abstract class PodSmartKeysFormattersTestCase extends PerlSmartKeysTestCa
   @NotNull
   protected abstract String formatter();
 
+  @Test
   public void testOpenAngle() {
     doTestWithBS(formatter() + "<caret>", "<", formatter() + "<<caret>>");
   }
 
+  @Test
   public void testOpenAngleInside() {
     doTestWithBS("test" + formatter() + "<caret>" + "text", "<", "test" + formatter() + "<<caret>>text");
   }
 
+  @Test
   public void testOpenAngleGrowStart() {
     doTest(formatter() + "<caret><>", "<", formatter() + "<<caret><  >>");
   }
 
+  @Test
   public void testOpenAngleGrowMid() {
     doTest(formatter() + "<<caret><  >>", "<", formatter() + "<<<caret><  >>>");
   }
 
+  @Test
   public void testOpenAngleGrowEnd() {
     doTest(formatter() + "<<<caret>  >>", "<", formatter() + "<<<<caret>  >>>");
   }
 
+  @Test
   public void testOpenAngleShrinkStart() {
     doTestBS(formatter() + "<<caret><  >>", formatter() + "<caret><  >");
   }
 
+  @Test
   public void testOpenAngleShrinkMid() {
     doTestBS(formatter() + "<<<caret><  >>>", formatter() + "<<caret><  >>");
   }
 
+  @Test
   public void testOpenAngleShrinkEnd() {
     doTestBS(formatter() + "<<<<caret>  >>>", formatter() + "<<<caret>  >>");
   }
 
+  @Test
   public void testCloseAngleGrowStart() {
     doTest(formatter() + "<<caret>>", ">", formatter() + "<<  ><caret>>");
   }
 
+  @Test
   public void testCloseAngleGrowMid() {
     doTest(formatter() + "<<  ><caret>>", ">", formatter() + "<<<  >><caret>>");
   }
 
+  @Test
   public void testCloseAngleGrowEnd() {
     doTest(formatter() + "<<  >><caret>", ">", formatter() + "<<<  >>><caret>");
   }
 
+  @Test
   public void testCloseAngleShrinkStart() {
     doTestBS(formatter() + "<<  ><caret>>", formatter() + "<  <caret>>");
   }
 
+  @Test
   public void testCloseAngleShrinkMid() {
     doTestBS(formatter() + "<<<  >><caret>>", formatter() + "<<  ><caret>>");
   }
 
+  @Test
   public void testCloseAngleShrinkEnd() {
     doTestBS(formatter() + "<<<  >>><caret>", formatter() + "<<  >><caret>");
   }

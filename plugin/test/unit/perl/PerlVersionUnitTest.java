@@ -16,11 +16,12 @@
 
 package unit.perl;
 
+
 import com.perl5.lang.perl.internals.PerlVersion;
 import junit.framework.TestCase;
-
-
+import org.junit.Test;
 public class PerlVersionUnitTest extends TestCase {
+  @Test
   public void testComparable() {
     PerlVersion version510 = new PerlVersion("v5.10");
     PerlVersion version510x = new PerlVersion("v5.10");
@@ -41,6 +42,7 @@ public class PerlVersionUnitTest extends TestCase {
   }
 
 
+  @Test
   public void testParsing() {
     // double constructor
     double doubleVersion = 5.008006;

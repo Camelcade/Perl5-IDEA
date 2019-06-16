@@ -16,10 +16,11 @@
 
 package completion;
 
+
 import base.PodLightTestCase;
 import com.intellij.openapi.util.text.StringUtil;
 import org.jetbrains.annotations.NotNull;
-
+import org.junit.Test;
 public class PodCompletionTest extends PodLightTestCase {
   @Override
   protected String getTestDataPath() {
@@ -32,11 +33,13 @@ public class PodCompletionTest extends PodLightTestCase {
     withPerlPod();
   }
 
+  @Test
   public void testHeading2() {
     myFixture.copyFileToProject("test.pm");
     doTest("=head2 <caret>");
   }
 
+  @Test
   public void testHeading2WithoutDocumented() {
     myFixture.copyFileToProject("test.pm");
     doTest("=head2 somesub()\n" +
@@ -44,34 +47,48 @@ public class PodCompletionTest extends PodLightTestCase {
            "=head2 <caret>");
   }
 
+  @Test
   public void testCommands() {doTest();}
 
+  @Test
   public void testItem() {doTest();}
 
+  @Test
   public void testBareName() {doTest();}
 
+  @Test
   public void testBareSection() {doTest();}
 
+  @Test
   public void testTitledName() {doTest();}
 
+  @Test
   public void testTitledNamedSection() {
     doTest();
   }
 
+  @Test
   public void testTitledSection() {doTest();}
 
+  @Test
   public void testEncoding() {doTest("=encoding <caret>", "utf-8");}
 
+  @Test
   public void testForSpace() {doTest("=for <caret>");}
 
+  @Test
   public void testBeginSpace() {doTest("=begin <caret>");}
 
+  @Test
   public void testEndSpace() {doTest("=end <caret>");}
 
+  @Test
   public void testForColon() {doTest("=for :<caret>");}
 
+  @Test
   public void testBeginColon() {doTest("=begin :<caret>");}
 
+  @Test
   public void testEndColon() {doTest("=end :<caret>");}
 
   private void doTest() {

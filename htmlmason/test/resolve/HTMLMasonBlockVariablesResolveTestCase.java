@@ -17,12 +17,16 @@
 package resolve;
 
 
+import org.junit.Test;
+
 public abstract class HTMLMasonBlockVariablesResolveTestCase extends HTMLMasonVariableResolveTestCase {
 
+  @Test
   public void testSecondEntry() {
     doTestResolve();
   }
 
+  @Test
   public void testFromSecondEntryBackwards() {
     doTestResolve();
   }

@@ -16,9 +16,10 @@
 
 package liveTemplates;
 
+
 import com.intellij.openapi.util.io.FileUtil;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
-
+import org.junit.Test;
 public class PerlSwitchLiveTemplatesTest extends PerlLiveTemplatesTestCase {
   @Override
   protected String getTestDataPath() {
@@ -35,9 +36,12 @@ public class PerlSwitchLiveTemplatesTest extends PerlLiveTemplatesTestCase {
     settings.PERL_SWITCH_ENABLED = true;
   }
 
+  @Test
   public void testSwitch() {doTest("sw");}
 
+  @Test
   public void testCase() {doTest("ca");}
 
+  @Test
   public void testElse() {doTest("el");}
 }

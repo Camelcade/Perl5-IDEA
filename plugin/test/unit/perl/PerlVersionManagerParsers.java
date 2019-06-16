@@ -16,6 +16,7 @@
 
 package unit.perl;
 
+
 import base.PerlLightTestCase;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
@@ -23,42 +24,49 @@ import com.intellij.testFramework.UsefulTestCase;
 import com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewAdapter;
 import com.perl5.lang.perl.idea.sdk.versionManager.plenv.PlenvAdapter;
 import org.jetbrains.annotations.NotNull;
+import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.function.Function;
-
 public class PerlVersionManagerParsers extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/unit/perl/vmList";
   }
 
+  @Test
   public void testPerlbrewAvailable() {
     doTest(PerlBrewAdapter::parseInstallableDistributionsList);
   }
 
+  @Test
   public void testPerlbrewClean() {
     doTest(PerlBrewAdapter::parseInstalledDistributionsList);
   }
 
+  @Test
   public void testPerlbrewSelected() {
     doTest(PerlBrewAdapter::parseInstalledDistributionsList);
   }
 
+  @Test
   public void testPlenvAvailable() {
     doTest(PlenvAdapter::parseInstallableDistributionsList);
   }
 
+  @Test
   public void testPlenvClean() {
     doTest(PlenvAdapter::parseInstalledDistributionsList);
   }
 
+  @Test
   public void testPlenvGlobal() {
     doTest(PlenvAdapter::parseInstalledDistributionsList);
   }
 
+  @Test
   public void testPlenvLocal() {
     doTest(PlenvAdapter::parseInstalledDistributionsList);
   }

@@ -16,9 +16,9 @@
 
 package parser;
 
+
 import com.perl5.lang.mason2.filetypes.Mason2FileTypeFactory;
-
-
+import org.junit.Test;
 public class Mason2ParserTest extends PerlParserTestBase {
   public Mason2ParserTest() {
     super(Mason2FileTypeFactory.PURE_PERL_COMPONENT_EXTENSION);
@@ -29,6 +29,7 @@ public class Mason2ParserTest extends PerlParserTestBase {
     return "testData/parser/perl";
   }
 
+  @Test
   public void testTestComponent() {
     doTest(true);
   }

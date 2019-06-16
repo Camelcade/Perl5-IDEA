@@ -16,6 +16,8 @@
 
 package parser;
 
+
+import org.junit.Test;
 public class EmbeddedPerlParserTest extends PerlParserTestBase {
   public EmbeddedPerlParserTest() {
     super("thtml");
@@ -26,14 +28,17 @@ public class EmbeddedPerlParserTest extends PerlParserTestBase {
     return "testData/parser";
   }
 
+  @Test
   public void testWithPod() {
     doTest();
   }
 
+  @Test
   public void testParserTest() {
     doTest();
   }
 
+  @Test
   public void testIncompletePerlBlock() {
     doTest();
   }

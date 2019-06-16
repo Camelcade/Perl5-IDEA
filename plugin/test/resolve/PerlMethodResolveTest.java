@@ -16,47 +16,56 @@
 
 package resolve;
 
+
 import base.PerlLightTestCase;
-
-
+import org.junit.Test;
 public class PerlMethodResolveTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/resolve/perl/methods";
   }
 
+  @Test
   public void testViaSelf() {
     doTest();
   }
 
+  @Test
   public void testViaShift() {
     doTest();
   }
 
+  @Test
   public void testViaDefault() {
     doTest();
   }
 
+  @Test
   public void testViaShiftInParens() {
     doTest();
   }
 
+  @Test
   public void testViaDefaultInParens() {
     doTest();
   }
 
+  @Test
   public void testViaPackageVar() {
     doTest();
   }
 
+  @Test
   public void testViaPackageVarInParens() {
     doTest();
   }
 
+  @Test
   public void testViaArbitraryVar() {
     doTestResolve();
   }
 
+  @Test
   public void testViaReturnResult() {
     doTest();
   }

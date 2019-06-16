@@ -16,59 +16,78 @@
 
 package stubs;
 
+
 import base.PerlLightTestCase;
 import org.jetbrains.annotations.NotNull;
-
+import org.junit.Test;
 public class PerlStubsTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/stubs/perl";
   }
 
+  @Test
   public void testExceptionClass_pl() {doTest();}
 
+  @Test
   public void testAugment_pl() {doTest();}
 
+  @Test
   public void testDoRequire_pl() {doTest();}
 
+  @Test
   public void testSubDeclaration_pl() {doTest();}
 
+  @Test
   public void testSubDefinition_pl() {doTest();}
 
+  @Test
   public void testMethodDefinition_pl() {doTest();}
 
+  @Test
   public void testFuncDefinition_pl() {doTest();}
 
+  @Test
   public void testClassAccessor_pl() {doTest();}
 
+  @Test
   public void testMooseAttr_pl() {doTest();}
 
+  @Test
   public void testConstants_pl() {doTest();}
 
+  @Test
   public void testNamespace_pl() {
     doTest();
   }
 
+  @Test
   public void testNamespace_pm() {
     doTest();
   }
 
+  @Test
   public void testNamespaceDeprecated_pl() {
     doTest();
   }
 
+  @Test
   public void testVariables_pl() {
     doTest();
   }
 
+  @Test
   public void testGlobs_pl() {
     doTest();
   }
 
+  @Test
   public void testNestedPodItems_pl() {doTest();}
 
+  @Test
   public void testNestedPodItemsLong_pl() {doTest();}
 
+  @Test
   public void testNestedPodSections_pl() {doTest();}
 
   @NotNull

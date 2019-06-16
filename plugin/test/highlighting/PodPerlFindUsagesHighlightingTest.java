@@ -16,16 +16,19 @@
 
 package highlighting;
 
-import base.PerlLightTestCase;
 
+import base.PerlLightTestCase;
+import org.junit.Test;
 public class PodPerlFindUsagesHighlightingTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/highlighting/pod/usages/perl";
   }
 
+  @Test
   public void testMethodInScript() {doTest();}
 
+  @Test
   public void testMethodDocInScript() {doTest();}
 
   private void doTest() {doTestUsagesHighlighting();}

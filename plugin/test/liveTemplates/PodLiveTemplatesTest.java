@@ -16,45 +16,62 @@
 
 package liveTemplates;
 
+
 import base.PodLightTestCase;
 import org.jetbrains.annotations.NotNull;
-
+import org.junit.Test;
 public class PodLiveTemplatesTest extends PodLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/liveTemplates/pod";
   }
 
+  @Test
   public void testH1() {doTest("=head1");}
 
+  @Test
   public void testH2() {doTest("=head2");}
 
+  @Test
   public void testAttr() {doTest("=attr");}
 
+  @Test
   public void testMethod() {doTest("=method");}
 
+  @Test
   public void testFunc() {doTest("=func");}
 
+  @Test
   public void testH3() {doTest("=head3");}
 
+  @Test
   public void testH4() {doTest("=head4");}
 
+  @Test
   public void testOverBack() {doTest("=over");}
 
+  @Test
   public void testBeginEnd() {doTest("=begin");}
 
+  @Test
   public void testFor() {doTest("=for");}
 
+  @Test
   public void testEncoding() {doTest("=encoding");}
 
+  @Test
   public void testItem() {doTest("=item");}
 
+  @Test
   public void testPod() {doTest("=pod");}
 
+  @Test
   public void testCut() {doTest("=cut");}
 
+  @Test
   public void testEnd() {doTest("=end");}
 
+  @Test
   public void testBack() {doTest("=back");}
 
   protected void doTest(@NotNull String textToType) {

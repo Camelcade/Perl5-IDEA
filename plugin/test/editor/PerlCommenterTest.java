@@ -16,20 +16,25 @@
 
 package editor;
 
-import base.PerlLightTestCase;
 
+import base.PerlLightTestCase;
+import org.junit.Test;
 public class PerlCommenterTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/commenter/perl";
   }
 
+  @Test
   public void testAll() {doTest();}
 
+  @Test
   public void testIndentedRange() {doTest();}
 
+  @Test
   public void testLineDoubleIndented() {doTest();}
 
+  @Test
   public void testLineIndented() {doTest();}
 
   private void doTest() {

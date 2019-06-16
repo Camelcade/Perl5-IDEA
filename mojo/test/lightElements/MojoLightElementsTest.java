@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,14 +16,16 @@
 
 package lightElements;
 
-import base.MojoLightTestCase;
 
+import base.MojoLightTestCase;
+import org.junit.Test;
 public class MojoLightElementsTest extends MojoLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/lightElements/templates";
   }
 
+  @Test
   public void testImplicitVars() {doTest();}
 
   private void doTest() {

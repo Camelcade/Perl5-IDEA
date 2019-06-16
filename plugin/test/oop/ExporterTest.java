@@ -16,13 +16,13 @@
 
 package oop;
 
+
 import com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionMixin;
 import org.jetbrains.annotations.NotNull;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-
-
 public class ExporterTest extends NamespaceTestCase {
   public static final String DATA_PATH = "testData/oop/exporter";
 
@@ -31,75 +31,93 @@ public class ExporterTest extends NamespaceTestCase {
     return DATA_PATH;
   }
 
+  @Test
   public void testExport() {
     doTest("export.pl", "Foo", new String[]{"this", "is", "the", "end"}, new String[]{});
   }
 
+  @Test
   public void testExportVariables() {
     doTest("variables.pl", "Foo", new String[]{"$MYVAR", "@MYARR", "%MYHASH", "&MYCODE", "SIMPLECODE"},
            new String[]{"$myvar", "@myarr", "%myhash", "&mycode", "simplecode"});
   }
 
+  @Test
   public void testExportInBegin() {
     doTest("export_in_begin.pl", "Foo", new String[]{"this", "is", "the", "end"}, new String[]{});
   }
 
+  @Test
   public void testExportInDefault() {
     doTest("export_in_default.pl", "Foo", new String[]{"this", "is", "the", "end"}, new String[]{});
   }
 
+  @Test
   public void testExportInFor() {
     doTest("export_in_for.pl", "Foo", new String[]{"this", "is", "the", "end"}, new String[]{});
   }
 
+  @Test
   public void testExportInForeach() {
     doTest("export_in_foreach.pl", "Foo", new String[]{"this", "is", "the", "end"}, new String[]{});
   }
 
+  @Test
   public void testExportInFunc() {
     doTest("export_in_func.pl", "Foo", new String[]{"this", "is", "the", "end"}, new String[]{});
   }
 
+  @Test
   public void testExportInGiven() {
     doTest("export_in_given.pl", "Foo", new String[]{"this", "is", "the", "end"}, new String[]{});
   }
 
+  @Test
   public void testExportInIf() {
     doTest("export_in_if.pl", "Foo", new String[]{"this", "is", "the", "end"}, new String[]{});
   }
 
+  @Test
   public void testExportInMethod() {
     doTest("export_in_method.pl", "Foo", new String[]{"this", "is", "the", "end"}, new String[]{});
   }
 
+  @Test
   public void testExportInSub() {
     doTest("export_in_sub.pl", "Foo", new String[]{"this", "is", "the", "end"}, new String[]{});
   }
 
+  @Test
   public void testExportInUnless() {
     doTest("export_in_unless.pl", "Foo", new String[]{"this", "is", "the", "end"}, new String[]{});
   }
 
+  @Test
   public void testExportInUntil() {
     doTest("export_in_until.pl", "Foo", new String[]{"this", "is", "the", "end"}, new String[]{});
   }
 
+  @Test
   public void testExportInWhen() {
     doTest("export_in_when.pl", "Foo", new String[]{"this", "is", "the", "end"}, new String[]{});
   }
 
+  @Test
   public void testExportInWhile() {
     doTest("export_in_while.pl", "Foo", new String[]{"this", "is", "the", "end"}, new String[]{});
   }
 
+  @Test
   public void testExportOk() {
     doTest("export_ok.pl", "Foo", new String[]{}, new String[]{"this", "is", "the", "end"});
   }
 
+  @Test
   public void testExportExportOk() {
     doTest("export_export_ok.pl", "Foo", new String[]{"this", "is", "the", "export"}, new String[]{"this", "is", "the", "export_ok"});
   }
 
+  @Test
   public void testTypingEXPORT() {
     doTest("typing_export.pl", "Foo", new String[]{}, new String[]{});
   }

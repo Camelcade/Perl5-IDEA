@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,14 +16,16 @@
 
 package findUsages;
 
-import base.MojoLightTestCase;
 
+import base.MojoLightTestCase;
+import org.junit.Test;
 public class MojoUsagesGroupingTest extends MojoLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/findUsages/grouping/";
   }
 
+  @Test
   public void testBasic() {doTest();}
 
   private void doTest() {doTestUsagesGrouping();}

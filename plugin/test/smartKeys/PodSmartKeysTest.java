@@ -16,17 +16,20 @@
 
 package smartKeys;
 
+
 import com.perl5.lang.pod.filetypes.PodFileType;
 import editor.PerlSmartKeysTestCase;
-
+import org.junit.Test;
 public class PodSmartKeysTest extends PerlSmartKeysTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/smartKeys/pod";
   }
 
+  @Test
   public void testOpenAngleStart() {doTestWithBS("", "<", "<");}
 
+  @Test
   public void testCloseAngleStart() {doTestWithBS("", ">", ">");}
 
   @Override

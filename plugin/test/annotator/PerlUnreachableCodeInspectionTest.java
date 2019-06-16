@@ -16,69 +16,98 @@
 
 package annotator;
 
+
 import base.PerlLightTestCase;
 import com.perl5.lang.perl.idea.inspections.PerlUnreachableCodeInspection;
-
+import org.junit.Test;
 public class PerlUnreachableCodeInspectionTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/annotator/perl/unreachableCode";
   }
 
+  @Test
   public void testLastEval() {doTest();}
 
+  @Test
   public void testLastEvalWithLabel() {doTest();}
 
+  @Test
   public void testLpLogicAfterComma() {doTest();}
 
+  @Test
   public void testFlowWithDereference() {doTest();}
 
+  @Test
   public void testReturnGoto() {doTest();}
 
+  @Test
   public void testReturnConfessIf() {doTest();}
 
+  @Test
   public void testPushXorNext() {doTest();}
 
+  @Test
   public void testPackageSubPackage() {doTest();}
 
+  @Test
   public void testGotoFromInnerEval() {doTest();}
 
+  @Test
   public void testTryCatchOrInFor() {doTest();}
 
+  @Test
   public void testExitFromInnerSub() {doTest();}
 
+  @Test
   public void testExitFromInnerFunc() {doTest();}
 
+  @Test
   public void testExitFromInnerMethod() {doTest();}
 
+  @Test
   public void testGotoAfterAnonSub() {doTest();}
 
+  @Test
   public void testGotoFromInnerSub() {doTest();}
 
+  @Test
   public void testGotoFromInnerFunc() {doTest();}
 
+  @Test
   public void testGotoFromInnerMethod() {doTest();}
 
+  @Test
   public void testDeleteInList() {doTest();}
 
+  @Test
   public void testUnreachableReturnWithLpLogic() {doTest();}
 
+  @Test
   public void testUnreachableGotoLabel() {doTest();}
 
+  @Test
   public void testUnreachableDieWithHeredoc() {doTest();}
 
+  @Test
   public void testUnreachableDbReturn() {doTest();}
 
+  @Test
   public void testUnreachableInnerSub() {doTest();}
 
+  @Test
   public void testUnreachableDereference() {doTest();}
 
+  @Test
   public void testUnreachableCommaSequence() {doTest();}
 
+  @Test
   public void testUnreachableCommaSequenceConditional() {doTest();}
 
+  @Test
   public void testUnreachableCommaSequenceParens() {doTest();}
 
+  @Test
   public void testUnreachableCommaSequenceParensConditional() {doTest();}
 
   private void doTest() {

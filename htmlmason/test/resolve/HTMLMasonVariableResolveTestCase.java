@@ -16,64 +16,80 @@
 
 package resolve;
 
+
 import base.HTMLMasonLightTestCase;
+import org.junit.Test;
 
 /**
  * Proper file structure: https://github.com/hurricup/Perl5-IDEA/issues/905
  */
 public abstract class HTMLMasonVariableResolveTestCase extends HTMLMasonLightTestCase {
+  @Test
   public void testFromCleanup() {
     doTestResolve();
   }
 
+  @Test
   public void testFromDef() {
     doTestResolve();
   }
 
+  @Test
   public void testFromFilter() {
     doTestResolve();
   }
 
+  @Test
   public void testFromFilteredBlockAhead() {
     doTestResolve();
   }
 
+  @Test
   public void testFromFilteredBlockBehind() {
     doTestResolve();
   }
 
+  @Test
   public void testFromInit() {
     doTestResolve();
   }
 
+  @Test
   public void testFromLineAhead() {
     doTestResolve();
   }
 
+  @Test
   public void testFromLineBehind() {
     doTestResolve();
   }
 
+  @Test
   public void testFromMethod() {
     doTestResolve();
   }
 
+  @Test
   public void testFromOnce() {
     doTestResolve();
   }
 
+  @Test
   public void testFromPerlAhead() {
     doTestResolve();
   }
 
+  @Test
   public void testFromPerlBehind() {
     doTestResolve();
   }
 
+  @Test
   public void testFromShared() {
     doTestResolve();
   }
 
+  @Test
   public void testFromFileArgs() {
     doTestResolve();
   }

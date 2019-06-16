@@ -16,26 +16,33 @@
 
 package quickfix;
 
+
 import base.PerlLightTestCase;
 import com.perl5.lang.perl.idea.inspections.PerlTruthinessInspection;
 import org.jetbrains.annotations.NotNull;
-
+import org.junit.Test;
 public class PerlTruthinessQuickfixTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/quickfix/perl/truthiness";
   }
 
+  @Test
   public void testScalarDefined() {doTestScalar("Add defined");}
 
+  @Test
   public void testScalarCastDefined() {doTestScalarCast("Add defined");}
 
+  @Test
   public void testScalarNumeric() {doTestScalar("Add zero equality check");}
 
+  @Test
   public void testScalarCastNumeric() {doTestScalarCast("Add zero equality check");}
 
+  @Test
   public void testScalarString() {doTestScalar("Add empty string equality check");}
 
+  @Test
   public void testScalarCastString() {doTestScalarCast("Add empty string equality check");}
 
   private void doTestScalar(@NotNull String quickFixPrefix) {

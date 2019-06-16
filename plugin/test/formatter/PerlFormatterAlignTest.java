@@ -16,9 +16,11 @@
 
 package formatter;
 
+
+import org.junit.Test;
+
 import static com.intellij.psi.codeStyle.CommonCodeStyleSettings.WRAP_AS_NEEDED;
 import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.*;
-
 public class PerlFormatterAlignTest extends PerlFormatterTestCase {
   @Override
   protected String getTestDataPath() {
@@ -26,12 +28,14 @@ public class PerlFormatterAlignTest extends PerlFormatterTestCase {
   }
 
 
+  @Test
   public void testAlignListElementsTrue() {
     getSettings().ARRAY_INITIALIZER_WRAP = WRAP_AS_NEEDED;
     getSettings().ALIGN_MULTILINE_ARRAY_INITIALIZER_EXPRESSION = true;
     doTestAlignListElements();
   }
 
+  @Test
   public void testAlignListElementsFalse() {
     getSettings().ARRAY_INITIALIZER_WRAP = WRAP_AS_NEEDED;
     getSettings().ALIGN_MULTILINE_ARRAY_INITIALIZER_EXPRESSION = false;
@@ -43,10 +47,12 @@ public class PerlFormatterAlignTest extends PerlFormatterTestCase {
   }
 
 
+  @Test
   public void testAlignCommentsTrue() {
     doTestAlignComments(true);
   }
 
+  @Test
   public void testAlignCommentsFalse() {
     doTestAlignComments(false);
   }
@@ -56,40 +62,48 @@ public class PerlFormatterAlignTest extends PerlFormatterTestCase {
     doTestSingleSource("alignComments");
   }
 
+  @Test
   public void testAlignDereferenceFalse() {
     getSettings().ALIGN_MULTILINE_CHAINED_METHODS = false;
     doFormatTest();
   }
 
+  @Test
   public void testAlignDereferenceTrue() {
     getSettings().ALIGN_MULTILINE_CHAINED_METHODS = true;
     doFormatTest();
   }
 
+  @Test
   public void testAlignFatCommaTrue() {
     getCustomSettings().ALIGN_FAT_COMMA = true;
     doFormatTest();
   }
 
+  @Test
   public void testAlignFatCommaFalse() {
     getCustomSettings().ALIGN_FAT_COMMA = false;
     doFormatTest();
   }
 
+  @Test
   public void testAlignQwTrue() {
     getCustomSettings().ALIGN_QW_ELEMENTS = true;
     doFormatTest();
   }
 
+  @Test
   public void testAlignQwFalse() {
     getCustomSettings().ALIGN_QW_ELEMENTS = false;
     doFormatTest();
   }
 
+  @Test
   public void testTernaryTrue() {
     doTestTernary(true);
   }
 
+  @Test
   public void testTernaryFalse() {
     doTestTernary(false);
   }
@@ -99,10 +113,12 @@ public class PerlFormatterAlignTest extends PerlFormatterTestCase {
     doTestSingleSource("ternary");
   }
 
+  @Test
   public void testBinaryTrue() {
     doTestBinary(true);
   }
 
+  @Test
   public void testBinaryFalse() {
     doTestBinary(false);
   }
@@ -112,10 +128,12 @@ public class PerlFormatterAlignTest extends PerlFormatterTestCase {
     doTestSingleSource("binary");
   }
 
+  @Test
   public void testSignaturesTrue() {
     doTestSignatures(true);
   }
 
+  @Test
   public void testSignaturesFalse() {
     doTestSignatures(false);
   }
@@ -125,10 +143,12 @@ public class PerlFormatterAlignTest extends PerlFormatterTestCase {
     doTestSingleSource("signatures");
   }
 
+  @Test
   public void testVariableDeclarationsTrue() {
     doTestVariablesDeclarations(true);
   }
 
+  @Test
   public void testVariableDeclarationsFalse() {
     doTestVariablesDeclarations(false);
   }
@@ -138,10 +158,12 @@ public class PerlFormatterAlignTest extends PerlFormatterTestCase {
     doTestSingleSource("variablesDeclaration");
   }
 
+  @Test
   public void testCallArgumentsTrue() {
     doTestCallArguments(true);
   }
 
+  @Test
   public void testCallArgumentsFalse() {
     doTestCallArguments(false);
   }
@@ -151,14 +173,17 @@ public class PerlFormatterAlignTest extends PerlFormatterTestCase {
     doTestSingleSource("callArguments");
   }
 
+  @Test
   public void testAssignmentsStatement() {
     doTestAssignments(ALIGN_IN_STATEMENT);
   }
 
+  @Test
   public void testAssignmentsLines() {
     doTestAssignments(ALIGN_LINES);
   }
 
+  @Test
   public void testAssignmentsNone() {
     doTestAssignments(NO_ALIGN);
   }
@@ -169,10 +194,12 @@ public class PerlFormatterAlignTest extends PerlFormatterTestCase {
   }
 
 
+  @Test
   public void testAttributesTrue() {
     doTestAttributes(true);
   }
 
+  @Test
   public void testAttributesFalse() {
     doTestAttributes(false);
   }

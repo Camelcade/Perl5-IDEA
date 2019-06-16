@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,22 +16,28 @@
 
 package unit;
 
-import base.PerlLightTestCase;
 
+import base.PerlLightTestCase;
+import org.junit.Test;
 public class MojoPerlValuesTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/unit/perl/perlValues";
   }
 
+  @Test
   public void testAttributeConstantSub() {doTestMojoAttr();}
 
+  @Test
   public void testAttributeConstantValue() {doTestMojoAttr();}
 
+  @Test
   public void testAttributeFirstName() {doTestMojoAttr();}
 
+  @Test
   public void testAttributeSecondSub() {doTestMojoAttr();}
 
+  @Test
   public void testAttributeUnnamed() {doTestMojoAttr();}
 
   private void doTestMojoAttr() {
@@ -39,6 +45,7 @@ public class MojoPerlValuesTest extends PerlLightTestCase {
     doTest();
   }
 
+  @Test
   public void testHelperValue() {
     myFixture.copyFileToProject("helperValueDeclaration.pl");
     doTest();

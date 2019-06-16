@@ -16,15 +16,16 @@
 
 package formatter;
 
+
 import base.HTMLMasonLightTestCase;
-
-
+import org.junit.Test;
 public class HTMLMasonFormatterTest extends HTMLMasonLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/formatter";
   }
 
+  @Test
   public void testSpacelessTags() {
     doFormatTest("spaceless", "");
   }

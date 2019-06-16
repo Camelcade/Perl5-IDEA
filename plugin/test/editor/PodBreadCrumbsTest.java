@@ -16,16 +16,19 @@
 
 package editor;
 
-import base.PodLightTestCase;
 
+import base.PodLightTestCase;
+import org.junit.Test;
 public class PodBreadCrumbsTest extends PodLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/breadcrumbs/pod";
   }
 
+  @Test
   public void testPodWeaverTags() {doTest();}
 
+  @Test
   public void testInFile() {doTest();}
 
   private void doTest() {

@@ -16,24 +16,31 @@
 
 package intellilang;
 
-import base.PerlLightTestCase;
 
+import base.PerlLightTestCase;
+import org.junit.Test;
 public class PerlInjectionSupportTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/intellilang/perl/injectionSupport";
   }
 
+  @Test
   public void testHtmlQ() {doFileTest();}
 
+  @Test
   public void testHtmlQQ() {doFileTest();}
 
+  @Test
   public void testHtmlQX() {doFileTest();}
 
+  @Test
   public void testHtmlHeredocQ() {doFileTest();}
 
+  @Test
   public void testHtmlHeredocQQ() {doFileTest();}
 
+  @Test
   public void testHtmlHeredocQX() {doFileTest();}
 
   private void doFileTest() {

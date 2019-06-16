@@ -16,9 +16,9 @@
 
 package parser;
 
+
 import com.perl5.lang.mason2.filetypes.Mason2FileTypeFactory;
-
-
+import org.junit.Test;
 public class Mason2TemplatingParserTest extends PerlParserTestBase {
   public Mason2TemplatingParserTest() {
     super(Mason2FileTypeFactory.TOP_LEVEL_COMPONENT_EXTENSION);
@@ -29,14 +29,17 @@ public class Mason2TemplatingParserTest extends PerlParserTestBase {
     return "testData/parser/template";
   }
 
+  @Test
   public void testTestComponent() {
     doTest(true);
   }
 
+  @Test
   public void testLiveTemplates() {
     doTest(true);
   }
 
+  @Test
   public void testIssue1077() {
     doTest(true);
   }

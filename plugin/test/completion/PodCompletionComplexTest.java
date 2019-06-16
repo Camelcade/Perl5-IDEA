@@ -16,6 +16,7 @@
 
 package completion;
 
+
 import base.PodLightTestCase;
 import categories.Heavy;
 import com.intellij.codeInsight.TargetElementUtil;
@@ -29,6 +30,7 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.intellij.usageView.UsageInfo;
 import org.jetbrains.annotations.NotNull;
+import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
 import java.util.*;
@@ -50,6 +52,7 @@ public class PodCompletionComplexTest extends PodLightTestCase {
     withPerlPod();
   }
 
+  @Test
   public void testPerlPod() {
     doTest("L<perlpod/<caret>>");
   }

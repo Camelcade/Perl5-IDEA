@@ -16,6 +16,7 @@
 
 package parser;
 
+import org.junit.Test;
 public class PODParserTest extends PerlParserTestBase {
   public PODParserTest() {
     super("pod");
@@ -26,67 +27,95 @@ public class PODParserTest extends PerlParserTestBase {
     return "testData/parser/pod";
   }
 
+  @Test
   public void testVariousItems() {doTest();}
 
+  @Test
   public void testVersionConfusedNumbers() {doTest();}
 
+  @Test
   public void testIndexedItems() {doTest();}
 
+  @Test
   public void testIndexedParagraphTop() {doTest();}
 
+  @Test
   public void testIndexedSectionContent() {doTest();}
 
+  @Test
   public void testItems() {doTest();}
 
+  @Test
   public void testItemsIndexed() {doTest();}
 
+  @Test
   public void testCloseMultiAngleWIthNewLine() {doTest();}
 
+  @Test
   public void testCodeWithAnglesAndArrow() {doTest();}
 
+  @Test
   public void testFormatterWithHeredoc() {doTest();}
 
+  @Test
   public void testLinksWithUnbalancedOpeners() {doTest();}
 
+  @Test
   public void testLinksWithUnbalancedCloseAngles() {doTest();}
 
+  @Test
   public void testIncompleteLink() {doTest(false);}
 
+  @Test
   public void testPodWeaverTags() {doTest();}
 
+  @Test
   public void testUnknownSectionWIthContent() {doTest();}
 
+  @Test
   public void testHierarchy() {
     doTest();
   }
 
+  @Test
   public void testOverRecovery() {
     doTest(false);
   }
 
+  @Test
   public void testForBeginContent() {
     doTest(false);
   }
 
+  @Test
   public void testBeginRecovery() {
     doTest(false);
   }
 
+  @Test
   public void testLinks() {doTest();}
 
+  @Test
   public void testLinksWithCodeInside() {doTest();}
 
+  @Test
   public void testLinksWithFalseQuote() {doTest();}
 
+  @Test
   public void testLinksMan() {doTest();}
 
+  @Test
   public void testLinksCode() {doTest();}
 
+  @Test
   public void testLinksEscaped() {doTest();}
 
+  @Test
   public void testLinksUrl() {doTest();}
 
+  @Test
   public void testLinksComplex1() {doTest();}
 
+  @Test
   public void testLinksComplex2() {doTest();}
 }

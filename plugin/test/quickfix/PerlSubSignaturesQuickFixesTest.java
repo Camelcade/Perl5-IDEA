@@ -16,93 +16,113 @@
 
 package quickfix;
 
+
 import base.PerlLightTestCase;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.inspections.PerlSubSignaturesInspection;
 import com.perl5.lang.perl.internals.PerlVersion;
 import org.jetbrains.annotations.NotNull;
+import org.junit.Test;
 
 import static com.perl5.lang.perl.internals.PerlVersion.*;
-
 public class PerlSubSignaturesQuickFixesTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/quickfix/perl/sub.signatures";
   }
 
+  @Test
   public void testV510to20() {
     test520VersionChange(V5_10, V5_20);
   }
 
+  @Test
   public void testV510to22() {
     test520VersionChange(V5_10, V5_22);
   }
 
+  @Test
   public void testV510to24() {
     test520VersionChange(V5_10, V5_24);
   }
 
+  @Test
   public void testV510to26() {
     test520VersionChange(V5_10, V5_26);
   }
 
+  @Test
   public void testV510to28() {
     test520VersionChange(V5_10, V5_28);
   }
 
+  @Test
   public void testV520to22() {
     test520VersionChange(V5_20, V5_22);
   }
 
+  @Test
   public void testV520to24() {
     test520VersionChange(V5_20, V5_24);
   }
 
+  @Test
   public void testV520to26() {
     test520VersionChange(V5_20, V5_26);
   }
 
+  @Test
   public void testV522to20() {
     test522VersionChange(V5_22, V5_20);
   }
 
+  @Test
   public void testV522to28() {
     test522VersionChange(V5_22, V5_28);
   }
 
+  @Test
   public void testV524to20() {
     test522VersionChange(V5_24, V5_20);
   }
 
+  @Test
   public void testV524to28() {
     test522VersionChange(V5_24, V5_28);
   }
 
+  @Test
   public void testV526to20() {
     test522VersionChange(V5_26, V5_20);
   }
 
+  @Test
   public void testV526to28() {
     test522VersionChange(V5_26, V5_28);
   }
 
 
+  @Test
   public void testV528to22() {
     test520VersionChange(V5_28, V5_22);
   }
 
+  @Test
   public void testV528to24() {
     test520VersionChange(V5_28, V5_24);
   }
 
+  @Test
   public void testV528to26() {
     test520VersionChange(V5_28, V5_26);
   }
 
+  @Test
   public void testFlip20to22() {
     doTest(V5_22);
   }
 
+  @Test
   public void testFlip22to20() {
     doTest(V5_20);
   }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,14 +16,17 @@
 
 package resolve;
 
-import base.MojoLightTestCase;
 
+import base.MojoLightTestCase;
+import org.junit.Test;
 public class MojoResolveTest extends MojoLightTestCase {
   protected String getTestDataPath() {
     return "testData/resolve/templates";
   }
 
+  @Test
   public void testImplicitVariables() {doTestResolve();}
 
+  @Test
   public void testHelpers() {doTestResolve();}
 }

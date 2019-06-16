@@ -16,9 +16,9 @@
 
 package parser;
 
+
 import com.perl5.lang.mojolicious.filetypes.MojoliciousFileType;
-
-
+import org.junit.Test;
 public class MojoliciousParserTest extends MojoliciousParserTestBase {
   public MojoliciousParserTest() {
     super(MojoliciousFileType.MOJO_DEFAULT_EXTENSION);
@@ -29,6 +29,7 @@ public class MojoliciousParserTest extends MojoliciousParserTestBase {
     return "testData/parser/templates";
   }
 
+  @Test
   public void testMojoParserTest() {
     doTest();
   }

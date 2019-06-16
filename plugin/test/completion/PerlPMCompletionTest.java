@@ -16,10 +16,11 @@
 
 package completion;
 
+
 import base.PerlLightTestCase;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.idea.project.PerlNamesCache;
-
+import org.junit.Test;
 public class PerlPMCompletionTest extends PerlLightTestCase {
 
   @Override
@@ -38,6 +39,7 @@ public class PerlPMCompletionTest extends PerlLightTestCase {
     return PerlFileTypePackage.EXTENSION;
   }
 
+  @Test
   public void testPackageDefinition() {
     doTestCompletion();
   }

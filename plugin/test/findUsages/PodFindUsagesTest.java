@@ -16,8 +16,9 @@
 
 package findUsages;
 
-import base.PodLightTestCase;
 
+import base.PodLightTestCase;
+import org.junit.Test;
 public class PodFindUsagesTest extends PodLightTestCase {
   @Override
   protected String getTestDataPath() {
@@ -31,44 +32,64 @@ public class PodFindUsagesTest extends PodLightTestCase {
     myFixture.copyFileToProject("Test.pm");
   }
 
+  @Test
   public void testMultiDeclarationsFirst() {doTest();}
 
+  @Test
   public void testMultiDeclarationsSecond() {doTest();}
 
+  @Test
   public void testMultiDeclarationsUsage() {doTest();}
 
+  @Test
   public void testNameBare() {doTest();}
 
+  @Test
   public void testNameWithSection() {doTest();}
 
+  @Test
   public void testSectionWithName() {doTest();}
 
+  @Test
   public void testSpacelessWithEscapes() {doTest();}
 
+  @Test
   public void testSectionBare() {doTest();}
 
+  @Test
   public void testSectionBareWithFormatting() {doTest();}
 
+  @Test
   public void testHead1() {doTest();}
 
+  @Test
   public void testHead1SameFormatting() {doTest();}
 
+  @Test
   public void testHead1DifferentFormatting() {doTest();}
 
+  @Test
   public void testHead1SectionEscaping() {doTest();}
 
+  @Test
   public void testHead1SameFormattingIndexed() {doTest();}
 
+  @Test
   public void testHead2() {doTest();}
 
+  @Test
   public void testHead3() {doTest();}
 
+  @Test
   public void testHead4() {doTest();}
 
+  @Test
   public void testItem() {doTest();}
 
+  @Test
   public void testIndex() {doTest();}
 
+  @Test
   public void testIndexWithAngles() {doTest();}
 
   private void doTest() {

@@ -16,9 +16,10 @@
 
 package completion;
 
+
 import base.PerlLightTestCase;
 import com.perl5.lang.perl.idea.project.PerlNamesCache;
-
+import org.junit.Test;
 public class PodCompletionEmbeddedTest extends PerlLightTestCase {
 
   @Override
@@ -32,24 +33,34 @@ public class PodCompletionEmbeddedTest extends PerlLightTestCase {
     return "testData/completion/pod/embedded";
   }
 
+  @Test
   public void testAttr() {doTest();}
 
+  @Test
   public void testAttrSecond() {doTest();}
 
+  @Test
   public void testFunc() {doTest();}
 
+  @Test
   public void testHeader1() {doTest();}
 
+  @Test
   public void testHeader2() {doTest();}
 
+  @Test
   public void testHeader2ExcludeDocumented() {doTest();}
 
+  @Test
   public void testHeader3() {doTest();}
 
+  @Test
   public void testHeader4() {doTest();}
 
+  @Test
   public void testMethod() {doTest();}
 
+  @Test
   public void testItem() {doTest();}
 
   private void doTest() {doTestCompletion();}

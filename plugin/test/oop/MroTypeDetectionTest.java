@@ -16,10 +16,10 @@
 
 package oop;
 
+
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import org.jetbrains.annotations.NotNull;
-
-
+import org.junit.Test;
 public class MroTypeDetectionTest extends NamespaceTestCase {
   public static final String DATA_PATH = "testData/oop/mroType";
 
@@ -28,14 +28,17 @@ public class MroTypeDetectionTest extends NamespaceTestCase {
     return DATA_PATH;
   }
 
+  @Test
   public void testDefault() {
     doTest("mro_default.pl", "Foo", PerlMroType.DFS);
   }
 
+  @Test
   public void testDFS() {
     doTest("mro_dfs.pl", "Foo", PerlMroType.DFS);
   }
 
+  @Test
   public void testC3() {
     doTest("mro_c3.pl", "Foo", PerlMroType.C3);
   }

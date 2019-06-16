@@ -16,24 +16,31 @@
 
 package lightElements;
 
-import base.PerlLightTestCase;
 
+import base.PerlLightTestCase;
+import org.junit.Test;
 public class PerlLightElementsTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/lightElements/perl";
   }
 
+  @Test
   public void testMooseAttrs() {doTest();}
 
+  @Test
   public void testConstants() {doTest();}
 
+  @Test
   public void testExceptionClass() {doTest();}
 
+  @Test
   public void testClassAccessor() {doTest();}
 
+  @Test
   public void testMojoAttrs() {doTest();}
 
+  @Test
   public void testMooseAttrsWithStandardTypes() {doTest();}
 
   private void doTest() {

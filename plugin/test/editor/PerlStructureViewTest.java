@@ -16,28 +16,36 @@
 
 package editor;
 
-import base.PerlLightTestCase;
 
+import base.PerlLightTestCase;
+import org.junit.Test;
 public class PerlStructureViewTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/structure/perl";
   }
 
+  @Test
   public void testPerlImports() {doTest();}
 
+  @Test
   public void testPerlInheritance() {doTest();}
 
+  @Test
   public void testPlainPerl() {
     doTest();
   }
 
+  @Test
   public void testClassAccessor() {doTest();}
 
+  @Test
   public void testConstants() {doTest();}
 
+  @Test
   public void testExceptionClass() {doTest();}
 
+  @Test
   public void testMooseAttrs() {doTest();}
 
   private void doTest() {

@@ -16,6 +16,7 @@
 
 package markers;
 
+
 import base.PerlLightTestCase;
 import com.intellij.codeInsight.daemon.GutterMark;
 import com.intellij.codeInsight.daemon.LineMarkerInfo;
@@ -23,27 +24,31 @@ import com.intellij.codeInsight.daemon.RelatedItemLineMarkerInfo;
 import com.intellij.navigation.GotoRelatedItem;
 import com.intellij.psi.PsiElement;
 import com.intellij.testFramework.UsefulTestCase;
+import org.junit.Test;
 
 import java.util.Collection;
 import java.util.List;
-
-
 public class PerlLineMarkersTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/linemarkers/perl";
   }
 
+  @Test
   public void testMooseAttrs() {doTest();}
 
+  @Test
   public void testMojoAttrs() {doTest();}
 
+  @Test
   public void testClassAccessor() {doTest();}
 
+  @Test
   public void testSupermethods() {
     doTest();
   }
 
+  @Test
   public void testExceptionClasses() {
     doTest();
   }
@@ -58,7 +63,7 @@ public class PerlLineMarkersTest extends PerlLightTestCase {
         LineMarkerInfo lineMarkerInfo = ((LineMarkerInfo.LineMarkerGutterIconRenderer)gutterMarker).getLineMarkerInfo();
         b.append(lineMarkerInfo.startOffset).append(" - ").append(lineMarkerInfo.endOffset).append(": ")
           .append('\'')
-          .append(text.substring(lineMarkerInfo.startOffset, lineMarkerInfo.endOffset))
+          .append(text, lineMarkerInfo.startOffset, lineMarkerInfo.endOffset)
           .append('\'')
           .append(": ")
           .append(lineMarkerInfo.getLineMarkerTooltip())

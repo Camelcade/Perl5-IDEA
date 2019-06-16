@@ -16,50 +16,59 @@
 
 package unit.perl;
 
+
 import base.PerlLightTestCase;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
-
-
+import org.junit.Test;
 public class PerlArgsExtractionTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/unit/perl/sub_arguments";
   }
 
+  @Test
   public void testUnpackFake() {
     doTest("unpack_fake", "");
   }
 
+  @Test
   public void testUnpackAll() {
     doTest("unpack_all", "($var, undef, $othervar)");
   }
 
+  @Test
   public void testUnpackAllShit() {
     doTest("unpack_all_shift", "($var, undef, $othervar)");
   }
 
+  @Test
   public void testUnpackAtAndShift() {
     doTest("unpack_at_and_shifts", "($var, undef, $othervar)");
   }
 
+  @Test
   public void testUnpackAtElements() {
     doTest("unpack_at_elements", "($var, undef)");
   }
 
+  @Test
   public void testUnpackMixed1() {
     doTest("unpack_mixed1", "($var, undef, $othervar)");
   }
 
+  @Test
   public void testUnpackMixed2() {
     doTest("unpack_mixed2", "($var, undef, $othervar)");
   }
 
+  @Test
   public void testUnpackMixed3() {
     doTest("unpack_mixed3", "($var, undef, $othervar)");
   }
 
+  @Test
   public void testUnpackMultiShifts() {
     doTest("unpack_multi_shifts", "($var, undef, $othervar)");
   }

@@ -16,19 +16,20 @@
 
 package packageProcessors;
 
+
 import base.PerlLightTestCase;
 import com.perl5.lang.perl.extensions.packageprocessor.*;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
-
-
+import org.junit.Test;
 public class packageProcessorsTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/packageProcessors";
   }
 
+  @Test
   public void testModernPerl() {
     initWithFileSmart("ModernPerl");
     PerlNamespaceDefinitionElement namespaceDefinition = getElementAtCaret(PerlNamespaceDefinitionElement.class);

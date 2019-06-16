@@ -16,8 +16,9 @@
 
 package parser;
 
-import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 
+import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
+import org.junit.Test;
 public class MojoliciousPerlParserTest extends MojoliciousParserTestBase{
   @Override
   protected String getTestDataPath() {
@@ -28,6 +29,7 @@ public class MojoliciousPerlParserTest extends MojoliciousParserTestBase{
     super(PerlFileTypeScript.EXTENSION_PL);
   }
 
+  @Test
   public void testMojoliciousHelperDeclaration() {
     doTest();
   }

@@ -16,36 +16,45 @@
 
 package editor;
 
+
 import base.PerlLightTestCase;
 import com.perl5.lang.perl.idea.execution.filters.PerlAbsolutePathConsoleFilter;
 import com.perl5.lang.perl.idea.execution.filters.PerlConsoleFileLinkFilter;
-
+import org.junit.Test;
 public class PerlConsoleFilterTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/consoleFilter/perl";
   }
 
+  @Test
   public void testConfess() {doTestDie();}
 
+  @Test
   public void testDie() {doTestDie();}
 
+  @Test
   public void testPythonBug() {doTestDie();}
 
+  @Test
   public void testInstallDtlFast() {
     doTestAbsolute();
   }
 
+  @Test
   public void testInstallDtlFastWin() {
     doTestAbsolute();
   }
 
+  @Test
   public void testDeparse() {doTestAbsolute();}
 
+  @Test
   public void testLibraryPath() {
     doTestAbsolute();
   }
 
+  @Test
   public void testSemicolons() {doTestAbsolute();}
 
   private void doTestAbsolute() {

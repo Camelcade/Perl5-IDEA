@@ -16,23 +16,28 @@
 
 package annotator;
 
+
 import base.PodLightTestCase;
 import com.intellij.spellchecker.inspections.SpellCheckingInspection;
 import com.perl5.lang.pod.idea.inspections.PodLegacySectionLinkInspection;
 import com.perl5.lang.pod.idea.inspections.PodOverlessItemInspection;
 import com.perl5.lang.pod.idea.inspections.PodUnresolvableLinkInspection;
-
+import org.junit.Test;
 public class PodAnnotatorTest extends PodLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/annotator/pod";
   }
 
+  @Test
   public void testSpellChecker() {doInspectionTest(SpellCheckingInspection.class);}
 
+  @Test
   public void testLegacyLink() {doInspectionTest(PodLegacySectionLinkInspection.class);}
 
+  @Test
   public void testUnresolvedLink() {doInspectionTest(PodUnresolvableLinkInspection.class);}
 
+  @Test
   public void testItemOutsideOver() {doInspectionTest(PodOverlessItemInspection.class);}
 }

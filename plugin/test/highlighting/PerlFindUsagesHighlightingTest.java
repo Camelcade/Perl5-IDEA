@@ -16,48 +16,67 @@
 
 package highlighting;
 
-import base.PerlLightTestCase;
 
+import base.PerlLightTestCase;
+import org.junit.Test;
 public class PerlFindUsagesHighlightingTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/highlighting/perl/usages";
   }
 
+  @Test
   public void testHashArgument() {doTest();}
 
+  @Test
   public void testHashArgumentArray() {doTest();}
 
+  @Test
   public void testArrayArguments() {doTest();}
 
+  @Test
   public void testHash() {doTest();}
 
+  @Test
   public void testArray() {doTest();}
 
+  @Test
   public void testForeachIterator() {doTest();}
 
+  @Test
   public void testScalarWithContext() {doTest();}
 
+  @Test
   public void testCaptureGroupsScalars() {doTest();}
 
+  @Test
   public void testNamespace() {doTest();}
 
+  @Test
   public void testBuiltInSubs() {doTest();}
 
+  @Test
   public void testPackageCore() {doTest();}
 
+  @Test
   public void testPackageCoreGlobal() {doTest();}
 
+  @Test
   public void testPackageUniversal() {doTest();}
 
+  @Test
   public void testPackageMain() {doTest();}
 
+  @Test
   public void testBuiltInScalar() {doTest();}
 
+  @Test
   public void testBuiltInArray() {doTest();}
 
+  @Test
   public void testBuiltInHash() {doTest();}
 
+  @Test
   public void testHasModification() {doTest();}
 
   private void doTest() {doTestUsagesHighlighting();}

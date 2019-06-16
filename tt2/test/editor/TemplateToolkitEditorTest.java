@@ -16,16 +16,18 @@
 
 package editor;
 
+
 import base.TemplateToolkitLightTestCase;
 import com.perl5.lang.tt2.idea.settings.TemplateToolkitSettings;
-
-
+import org.junit.Test;
 public class TemplateToolkitEditorTest extends TemplateToolkitLightTestCase {
 
+  @Test
   public void testAutocloseTag() {
     testSmartKey("[<caret>", '%', "[%  %]");
   }
 
+  @Test
   public void testAutocloseTagCustom() {
     saveSettings();
     TemplateToolkitSettings settings = TemplateToolkitSettings.getInstance(getProject());
@@ -35,22 +37,27 @@ public class TemplateToolkitEditorTest extends TemplateToolkitLightTestCase {
     restoreSettings();
   }
 
+  @Test
   public void testBraces() {
     testSmartKey("[% <caret> %]", '{', "[% {} %]");
   }
 
+  @Test
   public void testBrakets() {
     testSmartKey("[% <caret> %]", '[', "[% [] %]");
   }
 
+  @Test
   public void testParens() {
     testSmartKey("[% <caret> %]", '(', "[% () %]");
   }
 
+  @Test
   public void testDQ() {
     testSmartKey("[% <caret> %]", '"', "[% \"\" %]");
   }
 
+  @Test
   public void testSQ() {
     testSmartKey("[% <caret> %]", '\'', "[% '' %]");
   }

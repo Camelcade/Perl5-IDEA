@@ -16,22 +16,25 @@
 
 package resolve;
 
+
 import base.HTMLMasonLightTestCase;
-
-
+import org.junit.Test;
 public class HTMLMasonConcurrentBlocksResolveTest extends HTMLMasonLightTestCase {
   protected String getTestDataPath() {
     return "testData/resolve/concurrent_blocks";
   }
 
+  @Test
   public void testArgs() {
     doTestResolve();
   }
 
+  @Test
   public void testInit() {
     doTestResolve();
   }
 
+  @Test
   public void testFromFilter() {
     doTestResolve();
   }

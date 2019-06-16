@@ -16,27 +16,38 @@
 
 package formatter;
 
+
+import org.junit.Test;
 public class PerlFormatterInjectedHeredocTest extends PerlFormatterTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/formatter/perl/injected_heredoc";
   }
 
+  @Test
   public void testUnindentable() {doFormatTest();}
 
+  @Test
   public void testUnindentableIndented() {doFormatTest();}
 
+  @Test
   public void testIndented() {doFormatTest();}
 
+  @Test
   public void testIndentableUnindented() {doFormatTest();}
 
+  @Test
   public void testIndentedImproperly() {doFormatTest();}
 
+  @Test
   public void testIndentedStatement() {doFormatTest();}
 
+  @Test
   public void testIndentedNestedHeredoc() {doFormatTest();}
 
+  @Test
   public void testIndentedNestedHeredocUnindentable() {doFormatTest();}
 
+  @Test
   public void testIndentedNestedHeredocWithIndentation() {doFormatTest();}
 }

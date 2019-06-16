@@ -16,18 +16,22 @@
 
 package findUsages;
 
-import base.PerlLightTestCase;
 
+import base.PerlLightTestCase;
+import org.junit.Test;
 public class PerlFindUsagesTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/findusages/perl";
   }
 
+  @Test
   public void testPodIndexWithAngles() {doTest();}
 
+  @Test
   public void testCaptureGroupsScalars() {doTest();}
 
+  @Test
   public void testNamespace() {
     doTest();
   }

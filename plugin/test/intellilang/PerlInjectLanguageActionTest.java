@@ -16,10 +16,11 @@
 
 package intellilang;
 
+
 import base.PerlLightTestCase;
 import com.intellij.util.FileContentUtil;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
-
+import org.junit.Test;
 public class PerlInjectLanguageActionTest extends PerlLightTestCase {
   private PerlSharedSettings mySharedSettings;
   private boolean myAutomaticInjections;
@@ -49,106 +50,127 @@ public class PerlInjectLanguageActionTest extends PerlLightTestCase {
     }
   }
 
+  @Test
   public void testHeredocAutoInjectedQ() {
     doAutoInjectedTest();
   }
 
 
+  @Test
   public void testHeredocAutoInjectedQQ() {
     doAutoInjectedTest();
   }
 
 
+  @Test
   public void testHeredocAutoInjectedQX() {
     doAutoInjectedTest();
   }
 
 
+  @Test
   public void testHeredocIndentableQ() {
     doTest();
   }
 
 
+  @Test
   public void testHeredocIndentableQQ() {
     doTest();
   }
 
 
+  @Test
   public void testHeredocIndentableQQWithVariable() {
     doTestWithInterpolation();
   }
 
 
+  @Test
   public void testHeredocIndentableQWithVariable() {
     doTest();
   }
 
 
+  @Test
   public void testHeredocIndentableQX() {
     doTest();
   }
 
 
+  @Test
   public void testHeredocIndentableQXWithVariable() {
     doTestWithInterpolation();
   }
 
 
+  @Test
   public void testHeredocIndentedQ() {
     doTest();
   }
 
 
+  @Test
   public void testHeredocIndentedQQ() {
     doTest();
   }
 
 
+  @Test
   public void testHeredocIndentedQQWithVariable() {
     doTestWithInterpolation();
   }
 
 
+  @Test
   public void testHeredocIndentedQWithVariable() {
     doTest();
   }
 
 
+  @Test
   public void testHeredocIndentedQX() {
     doTest();
   }
 
 
+  @Test
   public void testHeredocIndentedQXWithVariable() {
     doTestWithInterpolation();
   }
 
 
+  @Test
   public void testHeredocQ() {
     doTest();
   }
 
 
+  @Test
   public void testHeredocQQ() {
     doTest();
   }
 
 
+  @Test
   public void testHeredocQQWithVariable() {
     doTestWithInterpolation();
   }
 
 
+  @Test
   public void testHeredocQWithVariable() {
     doTest();
   }
 
 
+  @Test
   public void testHeredocQX() {
     doTest();
   }
 
 
+  @Test
   public void testHeredocQXWithVariable() {
     doTestWithInterpolation();
   }

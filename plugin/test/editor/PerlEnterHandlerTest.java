@@ -16,54 +16,74 @@
 
 package editor;
 
-import base.PerlLightTestCase;
 
+import base.PerlLightTestCase;
+import org.junit.Test;
 public class PerlEnterHandlerTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/enterHandler/perl";
   }
 
+  @Test
   public void testEmpty() {doTest();}
 
+  @Test
   public void testCommentMiddle() {
     doTest();
   }
 
+  @Test
   public void testCommentMiddleIndented() {
     doTest();
   }
 
+  @Test
   public void testHeredocCloseBare() { doTest(); }
 
+  @Test
   public void testHeredocClosed() { doTest(); }
 
+  @Test
   public void testHeredocCloseDQ() { doTest(); }
 
+  @Test
   public void testHeredocCloseEscaped() { doTest(); }
 
+  @Test
   public void testHeredocCloseSQ() { doTest(); }
 
+  @Test
   public void testHeredocCloseWithIndentedAhead() { doTest(); }
 
+  @Test
   public void testHeredocCloseWithNormalAhead() { doTest(); }
 
+  @Test
   public void testHeredocCloseXQ() { doTest(); }
 
+  @Test
   public void testIndentedHeredocCloseBare() { doTest(); }
 
+  @Test
   public void testIndentedHeredocClosed() { doTest(); }
 
+  @Test
   public void testIndentedHeredocCloseDQ() { doTest(); }
 
+  @Test
   public void testIndentedHeredocCloseEscaped() { doTest(); }
 
+  @Test
   public void testIndentedHeredocCloseSQ() { doTest(); }
 
+  @Test
   public void testIndentedHeredocCloseWithIndentedAhead() { doTest(); }
 
+  @Test
   public void testIndentedHeredocCloseWithNormalAhead() { doTest(); }
 
+  @Test
   public void testIndentedHeredocCloseXQ() { doTest(); }
 
 

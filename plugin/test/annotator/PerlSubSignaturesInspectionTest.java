@@ -16,36 +16,46 @@
 
 package annotator;
 
+
 import base.PerlLightTestCase;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.inspections.PerlSubSignaturesInspection;
 import com.perl5.lang.perl.internals.PerlVersion;
 import org.jetbrains.annotations.NotNull;
+import org.junit.Test;
 
 import static com.perl5.lang.perl.internals.PerlVersion.*;
-
 public class PerlSubSignaturesInspectionTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/annotator/perl/sub.signatures";
   }
 
+  @Test
   public void testMethod() {doTest(V5_10);}
 
+  @Test
   public void testFunc() {doTest(V5_10);}
 
+  @Test
   public void testV516() {doTest(V5_16);}
 
+  @Test
   public void testV518() {doTest(V5_18);}
 
+  @Test
   public void testV520() {doTest(V5_20);}
 
+  @Test
   public void testV522() {doTest(V5_22);}
 
+  @Test
   public void testV524() {doTest(V5_24);}
 
+  @Test
   public void testV526() {doTest(V5_26);}
 
+  @Test
   public void testV528() {doTest(V5_28);}
 
   private void doTest(@NotNull PerlVersion targetPerlVersion) {

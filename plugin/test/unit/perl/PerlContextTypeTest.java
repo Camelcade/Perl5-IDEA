@@ -16,130 +16,161 @@
 
 package unit.perl;
 
+
 import base.PerlLightTestCase;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
-
+import org.junit.Test;
 public class PerlContextTypeTest extends PerlLightTestCase {
 
+  @Test
   public void testScalarDeclarationExpression() {
     assertScalar("my $ar<caret>ray = 123;", PerlVariableDeclarationExpr.class);
   }
 
+  @Test
   public void testScalarDeclarationExpressionParenthesized() {
     assertList("my( $ar<caret>ray) = 123;", PerlVariableDeclarationExpr.class);
   }
 
+  @Test
   public void testArrayDeclarationExpression() {
     assertList("my @ar<caret>ray = 123;", PerlVariableDeclarationExpr.class);
   }
 
+  @Test
   public void testArrayDeclarationExpressionParenthesized() {
     assertList("my( @ar<caret>ray) = 123;", PerlVariableDeclarationExpr.class);
   }
 
+  @Test
   public void testHashDeclarationExpression() {
     assertList("my %ar<caret>ray = 123;", PerlVariableDeclarationExpr.class);
   }
 
+  @Test
   public void testHashDeclarationExpressionParenthesized() {
     assertList("my( %ar<caret>ray) = 123;", PerlVariableDeclarationExpr.class);
   }
 
+  @Test
   public void testStringList() {
     assertList("qw/first s<caret>econd third/", PerlStringList.class);
   }
 
+  @Test
   public void testStringListParens() {
     assertList("(qw/fi<caret>rst second third/)", PerlStringList.class);
   }
 
+  @Test
   public void testScalar() {
     assertScalarVariable("$v<caret>ar = @_;");
   }
 
+  @Test
   public void testScalarParens() {
     assertScalarVariable("($v<caret>ar) = @_;");
   }
 
+  @Test
   public void testArray() {
     assertListVariable("@v<caret>ar = @_;");
   }
 
+  @Test
   public void testArrayParens() {
     assertListVariable("(@v<caret>ar) = @_;");
   }
 
+  @Test
   public void testArrayCast() {
     assertList("@$v<caret>ar = @_;", PsiPerlArrayCastExpr.class);
   }
 
+  @Test
   public void testArrayCastParens() {
     assertList("(@$v<caret>ar) = @_;", PsiPerlArrayCastExpr.class);
   }
 
+  @Test
   public void testHash() {
     assertListVariable("%v<caret>ar = @_;");
   }
 
+  @Test
   public void testHashParens() {
     assertListVariable("(%v<caret>ar) = @_;");
   }
 
+  @Test
   public void testHashCast() {
     assertList("%$v<caret>ar = @_;", PsiPerlHashCastExpr.class);
   }
 
+  @Test
   public void testHashParensCast() {
     assertList("(%$v<caret>ar) = @_;", PsiPerlHashCastExpr.class);
   }
 
+  @Test
   public void testScalarDeclaration() {
     assertScalarDeclaration("my $v<caret>ar = 123;");
   }
 
+  @Test
   public void testArrayDeclaration() {
     assertListDeclaration("my @v<caret>ar = 123;");
   }
 
+  @Test
   public void testHashDeclaration() {
     assertListDeclaration("my %v<caret>ar = 123;");
   }
 
+  @Test
   public void testScalarDeclarationAttrs() {
     assertScalarDeclaration("my $v<caret>ar :lvalue = 123;");
   }
 
+  @Test
   public void testArrayDeclarationAttrs() {
     assertListDeclaration("my @v<caret>ar :lvalue = 123;");
   }
 
+  @Test
   public void testHashDeclarationAttrs() {
     assertListDeclaration("my %v<caret>ar :lvalue = 123;");
   }
 
+  @Test
   public void testScalarDeclarationParens() {
     assertScalarDeclaration("my( $v<caret>ar )= 123;");
   }
 
+  @Test
   public void testArrayDeclarationParens() {
     assertListDeclaration("my( @v<caret>ar) = 123;");
   }
 
+  @Test
   public void testHashDeclarationParens() {
     assertListDeclaration("my( %v<caret>ar) = 123;");
   }
 
+  @Test
   public void testScalarDeclarationParensAttr() {
     assertScalarDeclaration("my( $v<caret>ar ): lvalue = 123;");
   }
 
+  @Test
   public void testArrayDeclarationParensAttrs() {
     assertListDeclaration("my( @v<caret>ar) :lvalue = 123;");
   }
 
+  @Test
   public void testHashDeclarationParensAttrs() {
     assertListDeclaration("my( %v<caret>ar) :lvalue = 123;");
   }

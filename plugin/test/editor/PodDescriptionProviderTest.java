@@ -16,39 +16,48 @@
 
 package editor;
 
+
 import base.PodLightTestCase;
 import org.jetbrains.annotations.NotNull;
-
+import org.junit.Test;
 public class PodDescriptionProviderTest extends PodLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/descriptionProvider/pod";
   }
 
+  @Test
   public void testHeader1() {doTest("=head1 Some <caret>C<header>");}
 
+  @Test
   public void testHeaderWithIndex() {
     doTest("=head1 Header <caret>C<with index>\n" +
            "X<someindex>");
   }
 
+  @Test
   public void testHeader2() {doTest("=head2 Some <caret>C<header>");}
 
+  @Test
   public void testHeader3() {doTest("=head3 Some <caret>C<header>");}
 
+  @Test
   public void testHeader4() {doTest("=head4 Some <caret>C<header>");}
 
+  @Test
   public void testItem() {
     doTest("=over\n\n" +
            "=item Some <caret>C<item>\n\n" +
            "=back");
   }
 
+  @Test
   public void testHeaderIndex() {
     doTest("=head1 Some C<header>\n" +
            "X<in<caret>dex>");
   }
 
+  @Test
   public void testItemIndex() {
     doTest("=over\n\n" +
            "=item Some <caret>C<item>\n" +

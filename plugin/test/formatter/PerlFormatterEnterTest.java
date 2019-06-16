@@ -16,83 +16,120 @@
 
 package formatter;
 
+
+import org.junit.Test;
 public class PerlFormatterEnterTest extends PerlFormatterTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/formatter/perl/enter";
   }
 
+  @Test
   public void testIssue1754() {
     getCustomSettings().ALIGN_COMMENTS_ON_CONSEQUENT_LINES = true;
     doTest();
   }
 
+  @Test
   public void testReplacementBlockBefore() {doTest();}
 
+  @Test
   public void testReplacementBlockInside() {doTest();}
 
+  @Test
   public void testReplacementBlockAfter() {doTest();}
 
+  @Test
   public void testCommaSequenceWithFatInSomething() {doTest();}
 
+  @Test
   public void testCommaSequenceWithFatTop() {doTest();}
 
+  @Test
   public void testIncompleteStatement() {doTest();}
 
+  @Test
   public void testPlainQqString() {doTest();}
 
+  @Test
   public void testPlainQString() {doTest();}
 
+  @Test
   public void testPlainQxString() {doTest();}
 
+  @Test
   public void testQqString() {doTest();}
 
+  @Test
   public void testQString() {doTest();}
 
+  @Test
   public void testQxString() {doTest();}
 
+  @Test
   public void testAnonHash() {doTest();}
 
+  @Test
   public void testAnonList() {doTest();}
 
+  @Test
   public void testAnonArray() {doTest();}
 
+  @Test
   public void testQwList() {doTest();}
 
+  @Test
   public void testCommaSequenceTop() {doTest();}
 
+  @Test
   public void testAfterStatement() {doTest();}
 
+  @Test
   public void testAfterStatementInMethod() {doTest();}
 
+  @Test
   public void testAfterStatementInBlock() {doTest();}
 
+  @Test
   public void testAfterStatementInContinue() {doTest();}
 
+  @Test
   public void testAfterStatementInElse() {doTest();}
 
+  @Test
   public void testAfterStatementInElseIf() {doTest();}
 
+  @Test
   public void testAfterStatementInFor() {doTest();}
 
+  @Test
   public void testAfterStatementInForeach() {doTest();}
 
+  @Test
   public void testAfterStatementInFunc() {doTest();}
 
+  @Test
   public void testAfterStatementInGiven() {doTest();}
 
+  @Test
   public void testAfterStatementInIf() {doTest();}
 
+  @Test
   public void testAfterStatementInNamedBlock() {doTest();}
 
+  @Test
   public void testAfterStatementInSub() {doTest();}
 
+  @Test
   public void testAfterStatementInUnless() {doTest();}
 
+  @Test
   public void testAfterStatementInUntil() {doTest();}
 
+  @Test
   public void testAfterStatementInWhen() {doTest();}
 
+  @Test
   public void testAfterStatementInWhile() {doTest();}
 
 

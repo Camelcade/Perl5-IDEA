@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,15 +16,17 @@
 
 package editor;
 
+
 import base.HTMLMasonLightTestCase;
 import com.perl5.lang.htmlmason.filetypes.HTMLMasonFileType;
-
+import org.junit.Test;
 public class HTMLMasonFoldingTest extends HTMLMasonLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/folding";
   }
 
+  @Test
   public void testHtmlMason() {
     testFoldingRegions(getTestName(true), HTMLMasonFileType.INSTANCE);
   }

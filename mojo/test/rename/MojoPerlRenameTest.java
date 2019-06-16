@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,11 +16,12 @@
 
 package rename;
 
+
 import base.MojoLightTestCase;
 import com.intellij.testFramework.UsefulTestCase;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import org.jetbrains.annotations.NotNull;
-
+import org.junit.Test;
 public class MojoPerlRenameTest extends MojoLightTestCase {
   @Override
   protected String getTestDataPath() {
@@ -34,6 +35,7 @@ public class MojoPerlRenameTest extends MojoLightTestCase {
   }
 
 
+  @Test
   public void testMojoHelper() {
     doTest("newName");
   }

@@ -16,6 +16,7 @@
 
 package parser;
 
+
 import categories.Performance;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
@@ -24,6 +25,7 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
 import gnu.trove.THashMap;
+import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
 import java.util.ArrayList;
@@ -103,6 +105,7 @@ public class PerlParsingPerformanceTest extends PerlParserTestBase {
     return "testData/parser/performance";
   }
 
+  @Test
   public void testPerlTidyParsing() {
 
     final String testData = getPerlTidy();

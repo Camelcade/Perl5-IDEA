@@ -17,6 +17,7 @@
 package parser;
 
 
+import org.junit.Test;
 public class TemplateToolkitParserTest extends PerlParserTestBase {
   public TemplateToolkitParserTest() {
     super("tt");
@@ -27,207 +28,258 @@ public class TemplateToolkitParserTest extends PerlParserTestBase {
     return "testData/parser";
   }
 
+  @Test
   public void testOperators() {
     doTest();
   }
 
+  @Test
   public void testPrecedence() {
     doTest();
   }
 
+  @Test
   public void testStrings() {
     doTest();
   }
 
+  @Test
   public void testHash() {
     doTest();
   }
 
+  @Test
   public void testSub() {
     doTest();
   }
 
+  @Test
   public void testArray() {
     doTest();
   }
 
+  @Test
   public void testVariables() {
     doTest();
   }
 
+  @Test
   public void testChomp() {
     doTest();
   }
 
+  @Test
   public void testComments() {
     doTest();
   }
 
+  @Test
   public void testGet() {
     doTest();
   }
 
+  @Test
   public void testCall() {
     doTest();
   }
 
+  @Test
   public void testSet() {
     doTest();
   }
 
+  @Test
   public void testDefault() {
     doTest();
   }
 
+  @Test
   public void testInsert() {
     doTest();
   }
 
+  @Test
   public void testInclude() {
     doTest();
   }
 
+  @Test
   public void testProcess() {
     doTest();
   }
 
+  @Test
   public void testBlockNamed() {
     doTest();
   }
 
+  @Test
   public void testBlockNamedUnclosed() {
     doTest(false);
   }
 
+  @Test
   public void testBlockAnon() {
     doTest();
   }
 
+  @Test
   public void testBlockAnonUnclosed() {
     doTest(false);
   }
 
+  @Test
   public void testWrapper() {
     doTest();
   }
 
+  @Test
   public void testWrapperUnclosed() {
     doTest(false);
   }
 
+  @Test
   public void testIf() {
     doTest();
   }
 
+  @Test
   public void testIfUnclosed() {
     doTest(false);
   }
 
+  @Test
   public void testSwitch() {
     doTest();
   }
 
+  @Test
   public void testForeach() {
     doTest();
   }
 
+  @Test
   public void testForeachUnclosed() {
     doTest(false);
   }
 
+  @Test
   public void testWhile() {
     doTest();
   }
 
+  @Test
   public void testWhileUnclosed() {
     doTest(false);
   }
 
 
+  @Test
   public void testFilter() {
     doTest();
   }
 
+  @Test
   public void testFilterPostfix() {
     doTest();
   }
 
+  @Test
   public void testFilterUnclosed() {
     doTest(false);
   }
 
+  @Test
   public void testThrow() {
     doTest();
   }
 
+  @Test
   public void testUse() {
     doTest();
   }
 
+  @Test
   public void testMacro() {
     doTest();
   }
 
+  @Test
   public void testPerl() {
     doTest();
   }
 
+  @Test
   public void testPerlUnclosed() {
     doTest(false);
   }
 
+  @Test
   public void testTryCatch() {
     doTest();
   }
 
+  @Test
   public void testTryCatchUnclosed() {
     doTest(false);
   }
 
+  @Test
   public void testNext() {
     doTest();
   }
 
+  @Test
   public void testLast() {
     doTest();
   }
 
+  @Test
   public void testReturn() {
     doTest();
   }
 
+  @Test
   public void testStop() {
     doTest();
   }
 
+  @Test
   public void testClear() {
     doTest();
   }
 
+  @Test
   public void testMeta() {
     doTest();
   }
 
+  @Test
   public void testDebug() {
     doTest();
   }
 
+  @Test
   public void testTags() {
     doTest();
   }
 
+  @Test
   public void testChompMarkers() {
     doTest();
   }
 
+  @Test
   public void testMultiDirectivesBlocks() {
     doTest();
   }
 
+  @Test
   public void testIssue1262() {
     doTest();
   }
 
+  @Test
   public void testIssue1263() {
     doTest();
   }

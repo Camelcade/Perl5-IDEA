@@ -16,22 +16,28 @@
 
 package editor;
 
-import base.PerlLightTestCase;
 
+import base.PerlLightTestCase;
+import org.junit.Test;
 public class PerlBreadCrumbsTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/breadcrumbs/perl";
   }
 
+  @Test
   public void testInFile() {doTest();}
 
+  @Test
   public void testInPackage() {doTest();}
 
+  @Test
   public void testInSecondPackage() {doTest();}
 
+  @Test
   public void testInNestedPackage() {doTest();}
 
+  @Test
   public void testPodInFile() {doTest();}
 
   private void doTest() {

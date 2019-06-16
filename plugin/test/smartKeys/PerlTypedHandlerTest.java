@@ -16,9 +16,10 @@
 
 package smartKeys;
 
+
 import com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings;
 import editor.PerlSmartKeysTestCase;
-
+import org.junit.Test;
 public class PerlTypedHandlerTest extends PerlSmartKeysTestCase {
 
   @Override
@@ -26,14 +27,17 @@ public class PerlTypedHandlerTest extends PerlSmartKeysTestCase {
     return "testData/smartKeys/perl";
   }
 
+  @Test
   public void testSmartHashLonger() {
     doTestSmartCommaSequence();
   }
 
+  @Test
   public void testSmartHashShorter() {
     doTestSmartCommaSequence();
   }
 
+  @Test
   public void testSmartHashDisabled() {
     doTestSmartCommaSequence(false);
   }
@@ -47,11 +51,13 @@ public class PerlTypedHandlerTest extends PerlSmartKeysTestCase {
     doTest(" ");
   }
 
+  @Test
   public void testDoubleColonInUseEnabled() {
     Perl5CodeInsightSettings.getInstance().AUTO_INSERT_COLON = true;
     doTest("use Mojolicious<caret>", ":", "use Mojolicious::<caret>");
   }
 
+  @Test
   public void testDoubleColonInUseDisabled() {
     Perl5CodeInsightSettings.getInstance().AUTO_INSERT_COLON = false;
     doTest("use Mojolicious<caret>", ":", "use Mojolicious:<caret>");

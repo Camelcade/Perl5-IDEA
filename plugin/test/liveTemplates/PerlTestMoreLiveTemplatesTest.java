@@ -16,9 +16,10 @@
 
 package liveTemplates;
 
+
 import com.intellij.openapi.util.io.FileUtil;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeTest;
-
+import org.junit.Test;
 public class PerlTestMoreLiveTemplatesTest extends PerlLiveTemplatesTestCase {
   @Override
   protected String getTestDataPath() {
@@ -30,53 +31,78 @@ public class PerlTestMoreLiveTemplatesTest extends PerlLiveTemplatesTestCase {
     return PerlFileTypeTest.EXTENSION;
   }
 
+  @Test
   public void testSubtest() {doTest("st");}
 
+  @Test
   public void testOk() {doTest("ok");}
 
+  @Test
   public void testIs() {doTest("is");}
 
+  @Test
   public void testIsnt() {doTest("it");}
 
+  @Test
   public void testLike() {doTest("li");}
 
+  @Test
   public void testUnlike() {doTest("ul");}
 
+  @Test
   public void testCmpOk() {doTest("cmo");}
 
+  @Test
   public void testCanOk() {doTest("cno");}
 
+  @Test
   public void testIsaOk() {doTest("iso");}
 
+  @Test
   public void testNewOk() {doTest("neo");}
 
+  @Test
   public void testPass() {doTest("pa");}
 
+  @Test
   public void testFail() {doTest("fa");}
 
+  @Test
   public void testRequireOk() {doTest("ro");}
 
+  @Test
   public void testUseOk() {doTest("uo");}
 
+  @Test
   public void testIsDeeply() {doTest("id");}
 
+  @Test
   public void testDiag() {doTest("di");}
 
+  @Test
   public void testNote() {doTest("nt");}
 
+  @Test
   public void testExplain() {doTest("exp");}
 
+  @Test
   public void testSkip() {doTest("sk");}
 
+  @Test
   public void testTodo() {doTest("td");}
 
+  @Test
   public void testTodoSkip() {doTest("tds");}
 
+  @Test
   public void testBailOut() {doTest("bo");}
 
+  @Test
   public void testPlanTests() {doTest("pl");}
 
+  @Test
   public void testPlanSkipAll() {doTest("psa");}
 
+  @Test
   public void testPlanNoPlan() {doTest("pnp");}
 }

@@ -16,16 +16,18 @@
 
 package intellilang;
 
+
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.testFramework.UsefulTestCase;
 import org.jetbrains.annotations.NotNull;
-
+import org.junit.Test;
 public class PerlHeredocUpdaterTest extends PerlHeredocInjectionTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/intellilang/perl/heredoc_updater";
   }
 
+  @Test
   public void testUnindentedUpdate() {
     doTestUnindentedUpdate("<html>\n" +
                            "<div>\n" +
@@ -35,18 +37,22 @@ public class PerlHeredocUpdaterTest extends PerlHeredocInjectionTestCase {
                            "</html>");
   }
 
+  @Test
   public void testUnindentedUpdateWithEmpty() {
     doTestUnindentedUpdate("");
   }
 
+  @Test
   public void testUnindentedUpdateWithNewLine() {
     doTestUnindentedUpdate("some text\n");
   }
 
+  @Test
   public void testUnindentedUpdateWithoutNewLine() {
     doTestUnindentedUpdate("some text");
   }
 
+  @Test
   public void testIndentedUpdate() {
     doTestIndentedUpdate("<html>\n" +
                          "<div>\n" +
@@ -56,14 +62,17 @@ public class PerlHeredocUpdaterTest extends PerlHeredocInjectionTestCase {
                          "</html>");
   }
 
+  @Test
   public void testIndentedUpdateWithEmpty() {
     doTestIndentedUpdate("");
   }
 
+  @Test
   public void testIndentedUpdateWithNewLine() {
     doTestIndentedUpdate("some text\n");
   }
 
+  @Test
   public void testIndentedUpdateWithoutNewLine() {
     doTestIndentedUpdate("some text");
   }

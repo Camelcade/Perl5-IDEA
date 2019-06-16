@@ -16,49 +16,58 @@
 
 package unit.perl;
 
+
 import base.PerlLightTestCase;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.PerlReplacementRegex;
 import com.perl5.lang.perl.psi.PsiPerlReplacementRegex;
 import org.jetbrains.annotations.NotNull;
+import org.junit.Test;
 
 import java.util.List;
 import java.util.function.Function;
-
 public class PerlRegexParts extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/unit/perl/regex";
   }
 
+  @Test
   public void testLazyParsable() {
     doTestRegexRegex();
   }
 
+  @Test
   public void testLazyParsableX() {
     doTestRegexRegex();
   }
 
+  @Test
   public void testLazyParsableXX() {
     doTestRegexRegex();
   }
 
+  @Test
   public void testBlock() {
     doTestRegexEval();
   }
 
+  @Test
   public void testEmptyBlock() {
     doTestRegexEval();
   }
 
+  @Test
   public void testLazyParsableBlock() {
     doTestRegexEval();
   }
 
+  @Test
   public void testEmpty() {
     doTestRegexRegex();
   }
 
+  @Test
   public void testNormal() {
     doTestRegexRegex();
   }

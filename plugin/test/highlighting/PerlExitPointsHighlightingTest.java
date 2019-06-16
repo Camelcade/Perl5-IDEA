@@ -16,26 +16,34 @@
 
 package highlighting;
 
-import base.PerlLightTestCase;
 
+import base.PerlLightTestCase;
+import org.junit.Test;
 public class PerlExitPointsHighlightingTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/highlighting/perl/exitPoints";
   }
 
+  @Test
   public void testNextLastRedo() {doTest();}
 
+  @Test
   public void testNextLastRedoOutbreak() {doTest();}
 
+  @Test
   public void testAnonSubNested() {doTest();}
 
+  @Test
   public void testDoNested() {doTest();}
 
+  @Test
   public void testEvalNested() {doTest();}
 
+  @Test
   public void testSortNested() {doTest();}
 
+  @Test
   public void testSubWithNestedEntities() {doTest();}
 
   private void doTest() {doTestUsagesHighlighting();}

@@ -16,14 +16,16 @@
 
 package resolve;
 
-import base.PerlLightTestCase;
 
+import base.PerlLightTestCase;
+import org.junit.Test;
 public class PerlPackageProcessorTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/resolve/perl/package_processor";
   }
 
+  @Test
   public void testListMoreUtils() {doTest();}
 
   private void doTest() {

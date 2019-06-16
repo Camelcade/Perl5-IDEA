@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,11 @@
  * limitations under the License.
  */
 
-package editor;import base.MojoLightTestCase;
-import com.perl5.lang.mojolicious.filetypes.MojoliciousFileType;
+package editor;
 
+import base.MojoLightTestCase;
+import com.perl5.lang.mojolicious.filetypes.MojoliciousFileType;
+import org.junit.Test;
 public class MojoFoldingTest extends MojoLightTestCase {
   @Override
   protected String getTestDataPath() {
@@ -24,6 +26,7 @@ public class MojoFoldingTest extends MojoLightTestCase {
   }
 
 
+  @Test
   public void testMojolicious() {
     testFoldingRegions(getTestName(true), MojoliciousFileType.INSTANCE);
   }

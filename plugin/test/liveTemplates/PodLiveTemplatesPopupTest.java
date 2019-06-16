@@ -16,10 +16,11 @@
 
 package liveTemplates;
 
+
 import base.PerlCompletionPopupTestCase;
 import com.perl5.lang.pod.filetypes.PodFileType;
 import org.jetbrains.annotations.NotNull;
-
+import org.junit.Test;
 public class PodLiveTemplatesPopupTest extends PerlCompletionPopupTestCase {
   @Override
   protected String getTestDataPath() {
@@ -39,24 +40,34 @@ public class PodLiveTemplatesPopupTest extends PerlCompletionPopupTestCase {
     return PodFileType.EXTENSION;
   }
 
+  @Test
   public void testH1() {doTest("=head1<caret>");}
 
+  @Test
   public void testH2() {doTest("=head2<caret>");}
 
+  @Test
   public void testAttr() {doTest("=attr<caret>");}
 
+  @Test
   public void testMethod() {doTest("=method<caret>");}
 
+  @Test
   public void testFunc() {doTest("=func<caret>");}
 
+  @Test
   public void testH3() {doTest("=head3<caret>");}
 
+  @Test
   public void testH4() {doTest("=head4<caret>");}
 
+  @Test
   public void testBeginEnd() {doTest("=begin<caret>");}
 
+  @Test
   public void testFor() {doTest("=for<caret>");}
 
+  @Test
   public void testEncoding() {doTest("=encoding<caret>");}
 
   protected void doTest(@NotNull String textToType) {

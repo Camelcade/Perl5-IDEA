@@ -16,19 +16,26 @@
 
 package liveTemplates;
 
+
+import org.junit.Test;
 public class PerlWithPodLiveTemplatesTest extends PerlLiveTemplatesTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/liveTemplates/perl/pod";
   }
 
+  @Test
   public void testHeaderTop() {doTest();}
 
+  @Test
   public void testHeaderTopTrimming() {doTest();}
 
+  @Test
   public void testHeaderNested() {doTest();}
 
+  @Test
   public void testOverTop() {doTest();}
 
+  @Test
   public void testOverNested() {doTest();}
 }

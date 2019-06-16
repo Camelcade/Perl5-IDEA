@@ -16,38 +16,44 @@
 
 package psi;
 
+
 import base.PerlLightTestCase;
 import com.perl5.lang.perl.psi.PerlUseStatement;
+import org.junit.Test;
 
 import java.util.Arrays;
-
-
 public class PerlStringCollectionTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/psi/stringCollection";
   }
 
+  @Test
   public void testQ() {
     doTest("q", "testq I:/mylib/");
   }
 
+  @Test
   public void testQQ() {
     doTest("qq", "testqq I:/mylib/");
   }
 
+  @Test
   public void testQX() {
     doTest("qx", "testqx I:/mylib/");
   }
 
+  @Test
   public void testQW() {
     doTest("qw", "testqw", "I:/mylib/");
   }
 
+  @Test
   public void testBare() {
     doTest("bare", "testbare", "I:/mylib/");
   }
 
+  @Test
   public void testMixed() {
     doTest("mixed", "test", "I:/mylib/", "something", "else", "one", "three", "and", "even", "more");
   }

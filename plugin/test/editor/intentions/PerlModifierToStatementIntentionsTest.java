@@ -16,9 +16,10 @@
 
 package editor.intentions;
 
+
 import com.intellij.openapi.util.io.FileUtil;
 import com.perl5.PerlBundle;
-
+import org.junit.Test;
 public class PerlModifierToStatementIntentionsTest extends PerlIntentionsTestCase {
 
   @Override
@@ -26,26 +27,37 @@ public class PerlModifierToStatementIntentionsTest extends PerlIntentionsTestCas
     return FileUtil.join(super.getTestDataPath(), "modifierToStatement");
   }
 
+  @Test
   public void testModifierToStatementFor() {doTest();}
 
+  @Test
   public void testModifierToStatementForeach() {doTest();}
 
+  @Test
   public void testModifierToStatementIf() {doTest();}
 
+  @Test
   public void testModifierToStatementIfDo() {doTest();}
 
+  @Test
   public void testModifierToStatementIfEmpty() {doTest(false);}
 
+  @Test
   public void testModifierToStatementIfParenthesized() {doTest();}
 
+  @Test
   public void testModifierToStatementUnless() {doTest();}
 
+  @Test
   public void testModifierToStatementUntil() {doTest();}
 
+  @Test
   public void testModifierToStatementWhen() {doTest();}
 
+  @Test
   public void testModifierToStatementWhile() {doTest();}
 
+  @Test
   public void testModifierToStatementWithError() {doTestNoIntention(PerlBundle.message("perl.intention.convert.to.compound"));}
 
   private void doTest(boolean checkErrors) {

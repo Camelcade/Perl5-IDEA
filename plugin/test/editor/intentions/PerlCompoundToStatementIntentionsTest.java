@@ -16,53 +16,74 @@
 
 package editor.intentions;
 
+
 import com.intellij.openapi.util.io.FileUtil;
 import com.perl5.PerlBundle;
-
+import org.junit.Test;
 public class PerlCompoundToStatementIntentionsTest extends PerlIntentionsTestCase {
   @Override
   protected String getTestDataPath() {
     return FileUtil.join(super.getTestDataPath(), "compoundToStatement");
   }
 
+  @Test
   public void testForIterable() {doTestNegative();}
 
+  @Test
   public void testForWithMultiStatements() {doTestNegative();}
 
+  @Test
   public void testForWithoutStatement() {doTestNegative();}
 
+  @Test
   public void testWithDeclarationIf() {doTest();}
 
+  @Test
   public void testWithDeclarationUnless() {doTest();}
 
+  @Test
   public void testWithDeclarationUntil() {doTest();}
 
+  @Test
   public void testWithDeclarationWhile() {doTest();}
 
+  @Test
   public void testWhileEach() {doTest();}
 
+  @Test
   public void testIf() {doTest();}
 
+  @Test
   public void testUnless() {doTest();}
 
+  @Test
   public void testWhile() {doTest();}
 
+  @Test
   public void testWhileWithPredeclared() {doTest();}
 
+  @Test
   public void testUntil() {doTest();}
 
+  @Test
   public void testFor() {doTest();}
 
+  @Test
   public void testForWithIterator() {doTest();}
 
+  @Test
   public void testForWithIteratorBracedRegexp() {doTest();}
 
+  @Test
   public void testForWithIteratorDeclaration() {doTest();}
 
+  @Test
   public void testForWithAmbiguousIterator() {doTest();}
 
+  @Test
   public void testForeach() {doTest();}
 
+  @Test
   public void testWhen() {doTest();}
 
   private void doTest() {

@@ -16,25 +16,34 @@
 
 package editor.intentions;
 
-import com.perl5.PerlBundle;
 
+import com.perl5.PerlBundle;
+import org.junit.Test;
 public class PerlIntentionsTest extends PerlIntentionsTestCase {
+  @Test
   public void testForeachToFor() {doTestForeachToForIntention();}
 
+  @Test
   public void testForeachToForFor() {doTestForeachToForIntention();}
 
   private void doTestForeachToForIntention() {doTestIntention(PerlBundle.message("perl.intention.foreach.to.for"));}
 
+  @Test
   public void testStringToHeredocQQ() {doTestConvertToHeredoc();}
 
+  @Test
   public void testStringToHeredocQQMnemonic() {doTestConvertToHeredoc();}
 
+  @Test
   public void testStringToHeredocSQ() {doTestConvertToHeredoc();}
 
+  @Test
   public void testStringToHeredocSQMnemonic() {doTestConvertToHeredoc();}
 
+  @Test
   public void testStringToHeredocXQ() {doTestConvertToHeredoc();}
 
+  @Test
   public void testStringToHeredocXQMnemonic() {doTestConvertToHeredoc();}
 
   private void doTestConvertToHeredoc() {

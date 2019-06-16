@@ -16,71 +16,101 @@
 
 package parameterInfo;
 
+
 import base.PerlLightTestCase;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
-
+import org.junit.Test;
 public class PerlParameterInfoHandlerTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/parameterInfo";
   }
 
+  @Test
   public void testSubSignatureOptional() {doTest();}
 
+  @Test
   public void testSubSignatureSimple() {doTest();}
 
+  @Test
   public void testSubSignatureWithEmpty() {doTest();}
 
+  @Test
   public void testSubSignatureWithHash() {doTest();}
 
+  @Test
   public void testSubSignatureWithList() {doTest();}
 
+  @Test
   public void testSubSignatureWithSlurpyHash() {doTest();}
 
+  @Test
   public void testSubSignatureWithSlurpyList() {doTest();}
 
+  @Test
   public void testFuncStatic() {doTest();}
 
+  @Test
   public void testFuncObject() {doTest();}
 
+  @Test
   public void testMethodStatic() {doTest();}
 
+  @Test
   public void testMethodObject() {doTest();}
 
+  @Test
   public void testMethodWithInvocantStatic() {doTest();}
 
+  @Test
   public void testMethodWithInvocantObject() {doTest();}
 
+  @Test
   public void testConstObject() {doTest();}
 
+  @Test
   public void testConstObjectMulti() {doTest();}
 
+  @Test
   public void testConstStatic() {doTest();}
 
+  @Test
   public void testConstStaticMulti() {doTest();}
 
+  @Test
   public void testStaticNoParensAll() {doTest();}
 
+  @Test
   public void testStaticNoParensEmpty() {doTest();}
 
+  @Test
   public void testStaticParensAll() {doTest();}
 
+  @Test
   public void testStaticParensEmpty() {doTest();}
 
+  @Test
   public void testObjectParensAll() {doTest();}
 
+  @Test
   public void testObjectParensAfterFirst() {doTest();}
 
+  @Test
   public void testStaticParensAfterFirst() {doTest();}
 
+  @Test
   public void testStaticNoParensAfterFirst() {doTest();}
 
+  @Test
   public void testObjectParensEmpty() {doTest();}
 
+  @Test
   public void testObjectParensInMissingMiddle() {doTest();}
 
+  @Test
   public void testStaticParensInMissingMiddle() {doTest();}
 
+  @Test
   public void testStaticNoParensInMissingMiddle() {doTest();}
 
   private void doTest() {

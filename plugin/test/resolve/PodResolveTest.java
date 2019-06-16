@@ -16,10 +16,11 @@
 
 package resolve;
 
+
 import base.PodLightTestCase;
 import com.intellij.openapi.vfs.VirtualFile;
 import org.jetbrains.annotations.NotNull;
-
+import org.junit.Test;
 public class PodResolveTest extends PodLightTestCase {
   @Override
   protected String getTestDataPath() {
@@ -32,64 +33,80 @@ public class PodResolveTest extends PodLightTestCase {
     withPerlPod();
   }
 
+  @Test
   public void testHead1SameFormatting() {doTest();}
 
+  @Test
   public void testPerlVar() {
     doTest("L<perlvar>");
   }
 
+  @Test
   public void testPerlVarTitled() {
     doTest("L<VarC<ia>bles|perlvar>");
   }
 
+  @Test
   public void testPerlVarGeneralVariables() {
     doTest("L<perlvar/General Variables>");
   }
 
+  @Test
   public void testPerlVarGeneralVariablesQuoted() {
     doTest("L<perlvar/\"General Variables\">");
   }
 
+  @Test
   public void testPerlVarGeneralVariablesTitled() {
     doTest("L<Vars|perlvar/General Variables>");
   }
 
+  @Test
   public void testPerlVarGeneralVariablesQuotedTitled() {
     doTest("L<C<VARIABLES>|perlvar/\"General Variables\">");
   }
 
+  @Test
   public void testPerlVarArg() {
     doTest("L<perlvar/$ARG>");
   }
 
+  @Test
   public void testPerlVarArgQuoted() {
     doTest("L<perlvar/\"$ARG\">");
   }
 
+  @Test
   public void testPerlVarArgTitled() {
     doTest("L<ARG|perlvar/$ARG>");
   }
 
+  @Test
   public void testPerlVarArgQuotedTitled() {
     doTest("L<AC<R>G|perlvar/\"$ARG\">");
   }
 
+  @Test
   public void testIndex() {
     doTest("L<perlpod/Z>");
   }
 
+  @Test
   public void testIndexQuoted() {
     doTest("L<perlpod/\"Z\">");
   }
 
+  @Test
   public void testInsideFile() {
     doTest();
   }
 
+  @Test
   public void testExternalPod() {
     doTestExternalFile("definitions.pod");
   }
 
+  @Test
   public void testExternalPm() {
     doTestExternalFile("definitions.pm");
   }
@@ -103,10 +120,12 @@ public class PodResolveTest extends PodLightTestCase {
     doTestResolveWithoutInit(false);
   }
 
+  @Test
   public void testIndexTitled() {
     doTest("L<zero formatter|perlpod/Z>");
   }
 
+  @Test
   public void testIndexQuotedTitled() {
     doTest("L<ZERO|perlpod/\"Z\">");
   }

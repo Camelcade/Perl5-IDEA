@@ -16,8 +16,9 @@
 
 package gotoDeclaration;
 
-import base.PodLightTestCase;
 
+import base.PodLightTestCase;
+import org.junit.Test;
 public class PodGotoDeclarationTest extends PodLightTestCase {
   @Override
   protected void setUp() throws Exception {
@@ -30,8 +31,10 @@ public class PodGotoDeclarationTest extends PodLightTestCase {
     return "testData/gotoDeclaration/pod";
   }
 
+  @Test
   public void testMultipleTargets() {doTest();}
 
+  @Test
   public void testMultipleTargetsExternal() {doTest();}
 
   private void doTest() {

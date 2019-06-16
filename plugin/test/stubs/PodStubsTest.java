@@ -16,29 +16,35 @@
 
 package stubs;
 
+
 import base.PodLightTestCase;
 import org.jetbrains.annotations.NotNull;
-
+import org.junit.Test;
 public class PodStubsTest extends PodLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/stubs/pod";
   }
 
+  @Test
   public void testItems_pod() {
     doTest();
   }
 
+  @Test
   public void testItemsLong_pod() {
     doTest();
   }
 
+  @Test
   public void testSections_pod() {
     doTest();
   }
 
+  @Test
   public void testIndexedParagraphTop_pod() {doTest();}
 
+  @Test
   public void testIndexedSectionContent_pod() {doTest();}
 
   @NotNull

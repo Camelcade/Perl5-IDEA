@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,10 @@
 
 package completion;
 
+
 import base.MojoLightTestCase;
 import com.perl5.lang.perl.idea.project.PerlNamesCache;
-
+import org.junit.Test;
 public class MojoCompletionTest extends MojoLightTestCase {
 
   @Override
@@ -32,11 +33,15 @@ public class MojoCompletionTest extends MojoLightTestCase {
     return "testData/completion/templates";
   }
 
+  @Test
   public void testTopLevel() {doTestCompletion();}
 
+  @Test
   public void testC() {doTestCompletion();}
 
+  @Test
   public void testSelf() {doTestCompletion();}
 
+  @Test
   public void testScalars() {doTestCompletion();}
 }

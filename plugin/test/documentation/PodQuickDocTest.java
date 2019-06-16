@@ -16,8 +16,9 @@
 
 package documentation;
 
-import base.PodLightTestCase;
 
+import base.PodLightTestCase;
+import org.junit.Test;
 public class PodQuickDocTest extends PodLightTestCase {
 
   @Override
@@ -31,62 +32,91 @@ public class PodQuickDocTest extends PodLightTestCase {
     return "testData/documentation/pod/quickdoc";
   }
 
+  @Test
   public void testVariousItems() {doTest();}
 
+  @Test
   public void testHeader1() {doTest();}
 
+  @Test
   public void testIndexContent() {doTest();}
 
+  @Test
   public void testItemContent() {doTest();}
 
+  @Test
   public void testBack() {doTest();}
 
+  @Test
   public void testBegin() {doTest();}
 
+  @Test
   public void testCut() {doTest();}
 
+  @Test
   public void testEncoding() {doTest();}
 
+  @Test
   public void testEnd() {doTest();}
 
+  @Test
   public void testFor() {doTest();}
 
+  @Test
   public void testFormatB() {doTest();}
 
+  @Test
   public void testFormatC() {doTest();}
 
+  @Test
   public void testFormatE() {doTest();}
 
+  @Test
   public void testFormatF() {doTest();}
 
+  @Test
   public void testFormatI() {doTest();}
 
+  @Test
   public void testFormatL() {doTest();}
 
+  @Test
   public void testFormatS() {doTest();}
 
+  @Test
   public void testFormatX() {doTest();}
 
+  @Test
   public void testFormatZ() {doTest();}
 
+  @Test
   public void testHead1() {doTest();}
 
+  @Test
   public void testHead2() {doTest();}
 
+  @Test
   public void testHead3() {doTest();}
 
+  @Test
   public void testHead4() {doTest();}
 
+  @Test
   public void testItem() {doTest();}
 
+  @Test
   public void testOver() {doTest();}
 
+  @Test
   public void testPod() {doTest();}
 
+  @Test
   public void testReferenceFile() {doTest();}
 
+  @Test
   public void testReferenceSection() {doTest();}
 
+  @Test
   public void testReferencedParagraph() {doTest();}
 
   private void doTest() {

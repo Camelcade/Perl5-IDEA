@@ -16,34 +16,46 @@
 
 package findUsages;
 
-import base.PerlLightTestCase;
 
+import base.PerlLightTestCase;
+import org.junit.Test;
 public class PerlFindUsagesGroupingTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/findusages/perl/grouping";
   }
 
+  @Test
   public void testBlessExpr() {doTest();}
 
+  @Test
   public void testSpliceExpr() {doTest();}
 
+  @Test
   public void testHashArgument() {doTest();}
 
+  @Test
   public void testHashArgumentArray() {doTest();}
 
+  @Test
   public void testArrayArguments() {doTest();}
 
+  @Test
   public void testHash() {doTest();}
 
+  @Test
   public void testArray() {doTest();}
 
+  @Test
   public void testForeachIterator() {doTest();}
 
+  @Test
   public void testScalarWithContext() {doTest();}
 
+  @Test
   public void testScalar() {doTest();}
 
+  @Test
   public void testSub() {doTest();}
 
   private void doTest() {doTestUsagesGrouping();}

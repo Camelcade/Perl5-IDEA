@@ -16,9 +16,10 @@
 
 package documentation;
 
+
 import base.PerlLightTestCase;
 import org.jetbrains.annotations.NotNull;
-
+import org.junit.Test;
 public class PerlQuickDockCompletionTest extends PerlLightTestCase {
 
   @Override
@@ -26,31 +27,37 @@ public class PerlQuickDockCompletionTest extends PerlLightTestCase {
     return "testData/documentation/perl/completion";
   }
 
+  @Test
   public void testSubDefinition() {
     myFixture.copyFileToProject("test.pm");
     doTest("test::-><caret>", "somesub");
   }
 
+  @Test
   public void testMethod() {
     myFixture.copyFileToProject("test.pm");
     doTest("test::-><caret>", "somemethod");
   }
 
+  @Test
   public void testFunc() {
     myFixture.copyFileToProject("test.pm");
     doTest("test::-><caret>", "somefunc");
   }
 
+  @Test
   public void testAttr() {
     myFixture.copyFileToProject("test.pm");
     doTest("test::-><caret>", "someattr");
   }
 
+  @Test
   public void testPackage() {
     myFixture.copyFileToProject("test.pm");
     doTest("<caret>", "test");
   }
 
+  @Test
   public void testMojoliciousController() {
     doTest("use <caret>", "Mojolicious::Controller");
   }

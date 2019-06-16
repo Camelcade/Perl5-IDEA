@@ -16,15 +16,18 @@
 
 package liveTemplates;
 
-import com.intellij.openapi.util.io.FileUtil;
 
+import com.intellij.openapi.util.io.FileUtil;
+import org.junit.Test;
 public class PerlTryCatchLiveTemplatesTest extends PerlLiveTemplatesTestCase {
   @Override
   protected String getTestDataPath() {
     return FileUtil.join(super.getTestDataPath(), "trycatch");
   }
 
+  @Test
   public void testTry() {doTest("tr");}
 
+  @Test
   public void testCatch() {doTest("ca");}
 }

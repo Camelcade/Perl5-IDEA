@@ -16,7 +16,9 @@
 
 package rename;
 
+
 import base.PerlLightTestCase;
+import org.junit.Test;
 
 // following tests are not working in inline test
 public class PerlRenameDialogTest extends PerlLightTestCase {
@@ -25,11 +27,15 @@ public class PerlRenameDialogTest extends PerlLightTestCase {
     return "testData/rename/perl";
   }
 
+  @Test
   public void testClassAccessorFbp() {doTestRename();}
 
+  @Test
   public void testExceptionClassFieldField() {doTestRename();}
 
+  @Test
   public void testClassAccessorFbpRo() {doTestRename();}
 
+  @Test
   public void testClassAccessorFbpWo() {doTestRename();}
 }

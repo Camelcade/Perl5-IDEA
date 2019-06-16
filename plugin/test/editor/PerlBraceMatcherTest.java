@@ -16,8 +16,9 @@
 
 package editor;
 
-import base.PerlLightTestCase;
 
+import base.PerlLightTestCase;
+import org.junit.Test;
 public class PerlBraceMatcherTest extends PerlLightTestCase {
 
   @Override
@@ -25,10 +26,13 @@ public class PerlBraceMatcherTest extends PerlLightTestCase {
     return "testData/braceMatcher/perl";
   }
 
+  @Test
   public void testRegex() {doTest();}
 
+  @Test
   public void testQuotes() {doTest();}
 
+  @Test
   public void testParensAll() {doTest();}
 
   private void doTest() {

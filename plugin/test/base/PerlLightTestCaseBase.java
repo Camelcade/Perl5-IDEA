@@ -190,6 +190,11 @@ import org.intellij.plugins.intelliLang.inject.InjectLanguageAction;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.Assert;
+import org.junit.Rule;
+import org.junit.rules.TestRule;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+import org.junit.runners.model.Statement;
 
 import javax.swing.*;
 import java.io.File;
@@ -204,6 +209,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+@RunWith(JUnit4.class)
 public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestCase {
   private static final String START_FOLD = "<fold\\stext=\'[^\']*\'(\\sexpand=\'[^\']*\')*>";
   private static final String END_FOLD = "</fold>";
@@ -229,6 +235,16 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   private static final String SEPARATOR_NEW_LINE_AFTER = SEPARATOR + "\n";
   private static final String SEPARATOR_NEWLINES = SEPARATOR_NEW_LINE_BEFORE + "\n";
   private final Disposable myPerlLightTestCaseDisposable = Disposer.newDisposable();
+
+  @Rule
+  public final TestRule myBaseRule = (base, description) ->
+    new Statement() {
+      @Override
+      public void evaluate() throws Throwable {
+        setName(description.getMethodName());
+        runBare();
+      }
+    };
 
   @Override
   protected void setUp() throws Exception {

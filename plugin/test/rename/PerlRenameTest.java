@@ -18,105 +18,145 @@ package rename;
 
 
 import base.PerlLightTestCase;
-
+import org.junit.Test;
 public class PerlRenameTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/rename/perl";
   }
 
+  @Test
   public void testPackageTag() {doTestRename();}
 
+  @Test
   public void testAccessorModification() {doTestRename();}
 
+  @Test
   public void testMojoAttrs() {doTestRename();}
 
+  @Test
   public void testClassAccessorSimple() {doTestRename();}
 
+  @Test
   public void testClassAccessorSimpleRo() {doTestRename();}
 
+  @Test
   public void testClassAccessorSimpleWo() {doTestRename();}
 
+  @Test
   public void testExceptionClassFieldMethod() {doTestRename();}
 
+  @Test
   public void testExceptionClassFieldStatic() {doTestRename();}
 
+  @Test
   public void testExceptionClassAliasLocal() {doTestRename();}
 
+  @Test
   public void testExceptionClassAliasStatic() {doTestRename();}
 
+  @Test
   public void testExceptionClassAliasMethod() {doTestRename();}
 
+  @Test
   public void testConstantBare() {doTestRename();}
 
+  @Test
   public void testConstantSQ() {doTestRename();}
 
+  @Test
   public void testConstantDQ() {doTestRename();}
 
+  @Test
   public void testConstantQQ() {doTestRename();}
 
+  @Test
   public void testConstantQ() {doTestRename();}
 
+  @Test
   public void testConstantQW() {doTestRename();}
 
+  @Test
   public void testExceptionClassSQ() {doTestRename();}
 
+  @Test
   public void testExceptionClassDQ() {doTestRename();}
 
+  @Test
   public void testExceptionClassQW() {doTestRename();}
 
+  @Test
   public void testExceptionClassBare() {doTestRename();}
 
+  @Test
   public void testExceptionClassQ() {doTestRename();}
 
+  @Test
   public void testExceptionClassQQ() {doTestRename();}
 
+  @Test
   public void testHeredocBare() {doTestRename();}
 
+  @Test
   public void testHeredocDQ() {doTestRename();}
 
+  @Test
   public void testHeredocDQSpaced() {doTestRename();}
 
+  @Test
   public void testHeredocEscaped() {doTestRename();}
 
+  @Test
   public void testHeredocIndented() {doTestRename();}
 
+  @Test
   public void testHeredocSQ() {doTestRename();}
 
+  @Test
   public void testHeredocSQSpaced() {doTestRename();}
 
+  @Test
   public void testHeredocXQ() {doTestRename();}
 
+  @Test
   public void testHeredocXQSpaced() {doTestRename();}
 
+  @Test
   public void testGlobRename() {
     doTestRename();
   }
 
+  @Test
   public void testLexicalVariable() {
     doTestRename();
   }
 
+  @Test
   public void testMultiVariable() {
     doTestRename();
   }
 
+  @Test
   public void testLabelRename() {
     doTestRename();
   }
 
+  @Test
   public void testPackageName() {
     doTestRename("Foo::Bar::Moo");
   }
 
+  @Test
   public void testMultiPackage() {
     doTestRename("Foo::Bar::Boo");
   }
 
+  @Test
   public void testPackageRanges() {
     doTestRename("Some::Other::Package");
   }
 
+  @Test
   public void testBrokenTemplate() {
     myFixture.copyFileToProject("TestFirst.pm");
     doTestRename("some_new_name");

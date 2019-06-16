@@ -16,13 +16,15 @@
 
 package editor;
 
-import base.PerlLightTestCase;
 
+import base.PerlLightTestCase;
+import org.junit.Test;
 public class PerlWordSelectorTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/wordSelector/perl";
   }
 
+  @Test
   public void testVariables() {doTestWorldSelector();}
 }
