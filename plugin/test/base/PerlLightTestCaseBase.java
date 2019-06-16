@@ -259,8 +259,11 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
       Perl5CodeInsightSettings.getInstance().loadState(myCodeInsightSettings);
       PerlSharedSettings.getInstance(getProject()).loadState(mySharedSettings);
       PerlLocalSettings.getInstance(getProject()).loadState(myLocalSettings);
-      ApplicationManager.getApplication()
-        .invokeAndWait(() -> PerlProjectManager.getInstance(getProject()).setExternalLibraries(Collections.emptyList()));
+      ApplicationManager.getApplication().invokeAndWait(() -> {
+        PerlProjectManager projectManager = PerlProjectManager.getInstance(getProject());
+        projectManager.setProjectSdk(null);
+        projectManager.setExternalLibraries(Collections.emptyList());
+      });
     }
     finally {
       super.tearDown();
