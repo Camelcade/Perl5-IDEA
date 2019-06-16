@@ -89,6 +89,11 @@
   </extensions>
 
   <actions>
+    <group id="Perl5.Mojo" popup="true" text="Mojolicious" icon="/icons/mojolicious_color.png">
+      <add-to-group group-id="Perl5.Tools" anchor="last"/>
+      <action id="perl5.mojo.install" class="com.perl5.lang.mojolicious.idea.actions.InstallMojoliciousAction"/>
+    </group>
+
     <group>
       <add-to-group group-id="NewGroup" relative-to-action="Perl5.NewFile" anchor="after"/>
       <action id="Mojo.newFile" class="com.perl5.lang.mojolicious.idea.ide.MojoCreateFileFromTemplateAction"/>
