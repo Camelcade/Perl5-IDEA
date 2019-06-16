@@ -25,7 +25,7 @@ env: ORG_GRADLE_PROJECT_downloadIdeaSources=false
 # More info: https://github.com/travis-ci/travis-ci/issues/8667
 before_install:
   - perlbrew list
-  - perlbrew install --verbose perl-5.26.2 --notest --noman
+  - perlbrew install --verbose perl-5.26.2 --notest --noman || true
   - perlbrew lib create perl-5.26.2@test_mojo
   - perlbrew exec -q --with perl-5.26.2@test_mojo cpanm --notest Mojolicious
   - perlbrew list
