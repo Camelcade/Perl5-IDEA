@@ -1,6 +1,8 @@
 language: java
 jdk:
   - oraclejdk8
+perl:
+  - "5.26.2"
 git:
   submodules: false
 #os:
@@ -13,18 +15,19 @@ cache:
   directories:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
+    - $HOME/.perl5/
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-
+  - perlbrew clean
 env: ORG_GRADLE_PROJECT_downloadIdeaSources=false
 
 # Override default install process on TravisCI
 # Avoid default `gradlew assemble` execution. Be explicit about it on the `script` section.
 # More info: https://github.com/travis-ci/travis-ci/issues/8667
-install: true
-before_install:
-  - perlbrew list
+install:
+  - perlbrew lib create perl-5.26.2@test_mojo
+  - perlbrew exec -q --with perl-5.26.2@test_mojo cpanm --notest Mojolicious
 script:
   - ./gradlew test
 after_success:
