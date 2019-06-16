@@ -24,7 +24,8 @@ env: ORG_GRADLE_PROJECT_downloadIdeaSources=false
 # Avoid default `gradlew assemble` execution. Be explicit about it on the `script` section.
 # More info: https://github.com/travis-ci/travis-ci/issues/8667
 before_install:
-  - perlbrew install --verbose perl-5.26.2 --notest --noman
+  - perlbrew list
+  #  - perlbrew install --verbose perl-5.26.2 --notest --noman
   - perlbrew lib create perl-5.26.2@test_mojo
   - perlbrew exec -q --with perl-5.26.2@test_mojo cpanm --notest Mojolicious
 install: true
