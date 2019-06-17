@@ -97,6 +97,7 @@ import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterFactory;
+import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.impl.PerlModuleExtension;
 import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
 import com.intellij.openapi.projectRoots.impl.ProjectJdkImpl;
@@ -192,6 +193,7 @@ import org.jetbrains.annotations.Nullable;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.rules.TestRule;
+import org.junit.runner.Description;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import org.junit.runners.model.Statement;
@@ -242,9 +244,19 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
       @Override
       public void evaluate() throws Throwable {
         setName(description.getMethodName());
+        doEvaluate(description);
         runBare();
       }
     };
+
+  /**
+   * As far as we can't provide additional rules, because of hacky way main rule works, you should
+   * put additional logic in here
+   *
+   * @param description test method description
+   */
+  protected void doEvaluate(@NotNull Description description) {
+  }
 
   @Override
   protected void setUp() throws Exception {
@@ -305,11 +317,13 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
       "/usr/bin/perl",
       PerlHostHandler.getDefaultHandler().createData(),
       PerlVersionManagerHandler.getDefaultHandler().createData(),
-      sdk -> {
-        PerlSdkTable.getInstance().addJdk(sdk, getTestRootDisposable());
-        PerlProjectManager.getInstance(getProject()).setProjectSdk(sdk);
-        PerlRunUtil.refreshSdkDirs(sdk, getProject());
-      });
+      this::onSdkCreation);
+  }
+
+  private void onSdkCreation(@NotNull Sdk sdk) {
+    PerlSdkTable.getInstance().addJdk(sdk, myPerlLightTestCaseDisposable);
+    PerlProjectManager.getInstance(getProject()).setProjectSdk(sdk);
+    PerlRunUtil.refreshSdkDirs(sdk, getProject());
   }
 
   /**
@@ -410,7 +424,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
           PerlHostHandler.getDefaultHandler().createData(),
           PerlVersionManagerData.getDefault(),
           PerlImplementationHandler.getDefaultHandler().createData()));
-        PerlSdkTable.getInstance().addJdk(testSdk, getTestRootDisposable());
+        PerlSdkTable.getInstance().addJdk(testSdk, myPerlLightTestCaseDisposable);
         perlProjectManager.setProjectSdk(testSdk);
         perlProjectManager.addExternalLibrary(libdir);
 

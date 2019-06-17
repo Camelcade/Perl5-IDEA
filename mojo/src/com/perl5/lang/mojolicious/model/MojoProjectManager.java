@@ -45,6 +45,7 @@ import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.TestOnly;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -103,6 +104,11 @@ public class MojoProjectManager {
   @Nullable
   public MojoProject getMojoProject(@Nullable VirtualFile root) {
     return myModel.myProjectRoots.get(root);
+  }
+
+  @NotNull
+  public List<MojoProject> getMojoProjects() {
+    return Collections.unmodifiableList(new ArrayList<>(myModel.myProjectRoots.values()));
   }
 
   /**
@@ -288,5 +294,10 @@ public class MojoProjectManager {
     private Set<MojoProject> getProjects() {
       return myProjectRoots.isEmpty() ? Collections.emptySet() : new HashSet<>(myProjectRoots.values());
     }
+  }
+
+  @TestOnly
+  public void updateInTestMode() {
+    updateModel();
   }
 }

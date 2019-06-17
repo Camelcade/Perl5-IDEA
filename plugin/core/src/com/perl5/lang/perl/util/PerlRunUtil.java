@@ -449,29 +449,50 @@ public class PerlRunUtil {
     ApplicationManager.getApplication().assertIsDispatchThread();
     Executor runExecutor = DefaultRunExecutor.getRunExecutorInstance();
     Project project = perlCommandLine.getNonNullEffectiveProject();
-    PerlTerminalExecutionConsole consoleView =
+    boolean isUnitTestMode = ApplicationManager.getApplication().isUnitTestMode();
+    PerlTerminalExecutionConsole consoleView = isUnitTestMode ? null :
       new PerlTerminalExecutionConsole(project).withHostData(perlCommandLine.getEffectiveHostData());
     ProcessHandler processHandler = null;
     try {
-      processHandler = PerlHostData.createConsoleProcessHandler(perlCommandLine.withPty(true));
+      processHandler = PerlHostData.createConsoleProcessHandler(perlCommandLine.withPty(!isUnitTestMode));
+      if (isUnitTestMode) {
+        processHandler.addProcessListener(new ProcessAdapter() {
+          @Override
+          public void onTextAvailable(@NotNull ProcessEvent event, @NotNull Key outputType) {
+            LOG.info(outputType + ": " + event.getText());
+          }
+        });
+      }
     }
     catch (ExecutionException e) {
-      consoleView.print(e.getMessage(), ConsoleViewContentType.ERROR_OUTPUT);
-      LOG.warn(e);
+      if (isUnitTestMode) {
+        throw new RuntimeException(e);
+      }
+      else {
+        consoleView.print(e.getMessage(), ConsoleViewContentType.ERROR_OUTPUT);
+        LOG.warn(e);
+      }
     }
 
-    RunContentDescriptor runContentDescriptor = new RunContentDescriptor(
-      consoleView,
-      processHandler,
-      consoleView.getComponent(),
-      ObjectUtils.notNull(perlCommandLine.getConsoleTitle(), perlCommandLine.getCommandLineString()),
-      ObjectUtils.notNull(perlCommandLine.getConsoleIcon(), PerlIcons.PERL_LANGUAGE_ICON)
-    );
+    if (!isUnitTestMode) {
+      RunContentDescriptor runContentDescriptor = new RunContentDescriptor(
+        consoleView,
+        processHandler,
+        consoleView.getComponent(),
+        ObjectUtils.notNull(perlCommandLine.getConsoleTitle(), perlCommandLine.getCommandLineString()),
+        ObjectUtils.notNull(perlCommandLine.getConsoleIcon(), PerlIcons.PERL_LANGUAGE_ICON)
+      );
 
-    ExecutionManager.getInstance(project).getContentManager().showRunContent(runExecutor, runContentDescriptor);
+      ExecutionManager.getInstance(project).getContentManager().showRunContent(runExecutor, runContentDescriptor);
+    }
     if (processHandler != null) {
-      consoleView.attachToProcess(processHandler);
+      if (!isUnitTestMode) {
+        consoleView.attachToProcess(processHandler);
+      }
       processHandler.startNotify();
+      if (isUnitTestMode) {
+        processHandler.waitFor();
+      }
     }
   }
 
