@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -289,6 +289,7 @@ public class PerlCommandLine extends GeneralCommandLine {
   public Process createProcess() throws ExecutionException {
     LOG.info("Executing: " + getCommandLineString());
     LOG.info("  environment: " + getEnvironment() + " (+" + getParentEnvironmentType() + ")");
+    LOG.info("  working dir: " + getWorkDirectory());
     PerlHostData hostData = getEffectiveHostData();
     LOG.info("  host = " + hostData +
              "; vm = " + getEffectiveVersionManagerData() +
