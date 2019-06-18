@@ -22,6 +22,7 @@ import com.perl5.lang.mojolicious.MojoIcons;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
+import java.util.regex.Pattern;
 
 public class MojoPlugin extends MojoProject {
   public MojoPlugin(@NotNull VirtualFile root) {
@@ -38,5 +39,15 @@ public class MojoPlugin extends MojoProject {
   @Override
   public String getTypeName() {
     return MojoBundle.message("mojo.plugin.type.name");
+  }
+
+  public static class NameValidator extends MojoProject.NameValidator {
+    private static final Pattern NAME_PATTERN = Pattern.compile("^[A-Za-z](?:[\\w_-]|::)+$");
+
+    @NotNull
+    @Override
+    protected Pattern getPattern() {
+      return NAME_PATTERN;
+    }
   }
 }

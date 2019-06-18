@@ -16,10 +16,12 @@
 
 package com.perl5.lang.mojolicious.model;
 
+import com.intellij.openapi.ui.InputValidator;
 import com.intellij.openapi.vfs.VirtualFile;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
+import java.util.regex.Pattern;
 
 /**
  * Base class for mojo-based projects: applications and plugins
@@ -69,5 +71,20 @@ public abstract class MojoProject {
   @Override
   public String toString() {
     return getTypeName() + ": " + myRoot;
+  }
+
+  protected static abstract class NameValidator implements InputValidator {
+    @NotNull
+    protected abstract Pattern getPattern();
+
+    @Override
+    public boolean checkInput(String inputString) {
+      return getPattern().matcher(inputString).matches();
+    }
+
+    @Override
+    public boolean canClose(String inputString) {
+      return checkInput(inputString);
+    }
   }
 }

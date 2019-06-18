@@ -16,7 +16,6 @@
 
 package com.perl5.lang.mojolicious.model;
 
-import com.intellij.openapi.ui.InputValidator;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.lang.mojolicious.MojoBundle;
 import com.perl5.lang.mojolicious.MojoIcons;
@@ -42,17 +41,13 @@ public class MojoApp extends MojoProject {
     return MojoBundle.message("mojo.app.type.name");
   }
 
-  public static class NameValidator implements InputValidator {
+  public static class NameValidator extends MojoProject.NameValidator {
     private static final Pattern NAME_PATTERN = Pattern.compile("^[A-Z](?:\\w|::)+$");
 
+    @NotNull
     @Override
-    public boolean checkInput(String inputString) {
-      return NAME_PATTERN.matcher(inputString).matches();
-    }
-
-    @Override
-    public boolean canClose(String inputString) {
-      return checkInput(inputString);
+    protected Pattern getPattern() {
+      return NAME_PATTERN;
     }
   }
 }
