@@ -19,9 +19,11 @@ package project;
 import base.PerlPlatformTestCase;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.testFramework.PlatformTestUtil;
 import com.perl5.lang.mojolicious.MojoUtil;
 import com.perl5.lang.mojolicious.idea.actions.MojoGenerateAppAction;
+import com.perl5.lang.mojolicious.idea.actions.MojoGenerateLiteAppAction;
 import com.perl5.lang.mojolicious.idea.actions.MojoGeneratePluginAction;
 import com.perl5.lang.mojolicious.model.MojoApp;
 import com.perl5.lang.mojolicious.model.MojoPlugin;
@@ -58,6 +60,15 @@ public class MojoProjectTest extends PerlPlatformTestCase {
     }
     assertInstanceOf(projects.get(0), MojoApp.class);
     LOG.info("Got: " + projects.get(0));
+  }
+
+  @Test
+  public void testGenerateLiteAppAction() {
+    assertMojoAvailable();
+    VirtualFile mainContentRoot = getMainContentRoot();
+    runAction(new MojoGenerateLiteAppAction(), mainContentRoot);
+    refreshAndRescanForProjects().getMojoProjects();
+    assertNotNull(mainContentRoot.findChild("myapp.pl"));
   }
 
   @NotNull
