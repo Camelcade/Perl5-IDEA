@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,12 +25,12 @@ import com.intellij.execution.ui.ConsoleView;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.terminal.TerminalExecutionConsole;
+import com.perl5.lang.perl.idea.sdk.host.PerlConsoleView;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
-import com.perl5.lang.perl.idea.sdk.host.PerlHostDataProvider;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class PerlTerminalExecutionConsole extends TerminalExecutionConsole implements PerlHostDataProvider {
+public class PerlTerminalExecutionConsole extends TerminalExecutionConsole implements PerlConsoleView {
   @Nullable
   private PerlHostData myHostData;
 

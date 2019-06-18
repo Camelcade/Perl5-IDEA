@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,12 +19,12 @@ package com.perl5.lang.perl.idea.run.prove;
 import com.intellij.execution.testframework.sm.runner.ui.SMTRunnerConsoleView;
 import com.intellij.openapi.project.Project;
 import com.perl5.lang.perl.idea.execution.PerlTerminalExecutionConsole;
+import com.perl5.lang.perl.idea.sdk.host.PerlConsoleView;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
-import com.perl5.lang.perl.idea.sdk.host.PerlHostDataProvider;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-class PerlSMTRunnerConsoleView extends SMTRunnerConsoleView implements PerlHostDataProvider {
+class PerlSMTRunnerConsoleView extends SMTRunnerConsoleView implements PerlConsoleView {
   private PerlHostData myHostData;
 
   public PerlSMTRunnerConsoleView(@NotNull Project project,

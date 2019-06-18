@@ -14,32 +14,14 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.run.remote;
+package com.perl5.lang.perl.idea.sdk.host;
 
-import com.intellij.execution.impl.ConsoleViewImpl;
-import com.intellij.openapi.project.Project;
-import com.perl5.lang.perl.idea.sdk.host.PerlConsoleView;
-import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
+import com.intellij.execution.ui.ConsoleView;
+import com.intellij.openapi.Disposable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class PerlRunConsole extends ConsoleViewImpl implements PerlConsoleView {
-  @Nullable
-  private PerlHostData<?, ?> myHostData;
-
-  public PerlRunConsole(@NotNull Project project) {
-    super(project, true);
-  }
-
-  @Nullable
-  @Override
-  public PerlHostData<?, ?> getHostData() {
-    return myHostData;
-  }
-
+public interface PerlConsoleView extends ConsoleView, PerlHostDataProvider, Disposable {
   @NotNull
-  public PerlRunConsole withHostData(@Nullable PerlHostData<?, ?> hostData) {
-    myHostData = hostData;
-    return this;
-  }
+  PerlConsoleView withHostData(@Nullable PerlHostData<?, ?> hostData);
 }
