@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class PerlSynInterpreterAction extends PerlActionBase {
   public PerlSynInterpreterAction() {
-    getTemplatePresentation().setText(PerlBundle.message("perl.action.sync.interpreter"));
+    super(PerlBundle.message("perl.action.sync.interpreter"));
   }
 
   @Override

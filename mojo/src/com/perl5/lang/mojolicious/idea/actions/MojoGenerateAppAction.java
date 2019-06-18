@@ -29,7 +29,7 @@ import java.util.List;
 public class MojoGenerateAppAction extends MojoGenerateAction {
 
   public MojoGenerateAppAction() {
-    getTemplatePresentation().setText("Mojo Application");
+    super("Mojo Application");
   }
 
   protected List<String> computeGenerationParameters(@NotNull AnActionEvent e, @NotNull VirtualFile mojoScript) {

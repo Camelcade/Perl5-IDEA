@@ -20,10 +20,36 @@ import com.intellij.openapi.actionSystem.ActionPlaces;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
+import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import javax.swing.*;
 
 
 public abstract class PerlActionBase extends AnAction {
+  public PerlActionBase() {
+  }
+
+  public PerlActionBase(@Nls(capitalization = Nls.Capitalization.Title) @Nullable String text,
+                        @Nls(capitalization = Nls.Capitalization.Sentence) @Nullable String description,
+                        @Nullable Icon icon) {
+    super(text, description, icon);
+  }
+
+  public PerlActionBase(@Nls(capitalization = Nls.Capitalization.Title) @Nullable String text,
+                        @Nullable Icon icon) {
+    this(text, null, icon);
+  }
+
+  public PerlActionBase(@Nls(capitalization = Nls.Capitalization.Title) @Nullable String text) {
+    this(text, null, null);
+  }
+
+  public PerlActionBase(Icon icon) {
+    super(icon);
+  }
+
   protected boolean isEnabled(AnActionEvent event) {
     return PerlProjectManager.isPerlEnabled(event.getDataContext());
   }

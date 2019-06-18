@@ -22,12 +22,18 @@ import com.intellij.psi.PsiFile;
 import com.perl5.lang.perl.fileTypes.PurePerlFileType;
 import com.perl5.lang.perl.util.PerlActionUtil;
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * Actions applicable to files with pure perl syntax
  */
 public abstract class PurePerlActionBase extends PerlActionBase {
+
+  public PurePerlActionBase(@Nls(capitalization = Nls.Capitalization.Title) @Nullable String text) {
+    super(text);
+  }
+
   @Override
   protected boolean isEnabled(AnActionEvent event) {
     return super.isEnabled(event) && isMyFile(PerlActionUtil.getPsiFileFromEvent(event));

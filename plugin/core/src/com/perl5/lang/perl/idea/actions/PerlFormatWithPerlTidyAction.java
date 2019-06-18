@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,7 +56,7 @@ public class PerlFormatWithPerlTidyAction extends PurePerlActionBase {
   private static final String SCRIPT_NAME = "perltidy";
 
   public PerlFormatWithPerlTidyAction() {
-    getTemplatePresentation().setText(PerlBundle.message("perl.action.reformat.perl.tidy"));
+    super(PerlBundle.message("perl.action.reformat.perl.tidy"));
   }
 
   @NotNull

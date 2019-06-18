@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ import java.util.Arrays;
 public abstract class PerlInstallPackageActionBase extends PerlActionBase {
 
   public PerlInstallPackageActionBase(@NotNull String managerName) {
-    getTemplatePresentation().setText(PerlBundle.message("perl.action.install.packages", managerName));
+    super(PerlBundle.message("perl.action.install.packages", managerName));
   }
 
   @Override

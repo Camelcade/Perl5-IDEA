@@ -26,7 +26,7 @@ import java.util.List;
 public class MojoGenerateLiteAppAction extends MojoGenerateAction {
 
   public MojoGenerateLiteAppAction() {
-    getTemplatePresentation().setText("Mojo Lite Application");
+    super("Mojo Lite Application");
   }
 
   protected List<String> computeGenerationParameters(@NotNull AnActionEvent e, @NotNull VirtualFile mojoScript) {

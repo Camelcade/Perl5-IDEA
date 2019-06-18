@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.idea.actions;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.Presentation;
 import com.intellij.openapi.project.Project;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.xsubs.PerlXSubsState;
@@ -26,8 +25,7 @@ import org.jetbrains.annotations.NotNull;
 public class PerlRegenerateXSubsAction extends PerlActionBase {
 
   public PerlRegenerateXSubsAction() {
-    Presentation presentation = getTemplatePresentation();
-    presentation.setText(PerlBundle.message("perl.action.generate.xsubs"));
+    super(PerlBundle.message("perl.action.generate.xsubs"));
   }
 
   @Override

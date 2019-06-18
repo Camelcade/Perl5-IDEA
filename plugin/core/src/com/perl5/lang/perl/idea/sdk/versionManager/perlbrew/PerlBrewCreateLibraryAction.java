@@ -37,7 +37,7 @@ import org.jetbrains.annotations.NotNull;
 public class PerlBrewCreateLibraryAction extends PerlBrewActionBase implements DumbAware {
 
   public PerlBrewCreateLibraryAction() {
-    getTemplatePresentation().setText(PerlBundle.message("perl.vm.perlbrew.create.lib"));
+    super(PerlBundle.message("perl.vm.perlbrew.create.lib"));
   }
 
   @Override

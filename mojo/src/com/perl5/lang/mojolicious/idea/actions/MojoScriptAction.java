@@ -21,11 +21,19 @@ import com.intellij.openapi.project.DumbAware;
 import com.perl5.lang.mojolicious.MojoIcons;
 import com.perl5.lang.mojolicious.MojoUtil;
 import com.perl5.lang.perl.idea.actions.PerlActionBase;
+import org.jetbrains.annotations.Nls;
+import org.jetbrains.annotations.Nullable;
+
+import javax.swing.*;
 
 public abstract class MojoScriptAction extends PerlActionBase implements DumbAware {
 
-  public MojoScriptAction() {
-    getTemplatePresentation().setIcon(MojoIcons.MOJO_LOGO);
+  public MojoScriptAction(@Nls(capitalization = Nls.Capitalization.Title) @Nullable String text) {
+    this(text, MojoIcons.MOJO_LOGO);
+  }
+
+  public MojoScriptAction(@Nls(capitalization = Nls.Capitalization.Title) @Nullable String text, @Nullable Icon icon) {
+    super(text, icon);
   }
 
   @Override

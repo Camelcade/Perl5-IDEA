@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.idea.sdk.versionManager;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.Presentation;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.perl5.PerlBundle;
@@ -30,8 +29,7 @@ import java.util.Objects;
 
 public class PerlInstallAction extends PerlActionBase implements DumbAware {
   public PerlInstallAction() {
-    Presentation presentation = getTemplatePresentation();
-    presentation.setText(PerlBundle.message("perl.vm.install.perl"));
+    super(PerlBundle.message("perl.vm.install.perl"));
   }
 
   @Override

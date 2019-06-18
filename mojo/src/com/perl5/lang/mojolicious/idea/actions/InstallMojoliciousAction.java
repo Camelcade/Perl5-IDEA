@@ -17,7 +17,6 @@
 package com.perl5.lang.mojolicious.idea.actions;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.Presentation;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.perl5.lang.mojolicious.MojoBundle;
 import com.perl5.lang.mojolicious.MojoIcons;
@@ -29,9 +28,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class InstallMojoliciousAction extends PerlActionBase {
   public InstallMojoliciousAction() {
-    Presentation presentation = getTemplatePresentation();
-    presentation.setIcon(MojoIcons.MOJO_APP_ICON);
-    presentation.setText(MojoBundle.message("mojo.action.install.action.title"));
+    super(MojoBundle.message("mojo.action.install.action.title"), MojoIcons.MOJO_APP_ICON);
   }
 
   @Override

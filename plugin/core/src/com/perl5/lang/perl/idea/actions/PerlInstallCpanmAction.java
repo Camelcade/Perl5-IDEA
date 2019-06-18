@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.idea.actions;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.Presentation;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.perl5.PerlBundle;
@@ -28,8 +27,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class PerlInstallCpanmAction extends PerlActionBase {
   public PerlInstallCpanmAction() {
-    Presentation templatePresentation = getTemplatePresentation();
-    templatePresentation.setText(PerlBundle.message("perl.action.install.cpanm"));
+    //noinspection DialogTitleCapitalization
+    super(PerlBundle.message("perl.action.install.cpanm"));
   }
 
   @Override

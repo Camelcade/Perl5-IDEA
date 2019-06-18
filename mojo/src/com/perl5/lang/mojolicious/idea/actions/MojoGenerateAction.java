@@ -28,13 +28,23 @@ import com.perl5.lang.mojolicious.MojoIcons;
 import com.perl5.lang.mojolicious.MojoUtil;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.util.PerlRunUtil;
+import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.swing.*;
 import java.util.List;
 
 public abstract class MojoGenerateAction extends MojoScriptAction {
   private static final String GENERATE_COMMAND = "generate";
+
+  public MojoGenerateAction(@Nls(capitalization = Nls.Capitalization.Title) @Nullable String text) {
+    super(text);
+  }
+
+  public MojoGenerateAction(@Nls(capitalization = Nls.Capitalization.Title) @Nullable String text, @Nullable Icon icon) {
+    super(text, icon);
+  }
 
   @Override
   protected boolean isEnabled(AnActionEvent event) {

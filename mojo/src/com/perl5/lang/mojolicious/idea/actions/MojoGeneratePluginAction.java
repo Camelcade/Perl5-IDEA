@@ -17,7 +17,6 @@
 package com.perl5.lang.mojolicious.idea.actions;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.Presentation;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -29,9 +28,7 @@ import java.util.List;
 
 public class MojoGeneratePluginAction extends MojoGenerateAction {
   public MojoGeneratePluginAction() {
-    Presentation presentation = getTemplatePresentation();
-    presentation.setText("Mojo Plugin");
-    presentation.setIcon(MojoIcons.pluginIcon());
+    super("Mojo Plugin", MojoIcons.pluginIcon());
   }
 
   protected List<String> computeGenerationParameters(@NotNull AnActionEvent e, @NotNull VirtualFile mojoScript) {
