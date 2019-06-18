@@ -104,6 +104,7 @@ import com.intellij.openapi.projectRoots.impl.ProjectJdkImpl;
 import com.intellij.openapi.roots.ContentEntry;
 import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.roots.ModuleRootManager;
+import com.intellij.openapi.ui.InputValidator;
 import com.intellij.openapi.util.*;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
@@ -2442,4 +2443,28 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     }
     return result;
   }
+
+  protected void assertNameValid(@NotNull String name) {
+    doTestNameValidator(name, true);
+  }
+
+  protected void assertNameInvalid(@NotNull String name) {
+    doTestNameValidator(name, false);
+  }
+
+  @NotNull
+  protected InputValidator getValidator() {
+    throw new RuntimeException("Test should implement this method");
+  }
+
+  protected void doTestNameValidator(@NotNull String name, boolean result) {
+    boolean actual = getValidator().checkInput(name);
+    if (result) {
+      assertTrue("Name expected to be valid: " + name, actual);
+    }
+    else {
+      assertFalse("Name expected to be invalid: " + name, actual);
+    }
+  }
+
 }

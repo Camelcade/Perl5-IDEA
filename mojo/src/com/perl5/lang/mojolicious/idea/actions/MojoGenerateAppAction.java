@@ -22,6 +22,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.lang.mojolicious.MojoBundle;
 import com.perl5.lang.mojolicious.MojoIcons;
+import com.perl5.lang.mojolicious.model.MojoApp;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -38,7 +39,9 @@ public class MojoGenerateAppAction extends MojoGenerateAction {
       getEventProject(e),
       MojoBundle.message("mojo.action.generate.app.prompt.message"),
       MojoBundle.message("mojo.action.generate.app.prompt.title"),
-      MojoIcons.MOJO_LOGO);
+      MojoIcons.MOJO_LOGO,
+      "",
+      new MojoApp.NameValidator());
     return StringUtil.isEmpty(appName) ? null : Arrays.asList("app", appName);
   }
 }
