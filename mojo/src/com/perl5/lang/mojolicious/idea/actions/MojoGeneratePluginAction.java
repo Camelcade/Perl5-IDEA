@@ -20,6 +20,7 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.perl5.lang.mojolicious.MojoBundle;
 import com.perl5.lang.mojolicious.MojoIcons;
 import org.jetbrains.annotations.NotNull;
 
@@ -28,11 +29,15 @@ import java.util.List;
 
 public class MojoGeneratePluginAction extends MojoGenerateAction {
   public MojoGeneratePluginAction() {
-    super("Mojo Plugin", MojoIcons.pluginIcon());
+    super(MojoBundle.message("mojo.action.generate.plugin"), MojoIcons.pluginIcon());
   }
 
   protected List<String> computeGenerationParameters(@NotNull AnActionEvent e, @NotNull VirtualFile mojoScript) {
-    String pluginName = Messages.showInputDialog(getEventProject(e), "Plugin name", "Generate Plugin", MojoIcons.pluginIcon());
+    String pluginName = Messages.showInputDialog(
+      getEventProject(e),
+      MojoBundle.message("mojo.action.generate.plugin.prompt.message"),
+      MojoBundle.message("mojo.action.generate.plugin.prompt.title"),
+      MojoIcons.pluginIcon());
     return StringUtil.isEmpty(pluginName) ? null : Arrays.asList("plugin", pluginName);
   }
 }

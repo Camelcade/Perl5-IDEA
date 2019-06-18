@@ -18,6 +18,7 @@ package com.perl5.lang.mojolicious.idea.actions;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.perl5.lang.mojolicious.MojoBundle;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
@@ -26,7 +27,7 @@ import java.util.List;
 public class MojoGenerateLiteAppAction extends MojoGenerateAction {
 
   public MojoGenerateLiteAppAction() {
-    super("Mojo Lite Application");
+    super(MojoBundle.message("mojo.action.generate.lite.app"));
   }
 
   protected List<String> computeGenerationParameters(@NotNull AnActionEvent e, @NotNull VirtualFile mojoScript) {
