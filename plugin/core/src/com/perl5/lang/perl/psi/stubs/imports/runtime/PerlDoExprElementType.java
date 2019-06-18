@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.psi.stubs.imports.runtime;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
@@ -24,7 +25,6 @@ import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.PerlDoExpr;
 import com.perl5.lang.perl.psi.impl.PsiPerlDoExprImpl;
 import com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil;
-import com.twelvemonkeys.lang.StringUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
