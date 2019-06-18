@@ -17,8 +17,8 @@
 package com.perl5;
 
 
-import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.openapi.util.IconLoader;
+import com.intellij.openapi.util.NotNullLazyValue;
 import com.intellij.ui.LayeredIcon;
 import com.intellij.util.IconUtil;
 import org.jetbrains.annotations.NotNull;
@@ -90,15 +90,15 @@ public class PerlIcons {
    * @see #createIconWithModifier(Icon, Icon)
    */
   @NotNull
-  public static AtomicNotNullLazyValue<Icon> createLazyIconWithModifier(@NotNull Icon baseIcon, @NotNull Icon modifierIcon) {
-    return AtomicNotNullLazyValue.createValue(() -> createIconWithModifier(baseIcon, modifierIcon));
+  public static NotNullLazyValue<Icon> createLazyIconWithModifier(@NotNull Icon baseIcon, @NotNull Icon modifierIcon) {
+    return NotNullLazyValue.createValue(() -> createIconWithModifier(baseIcon, modifierIcon));
   }
 
   @NotNull
-  public static AtomicNotNullLazyValue<Icon> createLazyIconWithModifier(@NotNull Icon baseIcon,
-                                                                        @NotNull Icon modifierIcon,
-                                                                        float modifierScale) {
-    return AtomicNotNullLazyValue.createValue(() -> createIconWithModifier(baseIcon, modifierIcon, modifierScale));
+  public static NotNullLazyValue<Icon> createLazyIconWithModifier(@NotNull Icon baseIcon,
+                                                                  @NotNull Icon modifierIcon,
+                                                                  float modifierScale) {
+    return NotNullLazyValue.createValue(() -> createIconWithModifier(baseIcon, modifierIcon, modifierScale));
   }
 
   @NotNull

@@ -17,8 +17,8 @@
 package com.perl5.lang.mojolicious;
 
 import com.intellij.icons.AllIcons;
-import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.openapi.util.IconLoader;
+import com.intellij.openapi.util.NotNullLazyValue;
 import com.perl5.PerlIcons;
 import org.jetbrains.annotations.NotNull;
 
@@ -28,10 +28,8 @@ public final class MojoIcons {
   public static final Icon MOJO_FILE = IconLoader.getIcon("/icons/mojolicious.png");
   public static final Icon MOJO_LOGO = IconLoader.getIcon("/icons/mojolicious_color.png");
   public static final Icon MOJO_APP_ICON = MOJO_LOGO;
-  private static final AtomicNotNullLazyValue<Icon> MOJO_ROOT =
-    PerlIcons.createLazyIconWithModifier(PerlIcons.TEMPLATE_ROOT, MOJO_LOGO);
-  private static final AtomicNotNullLazyValue<Icon> MOJO_PLUGIN_LOGO =
-    PerlIcons.createLazyIconWithModifier(AllIcons.Nodes.Plugin, MOJO_LOGO);
+  private static final NotNullLazyValue<Icon> MOJO_ROOT = PerlIcons.createLazyIconWithModifier(PerlIcons.TEMPLATE_ROOT, MOJO_LOGO);
+  private static final NotNullLazyValue<Icon> MOJO_PLUGIN_LOGO = PerlIcons.createLazyIconWithModifier(AllIcons.Nodes.Plugin, MOJO_LOGO);
 
   @NotNull
   public static Icon pluginIcon() {
