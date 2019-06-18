@@ -32,25 +32,32 @@ import java.util.Collection;
 
 public class MojoTreeStructureProvider implements TreeStructureProvider {
   @NotNull
+  private final MojoProjectManager myMojoProjectManager;
+
+  public MojoTreeStructureProvider(@NotNull Project project) {
+    myMojoProjectManager = MojoProjectManager.getInstance(project);
+  }
+
+  @NotNull
   @Override
   public Collection<AbstractTreeNode> modify(@NotNull AbstractTreeNode parent,
                                              @NotNull Collection<AbstractTreeNode> children,
                                              ViewSettings settings) {
+    if (!myMojoProjectManager.isMojoAvailable()) {
+      return children;
+    }
+
     return ContainerUtil.map(children, node -> {
       if (!(node instanceof PsiDirectoryNode)) {
         return node;
       }
-      Project project = node.getProject();
-      if (project == null || project.isDefault()) {
-        return node;
-      }
 
-      MojoProject mojoProject = MojoProjectManager.getInstance(project).getMojoProject(((PsiDirectoryNode)node).getVirtualFile());
+      MojoProject mojoProject = myMojoProjectManager.getMojoProject(((PsiDirectoryNode)node).getVirtualFile());
       if (mojoProject == null) {
         return node;
       }
 
-      return new PsiDirectoryNode(project, ((PsiDirectoryNode)node).getValue(), ((PsiDirectoryNode)node).getSettings()) {
+      return new PsiDirectoryNode(node.getProject(), ((PsiDirectoryNode)node).getValue(), ((PsiDirectoryNode)node).getSettings()) {
         @Override
         protected void updateImpl(@NotNull PresentationData data) {
           super.updateImpl(data);

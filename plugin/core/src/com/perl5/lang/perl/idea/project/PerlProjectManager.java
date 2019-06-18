@@ -231,6 +231,10 @@ public class PerlProjectManager {
     addExternalLibraries(Collections.singletonList(root));
   }
 
+  public boolean isPerlEnabled() {
+    return !myProject.isDefault() && getProjectSdk() != null;
+  }
+
   public void setExternalLibraries(@NotNull List<VirtualFile> roots) {
     WriteAction.run(() -> {
       myPerlSettings.setExternalLibrariesPaths(Collections.emptyList());
@@ -351,7 +355,7 @@ public class PerlProjectManager {
   }
 
   public static boolean isPerlEnabled(@Nullable Project project) {
-    return project != null && !project.isDisposed() && getInstance(project).getProjectSdk() != null;
+    return project != null && !project.isDisposed() && getInstance(project).isPerlEnabled();
   }
 
   public static boolean isPerlEnabled(@NotNull DataContext dataContext) {

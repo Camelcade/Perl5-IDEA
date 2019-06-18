@@ -100,6 +100,13 @@ public class MojoProjectManager {
     });
   }
 
+  /**
+   * @return true iff mojo is available for the project: perl is enabled and mojo installed
+   */
+  public boolean isMojoAvailable() {
+    return MojoUtil.isMojoAvailable(myProject);
+  }
+
   @Contract("null->null")
   @Nullable
   public MojoProject getMojoProject(@Nullable VirtualFile root) {

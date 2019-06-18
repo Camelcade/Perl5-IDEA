@@ -32,6 +32,7 @@ import java.util.Collection;
 import java.util.Map;
 
 public class PerlTreeStructureProvider implements TreeStructureProvider {
+  @NotNull
   private final PerlProjectManager myProjectManager;
 
   public PerlTreeStructureProvider(Project project) {
@@ -43,6 +44,10 @@ public class PerlTreeStructureProvider implements TreeStructureProvider {
   public Collection<AbstractTreeNode> modify(@NotNull AbstractTreeNode parent,
                                              @NotNull Collection<AbstractTreeNode> children,
                                              ViewSettings settings) {
+    if (!myProjectManager.isPerlEnabled()) {
+      return children;
+    }
+
     Map<VirtualFile, PerlSourceRootType> roots = myProjectManager.getAllModulesRoots();
     return ContainerUtil.map2List(children, node -> {
       if (!(node instanceof PsiDirectoryNode)) {
