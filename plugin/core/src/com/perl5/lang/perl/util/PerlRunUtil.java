@@ -45,6 +45,7 @@ import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.SdkTypeId;
 import com.intellij.openapi.roots.OrderRootType;
 import com.intellij.openapi.roots.ex.ProjectRootManagerEx;
+import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.util.EmptyRunnable;
 import com.intellij.openapi.util.Key;
 import com.intellij.openapi.util.text.StringUtil;
@@ -59,7 +60,9 @@ import com.perl5.lang.perl.adapters.CpanminusAdapter;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.execution.PerlTerminalExecutionConsole;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
+import com.perl5.lang.perl.idea.run.remote.PerlRunConsole;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
+import com.perl5.lang.perl.idea.sdk.host.PerlConsoleView;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandler;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
@@ -450,8 +453,8 @@ public class PerlRunUtil {
     Executor runExecutor = DefaultRunExecutor.getRunExecutorInstance();
     Project project = perlCommandLine.getNonNullEffectiveProject();
     boolean isUnitTestMode = ApplicationManager.getApplication().isUnitTestMode();
-    PerlTerminalExecutionConsole consoleView = isUnitTestMode ? null :
-      new PerlTerminalExecutionConsole(project).withHostData(perlCommandLine.getEffectiveHostData());
+    PerlConsoleView consoleView = isUnitTestMode ? new PerlRunConsole(project) : new PerlTerminalExecutionConsole(project);
+    consoleView.withHostData(perlCommandLine.getEffectiveHostData());
     ProcessHandler processHandler = null;
     try {
       processHandler = PerlHostData.createConsoleProcessHandler(perlCommandLine.withPty(!isUnitTestMode));
@@ -465,33 +468,25 @@ public class PerlRunUtil {
       }
     }
     catch (ExecutionException e) {
-      if (isUnitTestMode) {
-        throw new RuntimeException(e);
-      }
-      else {
-        consoleView.print(e.getMessage(), ConsoleViewContentType.ERROR_OUTPUT);
-        LOG.warn(e);
-      }
+      consoleView.print(e.getMessage(), ConsoleViewContentType.ERROR_OUTPUT);
+      LOG.warn(e);
     }
 
-    if (!isUnitTestMode) {
-      RunContentDescriptor runContentDescriptor = new RunContentDescriptor(
-        consoleView,
-        processHandler,
-        consoleView.getComponent(),
-        ObjectUtils.notNull(perlCommandLine.getConsoleTitle(), perlCommandLine.getCommandLineString()),
-        ObjectUtils.notNull(perlCommandLine.getConsoleIcon(), PerlIcons.PERL_LANGUAGE_ICON)
-      );
+    RunContentDescriptor runContentDescriptor = new RunContentDescriptor(
+      consoleView,
+      processHandler,
+      consoleView.getComponent(),
+      ObjectUtils.notNull(perlCommandLine.getConsoleTitle(), perlCommandLine.getCommandLineString()),
+      ObjectUtils.notNull(perlCommandLine.getConsoleIcon(), PerlIcons.PERL_LANGUAGE_ICON)
+    );
 
-      ExecutionManager.getInstance(project).getContentManager().showRunContent(runExecutor, runContentDescriptor);
-    }
+    ExecutionManager.getInstance(project).getContentManager().showRunContent(runExecutor, runContentDescriptor);
     if (processHandler != null) {
-      if (!isUnitTestMode) {
-        consoleView.attachToProcess(processHandler);
-      }
+      consoleView.attachToProcess(processHandler);
       processHandler.startNotify();
       if (isUnitTestMode) {
         processHandler.waitFor();
+        Disposer.dispose(consoleView);
       }
     }
   }

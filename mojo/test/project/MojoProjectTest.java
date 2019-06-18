@@ -52,13 +52,12 @@ public class MojoProjectTest extends PerlPlatformTestCase {
     assertMojoAvailable();
     Messages.setTestInputDialog(message -> "Test::App");
     runAction(new MojoGenerateAppAction(), getMainContentRoot());
-    refreshAndRescanForProjects();
-    List<MojoProject> projects = MojoProjectManager.getInstance(getProject()).getMojoProjects();
+    List<MojoProject> projects = refreshAndRescanForProjects().getMojoProjects();
     if (projects.size() != 1) {
       fail("Expected an application, got: " + projects);
     }
     assertInstanceOf(projects.get(0), MojoApp.class);
-    LOG.warn("Got: " + projects.get(0));
+    LOG.info("Got: " + projects.get(0));
   }
 
   @NotNull
@@ -75,13 +74,12 @@ public class MojoProjectTest extends PerlPlatformTestCase {
     assertMojoAvailable();
     Messages.setTestInputDialog(message -> "Test::Plugin");
     runAction(new MojoGeneratePluginAction(), getMainContentRoot());
-    refreshAndRescanForProjects();
-    List<MojoProject> projects = MojoProjectManager.getInstance(getProject()).getMojoProjects();
+    List<MojoProject> projects = refreshAndRescanForProjects().getMojoProjects();
     if (projects.size() != 1) {
       fail("Expected a plugin, got: " + projects);
     }
     assertInstanceOf(projects.get(0), MojoPlugin.class);
-    LOG.warn("Got: " + projects.get(0));
+    LOG.info("Got: " + projects.get(0));
   }
 
   private void assertMojoAvailable() {
