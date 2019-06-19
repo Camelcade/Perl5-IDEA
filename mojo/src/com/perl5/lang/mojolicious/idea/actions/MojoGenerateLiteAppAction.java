@@ -16,13 +16,13 @@
 
 package com.perl5.lang.mojolicious.idea.actions;
 
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.ui.InputValidator;
 import com.perl5.lang.mojolicious.MojoBundle;
+import com.perl5.lang.mojolicious.MojoIcons;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.Collections;
-import java.util.List;
+import javax.swing.*;
 
 public class MojoGenerateLiteAppAction extends MojoGenerateAction {
 
@@ -30,7 +30,39 @@ public class MojoGenerateLiteAppAction extends MojoGenerateAction {
     super(MojoBundle.message("mojo.action.generate.lite.app"));
   }
 
-  protected List<String> computeGenerationParameters(@NotNull AnActionEvent e, @NotNull VirtualFile mojoScript) {
-    return Collections.singletonList("lite_app");
+  @Nullable
+  @Override
+  protected InputValidator getNameValidator() {
+    return null;
+  }
+
+  @NotNull
+  @Override
+  protected Icon getPromptIcon() {
+    return MojoIcons.MOJO_LITE_APP_ICON;
+  }
+
+  @NotNull
+  @Override
+  protected String getPromptTitle() {
+    return MojoBundle.message("mojo.action.generate.lite.app.prompt.title");
+  }
+
+  @NotNull
+  @Override
+  protected String getPromptMessage() {
+    return MojoBundle.message("mojo.action.generate.lite.app.prompt.message");
+  }
+
+  @NotNull
+  @Override
+  protected String getGenerateCommand() {
+    return "lite_app";
+  }
+
+  @NotNull
+  @Override
+  protected String getDefaultName() {
+    return "myapp.pl";
   }
 }

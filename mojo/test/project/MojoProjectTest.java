@@ -66,9 +66,10 @@ public class MojoProjectTest extends PerlPlatformTestCase {
   public void testGenerateLiteAppAction() {
     assertMojoAvailable();
     VirtualFile mainContentRoot = getMainContentRoot();
+    Messages.setTestInputDialog(message -> "my_lite_app.pl");
     runAction(new MojoGenerateLiteAppAction(), mainContentRoot);
     refreshAndRescanForProjects().getMojoProjects();
-    assertNotNull(mainContentRoot.findChild("myapp.pl"));
+    assertNotNull(mainContentRoot.findChild("my_lite_app.pl"));
   }
 
   @NotNull

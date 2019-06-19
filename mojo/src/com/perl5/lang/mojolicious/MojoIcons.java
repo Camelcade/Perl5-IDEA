@@ -28,6 +28,7 @@ public final class MojoIcons {
   public static final Icon MOJO_FILE = IconLoader.getIcon("/icons/mojolicious.png");
   public static final Icon MOJO_LOGO = IconLoader.getIcon("/icons/mojolicious_color.png");
   public static final Icon MOJO_APP_ICON = MOJO_LOGO;
+  public static final Icon MOJO_LITE_APP_ICON = MOJO_LOGO;
   private static final NotNullLazyValue<Icon> MOJO_ROOT = PerlIcons.createLazyIconWithModifier(PerlIcons.TEMPLATE_ROOT, MOJO_LOGO);
   private static final NotNullLazyValue<Icon> MOJO_PLUGIN_LOGO = PerlIcons.createLazyIconWithModifier(AllIcons.Nodes.Plugin, MOJO_LOGO);
 
