@@ -50,7 +50,7 @@ public class MojoBaseProcessor extends PerlPackageProcessorBase implements
   @NotNull
   @Override
   public List<String> getLoadedPackageNames(PerlUseStatement useStatement) {
-    List<String> loadedPackages = new ArrayList<>(Arrays.asList(IO_HANDLE));
+    List<String> loadedPackages = new ArrayList<>(Collections.singletonList(IO_HANDLE));
     List<String> allOptions = useStatement.getImportParameters();
 
     if (allOptions != null) {
