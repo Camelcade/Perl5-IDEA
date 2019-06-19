@@ -16,31 +16,51 @@
 
 package com.perl5.lang.mojolicious.idea.actions;
 
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.ui.Messages;
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.lang.mojolicious.MojoBundle;
 import com.perl5.lang.mojolicious.MojoIcons;
 import com.perl5.lang.mojolicious.model.MojoPlugin;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Arrays;
-import java.util.List;
+import javax.swing.*;
 
 public class MojoGeneratePluginAction extends MojoGenerateAction {
   public MojoGeneratePluginAction() {
     super(MojoBundle.message("mojo.action.generate.plugin"), MojoIcons.pluginIcon());
   }
 
-  protected List<String> computeGenerationParameters(@NotNull AnActionEvent e, @NotNull VirtualFile mojoScript) {
-    String pluginName = Messages.showInputDialog(
-      getEventProject(e),
-      MojoBundle.message("mojo.action.generate.plugin.prompt.message"),
-      MojoBundle.message("mojo.action.generate.plugin.prompt.title"),
-      MojoIcons.pluginIcon(),
-      "",
-      new MojoPlugin.NameValidator());
-    return StringUtil.isEmpty(pluginName) ? null : Arrays.asList("plugin", pluginName);
+  @NotNull
+  @Override
+  protected MojoPlugin.NameValidator getNameValidator() {
+    return new MojoPlugin.NameValidator();
+  }
+
+  @NotNull
+  @Override
+  protected Icon getPromptIcon() {
+    return MojoIcons.pluginIcon();
+  }
+
+  @NotNull
+  @Override
+  protected String getPromptTitle() {
+    return MojoBundle.message("mojo.action.generate.plugin.prompt.title");
+  }
+
+  @NotNull
+  @Override
+  protected String getPromptMessage() {
+    return MojoBundle.message("mojo.action.generate.plugin.prompt.message");
+  }
+
+  @NotNull
+  @Override
+  protected String getGenerateCommand() {
+    return "plugin";
+  }
+
+  @NotNull
+  @Override
+  protected String getDefaultName() {
+    return "MyPlugin";
   }
 }

@@ -16,17 +16,14 @@
 
 package com.perl5.lang.mojolicious.idea.actions;
 
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.ui.Messages;
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.ui.InputValidator;
 import com.perl5.lang.mojolicious.MojoBundle;
 import com.perl5.lang.mojolicious.MojoIcons;
 import com.perl5.lang.mojolicious.model.MojoApp;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
-import java.util.List;
+import javax.swing.*;
 
 public class MojoGenerateAppAction extends MojoGenerateAction {
 
@@ -34,14 +31,39 @@ public class MojoGenerateAppAction extends MojoGenerateAction {
     super(MojoBundle.message("mojo.action.generate.app"));
   }
 
-  protected List<String> computeGenerationParameters(@NotNull AnActionEvent e, @NotNull VirtualFile mojoScript) {
-    String appName = Messages.showInputDialog(
-      getEventProject(e),
-      MojoBundle.message("mojo.action.generate.app.prompt.message"),
-      MojoBundle.message("mojo.action.generate.app.prompt.title"),
-      MojoIcons.MOJO_LOGO,
-      "",
-      new MojoApp.NameValidator());
-    return StringUtil.isEmpty(appName) ? null : Arrays.asList("app", appName);
+  @Nullable
+  @Override
+  protected InputValidator getNameValidator() {
+    return new MojoApp.NameValidator();
+  }
+
+  @NotNull
+  @Override
+  protected Icon getPromptIcon() {
+    return MojoIcons.MOJO_LOGO;
+  }
+
+  @NotNull
+  @Override
+  protected String getPromptTitle() {
+    return MojoBundle.message("mojo.action.generate.app.prompt.title");
+  }
+
+  @NotNull
+  @Override
+  protected String getPromptMessage() {
+    return MojoBundle.message("mojo.action.generate.app.prompt.message");
+  }
+
+  @NotNull
+  @Override
+  protected String getGenerateCommand() {
+    return "app";
+  }
+
+  @NotNull
+  @Override
+  protected String getDefaultName() {
+    return "MyApp";
   }
 }

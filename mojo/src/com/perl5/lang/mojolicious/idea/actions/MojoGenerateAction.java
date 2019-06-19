@@ -22,6 +22,9 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ProjectFileIndex;
+import com.intellij.openapi.ui.InputValidator;
+import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.mojolicious.MojoIcons;
@@ -33,6 +36,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import java.util.Arrays;
 import java.util.List;
 
 public abstract class MojoGenerateAction extends MojoScriptAction {
@@ -87,7 +91,42 @@ public abstract class MojoGenerateAction extends MojoScriptAction {
    * Should return generation parameters or null if generation should not be performed
    */
   @Nullable
-  protected abstract List<String> computeGenerationParameters(@NotNull AnActionEvent e, @NotNull VirtualFile mojoScript);
+  protected List<String> computeGenerationParameters(@NotNull AnActionEvent e, @NotNull VirtualFile mojoScript) {
+    String entityName = Messages.showInputDialog(
+      getEventProject(e), getPromptMessage(), getPromptTitle(), getPromptIcon(), getDefaultName(), getNameValidator());
+
+    return StringUtil.isEmpty(entityName) ? null : Arrays.asList(getGenerateCommand(), entityName);
+  }
+
+  @NotNull
+  protected abstract String getDefaultName();
+
+  @Nullable
+  protected abstract InputValidator getNameValidator();
+
+  /**
+   * @return icon for name prompt dialog
+   */
+  @NotNull
+  protected abstract Icon getPromptIcon();
+
+  /**
+   * @return title for name prompt dialog
+   */
+  @NotNull
+  protected abstract String getPromptTitle();
+
+  /**
+   * @return message for name prompt dialog
+   */
+  @NotNull
+  protected abstract String getPromptMessage();
+
+  /**
+   * @return a command that should be used to generate entity
+   */
+  @NotNull
+  protected abstract String getGenerateCommand();
 
   protected VirtualFile getTargetDirectory(AnActionEvent event) {
     Project project = getEventProject(event);
