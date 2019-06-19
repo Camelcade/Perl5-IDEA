@@ -68,7 +68,7 @@
     <packageProcessor key="lib"
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.LibProcessor"/>
     <packageProcessor key="Mojo::Base"
-                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MojoBaseProcessor"/>
+                      implementationClass="com.perl5.lang.perl.extensions.mojo.MojoBaseProcessor"/>
     <packageProcessor key="Moose"
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MooseProcessor"/>
     <packageProcessor key="Moose::Role"
