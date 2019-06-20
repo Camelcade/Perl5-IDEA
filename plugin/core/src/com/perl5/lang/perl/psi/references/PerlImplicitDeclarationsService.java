@@ -55,7 +55,7 @@ public class PerlImplicitDeclarationsService {
 
   public PerlImplicitDeclarationsService(@NotNull Project project) {
     myPsiManager = PsiManager.getInstance(project);
-    PerlImplicitDeclarationsProvider.EP_NAME.extensions().forEach(it -> it.registerDefinitions(this));
+    PerlImplicitDeclarationsProvider.EP_NAME.extensions().forEach(it -> it.registerDeclarations(this));
   }
 
   @NotNull

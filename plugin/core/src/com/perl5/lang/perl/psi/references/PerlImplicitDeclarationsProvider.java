@@ -61,7 +61,7 @@ public abstract class PerlImplicitDeclarationsProvider {
    *
    * @apiNote default implementation reads definitions from the xml file, provided by {@link #getDataFileName()}
    */
-  protected void registerDefinitions(@NotNull PerlImplicitDeclarationsService declarationsService) {
+  protected void registerDeclarations(@NotNull PerlImplicitDeclarationsService declarationsService) {
     String fileName = getDataFileName();
     if (StringUtil.isEmpty(fileName)) {
       return;
