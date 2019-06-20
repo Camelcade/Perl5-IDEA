@@ -127,8 +127,7 @@ public abstract class PerlImplicitDeclarationsProvider {
         declarationsService.getPsiManager(),
         subName,
         PerlPackageUtil.CORE_NAMESPACE,
-        readArguments(element.getChild(ARGUMENTS_ELEMENT), subName),
-        null
+        readArguments(element.getChild(ARGUMENTS_ELEMENT), subName)
       );
     }
     else {
@@ -136,8 +135,7 @@ public abstract class PerlImplicitDeclarationsProvider {
         declarationsService.getPsiManager(),
         subName,
         namespaceName,
-        readArguments(element.getChild(ARGUMENTS_ELEMENT), subName),
-        null
+        readArguments(element.getChild(ARGUMENTS_ELEMENT), subName)
       );
     }
     declarationsService.registerSub(subDefinition);

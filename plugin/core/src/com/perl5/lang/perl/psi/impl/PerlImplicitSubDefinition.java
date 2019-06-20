@@ -19,7 +19,10 @@ package com.perl5.lang.perl.psi.impl;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiManager;
 import com.intellij.util.IncorrectOperationException;
+import com.intellij.util.ObjectUtils;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
@@ -36,16 +39,41 @@ public class PerlImplicitSubDefinition extends PerlImplicitElement implements Pe
   private final String myNamespaceName;
   @NotNull
   private final List<PerlSubArgument> mySubArguments;
+  @NotNull
+  private final PerlValue myReturnValue;
+
+  public PerlImplicitSubDefinition(@NotNull PsiManager manager,
+                                   @NotNull String subName,
+                                   @NotNull String namespaceName,
+                                   @NotNull List<PerlSubArgument> argumentList) {
+    this(manager, subName, namespaceName, argumentList, null, null);
+  }
 
   public PerlImplicitSubDefinition(@NotNull PsiManager manager,
                                    @NotNull String subName,
                                    @NotNull String namespaceName,
                                    @NotNull List<PerlSubArgument> argumentList,
-                                   @Nullable PsiElement parent) {
+                                   @Nullable PerlValue returnValue) {
+    this(manager, subName, namespaceName, argumentList, null, returnValue);
+  }
+
+  public PerlImplicitSubDefinition(@NotNull PsiManager manager,
+                                   @NotNull String subName,
+                                   @NotNull String namespaceName,
+                                   @NotNull List<PerlSubArgument> argumentList,
+                                   @Nullable PsiElement parent,
+                                   @Nullable PerlValue returnValue) {
     super(manager, parent);
     mySubName = subName;
     myNamespaceName = namespaceName;
     mySubArguments = argumentList;
+    myReturnValue = ObjectUtils.notNull(returnValue, PerlValues.UNKNOWN_VALUE);
+  }
+
+  @NotNull
+  @Override
+  public PerlValue getReturnValueFromCode() {
+    return myReturnValue;
   }
 
   @Override

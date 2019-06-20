@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,11 +16,9 @@
 
 package com.perl5.lang.perl.psi.impl;
 
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiManager;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -28,9 +26,8 @@ public class PerlBuiltInSubDefinition extends PerlImplicitSubDefinition {
   public PerlBuiltInSubDefinition(@NotNull PsiManager manager,
                                   @NotNull String subName,
                                   @NotNull String packageName,
-                                  @NotNull List<PerlSubArgument> argumentList,
-                                  @Nullable PsiElement parent) {
-    super(manager, subName, packageName, argumentList, parent);
+                                  @NotNull List<PerlSubArgument> argumentList) {
+    super(manager, subName, packageName, argumentList);
   }
 
   @Override
