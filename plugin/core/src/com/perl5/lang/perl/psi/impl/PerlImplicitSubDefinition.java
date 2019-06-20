@@ -42,19 +42,22 @@ public class PerlImplicitSubDefinition extends PerlImplicitElement implements Pe
   @NotNull
   private final PerlValue myReturnValue;
 
+  final boolean myIsAnonymous;
+
   public PerlImplicitSubDefinition(@NotNull PsiManager manager,
                                    @NotNull String subName,
                                    @NotNull String namespaceName,
                                    @NotNull List<PerlSubArgument> argumentList) {
-    this(manager, subName, namespaceName, argumentList, null, null);
+    this(manager, subName, namespaceName, argumentList, null, null, false);
   }
 
   public PerlImplicitSubDefinition(@NotNull PsiManager manager,
                                    @NotNull String subName,
                                    @NotNull String namespaceName,
                                    @NotNull List<PerlSubArgument> argumentList,
-                                   @Nullable PerlValue returnValue) {
-    this(manager, subName, namespaceName, argumentList, null, returnValue);
+                                   @Nullable PerlValue returnValue,
+                                   boolean isAnonymous) {
+    this(manager, subName, namespaceName, argumentList, null, returnValue, isAnonymous);
   }
 
   public PerlImplicitSubDefinition(@NotNull PsiManager manager,
@@ -62,12 +65,18 @@ public class PerlImplicitSubDefinition extends PerlImplicitElement implements Pe
                                    @NotNull String namespaceName,
                                    @NotNull List<PerlSubArgument> argumentList,
                                    @Nullable PsiElement parent,
-                                   @Nullable PerlValue returnValue) {
+                                   @Nullable PerlValue returnValue,
+                                   boolean isAnonymous) {
     super(manager, parent);
     mySubName = subName;
     myNamespaceName = namespaceName;
     mySubArguments = argumentList;
     myReturnValue = ObjectUtils.notNull(returnValue, PerlValues.UNKNOWN_VALUE);
+    myIsAnonymous = isAnonymous;
+  }
+
+  public boolean isAnonymous() {
+    return myIsAnonymous;
   }
 
   @NotNull
@@ -113,12 +122,12 @@ public class PerlImplicitSubDefinition extends PerlImplicitElement implements Pe
   @NotNull
   @Override
   public String getSubName() {
-    return mySubName;
+    return myIsAnonymous ? "ANON-" + mySubName : mySubName;
   }
 
   @Override
   public String getName() {
-    return mySubName;
+    return getSubName();
   }
 
   @Nullable
@@ -135,25 +144,41 @@ public class PerlImplicitSubDefinition extends PerlImplicitElement implements Pe
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (!(o instanceof PerlImplicitSubDefinition)) return false;
-    if (!super.equals(o)) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    if (!super.equals(o)) {
+      return false;
+    }
 
     PerlImplicitSubDefinition that = (PerlImplicitSubDefinition)o;
 
-    if (!getSubName().equals(that.getSubName())) return false;
-    if (!getNamespaceName().equals(that.getNamespaceName())) {
+    if (myIsAnonymous != that.myIsAnonymous) {
       return false;
     }
-    return mySubArguments.equals(that.mySubArguments);
+    if (!mySubName.equals(that.mySubName)) {
+      return false;
+    }
+    if (!myNamespaceName.equals(that.myNamespaceName)) {
+      return false;
+    }
+    if (!mySubArguments.equals(that.mySubArguments)) {
+      return false;
+    }
+    return myReturnValue.equals(that.myReturnValue);
   }
 
   @Override
   public int hashCode() {
     int result = super.hashCode();
-    result = 31 * result + getSubName().hashCode();
-    result = 31 * result + getNamespaceName().hashCode();
+    result = 31 * result + mySubName.hashCode();
+    result = 31 * result + myNamespaceName.hashCode();
     result = 31 * result + mySubArguments.hashCode();
+    result = 31 * result + myReturnValue.hashCode();
+    result = 31 * result + (myIsAnonymous ? 1 : 0);
     return result;
   }
 

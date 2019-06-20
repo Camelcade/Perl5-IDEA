@@ -59,6 +59,13 @@ public interface PerlSub extends PerlDeprecatable, PerlPackageMember {
   }
 
   /**
+   * @return true iff this is an anonymous declaration
+   */
+  default boolean isAnonymous() {
+    return false;
+  }
+
+  /**
    * Checks if sub defined as a method
    *
    * @return result

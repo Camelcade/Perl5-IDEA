@@ -22,16 +22,19 @@ import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiManager;
 import com.intellij.util.Processor;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.impl.PerlImplicitSubDefinition;
 import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
 import com.perl5.lang.perl.psi.properties.PerlPackageMember;
+import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static com.perl5.lang.perl.util.PerlPackageUtil.CORE_NAMESPACE;
@@ -81,6 +84,17 @@ public class PerlImplicitDeclarationsService {
 
   public void registerSub(@NotNull PerlImplicitSubDefinition subDefinition) {
     doRegister(mySubsMap, subDefinition);
+  }
+
+  @NotNull
+  public PerlImplicitSubDefinition registerAnonSub(@NotNull String namespaceName,
+                                                   @NotNull String baseName,
+                                                   @NotNull List<PerlSubArgument> subArguments,
+                                                   @Nullable PerlValue returnValue) {
+    PerlImplicitSubDefinition subDefinition = new PerlImplicitSubDefinition(
+      myPsiManager, baseName, namespaceName, subArguments, returnValue, true);
+    doRegister(mySubsMap, subDefinition);
+    return subDefinition;
   }
 
   private static <T extends PerlPackageMember> void doRegister(@NotNull Map<String, T> targetMap, @NotNull T entity) {

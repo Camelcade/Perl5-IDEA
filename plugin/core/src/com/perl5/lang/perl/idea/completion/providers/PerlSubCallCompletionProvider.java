@@ -32,6 +32,7 @@ import com.perl5.lang.perl.psi.PerlGlobVariable;
 import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
+import com.perl5.lang.perl.psi.impl.PerlImplicitSubDefinition;
 import org.jetbrains.annotations.NotNull;
 
 
@@ -54,7 +55,10 @@ public class PerlSubCallCompletionProvider extends CompletionProvider<Completion
       position.getProject(), position.getResolveScope(), position, new PerlNamespaceItemProcessor<PsiNamedElement>() {
         @Override
         public boolean processItem(@NotNull PsiNamedElement element) {
-          if (element instanceof PerlSubDefinitionElement &&
+          if (element instanceof PerlImplicitSubDefinition && ((PerlImplicitSubDefinition)element).isAnonymous()) {
+            return true;
+          }
+          if (element instanceof PerlSubDefinitionElement && !((PerlSubDefinitionElement)element).isAnonymous() &&
               (isStatic && ((PerlSubDefinitionElement)element).isStatic() || ((PerlSubDefinitionElement)element).isMethod())) {
             resultSet.addElement(PerlSubCompletionUtil.getSubDefinitionLookupElement((PerlSubDefinitionElement)element));
           }
