@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,13 +19,16 @@ package com.perl5.lang.perl.parser.constant.psi.elementTypes;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.stubs.StubElement;
+import com.intellij.psi.stubs.StubInputStream;
 import com.perl5.lang.perl.parser.constant.psi.impl.PerlConstantsWrapper;
-import com.perl5.lang.perl.psi.PerlPolyNamedElement;
-import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
+import com.perl5.lang.perl.parser.constant.psi.stubs.PerlConstantsWrapperStub;
 import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementType;
 import org.jetbrains.annotations.NotNull;
 
-public class PerlConstantsWrapperElementType extends PerlPolyNamedElementType<PerlPolyNamedElementStub, PerlPolyNamedElement> {
+import java.util.List;
+
+public class PerlConstantsWrapperElementType extends PerlPolyNamedElementType<PerlConstantsWrapperStub, PerlConstantsWrapper> {
   public static final IStubElementType CONSTANT_WRAPPER = new PerlConstantsWrapperElementType("CONSTANT_WRAPPER");
 
   private PerlConstantsWrapperElementType(@NotNull String debugName) {
@@ -33,8 +36,24 @@ public class PerlConstantsWrapperElementType extends PerlPolyNamedElementType<Pe
   }
 
   @Override
-  public PerlPolyNamedElement createPsi(@NotNull PerlPolyNamedElementStub stub) {
+  public PerlConstantsWrapper createPsi(@NotNull PerlConstantsWrapperStub stub) {
     return new PerlConstantsWrapper(stub, this);
+  }
+
+  @NotNull
+  @Override
+  protected PerlConstantsWrapperStub createStub(@NotNull PerlConstantsWrapper wrapper,
+                                                StubElement parentStub,
+                                                @NotNull List<StubElement> lightElementsStubs) {
+    return new PerlConstantsWrapperStub(parentStub, this, lightElementsStubs);
+  }
+
+  @NotNull
+  @Override
+  protected PerlConstantsWrapperStub deserialize(@NotNull StubInputStream dataStream,
+                                                 StubElement parentStub,
+                                                 @NotNull List<StubElement> lightElementStubs) {
+    return new PerlConstantsWrapperStub(parentStub, this, lightElementStubs);
   }
 
   @NotNull

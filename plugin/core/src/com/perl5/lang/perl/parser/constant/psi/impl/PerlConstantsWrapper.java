@@ -22,10 +22,10 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
 import com.perl5.lang.perl.parser.constant.psi.light.PerlLightConstantDefinitionElement;
+import com.perl5.lang.perl.parser.constant.psi.stubs.PerlConstantsWrapperStub;
 import com.perl5.lang.perl.psi.PsiPerlAnonHash;
-import com.perl5.lang.perl.psi.impl.PerlPolyNamedElementBase;
+import com.perl5.lang.perl.psi.impl.PerlPolyNamedElement;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
-import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.util.PerlHashUtil;
@@ -39,9 +39,9 @@ import java.util.stream.Collectors;
 
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.LIGHT_SUB_DEFINITION;
 
-public class PerlConstantsWrapper extends PerlPolyNamedElementBase<PerlPolyNamedElementStub> {
+public class PerlConstantsWrapper extends PerlPolyNamedElement<PerlConstantsWrapperStub> {
 
-  public PerlConstantsWrapper(@NotNull PerlPolyNamedElementStub stub, @NotNull IStubElementType nodeType) {
+  public PerlConstantsWrapper(@NotNull PerlConstantsWrapperStub stub, @NotNull IStubElementType nodeType) {
     super(stub, nodeType);
   }
 
@@ -49,9 +49,8 @@ public class PerlConstantsWrapper extends PerlPolyNamedElementBase<PerlPolyNamed
     super(node);
   }
 
-  @NotNull
   @Override
-  protected List<PerlDelegatingLightNamedElement> computeLightElementsFromStubs(@NotNull PerlPolyNamedElementStub stub) {
+  protected List<PerlDelegatingLightNamedElement> computeLightElementsFromStubs(@NotNull PerlConstantsWrapperStub stub) {
     return stub.getLightNamedElementsStubs().stream()
       .filter(childStub -> childStub.getStubType() == LIGHT_SUB_DEFINITION)
       .map(childStub -> new PerlLightConstantDefinitionElement(this, (PerlSubDefinitionStub)childStub))

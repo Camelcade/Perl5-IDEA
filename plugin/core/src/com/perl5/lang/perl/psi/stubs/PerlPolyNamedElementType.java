@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
-import com.perl5.lang.perl.psi.PerlPolyNamedElement;
+import com.perl5.lang.perl.psi.impl.PerlPolyNamedElement;
 import gnu.trove.TIntObjectHashMap;
 import gnu.trove.TObjectIntHashMap;
 import org.jetbrains.annotations.NotNull;
@@ -33,7 +33,7 @@ import java.util.List;
 import static com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes.CLASS_ACCESSOR_METHOD;
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.*;
 
-public abstract class PerlPolyNamedElementType<Stub extends PerlPolyNamedElementStub, Psi extends PerlPolyNamedElement>
+public abstract class PerlPolyNamedElementType<Stub extends PerlPolyNamedElementStub<Psi>, Psi extends PerlPolyNamedElement<Stub>>
   extends IStubElementType<Stub, Psi> implements PsiElementProvider {
   private static final TObjectIntHashMap<IStubElementType> DIRECT_MAP = new TObjectIntHashMap<>();
   private static final TIntObjectHashMap<IStubElementType> REVERSE_MAP = new TIntObjectHashMap<>();
@@ -70,11 +70,7 @@ public abstract class PerlPolyNamedElementType<Stub extends PerlPolyNamedElement
   }
 
   @NotNull
-  protected Stub createStub(@NotNull Psi psi, StubElement parentStub, @NotNull List<StubElement> lightStubs) {
-    //noinspection unchecked
-    return (Stub)new PerlPolyNamedElementStub(parentStub, this, lightStubs);
-  }
-
+  protected abstract Stub createStub(@NotNull Psi psi, StubElement parentStub, @NotNull List<StubElement> lightElementsStubs);
 
   @NotNull
   @Override
@@ -114,14 +110,12 @@ public abstract class PerlPolyNamedElementType<Stub extends PerlPolyNamedElement
   }
 
   @NotNull
-  protected Stub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub, @NotNull List<StubElement> childStubs)
-    throws IOException {
-    //noinspection unchecked
-    return (Stub)new PerlPolyNamedElementStub(parentStub, this, childStubs);
-  }
+  protected abstract Stub deserialize(@NotNull StubInputStream dataStream,
+                                      StubElement parentStub,
+                                      @NotNull List<StubElement> lightElementsStubs) throws IOException;
 
   @Override
-  public final void indexStub(@NotNull PerlPolyNamedElementStub stub, @NotNull IndexSink sink) {
+  public final void indexStub(@NotNull Stub stub, @NotNull IndexSink sink) {
     //noinspection unchecked
     stub.getLightNamedElementsStubs().forEach(childStub -> childStub.getStubType().indexStub(childStub, sink));
   }

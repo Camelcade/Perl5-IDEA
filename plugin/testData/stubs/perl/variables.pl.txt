@@ -8,7 +8,7 @@ PerlFileStub
 	@EXPORT_TAGS: {}
 	Annotations: null
 	Type: Perl5
-  USE_STATEMENT:PerlUseStatementStubImpl
+  USE_STATEMENT:PerlUseStatementStub
 	Package name: vars
 	Outer package name: main
 	Import options: []

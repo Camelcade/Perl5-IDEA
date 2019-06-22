@@ -16,11 +16,11 @@ PerlFileStub
 	@EXPORT_OK: []
 	@EXPORT_TAGS: {}
 	Annotations: null
-    USE_STATEMENT:PerlUseStatementStubImpl
+    USE_STATEMENT:PerlUseStatementStub
 	Package name: strict
 	Outer package name: Foo::Bar
 	Import options: null
-    USE_STATEMENT:PerlUseStatementStubImpl
+    USE_STATEMENT:PerlUseStatementStub
 	Package name: warnings
 	Outer package name: Foo::Bar
 	Import options: [FATAL, all]

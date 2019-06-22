@@ -27,7 +27,6 @@ import com.perl5.lang.perl.parser.Class.Accessor.psi.stubs.PerlClassAccessorWrap
 import com.perl5.lang.perl.psi.PsiPerlNamespaceContent;
 import com.perl5.lang.perl.psi.impl.PerlPolyNamedNestedCallElementBase;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
-import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
@@ -55,9 +54,8 @@ public class PerlClassAccessorWrapper extends PerlPolyNamedNestedCallElementBase
     super(node);
   }
 
-  @NotNull
   @Override
-  protected List<PerlDelegatingLightNamedElement> computeLightElementsFromStubs(@NotNull PerlPolyNamedElementStub stub) {
+  protected List<PerlDelegatingLightNamedElement> computeLightElementsFromStubs(@NotNull PerlClassAccessorWrapperStub stub) {
     return stub.getLightNamedElementsStubs().stream()
       .filter(childStub -> childStub.getStubType() == CLASS_ACCESSOR_METHOD)
       .map(childStub -> new PerlClassAccessorMethod(this, (PerlSubDefinitionStub)childStub))

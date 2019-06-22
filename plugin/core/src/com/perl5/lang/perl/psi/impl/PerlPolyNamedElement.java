@@ -22,11 +22,13 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.ResolveState;
+import com.intellij.psi.StubBasedPsiElement;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.util.CachedValueProvider;
+import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.psi.util.PsiUtilCore;
-import com.perl5.lang.perl.psi.PerlPolyNamedElement;
 import com.perl5.lang.perl.psi.PerlStubBasedPsiElementBase;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
@@ -38,18 +40,26 @@ import java.util.List;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 
-public abstract class PerlPolyNamedElementBase<Stub extends PerlPolyNamedElementStub> extends PerlStubBasedPsiElementBase<Stub>
-  implements PerlPolyNamedElement {
-  public PerlPolyNamedElementBase(@NotNull Stub stub, @NotNull IStubElementType nodeType) {
+public abstract class PerlPolyNamedElement<Stub extends PerlPolyNamedElementStub> extends PerlStubBasedPsiElementBase<Stub>
+  implements StubBasedPsiElement<Stub> {
+  public PerlPolyNamedElement(@NotNull Stub stub, @NotNull IStubElementType nodeType) {
     super(stub, nodeType);
   }
 
-  public PerlPolyNamedElementBase(@NotNull ASTNode node) {
+  public PerlPolyNamedElement(@NotNull ASTNode node) {
     super(node);
   }
 
   @NotNull
-  @Override
+  public final List<PerlDelegatingLightNamedElement> getLightElements() {
+    return CachedValuesManager.getCachedValue(this, () -> CachedValueProvider.Result.create(computeLightElements(), this)
+    );
+  }
+
+  /**
+   * Calculates light elements from stubs or psi
+   */
+  @NotNull
   public final List<PerlDelegatingLightNamedElement> computeLightElements() {
     Stub stub = getGreenStub();
     if (stub != null) {
@@ -59,9 +69,15 @@ public abstract class PerlPolyNamedElementBase<Stub extends PerlPolyNamedElement
   }
 
   /**
+   * Internal sub for calculating light elements from psi
+   */
+  @NotNull
+  public abstract List<PerlDelegatingLightNamedElement> computeLightElementsFromPsi();
+
+  /**
    * Internal sub for calculating light elements from stubs
    */
-  protected abstract List<PerlDelegatingLightNamedElement> computeLightElementsFromStubs(@NotNull PerlPolyNamedElementStub stub);
+  protected abstract List<PerlDelegatingLightNamedElement> computeLightElementsFromStubs(@NotNull Stub stub);
 
   /**
    * @implNote we need to accept light elements here, because in non-recursive visitors case, platform collects elements by itself by

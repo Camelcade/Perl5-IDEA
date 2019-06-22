@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,8 +49,8 @@ public class ClassAccessorWrapperElementType extends PerlPolyNamedElementType<Pe
   @Override
   protected PerlClassAccessorWrapperStub createStub(@NotNull PerlClassAccessorWrapper psi,
                                                     StubElement parentStub,
-                                                    @NotNull List<StubElement> lightStubs) {
-    return new PerlClassAccessorWrapperStub(parentStub, this, lightStubs, psi.isFollowBestPractice());
+                                                    @NotNull List<StubElement> lightElementsStubs) {
+    return new PerlClassAccessorWrapperStub(parentStub, this, lightElementsStubs, psi.isFollowBestPractice());
   }
 
   @Override

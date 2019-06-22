@@ -24,8 +24,8 @@ import com.intellij.util.Function;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.parser.PerlIdentifierRangeProvider;
-import com.perl5.lang.perl.psi.PerlPolyNamedElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
+import com.perl5.lang.perl.psi.impl.PerlPolyNamedElement;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -33,7 +33,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Represents one of the declarations of {@link PerlPolyNamedElement}
  */
-public class PerlDelegatingLightNamedElement<Delegate extends PerlPolyNamedElement> extends PerlDelegatingLightElement<Delegate>
+public class PerlDelegatingLightNamedElement<Delegate extends PerlPolyNamedElement<?>> extends PerlDelegatingLightElement<Delegate>
   implements PsiNameIdentifierOwner {
   public static final Function<String, String> DEFAULT_NAME_COMPUTATION = name -> name;
 

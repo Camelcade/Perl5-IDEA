@@ -22,8 +22,8 @@ import com.intellij.codeInsight.TargetElementUtil;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.psi.*;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.lang.perl.psi.PerlPolyNamedElement;
 import com.perl5.lang.perl.psi.PerlVariableNameElement;
+import com.perl5.lang.perl.psi.impl.PerlPolyNamedElement;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -58,7 +58,7 @@ public class PerlTargetElementEvaluatorEx2 extends TargetElementEvaluatorEx2 imp
 
   @Nullable
   public static PsiElement getLightNameIdentifierOwner(@NotNull PsiElement element) {
-    PerlPolyNamedElement polyNamedElement = PsiTreeUtil.getParentOfType(element, PerlPolyNamedElement.class);
+    PerlPolyNamedElement<?> polyNamedElement = PsiTreeUtil.getParentOfType(element, PerlPolyNamedElement.class);
     if (polyNamedElement == null) {
       return null;
     }

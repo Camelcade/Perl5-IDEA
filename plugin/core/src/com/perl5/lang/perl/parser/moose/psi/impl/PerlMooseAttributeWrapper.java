@@ -33,10 +33,9 @@ import com.perl5.lang.perl.psi.PerlSubExpr;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.PsiPerlAnonArray;
 import com.perl5.lang.perl.psi.PsiPerlAnonHash;
-import com.perl5.lang.perl.psi.impl.PerlPolyNamedElementBase;
+import com.perl5.lang.perl.psi.impl.PerlPolyNamedElement;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.light.PerlLightMethodDefinitionElement;
-import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
@@ -54,7 +53,7 @@ import java.util.stream.Collectors;
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.LIGHT_ATTRIBUTE_DEFINITION;
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.LIGHT_METHOD_DEFINITION;
 
-public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlMooseAttributeWrapperStub> {
+public class PerlMooseAttributeWrapper extends PerlPolyNamedElement<PerlMooseAttributeWrapperStub> {
   private static final String MUTATOR_KEY = "writer";
   private static final String ACCESSOR_KEY = "accessor";
   private static final String READER_KEY = "reader";
@@ -89,9 +88,8 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlMoos
     return lists.first.stream().map(ElementManipulators::getValueText).collect(Collectors.toList());
   }
 
-  @NotNull
   @Override
-  protected List<PerlDelegatingLightNamedElement> computeLightElementsFromStubs(@NotNull PerlPolyNamedElementStub stub) {
+  protected List<PerlDelegatingLightNamedElement> computeLightElementsFromStubs(@NotNull PerlMooseAttributeWrapperStub stub) {
     return stub.getLightNamedElementsStubs().stream()
       .map(childStub -> {
         IStubElementType stubType = childStub.getStubType();

@@ -16,11 +16,11 @@ PerlFileStub
 	@EXPORT_OK: []
 	@EXPORT_TAGS: {}
 	Annotations: null
-    USE_STATEMENT:PerlUseStatementStubImpl
+    USE_STATEMENT:PerlUseStatementStub
 	Package name: constant
 	Outer package name: Foo::Bar
 	Import options: null
-      CONSTANT_WRAPPER:PerlPolyNamedElementStub
+      CONSTANT_WRAPPER:PerlConstantsWrapperStub
 	Light elements: 1
 	LIGHT_SUB_DEFINITION:PerlLightSubDefinitionStub
 	Namespace name: Foo::Bar
@@ -28,11 +28,11 @@ PerlFileStub
 	Annotations: null
 	Arguments: []
 	Return value: 1
-    USE_STATEMENT:PerlUseStatementStubImpl
+    USE_STATEMENT:PerlUseStatementStub
 	Package name: constant
 	Outer package name: Foo::Bar
 	Import options: null
-      CONSTANT_WRAPPER:PerlPolyNamedElementStub
+      CONSTANT_WRAPPER:PerlConstantsWrapperStub
 	Light elements: 2
 	LIGHT_SUB_DEFINITION:PerlLightSubDefinitionStub
 	Namespace name: Foo::Bar

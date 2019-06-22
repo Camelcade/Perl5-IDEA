@@ -26,7 +26,11 @@ import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimpleDynamicLocation;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
+import com.perl5.lang.perl.psi.PerlSubExpr;
+import com.perl5.lang.perl.psi.PerlVisitor;
+import com.perl5.lang.perl.psi.PsiPerlBlock;
+import com.perl5.lang.perl.psi.impl.PerlPolyNamedElement;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
@@ -39,7 +43,7 @@ import java.util.List;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE_PROVIDER;
 
-public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement> extends PerlDelegatingLightNamedElement<Delegate>
+public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement<?>> extends PerlDelegatingLightNamedElement<Delegate>
   implements PerlSubDefinitionElement {
   @Nullable
   private final String myNamespaceName;

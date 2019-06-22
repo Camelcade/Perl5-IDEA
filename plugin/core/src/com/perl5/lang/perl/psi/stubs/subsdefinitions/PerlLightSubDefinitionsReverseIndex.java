@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,8 +22,8 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.stubs.StubIndexKey;
 import com.intellij.util.Processor;
-import com.perl5.lang.perl.psi.PerlPolyNamedElement;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
+import com.perl5.lang.perl.psi.impl.PerlPolyNamedElement;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.stubs.PerlStubIndexBase;
 import org.jetbrains.annotations.NotNull;
@@ -49,7 +49,7 @@ public class PerlLightSubDefinitionsReverseIndex extends PerlStubIndexBase<PerlP
                                                        @NotNull Processor<PerlSubDefinitionElement> processor) {
     return StubIndex.getInstance().processElements(KEY, packageName, project, scope, PerlPolyNamedElement.class, polyNamedElement -> {
       ProgressManager.checkCanceled();
-      for (PerlDelegatingLightNamedElement lightNamedElement : polyNamedElement.getLightElements()) {
+      for (PerlDelegatingLightNamedElement lightNamedElement : ((PerlPolyNamedElement<?>)polyNamedElement).getLightElements()) {
         if (lightNamedElement instanceof PerlSubDefinitionElement &&
             packageName.equals(((PerlSubDefinitionElement)lightNamedElement).getNamespaceName())) {
           if (!processor.process((PerlSubDefinitionElement)lightNamedElement)) {

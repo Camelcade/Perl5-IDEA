@@ -20,13 +20,13 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
-import com.perl5.lang.perl.psi.PerlPolyNamedElement;
+import com.perl5.lang.perl.psi.impl.PerlPolyNamedElement;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PerlPolyNamedElementStub extends StubBase<PerlPolyNamedElement> {
+public abstract class PerlPolyNamedElementStub<Psi extends PerlPolyNamedElement<?>> extends StubBase<Psi> {
   @NotNull
   private final List<StubElement> myLightNamedElementsStubs;
 

@@ -24,6 +24,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.impl.PerlPolyNamedElement;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import org.jetbrains.annotations.NotNull;
 
@@ -42,7 +43,7 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
       addSubDefinitionsMarkers((PerlSubDefinitionElement)element, result);
     }
     else if (element instanceof PerlPolyNamedElement) {
-      for (PerlDelegatingLightNamedElement lightNamedElement : ((PerlPolyNamedElement)element).getLightElements()) {
+      for (PerlDelegatingLightNamedElement lightNamedElement : ((PerlPolyNamedElement<?>)element).getLightElements()) {
         if (lightNamedElement instanceof PerlNamespaceDefinitionWithIdentifier) {
           addNamespaceMarkers((PerlNamespaceDefinitionWithIdentifier)lightNamedElement, result);
         }

@@ -28,10 +28,7 @@ import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.parser.constant.psi.elementTypes.PerlConstantsWrapperElementType;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.impl.PsiPerlArrayIndexVariableImpl;
-import com.perl5.lang.perl.psi.impl.PsiPerlArrayVariableImpl;
-import com.perl5.lang.perl.psi.impl.PsiPerlHashVariableImpl;
-import com.perl5.lang.perl.psi.impl.PsiPerlScalarVariableImpl;
+import com.perl5.lang.perl.psi.impl.*;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.references.PerlSubReference;
 import com.perl5.lang.perl.util.PerlSubUtil;
@@ -90,7 +87,7 @@ public class PerlAnnotator extends PerlBaseAnnotator {
       if (elementType == PerlConstantsWrapperElementType.CONSTANT_WRAPPER) { // fixme some interface?
         subAttribute = PerlSyntaxHighlighter.PERL_CONSTANT;
       }
-      for (PerlDelegatingLightNamedElement lightNamedElement : ((PerlPolyNamedElement)element).getLightElements()) {
+      for (PerlDelegatingLightNamedElement lightNamedElement : ((PerlPolyNamedElement<?>)element).getLightElements()) {
         TextAttributesKey currentKey =
           lightNamedElement instanceof PerlSubDefinition ? subAttribute : PerlSyntaxHighlighter.PERL_PACKAGE_DEFINITION;
         PsiElement navigationElement = lightNamedElement.getNavigationElement();

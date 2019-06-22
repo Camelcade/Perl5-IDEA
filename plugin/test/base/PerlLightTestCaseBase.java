@@ -176,6 +176,7 @@ import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerHandler;
 import com.perl5.lang.perl.internals.PerlVersion;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.impl.PerlPolyNamedElement;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.mixins.PerlStringBareMixin;
 import com.perl5.lang.perl.psi.mixins.PerlStringMixin;
@@ -979,7 +980,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
       public void visitElement(PsiElement element) {
         if (element instanceof PerlPolyNamedElement) {
           sb.append("Poly-named provider: ").append(serializePsiElement(element)).append("\n");
-          for (PerlDelegatingLightNamedElement namedElement : ((PerlPolyNamedElement)element).getLightElements()) {
+          for (PerlDelegatingLightNamedElement namedElement : ((PerlPolyNamedElement<?>)element).getLightElements()) {
             sb.append("\t").append(serializePsiElement(namedElement)).append("\n");
           }
           sb.append("\n");

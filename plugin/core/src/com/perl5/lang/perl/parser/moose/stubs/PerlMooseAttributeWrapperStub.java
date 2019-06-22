@@ -18,12 +18,13 @@ package com.perl5.lang.perl.parser.moose.stubs;
 
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubElement;
+import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseAttributeWrapper;
 import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class PerlMooseAttributeWrapperStub extends PerlPolyNamedElementStub {
+public class PerlMooseAttributeWrapperStub extends PerlPolyNamedElementStub<PerlMooseAttributeWrapper> {
 
   @NotNull
   private final List<String> myAttributesNames;

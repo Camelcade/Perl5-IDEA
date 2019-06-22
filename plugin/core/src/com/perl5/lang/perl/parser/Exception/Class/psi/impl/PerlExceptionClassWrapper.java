@@ -22,13 +22,13 @@ import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.perl.parser.Exception.Class.psi.light.PerlLightExceptionClassDefinition;
+import com.perl5.lang.perl.parser.Exception.Class.psi.stubs.PerlExceptionClassWrapperStub;
 import com.perl5.lang.perl.psi.PsiPerlAnonArray;
-import com.perl5.lang.perl.psi.impl.PerlPolyNamedElementBase;
+import com.perl5.lang.perl.psi.impl.PerlPolyNamedElement;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.light.PerlLightMethodDefinitionElement;
 import com.perl5.lang.perl.psi.light.PerlLightSubDefinitionElement;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
-import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
@@ -43,10 +43,10 @@ import java.util.stream.Collectors;
 
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.*;
 
-public class PerlExceptionClassWrapper extends PerlPolyNamedElementBase<PerlPolyNamedElementStub> {
+public class PerlExceptionClassWrapper extends PerlPolyNamedElement<PerlExceptionClassWrapperStub> {
   public static final String FIELDS_METHOD_NAME = "Fields";
 
-  public PerlExceptionClassWrapper(@NotNull PerlPolyNamedElementStub stub,
+  public PerlExceptionClassWrapper(@NotNull PerlExceptionClassWrapperStub stub,
                                    @NotNull IStubElementType nodeType) {
     super(stub, nodeType);
   }
@@ -55,9 +55,8 @@ public class PerlExceptionClassWrapper extends PerlPolyNamedElementBase<PerlPoly
     super(node);
   }
 
-  @NotNull
   @Override
-  protected List<PerlDelegatingLightNamedElement> computeLightElementsFromStubs(@NotNull PerlPolyNamedElementStub stub) {
+  protected List<PerlDelegatingLightNamedElement> computeLightElementsFromStubs(@NotNull PerlExceptionClassWrapperStub stub) {
     return stub.getLightNamedElementsStubs().stream()
       .map(childStub -> {
         IStubElementType stubType = childStub.getStubType();

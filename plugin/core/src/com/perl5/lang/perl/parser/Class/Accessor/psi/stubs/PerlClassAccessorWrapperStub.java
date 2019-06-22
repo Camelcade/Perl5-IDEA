@@ -18,12 +18,13 @@ package com.perl5.lang.perl.parser.Class.Accessor.psi.stubs;
 
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubElement;
+import com.perl5.lang.perl.parser.Class.Accessor.psi.impl.PerlClassAccessorWrapper;
 import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class PerlClassAccessorWrapperStub extends PerlPolyNamedElementStub {
+public class PerlClassAccessorWrapperStub extends PerlPolyNamedElementStub<PerlClassAccessorWrapper> {
   private final boolean myIsFollowBestPractice;
 
   public PerlClassAccessorWrapperStub(StubElement parent,

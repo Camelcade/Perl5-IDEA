@@ -21,13 +21,13 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
+import com.perl5.lang.mojolicious.psi.stubs.MojoHelperWrapperStub;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlScalarValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.psi.PerlSelfHinter;
 import com.perl5.lang.perl.psi.PerlSubExpr;
 import com.perl5.lang.perl.psi.impl.PerlPolyNamedNestedCallElementBase;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
-import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import org.jetbrains.annotations.NotNull;
 
@@ -38,9 +38,9 @@ import java.util.stream.Collectors;
 import static com.perl5.lang.mojolicious.psi.impl.MojoliciousFile.MOJO_CONTROLLER_NS;
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.LIGHT_METHOD_DEFINITION;
 
-public class MojoHelperWrapper extends PerlPolyNamedNestedCallElementBase<PerlPolyNamedElementStub> implements PerlSelfHinter {
+public class MojoHelperWrapper extends PerlPolyNamedNestedCallElementBase<MojoHelperWrapperStub> implements PerlSelfHinter {
 
-  public MojoHelperWrapper(@NotNull PerlPolyNamedElementStub stub,
+  public MojoHelperWrapper(@NotNull MojoHelperWrapperStub stub,
                            @NotNull IStubElementType nodeType) {
     super(stub, nodeType);
   }
@@ -49,9 +49,8 @@ public class MojoHelperWrapper extends PerlPolyNamedNestedCallElementBase<PerlPo
     super(node);
   }
 
-  @NotNull
   @Override
-  protected List<PerlDelegatingLightNamedElement> computeLightElementsFromStubs(@NotNull PerlPolyNamedElementStub stub) {
+  protected List<PerlDelegatingLightNamedElement> computeLightElementsFromStubs(@NotNull MojoHelperWrapperStub stub) {
     return stub.getLightNamedElementsStubs().stream()
       .filter(childStub -> childStub.getStubType() == LIGHT_METHOD_DEFINITION)
       .map(childStub -> new MojoHelperDefinition(this, (PerlSubDefinitionStub)childStub))

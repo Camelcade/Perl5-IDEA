@@ -39,10 +39,7 @@ import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.impl.PsiPerlArrayElementImpl;
-import com.perl5.lang.perl.psi.impl.PsiPerlBlockImpl;
-import com.perl5.lang.perl.psi.impl.PsiPerlReturnExprImpl;
-import com.perl5.lang.perl.psi.impl.PsiPerlStatementImpl;
+import com.perl5.lang.perl.psi.impl.*;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.mixins.PerlStatementMixin;
 import com.perl5.lang.perl.psi.properties.PerlLabelScope;
@@ -347,7 +344,7 @@ public class PerlPsiUtil implements PerlElementTypes {
     }
 
     if (stub instanceof PerlPolyNamedElementStub) {
-      for (PsiElement child : ((PerlPolyNamedElementStub)stub).getPsi().getLightElements()) {
+      for (PsiElement child : ((PerlPolyNamedElementStub<?>)stub).getPsi().getLightElements()) {
         ProgressManager.checkCanceled();
         if (!processor.process(child)) {
           return false;
@@ -382,7 +379,7 @@ public class PerlPsiUtil implements PerlElementTypes {
     }
 
     if (element instanceof PerlPolyNamedElement) {
-      for (PerlDelegatingLightNamedElement lightNamedElement : ((PerlPolyNamedElement)element).getLightElements()) {
+      for (PerlDelegatingLightNamedElement lightNamedElement : ((PerlPolyNamedElement<?>)element).getLightElements()) {
         ProgressManager.checkCanceled();
         if (!processor.process(lightNamedElement)) {
           return false;

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,20 +18,40 @@ package com.perl5.lang.mojolicious.elementTypes;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.stubs.StubElement;
+import com.intellij.psi.stubs.StubInputStream;
 import com.perl5.lang.mojolicious.psi.impl.MojoHelperWrapper;
-import com.perl5.lang.perl.psi.PerlPolyNamedElement;
-import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
+import com.perl5.lang.mojolicious.psi.stubs.MojoHelperWrapperStub;
 import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementType;
 import org.jetbrains.annotations.NotNull;
 
-public class MojoHelperWrapperElementType extends PerlPolyNamedElementType<PerlPolyNamedElementStub, PerlPolyNamedElement> {
+import java.io.IOException;
+import java.util.List;
+
+public class MojoHelperWrapperElementType extends PerlPolyNamedElementType<MojoHelperWrapperStub, MojoHelperWrapper> {
   public MojoHelperWrapperElementType(@NotNull String debugName) {
     super(debugName);
   }
 
   @Override
-  public PerlPolyNamedElement createPsi(@NotNull PerlPolyNamedElementStub stub) {
+  public MojoHelperWrapper createPsi(@NotNull MojoHelperWrapperStub stub) {
     return new MojoHelperWrapper(stub, this);
+  }
+
+  @NotNull
+  @Override
+  protected MojoHelperWrapperStub createStub(@NotNull MojoHelperWrapper wrapper,
+                                             StubElement parentStub,
+                                             @NotNull List<StubElement> lightElementsStubs) {
+    return new MojoHelperWrapperStub(parentStub, this, lightElementsStubs);
+  }
+
+  @NotNull
+  @Override
+  protected MojoHelperWrapperStub deserialize(@NotNull StubInputStream dataStream,
+                                              StubElement parentStub,
+                                              @NotNull List<StubElement> lightElementsStubs) throws IOException {
+    return new MojoHelperWrapperStub(parentStub, this, lightElementsStubs);
   }
 
   @NotNull
