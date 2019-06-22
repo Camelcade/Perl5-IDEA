@@ -17,7 +17,7 @@
 package com.perl5.lang.perl.extensions.packageprocessor;
 
 import com.perl5.lang.perl.internals.PerlStrictMask;
-import com.perl5.lang.perl.psi.PerlUseStatement;
+import com.perl5.lang.perl.psi.PerlUseStatementElement;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -30,7 +30,7 @@ public interface PerlStrictProvider {
    * @param currentMask mask of the outer block, or null if there is no outer block
    * @return modified mask
    */
-  default PerlStrictMask getStrictMask(@NotNull PerlUseStatement useStatement, @NotNull PerlStrictMask currentMask) {
+  default PerlStrictMask getStrictMask(@NotNull PerlUseStatementElement useStatement, @NotNull PerlStrictMask currentMask) {
     // fixme NYI
     return currentMask.clone();
   }

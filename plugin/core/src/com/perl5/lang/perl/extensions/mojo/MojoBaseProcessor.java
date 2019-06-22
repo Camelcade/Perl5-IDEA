@@ -18,7 +18,7 @@ package com.perl5.lang.perl.extensions.mojo;
 
 import com.perl5.lang.perl.extensions.packageprocessor.*;
 import com.perl5.lang.perl.internals.PerlFeaturesTable;
-import com.perl5.lang.perl.psi.PerlUseStatement;
+import com.perl5.lang.perl.psi.PerlUseStatementElement;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -43,13 +43,13 @@ public class MojoBaseProcessor extends PerlPackageProcessorBase implements
   }
 
   @Override
-  public PerlFeaturesTable getFeaturesTable(PerlUseStatement useStatement, PerlFeaturesTable currentFeaturesTable) {
+  public PerlFeaturesTable getFeaturesTable(PerlUseStatementElement useStatement, PerlFeaturesTable currentFeaturesTable) {
     return currentFeaturesTable.clone();
   }
 
   @NotNull
   @Override
-  public List<String> getLoadedPackageNames(PerlUseStatement useStatement) {
+  public List<String> getLoadedPackageNames(PerlUseStatementElement useStatement) {
     List<String> loadedPackages = new ArrayList<>(Collections.singletonList(IO_HANDLE));
     List<String> allOptions = useStatement.getImportParameters();
 
@@ -77,7 +77,7 @@ public class MojoBaseProcessor extends PerlPackageProcessorBase implements
   }
 
   @Override
-  public void changeParentsList(@NotNull PerlUseStatement useStatement, @NotNull List<String> currentList) {
+  public void changeParentsList(@NotNull PerlUseStatementElement useStatement, @NotNull List<String> currentList) {
     List<String> allOptions = useStatement.getImportParameters();
 
     if (allOptions != null) {

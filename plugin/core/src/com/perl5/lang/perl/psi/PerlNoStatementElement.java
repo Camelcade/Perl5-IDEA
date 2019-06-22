@@ -17,5 +17,5 @@
 package com.perl5.lang.perl.psi;
 
 
-public interface PerlNoStatement extends PerlUseStatement {
+public interface PerlNoStatementElement extends PerlUseStatementElement {
 }

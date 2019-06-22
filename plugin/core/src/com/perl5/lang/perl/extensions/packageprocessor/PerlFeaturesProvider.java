@@ -17,7 +17,7 @@
 package com.perl5.lang.perl.extensions.packageprocessor;
 
 import com.perl5.lang.perl.internals.PerlFeaturesTable;
-import com.perl5.lang.perl.psi.PerlUseStatement;
+import com.perl5.lang.perl.psi.PerlUseStatementElement;
 
 /**
  * Marks a package processor that it can modify %^H (see use feature)
@@ -30,5 +30,5 @@ public interface PerlFeaturesProvider {
    * @param currentFeaturesTable features table of outer block
    * @return new features table
    */
-  public PerlFeaturesTable getFeaturesTable(PerlUseStatement useStatement, PerlFeaturesTable currentFeaturesTable);
+  PerlFeaturesTable getFeaturesTable(PerlUseStatementElement useStatement, PerlFeaturesTable currentFeaturesTable);
 }

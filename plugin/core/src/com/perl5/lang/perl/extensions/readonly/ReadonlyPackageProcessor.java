@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 package com.perl5.lang.perl.extensions.readonly;
 
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessorBase;
-import com.perl5.lang.perl.psi.PerlUseStatement;
+import com.perl5.lang.perl.psi.PerlUseStatementElement;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -32,7 +32,7 @@ public class ReadonlyPackageProcessor extends PerlPackageProcessorBase {
   );
 
   @Override
-  public void addExports(@NotNull PerlUseStatement useStatement, @NotNull Set<String> export, @NotNull Set<String> exportOk) {
+  public void addExports(@NotNull PerlUseStatementElement useStatement, @NotNull Set<String> export, @NotNull Set<String> exportOk) {
     export.addAll(EXPORT);
     exportOk.addAll(EXPORT_OK);
   }

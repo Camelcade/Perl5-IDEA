@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ package com.perl5.lang.perl.extensions.packageprocessor.impl;
 
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessorBase;
-import com.perl5.lang.perl.psi.PerlUseStatement;
+import com.perl5.lang.perl.psi.PerlUseStatementElement;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 
@@ -36,7 +36,7 @@ public class ListMoreUtilsProcessor extends PerlPackageProcessorBase {
 
   @NotNull
   @Override
-  public List<PerlExportDescriptor> getImports(@NotNull PerlUseStatement useStatement) {
+  public List<PerlExportDescriptor> getImports(@NotNull PerlUseStatementElement useStatement) {
     List<String> parameters = useStatement.getImportParameters();
     if (parameters == null) {
       return Collections.emptyList();
@@ -45,7 +45,7 @@ public class ListMoreUtilsProcessor extends PerlPackageProcessorBase {
   }
 
   @Override
-  public void addExports(@NotNull PerlUseStatement useStatement, @NotNull Set<String> export, @NotNull Set<String> exportOk) {
+  public void addExports(@NotNull PerlUseStatementElement useStatement, @NotNull Set<String> export, @NotNull Set<String> exportOk) {
     super.addExports(useStatement, export, exportOk);
     exportOk.addAll(ListMoreUtilsExports.EXPORT_OK);
   }

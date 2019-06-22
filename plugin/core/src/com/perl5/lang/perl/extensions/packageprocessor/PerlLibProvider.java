@@ -17,12 +17,12 @@
 package com.perl5.lang.perl.extensions.packageprocessor;
 
 import com.intellij.openapi.vfs.VirtualFile;
-import com.perl5.lang.perl.psi.PerlUseStatement;
+import com.perl5.lang.perl.psi.PerlUseStatementElement;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 
 public interface PerlLibProvider {
-  void addLibDirs(@NotNull PerlUseStatement useStatement, @NotNull List<VirtualFile> libDirs);
+  void addLibDirs(@NotNull PerlUseStatementElement useStatement, @NotNull List<VirtualFile> libDirs);
 }

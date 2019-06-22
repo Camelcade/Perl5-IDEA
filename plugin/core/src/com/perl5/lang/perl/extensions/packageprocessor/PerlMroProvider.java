@@ -16,10 +16,10 @@
 
 package com.perl5.lang.perl.extensions.packageprocessor;
 
-import com.perl5.lang.perl.psi.PerlUseStatement;
+import com.perl5.lang.perl.psi.PerlUseStatementElement;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 
 
 public interface PerlMroProvider {
-  public PerlMroType getMroType(PerlUseStatement useStatement);
+  PerlMroType getMroType(PerlUseStatementElement useStatement);
 }

@@ -204,7 +204,7 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
           currentStatement = currentStatement.getParent();
         }
 
-        if (currentStatement instanceof PerlUseStatement || currentStatement.getFirstChild() instanceof PerlRequireExpr) {
+        if (currentStatement instanceof PerlUseStatementElement || currentStatement.getFirstChild() instanceof PerlRequireExpr) {
           int blockStart = currentStatement.getTextOffset();
           int blockEnd = blockStart;
           ASTNode blockNode = perlImport.getNode();

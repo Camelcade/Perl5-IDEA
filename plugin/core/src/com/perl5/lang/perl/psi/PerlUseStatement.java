@@ -16,38 +16,12 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.intellij.psi.StubBasedPsiElement;
-import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
-import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
-import com.perl5.lang.perl.psi.stubs.imports.PerlUseStatementStub;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.util.List;
 
-public interface PerlUseStatement extends StubBasedPsiElement<PerlUseStatementStub>, PerlNamespaceElementContainer, PerlCompositeElement {
+public interface PerlUseStatement {
   String getPackageName();
 
-  boolean isPragma();
-
-  boolean isVersion();
-
-  boolean isPragmaOrVersion();
-
-  @Nullable
-  List<String> getImportParameters();
-
-  PerlVersionElement getVersionElement();
-
-  @NotNull
-  PerlPackageProcessor getPackageProcessor();
-
-  @Nullable
-  PsiPerlExpr getExpr();
-
-  /**
-   * @return a name of containing namespace
-   */
-  @Nullable
   String getNamespaceName();
+
+  List<String> getImportParameters();
 }

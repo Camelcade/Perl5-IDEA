@@ -18,11 +18,11 @@ package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.IStubElementType;
-import com.perl5.lang.perl.psi.PerlNoStatement;
+import com.perl5.lang.perl.psi.PerlNoStatementElement;
 import com.perl5.lang.perl.psi.stubs.imports.PerlUseStatementStub;
 
 
-public abstract class PerlNoStatementMixin extends PerlUseStatementMixin implements PerlNoStatement {
+public abstract class PerlNoStatementMixin extends PerlUseStatementMixin implements PerlNoStatementElement {
   public PerlNoStatementMixin(ASTNode node) {
     super(node);
   }

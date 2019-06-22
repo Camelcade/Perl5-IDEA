@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -59,11 +59,11 @@ public class PerlElementFactory {
     return Objects.requireNonNull(PsiTreeUtil.findChildOfType(file, PsiPerlDerefExpr.class));
   }
 
-  public static PerlUseStatement createUseStatement(Project project, String packageName) {
+  public static PerlUseStatementElement createUseStatement(Project project, String packageName) {
     assert packageName != null;
 
     PerlFileImpl file = createFile(project, String.format("use %s;", packageName));
-    PerlUseStatement def = PsiTreeUtil.findChildOfType(file, PerlUseStatement.class);
+    PerlUseStatementElement def = PsiTreeUtil.findChildOfType(file, PerlUseStatementElement.class);
     assert def != null;
     return def;
   }

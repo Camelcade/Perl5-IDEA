@@ -17,7 +17,7 @@
 package com.perl5.lang.perl.extensions.packageprocessor.impl;
 
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessorBase;
-import com.perl5.lang.perl.psi.PerlUseStatement;
+import com.perl5.lang.perl.psi.PerlUseStatementElement;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
@@ -25,7 +25,7 @@ import java.util.Set;
 
 public class POSIXPackageProcessor extends PerlPackageProcessorBase {
   @Override
-  public void addExports(@NotNull PerlUseStatement useStatement, @NotNull Set<String> export, @NotNull Set<String> exportOk) {
+  public void addExports(@NotNull PerlUseStatementElement useStatement, @NotNull Set<String> export, @NotNull Set<String> exportOk) {
     export.addAll(POSIXExports.EXPORT);
     exportOk.addAll(POSIXExports.EXPORT_OK);
     exportOk.addAll(POSIXExports.EXPORT);

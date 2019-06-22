@@ -18,7 +18,7 @@ package psi;
 
 
 import base.PerlLightTestCase;
-import com.perl5.lang.perl.psi.PerlUseStatement;
+import com.perl5.lang.perl.psi.PerlUseStatementElement;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -60,7 +60,7 @@ public class PerlStringCollectionTest extends PerlLightTestCase {
 
   protected void doTest(String fileName, String... result) {
     initWithFileSmart(fileName);
-    PerlUseStatement useStatement = getElementAtCaret(PerlUseStatement.class);
+    PerlUseStatementElement useStatement = getElementAtCaret(PerlUseStatementElement.class);
     assertNotNull(useStatement);
     assertEquals(Arrays.asList(result), useStatement.getImportParameters());
   }

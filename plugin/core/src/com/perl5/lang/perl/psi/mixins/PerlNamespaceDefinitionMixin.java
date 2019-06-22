@@ -273,10 +273,10 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
     public boolean process(PsiElement element) {
       //			counter++;
       //			System.err.println("Processing" + element);
-      if (element instanceof PerlUseStatement) {
-        PerlPackageProcessor packageProcessor = ((PerlUseStatement)element).getPackageProcessor();
+      if (element instanceof PerlUseStatementElement) {
+        PerlPackageProcessor packageProcessor = ((PerlUseStatementElement)element).getPackageProcessor();
         if (packageProcessor instanceof PerlMroProvider) {
-          myResult = ((PerlMroProvider)packageProcessor).getMroType((PerlUseStatement)element);
+          myResult = ((PerlMroProvider)packageProcessor).getMroType((PerlUseStatementElement)element);
           //					System.err.println("Got it");
           return false;
         }
@@ -366,10 +366,10 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
     public boolean process(PsiElement element) {
       //			System.err.println("Processing " + element);
 
-      if (element instanceof PerlUseStatement) {
-        PerlPackageProcessor processor = ((PerlUseStatement)element).getPackageProcessor();
+      if (element instanceof PerlUseStatementElement) {
+        PerlPackageProcessor processor = ((PerlUseStatementElement)element).getPackageProcessor();
         if (processor instanceof PerlPackageParentsProvider) {
-          ((PerlPackageParentsProvider)processor).changeParentsList((PerlUseStatement)element, parentNamespaces);
+          ((PerlPackageParentsProvider)processor).changeParentsList((PerlUseStatementElement)element, parentNamespaces);
         }
       }
       else if (element instanceof PerlRuntimeParentsProvider) {

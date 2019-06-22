@@ -17,7 +17,7 @@
 package com.perl5.lang.perl.extensions.packageprocessor.impl;
 
 import com.perl5.lang.perl.extensions.packageprocessor.*;
-import com.perl5.lang.perl.psi.PerlUseStatement;
+import com.perl5.lang.perl.psi.PerlUseStatementElement;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -43,12 +43,12 @@ public class MooseProcessor extends PerlPackageProcessorBase implements
 
   @NotNull
   @Override
-  public List<String> getLoadedPackageNames(PerlUseStatement useStatement) {
+  public List<String> getLoadedPackageNames(PerlUseStatementElement useStatement) {
     return getLoadedClasses();
   }
 
   @Override
-  public void changeParentsList(@NotNull PerlUseStatement useStatement, @NotNull List<String> currentList) {
+  public void changeParentsList(@NotNull PerlUseStatementElement useStatement, @NotNull List<String> currentList) {
     currentList.clear();
     currentList.addAll(getParentClasses());
   }
@@ -68,7 +68,7 @@ public class MooseProcessor extends PerlPackageProcessorBase implements
 
   @NotNull
   @Override
-  public List<PerlExportDescriptor> getImports(@NotNull PerlUseStatement useStatement) {
+  public List<PerlExportDescriptor> getImports(@NotNull PerlUseStatementElement useStatement) {
     return EXPORTS;
   }
 }

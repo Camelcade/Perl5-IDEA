@@ -16,7 +16,7 @@
 
 package com.perl5.lang.perl.extensions.packageprocessor;
 
-import com.perl5.lang.perl.psi.PerlUseStatement;
+import com.perl5.lang.perl.psi.PerlUseStatementElement;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -31,5 +31,5 @@ public interface PerlPackageLoader {
    * @return list of canonical package names
    */
   @NotNull
-  List<String> getLoadedPackageNames(PerlUseStatement useStatement);
+  List<String> getLoadedPackageNames(PerlUseStatementElement useStatement);
 }

@@ -429,11 +429,11 @@
     mixin("statement")="com.perl5.lang.perl.psi.mixins.PerlStatementMixin"
 
     mixin("use_statement")="com.perl5.lang.perl.psi.mixins.PerlUseStatementMixin"
-    implements("use_statement")="com.perl5.lang.perl.psi.PerlUseStatement"
+    implements("use_statement")="com.perl5.lang.perl.psi.PerlUseStatementElement"
     stubClass("use_statement")="com.perl5.lang.perl.psi.stubs.imports.PerlUseStatementStub"
 
     mixin("no_statement")="com.perl5.lang.perl.psi.mixins.PerlNoStatementMixin"
-    implements("no_statement")="com.perl5.lang.perl.psi.PerlNoStatement"
+    implements("no_statement")="com.perl5.lang.perl.psi.PerlNoStatementElement"
     stubClass("no_statement")="com.perl5.lang.perl.psi.stubs.imports.PerlUseStatementStub"
 
 	mixin("call_arguments")="com.perl5.lang.perl.psi.mixins.PerlCallArguments"

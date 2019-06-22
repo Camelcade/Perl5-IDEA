@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ package com.perl5.lang.perl.extensions.packageprocessor.impl;
 
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageOptionsProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessorBase;
-import com.perl5.lang.perl.psi.PerlUseStatement;
+import com.perl5.lang.perl.psi.PerlUseStatementElement;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -38,7 +38,7 @@ public class TestMoreProcessor extends PerlPackageProcessorBase implements PerlP
 
   @Nullable
   @Override
-  protected List<String> getImportParameters(@NotNull PerlUseStatement useStatement) {
+  protected List<String> getImportParameters(@NotNull PerlUseStatementElement useStatement) {
     return null; // this will cause descriptors to ignore parameters above
   }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessorBase;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlStrictProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlWarningsProvider;
-import com.perl5.lang.perl.psi.PerlUseStatement;
+import com.perl5.lang.perl.psi.PerlUseStatementElement;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -42,7 +42,7 @@ public class MooseRoleProcessor extends PerlPackageProcessorBase implements Perl
 
   @NotNull
   @Override
-  public List<PerlExportDescriptor> getImports(@NotNull PerlUseStatement useStatement) {
+  public List<PerlExportDescriptor> getImports(@NotNull PerlUseStatementElement useStatement) {
     return EXPORTS;
   }
 }

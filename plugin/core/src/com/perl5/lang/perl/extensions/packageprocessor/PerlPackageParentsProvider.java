@@ -16,7 +16,7 @@
 
 package com.perl5.lang.perl.extensions.packageprocessor;
 
-import com.perl5.lang.perl.psi.PerlUseStatement;
+import com.perl5.lang.perl.psi.PerlUseStatementElement;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -31,7 +31,7 @@ public interface PerlPackageParentsProvider {
    * @param useStatement use statement to fetch parameters from
    * @param currentList  current parents list
    */
-  void changeParentsList(@NotNull PerlUseStatement useStatement, @NotNull List<String> currentList);
+  void changeParentsList(@NotNull PerlUseStatementElement useStatement, @NotNull List<String> currentList);
 
   /**
    * Returns true if we should show available package files in autocompletion

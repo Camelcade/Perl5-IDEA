@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
-import com.perl5.lang.perl.psi.PerlUseStatement;
+import com.perl5.lang.perl.psi.PerlUseStatementElement;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.PsiPerlStatement;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
@@ -40,7 +40,7 @@ public class PerlUseVarsQuickFix extends LocalQuickFixOnPsiElement {
     AtomicNotNullLazyValue
       .createValue(() -> PsiTreeUtil.findChildrenOfType(myStartElement.getElement(), PerlVariableDeclarationElement.class));
 
-  public PerlUseVarsQuickFix(@NotNull PerlUseStatement element) {
+  public PerlUseVarsQuickFix(@NotNull PerlUseStatementElement element) {
     super(element);
   }
 

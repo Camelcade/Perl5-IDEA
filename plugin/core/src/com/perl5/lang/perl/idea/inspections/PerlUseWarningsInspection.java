@@ -28,7 +28,7 @@ import com.perl5.PerlBundle;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlWarningsProvider;
 import com.perl5.lang.perl.fileTypes.PerlFileType;
 import com.perl5.lang.perl.idea.quickfixes.PerlUsePackageQuickFix;
-import com.perl5.lang.perl.psi.PerlUseStatement;
+import com.perl5.lang.perl.psi.PerlUseStatementElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import org.jetbrains.annotations.NotNull;
 
@@ -52,7 +52,7 @@ public class PerlUseWarningsInspection extends PerlInspection {
           return;
         }
 
-        for (PerlUseStatement useStatement : PsiTreeUtil.findChildrenOfType(file, PerlUseStatement.class)) {
+        for (PerlUseStatementElement useStatement : PsiTreeUtil.findChildrenOfType(file, PerlUseStatementElement.class)) {
           if (useStatement.getPackageProcessor() instanceof PerlWarningsProvider) {
             return;
           }

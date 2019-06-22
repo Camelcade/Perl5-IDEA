@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,16 +21,16 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.stubs.StubIndexKey;
 import com.intellij.util.Processor;
-import com.perl5.lang.perl.psi.PerlUseStatement;
+import com.perl5.lang.perl.psi.PerlUseStatementElement;
 import com.perl5.lang.perl.psi.stubs.PerlStubIndexBase;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Indexes use statements by context namespace
  */
-public class PerlUseStatementsIndex extends PerlStubIndexBase<PerlUseStatement> {
+public class PerlUseStatementsIndex extends PerlStubIndexBase<PerlUseStatementElement> {
   public static final int VERSION = 1;
-  public static final StubIndexKey<String, PerlUseStatement> KEY = StubIndexKey.createIndexKey("perl.use.statements");
+  public static final StubIndexKey<String, PerlUseStatementElement> KEY = StubIndexKey.createIndexKey("perl.use.statements");
 
   @Override
   public int getVersion() {
@@ -39,14 +39,14 @@ public class PerlUseStatementsIndex extends PerlStubIndexBase<PerlUseStatement> 
 
   @NotNull
   @Override
-  public StubIndexKey<String, PerlUseStatement> getKey() {
+  public StubIndexKey<String, PerlUseStatementElement> getKey() {
     return KEY;
   }
 
   public static boolean processElements(@NotNull Project project,
                                         @NotNull GlobalSearchScope scope,
                                         @NotNull String namespaceName,
-                                        @NotNull Processor<? super PerlUseStatement> processor) {
-    return StubIndex.getInstance().processElements(KEY, namespaceName, project, scope, PerlUseStatement.class, processor);
+                                        @NotNull Processor<? super PerlUseStatementElement> processor) {
+    return StubIndex.getInstance().processElements(KEY, namespaceName, project, scope, PerlUseStatementElement.class, processor);
   }
 }

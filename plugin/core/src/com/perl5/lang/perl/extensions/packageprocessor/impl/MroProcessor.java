@@ -18,7 +18,7 @@ package com.perl5.lang.perl.extensions.packageprocessor.impl;
 
 import com.perl5.lang.perl.extensions.packageprocessor.PerlMroProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPragmaProcessorBase;
-import com.perl5.lang.perl.psi.PerlUseStatement;
+import com.perl5.lang.perl.psi.PerlUseStatementElement;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 
 import java.util.List;
@@ -26,7 +26,7 @@ import java.util.List;
 
 public class MroProcessor extends PerlPragmaProcessorBase implements PerlMroProvider {
   @Override
-  public PerlMroType getMroType(PerlUseStatement useStatement) {
+  public PerlMroType getMroType(PerlUseStatementElement useStatement) {
     List<String> parameters = useStatement.getImportParameters();
 
     if (parameters != null && !parameters.isEmpty() && "c3".equals(parameters.get(0))) {

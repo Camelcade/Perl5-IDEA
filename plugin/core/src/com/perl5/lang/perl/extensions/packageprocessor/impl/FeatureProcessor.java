@@ -20,7 +20,7 @@ import com.perl5.lang.perl.extensions.packageprocessor.PerlFeaturesProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageOptionsProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPragmaProcessorBase;
 import com.perl5.lang.perl.internals.PerlFeaturesTable;
-import com.perl5.lang.perl.psi.PerlUseStatement;
+import com.perl5.lang.perl.psi.PerlUseStatementElement;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
@@ -56,7 +56,7 @@ public class FeatureProcessor extends PerlPragmaProcessorBase implements PerlPac
   }
 
   @Override
-  public PerlFeaturesTable getFeaturesTable(PerlUseStatement useStatement, PerlFeaturesTable currentFeaturesTable) {
+  public PerlFeaturesTable getFeaturesTable(PerlUseStatementElement useStatement, PerlFeaturesTable currentFeaturesTable) {
     // fixme implement modification
     return currentFeaturesTable == null ? new PerlFeaturesTable() : currentFeaturesTable.clone();
   }

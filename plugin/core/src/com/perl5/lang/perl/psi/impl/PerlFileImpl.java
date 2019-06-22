@@ -43,7 +43,7 @@ import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import com.perl5.lang.perl.psi.PerlDoExpr;
 import com.perl5.lang.perl.psi.PerlFile;
-import com.perl5.lang.perl.psi.PerlUseStatement;
+import com.perl5.lang.perl.psi.PerlUseStatementElement;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.stubs.imports.PerlUseStatementStub;
@@ -219,10 +219,11 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
    * @param includedVirtualFiles set of already collected virtual files
    */
   protected void collectRequiresFromPsi(PsiFile psiFile, Set<VirtualFile> includedVirtualFiles) {
-    for (PsiElement importStatement : PsiTreeUtil.<PsiElement>findChildrenOfAnyType(psiFile, PerlUseStatement.class, PerlDoExpr.class)) {
+    for (PsiElement importStatement : PsiTreeUtil.<PsiElement>findChildrenOfAnyType(psiFile, PerlUseStatementElement.class,
+                                                                                    PerlDoExpr.class)) {
       VirtualFile virtualFile = null;
-      if (importStatement instanceof PerlUseStatement) {
-        String packageName = ((PerlUseStatement)importStatement).getPackageName();
+      if (importStatement instanceof PerlUseStatementElement) {
+        String packageName = ((PerlUseStatementElement)importStatement).getPackageName();
         if (packageName != null) {
           virtualFile = PerlPackageUtil.resolvePackageNameToVirtualFile(this, packageName);
         }

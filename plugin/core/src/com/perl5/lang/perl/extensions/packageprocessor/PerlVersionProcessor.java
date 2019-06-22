@@ -18,7 +18,7 @@ package com.perl5.lang.perl.extensions.packageprocessor;
 
 import com.perl5.lang.perl.internals.PerlFeaturesTable;
 import com.perl5.lang.perl.internals.PerlVersion;
-import com.perl5.lang.perl.psi.PerlUseStatement;
+import com.perl5.lang.perl.psi.PerlUseStatementElement;
 import com.perl5.lang.perl.psi.PerlVersionElement;
 import org.jetbrains.annotations.NotNull;
 
@@ -39,23 +39,23 @@ public class PerlVersionProcessor implements PerlPackageProcessor, PerlFeaturesP
   }
 
   @Override
-  public void addExports(@NotNull PerlUseStatement useStatement, @NotNull Set<String> export, @NotNull Set<String> exportOk) {
+  public void addExports(@NotNull PerlUseStatementElement useStatement, @NotNull Set<String> export, @NotNull Set<String> exportOk) {
 
   }
 
   @Override
   @NotNull
-  public List<PerlExportDescriptor> getImports(@NotNull PerlUseStatement useStatement) {
+  public List<PerlExportDescriptor> getImports(@NotNull PerlUseStatementElement useStatement) {
     return Collections.emptyList();
   }
 
   @Override
-  public PerlFeaturesTable getFeaturesTable(PerlUseStatement useStatement, PerlFeaturesTable currentFeaturesTable) {
+  public PerlFeaturesTable getFeaturesTable(PerlUseStatementElement useStatement, PerlFeaturesTable currentFeaturesTable) {
     // fixme implement modification
     return currentFeaturesTable == null ? new PerlFeaturesTable() : currentFeaturesTable.clone();
   }
 
-  public static PerlVersionProcessor getProcessor(PerlUseStatement useStatement) {
+  public static PerlVersionProcessor getProcessor(PerlUseStatementElement useStatement) {
     PerlVersionElement versionElement = useStatement.getVersionElement();
     assert versionElement != null;
 

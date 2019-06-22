@@ -18,7 +18,7 @@ package com.perl5.lang.perl.extensions.packageprocessor.impl;
 
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageParentsProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPragmaProcessorBase;
-import com.perl5.lang.perl.psi.PerlUseStatement;
+import com.perl5.lang.perl.psi.PerlUseStatementElement;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -26,7 +26,7 @@ import java.util.List;
 
 public class BaseProcessor extends PerlPragmaProcessorBase implements PerlPackageParentsProvider {
   @Override
-  public void changeParentsList(@NotNull PerlUseStatement useStatement, @NotNull List<String> currentList) {
+  public void changeParentsList(@NotNull PerlUseStatementElement useStatement, @NotNull List<String> currentList) {
     List<String> useParameters = useStatement.getImportParameters();
     if (useParameters != null) {
       currentList.addAll(useParameters);

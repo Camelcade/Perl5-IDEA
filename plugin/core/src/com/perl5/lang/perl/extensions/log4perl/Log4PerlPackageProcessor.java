@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageOptionsProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessorBase;
-import com.perl5.lang.perl.psi.PerlUseStatement;
+import com.perl5.lang.perl.psi.PerlUseStatementElement;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
@@ -74,7 +74,7 @@ public class Log4PerlPackageProcessor extends PerlPackageProcessorBase implement
 
   @NotNull
   @Override
-  public List<PerlExportDescriptor> getImports(@NotNull PerlUseStatement useStatement) {
+  public List<PerlExportDescriptor> getImports(@NotNull PerlUseStatementElement useStatement) {
     String packageName = useStatement.getPackageName();
     List<String> importParameters = useStatement.getImportParameters();
     if (packageName == null || importParameters == null || importParameters.isEmpty()) {
@@ -119,7 +119,7 @@ public class Log4PerlPackageProcessor extends PerlPackageProcessorBase implement
   }
 
   @Override
-  public void addExports(@NotNull PerlUseStatement useStatement, @NotNull Set<String> export, @NotNull Set<String> exportOk) {
+  public void addExports(@NotNull PerlUseStatementElement useStatement, @NotNull Set<String> export, @NotNull Set<String> exportOk) {
     export.add(GET_LOGGER);
     exportOk.add(GET_LOGGER);
   }

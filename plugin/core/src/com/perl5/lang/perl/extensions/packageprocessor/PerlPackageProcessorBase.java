@@ -23,7 +23,7 @@ import com.perl5.lang.perl.parser.PerlParserImpl;
 import com.perl5.lang.perl.parser.PerlParserUtil;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
-import com.perl5.lang.perl.psi.PerlUseStatement;
+import com.perl5.lang.perl.psi.PerlUseStatementElement;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
@@ -40,7 +40,7 @@ public abstract class PerlPackageProcessorBase implements PerlPackageProcessor {
     return false;
   }
 
-  public void addExports(@NotNull PerlUseStatement useStatement, @NotNull Set<String> export, @NotNull Set<String> exportOk) {
+  public void addExports(@NotNull PerlUseStatementElement useStatement, @NotNull Set<String> export, @NotNull Set<String> exportOk) {
     String packageName = useStatement.getPackageName();
 
     if (StringUtil.isEmpty(packageName)) {
@@ -59,7 +59,7 @@ public abstract class PerlPackageProcessorBase implements PerlPackageProcessor {
 
   @Override
   @NotNull
-  public List<PerlExportDescriptor> getImports(@NotNull PerlUseStatement useStatement) {
+  public List<PerlExportDescriptor> getImports(@NotNull PerlUseStatementElement useStatement) {
     List<PerlExportDescriptor> result = new ArrayList<>();
     String packageName = useStatement.getPackageName();
     if (packageName != null) {
@@ -94,7 +94,7 @@ public abstract class PerlPackageProcessorBase implements PerlPackageProcessor {
    * @return list of imported parameters or null if use has no parameters
    */
   @Nullable
-  protected List<String> getImportParameters(@NotNull PerlUseStatement useStatement) {
+  protected List<String> getImportParameters(@NotNull PerlUseStatementElement useStatement) {
     return useStatement.getImportParameters();
   }
 

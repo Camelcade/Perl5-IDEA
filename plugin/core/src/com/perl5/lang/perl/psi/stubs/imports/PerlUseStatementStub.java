@@ -18,13 +18,7 @@ package com.perl5.lang.perl.psi.stubs.imports;
 
 import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.perl.psi.PerlUseStatement;
+import com.perl5.lang.perl.psi.PerlUseStatementElement;
 
-import java.util.List;
-
-public interface PerlUseStatementStub extends StubElement<PerlUseStatement> {
-  String getPackageName();
-
-  String getNamespaceName();
-
-  List<String> getImportParameters();
+public interface PerlUseStatementStub extends StubElement<PerlUseStatementElement>, PerlUseStatement {
 }

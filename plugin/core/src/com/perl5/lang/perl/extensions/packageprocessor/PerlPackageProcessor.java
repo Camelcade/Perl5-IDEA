@@ -17,7 +17,7 @@
 package com.perl5.lang.perl.extensions.packageprocessor;
 
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
-import com.perl5.lang.perl.psi.PerlUseStatement;
+import com.perl5.lang.perl.psi.PerlUseStatementElement;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -41,7 +41,7 @@ public interface PerlPackageProcessor {
    * @return list of imported descriptors
    */
   @NotNull
-  List<PerlExportDescriptor> getImports(@NotNull PerlUseStatement useStatement);
+  List<PerlExportDescriptor> getImports(@NotNull PerlUseStatementElement useStatement);
 
 
   /**
@@ -51,7 +51,7 @@ public interface PerlPackageProcessor {
    * @param export       export set to fill
    * @param exportOk     export_ok set to fill
    */
-  void addExports(@NotNull PerlUseStatement useStatement, @NotNull Set<String> export, @NotNull Set<String> exportOk);
+  void addExports(@NotNull PerlUseStatementElement useStatement, @NotNull Set<String> export, @NotNull Set<String> exportOk);
 
   /**
    * Parses use statement parameters. Might be used if you need to put some specific PSI constructs in the parameters,

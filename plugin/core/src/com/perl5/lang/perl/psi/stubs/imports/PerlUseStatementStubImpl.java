@@ -18,12 +18,12 @@ package com.perl5.lang.perl.psi.stubs.imports;
 
 import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
-import com.perl5.lang.perl.psi.PerlUseStatement;
+import com.perl5.lang.perl.psi.PerlUseStatementElement;
 import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
 
 import java.util.List;
 
-public class PerlUseStatementStubImpl extends StubBase<PerlUseStatement> implements PerlUseStatementStub {
+public class PerlUseStatementStubImpl extends StubBase<PerlUseStatementElement> implements PerlUseStatementStub {
   private final String myPackageName;
   private final String myNamespaceName;
   private final List<String> myImportOptions;

@@ -52,7 +52,7 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.PerlSubElement;
-import com.perl5.lang.perl.psi.PerlUseStatement;
+import com.perl5.lang.perl.psi.PerlUseStatementElement;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlLightNamespaceIndex;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlLightNamespaceReverseIndex;
@@ -731,7 +731,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
     List<VirtualFile> result = new ArrayList<>();
 
     // libdirs providers fixme we need to use stubs or psi here
-    for (PerlUseStatement useStatement : PsiTreeUtil.findChildrenOfType(psiFile, PerlUseStatement.class)) {
+    for (PerlUseStatementElement useStatement : PsiTreeUtil.findChildrenOfType(psiFile, PerlUseStatementElement.class)) {
       PerlPackageProcessor packageProcessor = useStatement.getPackageProcessor();
       if (packageProcessor instanceof PerlLibProvider) {
         ((PerlLibProvider)packageProcessor).addLibDirs(useStatement, result);

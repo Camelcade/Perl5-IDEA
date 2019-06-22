@@ -22,7 +22,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
-import com.perl5.lang.perl.psi.PerlUseStatement;
+import com.perl5.lang.perl.psi.PerlUseStatementElement;
 import com.perl5.lang.perl.psi.impl.PsiPerlUseStatementImpl;
 import com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil;
 import org.jetbrains.annotations.NotNull;
@@ -33,14 +33,14 @@ import static com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil.readString
 import static com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil.readStringsList;
 
 
-public class PerlUseStatementStubElementType extends IStubElementType<PerlUseStatementStub, PerlUseStatement>
+public class PerlUseStatementStubElementType extends IStubElementType<PerlUseStatementStub, PerlUseStatementElement>
   implements PsiElementProvider {
   public PerlUseStatementStubElementType(String debugName) {
     super(debugName, PerlLanguage.INSTANCE);
   }
 
   @Override
-  public PerlUseStatement createPsi(@NotNull PerlUseStatementStub stub) {
+  public PerlUseStatementElement createPsi(@NotNull PerlUseStatementStub stub) {
     return new PsiPerlUseStatementImpl(stub, this);
   }
 
@@ -52,7 +52,7 @@ public class PerlUseStatementStubElementType extends IStubElementType<PerlUseSta
 
   @NotNull
   @Override
-  public PerlUseStatementStub createStub(@NotNull PerlUseStatement psi, StubElement parentStub) {
+  public PerlUseStatementStub createStub(@NotNull PerlUseStatementElement psi, StubElement parentStub) {
     return new PerlUseStatementStubImpl(
       parentStub,
       psi.getNamespaceName(),

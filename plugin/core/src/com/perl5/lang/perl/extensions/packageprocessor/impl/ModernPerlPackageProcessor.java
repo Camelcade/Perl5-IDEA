@@ -18,7 +18,7 @@ package com.perl5.lang.perl.extensions.packageprocessor.impl;
 
 import com.perl5.lang.perl.extensions.packageprocessor.*;
 import com.perl5.lang.perl.internals.PerlFeaturesTable;
-import com.perl5.lang.perl.psi.PerlUseStatement;
+import com.perl5.lang.perl.psi.PerlUseStatementElement;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import org.jetbrains.annotations.NotNull;
 
@@ -41,18 +41,18 @@ public class ModernPerlPackageProcessor extends PerlPackageProcessorBase impleme
   ));
 
   @Override
-  public PerlMroType getMroType(PerlUseStatement useStatement) {
+  public PerlMroType getMroType(PerlUseStatementElement useStatement) {
     return PerlMroType.C3;
   }
 
   @Override
   @NotNull
-  public List<String> getLoadedPackageNames(PerlUseStatement useStatement) {
+  public List<String> getLoadedPackageNames(PerlUseStatementElement useStatement) {
     return LOADED_PACKAGES;
   }
 
   @Override
-  public PerlFeaturesTable getFeaturesTable(PerlUseStatement useStatement, PerlFeaturesTable currentFeaturesTable) {
+  public PerlFeaturesTable getFeaturesTable(PerlUseStatementElement useStatement, PerlFeaturesTable currentFeaturesTable) {
     // fixme implement modification
     return currentFeaturesTable == null ? new PerlFeaturesTable() : currentFeaturesTable.clone();
   }

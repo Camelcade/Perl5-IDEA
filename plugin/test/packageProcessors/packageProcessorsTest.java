@@ -20,7 +20,7 @@ package packageProcessors;
 import base.PerlLightTestCase;
 import com.perl5.lang.perl.extensions.packageprocessor.*;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
-import com.perl5.lang.perl.psi.PerlUseStatement;
+import com.perl5.lang.perl.psi.PerlUseStatementElement;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import org.junit.Test;
 public class packageProcessorsTest extends PerlLightTestCase {
@@ -35,7 +35,7 @@ public class packageProcessorsTest extends PerlLightTestCase {
     PerlNamespaceDefinitionElement namespaceDefinition = getElementAtCaret(PerlNamespaceDefinitionElement.class);
     assertNotNull(namespaceDefinition);
     assertEquals(PerlMroType.C3, namespaceDefinition.getMroType());
-    PerlUseStatement useStatement = getElementAtCaret(PerlUseStatement.class);
+    PerlUseStatementElement useStatement = getElementAtCaret(PerlUseStatementElement.class);
     assertNotNull(useStatement);
     PerlPackageProcessor packageProcessor = useStatement.getPackageProcessor();
     assertNotNull(packageProcessor);

@@ -17,7 +17,7 @@
 package com.perl5.lang.perl.extensions.packageprocessor.impl;
 
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageOptionsProvider;
-import com.perl5.lang.perl.psi.PerlUseStatement;
+import com.perl5.lang.perl.psi.PerlUseStatementElement;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
@@ -46,7 +46,7 @@ public class ParentProcessor extends BaseProcessor implements PerlPackageOptions
   }
 
   @Override
-  public void changeParentsList(@NotNull PerlUseStatement useStatement, @NotNull List<String> currentList) {
+  public void changeParentsList(@NotNull PerlUseStatementElement useStatement, @NotNull List<String> currentList) {
     super.changeParentsList(useStatement, currentList);
     currentList.removeAll(getOptions().keySet());
   }
