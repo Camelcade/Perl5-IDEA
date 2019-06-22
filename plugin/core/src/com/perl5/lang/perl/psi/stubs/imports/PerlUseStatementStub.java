@@ -16,9 +16,50 @@
 
 package com.perl5.lang.perl.psi.stubs.imports;
 
+import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.psi.PerlUseStatementElement;
+import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
 
-public interface PerlUseStatementStub extends StubElement<PerlUseStatementElement>, PerlUseStatement {
+import java.util.List;
+
+public class PerlUseStatementStub extends StubBase<PerlUseStatementElement> implements StubElement<PerlUseStatementElement>,
+                                                                                       PerlUseStatement {
+  private final String myPackageName;
+  private final String myNamespaceName;
+  private final List<String> myImportOptions;
+
+  public PerlUseStatementStub(StubElement parent, String namespaceName, String packageName, List<String> importOptions) {
+    super(parent, PerlStubElementTypes.PERL_USE_STATEMENT);
+    assert packageName != null;
+    assert namespaceName != null;
+    this.myPackageName = packageName;
+    this.myNamespaceName = namespaceName;
+    this.myImportOptions = importOptions;
+  }
+
+  @Override
+  public String getPackageName() {
+    return myPackageName;
+  }
+
+  @Override
+  public String getNamespaceName() {
+    return myNamespaceName;
+  }
+
+  @Override
+  public List<String> getImportParameters() {
+    return myImportOptions;
+  }
+
+  @Override
+  public String toString() {
+    return super.toString() + "\n" +
+           "\tPackage name: " + myPackageName + "\n" +
+           "\tOuter package name: " + myNamespaceName + "\n" +
+           "\tImport options: " + myImportOptions
+      ;
+  }
 }

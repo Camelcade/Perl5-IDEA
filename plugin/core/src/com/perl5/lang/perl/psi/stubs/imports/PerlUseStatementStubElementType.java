@@ -53,7 +53,7 @@ public class PerlUseStatementStubElementType extends IStubElementType<PerlUseSta
   @NotNull
   @Override
   public PerlUseStatementStub createStub(@NotNull PerlUseStatementElement psi, StubElement parentStub) {
-    return new PerlUseStatementStubImpl(
+    return new PerlUseStatementStub(
       parentStub,
       psi.getNamespaceName(),
       psi.getPackageName(),
@@ -77,7 +77,7 @@ public class PerlUseStatementStubElementType extends IStubElementType<PerlUseSta
   @NotNull
   @Override
   public PerlUseStatementStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
-    return new PerlUseStatementStubImpl(parentStub, readString(dataStream), readString(dataStream), readStringsList(dataStream));
+    return new PerlUseStatementStub(parentStub, readString(dataStream), readString(dataStream), readStringsList(dataStream));
   }
 
   @Override
