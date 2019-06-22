@@ -51,7 +51,7 @@ public class PerlConstantsWrapper extends PerlPolyNamedElementBase<PerlPolyNamed
 
   @NotNull
   @Override
-  public List<PerlDelegatingLightNamedElement> calcLightElementsFromStubs(@NotNull PerlPolyNamedElementStub stub) {
+  protected List<PerlDelegatingLightNamedElement> computeLightElementsFromStubs(@NotNull PerlPolyNamedElementStub stub) {
     return stub.getLightNamedElementsStubs().stream()
       .filter(childStub -> childStub.getStubType() == LIGHT_SUB_DEFINITION)
       .map(childStub -> new PerlLightConstantDefinitionElement(this, (PerlSubDefinitionStub)childStub))
@@ -60,7 +60,7 @@ public class PerlConstantsWrapper extends PerlPolyNamedElementBase<PerlPolyNamed
 
   @NotNull
   @Override
-  public List<PerlDelegatingLightNamedElement> calcLightElementsFromPsi() {
+  public List<PerlDelegatingLightNamedElement> computeLightElementsFromPsi() {
     PsiElement firstChild = getFirstChild();
     boolean multipleDefinition = firstChild instanceof PsiPerlAnonHash;
 

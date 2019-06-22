@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ import java.util.List;
 public interface PerlPolyNamedElement extends StubBasedPsiElement<PerlPolyNamedElementStub> {
   @NotNull
   default List<PerlDelegatingLightNamedElement> getLightElements() {
-    return CachedValuesManager.getCachedValue(this, () -> CachedValueProvider.Result.create(calcLightElements(), this)
+    return CachedValuesManager.getCachedValue(this, () -> CachedValueProvider.Result.create(computeLightElements(), this)
     );
   }
 
@@ -39,17 +39,11 @@ public interface PerlPolyNamedElement extends StubBasedPsiElement<PerlPolyNamedE
    * Calculates light elements from stubs or psi
    */
   @NotNull
-  List<PerlDelegatingLightNamedElement> calcLightElements();
-
-  /**
-   * Internal sub for calculating light elements from stubs
-   */
-  @NotNull
-  List<PerlDelegatingLightNamedElement> calcLightElementsFromStubs(@NotNull PerlPolyNamedElementStub stub);
+  List<PerlDelegatingLightNamedElement> computeLightElements();
 
   /**
    * Internal sub for calculating light elements from psi
    */
   @NotNull
-  List<PerlDelegatingLightNamedElement> calcLightElementsFromPsi();
+  List<PerlDelegatingLightNamedElement> computeLightElementsFromPsi();
 }

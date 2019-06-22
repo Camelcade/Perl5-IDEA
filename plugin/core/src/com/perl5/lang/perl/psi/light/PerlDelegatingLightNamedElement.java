@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -84,7 +84,7 @@ public class PerlDelegatingLightNamedElement<Delegate extends PerlPolyNamedEleme
       return myNameIdentifier;
     }
 
-    for (PerlDelegatingLightNamedElement element : getDelegate().calcLightElementsFromPsi()) {
+    for (PerlDelegatingLightNamedElement element : getDelegate().computeLightElementsFromPsi()) {
       if (element.equals(this)) {
         return myNameIdentifier = element.getNameIdentifier();
       }

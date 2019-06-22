@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,13 +50,18 @@ public abstract class PerlPolyNamedElementBase<Stub extends PerlPolyNamedElement
 
   @NotNull
   @Override
-  public List<PerlDelegatingLightNamedElement> calcLightElements() {
+  public final List<PerlDelegatingLightNamedElement> computeLightElements() {
     Stub stub = getGreenStub();
     if (stub != null) {
-      return calcLightElementsFromStubs(stub);
+      return computeLightElementsFromStubs(stub);
     }
-    return calcLightElementsFromPsi();
+    return computeLightElementsFromPsi();
   }
+
+  /**
+   * Internal sub for calculating light elements from stubs
+   */
+  protected abstract List<PerlDelegatingLightNamedElement> computeLightElementsFromStubs(@NotNull PerlPolyNamedElementStub stub);
 
   /**
    * @implNote we need to accept light elements here, because in non-recursive visitors case, platform collects elements by itself by

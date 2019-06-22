@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -57,7 +57,7 @@ public class PerlExceptionClassWrapper extends PerlPolyNamedElementBase<PerlPoly
 
   @NotNull
   @Override
-  public List<PerlDelegatingLightNamedElement> calcLightElementsFromStubs(@NotNull PerlPolyNamedElementStub stub) {
+  protected List<PerlDelegatingLightNamedElement> computeLightElementsFromStubs(@NotNull PerlPolyNamedElementStub stub) {
     return stub.getLightNamedElementsStubs().stream()
       .map(childStub -> {
         IStubElementType stubType = childStub.getStubType();
@@ -77,7 +77,7 @@ public class PerlExceptionClassWrapper extends PerlPolyNamedElementBase<PerlPoly
 
   @NotNull
   @Override
-  public List<PerlDelegatingLightNamedElement> calcLightElementsFromPsi() {
+  public List<PerlDelegatingLightNamedElement> computeLightElementsFromPsi() {
     PsiElement firstChild = getFirstChild();
     List<PerlDelegatingLightNamedElement> result = new ArrayList<>();
     List<PsiElement> listElements = PerlArrayUtil.collectListElements(firstChild);

@@ -91,7 +91,7 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlMoos
 
   @NotNull
   @Override
-  public List<PerlDelegatingLightNamedElement> calcLightElementsFromStubs(@NotNull PerlPolyNamedElementStub stub) {
+  protected List<PerlDelegatingLightNamedElement> computeLightElementsFromStubs(@NotNull PerlPolyNamedElementStub stub) {
     return stub.getLightNamedElementsStubs().stream()
       .map(childStub -> {
         IStubElementType stubType = childStub.getStubType();
@@ -132,7 +132,7 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlMoos
 
   @NotNull
   @Override
-  public List<PerlDelegatingLightNamedElement> calcLightElementsFromPsi() {
+  public List<PerlDelegatingLightNamedElement> computeLightElementsFromPsi() {
     Pair<List<PsiElement>, List<PsiElement>> lists = getIdentifiersAndListElements();
     if (lists == null) {
       return Collections.emptyList();
