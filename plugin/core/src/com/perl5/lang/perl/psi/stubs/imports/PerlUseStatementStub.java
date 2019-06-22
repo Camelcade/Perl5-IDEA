@@ -21,34 +21,43 @@ import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.psi.PerlUseStatementElement;
 import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 public class PerlUseStatementStub extends StubBase<PerlUseStatementElement> implements StubElement<PerlUseStatementElement>,
                                                                                        PerlUseStatement {
+  @NotNull
   private final String myPackageName;
+  @NotNull
   private final String myNamespaceName;
+  @Nullable
   private final List<String> myImportOptions;
 
-  public PerlUseStatementStub(StubElement parent, String namespaceName, String packageName, List<String> importOptions) {
+  public PerlUseStatementStub(StubElement parent,
+                              @NotNull String namespaceName,
+                              @NotNull String packageName,
+                              @Nullable List<String> importOptions) {
     super(parent, PerlStubElementTypes.PERL_USE_STATEMENT);
-    assert packageName != null;
-    assert namespaceName != null;
-    this.myPackageName = packageName;
-    this.myNamespaceName = namespaceName;
-    this.myImportOptions = importOptions;
+    myPackageName = packageName;
+    myNamespaceName = namespaceName;
+    myImportOptions = importOptions;
   }
 
+  @NotNull
   @Override
   public String getPackageName() {
     return myPackageName;
   }
 
+  @NotNull
   @Override
   public String getNamespaceName() {
     return myNamespaceName;
   }
 
+  @Nullable
   @Override
   public List<String> getImportParameters() {
     return myImportOptions;
