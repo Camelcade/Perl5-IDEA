@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,9 +18,10 @@ package com.perl5.lang.perl.parser.Exception.Class.ide.refactoring;
 
 import com.intellij.openapi.util.Condition;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.parser.Exception.Class.psi.impl.PerlExceptionClassWrapper;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
+import com.perl5.lang.perl.extensions.packageprocessor.impl.ExceptionClassProcessor;
 import com.perl5.lang.perl.psi.impl.PerlImplicitElement;
-import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
+import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import com.perl5.lang.perl.psi.light.PerlLightMethodDefinitionElement;
 
 public class PerlRenamingVetoCondition implements Condition<PsiElement> {
@@ -34,8 +35,17 @@ public class PerlRenamingVetoCondition implements Condition<PsiElement> {
       return true;
     }
 
-    return element instanceof PerlLightMethodDefinitionElement &&
-           ((PerlDelegatingLightNamedElement)element).getDelegate() instanceof PerlExceptionClassWrapper &&
-           PerlExceptionClassWrapper.FIELDS_METHOD_NAME.equals(((PerlLightMethodDefinitionElement)element).getName());
+    if (!(element instanceof PerlLightMethodDefinitionElement)) {
+      return false;
+    }
+
+    PsiElement delegate = ((PerlLightMethodDefinitionElement)element).getDelegate();
+    if (!(delegate instanceof PerlUseStatementElement)) {
+      return false;
+    }
+
+    PerlPackageProcessor packageProcessor = ((PerlUseStatementElement)delegate).getPackageProcessor();
+    return packageProcessor instanceof ExceptionClassProcessor &&
+           ExceptionClassProcessor.FIELDS_METHOD_NAME.equals(((PerlLightMethodDefinitionElement)element).getName());
   }
 }

@@ -9,11 +9,6 @@ PerlFileStub
 	Annotations: null
 	Type: Perl5
   USE_STATEMENT:PerlUseStatementStub
-	Light elements: 0
-	Package name: Exception::Class
-	Outer package name: main
-	Import options: null
-    Class::Exception wrapper:PerlExceptionClassWrapperStub
 	Light elements: 2
 	LIGHT_NAMESPACE_DEFINITION:PerlLightNamespaceDefinitionStub
 	Name: Exception1
@@ -31,6 +26,9 @@ PerlFileStub
 	@EXPORT_OK: []
 	@EXPORT_TAGS: {}
 	Annotations: null
+	Package name: Exception::Class
+	Outer package name: main
+	Import options: [Exception1, Exception2]
 
 ----------
 Language: Perl5 POD
