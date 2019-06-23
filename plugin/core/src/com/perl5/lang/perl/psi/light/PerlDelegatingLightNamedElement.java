@@ -30,6 +30,8 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
+
 /**
  * Represents one of the declarations of {@link PerlPolyNamedElement}
  */
@@ -39,9 +41,10 @@ public class PerlDelegatingLightNamedElement<Delegate extends PerlPolyNamedEleme
 
   @NotNull
   protected String myName;
-
   @Nullable
   private PsiElement myNameIdentifier;
+
+  private boolean myIsImplicit = false;
 
   @NotNull
   private Function<String, String> myNameComputation = DEFAULT_NAME_COMPUTATION;
@@ -77,9 +80,12 @@ public class PerlDelegatingLightNamedElement<Delegate extends PerlPolyNamedEleme
     return this;
   }
 
-  @NotNull
+  @Nullable
   @Override
   public PsiElement getNameIdentifier() {
+    if (myIsImplicit) {
+      return null;
+    }
     if (myNameIdentifier != null && myNameIdentifier.isValid()) {
       return myNameIdentifier;
     }
@@ -99,6 +105,9 @@ public class PerlDelegatingLightNamedElement<Delegate extends PerlPolyNamedEleme
   public PsiElement setName(@NonNls @NotNull String newBaseName) throws IncorrectOperationException {
     // fixme should be in com.perl5.lang.perl.psi.utils.PerlPsiUtil.renameElement()
     PsiElement nameIdentifier = getNameIdentifier();
+    if (nameIdentifier == null) {
+      return this;
+    }
     ElementManipulator<PsiElement> manipulator = ElementManipulators.getManipulator(nameIdentifier);
     TextRange identifierRange = this instanceof PerlIdentifierRangeProvider
                                 ? ((PerlIdentifierRangeProvider)this).getRangeInIdentifier()
@@ -124,42 +133,60 @@ public class PerlDelegatingLightNamedElement<Delegate extends PerlPolyNamedEleme
     }
   }
 
+  public boolean isImplicit() {
+    return myIsImplicit;
+  }
+
+  public void setImplicit(boolean implicit) {
+    myIsImplicit = implicit;
+  }
+
   @NotNull
   @Override
   public PsiElement getNavigationElement() {
-    return getNameIdentifier();
+    return myIsImplicit ? getDelegate() : Objects.requireNonNull(getNameIdentifier());
   }
 
   @Override
   public int getTextOffset() {
-    return getNameIdentifier().getTextOffset();
+    return getNavigationElement().getTextOffset();
   }
 
   @Override
   public TextRange getTextRange() {
-    return getNameIdentifier().getTextRange();
+    return myIsImplicit ? super.getTextRange() : Objects.requireNonNull(getNameIdentifier()).getTextRange();
   }
 
   @Override
   public boolean isValid() {
-    return getDelegate().isValid() && (myNameIdentifier == null || myNameIdentifier.isValid());
+    return getDelegate().isValid() && (myIsImplicit || myNameIdentifier == null || myNameIdentifier.isValid());
   }
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (!(o instanceof PerlDelegatingLightNamedElement)) return false;
-    if (!super.equals(o)) return false;
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof PerlDelegatingLightNamedElement)) {
+      return false;
+    }
+    if (!super.equals(o)) {
+      return false;
+    }
 
     PerlDelegatingLightNamedElement<?> element = (PerlDelegatingLightNamedElement<?>)o;
 
-    return getName().equals(element.getName());
+    if (myIsImplicit != element.myIsImplicit) {
+      return false;
+    }
+    return myName.equals(element.myName);
   }
 
   @Override
   public int hashCode() {
     int result = super.hashCode();
-    result = 31 * result + getName().hashCode();
+    result = 31 * result + myName.hashCode();
+    result = 31 * result + (myIsImplicit ? 1 : 0);
     return result;
   }
 

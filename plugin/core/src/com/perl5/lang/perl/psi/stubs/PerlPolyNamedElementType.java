@@ -19,6 +19,7 @@ package com.perl5.lang.perl.psi.stubs;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.*;
+import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.impl.PerlPolyNamedElement;
@@ -63,8 +64,14 @@ public abstract class PerlPolyNamedElementType<Stub extends PerlPolyNamedElement
     List<StubElement> lightNamedElements = new ArrayList<>();
     Stub result = createStub(psi, parentStub, lightNamedElements);
 
-    //noinspection unchecked
-    psi.getLightElements().forEach(lightPsi -> lightNamedElements.add(lightPsi.getElementType().createStub(lightPsi, result)));
+    psi.getLightElements().forEach(lightPsi -> {
+      //noinspection unchecked
+      StubElement lightStubElement = lightPsi.getElementType().createStub(lightPsi, result);
+      if (lightStubElement instanceof PerlLightElementStub && lightPsi.isImplicit()) {
+        ((PerlLightElementStub)lightStubElement).setImplicit(true);
+      }
+      lightNamedElements.add(lightStubElement);
+    });
 
     return result;
   }
@@ -80,7 +87,8 @@ public abstract class PerlPolyNamedElementType<Stub extends PerlPolyNamedElement
 
   @Override
   public final void serialize(@NotNull Stub stub, @NotNull StubOutputStream dataStream) throws IOException {
-    List<StubElement> childrenStubs = stub.getLightNamedElementsStubs();
+    List<StubElement> childrenStubs = ContainerUtil.filter(stub.getLightNamedElementsStubs(), it ->
+      !(it instanceof PerlLightElementStub) || !((PerlLightElementStub)it).isImplicit());
     dataStream.writeVarInt(childrenStubs.size());
     serializeStub(stub, dataStream);
     for (StubElement childStub : childrenStubs) {

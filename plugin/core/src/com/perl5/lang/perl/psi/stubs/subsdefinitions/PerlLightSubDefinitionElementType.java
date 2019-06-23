@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,10 +22,12 @@ import com.intellij.psi.stubs.StubIndexKey;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
+import com.perl5.lang.perl.psi.light.PerlLightSubDefinitionElement;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collections;
 import java.util.List;
 
 public class PerlLightSubDefinitionElementType extends PerlSubDefinitionElementType {
@@ -46,6 +48,20 @@ public class PerlLightSubDefinitionElementType extends PerlSubDefinitionElementT
   @Override
   protected StubIndexKey<String, ? extends PsiElement> getReverseKey() {
     return PerlLightSubDefinitionsReverseIndex.KEY;
+  }
+
+  @NotNull
+  @Override
+  public PerlSubDefinitionStub createStub(@NotNull PerlSubDefinitionElement psi, StubElement parentStub) {
+    if (psi instanceof PerlLightSubDefinitionElement && ((PerlLightSubDefinitionElement)psi).isImplicit()) {
+      return createStubElement(parentStub,
+                               psi.getNamespaceName(),
+                               psi.getSubName(),
+                               Collections.emptyList(),
+                               psi.getReturnValueFromCode(),
+                               null);
+    }
+    return super.createStub(psi, parentStub);
   }
 
   @NotNull

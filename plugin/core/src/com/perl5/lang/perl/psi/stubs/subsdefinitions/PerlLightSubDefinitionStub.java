@@ -21,6 +21,7 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubElement;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
+import com.perl5.lang.perl.psi.stubs.PerlLightElementStub;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import org.jetbrains.annotations.NotNull;
@@ -28,9 +29,11 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class PerlLightSubDefinitionStub extends PerlSubDefinitionStub {
+public class PerlLightSubDefinitionStub extends PerlSubDefinitionStub implements PerlLightElementStub {
   @Nullable
   private final StubElement myParent;
+
+  private boolean myIsImplicit = false;
 
   public PerlLightSubDefinitionStub(@Nullable StubElement parent,
                                     String packageName,
@@ -57,5 +60,15 @@ public class PerlLightSubDefinitionStub extends PerlSubDefinitionStub {
   @Override
   public String toString() {
     return getStubType().toString() + ":" + super.toString();
+  }
+
+  @Override
+  public boolean isImplicit() {
+    return myIsImplicit;
+  }
+
+  @Override
+  public void setImplicit(boolean isImplicit) {
+    myIsImplicit = isImplicit;
   }
 }

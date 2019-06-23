@@ -20,12 +20,15 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubElement;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.perl.psi.stubs.PerlLightElementStub;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class PerlLightNamespaceDefinitionStub extends PerlNamespaceDefinitionStub {
+public class PerlLightNamespaceDefinitionStub extends PerlNamespaceDefinitionStub implements PerlLightElementStub {
   @Nullable
   private final StubElement myParent;
+
+  private boolean myIsImplicit = false;
 
   public PerlLightNamespaceDefinitionStub(@Nullable StubElement parent,
                                           IStubElementType elementType,
@@ -48,5 +51,15 @@ public class PerlLightNamespaceDefinitionStub extends PerlNamespaceDefinitionStu
   @Override
   public String toString() {
     return getStubType() + ":" + super.toString();
+  }
+
+  @Override
+  public boolean isImplicit() {
+    return myIsImplicit;
+  }
+
+  @Override
+  public void setImplicit(boolean isImplicit) {
+    myIsImplicit = isImplicit;
   }
 }

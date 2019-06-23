@@ -65,7 +65,7 @@ public class PerlTargetElementEvaluatorEx2 extends TargetElementEvaluatorEx2 imp
 
     for (PerlDelegatingLightNamedElement lightNamedElement : polyNamedElement.getLightElements()) {
       PsiElement identifier = lightNamedElement.getNameIdentifier();
-      if (identifier.getTextRange().contains(element.getTextRange())) {
+      if (identifier != null && identifier.getTextRange().contains(element.getTextRange())) {
         return lightNamedElement;
       }
     }

@@ -89,6 +89,9 @@ public class PerlAnnotator extends PerlBaseAnnotator {
         subAttribute = PerlSyntaxHighlighter.PERL_CONSTANT;
       }
       for (PerlDelegatingLightNamedElement lightNamedElement : ((PerlPolyNamedElement<?>)element).getLightElements()) {
+        if (lightNamedElement.isImplicit()) {
+          continue;
+        }
         TextAttributesKey currentKey =
           lightNamedElement instanceof PerlSubDefinition ? subAttribute : PerlSyntaxHighlighter.PERL_PACKAGE_DEFINITION;
         PsiElement navigationElement = lightNamedElement.getNavigationElement();
