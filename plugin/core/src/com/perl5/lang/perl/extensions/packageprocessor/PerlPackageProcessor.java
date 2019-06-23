@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.extensions.packageprocessor;
 
 import com.perl5.PerlBundle;
-import com.perl5.lang.perl.parser.builder.PerlBuilder;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.stubs.imports.PerlUseStatementStub;
@@ -57,19 +56,6 @@ public interface PerlPackageProcessor {
    * @param exportOk     export_ok set to fill
    */
   void addExports(@NotNull PerlUseStatementElement useStatement, @NotNull Set<String> export, @NotNull Set<String> exportOk);
-
-  /**
-   * Parses use statement parameters. Might be used if you need to put some specific PSI constructs in the parameters,
-   * like constant definition, moose attributes or smth.
-   * By default uses default parser passed from generated parser.
-   * It's safe to assume that builder is at PACKAGE token with appropriate name
-   * We are not advancing lexer through PACKAGE and [VERSION], because it may be used in parsing logic. If you
-   * don't need them, just invoke {@link com.perl5.lang.perl.parser.PerlParserUtil#passPackageAndVersion(PerlBuilder, int)}
-   */
-  @Deprecated
-  default boolean parseUseParameters(@NotNull PerlBuilder b, int l) {
-    return false;
-  }
 
   /**
    * @return list of the light psi elements declared by the {@code useStatementElement}

@@ -24,8 +24,6 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
-import com.perl5.lang.perl.idea.EP.PerlPackageProcessorEP;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
@@ -463,15 +461,13 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
       if (StringUtil.isEmpty(packageName)) {
         return false;
       }
-      PerlPackageProcessor packageProcessor = PerlPackageProcessorEP.EP.findSingle(packageName);
-      if (packageProcessor != null) {
+      if ("vars".equals(packageName)) {
         assert b instanceof PerlBuilder;
-        PsiBuilder.Marker m = b.mark();
-        if (packageProcessor.parseUseParameters((PerlBuilder)b, l)) {
-          m.drop();
-          return true;
-        }
-        m.rollbackTo();
+        PerlParserUtil.passPackageAndVersion((PerlBuilder)b, l);
+        ((PerlBuilder)b).setUseVarsContent(true);
+        PerlParserImpl.expr(b, l, -1);
+        ((PerlBuilder)b).setUseVarsContent(false);
+        return true;
       }
     }
     return defaultParser.parse(b, l);
