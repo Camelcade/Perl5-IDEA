@@ -129,7 +129,7 @@ public abstract class PerlPolyNamedElement<Stub extends PerlPolyNamedElementStub
   /**
    * Checks if we can treat this element as text identifier. Atm: no interpolation, no XQ strings
    */
-  protected boolean isAcceptableIdentifierElement(@Nullable PsiElement identifierElement) {
+  public boolean isAcceptableIdentifierElement(@Nullable PsiElement identifierElement) {
     if (identifierElement == null) {
       return false;
     }

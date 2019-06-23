@@ -17,11 +17,6 @@ PerlFileStub
 	@EXPORT_TAGS: {}
 	Annotations: null
     USE_STATEMENT:PerlUseStatementStub
-	Light elements: 0
-	Package name: constant
-	Outer package name: Foo::Bar
-	Import options: null
-      CONSTANT_WRAPPER:PerlConstantsWrapperStub
 	Light elements: 1
 	LIGHT_SUB_DEFINITION:PerlLightSubDefinitionStub
 	Namespace name: Foo::Bar
@@ -29,12 +24,10 @@ PerlFileStub
 	Annotations: null
 	Arguments: []
 	Return value: 1
-    USE_STATEMENT:PerlUseStatementStub
-	Light elements: 0
 	Package name: constant
 	Outer package name: Foo::Bar
-	Import options: null
-      CONSTANT_WRAPPER:PerlConstantsWrapperStub
+	Import options: [SINGLE_CONST]
+    USE_STATEMENT:PerlUseStatementStub
 	Light elements: 2
 	LIGHT_SUB_DEFINITION:PerlLightSubDefinitionStub
 	Namespace name: Foo::Bar
@@ -48,6 +41,9 @@ PerlFileStub
 	Annotations: null
 	Arguments: []
 	Return value: 2
+	Package name: constant
+	Outer package name: Foo::Bar
+	Import options: [MULTICONST1, MULTICONST2]
 
 ----------
 Language: Perl5 POD

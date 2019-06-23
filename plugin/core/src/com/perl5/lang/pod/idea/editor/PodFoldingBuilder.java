@@ -148,7 +148,7 @@ public class PodFoldingBuilder extends PerlFoldingBuilderBase implements PodElem
       PsiElement firstChild = element.getFirstChild();
       if (firstChild != null) {
         int endMargin = StringUtil.endsWith(element.getNode().getChars(), "\n") ? 1 : 0;
-        PerlFoldingBuilderBase.addDescriptorFor(myDescriptors, myDocument, element, firstChild.getTextLength(), endMargin, 1);
+        PerlFoldingBuilderBase.addDescriptorFor(myDescriptors, myDocument, element, firstChild.getTextLength(), endMargin, 1, null, false);
       }
     }
   }

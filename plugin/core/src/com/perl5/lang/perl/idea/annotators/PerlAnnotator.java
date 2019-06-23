@@ -25,8 +25,8 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
+import com.perl5.lang.perl.extensions.packageprocessor.impl.ConstantProcessor;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
-import com.perl5.lang.perl.parser.constant.psi.elementTypes.PerlConstantsWrapperElementType;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.*;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
@@ -84,7 +84,8 @@ public class PerlAnnotator extends PerlBaseAnnotator {
     }
     else if (element instanceof PerlPolyNamedElement) {
       TextAttributesKey subAttribute = PerlSyntaxHighlighter.PERL_SUB_DEFINITION;
-      if (elementType == PerlConstantsWrapperElementType.CONSTANT_WRAPPER) { // fixme some interface?
+      if (element instanceof PerlUseStatementElement &&
+          ((PerlUseStatementElement)element).getPackageProcessor() instanceof ConstantProcessor) {
         subAttribute = PerlSyntaxHighlighter.PERL_CONSTANT;
       }
       for (PerlDelegatingLightNamedElement lightNamedElement : ((PerlPolyNamedElement<?>)element).getLightElements()) {

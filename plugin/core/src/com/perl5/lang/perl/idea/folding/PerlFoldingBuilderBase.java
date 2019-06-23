@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.folding;
 
+import com.intellij.lang.ASTNode;
 import com.intellij.lang.folding.FoldingBuilderEx;
 import com.intellij.lang.folding.FoldingDescriptor;
 import com.intellij.openapi.editor.Document;
@@ -23,7 +24,9 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionWithIdentifier;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.Collections;
 import java.util.List;
 
 public abstract class PerlFoldingBuilderBase extends FoldingBuilderEx {
@@ -36,7 +39,9 @@ public abstract class PerlFoldingBuilderBase extends FoldingBuilderEx {
                                          @NotNull PsiElement element,
                                          int startMargin,
                                          int endMargin,
-                                         int minLines) {
+                                         int minLines,
+                                         @Nullable String placeHolderText,
+                                         boolean collapsedByDefault) {
     if (element.getParent() instanceof PerlNamespaceDefinitionWithIdentifier) {
       return;
     }
@@ -48,7 +53,12 @@ public abstract class PerlFoldingBuilderBase extends FoldingBuilderEx {
     int endLine = document.getLineNumber(endOffset);
 
     if (endLine - startLine > minLines) {
-      result.add(new FoldingDescriptor(element.getNode(), new TextRange(startOffset, endOffset)));
+      TextRange foldingRange = TextRange.create(startOffset, endOffset);
+      ASTNode node = element.getNode();
+      FoldingDescriptor descriptor = placeHolderText == null ?
+                                     new FoldingDescriptor(node, foldingRange) :
+                                     new FoldingDescriptor(node, range, null, placeHolderText, collapsedByDefault, Collections.emptySet());
+      result.add(descriptor);
     }
   }
 }

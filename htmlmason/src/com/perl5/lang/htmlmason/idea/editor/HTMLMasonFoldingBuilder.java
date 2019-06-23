@@ -125,7 +125,7 @@ public class HTMLMasonFoldingBuilder extends AbstractMasonFoldingBuilder impleme
       IElementType elementType = PsiUtilCore.getElementType(element);
 
       if (elementType == HTML_MASON_FILTERED_BLOCK) {
-        addDescriptorFor(myDescriptors, myDocument, element, 0, 0, 0);
+        addDescriptorFor(myDescriptors, myDocument, element, 0, 0, 0, null, false);
       }
       else if (FOLDABLE_TOKENS.contains(elementType)) {
         foldElement(element, myDescriptors, myDocument);

@@ -16,11 +16,13 @@
 
 package com.perl5.lang.perl.extensions.packageprocessor;
 
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.stubs.imports.PerlUseStatementStub;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
 import java.util.List;
@@ -64,6 +66,7 @@ public interface PerlPackageProcessor {
    * We are not advancing lexer through PACKAGE and [VERSION], because it may be used in parsing logic. If you
    * don't need them, just invoke {@link com.perl5.lang.perl.parser.PerlParserUtil#passPackageAndVersion(PerlBuilder, int)}
    */
+  @Deprecated
   default boolean parseUseParameters(@NotNull PerlBuilder b, int l) {
     return false;
   }
@@ -80,7 +83,23 @@ public interface PerlPackageProcessor {
    * @return list of the light psi elements declared by the {@code useStatementStub}
    */
   @NotNull
-  default List<PerlDelegatingLightNamedElement> computeLightElementsFromStubs(@NotNull PerlUseStatementStub useStatementStub) {
+  default List<PerlDelegatingLightNamedElement> computeLightElementsFromStubs(@NotNull PerlUseStatementElement useStatementElement,
+                                                                              @NotNull PerlUseStatementStub useStatementStub) {
     return Collections.emptyList();
+  }
+
+  /**
+   * @return text that should be shown in folded block of use arguments
+   */
+  @Nullable
+  default String getArgumentsFoldingText(@NotNull PerlUseStatementElement useStatementElement) {
+    return PerlBundle.message("perl.fold.ph.text.default");
+  }
+
+  /**
+   * @return true iff arguments of this use statement should be collapesed by default, e.g. group of constants definitions
+   */
+  default boolean isFoldedByDefault(@NotNull PerlUseStatementElement useStatementElement) {
+    return false;
   }
 }

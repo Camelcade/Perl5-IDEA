@@ -31,7 +31,6 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.parser.constant.psi.impl.PerlConstantsWrapper;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
@@ -43,7 +42,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.perl5.lang.perl.lexer.PerlTokenSets.HEREDOC_BODIES_TOKENSET;
-import static com.perl5.lang.perl.parser.constant.psi.elementTypes.PerlConstantsWrapperElementType.CONSTANT_WRAPPER;
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.USE_STATEMENT;
 
 public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlElementTypes, DumbAware {
@@ -247,9 +245,6 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
     if (elementType == BLOCK) {
       return PH_CODE_BLOCK;
     }
-    if (elementType == CONSTANT_WRAPPER) {
-      return "{constants definitions}";
-    }
     if (elementType == STRING_LIST) {
       return "{strings list}";
     }
@@ -288,6 +283,7 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
   @Override
   public boolean isCollapsedByDefault(@NotNull ASTNode node) {
     IElementType elementType = node.getElementType();
+    PsiElement psi = node.getPsi();
     if (elementType == POD) {
       return CodeFoldingSettings.getInstance().COLLAPSE_DOC_COMMENTS;
     }
@@ -299,9 +295,6 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
     }
     else if (elementType == COMMENT_LINE || elementType == COMMENT_BLOCK) {
       return PerlFoldingSettings.getInstance().COLLAPSE_COMMENTS;
-    }
-    else if (elementType == CONSTANT_WRAPPER) {
-      return PerlFoldingSettings.getInstance().COLLAPSE_CONSTANT_BLOCKS;
     }
     else if (elementType == ANON_ARRAY) {
       return PerlFoldingSettings.getInstance().COLLAPSE_ANON_ARRAYS;
@@ -352,48 +345,51 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
     @Override
     public void visitElement(@NotNull PsiElement element) {
       if (PsiUtilCore.getElementType(element) == POD) {
-        addDescriptorFor(myDescriptors, myDocument, element, 0, 0, 0);
+        addDescriptorFor(myDescriptors, myDocument, element, 0, 0, 0, null, false);
       }
       super.visitElement(element);
     }
 
     @Override
     public void visitBlock(@NotNull PsiPerlBlock o) {
-      addDescriptorFor(myDescriptors, myDocument, o, 0, 0, 1);
+      addDescriptorFor(myDescriptors, myDocument, o, 0, 0, 1, null, false);
       super.visitBlock(o);
     }
 
     @Override
     public void visitAnonArray(@NotNull PsiPerlAnonArray o) {
-      addDescriptorFor(myDescriptors, myDocument, o, 0, 0, 2);
+      addDescriptorFor(myDescriptors, myDocument, o, 0, 0, 2, null, false);
       super.visitAnonArray(o);
     }
 
     @Override
     public void visitParenthesisedExpr(@NotNull PsiPerlParenthesisedExpr o) {
-      addDescriptorFor(myDescriptors, myDocument, o, 0, 0, 2);
+      addDescriptorFor(myDescriptors, myDocument, o, 0, 0, 2, null, false);
       super.visitParenthesisedExpr(o);
     }
 
     @Override
     public void visitHeredocElement(@NotNull PerlHeredocElementImpl o) {
-      addDescriptorFor(myDescriptors, myDocument, o, 0, 1, 0);
+      addDescriptorFor(myDescriptors, myDocument, o, 0, 1, 0, null, false);
       super.visitHeredocElement(o);
     }
 
     @Override
     public void visitStringList(@NotNull PsiPerlStringList o) {
-      addDescriptorFor(myDescriptors, myDocument, o, 0, 0, 2);
+      addDescriptorFor(myDescriptors, myDocument, o, 0, 0, 2, null, false);
       super.visitStringList(o);
     }
 
     @Override
     public void visitAnonHash(@NotNull PsiPerlAnonHash o) {
-      if (o.getParent() instanceof PerlConstantsWrapper) {
-        addDescriptorFor(myDescriptors, myDocument, o.getParent(), 0, 0, 2);
+      PsiElement parent = o.getParent();
+      if (parent instanceof PerlUseStatementElement) {
+        addDescriptorFor(myDescriptors, myDocument, o, 0, 0, 2,
+                         ((PerlUseStatementElement)parent).getArgumentsFoldingText(),
+                         ((PerlUseStatementElement)parent).isFoldedByDefault());
       }
       else {
-        addDescriptorFor(myDescriptors, myDocument, o, 0, 0, 2);
+        addDescriptorFor(myDescriptors, myDocument, o, 0, 0, 2, null, false);
       }
       super.visitAnonHash(o);
     }

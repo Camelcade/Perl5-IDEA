@@ -22,9 +22,9 @@ import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.stubs.imports.PerlUseStatementStub;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-
 
 public class PerlUseStatementElement extends PerlUseStatementElementBase {
 
@@ -45,11 +45,26 @@ public class PerlUseStatementElement extends PerlUseStatementElementBase {
   @NotNull
   @Override
   protected final List<PerlDelegatingLightNamedElement> computeLightElementsFromStubs(@NotNull PerlUseStatementStub stub) {
-    return getPackageProcessor().computeLightElementsFromStubs(stub);
+    return getPackageProcessor().computeLightElementsFromStubs(this, stub);
   }
 
   @Override
   protected void visitWrapper(@NotNull PerlVisitor visitor) {
     visitor.visitUseStatement(this);
+  }
+
+  /**
+   * @return text that should be shown in folded block of use arguments
+   */
+  @Nullable
+  public String getArgumentsFoldingText() {
+    return getPackageProcessor().getArgumentsFoldingText(this);
+  }
+
+  /**
+   * @return true iff arguments of this use statement should be collapesed by default, e.g. group of constants definitions
+   */
+  public boolean isFoldedByDefault() {
+    return getPackageProcessor().isFoldedByDefault(this);
   }
 }

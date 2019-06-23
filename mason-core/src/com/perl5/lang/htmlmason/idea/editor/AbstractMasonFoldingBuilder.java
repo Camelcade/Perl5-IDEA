@@ -32,6 +32,6 @@ public abstract class AbstractMasonFoldingBuilder extends PerlFoldingBuilder {
     PsiElement lastChild = element.getLastChild();
     int rightMargin = lastChild == null || lastChild == firstChild ? 0 : lastChild.getNode().getTextLength();
 
-    addDescriptorFor(myDescriptors, myDocument, element, leftMargin, rightMargin, 0);
+    addDescriptorFor(myDescriptors, myDocument, element, leftMargin, rightMargin, 0, null, false);
   }
 }

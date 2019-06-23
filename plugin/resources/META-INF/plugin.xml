@@ -415,7 +415,6 @@
 
     <stubElementTypeHolder class="com.perl5.lang.perl.psi.stubs.PerlStubElementTypes"/>
     <stubElementTypeHolder class="com.perl5.lang.perl.parser.Exception.Class.psi.elementTypes.PerlExceptionClassWrapperElementType"/>
-    <stubElementTypeHolder class="com.perl5.lang.perl.parser.constant.psi.elementTypes.PerlConstantsWrapperElementType"/>
 
     <vetoRenameCondition implementation="com.perl5.lang.perl.parser.Exception.Class.ide.refactoring.PerlRenamingVetoCondition"/>
 

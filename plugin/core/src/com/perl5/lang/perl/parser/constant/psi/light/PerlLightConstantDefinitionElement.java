@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
-import com.perl5.lang.perl.parser.constant.psi.impl.PerlConstantsWrapper;
+import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import com.perl5.lang.perl.psi.light.PerlLightSubDefinitionElement;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
@@ -32,8 +32,8 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 import java.util.List;
 
-public class PerlLightConstantDefinitionElement extends PerlLightSubDefinitionElement<PerlConstantsWrapper> {
-  public PerlLightConstantDefinitionElement(@NotNull PerlConstantsWrapper wrapper,
+public class PerlLightConstantDefinitionElement extends PerlLightSubDefinitionElement<PerlUseStatementElement> {
+  public PerlLightConstantDefinitionElement(@NotNull PerlUseStatementElement wrapper,
                                             @NotNull String subName,
                                             @NotNull IStubElementType elementType,
                                             @NotNull PsiElement nameIdentifier,
@@ -44,7 +44,7 @@ public class PerlLightConstantDefinitionElement extends PerlLightSubDefinitionEl
     super(wrapper, subName, elementType, nameIdentifier, packageName, subArguments, annotations, returnValueFromCodeProvider);
   }
 
-  public PerlLightConstantDefinitionElement(@NotNull PerlConstantsWrapper delegate, @NotNull PerlSubDefinitionStub stub) {
+  public PerlLightConstantDefinitionElement(@NotNull PerlUseStatementElement delegate, @NotNull PerlSubDefinitionStub stub) {
     super(delegate, stub);
   }
 
