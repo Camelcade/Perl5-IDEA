@@ -19,7 +19,12 @@ package com.perl5.lang.perl.idea.inspections;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionWithIdentifier;
+import com.perl5.lang.perl.psi.PerlNamespaceElement;
+import com.perl5.lang.perl.psi.PerlVisitor;
+import com.perl5.lang.perl.psi.PsiPerlRequireExpr;
+import com.perl5.lang.perl.psi.impl.PerlNoStatementElement;
+import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -35,8 +40,8 @@ public class PerlUnresolvedNamespaceInspection extends PerlInspection {
         PsiElement parent = o.getParent();
 
         if (parent instanceof PsiPerlRequireExpr ||
-            parent instanceof PsiPerlUseStatement ||
-            parent instanceof PsiPerlNoStatement ||
+            parent instanceof PerlUseStatementElement ||
+            parent instanceof PerlNoStatementElement ||
             parent instanceof PerlNamespaceDefinitionWithIdentifier) {
           return;
         }

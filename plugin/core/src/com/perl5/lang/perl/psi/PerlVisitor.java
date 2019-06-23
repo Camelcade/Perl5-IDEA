@@ -17,10 +17,7 @@
 package com.perl5.lang.perl.psi;
 
 import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseAttributeWrapper;
-import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
-import com.perl5.lang.perl.psi.impl.PerlHeredocTerminatorElementImpl;
-import com.perl5.lang.perl.psi.impl.PerlPolyNamedElement;
-import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
+import com.perl5.lang.perl.psi.impl.*;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import org.jetbrains.annotations.NotNull;
 
@@ -125,6 +122,14 @@ public class PerlVisitor extends PsiPerlVisitor {
   }
 
   public void visitLightNamedElement(@NotNull PerlDelegatingLightNamedElement o) {
+    visitElement(o);
+  }
+
+  public void visitUseStatement(@NotNull PerlUseStatementElement o) {
+    visitElement(o);
+  }
+
+  public void visitNoStatement(@NotNull PerlNoStatementElement o) {
     visitElement(o);
   }
 

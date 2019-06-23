@@ -54,6 +54,7 @@ public class PerlClassAccessorWrapper extends PerlPolyNamedNestedCallElementBase
     super(node);
   }
 
+  @NotNull
   @Override
   protected List<PerlDelegatingLightNamedElement> computeLightElementsFromStubs(@NotNull PerlClassAccessorWrapperStub stub) {
     return stub.getLightNamedElementsStubs().stream()

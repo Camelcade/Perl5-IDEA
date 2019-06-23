@@ -16,12 +16,20 @@
 
 package com.perl5.lang.perl.psi;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 
 public interface PerlUseStatement {
+  @Nullable
   String getPackageName();
 
+  /**
+   * @return a name of containing namespace
+   */
+  @Nullable
   String getNamespaceName();
 
+  @Nullable
   List<String> getImportParameters();
 }

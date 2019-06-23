@@ -1,3 +1,5 @@
+Poly-named provider: PerlUseStatementElement(USE_STATEMENT) at 0 in constants.pl
+
 Poly-named provider: PerlConstantsWrapper(CONSTANT_WRAPPER) at 13 in constants.pl
 	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::CONST1; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 19 in constants.pl
 	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::CONST2; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 41 in constants.pl

@@ -47,8 +47,8 @@ public interface PerlStubElementTypes {
 
   IStubElementType PERL_NAMESPACE = new PerlNamespaceDefinitionElementType("NAMESPACE");
 
-  IStubElementType PERL_USE_STATEMENT = new PerlUseStatementStubElementType("USE_STATEMENT");
-  IStubElementType PERL_NO_STATEMENT = new PerlNoStatementStubElementType("NO_STATEMENT");
+  IStubElementType USE_STATEMENT = new PerlUseStatementStubElementType("USE_STATEMENT");
+  IStubElementType NO_STATEMENT = new PerlNoStatementStubElementType("NO_STATEMENT");
 
   IStubElementType PERL_DO_EXPR = new PerlDoExprElementType("PERL_DO_EXPR");
   IStubElementType PERL_REQUIRE_EXPR = new PerlRequireExprElementType("PERL_REQUIRE_EXPR");

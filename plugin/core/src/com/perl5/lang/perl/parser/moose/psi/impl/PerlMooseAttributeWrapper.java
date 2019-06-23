@@ -88,6 +88,7 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElement<PerlMooseAtt
     return lists.first.stream().map(ElementManipulators::getValueText).collect(Collectors.toList());
   }
 
+  @NotNull
   @Override
   protected List<PerlDelegatingLightNamedElement> computeLightElementsFromStubs(@NotNull PerlMooseAttributeWrapperStub stub) {
     return stub.getLightNamedElementsStubs().stream()

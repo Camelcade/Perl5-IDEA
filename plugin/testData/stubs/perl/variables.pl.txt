@@ -9,6 +9,7 @@ PerlFileStub
 	Annotations: null
 	Type: Perl5
   USE_STATEMENT:PerlUseStatementStub
+	Light elements: 0
 	Package name: vars
 	Outer package name: main
 	Import options: []

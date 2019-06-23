@@ -18,7 +18,7 @@ package psi;
 
 
 import base.PerlLightTestCase;
-import com.perl5.lang.perl.psi.PerlUseStatementElement;
+import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import org.junit.Test;
 
 import java.util.Arrays;

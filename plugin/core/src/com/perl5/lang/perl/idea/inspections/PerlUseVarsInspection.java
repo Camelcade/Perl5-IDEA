@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ import com.intellij.psi.PsiElementVisitor;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.quickfixes.PerlUseVarsQuickFix;
 import com.perl5.lang.perl.psi.PerlVisitor;
-import com.perl5.lang.perl.psi.PsiPerlUseStatement;
+import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import org.jetbrains.annotations.NotNull;
 
 import static com.perl5.lang.perl.util.PerlPackageUtil.PACKAGE_VARS;
@@ -33,7 +33,7 @@ public class PerlUseVarsInspection extends PerlInspection {
   public PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean isOnTheFly) {
     return new PerlVisitor() {
       @Override
-      public void visitUseStatement(@NotNull PsiPerlUseStatement o) {
+      public void visitUseStatement(@NotNull PerlUseStatementElement o) {
         if (PACKAGE_VARS.equals(o.getPackageName())) {
           PerlUseVarsQuickFix quickFix = new PerlUseVarsQuickFix(o);
           holder.registerProblem(

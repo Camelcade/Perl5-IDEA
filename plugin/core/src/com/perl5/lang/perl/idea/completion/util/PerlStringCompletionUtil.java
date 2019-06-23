@@ -34,6 +34,7 @@ import com.perl5.lang.perl.idea.completion.PerlStringCompletionCache;
 import com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
+import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import gnu.trove.THashSet;
@@ -143,8 +144,8 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
 
   public static void fillWithUseParameters(final @NotNull PsiElement stringContentElement, @NotNull final CompletionResultSet resultSet) {
     @SuppressWarnings("unchecked")
-    PsiPerlUseStatement useStatement =
-      PsiTreeUtil.getParentOfType(stringContentElement, PsiPerlUseStatement.class, true, PsiPerlStatement.class);
+    PerlUseStatementElement useStatement =
+      PsiTreeUtil.getParentOfType(stringContentElement, PerlUseStatementElement.class, true, PsiPerlStatement.class);
 
     if (useStatement == null) {
       return;

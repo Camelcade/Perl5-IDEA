@@ -49,6 +49,7 @@ public class PerlConstantsWrapper extends PerlPolyNamedElement<PerlConstantsWrap
     super(node);
   }
 
+  @NotNull
   @Override
   protected List<PerlDelegatingLightNamedElement> computeLightElementsFromStubs(@NotNull PerlConstantsWrapperStub stub) {
     return stub.getLightNamedElementsStubs().stream()

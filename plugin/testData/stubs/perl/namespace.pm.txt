@@ -17,10 +17,12 @@ PerlFileStub
 	@EXPORT_TAGS: {}
 	Annotations: null
     USE_STATEMENT:PerlUseStatementStub
+	Light elements: 0
 	Package name: strict
 	Outer package name: Foo::Bar
 	Import options: null
     USE_STATEMENT:PerlUseStatementStub
+	Light elements: 0
 	Package name: warnings
 	Outer package name: Foo::Bar
 	Import options: [FATAL, all]

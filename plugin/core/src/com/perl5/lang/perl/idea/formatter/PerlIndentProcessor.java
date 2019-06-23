@@ -44,6 +44,8 @@ import static com.perl5.lang.perl.idea.formatter.PerlFormattingContext.BLOCK_CLO
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingContext.BLOCK_OPENERS;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.HEREDOC_BODIES_TOKENSET;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.VARIABLE_DECLARATIONS;
+import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.NO_STATEMENT;
+import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.USE_STATEMENT;
 
 
 public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementTypes {
@@ -198,7 +200,8 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
     }
 
     if (getUnindentableTokens().contains(nodeType) ||
-        (nodeType instanceof PerlPolyNamedElementType && !(node.getPsi() instanceof PerlPolyNamedNestedCallElementBase))) {
+        (nodeType instanceof PerlPolyNamedElementType &&
+         !(node.getPsi() instanceof PerlPolyNamedNestedCallElementBase) && nodeType != USE_STATEMENT && nodeType != NO_STATEMENT)) {
       return Indent.getNoneIndent();
     }
 

@@ -22,6 +22,8 @@ import com.perl5.lang.perl.parser.moose.MooseElementTypes;
 
 import static com.perl5.lang.perl.parser.MooseParserExtension.MOOSE_RESERVED_TOKENSET;
 import static com.perl5.lang.perl.parser.PerlParserUtil.CLOSE_QUOTES;
+import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.NO_STATEMENT;
+import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.USE_STATEMENT;
 
 
 public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {

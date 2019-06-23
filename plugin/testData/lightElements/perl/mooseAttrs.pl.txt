@@ -1,3 +1,7 @@
+Poly-named provider: PerlUseStatementElement(USE_STATEMENT) at 39 in mooseAttrs.pl
+
+Poly-named provider: PerlUseStatementElement(USE_STATEMENT) at 51 in mooseAttrs.pl
+
 Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 84 in mooseAttrs.pl
 	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test1; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 84 in mooseAttrs.pl
 

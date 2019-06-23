@@ -16,18 +16,18 @@
 
 package com.perl5.lang.perl.psi.stubs.imports;
 
-import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.perl.psi.PerlUseStatement;
-import com.perl5.lang.perl.psi.PerlUseStatementElement;
+import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
+import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
 import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class PerlUseStatementStub extends StubBase<PerlUseStatementElement> implements StubElement<PerlUseStatementElement>,
-                                                                                       PerlUseStatement {
+public class PerlUseStatementStub extends PerlPolyNamedElementStub<PerlUseStatementElement> implements StubElement<PerlUseStatementElement>,
+                                                                                                       PerlUseStatement {
   @NotNull
   private final String myPackageName;
   @NotNull
@@ -38,8 +38,9 @@ public class PerlUseStatementStub extends StubBase<PerlUseStatementElement> impl
   public PerlUseStatementStub(StubElement parent,
                               @NotNull String namespaceName,
                               @NotNull String packageName,
-                              @Nullable List<String> importOptions) {
-    super(parent, PerlStubElementTypes.PERL_USE_STATEMENT);
+                              @Nullable List<String> importOptions,
+                              @NotNull List<StubElement> lightNamedElementsStubs) {
+    super(parent, PerlStubElementTypes.USE_STATEMENT, lightNamedElementsStubs);
     myPackageName = packageName;
     myNamespaceName = namespaceName;
     myImportOptions = importOptions;

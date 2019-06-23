@@ -29,6 +29,7 @@ import com.perl5.lang.perl.idea.EP.PerlPackageProcessorEP;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
+import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.regex.Pattern;
@@ -128,15 +129,9 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
       IElementType prevTokenType = prevToken == null ? null : prevToken.getTokenType();
 
       // optional }->[ or ]->{
-      if (
-        (prevTokenType == RIGHT_BRACE || prevTokenType == RIGHT_BRACKET)
-        && (tokenType == LEFT_BRACE || tokenType == LEFT_BRACKET || tokenType == LEFT_PAREN)
-        ) {
-        return true;
-      }
+      return (prevTokenType == RIGHT_BRACE || prevTokenType == RIGHT_BRACKET)
+             && (tokenType == LEFT_BRACE || tokenType == LEFT_BRACKET || tokenType == LEFT_PAREN);
     }
-
-    return false;
   }
 
   public static boolean parseExpressionLevel(PsiBuilder b, int l, int g) {
@@ -502,5 +497,31 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
     boolean r = PerlParserImpl.anon_hash(b, l) && b.getTokenType() == COMMA;
     rollbackMarker.rollbackTo();
     return r && PerlParserImpl.parse_list_expr(b, l);
+  }
+
+  public static boolean parseUse(@NotNull PsiBuilder b, int l) {
+    if (b.getTokenType() != RESERVED_USE) {
+      return false;
+    }
+    PsiBuilder.Marker mark = b.mark();
+    if (PerlParserImpl.parse_use_statement(b, l)) {
+      mark.done(PerlStubElementTypes.USE_STATEMENT);
+      return true;
+    }
+    mark.rollbackTo();
+    return false;
+  }
+
+  public static boolean parseNo(@NotNull PsiBuilder b, int l) {
+    if (b.getTokenType() != RESERVED_NO) {
+      return false;
+    }
+    PsiBuilder.Marker mark = b.mark();
+    if (PerlParserImpl.parse_no_statement(b, l)) {
+      mark.done(PerlStubElementTypes.NO_STATEMENT);
+      return true;
+    }
+    mark.rollbackTo();
+    return false;
   }
 }

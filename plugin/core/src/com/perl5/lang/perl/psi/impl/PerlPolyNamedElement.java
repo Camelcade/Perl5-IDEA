@@ -77,6 +77,7 @@ public abstract class PerlPolyNamedElement<Stub extends PerlPolyNamedElementStub
   /**
    * Internal sub for calculating light elements from stubs
    */
+  @NotNull
   protected abstract List<PerlDelegatingLightNamedElement> computeLightElementsFromStubs(@NotNull Stub stub);
 
   /**

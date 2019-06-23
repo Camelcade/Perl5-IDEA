@@ -139,7 +139,7 @@ HtmlFile:mojoParserTest.ep
 Subtree: Mojolicious Perl (Mojolicious Perl)
 Mojolicious Perl5 Template
   PsiComment(Mojolicious: %)('%')
-  PsiPerlUseStatementImpl(USE_STATEMENT)
+  PerlUseStatementElement(USE_STATEMENT)
     PsiElement(Perl5: use)('use')
     PerlNamespaceElementImpl(Perl5: package::name)('Time::Piece')
     PsiElement(Perl5: ;)(';')
@@ -225,7 +225,7 @@ Mojolicious Perl5 Template
       PsiElement(Perl5: })('}')
   PsiComment(Mojolicious: MOJO_TEMPLATE_BLOCK_HTML)('</body>\n</html>')
   PsiComment(Mojolicious: %)('%')
-  PsiPerlUseStatementImpl(USE_STATEMENT)
+  PerlUseStatementElement(USE_STATEMENT)
     PsiElement(Perl5: use)('use')
     PerlNamespaceElementImpl(Perl5: package::name)('Mojo::ByteStream')
     PsiPerlStringSqImpl(Perl5: STRING_SQ)

@@ -18,7 +18,7 @@ package com.perl5.lang.perl.extensions.mojo;
 
 import com.perl5.lang.perl.extensions.packageprocessor.*;
 import com.perl5.lang.perl.internals.PerlFeaturesTable;
-import com.perl5.lang.perl.psi.PerlUseStatementElement;
+import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;

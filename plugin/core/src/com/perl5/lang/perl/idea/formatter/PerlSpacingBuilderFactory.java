@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,8 @@ import static com.perl5.lang.perl.idea.formatter.PerlIndentProcessor.MULTI_PARAM
 import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.SAME_LINE;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.CUSTOM_EXPR_KEYWORDS;
 import static com.perl5.lang.perl.parser.MooseParserExtension.MOOSE_RESERVED_TOKENSET;
+import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.NO_STATEMENT;
+import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.USE_STATEMENT;
 
 public class PerlSpacingBuilderFactory {
   @NotNull

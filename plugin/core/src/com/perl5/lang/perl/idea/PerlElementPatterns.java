@@ -20,6 +20,8 @@ import com.intellij.patterns.PsiElementPattern;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.impl.PerlNoStatementElement;
+import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 
 import static com.intellij.patterns.PlatformPatterns.psiElement;
 
@@ -67,8 +69,8 @@ public interface PerlElementPatterns extends PerlElementTypes {
     );
 
   PsiElementPattern.Capture<PerlNamespaceElement> NAMESPACE_NAME_PATTERN = psiElement(PerlNamespaceElement.class);
-  PsiElementPattern.Capture<PsiPerlUseStatement> USE_STATEMENT_PATTERN = psiElement(PsiPerlUseStatement.class);
-  PsiElementPattern.Capture<PsiPerlNoStatement> NO_STATEMENT_PATTERN = psiElement(PsiPerlNoStatement.class);
+  PsiElementPattern.Capture<PerlUseStatementElement> USE_STATEMENT_PATTERN = psiElement(PerlUseStatementElement.class);
+  PsiElementPattern.Capture<PerlNoStatementElement> NO_STATEMENT_PATTERN = psiElement(PerlNoStatementElement.class);
   PsiElementPattern.Capture<PsiPerlRequireExpr> REQUIRE_EXPR_PATTERN = psiElement(PsiPerlRequireExpr.class);
   PsiElementPattern.Capture<PerlNamespaceDefinitionElement> NAMESPACE_DEFINITION_PATTERN = psiElement(PerlNamespaceDefinitionElement.class);
 

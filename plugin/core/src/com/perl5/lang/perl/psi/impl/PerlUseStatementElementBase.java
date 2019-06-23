@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.mixins;
+package com.perl5.lang.perl.psi.impl;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.IStubElementType;
@@ -23,6 +23,7 @@ import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessorDefau
 import com.perl5.lang.perl.extensions.packageprocessor.PerlVersionProcessor;
 import com.perl5.lang.perl.idea.EP.PerlPackageProcessorEP;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import com.perl5.lang.perl.psi.stubs.imports.PerlUseStatementStub;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -32,31 +33,33 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Collections;
 import java.util.List;
 
-
-public abstract class PerlUseStatementMixin extends PerlStubBasedPsiElementBase<PerlUseStatementStub> implements PsiPerlUseStatement {
-  public PerlUseStatementMixin(ASTNode node) {
-    super(node);
-  }
-
-  public PerlUseStatementMixin(PerlUseStatementStub stub, IStubElementType nodeType) {
+public abstract class PerlUseStatementElementBase extends PerlPolyNamedElement<PerlUseStatementStub>
+  implements PerlNamespaceElementContainer,
+             PerlCompositeElement,
+             PsiPerlStatement,
+             PerlUseStatement {
+  public PerlUseStatementElementBase(@NotNull PerlUseStatementStub stub,
+                                     @NotNull IStubElementType nodeType) {
     super(stub, nodeType);
   }
 
-  @Override
+  public PerlUseStatementElementBase(@NotNull ASTNode node) {
+    super(node);
+  }
+
   public boolean isPragma() {
     return getPackageProcessor().isPragma();
   }
 
-  @Override
   public boolean isVersion() {
     return getNamespaceElement() == null && getVersionElement() != null;
   }
 
-  @Override
   public boolean isPragmaOrVersion() {
     return isPragma() || isVersion();
   }
 
+  @Nullable
   @Override
   public String getPackageName() {
     PerlUseStatementStub stub = getGreenStub();
@@ -77,7 +80,6 @@ public abstract class PerlUseStatementMixin extends PerlStubBasedPsiElementBase<
     return findChildByClass(PerlNamespaceElement.class);
   }
 
-  @Override
   public PerlVersionElement getVersionElement() {
     return findChildByClass(PerlVersionElement.class);
   }
@@ -105,7 +107,6 @@ public abstract class PerlUseStatementMixin extends PerlStubBasedPsiElementBase<
   }
 
   @NotNull
-  @Override
   public PerlPackageProcessor getPackageProcessor() {
     PerlPackageProcessor packageProcessor = null;
 
@@ -115,13 +116,13 @@ public abstract class PerlUseStatementMixin extends PerlStubBasedPsiElementBase<
       packageProcessor = PerlPackageProcessorEP.EP.findSingle(packageName);
     }
     else if (getVersionElement() != null) {
-      packageProcessor = PerlVersionProcessor.getProcessor(PerlUseStatementMixin.this);
+      packageProcessor = PerlVersionProcessor.getProcessor(this);
     }
 
     return packageProcessor == null ? PerlPackageProcessorDefault.INSTANCE : packageProcessor;
   }
 
-  @Nullable
+  @NotNull
   @Override
   public String getNamespaceName() {
     PerlUseStatementStub stub = getGreenStub();
@@ -132,7 +133,6 @@ public abstract class PerlUseStatementMixin extends PerlStubBasedPsiElementBase<
     return PerlPackageUtil.getContextNamespaceName(this);
   }
 
-  @Override
   @Nullable
   public PsiPerlExpr getExpr() {
     return findChildByClass(PsiPerlExpr.class);

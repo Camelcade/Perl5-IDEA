@@ -17,9 +17,12 @@
 package com.perl5.lang.perl.extensions.packageprocessor;
 
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
-import com.perl5.lang.perl.psi.PerlUseStatementElement;
+import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
+import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
+import com.perl5.lang.perl.psi.stubs.imports.PerlUseStatementStub;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -63,5 +66,21 @@ public interface PerlPackageProcessor {
    */
   default boolean parseUseParameters(@NotNull PerlBuilder b, int l) {
     return false;
+  }
+
+  /**
+   * @return list of the light psi elements declared by the {@code useStatementElement}
+   */
+  @NotNull
+  default List<PerlDelegatingLightNamedElement> computeLightElementsFromPsi(@NotNull PerlUseStatementElement useStatementElement) {
+    return Collections.emptyList();
+  }
+
+  /**
+   * @return list of the light psi elements declared by the {@code useStatementStub}
+   */
+  @NotNull
+  default List<PerlDelegatingLightNamedElement> computeLightElementsFromStubs(@NotNull PerlUseStatementStub useStatementStub) {
+    return Collections.emptyList();
   }
 }

@@ -18,8 +18,9 @@ package com.perl5.lang.perl.extensions.packageprocessor;
 
 import com.perl5.lang.perl.internals.PerlFeaturesTable;
 import com.perl5.lang.perl.internals.PerlVersion;
-import com.perl5.lang.perl.psi.PerlUseStatementElement;
 import com.perl5.lang.perl.psi.PerlVersionElement;
+import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
+import com.perl5.lang.perl.psi.impl.PerlUseStatementElementBase;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
@@ -55,7 +56,7 @@ public class PerlVersionProcessor implements PerlPackageProcessor, PerlFeaturesP
     return currentFeaturesTable == null ? new PerlFeaturesTable() : currentFeaturesTable.clone();
   }
 
-  public static PerlVersionProcessor getProcessor(PerlUseStatementElement useStatement) {
+  public static PerlVersionProcessor getProcessor(PerlUseStatementElementBase useStatement) {
     PerlVersionElement versionElement = useStatement.getVersionElement();
     assert versionElement != null;
 

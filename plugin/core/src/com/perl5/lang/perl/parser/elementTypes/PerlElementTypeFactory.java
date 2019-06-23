@@ -111,10 +111,6 @@ public class PerlElementTypeFactory {
         return PerlStubElementTypes.PERL_NAMESPACE;
       case "VARIABLE_DECLARATION_ELEMENT":
         return PerlStubElementTypes.PERL_VARIABLE_DECLARATION_ELEMENT;
-      case "USE_STATEMENT":
-        return PerlStubElementTypes.PERL_USE_STATEMENT;
-      case "NO_STATEMENT":
-        return PerlStubElementTypes.PERL_NO_STATEMENT;
       case "DO_EXPR":
         return PerlStubElementTypes.PERL_DO_EXPR;
       case "REQUIRE_EXPR":

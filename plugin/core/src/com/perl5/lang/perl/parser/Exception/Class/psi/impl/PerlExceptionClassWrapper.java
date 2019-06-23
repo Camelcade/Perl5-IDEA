@@ -55,6 +55,7 @@ public class PerlExceptionClassWrapper extends PerlPolyNamedElement<PerlExceptio
     super(node);
   }
 
+  @NotNull
   @Override
   protected List<PerlDelegatingLightNamedElement> computeLightElementsFromStubs(@NotNull PerlExceptionClassWrapperStub stub) {
     return stub.getLightNamedElementsStubs().stream()

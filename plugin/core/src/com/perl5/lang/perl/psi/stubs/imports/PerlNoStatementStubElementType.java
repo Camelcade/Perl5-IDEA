@@ -18,7 +18,7 @@ package com.perl5.lang.perl.psi.stubs.imports;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.psi.impl.PsiPerlNoStatementImpl;
+import com.perl5.lang.perl.psi.impl.PerlNoStatementElement;
 import org.jetbrains.annotations.NotNull;
 
 
@@ -30,7 +30,7 @@ public class PerlNoStatementStubElementType extends PerlUseStatementStubElementT
   @NotNull
   @Override
   public PsiElement getPsiElement(@NotNull ASTNode node) {
-    return new PsiPerlNoStatementImpl(node);
+    return new PerlNoStatementElement(node);
   }
 
   @Override

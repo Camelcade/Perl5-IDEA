@@ -17,6 +17,7 @@ PerlFileStub
 	@EXPORT_TAGS: {}
 	Annotations: null
     USE_STATEMENT:PerlUseStatementStub
+	Light elements: 0
 	Package name: constant
 	Outer package name: Foo::Bar
 	Import options: null
@@ -29,6 +30,7 @@ PerlFileStub
 	Arguments: []
 	Return value: 1
     USE_STATEMENT:PerlUseStatementStub
+	Light elements: 0
 	Package name: constant
 	Outer package name: Foo::Bar
 	Import options: null

@@ -1,3 +1,5 @@
+Poly-named provider: PerlUseStatementElement(USE_STATEMENT) at 0 in exceptionClass.pl
+
 Poly-named provider: PerlExceptionClassWrapper(Class::Exception wrapper) at 25 in exceptionClass.pl
 	PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception1; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 25 in exceptionClass.pl
 	PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception2; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 43 in exceptionClass.pl

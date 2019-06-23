@@ -19,77 +19,84 @@ package com.perl5.lang.perl.psi.stubs.imports;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.stubs.*;
-import com.perl5.lang.perl.PerlLanguage;
+import com.intellij.psi.stubs.IndexSink;
+import com.intellij.psi.stubs.StubElement;
+import com.intellij.psi.stubs.StubInputStream;
+import com.intellij.psi.stubs.StubOutputStream;
+import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
-import com.perl5.lang.perl.psi.PerlUseStatementElement;
-import com.perl5.lang.perl.psi.impl.PsiPerlUseStatementImpl;
+import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
+import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementType;
 import com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.List;
 
 import static com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil.readString;
 import static com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil.readStringsList;
 
 
-public class PerlUseStatementStubElementType extends IStubElementType<PerlUseStatementStub, PerlUseStatementElement>
+public class PerlUseStatementStubElementType extends PerlPolyNamedElementType<PerlUseStatementStub, PerlUseStatementElement>
   implements PsiElementProvider {
   public PerlUseStatementStubElementType(String debugName) {
-    super(debugName, PerlLanguage.INSTANCE);
+    super(debugName);
   }
 
   @Override
   public PerlUseStatementElement createPsi(@NotNull PerlUseStatementStub stub) {
-    return new PsiPerlUseStatementImpl(stub, this);
+    return new PerlUseStatementElement(stub, this);
   }
 
   @NotNull
   @Override
   public PsiElement getPsiElement(@NotNull ASTNode node) {
-    return new PsiPerlUseStatementImpl(node);
+    return new PerlUseStatementElement(node);
   }
 
   @NotNull
   @Override
-  public PerlUseStatementStub createStub(@NotNull PerlUseStatementElement psi, StubElement parentStub) {
+  protected PerlUseStatementStub createStub(@NotNull PerlUseStatementElement psi,
+                                            StubElement parentStub,
+                                            @NotNull List<StubElement> lightElementsStubs) {
     return new PerlUseStatementStub(
       parentStub,
       psi.getNamespaceName(),
-      psi.getPackageName(),
-      psi.getImportParameters()
+      ObjectUtils.notNull(psi.getPackageName()),
+      psi.getImportParameters(),
+      lightElementsStubs
     );
   }
 
   @NotNull
   @Override
-  public String getExternalId() {
-    return "perl." + super.toString();
+  protected PerlUseStatementStub deserialize(@NotNull StubInputStream dataStream,
+                                             StubElement parentStub,
+                                             @NotNull List<StubElement> lightElementsStubs) throws IOException {
+    return new PerlUseStatementStub(parentStub,
+                                    ObjectUtils.notNull(readString(dataStream)),
+                                    ObjectUtils.notNull(readString(dataStream)),
+                                    readStringsList(dataStream),
+                                    lightElementsStubs);
   }
 
   @Override
-  public void serialize(@NotNull PerlUseStatementStub stub, @NotNull StubOutputStream dataStream) throws IOException {
+  public void serializeStub(@NotNull PerlUseStatementStub stub, @NotNull StubOutputStream dataStream) throws IOException {
     dataStream.writeName(stub.getNamespaceName());
     dataStream.writeName(stub.getPackageName());
     PerlStubSerializationUtil.writeStringsList(dataStream, stub.getImportParameters());
   }
 
-  @NotNull
   @Override
-  public PerlUseStatementStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
-    return new PerlUseStatementStub(parentStub, readString(dataStream), readString(dataStream), readStringsList(dataStream));
-  }
-
-  @Override
-  public void indexStub(@NotNull PerlUseStatementStub stub, @NotNull IndexSink sink) {
+  public void doIndexStub(@NotNull PerlUseStatementStub stub, @NotNull IndexSink sink) {
     sink.occurrence(PerlUseStatementsIndex.KEY, stub.getNamespaceName());
   }
 
   @Override
   public boolean shouldCreateStub(ASTNode node) {
     PsiElement element = node.getPsi();
-    return element instanceof PsiPerlUseStatementImpl &&
+    return element instanceof PerlUseStatementElement &&
            element.isValid() &&
-           StringUtil.isNotEmpty(((PsiPerlUseStatementImpl)element).getPackageName());
+           StringUtil.isNotEmpty(((PerlUseStatementElement)element).getPackageName());
   }
 }

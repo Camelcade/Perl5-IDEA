@@ -28,8 +28,12 @@ import com.perl5.lang.perl.adapters.CpanAdapter;
 import com.perl5.lang.perl.adapters.CpanminusAdapter;
 import com.perl5.lang.perl.adapters.PackageManagerAdapter;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PerlNamespaceElement;
+import com.perl5.lang.perl.psi.PerlVisitor;
+import com.perl5.lang.perl.psi.PsiPerlRequireExpr;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
+import com.perl5.lang.perl.psi.impl.PerlNoStatementElement;
+import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 
@@ -44,14 +48,14 @@ public class PerlUnresolvedPackageFileInspection extends PerlInspection {
     return new PerlVisitor() {
 
       @Override
-      public void visitUseStatement(@NotNull PsiPerlUseStatement o) {
+      public void visitUseStatement(@NotNull PerlUseStatementElement o) {
         if (o.getNamespaceElement() != null) {
           checkPackageFile(o.getNamespaceElement());
         }
       }
 
       @Override
-      public void visitNoStatement(@NotNull PsiPerlNoStatement o) {
+      public void visitNoStatement(@NotNull PerlNoStatementElement o) {
         if (o.getNamespaceElement() != null) {
           checkPackageFile(o.getNamespaceElement());
         }

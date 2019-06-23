@@ -1,3 +1,7 @@
+Poly-named provider: PerlUseStatementElement(USE_STATEMENT) at 0 in mooseAttrsWithStandardTypes.pl
+
+Poly-named provider: PerlUseStatementElement(USE_STATEMENT) at 9 in mooseAttrsWithStandardTypes.pl
+
 Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 40 in mooseAttrsWithStandardTypes.pl
 	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@main::attr1; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 40 in mooseAttrsWithStandardTypes.pl
 

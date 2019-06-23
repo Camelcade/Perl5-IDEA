@@ -28,13 +28,12 @@ import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.impl.PerlImplicitSubDefinition;
 import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
 import com.perl5.lang.perl.psi.properties.PerlPackageMember;
-import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static com.perl5.lang.perl.util.PerlPackageUtil.CORE_NAMESPACE;
@@ -89,10 +88,9 @@ public class PerlImplicitDeclarationsService {
   @NotNull
   public PerlImplicitSubDefinition registerAnonSub(@NotNull String namespaceName,
                                                    @NotNull String baseName,
-                                                   @NotNull List<PerlSubArgument> subArguments,
                                                    @Nullable PerlValue returnValue) {
     PerlImplicitSubDefinition subDefinition = new PerlImplicitSubDefinition(
-      myPsiManager, baseName, namespaceName, subArguments, returnValue, true);
+      myPsiManager, baseName, namespaceName, Collections.emptyList(), returnValue, true);
     doRegister(mySubsMap, subDefinition);
     return subDefinition;
   }

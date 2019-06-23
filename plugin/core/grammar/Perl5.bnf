@@ -428,19 +428,8 @@
 
     mixin("statement")="com.perl5.lang.perl.psi.mixins.PerlStatementMixin"
 
-    mixin("use_statement")="com.perl5.lang.perl.psi.mixins.PerlUseStatementMixin"
-    implements("use_statement")="com.perl5.lang.perl.psi.PerlUseStatementElement"
-    stubClass("use_statement")="com.perl5.lang.perl.psi.stubs.imports.PerlUseStatementStub"
-
-    mixin("no_statement")="com.perl5.lang.perl.psi.mixins.PerlNoStatementMixin"
-    implements("no_statement")="com.perl5.lang.perl.psi.PerlNoStatementElement"
-    stubClass("no_statement")="com.perl5.lang.perl.psi.stubs.imports.PerlUseStatementStub"
-
 	mixin("call_arguments")="com.perl5.lang.perl.psi.mixins.PerlCallArguments"
 	extends("parenthesised_call_arguments")=call_arguments
-
-    extends("use_statement.*")=statement
-    extends("no_statement")=statement
 
 	implements("named_block|conditional_block|unconditional_block")="com.perl5.lang.perl.psi.properties.PerlStatementsContainer"
 
@@ -551,6 +540,8 @@ private statement_item ::=
         | <<parseParserExtensionStatement>>
         | compound_statement
         | format_definition
+        | <<parseUse>>
+        | <<parseNo>>
         | statement
         | block_compound  // put it after statement to handle anon hashes before it.
         | annotation
@@ -663,11 +654,7 @@ foreach_compound ::= {'for'|'foreach'} [ foreach_iterator ] condition_expr parse
 foreach_iterator ::= variable_declaration | variable
 
 
-statement ::=
-    use_statement
-    | no_statement
-    | sub_declaration
-	| statement_body <<statementSemi>>
+statement ::= sub_declaration | statement_body <<statementSemi>>
 
 private statement_body ::= normal_statement {recoverWhile=recover_statement}
 
@@ -746,8 +733,8 @@ until_statement_modifier ::=    'until' expr {pin=1 name="Postfix until"}
 for_statement_modifier ::=    {'for'|'foreach'} expr  {pin=1 name="Postfix for"}
 when_statement_modifier ::=    'when' expr {pin=1 name="Postfix when"}
 
-use_statement ::=  'use' <<parseUseParameters use_no_parameters>> <<statementSemi>> {pin=1}
-no_statement ::=  'no' use_no_parameters <<statementSemi>> {pin=1}
+private parse_use_statement ::=  'use' <<parseUseParameters use_no_parameters>> <<statementSemi>> {pin=1}
+private parse_no_statement ::=  'no' use_no_parameters <<statementSemi>> {pin=1}
 
 private use_no_parameters ::= use_module_parameters | use_version_parameters {recoverWhile=recover_statement}
 private use_module_parameters ::= any_package [perl_version [comma]] [expr];

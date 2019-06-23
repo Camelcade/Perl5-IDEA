@@ -1,3 +1,5 @@
+Poly-named provider: PerlUseStatementElement(USE_STATEMENT) at 18 in classAccessor.pl
+
 Poly-named provider: PerlClassAccessorWrapper(CLASS_ACCESSOR_WRAPPER) at 67 in classAccessor.pl
 	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::accessor1($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 84 in classAccessor.pl
 	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::accessor2($self, [$new_value]); navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 101 in classAccessor.pl

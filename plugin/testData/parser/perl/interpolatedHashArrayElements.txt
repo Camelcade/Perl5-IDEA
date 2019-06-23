@@ -1,10 +1,10 @@
 Subtree: Perl5 (Perl5)
 Perl5
-  PsiPerlUseStatementImpl(USE_STATEMENT)
+  PerlUseStatementElement(USE_STATEMENT)
     PsiElement(Perl5: use)('use')
     PerlVersionElementImpl(Perl5: VERSION_ELEMENT)('v5.10')
     PsiElement(Perl5: ;)(';')
-  PsiPerlUseStatementImpl(USE_STATEMENT)
+  PerlUseStatementElement(USE_STATEMENT)
     PsiElement(Perl5: use)('use')
     PerlNamespaceElementImpl(Perl5: package::name)('strict')
     PsiElement(Perl5: ;)(';')

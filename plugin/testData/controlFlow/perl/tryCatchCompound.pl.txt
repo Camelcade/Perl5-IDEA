@@ -1,6 +1,6 @@
 0(1) element: null (InstructionImpl)
 1(2) element: Perl5 (InstructionImpl)
-2(3) element: PsiPerlUseStatementImpl(USE_STATEMENT) (InstructionImpl)
+2(3) element: PerlUseStatementElement(USE_STATEMENT) (InstructionImpl)
 3(4) element: PsiPerlStringSqImpl(Perl5: STRING_SQ) (InstructionImpl)
 4(5) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR) (InstructionImpl)
 5(6) element: PsiPerlStringSqImpl(Perl5: STRING_SQ) (InstructionImpl)

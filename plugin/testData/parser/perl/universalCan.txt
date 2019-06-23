@@ -1,6 +1,6 @@
 Subtree: Perl5 (Perl5)
 Perl5
-  PsiPerlUseStatementImpl(USE_STATEMENT)
+  PerlUseStatementElement(USE_STATEMENT)
     PsiElement(Perl5: use)('use')
     PerlNamespaceElementImpl(Perl5: package::name)('UNIVERSAL::can')
     PsiElement(Perl5: ;)(';')

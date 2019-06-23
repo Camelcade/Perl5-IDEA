@@ -118,10 +118,14 @@ public abstract class PerlPolyNamedElementType<Stub extends PerlPolyNamedElement
   public final void indexStub(@NotNull Stub stub, @NotNull IndexSink sink) {
     //noinspection unchecked
     stub.getLightNamedElementsStubs().forEach(childStub -> childStub.getStubType().indexStub(childStub, sink));
+    doIndexStub(stub, sink);
+  }
+
+  protected void doIndexStub(@NotNull Stub stub, @NotNull IndexSink sink) {
   }
 
   @Override
-  public final boolean shouldCreateStub(ASTNode node) {
+  public boolean shouldCreateStub(ASTNode node) {
     PsiElement psi = node.getPsi();
     assert psi instanceof PerlPolyNamedElement;
     return !((PerlPolyNamedElement)psi).getLightElements().isEmpty();

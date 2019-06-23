@@ -34,6 +34,7 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.constant.psi.impl.PerlConstantsWrapper;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
+import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -43,6 +44,7 @@ import java.util.List;
 
 import static com.perl5.lang.perl.lexer.PerlTokenSets.HEREDOC_BODIES_TOKENSET;
 import static com.perl5.lang.perl.parser.constant.psi.elementTypes.PerlConstantsWrapperElementType.CONSTANT_WRAPPER;
+import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.USE_STATEMENT;
 
 public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlElementTypes, DumbAware {
   public static final String PH_CODE_BLOCK = "{code block}";
@@ -212,9 +214,9 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
           int importsNumber = 0;
 
           while (currentStatement != null) {
-            if (currentStatement instanceof PsiPerlUseStatement &&
-                !((PsiPerlUseStatement)currentStatement).isPragma() &&
-                !((PsiPerlUseStatement)currentStatement).isVersion()
+            if (currentStatement instanceof PerlUseStatementElement &&
+                !((PerlUseStatementElement)currentStatement).isPragma() &&
+                !((PerlUseStatementElement)currentStatement).isVersion()
                 || currentStatement.getFirstChild() instanceof PerlRequireExpr) {
               blockEnd = currentStatement.getTextOffset() + currentStatement.getTextLength();
               importsNumber++;
@@ -403,7 +405,7 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
     }
 
     @Override
-    public void visitUseStatement(@NotNull PsiPerlUseStatement o) {
+    public void visitUseStatement(@NotNull PerlUseStatementElement o) {
       myImports.add(o);
       super.visitUseStatement(o);
     }

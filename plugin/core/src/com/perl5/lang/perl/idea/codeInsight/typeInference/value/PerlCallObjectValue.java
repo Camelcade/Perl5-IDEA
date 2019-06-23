@@ -28,6 +28,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -143,5 +144,22 @@ public final class PerlCallObjectValue extends PerlCallValue {
       getNamespaceNameValue().getPresentableText(),
       getSubNameValue().getPresentableText(),
       getPresentableArguments());
+  }
+
+  @NotNull
+  public static PerlValue create(@NotNull PerlValue namespaceValue, @NotNull String name) {
+    return create(namespaceValue, name, Collections.emptyList());
+  }
+
+  @NotNull
+  public static PerlValue create(@NotNull String namespace, @NotNull String name, @NotNull List<PerlValue> arguments) {
+    return create(PerlScalarValue.create(namespace), name, arguments);
+  }
+
+  @NotNull
+  public static PerlValue create(@NotNull PerlValue namespaceNameValue,
+                                 @NotNull String name,
+                                 @NotNull List<PerlValue> arguments) {
+    return PerlValuesManager.intern(new PerlCallObjectValue(namespaceNameValue, PerlScalarValue.create(name), arguments, false));
   }
 }
