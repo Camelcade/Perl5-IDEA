@@ -142,10 +142,6 @@ public final class PerlOneOfValue extends PerlValue implements Iterable<PerlValu
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    if (!super.equals(o)) {
-      return false;
-    }
-
     PerlOneOfValue of = (PerlOneOfValue)o;
 
     return myVariants.equals(of.myVariants);

@@ -79,9 +79,6 @@ abstract class PerlListValue extends PerlValue {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    if (!super.equals(o)) {
-      return false;
-    }
 
     PerlListValue value = (PerlListValue)o;
 
