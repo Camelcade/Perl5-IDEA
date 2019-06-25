@@ -81,6 +81,21 @@ public final class PerlCallStaticValue extends PerlCallValue {
     return true;
   }
 
+  protected void addFallbackTargets(@NotNull Set<String> namespaceNames,
+                                    @NotNull Set<String> subNames,
+                                    @NotNull List<PerlValue> resolvedArguments,
+                                    boolean hasTarget,
+                                    @NotNull PerlOneOfValue.Builder builder,
+                                    @NotNull PerlValue resolvedNamespaceValue,
+                                    @NotNull PerlValueResolver resolver) {
+    if (!hasTarget && myHasExplicitNamespace && subNames.size() == 1 && namespaceNames.size() == 1 && resolvedArguments.isEmpty()) {
+      String possiblePackageName = PerlPackageUtil.join(namespaceNames.iterator().next(), subNames.iterator().next());
+      if( !PerlPackageUtil.getNamespaceDefinitions(resolver.getProject(), resolver.getResolveScope(), possiblePackageName).isEmpty()){
+        builder.addVariant(PerlScalarValue.create(possiblePackageName));
+      }
+    }
+  }
+
   @Override
   protected boolean processCallTargets(@NotNull Project project,
                                        @NotNull GlobalSearchScope searchScope,

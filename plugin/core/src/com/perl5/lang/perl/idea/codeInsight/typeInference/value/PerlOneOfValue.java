@@ -215,6 +215,10 @@ public final class PerlOneOfValue extends PerlValue implements Iterable<PerlValu
       return this;
     }
 
+    public boolean isEmpty(){
+      return myVariants.isEmpty();
+    }
+
     @NotNull
     public PerlValue build() {
       if (myVariants.isEmpty()) {

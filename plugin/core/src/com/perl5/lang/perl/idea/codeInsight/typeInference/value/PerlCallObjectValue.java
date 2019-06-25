@@ -84,6 +84,18 @@ public final class PerlCallObjectValue extends PerlCallValue {
     return true;
   }
 
+  @Override
+  protected void addFallbackTargets(@NotNull Set<String> namespaceNames,
+                                    @NotNull Set<String> subNames,
+                                    @NotNull List<PerlValue> resolvedArguments,
+                                    boolean hasTarget,
+                                    @NotNull PerlOneOfValue.Builder builder,
+                                    @NotNull PerlValue resolvedNamespaceValue,
+                                    @NotNull PerlValueResolver resolver) {
+    if (subNames.size() == 1 && "new".equals(subNames.iterator().next()) && builder.isEmpty()) {
+      builder.addVariant(resolvedNamespaceValue);
+    }
+  }
 
   @Override
   protected boolean processCallTargets(@NotNull Project project,
