@@ -22,7 +22,7 @@ import org.junit.Test;
 import static com.intellij.psi.codeStyle.CommonCodeStyleSettings.*;
 public class PerlFormatterWrapTest extends PerlFormatterTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/formatter/perl/wrap";
   }
 

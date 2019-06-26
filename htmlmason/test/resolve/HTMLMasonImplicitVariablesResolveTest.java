@@ -18,7 +18,7 @@ package resolve;
 
 
 public class HTMLMasonImplicitVariablesResolveTest extends HTMLMasonArgsDefVariablesResolveTest {
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/resolve/implicit";
   }
 

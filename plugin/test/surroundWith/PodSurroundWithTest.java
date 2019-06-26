@@ -25,7 +25,7 @@ public class PodSurroundWithTest extends PodLightTestCase {
   private static final Pattern NAME_PATTERN = Pattern.compile("Surround with \\w<...>");
 
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/surroundWith/pod";
   }
 

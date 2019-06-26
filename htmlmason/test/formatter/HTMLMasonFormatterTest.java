@@ -21,7 +21,7 @@ import base.HTMLMasonLightTestCase;
 import org.junit.Test;
 public class HTMLMasonFormatterTest extends HTMLMasonLightTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/formatter";
   }
 

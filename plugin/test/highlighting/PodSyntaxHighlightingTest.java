@@ -22,7 +22,7 @@ import org.junit.Test;
 public class PodSyntaxHighlightingTest extends PodLightTestCase {
 
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/highlighting/pod/syntax";
   }
 

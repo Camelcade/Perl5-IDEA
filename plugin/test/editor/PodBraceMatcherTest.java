@@ -22,7 +22,7 @@ import org.junit.Test;
 public class PodBraceMatcherTest extends PodLightTestCase {
 
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/braceMatcher/pod";
   }
 

@@ -18,7 +18,7 @@ package resolve;
 
 
 public class HTMLMasonDefVariablesResolveTest extends HTMLMasonBlockVariablesResolveTestCase {
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/resolve/def";
   }
 

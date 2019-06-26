@@ -24,7 +24,7 @@ import org.junit.Test;
 import java.util.Arrays;
 public class PerlStringCollectionTest extends PerlLightTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/psi/stringCollection";
   }
 

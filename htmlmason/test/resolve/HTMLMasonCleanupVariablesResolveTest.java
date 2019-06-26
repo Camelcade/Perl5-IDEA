@@ -18,7 +18,7 @@ package resolve;
 
 
 public class HTMLMasonCleanupVariablesResolveTest extends HTMLMasonBlockVariablesResolveTestCase {
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/resolve/cleanup";
   }
 

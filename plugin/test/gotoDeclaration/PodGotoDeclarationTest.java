@@ -27,7 +27,7 @@ public class PodGotoDeclarationTest extends PodLightTestCase {
   }
 
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/gotoDeclaration/pod";
   }
 

@@ -30,7 +30,7 @@ import java.util.Collection;
 import java.util.List;
 public class PerlLineMarkersTest extends PerlLightTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/linemarkers/perl";
   }
 

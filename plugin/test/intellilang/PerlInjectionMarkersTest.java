@@ -33,7 +33,7 @@ public class PerlInjectionMarkersTest extends PerlLightTestCase {
   private static final String TEST_MARKER = "_MYHTML";
 
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/intellilang/perl/injeciton_markers";
   }
 

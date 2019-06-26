@@ -24,7 +24,7 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 public class PodRenameTest extends PodLightTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/rename/pod";
   }
 

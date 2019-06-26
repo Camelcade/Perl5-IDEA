@@ -21,7 +21,7 @@ import org.jetbrains.annotations.NotNull;
 
 public abstract class PerlLiveTemplatesTestCase extends PerlLightTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/liveTemplates/perl";
   }
 

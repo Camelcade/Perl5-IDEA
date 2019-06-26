@@ -21,8 +21,8 @@ import com.intellij.openapi.util.io.FileUtil;
 import org.junit.Test;
 public class PerlTryCatchLiveTemplatesTest extends PerlLiveTemplatesTestCase {
   @Override
-  protected String getTestDataPath() {
-    return FileUtil.join(super.getTestDataPath(), "trycatch");
+  protected String getBaseDataPath() {
+    return FileUtil.join(super.getBaseDataPath(), "trycatch");
   }
 
   @Test

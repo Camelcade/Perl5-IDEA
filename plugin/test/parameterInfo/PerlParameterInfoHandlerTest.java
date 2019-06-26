@@ -22,7 +22,7 @@ import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import org.junit.Test;
 public class PerlParameterInfoHandlerTest extends PerlLightTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/parameterInfo";
   }
 

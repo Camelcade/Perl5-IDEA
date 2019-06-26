@@ -25,7 +25,7 @@ import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import org.junit.Test;
 public class MethodsDetectionTest extends PerlLightTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/unit/perl/methods";
   }
 

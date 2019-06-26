@@ -25,7 +25,7 @@ import com.perl5.lang.pod.idea.inspections.PodUnresolvableLinkInspection;
 import org.junit.Test;
 public class PodAnnotatorTest extends PodLightTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/annotator/pod";
   }
 

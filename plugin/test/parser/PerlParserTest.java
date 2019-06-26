@@ -21,7 +21,7 @@ import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import org.junit.Test;
 public class PerlParserTest extends PerlParserTestBase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/parser/perl";
   }
 

@@ -23,7 +23,7 @@ import org.junit.Test;
 public class PerlTypedHandlerTest extends PerlSmartKeysTestCase {
 
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/smartKeys/perl";
   }
 

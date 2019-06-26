@@ -40,7 +40,7 @@ public class TemplateToolkitFormatterTest extends TemplateToolkitLightTestCase {
   }
 
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/formatter";
   }
 

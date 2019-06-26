@@ -28,7 +28,7 @@ public class PodQuickDocTest extends PodLightTestCase {
   }
 
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/documentation/pod/quickdoc";
   }
 

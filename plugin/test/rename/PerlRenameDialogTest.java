@@ -23,7 +23,7 @@ import org.junit.Test;
 // following tests are not working in inline test
 public class PerlRenameDialogTest extends PerlLightTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/rename/perl";
   }
 

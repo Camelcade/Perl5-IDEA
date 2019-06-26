@@ -21,7 +21,7 @@ import base.PerlLightTestCase;
 import org.junit.Test;
 public class PerlInjectionSupportTest extends PerlLightTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/intellilang/perl/injectionSupport";
   }
 

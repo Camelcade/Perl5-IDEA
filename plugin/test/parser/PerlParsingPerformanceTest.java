@@ -101,7 +101,7 @@ public class PerlParsingPerformanceTest extends PerlParserTestBase {
   );
 
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/parser/performance";
   }
 

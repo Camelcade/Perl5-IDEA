@@ -22,7 +22,7 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 public class Mason2LiveTemplateTest extends Mason2TopLevelComponentTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/liveTemplates/mc";
   }
 

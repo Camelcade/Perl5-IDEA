@@ -24,7 +24,7 @@ import org.junit.Test;
 public class PerlCompletionPopupTest extends PerlCompletionPopupTestCase {
 
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/completionPopup/perl";
   }
 

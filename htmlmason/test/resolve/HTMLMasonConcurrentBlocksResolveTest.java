@@ -20,7 +20,7 @@ package resolve;
 import base.HTMLMasonLightTestCase;
 import org.junit.Test;
 public class HTMLMasonConcurrentBlocksResolveTest extends HTMLMasonLightTestCase {
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/resolve/concurrent_blocks";
   }
 

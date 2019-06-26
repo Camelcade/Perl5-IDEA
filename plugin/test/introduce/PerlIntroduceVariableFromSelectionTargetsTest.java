@@ -19,7 +19,7 @@ package introduce;
 import org.junit.Test;
 public class PerlIntroduceVariableFromSelectionTargetsTest extends PerlIntroduceVariableFromCaretTargetsTest {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/introduce/targets/selection";
   }
 

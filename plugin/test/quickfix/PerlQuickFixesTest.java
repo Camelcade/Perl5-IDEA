@@ -23,7 +23,7 @@ import com.perl5.lang.perl.idea.inspections.*;
 import org.junit.Test;
 public class PerlQuickFixesTest extends PerlLightTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/quickfix/perl";
   }
 

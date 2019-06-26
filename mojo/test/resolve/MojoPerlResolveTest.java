@@ -21,7 +21,7 @@ import base.MojoLightTestCase;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import org.junit.Test;
 public class MojoPerlResolveTest extends MojoLightTestCase {
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/resolve/perl";
   }
 

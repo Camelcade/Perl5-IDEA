@@ -21,7 +21,7 @@ import base.MojoLightTestCase;
 import org.junit.Test;
 public class MojoUsagesGroupingTest extends MojoLightTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/findUsages/grouping/";
   }
 

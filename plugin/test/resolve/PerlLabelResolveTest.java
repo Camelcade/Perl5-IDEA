@@ -21,7 +21,7 @@ import base.PerlLightTestCase;
 import org.junit.Test;
 public class PerlLabelResolveTest extends PerlLightTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/resolve/perl/labels";
   }
 

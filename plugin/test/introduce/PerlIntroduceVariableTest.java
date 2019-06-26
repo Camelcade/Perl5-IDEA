@@ -25,7 +25,7 @@ import org.junit.Test;
 import static com.intellij.psi.codeStyle.CommonCodeStyleSettings.WRAP_AS_NEEDED;
 public class PerlIntroduceVariableTest extends PerlLightTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/introduce/full";
   }
 

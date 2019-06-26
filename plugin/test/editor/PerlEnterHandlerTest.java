@@ -21,7 +21,7 @@ import base.PerlLightTestCase;
 import org.junit.Test;
 public class PerlEnterHandlerTest extends PerlLightTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/enterHandler/perl";
   }
 

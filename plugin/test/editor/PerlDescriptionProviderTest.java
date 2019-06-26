@@ -22,7 +22,7 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 public class PerlDescriptionProviderTest extends PerlLightTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/descriptionProvider/perl";
   }
 

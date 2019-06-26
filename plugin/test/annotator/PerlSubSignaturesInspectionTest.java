@@ -27,7 +27,7 @@ import org.junit.Test;
 import static com.perl5.lang.perl.internals.PerlVersion.*;
 public class PerlSubSignaturesInspectionTest extends PerlLightTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/annotator/perl/sub.signatures";
   }
 

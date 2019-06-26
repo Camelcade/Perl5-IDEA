@@ -22,7 +22,7 @@ import org.junit.Test;
 public class MojoBraceMatcherTest extends MojoLightTestCase {
 
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/braceMatcher";
   }
 

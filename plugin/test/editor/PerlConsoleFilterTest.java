@@ -23,7 +23,7 @@ import com.perl5.lang.perl.idea.execution.filters.PerlConsoleFileLinkFilter;
 import org.junit.Test;
 public class PerlConsoleFilterTest extends PerlLightTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/consoleFilter/perl";
   }
 

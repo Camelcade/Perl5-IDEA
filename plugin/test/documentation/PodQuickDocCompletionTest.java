@@ -29,7 +29,7 @@ public class PodQuickDocCompletionTest extends PodLightTestCase {
   }
 
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/documentation/pod/completion";
   }
 

@@ -22,7 +22,7 @@ import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import com.perl5.lang.perl.idea.inspections.PerlDeprecatedInspection;
 import org.junit.Test;
 public class MojoAnnotatorTest extends MojoLightTestCase {
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/annotator/perl";
   }
 

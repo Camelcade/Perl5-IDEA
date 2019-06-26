@@ -22,7 +22,7 @@ import com.perl5.lang.perl.idea.inspections.PerlUnreachableCodeInspection;
 import org.junit.Test;
 public class PerlUnreachableCodeInspectionTest extends PerlLightTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/annotator/perl/unreachableCode";
   }
 

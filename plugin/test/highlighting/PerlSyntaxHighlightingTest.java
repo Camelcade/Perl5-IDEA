@@ -23,7 +23,7 @@ import org.junit.Test;
 public class PerlSyntaxHighlightingTest extends PerlLightTestCase {
 
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/highlighting/perl/syntax";
   }
 

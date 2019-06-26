@@ -21,7 +21,7 @@ import com.perl5.lang.mason2.idea.configuration.VariableDescription;
 
 
 public class HTMLMasonArgsDefVariablesResolveTest extends HTMLMasonBlockVariablesResolveTestCase {
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/resolve/args_def";
   }
 

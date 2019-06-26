@@ -18,7 +18,7 @@ package resolve;
 
 
 public class HTMLMasonArgsFileVariablesResolveTest extends HTMLMasonBlockVariablesResolveTestCase {
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/resolve/args_file";
   }
 

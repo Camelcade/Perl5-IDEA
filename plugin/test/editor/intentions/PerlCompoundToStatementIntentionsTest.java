@@ -22,8 +22,8 @@ import com.perl5.PerlBundle;
 import org.junit.Test;
 public class PerlCompoundToStatementIntentionsTest extends PerlIntentionsTestCase {
   @Override
-  protected String getTestDataPath() {
-    return FileUtil.join(super.getTestDataPath(), "compoundToStatement");
+  protected String getBaseDataPath() {
+    return FileUtil.join(super.getBaseDataPath(), "compoundToStatement");
   }
 
   @Test

@@ -22,7 +22,7 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 public class HTMLMasonLiveTemplateTest extends HTMLMasonLightTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/liveTemplates";
   }
 

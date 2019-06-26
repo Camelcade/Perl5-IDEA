@@ -32,7 +32,7 @@ public class PerlQuickDocLinksFollowingTest extends PerlLightTestCase {
   }
 
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/documentation/perl/links";
   }
 

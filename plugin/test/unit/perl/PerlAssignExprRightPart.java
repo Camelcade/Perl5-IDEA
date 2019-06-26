@@ -30,7 +30,7 @@ import java.util.List;
 public class PerlAssignExprRightPart extends PerlLightTestCase {
 
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/unit/perl/assign/rightPart";
   }
 

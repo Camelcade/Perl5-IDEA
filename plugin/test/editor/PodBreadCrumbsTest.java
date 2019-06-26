@@ -21,7 +21,7 @@ import base.PodLightTestCase;
 import org.junit.Test;
 public class PodBreadCrumbsTest extends PodLightTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/breadcrumbs/pod";
   }
 

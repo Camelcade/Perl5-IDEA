@@ -24,7 +24,7 @@ public class MroTypeDetectionTest extends NamespaceTestCase {
   public static final String DATA_PATH = "testData/oop/mroType";
 
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return DATA_PATH;
   }
 

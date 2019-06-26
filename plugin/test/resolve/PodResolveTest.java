@@ -23,7 +23,7 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 public class PodResolveTest extends PodLightTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/resolve/pod";
   }
 

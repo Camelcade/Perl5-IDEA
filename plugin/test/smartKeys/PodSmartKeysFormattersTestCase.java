@@ -24,7 +24,7 @@ import org.junit.Test;
 
 public abstract class PodSmartKeysFormattersTestCase extends PerlSmartKeysTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/smartKeys/pod";
   }
 

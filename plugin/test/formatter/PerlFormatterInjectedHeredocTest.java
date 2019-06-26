@@ -20,7 +20,7 @@ package formatter;
 import org.junit.Test;
 public class PerlFormatterInjectedHeredocTest extends PerlFormatterTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/formatter/perl/injected_heredoc";
   }
 

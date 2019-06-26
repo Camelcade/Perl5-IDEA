@@ -29,7 +29,7 @@ import java.io.IOException;
 @Category(Heavy.class)
 public class PodStructureViewTest extends PodLightTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/testLibSets/perldoc/pod";
   }
 

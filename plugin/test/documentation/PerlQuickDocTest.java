@@ -29,7 +29,7 @@ public class PerlQuickDocTest extends PerlLightTestCase {
   }
 
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/documentation/perl/quickdoc";
   }
 

@@ -29,7 +29,7 @@ public class MojoPerlCompletionTest extends MojoLightTestCase {
   }
 
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/completion/perl";
   }
 

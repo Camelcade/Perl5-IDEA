@@ -25,7 +25,7 @@ import com.perl5.lang.perl.psi.mro.PerlMroType;
 import org.junit.Test;
 public class packageProcessorsTest extends PerlLightTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/packageProcessors";
   }
 

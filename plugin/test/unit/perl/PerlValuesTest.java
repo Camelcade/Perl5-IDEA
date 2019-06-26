@@ -23,7 +23,7 @@ import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import org.junit.Test;
 public class PerlValuesTest extends PerlLightTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/unit/perl/perlValues";
   }
 

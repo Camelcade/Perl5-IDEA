@@ -27,7 +27,7 @@ import com.perl5.lang.perl.psi.PerlFile;
 import org.junit.Test;
 public class PerlAnnotatorTest extends PerlLightTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/annotator/perl";
   }
 

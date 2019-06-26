@@ -27,7 +27,7 @@ public class PerlInjectLanguageActionTest extends PerlLightTestCase {
   private boolean myInjectionsWithInterpolation;
 
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/intellilang/perl/inject_language_action";
   }
 

@@ -22,7 +22,7 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 public class PerlParameterInfoHandlerBuiltInTest extends PerlLightTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/parameterInfo/builtInLeftward";
   }
 

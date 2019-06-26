@@ -33,7 +33,7 @@ public class PerlQuickDocBuiltInCompletionTest extends PerlLightTestCase {
   }
 
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return PerlQuickDocBuiltInTest.ANSWERS_PATH;
   }
 

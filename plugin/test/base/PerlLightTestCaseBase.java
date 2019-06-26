@@ -260,6 +260,19 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   protected void doEvaluate(@NotNull Description description) {
   }
 
+  /**
+   * @return test data path relative to the module root
+   */
+  protected String getBaseDataPath(){
+    return "";
+  }
+
+  @Override
+  protected final String getTestDataPath() {
+    File file = new File(getBaseDataPath());
+    return file.exists() ? file.getAbsolutePath(): "";
+  }
+
   @Override
   protected void setUp() throws Exception {
     super.setUp();

@@ -22,7 +22,7 @@ import com.perl5.lang.mason2.filetypes.MasonTopLevelComponentFileType;
 import org.junit.Test;
 public class Mason2FoldingTest extends PerlLightTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/folding";
   }
 

@@ -25,7 +25,7 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 public class PerlFoldingTest extends PerlLightTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/folding";
   }
 

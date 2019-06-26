@@ -21,7 +21,7 @@ import base.PodLightTestCase;
 import org.junit.Test;
 public class PodFindUsagesHighlightingTest extends PodLightTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/highlighting/pod/usages";
   }
 

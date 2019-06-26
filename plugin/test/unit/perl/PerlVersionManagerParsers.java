@@ -32,7 +32,7 @@ import java.util.List;
 import java.util.function.Function;
 public class PerlVersionManagerParsers extends PerlLightTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/unit/perl/vmList";
   }
 

@@ -18,7 +18,7 @@ package resolve;
 
 
 public class HTMLMasonFilteredBlockTest extends HTMLMasonBlockVariablesResolveTestCase {
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/resolve/filtered_block";
   }
 

@@ -19,7 +19,7 @@ package resolve;
 
 public class HTMLMasonSimpleVariableResolveTest extends HTMLMasonVariableResolveTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/resolve/simple";
   }
 }

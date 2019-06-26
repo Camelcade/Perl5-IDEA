@@ -22,7 +22,7 @@ import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import org.junit.Test;
 public class MojoPerlLightElementsTest extends MojoLightTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/lightElements/perl";
   }
 

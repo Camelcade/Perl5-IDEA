@@ -20,7 +20,7 @@ package liveTemplates;
 import org.junit.Test;
 public class PerlWithPodLiveTemplatesTest extends PerlLiveTemplatesTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/liveTemplates/perl/pod";
   }
 

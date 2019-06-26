@@ -20,7 +20,7 @@ package resolve;
 import base.MojoLightTestCase;
 import org.junit.Test;
 public class MojoResolveTest extends MojoLightTestCase {
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/resolve/templates";
   }
 

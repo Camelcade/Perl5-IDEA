@@ -23,7 +23,7 @@ import com.perl5.lang.perl.internals.PerlVersion;
 import org.junit.Test;
 public class PerlResolveTest extends PerlLightTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/resolve/perl";
   }
 

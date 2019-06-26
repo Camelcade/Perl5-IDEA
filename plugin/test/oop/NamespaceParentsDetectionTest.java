@@ -28,7 +28,7 @@ public class NamespaceParentsDetectionTest extends NamespaceTestCase {
   public static final String DATA_PATH = "testData/oop/parents";
 
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return DATA_PATH;
   }
 

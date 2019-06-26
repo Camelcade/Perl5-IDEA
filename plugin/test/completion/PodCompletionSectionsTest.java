@@ -21,7 +21,7 @@ import base.PodLightTestCase;
 import org.junit.Test;
 public class PodCompletionSectionsTest extends PodLightTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/completion/pod/perlpod";
   }
 

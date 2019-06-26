@@ -23,8 +23,8 @@ import org.junit.Test;
 public class PerlModifierToStatementIntentionsTest extends PerlIntentionsTestCase {
 
   @Override
-  protected String getTestDataPath() {
-    return FileUtil.join(super.getTestDataPath(), "modifierToStatement");
+  protected String getBaseDataPath() {
+    return FileUtil.join(super.getBaseDataPath(), "modifierToStatement");
   }
 
   @Test

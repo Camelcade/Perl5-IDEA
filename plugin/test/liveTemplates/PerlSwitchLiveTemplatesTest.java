@@ -22,8 +22,8 @@ import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import org.junit.Test;
 public class PerlSwitchLiveTemplatesTest extends PerlLiveTemplatesTestCase {
   @Override
-  protected String getTestDataPath() {
-    return FileUtil.join(super.getTestDataPath(), "switch");
+  protected String getBaseDataPath() {
+    return FileUtil.join(super.getBaseDataPath(), "switch");
   }
 
   @Override

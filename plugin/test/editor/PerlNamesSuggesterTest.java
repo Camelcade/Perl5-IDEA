@@ -22,7 +22,7 @@ import com.perl5.lang.perl.idea.refactoring.rename.PerlMemberInplaceRenameHandle
 import org.junit.Test;
 public class PerlNamesSuggesterTest extends PerlLightTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/nameSuggester/perl";
   }
 

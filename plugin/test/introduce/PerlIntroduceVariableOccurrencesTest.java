@@ -25,7 +25,7 @@ import org.junit.Test;
  */
 public class PerlIntroduceVariableOccurrencesTest extends PerlLightTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/introduce/occurrences";
   }
 

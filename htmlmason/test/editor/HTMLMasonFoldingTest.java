@@ -22,7 +22,7 @@ import com.perl5.lang.htmlmason.filetypes.HTMLMasonFileType;
 import org.junit.Test;
 public class HTMLMasonFoldingTest extends HTMLMasonLightTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/folding";
   }
 

@@ -24,7 +24,7 @@ public class PerlHeredocEscaperTest extends PerlHeredocInjectionTestCase {
   private boolean myInjectWithInterpolation;
 
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/intellilang/perl/escaper";
   }
 

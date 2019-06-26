@@ -25,7 +25,7 @@ public class Mason2TemplatingParserTest extends PerlParserTestBase {
   }
 
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/parser/template";
   }
 

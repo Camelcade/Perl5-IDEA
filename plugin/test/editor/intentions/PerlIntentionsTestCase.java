@@ -20,7 +20,7 @@ import base.PerlLightTestCase;
 
 public abstract class PerlIntentionsTestCase extends PerlLightTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/intentions/perl";
   }
 }

@@ -22,7 +22,7 @@ import org.junit.Test;
 import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.*;
 public class PerlFormatterSpacingTest extends PerlFormatterTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/formatter/perl/spacing";
   }
 

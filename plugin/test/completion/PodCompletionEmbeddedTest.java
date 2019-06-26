@@ -29,7 +29,7 @@ public class PodCompletionEmbeddedTest extends PerlLightTestCase {
   }
 
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/completion/pod/embedded";
   }
 

@@ -29,7 +29,7 @@ public class MojoCompletionTest extends MojoLightTestCase {
   }
 
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/completion/templates";
   }
 

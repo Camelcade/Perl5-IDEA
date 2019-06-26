@@ -25,7 +25,7 @@ public class MojoliciousParserTest extends MojoliciousParserTestBase {
   }
 
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/parser/templates";
   }
 

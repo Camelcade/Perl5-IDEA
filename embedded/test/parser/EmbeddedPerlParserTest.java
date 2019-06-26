@@ -24,7 +24,7 @@ public class EmbeddedPerlParserTest extends PerlParserTestBase {
   }
 
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/parser";
   }
 

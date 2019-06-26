@@ -32,7 +32,7 @@ import java.io.File;
 public class PerlGotoModelTest extends PerlLightTestCase {
 
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/gotoModel/perl";
   }
 

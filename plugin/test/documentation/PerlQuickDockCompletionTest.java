@@ -23,7 +23,7 @@ import org.junit.Test;
 public class PerlQuickDockCompletionTest extends PerlLightTestCase {
 
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/documentation/perl/completion";
   }
 

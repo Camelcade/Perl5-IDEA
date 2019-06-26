@@ -24,7 +24,7 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 public class MojoPerlRenameTest extends MojoLightTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/rename/perl";
   }
 

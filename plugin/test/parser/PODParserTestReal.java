@@ -23,7 +23,7 @@ public class PODParserTestReal extends PerlParserTestBase {
   }
 
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/testLibSets/perldoc/pod";
   }
 

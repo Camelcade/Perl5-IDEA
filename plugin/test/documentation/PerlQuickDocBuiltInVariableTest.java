@@ -31,7 +31,7 @@ public class PerlQuickDocBuiltInVariableTest extends PerlLightTestCase {
   }
 
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return ANSWERS_PATH;
   }
 

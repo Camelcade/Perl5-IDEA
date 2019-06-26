@@ -30,7 +30,7 @@ public class PerlPMCompletionTest extends PerlLightTestCase {
   }
 
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/completion/perl";
   }
 

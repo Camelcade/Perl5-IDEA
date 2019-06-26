@@ -21,7 +21,7 @@ import com.perl5.lang.mojolicious.filetypes.MojoliciousFileType;
 import org.junit.Test;
 public class MojoFoldingTest extends MojoLightTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/folding/templates";
   }
 

@@ -21,7 +21,7 @@ import base.MojoLightTestCase;
 import org.junit.Test;
 public class MojoLightElementsTest extends MojoLightTestCase {
   @Override
-  protected String getTestDataPath() {
+  protected String getBaseDataPath() {
     return "testData/lightElements/templates";
   }
 

@@ -22,8 +22,8 @@ import com.perl5.lang.perl.fileTypes.PerlFileTypeTest;
 import org.junit.Test;
 public class PerlTestMoreLiveTemplatesTest extends PerlLiveTemplatesTestCase {
   @Override
-  protected String getTestDataPath() {
-    return FileUtil.join(super.getTestDataPath(), "test_more");
+  protected String getBaseDataPath() {
+    return FileUtil.join(super.getBaseDataPath(), "test_more");
   }
 
   @Override
