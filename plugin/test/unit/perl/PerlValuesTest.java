@@ -28,6 +28,12 @@ public class PerlValuesTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testSuperCall() {doTest();}
+
+  @Test
+  public void testSuperCallParent() {doTest();}
+
+  @Test
   public void testPushValueMultiOneOfs() {doTest();}
 
   @Test

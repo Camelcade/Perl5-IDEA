@@ -1,0 +1,6 @@
+sub something{
+  #@type Foo::Bar
+  my $var = $_[0];
+
+  $var;
+}

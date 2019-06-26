@@ -74,7 +74,7 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
       return UNKNOWN_VALUE;
     }
 
-    Set<String> namespaceNames = resolvedNamespaceValue.getNamespaceNames();
+    Set<String> namespaceNames = computeNamespaceNames(resolvedNamespaceValue);
     if (namespaceNames.isEmpty()) {
       return UNKNOWN_VALUE;
     }
@@ -86,7 +86,7 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
     PerlOneOfValue.Builder builder = PerlOneOfValue.builder();
     boolean[] hasTargets = new boolean[]{false};
     RecursionManager.doPreventingRecursion(
-      new Object[]{resolveScope, resolvedNamespaceValue, resolvedSubNameValue, argumentsValue}, true, () -> {
+      new Object[]{resolveScope, this}, true, () -> {
         processCallTargets(resolver.getProject(), resolveScope, resolver.getContextFile(), namespaceNames, subNames, it -> {
           hasTargets[0] = true;
             if (it instanceof PerlSubElement) {
@@ -100,6 +100,14 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
     addFallbackTargets(namespaceNames, subNames, resolvedArguments, hasTargets[0], builder, resolvedNamespaceValue, resolver);
 
     return builder.build();
+  }
+
+  /**
+   * @return set of a namepsaces names that should be used for the {@code resolvedNamespaceValue}
+   */
+  @NotNull
+  protected Set<String> computeNamespaceNames(@NotNull PerlValue resolvedNamespaceValue) {
+    return resolvedNamespaceValue.getNamespaceNames();
   }
 
   /**
@@ -156,7 +164,7 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
     Project project = contextElement.getProject();
     GlobalSearchScope searchScope = contextElement.getResolveScope();
     Set<String> subNames = getSubNameValue().resolve(contextElement).getSubNames();
-    Set<String> namespaceNames = getNamespaceNameValue().resolve(contextElement).getNamespaceNames();
+    Set<String> namespaceNames = computeNamespaceNames(getNamespaceNameValue().resolve(contextElement));
     return !subNames.isEmpty() && !namespaceNames.isEmpty() &&
            processCallTargets(project, searchScope, contextElement, namespaceNames, subNames, processor);
   }

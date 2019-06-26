@@ -49,9 +49,7 @@ import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.refactoring.rename.RenameRefactoringQueue;
 import com.perl5.lang.perl.internals.PerlVersion;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
-import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
-import com.perl5.lang.perl.psi.PerlSubElement;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlLightNamespaceIndex;
@@ -791,6 +789,18 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
       nameRange = TextRange.EMPTY_RANGE;
     }
     return Pair.create(packageRange, nameRange);
+  }
+
+  /**
+   * @return the expected value of the {@code $self} passed to the method. This is either context value or value from the self hinter
+   */
+  @NotNull
+  public static PerlValue getExpectedSelfValue(@NotNull PsiElement psiElement) {
+    PerlSelfHinter selfHinter = PsiTreeUtil.getParentOfType(psiElement, PerlSelfHinter.class);
+    if (selfHinter != null) {
+      return selfHinter.getSelfType();
+    }
+    return PerlScalarValue.create(getContextNamespaceName(psiElement));
   }
 
   public interface ClassRootVirtualFileProcessor {

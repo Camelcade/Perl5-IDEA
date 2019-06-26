@@ -25,10 +25,8 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.Processor;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlScalarValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
@@ -86,19 +84,15 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
     if (variableNameElement == null) {
       return UNKNOWN_VALUE;
     }
-    PerlVariableDeclarationElement lexicalDeclaration = PerlResolveUtil.getLexicalDeclaration(this);
-    if (lexicalDeclaration != null &&
-        (lexicalDeclaration.isInvocantDeclaration() || lexicalDeclaration.isSelf())) {
-      PerlSelfHinter selfHinter = PsiTreeUtil.getParentOfType(lexicalDeclaration, PerlSelfHinter.class);
-      if (selfHinter != null) {
-        return selfHinter.getSelfType();
-      }
-      return PerlScalarValue.create(PerlPackageUtil.getContextNamespaceName(lexicalDeclaration));
-    }
 
     PerlValue inferredValue = PerlResolveUtil.inferVariableValue(this);
     if (!inferredValue.isUnknown()) {
       return inferredValue;
+    }
+
+    PerlVariableDeclarationElement lexicalDeclaration = PerlResolveUtil.getLexicalDeclaration(this);
+    if (lexicalDeclaration != null && (lexicalDeclaration.isInvocantDeclaration() || lexicalDeclaration.isSelf())) {
+      return PerlPackageUtil.getExpectedSelfValue(lexicalDeclaration);
     }
 
     return lexicalDeclaration == null ? UNKNOWN_VALUE : lexicalDeclaration.getDeclaredValue();

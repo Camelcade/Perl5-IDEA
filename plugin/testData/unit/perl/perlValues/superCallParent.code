@@ -1,0 +1,18 @@
+package Parent;
+
+sub new{
+  return bless {}, shift;
+}
+
+package Child;
+use parent /Parent/;
+
+sub new{
+  return shift->SUPER::new(@_);
+}
+
+package main;
+
+my $obj = Parent::->new();
+
+$o<caret>bj;

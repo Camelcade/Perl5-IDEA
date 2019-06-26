@@ -39,11 +39,22 @@ public class PerlFallbackValue extends PerlParametrizedOperationValue {
   }
 
   @Override
+  public String toString() {
+    return getBaseValue() + "(fallback to " + getParameter() + ")";
+  }
+
+  @Override
   protected int getSerializationId() {
     return PerlValuesManager.FALLBACK_ID;
   }
 
   public static PerlValue create(@NotNull PerlValue mainValue, @NotNull PerlValue fallbackValue){
+    if( mainValue.isUnknown()){
+      return fallbackValue;
+    }
+    if( fallbackValue.isUnknown()){
+      return mainValue;
+    }
     return PerlValuesManager.intern(new PerlFallbackValue(mainValue, fallbackValue));
   }
 }

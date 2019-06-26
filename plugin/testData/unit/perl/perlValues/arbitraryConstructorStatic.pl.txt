@@ -8,4 +8,4 @@ scalar Something::Really::Wierd::new(one, 42)
 ----------
 Resolved
 ----------
-Something::Really::Wierd
+Value unknown

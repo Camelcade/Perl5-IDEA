@@ -1,0 +1,3 @@
+sub new{
+  return shift->SUPER::new(@_);
+}

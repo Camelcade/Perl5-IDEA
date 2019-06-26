@@ -18,12 +18,28 @@ package unit.perl;
 
 
 import base.PerlLightTestCase;
+import org.jetbrains.annotations.TestOnly;
 import org.junit.Test;
 public class PerlReturnValuesTest extends PerlLightTestCase {
   @Override
   protected String getBaseDataPath() {
     return "testData/unit/perl/returnValues";
   }
+
+  @Test
+  public void testArgumentAnnotated() {doTest();}
+
+  @Test
+  public void testArgumentFirst() {doTest();}
+
+  @Test
+  public void testArgumentSelf() {doTest();}
+
+  @Test
+  public void testArgumentTyped() {doTest();}
+
+  @Test
+  public void testSuperCall(){doTest();}
 
   @Test
   public void testMultiPushUnshift() {doTest();}

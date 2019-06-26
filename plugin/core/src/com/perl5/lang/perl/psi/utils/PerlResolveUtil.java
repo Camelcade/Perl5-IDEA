@@ -31,10 +31,7 @@ import com.intellij.util.PairProcessor;
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
 import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlControlFlowBuilder;
 import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlMutationInstruction;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlOneOfValue;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.*;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlBuiltInVariable;
 import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
@@ -309,11 +306,15 @@ public class PerlResolveUtil {
       return CONTINUE;
     });
 
-    if (lexicalDeclaration != null) {
-      valueBuilder.addVariant(lexicalDeclaration.getDeclaredValue());
-    }
+    PerlValue result = valueBuilder.build();
 
-    return valueBuilder.build();
+    if (lexicalDeclaration != null) {
+      PerlValue declaredValue = lexicalDeclaration.getDeclaredValue();
+      if( !declaredValue.isUnknown()){
+        return PerlFallbackValue.create(result, declaredValue);
+      }
+    }
+    return result;
   }
 
   /**

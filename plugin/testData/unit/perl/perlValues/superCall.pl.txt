@@ -1,0 +1,27 @@
+package Parent;
+
+sub new{
+  my $class = shift;
+  return bless {@_}, $class;
+}
+
+package Child;
+use parent qw/Parent/;
+
+sub new{
+  return shift->SUPER::new(@_);
+}
+
+package main;
+
+my $obj = Child::->new(foo => 42);
+
+$o<caret>bj;
+----------
+$obj
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 213 in superCall.pl
+scalar Child->new(foo, 42)
+----------
+Resolved
+----------
+Ref[Hash(foo => 42), blessed with Child]

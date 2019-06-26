@@ -20,10 +20,12 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.util.ObjectUtils;
 import com.intellij.util.Processor;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.mro.PerlMro;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -33,25 +35,26 @@ import java.util.List;
 import java.util.Set;
 
 public final class PerlCallObjectValue extends PerlCallValue {
-  private final boolean myIsSuper;
+  @Nullable
+  private final String mySuperContext;
 
-  public PerlCallObjectValue(@NotNull PerlValue namespaceNameValue,
+  private PerlCallObjectValue(@NotNull PerlValue namespaceNameValue,
                              @NotNull PerlValue subNameValue,
                              @NotNull List<PerlValue> arguments,
-                             boolean isSuper) {
+                             @Nullable String superContext) {
     super(namespaceNameValue, subNameValue, arguments);
-    myIsSuper = isSuper;
+    mySuperContext = superContext;
   }
 
   PerlCallObjectValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
     super(deserializer);
-    myIsSuper = deserializer.readBoolean();
+    mySuperContext = deserializer.readNameString();
   }
 
   @Override
   protected void serializeData(@NotNull PerlValueSerializer serializer) throws IOException {
     super.serializeData(serializer);
-    serializer.writeBoolean(myIsSuper);
+    serializer.writeName(mySuperContext);
   }
 
   @NotNull
@@ -65,23 +68,35 @@ public final class PerlCallObjectValue extends PerlCallValue {
     return PerlValuesManager.CALL_OBJECT_ID;
   }
 
-  public boolean isSuper() {
-    return myIsSuper;
-  }
-
   @Override
   public boolean processTargetNamespaceElements(@NotNull Project project,
                                                 @NotNull GlobalSearchScope searchScope,
                                                 @NotNull PsiElement contextElement,
                                                 @NotNull PerlNamespaceItemProcessor<? super PsiNamedElement> processor) {
     for (String contextNamespace : getNamespaceNameValue().resolve(contextElement).getNamespaceNames()) {
-      for (String currentNamespaceName : PerlMro.getLinearISA(project, searchScope, contextNamespace, myIsSuper)) {
+      for (String currentNamespaceName : PerlMro.getLinearISA(project, searchScope, getEffectiveNamespaceName(contextNamespace), isSuper())) {
         if (!processTargetNamespaceElements(project, searchScope, processor, currentNamespaceName)) {
           return false;
         }
       }
     }
     return true;
+  }
+
+  private boolean isSuper() {
+    return mySuperContext != null;
+  }
+
+  @NotNull
+  private String getEffectiveNamespaceName(String contextNamespace) {
+    return ObjectUtils.notNull(mySuperContext, contextNamespace);
+  }
+
+  @NotNull
+  @Override
+  protected Set<String> computeNamespaceNames(@NotNull PerlValue resolvedNamespaceValue) {
+    return resolvedNamespaceValue.isUnknown() ? Collections.singleton(PerlPackageUtil.NAMESPACE_PACKAGE) :
+           super.computeNamespaceNames(resolvedNamespaceValue);
   }
 
   @Override
@@ -105,7 +120,7 @@ public final class PerlCallObjectValue extends PerlCallValue {
                                        @NotNull Set<String> subNames,
                                        @NotNull Processor<? super PsiNamedElement> processor) {
     for (String contextNamespace : namespaceNames) {
-      for (String currentNamespaceName : PerlMro.getLinearISA(project, searchScope, contextNamespace, myIsSuper)) {
+      for (String currentNamespaceName : PerlMro.getLinearISA(project, searchScope, getEffectiveNamespaceName(contextNamespace), isSuper())) {
         ProcessingContext processingContext = new ProcessingContext();
         processingContext.processBuiltIns = false;
         if (!processItemsInNamespace(project, searchScope, subNames, processor, currentNamespaceName, processingContext, contextElement)) {
@@ -124,28 +139,28 @@ public final class PerlCallObjectValue extends PerlCallValue {
     if (this == o) {
       return true;
     }
-    if (o == null || getClass() != o.getClass()) {
+    if (!(o instanceof PerlCallObjectValue)) {
       return false;
     }
     if (!super.equals(o)) {
       return false;
     }
 
-    PerlCallObjectValue object = (PerlCallObjectValue)o;
+    PerlCallObjectValue value = (PerlCallObjectValue)o;
 
-    return myIsSuper == object.myIsSuper;
+    return mySuperContext != null ? mySuperContext.equals(value.mySuperContext) : value.mySuperContext == null;
   }
 
   @Override
   protected int computeHashCode() {
     int result = super.computeHashCode();
-    result = 31 * result + (myIsSuper ? 1 : 0);
+    result = 31 * result + (mySuperContext != null ? mySuperContext.hashCode() : 0);
     return result;
   }
 
   @Override
   public String toString() {
-    return getNamespaceNameValue() + "->" + (myIsSuper ? "SUPER::" : "") + getSubNameValue() + getArgumentsAsString();
+    return getNamespaceNameValue() + "->" + (isSuper() ? mySuperContext + "::SUPER::" : "") + getSubNameValue() + getArgumentsAsString();
   }
 
   @NotNull
@@ -160,24 +175,32 @@ public final class PerlCallObjectValue extends PerlCallValue {
 
   @NotNull
   public static PerlValue create(@NotNull PerlValue namespaceValue, @NotNull String name) {
-    return create(namespaceValue, name, false);
+    return create(namespaceValue, name, null);
   }
 
   @NotNull
-  public static PerlValue create(@NotNull PerlValue namespaceValue, @NotNull String name, boolean isSuper) {
-    return create(namespaceValue, name, Collections.emptyList(), isSuper);
+  public static PerlValue create(@NotNull PerlValue namespaceValue, @NotNull String name, @Nullable String superContext) {
+    return create(namespaceValue, name, Collections.emptyList(), superContext);
   }
 
   @NotNull
   public static PerlValue create(@NotNull String namespace, @NotNull String name, @NotNull List<PerlValue> arguments) {
-    return create(PerlScalarValue.create(namespace), name, arguments, false);
+    return create(PerlScalarValue.create(namespace), name, arguments, null);
   }
 
   @NotNull
   public static PerlValue create(@NotNull PerlValue namespaceNameValue,
                                  @NotNull String name,
                                  @NotNull List<PerlValue> arguments,
-                                 boolean isSuper) {
-    return PerlValuesManager.intern(new PerlCallObjectValue(namespaceNameValue, PerlScalarValue.create(name), arguments, isSuper));
+                                 @Nullable String superContext) {
+    return create(namespaceNameValue, PerlScalarValue.create(name), arguments, superContext);
+  }
+
+  @NotNull
+  public static PerlValue create(@NotNull PerlValue namespaceNameValue,
+                                  @NotNull PerlValue nameValue,
+                                  @NotNull List<PerlValue> arguments,
+                                  @Nullable String superContext) {
+    return PerlValuesManager.intern(new PerlCallObjectValue(namespaceNameValue, nameValue, arguments, superContext));
   }
 }

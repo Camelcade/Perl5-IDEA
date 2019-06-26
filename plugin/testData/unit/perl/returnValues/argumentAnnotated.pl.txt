@@ -1,0 +1,8 @@
+<caret>sub something{
+  #@type Foo::Bar
+  my $var = $_[0];
+
+  $var;
+}
+----------
+ArrayItem: SUB_ARGUMENTS[0](fallback to Foo::Bar)

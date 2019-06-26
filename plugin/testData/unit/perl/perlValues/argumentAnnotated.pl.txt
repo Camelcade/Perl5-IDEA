@@ -7,8 +7,7 @@ sub something{
 ----------
 $var
 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 55 in argumentAnnotated.pl
-OneOf[ArrayItem: SUB_ARGUMENTS[0],
-Foo::Bar]
+ArrayItem: SUB_ARGUMENTS[0](fallback to Foo::Bar)
 ----------
 Resolved
 ----------

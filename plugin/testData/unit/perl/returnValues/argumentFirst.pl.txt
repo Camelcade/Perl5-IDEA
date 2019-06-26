@@ -1,0 +1,7 @@
+<caret>sub something{
+  my $var = $_[0];
+
+  $var;
+}
+----------
+ArrayItem: SUB_ARGUMENTS[0]

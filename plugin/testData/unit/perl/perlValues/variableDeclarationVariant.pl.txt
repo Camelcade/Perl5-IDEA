@@ -15,8 +15,7 @@ $v<caret>ar;
 ----------
 $var
 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 120 in variableDeclarationVariant.pl
-OneOf[Foo::Baz,
-scalar main::some_unknown_sub()]
+scalar main::some_unknown_sub()(fallback to Foo::Baz)
 ----------
 Resolved
 ----------
