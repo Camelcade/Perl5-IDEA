@@ -2015,10 +2015,14 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   protected void doTestReturnValue() {
     initWithFileSmart(getTestName(true));
     addVirtualFileFilter();
-    PerlSubElement element = getElementAtCaret(PerlSubElement.class);
+    PsiElement element = TargetElementUtil.getInstance().getNamedElement(getFile().findElementAt(getEditor().getCaretModel().getOffset()), 0);
+    if( element == null){
+      element = getElementAtCaret(PerlSubElement.class);
+    }
     assertNotNull(element);
+    assertInstanceOf(element, PerlSubElement.class);
     StringBuilder sb = new StringBuilder();
-    PerlValue returnValue = element.getReturnValue();
+    PerlValue returnValue = ((PerlSubElement)element).getReturnValue();
     sb.append(getEditorTextWithCaretsAndSelections().trim())
       .append(SEPARATOR_NEWLINES)
       .append(returnValue);
