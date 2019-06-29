@@ -114,6 +114,13 @@ public final class PerlArrayValue extends PerlListValue implements Iterable<Perl
     return builder().addElements(resolvedElements).build();
   }
 
+  public static PerlValue create(@NotNull PerlValue ... values){
+    if( values.length == 0){
+      return EMPTY_ARRAY;
+    }
+    return PerlValuesManager.intern(new PerlArrayValue(Arrays.asList(values)));
+  }
+
   @NotNull
   public static Builder builder() {
     return new Builder();

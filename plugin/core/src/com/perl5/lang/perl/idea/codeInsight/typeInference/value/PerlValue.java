@@ -20,6 +20,7 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubOutputStream;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -81,6 +82,7 @@ public abstract class PerlValue {
     return Collections.emptySet();
   }
 
+  @Contract(pure=true)
   public final boolean isUnknown() {
     return this == UNKNOWN_VALUE;
   }
