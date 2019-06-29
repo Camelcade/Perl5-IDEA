@@ -1951,8 +1951,10 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     assertNotNull("Unable to find documentation provider for " + providerSource, documentationProvider);
     PsiElement documentationElement =
       documentationProvider.getDocumentationElementForLookupItem(PsiManager.getInstance(getProject()), elementObject, elementAtCaret);
-    assertNotNull("No documentation element found for " + elementObject, documentationElement);
-    String generatedDoc = documentationProvider.generateDoc(documentationElement, elementAtCaret);
+    if( documentationElement != null){
+      LOG.warn("No documentation element found for " + elementObject);
+    }
+    String generatedDoc = documentationElement == null ? "": StringUtil.notNullize(documentationProvider.generateDoc(documentationElement, elementAtCaret));
     assertNotNull("No document generated for " + documentationElement, generatedDoc);
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), generatedDoc);
   }
@@ -1996,6 +1998,10 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
 
   protected void doTestPerlValue() {
     initWithFileSmart(getTestName(true));
+    doTestPerlValueWithoutInit();
+  }
+
+  protected void doTestPerlValueWithoutInit(){
     addVirtualFileFilter();
     PerlValuableEntity element = getElementAtCaret(PerlValuableEntity.class);
     assertNotNull(element);
@@ -2237,6 +2243,8 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
 
   protected void withFileSpec() { addTestLibrary("fileSpec"); }
 
+  protected void withMojo() { addTestLibrary("mojo"); }
+
   protected void doTestStubs() {
     String testName = getTestName(true);
     String fileName = StringUtil.replace(testName, "_", ".");
@@ -2295,8 +2303,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     assertNotNull(targetElement);
     DocumentationProvider documentationProvider = DocumentationManager.getProviderFromElement(targetElement, elementAtCaret);
     assertInstanceOf(documentationProvider, DocumentationProviderEx.class);
-    String generatedDoc = documentationProvider.generateDoc(targetElement, elementAtCaret);
-    assertNotNull("No documentation for: " + targetElement + "; " + elementAtCaret, generatedDoc);
+    String generatedDoc = StringUtil.notNullize(documentationProvider.generateDoc(targetElement, elementAtCaret));
     return Pair.create(targetElement, generatedDoc);
   }
 

@@ -28,6 +28,9 @@ public class PerlResolveTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testMojoLite(){doTest();}
+
+  @Test
   public void testBlessedInference() {doTest();}
 
   @Test

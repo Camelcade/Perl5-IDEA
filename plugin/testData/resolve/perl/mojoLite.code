@@ -1,0 +1,17 @@
+use Mojolicious::Lite;
+
+any;
+app;
+del;
+get;
+group;
+helper;
+hook;
+new;
+options;
+patch;
+plugin;
+post;
+put;
+under;
+websocket;

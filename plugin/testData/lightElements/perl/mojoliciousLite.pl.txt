@@ -1,0 +1,16 @@
+Poly-named provider: PerlUseStatementElement(USE_STATEMENT) at 18 in mojoliciousLite.pl
+	MojoLightDelegatingSubDefinition(LIGHT_METHOD_DEFINITION)@Sandbox::app; navigated to: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::new at 4469 in Mojolicious.pm
+	MojoLightDelegatingSubDefinition(LIGHT_METHOD_DEFINITION)@Sandbox::new; navigated to: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::new at 4469 in Mojolicious.pm
+	MojoLightDelegatingSubDefinition(LIGHT_METHOD_DEFINITION)@Sandbox::any; navigated to: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Routes::Route::any($self) at 802 in Route.pm
+	MojoLightDelegatingSubDefinition(LIGHT_METHOD_DEFINITION)@Sandbox::get; navigated to: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Routes::Route::get($self) at 1011 in Route.pm
+	MojoLightDelegatingSubDefinition(LIGHT_METHOD_DEFINITION)@Sandbox::options; navigated to: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Routes::Route::options($self) at 1520 in Route.pm
+	MojoLightDelegatingSubDefinition(LIGHT_METHOD_DEFINITION)@Sandbox::patch; navigated to: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Routes::Route::patch($self) at 2003 in Route.pm
+	MojoLightDelegatingSubDefinition(LIGHT_METHOD_DEFINITION)@Sandbox::post; navigated to: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Routes::Route::post($self) at 2053 in Route.pm
+	MojoLightDelegatingSubDefinition(LIGHT_METHOD_DEFINITION)@Sandbox::put; navigated to: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Routes::Route::put($self) at 2103 in Route.pm
+	MojoLightDelegatingSubDefinition(LIGHT_METHOD_DEFINITION)@Sandbox::websocket; navigated to: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Routes::Route::websocket at 4005 in Route.pm
+	MojoLightDelegatingSubDefinition(LIGHT_METHOD_DEFINITION)@Sandbox::under; navigated to: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Routes::Route::under($self) at 3773 in Route.pm
+	MojoLightDelegatingSubDefinition(LIGHT_METHOD_DEFINITION)@Sandbox::del; navigated to: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Routes::Route::delete($self) at 877 in Route.pm
+	MojoLightDelegatingSubDefinition(LIGHT_METHOD_DEFINITION)@Sandbox::group; navigated to: PerlUseStatementElement(USE_STATEMENT) at 18 in mojoliciousLite.pl
+	MojoLightDelegatingSubDefinition(LIGHT_METHOD_DEFINITION)@Sandbox::helper; navigated to: PerlUseStatementElement(USE_STATEMENT) at 18 in mojoliciousLite.pl
+	MojoLightDelegatingSubDefinition(LIGHT_METHOD_DEFINITION)@Sandbox::hook; navigated to: PerlUseStatementElement(USE_STATEMENT) at 18 in mojoliciousLite.pl
+	MojoLightDelegatingSubDefinition(LIGHT_METHOD_DEFINITION)@Sandbox::plugin; navigated to: PerlUseStatementElement(USE_STATEMENT) at 18 in mojoliciousLite.pl

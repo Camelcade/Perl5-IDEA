@@ -1,0 +1,13 @@
+use Mojolicious::Lite;
+
+my $var = websocket;
+
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 46 in test.pl
+scalar main::websocket()
+----------
+Resolved
+----------
+Value unknown

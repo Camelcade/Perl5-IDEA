@@ -1,0 +1,6 @@
+$self->helper(
+    myh<caret>elper => sub {
+        my %hash = @_;
+        return $hash{$hash{key}};
+    }
+);

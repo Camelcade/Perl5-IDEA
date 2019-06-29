@@ -1,0 +1,19 @@
+Language: Perl5
+PerlFileStub
+	Name: main
+	Mro: DFS
+	Parents: []
+	@EXPORT: []
+	@EXPORT_OK: []
+	@EXPORT_TAGS: {}
+	Annotations: null
+	Type: Perl5
+  USE_STATEMENT:PerlUseStatementStub
+	Light elements: 0
+	Package name: Mojolicious::Lite
+	Outer package name: main
+	Import options: null
+
+----------
+Language: Perl5 POD
+PsiFileStubImpl

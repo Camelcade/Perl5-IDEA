@@ -51,6 +51,9 @@ public class PerlCompletionTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testMojoLite(){doTestCompletion((__, presentation) -> StringUtil.contains(StringUtil.notNullize(presentation.getTypeText()), "main"));}
+
+  @Test
   public void testBlessedInference() {doTest();}
 
   @Test

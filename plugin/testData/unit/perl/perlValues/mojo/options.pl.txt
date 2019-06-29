@@ -1,0 +1,13 @@
+use Mojolicious::Lite;
+
+my $var = options;
+
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 44 in test.pl
+scalar main::options()
+----------
+Resolved
+----------
+Value unknown

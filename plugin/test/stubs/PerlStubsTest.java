@@ -27,6 +27,9 @@ public class PerlStubsTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testMojoliciousLite_pl() {doTest();}
+
+  @Test
   public void testExceptionClass_pl() {doTest();}
 
   @Test

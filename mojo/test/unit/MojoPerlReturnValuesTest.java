@@ -14,42 +14,22 @@
  * limitations under the License.
  */
 
-package lightElements;
+package unit;
 
 
 import base.PerlLightTestCase;
 import org.junit.Test;
-public class PerlLightElementsTest extends PerlLightTestCase {
+
+public class MojoPerlReturnValuesTest extends PerlLightTestCase {
   @Override
   protected String getBaseDataPath() {
-    return "testData/lightElements/perl";
+    return "testData/unit/perl/returnValues";
   }
 
   @Test
-  public void testMojoliciousLite() {
-    withMojo();
-    doTest();
-  }
-
-  @Test
-  public void testMooseAttrs() {doTest();}
-
-  @Test
-  public void testConstants() {doTest();}
-
-  @Test
-  public void testExceptionClass() {doTest();}
-
-  @Test
-  public void testClassAccessor() {doTest();}
-
-  @Test
-  public void testMojoAttrs() {doTest();}
-
-  @Test
-  public void testMooseAttrsWithStandardTypes() {doTest();}
+  public void testHelper(){doTest();}
 
   private void doTest() {
-    doTestLightElements();
+    doTestReturnValue();
   }
 }

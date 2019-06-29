@@ -20,7 +20,7 @@ package documentation;
 import base.PerlLightTestCase;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
-public class PerlQuickDockCompletionTest extends PerlLightTestCase {
+public class PerlQuickDocCompletionTest extends PerlLightTestCase {
 
   @Override
   protected String getBaseDataPath() {

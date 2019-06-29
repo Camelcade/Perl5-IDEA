@@ -25,7 +25,9 @@ import com.intellij.psi.PsiManager;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
+import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.lang.perl.extensions.mojo.MojoLightDelegatingSubDefinition;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
@@ -79,6 +81,9 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
 
   @Override
   public PsiElement getDocumentationElementForLookupItem(PsiManager psiManager, Object object, PsiElement element) {
+    if (object instanceof MojoLightDelegatingSubDefinition) {
+      return findPodElement(ObjectUtils.notNull(((MojoLightDelegatingSubDefinition)object).getTargetSubElement(), (PsiElement)object));
+    }
     if (object instanceof PsiElement) {
       return findPodElement((PsiElement)object);
     }
@@ -118,8 +123,12 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
    */
   @Nullable
   public static PsiElement findDocumentation(@NotNull Editor editor) {
-    return findPodElement(
-      TargetElementUtil.findTargetElement(editor, TargetElementUtil.ELEMENT_NAME_ACCEPTED | TargetElementUtil.REFERENCED_ELEMENT_ACCEPTED));
+    PsiElement targetElement = TargetElementUtil.findTargetElement(
+      editor, TargetElementUtil.ELEMENT_NAME_ACCEPTED | TargetElementUtil.REFERENCED_ELEMENT_ACCEPTED);
+    if (targetElement instanceof MojoLightDelegatingSubDefinition) {
+      targetElement = ObjectUtils.notNull(((MojoLightDelegatingSubDefinition)targetElement).getTargetSubElement(), targetElement);
+    }
+    return findPodElement(targetElement);
   }
 
   protected static boolean isFunc(PsiElement element) {
