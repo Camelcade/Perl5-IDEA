@@ -129,6 +129,9 @@ public class PerlValueDeserializer {
     else if (valueId == SUBLIST_ID) {
       return new PerlSublistValue(this);
     }
+    else if( valueId == FALLBACK_ID){
+      return new PerlFallbackValue(this);
+    }
     throw new IOException("Don't know how to deserialize a value: " + valueId);
   }
 
