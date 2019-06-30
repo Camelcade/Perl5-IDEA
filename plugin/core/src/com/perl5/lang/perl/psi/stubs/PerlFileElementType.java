@@ -28,6 +28,7 @@ import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManage
 import com.perl5.lang.perl.psi.PerlFile;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionData;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceIndex;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -90,6 +91,9 @@ public class PerlFileElementType extends IStubFileElementType<PerlFileStub> {
 
   @Override
   public void indexStub(@NotNull PerlFileStub stub, @NotNull IndexSink sink) {
+    if( stub.isEmpty() && stub.getNamespaceName().equals(PerlPackageUtil.MAIN_NAMESPACE_NAME)){
+      return;
+    }
     sink.occurrence(PerlNamespaceIndex.KEY, stub.getNamespaceName());
   }
 

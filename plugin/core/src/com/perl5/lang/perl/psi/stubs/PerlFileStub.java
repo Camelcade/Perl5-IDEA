@@ -45,6 +45,14 @@ public class PerlFileStub extends PsiFileStubImpl<PerlFile> implements PerlNames
     myElementType = elementType;
   }
 
+  /**
+   * @return true iff this stub is empty and contains no useful data
+   * @see PerlNamespaceDefinitionData#isEmpty()
+   */
+  public boolean isEmpty(){
+    return myData.isEmpty();
+  }
+
   @NotNull
   @Override
   public final IStubFileElementType getType() {

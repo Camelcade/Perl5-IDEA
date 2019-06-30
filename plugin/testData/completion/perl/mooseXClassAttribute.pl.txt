@@ -346,44 +346,8 @@ Lookups: lstat; Text: lstat; Tail: null; Type: CORE; Icon: /subroutine_gutter_ic
     PsiElement: Implicit sub: lstat()
 Lookups: main->; Text: main->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
     PsiElement: Implicit namespace: main
-Lookups: main->; Text: main->; Tail: ...; Type: null; Icon: /perl5.png, null]; Type Icon: null
-    PsiElement: Perl5 at 0 in ClassAccessor.pm
-Lookups: main->; Text: main->; Tail: ...; Type: null; Icon: /perl5.png, null]; Type Icon: null
-    PsiElement: Perl5 at 0 in Constants.pm
-Lookups: main->; Text: main->; Tail: ...; Type: null; Icon: /perl5.png, null]; Type Icon: null
-    PsiElement: Perl5 at 0 in Controller.pm
-Lookups: main->; Text: main->; Tail: ...; Type: null; Icon: /perl5.png, null]; Type Icon: null
-    PsiElement: Perl5 at 0 in DefaultHelpers.pm
-Lookups: main->; Text: main->; Tail: ...; Type: null; Icon: /perl5.png, null]; Type Icon: null
-    PsiElement: Perl5 at 0 in Exceptions.pm
-Lookups: main->; Text: main->; Tail: ...; Type: null; Icon: /perl5.png, null]; Type Icon: null
-    PsiElement: Perl5 at 0 in Package.pm
-Lookups: main->; Text: main->; Tail: ...; Type: null; Icon: /perl5.png, null]; Type Icon: null
-    PsiElement: Perl5 at 0 in Something.pm
-Lookups: main->; Text: main->; Tail: ...; Type: null; Icon: /perl5.png, null]; Type Icon: null
-    PsiElement: Perl5 at 0 in TagHelpers.pm
-Lookups: main->; Text: main->; Tail: ...; Type: null; Icon: /perl5classic.png, null]; Type Icon: null
-    PsiElement: Perl5 at 0 in mooseXClassAttribute.pl
 Lookups: main::; Text: main::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
     PsiElement: Implicit namespace: main
-Lookups: main::; Text: main::; Tail: ...; Type: null; Icon: /perl5.png, null]; Type Icon: null
-    PsiElement: Perl5 at 0 in ClassAccessor.pm
-Lookups: main::; Text: main::; Tail: ...; Type: null; Icon: /perl5.png, null]; Type Icon: null
-    PsiElement: Perl5 at 0 in Constants.pm
-Lookups: main::; Text: main::; Tail: ...; Type: null; Icon: /perl5.png, null]; Type Icon: null
-    PsiElement: Perl5 at 0 in Controller.pm
-Lookups: main::; Text: main::; Tail: ...; Type: null; Icon: /perl5.png, null]; Type Icon: null
-    PsiElement: Perl5 at 0 in DefaultHelpers.pm
-Lookups: main::; Text: main::; Tail: ...; Type: null; Icon: /perl5.png, null]; Type Icon: null
-    PsiElement: Perl5 at 0 in Exceptions.pm
-Lookups: main::; Text: main::; Tail: ...; Type: null; Icon: /perl5.png, null]; Type Icon: null
-    PsiElement: Perl5 at 0 in Package.pm
-Lookups: main::; Text: main::; Tail: ...; Type: null; Icon: /perl5.png, null]; Type Icon: null
-    PsiElement: Perl5 at 0 in Something.pm
-Lookups: main::; Text: main::; Tail: ...; Type: null; Icon: /perl5.png, null]; Type Icon: null
-    PsiElement: Perl5 at 0 in TagHelpers.pm
-Lookups: main::; Text: main::; Tail: ...; Type: null; Icon: /perl5classic.png, null]; Type Icon: null
-    PsiElement: Perl5 at 0 in mooseXClassAttribute.pl
 Lookups: map; Text: map; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
     PsiElement: Implicit sub: map()
 Lookups: mkdir; Text: mkdir; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null

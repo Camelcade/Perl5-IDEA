@@ -108,7 +108,7 @@ public final class PerlValuesManager {
   static final int FALLBACK_ID = id++;
 
   // MUST stay here. Automatically changes on new element creation
-  public static final int VERSION = id + 2;
+  public static final int VERSION = id;
 
   private static final WeakInterner<PerlValue> INTERNER = new WeakInterner<>();
 

@@ -53,6 +53,13 @@ public class PerlNamespaceDefinitionData implements PerlNamespaceDefinition {
     this(Objects.requireNonNull(namespaceDefinition.getNamespaceName()), namespaceDefinition);
   }
 
+  /**
+   * @return true iff this data is empty, has no parents or exports data
+   */
+  public boolean isEmpty(){
+    return myParentNamespaces.isEmpty() && myEXPORT.isEmpty() && myEXPORT_OK.isEmpty() && myEXPORT_TAGS.isEmpty();
+  }
+
   public PerlNamespaceDefinitionData(@NotNull String namespaceName, @NotNull PerlNamespaceDefinition namespaceDefinition) {
     this(namespaceName,
          namespaceDefinition.getMroType(),
