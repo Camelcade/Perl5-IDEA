@@ -93,7 +93,7 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
       parentsPaths = stub.getParentNamespacesNames();
     }
     else {
-      parentsPaths = getParentNamespacesNamesFromPsi();
+      parentsPaths = PerlPackageUtil.collectParentNamespacesFromPsi(this);
     }
 
     VirtualFile containingFile = MasonCoreUtil.getContainingVirtualFile(getContainingFile());

@@ -38,9 +38,14 @@ import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.PairProcessor;
 import com.intellij.util.Processor;
+import com.intellij.util.SmartList;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlLibProvider;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageParentsProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
+import com.perl5.lang.perl.extensions.parser.PerlRuntimeParentsProvider;
+import com.perl5.lang.perl.extensions.parser.PerlRuntimeParentsProviderFromArray;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
+import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlScalarValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
@@ -803,7 +808,86 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
     return PerlScalarValue.create(getContextNamespaceName(psiElement));
   }
 
+  /**
+   * @return list of parent namespaces defined by different syntax constructions in the sub-tree of the {@code namespaceDefinition}
+   */
+  @NotNull
+  public static List<String> collectParentNamespacesFromPsi(@NotNull PerlNamespaceDefinitionElement namespaceDefinition) {
+    return CachedValuesManager.getCachedValue(namespaceDefinition, () ->
+      CachedValueProvider.Result.create(doCollectParentNamespacesFromPsi(namespaceDefinition), namespaceDefinition));
+  }
+
+  @NotNull
+  private static List<String> doCollectParentNamespacesFromPsi(@NotNull PerlNamespaceDefinitionElement namespaceDefinition) {
+    String namespaceName = namespaceDefinition.getNamespaceName();
+    if (StringUtil.isEmpty(namespaceName)) {
+      return Collections.emptyList();
+    }
+    ParentNamespacesNamesCollector collector = new ParentNamespacesNamesCollector(namespaceName);
+    PerlPsiUtil.processNamespaceStatements(namespaceDefinition, collector);
+    collector.applyRunTimeModifiers();
+    return collector.getParentNamespaces();
+  }
+
   public interface ClassRootVirtualFileProcessor {
     boolean process(VirtualFile file, VirtualFile classRoot);
+  }
+
+  public static class ParentNamespacesNamesCollector implements Processor<PsiElement> {
+    @NotNull
+    private final List<String> myParentNamespaces = new SmartList<>();
+    @NotNull
+    private final List<PerlRuntimeParentsProvider> runtimeModifiers = new SmartList<>();
+    @NotNull
+    private final String myNamespaceName;
+
+    public ParentNamespacesNamesCollector(@NotNull String namespaceName) {
+      myNamespaceName = namespaceName;
+    }
+
+    @Override
+    public boolean process(PsiElement element) {
+      if (element instanceof PerlUseStatementElement) {
+        PerlPackageProcessor processor = ((PerlUseStatementElement)element).getPackageProcessor();
+        if (processor instanceof PerlPackageParentsProvider) {
+          ((PerlPackageParentsProvider)processor).changeParentsList((PerlUseStatementElement)element, myParentNamespaces);
+        }
+      }
+      else if (element instanceof PerlRuntimeParentsProvider) {
+        runtimeModifiers.add((PerlRuntimeParentsProvider)element);
+      }
+      else if (element.getFirstChild() instanceof PerlRuntimeParentsProvider) {
+        runtimeModifiers.add((PerlRuntimeParentsProvider)element.getFirstChild());
+      }
+      else if (PerlElementPatterns.ISA_ASSIGN_STATEMENT.accepts(element)) {
+        PsiElement assignExpr = element.getFirstChild();
+        if (assignExpr instanceof PsiPerlAssignExpr) {
+          PsiPerlArrayVariable variable = PsiTreeUtil.findChildOfType(element, PsiPerlArrayVariable.class);
+
+          if (variable != null && StringUtil.equals("ISA", variable.getName())) {
+            PsiElement rightSide = assignExpr.getLastChild();
+            if (rightSide != null) {
+              String explicitPackageName = variable.getExplicitNamespaceName();
+              if (explicitPackageName == null || StringUtil.equals(explicitPackageName, myNamespaceName)) {
+                runtimeModifiers.add(new PerlRuntimeParentsProviderFromArray(assignExpr.getLastChild()));
+              }
+            }
+          }
+        }
+      }
+
+      return true;
+    }
+
+    public void applyRunTimeModifiers() {
+      for (PerlRuntimeParentsProvider provider : runtimeModifiers) {
+        provider.changeParentsList(myParentNamespaces);
+      }
+    }
+
+    @NotNull
+    public List<String> getParentNamespaces() {
+      return myParentNamespaces;
+    }
   }
 }
