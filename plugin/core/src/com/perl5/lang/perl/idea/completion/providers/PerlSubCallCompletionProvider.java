@@ -52,7 +52,7 @@ public class PerlSubCallCompletionProvider extends CompletionProvider<Completion
     boolean isStatic = perlValue instanceof PerlCallStaticValue;
 
     perlValue.processTargetNamespaceElements(
-      position.getProject(), position.getResolveScope(), position, new PerlNamespaceItemProcessor<PsiNamedElement>() {
+      position, new PerlNamespaceItemProcessor<PsiNamedElement>() {
         @Override
         public boolean processItem(@NotNull PsiNamedElement element) {
           if (element instanceof PerlImplicitSubDefinition && ((PerlImplicitSubDefinition)element).isAnonymous()) {

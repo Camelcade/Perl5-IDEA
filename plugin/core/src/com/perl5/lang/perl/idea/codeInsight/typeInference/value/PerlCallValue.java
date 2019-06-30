@@ -185,9 +185,7 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
    * all elements from {@code Foo::Bar}
    * @param contextElement origin element of a call. Used to process implicit import into the file
    */
-  public abstract boolean processTargetNamespaceElements(@NotNull Project project,
-                                                         @NotNull GlobalSearchScope searchScope,
-                                                         @NotNull PsiElement contextElement,
+  public abstract boolean processTargetNamespaceElements(@NotNull PsiElement contextElement,
                                                          @NotNull PerlNamespaceItemProcessor<? super PsiNamedElement> processor);
 
   @Override

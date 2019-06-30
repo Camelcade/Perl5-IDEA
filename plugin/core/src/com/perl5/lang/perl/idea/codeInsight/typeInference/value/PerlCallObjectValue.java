@@ -69,10 +69,10 @@ public final class PerlCallObjectValue extends PerlCallValue {
   }
 
   @Override
-  public boolean processTargetNamespaceElements(@NotNull Project project,
-                                                @NotNull GlobalSearchScope searchScope,
-                                                @NotNull PsiElement contextElement,
+  public boolean processTargetNamespaceElements(@NotNull PsiElement contextElement,
                                                 @NotNull PerlNamespaceItemProcessor<? super PsiNamedElement> processor) {
+    Project project = contextElement.getProject();
+    GlobalSearchScope searchScope = contextElement.getResolveScope();
     for (String contextNamespace : getNamespaceNameValue().resolve(contextElement).getNamespaceNames()) {
       for (String currentNamespaceName : PerlMro.getLinearISA(project, searchScope, getEffectiveNamespaceName(contextNamespace), isSuper())) {
         if (!processTargetNamespaceElements(project, searchScope, processor, currentNamespaceName)) {

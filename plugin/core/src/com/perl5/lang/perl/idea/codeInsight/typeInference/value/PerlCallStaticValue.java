@@ -62,10 +62,10 @@ public final class PerlCallStaticValue extends PerlCallValue {
 
   // fixme resolve namespace and subs first
   @Override
-  public boolean processTargetNamespaceElements(@NotNull Project project,
-                                                @NotNull GlobalSearchScope searchScope,
-                                                @NotNull PsiElement contextElement,
+  public boolean processTargetNamespaceElements(@NotNull PsiElement contextElement,
                                                 @NotNull PerlNamespaceItemProcessor<? super PsiNamedElement> processor) {
+    Project project = contextElement.getProject();
+    GlobalSearchScope searchScope = contextElement.getResolveScope();
     for (String currentNamespaceName : getNamespaceNameValue().resolve(contextElement).getNamespaceNames()) {
       if (!processTargetNamespaceElements(project, searchScope, processor, currentNamespaceName)) {
         return false;
