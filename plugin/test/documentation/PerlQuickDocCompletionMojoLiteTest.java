@@ -108,7 +108,7 @@ public class PerlQuickDocCompletionMojoLiteTest extends PerlLightTestCase {
   }
 
   private void doTest() {
-    initWithTextSmartWithoutErrors("package Sandbox; use Mojolicious::Lite;\n" +
+    initWithTextSmartWithoutErrors("use Mojolicious::Lite;\n" +
                                    "\n" +
                                    "<caret>");
     doTestCompletionQuickDoc(getTestName(true));

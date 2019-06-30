@@ -45,6 +45,7 @@ import com.perl5.lang.perl.psi.PerlDoExpr;
 import com.perl5.lang.perl.psi.PerlFile;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
+import com.perl5.lang.perl.psi.stubs.PerlFileStub;
 import com.perl5.lang.perl.psi.stubs.imports.PerlUseStatementStub;
 import com.perl5.lang.perl.psi.stubs.imports.runtime.PerlRuntimeImportStub;
 import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
@@ -364,7 +365,11 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
   @NotNull
   @Override
   public List<String> getParentNamespacesNames() {
-    return Collections.emptyList();
+    StubElement stub = getGreenStub();
+    if( stub instanceof PerlFileStub){
+      return ((PerlFileStub)stub).getParentNamespacesNames();
+    }
+    return PerlPackageUtil.collectParentNamespacesFromPsi(this);
   }
 
   @Nullable

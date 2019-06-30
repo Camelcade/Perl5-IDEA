@@ -17,6 +17,8 @@
 package unit.perl;
 
 
+import com.intellij.psi.PsiFile;
+import com.perl5.lang.perl.psi.PerlFile;
 import com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionMixin;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
@@ -32,6 +34,18 @@ public class NamespaceParentsDetectionTest extends NamespaceTestCase {
   protected String getBaseDataPath() {
     return DATA_PATH;
   }
+
+  @Test
+  public void testMain(){doFileTest();}
+
+  @Test
+  public void testMainInnerParent(){doFileTest();}
+
+  @Test
+  public void testMainMojolite(){doFileTest("Mojolicious::Lite");}
+
+  @Test
+  public void testMainParent(){doFileTest("Foo::Bar");}
 
   @Test
   public void testIsaAssign() {
@@ -137,6 +151,13 @@ public class NamespaceParentsDetectionTest extends NamespaceTestCase {
   @Test
   public void testTypingISA() {
     doTest("typing_isa.pl", "Foo", new String[]{});
+  }
+
+  private void doFileTest(String ... parentsList){
+    initWithFileSmartWithoutErrors();
+    PsiFile file = getFile();
+    assert file instanceof PerlFile;
+    assertEquals(Arrays.asList(parentsList), ((PerlFile)file).getParentNamespacesNames());
   }
 
   public void doTest(String fileName, @NotNull String namespaceName, String[] parentsList) {

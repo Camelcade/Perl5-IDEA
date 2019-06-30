@@ -10,4 +10,5 @@ scalar main::app()
 ----------
 Resolved
 ----------
-main
+OneOf[Ref[Hash(), blessed with main],
+Ref[Hash(Value unknown), blessed with main]]

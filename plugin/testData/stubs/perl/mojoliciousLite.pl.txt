@@ -2,7 +2,7 @@ Language: Perl5
 PerlFileStub
 	Name: main
 	Mro: DFS
-	Parents: []
+	Parents: [Mojolicious::Lite]
 	@EXPORT: []
 	@EXPORT_OK: []
 	@EXPORT_TAGS: {}

@@ -10,4 +10,4 @@ scalar main::helper()
 ----------
 Resolved
 ----------
-Value unknown
+Mojolicious::Renderer

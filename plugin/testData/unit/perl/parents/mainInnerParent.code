@@ -1,0 +1,3 @@
+
+package Sandbox;
+use parent qw/Foo::Bar/;

@@ -344,8 +344,12 @@ Lookups: lstat; Text: lstat; Tail: null; Type: CORE; Icon: /subroutine_gutter_ic
     PsiElement: Implicit sub: lstat()
 Lookups: main->; Text: main->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
     PsiElement: Implicit namespace: main
+Lookups: main->; Text: main->; Tail: ...; Type: null; Icon: /perl5classic.png, null]; Type Icon: null
+    PsiElement: Perl5 at 0 in mooseImports.pl
 Lookups: main::; Text: main::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
     PsiElement: Implicit namespace: main
+Lookups: main::; Text: main::; Tail: ...; Type: null; Icon: /perl5classic.png, null]; Type Icon: null
+    PsiElement: Perl5 at 0 in mooseImports.pl
 Lookups: map; Text: map; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
     PsiElement: Implicit sub: map()
 Lookups: mkdir; Text: mkdir; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
