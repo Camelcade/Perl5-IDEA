@@ -98,8 +98,10 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
     }
 
     if (c == ':' && nextTokenType == PACKAGE && Perl5CodeInsightSettings.getInstance().AUTO_INSERT_COLON) {
-      document.insertString(currentOffset, "::");
-      caretModel.moveToOffset(currentOffset + 2);
+      if( currentOffset > 0 && documentSequence.charAt(currentOffset-1) != ':'){
+        document.insertString(currentOffset, "::");
+        caretModel.moveToOffset(currentOffset + 2);
+      }
       AutoPopupController.getInstance(project).scheduleAutoPopup(editor);
       return Result.STOP;
     }

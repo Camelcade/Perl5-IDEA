@@ -62,4 +62,16 @@ public class PerlTypedHandlerTest extends PerlSmartKeysTestCase {
     Perl5CodeInsightSettings.getInstance().AUTO_INSERT_COLON = false;
     doTest("use Mojolicious<caret>", ":", "use Mojolicious:<caret>");
   }
+
+  @Test
+  public void testExtraDoubleColonInUseEnabled() {
+    Perl5CodeInsightSettings.getInstance().AUTO_INSERT_COLON = true;
+    doTest("use Mojolicious::<caret>", ":", "use Mojolicious::<caret>");
+  }
+
+  @Test
+  public void testExtraDoubleColonInUseDisabled() {
+    Perl5CodeInsightSettings.getInstance().AUTO_INSERT_COLON = false;
+    doTest("use Mojolicious::<caret>", ":", "use Mojolicious:::<caret>");
+  }
 }
