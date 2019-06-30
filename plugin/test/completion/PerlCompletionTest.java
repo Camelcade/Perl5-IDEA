@@ -51,6 +51,11 @@ public class PerlCompletionTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testMultipleNamespaces(){
+    doTestCompletion((__, presentation) -> StringUtil.startsWith(StringUtil.notNullize(presentation.getItemText()), "Some::Thing"));
+  }
+
+  @Test
   public void testMojoLite(){doTestCompletion((__, presentation) -> StringUtil.contains(StringUtil.notNullize(presentation.getTypeText()), "main"));}
 
   @Test

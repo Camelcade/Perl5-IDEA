@@ -116,6 +116,7 @@ public class PerlPackageCompletionUtil {
           char firstChar = name.charAt(0);
           if (firstChar == '_' || Character.isLetterOrDigit(firstChar)) {
             result.addElement(PerlPackageCompletionUtil.getPackageLookupElement(namespace, name, namespace.getIcon(0)));
+            return false;
           }
         }
         return true;
@@ -134,13 +135,13 @@ public class PerlPackageCompletionUtil {
     });
 
     for (String packageName : PerlPackageUtil.getKnownNamespaceNames(project)) {
-      PerlPackageUtil.processNamespaces(packageName, project, resolveScope, namespace ->
-      {
+      PerlPackageUtil.processNamespaces(packageName, project, resolveScope, namespace -> {
         String name = namespace.getNamespaceName();
         if (StringUtil.isNotEmpty(name)) {
           char firstChar = name.charAt(0);
           if (firstChar == '_' || Character.isLetterOrDigit(firstChar)) {
             addExpandablePackageElement(namespace, packageName, result, prefix);
+            return false;
           }
         }
         return true;
