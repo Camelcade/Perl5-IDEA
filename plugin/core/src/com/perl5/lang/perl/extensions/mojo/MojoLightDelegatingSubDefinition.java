@@ -96,6 +96,7 @@ public class MojoLightDelegatingSubDefinition extends PerlLightSubDefinitionElem
 
   /**
    * @return target sub of this delegating sub or method.
+   * @apiNote we may need this to obtain a signature of method
    */
   @Nullable
   public PerlSubElement getTargetSubElement() {

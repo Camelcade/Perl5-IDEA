@@ -81,7 +81,7 @@ public class MojoliciousLitePackageProcessor extends PerlPackageProcessorBase im
     result.add(createLightMethod(useStatementElement, contextNamespace, "del", PerlCallObjectValue.create(routes, "delete")));
     result.add(createLightMethod(useStatementElement, contextNamespace, "group", UNKNOWN_VALUE));
 
-    APP_METHODS.forEach(it -> result.add(createLightMethod(useStatementElement, contextNamespace, it, PerlCallObjectValue.create(app, it))));
+    APP_METHODS.forEach(it -> result.add(createLightMethod(useStatementElement, contextNamespace, it, PerlCallObjectValue.create(app, it, contextNamespace))));
 
     return result;
   }

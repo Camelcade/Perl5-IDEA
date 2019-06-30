@@ -1,1 +1,13 @@
-
+<p><a href="psi_element://Mojolicious%3A%3ARoutes%3A%3ARoute">Mojolicious::Routes::Route</a>: <a href="psi_element://Mojolicious%3A%3ARoutes%3A%3ARoute%2FMETHODS">METHODS</a></p><h2>websocket</h2><div style="padding-bottom: 10px;"><pre><code>  my $route = $r-&gt;websocket;
+  my $route = $r-&gt;websocket('/:foo');
+  my $route = $r-&gt;websocket('/:foo' =&gt; sub {...});
+  my $route = $r-&gt;websocket('/:foo' =&gt; sub {...} =&gt; 'name');
+  my $route = $r-&gt;websocket('/:foo' =&gt; {foo =&gt; 'bar'} =&gt; sub {...});
+  my $route = $r-&gt;websocket('/:foo' =&gt; [foo =&gt; qr/\w+/] =&gt; sub {...});
+  my $route = $r-&gt;websocket('/:foo' =&gt; (agent =&gt; qr/Firefox/) =&gt; sub {...});</code></pre></div>
+<p style="padding-bottom: 10px;">Generate <a href="psi_element://Mojolicious%3A%3ARoutes%3A%3ARoute">Mojolicious::Routes::Route</a> object matching only WebSocket
+handshakes, takes the same arguments as <a href="psi_element://Mojolicious%3A%3ARoutes%3A%3ARoute%2Fany">any</a> (except for the HTTP methods
+to match, which are implied). See <a href="psi_element://Mojolicious%3A%3AGuides%3A%3ATutorial">Mojolicious::Guides::Tutorial</a> and
+<a href="psi_element://Mojolicious%3A%3AGuides%3A%3ARouting">Mojolicious::Guides::Routing</a> for more information.</p>
+<div style="padding-bottom: 10px;"><pre><code>  # Route with destination
+  $r-&gt;websocket('/echo')-&gt;to('example#echo');</code></pre></div>
