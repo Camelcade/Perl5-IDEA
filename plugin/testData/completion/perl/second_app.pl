@@ -1,0 +1,2 @@
+use Mojolicious::Lite;
+

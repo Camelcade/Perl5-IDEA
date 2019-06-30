@@ -1,0 +1,6 @@
+Lookups: multiconst1; Text: multiconst1; Tail: null; Type: MyTest::Some::Package; Icon: /constant_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@MyTest::Some::Package::multiconst1; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 257 in Package.pm
+Lookups: someconst1; Text: someconst1; Tail: null; Type: MyTest::Some::Package; Icon: /constant_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@MyTest::Some::Package::someconst1; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 194 in Package.pm
+Lookups: somesub1; Text: somesub1; Tail: null; Type: MyTest::Some::Package; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@MyTest::Some::Package::somesub1 at 151 in Package.pm

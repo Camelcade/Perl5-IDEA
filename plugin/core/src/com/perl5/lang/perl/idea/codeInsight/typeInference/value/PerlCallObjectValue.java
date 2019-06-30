@@ -75,7 +75,7 @@ public final class PerlCallObjectValue extends PerlCallValue {
     GlobalSearchScope searchScope = contextElement.getResolveScope();
     for (String contextNamespace : getNamespaceNameValue().resolve(contextElement).getNamespaceNames()) {
       for (String currentNamespaceName : PerlMro.getLinearISA(project, searchScope, getEffectiveNamespaceName(contextNamespace), isSuper())) {
-        if (!processTargetNamespaceElements(project, searchScope, processor, currentNamespaceName)) {
+        if (!processTargetNamespaceElements(project, searchScope, processor, currentNamespaceName, contextElement)) {
           return false;
         }
       }

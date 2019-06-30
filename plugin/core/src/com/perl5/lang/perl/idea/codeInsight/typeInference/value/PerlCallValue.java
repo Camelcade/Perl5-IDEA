@@ -82,12 +82,11 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
     List<PerlValue> resolvedArguments = computeResolvedArguments(resolvedNamespaceValue, resolver);
     PerlValue argumentsValue = PerlArrayValue.builder().addElements(resolvedArguments).build();
 
-    GlobalSearchScope resolveScope = resolver.getResolveScope();
     PerlOneOfValue.Builder builder = PerlOneOfValue.builder();
     boolean[] hasTargets = new boolean[]{false};
     RecursionManager.doPreventingRecursion(
-      new Object[]{resolveScope, this}, true, () -> {
-        processCallTargets(resolver.getProject(), resolveScope, resolver.getContextFile(), namespaceNames, subNames, it -> {
+      new Object[]{resolver.getResolveScope(), this}, true, () -> {
+        processCallTargets(resolver.getProject(), resolver.getResolveScope(), resolver.getContextFile(), namespaceNames, subNames, it -> {
           hasTargets[0] = true;
             if (it instanceof PerlSubElement) {
               builder.addVariant(new PerlSubValueResolver(it, argumentsValue).resolve(((PerlSubElement)it).getReturnValue()));
@@ -234,18 +233,21 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
   protected static boolean processTargetNamespaceElements(@NotNull Project project,
                                                           @NotNull GlobalSearchScope searchScope,
                                                           @NotNull PerlNamespaceItemProcessor<? super PsiNamedElement> processor,
-                                                          @NotNull String currentNamespaceName) {
-    if (!PerlSubUtil.processRelatedItemsInPackage(project, searchScope, currentNamespaceName, it -> processor.processItem(it))) {
+                                                          @NotNull String currentNamespaceName,
+                                                          @Nullable PsiElement contextElement) {
+    GlobalSearchScope effectiveScope = getEffectiveScope(project, searchScope, currentNamespaceName, contextElement);
+
+    if (!PerlSubUtil.processRelatedItemsInPackage(project, effectiveScope, currentNamespaceName, processor::processItem)) {
       return false;
     }
 
     // exports
     Set<PerlExportDescriptor> exportDescriptors = new HashSet<>();
-    PerlNamespaceDefinitionElement.processExportDescriptors(project, searchScope, currentNamespaceName, (__, it) -> {
+    PerlNamespaceDefinitionElement.processExportDescriptors(project, effectiveScope, currentNamespaceName, (__, it) -> {
       exportDescriptors.add(it);
       return true;
     });
-    return processExportDescriptors(project, searchScope, processor, exportDescriptors);
+    return processExportDescriptors(project, effectiveScope, processor, exportDescriptors);
   }
 
   @Override
@@ -262,21 +264,13 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
                                                    @NotNull String namespaceName,
                                                    @NotNull ProcessingContext processingContext,
                                                    @Nullable PsiElement contextElement) {
-    PsiFile contextFile = contextElement == null ? null : contextElement.getContainingFile().getOriginalFile();
     Processor<PsiNamedElement> processorWrapper = it -> {
       processingContext.processBuiltIns = false;
       processingContext.processAutoload = false;
       return processor.process(it);
     };
 
-    GlobalSearchScope subsEffectiveScope;
-    if (PerlPackageUtil.MAIN_NAMESPACE_NAME.equals(namespaceName) &&
-        PerlSharedSettings.getInstance(project).SIMPLE_MAIN_RESOLUTION && contextFile != null) {
-      subsEffectiveScope = GlobalSearchScope.fileScope(contextFile);
-    }
-    else {
-      subsEffectiveScope = searchScope;
-    }
+    GlobalSearchScope subsEffectiveScope = getEffectiveScope(project, searchScope, namespaceName, contextElement);
     for (String subName : subNames) {
       if (!PerlSubUtil.processRelatedItems(project, subsEffectiveScope, PerlPackageUtil.join(namespaceName, subName), processorWrapper)) {
         return false;
@@ -304,6 +298,23 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
     return !processingContext.processAutoload ||
            PerlPackageUtil.isUNIVERSAL(namespaceName) || PerlPackageUtil.isCORE(namespaceName) ||
            PerlSubUtil.processRelatedItems(project, searchScope, PerlPackageUtil.join(namespaceName, SUB_AUTOLOAD), processorWrapper);
+  }
+
+  /**
+   * Adjust search scope if necessary. Used to handle simple main resolution
+   * @return original or adjusted scope to search
+   */
+  @NotNull
+  protected static GlobalSearchScope getEffectiveScope(@NotNull Project project,
+                                                       @NotNull GlobalSearchScope originalScope,
+                                                       @NotNull String namespaceName,
+                                                       @Nullable PsiElement contextElement) {
+    PsiFile contextFile = contextElement == null ? null : contextElement.getContainingFile().getOriginalFile();
+    if (PerlPackageUtil.MAIN_NAMESPACE_NAME.equals(namespaceName) &&
+        PerlSharedSettings.getInstance(project).SIMPLE_MAIN_RESOLUTION && contextFile != null) {
+      return GlobalSearchScope.fileScope(contextFile);
+    }
+    return originalScope;
   }
 
   protected static boolean processExportDescriptorsItems(@NotNull Project project,

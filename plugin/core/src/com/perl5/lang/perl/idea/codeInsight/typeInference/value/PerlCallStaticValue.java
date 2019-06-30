@@ -67,7 +67,7 @@ public final class PerlCallStaticValue extends PerlCallValue {
     Project project = contextElement.getProject();
     GlobalSearchScope searchScope = contextElement.getResolveScope();
     for (String currentNamespaceName : getNamespaceNameValue().resolve(contextElement).getNamespaceNames()) {
-      if (!processTargetNamespaceElements(project, searchScope, processor, currentNamespaceName)) {
+      if (!processTargetNamespaceElements(project, searchScope, processor, currentNamespaceName, contextElement)) {
         return false;
       }
     }

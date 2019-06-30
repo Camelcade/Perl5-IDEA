@@ -18,13 +18,24 @@ package completion;
 
 
 import base.PerlLightTestCase;
+import com.intellij.codeInsight.lookup.LookupElement;
+import com.intellij.codeInsight.lookup.LookupElementPresentation;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.project.PerlNamesCache;
 import com.perl5.lang.perl.internals.PerlVersion;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
+
+import java.util.function.BiPredicate;
+
 public class PerlCompletionTest extends PerlLightTestCase {
+
+  @NotNull
+  private static BiPredicate<LookupElement, LookupElementPresentation> withType(@NotNull String type){
+    return (__, presentation) -> StringUtil.contains(StringUtil.notNullize(presentation.getTypeText()), type);
+  }
 
   @Override
   protected void setUp() throws Exception {
@@ -51,12 +62,48 @@ public class PerlCompletionTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testMainCompletionAll(){
+    doTestMainCompletion(false);
+  }
+
+  @Test
+  public void testMainCompletionSimple(){
+    doTestMainCompletion(true);
+  }
+
+  private void doTestMainCompletion(boolean value) {
+    PerlSharedSettings.getInstance(getProject()).SIMPLE_MAIN_RESOLUTION = value;
+    myFixture.copyFileToProject("second_app.pl");
+    initWithTextSmartWithoutErrors("use Mojolicious::Lite;\n" +
+                                   "<caret>");
+    doTestCompletionCheck("", withType("main"));
+  }
+
+  @Test
+  public void testMainImportCompletionAll(){
+    doTestMainImportCompletion(false);
+  }
+
+  @Test
+  public void testMainImportCompletionSimple(){
+    doTestMainImportCompletion(true);
+  }
+
+  private void doTestMainImportCompletion(boolean value) {
+    PerlSharedSettings.getInstance(getProject()).SIMPLE_MAIN_RESOLUTION = value;
+    myFixture.copyFileToProject("mainImporter.pl");
+    initWithTextSmartWithoutErrors("<caret>");
+    doTestCompletionCheck("", withType("MyTest::Some::Package"));
+  }
+
+  @Test
   public void testMultipleNamespaces(){
     doTestCompletion((__, presentation) -> StringUtil.startsWith(StringUtil.notNullize(presentation.getItemText()), "Some::Thing"));
   }
 
   @Test
-  public void testMojoLite(){doTestCompletion((__, presentation) -> StringUtil.contains(StringUtil.notNullize(presentation.getTypeText()), "main"));}
+  public void testMojoLite(){
+    doTestCompletion(withType("main"));}
 
   @Test
   public void testBlessedInference() {doTest();}
