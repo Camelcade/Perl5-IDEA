@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
-package oop;
+package unit.perl;
 
 
 import com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionMixin;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
@@ -25,7 +26,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 public class NamespaceParentsDetectionTest extends NamespaceTestCase {
-  public static final String DATA_PATH = "testData/oop/parents";
+  public static final String DATA_PATH = "testData/unit/perl/parents";
 
   @Override
   protected String getBaseDataPath() {
@@ -140,7 +141,7 @@ public class NamespaceParentsDetectionTest extends NamespaceTestCase {
 
   public void doTest(String fileName, @NotNull String namespaceName, String[] parentsList) {
     PerlNamespaceDefinitionMixin namespaceDefinition = getNamespaceInFile(fileName, namespaceName);
-    List<String> parents = namespaceDefinition.getParentNamespacesNamesFromPsi();
+    List<String> parents = PerlPackageUtil.collectParentNamespacesFromPsi(namespaceDefinition);
     assertEquals(new ArrayList<>(Arrays.asList(parentsList)), parents);
   }
 }

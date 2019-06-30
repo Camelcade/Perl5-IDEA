@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package oop;
+package unit.perl;
 
 
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 public class MroTypeDetectionTest extends NamespaceTestCase {
-  public static final String DATA_PATH = "testData/oop/mroType";
+  public static final String DATA_PATH = "testData/unit/perl/mroType";
 
   @Override
   protected String getBaseDataPath() {

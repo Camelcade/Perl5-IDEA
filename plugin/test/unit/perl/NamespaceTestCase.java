@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package oop;
+package unit.perl;
 
 import base.PerlLightTestCase;
 import com.intellij.openapi.util.text.StringUtil;

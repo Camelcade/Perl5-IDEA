@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package oop;
+package unit.perl;
 
 
 import com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionMixin;
@@ -24,7 +24,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 public class ExporterTest extends NamespaceTestCase {
-  public static final String DATA_PATH = "testData/oop/exporter";
+  public static final String DATA_PATH = "testData/unit/perl/exporter";
 
   @Override
   protected String getBaseDataPath() {
