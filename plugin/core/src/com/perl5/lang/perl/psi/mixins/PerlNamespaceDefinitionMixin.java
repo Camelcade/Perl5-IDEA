@@ -22,9 +22,12 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.StubBasedPsiElement;
 import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.util.CachedValueProvider;
+import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.intellij.util.Processor;
+import com.intellij.util.SmartList;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlMroProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageParentsProvider;
@@ -54,10 +57,6 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
              PerlNamespaceDefinitionWithIdentifier,
              PerlElementPatterns,
              PerlCompositeElement {
-  private PerlMroType mroTypeCache = null;
-  private List<String> parentsNamesCache = null;
-  private ExporterInfo exporterInfoCache = null;
-
   public PerlNamespaceDefinitionMixin(@NotNull ASTNode node) {
     super(node);
   }
@@ -123,30 +122,25 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
     if (stub != null) {
       return stub.getParentNamespacesNames();
     }
-
     return getParentNamespacesNamesFromPsi();
   }
 
   @NotNull
   public List<String> getParentNamespacesNamesFromPsi() {
-    if (parentsNamesCache == null) {
-      collectParentNamespacesFromPsi();
-    }
-    return parentsNamesCache;
+    return CachedValuesManager.getCachedValue(this, () ->
+      CachedValueProvider.Result.create(collectParentNamespacesFromPsi(), PerlNamespaceDefinitionMixin.this));
   }
 
-  protected synchronized void collectParentNamespacesFromPsi() {
-    if (parentsNamesCache == null) {
-      //			System.err.println("Scanning");
-      ParentNamespacesNamesCollector collector = getCollector();
-      PerlPsiUtil.processNamespaceStatements(this, collector);
-      collector.applyRunTimeModifiers();
-      parentsNamesCache = collector.getParentNamespaces();
+  @NotNull
+  protected List<String> collectParentNamespacesFromPsi() {
+    String namespaceName = getNamespaceName();
+    if (StringUtil.isEmpty(namespaceName)) {
+      return Collections.emptyList();
     }
-  }
-
-  protected ParentNamespacesNamesCollector getCollector() {
-    return new ParentNamespacesNamesCollector(new ArrayList<>(), getNamespaceName());
+    ParentNamespacesNamesCollector collector = new ParentNamespacesNamesCollector(namespaceName);
+    PerlPsiUtil.processNamespaceStatements(this, collector);
+    collector.applyRunTimeModifiers();
+    return collector.getParentNamespaces();
   }
 
   @Nullable
@@ -168,12 +162,11 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
       return stub.getMroType();
     }
 
-    if (mroTypeCache == null) {
+    return CachedValuesManager.getCachedValue(this, () -> {
       MroSearcher searcher = new MroSearcher();
       PerlPsiUtil.processNamespaceStatements(this, searcher);
-      mroTypeCache = searcher.getResult();
-    }
-    return mroTypeCache;
+      return CachedValueProvider.Result.create(searcher.getResult(), PerlNamespaceDefinitionMixin.this);
+    });
   }
 
 
@@ -220,27 +213,13 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
            : nameIdentifier.getTextOffset();
   }
 
-  @Override
-  public void subtreeChanged() {
-    super.subtreeChanged();
-    mroTypeCache = null;
-    parentsNamesCache = null;
-    exporterInfoCache = null;
-  }
-
   @NotNull
   public ExporterInfo getExporterInfo() {
-    if (exporterInfoCache == null) {
-      collectExporterInfo();
-    }
-    return exporterInfoCache;
-  }
-
-  protected synchronized void collectExporterInfo() {
-    if (exporterInfoCache == null) {
-      exporterInfoCache = new ExporterInfo();
-      PerlPsiUtil.processNamespaceStatements(this, exporterInfoCache);
-    }
+    return CachedValuesManager.getCachedValue(this, () -> {
+      ExporterInfo result = new ExporterInfo();
+      PerlPsiUtil.processNamespaceStatements(this, result);
+      return CachedValueProvider.Result.create(result, PerlNamespaceDefinitionMixin.this);
+    });
   }
 
   @Nullable
@@ -268,32 +247,34 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
 
   public static class MroSearcher implements Processor<PsiElement> {
     public int counter = 0;
+    @NotNull
     private PerlMroType myResult = PerlMroType.DFS;
 
     @Override
     public boolean process(PsiElement element) {
-      //			counter++;
-      //			System.err.println("Processing" + element);
       if (element instanceof PerlUseStatementElement) {
         PerlPackageProcessor packageProcessor = ((PerlUseStatementElement)element).getPackageProcessor();
         if (packageProcessor instanceof PerlMroProvider) {
           myResult = ((PerlMroProvider)packageProcessor).getMroType((PerlUseStatementElement)element);
-          //					System.err.println("Got it");
           return false;
         }
       }
       return true;
     }
 
+    @NotNull
     public PerlMroType getResult() {
       return myResult;
     }
   }
 
   public static class ExporterInfo implements Processor<PsiElement> {
-    private List<String> EXPORT = new ArrayList<>();
-    private List<String> EXPORT_OK = new ArrayList<>();
-    private Map<String, List<String>> EXPORT_TAGS = Collections.emptyMap(); //new THashMap<String, List<String>>(); fixme nyi
+    @NotNull
+    private final List<String> EXPORT = new ArrayList<>();
+    @NotNull
+    private final List<String> EXPORT_OK = new ArrayList<>();
+    @NotNull
+    private final Map<String, List<String>> EXPORT_TAGS = Collections.emptyMap();
 
     @Override
     public boolean process(PsiElement element) {
@@ -317,11 +298,11 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
       return true;
     }
 
-    protected List<String> getRightSideStrings(@NotNull PsiElement rigthSide) {
+    protected List<String> getRightSideStrings(@NotNull PsiElement rightSide) {
       List<String> result = new ArrayList<>();
-      if (rigthSide.getFirstChild() != null) {
+      if (rightSide.getFirstChild() != null) {
         int lastEnd = -1;
-        for (PsiElement psiElement : PerlPsiUtil.collectStringElements(rigthSide.getFirstChild())) {
+        for (PsiElement psiElement : PerlPsiUtil.collectStringElements(rightSide.getFirstChild())) {
           String text = psiElement.getText();
           if (StringUtil.isNotEmpty(text)) {
             int newStart = psiElement.getNode().getStartOffset();
@@ -340,37 +321,40 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
       return result;
     }
 
+    @NotNull
     public List<String> getEXPORT() {
       return EXPORT;
     }
 
+    @NotNull
     public List<String> getEXPORT_OK() {
       return EXPORT_OK;
     }
 
+    @NotNull
     public Map<String, List<String>> getEXPORT_TAGS() {
       return EXPORT_TAGS;
     }
   }
 
   public static class ParentNamespacesNamesCollector implements Processor<PsiElement> {
-    private final List<String> parentNamespaces;
-    private final List<PerlRuntimeParentsProvider> runtimeModifiers = new ArrayList<>();
+    @NotNull
+    private final List<String> myParentNamespaces = new SmartList<>();
+    @NotNull
+    private final List<PerlRuntimeParentsProvider> runtimeModifiers = new SmartList<>();
+    @NotNull
     private final String myNamespaceName;
 
-    public ParentNamespacesNamesCollector(List<String> parentNamespaces, String namespaceName) {
-      this.parentNamespaces = parentNamespaces;
+    public ParentNamespacesNamesCollector(@NotNull String namespaceName) {
       myNamespaceName = namespaceName;
     }
 
     @Override
     public boolean process(PsiElement element) {
-      //			System.err.println("Processing " + element);
-
       if (element instanceof PerlUseStatementElement) {
         PerlPackageProcessor processor = ((PerlUseStatementElement)element).getPackageProcessor();
         if (processor instanceof PerlPackageParentsProvider) {
-          ((PerlPackageParentsProvider)processor).changeParentsList((PerlUseStatementElement)element, parentNamespaces);
+          ((PerlPackageParentsProvider)processor).changeParentsList((PerlUseStatementElement)element, myParentNamespaces);
         }
       }
       else if (element instanceof PerlRuntimeParentsProvider) {
@@ -401,12 +385,13 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
 
     public void applyRunTimeModifiers() {
       for (PerlRuntimeParentsProvider provider : runtimeModifiers) {
-        provider.changeParentsList(parentNamespaces);
+        provider.changeParentsList(myParentNamespaces);
       }
     }
 
+    @NotNull
     public List<String> getParentNamespaces() {
-      return parentNamespaces;
+      return myParentNamespaces;
     }
   }
 }

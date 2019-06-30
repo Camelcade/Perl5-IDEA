@@ -40,6 +40,7 @@ public class ModernPerlPackageProcessor extends PerlPackageProcessorBase impleme
     "IO::Handle"
   ));
 
+  @NotNull
   @Override
   public PerlMroType getMroType(PerlUseStatementElement useStatement) {
     return PerlMroType.C3;

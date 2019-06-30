@@ -20,11 +20,13 @@ import com.perl5.lang.perl.extensions.packageprocessor.PerlMroProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPragmaProcessorBase;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 
 public class MroProcessor extends PerlPragmaProcessorBase implements PerlMroProvider {
+  @NotNull
   @Override
   public PerlMroType getMroType(PerlUseStatementElement useStatement) {
     List<String> parameters = useStatement.getImportParameters();
