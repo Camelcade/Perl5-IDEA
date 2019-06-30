@@ -25,6 +25,7 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.containers.WeakInterner;
 import com.perl5.lang.perl.psi.*;
@@ -335,7 +336,9 @@ public final class PerlValuesManager {
         }
       }
       else if (elements.size() > 1) {
-        LOG.error("Can't be: " + target + "; " + assignValueDescriptor);
+        PerlStatement containingStatement = PsiTreeUtil.getParentOfType(target, PerlStatement.class);
+        LOG.error("Can't be: " + target + "; " + assignValueDescriptor + "; " +
+                  (containingStatement == null ? "text unknown" : containingStatement.getText()));
       }
     }
     else if (targetContextType == PerlContextType.LIST &&
