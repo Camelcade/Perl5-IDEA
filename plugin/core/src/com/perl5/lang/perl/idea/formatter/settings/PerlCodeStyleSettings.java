@@ -25,7 +25,7 @@ import static com.intellij.psi.codeStyle.CommonCodeStyleSettings.DO_NOT_WRAP;
 import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.SAME_LINE;
 import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.WHATEVER;
 import static com.perl5.lang.perl.util.PerlPackageUtil.MAIN_NAMESPACE_FULL;
-import static com.perl5.lang.perl.util.PerlPackageUtil.PACKAGE_SEPARATOR;
+import static com.perl5.lang.perl.util.PerlPackageUtil.NAMESPACE_SEPARATOR;
 
 
 public class PerlCodeStyleSettings extends CustomCodeStyleSettings {
@@ -117,7 +117,7 @@ public class PerlCodeStyleSettings extends CustomCodeStyleSettings {
     };
     Object[] BRACE_PLACEMENT_OPTIONS = {BRACE_PLACEMENT_LABELS, BRACE_PLACEMENT_VALUES};
 
-    String[] LABELS_MAIN_FORMAT = {AS_IS, MAIN_NAMESPACE_FULL, PACKAGE_SEPARATOR};
+    String[] LABELS_MAIN_FORMAT = {AS_IS, MAIN_NAMESPACE_FULL, NAMESPACE_SEPARATOR};
     Object[] OPTIONS_MAIN_FORMAT = {LABELS_MAIN_FORMAT, VALUES};
   }
 }

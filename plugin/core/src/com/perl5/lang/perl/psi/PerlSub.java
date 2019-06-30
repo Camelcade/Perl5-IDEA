@@ -55,7 +55,7 @@ public interface PerlSub extends PerlDeprecatable, PerlPackageMember {
       return null;
     }
 
-    return packageName + PerlPackageUtil.PACKAGE_SEPARATOR + getSubName();
+    return packageName + PerlPackageUtil.NAMESPACE_SEPARATOR + getSubName();
   }
 
   /**
@@ -122,7 +122,7 @@ public interface PerlSub extends PerlDeprecatable, PerlPackageMember {
     }
 
     PerlValue returnValue = subAnnotations.getReturnValue();
-    if (PerlPackageUtil.PACKAGE_ANY_VALUE.equals(returnValue)) {
+    if (PerlPackageUtil.NAMESPACE_ANY_VALUE.equals(returnValue)) {
       return PerlValues.RETURN_FIRST_ARGUMENT_VALUE;
     }
     else {

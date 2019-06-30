@@ -37,7 +37,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.perl5.lang.perl.util.PerlPackageUtil.CORE_NAMESPACE;
-import static com.perl5.lang.perl.util.PerlPackageUtil.PACKAGE_SEPARATOR;
+import static com.perl5.lang.perl.util.PerlPackageUtil.NAMESPACE_SEPARATOR;
 
 /**
  * Service for a common tricky-defined entities:<ul>
@@ -108,7 +108,7 @@ public class PerlImplicitDeclarationsService {
 
   @Nullable
   public PerlSubDefinitionElement getSub(@Nullable String packageName, @Nullable String subName) {
-    return getSub(packageName + PACKAGE_SEPARATOR + subName);
+    return getSub(packageName + NAMESPACE_SEPARATOR + subName);
   }
 
   @Contract("null->null")

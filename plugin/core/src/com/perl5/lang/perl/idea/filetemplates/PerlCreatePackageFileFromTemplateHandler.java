@@ -45,7 +45,7 @@ public class PerlCreatePackageFileFromTemplateHandler extends PerlCreateFileFrom
       props.put("PERL_PACKAGE_NAME", fileName);
     }
     else {
-      props.put("PERL_PACKAGE_NAME", packagePrefix + PerlPackageUtil.PACKAGE_SEPARATOR + fileName);
+      props.put("PERL_PACKAGE_NAME", packagePrefix + PerlPackageUtil.NAMESPACE_SEPARATOR + fileName);
     }
 
     super.prepareProperties(props);

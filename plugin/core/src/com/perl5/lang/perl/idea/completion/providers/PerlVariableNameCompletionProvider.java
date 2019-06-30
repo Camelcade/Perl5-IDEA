@@ -82,7 +82,7 @@ public class PerlVariableNameCompletionProvider extends CompletionProvider<Compl
     GlobalSearchScope resolveScope = variableNameElement.getResolveScope();
     String variableName = variableNameElement.getText();
 
-    boolean forceShortMain = StringUtil.startsWith(variableName, PerlPackageUtil.PACKAGE_SEPARATOR);
+    boolean forceShortMain = StringUtil.startsWith(variableName, PerlPackageUtil.NAMESPACE_SEPARATOR);
 
     final CompletionResultSet finalResultSet = resultSet;
 

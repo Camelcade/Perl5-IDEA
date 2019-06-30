@@ -63,7 +63,7 @@ public class PerlGlobStubElementType extends IStubElementType<PerlGlobStub, PsiP
 
   @Override
   public void indexStub(@NotNull PerlGlobStub stub, @NotNull IndexSink sink) {
-    String name = stub.getNamespaceName() + PerlPackageUtil.PACKAGE_SEPARATOR + stub.getName();
+    String name = stub.getNamespaceName() + PerlPackageUtil.NAMESPACE_SEPARATOR + stub.getName();
     sink.occurrence(PerlGlobsStubIndex.KEY, name);
     sink.occurrence(PerlGlobsStubIndex.KEY, "*" + stub.getNamespaceName());
   }

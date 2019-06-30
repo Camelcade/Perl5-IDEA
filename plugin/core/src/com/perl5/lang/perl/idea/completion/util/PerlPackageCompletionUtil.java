@@ -153,14 +153,14 @@ public class PerlPackageCompletionUtil {
                                                     @Nullable String packageName,
                                                     @NotNull CompletionResultSet result,
                                                     String prefix) {
-    String name = packageName + PerlPackageUtil.PACKAGE_SEPARATOR;
+    String name = packageName + PerlPackageUtil.NAMESPACE_SEPARATOR;
     if (!StringUtil.equals(prefix, name)) {
       LookupElementBuilder newElement = PerlPackageCompletionUtil.getPackageLookupElementWithAutocomplete(
         namespaceDefinitionElement, name, namespaceDefinitionElement.getIcon(0));
       newElement.putUserData(PerlCompletionWeighter.WEIGHT, -1);
       result.addElement(newElement);
     }
-    name = packageName + PerlPackageUtil.PACKAGE_DEREFERENCE;
+    name = packageName + PerlPackageUtil.DEREFERENCE_OPERATOR;
     if (!StringUtil.equals(prefix, name)) {
       LookupElementBuilder newElement = PerlPackageCompletionUtil.getPackageLookupElementWithAutocomplete(
         namespaceDefinitionElement, name, namespaceDefinitionElement.getIcon(0));

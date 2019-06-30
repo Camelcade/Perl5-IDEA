@@ -95,7 +95,7 @@ public final class PerlCallObjectValue extends PerlCallValue {
   @NotNull
   @Override
   protected Set<String> computeNamespaceNames(@NotNull PerlValue resolvedNamespaceValue) {
-    return resolvedNamespaceValue.isUnknown() ? Collections.singleton(PerlPackageUtil.NAMESPACE_PACKAGE) :
+    return resolvedNamespaceValue.isUnknown() ? Collections.singleton(PerlPackageUtil.UNIVERSAL_NAMESPACE) :
            super.computeNamespaceNames(resolvedNamespaceValue);
   }
 

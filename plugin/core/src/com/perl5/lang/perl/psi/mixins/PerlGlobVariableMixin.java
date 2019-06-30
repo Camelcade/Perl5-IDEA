@@ -139,7 +139,7 @@ public abstract class PerlGlobVariableMixin extends PerlStubBasedPsiElementBase<
     if (packageName == null) {
       return null;
     }
-    return packageName + PerlPackageUtil.PACKAGE_SEPARATOR + getName();
+    return packageName + PerlPackageUtil.NAMESPACE_SEPARATOR + getName();
   }
 
 

@@ -69,7 +69,7 @@ public abstract class PerlMro {
       return Collections.emptyList();
     }
     if (namespaceName == null) {
-      namespaceName = PerlPackageUtil.NAMESPACE_PACKAGE;
+      namespaceName = PerlPackageUtil.UNIVERSAL_NAMESPACE;
     }
     Collection<PsiElement> result = new ArrayList<>();
     processTargets(project, searchScope, namespaceName, Collections.singleton(subName), isSuper, result::add);
@@ -168,8 +168,8 @@ public abstract class PerlMro {
 
     getPackageParents(project, searchScope, packageName, recursionMap, result);
 
-    if (!recursionMap.contains(PerlPackageUtil.NAMESPACE_PACKAGE)) {
-      result.add(PerlPackageUtil.NAMESPACE_PACKAGE);
+    if (!recursionMap.contains(PerlPackageUtil.UNIVERSAL_NAMESPACE)) {
+      result.add(PerlPackageUtil.UNIVERSAL_NAMESPACE);
     }
 
     return result;

@@ -121,7 +121,7 @@ public class PerlVariableStubElementType extends IStubElementType<PerlVariableDe
 
   @Override
   public void indexStub(@NotNull PerlVariableDeclarationStub stub, @NotNull IndexSink sink) {
-    String variableName = stub.getNamespaceName() + PerlPackageUtil.PACKAGE_SEPARATOR + stub.getVariableName();
+    String variableName = stub.getNamespaceName() + PerlPackageUtil.NAMESPACE_SEPARATOR + stub.getVariableName();
     sink.occurrence(stub.getIndexKey(), variableName);
     sink.occurrence(stub.getIndexKey(), "*" + stub.getNamespaceName());
   }

@@ -46,7 +46,7 @@ public class Mason2Util {
   @NotNull
   public static String getClassnameFromPath(@NotNull String path) {
     return "/MC0::" +
-           path.replaceAll("[^\\p{L}\\d_\\/]", "_").replaceAll("" + VfsUtil.VFS_SEPARATOR_CHAR, PerlPackageUtil.PACKAGE_SEPARATOR);
+           path.replaceAll("[^\\p{L}\\d_\\/]", "_").replaceAll("" + VfsUtil.VFS_SEPARATOR_CHAR, PerlPackageUtil.NAMESPACE_SEPARATOR);
   }
 
   @Nullable

@@ -109,13 +109,13 @@ public class PodFileUtil {
   public static String getPackageNameFromVirtualFile(VirtualFile file, VirtualFile classRoot) {
     String relativePath = VfsUtil.getRelativePath(file, classRoot);
     if (relativePath != null) {
-      return StringUtil.join(relativePath.replaceAll(PM_OR_POD_EXTENSION_PATTERN, "").split("/"), PerlPackageUtil.PACKAGE_SEPARATOR);
+      return StringUtil.join(relativePath.replaceAll(PM_OR_POD_EXTENSION_PATTERN, "").split("/"), PerlPackageUtil.NAMESPACE_SEPARATOR);
     }
     return null;
   }
 
   public static String getFilenameFromPackage(@NotNull String packageName) {
-    return StringUtil.join(PerlPackageUtil.getCanonicalNamespaceName(packageName).split(PerlPackageUtil.PACKAGE_SEPARATOR), "/") +
+    return StringUtil.join(PerlPackageUtil.getCanonicalNamespaceName(packageName).split(PerlPackageUtil.NAMESPACE_SEPARATOR), "/") +
            "." +
            PodFileType.EXTENSION;
   }
@@ -146,7 +146,7 @@ public class PodFileUtil {
       // seek file
       String fileId = descriptor.getName();
 
-      if (fileId.contains(PerlPackageUtil.PACKAGE_SEPARATOR) || !StringUtil.startsWith(fileId, "perl")) // can be Foo/Bar.pod or Foo/Bar.pm
+      if (fileId.contains(PerlPackageUtil.NAMESPACE_SEPARATOR) || !StringUtil.startsWith(fileId, "perl")) // can be Foo/Bar.pod or Foo/Bar.pm
       {
         final PsiManager psiManager = PsiManager.getInstance(project);
         String podRelativePath = PodFileUtil.getFilenameFromPackage(fileId);

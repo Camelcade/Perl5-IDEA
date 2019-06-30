@@ -438,7 +438,7 @@ public interface PerlCorePackages {
     "Unicode::Collate",
     "Unicode::Normalize",
     "Unicode::UCD",
-    PerlPackageUtil.NAMESPACE_PACKAGE,
+    PerlPackageUtil.UNIVERSAL_NAMESPACE,
     "User::grent",
     "User::pwent",
     "XSLoader",

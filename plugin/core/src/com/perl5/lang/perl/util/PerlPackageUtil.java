@@ -74,20 +74,20 @@ import java.util.regex.Pattern;
 
 
 public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
-  public static final String PACKAGE_SEPARATOR = "::";
-  public static final String PACKAGE_DEREFERENCE = "->";
-  public static final char PACKAGE_SEPARATOR_LEGACY = '\'';
+  public static final String NAMESPACE_SEPARATOR = "::";
+  public static final String DEREFERENCE_OPERATOR = "->";
+  public static final char NAMESPACE_SEPARATOR_LEGACY = '\'';
 
-  public static final String PACKAGE_ANY = "*";
-  public static final PerlValue PACKAGE_ANY_VALUE = PerlScalarValue.create(PACKAGE_ANY);
+  public static final String NAMESPACE_ANY = "*";
+  public static final PerlValue NAMESPACE_ANY_VALUE = PerlScalarValue.create(NAMESPACE_ANY);
 
   public static final String __PACKAGE__ = "__PACKAGE__";
   public static final String PACKAGE_CARP = "Carp";
   public static final String PACKAGE_SCALAR_UTIL = "Scalar::Util";
   public static final String PACKAGE_MOOSE = "Moose";
-  public static final String PACKAGE_MOOSE_BASE = "Moose" + PACKAGE_SEPARATOR;
+  public static final String PACKAGE_MOOSE_BASE = "Moose" + NAMESPACE_SEPARATOR;
   public static final String PACKAGE_MOOSE_X = PACKAGE_MOOSE + "X";
-  public static final String PACKAGE_MOOSE_X_BASE = PACKAGE_MOOSE_X + PACKAGE_SEPARATOR;
+  public static final String PACKAGE_MOOSE_X_BASE = PACKAGE_MOOSE_X + NAMESPACE_SEPARATOR;
   public static final String PACKAGE_MOOSE_OBJECT = PACKAGE_MOOSE_BASE + "Object";
   public static final String PACKAGE_MOOSE_ROLE = PACKAGE_MOOSE_BASE + "Role";
   public static final String PACKAGE_MOOSE_UTIL_TYPE_CONSTRAINTS = PACKAGE_MOOSE_BASE + "Util::TypeConstraints";
@@ -99,23 +99,23 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
   public static final String PACKAGE_MOOSE_X_METHODATTRIBUTES = PACKAGE_MOOSE_X_BASE + "MethodAttributes";
   public static final String PACKAGE_VARS = "vars";
 
-  public static final Pattern PACKAGE_SEPARATOR_RE = Pattern.compile(PACKAGE_SEPARATOR + "|" + PACKAGE_SEPARATOR_LEGACY);
-  public static final Pattern PACKAGE_SEPARATOR_TAIL_RE = Pattern.compile("(" + PACKAGE_SEPARATOR + "|" + PACKAGE_SEPARATOR_LEGACY + ")$");
+  public static final Pattern PACKAGE_SEPARATOR_RE = Pattern.compile(NAMESPACE_SEPARATOR + "|" + NAMESPACE_SEPARATOR_LEGACY);
+  public static final Pattern PACKAGE_SEPARATOR_TAIL_RE = Pattern.compile("(" + NAMESPACE_SEPARATOR + "|" +
+                                                                          NAMESPACE_SEPARATOR_LEGACY + ")$");
 
   public static final Set<String> CORE_PACKAGES_ALL = new THashSet<>();
 
   public static final String SUPER_NAMESPACE = "SUPER";
-  public static final String SUPER_NAMESPACE_FULL = SUPER_NAMESPACE + PACKAGE_SEPARATOR;
+  public static final String SUPER_NAMESPACE_FULL = SUPER_NAMESPACE + NAMESPACE_SEPARATOR;
 
   public static final String MAIN_NAMESPACE_NAME = "main";
-  public static final String MAIN_NAMESPACE_FULL = MAIN_NAMESPACE_NAME + PACKAGE_SEPARATOR;
-  public static final String MAIN_NAMESPACE_SHORT = PACKAGE_SEPARATOR;
+  public static final String MAIN_NAMESPACE_FULL = MAIN_NAMESPACE_NAME + NAMESPACE_SEPARATOR;
+  public static final String MAIN_NAMESPACE_SHORT = NAMESPACE_SEPARATOR;
 
-  public static final String NAMESPACE_PACKAGE = "UNIVERSAL";
-  public static final PerlValue UNIVERSAL_VALUE = PerlScalarValue.create(NAMESPACE_PACKAGE);
+  public static final String UNIVERSAL_NAMESPACE = "UNIVERSAL";
 
   public static final String CORE_NAMESPACE = "CORE";
-  public static final String CORE_NAMESPACE_FULL = CORE_NAMESPACE + PACKAGE_SEPARATOR;
+  public static final String CORE_NAMESPACE_FULL = CORE_NAMESPACE + NAMESPACE_SEPARATOR;
   public static final String CORE_GLOBAL_NAMESPACE = CORE_NAMESPACE_FULL + "GLOBAL";
   public static final String DEFAULT_LIB_DIR = "lib";
 
@@ -176,12 +176,12 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
   }
 
   public static boolean isUNIVERSAL(String packageName) {
-    return NAMESPACE_PACKAGE.equals(packageName);
+    return UNIVERSAL_NAMESPACE.equals(packageName);
   }
 
   @NotNull
   public static String join(@NotNull String... chunks) {
-    return StringUtil.join(chunks, PACKAGE_SEPARATOR);
+    return StringUtil.join(chunks, NAMESPACE_SEPARATOR);
   }
 
   /**
@@ -215,7 +215,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
       chunks[0] = MAIN_NAMESPACE_NAME;
     }
 
-    newName = StringUtils.join(chunks, PACKAGE_SEPARATOR);
+    newName = StringUtils.join(chunks, NAMESPACE_SEPARATOR);
 
     CANONICAL_NAMES_CACHE.put(originalName, newName);
 
@@ -229,7 +229,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
 
   @NotNull
   public static List<String> split(@Nullable String packageName) {
-    return packageName == null ? Collections.emptyList() : StringUtil.split(getCanonicalNamespaceName(packageName), PACKAGE_SEPARATOR);
+    return packageName == null ? Collections.emptyList() : StringUtil.split(getCanonicalNamespaceName(packageName), NAMESPACE_SEPARATOR);
   }
 
   /**
@@ -419,7 +419,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
 
     if (result == null) {
       String path = packagePath.replaceAll("\\\\", "/");
-      result = getCanonicalNamespaceName(StringUtils.join(path.replaceFirst("\\.pm$", "").split("/"), PACKAGE_SEPARATOR));
+      result = getCanonicalNamespaceName(StringUtils.join(path.replaceFirst("\\.pm$", "").split("/"), NAMESPACE_SEPARATOR));
       PATH_TO_PACKAGE_NAME_MAP.put(packagePath, result);
     }
     return result;
@@ -688,8 +688,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
     VirtualFile targetFile = resolveRelativePathToVirtualFile(psiFile, relativePath);
 
     if (targetFile != null && targetFile.exists()) {
-      PsiFile targetPsiFile = PsiManager.getInstance(psiFile.getProject()).findFile(targetFile);
-      return targetPsiFile;
+      return PsiManager.getInstance(psiFile.getProject()).findFile(targetFile);
     }
 
     return null;

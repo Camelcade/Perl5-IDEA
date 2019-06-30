@@ -47,7 +47,7 @@ public class PerlPackageSubCompletionProvider extends CompletionProvider<Complet
     String explicitNamespace = ((PsiPerlMethod)method).getExplicitNamespaceName();
     String currentPrefixMatcher = result.getPrefixMatcher().getPrefix();
     String newPrefixMathcer =
-      (explicitNamespace == null ? currentPrefixMatcher : (explicitNamespace + PerlPackageUtil.PACKAGE_SEPARATOR) + currentPrefixMatcher);
+      (explicitNamespace == null ? currentPrefixMatcher : (explicitNamespace + PerlPackageUtil.NAMESPACE_SEPARATOR) + currentPrefixMatcher);
     result = result.withPrefixMatcher(new PlainPrefixMatcher(newPrefixMathcer));
 
     if (!((PsiPerlMethod)method).isObjectMethod()) {

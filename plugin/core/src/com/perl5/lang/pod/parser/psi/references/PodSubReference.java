@@ -75,7 +75,7 @@ public class PodSubReference extends PerlCachingReference<PodIdentifierImpl> {
     List<ResolveResult> results = new ArrayList<>();
 
     if (StringUtil.isNotEmpty(packageName)) {
-      String canonicalName = packageName + PerlPackageUtil.PACKAGE_SEPARATOR + subName;
+      String canonicalName = packageName + PerlPackageUtil.NAMESPACE_SEPARATOR + subName;
       for (PerlSubDefinitionElement target : PerlSubUtil.getSubDefinitions(project, canonicalName)) {
         results.add(new PsiElementResolveResult(target));
       }

@@ -59,7 +59,7 @@ public class PerlSubNameElementImpl extends PerlLeafPsiElementWithReferences imp
   @Override
   @NotNull
   public String getCanonicalName() {
-    return getNamespaceName() + PerlPackageUtil.PACKAGE_SEPARATOR + getName();
+    return getNamespaceName() + PerlPackageUtil.NAMESPACE_SEPARATOR + getName();
   }
 
   @Override

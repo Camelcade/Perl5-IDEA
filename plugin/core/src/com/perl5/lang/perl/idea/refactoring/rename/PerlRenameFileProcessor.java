@@ -53,9 +53,9 @@ public class PerlRenameFileProcessor extends RenamePsiFileProcessor {
       final String currentPackageName = ((PerlFileImpl)element).getFilePackageName();
 
       if (currentPackageName != null) {
-        String[] nameChunks = currentPackageName.split(PerlPackageUtil.PACKAGE_SEPARATOR);
+        String[] nameChunks = currentPackageName.split(PerlPackageUtil.NAMESPACE_SEPARATOR);
         nameChunks[nameChunks.length - 1] = newName.replaceFirst("\\.pm$", "");
-        final String newPackageName = StringUtils.join(nameChunks, PerlPackageUtil.PACKAGE_SEPARATOR);
+        final String newPackageName = StringUtils.join(nameChunks, PerlPackageUtil.NAMESPACE_SEPARATOR);
 
         final String newFileName = ((PerlFileImpl)element).getVirtualFile().getParent().getPath() + '/' + newName;
 

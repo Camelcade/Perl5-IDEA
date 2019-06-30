@@ -223,7 +223,7 @@ class PerlTestRunConfiguration extends GenericPerlRunConfiguration {
           String inputText = event.getText();
           Matcher matcher = MISSING_FILTER_PATTERN.matcher(inputText);
           if (matcher.find()) {
-            String libraryName = PROVE_PLUGIN_NAMESPACE + PerlPackageUtil.PACKAGE_SEPARATOR + matcher.group(1);
+            String libraryName = PROVE_PLUGIN_NAMESPACE + PerlPackageUtil.NAMESPACE_SEPARATOR + matcher.group(1);
             PerlRunUtil.showMissingLibraryNotification(getProject(), effectiveSdk, Collections.singletonList(libraryName));
           }
         }

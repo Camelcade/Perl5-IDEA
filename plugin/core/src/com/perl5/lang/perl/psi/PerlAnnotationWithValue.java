@@ -26,8 +26,8 @@ import org.jetbrains.annotations.Nullable;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.OPERATOR_MUL;
-import static com.perl5.lang.perl.util.PerlPackageUtil.PACKAGE_ANY;
-import static com.perl5.lang.perl.util.PerlPackageUtil.PACKAGE_ANY_VALUE;
+import static com.perl5.lang.perl.util.PerlPackageUtil.NAMESPACE_ANY;
+import static com.perl5.lang.perl.util.PerlPackageUtil.NAMESPACE_ANY_VALUE;
 
 
 public interface PerlAnnotationWithValue extends PsiElement, PerlAnnotation {
@@ -58,7 +58,7 @@ public interface PerlAnnotationWithValue extends PsiElement, PerlAnnotation {
     PsiElement run = getFirstChild();
     while (run != null) {
       if (PsiUtilCore.getElementType(run) == OPERATOR_MUL) {
-        return PACKAGE_ANY;
+        return NAMESPACE_ANY;
       }
       run = run.getNextSibling();
     }
@@ -73,6 +73,6 @@ public interface PerlAnnotationWithValue extends PsiElement, PerlAnnotation {
   default PerlValue getValue() {
     String returnClass = getReturnClass();
     return returnClass == null ? UNKNOWN_VALUE :
-           returnClass.equals(PACKAGE_ANY) ? PACKAGE_ANY_VALUE : PerlScalarValue.create(returnClass);
+           returnClass.equals(NAMESPACE_ANY) ? NAMESPACE_ANY_VALUE : PerlScalarValue.create(returnClass);
   }
 }

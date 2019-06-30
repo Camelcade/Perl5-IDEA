@@ -53,9 +53,9 @@ public class PerlNamespaceFileReference extends PerlCachingReference<PerlNamespa
   public PsiElement handleElementRename(@NotNull String newElementName) throws IncorrectOperationException {
     String currentName = myElement.getCanonicalName();
     if (currentName != null && newElementName.endsWith(".pm")) {
-      String[] nameChunks = currentName.split(PerlPackageUtil.PACKAGE_SEPARATOR);
+      String[] nameChunks = currentName.split(PerlPackageUtil.NAMESPACE_SEPARATOR);
       nameChunks[nameChunks.length - 1] = newElementName.replaceFirst("\\.pm$", "");
-      newElementName = StringUtils.join(nameChunks, PerlPackageUtil.PACKAGE_SEPARATOR);
+      newElementName = StringUtils.join(nameChunks, PerlPackageUtil.NAMESPACE_SEPARATOR);
 
       return super.handleElementRename(newElementName);
     }

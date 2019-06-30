@@ -39,7 +39,7 @@ public class PerlBuiltInNamespacesService {
     myNamespacesMap.put(MAIN_NAMESPACE_NAME, new PerlBuiltInNamespaceDefinition(psiManager, MAIN_NAMESPACE_NAME));
     myNamespacesMap.put(CORE_NAMESPACE, new PerlBuiltInNamespaceDefinition(psiManager, CORE_NAMESPACE));
     myNamespacesMap.put(CORE_GLOBAL_NAMESPACE, new PerlBuiltInNamespaceDefinition(psiManager, CORE_GLOBAL_NAMESPACE));
-    myNamespacesMap.put(NAMESPACE_PACKAGE, new PerlBuiltInNamespaceDefinition(psiManager, NAMESPACE_PACKAGE));
+    myNamespacesMap.put(UNIVERSAL_NAMESPACE, new PerlBuiltInNamespaceDefinition(psiManager, UNIVERSAL_NAMESPACE));
   }
 
   @Nullable

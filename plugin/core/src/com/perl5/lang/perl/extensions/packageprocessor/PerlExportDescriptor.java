@@ -59,7 +59,7 @@ public class PerlExportDescriptor {
 
   @NotNull
   public String getTargetCanonicalName() {
-    return getRealPackage() + PerlPackageUtil.PACKAGE_SEPARATOR + getRealName();
+    return getRealPackage() + PerlPackageUtil.NAMESPACE_SEPARATOR + getRealName();
   }
 
   @NotNull

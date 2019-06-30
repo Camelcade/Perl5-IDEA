@@ -59,7 +59,7 @@ public abstract class PerlSubStub<Psi extends PerlSubElement> extends StubBase<P
 
   @Override
   public String getCanonicalName() {
-    return getNamespaceName() + PerlPackageUtil.PACKAGE_SEPARATOR + getSubName();
+    return getNamespaceName() + PerlPackageUtil.NAMESPACE_SEPARATOR + getSubName();
   }
 
   @Nullable

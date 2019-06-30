@@ -77,7 +77,7 @@ public class PerlRenameNamespaceDefinitionProcessor extends PerlRenamePolyRefere
 
           // rename file
           String newPackageName = PerlPackageUtil.getCanonicalNamespaceName(newName);
-          List<String> newPackageChunks = Arrays.asList(newPackageName.split(PerlPackageUtil.PACKAGE_SEPARATOR));
+          List<String> newPackageChunks = Arrays.asList(newPackageName.split(PerlPackageUtil.NAMESPACE_SEPARATOR));
           String newFileName = newPackageChunks.get(newPackageChunks.size() - 1) + ".pm";
           file.setName(newFileName);
 

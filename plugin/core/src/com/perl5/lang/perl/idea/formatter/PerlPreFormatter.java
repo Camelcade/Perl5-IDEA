@@ -342,7 +342,7 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
     String elementContent = o.getNode().getText();
 
     if (myPerlSettings.MAIN_FORMAT == SUPPRESS && PerlPackageUtil.MAIN_NAMESPACE_FULL.equals(elementContent)) {
-      myFormattingOperations.add(new PerlFormattingReplaceWithText(o, PerlPackageUtil.PACKAGE_SEPARATOR));
+      myFormattingOperations.add(new PerlFormattingReplaceWithText(o, PerlPackageUtil.NAMESPACE_SEPARATOR));
     }
     else if (myPerlSettings.MAIN_FORMAT == FORCE && PerlPackageUtil.MAIN_NAMESPACE_SHORT.equals(elementContent)) {
       myFormattingOperations.add(new PerlFormattingReplaceWithText(o, PerlPackageUtil.MAIN_NAMESPACE_FULL));

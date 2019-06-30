@@ -50,7 +50,7 @@ public class MojoliciousFileImpl extends PerlFileImpl implements MojoliciousFile
     String namespaceName = null;
     if (canonicalPath != null) {
       try {
-        namespaceName = MOJO_SANDBOX_NS_PREFIX + PerlPackageUtil.PACKAGE_SEPARATOR +
+        namespaceName = MOJO_SANDBOX_NS_PREFIX + PerlPackageUtil.NAMESPACE_SEPARATOR +
                         new HexBinaryAdapter().marshal(MessageDigest.getInstance("MD5").digest(canonicalPath.getBytes()));
       }
       catch (NoSuchAlgorithmException ignore) {

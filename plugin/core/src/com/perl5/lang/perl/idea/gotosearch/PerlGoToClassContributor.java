@@ -42,7 +42,7 @@ public class PerlGoToClassContributor implements ChooseByNameContributor, GotoCl
   @Nullable
   @Override
   public String getQualifiedNameSeparator() {
-    return PerlPackageUtil.PACKAGE_SEPARATOR;
+    return PerlPackageUtil.NAMESPACE_SEPARATOR;
   }
 
   @NotNull
