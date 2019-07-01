@@ -53,7 +53,7 @@ public class PerlDeparseFileAction extends PurePerlActionBase {
   }
 
   @Override
-  protected boolean isEnabled(AnActionEvent event) {
+  protected boolean isEnabled(@NotNull AnActionEvent event) {
     boolean isEnabled = super.isEnabled(event);
     event.getPresentation().setText(
       isEnabled ?

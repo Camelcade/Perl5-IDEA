@@ -36,13 +36,13 @@ public class PerlBrewInstallPatchPerlAction extends PerlBrewActionBase {
   }
 
   @Override
-  protected boolean isEnabled(AnActionEvent event) {
-    return super.isEnabled(event) && PerlRunUtil.findScript(getEventProject(event), SCRIPT_NAME) == null;
+  protected boolean isEnabled(@NotNull AnActionEvent event) {
+    return super.isEnabled(event) && PerlRunUtil.findScript(event.getProject(), SCRIPT_NAME) == null;
   }
 
   @Override
   public void actionPerformed(@NotNull AnActionEvent e) {
-    Project project = getEventProject(e);
+    Project project = e.getProject();
     PerlBrewAdapter perlBrewAdapter = PerlBrewAdapter.create(project);
     if (perlBrewAdapter == null) {
       return;

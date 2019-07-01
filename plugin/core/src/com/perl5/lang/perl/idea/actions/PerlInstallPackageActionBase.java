@@ -33,7 +33,7 @@ public abstract class PerlInstallPackageActionBase extends PerlActionBase {
   }
 
   @Override
-  protected boolean isEnabled(AnActionEvent event) {
+  protected boolean isEnabled(@NotNull AnActionEvent event) {
     return super.isEnabled(event) && getAdapter(event) != null;
   }
 
@@ -53,7 +53,7 @@ public abstract class PerlInstallPackageActionBase extends PerlActionBase {
     }
 
     String packageNames = Messages.showInputDialog(
-      getEventProject(e),
+      e.getProject(),
       "Enter packages names",
       getTemplatePresentation().getText(),
       null

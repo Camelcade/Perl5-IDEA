@@ -29,13 +29,13 @@ public class PerlRegenerateXSubsAction extends PerlActionBase {
   }
 
   @Override
-  protected boolean isEnabled(AnActionEvent event) {
-    return super.isEnabled(event) && getEventProject(event) != null;
+  protected boolean isEnabled(@NotNull AnActionEvent event) {
+    return super.isEnabled(event) && event.getProject() != null;
   }
 
   @Override
   public void actionPerformed(@NotNull AnActionEvent e) {
-    Project project = getEventProject(e);
+    Project project = e.getProject();
     if (project == null) {
       return;
     }

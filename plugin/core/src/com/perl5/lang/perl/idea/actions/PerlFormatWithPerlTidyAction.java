@@ -65,7 +65,7 @@ public class PerlFormatWithPerlTidyAction extends PurePerlActionBase {
   }
 
   @Override
-  protected boolean isEnabled(AnActionEvent event) {
+  protected boolean isEnabled(@NotNull AnActionEvent event) {
     Presentation presentation = event.getPresentation();
     presentation.setText(PerlBundle.message("perl.action.reformat.perl.tidy"));
     if (!super.isEnabled(event)) {

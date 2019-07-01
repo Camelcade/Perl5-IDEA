@@ -30,6 +30,6 @@ public class PerlInstallPackagesWithCpanAction extends PerlInstallPackageActionB
   @Nullable
   @Override
   protected PackageManagerAdapter getAdapter(@NotNull AnActionEvent e) {
-    return CpanAdapter.create(getEventProject(e));
+    return CpanAdapter.create(e.getProject());
   }
 }

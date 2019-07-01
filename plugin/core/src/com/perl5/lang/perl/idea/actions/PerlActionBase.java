@@ -50,7 +50,7 @@ public abstract class PerlActionBase extends AnAction {
     super(icon);
   }
 
-  protected boolean isEnabled(AnActionEvent event) {
+  protected boolean isEnabled(@NotNull AnActionEvent event) {
     return PerlProjectManager.isPerlEnabled(event.getDataContext());
   }
 

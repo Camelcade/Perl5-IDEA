@@ -32,7 +32,7 @@ public class InstallMojoliciousAction extends PerlActionBase {
   }
 
   @Override
-  protected boolean isEnabled(AnActionEvent event) {
+  protected boolean isEnabled(@NotNull AnActionEvent event) {
     return super.isEnabled(event) && !MojoUtil.isMojoAvailable(event);
   }
 
@@ -42,6 +42,6 @@ public class InstallMojoliciousAction extends PerlActionBase {
     if (sdk == null) {
       return;
     }
-    PackageManagerAdapter.create(sdk, getEventProject(e)).install(MojoUtil.MOJO_PACKAGE_NAME);
+    PackageManagerAdapter.create(sdk, e.getProject()).install(MojoUtil.MOJO_PACKAGE_NAME);
   }
 }

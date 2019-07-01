@@ -63,7 +63,7 @@ public class PerlBrewCreateLibraryAction extends PerlBrewActionBase implements D
     if (StringUtil.isEmpty(libraryName)) {
       return;
     }
-    new Task.Backgroundable(getEventProject(e), PerlBundle.message("perl.vm.perlbrew.create.lib.progress", libraryName,
+    new Task.Backgroundable(e.getProject(), PerlBundle.message("perl.vm.perlbrew.create.lib.progress", libraryName,
                                                                    perlVersionString)) {
       @Override
       public void run(@NotNull ProgressIndicator indicator) {

@@ -22,6 +22,7 @@ import com.perl5.lang.mojolicious.MojoIcons;
 import com.perl5.lang.mojolicious.MojoUtil;
 import com.perl5.lang.perl.idea.actions.PerlActionBase;
 import org.jetbrains.annotations.Nls;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
@@ -37,7 +38,7 @@ public abstract class MojoScriptAction extends PerlActionBase implements DumbAwa
   }
 
   @Override
-  protected boolean isEnabled(AnActionEvent event) {
+  protected boolean isEnabled(@NotNull AnActionEvent event) {
     return MojoUtil.isMojoAvailable(event);
   }
 }

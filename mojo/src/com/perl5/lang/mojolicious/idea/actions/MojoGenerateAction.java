@@ -51,7 +51,7 @@ public abstract class MojoGenerateAction extends MojoScriptAction {
   }
 
   @Override
-  protected boolean isEnabled(AnActionEvent event) {
+  protected boolean isEnabled(@NotNull AnActionEvent event) {
     if (!super.isEnabled(event)) {
       return false;
     }
@@ -93,7 +93,7 @@ public abstract class MojoGenerateAction extends MojoScriptAction {
   @Nullable
   protected List<String> computeGenerationParameters(@NotNull AnActionEvent e, @NotNull VirtualFile mojoScript) {
     String entityName = Messages.showInputDialog(
-      getEventProject(e), getPromptMessage(), getPromptTitle(), getPromptIcon(), getDefaultName(), getNameValidator());
+      e.getProject(), getPromptMessage(), getPromptTitle(), getPromptIcon(), getDefaultName(), getNameValidator());
 
     return StringUtil.isEmpty(entityName) ? null : Arrays.asList(getGenerateCommand(), entityName);
   }
@@ -128,8 +128,8 @@ public abstract class MojoGenerateAction extends MojoScriptAction {
   @NotNull
   protected abstract String getGenerateCommand();
 
-  protected VirtualFile getTargetDirectory(AnActionEvent event) {
-    Project project = getEventProject(event);
+  protected VirtualFile getTargetDirectory(@NotNull AnActionEvent event) {
+    Project project = event.getProject();
     VirtualFile virtualFile = event.getData(CommonDataKeys.VIRTUAL_FILE);
     return virtualFile != null && project != null &&
            virtualFile.isDirectory() &&

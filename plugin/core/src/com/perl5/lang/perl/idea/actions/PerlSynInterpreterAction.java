@@ -28,6 +28,6 @@ public class PerlSynInterpreterAction extends PerlActionBase {
 
   @Override
   public void actionPerformed(@NotNull AnActionEvent e) {
-    PerlRunUtil.refreshSdkDirs(getEventProject(e));
+    PerlRunUtil.refreshSdkDirs(e.getProject());
   }
 }

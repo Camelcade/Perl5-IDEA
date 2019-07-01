@@ -37,7 +37,7 @@ public class PerlInstallCpanmAction extends PerlActionBase {
   }
 
   @Override
-  protected boolean isEnabled(AnActionEvent event) {
+  protected boolean isEnabled(@NotNull AnActionEvent event) {
     if (!super.isEnabled(event)) {
       return false;
     }
@@ -56,7 +56,7 @@ public class PerlInstallCpanmAction extends PerlActionBase {
   public void actionPerformed(@NotNull AnActionEvent e) {
     PerlVersionManagerData versionManagerData = PerlVersionManagerData.from(PerlProjectManager.getSdk(e));
     if (versionManagerData != null) {
-      versionManagerData.installCpanminus(getEventProject(e));
+      versionManagerData.installCpanminus(e.getProject());
     }
   }
 }
