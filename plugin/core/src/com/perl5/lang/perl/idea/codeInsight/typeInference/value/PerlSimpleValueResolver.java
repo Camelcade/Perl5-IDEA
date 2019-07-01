@@ -17,8 +17,6 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.lang.perl.psi.PerlSelfHinter;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -37,7 +35,7 @@ public class PerlSimpleValueResolver extends PerlValueResolver {
     if (perlValue == PerlValues.ARGUMENTS_VALUE) {
       return PerlValuesManager.intern(PerlArrayValue.create(PerlPackageUtil.getExpectedSelfValue(myContextElement)));
     }
-    if( perlValue instanceof PerlFallbackValue && ((PerlFallbackValue)perlValue).getBaseValue().equals(PerlValues.RETURN_FIRST_ARGUMENT_VALUE)){
+    if( perlValue instanceof PerlFallbackValue && ((PerlFallbackValue)perlValue).getBaseValue().equals(PerlValues.FIRST_ARGUMENT_VALUE)){
       return ((PerlFallbackValue)perlValue).getParameter();
     }
     return super.substitute(perlValue);

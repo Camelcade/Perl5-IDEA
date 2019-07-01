@@ -123,7 +123,7 @@ public interface PerlSub extends PerlDeprecatable, PerlPackageMember {
 
     PerlValue returnValue = subAnnotations.getReturnValue();
     if (PerlPackageUtil.NAMESPACE_ANY_VALUE.equals(returnValue)) {
-      return PerlValues.RETURN_FIRST_ARGUMENT_VALUE;
+      return PerlValues.FIRST_ARGUMENT_VALUE;
     }
     else {
       return returnValue;
