@@ -74,6 +74,7 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
     myOriginal = original;
   }
 
+  @NotNull
   @Override
   public ModuleExtension getModifiableModel(boolean writable) {
     return new PerlModuleExtension(this, writable);

@@ -77,7 +77,7 @@ public class PerlSdkType extends SdkType {
 
   @NotNull
   @Override
-  public PerlSdkAdditionalData loadAdditionalData(Element additional) {
+  public PerlSdkAdditionalData loadAdditionalData(@NotNull Element additional) {
     return PerlSdkAdditionalData.load(additional);
   }
 

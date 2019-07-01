@@ -26,6 +26,7 @@ import com.perl5.lang.embedded.EmbeddedPerlBundle;
 import com.perl5.lang.embedded.EmbeddedPerlIcons;
 import com.perl5.lang.embedded.filetypes.EmbeddedPerlFileType;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
+import org.jetbrains.annotations.NotNull;
 
 public class EmbeddedPerlCreateFileFromTemplateAction extends CreateFileFromTemplateAction implements DumbAware {
   public EmbeddedPerlCreateFileFromTemplateAction() {
@@ -39,7 +40,7 @@ public class EmbeddedPerlCreateFileFromTemplateAction extends CreateFileFromTemp
   }
 
   @Override
-  protected String getActionName(PsiDirectory directory, String newName, String templateName) {
+  protected String getActionName(PsiDirectory directory, @NotNull String newName, String templateName) {
     return EmbeddedPerlBundle.message("action.new.file.action.name", newName);
   }
 

@@ -31,6 +31,7 @@ import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.filetemplates.PerlCreateFileFromTemplateHandler;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +69,7 @@ public class PerlFileFromTemplateAction extends CreateFileFromTemplateAction imp
   }
 
   @Override
-  protected String getActionName(PsiDirectory directory, String newName, String templateName) {
+  protected String getActionName(PsiDirectory directory, @NotNull String newName, String templateName) {
     return "Create Perl5 file " + newName;
   }
 

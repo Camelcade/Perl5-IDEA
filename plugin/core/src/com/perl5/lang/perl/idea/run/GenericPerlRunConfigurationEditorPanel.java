@@ -200,12 +200,12 @@ public abstract class GenericPerlRunConfigurationEditorPanel<Configuration exten
   }
 
   @Override
-  public final void reset(CommonProgramRunConfigurationParameters configuration) {
+  public final void reset(@NotNull CommonProgramRunConfigurationParameters configuration) {
     throw new RuntimeException("Should not be invoked");
   }
 
   @Override
-  public final void applyTo(CommonProgramRunConfigurationParameters configuration) {
+  public final void applyTo(@NotNull CommonProgramRunConfigurationParameters configuration) {
     throw new RuntimeException("Should not be invoked");
   }
 

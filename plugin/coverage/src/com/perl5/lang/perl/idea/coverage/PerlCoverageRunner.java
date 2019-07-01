@@ -215,6 +215,7 @@ public class PerlCoverageRunner extends CoverageRunner {
     });
   }
 
+  @NotNull
   @Override
   public String getPresentableName() {
     return PerlBundle.message("perl.perl5");
@@ -226,6 +227,7 @@ public class PerlCoverageRunner extends CoverageRunner {
     return "Perl5CoverageRunner";
   }
 
+  @NotNull
   @Override
   public String getDataFileExtension() {
     return "json";

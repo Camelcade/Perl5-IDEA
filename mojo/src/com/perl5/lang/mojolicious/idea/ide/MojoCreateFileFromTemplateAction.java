@@ -26,6 +26,7 @@ import com.perl5.lang.mojolicious.MojoBundle;
 import com.perl5.lang.mojolicious.MojoIcons;
 import com.perl5.lang.mojolicious.MojoUtil;
 import com.perl5.lang.mojolicious.filetypes.MojoliciousFileType;
+import org.jetbrains.annotations.NotNull;
 
 public class MojoCreateFileFromTemplateAction extends CreateFileFromTemplateAction implements DumbAware {
   public MojoCreateFileFromTemplateAction() {
@@ -39,7 +40,7 @@ public class MojoCreateFileFromTemplateAction extends CreateFileFromTemplateActi
   }
 
   @Override
-  protected String getActionName(PsiDirectory directory, String newName, String templateName) {
+  protected String getActionName(PsiDirectory directory, @NotNull String newName, String templateName) {
     return MojoBundle.message("action.new.file.action.name", newName);
   }
 

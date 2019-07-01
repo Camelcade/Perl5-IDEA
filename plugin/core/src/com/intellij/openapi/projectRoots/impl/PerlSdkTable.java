@@ -82,7 +82,7 @@ public class PerlSdkTable extends ProjectJdkTable implements PersistentStateComp
 
   @Nullable
   @Override
-  public Sdk findJdk(String name) {
+  public Sdk findJdk(@Nullable String name) {
     for (Sdk interpreter : myInterpretersList) {
       if (StringUtil.equals(name, interpreter.getName())) {
         return interpreter;
@@ -93,7 +93,7 @@ public class PerlSdkTable extends ProjectJdkTable implements PersistentStateComp
 
   @Nullable
   @Override
-  public Sdk findJdk(String name, String type) {
+  public Sdk findJdk(@NotNull String name, @NotNull String type) {
     return findJdk(name);
   }
 

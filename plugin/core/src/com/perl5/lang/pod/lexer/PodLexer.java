@@ -157,6 +157,7 @@ public class PodLexer extends PodLexerGenerated {
    *
    * @return if it's matching close angle - returns angle. Symbol otherwise
    */
+  @NotNull
   protected IElementType popAngle() {
     int tokenLength = yylength();
     if (myOpenedAngles.empty()) {
@@ -186,6 +187,7 @@ public class PodLexer extends PodLexerGenerated {
   /**
    * Lexes curent token as target element if we are  inside formatter and as SYMBOL otherwise.
    */
+  @NotNull
   protected IElementType lexOptional(@NotNull IElementType type) {
     return myOpenedAngles.empty() ? POD_SYMBOL : type;
   }
