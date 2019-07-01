@@ -81,7 +81,7 @@ public abstract class PerlImplicitDeclarationsProvider {
       return;
     }
     for (Element namespaceElement : xmlElement.getChildren(PACKAGE)) {
-      String namespaceName = namespaceElement.getAttribute("name").getValue();
+      String namespaceName = namespaceElement.getAttributeValue("name");
       if (StringUtil.isEmpty(namespaceName)) {
         LOG.warn("Missing or empty package name");
         continue;
@@ -104,7 +104,7 @@ public abstract class PerlImplicitDeclarationsProvider {
   private void readVariable(@NotNull PerlImplicitDeclarationsService declarationsService,
                             @NotNull String namespaceName,
                             @NotNull Element element) {
-    String varName = element.getAttribute(NAME).getValue();
+    String varName = element.getAttributeValue(NAME);
     if (StringUtil.isEmpty(varName)) {
       LOG.warn("Missing or empty variable name");
       return;
@@ -116,7 +116,7 @@ public abstract class PerlImplicitDeclarationsProvider {
   private void readSub(@NotNull PerlImplicitDeclarationsService declarationsService,
                        @NotNull String namespaceName,
                        @NotNull Element element) {
-    String subName = element.getAttribute(NAME).getValue();
+    String subName = element.getAttributeValue(NAME);
     if (StringUtil.isEmpty(subName)) {
       LOG.warn("Missing or empty name attribute for sub");
       return;
@@ -170,14 +170,14 @@ public abstract class PerlImplicitDeclarationsProvider {
 
   @Nullable
   private PerlSubArgument readArgument(@NotNull Element element, boolean isOptional, String subName) {
-    String variableName = element.getAttribute("name").getValue();
+    String variableName = element.getAttributeValue("name");
     if (StringUtil.isEmpty(variableName)) {
       LOG.warn("Missing argument name for " + subName);
       return null;
     }
 
     PerlVariableType variableType;
-    String type = element.getAttribute("type").getValue();
+    String type = element.getAttributeValue("type");
     if (type == null || type.length() != 1 || (variableType = PerlVariableType.bySigil(type.charAt(0))) == null) {
       LOG.warn("Unknown type modifier for argument: " + variableName + " in " + subName);
       return null;
