@@ -1,0 +1,13 @@
+has something => 42;
+
+my $var = something(69);
+
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 48 in mojoAttrDefaultArgs.pl
+scalar main::something(69)
+----------
+Resolved
+----------
+42

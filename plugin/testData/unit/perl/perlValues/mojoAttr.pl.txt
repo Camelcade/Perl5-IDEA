@@ -1,0 +1,12 @@
+use Mojolicious;
+my $app = Mojolicious::->new()->routes->namespaces($a);
+$a<caret>pp;
+----------
+$app
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 73 in mojoAttr.pl
+scalar Mojolicious->new()->routes()->namespaces(Value unknown)
+----------
+Resolved
+----------
+OneOf[Ref[Hash(), blessed with Mojolicious::Routes],
+Ref[Hash(Value unknown), blessed with Mojolicious::Routes]]

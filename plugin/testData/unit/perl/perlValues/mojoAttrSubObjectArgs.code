@@ -1,0 +1,7 @@
+has something => sub{
+  'initializer'
+};
+
+my $var = main::->something(69);
+
+$v<caret>ar;

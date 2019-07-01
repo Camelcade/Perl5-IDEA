@@ -1,0 +1,5 @@
+has 'something';
+
+my $var = main::->something();
+
+$v<caret>ar;

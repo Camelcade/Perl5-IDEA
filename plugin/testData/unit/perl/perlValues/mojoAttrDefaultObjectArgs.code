@@ -1,0 +1,5 @@
+has something => 42;
+
+my $var = main::->something(69);
+
+$v<caret>ar;

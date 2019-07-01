@@ -1,0 +1,15 @@
+has something => sub{
+  'initializer'
+};
+
+my $var = main::->something();
+
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 74 in mojoAttrSubObject.pl
+scalar main->something()
+----------
+Resolved
+----------
+initializer

@@ -1,0 +1,3 @@
+use Mojolicious;
+my $app = Mojolicious::->new()->routes->namespaces($a);
+$a<caret>pp;

@@ -1,0 +1,5 @@
+has 'something';
+
+my $var = something(42);
+
+$v<caret>ar;

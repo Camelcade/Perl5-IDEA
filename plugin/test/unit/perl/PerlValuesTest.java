@@ -28,6 +28,90 @@ public class PerlValuesTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testMojoAttr() {
+    withMojo();
+    doTest();
+  }
+
+  @Test
+  public void testMojoAttrDefault() {
+    withMojo();
+    doTest();
+  }
+
+  @Test
+  public void testMojoAttrDefaultArgs() {
+    withMojo();
+    doTest();
+  }
+
+  @Test
+  public void testMojoAttrDefaultObject() {
+    withMojo();
+    doTest();
+  }
+
+  @Test
+  public void testMojoAttrDefaultObjectArgs() {
+    withMojo();
+    doTest();
+  }
+
+  @Test
+  public void testMojoAttrEmpty() {
+    withMojo();
+    doTest();
+  }
+
+  @Test
+  public void testMojoAttrEmptyArgs() {
+    withMojo();
+    doTest();
+  }
+
+  @Test
+  public void testMojoAttrEmptyObject() {
+    withMojo();
+    doTest();
+  }
+
+  @Test
+  public void testMojoAttrEmptyObjectArgs() {
+    withMojo();
+    doTest();
+  }
+
+  @Test
+  public void testMojoAttrNoArgs() {
+    withMojo();
+    doTest();
+  }
+
+  @Test
+  public void testMojoAttrSub() {
+    withMojo();
+    doTest();
+  }
+
+  @Test
+  public void testMojoAttrSubArgs() {
+    withMojo();
+    doTest();
+  }
+
+  @Test
+  public void testMojoAttrSubObject() {
+    withMojo();
+    doTest();
+  }
+
+  @Test
+  public void testMojoAttrSubObjectArgs() {
+    withMojo();
+    doTest();
+  }
+
+  @Test
   public void testSuperCall() {doTest();}
 
   @Test

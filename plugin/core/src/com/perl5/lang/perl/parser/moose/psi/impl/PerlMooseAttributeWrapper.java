@@ -26,6 +26,7 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlScalarValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlSmartGetterValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
 import com.perl5.lang.perl.parser.moose.stubs.PerlMooseAttributeWrapperStub;
@@ -50,6 +51,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNDEF_VALUE;
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.LIGHT_ATTRIBUTE_DEFINITION;
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.LIGHT_METHOD_DEFINITION;
 
@@ -142,15 +144,15 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElement<PerlMooseAtt
   @NotNull
   private List<PerlDelegatingLightNamedElement> createMojoAttributes(@NotNull Pair<List<PsiElement>, List<PsiElement>> lists) {
     List<PsiElement> arguments = lists.second.subList(1, lists.second.size());
-    PsiElement argument = arguments.isEmpty() ? null : arguments.get(0);
+    PsiElement argument = ContainerUtil.getFirstItem(arguments);
     PerlSubExpr subExpr = ObjectUtils.tryCast(argument, PerlSubExpr.class);
 
     List<PerlDelegatingLightNamedElement> result = new ArrayList<>();
     String namespaceName = PerlPackageUtil.getContextNamespaceName(this);
     for (PsiElement identifier : lists.first) {
-      AtomicNotNullLazyValue<PerlValue> valueProvider =
-        subExpr != null ? PerlResolveUtil.computeReturnValueFromControlFlowLazy(subExpr) :
-        argument != null ? PerlValuesManager.lazy(argument) : PerlScalarValue.createLazy(namespaceName);
+      AtomicNotNullLazyValue<PerlValue> valueProvider = AtomicNotNullLazyValue.createValue(() -> PerlSmartGetterValue.create(
+        subExpr != null ? PerlResolveUtil.computeReturnValueFromControlFlow(subExpr) :
+        argument != null ? PerlValuesManager.from(argument) : PerlScalarValue.create(namespaceName)));
       PerlLightMethodDefinitionElement<PerlMooseAttributeWrapper> newMethod = new PerlLightMethodDefinitionElement<>(
         this,
         ElementManipulators.getValueText(identifier),
