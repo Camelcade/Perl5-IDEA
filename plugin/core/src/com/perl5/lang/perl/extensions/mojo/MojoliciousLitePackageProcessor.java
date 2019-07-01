@@ -17,10 +17,7 @@
 package com.perl5.lang.perl.extensions.mojo;
 
 import com.perl5.lang.perl.extensions.packageprocessor.*;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlCallObjectValue;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlScalarValue;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.*;
 import com.perl5.lang.perl.internals.PerlFeaturesTable;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
@@ -31,6 +28,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.DELEGATE_METHOD_ARGUMENTS_LIST;
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
 
 public class MojoliciousLitePackageProcessor extends PerlPackageProcessorBase implements
@@ -68,20 +66,24 @@ public class MojoliciousLitePackageProcessor extends PerlPackageProcessorBase im
   public List<PerlDelegatingLightNamedElement> computeLightElementsFromPsi(@NotNull PerlUseStatementElement useStatementElement) {
     List<PerlDelegatingLightNamedElement> result = new ArrayList<>();
     String contextNamespace = useStatementElement.getNamespaceName();
+    List<PerlValue> constructorArguments = Arrays.asList(PerlScalarValue.create("moniker"), PerlValues.DUMMY_SCALAR);
     // there is a moniker argument, but it is meaningless here
-    PerlValue app = PerlCallObjectValue.create(PerlScalarValue.create(contextNamespace), "new", contextNamespace);
+    PerlValue app = PerlCallObjectValue.create(PerlScalarValue.create(contextNamespace), "new", constructorArguments, contextNamespace);
 
     result.add(createLightMethod(useStatementElement, contextNamespace, "app", app));
     result.add(createLightMethod(useStatementElement, contextNamespace, "new", app));
 
     PerlValue routes = PerlCallObjectValue.create(app, "routes");
-    ROUTES_METHODS
-      .forEach(it -> result.add(createLightMethod(useStatementElement, contextNamespace, it, PerlCallObjectValue.create(routes, it))));
+    ROUTES_METHODS.forEach(it -> result.add(
+      createLightMethod(useStatementElement, contextNamespace, it,
+                        PerlCallObjectValue.create(routes, it, DELEGATE_METHOD_ARGUMENTS_LIST))));
 
-    result.add(createLightMethod(useStatementElement, contextNamespace, "del", PerlCallObjectValue.create(routes, "delete")));
+    result.add(createLightMethod(useStatementElement, contextNamespace, "del",
+                                 PerlCallObjectValue.create(routes, "delete", DELEGATE_METHOD_ARGUMENTS_LIST)));
     result.add(createLightMethod(useStatementElement, contextNamespace, "group", UNKNOWN_VALUE));
 
-    APP_METHODS.forEach(it -> result.add(createLightMethod(useStatementElement, contextNamespace, it, PerlCallObjectValue.create(app, it, contextNamespace))));
+    APP_METHODS.forEach(it -> result.add(createLightMethod(
+      useStatementElement, contextNamespace, it, PerlCallObjectValue.create(app, it, DELEGATE_METHOD_ARGUMENTS_LIST, contextNamespace))));
 
     return result;
   }

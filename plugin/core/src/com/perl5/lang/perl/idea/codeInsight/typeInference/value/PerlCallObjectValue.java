@@ -175,7 +175,7 @@ public final class PerlCallObjectValue extends PerlCallValue {
 
   @NotNull
   public static PerlValue create(@NotNull PerlValue namespaceValue, @NotNull String name) {
-    return create(namespaceValue, name, null);
+    return create(namespaceValue, name, Collections.emptyList(), null);
   }
 
   @NotNull
@@ -186,6 +186,13 @@ public final class PerlCallObjectValue extends PerlCallValue {
   @NotNull
   public static PerlValue create(@NotNull String namespace, @NotNull String name, @NotNull List<PerlValue> arguments) {
     return create(PerlScalarValue.create(namespace), name, arguments, null);
+  }
+
+  @NotNull
+  public static PerlValue create(@NotNull PerlValue namespaceNameValue,
+                                 @NotNull String name,
+                                 @NotNull List<PerlValue> arguments) {
+    return create(namespaceNameValue, PerlScalarValue.create(name), arguments, null);
   }
 
   @NotNull
