@@ -18,8 +18,10 @@ package com.perl5.lang.perl.idea.codeInsight.controlFlow;
 
 import com.intellij.codeInsight.controlflow.*;
 import com.intellij.codeInsight.controlflow.impl.TransparentInstructionImpl;
+import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.openapi.util.Pair;
+import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
@@ -918,5 +920,36 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
   public static void iteratePrev(@NotNull Instruction[] instructions,
                                  @NotNull final Function<? super Instruction, ControlFlowUtil.Operation> processor) {
     ControlFlowUtil.iteratePrev(instructions.length - 1, instructions, processor);
+  }
+
+  /**
+   * @return the index of smallest instruction in the {@code flow}, covering the {@code textRange}
+   * @apiNote passes all flow
+   */
+  public static int findInstructionNumberByRange(final Instruction[] flow, @Nullable PsiElement element) {
+    if (element == null) {
+      return -1;
+    }
+    TextRange textRange = element.getTextRange();
+    int diff = Integer.MAX_VALUE;
+    int result = -1;
+    int rangeLength = textRange.getLength();
+    for (int i = 0; i < flow.length; i++) {
+      ProgressManager.checkCanceled();
+      PsiElement flowElement = flow[i].getElement();
+      if (flowElement == null) {
+        continue;
+      }
+      TextRange elementRange = flowElement.getTextRange();
+      if (!elementRange.contains(textRange)) {
+        continue;
+      }
+      int newDiff = elementRange.getLength() - rangeLength;
+      if (diff > newDiff) {
+        result = i;
+        diff = newDiff;
+      }
+    }
+    return result;
   }
 }

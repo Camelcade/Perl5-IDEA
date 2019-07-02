@@ -251,9 +251,12 @@ public class PerlResolveUtil {
       return UNKNOWN_VALUE;
     }
     Instruction[] instructions = PerlControlFlowBuilder.getFor(controlFlowScope).getInstructions();
-    int currentInstructionIndex = ControlFlowUtil.findInstructionNumberByElement(
-      instructions, element instanceof PerlFile ? element.getContext() : element);
-    if (currentInstructionIndex < 0) {
+    PsiElement elementToFind = element instanceof PerlFile ? element.getContext() : element;
+    int elementInstructionIndex = ControlFlowUtil.findInstructionNumberByElement(instructions, elementToFind);
+    if( elementInstructionIndex  < 0 && element instanceof PerlFile){
+      elementInstructionIndex  = PerlControlFlowBuilder.findInstructionNumberByRange(instructions, elementToFind);
+    }
+    if (elementInstructionIndex  < 0) {
       LOG.error("Unable to find an instruction for " +
                 element.getClass() + "; " +
                 element.getText() + "; " +
@@ -261,6 +264,7 @@ public class PerlResolveUtil {
                 PsiUtilCore.getVirtualFile(element));
       return UNKNOWN_VALUE;
     }
+    int currentInstructionIndex = elementInstructionIndex;
     PerlOneOfValue.Builder valueBuilder = PerlOneOfValue.builder();
     ControlFlowUtil.iteratePrev(currentInstructionIndex, instructions, currentInstruction -> {
       if (!(currentInstruction instanceof PerlMutationInstruction)) {
