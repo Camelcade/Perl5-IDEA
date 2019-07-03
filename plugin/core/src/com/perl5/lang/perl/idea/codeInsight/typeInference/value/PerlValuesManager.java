@@ -107,6 +107,7 @@ public final class PerlValuesManager {
   static final int DEFINED_ID = id++;
   static final int WANTARRAY_ID = id++;
   static final int FALLBACK_ID = id++;
+  static final int DEFAULT_ARGUMENT_ID = id++;
   static final int SMART_GETTER_ID = id++;
 
   // MUST stay here. Automatically changes on new element creation

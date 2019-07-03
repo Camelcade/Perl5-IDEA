@@ -1,0 +1,6 @@
+sub some($=69, $second){
+  $second;
+}
+
+my $var = some('input1', 'input2');
+$v<caret>ar;

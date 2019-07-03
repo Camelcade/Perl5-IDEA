@@ -28,6 +28,36 @@ public class PerlValuesTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testSubSignatureFirst() {doTest();}
+
+  @Test
+  public void testSubSignatureFirstDefault() {doTest();}
+
+  @Test
+  public void testSubSignatureFirstDefaultMissing() {doTest();}
+
+  @Test
+  public void testSubSignatureSecond() {doTest();}
+
+  @Test
+  public void testSubSignatureSecondDefault() {doTest();}
+
+  @Test
+  public void testSubSignatureSecondDefaultMissing() {doTest();}
+
+  @Test
+  public void testSubSignatureSecondDefaultUndef() {doTest();}
+
+  @Test
+  public void testSubSignatureSecondDefaultUnknown() {doTest();}
+
+  @Test
+  public void testSubSignatureSecondIgnored() {doTest();}
+
+  @Test
+  public void testSubSignatureSecondIgnoredDefault() {doTest();}
+
+  @Test
   public void testMojoAttr() {
     withMojo();
     doTest();

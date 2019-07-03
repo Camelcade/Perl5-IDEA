@@ -1,0 +1,14 @@
+sub some($first){
+  $first;
+}
+
+my $var = some('input');
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 56 in subSignatureFirst.pl
+scalar main::some(input)
+----------
+Resolved
+----------
+input

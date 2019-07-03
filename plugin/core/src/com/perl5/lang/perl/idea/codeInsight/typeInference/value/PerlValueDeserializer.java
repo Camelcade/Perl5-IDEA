@@ -135,6 +135,9 @@ public class PerlValueDeserializer {
     else if( valueId == SMART_GETTER_ID){
       return new PerlSmartGetterValue(this);
     }
+    else if (valueId == DEFAULT_ARGUMENT_ID) {
+      return new PerlDefaultArgumentValue(this);
+    }
     throw new IOException("Don't know how to deserialize a value: " + valueId);
   }
 

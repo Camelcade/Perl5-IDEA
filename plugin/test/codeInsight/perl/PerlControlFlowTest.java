@@ -26,6 +26,15 @@ public class PerlControlFlowTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testSubSignatureThird() {doTest();}
+
+  @Test
+  public void testSubSignatureThirdAfterSkipped() {doTest();}
+
+  @Test
+  public void testSubSignatureThirdDefault() {doTest();}
+
+  @Test
   public void testPopValue() {doTest();}
 
   @Test

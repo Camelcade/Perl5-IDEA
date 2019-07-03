@@ -1,0 +1,6 @@
+sub some($first = 42){
+  $first;
+}
+
+my $var = some();
+$v<caret>ar;

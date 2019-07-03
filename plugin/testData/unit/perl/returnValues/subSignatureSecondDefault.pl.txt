@@ -1,0 +1,5 @@
+<caret>sub some($first, $second = 42){
+  $second;
+}
+----------
+ArrayItem: SUB_ARGUMENTS[1](with default 42)

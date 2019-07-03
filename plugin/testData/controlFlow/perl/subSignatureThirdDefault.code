@@ -1,0 +1,3 @@
+sub so<caret>me($first, $second, $third = 42){
+  $third;
+}

@@ -18,13 +18,45 @@ package unit.perl;
 
 
 import base.PerlLightTestCase;
-import org.jetbrains.annotations.TestOnly;
 import org.junit.Test;
 public class PerlReturnValuesTest extends PerlLightTestCase {
   @Override
   protected String getBaseDataPath() {
     return "testData/unit/perl/returnValues";
   }
+
+  @Test
+  public void testSubSignatureArray() {doTest();}
+
+  @Test
+  public void testSubSignatureFirst() {doTest();}
+
+  @Test
+  public void testSubSignatureHash() {doTest();}
+
+  @Test
+  public void testSubSignatureSecond() {doTest();}
+
+  @Test
+  public void testSubSignatureThird() {doTest();}
+
+  @Test
+  public void testSubSignatureSecondDefault() {doTest();}
+
+  @Test
+  public void testSubSignatureThirdDefault() {doTest();}
+
+  @Test
+  public void testSubSignatureSecondAfterDefault() {doTest();}
+
+  @Test
+  public void testSubSignatureThirdAfterDefault() {doTest();}
+
+  @Test
+  public void testSubSignatureThirdAfterDefaultFirst() {doTest();}
+
+  @Test
+  public void testSubSignatureThirdAfterIgnored() {doTest();}
 
   @Test
   public void testArgumentAnnotated() {doTest();}

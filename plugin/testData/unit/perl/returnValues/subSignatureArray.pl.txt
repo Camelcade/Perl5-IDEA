@@ -1,0 +1,5 @@
+<caret>sub some($first, $second, @array){
+  @array;
+}
+----------
+Sublist (2;0) SUB_ARGUMENTS

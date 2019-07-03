@@ -368,6 +368,34 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     }
 
     @Override
+    public void visitVariableDeclarationElement(@NotNull PsiPerlVariableDeclarationElement o) {
+      PsiElement declarationContainer = o.getParent();
+      if (!(declarationContainer instanceof PsiPerlSubSignature)) {
+        super.visitVariableDeclarationElement(o);
+        return;
+      }
+      PsiElement[] signatureElements = declarationContainer.getChildren();
+      int argumentIndex = 0;
+      int childIndex = 0;
+      for (PsiElement signatureElement : signatureElements) {
+        if (signatureElement.equals(o)) {
+          break;
+        }
+        if (signatureElement instanceof PsiPerlVariableDeclarationElement || signatureElement instanceof PsiPerlSubSignatureElementIgnore) {
+          argumentIndex++;
+        }
+        childIndex++;
+      }
+
+      int nextChildIndex = childIndex + 1;
+      PsiElement nextChild = signatureElements.length > nextChildIndex ? signatureElements[nextChildIndex] : null;
+      PsiElement defaultValue = nextChild instanceof PsiPerlVariableDeclarationElement ||
+                                nextChild instanceof PsiPerlSubSignatureElementIgnore ? null : nextChild;
+      PerlVariable variable = o.getVariable();
+      addNodeAndCheckPending(new PerlSubSignatureElementInstruction(PerlControlFlowBuilder.this, variable, argumentIndex, defaultValue));
+    }
+
+    @Override
     public void visitTrycatchExpr(@NotNull PsiPerlTrycatchExpr o) {
       acceptSafe(o.getTryExpression());
 

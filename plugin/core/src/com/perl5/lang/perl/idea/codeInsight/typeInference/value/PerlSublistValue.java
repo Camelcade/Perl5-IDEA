@@ -143,29 +143,24 @@ public class PerlSublistValue extends PerlOperationValue {
 
   @NotNull
   public static PerlValue createShiftValue(@NotNull PerlValue listValue) {
+    return create(listValue, 1, 0);
+  }
+
+  public static PerlValue create(@NotNull PerlValue listValue, int startOffset, int endOffset) {
     PerlSublistValue result;
     if (listValue instanceof PerlSublistValue) {
       result = new PerlSublistValue(((PerlSublistValue)listValue).getBaseValue(),
-                                                    ((PerlSublistValue)listValue).getStartOffset() + 1,
-                                                    ((PerlSublistValue)listValue).getEndOffset());
+                                    ((PerlSublistValue)listValue).getStartOffset() + startOffset,
+                                    ((PerlSublistValue)listValue).getEndOffset() + endOffset);
     }
     else{
-      result = new PerlSublistValue(listValue, 1, 0);
+      result = new PerlSublistValue(listValue, startOffset, endOffset);
     }
     return PerlValuesManager.intern(result);
   }
 
   @NotNull
   public static PerlValue createPopValue(@NotNull PerlValue listValue) {
-    PerlSublistValue result;
-    if (listValue instanceof PerlSublistValue) {
-      result = new PerlSublistValue(((PerlSublistValue)listValue).getBaseValue(),
-                                                    ((PerlSublistValue)listValue).getStartOffset(),
-                                                    ((PerlSublistValue)listValue).getEndOffset() + 1);
-    }
-    else{
-      result = new PerlSublistValue(listValue, 0, 1);
-    }
-    return PerlValuesManager.intern(result);
+    return create(listValue, 0, 1);
   }
 }
