@@ -26,6 +26,12 @@ public class PerlControlFlowTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testMethodFirst() {doTest();}
+
+  @Test
+  public void testMethodExplicitInvocant() {doTest();}
+
+  @Test
   public void testSubSignatureThird() {doTest();}
 
   @Test

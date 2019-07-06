@@ -1,0 +1,3 @@
+method something($cb: $first){
+  $cb
+}

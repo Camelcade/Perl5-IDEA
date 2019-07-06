@@ -23,6 +23,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlScalarValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.mixins.PerlMethodDefinitionMixin;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
@@ -52,6 +53,10 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
   protected final boolean myIsLocal;
   protected final boolean myIsInvocant;
 
+  /**
+   * @deprecated use constructor with value
+   */
+  @Deprecated
   protected PerlImplicitVariableDeclaration(@NotNull PsiManager manager,
                                             @NotNull String variableNameWithSigil,
                                             @Nullable String namespaceName,
@@ -60,35 +65,50 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
                                             boolean isLocal,
                                             boolean isInvocant,
                                             @Nullable PsiElement parent) {
+    this(manager,
+         computeTypeFromNameWithSigil(variableNameWithSigil),
+         variableNameWithSigil.substring(1),
+         namespaceName,
+         PerlScalarValue.create(variableClass),
+         isLexical,
+         isLocal,
+         isInvocant,
+         parent);
+  }
+
+  protected PerlImplicitVariableDeclaration(@NotNull PsiManager manager,
+                                            @NotNull PerlVariableType type,
+                                            @NotNull String variableName,
+                                            @Nullable String namespaceName,
+                                            @NotNull PerlValue variableValue,
+                                            boolean isLexical,
+                                            boolean isLocal,
+                                            boolean isInvocant,
+                                            @Nullable PsiElement parent) {
     super(manager, parent);
+    myVariableType = type;
+    myVariableName = variableName;
+    myDeclaredValue = variableValue;
+    myIsLexical = isLexical;
+    myIsLocal = isLocal;
+    myIsInvocant = isInvocant;
+    myNamespaceName = namespaceName;
+  }
 
-    PerlVariableType type = null;
-
+  private static PerlVariableType computeTypeFromNameWithSigil(@NotNull String variableNameWithSigil) {
     if (variableNameWithSigil.startsWith("$")) {
-      type = PerlVariableType.SCALAR;
+      return PerlVariableType.SCALAR;
     }
     else if (variableNameWithSigil.startsWith("@")) {
-      type = PerlVariableType.ARRAY;
+      return PerlVariableType.ARRAY;
     }
     else if (variableNameWithSigil.startsWith("%")) {
-      type = PerlVariableType.HASH;
+      return PerlVariableType.HASH;
     }
     else if (variableNameWithSigil.startsWith("*")) {
-      type = PerlVariableType.GLOB;
+      return PerlVariableType.GLOB;
     }
-
-    if (type != null) {
-      myVariableType = type;
-      myVariableName = variableNameWithSigil.substring(1);
-      myDeclaredValue = PerlScalarValue.create(variableClass);
-      myIsLexical = isLexical;
-      myIsLocal = isLocal;
-      myIsInvocant = isInvocant;
-      myNamespaceName = namespaceName;
-    }
-    else {
-      throw new RuntimeException("Incorrect variable name, should start from sigil: " + variableNameWithSigil);
-    }
+    throw new RuntimeException("Incorrect variable name, should start from sigil: " + variableNameWithSigil);
   }
 
   @Override
@@ -358,8 +378,17 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
 
   @NotNull
   public static PerlImplicitVariableDeclaration createInvocant(@NotNull PsiElement parent) {
-    return create(parent, PerlMethodDefinitionMixin.getDefaultInvocantName(), PerlPackageUtil.getContextNamespaceName(parent), true, false,
-                  true);
+    return new PerlImplicitVariableDeclaration(
+      parent.getManager(),
+      PerlVariableType.SCALAR,
+      PerlMethodDefinitionMixin.getDefaultInvocantName().substring(1),
+      null,
+      PerlValues.FIRST_ARGUMENT_VALUE,
+      true,
+      false,
+      true,
+      parent
+    );
   }
 
   @NotNull

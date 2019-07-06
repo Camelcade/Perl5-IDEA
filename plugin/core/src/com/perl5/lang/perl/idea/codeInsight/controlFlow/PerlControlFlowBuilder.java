@@ -370,18 +370,25 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     @Override
     public void visitVariableDeclarationElement(@NotNull PsiPerlVariableDeclarationElement o) {
       PsiElement declarationContainer = o.getParent();
+
+      if (declarationContainer instanceof PsiPerlMethodSignatureInvocant) {
+        declarationContainer = declarationContainer.getParent();
+      }
       if (!(declarationContainer instanceof PsiPerlSubSignature)) {
         super.visitVariableDeclarationElement(o);
         return;
       }
       PsiElement[] signatureElements = declarationContainer.getChildren();
-      int argumentIndex = 0;
+      int argumentIndex = computeBaseArgumentIndex(declarationContainer.getParent(), signatureElements);
       int childIndex = 0;
       for (PsiElement signatureElement : signatureElements) {
+        if (signatureElement instanceof PsiPerlMethodSignatureInvocant) {
+          signatureElement = signatureElement.getFirstChild();
+        }
         if (signatureElement.equals(o)) {
           break;
         }
-        if (signatureElement instanceof PsiPerlVariableDeclarationElement || signatureElement instanceof PsiPerlSubSignatureElementIgnore) {
+        if (isDeclarationElement(signatureElement)) {
           argumentIndex++;
         }
         childIndex++;
@@ -389,10 +396,25 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
 
       int nextChildIndex = childIndex + 1;
       PsiElement nextChild = signatureElements.length > nextChildIndex ? signatureElements[nextChildIndex] : null;
-      PsiElement defaultValue = nextChild instanceof PsiPerlVariableDeclarationElement ||
-                                nextChild instanceof PsiPerlSubSignatureElementIgnore ? null : nextChild;
+      PsiElement defaultValue = isDeclarationElement(nextChild) ? null : nextChild;
       PerlVariable variable = o.getVariable();
       addNodeAndCheckPending(new PerlSubSignatureElementInstruction(PerlControlFlowBuilder.this, variable, argumentIndex, defaultValue));
+    }
+
+    /**
+     * @return base argument index for signature elements. 1 for method declaration without explicit invocant, 0 otherwise
+     */
+    private int computeBaseArgumentIndex(@Nullable PsiElement subDeclarationElement, @NotNull PsiElement[] signatureElements) {
+      if (!(subDeclarationElement instanceof PsiPerlMethodDefinition)) {
+        return 0;
+      }
+      return signatureElements.length > 0 && signatureElements[0] instanceof PsiPerlMethodSignatureInvocant ? 0 : 1;
+    }
+
+    private boolean isDeclarationElement(PsiElement signatureElement) {
+      return signatureElement instanceof PsiPerlVariableDeclarationElement ||
+             signatureElement instanceof PsiPerlSubSignatureElementIgnore ||
+             signatureElement instanceof PsiPerlMethodSignatureInvocant;
     }
 
     @Override

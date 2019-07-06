@@ -28,6 +28,9 @@ public class PerlValuesTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testMethodImplicitInvocant() {doTest();}
+
+  @Test
   public void testSubSignatureFirst() {doTest();}
 
   @Test

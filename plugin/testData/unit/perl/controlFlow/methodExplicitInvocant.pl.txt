@@ -1,0 +1,8 @@
+0(1) element: null (InstructionImpl)
+1(2) element: PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)@main::something (InstructionImpl)
+2(3) Argument 0 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) (PerlSubSignatureElementInstruction)
+3(4) element: PsiPerlMethodSignatureInvocantImpl(Perl5: METHOD_SIGNATURE_INVOCANT) (InstructionImpl)
+4(5) Argument 1 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) (PerlSubSignatureElementInstruction)
+5(6) element: PsiPerlMethodSignatureContentImpl(Perl5: METHOD_SIGNATURE_CONTENT) (InstructionImpl)
+6(7) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) (InstructionImpl)
+7() element: null (InstructionImpl)

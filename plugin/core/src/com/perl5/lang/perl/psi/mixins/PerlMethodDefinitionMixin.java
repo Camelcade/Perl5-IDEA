@@ -27,7 +27,6 @@ import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -47,11 +46,7 @@ public abstract class PerlMethodDefinitionMixin extends PerlSubDefinitionBase im
 
   @NotNull
   protected List<PerlVariableDeclarationElement> buildImplicitVariables() {
-    List<PerlVariableDeclarationElement> newImplicitVariables = new ArrayList<>();
-    if (isValid()) {
-      newImplicitVariables.add(PerlImplicitVariableDeclaration.createInvocant(this));
-    }
-    return newImplicitVariables;
+    return Collections.singletonList(PerlImplicitVariableDeclaration.createInvocant(this));
   }
 
   @Override

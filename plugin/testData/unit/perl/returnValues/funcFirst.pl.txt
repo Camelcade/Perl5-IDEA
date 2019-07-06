@@ -1,0 +1,5 @@
+<caret>func something($first){
+  $first
+}
+----------
+ArrayItem: SUB_ARGUMENTS[0]

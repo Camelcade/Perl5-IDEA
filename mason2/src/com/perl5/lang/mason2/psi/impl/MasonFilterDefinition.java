@@ -23,6 +23,7 @@ import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -39,7 +40,7 @@ public class MasonFilterDefinition extends MasonMethodDefinition {
 
   @NotNull
   protected List<PerlVariableDeclarationElement> buildImplicitVariables() {
-    List<PerlVariableDeclarationElement> newImplicitVariables = super.buildImplicitVariables();
+    List<PerlVariableDeclarationElement> newImplicitVariables = new ArrayList<>(super.buildImplicitVariables());
     newImplicitVariables.add(PerlImplicitVariableDeclaration.createLexical(this, YIELD_VARIABLE_NAME));
     return newImplicitVariables;
   }

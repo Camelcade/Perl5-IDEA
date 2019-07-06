@@ -1,0 +1,5 @@
+<caret>method something($cb: $first){
+  $cb
+}
+----------
+ArrayItem: SUB_ARGUMENTS[0]

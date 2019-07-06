@@ -1,0 +1,11 @@
+method something($first){
+  $s<caret>elf
+}
+----------
+$self
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 28 in methodImplicitInvocant.pl
+ArrayItem: SUB_ARGUMENTS[0]
+----------
+Resolved
+----------
+main

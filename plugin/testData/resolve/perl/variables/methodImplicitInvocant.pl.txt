@@ -1,3 +1,2 @@
 PerlVariableReference at (32,36); text in range: 'self' => 1 results:
-	Implicit variable: $main::self@main
-
+	Implicit variable: $main::self@ArrayItem: SUB_ARGUMENTS[0]
