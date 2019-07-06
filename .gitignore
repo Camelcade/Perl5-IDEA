@@ -4,7 +4,7 @@ build/
 out/
 classes/
 gen/
-plugin/testData/controlFlow/perl/svg/
+plugin/testData/**/svg/
 *.iml
 .idea/*.xml
 .idea/modules/

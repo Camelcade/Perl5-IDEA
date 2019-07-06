@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package codeInsight.perl;
+package unit.perl;
 
 
 import base.PerlLightTestCase;
@@ -22,7 +22,7 @@ import org.junit.Test;
 public class PerlControlFlowTest extends PerlLightTestCase {
   @Override
   protected String getBaseDataPath() {
-    return "testData/controlFlow/perl";
+    return "testData/unit/perl/controlFlow";
   }
 
   @Test
