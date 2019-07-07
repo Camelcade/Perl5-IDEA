@@ -14,23 +14,21 @@
  * limitations under the License.
  */
 
-import org.jetbrains.grammarkit.tasks.GenerateLexer
-import org.jetbrains.grammarkit.tasks.GenerateParser
+package com.perl5.lang.perl.idea.configuration.module;
 
-sourceSets {
-  main {
-    java.srcDirs project.files('src')
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+public class MojoPluginModuleBuilder extends PerlModuleBuilderBase<MojoProjectGenerationSettings> {
+  @NotNull
+  @Override
+  protected PerlProjectGeneratorBase<MojoProjectGenerationSettings> getGenerator() {
+    return new MojoPluginProjectGenerator();
+  }
+
+  @Nullable
+  @Override
+  public String getBuilderId() {
+    return "MOJO_PLUGIN_BUILDER";
   }
 }
-
-dependencies{
-  compileOnly project(":perl5.core")
-  compileOnly project(":perl5.core.idea")
-  compileOnly project(":perl5.lang.mojo.core")
-}
-
-intellij {
-  type 'IC'
-  intellij.plugins = ['java']
-}
-

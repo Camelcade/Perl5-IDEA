@@ -16,18 +16,42 @@
 
 package com.perl5.lang.perl.idea.configuration.module;
 
+import com.intellij.openapi.ui.InputValidator;
+import com.perl5.lang.mojolicious.MojoIcons;
+import com.perl5.lang.mojolicious.model.MojoPlugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class PerlModuleBuilder extends PerlModuleBuilderBase<PerlProjectGenerationSettings> {
-  @NotNull
-  protected PerlProjectGenerator getGenerator() {
-    return new PerlProjectGenerator();
-  }
+import javax.swing.*;
 
+public class MojoPluginProjectGenerator extends MojoProjectGenerator {
   @Nullable
   @Override
-  public String getBuilderId() {
-    return "PERL5_BUILDER";
+  public Icon getLogo() {
+    return MojoIcons.pluginIcon();
+  }
+
+  @NotNull
+  @Override
+  protected String suggestProjectName(@NotNull String entityName) {
+    return "mojo_plugin_" + super.suggestProjectName(entityName);
+  }
+
+  @NotNull
+  @Override
+  protected String getEntityLabel() {
+    return "Plugin name:";
+  }
+
+  @NotNull
+  @Override
+  protected InputValidator getNameValidator() {
+    return new MojoPlugin.NameValidator();
+  }
+
+  @NotNull
+  @Override
+  public String getName() {
+    return "Mojo Plugin";
   }
 }

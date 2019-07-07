@@ -17,21 +17,26 @@
 package com.perl5.lang.perl.idea.configuration.module;
 
 import com.intellij.ide.util.projectWizard.ModuleWizardStep;
+import com.intellij.ide.util.projectWizard.SettingsStep;
+import com.intellij.openapi.options.ConfigurationException;
+import com.intellij.openapi.ui.ValidationInfo;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 
 class PerlDelegatingModuleWizardStep extends ModuleWizardStep {
   @NotNull
-  private final PerlProjectGeneratorPeerBase myPeer;
+  private final PerlProjectGeneratorPeerBase<?> myPeer;
 
-  public PerlDelegatingModuleWizardStep(@NotNull PerlProjectGeneratorPeerBase peer) {
+  public PerlDelegatingModuleWizardStep(@NotNull SettingsStep settingsStep, @NotNull PerlProjectGeneratorPeerBase<?> peer) {
+    peer.getSettings().setProject(settingsStep.getContext().getProject());
     myPeer = peer;
+    myPeer.buildUI(settingsStep);
   }
 
   @Override
   public final JComponent getComponent() {
-    return myPeer.getComponent();
+    return null;
   }
 
   @Override
@@ -45,12 +50,19 @@ class PerlDelegatingModuleWizardStep extends ModuleWizardStep {
   }
 
   @Override
-  public final boolean isStepVisible() {
-    return true;
+  public final void disposeUIResources() {
+    myPeer.disposeUIResources();
   }
 
   @Override
-  public final void disposeUIResources() {
-    myPeer.disposeUIResources();
+  public final boolean validate() throws ConfigurationException {
+    ValidationInfo validationInfo = myPeer.validate();
+    if (validationInfo == null) {
+      return true;
+    }
+    if (validationInfo.component != null) {
+      validationInfo.component.requestFocusInWindow();
+    }
+    throw new ConfigurationException(validationInfo.message);
   }
 }

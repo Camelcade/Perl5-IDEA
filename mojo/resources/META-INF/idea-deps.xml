@@ -16,6 +16,8 @@
 
 <idea-plugin>
   <extensions defaultExtensionNs="com.intellij">
+    <moduleBuilder builderClass="com.perl5.lang.perl.idea.configuration.module.MojoAppModuleBuilder"/>
+    <moduleBuilder builderClass="com.perl5.lang.perl.idea.configuration.module.MojoPluginModuleBuilder"/>
   </extensions>
   <project-components>
   </project-components>

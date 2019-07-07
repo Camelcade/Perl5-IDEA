@@ -16,13 +16,15 @@
 
 package com.perl5.lang.perl.idea.configuration.module;
 
+import com.intellij.ide.util.projectWizard.SettingsStep;
 import com.intellij.openapi.options.UnnamedConfigurable;
 import com.intellij.openapi.ui.VerticalFlowLayout;
-import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.platform.GeneratorPeerImpl;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SdkConfigurable;
+import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SdkPanel;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
@@ -30,10 +32,8 @@ public abstract class PerlProjectGeneratorPeerBase<Settings extends PerlProjectG
   implements UnnamedConfigurable {
   @NotNull
   private final Perl5SdkConfigurable mySdkConfigurable;
-  private final AtomicNotNullLazyValue<JComponent> myComponentProvider = AtomicNotNullLazyValue.createValue(
-    () -> initializeComponent(super.getComponent()));
 
-  public PerlProjectGeneratorPeerBase(@NotNull Settings settings) {
+  protected PerlProjectGeneratorPeerBase(@NotNull Settings settings) {
     super(settings, new JPanel(new VerticalFlowLayout()));
     mySdkConfigurable = new Perl5SdkConfigurable(getSettings(), null);
   }
@@ -41,19 +41,22 @@ public abstract class PerlProjectGeneratorPeerBase<Settings extends PerlProjectG
   @NotNull
   @Override
   public final JComponent getComponent() {
-    return myComponentProvider.getValue();
+    return new JPanel();
   }
 
   @Override
-  public void disposeUIResources() {
+  public final void disposeUIResources() {
     mySdkConfigurable.disposeUIResources();
+    disposeAdditionalResources();
   }
 
-  @NotNull
-  protected JComponent initializeComponent(@NotNull JComponent component) {
-    component.add(mySdkConfigurable.createComponent());
+  protected void disposeAdditionalResources() {}
+
+  @Override
+  public void buildUI(@NotNull SettingsStep settingsStep) {
+    Perl5SdkPanel perl5SdkPanel = mySdkConfigurable.createComponent();
+    settingsStep.addSettingsField(perl5SdkPanel.getLabel().getText(), perl5SdkPanel.getComponent());
     mySdkConfigurable.setEnabled(PerlProjectManager.getSdk(getSettings().getProject()) == null);
-    return component;
   }
 
   @NotNull
@@ -63,8 +66,8 @@ public abstract class PerlProjectGeneratorPeerBase<Settings extends PerlProjectG
   }
 
   @Override
-  public boolean isModified() {
-    throw new RuntimeException("NYI");
+  public final boolean isModified() {
+    throw new RuntimeException("Should not be invoked");
   }
 
   @Override
@@ -75,5 +78,13 @@ public abstract class PerlProjectGeneratorPeerBase<Settings extends PerlProjectG
   @Override
   public void reset() {
     mySdkConfigurable.reset();
+  }
+
+  /**
+   * @return suggested project name according to current settings. Or null if none
+   */
+  @Nullable
+  public String suggestProjectName() {
+    return null;
   }
 }

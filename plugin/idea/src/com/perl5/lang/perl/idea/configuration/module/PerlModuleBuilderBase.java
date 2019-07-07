@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.configuration.module;
 
 import com.intellij.ide.util.projectWizard.ModuleBuilder;
 import com.intellij.ide.util.projectWizard.ModuleWizardStep;
+import com.intellij.ide.util.projectWizard.SettingsStep;
 import com.intellij.ide.util.projectWizard.WizardContext;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleType;
@@ -29,6 +30,7 @@ import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.perl5.lang.perl.idea.modules.PerlModuleType;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
@@ -57,6 +59,10 @@ public abstract class PerlModuleBuilderBase<Settings extends PerlProjectGenerati
   public final String getPresentableName() {
     return getGenerator().getName();
   }
+
+  @Nullable
+  @Override
+  public abstract String getBuilderId();
 
   /**
    * @return generator paired with this builder. All work is delegated to the generator and it's peer. This builder is just a wrapper
@@ -87,11 +93,13 @@ public abstract class PerlModuleBuilderBase<Settings extends PerlProjectGenerati
 
   @Override
   public final ModuleWizardStep[] createWizardSteps(@NotNull WizardContext wizardContext, @NotNull ModulesProvider modulesProvider) {
-    if (!isStepAvailable(wizardContext, modulesProvider)) {
-      return ModuleWizardStep.EMPTY_ARRAY;
-    }
-    getSettings().setProject(wizardContext.getProject());
-    return new ModuleWizardStep[]{new PerlDelegatingModuleWizardStep(getPeer())};
+    return ModuleWizardStep.EMPTY_ARRAY;
+  }
+
+  @Nullable
+  @Override
+  public ModuleWizardStep modifySettingsStep(@NotNull SettingsStep settingsStep) {
+    return new PerlDelegatingModuleWizardStep(settingsStep, getPeer());
   }
 
   /**
@@ -99,5 +107,10 @@ public abstract class PerlModuleBuilderBase<Settings extends PerlProjectGenerati
    */
   protected boolean isStepAvailable(@NotNull WizardContext wizardContext, @NotNull ModulesProvider modulesProvider) {
     return true;
+  }
+
+  @Override
+  public String getParentGroup() {
+    return PerlModuleType.getInstance().getName();
   }
 }
