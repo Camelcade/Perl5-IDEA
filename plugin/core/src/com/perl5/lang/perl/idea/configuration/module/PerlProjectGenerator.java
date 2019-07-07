@@ -16,13 +16,23 @@
 
 package com.perl5.lang.perl.idea.configuration.module;
 
+import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.roots.ModuleRootManager;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.perl5.lang.perl.idea.actions.PerlMarkLibrarySourceRootAction;
 import com.perl5.lang.perl.idea.modules.PerlModuleType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import java.io.IOException;
+
+import static com.perl5.lang.perl.util.PerlPackageUtil.DEFAULT_LIB_DIR;
+import static com.perl5.lang.perl.util.PerlPackageUtil.DEFAULT_TEST_DIR;
 
 public class PerlProjectGenerator extends PerlProjectGeneratorBase<PerlProjectGenerationSettings> {
+  private static final Logger LOG = Logger.getInstance(PerlProjectGenerator.class);
   @NotNull
   @Override
   public String getName() {
@@ -39,5 +49,34 @@ public class PerlProjectGenerator extends PerlProjectGeneratorBase<PerlProjectGe
   @Override
   public PerlProjectGeneratorPeer createPeer() {
     return new PerlProjectGeneratorPeer();
+  }
+
+  @Override
+  public void configureModule(@NotNull Module module, @NotNull PerlProjectGenerationSettings settings) {
+    super.configureModule(module, settings);
+    ModuleRootManager moduleRootManager = ModuleRootManager.getInstance(module);
+    for (VirtualFile contentRoot : moduleRootManager.getContentRoots()) {
+      contentRoot.refresh(true, false, () -> {
+        try {
+          VirtualFile libDir = contentRoot.findChild(DEFAULT_LIB_DIR);
+          if (libDir == null) {
+            libDir = contentRoot.createChildDirectory(this, DEFAULT_LIB_DIR);
+          }
+          new PerlMarkLibrarySourceRootAction().markRoot(module, libDir);
+        }
+        catch (IOException e) {
+          LOG.warn("Error creating lib directory for " + module, e);
+        }
+
+        if (contentRoot.findChild(DEFAULT_TEST_DIR) == null) {
+          try {
+            contentRoot.createChildDirectory(this, DEFAULT_TEST_DIR);
+          }
+          catch (IOException e) {
+            LOG.warn("Error creating test directory for " + module);
+          }
+        }
+      });
+    }
   }
 }

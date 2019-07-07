@@ -118,6 +118,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
   public static final String CORE_NAMESPACE_FULL = CORE_NAMESPACE + NAMESPACE_SEPARATOR;
   public static final String CORE_GLOBAL_NAMESPACE = CORE_NAMESPACE_FULL + "GLOBAL";
   public static final String DEFAULT_LIB_DIR = "lib";
+  public static final String DEFAULT_TEST_DIR = "t";
 
   private static final Map<String, String> CANONICAL_NAMES_CACHE = new ConcurrentHashMap<>();
   private static final Map<String, String> PATH_TO_PACKAGE_NAME_MAP = new ConcurrentHashMap<>();
