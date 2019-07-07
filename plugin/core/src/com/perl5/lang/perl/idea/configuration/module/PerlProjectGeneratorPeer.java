@@ -16,67 +16,8 @@
 
 package com.perl5.lang.perl.idea.configuration.module;
 
-import com.intellij.openapi.options.UnnamedConfigurable;
-import com.intellij.openapi.ui.VerticalFlowLayout;
-import com.intellij.openapi.util.AtomicNotNullLazyValue;
-import com.intellij.platform.GeneratorPeerImpl;
-import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SdkConfigurable;
-import com.perl5.lang.perl.idea.project.PerlProjectManager;
-import org.jetbrains.annotations.NotNull;
-
-import javax.swing.*;
-
-public class PerlProjectGeneratorPeer extends GeneratorPeerImpl<PerlProjectGenerationSettings> implements UnnamedConfigurable {
-  @NotNull
-  private final Perl5SdkConfigurable mySdkConfigurable;
-  private final AtomicNotNullLazyValue<JComponent> myComponentProvider = AtomicNotNullLazyValue.createValue(
-    () -> initializeComponent(super.getComponent()));
-
+public class PerlProjectGeneratorPeer extends PerlProjectGeneratorPeerBase<PerlProjectGenerationSettings> {
   public PerlProjectGeneratorPeer() {
-    this(new PerlProjectGenerationSettings());
-  }
-
-  public PerlProjectGeneratorPeer(@NotNull PerlProjectGenerationSettings settings) {
-    super(settings, new JPanel(new VerticalFlowLayout()));
-    mySdkConfigurable = new Perl5SdkConfigurable(getSettings(), null);
-  }
-
-  @NotNull
-  @Override
-  public final JComponent getComponent() {
-    return myComponentProvider.getValue();
-  }
-
-  @Override
-  public void disposeUIResources() {
-    mySdkConfigurable.disposeUIResources();
-  }
-
-  @NotNull
-  protected JComponent initializeComponent(@NotNull JComponent component) {
-    component.add(mySdkConfigurable.createComponent());
-    mySdkConfigurable.setEnabled(PerlProjectManager.getSdk(getSettings().getProject()) == null);
-    return component;
-  }
-
-  @NotNull
-  @Override
-  public final JComponent createComponent() {
-    return getComponent();
-  }
-
-  @Override
-  public boolean isModified() {
-    throw new RuntimeException("NYI");
-  }
-
-  @Override
-  public void apply() {
-    mySdkConfigurable.apply();
-  }
-
-  @Override
-  public void reset() {
-    mySdkConfigurable.reset();
+    super(new PerlProjectGenerationSettings());
   }
 }

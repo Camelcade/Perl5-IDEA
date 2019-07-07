@@ -23,9 +23,9 @@ import javax.swing.*;
 
 class PerlDelegatingModuleWizardStep extends ModuleWizardStep {
   @NotNull
-  private final PerlProjectGeneratorPeer myPeer;
+  private final PerlProjectGeneratorPeerBase myPeer;
 
-  public PerlDelegatingModuleWizardStep(@NotNull PerlProjectGeneratorPeer peer) {
+  public PerlDelegatingModuleWizardStep(@NotNull PerlProjectGeneratorPeerBase peer) {
     myPeer = peer;
   }
 

@@ -16,19 +16,13 @@
 
 package com.perl5.lang.perl.idea.configuration.module;
 
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.platform.DirectoryProjectGeneratorBase;
 import com.perl5.lang.perl.idea.modules.PerlModuleType;
-import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
-public class PerlProjectGenerator extends DirectoryProjectGeneratorBase<PerlProjectGenerationSettings> {
+public class PerlProjectGenerator extends PerlProjectGeneratorBase<PerlProjectGenerationSettings> {
   @NotNull
   @Override
   public String getName() {
@@ -45,20 +39,5 @@ public class PerlProjectGenerator extends DirectoryProjectGeneratorBase<PerlProj
   @Override
   public PerlProjectGeneratorPeer createPeer() {
     return new PerlProjectGeneratorPeer();
-  }
-
-  @Override
-  public final void generateProject(@Nullable Project project,
-                                    @NotNull VirtualFile baseDir,
-                                    @NotNull PerlProjectGenerationSettings settings,
-                                    @NotNull Module module) {
-    configureModule(module, settings);
-  }
-
-  public void configureModule(@NotNull Module module, @NotNull PerlProjectGenerationSettings settings) {
-    Sdk sdk = settings.getSdk();
-    if (sdk != null) {
-      PerlProjectManager.getInstance(module.getProject()).setProjectSdk(sdk);
-    }
   }
 }
