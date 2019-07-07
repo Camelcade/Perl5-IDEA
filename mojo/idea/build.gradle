@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,15 +14,22 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mojolicious;
+import org.jetbrains.grammarkit.tasks.GenerateLexer
+import org.jetbrains.grammarkit.tasks.GenerateParser
 
-import com.intellij.patterns.PsiElementPattern;
-import com.perl5.lang.mojolicious.psi.impl.MojoliciousFileImpl;
-
-import static com.intellij.patterns.PlatformPatterns.psiElement;
-import static com.intellij.patterns.PlatformPatterns.psiFile;
-
-public interface MojoliciousElementPatterns {
-  // fixme move this to mojo patterns
-  PsiElementPattern.Capture IN_MOJOLICIOUS_FILE = psiElement().inFile(psiFile(MojoliciousFileImpl.class));
+sourceSets {
+  main {
+    java.srcDirs project.files('src')
+  }
 }
+
+dependencies{
+  compileOnly project(":perl5.core")
+  compileOnly project(":perl5.lang.mojo.core")
+}
+
+intellij {
+  type 'IC'
+  intellij.plugins = ['java']
+}
+

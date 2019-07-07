@@ -25,6 +25,7 @@
 
   <depends>com.perl5</depends>
   <depends>com.intellij.modules.lang</depends>
+  <depends optional="true" config-file="idea-deps.xml">com.intellij.modules.java</depends>
 
   <extensions defaultExtensionNs="com.perl5">
     <parserExtension implementation="com.perl5.lang.perl.parser.MojoParserExtension"/>

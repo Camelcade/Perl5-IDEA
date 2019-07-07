@@ -33,6 +33,10 @@ include 'perl5.lang.tt2'
 project(':perl5.lang.tt2').projectDir=file('tt2')
 include 'perl5.lang.mojo'
 project(':perl5.lang.mojo').projectDir=file('mojo')
+include 'perl5.lang.mojo.core'
+project(':perl5.lang.mojo.core').projectDir=file('mojo/core')
+include 'perl5.lang.mojo.idea'
+project(':perl5.lang.mojo.idea').projectDir=file('mojo/idea')
 include 'perl5.lang.embedded'
 project(':perl5.lang.embedded').projectDir=file('embedded')
 include 'perl5.lang.mason.framework'

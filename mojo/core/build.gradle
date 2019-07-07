@@ -17,23 +17,40 @@
 import org.jetbrains.grammarkit.tasks.GenerateLexer
 import org.jetbrains.grammarkit.tasks.GenerateParser
 
-dependencies{
-  compile project(":perl5.lang.mojo.core")
-  compile project(":perl5.lang.mojo.idea")
-  testCompile project(":perl5.plugin").sourceSets.test.output
-}
+def genRoot = file('gen')
 
 sourceSets {
   main {
+    java.srcDirs project.files('src', genRoot)
     resources.srcDir file('resources')
   }
-  test {
-    java.srcDir file('test')
-    resources.srcDirs file('testData')
+}
+
+idea{
+  module {
+    generatedSourceDirs += genRoot
   }
 }
 
 intellij{
   type 'IC'
   plugins = [project(':perl5.plugin'), 'java']
+}
+
+dependencies{
+  compileOnly project(":perl5.core")
+}
+
+apply plugin: 'org.jetbrains.grammarkit'
+
+task generateMojoliciousLexer(type: GenerateLexer) {
+  source = "grammar/Mojolicious.flex"
+  targetDir = "gen/com/perl5/lang/mojolicious/lexer/"
+  targetClass = "MojoliciousLexer"
+  skeleton = rootProject.file(lexer_skeleton)
+  purgeOldFiles = true
+}
+
+compileJava {
+  dependsOn generateMojoliciousLexer
 }

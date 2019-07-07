@@ -14,26 +14,15 @@
  * limitations under the License.
  */
 
-import org.jetbrains.grammarkit.tasks.GenerateLexer
-import org.jetbrains.grammarkit.tasks.GenerateParser
+package com.perl5.lang.mojolicious;
 
-dependencies{
-  compile project(":perl5.lang.mojo.core")
-  compile project(":perl5.lang.mojo.idea")
-  testCompile project(":perl5.plugin").sourceSets.test.output
-}
+import com.intellij.patterns.PsiElementPattern;
+import com.perl5.lang.mojolicious.psi.impl.MojoliciousFileImpl;
 
-sourceSets {
-  main {
-    resources.srcDir file('resources')
-  }
-  test {
-    java.srcDir file('test')
-    resources.srcDirs file('testData')
-  }
-}
+import static com.intellij.patterns.PlatformPatterns.psiElement;
+import static com.intellij.patterns.PlatformPatterns.psiFile;
 
-intellij{
-  type 'IC'
-  plugins = [project(':perl5.plugin'), 'java']
+public interface MojoliciousElementPatterns {
+  // fixme move this to mojo patterns
+  PsiElementPattern.Capture IN_MOJOLICIOUS_FILE = psiElement().inFile(psiFile(MojoliciousFileImpl.class));
 }
