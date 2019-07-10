@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,43 +22,32 @@ import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.actionSystem.impl.ActionToolbarImpl;
 import com.intellij.openapi.project.DumbAwareAction;
 import com.intellij.openapi.ui.ComboBox;
+import com.intellij.openapi.ui.LabeledComponent;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.openapi.ui.popup.ListPopup;
 import com.intellij.ui.awt.RelativePoint;
 import com.intellij.util.ui.JBUI;
 import com.intellij.util.ui.UIUtil;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5SdkWrapper;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class Perl5SdkPanel {
-  private ComboBox<Perl5SdkWrapper> mySdkComboBox;
-  private JPanel myMainPanel;
+import static java.awt.BorderLayout.WEST;
+import static java.awt.FlowLayout.CENTER;
+
+public class Perl5SdkPanel extends LabeledComponent<JPanel> {
   private final DefaultActionGroup myActionGroup = new DefaultActionGroup();
   private JPanel myToolBar;
-  private JLabel myLabel;
-
-  public ComboBox<Perl5SdkWrapper> getSdkComboBox() {
-    return mySdkComboBox;
-  }
-
-  public JPanel getMainPanel() {
-    return myMainPanel;
-  }
-
-  @NotNull
-  public DefaultActionGroup getActionGroup() {
-    return myActionGroup;
-  }
+  private final ComboBox<Perl5SdkWrapper> mySdkComboBox = new ComboBox<>();
 
   /**
    * popup taken from {@link com.intellij.application.options.schemes.AbstractSchemesPanel}
    */
-  private void createUIComponents() {
+  public Perl5SdkPanel() {
     DefaultActionGroup toolbarActionGroup = new DefaultActionGroup();
-
     ActionToolbarImpl toolbar =
       (ActionToolbarImpl)ActionManager.getInstance().createActionToolbar(ActionPlaces.NAVIGATION_BAR_TOOLBAR, toolbarActionGroup, true);
     toolbar.setReservePlaceAutoPopupIcon(false);
@@ -89,15 +78,32 @@ public class Perl5SdkPanel {
       }
     });
     myToolBar = toolbar;
+
+    setText(PerlBundle.message("perl.config.interpreter.label"));
+    setLabelLocation(WEST);
+    JPanel comboboxAndToolbarPanel = new JPanel(new BorderLayout());
+    comboboxAndToolbarPanel.add(mySdkComboBox, BorderLayout.CENTER);
+    JPanel toolbarPanel = new JPanel(new FlowLayout(CENTER, 0, 4));
+    toolbarPanel.add(myToolBar);
+    comboboxAndToolbarPanel.add(toolbarPanel, BorderLayout.EAST);
+    setComponent(comboboxAndToolbarPanel);
+    getLabel().setLabelFor(mySdkComboBox);
+
+    //add(toolbarPanel, BorderLayout.EAST);
+  }
+
+  public ComboBox<Perl5SdkWrapper> getSdkComboBox() {
+    return mySdkComboBox;
+  }
+
+  @NotNull
+  public DefaultActionGroup getActionGroup() {
+    return myActionGroup;
   }
 
   public void setEnabled(boolean isEnabled) {
-    myLabel.setEnabled(isEnabled);
+    super.setEnabled(isEnabled);
     mySdkComboBox.setEnabled(isEnabled);
     myToolBar.setEnabled(isEnabled);
-  }
-
-  public void setLabelText(@NotNull String text) {
-    myLabel.setText(text);
   }
 }

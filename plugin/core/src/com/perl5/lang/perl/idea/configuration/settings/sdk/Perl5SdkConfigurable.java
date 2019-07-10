@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -88,11 +88,11 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
 
   @NotNull
   @Override
-  public JComponent createComponent() {
+  public Perl5SdkPanel createComponent() {
     if (myPanel == null) {
       initPanel();
     }
-    return myPanel.getMainPanel();
+    return myPanel;
   }
 
   private void initPanel() {
@@ -328,6 +328,6 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
   }
 
   public void setLabelText(@NotNull String text) {
-    myPanel.setLabelText(text);
+    myPanel.setText(text);
   }
 }
