@@ -42,6 +42,7 @@ import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.execution.configurations.PathEnvironmentVariableUtil;
 import com.intellij.execution.impl.EditorHyperlinkSupport;
+import com.intellij.execution.process.ProcessOutput;
 import com.intellij.execution.util.ExecUtil;
 import com.intellij.ide.DataManager;
 import com.intellij.ide.actions.runAnything.activity.RunAnythingProvider;
@@ -1581,9 +1582,20 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
       throw new FileNotFoundException("Cannot find dot utility in path");
     }
     File tmpFile = FileUtil.createTempFile("control-flow", ".dot", true);
-    FileUtil.writeToFile(tmpFile, convertControlFlowToDot(flow));
-    ExecUtil.execAndGetOutput(new GeneralCommandLine(dotFullPath.getAbsolutePath()).withInput(tmpFile.getAbsoluteFile())
-                                .withParameters("-Tsvg", "-o" + outSvgFile, tmpFile.getAbsolutePath()).withRedirectErrorStream(true));
+    String controlFlowGraph = convertControlFlowToDot(flow);
+    FileUtil.writeToFile(tmpFile, controlFlowGraph);
+    GeneralCommandLine commandLine = new GeneralCommandLine(dotFullPath.getAbsolutePath())
+      .withInput(tmpFile.getAbsoluteFile())
+      .withParameters("-Tsvg", "-o" + outSvgFile, tmpFile.getAbsolutePath())
+      .withRedirectErrorStream(true);
+    ProcessOutput output = ExecUtil.execAndGetOutput(commandLine);
+    assertNotNull(output);
+    if (output.getExitCode() != 0) {
+      fail("Error: " + output.getStderr() + "\n" +
+           "Output: " + output.getStdout() + "\n" +
+           "Exit code: " + output.getExitCode() + "\n" +
+           "Command line: " + commandLine);
+    }
   }
 
   @NotNull
@@ -1639,6 +1651,10 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   }
 
   private String getInstructionText(@NotNull Instruction instruction) {
+    return escape(doGetInstructionText(instruction));
+  }
+
+  private String doGetInstructionText(@NotNull Instruction instruction) {
     if (instruction instanceof PerlAssignInstruction) {
       PerlAssignInstruction assignInstruction = (PerlAssignInstruction)instruction;
       PerlAssignExpression.PerlAssignValueDescriptor rightSide = assignInstruction.getRightSide();
@@ -1661,7 +1677,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
       if (StringUtil.isEmpty(elementText)) {
         return element instanceof PsiNamedElement ? ((PsiNamedElement)element).getName() : "empty text, unnamed";
       }
-      return escape(elementText);
+      return elementText;
     }
   }
 
@@ -1672,7 +1688,6 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   private String escape(String text) {
     return StringUtil.replace(StringUtil.escapeChars(text, '"'), "\n", "\\n");
   }
-
 
   protected void doLineCommenterTest() {
     initWithFileSmart();
