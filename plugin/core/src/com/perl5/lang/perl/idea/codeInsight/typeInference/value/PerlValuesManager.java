@@ -25,8 +25,8 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
+import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.containers.WeakInterner;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlBuiltInVariable;
@@ -331,16 +331,15 @@ public final class PerlValuesManager {
     List<PsiElement> elements = assignValueDescriptor.getElements();
     PerlContextType targetContextType = PerlContextType.from(target);
     if (targetContextType == PerlContextType.SCALAR) {
-      // fixme otherwise we should createa list/extract subelement
-      if (elements.size() == 1) {
-        if ((PerlContextType.from(elements.get(0)) == PerlContextType.SCALAR || assignValueDescriptor.getStartIndex() == -1)) {
-          return PerlScalarContextValue.create(from(elements.get(0)));
-        }
+      int startIndex = assignValueDescriptor.getStartIndex();
+      if (elements.size() == 1 && (PerlContextType.isScalar(elements.get(0)) || startIndex == -1)) {
+        return PerlScalarContextValue.create(from(elements.get(0)));
       }
-      else if (elements.size() > 1) {
-        PerlStatement containingStatement = PsiTreeUtil.getParentOfType(target, PerlStatement.class);
-        LOG.error("Can't be: " + target + "; " + assignValueDescriptor + "; " +
-                  (containingStatement == null ? "text unknown" : containingStatement.getText()));
+      else if (elements.size() > 1 || PerlContextType.isList(ContainerUtil.getFirstItem(elements))) {
+        return PerlArrayElementValue.create(
+          PerlArrayValue.builder().addPsiElements(elements).build(),
+          PerlScalarValue.create(startIndex)
+        );
       }
     }
     else if (targetContextType == PerlContextType.LIST &&

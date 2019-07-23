@@ -1,0 +1,12 @@
+my @cmps = qw/one/;
+my ($var1, $var2, $var3);
+($var1, $var2, $var3)  = ("private", @cmps, "name") if @cmps == 1;
+$v<caret>ar2;
+----------
+$var2
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 113 in issue2073Second.pl
+one
+----------
+Resolved
+----------
+one

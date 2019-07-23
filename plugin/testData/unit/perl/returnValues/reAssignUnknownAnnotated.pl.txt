@@ -5,4 +5,4 @@ sub so<caret>me{
   $var;
 }
 ----------
-Foo::Baz
+ArrayItem: SUB_ARGUMENTS[0](fallback to Foo::Baz)

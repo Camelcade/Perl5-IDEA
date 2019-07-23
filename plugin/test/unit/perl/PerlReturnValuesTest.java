@@ -26,6 +26,12 @@ public class PerlReturnValuesTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testIssue2073Second() {doTest();}
+
+  @Test
+  public void testIssue2073Third() {doTest();}
+
+  @Test
   public void testFuncFirst() {doTest();}
 
   @Test

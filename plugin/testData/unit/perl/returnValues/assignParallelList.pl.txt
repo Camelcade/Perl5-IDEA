@@ -3,4 +3,4 @@ sub so<caret>me{
   $var;
 }
 ----------
-UNKNOWN_VALUE
+ArrayItem: SUB_ARGUMENTS[0]

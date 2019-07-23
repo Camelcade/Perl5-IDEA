@@ -26,6 +26,9 @@ public class PerlControlFlowTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testIssue2073() {doTest();}
+
+  @Test
   public void testMethodFirst() {doTest();}
 
   @Test
