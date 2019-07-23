@@ -178,7 +178,7 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
       introduceVariable(target, declaration, occurrences, anchorElement, psiOccurrencesPointers);
 
     if (variableDeclaration == null) {
-      LOG.error("No variable declaration created");
+      LOG.error("No variable declaration created " + target);
       return;
     }
 
