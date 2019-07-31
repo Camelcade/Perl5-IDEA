@@ -18,14 +18,25 @@ package unit.perl;
 
 
 import base.PerlLightTestCase;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
+import com.perl5.lang.perl.idea.run.debugger.PerlDebuggerEditorsProvider;
+import com.perl5.lang.perl.psi.PerlVariable;
 import org.junit.Test;
 public class PerlValuesTest extends PerlLightTestCase {
   @Override
   protected String getBaseDataPath() {
     return "testData/unit/perl/perlValues";
   }
+
+  @Test
+  public void testOuterVariable() {doTest();}
+
+  @Test
+  public void testContextSimple() {doTestFileWithContext();}
 
   @Test
   public void testIssue2073Second() {doTest();}
@@ -727,5 +738,17 @@ public class PerlValuesTest extends PerlLightTestCase {
 
   private void doTest() {
     doTestPerlValue();
+  }
+
+  private void doTestFileWithContext() {
+    initWithFileSmartWithoutErrors();
+    PsiElement elementAtCaret = getElementAtCaretWithoutInjection();
+    assertNotNull(elementAtCaret);
+    PsiFile lightFile = PerlDebuggerEditorsProvider.INSTANCE.createFile(getProject(), "$var", elementAtCaret);
+    PsiElement leafElement = lightFile.findElementAt(2);
+    assertNotNull(leafElement);
+    PerlVariable variable = PsiTreeUtil.getParentOfType(leafElement, PerlVariable.class);
+    assertNotNull(variable);
+    doTestPerlValueWithoutInit(variable);
   }
 }

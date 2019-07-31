@@ -1,0 +1,10 @@
+my $var = 42;
+s<caret>ay 1 + $var;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 0 in file.dummy
+42
+----------
+Resolved
+----------
+42

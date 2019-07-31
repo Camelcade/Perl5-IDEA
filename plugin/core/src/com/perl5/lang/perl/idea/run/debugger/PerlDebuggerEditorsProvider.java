@@ -26,6 +26,7 @@ import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.TestOnly;
 
 
 public class PerlDebuggerEditorsProvider extends XDebuggerEditorsProviderBase {
@@ -45,5 +46,11 @@ public class PerlDebuggerEditorsProvider extends XDebuggerEditorsProviderBase {
   @Override
   public FileType getFileType() {
     return PerlFileTypeScript.INSTANCE;
+  }
+
+  @TestOnly
+  @NotNull
+  public PsiFile createFile(@NotNull Project project, @NotNull String text, @NotNull PsiElement context) {
+    return createExpressionCodeFragment(project, text, context, true);
   }
 }

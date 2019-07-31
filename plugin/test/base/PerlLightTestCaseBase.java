@@ -2018,8 +2018,10 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
 
   protected void doTestPerlValueWithoutInit(){
     addVirtualFileFilter();
-    PerlValuableEntity element = getElementAtCaret(PerlValuableEntity.class);
-    assertNotNull(element);
+    doTestPerlValueWithoutInit(getElementAtCaret(PerlValuableEntity.class));
+  }
+
+  protected void doTestPerlValueWithoutInit(@NotNull PerlValuableEntity element) {
     StringBuilder sb = new StringBuilder();
     PerlValue elementValue = PerlValuesManager.from(element);
     sb.append(getEditorTextWithCaretsAndSelections().trim())
