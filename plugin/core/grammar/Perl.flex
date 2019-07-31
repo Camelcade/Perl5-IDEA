@@ -1029,18 +1029,21 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 	{CORE_PREFIX}"bless"    { yybegin(YYINITIAL); return RESERVED_BLESS;}
 	{CORE_PREFIX}"splice"    { yybegin(YYINITIAL); return RESERVED_SPLICE;}
 	{CORE_PREFIX}"delete"    { yybegin(YYINITIAL); return RESERVED_DELETE;}
-	{CORE_PREFIX}"wantarray" { yybegin(YYINITIAL); return RESERVED_WANTARRAY;}
-	{CORE_PREFIX}"defined"	 { yybegin(YYINITIAL); return RESERVED_DEFINED;}
-	{CORE_PREFIX}"scalar"	 { yybegin(YYINITIAL); return RESERVED_SCALAR;}
+	{CORE_PREFIX}"wantarray" { yybegin(AFTER_VALUE); return RESERVED_WANTARRAY;}
+
+	{CORE_PREFIX}"defined" / {SPACES_OR_COMMENTS} "//"	{ yybegin(AFTER_IDENTIFIER); return RESERVED_DEFINED;}
+	{CORE_PREFIX}"defined"	                                { yybegin(YYINITIAL); return RESERVED_DEFINED;}
+
+	{CORE_PREFIX}"scalar"	 { yybegin(AFTER_IDENTIFIER); return RESERVED_SCALAR;}
 	{CORE_PREFIX}"keys"	 { yybegin(YYINITIAL); return RESERVED_KEYS;}
 	{CORE_PREFIX}"values"	 { yybegin(YYINITIAL); return RESERVED_VALUES;}
 	{CORE_PREFIX}"each"	 { yybegin(YYINITIAL); return RESERVED_EACH;}
 	{CORE_PREFIX}"return"	 { yybegin(YYINITIAL); return RESERVED_RETURN;}
-	{CORE_PREFIX}"exit"	 { yybegin(YYINITIAL); return RESERVED_EXIT;}
-	{CORE_PREFIX}"shift"	 { yybegin(YYINITIAL); return RESERVED_SHIFT;}
+	{CORE_PREFIX}"exit"	 { yybegin(AFTER_IDENTIFIER); return RESERVED_EXIT;}
+	{CORE_PREFIX}"shift"	 { yybegin(AFTER_IDENTIFIER); return RESERVED_SHIFT;}
 	{CORE_PREFIX}"unshift"	 { yybegin(YYINITIAL); return RESERVED_UNSHIFT;}
 	{CORE_PREFIX}"push"	 { yybegin(YYINITIAL); return RESERVED_PUSH;}
-	{CORE_PREFIX}"pop"	 { yybegin(YYINITIAL); return RESERVED_POP;}
+	{CORE_PREFIX}"pop"	 { yybegin(AFTER_IDENTIFIER); return RESERVED_POP;}
 
 	{BLOCK_NAMES} / {BRACE_AFTER_SPACE_COMMENTS}		{yybegin(YYINITIAL);return BLOCK_NAME;}
 	{TAG_NAMES}									{yybegin(AFTER_VALUE); return TAG;}

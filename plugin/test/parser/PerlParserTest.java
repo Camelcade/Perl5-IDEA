@@ -41,6 +41,12 @@ public class PerlParserTest extends PerlParserTestBase {
   }
 
   @Test
+  public void testDefinedSigils() {doTest();}
+
+  @Test
+  public void testIssue2084() {doTest();}
+
+  @Test
   public void testFileTestPrecedence() {doTest();}
 
   @Test

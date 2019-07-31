@@ -14,22 +14,8 @@
   ~ limitations under the License.
   -->
 
-<p>Updates:</p>
+<p>Fixes:</p>
 <ul>
-  <li>Type inference:
-    <p>Plugin now understands Perl much better and can infer values of different operations and invocations. Therefore - resolve and
-      completion should be much better in many places. (Seriously, sometimes it's looks just like a magic.)
-    </p>
-  </li>
-  <li>Names suggester now taking inferred values into account when suggesting variable names.</li>
-  <li>Introduce variable action is now available for the Perl code</li>
-  <li>Documentation
-    <ul>
-      <li>Pod support has been deeply re-worked and should be much better now</li>
-      <li>Quick-doc on built-ins</li>
-      <li>Quick-doc on completion elements</li>
-      <li>Better completion, live-templates, smart keys, resolve and refactoring for POD</li>
-      <li>Re-worked POD color settings</li>
-    </ul>
-  </li>
+  <li>Parsing problem for <code>defined or</code> operator after keywords introduced in 2019.2, by <a
+      href="https://github.com/Camelcade/Perl5-IDEA/issues/2084">@aldem</a></li>
 </ul>

@@ -1,0 +1,8 @@
+shift // 1;
+pop // 1;
+defined // 1;
+exit // 1;
+keys %some;
+values %some;
+each %some;
+wantarray // 1;
