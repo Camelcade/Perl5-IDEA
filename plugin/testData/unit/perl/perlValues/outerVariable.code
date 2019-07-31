@@ -1,0 +1,5 @@
+my $something = 42;
+
+sub something{
+  say $someth<caret>ing;
+}

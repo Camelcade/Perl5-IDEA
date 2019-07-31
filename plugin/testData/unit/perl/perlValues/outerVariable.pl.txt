@@ -1,0 +1,13 @@
+my $something = 42;
+
+sub something{
+  say $someth<caret>ing;
+}
+----------
+$something
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 42 in outerVariable.pl
+42
+----------
+Resolved
+----------
+42
