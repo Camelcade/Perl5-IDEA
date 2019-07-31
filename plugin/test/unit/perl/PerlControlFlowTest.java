@@ -18,11 +18,18 @@ package unit.perl;
 
 
 import base.PerlLightTestCase;
+import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import org.junit.Test;
 public class PerlControlFlowTest extends PerlLightTestCase {
   @Override
   protected String getBaseDataPath() {
     return "testData/unit/perl/controlFlow";
+  }
+
+  @Test
+  public void testSwitch() {
+    PerlSharedSettings.getInstance(getProject()).PERL_SWITCH_ENABLED = true;
+    doTest();
   }
 
   @Test

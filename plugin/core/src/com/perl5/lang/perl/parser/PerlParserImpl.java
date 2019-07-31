@@ -32,25 +32,7 @@ public class PerlParserImpl extends PerlParserGenerated implements PerlParser {
   public PerlParserImpl() {
   }
 
-  /*
-                  @Override
-                  public ASTNode parse(IElementType t, PsiBuilder b)
-                  {
-                          if (t instanceof PerlFileElementType)
-                          {
-                                  PsiFile file = b.getUserDataUnprotected(FileContextUtil.CONTAINING_FILE_KEY);
-                                  if (file != null && file.getVirtualFile() != null)
-                                          System.err.println("Parsed file " + file.getVirtualFile());
-                          }
-                          return super.parse(t, b);
-                  }
-          */
   public boolean parseStatement(PsiBuilder b, int l) {
-    for (PerlParserExtension parserExtension : PerlParserDefinition.PARSER_EXTENSIONS) {
-      if (parserExtension.parseStatement((PerlBuilder)b, l)) {
-        return true;
-      }
-    }
     return false;
   }
 
@@ -64,11 +46,6 @@ public class PerlParserImpl extends PerlParserGenerated implements PerlParser {
   }
 
   public boolean parseStatementModifier(PsiBuilder b, int l) {
-    for (PerlParserExtension parserExtension : PerlParserDefinition.PARSER_EXTENSIONS) {
-      if (parserExtension.parseStatementModifier((PerlBuilder)b, l)) {
-        return true;
-      }
-    }
     return false;
   }
 

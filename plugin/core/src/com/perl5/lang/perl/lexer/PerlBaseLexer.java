@@ -28,7 +28,6 @@ import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.project.PerlNamesCache;
 import com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes;
 import com.perl5.lang.perl.parser.moose.MooseElementTypes;
-import com.perl5.lang.perl.parser.perlswitch.PerlSwitchElementTypes;
 import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -49,7 +48,6 @@ import static com.perl5.lang.perl.lexer.PerlLexer.*;
 
 public abstract class PerlBaseLexer extends PerlProtoLexer
   implements PerlElementTypes,
-             PerlSwitchElementTypes,
              ClassAccessorElementTypes,
              MooseElementTypes {
   // fixme move somewhere

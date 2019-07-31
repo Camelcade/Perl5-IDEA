@@ -469,6 +469,16 @@ public class PerlElementTypeFactory {
         return new PerlElementTypeEx(name, PsiPerlForeachIteratorImpl.class);
       case "ATTRIBUTES":
         return new PerlElementTypeEx(name, PsiPerlAttributesImpl.class);
+      case "SWITCH_COMPOUND":
+        return new PerlElementTypeEx(name, PsiPerlSwitchCompoundImpl.class);
+      case "SWITCH_CONDITION":
+        return new PerlElementTypeEx(name, PsiPerlSwitchConditionImpl.class);
+      case "CASE_COMPOUND":
+        return new PerlElementTypeEx(name, PsiPerlCaseCompoundImpl.class);
+      case "CASE_DEFAULT":
+        return new PerlElementTypeEx(name, PsiPerlCaseDefaultImpl.class);
+      case "CASE_CONDITION":
+        return new PerlElementTypeEx(name, PsiPerlCaseConditionImpl.class);
       default: {
         LOG.error("Unknown token:" + name);
         throw new RuntimeException("Unknown token:" + name);

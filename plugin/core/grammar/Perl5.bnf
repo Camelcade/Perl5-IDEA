@@ -583,6 +583,8 @@ private compound_statement ::=
     | method_definition
     | func_definition
     | trycatch_compound
+    | switch_compound
+    | cases_sequence
 
 
 named_block ::= BLOCK_NAME parse_block
@@ -1258,3 +1260,12 @@ heredoc ::= sq_string_content {extraRoot=true}
 heredoc_qq ::= qq_string_content {extraRoot=true}
 heredoc_qx ::= xq_string_content{extraRoot=true}
 /******************************************* End of Lazy parsable elements *******************************************************/
+
+/**********************************************************  switch.pm ******************************************************************/
+switch_compound ::= 'switch' switch_condition normal_block {pin=1}
+switch_condition ::= '(' parse_scalar_expr ')'
+private cases_sequence ::= case_compound + [case_default]
+case_compound ::= 'case' case_condition normal_block {pin=1}
+case_condition ::= '(' parse_scalar_expr ')' | normal_block | string | number_constant | anon_array | match_regex | compile_regex
+case_default ::= if_compound_else
+/******************************************************* end of switch.pm ***************************************************************/

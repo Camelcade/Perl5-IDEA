@@ -88,7 +88,8 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       HEREDOC_END, HEREDOC_END_INDENTABLE,
       TRYCATCH_EXPR, TRY_EXPR, CATCH_EXPR, FINALLY_EXPR, CATCH_CONDITION, EXCEPT_EXPR, OTHERWISE_EXPR, CONTINUATION_EXPR, TRYCATCH_COMPOUND,
       COMMA_SEQUENCE_EXPR, PARENTHESISED_EXPR,
-      AND_EXPR, LP_AND_EXPR, OR_EXPR, LP_OR_XOR_EXPR, TERNARY_EXPR
+      AND_EXPR, LP_AND_EXPR, OR_EXPR, LP_OR_XOR_EXPR, TERNARY_EXPR,
+      CASE_CONDITION, CASE_DEFAULT, SWITCH_COMPOUND
     ));
 
   /**
@@ -788,6 +789,32 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
         acceptSafe(o.getMethod());
         startNodeSmart(o);
       }
+    }
+
+    @Override
+    public void visitCaseCompound(@NotNull PsiPerlCaseCompound o) {
+      PsiPerlCaseCondition condition = o.getCaseCondition();
+      PsiPerlBlock block = o.getBlock();
+      PsiPerlSwitchCompound switchCompound = PsiTreeUtil.getParentOfType(o, PsiPerlSwitchCompound.class);
+
+      Instruction incoming = prevInstruction;
+
+      if (condition != null) {
+        condition.accept(this);
+        incoming = prevInstruction;
+        startConditionalNode(condition, true);
+      }
+      if (block != null) {
+        block.accept(this);
+      }
+      addPendingEdge(switchCompound, prevInstruction);
+
+      prevInstruction = incoming;
+    }
+
+    @Override
+    public void visitCaseDefault(@NotNull PsiPerlCaseDefault o) {
+      super.visitCaseDefault(o);
     }
 
     @Override
