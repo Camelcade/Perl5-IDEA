@@ -39,6 +39,7 @@ import com.perl5.lang.perl.psi.impl.PerlBuiltInVariable;
 import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.references.scopes.PerlVariableDeclarationSearcher;
+import com.perl5.lang.perl.util.PerlUtil;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -266,7 +267,9 @@ public class PerlResolveUtil {
                 element.getClass() + "; " +
                 element.getText() + "; " +
                 element.getTextRange() + "; " +
-                PsiUtilCore.getVirtualFile(element));
+                PsiUtilCore.getVirtualFile(element) + "; " +
+                controlFlowScope.getClass() + "; " +
+                PerlUtil.getParentsChain(element));
       return UNKNOWN_VALUE;
     }
     int currentInstructionIndex = elementInstructionIndex;

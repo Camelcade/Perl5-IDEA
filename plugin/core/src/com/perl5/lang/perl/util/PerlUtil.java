@@ -19,6 +19,7 @@ package com.perl5.lang.perl.util;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.stubs.StubIndexKey;
@@ -107,5 +108,21 @@ public class PerlUtil implements PerlElementTypes {
       });
 
     return result;
+  }
+
+  @NotNull
+  public static String getParentsChain(@Nullable PsiElement element) {
+    if (element == null) {
+      return "null";
+    }
+    StringBuilder sb = new StringBuilder();
+    while (true) {
+      sb.append(element.getClass()).append(": ");
+      if (element instanceof PsiFile || element.getParent() == null) {
+        break;
+      }
+      element = element.getParent();
+    }
+    return sb.toString();
   }
 }
