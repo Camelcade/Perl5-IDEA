@@ -244,12 +244,15 @@ public class PerlResolveUtil {
                                                    @Nullable PsiElement stopElement) {
     PsiElement controlFlowScope = PerlControlFlowBuilder.getControlFlowScope(element);
     if (controlFlowScope == null) {
-      LOG.error("Unable to find control flow scope for:" +
-                element.getClass() +
-                " at " +
-                element.getTextOffset() +
-                " in " +
-                PsiUtilCore.getVirtualFile(element));
+      VirtualFile virtualFile = PsiUtilCore.getVirtualFile(element);
+      if (!(element instanceof PsiFile) || !(virtualFile instanceof VirtualFileWindow)) {
+        LOG.error("Unable to find control flow scope for:" +
+                  element.getClass() +
+                  " at " +
+                  element.getTextOffset() +
+                  " in " +
+                  virtualFile);
+      }
       return UNKNOWN_VALUE;
     }
     Instruction[] instructions = PerlControlFlowBuilder.getFor(controlFlowScope).getInstructions();
@@ -279,13 +282,9 @@ public class PerlResolveUtil {
         if (Objects.equals(stopElement, instructionElement)) {
           return CONTINUE;
         }
-        if (currentInstruction.num() == 1 && instructionElement != null) {
-          PsiElement contextElement = instructionElement.getContext();
-          VirtualFile instructionVirtualFile = PsiUtilCore.getVirtualFile(instructionElement);
-          if (contextElement != null && !(instructionVirtualFile instanceof VirtualFileWindow)) {
-            valueBuilder.addVariant(
-              getValueFromControlFlow(instructionElement, namespaceName, variableName, actualType, lexicalDeclaration, stopElement));
-          }
+        if (currentInstruction.num() == 1 && instructionElement != null && instructionElement.getContext() != null) {
+          valueBuilder.addVariant(
+            getValueFromControlFlow(instructionElement, namespaceName, variableName, actualType, lexicalDeclaration, stopElement));
         }
         return NEXT;
       }
