@@ -18,9 +18,11 @@ package com.perl5.lang.perl.psi.utils;
 
 import com.intellij.codeInsight.controlflow.ControlFlowUtil;
 import com.intellij.codeInsight.controlflow.Instruction;
+import com.intellij.injected.editor.VirtualFileWindow;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.util.CachedValueProvider;
@@ -279,7 +281,8 @@ public class PerlResolveUtil {
         }
         if (currentInstruction.num() == 1 && instructionElement != null) {
           PsiElement contextElement = instructionElement.getContext();
-          if (contextElement != null) {
+          VirtualFile instructionVirtualFile = PsiUtilCore.getVirtualFile(instructionElement);
+          if (contextElement != null && !(instructionVirtualFile instanceof VirtualFileWindow)) {
             valueBuilder.addVariant(
               getValueFromControlFlow(instructionElement, namespaceName, variableName, actualType, lexicalDeclaration, stopElement));
           }
