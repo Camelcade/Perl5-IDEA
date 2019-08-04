@@ -23,8 +23,7 @@ import com.perl5.lang.perl.psi.PerlNamespaceDefinitionWithIdentifier;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.PsiPerlRequireExpr;
-import com.perl5.lang.perl.psi.impl.PerlNoStatementElement;
-import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
+import com.perl5.lang.perl.psi.impl.PerlUseStatementElementBase;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -40,8 +39,7 @@ public class PerlUnresolvedNamespaceInspection extends PerlInspection {
         PsiElement parent = o.getParent();
 
         if (parent instanceof PsiPerlRequireExpr ||
-            parent instanceof PerlUseStatementElement ||
-            parent instanceof PerlNoStatementElement ||
+            parent instanceof PerlUseStatementElementBase ||
             parent instanceof PerlNamespaceDefinitionWithIdentifier) {
           return;
         }
