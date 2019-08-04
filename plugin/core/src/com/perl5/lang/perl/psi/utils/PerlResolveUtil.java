@@ -247,12 +247,13 @@ public class PerlResolveUtil {
     if (controlFlowScope == null) {
       VirtualFile virtualFile = PsiUtilCore.getVirtualFile(element);
       if (!(element instanceof PsiFile) || !(virtualFile instanceof VirtualFileWindow)) {
-        LOG.warn("Unable to find control flow scope for:" +
-                 element.getClass() +
-                 " at " +
-                 element.getTextOffset() +
-                 " in " +
-                 virtualFile);
+        LOG.error("Unable to find control flow scope for:" +
+                  element.getClass() +
+                  " at " +
+                  element.getTextOffset() +
+                  " in " +
+                  virtualFile + "; " +
+                  PerlUtil.getParentsChain(element));
       }
       return UNKNOWN_VALUE;
     }
@@ -263,13 +264,13 @@ public class PerlResolveUtil {
       elementInstructionIndex  = PerlControlFlowBuilder.findInstructionNumberByRange(instructions, elementToFind);
     }
     if (elementInstructionIndex  < 0) {
-      LOG.warn("Unable to find an instruction for " +
-               element.getClass() + "; " +
-               element.getText() + "; " +
-               element.getTextRange() + "; " +
-               PsiUtilCore.getVirtualFile(element) + "; " +
-               controlFlowScope.getClass() + "; " +
-               PerlUtil.getParentsChain(element));
+      LOG.error("Unable to find an instruction for " +
+                element.getClass() + "; " +
+                element.getText() + "; " +
+                element.getTextRange() + "; " +
+                PsiUtilCore.getVirtualFile(element) + "; " +
+                controlFlowScope.getClass() + "; " +
+                PerlUtil.getParentsChain(element));
       return UNKNOWN_VALUE;
     }
     int currentInstructionIndex = elementInstructionIndex;
