@@ -1,0 +1,20 @@
+<fold text='imports...'>use Foo::Bar some => <fold text='{hash}'>{
+  one => 'two',
+  tree => 'four'
+}</fold>;
+
+no Foo::Bar some => <fold text='{hash}'>{
+  one => 'two',
+  tree => 'four'
+}</fold>;
+
+use Foo::Bar <fold text='{import parameters}'>{
+  one => 'two',
+  tree => 'four'
+}</fold>;
+
+no Foo::Bar <fold text='{import parameters}'>{
+  one => 'two',
+  tree => 'four'
+}</fold>;</fold>
+

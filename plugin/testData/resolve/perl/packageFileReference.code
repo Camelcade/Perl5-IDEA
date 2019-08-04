@@ -1,0 +1,2 @@
+use MyTest::Constants;
+no MyTest::Constants;

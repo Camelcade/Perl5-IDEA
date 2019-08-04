@@ -1,0 +1,6 @@
+PerlNamespaceFileReference at (4,21); text in range: 'MyTest::Constants' => 1 results:
+	Perl5 at 0 in Constants.pm
+
+PerlNamespaceFileReference at (26,43); text in range: 'MyTest::Constants' => 1 results:
+	Perl5 at 0 in Constants.pm
+

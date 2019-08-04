@@ -33,7 +33,9 @@ import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
+import com.perl5.lang.perl.psi.impl.PerlNoStatementElement;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
+import com.perl5.lang.perl.psi.impl.PerlUseStatementElementBase;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -194,7 +196,7 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
     List<FoldingDescriptor> descriptors;
     descriptors = new ArrayList<>();
 
-    int currentOffset = 0;
+    int currentOffset = -1;
 
     for (PsiElement perlImport : imports) {
       if (currentOffset < perlImport.getTextOffset()) {
@@ -204,7 +206,7 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
           currentStatement = currentStatement.getParent();
         }
 
-        if (currentStatement instanceof PerlUseStatementElement || currentStatement.getFirstChild() instanceof PerlRequireExpr) {
+        if (currentStatement instanceof PerlUseStatementElementBase || currentStatement.getFirstChild() instanceof PerlRequireExpr) {
           int blockStart = currentStatement.getTextOffset();
           int blockEnd = blockStart;
           ASTNode blockNode = perlImport.getNode();
@@ -212,9 +214,9 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
           int importsNumber = 0;
 
           while (currentStatement != null) {
-            if (currentStatement instanceof PerlUseStatementElement &&
-                !((PerlUseStatementElement)currentStatement).isPragma() &&
-                !((PerlUseStatementElement)currentStatement).isVersion()
+            if (currentStatement instanceof PerlUseStatementElementBase &&
+                !((PerlUseStatementElementBase)currentStatement).isPragma() &&
+                !((PerlUseStatementElementBase)currentStatement).isVersion()
                 || currentStatement.getFirstChild() instanceof PerlRequireExpr) {
               blockEnd = currentStatement.getTextOffset() + currentStatement.getTextLength();
               importsNumber++;
@@ -383,10 +385,10 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
     @Override
     public void visitAnonHash(@NotNull PsiPerlAnonHash o) {
       PsiElement parent = o.getParent();
-      if (parent instanceof PerlUseStatementElement) {
+      if (parent instanceof PerlUseStatementElementBase) {
         addDescriptorFor(myDescriptors, myDocument, o, 0, 0, 2,
-                         ((PerlUseStatementElement)parent).getArgumentsFoldingText(),
-                         ((PerlUseStatementElement)parent).isFoldedByDefault());
+                         ((PerlUseStatementElementBase)parent).getArgumentsFoldingText(),
+                         ((PerlUseStatementElementBase)parent).isFoldedByDefault());
       }
       else {
         addDescriptorFor(myDescriptors, myDocument, o, 0, 0, 2, null, false);
@@ -404,6 +406,12 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
     public void visitUseStatement(@NotNull PerlUseStatementElement o) {
       myImports.add(o);
       super.visitUseStatement(o);
+    }
+
+    @Override
+    public void visitNoStatement(@NotNull PerlNoStatementElement o) {
+      myImports.add(o);
+      super.visitNoStatement(o);
     }
 
     @Override

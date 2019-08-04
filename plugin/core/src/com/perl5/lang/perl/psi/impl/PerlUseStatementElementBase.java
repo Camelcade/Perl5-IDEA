@@ -137,4 +137,19 @@ public abstract class PerlUseStatementElementBase extends PerlPolyNamedElement<P
   public PsiPerlExpr getExpr() {
     return findChildByClass(PsiPerlExpr.class);
   }
+
+  /**
+   * @return text that should be shown in folded block of use arguments
+   */
+  @Nullable
+  public String getArgumentsFoldingText() {
+    return getPackageProcessor().getArgumentsFoldingText(this);
+  }
+
+  /**
+   * @return true iff arguments of this use statement should be collapesed by default, e.g. group of constants definitions
+   */
+  public boolean isFoldedByDefault() {
+    return getPackageProcessor().isFoldedByDefault(this);
+  }
 }

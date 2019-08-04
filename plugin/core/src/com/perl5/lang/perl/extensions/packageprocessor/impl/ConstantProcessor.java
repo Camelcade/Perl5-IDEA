@@ -25,6 +25,7 @@ import com.perl5.lang.perl.parser.constant.psi.light.PerlLightConstantDefinition
 import com.perl5.lang.perl.psi.PsiPerlAnonHash;
 import com.perl5.lang.perl.psi.PsiPerlExpr;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
+import com.perl5.lang.perl.psi.impl.PerlUseStatementElementBase;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.stubs.imports.PerlUseStatementStub;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
@@ -84,12 +85,12 @@ public class ConstantProcessor extends PerlPragmaProcessorBase {
 
   @Nullable
   @Override
-  public String getArgumentsFoldingText(@NotNull PerlUseStatementElement useStatementElement) {
+  public String getArgumentsFoldingText(@NotNull PerlUseStatementElementBase useStatementElement) {
     return PerlBundle.message("perl.fold.ph.text.constant");
   }
 
   @Override
-  public boolean isFoldedByDefault(@NotNull PerlUseStatementElement useStatementElement) {
+  public boolean isFoldedByDefault(@NotNull PerlUseStatementElementBase useStatementElement) {
     return PerlFoldingSettings.getInstance().COLLAPSE_CONSTANT_BLOCKS;
   }
 }

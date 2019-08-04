@@ -18,6 +18,7 @@ package com.perl5.lang.perl.extensions.packageprocessor;
 
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
+import com.perl5.lang.perl.psi.impl.PerlUseStatementElementBase;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.stubs.imports.PerlUseStatementStub;
 import org.jetbrains.annotations.NotNull;
@@ -78,14 +79,14 @@ public interface PerlPackageProcessor {
    * @return text that should be shown in folded block of use arguments
    */
   @Nullable
-  default String getArgumentsFoldingText(@NotNull PerlUseStatementElement useStatementElement) {
+  default String getArgumentsFoldingText(@NotNull PerlUseStatementElementBase useStatementElement) {
     return PerlBundle.message("perl.fold.ph.text.default");
   }
 
   /**
    * @return true iff arguments of this use statement should be collapesed by default, e.g. group of constants definitions
    */
-  default boolean isFoldedByDefault(@NotNull PerlUseStatementElement useStatementElement) {
+  default boolean isFoldedByDefault(@NotNull PerlUseStatementElementBase useStatementElement) {
     return false;
   }
 }

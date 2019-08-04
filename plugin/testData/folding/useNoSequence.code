@@ -1,0 +1,4 @@
+<fold text='imports...'>use Foo::Bar;
+use Foo::Bar;
+no Foo::Bar;
+no Foo::Bar;</fold>
