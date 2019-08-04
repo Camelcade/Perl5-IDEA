@@ -1,0 +1,2 @@
+my $var = 1;
+use constant SOMETHING => "hello $var test";

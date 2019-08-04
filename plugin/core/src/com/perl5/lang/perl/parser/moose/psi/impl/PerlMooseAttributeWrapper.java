@@ -22,6 +22,7 @@ import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.containers.ContainerUtil;
@@ -51,7 +52,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNDEF_VALUE;
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.LIGHT_ATTRIBUTE_DEFINITION;
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.LIGHT_METHOD_DEFINITION;
 
@@ -73,8 +73,13 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElement<PerlMooseAtt
   }
 
   @Override
-  protected void visitWrapper(@NotNull PerlVisitor visitor) {
-    visitor.visitMooseAttributeWrapper(this);
+  public void accept(@NotNull PsiElementVisitor visitor) {
+    if (visitor instanceof PerlVisitor) {
+      ((PerlVisitor)visitor).visitMooseAttributeWrapper(this);
+    }
+    else {
+      super.accept(visitor);
+    }
   }
 
   @NotNull

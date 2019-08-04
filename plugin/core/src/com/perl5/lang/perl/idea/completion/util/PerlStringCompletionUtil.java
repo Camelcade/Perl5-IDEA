@@ -132,6 +132,11 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
         }
 
         @Override
+        protected boolean shouldVisitLightElements() {
+          return true;
+        }
+
+        @Override
         public void visitPerlSubDefinitionElement(@NotNull PerlSubDefinitionElement o) {
           if (contextPackageName.equals(o.getNamespaceName())) {
             result.addElement(LookupElementBuilder.create(o, o.getSubName()));

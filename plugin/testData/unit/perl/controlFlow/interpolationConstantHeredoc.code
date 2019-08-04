@@ -1,0 +1,4 @@
+my $var = 1;
+use constant SOME => <<EOM;
+hello $var test
+EOM

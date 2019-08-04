@@ -1,0 +1,18 @@
+use constant SOME_SQL => <<SQL;
+SELECT
+  '<field_token>'                               AS TOKEN,
+  field1                                        AS FIELD1,
+  field2                                        AS FIELD2,
+  IF(field2 IN ($Cfg::cfg_scalar), TRUE, FALSE) AS FIELD2_OK,
+  @{[ join ', ', @Cfg::cf<caret>g_fields_arr ]}
+FROM <table_token>
+WHERE <conditions_token>
+SQL
+----------
+@Cfg::cfg_fields_arr
+PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 294 in interpolationHeredocArray.pl
+Value unknown
+----------
+Resolved
+----------
+Value unknown

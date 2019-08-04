@@ -1,0 +1,14 @@
+use constant SOME_CONSTANT => <<MULTI;
+...
+MULTI
+
+use constant SOME_SQL => <<SQL;
+SELECT
+  '<field_token>'                               AS TOKEN,
+  field1                                        AS FIELD1,
+  field2                                        AS FIELD2,
+  IF(field2 IN ($Cfg::cfg_scalar), TRUE, FALSE) AS FIELD2_OK,
+  @{[ join ', ', @Cfg::cfg_fields_arr ]}
+FROM <table_token>
+WHERE <conditions_token>
+SQL

@@ -1,0 +1,4 @@
+my $var = 1;
+say <<EOM;
+"hello $v<caret>ar test";
+EOM

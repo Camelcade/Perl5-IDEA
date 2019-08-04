@@ -36,6 +36,11 @@ public class PerlNamespaceRecursiveInheritanceInspection extends PerlInspection 
     return new PerlVisitor() {
 
       @Override
+      protected boolean shouldVisitLightElements() {
+        return true;
+      }
+
+      @Override
       public void visitPerlNamespaceDefinitionWithIdentifier(@NotNull PerlNamespaceDefinitionWithIdentifier o) {
         PsiElement nameIdentifier = o.getNameIdentifier();
         if (nameIdentifier == null) {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -81,14 +81,21 @@ public abstract class PerlIntroduceTargetOccurrencesCollector {
 
     myOccurrences = new ArrayList<>();
 
-    searchScope.accept(new PerlRecursiveVisitor() {
-      @Override
-      public void visitElement(@NotNull PsiElement element) {
-        if (!isTargetableElement(element) || !collectOccurrences(element)) {
-          super.visitElement(element);
+    searchScope.accept(
+      new PerlRecursiveVisitor() {
+        @Override
+        public void visitElement(@NotNull PsiElement element) {
+          if (!isTargetableElement(element) || !collectOccurrences(element)) {
+            super.visitElement(element);
+          }
+        }
+
+        @Override
+        protected boolean shouldVisitLightElements() {
+          return true;
         }
       }
-    });
+    );
     return getOccurrences();
   }
 

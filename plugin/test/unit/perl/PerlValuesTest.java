@@ -33,6 +33,18 @@ public class PerlValuesTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testInterpolationString() {doTest();}
+
+  @Test
+  public void testInterpolationHeredoc() {doTest();}
+
+  @Test
+  public void testInterpolationConstantHeredocSecond() {doTest();}
+
+  @Test
+  public void testInterpolationHeredocArray() {doTest();}
+
+  @Test
   public void testOuterVariable() {doTest();}
 
   @Test

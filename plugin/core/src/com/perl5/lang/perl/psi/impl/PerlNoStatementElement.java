@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.psi.impl;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
@@ -49,7 +50,12 @@ public class PerlNoStatementElement extends PerlUseStatementElementBase {
   }
 
   @Override
-  protected void visitWrapper(@NotNull PerlVisitor visitor) {
-    visitor.visitNoStatement(this);
+  public void accept(@NotNull PsiElementVisitor visitor) {
+    if (visitor instanceof PerlVisitor) {
+      ((PerlVisitor)visitor).visitNoStatement(this);
+    }
+    else {
+      super.accept(visitor);
+    }
   }
 }

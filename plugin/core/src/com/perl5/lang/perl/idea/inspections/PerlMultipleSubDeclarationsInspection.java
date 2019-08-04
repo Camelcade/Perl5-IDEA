@@ -33,6 +33,11 @@ public class PerlMultipleSubDeclarationsInspection extends PerlInspection {
     return new PerlVisitor() {
 
       @Override
+      protected boolean shouldVisitLightElements() {
+        return true;
+      }
+
+      @Override
       public void visitSubDeclarationElement(@NotNull PerlSubDeclarationElement o) {
         Project project = o.getProject();
         String canonicalName = o.getCanonicalName();

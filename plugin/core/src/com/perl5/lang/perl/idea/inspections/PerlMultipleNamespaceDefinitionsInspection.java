@@ -44,6 +44,11 @@ public class PerlMultipleNamespaceDefinitionsInspection extends PerlInspection {
           registerProblem(holder, o.getNameIdentifier(), "Multiple namespace definitions found");
         }
       }
+
+      @Override
+      protected boolean shouldVisitLightElements() {
+        return true;
+      }
     };
   }
 }

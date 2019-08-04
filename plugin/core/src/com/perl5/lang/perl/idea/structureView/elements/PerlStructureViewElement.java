@@ -177,6 +177,11 @@ public abstract class PerlStructureViewElement extends PsiTreeElementBase<PsiEle
             result.add(new PerlNamespaceStructureViewElement(o));
             super.visitNamespaceDefinitionElement(o);
           }
+
+          @Override
+          protected boolean shouldVisitLightElements() {
+            return true;
+          }
         });
       }
     }
@@ -306,6 +311,11 @@ public abstract class PerlStructureViewElement extends PsiTreeElementBase<PsiEle
             result.add(new PerlSubStructureViewElement(child));
           }
           super.visitSubDeclarationElement(child);
+        }
+
+        @Override
+        protected boolean shouldVisitLightElements() {
+          return true;
         }
 
         @Override

@@ -33,6 +33,36 @@ public class PerlControlFlowTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testInterpolationArray() {
+    doTest();
+  }
+
+  @Test
+  public void testInterpolationConst() {
+    doTest();
+  }
+
+  @Test
+  public void testInterpolationConstantHeredoc() {
+    doTest();
+  }
+
+  @Test
+  public void testInterpolationConstantHeredocSecond() {
+    doTest();
+  }
+
+  @Test
+  public void testInterpolationHeredoc() {
+    doTest();
+  }
+
+  @Test
+  public void testInterpolationString() {
+    doTest();
+  }
+
+  @Test
   public void testIssue2073() {doTest();}
 
   @Test

@@ -134,6 +134,11 @@ public class PerlSubCompletionUtil {
     PsiFile containingFile = subDefinition.getContainingFile();
     containingFile.accept(new PerlRecursiveVisitor() {
       @Override
+      protected boolean shouldVisitLightElements() {
+        return true;
+      }
+
+      @Override
       public void visitMethod(@NotNull PsiPerlMethod method) {
         PerlCallValue methodValue = PerlCallValue.from(method);
         if (methodValue == null) {

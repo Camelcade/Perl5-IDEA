@@ -119,6 +119,20 @@ public class PerlVisitor extends PsiPerlVisitor {
 
   public void visitPolyNamedElement(@NotNull PerlPolyNamedElement o) {
     visitElement(o);
+    visitLightElements(o);
+  }
+
+  protected final void visitLightElements(@NotNull PerlPolyNamedElement<?> o) {
+    if (!shouldVisitLightElements()) {
+      return;
+    }
+    for (PerlDelegatingLightNamedElement lightNamedElement : o.getLightElements()) {
+      lightNamedElement.accept(this);
+    }
+  }
+
+  protected boolean shouldVisitLightElements() {
+    return false;
   }
 
   public void visitLightNamedElement(@NotNull PerlDelegatingLightNamedElement o) {
@@ -126,11 +140,11 @@ public class PerlVisitor extends PsiPerlVisitor {
   }
 
   public void visitUseStatement(@NotNull PerlUseStatementElement o) {
-    visitElement(o);
+    visitPolyNamedElement(o);
   }
 
   public void visitNoStatement(@NotNull PerlNoStatementElement o) {
-    visitElement(o);
+    visitPolyNamedElement(o);
   }
 
   @Override

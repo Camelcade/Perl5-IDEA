@@ -1,0 +1,12 @@
+my $var = 1;
+say <<EOM;
+"hello $v<caret>ar test";
+EOM
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 31 in interpolationHeredoc.pl
+1
+----------
+Resolved
+----------
+1

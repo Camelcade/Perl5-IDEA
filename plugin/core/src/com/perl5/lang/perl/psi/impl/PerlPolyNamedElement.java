@@ -87,23 +87,12 @@ public abstract class PerlPolyNamedElement<Stub extends PerlPolyNamedElementStub
    * @see Divider#divideInsideAndOutsideInOneRoot(com.intellij.psi.PsiFile, com.intellij.openapi.util.TextRange, com.intellij.openapi.util.TextRange, java.util.List, java.util.List, java.util.List, java.util.List, java.util.List, java.util.List, boolean)
    */
   @Override
-  public final void accept(@NotNull PsiElementVisitor visitor) {
+  public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof PerlVisitor) {
-      visitWrapper((PerlVisitor)visitor);
-      acceptLightElements((PerlVisitor)visitor);
+      ((PerlVisitor)visitor).visitPolyNamedElement(this);
     }
     else {
       super.accept(visitor);
-    }
-  }
-
-  protected void visitWrapper(@NotNull PerlVisitor visitor) {
-    visitor.visitPolyNamedElement(this);
-  }
-
-  protected final void acceptLightElements(@NotNull PerlVisitor visitor) {
-    for (PerlDelegatingLightNamedElement lightNamedElement : getLightElements()) {
-      lightNamedElement.accept(visitor);
     }
   }
 

@@ -53,6 +53,11 @@ public class PerlMultipleSubDefinitionsInspection extends PerlInspection {
         }
         super.visitPerlSubDefinitionElement(o);
       }
+
+      @Override
+      protected boolean shouldVisitLightElements() {
+        return true;
+      }
     };
   }
 }

@@ -1,0 +1,10 @@
+my $var = 1;
+say "hello $v<caret>ar test";
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 24 in interpolationString.pl
+1
+----------
+Resolved
+----------
+1

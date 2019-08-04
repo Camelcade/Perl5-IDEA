@@ -49,6 +49,11 @@ public class PerlDeprecatedInspection extends PerlInspection {
       }
 
       @Override
+      protected boolean shouldVisitLightElements() {
+        return true;
+      }
+
+      @Override
       public void visitVariableNameElement(@NotNull PerlVariableNameElement o) {
         PsiElement parent = o.getParent();
         if (parent instanceof PerlVariable) {

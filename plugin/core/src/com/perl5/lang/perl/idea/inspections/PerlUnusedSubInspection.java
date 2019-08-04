@@ -60,6 +60,11 @@ public class PerlUnusedSubInspection extends PerlInspection {
       }
 
       @Override
+      protected boolean shouldVisitLightElements() {
+        return true;
+      }
+
+      @Override
       public void visitSubDeclarationElement(@NotNull PerlSubDeclarationElement o) {
         PsiElement subNameElement = o.getNameIdentifier();
         if (subNameElement != null &&

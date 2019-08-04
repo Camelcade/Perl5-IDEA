@@ -49,6 +49,11 @@ public class PerlClashedNamespacesInspection extends PerlInspection {
           registerProblem(holder, nameIdentifier, "Namespace definition clashes with built-in namespace");
         }
       }
+
+      @Override
+      protected boolean shouldVisitLightElements() {
+        return true;
+      }
     };
   }
 }

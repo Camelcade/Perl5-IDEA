@@ -1,0 +1,23 @@
+my $var = 42;
+use constant SOME_CONSTANT => <<MULTI;
+...
+MULTI
+
+use constant SOME_SQL => <<SQL;
+SELECT
+  '<field_token>'                               AS TOKEN,
+  field1                                        AS FIELD1,
+  field2                                        AS FIELD2,
+  IF(field2 IN ($Cfg::cfg_scalar), TRUE, FALSE) AS FIELD2_OK,
+  @{[ join ', ', $va<caret>r ]}
+FROM <table_token>
+WHERE <conditions_token>
+SQL
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 358 in interpolationConstantHeredocSecond.pl
+42
+----------
+Resolved
+----------
+42
