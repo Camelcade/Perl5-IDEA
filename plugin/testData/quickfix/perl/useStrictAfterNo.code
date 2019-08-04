@@ -1,0 +1,6 @@
+package FooBar42;
+
+no warnings;
+no Foo::Bar;
+
+say 'hi';

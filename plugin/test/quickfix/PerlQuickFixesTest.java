@@ -41,7 +41,26 @@ public class PerlQuickFixesTest extends PerlLightTestCase {
 
   @Test
   public void testUseStrictSimple() {
+    doTestAddUseStrict();
+  }
+
+  private void doTestAddUseStrict() {
     doTestAnnotationQuickFix(PerlUseStrictInspection.class, PerlBundle.message("perl.quickfix.add.use.name", "strict"));
+  }
+
+  @Test
+  public void testUseStrictAfterUse() {
+    doTestAddUseStrict();
+  }
+
+  @Test
+  public void testUseStrictAfterNo() {
+    doTestAddUseStrict();
+  }
+
+  @Test
+  public void testUseStrictAfterUseNo() {
+    doTestAddUseStrict();
   }
 
   @Test

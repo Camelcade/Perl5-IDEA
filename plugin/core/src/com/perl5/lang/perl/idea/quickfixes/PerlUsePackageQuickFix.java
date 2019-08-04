@@ -30,7 +30,7 @@ import com.perl5.PerlBundle;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.psi.PsiPerlNamespaceContent;
 import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
-import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
+import com.perl5.lang.perl.psi.impl.PerlUseStatementElementBase;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.Nls;
@@ -69,9 +69,9 @@ public class PerlUsePackageQuickFix implements LocalQuickFix {
     PsiElement afterAnchor = null;
     PsiElement beforeAnchor = null;
 
-    PsiElement baseUseStatement = PsiTreeUtil.findChildOfType(newStatementContainer, PerlUseStatementElement.class);
+    PsiElement baseUseStatement = PsiTreeUtil.findChildOfType(newStatementContainer, PerlUseStatementElementBase.class);
     if (baseUseStatement != null) {
-      if (((PerlUseStatementElement)baseUseStatement).isPragmaOrVersion()) // pragma or version
+      if (((PerlUseStatementElementBase)baseUseStatement).isPragmaOrVersion()) // pragma or version
       {
         while (true) {
           // trying to find next use statement
@@ -83,9 +83,8 @@ public class PerlUsePackageQuickFix implements LocalQuickFix {
 
           }
 
-          if (nextStatement instanceof PerlUseStatementElement &&
-              ((PerlUseStatementElement)nextStatement).isPragmaOrVersion())    // found more use pragma/version
-          {
+          if (nextStatement instanceof PerlUseStatementElementBase &&
+              ((PerlUseStatementElementBase)nextStatement).isPragmaOrVersion()) {    // found more use pragma/version
             baseUseStatement = nextStatement;
           }
           else {
