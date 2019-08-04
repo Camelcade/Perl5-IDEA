@@ -42,9 +42,7 @@ public class PerlNamespaceElementImpl extends PerlLeafPsiElementWithReferences i
   public PsiReference[] computeReferences() {
     PsiElement nameSpaceContainer = getParent();
 
-    if (nameSpaceContainer instanceof PerlUseStatementElement
-        || nameSpaceContainer instanceof PsiPerlRequireExpr
-      ) {
+    if (nameSpaceContainer instanceof PerlUseStatementElementBase || nameSpaceContainer instanceof PsiPerlRequireExpr) {
       return new PsiReference[]{new PerlNamespaceFileReference(this)};
     }
     else if (nameSpaceContainer instanceof PerlNamespaceDefinitionWithIdentifier) {
