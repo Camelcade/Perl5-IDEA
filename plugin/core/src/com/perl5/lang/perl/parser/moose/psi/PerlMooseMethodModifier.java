@@ -16,9 +16,12 @@
 
 package com.perl5.lang.perl.parser.moose.psi;
 
-import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.extensions.parser.PerlReferencesProvider;
+import com.perl5.lang.perl.psi.PsiPerlExpr;
+import org.jetbrains.annotations.Nullable;
 
 
-public interface PerlMooseMethodModifier extends PsiElement, PerlReferencesProvider {
+public interface PerlMooseMethodModifier extends PsiPerlExpr, PerlReferencesProvider {
+  @Nullable
+  PsiPerlExpr getExpr();
 }

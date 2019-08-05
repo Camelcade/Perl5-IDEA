@@ -19,13 +19,15 @@ package com.perl5.lang.perl.parser.moose.psi.impl;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseMethodModifier;
 import com.perl5.lang.perl.parser.moose.psi.PerlMoosePsiUtil;
-import com.perl5.lang.perl.psi.impl.PsiPerlStatementImpl;
+import com.perl5.lang.perl.psi.PsiPerlExpr;
+import com.perl5.lang.perl.psi.impl.PsiPerlExprImpl;
 import org.jetbrains.annotations.Nullable;
 
 
-public class PerlMooseMethodModifierImpl extends PsiPerlStatementImpl implements PerlMooseMethodModifier {
+public class PerlMooseMethodModifierImpl extends PsiPerlExprImpl implements PerlMooseMethodModifier {
   public PerlMooseMethodModifierImpl(ASTNode node) {
     super(node);
   }
@@ -34,5 +36,11 @@ public class PerlMooseMethodModifierImpl extends PsiPerlStatementImpl implements
   @Override
   public PsiReference[] getReferences(PsiElement element) {
     return PerlMoosePsiUtil.getModifiersNameReference(getExpr(), element);
+  }
+
+  @Override
+  @Nullable
+  public PsiPerlExpr getExpr() {
+    return PsiTreeUtil.getChildOfType(this, PsiPerlExpr.class);
   }
 }

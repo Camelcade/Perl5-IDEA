@@ -1,0 +1,5 @@
+$_ = 42;
+
+around something => sub{
+  say $_;
+};

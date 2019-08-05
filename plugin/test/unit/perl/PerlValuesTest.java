@@ -33,6 +33,24 @@ public class PerlValuesTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testVariableInAnonSub() {doTest();}
+
+  @Test
+  public void testVariableInAnonSubAfter() {doTest();}
+
+  @Test
+  public void testVariableInAnonSubAround() {doTest();}
+
+  @Test
+  public void testVariableInAnonSubAugment() {doTest();}
+
+  @Test
+  public void testVariableInAnonSubBefore() {doTest();}
+
+  @Test
+  public void testVariableInAnonSubOverride() {doTest();}
+
+  @Test
   public void testRecursiveCall() {doTest();}
 
   @Test

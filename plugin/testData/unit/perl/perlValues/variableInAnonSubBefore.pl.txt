@@ -1,0 +1,13 @@
+$_ = 42;
+
+before something => sub{
+  say $<caret>_;
+};
+----------
+$_
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 41 in variableInAnonSubBefore.pl
+42
+----------
+Resolved
+----------
+42
