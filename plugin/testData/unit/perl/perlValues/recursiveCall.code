@@ -1,0 +1,6 @@
+sub something{
+    return something @_, 1;
+}
+
+my $var = something 1,2;
+say $v<caret>ar;

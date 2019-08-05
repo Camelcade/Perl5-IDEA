@@ -33,6 +33,9 @@ public class PerlValuesTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testRecursiveCall() {doTest();}
+
+  @Test
   public void testInterpolationString() {doTest();}
 
   @Test

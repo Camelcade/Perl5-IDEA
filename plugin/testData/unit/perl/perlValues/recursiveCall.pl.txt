@@ -1,0 +1,14 @@
+sub something{
+    return something @_, 1;
+}
+
+my $var = something 1,2;
+say $v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 75 in recursiveCall.pl
+scalar main::something(1, 2)
+----------
+Resolved
+----------
+Value unknown

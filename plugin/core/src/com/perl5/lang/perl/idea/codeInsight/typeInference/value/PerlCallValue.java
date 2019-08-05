@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.RecursionManager;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
@@ -85,7 +86,7 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
     PerlOneOfValue.Builder builder = PerlOneOfValue.builder();
     boolean[] hasTargets = new boolean[]{false};
     RecursionManager.doPreventingRecursion(
-      new Object[]{resolver.getResolveScope(), this}, true, () -> {
+      Pair.create(resolver.getResolveScope(), this), true, () -> {
         processCallTargets(resolver.getProject(), resolver.getResolveScope(), resolver.getContextFile(), namespaceNames, subNames, it -> {
           hasTargets[0] = true;
             if (it instanceof PerlSubElement) {
