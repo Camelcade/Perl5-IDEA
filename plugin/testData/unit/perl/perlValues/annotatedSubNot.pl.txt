@@ -1,0 +1,14 @@
+sub something{
+  42
+}
+
+my $var = something();
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 46 in annotatedSubNot.pl
+scalar main::something()
+----------
+Resolved
+----------
+42

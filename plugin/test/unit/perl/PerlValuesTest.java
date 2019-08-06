@@ -33,6 +33,15 @@ public class PerlValuesTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testAnnotatedSub() {doTest();}
+
+  @Test
+  public void testAnnotatedSubIndirect() {doTest();}
+
+  @Test
+  public void testAnnotatedSubNot() {doTest();}
+
+  @Test
   public void testVariableInAnonSub() {doTest();}
 
   @Test

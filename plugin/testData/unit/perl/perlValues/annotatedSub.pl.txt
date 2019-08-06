@@ -1,0 +1,16 @@
+#@returns Foo::Bar
+sub something{
+  42
+}
+
+my $var = something();
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 65 in annotatedSub.pl
+scalar main::something()
+----------
+Resolved
+----------
+OneOf[42,
+Foo::Bar]

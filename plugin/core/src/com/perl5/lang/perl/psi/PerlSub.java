@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.psi;
 
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlOneOfValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues;
 import com.perl5.lang.perl.psi.properties.PerlPackageMember;
@@ -103,10 +104,14 @@ public interface PerlSub extends PerlDeprecatable, PerlPackageMember {
   @NotNull
   default PerlValue getReturnValue() {
     PerlValue valueFromCode = getReturnValueFromCode();
-    if (!valueFromCode.isUnknown()) {
+    PerlValue annotationsValue = getReturnValueFromAnnotations();
+    if (valueFromCode.isUnknown()) {
+      return annotationsValue;
+    }
+    if (annotationsValue.isUnknown()) {
       return valueFromCode;
     }
-    return getReturnValueFromAnnotations();
+    return PerlOneOfValue.builder().addVariant(valueFromCode).addVariant(annotationsValue).build();
   }
 
   @NotNull
