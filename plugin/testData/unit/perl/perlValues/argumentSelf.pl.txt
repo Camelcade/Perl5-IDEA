@@ -6,7 +6,8 @@ sub something{
 ----------
 $self
 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 38 in argumentSelf.pl
-ArrayItem: SUB_ARGUMENTS[0]
+OneOf[ArrayItem: SUB_ARGUMENTS[0],
+main]
 ----------
 Resolved
 ----------

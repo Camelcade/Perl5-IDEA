@@ -6,8 +6,10 @@ sub something{
 ----------
 $var
 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 46 in argumentTyped.pl
-ArrayItem: SUB_ARGUMENTS[0](fallback to Foo::Bar)
+OneOf[ArrayItem: SUB_ARGUMENTS[0],
+Foo::Bar]
 ----------
 Resolved
 ----------
-Foo::Bar
+OneOf[Foo::Bar,
+main]

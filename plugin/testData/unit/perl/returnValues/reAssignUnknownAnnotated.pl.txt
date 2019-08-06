@@ -5,4 +5,4 @@ sub so<caret>me{
   $var;
 }
 ----------
-ArrayItem: SUB_ARGUMENTS[0](fallback to Foo::Baz)
+OneOf: [ArrayItem: SUB_ARGUMENTS[0], Foo::Baz]

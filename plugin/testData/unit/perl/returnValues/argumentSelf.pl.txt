@@ -4,4 +4,4 @@
   $self;
 }
 ----------
-ArrayItem: SUB_ARGUMENTS[0]
+OneOf: [ArrayItem: SUB_ARGUMENTS[0], main]

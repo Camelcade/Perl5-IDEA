@@ -33,12 +33,16 @@ import com.intellij.util.PairProcessor;
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
 import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlControlFlowBuilder;
 import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlMutationInstruction;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.*;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlOneOfValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlBuiltInVariable;
 import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.references.scopes.PerlVariableDeclarationSearcher;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlUtil;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -316,15 +320,17 @@ public class PerlResolveUtil {
       return CONTINUE;
     });
 
-    PerlValue result = valueBuilder.build();
 
     if (lexicalDeclaration != null) {
       PerlValue declaredValue = lexicalDeclaration.getDeclaredValue();
       if( !declaredValue.isUnknown()){
-        return PerlFallbackValue.create(result, declaredValue);
+        valueBuilder.addVariant(declaredValue);
+      }
+      if (lexicalDeclaration.isInvocantDeclaration() || lexicalDeclaration.isSelf()) {
+        valueBuilder.addVariant(PerlPackageUtil.getExpectedSelfValue(lexicalDeclaration));
       }
     }
-    return result;
+    return valueBuilder.build();
   }
 
   /**

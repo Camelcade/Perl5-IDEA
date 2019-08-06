@@ -1,0 +1,27 @@
+package Some::Class;
+
+sub something{
+  42;
+}
+
+package main;
+
+sub useClass{
+  my(
+    #@type Some::Class
+    $class
+  ) = @_;
+
+  my $var = $class->something;
+  $v<caret>ar;
+}
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 159 in issue2092First.pl
+scalar OneOf[ArrayItem: SUB_ARGUMENTS[1],
+Some::Class,
+main]->something()
+----------
+Resolved
+----------
+42

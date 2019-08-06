@@ -85,17 +85,7 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
       return UNKNOWN_VALUE;
     }
 
-    PerlValue inferredValue = PerlResolveUtil.inferVariableValue(this);
-    if (!inferredValue.isUnknown()) {
-      return inferredValue;
-    }
-
-    PerlVariableDeclarationElement lexicalDeclaration = PerlResolveUtil.getLexicalDeclaration(this);
-    if (lexicalDeclaration != null && (lexicalDeclaration.isInvocantDeclaration() || lexicalDeclaration.isSelf())) {
-      return PerlPackageUtil.getExpectedSelfValue(lexicalDeclaration);
-    }
-
-    return lexicalDeclaration == null ? UNKNOWN_VALUE : lexicalDeclaration.getDeclaredValue();
+    return PerlResolveUtil.inferVariableValue(this);
   }
 
   @Override

@@ -1,0 +1,17 @@
+package Some::Class;
+
+sub something{
+  42;
+}
+
+package main;
+
+sub useClass{
+  my(
+    #@type Some::Class
+    $class
+  ) = @_;
+
+  my $var = $class->something;
+  $v<caret>ar;
+}

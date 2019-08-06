@@ -129,9 +129,6 @@ public class PerlValueDeserializer {
     else if (valueId == SUBLIST_ID) {
       return new PerlSublistValue(this);
     }
-    else if( valueId == FALLBACK_ID){
-      return new PerlFallbackValue(this);
-    }
     else if( valueId == SMART_GETTER_ID){
       return new PerlSmartGetterValue(this);
     }

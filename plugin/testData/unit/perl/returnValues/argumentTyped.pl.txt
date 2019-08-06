@@ -4,4 +4,4 @@
   $var;
 }
 ----------
-ArrayItem: SUB_ARGUMENTS[0](fallback to Foo::Bar)
+OneOf: [ArrayItem: SUB_ARGUMENTS[0], Foo::Bar]

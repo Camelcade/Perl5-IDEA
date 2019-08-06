@@ -35,9 +35,6 @@ public class PerlSimpleValueResolver extends PerlValueResolver {
     if (perlValue == PerlValues.ARGUMENTS_VALUE) {
       return PerlValuesManager.intern(PerlArrayValue.create(PerlPackageUtil.getExpectedSelfValue(myContextElement)));
     }
-    if( perlValue instanceof PerlFallbackValue && ((PerlFallbackValue)perlValue).getBaseValue().equals(PerlValues.FIRST_ARGUMENT_VALUE)){
-      return ((PerlFallbackValue)perlValue).getParameter();
-    }
     return super.substitute(perlValue);
   }
 

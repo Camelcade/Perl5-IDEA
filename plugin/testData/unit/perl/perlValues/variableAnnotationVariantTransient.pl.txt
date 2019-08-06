@@ -18,7 +18,8 @@ $otherv<caret>ar;
 ----------
 $othervar
 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 151 in variableAnnotationVariantTransient.pl
-scalar main::some_unknown_sub()(fallback to Foo::Baz)
+OneOf[Foo::Baz,
+scalar main::some_unknown_sub()]
 ----------
 Resolved
 ----------
