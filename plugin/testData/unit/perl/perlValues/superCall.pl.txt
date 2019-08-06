@@ -24,5 +24,6 @@ scalar Child->new(foo, 42)
 ----------
 Resolved
 ----------
-OneOf[Ref[Hash(foo => 42), blessed with Child],
+OneOf[Child,
+Ref[Hash(foo => 42), blessed with Child],
 Ref[Hash(foo => 42), blessed with Parent]]

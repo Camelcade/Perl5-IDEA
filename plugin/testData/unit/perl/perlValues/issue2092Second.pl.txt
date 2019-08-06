@@ -1,0 +1,20 @@
+package Some::Class;
+
+sub new{
+  bless my $self = {}, shift;
+  return $self;
+}
+
+package main;
+
+my $var = Some::Class::->new('test2');
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 134 in issue2092Second.pl
+scalar Some::Class->new(test2)
+----------
+Resolved
+----------
+OneOf[Ref[Hash()],
+Some::Class]

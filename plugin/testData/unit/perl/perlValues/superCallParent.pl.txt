@@ -23,4 +23,5 @@ scalar Parent->new()
 ----------
 Resolved
 ----------
-Ref[Hash(), blessed with Parent]
+OneOf[Parent,
+Ref[Hash(), blessed with Parent]]

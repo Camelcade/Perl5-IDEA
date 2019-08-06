@@ -1,0 +1,11 @@
+package Some::Class;
+
+sub new{
+  bless my $self = {}, shift;
+  return $self;
+}
+
+package main;
+
+my $var = Some::Class::->new('test2');
+$v<caret>ar;

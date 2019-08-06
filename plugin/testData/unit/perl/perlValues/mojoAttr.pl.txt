@@ -8,5 +8,6 @@ scalar Mojolicious->new()->routes()->namespaces(Value unknown)
 ----------
 Resolved
 ----------
-OneOf[Ref[Hash(), blessed with Mojolicious::Routes],
+OneOf[Mojolicious::Routes,
+Ref[Hash(), blessed with Mojolicious::Routes],
 Ref[Hash(Value unknown), blessed with Mojolicious::Routes]]

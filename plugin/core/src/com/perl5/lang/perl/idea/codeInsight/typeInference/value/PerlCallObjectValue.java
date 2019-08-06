@@ -107,7 +107,7 @@ public final class PerlCallObjectValue extends PerlCallValue {
                                     @NotNull PerlOneOfValue.Builder builder,
                                     @NotNull PerlValue resolvedNamespaceValue,
                                     @NotNull PerlValueResolver resolver) {
-    if (subNames.size() == 1 && "new".equals(subNames.iterator().next()) && builder.isEmpty()) {
+    if (subNames.size() == 1 && "new".equals(subNames.iterator().next())) {
       builder.addVariant(resolvedNamespaceValue);
     }
   }
