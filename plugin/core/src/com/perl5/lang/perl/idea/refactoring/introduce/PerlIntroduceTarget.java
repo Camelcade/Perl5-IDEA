@@ -46,7 +46,7 @@ public class PerlIntroduceTarget extends PsiIntroduceTarget<PsiElement> {
 
   @Override
   public String toString() {
-    return getPlace() + ";" + getTextRange() + "; " + render();
+    return isValid() ? getPlace() + ";" + getTextRange() + "; " + render() : "INVALID";
   }
 
   @NotNull
