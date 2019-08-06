@@ -98,7 +98,11 @@ public class PerlDocUtil implements PerlElementTypes {
       PsiFile targetFile = PodFileUtil.getPodOrPackagePsiByDescriptor(project, descriptor);
 
       if (targetFile == null) {
-        targetFile = origin.getContainingFile().getViewProvider().getPsi(PodLanguage.INSTANCE);
+        PsiFile containingFile = origin.getContainingFile();
+        if (containingFile == null) {
+          return null;
+        }
+        targetFile = containingFile.getViewProvider().getPsi(PodLanguage.INSTANCE);
       }
 
       if (targetFile != null) {
