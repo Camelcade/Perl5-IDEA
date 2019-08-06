@@ -10,6 +10,11 @@ scalar main::new()
 ----------
 Resolved
 ----------
-OneOf[Ref[Hash(), blessed with main],
+OneOf[Mojolicious,
+Ref[Hash(), blessed with Mojo::Base],
+Ref[Hash(), blessed with main],
+Ref[Hash(Value unknown), blessed with Mojo::Base],
 Ref[Hash(Value unknown), blessed with main],
-Ref[Hash(moniker => dummy), blessed with main]]
+Ref[Hash(moniker => dummy), blessed with Mojo::Base],
+Ref[Hash(moniker => dummy), blessed with main],
+main]

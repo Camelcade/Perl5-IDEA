@@ -10,5 +10,6 @@ scalar main::helper()
 ----------
 Resolved
 ----------
-OneOf[Ref[Hash(), blessed with Mojolicious::Renderer],
+OneOf[Mojolicious::Renderer,
+Ref[Hash(), blessed with Mojolicious::Renderer],
 Ref[Hash(Value unknown), blessed with Mojolicious::Renderer]]
