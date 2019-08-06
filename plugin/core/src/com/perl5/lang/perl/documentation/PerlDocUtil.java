@@ -94,32 +94,32 @@ public class PerlDocUtil implements PerlElementTypes {
   public static PsiElement resolveDescriptor(@Nullable PodLinkDescriptor descriptor, @NotNull PsiElement origin, boolean exactMatch) {
     final Project project = origin.getProject();
 
-    if (descriptor != null) {
-      PsiFile targetFile = PodFileUtil.getPodOrPackagePsiByDescriptor(project, descriptor);
-
-      if (targetFile == null) {
-        PsiFile containingFile = origin.getContainingFile();
-        if (containingFile == null) {
-          return null;
-        }
-        targetFile = containingFile.getViewProvider().getPsi(PodLanguage.INSTANCE);
-      }
-
-      if (targetFile != null) {
-        if (descriptor.getSection() == null) {
-          return targetFile;
-        }
-        else {    // seek section
-          PodDocumentPattern pattern = PodDocumentPattern.headingAndItemPattern(descriptor.getSection())
-            .withIndexPattern(descriptor.getSection());
-          if (exactMatch) {
-            pattern.withExactMatch();
-          }
-          return searchPodElement(targetFile, pattern);
-        }
-      }
+    if (descriptor == null) {
+      return null;
     }
-    return null;
+    PsiFile targetFile = PodFileUtil.getPodOrPackagePsiByDescriptor(project, descriptor);
+
+    if (targetFile == null) {
+      PsiFile containingFile = origin.getContainingFile();
+      if (containingFile == null) {
+        return null;
+      }
+      targetFile = containingFile.getViewProvider().getPsi(PodLanguage.INSTANCE);
+    }
+
+    if (targetFile == null) {
+      return null;
+    }
+    if (descriptor.getSection() == null) {
+      return targetFile;
+    }
+
+    PodDocumentPattern pattern = PodDocumentPattern.headingAndItemPattern(descriptor.getSection())
+      .withIndexPattern(descriptor.getSection());
+    if (exactMatch) {
+      pattern.withExactMatch();
+    }
+    return searchPodElement(targetFile, pattern);
   }
 
   public static PsiElement getRegexModifierDoc(PsiElement element) {
