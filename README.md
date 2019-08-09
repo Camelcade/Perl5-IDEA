@@ -1,6 +1,8 @@
 # Perl5 plugins for IntelliJ IDEA
 
-[![Build Status](https://travis-ci.org/Camelcade/Perl5-IDEA.svg?branch=master)](https://travis-ci.org/Camelcade/Perl5-IDEA) [![Coverage Status](https://coveralls.io/repos/github/Camelcade/Perl5-IDEA/badge.svg?branch=master)](https://coveralls.io/github/Camelcade/Perl5-IDEA?branch=master)
+[![Build Status](https://travis-ci.org/Camelcade/Perl5-IDEA.svg?branch=master)](https://travis-ci.org/Camelcade/Perl5-IDEA) 
+[![Coverage Status](https://coveralls.io/repos/github/Camelcade/Perl5-IDEA/badge.svg?branch=master)](https://coveralls.io/github/Camelcade/Perl5-IDEA?branch=master)
+[![Chat on gitter](https://badges.gitter.im/Camelcade/Perl5-IDEA.png)](https://gitter.im/IntelliJ-Plugin-Perl5/Lobby)
 
 This repo contains a bundle of Perl5-related plugins for [JetBrains IDEs](https://www.jetbrains.com/). 
 
