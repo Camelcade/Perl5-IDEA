@@ -8,7 +8,7 @@ sub foo {
     my ($self) = @_;
 
     try {
-        die Some::Class->new(code => 404 ) if $self->not_found;
+        die Some::Class::->new(code => 404 ) if $self->not_found;
         return "return value from foo";
     }
     catch  {
@@ -16,7 +16,7 @@ sub foo {
 }
 
 try {
-    die Some::Class->new(code => 404 ) if $self->not_found;
+    die Some::Class::->new(code => 404 ) if $self->not_found;
     return "return value from foo";
 }
 catch  {
@@ -24,7 +24,7 @@ catch  {
 
 try  #comment
 {
-    die Some::Class->new(code => 404 ) if $self->not_found;
+    die Some::Class::->new(code => 404 ) if $self->not_found;
     return "return value from foo";
 } # comment
 catch # comment
