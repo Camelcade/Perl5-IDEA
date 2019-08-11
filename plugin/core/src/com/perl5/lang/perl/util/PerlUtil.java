@@ -117,7 +117,7 @@ public class PerlUtil implements PerlElementTypes {
     }
     StringBuilder sb = new StringBuilder();
     while (true) {
-      sb.append(element.getClass()).append(": ");
+      sb.append(element.getClass()).append("(").append(PsiUtilCore.getElementType(element)).append(")").append(": ");
       if (element instanceof PsiFile || element.getParent() == null) {
         break;
       }
