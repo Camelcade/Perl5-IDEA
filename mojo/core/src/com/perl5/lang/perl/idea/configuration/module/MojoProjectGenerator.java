@@ -16,16 +16,32 @@
 
 package com.perl5.lang.perl.idea.configuration.module;
 
+import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.application.WriteAction;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
+import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.ui.InputValidator;
+import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.perl5.lang.mojolicious.MojoUtil;
+import com.perl5.lang.mojolicious.idea.actions.MojoGenerateAction;
+import com.perl5.lang.mojolicious.model.MojoProjectManager;
+import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Arrays;
+
 public abstract class MojoProjectGenerator extends PerlProjectGeneratorBase<MojoProjectGenerationSettings> {
+  private static final Logger LOG = Logger.getInstance(MojoProjectGenerator.class);
+
   @NotNull
   @Override
   public final PerlProjectGeneratorPeerBase<MojoProjectGenerationSettings> createPeer() {
@@ -60,11 +76,82 @@ public abstract class MojoProjectGenerator extends PerlProjectGeneratorBase<Mojo
   @NotNull
   protected abstract InputValidator getNameValidator();
 
-  @Override
-  public void generateProject(@NotNull Project project,
-                              @NotNull VirtualFile baseDir,
-                              @NotNull MojoProjectGenerationSettings settings,
-                              @NotNull Module module) {
+  /**
+   * @return an action which going to be used for generation
+   */
+  @NotNull
+  protected abstract MojoGenerateAction getGenerationAction();
 
+  @Override
+  public void configureModule(@NotNull Module module, @NotNull MojoProjectGenerationSettings settings) {
+    super.configureModule(module, settings);
+    ApplicationManager.getApplication().invokeLater(() -> generateEntity(module, settings));
+  }
+
+  private void generateEntity(@NotNull Module module,
+                              @NotNull MojoProjectGenerationSettings settings) {
+    if (module.isDisposed()) {
+      return;
+    }
+
+    VirtualFile[] roots = ModuleRootManager.getInstance(module).getContentRoots();
+    if (roots.length < 1) {
+      LOG.warn("Unable to generate entity, no content entries in module: " + module);
+      return;
+    }
+
+    VirtualFile mojoScriptFile = MojoUtil.getMojoScript(module);
+    if (mojoScriptFile == null) {
+      LOG.warn("Unable to generate entity, no mojo script for " + PerlProjectManager.getSdk(module));
+      return;
+    }
+
+    try {
+      File tempDirFile = FileUtil.createTempDirectory("MojoGeneration", null);
+      VirtualFile tempDirVirtualFile = VfsUtil.findFileByIoFile(tempDirFile, true);
+      if (tempDirVirtualFile == null) {
+        LOG.warn("Unable to find temp dir virtual file: " + tempDirFile);
+        return;
+      }
+
+      PerlRunUtil.runInConsole(getGenerationAction().createCommandLine(
+        module.getProject(), tempDirVirtualFile, settings.getEntityName(), mojoScriptFile, () ->
+          ApplicationManager.getApplication().invokeLater(
+            () -> moveEntityToTheModule(module, tempDirVirtualFile, roots[0]), module.getDisposed()
+          )));
+    }
+    catch (IOException e) {
+      LOG.warn("Error creating temporary directory for mojo generation: " + e.getMessage());
+    }
+  }
+
+  private void moveEntityToTheModule(@NotNull Module module,
+                                     @NotNull VirtualFile tempDir,
+                                     @NotNull VirtualFile contentRoot) {
+    if (!tempDir.isValid()) {
+      LOG.warn("Temp dir invalidated: " + tempDir);
+      return;
+    }
+    if (!contentRoot.isValid()) {
+      LOG.warn("Content root invalidated: " + contentRoot);
+      return;
+    }
+    VirtualFile[] children = tempDir.getChildren();
+    if (children.length != 1) {
+      LOG.warn("Expected a single child in the temp directory, got: " + Arrays.asList(children));
+      return;
+    }
+    VirtualFile entityDirectory = children[0];
+    if (!entityDirectory.isDirectory()) {
+      LOG.warn("Entity directory is not a directory: " + entityDirectory);
+      return;
+    }
+    try {
+      WriteAction.run(() -> VfsUtil.copyDirectory(this, entityDirectory, contentRoot, null));
+      MojoProjectManager.getInstance(module.getProject()).scheduleUpdate();
+    }
+    catch (IOException e) {
+      LOG.warn("Error moving " + entityDirectory + " content to " + contentRoot + "; " + e.getMessage());
+    }
   }
 }

@@ -26,7 +26,6 @@ import com.intellij.openapi.ui.InputValidator;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.mojolicious.MojoIcons;
 import com.perl5.lang.mojolicious.MojoUtil;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
@@ -36,8 +35,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import java.util.Arrays;
-import java.util.List;
 
 public abstract class MojoGenerateAction extends MojoScriptAction {
   private static final String GENERATE_COMMAND = "generate";
@@ -64,38 +61,32 @@ public abstract class MojoGenerateAction extends MojoScriptAction {
     if (mojoScript == null) {
       return;
     }
-    List<String> generationParameters = computeGenerationParameters(e, mojoScript);
-    if (generationParameters == null) {
+
+    String entityName = Messages.showInputDialog(
+      e.getProject(), getPromptMessage(), getPromptTitle(), getPromptIcon(), getDefaultName(), getNameValidator());
+    if (StringUtil.isEmpty(entityName)) {
       return;
     }
 
-    List<String> fullArguments = ContainerUtil.newArrayList(mojoScript.getPath(), GENERATE_COMMAND);
-    fullArguments.addAll(generationParameters);
-
-    VirtualFile targetDirectory = getTargetDirectory(e);
-    PerlRunUtil.runInConsole(
-      new PerlCommandLine(fullArguments)
-        .withProject(getEventProject(e))
-        .withConsoleIcon(MojoIcons.MOJO_LOGO)
-        .withWorkDirectory(targetDirectory.getPath())
-        .withProcessListener(new ProcessAdapter() {
-          @Override
-          public void processTerminated(@NotNull ProcessEvent event) {
-            targetDirectory.refresh(true, false);
-          }
-        })
-    );
+    PerlRunUtil.runInConsole(createCommandLine(getEventProject(e), getTargetDirectory(e), entityName, mojoScript, null));
   }
 
-  /**
-   * Should return generation parameters or null if generation should not be performed
-   */
-  @Nullable
-  protected List<String> computeGenerationParameters(@NotNull AnActionEvent e, @NotNull VirtualFile mojoScript) {
-    String entityName = Messages.showInputDialog(
-      e.getProject(), getPromptMessage(), getPromptTitle(), getPromptIcon(), getDefaultName(), getNameValidator());
-
-    return StringUtil.isEmpty(entityName) ? null : Arrays.asList(getGenerateCommand(), entityName);
+  @NotNull
+  public PerlCommandLine createCommandLine(@Nullable Project project,
+                                           @NotNull VirtualFile targetDirectory,
+                                           @NotNull String entityName,
+                                           @NotNull VirtualFile mojoScript,
+                                           @Nullable Runnable postRefreshRunnable) {
+    return new PerlCommandLine(mojoScript.getPath(), GENERATE_COMMAND, getGenerateCommand(), entityName)
+      .withProject(project)
+      .withConsoleIcon(MojoIcons.MOJO_LOGO)
+      .withWorkDirectory(targetDirectory.getPath())
+      .withProcessListener(new ProcessAdapter() {
+        @Override
+        public void processTerminated(@NotNull ProcessEvent event) {
+          targetDirectory.refresh(true, false, postRefreshRunnable);
+        }
+      });
   }
 
   @NotNull

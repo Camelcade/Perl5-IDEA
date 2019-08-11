@@ -18,6 +18,8 @@ package com.perl5.lang.perl.idea.configuration.module;
 
 import com.intellij.openapi.ui.InputValidator;
 import com.perl5.lang.mojolicious.MojoIcons;
+import com.perl5.lang.mojolicious.idea.actions.MojoGenerateAction;
+import com.perl5.lang.mojolicious.idea.actions.MojoGenerateAppAction;
 import com.perl5.lang.mojolicious.model.MojoApp;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -48,4 +50,10 @@ public class MojoAppProjectGenerator extends MojoProjectGenerator {
   public String getName() {
     return "Mojo Application";
   }
+
+  @NotNull
+  protected MojoGenerateAction getGenerationAction() {
+    return new MojoGenerateAppAction();
+  }
+
 }

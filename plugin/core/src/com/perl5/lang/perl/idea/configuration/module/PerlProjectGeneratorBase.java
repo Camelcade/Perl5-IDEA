@@ -30,7 +30,7 @@ public abstract class PerlProjectGeneratorBase<Settings extends PerlProjectGener
   @Override
   public final void generateProject(@Nullable Project project,
                                     @NotNull VirtualFile baseDir,
-                                    @NotNull PerlProjectGenerationSettings settings,
+                                    @NotNull Settings settings,
                                     @NotNull Module module) {
     configureModule(module, settings);
   }
@@ -39,7 +39,7 @@ public abstract class PerlProjectGeneratorBase<Settings extends PerlProjectGener
   @Override
   public abstract PerlProjectGeneratorPeerBase<Settings> createPeer();
 
-  public void configureModule(@NotNull Module module, @NotNull PerlProjectGenerationSettings settings) {
+  public void configureModule(@NotNull Module module, @NotNull Settings settings) {
     Sdk sdk = settings.getSdk();
     if (sdk != null) {
       PerlProjectManager.getInstance(module.getProject()).setProjectSdk(sdk);

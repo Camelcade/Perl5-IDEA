@@ -121,7 +121,7 @@ public class MojoProjectManager {
   /**
    * Queues model update
    */
-  private void scheduleUpdate() {
+  public void scheduleUpdate() {
     LOG.debug("Scheduling update");
     myUpdateQueue.queue(Update.create(this, this::updateModel));
   }
