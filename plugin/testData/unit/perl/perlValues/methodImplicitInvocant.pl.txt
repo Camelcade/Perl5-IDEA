@@ -4,8 +4,7 @@ method something($first){
 ----------
 $self
 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 28 in methodImplicitInvocant.pl
-OneOf[ArrayItem: SUB_ARGUMENTS[0],
-main]
+ArrayItem: SUB_ARGUMENTS[0]
 ----------
 Resolved
 ----------

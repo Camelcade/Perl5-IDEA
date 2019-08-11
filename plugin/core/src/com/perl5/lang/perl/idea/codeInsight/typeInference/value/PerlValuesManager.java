@@ -110,7 +110,7 @@ public final class PerlValuesManager {
   static final int SMART_GETTER_ID = id++;
 
   // MUST stay here. Automatically changes on new element creation
-  public static final int VERSION = id + 4;
+  public static final int VERSION = id + 5;
 
   private static final WeakInterner<PerlValue> INTERNER = new WeakInterner<>();
 

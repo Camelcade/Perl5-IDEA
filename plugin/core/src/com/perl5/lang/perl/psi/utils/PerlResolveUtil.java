@@ -42,7 +42,6 @@ import com.perl5.lang.perl.psi.impl.PerlBuiltInVariable;
 import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.references.scopes.PerlVariableDeclarationSearcher;
-import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlUtil;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -325,9 +324,6 @@ public class PerlResolveUtil {
       PerlValue declaredValue = lexicalDeclaration.getDeclaredValue();
       if( !declaredValue.isUnknown()){
         valueBuilder.addVariant(declaredValue);
-      }
-      if (lexicalDeclaration.isInvocantDeclaration() || lexicalDeclaration.isSelf()) {
-        valueBuilder.addVariant(PerlPackageUtil.getExpectedSelfValue(lexicalDeclaration));
       }
     }
     return valueBuilder.build();

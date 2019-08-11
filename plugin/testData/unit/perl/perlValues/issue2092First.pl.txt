@@ -19,8 +19,7 @@ sub useClass{
 $var
 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 159 in issue2092First.pl
 scalar OneOf[ArrayItem: SUB_ARGUMENTS[1],
-Some::Class,
-main]->something()
+Some::Class]->something()
 ----------
 Resolved
 ----------
