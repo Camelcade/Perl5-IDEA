@@ -1018,13 +1018,8 @@ anon_hash ::= '{' [expr] '}' <<validateAnonHashSuffix>>  // fixme pin here after
 // fixme it's not a variable, its variable expression
 private variable ::= scalar_or_element | array_or_slice | hash_variable | hash_cast_expr | glob_or_element
 
-private array_primitive ::=
-    array_variable
-    | array_cast_expr
-    | string_list
-
-
 private array_or_slice ::= array_primitive [array_slice|hash_slice]
+private array_primitive ::= array_variable | array_cast_expr | string_list
 left array_slice ::= array_index
 left hash_slice ::= hash_index
 
@@ -1036,10 +1031,7 @@ hash_cast_expr ::= '$%' hash_cast_target
 private hash_cast_target ::= {<<block hash_braced_cast_target >> | scalar_primitive}
 private hash_braced_cast_target ::= '%{' block_content '%}' {pin=1}
 
-private scalar_primitive ::=
-    scalar_variable
-    | scalar_cast_expr
-    | undef_expr  // shouldn't it be in term ? (check declarations)
+private scalar_primitive ::= scalar_variable | scalar_cast_expr | undef_expr  // shouldn't it be in term ? (check declarations)
 
 // |'$}'|'@}'|'%}'|'*}'|'&}'
 scalar_cast_expr ::= '$$' scalar_cast_target
@@ -1053,9 +1045,7 @@ left array_element ::= array_index
 left hash_element ::= hash_index
 
 private glob_or_element ::= glob_primitive [glob_slot]
-private glob_primitive ::=
-    glob_variable
-    | glob_cast_expr
+private glob_primitive ::= glob_variable | glob_cast_expr
 
 glob_cast_expr ::= '$*' glob_cast_target
 private glob_cast_target ::= {<<block glob_braced_cast_target>> | scalar_primitive}
