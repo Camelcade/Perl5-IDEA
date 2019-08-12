@@ -125,10 +125,14 @@ public class PerlElementTypeFactory {
         return new PerlElementTypeEx(name, PsiPerlAnonHashImpl.class);
       case "ARRAY_SLICE":
         return new PerlElementTypeEx(name, PsiPerlArraySliceImpl.class);
+      case "HASH_ARRAY_SLICE":
+        return new PerlElementTypeEx(name, PsiPerlHashArraySliceImpl.class);
       case "ARRAY_CAST_EXPR":
         return new PerlElementTypeEx(name, PsiPerlArrayCastExprImpl.class);
       case "HASH_SLICE":
         return new PerlElementTypeEx(name, PsiPerlHashSliceImpl.class);
+      case "HASH_HASH_SLICE":
+        return new PerlElementTypeEx(name, PsiPerlHashHashSliceImpl.class);
       case "ARRAY_INDEX":
         return new PerlElementTypeEx(name, PsiPerlArrayIndexImpl.class);
       case "ARRAY_INDEX_VARIABLE":

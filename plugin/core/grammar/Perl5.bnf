@@ -461,7 +461,7 @@
 
     extends("code_variable")=expr
 
-    extends("array_slice|hash_slice|array_element|hash_element|glob_slot")=expr
+    extends("array_slice|hash_slice|hash_array_slice|hash_hash_slice|array_element|hash_element|glob_slot")=expr
 
     stubClass("variable_declaration_element")="com.perl5.lang.perl.psi.stubs.variables.PerlVariableDeclarationStub"
     mixin("variable_declaration_element")="com.perl5.lang.perl.psi.mixins.PerlVariableDeclarationElementMixin"
@@ -812,8 +812,7 @@ term_expr ::=
     | array_pop_expr
     | wantarray_expr
     | exit_expr
-    | hash_variable
-    | hash_cast_expr
+    | hash_or_slice
     | array_index_variable
     | scalar_index_cast_expr
     | anon_array
@@ -1083,6 +1082,11 @@ private recover_braced_expression ::= !'}'
 array_index ::= '[' array_index_content ']' {pin=1}
 private array_index_content ::= expr {recoverWhile=recover_bracketed_expression}
 private recover_bracketed_expression ::= !']'
+
+private hash_or_slice ::= hash_primitive [hash_array_slice|hash_hash_slice]
+private hash_primitive ::= hash_variable | hash_cast_expr
+left hash_array_slice ::= array_index
+left hash_hash_slice ::= hash_index
 
 ///////////////////////////////////// CALLABLE /////////////////////////////////////////////////////////////////////////
 meta method ::= <<x1>>

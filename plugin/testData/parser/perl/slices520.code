@@ -1,0 +1,4 @@
+%args{qw/ssp_id dsp_id/};
+%args[1,2,3,4];
+%$args{qw/ssp_id dsp_id/};
+%$args[1,2,3,4];
