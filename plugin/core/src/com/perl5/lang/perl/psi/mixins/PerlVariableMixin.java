@@ -25,11 +25,16 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.Processor;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PerlGlobVariable;
+import com.perl5.lang.perl.psi.PerlVariable;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
+import com.perl5.lang.perl.psi.PerlVariableNameElement;
 import com.perl5.lang.perl.psi.impl.PerlBuiltInVariable;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
@@ -90,35 +95,29 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
 
   @Override
   public PerlVariableType getActualType() {
-    PsiElement variableContainer = this.getParent();
+    IElementType parentElementType = PsiUtilCore.getElementType(getParent());
 
-    if (this instanceof PsiPerlCodeVariable) {
-      return PerlVariableType.SCALAR;
-    }
-    else if (
-      variableContainer instanceof PsiPerlHashElement
-      || variableContainer instanceof PsiPerlHashSlice
-      || this instanceof PsiPerlHashVariable
-      ) {
+    if (parentElementType == HASH_ELEMENT || parentElementType == HASH_SLICE || parentElementType == HASH_HASH_SLICE) {
       return PerlVariableType.HASH;
     }
-    else if (
-      variableContainer instanceof PsiPerlArraySlice
-      || variableContainer instanceof PsiPerlArrayElement
-      || this instanceof PsiPerlArrayIndexVariable
-      || this instanceof PsiPerlArrayVariable
-      ) {
+    else if (parentElementType == ARRAY_SLICE || parentElementType == ARRAY_ELEMENT || parentElementType == HASH_ARRAY_SLICE) {
       return PerlVariableType.ARRAY;
     }
-    else if (
-      variableContainer instanceof PsiPerlDerefExpr
-      || this instanceof PsiPerlScalarVariable
-      ) {
+
+    IElementType elementType = PsiUtilCore.getElementType(this);
+    if (elementType == CODE_VARIABLE) {
       return PerlVariableType.SCALAR;
     }
-    else {
-      throw new RuntimeException("Can't be: could not detect actual type of myVariable: " + getText());
+    else if (elementType == ARRAY_INDEX_VARIABLE || elementType == ARRAY_VARIABLE) {
+      return PerlVariableType.ARRAY;
     }
+    else if (elementType == HASH_VARIABLE) {
+      return PerlVariableType.HASH;
+    }
+    else if (elementType == SCALAR_VARIABLE) {
+      return PerlVariableType.SCALAR;
+    }
+    throw new RuntimeException("Can't be: could not detect actual type of myVariable: " + getText());
   }
 
   /**

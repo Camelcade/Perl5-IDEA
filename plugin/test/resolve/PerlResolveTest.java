@@ -31,6 +31,9 @@ public class PerlResolveTest extends PerlLightTestCase {
   public void testPackageFileReference() {doTest();}
 
   @Test
+  public void testSlices520() {doTest();}
+
+  @Test
   public void testMojoLite(){doTest();}
 
   @Test

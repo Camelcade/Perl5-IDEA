@@ -1,0 +1,12 @@
+PerlVariableReference at (35,39); text in range: 'hash' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 14 in slices520.pl
+
+PerlVariableReference at (61,66); text in range: 'array' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 3 in slices520.pl
+
+PerlVariableReference at (79,85); text in range: 'scalar' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 24 in slices520.pl
+
+PerlVariableReference at (108,114); text in range: 'scalar' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 24 in slices520.pl
+
