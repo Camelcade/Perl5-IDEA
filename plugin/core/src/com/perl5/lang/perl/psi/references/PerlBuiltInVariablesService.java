@@ -21,8 +21,7 @@ import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiManager;
-import com.intellij.psi.ResolveState;
-import com.intellij.psi.scope.PsiScopeProcessor;
+import com.intellij.util.Processor;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.impl.PerlBuiltInVariable;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
@@ -77,23 +76,23 @@ public class PerlBuiltInVariablesService {
     return myHashes.get(name);
   }
 
-  public boolean processScalars(@NotNull PsiScopeProcessor processor) {
+  public boolean processScalars(@NotNull Processor<PerlVariableDeclarationElement> processor) {
     return processVariables(myScalars, processor);
   }
 
-  public boolean processArrays(@NotNull PsiScopeProcessor processor) {
+  public boolean processArrays(@NotNull Processor<PerlVariableDeclarationElement> processor) {
     return processVariables(myArrays, processor);
   }
 
-  public boolean processHashes(@NotNull PsiScopeProcessor processor) {
+  public boolean processHashes(@NotNull Processor<PerlVariableDeclarationElement> processor) {
     return processVariables(myHashes, processor);
   }
 
-  public boolean processVariables(@NotNull PsiScopeProcessor processor) {
-    return processScalars(processor) && processArrays(processor) && processHashes(processor);
+  public boolean processVariables(@NotNull Processor<PerlVariableDeclarationElement> processor) {
+    return processScalars(processor) && processArrays(processor) && processHashes(processor) && processGlobs(processor);
   }
 
-  public boolean processGlobs(@NotNull PsiScopeProcessor processor) {
+  public boolean processGlobs(@NotNull Processor<PerlVariableDeclarationElement> processor) {
     return processVariables(myGlobs, processor);
   }
 
@@ -116,10 +115,11 @@ public class PerlBuiltInVariablesService {
     return null;
   }
 
-  private static boolean processVariables(@NotNull Map<String, PerlBuiltInVariable> variableMap, @NotNull PsiScopeProcessor processor) {
+  private static boolean processVariables(@NotNull Map<String, PerlBuiltInVariable> variableMap,
+                                          @NotNull Processor<PerlVariableDeclarationElement> processor) {
     for (PerlBuiltInVariable variable : variableMap.values()) {
       ProgressManager.checkCanceled();
-      if (!processor.execute(variable, ResolveState.initial())) {
+      if (!processor.process(variable)) {
         return false;
       }
     }

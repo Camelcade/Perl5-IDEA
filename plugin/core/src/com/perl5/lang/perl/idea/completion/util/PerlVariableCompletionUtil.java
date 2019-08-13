@@ -142,8 +142,8 @@ public class PerlVariableCompletionUtil {
       return;
     }
 
-    PerlBuiltInVariablesService.getInstance(variableNameElement.getProject()).processVariables((element, __) -> {
-      generator.accept((PerlVariableDeclarationElement)element);
+    PerlBuiltInVariablesService.getInstance(variableNameElement.getProject()).processVariables(it -> {
+      generator.accept(it);
       return true;
     });
   }
