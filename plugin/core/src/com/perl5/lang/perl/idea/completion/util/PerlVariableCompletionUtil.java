@@ -34,8 +34,10 @@ import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
+import java.util.function.Consumer;
 
 
 public class PerlVariableCompletionUtil {
@@ -181,57 +183,89 @@ public class PerlVariableCompletionUtil {
 
   public static void fillWithLexicalVariables(@NotNull PsiElement variableNameElement,
                                               @NotNull final CompletionResultSet resultSet) {
-    final PsiElement perlVariable = variableNameElement.getParent();
+    PsiElement perlVariable = variableNameElement.getParent();
+    Consumer<PerlVariableDeclarationElement> lookupGenerator = createLexicalLookupGenerator(perlVariable, resultSet::addElement);
+
+    if (lookupGenerator == null) {
+      return;
+    }
 
     PsiScopeProcessor processor = (element, state) -> {
-      if (element instanceof PerlVariableDeclarationElement) {
-        PerlVariableDeclarationElement variable = (PerlVariableDeclarationElement)element;
-        PsiElement declarationStatement = PsiTreeUtil.getParentOfType(variable, PerlStatement.class);
-        if (PsiTreeUtil.isAncestor(declarationStatement, perlVariable, false)) {
-          return true;
-        }
+      if (!(element instanceof PerlVariableDeclarationElement)) {
+        return true;
+      }
+      PerlVariableDeclarationElement variable = (PerlVariableDeclarationElement)element;
+      PsiElement declarationStatement = PsiTreeUtil.getParentOfType(variable, PerlStatement.class);
+      if (PsiTreeUtil.isAncestor(declarationStatement, perlVariable, false)) {
+        return true;
+      }
 
-        if (perlVariable instanceof PsiPerlScalarVariable) {
-          if (variable.getName() != null) {
-            if (variable.getActualType() == PerlVariableType.SCALAR) {
-              resultSet.addElement(setLexical(createVariableLookupElement(variable, false)));
-            }
-            else if (variable.getActualType() == PerlVariableType.ARRAY) {
-              resultSet.addElement(setLexical(createArrayElementLookupElement(variable, false)));
-            }
-            else if (variable.getActualType() == PerlVariableType.HASH) {
-              resultSet.addElement(setLexical(createHashElementLookupElement(variable, false)));
-            }
-          }
-        }
-        else if (perlVariable instanceof PsiPerlArrayVariable) {
-          if (variable.getName() != null) {
-            if (variable.getActualType() == PerlVariableType.ARRAY) {
-              resultSet.addElement(setLexical(createVariableLookupElement(variable, false)));
-              resultSet.addElement(setLexical(createArrayElementLookupElement(variable, false)));
-            }
-            else if (variable.getActualType() == PerlVariableType.HASH) {
-              resultSet.addElement(setLexical(createHashElementLookupElement(variable, false)));
-            }
-          }
-        }
-        else if (perlVariable instanceof PsiPerlArrayIndexVariable) {
-          if (variable.getName() != null && variable.getActualType() == PerlVariableType.ARRAY) {
-            resultSet.addElement(setLexical(createVariableLookupElement(variable, false)));
-          }
-        }
-        else if (perlVariable instanceof PsiPerlHashVariable) {
-          if (variable.getName() != null) {
-            if (variable.getActualType() == PerlVariableType.HASH) {
-              resultSet.addElement(setLexical(createVariableLookupElement(variable, false)));
-            }
-          }
-        }
+      if (StringUtil.isNotEmpty(variable.getName())) {
+        lookupGenerator.accept(variable);
       }
 
       return true;
     };
     PerlResolveUtil.treeWalkUp(variableNameElement, processor);
     PerlBuiltInVariablesService.getInstance(variableNameElement.getProject()).processVariables(processor);
+  }
+
+
+  /**
+   * @return lookup generator for lexical variables
+   * @see #createLookupGenerator(PsiElement, Consumer)
+   */
+  @Nullable
+  private static Consumer<PerlVariableDeclarationElement> createLexicalLookupGenerator(@Nullable PsiElement perlVariable,
+                                                                                       @NotNull Consumer<LookupElement> lookupConsumer) {
+    return createLookupGenerator(perlVariable, it -> lookupConsumer.accept(setLexical(it)));
+  }
+
+  /**
+   * @param perlVariable for which lookup is built (element under caret)
+   * @return consumer of variable declarations, generating lookup elements for them and feeding to the {@code lookupConsumer}
+   */
+  @Nullable
+  private static Consumer<PerlVariableDeclarationElement> createLookupGenerator(@Nullable PsiElement perlVariable,
+                                                                                @NotNull Consumer<LookupElement> lookupConsumer) {
+    if (perlVariable instanceof PsiPerlScalarVariable) {
+      return variable -> {
+        if (variable.getActualType() == PerlVariableType.SCALAR) {
+          lookupConsumer.accept(createVariableLookupElement(variable, false));
+        }
+        else if (variable.getActualType() == PerlVariableType.ARRAY) {
+          lookupConsumer.accept(createArrayElementLookupElement(variable, false));
+        }
+        else if (variable.getActualType() == PerlVariableType.HASH) {
+          lookupConsumer.accept(createHashElementLookupElement(variable, false));
+        }
+      };
+    }
+    else if (perlVariable instanceof PsiPerlArrayVariable) {
+      return variable -> {
+        if (variable.getActualType() == PerlVariableType.ARRAY) {
+          lookupConsumer.accept(createVariableLookupElement(variable, false));
+          lookupConsumer.accept(createArrayElementLookupElement(variable, false));
+        }
+        else if (variable.getActualType() == PerlVariableType.HASH) {
+          lookupConsumer.accept(createHashElementLookupElement(variable, false));
+        }
+      };
+    }
+    else if (perlVariable instanceof PsiPerlArrayIndexVariable) {
+      return variable -> {
+        if (variable.getActualType() == PerlVariableType.ARRAY) {
+          lookupConsumer.accept(createVariableLookupElement(variable, false));
+        }
+      };
+    }
+    else if (perlVariable instanceof PsiPerlHashVariable) {
+      return variable -> {
+        if (variable.getActualType() == PerlVariableType.HASH) {
+          lookupConsumer.accept(createVariableLookupElement(variable, false));
+        }
+      };
+    }
+    return null;
   }
 }
