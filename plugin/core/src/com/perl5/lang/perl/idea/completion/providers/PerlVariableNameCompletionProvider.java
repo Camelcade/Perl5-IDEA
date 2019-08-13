@@ -21,18 +21,15 @@ import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.completion.PlainPrefixMatcher;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.ProcessingContext;
-import com.intellij.util.Processor;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.idea.completion.util.PerlVariableCompletionUtil;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
-import com.perl5.lang.perl.util.*;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.processors.PerlNamespaceEntityProcessor;
 import org.jetbrains.annotations.NotNull;
 
@@ -73,71 +70,7 @@ public class PerlVariableNameCompletionProvider extends CompletionProvider<Compl
 
     // fqn names
     if (!isDeclaration) {
-      fillWithFullQualifiedVariables(variableNameElement, resultSet);
-    }
-  }
-
-  private void fillWithFullQualifiedVariables(@NotNull PsiElement variableNameElement, @NotNull CompletionResultSet resultSet) {
-    PsiElement perlVariable = variableNameElement.getParent();
-    Project project = variableNameElement.getProject();
-    GlobalSearchScope resolveScope = variableNameElement.getResolveScope();
-    String variableName = variableNameElement.getText();
-
-    boolean forceShortMain = StringUtil.startsWith(variableName, PerlPackageUtil.NAMESPACE_SEPARATOR);
-
-    final CompletionResultSet finalResultSet = resultSet;
-
-    Processor<PerlVariableDeclarationElement> scalarDefaultProcessor = wrapper -> {
-      finalResultSet.addElement(PerlVariableCompletionUtil.createVariableLookupElement(wrapper, forceShortMain));
-      return true;
-    };
-
-    Processor<PerlVariableDeclarationElement> arrayDefaultProcessor = wrapper -> {
-      finalResultSet.addElement(PerlVariableCompletionUtil.createVariableLookupElement(wrapper, forceShortMain));
-      return true;
-    };
-
-    Processor<PerlVariableDeclarationElement> hashDefaultProcessor = wrapper -> {
-      finalResultSet.addElement(PerlVariableCompletionUtil.createVariableLookupElement(wrapper, forceShortMain));
-      return true;
-    };
-
-    if (perlVariable instanceof PsiPerlScalarVariable) {
-      PerlScalarUtil.processDefinedGlobalScalars(project, resolveScope, scalarDefaultProcessor);
-      PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, wrapper -> {
-        finalResultSet.addElement(PerlVariableCompletionUtil.createArrayElementLookupElement(wrapper, forceShortMain));
-        return true;
-      });
-      PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, wrapper -> {
-        finalResultSet.addElement(PerlVariableCompletionUtil.createHashElementLookupElement(wrapper, forceShortMain));
-        return true;
-      });
-    }
-    else if (perlVariable instanceof PerlGlobVariable) {
-      PerlScalarUtil.processDefinedGlobalScalars(project, resolveScope, scalarDefaultProcessor);
-      PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, arrayDefaultProcessor);
-      PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, hashDefaultProcessor);
-
-      // globs
-      PerlGlobUtil.processDefinedGlobsNames(project, resolveScope, typeglob -> {
-        finalResultSet.addElement(PerlVariableCompletionUtil.createVariableLookupElement(typeglob));
-        return true;
-      });
-    }
-    else if (perlVariable instanceof PsiPerlArrayVariable) {
-      PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, arrayDefaultProcessor);
-      PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, wrapper -> {
-        finalResultSet.addElement(PerlVariableCompletionUtil.createHashElementLookupElement(wrapper, forceShortMain));
-        return true;
-      });
-    }
-    else if (perlVariable instanceof PsiPerlArrayIndexVariable) {
-      // global arrays
-      PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, arrayDefaultProcessor);
-    }
-    else if (perlVariable instanceof PsiPerlHashVariable) {
-      // global hashes
-      PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, hashDefaultProcessor);
+      PerlVariableCompletionUtil.fillWithFullQualifiedVariables(variableNameElement, resultSet);
     }
   }
 
