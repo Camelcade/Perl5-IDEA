@@ -19,16 +19,17 @@ package quickfix;
 
 import base.PerlLightTestCase;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
-import com.perl5.lang.perl.idea.inspections.PerlSubSignaturesInspection;
+import com.perl5.lang.perl.idea.inspections.PerlSyntaxInspection;
 import com.perl5.lang.perl.internals.PerlVersion;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
 import static com.perl5.lang.perl.internals.PerlVersion.*;
-public class PerlSubSignaturesQuickFixesTest extends PerlLightTestCase {
+
+public class PerlSyntaxQuickFixesTest extends PerlLightTestCase {
   @Override
   protected String getBaseDataPath() {
-    return "testData/quickfix/perl/sub.signatures";
+    return "testData/quickfix/perl/syntax";
   }
 
   @Test
@@ -141,7 +142,7 @@ public class PerlSubSignaturesQuickFixesTest extends PerlLightTestCase {
                                    @NotNull PerlVersion initialVersion,
                                    @NotNull PerlVersion expectedVersion) {
     PerlSharedSettings.getInstance(getProject()).setTargetPerlVersion(initialVersion);
-    doTestAnnotationQuickFix(sourceFileName, PerlSubSignaturesInspection.class,
+    doTestAnnotationQuickFix(sourceFileName, PerlSyntaxInspection.class,
                              "Set perl target version to " + expectedVersion.getStrictDottedVersion());
     PerlVersion actualVersion = PerlSharedSettings.getInstance(getProject()).getTargetPerlVersion();
     assertEquals("Expected " + expectedVersion + " got " + actualVersion + " instead", actualVersion, expectedVersion);
@@ -149,6 +150,6 @@ public class PerlSubSignaturesQuickFixesTest extends PerlLightTestCase {
 
   private void doTest(@NotNull PerlVersion version) {
     PerlSharedSettings.getInstance(getProject()).setTargetPerlVersion(version);
-    doTestAnnotationQuickFix(PerlSubSignaturesInspection.class, "Flip signature with");
+    doTestAnnotationQuickFix(PerlSyntaxInspection.class, "Flip signature with");
   }
 }

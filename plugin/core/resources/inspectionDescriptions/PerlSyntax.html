@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright 2015-2018 Alexandr Evstigneev
+  ~ Copyright 2015-2019 Alexandr Evstigneev
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -16,13 +16,15 @@
 
 <html>
 <body>
-<p>Inspection checks subs signatures availability and positioning according to selected perl language level.</p>
-<p>Sub signatures became available in perl 5.20 and their positioning <a
+<p>Inspection checks for syntax elements availability and correctness according to selected perl language level.</p>
+<ul>
+  <li>Sub signatures became available in perl 5.20 and their positioning <a
     href="https://metacpan.org/pod/distribution/perl/pod/perldelta.pod#Subroutine-attribute-and-signature-order">changed twice</a>:
   <code>
     sub f :lvalue ($a, $b) { ... }; # 5.20; 5.28 onwards
     sub f ($a, $b) :lvalue { ... }; # 5.22 - 5.26
   </code>
-</p>
+  </li>
+</ul>
 </body>
 </html>

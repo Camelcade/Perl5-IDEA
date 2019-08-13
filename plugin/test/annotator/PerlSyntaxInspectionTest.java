@@ -19,16 +19,17 @@ package annotator;
 
 import base.PerlLightTestCase;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
-import com.perl5.lang.perl.idea.inspections.PerlSubSignaturesInspection;
+import com.perl5.lang.perl.idea.inspections.PerlSyntaxInspection;
 import com.perl5.lang.perl.internals.PerlVersion;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
 import static com.perl5.lang.perl.internals.PerlVersion.*;
-public class PerlSubSignaturesInspectionTest extends PerlLightTestCase {
+
+public class PerlSyntaxInspectionTest extends PerlLightTestCase {
   @Override
   protected String getBaseDataPath() {
-    return "testData/annotator/perl/sub.signatures";
+    return "testData/annotator/perl/syntax";
   }
 
   @Test
@@ -60,6 +61,6 @@ public class PerlSubSignaturesInspectionTest extends PerlLightTestCase {
 
   private void doTest(@NotNull PerlVersion targetPerlVersion) {
     PerlSharedSettings.getInstance(getProject()).setTargetPerlVersion(targetPerlVersion);
-    doInspectionTest(PerlSubSignaturesInspection.class);
+    doInspectionTest(PerlSyntaxInspection.class);
   }
 }

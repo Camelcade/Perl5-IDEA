@@ -47,7 +47,7 @@ import static com.perl5.lang.perl.internals.PerlVersion.V5_28;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.LEFT_PAREN;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.RIGHT_PAREN;
 
-public class PerlSubSignaturesInspection extends PerlInspection {
+public class PerlSyntaxInspection extends PerlInspection {
   @NotNull
   @Override
   public PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean isOnTheFly) {
