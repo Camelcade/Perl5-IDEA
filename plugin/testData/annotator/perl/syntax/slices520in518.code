@@ -1,0 +1,4 @@
+<error descr="Key/value hash slices available only in perl 5.20+">%hash{qw/ssp_id dsp_id/}</error>;
+<error descr="Index/value array slices available only in perl 5.20+">%array[1,2,3,4]</error>;
+<error descr="Key/value hash slices available only in perl 5.20+">%$scalar{qw/ssp_id dsp_id/}</error>;
+<error descr="Index/value array slices available only in perl 5.20+">%$scalar[1,2,3,4]</error>;

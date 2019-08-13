@@ -33,6 +33,12 @@ public class PerlSyntaxInspectionTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testSlices520in520() {doTest(V5_20);}
+
+  @Test
+  public void testSlices520in518() {doTest(V5_18);}
+
+  @Test
   public void testMethod() {doTest(V5_10);}
 
   @Test

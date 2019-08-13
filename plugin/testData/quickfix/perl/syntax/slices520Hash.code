@@ -1,0 +1,4 @@
+%hash{qw/ssp_id dsp_id/};
+%array[1,2,3,4];
+%$scalar{qw/s<caret>sp_id dsp_id/};
+%$scalar[1,2,3,4];

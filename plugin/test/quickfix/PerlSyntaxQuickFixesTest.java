@@ -128,6 +128,16 @@ public class PerlSyntaxQuickFixesTest extends PerlLightTestCase {
     doTest(V5_20);
   }
 
+  @Test
+  public void testSlices520Hash() {
+    doTestVersionChange(V5_10, V5_20);
+  }
+
+  @Test
+  public void testSlices520Array() {
+    doTestVersionChange(V5_10, V5_20);
+  }
+
   private void test520VersionChange(@NotNull PerlVersion initialVersion,
                                     @NotNull PerlVersion expectedVersion) {
     doTestVersionChange("v520style", initialVersion, expectedVersion);
@@ -136,6 +146,11 @@ public class PerlSyntaxQuickFixesTest extends PerlLightTestCase {
   private void test522VersionChange(@NotNull PerlVersion initialVersion,
                                     @NotNull PerlVersion expectedVersion) {
     doTestVersionChange("v522style", initialVersion, expectedVersion);
+  }
+
+  private void doTestVersionChange(@NotNull PerlVersion initialVersion,
+                                   @NotNull PerlVersion expectedVersion) {
+    doTestVersionChange(getTestName(true), initialVersion, expectedVersion);
   }
 
   private void doTestVersionChange(@NotNull String sourceFileName,

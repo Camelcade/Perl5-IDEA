@@ -51,14 +51,37 @@ public class PerlSyntaxInspection extends PerlInspection {
   @NotNull
   @Override
   public PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean isOnTheFly) {
+    PerlVersion selectedVersion = PerlSharedSettings.getInstance(holder.getProject()).getTargetPerlVersion();
     return new PerlVisitor() {
+
+      @Override
+      public void visitHashHashSlice(@NotNull PsiPerlHashHashSlice o) {
+        if (selectedVersion.lesserThan(V5_20)) {
+          registerProblem(
+            holder, o,
+            PerlBundle.message("perl.inspection.hash.hash.slice.unavailable"),
+            buildChangePerlVersionQuickFixes(version -> !version.lesserThan(V5_20)));
+        }
+        super.visitHashHashSlice(o);
+      }
+
+      @Override
+      public void visitHashArraySlice(@NotNull PsiPerlHashArraySlice o) {
+        if (selectedVersion.lesserThan(V5_20)) {
+          registerProblem(
+            holder, o,
+            PerlBundle.message("perl.inspection.hash.array.slice.unavailable"),
+            buildChangePerlVersionQuickFixes(version -> !version.lesserThan(V5_20)));
+        }
+        super.visitHashArraySlice(o);
+      }
+
       @Override
       public void visitSubSignature(@NotNull PsiPerlSubSignature o) {
         if (o instanceof PsiPerlFuncSignatureContent || o instanceof PsiPerlMethodSignatureContent) {
           return;
         }
 
-        PerlVersion selectedVersion = PerlSharedSettings.getInstance(holder.getProject()).getTargetPerlVersion();
         if (selectedVersion.lesserThan(V5_20)) {
           registerProblem(
             holder, o,
