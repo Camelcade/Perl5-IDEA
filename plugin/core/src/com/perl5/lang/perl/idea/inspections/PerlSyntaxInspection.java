@@ -60,7 +60,7 @@ public class PerlSyntaxInspection extends PerlInspection {
           registerProblem(
             holder, o,
             PerlBundle.message("perl.inspection.hash.hash.slice.unavailable"),
-            buildChangePerlVersionQuickFixes(version -> !version.lesserThan(V5_20)));
+            buildChangePerlVersionQuickFixes(PerlVersion.GREATER_OR_EQUAL_V520));
         }
         super.visitHashHashSlice(o);
       }
@@ -71,7 +71,7 @@ public class PerlSyntaxInspection extends PerlInspection {
           registerProblem(
             holder, o,
             PerlBundle.message("perl.inspection.hash.array.slice.unavailable"),
-            buildChangePerlVersionQuickFixes(version -> !version.lesserThan(V5_20)));
+            buildChangePerlVersionQuickFixes(PerlVersion.GREATER_OR_EQUAL_V520));
         }
         super.visitHashArraySlice(o);
       }
@@ -86,7 +86,7 @@ public class PerlSyntaxInspection extends PerlInspection {
           registerProblem(
             holder, o,
             PerlBundle.message("perl.inspection.sub.signatures", selectedVersion.getStrictDottedVersion()),
-            buildChangePerlVersionQuickFixes(version -> !version.lesserThan(V5_20))
+            buildChangePerlVersionQuickFixes(PerlVersion.GREATER_OR_EQUAL_V520)
           );
         }
         else if (selectedVersion.greaterThan(V5_20) && selectedVersion.lesserThan(V5_28)) {

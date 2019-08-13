@@ -23,6 +23,7 @@ import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.regex.Matcher;
 
 /**
@@ -39,6 +40,7 @@ public class PerlVersion implements PerlVersionRegexps, Comparable<PerlVersion> 
   public static final PerlVersion V5_24 = new PerlVersion(5.024);
   public static final PerlVersion V5_26 = new PerlVersion(5.026);
   public static final PerlVersion V5_28 = new PerlVersion(5.028);
+  public static final Predicate<PerlVersion> GREATER_OR_EQUAL_V520 = version -> !version.lesserThan(V5_20);
   public static final List<PerlVersion> ALL_VERSIONS = ContainerUtil.immutableList(
     V5_10, V5_12, V5_14, V5_16, V5_18, V5_20, V5_22, V5_24, V5_26, V5_28
   );
