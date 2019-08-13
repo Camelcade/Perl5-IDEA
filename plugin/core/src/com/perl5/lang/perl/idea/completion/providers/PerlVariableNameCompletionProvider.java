@@ -58,6 +58,7 @@ public class PerlVariableNameCompletionProvider extends CompletionProvider<Compl
     }
     else if (!isFullQualified) {
       PerlVariableCompletionUtil.fillWithLexicalVariables(variableNameElement, resultSet);
+      PerlVariableCompletionUtil.fillWithBuiltInVariables(variableNameElement, resultSet);
     }
 
     // built ins

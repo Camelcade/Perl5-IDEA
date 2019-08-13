@@ -128,7 +128,8 @@ public class PerlVariableCompletionUtil {
     }
   }
 
-  public static LookupElement setLexical(@NotNull LookupElement element) {
+  @NotNull
+  public static <T extends LookupElement> T setLexical(@NotNull T element) {
     element.putUserData(PerlCompletionWeighter.WEIGHT, 1);
     return element;
   }
@@ -136,49 +137,15 @@ public class PerlVariableCompletionUtil {
   public static void fillWithBuiltInVariables(@NotNull PsiElement variableNameElement,
                                               @NotNull CompletionResultSet resultSet) {
     PsiElement perlVariable = variableNameElement.getParent();
-    PerlBuiltInVariablesService perlBuiltInVariablesService = PerlBuiltInVariablesService.getInstance(variableNameElement.getProject());
+    Consumer<PerlVariableDeclarationElement> generator = createBuiltInLookupGenerator(perlVariable, resultSet::addElement);
+    if (generator == null) {
+      return;
+    }
 
-    PsiScopeProcessor variableProcessor = (element, __) -> {
-      resultSet.addElement(createVariableLookupElement((PerlVariableDeclarationElement)element, false).withBoldness(true));
+    PerlBuiltInVariablesService.getInstance(variableNameElement.getProject()).processVariables((element, __) -> {
+      generator.accept((PerlVariableDeclarationElement)element);
       return true;
-    };
-    if (perlVariable instanceof PsiPerlScalarVariable) {
-      perlBuiltInVariablesService.processScalars(variableProcessor);
-
-      perlBuiltInVariablesService.processArrays((element, __) -> {
-        resultSet
-          .addElement(
-            createArrayElementLookupElement((PerlVariableDeclarationElement)element, false).withBoldness(true).withPsiElement(element));
-        return true;
-      });
-
-      perlBuiltInVariablesService.processHashes((element, __) -> {
-        resultSet
-          .addElement(
-            createHashElementLookupElement((PerlVariableDeclarationElement)element, false).withBoldness(true).withPsiElement(element));
-        return true;
-      });
-    }
-    else if (perlVariable instanceof PsiPerlArrayVariable) {
-      perlBuiltInVariablesService.processArrays((element, state) -> {
-        resultSet.addElement(createVariableLookupElement((PerlVariableDeclarationElement)element, false).withBoldness(true));
-        resultSet.addElement(createArrayElementLookupElement((PerlVariableDeclarationElement)element, false).withBoldness(true));
-        return true;
-      });
-      perlBuiltInVariablesService.processHashes((element, state) -> {
-        resultSet.addElement(createHashElementLookupElement((PerlVariableDeclarationElement)element, false).withBoldness(true));
-        return true;
-      });
-    }
-    else if (perlVariable instanceof PsiPerlArrayIndexVariable) {
-      perlBuiltInVariablesService.processArrays(variableProcessor);
-    }
-    else if (perlVariable instanceof PsiPerlHashVariable) {
-      perlBuiltInVariablesService.processHashes(variableProcessor);
-    }
-    else if (perlVariable instanceof PsiPerlGlobVariable) {
-      perlBuiltInVariablesService.processGlobs(variableProcessor);
-    }
+    });
   }
 
   public static void fillWithLexicalVariables(@NotNull PsiElement variableNameElement,
@@ -190,7 +157,7 @@ public class PerlVariableCompletionUtil {
       return;
     }
 
-    PsiScopeProcessor processor = (element, state) -> {
+    PsiScopeProcessor processor = (element, __) -> {
       if (!(element instanceof PerlVariableDeclarationElement)) {
         return true;
       }
@@ -207,7 +174,6 @@ public class PerlVariableCompletionUtil {
       return true;
     };
     PerlResolveUtil.treeWalkUp(variableNameElement, processor);
-    PerlBuiltInVariablesService.getInstance(variableNameElement.getProject()).processVariables(processor);
   }
 
 
@@ -217,8 +183,18 @@ public class PerlVariableCompletionUtil {
    */
   @Nullable
   private static Consumer<PerlVariableDeclarationElement> createLexicalLookupGenerator(@Nullable PsiElement perlVariable,
-                                                                                       @NotNull Consumer<LookupElement> lookupConsumer) {
+                                                                                       @NotNull Consumer<LookupElementBuilder> lookupConsumer) {
     return createLookupGenerator(perlVariable, it -> lookupConsumer.accept(setLexical(it)));
+  }
+
+  /**
+   * @return lookup generator for built-in variables
+   * @see #createLookupGenerator(PsiElement, Consumer)
+   */
+  @Nullable
+  private static Consumer<PerlVariableDeclarationElement> createBuiltInLookupGenerator(@Nullable PsiElement perlVariable,
+                                                                                       @NotNull Consumer<LookupElementBuilder> lookupConsumer) {
+    return createLookupGenerator(perlVariable, it -> lookupConsumer.accept(it.withBoldness(true)));
   }
 
   /**
@@ -227,7 +203,7 @@ public class PerlVariableCompletionUtil {
    */
   @Nullable
   private static Consumer<PerlVariableDeclarationElement> createLookupGenerator(@Nullable PsiElement perlVariable,
-                                                                                @NotNull Consumer<LookupElement> lookupConsumer) {
+                                                                                @NotNull Consumer<LookupElementBuilder> lookupConsumer) {
     if (perlVariable instanceof PsiPerlScalarVariable) {
       return variable -> {
         if (variable.getActualType() == PerlVariableType.SCALAR) {
