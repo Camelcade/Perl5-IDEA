@@ -81,7 +81,10 @@ public class PerlVersion implements PerlVersionRegexps, Comparable<PerlVersion> 
   }
 
   public PerlVersion(String versionString) {
+    init(versionString);
+  }
 
+  private void init(String versionString) {
     try {
       Matcher matcher;
 
