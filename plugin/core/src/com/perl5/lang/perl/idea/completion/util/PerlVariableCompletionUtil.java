@@ -37,6 +37,7 @@ import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.*;
 import gnu.trove.THashSet;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -206,10 +207,14 @@ public class PerlVariableCompletionUtil {
    * @param forceShortMain if true and if fqn is in the {@code main} namespace, use a short form {@code ::}
    * @return consumer of variable declarations, generating lookup elements for them and feeding to the {@code lookupConsumer}
    */
+  @Contract("null,_,_->null")
   @Nullable
   private static Consumer<PerlVariableDeclarationElement> createLookupGenerator(@Nullable PsiElement perlVariable,
                                                                                 @NotNull Consumer<LookupElementBuilder> lookupConsumer,
                                                                                 boolean forceShortMain) {
+    if (perlVariable == null) {
+      return null;
+    }
     if (perlVariable instanceof PsiPerlScalarVariable) {
       return variable -> {
         if (variable.getActualType() == PerlVariableType.SCALAR) {
