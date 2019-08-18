@@ -1,0 +1,18 @@
+package Foo::Bar;
+
+sub something{
+    # make it lp make it lp make it lp make it lp make it lp make it lp make it lp make it lp make it lp make it lp
+    # make it lp make it lp make it lp make it lp make it lp make it lp make it lp make it lp make it lp make it lp
+    foreach(keys @ARGV) {
+        my $var = $_;
+        $v<caret>ar;
+    }
+}
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 322 in issue2109b.pl
+Value unknown
+----------
+Resolved
+----------
+Value unknown

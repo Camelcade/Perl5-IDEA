@@ -33,6 +33,12 @@ public class PerlValuesTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testIssue2109a() {doTest();}
+
+  @Test
+  public void testIssue2109b() {doTest();}
+
+  @Test
   public void testIssue2092First() {doTest();}
 
   @Test

@@ -1,0 +1,10 @@
+package Foo::Bar;
+
+sub something{
+    # make it lp make it lp make it lp make it lp make it lp make it lp make it lp make it lp make it lp make it lp
+    # make it lp make it lp make it lp make it lp make it lp make it lp make it lp make it lp make it lp make it lp
+    foreach my $element (@ARGV) {
+        my $var = $element;
+        $v<caret>ar;
+    }
+}
