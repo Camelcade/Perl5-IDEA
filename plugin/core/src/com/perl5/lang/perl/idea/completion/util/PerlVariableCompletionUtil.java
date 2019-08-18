@@ -183,112 +183,105 @@ public class PerlVariableCompletionUtil {
 
   /**
    * @return lookup generator for lexical variables
-   * @see #createLookupGenerator(PsiElement, Consumer)
+   * @see #createLookupGenerator(PsiElement, Consumer, boolean)
    */
   @Nullable
   private static Consumer<PerlVariableDeclarationElement> createLexicalLookupGenerator(@Nullable PsiElement perlVariable,
                                                                                        @NotNull Consumer<LookupElementBuilder> lookupConsumer) {
-    return createLookupGenerator(perlVariable, it -> lookupConsumer.accept(setLexical(it)));
+    return createLookupGenerator(perlVariable, it -> lookupConsumer.accept(setLexical(it)), false);
   }
 
   /**
    * @return lookup generator for built-in variables
-   * @see #createLookupGenerator(PsiElement, Consumer)
+   * @see #createLookupGenerator(PsiElement, Consumer, boolean)
    */
   @Nullable
   private static Consumer<PerlVariableDeclarationElement> createBuiltInLookupGenerator(@Nullable PsiElement perlVariable,
                                                                                        @NotNull Consumer<LookupElementBuilder> lookupConsumer) {
-    return createLookupGenerator(perlVariable, it -> lookupConsumer.accept(it.withBoldness(true)));
+    return createLookupGenerator(perlVariable, it -> lookupConsumer.accept(it.withBoldness(true)), false);
   }
 
   /**
    * @param perlVariable for which lookup is built (element under caret)
+   * @param forceShortMain if true and if fqn is in the {@code main} namespace, use a short form {@code ::}
    * @return consumer of variable declarations, generating lookup elements for them and feeding to the {@code lookupConsumer}
    */
   @Nullable
   private static Consumer<PerlVariableDeclarationElement> createLookupGenerator(@Nullable PsiElement perlVariable,
-                                                                                @NotNull Consumer<LookupElementBuilder> lookupConsumer) {
+                                                                                @NotNull Consumer<LookupElementBuilder> lookupConsumer,
+                                                                                boolean forceShortMain) {
     if (perlVariable instanceof PsiPerlScalarVariable) {
       return variable -> {
         if (variable.getActualType() == PerlVariableType.SCALAR) {
-          lookupConsumer.accept(createVariableLookupElement(variable, false));
+          lookupConsumer.accept(createVariableLookupElement(variable, forceShortMain));
         }
         else if (variable.getActualType() == PerlVariableType.ARRAY) {
-          lookupConsumer.accept(createArrayElementLookupElement(variable, false));
+          lookupConsumer.accept(createArrayElementLookupElement(variable, forceShortMain));
         }
         else if (variable.getActualType() == PerlVariableType.HASH) {
-          lookupConsumer.accept(createHashElementLookupElement(variable, false));
+          lookupConsumer.accept(createHashElementLookupElement(variable, forceShortMain));
         }
       };
     }
     else if (perlVariable instanceof PsiPerlArrayVariable) {
       return variable -> {
         if (variable.getActualType() == PerlVariableType.ARRAY) {
-          lookupConsumer.accept(createVariableLookupElement(variable, false));
-          lookupConsumer.accept(createArrayElementLookupElement(variable, false));
+          lookupConsumer.accept(createVariableLookupElement(variable, forceShortMain));
+          lookupConsumer.accept(createArrayElementLookupElement(variable, forceShortMain));
         }
         else if (variable.getActualType() == PerlVariableType.HASH) {
-          lookupConsumer.accept(createHashElementLookupElement(variable, false));
+          lookupConsumer.accept(createHashElementLookupElement(variable, forceShortMain));
         }
       };
     }
     else if (perlVariable instanceof PsiPerlArrayIndexVariable) {
       return variable -> {
         if (variable.getActualType() == PerlVariableType.ARRAY) {
-          lookupConsumer.accept(createVariableLookupElement(variable, false));
+          lookupConsumer.accept(createVariableLookupElement(variable, forceShortMain));
         }
       };
     }
     else if (perlVariable instanceof PsiPerlHashVariable) {
       return variable -> {
         if (variable.getActualType() == PerlVariableType.HASH) {
-          lookupConsumer.accept(createVariableLookupElement(variable, false));
+          lookupConsumer.accept(createVariableLookupElement(variable, forceShortMain));
         }
       };
+    }
+    else if (perlVariable instanceof PerlGlobVariable) {
+      return variable -> lookupConsumer.accept(createVariableLookupElement(variable, forceShortMain));
     }
     return null;
   }
 
   public static void fillWithFullQualifiedVariables(@NotNull PsiElement variableNameElement, @NotNull CompletionResultSet resultSet) {
     PsiElement perlVariable = variableNameElement.getParent();
+    Consumer<PerlVariableDeclarationElement> lookupGenerator = createLookupGenerator(
+      perlVariable, resultSet::addElement,
+      StringUtil.startsWith(variableNameElement.getNode().getChars(), PerlPackageUtil.NAMESPACE_SEPARATOR));
+    if (lookupGenerator == null) {
+      return;
+    }
+
+    Processor<PerlVariableDeclarationElement> lookupGeneratorProcessor = it -> {
+      lookupGenerator.accept(it);
+      return true;
+    };
+
     Project project = variableNameElement.getProject();
     GlobalSearchScope resolveScope = variableNameElement.getResolveScope();
-    String variableName = variableNameElement.getText();
-
-    boolean forceShortMain = StringUtil.startsWith(variableName, PerlPackageUtil.NAMESPACE_SEPARATOR);
 
     final CompletionResultSet finalResultSet = resultSet;
 
-    Processor<PerlVariableDeclarationElement> scalarDefaultProcessor = wrapper -> {
-      finalResultSet.addElement(createVariableLookupElement(wrapper, forceShortMain));
-      return true;
-    };
-
-    Processor<PerlVariableDeclarationElement> arrayDefaultProcessor = wrapper -> {
-      finalResultSet.addElement(createVariableLookupElement(wrapper, forceShortMain));
-      return true;
-    };
-
-    Processor<PerlVariableDeclarationElement> hashDefaultProcessor = wrapper -> {
-      finalResultSet.addElement(createVariableLookupElement(wrapper, forceShortMain));
-      return true;
-    };
-
     if (perlVariable instanceof PsiPerlScalarVariable) {
-      PerlScalarUtil.processDefinedGlobalScalars(project, resolveScope, scalarDefaultProcessor);
-      PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, wrapper -> {
-        finalResultSet.addElement(createArrayElementLookupElement(wrapper, forceShortMain));
-        return true;
-      });
-      PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, wrapper -> {
-        finalResultSet.addElement(createHashElementLookupElement(wrapper, forceShortMain));
-        return true;
-      });
+      PerlScalarUtil.processDefinedGlobalScalars(project, resolveScope, lookupGeneratorProcessor);
+      PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, lookupGeneratorProcessor);
+      PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, lookupGeneratorProcessor);
     }
     else if (perlVariable instanceof PerlGlobVariable) {
-      PerlScalarUtil.processDefinedGlobalScalars(project, resolveScope, scalarDefaultProcessor);
-      PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, arrayDefaultProcessor);
-      PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, hashDefaultProcessor);
+      PerlScalarUtil.processDefinedGlobalScalars(project, resolveScope, lookupGeneratorProcessor);
+      PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, lookupGeneratorProcessor);
+      PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, lookupGeneratorProcessor);
 
       // globs
       PerlGlobUtil.processDefinedGlobsNames(project, resolveScope, typeglob -> {
@@ -297,19 +290,16 @@ public class PerlVariableCompletionUtil {
       });
     }
     else if (perlVariable instanceof PsiPerlArrayVariable) {
-      PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, arrayDefaultProcessor);
-      PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, wrapper -> {
-        finalResultSet.addElement(createHashElementLookupElement(wrapper, forceShortMain));
-        return true;
-      });
+      PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, lookupGeneratorProcessor);
+      PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, lookupGeneratorProcessor);
     }
     else if (perlVariable instanceof PsiPerlArrayIndexVariable) {
       // global arrays
-      PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, arrayDefaultProcessor);
+      PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, lookupGeneratorProcessor);
     }
     else if (perlVariable instanceof PsiPerlHashVariable) {
       // global hashes
-      PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, hashDefaultProcessor);
+      PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, lookupGeneratorProcessor);
     }
   }
 }
