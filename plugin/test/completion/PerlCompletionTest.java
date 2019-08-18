@@ -49,6 +49,38 @@ public class PerlCompletionTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testHashSlices520LexicalDisabled() {
+    doTestHashSlices520Lexical();
+  }
+
+  @Test
+  public void testHashSlices520LexicalEnabled() {
+    PerlSharedSettings.getInstance(getProject()).setTargetPerlVersion(PerlVersion.V5_20);
+    doTestHashSlices520Lexical();
+  }
+
+  private void doTestHashSlices520Lexical() {
+    initWithFileSmart("hashSlices520lexical");
+    doTestCompletionCheck();
+  }
+
+  @Test
+  public void testHashSlices520GlobalDisabled() {
+    doTestHashSlices520Global();
+  }
+
+  @Test
+  public void testHashSlices520GlobalEnabled() {
+    PerlSharedSettings.getInstance(getProject()).setTargetPerlVersion(PerlVersion.V5_20);
+    doTestHashSlices520Global();
+  }
+
+  private void doTestHashSlices520Global() {
+    initWithFileSmart("hashSlices520global");
+    doTestCompletionCheck();
+  }
+
+  @Test
   public void testIssue2024() {
     String fileName = "MyCustomPackage.pm";
     VirtualFile package1 = myFixture.copyFileToProject(fileName, "lib/" + fileName);

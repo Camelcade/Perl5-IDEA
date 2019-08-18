@@ -1,0 +1,5 @@
+our($scalar,@array,%hash,%otherhash);
+
+%main::<caret>
+
+

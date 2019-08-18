@@ -28,7 +28,9 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.Processor;
 import com.perl5.lang.perl.idea.PerlCompletionWeighter;
 import com.perl5.lang.perl.idea.completion.PerlInsertHandlers;
+import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.ui.PerlIconProvider;
+import com.perl5.lang.perl.internals.PerlVersion;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlBuiltInVariable;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
@@ -215,6 +217,7 @@ public class PerlVariableCompletionUtil {
     if (perlVariable == null) {
       return null;
     }
+    boolean hashHashSlices = hasHashSlices(perlVariable);
     if (perlVariable instanceof PsiPerlScalarVariable) {
       return variable -> {
         if (variable.getActualType() == PerlVariableType.SCALAR) {
@@ -248,8 +251,15 @@ public class PerlVariableCompletionUtil {
     }
     else if (perlVariable instanceof PsiPerlHashVariable) {
       return variable -> {
-        if (variable.getActualType() == PerlVariableType.HASH) {
+        PerlVariableType variableType = variable.getActualType();
+        if (variableType == PerlVariableType.HASH) {
           lookupConsumer.accept(createVariableLookupElement(variable, forceShortMain));
+          if (hashHashSlices) {
+            lookupConsumer.accept(createHashElementLookupElement(variable, forceShortMain));
+          }
+        }
+        else if (hashHashSlices && variableType == PerlVariableType.ARRAY) {
+          lookupConsumer.accept(createArrayElementLookupElement(variable, forceShortMain));
         }
       };
     }
@@ -257,6 +267,13 @@ public class PerlVariableCompletionUtil {
       return variable -> lookupConsumer.accept(createVariableLookupElement(variable, forceShortMain));
     }
     return null;
+  }
+
+  /**
+   * @return true iff 5.20 hash/array slices are enabled
+   */
+  private static boolean hasHashSlices(@NotNull PsiElement psiElement) {
+    return !PerlSharedSettings.getInstance(psiElement).getTargetPerlVersion().lesserThan(PerlVersion.V5_20);
   }
 
   public static void fillWithFullQualifiedVariables(@NotNull PsiElement variableNameElement, @NotNull CompletionResultSet resultSet) {
@@ -305,6 +322,9 @@ public class PerlVariableCompletionUtil {
     else if (perlVariable instanceof PsiPerlHashVariable) {
       // global hashes
       PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, lookupGeneratorProcessor);
+      if (hasHashSlices(perlVariable)) {
+        PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, lookupGeneratorProcessor);
+      }
     }
   }
 }
