@@ -143,18 +143,19 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
 
   @Nullable
   @Override
-  public SuggestedNameInfo getSuggestedNames(@NotNull PsiElement targetElement,
+  public SuggestedNameInfo getSuggestedNames(@Nullable PsiElement targetElement,
                                              @Nullable PsiElement contextElement,
                                              @NotNull Set<String> result) {
     suggestAndAddRecommendedName(targetElement, contextElement, result);
     return SuggestedNameInfo.NULL_INFO;
   }
 
+  @Contract("null, _, _ -> null")
   @Nullable
-  private String suggestAndAddRecommendedName(@NotNull PsiElement targetElement,
+  private String suggestAndAddRecommendedName(@Nullable PsiElement targetElement,
                                               @Nullable PsiElement contextElement,
                                               @NotNull Set<String> result) {
-    if (!targetElement.getLanguage().isKindOf(PerlLanguage.INSTANCE)) {
+    if (targetElement == null || !targetElement.getLanguage().isKindOf(PerlLanguage.INSTANCE)) {
       return null;
     }
 
