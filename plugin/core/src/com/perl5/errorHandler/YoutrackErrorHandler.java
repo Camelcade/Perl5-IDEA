@@ -166,54 +166,59 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
       throw new RuntimeException(DiagnosticBundle.message("error.report.failure.message"));
     }
 
-    CloseableHttpClient httpClient = HttpClients.createDefault();
-    HttpPost loginPost = new HttpPost(LOGIN_URL);
-    MultipartEntityBuilder builder = MultipartEntityBuilder.create()
-      .addTextBody("login", "autoreporter")
-      .addTextBody("password", "fdnjhtgjhn");
-    loginPost.setEntity(builder.build());
-    CloseableHttpResponse response;
-    try {
-      response = httpClient.execute(loginPost);
-    }
-    catch (IOException ex) {
-      LOGGER.warn("Error logging on: " + ex.getMessage());
-      return null;
-    }
+    try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
+      // logging on
+      HttpPost loginPost = new HttpPost(LOGIN_URL);
+      MultipartEntityBuilder builder = MultipartEntityBuilder.create()
+        .addTextBody("login", "autoreporter")
+        .addTextBody("password", "fdnjhtgjhn");
+      loginPost.setEntity(builder.build());
+      CloseableHttpResponse response;
+      try {
+        response = httpClient.execute(loginPost);
+      }
+      catch (IOException ex) {
+        LOGGER.warn("Error logging on: " + ex.getMessage());
+        return null;
+      }
       LOGGER.info(response.toString());
 
-    // posting an issue
+      // posting an issue
+      ContentType encoding = ContentType.create("text/plain", Consts.UTF_8);
+      builder = MultipartEntityBuilder.create()
+        .addTextBody("project", PROJECT)
+        .addTextBody("assignee", "Unassigned")
+        .addTextBody("summary", desc.replaceAll("[\r\n]", ""), encoding)
+        .addTextBody("description", body, encoding)
+        .addTextBody("priority", "4")
+        .addTextBody("type", "Exception")
+      ;
 
-    ContentType encoding = ContentType.create("text/plain", Consts.UTF_8);
-    builder = MultipartEntityBuilder.create()
-      .addTextBody("project", PROJECT)
-      .addTextBody("assignee", "Unassigned")
-      .addTextBody("summary", desc.replaceAll("[\r\n]", ""), encoding)
-      .addTextBody("description", body, encoding)
-      .addTextBody("priority", "4")
-      .addTextBody("type", "Exception")
-    ;
+      if (StringUtil.isNotEmpty(affectedVersion)) {
+        builder.addTextBody("affectsVersion", affectedVersion);
+      }
 
-    if (StringUtil.isNotEmpty(affectedVersion)) {
-      builder.addTextBody("affectsVersion", affectedVersion);
+      for (Attachment it : attachments) {
+        builder.addBinaryBody("attachments[]", it.getBytes(), encoding, it.getName());
+      }
+
+      HttpPost issuePost = new HttpPost(SERVER_ISSUE_URL);
+      issuePost.setEntity(builder.build());
+
+      try {
+        response = httpClient.execute(issuePost);
+      }
+      catch (IOException ex) {
+        LOGGER.warn("Error posting an issue: " + ex.getMessage());
+        return null;
+      }
+
+      return response.toString();
     }
-
-    for (Attachment it : attachments) {
-      builder.addBinaryBody("attachments[]", it.getBytes(), encoding, it.getName());
+    catch (IOException e) {
+      LOGGER.warn(e);
     }
-
-    HttpPost issuePost = new HttpPost(SERVER_ISSUE_URL);
-    issuePost.setEntity(builder.build());
-
-    try {
-      response = httpClient.execute(issuePost);
-    }
-    catch (IOException ex) {
-      LOGGER.warn("Error posting an issue: " + ex.getMessage());
-      return null;
-    }
-
-    return response.toString();
+    return null;
   }
 
   private static void popupResultInfo(final SubmittedReportInfo reportInfo, final Project project) {
