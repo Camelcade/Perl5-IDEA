@@ -33,6 +33,9 @@ public class PerlControlFlowTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testBareLpCodeBlock() {doTestControlFlow(false);}
+
+  @Test
   public void testVariableInAnonSub() {doTest();}
 
   @Test

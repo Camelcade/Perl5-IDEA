@@ -24,6 +24,7 @@ import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.TokenType;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
@@ -96,7 +97,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
    * We should not create a node for following elements, only accept children.
    */
   private static final TokenSet IGNORED_CONTAINERS = TokenSet.create(
-    FOR_INIT, FOR_CONDITION, FOR_MUTATOR
+    FOR_INIT, FOR_CONDITION, FOR_MUTATOR, TokenType.ERROR_ELEMENT
   );
 
   /**
@@ -539,7 +540,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       TransparentInstruction nextInstruction = createNextInstruction(o);
       myLoopNextInstructions.put(o, nextInstruction);
       myLoopRedoInstructions.put(o, startTransparentNode(o, "redo"));
-      acceptSafe(o.getBlock());
+      acceptSafe(o.getBlockSmart());
       addNodeAndCheckPending(nextInstruction);
       acceptSafe(o.getContinueBlock());
       myLoopNextInstructions.remove(o);

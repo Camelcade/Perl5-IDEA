@@ -1545,7 +1545,16 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   }
 
   protected final void doTestControlFlow() {
-    initWithFileSmartWithoutErrors();
+    doTestControlFlow(true);
+  }
+
+  protected final void doTestControlFlow(boolean checkErrors) {
+    if (checkErrors) {
+      initWithFileSmartWithoutErrors();
+    }
+    else {
+      initWithFileSmart();
+    }
     PsiElement psiElement = getFile().findElementAt(getEditor().getCaretModel().getOffset());
     assertNotNull(psiElement);
     PsiElement controlFlowScope = PerlControlFlowBuilder.getControlFlowScope(psiElement);

@@ -1,0 +1,30 @@
+package Foo::Bar;
+
+sub something($foo = 42[])  {
+    # something something something something something something something something something something something
+    # something something something something something something something something something something something
+    # something something something something something something something something something something something
+    # something something something something something something something something something something something
+    # something something something something something something something something something something something
+    # something something something something something something something something something something something
+    # something something something something something something something something something something something
+    # something something something something something something something something something something something
+    # something something something something something something something something something something something
+    # something something something something something something something something something something something
+    # something something something something something something something something something something something
+    # something something something something something something something something something something something
+    # something something something something something something something something something something something
+    # something something something something something something something something something something something
+    # something something something something something something something something something something something
+    # something something something something something something something something something something something
+    # something something something something something something something something something something something
+    # something something something something something something something something something something something
+    # something something something something something something something something something something something
+    # something something something something something something something something something something something
+    # something something something something something something something something something something something
+    # something something something something something something something something something something something
+    # something something something something something something something something something something something
+    if(){
+        $somet<caret>hing;
+    }
+}

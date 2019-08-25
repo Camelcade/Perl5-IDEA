@@ -1,0 +1,38 @@
+package Foo::Bar;
+
+sub something($foo = 42[])  {
+    # something something something something something something something something something something something
+    # something something something something something something something something something something something
+    # something something something something something something something something something something something
+    # something something something something something something something something something something something
+    # something something something something something something something something something something something
+    # something something something something something something something something something something something
+    # something something something something something something something something something something something
+    # something something something something something something something something something something something
+    # something something something something something something something something something something something
+    # something something something something something something something something something something something
+    # something something something something something something something something something something something
+    # something something something something something something something something something something something
+    # something something something something something something something something something something something
+    # something something something something something something something something something something something
+    # something something something something something something something something something something something
+    # something something something something something something something something something something something
+    # something something something something something something something something something something something
+    # something something something something something something something something something something something
+    # something something something something something something something something something something something
+    # something something something something something something something something something something something
+    # something something something something something something something something something something something
+    # something something something something something something something something something something something
+    # something something something something something something something something something something something
+    if(){
+        $somet<caret>hing;
+    }
+}
+----------
+$something
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 2735 in bareLpCodeBlock.pl
+Value unknown
+----------
+Resolved
+----------
+Value unknown
