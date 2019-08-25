@@ -49,20 +49,15 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
-import static com.intellij.openapi.diagnostic.SubmittedReportInfo.SubmissionStatus.*;
+import static com.intellij.openapi.diagnostic.SubmittedReportInfo.SubmissionStatus.FAILED;
+import static com.intellij.openapi.diagnostic.SubmittedReportInfo.SubmissionStatus.NEW_ISSUE;
 import static com.intellij.openapi.util.text.StringUtil.isEmpty;
 
 public class YoutrackErrorHandler extends ErrorReportSubmitter {
@@ -73,8 +68,6 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
   private static final String SERVER_REST_URL = SERVER_URL + "rest/";
   private static final String SERVER_ISSUE_URL = SERVER_REST_URL + "issue";
   private static final String LOGIN_URL = SERVER_REST_URL + "user/login";
-
-  private final CookieManager cookieManager = new CookieManager();
 
   @NotNull
   @Override
@@ -106,18 +99,6 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
     final IdeaLoggingEvent ideaLoggingEvent = ideaLoggingEvents[0];
     final String throwableText = ideaLoggingEvent.getThrowableText();
     String description = throwableText.substring(0, Math.min(Math.max(80, throwableText.length()), 80));
-
-
-    @SuppressWarnings("ThrowableResultOfMethodCallIgnored")
-    int signature = ideaLoggingEvent.getThrowable().getStackTrace()[0].hashCode();
-
-    String existing = findExisting(String.valueOf(signature));
-    if (existing != null) {
-      final SubmittedReportInfo reportInfo = new SubmittedReportInfo(SERVER_URL + "issue/" + existing, existing, DUPLICATE);
-      popupResultInfo(reportInfo, project);
-      return reportInfo;
-    }
-
 
     StringBuilder descBuilder = new StringBuilder();
 
@@ -170,10 +151,6 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
 
 
     final SubmittedReportInfo reportInfo = new SubmittedReportInfo(SERVER_URL + "issue/" + ResultString, ResultString, NEW_ISSUE);
-
-    if (signature != 0) {
-      runCommand(ResultString, "Exception Signature " + signature);
-    }
 
     popupResultInfo(reportInfo, project);
 
@@ -237,89 +214,6 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
     }
 
     return response.toString();
-  }
-
-  //http://sylvanaar.myjetbrains.com/youtrack/rest/issue?filter=Exception%20Signature%3A801961033
-  @Nullable
-  private String findExisting(String signature) {
-    try {
-      LOGGER.debug(String.format("Run Query for signature <%s>", signature));
-      URL url = new URL(String.format("%s?filter=Exception%%20Signature%%3A%s&with=id", SERVER_ISSUE_URL, signature));
-
-      URLConnection conn = getUrlConnectionAndLogin(url);
-
-      // Get The Response
-      BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-      String line;
-      StringBuilder response = new StringBuilder(500);
-      while ((line = rd.readLine()) != null) {
-        response.append(line);
-      }
-
-      // <?xml version="1.0" encoding="UTF-8" standalone="yes"?><issueCompacts><issue
-      // id="IDLua-1293"/></issueCompacts>
-      LOGGER.debug(response.toString());
-
-      String resultString = null;
-      try {
-        Pattern regex = Pattern.compile("<issue id=\"([^\"]+)\"/>", Pattern.MULTILINE);
-        Matcher regexMatcher = regex.matcher(response.toString());
-        if (regexMatcher.find()) {
-          resultString = regexMatcher.group(1);
-        }
-      }
-      catch (PatternSyntaxException ex) {
-        // Syntax error in the regular expression
-      }
-
-      if (resultString != null) {
-        LOGGER.debug("could be dumplicate of " + resultString);
-        return resultString;
-      }
-    }
-    catch (IOException e) {
-      LOGGER.info("Query Failed", e);
-    }
-
-    return null;
-  }
-
-  private URLConnection getUrlConnectionAndLogin(URL url) throws IOException {
-    URLConnection conn = url.openConnection();
-    conn.setDoOutput(true);
-    cookieManager.setCookies(conn);
-    return conn;
-  }
-
-  // POST /rest/issue/{issue}/execute?{command}&{comment}&{group}&{disableNotifications}&{runAs}
-  private void runCommand(String issueID, String command) {
-    try {
-      LOGGER.debug(String.format("Run Command <%s> on issue <%s>", command, issueID));
-      URL url = new URL(SERVER_ISSUE_URL + "/" + issueID + "/execute");
-
-      URLConnection conn = getUrlConnectionAndLogin(url);
-
-      String data = URLEncoder.encode("command", "UTF-8") + "=" + URLEncoder.encode(command, "UTF-8");
-      data += "&" + URLEncoder.encode("disableNotifications", "UTF-8") + "=" + URLEncoder.encode("true", "UTF-8");
-
-      OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-      wr.write(data);
-      wr.flush();
-
-
-      // Get The Response
-      BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-      String line;
-      StringBuilder response = new StringBuilder();
-      while ((line = rd.readLine()) != null) {
-        response.append(line);
-      }
-
-      LOGGER.debug(response.toString());
-    }
-    catch (IOException e) {
-      LOGGER.info("Command Failed", e);
-    }
   }
 
   private static void popupResultInfo(final SubmittedReportInfo reportInfo, final Project project) {
