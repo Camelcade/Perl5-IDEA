@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,9 @@ import com.intellij.navigation.ItemPresentation;
 import com.intellij.navigation.PsiElementNavigationItem;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.SmartPointerManager;
+import com.intellij.psi.SmartPsiElementPointer;
 import com.intellij.util.containers.FactoryMap;
 import com.perl5.PerlBundle;
 import com.perl5.PerlIcons;
@@ -95,12 +98,12 @@ public class PerlAttributeGrouper implements Grouper, ActionPresentation {
 
   private static class AttributeGroup implements Group, ItemPresentation, PsiElementNavigationItem {
     @NotNull
-    private final PerlMooseAttributeWrapper myAttributeWrapper;
+    private final SmartPsiElementPointer<PerlMooseAttributeWrapper> myAttributeWrapperPointer;
     @NotNull
     private final List<TreeElement> myChildren = new ArrayList<>();
 
     public AttributeGroup(@NotNull PerlMooseAttributeWrapper attributeWrapper) {
-      myAttributeWrapper = attributeWrapper;
+      myAttributeWrapperPointer = SmartPointerManager.createPointer(attributeWrapper);
     }
 
     public void addChild(@NotNull TreeElement child) {
@@ -122,7 +125,11 @@ public class PerlAttributeGrouper implements Grouper, ActionPresentation {
     @Nullable
     @Override
     public String getPresentableText() {
-      List<String> namesList = myAttributeWrapper.getAttributesNames();
+      PerlMooseAttributeWrapper element = myAttributeWrapperPointer.getElement();
+      if (element == null) {
+        return PerlBundle.message("perl.presentation.invalid");
+      }
+      List<String> namesList = element.getAttributesNames();
       String names = namesList.isEmpty() ? PerlBundle.message("perl.structure.attributes.unknown") : StringUtil.join(namesList, ", ");
       return StringUtil.shortenPathWithEllipsis(names, 30);
     }
@@ -130,7 +137,8 @@ public class PerlAttributeGrouper implements Grouper, ActionPresentation {
     @Nullable
     @Override
     public String getLocationString() {
-      return myAttributeWrapper.getContainingFile().getName();
+      PsiFile containingFile = myAttributeWrapperPointer.getContainingFile();
+      return containingFile == null ? PerlBundle.message("perl.presentation.invalid") : containingFile.getName();
     }
 
     @Nullable
@@ -142,7 +150,7 @@ public class PerlAttributeGrouper implements Grouper, ActionPresentation {
     @Nullable
     @Override
     public PsiElement getTargetElement() {
-      return myAttributeWrapper;
+      return myAttributeWrapperPointer.getElement();
     }
 
     @Nullable
@@ -153,17 +161,22 @@ public class PerlAttributeGrouper implements Grouper, ActionPresentation {
 
     @Override
     public void navigate(boolean requestFocus) {
-      myAttributeWrapper.navigate(requestFocus);
+      PerlMooseAttributeWrapper element = myAttributeWrapperPointer.getElement();
+      if (element != null) {
+        element.navigate(requestFocus);
+      }
     }
 
     @Override
     public boolean canNavigate() {
-      return myAttributeWrapper.canNavigate();
+      PerlMooseAttributeWrapper element = myAttributeWrapperPointer.getElement();
+      return element != null && element.canNavigate();
     }
 
     @Override
     public boolean canNavigateToSource() {
-      return myAttributeWrapper.canNavigateToSource();
+      PerlMooseAttributeWrapper element = myAttributeWrapperPointer.getElement();
+      return element != null && element.canNavigateToSource();
     }
   }
 }
