@@ -1,20 +1,17 @@
 /*
- * Copyright 2013 Jon S Akhtar (Sylvanaar)
- * Copyright 2013-2014 must-be.org
- * Copyright 2015 VISTALL
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package com.perl5.errorHandler;
@@ -24,26 +21,29 @@ import com.intellij.diagnostic.IdeErrorsDialog;
 import com.intellij.diagnostic.ReportMessages;
 import com.intellij.ide.BrowserUtil;
 import com.intellij.ide.DataManager;
-import com.intellij.ide.plugins.IdeaPluginDescriptor;
-import com.intellij.ide.plugins.PluginManager;
 import com.intellij.notification.NotificationListener;
 import com.intellij.notification.NotificationType;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.application.ApplicationInfo;
 import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.diagnostic.ErrorReportSubmitter;
-import com.intellij.openapi.diagnostic.IdeaLoggingEvent;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.diagnostic.SubmittedReportInfo;
-import com.intellij.openapi.extensions.PluginId;
+import com.intellij.openapi.diagnostic.*;
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.Task;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.SystemInfo;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.Consumer;
+import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.util.PerlPluginUtil;
+import org.apache.http.Consts;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -56,6 +56,8 @@ import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
@@ -107,9 +109,9 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
 
 
     @SuppressWarnings("ThrowableResultOfMethodCallIgnored")
-    Integer signature = ideaLoggingEvent.getThrowable().getStackTrace()[0].hashCode();
+    int signature = ideaLoggingEvent.getThrowable().getStackTrace()[0].hashCode();
 
-    String existing = findExisting(signature);
+    String existing = findExisting(String.valueOf(signature));
     if (existing != null) {
       final SubmittedReportInfo reportInfo = new SubmittedReportInfo(SERVER_URL + "issue/" + existing, existing, DUPLICATE);
       popupResultInfo(reportInfo, project);
@@ -117,7 +119,7 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
     }
 
 
-    @NonNls StringBuilder descBuilder = new StringBuilder();
+    StringBuilder descBuilder = new StringBuilder();
 
     descBuilder.append("Build: ").append(ApplicationInfo.getInstance().getBuild()).append('\n');
     descBuilder.append("OS: ").append(SystemInfo.OS_NAME).append(" ").append(SystemInfo.OS_ARCH).append(" ").append(SystemInfo.OS_VERSION)
@@ -127,29 +129,23 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
     descBuilder.append("Java Arch: ").append(SystemInfo.is32Bit ? "32 bit" : "64 bit").append('\n');
     descBuilder.append("Java Runtime Version: ").append(SystemInfo.JAVA_RUNTIME_VERSION).append('\n');
     descBuilder.append("Perl Plugin Version: ").append(PerlPluginUtil.getPluginVersion()).append('\n');
+    descBuilder.append("Description: ").append(StringUtil.notNullize(addInfo, "<none>"));
 
-    String affectedVersion = null;
-    Throwable t = ideaLoggingEvent.getThrowable();
-    final PluginId pluginId = IdeErrorsDialog.findPluginId(t);
-    if (pluginId != null) {
-      final IdeaPluginDescriptor ideaPluginDescriptor = PluginManager.getPlugin(pluginId);
-      if (ideaPluginDescriptor != null) {
-        descBuilder.append("Plugin Version: ").append(ideaPluginDescriptor.getVersion()).append("\n");
-        affectedVersion = ideaPluginDescriptor.getVersion();
+    List<Attachment> attachments = new ArrayList<>();
+    for (IdeaLoggingEvent e : ideaLoggingEvents) {
+      descBuilder
+        .append("\n").append("Message: ").append(e.getMessage())
+        .append("\n").append("Throwable: ").append(e.getThrowableText())
+        .append("\n")
+      ;
+
+      Throwable throwable = e.getThrowable();
+      if (throwable instanceof ExceptionWithAttachments) {
+        ContainerUtil.addAll(attachments, ((ExceptionWithAttachments)throwable).getAttachments());
       }
     }
 
-    if (addInfo == null) {
-      addInfo = "<none>";
-    }
-
-    descBuilder.append("Description: ").append(addInfo);
-
-    for (IdeaLoggingEvent e : ideaLoggingEvents) {
-      descBuilder.append("\n\n").append(e.toString());
-    }
-
-    String result = submit(description, descBuilder.toString(), affectedVersion);
+    String result = submit(description, descBuilder.toString(), PerlPluginUtil.getPluginVersion(), attachments);
     LOGGER.info("Error submitted, response: " + result);
 
     if (result == null) {
@@ -184,87 +180,60 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
     return reportInfo;
   }
 
-  public String submit(String desc, String body, String affectedVersion) {
+  @Nullable
+  public String submit(@Nullable String desc,
+                       @NotNull String body,
+                       @Nullable String affectedVersion,
+                       @NotNull List<Attachment> attachments) {
     if (isEmpty(desc)) {
       throw new RuntimeException(DiagnosticBundle.message("error.report.failure.message"));
     }
 
-    StringBuilder response = new StringBuilder();
-
-    //Create Post String
-    String data;
+    CloseableHttpClient httpClient = HttpClients.createDefault();
+    HttpPost loginPost = new HttpPost(LOGIN_URL);
+    MultipartEntityBuilder builder = MultipartEntityBuilder.create()
+      .addTextBody("login", "autoreporter")
+      .addTextBody("password", "fdnjhtgjhn");
+    loginPost.setEntity(builder.build());
+    CloseableHttpResponse response;
     try {
-      // Log-In
-      String userName = "autoreporter";
-      data = URLEncoder.encode("login", "UTF-8") + "=" + URLEncoder.encode(userName, "UTF-8");
-      data += "&" + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode("fdnjhtgjhn", "UTF-8");
-      // Send Data To Page
-      URL url = new URL(LOGIN_URL);
-      URLConnection conn = url.openConnection();
-      conn.setDoOutput(true);
-      OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-      wr.write(data);
-      wr.flush();
-
-
-      // Get The Login Cookie
-      BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-      String line;
-
-      while ((line = rd.readLine()) != null) {
-        response.append(line);
-      }
-
-      LOGGER.info(response.toString());
-      cookieManager.storeCookies(conn);
-
-      // project=TST&assignee=beto&summary=new issue&description=description of new issue
-      // #&priority=show-stopper&type=feature&subsystem=UI&state=Reopened&affectsVersion=2.0,
-      // 2.0.1&fixedVersions=2.0&fixedInBuild=2.0.1
-      // POST /rest/issue?{project}&{assignee}&{summary}&{description}&{priority}&{type}&{subsystem}&{state
-      // }&{affectsVersion}&{fixedVersions}&{attachments}&{fixedInBuild}
-
-      // Make the description 1 line
-      desc = desc.replaceAll("[\r\n]", "");
-
-      // build the static post data for this issue
-      data = URLEncoder.encode("project", "UTF-8") + "=" + URLEncoder.encode(PROJECT, "UTF-8");
-      data += "&" + URLEncoder.encode("assignee", "UTF-8") + "=" + URLEncoder.encode("Unassigned", "UTF-8");
-      data += "&" + URLEncoder.encode("summary", "UTF-8") + "=" + URLEncoder.encode(desc, "UTF-8");
-      data += "&" + URLEncoder.encode("description", "UTF-8") + "=" +
-              URLEncoder.encode(body, "UTF-8");
-      data += "&" + URLEncoder.encode("priority", "UTF-8") + "=" + URLEncoder.encode("4", "UTF-8");
-      data += "&" + URLEncoder.encode("type", "UTF-8") + "=" + URLEncoder.encode("Exception", "UTF-8");
-
-      if (affectedVersion != null) {
-        data += "&" + URLEncoder.encode("affectsVersion", "UTF-8") + "=" +
-                URLEncoder.encode(affectedVersion, "UTF-8");
-      }
-
-
-      // We will use \n exclusively
-      data = data.replaceAll("\r", "");
-
-
-      // Send Data To Page
-      url = new URL(SERVER_ISSUE_URL);
-      conn = url.openConnection();
-
-      conn.setDoOutput(true);
-      cookieManager.setCookies(conn); // Use the login from earlier
-
-      wr = new OutputStreamWriter(conn.getOutputStream());
-      wr.write(data);
-      wr.flush();
-
-      // Get The Response
-      rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-      while ((line = rd.readLine()) != null) {
-        response.append(line);
-      }
+      response = httpClient.execute(loginPost);
     }
-    catch (Exception e) {
-      LOGGER.error(e);
+    catch (IOException ex) {
+      LOGGER.warn("Error logging on: " + ex.getMessage());
+      return null;
+    }
+      LOGGER.info(response.toString());
+
+    // posting an issue
+
+    ContentType encoding = ContentType.create("text/plain", Consts.UTF_8);
+    builder = MultipartEntityBuilder.create()
+      .addTextBody("project", PROJECT)
+      .addTextBody("assignee", "Unassigned")
+      .addTextBody("summary", desc.replaceAll("[\r\n]", ""), encoding)
+      .addTextBody("description", body, encoding)
+      .addTextBody("priority", "4")
+      .addTextBody("type", "Exception")
+    ;
+
+    if (StringUtil.isNotEmpty(affectedVersion)) {
+      builder.addTextBody("affectsVersion", affectedVersion);
+    }
+
+    for (Attachment it : attachments) {
+      builder.addBinaryBody("attachments[]", it.getBytes(), encoding, it.getName());
+    }
+
+    HttpPost issuePost = new HttpPost(SERVER_ISSUE_URL);
+    issuePost.setEntity(builder.build());
+
+    try {
+      response = httpClient.execute(issuePost);
+    }
+    catch (IOException ex) {
+      LOGGER.warn("Error posting an issue: " + ex.getMessage());
+      return null;
     }
 
     return response.toString();
@@ -272,10 +241,10 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
 
   //http://sylvanaar.myjetbrains.com/youtrack/rest/issue?filter=Exception%20Signature%3A801961033
   @Nullable
-  private String findExisting(Integer signature) {
+  private String findExisting(String signature) {
     try {
-      LOGGER.debug(String.format("Run Query for signature <%s>", signature.toString()));
-      URL url = new URL(String.format("%s?filter=Exception%%20Signature%%3A%s&with=id", SERVER_ISSUE_URL, signature.toString()));
+      LOGGER.debug(String.format("Run Query for signature <%s>", signature));
+      URL url = new URL(String.format("%s?filter=Exception%%20Signature%%3A%s&with=id", SERVER_ISSUE_URL, signature));
 
       URLConnection conn = getUrlConnectionAndLogin(url);
 
