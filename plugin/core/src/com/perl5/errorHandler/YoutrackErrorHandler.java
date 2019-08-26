@@ -44,6 +44,7 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -115,8 +116,8 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
     List<Attachment> attachments = new ArrayList<>();
     for (IdeaLoggingEvent e : ideaLoggingEvents) {
       descBuilder
-        .append("\n").append("Message: ").append(e.getMessage())
-        .append("\n").append("Throwable: ").append(e.getThrowableText())
+        .append("\n").append("Message: ").append(StringUtil.notNullize(e.getMessage(), "none"))
+        .append("\n").append("Throwable:\n").append(e.getThrowableText())
         .append("\n")
       ;
 
@@ -213,7 +214,7 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
         return null;
       }
 
-      return response.toString();
+      return EntityUtils.toString(response.getEntity());
     }
     catch (IOException e) {
       LOGGER.warn(e);
