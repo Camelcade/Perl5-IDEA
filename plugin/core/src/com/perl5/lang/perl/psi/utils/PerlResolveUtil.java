@@ -267,13 +267,13 @@ public class PerlResolveUtil {
       elementInstructionIndex  = PerlControlFlowBuilder.findInstructionNumberByRange(instructions, elementToFind);
     }
     if (elementInstructionIndex  < 0) {
-      LOG.error("Unable to find an instruction for " +
-                element.getClass() + "; " +
-                element.getText() + "; " +
-                element.getTextRange() + "; " +
-                PsiUtilCore.getVirtualFile(element) + "; " +
-                controlFlowScope.getClass() + "; " +
-                PerlUtil.getParentsChain(element));
+      LOG.warn("Unable to find an instruction for " +
+               element.getClass() + "; " +
+               element.getText() + "; " +
+               element.getTextRange() + "; " +
+               PsiUtilCore.getVirtualFile(element) + "; " +
+               controlFlowScope.getClass() + "; " +
+               PerlUtil.getParentsChain(element));
       return UNKNOWN_VALUE;
     }
     int currentInstructionIndex = elementInstructionIndex;

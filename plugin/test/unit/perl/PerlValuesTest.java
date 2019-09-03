@@ -33,6 +33,9 @@ public class PerlValuesTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testIssue2115() {doTest();}
+
+  @Test
   public void testBareLpCodeBlock() {doTest();}
 
   @Test

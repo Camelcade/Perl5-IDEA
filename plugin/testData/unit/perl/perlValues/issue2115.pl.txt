@@ -1,0 +1,20 @@
+sub something{
+
+    my $var;
+
+    foreach $a (@VAR) {
+        {
+            if( $a ){
+                foreach @{[foo($v<caret>ar)];}
+            }
+        }
+    }
+}
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 119 in issue2115.pl
+Value unknown
+----------
+Resolved
+----------
+Value unknown

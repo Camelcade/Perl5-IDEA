@@ -1,0 +1,15 @@
+
+
+sub something{
+
+    my $var;
+
+    foreach $a (@VAR) {
+        {
+            if( $a ){
+                foreach @{[foo($v<caret>ar)];}
+            }
+        }
+    }
+}
+

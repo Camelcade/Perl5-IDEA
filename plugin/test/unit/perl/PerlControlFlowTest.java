@@ -27,6 +27,9 @@ public class PerlControlFlowTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testIssue2115() {doTestControlFlow(false);}
+
+  @Test
   public void testSwitch() {
     PerlSharedSettings.getInstance(getProject()).PERL_SWITCH_ENABLED = true;
     doTest();
