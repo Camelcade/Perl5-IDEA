@@ -17,12 +17,20 @@
 package unit.perl;
 
 import base.PerlLightTestCase;
+import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.diagnostic.Attachment;
+import com.intellij.openapi.diagnostic.IdeaLoggingEvent;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiInvalidElementAccessException;
+import com.intellij.psi.util.PsiUtilCore;
+import com.intellij.util.concurrency.Semaphore;
 import com.perl5.errorHandler.YoutrackErrorHandler;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import javax.swing.*;
 import java.util.Arrays;
 
 public class PerlExceptionReporterTest extends PerlLightTestCase {
@@ -40,5 +48,30 @@ public class PerlExceptionReporterTest extends PerlLightTestCase {
                     new Attachment("последний", "русский аттачмент")
       ));
     assertTrue(StringUtil.isNotEmpty(result));
+  }
+
+  @Ignore
+  @Test
+  public void testReportingInvalidPsiElement() {
+    initWithTextSmart("say 'hi'");
+    PsiFile file = getFile();
+    assertTrue(file.isValid());
+    PsiElement statement = file.getFirstChild();
+    WriteCommandAction.runWriteCommandAction(getProject(), statement::delete);
+    assertFalse(statement.isValid());
+    try {
+      PsiUtilCore.ensureValid(statement);
+    }
+    catch (PsiInvalidElementAccessException e) {
+      Semaphore semaphore = new Semaphore();
+      semaphore.down();
+      new YoutrackErrorHandler().submit(
+        new IdeaLoggingEvent[]{new IdeaLoggingEvent("Test message", e)},
+        "No info",
+        new JPanel(),
+        info -> semaphore.up()
+      );
+      semaphore.waitFor();
+    }
   }
 }
