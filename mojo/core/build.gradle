@@ -41,8 +41,6 @@ dependencies{
   compileOnly project(":perl5.core")
 }
 
-apply plugin: 'org.jetbrains.grammarkit'
-
 task generateMojoliciousLexer(type: GenerateLexer) {
   source = "grammar/Mojolicious.flex"
   targetDir = "gen/com/perl5/lang/mojolicious/lexer/"

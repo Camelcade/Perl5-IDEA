@@ -51,6 +51,12 @@ def pluginProjects = allprojects.findAll {
 }
 
 allprojects {
+  apply plugin: 'org.jetbrains.grammarkit'
+
+  grammarKit{
+    grammarKitRelease = '07f30a1e7666f36ae780f614b6bbc89690ba36c3'
+  }
+
   apply plugin: 'jacoco'
   dependencies{
     it.jacocoAgent agentFiles

@@ -46,8 +46,6 @@ dependencies{
   testCompile project(":perl5.plugin").sourceSets.test.output
 }
 
-apply plugin: 'org.jetbrains.grammarkit'
-
 task generateEmbeddedPerlLexer(type: GenerateLexer) {
   source = "grammar/EmbeddedPerl.flex"
   targetDir = "gen/com/perl5/lang/embedded/lexer/"

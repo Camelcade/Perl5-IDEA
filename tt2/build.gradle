@@ -46,8 +46,6 @@ dependencies{
   testCompile project(":perl5.plugin").sourceSets.test.output
 }
 
-apply plugin: 'org.jetbrains.grammarkit'
-
 task generateTT2Parser(type: GenerateParser) {
   source = "grammar/TemplateToolkit.bnf"
   pathToParser = '/com/perl5/lang/tt2/parser/TemplateToolkitParserGenerated.java'

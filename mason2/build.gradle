@@ -50,8 +50,6 @@ dependencies{
   testCompile project(":perl5.plugin").sourceSets.test.output
 }
 
-apply plugin: 'org.jetbrains.grammarkit'
-
 task generateMason2Lexer(type: GenerateLexer) {
   source = "grammar/Mason2.flex"
   targetDir = "gen/com/perl5/lang/mason2/lexer/"

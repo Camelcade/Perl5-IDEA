@@ -37,8 +37,6 @@ intellij {
   intellij.plugins = ["PsiViewer:$psiViewerVersion", 'java']
 }
 
-apply plugin: 'org.jetbrains.grammarkit'
-
 task generatePerl5Parser(type: GenerateParser) {
   source = "grammar/Perl5.bnf"
   pathToParser = '/com/perl5/lang/perl/parser/PerlParserGenerated.java'
