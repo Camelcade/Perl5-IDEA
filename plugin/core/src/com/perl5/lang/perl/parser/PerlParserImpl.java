@@ -20,7 +20,6 @@ import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
 import org.jetbrains.annotations.NotNull;
@@ -37,7 +36,7 @@ public class PerlParserImpl extends PerlParserGenerated implements PerlParser {
   }
 
   public boolean parseTerm(PsiBuilder b, int l) {
-    for (PerlParserExtension parserExtension : PerlParserDefinition.PARSER_EXTENSIONS) {
+    for (PerlParserExtension parserExtension : PerlParserExtension.EP_NAME.getExtensions()) {
       if (parserExtension.parseTerm((PerlBuilder)b, l)) {
         return true;
       }
@@ -50,7 +49,7 @@ public class PerlParserImpl extends PerlParserGenerated implements PerlParser {
   }
 
   public boolean parseNestedElementVariation(PsiBuilder b, int l) {
-    for (PerlParserExtension parserExtension : PerlParserDefinition.PARSER_EXTENSIONS) {
+    for (PerlParserExtension parserExtension : PerlParserExtension.EP_NAME.getExtensions()) {
       if (parserExtension.parseNestedElement((PerlBuilder)b, l)) {
         return true;
       }

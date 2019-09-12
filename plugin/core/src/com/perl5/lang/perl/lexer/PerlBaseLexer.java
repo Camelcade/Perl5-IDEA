@@ -18,15 +18,18 @@ package com.perl5.lang.perl.lexer;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
+import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.Trinity;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.util.containers.Queue;
+import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.project.PerlNamesCache;
 import com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes;
+import com.perl5.lang.perl.parser.PerlParserImpl;
 import com.perl5.lang.perl.parser.moose.MooseElementTypes;
 import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService;
@@ -36,20 +39,16 @@ import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static com.perl5.lang.perl.lexer.PerlLexer.*;
 
 
-public abstract class PerlBaseLexer extends PerlProtoLexer
-  implements PerlElementTypes,
-             ClassAccessorElementTypes,
-             MooseElementTypes {
+public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElementTypes,
+                                                                      ClassAccessorElementTypes,
+                                                                      MooseElementTypes {
   // fixme move somewhere
   public static final String STRING_UNDEF = "undef";
 
@@ -59,20 +58,18 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
   public static final Map<IElementType, String> ALLOWED_REGEXP_MODIFIERS = new THashMap<>();
   public static final String ALLOWED_TR_MODIFIERS = "cdsr";
   public static final Pattern POSIX_CHAR_CLASS_PATTERN = Pattern.compile("\\[\\[:\\^?\\w*:\\]\\]");
-  public static final Map<String, IElementType> RESERVED_TOKEN_TYPES = new THashMap<>();
-  public static final Map<String, IElementType> CUSTOM_TOKEN_TYPES = new THashMap<>();
-  public static final Map<String, IElementType> CUSTOM_TOKEN_TYPES_AFTER_DEREFERENCE = new THashMap<>();
+  public static final Map<String, IElementType> CUSTOM_TOKEN_TYPES = new HashMap<>();
+  public static final Map<String, IElementType> CUSTOM_TOKEN_TYPES_AFTER_DEREFERENCE = new HashMap<>();
   private static final List<IElementType> DQ_TOKENS = Arrays.asList(QUOTE_DOUBLE_OPEN, LP_STRING_QQ, QUOTE_DOUBLE_CLOSE);
   private static final List<IElementType> SQ_TOKENS = Arrays.asList(QUOTE_SINGLE_OPEN, STRING_CONTENT, QUOTE_SINGLE_CLOSE);
   private static final List<IElementType> XQ_TOKENS = Arrays.asList(QUOTE_TICK_OPEN, LP_STRING_QX, QUOTE_TICK_CLOSE);
   private static final List<IElementType> QW_TOKENS = Arrays.asList(QUOTE_SINGLE_OPEN, LP_STRING_QW, QUOTE_SINGLE_CLOSE);
 
-  private static final Map<IElementType, Trinity<IElementType, IElementType, IElementType>> SIGILS_TO_TOKENS_MAP = new THashMap<>();
+  private static final Map<IElementType, Trinity<IElementType, IElementType, IElementType>> SIGILS_TO_TOKENS_MAP = new HashMap<>();
 
   protected static final String SUB_SIGNATURE = "Sub.Signature";
-  public static TokenSet BARE_REGEX_PREFIX_TOKENSET = TokenSet.EMPTY;
-  public static TokenSet RESERVED_TOKENSET;
-  public static TokenSet CUSTOM_TOKENSET;
+  public static final TokenSet BARE_REGEX_PREFIX_TOKENSET;
+  public static final TokenSet CUSTOM_TOKENSET;
 
   static {
     ALLOWED_REGEXP_MODIFIERS.put(RESERVED_S, "nmsixpodualgcer");
@@ -87,6 +84,38 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
     SIGILS_TO_TOKENS_MAP.put(SIGIL_HASH, Trinity.create(LEFT_BRACE_HASH, HASH_NAME, RIGHT_BRACE_HASH));
     SIGILS_TO_TOKENS_MAP.put(SIGIL_CODE, Trinity.create(LEFT_BRACE_CODE, SUB_NAME, RIGHT_BRACE_CODE));
     SIGILS_TO_TOKENS_MAP.put(SIGIL_GLOB, Trinity.create(LEFT_BRACE_GLOB, GLOB_NAME, RIGHT_BRACE_GLOB));
+  }
+
+  static {
+    TokenSet bareRegexPrefixTokenSet = TokenSet.EMPTY;
+
+    for (PerlParserExtension extension : PerlParserExtension.EP_NAME.getExtensions()) {
+
+      // add tokens to lex
+      CUSTOM_TOKEN_TYPES.putAll(extension.getCustomTokensMap());
+      CUSTOM_TOKEN_TYPES_AFTER_DEREFERENCE.putAll(extension.getCustomTokensAfterDereferenceMap());
+
+      // add regex prefix tokenset
+      TokenSet regexPrefixes = extension.getRegexPrefixTokenSet();
+      if (regexPrefixes != null) {
+        bareRegexPrefixTokenSet = TokenSet.orSet(bareRegexPrefixTokenSet, regexPrefixes);
+      }
+
+      // add extensions tokens
+      List<Pair<IElementType, TokenSet>> extensionSets = extension.getExtensionSets();
+      if (extensionSets != null) {
+        for (Pair<IElementType, TokenSet> extensionSet : extensionSets) {
+          for (int i = 0; i < PerlParserImpl.EXTENDS_SETS_.length; i++) {
+            if (PerlParserImpl.EXTENDS_SETS_[i].contains(extensionSet.first)) {
+              PerlParserImpl.EXTENDS_SETS_[i] = TokenSet.orSet(PerlParserImpl.EXTENDS_SETS_[i], extensionSet.getSecond());
+              break;
+            }
+          }
+        }
+      }
+    }
+    BARE_REGEX_PREFIX_TOKENSET = bareRegexPrefixTokenSet;
+    CUSTOM_TOKENSET = TokenSet.create(CUSTOM_TOKEN_TYPES.values().toArray(IElementType.EMPTY_ARRAY));
   }
 
   // last captured heredoc marker
@@ -451,9 +480,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
     String tokenText = yytext().toString();
     IElementType tokenType;
 
-    if ((tokenType = RESERVED_TOKEN_TYPES.get(tokenText)) == null &&
-        (tokenType = CUSTOM_TOKEN_TYPES.get(tokenText)) == null
-    ) {
+    if ((tokenType = CUSTOM_TOKEN_TYPES.get(tokenText)) == null) {
       if (StringUtil.endsWithChar(tokenText, ':')) {
         tokenType = PACKAGE;
       }
@@ -1042,16 +1069,6 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 
   public void setHeredocLike(boolean heredocLike) {
     myIsHeredocLike = heredocLike;
-  }
-
-  public static void initReservedTokensMap() {
-    RESERVED_TOKEN_TYPES.clear();
-    // reserved
-  }
-
-  public static void initReservedTokensSet() {
-    RESERVED_TOKENSET = TokenSet.create(RESERVED_TOKEN_TYPES.values().toArray(new IElementType[RESERVED_TOKEN_TYPES.values().size()]));
-    CUSTOM_TOKENSET = TokenSet.create(CUSTOM_TOKEN_TYPES.values().toArray(new IElementType[CUSTOM_TOKEN_TYPES.values().size()]));
   }
 
   /**

@@ -27,7 +27,6 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.lexer.adapters.PerlMergingLexerAdapter;
@@ -37,14 +36,9 @@ import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static com.perl5.lang.perl.lexer.PerlTokenSets.HEREDOC_BODIES_TOKENSET;
 
 public class PerlParserDefinition implements ParserDefinition, PerlElementTypes {
-  public static final List<PerlParserExtension> PARSER_EXTENSIONS = new ArrayList<>();
-
   public static final TokenSet WHITE_SPACES = TokenSet.create(
     TokenType.WHITE_SPACE
   );
