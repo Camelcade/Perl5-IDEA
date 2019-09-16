@@ -36,7 +36,7 @@ public class PerlParserImpl extends PerlParserGenerated implements PerlParser {
   }
 
   public boolean parseTerm(PsiBuilder b, int l) {
-    for (PerlParserExtension parserExtension : PerlParserExtension.EP_NAME.getExtensions()) {
+    for (PerlParserExtension parserExtension : PerlParserExtension.EP_NAME.getExtensionList()) {
       if (parserExtension.parseTerm((PerlBuilder)b, l)) {
         return true;
       }
@@ -49,7 +49,7 @@ public class PerlParserImpl extends PerlParserGenerated implements PerlParser {
   }
 
   public boolean parseNestedElementVariation(PsiBuilder b, int l) {
-    for (PerlParserExtension parserExtension : PerlParserExtension.EP_NAME.getExtensions()) {
+    for (PerlParserExtension parserExtension : PerlParserExtension.EP_NAME.getExtensionList()) {
       if (parserExtension.parseNestedElement((PerlBuilder)b, l)) {
         return true;
       }

@@ -174,7 +174,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements Perl
     safeMap(TokenSet.andNot(OPERATORS_TOKENSET, TokenSet.create(COMMA, FAT_COMMA, OPERATOR_DEREFERENCE)), PERL_OPERATOR);
 
     //		safeMap(PERL_REGEX_CHAR_CLASS, REGEX_CHAR_CLASS, REGEX_POSIX_CLASS_NAME);
-    for (PerlParserExtension extension : PerlParserExtension.EP_NAME.getExtensions()) {
+    for (PerlParserExtension extension : PerlParserExtension.EP_NAME.getExtensionList()) {
       extension.addHighlighting();
     }
   }

@@ -49,7 +49,7 @@ public interface PerlImportsProvider {
    */
   static Set<PerlExportDescriptor> getAllExportDescriptors(@Nullable PerlNamespaceDefinitionElement namespaceDefinitionElement) {
     Set<PerlExportDescriptor> result = new HashSet<>();
-    for (PerlImportsProvider importsProvider : EP_NAME.getExtensions()) {
+    for (PerlImportsProvider importsProvider : EP_NAME.getExtensionList()) {
       if (importsProvider.isApplicable(namespaceDefinitionElement)) {
         result.addAll(importsProvider.getExportDescriptors(namespaceDefinitionElement));
       }

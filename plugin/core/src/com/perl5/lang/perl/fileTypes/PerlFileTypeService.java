@@ -40,7 +40,7 @@ public class PerlFileTypeService implements Disposable {
     directoryIndex -> ReadAction.run(() -> {
       for (Project project : ProjectManager.getInstance().getOpenProjects()) {
         if (!project.isDisposed()) {
-          for (PerlFileTypeProvider fileTypeProvider : PerlFileTypeProvider.EP_NAME.getExtensions()) {
+          for (PerlFileTypeProvider fileTypeProvider : PerlFileTypeProvider.EP_NAME.getExtensionList()) {
             fileTypeProvider.addRoots(project, (root, function) -> {
               if (!root.isValid()) {
                 LOG.warn("Attempt to create a descriptor for invalid file for " + root);

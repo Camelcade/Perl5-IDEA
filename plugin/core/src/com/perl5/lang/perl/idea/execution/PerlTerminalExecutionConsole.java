@@ -57,7 +57,7 @@ public class PerlTerminalExecutionConsole extends TerminalExecutionConsole imple
   @NotNull
   public static ConsoleView addFiltersToConsole(@NotNull Project project, @NotNull ConsoleView console) {
     GlobalSearchScope searchScope = GlobalSearchScope.allScope(project);
-    for (ConsoleFilterProvider eachProvider : ConsoleFilterProvider.FILTER_PROVIDERS.getExtensions()) {
+    for (ConsoleFilterProvider eachProvider : ConsoleFilterProvider.FILTER_PROVIDERS.getExtensionList()) {
       Filter[] filters;
       if (eachProvider instanceof ConsoleDependentFilterProvider) {
         filters = ((ConsoleDependentFilterProvider)eachProvider).getDefaultFilters(console, project, searchScope);

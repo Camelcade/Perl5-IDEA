@@ -89,7 +89,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
   static {
     TokenSet bareRegexPrefixTokenSet = TokenSet.EMPTY;
 
-    for (PerlParserExtension extension : PerlParserExtension.EP_NAME.getExtensions()) {
+    for (PerlParserExtension extension : PerlParserExtension.EP_NAME.getExtensionList()) {
 
       // add tokens to lex
       CUSTOM_TOKEN_TYPES.putAll(extension.getCustomTokensMap());

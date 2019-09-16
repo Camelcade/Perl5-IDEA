@@ -23,7 +23,6 @@ import com.perl5.lang.perl.idea.modules.PerlSourceRootType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
@@ -41,11 +40,11 @@ public interface Perl5SettingsConfigurableExtension {
   default Configurable createProjectConfigurable(@NotNull Project project) {return null;}
 
   static Stream<Perl5SettingsConfigurableExtension> stream() {
-    return Arrays.stream(EP_NAME.getExtensions());
+    return EP_NAME.getExtensionList().stream();
   }
 
   static void forEach(Consumer<Perl5SettingsConfigurableExtension> consumer) {
-    for (Perl5SettingsConfigurableExtension extension : EP_NAME.getExtensions()) {
+    for (Perl5SettingsConfigurableExtension extension : EP_NAME.getExtensionList()) {
       consumer.accept(extension);
     }
   }
