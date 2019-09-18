@@ -131,7 +131,12 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
   @Nullable
   @Override
   public String doGetLocalPath(@NotNull String remotePathName) {
-    String windowsPath = WSLUtil.getWindowsPath(remotePathName);
+    WSLDistributionWithRoot distribution = getDistribution();
+    if (distribution == null) {
+      LOG.warn("Distribution unavailable: " + myDistributionId);
+      return null;
+    }
+    String windowsPath = distribution.getWindowsPath(remotePathName);
     return windowsPath != null ? windowsPath : FileUtil.toSystemDependentName(new File(getLocalCacheRoot(), remotePathName).getPath());
   }
 
