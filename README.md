@@ -10,7 +10,7 @@ Current versions of plugins may be found in [JetBrains repo](https://plugins.jet
 
 #### This repository contains following plugins:
 
-- Perl plugin (`core`) - base plugin with perl & pod support and all basic features ([repo](https://plugins.jetbrains.com/plugin/7796-perl)).  
+- Perl plugin (`plugin`) - base plugin with perl & pod support and all basic features ([repo](https://plugins.jetbrains.com/plugin/7796-perl)).
   - [Docker](https://www.docker.com/) Support (`transport.docker`) - allows to use interpreters from Docker containers ([repo](https://plugins.jetbrains.com/plugin/11328-perl-docker-support)).
   - [WSL](https://en.wikipedia.org/wiki/Windows_Subsystem_for_Linux) Support (`transport.wsl`) - allows to use interpreters from WSL (Windows Subsystem for Linux) ([repo](https://plugins.jetbrains.com/plugin/11329-perl-wsl-support)).
 - [Template Toolkit](http://www.template-toolkit.org/) Support (`lang.tt2`) 
