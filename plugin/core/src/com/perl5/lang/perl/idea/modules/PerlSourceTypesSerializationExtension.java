@@ -16,13 +16,13 @@
 
 package com.perl5.lang.perl.idea.modules;
 
-import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurableExtension;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.jps.model.serialization.JpsModelSerializerExtension;
 import org.jetbrains.jps.model.serialization.module.JpsModuleSourceRootDummyPropertiesSerializer;
 import org.jetbrains.jps.model.serialization.module.JpsModuleSourceRootPropertiesSerializer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -31,7 +31,7 @@ public class PerlSourceTypesSerializationExtension extends JpsModelSerializerExt
   @NotNull
   @Override
   public List<? extends JpsModuleSourceRootPropertiesSerializer<?>> getModuleSourceRootPropertiesSerializers() {
-    List<JpsModuleSourceRootDummyPropertiesSerializer> result = ContainerUtil.newArrayList();
+    List<JpsModuleSourceRootDummyPropertiesSerializer> result = new ArrayList<>();
     Perl5SettingsConfigurableExtension.forEach(extension -> extension.getSourceRootTypes().forEach(
       type -> result.add(new JpsModuleSourceRootDummyPropertiesSerializer(type, type.getSerializationKey()))
     ));

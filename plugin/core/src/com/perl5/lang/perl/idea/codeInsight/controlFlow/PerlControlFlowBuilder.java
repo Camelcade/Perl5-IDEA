@@ -108,9 +108,9 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
   );
 
   // modifier's loops should be edged back here. Maps statement -> modifier
-  private final Map<PsiElement, Instruction> myStatementsModifiersMap = ContainerUtil.newHashMap();
-  private final Map<String, Instruction> myLabelsDeclarations = ContainerUtil.newHashMap();
-  private final List<Instruction> myGotos = ContainerUtil.newArrayList();
+  private final Map<PsiElement, Instruction> myStatementsModifiersMap = new HashMap<>();
+  private final Map<String, Instruction> myLabelsDeclarations = new HashMap<>();
+  private final List<Instruction> myGotos = new ArrayList<>();
 
   public ControlFlow build(PsiElement element) {
     addEntryPointNode(element);
@@ -307,8 +307,8 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
   // fixme given & friends
   // fixme revert do transparency?
   private class PerlControlFlowVisitor extends PerlRecursiveVisitor {
-    private final Map<PsiElement, Instruction> myLoopNextInstructions = ContainerUtil.newHashMap();
-    private final Map<PsiElement, Instruction> myLoopRedoInstructions = ContainerUtil.newHashMap();
+    private final Map<PsiElement, Instruction> myLoopNextInstructions = new HashMap<>();
+    private final Map<PsiElement, Instruction> myLoopRedoInstructions = new HashMap<>();
     @NotNull
     private final PsiElement myElement;
     private final AtomicNotNullLazyValue<HeredocCollector> myCollectorProvider = AtomicNotNullLazyValue.createValue(
@@ -426,7 +426,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       // get map of exceptions and handlers; Internals won't be handled for now
       o.getExceptExpressions().forEach(this::acceptSafe);
 
-      List<Instruction> catchesTails = ContainerUtil.newArrayList();
+      List<Instruction> catchesTails = new ArrayList<>();
       // catches
       for (PerlCatchExpr catchExpr : o.getCatchExpressions()) {
         acceptSafe(catchExpr);
@@ -708,7 +708,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     public void visitExpr(@NotNull PsiPerlExpr o) {
       PsiElement run = o.getFirstChild();
       PsiElement lastRun = null;
-      List<Instruction> instructionsToLink = ContainerUtil.newArrayList();
+      List<Instruction> instructionsToLink = new ArrayList<>();
       while (run != null) {
         if (!PerlPsiUtil.isCommentOrSpace(run)) {
           run.accept(this);
@@ -951,9 +951,9 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
 
   // this won't handle nested heredocs.
   private class HeredocCollector extends PerlRecursiveVisitor {
-    private final List<PsiElement> myOpeners = ContainerUtil.newArrayList();
+    private final List<PsiElement> myOpeners = new ArrayList<>();
     // may contain nulls for heredocs without bodies
-    private final List<PsiElement> myBodies = ContainerUtil.newArrayList();
+    private final List<PsiElement> myBodies = new ArrayList<>();
     private int myTerminatorCounter = 0;
 
     @Override

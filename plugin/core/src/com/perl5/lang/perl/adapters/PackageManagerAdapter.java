@@ -34,10 +34,7 @@ import com.pty4j.util.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public abstract class PackageManagerAdapter {
   private static final MergingUpdateQueue QUEUE =
@@ -154,7 +151,7 @@ public abstract class PackageManagerAdapter {
     private final PackageManagerAdapter myAdapter;
 
     @NotNull
-    private final Set<String> myPackages = ContainerUtil.newHashSet();
+    private final Set<String> myPackages = new HashSet<>();
 
     public InstallUpdate(@NotNull PackageManagerAdapter adapter, @NotNull Collection<String> packageNames) {
       super(Pair.create(adapter, packageNames));

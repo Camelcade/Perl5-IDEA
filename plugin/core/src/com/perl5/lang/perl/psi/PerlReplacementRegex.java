@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,7 @@ import com.perl5.lang.perl.lexer.PerlTokenSets;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
@@ -55,7 +56,7 @@ public interface PerlReplacementRegex extends PerlRegexExpression {
    */
   @NotNull
   default List<PsiElement> getParts() {
-    List<PsiElement> result = ContainerUtil.newArrayList();
+    List<PsiElement> result = new ArrayList<>();
     PsiElement run = getFirstChild();
     while (run != null) {
       IElementType elementType = PsiUtilCore.getElementType(run);

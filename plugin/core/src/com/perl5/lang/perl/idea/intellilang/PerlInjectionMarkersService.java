@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,6 @@ import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.AtomicClearableLazyValue;
-import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.xmlb.annotations.Tag;
 import com.intellij.util.xmlb.annotations.Transient;
 import com.perl5.lang.perl.idea.PerlPathMacros;
@@ -46,7 +45,7 @@ import static com.perl5.lang.perl.idea.intellilang.PerlDefaultInjectionMarkers.D
 )
 public class PerlInjectionMarkersService implements PersistentStateComponent<PerlInjectionMarkersService> {
   @Tag("MARKERS_MAP")
-  private Map<String, String> myCustomMarkersMap = ContainerUtil.newHashMap();
+  private Map<String, String> myCustomMarkersMap = new HashMap<>();
 
   private final transient AtomicClearableLazyValue<Map<String, Language>> myLanguageMapProvider =
     AtomicClearableLazyValue.create(this::computeMarkersMap);
@@ -66,13 +65,13 @@ public class PerlInjectionMarkersService implements PersistentStateComponent<Per
   @Transient
   @NotNull
   Map<String, String> computeMergedMarkersMap() {
-    HashMap<String, String> mergedMap = ContainerUtil.newHashMap(myCustomMarkersMap);
+    HashMap<String, String> mergedMap = new HashMap<>(myCustomMarkersMap);
     DEFAULT_MARKERS.forEach(mergedMap::putIfAbsent);
     return mergedMap;
   }
 
   public void setCustomMarkersMap(Map<String, String> customMarkersMap) {
-    Map<String, String> result = ContainerUtil.newHashMap();
+    Map<String, String> result = new HashMap<>();
     customMarkersMap.forEach((marker, languageId) -> {
       String defaultLanguageId = DEFAULT_MARKERS.get(marker);
       if (defaultLanguageId == null || !defaultLanguageId.equals(languageId)) {
@@ -101,7 +100,7 @@ public class PerlInjectionMarkersService implements PersistentStateComponent<Per
 
   @NotNull
   private Map<String, Language> computeMarkersMap() {
-    HashMap<String, Language> result = ContainerUtil.newHashMap();
+    HashMap<String, Language> result = new HashMap<>();
     computeMergedMarkersMap().forEach((marker, languageid) -> result.put(marker, Language.findLanguageByID(languageid)));
     return result;
   }

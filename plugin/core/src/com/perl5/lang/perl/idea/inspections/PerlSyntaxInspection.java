@@ -28,7 +28,6 @@ import com.intellij.psi.SmartPointerManager;
 import com.intellij.psi.SmartPsiElementPointer;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ArrayUtil;
-import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurable;
@@ -39,6 +38,7 @@ import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -171,7 +171,7 @@ public class PerlSyntaxInspection extends PerlInspection {
 
       @NotNull
       private LocalQuickFix[] buildChangePerlVersionQuickFixes(@NotNull Predicate<PerlVersion> versionPredicate) {
-        List<LocalQuickFix> result = ContainerUtil.newArrayList();
+        List<LocalQuickFix> result = new ArrayList<>();
         result.add(new LocalQuickFix() {
           @Nls
           @NotNull

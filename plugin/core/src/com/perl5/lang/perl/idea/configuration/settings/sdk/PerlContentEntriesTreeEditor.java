@@ -46,7 +46,6 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.ScrollPaneFactory;
 import com.intellij.ui.TreeSpeedSearch;
 import com.intellij.ui.treeStructure.Tree;
-import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.ui.JBUI;
 import com.intellij.util.ui.tree.TreeUtil;
 import com.perl5.lang.perl.idea.modules.PerlSourceRootType;
@@ -75,7 +74,7 @@ public class PerlContentEntriesTreeEditor implements UnnamedConfigurable, Dispos
     Disposer.register(parentDisposable, this);
 
 
-    List<PerlSourceRootType> types = ContainerUtil.newArrayList();
+    List<PerlSourceRootType> types = new ArrayList<>();
     Perl5SettingsConfigurableExtension.forEach(extension -> types.addAll(extension.getSourceRootTypes()));
 
     for (PerlSourceRootType type : types) {

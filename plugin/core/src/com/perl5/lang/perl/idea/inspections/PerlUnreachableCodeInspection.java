@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,13 +23,13 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
-import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlControlFlowBuilder;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
@@ -43,7 +43,7 @@ public class PerlUnreachableCodeInspection extends PerlInspection {
   @NotNull
   @Override
   public PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean isOnTheFly) {
-    Set<PsiElement> notifiedElements = ContainerUtil.newHashSet();
+    Set<PsiElement> notifiedElements = new HashSet<>();
     return new PerlVisitor() {
       @Override
       public void visitPerlSubDefinitionElement(@NotNull PerlSubDefinitionElement o) {

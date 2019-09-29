@@ -89,7 +89,7 @@ public class PerlSdkType extends SdkType {
     String oldText = PerlRunUtil.setProgressText(PerlBundle.message("perl.progress.refreshing.inc", sdk.getName()));
     LOG.info("Refreshing @INC for " + sdk);
     PerlHostData hostData = PerlHostData.notNullFrom(sdk);
-    List<String> pathsToRefresh = ContainerUtil.newArrayList();
+    List<String> pathsToRefresh = new ArrayList<>();
     // syncing data if necessary
     List<String> incPaths = computeIncPaths(sdk);
     List<Exception> exceptions = new ArrayList<>();

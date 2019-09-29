@@ -18,9 +18,9 @@ package com.perl5.lang.tt2.lexer;
 
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
 
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -62,10 +62,10 @@ public class TemplateToolkitSyntaxElements implements TemplateToolkitElementType
     GET_DIRECTIVE
   );
 
-  public static final Map<String, IElementType> KEYWORDS = ContainerUtil.newHashMap();
+  public static final Map<String, IElementType> KEYWORDS = new HashMap<>();
   public static final TokenSet KEYWORDS_TOKENSET;
 
-  public static final Map<String, IElementType> TEXT_OPERATORS = ContainerUtil.newHashMap();
+  public static final Map<String, IElementType> TEXT_OPERATORS = new HashMap<>();
   public static final TokenSet TEXT_OPERATORS_TOKENSET;
 
   public static final TokenSet KEYWORDS_OR_TEXT_OPERATORS_TOKENSET;

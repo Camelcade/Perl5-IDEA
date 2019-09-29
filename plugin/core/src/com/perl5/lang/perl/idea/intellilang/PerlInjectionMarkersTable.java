@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,10 +41,7 @@ import javax.swing.*;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumn;
 import java.awt.event.MouseEvent;
-import java.util.Comparator;
-import java.util.EventObject;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 final class PerlInjectionMarkersTable extends JBTable implements Configurable {
@@ -152,7 +149,7 @@ final class PerlInjectionMarkersTable extends JBTable implements Configurable {
       return;
     }
 
-    Map<String, String> result = ContainerUtil.newHashMap();
+    Map<String, String> result = new HashMap<>();
     getModel().getItems().forEach(item -> result.putIfAbsent(item.marker, item.languageId));
     PerlInjectionMarkersService.getInstance(myProject).setCustomMarkersMap(result);
     FileContentUtil.reparseOpenedFiles();

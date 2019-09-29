@@ -24,10 +24,7 @@ import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessorBase;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class Log4PerlPackageProcessor extends PerlPackageProcessorBase implements PerlPackageOptionsProvider {
   private static final String GET_LOGGER = "get_logger";
@@ -103,7 +100,7 @@ public class Log4PerlPackageProcessor extends PerlPackageProcessorBase implement
       return Collections.emptyList();
     }
 
-    List<PerlExportDescriptor> result = ContainerUtil.newArrayList();
+    List<PerlExportDescriptor> result = new ArrayList<>();
     if (importGetLogger) {
       result.add(PerlExportDescriptor.create(packageName, GET_LOGGER));
     }

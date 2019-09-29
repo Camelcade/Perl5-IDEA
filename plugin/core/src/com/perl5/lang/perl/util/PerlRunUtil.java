@@ -516,7 +516,7 @@ public class PerlRunUtil {
     }
 
     Sdk finalSdk = sdk;
-    Set<String> missingPackages = ContainerUtil.newHashSet();
+    Set<String> missingPackages = new HashSet<>();
 
     return new ProcessAdapter() {
       @Override

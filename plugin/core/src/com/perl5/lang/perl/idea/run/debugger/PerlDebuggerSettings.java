@@ -45,7 +45,7 @@ import java.util.List;
 
 public class PerlDebuggerSettings extends XDebuggerSettings<PerlDebuggerSettings> {
   @Tag("dataRenderers")
-  private List<Item> myDataRenderers = ContainerUtil.newArrayList();
+  private List<Item> myDataRenderers = new ArrayList<>();
 
   public PerlDebuggerSettings() {
     super("perl5");

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,12 +29,12 @@ import com.intellij.openapi.util.Key;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.EditorNotificationPanel;
 import com.intellij.ui.EditorNotifications;
-import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -44,7 +44,7 @@ import java.util.Optional;
  */
 public class PerlAssociationEditorNotification extends EditorNotifications.Provider<EditorNotificationPanel> implements DumbAware {
   private static final Key<EditorNotificationPanel> KEY = Key.create("perl.wrong.file.association");
-  private static final Map<FileNameMatcher, FileType> PERL_FILE_TYPES = ContainerUtil.newHashMap();
+  private static final Map<FileNameMatcher, FileType> PERL_FILE_TYPES = new HashMap<>();
   @NotNull
   private final Project myProject;
 

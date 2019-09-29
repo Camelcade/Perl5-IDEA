@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,7 +30,6 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.ArrayUtil;
-import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.sdk.host.PerlExecutionException;
@@ -182,7 +181,7 @@ class PerlDockerAdapter {
     Project project = commandLine.getEffectiveProject();
     if (project != null) {
       // mounting modules roots
-      Set<VirtualFile> roots = ContainerUtil.newHashSet();
+      Set<VirtualFile> roots = new HashSet<>();
       for (Module module : ModuleManager.getInstance(project).getModules()) {
         roots.addAll(Arrays.asList(ModuleRootManager.getInstance(module).getContentRoots()));
       }
