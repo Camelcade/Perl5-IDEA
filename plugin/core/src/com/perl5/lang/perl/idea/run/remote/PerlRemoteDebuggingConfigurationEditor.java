@@ -60,7 +60,7 @@ class PerlRemoteDebuggingConfigurationEditor extends PerlConfigurationEditorBase
   protected void resetEditorFrom(@NotNull PerlRemoteDebuggingConfiguration perlConfiguration) {
     myWorkingDirectoryComponent.setText(perlConfiguration.getRemoteProjectRoot());
     myPerlRole.setSelectedItem(perlConfiguration.getPerlRole());
-    myDebuggingHost.setText(perlConfiguration.getDebugHost());
+    myDebuggingHost.setText(perlConfiguration.getHostToBind());
     myDebuggingPort.setText(String.valueOf(perlConfiguration.getDebugPort()));
     myIsReconnectCheckbox.setSelected(perlConfiguration.isReconnect());
     updateCommandLine();

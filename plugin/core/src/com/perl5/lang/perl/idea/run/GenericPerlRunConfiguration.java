@@ -294,8 +294,8 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
   }
 
   @Override
-  public String getDebugHost() {
-    return "0.0.0.0";
+  public String getHostToBind() {
+    return LOCAL_DEBUG_HOST;
   }
 
   @Override

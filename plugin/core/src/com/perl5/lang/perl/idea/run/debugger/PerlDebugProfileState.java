@@ -107,7 +107,7 @@ public class PerlDebugProfileState extends PerlDebugProfileStateBase {
     Map<String, String> stringStringMap = new HashMap<>();
     PerlDebugOptions debugOptions = getDebugOptions();
     stringStringMap.put(PERL5_DEBUG_ROLE, debugOptions.getPerlRole());
-    stringStringMap.put(PERL5_DEBUG_HOST, debugOptions.getDebugHost());
+    stringStringMap.put(PERL5_DEBUG_HOST, debugOptions.getHostToBind());
     stringStringMap.put(PERL5_DEBUG_PORT, String.valueOf(getDebugPort()));
     return stringStringMap;
   }

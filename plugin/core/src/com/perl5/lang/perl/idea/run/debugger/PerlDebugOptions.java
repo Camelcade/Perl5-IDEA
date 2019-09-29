@@ -22,8 +22,23 @@ import com.intellij.execution.ExecutionException;
 public interface PerlDebugOptions {
   String ROLE_SERVER = "server";
   String ROLE_CLIENT = "client";
+  String LOCAL_DEBUG_HOST = "0.0.0.0";
+  String LOCALHOST = "localhost";
 
-  String getDebugHost();
+  /**
+   * @return host to bind for debugging with perl or IDE, depending on {@link #getPerlRole()}
+   */
+  String getHostToBind();
+
+  /**
+   * @return host to connect to for debugging
+   * @apiNote sometimes, hosts may differ. E.g. you may bind to the 0.0.0.0 but you can't use it as target host. It works sometimes, but
+   * {@code localhost} should be used for connections
+   */
+  default String getHostToConnect() {
+    String hostToBind = getHostToBind();
+    return LOCAL_DEBUG_HOST.equals(hostToBind) ? LOCALHOST : hostToBind;
+  }
 
   int getDebugPort() throws ExecutionException;
 

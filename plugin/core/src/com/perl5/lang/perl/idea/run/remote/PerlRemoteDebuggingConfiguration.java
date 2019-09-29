@@ -45,7 +45,8 @@ import java.util.Objects;
 
 public class PerlRemoteDebuggingConfiguration extends RunConfigurationBase
   implements RunConfigurationWithSuppressedDefaultRunAction, PerlDebuggableRunConfiguration {
-  public String debugHost = "localhost";
+  public String debugHost = LOCALHOST;
+
   public int debugPort = 12345;
   public String remoteProjectRoot = "/home/";
   public String scriptCharset = "utf8";
@@ -93,7 +94,7 @@ public class PerlRemoteDebuggingConfiguration extends RunConfigurationBase
     return null;
   }
 
-  public String getDebugHost() {
+  public String getHostToBind() {
     return debugHost;
   }
 

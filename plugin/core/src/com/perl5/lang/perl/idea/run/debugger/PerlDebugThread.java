@@ -136,10 +136,11 @@ public class PerlDebugThread extends Thread {
     myEvalsListPanel.clear();
     WriteAction.runAndWait(() -> myPerlRemoteFileSystem.dropFiles());
 
-    String debugHost = myPerlDebugOptions.getDebugHost();
     int debugPort = myDebugProfileState.getDebugPort();
-    String debugName = debugHost + ":" + debugPort;
+    String debugName;
     if (myPerlDebugOptions.getPerlRole().equals(PerlDebugOptions.ROLE_SERVER)) {
+      String hostToConnect = myPerlDebugOptions.getHostToConnect();
+      debugName = hostToConnect + ":" + debugPort;
       while (!myStop && !PerlDebugProfileStateBase.isReadyForConnection(myExecutionResult.getProcessHandler())) {
         print("perl.debug.waiting.start");
         Thread.sleep(1000);
@@ -151,7 +152,7 @@ public class PerlDebugThread extends Thread {
       print("perl.debug.connecting.to", debugName);
       for (int i = 1; i < 11 && !myStop; i++) {
         try {
-          mySocket = new Socket(debugHost, debugPort);
+          mySocket = new Socket(hostToConnect, debugPort);
           break;
         }
         catch (ConnectException e) {
@@ -165,8 +166,10 @@ public class PerlDebugThread extends Thread {
       }
     }
     else {
+      String hostToBind = myPerlDebugOptions.getHostToBind();
+      debugName = hostToBind + ":" + debugPort;
       print("perl.debug.listening.on", debugName);
-      myServerSocket = new ServerSocket(debugPort, 50, InetAddress.getByName(debugHost));
+      myServerSocket = new ServerSocket(debugPort, 50, InetAddress.getByName(hostToBind));
       mySocket = myServerSocket.accept();
     }
   }
