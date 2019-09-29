@@ -28,7 +28,6 @@ import com.intellij.ui.ToolbarDecorator;
 import com.intellij.ui.table.JBTable;
 import com.intellij.util.ArrayUtil;
 import com.intellij.util.FileContentUtil;
-import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.ui.ColumnInfo;
 import com.intellij.util.ui.FormBuilder;
 import com.intellij.util.ui.ListTableModel;
@@ -128,7 +127,7 @@ final class PerlInjectionMarkersTable extends JBTable implements Configurable {
 
   @Override
   public boolean isModified() {
-    return !ContainerUtil.newHashSet(computeItems()).equals(ContainerUtil.newHashSet(getModel().getItems()));
+    return !new HashSet<>(computeItems()).equals(new HashSet<>(getModel().getItems()));
   }
 
   private List<Item> computeItems() {

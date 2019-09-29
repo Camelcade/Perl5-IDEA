@@ -47,7 +47,9 @@ public class TemplateToolkitEditorNotificationsProvider extends EditorNotificati
 
   @Nullable
   @Override
-  public EditorNotificationPanel createNotificationPanel(@NotNull VirtualFile file, @NotNull FileEditor fileEditor) {
+  public EditorNotificationPanel createNotificationPanel(@NotNull VirtualFile file,
+                                                         @NotNull FileEditor fileEditor,
+                                                         @NotNull Project project) {
     if (file.getFileType() == TemplateToolkitFileType.INSTANCE) {
       TemplateToolkitSettings settings = TemplateToolkitSettings.getInstance(myProject);
       if (!settings.isVirtualFileUnderRoot(file)) {

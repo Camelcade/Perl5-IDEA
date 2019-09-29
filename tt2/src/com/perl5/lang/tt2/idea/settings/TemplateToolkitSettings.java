@@ -154,7 +154,7 @@ public class TemplateToolkitSettings implements PersistentStateComponent<Templat
 
   public boolean isVirtualFileNameMatches(@NotNull VirtualFile file) {
     for (FileNameMatcher matcher : myLazyMatchers.getValue()) {
-      if (matcher.accept(file.getName())) {
+      if (matcher.acceptsCharSequence(file.getName())) {
         return true;
       }
     }

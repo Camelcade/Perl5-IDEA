@@ -24,7 +24,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class TemplateToolkitIndentStrategy implements IndentStrategy, TemplateToolkitElementTypes {
   @Override
-  public boolean canIndent(@NotNull PsiElement element) {
+  public boolean canIndent(int indentationStartOffset, int indentationEndOffset, @NotNull PsiElement element) {
     return element.getNode().getElementType() != TT2_OUTLINE_TAG;
   }
 }
