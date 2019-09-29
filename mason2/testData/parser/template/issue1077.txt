@@ -16,7 +16,7 @@ HtmlFile:issue1077.mc
 --------------------------------------------------------------------------------
 Subtree: Mason2 Templating Language (Mason2 Templating Language)
 Mason2 template file
-  MasonNamespaceDefinitionImpl(MASON_PACKAGE)@null
+  MasonNamespaceDefinitionImpl(MASON_PACKAGE)@/MC0::issue1077_mc
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
       PsiComment(Mason2: MASON_TEMPLATE_BLOCK_HTML)('<b>')
       PsiPerlStatementImpl(Perl5: STATEMENT)

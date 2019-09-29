@@ -33,6 +33,7 @@ import com.perl5.lang.mason2.idea.configuration.MasonSettings;
 import com.perl5.lang.mason2.psi.MasonNamespaceDefinition;
 import com.perl5.lang.mason2.psi.stubs.MasonNamespaceDefitnitionsStubIndex;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
+import com.perl5.lang.perl.util.PerlFileUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -105,7 +106,7 @@ public class Mason2Util {
       }
 
       if (componentFile != null) {
-        String absolutePath = VfsUtil.getRelativePath(componentFile, project.getBaseDir());
+        String absolutePath = PerlFileUtil.getPathRelativeToContentRoot(componentFile, project);
         if (absolutePath != null) {
           result.addAll(Mason2Util.getMasonNamespacesByAbsolutePath(project, absolutePath));
         }
@@ -117,7 +118,7 @@ public class Mason2Util {
 
   public static void reindexProjectFile(Project project, VirtualFile virtualFile) {
     if (VfsUtil.isAncestor(project.getBaseDir(), virtualFile, false)) {
-      reindexProjectRoots(project, Collections.singletonList(VfsUtil.getRelativePath(virtualFile, project.getBaseDir())));
+      reindexProjectRoots(project, Collections.singletonList(PerlFileUtil.getPathRelativeToContentRoot(virtualFile, project)));
     }
   }
 

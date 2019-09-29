@@ -7,7 +7,7 @@ HtmlFile:liveTemplates.mc
 --------------------------------------------------------------------------------
 Subtree: Mason2 Templating Language (Mason2 Templating Language)
 Mason2 template file
-  MasonNamespaceDefinitionImpl(MASON_PACKAGE)@null
+  MasonNamespaceDefinitionImpl(MASON_PACKAGE)@/MC0::liveTemplates_mc
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
       PsiComment(Mason2: %)('% ')
       PsiElement(Perl5: ;)('\n')

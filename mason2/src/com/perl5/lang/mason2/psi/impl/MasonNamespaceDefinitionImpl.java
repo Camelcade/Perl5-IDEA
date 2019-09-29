@@ -34,6 +34,7 @@ import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.impl.PsiPerlNamespaceDefinitionImpl;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStub;
+import com.perl5.lang.perl.util.PerlFileUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -124,7 +125,7 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
   public String getAbsoluteComponentPath() {
     VirtualFile containingFile = MasonCoreUtil.getContainingVirtualFile(getContainingFile());
     if (containingFile != null) {
-      return VfsUtil.getRelativePath(containingFile, getProject().getBaseDir());
+      return PerlFileUtil.getPathRelativeToContentRoot(containingFile, getProject());
     }
 
     return null;
@@ -153,7 +154,7 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
       VirtualFile parentComponentFile = getParentComponentFile(componentRoot, containingFile.getParent(), containingFile);
       if (parentComponentFile != null) // found autobase class
       {
-        String componentPath = VfsUtil.getRelativePath(parentComponentFile, getProject().getBaseDir());
+        String componentPath = PerlFileUtil.getPathRelativeToContentRoot(parentComponentFile, getProject());
 
         if (componentPath != null) {
           return componentPath;
@@ -253,7 +254,7 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
     if (masonSettings.autobaseNames.contains(getContainingFile().getName())) {
       VirtualFile containingFile = MasonCoreUtil.getContainingVirtualFile(getContainingFile());
       if (containingFile != null) {
-        final String basePath = VfsUtil.getRelativePath(containingFile.getParent(), getProject().getBaseDir());
+        final String basePath = PerlFileUtil.getPathRelativeToContentRoot(containingFile.getParent(), getProject());
 
         if (basePath != null) {
           final List<String> componentPaths = new ArrayList<>();

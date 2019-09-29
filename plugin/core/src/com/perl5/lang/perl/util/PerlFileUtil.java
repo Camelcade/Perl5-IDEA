@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,9 +17,14 @@
 package com.perl5.lang.perl.util;
 
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.util.io.FileUtil;
+import com.intellij.openapi.vfs.VfsUtilCore;
+import com.intellij.openapi.vfs.VirtualFile;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class PerlFileUtil {
   private static final Logger LOG = Logger.getInstance(PerlFileUtil.class);
@@ -53,5 +58,23 @@ public class PerlFileUtil {
       throw new RuntimeException("Unexpected drive letter: " + linuxisedPath);
     }
     return FileUtil.toSystemDependentName(driveLetter + ":" + (linuxisedPath.length() > 2 ? linuxisedPath.substring(2) : ""));
+  }
+
+  /**
+   * @return a content root for the {@code virtualFile} in the context of {@code project} or null if file is not in content
+   */
+  @Nullable
+  public static VirtualFile getContentRoot(@NotNull Project project, @Nullable VirtualFile virtualFile) {
+    return virtualFile == null ? null : ProjectFileIndex.getInstance(project).getContentRootForFile(virtualFile);
+  }
+
+  /**
+   * @return a path to the {@code virtualFile} relative to the nearest content root in the context of {@code project}
+   */
+  @Nullable
+  public static String getPathRelativeToContentRoot(@Nullable VirtualFile virtualFile,
+                                                    @NotNull Project project) {
+    VirtualFile root = getContentRoot(project, virtualFile);
+    return root == null ? null : VfsUtilCore.getRelativePath(virtualFile, root);
   }
 }
