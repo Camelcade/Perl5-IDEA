@@ -41,8 +41,6 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 import java.util.List;
 
-import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE_PROVIDER;
-
 public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement<?>> extends PerlDelegatingLightNamedElement<Delegate>
   implements PerlSubDefinitionElement {
   @Nullable
@@ -62,8 +60,8 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
                                        @NotNull IStubElementType elementType,
                                        @Nullable PsiElement nameIdentifier,
                                        @Nullable String namespaceName,
-                                       @Nullable PerlSubAnnotations annotations,
                                        @NotNull List<PerlSubArgument> subArguments,
+                                       @Nullable PerlSubAnnotations annotations,
                                        @NotNull AtomicNotNullLazyValue<PerlValue> returnValueFromCodeProvider,
                                        @Nullable PsiPerlBlock subDefinitionBody) {
     super(delegate, name, elementType, nameIdentifier);
@@ -88,29 +86,6 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
     mySubArgumentsProvider = AtomicNotNullLazyValue.createValue(
       () -> PerlSubDefinitionElement.getPerlSubArgumentsFromBody(mySubDefinitionBody));
     myReturnValueFromCodeProvider = PerlResolveUtil.computeReturnValueFromControlFlowLazy(elementSub);
-  }
-
-  @Deprecated
-  public PerlLightSubDefinitionElement(@NotNull Delegate delegate,
-                                       @NotNull String subName,
-                                       @NotNull IStubElementType elementType,
-                                       @NotNull PsiElement nameIdentifier,
-                                       @Nullable String namespaceName,
-                                       @NotNull List<PerlSubArgument> subArguments,
-                                       @Nullable PerlSubAnnotations annotations,
-                                       @NotNull AtomicNotNullLazyValue<PerlValue> returnValueFromCodeProvider) {
-    this(delegate, subName, elementType, nameIdentifier, namespaceName, annotations, subArguments, returnValueFromCodeProvider, null);
-  }
-
-  @Deprecated
-  public PerlLightSubDefinitionElement(@NotNull Delegate delegate,
-                                       @NotNull String subName,
-                                       @NotNull IStubElementType elementType,
-                                       @NotNull PsiElement nameIdentifier,
-                                       @Nullable String namespaceName,
-                                       @NotNull List<PerlSubArgument> subArguments,
-                                       @Nullable PerlSubAnnotations annotations) {
-    this(delegate, subName, elementType, nameIdentifier, namespaceName, subArguments, annotations, UNKNOWN_VALUE_PROVIDER);
   }
 
   public PerlLightSubDefinitionElement(@NotNull Delegate delegate, @NotNull PerlSubDefinitionStub stub) {

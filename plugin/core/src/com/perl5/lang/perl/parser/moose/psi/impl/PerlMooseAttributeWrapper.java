@@ -164,8 +164,8 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElement<PerlMooseAtt
         LIGHT_METHOD_DEFINITION,
         identifier,
         namespaceName,
-        PerlSubAnnotations.tryToFindAnnotations(identifier, getParent()),
         Arrays.asList(PerlSubArgument.self(), PerlSubArgument.optionalScalar("new_value")),
+        PerlSubAnnotations.tryToFindAnnotations(identifier, getParent()),
         valueProvider,
         subExpr == null ? null : subExpr.getBlock()
       );

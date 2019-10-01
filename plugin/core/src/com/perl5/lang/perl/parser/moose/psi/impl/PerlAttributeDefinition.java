@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,15 +41,14 @@ public class PerlAttributeDefinition extends PerlLightMethodDefinitionElement<Pe
   public static final Function<String, String> DEFAULT_NAME_COMPUTATION =
     name -> StringUtil.startsWith(name, "+") ? name.substring(1) : name;
 
-
   public PerlAttributeDefinition(@NotNull PerlMooseAttributeWrapper wrapper,
-                                 @NotNull String subName,
+                                 @NotNull String name,
                                  @NotNull IStubElementType elementType,
-                                 @NotNull PsiElement nameIdentifier,
+                                 @Nullable PsiElement nameIdentifier,
                                  @Nullable String packageName,
                                  @NotNull List<PerlSubArgument> subArguments,
                                  @Nullable PerlSubAnnotations annotations) {
-    super(wrapper, subName, elementType, nameIdentifier, packageName, subArguments, annotations);
+    super(wrapper, name, elementType, nameIdentifier, packageName, subArguments, annotations);
   }
 
   public PerlAttributeDefinition(@NotNull PerlMooseAttributeWrapper wrapper,

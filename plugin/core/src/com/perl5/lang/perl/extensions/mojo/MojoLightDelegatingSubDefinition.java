@@ -43,7 +43,7 @@ public class MojoLightDelegatingSubDefinition extends PerlLightSubDefinitionElem
                                           @Nullable String namespaceName,
                                           @NotNull String name,
                                           @NotNull AtomicNotNullLazyValue<PerlValue> returnValueFromCodeProvider) {
-    super(useStatementElement, name, PerlStubElementTypes.LIGHT_METHOD_DEFINITION, null, namespaceName, null, Collections.emptyList(),
+    super(useStatementElement, name, PerlStubElementTypes.LIGHT_METHOD_DEFINITION, null, namespaceName, Collections.emptyList(), null,
           returnValueFromCodeProvider,
           null);
     setImplicit(true);

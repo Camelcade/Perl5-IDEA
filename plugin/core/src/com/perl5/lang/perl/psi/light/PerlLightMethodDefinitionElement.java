@@ -33,6 +33,8 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 import java.util.List;
 
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE_PROVIDER;
+
 public class PerlLightMethodDefinitionElement<Delegate extends PerlPolyNamedElement<?>> extends PerlLightSubDefinitionElement<Delegate> {
 
   public PerlLightMethodDefinitionElement(@NotNull Delegate delegate,
@@ -44,15 +46,17 @@ public class PerlLightMethodDefinitionElement<Delegate extends PerlPolyNamedElem
     super(delegate, name, elementType, nameIdentifier, packageName, elementSub);
   }
 
-  @Deprecated
   public PerlLightMethodDefinitionElement(@NotNull Delegate delegate,
-                                          @NotNull String subName,
+                                          @NotNull String name,
                                           @NotNull IStubElementType elementType,
-                                          @NotNull PsiElement nameIdentifier,
+                                          @Nullable PsiElement nameIdentifier,
                                           @Nullable String packageName,
                                           @NotNull List<PerlSubArgument> subArguments,
-                                          @Nullable PerlSubAnnotations annotations) {
-    super(delegate, subName, elementType, nameIdentifier, packageName, subArguments, annotations);
+                                          @Nullable PerlSubAnnotations annotations,
+                                          @NotNull AtomicNotNullLazyValue<PerlValue> returnValueFromCodeProfider,
+                                          @Nullable PsiPerlBlock subDefinitionBody) {
+    super(delegate, name, elementType, nameIdentifier, packageName, subArguments, annotations, returnValueFromCodeProfider,
+          subDefinitionBody);
   }
 
   public PerlLightMethodDefinitionElement(@NotNull Delegate delegate,
@@ -60,12 +64,9 @@ public class PerlLightMethodDefinitionElement<Delegate extends PerlPolyNamedElem
                                           @NotNull IStubElementType elementType,
                                           @Nullable PsiElement nameIdentifier,
                                           @Nullable String packageName,
-                                          @Nullable PerlSubAnnotations annotations,
                                           @NotNull List<PerlSubArgument> subArguments,
-                                          @NotNull AtomicNotNullLazyValue<PerlValue> returnValueFromCodeProfider,
-                                          @Nullable PsiPerlBlock subDefinitionBody) {
-    super(delegate, name, elementType, nameIdentifier, packageName, annotations, subArguments, returnValueFromCodeProfider,
-          subDefinitionBody);
+                                          @Nullable PerlSubAnnotations annotations) {
+    this(delegate, name, elementType, nameIdentifier, packageName, subArguments, annotations, UNKNOWN_VALUE_PROVIDER, null);
   }
 
   public PerlLightMethodDefinitionElement(@NotNull Delegate delegate,

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,7 +47,14 @@ public class PerlClassAccessorMethod extends PerlLightMethodDefinitionElement<Pe
                                  @NotNull PsiElement nameIdentifier,
                                  @Nullable String packageName,
                                  @Nullable PerlSubAnnotations annotations) {
-    super(delegate, nameComputation.fun(baseName), elementType, nameIdentifier, packageName, Collections.emptyList(), annotations);
+    super(delegate,
+          nameComputation.fun(baseName),
+          elementType,
+          nameIdentifier,
+          packageName,
+          Collections.emptyList(),
+          annotations
+    );
     withNameComputation(nameComputation);
     if (isFollowBestPractice()) {
       if (hasSetterName()) {

@@ -41,7 +41,7 @@ public class PerlLightConstantDefinitionElement extends PerlLightSubDefinitionEl
                                             @NotNull List<PerlSubArgument> subArguments,
                                             @Nullable PerlSubAnnotations annotations,
                                             @NotNull AtomicNotNullLazyValue<PerlValue> returnValueFromCodeProvider) {
-    super(wrapper, subName, elementType, nameIdentifier, packageName, subArguments, annotations, returnValueFromCodeProvider);
+    super(wrapper, subName, elementType, nameIdentifier, packageName, subArguments, annotations, returnValueFromCodeProvider, null);
   }
 
   public PerlLightConstantDefinitionElement(@NotNull PerlUseStatementElement delegate, @NotNull PerlSubDefinitionStub stub) {

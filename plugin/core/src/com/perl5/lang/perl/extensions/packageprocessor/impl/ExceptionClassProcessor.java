@@ -42,6 +42,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE_PROVIDER;
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.*;
 
 public class ExceptionClassProcessor extends PerlPackageProcessorBase {
@@ -183,7 +184,9 @@ public class ExceptionClassProcessor extends PerlPackageProcessorBase {
             aliasEntry.getNonNullValueElement(),
             PerlPackageUtil.getContextNamespaceName(useStatementElement),
             new ArrayList<>(throwArguments),
-            PerlSubAnnotations.tryToFindAnnotations(aliasEntry.keyElement, aliasEntry.valueElement)
+            PerlSubAnnotations.tryToFindAnnotations(aliasEntry.keyElement, aliasEntry.valueElement),
+            UNKNOWN_VALUE_PROVIDER,
+            null
           ));
         }
       }
