@@ -24,7 +24,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class MasonIndentStrategy implements IndentStrategy {
   @Override
-  public boolean canIndent(@NotNull PsiElement element) {
+  public boolean canIndent(int indentationStartOffset, int indentationEndOffset, @NotNull PsiElement element) {
     return !MasonIndentProcessor.INSTANCE.getAbsoluteUnindentableTokens().contains(element.getNode().getElementType());
   }
 }

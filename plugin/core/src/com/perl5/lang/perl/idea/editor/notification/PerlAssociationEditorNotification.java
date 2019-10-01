@@ -60,14 +60,16 @@ public class PerlAssociationEditorNotification extends EditorNotifications.Provi
 
   @Nullable
   @Override
-  public EditorNotificationPanel createNotificationPanel(@NotNull VirtualFile file, @NotNull FileEditor fileEditor) {
+  public EditorNotificationPanel createNotificationPanel(@NotNull VirtualFile file,
+                                                         @NotNull FileEditor fileEditor,
+                                                         @NotNull Project project) {
     PerlLocalSettings perlLocalSettings = PerlLocalSettings.getInstance(myProject);
     if (perlLocalSettings.DISABLE_ASSOCIATIONS_CHECKING || ScratchUtil.isScratch(file)) {
       return null;
     }
 
     Optional<Map.Entry<FileNameMatcher, FileType>> matchedEntry =
-      PERL_FILE_TYPES.entrySet().stream().filter(entry -> entry.getKey().accept(file.getName())).findFirst();
+      PERL_FILE_TYPES.entrySet().stream().filter(entry -> entry.getKey().acceptsCharSequence(file.getName())).findFirst();
     if (matchedEntry == null || !matchedEntry.isPresent()) {
       return null;
     }

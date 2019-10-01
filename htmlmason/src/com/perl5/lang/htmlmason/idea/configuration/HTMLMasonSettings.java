@@ -123,7 +123,7 @@ public class HTMLMasonSettings extends AbstractMasonSettings implements Persiste
 
   public boolean isVirtualFileNameMatches(@NotNull VirtualFile file) {
     for (FileNameMatcher matcher : myLazyMatchers.getValue()) {
-      if (matcher.accept(file.getName())) {
+      if (matcher.acceptsCharSequence(file.getName())) {
         return true;
       }
     }

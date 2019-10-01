@@ -18,8 +18,8 @@ package com.perl5.lang.mason2.idea.components;
 
 import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFileListener;
-import com.intellij.openapi.vfs.VirtualFileManager;
 import com.perl5.lang.mason2.idea.vfs.MasonVirtualFileListener;
 import org.jetbrains.annotations.NotNull;
 
@@ -35,12 +35,12 @@ public class MasonProjectComponent implements ProjectComponent {
 
   @Override
   public void initComponent() {
-    VirtualFileManager.getInstance().addVirtualFileListener(myFileListener);
+    LocalFileSystem.getInstance().addVirtualFileListener(myFileListener);
   }
 
   @Override
   public void disposeComponent() {
-    VirtualFileManager.getInstance().removeVirtualFileListener(myFileListener);
+    LocalFileSystem.getInstance().removeVirtualFileListener(myFileListener);
   }
 
   @Override

@@ -49,7 +49,9 @@ public class PerlInterpreterEditorNotification extends EditorNotifications.Provi
 
   @Nullable
   @Override
-  public EditorNotificationPanel createNotificationPanel(@NotNull VirtualFile virtualFile, @NotNull FileEditor fileEditor) {
+  public EditorNotificationPanel createNotificationPanel(@NotNull VirtualFile virtualFile,
+                                                         @NotNull FileEditor fileEditor,
+                                                         @NotNull Project project) {
     if (virtualFile.getFileType() instanceof PerlFileType && !(virtualFile instanceof LightVirtualFile)) {
       final PerlLocalSettings perlLocalSettings = PerlLocalSettings.getInstance(myProject);
       if (perlLocalSettings.DISABLE_NO_INTERPRETER_WARNING) {

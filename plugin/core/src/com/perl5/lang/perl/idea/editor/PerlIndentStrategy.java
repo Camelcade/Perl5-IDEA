@@ -26,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class PerlIndentStrategy implements IndentStrategy {
   @Override
-  public boolean canIndent(@NotNull PsiElement element) {
+  public boolean canIndent(int indentationStartOffset, int indentationEndOffset, @NotNull PsiElement element) {
     if (element instanceof PerlHeredocElementImpl) {
       return ((PerlHeredocElementImpl)element).isIndentable();
     }

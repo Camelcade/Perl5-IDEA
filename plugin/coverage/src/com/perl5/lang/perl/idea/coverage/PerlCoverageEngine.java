@@ -23,7 +23,6 @@ import com.intellij.coverage.view.DirectoryCoverageViewExtension;
 import com.intellij.execution.configurations.RunConfigurationBase;
 import com.intellij.execution.configurations.coverage.CoverageEnabledConfiguration;
 import com.intellij.execution.testframework.AbstractTestProxy;
-import com.intellij.openapi.extensions.Extensions;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.io.FileUtil;
@@ -163,7 +162,7 @@ public class PerlCoverageEngine extends CoverageEngine {
   }
 
   public static PerlCoverageEngine getInstance() {
-    return Extensions.findExtension(CoverageEngine.EP_NAME, PerlCoverageEngine.class);
+    return CoverageEngine.EP_NAME.findExtension(PerlCoverageEngine.class);
   }
 
   private static boolean isOurFile(@Nullable VirtualFile virtualFile) {

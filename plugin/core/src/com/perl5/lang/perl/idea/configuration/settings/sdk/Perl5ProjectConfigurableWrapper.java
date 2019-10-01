@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -51,13 +50,8 @@ public class Perl5ProjectConfigurableWrapper implements UnnamedConfigurable {
       return myConfigurables.get(0).createComponent();
     }
 
-    JBTabbedPane tabbedPane = new JBTabbedPane() {
-      @NotNull
-      @Override
-      protected Insets getInsetsForTabComponent() {
-        return JBUI.emptyInsets();
-      }
-    };
+    JBTabbedPane tabbedPane = new JBTabbedPane();
+    tabbedPane.setTabComponentInsets(JBUI.emptyInsets());
 
     myConfigurables.forEach(configurable -> {
       JComponent configurableComponent = configurable.createComponent();

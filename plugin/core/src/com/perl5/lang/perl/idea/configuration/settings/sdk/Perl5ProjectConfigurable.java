@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -416,7 +416,6 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
   private static LabeledComponent<RawCommandLineEditor> copyDialogCaption(final LabeledComponent<RawCommandLineEditor> component,
                                                                           String text) {
     final RawCommandLineEditor rawCommandLineEditor = component.getComponent();
-    rawCommandLineEditor.setDialogCaption(text);
     component.getLabel().setLabelFor(rawCommandLineEditor.getTextField());
     return component;
   }

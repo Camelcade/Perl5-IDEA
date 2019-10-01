@@ -49,7 +49,9 @@ public class HTMLMasonPathsNotification extends EditorNotifications.Provider<Edi
 
   @Nullable
   @Override
-  public EditorNotificationPanel createNotificationPanel(@NotNull final VirtualFile file, @NotNull FileEditor fileEditor) {
+  public EditorNotificationPanel createNotificationPanel(@NotNull VirtualFile file,
+                                                         @NotNull FileEditor fileEditor,
+                                                         @NotNull Project project) {
     if (file.getFileType() == HTMLMasonFileType.INSTANCE) {
       String message = null;
 

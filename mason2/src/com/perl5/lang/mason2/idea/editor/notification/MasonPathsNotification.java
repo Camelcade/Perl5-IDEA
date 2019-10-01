@@ -49,7 +49,9 @@ public class MasonPathsNotification extends EditorNotifications.Provider<EditorN
 
   @Nullable
   @Override
-  public EditorNotificationPanel createNotificationPanel(@NotNull final VirtualFile file, @NotNull FileEditor fileEditor) {
+  public EditorNotificationPanel createNotificationPanel(@NotNull VirtualFile file,
+                                                         @NotNull FileEditor fileEditor,
+                                                         @NotNull Project project) {
     if (file.getFileType() instanceof MasonPurePerlComponentFileType) {
       String message = null;
 
