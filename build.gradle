@@ -24,7 +24,7 @@ plugins {
   id "org.jetbrains.intellij" version "0.4.10"
   id 'jacoco'
   id 'com.github.kt3k.coveralls' version '2.8.2'
-  id 'org.jetbrains.grammarkit' version '2019.2'
+  id 'org.jetbrains.grammarkit' version '2019.2.3'
 }
 
 repositories {
@@ -52,10 +52,6 @@ def pluginProjects = allprojects.findAll {
 
 allprojects {
   apply plugin: 'org.jetbrains.grammarkit'
-
-  grammarKit{
-    grammarKitRelease = '07f30a1e7666f36ae780f614b6bbc89690ba36c3'
-  }
 
   apply plugin: 'jacoco'
   dependencies{
