@@ -23,7 +23,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.ui.update.MergingUpdateQueue;
 import com.intellij.util.ui.update.Update;
 import com.perl5.PerlBundle;
@@ -65,7 +64,7 @@ public abstract class PackageManagerAdapter {
    */
   @NotNull
   protected List<String> getInstallParameters(@NotNull Collection<String> packageNames) {
-    return ContainerUtil.newArrayList(packageNames);
+    return new ArrayList<>(packageNames);
   }
 
   /**

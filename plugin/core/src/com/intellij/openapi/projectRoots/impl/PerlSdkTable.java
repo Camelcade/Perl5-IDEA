@@ -29,7 +29,6 @@ import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.intellij.util.ReflectionUtil;
-import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.messages.MessageBus;
 import com.intellij.util.messages.Topic;
 import com.perl5.lang.perl.idea.PerlPathMacros;
@@ -108,7 +107,7 @@ public class PerlSdkTable extends ProjectJdkTable implements PersistentStateComp
 
   @NotNull
   public List<Sdk> getInterpreters() {
-    return ContainerUtil.newArrayList(myInterpretersList);
+    return new ArrayList<>(myInterpretersList);
   }
 
   @NotNull
