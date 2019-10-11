@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright 2015-2018 Alexandr Evstigneev
+  ~ Copyright 2015-2019 Alexandr Evstigneev
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -14,5 +14,17 @@
   ~ limitations under the License.
   -->
 
-<p>WSL support for <a href="https://plugins.jetbrains.com/plugin/7796-perl">Perl5 plugin</a></p>
-<p>More information may be found in our <a href="https://github.com/hurricup/Perl5-IDEA/wiki">Wiki</a>.</p>
+<idea-plugin url="https://github.com/hurricup/Perl5-IDEA">
+  <module value="com.perl5.transport.docker"/>
+
+  <extensions defaultExtensionNs="com.perl5">
+    <hostHandler key="docker"
+                 implementationClass="com.perl5.lang.perl.idea.sdk.host.docker.PerlDockerHandler"/>
+  </extensions>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <projectService serviceImplementation="com.perl5.lang.perl.idea.sdk.host.docker.PerlDockerProjectSettings"/>
+  </extensions>
+
+
+</idea-plugin>

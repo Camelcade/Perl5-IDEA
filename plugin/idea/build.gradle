@@ -14,12 +14,10 @@
  * limitations under the License.
  */
 
-import org.jetbrains.grammarkit.tasks.GenerateLexer
-import org.jetbrains.grammarkit.tasks.GenerateParser
-
 sourceSets {
   main {
     java.srcDirs project.files('src')
+    resources.srcDir file('resources')
   }
 }
 

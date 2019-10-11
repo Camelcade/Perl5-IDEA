@@ -14,14 +14,13 @@
  * limitations under the License.
  */
 
-import org.jetbrains.grammarkit.tasks.GenerateLexer
-import org.jetbrains.grammarkit.tasks.GenerateParser
-
 dependencies{
   compile project(":perl5.core")
   compile project(":perl5.core.idea")
   compile project(":perl5.core.coverage")
   compile project(":perl5.core.intelliLang")
+  compile project(":perl5.transport.docker")
+  compile project(":perl5.transport.wsl")
 }
 
 sourceSets {

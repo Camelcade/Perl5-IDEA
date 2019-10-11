@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright 2015-2018 Alexandr Evstigneev
+  ~ Copyright 2015-2019 Alexandr Evstigneev
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -15,26 +15,17 @@
   -->
 
 <idea-plugin url="https://github.com/hurricup/Perl5-IDEA">
-  <id>com.perl5.transport.docker</id>
-  <name>Perl Docker Support</name>
-  <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
-  <category>Custom Languages</category>
+  <module value="com.perl5.transport.wsl"/>
 
   <!-- please  see http://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
        on how to target different products  -->
-
-  <depends>com.perl5</depends>
-  <depends>Docker</depends>
-  <depends>com.intellij.modules.ultimate</depends>
-
   <extensions defaultExtensionNs="com.perl5">
-    <hostHandler key="docker"
-                 implementationClass="com.perl5.lang.perl.idea.sdk.host.docker.PerlDockerHandler"/>
+    <hostHandler key="wsl"
+                 implementationClass="com.perl5.lang.perl.idea.sdk.host.wsl.PerlWslHandler"/>
   </extensions>
 
   <extensions defaultExtensionNs="com.intellij">
-    <projectService serviceImplementation="com.perl5.lang.perl.idea.sdk.host.docker.PerlDockerProjectSettings"/>
+    <consoleInputFilterProvider implementation="com.perl5.lang.perl.idea.sdk.host.wsl.PerlWslInputFilterProvider"/>
   </extensions>
-
 
 </idea-plugin>

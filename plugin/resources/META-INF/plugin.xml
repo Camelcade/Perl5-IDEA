@@ -24,11 +24,13 @@
        on how to target different products  -->
 
   <depends>com.intellij.modules.lang</depends>
-  <depends optional="true" config-file="intellilang-deps.xml">org.intellij.intelliLang</depends>
-  <depends optional="true" config-file="idea-deps.xml">com.intellij.modules.java</depends>
-  <depends optional="true" config-file="coverage-deps.xml">com.intellij.modules.coverage</depends>
 
-  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="plugin-pod.xml" xpointer="xpointer(/idea-plugin/*)"/>
+  <depends optional="true" config-file="plugin-ultimate.xml">com.intellij.modules.ultimate</depends>
+  <depends optional="true" config-file="perl-intellilang.xml">org.intellij.intelliLang</depends>
+  <depends optional="true" config-file="perl-idea.xml">com.intellij.modules.java</depends>
+  <depends optional="true" config-file="perl-coverage.xml">com.intellij.modules.coverage</depends>
+
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="perl-pod.xml" xpointer="xpointer(/idea-plugin/*)"/>
 
   <extensionPoints>
     <extensionPoint name="packageProcessor" beanClass="com.perl5.lang.perl.idea.EP.PerlPackageProcessorEP">

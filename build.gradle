@@ -36,8 +36,6 @@ def agentFiles = files('lib/org.jacoco.agent-0.8.1.jar')
 
 Set pluginProjectsNames = [
   "perl5.plugin",
-  "perl5.transport.docker",
-  "perl5.transport.wsl",
   "perl5.lang.tt2",
   "perl5.lang.mojo",
   "perl5.lang.embedded",

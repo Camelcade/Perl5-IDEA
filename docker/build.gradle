@@ -27,7 +27,7 @@ sourceSets {
 
 intellij{
   type 'IU'
-  plugins = [project(':perl5.plugin'), 'Docker', 'remote-run', 'java']
+  plugins = ['Docker', 'remote-run', 'java']
 }
 
 dependencies{
