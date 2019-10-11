@@ -24,12 +24,21 @@ import com.intellij.openapi.vfs.VirtualFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collection;
+import java.util.Collections;
+
 
 public class PerlFileTypeDetector implements FileTypeRegistry.FileTypeDetector {
   @Override
   public FileType detect(@NotNull VirtualFile file, @NotNull ByteSequence firstBytes, @Nullable CharSequence firstCharsIfText) {
     // todo add some detections for xs/pod/pm
     return FileUtil.isHashBangLine(firstCharsIfText, "perl") ? PerlFileTypeScript.INSTANCE : null;
+  }
+
+  @Nullable
+  @Override
+  public Collection<? extends FileType> getDetectedFileTypes() {
+    return Collections.singletonList(PerlFileTypeScript.INSTANCE);
   }
 
   @Override

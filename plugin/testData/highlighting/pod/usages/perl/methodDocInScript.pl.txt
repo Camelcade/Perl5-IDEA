@@ -17,4 +17,3 @@ __DATA__
 L<Ref To Method|/<READ>somemethod()</READ>>
 
 L</<READ>somemethod()</READ>>
-
