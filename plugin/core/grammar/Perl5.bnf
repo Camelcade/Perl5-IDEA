@@ -1006,7 +1006,9 @@ private strict_variable_declaration_argument ::= strict_variable_declaration_wra
 private variable_declaration_argument ::= variable_declaration_element |  undef_expr
 
 private strict_variable_declaration_wrapper ::= variable_declaration_element !('{' | '[' | '->' )
-variable_declaration_element ::= '\\'? lexical_variable
+variable_declaration_element ::= '\\'? [funcation_parameters_named_parameters_prefix] lexical_variable [function_parameters_default_arguments]
+private function_parameters_default_arguments ::= '=' expr
+private funcation_parameters_named_parameters_prefix ::= ':'
 
 /////////////////////////////////// REFERENCES /////////////////////////////////////////////////////////////////////////
 anon_array ::= '[' [expr] ']' //{pin=1}
