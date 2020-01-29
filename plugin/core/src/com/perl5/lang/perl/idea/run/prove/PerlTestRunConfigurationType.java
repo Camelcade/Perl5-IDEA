@@ -34,6 +34,12 @@ public class PerlTestRunConfigurationType extends ConfigurationTypeBase {
     addFactory(new ConfigurationFactory(this) {
       @NotNull
       @Override
+      public String getId() {
+        return "Perl5 Test";
+      }
+
+      @NotNull
+      @Override
       public RunConfiguration createTemplateConfiguration(@NotNull Project project) {
         return new PerlTestRunConfiguration(project, this, "Unnamed");
       }

@@ -48,7 +48,7 @@ import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.search.GlobalSearchScopesCore;
 import com.intellij.testFramework.LightVirtualFile;
-import com.intellij.util.FileContentUtil;
+import com.intellij.util.FileContentUtilCore;
 import com.intellij.util.Function;
 import com.intellij.util.xmlb.XmlSerializerUtil;
 import com.intellij.util.xmlb.annotations.Transient;
@@ -282,7 +282,7 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
                 outputStream.write(stdout.getBytes());
                 outputStream.close();
                 newFile.setWritable(false);
-                FileContentUtil.reparseFiles(newFile);
+                FileContentUtilCore.reparseFiles(newFile);
 
                 myFilesMap = newFilesMap;
                 isActual = true;

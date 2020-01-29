@@ -20,6 +20,7 @@ import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
 import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.WriteAction;
 import com.intellij.openapi.diagnostic.Logger;
@@ -50,7 +51,8 @@ public class PerlHostCacheCleaner implements StartupActivity, DumbAware {
 
   @Override
   public void runActivity(@NotNull Project project) {
-    if (ApplicationManager.getApplication().isDispatchThread()) {
+    Application application = ApplicationManager.getApplication();
+    if (!application.isUnitTestMode() && application.isDispatchThread()) {
       LOG.error("This supposed to be invoked from pooled thread");
       return;
     }

@@ -35,6 +35,12 @@ public class PerlRunConfigurationType extends ConfigurationTypeBase {
     addFactory(new ConfigurationFactory(this) {
       @NotNull
       @Override
+      public String getId() {
+        return "Perl";
+      }
+
+      @NotNull
+      @Override
       public RunConfiguration createTemplateConfiguration(@NotNull Project project) {
         return new PerlRunConfiguration(project, this, "Unnamed");
       }

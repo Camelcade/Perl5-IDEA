@@ -114,7 +114,7 @@ public class PerlHierarchyBrowser extends TypeHierarchyBrowserBase {
 
   @Nullable
   @Override
-  protected Comparator<NodeDescriptor> getComparator() {
+  protected Comparator<NodeDescriptor<?>> getComparator() {
     return null;
   }
 

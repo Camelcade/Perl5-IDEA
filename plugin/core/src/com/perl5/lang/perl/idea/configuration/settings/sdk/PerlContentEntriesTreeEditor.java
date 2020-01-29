@@ -118,11 +118,12 @@ public class PerlContentEntriesTreeEditor implements UnnamedConfigurable, Dispos
                                                 //myFileSystemTree.select(file, null);
                                               },
                                               null) {
+
       @Override
       protected AbstractTreeBuilder createTreeBuilder(JTree tree,
                                                       DefaultTreeModel treeModel,
                                                       AbstractTreeStructure treeStructure,
-                                                      Comparator<NodeDescriptor> comparator,
+                                                      Comparator<NodeDescriptor<?>> comparator,
                                                       FileChooserDescriptor descriptor,
                                                       @Nullable Runnable onInitialized) {
         return new MyFileTreeBuilder(tree, treeModel, treeStructure, comparator, descriptor, onInitialized);
@@ -203,10 +204,9 @@ public class PerlContentEntriesTreeEditor implements UnnamedConfigurable, Dispos
     public MyFileTreeBuilder(JTree tree,
                              DefaultTreeModel treeModel,
                              AbstractTreeStructure treeStructure,
-                             Comparator<NodeDescriptor> comparator,
-                             FileChooserDescriptor descriptor,
-                             @Nullable Runnable onInitialized) {
-      super(tree, treeModel, treeStructure, comparator, descriptor, onInitialized);
+                             Comparator<? super NodeDescriptor<?>> comparator,
+                             FileChooserDescriptor chooserDescriptor, Runnable onInitialized) {
+      super(tree, treeModel, treeStructure, comparator, chooserDescriptor, onInitialized);
     }
 
     @Override

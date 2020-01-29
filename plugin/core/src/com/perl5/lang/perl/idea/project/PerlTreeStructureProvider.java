@@ -41,9 +41,9 @@ public class PerlTreeStructureProvider implements TreeStructureProvider {
 
   @NotNull
   @Override
-  public Collection<AbstractTreeNode> modify(@NotNull AbstractTreeNode parent,
-                                             @NotNull Collection<AbstractTreeNode> children,
-                                             ViewSettings settings) {
+  public Collection<AbstractTreeNode<?>> modify(@NotNull AbstractTreeNode<?> parent,
+                                                @NotNull Collection<AbstractTreeNode<?>> children,
+                                                ViewSettings settings) {
     if (!myProjectManager.isPerlEnabled()) {
       return children;
     }

@@ -27,6 +27,7 @@ import com.intellij.execution.configurations.RunnerSettings;
 import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.runners.DefaultProgramRunner;
 import com.intellij.execution.runners.ExecutionEnvironment;
+import com.intellij.execution.ui.RunContentDescriptor;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -45,22 +46,23 @@ public class PerlCoverageProgramRunner extends DefaultProgramRunner {
 
   @Nullable
   @Override
-  public RunnerSettings createConfigurationData(ConfigurationInfoProvider settingsProvider) {
+  public RunnerSettings createConfigurationData(@NotNull ConfigurationInfoProvider settingsProvider) {
     return new CoverageRunnerData();
   }
 
+  @Nullable
   @Override
-  protected void execute(@NotNull ExecutionEnvironment environment, Callback callback, @NotNull RunProfileState state)
+  protected RunContentDescriptor doExecute(@NotNull RunProfileState state, @NotNull ExecutionEnvironment environment)
     throws ExecutionException {
-    super.execute(environment, descriptor -> {
-      ProcessHandler processHandler = descriptor.getProcessHandler();
-      if (processHandler != null) {
-        CoverageHelper
-          .attachToProcess((GenericPerlRunConfiguration)environment.getRunProfile(), processHandler, environment.getRunnerSettings());
-      }
-      if (callback != null) {
-        callback.processStarted(descriptor);
-      }
-    }, new PerlCoverageProfileState(environment));
+    RunContentDescriptor descriptor = super.doExecute(new PerlCoverageProfileState(environment), environment);
+    if (descriptor == null) {
+      return null;
+    }
+    ProcessHandler processHandler = descriptor.getProcessHandler();
+    if (processHandler != null) {
+      CoverageHelper
+        .attachToProcess((GenericPerlRunConfiguration)environment.getRunProfile(), processHandler, environment.getRunnerSettings());
+    }
+    return descriptor;
   }
 }

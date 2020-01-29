@@ -68,7 +68,6 @@ import com.intellij.lang.Language;
 import com.intellij.lang.LanguageDocumentation;
 import com.intellij.lang.LanguageStructureViewBuilder;
 import com.intellij.lang.documentation.DocumentationProvider;
-import com.intellij.lang.documentation.DocumentationProviderEx;
 import com.intellij.lang.injection.InjectedLanguageManager;
 import com.intellij.lang.parameterInfo.ParameterInfoHandler;
 import com.intellij.lexer.Lexer;
@@ -370,7 +369,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   }
 
   protected void enableLiveTemplatesTesting() {
-    TemplateManagerImpl.setTemplateTesting(getProject(), getTestRootDisposable());
+    TemplateManagerImpl.setTemplateTesting(getTestRootDisposable());
   }
 
   protected void setTargetPerlVersion(@NotNull PerlVersion perlVersion) {
@@ -2328,7 +2327,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     PsiElement targetElement = DocumentationManager.getInstance(getProject()).findTargetElement(editor, file);
     assertNotNull(targetElement);
     DocumentationProvider documentationProvider = DocumentationManager.getProviderFromElement(targetElement, elementAtCaret);
-    assertInstanceOf(documentationProvider, DocumentationProviderEx.class);
+    assertNotNull(documentationProvider);
     String generatedDoc = StringUtil.notNullize(documentationProvider.generateDoc(targetElement, elementAtCaret));
     return Pair.create(targetElement, generatedDoc);
   }

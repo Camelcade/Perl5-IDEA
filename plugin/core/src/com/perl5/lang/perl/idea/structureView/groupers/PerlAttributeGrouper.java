@@ -42,7 +42,7 @@ public class PerlAttributeGrouper implements Grouper, ActionPresentation {
 
   @NotNull
   @Override
-  public Collection<Group> group(@NotNull AbstractTreeNode parent, @NotNull Collection<TreeElement> children) {
+  public Collection<Group> group(@NotNull AbstractTreeNode<?> parent, @NotNull Collection<TreeElement> children) {
     if (children.isEmpty() || parent instanceof GroupWrapper && ((GroupWrapper)parent).getValue() instanceof AttributeGroup) {
       return Collections.emptyList();
     }

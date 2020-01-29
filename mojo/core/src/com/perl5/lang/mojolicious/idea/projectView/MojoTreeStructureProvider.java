@@ -40,9 +40,9 @@ public class MojoTreeStructureProvider implements TreeStructureProvider {
 
   @NotNull
   @Override
-  public Collection<AbstractTreeNode> modify(@NotNull AbstractTreeNode parent,
-                                             @NotNull Collection<AbstractTreeNode> children,
-                                             ViewSettings settings) {
+  public Collection<AbstractTreeNode<?>> modify(@NotNull AbstractTreeNode<?> parent,
+                                                @NotNull Collection<AbstractTreeNode<?>> children,
+                                                ViewSettings settings) {
     if (!myMojoProjectManager.isMojoAvailable()) {
       return children;
     }

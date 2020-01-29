@@ -31,6 +31,12 @@ public class PerlRemoteDebuggingConfigurationType extends ConfigurationTypeBase 
     addFactory(new ConfigurationFactory(this) {
       @NotNull
       @Override
+      public String getId() {
+        return "Perl Remote Debugging";
+      }
+
+      @NotNull
+      @Override
       public RunConfiguration createTemplateConfiguration(@NotNull Project project) {
         return new PerlRemoteDebuggingConfiguration(project, this, "Unnamed");
       }
