@@ -64,6 +64,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.stream.Collectors;
 
 import static com.perl5.PerlBundle.PATH_TO_BUNDLE;
 import static com.perl5.lang.perl.idea.run.debugger.PerlDebugProfileState.DEBUG_PACKAGE;
@@ -86,6 +87,7 @@ public class PerlDebugThread extends Thread {
   private InputStream myInputStream;
   private volatile boolean myStop = false;
   private List<PerlLineBreakPointDescriptor> breakpointsDescriptorsQueue = new CopyOnWriteArrayList<>();
+  private List<PerlLineBreakPointDescriptor> breakpointsDescriptorsForRestore = new CopyOnWriteArrayList<>();
   private boolean isReady = false;
   private int transactionId = 0;
   private ConcurrentHashMap<Integer, PerlDebuggingTransactionHandler> transactionsMap =
@@ -109,10 +111,21 @@ public class PerlDebugThread extends Thread {
     if (descriptor != null) {
       // fixme potentially risk of race condition between clear and add
       breakpointsDescriptorsQueue.add(descriptor);
+      updateBreakpointsForRestore(descriptor);
       if (isReady) {
         sendQueuedBreakpoints();
       }
     }
+  }
+
+  private void updateBreakpointsForRestore(PerlLineBreakPointDescriptor descriptor) {
+      List<PerlLineBreakPointDescriptor> toRemove = breakpointsDescriptorsForRestore.stream()
+        .filter(d -> d.isSameLine(descriptor))
+        .collect(Collectors.toList());
+      breakpointsDescriptorsForRestore.removeAll(toRemove);
+      if (!descriptor.isRemove()) {
+        breakpointsDescriptorsForRestore.add(descriptor);
+      }
   }
 
   protected void sendQueuedBreakpoints() {
@@ -230,6 +243,7 @@ public class PerlDebugThread extends Thread {
       while (doRun() && myPerlDebugOptions.isReconnect()) {
         print("perl.debug.reconnecting");
         closeStreamsAndSockets();
+        breakpointsDescriptorsQueue.addAll(breakpointsDescriptorsForRestore);
       }
     }
     finally {

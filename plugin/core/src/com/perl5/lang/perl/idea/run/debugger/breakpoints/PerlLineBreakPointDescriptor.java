@@ -51,6 +51,14 @@ public class PerlLineBreakPointDescriptor {
     return condition;
   }
 
+  public boolean isRemove() {
+    return remove;
+  }
+
+  public boolean isSameLine(PerlLineBreakPointDescriptor descriptor) {
+    return path.equals(descriptor.path) && line == descriptor.line;
+  }
+
   @Nullable
   public static PerlLineBreakPointDescriptor createFromBreakpoint(XLineBreakpoint<PerlLineBreakpointProperties> breakpoint,
                                                                   PerlDebugThread debugThread) {
