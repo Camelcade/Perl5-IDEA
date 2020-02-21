@@ -1,0 +1,6 @@
+my $var = defined
+
+    #@type Foo::Bar
+    my $log = 123;
+
+$v<caret>ar;

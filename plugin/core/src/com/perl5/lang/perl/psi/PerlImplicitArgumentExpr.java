@@ -18,7 +18,10 @@ package com.perl5.lang.perl.psi;
 
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.PsiElement;
+import com.intellij.util.containers.ContainerUtil;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 /**
  * Represents an expression which may have an argument or use the implicit one
@@ -26,14 +29,15 @@ import org.jetbrains.annotations.NotNull;
 public interface PerlImplicitArgumentExpr extends PsiPerlExpr {
   @NotNull
   default PsiElement getArgument() {
-    PsiElement[] children = getChildren();
-    if (children.length == 0) {
+    List<PsiElement> filteredChildren = ContainerUtil.filter(getChildren(), it -> !(it instanceof PerlAnnotationContainer));
+    if (filteredChildren.isEmpty()) {
       return getImplicitArgument();
     }
-    if (children.length > 1) {
-      Logger.getInstance(PerlImplicitArgumentExpr.class).error("Got more than one child from expression: " + this + "; " + getText());
+    if (filteredChildren.size() > 1) {
+      Logger.getInstance(PerlImplicitArgumentExpr.class).error(
+        "Got more than one child from expression: " + this + "; " + getText() + "; " + filteredChildren);
     }
-    return children[0];
+    return filteredChildren.get(0);
   }
 
   /**

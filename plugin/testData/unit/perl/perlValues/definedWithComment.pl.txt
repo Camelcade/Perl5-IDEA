@@ -1,0 +1,14 @@
+my $var = defined
+
+    #@type Foo::Bar
+    my $log = 123;
+
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 59 in definedWithComment.pl
+Value unknown
+----------
+Resolved
+----------
+Value unknown
