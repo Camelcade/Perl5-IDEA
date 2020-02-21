@@ -24,6 +24,7 @@ import com.intellij.openapi.ui.LabeledComponent;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.ui.RawCommandLineEditor;
 import com.intellij.ui.components.fields.ExpandableTextField;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
@@ -56,6 +57,9 @@ class PerlTestRunConfigurationEditor extends GenericPerlRunConfigurationEditor<P
     private JComboBox<Integer> myJobsCombobox;
     private LabeledComponent<JComboBox<Integer>> myLabeledJobsCombobox;
 
+    private RawCommandLineEditor myTestScriptParametersEditor;
+    private LabeledComponent<RawCommandLineEditor> myLabeledTestScriptParametersEditor;
+
     public ParametersPanel(@NotNull Project project) {
       super(project);
     }
@@ -76,21 +80,28 @@ class PerlTestRunConfigurationEditor extends GenericPerlRunConfigurationEditor<P
       }
 
       myJobsCombobox = new JComboBox<>(jobs.toArray(new Integer[0]));
-      myLabeledJobsCombobox = LabeledComponent.create(myJobsCombobox, "Parallel jobs number:");
+      myLabeledJobsCombobox = LabeledComponent.create(myJobsCombobox, PerlBundle.message("perl.run.option.jobs.number"));
       myLabeledJobsCombobox.setLabelLocation(BorderLayout.WEST);
+
+      myTestScriptParametersEditor = new RawCommandLineEditor();
+      myLabeledTestScriptParametersEditor = LabeledComponent.create(
+        myTestScriptParametersEditor, PerlBundle.message("perl.run.option.test.script.parameters"));
+      myLabeledTestScriptParametersEditor.setLabelLocation(BorderLayout.WEST);
     }
 
     @Override
     protected void reset(PerlTestRunConfiguration runConfiguration) {
       super.reset(runConfiguration);
-      myJobsCombobox.setSelectedItem(Integer.valueOf(runConfiguration.getJobsNumber()));
+      myJobsCombobox.setSelectedItem(runConfiguration.getJobsNumber());
+      myTestScriptParametersEditor.setText(runConfiguration.getTestScriptParameters());
     }
 
     @Override
     protected void applyTo(PerlTestRunConfiguration runConfiguration) {
       super.applyTo(runConfiguration);
       Object item = myJobsCombobox.getSelectedItem();
-      runConfiguration.setJobsNumber(item instanceof Integer ? ((Integer)item).intValue() : PerlTestRunConfiguration.DEFAULT_JOBS_NUMBER);
+      runConfiguration.setJobsNumber(item instanceof Integer ? (Integer)item : PerlTestRunConfiguration.DEFAULT_JOBS_NUMBER);
+      runConfiguration.setTestScriptParameters(myTestScriptParametersEditor.getText());
     }
 
     @NotNull
@@ -98,6 +109,7 @@ class PerlTestRunConfigurationEditor extends GenericPerlRunConfigurationEditor<P
     protected List<LabeledComponent<?>> getLabeledComponents() {
       List<LabeledComponent<?>> parentComponents = new ArrayList<>(super.getLabeledComponents());
       parentComponents.add(myLabeledJobsCombobox);
+      parentComponents.add(myLabeledTestScriptParametersEditor);
       return parentComponents;
     }
 

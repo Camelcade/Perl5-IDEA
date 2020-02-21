@@ -45,6 +45,7 @@ import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.regex.Matcher;
@@ -70,6 +71,8 @@ class PerlTestRunConfiguration extends GenericPerlRunConfiguration {
   private static final Logger LOG = Logger.getInstance(PerlTestRunConfiguration.class);
   @Tag("JOBS_NUMBER")
   private int myJobsNumber = DEFAULT_JOBS_NUMBER;
+  @Tag("TEST_SCRIPT_PARAMETERS")
+  private String myTestScriptParameters = "";
 
   public PerlTestRunConfiguration(Project project,
                                   @NotNull ConfigurationFactory factory,
@@ -83,6 +86,21 @@ class PerlTestRunConfiguration extends GenericPerlRunConfiguration {
 
   void setJobsNumber(int jobsNumber) {
     myJobsNumber = jobsNumber;
+  }
+
+  @Nullable
+  String getTestScriptParameters() {
+    return myTestScriptParameters;
+  }
+
+  void setTestScriptParameters(@Nullable String testScriptParameters) {
+    myTestScriptParameters = testScriptParameters;
+  }
+
+  @NotNull
+  List<String> getTestScriptParametersList() {
+    String testScriptParameters = getTestScriptParameters();
+    return StringUtil.isEmpty(testScriptParameters) ? Collections.emptyList() : StringUtil.split(testScriptParameters, " ");
   }
 
   @NotNull
@@ -147,21 +165,27 @@ class PerlTestRunConfiguration extends GenericPerlRunConfiguration {
       .withProject(project)
       .withSdk(perlSdk);
 
-    ArrayList<String> testPerlParameters = new ArrayList<>(getPerlParametersList());
-    testPerlParameters.addAll(additionalPerlParameters);
+    List<String> testScriptParametersList = getTestScriptParametersList();
+    if (!testScriptParametersList.isEmpty()) {
+      commandLine.withParameters("::");
+      commandLine.withParameters(testScriptParametersList);
+    }
+
+    ArrayList<String> perlParametersList = new ArrayList<>(getPerlParametersList());
+    perlParametersList.addAll(additionalPerlParameters);
     for (VirtualFile libRoot : PerlProjectManager.getInstance(project).getModulesLibraryRoots()) {
-      testPerlParameters.add(PERL_I + perlHostData.getRemotePath(libRoot.getCanonicalPath()));
+      perlParametersList.add(PERL_I + perlHostData.getRemotePath(libRoot.getCanonicalPath()));
     }
 
     // environment
     Map<String, String> environment = new HashMap<>(getEnvs());
     environment.putAll(additionalEnvironmentVariables);
-    if (!testPerlParameters.isEmpty()) {
+    if (!perlParametersList.isEmpty()) {
       String currentOpt = environment.get(PerlRunUtil.PERL5OPT);
       if (StringUtil.isNotEmpty(currentOpt)) {
-        testPerlParameters.addAll(0, StringUtil.split(currentOpt, " "));
+        perlParametersList.addAll(0, StringUtil.split(currentOpt, " "));
       }
-      environment.put(PerlRunUtil.PERL5OPT, StringUtil.join(testPerlParameters, " "));
+      environment.put(PerlRunUtil.PERL5OPT, StringUtil.join(perlParametersList, " "));
     }
     environment.forEach((key, val) -> commandLine.withEnvironment(PROVE_PASS_PREFIX + key, val));
 
