@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,8 +33,8 @@ import org.junit.Test;
 import javax.swing.*;
 import java.util.Arrays;
 
+@Ignore("For manual testing only")
 public class PerlExceptionReporterTest extends PerlLightTestCase {
-  @Ignore("For manual testing only")
   @Test
   public void testReporting() {
     Throwable first = new Throwable();
@@ -50,7 +50,6 @@ public class PerlExceptionReporterTest extends PerlLightTestCase {
     assertTrue(StringUtil.isNotEmpty(result));
   }
 
-  @Ignore
   @Test
   public void testReportingInvalidPsiElement() {
     initWithTextSmart("say 'hi'");
