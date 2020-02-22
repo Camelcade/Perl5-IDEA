@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,12 +49,12 @@ class PerlDockerHandler extends PerlHostWithFileSystemHandler<PerlDockerData, Pe
       images = new PerlDockerAdapter(hostData).listImages();
     }
     catch (ExecutionException e) {
-      // fixme notify user?
-      LOG.error(e);
+      showErrorDialog(e.getMessage());
+      LOG.warn("Error listing docker images: " + e.getMessage());
       return null;
     }
     if (images.isEmpty()) {
-      // fixme notfiy user?
+      showErrorDialog(PerlDockerBundle.message("perl.host.handler.docker.error.list.images.empty"));
       return null;
     }
     String[] imagesArray = ArrayUtil.toStringArray(images);
@@ -71,6 +71,13 @@ class PerlDockerHandler extends PerlHostWithFileSystemHandler<PerlDockerData, Pe
     }
     hostData.withImageName(images.get(index));
     return hostData;
+  }
+
+  private void showErrorDialog(@NotNull String message) {
+    ApplicationManager.getApplication().invokeAndWait(() -> Messages.showErrorDialog(
+      message,
+      PerlDockerBundle.message("perl.host.handler.docker.error.list.images.title")
+    ));
   }
 
   @NotNull
