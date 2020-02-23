@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ModuleRootManager;
+import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
@@ -75,6 +76,7 @@ class PerlDockerAdapter {
   private static final String EXPOSE_PORT = "--expose";
   private static final String PUBLISH_PORT = "-p";
   private static final String WORKING_DIRECTORY = "-w";
+  static final String DOCKER_EXECUTABLE = SystemInfo.isWindows ? "docker.exe" : "docker";
 
   @NotNull
   private final PerlDockerData myData;
@@ -226,7 +228,7 @@ class PerlDockerAdapter {
   }
 
   private static PerlCommandLine baseCommandLine() {
-    return new PerlCommandLine("docker").withHostData(PerlHostHandler.getDefaultHandler().createData());
+    return new PerlCommandLine(DOCKER_EXECUTABLE).withHostData(PerlHostHandler.getDefaultHandler().createData());
   }
 
   @NotNull

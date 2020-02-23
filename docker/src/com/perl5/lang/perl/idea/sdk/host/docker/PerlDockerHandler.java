@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.sdk.host.docker;
 
 import com.intellij.execution.ExecutionException;
+import com.intellij.execution.configurations.PathEnvironmentVariableUtil;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.options.UnnamedConfigurable;
@@ -94,7 +95,7 @@ class PerlDockerHandler extends PerlHostWithFileSystemHandler<PerlDockerData, Pe
 
   @Override
   public boolean isApplicable() {
-    return true;
+    return PathEnvironmentVariableUtil.findInPath(PerlDockerAdapter.DOCKER_EXECUTABLE) != null;
   }
 
   @Nullable
