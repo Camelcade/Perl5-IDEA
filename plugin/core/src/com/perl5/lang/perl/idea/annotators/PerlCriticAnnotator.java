@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -132,7 +132,7 @@ public class PerlCriticAnnotator extends ExternalAnnotator<PerlFile, List<PerlCr
       return errors;
     }
     catch (Exception e) {
-      LOG.error("Error running perlcritic", e);
+      LOG.warn("Error running perlcritic", e);
 
       Notifications.Bus.notify(new Notification(
         PerlBundle.message("perl.critic.notification.group"),
