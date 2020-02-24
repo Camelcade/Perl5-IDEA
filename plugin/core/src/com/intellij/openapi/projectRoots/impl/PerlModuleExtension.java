@@ -191,7 +191,7 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
         continue;
       }
       String expandedPath = macroManager.expandPath(pathElement.getAttributeValue(ATTRIBUTE_VALUE));
-      VirtualFile libRoot = VfsUtil.findFileByIoFile(new File(expandedPath), true);
+      VirtualFile libRoot = VfsUtil.findFileByIoFile(new File(expandedPath), false);
       if (libRoot != null && libRoot.isValid() && libRoot.isDirectory()) {
         myRoots.put(libRoot, (PerlSourceRootType)serializer.getType());
       }
