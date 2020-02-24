@@ -16,9 +16,9 @@
 
 package com.perl5.lang.perl.extensions.imports;
 
+import com.intellij.psi.PsiFile;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeCpanfile;
-import com.perl5.lang.perl.psi.PerlFile;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -58,7 +58,9 @@ public class PerlCpanfileImportProvider implements PerlImportsProvider {
 
   @Override
   public boolean isApplicable(@Nullable PerlNamespaceDefinitionElement namespaceDefinitionElement) {
-    return namespaceDefinitionElement instanceof PerlFile &&
-           ((PerlFile)namespaceDefinitionElement.getOriginalElement()).getFileType() == PerlFileTypeCpanfile.INSTANCE;
+    if (!(namespaceDefinitionElement instanceof PsiFile)) {
+      return false;
+    }
+    return ((PsiFile)namespaceDefinitionElement).getOriginalFile().getFileType() == PerlFileTypeCpanfile.INSTANCE;
   }
 }
