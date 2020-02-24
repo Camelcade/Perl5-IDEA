@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -489,7 +489,12 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
 
     String nameFromKey = getBaseName(indexExpr);
     if (indexExpr instanceof PerlString) {
-      recommendation = nameFromKey;
+      if (StringUtil.isEmpty(nameFromKey)) {
+        LOG.error("Unable to extract name from: " + indexExpr + "; '" + indexExpr.getText() + "'");
+      }
+      else {
+        recommendation = nameFromKey;
+      }
     }
 
     if (StringUtil.isNotEmpty(nameFromKey) && !(indexExpr instanceof PsiPerlNumberConstant)) {
