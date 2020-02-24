@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.manipulators;
 
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.AbstractElementManipulator;
@@ -26,6 +27,8 @@ import org.jetbrains.annotations.NotNull;
 
 
 public class PerlVariableNameManipulator extends AbstractElementManipulator<PerlVariableNameElement> {
+  private static final Logger LOG = Logger.getInstance(PerlVariableNameManipulator.class);
+
   @NotNull
   @Override
   public TextRange getRangeInElement(@NotNull PerlVariableNameElement element) {
@@ -33,6 +36,8 @@ public class PerlVariableNameManipulator extends AbstractElementManipulator<Perl
     if (StringUtil.endsWithChar(elementText, ':')) {
       return TextRange.EMPTY_RANGE;
     }
+
+    LOG.assertTrue(StringUtil.isNotEmpty(elementText), element);
 
     int lastDelimiterOffset = elementText.lastIndexOf(':');
     if (lastDelimiterOffset > -1) {
