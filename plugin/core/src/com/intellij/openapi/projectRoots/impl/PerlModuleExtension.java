@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,17 +47,17 @@ import java.util.stream.Collectors;
 
 public class PerlModuleExtension extends ModuleExtension implements PersistentStateComponentWithModificationTracker<Element> {
   private static final Logger LOG = Logger.getInstance(PerlModuleExtension.class);
-  private static String PERL_CONFIG = "perl5";
-  private static String ELEMENT_PATH = "path";
-  private static String ATTRIBUTE_VALUE = "value";
-  private static String ATTRIBUTE_TYPE = "type";
+  private static final String PERL_CONFIG = "perl5";
+  private static final String ELEMENT_PATH = "path";
+  private static final String ATTRIBUTE_VALUE = "value";
+  private static final String ATTRIBUTE_TYPE = "type";
   private final boolean myIsWritable;
   private long myModificationTracker;
   private PerlModuleExtension myOriginal;
   private Module myModule;
-  private static Map<String, JpsModuleSourceRootPropertiesSerializer> SERIALIZER_BY_ID_MAP =
+  private static final Map<String, JpsModuleSourceRootPropertiesSerializer<?>> SERIALIZER_BY_ID_MAP =
     FactoryMap.create(key -> getSerializer(serializer -> serializer != null && serializer.getTypeId().equals(key)));
-  private static Map<PerlSourceRootType, JpsModuleSourceRootPropertiesSerializer> SERIALIZER_BY_TYPE_MAP =
+  private static final Map<PerlSourceRootType, JpsModuleSourceRootPropertiesSerializer<?>> SERIALIZER_BY_TYPE_MAP =
     FactoryMap.create(key -> getSerializer(serializer -> serializer != null && serializer.getType().equals(key)));
   private Map<VirtualFile, PerlSourceRootType> myRoots = new LinkedHashMap<>();
 
@@ -82,7 +82,7 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
 
   @Override
   public void commit() {
-    LOG.assertTrue(myOriginal != null, "Attempt to commit non-modifyable model");
+    LOG.assertTrue(myOriginal != null, "Attempt to commit non-modifiable model");
     if (isChanged()) {
       synchronized (myOriginal) {
         WriteAction.run(
@@ -100,7 +100,7 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
     return !myRoots.equals(myOriginal.myRoots);
   }
 
-  public synchronized void setRoot(@NotNull VirtualFile root, @NotNull JpsModuleSourceRootType type) {
+  public synchronized void setRoot(@NotNull VirtualFile root, @NotNull JpsModuleSourceRootType<?> type) {
     LOG.assertTrue(myIsWritable, "Obtain modifiableModel first");
     LOG.assertTrue(type instanceof PerlSourceRootType, type + " is not a PerlSourceRootType");
     myRoots.put(root, (PerlSourceRootType)type);
@@ -152,7 +152,7 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
       if (!root.isValid() || !root.isDirectory()) {
         continue;
       }
-      JpsModuleSourceRootPropertiesSerializer serializer = SERIALIZER_BY_TYPE_MAP.get(myRoots.get(root));
+      JpsModuleSourceRootPropertiesSerializer<?> serializer = SERIALIZER_BY_TYPE_MAP.get(myRoots.get(root));
       if (serializer == null) {
         continue;
       }
@@ -186,7 +186,7 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
     }
     PathMacroManager macroManager = ModulePathMacroManager.getInstance(myModule);
     for (Element pathElement : state.getChildren(ELEMENT_PATH)) {
-      JpsModuleSourceRootPropertiesSerializer serializer = SERIALIZER_BY_ID_MAP.get(pathElement.getAttributeValue(ATTRIBUTE_TYPE));
+      JpsModuleSourceRootPropertiesSerializer<?> serializer = SERIALIZER_BY_ID_MAP.get(pathElement.getAttributeValue(ATTRIBUTE_TYPE));
       if (serializer == null) {
         continue;
       }
@@ -203,7 +203,7 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
   }
 
   @Nullable
-  private static JpsModuleSourceRootPropertiesSerializer getSerializer(Predicate<JpsModuleSourceRootPropertiesSerializer> predicate) {
+  private static JpsModuleSourceRootPropertiesSerializer<?> getSerializer(Predicate<JpsModuleSourceRootPropertiesSerializer<?>> predicate) {
     for (JpsModelSerializerExtension extension : JpsModelSerializerExtension.getExtensions()) {
       for (JpsModuleSourceRootPropertiesSerializer<?> serializer : extension.getModuleSourceRootPropertiesSerializers()) {
         if (predicate.apply(serializer)) {
