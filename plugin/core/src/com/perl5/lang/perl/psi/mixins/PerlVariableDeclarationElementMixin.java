@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -60,7 +60,7 @@ public class PerlVariableDeclarationElementMixin extends PerlStubBasedPsiElement
   @NotNull
   @Override
   public PerlVariable getVariable() {
-    return Objects.requireNonNull(findChildByClass(PerlVariable.class));
+    return Objects.requireNonNull(findChildByClass(PerlVariable.class), () -> "Unable to find variable in: " + getText());
   }
 
   @Nullable
