@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ import java.util.List;
 
 public class PerlCpanfileImportProvider implements PerlImportsProvider {
   private static final String NAMESPACE = "Module::CPANfile::Environment";
-  private static List<String> BINDINGS = Arrays.asList(
+  private static final List<String> BINDINGS = Arrays.asList(
     "on",
     "requires",
     "recommends",
@@ -44,7 +44,7 @@ public class PerlCpanfileImportProvider implements PerlImportsProvider {
     "author_requires"
   );
 
-  private static List<PerlExportDescriptor> DESCRIPTORS = new ArrayList<>();
+  private static final List<PerlExportDescriptor> DESCRIPTORS = new ArrayList<>();
 
   static {
     BINDINGS.forEach(name -> DESCRIPTORS.add(PerlExportDescriptor.create(NAMESPACE, name)));
