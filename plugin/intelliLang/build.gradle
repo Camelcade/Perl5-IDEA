@@ -27,6 +27,6 @@ dependencies{
 
 intellij {
   type 'IC'
-  intellij.plugins = ['IntelliLang']
+  intellij.plugins = ['platform-langInjection']
 }
 

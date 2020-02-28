@@ -35,7 +35,7 @@ sourceSets {
 
 intellij {
   type 'IC'
-  intellij.plugins = ["PsiViewer:$psiViewerVersion", 'IntelliLang', 'coverage', 'java']
+  intellij.plugins = ["PsiViewer:$psiViewerVersion", 'platform-langInjection', 'coverage', 'java']
 }
 
 prepareSandbox {
