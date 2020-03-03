@@ -73,26 +73,26 @@ import static com.perl5.lang.perl.idea.run.debugger.protocol.PerlDebuggingEventR
 public class PerlDebugThread extends Thread {
   static final boolean DEV_MODE = false;
   private static final Logger LOG = Logger.getInstance(PerlDebugThread.class);
-  private static Executor ourExecutor = Executors.newSingleThreadExecutor();
+  private static final Executor ourExecutor = Executors.newSingleThreadExecutor();
   private final ExecutionResult myExecutionResult;
   private final Gson myGson;
   private final PerlDebugProfileStateBase myDebugProfileState;
   private final PerlScriptsPanel myScriptListPanel;
   private final PerlScriptsPanel myEvalsListPanel;
-  private XDebugSession mySession;
+  private final XDebugSession mySession;
   private Socket mySocket;
   private ServerSocket myServerSocket;
   private OutputStream myOutputStream;
   private InputStream myInputStream;
   private volatile boolean myStop = false;
-  private List<PerlLineBreakPointDescriptor> breakpointsDescriptorsQueue = new CopyOnWriteArrayList<>();
+  private final List<PerlLineBreakPointDescriptor> breakpointsDescriptorsQueue = new CopyOnWriteArrayList<>();
   private boolean isReady = false;
   private int transactionId = 0;
-  private ConcurrentHashMap<Integer, PerlDebuggingTransactionHandler> transactionsMap =
+  private final ConcurrentHashMap<Integer, PerlDebuggingTransactionHandler> transactionsMap =
     new ConcurrentHashMap<>();
-  private ReentrantLock lock = new ReentrantLock();
-  private PerlRemoteFileSystem myPerlRemoteFileSystem = PerlRemoteFileSystem.getInstance();
-  private PerlDebugOptions myPerlDebugOptions;
+  private final ReentrantLock lock = new ReentrantLock();
+  private final PerlRemoteFileSystem myPerlRemoteFileSystem = PerlRemoteFileSystem.getInstance();
+  private final PerlDebugOptions myPerlDebugOptions;
 
   public PerlDebugThread(XDebugSession session, PerlDebugProfileStateBase state, ExecutionResult executionResult) {
     super("PerlDebugThread");
@@ -134,7 +134,7 @@ public class PerlDebugThread extends Thread {
   private void prepareAndConnect() throws ExecutionException, IOException, InterruptedException {
     myScriptListPanel.clear();
     myEvalsListPanel.clear();
-    WriteAction.runAndWait(() -> myPerlRemoteFileSystem.dropFiles());
+    WriteAction.runAndWait(myPerlRemoteFileSystem::dropFiles);
 
     int debugPort = myDebugProfileState.getDebugPort();
     String debugName;
