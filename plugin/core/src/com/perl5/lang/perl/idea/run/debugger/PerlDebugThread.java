@@ -28,6 +28,7 @@ import com.intellij.execution.ui.ConsoleViewContentType;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
+import com.intellij.openapi.application.ReadAction;
 import com.intellij.openapi.application.WriteAction;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
@@ -35,6 +36,7 @@ import com.intellij.openapi.vfs.CharsetToolkit;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.concurrency.Semaphore;
 import com.intellij.xdebugger.XDebugSession;
+import com.intellij.xdebugger.impl.XDebugSessionImpl;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakPointDescriptor;
@@ -230,6 +232,9 @@ public class PerlDebugThread extends Thread {
       while (doRun() && myPerlDebugOptions.isReconnect()) {
         print("perl.debug.reconnecting");
         closeStreamsAndSockets();
+        isReady = false;
+        ((XDebugSessionImpl)mySession).reset();
+        ReadAction.run(mySession::initBreakpoints);
       }
     }
     finally {
