@@ -16,14 +16,14 @@
 
 package com.perl5.lang.perl.idea.run.debugger.breakpoints;
 
-import com.intellij.xdebugger.breakpoints.XBreakpoint;
 import com.intellij.xdebugger.breakpoints.XBreakpointHandler;
 import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugThread;
 import org.jetbrains.annotations.NotNull;
 
 
-public class PerlLineBreakpointHandler extends XBreakpointHandler {
+public class PerlLineBreakpointHandler extends XBreakpointHandler<XLineBreakpoint<PerlLineBreakpointProperties>> {
+  @NotNull
   private final PerlDebugThread myPerlDebugThread;
 
   public PerlLineBreakpointHandler(@NotNull PerlDebugThread myThread) {
@@ -32,26 +32,14 @@ public class PerlLineBreakpointHandler extends XBreakpointHandler {
   }
 
   @Override
-  public void registerBreakpoint(@NotNull XBreakpoint breakpoint) {
-    if (breakpoint instanceof XLineBreakpoint) {
-      //noinspection unchecked
-      myPerlDebugThread
-        .queueLineBreakpointDescriptor(PerlLineBreakPointDescriptor.createFromBreakpoint((XLineBreakpoint)breakpoint, myPerlDebugThread));
-    }
-    else {
-      System.err.println("Don't know how to register" + breakpoint);
-    }
+  public void registerBreakpoint(@NotNull XLineBreakpoint<PerlLineBreakpointProperties> breakpoint) {
+    myPerlDebugThread.queueLineBreakpointDescriptor(
+      PerlLineBreakPointDescriptor.createFromBreakpoint(breakpoint, myPerlDebugThread));
   }
 
   @Override
-  public void unregisterBreakpoint(@NotNull XBreakpoint breakpoint, boolean temporary) {
-    if (breakpoint instanceof XLineBreakpoint) {
-      //noinspection unchecked
-      myPerlDebugThread.queueLineBreakpointDescriptor(
-        PerlLineBreakPointDescriptor.createRemoveFromBreakpoint((XLineBreakpoint)breakpoint, myPerlDebugThread));
-    }
-    else {
-      System.err.println("Don't know how to unregister" + breakpoint);
-    }
+  public void unregisterBreakpoint(@NotNull XLineBreakpoint<PerlLineBreakpointProperties> breakpoint, boolean temporary) {
+    myPerlDebugThread.queueLineBreakpointDescriptor(
+      PerlLineBreakPointDescriptor.createRemoveFromBreakpoint(breakpoint, myPerlDebugThread));
   }
 }
