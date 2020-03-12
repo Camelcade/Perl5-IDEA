@@ -110,14 +110,9 @@
         implementation="com.perl5.lang.mason2.idea.highlighter.Mason2TemplateLanguageErrorFilter"/>
     <liveTemplateOptionalProcessor
         implementation="com.perl5.lang.mason2.idea.livetemplates.MasonLiveTemplatesProcessor"/>
+    <backgroundPostStartupActivity implementation="com.perl5.lang.mason2.idea.components.MasonPostStartupActivity"/>
     <!--Mason2 settings end -->
   </extensions>
-
-  <project-components>
-    <component>
-      <implementation-class>com.perl5.lang.mason2.idea.components.MasonProjectComponent</implementation-class>
-    </component>
-  </project-components>
 
   <actions>
     <group>
