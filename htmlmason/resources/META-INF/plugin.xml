@@ -98,12 +98,6 @@
         implementation="com.perl5.lang.htmlmason.idea.livetemplates.HTMLMasonLiveTemplateProcessor"/>
   </extensions>
 
-  <project-components>
-    <component>
-      <implementation-class>com.perl5.lang.htmlmason.idea.project.HTMLMasonProjectComponent</implementation-class>
-    </component>
-  </project-components>
-
   <actions>
     <group>
       <add-to-group group-id="MarkRootGroup"/>

@@ -25,22 +25,17 @@ import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.fileTypes.FileTypeManager;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.AtomicNotNullLazyValue;
-import com.intellij.openapi.util.AtomicNullableLazyValue;
+import com.intellij.openapi.util.ClearableLazyValue;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.xmlb.XmlSerializerUtil;
-import com.intellij.util.xmlb.annotations.Transient;
 import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
 import com.perl5.lang.mason2.idea.configuration.VariableDescription;
 import com.perl5.lang.perl.idea.PerlPathMacros;
 import com.perl5.lang.perl.idea.modules.PerlSourceRootType;
-import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 @State(
@@ -56,40 +51,37 @@ public class HTMLMasonSettings extends AbstractMasonSettings implements Persiste
   public List<String> substitutedExtensions = new ArrayList<>();
   public List<HTMLMasonCustomTag> customTags = new ArrayList<>();
 
-  @Transient
-  private transient AtomicNotNullLazyValue<List<FileNameMatcher>> myLazyMatchers;
-
-  private transient Map<String, String> myOpenCloseMap;
-  private transient AtomicNullableLazyValue<Map<String, HTMLMasonCustomTag>> myCustomTagsMapProvider;
+  private final transient ClearableLazyValue<List<FileNameMatcher>> myLazyMatchersProvider
+    = ClearableLazyValue.createAtomic(this::computeMatchers);
+  private final transient ClearableLazyValue<Map<String, String>> myOpenCloseMapProvider =
+    ClearableLazyValue.createAtomic(this::computeOpenCloseMap);
+  private final transient ClearableLazyValue<Map<String, HTMLMasonCustomTag>> myCustomTagsMapProvider =
+    ClearableLazyValue.createAtomic(this::computeCustomTagsMap);
 
   public HTMLMasonSettings(@NotNull Project project) {
     this();
     myProject = project;
-    createLazyObjects();
   }
 
   private HTMLMasonSettings() {
     globalVariables.add(new VariableDescription("$m", "HTML::Mason::Request"));
     globalVariables.add(new VariableDescription("$r", "Apache::Request"));
     changeCounter++;
-    initCustomTagsMapProvider();
-    createLazyObjects();
   }
 
-  private void initCustomTagsMapProvider() {
-    myCustomTagsMapProvider = AtomicNullableLazyValue.createValue(() -> {
-      if (customTags.isEmpty()) {
-        return null;
-      }
+  @NotNull
+  private Map<String, HTMLMasonCustomTag> computeCustomTagsMap() {
+    if (customTags.isEmpty()) {
+      return Collections.emptyMap();
+    }
 
-      Map<String, HTMLMasonCustomTag> result = new THashMap<>();
+    Map<String, HTMLMasonCustomTag> result = new HashMap<>();
 
-      for (HTMLMasonCustomTag customTag : customTags) {
-        result.put(customTag.getText(), customTag);
-      }
+    for (HTMLMasonCustomTag customTag : customTags) {
+      result.put(customTag.getText(), customTag);
+    }
 
-      return result;
-    });
+    return result;
   }
 
   @Nullable
@@ -104,25 +96,24 @@ public class HTMLMasonSettings extends AbstractMasonSettings implements Persiste
     changeCounter++;
   }
 
-  private void createLazyObjects() {
-    myLazyMatchers = AtomicNotNullLazyValue.createValue(() -> {
-      List<FileNameMatcher> result = new ArrayList<>();
-      FileTypeManager fileTypeManager = FileTypeManager.getInstance();
-      for (FileType fileType : fileTypeManager.getRegisteredFileTypes()) {
-        if (fileType instanceof LanguageFileType) {
-          for (FileNameMatcher matcher : fileTypeManager.getAssociations(fileType)) {
-            if (substitutedExtensions.contains(matcher.getPresentableString())) {
-              result.add(matcher);
-            }
+  @NotNull
+  private List<FileNameMatcher> computeMatchers() {
+    List<FileNameMatcher> result = new ArrayList<>();
+    FileTypeManager fileTypeManager = FileTypeManager.getInstance();
+    for (FileType fileType : fileTypeManager.getRegisteredFileTypes()) {
+      if (fileType instanceof LanguageFileType) {
+        for (FileNameMatcher matcher : fileTypeManager.getAssociations(fileType)) {
+          if (substitutedExtensions.contains(matcher.getPresentableString())) {
+            result.add(matcher);
           }
         }
       }
-      return result;
-    });
+    }
+    return result;
   }
 
   public boolean isVirtualFileNameMatches(@NotNull VirtualFile file) {
-    for (FileNameMatcher matcher : myLazyMatchers.getValue()) {
+    for (FileNameMatcher matcher : myLazyMatchersProvider.getValue()) {
       if (matcher.acceptsCharSequence(file.getName())) {
         return true;
       }
@@ -138,42 +129,40 @@ public class HTMLMasonSettings extends AbstractMasonSettings implements Persiste
   @Override
   public void settingsUpdated() {
     super.settingsUpdated();
-    createLazyObjects();
-    myOpenCloseMap = null;
-    initCustomTagsMapProvider();
+    myLazyMatchersProvider.drop();
+    myOpenCloseMapProvider.drop();
+    myCustomTagsMapProvider.drop();
   }
 
-  public void prepareLexerConfiguration() {
-    myOpenCloseMap = new THashMap<>();
-    myOpenCloseMap.put(KEYWORD_PERL_OPENER, KEYWORD_PERL_CLOSER);
-    myOpenCloseMap.put(KEYWORD_INIT_OPENER, KEYWORD_INIT_CLOSER);
-    myOpenCloseMap.put(KEYWORD_CLEANUP_OPENER, KEYWORD_CLEANUP_CLOSER);
-    myOpenCloseMap.put(KEYWORD_ONCE_OPENER, KEYWORD_ONCE_CLOSER);
-    myOpenCloseMap.put(KEYWORD_SHARED_OPENER, KEYWORD_SHARED_CLOSER);
-    myOpenCloseMap.put(KEYWORD_FLAGS_OPENER, KEYWORD_FLAGS_CLOSER);
-    myOpenCloseMap.put(KEYWORD_ATTR_OPENER, KEYWORD_ATTR_CLOSER);
-    myOpenCloseMap.put(KEYWORD_ARGS_OPENER, KEYWORD_ARGS_CLOSER);
-    myOpenCloseMap.put(KEYWORD_FILTER_OPENER, KEYWORD_FILTER_CLOSER);
-    myOpenCloseMap.put(KEYWORD_DOC_OPENER, KEYWORD_DOC_CLOSER);
-    myOpenCloseMap.put(KEYWORD_TEXT_OPENER, KEYWORD_TEXT_CLOSER);
+  @NotNull
+  private Map<String, String> computeOpenCloseMap() {
+    Map<String, String> openCloseMap = new HashMap<>();
+    openCloseMap.put(KEYWORD_PERL_OPENER, KEYWORD_PERL_CLOSER);
+    openCloseMap.put(KEYWORD_INIT_OPENER, KEYWORD_INIT_CLOSER);
+    openCloseMap.put(KEYWORD_CLEANUP_OPENER, KEYWORD_CLEANUP_CLOSER);
+    openCloseMap.put(KEYWORD_ONCE_OPENER, KEYWORD_ONCE_CLOSER);
+    openCloseMap.put(KEYWORD_SHARED_OPENER, KEYWORD_SHARED_CLOSER);
+    openCloseMap.put(KEYWORD_FLAGS_OPENER, KEYWORD_FLAGS_CLOSER);
+    openCloseMap.put(KEYWORD_ATTR_OPENER, KEYWORD_ATTR_CLOSER);
+    openCloseMap.put(KEYWORD_ARGS_OPENER, KEYWORD_ARGS_CLOSER);
+    openCloseMap.put(KEYWORD_FILTER_OPENER, KEYWORD_FILTER_CLOSER);
+    openCloseMap.put(KEYWORD_DOC_OPENER, KEYWORD_DOC_CLOSER);
+    openCloseMap.put(KEYWORD_TEXT_OPENER, KEYWORD_TEXT_CLOSER);
 
     // parametrized
-    myOpenCloseMap.put(KEYWORD_METHOD_OPENER, KEYWORD_METHOD_CLOSER);
-    myOpenCloseMap.put(KEYWORD_DEF_OPENER, KEYWORD_DEF_CLOSER);
+    openCloseMap.put(KEYWORD_METHOD_OPENER, KEYWORD_METHOD_CLOSER);
+    openCloseMap.put(KEYWORD_DEF_OPENER, KEYWORD_DEF_CLOSER);
 
     // iterate custom tags
     for (HTMLMasonCustomTag customTag : customTags) {
-      myOpenCloseMap.put(customTag.getOpenTagText(), customTag.getCloseTagText());
+      openCloseMap.put(customTag.getOpenTagText(), customTag.getCloseTagText());
     }
-
-    //		System.err.println("HTML::Mason lexer settings prepared");
+    return openCloseMap;
   }
 
+  @NotNull
   public Map<String, String> getOpenCloseMap() {
-    if (myOpenCloseMap == null) {
-      prepareLexerConfiguration();
-    }
-    return myOpenCloseMap;
+    return myOpenCloseMapProvider.getValue();
   }
 
   @Nullable
