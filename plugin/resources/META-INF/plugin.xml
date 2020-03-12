@@ -51,7 +51,7 @@
     <extensionPoint name="importsProvider" interface="com.perl5.lang.perl.extensions.imports.PerlImportsProvider" dynamic="true"/>
     <extensionPoint name="implicitSubsProvider" interface="com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsProvider"/>
     <extensionPoint name="settings.configurable.extension"
-                    interface="com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurableExtension"/>
+                    interface="com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurableExtension" dynamic="true"/>
   </extensionPoints>
 
   <extensions defaultExtensionNs="com.perl5">

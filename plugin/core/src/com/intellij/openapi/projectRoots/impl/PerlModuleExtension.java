@@ -28,7 +28,6 @@ import com.intellij.openapi.roots.ex.ProjectRootManagerEx;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.util.containers.FactoryMap;
 import com.intellij.util.containers.Predicate;
 import com.perl5.lang.perl.idea.modules.PerlSourceRootType;
 import gnu.trove.THashMap;
@@ -55,10 +54,6 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
   private long myModificationTracker;
   private PerlModuleExtension myOriginal;
   private Module myModule;
-  private static final Map<String, JpsModuleSourceRootPropertiesSerializer<?>> SERIALIZER_BY_ID_MAP =
-    FactoryMap.create(key -> getSerializer(serializer -> serializer != null && serializer.getTypeId().equals(key)));
-  private static final Map<PerlSourceRootType, JpsModuleSourceRootPropertiesSerializer<?>> SERIALIZER_BY_TYPE_MAP =
-    FactoryMap.create(key -> getSerializer(serializer -> serializer != null && serializer.getType().equals(key)));
   private Map<VirtualFile, PerlSourceRootType> myRoots = new LinkedHashMap<>();
 
   public PerlModuleExtension(Module module) {
@@ -152,7 +147,7 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
       if (!root.isValid() || !root.isDirectory()) {
         continue;
       }
-      JpsModuleSourceRootPropertiesSerializer<?> serializer = SERIALIZER_BY_TYPE_MAP.get(myRoots.get(root));
+      JpsModuleSourceRootPropertiesSerializer<?> serializer = getSerializer(it -> it != null && it.getType().equals(myRoots.get(root)));
       if (serializer == null) {
         continue;
       }
@@ -186,7 +181,8 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
     }
     PathMacroManager macroManager = ModulePathMacroManager.getInstance(myModule);
     for (Element pathElement : state.getChildren(ELEMENT_PATH)) {
-      JpsModuleSourceRootPropertiesSerializer<?> serializer = SERIALIZER_BY_ID_MAP.get(pathElement.getAttributeValue(ATTRIBUTE_TYPE));
+      JpsModuleSourceRootPropertiesSerializer<?> serializer =
+        getSerializer(it -> it != null && it.getTypeId().equals(pathElement.getAttributeValue(ATTRIBUTE_TYPE)));
       if (serializer == null) {
         continue;
       }
