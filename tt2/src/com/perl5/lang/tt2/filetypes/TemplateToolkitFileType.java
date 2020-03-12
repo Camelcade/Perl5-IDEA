@@ -50,7 +50,7 @@ public class TemplateToolkitFileType extends PerlPluginBaseFileType implements F
   @NotNull
   @Override
   public String getDescription() {
-    return "Template Toolkit Template";
+    return "Template toolkit template";
   }
 
   @NotNull

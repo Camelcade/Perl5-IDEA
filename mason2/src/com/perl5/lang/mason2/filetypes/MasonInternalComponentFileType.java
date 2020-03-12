@@ -25,11 +25,12 @@ import javax.swing.*;
 
 public class MasonInternalComponentFileType extends MasonTopLevelComponentFileType {
   public final static MasonInternalComponentFileType INSTANCE = new MasonInternalComponentFileType();
+  public static final String INTERNAL_COMPONENT_EXTENSION = "mi";
 
   @NotNull
   @Override
   public String getName() {
-    return "Mason2 internal component";
+    return "Mason2 Internal Component";
   }
 
   @NotNull
@@ -41,7 +42,7 @@ public class MasonInternalComponentFileType extends MasonTopLevelComponentFileTy
   @NotNull
   @Override
   public String getDefaultExtension() {
-    return "mi";
+    return INTERNAL_COMPONENT_EXTENSION;
   }
 
   @Nullable

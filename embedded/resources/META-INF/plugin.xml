@@ -32,7 +32,8 @@
   <extensions defaultExtensionNs="com.intellij">
     <stubElementTypeHolder class="com.perl5.lang.embedded.EmbeddedPerlParserDefinition"/>
     <internalFileTemplate name="Perl5 embedded"/>
-    <fileTypeFactory implementation="com.perl5.lang.embedded.filetypes.EmbeddedPerlFileTypeFactory"/>
+    <fileType implementationClass="com.perl5.lang.embedded.filetypes.EmbeddedPerlFileType" fieldName="INSTANCE"
+              name="Embedded Perl" language="Embedded Perl" extensions="thtml;phtml"/>
     <lang.parserDefinition language="Embedded Perl"
                            implementationClass="com.perl5.lang.embedded.EmbeddedPerlParserDefinition"/>
     <lang.fileViewProviderFactory language="Embedded Perl"

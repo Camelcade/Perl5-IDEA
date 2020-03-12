@@ -10,7 +10,7 @@ Lookups: MANIFEST; Text: MANIFEST; Tail: null; Type: inject with Manifest; Icon:
     String
 Lookups: MYSUPERMARKER; Text: MYSUPERMARKER; Tail: null; Type: null; Icon: null; Type Icon: null
     PsiElement: PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER) at 0 in heredocOpenerBare.pl
-Lookups: PERL5; Text: PERL5; Tail: null; Type: inject with Perl5; Icon: /perl5.png; Type Icon: null
+Lookups: PERL5; Text: PERL5; Tail: null; Type: inject with Perl5; Icon: /perl5classic.png; Type Icon: null
     String
 Lookups: XHTML; Text: XHTML; Tail: null; Type: inject with XHTML; Icon: /xhtml.svg; Type Icon: null
     String

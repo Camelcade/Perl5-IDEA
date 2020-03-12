@@ -35,7 +35,7 @@ public class XSFileType extends PerlPluginBaseFileType {
   @NotNull
   @Override
   public String getName() {
-    return "XS extension";
+    return "Perl5 Extension";
   }
 
   @NotNull

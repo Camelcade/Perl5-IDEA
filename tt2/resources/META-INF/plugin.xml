@@ -32,7 +32,8 @@
   </extensions>
 
   <extensions defaultExtensionNs="com.intellij">
-    <fileTypeFactory implementation="com.perl5.lang.tt2.filetypes.TemplateToolkitFileTypeFactory"/>
+    <fileType implementationClass="com.perl5.lang.tt2.filetypes.TemplateToolkitFileType" fieldName="INSTANCE"
+              name="Template Toolkit" extensions="tt;tt2" language="Template Toolkit 2"/>
     <lang.fileViewProviderFactory language="Template Toolkit 2"
                                   implementationClass="com.perl5.lang.tt2.TemplateToolkitFileViewProviderFactory"/>
     <lang.parserDefinition language="Template Toolkit 2"

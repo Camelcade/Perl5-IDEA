@@ -28,6 +28,7 @@ import javax.swing.*;
 
 public class MasonTopLevelComponentFileType extends MasonPurePerlComponentFileType {
   public static final MasonTopLevelComponentFileType INSTANCE = new MasonTopLevelComponentFileType();
+  public static final String TOP_LEVEL_COMPONENT_EXTENSION = "mc";
 
   public MasonTopLevelComponentFileType() {
     super(Mason2TemplatingLanguage.INSTANCE);
@@ -39,7 +40,7 @@ public class MasonTopLevelComponentFileType extends MasonPurePerlComponentFileTy
   @NotNull
   @Override
   public String getName() {
-    return "Mason2 top-level component";
+    return "Mason2 Top-Level Component";
   }
 
   @NotNull
@@ -51,7 +52,7 @@ public class MasonTopLevelComponentFileType extends MasonPurePerlComponentFileTy
   @NotNull
   @Override
   public String getDefaultExtension() {
-    return "mc";
+    return TOP_LEVEL_COMPONENT_EXTENSION;
   }
 
   @Nullable

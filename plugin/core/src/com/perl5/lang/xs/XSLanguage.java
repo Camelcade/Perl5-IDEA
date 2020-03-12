@@ -25,7 +25,7 @@ public class XSLanguage extends Language {
   public static final XSLanguage INSTANCE = new XSLanguage();
 
   public XSLanguage() {
-    super("Perl extension language");
+    super("Perl5 XS");
   }
 
   @Override

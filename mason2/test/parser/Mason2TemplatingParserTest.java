@@ -17,11 +17,11 @@
 package parser;
 
 
-import com.perl5.lang.mason2.filetypes.Mason2FileTypeFactory;
+import com.perl5.lang.mason2.filetypes.MasonTopLevelComponentFileType;
 import org.junit.Test;
 public class Mason2TemplatingParserTest extends PerlParserTestBase {
   public Mason2TemplatingParserTest() {
-    super(Mason2FileTypeFactory.TOP_LEVEL_COMPONENT_EXTENSION);
+    super(MasonTopLevelComponentFileType.TOP_LEVEL_COMPONENT_EXTENSION);
   }
 
   @Override

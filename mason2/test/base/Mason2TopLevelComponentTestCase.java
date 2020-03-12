@@ -16,11 +16,11 @@
 
 package base;
 
-import com.perl5.lang.mason2.filetypes.Mason2FileTypeFactory;
+import com.perl5.lang.mason2.filetypes.MasonTopLevelComponentFileType;
 
 public abstract class Mason2TopLevelComponentTestCase extends Mason2LightTestCase {
   @Override
   public String getFileExtension() {
-    return Mason2FileTypeFactory.TOP_LEVEL_COMPONENT_EXTENSION;
+    return MasonTopLevelComponentFileType.TOP_LEVEL_COMPONENT_EXTENSION;
   }
 }

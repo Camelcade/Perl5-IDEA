@@ -31,17 +31,17 @@ public class EmbeddedPerlFileType extends PerlFileType {
   public static final EmbeddedPerlFileType INSTANCE = new EmbeddedPerlFileType();
 
   public EmbeddedPerlFileType() {
-
     super(EmbeddedPerlLanguage.INSTANCE);
-    FileTypeEditorHighlighterProviders.INSTANCE.addExplicitExtension(this,
-                                                                     (project, fileType, virtualFile, editorColorsScheme) -> new EmbeddedPerlHighlighter(
-                                                                       project, virtualFile, editorColorsScheme));
+    FileTypeEditorHighlighterProviders.INSTANCE.addExplicitExtension(
+      this,
+      (project, fileType, virtualFile, editorColorsScheme) ->
+        new EmbeddedPerlHighlighter(project, virtualFile, editorColorsScheme));
   }
 
   @NotNull
   @Override
   public String getName() {
-    return "Embedded perl";
+    return "Embedded Perl";
   }
 
   @NotNull

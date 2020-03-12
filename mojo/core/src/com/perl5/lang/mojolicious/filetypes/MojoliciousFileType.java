@@ -33,9 +33,10 @@ public class MojoliciousFileType extends PerlFileType {
 
   public MojoliciousFileType() {
     super(MojoliciousLanguage.INSTANCE);
-    FileTypeEditorHighlighterProviders.INSTANCE.addExplicitExtension(this,
-                                                                     (project, fileType, virtualFile, editorColorsScheme) -> new MojoliciousHighlighter(
-                                                                       project, virtualFile, editorColorsScheme));
+    FileTypeEditorHighlighterProviders.INSTANCE.addExplicitExtension(
+      this,
+      (project, fileType, virtualFile, editorColorsScheme) -> new MojoliciousHighlighter(
+        project, virtualFile, editorColorsScheme));
   }
 
   @NotNull
@@ -47,7 +48,7 @@ public class MojoliciousFileType extends PerlFileType {
   @NotNull
   @Override
   public String getDescription() {
-    return "Mojolicious Perl5 Template";
+    return "Mojolicious Perl5 template";
   }
 
   @NotNull

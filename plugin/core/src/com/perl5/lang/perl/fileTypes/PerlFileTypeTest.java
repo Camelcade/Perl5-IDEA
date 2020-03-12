@@ -32,7 +32,7 @@ public class PerlFileTypeTest extends PurePerlFileType {
   @NotNull
   @Override
   public String getName() {
-    return "Perl5 test";
+    return "Perl5 Test";
   }
 
   @NotNull

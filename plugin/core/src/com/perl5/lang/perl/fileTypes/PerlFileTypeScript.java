@@ -41,7 +41,7 @@ public class PerlFileTypeScript extends PurePerlFileType {
   @NotNull
   @Override
   public String getName() {
-    return "Perl5 script";
+    return "Perl5 Script";
   }
 
   @NotNull

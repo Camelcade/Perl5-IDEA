@@ -44,7 +44,7 @@ public class HTMLMasonFileType extends PerlFileType implements FileTypeIdentifia
   @NotNull
   @Override
   public String getName() {
-    return "HTML::Mason component";
+    return "HTML::Mason Component";
   }
 
   @NotNull

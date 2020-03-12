@@ -38,7 +38,10 @@
 
     <stubElementTypeHolder class="com.perl5.lang.mojolicious.MojoliciousElementTypes"/>
 
-    <fileTypeFactory implementation="com.perl5.lang.mojolicious.filetypes.MojoliciousFileTypeFactory"/>
+    <fileType implementationClass="com.perl5.lang.mojolicious.filetypes.MojoliciousFileType" fieldName="INSTANCE"
+              name="Mojolicious Perl5 Template"
+              language="Mojolicious Perl"
+              extensions="ep"/>
     <lang.parserDefinition language="Mojolicious Perl"
                            implementationClass="com.perl5.lang.mojolicious.MojoliciousParserDefinition"/>
     <lang.fileViewProviderFactory language="Mojolicious Perl"

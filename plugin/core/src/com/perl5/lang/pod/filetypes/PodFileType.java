@@ -36,13 +36,13 @@ public class PodFileType extends PerlPluginBaseFileType {
   @NotNull
   @Override
   public String getName() {
-    return "POD file";
+    return "POD File";
   }
 
   @NotNull
   @Override
   public String getDescription() {
-    return "Perl5 Documentation File";
+    return "Perl5 documentation file";
   }
 
   @NotNull

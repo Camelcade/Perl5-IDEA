@@ -31,7 +31,7 @@ public class PerlFileTypePackage extends PurePerlFileType {
   @NotNull
   @Override
   public String getName() {
-    return "Perl5 package";
+    return "Perl5 Package";
   }
 
   @NotNull

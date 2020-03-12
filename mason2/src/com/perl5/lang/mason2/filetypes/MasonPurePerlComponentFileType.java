@@ -28,6 +28,7 @@ import javax.swing.*;
 
 public class MasonPurePerlComponentFileType extends PurePerlFileType {
   public final static MasonPurePerlComponentFileType INSTANCE = new MasonPurePerlComponentFileType();
+  public static final String PURE_PERL_COMPONENT_EXTENSION = "mp";
 
   public MasonPurePerlComponentFileType() {
     this(Mason2Language.INSTANCE);
@@ -40,7 +41,7 @@ public class MasonPurePerlComponentFileType extends PurePerlFileType {
   @NotNull
   @Override
   public String getName() {
-    return "Mason2 pure Perl component";
+    return "Mason2 Pure Perl5 Component";
   }
 
   @NotNull
@@ -52,7 +53,7 @@ public class MasonPurePerlComponentFileType extends PurePerlFileType {
   @NotNull
   @Override
   public String getDefaultExtension() {
-    return "mp";
+    return PURE_PERL_COMPONENT_EXTENSION;
   }
 
   @Nullable

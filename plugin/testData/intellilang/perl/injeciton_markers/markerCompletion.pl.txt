@@ -8,7 +8,7 @@ Lookups: JSON; Text: JSON; Tail: null; Type: inject with JSON; Icon: /json.svg; 
     String
 Lookups: MANIFEST; Text: MANIFEST; Tail: null; Type: inject with Manifest; Icon: /manifest.svg; Type Icon: null
     String
-Lookups: PERL5; Text: PERL5; Tail: null; Type: inject with Perl5; Icon: /perl5.png; Type Icon: null
+Lookups: PERL5; Text: PERL5; Tail: null; Type: inject with Perl5; Icon: /perl5classic.png; Type Icon: null
     String
 Lookups: XHTML; Text: XHTML; Tail: null; Type: inject with XHTML; Icon: /xhtml.svg; Type Icon: null
     String
