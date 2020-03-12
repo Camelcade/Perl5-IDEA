@@ -58,8 +58,8 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
   public static final Map<IElementType, String> ALLOWED_REGEXP_MODIFIERS = new THashMap<>();
   public static final String ALLOWED_TR_MODIFIERS = "cdsr";
   public static final Pattern POSIX_CHAR_CLASS_PATTERN = Pattern.compile("\\[\\[:\\^?\\w*:\\]\\]");
-  public static final Map<String, IElementType> CUSTOM_TOKEN_TYPES = new HashMap<>();
-  public static final Map<String, IElementType> CUSTOM_TOKEN_TYPES_AFTER_DEREFERENCE = new HashMap<>();
+  public static Map<String, IElementType> CUSTOM_TOKEN_TYPES = new HashMap<>();
+  public static Map<String, IElementType> CUSTOM_TOKEN_TYPES_AFTER_DEREFERENCE = new HashMap<>();
   private static final List<IElementType> DQ_TOKENS = Arrays.asList(QUOTE_DOUBLE_OPEN, LP_STRING_QQ, QUOTE_DOUBLE_CLOSE);
   private static final List<IElementType> SQ_TOKENS = Arrays.asList(QUOTE_SINGLE_OPEN, STRING_CONTENT, QUOTE_SINGLE_CLOSE);
   private static final List<IElementType> XQ_TOKENS = Arrays.asList(QUOTE_TICK_OPEN, LP_STRING_QX, QUOTE_TICK_CLOSE);
@@ -68,8 +68,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
   private static final Map<IElementType, Trinity<IElementType, IElementType, IElementType>> SIGILS_TO_TOKENS_MAP = new HashMap<>();
 
   protected static final String SUB_SIGNATURE = "Sub.Signature";
-  public static final TokenSet BARE_REGEX_PREFIX_TOKENSET;
-  public static final TokenSet CUSTOM_TOKENSET;
+  private static TokenSet BARE_REGEX_PREFIX_TOKENSET;
 
   static {
     ALLOWED_REGEXP_MODIFIERS.put(RESERVED_S, "nmsixpodualgcer");
@@ -87,35 +86,39 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
   }
 
   static {
+    PerlParserExtension.EP_NAME.addExtensionPointListener(PerlBaseLexer::refreshExtensions, null);
+    refreshExtensions();
+  }
+
+  private static void refreshExtensions() {
     TokenSet bareRegexPrefixTokenSet = TokenSet.EMPTY;
+    Map<String, IElementType> customTokenTypes = new HashMap<>();
+    Map<String, IElementType> customTokenTypesAfterDereference = new HashMap<>();
+    PerlParserImpl.restoreDefaultExtendsSet();
 
     for (PerlParserExtension extension : PerlParserExtension.EP_NAME.getExtensionList()) {
 
       // add tokens to lex
-      CUSTOM_TOKEN_TYPES.putAll(extension.getCustomTokensMap());
-      CUSTOM_TOKEN_TYPES_AFTER_DEREFERENCE.putAll(extension.getCustomTokensAfterDereferenceMap());
+      customTokenTypes.putAll(extension.getCustomTokensMap());
+      customTokenTypesAfterDereference.putAll(extension.getCustomTokensAfterDereferenceMap());
 
       // add regex prefix tokenset
-      TokenSet regexPrefixes = extension.getRegexPrefixTokenSet();
-      if (regexPrefixes != null) {
-        bareRegexPrefixTokenSet = TokenSet.orSet(bareRegexPrefixTokenSet, regexPrefixes);
-      }
+      bareRegexPrefixTokenSet = TokenSet.orSet(bareRegexPrefixTokenSet, extension.getRegexPrefixTokenSet());
 
       // add extensions tokens
       List<Pair<IElementType, TokenSet>> extensionSets = extension.getExtensionSets();
-      if (extensionSets != null) {
-        for (Pair<IElementType, TokenSet> extensionSet : extensionSets) {
-          for (int i = 0; i < PerlParserImpl.EXTENDS_SETS_.length; i++) {
-            if (PerlParserImpl.EXTENDS_SETS_[i].contains(extensionSet.first)) {
-              PerlParserImpl.EXTENDS_SETS_[i] = TokenSet.orSet(PerlParserImpl.EXTENDS_SETS_[i], extensionSet.getSecond());
-              break;
-            }
+      for (Pair<IElementType, TokenSet> extensionSet : extensionSets) {
+        for (int i = 0; i < PerlParserImpl.EXTENDS_SETS_.length; i++) {
+          if (PerlParserImpl.EXTENDS_SETS_[i].contains(extensionSet.first)) {
+            PerlParserImpl.EXTENDS_SETS_[i] = TokenSet.orSet(PerlParserImpl.EXTENDS_SETS_[i], extensionSet.getSecond());
+            break;
           }
         }
       }
     }
+    CUSTOM_TOKEN_TYPES = customTokenTypes;
+    CUSTOM_TOKEN_TYPES_AFTER_DEREFERENCE = customTokenTypesAfterDereference;
     BARE_REGEX_PREFIX_TOKENSET = bareRegexPrefixTokenSet;
-    CUSTOM_TOKENSET = TokenSet.create(CUSTOM_TOKEN_TYPES.values().toArray(IElementType.EMPTY_ARRAY));
   }
 
   // last captured heredoc marker

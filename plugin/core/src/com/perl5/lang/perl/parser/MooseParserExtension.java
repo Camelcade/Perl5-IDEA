@@ -25,7 +25,7 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
 import com.perl5.lang.perl.parser.moose.MooseElementTypes;
 import gnu.trove.THashMap;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -70,13 +70,13 @@ public class MooseParserExtension extends PerlParserExtension implements MooseEl
     List<IElementType> tokensList = new ArrayList<>();
     tokensList.add(MOOSE_HAS_EXPR);
     tokensList.addAll(RESERVED_TO_STATEMENT_MAP.values());
-    EXTENSION_SET.add(Pair.create(EXPR, TokenSet.create(tokensList.toArray(new IElementType[tokensList.size()]))));
+    EXTENSION_SET.add(Pair.create(EXPR, TokenSet.create(tokensList.toArray(IElementType.EMPTY_ARRAY))));
 
     PARSER_TOKEN_SET =
-      TokenSet.create(RESERVED_TO_STATEMENT_MAP.keySet().toArray(new IElementType[RESERVED_TO_STATEMENT_MAP.keySet().size()]));
+      TokenSet.create(RESERVED_TO_STATEMENT_MAP.keySet().toArray(IElementType.EMPTY_ARRAY));
 
     Collection<IElementType> reservedTokens = TOKENS_MAP.values();
-    MOOSE_RESERVED_TOKENSET = TokenSet.create(reservedTokens.toArray(new IElementType[reservedTokens.size()]));
+    MOOSE_RESERVED_TOKENSET = TokenSet.create(reservedTokens.toArray(IElementType.EMPTY_ARRAY));
   }
 
   @Override
@@ -89,7 +89,7 @@ public class MooseParserExtension extends PerlParserExtension implements MooseEl
            super.parseTerm(b, l);
   }
 
-  @Nullable
+  @NotNull
   @Override
   public List<Pair<IElementType, TokenSet>> getExtensionSets() {
     return EXTENSION_SET;

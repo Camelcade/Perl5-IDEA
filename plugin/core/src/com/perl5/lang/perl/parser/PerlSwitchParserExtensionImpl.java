@@ -19,7 +19,7 @@ package com.perl5.lang.perl.parser;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.RESERVED_CASE;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.RESERVED_SWITCH;
@@ -39,7 +39,7 @@ public class PerlSwitchParserExtensionImpl extends PerlParserExtension {
     PerlSyntaxHighlighter.safeMap(PerlSyntaxHighlighter.PERL_KEYWORD, TOKENS_SET);
   }
 
-  @Nullable
+  @NotNull
   @Override
   public TokenSet getRegexPrefixTokenSet() {
     return BARE_REGEX_PREFIX_TOKEN_SET;

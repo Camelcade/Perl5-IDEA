@@ -17,7 +17,7 @@
 package com.perl5.lang.perl.util;
 
 import com.intellij.ide.plugins.IdeaPluginDescriptor;
-import com.intellij.ide.plugins.PluginManager;
+import com.intellij.ide.plugins.PluginManagerCore;
 import com.intellij.openapi.application.PathManager;
 import com.intellij.openapi.extensions.PluginId;
 import com.intellij.openapi.util.io.FileUtil;
@@ -36,7 +36,7 @@ public class PerlPluginUtil {
 
   @NotNull
   public static IdeaPluginDescriptor getPlugin() {
-    return Objects.requireNonNull(PluginManager.getPlugin(PluginId.getId(PLUGIN_ID)));
+    return Objects.requireNonNull(PluginManagerCore.getPlugin(PluginId.getId(PLUGIN_ID)));
   }
 
   @Nullable

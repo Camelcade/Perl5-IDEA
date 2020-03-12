@@ -28,6 +28,20 @@ import org.jetbrains.annotations.NotNull;
 public class PerlParserImpl extends PerlParserGenerated implements PerlParser {
   public static final PsiParser INSTANCE = new PerlParserImpl();
 
+  private static final TokenSet[] EXTENDS_SETS_BACKUP = new TokenSet[EXTENDS_SETS_.length];
+
+  static {
+    for (int i = 0; i < EXTENDS_SETS_.length; i++) {
+      EXTENDS_SETS_BACKUP[i] = TokenSet.orSet(EXTENDS_SETS_[i]);
+    }
+  }
+
+  public static void restoreDefaultExtendsSet() {
+    for (int i = 0; i < EXTENDS_SETS_BACKUP.length; i++) {
+      EXTENDS_SETS_[i] = TokenSet.orSet(EXTENDS_SETS_BACKUP[i]);
+    }
+  }
+
   public PerlParserImpl() {
   }
 

@@ -47,7 +47,7 @@
       <with attribute="implementationClass" implements="com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerHandler"/>
     </extensionPoint>
     <extensionPoint name="fileTypeProvider" interface="com.perl5.lang.perl.fileTypes.PerlFileTypeProvider"/>
-    <extensionPoint name="parserExtension" interface="com.perl5.lang.perl.extensions.parser.PerlParserExtension"/>
+    <extensionPoint name="parserExtension" interface="com.perl5.lang.perl.extensions.parser.PerlParserExtension" dynamic="true"/>
     <extensionPoint name="importsProvider" interface="com.perl5.lang.perl.extensions.imports.PerlImportsProvider" dynamic="true"/>
     <extensionPoint name="implicitSubsProvider" interface="com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsProvider"/>
     <extensionPoint name="settings.configurable.extension"

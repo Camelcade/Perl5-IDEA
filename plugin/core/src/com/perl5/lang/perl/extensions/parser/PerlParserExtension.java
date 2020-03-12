@@ -22,7 +22,6 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
 import java.util.List;
@@ -55,9 +54,9 @@ public abstract class PerlParserExtension {
    *
    * @return list of pairs to extend
    */
-  @Nullable
+  @NotNull
   public List<Pair<IElementType, TokenSet>> getExtensionSets() {
-    return null;
+    return Collections.emptyList();
   }
 
   /**
@@ -65,9 +64,9 @@ public abstract class PerlParserExtension {
    *
    * @return list of pairs to extend
    */
-  @Nullable
+  @NotNull
   public TokenSet getRegexPrefixTokenSet() {
-    return null;
+    return TokenSet.EMPTY;
   }
 
   /**
