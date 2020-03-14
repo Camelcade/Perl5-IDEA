@@ -99,6 +99,7 @@ public class PerlSdkTable extends ProjectJdkTable implements PersistentStateComp
   /**
    * @deprecated use com.intellij.openapi.projectRoots.impl.PerlSdkTable#getInterpreters() instead
    */
+  @Deprecated
   @NotNull
   @Override
   public Sdk[] getAllJdks() {

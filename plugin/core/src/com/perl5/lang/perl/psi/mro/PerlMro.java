@@ -59,6 +59,7 @@ public abstract class PerlMro {
    * @return collection of first encountered super subs declarations, definitions, constants and typeglobs
    * @deprecated use {@link #processTargets(Project, GlobalSearchScope, String, Set, boolean, Processor)}
    */
+  @Deprecated
   @NotNull
   public static Collection<PsiElement> resolveSub(@NotNull Project project,
                                                   @NotNull GlobalSearchScope searchScope,

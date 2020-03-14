@@ -123,6 +123,7 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
   /**
    * @deprecated should be detected from resolve result
    */
+  @Deprecated
   @Override
   public boolean isBuiltIn() {
     return getLexicalDeclaration() instanceof PerlBuiltInVariable;
