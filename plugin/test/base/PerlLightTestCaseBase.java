@@ -193,6 +193,7 @@ import org.intellij.plugins.intelliLang.inject.InjectLanguageAction;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.Assert;
+import org.junit.Assume;
 import org.junit.Rule;
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
@@ -2517,4 +2518,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     }
   }
 
+  protected void assumeNotWindows() {
+    Assume.assumeFalse("Not running on windows", SystemInfo.isWindows);
+  }
 }

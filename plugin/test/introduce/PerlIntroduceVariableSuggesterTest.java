@@ -242,7 +242,10 @@ public class PerlIntroduceVariableSuggesterTest extends PerlLightTestCase {
   public void testNumber() {doTest();}
 
   @Test
-  public void testStringPathAbsolute() {doTest();}
+  public void testStringPathAbsolute() {
+    assumeNotWindows();
+    doTest();
+  }
 
   @Test
   public void testStringPathAbsoluteWindows() {doTest();}
@@ -254,7 +257,10 @@ public class PerlIntroduceVariableSuggesterTest extends PerlLightTestCase {
   public void testStringPathRelativeWindows() {doTest();}
 
   @Test
-  public void testStringPathAbsoluteQQ() {doTest();}
+  public void testStringPathAbsoluteQQ() {
+    assumeNotWindows();
+    doTest();
+  }
 
   @Test
   public void testStringPathRelativeQQ() {doTest();}
