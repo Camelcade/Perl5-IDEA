@@ -205,6 +205,7 @@
     <projectService serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings"/>
     <projectService serviceImplementation="com.perl5.lang.perl.xsubs.PerlXSubsState"/>
     <projectService serviceImplementation="com.perl5.lang.perl.idea.project.PerlProjectManager"/>
+    <projectService serviceImplementation="com.perl5.lang.perl.idea.project.PerlNamesCache"/>
 
     <postStartupActivity implementation="com.perl5.lang.perl.xsubs.PerlXSubsStartupActivity"/>
 
@@ -667,13 +668,6 @@
       <implementation-class>com.perl5.lang.perl.idea.run.debugger.PerlRemoteFileSystem</implementation-class>
     </component>
   </application-components>
-
-  <project-components>
-    <!-- Add your project components here -->
-    <component>
-      <implementation-class>com.perl5.lang.perl.idea.project.PerlNamesCache</implementation-class>
-    </component>
-  </project-components>
 
   <actions>
     <group id="perl5.tools" text="Perl5" popup="true" icon="/icons/perl5language.png">

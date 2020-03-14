@@ -16,11 +16,11 @@
 
 package com.perl5.lang.perl.idea.project;
 
-import com.intellij.openapi.components.ProjectComponent;
+import com.intellij.openapi.Disposable;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.progress.ProcessCanceledException;
 import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.startup.StartupManager;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
@@ -31,9 +31,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-public class PerlNamesCache implements ProjectComponent {
+public class PerlNamesCache implements Disposable {
   private final NamesCacheUpdater myUpdaterRunner = new NamesCacheUpdater();
-  private final Thread myUpdaterThread = new Thread(myUpdaterRunner);
   private final Project myProject;
   private Set<String> myKnownSubs = Collections.emptySet();
   private Set<String> myKnownNamespaces = Collections.emptySet();
@@ -60,16 +59,7 @@ public class PerlNamesCache implements ProjectComponent {
 
   public PerlNamesCache(Project project) {
     this.myProject = project;
-  }
-
-  @Override
-  public void projectOpened() {
-
-  }
-
-  @Override
-  public void projectClosed() {
-
+    ApplicationManager.getApplication().executeOnPooledThread(myUpdaterRunner);
   }
 
   public void forceCacheUpdate() {
@@ -77,19 +67,8 @@ public class PerlNamesCache implements ProjectComponent {
   }
 
   @Override
-  public void initComponent() {
-    StartupManager.getInstance(myProject).runWhenProjectIsInitialized(myUpdaterThread::start);
-  }
-
-  @Override
-  public void disposeComponent() {
+  public void dispose() {
     myUpdaterRunner.stopUpdater();
-  }
-
-  @NotNull
-  @Override
-  public String getComponentName() {
-    return "Perl5 names cache";
   }
 
   public Set<String> getSubsNamesSet() {
@@ -104,7 +83,7 @@ public class PerlNamesCache implements ProjectComponent {
 
   @NotNull
   public static PerlNamesCache getInstance(@NotNull Project project) {
-    return project.getComponent(PerlNamesCache.class);
+    return project.getService(PerlNamesCache.class);
   }
 
   protected class NamesCacheUpdater implements Runnable {
