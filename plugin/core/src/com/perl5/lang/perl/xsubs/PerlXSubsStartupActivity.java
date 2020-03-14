@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,42 +16,14 @@
 
 package com.perl5.lang.perl.xsubs;
 
-import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.startup.StartupActivity;
 import com.intellij.openapi.startup.StartupManager;
 import org.jetbrains.annotations.NotNull;
 
-
-public class PerlXSubsProjectComponent implements ProjectComponent {
-
-  private final Project myProject;
-
-  public PerlXSubsProjectComponent(Project project) {
-    myProject = project;
-  }
-
+public class PerlXSubsStartupActivity implements StartupActivity {
   @Override
-  public void projectOpened() {
-    StartupManager.getInstance(myProject).runWhenProjectIsInitialized(() -> PerlXSubsState.getInstance(myProject).rescanFiles());
-  }
-
-  @Override
-  public void projectClosed() {
-  }
-
-  @Override
-  public void initComponent() {
-
-  }
-
-  @Override
-  public void disposeComponent() {
-
-  }
-
-  @NotNull
-  @Override
-  public String getComponentName() {
-    return "PerlXSubsProjectComponent";
+  public void runActivity(@NotNull Project project) {
+    StartupManager.getInstance(project).runWhenProjectIsInitialized(() -> PerlXSubsState.getInstance(project).rescanFiles());
   }
 }

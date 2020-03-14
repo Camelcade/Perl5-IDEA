@@ -205,6 +205,9 @@
     <projectService serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings"/>
     <projectService serviceImplementation="com.perl5.lang.perl.xsubs.PerlXSubsState"/>
     <projectService serviceImplementation="com.perl5.lang.perl.idea.project.PerlProjectManager"/>
+
+    <postStartupActivity implementation="com.perl5.lang.perl.xsubs.PerlXSubsStartupActivity"/>
+
     <treeStructureProvider implementation="com.perl5.lang.perl.idea.project.PerlTreeStructureProvider"/>
     <moduleExtension implementation="com.intellij.openapi.projectRoots.impl.PerlModuleExtension"/>
 
@@ -669,9 +672,6 @@
     <!-- Add your project components here -->
     <component>
       <implementation-class>com.perl5.lang.perl.idea.project.PerlNamesCache</implementation-class>
-    </component>
-    <component>
-      <implementation-class>com.perl5.lang.perl.xsubs.PerlXSubsProjectComponent</implementation-class>
     </component>
   </project-components>
 
