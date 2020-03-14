@@ -193,6 +193,7 @@
     <editorNotificationProvider implementation="com.perl5.lang.perl.idea.editor.notification.PerlAssociationEditorNotification"/>
 
     <virtualFileSystem key="perlhost" implementationClass="com.perl5.lang.perl.idea.sdk.host.PerlHostVirtualFileSystem"/>
+    <virtualFileSystem key="perl5_remote" implementationClass="com.perl5.lang.perl.idea.run.debugger.PerlRemoteFileSystem"/>
 
     <editorFactoryListener implementation="com.perl5.lang.perl.idea.configuration.settings.PerlEditorFactoryListener"/>
 
@@ -660,12 +661,6 @@
       <descriptionDirectoryName>ForeachToForConverter</descriptionDirectoryName>
     </intentionAction>
   </extensions>
-
-  <application-components>
-    <component>
-      <implementation-class>com.perl5.lang.perl.idea.run.debugger.PerlRemoteFileSystem</implementation-class>
-    </component>
-  </application-components>
 
   <actions>
     <group id="perl5.tools" text="Perl5" popup="true" icon="/icons/perl5language.png">
