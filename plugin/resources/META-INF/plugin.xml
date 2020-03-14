@@ -194,6 +194,8 @@
 
     <virtualFileSystem key="perlhost" implementationClass="com.perl5.lang.perl.idea.sdk.host.PerlHostVirtualFileSystem"/>
 
+    <editorFactoryListener implementation="com.perl5.lang.perl.idea.configuration.settings.PerlEditorFactoryListener"/>
+
     <projectService serviceImplementation="com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesCacheService"/>
     <projectService serviceImplementation="com.perl5.lang.perl.idea.completion.PerlStringCompletionCache"/>
     <projectService serviceImplementation="com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService"/>
@@ -660,10 +662,6 @@
   </extensions>
 
   <application-components>
-    <component>
-      <implementation-class>com.perl5.lang.perl.idea.configuration.settings.PerlUpdateComponent
-      </implementation-class>
-    </component>
     <component>
       <implementation-class>com.perl5.lang.perl.idea.run.debugger.PerlRemoteFileSystem</implementation-class>
     </component>

@@ -18,13 +18,10 @@ package com.perl5.lang.perl.idea.configuration.settings;
 
 import com.intellij.ide.plugins.IdeaPluginDescriptor;
 import com.intellij.ide.util.PropertiesComponent;
-import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ApplicationInfo;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.PermanentInstallationID;
-import com.intellij.openapi.components.BaseComponent;
 import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.editor.EditorFactory;
 import com.intellij.openapi.editor.event.EditorFactoryEvent;
 import com.intellij.openapi.editor.event.EditorFactoryListener;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
@@ -43,42 +40,21 @@ import java.util.concurrent.TimeUnit;
 import static com.perl5.lang.perl.util.PerlPluginUtil.getPlugin;
 
 
-public class PerlUpdateComponent implements BaseComponent, Disposable {
+public class PerlEditorFactoryListener implements EditorFactoryListener {
   private static final String KEY = "perl.last.update.timestamp";
 
-  private final EditorFactoryListener myListener = new EditorFactoryListener() {
-    @Override
-    public void editorCreated(@NotNull EditorFactoryEvent event) {
-      Document document = event.getEditor().getDocument();
-
-      VirtualFile file = FileDocumentManager.getInstance().getFile(document);
-      if (file != null && file.getFileType() instanceof PerlPluginBaseFileType) {
-        checkForUpdates();
-      }
+  @Override
+  public void editorCreated(@NotNull EditorFactoryEvent event) {
+    if (ApplicationManager.getApplication().isUnitTestMode()) {
+      return;
     }
-  };
 
-  @Override
-  public void initComponent() {
-    if (!ApplicationManager.getApplication().isUnitTestMode()) {
-      EditorFactory.getInstance().addEditorFactoryListener(myListener, this);
+    Document document = event.getEditor().getDocument();
+
+    VirtualFile file = FileDocumentManager.getInstance().getFile(document);
+    if (file != null && file.getFileType() instanceof PerlPluginBaseFileType) {
+      checkForUpdates();
     }
-  }
-
-  @Override
-  public void disposeComponent() {
-
-  }
-
-  @NotNull
-  @Override
-  public String getComponentName() {
-    return getClass().getName();
-  }
-
-  @Override
-  public void dispose() {
-    disposeComponent();
   }
 
   private static void checkForUpdates() {
