@@ -148,9 +148,9 @@ task jacocoRootReport(type: JacocoReport, group: 'Coverage reports') {
   description = 'Generates an aggregate report from all subprojects'
   dependsOn jacocoMerge
 
-  additionalSourceDirs = files(subprojects.sourceSets.main.allSource.srcDirs)
-  sourceDirectories = files(subprojects.sourceSets.main.allSource.srcDirs)
-  classDirectories = files(subprojects.sourceSets.main.output)
+  additionalSourceDirs.setFrom files(subprojects.sourceSets.main.allSource.srcDirs)
+  sourceDirectories.setFrom files(subprojects.sourceSets.main.allSource.srcDirs)
+  classDirectories.setFrom files(subprojects.sourceSets.main.output)
   executionData jacocoMerge.destinationFile
 
   reports {
