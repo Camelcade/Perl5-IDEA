@@ -24,7 +24,7 @@ plugins {
   id "org.jetbrains.intellij" version "0.4.16"
   id 'jacoco'
   id 'com.github.kt3k.coveralls' version '2.10.1'
-  id 'org.jetbrains.grammarkit' version '2020.1'
+  id 'org.jetbrains.grammarkit' version '2020.1.1'
 }
 
 repositories {
@@ -161,6 +161,8 @@ task jacocoRootReport(type: JacocoReport, group: 'Coverage reports') {
 }
 
 coveralls{
+  saveAsFile = true
+  sendToCoveralls = false
   jacocoReportPath = "$buildDir/reports/jacoco/jacocoRootReport/jacocoRootReport.xml"
 }
 
