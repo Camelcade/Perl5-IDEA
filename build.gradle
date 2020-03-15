@@ -161,8 +161,6 @@ task jacocoRootReport(type: JacocoReport, group: 'Coverage reports') {
 }
 
 coveralls{
-  saveAsFile = true
-  sendToCoveralls = false
   jacocoReportPath = "$buildDir/reports/jacoco/jacocoRootReport/jacocoRootReport.xml"
 }
 
