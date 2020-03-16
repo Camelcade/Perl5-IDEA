@@ -34,6 +34,7 @@ import com.perl5.lang.perl.parser.moose.MooseElementTypes;
 import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPluginUtil;
 import gnu.trove.THashMap;
 import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
@@ -86,7 +87,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
   }
 
   static {
-    PerlParserExtension.EP_NAME.addExtensionPointListener(PerlBaseLexer::refreshExtensions, null);
+    PerlParserExtension.EP_NAME.addExtensionPointListener(PerlBaseLexer::refreshExtensions, PerlPluginUtil.getPluginDisposable());
     refreshExtensions();
   }
 

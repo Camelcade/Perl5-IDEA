@@ -60,7 +60,7 @@ public class PerlFileTypeService implements Disposable {
   );
 
   public PerlFileTypeService() {
-    PerlFileTypeProvider.EP_NAME.addExtensionPointListener(this::reset, null);
+    PerlFileTypeProvider.EP_NAME.addExtensionPointListener(this::reset, this);
   }
 
   @Override
@@ -72,7 +72,7 @@ public class PerlFileTypeService implements Disposable {
     myDirectoryIndex.resetIndex();
   }
 
-  static PerlFileTypeService getInstance() {
+  public static PerlFileTypeService getInstance() {
     return ServiceManager.getService(PerlFileTypeService.class);
   }
 

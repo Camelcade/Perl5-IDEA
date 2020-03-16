@@ -18,9 +18,11 @@ package com.perl5.lang.perl.util;
 
 import com.intellij.ide.plugins.IdeaPluginDescriptor;
 import com.intellij.ide.plugins.PluginManagerCore;
+import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.PathManager;
 import com.intellij.openapi.extensions.PluginId;
 import com.intellij.openapi.util.io.FileUtil;
+import com.perl5.lang.perl.fileTypes.PerlFileTypeService;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -37,6 +39,14 @@ public class PerlPluginUtil {
   @NotNull
   public static IdeaPluginDescriptor getPlugin() {
     return Objects.requireNonNull(PluginManagerCore.getPlugin(PluginId.getId(PLUGIN_ID)));
+  }
+
+  /**
+   * @return disposable for the plugin. Need to be replaced with proper plugin disposable later
+   */
+  @NotNull
+  public static Disposable getPluginDisposable() {
+    return PerlFileTypeService.getInstance();
   }
 
   @Nullable
