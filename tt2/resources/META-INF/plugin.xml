@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright 2015-2018 Alexandr Evstigneev
+  ~ Copyright 2015-2020 Alexandr Evstigneev
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -53,8 +53,8 @@
     <typedHandler implementation="com.perl5.lang.tt2.idea.editor.TemplateToolkitTypedHandler"
                   order="first"/>
 
-    <defaultLiveTemplatesProvider
-        implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitLiveTemplatesProvider"/>
+    <defaultLiveTemplates file="liveTemplates/TemplateToolkit2.xml"/>
+    <defaultLiveTemplates file="liveTemplates/TemplateToolkit2Postfix.xml"/>
     <liveTemplateContext
         implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitTemplateContextType$Generic"/>
     <liveTemplateContext

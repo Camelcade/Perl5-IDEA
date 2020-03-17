@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright 2015-2019 Alexandr Evstigneev
+  ~ Copyright 2015-2020 Alexandr Evstigneev
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -406,13 +406,12 @@
     <nameSuggestionProvider implementation="com.perl5.lang.perl.idea.refactoring.PerlNameSuggestionProvider"
                             order="first"/>
 
-    <defaultLiveTemplatesProvider
-        implementation="com.perl5.lang.perl.idea.livetemplates.PerlDefaultTemplatesProvider"/>
-    <defaultLiveTemplatesProvider
-        implementation="com.perl5.lang.perl.parser.method.signatures.simple.idea.liveTemplates.MethodSignaturesSimpleTemplatesProvider"/>
+    <defaultLiveTemplates file="liveTemplates/Perl5.xml"/>
+    <defaultLiveTemplates file="liveTemplates/Perl5Postfix.xml"/>
+    <defaultLiveTemplates file="liveTemplates/Perl5Test.xml"/>
+    <defaultLiveTemplates file="liveTemplates/Perl5MethodSignaturesSimple.xml"/>
+    <defaultLiveTemplates file="liveTemplates/Perl5Moose.xml"/>
 
-    <defaultLiveTemplatesProvider
-        implementation="com.perl5.lang.perl.parser.moose.idea.liveTemplates.MooseTemplatesProvider"/>
     <stubElementTypeHolder class="com.perl5.lang.perl.parser.moose.MooseElementTypes"/>
     <referencesSearch
         implementation="com.perl5.lang.perl.parser.moose.psi.references.PerlMooseReferencesSearcher"/>
@@ -463,8 +462,7 @@
     <multiHostInjector implementation="com.perl5.lang.perl.idea.regexp.Perl5RegexpInjector"/>
 
     <!--TryCatch settings -->
-    <defaultLiveTemplatesProvider
-        implementation="com.perl5.lang.perl.parser.trycatch.idea.liveTemplates.TryCatchLiveTemplatesProvider"/>
+    <defaultLiveTemplates file="liveTemplates/Perl5TryCatch.xml"/>
     <liveTemplateContext
         implementation="com.perl5.lang.perl.parser.trycatch.idea.liveTemplates.TryCatchTemplateContextType"/>
 
@@ -473,8 +471,7 @@
     <!--TryCatch settings end -->
 
     <!-- Switch settings -->
-    <defaultLiveTemplatesProvider
-        implementation="com.perl5.lang.perl.parser.perlswitch.idea.liveTemplates.PerlSwitchTemplatesProvider"/>
+    <defaultLiveTemplates file="liveTemplates/Perl5Switch.xml"/>
     <liveTemplateContext
         implementation="com.perl5.lang.perl.parser.perlswitch.idea.liveTemplates.PerlSwitchTemplateContextType"/>
     <liveTemplateContext

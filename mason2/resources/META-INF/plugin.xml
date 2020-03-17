@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright 2015-2018 Alexandr Evstigneev
+  ~ Copyright 2015-2020 Alexandr Evstigneev
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -52,8 +52,7 @@
 
     <liveTemplateContext implementation="com.perl5.lang.mason2.idea.livetemplates.MasonTemplateContextType"/>
     <liveTemplatePreprocessor implementation="com.perl5.lang.mason2.idea.livetemplates.MasonTemplatePreprocessor"/>
-    <defaultLiveTemplatesProvider
-        implementation="com.perl5.lang.mason2.idea.livetemplates.MasonLivetemplatesProvider"/>
+    <defaultLiveTemplates file="liveTemplates/Perl5Mason2.xml"/>
 
     <editorNotificationProvider
         implementation="com.perl5.lang.mason2.idea.editor.notification.MasonPathsNotification"/>

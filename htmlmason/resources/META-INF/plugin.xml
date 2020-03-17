@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright 2015-2018 Alexandr Evstigneev
+  ~ Copyright 2015-2020 Alexandr Evstigneev
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -70,8 +70,7 @@
     <liveTemplateContext implementation="com.perl5.lang.htmlmason.idea.livetemplates.HTMLMasonTemplateContextType"/>
     <liveTemplatePreprocessor
         implementation="com.perl5.lang.htmlmason.idea.livetemplates.HTMLMasonTemplatePreprocessor"/>
-    <defaultLiveTemplatesProvider
-        implementation="com.perl5.lang.htmlmason.idea.livetemplates.HTMLMasonLiveTemplatesProvider"/>
+    <defaultLiveTemplates file="liveTemplates/Perl5HTMLMason.xml"/>
     <typedHandler implementation="com.perl5.lang.htmlmason.idea.editor.HTMLMasonTypedHandler" order="first"/>
 
     <stubElementTypeHolder class="com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes"/>

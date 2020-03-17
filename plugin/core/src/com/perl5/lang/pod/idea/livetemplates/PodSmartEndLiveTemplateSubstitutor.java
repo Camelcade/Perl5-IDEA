@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,9 +25,9 @@ import com.perl5.lang.pod.parser.psi.PodSyntaxElements;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static com.perl5.lang.pod.idea.livetemplates.PodDefaultLiveTemplatesProvider.POD_GROUP;
-
 public class PodSmartEndLiveTemplateSubstitutor implements TemplateSubstitutor {
+  private static final String POD_GROUP = "Perl5: POD";
+
   @Nullable
   @Override
   public TemplateImpl substituteTemplate(@NotNull PsiFile file, int caretOffset, @NotNull TemplateImpl template) {
