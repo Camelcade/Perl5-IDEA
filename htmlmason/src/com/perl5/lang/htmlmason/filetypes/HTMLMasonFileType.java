@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,12 +16,10 @@
 
 package com.perl5.lang.htmlmason.filetypes;
 
-import com.intellij.openapi.fileTypes.FileTypeEditorHighlighterProviders;
 import com.intellij.openapi.fileTypes.ex.FileTypeIdentifiableByVirtualFile;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.lang.htmlmason.HTMLMasonIcons;
 import com.perl5.lang.htmlmason.HTMLMasonLanguage;
-import com.perl5.lang.htmlmason.idea.editor.HTMLMasonHighlighter;
 import com.perl5.lang.perl.fileTypes.PerlFileType;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeService;
 import org.jetbrains.annotations.NotNull;
@@ -36,9 +34,6 @@ public class HTMLMasonFileType extends PerlFileType implements FileTypeIdentifia
 
   public HTMLMasonFileType() {
     super(HTMLMasonLanguage.INSTANCE);
-    FileTypeEditorHighlighterProviders.INSTANCE.addExplicitExtension(this,
-                                                                     (project, fileType, virtualFile, editorColorsScheme) -> new HTMLMasonHighlighter(
-                                                                       project, virtualFile, editorColorsScheme));
   }
 
   @NotNull

@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright 2015-2018 Alexandr Evstigneev
+  ~ Copyright 2015-2020 Alexandr Evstigneev
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -34,6 +34,8 @@
     <internalFileTemplate name="Perl5 embedded"/>
     <fileType implementationClass="com.perl5.lang.embedded.filetypes.EmbeddedPerlFileType" fieldName="INSTANCE"
               name="Embedded Perl" language="Embedded Perl" extensions="thtml;phtml"/>
+    <editorHighlighterProvider filetype="Embedded Perl"
+                               implementationClass="com.perl5.lang.embedded.filetypes.EmbeddedPerlEditorHighlighterProvider"/>
     <lang.parserDefinition language="Embedded Perl"
                            implementationClass="com.perl5.lang.embedded.EmbeddedPerlParserDefinition"/>
     <lang.fileViewProviderFactory language="Embedded Perl"

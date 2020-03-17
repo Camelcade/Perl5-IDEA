@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,14 +17,12 @@
 package com.perl5.lang.tt2.filetypes;
 
 import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.openapi.fileTypes.FileTypeEditorHighlighterProviders;
 import com.intellij.openapi.fileTypes.ex.FileTypeIdentifiableByVirtualFile;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeService;
 import com.perl5.lang.perl.fileTypes.PerlPluginBaseFileType;
 import com.perl5.lang.tt2.TemplateToolkitIcons;
 import com.perl5.lang.tt2.TemplateToolkitLanguage;
-import com.perl5.lang.tt2.idea.highlighting.TemplateToolkitHighlighter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -36,9 +34,6 @@ public class TemplateToolkitFileType extends PerlPluginBaseFileType implements F
 
   public TemplateToolkitFileType() {
     super(TemplateToolkitLanguage.INSTANCE);
-    FileTypeEditorHighlighterProviders.INSTANCE.addExplicitExtension(this,
-                                                                     (project, fileType, virtualFile, editorColorsScheme) -> new TemplateToolkitHighlighter(
-                                                                       project, virtualFile, editorColorsScheme));
   }
 
   @NotNull

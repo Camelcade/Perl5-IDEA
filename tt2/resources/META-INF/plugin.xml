@@ -34,6 +34,8 @@
   <extensions defaultExtensionNs="com.intellij">
     <fileType implementationClass="com.perl5.lang.tt2.filetypes.TemplateToolkitFileType" fieldName="INSTANCE"
               name="Template Toolkit" extensions="tt;tt2" language="Template Toolkit 2"/>
+    <editorHighlighterProvider filetype="Template Toolkit"
+                               implementationClass="com.perl5.lang.tt2.filetypes.TemplateToolkitEditorHighlighterProvider"/>
     <lang.fileViewProviderFactory language="Template Toolkit 2"
                                   implementationClass="com.perl5.lang.tt2.TemplateToolkitFileViewProviderFactory"/>
     <lang.parserDefinition language="Template Toolkit 2"

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,10 +16,8 @@
 
 package com.perl5.lang.mojolicious.filetypes;
 
-import com.intellij.openapi.fileTypes.FileTypeEditorHighlighterProviders;
 import com.perl5.lang.mojolicious.MojoIcons;
 import com.perl5.lang.mojolicious.MojoliciousLanguage;
-import com.perl5.lang.mojolicious.idea.highlighter.MojoliciousHighlighter;
 import com.perl5.lang.perl.fileTypes.PerlFileType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -33,10 +31,6 @@ public class MojoliciousFileType extends PerlFileType {
 
   public MojoliciousFileType() {
     super(MojoliciousLanguage.INSTANCE);
-    FileTypeEditorHighlighterProviders.INSTANCE.addExplicitExtension(
-      this,
-      (project, fileType, virtualFile, editorColorsScheme) -> new MojoliciousHighlighter(
-        project, virtualFile, editorColorsScheme));
   }
 
   @NotNull

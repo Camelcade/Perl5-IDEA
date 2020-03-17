@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright 2015-2019 Alexandr Evstigneev
+  ~ Copyright 2015-2020 Alexandr Evstigneev
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -42,6 +42,8 @@
               name="Mojolicious Perl5 Template"
               language="Mojolicious Perl"
               extensions="ep"/>
+    <editorHighlighterProvider filetype="Mojolicious Perl5 Template"
+                               implementationClass="com.perl5.lang.mojolicious.filetypes.MojoliciousFileTypeEditorHighlighterProvider"/>
     <lang.parserDefinition language="Mojolicious Perl"
                            implementationClass="com.perl5.lang.mojolicious.MojoliciousParserDefinition"/>
     <lang.fileViewProviderFactory language="Mojolicious Perl"

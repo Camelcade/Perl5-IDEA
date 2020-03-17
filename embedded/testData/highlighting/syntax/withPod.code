@@ -1,0 +1,14 @@
+<html></html><?
+say 'hi';
+
+
+=pod
+
+this is a pod
+
+=cut
+
+
+
+
+?> 

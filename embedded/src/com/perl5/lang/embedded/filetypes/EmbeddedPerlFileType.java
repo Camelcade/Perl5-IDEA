@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,10 +16,8 @@
 
 package com.perl5.lang.embedded.filetypes;
 
-import com.intellij.openapi.fileTypes.FileTypeEditorHighlighterProviders;
 import com.perl5.lang.embedded.EmbeddedPerlIcons;
 import com.perl5.lang.embedded.EmbeddedPerlLanguage;
-import com.perl5.lang.embedded.idea.highlighting.EmbeddedPerlHighlighter;
 import com.perl5.lang.perl.fileTypes.PerlFileType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -29,13 +27,10 @@ import javax.swing.*;
 
 public class EmbeddedPerlFileType extends PerlFileType {
   public static final EmbeddedPerlFileType INSTANCE = new EmbeddedPerlFileType();
+  public static final String DEFAULT_EXTENSION = "thtml";
 
   public EmbeddedPerlFileType() {
     super(EmbeddedPerlLanguage.INSTANCE);
-    FileTypeEditorHighlighterProviders.INSTANCE.addExplicitExtension(
-      this,
-      (project, fileType, virtualFile, editorColorsScheme) ->
-        new EmbeddedPerlHighlighter(project, virtualFile, editorColorsScheme));
   }
 
   @NotNull
@@ -53,7 +48,7 @@ public class EmbeddedPerlFileType extends PerlFileType {
   @NotNull
   @Override
   public String getDefaultExtension() {
-    return "thtml";
+    return DEFAULT_EXTENSION;
   }
 
   @Nullable

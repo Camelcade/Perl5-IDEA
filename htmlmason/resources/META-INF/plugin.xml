@@ -50,6 +50,8 @@
                            implementationClass="com.perl5.lang.htmlmason.HTMLMasonParserDefinition"/>
     <fileType implementationClass="com.perl5.lang.htmlmason.filetypes.HTMLMasonFileType" fieldName="INSTANCE"
               name="HTML::Mason Component" extensions="mas" language="HTML::Mason Templating Language"/>
+    <editorHighlighterProvider filetype="HTML::Mason Component"
+                               implementationClass="com.perl5.lang.htmlmason.filetypes.HTMLMasonFileTypeEditorHighlighterProvider"/>
     <lang.fileViewProviderFactory language="HTML::Mason Templating Language"
                                   implementationClass="com.perl5.lang.htmlmason.HTMLMasonFileViewProviderFactory"/>
     <editorNotificationProvider

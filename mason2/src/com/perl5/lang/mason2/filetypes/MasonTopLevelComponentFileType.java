@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,10 +16,8 @@
 
 package com.perl5.lang.mason2.filetypes;
 
-import com.intellij.openapi.fileTypes.FileTypeEditorHighlighterProviders;
 import com.perl5.lang.mason2.Mason2Icons;
 import com.perl5.lang.mason2.Mason2TemplatingLanguage;
-import com.perl5.lang.mason2.idea.highlighter.MasonHighlighter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -32,9 +30,6 @@ public class MasonTopLevelComponentFileType extends MasonPurePerlComponentFileTy
 
   public MasonTopLevelComponentFileType() {
     super(Mason2TemplatingLanguage.INSTANCE);
-    FileTypeEditorHighlighterProviders.INSTANCE.addExplicitExtension(this,
-                                                                     (project, fileType, virtualFile, editorColorsScheme) -> new MasonHighlighter(
-                                                                       project, virtualFile, editorColorsScheme));
   }
 
   @NotNull
