@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
+import com.intellij.openapi.Disposable;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
@@ -30,7 +31,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
 
-public class PerlValuesCacheService implements PsiModificationTracker.Listener {
+public class PerlValuesCacheService implements PsiModificationTracker.Listener, Disposable {
   private static final Logger LOG = Logger.getInstance(PerlValuesCacheService.class);
   @NotNull
   private final Map<Pair<PerlValue, PerlValueResolver>, PerlValue> myResolveMap = ContainerUtil.createConcurrentWeakMap();
@@ -39,9 +40,13 @@ public class PerlValuesCacheService implements PsiModificationTracker.Listener {
   private final AtomicLong myResolveBuilds = new AtomicLong();
 
   public PerlValuesCacheService(@NotNull Project project) {
-    project.getMessageBus().connect().subscribe(PsiModificationTracker.TOPIC, this);
+    project.getMessageBus().connect(this).subscribe(PsiModificationTracker.TOPIC, this);
   }
 
+  @Override
+  public void dispose() {
+
+  }
 
   @NotNull
   public PerlValue getResolvedValue(@NotNull PerlValue deferredValue, @NotNull PerlValueResolver resolver) {

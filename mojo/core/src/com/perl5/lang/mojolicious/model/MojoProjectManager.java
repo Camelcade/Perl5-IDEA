@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 package com.perl5.lang.mojolicious.model;
 
 import com.intellij.ide.projectView.ProjectView;
+import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.ReadAction;
 import com.intellij.openapi.components.ServiceManager;
@@ -52,7 +53,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import static com.perl5.lang.mojolicious.model.MojoProjectListener.MOJO_PROJECT_TOPIC;
 
-public class MojoProjectManager {
+public class MojoProjectManager implements Disposable {
   static final Logger LOG = Logger.getInstance(MojoProjectManager.class);
   @NotNull
   private final Project myProject;
@@ -66,7 +67,7 @@ public class MojoProjectManager {
   public MojoProjectManager(@NotNull Project project) {
     myProject = project;
     myUpdateQueue = new MergingUpdateQueue("mojo model updating queue", 500, true, null, project, null, false);
-    MessageBusConnection connection = myProject.getMessageBus().connect();
+    MessageBusConnection connection = myProject.getMessageBus().connect(this);
     connection.subscribe(DumbService.DUMB_MODE, new DumbService.DumbModeListener() {
       @Override
       public void exitDumbMode() {
@@ -98,6 +99,11 @@ public class MojoProjectManager {
         });
       }
     });
+  }
+
+  @Override
+  public void dispose() {
+
   }
 
   /**

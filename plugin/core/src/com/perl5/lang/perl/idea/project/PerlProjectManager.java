@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.project;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
+import com.intellij.openapi.Disposable;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.actionSystem.DataContext;
@@ -64,8 +65,7 @@ import java.util.*;
 
 import static com.intellij.ProjectTopics.PROJECT_ROOTS;
 
-@SuppressWarnings("UnstableApiUsage")
-public class PerlProjectManager {
+public class PerlProjectManager implements Disposable {
   @NotNull
   private final Project myProject;
   private final PerlLocalSettings myPerlSettings;
@@ -82,7 +82,7 @@ public class PerlProjectManager {
     myPerlSettings = PerlLocalSettings.getInstance(project);
     myModulesRootsProvider = FactoryMap.create(type -> type.getRoots(myProject));
     resetProjectCaches();
-    MessageBusConnection connection = myProject.getMessageBus().connect();
+    MessageBusConnection connection = myProject.getMessageBus().connect(this);
     connection.subscribe(PerlSdkTable.PERL_TABLE_TOPIC, new ProjectJdkTable.Listener() {
       @Override
       public void jdkAdded(@NotNull Sdk jdk) {
@@ -125,6 +125,11 @@ public class PerlProjectManager {
         resetProjectCaches();
       }
     });
+  }
+
+  @Override
+  public void dispose() {
+
   }
 
   private void resetProjectCaches() {

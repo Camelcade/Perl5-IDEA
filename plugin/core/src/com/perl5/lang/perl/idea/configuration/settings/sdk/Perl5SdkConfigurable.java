@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -63,9 +63,9 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
 
   private Perl5SdkPanel myPanel;
   @NotNull
-  private MessageBusConnection myConnection;
+  private final MessageBusConnection myConnection;
   @NotNull
-  private Perl5SdkManipulator mySdkManipulator;
+  private final Perl5SdkManipulator mySdkManipulator;
   @Nullable
   private Project myProject;
 
