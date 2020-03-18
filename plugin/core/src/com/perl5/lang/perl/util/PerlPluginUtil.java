@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,8 +21,10 @@ import com.intellij.ide.plugins.PluginManagerCore;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.PathManager;
 import com.intellij.openapi.extensions.PluginId;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.io.FileUtil;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeService;
+import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -47,6 +49,15 @@ public class PerlPluginUtil {
   @NotNull
   public static Disposable getPluginDisposable() {
     return PerlFileTypeService.getInstance();
+  }
+
+  /**
+   * @return project-level disposable for a plugin. It's eol happens on project service unloading what may
+   * happen when project is closed or plugin unloaded.
+   */
+  @NotNull
+  public static Disposable getProjectPluginDisposable(@NotNull Project project) {
+    return PerlProjectManager.getInstance(project);
   }
 
   @Nullable

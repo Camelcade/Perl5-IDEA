@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ import com.intellij.openapi.roots.ModuleRootListener;
 import com.intellij.openapi.startup.StartupActivity;
 import com.intellij.util.Function;
 import com.intellij.util.messages.MessageBusConnection;
+import com.perl5.lang.perl.util.PerlPluginUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -35,7 +36,7 @@ import java.util.List;
 class PerlFileTypeServiceWatcher implements StartupActivity, ModuleListener, ModuleRootListener {
   @Override
   public void runActivity(@NotNull Project project) {
-    MessageBusConnection connection = project.getMessageBus().connect();
+    MessageBusConnection connection = project.getMessageBus().connect(PerlPluginUtil.getProjectPluginDisposable(project));
     connection.subscribe(ProjectTopics.PROJECT_ROOTS, this);
     connection.subscribe(ProjectTopics.MODULES, this);
     reset();
