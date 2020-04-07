@@ -172,7 +172,7 @@ tasks.coveralls {
 }
 
 intellij {
-  def pluginList = ["PsiViewer:$psiViewerVersion", 'platform-langInjection',
+  def pluginList = ["PsiViewer:$psiViewerVersion", intelliLangPlugin,
                     project(':perl5.plugin'),
                     project(':perl5.transport.docker'),
                     project(':perl5.transport.wsl'),

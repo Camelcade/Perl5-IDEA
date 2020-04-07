@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,7 +35,7 @@ sourceSets {
 
 intellij {
   type 'IC'
-  intellij.plugins = ["PsiViewer:$psiViewerVersion", 'platform-langInjection', 'coverage', 'java']
+  intellij.plugins = ["PsiViewer:$psiViewerVersion", intelliLangPlugin, 'coverage', 'java']
 }
 
 prepareSandbox {
