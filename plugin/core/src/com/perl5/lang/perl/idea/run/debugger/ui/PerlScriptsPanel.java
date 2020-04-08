@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,8 +23,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
-import com.intellij.ui.FileColorManager;
-import com.intellij.ui.ListCellRendererWrapper;
+import com.intellij.ui.SimpleListCellRenderer;
 import com.intellij.ui.SortedListModel;
 import com.intellij.ui.components.JBList;
 import com.intellij.ui.components.JBScrollPane;
@@ -74,10 +73,10 @@ public class PerlScriptsPanel extends JPanel {
   }
 
   private void init() {
-    final JBList jbList = new JBList(myModel);
-    jbList.setCellRenderer(new ListCellRendererWrapper<PerlLoadedFileDescriptor>() {
+    final JBList<PerlLoadedFileDescriptor> jbList = new JBList<>(myModel);
+    jbList.setCellRenderer(new SimpleListCellRenderer<PerlLoadedFileDescriptor>() {
       @Override
-      public void customize(JList list, PerlLoadedFileDescriptor fileDescriptor, int index, boolean selected, boolean hasFocus) {
+      public void customize(@NotNull JList list, PerlLoadedFileDescriptor fileDescriptor, int index, boolean selected, boolean hasFocus) {
         String remotePath = fileDescriptor.getPath();
         String localPath = myDebugThread.getDebugProfileState().mapPathToLocal(remotePath);
         VirtualFile virtualFile = getVirtualFileByName(localPath);
@@ -86,7 +85,6 @@ public class PerlScriptsPanel extends JPanel {
         setText(fileDescriptor.getPresentableName());
 
         if (virtualFile != null) {
-          setBackground(FileColorManager.getInstance(myProject).getFileColor(virtualFile));
           setText(fileDescriptor.getPresentableName());
           setIcon(virtualFile.getFileType().getIcon());
         }
@@ -96,7 +94,7 @@ public class PerlScriptsPanel extends JPanel {
       @Override
       public void mouseClicked(MouseEvent e) {
         if (e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1) {
-          PerlLoadedFileDescriptor fileDescriptor = (PerlLoadedFileDescriptor)jbList.getSelectedValue();
+          PerlLoadedFileDescriptor fileDescriptor = jbList.getSelectedValue();
           String remotePath = fileDescriptor.getPath();
           String localPath = myDebugThread.getDebugProfileState().mapPathToLocal(remotePath);
           VirtualFile selectedVirtualFile = getVirtualFileByName(localPath);
@@ -136,7 +134,7 @@ public class PerlScriptsPanel extends JPanel {
 
   public void bulkChange(final List<PerlLoadedFileDescriptor> toAdd, final List<PerlLoadedFileDescriptor> toRemove) {
     // based on synthetic benchmarks, at 5000 items the performance of bulkChangeNow is definitely
-    // better than the naive method; the axact number might still need some tweaking
+    // better than the naive method; the exact number might still need some tweaking
     if (toAdd.size() + toRemove.size() < 5000) {
       for (PerlLoadedFileDescriptor value : toRemove) {
         remove(value);
@@ -150,7 +148,7 @@ public class PerlScriptsPanel extends JPanel {
     }
   }
 
-  // so the naive version is good for "small" added/removed; where the exact value needs to be determined with benchamrks;
+  // so the naive version is good for "small" added/removed; where the exact value needs to be determined with benchmarks;
   // there is a slightly more detailed analysis in the commit message
   private void bulkChangeNow(final List<PerlLoadedFileDescriptor> toAdd,
                              final List<PerlLoadedFileDescriptor> toRemove) {
