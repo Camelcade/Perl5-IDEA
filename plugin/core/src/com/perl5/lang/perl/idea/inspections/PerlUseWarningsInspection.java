@@ -18,10 +18,10 @@ package com.perl5.lang.perl.idea.inspections;
 
 import com.intellij.codeInspection.ProblemHighlightType;
 import com.intellij.codeInspection.ProblemsHolder;
+import com.intellij.lang.injection.InjectedLanguageManager;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiFile;
-import com.intellij.psi.impl.source.tree.injected.InjectedFileViewProvider;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.testFramework.LightVirtualFile;
 import com.perl5.PerlBundle;
@@ -40,10 +40,10 @@ public class PerlUseWarningsInspection extends PerlInspection {
     return new PerlVisitor() {
       @Override
       public void visitFile(@NotNull PsiFile file) {
-        if (file.getViewProvider() instanceof InjectedFileViewProvider ||
-            !file.isWritable() ||
+        if (!file.isWritable() ||
             !file.isPhysical() ||
-            file.getVirtualFile() instanceof LightVirtualFile) {
+            file.getVirtualFile() instanceof LightVirtualFile ||
+            InjectedLanguageManager.getInstance(file.getProject()).isInjectedFragment(file)) {
           return;
         }
 
