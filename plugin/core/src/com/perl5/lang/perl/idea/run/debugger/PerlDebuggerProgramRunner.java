@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,12 +17,12 @@
 package com.perl5.lang.perl.idea.run.debugger;
 
 import com.intellij.execution.ExecutionException;
+import com.intellij.execution.ExecutionManager;
 import com.intellij.execution.configurations.RunProfile;
-import com.intellij.execution.configurations.RunProfileState;
+import com.intellij.execution.configurations.RunnerSettings;
 import com.intellij.execution.executors.DefaultDebugExecutor;
-import com.intellij.execution.runners.DefaultProgramRunner;
 import com.intellij.execution.runners.ExecutionEnvironment;
-import com.intellij.execution.ui.RunContentDescriptor;
+import com.intellij.execution.runners.ProgramRunner;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.xdebugger.XDebugProcess;
 import com.intellij.xdebugger.XDebugProcessStarter;
@@ -31,7 +31,7 @@ import com.intellij.xdebugger.XDebuggerManager;
 import org.jetbrains.annotations.NotNull;
 
 
-public class PerlDebuggerProgramRunner extends DefaultProgramRunner {
+public class PerlDebuggerProgramRunner implements ProgramRunner<RunnerSettings> {
   @NotNull
   @Override
   public String getRunnerId() {
@@ -44,17 +44,18 @@ public class PerlDebuggerProgramRunner extends DefaultProgramRunner {
   }
 
   @Override
-  protected RunContentDescriptor doExecute(@NotNull final RunProfileState state, @NotNull final ExecutionEnvironment env)
-    throws ExecutionException {
+  public void execute(@NotNull ExecutionEnvironment env) throws ExecutionException {
     FileDocumentManager.getInstance().saveAllDocuments();
-    XDebugSession xDebugSession = XDebuggerManager.getInstance(env.getProject()).startSession(env, new XDebugProcessStarter() {
-      @NotNull
-      @Override
-      public XDebugProcess start(@NotNull XDebugSession session) throws ExecutionException {
-        return ((PerlDebuggableRunConfiguration)env.getRunProfile())
-          .createDebugProcess(((PerlDebuggableRunConfiguration)env.getRunProfile()).computeDebugAddress(null), session, null, env);
-      }
+    ExecutionManager.getInstance(env.getProject()).startRunProfile(env, state -> {
+      XDebugSession xDebugSession = XDebuggerManager.getInstance(env.getProject()).startSession(env, new XDebugProcessStarter() {
+        @NotNull
+        @Override
+        public XDebugProcess start(@NotNull XDebugSession session) throws ExecutionException {
+          return ((PerlDebuggableRunConfiguration)env.getRunProfile())
+            .createDebugProcess(((PerlDebuggableRunConfiguration)env.getRunProfile()).computeDebugAddress(null), session, null, env);
+        }
+      });
+      return xDebugSession.getRunContentDescriptor();
     });
-    return xDebugSession.getRunContentDescriptor();
   }
 }

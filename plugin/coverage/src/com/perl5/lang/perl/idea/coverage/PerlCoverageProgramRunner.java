@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,19 +20,20 @@ import com.intellij.coverage.CoverageExecutor;
 import com.intellij.coverage.CoverageHelper;
 import com.intellij.coverage.CoverageRunnerData;
 import com.intellij.execution.ExecutionException;
+import com.intellij.execution.ExecutionManager;
 import com.intellij.execution.configurations.ConfigurationInfoProvider;
 import com.intellij.execution.configurations.RunProfile;
-import com.intellij.execution.configurations.RunProfileState;
 import com.intellij.execution.configurations.RunnerSettings;
 import com.intellij.execution.process.ProcessHandler;
-import com.intellij.execution.runners.DefaultProgramRunner;
+import com.intellij.execution.runners.DefaultProgramRunnerKt;
 import com.intellij.execution.runners.ExecutionEnvironment;
+import com.intellij.execution.runners.ProgramRunner;
 import com.intellij.execution.ui.RunContentDescriptor;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class PerlCoverageProgramRunner extends DefaultProgramRunner {
+public class PerlCoverageProgramRunner implements ProgramRunner<RunnerSettings> {
   @NotNull
   @Override
   public String getRunnerId() {
@@ -50,19 +51,19 @@ public class PerlCoverageProgramRunner extends DefaultProgramRunner {
     return new CoverageRunnerData();
   }
 
-  @Nullable
   @Override
-  protected RunContentDescriptor doExecute(@NotNull RunProfileState state, @NotNull ExecutionEnvironment environment)
-    throws ExecutionException {
-    RunContentDescriptor descriptor = super.doExecute(new PerlCoverageProfileState(environment), environment);
-    if (descriptor == null) {
-      return null;
-    }
-    ProcessHandler processHandler = descriptor.getProcessHandler();
-    if (processHandler != null) {
-      CoverageHelper
-        .attachToProcess((GenericPerlRunConfiguration)environment.getRunProfile(), processHandler, environment.getRunnerSettings());
-    }
-    return descriptor;
+  public void execute(@NotNull ExecutionEnvironment environment) throws ExecutionException {
+    ExecutionManager.getInstance(environment.getProject()).startRunProfile(environment, state -> {
+      RunContentDescriptor descriptor = DefaultProgramRunnerKt.executeState(new PerlCoverageProfileState(environment), environment, this);
+      if (descriptor == null) {
+        return null;
+      }
+      ProcessHandler processHandler = descriptor.getProcessHandler();
+      if (processHandler != null) {
+        CoverageHelper
+          .attachToProcess((GenericPerlRunConfiguration)environment.getRunProfile(), processHandler, environment.getRunnerSettings());
+      }
+      return descriptor;
+    });
   }
 }
