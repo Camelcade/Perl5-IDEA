@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,8 +17,6 @@
 package com.perl5.lang.perl.idea.configuration.settings.sdk;
 
 import com.intellij.icons.AllIcons;
-import com.intellij.ide.util.treeView.AbstractTreeBuilder;
-import com.intellij.ide.util.treeView.AbstractTreeStructure;
 import com.intellij.ide.util.treeView.NodeDescriptor;
 import com.intellij.ide.util.treeView.NodeRenderer;
 import com.intellij.idea.ActionsBundle;
@@ -34,7 +32,6 @@ import com.intellij.openapi.fileChooser.FileElement;
 import com.intellij.openapi.fileChooser.actions.NewFolderAction;
 import com.intellij.openapi.fileChooser.ex.FileNodeDescriptor;
 import com.intellij.openapi.fileChooser.ex.FileSystemTreeImpl;
-import com.intellij.openapi.fileChooser.impl.FileTreeBuilder;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.options.UnnamedConfigurable;
 import com.intellij.openapi.projectRoots.impl.PerlModuleExtension;
@@ -50,15 +47,12 @@ import com.intellij.util.ui.JBUI;
 import com.intellij.util.ui.tree.TreeUtil;
 import com.perl5.lang.perl.idea.modules.PerlSourceRootType;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 
@@ -120,13 +114,8 @@ public class PerlContentEntriesTreeEditor implements UnnamedConfigurable, Dispos
                                               null) {
 
       @Override
-      protected AbstractTreeBuilder createTreeBuilder(JTree tree,
-                                                      DefaultTreeModel treeModel,
-                                                      AbstractTreeStructure treeStructure,
-                                                      Comparator<NodeDescriptor<?>> comparator,
-                                                      FileChooserDescriptor descriptor,
-                                                      @Nullable Runnable onInitialized) {
-        return new MyFileTreeBuilder(tree, treeModel, treeStructure, comparator, descriptor, onInitialized);
+      protected boolean useNewAsyncModel() {
+        return true;
       }
     };
     myFileSystemTree.showHiddens(true);
@@ -186,40 +175,6 @@ public class PerlContentEntriesTreeEditor implements UnnamedConfigurable, Dispos
     disposeUIResources();
   }
 
-  private static class MyNewFolderAction extends NewFolderAction implements CustomComponentAction {
-    private MyNewFolderAction() {
-      super(ActionsBundle.message("action.FileChooser.NewFolder.text"),
-            ActionsBundle.message("action.FileChooser.NewFolder.description"),
-            AllIcons.Actions.NewFolder);
-    }
-
-    @NotNull
-    @Override
-    public JComponent createCustomComponent(@NotNull Presentation presentation) {
-      return IconWithTextAction.createCustomComponentImpl(this, presentation);
-    }
-  }
-
-  private static class MyFileTreeBuilder extends FileTreeBuilder {
-    public MyFileTreeBuilder(JTree tree,
-                             DefaultTreeModel treeModel,
-                             AbstractTreeStructure treeStructure,
-                             Comparator<? super NodeDescriptor<?>> comparator,
-                             FileChooserDescriptor chooserDescriptor, Runnable onInitialized) {
-      super(tree, treeModel, treeStructure, comparator, chooserDescriptor, onInitialized);
-    }
-
-    @Override
-    protected boolean isAlwaysShowPlus(NodeDescriptor nodeDescriptor) {
-      return false; // need this in order to not show plus for empty directories
-    }
-  }
-
-  @NotNull
-  PerlModuleExtension getModifiableModel() {
-    return myModifiableModel;
-  }
-
   @NotNull
   VirtualFile[] getSelectedFiles() {
     final TreePath[] selectionPaths = myTree.getSelectionPaths();
@@ -239,7 +194,26 @@ public class PerlContentEntriesTreeEditor implements UnnamedConfigurable, Dispos
         selected.add(file);
       }
     }
-    return selected.toArray(new VirtualFile[selected.size()]);
+    return selected.toArray(VirtualFile.EMPTY_ARRAY);
+  }
+
+  @NotNull
+  PerlModuleExtension getModifiableModel() {
+    return myModifiableModel;
+  }
+
+  private static class MyNewFolderAction extends NewFolderAction implements CustomComponentAction {
+    private MyNewFolderAction() {
+      super(ActionsBundle.message("action.FileChooser.NewFolder.text"),
+            ActionsBundle.message("action.FileChooser.NewFolder.description"),
+            AllIcons.Actions.NewFolder);
+    }
+
+    @NotNull
+    @Override
+    public JComponent createCustomComponent(@NotNull Presentation presentation, @NotNull String place) {
+      return IconWithTextAction.createCustomComponentImpl(this, presentation, place);
+    }
   }
 
   private class MyTreeCellRenderer extends NodeRenderer {
@@ -256,7 +230,7 @@ public class PerlContentEntriesTreeEditor implements UnnamedConfigurable, Dispos
       if (!(userObject instanceof NodeDescriptor)) {
         return;
       }
-      final Object element = ((NodeDescriptor)userObject).getElement();
+      final Object element = ((NodeDescriptor<?>)userObject).getElement();
       if (!(element instanceof FileElement)) {
         return;
       }
