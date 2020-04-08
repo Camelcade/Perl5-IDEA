@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -771,7 +771,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
       }
       file.accept(new PsiElementVisitor() {
         @Override
-        public void visitElement(PsiElement element) {
+        public void visitElement(@NotNull PsiElement element) {
           Collections.addAll(references, element.getReferences());
           element.acceptChildren(this);
         }
@@ -991,7 +991,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     StringBuilder sb = new StringBuilder();
     getFile().accept(new PsiRecursiveElementVisitor() {
       @Override
-      public void visitElement(PsiElement element) {
+      public void visitElement(@NotNull PsiElement element) {
         if (element instanceof PerlPolyNamedElement) {
           sb.append("Poly-named provider: ").append(serializePsiElement(element)).append("\n");
           for (PerlDelegatingLightNamedElement namedElement : ((PerlPolyNamedElement<?>)element).getLightElements()) {

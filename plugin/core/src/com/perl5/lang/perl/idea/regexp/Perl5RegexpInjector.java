@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,7 +46,7 @@ public class Perl5RegexpInjector implements MultiHostInjector {
     boolean[] hasStarted = new boolean[]{false};
     context.acceptChildren(new PsiElementVisitor() {
       @Override
-      public void visitElement(PsiElement element) {
+      public void visitElement(@NotNull PsiElement element) {
         if (PsiUtilCore.getElementType(element) == REGEX_TOKEN) {
           if (!hasStarted[0]) {
             registrar.startInjecting(Perl5RegexpLanguage.INSTANCE);

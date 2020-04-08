@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -133,7 +133,7 @@ public abstract class PerlParserTestBase extends PerlLightTestCaseBase {
       private static final int TAB_WIDTH = 8;
 
       @Override
-      public void visitErrorElement(PsiErrorElement element) {
+      public void visitErrorElement(@NotNull PsiErrorElement element) {
         // Very dump approach since a corresponding Document is not available.
         String text = getFile().getText();
         String[] lines = StringUtil.splitByLinesKeepSeparators(text);

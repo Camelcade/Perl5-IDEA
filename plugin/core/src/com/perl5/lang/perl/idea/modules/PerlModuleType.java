@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -61,6 +61,7 @@ public class PerlModuleType extends ModuleType<ModuleBuilder> {
     return PerlBundle.message("perl.module.description");
   }
 
+  @NotNull
   @Override
   public Icon getNodeIcon(@Deprecated boolean isOpened) {
     return PerlIcons.PERL_LANGUAGE_ICON;

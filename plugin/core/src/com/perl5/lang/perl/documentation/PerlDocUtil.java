@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -268,7 +268,7 @@ public class PerlDocUtil implements PerlElementTypes {
 
     psiFile.accept(new PsiStubsAwareRecursiveVisitor() {
       @Override
-      public void visitElement(PsiElement element) {
+      public void visitElement(@NotNull PsiElement element) {
         if (pattern.accepts(element)) {
           result.add((PodCompositeElement)element);
           stop();
@@ -346,7 +346,7 @@ public class PerlDocUtil implements PerlElementTypes {
       private boolean stopProcessing = false;
 
       @Override
-      public void visitElement(PsiElement element) {
+      public void visitElement(@NotNull PsiElement element) {
         if (stopProcessing) {
           return;
         }
