@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ package com.perl5.lang.perl.psi;
 import com.intellij.lang.Language;
 import com.intellij.lang.LanguageParserDefinitions;
 import com.intellij.lang.ParserDefinition;
-import com.intellij.lang.StdLanguages;
+import com.intellij.lang.html.HTMLLanguage;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.MultiplePsiFilesPerDocumentFileViewProvider;
 import com.intellij.psi.PsiFile;
@@ -108,6 +108,6 @@ public abstract class PerlMultiplePsiFilesPerDocumentFileViewProvider
   @NotNull
   protected static Language calcTemplateLanguage(PsiManager manager, VirtualFile file) {
     Language result = TemplateDataLanguageMappings.getInstance(manager.getProject()).getMapping(file);
-    return result == null ? StdLanguages.HTML : result;
+    return result == null ? HTMLLanguage.INSTANCE : result;
   }
 }
