@@ -35,7 +35,7 @@ import java.util.List;
 
 public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implements PerlElementTypes {
   @Override
-  protected void collectNavigationMarkers(@NotNull PsiElement element, @NotNull Collection<? super RelatedItemLineMarkerInfo> result) {
+  protected void collectNavigationMarkers(@NotNull PsiElement element, @NotNull Collection<? super RelatedItemLineMarkerInfo<?>> result) {
     if (element instanceof PerlNamespaceDefinitionWithIdentifier) {
       addNamespaceMarkers((PerlNamespaceDefinitionWithIdentifier)element, result);
     }
@@ -82,7 +82,8 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
     }
   }
 
-  private RelatedItemLineMarkerInfo<?> getMarkerInfo(@NotNull NavigationGutterIconBuilder<?> builder, @NotNull PsiElement element) {
+  private RelatedItemLineMarkerInfo<?> getMarkerInfo(@NotNull NavigationGutterIconBuilder<PsiElement> builder,
+                                                     @NotNull PsiElement element) {
     while (element.getFirstChild() != null) {
       element = element.getFirstChild();
     }

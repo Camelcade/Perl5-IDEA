@@ -42,18 +42,20 @@ class PerlHighlightExitPointsHandler extends HighlightUsagesHandlerBase<PsiEleme
     myTarget = target;
   }
 
+  @NotNull
   @Override
   public List<PsiElement> getTargets() {
     return Collections.emptyList();
   }
 
   @Override
-  protected void selectTargets(List<PsiElement> targets, Consumer<List<PsiElement>> selectionConsumer) {
+  protected void selectTargets(@NotNull List<? extends PsiElement> targets,
+                               @NotNull Consumer<? super List<? extends PsiElement>> selectionConsumer) {
     selectionConsumer.consume(targets);
   }
 
   @Override
-  public void computeUsages(List<PsiElement> targets) {
+  public void computeUsages(@NotNull List<? extends PsiElement> targets) {
     PerlReturnScope returnScope = PsiTreeUtil.getParentOfType(myTarget, PerlReturnScope.class);
     if (returnScope == null) {
       return;

@@ -18,5 +18,4 @@ Caret offset: 10
 <% 
     if (<selection>$expr<caret></selection>);
     
-     %>
-
+ %>

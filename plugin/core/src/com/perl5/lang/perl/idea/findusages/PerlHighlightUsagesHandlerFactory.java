@@ -56,6 +56,7 @@ public class PerlHighlightUsagesHandlerFactory implements HighlightUsagesHandler
       myAdjustedOffset = adjustedOffset;
     }
 
+    @NotNull
     @Override
     public List<PsiElement> getTargets() {
       PsiElement namedElement =
@@ -97,19 +98,17 @@ public class PerlHighlightUsagesHandlerFactory implements HighlightUsagesHandler
           }
         }
       }
-      return null;
+      return Collections.emptyList();
     }
 
     @Override
-    protected void selectTargets(List<PsiElement> targets, Consumer<List<PsiElement>> selectionConsumer) {
+    protected void selectTargets(@NotNull List<? extends PsiElement> targets,
+                                 @NotNull Consumer<? super List<? extends PsiElement>> selectionConsumer) {
       selectionConsumer.consume(targets);
     }
 
     @Override
-    public void computeUsages(List<PsiElement> targets) {
-      if (targets == null) {
-        return;
-      }
+    public void computeUsages(@NotNull List<? extends PsiElement> targets) {
       for (PsiElement target : targets) {
         if (myFile.equals(target.getContainingFile()) && target instanceof PsiNameIdentifierOwner) {
           PsiElement nameIdentifier = ((PsiNameIdentifierOwner)target).getNameIdentifier();

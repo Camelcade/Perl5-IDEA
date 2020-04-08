@@ -57,18 +57,20 @@ public class PodUsagesHighlightingFactory extends HighlightUsagesHandlerFactoryB
       return null;
     }
     return new HighlightUsagesHandlerBase<PsiElement>(editor, file) {
+      @NotNull
       @Override
       public List<PsiElement> getTargets() {
         return Collections.singletonList(targetElement);
       }
 
       @Override
-      protected void selectTargets(List<PsiElement> targets, Consumer<List<PsiElement>> selectionConsumer) {
+      protected void selectTargets(@NotNull List<? extends PsiElement> targets,
+                                   @NotNull Consumer<? super List<? extends PsiElement>> selectionConsumer) {
         selectionConsumer.consume(targets);
       }
 
       @Override
-      public void computeUsages(List<PsiElement> targets) {
+      public void computeUsages(@NotNull List<? extends PsiElement> targets) {
         List<PodTitledSection> allTargetSections = PodLinkToSectionReference.getAllSynonymousSections((PodTitledSection)targetElement);
         if (allTargetSections.isEmpty()) {
           return;

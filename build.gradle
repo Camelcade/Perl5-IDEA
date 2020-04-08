@@ -62,6 +62,9 @@ allprojects {
   tasks.withType(JavaCompile) { options.encoding = 'UTF-8' }
 
   apply plugin: 'org.jetbrains.intellij'
+  repositories {
+    mavenCentral()
+  }
   version = "${pluginVersion}${platformBranch}${pluginBuild}"
 
   def isPlugin = pluginProjectsNames.contains(project.name)

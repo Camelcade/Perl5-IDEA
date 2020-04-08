@@ -18,5 +18,4 @@ Caret offset: 10
 <% 
     until (<selection>$expr<caret></selection>);
     
-     %>
-
+ %>

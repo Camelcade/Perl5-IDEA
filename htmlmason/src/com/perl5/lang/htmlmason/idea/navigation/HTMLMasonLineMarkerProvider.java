@@ -34,7 +34,7 @@ import java.util.List;
 
 public class HTMLMasonLineMarkerProvider extends RelatedItemLineMarkerProvider implements HTMLMasonElementTypes {
   @Override
-  protected void collectNavigationMarkers(@NotNull PsiElement element, @NotNull Collection<? super RelatedItemLineMarkerInfo> result) {
+  protected void collectNavigationMarkers(@NotNull PsiElement element, @NotNull Collection<? super RelatedItemLineMarkerInfo<?>> result) {
     if (element instanceof HTMLMasonFileImpl) {
       HTMLMasonFileImpl parentComponent = ((HTMLMasonFileImpl)element).getParentComponent();
       if (parentComponent != null) {

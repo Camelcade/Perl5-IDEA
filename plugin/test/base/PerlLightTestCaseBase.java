@@ -1791,7 +1791,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     assertNotNull(targetElement);
     PsiElement[] targetElements = {targetElement};
     Collection<UsageInfo> usages = myFixture.findUsages(targetElement);
-    List<UsageGroupingRule> rules = getActiveGroupingRules(new UsageViewSettings(true, true, true, true, true));
+    List<UsageGroupingRule> rules = getActiveGroupingRules(new UsageViewSettings(true, true, true, true, true, false));
     StringBuilder sb = new StringBuilder();
     usages.forEach(usageInfo -> {
       PsiElement element = Objects.requireNonNull(usageInfo.getElement());
@@ -1995,7 +1995,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     assertNotNull("Unable to find documentation provider for " + providerSource, documentationProvider);
     PsiElement documentationElement =
       documentationProvider.getDocumentationElementForLookupItem(PsiManager.getInstance(getProject()), elementObject, elementAtCaret);
-    if( documentationElement != null){
+    if (documentationElement == null) {
       LOG.warn("No documentation element found for " + elementObject);
     }
     String generatedDoc = documentationElement == null ? "": StringUtil.notNullize(documentationProvider.generateDoc(documentationElement, elementAtCaret));
