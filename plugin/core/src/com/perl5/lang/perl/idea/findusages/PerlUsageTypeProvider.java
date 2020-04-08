@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,12 +19,13 @@ package com.perl5.lang.perl.idea.findusages;
 import com.intellij.psi.PsiElement;
 import com.intellij.usages.impl.rules.UsageType;
 import com.intellij.usages.impl.rules.UsageTypeProvider;
+import com.perl5.PerlBundle;
 import com.perl5.lang.pod.PodLanguage;
 import org.jetbrains.annotations.Nullable;
 
 
 public class PerlUsageTypeProvider implements UsageTypeProvider {
-  public static final UsageType DOCUMENT_USAGE = new UsageType("Documentation");
+  public static final UsageType DOCUMENT_USAGE = new UsageType(() -> PerlBundle.message("perl.usage.type.documentation"));
 
   @Nullable
   @Override
