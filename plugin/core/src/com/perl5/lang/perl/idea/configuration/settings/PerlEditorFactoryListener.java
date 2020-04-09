@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -59,7 +59,7 @@ public class PerlEditorFactoryListener implements EditorFactoryListener {
 
   private static void checkForUpdates() {
     PropertiesComponent propertiesComponent = PropertiesComponent.getInstance();
-    long lastUpdate = propertiesComponent.getOrInitLong(KEY, 0);
+    long lastUpdate = propertiesComponent.getLong(KEY, 0);
     if (lastUpdate == 0 || System.currentTimeMillis() - lastUpdate > TimeUnit.DAYS.toMillis(1)) {
       ApplicationManager.getApplication().executeOnPooledThread(
         () -> {
