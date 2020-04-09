@@ -115,7 +115,7 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
         NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
           .create(AllIcons.Gutter.OverridenMethod)
           .setTargets(overridingSubs)
-          .setTooltipText("Overriden methods");
+          .setTooltipText("Overridden methods");
 
         result.add(getMarkerInfo(builder, nameIdentifier));
       }

@@ -2,35 +2,35 @@
 Targets: 1
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Some::Child::Package at 542 in supermethods.pl
 
-45 - 55: 'somemethod': Overriden methods
+45 - 55: 'somemethod': Overridden methods
 Targets: 1
 	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Some::Child::Package::somemethod at 621 in supermethods.pl
 
-63 - 79: 'somemethod_shift': Overriden methods
+63 - 79: 'somemethod_shift': Overridden methods
 Targets: 1
 	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Some::Child::Package::somemethod_shift($self) at 639 in supermethods.pl
 
-99 - 120: 'somemethod_shift_self': Overriden methods
+99 - 120: 'somemethod_shift_self': Overridden methods
 Targets: 1
 	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Some::Child::Package::somemethod_shift_self($self) at 675 in supermethods.pl
 
-151 - 168: 'somemethod_unpack': Overriden methods
+151 - 168: 'somemethod_unpack': Overridden methods
 Targets: 1
 	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Some::Child::Package::somemethod_unpack($self, %kwargs) at 728 in supermethods.pl
 
-216 - 231: 'CONSTANT_METHOD': Overriden methods
+216 - 231: 'CONSTANT_METHOD': Overridden methods
 Targets: 1
 	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Some::Child::Package::CONSTANT_METHOD; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 797 in supermethods.pl
 
-258 - 280: 'OTHER_CONSTANT_METHOD1': Overriden methods
+258 - 280: 'OTHER_CONSTANT_METHOD1': Overridden methods
 Targets: 1
 	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Some::Child::Package::OTHER_CONSTANT_METHOD1; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 839 in supermethods.pl
 
-291 - 313: 'OTHER_CONSTANT_METHOD2': Overriden methods
+291 - 313: 'OTHER_CONSTANT_METHOD2': Overridden methods
 Targets: 1
 	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Some::Child::Package::OTHER_CONSTANT_METHOD2; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 872 in supermethods.pl
 
-328 - 353: 'somemethod_with_lpe_block': Overriden methods
+328 - 353: 'somemethod_with_lpe_block': Overridden methods
 Targets: 1
 	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Some::Child::Package::somemethod_with_lpe_block($self) at 905 in supermethods.pl
 
@@ -69,4 +69,3 @@ Targets: 1
 909 - 934: 'somemethod_with_lpe_block': Overriding method
 Targets: 1
 	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Some::Parent::Package::somemethod_with_lpe_block($self) at 324 in supermethods.pl
-
