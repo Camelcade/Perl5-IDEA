@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -110,8 +110,8 @@ class PerlWslFileTransfer extends PerlHostFileTransfer<PerlWslData> {
   protected void doSyncHelpers() {
   }
 
+  @SuppressWarnings("RedundantThrows")
   @Override
   public void close() throws IOException {
-
   }
 }

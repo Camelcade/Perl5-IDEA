@@ -75,6 +75,7 @@ public abstract class PerlModuleBuilderBase<Settings extends PerlProjectGenerati
     return false;
   }
 
+  @SuppressWarnings("RedundantThrows")
   @Override
   public final void setupRootModel(@NotNull ModifiableRootModel modifiableRootModel) throws ConfigurationException {
     doAddContentEntry(modifiableRootModel);

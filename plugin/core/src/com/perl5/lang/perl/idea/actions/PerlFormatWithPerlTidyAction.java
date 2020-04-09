@@ -81,7 +81,7 @@ public class PerlFormatWithPerlTidyAction extends PurePerlActionBase {
   }
 
   @Nullable
-  private PerlCommandLine getPerlTidyCommandLine(@NotNull Project project) throws ExecutionException {
+  private PerlCommandLine getPerlTidyCommandLine(@NotNull Project project) {
     PerlSharedSettings sharedSettings = PerlSharedSettings.getInstance(project);
     VirtualFile perlTidyScript =
       ReadAction.compute(() -> PerlRunUtil.findLibraryScriptWithNotification(project, SCRIPT_NAME, PACKAGE_NAME));

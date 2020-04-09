@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.idea.annotators;
 
-import com.intellij.execution.ExecutionException;
 import com.intellij.execution.process.BaseProcessHandler;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.ExternalAnnotator;
@@ -62,7 +61,7 @@ public class PerlCriticAnnotator extends ExternalAnnotator<PerlFile, List<PerlCr
   }
 
   @Nullable
-  protected PerlCommandLine getPerlCriticCommandLine(Project project) throws ExecutionException {
+  protected PerlCommandLine getPerlCriticCommandLine(Project project) {
     PerlSharedSettings sharedSettings = PerlSharedSettings.getInstance(project);
     VirtualFile perlCriticScript =
       ReadAction.compute(() -> PerlRunUtil.findLibraryScriptWithNotification(project, SCRIPT_NAME, PACKAGE_NAME));

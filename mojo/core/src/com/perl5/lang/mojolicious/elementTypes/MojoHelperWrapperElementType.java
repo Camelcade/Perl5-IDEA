@@ -46,6 +46,7 @@ public class MojoHelperWrapperElementType extends PerlPolyNamedElementType<MojoH
     return new MojoHelperWrapperStub(parentStub, this, lightElementsStubs);
   }
 
+  @SuppressWarnings("RedundantThrows")
   @NotNull
   @Override
   protected MojoHelperWrapperStub deserialize(@NotNull StubInputStream dataStream,
