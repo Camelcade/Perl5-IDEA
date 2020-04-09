@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -72,14 +72,17 @@ public class PodDocumentationProvider extends PerlDocumentationProviderBase impl
 
   @Nullable
   @Override
-  public PsiElement getCustomDocumentationElement(@NotNull Editor editor, @NotNull PsiFile file, @Nullable PsiElement contextElement) {
+  public PsiElement getCustomDocumentationElement(@NotNull Editor editor,
+                                                  @NotNull PsiFile file,
+                                                  @Nullable PsiElement contextElement,
+                                                  int targetOffset) {
     if (contextElement == null || contextElement.getLanguage() != PodLanguage.INSTANCE) {
       return null;
     }
     IElementType elementType = PsiUtilCore.getElementType(contextElement);
 
     if (elementType == POD_ANGLE_LEFT) {
-      return getCustomDocumentationElement(editor, file, contextElement.getPrevSibling());
+      return getCustomDocumentationElement(editor, file, contextElement.getPrevSibling(), targetOffset);
     }
     else if (PodTokenSets.POD_FORMATTERS_TOKENSET.contains(elementType)) {
       return PerlDocUtil.resolveDoc("perlpod", contextElement.getText(), contextElement, true);
@@ -125,7 +128,7 @@ public class PodDocumentationProvider extends PerlDocumentationProviderBase impl
     return null;
   }
 
-  @Nullable
+  @NotNull
   private static String generateDocByIndex(@NotNull PodFormatterX element) {
     String indexText = element.getPresentableText();
     List<PsiElement> targets = new ArrayList<>();
