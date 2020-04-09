@@ -175,7 +175,7 @@ public class PerlCriticAnnotator extends ExternalAnnotator<PerlFile, List<PerlCr
         }
 
         if (warningRange != null) {
-          holder.createAnnotation(HighlightSeverity.WARNING, warningRange, descriptor.getMessage());
+          holder.newAnnotation(HighlightSeverity.WARNING, descriptor.getMessage()).range(warningRange).create();
         }
       }
     }
