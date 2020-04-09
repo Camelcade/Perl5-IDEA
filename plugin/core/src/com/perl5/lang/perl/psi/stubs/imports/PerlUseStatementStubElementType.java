@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,6 @@ import com.intellij.psi.stubs.IndexSink;
 import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
-import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementType;
@@ -32,6 +31,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 import static com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil.readString;
 import static com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil.readStringsList;
@@ -62,7 +62,7 @@ public class PerlUseStatementStubElementType extends PerlPolyNamedElementType<Pe
     return new PerlUseStatementStub(
       parentStub,
       psi.getNamespaceName(),
-      ObjectUtils.notNull(psi.getPackageName()),
+      Objects.requireNonNull(psi.getPackageName()),
       psi.getImportParameters(),
       lightElementsStubs
     );
@@ -74,8 +74,8 @@ public class PerlUseStatementStubElementType extends PerlPolyNamedElementType<Pe
                                              StubElement parentStub,
                                              @NotNull List<StubElement> lightElementsStubs) throws IOException {
     return new PerlUseStatementStub(parentStub,
-                                    ObjectUtils.notNull(readString(dataStream)),
-                                    ObjectUtils.notNull(readString(dataStream)),
+                                    Objects.requireNonNull(readString(dataStream)),
+                                    Objects.requireNonNull(readString(dataStream)),
                                     readStringsList(dataStream),
                                     lightElementsStubs);
   }

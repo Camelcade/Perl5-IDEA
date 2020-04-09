@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,6 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.util.ObjectUtils;
 import com.intellij.util.SmartList;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
@@ -127,7 +126,7 @@ public interface PerlAssignExpression extends PsiPerlExpr {
     }
     if (PerlContextType.isScalar(leftAssignPart)) {
       PsiElement lastItem = ContainerUtil.getLastItem(rightElements);
-      return new PerlAssignValueDescriptor(ObjectUtils.notNull(lastItem), PerlContextType.isList(lastItem) ? -1 : 0);
+      return new PerlAssignValueDescriptor(Objects.requireNonNull(lastItem), PerlContextType.isList(lastItem) ? -1 : 0);
     }
 
     PerlContextType leftContextType = PerlContextType.from(leftPartElement);

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,9 +20,10 @@ import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.ConfigurationTypeBase;
 import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.openapi.project.Project;
-import com.intellij.util.ObjectUtils;
 import com.perl5.PerlIcons;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 /**
  * @author VISTALL
@@ -49,6 +50,6 @@ public class PerlRunConfigurationType extends ConfigurationTypeBase {
 
   @NotNull
   public static PerlRunConfigurationType getInstance() {
-    return ObjectUtils.notNull(CONFIGURATION_TYPE_EP.findExtension(PerlRunConfigurationType.class));
+    return Objects.requireNonNull(CONFIGURATION_TYPE_EP.findExtension(PerlRunConfigurationType.class));
   }
 }
