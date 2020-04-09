@@ -18,7 +18,6 @@ package com.perl5.lang.perl.util;
 
 import com.intellij.codeInsight.daemon.DaemonCodeAnalyzer;
 import com.intellij.execution.ExecutionException;
-import com.intellij.execution.ExecutionManager;
 import com.intellij.execution.Executor;
 import com.intellij.execution.executors.DefaultRunExecutor;
 import com.intellij.execution.process.ProcessAdapter;
@@ -27,6 +26,7 @@ import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.process.ProcessListener;
 import com.intellij.execution.ui.ConsoleViewContentType;
 import com.intellij.execution.ui.RunContentDescriptor;
+import com.intellij.execution.ui.RunContentManager;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
@@ -480,7 +480,7 @@ public class PerlRunUtil {
       ObjectUtils.notNull(perlCommandLine.getConsoleIcon(), PerlIcons.PERL_LANGUAGE_ICON)
     );
 
-    ExecutionManager.getInstance(project).getContentManager().showRunContent(runExecutor, runContentDescriptor);
+    RunContentManager.getInstance(project).showRunContent(runExecutor, runContentDescriptor);
     if (processHandler != null) {
       consoleView.attachToProcess(processHandler);
       processHandler.startNotify();
