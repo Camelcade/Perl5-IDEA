@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,14 +45,14 @@ import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.LIGHT_SUB_DEFIN
 public class ConstantProcessor extends PerlPragmaProcessorBase {
   @NotNull
   @Override
-  public List<PerlDelegatingLightNamedElement> computeLightElementsFromPsi(@NotNull PerlUseStatementElement useStatementElement) {
+  public List<PerlDelegatingLightNamedElement<?>> computeLightElementsFromPsi(@NotNull PerlUseStatementElement useStatementElement) {
     PsiPerlExpr useArguments = useStatementElement.getExpr();
     if (useArguments == null) {
       return Collections.emptyList();
     }
     boolean multipleDefinition = useArguments instanceof PsiPerlAnonHash;
 
-    List<PerlDelegatingLightNamedElement> result = new ArrayList<>();
+    List<PerlDelegatingLightNamedElement<?>> result = new ArrayList<>();
     PerlHashUtil.processHashElements(useArguments, (keyElement, valElement) -> {
       if (useStatementElement.isAcceptableIdentifierElement(keyElement)) {
         result.add(new PerlLightConstantDefinitionElement(
@@ -75,8 +75,8 @@ public class ConstantProcessor extends PerlPragmaProcessorBase {
 
   @NotNull
   @Override
-  public List<PerlDelegatingLightNamedElement> computeLightElementsFromStubs(@NotNull PerlUseStatementElement useStatementElement,
-                                                                             @NotNull PerlUseStatementStub useStatementStub) {
+  public List<PerlDelegatingLightNamedElement<?>> computeLightElementsFromStubs(@NotNull PerlUseStatementElement useStatementElement,
+                                                                                @NotNull PerlUseStatementStub useStatementStub) {
     return useStatementStub.getLightNamedElementsStubs().stream()
       .filter(childStub -> childStub.getStubType() == LIGHT_SUB_DEFINITION)
       .map(childStub -> new PerlLightConstantDefinitionElement(useStatementElement, (PerlSubDefinitionStub)childStub))

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,7 +43,7 @@ public class PerlAttributeDefinition extends PerlLightMethodDefinitionElement<Pe
 
   public PerlAttributeDefinition(@NotNull PerlMooseAttributeWrapper wrapper,
                                  @NotNull String name,
-                                 @NotNull IStubElementType elementType,
+                                 @NotNull IStubElementType<?, ?> elementType,
                                  @Nullable PsiElement nameIdentifier,
                                  @Nullable String packageName,
                                  @NotNull List<PerlSubArgument> subArguments,

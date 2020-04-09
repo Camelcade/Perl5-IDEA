@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,7 +49,7 @@ public class PerlLightSubDefinitionsIndex extends PerlStubIndexBase<PerlPolyName
                                               @NotNull Processor<PerlSubDefinitionElement> processor) {
     return StubIndex.getInstance().processElements(KEY, canonicalName, project, scope, PerlPolyNamedElement.class, polyNamedElement -> {
       ProgressManager.checkCanceled();
-      for (PerlDelegatingLightNamedElement lightNamedElement : ((PerlPolyNamedElement<?>)polyNamedElement).getLightElements()) {
+      for (PerlDelegatingLightNamedElement<?> lightNamedElement : ((PerlPolyNamedElement<?>)polyNamedElement).getLightElements()) {
         if (lightNamedElement instanceof PerlSubDefinitionElement &&
             canonicalName.equals(((PerlSubDefinitionElement)lightNamedElement).getCanonicalName())) {
           if (!processor.process((PerlSubDefinitionElement)lightNamedElement)) {

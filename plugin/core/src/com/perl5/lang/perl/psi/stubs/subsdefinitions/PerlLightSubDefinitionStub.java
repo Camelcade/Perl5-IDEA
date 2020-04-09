@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,11 +31,11 @@ import java.util.List;
 
 public class PerlLightSubDefinitionStub extends PerlSubDefinitionStub implements PerlLightElementStub {
   @Nullable
-  private final StubElement myParent;
+  private final StubElement<?> myParent;
 
   private boolean myIsImplicit = false;
 
-  public PerlLightSubDefinitionStub(@Nullable StubElement parent,
+  public PerlLightSubDefinitionStub(@Nullable StubElement<?> parent,
                                     String packageName,
                                     String subName,
                                     @NotNull List<PerlSubArgument> arguments,
@@ -47,7 +47,7 @@ public class PerlLightSubDefinitionStub extends PerlSubDefinitionStub implements
   }
 
   @Override
-  public StubElement getParentStub() {
+  public StubElement<?> getParentStub() {
     return myParent;
   }
 

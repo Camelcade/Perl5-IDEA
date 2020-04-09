@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,11 +26,11 @@ import org.jetbrains.annotations.Nullable;
 
 public class PerlLightNamespaceDefinitionStub extends PerlNamespaceDefinitionStub implements PerlLightElementStub {
   @Nullable
-  private final StubElement myParent;
+  private final StubElement<?> myParent;
 
   private boolean myIsImplicit = false;
 
-  public PerlLightNamespaceDefinitionStub(@Nullable StubElement parent,
+  public PerlLightNamespaceDefinitionStub(@Nullable StubElement<?> parent,
                                           IStubElementType elementType,
                                           @NotNull PerlNamespaceDefinitionData data) {
     super(null, elementType, data);
@@ -38,7 +38,7 @@ public class PerlLightNamespaceDefinitionStub extends PerlNamespaceDefinitionStu
   }
 
   @Override
-  public StubElement getParentStub() {
+  public StubElement<?> getParentStub() {
     return myParent;
   }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,7 +56,7 @@ public class PerlConsoleFileLinkFilter implements Filter {
     int lineStartOffset = endOffset - textLine.length();
     int fileStartOffset = matcher.start(1);
     int lineNumberEndOffset = matcher.end(2);
-    PerlHostData hostData = myHostDataContainer.getHostData();
+    PerlHostData<?, ?> hostData = myHostDataContainer.getHostData();
     String filePath = hostData == null ? matcher.group(1) : hostData.getLocalPath(matcher.group(1));
     int line;
     try{

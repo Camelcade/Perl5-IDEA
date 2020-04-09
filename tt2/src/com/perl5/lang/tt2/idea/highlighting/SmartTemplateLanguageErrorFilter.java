@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,22 +32,22 @@ import java.util.*;
  * This is an extended TemplateLanguageErrorFilter, providing additional method for checking errorElement
  */
 public abstract class SmartTemplateLanguageErrorFilter extends HighlightErrorFilter {
-  private static final Key<Class> TEMPLATE_VIEW_PROVIDER_CLASS_KEY = Key.create("TEMPLATE_VIEW_PROVIDER_CLASS");
+  private static final Key<Class<?>> TEMPLATE_VIEW_PROVIDER_CLASS_KEY = Key.create("TEMPLATE_VIEW_PROVIDER_CLASS");
   @NotNull
   private final TokenSet myTemplateExpressionStartTokens;
   @NotNull
-  private final Class myTemplateFileViewProviderClass;
+  private final Class<?> myTemplateFileViewProviderClass;
   private final Set<Language> knownLanguageSet;
 
   protected SmartTemplateLanguageErrorFilter(
     @NotNull final TokenSet templateExpressionStartTokens,
-    @NotNull final Class templateFileViewProviderClass) {
+    @NotNull final Class<?> templateFileViewProviderClass) {
     this(templateExpressionStartTokens, templateFileViewProviderClass, new String[0]);
   }
 
   protected SmartTemplateLanguageErrorFilter(
     @NotNull final TokenSet templateExpressionStartTokens,
-    @NotNull final Class templateFileViewProviderClass,
+    @NotNull final Class<?> templateFileViewProviderClass,
     @NotNull final String... knownSubLanguageNames) {
     myTemplateExpressionStartTokens = TokenSet.create(templateExpressionStartTokens.getTypes());
     myTemplateFileViewProviderClass = templateFileViewProviderClass;
@@ -70,7 +70,7 @@ public abstract class SmartTemplateLanguageErrorFilter extends HighlightErrorFil
       //
       // Immediately discard filters with non-matching template class if already known
       //
-      Class templateClass = element.getUserData(TEMPLATE_VIEW_PROVIDER_CLASS_KEY);
+      Class<?> templateClass = element.getUserData(TEMPLATE_VIEW_PROVIDER_CLASS_KEY);
       if (templateClass != null && (templateClass != myTemplateFileViewProviderClass)) {
         return true;
       }
@@ -93,12 +93,9 @@ public abstract class SmartTemplateLanguageErrorFilter extends HighlightErrorFil
       //
       // An error can occur at template element or before it. Check both.
       //
-      if (shouldIgnorePrefixErrorAt(viewProvider, offset)
-          || shouldIgnorePrefixErrorAt(viewProvider, offset + 1)
-          || shouldIgnoreErrorElement(element)
-      ) {
-        return false;
-      }
+      return !shouldIgnorePrefixErrorAt(viewProvider, offset)
+             && !shouldIgnorePrefixErrorAt(viewProvider, offset + 1)
+             && !shouldIgnoreErrorElement(element);
     }
     return true;
   }

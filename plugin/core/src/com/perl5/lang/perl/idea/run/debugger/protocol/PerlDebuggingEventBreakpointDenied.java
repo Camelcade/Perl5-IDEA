@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class PerlDebuggingEventBreakpointDenied extends PerlDebuggingEventBreakpointBase {
   @Override
-  protected void processBreakPoint(@NotNull XLineBreakpoint breakpoint, XDebugSession session) {
+  protected void processBreakPoint(@NotNull XLineBreakpoint<?> breakpoint, XDebugSession session) {
     XDebuggerManager.getInstance(session.getProject()).getBreakpointManager().updateBreakpointPresentation(
       breakpoint,
       AllIcons.Debugger.Db_invalid_breakpoint,

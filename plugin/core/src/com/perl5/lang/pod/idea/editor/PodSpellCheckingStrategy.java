@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,7 +32,7 @@ import static com.perl5.lang.pod.lexer.PodElementTypesGenerated.POD_IDENTIFIER;
 public class PodSpellCheckingStrategy extends SpellcheckingStrategy {
   @NotNull
   @Override
-  public Tokenizer getTokenizer(PsiElement element) {
+  public Tokenizer<?> getTokenizer(PsiElement element) {
     IElementType elementType = PsiUtilCore.getElementType(element);
     if (elementType == POD_IDENTIFIER) {
       PsiElement namedElement = TargetElementUtil.getInstance().getNamedElement(element, 0);

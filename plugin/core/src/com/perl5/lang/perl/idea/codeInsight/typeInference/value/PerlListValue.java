@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -104,7 +104,7 @@ abstract class PerlListValue extends PerlValue {
     return result;
   }
 
-  protected static abstract class Builder<Self extends PerlListValue.Builder> {
+  protected static abstract class Builder<Self extends PerlListValue.Builder<?>> {
     protected final List<PerlValue> myElements = new ArrayList<>();
 
     protected Builder() {

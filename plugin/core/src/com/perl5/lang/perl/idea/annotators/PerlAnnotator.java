@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -88,7 +88,7 @@ public class PerlAnnotator extends PerlBaseAnnotator {
           ((PerlUseStatementElement)element).getPackageProcessor() instanceof ConstantProcessor) {
         subAttribute = PerlSyntaxHighlighter.PERL_CONSTANT;
       }
-      for (PerlDelegatingLightNamedElement lightNamedElement : ((PerlPolyNamedElement<?>)element).getLightElements()) {
+      for (PerlDelegatingLightNamedElement<?> lightNamedElement : ((PerlPolyNamedElement<?>)element).getLightElements()) {
         if (lightNamedElement.isImplicit()) {
           continue;
         }

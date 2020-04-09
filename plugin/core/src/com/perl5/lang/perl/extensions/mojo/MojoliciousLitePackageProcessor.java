@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -63,8 +63,8 @@ public class MojoliciousLitePackageProcessor extends PerlPackageProcessorBase im
 
   @NotNull
   @Override
-  public List<PerlDelegatingLightNamedElement> computeLightElementsFromPsi(@NotNull PerlUseStatementElement useStatementElement) {
-    List<PerlDelegatingLightNamedElement> result = new ArrayList<>();
+  public List<PerlDelegatingLightNamedElement<?>> computeLightElementsFromPsi(@NotNull PerlUseStatementElement useStatementElement) {
+    List<PerlDelegatingLightNamedElement<?>> result = new ArrayList<>();
     String contextNamespace = useStatementElement.getNamespaceName();
     List<PerlValue> constructorArguments = Arrays.asList(PerlScalarValue.create("moniker"), PerlValues.DUMMY_SCALAR);
     // there is a moniker argument, but it is meaningless here
@@ -102,8 +102,8 @@ public class MojoliciousLitePackageProcessor extends PerlPackageProcessorBase im
 
   @NotNull
   @Override
-  public List<PerlDelegatingLightNamedElement> computeLightElementsFromStubs(@NotNull PerlUseStatementElement useStatementElement,
-                                                                             @NotNull PerlUseStatementStub useStatementStub) {
+  public List<PerlDelegatingLightNamedElement<?>> computeLightElementsFromStubs(@NotNull PerlUseStatementElement useStatementElement,
+                                                                                @NotNull PerlUseStatementStub useStatementStub) {
     return computeLightElementsFromPsi(useStatementElement);
   }
 }

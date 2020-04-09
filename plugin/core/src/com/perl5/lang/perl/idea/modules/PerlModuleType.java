@@ -43,7 +43,7 @@ public class PerlModuleType extends ModuleType<ModuleBuilder> {
       }
 
       @Override
-      public ModuleType getModuleType() {
+      public ModuleType<?> getModuleType() {
         return PerlModuleType.this;
       }
     };

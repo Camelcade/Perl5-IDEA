@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,12 +21,12 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.ComboBox;
 import com.intellij.openapi.ui.LabeledComponent;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.ui.CollectionComboBoxModel;
 import com.intellij.ui.ColoredListCellRenderer;
 import com.intellij.ui.DocumentAdapter;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.run.PerlConfigurationEditorBase;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugOptionsSets;
-import org.jdesktop.swingx.combobox.MapComboBoxModel;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -37,6 +37,7 @@ import java.awt.*;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Objects;
 
 import static com.perl5.lang.perl.idea.run.debugger.PerlDebugProfileState.*;
@@ -46,7 +47,7 @@ class PerlRemoteDebuggingConfigurationEditor extends PerlConfigurationEditorBase
 
 
   private JTextField myWorkingDirectoryComponent;
-  private ComboBox myPerlRole;
+  private ComboBox<String> myPerlRole;
   private JTextField myDebuggingHost;
   private JFormattedTextField myDebuggingPort;
   private JTextField myGeneratedCommandLine;
@@ -97,8 +98,7 @@ class PerlRemoteDebuggingConfigurationEditor extends PerlConfigurationEditorBase
     workingDirectory.setLabelLocation(BorderLayout.WEST);
     debugPanel.add(workingDirectory);
 
-    //noinspection Since15
-    myPerlRole = new ComboBox(new MapComboBoxModel<>(PerlDebugOptionsSets.ROLE_OPTIONS)) {
+    myPerlRole = new ComboBox<String>(new CollectionComboBoxModel<>(new ArrayList<>(PerlDebugOptionsSets.ROLE_OPTIONS.keySet()))) {
       @Override
       public void setRenderer(ListCellRenderer renderer) {
         super.setRenderer(new ColoredListCellRenderer<String>() {

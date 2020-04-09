@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,7 +56,7 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
   final HTMLMasonSettings mySettings;
 
   protected CollectionListModel<String> substitutedExtensionsModel;
-  protected JBList substitutedExtensionsList;
+  protected JBList<String> substitutedExtensionsList;
   protected JPanel substitutedExtensionsPanel;
 
   protected JTextField autohandlerName;
@@ -173,7 +173,6 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
   }
 
   protected void createSubstitutedExtensionsComponent(FormBuilder builder) {
-    //noinspection Since15
     substitutedExtensionsModel = new CollectionListModel<>();
     substitutedExtensionsList = new JBList<>(substitutedExtensionsModel);
     substitutedExtensionsPanel =

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,7 +32,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class PerlTerminalExecutionConsole extends TerminalExecutionConsole implements PerlConsoleView {
   @Nullable
-  private PerlHostData myHostData;
+  private PerlHostData<?, ?> myHostData;
 
   public PerlTerminalExecutionConsole(@NotNull Project project) {
     super(project, null);
@@ -40,12 +40,12 @@ public class PerlTerminalExecutionConsole extends TerminalExecutionConsole imple
   }
 
   @Nullable
-  public PerlHostData getHostData() {
+  public PerlHostData<?, ?> getHostData() {
     return myHostData;
   }
 
   @NotNull
-  public PerlTerminalExecutionConsole withHostData(@Nullable PerlHostData hostData) {
+  public PerlTerminalExecutionConsole withHostData(@Nullable PerlHostData<?, ?> hostData) {
     myHostData = hostData;
     return this;
   }
@@ -54,8 +54,7 @@ public class PerlTerminalExecutionConsole extends TerminalExecutionConsole imple
    * This is a copy-paste of {@link ConsoleViewImpl#computeConsoleFilters(com.intellij.openapi.project.Project, com.intellij.psi.search.GlobalSearchScope)}
    * Must be fixed in the platform
    */
-  @NotNull
-  public static ConsoleView addFiltersToConsole(@NotNull Project project, @NotNull ConsoleView console) {
+  public static void addFiltersToConsole(@NotNull Project project, @NotNull ConsoleView console) {
     GlobalSearchScope searchScope = GlobalSearchScope.allScope(project);
     for (ConsoleFilterProvider eachProvider : ConsoleFilterProvider.FILTER_PROVIDERS.getExtensionList()) {
       Filter[] filters;
@@ -72,6 +71,5 @@ public class PerlTerminalExecutionConsole extends TerminalExecutionConsole imple
         console.addMessageFilter(filter);
       }
     }
-    return console;
   }
 }

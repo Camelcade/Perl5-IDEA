@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,7 +56,7 @@ public class PerlClassAccessorWrapper extends PerlPolyNamedNestedCallElementBase
 
   @NotNull
   @Override
-  protected List<PerlDelegatingLightNamedElement> computeLightElementsFromStubs(@NotNull PerlClassAccessorWrapperStub stub) {
+  protected List<PerlDelegatingLightNamedElement<?>> computeLightElementsFromStubs(@NotNull PerlClassAccessorWrapperStub stub) {
     return stub.getLightNamedElementsStubs().stream()
       .filter(childStub -> childStub.getStubType() == CLASS_ACCESSOR_METHOD)
       .map(childStub -> new PerlClassAccessorMethod(this, (PerlSubDefinitionStub)childStub))
@@ -65,7 +65,7 @@ public class PerlClassAccessorWrapper extends PerlPolyNamedNestedCallElementBase
 
   @NotNull
   @Override
-  public List<PerlDelegatingLightNamedElement> computeLightElementsFromPsi() {
+  public List<PerlDelegatingLightNamedElement<?>> computeLightElementsFromPsi() {
     String packageName = PerlPackageUtil.getContextNamespaceName(this);
     if (StringUtil.isEmpty(packageName)) {
       return Collections.emptyList();
@@ -76,7 +76,7 @@ public class PerlClassAccessorWrapper extends PerlPolyNamedNestedCallElementBase
       return Collections.emptyList();
     }
 
-    List<PerlDelegatingLightNamedElement> result = new ArrayList<>();
+    List<PerlDelegatingLightNamedElement<?>> result = new ArrayList<>();
     for (PsiElement listElement : listElements) {
       if (!isAcceptableIdentifierElement(listElement)) {
         continue;
@@ -103,7 +103,7 @@ public class PerlClassAccessorWrapper extends PerlPolyNamedNestedCallElementBase
     if (!isFollowBestPractice()) {
       return Collections.singletonList(PerlClassAccessorMethod.SIMPLE_COMPUTATION);
     }
-    IStubElementType elementType = getElementType();
+    IStubElementType<?, ?> elementType = getElementType();
     if (elementType == CLASS_ACCESSOR_WRAPPER_RO) {
       return Collections.singletonList(GETTER_COMPUTATION);
     }

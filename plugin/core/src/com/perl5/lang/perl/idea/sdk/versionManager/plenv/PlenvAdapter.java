@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,7 +46,7 @@ public class PlenvAdapter extends PerlVersionManagerAdapter {
   private static final String PLENV_VERSIONS = "versions";
 
   public PlenvAdapter(@NotNull String versionManagerPath,
-                      @NotNull PerlHostData hostData) {
+                      @NotNull PerlHostData<?, ?> hostData) {
     super(versionManagerPath, hostData);
   }
 

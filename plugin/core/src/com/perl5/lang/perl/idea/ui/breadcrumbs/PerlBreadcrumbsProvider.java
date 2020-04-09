@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -84,7 +84,7 @@ public class PerlBreadcrumbsProvider implements BreadcrumbsProvider {
 
     PerlPolyNamedElement<?> polyNamedElement = PsiTreeUtil.getParentOfType(nearestParent, PerlPolyNamedElement.class);
     if (polyNamedElement != null) {
-      for (PerlDelegatingLightNamedElement lightNamedElement : polyNamedElement.getLightElements()) {
+      for (PerlDelegatingLightNamedElement<?> lightNamedElement : polyNamedElement.getLightElements()) {
         if (lightNamedElement instanceof PerlSubDefinitionElement &&
             exprBlock.equals(((PerlSubDefinitionElement)lightNamedElement).getSubDefinitionBody())) {
           return lightNamedElement;

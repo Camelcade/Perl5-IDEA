@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,9 +46,9 @@ public abstract class PerlVersionManagerAdapter {
   @NotNull
   private final String myVersionManagerPath;
   @NotNull
-  private final PerlHostData myHostData;
+  private final PerlHostData<?, ?> myHostData;
 
-  public PerlVersionManagerAdapter(@NotNull String versionManagerPath, @NotNull PerlHostData hostData) {
+  public PerlVersionManagerAdapter(@NotNull String versionManagerPath, @NotNull PerlHostData<?, ?> hostData) {
     myVersionManagerPath = versionManagerPath;
     myHostData = hostData;
   }
@@ -59,7 +59,7 @@ public abstract class PerlVersionManagerAdapter {
   }
 
   @NotNull
-  public PerlHostData getHostData() {
+  public PerlHostData<?, ?> getHostData() {
     return myHostData;
   }
 
@@ -135,7 +135,7 @@ public abstract class PerlVersionManagerAdapter {
   }
 
   /**
-   * @return output of perlbew command or null if error happened
+   * @return output of perlbrew command or null if error happened
    */
   @Nullable
   protected List<String> getOutput(@NotNull PerlCommandLine commandLine) {

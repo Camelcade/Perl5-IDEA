@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -60,7 +60,7 @@ public class PerlLineMarkersTest extends PerlLightTestCase {
     StringBuilder b = new StringBuilder();
     for (GutterMark gutterMarker : allMarkers) {
       if (gutterMarker instanceof LineMarkerInfo.LineMarkerGutterIconRenderer) {
-        LineMarkerInfo lineMarkerInfo = ((LineMarkerInfo.LineMarkerGutterIconRenderer)gutterMarker).getLineMarkerInfo();
+        LineMarkerInfo<?> lineMarkerInfo = ((LineMarkerInfo.LineMarkerGutterIconRenderer<?>)gutterMarker).getLineMarkerInfo();
         b.append(lineMarkerInfo.startOffset).append(" - ").append(lineMarkerInfo.endOffset).append(": ")
           .append('\'')
           .append(text, lineMarkerInfo.startOffset, lineMarkerInfo.endOffset)
@@ -74,7 +74,7 @@ public class PerlLineMarkersTest extends PerlLightTestCase {
           continue;
         }
 
-        Collection<GotoRelatedItem> gotoRelatedItems = ((RelatedItemLineMarkerInfo)lineMarkerInfo).createGotoRelatedItems();
+        Collection<? extends GotoRelatedItem> gotoRelatedItems = ((RelatedItemLineMarkerInfo<?>)lineMarkerInfo).createGotoRelatedItems();
         b.append("Targets: ").append(gotoRelatedItems.size()).append("\n");
 
         for (GotoRelatedItem gotoRelatedItem : gotoRelatedItems) {

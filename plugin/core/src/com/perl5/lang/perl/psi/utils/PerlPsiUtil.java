@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -161,7 +161,6 @@ public class PerlPsiUtil implements PerlElementTypes {
   }
 
   private static void collectStringContentsRecursively(PsiElement run, List<String> result) {
-    //noinspection ConstantConditions
     while (run != null) {
       if (run instanceof PerlString) {
         result.add(ElementManipulators.getValueText(run));
@@ -185,8 +184,8 @@ public class PerlPsiUtil implements PerlElementTypes {
    * @return manipulator
    */
   @NotNull
-  public static ElementManipulator getManipulator(PsiElement element) {
-    ElementManipulator manipulator = ElementManipulators.getManipulator(element);
+  public static ElementManipulator<? super PsiElement> getManipulator(PsiElement element) {
+    ElementManipulator<? super PsiElement> manipulator = ElementManipulators.getManipulator(element);
     if (manipulator == null) {
       throw new IncorrectOperationException("Unable to find manipulator for " + element.getClass().getName());
     }
@@ -213,7 +212,6 @@ public class PerlPsiUtil implements PerlElementTypes {
     if (StringUtil.isEmpty(newName)) {
       return element;
     }
-    //noinspection unchecked
     return PerlPsiUtil.getManipulator(element).handleContentChange(element, newName);
   }
 
@@ -252,14 +250,14 @@ public class PerlPsiUtil implements PerlElementTypes {
 
   @Nullable
   public static PsiElement getParentElementOrStub(PsiElement currentElement,
-                                                  @Nullable final Class<? extends StubElement> stubClass,
+                                                  @Nullable final Class<? extends StubElement<?>> stubClass,
                                                   @NotNull final Class<? extends PsiElement> psiClass
   ) {
 
-    Stub stub = currentElement instanceof StubBasedPsiElement ? ((StubBasedPsiElement)currentElement).getStub() : null;
+    Stub stub = currentElement instanceof StubBasedPsiElement ? ((StubBasedPsiElement<?>)currentElement).getStub() : null;
     if (stub != null && stubClass != null) {
       Stub parentStub = getParentStubOfType(stub, stubClass);
-      return parentStub == null ? null : ((StubBase)parentStub).getPsi();
+      return parentStub == null ? null : ((StubBase<?>)parentStub).getPsi();
     }
     else {
       return PsiTreeUtil.getParentOfType(currentElement, psiClass);
@@ -299,7 +297,7 @@ public class PerlPsiUtil implements PerlElementTypes {
     };
 
     if (rootElement instanceof StubBasedPsiElement) {
-      Stub rootElementStub = ((StubBasedPsiElement)rootElement).getStub();
+      Stub rootElementStub = ((StubBasedPsiElement<?>)rootElement).getStub();
 
       if (rootElementStub != null) {
         processElementsFromStubs(
@@ -321,7 +319,7 @@ public class PerlPsiUtil implements PerlElementTypes {
 
   public static boolean processElementsFromStubs(
     @Nullable Stub stub,
-    @Nullable Processor<PsiElement> processor,
+    @Nullable Processor<? super PsiElement> processor,
     @Nullable Class<? extends PsiElement> avoidPsiClass
   ) {
     if (stub == null || processor == null) {
@@ -330,7 +328,7 @@ public class PerlPsiUtil implements PerlElementTypes {
 
     for (Stub childStub : stub.getChildrenStubs()) {
       ProgressManager.checkCanceled();
-      PsiElement childPsi = ((StubElement)childStub).getPsi();
+      PsiElement childPsi = ((StubElement<?>)childStub).getPsi();
       if (!processor.process(childPsi)) {
         return false;
       }
@@ -379,7 +377,7 @@ public class PerlPsiUtil implements PerlElementTypes {
     }
 
     if (element instanceof PerlPolyNamedElement) {
-      for (PerlDelegatingLightNamedElement lightNamedElement : ((PerlPolyNamedElement<?>)element).getLightElements()) {
+      for (PerlDelegatingLightNamedElement<?> lightNamedElement : ((PerlPolyNamedElement<?>)element).getLightElements()) {
         ProgressManager.checkCanceled();
         if (!processor.process(lightNamedElement)) {
           return false;
@@ -976,7 +974,7 @@ public class PerlPsiUtil implements PerlElementTypes {
       stubElement = ((PsiFileImpl)element).getStub();
     }
     else if (element instanceof StubBasedPsiElement) {
-      stubElement = ((StubBasedPsiElement)element).getStub();
+      stubElement = ((StubBasedPsiElement<?>)element).getStub();
     }
     return stubElement;
   }
@@ -989,20 +987,13 @@ public class PerlPsiUtil implements PerlElementTypes {
     }
   }
 
+  @SuppressWarnings("UnusedReturnValue")
   public static boolean processSubElements(@Nullable PsiElement rootElement, @NotNull PsiElementProcessor<PerlSubElement> processor) {
     StubElement<?> stubElement = getStubFromElement(rootElement);
     if (stubElement != null) {
       return processElementsFromStubs(stubElement, it -> !(it instanceof PerlSubElement) || processor.execute((PerlSubElement)it), null);
     }
     return processElementsFromPsi(rootElement, it -> !(it instanceof PerlSubElement) || processor.execute((PerlSubElement)it), null);
-  }
-
-  /**
-   * @return removes meaningless elements from the {@code source} list
-   */
-  @NotNull
-  public static <T extends PsiElement> List<T> cleanupChildren(@NotNull List<T> source) {
-    return ContainerUtil.filter(source, it -> !PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(PsiUtilCore.getElementType(it)));
   }
 
   /**

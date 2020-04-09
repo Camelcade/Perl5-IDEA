@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -155,7 +155,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
     if (!includedVirtualFiles.contains(getVirtualFile())) {
       includedVirtualFiles.add(getVirtualFile());
 
-      StubElement fileStub = getStub();
+      StubElement<?> fileStub = getStub();
 
       if (fileStub == null) {
         //				System.err.println("Collecting from psi for " + getVirtualFile());
@@ -172,10 +172,10 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
     if (!includedVirtualFiles.contains(virtualFile)) {
       includedVirtualFiles.add(virtualFile);
 
-      ObjectStubTree objectStubTree = StubTreeLoader.getInstance().readOrBuild(getProject(), virtualFile, null);
+      ObjectStubTree<?> objectStubTree = StubTreeLoader.getInstance().readOrBuild(getProject(), virtualFile, null);
       if (objectStubTree != null) {
         //				System.err.println("Collecting from stub for " + virtualFile);
-        collectRequiresFromStub((PsiFileStub)objectStubTree.getRoot(), includedVirtualFiles);
+        collectRequiresFromStub((PsiFileStub<?>)objectStubTree.getRoot(), includedVirtualFiles);
       }
       else {
         //				System.err.println("Collecting from psi for " + virtualFile);
@@ -187,13 +187,11 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
     }
   }
 
-  protected void collectRequiresFromStub(@NotNull StubElement currentStub, Set<VirtualFile> includedVirtualFiles) {
+  protected void collectRequiresFromStub(@NotNull StubElement<?> currentStub, Set<VirtualFile> includedVirtualFiles) {
     VirtualFile virtualFile = null;
     if (currentStub instanceof PerlUseStatementStub) {
       String packageName = ((PerlUseStatementStub)currentStub).getPackageName();
-      if (packageName != null) {
-        virtualFile = PerlPackageUtil.resolvePackageNameToVirtualFile(this, packageName);
-      }
+      virtualFile = PerlPackageUtil.resolvePackageNameToVirtualFile(this, packageName);
     }
     if (currentStub instanceof PerlRuntimeImportStub) {
       String importPath = ((PerlRuntimeImportStub)currentStub).getImportPath();
@@ -208,7 +206,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
 
     for (Object childStub : currentStub.getChildrenStubs()) {
       assert childStub instanceof StubElement : childStub.getClass();
-      collectRequiresFromStub((StubElement)childStub, includedVirtualFiles);
+      collectRequiresFromStub((StubElement<?>)childStub, includedVirtualFiles);
     }
   }
 
@@ -365,7 +363,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
   @NotNull
   @Override
   public List<String> getParentNamespacesNames() {
-    StubElement stub = getGreenStub();
+    StubElement<?> stub = getGreenStub();
     if( stub instanceof PerlFileStub){
       return ((PerlFileStub)stub).getParentNamespacesNames();
     }

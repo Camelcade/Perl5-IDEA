@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -120,11 +120,11 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
   }
 
   @NotNull
-  public abstract PerlVersionManagerAdapter createAdapter(@NotNull String pathToVersionManager, @NotNull PerlHostData hostData);
+  public abstract PerlVersionManagerAdapter createAdapter(@NotNull String pathToVersionManager, @NotNull PerlHostData<?, ?> hostData);
 
   private void createSdkInteractively(@Nullable Project project,
                                       @Nullable String selectedPath,
-                                      @Nullable PerlHostData perlHostData,
+                                      @Nullable PerlHostData<?, ?> perlHostData,
                                       @Nullable Consumer<Sdk> sdkConsumer) {
     if (!StringUtil.isNotEmpty(selectedPath) || perlHostData == null) {
       return;
@@ -138,11 +138,10 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
       InstallPerlHandler installHandler = createInstallHandler(selectedPath);
       if (installHandler != null) {
         int[] response = new int[]{-1};
-        ApplicationManager.getApplication().invokeAndWait(() -> {
-          response[0] = Messages.showYesNoDialog(PerlBundle.message("perl.vm.would.you.like.to.install"),
-                                                 PerlBundle.message("perl.vm.empty.list.title"),
-                                                 getIcon());
-        });
+        ApplicationManager.getApplication().invokeAndWait(
+          () -> response[0] = Messages.showYesNoDialog(PerlBundle.message("perl.vm.would.you.like.to.install"),
+                                                       PerlBundle.message("perl.vm.empty.list.title"),
+                                                       getIcon()));
         if (response[0] == Messages.YES) {
           installHandler.doInstall(perlHostData, project);
           return;
@@ -207,7 +206,7 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
       ));
       return;
     }
-    PerlRealVersionManagerData versionManagerData = createData(vmAdapter, distributionId);
+    PerlRealVersionManagerData<?, ?> versionManagerData = createData(vmAdapter, distributionId);
     PerlSdkType.createAndAddSdk(perlPath.get(0), vmAdapter.getHostData(), versionManagerData, sdkConsumer, project);
   }
 }

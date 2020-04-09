@@ -44,10 +44,10 @@ public class PerlCommandLine extends GeneralCommandLine {
   private Sdk mySdk;
 
   @Nullable
-  private PerlHostData myHostData;
+  private PerlHostData<?, ?> myHostData;
 
   @Nullable
-  private PerlVersionManagerData myVersionManagerData;
+  private PerlVersionManagerData<?, ?> myVersionManagerData;
 
   private boolean myUsePty = false;
 
@@ -155,12 +155,12 @@ public class PerlCommandLine extends GeneralCommandLine {
    * @return explicit data or data from sdk if any, null otherwise
    */
   @Nullable
-  public PerlHostData getEffectiveHostData() {
+  public PerlHostData<?, ?> getEffectiveHostData() {
     return myHostData == null ? PerlHostData.from(getEffectiveSdk()) : myHostData;
   }
 
   @NotNull
-  public PerlCommandLine withHostData(@Nullable PerlHostData hostData) {
+  public PerlCommandLine withHostData(@Nullable PerlHostData<?, ?> hostData) {
     myHostData = hostData;
     return this;
   }
@@ -169,12 +169,12 @@ public class PerlCommandLine extends GeneralCommandLine {
    * @return explicit data or data from sdk if any, null otherwise
    */
   @Nullable
-  public PerlVersionManagerData getEffectiveVersionManagerData() {
+  public PerlVersionManagerData<?, ?> getEffectiveVersionManagerData() {
     return myVersionManagerData == null ? PerlVersionManagerData.from(getEffectiveSdk()) : myVersionManagerData;
   }
 
   @NotNull
-  public PerlCommandLine withVersionManagerData(@Nullable PerlVersionManagerData versionManagerData) {
+  public PerlCommandLine withVersionManagerData(@Nullable PerlVersionManagerData<?, ?> versionManagerData) {
     myVersionManagerData = versionManagerData;
     return this;
   }
@@ -290,7 +290,7 @@ public class PerlCommandLine extends GeneralCommandLine {
     LOG.info("Executing: " + getCommandLineString());
     LOG.info("  environment: " + getEnvironment() + " (+" + getParentEnvironmentType() + ")");
     LOG.info("  working dir: " + getWorkDirectory());
-    PerlHostData hostData = getEffectiveHostData();
+    PerlHostData<?, ?> hostData = getEffectiveHostData();
     LOG.info("  host = " + hostData +
              "; vm = " + getEffectiveVersionManagerData() +
              "; pty = " + isUsePty() +

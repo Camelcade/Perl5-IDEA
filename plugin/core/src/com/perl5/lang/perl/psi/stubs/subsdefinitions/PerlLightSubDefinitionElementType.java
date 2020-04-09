@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -53,7 +53,7 @@ public class PerlLightSubDefinitionElementType extends PerlSubDefinitionElementT
   @NotNull
   @Override
   public PerlSubDefinitionStub createStub(@NotNull PerlSubDefinitionElement psi, StubElement parentStub) {
-    if (psi instanceof PerlLightSubDefinitionElement && ((PerlLightSubDefinitionElement)psi).isImplicit()) {
+    if (psi instanceof PerlLightSubDefinitionElement && ((PerlLightSubDefinitionElement<?>)psi).isImplicit()) {
       return createStubElement(parentStub,
                                psi.getNamespaceName(),
                                psi.getSubName(),
@@ -66,7 +66,7 @@ public class PerlLightSubDefinitionElementType extends PerlSubDefinitionElementT
 
   @NotNull
   @Override
-  protected PerlSubDefinitionStub createStubElement(StubElement parentStub,
+  protected PerlSubDefinitionStub createStubElement(StubElement<?> parentStub,
                                                     String packageName,
                                                     String functionName,
                                                     @NotNull List<PerlSubArgument> arguments,

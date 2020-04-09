@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -62,7 +62,7 @@ public interface PerlPackageProcessor {
    * @return list of the light psi elements declared by the {@code useStatementElement}
    */
   @NotNull
-  default List<PerlDelegatingLightNamedElement> computeLightElementsFromPsi(@NotNull PerlUseStatementElement useStatementElement) {
+  default List<PerlDelegatingLightNamedElement<?>> computeLightElementsFromPsi(@NotNull PerlUseStatementElement useStatementElement) {
     return Collections.emptyList();
   }
 
@@ -70,8 +70,8 @@ public interface PerlPackageProcessor {
    * @return list of the light psi elements declared by the {@code useStatementStub}
    */
   @NotNull
-  default List<PerlDelegatingLightNamedElement> computeLightElementsFromStubs(@NotNull PerlUseStatementElement useStatementElement,
-                                                                              @NotNull PerlUseStatementStub useStatementStub) {
+  default List<PerlDelegatingLightNamedElement<?>> computeLightElementsFromStubs(@NotNull PerlUseStatementElement useStatementElement,
+                                                                                 @NotNull PerlUseStatementStub useStatementStub) {
     return Collections.emptyList();
   }
 
@@ -84,7 +84,7 @@ public interface PerlPackageProcessor {
   }
 
   /**
-   * @return true iff arguments of this use statement should be collapesed by default, e.g. group of constants definitions
+   * @return true iff arguments of this use statement should be collapsed by default, e.g. group of constants definitions
    */
   default boolean isFoldedByDefault(@NotNull PerlUseStatementElementBase useStatementElement) {
     return false;

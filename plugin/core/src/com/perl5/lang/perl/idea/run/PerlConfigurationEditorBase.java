@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,7 @@ import com.intellij.openapi.ui.VerticalFlowLayout;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiFileFactory;
+import com.intellij.ui.CollectionComboBoxModel;
 import com.intellij.ui.ColoredListCellRenderer;
 import com.intellij.ui.EditorTextField;
 import com.intellij.ui.components.JBTabbedPane;
@@ -33,19 +34,19 @@ import com.perl5.PerlBundle;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugOptions;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugOptionsSets;
-import org.jdesktop.swingx.combobox.MapComboBoxModel;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 
 public abstract class PerlConfigurationEditorBase<Settings extends PerlDebugOptions> extends SettingsEditor<Settings> {
   protected Project myProject;
 
   private JTextField myScriptCharset;
-  private ComboBox myStartMode;
+  private ComboBox<String> myStartMode;
   private JCheckBox myIsNonInteractiveModeEnabled;
   private JCheckBox myIsCompileTimeBreakpointsEnabled;
   private EditorTextField myInitCodeTextField;
@@ -88,7 +89,7 @@ public abstract class PerlConfigurationEditorBase<Settings extends PerlDebugOpti
     scriptCharset.setLabelLocation(BorderLayout.WEST);
     panel.add(scriptCharset);
 
-    myStartMode = new ComboBox(new MapComboBoxModel<>(PerlDebugOptionsSets.STARTUP_OPTIONS)) {
+    myStartMode = new ComboBox<String>(new CollectionComboBoxModel<>(new ArrayList<>(PerlDebugOptionsSets.STARTUP_OPTIONS.keySet()))) {
       @Override
       public void setRenderer(ListCellRenderer renderer) {
         super.setRenderer(new ColoredListCellRenderer<String>() {

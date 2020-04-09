@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -142,7 +142,7 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
    * Creates a process and process handler to be run in background.
    */
   @NotNull
-  protected BaseProcessHandler doCreateProcessHandler(@NotNull PerlCommandLine commandLine) throws ExecutionException {
+  protected BaseProcessHandler<?> doCreateProcessHandler(@NotNull PerlCommandLine commandLine) throws ExecutionException {
     return new KillableProcessHandler(createProcess(commandLine), commandLine.getCommandLineString(), commandLine.getCharset());
   }
 
@@ -276,17 +276,17 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
   }
 
   @NotNull
-  public static BaseProcessHandler createProcessHandler(@NotNull PerlCommandLine commandLine) throws ExecutionException {
-    PerlVersionManagerData versionManagerData = commandLine.getEffectiveVersionManagerData();
+  public static BaseProcessHandler<?> createProcessHandler(@NotNull PerlCommandLine commandLine) throws ExecutionException {
+    PerlVersionManagerData<?, ?> versionManagerData = commandLine.getEffectiveVersionManagerData();
     if (versionManagerData != null) {
       commandLine = versionManagerData.patchCommandLine(commandLine);
     }
 
-    PerlHostData perlHostData = commandLine.getEffectiveHostData();
+    PerlHostData<?, ?> perlHostData = commandLine.getEffectiveHostData();
     if (perlHostData == null) {
       throw new ExecutionException("No host data in " + commandLine);
     }
-    BaseProcessHandler processHandler = perlHostData.doCreateProcessHandler(commandLine);
+    BaseProcessHandler<?> processHandler = perlHostData.doCreateProcessHandler(commandLine);
     commandLine.getProcessListeners().forEach(processHandler::addProcessListener);
     PerlRunUtil.addMissingPackageListener(processHandler, commandLine);
     return processHandler;
@@ -313,11 +313,11 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
 
   @NotNull
   public static ProcessHandler createConsoleProcessHandler(@NotNull PerlCommandLine commandLine) throws ExecutionException {
-    PerlHostData hostData = commandLine.getEffectiveHostData();
+    PerlHostData<?, ?> hostData = commandLine.getEffectiveHostData();
     if (hostData == null) {
       throw new ExecutionException("No host data in the command line " + commandLine);
     }
-    PerlVersionManagerData versionManagerData = commandLine.getEffectiveVersionManagerData();
+    PerlVersionManagerData<?, ?> versionManagerData = commandLine.getEffectiveVersionManagerData();
     if (versionManagerData != null) {
       commandLine = versionManagerData.patchCommandLine(commandLine);
     }

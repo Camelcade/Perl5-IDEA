@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -59,7 +59,7 @@ public abstract class GenericPerlRunConfigurationEditorPanel<Configuration exten
   private JPanel myScriptField;
 
   private LabeledComponent<?> myLabeledConsoleCharset;
-  private ComboBox myConsoleCharset;
+  private ComboBox<String> myConsoleCharset;
 
   private LabeledComponent<RawCommandLineEditor> myLabeledPerlParametersPanel;
   private RawCommandLineEditor myPerlParametersPanel;
@@ -107,7 +107,7 @@ public abstract class GenericPerlRunConfigurationEditorPanel<Configuration exten
   }
 
   private void createConsoleEncodingField() {
-    myConsoleCharset = new ComboBox(new CollectionComboBoxModel(new ArrayList<>(Charset.availableCharsets().keySet())));
+    myConsoleCharset = new ComboBox<>(new CollectionComboBoxModel<>(new ArrayList<>(Charset.availableCharsets().keySet())));
     myLabeledConsoleCharset = LabeledComponent.create(myConsoleCharset, PerlBundle.message("perl.run.option.output.encoding"));
     myLabeledConsoleCharset.setLabelLocation(BorderLayout.WEST);
   }

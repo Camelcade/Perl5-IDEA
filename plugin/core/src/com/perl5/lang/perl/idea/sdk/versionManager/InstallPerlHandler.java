@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,7 +48,7 @@ public abstract class InstallPerlHandler {
     myVersionManageHandler = versionManageHandler;
   }
 
-  void install(@NotNull PerlHostData hostData, @Nullable Project project) {
+  void install(@NotNull PerlHostData<?, ?> hostData, @Nullable Project project) {
     new Task.Modal(project, PerlBundle.message("perl.vm.installing.perl"), false) {
       @Override
       public void run(@NotNull ProgressIndicator indicator) {
@@ -58,7 +58,7 @@ public abstract class InstallPerlHandler {
     }.queue();
   }
 
-  void doInstall(@NotNull PerlHostData hostData, @Nullable Project project) {
+  void doInstall(@NotNull PerlHostData<?, ?> hostData, @Nullable Project project) {
     if (ApplicationManager.getApplication().isDispatchThread()) {
       throw new RuntimeException("Should not be invoked on EDT");
     }
@@ -110,7 +110,7 @@ public abstract class InstallPerlHandler {
   protected abstract boolean doIsInstalled(@NotNull String rawItem);
 
   @NotNull
-  protected abstract PerlVersionManagerAdapter createAdapter(@NotNull String vmPath, @NotNull PerlHostData hostData);
+  protected abstract PerlVersionManagerAdapter createAdapter(@NotNull String vmPath, @NotNull PerlHostData<?, ?> hostData);
 
   @NotNull
   protected abstract PerlInstallFormOptions createOptionsForm();

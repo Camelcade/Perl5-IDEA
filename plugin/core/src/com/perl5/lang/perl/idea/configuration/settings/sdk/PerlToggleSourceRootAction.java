@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,10 +29,10 @@ import java.util.Locale;
 public class PerlToggleSourceRootAction extends ToggleAction {
   @NotNull
   private final PerlContentEntriesTreeEditor myEditor;
-  private final ModuleSourceRootEditHandler myHandler;
+  private final ModuleSourceRootEditHandler<?> myHandler;
 
   public PerlToggleSourceRootAction(@NotNull PerlContentEntriesTreeEditor editor,
-                                    @NotNull ModuleSourceRootEditHandler handler) {
+                                    @NotNull ModuleSourceRootEditHandler<?> handler) {
     super(handler.getMarkRootButtonText(),
           ProjectBundle.message("module.toggle.sources.action.description",
                                 handler.getFullRootTypeName().toLowerCase(Locale.getDefault())),

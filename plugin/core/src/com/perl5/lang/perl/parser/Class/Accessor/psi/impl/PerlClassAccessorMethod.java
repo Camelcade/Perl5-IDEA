@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,7 +43,7 @@ public class PerlClassAccessorMethod extends PerlLightMethodDefinitionElement<Pe
   public PerlClassAccessorMethod(@NotNull PerlClassAccessorWrapper delegate,
                                  @NotNull String baseName,
                                  @NotNull Function<String, String> nameComputation,
-                                 @NotNull IStubElementType elementType,
+                                 @NotNull IStubElementType<?, ?> elementType,
                                  @NotNull PsiElement nameIdentifier,
                                  @Nullable String packageName,
                                  @Nullable PerlSubAnnotations annotations) {
@@ -120,11 +120,11 @@ public class PerlClassAccessorMethod extends PerlLightMethodDefinitionElement<Pe
       return null;
     }
     String baseName = getBaseName();
-    for (PerlDelegatingLightNamedElement element : getDelegate().getLightElements()) {
+    for (PerlDelegatingLightNamedElement<?> element : getDelegate().getLightElements()) {
       if (element instanceof PerlClassAccessorMethod &&
           baseName.equals(((PerlClassAccessorMethod)element).getBaseName()) &&
           !element.equals(this)
-        ) {
+      ) {
         return (PerlClassAccessorMethod)element;
       }
     }

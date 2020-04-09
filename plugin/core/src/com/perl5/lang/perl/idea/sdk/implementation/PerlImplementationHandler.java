@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,8 +56,8 @@ public abstract class PerlImplementationHandler<Data extends PerlImplementationD
   @Contract("null, _, _ -> null; _, null, _ -> null; _, _, null -> null")
   @Nullable
   protected abstract Data doCreateData(@Nullable String interpreterPath,
-                                       @Nullable PerlHostData hostData,
-                                       @Nullable PerlVersionManagerData versionManagerData);
+                                       @Nullable PerlHostData<?, ?> hostData,
+                                       @Nullable PerlVersionManagerData<?, ?> versionManagerData);
 
   @NotNull
   @Override
@@ -76,7 +76,7 @@ public abstract class PerlImplementationHandler<Data extends PerlImplementationD
 
   @Contract("null->null")
   @Nullable
-  static PerlImplementationHandler from(@Nullable Sdk sdk) {
+  static PerlImplementationHandler<?, ?> from(@Nullable Sdk sdk) {
     PerlImplementationData<?, ?> perlImplementationData = PerlImplementationData.from(sdk);
     return perlImplementationData == null ? null : perlImplementationData.getHandler();
   }
@@ -98,8 +98,8 @@ public abstract class PerlImplementationHandler<Data extends PerlImplementationD
   @Contract("null, _, _ -> null; _, null, _ -> null; _, _, null -> null")
   @Nullable
   public static PerlImplementationData<?, ?> createData(@Nullable String interpreterPath,
-                                                        @Nullable PerlHostData hostData,
-                                                        @Nullable PerlVersionManagerData versionManagerData) {
+                                                        @Nullable PerlHostData<?, ?> hostData,
+                                                        @Nullable PerlVersionManagerData<?, ?> versionManagerData) {
     return getDefaultHandler().doCreateData(interpreterPath, hostData, versionManagerData);
   }
 

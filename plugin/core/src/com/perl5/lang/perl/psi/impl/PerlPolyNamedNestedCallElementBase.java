@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,10 +23,7 @@ import com.perl5.lang.perl.psi.PsiPerlMethod;
 import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Base class for
- */
-public abstract class PerlPolyNamedNestedCallElementBase<Stub extends PerlPolyNamedElementStub> extends PerlPolyNamedElement<Stub>
+public abstract class PerlPolyNamedNestedCallElementBase<Stub extends PerlPolyNamedElementStub<?>> extends PerlPolyNamedElement<Stub>
   implements PerlNestedCall {
   public PerlPolyNamedNestedCallElementBase(@NotNull Stub stub,
                                             @NotNull IStubElementType nodeType) {

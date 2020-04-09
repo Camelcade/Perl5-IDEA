@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -63,7 +63,7 @@ public class PerlTreeStructureProvider implements TreeStructureProvider {
       VirtualFile virtualFile = ((PsiDirectoryNode)node).getVirtualFile();
       if (virtualFile != null && roots.containsKey(virtualFile)) {
         PerlSourceRootType rootType = roots.get(virtualFile);
-        ModuleSourceRootEditHandler handler = rootType.getEditHandler();
+        ModuleSourceRootEditHandler<?> handler = rootType.getEditHandler();
         node = new PsiDirectoryNode(node.getProject(), ((PsiDirectoryNode)node).getValue(), ((PsiDirectoryNode)node).getSettings()) {
           @Override
           protected void updateImpl(@NotNull PresentationData data) {

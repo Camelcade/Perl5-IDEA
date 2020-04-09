@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,8 +36,8 @@ import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.*;
 
 public abstract class PerlPolyNamedElementType<Stub extends PerlPolyNamedElementStub<Psi>, Psi extends PerlPolyNamedElement<Stub>>
   extends IStubElementType<Stub, Psi> implements PsiElementProvider {
-  private static final TObjectIntHashMap<IStubElementType> DIRECT_MAP = new TObjectIntHashMap<>();
-  private static final TIntObjectHashMap<IStubElementType> REVERSE_MAP = new TIntObjectHashMap<>();
+  private static final TObjectIntHashMap<IStubElementType<?, ?>> DIRECT_MAP = new TObjectIntHashMap<>();
+  private static final TIntObjectHashMap<IStubElementType<?, ?>> REVERSE_MAP = new TIntObjectHashMap<>();
 
   static {
     // 0 is reserved for n/a
@@ -61,12 +61,11 @@ public abstract class PerlPolyNamedElementType<Stub extends PerlPolyNamedElement
   @NotNull
   @Override
   public final Stub createStub(@NotNull Psi psi, StubElement parentStub) {
-    List<StubElement> lightNamedElements = new ArrayList<>();
+    List<StubElement<?>> lightNamedElements = new ArrayList<>();
     Stub result = createStub(psi, parentStub, lightNamedElements);
 
     psi.getLightElements().forEach(lightPsi -> {
-      //noinspection unchecked
-      StubElement lightStubElement = lightPsi.getElementType().createStub(lightPsi, result);
+      StubElement<?> lightStubElement = lightPsi.getElementType().createStub(lightPsi, result);
       if (lightStubElement instanceof PerlLightElementStub && lightPsi.isImplicit()) {
         ((PerlLightElementStub)lightStubElement).setImplicit(true);
       }
@@ -77,7 +76,7 @@ public abstract class PerlPolyNamedElementType<Stub extends PerlPolyNamedElement
   }
 
   @NotNull
-  protected abstract Stub createStub(@NotNull Psi psi, StubElement parentStub, @NotNull List<StubElement> lightElementsStubs);
+  protected abstract Stub createStub(@NotNull Psi psi, StubElement<?> parentStub, @NotNull List<StubElement<?>> lightElementsStubs);
 
   @NotNull
   @Override
@@ -87,11 +86,11 @@ public abstract class PerlPolyNamedElementType<Stub extends PerlPolyNamedElement
 
   @Override
   public final void serialize(@NotNull Stub stub, @NotNull StubOutputStream dataStream) throws IOException {
-    List<StubElement> childrenStubs = ContainerUtil.filter(stub.getLightNamedElementsStubs(), it ->
+    List<StubElement<?>> childrenStubs = ContainerUtil.filter(stub.getLightNamedElementsStubs(), it ->
       !(it instanceof PerlLightElementStub) || !((PerlLightElementStub)it).isImplicit());
     dataStream.writeVarInt(childrenStubs.size());
     serializeStub(stub, dataStream);
-    for (StubElement childStub : childrenStubs) {
+    for (StubElement<?> childStub : childrenStubs) {
       dataStream.writeVarInt(getSerializationId(childStub)); // serialization id
       //noinspection unchecked
       childStub.getStubType().serialize(childStub, dataStream);
@@ -106,12 +105,11 @@ public abstract class PerlPolyNamedElementType<Stub extends PerlPolyNamedElement
   @Override
   public final Stub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
     int size = dataStream.readVarInt();
-    List<StubElement> childStubs = new ArrayList<>(size);
+    List<StubElement<?>> childStubs = new ArrayList<>(size);
     Stub result = deserialize(dataStream, parentStub, childStubs);
 
     for (int i = 0; i < size; i++) {
-      //noinspection unchecked
-      childStubs.add((StubElement)getElementTypeById(dataStream.readVarInt()).deserialize(dataStream, result));
+      childStubs.add(getElementTypeById(dataStream.readVarInt()).deserialize(dataStream, result));
     }
 
     return result;
@@ -119,8 +117,8 @@ public abstract class PerlPolyNamedElementType<Stub extends PerlPolyNamedElement
 
   @NotNull
   protected abstract Stub deserialize(@NotNull StubInputStream dataStream,
-                                      StubElement parentStub,
-                                      @NotNull List<StubElement> lightElementsStubs) throws IOException;
+                                      StubElement<?> parentStub,
+                                      @NotNull List<StubElement<?>> lightElementsStubs) throws IOException;
 
   @Override
   public final void indexStub(@NotNull Stub stub, @NotNull IndexSink sink) {
@@ -136,10 +134,10 @@ public abstract class PerlPolyNamedElementType<Stub extends PerlPolyNamedElement
   public boolean shouldCreateStub(ASTNode node) {
     PsiElement psi = node.getPsi();
     assert psi instanceof PerlPolyNamedElement;
-    return !((PerlPolyNamedElement)psi).getLightElements().isEmpty();
+    return !((PerlPolyNamedElement<?>)psi).getLightElements().isEmpty();
   }
 
-  private static int getSerializationId(@NotNull StubElement stubElement) {
+  private static int getSerializationId(@NotNull StubElement<?> stubElement) {
     int id = DIRECT_MAP.get(stubElement.getStubType());
     if (id > 0) {
       return id;
@@ -148,9 +146,9 @@ public abstract class PerlPolyNamedElementType<Stub extends PerlPolyNamedElement
   }
 
   @NotNull
-  private static IStubElementType getElementTypeById(int id) {
+  private static IStubElementType<?, ?> getElementTypeById(int id) {
     assert id > 0;
-    IStubElementType type = REVERSE_MAP.get(id);
+    IStubElementType<?, ?> type = REVERSE_MAP.get(id);
     if (type != null) {
       return type;
     }

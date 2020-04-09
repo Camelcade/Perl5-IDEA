@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -129,7 +129,7 @@ public class PerlSyntaxInspection extends PerlInspection {
 
       @NotNull
       private LocalQuickFix getFlipElementsQuickFix(@NotNull PsiElement attributes) {
-        SmartPsiElementPointer attributesPointer =
+        SmartPsiElementPointer<?> attributesPointer =
           SmartPointerManager.getInstance(attributes.getProject()).createSmartPsiElementPointer(attributes);
         return new MyTopQuickFix() {
           @Nls

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -59,7 +59,7 @@ public class PerlNamespaceDefinitionElementType extends IStubElementType<PerlNam
     return createStubElement(parentStub, new PerlNamespaceDefinitionData(psi));
   }
 
-  protected PerlNamespaceDefinitionStub createStubElement(@Nullable StubElement parentStub, @NotNull PerlNamespaceDefinitionData data) {
+  protected PerlNamespaceDefinitionStub createStubElement(@Nullable StubElement<?> parentStub, @NotNull PerlNamespaceDefinitionData data) {
     return new PerlNamespaceDefinitionStub(parentStub, this, data);
   }
 
@@ -72,7 +72,6 @@ public class PerlNamespaceDefinitionElementType extends IStubElementType<PerlNam
   @Override
   public void indexStub(@NotNull PerlNamespaceDefinitionStub stub, @NotNull IndexSink sink) {
     String name = stub.getNamespaceName();
-    assert name != null;
     sink.occurrence(getDirectKey(), name);
 
     for (String parent : stub.getParentNamespacesNames()) {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,10 +29,10 @@ public class PerlMooseAttributeWrapperStub extends PerlPolyNamedElementStub<Perl
   @NotNull
   private final List<String> myAttributesNames;
 
-  public PerlMooseAttributeWrapperStub(StubElement parent,
-                                       IStubElementType elementType,
+  public PerlMooseAttributeWrapperStub(StubElement<?> parent,
+                                       IStubElementType<?, ?> elementType,
                                        @NotNull List<String> attributesNames,
-                                       @NotNull List<StubElement> lightNamedElementsStubs) {
+                                       @NotNull List<StubElement<?>> lightNamedElementsStubs) {
     super(parent, elementType, lightNamedElementsStubs);
     myAttributesNames = attributesNames;
   }

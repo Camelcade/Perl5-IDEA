@@ -38,6 +38,7 @@ import com.intellij.codeInsight.template.impl.LiveTemplateLookupElementImpl;
 import com.intellij.codeInsight.template.impl.TemplateManagerImpl;
 import com.intellij.codeInsight.template.impl.TemplateState;
 import com.intellij.codeInsight.template.impl.editorActions.ExpandLiveTemplateByTabAction;
+import com.intellij.codeInspection.LocalInspectionTool;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.execution.configurations.PathEnvironmentVariableUtil;
@@ -994,7 +995,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
       public void visitElement(@NotNull PsiElement element) {
         if (element instanceof PerlPolyNamedElement) {
           sb.append("Poly-named provider: ").append(serializePsiElement(element)).append("\n");
-          for (PerlDelegatingLightNamedElement namedElement : ((PerlPolyNamedElement<?>)element).getLightElements()) {
+          for (PerlDelegatingLightNamedElement<?> namedElement : ((PerlPolyNamedElement<?>)element).getLightElements()) {
             sb.append("\t").append(serializePsiElement(namedElement)).append("\n");
           }
           sb.append("\n");
@@ -1186,8 +1187,11 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     UsefulTestCase.assertDoesntContain(lookups, expected);
   }
 
-  protected void doTestMassQuickFixes(@NotNull String fileName, @NotNull Class inspectionClass, @NotNull String quickfixNamePrefix) {
+  protected void doTestMassQuickFixes(@NotNull String fileName,
+                                      @NotNull Class<? extends LocalInspectionTool> inspectionClass,
+                                      @NotNull String quickfixNamePrefix) {
     initWithFileSmart(fileName);
+    //noinspection unchecked
     myFixture.enableInspections(inspectionClass);
     myFixture.getAllQuickFixes().stream()
       .filter((it) -> it.getText().startsWith(quickfixNamePrefix))
@@ -1195,17 +1199,22 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getFile().getText());
   }
 
-  protected void doTestAnnotationQuickFix(@NotNull String fileName, @NotNull Class inspectionClass, @NotNull String quickFixNamePrefix) {
+  protected void doTestAnnotationQuickFix(@NotNull String fileName,
+                                          @NotNull Class<? extends LocalInspectionTool> inspectionClass,
+                                          @NotNull String quickFixNamePrefix) {
     initWithFileSmartWithoutErrors(fileName);
     doTestAnnotationQuickFixWithoutInitialization(inspectionClass, quickFixNamePrefix);
   }
 
-  protected void doTestAnnotationQuickFix(@NotNull Class inspectionClass, @NotNull String quickFixNamePrefix) {
+  protected void doTestAnnotationQuickFix(@NotNull Class<? extends LocalInspectionTool> inspectionClass,
+                                          @NotNull String quickFixNamePrefix) {
     initWithFileSmartWithoutErrors();
     doTestAnnotationQuickFixWithoutInitialization(inspectionClass, quickFixNamePrefix);
   }
 
-  private void doTestAnnotationQuickFixWithoutInitialization(@NotNull Class inspectionClass, @NotNull String quickFixNamePrefix) {
+  private void doTestAnnotationQuickFixWithoutInitialization(@NotNull Class<? extends LocalInspectionTool> inspectionClass,
+                                                             @NotNull String quickFixNamePrefix) {
+    //noinspection unchecked
     myFixture.enableInspections(inspectionClass);
     //myFixture.checkHighlighting(true, false, false);
     doTestIntentionWithoutLoad(quickFixNamePrefix);
@@ -1474,9 +1483,10 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   }
 
 
-  protected void doInspectionTest(Class clazz) {
+  protected void doInspectionTest(Class<? extends LocalInspectionTool> clazz) {
     initWithFileSmart();
     addVirtualFileFilter();
+    //noinspection unchecked
     myFixture.enableInspections(clazz);
     myFixture.checkHighlighting(true, false, false);
     removeVirtualFileFilter();
@@ -1817,7 +1827,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   @NotNull
   private String serializeUsageGroup(@NotNull UsageGroup usageGroup) {
     if (usageGroup instanceof PsiElementUsageGroupBase) {
-      return "PsiElement: " + serializePsiElement(((PsiElementUsageGroupBase)usageGroup).getElement());
+      return "PsiElement: " + serializePsiElement(((PsiElementUsageGroupBase<?>)usageGroup).getElement());
     }
     return usageGroup.getClass().getSimpleName() + ": " + usageGroup.getText(null) + "; " + getIconText(usageGroup.getIcon(true));
   }
@@ -2196,7 +2206,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
       sb.append(getEditorTextWithCaretsAndSelections()).append("\n");
       final int offsetForLangDetection = offset > 0 && offset == fileLength ? offset - 1 : offset;
       final Language language = PsiUtilCore.getLanguageAtOffset(file, offsetForLangDetection);
-      ParameterInfoHandler[] handlers =
+      ParameterInfoHandler<?, ?>[] handlers =
         ShowParameterInfoHandler.getHandlers(getProject(), language, file.getViewProvider().getBaseLanguage());
       assertNotNull(handlers);
       if (handlers.length == 0) {
@@ -2205,7 +2215,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
       }
 
 
-      for (ParameterInfoHandler handler : handlers) {
+      for (ParameterInfoHandler<?, ?> handler : handlers) {
         MockCreateParameterInfoContext context = new MockCreateParameterInfoContext(editor, file);
         Object element = handler.findElementForParameterInfo(context);
         if (element == null) {
@@ -2285,7 +2295,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     StringBuilder sb = new StringBuilder();
     for (PsiFile file : fileViewProvider.getAllFiles()) {
       assertInstanceOf(file, PsiFileImpl.class);
-      StubElement stub = ((PsiFileImpl)file).getStub();
+      StubElement<?> stub = ((PsiFileImpl)file).getStub();
       if (sb.length() > 0) {
         sb.append(SEPARATOR_NEWLINES);
       }

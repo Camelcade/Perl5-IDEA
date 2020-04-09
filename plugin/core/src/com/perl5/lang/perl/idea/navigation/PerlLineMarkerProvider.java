@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,7 +43,7 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
       addSubDefinitionsMarkers((PerlSubDefinitionElement)element, result);
     }
     else if (element instanceof PerlPolyNamedElement) {
-      for (PerlDelegatingLightNamedElement lightNamedElement : ((PerlPolyNamedElement<?>)element).getLightElements()) {
+      for (PerlDelegatingLightNamedElement<?> lightNamedElement : ((PerlPolyNamedElement<?>)element).getLightElements()) {
         if (lightNamedElement instanceof PerlNamespaceDefinitionWithIdentifier) {
           addNamespaceMarkers((PerlNamespaceDefinitionWithIdentifier)lightNamedElement, result);
         }
@@ -55,7 +55,7 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
   }
 
   private void addNamespaceMarkers(@NotNull PerlNamespaceDefinitionWithIdentifier element,
-                                   Collection<? super RelatedItemLineMarkerInfo> result) {
+                                   Collection<? super RelatedItemLineMarkerInfo<?>> result) {
     PsiElement nameIdentifier = element.getNameIdentifier();
     if (nameIdentifier == null) {
       nameIdentifier = element;
@@ -82,7 +82,7 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
     }
   }
 
-  private RelatedItemLineMarkerInfo getMarkerInfo(@NotNull NavigationGutterIconBuilder builder, @NotNull PsiElement element) {
+  private RelatedItemLineMarkerInfo<?> getMarkerInfo(@NotNull NavigationGutterIconBuilder<?> builder, @NotNull PsiElement element) {
     while (element.getFirstChild() != null) {
       element = element.getFirstChild();
     }
@@ -90,7 +90,7 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
   }
 
   private void addSubDefinitionsMarkers(@NotNull PerlSubDefinitionElement subElement,
-                                        Collection<? super RelatedItemLineMarkerInfo> result) {
+                                        Collection<? super RelatedItemLineMarkerInfo<?>> result) {
     PerlNamespaceDefinitionElement containingNamespace = PsiTreeUtil.getParentOfType(subElement, PerlNamespaceDefinitionElement.class);
     if (containingNamespace != null) {
       PsiElement nameIdentifier = subElement.getNameIdentifier();

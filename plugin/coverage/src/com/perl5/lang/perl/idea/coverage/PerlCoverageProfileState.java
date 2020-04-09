@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,7 +42,7 @@ public class PerlCoverageProfileState extends PerlRunProfileState {
       CoverageEnabledConfiguration.getOrCreate((GenericPerlRunConfiguration)getEnvironment().getRunProfile()).getCoverageFilePath();
 
     Sdk effectiveSdk = perlRunConfiguration.getEffectiveSdk();
-    PerlHostData hostData = PerlHostData.notNullFrom(effectiveSdk);
+    PerlHostData<?, ?> hostData = PerlHostData.notNullFrom(effectiveSdk);
 
     return Collections.singletonList("-MDevel::Cover=-silent,1,-db," + hostData.getRemotePath(coverageBasePath) + ",-dir,.");
   }

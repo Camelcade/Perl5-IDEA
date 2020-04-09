@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,9 +23,9 @@ import javax.swing.*;
 
 class PerlDelegatingModuleWizardStep extends ModuleWizardStep {
   @NotNull
-  private final PerlProjectGeneratorPeerBase myPeer;
+  private final PerlProjectGeneratorPeerBase<?> myPeer;
 
-  public PerlDelegatingModuleWizardStep(@NotNull PerlProjectGeneratorPeerBase peer) {
+  public PerlDelegatingModuleWizardStep(@NotNull PerlProjectGeneratorPeerBase<?> peer) {
     myPeer = peer;
   }
 

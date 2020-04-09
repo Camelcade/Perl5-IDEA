@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ public class PerlDebuggingEventBreakpointReached extends PerlDebuggingEventStop 
   @Override
   public void run() {
     XDebugSession session = getDebugSession();
-    XLineBreakpoint breakpoint = PerlDebugUtil.findBreakpoint(session.getProject(), this);
+    XLineBreakpoint<?> breakpoint = PerlDebugUtil.findBreakpoint(session.getProject(), this);
     if (breakpoint != null) {
       session.breakpointReached(breakpoint, logmessage, getSuspendContext());
     }

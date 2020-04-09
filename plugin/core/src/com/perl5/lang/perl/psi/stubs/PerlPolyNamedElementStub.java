@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,17 +28,17 @@ import java.util.List;
 
 public abstract class PerlPolyNamedElementStub<Psi extends PerlPolyNamedElement<?>> extends StubBase<Psi> {
   @NotNull
-  private final List<StubElement> myLightNamedElementsStubs;
+  private final List<StubElement<?>> myLightNamedElementsStubs;
 
-  public PerlPolyNamedElementStub(StubElement parent,
-                                  IStubElementType elementType,
-                                  @NotNull List<StubElement> lightNamedElementsStubs) {
+  public PerlPolyNamedElementStub(StubElement<?> parent,
+                                  IStubElementType<?, ?> elementType,
+                                  @NotNull List<StubElement<?>> lightNamedElementsStubs) {
     super(parent, elementType);
     myLightNamedElementsStubs = lightNamedElementsStubs;
   }
 
   @NotNull
-  public List<StubElement> getLightNamedElementsStubs() {
+  public List<StubElement<?>> getLightNamedElementsStubs() {
     return myLightNamedElementsStubs;
   }
 
@@ -47,7 +47,7 @@ public abstract class PerlPolyNamedElementStub<Psi extends PerlPolyNamedElement<
     List<String> chunks = new ArrayList<>();
     chunks.add(super.toString());
     chunks.add("\tLight elements: " + myLightNamedElementsStubs.size());
-    for (StubElement lightNamedElementsStub : myLightNamedElementsStubs) {
+    for (StubElement<?> lightNamedElementsStub : myLightNamedElementsStubs) {
       chunks.add("\t" + lightNamedElementsStub);
     }
     return StringUtil.join(chunks, "\n");

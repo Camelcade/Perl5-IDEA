@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,6 @@
 
 package com.perl5.lang.perl.psi.stubs;
 
-import com.intellij.psi.stubs.IStubElementType;
-import com.intellij.psi.tree.IFileElementType;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.parser.moose.psi.elementTypes.PerlMooseAttributeElementType;
 import com.perl5.lang.perl.psi.stubs.globs.PerlGlobStubElementType;
@@ -36,25 +34,26 @@ import com.perl5.lang.perl.psi.stubs.variables.PerlVariableStubElementType;
 
 
 public interface PerlStubElementTypes {
-  IStubElementType SUB_DECLARATION = new PerlSubDeclarationElementType("SUB_DECLARATION");
-  IStubElementType SUB_DEFINITION = new PerlSubDefinitionElementType("SUB_DEFINITION");
-  IStubElementType FUNC_DEFINITION = new PerlFuncDefinitionElementType("FUNC_DEFINITION");
-  IStubElementType METHOD_DEFINITION = new PerlMethodDefinitionElementType("METHOD_DEFINITION");
-  IStubElementType LIGHT_SUB_DEFINITION = new PerlLightSubDefinitionElementType("LIGHT_SUB_DEFINITION");
-  IStubElementType LIGHT_METHOD_DEFINITION = new PerlLightSubDefinitionElementType("LIGHT_METHOD_DEFINITION");
-  IStubElementType LIGHT_NAMESPACE_DEFINITION = new PerlLightNamespaceDefinitionElementType("LIGHT_NAMESPACE_DEFINITION");
-  IStubElementType LIGHT_ATTRIBUTE_DEFINITION = new PerlMooseAttributeElementType("LIGHT_ATTRIBUTE");
+  PerlSubDeclarationElementType SUB_DECLARATION = new PerlSubDeclarationElementType("SUB_DECLARATION");
+  PerlSubDefinitionElementType SUB_DEFINITION = new PerlSubDefinitionElementType("SUB_DEFINITION");
+  PerlFuncDefinitionElementType FUNC_DEFINITION = new PerlFuncDefinitionElementType("FUNC_DEFINITION");
+  PerlMethodDefinitionElementType METHOD_DEFINITION = new PerlMethodDefinitionElementType("METHOD_DEFINITION");
+  PerlLightSubDefinitionElementType LIGHT_SUB_DEFINITION = new PerlLightSubDefinitionElementType("LIGHT_SUB_DEFINITION");
+  PerlLightSubDefinitionElementType LIGHT_METHOD_DEFINITION = new PerlLightSubDefinitionElementType("LIGHT_METHOD_DEFINITION");
+  PerlLightNamespaceDefinitionElementType LIGHT_NAMESPACE_DEFINITION =
+    new PerlLightNamespaceDefinitionElementType("LIGHT_NAMESPACE_DEFINITION");
+  PerlMooseAttributeElementType LIGHT_ATTRIBUTE_DEFINITION = new PerlMooseAttributeElementType("LIGHT_ATTRIBUTE");
 
-  IStubElementType PERL_NAMESPACE = new PerlNamespaceDefinitionElementType("NAMESPACE");
+  PerlNamespaceDefinitionElementType PERL_NAMESPACE = new PerlNamespaceDefinitionElementType("NAMESPACE");
 
-  IStubElementType USE_STATEMENT = new PerlUseStatementStubElementType("USE_STATEMENT");
-  IStubElementType NO_STATEMENT = new PerlNoStatementStubElementType("NO_STATEMENT");
+  PerlUseStatementStubElementType USE_STATEMENT = new PerlUseStatementStubElementType("USE_STATEMENT");
+  PerlNoStatementStubElementType NO_STATEMENT = new PerlNoStatementStubElementType("NO_STATEMENT");
 
-  IStubElementType PERL_DO_EXPR = new PerlDoExprElementType("PERL_DO_EXPR");
-  IStubElementType PERL_REQUIRE_EXPR = new PerlRequireExprElementType("PERL_REQUIRE_EXPR");
+  PerlDoExprElementType PERL_DO_EXPR = new PerlDoExprElementType("PERL_DO_EXPR");
+  PerlRequireExprElementType PERL_REQUIRE_EXPR = new PerlRequireExprElementType("PERL_REQUIRE_EXPR");
 
-  IStubElementType PERL_GLOB = new PerlGlobStubElementType("*");
+  PerlGlobStubElementType PERL_GLOB = new PerlGlobStubElementType("*");
 
-  IStubElementType PERL_VARIABLE_DECLARATION_ELEMENT = new PerlVariableStubElementType("VARIABLE_DECLARATION_ELEMENT");
-  IFileElementType FILE = new PerlFileElementType("Perl5", PerlLanguage.INSTANCE);
+  PerlVariableStubElementType PERL_VARIABLE_DECLARATION_ELEMENT = new PerlVariableStubElementType("VARIABLE_DECLARATION_ELEMENT");
+  PerlFileElementType FILE = new PerlFileElementType("Perl5", PerlLanguage.INSTANCE);
 }

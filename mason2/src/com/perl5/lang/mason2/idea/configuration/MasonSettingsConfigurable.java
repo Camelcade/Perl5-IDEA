@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,7 +37,7 @@ public class MasonSettingsConfigurable extends AbstractMasonSettingsConfigurable
   protected final MasonSettings mySettings;
 
   protected CollectionListModel<String> autobaseModel;
-  protected JBList autobaseList;
+  protected JBList<String> autobaseList;
 
   public MasonSettingsConfigurable(Project myProject) {
     this(myProject, "Mason2");

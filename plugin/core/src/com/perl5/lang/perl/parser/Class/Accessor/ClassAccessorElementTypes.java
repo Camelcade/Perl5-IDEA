@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlLightSubDefinitionEleme
 
 public interface ClassAccessorElementTypes {
   IElementType CLASS_ACCESSOR_FBP = new PerlNestedCallElementType("CLASS_ACCESSOR_FBP");
-  IStubElementType CLASS_ACCESSOR_METHOD = new PerlLightSubDefinitionElementType("CLASS_ACCESSOR_METHOD");
+  IStubElementType<?, ?> CLASS_ACCESSOR_METHOD = new PerlLightSubDefinitionElementType("CLASS_ACCESSOR_METHOD");
   // fixme must be AFTER METHOD
   IElementType CLASS_ACCESSOR_WRAPPER = new ClassAccessorWrapperElementType("CLASS_ACCESSOR_WRAPPER");
   IElementType CLASS_ACCESSOR_WRAPPER_RO = new ClassAccessorWrapperElementType("CLASS_ACCESSOR_WRAPPER_RO");

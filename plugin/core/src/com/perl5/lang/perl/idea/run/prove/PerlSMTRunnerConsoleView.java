@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 class PerlSMTRunnerConsoleView extends SMTRunnerConsoleView implements PerlConsoleView {
-  private PerlHostData myHostData;
+  private PerlHostData<?, ?> myHostData;
 
   public PerlSMTRunnerConsoleView(@NotNull Project project,
                                   @NotNull PerlSMTRunnerConsoleProperties consoleProperties,
@@ -35,7 +35,7 @@ class PerlSMTRunnerConsoleView extends SMTRunnerConsoleView implements PerlConso
   }
 
   @NotNull
-  public PerlSMTRunnerConsoleView withHostData(@Nullable PerlHostData hostData) {
+  public PerlSMTRunnerConsoleView withHostData(@Nullable PerlHostData<?, ?> hostData) {
     myHostData = hostData;
     return this;
   }

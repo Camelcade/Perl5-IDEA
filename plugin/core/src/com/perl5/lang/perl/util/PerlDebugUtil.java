@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,8 +46,8 @@ import java.util.Collection;
 
 public class PerlDebugUtil {
   @Nullable
-  public static XLineBreakpoint findBreakpoint(final Project project, final PerlDebuggingEventBreakpoint breakpointBase) {
-    final XLineBreakpoint[] result = new XLineBreakpoint[]{null};
+  public static XLineBreakpoint<?> findBreakpoint(final Project project, final PerlDebuggingEventBreakpoint breakpointBase) {
+    final XLineBreakpoint<?>[] result = new XLineBreakpoint<?>[]{null};
 
     ApplicationManager.getApplication().runReadAction(() -> {
       String path = breakpointBase.getPath();

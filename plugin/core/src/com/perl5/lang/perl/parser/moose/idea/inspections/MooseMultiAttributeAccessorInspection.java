@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,12 +38,12 @@ public class MooseMultiAttributeAccessorInspection extends PerlInspection {
     return new PerlVisitor() {
       @Override
       public void visitMooseAttributeWrapper(@NotNull PerlMooseAttributeWrapper o) {
-        List<PerlDelegatingLightNamedElement> lightElements = o.getLightElements();
+        List<? extends PerlDelegatingLightNamedElement<?>> lightElements = o.getLightElements();
         if (lightElements.size() < 2) {
           return;
         }
-        List<PerlDelegatingLightNamedElement> attributes = new ArrayList<>(lightElements.size());
-        List<PerlDelegatingLightNamedElement> accessors = new ArrayList<>(lightElements.size() - 1);
+        List<PerlDelegatingLightNamedElement<?>> attributes = new ArrayList<>(lightElements.size());
+        List<PerlDelegatingLightNamedElement<?>> accessors = new ArrayList<>(lightElements.size() - 1);
         lightElements.forEach(it -> {
           if (it instanceof PerlAttributeDefinition) {
             attributes.add(it);

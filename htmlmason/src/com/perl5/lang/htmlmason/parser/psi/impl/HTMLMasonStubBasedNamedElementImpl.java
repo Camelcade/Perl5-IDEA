@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,7 +38,7 @@ import java.util.Collections;
 import java.util.List;
 
 
-public abstract class HTMLMasonStubBasedNamedElementImpl<T extends StubElement> extends HTMLMasonStubBasedElement<T>
+public abstract class HTMLMasonStubBasedNamedElementImpl<T extends StubElement<?>> extends HTMLMasonStubBasedElement<T>
   implements HTMLMasonNamedElement {
   public HTMLMasonStubBasedNamedElementImpl(@NotNull T stub, @NotNull IStubElementType nodeType) {
     super(stub, nodeType);
@@ -105,7 +105,7 @@ public abstract class HTMLMasonStubBasedNamedElementImpl<T extends StubElement> 
 
   @NotNull
   public List<HTMLMasonCompositeElement> getArgsBlocks() {
-    StubElement rootStub = getGreenStub();
+    StubElement<?> rootStub = getGreenStub();
 
     //noinspection Duplicates duplicates file implementation
     if (rootStub != null) {

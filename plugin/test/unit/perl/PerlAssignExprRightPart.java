@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -137,7 +137,7 @@ public class PerlAssignExprRightPart extends PerlLightTestCase {
     doTestRightPart(PerlVariable.class);
   }
 
-  private void doTestRightPart(@NotNull Class clazz) {
+  private void doTestRightPart(@NotNull Class<? extends PsiElement> clazz) {
     initWithFileSmartWithoutErrors();
     PsiElement elementAtCaret = getElementAtCaret(clazz);
     assertNotNull(elementAtCaret);

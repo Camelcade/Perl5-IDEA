@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,7 +35,7 @@ public abstract class PerlImplementationData<Data extends PerlImplementationData
 
   @Contract("null->null")
   @Nullable
-  static PerlImplementationData from(@Nullable Sdk sdk) {
+  static PerlImplementationData<?, ?> from(@Nullable Sdk sdk) {
     return ObjectUtils.doIfNotNull(PerlSdkAdditionalData.from(sdk), PerlSdkAdditionalData::getImplementationData);
   }
 }

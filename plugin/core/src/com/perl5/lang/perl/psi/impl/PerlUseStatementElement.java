@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,13 +38,13 @@ public class PerlUseStatementElement extends PerlUseStatementElementBase {
 
   @NotNull
   @Override
-  public final List<PerlDelegatingLightNamedElement> computeLightElementsFromPsi() {
+  public final List<PerlDelegatingLightNamedElement<?>> computeLightElementsFromPsi() {
     return getPackageProcessor().computeLightElementsFromPsi(this);
   }
 
   @NotNull
   @Override
-  protected final List<PerlDelegatingLightNamedElement> computeLightElementsFromStubs(@NotNull PerlUseStatementStub stub) {
+  protected final List<PerlDelegatingLightNamedElement<?>> computeLightElementsFromStubs(@NotNull PerlUseStatementStub stub) {
     return getPackageProcessor().computeLightElementsFromStubs(this, stub);
   }
 

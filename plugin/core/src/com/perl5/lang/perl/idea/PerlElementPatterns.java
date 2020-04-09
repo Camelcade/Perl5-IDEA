@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -93,10 +93,10 @@ public interface PerlElementPatterns extends PerlElementTypes {
   PsiElementPattern.Capture<PerlSubNameElement> SUB_NAME_PATTERN = psiElement(PerlSubNameElement.class);
 
   PsiElementPattern.Capture<PsiPerlMethod> METHOD_PATTERN = psiElement(PsiPerlMethod.class);
-  PsiElementPattern.Capture IN_OBJECT_CALL_PATTERN = psiElement().withParent(PsiPerlNestedCall.class);
+  PsiElementPattern.Capture<PsiElement> IN_OBJECT_CALL_PATTERN = psiElement().withParent(PsiPerlNestedCall.class);
 
-  PsiElementPattern.Capture IN_STATIC_METHOD_PATTERN = psiElement().withParent(METHOD_PATTERN.andNot(IN_OBJECT_CALL_PATTERN));
-  PsiElementPattern.Capture IN_OBJECT_METHOD_PATTERN = psiElement().withParent(METHOD_PATTERN.and(IN_OBJECT_CALL_PATTERN));
+  PsiElementPattern.Capture<PsiElement> IN_STATIC_METHOD_PATTERN = psiElement().withParent(METHOD_PATTERN.andNot(IN_OBJECT_CALL_PATTERN));
+  PsiElementPattern.Capture<PsiElement> IN_OBJECT_METHOD_PATTERN = psiElement().withParent(METHOD_PATTERN.and(IN_OBJECT_CALL_PATTERN));
 
   PsiElementPattern.Capture<PerlVariable> VARIABLE_PATTERN = psiElement(PerlVariable.class);
 
@@ -225,16 +225,6 @@ public interface PerlElementPatterns extends PerlElementTypes {
     psiElement(PsiPerlStatement.class).withFirstChild(
       psiElement(PerlAssignExpression.class).withFirstChild(
         psiElement(PerlVariableDeclarationExpr.class)
-      )/*.andOr(
-                                                        psiElement().withLastChild(TAILING_SHIFT_PATTERN),
-							psiElement().withLastChild(ALL_ARGUMENTS_PATTERN)
-					)*/
-    );
+      ));
 
-  PsiElementPattern.Capture<PsiPerlStatement> ARGUMENTS_LAST_UNPACKING_PATTERN =
-    psiElement(PsiPerlStatement.class).withFirstChild(
-      psiElement(PsiPerlAssignExpr.class).withFirstChild(
-        psiElement(PerlVariableDeclarationExpr.class)
-      ).withLastChild(ALL_ARGUMENTS_PATTERN)
-    );
 }

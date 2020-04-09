@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -276,17 +276,15 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
 
   @Nullable
   public HTMLMasonFlagsStatement getFlagsStatement() {
-    StubElement stub = getStub();
-    FlagsStatementSeeker seeker;
+    StubElement<?> stub = getStub();
+    FlagsStatementSeeker<PsiElement> seeker;
 
     if (stub != null) {
       seeker = new FlagsStatementStubSeeker();
-      //noinspection unchecked
       PerlPsiUtil.processElementsFromStubs(stub, seeker, null);
     }
     else {
       seeker = new FlagsStatementPsiSeeker();
-      //noinspection unchecked
       PerlPsiUtil.processElementsFromPsi(this, seeker, null);
     }
     return seeker.getResult();
@@ -508,7 +506,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
   }
 
   public List<HTMLMasonCompositeElement> getMethodsDefinitions() {
-    StubElement parentStub = getStub();
+    StubElement<?> parentStub = getStub();
     if (parentStub != null) {
       final List<HTMLMasonCompositeElement> result = new ArrayList<>();
       PerlPsiUtil.processElementsFromStubs(parentStub, psi ->
@@ -527,7 +525,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
   @NotNull
   @Override
   public List<HTMLMasonCompositeElement> getArgsBlocks() {
-    StubElement rootStub = getStub();
+    StubElement<?> rootStub = getStub();
 
     //noinspection Duplicates in HTMLMasonStubBasedNamedElementImpl
     if (rootStub != null) {

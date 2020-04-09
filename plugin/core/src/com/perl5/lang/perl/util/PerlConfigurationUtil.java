@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,26 +16,19 @@
 
 package com.perl5.lang.perl.util;
 
-import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
-import com.intellij.openapi.fileChooser.FileChooserFactory;
 import com.intellij.openapi.fileTypes.*;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.openapi.ui.popup.PopupStep;
 import com.intellij.openapi.ui.popup.util.BaseListPopupStep;
-import com.intellij.openapi.vfs.VfsUtil;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.AnActionButton;
 import com.intellij.ui.AnActionButtonRunnable;
 import com.intellij.ui.CollectionListModel;
 import com.intellij.ui.ToolbarDecorator;
 import com.intellij.ui.components.JBList;
 import com.intellij.util.ui.JBUI;
-import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,48 +36,8 @@ import java.util.List;
 public class PerlConfigurationUtil {
   public static final int WIDGET_HEIGHT = 90;
 
-  public static JPanel createProjectPathsSelection(
-    @NotNull final Project myProject,
-    @NotNull final JBList rootsList,
-    @SuppressWarnings("Since15") @NotNull final CollectionListModel<String> rootsModel,
-    @NotNull @Nls final String dialogTitle
-  ) {
-    return ToolbarDecorator
-      .createDecorator(rootsList)
-      .setAddAction(anActionButton -> {
-        //rootsModel.add("New element");
-        FileChooserFactory.getInstance().createPathChooser(
-          FileChooserDescriptorFactory.
-            createMultipleFoldersDescriptor().
-            withRoots(myProject.getBaseDir()).
-            withTreeRootVisible(true).
-            withTitle(dialogTitle),
-          myProject,
-          rootsList
-        ).choose(null, virtualFiles -> {
-          String rootPath = myProject.getBasePath();
-          if (rootPath != null) {
-            VirtualFile rootFile = VfsUtil.findFileByIoFile(new File(rootPath), true);
-
-            if (rootFile != null) {
-              for (VirtualFile file : virtualFiles) {
-                String relativePath = VfsUtil.getRelativePath(file, rootFile);
-                if (!rootsModel.getItems().contains(relativePath)) {
-                  rootsModel.add(relativePath);
-                }
-              }
-            }
-          }
-        });
-      })
-      .setPreferredSize(JBUI.size(0, WIDGET_HEIGHT))
-      .createPanel();
-  }
-
-  public static JPanel createSubstituteExtensionPanel(
-    @SuppressWarnings("Since15") @NotNull final CollectionListModel<String> substitutedExtensionsModel,
-    @NotNull final JBList substitutedExtensionsList
-
+  public static JPanel createSubstituteExtensionPanel(@NotNull final CollectionListModel<String> substitutedExtensionsModel,
+                                                      @NotNull final JBList<String> substitutedExtensionsList
   ) {
     return ToolbarDecorator
       .createDecorator(substitutedExtensionsList)
@@ -113,8 +66,9 @@ public class PerlConfigurationUtil {
           BaseListPopupStep<FileNameMatcher> fileNameMatcherBaseListPopupStep =
             new BaseListPopupStep<FileNameMatcher>("Select Extension", possibleItems, itemsIcons) {
               @Override
-              public PopupStep onChosen(FileNameMatcher selectedValue, boolean finalChoice) {
+              public PopupStep<FileNameMatcher> onChosen(FileNameMatcher selectedValue, boolean finalChoice) {
                 substitutedExtensionsModel.add(selectedValue.getPresentableString());
+                //noinspection unchecked
                 return super.onChosen(selectedValue, finalChoice);
               }
             };

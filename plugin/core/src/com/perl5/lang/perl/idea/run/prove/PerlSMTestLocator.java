@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,9 +36,9 @@ class PerlSMTestLocator implements SMTestLocator {
   private static final String FILE_PROTOCOL = "myfile";
 
   @NotNull
-  private final PerlHostData myHostData;
+  private final PerlHostData<?, ?> myHostData;
 
-  public PerlSMTestLocator(@NotNull PerlHostData hostData) {
+  public PerlSMTestLocator(@NotNull PerlHostData<?, ?> hostData) {
     myHostData = hostData;
   }
 
@@ -55,7 +55,7 @@ class PerlSMTestLocator implements SMTestLocator {
         if (virtualFile != null) {
           PsiFile psiFile = PsiManager.getInstance(project).findFile(virtualFile);
           if (psiFile != null) {
-            return Collections.singletonList(new PsiLocation<PsiFile>(psiFile));
+            return Collections.singletonList(new PsiLocation<>(psiFile));
           }
         }
       }

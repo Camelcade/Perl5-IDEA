@@ -443,7 +443,7 @@ public class PerlDocUtil implements PerlElementTypes {
     return builder.toString();
   }
 
-  private static class PodTocBuilder implements PsiElementProcessor {
+  private static class PodTocBuilder implements PsiElementProcessor<PsiElement> {
     private final StringBuilder myBuilder;
     private int myHeaderLevel = 0;
 

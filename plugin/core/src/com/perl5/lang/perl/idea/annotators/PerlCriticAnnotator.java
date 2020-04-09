@@ -107,7 +107,7 @@ public class PerlCriticAnnotator extends ExternalAnnotator<PerlFile, List<PerlCr
         return null;
       }
 
-      BaseProcessHandler processHandler = PerlHostData.createProcessHandler(
+      BaseProcessHandler<?> processHandler = PerlHostData.createProcessHandler(
         criticCommandLine.withCharset(virtualFile.getCharset())
       );
 

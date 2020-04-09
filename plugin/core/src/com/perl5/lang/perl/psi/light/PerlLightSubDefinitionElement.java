@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -57,7 +57,7 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
 
   public PerlLightSubDefinitionElement(@NotNull Delegate delegate,
                                        @NotNull String name,
-                                       @NotNull IStubElementType elementType,
+                                       @NotNull IStubElementType<?, ?> elementType,
                                        @Nullable PsiElement nameIdentifier,
                                        @Nullable String namespaceName,
                                        @NotNull List<PerlSubArgument> subArguments,
@@ -74,7 +74,7 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
 
   public PerlLightSubDefinitionElement(@NotNull Delegate delegate,
                                        @NotNull String name,
-                                       @NotNull IStubElementType elementType,
+                                       @NotNull IStubElementType<?, ?> elementType,
                                        @NotNull PsiElement nameIdentifier,
                                        @Nullable String namespaceName,
                                        @NotNull PerlSubExpr elementSub) {
@@ -132,11 +132,17 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (!(o instanceof PerlLightSubDefinitionElement)) return false;
-    if (!super.equals(o)) return false;
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof PerlLightSubDefinitionElement<?>)) {
+      return false;
+    }
+    if (!super.equals(o)) {
+      return false;
+    }
 
-    PerlLightSubDefinitionElement element = (PerlLightSubDefinitionElement)o;
+    PerlLightSubDefinitionElement<?> element = (PerlLightSubDefinitionElement<?>)o;
 
     if (getNamespaceName() != null ? !getNamespaceName().equals(element.getNamespaceName()) : element.getNamespaceName() != null) {
       return false;

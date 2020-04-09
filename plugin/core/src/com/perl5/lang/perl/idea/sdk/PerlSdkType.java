@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -88,13 +88,13 @@ public class PerlSdkType extends SdkType {
     }
     String oldText = PerlRunUtil.setProgressText(PerlBundle.message("perl.progress.refreshing.inc", sdk.getName()));
     LOG.info("Refreshing @INC for " + sdk);
-    PerlHostData hostData = PerlHostData.notNullFrom(sdk);
+    PerlHostData<?, ?> hostData = PerlHostData.notNullFrom(sdk);
     List<String> pathsToRefresh = new ArrayList<>();
     // syncing data if necessary
     List<String> incPaths = computeIncPaths(sdk);
     List<Exception> exceptions = new ArrayList<>();
 
-    try (PerlHostFileTransfer fileTransfer = hostData.getFileTransfer()) {
+    try (PerlHostFileTransfer<?> fileTransfer = hostData.getFileTransfer()) {
       Consumer<File> downloader = it -> syncAndCollectException(fileTransfer, it, pathsToRefresh, exceptions);
       for (String hostPath : incPaths) {
         downloader.accept(new File(hostPath));
@@ -167,7 +167,7 @@ public class PerlSdkType extends SdkType {
    * Copying {@code fileToCopy} using the {@code fileTransfer} and collecting local path of copied file to the {@code pathsToRefresh}. In
    * case exception been thrown by the {@code fileTransfer}, it's collected to the {@code exceptionsThrown}
    */
-  private static void syncAndCollectException(@NotNull PerlHostFileTransfer fileTransfer,
+  private static void syncAndCollectException(@NotNull PerlHostFileTransfer<?> fileTransfer,
                                               @Nullable File fileToCopy,
                                               @NotNull List<String> pathsToRefresh,
                                               @NotNull List<Exception> exceptionsThrown) {
@@ -257,8 +257,8 @@ public class PerlSdkType extends SdkType {
 
   @NotNull
   private static String suggestSdkName(@Nullable VersionDescriptor descriptor,
-                                       @NotNull PerlHostData hostData,
-                                       @NotNull PerlVersionManagerData versionManagerData) {
+                                       @NotNull PerlHostData<?, ?> hostData,
+                                       @NotNull PerlVersionManagerData<?, ?> versionManagerData) {
     return StringUtil.capitalize(hostData.getShortName()) + ", " +
            StringUtil.capitalize(versionManagerData.getShortName()) + ": " +
            "Perl" + (descriptor == null ? "" : " " + descriptor.version);
@@ -267,8 +267,8 @@ public class PerlSdkType extends SdkType {
   @Contract("null, _,_->null")
   @Nullable
   public static VersionDescriptor getPerlVersionDescriptor(@Nullable String interpreterPath,
-                                                           @NotNull PerlHostData hostData,
-                                                           @NotNull PerlVersionManagerData versionManagerData) {
+                                                           @NotNull PerlHostData<?, ?> hostData,
+                                                           @NotNull PerlVersionManagerData<?, ?> versionManagerData) {
     if (StringUtil.isEmpty(interpreterPath)) {
       return null;
     }
@@ -290,8 +290,8 @@ public class PerlSdkType extends SdkType {
 
 
   public static void createAndAddSdk(@NotNull String interpreterPath,
-                                     @NotNull PerlHostData hostData,
-                                     @NotNull PerlVersionManagerData versionManagerData,
+                                     @NotNull PerlHostData<?, ?> hostData,
+                                     @NotNull PerlVersionManagerData<?, ?> versionManagerData,
                                      @Nullable Consumer<Sdk> sdkConsumer,
                                      @Nullable Project project) {
     createSdk(interpreterPath, hostData, versionManagerData, sdk -> {
@@ -310,8 +310,8 @@ public class PerlSdkType extends SdkType {
    * @param sdkConsumer     created sdk consumer
    */
   public static void createSdk(@NotNull String interpreterPath,
-                               @NotNull PerlHostData hostData,
-                               @NotNull PerlVersionManagerData versionManagerData,
+                               @NotNull PerlHostData<?, ?> hostData,
+                               @NotNull PerlVersionManagerData<?, ?> versionManagerData,
                                @NotNull Consumer<Sdk> sdkConsumer) {
     VersionDescriptor perlVersionDescriptor = PerlSdkType.getPerlVersionDescriptor(interpreterPath, hostData, versionManagerData);
     if (perlVersionDescriptor == null) {

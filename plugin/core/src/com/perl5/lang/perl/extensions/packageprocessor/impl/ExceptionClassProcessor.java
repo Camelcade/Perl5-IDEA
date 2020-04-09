@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,12 +50,12 @@ public class ExceptionClassProcessor extends PerlPackageProcessorBase {
 
   @NotNull
   @Override
-  public List<PerlDelegatingLightNamedElement> computeLightElementsFromPsi(@NotNull PerlUseStatementElement useStatementElement) {
+  public List<PerlDelegatingLightNamedElement<?>> computeLightElementsFromPsi(@NotNull PerlUseStatementElement useStatementElement) {
     PsiPerlExpr expr = useStatementElement.getExpr();
     if (expr == null) {
       return Collections.emptyList();
     }
-    List<PerlDelegatingLightNamedElement> result = new ArrayList<>();
+    List<PerlDelegatingLightNamedElement<?>> result = new ArrayList<>();
     List<PsiElement> listElements = PerlArrayUtil.collectListElements(expr);
 
     for (int i = 0; i < listElements.size(); i++) {
@@ -67,11 +67,11 @@ public class ExceptionClassProcessor extends PerlPackageProcessorBase {
 
   @NotNull
   @Override
-  public List<PerlDelegatingLightNamedElement> computeLightElementsFromStubs(@NotNull PerlUseStatementElement useStatementElement,
-                                                                             @NotNull PerlUseStatementStub useStatementStub) {
+  public List<PerlDelegatingLightNamedElement<?>> computeLightElementsFromStubs(@NotNull PerlUseStatementElement useStatementElement,
+                                                                                @NotNull PerlUseStatementStub useStatementStub) {
     return useStatementStub.getLightNamedElementsStubs().stream()
       .map(childStub -> {
-        IStubElementType stubType = childStub.getStubType();
+        IStubElementType<?, ?> stubType = childStub.getStubType();
         if (stubType == LIGHT_NAMESPACE_DEFINITION) {
           return new PerlLightExceptionClassDefinition(useStatementElement, (PerlNamespaceDefinitionStub)childStub);
         }
@@ -88,7 +88,7 @@ public class ExceptionClassProcessor extends PerlPackageProcessorBase {
 
   private void processExceptionElement(@NotNull List<PsiElement> listElements,
                                        int currentIndex,
-                                       @NotNull List<PerlDelegatingLightNamedElement> result,
+                                       @NotNull List<PerlDelegatingLightNamedElement<?>> result,
                                        @NotNull PerlUseStatementElement useStatementElement) {
     PsiElement listElement = listElements.get(currentIndex);
     if (!useStatementElement.isAcceptableIdentifierElement(listElement)) {

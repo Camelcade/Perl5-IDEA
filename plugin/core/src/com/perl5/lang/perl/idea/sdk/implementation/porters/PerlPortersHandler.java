@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,8 +39,8 @@ class PerlPortersHandler
   @Nullable
   @Override
   protected PerlPortersData doCreateData(@Nullable String interpreterPath,
-                                         @Nullable PerlHostData hostData,
-                                         @Nullable PerlVersionManagerData versionManagerData) {
+                                         @Nullable PerlHostData<?, ?> hostData,
+                                         @Nullable PerlVersionManagerData<?, ?> versionManagerData) {
     return interpreterPath == null || hostData == null || versionManagerData == null ? null : createData();
   }
 }

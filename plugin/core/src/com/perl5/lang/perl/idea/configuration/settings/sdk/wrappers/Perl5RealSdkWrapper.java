@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -68,7 +68,7 @@ public class Perl5RealSdkWrapper implements Perl5SdkWrapper {
   }
 
   public static void appendSdkString(@NotNull ColoredListCellRenderer<Perl5SdkWrapper> renderer, @NotNull Sdk sdk) {
-    PerlHostData hostData = PerlHostData.notNullFrom(sdk);
+    PerlHostData<?, ?> hostData = PerlHostData.notNullFrom(sdk);
     renderPair(renderer, hostData.getPrimaryShortName(), hostData.getSecondaryShortName());
     PerlVersionManagerData<?, ?> versionManagerData = PerlVersionManagerData.notNullFrom(sdk);
     renderPair(renderer, versionManagerData.getPrimaryShortName(), versionManagerData.getSecondaryShortName());

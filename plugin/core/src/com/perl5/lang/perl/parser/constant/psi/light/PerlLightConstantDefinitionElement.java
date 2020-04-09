@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,7 +35,7 @@ import java.util.List;
 public class PerlLightConstantDefinitionElement extends PerlLightSubDefinitionElement<PerlUseStatementElement> {
   public PerlLightConstantDefinitionElement(@NotNull PerlUseStatementElement wrapper,
                                             @NotNull String subName,
-                                            @NotNull IStubElementType elementType,
+                                            @NotNull IStubElementType<?, ?> elementType,
                                             @NotNull PsiElement nameIdentifier,
                                             @Nullable String packageName,
                                             @NotNull List<PerlSubArgument> subArguments,

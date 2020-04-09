@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,16 +34,16 @@ import java.util.Objects;
 
 public class PerlSdkAdditionalData implements SdkAdditionalData {
   @NotNull
-  private final PerlHostData myHostData;
+  private final PerlHostData<?, ?> myHostData;
   @NotNull
-  private final PerlVersionManagerData myVersionManagerData;
+  private final PerlVersionManagerData<?, ?> myVersionManagerData;
   @NotNull
-  private final PerlImplementationData myImplementationData;
+  private final PerlImplementationData<?, ?> myImplementationData;
 
 
-  public PerlSdkAdditionalData(@NotNull PerlHostData hostData,
-                               @NotNull PerlVersionManagerData versionManagerData,
-                               @NotNull PerlImplementationData implementationData) {
+  public PerlSdkAdditionalData(@NotNull PerlHostData<?, ?> hostData,
+                               @NotNull PerlVersionManagerData<?, ?> versionManagerData,
+                               @NotNull PerlImplementationData<?, ?> implementationData) {
     myHostData = hostData;
     myVersionManagerData = versionManagerData;
     myImplementationData = implementationData;

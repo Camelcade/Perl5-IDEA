@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,7 +42,7 @@ public abstract class GenericPerlRunConfigurationProducer<Configuration extends 
       return Collections.emptyList();
     }
     Set<VirtualFile> virtualFiles = new LinkedHashSet<>();
-    Consumer<Location> locationConsumer = location -> {
+    Consumer<Location<?>> locationConsumer = location -> {
       if (location != null) {
         VirtualFile virtualFile = location.getVirtualFile();
         if (virtualFile != null && !(virtualFile instanceof PerlRemoteFileSystem.PerlRemoteVirtualFile) && isOurFile(virtualFile)) {

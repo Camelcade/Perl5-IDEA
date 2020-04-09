@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@ import java.util.Objects;
 
 
 public abstract class PerlCachingReference<T extends PsiElement> extends PsiPolyVariantReferenceBase<T> {
-  private final static ResolveCache.PolyVariantResolver<PerlCachingReference> RESOLVER = PerlCachingReference::resolveInner;
+  private final static ResolveCache.PolyVariantResolver<PerlCachingReference<?>> RESOLVER = PerlCachingReference::resolveInner;
 
   private final TextRange myExplicitRange;
 

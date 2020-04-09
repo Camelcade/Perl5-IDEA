@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,9 +44,9 @@ import static com.intellij.codeInsight.TargetElementUtil.REFERENCED_ELEMENT_ACCE
 public class PodUsagesHighlightingFactory extends HighlightUsagesHandlerFactoryBase {
   @Nullable
   @Override
-  public HighlightUsagesHandlerBase createHighlightUsagesHandler(@NotNull Editor editor,
-                                                                 @NotNull PsiFile file,
-                                                                 @NotNull PsiElement target) {
+  public HighlightUsagesHandlerBase<?> createHighlightUsagesHandler(@NotNull Editor editor,
+                                                                    @NotNull PsiFile file,
+                                                                    @NotNull PsiElement target) {
     if (!target.getLanguage().isKindOf(PodLanguage.INSTANCE)) {
       return null;
     }

@@ -57,8 +57,8 @@ public class PerlUseStatementStubElementType extends PerlPolyNamedElementType<Pe
   @NotNull
   @Override
   protected PerlUseStatementStub createStub(@NotNull PerlUseStatementElement psi,
-                                            StubElement parentStub,
-                                            @NotNull List<StubElement> lightElementsStubs) {
+                                            StubElement<?> parentStub,
+                                            @NotNull List<StubElement<?>> lightElementsStubs) {
     return new PerlUseStatementStub(
       parentStub,
       psi.getNamespaceName(),
@@ -71,8 +71,8 @@ public class PerlUseStatementStubElementType extends PerlPolyNamedElementType<Pe
   @NotNull
   @Override
   protected PerlUseStatementStub deserialize(@NotNull StubInputStream dataStream,
-                                             StubElement parentStub,
-                                             @NotNull List<StubElement> lightElementsStubs) throws IOException {
+                                             StubElement<?> parentStub,
+                                             @NotNull List<StubElement<?>> lightElementsStubs) throws IOException {
     return new PerlUseStatementStub(parentStub,
                                     Objects.requireNonNull(readString(dataStream)),
                                     Objects.requireNonNull(readString(dataStream)),

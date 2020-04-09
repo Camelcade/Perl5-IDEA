@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,13 +39,13 @@ public class PerlRenamingVetoCondition implements Condition<PsiElement> {
       return false;
     }
 
-    PsiElement delegate = ((PerlLightMethodDefinitionElement)element).getDelegate();
+    PsiElement delegate = ((PerlLightMethodDefinitionElement<?>)element).getDelegate();
     if (!(delegate instanceof PerlUseStatementElement)) {
       return false;
     }
 
     PerlPackageProcessor packageProcessor = ((PerlUseStatementElement)delegate).getPackageProcessor();
     return packageProcessor instanceof ExceptionClassProcessor &&
-           ExceptionClassProcessor.FIELDS_METHOD_NAME.equals(((PerlLightMethodDefinitionElement)element).getName());
+           ExceptionClassProcessor.FIELDS_METHOD_NAME.equals(((PerlLightMethodDefinitionElement<?>)element).getName());
   }
 }

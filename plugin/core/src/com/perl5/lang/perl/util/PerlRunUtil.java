@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -159,7 +159,7 @@ public class PerlRunUtil {
     }
     PerlCommandLine commandLine = new PerlCommandLine(perlSdk).withProject(project);
     commandLine.setExePath(interpreterPath);
-    PerlHostData hostData = PerlHostData.notNullFrom(perlSdk);
+    PerlHostData<?, ?> hostData = PerlHostData.notNullFrom(perlSdk);
     for (VirtualFile libRoot : PerlProjectManager.getInstance(project).getModulesLibraryRoots()) {
       commandLine.addParameter(PERL_I + hostData.getRemotePath(libRoot.getCanonicalPath()));
     }
@@ -345,7 +345,7 @@ public class PerlRunUtil {
     List<VirtualFile> files =
       new ArrayList<>(ContainerUtil.map(sdk.getRootProvider().getFiles(OrderRootType.CLASSES), PerlRunUtil::findLibsBin));
 
-    PerlHostData hostData = PerlHostData.notNullFrom(sdk);
+    PerlHostData<?, ?> hostData = PerlHostData.notNullFrom(sdk);
     File localSdkBinDir = hostData.getLocalPath(new File(
       StringUtil.notNullize(PerlProjectManager.getInterpreterPath(sdk))).getParentFile());
     if (localSdkBinDir != null) {
@@ -396,7 +396,7 @@ public class PerlRunUtil {
    * @return version string or null if response was wrong
    */
   @Nullable
-  public static String getPathFromPerl(@NotNull PerlHostData hostData) {
+  public static String getPathFromPerl(@NotNull PerlHostData<?, ?> hostData) {
     List<String> perlPathLines = getOutputFromProgram(
       hostData, hostData.getOsHandler().getPerlExecutableName(), PERL_LE, PERL_CTRL_X);
     return perlPathLines.size() == 1 ? perlPathLines.get(0) : null;
@@ -417,8 +417,8 @@ public class PerlRunUtil {
    * Commands are going to be patched with version manager, represented by {@code versionManagerData}
    */
   @NotNull
-  public static List<String> getOutputFromProgram(@NotNull PerlHostData hostData,
-                                                  @NotNull PerlVersionManagerData versionManagerData,
+  public static List<String> getOutputFromProgram(@NotNull PerlHostData<?, ?> hostData,
+                                                  @NotNull PerlVersionManagerData<?, ?> versionManagerData,
                                                   @NotNull String... commands) {
     return getOutputFromProgram(new PerlCommandLine(commands).withHostData(hostData).withVersionManagerData(versionManagerData));
   }
@@ -429,7 +429,7 @@ public class PerlRunUtil {
    * @apiNote MUST not be used for executing perl scripts
    */
   @NotNull
-  public static List<String> getOutputFromProgram(@NotNull PerlHostData hostData, @NotNull String... commands) {
+  public static List<String> getOutputFromProgram(@NotNull PerlHostData<?, ?> hostData, @NotNull String... commands) {
     return getOutputFromProgram(new PerlCommandLine(commands).withHostData(hostData));
   }
 

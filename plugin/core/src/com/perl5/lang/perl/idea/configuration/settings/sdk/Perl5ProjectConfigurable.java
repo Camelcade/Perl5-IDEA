@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -186,7 +186,7 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
     builder.addLabeledComponent(PerlBundle.message("perl.config.deparse.options.label"), deparseArgumentsTextField);
 
     selfNamesModel = new CollectionListModel<>();
-    JBList selfNamesList = new JBList<>(selfNamesModel);
+    JBList<String> selfNamesList = new JBList<>(selfNamesModel);
     selfNamesList.setVisibleRowCount(ourRowsCount);
     builder.addLabeledComponent(new JLabel(PerlBundle.message("perl.config.self.names.label")), ToolbarDecorator
       .createDecorator(selfNamesList)

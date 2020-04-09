@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,8 +48,8 @@ public class ClassAccessorWrapperElementType extends PerlPolyNamedElementType<Pe
   @NotNull
   @Override
   protected PerlClassAccessorWrapperStub createStub(@NotNull PerlClassAccessorWrapper psi,
-                                                    StubElement parentStub,
-                                                    @NotNull List<StubElement> lightElementsStubs) {
+                                                    StubElement<?> parentStub,
+                                                    @NotNull List<StubElement<?>> lightElementsStubs) {
     return new PerlClassAccessorWrapperStub(parentStub, this, lightElementsStubs, psi.isFollowBestPractice());
   }
 
@@ -61,8 +61,8 @@ public class ClassAccessorWrapperElementType extends PerlPolyNamedElementType<Pe
   @NotNull
   @Override
   protected PerlClassAccessorWrapperStub deserialize(@NotNull StubInputStream dataStream,
-                                                     StubElement parentStub,
-                                                     @NotNull List<StubElement> childStubs) throws IOException {
+                                                     StubElement<?> parentStub,
+                                                     @NotNull List<StubElement<?>> childStubs) throws IOException {
     return new PerlClassAccessorWrapperStub(parentStub, this, childStubs, dataStream.readBoolean());
   }
 }

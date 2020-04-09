@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,13 +32,13 @@ import java.util.List;
 import java.util.Map;
 
 public class PerlLightExceptionClassDefinition extends PerlLightNamespaceDefinitionElement {
-  public PerlLightExceptionClassDefinition(@NotNull PerlPolyNamedElement delegate, @NotNull PerlNamespaceDefinitionStub stub) {
+  public PerlLightExceptionClassDefinition(@NotNull PerlPolyNamedElement<?> delegate, @NotNull PerlNamespaceDefinitionStub stub) {
     super(delegate, stub);
   }
 
-  public PerlLightExceptionClassDefinition(@NotNull PerlPolyNamedElement delegate,
+  public PerlLightExceptionClassDefinition(@NotNull PerlPolyNamedElement<?> delegate,
                                            @NotNull String name,
-                                           @NotNull IStubElementType elementType,
+                                           @NotNull IStubElementType<?, ?> elementType,
                                            @NotNull PsiElement nameIdentifier,
                                            @NotNull PerlMroType mroType,
                                            @NotNull List<String> parentNamespacesNames,

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -97,10 +97,10 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElement<PerlMooseAtt
 
   @NotNull
   @Override
-  protected List<PerlDelegatingLightNamedElement> computeLightElementsFromStubs(@NotNull PerlMooseAttributeWrapperStub stub) {
+  protected List<PerlDelegatingLightNamedElement<?>> computeLightElementsFromStubs(@NotNull PerlMooseAttributeWrapperStub stub) {
     return stub.getLightNamedElementsStubs().stream()
       .map(childStub -> {
-        IStubElementType stubType = childStub.getStubType();
+        IStubElementType<?, ?> stubType = childStub.getStubType();
         if (stubType == LIGHT_METHOD_DEFINITION) {
           return new PerlLightMethodDefinitionElement<>(this, (PerlSubDefinitionStub)childStub);
         }
@@ -138,7 +138,7 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElement<PerlMooseAtt
 
   @NotNull
   @Override
-  public List<PerlDelegatingLightNamedElement> computeLightElementsFromPsi() {
+  public List<PerlDelegatingLightNamedElement<?>> computeLightElementsFromPsi() {
     Pair<List<PsiElement>, List<PsiElement>> lists = getIdentifiersAndListElements();
     if (lists == null) {
       return Collections.emptyList();
@@ -147,12 +147,12 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElement<PerlMooseAtt
   }
 
   @NotNull
-  private List<PerlDelegatingLightNamedElement> createMojoAttributes(@NotNull Pair<List<PsiElement>, List<PsiElement>> lists) {
+  private List<PerlDelegatingLightNamedElement<?>> createMojoAttributes(@NotNull Pair<List<PsiElement>, List<PsiElement>> lists) {
     List<PsiElement> arguments = lists.second.subList(1, lists.second.size());
     PsiElement argument = ContainerUtil.getFirstItem(arguments);
     PerlSubExpr subExpr = ObjectUtils.tryCast(argument, PerlSubExpr.class);
 
-    List<PerlDelegatingLightNamedElement> result = new ArrayList<>();
+    List<PerlDelegatingLightNamedElement<?>> result = new ArrayList<>();
     String namespaceName = PerlPackageUtil.getContextNamespaceName(this);
     for (PsiElement identifier : lists.first) {
       AtomicNotNullLazyValue<PerlValue> valueProvider = AtomicNotNullLazyValue.createValue(() -> PerlSmartGetterValue.create(
@@ -176,10 +176,10 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElement<PerlMooseAtt
   }
 
   @NotNull
-  private List<PerlDelegatingLightNamedElement> createMooseAttributes(@NotNull List<PsiElement> identifiers,
-                                                                      @NotNull List<PsiElement> listElements) {
+  private List<PerlDelegatingLightNamedElement<?>> createMooseAttributes(@NotNull List<PsiElement> identifiers,
+                                                                         @NotNull List<PsiElement> listElements) {
 
-    List<PerlDelegatingLightNamedElement> result = new ArrayList<>();
+    List<PerlDelegatingLightNamedElement<?>> result = new ArrayList<>();
     String packageName = PerlPackageUtil.getContextNamespaceName(this);
 
     Map<String, PerlHashEntry> parameters = PerlHashUtil.packToHash(listElements.subList(1, listElements.size()));
@@ -203,7 +203,7 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElement<PerlMooseAtt
     }
 
     // handling accessor, reader, etc.
-    List<PerlLightMethodDefinitionElement> secondaryResult = new ArrayList<>();
+    List<PerlLightMethodDefinitionElement<?>> secondaryResult = new ArrayList<>();
     for (String key : MOOSE_SUB_NAMES_KEYS) {
       PerlHashEntry entry = parameters.get(key);
       if (entry == null) {
@@ -292,7 +292,7 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElement<PerlMooseAtt
       }
     }
 
-    // handle required this should alter contstructor, no idea how for now
+    // handle required this should alter consttructor, no idea how for now
     // handle HANDLES ROLE OR ROLETYPE requires index
     // handle HANDLES DUCKTYPE requires index
     // handle HANDLES REGEXP this requires regexp & resolve

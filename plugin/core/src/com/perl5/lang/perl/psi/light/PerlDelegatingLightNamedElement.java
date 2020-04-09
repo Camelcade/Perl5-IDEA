@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,13 +51,13 @@ public class PerlDelegatingLightNamedElement<Delegate extends PerlPolyNamedEleme
 
   public PerlDelegatingLightNamedElement(@NotNull Delegate delegate,
                                          @NotNull String name,
-                                         @NotNull IStubElementType elementType) {
+                                         @NotNull IStubElementType<?, ?> elementType) {
     this(delegate, name, elementType, null);
   }
 
   public PerlDelegatingLightNamedElement(@NotNull Delegate delegate,
                                          @NotNull String name,
-                                         @NotNull IStubElementType elementType,
+                                         @NotNull IStubElementType<?, ?> elementType,
                                          @Nullable PsiElement nameIdentifier) {
     super(delegate, elementType);
     myName = name;
@@ -71,11 +71,11 @@ public class PerlDelegatingLightNamedElement<Delegate extends PerlPolyNamedEleme
   }
 
   @Override
-  public IStubElementType getElementType() {
-    return (IStubElementType)super.getElementType();
+  public IStubElementType<?, PerlDelegatingLightNamedElement<?>> getElementType() {
+    return (IStubElementType<?, PerlDelegatingLightNamedElement<?>>)super.getElementType();
   }
 
-  public PerlDelegatingLightNamedElement withNameComputation(@NotNull Function<String, String> nameComputation) {
+  public PerlDelegatingLightNamedElement<Delegate> withNameComputation(@NotNull Function<String, String> nameComputation) {
     myNameComputation = nameComputation;
     return this;
   }
@@ -90,7 +90,7 @@ public class PerlDelegatingLightNamedElement<Delegate extends PerlPolyNamedEleme
       return myNameIdentifier;
     }
 
-    for (PerlDelegatingLightNamedElement element : getDelegate().computeLightElementsFromPsi()) {
+    for (PerlDelegatingLightNamedElement<?> element : getDelegate().computeLightElementsFromPsi()) {
       if (element.equals(this)) {
         return myNameIdentifier = element.getNameIdentifier();
       }

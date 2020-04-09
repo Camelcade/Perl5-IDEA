@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -104,7 +104,7 @@ public class PodFormatterX extends PodStubBasedTitledSection implements PodForma
   public PsiElement getIndexTarget() {
     PodSectionStub stub = getStub();
     if (stub != null) {
-      StubElement parentStub = stub.getParentStub();
+      StubElement<?> parentStub = stub.getParentStub();
       return parentStub == null ? null : parentStub.getPsi();
     }
     PsiElement parent = getParent();

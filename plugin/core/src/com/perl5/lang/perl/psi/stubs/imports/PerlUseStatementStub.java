@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,11 +35,11 @@ public class PerlUseStatementStub extends PerlPolyNamedElementStub<PerlUseStatem
   @Nullable
   private final List<String> myImportOptions;
 
-  public PerlUseStatementStub(StubElement parent,
+  public PerlUseStatementStub(StubElement<?> parent,
                               @NotNull String namespaceName,
                               @NotNull String packageName,
                               @Nullable List<String> importOptions,
-                              @NotNull List<StubElement> lightNamedElementsStubs) {
+                              @NotNull List<StubElement<?>> lightNamedElementsStubs) {
     super(parent, PerlStubElementTypes.USE_STATEMENT, lightNamedElementsStubs);
     myPackageName = packageName;
     myNamespaceName = namespaceName;

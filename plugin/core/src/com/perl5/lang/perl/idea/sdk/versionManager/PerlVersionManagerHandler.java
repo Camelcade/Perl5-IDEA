@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -92,7 +92,7 @@ public abstract class PerlVersionManagerHandler<Data extends PerlVersionManagerD
     return EP.getExtensionsList();
   }
 
-  public static void forEach(@NotNull Consumer<? super PerlVersionManagerHandler> action) {
+  public static void forEach(@NotNull Consumer<? super PerlVersionManagerHandler<?, ?>> action) {
     all().forEach(action);
   }
 
@@ -103,7 +103,7 @@ public abstract class PerlVersionManagerHandler<Data extends PerlVersionManagerD
 
   @Contract("null->null")
   @Nullable
-  static PerlVersionManagerHandler from(@Nullable Sdk sdk) {
+  static PerlVersionManagerHandler<?, ?> from(@Nullable Sdk sdk) {
     PerlVersionManagerData<?, ?> versionManagerData = PerlVersionManagerData.from(sdk);
     return versionManagerData == null ? null : versionManagerData.getHandler();
   }
@@ -113,7 +113,7 @@ public abstract class PerlVersionManagerHandler<Data extends PerlVersionManagerD
    */
   @Contract("null -> false")
   public boolean isSameHandler(@Nullable Sdk sdk) {
-    PerlVersionManagerHandler handler = PerlVersionManagerHandler.from(sdk);
+    PerlVersionManagerHandler<?, ?> handler = PerlVersionManagerHandler.from(sdk);
     return handler != null && handler.getId().equals(getId());
   }
 

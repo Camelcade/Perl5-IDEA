@@ -55,7 +55,7 @@ public class PsiStubsAwareRecursiveVisitor extends PsiRecursiveElementVisitor im
       return false;
     }
     ProgressManager.checkCanceled();
-    for (StubElement childrenStub : stubElement.getChildrenStubs()) {
+    for (StubElement<?> childrenStub : stubElement.getChildrenStubs()) {
       if (visitor instanceof SelfStoppingVisitor && ((SelfStoppingVisitor)visitor).isStopped()) {
         break;
       }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,7 +39,7 @@ public class HTMLMasonSubTypeHierarchyStructure extends PerlSubTypesHierarchyTre
   }
 
   @Override
-  protected PerlHierarchyNodeDescriptor createDescriptor(NodeDescriptor parentDescriptor, PsiElement element, boolean isBase) {
+  protected PerlHierarchyNodeDescriptor createDescriptor(NodeDescriptor<?> parentDescriptor, PsiElement element, boolean isBase) {
     return new HTMLMasonHierarchyNodeDescriptor(parentDescriptor, element, isBase);
   }
 

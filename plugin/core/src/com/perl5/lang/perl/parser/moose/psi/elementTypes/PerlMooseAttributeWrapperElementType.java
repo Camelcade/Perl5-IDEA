@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,8 +50,8 @@ public class PerlMooseAttributeWrapperElementType
   @NotNull
   @Override
   protected PerlMooseAttributeWrapperStub createStub(@NotNull PerlMooseAttributeWrapper perlMooseAttributeWrapper,
-                                                     StubElement parentStub,
-                                                     @NotNull List<StubElement> lightElementsStubs) {
+                                                     StubElement<?> parentStub,
+                                                     @NotNull List<StubElement<?>> lightElementsStubs) {
     return new PerlMooseAttributeWrapperStub(parentStub, this, perlMooseAttributeWrapper.getAttributesNames(), lightElementsStubs);
   }
 
@@ -63,8 +63,8 @@ public class PerlMooseAttributeWrapperElementType
   @NotNull
   @Override
   protected PerlMooseAttributeWrapperStub deserialize(@NotNull StubInputStream dataStream,
-                                                      StubElement parentStub,
-                                                      @NotNull List<StubElement> childStubs) throws IOException {
+                                                      StubElement<?> parentStub,
+                                                      @NotNull List<StubElement<?>> childStubs) throws IOException {
     List<String> attributesNames = PerlStubSerializationUtil.readStringsList(dataStream);
     assert attributesNames != null;
     return new PerlMooseAttributeWrapperStub(parentStub, this, attributesNames, childStubs);

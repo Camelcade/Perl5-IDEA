@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,7 +54,7 @@ public class PerlLightNamespaceDefinitionElement extends PerlDelegatingLightName
   @NotNull
   private final Map<String, List<String>> myExportTags;
 
-  public PerlLightNamespaceDefinitionElement(@NotNull PerlPolyNamedElement delegate, @NotNull PerlNamespaceDefinitionStub stub) {
+  public PerlLightNamespaceDefinitionElement(@NotNull PerlPolyNamedElement<?> delegate, @NotNull PerlNamespaceDefinitionStub stub) {
     super(delegate, stub.getNamespaceName(), stub.getStubType());
     myMroType = stub.getMroType();
     myParentNamespacesNames = stub.getParentNamespacesNames();
@@ -64,9 +64,9 @@ public class PerlLightNamespaceDefinitionElement extends PerlDelegatingLightName
     myExportTags = stub.getEXPORT_TAGS();
   }
 
-  public PerlLightNamespaceDefinitionElement(@NotNull PerlPolyNamedElement delegate,
+  public PerlLightNamespaceDefinitionElement(@NotNull PerlPolyNamedElement<?> delegate,
                                              @NotNull String name,
-                                             @NotNull IStubElementType elementType,
+                                             @NotNull IStubElementType<?, ?> elementType,
                                              @NotNull PsiElement nameIdentifier,
                                              @NotNull PerlMroType mroType,
                                              @NotNull List<String> parentNamespacesNames,

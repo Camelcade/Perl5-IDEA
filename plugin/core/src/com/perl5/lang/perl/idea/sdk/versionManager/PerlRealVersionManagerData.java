@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -86,10 +86,10 @@ public abstract class PerlRealVersionManagerData<Data extends PerlRealVersionMan
   }
 
   @NotNull
-  public static PerlRealVersionManagerData notNullFrom(@NotNull Sdk sdk) {
-    PerlVersionManagerData data = PerlVersionManagerData.notNullFrom(sdk);
+  public static PerlRealVersionManagerData<?, ?> notNullFrom(@NotNull Sdk sdk) {
+    PerlVersionManagerData<?, ?> data = PerlVersionManagerData.notNullFrom(sdk);
     if (data instanceof PerlRealVersionManagerData) {
-      return (PerlRealVersionManagerData)data;
+      return (PerlRealVersionManagerData<?, ?>)data;
     }
     throw new NullPointerException("Additional data supposed to be " + PerlRealVersionManagerData.class.getSimpleName() + " not " + data);
   }

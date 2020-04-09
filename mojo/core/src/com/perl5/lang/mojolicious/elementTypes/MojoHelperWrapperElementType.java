@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,16 +41,16 @@ public class MojoHelperWrapperElementType extends PerlPolyNamedElementType<MojoH
   @NotNull
   @Override
   protected MojoHelperWrapperStub createStub(@NotNull MojoHelperWrapper wrapper,
-                                             StubElement parentStub,
-                                             @NotNull List<StubElement> lightElementsStubs) {
+                                             StubElement<?> parentStub,
+                                             @NotNull List<StubElement<?>> lightElementsStubs) {
     return new MojoHelperWrapperStub(parentStub, this, lightElementsStubs);
   }
 
   @NotNull
   @Override
   protected MojoHelperWrapperStub deserialize(@NotNull StubInputStream dataStream,
-                                              StubElement parentStub,
-                                              @NotNull List<StubElement> lightElementsStubs) throws IOException {
+                                              StubElement<?> parentStub,
+                                              @NotNull List<StubElement<?>> lightElementsStubs) throws IOException {
     return new MojoHelperWrapperStub(parentStub, this, lightElementsStubs);
   }
 

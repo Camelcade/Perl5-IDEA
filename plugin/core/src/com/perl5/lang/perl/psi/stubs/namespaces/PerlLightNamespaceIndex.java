@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,7 +50,7 @@ public class PerlLightNamespaceIndex extends PerlStubIndexBase<PerlPolyNamedElem
 
     return StubIndex.getInstance().processElements(KEY, packageName, project, scope, PerlPolyNamedElement.class, polyNamedElement -> {
       ProgressManager.checkCanceled();
-      for (PerlDelegatingLightNamedElement lightNamedElement : ((PerlPolyNamedElement<?>)polyNamedElement).getLightElements()) {
+      for (PerlDelegatingLightNamedElement<?> lightNamedElement : ((PerlPolyNamedElement<?>)polyNamedElement).getLightElements()) {
         if (lightNamedElement instanceof PerlNamespaceDefinitionElement &&
             packageName.equals(((PerlNamespaceDefinitionElement)lightNamedElement).getNamespaceName())) {
           if (!processor.process((PerlNamespaceDefinitionElement)lightNamedElement)) {

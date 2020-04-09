@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ import org.intellij.plugins.intelliLang.inject.AbstractLanguageInjectionSupport;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlInjectionSupport extends AbstractLanguageInjectionSupport {
-  private static final Class[] PATTERNS_CLASSES = new Class[]{PerlInjectionPatterns.class};
+  private static final Class<?>[] PATTERNS_CLASSES = new Class[]{PerlInjectionPatterns.class};
 
   @NotNull
   @Override
@@ -42,7 +42,7 @@ public class PerlInjectionSupport extends AbstractLanguageInjectionSupport {
 
   @NotNull
   @Override
-  public Class[] getPatternClasses() {
+  public Class<?>[] getPatternClasses() {
     return PATTERNS_CLASSES;
   }
 }

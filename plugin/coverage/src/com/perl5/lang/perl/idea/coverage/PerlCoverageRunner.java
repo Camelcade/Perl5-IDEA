@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -99,7 +99,7 @@ public class PerlCoverageRunner extends CoverageRunner {
         return null;
       }
 
-      PerlHostData hostData = PerlHostData.notNullFrom(effectiveSdk);
+      PerlHostData<?, ?> hostData = PerlHostData.notNullFrom(effectiveSdk);
       PerlCommandLine commandLine = PerlRunUtil.getPerlCommandLine(
         project, effectiveSdk, coverFile,
         Collections.singletonList(PerlRunUtil.PERL_I + hostData.getRemotePath(PerlPluginUtil.getHelpersLibPath())),
@@ -159,7 +159,7 @@ public class PerlCoverageRunner extends CoverageRunner {
   }
 
   @NotNull
-  private static ProjectData parsePerlFileData(@NotNull PerlHostData hostData, @NotNull PerlFileData[] filesData) {
+  private static ProjectData parsePerlFileData(@NotNull PerlHostData<?, ?> hostData, @NotNull PerlFileData[] filesData) {
     ProjectData projectData = new ProjectData();
     for (PerlFileData perlFileData : filesData) {
       if (StringUtil.isEmpty(perlFileData.name) || perlFileData.lines == null) {

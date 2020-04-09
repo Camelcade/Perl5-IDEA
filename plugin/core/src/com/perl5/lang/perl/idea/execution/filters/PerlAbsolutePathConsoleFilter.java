@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -58,7 +58,7 @@ public class PerlAbsolutePathConsoleFilter implements Filter {
     Matcher matcher = PATTERN.matcher(line);
     while (matcher.find()) {
       String filePath;
-      PerlHostData hostData = myHostDataContainer.getHostData();
+      PerlHostData<?, ?> hostData = myHostDataContainer.getHostData();
       filePath = hostData == null ? matcher.group(1) : hostData.getLocalPath(matcher.group(1));
       resultList.add(new Result(
         startOffset + matcher.start(1),

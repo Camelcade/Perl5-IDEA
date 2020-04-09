@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -59,7 +59,7 @@ public class PerlBrewAdapter extends PerlVersionManagerAdapter {
   static final String PERLBREW_INSTALL_PATCHPERL = "install-patchperl";
   static final String PERLBREW_INSTALL_CPANM = "install-cpanm";
 
-  public PerlBrewAdapter(@NotNull String versionManagerPath, @NotNull PerlHostData hostData) {
+  public PerlBrewAdapter(@NotNull String versionManagerPath, @NotNull PerlHostData<?, ?> hostData) {
     super(versionManagerPath, hostData);
   }
 

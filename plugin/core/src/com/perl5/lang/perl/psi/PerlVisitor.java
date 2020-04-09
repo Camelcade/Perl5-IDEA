@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -117,7 +117,7 @@ public class PerlVisitor extends PsiPerlVisitor {
     visitPolyNamedElement(o);
   }
 
-  public void visitPolyNamedElement(@NotNull PerlPolyNamedElement o) {
+  public void visitPolyNamedElement(@NotNull PerlPolyNamedElement<?> o) {
     visitElement(o);
     visitLightElements(o);
   }
@@ -126,7 +126,7 @@ public class PerlVisitor extends PsiPerlVisitor {
     if (!shouldVisitLightElements()) {
       return;
     }
-    for (PerlDelegatingLightNamedElement lightNamedElement : o.getLightElements()) {
+    for (PerlDelegatingLightNamedElement<?> lightNamedElement : o.getLightElements()) {
       lightNamedElement.accept(this);
     }
   }
@@ -135,7 +135,7 @@ public class PerlVisitor extends PsiPerlVisitor {
     return false;
   }
 
-  public void visitLightNamedElement(@NotNull PerlDelegatingLightNamedElement o) {
+  public void visitLightNamedElement(@NotNull PerlDelegatingLightNamedElement<?> o) {
     visitElement(o);
   }
 

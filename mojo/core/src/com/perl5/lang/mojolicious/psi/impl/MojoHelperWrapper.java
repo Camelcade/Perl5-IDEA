@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,7 +51,7 @@ public class MojoHelperWrapper extends PerlPolyNamedNestedCallElementBase<MojoHe
 
   @NotNull
   @Override
-  protected List<PerlDelegatingLightNamedElement> computeLightElementsFromStubs(@NotNull MojoHelperWrapperStub stub) {
+  protected List<PerlDelegatingLightNamedElement<?>> computeLightElementsFromStubs(@NotNull MojoHelperWrapperStub stub) {
     return stub.getLightNamedElementsStubs().stream()
       .filter(childStub -> childStub.getStubType() == LIGHT_METHOD_DEFINITION)
       .map(childStub -> new MojoHelperDefinition(this, (PerlSubDefinitionStub)childStub))
@@ -60,7 +60,7 @@ public class MojoHelperWrapper extends PerlPolyNamedNestedCallElementBase<MojoHe
 
   @NotNull
   @Override
-  public List<PerlDelegatingLightNamedElement> computeLightElementsFromPsi() {
+  public List<PerlDelegatingLightNamedElement<?>> computeLightElementsFromPsi() {
     List<PsiElement> listElements = getCallArgumentsList();
     if (listElements.size() != 2) {
       return Collections.emptyList();

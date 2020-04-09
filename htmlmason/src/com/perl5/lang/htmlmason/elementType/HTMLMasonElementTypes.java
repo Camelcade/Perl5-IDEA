@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -101,12 +101,12 @@ public interface HTMLMasonElementTypes extends HTMLMasonSyntaxElements {
   IElementType HTML_MASON_ATTR_BLOCK = new HTMLMasonElementType("HTML_MASON_ATTR_BLOCK");
   IElementType HTML_MASON_HARD_NEWLINE = new HTMLMasonElementType("HTML_MASON_HARD_NEWLINE");
 
-  IElementType HTML_MASON_METHOD_DEFINITION = new HTMLMasonMethodElementType("HTML_MASON_METHOD_DEFINITION");
-  IElementType HTML_MASON_SUBCOMPONENT_DEFINITION = new HTMLMasonSubcomponentElementType("HTML_MASON_DEF_DEFINITION");
+  HTMLMasonMethodElementType HTML_MASON_METHOD_DEFINITION = new HTMLMasonMethodElementType("HTML_MASON_METHOD_DEFINITION");
+  HTMLMasonSubcomponentElementType HTML_MASON_SUBCOMPONENT_DEFINITION = new HTMLMasonSubcomponentElementType("HTML_MASON_DEF_DEFINITION");
 
-  IElementType HTML_MASON_FLAGS_STATEMENT = new HTMLMasonFlagsStatementElementType("HTML_MASON_FLAGS_STATEMENT");
+  HTMLMasonFlagsStatementElementType HTML_MASON_FLAGS_STATEMENT = new HTMLMasonFlagsStatementElementType("HTML_MASON_FLAGS_STATEMENT");
 
-  IElementType HTML_MASON_ARGS_BLOCK = new HTMLMasonArgsBlockElementType("HTML_MASON_ARGS_BLOCK");
+  HTMLMasonArgsBlockElementType HTML_MASON_ARGS_BLOCK = new HTMLMasonArgsBlockElementType("HTML_MASON_ARGS_BLOCK");
 
   IElementType HTML_MASON_ONCE_BLOCK = new HTMLMasonElementType("HTML_MASON_ONCE_BLOCK") {
     @NotNull
