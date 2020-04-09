@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -226,12 +226,6 @@ public class PerlDelegatingLightElement<Delegate extends PsiElement> extends Lig
   }
 
   @Override
-  public void checkAdd(@NotNull PsiElement element) throws IncorrectOperationException {
-    //noinspection deprecation
-    getDelegate().checkAdd(element);
-  }
-
-  @Override
   public PsiElement add(@NotNull PsiElement element) throws IncorrectOperationException {
     return getDelegate().add(element);
   }
@@ -249,12 +243,6 @@ public class PerlDelegatingLightElement<Delegate extends PsiElement> extends Lig
   @Override
   public void delete() throws IncorrectOperationException {
     getDelegate().delete();
-  }
-
-  @Override
-  public void checkDelete() throws IncorrectOperationException {
-    //noinspection deprecation
-    getDelegate().checkDelete();
   }
 
   @Override
