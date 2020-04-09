@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,10 @@
 
 package com.perl5.lang.perl.idea.annotators;
 
-import com.intellij.lang.annotation.Annotation;
+import com.intellij.lang.annotation.AnnotationBuilder;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
+import com.intellij.lang.annotation.HighlightSeverity;
 import com.intellij.openapi.editor.colors.CodeInsightColors;
 import com.intellij.openapi.editor.colors.EditorColorsManager;
 import com.intellij.openapi.editor.colors.EditorColorsScheme;
@@ -27,6 +28,7 @@ import com.intellij.openapi.editor.markup.TextAttributes;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 
 public abstract class PerlBaseAnnotator implements Annotator, PerlElementTypes {
@@ -39,23 +41,16 @@ public abstract class PerlBaseAnnotator implements Annotator, PerlElementTypes {
     return textAttributes;
   }
 
-
-  public void decorateElement(Annotation annotation, TextAttributesKey key, boolean deprecated) {
-    annotation.setEnforcedTextAttributes(adjustTextAttributes(currentScheme.getAttributes(key), deprecated));
-  }
-
-  public void decorateElement(PsiElement element, @NotNull AnnotationHolder holder, TextAttributesKey key, boolean deprecated) {
+  public static void createInfoAnnotation(@NotNull AnnotationHolder holder,
+                                          @Nullable PsiElement element,
+                                          @Nullable String message,
+                                          @NotNull TextAttributesKey key) {
     if (element == null) {
       return;
     }
-    holder.createInfoAnnotation(element, null)
-      .setEnforcedTextAttributes(adjustTextAttributes(currentScheme.getAttributes(key), deprecated));
-  }
-
-  public void decorateElement(PsiElement element, @NotNull AnnotationHolder holder, TextAttributesKey key) {
-    if (element == null) {
-      return;
-    }
-    holder.createInfoAnnotation(element, null).setTextAttributes(key);
+    AnnotationBuilder annotationBuilder = message == null ?
+                                          holder.newSilentAnnotation(HighlightSeverity.INFORMATION) :
+                                          holder.newAnnotation(HighlightSeverity.INFORMATION, message);
+    annotationBuilder.range(element).textAttributes(key).create();
   }
 }

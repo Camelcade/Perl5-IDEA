@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ public class HTMLMasonAnnotator extends PerlBaseAnnotator {
       PsiElement nameIdentifier = ((HTMLMasonNamedElement)element).getNameIdentifier();
 
       if (nameIdentifier != null) {
-        holder.createInfoAnnotation(nameIdentifier, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SUB_DEFINITION);
+        createInfoAnnotation(holder, nameIdentifier, null, PerlSyntaxHighlighter.PERL_SUB_DEFINITION);
       }
     }
   }

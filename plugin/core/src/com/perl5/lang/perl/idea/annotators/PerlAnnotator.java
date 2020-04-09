@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.annotators;
 
 
 import com.intellij.lang.annotation.AnnotationHolder;
+import com.intellij.lang.annotation.HighlightSeverity;
 import com.intellij.openapi.editor.colors.CodeInsightColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.psi.ElementManipulators;
@@ -36,6 +37,8 @@ import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 import static com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter.*;
 
@@ -52,17 +55,20 @@ public class PerlAnnotator extends PerlBaseAnnotator {
   @Override
   public void annotate(@NotNull final PsiElement element, @NotNull AnnotationHolder holder) {
     IElementType elementType = PsiUtilCore.getElementType(element);
+    BiConsumer<String, TextAttributesKey> defaultAnnotationProducer = (msg, key) -> createInfoAnnotation(holder, element, msg, key);
+    Consumer<TextAttributesKey> defaultSilentProducer = (key) -> createInfoAnnotation(holder, element, null, key);
+
     if (elementType == NYI_STATEMENT) {
-      holder.createInfoAnnotation(element, "Unimplemented statement").setTextAttributes(CodeInsightColors.TODO_DEFAULT_ATTRIBUTES);
+      defaultAnnotationProducer.accept("Unimplemented statement", CodeInsightColors.TODO_DEFAULT_ATTRIBUTES);
     }
     else if (element instanceof PerlGlobVariable && ((PerlGlobVariable)element).isBuiltIn()) {
-      holder.createInfoAnnotation(element, null).setTextAttributes(PERL_GLOB_BUILTIN);
+      defaultSilentProducer.accept(PERL_GLOB_BUILTIN);
     }
     else if (element instanceof PerlVariable && ((PerlVariable)element).isBuiltIn()) {
-      holder.createInfoAnnotation(element, null).setTextAttributes(VARIABLE_KEYS_MAP.get(element.getClass()));
+      defaultSilentProducer.accept(VARIABLE_KEYS_MAP.get(element.getClass()));
     }
     else if (elementType == LABEL_DECLARATION || elementType == LABEL_EXPR) {
-      holder.createInfoAnnotation(element.getFirstChild(), null).setTextAttributes(PerlSyntaxHighlighter.PERL_LABEL);
+      createInfoAnnotation(holder, element.getFirstChild(), null, PerlSyntaxHighlighter.PERL_LABEL);
     }
     else if (elementType == PACKAGE) {
       assert element instanceof PerlNamespaceElement;
@@ -71,14 +77,14 @@ public class PerlAnnotator extends PerlBaseAnnotator {
       PsiElement parent = namespaceElement.getParent();
 
       if (parent instanceof PerlNamespaceDefinitionWithIdentifier) {
-        decorateElement(namespaceElement, holder, PerlSyntaxHighlighter.PERL_PACKAGE_DEFINITION, false);
+        createInfoAnnotation(holder, namespaceElement, null, PerlSyntaxHighlighter.PERL_PACKAGE_DEFINITION);
       }
       else {
         if (namespaceElement.isPragma()) {
-          decorateElement(namespaceElement, holder, PerlSyntaxHighlighter.PERL_PACKAGE_PRAGMA, false);
+          createInfoAnnotation(holder, namespaceElement, null, PerlSyntaxHighlighter.PERL_PACKAGE_PRAGMA);
         }
         else if (namespaceElement.isBuiltin()) {
-          decorateElement(namespaceElement, holder, PerlSyntaxHighlighter.PERL_PACKAGE_CORE, false);
+          createInfoAnnotation(holder, namespaceElement, null, PerlSyntaxHighlighter.PERL_PACKAGE_CORE);
         }
       }
     }
@@ -95,23 +101,23 @@ public class PerlAnnotator extends PerlBaseAnnotator {
         TextAttributesKey currentKey =
           lightNamedElement instanceof PerlSubDefinition ? subAttribute : PerlSyntaxHighlighter.PERL_PACKAGE_DEFINITION;
         PsiElement navigationElement = lightNamedElement.getNavigationElement();
-        holder.createInfoAnnotation(ElementManipulators.getValueTextRange(navigationElement).shiftRight(lightNamedElement.getTextOffset()),
-                                    null)
-          .setEnforcedTextAttributes(adjustTextAttributes(currentScheme.getAttributes(currentKey), false));
+        holder.newSilentAnnotation(HighlightSeverity.INFORMATION)
+          .range(ElementManipulators.getValueTextRange(navigationElement).shiftRight(lightNamedElement.getTextOffset()))
+          .enforcedTextAttributes(adjustTextAttributes(currentScheme.getAttributes(currentKey), false))
+          .create();
       }
     }
-    else if (elementType == SUB_NAME) //  instanceof PerlSubNameElement
-    {
+    else if (elementType == SUB_NAME) {
       PsiElement parent = element.getParent();
       if (parent instanceof PsiPerlSubDeclaration) {
-        holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SUB_DECLARATION);
+        defaultSilentProducer.accept(PerlSyntaxHighlighter.PERL_SUB_DECLARATION);
       }
       else if (parent instanceof PerlSubDefinitionElement) {
         if (PerlSubUtil.SUB_AUTOLOAD.equals(((PerlSubNameElement)element).getName())) {
-          holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_AUTOLOAD);
+          defaultSilentProducer.accept(PerlSyntaxHighlighter.PERL_AUTOLOAD);
         }
         else {
-          holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SUB_DEFINITION);
+          defaultSilentProducer.accept(PerlSyntaxHighlighter.PERL_SUB_DEFINITION);
         }
       }
       else if (parent instanceof PerlMethodCall) {
@@ -124,7 +130,7 @@ public class PerlAnnotator extends PerlBaseAnnotator {
           && (methodNamespace == null || methodNamespace.isCORE())    // no explicit NS or it's core
           && ((PerlSubNameElement)element).isBuiltIn()
           ) {
-          decorateElement(element, holder, PerlSyntaxHighlighter.PERL_SUB_BUILTIN);
+          createInfoAnnotation(holder, element, null, PerlSyntaxHighlighter.PERL_SUB_BUILTIN);
         }
         else {
 
@@ -134,13 +140,13 @@ public class PerlAnnotator extends PerlBaseAnnotator {
             ((PerlSubReference)reference).multiResolve(false);
 
             if (((PerlSubReference)reference).isConstant()) {
-              holder.createInfoAnnotation(element, "Constant").setTextAttributes(PerlSyntaxHighlighter.PERL_CONSTANT);
+              defaultAnnotationProducer.accept("Constant", PerlSyntaxHighlighter.PERL_CONSTANT);
             }
             else if (((PerlSubReference)reference).isAutoloaded()) {
-              holder.createInfoAnnotation(element, "Auto-loaded sub").setTextAttributes(PerlSyntaxHighlighter.PERL_AUTOLOAD);
+              defaultAnnotationProducer.accept("Auto-loaded sub", PerlSyntaxHighlighter.PERL_AUTOLOAD);
             }
             else if (((PerlSubReference)reference).isXSub()) {
-              holder.createInfoAnnotation(element, "XSub").setTextAttributes(PerlSyntaxHighlighter.PERL_XSUB);
+              defaultAnnotationProducer.accept("XSub", PerlSyntaxHighlighter.PERL_XSUB);
             }
           }
         }

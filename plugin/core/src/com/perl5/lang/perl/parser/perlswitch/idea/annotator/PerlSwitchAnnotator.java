@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@ public class PerlSwitchAnnotator extends PerlBaseAnnotator {
   @Override
   public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder) {
     if (PerlSwitchParserExtensionImpl.getTokenSet().contains(element.getNode().getElementType())) {
-      holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_KEYWORD);
+      createInfoAnnotation(holder, element, null, PerlSyntaxHighlighter.PERL_KEYWORD);
     }
   }
 }
