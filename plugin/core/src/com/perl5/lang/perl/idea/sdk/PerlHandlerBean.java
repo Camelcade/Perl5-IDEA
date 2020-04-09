@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,12 +40,12 @@ public final class PerlHandlerBean extends AbstractExtensionPointBean
 
   private final NotNullLazyValue<AbstractPerlHandler<?, ?>> myHandler = NotNullLazyValue.createValue(() -> {
     try {
-      Class<AbstractPerlHandler<?, ?>> extensionClass = findClass(implementationClass);
+      Class<AbstractPerlHandler<?, ?>> extensionClass = findExtensionClass(implementationClass);
       Constructor<AbstractPerlHandler<?, ?>> constructor = extensionClass.getConstructor(PerlHandlerBean.class);
       constructor.setAccessible(true);
       return constructor.newInstance(PerlHandlerBean.this);
     }
-    catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | InvocationTargetException | IllegalAccessException e) {
+    catch (NoSuchMethodException | InstantiationException | InvocationTargetException | IllegalAccessException e) {
       throw new RuntimeException(e);
     }
   });
