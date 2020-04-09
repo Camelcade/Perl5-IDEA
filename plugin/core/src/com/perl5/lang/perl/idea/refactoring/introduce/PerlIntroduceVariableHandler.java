@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,8 +18,8 @@ package com.perl5.lang.perl.idea.refactoring.introduce;
 
 import com.intellij.ide.DataManager;
 import com.intellij.openapi.actionSystem.DataContext;
+import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.application.TransactionGuard;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Editor;
@@ -199,16 +199,18 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
   }
 
   private void performDialogRename(@NotNull Project project, @NotNull PerlVariableDeclarationElement variableDeclaration) {
-    DataContext renamingContext = DataManager.getInstance().getDataContext();
-    if (ApplicationManager.getApplication().isUnitTestMode()) {
-      DataContext originalContext = renamingContext;
-      renamingContext = dataId -> PsiElementRenameHandler.DEFAULT_NAME.getName().equals(dataId)
-                                  ? "dialog_test_name"
-                                  : originalContext.getData(dataId);
-    }
-    RefactoringActionHandler handler = RefactoringActionHandlerFactory.getInstance().createRenameHandler();
-    DataContext effectiveContext = renamingContext;
-    TransactionGuard.submitTransaction(project, () -> handler.invoke(project, new PsiElement[]{variableDeclaration}, effectiveContext));
+    DataManager.getInstance().getDataContextFromFocusAsync().onProcessed(renamingContext -> {
+      Application application = ApplicationManager.getApplication();
+      if (application.isUnitTestMode()) {
+        DataContext originalContext = renamingContext;
+        renamingContext = dataId -> PsiElementRenameHandler.DEFAULT_NAME.getName().equals(dataId)
+                                    ? "dialog_test_name"
+                                    : originalContext.getData(dataId);
+      }
+      RefactoringActionHandler handler = RefactoringActionHandlerFactory.getInstance().createRenameHandler();
+      DataContext effectiveContext = renamingContext;
+      handler.invoke(project, new PsiElement[]{variableDeclaration}, effectiveContext);
+    });
   }
 
   /**
