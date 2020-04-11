@@ -37,6 +37,7 @@ import com.perl5.lang.perl.psi.impl.PerlBuiltInSubDefinition;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
 import com.perl5.lang.pod.PodLanguage;
+import com.perl5.lang.pod.parser.psi.PodLinkDescriptor;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -102,6 +103,9 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
 
     IElementType elementType = contextElement.getNode().getElementType();
 
+    if (elementType == RESERVED_ASYNC) {
+      return PerlDocUtil.resolveDescriptor(PodLinkDescriptor.create("Future::AsyncAwait", "async"), contextElement, false);
+    }
     if (elementType == REGEX_MODIFIER) {
       return PerlDocUtil.getRegexModifierDoc(contextElement);
     }

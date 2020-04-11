@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,6 +31,18 @@ public class PerlQuickDocTest extends PerlLightTestCase {
   @Override
   protected String getBaseDataPath() {
     return "testData/documentation/perl/quickdoc";
+  }
+
+  @Test
+  public void testAsyncSub() {
+    withFuture();
+    doTest();
+  }
+
+  @Test
+  public void testAsyncMethod() {
+    withFuture();
+    doTest();
   }
 
   @Test
