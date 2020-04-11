@@ -1,0 +1,3 @@
+helper( t<caret>est => sub {
+    state $pkg = 42
+});

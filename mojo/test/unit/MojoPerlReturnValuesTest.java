@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package unit;
 
 
 import base.PerlLightTestCase;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class MojoPerlReturnValuesTest extends PerlLightTestCase {
@@ -27,7 +28,21 @@ public class MojoPerlReturnValuesTest extends PerlLightTestCase {
   }
 
   @Test
-  public void testHelper(){doTest();}
+  public void testIssue2142() {doTest();}
+
+  @Test
+  @Ignore
+  public void testIssue2142Lite() {doTest();}
+
+  @Test
+  public void testIssue2142Indirect() {doTest();}
+
+  @Test
+  @Ignore
+  public void testIssue2142IndirectLite() {doTest();}
+
+  @Test
+  public void testHelper() {doTest();}
 
   private void doTest() {
     doTestReturnValue();
