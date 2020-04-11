@@ -425,7 +425,7 @@
     extends("nested_call")=sub_call_expr
     implements("nested_call")="com.perl5.lang.perl.psi.PerlNestedCall"
 
-    implements("sub_call_expr|named_list_expr|unary_list_expr")="com.perl5.lang.perl.psi.PerlMethodContainer"
+    implements("sub_call_expr")="com.perl5.lang.perl.psi.PerlMethodContainer"
 
     mixin("statement")="com.perl5.lang.perl.psi.mixins.PerlStatementMixin"
 
