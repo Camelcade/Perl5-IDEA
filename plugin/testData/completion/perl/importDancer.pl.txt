@@ -608,8 +608,6 @@ Lookups: status; Text: status; Tail: null; Type: Dancer; Icon: /subroutine_gutte
     Export: &status => &Dancer::status
 Lookups: study; Text: study; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
     PsiElement: Implicit sub: study()
-Lookups: sub; Text: sub; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-    PsiElement: Implicit sub: sub()
 Lookups: substr; Text: substr; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
     PsiElement: Implicit sub: substr()
 Lookups: symlink; Text: symlink; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null

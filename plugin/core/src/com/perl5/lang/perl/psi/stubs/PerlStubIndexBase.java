@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManage
 
 
 public abstract class PerlStubIndexBase<Psi extends PsiElement> extends StringStubIndexExtension<Psi> {
-  private final static int VERSION = 8;
+  private final static int VERSION = 9;
 
   @Override
   public int getVersion() {

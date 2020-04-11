@@ -436,8 +436,6 @@ Lookups: state; Text: state; Tail: null; Type: CORE; Icon: /subroutine_gutter_ic
     PsiElement: Implicit sub: state()
 Lookups: study; Text: study; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
     PsiElement: Implicit sub: study()
-Lookups: sub; Text: sub; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-    PsiElement: Implicit sub: sub()
 Lookups: substr; Text: substr; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
     PsiElement: Implicit sub: substr()
 Lookups: symlink; Text: symlink; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null

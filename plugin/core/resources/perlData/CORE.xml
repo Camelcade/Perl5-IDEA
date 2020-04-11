@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright 2015-2017 Alexandr Evstigneev
+  ~ Copyright 2015-2020 Alexandr Evstigneev
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -638,7 +638,6 @@
     <sub name="stat"/>
     <sub name="state"/>
     <sub name="study"/>
-    <sub name="sub"/>
     <sub name="substr"/>
     <sub name="symlink"/>
     <sub name="syscall"/>
