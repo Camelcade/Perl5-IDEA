@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +25,12 @@ public class PerlFormatterSpacingTest extends PerlFormatterTestCase {
   protected String getBaseDataPath() {
     return "testData/formatter/perl/spacing";
   }
+
+  @Test
+  public void testAsyncSubs() {doFormatTest();}
+
+  @Test
+  public void testSubModifiers() {doFormatTest();}
 
   @Test
   public void testSpliceExpr() {doFormatTest();}

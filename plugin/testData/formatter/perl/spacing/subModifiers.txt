@@ -1,0 +1,6 @@
+my sub something {}
+our sub something {}
+state sub something {}
+my sub something;
+our sub something;
+state sub something;

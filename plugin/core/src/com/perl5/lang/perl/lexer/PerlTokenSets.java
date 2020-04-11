@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -191,6 +191,10 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
 
   TokenSet SWITCH_KEYWORDS_TOKENSET = TokenSet.create(
     RESERVED_GIVEN, RESERVED_WHEN, RESERVED_DEFAULT
+  );
+
+  TokenSet SUB_MODIFIERS = TokenSet.create(
+    RESERVED_MY, RESERVED_OUR, RESERVED_STATE, RESERVED_ASYNC
   );
 
   TokenSet DEFAULT_KEYWORDS_TOKENSET = TokenSet.orSet(

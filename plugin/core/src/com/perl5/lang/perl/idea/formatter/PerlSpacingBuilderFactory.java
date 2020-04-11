@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.*;
 import static com.perl5.lang.perl.idea.formatter.PerlIndentProcessor.MULTI_PARAM_BLOCK_CONTAINERS;
 import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.SAME_LINE;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.CUSTOM_EXPR_KEYWORDS;
+import static com.perl5.lang.perl.lexer.PerlTokenSets.SUB_MODIFIERS;
 import static com.perl5.lang.perl.parser.MooseParserExtension.MOOSE_RESERVED_TOKENSET;
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.NO_STATEMENT;
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.USE_STATEMENT;
@@ -74,8 +75,10 @@ public class PerlSpacingBuilderFactory {
       .beforeInside(COLON, ATTRIBUTES).spaceIf(perlSettings.SPACE_BEFORE_ATTRIBUTE)
       .between(COLON, ATTRIBUTE).spaces(0)
 
+      .between(SUB_MODIFIERS, RESERVED_SUB).spaces(1)
       .afterInside(RESERVED_SUB, SUB_DEFINITION).spaces(1)
       .afterInside(RESERVED_SUB, SUB_DECLARATION).spaces(1)
+      .between(RESERVED_ASYNC, RESERVED_METHOD).spaces(1)
       .afterInside(RESERVED_METHOD, METHOD_DEFINITION).spaces(1)
       .afterInside(RESERVED_FUNC, FUNC_DEFINITION).spaces(1)
 
