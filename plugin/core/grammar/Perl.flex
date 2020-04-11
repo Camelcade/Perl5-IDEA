@@ -982,7 +982,9 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 	{CORE_PREFIX}"continue"	 	{yybegin(YYINITIAL); return RESERVED_CONTINUE;}
 
 	{CORE_PREFIX}"format"	 	{myFormatWaiting = true; yybegin(AFTER_IDENTIFIER); return RESERVED_FORMAT;}
-	{CORE_PREFIX}"sub" 		{yybegin(SUB_DECLARATION);return  RESERVED_SUB;}
+
+        "async" / {SPACES_OR_COMMENTS} {CORE_PREFIX}"sub"   {return RESERVED_ASYNC;}
+	{CORE_PREFIX}"sub" 		                  {yybegin(SUB_DECLARATION);return  RESERVED_SUB;}
 
 	{CORE_PREFIX}"package"	 	{yybegin(PACKAGE_DECLARATION_ARGUMENTS); return RESERVED_PACKAGE;}
 	{CORE_PREFIX}"use"	 		{yybegin(PACKAGE_ARGUMENTS); return RESERVED_USE;}
@@ -991,8 +993,9 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 
 	{CORE_PREFIX}"undef"		{yybegin(AFTER_IDENTIFIER); return RESERVED_UNDEF;}
 
-	"method"					{yybegin(METHOD_DECLARATION); return RESERVED_METHOD;}
-	"func"						{yybegin(METHOD_DECLARATION); return RESERVED_FUNC;}
+        "async" / {SPACES_OR_COMMENTS} "method"   {return RESERVED_ASYNC;}
+	"method"			        {yybegin(METHOD_DECLARATION); return RESERVED_METHOD;}
+	"func"				        {yybegin(METHOD_DECLARATION); return RESERVED_FUNC;}
 
 	"try" / {BRACE_AFTER_SPACE_COMMENTS} { return handleTry();}
 

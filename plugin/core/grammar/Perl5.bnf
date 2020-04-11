@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -99,6 +99,7 @@
 
     RESERVED_FORMAT='format'
     RESERVED_SUB='sub'
+    RESERVED_ASYNC='async'
     RESERVED_PACKAGE='package'
     RESERVED_USE='use'
     RESERVED_NO='no'
@@ -664,7 +665,7 @@ private normal_statement ::= expr [<<parseStatementModifier>>] {pin=1}
 //private normal_statement_body ::= expr {recoverWhile=recover_statement}
 
 // fixme adjust parsing of this thing to avoid duplicates
-sub_definition ::=  ['my'|'our'|'state'] 'sub' sub_names_token sub_definition_parameters parse_block
+sub_definition ::=  ['my'|'our'|'state'|'async'] 'sub' sub_names_token sub_definition_parameters parse_block
 sub_declaration ::=  ['my'|'our'|'state'] 'sub' sub_names_token sub_declaration_parameters <<statementSemi>>
 private sub_declaration_parameters ::= sub_definition_parameters {recoverWhile=recover_statement}
 
@@ -1191,7 +1192,7 @@ private comma ::= ',' | '=>'
 
 /********************************************** Extensions for Method::Signatures *************************************/
 // we can make this smareter and use keywords from settings or import opitions; We can't pin here because MooseX method works othewise
-method_definition ::= 'method' sub_names_token [method_signature] [sub_attributes] parse_block
+method_definition ::= ['async'] 'method' sub_names_token [method_signature] [sub_attributes] parse_block
 func_definition ::= 'func' sub_names_token [func_signature] [sub_attributes] parse_block
 
 // not sure that we need a wrapper for signatures

@@ -208,6 +208,7 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
       RESERVED_CONTINUE,
       RESERVED_FORMAT,
       RESERVED_SUB,
+      RESERVED_ASYNC,
       RESERVED_PACKAGE,
       RESERVED_DO,
       RESERVED_EVAL,

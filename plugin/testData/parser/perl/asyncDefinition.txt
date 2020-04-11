@@ -1,0 +1,14 @@
+Subtree: Perl5 (Perl5)
+Perl5
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::somesub
+    PsiElement(Perl5: async)('async')
+    PsiElement(Perl5: sub)('sub')
+    PerlSubNameElementImpl(Perl5: subname)('somesub')
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiElement(Perl5: })('}')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('async sub somesub{\n\n}')
+--------------------------------------------------------------------------------
