@@ -1,0 +1,5 @@
+$self->helper( t<caret>est => sub {
+    state $pkg = 42
+});
+----------
+UNKNOWN_VALUE
