@@ -16,18 +16,16 @@
 
 package com.perl5.lang.mojolicious.psi.impl;
 
-import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.stubs.IStubElementType;
-import com.perl5.lang.mojolicious.psi.stubs.MojoHelperWrapperStub;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlScalarValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
-import com.perl5.lang.perl.psi.PerlSelfHinter;
+import com.perl5.lang.perl.psi.PerlSubCallHandlerWithEmptyData;
 import com.perl5.lang.perl.psi.PerlSubExpr;
-import com.perl5.lang.perl.psi.impl.PerlPolyNamedNestedCallElementBase;
+import com.perl5.lang.perl.psi.impl.PerlSubCallElement;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
+import com.perl5.lang.perl.psi.stubs.calls.PerlSubCallElementStub;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import org.jetbrains.annotations.NotNull;
 
@@ -38,36 +36,17 @@ import java.util.stream.Collectors;
 import static com.perl5.lang.mojolicious.psi.impl.MojoliciousFile.MOJO_CONTROLLER_NS;
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.LIGHT_METHOD_DEFINITION;
 
-public class MojoHelperWrapper extends PerlPolyNamedNestedCallElementBase<MojoHelperWrapperStub> implements PerlSelfHinter {
-
-  public MojoHelperWrapper(@NotNull MojoHelperWrapperStub stub,
-                           @NotNull IStubElementType nodeType) {
-    super(stub, nodeType);
-  }
-
-  public MojoHelperWrapper(@NotNull ASTNode node) {
-    super(node);
-  }
-
+public class MojoHelperHandler extends PerlSubCallHandlerWithEmptyData {
   @NotNull
   @Override
-  protected List<PerlDelegatingLightNamedElement<?>> computeLightElementsFromStubs(@NotNull MojoHelperWrapperStub stub) {
-    return stub.getLightNamedElementsStubs().stream()
-      .filter(childStub -> childStub.getStubType() == LIGHT_METHOD_DEFINITION)
-      .map(childStub -> new MojoHelperDefinition(this, (PerlSubDefinitionStub)childStub))
-      .collect(Collectors.toList());
-  }
-
-  @NotNull
-  @Override
-  public List<PerlDelegatingLightNamedElement<?>> computeLightElementsFromPsi() {
-    List<PsiElement> listElements = getCallArgumentsList();
+  public List<? extends PerlDelegatingLightNamedElement<?>> computeLightElementsFromPsi(@NotNull PerlSubCallElement psiElement) {
+    List<PsiElement> listElements = psiElement.getCallArgumentsList();
     if (listElements.size() != 2) {
       return Collections.emptyList();
     }
 
     PsiElement identifierElement = listElements.get(0);
-    if (!isAcceptableIdentifierElement(identifierElement)) {
+    if (!psiElement.isAcceptableIdentifierElement(identifierElement)) {
       return Collections.emptyList();
     }
 
@@ -82,7 +61,17 @@ public class MojoHelperWrapper extends PerlPolyNamedNestedCallElementBase<MojoHe
     }
 
     return Collections.singletonList(new MojoHelperDefinition(
-      this, subName, LIGHT_METHOD_DEFINITION, identifierElement, MOJO_CONTROLLER_NS, (PerlSubExpr)bodyElement));
+      psiElement, subName, LIGHT_METHOD_DEFINITION, identifierElement, MOJO_CONTROLLER_NS, (PerlSubExpr)bodyElement));
+  }
+
+  @NotNull
+  @Override
+  public List<? extends PerlDelegatingLightNamedElement<?>> computeLightElementsFromStubs(@NotNull PerlSubCallElement psiElement,
+                                                                                          @NotNull PerlSubCallElementStub stubElement) {
+    return stubElement.getLightNamedElementsStubs().stream()
+      .filter(childStub -> childStub.getStubType() == LIGHT_METHOD_DEFINITION)
+      .map(childStub -> new MojoHelperDefinition(psiElement, (PerlSubDefinitionStub)childStub))
+      .collect(Collectors.toList());
   }
 
   @NotNull

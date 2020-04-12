@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseAttributeWrapper;
 import com.perl5.lang.perl.psi.impl.*;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import org.jetbrains.annotations.NotNull;
@@ -113,8 +112,9 @@ public class PerlVisitor extends PsiPerlVisitor {
     visitPerlSubDefinitionElement(o);
   }
 
-  public void visitMooseAttributeWrapper(@NotNull PerlMooseAttributeWrapper o) {
-    visitPolyNamedElement(o);
+  @Override
+  public void visitSubCall(@NotNull PsiPerlSubCall o) {
+    visitPolyNamedElement((PerlPolyNamedElement<?>)o);
   }
 
   public void visitPolyNamedElement(@NotNull PerlPolyNamedElement<?> o) {

@@ -6,7 +6,7 @@ Perl5
         PsiElement(Perl5: $$)('$')
         PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('self')
       PsiElement(Perl5: ->)('->')
-      MojoHelperWrapper(MOJO_HELPER_WRAPPER)
+      PsiPerlSubCallImpl(SUB_CALL)
         PsiPerlMethodImpl(Perl5: METHOD)
           PerlSubNameElementImpl(Perl5: subname)('helper')
         PsiPerlParenthesisedCallArgumentsImpl(Perl5: PARENTHESISED_CALL_ARGUMENTS)

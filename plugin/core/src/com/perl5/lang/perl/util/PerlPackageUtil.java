@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -801,9 +801,17 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
    */
   @NotNull
   public static PerlValue getExpectedSelfValue(@NotNull PsiElement psiElement) {
-    PerlSelfHinter selfHinter = PsiTreeUtil.getParentOfType(psiElement, PerlSelfHinter.class);
-    if (selfHinter != null) {
-      return selfHinter.getSelfType();
+    PsiElement run = psiElement;
+    while (true) {
+      PerlSelfHinterElement selfHinter = PsiTreeUtil.getParentOfType(run, PerlSelfHinterElement.class);
+      if (selfHinter == null) {
+        break;
+      }
+      PerlValue hintedType = selfHinter.getSelfType();
+      if (!hintedType.isUnknown()) {
+        return hintedType;
+      }
+      run = selfHinter;
     }
     return PerlScalarValue.create(getContextNamespaceName(psiElement));
   }

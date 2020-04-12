@@ -422,10 +422,9 @@
     mixin("string_sq|string_dq|string_xq")="com.perl5.lang.perl.psi.mixins.PerlStringMixin"
     mixin("string_bare")="com.perl5.lang.perl.psi.mixins.PerlStringBareMixin"
 
-    extends("nested_call")=sub_call_expr
-    implements("nested_call")="com.perl5.lang.perl.psi.PerlNestedCall"
-
-    implements("sub_call_expr")="com.perl5.lang.perl.psi.PerlMethodContainer"
+    implements("sub_call")="com.perl5.lang.perl.psi.PerlMethodContainer"
+    extends("sub_call")="com.perl5.lang.perl.psi.impl.PerlSubCallElement"
+    stubClass("sub_call")="com.perl5.lang.perl.psi.stubs.calls.PerlSubCallElementStub"
 
     mixin("statement")="com.perl5.lang.perl.psi.mixins.PerlStatementMixin"
 
@@ -514,7 +513,7 @@
     stubClass("do_expr")="com.perl5.lang.perl.psi.stubs.imports.runtime.PerlRuntimeImportStub"
 
     mixin("method")="com.perl5.lang.perl.psi.mixins.PerlMethodMixin";
-    implements("method")="com.perl5.lang.perl.psi.PerlMethodCall";
+    implements("method")="com.perl5.lang.perl.psi.PerlMethod";
 
     implements("namespace_content")="com.perl5.lang.perl.psi.properties.PerlStatementsContainer"
 
@@ -842,7 +841,7 @@ term_expr ::=
 
     | trycatch_expr
 
-    | sub_call_expr
+    | regular_sub_call
     | code_primitive
     | package_expr
 
@@ -1089,11 +1088,8 @@ private hash_primitive ::= hash_variable | hash_cast_expr
 left hash_array_slice ::= array_index
 left hash_hash_slice ::= hash_index
 
-///////////////////////////////////// CALLABLE /////////////////////////////////////////////////////////////////////////
+///////////////////////////////////// CALLABLE /////////////////////////////////////////////////////////////////////////k
 meta method ::= <<x1>>
-// deprecated, remove after moving to poly-named elements
-meta nested_call ::= <<nested_call_inner <<x1>> <<x2>>>>	// reused by mk_accessor and so on
-private meta nested_call_inner ::= <<method <<x1>>>> [<<parenthesised_call_arguments <<x2>>>>]
 meta call_arguments ::= <<x1>>
 private default_parenthesised_call_arguments ::= <<parenthesised_call_arguments optional_expression>>
 meta parenthesised_call_arguments ::= <<parse_parenthesized_expression <<x1>>>> !'['
@@ -1102,22 +1098,28 @@ private meta any_call_arguments ::= <<parenthesised_call_arguments <<x1>>>> | <<
 private list_call_arguments ::= <<any_call_arguments parse_list_expr>>
 private optional_unary_call_arguments ::= [<<parenthesised_call_arguments optional_unary_expr>> | <<call_arguments <<unary_expr>>>>]
 
-private regular_nested_call ::= <<nested_call regular_nested_call_tokens optional_expression>>
-private regular_nested_call_tokens ::= [QUALIFYING_PACKAGE] SUB_NAME
 scalar_call ::= scalar_or_element [default_parenthesised_call_arguments]
 
-sub_call_expr ::=
- 	<<leftward_call method_tokens>> |
+private regular_sub_call ::= <<sub_call parse_sub_call>>
+private regular_nested_call ::= <<sub_call regular_nested_call_variations>>
+private regular_nested_call_variations ::= parse_leftward_call | normal_method
+meta sub_call ::= <<x1>>
+
+private parse_sub_call ::=
+ 	parse_leftward_call |
  	named_unary_call |
  	argumentless_call |
  	<<rightward_call method_tokens>>
+
+private parse_leftward_call ::= <<leftward_call method_tokens>>
 
 private argumentless_call ::= <<method 'argumentless'>>
 
 private named_unary_call ::= <<method named_unary_calee>> [<<call_arguments unary_expr>>]
 private named_unary_calee ::= 'unary' | 'unary_custom' | '-t'
 
-private meta rightward_call ::= <<method <<x1>>>> [<<call_arguments parse_call_arguments>>]
+private meta rightward_call ::= <<method <<x1>>>> [rightward_call_arguments]
+private rightward_call_arguments ::= <<call_arguments parse_call_arguments>>
 private meta leftward_call ::= {<<method <<x1>>>>|code_primitive} default_parenthesised_call_arguments
 
 //// fixme this should depend on prototype

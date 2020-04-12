@@ -3,8 +3,8 @@ package FooBar24;
 sub declaredsub;
 sub definedsub{}
 use constant definedconst => 42;
-has 'mojoattr';
-has 'mooseattr' => is => 'rw';
+<warning descr="Unable to find sub definition, declaration, constant definition or typeglob aliasing">has</warning> 'mojoattr';
+<warning descr="Unable to find sub definition, declaration, constant definition or typeglob aliasing">has</warning> 'mooseattr' => is => 'rw';
 __PACKAGE__-><warning descr="Unable to find sub definition, declaration, constant definition or typeglob aliasing">mk_accessors</warning>('accessor');
 *globalias = &declaredsub;
 

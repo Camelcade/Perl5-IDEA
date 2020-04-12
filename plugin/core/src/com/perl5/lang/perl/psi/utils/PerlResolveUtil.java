@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,6 +40,7 @@ import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManage
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlBuiltInVariable;
 import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
+import com.perl5.lang.perl.psi.impl.PerlSubCallElement;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.references.scopes.PerlVariableDeclarationSearcher;
 import com.perl5.lang.perl.util.PerlUtil;
@@ -82,10 +83,10 @@ public class PerlResolveUtil {
     PsiElement run = lastParent == null ? element.getLastChild() : lastParent.getPrevSibling();
     while (run != null) {
       ProgressManager.checkCanceled();
-      if (run instanceof PerlCompositeElement &&
+      if ((run instanceof PerlCompositeElement || run instanceof PerlSubCallElement) &&
           !(run instanceof PerlLexicalScope) && // fixme this should be in composite
           !run.processDeclarations(processor, resolveState, null, place)
-        ) {
+      ) {
         return false;
       }
       run = run.getPrevSibling();

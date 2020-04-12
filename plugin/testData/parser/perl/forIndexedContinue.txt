@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlForCompoundImpl(Perl5: FOR_COMPOUND)
     PsiElement(Perl5: for)('for')
@@ -17,3 +18,8 @@ Perl5
     PsiPerlAnonHashImpl(Perl5: ANON_HASH)
       PsiElement(Perl5: {)('{')
       PsiElement(Perl5: })('}')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('for(;;) {\n\n}\ncontinue\n{\n\n}')
+--------------------------------------------------------------------------------

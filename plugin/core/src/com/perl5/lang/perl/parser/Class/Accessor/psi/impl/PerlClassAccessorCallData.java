@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,14 +14,23 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser.elementTypes;
+package com.perl5.lang.perl.parser.Class.Accessor.psi.impl;
 
-import com.perl5.lang.perl.psi.impl.PsiPerlNestedCallImpl;
-import org.jetbrains.annotations.NotNull;
+import com.perl5.lang.perl.psi.stubs.calls.PerlSubCallElementData;
 
-public class PerlNestedCallElementType extends PerlElementTypeEx {
-  public PerlNestedCallElementType(@NotNull String debugName) {
-    super(debugName, PsiPerlNestedCallImpl.class);
+public class PerlClassAccessorCallData implements PerlSubCallElementData {
+  private final boolean myFBP;
+
+  PerlClassAccessorCallData(boolean FBP) {
+    myFBP = FBP;
+  }
+
+  public boolean isFBP() {
+    return myFBP;
+  }
+
+  @Override
+  public String toString() {
+    return getClass().getSimpleName() + " (FBP: " + myFBP + ")";
   }
 }
-

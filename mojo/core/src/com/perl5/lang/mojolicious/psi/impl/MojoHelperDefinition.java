@@ -20,6 +20,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.mojolicious.MojoIcons;
 import com.perl5.lang.perl.psi.PerlSubExpr;
+import com.perl5.lang.perl.psi.impl.PerlSubCallElement;
 import com.perl5.lang.perl.psi.light.PerlLightMethodDefinitionElement;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import org.jetbrains.annotations.NotNull;
@@ -27,8 +28,8 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
-public class MojoHelperDefinition extends PerlLightMethodDefinitionElement<MojoHelperWrapper> {
-  public MojoHelperDefinition(@NotNull MojoHelperWrapper wrapper,
+public class MojoHelperDefinition extends PerlLightMethodDefinitionElement<PerlSubCallElement> {
+  public MojoHelperDefinition(@NotNull PerlSubCallElement wrapper,
                               @NotNull String name,
                               @NotNull IStubElementType<?, ?> elementType,
                               @NotNull PsiElement nameIdentifier,
@@ -37,7 +38,7 @@ public class MojoHelperDefinition extends PerlLightMethodDefinitionElement<MojoH
     super(wrapper, name, elementType, nameIdentifier, packageName, elementSub);
   }
 
-  public MojoHelperDefinition(@NotNull MojoHelperWrapper wrapper,
+  public MojoHelperDefinition(@NotNull PerlSubCallElement wrapper,
                               @NotNull PerlSubDefinitionStub stub) {
     super(wrapper, stub);
   }

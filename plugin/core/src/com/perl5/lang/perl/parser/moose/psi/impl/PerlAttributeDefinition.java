@@ -22,10 +22,9 @@ import com.intellij.psi.ElementManipulator;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.Function;
-import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.parser.PerlIdentifierRangeProvider;
+import com.perl5.lang.perl.psi.impl.PerlSubCallElement;
 import com.perl5.lang.perl.psi.light.PerlLightMethodDefinitionElement;
 import com.perl5.lang.perl.psi.properties.PerlPodAwareElement;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
@@ -36,12 +35,12 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class PerlAttributeDefinition extends PerlLightMethodDefinitionElement<PerlMooseAttributeWrapper>
+public class PerlAttributeDefinition extends PerlLightMethodDefinitionElement<PerlSubCallElement>
   implements PerlIdentifierRangeProvider, PerlPodAwareElement {
   public static final Function<String, String> DEFAULT_NAME_COMPUTATION =
     name -> StringUtil.startsWith(name, "+") ? name.substring(1) : name;
 
-  public PerlAttributeDefinition(@NotNull PerlMooseAttributeWrapper wrapper,
+  public PerlAttributeDefinition(@NotNull PerlSubCallElement wrapper,
                                  @NotNull String name,
                                  @NotNull IStubElementType<?, ?> elementType,
                                  @Nullable PsiElement nameIdentifier,
@@ -51,7 +50,7 @@ public class PerlAttributeDefinition extends PerlLightMethodDefinitionElement<Pe
     super(wrapper, name, elementType, nameIdentifier, packageName, subArguments, annotations);
   }
 
-  public PerlAttributeDefinition(@NotNull PerlMooseAttributeWrapper wrapper,
+  public PerlAttributeDefinition(@NotNull PerlSubCallElement wrapper,
                                  @NotNull PerlSubDefinitionStub stub) {
     super(wrapper, stub);
   }
@@ -76,7 +75,6 @@ public class PerlAttributeDefinition extends PerlLightMethodDefinitionElement<Pe
   @NotNull
   @Override
   public PsiElement getPodAnchor() {
-    PerlHasExpression hasExpression = PsiTreeUtil.getParentOfType(getParent(), PerlHasExpression.class);
-    return ObjectUtils.notNull(hasExpression, this);
+    return getDelegate();
   }
 }

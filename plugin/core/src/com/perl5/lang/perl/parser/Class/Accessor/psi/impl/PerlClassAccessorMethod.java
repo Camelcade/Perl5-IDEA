@@ -20,6 +20,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.util.Function;
 import com.perl5.lang.perl.extensions.PerlRenameUsagesHelper;
+import com.perl5.lang.perl.psi.impl.PerlSubCallElement;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.light.PerlLightMethodDefinitionElement;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
@@ -31,7 +32,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Arrays;
 import java.util.Collections;
 
-public class PerlClassAccessorMethod extends PerlLightMethodDefinitionElement<PerlClassAccessorWrapper>
+public class PerlClassAccessorMethod extends PerlLightMethodDefinitionElement<PerlSubCallElement>
   implements PerlRenameUsagesHelper {
   public static final String GETTER_PREFIX = "get_";
   public static final String SETTER_PREFIX = "set_";
@@ -40,7 +41,7 @@ public class PerlClassAccessorMethod extends PerlLightMethodDefinitionElement<Pe
   public static final Function<String, String> GETTER_COMPUTATION = name -> GETTER_PREFIX + name;
   public static final Function<String, String> SETTER_COMPUTATION = name -> SETTER_PREFIX + name;
 
-  public PerlClassAccessorMethod(@NotNull PerlClassAccessorWrapper delegate,
+  public PerlClassAccessorMethod(@NotNull PerlSubCallElement delegate,
                                  @NotNull String baseName,
                                  @NotNull Function<String, String> nameComputation,
                                  @NotNull IStubElementType<?, ?> elementType,
@@ -66,7 +67,7 @@ public class PerlClassAccessorMethod extends PerlLightMethodDefinitionElement<Pe
     }
   }
 
-  public PerlClassAccessorMethod(@NotNull PerlClassAccessorWrapper delegate,
+  public PerlClassAccessorMethod(@NotNull PerlSubCallElement delegate,
                                  @NotNull PerlSubDefinitionStub stub) {
     super(delegate, stub);
     if (hasGetterName()) {
@@ -81,7 +82,7 @@ public class PerlClassAccessorMethod extends PerlLightMethodDefinitionElement<Pe
   }
 
   public boolean isFollowBestPractice() {
-    return getDelegate().isFollowBestPractice();
+    return PerlClassAccessorHandler.isFollowBestPractice(getDelegate());
   }
 
   public boolean hasGetterName() {

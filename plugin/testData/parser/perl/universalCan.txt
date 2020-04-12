@@ -5,7 +5,7 @@ Perl5
     PerlNamespaceElementImpl(Perl5: package::name)('UNIVERSAL::can')
     PsiElement(Perl5: ;)(';')
   PsiPerlStatementImpl(Perl5: STATEMENT)
-    PsiPerlSubCallExprImpl(Perl5: SUB_CALL_EXPR)
+    PsiPerlSubCallImpl(SUB_CALL)
       PsiPerlMethodImpl(Perl5: METHOD)
         PerlNamespaceElementImpl(Perl5: package::name::)('UNIVERSAL::')
         PerlSubNameElementImpl(Perl5: subname)('can')

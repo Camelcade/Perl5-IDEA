@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,9 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser.moose.psi.impl;
+package com.perl5.lang.perl.psi;
 
-import com.intellij.lang.ASTNode;
-import com.perl5.lang.perl.psi.impl.PsiPerlExprImpl;
+import com.intellij.psi.PsiElement;
 
-public class PerlHasExpression extends PsiPerlExprImpl {
-  public PerlHasExpression(ASTNode node) {
-    super(node);
-  }
+public interface PerlSelfHinterElement extends PsiElement, PerlSelfHinter {
 }

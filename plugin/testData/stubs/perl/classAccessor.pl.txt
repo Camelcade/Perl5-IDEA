@@ -16,7 +16,7 @@ PerlFileStub
 	@EXPORT_OK: []
 	@EXPORT_TAGS: {}
 	Annotations: null
-    CLASS_ACCESSOR_WRAPPER_RO:PerlClassAccessorWrapperStub
+    SUB_CALL:PerlSubCallElementStub
 	Light elements: 1
 	CLASS_ACCESSOR_METHOD:PerlLightSubDefinitionStub
 	Namespace name: Foo::Bar
@@ -24,8 +24,9 @@ PerlFileStub
 	Annotations: null
 	Arguments: [$self, [$new_value]]
 	Return value: UNKNOWN_VALUE
-	Follow best practice: false
-    CLASS_ACCESSOR_WRAPPER_WO:PerlClassAccessorWrapperStub
+	Handler sub name: mk_ro_accessors
+	Call data: PerlClassAccessorCallData (FBP: false)
+    SUB_CALL:PerlSubCallElementStub
 	Light elements: 1
 	CLASS_ACCESSOR_METHOD:PerlLightSubDefinitionStub
 	Namespace name: Foo::Bar
@@ -33,8 +34,9 @@ PerlFileStub
 	Annotations: null
 	Arguments: [$self, [$new_value]]
 	Return value: UNKNOWN_VALUE
-	Follow best practice: false
-    CLASS_ACCESSOR_WRAPPER:PerlClassAccessorWrapperStub
+	Handler sub name: mk_wo_accessors
+	Call data: PerlClassAccessorCallData (FBP: false)
+    SUB_CALL:PerlSubCallElementStub
 	Light elements: 1
 	CLASS_ACCESSOR_METHOD:PerlLightSubDefinitionStub
 	Namespace name: Foo::Bar
@@ -42,8 +44,9 @@ PerlFileStub
 	Annotations: null
 	Arguments: [$self, [$new_value]]
 	Return value: UNKNOWN_VALUE
-	Follow best practice: false
-    CLASS_ACCESSOR_WRAPPER_RO:PerlClassAccessorWrapperStub
+	Handler sub name: mk_accessors
+	Call data: PerlClassAccessorCallData (FBP: false)
+    SUB_CALL:PerlSubCallElementStub
 	Light elements: 1
 	CLASS_ACCESSOR_METHOD:PerlLightSubDefinitionStub
 	Namespace name: Foo::Bar
@@ -51,8 +54,9 @@ PerlFileStub
 	Annotations: null
 	Arguments: []
 	Return value: UNKNOWN_VALUE
-	Follow best practice: true
-    CLASS_ACCESSOR_WRAPPER_WO:PerlClassAccessorWrapperStub
+	Handler sub name: mk_ro_accessors
+	Call data: PerlClassAccessorCallData (FBP: true)
+    SUB_CALL:PerlSubCallElementStub
 	Light elements: 1
 	CLASS_ACCESSOR_METHOD:PerlLightSubDefinitionStub
 	Namespace name: Foo::Bar
@@ -60,8 +64,9 @@ PerlFileStub
 	Annotations: null
 	Arguments: [$self, $new_value]
 	Return value: UNKNOWN_VALUE
-	Follow best practice: true
-    CLASS_ACCESSOR_WRAPPER:PerlClassAccessorWrapperStub
+	Handler sub name: mk_wo_accessors
+	Call data: PerlClassAccessorCallData (FBP: true)
+    SUB_CALL:PerlSubCallElementStub
 	Light elements: 2
 	CLASS_ACCESSOR_METHOD:PerlLightSubDefinitionStub
 	Namespace name: Foo::Bar
@@ -75,7 +80,8 @@ PerlFileStub
 	Annotations: null
 	Arguments: [$self, $new_value]
 	Return value: UNKNOWN_VALUE
-	Follow best practice: true
+	Handler sub name: mk_accessors
+	Call data: PerlClassAccessorCallData (FBP: true)
 
 ----------
 Language: Perl5 POD

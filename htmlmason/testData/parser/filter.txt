@@ -48,7 +48,7 @@ HTML::Mason component
             PsiElement(Perl5: $$)('$')
             PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('r')
           PsiElement(Perl5: ->)('->')
-          PsiPerlNestedCallImpl(Perl5: NESTED_CALL)
+          PsiPerlSubCallImpl(SUB_CALL)
             PsiPerlMethodImpl(Perl5: METHOD)
               PerlSubNameElementImpl(Perl5: subname)('uri')
       PsiElement(Perl5: ;)(';')

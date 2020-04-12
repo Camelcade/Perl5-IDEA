@@ -1,3 +1,49 @@
+Subtree: HTML (HTML)
+HtmlFile:tryCatchUnclosed.tt
+  PsiElement(HTML_DOCUMENT)
+    PsiElement(XML_PROLOG)
+      <empty list>
+    HtmlTag:html
+      XmlToken:XML_START_TAG_START('<')
+      XmlToken:XML_NAME('html')
+      XmlToken:XML_TAG_END('>')
+      XmlText
+      HtmlTag:head
+        XmlToken:XML_START_TAG_START('<')
+        XmlToken:XML_NAME('head')
+        XmlToken:XML_TAG_END('>')
+        XmlText
+          XmlToken:XML_DATA_CHARACTERS('http://template-toolkit.org/docs/manual/Variables.html')
+        XmlToken:XML_END_TAG_START('</')
+        XmlToken:XML_NAME('head')
+        XmlToken:XML_TAG_END('>')
+      XmlText
+      HtmlTag:body
+        XmlToken:XML_START_TAG_START('<')
+        XmlToken:XML_NAME('body')
+        XmlToken:XML_TAG_END('>')
+        XmlText
+          PsiElement(TT2: TT2_OUTER)('[% TRY %]')
+          XmlToken:XML_DATA_CHARACTERS('...blah...blah...')
+          PsiElement(TT2: TT2_OUTER)('[% CALL somecode %]')
+          XmlToken:XML_DATA_CHARACTERS('...etc...')
+          PsiElement(TT2: TT2_OUTER)('[% INCLUDE someblock %]')
+          XmlToken:XML_DATA_CHARACTERS('...and')
+          XmlToken:XML_DATA_CHARACTERS('so')
+          XmlToken:XML_DATA_CHARACTERS('on...')
+          PsiElement(TT2: TT2_OUTER)('[% CATCH %]')
+          XmlToken:XML_DATA_CHARACTERS('An')
+          XmlToken:XML_DATA_CHARACTERS('error')
+          XmlToken:XML_DATA_CHARACTERS('occurred!')
+        XmlToken:XML_END_TAG_START('</')
+        XmlToken:XML_NAME('body')
+        XmlToken:XML_TAG_END('>')
+      XmlText
+      XmlToken:XML_END_TAG_START('</')
+      XmlToken:XML_NAME('html')
+      XmlToken:XML_TAG_END('>')
+--------------------------------------------------------------------------------
+Subtree: Template Toolkit 2 (Template Toolkit 2)
 Template Toolkit File
   PsiComment(TT2: TT2_HTML)('<html>\n<head>http://template-toolkit.org/docs/manual/Variables.html</head>\n<body>\n\n')
   PsiTryCatchBlockImpl(TT2: TRY_CATCH_BLOCK)
@@ -28,3 +74,4 @@ Template Toolkit File
           PsiElement(TT2: CATCH)('CATCH')
         PsiElement(TT2: %])('%]')
         PsiComment(TT2: TT2_HTML)('\n   An error occurred!\n\n\n\n</body>\n</html>')
+--------------------------------------------------------------------------------

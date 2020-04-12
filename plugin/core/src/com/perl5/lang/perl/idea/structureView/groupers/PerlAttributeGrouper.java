@@ -29,7 +29,8 @@ import com.intellij.util.containers.FactoryMap;
 import com.perl5.PerlBundle;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.structureView.elements.PerlStructureViewElement;
-import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseAttributeWrapper;
+import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseAttributeHandler;
+import com.perl5.lang.perl.psi.impl.PerlSubCallElement;
 import com.perl5.lang.perl.psi.light.PerlLightMethodDefinitionElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -47,7 +48,7 @@ public class PerlAttributeGrouper implements Grouper, ActionPresentation {
       return Collections.emptyList();
     }
 
-    Map<PerlMooseAttributeWrapper, AttributeGroup> groupMap = FactoryMap.create(AttributeGroup::new);
+    Map<PerlSubCallElement, AttributeGroup> groupMap = FactoryMap.create(AttributeGroup::new);
 
     for (TreeElement childTreeElement : children) {
       if (!(childTreeElement instanceof PerlStructureViewElement)) {
@@ -58,10 +59,10 @@ public class PerlAttributeGrouper implements Grouper, ActionPresentation {
         continue;
       }
       PsiElement delegate = ((PerlLightMethodDefinitionElement<?>)value).getDelegate();
-      if (!(delegate instanceof PerlMooseAttributeWrapper)) {
+      if (!PerlMooseAttributeHandler.isMooseAttributeWrapper(delegate)) {
         continue;
       }
-
+      assert delegate instanceof PerlSubCallElement;
       groupMap.get(delegate).addChild(childTreeElement);
     }
 
@@ -98,12 +99,12 @@ public class PerlAttributeGrouper implements Grouper, ActionPresentation {
 
   private static class AttributeGroup implements Group, ItemPresentation, PsiElementNavigationItem {
     @NotNull
-    private final SmartPsiElementPointer<PerlMooseAttributeWrapper> myAttributeWrapperPointer;
+    private final SmartPsiElementPointer<PerlSubCallElement> mySubCallElementPointer;
     @NotNull
     private final List<TreeElement> myChildren = new ArrayList<>();
 
-    public AttributeGroup(@NotNull PerlMooseAttributeWrapper attributeWrapper) {
-      myAttributeWrapperPointer = SmartPointerManager.createPointer(attributeWrapper);
+    public AttributeGroup(@NotNull PerlSubCallElement attributeWrapper) {
+      mySubCallElementPointer = SmartPointerManager.createPointer(attributeWrapper);
     }
 
     public void addChild(@NotNull TreeElement child) {
@@ -125,11 +126,11 @@ public class PerlAttributeGrouper implements Grouper, ActionPresentation {
     @Nullable
     @Override
     public String getPresentableText() {
-      PerlMooseAttributeWrapper element = myAttributeWrapperPointer.getElement();
+      PerlSubCallElement element = mySubCallElementPointer.getElement();
       if (element == null) {
         return PerlBundle.message("perl.presentation.invalid");
       }
-      List<String> namesList = element.getAttributesNames();
+      List<String> namesList = PerlMooseAttributeHandler.notNullFrom(element).getAttributesNames(element);
       String names = namesList.isEmpty() ? PerlBundle.message("perl.structure.attributes.unknown") : StringUtil.join(namesList, ", ");
       return StringUtil.shortenPathWithEllipsis(names, 30);
     }
@@ -137,7 +138,7 @@ public class PerlAttributeGrouper implements Grouper, ActionPresentation {
     @Nullable
     @Override
     public String getLocationString() {
-      PsiFile containingFile = myAttributeWrapperPointer.getContainingFile();
+      PsiFile containingFile = mySubCallElementPointer.getContainingFile();
       return containingFile == null ? PerlBundle.message("perl.presentation.invalid") : containingFile.getName();
     }
 
@@ -150,7 +151,7 @@ public class PerlAttributeGrouper implements Grouper, ActionPresentation {
     @Nullable
     @Override
     public PsiElement getTargetElement() {
-      return myAttributeWrapperPointer.getElement();
+      return mySubCallElementPointer.getElement();
     }
 
     @Nullable
@@ -161,7 +162,7 @@ public class PerlAttributeGrouper implements Grouper, ActionPresentation {
 
     @Override
     public void navigate(boolean requestFocus) {
-      PerlMooseAttributeWrapper element = myAttributeWrapperPointer.getElement();
+      PerlSubCallElement element = mySubCallElementPointer.getElement();
       if (element != null) {
         element.navigate(requestFocus);
       }
@@ -169,13 +170,13 @@ public class PerlAttributeGrouper implements Grouper, ActionPresentation {
 
     @Override
     public boolean canNavigate() {
-      PerlMooseAttributeWrapper element = myAttributeWrapperPointer.getElement();
+      PerlSubCallElement element = mySubCallElementPointer.getElement();
       return element != null && element.canNavigate();
     }
 
     @Override
     public boolean canNavigateToSource() {
-      PerlMooseAttributeWrapper element = myAttributeWrapperPointer.getElement();
+      PerlSubCallElement element = mySubCallElementPointer.getElement();
       return element != null && element.canNavigateToSource();
     }
   }

@@ -88,13 +88,6 @@ public abstract class PerlParserTestBase extends PerlLightTestCaseBase {
     return true;
   }
 
-  protected void doTest(boolean checkErrors) {
-    doTest(checkErrors, false);
-    if (checkErrors) {
-      doCheckErrors();
-    }
-  }
-
   @Override
   public void initWithFileContent(String filename, String extension, String content) {
     super.initWithFileContent(filename, extension, StringUtil.replace(content, REPLACES, REPLACEMENTS).trim());
@@ -104,7 +97,7 @@ public abstract class PerlParserTestBase extends PerlLightTestCaseBase {
     return false;
   }
 
-  protected void doTest(boolean checkResult, boolean ensureNoErrorElements) {
+  protected void doTest(boolean ensureNoErrorElements) {
     initWithFileSmart();
     PsiFile psiFile = getFile();
     String text = psiFile.getText();
@@ -112,15 +105,10 @@ public abstract class PerlParserTestBase extends PerlLightTestCaseBase {
     ensureParsed(psiFile);
     assertEquals("doc text mismatch", text, requireNonNull(psiFile.getViewProvider().getDocument()).getText());
     ensureCorrectReparse(psiFile);
-    if (checkResult) {
-      doCheckResult(getAnswersDataPath(), psiFile, checkAllPsiRoots(), getTestName(true), skipSpaces(), includeRanges(),
-                    allTreesInSingleFile());
-      if (ensureNoErrorElements) {
-        ensureNoErrorElements();
-      }
-    }
-    else {
-      DebugUtil.psiToString(psiFile, skipSpaces(), includeRanges());
+    doCheckResult(getAnswersDataPath(), psiFile, checkAllPsiRoots(), getTestName(true), skipSpaces(), includeRanges(),
+                  allTreesInSingleFile());
+    if (ensureNoErrorElements) {
+      ensureNoErrorElements();
     }
   }
 

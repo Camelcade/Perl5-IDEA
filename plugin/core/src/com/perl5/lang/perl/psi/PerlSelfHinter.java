@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,14 +16,16 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Implement this interface to wrappers, that should hint a type for self, like mojo helpers
  */
-public interface PerlSelfHinter extends PsiElement {
+public interface PerlSelfHinter {
   @NotNull
-  PerlValue getSelfType();
+  default PerlValue getSelfType() {
+    return PerlValues.UNKNOWN_VALUE;
+  }
 }

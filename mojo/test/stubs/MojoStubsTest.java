@@ -14,20 +14,31 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mojolicious.psi.stubs;
+package stubs;
 
-import com.intellij.psi.stubs.IStubElementType;
-import com.intellij.psi.stubs.StubElement;
-import com.perl5.lang.mojolicious.psi.impl.MojoHelperWrapper;
-import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
+import base.PerlLightTestCase;
 import org.jetbrains.annotations.NotNull;
+import org.junit.Test;
 
-import java.util.List;
+public class MojoStubsTest extends PerlLightTestCase {
+  @Override
+  protected String getBaseDataPath() {
+    return "testData/stubs/perl";
+  }
 
-public class MojoHelperWrapperStub extends PerlPolyNamedElementStub<MojoHelperWrapper> {
-  public MojoHelperWrapperStub(StubElement<?> parent,
-                               IStubElementType<?, ?> elementType,
-                               @NotNull List<StubElement<?>> lightNamedElementsStubs) {
-    super(parent, elementType, lightNamedElementsStubs);
+  @Test
+  public void testHelper_pl() {doTest();}
+
+  @Test
+  public void testHelperLite_pl() {doTest();}
+
+  @NotNull
+  @Override
+  protected String computeAnswerFileName(@NotNull String appendix) {
+    return getTestName(true).replace('_', '.') + ".txt";
+  }
+
+  private void doTest() {
+    doTestStubs();
   }
 }

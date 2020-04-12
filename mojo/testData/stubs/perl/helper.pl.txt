@@ -1,0 +1,24 @@
+Language: Perl5
+PerlFileStub
+	Name: main
+	Mro: DFS
+	Parents: []
+	@EXPORT: []
+	@EXPORT_OK: []
+	@EXPORT_TAGS: {}
+	Annotations: null
+	Type: Perl5
+  SUB_CALL:PerlSubCallElementStub
+	Light elements: 1
+	LIGHT_METHOD_DEFINITION:PerlLightSubDefinitionStub
+	Namespace name: Mojolicious::Controller
+	Sub name: myhelper
+	Annotations: null
+	Arguments: []
+	Return value: 42
+	Handler sub name: helper
+	Call data: Emtpy call data
+
+----------
+Language: Perl5 POD
+PsiFileStubImpl

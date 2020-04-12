@@ -93,7 +93,9 @@ public interface PerlElementPatterns extends PerlElementTypes {
   PsiElementPattern.Capture<PerlSubNameElement> SUB_NAME_PATTERN = psiElement(PerlSubNameElement.class);
 
   PsiElementPattern.Capture<PsiPerlMethod> METHOD_PATTERN = psiElement(PsiPerlMethod.class);
-  PsiElementPattern.Capture<PsiElement> IN_OBJECT_CALL_PATTERN = psiElement().withParent(PsiPerlNestedCall.class);
+  PsiElementPattern.Capture<PsiElement> IN_OBJECT_CALL_PATTERN = psiElement().withParent(
+    psiElement(SUB_CALL).withParent(psiElement(DEREF_EXPR))
+  );
 
   PsiElementPattern.Capture<PsiElement> IN_STATIC_METHOD_PATTERN = psiElement().withParent(METHOD_PATTERN.andNot(IN_OBJECT_CALL_PATTERN));
   PsiElementPattern.Capture<PsiElement> IN_OBJECT_METHOD_PATTERN = psiElement().withParent(METHOD_PATTERN.and(IN_OBJECT_CALL_PATTERN));

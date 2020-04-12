@@ -28,7 +28,8 @@
   <depends optional="true" config-file="idea-deps.xml">com.intellij.modules.java</depends>
 
   <extensions defaultExtensionNs="com.perl5">
-    <parserExtension implementation="com.perl5.lang.perl.parser.MojoParserExtension"/>
+    <subCallHandler key="helper" implementationClass="com.perl5.lang.mojolicious.psi.impl.MojoHelperHandler"/>
+
     <importsProvider implementation="com.perl5.lang.mojolicious.extensions.MojoImplicitImportsProvider"/>
     <settings.configurable.extension implementation="com.perl5.lang.mojolicious.idea.modules.MojoSettingsConfigurableExtension"/>
   </extensions>

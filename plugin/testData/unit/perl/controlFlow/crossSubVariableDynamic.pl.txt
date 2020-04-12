@@ -3,7 +3,7 @@
 2(3) element: PsiPerlPackageExprImpl(Perl5: PACKAGE_EXPR) (InstructionImpl)
 3(4) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) (InstructionImpl)
 4(5) element: PsiPerlMethodImpl(Perl5: METHOD) (InstructionImpl)
-5(6) element: PsiPerlNestedCallImpl(Perl5: NESTED_CALL) (InstructionImpl)
+5(6) element: PsiPerlSubCallImpl(SUB_CALL) (InstructionImpl)
 6(7) element: PsiPerlDerefExprImpl(Perl5: DEREF_EXPR) (InstructionImpl)
 7(8) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) (InstructionImpl)
 8(9) assign PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) Perl5: = PsiPerlDerefExprImpl(Perl5: DEREF_EXPR) (PerlAssignInstruction)

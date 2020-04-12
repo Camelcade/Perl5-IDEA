@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,10 +21,10 @@ import com.intellij.codeInspection.ProblemDescriptor;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.perl5.PerlBundle;
-import com.perl5.lang.perl.psi.PerlMethodCall;
+import com.perl5.lang.perl.psi.PerlMethod;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
-import com.perl5.lang.perl.psi.PsiPerlSubCallExpr;
+import com.perl5.lang.perl.psi.impl.PerlSubCallElement;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
@@ -54,15 +54,15 @@ public class PerlFancyMethodQuickFix implements LocalQuickFix {
   @Override
   public void applyFix(@NotNull Project project, @NotNull ProblemDescriptor descriptor) {
     PsiElement method = descriptor.getPsiElement();
-    assert method instanceof PerlMethodCall;
+    assert method instanceof PerlMethod;
 
     PsiElement callExpression = method.getParent();
-    assert callExpression instanceof PsiPerlSubCallExpr;
+    assert callExpression instanceof PerlSubCallElement;
 
-    PerlNamespaceElement namespaceElement = ((PerlMethodCall)method).getNamespaceElement();
+    PerlNamespaceElement namespaceElement = ((PerlMethod)method).getNamespaceElement();
     assert namespaceElement != null;
 
-    PerlSubNameElement subNameElement = ((PerlMethodCall)method).getSubNameElement();
+    PerlSubNameElement subNameElement = ((PerlMethod)method).getSubNameElement();
     assert subNameElement != null;
 
     StringBuilder argsBuilder = new StringBuilder();

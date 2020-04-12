@@ -1,3 +1,41 @@
+Subtree: HTML (HTML)
+HtmlFile:foreachUnclosed.tt
+  PsiElement(HTML_DOCUMENT)
+    PsiElement(XML_PROLOG)
+      <empty list>
+    HtmlTag:html
+      XmlToken:XML_START_TAG_START('<')
+      XmlToken:XML_NAME('html')
+      XmlToken:XML_TAG_END('>')
+      XmlText
+      HtmlTag:head
+        XmlToken:XML_START_TAG_START('<')
+        XmlToken:XML_NAME('head')
+        XmlToken:XML_TAG_END('>')
+        XmlText
+          XmlToken:XML_DATA_CHARACTERS('http://template-toolkit.org/docs/manual/Variables.html')
+        XmlToken:XML_END_TAG_START('</')
+        XmlToken:XML_NAME('head')
+        XmlToken:XML_TAG_END('>')
+      XmlText
+      HtmlTag:body
+        XmlToken:XML_START_TAG_START('<')
+        XmlToken:XML_NAME('body')
+        XmlToken:XML_TAG_END('>')
+        XmlText
+          XmlToken:XML_DATA_CHARACTERS('Things:')
+          PsiElement(TT2: TT2_OUTER)('[% FOREACH thing IN [ foo 'Bar' "$foo Baz" ] %]')
+          XmlToken:XML_DATA_CHARACTERS('*')
+          PsiElement(TT2: TT2_OUTER)('[% thing %]')
+        XmlToken:XML_END_TAG_START('</')
+        XmlToken:XML_NAME('body')
+        XmlToken:XML_TAG_END('>')
+      XmlText
+      XmlToken:XML_END_TAG_START('</')
+      XmlToken:XML_NAME('html')
+      XmlToken:XML_TAG_END('>')
+--------------------------------------------------------------------------------
+Subtree: Template Toolkit 2 (Template Toolkit 2)
 Template Toolkit File
   PsiComment(TT2: TT2_HTML)('<html>\n<head>http://template-toolkit.org/docs/manual/Variables.html</head>\n<body>\n\nThings:\n')
   PsiErrorElement:Unclosed block directive, missing END
@@ -33,3 +71,4 @@ Template Toolkit File
           PsiElement(TT2: TT2_IDENTIFIER)('thing')
       PsiElement(TT2: %])('%]')
       PsiComment(TT2: TT2_HTML)('\n\n</body>\n</html>')
+--------------------------------------------------------------------------------

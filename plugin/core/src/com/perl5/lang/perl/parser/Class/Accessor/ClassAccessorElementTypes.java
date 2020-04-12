@@ -16,24 +16,10 @@
 
 package com.perl5.lang.perl.parser.Class.Accessor;
 
-import com.intellij.psi.stubs.IStubElementType;
-import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.parser.Class.Accessor.elementTypes.ClassAccessorWrapperElementType;
-import com.perl5.lang.perl.parser.elementTypes.PerlNestedCallElementType;
-import com.perl5.lang.perl.parser.elementTypes.PerlTokenType;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlLightSubDefinitionElementType;
 
 
-public interface ClassAccessorElementTypes {
-  IElementType CLASS_ACCESSOR_FBP = new PerlNestedCallElementType("CLASS_ACCESSOR_FBP");
-  IStubElementType<?, ?> CLASS_ACCESSOR_METHOD = new PerlLightSubDefinitionElementType("CLASS_ACCESSOR_METHOD");
-  // fixme must be AFTER METHOD
-  IElementType CLASS_ACCESSOR_WRAPPER = new ClassAccessorWrapperElementType("CLASS_ACCESSOR_WRAPPER");
-  IElementType CLASS_ACCESSOR_WRAPPER_RO = new ClassAccessorWrapperElementType("CLASS_ACCESSOR_WRAPPER_RO");
-  IElementType CLASS_ACCESSOR_WRAPPER_WO = new ClassAccessorWrapperElementType("CLASS_ACCESSOR_WRAPPER_WO");
-
-  IElementType RESERVED_MK_RO_ACCESSORS = new PerlTokenType("MK_RO_ACCESSORS");
-  IElementType RESERVED_MK_WO_ACCESSORS = new PerlTokenType("MK_WO_ACCESSORS");
-  IElementType RESERVED_MK_ACCESSORS = new PerlTokenType("MK_ACCESSORS");
-  IElementType RESERVED_FOLLOW_BEST_PRACTICE = new PerlTokenType("FOLLOW_BEST_PRACTICE");
+public final class ClassAccessorElementTypes {
+  public static final PerlLightSubDefinitionElementType CLASS_ACCESSOR_METHOD =
+    new PerlLightSubDefinitionElementType("CLASS_ACCESSOR_METHOD");
 }

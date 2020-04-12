@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,6 @@ import com.intellij.util.containers.Queue;
 import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.project.PerlNamesCache;
-import com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes;
 import com.perl5.lang.perl.parser.PerlParserImpl;
 import com.perl5.lang.perl.parser.moose.MooseElementTypes;
 import com.perl5.lang.perl.psi.PerlString;
@@ -48,7 +47,6 @@ import static com.perl5.lang.perl.lexer.PerlLexer.*;
 
 
 public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElementTypes,
-                                                                      ClassAccessorElementTypes,
                                                                       MooseElementTypes {
   // fixme move somewhere
   public static final String STRING_UNDEF = "undef";
@@ -109,17 +107,22 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
       // add extensions tokens
       List<Pair<IElementType, TokenSet>> extensionSets = extension.getExtensionSets();
       for (Pair<IElementType, TokenSet> extensionSet : extensionSets) {
-        for (int i = 0; i < PerlParserImpl.EXTENDS_SETS_.length; i++) {
-          if (PerlParserImpl.EXTENDS_SETS_[i].contains(extensionSet.first)) {
-            PerlParserImpl.EXTENDS_SETS_[i] = TokenSet.orSet(PerlParserImpl.EXTENDS_SETS_[i], extensionSet.getSecond());
-            break;
-          }
-        }
+        extendParserTokens(extensionSet.first, extensionSet.getSecond());
       }
     }
+    extendParserTokens(TERM_EXPR, TokenSet.create(SUB_CALL));
     CUSTOM_TOKEN_TYPES = customTokenTypes;
     CUSTOM_TOKEN_TYPES_AFTER_DEREFERENCE = customTokenTypesAfterDereference;
     BARE_REGEX_PREFIX_TOKENSET = bareRegexPrefixTokenSet;
+  }
+
+  private static void extendParserTokens(IElementType setToExtend, TokenSet extendWith) {
+    for (int i = 0; i < PerlParserImpl.EXTENDS_SETS_.length; i++) {
+      if (PerlParserImpl.EXTENDS_SETS_[i].contains(setToExtend)) {
+        PerlParserImpl.EXTENDS_SETS_[i] = TokenSet.orSet(PerlParserImpl.EXTENDS_SETS_[i], extendWith);
+        break;
+      }
+    }
   }
 
   // last captured heredoc marker

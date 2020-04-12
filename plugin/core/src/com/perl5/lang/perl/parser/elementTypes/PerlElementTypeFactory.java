@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.psi.impl.*;
 import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
+import com.perl5.lang.perl.psi.stubs.calls.PerlSubCallElementType;
 import org.jetbrains.annotations.NotNull;
 
 import static com.perl5.lang.perl.util.PerlPackageUtil.__PACKAGE__;
@@ -261,8 +262,6 @@ public class PerlElementTypeFactory {
         return new PerlElementTypeEx(name, PsiPerlNamedBlockImpl.class);
       case "NAMESPACE_CONTENT":
         return new PerlElementTypeEx(name, PsiPerlNamespaceContentImpl.class);
-      case "NESTED_CALL":
-        return new PerlNestedCallElementType(name);
       case "NEXT_EXPR":
         return new PerlElementTypeEx(name, PsiPerlNextExprImpl.class);
       case "NUMBER_CONSTANT":
@@ -361,8 +360,8 @@ public class PerlElementTypeFactory {
         return new PerlElementTypeEx(name, PsiPerlStringSqImpl.class);
       case "STRING_XQ":
         return new PerlElementTypeEx(name, PsiPerlStringXqImpl.class);
-      case "SUB_CALL_EXPR":
-        return new PerlElementTypeEx(name, PsiPerlSubCallExprImpl.class);
+      case "SUB_CALL":
+        return new PerlSubCallElementType(name);
       case "SUB_EXPR":
         return new PerlElementTypeEx(name, PsiPerlSubExprImpl.class);
       case "CONTINUE_EXPR":

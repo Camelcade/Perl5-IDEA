@@ -37,6 +37,9 @@
       <with attribute="implementationClass"
             implements="com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor"/>
     </extensionPoint>
+    <extensionPoint name="subCallHandler" beanClass="com.perl5.lang.perl.psi.PerlSubCallHandler$Bean" dynamic="true">
+      <with attribute="implementationClass" implements="com.perl5.lang.perl.psi.PerlSubCallHandler"/>
+    </extensionPoint>
     <extensionPoint name="hostHandler" beanClass="com.perl5.lang.perl.idea.sdk.PerlHandlerBean">
       <with attribute="implementationClass" implements="com.perl5.lang.perl.idea.sdk.host.PerlHostHandler"/>
     </extensionPoint>
@@ -55,6 +58,15 @@
   </extensionPoints>
 
   <extensions defaultExtensionNs="com.perl5">
+    <subCallHandler key="has"
+                    implementationClass="com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseAttributeHandler"/>
+    <subCallHandler key="mk_accessors"
+                    implementationClass="com.perl5.lang.perl.parser.Class.Accessor.psi.impl.PerlClassAccessorHandler$PerlClassAccessorRWHandler"/>
+    <subCallHandler key="mk_ro_accessors"
+                    implementationClass="com.perl5.lang.perl.parser.Class.Accessor.psi.impl.PerlClassAccessorHandler$PerlClassAccessorRoHandler"/>
+    <subCallHandler key="mk_wo_accessors"
+                    implementationClass="com.perl5.lang.perl.parser.Class.Accessor.psi.impl.PerlClassAccessorHandler$PerlClassAccessorWoHandler"/>
+
     <packageProcessor key="parent"
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.ParentProcessor"/>
     <packageProcessor key="base"
@@ -126,7 +138,6 @@
 
     <parserExtension implementation="com.perl5.lang.perl.parser.PerlSwitchParserExtensionImpl"/>
     <parserExtension implementation="com.perl5.lang.perl.parser.MooseParserExtension"/>
-    <parserExtension implementation="com.perl5.lang.perl.parser.ClassAccessorParserExtension"/>
 
     <settings.configurable.extension
         implementation="com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurableExtensionImpl"/>

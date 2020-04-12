@@ -98,7 +98,7 @@ public class PerlParsingPerformanceTest extends PerlParserTestBase {
     SUB_EXPR,
 
     //calls
-    SUB_CALL_EXPR
+    SUB_CALL
   );
 
   @Override

@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlReplacementRegexImpl(Perl5: REPLACEMENT_REGEX)
@@ -8,7 +9,7 @@ Perl5
       PsiElement(Perl5: re/)('@')
       PsiPerlBlockImpl(Perl5: BLOCK)
         PsiPerlStatementImpl(Perl5: STATEMENT)
-          PsiPerlSubCallExprImpl(Perl5: SUB_CALL_EXPR)
+          PsiPerlSubCallImpl(SUB_CALL)
             PsiPerlMethodImpl(Perl5: METHOD)
               PsiElement(Perl5: method)('method')
       PsiComment(Perl5: COMMENT_LINE)('#')
@@ -19,6 +20,11 @@ Perl5
     PsiErrorElement:Semicolon expected
       <empty list>
   PsiPerlStatementImpl(Perl5: STATEMENT)
-    PsiPerlSubCallExprImpl(Perl5: SUB_CALL_EXPR)
+    PsiPerlSubCallImpl(SUB_CALL)
       PsiPerlMethodImpl(Perl5: METHOD)
         PerlSubNameElementImpl(Perl5: subname)('thod')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('s@ARGV;\n\n#@method\n\n#@method')
+--------------------------------------------------------------------------------

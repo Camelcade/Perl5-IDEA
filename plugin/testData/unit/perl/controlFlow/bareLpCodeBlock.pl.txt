@@ -8,6 +8,6 @@
 7(8) element: PsiPerlConditionExprImpl(Perl5: CONDITION_EXPR). Condition: ():true (ConditionalInstructionImpl)
 8(9) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) (InstructionImpl)
 9(10) element: PsiPerlMethodImpl(Perl5: METHOD) (InstructionImpl)
-10(11) element: PsiPerlNestedCallImpl(Perl5: NESTED_CALL) (InstructionImpl)
+10(11) element: PsiPerlSubCallImpl(SUB_CALL) (InstructionImpl)
 11(12) element: PsiPerlDerefExprImpl(Perl5: DEREF_EXPR) (InstructionImpl)
 12() element: null (InstructionImpl)

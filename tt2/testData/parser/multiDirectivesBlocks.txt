@@ -300,7 +300,7 @@ Template Toolkit File
                   PsiElement(Perl5: $$)('$')
                   PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('stash')
                 PsiElement(Perl5: ->)('->')
-                PsiPerlNestedCallImpl(Perl5: NESTED_CALL)
+                PsiPerlSubCallImpl(SUB_CALL)
                   PsiPerlMethodImpl(Perl5: METHOD)
                     PerlSubNameElementImpl(Perl5: subname)('get')
                   PsiPerlParenthesisedCallArgumentsImpl(Perl5: PARENTHESISED_CALL_ARGUMENTS)

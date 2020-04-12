@@ -120,16 +120,16 @@ public class PerlAnnotator extends PerlBaseAnnotator {
           defaultSilentProducer.accept(PerlSyntaxHighlighter.PERL_SUB_DEFINITION);
         }
       }
-      else if (parent instanceof PerlMethodCall) {
+      else if (parent instanceof PerlMethod) {
         // fixme don't we need to take multiple references here?
         PsiElement grandParent = parent.getParent();
-        PerlNamespaceElement methodNamespace = ((PerlMethodCall)parent).getNamespaceElement();
+        PerlNamespaceElement methodNamespace = ((PerlMethod)parent).getNamespaceElement();
 
         if (
-          !(grandParent instanceof PsiPerlNestedCall)    /// not ...->method fixme shouldn't we use isObjectMethod here?
-          && (methodNamespace == null || methodNamespace.isCORE())    // no explicit NS or it's core
+          !PerlSubCallElement.isNestedCall(grandParent) /// not ...->method fixme shouldn't we use isObjectMethod here?
+          && (methodNamespace == null || methodNamespace.isCORE())// no explicit NS or it's core
           && ((PerlSubNameElement)element).isBuiltIn()
-          ) {
+        ) {
           createInfoAnnotation(holder, element, null, PerlSyntaxHighlighter.PERL_SUB_BUILTIN);
         }
         else {

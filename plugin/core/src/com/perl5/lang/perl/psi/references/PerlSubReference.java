@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ package com.perl5.lang.perl.psi.references;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.ResolveResult;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlCallValue;
-import com.perl5.lang.perl.psi.PerlMethodCall;
+import com.perl5.lang.perl.psi.PerlMethod;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import org.jetbrains.annotations.NotNull;
 
@@ -39,7 +39,7 @@ public class PerlSubReference extends PerlSubReferenceSimple {
     assert element instanceof PerlSubNameElement;
 
     PsiElement parent = element.getParent();
-    if (!(parent instanceof PerlMethodCall)) {
+    if (!(parent instanceof PerlMethod)) {
       return ResolveResult.EMPTY_ARRAY;
     }
 

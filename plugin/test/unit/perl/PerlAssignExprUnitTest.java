@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.PerlAssignExpression;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
-import com.perl5.lang.perl.psi.PsiPerlSubCallExpr;
+import com.perl5.lang.perl.psi.impl.PerlSubCallElement;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 public class PerlAssignExprUnitTest extends PerlLightTestCase {
@@ -317,7 +317,7 @@ public class PerlAssignExprUnitTest extends PerlLightTestCase {
   }
 
   private void doTestSubCall(@NotNull String text, boolean result) {
-    doTest(text, PsiPerlSubCallExpr.class, result);
+    doTest(text, PerlSubCallElement.class, result);
   }
 
   private void doTestVariable(@NotNull String text, boolean result) {

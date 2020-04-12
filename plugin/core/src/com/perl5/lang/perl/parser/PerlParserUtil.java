@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -445,7 +445,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
   public static boolean parseCustomCallExpr(PsiBuilder b, int l, Parser tokenParser) {
     PsiBuilder.Marker m = b.mark();
     if (PerlParserImpl.leftward_call(b, l, tokenParser) || PerlParserImpl.rightward_call(b, l, tokenParser)) {
-      m.done(SUB_CALL_EXPR);
+      m.done(SUB_CALL);
       return true;
     }
     m.rollbackTo();

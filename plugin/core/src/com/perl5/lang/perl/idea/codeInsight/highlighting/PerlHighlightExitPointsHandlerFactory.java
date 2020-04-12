@@ -24,7 +24,11 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlControlFlowBuilder;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PerlFlowControlExpr;
+import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.PerlSubNameElement;
+import com.perl5.lang.perl.psi.PsiPerlMethod;
+import com.perl5.lang.perl.psi.impl.PerlSubCallElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -44,7 +48,7 @@ public class PerlHighlightExitPointsHandlerFactory extends HighlightUsagesHandle
                                                                     @NotNull PsiElement target) {
     if (target instanceof PerlSubNameElement &&
         target.getParent() instanceof PsiPerlMethod &&
-        target.getParent().getParent() instanceof PsiPerlSubCallExpr &&
+        target.getParent().getParent() instanceof PerlSubCallElement &&
         PerlControlFlowBuilder.DIE_SUBS.contains(target.getText()) ||
         EXIT_KEYWORDS.contains(PsiUtilCore.getElementType(target))) {
       return new PerlHighlightExitPointsHandler(editor, file, target);

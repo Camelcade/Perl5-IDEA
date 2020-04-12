@@ -6,6 +6,6 @@
 5(6) element: PsiPerlVariableDeclarationLexicalImpl(Perl5: VARIABLE_DECLARATION_LEXICAL) (InstructionImpl)
 6(7) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) (InstructionImpl)
 7(8) element: PsiPerlMethodImpl(Perl5: METHOD) (InstructionImpl)
-8(9) element: PsiPerlNestedCallImpl(Perl5: NESTED_CALL) (InstructionImpl)
+8(9) element: PsiPerlSubCallImpl(SUB_CALL) (InstructionImpl)
 9(10) element: PsiPerlDerefExprImpl(Perl5: DEREF_EXPR) (InstructionImpl)
 10() element: null (InstructionImpl)

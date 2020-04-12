@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,7 +54,7 @@ import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 public abstract class PerlIntroduceTargetsHandler {
   private static final Logger LOG = Logger.getInstance(PerlIntroduceTargetsHandler.class);
   private static final TokenSet UNINTRODUCIBLE_TOKENS = TokenSet.create(
-    CONDITION_EXPR, NESTED_CALL, PARENTHESISED_EXPR,
+    CONDITION_EXPR, PARENTHESISED_EXPR,
     VARIABLE_DECLARATION_LEXICAL, VARIABLE_DECLARATION_GLOBAL, VARIABLE_DECLARATION_LOCAL,
     TR_REPLACEMENTLIST, TR_SEARCHLIST, TR_REGEX,
     PERL_REGEX, REPLACEMENT_REGEX
@@ -215,6 +215,9 @@ public abstract class PerlIntroduceTargetsHandler {
     }
     IElementType elementType = PsiUtilCore.getElementType(element);
     if (elementType == SUB_EXPR && FAKE_SUB_EXPR_CONTAINERS.contains(PsiUtilCore.getElementType(element.getParent()))) {
+      return false;
+    }
+    if (elementType == SUB_CALL && element.getParent() instanceof PsiPerlDerefExpr) {
       return false;
     }
     if (!UNINTRODUCIBLE_TOKENS.contains(elementType)) {

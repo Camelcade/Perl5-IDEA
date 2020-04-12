@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.*;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
+import com.perl5.lang.perl.psi.impl.PerlSubCallElement;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -36,7 +37,7 @@ import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.PACKAGE;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.QUALIFYING_PACKAGE;
 
 
-public abstract class PerlMethodMixin extends PerlCompositeElementImpl implements PerlMethodCall {
+public abstract class PerlMethodMixin extends PerlCompositeElementImpl implements PerlMethod {
   private static final Logger LOG = Logger.getInstance(PerlMethodMixin.class);
 
   public PerlMethodMixin(@NotNull ASTNode node) {
@@ -66,7 +67,7 @@ public abstract class PerlMethodMixin extends PerlCompositeElementImpl implement
     String explicitNamespaceName = getExplicitNamespaceName();
     boolean hasExplicitNamespace = StringUtil.isNotEmpty(explicitNamespaceName);
     PsiElement parentElement = getParent();
-    boolean isNestedCall = parentElement instanceof PerlNestedCall;
+    boolean isNestedCall = PerlSubCallElement.isNestedCall(parentElement);
 
     List<PerlValue> callArguments;
     if (parentElement instanceof PerlMethodContainer) {
@@ -112,7 +113,7 @@ public abstract class PerlMethodMixin extends PerlCompositeElementImpl implement
   @Override
   public boolean isObjectMethod() {
     boolean hasExplicitNamespace = hasExplicitNamespace();
-    boolean isNestedCall = getParent() instanceof PerlNestedCall;
+    boolean isNestedCall = PerlSubCallElement.isNestedCall(getParent());
 
     return !hasExplicitNamespace && isNestedCall            // part of ..->method()
            || hasExplicitNamespace && getFirstChild() instanceof PerlSubNameElement    // method Foo::Bar

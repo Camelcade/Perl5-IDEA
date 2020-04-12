@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,9 +18,9 @@ package com.perl5.lang.mojolicious.psi.impl;
 
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
 import com.perl5.lang.perl.psi.PerlFile;
-import com.perl5.lang.perl.psi.PerlSelfHinter;
+import com.perl5.lang.perl.psi.PerlSelfHinterElement;
 
-public interface MojoliciousFile extends PerlFile, PerlImplicitVariablesProvider, PerlSelfHinter {
+public interface MojoliciousFile extends PerlFile, PerlImplicitVariablesProvider, PerlSelfHinterElement {
   String MOJO_CONTROLLER_NS = "Mojolicious::Controller";
   String MOJO_SANDBOX_NS_PREFIX = "Mojo::Template::Sandbox";
   String MOJO_TAG_HELPERS_NS = "Mojolicious::Plugin::TagHelpers";

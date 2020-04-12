@@ -17,21 +17,20 @@
 package com.perl5.lang.perl.extensions.packageprocessor;
 
 import com.perl5.PerlBundle;
+import com.perl5.lang.perl.psi.PerlLightElementProvider;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElementBase;
-import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.stubs.imports.PerlUseStatementStub;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
 /**
  * implement this interface to provide a package processor
  */
-public interface PerlPackageProcessor {
+public interface PerlPackageProcessor extends PerlLightElementProvider<PerlUseStatementElement, PerlUseStatementStub> {
   /**
    * Returns true if package is pragma, false otherwise
    *
@@ -57,23 +56,6 @@ public interface PerlPackageProcessor {
    * @param exportOk     export_ok set to fill
    */
   void addExports(@NotNull PerlUseStatementElement useStatement, @NotNull Set<String> export, @NotNull Set<String> exportOk);
-
-  /**
-   * @return list of the light psi elements declared by the {@code useStatementElement}
-   */
-  @NotNull
-  default List<PerlDelegatingLightNamedElement<?>> computeLightElementsFromPsi(@NotNull PerlUseStatementElement useStatementElement) {
-    return Collections.emptyList();
-  }
-
-  /**
-   * @return list of the light psi elements declared by the {@code useStatementStub}
-   */
-  @NotNull
-  default List<PerlDelegatingLightNamedElement<?>> computeLightElementsFromStubs(@NotNull PerlUseStatementElement useStatementElement,
-                                                                                 @NotNull PerlUseStatementStub useStatementStub) {
-    return Collections.emptyList();
-  }
 
   /**
    * @return text that should be shown in folded block of use arguments

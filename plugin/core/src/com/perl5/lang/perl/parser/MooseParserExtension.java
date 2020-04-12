@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.parser;
 
+import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.parser.GeneratedParserUtilBase;
 import com.intellij.openapi.util.Pair;
 import com.intellij.psi.tree.IElementType;
@@ -67,9 +68,7 @@ public class MooseParserExtension extends PerlParserExtension implements MooseEl
     RESERVED_TO_STATEMENT_MAP.put(RESERVED_BEFORE, MOOSE_STATEMENT_BEFORE);
 
 
-    List<IElementType> tokensList = new ArrayList<>();
-    tokensList.add(MOOSE_HAS_EXPR);
-    tokensList.addAll(RESERVED_TO_STATEMENT_MAP.values());
+    List<IElementType> tokensList = new ArrayList<>(RESERVED_TO_STATEMENT_MAP.values());
     EXTENSION_SET.add(Pair.create(EXPR, TokenSet.create(tokensList.toArray(IElementType.EMPTY_ARRAY))));
 
     PARSER_TOKEN_SET =
@@ -104,15 +103,16 @@ public class MooseParserExtension extends PerlParserExtension implements MooseEl
       return false;
     }
     PerlBuilder.Marker m = b.mark();
+    PsiBuilder.Marker sm = b.mark();
     PerlParserUtil.consumeToken(b, RESERVED_HAS);
+    sm.collapse(SUB_NAME);
+    sm.precede().done(METHOD);
 
-    PerlBuilder.Marker wrapperMarker = b.mark();
-    if (PerlParserImpl.parse_list_expr(b, l + 1)) {
-      wrapperMarker.done(MOOSE_ATTRIBUTE_WRAPPER);
-      m.done(MOOSE_HAS_EXPR);
+    if (PerlParserImpl.default_parenthesised_call_arguments(b, l + 1) ||
+        PerlParserImpl.rightward_call_arguments(b, l + 1)) {
+      m.done(SUB_CALL);
       return true;
     }
-    wrapperMarker.drop();
     m.error("Incomplete has expression");
     return true;
   }

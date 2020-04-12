@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,6 @@ package com.perl5.lang.perl.parser.moose;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.parser.elementTypes.PerlElementTypeEx;
 import com.perl5.lang.perl.parser.elementTypes.PerlTokenTypeEx;
-import com.perl5.lang.perl.parser.moose.psi.elementTypes.PerlMooseAttributeWrapperElementType;
 import com.perl5.lang.perl.parser.moose.psi.impl.*;
 import com.perl5.lang.perl.parser.moose.stubs.PerlMooseOverrideElementType;
 import com.perl5.lang.perl.parser.moose.stubs.augment.PerlMooseAugmentStatementElementType;
@@ -50,8 +49,6 @@ public interface MooseElementTypes {
 
   IElementType MOOSE_STATEMENT_AUGMENT = new PerlMooseAugmentStatementElementType("MOOSE_STATEMENT_AUGMENT");
   IElementType MOOSE_STATEMENT_OVERRIDE = new PerlMooseOverrideElementType("MOOSE_STATEMENT_OVERRIDE");
-  IElementType MOOSE_ATTRIBUTE_WRAPPER = new PerlMooseAttributeWrapperElementType("ATTRIBUTE_WRAPPER");
-  IElementType MOOSE_HAS_EXPR = new PerlElementTypeEx("MOOSE_HAS_EXPR", PerlHasExpression.class);
 
   class PerlMooseTokenType extends PerlTokenTypeEx {
     public PerlMooseTokenType(@NotNull @NonNls String debugName) {

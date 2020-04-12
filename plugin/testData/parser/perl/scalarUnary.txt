@@ -14,7 +14,7 @@ Perl5
           PsiElement(Perl5: =>)('=>')
           PsiPerlScalarExprImpl(Perl5: SCALAR_EXPR)
             PsiElement(Perl5: scalar)('scalar')
-            PsiPerlSubCallExprImpl(Perl5: SUB_CALL_EXPR)
+            PsiPerlSubCallImpl(SUB_CALL)
               PsiPerlMethodImpl(Perl5: METHOD)
                 PerlSubNameElementImpl(Perl5: unary)('localtime')
               PsiPerlParenthesisedCallArgumentsImpl(Perl5: PARENTHESISED_CALL_ARGUMENTS)

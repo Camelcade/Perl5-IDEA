@@ -1,3 +1,4 @@
+Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlScalarExprImpl(Perl5: SCALAR_EXPR)
@@ -53,3 +54,8 @@ Perl5
       PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
         PsiElement(Perl5: NUMBER)('1')
     PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('scalar (@array);\nscalar ;\nscalar @array;\nscalar (@array) + 1;\nscalar ;\nscalar @array + 1;')
+--------------------------------------------------------------------------------

@@ -22,8 +22,10 @@ import com.intellij.psi.PsiElementVisitor;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.inspections.PerlInspection;
 import com.perl5.lang.perl.parser.moose.psi.impl.PerlAttributeDefinition;
-import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseAttributeWrapper;
+import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseAttributeHandler;
 import com.perl5.lang.perl.psi.PerlVisitor;
+import com.perl5.lang.perl.psi.PsiPerlSubCall;
+import com.perl5.lang.perl.psi.impl.PerlSubCallElement;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import org.jetbrains.annotations.NotNull;
 
@@ -37,8 +39,12 @@ public class MooseMultiAttributeAccessorInspection extends PerlInspection {
   public PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean isOnTheFly) {
     return new PerlVisitor() {
       @Override
-      public void visitMooseAttributeWrapper(@NotNull PerlMooseAttributeWrapper o) {
-        List<? extends PerlDelegatingLightNamedElement<?>> lightElements = o.getLightElements();
+      public void visitSubCall(@NotNull PsiPerlSubCall o) {
+        if (!PerlMooseAttributeHandler.isMooseAttributeWrapper(o)) {
+          return;
+        }
+
+        List<? extends PerlDelegatingLightNamedElement<?>> lightElements = ((PerlSubCallElement)o).getLightElements();
         if (lightElements.size() < 2) {
           return;
         }

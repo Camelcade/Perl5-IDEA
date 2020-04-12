@@ -18,7 +18,9 @@ package com.perl5.lang.perl.psi.stubs;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StringStubIndexExtension;
+import com.perl5.lang.perl.idea.EP.PerlPackageProcessorEP;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
+import com.perl5.lang.perl.psi.PerlSubCallHandler;
 
 
 public abstract class PerlStubIndexBase<Psi extends PsiElement> extends StringStubIndexExtension<Psi> {
@@ -26,6 +28,10 @@ public abstract class PerlStubIndexBase<Psi extends PsiElement> extends StringSt
 
   @Override
   public int getVersion() {
-    return super.getVersion() + VERSION + PerlValuesManager.VERSION;
+    return super.getVersion() +
+           VERSION +
+           PerlValuesManager.VERSION +
+           PerlSubCallHandler.getHandlersVersion() +
+           PerlPackageProcessorEP.getVersion();
   }
 }

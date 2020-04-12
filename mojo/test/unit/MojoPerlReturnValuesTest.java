@@ -38,7 +38,6 @@ public class MojoPerlReturnValuesTest extends PerlLightTestCase {
   public void testIssue2142Indirect() {doTest();}
 
   @Test
-  @Ignore
   public void testIssue2142IndirectLite() {doTest();}
 
   @Test

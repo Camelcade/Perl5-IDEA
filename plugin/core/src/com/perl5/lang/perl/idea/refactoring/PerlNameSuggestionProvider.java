@@ -41,6 +41,7 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.PerlAssignExpression.PerlAssignValueDescriptor;
+import com.perl5.lang.perl.psi.impl.PerlSubCallElement;
 import com.perl5.lang.perl.psi.mixins.PerlStatementMixin;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
@@ -254,8 +255,8 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
     else if (expressionType == SORT_EXPR) {
       recommendation = suggestAndGetGrepMapSortNames(expression, SORTED, result);
     }
-    else if (CALLS.contains(expressionType)) {
-      recommendation = suggestAndGetForCall((PsiPerlSubCallExpr)expression, result, recommendation);
+    else if (expressionType == SUB_CALL) {
+      recommendation = suggestAndGetForCall((PerlSubCallElement)expression, result, recommendation);
     }
     else if (expressionType == SUB_EXPR) {
       result.addAll(BASE_ANON_SUB_NAMES);
@@ -303,8 +304,8 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
 
       recommendation = suggestNamesForElements(baseElement, true, ((PsiPerlArrayIndex)element).getExpr(), result, recommendation);
     }
-    else if (element instanceof PsiPerlNestedCall) {
-      recommendation = suggestAndGetForCall((PsiPerlNestedCall)element, result, recommendation);
+    else if (element instanceof PerlSubCallElement) {
+      recommendation = suggestAndGetForCall((PerlSubCallElement)element, result, recommendation);
     }
     else if (element instanceof PsiPerlParenthesisedCallArguments) {
       recommendation = join(getBaseName(baseElement), RESULT);
@@ -312,8 +313,8 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
     return recommendation;
   }
 
-  private static String suggestAndGetForCall(@NotNull PsiPerlSubCallExpr expression, @NotNull Set<String> result, String recommendation) {
-    PsiPerlMethod method = expression.getMethod();
+  private static String suggestAndGetForCall(@NotNull PerlSubCallElement subCall, @NotNull Set<String> result, String recommendation) {
+    PsiPerlMethod method = subCall.getMethod();
     if (method == null) {
       return recommendation;
     }
@@ -342,7 +343,7 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
         }
       }
       recommendation = recommendationRef.get();
-      result.addAll(getVariantsFromEntityValueNamespaces(expression));
+      result.addAll(getVariantsFromEntityValueNamespaces(subCall));
     }
     return recommendation;
   }

@@ -1,3 +1,55 @@
+Subtree: HTML (HTML)
+HtmlFile:wrapperUnclosed.tt
+  PsiElement(HTML_DOCUMENT)
+    PsiElement(XML_PROLOG)
+      <empty list>
+    HtmlTag:html
+      XmlToken:XML_START_TAG_START('<')
+      XmlToken:XML_NAME('html')
+      XmlToken:XML_TAG_END('>')
+      XmlText
+      HtmlTag:head
+        XmlToken:XML_START_TAG_START('<')
+        XmlToken:XML_NAME('head')
+        XmlToken:XML_TAG_END('>')
+        XmlText
+          XmlToken:XML_DATA_CHARACTERS('http://template-toolkit.org/docs/manual/Variables.html')
+        XmlToken:XML_END_TAG_START('</')
+        XmlToken:XML_NAME('head')
+        XmlToken:XML_TAG_END('>')
+      XmlText
+      HtmlTag:body
+        XmlToken:XML_START_TAG_START('<')
+        XmlToken:XML_NAME('body')
+        XmlToken:XML_TAG_END('>')
+        XmlText
+          PsiElement(TT2: TT2_OUTER)('[% WRAPPER section\n   title = 'Quantum Mechanics'\n%]')
+          XmlToken:XML_DATA_CHARACTERS('Quantum')
+          XmlToken:XML_DATA_CHARACTERS('mechanics')
+          XmlToken:XML_DATA_CHARACTERS('is')
+          XmlToken:XML_DATA_CHARACTERS('a')
+          XmlToken:XML_DATA_CHARACTERS('very')
+          XmlToken:XML_DATA_CHARACTERS('interesting')
+          XmlToken:XML_DATA_CHARACTERS('subject')
+          XmlToken:XML_DATA_CHARACTERS('wish')
+          XmlToken:XML_DATA_CHARACTERS('should')
+          XmlToken:XML_DATA_CHARACTERS('prove')
+          XmlToken:XML_DATA_CHARACTERS('easy')
+          XmlToken:XML_DATA_CHARACTERS('for')
+          XmlToken:XML_DATA_CHARACTERS('the')
+          XmlToken:XML_DATA_CHARACTERS('layman')
+          XmlToken:XML_DATA_CHARACTERS('to')
+          XmlToken:XML_DATA_CHARACTERS('fully')
+          XmlToken:XML_DATA_CHARACTERS('comprehend.')
+        XmlToken:XML_END_TAG_START('</')
+        XmlToken:XML_NAME('body')
+        XmlToken:XML_TAG_END('>')
+      XmlText
+      XmlToken:XML_END_TAG_START('</')
+      XmlToken:XML_NAME('html')
+      XmlToken:XML_TAG_END('>')
+--------------------------------------------------------------------------------
+Subtree: Template Toolkit 2 (Template Toolkit 2)
 Template Toolkit File
   PsiComment(TT2: TT2_HTML)('<html>\n<head>http://template-toolkit.org/docs/manual/Variables.html</head>\n<body>\n\n')
   PsiErrorElement:Unclosed block directive, missing END
@@ -19,3 +71,4 @@ Template Toolkit File
             PsiElement(TT2: SQ_CLOSE)(''')
       PsiElement(TT2: %])('%]')
       PsiComment(TT2: TT2_HTML)('\n   Quantum mechanics is a very interesting subject wish\n   should prove easy for the layman to fully comprehend.\n\n\n</body>\n</html>')
+--------------------------------------------------------------------------------

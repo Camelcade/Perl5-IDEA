@@ -24,8 +24,10 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.StubBuilder;
 import com.intellij.psi.stubs.*;
 import com.intellij.psi.tree.IStubFileElementType;
+import com.perl5.lang.perl.idea.EP.PerlPackageProcessorEP;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
 import com.perl5.lang.perl.psi.PerlFile;
+import com.perl5.lang.perl.psi.PerlSubCallHandler;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionData;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceIndex;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -34,8 +36,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 
-public class PerlFileElementType extends IStubFileElementType<PerlFileStub> {
-  private static final int VERSION = 11;
+public final class PerlFileElementType extends IStubFileElementType<PerlFileStub> {
+  private static final int VERSION = 1;
 
   public PerlFileElementType(String debugName, Language language) {
     super(debugName, language);
@@ -43,7 +45,11 @@ public class PerlFileElementType extends IStubFileElementType<PerlFileStub> {
 
   @Override
   public int getStubVersion() {
-    return super.getStubVersion() + VERSION + PerlValuesManager.VERSION;
+    return super.getStubVersion() +
+           VERSION +
+           PerlValuesManager.VERSION +
+           PerlSubCallHandler.getHandlersVersion() +
+           PerlPackageProcessorEP.getVersion();
   }
 
   @Override

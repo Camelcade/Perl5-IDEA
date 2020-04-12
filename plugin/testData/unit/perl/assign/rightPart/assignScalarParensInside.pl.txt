@@ -2,4 +2,4 @@ my($v<caret>ar) = (get_something);
 Index: 0
 Elements number: 1
 Text: get_something
-PsiPerlSubCallExprImpl(Perl5: SUB_CALL_EXPR) at 12 in assignScalarParensInside.pl
+PsiPerlSubCallImpl(SUB_CALL) at 12 in assignScalarParensInside.pl

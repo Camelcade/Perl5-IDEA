@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ import com.perl5.lang.perl.idea.formatter.blocks.PerlSyntheticBlock;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
-import com.perl5.lang.perl.psi.impl.PerlPolyNamedNestedCallElementBase;
+import com.perl5.lang.perl.psi.impl.PerlSubCallElement;
 import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementType;
 import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
 import org.jetbrains.annotations.NotNull;
@@ -200,7 +200,7 @@ public class PerlIndentProcessor implements PerlElementTypes {
 
     if (getUnindentableTokens().contains(nodeType) ||
         (nodeType instanceof PerlPolyNamedElementType &&
-         !(node.getPsi() instanceof PerlPolyNamedNestedCallElementBase) && nodeType != USE_STATEMENT && nodeType != NO_STATEMENT)) {
+         !(node.getPsi() instanceof PerlSubCallElement) && nodeType != USE_STATEMENT && nodeType != NO_STATEMENT)) {
       return Indent.getNoneIndent();
     }
 
