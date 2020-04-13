@@ -285,7 +285,6 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
   @Override
   public boolean isCollapsedByDefault(@NotNull ASTNode node) {
     IElementType elementType = node.getElementType();
-    PsiElement psi = node.getPsi();
     if (elementType == POD) {
       return CodeFoldingSettings.getInstance().COLLAPSE_DOC_COMMENTS;
     }

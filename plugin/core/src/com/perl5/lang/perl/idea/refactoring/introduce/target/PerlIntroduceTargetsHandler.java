@@ -104,7 +104,6 @@ public abstract class PerlIntroduceTargetsHandler {
   protected PerlVariableType doComputeVariableType(@NotNull PerlIntroduceTarget target) {
     PsiElement targetPlace = target.getPlace();
     IElementType targetType = PsiUtilCore.getElementType(targetPlace);
-    String sigil;
     if (ARRAY_CONTEXT_TOKENSET.contains(targetType)) {
       return PerlVariableType.ARRAY;
     }
