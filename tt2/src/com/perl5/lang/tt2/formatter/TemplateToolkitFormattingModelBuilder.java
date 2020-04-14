@@ -56,7 +56,7 @@ public class TemplateToolkitFormattingModelBuilder extends TemplateLanguageForma
    * We have to override {@link com.intellij.formatting.templateLanguages.TemplateLanguageFormattingModelBuilder#createModel}
    * since after we delegate to some templated languages, those languages (xml/html for sure, potentially others)
    * delegate right back to us to format the TemplateToolkitElementTypes.TT2_OUTER token we tell them to ignore,
-   * causing an stack-overflowing loop of polite format-delegation.
+   * causing a stack-overflowing loop of polite format-delegation.
    */
 
   @NotNull

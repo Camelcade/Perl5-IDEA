@@ -22,7 +22,7 @@ import com.intellij.psi.PsiElement;
 public interface PerlStringContentElement extends PsiElement {
 
   /**
-   * Returns continuos string for this element
+   * Returns continuous string for this element
    *
    * @return text till space or end before and after this element
    * @deprecated use {@link com.intellij.psi.ElementManipulators#getValueText(PsiElement)} instead

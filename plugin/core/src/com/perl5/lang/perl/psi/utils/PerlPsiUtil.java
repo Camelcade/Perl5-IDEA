@@ -866,7 +866,7 @@ public class PerlPsiUtil implements PerlElementTypes {
       return false;
     }
 
-    // textual comparision for simple strings
+    // textual comparison for simple strings
     boolean isTargetSimple = targetString.getChildren().length == 0;
     boolean isElementSimple = elementToCompare.getChildren().length == 0;
     if (isTargetSimple && isElementSimple) {
@@ -888,7 +888,7 @@ public class PerlPsiUtil implements PerlElementTypes {
       return false;
     }
 
-    // traversal comparision
+    // traversal comparison
     PsiElement targetRun = targetString.getFirstContentToken();
     PsiElement runToCompare = ((PerlString)elementToCompare).getFirstContentToken();
     PsiElement targetCloseQuoteElement = targetString.getCloseQuoteElement();

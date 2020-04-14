@@ -18,7 +18,7 @@ package com.perl5.lang.perl.internals;
 
 /**
  * Represents internal $^H
- * Respecitve data is in perl.h
+ * Respective data is in perl.h
  */
 public class PerlStrictMask implements Cloneable {
   // fixme make this with Mask

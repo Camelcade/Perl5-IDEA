@@ -78,7 +78,7 @@ public interface PerlVariable extends PsiPerlExpr, PerlLexicalScopeMember, PerlV
   String getName();
 
   /**
-   * Checks if this occurance is declaration
+   * Checks if this occurrence is declaration
    *
    * @return true if it's declaration
    */
