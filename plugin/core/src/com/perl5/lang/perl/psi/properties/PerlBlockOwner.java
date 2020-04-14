@@ -35,7 +35,7 @@ public interface PerlBlockOwner extends PsiElement {
   }
 
   /**
-   * @return a block for the {@code blockOwner}, omiting lazy-parsable blocks if any
+   * @return a block for the {@code blockOwner}, omitting lazy-parsable blocks if any
    */
   @Nullable
   static PsiPerlBlock findBlock(@NotNull PerlBlockOwner blockOwner) {

@@ -71,7 +71,7 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
     FINAL_BRANCH
   );
 
-  private final TokenSet CONTINUOS_INDENTED_CONTAINERS = TokenSet.create(
+  private final TokenSet CONTINUOUS_INDENTED_CONTAINERS = TokenSet.create(
     ASSIGN_EXPR,
     PAIR_EXPR,
     CALL_ARGUMENTS,
@@ -108,7 +108,7 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
     WRAPPER_DIRECTIVE
   );
 
-  private final TokenSet CONTINUOS_INDENTED_CONTAINERS_WITH_CLOSE_TAG = TokenSet.create(
+  private final TokenSet CONTINUOUS_INDENTED_CONTAINERS_WITH_CLOSE_TAG = TokenSet.create(
     ARRAY_EXPR,
     HASH_EXPR
   );
@@ -132,9 +132,9 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
     NORMAL_INDENTED_CONTAINERS_WITH_CLOSE_TAG,
     NORMAL_INDENTED_CONTAINERS_PARENTS
   );
-  private final TokenSet CONTINUOS_CHILD_INDENTED_CONTAINERS = TokenSet.orSet(
-    CONTINUOS_INDENTED_CONTAINERS,
-    CONTINUOS_INDENTED_CONTAINERS_WITH_CLOSE_TAG
+  private final TokenSet CONTINUOUS_CHILD_INDENTED_CONTAINERS = TokenSet.orSet(
+    CONTINUOUS_INDENTED_CONTAINERS,
+    CONTINUOUS_INDENTED_CONTAINERS_WITH_CLOSE_TAG
   );
 
   private final TokenSet LEAF_BLOCKS = TokenSet.create(
@@ -198,11 +198,11 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
     {
       return Indent.getNormalIndent();
     }
-    else if (CONTINUOS_INDENTED_CONTAINERS.contains(parentNodeType)) // default, set, etc
+    else if (CONTINUOUS_INDENTED_CONTAINERS.contains(parentNodeType)) // default, set, etc
     {
       return Indent.getContinuationWithoutFirstIndent();
     }
-    else if (CONTINUOS_INDENTED_CONTAINERS_WITH_CLOSE_TAG.contains(parentNodeType)) // array, hash
+    else if (CONTINUOUS_INDENTED_CONTAINERS_WITH_CLOSE_TAG.contains(parentNodeType)) // array, hash
     {
       // fixme this one incorrectly detects indent inside DataWrapper; we could enforce to parent, but may be ugly
       return isLast() ? Indent.getNormalIndent() : Indent.getContinuationWithoutFirstIndent();
@@ -302,7 +302,7 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
     if (NORMAL_CHILD_INDENTED_CONTAINERS.contains(elementType)) {
       return Indent.getNormalIndent();
     }
-    else if (CONTINUOS_CHILD_INDENTED_CONTAINERS.contains(elementType)) {
+    else if (CONTINUOUS_CHILD_INDENTED_CONTAINERS.contains(elementType)) {
       return Indent.getContinuationWithoutFirstIndent();
     }
     return super.getChildIndent();

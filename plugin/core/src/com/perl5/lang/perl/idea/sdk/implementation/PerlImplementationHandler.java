@@ -93,7 +93,7 @@ public abstract class PerlImplementationHandler<Data extends PerlImplementationD
    * @param hostData           transport-level data to access an sdk host
    * @param versionManagerData information about used version manager
    * @return new implementation data or null if something went wrong. Handler should handle errors by itself.
-   * @implSpec handler is free to adjust sdk with necessary data. Current implementaion just uses a default handler
+   * @implSpec handler is free to adjust sdk with necessary data. Current implementation just uses a default handler
    */
   @Contract("null, _, _ -> null; _, null, _ -> null; _, _, null -> null")
   @Nullable
