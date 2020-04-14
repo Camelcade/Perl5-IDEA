@@ -34,7 +34,7 @@ If you want to participate in development, don't forget to read our [contributio
 * [Camelcade wiki](https://github.com/hurricup/Perl5-IDEA/wiki)
 * [Gitter chat](https://gitter.im/IntelliJ-Plugin-Perl5/Lobby)
 * [Google group](https://groups.google.com/forum/#!forum/camelcade)
-* [Onion parsing comparision](http://evstigneev.com/onion_all.png)
+* [Onion parsing comparison](http://evstigneev.com/onion_all.png)
 
 YourKit supports open source projects with its full-featured <a href="https://www.yourkit.com/java/profiler/index.jsp">Java Profiler</a>.
 

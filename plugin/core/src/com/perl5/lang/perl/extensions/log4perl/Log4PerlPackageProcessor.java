@@ -36,7 +36,7 @@ public class Log4PerlPackageProcessor extends PerlPackageProcessorBase implement
 
   private static final Map<String, String> OPTIONS = ContainerUtil.newHashMap(
     Pair.create(LEVELS, "Exports log levels from Log4perl::Level"),
-    Pair.create(":nowarn", "No warnings about non-initalized usage"),
+    Pair.create(":nowarn", "No warnings about non-initialized usage"),
     Pair.create(":nostrict", "Put Log4perl in a more permissive mode"),
     Pair.create(":resurrect", "Resurrects buried statements before running"),
     Pair.create(":no_extra_logdie_message", "Suppresses extra LOGDIE message")

@@ -42,7 +42,7 @@ public interface PerlCodeGenerator {
 
 
   /**
-   * Generating and inserting overriden method
+   * Generating and inserting overridden method
    *
    * @param anchor element to insert method after
    */

@@ -694,7 +694,7 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
   }
 
   /**
-   * Traverses a subtree after an baseElement and walk ups from the baseElement, collecting all variable names.
+   * Traverses a subtree after a baseElement and walk ups from the baseElement, collecting all variable names.
    */
   @NotNull
   public static Set<String> collectExistingNames(@Nullable PsiElement baseElement, @NotNull PerlVariableType variableType) {

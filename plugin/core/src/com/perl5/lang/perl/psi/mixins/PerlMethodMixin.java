@@ -81,7 +81,7 @@ public abstract class PerlMethodMixin extends PerlCompositeElementImpl implement
     PsiElement derefExpression = parentElement.getParent();
     if (isNestedCall && parentElement.getPrevSibling() != null) {
       boolean isSuper = PerlPackageUtil.isSUPER(explicitNamespaceName);
-      if (hasExplicitNamespace && !isSuper) { // ackward $var->Foo::Bar::method->
+      if (hasExplicitNamespace && !isSuper) { // awkward $var->Foo::Bar::method->
         return new PerlCallStaticValue(PerlScalarValue.create(explicitNamespaceName), subNameValue, callArguments, hasExplicitNamespace);
       }
       String superContext = isSuper ? PerlPackageUtil.getContextNamespaceName(this): null;

@@ -95,7 +95,7 @@ public class PerlGotoDeclarationHandler implements GotoDeclarationHandler {
             for (PsiFileSystemItem fileItem : FilenameIndex.getFilesByName(project, file, GlobalSearchScope.allScope(project))) {
               String canonicalPath = fileItem.getVirtualFile().getCanonicalPath();
               if (canonicalPath != null) {
-                if (canonicalPath.contains(tokenText + "."))    // higer priority
+                if (canonicalPath.contains(tokenText + "."))    // higher priority
                 {
                   result.add(0, fileItem);
                 }

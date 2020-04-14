@@ -74,7 +74,7 @@ public interface PerlNamespaceDefinition extends PerlDeprecatable {
   PerlNamespaceAnnotations getAnnotations();
 
   /**
-   * Retuns list of exports from this module
+   * Returns list of exports from this module
    *
    * @return list of @EXPORTs
    */
