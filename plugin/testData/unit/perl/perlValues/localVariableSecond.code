@@ -1,0 +1,2 @@
+local $othervar = local $var = 42;
+$v<caret>ar;

@@ -1,0 +1,1 @@
+my($first, $second) = my($third, $forth) = (42,69);

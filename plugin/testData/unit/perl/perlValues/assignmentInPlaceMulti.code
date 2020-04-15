@@ -1,0 +1,2 @@
+my($first,$second, $third,$forth);
+($first,$sec<caret>ond) = ($third,$forth) = (42,69);

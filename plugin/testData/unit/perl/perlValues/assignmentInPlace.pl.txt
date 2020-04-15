@@ -1,0 +1,10 @@
+my $var;
+$v<caret>ar = 42;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 9 in assignmentInPlace.pl
+42
+----------
+Resolved
+----------
+42

@@ -1,0 +1,1 @@
+state($first, $se<caret>cond) = state( $third, $forth) = (42,69);

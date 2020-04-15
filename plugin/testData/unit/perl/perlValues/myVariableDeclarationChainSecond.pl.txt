@@ -1,0 +1,9 @@
+my ($first, $se<caret>cond) = my( $third, $forth) = (42,69);
+----------
+$second
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 12 in myVariableDeclarationChainSecond.pl
+69
+----------
+Resolved
+----------
+69

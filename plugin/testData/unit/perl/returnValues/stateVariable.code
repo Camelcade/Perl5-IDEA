@@ -1,0 +1,3 @@
+sub somesub{
+  state $var = 42
+}

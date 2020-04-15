@@ -1,0 +1,9 @@
+our($othervar, $va<caret>r) = (42, 69);
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 15 in ourVariableDeclarationMultiSecond.pl
+69
+----------
+Resolved
+----------
+69

@@ -1,0 +1,1 @@
+our ($first, $se<caret>cond) = our( $third, $forth) = (42,69);

@@ -1,0 +1,10 @@
+my($first,$second, $third,$forth);
+($first,$sec<caret>ond) = ($third,$forth) = (42,69);
+----------
+$second
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 43 in assignmentInPlaceMulti.pl
+69
+----------
+Resolved
+----------
+69

@@ -1,0 +1,10 @@
+my $othervar = my $var = 42;
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 29 in myVariableSecond.pl
+42
+----------
+Resolved
+----------
+42

@@ -1,0 +1,2 @@
+our $othervar = our $var = 42;
+$othe<caret>rvar;

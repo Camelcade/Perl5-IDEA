@@ -1,0 +1,9 @@
+state($first, $se<caret>cond) = state( $third, $forth) = (42,69);
+----------
+$second
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 14 in stateVariableDeclarationChainSecond.pl
+69
+----------
+Resolved
+----------
+69

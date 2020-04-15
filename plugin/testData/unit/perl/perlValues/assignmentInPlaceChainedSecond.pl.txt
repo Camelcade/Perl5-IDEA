@@ -1,0 +1,11 @@
+my $first;
+my $second;
+$first = $se<caret>cond = 42;
+----------
+$second
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 32 in assignmentInPlaceChainedSecond.pl
+42
+----------
+Resolved
+----------
+42

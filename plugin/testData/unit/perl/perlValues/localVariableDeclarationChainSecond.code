@@ -1,0 +1,1 @@
+local ($first, $se<caret>cond) = local( $third, $forth) = (42,69);

@@ -1,0 +1,11 @@
+my $first;
+my $second;
+$f<caret>irst = $second = 42;
+----------
+$first
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 23 in assignmentInPlaceChained.pl
+42
+----------
+Resolved
+----------
+42

@@ -1,0 +1,5 @@
+<caret>sub somesub{
+  my $var = 42
+}
+----------
+42

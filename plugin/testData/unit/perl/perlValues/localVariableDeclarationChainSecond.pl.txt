@@ -1,0 +1,9 @@
+local ($first, $se<caret>cond) = local( $third, $forth) = (42,69);
+----------
+$second
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 15 in localVariableDeclarationChainSecond.pl
+69
+----------
+Resolved
+----------
+69

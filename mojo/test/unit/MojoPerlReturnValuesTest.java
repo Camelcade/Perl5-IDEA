@@ -18,7 +18,6 @@ package unit;
 
 
 import base.PerlLightTestCase;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class MojoPerlReturnValuesTest extends PerlLightTestCase {
@@ -31,7 +30,6 @@ public class MojoPerlReturnValuesTest extends PerlLightTestCase {
   public void testIssue2142() {doTest();}
 
   @Test
-  @Ignore
   public void testIssue2142Lite() {doTest();}
 
   @Test

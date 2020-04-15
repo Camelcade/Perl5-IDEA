@@ -1,0 +1,6 @@
+0(1) element: null (InstructionImpl)
+1(2) element: Perl5 (InstructionImpl)
+2(3) element: PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT) (InstructionImpl)
+3(4) assign PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) Perl5: = PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT) (PerlAssignInstruction)
+4(5) assign PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) Perl5: = PsiPerlVariableDeclarationLexicalImpl(Perl5: VARIABLE_DECLARATION_LEXICAL) (PerlAssignInstruction)
+5() element: null (InstructionImpl)

@@ -1,0 +1,2 @@
+local $othervar = 42;
+$othe<caret>rvar;

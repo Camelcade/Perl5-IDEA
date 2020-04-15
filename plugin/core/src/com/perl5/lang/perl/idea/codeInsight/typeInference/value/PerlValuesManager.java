@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -58,6 +58,12 @@ public final class PerlValuesManager {
   );
   private static final TokenSet LIST_VALUES = TokenSet.create(
     STRING_LIST, COMMA_SEQUENCE_EXPR
+  );
+  /**
+   * Values from this entities delegated to the kids
+   */
+  private static final TokenSet TRANSPARENT_VALUES = TokenSet.create(
+    VARIABLE_DECLARATION_ELEMENT
   );
 
   private static int id = 0;
@@ -136,6 +142,18 @@ public final class PerlValuesManager {
       LOG.error("Attempt to compute value from invalid element");
       return UNKNOWN_VALUE;
     }
+    IElementType elementType = PsiUtilCore.getElementType(finalElement);
+    if (TRANSPARENT_VALUES.contains(elementType)) {
+      PsiElement[] children = finalElement.getChildren();
+      if (children.length == 0) {
+        return UNKNOWN_VALUE;
+      }
+      if (children.length > 1) {
+        LOG.error("Got transparent value: " + element + " with children: " + Arrays.asList(children));
+      }
+      return from(children[0]);
+    }
+
     return CachedValuesManager.getCachedValue(
       finalElement, () -> {
         PerlValue computedValue = RecursionManager.doPreventingRecursion(finalElement, true, () -> computeValue(finalElement));
@@ -149,6 +167,13 @@ public final class PerlValuesManager {
 
   @NotNull
   private static PerlValue computeValue(@NotNull PsiElement element) {
+    if (element instanceof PerlVariableDeclarationExpr) {
+      if (((PerlVariableDeclarationExpr)element).isParenthesized()) {
+        return PerlArrayValue.builder().addPsiElements(Arrays.asList(element.getChildren())).build();
+      }
+      PsiElement[] children = element.getChildren();
+      return children.length == 1 ? from(children[0]) : UNKNOWN_VALUE;
+    }
     if (element instanceof PerlReturnExpr) {
       PsiPerlExpr expr = ((PerlReturnExpr)element).getReturnValueExpr();
       return expr == null ? UNDEF_VALUE : from(expr);

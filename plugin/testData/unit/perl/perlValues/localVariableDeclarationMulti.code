@@ -1,0 +1,1 @@
+local($ot<caret>hervar, $var) = (42, 69);

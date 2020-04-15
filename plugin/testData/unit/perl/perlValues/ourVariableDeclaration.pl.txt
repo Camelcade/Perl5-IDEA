@@ -1,0 +1,9 @@
+our $ot<caret>hervar = 42;
+----------
+$othervar
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 4 in ourVariableDeclaration.pl
+42
+----------
+Resolved
+----------
+42

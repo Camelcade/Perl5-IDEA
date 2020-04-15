@@ -1,0 +1,5 @@
+<caret>sub somesub{
+  state $var = 42
+}
+----------
+42

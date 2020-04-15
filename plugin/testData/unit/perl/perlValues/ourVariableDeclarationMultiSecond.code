@@ -1,0 +1,1 @@
+our($othervar, $va<caret>r) = (42, 69);

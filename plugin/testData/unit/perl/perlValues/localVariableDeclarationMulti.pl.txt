@@ -1,0 +1,9 @@
+local($ot<caret>hervar, $var) = (42, 69);
+----------
+$othervar
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 6 in localVariableDeclarationMulti.pl
+42
+----------
+Resolved
+----------
+42

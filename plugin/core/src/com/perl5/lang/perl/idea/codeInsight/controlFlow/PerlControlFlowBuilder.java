@@ -734,6 +734,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     @Override
     public void visitAssignExpr(@NotNull PsiPerlAssignExpr o) {
       PsiElement rightSide = o.getLastChild();
+      boolean firstPass = true;
       while (true) {
         PsiElement operator = PerlPsiUtil.getPrevSignificantSibling(rightSide);
         if (operator == null) {
@@ -744,9 +745,6 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
           return;
         }
         IElementType operatorType = PsiUtilCore.getElementType(operator);
-        if (operatorType != OPERATOR_ASSIGN) {
-          leftSide.accept(this);
-        }
         if (operatorType == OPERATOR_AND_ASSIGN) {
           addPendingEdge(o, prevInstruction);
           startConditionalNode(o, leftSide, true);
@@ -756,14 +754,16 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
           startConditionalNode(o, leftSide, false);
         }
 
-        rightSide.accept(this);
-        leftSide.accept(this);
+        if (firstPass) {
+          rightSide.accept(this);
+        }
         for (PsiElement target : PerlAssignExpression.flattenAssignmentPart(leftSide)) {
           PerlAssignValueDescriptor rightPartDescriptor =
             ObjectUtils.notNull(o.getRightPartOfAssignment(target), PerlAssignValueDescriptor.EMPTY);
           addNodeAndCheckPending(new PerlAssignInstruction(PerlControlFlowBuilder.this, target, rightPartDescriptor, operator));
         }
         rightSide = leftSide;
+        firstPass = false;
       }
     }
 

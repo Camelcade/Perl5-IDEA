@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,6 +31,93 @@ public class PerlValuesTest extends PerlLightTestCase {
   protected String getBaseDataPath() {
     return "testData/unit/perl/perlValues";
   }
+
+  @Test
+  public void testAssignmentInPlace() {doTest();}
+
+  @Test
+  public void testAssignmentInPlaceChained() {doTest();}
+
+  @Test
+  public void testAssignmentInPlaceChainedSecond() {doTest();}
+
+  @Test
+  public void testAssignmentInPlaceMulti() {doTest();}
+
+  @Test
+  public void testAssignmentInPlaceMultiSecond() {doTest();}
+
+  @Test
+  public void testMyVariable() {doTest();}
+
+  @Test
+  public void testOurVariable() {doTest();}
+
+  @Test
+  public void testLocalVariable() {doTest();}
+
+  @Test
+  public void testStateVariable() {doTest();}
+
+  @Test
+  public void testMyVariableDeclaration() {doTest();}
+
+  @Test
+  public void testOurVariableDeclaration() {doTest();}
+
+  @Test
+  public void testLocalVariableDeclaration() {doTest();}
+
+  @Test
+  public void testStateVariableDeclaration() {doTest();}
+
+  @Test
+  public void testMyVariableDeclarationChainSecond() {doTest();}
+
+  @Test
+  public void testOurVariableDeclarationChainSecond() {doTest();}
+
+  @Test
+  public void testLocalVariableDeclarationChainSecond() {doTest();}
+
+  @Test
+  public void testStateVariableDeclarationChainSecond() {doTest();}
+
+  @Test
+  public void testMyVariableDeclarationMulti() {doTest();}
+
+  @Test
+  public void testOurVariableDeclarationMulti() {doTest();}
+
+  @Test
+  public void testLocalVariableDeclarationMulti() {doTest();}
+
+  @Test
+  public void testStateVariableDeclarationMulti() {doTest();}
+
+  @Test
+  public void testMyVariableDeclarationMultiSecond() {doTest();}
+
+  @Test
+  public void testOurVariableDeclarationMultiSecond() {doTest();}
+
+  @Test
+  public void testLocalVariableDeclarationMultiSecond() {doTest();}
+
+  @Test
+  public void testStateVariableDeclarationMultiSecond() {doTest();}
+
+  @Test
+  public void testMyVariableSecond() {doTest();}
+
+  @Test
+  public void testOurVariableSecond() {doTest();}
+
+  @Test
+  public void testLocalVariableSecond() {doTest();}
+
+  @Test
+  public void testStateVariableSecond() {doTest();}
 
   @Test
   public void testDefinedWithComment() {doTest();}

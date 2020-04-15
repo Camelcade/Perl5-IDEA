@@ -1,0 +1,9 @@
+our ($first, $se<caret>cond) = our( $third, $forth) = (42,69);
+----------
+$second
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 13 in ourVariableDeclarationChainSecond.pl
+69
+----------
+Resolved
+----------
+69

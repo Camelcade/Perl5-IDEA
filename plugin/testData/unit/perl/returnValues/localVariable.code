@@ -1,0 +1,3 @@
+sub somesub{
+  local $var = 42
+}

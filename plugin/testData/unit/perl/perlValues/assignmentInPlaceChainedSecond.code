@@ -1,0 +1,3 @@
+my $first;
+my $second;
+$first = $se<caret>cond = 42;

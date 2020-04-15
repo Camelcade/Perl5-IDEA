@@ -1,0 +1,2 @@
+state $othervar = state $var = 42;
+$othe<caret>rvar;

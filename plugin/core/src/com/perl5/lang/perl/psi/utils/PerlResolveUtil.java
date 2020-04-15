@@ -31,6 +31,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.PairProcessor;
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
+import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlAssignInstruction;
 import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlControlFlowBuilder;
 import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlMutationInstruction;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlOneOfValue;
@@ -263,10 +264,7 @@ public class PerlResolveUtil {
     }
     Instruction[] instructions = PerlControlFlowBuilder.getFor(controlFlowScope).getInstructions();
     PsiElement elementToFind = element instanceof PerlFile ? element.getContext() : element;
-    int elementInstructionIndex = ControlFlowUtil.findInstructionNumberByElement(instructions, elementToFind);
-    if( elementInstructionIndex  < 0 && element instanceof PerlFile){
-      elementInstructionIndex  = PerlControlFlowBuilder.findInstructionNumberByRange(instructions, elementToFind);
-    }
+    int elementInstructionIndex = findElementInstruction(elementToFind, instructions, element);
     if (elementInstructionIndex  < 0) {
       LOG.warn("Unable to find an instruction for " +
                element.getClass() + "; " +
@@ -277,9 +275,8 @@ public class PerlResolveUtil {
                PerlUtil.getParentsChain(element));
       return UNKNOWN_VALUE;
     }
-    int currentInstructionIndex = elementInstructionIndex;
     PerlOneOfValue.Builder valueBuilder = PerlOneOfValue.builder();
-    ControlFlowUtil.iteratePrev(currentInstructionIndex, instructions, currentInstruction -> {
+    ControlFlowUtil.iteratePrev(elementInstructionIndex, instructions, currentInstruction -> {
       if (!(currentInstruction instanceof PerlMutationInstruction)) {
         PsiElement instructionElement = currentInstruction.getElement();
         if ((instructionElement instanceof PerlSubDefinitionElement || instructionElement instanceof PerlSubExpr) &&
@@ -296,7 +293,11 @@ public class PerlResolveUtil {
         }
         return NEXT;
       }
-      if (currentInstruction.num() >= currentInstructionIndex) {
+      if (currentInstruction.num() > elementInstructionIndex) {
+        return NEXT;
+      }
+      // fixme pop instruction should be decomposed
+      if (currentInstruction.num() == elementInstructionIndex && !(currentInstruction instanceof PerlAssignInstruction)) {
         return NEXT;
       }
       PsiElement assignee = ((PerlMutationInstruction)currentInstruction).getLeftSide();
@@ -311,9 +312,11 @@ public class PerlResolveUtil {
         return NEXT;
       }
       PerlVariableDeclarationElement assigneeDeclaration = getLexicalDeclaration((PerlVariable)assignee);
-      if (lexicalDeclaration == null && assigneeDeclaration == null && !(assignee.getParent() instanceof PerlVariableDeclarationElement) ||
-          lexicalDeclaration != null &&
-          (Objects.equals(lexicalDeclaration, assigneeDeclaration) || Objects.equals(lexicalDeclaration, assignee.getParent()))
+      if (element == assignee ||
+          lexicalDeclaration == null && assigneeDeclaration == null && !(assignee.getParent() instanceof PerlVariableDeclarationElement) ||
+          lexicalDeclaration != null && (
+            Objects.equals(lexicalDeclaration, assigneeDeclaration) ||
+            Objects.equals(lexicalDeclaration, assignee.getParent()))
       ) {
         valueBuilder.addVariant(((PerlMutationInstruction)currentInstruction).createValue());
       }
@@ -323,11 +326,26 @@ public class PerlResolveUtil {
 
     if (lexicalDeclaration != null) {
       PerlValue declaredValue = lexicalDeclaration.getDeclaredValue();
-      if( !declaredValue.isUnknown()){
+      if (!declaredValue.isUnknown()) {
         valueBuilder.addVariant(declaredValue);
       }
     }
     return valueBuilder.build();
+  }
+
+  private static int findElementInstruction(@Nullable PsiElement elementToFind,
+                                            @NotNull Instruction[] instructions,
+                                            @Nullable PsiElement originalElementToFind) {
+    if (elementToFind == null) {
+      return -1;
+    }
+    int elementInstructionIndex = ControlFlowUtil.findInstructionNumberByElement(instructions, elementToFind);
+
+    if (elementInstructionIndex < 0 && originalElementToFind instanceof PerlFile) {
+      elementInstructionIndex = PerlControlFlowBuilder.findInstructionNumberByRange(instructions, elementToFind);
+    }
+
+    return elementInstructionIndex;
   }
 
   /**

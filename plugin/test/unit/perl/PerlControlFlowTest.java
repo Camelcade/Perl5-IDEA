@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +25,25 @@ public class PerlControlFlowTest extends PerlLightTestCase {
   protected String getBaseDataPath() {
     return "testData/unit/perl/controlFlow";
   }
+
+  @Test
+  public void testAssignmentMyChained() {doTest();}
+
+  @Test
+  public void testAssignmentMyChainedMulti() {doTest();}
+
+  @Test
+  public void testAssignmentMyChainedParens() {doTest();}
+
+  @Test
+  public void testAssignmentInPlace() {doTest();}
+
+  @Test
+  public void testAssignmentInPlaceChained() {doTest();}
+
+  @Test
+  public void testAssignmentInPlaceMulti() {doTest();}
+
 
   @Test
   public void testIssue2115() {doTestControlFlow(false);}
