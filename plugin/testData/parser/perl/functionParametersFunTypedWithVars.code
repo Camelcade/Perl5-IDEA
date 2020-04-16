@@ -1,0 +1,8 @@
+my ($my_type, $some_other_type);
+BEGIN {
+    $my_type = Some::Constraint::Class->new;
+    $some_other_type = Some::Other::Class->new;
+}
+
+fun foo(($my_type) $label, ($some_other_type) $counts) {
+}

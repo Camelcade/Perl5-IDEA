@@ -1,0 +1,50 @@
+Subtree: Perl5 (Perl5)
+Perl5
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlSubCallImpl(SUB_CALL)
+      PsiPerlMethodImpl(Perl5: METHOD)
+        PerlSubNameElementImpl(Perl5: subname)('fun')
+      PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
+        PsiPerlSubCallImpl(SUB_CALL)
+          PsiPerlMethodImpl(Perl5: METHOD)
+            PerlSubNameElementImpl(Perl5: subname)('foo')
+          PsiPerlParenthesisedCallArgumentsImpl(Perl5: PARENTHESISED_CALL_ARGUMENTS)
+            PsiElement(Perl5: ()('(')
+            PsiPerlAssignExprImpl(Perl5: ASSIGN_EXPR)
+              PsiPerlCommaSequenceExprImpl(Perl5: COMMA_SEQUENCE_EXPR)
+                PsiPerlAssignExprImpl(Perl5: ASSIGN_EXPR)
+                  PsiPerlCommaSequenceExprImpl(Perl5: COMMA_SEQUENCE_EXPR)
+                    PsiPerlAssignExprImpl(Perl5: ASSIGN_EXPR)
+                      PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+                        PsiElement(Perl5: $$)('$')
+                        PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('x')
+                      PsiElement(Perl5: =)('=')
+                      PsiErrorElement:<expr> expected, got ','
+                        <empty list>
+                    PsiElement(Perl5: ,)(',')
+                    PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+                      PsiElement(Perl5: $$)('$')
+                      PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('y')
+                  PsiElement(Perl5: =)('=')
+                  PsiErrorElement:<expr> expected, got ','
+                    <empty list>
+                PsiElement(Perl5: ,)(',')
+                PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+                  PsiElement(Perl5: $$)('$')
+                  PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('z')
+              PsiElement(Perl5: =)('=')
+              PsiErrorElement:<expr> expected, got ')'
+                <empty list>
+            PsiElement(Perl5: ))(')')
+    PsiErrorElement:Semicolon expected
+      <empty list>
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlAnonHashImpl(Perl5: ANON_HASH)
+      PsiElement(Perl5: {)('{')
+      PsiComment(Perl5: COMMENT_LINE)('# shorter syntax, same meaning')
+      PsiElement(Perl5: })('}')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('fun foo($x=, $y=, $z=) {\n    # shorter syntax, same meaning\n}')
+--------------------------------------------------------------------------------

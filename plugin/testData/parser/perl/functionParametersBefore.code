@@ -1,0 +1,6 @@
+before foo($x, $y, $z) {
+}
+# works like
+
+&before('foo', method ($x, $y, $z) {
+});

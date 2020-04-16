@@ -41,6 +41,78 @@ public class PerlParserTest extends PerlParserTestBase {
   }
 
   @Test
+  public void testFunctionParametersAfter() {doTest(false);}
+
+  @Test
+  public void testFunctionParametersAround() {doTest(false);}
+
+  @Test
+  public void testFunctionParametersAugment() {doTest(false);}
+
+  @Test
+  public void testFunctionParametersBefore() {doTest(false);}
+
+  @Test
+  public void testFunctionParametersFun() {doTest(false);}
+
+  @Test
+  public void testFunctionParametersFunAnon() {doTest(false);}
+
+  @Test
+  public void testFunctionParametersFunAttrs() {doTest();}
+
+  @Test
+  public void testFunctionParametersFunAttrsPrototype() {doTest(false);}
+
+  @Test
+  public void testFunctionParametersFunDefaultArgs() {doTest(false);}
+
+  @Test
+  public void testFunctionParametersFunDefaultCode() {doTest(false);}
+
+  @Test
+  public void testFunctionParametersFunDefaultEmpty() {doTest(false);}
+
+  @Test
+  public void testFunctionParametersFunDefaultUndef() {doTest(false);}
+
+  @Test
+  public void testFunctionParametersFunDefaultUsePreceding() {doTest(false);}
+
+  @Test
+  public void testFunctionParametersFunNamed() {doTest(false);}
+
+  @Test
+  public void testFunctionParametersFunNamedDefault() {doTest(false);}
+
+  @Test
+  public void testFunctionParametersFunOmited() {doTest(false);}
+
+  @Test
+  public void testFunctionParametersFunPositionalAndNamed() {doTest(false);}
+
+  @Test
+  public void testFunctionParametersFunSlurpy() {doTest(false);}
+
+  @Test
+  public void testFunctionParametersFunTyped() {doTest(false);}
+
+  @Test
+  public void testFunctionParametersFunTypedWithVars() {doTest(false);}
+
+  @Test
+  public void testFunctionParametersMethod() {doTest();}
+
+  @Test
+  public void testFunctionParametersMethodInvocant() {doTest();}
+
+  @Test
+  public void testFunctionParametersMethodInvocantNoArgs() {doTest();}
+
+  @Test
+  public void testFunctionParametersOverride() {doTest(false);}
+
+  @Test
   public void testIssue2158() {doTest();}
 
   @Test

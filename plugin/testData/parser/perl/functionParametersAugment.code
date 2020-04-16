@@ -1,0 +1,6 @@
+augment foo($x, $y, $z) {
+}
+# works like
+
+&augment('foo', method ($x, $y, $z) {
+});

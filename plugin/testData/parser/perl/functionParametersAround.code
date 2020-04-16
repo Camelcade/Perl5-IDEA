@@ -1,0 +1,9 @@
+around foo($x, $y, $z) {
+}
+# works like
+
+&around('foo', sub :method {
+    my $orig = shift;
+    my $self = shift;
+    my ($x, $y, $z) = @_;
+});

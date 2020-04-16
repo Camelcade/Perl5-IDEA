@@ -1,0 +1,3 @@
+fun foo($x, $y, $z = 5) {
+    return $x + $y + $z;
+}
