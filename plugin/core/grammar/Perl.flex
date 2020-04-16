@@ -996,6 +996,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
         "async" / {SPACES_OR_COMMENTS} "method"   {return RESERVED_ASYNC;}
 	"method"			        {yybegin(METHOD_DECLARATION); return RESERVED_METHOD;}
 	"func"				        {yybegin(METHOD_DECLARATION); return RESERVED_FUNC;}
+	"fun"				        {yybegin(METHOD_DECLARATION); return RESERVED_FUN;}
 
 	"try" / {BRACE_AFTER_SPACE_COMMENTS} { return handleTry();}
 

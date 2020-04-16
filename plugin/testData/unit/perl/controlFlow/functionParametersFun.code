@@ -1,0 +1,6 @@
+say 'before';
+fun f<caret>oo($x, $y, $z) {
+    say 'inner';
+    return ($x, $y, $z);
+}
+say 'after';

@@ -27,6 +27,9 @@ public class PerlControlFlowTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testFunctionParametersFun() {doTest();}
+
+  @Test
   public void testAssignArrayElement() {doTest();}
 
   @Test

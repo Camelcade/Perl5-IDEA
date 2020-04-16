@@ -1,0 +1,5 @@
+<caret>fun foo($x, $y, $z) {
+    return ($x, $y, $z);
+}
+----------
+Array: [ArrayItem: SUB_ARGUMENTS[0], ArrayItem: SUB_ARGUMENTS[1], ArrayItem: SUB_ARGUMENTS[2]]

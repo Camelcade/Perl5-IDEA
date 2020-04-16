@@ -1,0 +1,4 @@
+#@deprecated
+fun <warning descr="This sub is deprecated">foo</warning>($x, $y, $z) {
+    return ($x, $y, $z);
+}

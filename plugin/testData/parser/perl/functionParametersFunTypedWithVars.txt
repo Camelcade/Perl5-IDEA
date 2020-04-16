@@ -52,24 +52,22 @@ Perl5
                 PerlSubNameElementImpl(Perl5: subname)('new')
         PsiElement(Perl5: ;)(';')
       PsiElement(Perl5: })('}')
+  PsiErrorElement:Unexpected token
+    PsiElement(Perl5: fun)('fun')
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlSubCallImpl(SUB_CALL)
       PsiPerlMethodImpl(Perl5: METHOD)
-        PerlSubNameElementImpl(Perl5: subname)('fun')
-      PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
-        PsiPerlSubCallImpl(SUB_CALL)
-          PsiPerlMethodImpl(Perl5: METHOD)
-            PerlSubNameElementImpl(Perl5: subname)('foo')
-          PsiPerlParenthesisedCallArgumentsImpl(Perl5: PARENTHESISED_CALL_ARGUMENTS)
-            PsiElement(Perl5: ()('(')
-            PsiPerlParenthesisedExprImpl(Perl5: PARENTHESISED_EXPR)
-              PsiElement(Perl5: ()('(')
-              PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
-                PsiElement(Perl5: $$)('$')
-                PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('my_type')
-              PsiElement(Perl5: ))(')')
-            PsiErrorElement:Perl5: ), Perl5: ,, Perl5: => or Perl5: [ expected, got '$'
-              <empty list>
+        PerlSubNameElementImpl(Perl5: subname)('foo')
+      PsiPerlParenthesisedCallArgumentsImpl(Perl5: PARENTHESISED_CALL_ARGUMENTS)
+        PsiElement(Perl5: ()('(')
+        PsiPerlParenthesisedExprImpl(Perl5: PARENTHESISED_EXPR)
+          PsiElement(Perl5: ()('(')
+          PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+            PsiElement(Perl5: $$)('$')
+            PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('my_type')
+          PsiElement(Perl5: ))(')')
+        PsiErrorElement:Perl5: ), Perl5: ,, Perl5: => or Perl5: [ expected, got '$'
+          <empty list>
     PsiErrorElement:Semicolon expected
       <empty list>
   PsiPerlStatementImpl(Perl5: STATEMENT)

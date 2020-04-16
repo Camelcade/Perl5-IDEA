@@ -1,0 +1,2 @@
+Lookups: foo; Text: foo; Tail: ($x, $y, $z); Type: Foo::Bar; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlFuncDefinitionImpl(FUNC_DEFINITION)@Foo::Bar::foo($x, $y, $z) at 19 in functionParametersFun.pl

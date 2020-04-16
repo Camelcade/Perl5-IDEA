@@ -182,6 +182,7 @@
 
     RESERVED_METHOD='method'
     RESERVED_FUNC='func'
+    RESERVED_FUN='fun'
 
     // Operators
 
@@ -507,7 +508,7 @@
 	implements("map_expr")="com.perl5.lang.perl.psi.PerlMapExpr"
 	implements("sort_expr")="com.perl5.lang.perl.psi.PerlSortExpr"
 	implements("eval_expr")="com.perl5.lang.perl.psi.PerlEvalExpr"
-	implements("sub_expr")="com.perl5.lang.perl.psi.PerlSubExpr"
+	implements("sub_expr|fun_expr")="com.perl5.lang.perl.psi.PerlSubExpr"
 
     mixin("do_expr")="com.perl5.lang.perl.psi.mixins.PerlDoExprMixin"
     implements("do_expr")="com.perl5.lang.perl.psi.PerlDoExpr"
@@ -783,6 +784,8 @@ private parse_list_expr ::= <<parseExpressionLevel 2>>
 // List expression elements
 private parse_scalar_expr ::= <<parseExpressionLevel 3>>
 
+private parse_list_element ::=  <<parseExpressionLevel 4>>
+
 // Unary expression argument
 private unary_expr ::= <<parseExpressionLevel 12>>
 private optional_unary_expr ::= [unary_expr]
@@ -821,6 +824,7 @@ term_expr ::=
     | print_expr
     | replacement_regex
     | sub_expr_full
+    | fun_expr
     | eval_expr
     | do_expr
     | anon_hash
@@ -1134,7 +1138,7 @@ private normal_method ::= <<method method_tokens>>
 private method_tokens ::= 'list' | 'unary' | 'unary_custom'| 'argumentless' |
   QUALIFYING_PACKAGE SUB_NAME |
   SUB_NAME [PACKAGE] |
-  'method' | 'func' |
+  'method' | 'func' | 'fun'
   'finally' | 'try' | 'catch' |
   'switch' | 'case'
 
@@ -1196,14 +1200,20 @@ private comma ::= ',' | '=>'
 /********************************************** Extensions for Method::Signatures *************************************/
 // we can make this smareter and use keywords from settings or import opitions; We can't pin here because MooseX method works othewise
 method_definition ::= ['async'] 'method' sub_names_token [method_signature] [sub_attributes] parse_block
-func_definition ::= 'func' sub_names_token [func_signature] [sub_attributes] parse_block
+func_definition ::= {'func'|'fun'} sub_names_token func_body
+fun_expr ::= 'fun' func_body
+private func_body ::= [func_signature] [sub_attributes] parse_block
 
 // not sure that we need a wrapper for signatures
 private method_signature ::= '(' method_signature_content ')' {pin=1}
-method_signature_content ::= [method_signature_invocant] [variable_parenthesised_declaration_contents] {recoverWhile=recover_signature_content}
+method_signature_content ::= [method_signature_invocant] [func_signature_elements] {recoverWhile=recover_signature_content}
 method_signature_invocant ::= <<scalarDeclarationWrapper>> ':'
 private func_signature ::= '(' func_signature_content ')' {pin=1}
-func_signature_content ::= [variable_parenthesised_declaration_contents] {recoverWhile=recover_signature_content}
+func_signature_content ::= [func_signature_elements] {recoverWhile=recover_signature_content}
+private func_signature_elements ::= func_signature_element (comma + func_signature_element ) * comma*
+private func_signature_element ::= ':' ? strict_variable_declaration_wrapper [parse_func_initializer] |  undef_expr
+private parse_func_initializer ::= '=' [parse_list_element]
+
 private recover_signature_content ::= !(')'|'{')
 
 /********************************************** Extensions for Moose **************************************************/

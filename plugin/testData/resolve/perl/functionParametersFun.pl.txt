@@ -1,0 +1,15 @@
+PerlVariableReference at (54,55); text in range: 'x' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 27 in functionParametersFun.pl
+
+PerlVariableReference at (58,59); text in range: 'y' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 31 in functionParametersFun.pl
+
+PerlVariableReference at (62,63); text in range: 'z' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 35 in functionParametersFun.pl
+
+PerlNamespaceReference at (84,92); text in range: 'Foo::Bar' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bar at 0 in functionParametersFun.pl
+
+PerlSubReference at (94,97); text in range: 'foo' => 1 results:
+	PsiPerlFuncDefinitionImpl(FUNC_DEFINITION)@Foo::Bar::foo($x, $y, $z) at 19 in functionParametersFun.pl
+

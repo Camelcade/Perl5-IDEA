@@ -1,0 +1,20 @@
+Language: Perl5
+PerlFileStub
+	Name: main
+	Mro: DFS
+	Parents: []
+	@EXPORT: []
+	@EXPORT_OK: []
+	@EXPORT_TAGS: {}
+	Annotations: null
+	Type: Perl5
+  FUNC_DEFINITION:PerlSubDefinitionStub
+	Namespace name: main
+	Sub name: foo
+	Annotations: null
+	Arguments: [$x, $y, $z]
+	Return value: Array: [ArrayItem: SUB_ARGUMENTS[0], ArrayItem: SUB_ARGUMENTS[1], ArrayItem: SUB_ARGUMENTS[2]]
+
+----------
+Language: Perl5 POD
+PsiFileStubImpl

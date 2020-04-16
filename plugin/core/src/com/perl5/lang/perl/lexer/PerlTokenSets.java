@@ -235,7 +235,8 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
 
   TokenSet METHOD_SIGNATURES_KEYWORDS_TOKENSET = TokenSet.create(
     RESERVED_METHOD,
-    RESERVED_FUNC
+    RESERVED_FUNC,
+    RESERVED_FUN
   );
 
   TokenSet KEYWORDS_TOKENSET = TokenSet.orSet(

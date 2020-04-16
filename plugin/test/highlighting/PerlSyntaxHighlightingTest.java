@@ -28,6 +28,9 @@ public class PerlSyntaxHighlightingTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testFunctionParametersFun() {doTest();}
+
+  @Test
   public void testAsyncSubs() {doTest();}
 
   @Test

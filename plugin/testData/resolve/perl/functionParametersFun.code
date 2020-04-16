@@ -1,0 +1,9 @@
+package Foo::Bar;
+
+fun foo($x, $y, $z) {
+    return ($x, $y, $z);
+}
+
+
+package main;
+Foo::Bar::foo();
