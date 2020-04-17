@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.project;
 
+import com.intellij.ide.lightEdit.LightEdit;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.progress.ProcessCanceledException;
@@ -39,6 +40,9 @@ public class PerlNamesCache implements Disposable {
   private final Runnable myCacheUpdaterWorker = new Runnable() {
     @Override
     public void run() {
+      if (LightEdit.owns(myProject)) {
+        return;
+      }
       DumbService.getInstance(myProject).runReadActionInSmartMode(() -> {
         Set<String> subsSet = new HashSet<>();
         subsSet.addAll(PerlSubUtil.getDeclaredSubsNames(myProject));
