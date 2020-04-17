@@ -19,7 +19,7 @@ Perl5
     PerlSubNameElementImpl(Perl5: subname)('foo')
     PsiElement(Perl5: ()('(')
     PsiPerlFuncSignatureContentImpl(Perl5: FUNC_SIGNATURE_CONTENT)
-      PsiErrorElement:<expression>, <variable declaration element> or Perl5: : expected, got 'Str'
+      PsiErrorElement:<expression>, <sub signature element ignore>, <variable declaration element> or Perl5: : expected, got 'Str'
         PerlSubNameElementImpl(Perl5: subname)('Str')
       PsiElement(Perl5: $$)('$')
       PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('label')

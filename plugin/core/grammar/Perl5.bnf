@@ -1211,7 +1211,7 @@ method_signature_invocant ::= <<scalarDeclarationWrapper>> ':'
 private func_signature ::= '(' func_signature_content ')' {pin=1}
 func_signature_content ::= [func_signature_elements] {recoverWhile=recover_signature_content}
 private func_signature_elements ::= func_signature_element (comma + func_signature_element ) * comma*
-private func_signature_element ::= ':' ? strict_variable_declaration_wrapper [parse_func_initializer] |  undef_expr
+private func_signature_element ::= ':' ? strict_variable_declaration_wrapper [parse_func_initializer] |  undef_expr | sub_signature_element_ignore
 private parse_func_initializer ::= '=' [parse_list_element]
 
 private recover_signature_content ::= !(')'|'{')
