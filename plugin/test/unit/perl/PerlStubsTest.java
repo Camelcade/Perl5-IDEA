@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package stubs;
+package unit.perl;
 
 
 import base.PerlLightTestCase;
@@ -23,7 +23,7 @@ import org.junit.Test;
 public class PerlStubsTest extends PerlLightTestCase {
   @Override
   protected String getBaseDataPath() {
-    return "testData/stubs/perl";
+    return "testData/unit/perl/stubs";
   }
 
   @Test
