@@ -426,6 +426,8 @@ public class PerlElementTypeFactory {
         return new PerlElementTypeEx(name, PsiPerlCatchConditionImpl.class);
       case "TYPE_CONSTRAINTS":
         return new PerlElementTypeEx(name, PsiPerlTypeConstraintsImpl.class);
+      case "TYPE_SPECIFIER":
+        return new PerlElementTypeEx(name, PsiPerlTypeSpecifierImpl.class);
       case "FINALLY_EXPR":
         return new PerlElementTypeEx(name, PsiPerlFinallyExprImpl.class);
       case "EXCEPT_EXPR":

@@ -1123,6 +1123,10 @@ private argumentless_call ::= <<method 'argumentless'>>
 private named_unary_call ::= <<method named_unary_calee>> [<<call_arguments unary_expr>>]
 private named_unary_calee ::= 'unary' | 'unary_custom' | '-t'
 
+type_specifier ::= parenthesised_expr | <<sub_call parse_type_specifier>>
+private parse_type_specifier ::= <<method type_specifier_tokens>> [!('$$'|'$@'|'$%')<<call_arguments unary_expr>>]
+private type_specifier_tokens ::= 'unary_custom'|'subname'
+
 private meta rightward_call ::= <<method <<x1>>>> [rightward_call_arguments]
 private rightward_call_arguments ::= <<call_arguments parse_call_arguments>>
 private meta leftward_call ::= {<<method <<x1>>>>|code_primitive} default_parenthesised_call_arguments
@@ -1211,7 +1215,7 @@ method_signature_invocant ::= <<scalarDeclarationWrapper>> ':'
 private func_signature ::= '(' func_signature_content ')' {pin=1}
 func_signature_content ::= [func_signature_elements] {recoverWhile=recover_signature_content}
 private func_signature_elements ::= func_signature_element (comma + func_signature_element ) * comma*
-private func_signature_element ::= ':' ? strict_variable_declaration_wrapper [parse_func_initializer] |  undef_expr | sub_signature_element_ignore
+private func_signature_element ::= [type_specifier]':' ? strict_variable_declaration_wrapper [parse_func_initializer] |  undef_expr | sub_signature_element_ignore
 private parse_func_initializer ::= '=' [parse_list_element]
 
 private recover_signature_content ::= !(')'|'{')

@@ -60,10 +60,10 @@ public class PerlParserTest extends PerlParserTestBase {
   public void testFunctionParametersFunOmited() {doTest();}
 
   @Test
-  public void testFunctionParametersFunTyped() {doTest(false);}
+  public void testFunctionParametersFunTyped() {doTest();}
 
   @Test
-  public void testFunctionParametersFunTypedWithVars() {doTest(false);}
+  public void testFunctionParametersFunTypedWithVars() {doTest();}
 
   @Test
   public void testFunctionParametersFun() {doTest();}
