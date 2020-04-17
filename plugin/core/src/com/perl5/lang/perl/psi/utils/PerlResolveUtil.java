@@ -19,6 +19,8 @@ package com.perl5.lang.perl.psi.utils;
 import com.intellij.codeInsight.controlflow.ControlFlowUtil;
 import com.intellij.codeInsight.controlflow.Instruction;
 import com.intellij.injected.editor.VirtualFileWindow;
+import com.intellij.openapi.application.Application;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
@@ -266,13 +268,20 @@ public class PerlResolveUtil {
     PsiElement elementToFind = element instanceof PerlFile ? element.getContext() : element;
     int elementInstructionIndex = findElementInstruction(elementToFind, instructions, element);
     if (elementInstructionIndex  < 0) {
-      LOG.warn("Unable to find an instruction for " +
-               element.getClass() + "; " +
-               element.getText() + "; " +
-               element.getTextRange() + "; " +
-               PsiUtilCore.getVirtualFile(element) + "; " +
-               controlFlowScope.getClass() + "; " +
-               PerlUtil.getParentsChain(element));
+      String message = "Unable to find an instruction for " +
+                       element.getClass() + "; " +
+                       element.getText() + "; " +
+                       element.getTextRange() + "; " +
+                       PsiUtilCore.getVirtualFile(element) + "; " +
+                       controlFlowScope.getClass() + "; " +
+                       PerlUtil.getParentsChain(element);
+      Application application = ApplicationManager.getApplication();
+      if (application.isUnitTestMode() || application.isInternal()) {
+        LOG.error(message);
+      }
+      else {
+        LOG.warn(message);
+      }
       return UNKNOWN_VALUE;
     }
     PerlOneOfValue.Builder valueBuilder = PerlOneOfValue.builder();
