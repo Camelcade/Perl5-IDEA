@@ -25,6 +25,7 @@ import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebuggerEditorsProvider;
 import com.perl5.lang.perl.psi.PerlVariable;
+import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import org.junit.Test;
 public class PerlValuesTest extends PerlLightTestCase {
   @Override
@@ -123,7 +124,9 @@ public class PerlValuesTest extends PerlLightTestCase {
   public void testDefinedWithComment() {doTest();}
 
   @Test
-  public void testIssue2115() {doTest();}
+  public void testIssue2115() {
+    PerlResolveUtil.runWithoutErrors(this::doTest);
+  }
 
   @Test
   public void testBareLpCodeBlock() {doTest();}

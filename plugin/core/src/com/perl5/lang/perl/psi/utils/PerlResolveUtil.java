@@ -50,6 +50,7 @@ import com.perl5.lang.perl.util.PerlUtil;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.TestOnly;
 
 import java.util.Objects;
 
@@ -61,6 +62,7 @@ import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
 
 public class PerlResolveUtil {
   private static final Logger LOG = Logger.getInstance(PerlResolveUtil.class);
+  private static boolean SUPPRESS_ERRORS = false;
 
   public static boolean treeWalkUp(@Nullable PsiElement place, @NotNull PsiScopeProcessor processor) {
     PsiElement lastParent = null;
@@ -276,7 +278,7 @@ public class PerlResolveUtil {
                        controlFlowScope.getClass() + "; " +
                        PerlUtil.getParentsChain(element);
       Application application = ApplicationManager.getApplication();
-      if (application.isUnitTestMode() || application.isInternal()) {
+      if (!SUPPRESS_ERRORS && (!application.isUnitTestMode() || application.isInternal())) {
         LOG.error(message);
       }
       else {
@@ -428,5 +430,17 @@ public class PerlResolveUtil {
       }
     }
     return false;
+  }
+
+  @TestOnly
+  public static void runWithoutErrors(@NotNull Runnable run) {
+    boolean backup = SUPPRESS_ERRORS;
+    SUPPRESS_ERRORS = true;
+    try {
+      run.run();
+    }
+    finally {
+      SUPPRESS_ERRORS = backup;
+    }
   }
 }

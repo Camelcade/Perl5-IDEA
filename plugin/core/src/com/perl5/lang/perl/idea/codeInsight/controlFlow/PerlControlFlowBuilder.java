@@ -587,7 +587,8 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       startNodeSmart(o);
       PsiPerlConditionExpr sourceElement = o.getConditionExpr();
       acceptSafe(sourceElement);
-      Instruction loopInstruction = startIterationNode(o, o.getForeachIterator(), sourceElement);
+      PsiPerlForeachIterator foreachIterator = o.getForeachIterator();
+      Instruction loopInstruction = startIterationNode(o, foreachIterator, sourceElement);
       TransparentInstruction nextInstruction = createNextInstruction(o);
       myLoopNextInstructions.put(o, nextInstruction);
       startIteratorConditionalNode(sourceElement); // fake condition if iterator is not finished yet
@@ -753,11 +754,11 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
           addPendingEdge(o, prevInstruction);
           startConditionalNode(o, leftSide, false);
         }
-
         if (firstPass) {
           rightSide.accept(this);
         }
         for (PsiElement target : PerlAssignExpression.flattenAssignmentPart(leftSide)) {
+          target.acceptChildren(this);
           PerlAssignValueDescriptor rightPartDescriptor =
             ObjectUtils.notNull(o.getRightPartOfAssignment(target), PerlAssignValueDescriptor.EMPTY);
           addNodeAndCheckPending(new PerlAssignInstruction(PerlControlFlowBuilder.this, target, rightPartDescriptor, operator));
