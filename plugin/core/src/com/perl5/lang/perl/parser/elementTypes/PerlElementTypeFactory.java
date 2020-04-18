@@ -116,6 +116,18 @@ public class PerlElementTypeFactory {
         return PerlStubElementTypes.PERL_DO_EXPR;
       case "REQUIRE_EXPR":
         return PerlStubElementTypes.PERL_REQUIRE_EXPR;
+      case "AFTER_MODIFIER":
+        return new PerlElementTypeEx(name, PsiPerlAfterModifierImpl.class);
+      case "BEFORE_MODIFIER":
+        return new PerlElementTypeEx(name, PsiPerlBeforeModifierImpl.class);
+      case "AROUND_MODIFIER":
+        return new PerlElementTypeEx(name, PsiPerlAroundModifierImpl.class);
+      case "AROUND_SIGNATURE_CONTENT":
+        return new PerlElementTypeEx(name, PsiPerlAroundSignatureContentImpl.class);
+      case "AROUND_SIGNATURE_INVOCANTS":
+        return new PerlElementTypeEx(name, PsiPerlAroundSignatureInvocantsImpl.class);
+      case "AUGMENT_MODIFIER":
+        return new PerlElementTypeEx(name, PsiPerlAugmentModifierImpl.class);
       case "ADD_EXPR":
         return new PerlElementTypeEx(name, PsiPerlAddExprImpl.class);
       case "AND_EXPR":

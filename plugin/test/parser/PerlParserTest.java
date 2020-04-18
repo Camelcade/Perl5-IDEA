@@ -42,19 +42,19 @@ public class PerlParserTest extends PerlParserTestBase {
   }
 
   @Test
-  public void testFunctionParametersAfter() {doTest(false);}
+  public void testFunctionParametersAfter() {doTest();}
 
   @Test
-  public void testFunctionParametersAround() {doTest(false);}
+  public void testFunctionParametersAround() {doTest();}
 
   @Test
-  public void testFunctionParametersAugment() {doTest(false);}
+  public void testFunctionParametersAugment() {doTest();}
 
   @Test
-  public void testFunctionParametersBefore() {doTest(false);}
+  public void testFunctionParametersBefore() {doTest();}
 
   @Test
-  public void testFunctionParametersOverride() {doTest(false);}
+  public void testFunctionParametersOverride() {doTest();}
 
   @Test
   public void testFunctionParametersFunOmited() {doTest();}

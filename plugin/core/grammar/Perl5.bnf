@@ -184,6 +184,12 @@
     RESERVED_FUNC='func'
     RESERVED_FUN='fun'
 
+    RESERVED_AFTER_FP='fp_after'
+    RESERVED_AROUND_FP='fp_around'
+    RESERVED_AUGMENT_FP='fp_augment'
+    RESERVED_BEFORE_FP='fp_before'
+    RESERVED_OVERRIDE_FP='fp_override'
+
     // Operators
 
 
@@ -584,6 +590,10 @@ private compound_statement ::=
     | default_compound
     | method_definition
     | func_definition
+    | before_modifier
+    | after_modifier
+    | around_modifier
+    | augment_modifier
     | trycatch_compound
     | switch_compound
     | cases_sequence
@@ -1142,7 +1152,7 @@ private normal_method ::= <<method method_tokens>>
 private method_tokens ::= 'list' | 'unary' | 'unary_custom'| 'argumentless' |
   QUALIFYING_PACKAGE SUB_NAME |
   SUB_NAME [PACKAGE] |
-  'method' | 'func' | 'fun'
+  'method' | 'func' | 'fun' |
   'finally' | 'try' | 'catch' |
   'switch' | 'case'
 
@@ -1203,10 +1213,21 @@ private comma ::= ',' | '=>'
 
 /********************************************** Extensions for Method::Signatures *************************************/
 // we can make this smareter and use keywords from settings or import opitions; We can't pin here because MooseX method works othewise
-method_definition ::= ['async'] 'method' sub_names_token [method_signature] [sub_attributes] parse_block
-func_definition ::= {'func'|'fun'} sub_names_token func_body
+method_definition ::= {['async'] 'method'|'fp_override'} sub_names_token [method_signature] func_or_method_body
+func_definition ::= {'func'|'fun'} named_func_body
 fun_expr ::= 'fun' func_body
-private func_body ::= [func_signature] [sub_attributes] parse_block
+private named_func_body ::=  sub_names_token func_body
+private func_body ::= [func_signature] func_or_method_body
+private func_or_method_body ::= [sub_attributes] parse_block
+
+around_modifier ::= 'fp_around' sub_names_token [around_signature] func_or_method_body
+private around_signature ::= '(' around_signature_content ')' {pin=1}
+around_signature_content ::= [around_signature_invocants] [func_signature_elements] {recoverWhile=recover_signature_content}
+around_signature_invocants ::= <<scalarDeclarationWrapper>> ',' <<scalarDeclarationWrapper>>  ':'
+
+after_modifier ::= 'fp_after' named_func_body
+augment_modifier ::= 'fp_augment' named_func_body // we should probably stub this one to navigate easier
+before_modifier ::= 'fp_before' named_func_body
 
 // not sure that we need a wrapper for signatures
 private method_signature ::= '(' method_signature_content ')' {pin=1}
