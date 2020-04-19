@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -88,7 +88,7 @@ public interface PerlFlowControlExpr extends PsiPerlExpr {
         PsiElement closestElement = PerlPsiUtil.getClosest(closestBlockContainer, containingStatementWithForModifier);
         return closestEval == null ? closestElement : PerlPsiUtil.getClosest(closestElement, closestEval);
       }
-      else if (blockContainerType == DO_EXPR || blockContainerType == EVAL_EXPR) {
+      else if (blockContainerType == DO_BLOCK_EXPR || blockContainerType == EVAL_EXPR) {
         PsiPerlStatementImpl statementWithModifier = getWrappingStatementWithForModifier(closestBlockContainer);
         if (statementWithModifier != null) {
           return PerlPsiUtil.getClosest(statementWithModifier, containingStatementWithForModifier);

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,8 +35,8 @@ import java.util.Set;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 
 public class PerlUnreachableCodeInspection extends PerlInspection {
-  private TokenSet TRANSPARENT_ELEMENTS = TokenSet.create(
-    COMMA_SEQUENCE_EXPR, DO_EXPR, PARENTHESISED_EXPR, DEREF_EXPR, SUB_EXPR, SUB_DEFINITION, METHOD_DEFINITION, FUNC_DEFINITION,
+  private final TokenSet TRANSPARENT_ELEMENTS = TokenSet.create(
+    COMMA_SEQUENCE_EXPR, DO_BLOCK_EXPR, PARENTHESISED_EXPR, DEREF_EXPR, SUB_EXPR, SUB_DEFINITION, METHOD_DEFINITION, FUNC_DEFINITION,
     LP_OR_XOR_EXPR, EVAL_EXPR
   );
 

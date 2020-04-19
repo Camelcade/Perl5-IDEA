@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,8 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 
 
-public interface PerlRequireExpr extends PsiElement, PerlDoExpr, PerlNamespaceElementContainer {
+public interface PerlRequireExpr extends PerlDoExpr, PerlNamespaceElementContainer {
 }

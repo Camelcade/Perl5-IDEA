@@ -82,7 +82,7 @@ public class PerlParsingPerformanceTest extends PerlParserTestBase {
     MATCH_REGEX,
 
     // exprs
-    DO_EXPR,
+    DO_BLOCK_EXPR,
     EVAL_EXPR,
     GREP_EXPR,
     RETURN_EXPR,

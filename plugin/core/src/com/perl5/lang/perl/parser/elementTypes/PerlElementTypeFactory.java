@@ -114,6 +114,8 @@ public class PerlElementTypeFactory {
         return PerlStubElementTypes.PERL_VARIABLE_DECLARATION_ELEMENT;
       case "DO_EXPR":
         return PerlStubElementTypes.PERL_DO_EXPR;
+      case "DO_BLOCK_EXPR":
+        return new PerlElementTypeEx(name, PsiPerlDoBlockExprImpl.class);
       case "REQUIRE_EXPR":
         return PerlStubElementTypes.PERL_REQUIRE_EXPR;
       case "AFTER_MODIFIER":

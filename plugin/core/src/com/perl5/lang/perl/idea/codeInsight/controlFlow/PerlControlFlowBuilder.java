@@ -80,7 +80,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     LAZY_CODE_BLOCKS,
     TokenSet.create(
       NAMESPACE_CONTENT, NAMESPACE_DEFINITION,
-      DO_EXPR,
+      DO_BLOCK_EXPR,
       BLOCK, CONTINUE_BLOCK, CONDITION_EXPR,
       CALL_ARGUMENTS, PARENTHESISED_CALL_ARGUMENTS,
       WHILE_COMPOUND, UNTIL_COMPOUND,
@@ -834,7 +834,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
        * except when applied to a do-BLOCK (or to the Perl4 do-SUBROUTINE statement), in which case the block
        * executes once before the conditional is evaluated.
        */
-      if (statementExpression instanceof PsiPerlDoExpr &&
+      if (statementExpression instanceof PerlDoBlockExpr &&
           (modifier instanceof PsiPerlWhileStatementModifier || modifier instanceof PsiPerlUntilStatementModifier)
       ) {
         startTransparentNode(o, "statement");

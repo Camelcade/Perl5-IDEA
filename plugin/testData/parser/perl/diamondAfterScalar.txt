@@ -88,7 +88,7 @@ Perl5
             PsiElement(Perl5: $$)('$')
             PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('content')
       PsiElement(Perl5: =)('=')
-      PsiPerlDoExprImpl(PERL_DO_EXPR)
+      PsiPerlDoBlockExprImpl(Perl5: DO_BLOCK_EXPR)
         PsiElement(Perl5: do)('do')
         PsiPerlBlockImpl(Perl5: BLOCK)
           PsiElement(Perl5: {)('{')

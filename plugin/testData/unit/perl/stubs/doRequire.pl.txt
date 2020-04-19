@@ -14,8 +14,6 @@ PerlFileStub
 	Path: some/oher/file.pl
   PERL_REQUIRE_EXPR:PerlRuntimeImportStubImpl
 	Path: null
-  PERL_DO_EXPR:PerlRuntimeImportStubImpl
-	Path: null
 
 ----------
 Language: Perl5 POD

@@ -68,7 +68,7 @@ public abstract class PerlIntroduceTargetsHandler {
     SORT_EXPR, GREP_EXPR, MAP_EXPR
   );
   private static final TokenSet FAKE_SUB_EXPR_CONTAINERS = TokenSet.create(
-    SORT_EXPR, EVAL_EXPR, DO_EXPR
+    SORT_EXPR, EVAL_EXPR, DO_BLOCK_EXPR
   );
   private static final TokenSet HASH_CONTEXT_TOKENSET = TokenSet.create(
     HASH_VARIABLE, HASH_CAST_EXPR

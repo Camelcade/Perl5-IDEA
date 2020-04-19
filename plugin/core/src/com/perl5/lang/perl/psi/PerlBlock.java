@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,7 +48,7 @@ public interface PerlBlock extends PerlLexicalScope {
   );
   TokenSet BLOCKS_WITH_RETURN_VALUE = TokenSet.create(
     SUB_EXPR,
-    DO_EXPR,
+    DO_BLOCK_EXPR,
     EVAL_EXPR,
     SUB_DEFINITION,
     METHOD_DEFINITION,

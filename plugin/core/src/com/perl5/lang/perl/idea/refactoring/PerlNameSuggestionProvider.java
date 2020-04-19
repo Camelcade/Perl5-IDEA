@@ -126,7 +126,7 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
     namesMap.put(STRING_LIST, STRING_LIST_NAME);
     namesMap.put(COMMA_SEQUENCE_EXPR, LIST);
     namesMap.put(SUB_EXPR, CODE_REF);
-    namesMap.put(DO_EXPR, DO_RESULT);
+    namesMap.put(DO_BLOCK_EXPR, DO_RESULT);
     namesMap.put(EVAL_EXPR, EVAL_RESULT);
     namesMap.put(PerlElementTypes.ANON_ARRAY, ANON_ARRAY);
     namesMap.put(PerlElementTypes.ANON_HASH, ANON_HASH);

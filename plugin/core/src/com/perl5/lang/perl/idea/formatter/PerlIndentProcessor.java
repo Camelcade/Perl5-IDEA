@@ -86,10 +86,10 @@ public class PerlIndentProcessor implements PerlElementTypes {
       SWITCH_COMPOUND,
       CASE_COMPOUND,
 
-    DO_EXPR,
-    EVAL_EXPR,
-    SUB_EXPR,
-    PerlStubElementTypes.FILE,
+      DO_BLOCK_EXPR,
+      EVAL_EXPR,
+      SUB_EXPR,
+      PerlStubElementTypes.FILE,
 
       LP_STRING_QW
     ));

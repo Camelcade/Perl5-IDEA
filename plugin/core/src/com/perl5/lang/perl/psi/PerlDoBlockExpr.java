@@ -16,17 +16,12 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.intellij.psi.StubBasedPsiElement;
-import com.perl5.lang.perl.psi.stubs.imports.runtime.PerlRuntimeImportStub;
-import org.jetbrains.annotations.Nullable;
+import com.perl5.lang.perl.psi.properties.PerlBlockOwner;
+import com.perl5.lang.perl.psi.properties.PerlLabelScope;
+import com.perl5.lang.perl.psi.properties.PerlReturnScope;
 
-
-public interface PerlDoExpr extends StubBasedPsiElement<PerlRuntimeImportStub> {
-  /**
-   * Returns imported file relative path or null if unrecognizable
-   *
-   * @return relative path
-   */
-  @Nullable
-  String getImportPath();
+/**
+ * Used for {@code do BLOCK} syntax. Semantically different {@code do EXPR} is in the {@link PerlDoExpr}
+ */
+public interface PerlDoBlockExpr extends PerlLabelScope, PerlBlockOwner, PerlReturnScope {
 }

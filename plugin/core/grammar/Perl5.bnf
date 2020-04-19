@@ -516,6 +516,8 @@
 	implements("eval_expr")="com.perl5.lang.perl.psi.PerlEvalExpr"
 	implements("sub_expr|fun_expr")="com.perl5.lang.perl.psi.PerlSubExpr"
 
+    implements("do_block_expr")="com.perl5.lang.perl.psi.PerlDoBlockExpr"
+
     mixin("do_expr")="com.perl5.lang.perl.psi.mixins.PerlDoExprMixin"
     implements("do_expr")="com.perl5.lang.perl.psi.PerlDoExpr"
     stubClass("do_expr")="com.perl5.lang.perl.psi.stubs.imports.runtime.PerlRuntimeImportStub"
@@ -836,6 +838,7 @@ term_expr ::=
     | sub_expr_full
     | fun_expr
     | eval_expr
+    | do_block_expr
     | do_expr
     | anon_hash
     | variable_declaration_local
@@ -992,8 +995,8 @@ tr_modifiers ::= '/m' +
 
 ////////////////////////// end of regular expressions //////////////////////////////////////////////////////////////////
 
-do_expr ::=  'do' do_argument {pin=1}
-private do_argument ::= parenthesised_expr | parse_block | expr
+do_block_expr ::=  'do' parse_block
+do_expr ::= 'do' expr {pin=1}
 
 eval_expr ::=  'eval' [eval_argument] {pin=1}
 private eval_argument ::= parenthesised_expr | sub_expr_simple | expr
