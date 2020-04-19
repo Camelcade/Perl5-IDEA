@@ -1,0 +1,3 @@
+around somefunc{
+  say 'hi';
+}

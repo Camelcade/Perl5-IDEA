@@ -1,0 +1,3 @@
+oferride somefunc: method{
+  say 'hi';
+}

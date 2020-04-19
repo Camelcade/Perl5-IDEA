@@ -1220,14 +1220,16 @@ private named_func_body ::=  sub_names_token func_body
 private func_body ::= [func_signature] func_or_method_body
 private func_or_method_body ::= [sub_attributes] parse_block
 
-around_modifier ::= 'fp_around' sub_names_token [around_signature] func_or_method_body
+private fp_modifier_named_body ::= sub_names_token func_signature func_or_method_body
+
+around_modifier ::= 'fp_around' sub_names_token around_signature func_or_method_body
 private around_signature ::= '(' around_signature_content ')' {pin=1}
 around_signature_content ::= [around_signature_invocants] [func_signature_elements] {recoverWhile=recover_signature_content}
 around_signature_invocants ::= <<scalarDeclarationWrapper>> ',' <<scalarDeclarationWrapper>>  ':'
 
-after_modifier ::= 'fp_after' named_func_body
-augment_modifier ::= 'fp_augment' named_func_body // we should probably stub this one to navigate easier
-before_modifier ::= 'fp_before' named_func_body
+after_modifier ::= 'fp_after' fp_modifier_named_body
+augment_modifier ::= 'fp_augment' fp_modifier_named_body // we should probably stub this one to navigate easier
+before_modifier ::= 'fp_before' fp_modifier_named_body
 
 // not sure that we need a wrapper for signatures
 private method_signature ::= '(' method_signature_content ')' {pin=1}

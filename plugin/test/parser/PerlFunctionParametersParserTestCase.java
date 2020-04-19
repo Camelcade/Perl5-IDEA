@@ -29,6 +29,12 @@ public abstract class PerlFunctionParametersParserTestCase extends PerlParserTes
   @NotNull
   protected abstract String getDataDirName();
 
+  @Test
+  public void testNoSignature() {doTest();}
+
+  @Test
+  public void testNoSignatureAttrs() {doTest(false);}
+
   public static class AfterTest extends PerlFunctionParametersParserTestCase {
     @NotNull
     @Override
@@ -143,6 +149,9 @@ public abstract class PerlFunctionParametersParserTestCase extends PerlParserTes
     protected String getDataDirName() {
       return "method";
     }
+
+    @Test
+    public void testNoSignatureAttrs() {doTest();}
 
     @Test
     public void testFunctionParametersMethod() {doTest();}

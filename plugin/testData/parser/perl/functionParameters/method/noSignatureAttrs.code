@@ -1,0 +1,3 @@
+method somefunc: method{
+  say 'hi';
+}

@@ -1,0 +1,3 @@
+before somefunc: method{
+  say 'hi';
+}

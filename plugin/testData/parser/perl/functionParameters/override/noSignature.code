@@ -1,0 +1,3 @@
+override somefunc{
+  say 'hi';
+}

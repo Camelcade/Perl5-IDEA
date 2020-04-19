@@ -1,0 +1,3 @@
+augment somefunc: method{
+  say 'hi';
+}

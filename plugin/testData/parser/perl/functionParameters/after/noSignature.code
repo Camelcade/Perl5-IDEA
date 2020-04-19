@@ -1,0 +1,3 @@
+after somefunc{
+  say 'hi';
+}

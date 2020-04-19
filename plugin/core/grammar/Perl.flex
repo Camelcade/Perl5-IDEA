@@ -49,7 +49,7 @@ SPACE_OR_COMMENT = {ANY_SPACE}|{LINE_COMMENT_WITH_NEW_LINE}
 SPACES_OR_COMMENTS = {SPACE_OR_COMMENT}*
 NON_SPACE_AHEAD = {SPACES_OR_COMMENTS}[^ \t\f\n\r\#]
 
-FP_SUFFIX = {SPACES_OR_COMMENTS} {IDENTIFIER} {SPACES_OR_COMMENTS} [{(:]
+FP_SUFFIX = {SPACES_OR_COMMENTS} {IDENTIFIER} {SPACES_OR_COMMENTS} "("
 ESCAPED_SPACE_OR_COMMENT = "\\"({ANY_SPACE}|"#")
 
 // http://perldoc.perl.org/perldata.html#Identifier-parsing
@@ -998,7 +998,8 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
         "async" / {SPACES_OR_COMMENTS} "method" {return RESERVED_ASYNC;}
 	"method"			        {yybegin(METHOD_DECLARATION); return RESERVED_METHOD;}
 	"func"				        {yybegin(METHOD_DECLARATION); return RESERVED_FUNC;}
-	"fun"				        {yybegin(METHOD_DECLARATION); return RESERVED_FUN;}
+	"fun"  / {FP_SUFFIX}		        {yybegin(METHOD_DECLARATION); return RESERVED_FUN;}
+	"fun"  / {SPACES_OR_COMMENTS}"("        {yybegin(METHOD_DECLARATION); return RESERVED_FUN;}
         "override" / {FP_SUFFIX}                {yybegin(METHOD_DECLARATION); return RESERVED_OVERRIDE_FP;}
         "after" / {FP_SUFFIX}                   {yybegin(METHOD_DECLARATION); return RESERVED_AFTER_FP;}
         "before" / {FP_SUFFIX}                  {yybegin(METHOD_DECLARATION); return RESERVED_BEFORE_FP;}
