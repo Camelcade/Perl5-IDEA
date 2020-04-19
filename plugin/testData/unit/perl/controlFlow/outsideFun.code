@@ -1,0 +1,5 @@
+say 1;
+fun some($var){
+  say 2;
+}
+say 3;

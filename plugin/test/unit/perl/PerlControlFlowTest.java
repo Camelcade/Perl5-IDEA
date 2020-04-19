@@ -27,6 +27,30 @@ public class PerlControlFlowTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testOutsideAfterModifier() {doTest();}
+
+  @Test
+  public void testOutsideAroundModifier() {doTest();}
+
+  @Test
+  public void testOutsideAugmentModifier() {doTest();}
+
+  @Test
+  public void testOutsideBeforeModifier() {doTest();}
+
+  @Test
+  public void testOutsideFun() {doTest();}
+
+  @Test
+  public void testOutsideFunAnon() {doTest();}
+
+  @Test
+  public void testOutsideMethod() {doTest();}
+
+  @Test
+  public void testOutsideOverride() {doTest();}
+
+  @Test
   public void testFunctionParametersFun() {doTest();}
 
   @Test

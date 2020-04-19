@@ -935,8 +935,10 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       if (element instanceof LeafPsiElement) {
         return;
       }
-      element.acceptChildren(this);
-      startNodeSmart(element);
+      if (!(element instanceof PerlDieScope) || ((PerlDieScope)element).includeInControlFlow()) {
+        element.acceptChildren(this);
+        startNodeSmart(element);
+      }
     }
   }
 

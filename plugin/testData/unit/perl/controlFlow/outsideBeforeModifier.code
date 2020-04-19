@@ -1,0 +1,5 @@
+say 1;
+before some($var){
+  say 2;
+}
+say 3;
