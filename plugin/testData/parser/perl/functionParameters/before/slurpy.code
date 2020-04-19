@@ -1,0 +1,3 @@
+before scale($factor, @values) {
+    return map { $_ * $factor } @values;
+}

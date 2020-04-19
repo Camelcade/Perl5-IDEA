@@ -1,0 +1,2 @@
+around foo(Str $label, ArrayRef[Int] $counts) {
+}

@@ -999,7 +999,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 	"method"			        {yybegin(METHOD_DECLARATION); return RESERVED_METHOD;}
 	"func"				        {yybegin(METHOD_DECLARATION); return RESERVED_FUNC;}
 	"fun"  / {FP_SUFFIX}		        {yybegin(METHOD_DECLARATION); return RESERVED_FUN;}
-	"fun"  / {SPACES_OR_COMMENTS}"("        {yybegin(METHOD_DECLARATION); return RESERVED_FUN;}
+	"fun"  / {SPACES_OR_COMMENTS}"("        {pushStateAndBegin(YYINITIAL,METHOD_DECLARATION_CONTENT); return RESERVED_FUN;}
         "override" / {FP_SUFFIX}                {yybegin(METHOD_DECLARATION); return RESERVED_OVERRIDE_FP;}
         "after" / {FP_SUFFIX}                   {yybegin(METHOD_DECLARATION); return RESERVED_AFTER_FP;}
         "before" / {FP_SUFFIX}                  {yybegin(METHOD_DECLARATION); return RESERVED_BEFORE_FP;}

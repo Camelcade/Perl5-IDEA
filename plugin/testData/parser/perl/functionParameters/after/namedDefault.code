@@ -1,0 +1,2 @@
+after create_point(:$x, :$y, :$color = 0x00_00_00) {
+}

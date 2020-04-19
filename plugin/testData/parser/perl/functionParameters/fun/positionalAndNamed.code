@@ -1,4 +1,4 @@
-method output(
+fun output(
    $data,
    :$handle       = $self->output_handle,
    :$separator    = $self->separator,

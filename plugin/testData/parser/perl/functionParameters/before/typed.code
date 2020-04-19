@@ -1,0 +1,2 @@
+before foo(Str $label, ArrayRef[Int] $counts) {
+}

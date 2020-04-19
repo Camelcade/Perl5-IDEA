@@ -1,0 +1,4 @@
+override weird($name = return "nope") {
+    print "Hello, $name!\n";
+    return $name;
+}

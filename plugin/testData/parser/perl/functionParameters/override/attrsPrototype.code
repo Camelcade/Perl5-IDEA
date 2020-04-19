@@ -1,0 +1,3 @@
+override mypush($aref, @values) :prototype(\@@) {
+    push @{$aref}, @values;
+}

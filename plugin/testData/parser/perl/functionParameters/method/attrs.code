@@ -1,0 +1,4 @@
+method foo() :method {
+   my $self = shift;
+   my ($x, $y) = @_;
+}

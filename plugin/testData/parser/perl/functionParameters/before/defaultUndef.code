@@ -1,0 +1,3 @@
+before foo($x = undef, $y = undef, $z = undef) {
+    # three arguments, all optional
+}

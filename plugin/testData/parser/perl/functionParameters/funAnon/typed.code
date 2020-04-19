@@ -1,0 +1,2 @@
+fun (Str $label, ArrayRef[Int] $counts) {
+}

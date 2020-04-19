@@ -1,0 +1,3 @@
+override dynamic_default($x, $y = length $x) {
+   return "$x/$y";
+}

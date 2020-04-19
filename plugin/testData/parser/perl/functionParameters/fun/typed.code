@@ -1,4 +1,2 @@
-use Types::Standard qw(Str Int ArrayRef);
- 
 fun foo(Str $label, ArrayRef[Int] $counts) {
 }

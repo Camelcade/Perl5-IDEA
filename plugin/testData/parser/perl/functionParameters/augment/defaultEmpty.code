@@ -1,0 +1,3 @@
+augment foo($x=, $y=, $z=) {
+    # shorter syntax, same meaning
+}

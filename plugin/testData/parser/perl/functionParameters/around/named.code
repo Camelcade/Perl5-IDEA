@@ -1,0 +1,3 @@
+around create_point(:$x, :$y, :$color) {
+    print "creating a $color point at ($x, $y)\n";
+}

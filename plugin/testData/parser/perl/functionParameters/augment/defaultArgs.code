@@ -1,0 +1,3 @@
+augment passthrough($x, $y = 42, $z = []) {
+    return ($x, $y, $z);
+}

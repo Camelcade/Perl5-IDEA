@@ -1,0 +1,4 @@
+fun ($name = return "nope") {
+    print "Hello, $name!\n";
+    return $name;
+}

@@ -1,8 +1,12 @@
 Subtree: Perl5 (Perl5)
 Perl5
-  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::foo
-    PsiElement(Perl5: sub)('sub')
+  PsiPerlFuncDefinitionImpl(FUNC_DEFINITION)@main::foo
+    PsiElement(Perl5: fun)('fun')
     PerlSubNameElementImpl(Perl5: subname)('foo')
+    PsiElement(Perl5: ()('(')
+    PsiPerlFuncSignatureContentImpl(Perl5: FUNC_SIGNATURE_CONTENT)
+      <empty list>
+    PsiElement(Perl5: ))(')')
     PsiPerlAttributesImpl(Perl5: ATTRIBUTES)
       PsiElement(Perl5: :)(':')
       PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
@@ -45,5 +49,5 @@ Perl5
 --------------------------------------------------------------------------------
 Subtree: Perl5 POD (Perl5 POD)
 POD file
-  PsiElement(Perl5 POD: POD_OUTER)('sub foo :method {\n   my $self = shift;\n   my ($x, $y) = @_;\n}')
+  PsiElement(Perl5 POD: POD_OUTER)('fun foo() :method {\n   my $self = shift;\n   my ($x, $y) = @_;\n}')
 --------------------------------------------------------------------------------

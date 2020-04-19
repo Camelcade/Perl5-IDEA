@@ -1,0 +1,2 @@
+after foo(($my_type) $label, ($some_other_type) $counts) {
+}

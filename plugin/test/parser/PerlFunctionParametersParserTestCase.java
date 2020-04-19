@@ -30,6 +30,48 @@ public abstract class PerlFunctionParametersParserTestCase extends PerlParserTes
   protected abstract String getDataDirName();
 
   @Test
+  public void testOmited() {doTest();}
+
+  @Test
+  public void testTyped() {doTest();}
+
+  @Test
+  public void testTypedWithVars() {doTest();}
+
+  @Test
+  public void testAttrs() {doTest();}
+
+  @Test
+  public void testAttrsPrototype() {doTest();}
+
+  @Test
+  public void testDefaultArgs() {doTest();}
+
+  @Test
+  public void testDefaultCode() {doTest();}
+
+  @Test
+  public void testDefaultEmpty() {doTest();}
+
+  @Test
+  public void testDefaultUndef() {doTest();}
+
+  @Test
+  public void testDefaultUsePreceding() {doTest();}
+
+  @Test
+  public void testNamed() {doTest();}
+
+  @Test
+  public void testNamedDefault() {doTest();}
+
+  @Test
+  public void testPositionalAndNamed() {doTest();}
+
+  @Test
+  public void testSlurpy() {doTest();}
+
+  @Test
   public void testEmptySignature() {doTest();}
 
   @Test
@@ -105,48 +147,6 @@ public abstract class PerlFunctionParametersParserTestCase extends PerlParserTes
     protected String getDataDirName() {
       return "fun";
     }
-
-    @Test
-    public void testOmited() {doTest();}
-
-    @Test
-    public void testTyped() {doTest();}
-
-    @Test
-    public void testTypedWithVars() {doTest();}
-
-    @Test
-    public void testAttrs() {doTest();}
-
-    @Test
-    public void testAttrsPrototype() {doTest();}
-
-    @Test
-    public void testDefaultArgs() {doTest();}
-
-    @Test
-    public void testDefaultCode() {doTest();}
-
-    @Test
-    public void testDefaultEmpty() {doTest();}
-
-    @Test
-    public void testDefaultUndef() {doTest();}
-
-    @Test
-    public void testDefaultUsePreceding() {doTest();}
-
-    @Test
-    public void testNamed() {doTest();}
-
-    @Test
-    public void testNamedDefault() {doTest();}
-
-    @Test
-    public void testPositionalAndNamed() {doTest();}
-
-    @Test
-    public void testSlurpy() {doTest();}
   }
 
   public static class FunctionAnonTest extends FunctionTestCase {

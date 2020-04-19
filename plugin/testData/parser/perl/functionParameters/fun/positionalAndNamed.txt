@@ -1,10 +1,10 @@
 Subtree: Perl5 (Perl5)
 Perl5
-  PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)@main::output
-    PsiElement(Perl5: method)('method')
+  PsiPerlFuncDefinitionImpl(FUNC_DEFINITION)@main::output
+    PsiElement(Perl5: fun)('fun')
     PerlSubNameElementImpl(Perl5: subname)('output')
     PsiElement(Perl5: ()('(')
-    PsiPerlMethodSignatureContentImpl(Perl5: METHOD_SIGNATURE_CONTENT)
+    PsiPerlFuncSignatureContentImpl(Perl5: FUNC_SIGNATURE_CONTENT)
       PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT)
         PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
           PsiElement(Perl5: $$)('$')
@@ -56,5 +56,5 @@ Perl5
 --------------------------------------------------------------------------------
 Subtree: Perl5 POD (Perl5 POD)
 POD file
-  PsiElement(Perl5 POD: POD_OUTER)('method output(\n   $data,\n   :$handle       = $self->output_handle,\n   :$separator    = $self->separator,\n   :$quote_fields = 0,\n) {\n}')
+  PsiElement(Perl5 POD: POD_OUTER)('fun output(\n   $data,\n   :$handle       = $self->output_handle,\n   :$separator    = $self->separator,\n   :$quote_fields = 0,\n) {\n}')
 --------------------------------------------------------------------------------

@@ -1,0 +1,7 @@
+override output(
+   $data,
+   :$handle       = $self->output_handle,
+   :$separator    = $self->separator,
+   :$quote_fields = 0,
+) {
+}
