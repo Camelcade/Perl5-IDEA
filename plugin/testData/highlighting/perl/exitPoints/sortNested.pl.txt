@@ -28,14 +28,14 @@ sub somesub {
         42;
     };
     sort {
-        <READ>return 'Sort return is not highlighted.'</READ> if $a;
+        return 'Sort return is not highlighted.' if $a;
         say 'Some real code...';
         <READ>die 'And we are dead'</READ> if $b;
         say 'Some real code...';
         <READ>exit -1</READ> if $b;
         say 'Some real code...';
-        <READ>42</READ>;
-    } @ARGV;
+        42;
+    } <READ>@ARGV</READ>;
     return 'this is a proper return' if $a;
     say 'Some real code...';
     die 'And we are dead' if $b;
@@ -44,4 +44,3 @@ sub somesub {
     say 'Some real code...';
     say 'This is a last statement exit point';
 }
-

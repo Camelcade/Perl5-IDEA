@@ -865,29 +865,31 @@ term_expr ::=
 
 package_expr ::= any_package
 continue_expr ::= 'continue' ['(' ')'] {pin=1}
-grep_expr ::=  'grep' grep_map_arguments {pin=1}
-map_expr ::=  'map' grep_map_arguments {pin=1}
+grep_expr ::=  'grep' parse_grep_map_arguments {pin=1}
+map_expr ::=  'map' parse_grep_map_arguments {pin=1}
 
-private grep_map_arguments ::=
-    '(' grep_map_arguments_ ')' !'['
-    | grep_map_arguments_
+private parse_grep_map_arguments ::=
+    '(' grep_map_arguments_variants ')' !'['
+    | grep_map_arguments_variants
 
-private grep_map_arguments_ ::=
-    parse_block [comma] grep_map_sort_tail
-    | parse_scalar_expr comma grep_map_sort_tail
-    | expr
+private grep_map_arguments_variants ::=
+    grep_map_sort_with_block |
+    parse_scalar_expr comma grep_map_sort_tail |
+    expr
+
+private grep_map_sort_with_block ::= parse_block [comma] grep_map_sort_tail
 
 private grep_map_sort_tail ::= parse_list_expr
 
-sort_expr ::=  'sort' sort_arguments {pin=1}
-private sort_arguments ::=
-    '(' sort_arguments_ ')' !'['
-    | sort_arguments_
+sort_expr ::=  'sort' parse_sort_arguments {pin=1}
+private parse_sort_arguments ::=
+    '(' sort_arguments_variants ')' !'['
+    | sort_arguments_variants
 
-private sort_arguments_ ::=
-    sub_expr_simple [comma] grep_map_sort_tail
-    | sorter grep_map_sort_tail
-    | grep_map_sort_tail
+private sort_arguments_variants ::=
+    grep_map_sort_with_block |
+    sorter grep_map_sort_tail |
+    grep_map_sort_tail
 
 private sorter ::= scalar_variable | normal_method
 
