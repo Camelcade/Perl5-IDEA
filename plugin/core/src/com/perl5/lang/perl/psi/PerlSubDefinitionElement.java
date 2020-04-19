@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,8 @@ package com.perl5.lang.perl.psi;
 
 import com.intellij.navigation.NavigationItem;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.psi.properties.PerlDieScopeWithBLock;
+import com.perl5.lang.perl.psi.properties.PerlBlockOwner;
+import com.perl5.lang.perl.psi.properties.PerlDieScope;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.psi.utils.PerlSubArgumentsExtractor;
 import org.jetbrains.annotations.NotNull;
@@ -27,7 +28,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Collections;
 import java.util.List;
 
-public interface PerlSubDefinitionElement extends PerlSubDefinition, PerlSubElement, PerlDieScopeWithBLock, NavigationItem {
+public interface PerlSubDefinitionElement extends PerlSubDefinition, PerlSubElement, PerlDieScope, PerlBlockOwner, NavigationItem {
   @Override
   default String getPresentableName() {
     String args = getSubArgumentsListAsString();
