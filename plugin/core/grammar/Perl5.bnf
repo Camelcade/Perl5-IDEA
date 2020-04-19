@@ -999,7 +999,7 @@ do_block_expr ::=  'do' parse_block
 do_expr ::= 'do' expr {pin=1}
 
 eval_expr ::=  'eval' [eval_argument] {pin=1}
-private eval_argument ::= parenthesised_expr | sub_expr_simple | expr
+private eval_argument ::= parenthesised_expr | parse_block | expr
 
 private variable_declaration ::=
     variable_declaration_global
