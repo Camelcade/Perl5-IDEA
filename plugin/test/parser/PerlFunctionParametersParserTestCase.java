@@ -107,46 +107,46 @@ public abstract class PerlFunctionParametersParserTestCase extends PerlParserTes
     }
 
     @Test
-    public void testFunctionParametersFunOmited() {doTest();}
+    public void testOmited() {doTest();}
 
     @Test
-    public void testFunctionParametersFunTyped() {doTest();}
+    public void testTyped() {doTest();}
 
     @Test
-    public void testFunctionParametersFunTypedWithVars() {doTest();}
+    public void testTypedWithVars() {doTest();}
 
     @Test
-    public void testFunctionParametersFunAttrs() {doTest();}
+    public void testAttrs() {doTest();}
 
     @Test
-    public void testFunctionParametersFunAttrsPrototype() {doTest();}
+    public void testAttrsPrototype() {doTest();}
 
     @Test
-    public void testFunctionParametersFunDefaultArgs() {doTest();}
+    public void testDefaultArgs() {doTest();}
 
     @Test
-    public void testFunctionParametersFunDefaultCode() {doTest();}
+    public void testDefaultCode() {doTest();}
 
     @Test
-    public void testFunctionParametersFunDefaultEmpty() {doTest();}
+    public void testDefaultEmpty() {doTest();}
 
     @Test
-    public void testFunctionParametersFunDefaultUndef() {doTest();}
+    public void testDefaultUndef() {doTest();}
 
     @Test
-    public void testFunctionParametersFunDefaultUsePreceding() {doTest();}
+    public void testDefaultUsePreceding() {doTest();}
 
     @Test
-    public void testFunctionParametersFunNamed() {doTest();}
+    public void testNamed() {doTest();}
 
     @Test
-    public void testFunctionParametersFunNamedDefault() {doTest();}
+    public void testNamedDefault() {doTest();}
 
     @Test
-    public void testFunctionParametersFunPositionalAndNamed() {doTest();}
+    public void testPositionalAndNamed() {doTest();}
 
     @Test
-    public void testFunctionParametersFunSlurpy() {doTest();}
+    public void testSlurpy() {doTest();}
   }
 
   public static class FunctionAnonTest extends FunctionTestCase {
