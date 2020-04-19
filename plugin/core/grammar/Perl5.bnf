@@ -575,7 +575,7 @@ private braced_block_content ::= '{' block_content '}' {pin=1}
 private block_content ::= file_item * {recoverWhile=recover_statement}
 
 nyi_statement ::= 'nyi'
-format_definition ::=  'format' [SUB_NAME] '=' [FORMAT] FORMAT_TERMINATOR {pin=1}
+format_definition ::=  'format' ['subname'] '=' [FORMAT] FORMAT_TERMINATOR {pin=1}
 
 private compound_statement ::=
     sub_definition
@@ -680,7 +680,7 @@ sub_definition ::=  ['my'|'our'|'state'|'async'] 'sub' sub_names_token sub_defin
 sub_declaration ::=  ['my'|'our'|'state'] 'sub' sub_names_token sub_declaration_parameters <<statementSemi>>
 private sub_declaration_parameters ::= sub_definition_parameters {recoverWhile=recover_statement}
 
-private sub_names_token ::= [QUALIFYING_PACKAGE] SUB_NAME
+private sub_names_token ::= ['package::name::'] 'subname'
 
 private sub_definition_parameters ::=
   sub_attributes [sub_signature_in_parens] |
@@ -1150,9 +1150,9 @@ private parse_call_arguments ::=
 private normal_method ::= <<method method_tokens>>
 // the rest are fallback
 private method_tokens ::= 'list' | 'unary' | 'unary_custom'| 'argumentless' |
-  QUALIFYING_PACKAGE SUB_NAME |
-  SUB_NAME [PACKAGE] |
-  'method' | 'func' | 'fun' |
+  'package::name::' 'subname' |
+  'subname' ['package::name'] |
+  'method' | 'func' |
   'finally' | 'try' | 'catch' |
   'switch' | 'case'
 
@@ -1161,7 +1161,7 @@ private method_tokens ::= 'list' | 'unary' | 'unary_custom'| 'argumentless' |
 ////////////////////////////////END OF CALLABLE ////////////////////////////////////////////////////////////////////////
 
 label_declaration ::= <<parseLabelDeclaration>> // custom faster method
-label_expr ::= IDENTIFIER|SUB_NAME !'('
+label_expr ::= IDENTIFIER|'subname' !'('
 private perl_version ::= <<parsePerlVersion>>
 private perl_handle ::=  perl_handle_expr | parse_block | scalar_variable !('{'|'['|<<isOperatorToken>>)
 perl_handle_expr ::= HANDLE
