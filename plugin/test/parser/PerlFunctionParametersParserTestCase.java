@@ -29,77 +29,49 @@ public abstract class PerlFunctionParametersParserTestCase extends PerlParserTes
   @NotNull
   protected abstract String getDataDirName();
 
-  @Test
-  public void testFunctionParametersAfter() {doTest();}
+  public static class AfterTest extends PerlFunctionParametersParserTestCase {
+    @NotNull
+    @Override
+    protected String getDataDirName() {
+      return "after";
+    }
 
-  @Test
-  public void testFunctionParametersAround() {doTest();}
+    @Test
+    public void testFunctionParametersAfter() {doTest();}
+  }
 
-  @Test
-  public void testFunctionParametersAugment() {doTest();}
+  public static class AroundTest extends PerlFunctionParametersParserTestCase {
+    @NotNull
+    @Override
+    protected String getDataDirName() {
+      return "around";
+    }
 
-  @Test
-  public void testFunctionParametersBefore() {doTest();}
+    @Test
+    public void testFunctionParametersAround() {doTest();}
+  }
 
-  @Test
-  public void testFunctionParametersOverride() {doTest();}
+  public static class AugmentTest extends PerlFunctionParametersParserTestCase {
+    @NotNull
+    @Override
+    protected String getDataDirName() {
+      return "augment";
+    }
 
-  @Test
-  public void testFunctionParametersFunOmited() {doTest();}
+    @Test
+    public void testFunctionParametersAugment() {doTest();}
+  }
 
-  @Test
-  public void testFunctionParametersFunTyped() {doTest();}
+  public static class BeforeTest extends PerlFunctionParametersParserTestCase {
+    @NotNull
+    @Override
+    protected String getDataDirName() {
+      return "before";
+    }
 
-  @Test
-  public void testFunctionParametersFunTypedWithVars() {doTest();}
-
-  @Test
-  public void testFunctionParametersFun() {doTest();}
-
-  @Test
-  public void testFunctionParametersFunAnon() {doTest();}
-
-  @Test
-  public void testFunctionParametersFunAttrs() {doTest();}
-
-  @Test
-  public void testFunctionParametersFunAttrsPrototype() {doTest();}
-
-  @Test
-  public void testFunctionParametersFunDefaultArgs() {doTest();}
-
-  @Test
-  public void testFunctionParametersFunDefaultCode() {doTest();}
-
-  @Test
-  public void testFunctionParametersFunDefaultEmpty() {doTest();}
-
-  @Test
-  public void testFunctionParametersFunDefaultUndef() {doTest();}
-
-  @Test
-  public void testFunctionParametersFunDefaultUsePreceding() {doTest();}
-
-  @Test
-  public void testFunctionParametersFunNamed() {doTest();}
-
-  @Test
-  public void testFunctionParametersFunNamedDefault() {doTest();}
-
-  @Test
-  public void testFunctionParametersFunPositionalAndNamed() {doTest();}
-
-  @Test
-  public void testFunctionParametersFunSlurpy() {doTest();}
-
-  @Test
-  public void testFunctionParametersMethod() {doTest();}
-
-  @Test
-  public void testFunctionParametersMethodInvocant() {doTest();}
-
-  @Test
-  public void testFunctionParametersMethodInvocantNoArgs() {doTest();}
+    @Test
+    public void testFunctionParametersBefore() {doTest();}
+  }
 
   public static class FunctionTest extends PerlFunctionParametersParserTestCase {
     @NotNull
@@ -107,5 +79,89 @@ public abstract class PerlFunctionParametersParserTestCase extends PerlParserTes
     protected String getDataDirName() {
       return "fun";
     }
+
+    @Test
+    public void testFunctionParametersFunOmited() {doTest();}
+
+    @Test
+    public void testFunctionParametersFunTyped() {doTest();}
+
+    @Test
+    public void testFunctionParametersFunTypedWithVars() {doTest();}
+
+    @Test
+    public void testFunctionParametersFun() {doTest();}
+
+    @Test
+    public void testFunctionParametersFunAttrs() {doTest();}
+
+    @Test
+    public void testFunctionParametersFunAttrsPrototype() {doTest();}
+
+    @Test
+    public void testFunctionParametersFunDefaultArgs() {doTest();}
+
+    @Test
+    public void testFunctionParametersFunDefaultCode() {doTest();}
+
+    @Test
+    public void testFunctionParametersFunDefaultEmpty() {doTest();}
+
+    @Test
+    public void testFunctionParametersFunDefaultUndef() {doTest();}
+
+    @Test
+    public void testFunctionParametersFunDefaultUsePreceding() {doTest();}
+
+    @Test
+    public void testFunctionParametersFunNamed() {doTest();}
+
+    @Test
+    public void testFunctionParametersFunNamedDefault() {doTest();}
+
+    @Test
+    public void testFunctionParametersFunPositionalAndNamed() {doTest();}
+
+    @Test
+    public void testFunctionParametersFunSlurpy() {doTest();}
+  }
+
+  public static class FunctionAnonTest extends PerlFunctionParametersParserTestCase {
+    @NotNull
+    @Override
+    protected String getDataDirName() {
+      return "funAnon";
+    }
+
+    @Test
+    public void testFunctionParametersFunAnon() {doTest();}
+  }
+
+  public static class MethodTest extends PerlFunctionParametersParserTestCase {
+    @NotNull
+    @Override
+    protected String getDataDirName() {
+      return "method";
+    }
+
+    @Test
+    public void testFunctionParametersMethod() {doTest();}
+
+    @Test
+    public void testFunctionParametersMethodInvocant() {doTest();}
+
+    @Test
+    public void testFunctionParametersMethodInvocantNoArgs() {doTest();}
+  }
+
+  public static class OverrideTest extends PerlFunctionParametersParserTestCase {
+    @NotNull
+    @Override
+    protected String getDataDirName() {
+      return "override";
+    }
+
+    @Test
+    public void testFunctionParametersOverride() {doTest();}
   }
 }
