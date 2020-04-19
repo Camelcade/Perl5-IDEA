@@ -1220,7 +1220,7 @@ private named_func_body ::=  sub_names_token func_body
 private func_body ::= [func_signature] func_or_method_body
 private func_or_method_body ::= [sub_attributes] parse_block
 
-private fp_modifier_named_body ::= sub_names_token func_signature func_or_method_body
+private fp_modifier_named_body ::= sub_names_token method_signature func_or_method_body
 
 around_modifier ::= 'fp_around' sub_names_token around_signature func_or_method_body
 private around_signature ::= '(' around_signature_content ')' {pin=1}

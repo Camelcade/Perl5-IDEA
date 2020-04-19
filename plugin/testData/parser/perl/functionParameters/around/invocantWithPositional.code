@@ -1,0 +1,3 @@
+around new($orig, $class: $x, $y) {
+    return bless { x => $x, y => $y }, $class;
+}

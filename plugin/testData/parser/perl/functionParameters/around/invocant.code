@@ -1,0 +1,3 @@
+around from_env($orig, $class:) {
+    return $class->new($ENV{x}, $ENV{y});
+}

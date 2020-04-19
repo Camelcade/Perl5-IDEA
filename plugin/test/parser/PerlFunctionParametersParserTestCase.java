@@ -38,6 +38,18 @@ public abstract class PerlFunctionParametersParserTestCase extends PerlParserTes
   @Test
   public void testNoSignatureAttrs() {doTest(false);}
 
+  @Test
+  public void testInvocant() {doTest();}
+
+  @Test
+  public void testInvocantWithNamed() {doTest();}
+
+  @Test
+  public void testInvocantWithPositional() {doTest();}
+
+  @Test
+  public void testInvocantWithPositionalNamed() {doTest();}
+
   public static class AfterTest extends PerlFunctionParametersParserTestCase {
     @NotNull
     @Override
@@ -70,7 +82,21 @@ public abstract class PerlFunctionParametersParserTestCase extends PerlParserTes
     }
   }
 
-  public static class FunctionTest extends PerlFunctionParametersParserTestCase {
+  public static abstract class FunctionTestCase extends PerlFunctionParametersParserTestCase {
+    @Test
+    public void testInvocant() {doTest(false);}
+
+    @Test
+    public void testInvocantWithNamed() {doTest(false);}
+
+    @Test
+    public void testInvocantWithPositional() {doTest(false);}
+
+    @Test
+    public void testInvocantWithPositionalNamed() {doTest(false);}
+  }
+
+  public static class FunctionTest extends FunctionTestCase {
     @NotNull
     @Override
     protected String getDataDirName() {
@@ -120,7 +146,7 @@ public abstract class PerlFunctionParametersParserTestCase extends PerlParserTes
     public void testFunctionParametersFunSlurpy() {doTest();}
   }
 
-  public static class FunctionAnonTest extends PerlFunctionParametersParserTestCase {
+  public static class FunctionAnonTest extends FunctionTestCase {
     @NotNull
     @Override
     protected String getDataDirName() {
@@ -137,12 +163,6 @@ public abstract class PerlFunctionParametersParserTestCase extends PerlParserTes
 
     @Test
     public void testNoSignatureAttrs() {doTest();}
-
-    @Test
-    public void testFunctionParametersMethodInvocant() {doTest();}
-
-    @Test
-    public void testFunctionParametersMethodInvocantNoArgs() {doTest();}
   }
 
   public static class OverrideTest extends PerlFunctionParametersParserTestCase {

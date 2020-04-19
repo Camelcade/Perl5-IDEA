@@ -1,0 +1,3 @@
+fun($class: $x, :$y) {
+    return bless { x => $x, y => $y }, $class;
+}
