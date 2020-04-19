@@ -243,6 +243,7 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
     RESERVED_BEFORE_FP,
     RESERVED_AROUND_FP,
     RESERVED_AUGMENT_FP,
+    RESERVED_OVERRIDE_FP,
     RESERVED_FUN
   );
 
