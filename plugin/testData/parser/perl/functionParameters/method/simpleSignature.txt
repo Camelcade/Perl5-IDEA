@@ -1,10 +1,10 @@
 Subtree: Perl5 (Perl5)
 Perl5
-  PsiPerlAroundModifierImpl(Perl5: AROUND_MODIFIER)
-    PsiElement(Perl5: fp_around)('around')
+  PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)@main::foo
+    PsiElement(Perl5: method)('method')
     PerlSubNameElementImpl(Perl5: subname)('foo')
     PsiElement(Perl5: ()('(')
-    PsiPerlAroundSignatureContentImpl(Perl5: AROUND_SIGNATURE_CONTENT)
+    PsiPerlMethodSignatureContentImpl(Perl5: METHOD_SIGNATURE_CONTENT)
       PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT)
         PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
           PsiElement(Perl5: $$)('$')
@@ -23,14 +23,8 @@ Perl5
     PsiPerlBlockImpl(Perl5: BLOCK)
       PsiElement(Perl5: {)('{')
       PsiElement(Perl5: })('}')
-  PsiComment(Perl5: COMMENT_LINE)('# works like')
-  PsiComment(Perl5: COMMENT_LINE)('#&around('foo', sub :method {')
-  PsiComment(Perl5: COMMENT_LINE)('#    my $orig = shift;')
-  PsiComment(Perl5: COMMENT_LINE)('#    my $self = shift;')
-  PsiComment(Perl5: COMMENT_LINE)('#    my ($x, $y, $z) = @_;')
-  PsiComment(Perl5: COMMENT_LINE)('#});')
 --------------------------------------------------------------------------------
 Subtree: Perl5 POD (Perl5 POD)
 POD file
-  PsiElement(Perl5 POD: POD_OUTER)('around foo($x, $y, $z) {\n}\n# works like\n#&around('foo', sub :method {\n#    my $orig = shift;\n#    my $self = shift;\n#    my ($x, $y, $z) = @_;\n#});')
+  PsiElement(Perl5 POD: POD_OUTER)('method foo($x, $y, $z) {\n}')
 --------------------------------------------------------------------------------

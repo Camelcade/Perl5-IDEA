@@ -1,3 +1,0 @@
-method bar($label, $n) {
-    return "$label: " . ($n * $self->scale);
-}

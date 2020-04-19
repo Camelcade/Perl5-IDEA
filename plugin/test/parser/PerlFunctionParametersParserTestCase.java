@@ -30,6 +30,9 @@ public abstract class PerlFunctionParametersParserTestCase extends PerlParserTes
   protected abstract String getDataDirName();
 
   @Test
+  public void testSimpleSignature() {doTest();}
+
+  @Test
   public void testNoSignature() {doTest();}
 
   @Test
@@ -41,9 +44,6 @@ public abstract class PerlFunctionParametersParserTestCase extends PerlParserTes
     protected String getDataDirName() {
       return "after";
     }
-
-    @Test
-    public void testFunctionParametersAfter() {doTest();}
   }
 
   public static class AroundTest extends PerlFunctionParametersParserTestCase {
@@ -52,9 +52,6 @@ public abstract class PerlFunctionParametersParserTestCase extends PerlParserTes
     protected String getDataDirName() {
       return "around";
     }
-
-    @Test
-    public void testFunctionParametersAround() {doTest();}
   }
 
   public static class AugmentTest extends PerlFunctionParametersParserTestCase {
@@ -63,9 +60,6 @@ public abstract class PerlFunctionParametersParserTestCase extends PerlParserTes
     protected String getDataDirName() {
       return "augment";
     }
-
-    @Test
-    public void testFunctionParametersAugment() {doTest();}
   }
 
   public static class BeforeTest extends PerlFunctionParametersParserTestCase {
@@ -74,9 +68,6 @@ public abstract class PerlFunctionParametersParserTestCase extends PerlParserTes
     protected String getDataDirName() {
       return "before";
     }
-
-    @Test
-    public void testFunctionParametersBefore() {doTest();}
   }
 
   public static class FunctionTest extends PerlFunctionParametersParserTestCase {
@@ -94,9 +85,6 @@ public abstract class PerlFunctionParametersParserTestCase extends PerlParserTes
 
     @Test
     public void testFunctionParametersFunTypedWithVars() {doTest();}
-
-    @Test
-    public void testFunctionParametersFun() {doTest();}
 
     @Test
     public void testFunctionParametersFunAttrs() {doTest();}
@@ -138,9 +126,6 @@ public abstract class PerlFunctionParametersParserTestCase extends PerlParserTes
     protected String getDataDirName() {
       return "funAnon";
     }
-
-    @Test
-    public void testFunctionParametersFunAnon() {doTest();}
   }
 
   public static class MethodTest extends PerlFunctionParametersParserTestCase {
@@ -152,9 +137,6 @@ public abstract class PerlFunctionParametersParserTestCase extends PerlParserTes
 
     @Test
     public void testNoSignatureAttrs() {doTest();}
-
-    @Test
-    public void testFunctionParametersMethod() {doTest();}
 
     @Test
     public void testFunctionParametersMethodInvocant() {doTest();}
@@ -169,8 +151,5 @@ public abstract class PerlFunctionParametersParserTestCase extends PerlParserTes
     protected String getDataDirName() {
       return "override";
     }
-
-    @Test
-    public void testFunctionParametersOverride() {doTest();}
   }
 }

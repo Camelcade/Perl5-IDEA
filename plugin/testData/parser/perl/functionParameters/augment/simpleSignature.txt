@@ -1,7 +1,7 @@
 Subtree: Perl5 (Perl5)
 Perl5
-  PsiPerlAfterModifierImpl(Perl5: AFTER_MODIFIER)
-    PsiElement(Perl5: fp_after)('after')
+  PsiPerlAugmentModifierImpl(Perl5: AUGMENT_MODIFIER)
+    PsiElement(Perl5: fp_augment)('augment')
     PerlSubNameElementImpl(Perl5: subname)('foo')
     PsiElement(Perl5: ()('(')
     PsiPerlFuncSignatureContentImpl(Perl5: FUNC_SIGNATURE_CONTENT)
@@ -23,11 +23,8 @@ Perl5
     PsiPerlBlockImpl(Perl5: BLOCK)
       PsiElement(Perl5: {)('{')
       PsiElement(Perl5: })('}')
-  PsiComment(Perl5: COMMENT_LINE)('# works like')
-  PsiComment(Perl5: COMMENT_LINE)('# &after('foo', sub: method ($x, $y, $z) {')
-  PsiComment(Perl5: COMMENT_LINE)('# });')
 --------------------------------------------------------------------------------
 Subtree: Perl5 POD (Perl5 POD)
 POD file
-  PsiElement(Perl5 POD: POD_OUTER)('after foo($x, $y, $z) {\n}\n\n# works like\n# &after('foo', sub: method ($x, $y, $z) {\n# });')
+  PsiElement(Perl5 POD: POD_OUTER)('augment foo($x, $y, $z) {\n}')
 --------------------------------------------------------------------------------

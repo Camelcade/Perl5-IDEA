@@ -1,0 +1,2 @@
+augment foo($x, $y, $z) {
+}

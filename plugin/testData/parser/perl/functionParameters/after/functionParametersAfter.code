@@ -1,6 +1,0 @@
-after foo($x, $y, $z) {
-}
-
-# works like
-# &after('foo', sub: method ($x, $y, $z) {
-# });

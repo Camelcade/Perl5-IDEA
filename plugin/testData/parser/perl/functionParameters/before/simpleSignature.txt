@@ -23,11 +23,8 @@ Perl5
     PsiPerlBlockImpl(Perl5: BLOCK)
       PsiElement(Perl5: {)('{')
       PsiElement(Perl5: })('}')
-  PsiComment(Perl5: COMMENT_LINE)('# works like')
-  PsiComment(Perl5: COMMENT_LINE)('#&before('foo', method ($x, $y, $z) {')
-  PsiComment(Perl5: COMMENT_LINE)('#});')
 --------------------------------------------------------------------------------
 Subtree: Perl5 POD (Perl5 POD)
 POD file
-  PsiElement(Perl5 POD: POD_OUTER)('before foo($x, $y, $z) {\n}\n# works like\n#&before('foo', method ($x, $y, $z) {\n#});')
+  PsiElement(Perl5 POD: POD_OUTER)('before foo($x, $y, $z) {\n}')
 --------------------------------------------------------------------------------

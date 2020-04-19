@@ -1,5 +1,0 @@
-override foo($x, $y, $z) {
-}
-# works like
-# &override('foo', method ($x, $y, $z) {
-# });
