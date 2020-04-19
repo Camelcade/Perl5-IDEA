@@ -18,10 +18,9 @@ package com.perl5.lang.perl.psi;
 
 import com.perl5.lang.perl.psi.properties.PerlBlockOwner;
 import com.perl5.lang.perl.psi.properties.PerlLabelScope;
-import com.perl5.lang.perl.psi.properties.PerlReturnScope;
 
 /**
  * Used for {@code do BLOCK} syntax. Semantically different {@code do EXPR} is in the {@link PerlDoExpr}
  */
-public interface PerlDoBlockExpr extends PerlLabelScope, PerlBlockOwner, PerlReturnScope {
+public interface PerlDoBlockExpr extends PerlLabelScope, PerlBlockOwner {
 }

@@ -19,7 +19,7 @@ sub somesub {
         42;
     };
     do {
-        return 'Do return is not highlighted.' if $a;
+        <READ>return 'Do return is not highlighted.'</READ> if $a;
         say 'Some real code...';
         <READ>die 'And we are dead'</READ> if $b;
         say 'Some real code...';
@@ -78,4 +78,3 @@ EOM
     say 'Some real code...';
     <READ>say 'This is a last statement exit point'</READ>;
 }
-
