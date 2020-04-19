@@ -30,6 +30,9 @@ public abstract class PerlFunctionParametersParserTestCase extends PerlParserTes
   protected abstract String getDataDirName();
 
   @Test
+  public void testEmptySignature() {doTest();}
+
+  @Test
   public void testSimpleSignature() {doTest();}
 
   @Test

@@ -1,0 +1,17 @@
+Subtree: Perl5 (Perl5)
+Perl5
+  PsiPerlAroundModifierImpl(Perl5: AROUND_MODIFIER)
+    PsiElement(Perl5: fp_around)('around')
+    PerlSubNameElementImpl(Perl5: subname)('foo')
+    PsiElement(Perl5: ()('(')
+    PsiPerlAroundSignatureContentImpl(Perl5: AROUND_SIGNATURE_CONTENT)
+      <empty list>
+    PsiElement(Perl5: ))(')')
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiElement(Perl5: })('}')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('around foo() {\n}')
+--------------------------------------------------------------------------------
