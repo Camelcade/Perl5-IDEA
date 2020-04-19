@@ -23,4 +23,8 @@ import com.perl5.lang.perl.psi.properties.PerlLabelScope;
 
 
 public interface PerlEvalExpr extends PsiElement, PerlLabelScope, PerlDieScope, PerlBlockOwner {
+  @Override
+  default boolean includeInControlFlow() {
+    return true;
+  }
 }

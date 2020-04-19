@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,4 +20,10 @@ package com.perl5.lang.perl.psi.properties;
  * Marker interface for elements which can be exited with die & friends
  */
 public interface PerlDieScope extends PerlReturnScope {
+  /**
+   * @return true iff this element's contents should be inlined into the normal control flow.
+   */
+  default boolean includeInControlFlow() {
+    return false;
+  }
 }

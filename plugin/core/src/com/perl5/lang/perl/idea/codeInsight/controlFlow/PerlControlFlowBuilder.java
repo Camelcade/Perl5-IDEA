@@ -67,8 +67,6 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     WHILE_STATEMENT_MODIFIER
   );
 
-  private static final TokenSet INLINE_SUB_OWNERS = TokenSet.create(EVAL_EXPR);
-
   private static final TokenSet NO_RESULT_INSTRUCTIONS = TokenSet.create(
     EXIT_EXPR, GOTO_EXPR, NEXT_EXPR, LAST_EXPR, REDO_EXPR
   );
@@ -331,16 +329,6 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     private void acceptSafe(@Nullable PsiElement o) {
       if (o != null && !(o instanceof PerlBuiltInVariable)) {
         o.accept(this);
-      }
-    }
-
-    @Override
-    public void visitSubExpr(@NotNull PsiPerlSubExpr o) {
-      if (INLINE_SUB_OWNERS.contains(PsiUtilCore.getElementType(o.getParent()))) {
-        o.acceptChildren(this);
-      }
-      else {
-        startNodeSmart(o);
       }
     }
 
@@ -707,26 +695,28 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
 
     @Override
     public void visitExpr(@NotNull PsiPerlExpr o) {
-      PsiElement run = o.getFirstChild();
-      PsiElement lastRun = null;
       List<Instruction> instructionsToLink = new ArrayList<>();
-      while (run != null) {
-        if (!PerlPsiUtil.isCommentOrSpace(run)) {
-          run.accept(this);
-          IElementType elementType = PsiUtilCore.getElementType(run);
-          if (lastRun != null) {
-            if (elementType == OPERATOR_AND || elementType == OPERATOR_AND_LP) {
-              instructionsToLink.add(prevInstruction);
-              startPartialConditionalNode(run, o, lastRun, true);
-            }
-            else if (elementType == OPERATOR_OR || elementType == OPERATOR_OR_LP || elementType == OPERATOR_OR_DEFINED) {
-              instructionsToLink.add(prevInstruction);
-              startPartialConditionalNode(run, o, lastRun, false);
+      if (!(o instanceof PerlDieScope) || ((PerlDieScope)o).includeInControlFlow()) {
+        PsiElement run = o.getFirstChild();
+        PsiElement lastRun = null;
+        while (run != null) {
+          if (!PerlPsiUtil.isCommentOrSpace(run)) {
+            run.accept(this);
+            IElementType elementType = PsiUtilCore.getElementType(run);
+            if (lastRun != null) {
+              if (elementType == OPERATOR_AND || elementType == OPERATOR_AND_LP) {
+                instructionsToLink.add(prevInstruction);
+                startPartialConditionalNode(run, o, lastRun, true);
+              }
+              else if (elementType == OPERATOR_OR || elementType == OPERATOR_OR_LP || elementType == OPERATOR_OR_DEFINED) {
+                instructionsToLink.add(prevInstruction);
+                startPartialConditionalNode(run, o, lastRun, false);
+              }
             }
           }
+          lastRun = run;
+          run = run.getNextSibling();
         }
-        lastRun = run;
-        run = run.getNextSibling();
       }
       Instruction outerInstruction = startNodeSmart(o);
       instructionsToLink.forEach(instruction -> addEdge(instruction, outerInstruction));
