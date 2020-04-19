@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,10 @@ import org.jetbrains.annotations.Nullable;
 
 /**
  * Implement this interface if element contains anon sub, like eval, try, etc.
+ *
+ * @deprecated use {@link PerlBlockOwner} && {@link PerlDieScope} instead
  */
+@Deprecated
 public interface PerlSubOwner extends PsiElement {
   @Nullable
   default PsiPerlSubExpr getSub() {
