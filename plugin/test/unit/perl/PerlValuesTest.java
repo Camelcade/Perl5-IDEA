@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,11 +26,24 @@ import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebuggerEditorsProvider;
 import com.perl5.lang.perl.psi.PerlVariable;
 import org.junit.Test;
+
 public class PerlValuesTest extends PerlLightTestCase {
   @Override
   protected String getBaseDataPath() {
     return "testData/unit/perl/perlValues";
   }
+
+  @Test
+  public void testReturnScalarToList() {doTest();}
+
+  @Test
+  public void testReturnScalarToScalar() {doTest();}
+
+  @Test
+  public void testReturnSingleElementListToList() {doTest();}
+
+  @Test
+  public void testReturnSingleElementListToScalar() {doTest();}
 
   @Test
   public void testDefinedWithComment() {doTest();}

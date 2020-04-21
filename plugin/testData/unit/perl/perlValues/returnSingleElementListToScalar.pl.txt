@@ -1,0 +1,14 @@
+sub something{
+    return (42);
+}
+
+my $var = something;
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 56 in returnSingleElementListToScalar.pl
+scalar main::something()
+----------
+Resolved
+----------
+42
