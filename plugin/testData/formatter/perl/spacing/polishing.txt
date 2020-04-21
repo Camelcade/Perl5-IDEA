@@ -11,7 +11,7 @@ next $a;
 redo $a;
 goto FOO;
 return $a;
-return($a);
+return ($a);
 my $a;
 our $a;
 state $a;

@@ -174,6 +174,7 @@ public class PerlSpacingBuilderFactory {
       .afterInside(PERL_HANDLE_EXPR, PRINT_EXPR).spaces(1)
 
       .between(CUSTOM_EXPR_KEYWORDS, SEMICOLON).spaces(0)
+      .between(RESERVED_RETURN, PARENTHESISED_EXPR).spaces(1)
       .between(CUSTOM_EXPR_KEYWORDS, PARENTHESISED_EXPR).spaces(0)
       .after(CUSTOM_EXPR_KEYWORDS).spaces(1)
       .after(MOOSE_RESERVED_TOKENSET).spaces(1)
