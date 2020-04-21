@@ -34,6 +34,18 @@ public class PerlValuesTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testReturnScalarToList() {doTest();}
+
+  @Test
+  public void testReturnScalarToScalar() {doTest();}
+
+  @Test
+  public void testReturnSingleElementListToList() {doTest();}
+
+  @Test
+  public void testReturnSingleElementListToScalar() {doTest();}
+
+  @Test
   public void testAssignmentInPlace() {doTest();}
 
   @Test
