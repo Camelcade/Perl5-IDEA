@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.findusages;
 
+import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.usages.*;
@@ -24,6 +25,7 @@ import com.intellij.usages.rules.SingleParentUsageGroupingRule;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.ui.breadcrumbs.PerlBreadcrumbsProvider;
 import com.perl5.lang.perl.psi.PerlFile;
+import com.perl5.lang.perl.psi.PerlMethodModifier;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import org.jetbrains.annotations.NotNull;
@@ -71,6 +73,23 @@ class PerlUsageGroupingRule extends SingleParentUsageGroupingRule {
 
     if (structuralParentElement instanceof PerlNamespaceDefinitionElement) {
       return new PsiNamedElementUsageGroupBase<>((PerlNamespaceDefinitionElement)structuralParentElement);
+    }
+
+    if (structuralParentElement instanceof PerlMethodModifier) {
+      return new PsiElementUsageGroupBase<PerlMethodModifier>((PerlMethodModifier)structuralParentElement) {
+        @NotNull
+        @Override
+        public String getText(UsageView view) {
+          PerlMethodModifier modifier = getElement();
+          if (modifier != null) {
+            ItemPresentation presentation = modifier.getPresentation();
+            if (presentation != null) {
+              return StringUtil.notNullize(presentation.getPresentableText());
+            }
+          }
+          return super.getText(view);
+        }
+      };
     }
 
     return computeParentGroupFor(structuralParentElement.getParent());

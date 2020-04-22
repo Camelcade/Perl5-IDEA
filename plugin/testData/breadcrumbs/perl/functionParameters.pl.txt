@@ -1,0 +1,40 @@
+package Parent::Package;
+use Moose;
+
+method methodname() {
+    say 'method';<[Parent::Package, /package_gutter_icon.png: [methodname(), /method_gutter_icon.png>
+}
+
+fun funcname() {
+    say 'method';<[Parent::Package, /package_gutter_icon.png: [funcname(), /subroutine_gutter_icon.png>
+}
+
+method () {
+    say 'anon method';<[Parent::Package, /package_gutter_icon.png: [sub(), /perl5classic.png, null]>
+};
+
+fun () {
+    say 'anon method';<[Parent::Package, /package_gutter_icon.png: [sub(), /perl5classic.png, null]>
+};
+
+package Child::Package;
+use Moose;
+extends 'Parent::Package';
+
+before methodname(){
+    say 'before'<[Child::Package, /package_gutter_icon.png: [before methodname(), /method_gutter_icon.png>
+}
+
+after methodname(){
+    say 'after';<[Child::Package, /package_gutter_icon.png: [after methodname(), /method_gutter_icon.png>
+}
+
+around methodname(){
+    say 'around';<[Child::Package, /package_gutter_icon.png: [around methodname(), /method_gutter_icon.png>
+    $self->$orig();
+}
+
+# won't work with others IRL
+augment methodname(){
+    say 'augment';<[Child::Package, /package_gutter_icon.png: [augment methodname(), /method_gutter_icon.png>
+}

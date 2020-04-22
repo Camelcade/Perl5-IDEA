@@ -1,0 +1,41 @@
+package Parent::Package;
+use Moose;
+
+method methodname() {
+    say 'method';<caret>
+}
+
+fun funcname() {
+    say 'method';<caret>
+}
+
+method () {
+    say 'anon method';<caret>
+};
+
+fun () {
+    say 'anon method';<caret>
+};
+
+package Child::Package;
+use Moose;
+extends 'Parent::Package';
+
+before methodname(){
+    say 'before'<caret>
+}
+
+after methodname(){
+    say 'after';<caret>
+}
+
+around methodname(){
+    say 'around';<caret>
+    $self->$orig();
+}
+
+# won't work with others IRL
+augment methodname(){
+    say 'augment';<caret>
+}
+

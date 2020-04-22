@@ -17,6 +17,8 @@
 package com.perl5.lang.perl.idea.ui.breadcrumbs;
 
 import com.intellij.lang.Language;
+import com.intellij.navigation.ItemPresentation;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiTreeUtil;
@@ -30,6 +32,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import java.util.Objects;
 
 public class PerlBreadcrumbsProvider implements BreadcrumbsProvider {
 
@@ -41,6 +44,7 @@ public class PerlBreadcrumbsProvider implements BreadcrumbsProvider {
   @Override
   public boolean acceptElement(@NotNull PsiElement element) {
     return element instanceof PerlFile ||
+           element instanceof PerlMethodModifier ||
            element instanceof PerlSubDefinitionElement && ((PerlSubDefinitionElement)element).getSubName() != null ||
            element instanceof PerlSubExpr && (!(element.getParent() instanceof PerlSubOwner)) ||
            element instanceof PerlNamespaceDefinitionElement && ((PerlNamespaceDefinitionElement)element).getNamespaceName() != null;
@@ -66,8 +70,13 @@ public class PerlBreadcrumbsProvider implements BreadcrumbsProvider {
     }
 
     PsiElement nearestParent =
-      PsiTreeUtil.getParentOfType(element, PerlSubDefinitionElement.class, PerlNamespaceDefinitionElement.class, PerlSubExpr.class);
+      PsiTreeUtil.getParentOfType(element,
+                                  PerlSubDefinitionElement.class,
+                                  PerlNamespaceDefinitionElement.class,
+                                  PerlMethodModifier.class,
+                                  PerlSubExpr.class);
     if (nearestParent == null ||
+        nearestParent instanceof PerlMethodModifier ||
         nearestParent instanceof PerlSubDefinitionElement ||
         nearestParent instanceof PerlNamespaceDefinitionElement) {
       return nearestParent;
@@ -110,7 +119,13 @@ public class PerlBreadcrumbsProvider implements BreadcrumbsProvider {
       return ((PerlSubDefinition)element).getSubName() + "()";
     }
     else if (element instanceof PerlNamespaceDefinitionElement) {
-      return ((PerlNamespaceDefinition)element).getNamespaceName();
+      return Objects.requireNonNull(((PerlNamespaceDefinition)element).getNamespaceName());
+    }
+    else if (element instanceof PerlMethodModifier) {
+      ItemPresentation presentation = ((PerlMethodModifier)element).getPresentation();
+      if (presentation != null) {
+        return StringUtil.notNullize(presentation.getPresentableText());
+      }
     }
     else if (element instanceof PerlSubExpr) {
       return "sub()";

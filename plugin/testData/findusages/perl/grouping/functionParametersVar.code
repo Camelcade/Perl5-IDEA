@@ -1,0 +1,55 @@
+my $somevar;
+
+package Parent::Package;
+use Moose;
+
+method methodname() {
+    say 'method';
+    say $somevar;
+}
+
+fun funcname(){
+    say $somevar;
+}
+
+method () {
+    say 'method';
+    say $somevar;
+};
+
+fun (){
+    say $somevar;
+};
+
+package Child::Package;
+use Moose;
+extends 'Parent::Package';
+
+before methodname(){
+    say 'before';
+    say $somevar;
+}
+
+after methodname(){
+    say 'after';
+    say $somevar;
+}
+
+around methodname(){
+    say 'around';
+    $self->$orig();
+    say $some<caret>var;
+}
+
+# won't work with others
+augment methodname(){
+    say 'augment';
+    say $somevar;
+}
+
+#
+# method methodname() {
+#     say 'child method';
+# }
+#
+

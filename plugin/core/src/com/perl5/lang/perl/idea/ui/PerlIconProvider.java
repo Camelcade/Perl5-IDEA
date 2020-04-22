@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,8 @@ package com.perl5.lang.perl.idea.ui;
 
 import com.intellij.ide.IconProvider;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.psi.PerlSubExpr;
 import com.perl5.lang.perl.psi.PerlVariable;
@@ -27,6 +29,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 
 public class PerlIconProvider extends IconProvider {
   @Nullable
@@ -45,6 +49,19 @@ public class PerlIconProvider extends IconProvider {
     }
     else if (element instanceof PerlVariableDeclarationElement) {
       return getIcon(((PerlVariableDeclarationElement)element).getActualType());
+    }
+    IElementType elementType = PsiUtilCore.getElementType(element);
+    if (elementType == AFTER_MODIFIER) {
+      return PerlIcons.AFTER_MODIFIER_GUTTER_ICON;
+    }
+    if (elementType == BEFORE_MODIFIER) {
+      return PerlIcons.BEFORE_MODIFIER_GUTTER_ICON;
+    }
+    if (elementType == AROUND_MODIFIER) {
+      return PerlIcons.AROUND_MODIFIER_GUTTER_ICON;
+    }
+    if (elementType == AUGMENT_MODIFIER) {
+      return PerlIcons.AUGMENT_MODIFIER_GUTTER_ICON;
     }
     return null;
   }

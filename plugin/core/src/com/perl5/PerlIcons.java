@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -64,6 +64,10 @@ public class PerlIcons {
   public static final Icon XSUB_GUTTER_ICON = IconLoader.getIcon("/icons/xsub_gutter_icon.png");
   public static final Icon SUB_DECLARATION_GUTTER_ICON = IconLoader.getIcon("/icons/sub_declaration_gutter_icon.png");
   public static final Icon METHOD_GUTTER_ICON = IconLoader.getIcon("/icons/method_gutter_icon.png");
+  public static final Icon BEFORE_MODIFIER_GUTTER_ICON = METHOD_GUTTER_ICON;
+  public static final Icon AFTER_MODIFIER_GUTTER_ICON = METHOD_GUTTER_ICON;
+  public static final Icon AROUND_MODIFIER_GUTTER_ICON = METHOD_GUTTER_ICON;
+  public static final Icon AUGMENT_MODIFIER_GUTTER_ICON = METHOD_GUTTER_ICON;
   public static final Icon SUB_GUTTER_ICON = IconLoader.getIcon("/icons/subroutine_gutter_icon.png");
   public static final Icon CONSTANT_GUTTER_ICON = IconLoader.getIcon("/icons/constant_gutter_icon.png");
   public static final Icon ANON_SUB_ICON = SUB_GUTTER_ICON;

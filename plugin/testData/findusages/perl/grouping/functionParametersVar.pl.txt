@@ -1,0 +1,184 @@
+Usage: "somevar"; (100,107); reading; PerlVariableNameElementImpl(Perl5: SCALAR_NAME) at 100 in functionParametersVar.pl
+ - Rule: NonCodeUsageGroupingRule
+    CodeUsageGroup: Code usages; null
+
+ - Rule: UsageScopeGroupingRule
+    : Production; /package.svg
+
+ - Rule: UsageTypeGroupingRule
+    UsageTypeGroup: Value read; null
+
+ - Rule: ModuleGroupingRule
+    ModuleUsageGroup: light_idea_test_case; /Module.svg
+
+ - Rule: PackageGroupingRule
+    PackageGroup: ; /nodePlaceholder.svg
+
+ - Rule: NonJavaFileGroupingRule
+    FileUsageGroup: functionParametersVar.pl; /perl5classic.png
+
+ - Rule: PerlUsageGroupingRule
+    PsiElement: PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)@Parent::Package::methodname at 51 in functionParametersVar.pl
+
+
+Usage: "somevar"; (137,144); reading; PerlVariableNameElementImpl(Perl5: SCALAR_NAME) at 137 in functionParametersVar.pl
+ - Rule: NonCodeUsageGroupingRule
+    CodeUsageGroup: Code usages; null
+
+ - Rule: UsageScopeGroupingRule
+    : Production; /package.svg
+
+ - Rule: UsageTypeGroupingRule
+    UsageTypeGroup: Value read; null
+
+ - Rule: ModuleGroupingRule
+    ModuleUsageGroup: light_idea_test_case; /Module.svg
+
+ - Rule: PackageGroupingRule
+    PackageGroup: ; /nodePlaceholder.svg
+
+ - Rule: NonJavaFileGroupingRule
+    FileUsageGroup: functionParametersVar.pl; /perl5classic.png
+
+ - Rule: PerlUsageGroupingRule
+    PsiElement: PsiPerlFuncDefinitionImpl(FUNC_DEFINITION)@Parent::Package::funcname at 112 in functionParametersVar.pl
+
+
+Usage: "somevar"; (188,195); reading; PerlVariableNameElementImpl(Perl5: SCALAR_NAME) at 188 in functionParametersVar.pl
+ - Rule: NonCodeUsageGroupingRule
+    CodeUsageGroup: Code usages; null
+
+ - Rule: UsageScopeGroupingRule
+    : Production; /package.svg
+
+ - Rule: UsageTypeGroupingRule
+    UsageTypeGroup: Value read; null
+
+ - Rule: ModuleGroupingRule
+    ModuleUsageGroup: light_idea_test_case; /Module.svg
+
+ - Rule: PackageGroupingRule
+    PackageGroup: ; /nodePlaceholder.svg
+
+ - Rule: NonJavaFileGroupingRule
+    FileUsageGroup: functionParametersVar.pl; /perl5classic.png
+
+ - Rule: PerlUsageGroupingRule
+    PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Parent::Package at 14 in functionParametersVar.pl
+
+
+Usage: "somevar"; (218,225); reading; PerlVariableNameElementImpl(Perl5: SCALAR_NAME) at 218 in functionParametersVar.pl
+ - Rule: NonCodeUsageGroupingRule
+    CodeUsageGroup: Code usages; null
+
+ - Rule: UsageScopeGroupingRule
+    : Production; /package.svg
+
+ - Rule: UsageTypeGroupingRule
+    UsageTypeGroup: Value read; null
+
+ - Rule: ModuleGroupingRule
+    ModuleUsageGroup: light_idea_test_case; /Module.svg
+
+ - Rule: PackageGroupingRule
+    PackageGroup: ; /nodePlaceholder.svg
+
+ - Rule: NonJavaFileGroupingRule
+    FileUsageGroup: functionParametersVar.pl; /perl5classic.png
+
+ - Rule: PerlUsageGroupingRule
+    PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Parent::Package at 14 in functionParametersVar.pl
+
+
+Usage: "somevar"; (342,349); reading; PerlVariableNameElementImpl(Perl5: SCALAR_NAME) at 342 in functionParametersVar.pl
+ - Rule: NonCodeUsageGroupingRule
+    CodeUsageGroup: Code usages; null
+
+ - Rule: UsageScopeGroupingRule
+    : Production; /package.svg
+
+ - Rule: UsageTypeGroupingRule
+    UsageTypeGroup: Value read; null
+
+ - Rule: ModuleGroupingRule
+    ModuleUsageGroup: light_idea_test_case; /Module.svg
+
+ - Rule: PackageGroupingRule
+    PackageGroup: ; /nodePlaceholder.svg
+
+ - Rule: NonJavaFileGroupingRule
+    FileUsageGroup: functionParametersVar.pl; /perl5classic.png
+
+ - Rule: PerlUsageGroupingRule
+    PsiElement: PsiPerlBeforeModifierImpl(Perl5: BEFORE_MODIFIER) at 294 in functionParametersVar.pl; navigated to: PerlSubNameElementImpl(Perl5: subname) at 301 in functionParametersVar.pl
+
+
+Usage: "somevar"; (400,407); reading; PerlVariableNameElementImpl(Perl5: SCALAR_NAME) at 400 in functionParametersVar.pl
+ - Rule: NonCodeUsageGroupingRule
+    CodeUsageGroup: Code usages; null
+
+ - Rule: UsageScopeGroupingRule
+    : Production; /package.svg
+
+ - Rule: UsageTypeGroupingRule
+    UsageTypeGroup: Value read; null
+
+ - Rule: ModuleGroupingRule
+    ModuleUsageGroup: light_idea_test_case; /Module.svg
+
+ - Rule: PackageGroupingRule
+    PackageGroup: ; /nodePlaceholder.svg
+
+ - Rule: NonJavaFileGroupingRule
+    FileUsageGroup: functionParametersVar.pl; /perl5classic.png
+
+ - Rule: PerlUsageGroupingRule
+    PsiElement: PsiPerlAfterModifierImpl(Perl5: AFTER_MODIFIER) at 354 in functionParametersVar.pl; navigated to: PerlSubNameElementImpl(Perl5: subname) at 360 in functionParametersVar.pl
+
+
+Usage: "somevar"; (480,487); reading; PerlVariableNameElementImpl(Perl5: SCALAR_NAME) at 480 in functionParametersVar.pl
+ - Rule: NonCodeUsageGroupingRule
+    CodeUsageGroup: Code usages; null
+
+ - Rule: UsageScopeGroupingRule
+    : Production; /package.svg
+
+ - Rule: UsageTypeGroupingRule
+    UsageTypeGroup: Value read; null
+
+ - Rule: ModuleGroupingRule
+    ModuleUsageGroup: light_idea_test_case; /Module.svg
+
+ - Rule: PackageGroupingRule
+    PackageGroup: ; /nodePlaceholder.svg
+
+ - Rule: NonJavaFileGroupingRule
+    FileUsageGroup: functionParametersVar.pl; /perl5classic.png
+
+ - Rule: PerlUsageGroupingRule
+    PsiElement: PsiPerlAroundModifierImpl(Perl5: AROUND_MODIFIER) at 412 in functionParametersVar.pl; navigated to: PerlSubNameElementImpl(Perl5: subname) at 419 in functionParametersVar.pl
+
+
+Usage: "somevar"; (567,574); reading; PerlVariableNameElementImpl(Perl5: SCALAR_NAME) at 567 in functionParametersVar.pl
+ - Rule: NonCodeUsageGroupingRule
+    CodeUsageGroup: Code usages; null
+
+ - Rule: UsageScopeGroupingRule
+    : Production; /package.svg
+
+ - Rule: UsageTypeGroupingRule
+    UsageTypeGroup: Value read; null
+
+ - Rule: ModuleGroupingRule
+    ModuleUsageGroup: light_idea_test_case; /Module.svg
+
+ - Rule: PackageGroupingRule
+    PackageGroup: ; /nodePlaceholder.svg
+
+ - Rule: NonJavaFileGroupingRule
+    FileUsageGroup: functionParametersVar.pl; /perl5classic.png
+
+ - Rule: PerlUsageGroupingRule
+    PsiElement: PsiPerlAugmentModifierImpl(Perl5: AUGMENT_MODIFIER) at 517 in functionParametersVar.pl; navigated to: PerlSubNameElementImpl(Perl5: subname) at 525 in functionParametersVar.pl
+
+

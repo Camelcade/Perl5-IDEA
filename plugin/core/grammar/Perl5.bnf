@@ -386,6 +386,7 @@
     name(".+expr")="expression"
     extends("number_constant")=expr
 
+    mixin("around_modifier|after_modifier|before_modifier|augment_modifier")="com.perl5.lang.perl.psi.mixins.PerlMethodModifierMixin"
     implements("around_modifier|after_modifier|before_modifier|augment_modifier")="com.perl5.lang.perl.psi.PerlMethodModifier"
 
     implements("next_expr|last_expr|redo_expr")="com.perl5.lang.perl.psi.PerlFlowControlExpr"
