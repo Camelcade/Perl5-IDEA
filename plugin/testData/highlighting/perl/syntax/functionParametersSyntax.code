@@ -1,0 +1,34 @@
+fun foo($x, $y, :$z, $, @): proto($) {
+    return $x + $y + $z;
+}
+fun ($x, $y, :$z, $, @): proto($) {
+    return $x + $y + $z;
+};
+
+method foo($class: $x, $y, :$z, $, @): proto($) {
+    return $x + $y + $z;
+}
+
+method ($class: $x, $y, :$z, $, @): proto($) {
+    return $x + $y + $z;
+};
+
+override foo($class: $x, $y, :$z, $, @): proto($) {
+    return $x + $y + $z;
+}
+
+after foo($class: $x, $y, :$z, $, @): proto($) {
+    return $x + $y + $z;
+}
+
+before foo($class: $x, $y, :$z, $, @): proto($) {
+    return $x + $y + $z;
+}
+
+around foo($original, $class: $x, $y, :$z, $, @): proto($) {
+    return $x + $y + $z;
+}
+
+augment foo($class: $x, $y, :$z, $, @): proto($) {
+    return $x + $y + $z;
+}
