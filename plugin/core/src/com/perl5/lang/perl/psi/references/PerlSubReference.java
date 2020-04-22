@@ -18,13 +18,19 @@ package com.perl5.lang.perl.psi.references;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.ResolveResult;
+import com.intellij.psi.util.PsiUtilCore;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlCallObjectValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlCallValue;
 import com.perl5.lang.perl.psi.PerlMethod;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+
+import static com.perl5.lang.perl.lexer.PerlTokenSets.MODIFIER_DECLARATIONS_TOKENSET;
 
 public class PerlSubReference extends PerlSubReferenceSimple {
 
@@ -39,17 +45,22 @@ public class PerlSubReference extends PerlSubReferenceSimple {
     assert element instanceof PerlSubNameElement;
 
     PsiElement parent = element.getParent();
-    if (!(parent instanceof PerlMethod)) {
-      return ResolveResult.EMPTY_ARRAY;
+    PerlCallValue perlValue = null;
+    if (parent instanceof PerlMethod) {
+      perlValue = PerlCallValue.from(parent);
+    }
+    else if (MODIFIER_DECLARATIONS_TOKENSET.contains(PsiUtilCore.getElementType(parent))) {
+      perlValue = PerlCallObjectValue.create(PerlPackageUtil.getContextNamespaceName(myElement),
+                                             myElement.getText(),
+                                             Collections.emptyList());
     }
 
-    PerlCallValue perlValue = PerlCallValue.from(parent);
     if (perlValue == null) {
       return ResolveResult.EMPTY_ARRAY;
     }
 
     List<PsiElement> relatedItems = new ArrayList<>();
     perlValue.processCallTargets(element, relatedItems::add);
-    return getResolveResults(relatedItems).toArray(new ResolveResult[0]);
+    return getResolveResults(relatedItems).toArray(ResolveResult.EMPTY_ARRAY);
   }
 }

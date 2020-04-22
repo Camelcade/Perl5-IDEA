@@ -1,0 +1,36 @@
+PerlNamespaceFileReference at (29,34); text in range: 'Moose' => 0 results:
+
+PerlNamespaceFileReference at (108,113); text in range: 'Moose' => 0 results:
+
+PerlSubReference at (115,122); text in range: 'extends' => 0 results:
+
+PerlNamespaceReference at (124,139); text in range: 'Parent::Package' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Parent::Package at 0 in functionParametersMethodModifiersSuper.pl
+
+PerlSubReference at (150,160); text in range: 'methodname' => 1 results:
+	PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)@Parent::Package::methodname at 37 in functionParametersMethodModifiersSuper.pl
+
+PerlSubReference at (190,200); text in range: 'methodname' => 1 results:
+	PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)@Parent::Package::methodname at 37 in functionParametersMethodModifiersSuper.pl
+
+PerlSubReference at (231,241); text in range: 'methodname' => 1 results:
+	PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)@Parent::Package::methodname at 37 in functionParametersMethodModifiersSuper.pl
+
+PerlVariableReference at (268,272); text in range: 'self' => 0 results:
+
+PerlVariableReference at (275,279); text in range: 'orig' => 0 results:
+
+PerlSubReference at (323,333); text in range: 'methodname' => 1 results:
+	PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)@Parent::Package::methodname at 37 in functionParametersMethodModifiersSuper.pl
+
+PerlNamespaceReference at (383,397); text in range: 'Child::Package' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Child::Package at 80 in functionParametersMethodModifiersSuper.pl
+
+PerlSubReference at (399,402); text in range: 'new' => 0 results:
+
+PerlVariableReference at (405,408); text in range: 'obj' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 376 in functionParametersMethodModifiersSuper.pl
+
+PerlSubReference at (410,420); text in range: 'methodname' => 1 results:
+	PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)@Parent::Package::methodname at 37 in functionParametersMethodModifiersSuper.pl
+

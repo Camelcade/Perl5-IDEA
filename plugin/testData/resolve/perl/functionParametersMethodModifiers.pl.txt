@@ -1,0 +1,36 @@
+PerlNamespaceFileReference at (29,34); text in range: 'Moose' => 0 results:
+
+PerlNamespaceFileReference at (108,113); text in range: 'Moose' => 0 results:
+
+PerlSubReference at (115,122); text in range: 'extends' => 0 results:
+
+PerlNamespaceReference at (124,139); text in range: 'Parent::Package' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Parent::Package at 0 in functionParametersMethodModifiers.pl
+
+PerlSubReference at (150,160); text in range: 'methodname' => 1 results:
+	PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)@Child::Package::methodname at 359 in functionParametersMethodModifiers.pl
+
+PerlSubReference at (190,200); text in range: 'methodname' => 1 results:
+	PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)@Child::Package::methodname at 359 in functionParametersMethodModifiers.pl
+
+PerlSubReference at (231,241); text in range: 'methodname' => 1 results:
+	PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)@Child::Package::methodname at 359 in functionParametersMethodModifiers.pl
+
+PerlVariableReference at (268,272); text in range: 'self' => 0 results:
+
+PerlVariableReference at (275,279); text in range: 'orig' => 0 results:
+
+PerlSubReference at (323,333); text in range: 'methodname' => 1 results:
+	PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)@Child::Package::methodname at 359 in functionParametersMethodModifiers.pl
+
+PerlNamespaceReference at (432,446); text in range: 'Child::Package' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Child::Package at 80 in functionParametersMethodModifiers.pl
+
+PerlSubReference at (448,451); text in range: 'new' => 0 results:
+
+PerlVariableReference at (454,457); text in range: 'obj' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 425 in functionParametersMethodModifiers.pl
+
+PerlSubReference at (459,469); text in range: 'methodname' => 1 results:
+	PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)@Child::Package::methodname at 359 in functionParametersMethodModifiers.pl
+

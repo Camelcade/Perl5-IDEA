@@ -353,4 +353,8 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
     VARIABLE_DECLARATION_LEXICAL,
     VARIABLE_DECLARATION_LOCAL
   );
+
+  TokenSet MODIFIER_DECLARATIONS_TOKENSET = TokenSet.create(
+    AFTER_MODIFIER, BEFORE_MODIFIER, AROUND_MODIFIER, AUGMENT_MODIFIER
+  );
 }
