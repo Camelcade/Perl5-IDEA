@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,10 +45,7 @@ import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.BitSet;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static com.intellij.formatting.WrapType.*;
 import static com.intellij.psi.codeStyle.CommonCodeStyleSettings.*;
@@ -246,11 +243,11 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       ASTNode parentNode = parent.getNode();
       IElementType parentNodeType = PsiUtilCore.getElementType(parentNode);
       ASTNode child1Node = ((ASTBlock)child1).getNode();
-      IElementType child1Type = child1Node.getElementType();
+      IElementType child1Type = PsiUtilCore.getElementType(child1Node);
       ASTNode child2Node = ((ASTBlock)child2).getNode();
-      IElementType child2Type = child2Node.getElementType();
+      IElementType child2Type = PsiUtilCore.getElementType(child2Node);
 
-      if (ALL_QUOTE_OPENERS.contains(child1Type)) {
+      if (ALL_QUOTE_OPENERS.contains(child1Type) && child2Node != null) {
         CharSequence openerChars = child2Node.getChars();
         int spaces = 0;
         if (openerChars.length() > 0 && Character.isUnicodeIdentifierPart(openerChars.charAt(0))) {
@@ -297,12 +294,13 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
           (BLOCK_OPENERS.contains(child1Type) && ((PerlFormattingBlock)child1).isFirst()
            || BLOCK_CLOSERS.contains(child2Type) && ((PerlFormattingBlock)child2).isLast()
           )
-          && !isNewLineForbiddenAt(child1Node)
+          && !isNewLineForbiddenAt(Objects.requireNonNull(child1Node))
         ) {
         return Spacing.createSpacing(0, 0, 1, true, 1);
       }
       if (parentNodeType == PARENTHESISED_CALL_ARGUMENTS &&
           child2Type == RIGHT_PAREN &&
+          child1Node != null &&
           PsiUtilCore.getElementType(PsiTreeUtil.getDeepestLast(child1Node.getPsi())) == RIGHT_PAREN
         ) {
         return Spacing.createSpacing(0, 0, 0, true, 0);

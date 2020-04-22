@@ -58,15 +58,15 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
   public void customizeSettings(@NotNull CodeStyleSettingsCustomizable consumer, @NotNull SettingsType settingsType) {
     if (settingsType == SPACING_SETTINGS) {
       consumer.showStandardOptions(
-        "SPACE_AROUND_ASSIGNMENT_OPERATORS",    // implemented
-        "SPACE_AROUND_LOGICAL_OPERATORS",        // implemented
-        "SPACE_AROUND_EQUALITY_OPERATORS",        // implemented
-        "SPACE_AROUND_RELATIONAL_OPERATORS",    // implemented
-        "SPACE_AROUND_BITWISE_OPERATORS",        // implemented
-        "SPACE_AROUND_ADDITIVE_OPERATORS",        // implemented
-        "SPACE_AROUND_MULTIPLICATIVE_OPERATORS",// implemented
-        "SPACE_AROUND_SHIFT_OPERATORS",            // implemented
-        "SPACE_AROUND_UNARY_OPERATOR",            // implemented
+        "SPACE_AROUND_ASSIGNMENT_OPERATORS",
+        "SPACE_AROUND_LOGICAL_OPERATORS",
+        "SPACE_AROUND_EQUALITY_OPERATORS",
+        "SPACE_AROUND_RELATIONAL_OPERATORS",
+        "SPACE_AROUND_BITWISE_OPERATORS",
+        "SPACE_AROUND_ADDITIVE_OPERATORS",
+        "SPACE_AROUND_MULTIPLICATIVE_OPERATORS",
+        "SPACE_AROUND_SHIFT_OPERATORS",
+        "SPACE_AROUND_UNARY_OPERATOR",
 
         "SPACE_BEFORE_METHOD_PARENTHESES",
         "SPACE_WITHIN_METHOD_PARENTHESES",
@@ -74,24 +74,24 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
 
         "SPACE_WITHIN_METHOD_CALL_PARENTHESES", // method()
 
-        "SPACE_AFTER_COMMA",    // implemented
-        "SPACE_BEFORE_COMMA",   // implemented
+        "SPACE_AFTER_COMMA",
+        "SPACE_BEFORE_COMMA",
 
         "SPACE_BEFORE_QUEST",
         "SPACE_AFTER_QUEST",
         "SPACE_BEFORE_COLON",
-        "SPACE_AFTER_COLON",    // implemented
+        "SPACE_AFTER_COLON",
 
-        "SPACE_AFTER_SEMICOLON",    // implemented
-        "SPACE_BEFORE_SEMICOLON",    // implemented
+        "SPACE_AFTER_SEMICOLON",
+        "SPACE_BEFORE_SEMICOLON",
 
-        "SPACE_BEFORE_IF_PARENTHESES",    // implemented, any conditional block, for and iterator
+        "SPACE_BEFORE_IF_PARENTHESES",    // any conditional block, for and iterator
 
         "SPACE_WITHIN_BRACES",            // for code blocks
         "SPACE_WITHIN_IF_PARENTHESES",    // condition, for iterator
         "SPACE_WITHIN_PARENTHESES",       // @a = (something)
 
-        "SPACE_BEFORE_IF_LBRACE",        // implemented, any or undonditional conditional block, for,
+        "SPACE_BEFORE_IF_LBRACE",        //  any or unconditional conditional block, for,
 
         "SPACE_BEFORE_ELSE_KEYWORD",    // implemented, else,elsif,continue,default
 
