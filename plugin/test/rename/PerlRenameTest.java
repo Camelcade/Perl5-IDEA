@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,12 +18,40 @@ package rename;
 
 
 import base.PerlLightTestCase;
+import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.ui.TestDialog;
 import org.junit.Test;
+
 public class PerlRenameTest extends PerlLightTestCase {
+  @Override
+  protected void tearDown() throws Exception {
+    try {
+      Messages.setTestDialog(TestDialog.DEFAULT);
+    }
+    finally {
+      super.tearDown();
+    }
+  }
+
   @Override
   protected String getBaseDataPath() {
     return "testData/rename/perl";
   }
+
+  @Test
+  public void testFunctionParametersMethodModifiers() {
+    Messages.setTestDialog(TestDialog.OK);
+    doTestRename();
+  }
+
+  @Test
+  public void testFunctionParametersMethodModifiersCurrent() {
+    Messages.setTestDialog(TestDialog.NO);
+    doTestRename();
+  }
+
+  @Test
+  public void testFunctionParametersMethodModifiersSuper() {doTestRename();}
 
   @Test
   public void testPackageTag() {doTestRename();}

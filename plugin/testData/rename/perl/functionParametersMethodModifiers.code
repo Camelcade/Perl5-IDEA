@@ -1,0 +1,36 @@
+package Parent::Package;
+use Moose;
+
+method methodname() {
+    say 'method';
+}
+
+package Child::Package;
+use Moose;
+extends 'Parent::Package';
+
+before meth<caret>odname(){
+    say 'before'
+}
+
+after methodname(){
+    say 'after';
+}
+
+around methodname(){
+    say 'around';
+    $self->$orig();
+}
+
+# won't work with others IRL
+augment methodname(){
+    say 'augment';
+}
+
+method methodname() {
+    say 'child method';
+}
+
+package main;
+my $obj = Child::Package->new;
+$obj->methodname();

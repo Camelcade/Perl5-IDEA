@@ -1,0 +1,32 @@
+package Parent::Package;
+use Moose;
+
+method NewName() {
+    say 'method';
+}
+
+package Child::Package;
+use Moose;
+extends 'Parent::Package';
+
+before NewName(){
+    say 'before'
+}
+
+after NewName(){
+    say 'after';
+}
+
+around NewName(){
+    say 'around';
+    $self->$orig();
+}
+
+# won't work with others irl
+augment NewName(){
+    say 'augment';
+}
+
+package main;
+my $obj = Child::Package->new;
+$obj->NewName();

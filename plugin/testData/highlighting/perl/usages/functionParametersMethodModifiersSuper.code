@@ -1,0 +1,32 @@
+package Parent::Package;
+use Moose;
+
+method methodname() {
+    say 'method';
+}
+
+package Child::Package;
+use Moose;
+extends 'Parent::Package';
+
+before methodname(){
+    say 'before'
+}
+
+after method<caret>name(){
+    say 'after';
+}
+
+around methodname(){
+    say 'around';
+    $self->$orig();
+}
+
+# won't work with others irl
+augment methodname(){
+    say 'augment';
+}
+
+package main;
+my $obj = Child::Package->new;
+$obj->methodname();

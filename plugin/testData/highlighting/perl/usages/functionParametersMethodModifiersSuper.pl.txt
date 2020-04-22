@@ -1,0 +1,32 @@
+package Parent::Package;
+use Moose;
+
+method <WRITE>methodname</WRITE>() {
+    say 'method';
+}
+
+package Child::Package;
+use Moose;
+extends 'Parent::Package';
+
+before <READ>methodname</READ>(){
+    say 'before'
+}
+
+after <READ>methodname</READ>(){
+    say 'after';
+}
+
+around <READ>methodname</READ>(){
+    say 'around';
+    $self->$orig();
+}
+
+# won't work with others irl
+augment <READ>methodname</READ>(){
+    say 'augment';
+}
+
+package main;
+my $obj = Child::Package->new;
+$obj-><READ>methodname</READ>();

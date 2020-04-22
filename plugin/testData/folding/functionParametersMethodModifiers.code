@@ -1,0 +1,40 @@
+package Parent::Package;
+use Moose;
+
+fun funcname()<fold text='{code block}'>{
+  say 'func';
+}</fold>
+
+method methodname() <fold text='{code block}'>{
+    say 'method';
+}</fold>
+
+package Child::Package;
+use Moose;
+extends 'Parent::Package';
+
+before methodname()<fold text='{code block}'>{
+    say 'before'
+}</fold>
+
+after methodname()<fold text='{code block}'>{
+    say 'after';
+}</fold>
+
+around methodname()<fold text='{code block}'>{
+    say 'around';
+    $self->$orig();
+}</fold>
+
+# won't work with others IRL
+augment methodname()<fold text='{code block}'>{
+    say 'augment';
+}</fold>
+
+method methodname() <fold text='{code block}'>{
+    say 'child method';
+}</fold>
+
+package main;
+my $obj = Child::Package->new;
+$obj->methodname();
