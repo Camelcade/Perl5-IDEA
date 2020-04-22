@@ -98,6 +98,18 @@ public class PerlFormatterSpacingTest extends PerlFormatterTestCase {
   }
 
   @Test
+  public void testSpaceInsideDereferenceTrue() {
+    getSettings().SPACE_WITHIN_CAST_PARENTHESES = true;
+    doFormatTest();
+  }
+
+  @Test
+  public void testSpaceInsideDereferenceFalse() {
+    getSettings().SPACE_WITHIN_CAST_PARENTHESES = false;
+    doFormatTest();
+  }
+
+  @Test
   public void testDeclarationsBeforeSignatureTrue() {
     getSettings().SPACE_BEFORE_METHOD_PARENTHESES = true;
     doTestDeclarations();
