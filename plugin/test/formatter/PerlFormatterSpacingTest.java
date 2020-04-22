@@ -27,6 +27,9 @@ public class PerlFormatterSpacingTest extends PerlFormatterTestCase {
   }
 
   @Test
+  public void testIssue2158() {doFormatTest();}
+
+  @Test
   public void testAsyncSubs() {doFormatTest();}
 
   @Test

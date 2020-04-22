@@ -707,7 +707,7 @@ keys_expr ::= 'keys' single_argument_expr {pin=1}
 values_expr ::= 'values' single_argument_expr {pin=1}
 each_expr ::= 'each' single_argument_expr {pin=1}
 defined_expr ::= 'defined' [unary_expr] {pin=1}
-wantarray_expr ::= 'wantarray'
+wantarray_expr ::= 'wantarray' [default_parenthesised_call_arguments] {pin=1}
 delete_expr ::= 'delete' unary_expr {pin=1}
 splice_expr ::= 'splice' parse_list_expr {pin=1}
 bless_expr ::= 'bless' parse_list_expr {pin=1}
