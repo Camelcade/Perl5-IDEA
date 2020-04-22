@@ -41,6 +41,9 @@ public class PerlParserTest extends PerlParserTestBase {
   }
 
   @Test
+  public void testIssue2158() {doTest();}
+
+  @Test
   public void testSlices520() {doTest();}
 
   @Test
