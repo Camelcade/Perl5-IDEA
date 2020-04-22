@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -87,7 +87,8 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
 
         "SPACE_BEFORE_IF_PARENTHESES",    // any conditional block, for and iterator
 
-        "SPACE_WITHIN_BRACES",            // for code blocks
+        "SPACE_WITHIN_BRACES",            // code blocks
+        "SPACE_WITHIN_CAST_PARENTHESES",  // dereference expressions ${...}
         "SPACE_WITHIN_IF_PARENTHESES",    // condition, for iterator
         "SPACE_WITHIN_PARENTHESES",       // @a = (something)
 
@@ -103,6 +104,7 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
       consumer.renameStandardOption("SPACE_BEFORE_DO_LBRACE", PerlBundle.message("perl.formatting.term.block"));
       consumer.renameStandardOption("SPACE_WITHIN_IF_PARENTHESES", PerlBundle.message("perl.formatting.condition"));
       consumer.renameStandardOption("SPACE_WITHIN_BRACES", PerlBundle.message("perl.formatting.within.code.block"));
+      consumer.renameStandardOption("SPACE_WITHIN_CAST_PARENTHESES", PerlBundle.message("perl.formatting.within.braced.dereference"));
       consumer.renameStandardOption("SPACE_BEFORE_METHOD_PARENTHESES", PerlBundle.message("perl.formatting.sub.signature"));
       consumer.renameStandardOption("SPACE_WITHIN_METHOD_PARENTHESES", PerlBundle.message("perl.formatting.signature.parentheses"));
       consumer

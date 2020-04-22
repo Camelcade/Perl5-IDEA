@@ -289,20 +289,29 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
         }
       }
 
-      // small inline blocks
-      if (parentNodeType == BLOCK && !inGrepMapSort(parentNode) && !blockHasLessChildrenThan(parentNode, 2) &&
-          (BLOCK_OPENERS.contains(child1Type) && ((PerlFormattingBlock)child1).isFirst()
-           || BLOCK_CLOSERS.contains(child2Type) && ((PerlFormattingBlock)child2).isLast()
-          )
-          && !isNewLineForbiddenAt(Objects.requireNonNull(child1Node))
-        ) {
-        return Spacing.createSpacing(0, 0, 1, true, 1);
+      if (parentNodeType == BLOCK) {
+        boolean afterOpener = BLOCK_OPENERS.contains(child1Type) && ((PerlFormattingBlock)child1).isFirst();
+        boolean beforeCloser = BLOCK_CLOSERS.contains(child2Type) && ((PerlFormattingBlock)child2).isLast();
+        IElementType grandParentElementType = PsiUtilCore.getElementType(parentNode.getTreeParent());
+        if (PerlTokenSets.CAST_EXPRESSIONS.contains(grandParentElementType)) {
+          int spaces = getSettings().SPACE_WITHIN_CAST_PARENTHESES ? 1 : 0;
+          return Spacing.createSpacing(spaces, spaces, 0, true, 0);
+        }
+
+        // small inline blocks
+        if (grandParentElementType != GREP_EXPR && grandParentElementType != SORT_EXPR && grandParentElementType != MAP_EXPR) {
+          boolean isSmallBlock = blockHasLessChildrenThan(parentNode, 2);
+          boolean isNewLineAllowed = !isNewLineForbiddenAt(Objects.requireNonNull(child1Node));
+          if (!isSmallBlock && (afterOpener || beforeCloser) && isNewLineAllowed) {
+            return Spacing.createSpacing(0, 0, 1, true, 1);
+          }
+        }
       }
       if (parentNodeType == PARENTHESISED_CALL_ARGUMENTS &&
           child2Type == RIGHT_PAREN &&
           child1Node != null &&
           PsiUtilCore.getElementType(PsiTreeUtil.getDeepestLast(child1Node.getPsi())) == RIGHT_PAREN
-        ) {
+      ) {
         return Spacing.createSpacing(0, 0, 0, true, 0);
       }
 
@@ -322,18 +331,6 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       }
     }
     return getSpacingBuilder().getSpacing(parent, child1, child2);
-  }
-
-  /**
-   * Check if we are in grep map or sort
-   *
-   * @return check result
-   */
-  private static boolean inGrepMapSort(@NotNull ASTNode node) {
-    ASTNode parent = node.getTreeParent();
-    IElementType parentElementType;
-    return parent != null &&
-           ((parentElementType = parent.getElementType()) == GREP_EXPR || parentElementType == SORT_EXPR || parentElementType == MAP_EXPR);
   }
 
   /**
