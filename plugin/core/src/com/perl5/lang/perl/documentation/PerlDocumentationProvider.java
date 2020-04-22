@@ -121,7 +121,7 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
     if (elementType == RESERVED_AUGMENT_FP) {
       return PerlDocUtil.resolveDescriptor(PodLinkDescriptor.create(FUNCTION_PARAMETERS, KEYWORD_AUGMENT), contextElement, false);
     }
-    if (elementType == RESERVED_FUN) {
+    if (elementType == RESERVED_FUN || elementType == RESERVED_METHOD || elementType == RESERVED_METHOD_FP) {
       return PerlDocUtil.resolveDescriptor(PodLinkDescriptor.create(FUNCTION_PARAMETERS, SECTION_DESCRIPTION), contextElement, false);
     }
     if (elementType == RESERVED_OVERRIDE_FP) {

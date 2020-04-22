@@ -1,0 +1,3 @@
+method ($factor, @values) {
+    return map { $_ * $factor } @values;
+}

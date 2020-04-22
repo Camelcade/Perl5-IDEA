@@ -1,0 +1,3 @@
+before foo($, @) {
+    return $x + $y;
+}

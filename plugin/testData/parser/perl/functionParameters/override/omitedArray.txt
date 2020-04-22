@@ -1,0 +1,33 @@
+Subtree: Perl5 (Perl5)
+Perl5
+  PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)@main::foo
+    PsiElement(Perl5: fp_override)('override')
+    PerlSubNameElementImpl(Perl5: subname)('foo')
+    PsiElement(Perl5: ()('(')
+    PsiPerlMethodSignatureContentImpl(Perl5: METHOD_SIGNATURE_CONTENT)
+      PsiPerlSubSignatureElementIgnoreImpl(Perl5: SUB_SIGNATURE_ELEMENT_IGNORE)
+        PsiElement(Perl5: $$)('$')
+      PsiElement(Perl5: ,)(',')
+      PsiPerlSubSignatureElementIgnoreImpl(Perl5: SUB_SIGNATURE_ELEMENT_IGNORE)
+        PsiElement(Perl5: $@)('@')
+    PsiElement(Perl5: ))(')')
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlReturnExprImpl(Perl5: RETURN_EXPR)
+          PsiElement(Perl5: return)('return')
+          PsiPerlAddExprImpl(Perl5: ADD_EXPR)
+            PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+              PsiElement(Perl5: $$)('$')
+              PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('x')
+            PsiElement(Perl5: +)('+')
+            PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+              PsiElement(Perl5: $$)('$')
+              PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('y')
+        PsiElement(Perl5: ;)(';')
+      PsiElement(Perl5: })('}')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('override foo($, @) {\n    return $x + $y;\n}')
+--------------------------------------------------------------------------------

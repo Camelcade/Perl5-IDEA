@@ -63,6 +63,16 @@ public class PerlFunctionParametersQuickDocTest extends PerlQuickDocTestCase {
   }
 
   @Test
+  public void testKeywordMethod() {
+    doTest();
+  }
+
+  @Test
+  public void testKeywordMethodAnon() {
+    doTest();
+  }
+
+  @Test
   public void testKeywordOverride() {
     doTest();
   }

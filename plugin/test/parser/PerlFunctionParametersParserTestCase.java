@@ -33,6 +33,9 @@ public abstract class PerlFunctionParametersParserTestCase extends PerlParserTes
   public void testOmited() {doTest();}
 
   @Test
+  public void testOmitedArray() {doTest();}
+
+  @Test
   public void testTyped() {doTest();}
 
   @Test
@@ -154,6 +157,14 @@ public abstract class PerlFunctionParametersParserTestCase extends PerlParserTes
     @Override
     protected String getDataDirName() {
       return "funAnon";
+    }
+  }
+
+  public static class MethodAnonTest extends FunctionTestCase {
+    @NotNull
+    @Override
+    protected String getDataDirName() {
+      return "methodAnon";
     }
   }
 

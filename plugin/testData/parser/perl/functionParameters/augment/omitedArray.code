@@ -1,0 +1,3 @@
+augment foo($, @) {
+    return $x + $y;
+}

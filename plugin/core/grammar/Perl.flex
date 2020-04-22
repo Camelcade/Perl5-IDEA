@@ -996,6 +996,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 	{CORE_PREFIX}"undef"		{yybegin(AFTER_IDENTIFIER); return RESERVED_UNDEF;}
 
         "async" / {SPACES_OR_COMMENTS} "method" {return RESERVED_ASYNC;}
+	"method" / {SPACES_OR_COMMENTS}"("      {pushStateAndBegin(YYINITIAL,METHOD_DECLARATION_CONTENT); return RESERVED_METHOD_FP;}
 	"method"			        {yybegin(METHOD_DECLARATION); return RESERVED_METHOD;}
 	"func"				        {yybegin(METHOD_DECLARATION); return RESERVED_FUNC;}
 	"fun"  / {FP_SUFFIX}		        {yybegin(METHOD_DECLARATION); return RESERVED_FUN;}

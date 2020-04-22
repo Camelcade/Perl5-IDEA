@@ -1,0 +1,3 @@
+after foo($, @) {
+    return $x + $y;
+}

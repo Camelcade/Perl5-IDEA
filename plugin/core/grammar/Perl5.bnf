@@ -183,6 +183,7 @@
     RESERVED_METHOD='method'
     RESERVED_FUNC='func'
     RESERVED_FUN='fun'
+    RESERVED_METHOD_FP='fp_method'
 
     RESERVED_AFTER_FP='fp_after'
     RESERVED_AROUND_FP='fp_around'
@@ -516,7 +517,7 @@
 	implements("map_expr")="com.perl5.lang.perl.psi.PerlMapExpr"
 	implements("sort_expr")="com.perl5.lang.perl.psi.PerlSortExpr"
 	implements("eval_expr")="com.perl5.lang.perl.psi.PerlEvalExpr"
-	implements("sub_expr|fun_expr")="com.perl5.lang.perl.psi.PerlSubExpr"
+	implements("sub_expr|fun_expr|method_expr")="com.perl5.lang.perl.psi.PerlSubExpr"
 
     implements("do_block_expr")="com.perl5.lang.perl.psi.PerlDoBlockExpr"
 
@@ -839,6 +840,7 @@ term_expr ::=
     | replacement_regex
     | sub_expr_full
     | fun_expr
+    | method_expr
     | eval_expr
     | do_block_expr
     | do_expr
@@ -1220,10 +1222,11 @@ private comma ::= ',' | '=>'
 
 /********************************************** Extensions for Method::Signatures *************************************/
 // we can make this smareter and use keywords from settings or import opitions; We can't pin here because MooseX method works othewise
-method_definition ::= {['async'] 'method'|'fp_override'} sub_names_token [method_signature] func_or_method_body
-func_definition ::= {'func'|'fun'} named_func_body
+method_definition ::= {['async'] 'method'|'fp_override'} sub_names_token method_body
+func_definition ::= {'func'|'fun'} sub_names_token func_body
 fun_expr ::= 'fun' func_body
-private named_func_body ::=  sub_names_token func_body
+method_expr ::= 'fp_method' method_body
+private method_body ::= [method_signature] func_or_method_body
 private func_body ::= [func_signature] func_or_method_body
 private func_or_method_body ::= [sub_attributes] parse_block
 

@@ -1,0 +1,2 @@
+method (Str $label, ArrayRef[Int] $counts) {
+}

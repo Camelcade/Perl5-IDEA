@@ -1,0 +1,3 @@
+method {
+  say 'hi';
+}

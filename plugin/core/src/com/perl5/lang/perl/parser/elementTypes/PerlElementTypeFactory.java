@@ -380,6 +380,8 @@ public class PerlElementTypeFactory {
         return new PerlElementTypeEx(name, PsiPerlSubExprImpl.class);
       case "FUN_EXPR":
         return new PerlElementTypeEx(name, PsiPerlFunExprImpl.class);
+      case "METHOD_EXPR":
+        return new PerlElementTypeEx(name, PsiPerlMethodExprImpl.class);
       case "CONTINUE_EXPR":
         return new PerlElementTypeEx(name, PsiPerlContinueExprImpl.class);
       case "SUB_SIGNATURE":

@@ -1,0 +1,723 @@
+<p><a href="psi_element://Function%3A%3AParameters">Function::Parameters</a></p><h1>DESCRIPTION</h1><p style="padding-bottom: 10px;">This module provides two new keywords, <code>fun</code> and <code>method</code>, for defining
+functions and methods with parameter lists. At minimum this saves you from
+having to unpack <code>@_</code> manually, but this module can do much more for you.</p>
+<p style="padding-bottom: 10px;">The parameter lists provided by this module are similar to the <code>signatures</code>
+feature available in perl v5.20+. However, this module supports all perl
+versions starting from v5.14, it offers far more features than core signatures,
+and it is not experimental. The downside is that you need a C compiler if you
+want to install it from source, as it uses Perl's
+<a href="psi_element://perlapi%2FPL_keyword_plugin" style="color:red">keyword plugin</a> API in order to work reliably
+without requiring a source filter.</p>
+<h2>Default functionality</h2><p style="padding-bottom: 10px;">This module is a lexically scoped pragma: If you <code>use Function::Parameters</code>
+inside a block or file, the keywords won't be available outside of that block
+or file.</p>
+<p style="padding-bottom: 10px;">You can also disable <code>Function::Parameters</code> within a block:</p>
+<div style="padding-bottom: 10px;"><pre><code> {
+     no Function::Parameters;  # disable all keywords
+     ...
+ }</code></pre></div>
+<p style="padding-bottom: 10px;">Or explicitly list the keywords you want to disable:</p>
+<div style="padding-bottom: 10px;"><pre><code> {
+     no Function::Parameters qw(method);
+     # 'method' is a normal identifier here
+     ...
+ }</code></pre></div>
+<p style="padding-bottom: 10px;">You can also explicitly list the keywords you want to enable:</p>
+<div style="padding-bottom: 10px;"><pre><code> use Function::Parameters qw(fun);  # provides 'fun' but not 'method'
+ use Function::Parameters qw(method);  # provides 'method' but not 'fun'</code></pre></div>
+<h3>Simple parameter lists</h3><p style="padding-bottom: 10px;">By default you get two keywords, <code>fun</code> and <code>method</code> (but see
+<a href="psi_element://Function%3A%3AParameters%2FCustomizing+and+extending">Customizing and extending</a> below). <code>fun</code> is very similar to <code>sub</code>. You can
+use it to define both named and anonymous functions:</p>
+<div style="padding-bottom: 10px;"><pre><code> fun left_pad($str, $n) {
+     return sprintf '%*s', $n, $str;
+ }
+
+ print left_pad(&quot;hello&quot;, 10), &quot;\n&quot;;
+
+ my $twice = fun ($x) { $x * 2 };
+ print $twice-&gt;(21), &quot;\n&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">In the simplest case the parameter list is just a comma-separated list of zero
+or more scalar variables (enclosed in parentheses, following the function name,
+if any).</p>
+<p style="padding-bottom: 10px;"><code>Function::Parameters</code> automatically validates the arguments your function is
+called with. If the number of arguments doesn't match the parameter list, an
+exception is thrown.</p>
+<p style="padding-bottom: 10px;">Apart from that, the parameter variables are defined and initialized as if by:</p>
+<div style="padding-bottom: 10px;"><pre><code> sub left_pad {
+     sub left_pad;
+     my ($str, $n) = @_;
+     ...
+ }</code></pre></div>
+<p style="padding-bottom: 10px;">In particular, <code>@_</code> is still available in functions defined by <code>fun</code> and
+holds the original argument list.</p>
+<p style="padding-bottom: 10px;">The inner <code>sub left_pad;</code> declaration is intended to illustrate that the name
+of the function being defined is in scope in its own body, meaning you can call
+it recursively without having to use parentheses:</p>
+<div style="padding-bottom: 10px;"><pre><code> fun fac($n) {
+     return 1 if $n &lt; 2;
+     return $n * fac $n - 1;
+ }</code></pre></div>
+<p style="padding-bottom: 10px;">In a normal <code>sub</code> the last line would have had to be written
+<code>return $n * fac($n - 1);</code>.</p>
+<p style="padding-bottom: 10px;"><code>method</code> is almost the same as <code>fun</code> but automatically creates a <code>$self</code>
+variable as the first parameter (which is removed from <code>@_</code>):</p>
+<div style="padding-bottom: 10px;"><pre><code> method foo($x, $y) {
+    ...
+ }
+
+ # works like:
+ sub foo :method {
+    my $self = shift;
+    my ($x, $y) = @_;
+    ...
+ }</code></pre></div>
+<p style="padding-bottom: 10px;">As you can see, the <code>:method</code> attribute is also added automatically (see
+<a href="psi_element://attributes%2Fmethod" style="color:red">method in attributes</a> for details).</p>
+<p style="padding-bottom: 10px;">In some cases (e.g. class methods) <code>$self</code> is not the best name for the
+invocant of the method. You can override it on a case-by-case basis by putting
+a variable name followed by a <code>:</code> (colon) as the first thing in the parameter
+list:</p>
+<div style="padding-bottom: 10px;"><pre><code> method new($class: $x, $y) {
+     return bless { x =&gt; $x, y =&gt; $y }, $class;
+ }</code></pre></div>
+<p style="padding-bottom: 10px;">Here the invocant is named <code>$class</code>, not <code>$self</code>. It looks a bit weird but
+still works the same way if the remaining parameter list is empty:</p>
+<div style="padding-bottom: 10px;"><pre><code> method from_env($class:) {
+     return $class-&gt;new($ENV{x}, $ENV{y});
+ }</code></pre></div>
+<h3>Default arguments</h3><p style="padding-bottom: 10px;">(Most of the following examples use <code>fun</code> only. Unless specified otherwise
+everything applies to <code>method</code> as well.)</p>
+<p style="padding-bottom: 10px;">You can make some arguments optional by giving them default values.</p>
+<div style="padding-bottom: 10px;"><pre><code> fun passthrough($x, $y = 42, $z = []) {
+     return ($x, $y, $z);
+ }</code></pre></div>
+<p style="padding-bottom: 10px;">In this example the first parameter <code>$x</code> is required but <code>$y</code> and <code>$z</code> are
+optional.</p>
+<div style="padding-bottom: 10px;"><pre><code> passthrough('a', 'b', 'c', 'd')   # error: Too many arguments
+ passthrough('a', 'b', 'c')        # returns ('a', 'b', 'c')
+ passthrough('a', 'b')             # returns ('a', 'b', [])
+ passthrough('a', undef)           # returns ('a', undef, [])
+ passthrough('a')                  # returns ('a', 42, [])
+ passthrough()                     # error: Too few arguments</code></pre></div>
+<p style="padding-bottom: 10px;">Default arguments are evaluated whenever a corresponding real argument is not
+passed in by the caller. <code>undef</code> counts as a real argument; you can't use the
+default value for parameter <i>N</i> and still pass a value for parameter <i>N+1</i>.
+<code>$z = []</code> means each call that doesn't pass a third argument gets a new array
+reference (they're not shared between calls).</p>
+<p style="padding-bottom: 10px;">Default arguments are evaluated as part of the function body, allowing for
+silliness such as:</p>
+<div style="padding-bottom: 10px;"><pre><code> fun weird($name = return &quot;nope&quot;) {
+     print &quot;Hello, $name!\n&quot;;
+     return $name;
+ }
+
+ weird(&quot;Larry&quot;);  # prints &quot;Hello, Larry!&quot; and returns &quot;Larry&quot;
+ weird();         # returns &quot;nope&quot; immediately; function body doesn't run</code></pre></div>
+<p style="padding-bottom: 10px;">Preceding parameters are in scope for default arguments:</p>
+<div style="padding-bottom: 10px;"><pre><code> fun dynamic_default($x, $y = length $x) {
+    return &quot;$x/$y&quot;;
+ }
+
+ dynamic_default(&quot;hello&quot;, 0)  # returns &quot;hello/0&quot;
+ dynamic_default(&quot;hello&quot;)     # returns &quot;hello/5&quot;
+ dynamic_default(&quot;abc&quot;)       # returns &quot;abc/3&quot;</code></pre></div>
+<p style="padding-bottom: 10px;">If you just want to make a parameter optional without giving it a special
+value, write <code>$param = undef</code>. There is a special shortcut syntax for
+this case: <code>$param = undef</code> can also be written <code>$param =</code> (with no following
+expression).</p>
+<div style="padding-bottom: 10px;"><pre><code> fun foo($x = undef, $y = undef, $z = undef) {
+     # three arguments, all optional
+     ...
+ }
+
+ fun foo($x=, $y=, $z=) {
+     # shorter syntax, same meaning
+     ...
+ }</code></pre></div>
+<p style="padding-bottom: 10px;">Optional parameters must come at the end. It is not possible to have a required
+parameter after an optional one.</p>
+<h3>Slurpy/rest parameters</h3><p style="padding-bottom: 10px;">The last parameter of a function or method can be an array. This lets you slurp
+up any number of arguments the caller passes (0 or more).</p>
+<div style="padding-bottom: 10px;"><pre><code> fun scale($factor, @values) {
+     return map { $_ * $factor } @values;
+ }
+
+ scale(10, 1 .. 4)  # returns (10, 20, 30, 40)
+ scale(10)          # returns ()</code></pre></div>
+<p style="padding-bottom: 10px;">You can also use a hash, but then the number of arguments has to be even.</p>
+<h3>Named parameters</h3><p style="padding-bottom: 10px;">As soon as your functions take more than three arguments, it gets harder to
+keep track of what argument means what:</p>
+<div style="padding-bottom: 10px;"><pre><code> foo($handle, $w, $h * 2 + 15, 1, 24, 'icon');
+ # what do these arguments mean?</code></pre></div>
+<p style="padding-bottom: 10px;"><code>Function::Parameters</code> offers an alternative for these kinds of situations in
+the form of named parameters. Unlike the parameters described previously, which
+are identified by position, these parameters are identified by name:</p>
+<div style="padding-bottom: 10px;"><pre><code> fun create_point(:$x, :$y, :$color) {
+     ...
+ }
+
+ # Case 1
+ create_point(
+     x     =&gt; 50,
+     y     =&gt; 50,
+     color =&gt; 0xff_00_00,
+ );</code></pre></div>
+<p style="padding-bottom: 10px;">To create a named parameter, put a <code>:</code> (colon) in front of it in the parameter
+list. When the function is called, the arguments have to be supplied in the
+form of a hash initializer (a list of alternating keys/values). As with a hash,
+the order of key/value pairs doesn't matter (except in the case of duplicate
+keys, where the last occurrence wins):</p>
+<div style="padding-bottom: 10px;"><pre><code> # Case 2
+ create_point(
+     color =&gt; 0xff_00_00,
+     x     =&gt; 50,
+     y     =&gt; 50,
+ );
+
+ # Case 3
+ create_point(
+     x     =&gt; 200,
+     color =&gt; 0x12_34_56,
+     color =&gt; 0xff_00_00,
+     x     =&gt; 50,
+     y     =&gt; 50,
+ );</code></pre></div>
+<p style="padding-bottom: 10px;">Case 1, Case 2, and Case 3 all mean the same thing.</p>
+<p style="padding-bottom: 10px;">As with positional parameters, you can make named parameters optional by
+supplying a <a href="psi_element://Function%3A%3AParameters%2FDefault+arguments">default argument</a>:</p>
+<div style="padding-bottom: 10px;"><pre><code> fun create_point(:$x, :$y, :$color = 0x00_00_00) {
+     ...
+ }
+
+ create_point(x =&gt; 0, y =&gt; 64)  # color =&gt; 0x00_00_00 is implicit</code></pre></div>
+<p style="padding-bottom: 10px;">If you want to accept any key/value pairs, you can add a
+<a href="psi_element://Function%3A%3AParameters%2FSlurpy%2Frest+parameters">rest parameter</a> (hashes are particularly useful):</p>
+<div style="padding-bottom: 10px;"><pre><code> fun accept_all_keys(:$name, :$age, %rest) {
+     ...
+ }
+
+ accept_all_keys(
+     age     =&gt; 42,
+     gender  =&gt; 2,
+     name    =&gt; &quot;Jamie&quot;,
+     marbles =&gt; [],
+ );
+ # $name = &quot;Jamie&quot;;
+ # $age = 42;
+ # %rest = (
+ #     gender  =&gt; 2,
+ #     marbles =&gt; [],
+ # );</code></pre></div>
+<p style="padding-bottom: 10px;">You can combine positional and named parameters but all positional parameters
+have to come first:</p>
+<div style="padding-bottom: 10px;"><pre><code> method output(
+    $data,
+    :$handle       = $self-&gt;output_handle,
+    :$separator    = $self-&gt;separator,
+    :$quote_fields = 0,
+ ) {
+     ...
+ }
+
+ $obj-&gt;output([&quot;greetings&quot;, &quot;from&quot;, &quot;space&quot;]);
+ $obj-&gt;output(
+    [&quot;a&quot;, &quot;random&quot;, &quot;example&quot;],
+    quote_fields =&gt; 1,
+    separator    =&gt; &quot;;&quot;,
+ );</code></pre></div>
+<h3>Unnamed parameters</h3><p style="padding-bottom: 10px;">If your function doesn't use a particular parameter at all, you can omit its
+name and just write a sigil in the parameter list:</p>
+<div style="padding-bottom: 10px;"><pre><code> register_callback('click', fun ($target, $) {
+     ...
+ });</code></pre></div>
+<p style="padding-bottom: 10px;">Here we're calling a hypothetical <code>register_callback</code> function that registers
+our coderef to be called in response to a <code>click</code> event. It will pass two
+arguments to the click handler, but the coderef only cares about the first one
+(<code>$target</code>). The second parameter doesn't even get a name (just a sigil,
+<code>$</code>). This marks it as unused.</p>
+<p style="padding-bottom: 10px;">This case typically occurs when your functions have to conform to an externally
+imposed interface, e.g. because they're called by someone else. It can happen
+with callbacks or methods that don't need all of the arguments they get.</p>
+<p style="padding-bottom: 10px;">You can use unnamed <a href="psi_element://Function%3A%3AParameters%2FSlurpy%2Frest+parameters">slurpy parameters</a> to accept and
+ignore all following arguments. In particular, <code>fun foo(@)</code> is a lot like
+<code>sub foo</code> in that it accepts and ignores any number of arguments (apart from
+leaving them in <code>@_</code>).</p>
+<h3>Type constraints</h3><p style="padding-bottom: 10px;">It is possible to automatically check the types of arguments passed to your
+function. There are two ways to do this.</p>
+<ol><li>
+
+<div style="padding-bottom: 10px;"><pre><code> use Types::Standard qw(Str Int ArrayRef);
+
+ fun foo(Str $label, ArrayRef[Int] $counts) {
+     ...
+ }</code></pre></div>
+<p style="padding-bottom: 10px;">In this variant you simply put the name of a type in front of a parameter. The
+way this works is that <code>Function::Parameters</code> parses the type using very
+simple rules:</p>
+<ul><li>
+
+<p style="padding-bottom: 10px;">A <i>type</i> is a sequence of one or more simple types, separated by <code>|</code> (pipe).
+<code>|</code> is meant for union types (e.g. <code>Str | ArrayRef[Int]</code> would accept either
+a string or reference to an array of integers).</p></li>
+<li>
+
+<p style="padding-bottom: 10px;">A <i>simple type</i> is an identifier, optionally followed by a list of one or more
+types, separated by <code>,</code> (comma), enclosed in <code>[</code> <code>]</code> (square brackets).</p></li></ul>
+<p style="padding-bottom: 10px;"><code>Function::Parameters</code> then resolves simple types by looking for functions of
+the same name in your current package. A type specification like
+<code>Str | ArrayRef[Int]</code> ends up running the Perl code
+<code>Str() | ArrayRef([Int()])</code> (at compile time, while the function definition is
+being processed). In other words, <code>Function::Parameters</code> doesn't support any
+types natively; it simply uses whatever is in scope.</p>
+<p style="padding-bottom: 10px;">You don't have to define these functions yourself. You can also import them
+from a type library such as <a href="psi_element://Types%3A%3AStandard" style="color:red"><code>Types::Standard</code></a> or
+<a href="psi_element://MooseX%3A%3ATypes%3A%3AMoose" style="color:red"><code>MooseX::Types::Moose</code></a>.</p>
+<p style="padding-bottom: 10px;">The only requirement is that the returned value (here referred to as <code>$tc</code>,
+for &quot;type constraint&quot;) is an object that provides <code>$tc-&gt;check($value)</code>
+and <code>$tc-&gt;get_message($value)</code> methods. <code>check</code> is called to determine
+whether a particular value is valid; it should return a true or false value.
+<code>get_message</code> is called on values that fail the <code>check</code> test; it should
+return a string that describes the error.</p></li>
+<li>
+
+<div style="padding-bottom: 10px;"><pre><code> my ($my_type, $some_other_type);
+ BEGIN {
+     $my_type = Some::Constraint::Class-&gt;new;
+     $some_other_type = Some::Other::Class-&gt;new;
+ }
+
+ fun foo(($my_type) $label, ($some_other_type) $counts) {
+     ...
+ }</code></pre></div>
+<p style="padding-bottom: 10px;">In this variant you enclose an arbitrary Perl expression in <code>(</code> <code>)</code>
+(parentheses) and put it in front of a parameter. This expression is evaluated
+at compile time and must return a type constraint object as described above.
+(If you use variables here, make sure they're defined at compile time.)</p></li></ol>
+<h3>Method modifiers</h3><p style="padding-bottom: 10px;"><code>Function::Parameters</code> has support for method modifiers as provided by
+<a href="psi_element://Moo" style="color:red"><code>Moo</code></a> or <a href="psi_element://Moose" style="color:red"><code>Moose</code></a>. They're not exported by default, so you
+have to say</p>
+<div style="padding-bottom: 10px;"><pre><code> use Function::Parameters qw(:modifiers);</code></pre></div>
+<p style="padding-bottom: 10px;">to get them. This line gives you method modifiers <i>only</i>; <code>fun</code> and <code>method</code>
+are not defined. To get both the standard keywords and method modifiers, you
+can either write two <code>use</code> lines:</p>
+<div style="padding-bottom: 10px;"><pre><code> use Function::Parameters;
+ use Function::Parameters qw(:modifiers);</code></pre></div>
+<p style="padding-bottom: 10px;">or explicitly list the keywords you want:</p>
+<div style="padding-bottom: 10px;"><pre><code> use Function::Parameters qw(fun method :modifiers);</code></pre></div>
+<p style="padding-bottom: 10px;">or add the <code>:std</code> import tag (which gives you the default import behavior):</p>
+<div style="padding-bottom: 10px;"><pre><code> use Function::Parameters qw(:std :modifiers);</code></pre></div>
+<p style="padding-bottom: 10px;">This defines the following additional keywords: <code>before</code>, <code>after</code>, <code>around</code>,
+<code>augment</code>, <code>override</code>. These work mostly like <code>method</code>, but they don't
+install the function into your package themselves. Instead they invoke whatever
+<code>before</code>, <code>after</code>, <code>around</code>, <code>augment</code>, or <code>override</code> function
+(respectively) is in scope to do the job.</p>
+<div style="padding-bottom: 10px;"><pre><code> before foo($x, $y, $z) {
+     ...
+ }</code></pre></div>
+<p style="padding-bottom: 10px;">works like</p>
+<div style="padding-bottom: 10px;"><pre><code> &amp;before('foo', method ($x, $y, $z) {
+     ...
+ });</code></pre></div>
+<p style="padding-bottom: 10px;"><code>after</code>, <code>augment</code>, and <code>override</code> work the same way.</p>
+<p style="padding-bottom: 10px;"><code>around</code> is slightly different: Instead of shifting off the first element of
+<code>@_</code> into <code>$self</code> (as <code>method</code> does), it shifts off <i>two</i> values:</p>
+<div style="padding-bottom: 10px;"><pre><code> around foo($x, $y, $z) {
+     ...
+ }</code></pre></div>
+<p style="padding-bottom: 10px;">works like</p>
+<div style="padding-bottom: 10px;"><pre><code> &amp;around('foo', sub :method {
+     my $orig = shift;
+     my $self = shift;
+     my ($x, $y, $z) = @_;
+     ...
+ });</code></pre></div>
+<p style="padding-bottom: 10px;">(except you also get the usual <code>Function::Parameters</code> features such as
+checking the number of arguments, etc).</p>
+<p style="padding-bottom: 10px;"><code>$orig</code> and <code>$self</code> both count as invocants and you can override their names
+like this:</p>
+<div style="padding-bottom: 10px;"><pre><code> around foo($original, $object: $x, $y, $z) {
+     # $original is a reference to the wrapped method;
+     # $object is the object we're being called on
+     ...
+ }</code></pre></div>
+<p style="padding-bottom: 10px;">If you use <code>:</code> to pick your own invocant names in the parameter list of
+<code>around</code>, you must specify exactly two variables.</p>
+<p style="padding-bottom: 10px;">These modifiers also differ from <code>fun</code> and <code>method</code> (and <code>sub</code>) in that they
+require a function name (there are no anonymous method modifiers) and they
+take effect at runtime, not compile time. When you say <code>fun foo() {}</code>, the
+<code>foo</code> function is defined right after the closing <code>}</code> of the function body is
+parsed. But with e.g. <code>before foo() {}</code>, the declaration becomes a normal
+function call (to the <code>before</code> function in the current package), which is
+performed at runtime.</p>
+<h3>Prototypes and attributes</h3><p style="padding-bottom: 10px;">You can specify attributes (see <a href="psi_element://perlsub%2FSubroutine+Attributes" style="color:red">Subroutine Attributes in perlsub</a>) for your
+functions using the usual syntax:</p>
+<div style="padding-bottom: 10px;"><pre><code> fun deref($x) :lvalue {
+    ${$x}
+ }
+
+ my $silly;
+ deref(\$silly) = 42;</code></pre></div>
+<p style="padding-bottom: 10px;">To specify a prototype (see <a href="psi_element://perlsub%2FPrototypes" style="color:red">Prototypes in perlsub</a>), use the <code>prototype</code>
+attribute:</p>
+<div style="padding-bottom: 10px;"><pre><code> fun mypush($aref, @values) :prototype(\@@) {
+     push @{$aref}, @values;
+ }</code></pre></div>
+<h3>Introspection</h3><p style="padding-bottom: 10px;">The function <code>Function::Parameters::info</code> lets you introspect parameter lists
+at runtime. It is not exported, so you have to call it by its full name.</p>
+<p style="padding-bottom: 10px;">It takes a reference to a function and returns either <code>undef</code> (if it knows
+nothing about the function) or an object that describes the parameter list of
+the given function. See
+<a href="psi_element://Function%3A%3AParameters%3A%3AInfo"><code>Function::Parameters::Info</code></a> for details.</p>
+<h2>Customizing and extending</h2><h3>Wrapping <code>Function::Parameters</code></h3><p style="padding-bottom: 10px;">Due to its nature as a lexical pragma, importing from <code>Function::Parameters</code>
+always affects the scope that is currently being compiled. If you want to write
+a wrapper module that enables <code>Function::Parameters</code> automatically, just call
+<code>Function::Parameters-&gt;import</code> from your own <code>import</code> method (and
+<code>Function::Parameters-&gt;unimport</code> from your <code>unimport</code>, as required).</p>
+<h3>Gory details of importing</h3><p style="padding-bottom: 10px;">At the lowest layer <code>use Function::Parameters ...</code> takes a list of one or more
+hash references. Each key is a keyword to be defined as specified by the
+corresponding value, which must be another hash reference containing
+configuration options.</p>
+<div style="padding-bottom: 10px;"><pre><code> use Function::Parameters
+     {
+         keyword_1 =&gt; { ... },
+         keyword_2 =&gt; { ... },
+     },
+     {
+         keyword_3 =&gt; { ... },
+     };</code></pre></div>
+<p style="padding-bottom: 10px;">If you don't specify a particular option, its default value is used. The
+available configuration options are:</p>
+<dl><dt style="padding-bottom:4px;font-weight:bold;"><code>attributes</code></dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">(string) The attributes that every function declared with this
+keyword should have (in the form of source code, with a leading <code>:</code>).</p>
+<p style="padding-bottom: 10px;">Default: nothing</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;"><code>check_argument_count</code></dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">(boolean) Whether functions declared with this keyword should check how many
+arguments they are called with. If false, omitting a required argument sets it
+to <code>undef</code> and excess arguments are silently ignored. If true, an exception is
+thrown if too few or too many arguments are passed.</p>
+<p style="padding-bottom: 10px;">Default: <code>1</code></p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;"><code>check_argument_types</code></dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">(boolean) Whether functions declared with this keyword should check the types
+of the arguments they are called with. If false,
+<a href="psi_element://Function%3A%3AParameters%2FType+constraints">type constraints</a> are parsed but silently ignored. If true,
+an exception is thrown if an argument fails a type check.</p>
+<p style="padding-bottom: 10px;">Default: <code>1</code></p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;"><code>default_arguments</code></dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">(boolean) Whether functions declared with this keyword should allow default
+arguments in their parameter list. If false,
+<a href="psi_element://Function%3A%3AParameters%2FDefault+arguments">default arguments</a> are a compile-time error.</p>
+<p style="padding-bottom: 10px;">Default: <code>1</code></p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;"><code>install_sub</code></dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">(sub name or reference) If this is set, named functions declared with this
+keyword are not entered into the symbol table directly. Instead the subroutine
+specified here (by name or reference) is called with two arguments, the name of
+the function being declared and a reference to its body.</p>
+<p style="padding-bottom: 10px;">Default: nothing</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;"><code>invocant</code></dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">(boolean) Whether functions declared with this keyword should allow explicitly
+specifying invocant(s) at the beginning of the parameter list (as in
+<code>($invocant: ...)</code> or <code>($invocant1, $invocant2, $invocant3: ...)</code>).</p>
+<p style="padding-bottom: 10px;">Default: 0</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;"><code>name</code></dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">(string) There are three possible values for this option. <code>'required'</code> means
+functions declared with this keyword must have a name. <code>'prohibited'</code> means
+specifying a name is not allowed. <code>'optional'</code> means this keyword can be used
+for both named and anonymous functions.</p>
+<p style="padding-bottom: 10px;">Default: <code>'optional'</code></p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;"><code>named_parameters</code></dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">(boolean) Whether functions declared with this keyword should allow named
+parameters. If false, <a href="psi_element://Function%3A%3AParameters%2FNamed+parameters">named parameters</a> are a compile-time
+error.</p>
+<p style="padding-bottom: 10px;">Default: <code>1</code></p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;"><code>reify_type</code></dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">(coderef or <code>'auto'</code> or <code>'moose'</code>) The code reference used to resolve
+<a href="psi_element://Function%3A%3AParameters%2FType+constraints">type constraints</a> in functions declared with this keyword.
+It is called once for each type constraint that doesn't use the <code>( EXPR )</code>
+syntax, with one argument, the text of the type in the parameter list (e.g.
+<code>'ArrayRef[Int]'</code>). The package the function declaration is in is available
+through <a href="psi_element://perlfunc%2Fcaller+EXPR" style="color:red"><code>caller</code></a>.</p>
+<p style="padding-bottom: 10px;">The only requirement is that the returned value (here referred to as <code>$tc</code>,
+for &quot;type constraint&quot;) is an object that provides <code>$tc-&gt;check($value)</code>
+and <code>$tc-&gt;get_message($value)</code> methods. <code>check</code> is called to determine
+whether a particular value is valid; it should return a true or false value.
+<code>get_message</code> is called on values that fail the <code>check</code> test; it should
+return a string that describes the error.</p>
+<p style="padding-bottom: 10px;">Instead of a code reference you can also specify one of two strings.</p>
+<p style="padding-bottom: 10px;"><code>'auto'</code> stands for a built-in type reifier that treats identifiers as
+subroutine names, <code>[</code> <code>]</code> as an array reference, and <code>|</code> as bitwise or. In
+other words, it parses and executes type constraints (mostly) as if they had
+been Perl source code.</p>
+<p style="padding-bottom: 10px;"><code>'moose'</code> stands for a built-in type reifier that loads
+<a href="psi_element://Moose%3A%3AUtil%3A%3ATypeConstraints" style="color:red"><code>Moose::Util::TypeConstraints</code></a> and just
+forwards to
+<a href="psi_element://Moose%3A%3AUtil%3A%3ATypeConstraints%2Ffind_or_create_isa_type_constraint%28%24type_name%29" style="color:red"><code>find_or_create_isa_type_constraint</code></a>.</p>
+<p style="padding-bottom: 10px;">Default: <code>'auto'</code></p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;"><code>runtime</code></dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">(boolean) Whether functions declared with this keyword should be installed into
+the symbol table at runtime. If false, named functions are defined (or their
+<a href="psi_element://Function%3A%3AParameters%2Finstall_sub"><code>install_sub</code></a> is invoked if specified) immediately after
+their declaration is parsed (as with <a href="psi_element://perlfunc%2Fsub+NAME+BLOCK" style="color:red"><code>sub</code></a>). If
+true, function declarations become normal statements that only take effect at
+runtime (similar to <code>*foo = sub { ... };</code> or
+<code>$install_sub-&gt;('foo', sub { ... });</code>, respectively).</p>
+<p style="padding-bottom: 10px;">Default: <code>0</code></p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;"><code>shift</code></dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">(string or arrayref) In its simplest form, this is the name of a variable that
+acts as the default invocant (a required leading argument that is removed from
+<code>@_</code>) for all functions declared with this keyword (e.g.  <code>'$self'</code> for
+methods). You can also set this to an array reference of strings, which lets
+you specify multiple default invocants, or even to an array reference of array
+references of the form <code>[ $name, $type ]</code> (where <code>$name</code> is the variable name
+and <code>$type</code> is a <a href="psi_element://Function%3A%3AParameters%2FType+constraints">type constraint object</a>), which lets you
+specify multiple default invocants with type constraints.</p>
+<p style="padding-bottom: 10px;">If you define any default invocants here and also allow individual declarations
+to override the default (with <code>invocant =&gt; 1</code>), the number of overridden
+invocants must match the default. For example, <code>method</code> has a default invocant
+of <code>$self</code>, so <code>method foo($x, $y: $z)</code> is invalid because it tries to define
+two invocants.</p>
+<p style="padding-bottom: 10px;">Default: <code>[]</code> (meaning no invocants)</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;"><code>strict</code></dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">(boolean) Whether functions declared with this keyword should do &quot;strict&quot;
+checks on their arguments. Currently setting this simply sets
+<a href="psi_element://Function%3A%3AParameters%2Fcheck_argument_count"><code>check_argument_count</code></a> to the same value with no
+other effects.</p>
+<p style="padding-bottom: 10px;">Default: nothing</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;"><code>types</code></dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">(boolean) Whether functions declared with this keyword should allow type
+constraints in their parameter lists. If false, trying to use
+<a href="psi_element://Function%3A%3AParameters%2FType+constraints">type constraints</a> is a compile-time error.</p>
+<p style="padding-bottom: 10px;">Default: <code>1</code></p></dd></dl>
+<p style="padding-bottom: 10px;">You can get the same effect as <code>use Function::Parameters;</code> by saying:</p>
+<div style="padding-bottom: 10px;"><pre><code> use Function::Parameters {
+     fun =&gt; {
+         # 'fun' uses default settings only
+     },
+     method =&gt; {
+         attributes =&gt; ':method',
+         shift      =&gt; '$self',
+         invocant   =&gt; 1,
+         # the rest is defaults
+     },
+ };</code></pre></div>
+<h3>Configuration bundles</h3><p style="padding-bottom: 10px;">Because specifying all these configuration options from scratch each time is a
+lot of writing, <code>Function::Parameters</code> offers configuration bundles in the
+form of special strings. These strings can be used to replace a configuration
+hash completely or as the value of the <code>defaults</code> pseudo-option within a
+configuration hash. The latter lets you use the configuration bundle behind the
+string to provide defaults and tweak them with your own settings.</p>
+<p style="padding-bottom: 10px;">The following bundles are available:</p>
+<dl><dt style="padding-bottom:4px;font-weight:bold;"><code>function_strict</code></dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Equivalent to <code>{}</code>, i.e. all defaults.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;"><code>function_lax</code></dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Equivalent to:</p>
+<div style="padding-bottom: 10px;"><pre><code> {
+     defaults =&gt; 'function_strict',
+     strict   =&gt; 0,
+ }</code></pre></div>
+<p style="padding-bottom: 10px;">i.e. just like <a href="psi_element://Function%3A%3AParameters%2Ffunction_strict"><code>function_strict</code></a> but with
+<a href="psi_element://Function%3A%3AParameters%2Fstrict"><code>strict</code></a> checks turned off.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;"><code>function</code></dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Equivalent to <code>function_strict</code>. This is what the default <code>fun</code> keyword
+actually uses. (In version 1 of this module, <code>function</code> was equivalent to
+<code>function_lax</code>.)</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;"><code>method_strict</code></dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Equivalent to:</p>
+<div style="padding-bottom: 10px;"><pre><code> {
+     defaults   =&gt; 'function_strict',
+     attributes =&gt; ':method',
+     shift      =&gt; '$self',
+     invocant   =&gt; 1,
+ }</code></pre></div></dd>
+<dt style="padding-bottom:4px;font-weight:bold;"><code>method_lax</code></dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Equivalent to:</p>
+<div style="padding-bottom: 10px;"><pre><code> {
+     defaults =&gt; 'method_strict',
+     strict   =&gt; 0,
+ }</code></pre></div>
+<p style="padding-bottom: 10px;">i.e. just like <a href="psi_element://Function%3A%3AParameters%2Fmethod_strict"><code>method_strict</code></a> but with
+<a href="psi_element://Function%3A%3AParameters%2Fstrict"><code>strict</code></a> checks turned off.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;"><code>method</code></dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Equivalent to <code>method_strict</code>. This is what the default <code>method</code> keyword
+actually uses. (In version 1 of this module, <code>method</code> was equivalent to
+<code>method_lax</code>.)</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;"><code>classmethod_strict</code></dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Equivalent to:</p>
+<div style="padding-bottom: 10px;"><pre><code> {
+     defaults =&gt; 'method_strict',
+     shift    =&gt; '$class',
+ }</code></pre></div>
+<p style="padding-bottom: 10px;">i.e. just like <a href="psi_element://Function%3A%3AParameters%2Fmethod_strict"><code>method_strict</code></a> but the implicit first
+parameter is called <code>$class</code>, not <code>$self</code>.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;"><code>classmethod_lax</code></dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Equivalent to:</p>
+<div style="padding-bottom: 10px;"><pre><code> {
+     defaults =&gt; 'classmethod_strict',
+     strict   =&gt; 0,
+ }</code></pre></div>
+<p style="padding-bottom: 10px;">i.e. just like <a href="psi_element://Function%3A%3AParameters%2Fclassmethod_strict"><code>classmethod_strict</code></a> but with
+<a href="psi_element://Function%3A%3AParameters%2Fstrict"><code>strict</code></a> checks turned off.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;"><code>classmethod</code></dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Equivalent to <code>classmethod_strict</code>. This is currently not used anywhere within
+<code>Function::Parameters</code>.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;"><code>around</code></dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Equivalent to:</p>
+<div style="padding-bottom: 10px;"><pre><code> {
+     defaults    =&gt; 'method',
+     install_sub =&gt; 'around',
+     shift       =&gt; ['$orig', '$self'],
+     runtime     =&gt; 1,
+     name        =&gt; 'required',
+ }</code></pre></div>
+<p style="padding-bottom: 10px;">i.e. just like <a href="psi_element://Function%3A%3AParameters%2Fmethod"><code>method</code></a> but with a custom installer
+(<code>'around'</code>), two implicit first parameters, only taking effect at
+runtime, and a method name is required.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;"><code>before</code></dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Equivalent to:</p>
+<div style="padding-bottom: 10px;"><pre><code> {
+     defaults    =&gt; 'method',
+     install_sub =&gt; 'before',
+     runtime     =&gt; 1,
+     name        =&gt; 'required',
+ }</code></pre></div>
+<p style="padding-bottom: 10px;">i.e. just like <a href="psi_element://Function%3A%3AParameters%2Fmethod"><code>method</code></a> but with a custom installer
+(<code>'before'</code>), only taking effect at runtime, and a method name is required.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;"><code>after</code></dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Equivalent to:</p>
+<div style="padding-bottom: 10px;"><pre><code> {
+     defaults    =&gt; 'method',
+     install_sub =&gt; 'after',
+     runtime     =&gt; 1,
+     name        =&gt; 'required',
+ }</code></pre></div>
+<p style="padding-bottom: 10px;">i.e. just like <a href="psi_element://Function%3A%3AParameters%2Fmethod"><code>method</code></a> but with a custom installer
+(<code>'after'</code>), only taking effect at runtime, and a method name is required.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;"><code>augment</code></dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Equivalent to:</p>
+<div style="padding-bottom: 10px;"><pre><code> {
+     defaults    =&gt; 'method',
+     install_sub =&gt; 'augment',
+     runtime     =&gt; 1,
+     name        =&gt; 'required',
+ }</code></pre></div>
+<p style="padding-bottom: 10px;">i.e. just like <a href="psi_element://Function%3A%3AParameters%2Fmethod"><code>method</code></a> but with a custom installer
+(<code>'augment'</code>), only taking effect at runtime, and a method name is required.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;"><code>override</code></dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Equivalent to:</p>
+<div style="padding-bottom: 10px;"><pre><code> {
+     defaults    =&gt; 'method',
+     install_sub =&gt; 'override',
+     runtime     =&gt; 1,
+     name        =&gt; 'required',
+ }</code></pre></div>
+<p style="padding-bottom: 10px;">i.e. just like <a href="psi_element://Function%3A%3AParameters%2Fmethod"><code>method</code></a> but with a custom installer
+(<code>'override'</code>), only taking effect at runtime, and a method name is required.</p></dd></dl>
+<p style="padding-bottom: 10px;">You can get the same effect as <code>use Function::Parameters;</code> by saying:</p>
+<div style="padding-bottom: 10px;"><pre><code> use Function::Parameters {
+     fun    =&gt; { defaults =&gt; 'function' },
+     method =&gt; { defaults =&gt; 'method' },
+ };</code></pre></div>
+<p style="padding-bottom: 10px;">or:</p>
+<div style="padding-bottom: 10px;"><pre><code> use Function::Parameters {
+     fun    =&gt; 'function',
+     method =&gt; 'method',
+ };</code></pre></div>
+<h3>Import tags</h3><p style="padding-bottom: 10px;">In addition to hash references you can also use special strings in your import
+list. The following import tags are available:</p>
+<dl><dt style="padding-bottom:4px;font-weight:bold;"><code>'fun'</code></dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Equivalent to <code>{ fun =&gt; 'function' }</code>.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;"><code>'method'</code></dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Equivalent to <code>{ method =&gt; 'method' }</code>.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;"><code>'classmethod'</code></dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Equivalent to <code>{ classmethod =&gt; 'classmethod' }</code>.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;"><code>'before'</code></dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Equivalent to <code>{ before =&gt; 'before' }</code>.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;"><code>'after'</code></dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Equivalent to <code>{ after =&gt; 'after' }</code>.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;"><code>'around'</code></dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Equivalent to <code>{ around =&gt; 'around' }</code>.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;"><code>'augment'</code></dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Equivalent to <code>{ augment =&gt; 'augment' }</code>.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;"><code>'override'</code></dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Equivalent to <code>{ override =&gt; 'override' }</code>.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;"><code>':strict'</code></dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Equivalent to <code>{ fun =&gt; 'function_strict', method =&gt; 'method_strict' }</code>
+but that's just the default behavior anyway.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;"><code>':lax'</code></dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Equivalent to <code>{ fun =&gt; 'function_lax', method =&gt; 'method_lax' }</code>, i.e. it
+provides <code>fun</code> and <code>method</code> keywords that define functions that don't check
+their arguments.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;"><code>':std'</code></dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Equivalent to <code>'fun', 'method'</code>. This is what's used by default:</p>
+<div style="padding-bottom: 10px;"><pre><code> use Function::Parameters;</code></pre></div>
+<p style="padding-bottom: 10px;">is the same as:</p>
+<div style="padding-bottom: 10px;"><pre><code> use Function::Parameters qw(:std);</code></pre></div></dd>
+<dt style="padding-bottom:4px;font-weight:bold;"><code>':modifiers'</code></dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Equivalent to <code>'before', 'after', 'around', 'augment', 'override'</code>.</p></dd></dl>
+<p style="padding-bottom: 10px;">For example, when you say</p>
+<div style="padding-bottom: 10px;"><pre><code> use Function::Parameters qw(:modifiers);</code></pre></div>
+<p style="padding-bottom: 10px;"><code>:modifiers</code> is an import tag that <a href="psi_element://Function%3A%3AParameters%2F%27%3Amodifiers%27">expands to</a></p>
+<div style="padding-bottom: 10px;"><pre><code> use Function::Parameters qw(before after around augment override);</code></pre></div>
+<p style="padding-bottom: 10px;">Each of those is another import tag. Stepping through the first one:</p>
+<div style="padding-bottom: 10px;"><pre><code> use Function::Parameters qw(before);</code></pre></div>
+<p style="padding-bottom: 10px;">is <a href="psi_element://Function%3A%3AParameters%2F%27before%27">equivalent to</a>:</p>
+<div style="padding-bottom: 10px;"><pre><code> use Function::Parameters { before =&gt; 'before' };</code></pre></div>
+<p style="padding-bottom: 10px;">This says to define the keyword <code>before</code> according to the
+<a href="psi_element://Function%3A%3AParameters%2Fbefore">configuration bundle <code>before</code></a>:</p>
+<div style="padding-bottom: 10px;"><pre><code> use Function::Parameters {
+     before =&gt; {
+         defaults    =&gt; 'method',
+         install_sub =&gt; 'before',
+         runtime     =&gt; 1,
+         name        =&gt; 'required',
+     },
+ };</code></pre></div>
+<p style="padding-bottom: 10px;">The <code>defaults =&gt; 'method'</code> part <a href="psi_element://Function%3A%3AParameters%2FConfiguration+bundles">pulls in</a> the
+contents of the <a href="psi_element://Function%3A%3AParameters%2Fmethod"><code>'method'</code> configuration bundle</a> (which is the
+same as <a href="psi_element://Function%3A%3AParameters%2Fmethod_strict"><code>'method_strict'</code></a>):</p>
+<div style="padding-bottom: 10px;"><pre><code> use Function::Parameters {
+     before =&gt; {
+         defaults    =&gt; 'function_strict',
+         attributes  =&gt; ':method',
+         shift       =&gt; '$self',
+         invocant    =&gt; 1,
+         install_sub =&gt; 'before',
+         runtime     =&gt; 1,
+         name        =&gt; 'required',
+     },
+ };</code></pre></div>
+<p style="padding-bottom: 10px;">This in turn uses the
+<a href="psi_element://Function%3A%3AParameters%2Ffunction_strict"><code>'function_strict'</code> configuration bundle</a> (which is
+empty because it consists of default values only):</p>
+<div style="padding-bottom: 10px;"><pre><code> use Function::Parameters {
+     before =&gt; {
+         attributes  =&gt; ':method',
+         shift       =&gt; '$self',
+         invocant    =&gt; 1,
+         install_sub =&gt; 'before',
+         runtime     =&gt; 1,
+         name        =&gt; 'required',
+     },
+ };</code></pre></div>
+<p style="padding-bottom: 10px;">But if we wanted to be completely explicit, we could write this as:</p>
+<div style="padding-bottom: 10px;"><pre><code> use Function::Parameters {
+     before =&gt; {
+         check_argument_count =&gt; 1,
+         check_argument_types =&gt; 1,
+         default_arguments    =&gt; 1,
+         named_parameters     =&gt; 1,
+         reify_type           =&gt; 'auto',
+         types                =&gt; 1,
+
+         attributes  =&gt; ':method',
+         shift       =&gt; '$self',
+         invocant    =&gt; 1,
+         install_sub =&gt; 'before',
+         runtime     =&gt; 1,
+         name        =&gt; 'required',
+     },
+ };</code></pre></div>
+<h2>Incompatibilites with version 1 of <code>Function::Parameters</code></h2><ul><li>
+
+<p style="padding-bottom: 10px;">Version 1 defaults to lax mode (no argument checks). To get the same behavior
+on both version 1 and version 2, explicitly write either
+<code>use Function::Parameters qw(:strict);</code> (the new default) or
+<code>use Function::Parameters qw(:lax);</code> (the old default). (Or write
+<code>use Function::Parameters 2;</code> to trigger an error if an older version of
+<code>Function::Parameters</code> is loaded.)</p></li>
+<li>
+
+<p style="padding-bottom: 10px;">Parameter lists used to be optional. The syntax <code>fun foo { ... }</code> would accept
+any number of arguments. This syntax has been removed; you now have to write
+<code>fun foo(@) { ... }</code> to accept (and ignore) all arguments. On the other hand,
+if you meant for the function to take no arguments, write <code>fun foo() { ... }</code>.</p></li>
+<li>
+
+<p style="padding-bottom: 10px;">There used to be a shorthand syntax for prototypes: Using <code>:(...)</code> (i.e. an
+attribute with an empty name) as the first attribute was equivalent to
+<code>:prototype(...)</code>. This syntax has been removed.</p></li>
+<li>
+
+<p style="padding-bottom: 10px;">The default type reifier used to be hardcoded to use <a href="psi_element://Moose" style="color:red"><code>Moose</code></a> (as in
+<code>reify_type =&gt; 'moose'</code>). This has been changed to use whatever type
+functions are in scope (<code>reify_type =&gt; 'auto'</code>).</p></li>
+<li>
+
+<p style="padding-bottom: 10px;">Type reifiers used to see the wrong package in
+<a href="psi_element://perlfunc%2Fcaller+EXPR" style="color:red"><code>caller</code></a>. As a workaround the correct calling package
+used to be passed as a second argument. This problem has been fixed and the
+second argument has been removed. (Technically this is a core perl bug
+(<a href="https://rt.perl.org/Public/Bug/Display.html?id=129239">RT #129239</a>) that
+wasn't so much fixed as worked around in <code>Function::Parameters</code>.)</p>
+<p style="padding-bottom: 10px;">If you want your type reifier to be compatible with both versions, you can do
+this:</p>
+<div style="padding-bottom: 10px;"><pre><code> sub my_reifier {
+     my ($type, $package) = @_;
+     $package //= caller;
+     ...
+ }</code></pre></div>
+<p style="padding-bottom: 10px;">Or using <code>Function::Parameters</code> itself:</p>
+<div style="padding-bottom: 10px;"><pre><code> fun my_reifier($type, $package = caller) {
+     ...
+ }</code></pre></div></li></ul>

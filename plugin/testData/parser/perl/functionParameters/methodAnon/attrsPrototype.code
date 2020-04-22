@@ -1,0 +1,3 @@
+method ($aref, @values) :prototype(\@@) {
+    push @{$aref}, @values;
+}
