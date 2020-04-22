@@ -937,8 +937,8 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       }
       if (!(element instanceof PerlDieScope) || ((PerlDieScope)element).includeInControlFlow()) {
         element.acceptChildren(this);
-        startNodeSmart(element);
       }
+      startNodeSmart(element);
     }
   }
 
