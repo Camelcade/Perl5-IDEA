@@ -110,7 +110,6 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
         extendParserTokens(extensionSet.first, extensionSet.getSecond());
       }
     }
-    extendParserTokens(TERM_EXPR, TokenSet.create(SUB_CALL));
     CUSTOM_TOKEN_TYPES = customTokenTypes;
     CUSTOM_TOKEN_TYPES_AFTER_DEREFERENCE = customTokenTypesAfterDereference;
     BARE_REGEX_PREFIX_TOKENSET = bareRegexPrefixTokenSet;

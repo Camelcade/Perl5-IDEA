@@ -423,7 +423,8 @@
     mixin("string_bare")="com.perl5.lang.perl.psi.mixins.PerlStringBareMixin"
 
     implements("sub_call")="com.perl5.lang.perl.psi.PerlMethodContainer"
-    extends("sub_call")="com.perl5.lang.perl.psi.impl.PerlSubCallElement"
+    mixin("sub_call")="com.perl5.lang.perl.psi.impl.PerlSubCallElement"
+    extends("sub_call")=expr
     stubClass("sub_call")="com.perl5.lang.perl.psi.stubs.calls.PerlSubCallElementStub"
 
     mixin("statement")="com.perl5.lang.perl.psi.mixins.PerlStatementMixin"
