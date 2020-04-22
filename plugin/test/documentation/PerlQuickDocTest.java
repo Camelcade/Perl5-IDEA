@@ -17,10 +17,8 @@
 package documentation;
 
 
-import base.PerlLightTestCase;
-import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
-public class PerlQuickDocTest extends PerlLightTestCase {
+public class PerlQuickDocTest extends PerlQuickDocTestCase {
 
   @Override
   protected void setUp() throws Exception {
@@ -209,15 +207,5 @@ public class PerlQuickDocTest extends PerlLightTestCase {
 
   @Test
   public void testNamespaceDefinitionInline() {doTest();}
-
-  @NotNull
-  @Override
-  protected String getResultsFileExtension() {
-    return "txt";
-  }
-
-  private void doTest() {
-    doTestQuickDoc();
-  }
 
 }

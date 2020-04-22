@@ -45,19 +45,31 @@ public class MooseParserExtension extends PerlParserExtension implements MooseEl
   protected static TokenSet PARSER_TOKEN_SET;
   public static final TokenSet MOOSE_RESERVED_TOKENSET;
 
+  public static final String KEYWORD_AFTER = "after";
+  public static final String KEYWORD_BEFORE = "before";
+  public static final String KEYWORD_HAS = "has";
+  public static final String KEYWORD_AUGMENT = "augment";
+  public static final String KEYWORD_SUPER = "super";
+  public static final String KEYWORD_AROUND = "around";
+  public static final String KEYWORD_OVERRIDE = "override";
+  public static final String KEYWORD_META = "meta";
+  public static final String KEYWORD_EXTENDS = "extends";
+  public static final String KEYWORD_WITH = "with";
+  public static final String KEYWORD_INNER = "inner";
+
   static {
     // in regular case, these tokens should be created in extension class
-    TOKENS_MAP.put("inner", RESERVED_INNER);
-    TOKENS_MAP.put("with", RESERVED_WITH);
-    TOKENS_MAP.put("extends", RESERVED_EXTENDS);
-    TOKENS_MAP.put("meta", RESERVED_META);
-    TOKENS_MAP.put("override", RESERVED_OVERRIDE);
-    TOKENS_MAP.put("around", RESERVED_AROUND);
-    TOKENS_MAP.put("super", RESERVED_SUPER);
-    TOKENS_MAP.put("augment", RESERVED_AUGMENT);
-    TOKENS_MAP.put("after", RESERVED_AFTER);
-    TOKENS_MAP.put("before", RESERVED_BEFORE);
-    TOKENS_MAP.put("has", RESERVED_HAS);
+    TOKENS_MAP.put(KEYWORD_INNER, RESERVED_INNER);
+    TOKENS_MAP.put(KEYWORD_WITH, RESERVED_WITH);
+    TOKENS_MAP.put(KEYWORD_EXTENDS, RESERVED_EXTENDS);
+    TOKENS_MAP.put(KEYWORD_META, RESERVED_META);
+    TOKENS_MAP.put(KEYWORD_OVERRIDE, RESERVED_OVERRIDE);
+    TOKENS_MAP.put(KEYWORD_AROUND, RESERVED_AROUND);
+    TOKENS_MAP.put(KEYWORD_SUPER, RESERVED_SUPER);
+    TOKENS_MAP.put(KEYWORD_AUGMENT, RESERVED_AUGMENT);
+    TOKENS_MAP.put(KEYWORD_AFTER, RESERVED_AFTER);
+    TOKENS_MAP.put(KEYWORD_BEFORE, RESERVED_BEFORE);
+    TOKENS_MAP.put(KEYWORD_HAS, RESERVED_HAS);
 
     RESERVED_TO_STATEMENT_MAP.put(RESERVED_WITH, MOOSE_STATEMENT_WITH);
     RESERVED_TO_STATEMENT_MAP.put(RESERVED_EXTENDS, MOOSE_STATEMENT_EXTENDS);

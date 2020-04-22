@@ -45,6 +45,8 @@ import org.jetbrains.annotations.Nullable;
 import static com.perl5.lang.perl.documentation.PerlDocUtil.SWITCH_DOC_LINK;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.HEREDOC_BODIES_TOKENSET;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.TAGS_TOKEN_SET;
+import static com.perl5.lang.perl.parser.MooseParserExtension.*;
+import static com.perl5.lang.perl.util.PerlPackageUtil.FUNCTION_PARAMETERS;
 import static com.perl5.lang.pod.lexer.PodElementTypes.POD_OUTER;
 
 public class PerlDocumentationProvider extends PerlDocumentationProviderBase implements PerlElementTypes, PerlElementPatterns {
@@ -67,6 +69,7 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
     )
   );
   private static final TokenSet FORCE_AS_FUNC_TOKENSET = TokenSet.orSet(TAGS_TOKEN_SET, TokenSet.create(BLOCK_NAME, OPERATOR_FILETEST));
+  private static final String SECTION_DESCRIPTION = "DESCRIPTION";
 
   @Nullable
   @Override
@@ -105,6 +108,24 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
 
     if (elementType == RESERVED_ASYNC) {
       return PerlDocUtil.resolveDescriptor(PodLinkDescriptor.create("Future::AsyncAwait", "async"), contextElement, false);
+    }
+    if (elementType == RESERVED_AFTER_FP) {
+      return PerlDocUtil.resolveDescriptor(PodLinkDescriptor.create(FUNCTION_PARAMETERS, KEYWORD_AFTER), contextElement, false);
+    }
+    if (elementType == RESERVED_BEFORE_FP) {
+      return PerlDocUtil.resolveDescriptor(PodLinkDescriptor.create(FUNCTION_PARAMETERS, KEYWORD_BEFORE), contextElement, false);
+    }
+    if (elementType == RESERVED_AROUND_FP) {
+      return PerlDocUtil.resolveDescriptor(PodLinkDescriptor.create(FUNCTION_PARAMETERS, KEYWORD_AROUND), contextElement, false);
+    }
+    if (elementType == RESERVED_AUGMENT_FP) {
+      return PerlDocUtil.resolveDescriptor(PodLinkDescriptor.create(FUNCTION_PARAMETERS, KEYWORD_AUGMENT), contextElement, false);
+    }
+    if (elementType == RESERVED_FUN) {
+      return PerlDocUtil.resolveDescriptor(PodLinkDescriptor.create(FUNCTION_PARAMETERS, SECTION_DESCRIPTION), contextElement, false);
+    }
+    if (elementType == RESERVED_OVERRIDE_FP) {
+      return PerlDocUtil.resolveDescriptor(PodLinkDescriptor.create(FUNCTION_PARAMETERS, KEYWORD_OVERRIDE), contextElement, false);
     }
     if (elementType == REGEX_MODIFIER) {
       return PerlDocUtil.getRegexModifierDoc(contextElement);

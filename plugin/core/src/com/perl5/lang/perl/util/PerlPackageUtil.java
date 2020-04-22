@@ -122,6 +122,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
 
   private static final Map<String, String> CANONICAL_NAMES_CACHE = new ConcurrentHashMap<>();
   private static final Map<String, String> PATH_TO_PACKAGE_NAME_MAP = new ConcurrentHashMap<>();
+  public static final String FUNCTION_PARAMETERS = "Function::Parameters";
 
   static {
     CORE_PACKAGES_ALL.addAll(CORE_PACKAGES);
