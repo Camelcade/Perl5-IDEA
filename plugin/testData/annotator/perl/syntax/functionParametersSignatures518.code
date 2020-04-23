@@ -1,0 +1,14 @@
+sub somesub(<error descr="Sub signatures available since perl 5.20, current project is configured for v5.18">$test</error>){}
+sub (<error descr="Sub signatures available since perl 5.20, current project is configured for v5.18">$test</error>){};
+method somesub($test){}
+method ($test){};
+func somesub($test){}
+func ($test){};
+fun somesub($test){}
+fun ($test){};
+override somesub($test){}
+after somesub($test){}
+before somesub($test){}
+around somesub($test){}
+augment somesub($test){}
+

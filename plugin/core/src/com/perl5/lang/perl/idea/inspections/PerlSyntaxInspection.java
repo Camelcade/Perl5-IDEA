@@ -78,7 +78,9 @@ public class PerlSyntaxInspection extends PerlInspection {
 
       @Override
       public void visitSubSignature(@NotNull PsiPerlSubSignature o) {
-        if (o instanceof PsiPerlFuncSignatureContent || o instanceof PsiPerlMethodSignatureContent) {
+        if (o instanceof PsiPerlFuncSignatureContent ||
+            o instanceof PsiPerlMethodSignatureContent ||
+            o instanceof PsiPerlAroundSignatureContent) {
           return;
         }
 

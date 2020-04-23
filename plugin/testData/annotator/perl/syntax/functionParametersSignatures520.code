@@ -1,0 +1,14 @@
+sub somesub($test){}
+sub ($test){};
+method somesub($test){}
+method ($test){};
+func somesub($test){}
+func ($test){};
+fun somesub($test){}
+fun ($test){};
+override somesub($test){}
+after somesub($test){}
+before somesub($test){}
+around somesub($test){}
+augment somesub($test){}
+
