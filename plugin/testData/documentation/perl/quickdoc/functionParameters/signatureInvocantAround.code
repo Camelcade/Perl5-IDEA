@@ -1,0 +1,2 @@
+around something($object, $class<caret>: $var, :$othervar, $somevar = 42, $, @) {
+}

@@ -1,0 +1,17 @@
+<p><a href="psi_element://Function%3A%3AParameters">Function::Parameters</a>: <a href="psi_element://Function%3A%3AParameters%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://Function%3A%3AParameters%2FDefault+functionality">Default functionality</a></p><h3>Unnamed parameters</h3><p style="padding-bottom: 10px;">If your function doesn't use a particular parameter at all, you can omit its
+name and just write a sigil in the parameter list:</p>
+<div style="padding-bottom: 10px;"><pre><code> register_callback('click', fun ($target, $) {
+     ...
+ });</code></pre></div>
+<p style="padding-bottom: 10px;">Here we're calling a hypothetical <code>register_callback</code> function that registers
+our coderef to be called in response to a <code>click</code> event. It will pass two
+arguments to the click handler, but the coderef only cares about the first one
+(<code>$target</code>). The second parameter doesn't even get a name (just a sigil,
+<code>$</code>). This marks it as unused.</p>
+<p style="padding-bottom: 10px;">This case typically occurs when your functions have to conform to an externally
+imposed interface, e.g. because they're called by someone else. It can happen
+with callbacks or methods that don't need all of the arguments they get.</p>
+<p style="padding-bottom: 10px;">You can use unnamed <a href="psi_element://Function%3A%3AParameters%2FSlurpy%2Frest+parameters">slurpy parameters</a> to accept and
+ignore all following arguments. In particular, <code>fun foo(@)</code> is a lot like
+<code>sub foo</code> in that it accepts and ignores any number of arguments (apart from
+leaving them in <code>@_</code>).</p>

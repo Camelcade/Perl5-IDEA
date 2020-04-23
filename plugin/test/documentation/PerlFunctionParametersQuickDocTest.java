@@ -33,6 +33,31 @@ public class PerlFunctionParametersQuickDocTest extends PerlQuickDocTestCase {
   }
 
   @Test
+  public void testSignatureDefault() {
+    doTest();
+  }
+
+  @Test
+  public void testSignatureInvocant() {
+    doTest();
+  }
+
+  @Test
+  public void testSignatureInvocantAround() {
+    doTest();
+  }
+
+  @Test
+  public void testSignatureNamed() {
+    doTest();
+  }
+
+  @Test
+  public void testSignatureUnnamed() {
+    doTest();
+  }
+
+  @Test
   public void testKeywordAfter() {
     doTest();
   }

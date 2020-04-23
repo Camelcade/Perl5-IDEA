@@ -1,0 +1,51 @@
+<p><a href="psi_element://Function%3A%3AParameters">Function::Parameters</a>: <a href="psi_element://Function%3A%3AParameters%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://Function%3A%3AParameters%2FDefault+functionality">Default functionality</a></p><h3>Default arguments</h3><p style="padding-bottom: 10px;">(Most of the following examples use <code>fun</code> only. Unless specified otherwise
+everything applies to <code>method</code> as well.)</p>
+<p style="padding-bottom: 10px;">You can make some arguments optional by giving them default values.</p>
+<div style="padding-bottom: 10px;"><pre><code> fun passthrough($x, $y = 42, $z = []) {
+     return ($x, $y, $z);
+ }</code></pre></div>
+<p style="padding-bottom: 10px;">In this example the first parameter <code>$x</code> is required but <code>$y</code> and <code>$z</code> are
+optional.</p>
+<div style="padding-bottom: 10px;"><pre><code> passthrough('a', 'b', 'c', 'd')   # error: Too many arguments
+ passthrough('a', 'b', 'c')        # returns ('a', 'b', 'c')
+ passthrough('a', 'b')             # returns ('a', 'b', [])
+ passthrough('a', undef)           # returns ('a', undef, [])
+ passthrough('a')                  # returns ('a', 42, [])
+ passthrough()                     # error: Too few arguments</code></pre></div>
+<p style="padding-bottom: 10px;">Default arguments are evaluated whenever a corresponding real argument is not
+passed in by the caller. <code>undef</code> counts as a real argument; you can't use the
+default value for parameter <i>N</i> and still pass a value for parameter <i>N+1</i>.
+<code>$z = []</code> means each call that doesn't pass a third argument gets a new array
+reference (they're not shared between calls).</p>
+<p style="padding-bottom: 10px;">Default arguments are evaluated as part of the function body, allowing for
+silliness such as:</p>
+<div style="padding-bottom: 10px;"><pre><code> fun weird($name = return &quot;nope&quot;) {
+     print &quot;Hello, $name!\n&quot;;
+     return $name;
+ }
+
+ weird(&quot;Larry&quot;);  # prints &quot;Hello, Larry!&quot; and returns &quot;Larry&quot;
+ weird();         # returns &quot;nope&quot; immediately; function body doesn't run</code></pre></div>
+<p style="padding-bottom: 10px;">Preceding parameters are in scope for default arguments:</p>
+<div style="padding-bottom: 10px;"><pre><code> fun dynamic_default($x, $y = length $x) {
+    return &quot;$x/$y&quot;;
+ }
+
+ dynamic_default(&quot;hello&quot;, 0)  # returns &quot;hello/0&quot;
+ dynamic_default(&quot;hello&quot;)     # returns &quot;hello/5&quot;
+ dynamic_default(&quot;abc&quot;)       # returns &quot;abc/3&quot;</code></pre></div>
+<p style="padding-bottom: 10px;">If you just want to make a parameter optional without giving it a special
+value, write <code>$param = undef</code>. There is a special shortcut syntax for
+this case: <code>$param = undef</code> can also be written <code>$param =</code> (with no following
+expression).</p>
+<div style="padding-bottom: 10px;"><pre><code> fun foo($x = undef, $y = undef, $z = undef) {
+     # three arguments, all optional
+     ...
+ }
+
+ fun foo($x=, $y=, $z=) {
+     # shorter syntax, same meaning
+     ...
+ }</code></pre></div>
+<p style="padding-bottom: 10px;">Optional parameters must come at the end. It is not possible to have a required
+parameter after an optional one.</p>

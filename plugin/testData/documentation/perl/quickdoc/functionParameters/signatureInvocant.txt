@@ -1,0 +1,60 @@
+<p><a href="psi_element://Function%3A%3AParameters">Function::Parameters</a>: <a href="psi_element://Function%3A%3AParameters%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://Function%3A%3AParameters%2FDefault+functionality">Default functionality</a></p><h3>Simple parameter lists</h3><p style="padding-bottom: 10px;">By default you get two keywords, <code>fun</code> and <code>method</code> (but see
+<a href="psi_element://Function%3A%3AParameters%2FCustomizing+and+extending">Customizing and extending</a> below). <code>fun</code> is very similar to <code>sub</code>. You can
+use it to define both named and anonymous functions:</p>
+<div style="padding-bottom: 10px;"><pre><code> fun left_pad($str, $n) {
+     return sprintf '%*s', $n, $str;
+ }
+
+ print left_pad(&quot;hello&quot;, 10), &quot;\n&quot;;
+
+ my $twice = fun ($x) { $x * 2 };
+ print $twice-&gt;(21), &quot;\n&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">In the simplest case the parameter list is just a comma-separated list of zero
+or more scalar variables (enclosed in parentheses, following the function name,
+if any).</p>
+<p style="padding-bottom: 10px;"><code>Function::Parameters</code> automatically validates the arguments your function is
+called with. If the number of arguments doesn't match the parameter list, an
+exception is thrown.</p>
+<p style="padding-bottom: 10px;">Apart from that, the parameter variables are defined and initialized as if by:</p>
+<div style="padding-bottom: 10px;"><pre><code> sub left_pad {
+     sub left_pad;
+     my ($str, $n) = @_;
+     ...
+ }</code></pre></div>
+<p style="padding-bottom: 10px;">In particular, <code>@_</code> is still available in functions defined by <code>fun</code> and
+holds the original argument list.</p>
+<p style="padding-bottom: 10px;">The inner <code>sub left_pad;</code> declaration is intended to illustrate that the name
+of the function being defined is in scope in its own body, meaning you can call
+it recursively without having to use parentheses:</p>
+<div style="padding-bottom: 10px;"><pre><code> fun fac($n) {
+     return 1 if $n &lt; 2;
+     return $n * fac $n - 1;
+ }</code></pre></div>
+<p style="padding-bottom: 10px;">In a normal <code>sub</code> the last line would have had to be written
+<code>return $n * fac($n - 1);</code>.</p>
+<p style="padding-bottom: 10px;"><code>method</code> is almost the same as <code>fun</code> but automatically creates a <code>$self</code>
+variable as the first parameter (which is removed from <code>@_</code>):</p>
+<div style="padding-bottom: 10px;"><pre><code> method foo($x, $y) {
+    ...
+ }
+
+ # works like:
+ sub foo :method {
+    my $self = shift;
+    my ($x, $y) = @_;
+    ...
+ }</code></pre></div>
+<p style="padding-bottom: 10px;">As you can see, the <code>:method</code> attribute is also added automatically (see
+<a href="psi_element://attributes%2Fmethod" style="color:red">method in attributes</a> for details).</p>
+<p style="padding-bottom: 10px;">In some cases (e.g. class methods) <code>$self</code> is not the best name for the
+invocant of the method. You can override it on a case-by-case basis by putting
+a variable name followed by a <code>:</code> (colon) as the first thing in the parameter
+list:</p>
+<div style="padding-bottom: 10px;"><pre><code> method new($class: $x, $y) {
+     return bless { x =&gt; $x, y =&gt; $y }, $class;
+ }</code></pre></div>
+<p style="padding-bottom: 10px;">Here the invocant is named <code>$class</code>, not <code>$self</code>. It looks a bit weird but
+still works the same way if the remaining parameter list is empty:</p>
+<div style="padding-bottom: 10px;"><pre><code> method from_env($class:) {
+     return $class-&gt;new($ENV{x}, $ENV{y});
+ }</code></pre></div>

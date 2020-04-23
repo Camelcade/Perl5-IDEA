@@ -1,0 +1,2 @@
+method something($class: $var, :$othervar, $somevar = 42, <caret>$, @) {
+}

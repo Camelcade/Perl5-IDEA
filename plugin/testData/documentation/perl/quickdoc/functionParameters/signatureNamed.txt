@@ -1,0 +1,80 @@
+<p><a href="psi_element://Function%3A%3AParameters">Function::Parameters</a>: <a href="psi_element://Function%3A%3AParameters%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://Function%3A%3AParameters%2FDefault+functionality">Default functionality</a></p><h3>Named parameters</h3><p style="padding-bottom: 10px;">As soon as your functions take more than three arguments, it gets harder to
+keep track of what argument means what:</p>
+<div style="padding-bottom: 10px;"><pre><code> foo($handle, $w, $h * 2 + 15, 1, 24, 'icon');
+ # what do these arguments mean?</code></pre></div>
+<p style="padding-bottom: 10px;"><code>Function::Parameters</code> offers an alternative for these kinds of situations in
+the form of named parameters. Unlike the parameters described previously, which
+are identified by position, these parameters are identified by name:</p>
+<div style="padding-bottom: 10px;"><pre><code> fun create_point(:$x, :$y, :$color) {
+     ...
+ }
+
+ # Case 1
+ create_point(
+     x     =&gt; 50,
+     y     =&gt; 50,
+     color =&gt; 0xff_00_00,
+ );</code></pre></div>
+<p style="padding-bottom: 10px;">To create a named parameter, put a <code>:</code> (colon) in front of it in the parameter
+list. When the function is called, the arguments have to be supplied in the
+form of a hash initializer (a list of alternating keys/values). As with a hash,
+the order of key/value pairs doesn't matter (except in the case of duplicate
+keys, where the last occurrence wins):</p>
+<div style="padding-bottom: 10px;"><pre><code> # Case 2
+ create_point(
+     color =&gt; 0xff_00_00,
+     x     =&gt; 50,
+     y     =&gt; 50,
+ );
+
+ # Case 3
+ create_point(
+     x     =&gt; 200,
+     color =&gt; 0x12_34_56,
+     color =&gt; 0xff_00_00,
+     x     =&gt; 50,
+     y     =&gt; 50,
+ );</code></pre></div>
+<p style="padding-bottom: 10px;">Case 1, Case 2, and Case 3 all mean the same thing.</p>
+<p style="padding-bottom: 10px;">As with positional parameters, you can make named parameters optional by
+supplying a <a href="psi_element://Function%3A%3AParameters%2FDefault+arguments">default argument</a>:</p>
+<div style="padding-bottom: 10px;"><pre><code> fun create_point(:$x, :$y, :$color = 0x00_00_00) {
+     ...
+ }
+
+ create_point(x =&gt; 0, y =&gt; 64)  # color =&gt; 0x00_00_00 is implicit</code></pre></div>
+<p style="padding-bottom: 10px;">If you want to accept any key/value pairs, you can add a
+<a href="psi_element://Function%3A%3AParameters%2FSlurpy%2Frest+parameters">rest parameter</a> (hashes are particularly useful):</p>
+<div style="padding-bottom: 10px;"><pre><code> fun accept_all_keys(:$name, :$age, %rest) {
+     ...
+ }
+
+ accept_all_keys(
+     age     =&gt; 42,
+     gender  =&gt; 2,
+     name    =&gt; &quot;Jamie&quot;,
+     marbles =&gt; [],
+ );
+ # $name = &quot;Jamie&quot;;
+ # $age = 42;
+ # %rest = (
+ #     gender  =&gt; 2,
+ #     marbles =&gt; [],
+ # );</code></pre></div>
+<p style="padding-bottom: 10px;">You can combine positional and named parameters but all positional parameters
+have to come first:</p>
+<div style="padding-bottom: 10px;"><pre><code> method output(
+    $data,
+    :$handle       = $self-&gt;output_handle,
+    :$separator    = $self-&gt;separator,
+    :$quote_fields = 0,
+ ) {
+     ...
+ }
+
+ $obj-&gt;output([&quot;greetings&quot;, &quot;from&quot;, &quot;space&quot;]);
+ $obj-&gt;output(
+    [&quot;a&quot;, &quot;random&quot;, &quot;example&quot;],
+    quote_fields =&gt; 1,
+    separator    =&gt; &quot;;&quot;,
+ );</code></pre></div>

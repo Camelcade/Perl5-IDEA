@@ -104,28 +104,15 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
       return null;
     }
 
-    IElementType elementType = contextElement.getNode().getElementType();
+    PsiElement functionParametersDoc = computeFunctionParametersDoc(contextElement);
+    if (functionParametersDoc != null) {
+      return functionParametersDoc;
+    }
+
+    IElementType elementType = PsiUtilCore.getElementType(contextElement);
 
     if (elementType == RESERVED_ASYNC) {
       return PerlDocUtil.resolveDescriptor(PodLinkDescriptor.create("Future::AsyncAwait", "async"), contextElement, false);
-    }
-    if (elementType == RESERVED_AFTER_FP) {
-      return PerlDocUtil.resolveDescriptor(PodLinkDescriptor.create(FUNCTION_PARAMETERS, KEYWORD_AFTER), contextElement, false);
-    }
-    if (elementType == RESERVED_BEFORE_FP) {
-      return PerlDocUtil.resolveDescriptor(PodLinkDescriptor.create(FUNCTION_PARAMETERS, KEYWORD_BEFORE), contextElement, false);
-    }
-    if (elementType == RESERVED_AROUND_FP) {
-      return PerlDocUtil.resolveDescriptor(PodLinkDescriptor.create(FUNCTION_PARAMETERS, KEYWORD_AROUND), contextElement, false);
-    }
-    if (elementType == RESERVED_AUGMENT_FP) {
-      return PerlDocUtil.resolveDescriptor(PodLinkDescriptor.create(FUNCTION_PARAMETERS, KEYWORD_AUGMENT), contextElement, false);
-    }
-    if (elementType == RESERVED_FUN || elementType == RESERVED_METHOD || elementType == RESERVED_METHOD_FP) {
-      return PerlDocUtil.resolveDescriptor(PodLinkDescriptor.create(FUNCTION_PARAMETERS, SECTION_DESCRIPTION), contextElement, false);
-    }
-    if (elementType == RESERVED_OVERRIDE_FP) {
-      return PerlDocUtil.resolveDescriptor(PodLinkDescriptor.create(FUNCTION_PARAMETERS, KEYWORD_OVERRIDE), contextElement, false);
     }
     if (elementType == REGEX_MODIFIER) {
       return PerlDocUtil.getRegexModifierDoc(contextElement);
@@ -144,6 +131,52 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
     }
 
     return findDocumentation(editor);
+  }
+
+  /**
+   * @return some {@code Function::Parameters} specific documentation if available
+   */
+  @Nullable
+  private PsiElement computeFunctionParametersDoc(@NotNull PsiElement contextElement) {
+    IElementType elementType = PsiUtilCore.getElementType(contextElement);
+    if (elementType == RESERVED_AFTER_FP) {
+      return PerlDocUtil.resolveDescriptor(PodLinkDescriptor.create(FUNCTION_PARAMETERS, KEYWORD_AFTER), contextElement, false);
+    }
+    if (elementType == RESERVED_BEFORE_FP) {
+      return PerlDocUtil.resolveDescriptor(PodLinkDescriptor.create(FUNCTION_PARAMETERS, KEYWORD_BEFORE), contextElement, false);
+    }
+    if (elementType == RESERVED_AROUND_FP) {
+      return PerlDocUtil.resolveDescriptor(PodLinkDescriptor.create(FUNCTION_PARAMETERS, KEYWORD_AROUND), contextElement, false);
+    }
+    if (elementType == RESERVED_AUGMENT_FP) {
+      return PerlDocUtil.resolveDescriptor(PodLinkDescriptor.create(FUNCTION_PARAMETERS, KEYWORD_AUGMENT), contextElement, false);
+    }
+    if (elementType == RESERVED_FUN || elementType == RESERVED_METHOD || elementType == RESERVED_METHOD_FP) {
+      return PerlDocUtil.resolveDescriptor(PodLinkDescriptor.create(FUNCTION_PARAMETERS, SECTION_DESCRIPTION), contextElement, false);
+    }
+    if (elementType == RESERVED_OVERRIDE_FP) {
+      return PerlDocUtil.resolveDescriptor(PodLinkDescriptor.create(FUNCTION_PARAMETERS, KEYWORD_OVERRIDE), contextElement, false);
+    }
+    IElementType parentElementType = PsiUtilCore.getElementType(contextElement.getParent());
+    if (elementType == COLON) {
+      if (parentElementType == METHOD_SIGNATURE_INVOCANT) {
+        return PerlDocUtil
+          .resolveDescriptor(PodLinkDescriptor.create(FUNCTION_PARAMETERS, "Simple parameter lists"), contextElement, false);
+      }
+      else if (parentElementType == AROUND_SIGNATURE_INVOCANTS) {
+        return PerlDocUtil.resolveDescriptor(PodLinkDescriptor.create(FUNCTION_PARAMETERS, KEYWORD_AROUND), contextElement, false);
+      }
+      else if (PerlTokenSets.SIGNATURE_CONTAINERS.contains(parentElementType)) {
+        return PerlDocUtil.resolveDescriptor(PodLinkDescriptor.create(FUNCTION_PARAMETERS, "Named parameters"), contextElement, false);
+      }
+    }
+    if (elementType == OPERATOR_ASSIGN && PerlTokenSets.SIGNATURE_CONTAINERS.contains(parentElementType)) {
+      return PerlDocUtil.resolveDescriptor(PodLinkDescriptor.create(FUNCTION_PARAMETERS, "Default arguments"), contextElement, false);
+    }
+    if (PerlTokenSets.SIGILS.contains(elementType) && parentElementType == SUB_SIGNATURE_ELEMENT_IGNORE) {
+      return PerlDocUtil.resolveDescriptor(PodLinkDescriptor.create(FUNCTION_PARAMETERS, "Unnamed parameters"), contextElement, false);
+    }
+    return null;
   }
 
   /**
