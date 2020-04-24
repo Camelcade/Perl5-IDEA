@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,8 @@ import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
 
+import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
+
 
 public interface PerlFormattingTokenSets extends PerlElementTypes {
   TokenSet FOR_OR_FOREACH = TokenSet.create(
@@ -36,7 +38,17 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     FUNC_DEFINITION,
     SUB_EXPR,
     SUB_DEFINITION,
-    SUB_DECLARATION
+    SUB_DECLARATION,
+    FUN_EXPR,
+    METHOD_EXPR
+  );
+
+  TokenSet INVOCANTS_TOKENSET = TokenSet.create(
+    METHOD_SIGNATURE_INVOCANT, AROUND_SIGNATURE_INVOCANTS
+  );
+
+  TokenSet SUB_OR_MODIFIER_DEFINITIONS_TOKENSET = TokenSet.orSet(
+    SUB_DEFINITIONS_TOKENSET, MODIFIER_DECLARATIONS_TOKENSET
   );
 
   TokenSet SECONDARY_COMPOUND_TOKENSET = TokenSet.create(
@@ -271,4 +283,38 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     VARIABLE_RIGHT_BRACES,
     TokenSet.create(RIGHT_BRACE)
   );
+
+  TokenSet BLOCK_OPENERS = TokenSet.create(
+    LEFT_BRACE,
+    LEFT_BRACKET,
+    LEFT_PAREN
+  );
+
+  TokenSet BLOCK_CLOSERS = TokenSet.create(
+    RIGHT_BRACE,
+    RIGHT_BRACKET,
+    RIGHT_PAREN,
+
+    SEMICOLON
+  );
+
+  TokenSet SIGNATURES_CONTAINERS = TokenSet.orSet(TokenSet.create(SUB_SIGNATURE), SIGNATURE_CONTAINERS_EX);
+
+  TokenSet COMMA_LIKE_SEQUENCES = TokenSet.orSet(SIGNATURES_CONTAINERS, TokenSet.create(COMMA_SEQUENCE_EXPR));
+
+  /**
+   * Elements that must have LF between them
+   */
+  TokenSet LF_ELEMENTS = TokenSet.orSet(
+    STATEMENTS,
+    TokenSet.create(
+      LABEL_DECLARATION,
+      FOR_COMPOUND,
+      TRYCATCH_COMPOUND,
+      FOREACH_COMPOUND,
+      WHILE_COMPOUND,
+      WHEN_COMPOUND,
+      UNTIL_COMPOUND,
+      IF_COMPOUND
+    ));
 }

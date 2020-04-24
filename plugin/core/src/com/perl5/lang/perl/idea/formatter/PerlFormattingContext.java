@@ -28,7 +28,6 @@ import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.intellij.psi.impl.source.tree.CompositeElement;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.containers.FactoryMap;
@@ -55,29 +54,6 @@ import static com.perl5.lang.perl.lexer.PerlTokenSets.ALL_QUOTE_OPENERS;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.STATEMENTS;
 
 public class PerlFormattingContext implements PerlFormattingTokenSets {
-  public final static TokenSet BLOCK_OPENERS = TokenSet.create(
-    LEFT_BRACE,
-    LEFT_BRACKET,
-    LEFT_PAREN
-  );
-  public final static TokenSet BLOCK_CLOSERS = TokenSet.create(
-    RIGHT_BRACE,
-    RIGHT_BRACKET,
-    RIGHT_PAREN,
-
-    SEMICOLON
-  );
-
-  public static final TokenSet SIGNATURES_CONTAINERS = TokenSet.create(
-    SUB_SIGNATURE,
-    METHOD_SIGNATURE_CONTENT,
-    FUNC_SIGNATURE_CONTENT
-  );
-
-  public static final TokenSet COMMA_LIKE_SEQUENCES = TokenSet.orSet(
-    SIGNATURES_CONTAINERS,
-    TokenSet.create(COMMA_SEQUENCE_EXPR)
-  );
 
   private final Map<ASTNode, Wrap> myWrapMap = new THashMap<>();
   private final Map<Integer, Alignment> myAssignmentsAlignmentsMap = new THashMap<>();
@@ -118,21 +94,6 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
   private final SpacingBuilder mySpacingBuilder;
   private final List<TextRange> myHeredocRangesList = new ArrayList<>();
 
-  /**
-   * Elements that must have LF between them
-   */
-  public final static TokenSet LF_ELEMENTS = TokenSet.orSet(
-    STATEMENTS,
-    TokenSet.create(
-      LABEL_DECLARATION,
-      FOR_COMPOUND,
-      TRYCATCH_COMPOUND,
-      FOREACH_COMPOUND,
-      WHILE_COMPOUND,
-      WHEN_COMPOUND,
-      UNTIL_COMPOUND,
-      IF_COMPOUND
-    ));
   private final static MultiMap<IElementType, IElementType> OPERATOR_COLLISIONS_MAP = new MultiMap<>();
 
   static {
@@ -551,7 +512,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
   public Alignment getChildAlignment(@NotNull PerlAstBlock block, int newChildIndex) {
     ASTNode node = block.getNode();
     IElementType elementType = PsiUtilCore.getElementType(node);
-    if (PerlFormattingContext.COMMA_LIKE_SEQUENCES.contains(elementType)) {
+    if (PerlFormattingTokenSets.COMMA_LIKE_SEQUENCES.contains(elementType)) {
       return null;
     }
 

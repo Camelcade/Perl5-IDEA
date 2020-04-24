@@ -39,8 +39,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Objects;
 
-import static com.perl5.lang.perl.idea.formatter.PerlFormattingContext.BLOCK_CLOSERS;
-import static com.perl5.lang.perl.idea.formatter.PerlFormattingContext.BLOCK_OPENERS;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.BLOCK_CLOSERS;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.BLOCK_OPENERS;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.HEREDOC_BODIES_TOKENSET;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.VARIABLE_DECLARATIONS;
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.NO_STATEMENT;
@@ -226,7 +226,7 @@ public class PerlIndentProcessor implements PerlElementTypes {
       return Indent.getNoneIndent();
     }
 
-    if (PerlFormattingContext.COMMA_LIKE_SEQUENCES.contains(parentNodeType)) {
+    if (PerlFormattingTokenSets.COMMA_LIKE_SEQUENCES.contains(parentNodeType)) {
       return grandParentNodeType == STATEMENT ? Indent.getContinuationWithoutFirstIndent() : Indent.getContinuationIndent();
     }
 

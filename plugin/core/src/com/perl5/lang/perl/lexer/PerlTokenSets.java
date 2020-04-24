@@ -358,7 +358,7 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
     AFTER_MODIFIER, BEFORE_MODIFIER, AROUND_MODIFIER, AUGMENT_MODIFIER
   );
 
-  TokenSet SIGNATURE_CONTAINERS = TokenSet.create(
+  TokenSet SIGNATURE_CONTAINERS_EX = TokenSet.create(
     METHOD_SIGNATURE_CONTENT, FUNC_SIGNATURE_CONTENT, AROUND_SIGNATURE_CONTENT
   );
 }

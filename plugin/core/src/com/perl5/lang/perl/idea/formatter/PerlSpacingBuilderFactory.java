@@ -21,11 +21,101 @@ import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import org.jetbrains.annotations.NotNull;
 
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.ADD_EXPR;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.ANON_ARRAY;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.ANON_HASH;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.AROUND_SIGNATURE_CONTENT;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.ARRAY_INDEX;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.ATTRIBUTE;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.ATTRIBUTES;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.BLOCK;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.CALL_ARGUMENTS;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.COLON;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.COMMA;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.COMMENT_LINE;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.CONDITIONAL_BLOCK;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.CONDITION_EXPR;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.FAT_COMMA;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.FLIPFLOP_EXPR;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.FOREACH_COMPOUND;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.FOREACH_ITERATOR;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.FOR_COMPOUND;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.FOR_STATEMENT_MODIFIER;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.FUNC_DEFINITION;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.FUNC_SIGNATURE_CONTENT;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.HASH_INDEX;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.HEREDOC_END;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.IF_STATEMENT_MODIFIER;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.LEFT_BRACE;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.LEFT_BRACKET;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.LEFT_PAREN;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.LP_CODE_BLOCK;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.LP_CODE_BLOCK_WITH_TRYCATCH;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.LP_STRING_QW;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.METHOD_DEFINITION;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.METHOD_SIGNATURE_CONTENT;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.NAMESPACE_DEFINITION;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.NUMBER_CONSTANT;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.OPERATOR_CONCAT;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.OPERATOR_DEREFERENCE;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.OPERATOR_HEREDOC;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.OPERATOR_MINUS;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.OPERATOR_PLUS;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.OPERATOR_REFERENCE;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.OPERATOR_X;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.OPERATOR_X_ASSIGN;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.PACKAGE;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.PARENTHESISED_CALL_ARGUMENTS;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.PARENTHESISED_EXPR;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.PERL_HANDLE_EXPR;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.PREFIX_UNARY_EXPR;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.PRINT_EXPR;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.QUESTION;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.QUOTE_SINGLE_CLOSE;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.QUOTE_SINGLE_OPEN;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.RESERVED_ASYNC;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.RESERVED_ELSE;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.RESERVED_FOR;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.RESERVED_FOREACH;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.RESERVED_FORMAT;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.RESERVED_FUNC;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.RESERVED_IF;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.RESERVED_METHOD;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.RESERVED_PACKAGE;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.RESERVED_RETURN;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.RESERVED_SUB;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.RESERVED_UNLESS;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.RESERVED_UNTIL;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.RESERVED_WHEN;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.RESERVED_WHILE;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.RIGHT_BRACE;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.RIGHT_BRACKET;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.RIGHT_PAREN;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.SEMICOLON;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.SORT_EXPR;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.STATEMENT;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.STRING_BARE;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.STRING_LIST;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.SUB_DECLARATION;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.SUB_DEFINITION;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.SUB_EXPR;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.SUB_NAME;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.SUB_SIGNATURE_ELEMENT_IGNORE;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.TERNARY_EXPR;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.UNCONDITIONAL_BLOCK;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.UNLESS_STATEMENT_MODIFIER;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.UNTIL_STATEMENT_MODIFIER;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.VARIABLE_DECLARATION_ELEMENT;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.VARIABLE_DECLARATION_GLOBAL;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.VARIABLE_DECLARATION_LEXICAL;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.VARIABLE_DECLARATION_LOCAL;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.VERSION_ELEMENT;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.WHEN_STATEMENT_MODIFIER;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.WHILE_STATEMENT_MODIFIER;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.*;
 import static com.perl5.lang.perl.idea.formatter.PerlIndentProcessor.MULTI_PARAM_BLOCK_CONTAINERS;
 import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.SAME_LINE;
-import static com.perl5.lang.perl.lexer.PerlTokenSets.CUSTOM_EXPR_KEYWORDS;
-import static com.perl5.lang.perl.lexer.PerlTokenSets.SUB_MODIFIERS;
+import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
 import static com.perl5.lang.perl.parser.MooseParserExtension.MOOSE_RESERVED_TOKENSET;
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.NO_STATEMENT;
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.USE_STATEMENT;
@@ -46,6 +136,8 @@ public class PerlSpacingBuilderFactory {
       .around(OPERATORS_BITWISE).spaceIf(settings.SPACE_AROUND_BITWISE_OPERATORS)
       .after(OPERATOR_REFERENCE).spaces(0)
 
+      .between(FUNCTION_PARAMETERS_KEYWORDS_TOKENSET, SUB_NAME).spaces(1)
+
       .afterInside(OPERATOR_MINUS, PREFIX_UNARY_EXPR).spaceIf(settings.SPACE_AROUND_UNARY_OPERATOR)
       .afterInside(OPERATOR_PLUS, PREFIX_UNARY_EXPR).spaceIf(settings.SPACE_AROUND_UNARY_OPERATOR)
 
@@ -60,7 +152,7 @@ public class PerlSpacingBuilderFactory {
       .between(RESERVED_FORMAT, SUB_NAME).spaces(1)
 
       .between(ATTRIBUTES, LEFT_PAREN).spaces(1)
-      .beforeInside(LEFT_PAREN, SUB_DEFINITIONS_TOKENSET).spaceIf(settings.SPACE_BEFORE_METHOD_PARENTHESES)
+      .beforeInside(LEFT_PAREN, SUB_OR_MODIFIER_DEFINITIONS_TOKENSET).spaceIf(settings.SPACE_BEFORE_METHOD_PARENTHESES)
 
       .betweenInside(LEFT_PAREN, RIGHT_PAREN, SUB_DEFINITION).spaceIf(settings.SPACE_WITHIN_EMPTY_METHOD_PARENTHESES)
       .betweenInside(LEFT_PAREN, RIGHT_PAREN, SUB_DECLARATION).spaceIf(settings.SPACE_WITHIN_EMPTY_METHOD_PARENTHESES)
@@ -68,12 +160,20 @@ public class PerlSpacingBuilderFactory {
       .betweenInside(LEFT_PAREN, RIGHT_PAREN, FUNC_DEFINITION).spaceIf(settings.SPACE_WITHIN_EMPTY_METHOD_PARENTHESES)
       .betweenInside(LEFT_PAREN, RIGHT_PAREN, SUB_EXPR).spaceIf(settings.SPACE_WITHIN_EMPTY_METHOD_PARENTHESES)
 
-      .afterInside(LEFT_PAREN, SUB_DEFINITIONS_TOKENSET).spaceIf(settings.SPACE_WITHIN_METHOD_PARENTHESES)
-      .beforeInside(RIGHT_PAREN, SUB_DEFINITIONS_TOKENSET).spaceIf(settings.SPACE_WITHIN_METHOD_PARENTHESES)
+      .afterInside(LEFT_PAREN, SUB_OR_MODIFIER_DEFINITIONS_TOKENSET).spaceIf(settings.SPACE_WITHIN_METHOD_PARENTHESES)
+      .beforeInside(RIGHT_PAREN, SUB_OR_MODIFIER_DEFINITIONS_TOKENSET).spaceIf(settings.SPACE_WITHIN_METHOD_PARENTHESES)
 
       .before(ATTRIBUTES).spaceIf(perlSettings.SPACE_BEFORE_ATTRIBUTE)
+      .between(INVOCANTS_TOKENSET, COLON).spaces(1)
+      .between(INVOCANTS_TOKENSET, VARIABLE_DECLARATION_ELEMENT).spaces(1)
+      .between(INVOCANTS_TOKENSET, SUB_SIGNATURE_ELEMENT_IGNORE).spaces(1)
+      .betweenInside(COLON, VARIABLE_DECLARATION_ELEMENT, METHOD_SIGNATURE_CONTENT).spaces(0)
+      .betweenInside(COLON, VARIABLE_DECLARATION_ELEMENT, AROUND_SIGNATURE_CONTENT).spaces(0)
+      .betweenInside(COLON, VARIABLE_DECLARATION_ELEMENT, FUNC_SIGNATURE_CONTENT).spaces(0)
+      .beforeInside(COLON, INVOCANTS_TOKENSET).spaces(0)
       .beforeInside(COLON, ATTRIBUTES).spaceIf(perlSettings.SPACE_BEFORE_ATTRIBUTE)
       .between(COLON, ATTRIBUTE).spaces(0)
+      .between(ATTRIBUTE, ATTRIBUTE).spaces(1)
 
       .between(SUB_MODIFIERS, RESERVED_SUB).spaces(1)
       .afterInside(RESERVED_SUB, SUB_DEFINITION).spaces(1)
@@ -191,7 +291,7 @@ public class PerlSpacingBuilderFactory {
       .afterInside(PACKAGE, NO_STATEMENT).spaces(1)
       .afterInside(VERSION_ELEMENT, NO_STATEMENT).spaces(1)
 
-      .beforeInside(BLOCK, SUB_DEFINITIONS_TOKENSET).spacing(
+      .beforeInside(BLOCK, SUB_OR_MODIFIER_DEFINITIONS_TOKENSET).spacing(
         settings.SPACE_BEFORE_IF_LBRACE ? 1 : 0,
         settings.SPACE_BEFORE_IF_LBRACE ? 1 : 0,
         perlSettings.BRACE_STYLE_SUB == SAME_LINE ? 0 : 1,
@@ -199,7 +299,7 @@ public class PerlSpacingBuilderFactory {
         0
       )
 
-      .beforeInside(LP_CODE_BLOCK, SUB_DEFINITIONS_TOKENSET).spacing(
+      .beforeInside(LP_CODE_BLOCK, SUB_OR_MODIFIER_DEFINITIONS_TOKENSET).spacing(
         settings.SPACE_BEFORE_IF_LBRACE ? 1 : 0,
         settings.SPACE_BEFORE_IF_LBRACE ? 1 : 0,
         perlSettings.BRACE_STYLE_SUB == SAME_LINE ? 0 : 1,
@@ -207,7 +307,7 @@ public class PerlSpacingBuilderFactory {
         0
       )
 
-      .beforeInside(LP_CODE_BLOCK_WITH_TRYCATCH, SUB_DEFINITIONS_TOKENSET).spacing(
+      .beforeInside(LP_CODE_BLOCK_WITH_TRYCATCH, SUB_OR_MODIFIER_DEFINITIONS_TOKENSET).spacing(
         settings.SPACE_BEFORE_IF_LBRACE ? 1 : 0,
         settings.SPACE_BEFORE_IF_LBRACE ? 1 : 0,
         perlSettings.BRACE_STYLE_SUB == SAME_LINE ? 0 : 1,
