@@ -361,4 +361,5 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
   TokenSet SIGNATURE_CONTAINERS_EX = TokenSet.create(
     METHOD_SIGNATURE_CONTENT, FUNC_SIGNATURE_CONTENT, AROUND_SIGNATURE_CONTENT
   );
+  TokenSet SIGNATURES_CONTAINERS = TokenSet.orSet(TokenSet.create(SUB_SIGNATURE), SIGNATURE_CONTAINERS_EX);
 }

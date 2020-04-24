@@ -298,8 +298,6 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     SEMICOLON
   );
 
-  TokenSet SIGNATURES_CONTAINERS = TokenSet.orSet(TokenSet.create(SUB_SIGNATURE), SIGNATURE_CONTAINERS_EX);
-
   TokenSet COMMA_LIKE_SEQUENCES = TokenSet.orSet(SIGNATURES_CONTAINERS, TokenSet.create(COMMA_SEQUENCE_EXPR));
 
   /**

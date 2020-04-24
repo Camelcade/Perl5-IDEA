@@ -150,48 +150,48 @@ around something($) {}
 augment something($) {}
 
 #   Variable   with   empty   default
-fun something($some =) {}
-fun($some =) {};
-method something($some =) {}
-method($some =) {};
-override something($some =) {}
-after something($some =) {}
-before something($some =) {}
-around something($some =) {}
-augment something($some =) {}
+fun something($some=) {}
+fun($some=) {};
+method something($some=) {}
+method($some=) {};
+override something($some=) {}
+after something($some=) {}
+before something($some=) {}
+around something($some=) {}
+augment something($some=) {}
 
 #   Named   with   empty   default
-fun something(:$some =) {}
-fun(:$some =) {};
-method something(:$some =) {}
-method(:$some =) {};
-override something(:$some =) {}
-after something(:$some =) {}
-before something(:$some =) {}
-around something(:$some =) {}
-augment something(:$some =) {}
+fun something(:$some=) {}
+fun(:$some=) {};
+method something(:$some=) {}
+method(:$some=) {};
+override something(:$some=) {}
+after something(:$some=) {}
+before something(:$some=) {}
+around something(:$some=) {}
+augment something(:$some=) {}
 
 #   Variable   with   default
-fun something($some = somecall(42 + 'sparta')) {}
-fun($some = somecall(42 + 'sparta')) {};
-method something($some = somecall(42 + 'sparta')) {}
-method($some = somecall(42 + 'sparta')) {};
-override something($some = somecall(42 + 'sparta')) {}
-after something($some = somecall(42 + 'sparta')) {}
-before something($some = somecall(42 + 'sparta')) {}
-around something($some = somecall(42 + 'sparta')) {}
-augment something($some = somecall(42 + 'sparta')) {}
+fun something($some=somecall(42 + 'sparta')) {}
+fun($some=somecall(42 + 'sparta')) {};
+method something($some=somecall(42 + 'sparta')) {}
+method($some=somecall(42 + 'sparta')) {};
+override something($some=somecall(42 + 'sparta')) {}
+after something($some=somecall(42 + 'sparta')) {}
+before something($some=somecall(42 + 'sparta')) {}
+around something($some=somecall(42 + 'sparta')) {}
+augment something($some=somecall(42 + 'sparta')) {}
 
 #   Named   with   default
-fun something(:$some = somecall(42 + 'sparta')) {}
-fun(:$some = somecall(42 + 'sparta')) {};
-method something(:$some = somecall(42 + 'sparta')) {}
-method(:$some = somecall(42 + 'sparta')) {};
-override something(:$some = somecall(42 + 'sparta')) {}
-after something(:$some = somecall(42 + 'sparta')) {}
-before something(:$some = somecall(42 + 'sparta')) {}
-around something(:$some = somecall(42 + 'sparta')) {}
-augment something(:$some = somecall(42 + 'sparta')) {}
+fun something(:$some=somecall(42 + 'sparta')) {}
+fun(:$some=somecall(42 + 'sparta')) {};
+method something(:$some=somecall(42 + 'sparta')) {}
+method(:$some=somecall(42 + 'sparta')) {};
+override something(:$some=somecall(42 + 'sparta')) {}
+after something(:$some=somecall(42 + 'sparta')) {}
+before something(:$some=somecall(42 + 'sparta')) {}
+around something(:$some=somecall(42 + 'sparta')) {}
+augment something(:$some=somecall(42 + 'sparta')) {}
 
 #   Mixed   cases
 fun something($var, $othervar, :$namedvar, :@namedarray, $, @) :some stuff {}

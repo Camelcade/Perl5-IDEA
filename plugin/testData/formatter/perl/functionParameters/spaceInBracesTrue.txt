@@ -10,15 +10,15 @@ around something() {}
 augment something() {}
 
 #   Simple code
-fun something() {say 'hi';}
-fun() {say 'hi';};
-method something() {say 'hi';}
-method() {say 'hi';};
-override something() {say 'hi';}
-after something() {say 'hi';}
-before something() {say 'hi';}
-around something() {say 'hi';}
-augment something() {say 'hi';}
+fun something() { say 'hi'; }
+fun() { say 'hi'; };
+method something() { say 'hi'; }
+method() { say 'hi'; };
+override something() { say 'hi'; }
+after something() { say 'hi'; }
+before something() { say 'hi'; }
+around something() { say 'hi'; }
+augment something() { say 'hi'; }
 
 #   Complex code
 fun something() {

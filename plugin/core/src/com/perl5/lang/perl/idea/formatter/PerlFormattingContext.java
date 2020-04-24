@@ -39,7 +39,10 @@ import com.perl5.lang.perl.idea.formatter.blocks.PerlSyntheticBlock;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.PsiPerlStatementModifier;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
+import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -358,7 +361,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
         return myElementsALignmentsMap.get(parentNode);
       }
     }
-    else if (SIGNATURES_CONTAINERS.contains(parentNodeType)) {
+    else if (PerlTokenSets.SIGNATURES_CONTAINERS.contains(parentNodeType)) {
       return mySettings.ALIGN_MULTILINE_PARAMETERS ? myElementsALignmentsMap.get(parentNode) : null;
     }
     else if ((childNodeType == VARIABLE_DECLARATION_ELEMENT ||
@@ -377,7 +380,8 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
         return myElementsALignmentsMap.get(parentNode);
       }
     }
-    else if (parentNodeType == ATTRIBUTES && childNodeType == COLON && myPerlSettings.ALIGN_ATTRIBUTES) {
+    else if (myPerlSettings.ALIGN_ATTRIBUTES && parentNodeType == ATTRIBUTES &&
+             (childNodeType == COLON || isAttributeWithoutColon(childNode))) {
       return myElementsALignmentsMap.get(parentNode);
     }
     return null;
@@ -438,8 +442,13 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
         return getWrapBySettings(parentNode, mySettings.TERNARY_OPERATION_WRAP, false);
       }
     }
-    else if (SIGNATURES_CONTAINERS.contains(parentNodeType) && childNodeType != COMMA && childNodeType != FAT_COMMA) {
-      return getWrapBySettings(parentNode, mySettings.METHOD_PARAMETERS_WRAP, false);
+    // fixme assign operator should probably use assignment wrapping settings
+    else if (PerlTokenSets.SIGNATURES_CONTAINERS.contains(parentNodeType) &&
+             childNodeType != COMMA && childNodeType != FAT_COMMA && childNodeType != OPERATOR_ASSIGN) {
+      PsiElement psiElement = childNode.getPsi();
+      if (!PerlVariableDeclarationElement.isNamedParameter(psiElement) && !PerlSubArgument.isDefaultValue(childNode.getPsi())) {
+        return getWrapBySettings(parentNode, mySettings.METHOD_PARAMETERS_WRAP, false);
+      }
     }
     else if (parentNodeType == COMMA_SEQUENCE_EXPR && childNodeType != COMMA && childNodeType != FAT_COMMA) {
       IElementType grandParentNodeType = PsiUtilCore.getElementType(parentNode.getTreeParent());
@@ -473,10 +482,15 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
              OPERATORS_ASSIGNMENT.contains(childNodeType) == mySettings.PLACE_ASSIGNMENT_SIGN_ON_NEXT_LINE) {
       return getWrapBySettings(parentNode, mySettings.ASSIGNMENT_WRAP, OPERATORS_ASSIGNMENT.contains(childNodeType));
     }
-    else if (parentNodeType == ATTRIBUTES && childNodeType == COLON) {
+    else if (parentNodeType == ATTRIBUTES && (childNodeType == COLON || isAttributeWithoutColon(childNode))) {
       return getWrapBySettings(parentNode, myPerlSettings.ATTRIBUTES_WRAP, false);
     }
     return null;
+  }
+
+  private boolean isAttributeWithoutColon(@NotNull ASTNode node) {
+    return PsiUtilCore.getElementType(node) == ATTRIBUTE &&
+           PsiUtilCore.getElementType(PerlPsiUtil.getPrevSignificantSibling(node.getPsi())) != COLON;
   }
 
   @NotNull

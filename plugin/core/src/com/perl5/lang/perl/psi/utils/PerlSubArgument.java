@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,10 +18,13 @@ package com.perl5.lang.perl.psi.utils;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
+import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.lexer.PerlLexer;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -30,6 +33,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.OPERATOR_ASSIGN;
+import static com.perl5.lang.perl.lexer.PerlTokenSets.SIGNATURES_CONTAINERS;
 import static com.perl5.lang.perl.util.PerlScalarUtil.DEFAULT_SELF_NAME;
 
 
@@ -214,5 +219,19 @@ public class PerlSubArgument {
     for (PerlSubArgument argument : arguments) {
       argument.serialize(dataStream);
     }
+  }
+
+  /**
+   * @return true iff {@code psiElement} is default value of sub/method/modifier parameter specified in signature
+   */
+  @Contract("null->false")
+  public static boolean isDefaultValue(@Nullable PsiElement psiElement) {
+    if (psiElement == null) {
+      return false;
+    }
+    if (!SIGNATURES_CONTAINERS.contains(PsiUtilCore.getElementType(psiElement.getParent()))) {
+      return false;
+    }
+    return PsiUtilCore.getElementType(PerlPsiUtil.getPrevSignificantSibling(psiElement)) == OPERATOR_ASSIGN;
   }
 }

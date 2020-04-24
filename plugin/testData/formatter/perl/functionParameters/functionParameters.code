@@ -9,6 +9,28 @@ before   something   (   )   {   }
 around   something   (   )   {   }
 augment   something   (   )   {   }
 
+#   Simple code
+fun   something   (   )   {    say    'hi'  ;  }
+fun   (   )   {     say    'hi'  ;   }   ;
+method   something   (   )   {     say    'hi'  ;   }
+method   (   )   {     say    'hi'  ;   }   ;
+override   something   (   )   {     say    'hi'  ;   }
+after   something   (   )   {     say    'hi'  ;   }
+before   something   (   )   {     say    'hi'  ;   }
+around   something   (   )   {     say    'hi'  ;   }
+augment   something   (   )   {     say    'hi'  ;   }
+
+#   Complex code
+fun   something   (   )   {    say    'hi'  ;     say    'hi'  ;   }
+fun   (   )   {     say    'hi'  ;     say    'hi'  ;    }   ;
+method   something   (   )   {     say    'hi'  ;     say    'hi'  ;    }
+method   (   )   {     say    'hi'  ;     say    'hi'  ;    }   ;
+override   something   (   )   {     say    'hi'  ;     say    'hi'  ;    }
+after   something   (   )   {     say    'hi'  ;     say    'hi'  ;    }
+before   something   (   )   {     say    'hi'  ;     say    'hi'  ;    }
+around   something   (   )   {     say    'hi'  ;     say    'hi'  ;    }
+augment   something   (   )   {     say    'hi'  ;     say    'hi'  ;    }
+
 #   Empty   with   attrs
 fun   something   (   )   :   some   thing   {   }
 fun   (   )   :   some   thing   {   }   ;

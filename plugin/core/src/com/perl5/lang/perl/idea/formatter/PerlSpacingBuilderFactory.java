@@ -22,12 +22,16 @@ import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import org.jetbrains.annotations.NotNull;
 
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.ADD_EXPR;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.AFTER_MODIFIER;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.ANON_ARRAY;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.ANON_HASH;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.AROUND_MODIFIER;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.AROUND_SIGNATURE_CONTENT;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.ARRAY_INDEX;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.ATTRIBUTE;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.ATTRIBUTES;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.AUGMENT_MODIFIER;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.BEFORE_MODIFIER;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.BLOCK;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.CALL_ARGUMENTS;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.COLON;
@@ -43,6 +47,7 @@ import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.FOR_COM
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.FOR_STATEMENT_MODIFIER;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.FUNC_DEFINITION;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.FUNC_SIGNATURE_CONTENT;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.FUN_EXPR;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.HASH_INDEX;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.HEREDOC_END;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.IF_STATEMENT_MODIFIER;
@@ -53,6 +58,7 @@ import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.LP_CODE
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.LP_CODE_BLOCK_WITH_TRYCATCH;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.LP_STRING_QW;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.METHOD_DEFINITION;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.METHOD_EXPR;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.METHOD_SIGNATURE_CONTENT;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.NAMESPACE_DEFINITION;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.NUMBER_CONSTANT;
@@ -159,6 +165,12 @@ public class PerlSpacingBuilderFactory {
       .betweenInside(LEFT_PAREN, RIGHT_PAREN, METHOD_DEFINITION).spaceIf(settings.SPACE_WITHIN_EMPTY_METHOD_PARENTHESES)
       .betweenInside(LEFT_PAREN, RIGHT_PAREN, FUNC_DEFINITION).spaceIf(settings.SPACE_WITHIN_EMPTY_METHOD_PARENTHESES)
       .betweenInside(LEFT_PAREN, RIGHT_PAREN, SUB_EXPR).spaceIf(settings.SPACE_WITHIN_EMPTY_METHOD_PARENTHESES)
+      .betweenInside(LEFT_PAREN, RIGHT_PAREN, FUN_EXPR).spaceIf(settings.SPACE_WITHIN_EMPTY_METHOD_PARENTHESES)
+      .betweenInside(LEFT_PAREN, RIGHT_PAREN, METHOD_EXPR).spaceIf(settings.SPACE_WITHIN_EMPTY_METHOD_PARENTHESES)
+      .betweenInside(LEFT_PAREN, RIGHT_PAREN, AFTER_MODIFIER).spaceIf(settings.SPACE_WITHIN_EMPTY_METHOD_PARENTHESES)
+      .betweenInside(LEFT_PAREN, RIGHT_PAREN, BEFORE_MODIFIER).spaceIf(settings.SPACE_WITHIN_EMPTY_METHOD_PARENTHESES)
+      .betweenInside(LEFT_PAREN, RIGHT_PAREN, AROUND_MODIFIER).spaceIf(settings.SPACE_WITHIN_EMPTY_METHOD_PARENTHESES)
+      .betweenInside(LEFT_PAREN, RIGHT_PAREN, AUGMENT_MODIFIER).spaceIf(settings.SPACE_WITHIN_EMPTY_METHOD_PARENTHESES)
 
       .afterInside(LEFT_PAREN, SUB_OR_MODIFIER_DEFINITIONS_TOKENSET).spaceIf(settings.SPACE_WITHIN_METHOD_PARENTHESES)
       .beforeInside(RIGHT_PAREN, SUB_OR_MODIFIER_DEFINITIONS_TOKENSET).spaceIf(settings.SPACE_WITHIN_METHOD_PARENTHESES)

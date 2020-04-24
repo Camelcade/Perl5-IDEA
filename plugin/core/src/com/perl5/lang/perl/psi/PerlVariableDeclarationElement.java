@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,17 +16,24 @@
 
 package com.perl5.lang.perl.psi;
 
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.StubBasedPsiElement;
+import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.psi.properties.PerlIdentifierOwner;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariableDeclarationStub;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.COLON;
+import static com.perl5.lang.perl.lexer.PerlTokenSets.SIGNATURES_CONTAINERS;
 
 
 public interface PerlVariableDeclarationElement
@@ -104,4 +111,15 @@ public interface PerlVariableDeclarationElement
    */
   @Nullable
   PerlVariableAnnotations getExternalVariableAnnotations();
+
+  /**
+   * @return true iff {@code psiElement} is variable declaration element preceding by colon. See {@code Function::Parameters} named
+   * parameters syntax.
+   */
+  @Contract("null -> false")
+  static boolean isNamedParameter(@Nullable PsiElement psiElement) {
+    return psiElement instanceof PerlVariableDeclarationElement &&
+           SIGNATURES_CONTAINERS.contains(PsiUtilCore.getElementType(psiElement.getParent())) &&
+           PsiUtilCore.getElementType(PerlPsiUtil.getPrevSignificantSibling(psiElement)) == COLON;
+  }
 }
