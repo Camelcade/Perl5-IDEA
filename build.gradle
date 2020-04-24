@@ -64,6 +64,16 @@ allprojects {
   apply plugin: 'org.jetbrains.intellij'
   version = "${pluginVersion}${platformBranch}${pluginBuild}"
 
+  def isPlugin = pluginProjectsNames.contains(project.name)
+
+  buildPlugin { onlyIf { isPlugin } }
+  patchPluginXml{ onlyIf { isPlugin } }
+  buildSearchableOptions{ onlyIf { isPlugin } }
+  publishPlugin{
+    onlyIf {isPlugin}
+    token = project.findProperty('jbToken') ?: ''
+  }
+
   intellij {
     version "${platformVersion}${platformBranch}${platformBuild}"
     updateSinceUntilBuild = true
@@ -111,10 +121,6 @@ allprojects {
 
   it.afterEvaluate {
     coveralls.sourceDirs += it.sourceSets.main.java.srcDirs.findAll { file -> file.name == "src" }
-  }
-
-  publishPlugin {
-    token = project.findProperty('jbToken') ?: ''
   }
 }
 
@@ -223,8 +229,4 @@ sourceSets {
   test {
     resources.srcDirs file('testData')
   }
-}
-
-task publishAllPlugins {
-  pluginProjects.each { dependsOn("${it.name}:publishPlugin") }
 }
