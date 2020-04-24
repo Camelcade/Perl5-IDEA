@@ -1,0 +1,20 @@
+Subtree: Perl5 (Perl5)
+Perl5
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlSubCallImpl(SUB_CALL)
+      PsiPerlMethodImpl(Perl5: METHOD)
+        PerlSubNameElementImpl(Perl5: subname)('augmentfoo')
+      PsiPerlParenthesisedCallArgumentsImpl(Perl5: PARENTHESISED_CALL_ARGUMENTS)
+        PsiElement(Perl5: ()('(')
+        PsiElement(Perl5: ))(')')
+    PsiErrorElement:Semicolon expected
+      <empty list>
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlAnonHashImpl(Perl5: ANON_HASH)
+      PsiElement(Perl5: {)('{')
+      PsiElement(Perl5: })('}')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('augmentfoo() {\n}')
+--------------------------------------------------------------------------------

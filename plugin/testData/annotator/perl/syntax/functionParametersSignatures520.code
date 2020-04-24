@@ -3,7 +3,6 @@ sub ($test){};
 method somesub($test){}
 method ($test){};
 func somesub($test){}
-func ($test){};
 fun somesub($test){}
 fun ($test){};
 override somesub($test){}

@@ -1,0 +1,17 @@
+Subtree: Perl5 (Perl5)
+Perl5
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlFunExprImpl(Perl5: FUN_EXPR)
+      PsiElement(Perl5: fun)('fun')
+      PsiElement(Perl5: ()('(')
+      PsiPerlFuncSignatureContentImpl(Perl5: FUNC_SIGNATURE_CONTENT)
+        <empty list>
+      PsiElement(Perl5: ))(')')
+      PsiPerlBlockImpl(Perl5: BLOCK)
+        PsiElement(Perl5: {)('{')
+        PsiElement(Perl5: })('}')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('fun() {\n}')
+--------------------------------------------------------------------------------
