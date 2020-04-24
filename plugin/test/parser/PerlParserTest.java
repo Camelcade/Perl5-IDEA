@@ -648,6 +648,9 @@ public class PerlParserTest extends PerlParserTestBase {
   public void testAsyncDeclaration() {doTest(false);}
 
   @Test
+  public void testAsyncJoined() {doTest(false);}
+
+  @Test
   public void testAsyncDefinition() {doTest();}
 
   @Test

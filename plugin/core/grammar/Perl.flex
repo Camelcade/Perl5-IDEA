@@ -46,10 +46,11 @@ LINE_COMMENT = "#" .*
 LINE_COMMENT_ANNOTATION = "#@" .*
 LINE_COMMENT_WITH_NEW_LINE = {LINE_COMMENT} \R
 SPACE_OR_COMMENT = {ANY_SPACE}|{LINE_COMMENT_WITH_NEW_LINE}
-SPACES_OR_COMMENTS = {SPACE_OR_COMMENT}*
-NON_SPACE_AHEAD = {SPACES_OR_COMMENTS}[^ \t\f\n\r\#]
+MAY_BE_SPACES_OR_COMMENTS = {SPACE_OR_COMMENT}*
+MUST_BE_SPACES_OR_COMMENTS = {SPACE_OR_COMMENT}+
+NON_SPACE_AHEAD = {MAY_BE_SPACES_OR_COMMENTS}[^ \t\f\n\r\#]
 
-FP_SUFFIX = {SPACE_OR_COMMENT}+ {IDENTIFIER} {SPACES_OR_COMMENTS} "("
+FP_SUFFIX = {MUST_BE_SPACES_OR_COMMENTS} {IDENTIFIER} {MAY_BE_SPACES_OR_COMMENTS} "("
 ESCAPED_SPACE_OR_COMMENT = "\\"({ANY_SPACE}|"#")
 
 // http://perldoc.perl.org/perldata.html#Identifier-parsing
@@ -91,8 +92,8 @@ CAPPED_SINGLE_LETTER_VARIABLE_NAME = "^"[\]\[A-Z\^_?\\]
 VARIABLE_NAME = {VARIABLE_QUALIFIED_IDENTIFIER} | {NUMERIC_VARIABLE_NAME} | "::" | {CAPPED_SINGLE_LETTER_VARIABLE_NAME} | {SPECIAL_VARIABLE_NAME}
 CAPPED_BRACED_VARIABLE = {CAPPED_SINGLE_LETTER_VARIABLE_NAME}[\w_]*
 
-AMBIGUOUS_SIGIL_SUFFIX = {SPACES_OR_COMMENTS} ("{"|[\"\'\[\]\`\\\!\)\+\,\-\.\/\;\<\=\>\|\~\?\:\^]|{CAPPED_SINGLE_LETTER_VARIABLE_NAME}|
-  {IDENTIFIER}{SPACES_OR_COMMENTS}"=>" )
+AMBIGUOUS_SIGIL_SUFFIX = {MAY_BE_SPACES_OR_COMMENTS} ("{"|[\"\'\[\]\`\\\!\)\+\,\-\.\/\;\<\=\>\|\~\?\:\^]|{CAPPED_SINGLE_LETTER_VARIABLE_NAME}|
+  {IDENTIFIER}{MAY_BE_SPACES_OR_COMMENTS}"=>" )
 
 // atm making the same, but seems unary are different
 PERL_OPERATORS_FILETEST = "-" [rwxoRWXOezsfdlpSbctugkTBMAC]
@@ -140,10 +141,10 @@ AMBIGOUS_PACKAGES="version"|"JSON"|"YAML"|"Test"
 REGEX_COMMENT = "(?#"[^)]*")"
 REGEX_ARRAY_NEGATING = [\^\:\\\[\{\.\,\'\"]
 REGEX_HASH_NEGATING = [\^\:\\\[\{\.\,]
-HANDLE_NEGATING = {SPACES_OR_COMMENTS} ("("|"->"|":")
-PRINT_HANDLE_NEGATING = {SPACES_OR_COMMENTS} ("("|"->"|":"|";"|"=>"|"&&"|"||")
+HANDLE_NEGATING = {MAY_BE_SPACES_OR_COMMENTS} ("("|"->"|":")
+PRINT_HANDLE_NEGATING = {MAY_BE_SPACES_OR_COMMENTS} ("("|"->"|":"|";"|"=>"|"&&"|"||")
 
-BRACE_AFTER_SPACE_COMMENTS = {SPACES_OR_COMMENTS}"{"
+BRACE_AFTER_SPACE_COMMENTS = {MAY_BE_SPACES_OR_COMMENTS}"{"
 
 //REGEX_CHAR_CLASS = "\\" [dswDSW]
 REGEX_POSIX_CHARGROUPS = "alpha"|"alnum"|"ascii"|"cntrl"|"digit"|"graph"|"lower"|"print"|"punct"|"space"|"uppper"|"xdigit"|"word"|"blank"
@@ -561,9 +562,9 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 	[^] 					{return REGEX_TOKEN;}
 
 <MATCH_REGEX, MATCH_REGEX_X,MATCH_REGEX_XX,REGEX_CHARCLASS_X,REGEX_CHARCLASS_XX,REGEX_QUOTED_X>{
-  "$" / {SPACES_OR_COMMENTS}[()]      {return REGEX_TOKEN;}
-  "$#" / {SPACES_OR_COMMENTS}[()]     {return REGEX_TOKEN;}
-  "@" / {SPACES_OR_COMMENTS}[()]     {return REGEX_TOKEN;}
+  "$" / {MAY_BE_SPACES_OR_COMMENTS}[()]      {return REGEX_TOKEN;}
+  "$#" / {MAY_BE_SPACES_OR_COMMENTS}[()]     {return REGEX_TOKEN;}
+  "@" / {MAY_BE_SPACES_OR_COMMENTS}[()]     {return REGEX_TOKEN;}
 }
 
 //////////////////////////////////// END OF REGULAR EXPRESSION /////////////////////////////////////////////////////////
@@ -602,11 +603,11 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 <CATCH_PACKAGE>   {QUALIFIED_IDENTIFIER}	{yybegin(YYINITIAL);return PACKAGE;}
 
 <AFTER_TRY_BLOCK,AFTER_CATCH_BLOCK,AFTER_FINALLY_BLOCK,AFTER_EXCEPT_BLOCK,AFTER_OTHERWISE_BLOCK,AFTER_CONTINUATION_BLOCK>{
-  "catch"        / {SPACES_OR_COMMENTS} ("("|"{"|{QUALIFIED_IDENTIFIER}) {yybegin(AFTER_CATCH); return RESERVED_CATCH;}
+  "catch"        / {MAY_BE_SPACES_OR_COMMENTS} ("("|"{"|{QUALIFIED_IDENTIFIER}) {yybegin(AFTER_CATCH); return RESERVED_CATCH;}
 }
 
 <AFTER_TRY_TRYCATCH_BLOCK>{
-  "catch"        / {SPACES_OR_COMMENTS} "{" {yybegin(AFTER_CATCH_TRYCATCH); return RESERVED_CATCH;}
+  "catch"        / {MAY_BE_SPACES_OR_COMMENTS} "{" {yybegin(AFTER_CATCH_TRYCATCH); return RESERVED_CATCH;}
   [^]            {    yypushback(1);yybegin(YYINITIAL);}
 }
 
@@ -801,8 +802,8 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 }
 
 <VARIABLE_BRACED>{
-	{VARIABLE_NAME}	/ {SPACES_OR_COMMENTS}"}"				{return getBracedVariableNameToken();}
-	{CAPPED_BRACED_VARIABLE} / {SPACES_OR_COMMENTS}"}"		{return getBracedVariableNameToken();}
+	{VARIABLE_NAME}	/ {MAY_BE_SPACES_OR_COMMENTS}"}"				{return getBracedVariableNameToken();}
+	{CAPPED_BRACED_VARIABLE} / {MAY_BE_SPACES_OR_COMMENTS}"}"		{return getBracedVariableNameToken();}
 	[^]														{yypushback(1);yybegin(YYINITIAL);}
 }
 
@@ -871,7 +872,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 
 <AFTER_IDENTIFIER_WITH_LABEL>{
         {IDENTIFIER} / "::" {yybegin(YYINITIAL);pushback();}
-        {IDENTIFIER} / {SPACES_OR_COMMENTS} "(" {yybegin(YYINITIAL);pushback();}
+        {IDENTIFIER} / {MAY_BE_SPACES_OR_COMMENTS} "(" {yybegin(YYINITIAL);pushback();}
 	{IDENTIFIER}	{yybegin(YYINITIAL);return IDENTIFIER;}
 	[^]				{yypushback(1);yybegin(YYINITIAL);}
 }
@@ -911,7 +912,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 // ambiguous variable in ambiguous situation
 <AFTER_IDENTIFIER>
 {
-        "&" / {SPACES_OR_COMMENTS} "~"  {yybegin(AFTER_POSSIBLE_SIGIL);return OPERATOR_BITWISE_AND;}
+        "&" / {MAY_BE_SPACES_OR_COMMENTS} "~"  {yybegin(AFTER_POSSIBLE_SIGIL);return OPERATOR_BITWISE_AND;}
 	"%" / {AMBIGUOUS_SIGIL_SUFFIX}	{return startUnbracedVariable(AFTER_VARIABLE, SIGIL_HASH);}
 	"*"	/ {AMBIGUOUS_SIGIL_SUFFIX}	{return startUnbracedVariable(AFTER_VARIABLE, SIGIL_GLOB);}
 	"&"	/ {AMBIGUOUS_SIGIL_SUFFIX}	{return startUnbracedVariable(AFTER_VARIABLE, SIGIL_CODE);}
@@ -985,7 +986,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 
 	{CORE_PREFIX}"format"	 	{myFormatWaiting = true; yybegin(AFTER_IDENTIFIER); return RESERVED_FORMAT;}
 
-        "async" / {SPACES_OR_COMMENTS} {CORE_PREFIX}"sub"   {return RESERVED_ASYNC;}
+        "async" / {MUST_BE_SPACES_OR_COMMENTS} {CORE_PREFIX}"sub"   {return RESERVED_ASYNC;}
 	{CORE_PREFIX}"sub" 		                  {yybegin(SUB_DECLARATION);return  RESERVED_SUB;}
 
 	{CORE_PREFIX}"package"	 	{yybegin(PACKAGE_DECLARATION_ARGUMENTS); return RESERVED_PACKAGE;}
@@ -995,12 +996,12 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 
 	{CORE_PREFIX}"undef"		{yybegin(AFTER_IDENTIFIER); return RESERVED_UNDEF;}
 
-        "async" / {SPACES_OR_COMMENTS} "method" {return RESERVED_ASYNC;}
-	"method" / {SPACES_OR_COMMENTS}"("      {pushStateAndBegin(YYINITIAL,METHOD_DECLARATION_CONTENT); return RESERVED_METHOD_FP;}
+        "async" / {MUST_BE_SPACES_OR_COMMENTS} "method" {return RESERVED_ASYNC;}
+	"method" / {MAY_BE_SPACES_OR_COMMENTS}"("      {pushStateAndBegin(YYINITIAL,METHOD_DECLARATION_CONTENT); return RESERVED_METHOD_FP;}
 	"method"			        {yybegin(METHOD_DECLARATION); return RESERVED_METHOD;}
 	"func"				        {yybegin(METHOD_DECLARATION); return RESERVED_FUNC;}
 	"fun"  / {FP_SUFFIX}		        {yybegin(METHOD_DECLARATION); return RESERVED_FUN;}
-	"fun"  / {SPACES_OR_COMMENTS}"("        {pushStateAndBegin(YYINITIAL,METHOD_DECLARATION_CONTENT); return RESERVED_FUN;}
+	"fun"  / {MAY_BE_SPACES_OR_COMMENTS}"("        {pushStateAndBegin(YYINITIAL,METHOD_DECLARATION_CONTENT); return RESERVED_FUN;}
         "override" / {FP_SUFFIX}                {yybegin(METHOD_DECLARATION); return RESERVED_OVERRIDE_FP;}
         "after" / {FP_SUFFIX}                   {yybegin(METHOD_DECLARATION); return RESERVED_AFTER_FP;}
         "before" / {FP_SUFFIX}                  {yybegin(METHOD_DECLARATION); return RESERVED_BEFORE_FP;}
@@ -1044,7 +1045,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 	{CORE_PREFIX}"delete"    { yybegin(YYINITIAL); return RESERVED_DELETE;}
 	{CORE_PREFIX}"wantarray" { yybegin(AFTER_VALUE); return RESERVED_WANTARRAY;}
 
-	{CORE_PREFIX}"defined" / {SPACES_OR_COMMENTS} "//"	{ yybegin(AFTER_IDENTIFIER); return RESERVED_DEFINED;}
+	{CORE_PREFIX}"defined" / {MAY_BE_SPACES_OR_COMMENTS} "//"	{ yybegin(AFTER_IDENTIFIER); return RESERVED_DEFINED;}
 	{CORE_PREFIX}"defined"	                                { yybegin(YYINITIAL); return RESERVED_DEFINED;}
 
 	{CORE_PREFIX}"scalar"	 { yybegin(AFTER_IDENTIFIER); return RESERVED_SCALAR;}
@@ -1163,7 +1164,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 	{XQ_STRING} {yybegin(AFTER_VALUE);pushState();yybegin(QUOTE_LIKE_OPENER_QX);return captureString();}
 
 	// fixme optimize via merging?
-	{BAREWORD_MINUS} / {SPACES_OR_COMMENTS}* {FARROW}	{yybegin(AFTER_VALUE);return STRING_CONTENT;}
+	{BAREWORD_MINUS} / {MAY_BE_SPACES_OR_COMMENTS}* {FARROW}	{yybegin(AFTER_VALUE);return STRING_CONTENT;}
 
 	{NUMBER_BIN}									 {yybegin(AFTER_VALUE);return NUMBER;}
 	{NUMBER_HEX}									 {yybegin(AFTER_VALUE);return NUMBER;}
@@ -1203,10 +1204,10 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 <YYINITIAL,BLOCK_AS_VALUE,AFTER_COMMA,AFTER_VARIABLE,AFTER_VALUE,AFTER_IDENTIFIER,AFTER_POSSIBLE_SIGIL>{
         "default" / {ANY_SPACE}* "("  {return SUB_NAME;}
 
-        "new" / {SPACES_OR_COMMENTS}{AMBIGOUS_PACKAGES}{ANY_SPACE}* "("  {pushStateAndBegin(FORCE_PACKAGE_TOKEN);return SUB_NAME;}
+        "new" / {MUST_BE_SPACES_OR_COMMENTS}{AMBIGOUS_PACKAGES}{ANY_SPACE}* "("  {pushStateAndBegin(FORCE_PACKAGE_TOKEN);return SUB_NAME;}
         {AMBIGOUS_PACKAGES} / {ANY_SPACE}* "("                           {return SUB_NAME;}
 
-        "parent" / {SPACES_OR_COMMENTS}"{"      {return SUB_NAME;}
+        "parent" / {MAY_BE_SPACES_OR_COMMENTS}"{"      {return SUB_NAME;}
 	{CORE_LIST}				{return PACKAGE;}
 	"__PACKAGE__"           {yybegin(AFTER_IDENTIFIER);return TAG_PACKAGE;}
 	{QUALIFIED_IDENTIFIER} 	{return getIdentifierToken();}
