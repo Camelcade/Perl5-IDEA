@@ -59,16 +59,12 @@ augment something() {
 }
 
 #   Empty   with   attrs
-fun something() :some
-        thing {}
-fun() :some
-        thing {};
+fun something() :some thing {}
+fun() :some thing {};
 method something() :some
         thing {}
-method() :some
-        thing {};
-override something()
-        :some
+method() :some thing {};
+override something() :some
         thing {}
 after something() :some
         thing {}
@@ -76,21 +72,17 @@ before something() :some
         thing {}
 around something() :some
         thing {}
-augment something()
-        :some
+augment something() :some
         thing {}
 
 #   Empty   with   colon   attrs
 fun something() :some
         :thing {}
-fun() :some
-        :thing {};
+fun() :some :thing {};
 method something() :some
         :thing {}
-method() :some
-        :thing {};
-override something()
-        :some
+method() :some :thing {};
+override something() :some
         :thing {}
 after something() :some
         :thing {}
@@ -98,8 +90,7 @@ before something() :some
         :thing {}
 around something() :some
         :thing {}
-augment something()
-        :some
+augment something() :some
         :thing {}
 
 #   Invocant   only
@@ -280,40 +271,32 @@ around something($var, $othervar, :$namedvar, :@namedarray, $, @)
 #   Mixed   cases with params and attrs on the new line
 fun something(
         $var, $othervar, :$namedvar, :@namedarray, $, @)
-        :some
-        stuff {}
+        :some stuff {}
 fun(
         $var, $othervar, :$namedvar, :@namedarray, $, @)
-        :some
-        stuff {};
+        :some stuff {};
 method something(
         $someself: $var, $othervar, :$namedvar, :@namedarray, $, @)
-        :some
-        stuff {}
+        :some stuff {}
 method(
                 $someself: $var, $othervar, :$namedvar, :@namedarray, $, @)
                 :some
         stuff {};
 override something(
         $someself: $var, $othervar, :$namedvar, :@namedarray, $, @)
-        :some
-        stuff {}
+        :some stuff {}
 after something(
         $someself: :$var, $othervar, :$namedvar, :@namedarray, $, @)
-        :some
-        stuff {}
+        :some stuff {}
 before something(
         $someself: :$var, $othervar, :$namedvar, :@namedarray, $, @)
-        :some
-        stuff {}
+        :some stuff {}
 augment something(
         $someself: :$var, $othervar, :$namedvar, :@namedarray, $, @)
-        :some
-        stuff {}
+        :some stuff {}
 around something(
         $var, $othervar, :$namedvar, :@namedarray, $, @)
-        :some
-        stuff {}
+        :some stuff {}
 
 # Sub cases
 sub somesub($var1, $var2 = 123, $var4, $)

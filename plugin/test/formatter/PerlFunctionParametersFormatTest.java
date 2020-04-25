@@ -203,7 +203,7 @@ public class PerlFunctionParametersFormatTest extends PerlFormatterTestCase {
 
 
   private void doWrapTest() {
-    getSettings().RIGHT_MARGIN = 20;
+    getSettings().RIGHT_MARGIN = 30;
     doTest();
   }
 

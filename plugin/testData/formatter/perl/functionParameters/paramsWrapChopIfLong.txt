@@ -92,8 +92,7 @@ augment something($class:) {}
 #   Invocant   +   variable
 method something($class:
                  $var) {}
-method($class:
-       $var) {};
+method($class: $var) {};
 override something($class:
                    $var) {}
 after something($class:
@@ -108,8 +107,7 @@ augment something($class:
 #   Invocant   +   named   variable
 method something($class:
                  :$var) {}
-method($class:
-       :$var) {};
+method($class: :$var) {};
 override something($class:
                    :$var) {}
 after something($class:
@@ -122,16 +120,12 @@ augment something($class:
                   :$var) {}
 
 #   Invocant   +   ignored
-method something($class:
-                 $) {}
-method($class:
-       @) {};
+method something($class: $) {}
+method($class: @) {};
 override something($class:
                    $) {}
-after something($class:
-                $) {}
-before something($class:
-                 $) {}
+after something($class: $) {}
+before something($class: $) {}
 around something($orig, $class:
                  $) {}
 augment something($class:
