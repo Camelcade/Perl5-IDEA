@@ -357,7 +357,8 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     LP_STRING_QW,
     COMMA_SEQUENCE_EXPR,
     CALL_ARGUMENTS,
-    REGEX_QUOTE_CLOSE
+    REGEX_QUOTE_CLOSE,
+    ATTRIBUTES
   );
   TokenSet BLOCK_LIKE_CONTAINERS = TokenSet.create(
     BLOCK
