@@ -349,3 +349,43 @@ around something($var,
         :@namedarray,
         $,
         @) :some stuff {}
+
+# Sub cases
+sub somesub($var1,
+        $var2 = 123,
+        $var4,
+        $) :one two three {
+    say 'hi';
+    say 'hi';
+}
+
+sub(
+        $var1,
+        $var2 = 123,
+        $var4,
+        $)
+        :one
+        two
+        three {
+    say 'hi';
+    say 'hi';
+};
+sub($var1,
+        $var2 = 123,
+        $var4,
+        $) :one two three {
+    say 'hi';
+    say 'hi';
+};
+
+sub(
+        $var1,
+        $var2 = 123,
+        $var4,
+        $)
+        :one
+        two
+        three {
+    say 'hi';
+    say 'hi';
+}
