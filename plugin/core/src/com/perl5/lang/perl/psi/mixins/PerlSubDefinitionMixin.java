@@ -19,7 +19,6 @@ package com.perl5.lang.perl.psi.mixins;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PsiPerlSubDefinition;
 import com.perl5.lang.perl.psi.PsiPerlSubSignatureElementIgnore;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
@@ -45,12 +44,8 @@ public abstract class PerlSubDefinitionMixin extends PerlSubDefinitionBase imple
     if (!super.processSignatureElement(signatureElement, arguments)) {
       if (signatureElement instanceof PsiPerlSubSignatureElementIgnore) {
         PerlSubArgument newArgument = PerlSubArgument.empty();
-        newArgument.setOptional(signatureElement.getFirstChild() != signatureElement.getLastChild()); // has elements inside, means optional
+        newArgument.setOptional(signatureElement.getNextSibling() != null);
         arguments.add(newArgument);
-      }
-      else if (signatureElement.getNode().getElementType() == PerlElementTypes.OPERATOR_ASSIGN && arguments.size() > 0) {
-        // setting last element as optional
-        arguments.get(arguments.size() - 1).setOptional(true);
       }
       else {
         return false;

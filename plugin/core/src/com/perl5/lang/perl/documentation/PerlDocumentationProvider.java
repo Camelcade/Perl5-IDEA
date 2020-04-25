@@ -166,11 +166,12 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
       else if (parentElementType == AROUND_SIGNATURE_INVOCANTS) {
         return PerlDocUtil.resolveDescriptor(PodLinkDescriptor.create(FUNCTION_PARAMETERS, KEYWORD_AROUND), contextElement, false);
       }
-      else if (parentElementType == SIGNATURE_CONTENT) {
+      else if (parentElementType == SIGNATURE_ELEMENT) {
         return PerlDocUtil.resolveDescriptor(PodLinkDescriptor.create(FUNCTION_PARAMETERS, "Named parameters"), contextElement, false);
       }
     }
-    if (elementType == OPERATOR_ASSIGN && parentElementType == SIGNATURE_CONTENT) {
+    // fixme these may occur in regular sub signature
+    if (elementType == OPERATOR_ASSIGN && parentElementType == SIGNATURE_ELEMENT) {
       return PerlDocUtil.resolveDescriptor(PodLinkDescriptor.create(FUNCTION_PARAMETERS, "Default arguments"), contextElement, false);
     }
     if (PerlTokenSets.SIGILS.contains(elementType) && parentElementType == SUB_SIGNATURE_ELEMENT_IGNORE) {

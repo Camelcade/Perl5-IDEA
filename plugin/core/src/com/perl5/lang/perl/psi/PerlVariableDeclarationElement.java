@@ -33,7 +33,7 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.COLON;
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.SIGNATURE_CONTENT;
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.SIGNATURE_ELEMENT;
 
 
 public interface PerlVariableDeclarationElement
@@ -119,7 +119,7 @@ public interface PerlVariableDeclarationElement
   @Contract("null -> false")
   static boolean isNamedParameter(@Nullable PsiElement psiElement) {
     return psiElement instanceof PerlVariableDeclarationElement &&
-           PsiUtilCore.getElementType(psiElement.getParent()) == SIGNATURE_CONTENT &&
+           PsiUtilCore.getElementType(psiElement.getParent()) == SIGNATURE_ELEMENT &&
            PsiUtilCore.getElementType(PerlPsiUtil.getPrevSignificantSibling(psiElement)) == COLON;
   }
 }

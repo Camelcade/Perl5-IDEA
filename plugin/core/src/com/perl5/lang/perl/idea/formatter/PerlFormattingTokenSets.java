@@ -353,6 +353,7 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
 
       LP_STRING_QW
     ));
+
   TokenSet UNINDENTABLE_TOKENS = TokenSet.create(
     LP_STRING_QW,
     COMMA_SEQUENCE_EXPR,

@@ -80,7 +80,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     TokenSet.create(
       NAMESPACE_CONTENT, NAMESPACE_DEFINITION,
       DO_BLOCK_EXPR,
-      SIGNATURE_CONTENT,
+      SIGNATURE_CONTENT, SIGNATURE_ELEMENT,
       BLOCK, CONTINUE_BLOCK, CONDITION_EXPR,
       CALL_ARGUMENTS, PARENTHESISED_CALL_ARGUMENTS,
       WHILE_COMPOUND, UNTIL_COMPOUND,
@@ -366,29 +366,31 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       if (declarationContainer instanceof PsiPerlMethodSignatureInvocant) {
         declarationContainer = declarationContainer.getParent();
       }
+      else if (declarationContainer instanceof PerlSignatureElement) {
+        declarationContainer = declarationContainer.getParent();
+      }
       if (!(declarationContainer instanceof PsiPerlSignatureContent)) {
         super.visitVariableDeclarationElement(o);
         return;
       }
       PsiElement[] signatureElements = declarationContainer.getChildren();
       int argumentIndex = computeBaseArgumentIndex(declarationContainer.getParent(), signatureElements);
-      int childIndex = 0;
+
+      PsiElement currentSignatureElement = null;
       for (PsiElement signatureElement : signatureElements) {
-        if (signatureElement instanceof PsiPerlMethodSignatureInvocant) {
-          signatureElement = signatureElement.getFirstChild();
-        }
-        if (signatureElement.equals(o)) {
+        if (PsiTreeUtil.isAncestor(signatureElement, o, true)) {
+          currentSignatureElement = signatureElement;
           break;
         }
-        if (isDeclarationElement(signatureElement)) {
-          argumentIndex++;
-        }
-        childIndex++;
+        argumentIndex++;
       }
 
-      int nextChildIndex = childIndex + 1;
-      PsiElement nextChild = signatureElements.length > nextChildIndex ? signatureElements[nextChildIndex] : null;
-      PsiElement defaultValue = isDeclarationElement(nextChild) ? null : nextChild;
+      if (currentSignatureElement == null) {
+        LOG.error("Could not find: " + o.getText() + " in " + declarationContainer.getText());
+      }
+
+      PsiElement defaultValue = currentSignatureElement instanceof PerlSignatureElement ?
+                                ((PerlSignatureElement)currentSignatureElement).getDefaultValueElement() : null;
       PerlVariable variable = o.getVariable();
       addNodeAndCheckPending(new PerlSubSignatureElementInstruction(PerlControlFlowBuilder.this, variable, argumentIndex, defaultValue));
     }
@@ -401,12 +403,6 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
         return 0;
       }
       return signatureElements.length > 0 && signatureElements[0] instanceof PsiPerlMethodSignatureInvocant ? 0 : 1;
-    }
-
-    private boolean isDeclarationElement(PsiElement signatureElement) {
-      return signatureElement instanceof PsiPerlVariableDeclarationElement ||
-             signatureElement instanceof PsiPerlSubSignatureElementIgnore ||
-             signatureElement instanceof PsiPerlMethodSignatureInvocant;
     }
 
     @Override

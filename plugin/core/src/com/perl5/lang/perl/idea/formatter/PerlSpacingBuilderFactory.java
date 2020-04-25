@@ -95,7 +95,7 @@ import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.RIGHT_B
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.RIGHT_BRACKET;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.RIGHT_PAREN;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.SEMICOLON;
-import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.SIGNATURE_CONTENT;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.SIGNATURE_ELEMENT;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.SORT_EXPR;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.STATEMENT;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.STRING_BARE;
@@ -104,7 +104,6 @@ import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.SUB_DEC
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.SUB_DEFINITION;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.SUB_EXPR;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.SUB_NAME;
-import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.SUB_SIGNATURE_ELEMENT_IGNORE;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.TERNARY_EXPR;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.UNCONDITIONAL_BLOCK;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.UNLESS_STATEMENT_MODIFIER;
@@ -174,9 +173,8 @@ public class PerlSpacingBuilderFactory {
 
       .before(ATTRIBUTES).spaceIf(perlSettings.SPACE_BEFORE_ATTRIBUTE)
       .between(INVOCANTS_TOKENSET, COLON).spaces(1)
-      .between(INVOCANTS_TOKENSET, VARIABLE_DECLARATION_ELEMENT).spaces(1)
-      .between(INVOCANTS_TOKENSET, SUB_SIGNATURE_ELEMENT_IGNORE).spaces(1)
-      .betweenInside(COLON, VARIABLE_DECLARATION_ELEMENT, SIGNATURE_CONTENT).spaces(0)
+      .between(INVOCANTS_TOKENSET, SIGNATURE_ELEMENT).spaces(1)
+      .betweenInside(COLON, VARIABLE_DECLARATION_ELEMENT, SIGNATURE_ELEMENT).spaces(0)
       .beforeInside(COLON, INVOCANTS_TOKENSET).spaces(0)
       .beforeInside(COLON, ATTRIBUTES).spaceIf(perlSettings.SPACE_BEFORE_ATTRIBUTE)
       .between(COLON, ATTRIBUTE).spaces(0)

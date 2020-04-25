@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,10 @@
 
 package com.perl5.lang.perl.psi;
 
+import com.intellij.psi.PsiElement;
+
 /**
  * Marker interface for declarations wrappers, which wraps lexical variables: signatures, locals and so on
  */
-public interface PerlLexicalVariableDeclarationMarker {
+public interface PerlLexicalVariableDeclarationMarker extends PsiElement {
 }

@@ -34,7 +34,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.OPERATOR_ASSIGN;
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.SIGNATURE_CONTENT;
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.SIGNATURE_ELEMENT;
 import static com.perl5.lang.perl.util.PerlScalarUtil.DEFAULT_SELF_NAME;
 
 
@@ -229,7 +229,7 @@ public class PerlSubArgument {
     if (psiElement == null) {
       return false;
     }
-    if (PsiUtilCore.getElementType(psiElement.getParent()) != SIGNATURE_CONTENT) {
+    if (PsiUtilCore.getElementType(psiElement.getParent()) != SIGNATURE_ELEMENT) {
       return false;
     }
     return PsiUtilCore.getElementType(PerlPsiUtil.getPrevSignificantSibling(psiElement)) == OPERATOR_ASSIGN;

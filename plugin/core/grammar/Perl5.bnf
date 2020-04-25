@@ -409,7 +409,8 @@
 	extends(".*statement_modifier")=statement_modifier
 	implements("statement_modifier")="com.perl5.lang.perl.psi.PerlStatementModifier"
 
-	implements("signature_content|variable_declaration_lexical")="com.perl5.lang.perl.psi.PerlLexicalVariableDeclarationMarker"
+	implements("variable_declaration_lexical")="com.perl5.lang.perl.psi.PerlLexicalVariableDeclarationMarker"
+	implements("signature_element")="com.perl5.lang.perl.psi.PerlSignatureElement"
 
     extends("heredoc_opener|anon_array|anon_hash")=expr
 //    extends("glob_slot")=expr
@@ -699,7 +700,8 @@ private sub_prototype ::= SUB_PROTOTYPE_TOKEN*
 /************************************* Sub signatures *****************************************************************/
 private sub_signature ::= <<signature_content parse_sub_signature>>
 private parse_sub_signature ::= sub_signature_element (',' sub_signature_element) *
-private sub_signature_element ::= signature_left_side ['=' [parse_scalar_expr]]
+private sub_signature_element ::= <<signature_element parse_sub_signature_element>>
+private parse_sub_signature_element ::= signature_left_side ['=' [parse_scalar_expr]]
 private signature_left_side ::= variable_declaration_element | sub_signature_element_ignore
 sub_signature_element_ignore ::= '$$' | '$@' | '$%'
 
@@ -1244,6 +1246,7 @@ before_modifier ::= 'fp_before' fp_modifier_named_body
 
 private meta parse_signature_content ::= '(' <<signature_content <<x1>>>> ')' {pin=1}
 meta signature_content ::= <<x1>>
+meta signature_element ::= <<x1>>
 
 // not sure that we need a wrapper for signatures
 private method_signature ::= <<parse_signature_content parse_method_signature_content>>
@@ -1252,7 +1255,8 @@ method_signature_invocant ::= <<scalarDeclarationWrapper>> ':'
 private func_signature ::= <<parse_signature_content parse_func_signature_content>>
 private parse_func_signature_content ::= [func_signature_elements] {recoverWhile=recover_signature_content}
 private func_signature_elements ::= func_signature_element (comma + func_signature_element ) * comma*
-private func_signature_element ::= [type_specifier]':' ? strict_variable_declaration_wrapper [parse_func_initializer] |  undef_expr | sub_signature_element_ignore
+private func_signature_element ::= <<signature_element parse_func_signature_element>>
+private parse_func_signature_element ::= [type_specifier]':' ? strict_variable_declaration_wrapper [parse_func_initializer] |  undef_expr | sub_signature_element_ignore
 private parse_func_initializer ::= '=' [parse_list_element]
 
 private recover_signature_content ::= !(')'|'{')

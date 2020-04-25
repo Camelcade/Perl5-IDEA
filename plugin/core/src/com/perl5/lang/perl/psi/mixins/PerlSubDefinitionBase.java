@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -111,7 +111,12 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
       PsiElement signatureElement = signatureContainer.getFirstChild();
 
       while (signatureElement != null) {
-        processSignatureElement(signatureElement, arguments);
+        if (signatureElement instanceof PerlSignatureElement) {
+          processSignatureElement(((PerlSignatureElement)signatureElement).getDeclarationElement(), arguments);
+        }
+        else {
+          processSignatureElement(signatureElement, arguments);
+        }
         signatureElement = signatureElement.getNextSibling();
       }
     }
@@ -122,7 +127,9 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
   protected boolean processSignatureElement(PsiElement signatureElement, List<PerlSubArgument> arguments) {
     if (signatureElement instanceof PerlVariableDeclarationElement) {
       PerlVariable variable = ((PerlVariableDeclarationElement)signatureElement).getVariable();
-      arguments.add(PerlSubArgument.mandatory(variable.getActualType(), variable.getName()));
+      PerlSubArgument newArgument = PerlSubArgument.mandatory(variable.getActualType(), variable.getName());
+      newArgument.setOptional(signatureElement.getNextSibling() != null);
+      arguments.add(newArgument);
       return true;
     }
     return false;

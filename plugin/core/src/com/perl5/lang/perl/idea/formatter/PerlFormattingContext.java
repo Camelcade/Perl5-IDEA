@@ -39,10 +39,8 @@ import com.perl5.lang.perl.idea.formatter.blocks.PerlSyntheticBlock;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.PsiPerlStatementModifier;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
-import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -442,13 +440,8 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
         return getWrapBySettings(parentNode, mySettings.TERNARY_OPERATION_WRAP, false);
       }
     }
-    // fixme assign operator should probably use assignment wrapping settings
-    else if (parentNodeType == SIGNATURE_CONTENT &&
-             childNodeType != COMMA && childNodeType != FAT_COMMA && childNodeType != OPERATOR_ASSIGN) {
-      PsiElement psiElement = childNode.getPsi();
-      if (!PerlVariableDeclarationElement.isNamedParameter(psiElement) && !PerlSubArgument.isDefaultValue(childNode.getPsi())) {
-        return getWrapBySettings(parentNode, mySettings.METHOD_PARAMETERS_WRAP, false);
-      }
+    else if (parentNodeType == SIGNATURE_CONTENT && childNodeType != COMMA && childNodeType != FAT_COMMA) {
+      return getWrapBySettings(parentNode, mySettings.METHOD_PARAMETERS_WRAP, false);
     }
     else if (parentNodeType == COMMA_SEQUENCE_EXPR && childNodeType != COMMA && childNodeType != FAT_COMMA) {
       IElementType grandParentNodeType = PsiUtilCore.getElementType(parentNode.getTreeParent());

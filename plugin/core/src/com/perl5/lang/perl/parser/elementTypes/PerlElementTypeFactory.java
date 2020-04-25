@@ -380,6 +380,8 @@ public class PerlElementTypeFactory {
         return new PerlElementTypeEx(name, PsiPerlContinueExprImpl.class);
       case "SIGNATURE_CONTENT":
         return new PerlElementTypeEx(name, PsiPerlSignatureContentImpl.class);
+      case "SIGNATURE_ELEMENT":
+        return new PerlElementTypeEx(name, PsiPerlSignatureElementImpl.class);
       case "SUB_SIGNATURE_ELEMENT_IGNORE":
         return new PerlElementTypeEx(name, PsiPerlSubSignatureElementIgnoreImpl.class);
       case "SUFF_PP_EXPR":
