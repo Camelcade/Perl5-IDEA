@@ -73,12 +73,14 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
 
   /**
    * We should create a trasparent node for following elements
+   * Mostly these are structural elements without any perl value
    */
   private static final TokenSet TRANSPARENT_CONTAINERS = TokenSet.orSet(
     LAZY_CODE_BLOCKS,
     TokenSet.create(
       NAMESPACE_CONTENT, NAMESPACE_DEFINITION,
       DO_BLOCK_EXPR,
+      SIGNATURE_CONTENT,
       BLOCK, CONTINUE_BLOCK, CONDITION_EXPR,
       CALL_ARGUMENTS, PARENTHESISED_CALL_ARGUMENTS,
       WHILE_COMPOUND, UNTIL_COMPOUND,

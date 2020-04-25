@@ -3,6 +3,5 @@
 2(3) Argument 0 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) (PerlSubSignatureElementInstruction)
 3(4) Argument 1 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) (PerlSubSignatureElementInstruction)
 4(5) Argument 2 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) (PerlSubSignatureElementInstruction)
-5(6) element: PsiPerlSignatureContentImpl(Perl5: SIGNATURE_CONTENT) (InstructionImpl)
-6(7) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) (InstructionImpl)
-7() element: null (InstructionImpl)
+5(6) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) (InstructionImpl)
+6() element: null (InstructionImpl)
