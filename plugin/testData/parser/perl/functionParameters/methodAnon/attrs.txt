@@ -4,7 +4,7 @@ Perl5
     PsiPerlMethodExprImpl(Perl5: METHOD_EXPR)
       PsiElement(Perl5: fp_method)('method')
       PsiElement(Perl5: ()('(')
-      PsiPerlMethodSignatureContentImpl(Perl5: METHOD_SIGNATURE_CONTENT)
+      PsiPerlSignatureContentImpl(Perl5: SIGNATURE_CONTENT)
         <empty list>
       PsiElement(Perl5: ))(')')
       PsiPerlAttributesImpl(Perl5: ATTRIBUTES)

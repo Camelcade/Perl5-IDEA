@@ -4,7 +4,7 @@ Perl5
     PsiElement(Perl5: fp_before)('before')
     PerlSubNameElementImpl(Perl5: subname)('dynamic_default')
     PsiElement(Perl5: ()('(')
-    PsiPerlMethodSignatureContentImpl(Perl5: METHOD_SIGNATURE_CONTENT)
+    PsiPerlSignatureContentImpl(Perl5: SIGNATURE_CONTENT)
       PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT)
         PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
           PsiElement(Perl5: $$)('$')

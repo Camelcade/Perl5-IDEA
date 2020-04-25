@@ -4,7 +4,7 @@ Perl5
     PsiPerlFunExprImpl(Perl5: FUN_EXPR)
       PsiElement(Perl5: fun)('fun')
       PsiElement(Perl5: ()('(')
-      PsiPerlFuncSignatureContentImpl(Perl5: FUNC_SIGNATURE_CONTENT)
+      PsiPerlSignatureContentImpl(Perl5: SIGNATURE_CONTENT)
         <empty list>
       PsiElement(Perl5: ))(')')
       PsiPerlBlockImpl(Perl5: BLOCK)

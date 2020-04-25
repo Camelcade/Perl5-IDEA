@@ -4,7 +4,7 @@ Perl5
     PsiPerlFunExprImpl(Perl5: FUN_EXPR)
       PsiElement(Perl5: fun)('fun')
       PsiElement(Perl5: ()('(')
-      PsiPerlFuncSignatureContentImpl(Perl5: FUNC_SIGNATURE_CONTENT)
+      PsiPerlSignatureContentImpl(Perl5: SIGNATURE_CONTENT)
         PsiPerlSubSignatureElementIgnoreImpl(Perl5: SUB_SIGNATURE_ELEMENT_IGNORE)
           PsiElement(Perl5: $$)('$')
         PsiElement(Perl5: ,)(',')

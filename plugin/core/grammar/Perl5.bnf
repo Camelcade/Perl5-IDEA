@@ -399,7 +399,7 @@
     implements("return_expr")="com.perl5.lang.perl.psi.PerlReturnExpr"
     implements("defined_expr")="com.perl5.lang.perl.psi.PerlImplicitScalarExpr"
 
-    implements("condition_expr|foreach_iterator|sub_signature|func_signature_content|method_signature_content|for_init|for_condition|for_mutator")="com.perl5.lang.perl.psi.PerlStatement"
+    implements("condition_expr|foreach_iterator|signature_content|for_init|for_condition|for_mutator")="com.perl5.lang.perl.psi.PerlStatement"
 
 	implements(".+_cast_expr")="com.perl5.lang.perl.psi.PerlCastExpression"
 	mixin(".+_cast_expr")="com.perl5.lang.perl.psi.mixins.PerlCastExpressionMixin"
@@ -409,8 +409,7 @@
 	extends(".*statement_modifier")=statement_modifier
 	implements("statement_modifier")="com.perl5.lang.perl.psi.PerlStatementModifier"
 
-	extends(".*_signature_content")=sub_signature
-	implements("sub_signature|variable_declaration_lexical")="com.perl5.lang.perl.psi.PerlLexicalVariableDeclarationMarker"
+	implements("signature_content|variable_declaration_lexical")="com.perl5.lang.perl.psi.PerlLexicalVariableDeclarationMarker"
 
     extends("heredoc_opener|anon_array|anon_hash")=expr
 //    extends("glob_slot")=expr
@@ -692,13 +691,14 @@ private sub_definition_parameters ::=
   sub_attributes [sub_signature_in_parens] |
   [sub_prototype_or_signature] [sub_attributes]
 private sub_prototype_or_signature ::= '(' sub_prototype_or_signature_content ')' {pin=1}
-private sub_prototype_or_signature_content ::= sub_signature |sub_prototype
+private sub_prototype_or_signature_content ::= sub_signature | sub_prototype
 private sub_signature_in_parens ::= '(' [sub_signature] ')' {pin=1}
 
 private sub_prototype ::= SUB_PROTOTYPE_TOKEN*
 
 /************************************* Sub signatures *****************************************************************/
-sub_signature ::= sub_signature_element (',' sub_signature_element) *
+private sub_signature ::= <<signature_content parse_sub_signature>>
+private parse_sub_signature ::= sub_signature_element (',' sub_signature_element) *
 private sub_signature_element ::= signature_left_side ['=' [parse_scalar_expr]]
 private signature_left_side ::= variable_declaration_element | sub_signature_element_ignore
 sub_signature_element_ignore ::= '$$' | '$@' | '$%'
@@ -1234,20 +1234,23 @@ private func_or_method_body ::= [sub_attributes] parse_block
 private fp_modifier_named_body ::= sub_names_token method_signature func_or_method_body
 
 around_modifier ::= 'fp_around' sub_names_token around_signature func_or_method_body
-private around_signature ::= '(' around_signature_content ')' {pin=1}
-around_signature_content ::= [around_signature_invocants] [func_signature_elements] {recoverWhile=recover_signature_content}
+private around_signature ::= <<parse_signature_content parse_around_signature_content>>
+private parse_around_signature_content ::= [around_signature_invocants] [func_signature_elements] {recoverWhile=recover_signature_content}
 around_signature_invocants ::= <<scalarDeclarationWrapper>> ',' <<scalarDeclarationWrapper>>  ':'
 
 after_modifier ::= 'fp_after' fp_modifier_named_body
 augment_modifier ::= 'fp_augment' fp_modifier_named_body // we should probably stub this one to navigate easier
 before_modifier ::= 'fp_before' fp_modifier_named_body
 
+private meta parse_signature_content ::= '(' <<signature_content <<x1>>>> ')' {pin=1}
+meta signature_content ::= <<x1>>
+
 // not sure that we need a wrapper for signatures
-private method_signature ::= '(' method_signature_content ')' {pin=1}
-method_signature_content ::= [method_signature_invocant] [func_signature_elements] {recoverWhile=recover_signature_content}
+private method_signature ::= <<parse_signature_content parse_method_signature_content>>
+private parse_method_signature_content ::= [method_signature_invocant] [func_signature_elements] {recoverWhile=recover_signature_content}
 method_signature_invocant ::= <<scalarDeclarationWrapper>> ':'
-private func_signature ::= '(' func_signature_content ')' {pin=1}
-func_signature_content ::= [func_signature_elements] {recoverWhile=recover_signature_content}
+private func_signature ::= <<parse_signature_content parse_func_signature_content>>
+private parse_func_signature_content ::= [func_signature_elements] {recoverWhile=recover_signature_content}
 private func_signature_elements ::= func_signature_element (comma + func_signature_element ) * comma*
 private func_signature_element ::= [type_specifier]':' ? strict_variable_declaration_wrapper [parse_func_initializer] |  undef_expr | sub_signature_element_ignore
 private parse_func_initializer ::= '=' [parse_list_element]

@@ -124,8 +124,6 @@ public class PerlElementTypeFactory {
         return new PerlElementTypeEx(name, PsiPerlBeforeModifierImpl.class);
       case "AROUND_MODIFIER":
         return new PerlElementTypeEx(name, PsiPerlAroundModifierImpl.class);
-      case "AROUND_SIGNATURE_CONTENT":
-        return new PerlElementTypeEx(name, PsiPerlAroundSignatureContentImpl.class);
       case "AROUND_SIGNATURE_INVOCANTS":
         return new PerlElementTypeEx(name, PsiPerlAroundSignatureInvocantsImpl.class);
       case "AUGMENT_MODIFIER":
@@ -228,8 +226,6 @@ public class PerlElementTypeFactory {
         return new PerlElementTypeEx(name, PsiPerlForMutatorImpl.class);
       case "FOR_STATEMENT_MODIFIER":
         return new PerlElementTypeEx(name, PsiPerlForStatementModifierImpl.class);
-      case "FUNC_SIGNATURE_CONTENT":
-        return new PerlElementTypeEx(name, PsiPerlFuncSignatureContentImpl.class);
       case "GIVEN_COMPOUND":
         return new PerlElementTypeEx(name, PsiPerlGivenCompoundImpl.class);
       case "GLOB_CAST_EXPR":
@@ -266,8 +262,6 @@ public class PerlElementTypeFactory {
         return new PerlElementTypeEx(name, PsiPerlMatchRegexImpl.class);
       case "METHOD":
         return new PerlElementTypeEx(name, PsiPerlMethodImpl.class);
-      case "METHOD_SIGNATURE_CONTENT":
-        return new PerlElementTypeEx(name, PsiPerlMethodSignatureContentImpl.class);
       case "METHOD_SIGNATURE_INVOCANT":
         return new PerlElementTypeEx(name, PsiPerlMethodSignatureInvocantImpl.class);
       case "MUL_EXPR":
@@ -384,8 +378,8 @@ public class PerlElementTypeFactory {
         return new PerlElementTypeEx(name, PsiPerlMethodExprImpl.class);
       case "CONTINUE_EXPR":
         return new PerlElementTypeEx(name, PsiPerlContinueExprImpl.class);
-      case "SUB_SIGNATURE":
-        return new PerlElementTypeEx(name, PsiPerlSubSignatureImpl.class);
+      case "SIGNATURE_CONTENT":
+        return new PerlElementTypeEx(name, PsiPerlSignatureContentImpl.class);
       case "SUB_SIGNATURE_ELEMENT_IGNORE":
         return new PerlElementTypeEx(name, PsiPerlSubSignatureElementIgnoreImpl.class);
       case "SUFF_PP_EXPR":

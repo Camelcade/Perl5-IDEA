@@ -364,7 +364,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       if (declarationContainer instanceof PsiPerlMethodSignatureInvocant) {
         declarationContainer = declarationContainer.getParent();
       }
-      if (!(declarationContainer instanceof PsiPerlSubSignature)) {
+      if (!(declarationContainer instanceof PsiPerlSignatureContent)) {
         super.visitVariableDeclarationElement(o);
         return;
       }

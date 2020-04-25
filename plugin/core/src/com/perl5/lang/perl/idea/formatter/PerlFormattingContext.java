@@ -361,7 +361,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
         return myElementsALignmentsMap.get(parentNode);
       }
     }
-    else if (PerlTokenSets.SIGNATURES_CONTAINERS.contains(parentNodeType)) {
+    else if (parentNodeType == SIGNATURE_CONTENT) {
       return mySettings.ALIGN_MULTILINE_PARAMETERS ? myElementsALignmentsMap.get(parentNode) : null;
     }
     else if ((childNodeType == VARIABLE_DECLARATION_ELEMENT ||
@@ -443,7 +443,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       }
     }
     // fixme assign operator should probably use assignment wrapping settings
-    else if (PerlTokenSets.SIGNATURES_CONTAINERS.contains(parentNodeType) &&
+    else if (parentNodeType == SIGNATURE_CONTENT &&
              childNodeType != COMMA && childNodeType != FAT_COMMA && childNodeType != OPERATOR_ASSIGN) {
       PsiElement psiElement = childNode.getPsi();
       if (!PerlVariableDeclarationElement.isNamedParameter(psiElement) && !PerlSubArgument.isDefaultValue(childNode.getPsi())) {

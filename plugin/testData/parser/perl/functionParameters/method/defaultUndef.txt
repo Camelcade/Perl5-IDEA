@@ -4,7 +4,7 @@ Perl5
     PsiElement(Perl5: method)('method')
     PerlSubNameElementImpl(Perl5: subname)('foo')
     PsiElement(Perl5: ()('(')
-    PsiPerlMethodSignatureContentImpl(Perl5: METHOD_SIGNATURE_CONTENT)
+    PsiPerlSignatureContentImpl(Perl5: SIGNATURE_CONTENT)
       PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT)
         PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
           PsiElement(Perl5: $$)('$')

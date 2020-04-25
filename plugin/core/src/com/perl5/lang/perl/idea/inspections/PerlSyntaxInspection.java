@@ -33,6 +33,8 @@ import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurable;
 import com.perl5.lang.perl.internals.PerlVersion;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.impl.PsiPerlSubDefinitionImpl;
+import com.perl5.lang.perl.psi.impl.PsiPerlSubExprImpl;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.Nls;
@@ -77,10 +79,10 @@ public class PerlSyntaxInspection extends PerlInspection {
       }
 
       @Override
-      public void visitSubSignature(@NotNull PsiPerlSubSignature o) {
-        if (o instanceof PsiPerlFuncSignatureContent ||
-            o instanceof PsiPerlMethodSignatureContent ||
-            o instanceof PsiPerlAroundSignatureContent) {
+      public void visitSignatureContent(@NotNull PsiPerlSignatureContent o) {
+        PsiElement signatureOwner = o.getParent();
+        if (!(signatureOwner instanceof PsiPerlSubDefinitionImpl) &&
+            !(signatureOwner instanceof PsiPerlSubExprImpl)) {
           return;
         }
 

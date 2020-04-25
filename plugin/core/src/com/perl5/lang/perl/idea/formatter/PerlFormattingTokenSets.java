@@ -306,7 +306,7 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     SEMICOLON
   );
 
-  TokenSet COMMA_LIKE_SEQUENCES = TokenSet.orSet(SIGNATURES_CONTAINERS, TokenSet.create(COMMA_SEQUENCE_EXPR));
+  TokenSet COMMA_LIKE_SEQUENCES = TokenSet.create(SIGNATURE_CONTENT, COMMA_SEQUENCE_EXPR);
 
   /**
    * Elements that must have LF between them

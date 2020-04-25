@@ -26,7 +26,6 @@ import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.AFTER_M
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.ANON_ARRAY;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.ANON_HASH;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.AROUND_MODIFIER;
-import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.AROUND_SIGNATURE_CONTENT;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.ARRAY_INDEX;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.ATTRIBUTE;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.ATTRIBUTES;
@@ -46,7 +45,6 @@ import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.FOREACH
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.FOR_COMPOUND;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.FOR_STATEMENT_MODIFIER;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.FUNC_DEFINITION;
-import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.FUNC_SIGNATURE_CONTENT;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.FUN_EXPR;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.HASH_INDEX;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.HEREDOC_END;
@@ -59,7 +57,6 @@ import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.LP_CODE
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.LP_STRING_QW;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.METHOD_DEFINITION;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.METHOD_EXPR;
-import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.METHOD_SIGNATURE_CONTENT;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.NAMESPACE_DEFINITION;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.NUMBER_CONSTANT;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.OPERATOR_CONCAT;
@@ -98,6 +95,7 @@ import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.RIGHT_B
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.RIGHT_BRACKET;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.RIGHT_PAREN;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.SEMICOLON;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.SIGNATURE_CONTENT;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.SORT_EXPR;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.STATEMENT;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.STRING_BARE;
@@ -178,9 +176,7 @@ public class PerlSpacingBuilderFactory {
       .between(INVOCANTS_TOKENSET, COLON).spaces(1)
       .between(INVOCANTS_TOKENSET, VARIABLE_DECLARATION_ELEMENT).spaces(1)
       .between(INVOCANTS_TOKENSET, SUB_SIGNATURE_ELEMENT_IGNORE).spaces(1)
-      .betweenInside(COLON, VARIABLE_DECLARATION_ELEMENT, METHOD_SIGNATURE_CONTENT).spaces(0)
-      .betweenInside(COLON, VARIABLE_DECLARATION_ELEMENT, AROUND_SIGNATURE_CONTENT).spaces(0)
-      .betweenInside(COLON, VARIABLE_DECLARATION_ELEMENT, FUNC_SIGNATURE_CONTENT).spaces(0)
+      .betweenInside(COLON, VARIABLE_DECLARATION_ELEMENT, SIGNATURE_CONTENT).spaces(0)
       .beforeInside(COLON, INVOCANTS_TOKENSET).spaces(0)
       .beforeInside(COLON, ATTRIBUTES).spaceIf(perlSettings.SPACE_BEFORE_ATTRIBUTE)
       .between(COLON, ATTRIBUTE).spaces(0)

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,8 +20,12 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PerlMethodDefinition;
+import com.perl5.lang.perl.psi.PerlVariable;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
+import com.perl5.lang.perl.psi.PsiPerlMethodSignatureInvocant;
 import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
+import com.perl5.lang.perl.psi.impl.PsiPerlMethodDefinitionImpl;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import org.jetbrains.annotations.NotNull;
@@ -57,7 +61,7 @@ public abstract class PerlMethodDefinitionMixin extends PerlSubDefinitionBase im
   @Nullable
   @Override
   protected PsiElement getSignatureContainer() {
-    return getMethodSignatureContent();
+    return ((PsiPerlMethodDefinitionImpl)this).getSignatureContent();
   }
 
   @Override
@@ -86,8 +90,8 @@ public abstract class PerlMethodDefinitionMixin extends PerlSubDefinitionBase im
    * @return check result
    */
   private boolean hasExplicitInvocant() {
-    PsiPerlMethodSignatureContent methodSignatureContent = getMethodSignatureContent();
-    return methodSignatureContent != null && methodSignatureContent.getFirstChild() instanceof PsiPerlMethodSignatureInvocant;
+    PsiElement signatureContainer = getSignatureContainer();
+    return signatureContainer != null && signatureContainer.getFirstChild() instanceof PsiPerlMethodSignatureInvocant;
   }
 
   @NotNull

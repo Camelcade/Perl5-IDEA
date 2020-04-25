@@ -4,7 +4,7 @@ Perl5
     PsiElement(Perl5: fp_after)('after')
     PerlSubNameElementImpl(Perl5: subname)('foo')
     PsiElement(Perl5: ()('(')
-    PsiPerlMethodSignatureContentImpl(Perl5: METHOD_SIGNATURE_CONTENT)
+    PsiPerlSignatureContentImpl(Perl5: SIGNATURE_CONTENT)
       <empty list>
     PsiElement(Perl5: ))(')')
     PsiPerlBlockImpl(Perl5: BLOCK)

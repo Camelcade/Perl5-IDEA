@@ -4,7 +4,7 @@ Perl5
     PsiElement(Perl5: fp_override)('override')
     PerlSubNameElementImpl(Perl5: subname)('foo')
     PsiElement(Perl5: ()('(')
-    PsiPerlMethodSignatureContentImpl(Perl5: METHOD_SIGNATURE_CONTENT)
+    PsiPerlSignatureContentImpl(Perl5: SIGNATURE_CONTENT)
       PsiPerlSubSignatureElementIgnoreImpl(Perl5: SUB_SIGNATURE_ELEMENT_IGNORE)
         PsiElement(Perl5: $$)('$')
       PsiElement(Perl5: ,)(',')

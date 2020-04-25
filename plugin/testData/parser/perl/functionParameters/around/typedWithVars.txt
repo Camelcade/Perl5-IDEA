@@ -4,7 +4,7 @@ Perl5
     PsiElement(Perl5: fp_around)('around')
     PerlSubNameElementImpl(Perl5: subname)('foo')
     PsiElement(Perl5: ()('(')
-    PsiPerlAroundSignatureContentImpl(Perl5: AROUND_SIGNATURE_CONTENT)
+    PsiPerlSignatureContentImpl(Perl5: SIGNATURE_CONTENT)
       PsiPerlTypeSpecifierImpl(Perl5: TYPE_SPECIFIER)
         PsiPerlParenthesisedExprImpl(Perl5: PARENTHESISED_EXPR)
           PsiElement(Perl5: ()('(')

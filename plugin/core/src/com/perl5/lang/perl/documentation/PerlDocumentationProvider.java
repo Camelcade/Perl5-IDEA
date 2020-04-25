@@ -166,11 +166,11 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
       else if (parentElementType == AROUND_SIGNATURE_INVOCANTS) {
         return PerlDocUtil.resolveDescriptor(PodLinkDescriptor.create(FUNCTION_PARAMETERS, KEYWORD_AROUND), contextElement, false);
       }
-      else if (PerlTokenSets.SIGNATURE_CONTAINERS_EX.contains(parentElementType)) {
+      else if (parentElementType == SIGNATURE_CONTENT) {
         return PerlDocUtil.resolveDescriptor(PodLinkDescriptor.create(FUNCTION_PARAMETERS, "Named parameters"), contextElement, false);
       }
     }
-    if (elementType == OPERATOR_ASSIGN && PerlTokenSets.SIGNATURE_CONTAINERS_EX.contains(parentElementType)) {
+    if (elementType == OPERATOR_ASSIGN && parentElementType == SIGNATURE_CONTENT) {
       return PerlDocUtil.resolveDescriptor(PodLinkDescriptor.create(FUNCTION_PARAMETERS, "Default arguments"), contextElement, false);
     }
     if (PerlTokenSets.SIGILS.contains(elementType) && parentElementType == SUB_SIGNATURE_ELEMENT_IGNORE) {
