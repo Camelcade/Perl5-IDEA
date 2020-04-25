@@ -45,3 +45,8 @@ my $var :me
 my ($v1, $v2, $v3) :me
         :ot
         :so;
+
+sub something
+        :me
+        :ot
+        :so;

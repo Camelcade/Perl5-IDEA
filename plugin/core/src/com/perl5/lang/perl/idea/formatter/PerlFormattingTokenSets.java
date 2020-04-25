@@ -327,6 +327,8 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
       NAMESPACE_DEFINITION,
       NAMESPACE_CONTENT,
 
+      SUB_DECLARATION,
+
       DEFAULT_COMPOUND,
       CONDITIONAL_BLOCK,
       CONTINUE_BLOCK,
