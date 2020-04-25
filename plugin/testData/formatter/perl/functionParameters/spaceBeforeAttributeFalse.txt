@@ -215,6 +215,35 @@ around something($originals, $someself: $var, $othervar, :$namedvar, :@namedarra
 around something(:$var, $othervar, :$namedvar, :@namedarray, $, @):some stuff {}
 around something($var, $othervar, :$namedvar, :@namedarray, $, @):some stuff {}
 
+#   Mixed   cases with params and attrs on the new line
+fun something(
+        $var, $othervar, :$namedvar, :@namedarray, $, @)
+        :some stuff {}
+fun(
+                $var, $othervar, :$namedvar, :@namedarray, $, @)
+                :some stuff {};
+method something(
+        $someself: $var, $othervar, :$namedvar, :@namedarray, $, @)
+        :some stuff {}
+method(
+                $someself: $var, $othervar, :$namedvar, :@namedarray, $, @)
+                :some stuff {};
+override something(
+        $someself: $var, $othervar, :$namedvar, :@namedarray, $, @)
+        :some stuff {}
+after something(
+                $someself: :$var, $othervar, :$namedvar, :@namedarray, $, @)
+                :some stuff {}
+before something(
+                $someself: :$var, $othervar, :$namedvar, :@namedarray, $, @)
+                :some stuff {}
+augment something(
+                $someself: :$var, $othervar, :$namedvar, :@namedarray, $, @)
+                :some stuff {}
+around something(
+                $var, $othervar, :$namedvar, :@namedarray, $, @)
+                :some stuff {}
+
 # Sub cases
 sub somesub($var1, $var2 = 123, $var4, $):one two three {
     say 'hi';
