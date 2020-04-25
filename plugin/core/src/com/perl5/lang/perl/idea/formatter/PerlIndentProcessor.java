@@ -60,6 +60,13 @@ public class PerlIndentProcessor implements PerlElementTypes {
       SUB_DEFINITION,
       METHOD_DEFINITION,
       FUNC_DEFINITION,
+
+      AROUND_MODIFIER,
+      AFTER_MODIFIER,
+      AUGMENT_MODIFIER,
+      BEFORE_MODIFIER,
+      FUN_EXPR,
+
       IF_COMPOUND,
       UNLESS_COMPOUND,
       UNTIL_COMPOUND,

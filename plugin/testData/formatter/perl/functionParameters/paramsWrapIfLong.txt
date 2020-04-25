@@ -86,13 +86,14 @@ method something(
 method($class:) {};
 override something(
         $class:) {}
-after something($class:) {}
+after something(
+        $class:) {}
 before something(
-                $class:) {}
+        $class:) {}
 around something(
-                $orig, $class:) {}
+        $orig, $class:) {}
 augment something(
-                $class:) {}
+        $class:) {}
 
 #   Invocant   +   variable
 method something(
@@ -103,17 +104,18 @@ method($class:
 override something(
         $class:
         $var) {}
-after something($class:
-                $var) {}
+after something(
+        $class:
+        $var) {}
 before something(
-                $class:
-                $var) {}
+        $class:
+        $var) {}
 around something(
-                $orig, $class:
-                $var) {}
+        $orig, $class:
+        $var) {}
 augment something(
-                $class:
-                $var) {}
+        $class:
+        $var) {}
 
 #   Invocant   +   named   variable
 method something(
@@ -124,17 +126,18 @@ method($class:
 override something(
         $class:
         :$var) {}
-after something($class:
-                :$var) {}
+after something(
+        $class:
+        :$var) {}
 before something(
-                $class:
-                :$var) {}
+        $class:
+        :$var) {}
 around something(
-                $orig, $class:
-                :$var) {}
+        $orig, $class:
+        :$var) {}
 augment something(
-                $class:
-                :$var) {}
+        $class:
+        :$var) {}
 
 #   Invocant   +   ignored
 method something(
@@ -145,17 +148,18 @@ method($class:
 override something(
         $class:
         $) {}
-after something($class:
-                $) {}
+after something(
+        $class:
+        $) {}
 before something(
-                $class:
-                $) {}
+        $class:
+        $) {}
 around something(
-                $orig, $class:
-                $) {}
+        $orig, $class:
+        $) {}
 augment something(
-                $class:
-                $) {}
+        $class:
+        $) {}
 
 #   Variable   only
 fun something(
@@ -166,13 +170,14 @@ method something(
 method($somevar) {};
 override something(
         $somevar) {}
-after something($somevar) {}
+after something(
+        $somevar) {}
 before something(
-                $somevar) {}
+        $somevar) {}
 around something(
-                $somevar) {}
+        $somevar) {}
 augment something(
-                $somevar) {}
+        $somevar) {}
 
 #   Named   only
 fun something(
@@ -183,13 +188,14 @@ method something(
 method(:$somevar) {};
 override something(
         :$somevar) {}
-after something(:$somevar) {}
+after something(
+        :$somevar) {}
 before something(
-                :$somevar) {}
+        :$somevar) {}
 around something(
-                :$somevar) {}
+        :$somevar) {}
 augment something(
-                :$somevar) {}
+        :$somevar) {}
 
 #   Ignored   only
 fun something($) {}
@@ -199,13 +205,14 @@ method something(
 method(@) {};
 override something(
         @) {}
-after something(@) {}
+after something(
+        @) {}
 before something(
-                @) {}
+        @) {}
 around something(
-                $) {}
+        $) {}
 augment something(
-                $) {}
+        $) {}
 
 #   Variable   with   empty   default
 fun something(
@@ -216,13 +223,14 @@ method something(
 method($some =) {};
 override something(
         $some =) {}
-after something($some =) {}
+after something(
+        $some =) {}
 before something(
-                $some =) {}
+        $some =) {}
 around something(
-                $some =) {}
+        $some =) {}
 augment something(
-                $some =) {}
+        $some =) {}
 
 #   Named   with   empty   default
 fun something(
@@ -233,13 +241,14 @@ method something(
 method(:$some =) {};
 override something(
         :$some =) {}
-after something(:$some =) {}
+after something(
+        :$some =) {}
 before something(
-                :$some =) {}
+        :$some =) {}
 around something(
-                :$some =) {}
+        :$some =) {}
 augment something(
-                :$some =) {}
+        :$some =) {}
 
 #   Variable   with   default
 fun something(
@@ -250,13 +259,14 @@ method something(
 method($some = somecall(42 + 'sparta')) {};
 override something(
         $some = somecall(42 + 'sparta')) {}
-after something($some = somecall(42 + 'sparta')) {}
+after something(
+        $some = somecall(42 + 'sparta')) {}
 before something(
-                $some = somecall(42 + 'sparta')) {}
+        $some = somecall(42 + 'sparta')) {}
 around something(
-                $some = somecall(42 + 'sparta')) {}
+        $some = somecall(42 + 'sparta')) {}
 augment something(
-                $some = somecall(42 + 'sparta')) {}
+        $some = somecall(42 + 'sparta')) {}
 
 #   Named   with   default
 fun something(
@@ -267,13 +277,14 @@ method something(
 method(:$some = somecall(42 + 'sparta')) {};
 override something(
         :$some = somecall(42 + 'sparta')) {}
-after something(:$some = somecall(42 + 'sparta')) {}
+after something(
+        :$some = somecall(42 + 'sparta')) {}
 before something(
-                :$some = somecall(42 + 'sparta')) {}
+        :$some = somecall(42 + 'sparta')) {}
 around something(
-                :$some = somecall(42 + 'sparta')) {}
+        :$some = somecall(42 + 'sparta')) {}
 augment something(
-                :$some = somecall(42 + 'sparta')) {}
+        :$some = somecall(42 + 'sparta')) {}
 
 #   Mixed   cases
 fun something($var,
@@ -343,82 +354,84 @@ override something(
         :@namedarray,
         $,
         @) :some stuff {}
-after something($someself:
-                :$var,
-                $othervar,
-                :$namedvar,
-                :@namedarray,
-                $,
-                @) :some stuff {}
+after something(
+        $someself:
+        :$var,
+        $othervar,
+        :$namedvar,
+        :@namedarray,
+        $,
+        @) :some stuff {}
 before something(
-                $someself:
-                :$var,
-                $othervar,
-                :$namedvar,
-                :@namedarray,
-                $,
-                @) :some stuff {}
+        $someself:
+        :$var,
+        $othervar,
+        :$namedvar,
+        :@namedarray,
+        $,
+        @) :some stuff {}
 augment something(
-                $someself:
-                :$var,
-                $othervar,
-                :$namedvar,
-                :@namedarray,
-                $,
-                @) :some stuff {}
-after something($someself:
-                $var,
-                $othervar,
-                :$namedvar,
-                :@namedarray,
-                $,
-                @) :some stuff {}
+        $someself:
+        :$var,
+        $othervar,
+        :$namedvar,
+        :@namedarray,
+        $,
+        @) :some stuff {}
+after something(
+        $someself:
+        $var,
+        $othervar,
+        :$namedvar,
+        :@namedarray,
+        $,
+        @) :some stuff {}
 before something(
-                $someself:
-                $var,
-                $othervar,
-                :$namedvar,
-                :@namedarray,
-                $,
-                @) :some stuff {}
+        $someself:
+        $var,
+        $othervar,
+        :$namedvar,
+        :@namedarray,
+        $,
+        @) :some stuff {}
 augment something(
-                $someself:
-                $var,
-                $othervar,
-                :$namedvar,
-                :@namedarray,
-                $,
-                @) :some stuff {}
+        $someself:
+        $var,
+        $othervar,
+        :$namedvar,
+        :@namedarray,
+        $,
+        @) :some stuff {}
 around something(
-                $originals, $someself:
-                :$var,
-                $othervar,
-                :$namedvar,
-                :@namedarray,
-                $,
-                @) :some stuff {}
+        $originals, $someself:
+        :$var,
+        $othervar,
+        :$namedvar,
+        :@namedarray,
+        $,
+        @) :some stuff {}
 around something(
-                $originals, $someself:
-                $var,
-                $othervar,
-                :$namedvar,
-                :@namedarray,
-                $,
-                @) :some stuff {}
+        $originals, $someself:
+        $var,
+        $othervar,
+        :$namedvar,
+        :@namedarray,
+        $,
+        @) :some stuff {}
 around something(
-                :$var,
-                $othervar,
-                :$namedvar,
-                :@namedarray,
-                $,
-                @) :some stuff {}
+        :$var,
+        $othervar,
+        :$namedvar,
+        :@namedarray,
+        $,
+        @) :some stuff {}
 around something(
-                $var,
-                $othervar,
-                :$namedvar,
-                :@namedarray,
-                $,
-                @) :some stuff {}
+        $var,
+        $othervar,
+        :$namedvar,
+        :@namedarray,
+        $,
+        @) :some stuff {}
 
 #   Mixed   cases with params and attrs on the new line
 fun something(
@@ -429,13 +442,12 @@ fun something(
         $, @)
         :some stuff {}
 fun(
-                $var,
-                $othervar,
-                :$namedvar,
-                :@namedarray,
-                $,
-                @)
-                :some stuff {};
+        $var,
+        $othervar,
+        :$namedvar,
+        :@namedarray,
+        $, @)
+        :some stuff {};
 method something(
         $someself:
         $var,
@@ -462,40 +474,36 @@ override something(
         $, @)
         :some stuff {}
 after something(
-                $someself:
-                :$var,
-                $othervar,
-                :$namedvar,
-                :@namedarray,
-                $,
-                @)
-                :some stuff {}
+        $someself:
+        :$var,
+        $othervar,
+        :$namedvar,
+        :@namedarray,
+        $, @)
+        :some stuff {}
 before something(
-                $someself:
-                :$var,
-                $othervar,
-                :$namedvar,
-                :@namedarray,
-                $,
-                @)
-                :some stuff {}
+        $someself:
+        :$var,
+        $othervar,
+        :$namedvar,
+        :@namedarray,
+        $, @)
+        :some stuff {}
 augment something(
-                $someself:
-                :$var,
-                $othervar,
-                :$namedvar,
-                :@namedarray,
-                $,
-                @)
-                :some stuff {}
+        $someself:
+        :$var,
+        $othervar,
+        :$namedvar,
+        :@namedarray,
+        $, @)
+        :some stuff {}
 around something(
-                $var,
-                $othervar,
-                :$namedvar,
-                :@namedarray,
-                $,
-                @)
-                :some stuff {}
+        $var,
+        $othervar,
+        :$namedvar,
+        :@namedarray,
+        $, @)
+        :some stuff {}
 
 # Sub cases
 sub somesub($var1,

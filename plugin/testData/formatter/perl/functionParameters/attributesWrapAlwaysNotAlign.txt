@@ -259,8 +259,8 @@ fun something(
         :some
         stuff {}
 fun(
-                $var, $othervar, :$namedvar, :@namedarray, $, @)
-                :some
+        $var, $othervar, :$namedvar, :@namedarray, $, @)
+        :some
         stuff {};
 method something(
         $someself: $var, $othervar, :$namedvar, :@namedarray, $, @)
@@ -275,20 +275,20 @@ override something(
         :some
         stuff {}
 after something(
-                $someself: :$var, $othervar, :$namedvar, :@namedarray, $, @)
-                :some
+        $someself: :$var, $othervar, :$namedvar, :@namedarray, $, @)
+        :some
         stuff {}
 before something(
-                $someself: :$var, $othervar, :$namedvar, :@namedarray, $, @)
-                :some
+        $someself: :$var, $othervar, :$namedvar, :@namedarray, $, @)
+        :some
         stuff {}
 augment something(
-                $someself: :$var, $othervar, :$namedvar, :@namedarray, $, @)
-                :some
+        $someself: :$var, $othervar, :$namedvar, :@namedarray, $, @)
+        :some
         stuff {}
 around something(
-                $var, $othervar, :$namedvar, :@namedarray, $, @)
-                :some
+        $var, $othervar, :$namedvar, :@namedarray, $, @)
+        :some
         stuff {}
 
 # Sub cases

@@ -360,13 +360,13 @@ fun something(
         @)
         :some stuff {}
 fun(
-                $var,
+        $var,
         $othervar,
         :$namedvar,
         :@namedarray,
         $,
         @)
-                :some stuff {};
+        :some stuff {};
 method something(
         $someself:
         $var,
@@ -395,40 +395,40 @@ override something(
         @)
         :some stuff {}
 after something(
-                $someself:
+        $someself:
         :$var,
         $othervar,
         :$namedvar,
         :@namedarray,
         $,
         @)
-                :some stuff {}
+        :some stuff {}
 before something(
-                $someself:
+        $someself:
         :$var,
         $othervar,
         :$namedvar,
         :@namedarray,
         $,
         @)
-                :some stuff {}
+        :some stuff {}
 augment something(
-                $someself:
+        $someself:
         :$var,
         $othervar,
         :$namedvar,
         :@namedarray,
         $,
         @)
-                :some stuff {}
+        :some stuff {}
 around something(
-                $var,
+        $var,
         $othervar,
         :$namedvar,
         :@namedarray,
         $,
         @)
-                :some stuff {}
+        :some stuff {}
 
 # Sub cases
 sub somesub($var1,
