@@ -53,7 +53,7 @@ sub something()
         :something {}
 
 sub something()
-                :method
+        :method
         :other
         :something;
 
@@ -83,7 +83,7 @@ sub so()
         :so {}
 
 sub so()
-                :me
+        :me
         :ot
         :so;
 

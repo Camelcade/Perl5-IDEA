@@ -220,11 +220,9 @@ method something($someself: $var, $othervar, :$namedvar, :@namedarray, $, @)
 method something($someself: :$var, $othervar, :$namedvar, :@namedarray, $, @)
         :some stuff {}
 method($someself: $var, $othervar, :$namedvar, :@namedarray, $, @)
-                :some
-        stuff {};
+        :some stuff {};
 method($someself: :$var, $othervar, :$namedvar, :@namedarray, $, @)
-                :some
-        stuff {};
+        :some stuff {};
 override something($someself: $var, $othervar, :$namedvar, :@namedarray, $, @)
         :some stuff {}
 override something($someself: :$var, $othervar, :$namedvar, :@namedarray, $, @)
@@ -261,9 +259,8 @@ method something(
         $someself: $var, $othervar, :$namedvar, :@namedarray, $, @)
         :some stuff {}
 method(
-                $someself: $var, $othervar, :$namedvar, :@namedarray, $, @)
-                :some
-        stuff {};
+        $someself: $var, $othervar, :$namedvar, :@namedarray, $, @)
+        :some stuff {};
 override something(
         $someself: $var, $othervar, :$namedvar, :@namedarray, $, @)
         :some stuff {}

@@ -40,6 +40,5 @@ when ($some_condition) {
     say 'hi' when ($some_condition);
 }
 
-
 given ($foo) {
 }

@@ -3,7 +3,8 @@ sub something()
         :other
         :something {}
 
-sub something() :method
+sub something()
+        :method
         :other
         :something;
 

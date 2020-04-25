@@ -371,14 +371,14 @@ method something(
         @)
         :some stuff {}
 method(
-                $someself:
-                $var,
-                $othervar,
-                :$namedvar,
-                :@namedarray,
-                $,
-                @)
-                :some stuff {};
+        $someself:
+        $var,
+        $othervar,
+        :$namedvar,
+        :@namedarray,
+        $,
+        @)
+        :some stuff {};
 override something(
         $someself:
         $var,

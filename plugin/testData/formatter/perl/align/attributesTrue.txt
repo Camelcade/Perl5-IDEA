@@ -53,9 +53,9 @@ sub something()
         :something {}
 
 sub something()
-                :method
-                :other
-                :something;
+        :method
+        :other
+        :something;
 
 method something()
         :method
@@ -83,9 +83,9 @@ sub so()
         :so {}
 
 sub so()
-                :me
-                :ot
-                :so;
+        :me
+        :ot
+        :so;
 
 method so()
         :me

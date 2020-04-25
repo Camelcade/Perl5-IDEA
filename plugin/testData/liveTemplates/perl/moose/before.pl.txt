@@ -594,7 +594,6 @@ before <selection>sub_name<caret></selection> => sub {
     
 };
 
-
 unless($a){}
 
 
@@ -2055,7 +2054,6 @@ foreach($a){}continue{}
 before <selection>sub_name<caret></selection> => sub {
     
 };
-
 
 given($a){
   

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package com.perl5.lang.mojolicious.idea.formatter;
 
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.mojolicious.MojoliciousElementTypes;
+import com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets;
 import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
 
 
@@ -25,7 +26,7 @@ public class MojoliciousIndentProcessor extends PerlIndentProcessor implements M
   public static final MojoliciousIndentProcessor INSTANCE = new MojoliciousIndentProcessor();
 
   public static final TokenSet ABSOLUTE_UNINDENTABLE_TOKENS = TokenSet.orSet(
-    PerlIndentProcessor.ABSOLUTE_UNINDENTABLE_TOKENS,
+    PerlFormattingTokenSets.ABSOLUTE_UNINDENTABLE_TOKENS,
     TokenSet.create(
       MOJO_LINE_OPENER,
       MOJO_LINE_EXPR_OPENER,
@@ -34,7 +35,7 @@ public class MojoliciousIndentProcessor extends PerlIndentProcessor implements M
     ));
 
   public static final TokenSet UNINDENTABLE_CONTAINERS = TokenSet.orSet(
-    PerlIndentProcessor.UNINDENTABLE_CONTAINERS,
+    PerlFormattingTokenSets.UNINDENTABLE_CONTAINERS,
     TokenSet.create(
       MojoliciousElementTypes.FILE
     ));

@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.formatter;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
+import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
 
 import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
 
@@ -63,27 +64,35 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     CONTINUATION_EXPR
   );
 
-  // fixme doesn't duplicate BlockOwner interface?
-  TokenSet BLOCK_CONTAINERS_TOKENSET = TokenSet.create(
-    CONDITIONAL_BLOCK,
-    UNCONDITIONAL_BLOCK,
-    FOR_COMPOUND,
-    FOREACH_COMPOUND,
-    WHILE_COMPOUND,
+  TokenSet COMPOUND_STATEMENTS_TOKENSET = TokenSet.create(
+    IF_COMPOUND,
+    UNLESS_COMPOUND,
     UNTIL_COMPOUND,
+    WHILE_COMPOUND,
     GIVEN_COMPOUND,
     WHEN_COMPOUND,
-    CONTINUE_BLOCK,
-    DEFAULT_COMPOUND,
     TRYCATCH_COMPOUND,
-
-    TRY_EXPR,
-    CATCH_EXPR,
-    FINALLY_EXPR,
-    EXCEPT_EXPR,
-    OTHERWISE_EXPR,
-    CONTINUATION_EXPR
+    FOR_COMPOUND,
+    FOREACH_COMPOUND
   );
+
+
+  // fixme doesn't duplicate BlockOwner interface?
+  TokenSet BLOCK_CONTAINERS_TOKENSET = TokenSet.orSet(
+    COMPOUND_STATEMENTS_TOKENSET,
+    TokenSet.create(
+      CONDITIONAL_BLOCK,
+      UNCONDITIONAL_BLOCK,
+      CONTINUE_BLOCK,
+      DEFAULT_COMPOUND,
+
+      TRY_EXPR,
+      CATCH_EXPR,
+      FINALLY_EXPR,
+      EXCEPT_EXPR,
+      OTHERWISE_EXPR,
+      CONTINUATION_EXPR
+    ));
 
   TokenSet STATEMENT_MODIFIERS = TokenSet.create(
     IF_STATEMENT_MODIFIER,
@@ -248,7 +257,6 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     OPERATORS_SHIFT
   );
 
-
   TokenSet RESERVED_VARIABLE_DECLARATION = TokenSet.create(
     RESERVED_MY,
     RESERVED_OUR,
@@ -305,14 +313,68 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
    */
   TokenSet LF_ELEMENTS = TokenSet.orSet(
     STATEMENTS,
+    COMPOUND_STATEMENTS_TOKENSET,
+    TokenSet.create(LABEL_DECLARATION));
+
+
+  // containers which has none indentation
+  TokenSet UNINDENTABLE_CONTAINERS = TokenSet.orSet(
+    LAZY_PARSABLE_STRINGS,
+    LAZY_PARSABLE_REGEXPS,
+    SUB_OR_MODIFIER_DEFINITIONS_TOKENSET,
+    COMPOUND_STATEMENTS_TOKENSET,
     TokenSet.create(
-      LABEL_DECLARATION,
-      FOR_COMPOUND,
-      TRYCATCH_COMPOUND,
-      FOREACH_COMPOUND,
-      WHILE_COMPOUND,
-      WHEN_COMPOUND,
-      UNTIL_COMPOUND,
-      IF_COMPOUND
+      NAMESPACE_DEFINITION,
+      NAMESPACE_CONTENT,
+
+      DEFAULT_COMPOUND,
+      CONDITIONAL_BLOCK,
+      CONTINUE_BLOCK,
+      BLOCK_COMPOUND,
+
+      TRYCATCH_EXPR,
+      TRY_EXPR,
+      CATCH_EXPR,
+      FINALLY_EXPR,
+      EXCEPT_EXPR,
+      OTHERWISE_EXPR,
+      CONTINUATION_EXPR,
+
+      // fixme see #745
+      SWITCH_COMPOUND,
+      CASE_COMPOUND,
+
+      DO_BLOCK_EXPR,
+      EVAL_EXPR,
+      SUB_EXPR,
+      PerlStubElementTypes.FILE,
+
+      LP_STRING_QW
     ));
+  TokenSet UNINDENTABLE_TOKENS = TokenSet.create(
+    LP_STRING_QW,
+    COMMA_SEQUENCE_EXPR,
+    CALL_ARGUMENTS,
+    REGEX_QUOTE_CLOSE
+  );
+  TokenSet BLOCK_LIKE_CONTAINERS = TokenSet.create(
+    BLOCK
+  );
+  TokenSet MULTI_PARAM_BLOCK_CONTAINERS = TokenSet.create(
+    GREP_EXPR, MAP_EXPR, SORT_EXPR, REPLACEMENT_REGEX
+  );
+  TokenSet FOR_ELEMENTS_TOKENSET = TokenSet.create(
+    FOR_INIT, FOR_CONDITION, FOR_MUTATOR
+  );
+  /**
+   * Tokens that must be suppressed for indentation
+   */
+  TokenSet ABSOLUTE_UNINDENTABLE_TOKENS = TokenSet.create(
+    HEREDOC_END,
+    POD,
+    FORMAT,
+    FORMAT_TERMINATOR,
+    TAG_DATA,
+    TAG_END
+  );
 }

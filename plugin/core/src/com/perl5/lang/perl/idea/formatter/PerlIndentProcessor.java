@@ -28,11 +28,9 @@ import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlAstBlock;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlSyntheticBlock;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlSubCallElement;
 import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementType;
-import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -50,101 +48,20 @@ import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.USE_STATEMENT;
 public class PerlIndentProcessor implements PerlElementTypes {
   public static final PerlIndentProcessor INSTANCE = new PerlIndentProcessor();
 
-  // containers which has none indentation
-  public static final TokenSet UNINDENTABLE_CONTAINERS = TokenSet.orSet(
-    PerlTokenSets.LAZY_PARSABLE_STRINGS,
-    PerlTokenSets.LAZY_PARSABLE_REGEXPS,
-    TokenSet.create(
-      NAMESPACE_DEFINITION,
-      NAMESPACE_CONTENT,
-      SUB_DEFINITION,
-      METHOD_DEFINITION,
-      FUNC_DEFINITION,
-
-      AROUND_MODIFIER,
-      AFTER_MODIFIER,
-      AUGMENT_MODIFIER,
-      BEFORE_MODIFIER,
-      FUN_EXPR,
-
-      IF_COMPOUND,
-      UNLESS_COMPOUND,
-      UNTIL_COMPOUND,
-      WHILE_COMPOUND,
-      GIVEN_COMPOUND,
-      WHEN_COMPOUND,
-      DEFAULT_COMPOUND,
-      TRYCATCH_COMPOUND,
-      FOR_COMPOUND,
-      FOREACH_COMPOUND,
-      CONDITIONAL_BLOCK,
-      CONTINUE_BLOCK,
-      BLOCK_COMPOUND,
-
-      TRYCATCH_EXPR,
-      TRY_EXPR,
-      CATCH_EXPR,
-      FINALLY_EXPR,
-      EXCEPT_EXPR,
-      OTHERWISE_EXPR,
-      CONTINUATION_EXPR,
-
-      // fixme see #745
-      SWITCH_COMPOUND,
-      CASE_COMPOUND,
-
-      DO_BLOCK_EXPR,
-      EVAL_EXPR,
-      SUB_EXPR,
-      PerlStubElementTypes.FILE,
-
-      LP_STRING_QW
-    ));
-
-  public static final TokenSet UNINDENTABLE_TOKENS = TokenSet.create(
-    LP_STRING_QW,
-    COMMA_SEQUENCE_EXPR,
-    CALL_ARGUMENTS,
-    REGEX_QUOTE_CLOSE
-  );
-
-  public static final TokenSet BLOCK_LIKE_CONTAINERS = TokenSet.create(
-    BLOCK
-  );
-  static final TokenSet MULTI_PARAM_BLOCK_CONTAINERS = TokenSet.create(
-    GREP_EXPR, MAP_EXPR, SORT_EXPR, REPLACEMENT_REGEX
-  );
-
-  private static final TokenSet FOR_ELEMENTS_TOKENSET = TokenSet.create(
-    FOR_INIT, FOR_CONDITION, FOR_MUTATOR
-  );
-
-  /**
-   * Tokens that must be suppressed for indentation
-   */
-  public static final TokenSet ABSOLUTE_UNINDENTABLE_TOKENS = TokenSet.create(
-    HEREDOC_END,
-    POD,
-    FORMAT,
-    FORMAT_TERMINATOR,
-    TAG_DATA,
-    TAG_END
-  );
-
   public TokenSet getAbsoluteUnindentableTokens() {
-    return ABSOLUTE_UNINDENTABLE_TOKENS;
+    return PerlFormattingTokenSets.ABSOLUTE_UNINDENTABLE_TOKENS;
   }
 
   public TokenSet getBlockLikeContainers() {
-    return BLOCK_LIKE_CONTAINERS;
+    return PerlFormattingTokenSets.BLOCK_LIKE_CONTAINERS;
   }
 
   public TokenSet getUnindentableContainers() {
-    return UNINDENTABLE_CONTAINERS;
+    return PerlFormattingTokenSets.UNINDENTABLE_CONTAINERS;
   }
 
   public TokenSet getUnindentableTokens() {
-    return UNINDENTABLE_TOKENS;
+    return PerlFormattingTokenSets.UNINDENTABLE_TOKENS;
   }
 
   @NotNull
@@ -169,7 +86,7 @@ public class PerlIndentProcessor implements PerlElementTypes {
       return Indent.getContinuationIndent();
     }
 
-    if (FOR_ELEMENTS_TOKENSET.contains(nodeType)) {
+    if (PerlFormattingTokenSets.FOR_ELEMENTS_TOKENSET.contains(nodeType)) {
       return Indent.getContinuationIndent();
     }
 
@@ -197,7 +114,7 @@ public class PerlIndentProcessor implements PerlElementTypes {
       return Indent.getAbsoluteNoneIndent();
     }
 
-    if ((nodeType == BLOCK || nodeType == SUB_EXPR) && MULTI_PARAM_BLOCK_CONTAINERS.contains(parentNodeType)) {
+    if ((nodeType == BLOCK || nodeType == SUB_EXPR) && PerlFormattingTokenSets.MULTI_PARAM_BLOCK_CONTAINERS.contains(parentNodeType)) {
       return Indent.getNoneIndent();
     }
 

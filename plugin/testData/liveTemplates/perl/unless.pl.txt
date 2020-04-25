@@ -485,7 +485,8 @@ Caret offset: 93
 } continue {}
 
 
-say 'hi' unless (<selection>$expr<caret></selection>) {
+say 'hi'
+unless (<selection>$expr<caret></selection>) {
     
 };
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import com.intellij.formatting.Indent;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
+import com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets;
 import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlAstBlock;
 import org.jetbrains.annotations.NotNull;
@@ -30,7 +31,7 @@ public class HTMLMasonIndentProcessor extends PerlIndentProcessor implements HTM
   public static final HTMLMasonIndentProcessor INSTANCE = new HTMLMasonIndentProcessor();
 
   public static final TokenSet ABSOLUTE_UNINDENTABLE_TOKENS = TokenSet.orSet(
-    PerlIndentProcessor.ABSOLUTE_UNINDENTABLE_TOKENS,
+    PerlFormattingTokenSets.ABSOLUTE_UNINDENTABLE_TOKENS,
     TokenSet.create(
       HTML_MASON_PERL_OPENER,
       HTML_MASON_PERL_CLOSER,
@@ -40,7 +41,7 @@ public class HTMLMasonIndentProcessor extends PerlIndentProcessor implements HTM
     ));
 
   public static final TokenSet UNINDENTABLE_CONTAINERS = TokenSet.orSet(
-    PerlIndentProcessor.UNINDENTABLE_CONTAINERS,
+    PerlFormattingTokenSets.UNINDENTABLE_CONTAINERS,
     TokenSet.create(
       HTML_MASON_METHOD_DEFINITION,
       HTML_MASON_SUBCOMPONENT_DEFINITION,
@@ -48,7 +49,7 @@ public class HTMLMasonIndentProcessor extends PerlIndentProcessor implements HTM
     ));
 
   public static final TokenSet UNINDENTABLE_TOKENS = TokenSet.orSet(
-    PerlIndentProcessor.UNINDENTABLE_TOKENS,
+    PerlFormattingTokenSets.UNINDENTABLE_TOKENS,
     TokenSet.create(
       HTML_MASON_FLAGS_OPENER,
       HTML_MASON_FLAGS_CLOSER,
@@ -78,7 +79,7 @@ public class HTMLMasonIndentProcessor extends PerlIndentProcessor implements HTM
     ));
 
   public static final TokenSet BLOCK_LIKE_CONTAINERS = TokenSet.orSet(
-    PerlIndentProcessor.BLOCK_LIKE_CONTAINERS,
+    PerlFormattingTokenSets.BLOCK_LIKE_CONTAINERS,
     TokenSet.create(
       HTML_MASON_BLOCK
     ));

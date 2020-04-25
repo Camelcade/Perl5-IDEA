@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package com.perl5.lang.mason2.idea.formatter;
 
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.mason2.elementType.Mason2ElementTypes;
+import com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets;
 import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
 
 
@@ -25,14 +26,14 @@ public class MasonIndentProcessor extends PerlIndentProcessor implements Mason2E
   public static final MasonIndentProcessor INSTANCE = new MasonIndentProcessor();
 
   public static final TokenSet ABSOLUTE_UNINDENTABLE_TOKENS = TokenSet.orSet(
-    PerlIndentProcessor.ABSOLUTE_UNINDENTABLE_TOKENS,
+    PerlFormattingTokenSets.ABSOLUTE_UNINDENTABLE_TOKENS,
     TokenSet.create(
       MASON_LINE_OPENER,
       MASON_TEMPLATE_BLOCK_HTML
     ));
 
   public static final TokenSet UNINDENTABLE_CONTAINERS = TokenSet.orSet(
-    PerlIndentProcessor.UNINDENTABLE_CONTAINERS,
+    PerlFormattingTokenSets.UNINDENTABLE_CONTAINERS,
     TokenSet.create(
       Mason2ElementTypes.COMPONENT_FILE,
 
@@ -47,7 +48,7 @@ public class MasonIndentProcessor extends PerlIndentProcessor implements Mason2E
     ));
 
   public static final TokenSet UNINDENTABLE_TOKENS = TokenSet.orSet(
-    PerlIndentProcessor.UNINDENTABLE_TOKENS,
+    PerlFormattingTokenSets.UNINDENTABLE_TOKENS,
     TokenSet.create(
       MASON_METHOD_OPENER,
       MASON_METHOD_CLOSER,

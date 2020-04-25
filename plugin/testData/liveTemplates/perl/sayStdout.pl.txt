@@ -580,7 +580,6 @@ my $var = 1 + 2;
 if($a){}
 say "<caret>";
 
-
 unless($a){}
 
 
@@ -2011,7 +2010,6 @@ for($a){}continue{}
 
 foreach($a){}continue{}
 say "<caret>";
-
 
 given($a){
   
