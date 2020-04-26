@@ -699,7 +699,7 @@ private sub_prototype ::= SUB_PROTOTYPE_TOKEN*
 
 /************************************* Sub signatures *****************************************************************/
 private sub_signature ::= <<signature_content parse_sub_signature>>
-private parse_sub_signature ::= sub_signature_element (',' sub_signature_element) *
+private parse_sub_signature ::= sub_signature_element (',' sub_signature_element) * ','*
 private sub_signature_element ::= <<signature_element parse_sub_signature_element>>
 private parse_sub_signature_element ::= signature_left_side ['=' [parse_scalar_expr]]
 private signature_left_side ::= variable_declaration_element | sub_signature_element_ignore
