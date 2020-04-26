@@ -35,7 +35,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Objects;
 
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.*;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.HEREDOC_BODIES_TOKENSET;
@@ -166,12 +165,25 @@ public class PerlIndentProcessor implements PerlElementTypes {
 
   @Nullable
   public Indent getChildIndent(@NotNull PerlAstBlock block, int newChildIndex) {
-    IElementType elementType = block.getElementType();
+    ASTNode node = block.getNode();
+    IElementType elementType = PsiUtilCore.getElementType(node);
+    ASTNode parentNode = node == null ? null : node.getTreeParent();
+
+    // hack for signature_element wrapping variable_declaration
+    ASTNode grandParentNode = parentNode == null ? null : parentNode.getTreeParent();
+    IElementType grandParentElementType = PsiUtilCore.getElementType(grandParentNode);
+    if (grandParentElementType == SIGNATURE_ELEMENT && PsiUtilCore.getElementType(parentNode) == VARIABLE_DECLARATION_ELEMENT &&
+        node.getTextRange().equals(grandParentNode.getTextRange())) {
+      node = grandParentNode;
+      elementType = grandParentElementType;
+    }
 
     if (elementType == ATTRIBUTES) {
       return Indent.getContinuationIndent();
     }
-
+    if (elementType == SIGNATURE_ELEMENT) {
+      return Indent.getContinuationWithoutFirstIndent();
+    }
     if (SUB_OR_MODIFIER_DEFINITIONS_TOKENSET.contains(elementType) && block.getChildElementType(newChildIndex - 1) == LEFT_PAREN) {
       return Indent.getNormalIndent();
     }
@@ -184,10 +196,8 @@ public class PerlIndentProcessor implements PerlElementTypes {
       return Indent.getNormalIndent();
     }
 
-    if (block instanceof PerlSyntheticBlock && block.getSubBlocks().size() == newChildIndex) {
-      ASTNode parentNode = Objects.requireNonNull(block.getNode());
-      ASTNode grandParentNode = parentNode.getTreeParent();
-      return PsiUtilCore.getElementType(grandParentNode) == STATEMENT ? Indent.getNormalIndent() : Indent.getNoneIndent();
+    if (parentNode != null && block instanceof PerlSyntheticBlock && block.getSubBlocks().size() == newChildIndex) {
+      return PsiUtilCore.getElementType(parentNode) == STATEMENT ? Indent.getNormalIndent() : Indent.getNoneIndent();
     }
 
     List<Block> subBlocks = block.getSubBlocks();

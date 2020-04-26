@@ -19,11 +19,36 @@ package formatter;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
+import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.*;
+
 public abstract class PerlSubsFormatterEnterTest extends PerlFormatterTestCase {
 
   @Override
   protected final String getBaseDataPath() {
     return "testData/formatter/perl/enter/subs";
+  }
+
+  @Test
+  public void testSignatureElementDefaultValue() {
+    doTest();
+  }
+
+  @Test
+  public void testSignatureElementDefaultValueSecond() {
+    getCustomSettings().ALIGN_CONSECUTIVE_ASSIGNMENTS = NO_ALIGN;
+    doTest();
+  }
+
+  @Test
+  public void testSignatureElementDefaultValueSecondAligned() {
+    getCustomSettings().ALIGN_CONSECUTIVE_ASSIGNMENTS = ALIGN_LINES;
+    doTest();
+  }
+
+  @Test
+  public void testSignatureElementDefaultValueSecondAlignedStatement() {
+    getCustomSettings().ALIGN_CONSECUTIVE_ASSIGNMENTS = ALIGN_IN_STATEMENT;
+    doTest();
   }
 
   @Test

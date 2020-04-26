@@ -51,8 +51,7 @@ import java.util.*;
 
 import static com.intellij.formatting.WrapType.*;
 import static com.intellij.psi.codeStyle.CommonCodeStyleSettings.*;
-import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.ALIGN_IN_STATEMENT;
-import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.ALIGN_LINES;
+import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.*;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.ALL_QUOTE_OPENERS;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.STATEMENTS;
 
@@ -63,6 +62,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
   private final Map<Integer, Alignment> myCommentsAlignmentMap = FactoryMap.create(line -> Alignment.createAlignment(true));
   private final Map<ASTNode, Alignment> myOperatorsAlignmentsMap = FactoryMap.create(sequence -> Alignment.createAlignment(true));
   private final Map<ASTNode, Alignment> myElementsALignmentsMap = FactoryMap.create(sequence -> Alignment.createAlignment(true));
+  private final Map<ASTNode, Alignment> myAssignmentsElementAlignmentsMap = FactoryMap.create(sequence -> Alignment.createAlignment(true));
   private final Map<ASTNode, Map<ASTNode, Alignment>> myStringListAlignmentMap = FactoryMap.create(listNode -> {
     Map<Integer, Alignment> generatingMap = FactoryMap.create(key -> Alignment.createAlignment(true));
 
@@ -383,7 +383,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
         return getLineBasedAlignment(childNode, myAssignmentsAlignmentsMap);
       }
       else if (myPerlSettings.ALIGN_CONSECUTIVE_ASSIGNMENTS == ALIGN_IN_STATEMENT) {
-        return myElementsALignmentsMap.get(parentNode);
+        return myAssignmentsElementAlignmentsMap.get(parentNodeType == SIGNATURE_ELEMENT ? parentNode.getTreeParent() : parentNode);
       }
     }
     else if (myPerlSettings.ALIGN_ATTRIBUTES && parentNodeType == ATTRIBUTES &&
@@ -538,13 +538,40 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
   public Alignment getChildAlignment(@NotNull PerlAstBlock block, int newChildIndex) {
     ASTNode node = block.getNode();
     IElementType elementType = PsiUtilCore.getElementType(node);
+    ASTNode parentNode = node == null ? null : node.getTreeParent();
+
+    // hack for signature_element wrapping variable_declaration
+    ASTNode grandParentNode = parentNode == null ? null : parentNode.getTreeParent();
+    IElementType grandParentElementType = PsiUtilCore.getElementType(grandParentNode);
+    if (grandParentElementType == SIGNATURE_ELEMENT && PsiUtilCore.getElementType(parentNode) == VARIABLE_DECLARATION_ELEMENT &&
+        node.getTextRange().equals(grandParentNode.getTextRange())) {
+      node = grandParentNode;
+      parentNode = node.getTreeParent();
+      elementType = grandParentElementType;
+    }
+
+    if (myPerlSettings.ALIGN_CONSECUTIVE_ASSIGNMENTS != NO_ALIGN && elementType == SIGNATURE_ELEMENT) {
+      IElementType lastChildNodeType = PsiUtilCore.getElementType(node.getLastChildNode());
+      if (lastChildNodeType == OPERATOR_ASSIGN) {
+        return null;
+      }
+      PsiElement psiElement = node.getPsi();
+      assert psiElement instanceof PerlSignatureElement;
+      if (((PerlSignatureElement)psiElement).hasDeclarationElement()) {
+        if (myPerlSettings.ALIGN_CONSECUTIVE_ASSIGNMENTS == ALIGN_IN_STATEMENT) {
+          return myAssignmentsElementAlignmentsMap.get(parentNode);
+        }
+        else if (myPerlSettings.ALIGN_CONSECUTIVE_ASSIGNMENTS == ALIGN_LINES) {
+          return getLineBasedAlignment(node, myAssignmentsAlignmentsMap);
+        }
+      }
+    }
     if (elementType == SIGNATURE_CONTENT) {
       return mySettings.ALIGN_MULTILINE_PARAMETERS ? myElementsALignmentsMap.get(block.getNode()) : null;
     }
     if (elementType == ATTRIBUTES && myPerlSettings.ALIGN_ATTRIBUTES) {
       return myElementsALignmentsMap.get(node);
     }
-
     if (PerlFormattingTokenSets.COMMA_LIKE_SEQUENCES.contains(elementType)) {
       return null;
     }
@@ -573,10 +600,21 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     if (elementType == ATTRIBUTES) {
       return true;
     }
+    if (elementType == SIGNATURE_ELEMENT) {
+      PsiElement psiElement = blockNode.getPsi();
+      assert psiElement instanceof PerlSignatureElement;
+      return !((PerlSignatureElement)psiElement).hasDefaultValueElement();
+    }
     if (COMMA_LIKE_SEQUENCES.contains(elementType)) {
       IElementType lastNodeType = PsiUtilCore.getElementType(blockNode.getLastChildNode());
       if (lastNodeType == COMMA || lastNodeType == FAT_COMMA) {
         return true;
+      }
+      if (elementType == SIGNATURE_CONTENT) {
+        Block lastSubBlock = block.getLastSubBlock();
+        if (lastSubBlock != null && lastSubBlock.isIncomplete()) {
+          return true;
+        }
       }
     }
     else if (STATEMENTS.contains(elementType)) {

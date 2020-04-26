@@ -63,4 +63,12 @@ public interface PerlSignatureElement extends PerlLexicalVariableDeclarationMark
     }
     return isDeclarationElement(children[1]) ? null : children[1];
   }
+
+  default boolean hasDefaultValueElement() {
+    return getDefaultValueElement() != null;
+  }
+
+  default boolean hasDeclarationElement() {
+    return getDeclarationElement() != null;
+  }
 }

@@ -279,63 +279,63 @@ sub(
 };
 
 # Assignments alignment
-sub something($var1 = 123,
-              $varvar2 = 42,
+sub something($var1       = 123,
+              $varvar2    = 42,
               $varvarvar3 = 69) {
 }
-sub($var1 = 123,
-    $varvar2 = 42,
+sub($var1       = 123,
+    $varvar2    = 42,
     $varvarvar3 = 69) {
 };
 
-method something($var1 = 123,
-                 $varvar2 = 42,
+method something($var1       = 123,
+                 $varvar2    = 42,
                  $varvarvar3 = 69,
-                 Str $var4 = 'somename',
+                 Str $var4   = 'somename',
                  Array[ Str ] :$var5) {
 }
-method($var1 = 123,
-       $varvar2 = 42,
+method($var1       = 123,
+       $varvar2    = 42,
        $varvarvar3 = 69,
-       Str $var4 = 'somename',
+       Str $var4   = 'somename',
        Array[ Str ] :$var5) {
 };
 
-fun something($var1 = 123,
-              $varvar2 = 42,
+fun something($var1       = 123,
+              $varvar2    = 42,
               $varvarvar3 = 69,
-              Str $var4 = 'somename',
+              Str $var4   = 'somename',
               Array[ Str ] :$var5) {
 }
-fun($var1 = 123,
-    $varvar2 = 42,
+fun($var1       = 123,
+    $varvar2    = 42,
     $varvarvar3 = 69,
-    Str $var4 = 'somename',
+    Str $var4   = 'somename',
     Array[ Str ] :$var5) {
 };
 
-after something($var1 = 123,
-                $varvar2 = 42,
+after something($var1       = 123,
+                $varvar2    = 42,
                 $varvarvar3 = 69,
-                Str $var4 = 'somename',
+                Str $var4   = 'somename',
                 Array[ Str ] :$var5) {
 }
-before something($var1 = 123,
-                 $varvar2 = 42,
+before something($var1       = 123,
+                 $varvar2    = 42,
                  $varvarvar3 = 69,
-                 Str $var4 = 'somename',
+                 Str $var4   = 'somename',
                  Array[ Str ] :$var5) {
 }
-around something($var1 = 123,
-                 $varvar2 = 42,
+around something($var1       = 123,
+                 $varvar2    = 42,
                  $varvarvar3 = 69,
-                 Str $var4 = 'somename',
+                 Str $var4   = 'somename',
                  Array[ Str ] :$var5) {
 }
-augment something($var1 = 123,
-                  $varvar2 = 42,
+augment something($var1       = 123,
+                  $varvar2    = 42,
                   $varvarvar3 = 69,
-                  Str $var4 = 'somename',
+                  Str $var4   = 'somename',
                   Array[ Str ] :$var5) {
 }
 
@@ -656,4 +656,3 @@ augment something(
         :second
         third {
 }
-

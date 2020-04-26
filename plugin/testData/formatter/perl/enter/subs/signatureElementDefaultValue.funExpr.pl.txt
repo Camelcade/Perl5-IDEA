@@ -1,0 +1,6 @@
+sub somesub(
+    $somevar =
+            <caret>
+) :attribute
+{
+}

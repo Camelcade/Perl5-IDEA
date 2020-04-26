@@ -21,6 +21,7 @@ import com.intellij.formatting.Block;
 import com.intellij.formatting.Indent;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
+import com.intellij.util.containers.ContainerUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -41,10 +42,18 @@ public interface PerlAstBlock extends ASTBlock {
 
   @Nullable
   default IElementType getChildElementType(int blockIndex) {
+    if (blockIndex < 0) {
+      return null;
+    }
     List<Block> subBlocks = getSubBlocks();
     if (subBlocks.size() <= blockIndex) {
       return null;
     }
     return ASTBlock.getElementType(subBlocks.get(blockIndex));
+  }
+
+  @Nullable
+  default Block getLastSubBlock() {
+    return ContainerUtil.getLastItem(getSubBlocks());
   }
 }
