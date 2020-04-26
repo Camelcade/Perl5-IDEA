@@ -19,6 +19,7 @@ package formatter;
 import org.junit.Test;
 
 import static com.intellij.psi.codeStyle.CommonCodeStyleSettings.*;
+import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.*;
 
 public class PerlFunctionParametersFormatTest extends PerlFormatterTestCase {
   @Override
@@ -201,6 +202,23 @@ public class PerlFunctionParametersFormatTest extends PerlFormatterTestCase {
     doWrapTest();
   }
 
+  @Test
+  public void testAssignmentAlignmentsNo() {
+    getCustomSettings().ALIGN_CONSECUTIVE_ASSIGNMENTS = NO_ALIGN;
+    doTest();
+  }
+
+  @Test
+  public void testAssignmentAlignmentsLines() {
+    getCustomSettings().ALIGN_CONSECUTIVE_ASSIGNMENTS = ALIGN_LINES;
+    doTest();
+  }
+
+  @Test
+  public void testAssignmentAlignmentsStatements() {
+    getCustomSettings().ALIGN_CONSECUTIVE_ASSIGNMENTS = ALIGN_IN_STATEMENT;
+    doTest();
+  }
 
   private void doWrapTest() {
     getSettings().RIGHT_MARGIN = 30;

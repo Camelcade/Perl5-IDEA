@@ -150,48 +150,48 @@ around something($) {}
 augment something($) {}
 
 #   Variable   with   empty   default
-fun something($some =) {}
-fun($some =) {};
-method something($some =) {}
-method($some =) {};
+fun something($some      =) {}
+fun($some                =) {};
+method something($some   =) {}
+method($some             =) {};
 override something($some =) {}
-after something($some =) {}
-before something($some =) {}
-around something($some =) {}
-augment something($some =) {}
+after something($some    =) {}
+before something($some   =) {}
+around something($some   =) {}
+augment something($some  =) {}
 
 #   Named   with   empty   default
-fun something(:$some =) {}
-fun(:$some =) {};
-method something(:$some =) {}
-method(:$some =) {};
+fun something(:$some      =) {}
+fun(:$some                =) {};
+method something(:$some   =) {}
+method(:$some             =) {};
 override something(:$some =) {}
-after something(:$some =) {}
-before something(:$some =) {}
-around something(:$some =) {}
-augment something(:$some =) {}
+after something(:$some    =) {}
+before something(:$some   =) {}
+around something(:$some   =) {}
+augment something(:$some  =) {}
 
 #   Variable   with   default
-fun something($some = somecall(42 + 'sparta')) {}
-fun($some = somecall(42 + 'sparta')) {};
-method something($some = somecall(42 + 'sparta')) {}
-method($some = somecall(42 + 'sparta')) {};
+fun something($some      = somecall(42 + 'sparta')) {}
+fun($some                = somecall(42 + 'sparta')) {};
+method something($some   = somecall(42 + 'sparta')) {}
+method($some             = somecall(42 + 'sparta')) {};
 override something($some = somecall(42 + 'sparta')) {}
-after something($some = somecall(42 + 'sparta')) {}
-before something($some = somecall(42 + 'sparta')) {}
-around something($some = somecall(42 + 'sparta')) {}
-augment something($some = somecall(42 + 'sparta')) {}
+after something($some    = somecall(42 + 'sparta')) {}
+before something($some   = somecall(42 + 'sparta')) {}
+around something($some   = somecall(42 + 'sparta')) {}
+augment something($some  = somecall(42 + 'sparta')) {}
 
 #   Named   with   default
-fun something(:$some = somecall(42 + 'sparta')) {}
-fun(:$some = somecall(42 + 'sparta')) {};
-method something(:$some = somecall(42 + 'sparta')) {}
-method(:$some = somecall(42 + 'sparta')) {};
+fun something(:$some      = somecall(42 + 'sparta')) {}
+fun(:$some                = somecall(42 + 'sparta')) {};
+method something(:$some   = somecall(42 + 'sparta')) {}
+method(:$some             = somecall(42 + 'sparta')) {};
 override something(:$some = somecall(42 + 'sparta')) {}
-after something(:$some = somecall(42 + 'sparta')) {}
-before something(:$some = somecall(42 + 'sparta')) {}
-around something(:$some = somecall(42 + 'sparta')) {}
-augment something(:$some = somecall(42 + 'sparta')) {}
+after something(:$some    = somecall(42 + 'sparta')) {}
+before something(:$some   = somecall(42 + 'sparta')) {}
+around something(:$some   = somecall(42 + 'sparta')) {}
+augment something(:$some  = somecall(42 + 'sparta')) {}
 
 #   Mixed   cases
 fun something($var, $othervar, :$namedvar, :@namedarray, $, @) :some stuff {}
@@ -279,47 +279,47 @@ sub(
 };
 
 # Assignments alignment
-sub something($var1 = 123,
-              $varvar2 = 42,
+sub something($var1       = 123,
+              $varvar2    = 42,
               $varvarvar3 = 69) {
 }
-sub($var1 = 123,
-    $varvar2 = 42,
+sub($var1       = 123,
+    $varvar2    = 42,
     $varvarvar3 = 69) {
 };
 
-method something($var1 = 123,
-                 $varvar2 = 42,
+method something($var1       = 123,
+                 $varvar2    = 42,
                  $varvarvar3 = 69) {
 }
-method($var1 = 123,
-       $varvar2 = 42,
+method($var1       = 123,
+       $varvar2    = 42,
        $varvarvar3 = 69) {
 };
 
-fun something($var1 = 123,
-              $varvar2 = 42,
+fun something($var1       = 123,
+              $varvar2    = 42,
               $varvarvar3 = 69) {
 }
-fun($var1 = 123,
-    $varvar2 = 42,
+fun($var1       = 123,
+    $varvar2    = 42,
     $varvarvar3 = 69) {
 };
 
-after something($var1 = 123,
-                $varvar2 = 42,
+after something($var1       = 123,
+                $varvar2    = 42,
                 $varvarvar3 = 69) {
 }
-before something($var1 = 123,
-                 $varvar2 = 42,
+before something($var1       = 123,
+                 $varvar2    = 42,
                  $varvarvar3 = 69) {
 }
-around something($var1 = 123,
-                 $varvar2 = 42,
+around something($var1       = 123,
+                 $varvar2    = 42,
                  $varvarvar3 = 69) {
 }
-augment something($var1 = 123,
-                  $varvar2 = 42,
+augment something($var1       = 123,
+                  $varvar2    = 42,
                   $varvarvar3 = 69) {
 }
 

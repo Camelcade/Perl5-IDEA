@@ -276,4 +276,50 @@ sub(
         three {
     say 'hi';
     say 'hi';
+};
+
+# Assignments alignment
+sub something( $var1 = 123,
+               $varvar2 = 42,
+               $varvarvar3 = 69 ) {
 }
+sub( $var1 = 123,
+     $varvar2 = 42,
+     $varvarvar3 = 69 ) {
+};
+
+method something( $var1 = 123,
+                  $varvar2 = 42,
+                  $varvarvar3 = 69 ) {
+}
+method( $var1 = 123,
+        $varvar2 = 42,
+        $varvarvar3 = 69 ) {
+};
+
+fun something( $var1 = 123,
+               $varvar2 = 42,
+               $varvarvar3 = 69 ) {
+}
+fun( $var1 = 123,
+     $varvar2 = 42,
+     $varvarvar3 = 69 ) {
+};
+
+after something( $var1 = 123,
+                 $varvar2 = 42,
+                 $varvarvar3 = 69 ) {
+}
+before something( $var1 = 123,
+                  $varvar2 = 42,
+                  $varvarvar3 = 69 ) {
+}
+around something( $var1 = 123,
+                  $varvar2 = 42,
+                  $varvarvar3 = 69 ) {
+}
+augment something( $var1 = 123,
+                   $varvar2 = 42,
+                   $varvarvar3 = 69 ) {
+}
+

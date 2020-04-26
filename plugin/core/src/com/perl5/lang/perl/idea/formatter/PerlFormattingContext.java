@@ -370,7 +370,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     else if (BINARY_EXPRESSIONS.contains(parentNodeType) && mySettings.ALIGN_MULTILINE_BINARY_OPERATION) {
       return myElementsALignmentsMap.get(parentNode);
     }
-    else if (parentNodeType == ASSIGN_EXPR && OPERATORS_ASSIGNMENT.contains(childNodeType)) {
+    else if ((parentNodeType == ASSIGN_EXPR || parentNodeType == SIGNATURE_ELEMENT) && OPERATORS_ASSIGNMENT.contains(childNodeType)) {
       if (myPerlSettings.ALIGN_CONSECUTIVE_ASSIGNMENTS == ALIGN_LINES) {
         return getLineBasedAlignment(childNode, myAssignmentsAlignmentsMap);
       }
