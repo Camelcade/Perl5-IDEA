@@ -1,0 +1,4 @@
+method() :attribute
+         <caret>
+{
+}

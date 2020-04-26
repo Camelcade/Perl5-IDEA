@@ -1,0 +1,4 @@
+func somefunc() :attribute
+        <caret>
+{
+}

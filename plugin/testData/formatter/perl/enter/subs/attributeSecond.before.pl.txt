@@ -1,0 +1,4 @@
+before somemethod() :attribute
+        <caret>
+{
+}

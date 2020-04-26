@@ -168,6 +168,10 @@ public class PerlIndentProcessor implements PerlElementTypes {
   public Indent getChildIndent(@NotNull PerlAstBlock block, int newChildIndex) {
     IElementType elementType = block.getElementType();
 
+    if (elementType == ATTRIBUTES) {
+      return Indent.getContinuationIndent();
+    }
+
     if (SUB_OR_MODIFIER_DEFINITIONS_TOKENSET.contains(elementType) && block.getChildElementType(newChildIndex - 1) == LEFT_PAREN) {
       return Indent.getNormalIndent();
     }

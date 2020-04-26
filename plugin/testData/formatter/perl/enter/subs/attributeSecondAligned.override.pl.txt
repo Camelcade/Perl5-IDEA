@@ -1,0 +1,4 @@
+override somemethod() :attribute
+                      <caret>
+{
+}
