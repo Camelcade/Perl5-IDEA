@@ -155,20 +155,11 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 
 
   /**
-   * Statement recovery function. Should not consume token, only check;
-   *
-   * @param b PerlBuilder
-   * @param l parsing level
-   * @return parsing result
+   * @return true iff next token should be consumed by parser while recovering after statement parsing
    */
   public static boolean recoverStatement(PsiBuilder b, @SuppressWarnings("unused") int l) {
     assert b instanceof PerlBuilder;
-    IElementType currentTokenType = b.getTokenType();
-
-    return !(
-      currentTokenType == null ||                                                                                 // got end of file
-      !((PerlBuilder)b).getPerlParser().getStatementRecoveryConsumableTokenSet().contains(currentTokenType)
-    );
+    return ((PerlBuilder)b).getPerlParser().getStatementRecoveryConsumableTokenSet().contains(b.getTokenType());
   }
 
   /**
