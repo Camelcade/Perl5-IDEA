@@ -362,7 +362,7 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     ATTRIBUTES
   );
   TokenSet BLOCK_LIKE_CONTAINERS = TokenSet.create(
-    BLOCK
+    BLOCK, SIGNATURE_CONTENT
   );
   TokenSet MULTI_PARAM_BLOCK_CONTAINERS = TokenSet.create(
     GREP_EXPR, MAP_EXPR, SORT_EXPR, REPLACEMENT_REGEX

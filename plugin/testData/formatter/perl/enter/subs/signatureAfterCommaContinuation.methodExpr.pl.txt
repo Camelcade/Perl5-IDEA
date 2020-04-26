@@ -1,0 +1,4 @@
+method( $var,
+    <caret>
+) {
+};

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,12 +18,15 @@ package formatter;
 
 import base.PerlLightTestCase;
 import com.intellij.application.options.CodeStyle;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class PerlFormatterTestCase extends PerlLightTestCase {
+  private static final String PER_TEST_CODE = "<per test code>";
+
   @Override
   protected void setUp() throws Exception {
     super.setUp();
@@ -31,6 +34,15 @@ public abstract class PerlFormatterTestCase extends PerlLightTestCase {
     assertNotNull(options);
     options.INDENT_SIZE = 4;
     options.CONTINUATION_INDENT_SIZE = 8;
+  }
+
+  protected final String getPatchedContent(@NotNull String content) {
+    return StringUtil.replace(content, PER_TEST_CODE, getPerTestCode());
+  }
+
+  @NotNull
+  protected String getPerTestCode() {
+    throw new RuntimeException("Not implemented");
   }
 
   protected void doWrappingFormatTest() {

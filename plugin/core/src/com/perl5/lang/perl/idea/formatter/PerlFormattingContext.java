@@ -538,6 +538,10 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
   public Alignment getChildAlignment(@NotNull PerlAstBlock block, int newChildIndex) {
     ASTNode node = block.getNode();
     IElementType elementType = PsiUtilCore.getElementType(node);
+    if (elementType == SIGNATURE_CONTENT) {
+      return mySettings.ALIGN_MULTILINE_PARAMETERS ? myElementsALignmentsMap.get(block.getNode()) : null;
+    }
+
     if (PerlFormattingTokenSets.COMMA_LIKE_SEQUENCES.contains(elementType)) {
       return null;
     }
@@ -563,7 +567,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       return null;
     }
     IElementType elementType = block.getElementType();
-    if (elementType == COMMA_SEQUENCE_EXPR) {
+    if (COMMA_LIKE_SEQUENCES.contains(elementType)) {
       IElementType lastNodeType = PsiUtilCore.getElementType(blockNode.getLastChildNode());
       if (lastNodeType == COMMA || lastNodeType == FAT_COMMA) {
         return true;

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,12 +17,14 @@
 package com.perl5.lang.perl.idea.formatter.blocks;
 
 import com.intellij.formatting.ASTBlock;
+import com.intellij.formatting.Block;
 import com.intellij.formatting.Indent;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Objects;
 
 public interface PerlAstBlock extends ASTBlock {
@@ -35,5 +37,14 @@ public interface PerlAstBlock extends ASTBlock {
   @NotNull
   default IElementType getElementType() {
     return Objects.requireNonNull(PsiUtilCore.getElementType(getNode()));
+  }
+
+  @Nullable
+  default IElementType getChildElementType(int blockIndex) {
+    List<Block> subBlocks = getSubBlocks();
+    if (subBlocks.size() <= blockIndex) {
+      return null;
+    }
+    return ASTBlock.getElementType(subBlocks.get(blockIndex));
   }
 }

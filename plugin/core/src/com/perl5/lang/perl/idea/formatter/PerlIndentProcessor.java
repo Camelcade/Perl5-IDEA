@@ -37,8 +37,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Objects;
 
-import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.BLOCK_CLOSERS;
-import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.BLOCK_OPENERS;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.*;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.HEREDOC_BODIES_TOKENSET;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.VARIABLE_DECLARATIONS;
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.NO_STATEMENT;
@@ -168,6 +167,10 @@ public class PerlIndentProcessor implements PerlElementTypes {
   @Nullable
   public Indent getChildIndent(@NotNull PerlAstBlock block, int newChildIndex) {
     IElementType elementType = block.getElementType();
+
+    if (SUB_OR_MODIFIER_DEFINITIONS_TOKENSET.contains(elementType) && block.getChildElementType(newChildIndex - 1) == LEFT_PAREN) {
+      return Indent.getNormalIndent();
+    }
 
     if (getUnindentableContainers().contains(elementType)) {
       return Indent.getNoneIndent();
