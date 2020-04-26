@@ -1,0 +1,50 @@
+sub somesub($$$$){
+}
+
+sub somesub(
+'somestuff'
+){}
+
+sub ($$$$){
+};
+
+sub (
+'somestuff'
+){};
+
+method somesub1(
+    'somestuff'
+){}
+
+method (
+    'somestuff'
+){};
+
+func somesub2(
+    'somestuff'
+){}
+
+fun somesub3(
+    'somestuff'
+){}
+
+fun (
+    'somestuff'
+){};
+
+override something (
+    'somestuff'
+){};
+
+after something (
+    'somestuff'
+){};
+before something (
+    'somestuff'
+){};
+around something (
+    'somestuff'
+){};
+augment something (
+    'somestuff'
+){};

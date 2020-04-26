@@ -47,6 +47,11 @@ public class PerlParserTest extends PerlParserTestBase {
   }
 
   @Test
+  public void testSignatureRecovery() {
+    doTest(false);
+  }
+
+  @Test
   public void testIssue2158() {doTest();}
 
   @Test

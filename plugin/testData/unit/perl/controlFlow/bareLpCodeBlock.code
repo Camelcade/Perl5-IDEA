@@ -24,7 +24,7 @@ sub something($foo = 42[])  {
     # something something something something something something something something something something something
     # something something something something something something something something something something something
     # something something something something something something something something something something something
-    if(){
+    i<caret>f(){
         $something->foo;
     }
 }
