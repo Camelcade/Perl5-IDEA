@@ -293,7 +293,13 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
           return Spacing.createSpacing(1, 1, 0, true, 1);
         }
       }
+
+      if (child1Type == METHOD && child2Type == CALL_ARGUMENTS &&
+          parentNodeType == SUB_CALL && PsiUtilCore.getElementType(parentNode.getTreeParent()) == TYPE_SPECIFIER) {
+        return Spacing.createSpacing(0, 0, 0, false, 0);
+      }
     }
+
     return getSpacingBuilder().getSpacing(parent, child1, child2);
   }
 

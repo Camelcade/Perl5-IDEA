@@ -325,36 +325,370 @@ sub($var1 = 123,
 
 method something($var1 = 123,
                  $varvar2 = 42,
-                 $varvarvar3 = 69) {
+                 $varvarvar3 = 69,
+                 Str $var4 = 'somename',
+                 Array[ Str ] :$var5) {
 }
 method($var1 = 123,
        $varvar2 = 42,
-       $varvarvar3 = 69) {
+       $varvarvar3 = 69,
+       Str $var4 = 'somename',
+       Array[ Str ] :$var5) {
 };
 
 fun something($var1 = 123,
               $varvar2 = 42,
-              $varvarvar3 = 69) {
+              $varvarvar3 = 69,
+              Str $var4 = 'somename',
+              Array[ Str ] :$var5) {
 }
 fun($var1 = 123,
     $varvar2 = 42,
-    $varvarvar3 = 69) {
+    $varvarvar3 = 69,
+    Str $var4 = 'somename',
+    Array[ Str ] :$var5) {
 };
 
 after something($var1 = 123,
                 $varvar2 = 42,
-                $varvarvar3 = 69) {
+                $varvarvar3 = 69,
+                Str $var4 = 'somename',
+                Array[ Str ] :$var5) {
 }
 before something($var1 = 123,
                  $varvar2 = 42,
-                 $varvarvar3 = 69) {
+                 $varvarvar3 = 69,
+                 Str $var4 = 'somename',
+                 Array[ Str ] :$var5) {
 }
 around something($var1 = 123,
                  $varvar2 = 42,
-                 $varvarvar3 = 69) {
+                 $varvarvar3 = 69,
+                 Str $var4 = 'somename',
+                 Array[ Str ] :$var5) {
 }
 augment something($var1 = 123,
                   $varvar2 = 42,
-                  $varvarvar3 = 69) {
+                  $varvarvar3 = 69,
+                  Str $var4 = 'somename',
+                  Array[ Str ] :$var5) {
+}
+
+
+# everything on the new line
+sub something(
+        $var1
+                =
+                123,
+        $varvar2
+                =
+                42,
+        $varvarvar3
+                =
+                69,
+        $,
+        @
+)
+        :first
+        :second
+        third {
+}
+
+sub(
+        $var1
+                =
+                123,
+        $varvar2
+                =
+                42,
+        $varvarvar3
+                =
+                69,
+        $,
+        @
+)
+        :first
+        :second
+        third {
+}
+;
+
+method something(
+        $self:
+        $var1
+                =
+                123,
+        String $varvar2
+                =
+                42,
+        Array[
+                String
+        ] $varvarvar3
+                =
+                69,
+        :$namedvar
+                =
+                42
+                        +
+                        69,
+        String :$namedvar
+                =
+                42
+                        +
+                        69,
+        $,
+        @
+)
+        :first
+        :second
+        third {
+}
+
+override something(
+        $self:
+        $var1
+                =
+                123,
+        String $varvar2
+                =
+                42,
+        Array[
+                String
+        ] $varvarvar3
+                =
+                69,
+        :$namedvar
+                =
+                42
+                        +
+                        69,
+        String :$namedvar
+                =
+                42
+                        +
+                        69,
+        $,
+        @
+)
+        :first
+        :second
+        third {
+}
+
+method(
+        $var1
+                =
+                123,
+        String $varvar2
+                =
+                42,
+        Array[
+                String
+        ] $varvarvar3
+                =
+                69,
+        :$namedvar
+                =
+                42
+                        +
+                        69,
+        String :$namedvar
+                =
+                42
+                        +
+                        69,
+        $,
+        @
+)
+        :first
+        :second
+        third {
+}
+;
+
+fun something(
+        $var1
+                =
+                123,
+        String $varvar2
+                =
+                42,
+        Array[
+                String
+        ] $varvarvar3
+                =
+                69,
+        :$namedvar
+                =
+                42
+                        +
+                        69,
+        String :$namedvar
+                =
+                42
+                        +
+                        69,
+        $,
+        @
+)
+        :first
+        :second
+        third {
+}
+
+fun(
+        $var1
+                =
+                123,
+        String $varvar2
+                =
+                42,
+        Array[
+                String
+        ] $varvarvar3
+                =
+                69,
+        :$namedvar
+                =
+                42
+                        +
+                        69,
+        String :$namedvar
+                =
+                42
+                        +
+                        69,
+        $,
+        @
+)
+        :first
+        :second
+        third {
+}
+;
+
+after something(
+        $self:
+        $var1
+                =
+                123,
+        String $varvar2
+                =
+                42,
+        Array[
+                String
+        ] $varvarvar3
+                =
+                69,
+        :$namedvar
+                =
+                42
+                        +
+                        69,
+        String :$namedvar
+                =
+                42
+                        +
+                        69,
+        $,
+        @
+)
+        :first
+        :second
+        third {
+}
+
+before something(
+        $self:
+        $var1
+                =
+                123,
+        String $varvar2
+                =
+                42,
+        Array[
+                String
+        ] $varvarvar3
+                =
+                69,
+        :$namedvar
+                =
+                42
+                        +
+                        69,
+        String :$namedvar
+                =
+                42
+                        +
+                        69,
+        $,
+        @
+)
+        :first
+        :second
+        third {
+}
+
+around something(
+        $orig,
+                $self:
+        $var1
+                =
+                123,
+        String $varvar2
+                =
+                42,
+        Array[
+                String
+        ] $varvarvar3
+                =
+                69,
+        :$namedvar
+                =
+                42
+                        +
+                        69,
+        String :$namedvar
+                =
+                42
+                        +
+                        69,
+        $,
+        @
+)
+        :first
+        :second
+        third {
+}
+
+augment something(
+        $self:
+        $var1
+                =
+                123,
+        String $varvar2
+                =
+                42,
+        Array[
+                String
+        ] $varvarvar3
+                =
+                69,
+        :$namedvar
+                =
+                42
+                        +
+                        69,
+        String :$namedvar
+                =
+                42
+                        +
+                        69,
+        $,
+        @
+)
+        :first
+        :second
+        third {
 }
 

@@ -26,6 +26,7 @@ import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.AFTER_M
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.ANON_ARRAY;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.ANON_HASH;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.AROUND_MODIFIER;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.AROUND_SIGNATURE_INVOCANTS;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.ARRAY_INDEX;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.ATTRIBUTE;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.ATTRIBUTES;
@@ -95,6 +96,7 @@ import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.RIGHT_B
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.RIGHT_BRACKET;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.RIGHT_PAREN;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.SEMICOLON;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.SIGNATURE_CONTENT;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.SIGNATURE_ELEMENT;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.SORT_EXPR;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.STATEMENT;
@@ -105,6 +107,7 @@ import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.SUB_DEF
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.SUB_EXPR;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.SUB_NAME;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.TERNARY_EXPR;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.TYPE_SPECIFIER;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.UNCONDITIONAL_BLOCK;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.UNLESS_STATEMENT_MODIFIER;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.UNTIL_STATEMENT_MODIFIER;
@@ -138,7 +141,7 @@ public class PerlSpacingBuilderFactory {
       .around(OPERATORS_BITWISE).spaceIf(settings.SPACE_AROUND_BITWISE_OPERATORS)
       .after(OPERATOR_REFERENCE).spaces(0)
 
-      .between(FUNCTION_PARAMETERS_KEYWORDS_TOKENSET, SUB_NAME).spaces(1)
+      .between(FUNCTION_PARAMETERS_KEYWORDS_TOKENSET, SUB_NAME).spacing(1, 1, 0, false, 0)
 
       .afterInside(OPERATOR_MINUS, PREFIX_UNARY_EXPR).spaceIf(settings.SPACE_AROUND_UNARY_OPERATOR)
       .afterInside(OPERATOR_PLUS, PREFIX_UNARY_EXPR).spaceIf(settings.SPACE_AROUND_UNARY_OPERATOR)
@@ -154,8 +157,14 @@ public class PerlSpacingBuilderFactory {
       .between(RESERVED_FORMAT, SUB_NAME).spaces(1)
 
       .between(ATTRIBUTES, LEFT_PAREN).spaces(1)
-      .beforeInside(LEFT_PAREN, SUB_OR_MODIFIER_DEFINITIONS_TOKENSET).spaceIf(settings.SPACE_BEFORE_METHOD_PARENTHESES)
-
+      .beforeInside(LEFT_PAREN, SUB_OR_MODIFIER_DEFINITIONS_TOKENSET).spacing(
+        settings.SPACE_BEFORE_METHOD_PARENTHESES ? 1 : 0,
+        settings.SPACE_BEFORE_METHOD_PARENTHESES ? 1 : 0,
+        0,
+        false,
+        0
+      )
+      .after(TYPE_SPECIFIER).spacing(1, 1, 0, false, 0)
       .betweenInside(LEFT_PAREN, RIGHT_PAREN, SUB_DEFINITION).spaceIf(settings.SPACE_WITHIN_EMPTY_METHOD_PARENTHESES)
       .betweenInside(LEFT_PAREN, RIGHT_PAREN, SUB_DECLARATION).spaceIf(settings.SPACE_WITHIN_EMPTY_METHOD_PARENTHESES)
       .betweenInside(LEFT_PAREN, RIGHT_PAREN, METHOD_DEFINITION).spaceIf(settings.SPACE_WITHIN_EMPTY_METHOD_PARENTHESES)
@@ -174,18 +183,18 @@ public class PerlSpacingBuilderFactory {
       .before(ATTRIBUTES).spaceIf(perlSettings.SPACE_BEFORE_ATTRIBUTE)
       .between(INVOCANTS_TOKENSET, COLON).spaces(1)
       .between(INVOCANTS_TOKENSET, SIGNATURE_ELEMENT).spaces(1)
-      .betweenInside(COLON, VARIABLE_DECLARATION_ELEMENT, SIGNATURE_ELEMENT).spaces(0)
-      .beforeInside(COLON, INVOCANTS_TOKENSET).spaces(0)
+      .betweenInside(COLON, VARIABLE_DECLARATION_ELEMENT, SIGNATURE_ELEMENT).spacing(0, 0, 0, false, 0)
+      .beforeInside(COLON, INVOCANTS_TOKENSET).spacing(0, 0, 0, false, 0)
       .beforeInside(COLON, ATTRIBUTES).spaceIf(perlSettings.SPACE_BEFORE_ATTRIBUTE)
-      .between(COLON, ATTRIBUTE).spaces(0)
+      .between(COLON, ATTRIBUTE).spacing(0, 0, 0, false, 0)
       .between(ATTRIBUTE, ATTRIBUTE).spaces(1)
 
       .between(SUB_MODIFIERS, RESERVED_SUB).spaces(1)
-      .afterInside(RESERVED_SUB, SUB_DEFINITION).spaces(1)
-      .afterInside(RESERVED_SUB, SUB_DECLARATION).spaces(1)
-      .between(RESERVED_ASYNC, RESERVED_METHOD).spaces(1)
-      .afterInside(RESERVED_METHOD, METHOD_DEFINITION).spaces(1)
-      .afterInside(RESERVED_FUNC, FUNC_DEFINITION).spaces(1)
+      .afterInside(RESERVED_SUB, SUB_DEFINITION).spacing(1, 1, 0, false, 0)
+      .afterInside(RESERVED_SUB, SUB_DECLARATION).spacing(1, 1, 0, false, 0)
+      .between(RESERVED_ASYNC, RESERVED_METHOD).spacing(1, 1, 0, false, 0)
+      .afterInside(RESERVED_METHOD, METHOD_DEFINITION).spacing(1, 1, 0, false, 0)
+      .afterInside(RESERVED_FUNC, FUNC_DEFINITION).spacing(1, 1, 0, false, 0)
 
       .between(NUMBER_CONSTANT, OPERATOR_CONCAT).spaces(1)
       .aroundInside(OPERATOR_CONCAT, ADD_EXPR).spaceIf(perlSettings.SPACE_AROUND_CONCAT_OPERATOR)
@@ -229,6 +238,20 @@ public class PerlSpacingBuilderFactory {
       .afterInside(LEFT_PAREN, PARENTHESISED_CALL_ARGUMENTS).spaceIf(settings.SPACE_WITHIN_METHOD_CALL_PARENTHESES)
       .beforeInside(RIGHT_PAREN, PARENTHESISED_CALL_ARGUMENTS).spaceIf(settings.SPACE_WITHIN_METHOD_CALL_PARENTHESES)
 
+      .beforeInside(COMMA, SIGNATURE_CONTENT).spacing(
+        (settings.SPACE_BEFORE_COMMA ? 1 : 0),
+        (settings.SPACE_BEFORE_COMMA ? 1 : 0),
+        0,
+        false,
+        0
+      )
+      .beforeInside(COMMA, AROUND_SIGNATURE_INVOCANTS).spacing(
+        (settings.SPACE_BEFORE_COMMA ? 1 : 0),
+        (settings.SPACE_BEFORE_COMMA ? 1 : 0),
+        0,
+        false,
+        0
+      )
       .before(COMMA).spaceIf(settings.SPACE_BEFORE_COMMA)
       .after(COMMA).spaceIf(settings.SPACE_AFTER_COMMA)
 
