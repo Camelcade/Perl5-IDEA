@@ -220,6 +220,20 @@ public class PerlFunctionParametersFormatTest extends PerlFormatterTestCase {
     doTest();
   }
 
+  @Test
+  public void testAssignmentOnTheNextLineTrue() {
+    getSettings().ASSIGNMENT_WRAP = WRAP_ALWAYS;
+    getSettings().PLACE_ASSIGNMENT_SIGN_ON_NEXT_LINE = true;
+    doTest();
+  }
+
+  @Test
+  public void testAssignmentOnTheNextLineFalse() {
+    getSettings().ASSIGNMENT_WRAP = WRAP_ALWAYS;
+    getSettings().PLACE_ASSIGNMENT_SIGN_ON_NEXT_LINE = false;
+    doTest();
+  }
+
   private void doWrapTest() {
     getSettings().RIGHT_MARGIN = 30;
     doTest();

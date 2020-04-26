@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.formatter;
 
 import com.intellij.formatting.*;
 import com.intellij.lang.ASTNode;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
@@ -39,6 +40,7 @@ import com.perl5.lang.perl.idea.formatter.blocks.PerlSyntheticBlock;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
+import com.perl5.lang.perl.psi.PerlSignatureElement;
 import com.perl5.lang.perl.psi.PsiPerlStatementModifier;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import gnu.trove.THashMap;
@@ -55,7 +57,7 @@ import static com.perl5.lang.perl.lexer.PerlTokenSets.ALL_QUOTE_OPENERS;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.STATEMENTS;
 
 public class PerlFormattingContext implements PerlFormattingTokenSets {
-
+  private static final Logger LOG = Logger.getInstance(PerlFormattingContext.class);
   private final Map<ASTNode, Wrap> myWrapMap = new THashMap<>();
   private final Map<Integer, Alignment> myAssignmentsAlignmentsMap = new THashMap<>();
   private final Map<Integer, Alignment> myCommentsAlignmentMap = FactoryMap.create(line -> Alignment.createAlignment(true));
@@ -456,7 +458,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
              (childNodeType == STRING_BARE || childNodeType == QUOTE_SINGLE_CLOSE)) {
       return getWrapBySettings(parentNode, myPerlSettings.QW_LIST_WRAP, false);
     }
-    else if (childNodeType == VARIABLE_DECLARATION_ELEMENT ||
+    else if (childNodeType == VARIABLE_DECLARATION_ELEMENT && parentNodeType != SIGNATURE_ELEMENT ||
              (childNodeType == UNDEF_EXPR && PerlTokenSets.VARIABLE_DECLARATIONS.contains(parentNodeType))) {
       return getWrapBySettings(parentNode, myPerlSettings.VARIABLE_DECLARATION_WRAP, false);
     }
@@ -474,6 +476,17 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     else if (parentNodeType == ASSIGN_EXPR &&
              OPERATORS_ASSIGNMENT.contains(childNodeType) == mySettings.PLACE_ASSIGNMENT_SIGN_ON_NEXT_LINE) {
       return getWrapBySettings(parentNode, mySettings.ASSIGNMENT_WRAP, OPERATORS_ASSIGNMENT.contains(childNodeType));
+    }
+    else if (parentNodeType == SIGNATURE_ELEMENT) {
+      PsiElement signatureElement = parentNode.getPsi();
+      LOG.assertTrue(signatureElement instanceof PerlSignatureElement);
+      PsiElement declarationElement = ((PerlSignatureElement)signatureElement).getDeclarationElement();
+      PsiElement defaultValueElement = ((PerlSignatureElement)signatureElement).getDefaultValueElement();
+      if (defaultValueElement != null && declarationElement != null &&
+          declarationElement.getStartOffsetInParent() < childNode.getStartOffsetInParent() &&
+          (childNodeType == OPERATOR_ASSIGN) == mySettings.PLACE_ASSIGNMENT_SIGN_ON_NEXT_LINE) {
+        return getWrapBySettings(parentNode, mySettings.ASSIGNMENT_WRAP, true);
+      }
     }
     else if (parentNodeType == ATTRIBUTES && (childNodeType == COLON || isAttributeWithoutColon(childNode))) {
       return getWrapBySettings(parentNode, myPerlSettings.ATTRIBUTES_WRAP, false);
