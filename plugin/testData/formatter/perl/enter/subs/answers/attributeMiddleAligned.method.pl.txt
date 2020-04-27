@@ -1,0 +1,5 @@
+method somemethod() :attribute
+                    <caret>
+                  otherone
+{
+}

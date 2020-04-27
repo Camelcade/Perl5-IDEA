@@ -1,0 +1,4 @@
+<per test code>() :attribute<caret>
+                  otherone
+{
+}

@@ -1,0 +1,5 @@
+fun somefun() :attribute
+        <caret>
+                  otherone
+{
+}

@@ -69,6 +69,18 @@ public abstract class PerlSubsFormatterEnterTest extends PerlFormatterTestCase {
   }
 
   @Test
+  public void testAttributeMiddle() {
+    getCustomSettings().ALIGN_ATTRIBUTES = false;
+    doTest();
+  }
+
+  @Test
+  public void testAttributeMiddleAligned() {
+    getCustomSettings().ALIGN_ATTRIBUTES = true;
+    doTest();
+  }
+
+  @Test
   public void testSignatureEmpty() {
     doTest();
   }
