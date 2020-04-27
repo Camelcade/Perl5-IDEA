@@ -28,6 +28,11 @@ public abstract class PerlSubsFormatterEnterTest extends PerlFormatterTestCase {
     return "testData/formatter/perl/enter/subs";
   }
 
+  @Override
+  protected String getResultsTestDataPath() {
+    return super.getResultsTestDataPath() + "/answers";
+  }
+
   @Test
   public void testSignatureElementDefaultValue() {
     doTest();
