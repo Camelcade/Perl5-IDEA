@@ -39,6 +39,11 @@ public abstract class PerlSubsFormatterEnterTest extends PerlFormatterTestCase {
   }
 
   @Test
+  public void testSignatureElementDefaultValueAfterAssign() {
+    doTest();
+  }
+
+  @Test
   public void testSignatureElementDefaultValueSecond() {
     getCustomSettings().ALIGN_CONSECUTIVE_ASSIGNMENTS = NO_ALIGN;
     doTest();

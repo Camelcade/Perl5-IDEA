@@ -1,5 +1,5 @@
 sub somesub(
-    $somevar<caret>
+    $somevar =<caret>
 ) :attribute
 {
 }
