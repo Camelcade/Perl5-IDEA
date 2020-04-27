@@ -46,61 +46,61 @@ public abstract class PerlSubsFormatterEnterTest extends PerlFormatterTestCase {
   @Test
   public void testSignatureElementDefaultValueSecond() {
     getCustomSettings().ALIGN_CONSECUTIVE_ASSIGNMENTS = NO_ALIGN;
-    doTest();
+    doTest("signatureElementDefaultValueSecond");
   }
 
   @Test
   public void testSignatureElementDefaultValueSecondAligned() {
     getCustomSettings().ALIGN_CONSECUTIVE_ASSIGNMENTS = ALIGN_LINES;
-    doTest();
+    doTest("signatureElementDefaultValueSecond");
   }
 
   @Test
   public void testSignatureElementDefaultValueSecondAlignedStatement() {
     getCustomSettings().ALIGN_CONSECUTIVE_ASSIGNMENTS = ALIGN_IN_STATEMENT;
-    doTest();
+    doTest("signatureElementDefaultValueSecond");
   }
 
   @Test
   public void testSignatureElementDefaultValueMiddle() {
     getCustomSettings().ALIGN_CONSECUTIVE_ASSIGNMENTS = NO_ALIGN;
-    doTest();
+    doTest("signatureElementDefaultValueMiddle");
   }
 
   @Test
   public void testSignatureElementDefaultValueMiddleAligned() {
     getCustomSettings().ALIGN_CONSECUTIVE_ASSIGNMENTS = ALIGN_LINES;
-    doTest();
+    doTest("signatureElementDefaultValueMiddle");
   }
 
   @Test
   public void testSignatureElementDefaultValueMiddleAlignedStatement() {
     getCustomSettings().ALIGN_CONSECUTIVE_ASSIGNMENTS = ALIGN_IN_STATEMENT;
-    doTest();
+    doTest("signatureElementDefaultValueMiddle");
   }
 
   @Test
   public void testAttributeSecond() {
     getCustomSettings().ALIGN_ATTRIBUTES = false;
-    doTest();
+    doTest("attributeSecond");
   }
 
   @Test
   public void testAttributeSecondAligned() {
     getCustomSettings().ALIGN_ATTRIBUTES = true;
-    doTest();
+    doTest("attributeSecond");
   }
 
   @Test
   public void testAttributeMiddle() {
     getCustomSettings().ALIGN_ATTRIBUTES = false;
-    doTest();
+    doTest("attributeMiddle");
   }
 
   @Test
   public void testAttributeMiddleAligned() {
     getCustomSettings().ALIGN_ATTRIBUTES = true;
-    doTest();
+    doTest("attributeMiddle");
   }
 
   @Test
@@ -121,25 +121,25 @@ public abstract class PerlSubsFormatterEnterTest extends PerlFormatterTestCase {
   @Test
   public void testSignatureAfterCommaContinuation() {
     getSettings().ALIGN_MULTILINE_PARAMETERS = false;
-    doTest();
+    doTest("signatureAfterCommaContinuation");
   }
 
   @Test
   public void testSignatureAfterCommaContinuationAligned() {
     getSettings().ALIGN_MULTILINE_PARAMETERS = true;
-    doTest();
+    doTest("signatureAfterCommaContinuation");
   }
 
   @Test
   public void testSignatureAfterCommaContinuationMiddle() {
     getSettings().ALIGN_MULTILINE_PARAMETERS = false;
-    doTest();
+    doTest("signatureAfterCommaContinuationMiddle");
   }
 
   @Test
   public void testSignatureAfterCommaContinuationMiddleAligned() {
     getSettings().ALIGN_MULTILINE_PARAMETERS = true;
-    doTest();
+    doTest("signatureAfterCommaContinuationMiddle");
   }
 
   @NotNull
@@ -158,6 +158,10 @@ public abstract class PerlSubsFormatterEnterTest extends PerlFormatterTestCase {
 
   protected void doTest() {
     doTestEnter();
+  }
+
+  protected void doTest(@NotNull String fileName) {
+    doTestEnter(fileName);
   }
 
   public static class After extends PerlSubsFormatterEnterTest {

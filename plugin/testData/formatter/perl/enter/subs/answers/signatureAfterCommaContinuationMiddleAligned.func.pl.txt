@@ -1,5 +1,5 @@
 func somefunc( $var,
                <caret>
-                 $othervar
+    $othervar
 ) {
 };

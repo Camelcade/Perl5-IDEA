@@ -1,4 +1,0 @@
-<per test code>( $var,<caret>
-                 $othervar
-) {
-};

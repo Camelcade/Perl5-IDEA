@@ -1,5 +1,5 @@
 after somemethod( $var,
                   <caret>
-                 $othervar
+    $othervar
 ) {
 };
