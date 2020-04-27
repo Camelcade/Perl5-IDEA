@@ -1,0 +1,5 @@
+sub somesub( $var,
+             <caret>
+                 $othervar
+) {
+};

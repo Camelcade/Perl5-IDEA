@@ -1,0 +1,6 @@
+fun somefun(
+    $var,
+    <caret>
+    $othervar
+) {
+};

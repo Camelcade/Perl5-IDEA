@@ -1,0 +1,6 @@
+func somefunc(
+    $var,
+    <caret>
+    $othervar
+) {
+};

@@ -1,0 +1,5 @@
+override somemethod( $var,
+                     <caret>
+                 $othervar
+) {
+};

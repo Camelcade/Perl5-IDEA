@@ -91,6 +91,11 @@ public abstract class PerlSubsFormatterEnterTest extends PerlFormatterTestCase {
   }
 
   @Test
+  public void testSignatureAfterCommaMiddle() {
+    doTest();
+  }
+
+  @Test
   public void testSignatureAfterCommaContinuation() {
     getSettings().ALIGN_MULTILINE_PARAMETERS = false;
     doTest();
@@ -98,6 +103,18 @@ public abstract class PerlSubsFormatterEnterTest extends PerlFormatterTestCase {
 
   @Test
   public void testSignatureAfterCommaContinuationAligned() {
+    getSettings().ALIGN_MULTILINE_PARAMETERS = true;
+    doTest();
+  }
+
+  @Test
+  public void testSignatureAfterCommaContinuationMiddle() {
+    getSettings().ALIGN_MULTILINE_PARAMETERS = false;
+    doTest();
+  }
+
+  @Test
+  public void testSignatureAfterCommaContinuationMiddleAligned() {
     getSettings().ALIGN_MULTILINE_PARAMETERS = true;
     doTest();
   }

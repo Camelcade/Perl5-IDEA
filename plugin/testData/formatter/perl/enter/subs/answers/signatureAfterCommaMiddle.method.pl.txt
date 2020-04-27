@@ -1,0 +1,6 @@
+method somemethod(
+    $var,
+    <caret>
+    $othervar
+) {
+};
