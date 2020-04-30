@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,7 +29,10 @@ import org.jetbrains.annotations.Nullable;
 
 @State(
   name = "Perl5DockerSettings",
-  storages = @Storage(PerlPathMacros.PERL5_PROJECT_SETTINGS_FILE)
+  storages = {
+    @Storage(PerlPathMacros.PERL5_PROJECT_SETTINGS_FILE),
+    @Storage(PerlPathMacros.PERL5_PROJECT_SHARED_SETTINGS_FILE)
+  }
 )
 class PerlDockerProjectSettings implements PersistentStateComponent<PerlDockerProjectSettings> {
   @Tag("additional-params")
