@@ -225,8 +225,13 @@ runIde {
   }
   jvmArgs("-Xmx2048m")
 }
+
 sourceSets {
   test {
     resources.srcDirs file('testData')
   }
+}
+
+task publishAllPlugins {
+  pluginProjects.each { dependsOn("${it.name}:publishPlugin") }
 }
