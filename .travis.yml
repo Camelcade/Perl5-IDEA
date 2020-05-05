@@ -26,7 +26,7 @@ before_install:
   - perlbrew lib create perl-5.26.2@test_mojo
   - perlbrew exec -q --with perl-5.26.2@test_mojo cpanm --notest Mojolicious
   - perlbrew list
-  - printenv | sort
+  - printenv | sort | grep java
 install: true
 script:
   - ./gradlew -Dorg.gradle.java.home=/usr/local/lib/jvm/openjdk11 test
