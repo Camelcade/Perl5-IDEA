@@ -21,10 +21,10 @@ buildscript {
 }
 
 plugins {
-  id "org.jetbrains.intellij" version "0.4.19"
+  id "org.jetbrains.intellij" version "$intellijGradlePluginVersion"
   id 'jacoco'
-  id 'com.github.kt3k.coveralls' version '2.10.1'
-  id 'org.jetbrains.grammarkit' version '2020.1.2'
+  id 'com.github.kt3k.coveralls' version "$coverallsGradlePluginVersion"
+  id 'org.jetbrains.grammarkit' version "$grammarKitGradlePluginVersion"
 }
 
 repositories {
