@@ -31,5 +31,5 @@ install: true
 script:
   - ./gradlew -Dorg.gradle.java.home=/usr/local/lib/jvm/openjdk11 test
 after_success:
-  - ./gradlew coveralls
+  - ./gradlew -Dorg.gradle.java.home=/usr/local/lib/jvm/openjdk11 coveralls
 
