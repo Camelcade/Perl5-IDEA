@@ -3,9 +3,6 @@ jdk:
   - openjdk8
 git:
   submodules: false
-#os:
-#  - linux
-#  - osx
 
 # Cache settings
 cache:
@@ -29,9 +26,10 @@ before_install:
   - perlbrew lib create perl-5.26.2@test_mojo
   - perlbrew exec -q --with perl-5.26.2@test_mojo cpanm --notest Mojolicious
   - perlbrew list
+  - printenv | sort
 install: true
 script:
-  - ./gradlew test
+  - ./gradlew -Dorg.gradle.java.home=/usr/local/lib/jvm/openjdk11 test
 after_success:
   - ./gradlew coveralls
 
