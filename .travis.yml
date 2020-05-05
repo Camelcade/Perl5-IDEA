@@ -29,7 +29,7 @@ before_install:
   - printenv | sort | grep java
 install: true
 script:
-  - ./gradlew -Dorg.gradle.java.home=/usr/local/lib/jvm/openjdk11 test
+  - ./gradlew test
 after_success:
-  - ./gradlew -Dorg.gradle.java.home=/usr/local/lib/jvm/openjdk11 coveralls
+  - ./gradlew coveralls
 
