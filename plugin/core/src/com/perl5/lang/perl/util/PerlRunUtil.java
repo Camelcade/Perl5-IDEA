@@ -493,6 +493,9 @@ public class PerlRunUtil {
 
   public static void addMissingPackageListener(@NotNull ProcessHandler handler,
                                                @NotNull PerlCommandLine commandLine) {
+    if (!commandLine.isWithMissingPackageListener()) {
+      return;
+    }
     ProcessListener listener = createMissingPackageListener(commandLine.getEffectiveProject(), commandLine.getEffectiveSdk());
     if (listener != null) {
       handler.addProcessListener(listener);

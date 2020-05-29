@@ -69,6 +69,8 @@ public class PerlCommandLine extends GeneralCommandLine {
   @NotNull
   private Set<PortMapping> myPortMappings = Collections.emptySet();
 
+  private boolean myWithMissingPackageListener = true;
+
   public PerlCommandLine() {
   }
 
@@ -97,6 +99,22 @@ public class PerlCommandLine extends GeneralCommandLine {
       myProject = ((PerlCommandLine)original).myProject;
       myModule = ((PerlCommandLine)original).myModule;
     }
+  }
+
+  /**
+   * @return true iff we should add listener for CPAN error messages about missing packages. Enabled by default.
+   */
+  public boolean isWithMissingPackageListener() {
+    return myWithMissingPackageListener;
+  }
+
+  /**
+   * @see #isWithMissingPackageListener()
+   */
+  @NotNull
+  public PerlCommandLine withMissingPackageListener(boolean withMissingPackageListener) {
+    myWithMissingPackageListener = withMissingPackageListener;
+    return this;
   }
 
   @NotNull
