@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -57,7 +57,9 @@ public class PerlIntroduceTarget extends PsiIntroduceTarget<PsiElement> {
   @NotNull
   @Override
   public String render() {
-    return myTextRangeInElement.subSequence(super.render()).toString();
+    String elementText = super.render();
+    return myTextRangeInElement.getEndOffset() > elementText.length() ?
+           elementText : myTextRangeInElement.subSequence(elementText).toString();
   }
 
   /**
