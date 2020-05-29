@@ -1,0 +1,3 @@
+my $something;
+$a =~ s{one/two$/three}{one$<caret>/two/tree};
+

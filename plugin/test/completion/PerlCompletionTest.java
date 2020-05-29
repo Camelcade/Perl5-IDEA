@@ -49,6 +49,24 @@ public class PerlCompletionTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testVariableInHeredocDq() {doTest();}
+
+  @Test
+  public void testVariableInHeredocXq() {doTest();}
+
+  @Test
+  public void testVariableInMatchRegex() {doTest();}
+
+  @Test
+  public void testVariableInReplaceRegex() {doTest();}
+
+  @Test
+  public void testVariableInStringDq() {doTest();}
+
+  @Test
+  public void testVariableInStringXq() {doTest();}
+
+  @Test
   public void testFunctionParametersFun() {doTestCompletion(withType("Foo::Bar"));}
 
   @Test

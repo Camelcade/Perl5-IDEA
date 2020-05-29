@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,6 @@ package com.perl5.lang.perl.idea.completion.providers;
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
-import com.intellij.codeInsight.completion.PlainPrefixMatcher;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
@@ -43,11 +42,6 @@ public class PerlVariableNameCompletionProvider extends CompletionProvider<Compl
 
     boolean isDeclaration = VARIABLE_NAME_IN_DECLARATION_PATTERN.accepts(variableNameElement);
     boolean isFullQualified = PerlPackageUtil.isFullQualifiedName(variableNameElement.getText());
-
-    PsiElement originalPosition = parameters.getOriginalPosition();
-    if (originalPosition instanceof PerlVariableNameElement) {
-      resultSet = resultSet.withPrefixMatcher(new PlainPrefixMatcher(originalPosition.getText()));
-    }
 
     // declaration helper
     if (isDeclaration) {
