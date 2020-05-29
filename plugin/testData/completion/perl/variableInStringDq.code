@@ -1,0 +1,3 @@
+my $something;
+"one/two$<caret>/three";
+

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,6 +47,24 @@ public class PerlCompletionTest extends PerlLightTestCase {
   protected String getBaseDataPath() {
     return "testData/completion/perl";
   }
+
+  @Test
+  public void testVariableInHeredocDq() {doTest();}
+
+  @Test
+  public void testVariableInHeredocXq() {doTest();}
+
+  @Test
+  public void testVariableInMatchRegex() {doTest();}
+
+  @Test
+  public void testVariableInReplaceRegex() {doTest();}
+
+  @Test
+  public void testVariableInStringDq() {doTest();}
+
+  @Test
+  public void testVariableInStringXq() {doTest();}
 
   @Test
   public void testHashSlices520LexicalDisabled() {
