@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +25,60 @@ public class PerlUnreachableCodeInspectionTest extends PerlLightTestCase {
   protected String getBaseDataPath() {
     return "testData/annotator/perl/unreachableCode";
   }
+
+  @Test
+  public void testGivenWhenBreak() {doTest();}
+
+  @Test
+  public void testGivenWhenBreakDefault() {doTest();}
+
+  @Test
+  public void testGivenWhenBreakDefaultPostfix() {doTest();}
+
+  @Test
+  public void testGivenWhenContinue() {doTest();}
+
+  @Test
+  public void testForWhenBreak() {doTest();}
+
+  @Test
+  public void testForWhenBreakDefault() {doTest();}
+
+  @Test
+  public void testForWhenBreakDefaultPostfix() {doTest();}
+
+  @Test
+  public void testForWhenContinue() {doTest();}
+
+  @Test
+  public void testIssue2176() {doTest();}
+
+  @Test
+  public void testIssue2176_2() {doTest();}
+
+  @Test
+  public void testForWhenDefault() {doTest();}
+
+  @Test
+  public void testForWhenWhenDefault() {doTest();}
+
+  @Test
+  public void testForWhenDefaultPostfix() {doTest();}
+
+  @Test
+  public void testForWhenWhenDefaultPostfix() {doTest();}
+
+  @Test
+  public void testGivenWhenDefault() {doTest();}
+
+  @Test
+  public void testGivenWhenWhenDefault() {doTest();}
+
+  @Test
+  public void testGivenWhenDefaultPostfix() {doTest();}
+
+  @Test
+  public void testGivenWhenWhenDefaultPostfix() {doTest();}
 
   @Test
   public void testLastEval() {doTest();}

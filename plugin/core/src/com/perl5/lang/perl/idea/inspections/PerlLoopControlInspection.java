@@ -24,6 +24,7 @@ import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.PerlBundle;
+import com.perl5.lang.perl.lexer.PerlSyntax;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PsiPerlStatementImpl;
 import org.jetbrains.annotations.NotNull;
@@ -115,7 +116,7 @@ public class PerlLoopControlInspection extends PerlInspection {
           holder.registerProblem(
             expr,
             PerlBundle.message("perl.inspection.loop.control.last.instead.of.break"),
-            new ReplaceWithExpressionQuickFix("break"));
+            new ReplaceWithExpressionQuickFix(PerlSyntax.BREAK_KEYWORD));
         }
         else {
           problem(expr, "perl.inspection.loop.control.outside", keywordText);

@@ -23,6 +23,7 @@ import com.intellij.psi.PsiReference;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.PerlBundle;
+import com.perl5.lang.perl.lexer.PerlSyntax;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlSubCallElement;
 import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService;
@@ -39,7 +40,7 @@ public class PerlSwitchInspection extends PerlInspection {
   @Override
   public @NotNull PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean isOnTheFly) {
     PerlSubDefinitionElement breakDefinition = Objects.requireNonNull(
-      PerlImplicitDeclarationsService.getInstance(holder.getProject()).getCoreSub("break"));
+      PerlImplicitDeclarationsService.getInstance(holder.getProject()).getCoreSub(PerlSyntax.BREAK_KEYWORD));
 
     return new PerlVisitor() {
       private void problem(@NotNull PsiElement anchor,

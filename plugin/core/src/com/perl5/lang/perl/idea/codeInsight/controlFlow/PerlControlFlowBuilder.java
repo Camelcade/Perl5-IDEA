@@ -35,6 +35,7 @@ import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.Function;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.containers.ContainerUtil;
+import com.perl5.lang.perl.lexer.PerlSyntax;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.PerlAssignExpression.PerlAssignValueDescriptor;
 import com.perl5.lang.perl.psi.impl.PerlBuiltInVariable;
@@ -89,7 +90,8 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       TRYCATCH_EXPR, TRY_EXPR, CATCH_EXPR, FINALLY_EXPR, CATCH_CONDITION, EXCEPT_EXPR, OTHERWISE_EXPR, CONTINUATION_EXPR, TRYCATCH_COMPOUND,
       COMMA_SEQUENCE_EXPR, PARENTHESISED_EXPR,
       AND_EXPR, LP_AND_EXPR, OR_EXPR, LP_OR_XOR_EXPR, TERNARY_EXPR,
-      CASE_CONDITION, CASE_DEFAULT, SWITCH_COMPOUND
+      CASE_CONDITION, CASE_DEFAULT, SWITCH_COMPOUND,
+      DEFAULT_COMPOUND, GIVEN_COMPOUND, WHEN_COMPOUND
     ));
 
   /**
@@ -766,17 +768,26 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       // this is assumption, because we are building flow on stubbing and can't resolve. For now...
       //List<PsiElement> targetElements = method.getTargetElements();
       PerlSubNameElement subNameElement = method.getSubNameElement();
-      if (subNameElement != null && DIE_SUBS.contains(subNameElement.getText())) {
+      String subName = subNameElement == null ? null : subNameElement.getText();
+      if (DIE_SUBS.contains(subName)) {
         acceptSafe(o.getCallArguments());
         PsiElement dieScope = getDieScopeBlock(o);
         startNoResultNode(o);
         addPendingEdge(dieScope, prevInstruction);
         flowAbrupted();
+        return;
       }
-      else {
-        acceptSafe(o.getCallArguments());
-        acceptSafe(o.getMethod());
-        startNodeSmart(o);
+
+      acceptSafe(o.getCallArguments());
+      acceptSafe(o.getMethod());
+      startNodeSmart(o);
+
+      if (PerlSyntax.BREAK_KEYWORD.equals(subName)) {
+        PerlSwitchTopicalizer topicalizer = PerlSwitchTopicalizer.wrapping(o);
+        if (topicalizer != null) {
+          addPendingEdge(topicalizer, prevInstruction);
+          flowAbrupted();
+        }
       }
     }
 
@@ -845,10 +856,30 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
           addEdge(prevInstruction, modifierLoopConditionInstruction);
           prevInstruction = modifierLoopConditionInstruction;
         }
+        if (modifier instanceof PsiPerlWhenStatementModifier) {
+          createEdgeToTopicalizer(PerlSwitchTopicalizer.wrapping(o));
+        }
       }
       myStatementsModifiersMap.remove(o);
       myLoopNextInstructions.remove(o);
       myLoopRedoInstructions.remove(o);
+    }
+
+    /**
+     * Creates edge to topicalizer exit point or next expression in case of loop (for/foreach)
+     */
+    private void createEdgeToTopicalizer(@Nullable PsiElement topicalizer) {
+      if (topicalizer == null) {
+        return;
+      }
+      Instruction loopNextInstruction = myLoopNextInstructions.get(topicalizer);
+      if (loopNextInstruction != null) {
+        addEdge(prevInstruction, loopNextInstruction);
+      }
+      else {
+        addPendingEdge(topicalizer, prevInstruction);
+      }
+      flowAbrupted();
     }
 
     @Override
@@ -918,6 +949,50 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     @Override
     public void visitHeredocElement(@NotNull PerlHeredocElementImpl o) {
       // we are inlining this after opener
+    }
+
+    @Override
+    public void visitWhenCompound(@NotNull PsiPerlWhenCompound o) {
+      PerlSwitchTopicalizer topicalizer = PerlSwitchTopicalizer.wrapping(o);
+      if (topicalizer == null) {
+        super.visitWhenCompound(o);
+        return;
+      }
+
+      PsiPerlConditionExpr perlConditionExpr = o.getConditionExpr();
+      acceptSafe(perlConditionExpr);
+      Instruction elseFlow = prevInstruction;
+      prevInstruction = startConditionalNode(perlConditionExpr, true);
+      acceptSafe(o.getBlock());
+
+      createEdgeToTopicalizer(topicalizer);
+      prevInstruction = elseFlow;
+    }
+
+    @Override
+    public void visitDefaultCompound(@NotNull PsiPerlDefaultCompound o) {
+      super.visitDefaultCompound(o);
+      createEdgeToTopicalizer(PerlSwitchTopicalizer.wrapping(o));
+    }
+
+    @Override
+    public void visitContinueExpr(@NotNull PsiPerlContinueExpr o) {
+      PsiElement whenOrDefault = getWhenOrDefaultScope(o);
+      if (whenOrDefault == null) {
+        return;
+      }
+      addPendingEdge(whenOrDefault, prevInstruction);
+      flowAbrupted();
+    }
+
+    @Nullable
+    private PsiElement getWhenOrDefaultScope(@NotNull PsiPerlContinueExpr o) {
+      PsiPerlStatement enclosingStatement = PsiTreeUtil.getParentOfType(o, PsiPerlStatement.class);
+      if (enclosingStatement instanceof PerlStatementMixin &&
+          ((PerlStatementMixin)enclosingStatement).getModifier() instanceof PsiPerlWhenStatementModifier) {
+        return enclosingStatement;
+      }
+      return PsiTreeUtil.getParentOfType(o, PsiPerlWhenCompound.class, PsiPerlDefaultCompound.class);
     }
 
     @Override

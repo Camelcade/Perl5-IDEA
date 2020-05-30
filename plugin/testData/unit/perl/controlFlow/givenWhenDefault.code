@@ -1,0 +1,13 @@
+my $var = 'test';
+given($var){
+    say 'before';
+    when('test'){
+        say 'first';
+    }
+    say 'mid';
+    default{
+        say 'default';
+    }
+    say 'after';
+}
+say 'end';

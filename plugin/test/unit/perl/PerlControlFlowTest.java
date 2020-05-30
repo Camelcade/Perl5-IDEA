@@ -842,5 +842,101 @@ public class PerlControlFlowTest extends PerlLightTestCase {
   @Test
   public void testTryFinally() {doTest();}
 
+  @Test
+  public void testForWhen() {doTest();}
+
+  @Test
+  public void testForWhenDefault() {doTest();}
+
+  @Test
+  public void testForWhenDefaultPostfix() {doTest();}
+
+  @Test
+  public void testForWhenPostfix() {doTest();}
+
+  @Test
+  public void testForWhenWhen() {doTest();}
+
+  @Test
+  public void testForWhenWhenDefault() {doTest();}
+
+  @Test
+  public void testForWhenWhenPostfix() {doTest();}
+
+  @Test
+  public void testForWhenWhenDefaultPostfix() {doTest();}
+
+  @Test
+  public void testGivenWhen() {doTest();}
+
+  @Test
+  public void testGivenWhenDefault() {doTest();}
+
+  @Test
+  public void testGivenWhenDefaultPostfix() {doTest();}
+
+  @Test
+  public void testGivenWhenPostfix() {doTest();}
+
+  @Test
+  public void testGivenWhenWhen() {doTest();}
+
+  @Test
+  public void testGivenWhenWhenDefault() {doTest();}
+
+  @Test
+  public void testGivenWhenWhenPostfix() {doTest();}
+
+  @Test
+  public void testGivenWhenWhenDefaultPostfix() {doTest();}
+
+  @Test
+  public void testIssue2176() {doTest();}
+
+  @Test
+  public void testIssue2176_2() {doTest();}
+
+  @Test
+  public void testGivenWhenBreak() {doTest();}
+
+  @Test
+  public void testGivenWhenBreakDefault() {doTest();}
+
+  @Test
+  public void testGivenWhenBreakDefaultPostfix() {doTest();}
+
+  @Test
+  public void testGivenWhenContinue() {doTest();}
+
+  @Test
+  public void testGivenWhenContinueDefault() {doTest();}
+
+  @Test
+  public void testGivenWhenContinueDefaultPostfix() {doTest();}
+
+  @Test
+  public void testGivenWhenDefaultContinue() {doTest();}
+
+  @Test
+  public void testForWhenBreak() {doTest();}
+
+  @Test
+  public void testForWhenBreakDefault() {doTest();}
+
+  @Test
+  public void testForWhenBreakDefaultPostfix() {doTest();}
+
+  @Test
+  public void testForWhenContinue() {doTest();}
+
+  @Test
+  public void testForWhenContinueDefault() {doTest();}
+
+  @Test
+  public void testForWhenContinueDefaultPostfix() {doTest();}
+
+  @Test
+  public void testForWhenDefaultContinue() {doTest();}
+
   private void doTest() {doTestControlFlow();}
 }

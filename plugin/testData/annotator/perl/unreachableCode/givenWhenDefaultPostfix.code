@@ -1,0 +1,13 @@
+sub subname {
+    say 'start';
+    given($something){
+        say 'before';
+        say $a when($a);
+        say 'mid';
+        default{
+            say $c;
+        }
+        say '<error descr="Unreachable code">after</error>';
+    }
+    say 'end';
+}

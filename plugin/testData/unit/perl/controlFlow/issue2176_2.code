@@ -1,0 +1,7 @@
+sub test{
+  for($key){
+    when('a'){return 'a'}
+    when('b'){return 'b'}
+    default {return "default key $key"}
+  }
+}
