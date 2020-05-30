@@ -48,6 +48,13 @@ public class PerlAnnotatorTest extends PerlLightTestCase {
   public void testIssue1884() {doTestHashLoopInspection();}
 
   @Test
+  public void testBreakContinue() {doTestSwitchInspection();}
+
+  private void doTestSwitchInspection() {
+    doInspectionTest(PerlSwitchInspection.class);
+  }
+
+  @Test
   public void testLoopControlInspection() {doTestLoopControlInspection();}
 
   @Test

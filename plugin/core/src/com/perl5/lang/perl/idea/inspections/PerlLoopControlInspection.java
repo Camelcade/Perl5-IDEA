@@ -16,158 +16,41 @@
 
 package com.perl5.lang.perl.idea.inspections;
 
-import com.intellij.codeInspection.LocalQuickFix;
-import com.intellij.codeInspection.ProblemDescriptor;
 import com.intellij.codeInspection.ProblemsHolder;
-import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.PsiReference;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.impl.PerlFileImpl;
-import com.perl5.lang.perl.psi.impl.PerlSubCallElement;
 import com.perl5.lang.perl.psi.impl.PsiPerlStatementImpl;
-import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService;
-import com.perl5.lang.perl.psi.utils.PerlElementFactory;
-import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.PropertyKey;
 
-import java.util.Objects;
-
+import static com.perl5.PerlBundle.PATH_TO_BUNDLE;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 
 public class PerlLoopControlInspection extends PerlInspection {
-  private static final TokenSet MAP_GREP = TokenSet.create(
+  static final TokenSet MAP_GREP = TokenSet.create(
     MAP_EXPR, GREP_EXPR
   );
 
   @NotNull
   @Override
   public PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean isOnTheFly) {
-    PerlSubDefinitionElement breakDefinition = Objects.requireNonNull(
-      PerlImplicitDeclarationsService.getInstance(holder.getProject()).getCoreSub("break"));
-
     return new PerlVisitor() {
-      @Override
-      public void visitContinueExpr(@NotNull PsiPerlContinueExpr o) {
-
-        PsiElement position = o;
-        boolean isInsideTheLoop = false;
-        while (true) {
-
-          PsiElement closestBlockContainer = PerlBlock.getClosestBlockCompoundContainer(position);
-          if (closestBlockContainer == null) {
-            break;
-          }
-
-          IElementType blockContainerElementType = PsiUtilCore.getElementType(closestBlockContainer);
-          if (blockContainerElementType == WHEN_COMPOUND || blockContainerElementType == DEFAULT_COMPOUND) {
-            return;
-          }
-          else if (PerlBlock.LOOPS_CONTAINERS.contains(blockContainerElementType)) {
-            isInsideTheLoop = true;
-          }
-          else if (blockContainerElementType == NAMED_BLOCK) {
-            break;
-          }
-          else if (MAP_GREP.contains(blockContainerElementType)) {
-            break;
-          }
-          else if (PerlBlock.BLOCKS_WITH_RETURN_VALUE.contains(blockContainerElementType)) {
-            break;
-          }
-          else if (blockContainerElementType == GIVEN_COMPOUND) {
-            break;
-          }
-
-          position = closestBlockContainer;
-        }
-
-        if (isInsideTheLoop) {
-          holder.registerProblem(
-            o,
-            PerlBundle.message("perl.inspection.loop.control.continue.instead.of.next"),
-            new ReplaceWithExpressionQuickFix("next"));
-        }
-        else {
-          problem(o, "perl.inspection.loop.control.continue");
-        }
-      }
-
-      @Override
-      public void visitSubNameElement(@NotNull PerlSubNameElement o) {
-        PsiReference reference = o.getReference();
-        if (reference == null) {
-          return;
-        }
-        if (reference.resolve() != breakDefinition) {
-          return;
-        }
-
-        PsiElement methodElement = o.getParent();
-        if (!(methodElement instanceof PsiPerlMethod)) {
-          return;
-        }
-
-        PsiElement callExpr = methodElement.getParent();
-        if (!(callExpr instanceof PerlSubCallElement)) {
-          return;
-        }
-
-        PsiElement position = o;
-        boolean isInsideTheLoop = false;
-        while (true) {
-          PsiElement closestBlockContainer = PerlBlock.getClosestBlockCompoundContainer(position);
-          if (closestBlockContainer == null) {
-            break;
-          }
-
-          IElementType blockContainerElementType = PsiUtilCore.getElementType(closestBlockContainer);
-          if (PerlBlock.LOOPS_CONTAINERS.contains(blockContainerElementType)) {
-            isInsideTheLoop = true;
-          }
-          else if (blockContainerElementType == NAMED_BLOCK) {
-            break;
-          }
-          else if (MAP_GREP.contains(blockContainerElementType)) {
-            break;
-          }
-          else if (PerlBlock.BLOCKS_WITH_RETURN_VALUE.contains(blockContainerElementType)) {
-            break;
-          }
-          else if (blockContainerElementType == GIVEN_COMPOUND) {
-            return;
-          }
-
-          position = closestBlockContainer;
-        }
-
-        if (isInsideTheLoop) {
-          holder.registerProblem(
-            callExpr,
-            PerlBundle.message("perl.inspection.loop.control.break.instead.of.last"),
-            new ReplaceWithExpressionQuickFix("last"));
-        }
-        else {
-          problem(o, "perl.inspection.loop.control.break");
-        }
-      }
-
-      private void problem(@NotNull PsiElement anchor, @NotNull String key, @NotNull String... args) {
+      private void problem(@NotNull PsiElement anchor,
+                           @NotNull @PropertyKey(resourceBundle = PATH_TO_BUNDLE) String key,
+                           @NotNull String... args) {
         registerProblem(holder, anchor, PerlBundle.message(key, (Object[])args));
       }
-
 
       /**
        * Traversing blocks up, trying to figure out if last/next/redo are in right place.
        *
        * @param expr last/next/redo expression
-       *
        * @implNote duplicates logic in {@link PerlFlowControlExpr#getTargetScope()}
        */
       @Override
@@ -239,35 +122,5 @@ public class PerlLoopControlInspection extends PerlInspection {
         }
       }
     };
-  }
-
-  private static class ReplaceWithExpressionQuickFix implements LocalQuickFix {
-    @NotNull
-    private final String myTargetKeyword;
-
-    public ReplaceWithExpressionQuickFix(@NotNull String targetKeyword) {
-      myTargetKeyword = targetKeyword;
-    }
-
-    @Nls
-    @NotNull
-    @Override
-    public String getFamilyName() {
-      return PerlBundle.message("perl.inspection.loop.control.convert", myTargetKeyword);
-    }
-
-    @Override
-    public void applyFix(@NotNull Project project, @NotNull ProblemDescriptor descriptor) {
-      PsiElement targetElement = descriptor.getPsiElement();
-      PerlFileImpl file = PerlElementFactory.createFile(targetElement.getProject(), myTargetKeyword);
-      PsiElement statement = file.getFirstChild();
-      if (statement == null) {
-        return;
-      }
-      PsiElement expression = statement.getFirstChild();
-      if (expression != null) {
-        targetElement.replace(expression);
-      }
-    }
   }
 }
