@@ -550,6 +550,10 @@
                      enabledByDefault="true" level="ERROR"
                      implementationClass="com.perl5.lang.perl.idea.inspections.PerlSyntaxInspection"/>
     <localInspection language="Perl5"
+                     shortName="PerlSwitch" displayName="Perl Switch" groupName="Perl5"
+                     enabledByDefault="true" level="ERROR"
+                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlSwitchInspection"/>
+    <localInspection language="Perl5"
                      shortName="SubMultipleDeclarations" displayName="Multiple sub declarations" groupName="Perl5"
                      enabledByDefault="true" level="WARNING"
                      implementationClass="com.perl5.lang.perl.idea.inspections.PerlMultipleSubDeclarationsInspection"/>

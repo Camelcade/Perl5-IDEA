@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -84,7 +84,7 @@ public class PerlQuickFixesTest extends PerlLightTestCase {
   }
 
   @Test
-  public void testBreakToLast() {doTestAnnotationQuickFix(PerlLoopControlInspection.class, "Replace with '");}
+  public void testBreakToLast() {doTestAnnotationQuickFix(PerlSwitchInspection.class, "Replace with '");}
 
   @Test
   public void testLastToBreak() {doTestAnnotationQuickFix(PerlLoopControlInspection.class, "Replace with '");}
@@ -93,6 +93,6 @@ public class PerlQuickFixesTest extends PerlLightTestCase {
   public void testNextToContinue() {doTestAnnotationQuickFix(PerlLoopControlInspection.class, "Replace with '");}
 
   @Test
-  public void testContinueToNext() {doTestAnnotationQuickFix(PerlLoopControlInspection.class, "Replace with '");}
+  public void testContinueToNext() {doTestAnnotationQuickFix(PerlSwitchInspection.class, "Replace with '");}
 
 }
