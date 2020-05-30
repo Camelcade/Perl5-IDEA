@@ -23,7 +23,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Base interface for iteration foreach loop. This entity is kinda artificial, because for/foreach are actually the same
  */
-public interface PerlForeachCompound extends PerlConvertableCompound, PerlLoop {
+public interface PerlForeachCompound extends PerlConvertableCompound, PerlLoop, PerlSwitchTopicalizer {
   @Override
   default boolean isConvertableToModifier() {
     return PerlConvertableCompound.super.isConvertableToModifier() && getContinueBlock() == null;

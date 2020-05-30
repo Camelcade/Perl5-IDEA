@@ -445,7 +445,8 @@
     implements("while_compound|until_compound")="com.perl5.lang.perl.psi.PerlWhileUntilCompound"
     implements("if_compound|unless_compound")="com.perl5.lang.perl.psi.PerlIfUnlessCompound"
     implements("when_compound")="com.perl5.lang.perl.psi.properties.PerlConvertableCompoundSimple"
-    implements("given_compound|default_compound")="com.perl5.lang.perl.psi.properties.PerlCompound";
+    implements("given_compound")="com.perl5.lang.perl.psi.PerlGivenCompound";
+    implements("default_compound")="com.perl5.lang.perl.psi.properties.PerlCompound";
     implements("trycatch_compound")="com.perl5.lang.perl.psi.PerlTryCatchCompound"
 
     implements("heredoc_opener")="com.perl5.lang.perl.psi.PerlHeredocOpener"
