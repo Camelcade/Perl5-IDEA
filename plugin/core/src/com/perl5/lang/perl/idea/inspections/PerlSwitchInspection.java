@@ -155,16 +155,25 @@ public class PerlSwitchInspection extends PerlInspection {
 
       @Override
       public void visitWhenCompound(@NotNull PsiPerlWhenCompound o) {
+        if (PerlSwitchTopicalizer.wrapping(o) == null) {
+          problem(o, "perl.inspection.switch.when.outside");
+        }
         super.visitWhenCompound(o);
       }
 
       @Override
       public void visitWhenStatementModifier(@NotNull PsiPerlWhenStatementModifier o) {
+        if (PerlSwitchTopicalizer.wrapping(o) == null) {
+          problem(o, "perl.inspection.switch.when.modifier.outside");
+        }
         super.visitWhenStatementModifier(o);
       }
 
       @Override
       public void visitDefaultCompound(@NotNull PsiPerlDefaultCompound o) {
+        if (PerlSwitchTopicalizer.wrapping(o) == null) {
+          problem(o, "perl.inspection.switch.default.outside");
+        }
         super.visitDefaultCompound(o);
       }
     };

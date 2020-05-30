@@ -50,6 +50,9 @@ public class PerlAnnotatorTest extends PerlLightTestCase {
   @Test
   public void testBreakContinue() {doTestSwitchInspection();}
 
+  @Test
+  public void testSwitchDefaultWhen() {doTestSwitchInspection();}
+
   private void doTestSwitchInspection() {
     doInspectionTest(PerlSwitchInspection.class);
   }

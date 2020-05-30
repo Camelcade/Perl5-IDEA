@@ -1,0 +1,37 @@
+foreach ($var) {
+    when ('test') {
+        say 'first';
+    }
+    say 42 when 'otherthing';
+    default {
+        say 'default';
+    }
+}
+
+for ($var) {
+    when ('test') {
+        say 'first';
+    }
+    say 42 when 'otherthing';
+    default {
+        say 'default';
+    }
+}
+
+while ($var) {
+    <error descr="`when` block outside of the `for` or `given` block">when ('test') {
+        say 'first';
+    }</error>
+    say 42 <error descr="`when` modifier outside of the `for` or `given` block">when 'otherthing'</error>;
+    <error descr="`default` block outside of the `for` or `given` block">default {
+        say 'default';
+    }</error>
+}
+
+<error descr="`when` block outside of the `for` or `given` block">when ('test') {
+    say 'first';
+}</error>
+say 42 <error descr="`when` modifier outside of the `for` or `given` block">when 'otherthing'</error>;
+<error descr="`default` block outside of the `for` or `given` block">default {
+    say 'default';
+}</error>
