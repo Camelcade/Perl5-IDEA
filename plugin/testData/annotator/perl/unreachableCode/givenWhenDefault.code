@@ -1,0 +1,15 @@
+sub test(){
+  my $var = 'test';
+  given($var){
+      say 'before';
+      when('test'){
+          say 'first';
+      }
+      say 'mid';
+      default{
+          say 'default';
+      }
+      say '<error descr="Unreachable code">after</error>';
+  }
+  say 'end';
+}

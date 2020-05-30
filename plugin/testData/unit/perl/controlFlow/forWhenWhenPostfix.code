@@ -1,0 +1,11 @@
+sub subname {
+    say 'start';
+    f<caret>or($something){
+        say 'before';
+        say $a when($a);
+        say 'mid';
+        say $b when($b);
+        say 'after';
+    }
+    say 'end';
+}

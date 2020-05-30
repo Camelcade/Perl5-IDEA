@@ -1,0 +1,9 @@
+my $var = 'test';
+for($var){
+    say 'before';
+    when('test'){
+        say 'first';
+    }
+    say 'after';
+}
+say 'end';

@@ -1,0 +1,17 @@
+my $var = 'test';
+for($var){
+    'before';
+    when('test'){
+        'first';
+        break;
+        'first2';
+    }
+    'mid';
+    default{
+        'default';
+        break;
+        'default2';
+    }
+    'after';
+}
+'end';

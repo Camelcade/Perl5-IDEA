@@ -1,0 +1,15 @@
+sub subname {<caret>
+    'start';
+    given($something){
+        'before';
+        break when($a);
+        'mid';
+        default{
+            $c;
+            break;
+            $d;
+        }
+        'after';
+    }
+    'end';
+}

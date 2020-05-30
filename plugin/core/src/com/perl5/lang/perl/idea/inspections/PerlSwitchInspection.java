@@ -23,8 +23,8 @@ import com.intellij.psi.PsiReference;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.PerlBundle;
+import com.perl5.lang.perl.lexer.PerlSyntax;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.impl.PerlSubCallElement;
 import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.PropertyKey;
@@ -40,7 +40,7 @@ public class PerlSwitchInspection extends PerlInspection {
   public @NotNull
   PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean isOnTheFly) {
     PerlSubDefinitionElement breakDefinition = Objects.requireNonNull(
-      PerlImplicitDeclarationsService.getInstance(holder.getProject()).getCoreSub("break"));
+      PerlImplicitDeclarationsService.getInstance(holder.getProject()).getCoreSub(PerlSyntax.BREAK_KEYWORD));
 
     return new PerlVisitor() {
       private void problem(@NotNull PsiElement anchor,
@@ -111,7 +111,7 @@ public class PerlSwitchInspection extends PerlInspection {
         }
 
         PsiElement callExpr = methodElement.getParent();
-        if (!(callExpr instanceof PerlSubCallElement)) {
+        if (!(callExpr instanceof PsiPerlSubCallExpr)) {
           return;
         }
 

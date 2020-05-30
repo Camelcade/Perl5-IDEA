@@ -1,0 +1,7 @@
+sub test{
+  for($key){
+    when('a'){say 'a'}
+    when('b'){say 'b'}
+    default {die "default key $key"}
+  }
+}

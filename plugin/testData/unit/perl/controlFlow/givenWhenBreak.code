@@ -1,0 +1,11 @@
+my $var = 'test';
+given($var){
+    'before';
+    when('test'){
+        'first';
+        break;
+        'first2';
+    }
+    'after';
+}
+'end';

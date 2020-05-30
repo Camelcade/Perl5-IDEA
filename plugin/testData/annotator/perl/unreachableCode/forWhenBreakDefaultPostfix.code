@@ -1,0 +1,15 @@
+sub subname {
+    'start';
+    for($something){
+        'before';
+        break when($a);
+        'mid';
+        default{
+            $c;
+            break;
+            <error descr="Unreachable code">$d</error>;
+        }
+        '<error descr="Unreachable code">after</error>';
+    }
+    'end';
+}

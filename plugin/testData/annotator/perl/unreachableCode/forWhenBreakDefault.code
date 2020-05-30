@@ -1,0 +1,19 @@
+sub test(){
+  my $var = 'test';
+  for($var){
+      'before';
+      when('test'){
+          'first';
+          break;
+          '<error descr="Unreachable code">first2</error>';
+      }
+      'mid';
+      default{
+          'default';
+          break;
+          '<error descr="Unreachable code">default2</error>';
+      }
+      '<error descr="Unreachable code">after</error>';
+  }
+  'end';
+}
