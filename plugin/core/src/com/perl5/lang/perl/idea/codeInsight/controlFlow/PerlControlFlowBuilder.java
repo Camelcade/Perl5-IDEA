@@ -39,7 +39,6 @@ import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.PerlAssignExpression.PerlAssignValueDescriptor;
 import com.perl5.lang.perl.psi.impl.PerlBuiltInVariable;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
-import com.perl5.lang.perl.psi.impl.PerlHeredocTerminatorElementImpl;
 import com.perl5.lang.perl.psi.mixins.PerlStatementMixin;
 import com.perl5.lang.perl.psi.properties.PerlBlockOwner;
 import com.perl5.lang.perl.psi.properties.PerlDieScope;
@@ -937,45 +936,6 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
         element.acceptChildren(this);
       }
       startNodeSmart(element);
-    }
-  }
-
-  // this won't handle nested heredocs.
-  private class HeredocCollector extends PerlRecursiveVisitor {
-    private final List<PsiElement> myOpeners = new ArrayList<>();
-    // may contain nulls for heredocs without bodies
-    private final List<PsiElement> myBodies = new ArrayList<>();
-    private int myTerminatorCounter = 0;
-
-    @Override
-    public void visitHeredocOpener(@NotNull PsiPerlHeredocOpener o) {
-      myOpeners.add(o);
-    }
-
-    @Override
-    public void visitHeredocElement(@NotNull PerlHeredocElementImpl o) {
-      myBodies.add(o);
-      super.visitHeredocElement(o);
-    }
-
-    @Override
-    public void visitHeredocTeminator(@NotNull PerlHeredocTerminatorElementImpl o) {
-      myTerminatorCounter++;
-      if (myTerminatorCounter > myBodies.size()) {
-        myBodies.add(null);
-      }
-    }
-
-    /**
-     * @return body psi element for opener if any
-     */
-    @Nullable
-    public PerlHeredocElementImpl getBody(@NotNull PsiPerlHeredocOpener opener) {
-      int openerIndex = myOpeners.indexOf(opener);
-      if (openerIndex == -1 || myBodies.size() <= openerIndex) {
-        return null;
-      }
-      return ObjectUtils.tryCast(myBodies.get(openerIndex), PerlHeredocElementImpl.class);
     }
   }
 
