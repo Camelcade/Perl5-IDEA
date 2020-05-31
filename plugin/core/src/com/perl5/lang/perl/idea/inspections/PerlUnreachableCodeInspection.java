@@ -26,6 +26,7 @@ import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlControlFlowBuilder;
+import com.perl5.lang.perl.psi.PerlMethodModifier;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.PsiPerlSubExpr;
@@ -49,6 +50,11 @@ public class PerlUnreachableCodeInspection extends PerlInspection {
     return new PerlVisitor() {
       @Override
       public void visitPerlSubDefinitionElement(@NotNull PerlSubDefinitionElement o) {
+        processElement(o);
+      }
+
+      @Override
+      public void visitPerlMethodModifier(@NotNull PerlMethodModifier o) {
         processElement(o);
       }
 

@@ -1,0 +1,43 @@
+augment test() {
+    'first';
+    sub {
+        'subfirst';
+        return;
+        '<error descr="Unreachable code">subsecond</error>';
+    };
+    return;
+    '<error descr="Unreachable code">second</error>';
+}
+
+after test() {
+    'first';
+    sub {
+        'subfirst';
+        return;
+        '<error descr="Unreachable code">subsecond</error>';
+    };
+    return;
+    '<error descr="Unreachable code">second</error>';
+}
+
+around test() {
+    'first';
+    sub {
+        'subfirst';
+        return;
+        '<error descr="Unreachable code">subsecond</error>';
+    };
+    return;
+    '<error descr="Unreachable code">second</error>';
+}
+
+before test() {
+    'first';
+    sub {
+        'subfirst';
+        return;
+        '<error descr="Unreachable code">subsecond</error>';
+    };
+    return;
+    '<error descr="Unreachable code">second</error>';
+}

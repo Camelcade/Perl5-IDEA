@@ -170,6 +170,9 @@ public class PerlUnreachableCodeInspectionTest extends PerlLightTestCase {
   @Test
   public void testUnreachableCommaSequenceParensConditional() {doTest();}
 
+  @Test
+  public void testMethodModifiers() {doTest();}
+
   private void doTest() {
     doInspectionTest(PerlUnreachableCodeInspection.class);
   }
