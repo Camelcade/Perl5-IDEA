@@ -27,6 +27,12 @@ public class PerlUnreachableCodeInspectionTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testNestedSubExpr() {doTest();}
+
+  @Test
+  public void testFileLevel() {doTest();}
+
+  @Test
   public void testGivenWhenBreak() {doTest();}
 
   @Test

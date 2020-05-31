@@ -1,0 +1,8 @@
+'first';
+sub {
+    'subfirst';
+    return;
+    '<error descr="Unreachable code">subsecond</error>';
+};
+return;
+'<error descr="Unreachable code">second</error>';

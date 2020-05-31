@@ -1,0 +1,11 @@
+sub test {<caret>
+    'first';
+    sub {
+        'subfirst';
+        return;
+        'subsecond';
+    };
+    return;
+    'second';
+
+}
