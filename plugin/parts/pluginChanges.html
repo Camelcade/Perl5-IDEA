@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright 2015-2019 Alexandr Evstigneev
+  ~ Copyright 2015-2020 Alexandr Evstigneev
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -16,6 +16,25 @@
 
 <p>Fixes:</p>
 <ul>
-  <li>Parsing problem for <code>defined or</code> operator after keywords introduced in 2019.2, by <a
-      href="https://github.com/Camelcade/Perl5-IDEA/issues/2084">@aldem</a></li>
+  <li>Unreachable inspection is now working properly in sub expressions and on file level, <a
+      href="https://github.com/Camelcade/Perl5-IDEA/issues/2178">#2178</a></li>
+  <li>Perl given/when blocks are now have proper control flow and proper reporting of unreachable code, <a
+      href="https://github.com/Camelcade/Perl5-IDEA/issues/2176">#2176</a></li>
+  <li>Orphan when/default blocks are now reported by the switch control inspection, <a
+      href="https://github.com/Camelcade/Perl5-IDEA/issues/2176">#2176</a></li>
+  <li>Improved completion responsiveness in strings, heredocs and regular expressions, <a
+      href="https://github.com/Camelcade/Perl5-IDEA/issues/2171">#2171</a></li>
+  <li>Deparsing XSubs is no longer suggest to install some strange modules after, <a
+      href="https://github.com/Camelcade/Perl5-IDEA/issues/2163">#2163</a></li>
+  <li>New spacing option allows to control spaces inside dereferencing braces, <a
+      href="https://github.com/Camelcade/Perl5-IDEA/issues/2155">#2155</a></li>
+  <li><code>wantarray</code> is now properly parsed with arguments, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/2158">#2158</a>
+  </li>
+  <li><code>return (...)</code> is now properly spaced on formatting, <a
+      href="https://github.com/Camelcade/Perl5-IDEA/issues/2156">#2156</a></li>
+  <li>Fixed problem with adding old perl versions as interpreters (prior 5.10), <a
+      href="https://github.com/Camelcade/Perl5-IDEA/issues/2150">#2150</a></li>
+  <li>Added support for <code>async</code> keyword from the <code>Future::AsyncAwait</code> module, <a
+      href="https://github.com/Camelcade/Perl5-IDEA/issues/2144">#2144</a></li>
+  <li>Several exceptions reported by 2020.1 users</li>
 </ul>
