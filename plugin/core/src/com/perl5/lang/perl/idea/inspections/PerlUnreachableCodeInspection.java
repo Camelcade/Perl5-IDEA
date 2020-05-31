@@ -21,12 +21,14 @@ import com.intellij.codeInsight.controlflow.Instruction;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlControlFlowBuilder;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
+import com.perl5.lang.perl.psi.PsiPerlSubExpr;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
@@ -47,12 +49,26 @@ public class PerlUnreachableCodeInspection extends PerlInspection {
     return new PerlVisitor() {
       @Override
       public void visitPerlSubDefinitionElement(@NotNull PerlSubDefinitionElement o) {
+        processElement(o);
+      }
+
+      private void processElement(@NotNull PsiElement o) {
         PerlControlFlowBuilder.iteratePrev(o, instruction -> {
           if (instruction.allPred().isEmpty() && instruction.num() != 0) {
             processInstruction(instruction);
           }
           return ControlFlowUtil.Operation.NEXT;
         });
+      }
+
+      @Override
+      public void visitSubExpr(@NotNull PsiPerlSubExpr o) {
+        processElement(o);
+      }
+
+      @Override
+      public void visitFile(@NotNull PsiFile file) {
+        processElement(file);
       }
 
       private void processInstruction(@NotNull Instruction instruction) {

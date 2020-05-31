@@ -938,5 +938,8 @@ public class PerlControlFlowTest extends PerlLightTestCase {
   @Test
   public void testForWhenDefaultContinue() {doTest();}
 
+  @Test
+  public void testNestedSubExpr() {doTest();}
+
   private void doTest() {doTestControlFlow();}
 }
