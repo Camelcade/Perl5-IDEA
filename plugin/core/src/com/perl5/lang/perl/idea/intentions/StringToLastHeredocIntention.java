@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -96,7 +96,7 @@ public class StringToLastHeredocIntention extends PsiElementBaseIntentionAction 
   @Override
   public boolean isAvailable(@NotNull Project project, Editor editor, @NotNull PsiElement element) {
     PsiElement parent = element.getParent();
-    PsiElement grandParent = parent.getParent();
+    PsiElement grandParent = parent == null ? null : parent.getParent();
     return !(grandParent instanceof PerlHeredocOpener) &&
            (parent instanceof PsiPerlStringDq || parent instanceof PsiPerlStringSq || parent instanceof PsiPerlStringXq);
   }
