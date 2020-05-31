@@ -19,10 +19,12 @@ package com.perl5.lang.perl.idea.sdk.host.docker;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.process.ProcessOutput;
 import com.intellij.execution.util.ExecUtil;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.PathManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
+import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.util.SystemInfo;
@@ -150,16 +152,31 @@ class PerlDockerAdapter {
   @NotNull
   public List<PerlFileDescriptor> listFiles(@NotNull String containerName, @NotNull String path) {
     try {
-      ProcessOutput output = runCommand(EXEC, containerName, "ls", "-LAs", "--classify", path);
-      return output.getStdoutLines().stream()
-        .map(it -> PerlFileDescriptor.create(path, it))
-        .filter(Objects::nonNull)
-        .collect(Collectors.toList());
+      if (ApplicationManager.getApplication().isDispatchThread()) {
+        return ProgressManager.getInstance().runProcessWithProgressSynchronously(
+          () -> doListFiles(containerName, path),
+          PerlDockerBundle.message("docker.adapter.listing.files.in", path),
+          true,
+          null
+        );
+      }
+      else {
+        return doListFiles(containerName, path);
+      }
     }
     catch (ExecutionException e) {
       LOG.error(e);
       return Collections.emptyList();
     }
+  }
+
+  @NotNull
+  private List<PerlFileDescriptor> doListFiles(@NotNull String containerName, @NotNull String path) throws ExecutionException {
+    ProcessOutput output = runCommand(EXEC, containerName, "ls", "-LAs", "--classify", path);
+    return output.getStdoutLines().stream()
+      .map(it -> PerlFileDescriptor.create(path, it))
+      .filter(Objects::nonNull)
+      .collect(Collectors.toList());
   }
 
   private static String createContainerName(@NotNull String seed) {
