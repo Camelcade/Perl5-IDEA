@@ -99,7 +99,15 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 
   @NotNull
   private List<Block> processSubBlocks(@NotNull List<Block> rawBlocks) {
-    if (getElementType() != COMMA_SEQUENCE_EXPR) {
+    IElementType elementType = getElementType();
+    if (elementType == SIGNATURE_ELEMENT && rawBlocks.size() == 1) {
+      while (rawBlocks.size() == 1) {
+        rawBlocks = rawBlocks.get(0).getSubBlocks();
+      }
+      return rawBlocks;
+    }
+
+    if (elementType != COMMA_SEQUENCE_EXPR) {
       return rawBlocks;
     }
 

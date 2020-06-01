@@ -540,16 +540,6 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     IElementType elementType = PsiUtilCore.getElementType(node);
     ASTNode parentNode = node == null ? null : node.getTreeParent();
 
-    // hack for signature_element wrapping variable_declaration
-    ASTNode grandParentNode = parentNode == null ? null : parentNode.getTreeParent();
-    IElementType grandParentElementType = PsiUtilCore.getElementType(grandParentNode);
-    if (grandParentElementType == SIGNATURE_ELEMENT && PsiUtilCore.getElementType(parentNode) == VARIABLE_DECLARATION_ELEMENT &&
-        node.getTextRange().equals(grandParentNode.getTextRange())) {
-      node = grandParentNode;
-      parentNode = node.getTreeParent();
-      elementType = grandParentElementType;
-    }
-
     if (myPerlSettings.ALIGN_CONSECUTIVE_ASSIGNMENTS != NO_ALIGN && elementType == SIGNATURE_ELEMENT) {
       IElementType lastChildNodeType = PsiUtilCore.getElementType(node.getLastChildNode());
       if (lastChildNodeType == OPERATOR_ASSIGN) {
