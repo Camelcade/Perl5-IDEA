@@ -90,7 +90,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
     final List<Block> blocks = new ArrayList<>();
 
     for (ASTNode child = myNode.getFirstChildNode(); child != null; child = child.getTreeNext()) {
-      if (shouldCreateBlockFor(child)) {
+      if (shouldCreateSubBlockFor(child)) {
         blocks.add(createBlock(child));
       }
     }
@@ -199,7 +199,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
     return myIsIncomple;
   }
 
-  protected static boolean shouldCreateBlockFor(ASTNode node) {
+  protected boolean shouldCreateSubBlockFor(ASTNode node) {
     IElementType elementType = PsiUtilCore.getElementType(node);
     return elementType != TokenType.WHITE_SPACE && !node.getText().isEmpty() &&
            !(HEREDOC_BODIES_TOKENSET.contains(elementType) && node.getTextLength() == 1);
