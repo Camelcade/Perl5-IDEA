@@ -1,4 +1,4 @@
-sub somesub(
+func somefunc(
     $firstvarlong = 42,
     $somevar
             <caret>

@@ -1,4 +1,4 @@
-sub somesub(
+<per test code>(
     $somevar =<caret>
 ) :attribute
 {

@@ -1,4 +1,4 @@
-sub somesub(
+method(
     $firstvarlong = 42,
     $somevar
             <caret>

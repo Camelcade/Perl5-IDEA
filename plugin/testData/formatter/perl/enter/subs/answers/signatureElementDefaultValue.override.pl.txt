@@ -1,4 +1,4 @@
-sub somesub(
+override somemethod(
     $somevar
             <caret>
 ) :attribute

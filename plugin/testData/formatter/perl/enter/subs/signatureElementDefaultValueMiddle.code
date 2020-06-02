@@ -1,4 +1,4 @@
-sub somesub(
+<per test code>(
     $firstvarlong = 42,
     $somevar<caret>
     ,

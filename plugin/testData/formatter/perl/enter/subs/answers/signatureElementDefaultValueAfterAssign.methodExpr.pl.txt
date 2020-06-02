@@ -1,4 +1,4 @@
-sub somesub(
+method(
     $somevar =
             <caret>
 ) :attribute
