@@ -1,0 +1,6 @@
+before somemethod(
+    $somevar =
+            <caret>
+) :attribute
+{
+}

@@ -1,0 +1,6 @@
+fun somefun(
+    $somevar =
+            <caret>
+) :attribute
+{
+}
