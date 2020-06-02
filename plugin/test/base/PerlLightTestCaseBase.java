@@ -217,7 +217,8 @@ import java.util.stream.Collectors;
 
 @RunWith(JUnit4.class)
 public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestCase {
-  private static final String START_FOLD = "<fold\\stext=\'[^\']*\'(\\sexpand=\'[^\']*\')*>";
+  protected static final String PER_TEST_CODE = "<per test code>";
+  private static final String START_FOLD = "<fold\\stext='[^']*'(\\sexpand='[^']*')*>";
   private static final String END_FOLD = "</fold>";
   private static final List<ElementDescriptionLocation> LOCATIONS = Arrays.asList(
     UsageViewShortNameLocation.INSTANCE,
@@ -479,7 +480,16 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   }
 
   public void initWithFileContent(String filename, String extension, String content) {
-    myFixture.configureByText(filename + (extension.isEmpty() ? "" : "." + extension), content);
+    myFixture.configureByText(filename + (extension.isEmpty() ? "" : "." + extension), getPatchedContent(content));
+  }
+
+  protected String getPatchedContent(@NotNull String content) {
+    return StringUtil.replace(content, PER_TEST_CODE, getPerTestCode());
+  }
+
+  @NotNull
+  protected String getPerTestCode() {
+    return "Implement getPerTestCode() method in test";
   }
 
   public void initWithFile(String filename, String extension) throws IOException {
@@ -928,6 +938,10 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
 
   protected void doTestTyping(@NotNull String toType) {
     initWithFileSmart();
+    doTestTypingWithoutInit(toType);
+  }
+
+  protected void doTestTypingWithoutInit(@NotNull String toType) {
     myFixture.type(toType);
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithCaretsAndSelections());
   }

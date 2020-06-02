@@ -161,11 +161,6 @@ public abstract class PerlSubsFormatterEnterTest extends PerlFormatterTestCase {
   @NotNull
   protected abstract String getResultAppendix();
 
-  @Override
-  public void initWithFileContent(String filename, String extension, String content) {
-    super.initWithFileContent(filename, extension, getPatchedContent(content));
-  }
-
   protected void doTest() {
     doTestEnter();
   }

@@ -1,0 +1,6 @@
+sub somesub(
+    $firstvarlong = 42,
+    $firstvarlong
+        = <caret>
+){
+}

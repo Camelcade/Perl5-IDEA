@@ -1,0 +1,6 @@
+method somemethod(
+    $firstvarlong = 42,
+    $firstvarlong
+                  = <caret>
+){
+}

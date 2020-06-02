@@ -1,0 +1,6 @@
+fun(
+    $firstvarlong = 42,
+    $firstvarlong
+                  = <caret>
+){
+}

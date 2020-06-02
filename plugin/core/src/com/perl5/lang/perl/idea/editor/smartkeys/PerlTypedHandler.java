@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,19 +36,18 @@ import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.codeStyle.CodeStyleManager;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlString;
-import com.perl5.lang.perl.psi.PsiPerlCommaSequenceExpr;
-import com.perl5.lang.perl.psi.PsiPerlHashIndex;
-import com.perl5.lang.perl.psi.PsiPerlStringList;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.mixins.PerlStringBareMixin;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import static com.intellij.psi.TokenType.WHITE_SPACE;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
 
 
@@ -128,9 +127,9 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
     HighlighterIterator iterator = highlighter.createIterator(offset);
     IElementType elementTokenType = iterator.getTokenType();
     Document document = editor.getDocument();
+    CharSequence text = document.getCharsSequence();
     if (QUOTE_OPEN_ANY.contains(elementTokenType) && CodeInsightSettings.getInstance().AUTOINSERT_PAIR_QUOTE) {
       IElementType quotePrefixType = offset > 0 ? PerlEditorUtil.getPreviousTokenType(highlighter.createIterator(offset - 1)) : null;
-      CharSequence text = document.getCharsSequence();
       if (offset > text.length() - 1 || text.charAt(offset) != typedChar) {
         return Result.CONTINUE;
       }
@@ -176,8 +175,40 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
                newElement.getParent() instanceof PsiPerlHashIndex;
       });
     }
+    else if (typedChar == '=' && !iterator.atEnd()) {
+      handleEqualSign(editor, file, offset, iterator, document);
+    }
 
     return Result.CONTINUE;
+  }
+
+  private void handleEqualSign(@NotNull Editor editor,
+                               @NotNull PsiFile file,
+                               int offset,
+                               HighlighterIterator iterator,
+                               Document document) {
+    int previousNonSpaceTokenStart = -1;
+    while (true) {
+      iterator.retreat();
+      if (iterator.atEnd()) {
+        return;
+      }
+      if (iterator.getTokenType() != WHITE_SPACE) {
+        previousNonSpaceTokenStart = iterator.getStart();
+        break;
+      }
+    }
+
+    PsiElement elementAtOffset = file.findElementAt(previousNonSpaceTokenStart);
+    PsiPerlSignatureContent wrappingSignature = PsiTreeUtil.getParentOfType(elementAtOffset, PsiPerlSignatureContent.class);
+    if (wrappingSignature != null) {
+      int signatureOffset = wrappingSignature.getNode().getStartOffset();
+      EditorModificationUtil.insertStringAtCaret(editor, " ", false, true);
+      Project project = file.getProject();
+      PsiDocumentManager.getInstance(project).commitDocument(document);
+      CodeStyleManager.getInstance(project).reformatText(file, signatureOffset, offset);
+      AutoPopupController.getInstance(project).scheduleAutoPopup(editor);
+    }
   }
 
   @Nullable

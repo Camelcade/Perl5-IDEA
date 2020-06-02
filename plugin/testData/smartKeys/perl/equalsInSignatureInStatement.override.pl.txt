@@ -1,0 +1,6 @@
+override somemethod(
+    $firstvarlong = 42,
+    $firstvarlong
+                  = <caret>
+){
+}

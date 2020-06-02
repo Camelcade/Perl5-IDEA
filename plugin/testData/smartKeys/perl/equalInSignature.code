@@ -1,0 +1,6 @@
+<per test code>(
+    $firstvarlong = 42,
+    $firstvarlong
+<caret>
+){
+}
