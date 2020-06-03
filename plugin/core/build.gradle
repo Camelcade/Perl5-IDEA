@@ -55,7 +55,7 @@ tasks.withType(GenerateLexer).each {
 }
 
 tasks.withType(GenerateParser).each {
-  it.targetRoot = project.ext.genRoot
+  it.targetRoot = genRoot
   it.purgeOldFiles = true
 }
 
