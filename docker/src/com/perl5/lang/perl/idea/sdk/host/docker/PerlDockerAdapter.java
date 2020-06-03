@@ -131,7 +131,10 @@ class PerlDockerAdapter {
           UnixSystem system = new UnixSystem();
           long gid = system.getGid();
           long uid = system.getUid();
-          additionalArguments = Collections.singletonList("chown -R " + uid + ":" + gid + " " + remoteCachePath);
+          additionalArguments = Arrays.asList(
+            "chown -R " + uid + ":" + gid + " " + remoteCachePath,
+            "chmod u+w " + remoteCachePath + "/*"
+          );
         }
         File script = createCommandScript(new PerlCommandLine(
           BASH_COPY, String.join("/", remotePath, "*"), remoteCachePath), additionalArguments);
