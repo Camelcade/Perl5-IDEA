@@ -25,6 +25,7 @@ plugins {
   id 'jacoco'
   id 'com.github.kt3k.coveralls' version "$coverallsGradlePluginVersion"
   id 'org.jetbrains.grammarkit' version "$grammarKitGradlePluginVersion"
+  id 'idea'
 }
 
 repositories {
@@ -52,7 +53,7 @@ allprojects {
   apply plugin: 'org.jetbrains.grammarkit'
 
   apply plugin: 'jacoco'
-  dependencies{
+  dependencies {
     it.jacocoAgent agentFiles
   }
 
@@ -60,6 +61,28 @@ allprojects {
   sourceCompatibility = javaVersion
   targetCompatibility = javaTargetVersion
   tasks.withType(JavaCompile) { options.encoding = 'UTF-8' }
+
+  project.ext{
+    genRoot = project.file('gen')
+  }
+
+  sourceSets {
+    main {
+      java.srcDirs files(project.file('src'), project.genRoot)
+      resources.srcDir project.file('resources')
+    }
+    test {
+      java.srcDir project.file('test')
+      resources.srcDirs project.file('testData')
+    }
+  }
+
+  apply plugin: 'idea'
+  idea {
+    module {
+      generatedSourceDirs += project.genRoot
+    }
+  }
 
   apply plugin: 'org.jetbrains.intellij'
   repositories {
