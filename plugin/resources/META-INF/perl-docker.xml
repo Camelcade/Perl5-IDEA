@@ -24,7 +24,9 @@
 
   <extensions defaultExtensionNs="com.intellij">
     <projectService serviceImplementation="com.perl5.lang.perl.idea.sdk.host.docker.PerlDockerProjectSettings"/>
+    <experimentalFeature id="perl5.docker.experimental.download" percentOfUsers="100">
+      <description>Uses cp command inside container to copy files to the volume with later chown, instead of docker cp command. See #2179
+      </description>
+    </experimentalFeature>
   </extensions>
-
-
 </idea-plugin>

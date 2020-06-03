@@ -42,21 +42,21 @@ public abstract class PerlHostFileTransfer<HostData extends PerlHostData<?, ?>> 
   /**
    * Downloads {@code remoteFile} to the local cache
    */
-  @Contract("null->null; !null->!null")
+  @Contract("null, _ -> null; !null, _ -> !null")
   @Nullable
-  public final File syncFile(@Nullable File remoteFile) throws IOException {
+  public final File syncFile(@Nullable File remoteFile, boolean binaries) throws IOException {
     if (remoteFile == null) {
       return null;
     }
-    return new File(syncFile(FileUtil.toSystemIndependentName(remoteFile.getPath())));
+    return new File(syncFile(FileUtil.toSystemIndependentName(remoteFile.getPath()), binaries));
   }
 
   /**
    * Downloads {@code remotePath} to the local cache
    */
-  @Contract("null->null; !null->!null")
+  @Contract("null, _ -> null; !null, _ -> !null")
   @Nullable
-  public final String syncFile(@Nullable String remotePath) throws IOException {
+  public final String syncFile(@Nullable String remotePath, boolean binaries) throws IOException {
     if (remotePath == null) {
       return null;
     }
@@ -70,7 +70,7 @@ public abstract class PerlHostFileTransfer<HostData extends PerlHostData<?, ?>> 
     PerlRunUtil.setProgressText(PerlBundle.message("perl.host.progress.syncing", remotePath));
     try {
       LOG.info("Syncing " + myHostData + ": " + remotePath + " => " + localPath);
-      doSyncPath(remotePath, localPath);
+      doSyncPath(remotePath, localPath, binaries);
     }
     catch (IOException e) {
       throw new IOException(PerlBundle.message("perl.sync.error.copying", remotePath, localPath, myHostData.getShortName()), e);
@@ -94,7 +94,7 @@ public abstract class PerlHostFileTransfer<HostData extends PerlHostData<?, ?>> 
    *
    * @implNote always invoked on pooled thread
    */
-  protected abstract void doSyncPath(@NotNull String remotePath, String localPath) throws IOException;
+  protected abstract void doSyncPath(@NotNull String remotePath, String localPath, boolean binaries) throws IOException;
 
 
   /**

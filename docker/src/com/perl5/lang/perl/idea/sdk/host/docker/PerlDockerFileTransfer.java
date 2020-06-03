@@ -55,14 +55,14 @@ class PerlDockerFileTransfer extends PerlHostFileTransfer<PerlDockerData> {
   }
 
   @Override
-  protected void doSyncPath(@NotNull String remotePath, String localPath) throws IOException {
+  protected void doSyncPath(@NotNull String remotePath, String localPath, boolean binaries) throws IOException {
     assertNotClosed();
     String containerName = getContainerName();
     if (containerName == null) {
       throw new IOException("Container could not be created.", myCreationError);
     }
     try {
-      myAdapter.copyRemote(containerName, remotePath, localPath);
+      myAdapter.copyRemote(containerName, remotePath, localPath, binaries);
     }
     catch (ExecutionException e) {
       throw new IOException(e);

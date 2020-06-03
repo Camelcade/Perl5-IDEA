@@ -20,6 +20,7 @@ import com.intellij.execution.ExecutionException;
 import com.intellij.execution.process.ProcessOutput;
 import com.intellij.execution.util.ExecUtil;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.application.Experiments;
 import com.intellij.openapi.application.PathManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.module.Module;
@@ -40,6 +41,7 @@ import com.perl5.lang.perl.idea.sdk.host.PerlFileDescriptor;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostHandler;
 import com.perl5.lang.perl.util.PerlPluginUtil;
+import com.sun.security.auth.module.UnixSystem;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -63,6 +65,7 @@ class PerlDockerAdapter {
   private static final String CREATE = "create";
   private static final String WITH_CONTAINER_NAME = "--name";
   private static final String COPY = "cp";
+  private static final String BASH_COPY = "cp";
   private static final String AS_ARCHIVE = "--archive";
   private static final String FOLLOWING_LINKS = "--follow-link";
   private static final String IMAGE = "image";
@@ -78,6 +81,7 @@ class PerlDockerAdapter {
   private static final String EXPOSE_PORT = "--expose";
   private static final String PUBLISH_PORT = "-p";
   private static final String WORKING_DIRECTORY = "-w";
+  private static final String CACHE_MOUNT_POINT = "/intellijExternalCache";
   static final String DOCKER_EXECUTABLE = SystemInfo.isWindows ? "docker.exe" : "docker";
 
   @NotNull
@@ -103,16 +107,38 @@ class PerlDockerAdapter {
   @NotNull
   public String createRunningContainer(@NotNull String containerNameSeed) throws ExecutionException {
     String containerName = createContainerName(containerNameSeed);
-    runCommand(RUN, AS_DAEMON, WITH_AUTOREMOVE, WITH_CONTAINER_NAME,
-               containerName, myData.getImageName(), "bash", "-c", "while true;do sleep 1000000;done");
+    String localSystemPath = PathManager.getSystemPath();
+    runCommand(RUN, AS_DAEMON, WITH_AUTOREMOVE,
+               WITH_CONTAINER_NAME, containerName,
+               WITH_VOLUME, String.join(":", localSystemPath, myData.getRemotePath(localSystemPath)),
+               WITH_VOLUME, String.join(":", myData.getLocalCacheRoot(), CACHE_MOUNT_POINT),
+               myData.getImageName(), "bash", "-c", "while true;do sleep 1000000;done");
     return containerName;
   }
 
-  public void copyRemote(@NotNull String containerName, @NotNull String remotePath, @NotNull String localPath) throws ExecutionException {
+  public void copyRemote(@NotNull String containerName, @NotNull String remotePath, @NotNull String localPath, boolean binaries)
+    throws ExecutionException {
     try {
       File localPathFile = new File(localPath);
       FileUtil.createDirectory(localPathFile);
-      runCommand(COPY, AS_ARCHIVE, FOLLOWING_LINKS, containerName + ':' + remotePath, localPathFile.getParent());
+      if (!Experiments.getInstance().isFeatureEnabled("perl5.docker.experimental.download") || !binaries) {
+        runCommand(COPY, AS_ARCHIVE, FOLLOWING_LINKS, containerName + ':' + remotePath, localPathFile.getParent());
+      }
+      else {
+        String remoteCachePath = CACHE_MOUNT_POINT + remotePath;
+        List<String> additionalArguments = Collections.emptyList();
+        if (SystemInfo.isUnix) {
+          UnixSystem system = new UnixSystem();
+          long gid = system.getGid();
+          long uid = system.getUid();
+          additionalArguments = Collections.singletonList("chown -R " + uid + ":" + gid + " " + remoteCachePath);
+        }
+        File script = createCommandScript(new PerlCommandLine(
+          BASH_COPY, String.join("/", remotePath, "*"), remoteCachePath), additionalArguments);
+        String dockerScriptPath = myData.getRemotePath(script.getPath());
+        LOG.assertTrue(dockerScriptPath != null);
+        runCommand(EXEC, containerName, "sh", dockerScriptPath);
+      }
     }
     catch (PerlExecutionException e) {
       ProcessOutput processOutput = e.getProcessOutput();
@@ -228,8 +254,9 @@ class PerlDockerAdapter {
     dockerCommandLine.withParameters(WITH_VOLUME, localSystemPath + ':' + myData.getRemotePath(localSystemPath));
 
     // we sure that command script is under system dir
-    File script = createCommandScript(commandLine);
+    File script = createCommandScript(commandLine, Collections.emptyList());
     String dockerScriptPath = myData.getRemotePath(script.getPath());
+    LOG.assertTrue(dockerScriptPath != null);
     return dockerCommandLine.withParameters(myData.getImageName(), "sh", dockerScriptPath).createProcess();
   }
 
@@ -269,11 +296,13 @@ class PerlDockerAdapter {
   }
 
   @NotNull
-  private File createCommandScript(@NotNull PerlCommandLine commandLine) throws ExecutionException {
+  private File createCommandScript(@NotNull PerlCommandLine commandLine,
+                                   @NotNull List<String> additionalCommands) throws ExecutionException {
     StringBuilder sb = new StringBuilder();
     commandLine.getEnvironment().forEach((key, val) -> sb.append("export ").append(key).append('=')
       .append('\'').append(StringUtil.escapeChars(val, '\'')).append("'\n"));
     sb.append(commandLine.getCommandLineString());
+    additionalCommands.forEach(it -> sb.append("\n").append(it));
 
     try {
       String command = sb.toString();

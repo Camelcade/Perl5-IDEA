@@ -52,7 +52,7 @@ class PerlWslFileTransfer extends PerlHostFileTransfer<PerlWslData> {
   }
 
   @Override
-  protected void doSyncPath(@NotNull String remotePath, String localPath) throws IOException {
+  protected void doSyncPath(@NotNull String remotePath, String localPath, boolean binaries) throws IOException {
     WSLDistributionWithRoot distribution = myHostData.getDistribution();
     if (distribution == null) {
       throw new IOException("No distribution available for " + myHostData.getDistributionId());

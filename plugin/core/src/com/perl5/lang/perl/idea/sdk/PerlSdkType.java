@@ -95,17 +95,18 @@ public class PerlSdkType extends SdkType {
     List<Exception> exceptions = new ArrayList<>();
 
     try (PerlHostFileTransfer<?> fileTransfer = hostData.getFileTransfer()) {
-      Consumer<File> downloader = it -> syncAndCollectException(fileTransfer, it, pathsToRefresh, exceptions);
+      Consumer<File> downloader = it -> syncAndCollectException(fileTransfer, it, pathsToRefresh, exceptions, false);
+      Consumer<File> binaryDownloader = it -> syncAndCollectException(fileTransfer, it, pathsToRefresh, exceptions, true);
       for (String hostPath : incPaths) {
         downloader.accept(new File(hostPath));
-        downloader.accept(PerlRunUtil.findLibsBin(new File(hostPath)));
+        binaryDownloader.accept(PerlRunUtil.findLibsBin(new File(hostPath)));
       }
       // additional bin dirs from version manager
-      PerlVersionManagerData.notNullFrom(sdk).getBinDirsPath().forEach(downloader);
+      PerlVersionManagerData.notNullFrom(sdk).getBinDirsPath().forEach(binaryDownloader);
 
       // sdk home path
       File interpreterPath = new File(Objects.requireNonNull(PerlProjectManager.getInterpreterPath(sdk)));
-      downloader.accept(interpreterPath.getParentFile());
+      binaryDownloader.accept(interpreterPath.getParentFile());
 
       List<VirtualFile> filesToRefresh = pathsToRefresh.stream()
         .map(it -> VfsUtil.findFileByIoFile(new File(it), true))
@@ -170,12 +171,13 @@ public class PerlSdkType extends SdkType {
   private static void syncAndCollectException(@NotNull PerlHostFileTransfer<?> fileTransfer,
                                               @Nullable File fileToCopy,
                                               @NotNull List<String> pathsToRefresh,
-                                              @NotNull List<Exception> exceptionsThrown) {
+                                              @NotNull List<Exception> exceptionsThrown,
+                                              boolean binaries) {
     if (fileToCopy == null) {
       return;
     }
     try {
-      pathsToRefresh.add(fileTransfer.syncFile(fileToCopy).getPath());
+      pathsToRefresh.add(fileTransfer.syncFile(fileToCopy, binaries).getPath());
     }
     catch (IOException e) {
       exceptionsThrown.add(e);
