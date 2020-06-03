@@ -3,7 +3,6 @@
 build/
 out/
 classes/
-gen/
 plugin/testData/**/svg/
 *.iml
 .idea/*.xml
