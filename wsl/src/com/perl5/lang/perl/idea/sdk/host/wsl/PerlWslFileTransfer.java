@@ -57,6 +57,11 @@ class PerlWslFileTransfer extends PerlHostFileTransfer<PerlWslData> {
 
   @Override
   protected void doSyncPath(@NotNull String remotePath, String localPath) throws IOException {
+    if (myHostData.isFileDirectlyAvailable(remotePath)) {
+      LOG.info(myHostData + " file directly available: " + remotePath + " => " + localPath);
+      return;
+    }
+
     WSLDistributionWithRoot distribution = myHostData.getNotNullDistribution();
     remotePath = FileUtil.toSystemIndependentName(remotePath);
 
@@ -108,7 +113,20 @@ class PerlWslFileTransfer extends PerlHostFileTransfer<PerlWslData> {
   }
 
   @Override
+  protected void doStubFiles(@NotNull String remoteDir, String localDir) throws IOException {
+    if (myHostData.isFileDirectlyAvailable(remoteDir)) {
+      LOG.info(myHostData + " directory directly available: " + remoteDir + " => " + localDir);
+      return;
+    }
+    super.doStubFiles(remoteDir, localDir);
+  }
+
+  @Override
   public @NotNull List<VirtualFile> listFiles(@NotNull String remotePath) throws IOException {
+    if (myHostData.isFileDirectlyAvailable(remotePath)) {
+      LOG.debug(myHostData + " file directly available: " + remotePath);
+      return Collections.emptyList();
+    }
     PerlWslFileSystem wslFileSystem = PerlWslFileSystem.create(myHostData.getNotNullDistribution());
     VirtualFile root = wslFileSystem.refreshAndFindFileByPath(remotePath);
     return root == null ? Collections.emptyList() : Collections.unmodifiableList(Arrays.asList(root.getChildren()));

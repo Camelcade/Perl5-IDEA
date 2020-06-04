@@ -74,7 +74,7 @@ public abstract class PerlHostFileTransfer<HostData extends PerlHostData<?, ?>> 
     }
     PerlRunUtil.setProgressText(PerlBundle.message("perl.host.progress.syncing", remotePath));
     try {
-      LOG.info("Syncing " + myHostData + ": " + remotePath + " => " + localPath);
+      LOG.info(myHostData + " syncing: " + remotePath + " => " + localPath);
       doSyncPath(remotePath, localPath);
     }
     catch (IOException e) {
@@ -113,7 +113,7 @@ public abstract class PerlHostFileTransfer<HostData extends PerlHostData<?, ?>> 
     }
     PerlRunUtil.setProgressText(PerlBundle.message("perl.host.progress.stubbing", remoteDir));
     try {
-      LOG.info("Stubbing " + myHostData + ": " + remoteDir + " => " + localDir);
+      LOG.info(myHostData + " stubbing: " + remoteDir + " => " + localDir);
 
       doStubFiles(remoteDir, localDir);
     }

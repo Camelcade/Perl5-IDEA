@@ -139,6 +139,18 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
     return cacheRoot.getAbsolutePath();
   }
 
+  /**
+   * @return true iff {@code remotePathName} is directly available in windows file system.
+   * @implNote it should be returned by {@link #doGetLocalPath(String)} and we don't need to download it
+   */
+  boolean isFileDirectlyAvailable(@NotNull String remotePathName) {
+    WSLDistributionWithRoot distribution = getDistribution();
+    if (distribution == null) {
+      return false;
+    }
+    return distribution.getWindowsPath(remotePathName) != null;
+  }
+
   @Nullable
   @Override
   public String doGetLocalPath(@NotNull String remotePathName) {
