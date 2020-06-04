@@ -31,7 +31,7 @@ class PerlLocalFileTransfer extends PerlHostFileTransfer<PerlLocalHostData> {
   }
 
   @Override
-  protected void doSyncPath(@NotNull String remotePath, String localPath, boolean binaries) {
+  protected void doSyncPath(@NotNull String remotePath, String localPath) {
   }
 
   @SuppressWarnings("RedundantThrows")
