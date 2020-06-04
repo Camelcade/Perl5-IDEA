@@ -89,7 +89,7 @@ class PerlDockerData extends PerlHostData<PerlDockerData, PerlDockerHandler> {
   @Override
   public synchronized PerlHostVirtualFileSystem getFileSystem(@NotNull Disposable disposable) {
     if (myFileSystem == null) {
-      myFileSystem = PerlDockerFileSystem.create(new PerlDockerAdapter(this));
+      myFileSystem = PerlDockerFileSystem.create(this);
       Disposer.register(disposable, () -> {
         PerlDockerFileSystem fileSystem = myFileSystem;
         ApplicationManager.getApplication().executeOnPooledThread(() -> {

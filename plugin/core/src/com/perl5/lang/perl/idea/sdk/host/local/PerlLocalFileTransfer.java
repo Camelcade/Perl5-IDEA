@@ -16,12 +16,20 @@
 
 package com.perl5.lang.perl.idea.sdk.host.local;
 
+import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.vfs.LocalFileSystem;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostFileTransfer;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 class PerlLocalFileTransfer extends PerlHostFileTransfer<PerlLocalHostData> {
+  private static final Logger LOG = Logger.getInstance(PerlLocalFileTransfer.class);
+
   public PerlLocalFileTransfer(@NotNull PerlLocalHostData hostData) {
     super(hostData);
   }
@@ -31,7 +39,17 @@ class PerlLocalFileTransfer extends PerlHostFileTransfer<PerlLocalHostData> {
   }
 
   @Override
+  protected void doStubFiles(@NotNull String remoteDir, String localDir) throws IOException {
+  }
+
+  @Override
   protected void doSyncPath(@NotNull String remotePath, String localPath) {
+  }
+
+  @Override
+  public @NotNull List<VirtualFile> listFiles(@NotNull String remotePath) {
+    VirtualFile root = LocalFileSystem.getInstance().findFileByPath(remotePath);
+    return root == null ? Collections.emptyList() : Collections.unmodifiableList(Arrays.asList(root.getChildren()));
   }
 
   @SuppressWarnings("RedundantThrows")

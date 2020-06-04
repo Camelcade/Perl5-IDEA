@@ -19,6 +19,8 @@ package com.perl5.lang.perl.idea.sdk.host;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.io.FileUtil;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.util.PerlPluginUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
@@ -29,6 +31,9 @@ import org.jetbrains.annotations.Nullable;
 import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public abstract class PerlHostFileTransfer<HostData extends PerlHostData<?, ?>> implements Closeable {
   private static final Logger LOG = Logger.getInstance(PerlHostFileTransfer.class);
@@ -79,6 +84,46 @@ public abstract class PerlHostFileTransfer<HostData extends PerlHostData<?, ?>> 
   }
 
   /**
+   * Creates a local stubs for the  {@code remoteDir}: empty files with same names
+   */
+  @Contract("null->null; !null->!null")
+  @Nullable
+  public final File stubFiles(@Nullable File remoteDir) throws IOException {
+    if (remoteDir == null) {
+      return null;
+    }
+    return new File(stubFiles(FileUtil.toSystemIndependentName(remoteDir.getPath())));
+  }
+
+  /**
+   * @see #stubFiles(File)
+   */
+  @Contract("null->null; !null->!null")
+  @Nullable
+  private String stubFiles(@Nullable String remoteDir) throws IOException {
+    if (remoteDir == null) {
+      return null;
+    }
+    if (ApplicationManager.getApplication().isDispatchThread()) {
+      throw new RuntimeException("Should not be invoked from EDT");
+    }
+    String localDir = myHostData.getLocalPath(remoteDir);
+    if (localDir == null) {
+      throw new RuntimeException("Unable to compute local path for " + remoteDir);
+    }
+    PerlRunUtil.setProgressText(PerlBundle.message("perl.host.progress.stubbing", remoteDir));
+    try {
+      LOG.info("Stubbing " + myHostData + ": " + remoteDir + " => " + localDir);
+
+      doStubFiles(remoteDir, localDir);
+    }
+    catch (IOException e) {
+      throw new IOException(PerlBundle.message("perl.sync.error.stubbing", remoteDir, localDir, myHostData.getShortName()), e);
+    }
+    return localDir;
+  }
+
+  /**
    * Synchronizes local helpers from {@link PerlPluginUtil#getPluginHelpersRoot() helpers root} with remote machine
    */
   public final void syncHelpers() throws IOException {
@@ -90,12 +135,51 @@ public abstract class PerlHostFileTransfer<HostData extends PerlHostData<?, ?>> 
   }
 
   /**
+   * synchronizes {@code remoteDir} with local cache
+   *
+   * @implNote always invoked on pooled thread
+   */
+  protected void doStubFiles(@NotNull String remoteDir, String localDir) throws IOException {
+    File localDirFile = new File(localDir);
+    FileUtil.createDirectory(localDirFile);
+    Set<String> localFileNames = new HashSet<>();
+    for (File localFile : localDirFile.listFiles()) {
+      if (localFile.length() == 0 || !localFile.delete()) {
+        localFileNames.add(localFile.getName());
+      }
+    }
+    Set<String> remoteFileNames = ContainerUtil.map2Set(listFiles(remoteDir), VirtualFile::getName);
+
+    for (String fileName : ContainerUtil.subtract(localFileNames, remoteFileNames)) {
+      String localFileToDelete = FileUtil.join(localDir, fileName);
+      if (!new File(localFileToDelete).delete()) {
+        LOG.warn("Failed to delete: " + localFileToDelete);
+      }
+    }
+
+
+    for (String fileName : ContainerUtil.subtract(remoteFileNames, localFileNames)) {
+      String localFileToDelete = FileUtil.join(localDir, fileName);
+      if (!new File(localFileToDelete).createNewFile()) {
+        LOG.warn("Failed to create: " + localFileToDelete);
+      }
+    }
+  }
+
+  /**
+   * @return contents of {@code remotePath} on remote machine.
+   * @implNote we need this method to optimize working with docker and/or ssh. Using virtual file system may cause additional container
+   * start or additional connection created.
+   */
+  @NotNull
+  public abstract List<VirtualFile> listFiles(@NotNull String remotePath) throws IOException;
+
+  /**
    * synchronizes {@code remotePath} with local cache
    *
    * @implNote always invoked on pooled thread
    */
   protected abstract void doSyncPath(@NotNull String remotePath, String localPath) throws IOException;
-
 
   /**
    * Uploads local helpers to the remote machine

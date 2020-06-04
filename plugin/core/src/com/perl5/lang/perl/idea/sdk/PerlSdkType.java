@@ -95,17 +95,18 @@ public class PerlSdkType extends SdkType {
     List<Exception> exceptions = new ArrayList<>();
 
     try (PerlHostFileTransfer<?> fileTransfer = hostData.getFileTransfer()) {
-      Consumer<File> downloader = it -> syncAndCollectException(fileTransfer, it, pathsToRefresh, exceptions);
+      Consumer<File> downloader = it -> syncAndCollectException(fileTransfer, it, pathsToRefresh, exceptions, false);
+      Consumer<File> binStubber = it -> syncAndCollectException(fileTransfer, it, pathsToRefresh, exceptions, true);
       for (String hostPath : incPaths) {
         downloader.accept(new File(hostPath));
-        downloader.accept(PerlRunUtil.findLibsBin(new File(hostPath)));
+        binStubber.accept(PerlRunUtil.findLibsBin(new File(hostPath)));
       }
       // additional bin dirs from version manager
-      PerlVersionManagerData.notNullFrom(sdk).getBinDirsPath().forEach(downloader);
+      PerlVersionManagerData.notNullFrom(sdk).getBinDirsPath().forEach(binStubber);
 
       // sdk home path
       File interpreterPath = new File(Objects.requireNonNull(PerlProjectManager.getInterpreterPath(sdk)));
-      downloader.accept(interpreterPath.getParentFile());
+      binStubber.accept(interpreterPath.getParentFile());
 
       List<VirtualFile> filesToRefresh = pathsToRefresh.stream()
         .map(it -> VfsUtil.findFileByIoFile(new File(it), true))
@@ -166,16 +167,24 @@ public class PerlSdkType extends SdkType {
   /**
    * Copying {@code fileToCopy} using the {@code fileTransfer} and collecting local path of copied file to the {@code pathsToRefresh}. In
    * case exception been thrown by the {@code fileTransfer}, it's collected to the {@code exceptionsThrown}
+   *
+   * @param if set, only empty stubs with same names going to be created, instead of actual copying the file.
    */
   private static void syncAndCollectException(@NotNull PerlHostFileTransfer<?> fileTransfer,
                                               @Nullable File fileToCopy,
                                               @NotNull List<String> pathsToRefresh,
-                                              @NotNull List<Exception> exceptionsThrown) {
+                                              @NotNull List<Exception> exceptionsThrown,
+                                              boolean stubOnly) {
     if (fileToCopy == null) {
       return;
     }
     try {
-      pathsToRefresh.add(fileTransfer.syncFile(fileToCopy).getPath());
+      if (stubOnly) {
+        pathsToRefresh.add(fileTransfer.stubFiles(fileToCopy).getPath());
+      }
+      else {
+        pathsToRefresh.add(fileTransfer.syncFile(fileToCopy).getPath());
+      }
     }
     catch (IOException e) {
       exceptionsThrown.add(e);

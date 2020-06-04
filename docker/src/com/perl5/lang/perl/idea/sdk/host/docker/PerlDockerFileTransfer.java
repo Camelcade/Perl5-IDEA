@@ -18,11 +18,14 @@ package com.perl5.lang.perl.idea.sdk.host.docker;
 
 import com.intellij.execution.ExecutionException;
 import com.intellij.openapi.util.AtomicNullableLazyValue;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostFileTransfer;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 class PerlDockerFileTransfer extends PerlHostFileTransfer<PerlDockerData> {
   @NotNull
@@ -50,19 +53,15 @@ class PerlDockerFileTransfer extends PerlHostFileTransfer<PerlDockerData> {
   }
 
   @NotNull
-  private PerlDockerAdapter getAdapter() {
+  PerlDockerAdapter getAdapter() {
     return myAdapter;
   }
 
   @Override
   protected void doSyncPath(@NotNull String remotePath, String localPath) throws IOException {
     assertNotClosed();
-    String containerName = getContainerName();
-    if (containerName == null) {
-      throw new IOException("Container could not be created.", myCreationError);
-    }
     try {
-      myAdapter.copyRemote(containerName, remotePath, localPath);
+      myAdapter.copyRemote(getContainerName(), remotePath, localPath);
     }
     catch (ExecutionException e) {
       throw new IOException(e);
@@ -80,9 +79,13 @@ class PerlDockerFileTransfer extends PerlHostFileTransfer<PerlDockerData> {
     assertNotClosed();
   }
 
-  @Nullable
-  private String getContainerName() {
-    return myContainerNameProvider.getValue();
+  @NotNull
+  String getContainerName() throws IOException {
+    String containerName = myContainerNameProvider.getValue();
+    if (containerName != null) {
+      return containerName;
+    }
+    throw new IOException("Container could not be created for " + myHostData + ".", myCreationError);
   }
 
   @Override
@@ -91,20 +94,23 @@ class PerlDockerFileTransfer extends PerlHostFileTransfer<PerlDockerData> {
       return;
     }
     if (closedThrowable != null) {
-      throw new IOException("This transfer is already closed from:", closedThrowable);
+      throw new IOException("This transfer is already closed.", closedThrowable);
     }
     closedThrowable = new Throwable();
 
     String containerName = getContainerName();
-    if (containerName == null) {
-      throw new IOException("Transfer is marked as opened, but there is no container name for " + myHostData);
-    }
     try {
       myAdapter.killContainer(containerName);
     }
     catch (ExecutionException e) {
       throw new IOException("Error killing copy container: " + containerName, e);
     }
+  }
+
+  @Override
+  public @NotNull List<VirtualFile> listFiles(@NotNull String remotePath) throws IOException {
+    VirtualFile root = new PerlDockerFileSystem(this).refreshAndFindFileByPath(remotePath);
+    return root == null ? Collections.emptyList() : Collections.unmodifiableList(Arrays.asList(root.getChildren()));
   }
 }
 

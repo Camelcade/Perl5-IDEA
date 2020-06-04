@@ -16,9 +16,7 @@
 
 package com.perl5.lang.perl.idea.sdk.host.docker;
 
-import com.intellij.execution.ExecutionException;
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.util.AtomicNullableLazyValue;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.containers.ContainerUtil;
@@ -28,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
-import java.util.Collections;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -39,32 +37,15 @@ class PerlDockerFileSystem extends PerlPluggableVirtualFileSystem {
   private final Map<String, VirtualFile> myFiles = ContainerUtil.newConcurrentMap();
 
   @NotNull
-  private final PerlDockerAdapter myAdapter;
+  private final PerlDockerFileTransfer myTransfer;
 
-  private volatile boolean myContainerCreated = false;
 
-  @NotNull
-  private final AtomicNullableLazyValue<String> myContainerNameProvider = AtomicNullableLazyValue.createValue(() -> {
-    PerlDockerAdapter dockerAdapter = getAdapter();
-    String containerName;
-    try {
-      containerName = dockerAdapter.createRunningContainer("filesystem_" + dockerAdapter.getData().getSafeImageName());
-    }
-    catch (ExecutionException e) {
-      LOG.error("Error creating container from data: " + dockerAdapter.getData(), e);
-      return null;
-    }
-    myContainerCreated = true;
-    return containerName;
-  });
-
-  private PerlDockerFileSystem(@NotNull PerlDockerAdapter adapter) {
-    myAdapter = adapter;
+  private PerlDockerFileSystem(@NotNull PerlDockerData dockerData) {
+    myTransfer = new PerlDockerFileTransfer(dockerData);
   }
 
-  @NotNull
-  private PerlDockerAdapter getAdapter() {
-    return myAdapter;
+  PerlDockerFileSystem(@NotNull PerlDockerFileTransfer fileTransfer) {
+    myTransfer = fileTransfer;
   }
 
   @Nullable
@@ -75,19 +56,23 @@ class PerlDockerFileSystem extends PerlPluggableVirtualFileSystem {
         return new PerlDockerVirtualFile(PerlFileDescriptor.ROOT_DESCRIPTOR);
       }
       File pathFile = new File(it);
-      for (PerlFileDescriptor descriptor : listFiles(pathFile.getParent())) {
-        if (pathFile.getName().equals(descriptor.getName())) {
-          return new PerlDockerVirtualFile(descriptor);
+      try {
+        for (PerlFileDescriptor descriptor : listFiles(pathFile.getParent())) {
+          if (pathFile.getName().equals(descriptor.getName())) {
+            return new PerlDockerVirtualFile(descriptor);
+          }
         }
+      }
+      catch (IOException e) {
+        LOG.warn("Error listing files for " + path, e);
       }
       return null;
     });
   }
 
   @NotNull
-  private List<PerlFileDescriptor> listFiles(@NotNull String path) {
-    String containerName = myContainerNameProvider.getValue();
-    return containerName == null ? Collections.emptyList() : myAdapter.listFiles(containerName, FileUtil.toSystemIndependentName(path));
+  private List<PerlFileDescriptor> listFiles(@NotNull String path) throws IOException {
+    return myTransfer.getAdapter().listFiles(myTransfer.getContainerName(), FileUtil.toSystemIndependentName(path));
   }
 
   @Nullable
@@ -98,22 +83,19 @@ class PerlDockerFileSystem extends PerlPluggableVirtualFileSystem {
 
   @Override
   public synchronized void clean() {
-    if (!myContainerCreated) {
-      return;
-    }
-    myContainerCreated = false;
-    String containerName = myContainerNameProvider.getValue();
     try {
-      myAdapter.killContainer(containerName);
+      myTransfer.close();
     }
-    catch (ExecutionException e) {
-      LOG.warn("Error killing container: " + containerName, e);
+    catch (IOException e) {
+      LOG.warn("Error cleaning file system for " + myTransfer.getAdapter(), e);
     }
-    super.clean();
+    finally {
+      super.clean();
+    }
   }
 
-  static PerlDockerFileSystem create(@NotNull PerlDockerAdapter adapter) {
-    return new PerlDockerFileSystem(adapter);
+  static PerlDockerFileSystem create(@NotNull PerlDockerData dockerData) {
+    return new PerlDockerFileSystem(dockerData);
   }
 
   private class PerlDockerVirtualFile extends PerlPluggableVirtualFile {
@@ -166,9 +148,16 @@ class PerlDockerFileSystem extends PerlPluggableVirtualFileSystem {
         return myChildren = VirtualFile.EMPTY_ARRAY;
       }
 
-      List<VirtualFile> children = ContainerUtil.map(
-        listFiles(myDescriptor.getPath()),
-        it -> myFiles.computeIfAbsent(FileUtil.toSystemIndependentName(it.getPath()), it2 -> new PerlDockerVirtualFile(it)));
+      List<VirtualFile> children;
+      try {
+        children = ContainerUtil.map(
+          listFiles(myDescriptor.getPath()),
+          it -> myFiles.computeIfAbsent(FileUtil.toSystemIndependentName(it.getPath()), it2 -> new PerlDockerVirtualFile(it)));
+      }
+      catch (IOException e) {
+        LOG.warn("Error reading children for " + toString(), e);
+        return myChildren = VirtualFile.EMPTY_ARRAY;
+      }
 
       return myChildren = children.toArray(VirtualFile.EMPTY_ARRAY);
     }

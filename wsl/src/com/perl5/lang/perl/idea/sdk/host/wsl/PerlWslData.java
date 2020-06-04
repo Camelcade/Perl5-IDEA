@@ -38,6 +38,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
@@ -101,6 +102,16 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
   @Nullable
   WSLDistributionWithRoot getDistribution() {
     return ObjectUtils.doIfNotNull(WSLUtil.getDistributionById(getDistributionId()), WSLDistributionWithRoot::new);
+  }
+
+  @NotNull
+  WSLDistributionWithRoot getNotNullDistribution() throws IOException {
+    WSLDistributionWithRoot distribution =
+      ObjectUtils.doIfNotNull(WSLUtil.getDistributionById(getDistributionId()), WSLDistributionWithRoot::new);
+    if (distribution != null) {
+      return distribution;
+    }
+    throw new IOException("No distribution for " + myDistributionId);
   }
 
   @NotNull

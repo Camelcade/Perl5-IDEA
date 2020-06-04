@@ -32,6 +32,7 @@ import com.intellij.openapi.project.DumbAwareAction;
 import com.intellij.openapi.util.Key;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.ui.update.MergingUpdateQueue;
 import com.intellij.util.ui.update.Update;
@@ -40,6 +41,9 @@ import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 class PerlWslFileTransfer extends PerlHostFileTransfer<PerlWslData> {
   private static final Logger LOG = Logger.getInstance(PerlWslFileTransfer.class);
@@ -53,10 +57,7 @@ class PerlWslFileTransfer extends PerlHostFileTransfer<PerlWslData> {
 
   @Override
   protected void doSyncPath(@NotNull String remotePath, String localPath) throws IOException {
-    WSLDistributionWithRoot distribution = myHostData.getDistribution();
-    if (distribution == null) {
-      throw new IOException("No distribution available for " + myHostData.getDistributionId());
-    }
+    WSLDistributionWithRoot distribution = myHostData.getNotNullDistribution();
     remotePath = FileUtil.toSystemIndependentName(remotePath);
 
     try {
@@ -104,6 +105,13 @@ class PerlWslFileTransfer extends PerlHostFileTransfer<PerlWslData> {
     catch (ExecutionException e) {
       throw new IOException(e);
     }
+  }
+
+  @Override
+  public @NotNull List<VirtualFile> listFiles(@NotNull String remotePath) throws IOException {
+    PerlWslFileSystem wslFileSystem = PerlWslFileSystem.create(myHostData.getNotNullDistribution());
+    VirtualFile root = wslFileSystem.refreshAndFindFileByPath(remotePath);
+    return root == null ? Collections.emptyList() : Collections.unmodifiableList(Arrays.asList(root.getChildren()));
   }
 
   @Override
