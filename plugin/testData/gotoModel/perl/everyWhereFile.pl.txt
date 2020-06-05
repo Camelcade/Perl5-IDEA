@@ -46,9 +46,6 @@ PsiDirectory
 scripts
 PsiDirectory
 ----------
-src
-PsiDirectory
-----------
 test_script.pl
 test_script.pl in scripts; /perl5classic.png
 ----------

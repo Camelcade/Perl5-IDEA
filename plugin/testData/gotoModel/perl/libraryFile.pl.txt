@@ -34,8 +34,5 @@ MyTest::Something in MyTest; /perl5.png
 TagHelpers.pm
 Mojolicious::Plugin::TagHelpers in Mojolicious/Plugin; /perl5.png
 ----------
-src
-PsiDirectory
-----------
 testlib
 PsiDirectory
