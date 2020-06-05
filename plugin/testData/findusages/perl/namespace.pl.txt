@@ -1,17 +1,5 @@
 Target: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@My::Test at 0 in namespace.pl
 Total usages: 12
-	PerlNamespaceElementImpl(Perl5: __PACKAGE__) at 72 in namespace.pl, via: PerlNamespaceReference at (72,83); text in range: '__PACKAGE__' => 1 results:
-	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@My::Test at 0 in namespace.pl
-
-	PerlNamespaceElementImpl(Perl5: __PACKAGE__) at 101 in namespace.pl, via: PerlNamespaceReference at (101,112); text in range: '__PACKAGE__' => 1 results:
-	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@My::Test at 0 in namespace.pl
-
-	PerlNamespaceElementImpl(Perl5: __PACKAGE__) at 186 in namespace.pl, via: PerlNamespaceReference at (186,197); text in range: '__PACKAGE__' => 1 results:
-	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@My::Test at 0 in namespace.pl
-
-	PerlNamespaceElementImpl(Perl5: __PACKAGE__) at 216 in namespace.pl, via: PerlNamespaceReference at (216,227); text in range: '__PACKAGE__' => 1 results:
-	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@My::Test at 0 in namespace.pl
-
 	PerlNamespaceElementImpl(Perl5: package::name) at 23 in namespace.pl, via: PerlNamespaceReference at (23,31); text in range: 'My::Test' => 1 results:
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@My::Test at 0 in namespace.pl
 
@@ -36,3 +24,8 @@ Total usages: 12
 	PerlNamespaceElementImpl(Perl5: package::name) at 331 in namespace.pl, via: PerlNamespaceReference at (331,339); text in range: 'My::Test' => 1 results:
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@My::Test at 0 in namespace.pl
 
+	PerlNamespaceElementImpl(Perl5: __PACKAGE__) at 72 in namespace.pl, via: PerlNamespaceReference at (72,83); text in range: '__PACKAGE__' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@My::Test at 0 in namespace.pl
+
+	PerlNamespaceElementImpl(Perl5: __PACKAGE__) at 101 in namespace.pl, via: PerlNamespaceReference at (101,112); text in range: '__PACKAGE__' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@My::Test at 0 in namespace.pl
