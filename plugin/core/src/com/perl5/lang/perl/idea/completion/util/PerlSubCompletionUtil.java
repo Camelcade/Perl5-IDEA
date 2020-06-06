@@ -110,7 +110,7 @@ public class PerlSubCompletionUtil {
   }
 
   /**
-   * Probably duplicate of {@link PerlVariableCompletionUtil#createVariableLookupElement(com.perl5.lang.perl.psi.PerlGlobVariable)}
+   * Probably duplicate of {@link PerlVariableCompletionUtil#createVariableLookupElement(PerlGlobVariable, boolean)}
    */
   @NotNull
   public static LookupElementBuilder getGlobLookupElement(@NotNull PerlGlobVariable globVariable,

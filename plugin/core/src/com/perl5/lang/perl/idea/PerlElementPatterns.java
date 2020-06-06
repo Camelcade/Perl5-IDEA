@@ -91,6 +91,7 @@ public interface PerlElementPatterns extends PerlElementTypes {
     NAMESPACE_NAME_PATTERN.withParent(psiElement(PerlVariableDeclarationExpr.class));
 
   PsiElementPattern.Capture<PerlSubNameElement> SUB_NAME_PATTERN = psiElement(PerlSubNameElement.class);
+  PsiElementPattern.Capture<PsiElement> HANDLE_PATTERN = psiElement(PerlElementTypes.HANDLE);
 
   PsiElementPattern.Capture<PsiPerlMethod> METHOD_PATTERN = psiElement(PsiPerlMethod.class);
   PsiElementPattern.Capture<PsiElement> IN_OBJECT_CALL_PATTERN = psiElement().withParent(

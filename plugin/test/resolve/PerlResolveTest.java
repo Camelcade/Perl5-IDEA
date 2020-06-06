@@ -118,7 +118,7 @@ public class PerlResolveTest extends PerlLightTestCase {
 
   @Test
   public void testWildCardReturns() {
-    //doTest();
+    doTest();
   }
 
   @Test
@@ -149,7 +149,7 @@ public class PerlResolveTest extends PerlLightTestCase {
 
   @Test
   public void testMojoAttrSmartResolve() {
-    //  doTest();
+    doTest();
   }
 
   @Test

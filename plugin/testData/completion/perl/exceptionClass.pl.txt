@@ -1,3 +1,81 @@
+Lookups: $BASETIME, BASETIME; Text: $BASETIME; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $BASETIME
+Lookups: $CHILD_ERROR, CHILD_ERROR; Text: $CHILD_ERROR; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $CHILD_ERROR
+Lookups: $EFFECTIVE_GROUP_ID, EFFECTIVE_GROUP_ID; Text: $EFFECTIVE_GROUP_ID; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $EFFECTIVE_GROUP_ID
+Lookups: $EFFECTIVE_USER_ID, EFFECTIVE_USER_ID; Text: $EFFECTIVE_USER_ID; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $EFFECTIVE_USER_ID
+Lookups: $EGID, EGID; Text: $EGID; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $EGID
+Lookups: $ENV, ENV; Text: $ENV; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %ENV
+Lookups: $EUID, EUID; Text: $EUID; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $EUID
+Lookups: $EXTENDED_OS_ERROR, EXTENDED_OS_ERROR; Text: $EXTENDED_OS_ERROR; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $EXTENDED_OS_ERROR
+Lookups: $FORMAT_FORMFEED, FORMAT_FORMFEED; Text: $FORMAT_FORMFEED; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $FORMAT_FORMFEED
+Lookups: $FORMAT_PAGE_NUMBER, FORMAT_PAGE_NUMBER; Text: $FORMAT_PAGE_NUMBER; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $FORMAT_PAGE_NUMBER
+Lookups: $FORMAT_TOP_NAME, FORMAT_TOP_NAME; Text: $FORMAT_TOP_NAME; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $FORMAT_TOP_NAME
+Lookups: $INPLACE_EDIT, INPLACE_EDIT; Text: $INPLACE_EDIT; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $INPLACE_EDIT
+Lookups: $INPUT_LINE_NUMBER, INPUT_LINE_NUMBER; Text: $INPUT_LINE_NUMBER; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $INPUT_LINE_NUMBER
+Lookups: $INPUT_RECORD_SEPARATOR, INPUT_RECORD_SEPARATOR; Text: $INPUT_RECORD_SEPARATOR; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $INPUT_RECORD_SEPARATOR
+Lookups: $LAST_REGEXP_CODE_RESULT, LAST_REGEXP_CODE_RESULT; Text: $LAST_REGEXP_CODE_RESULT; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $LAST_REGEXP_CODE_RESULT
+Lookups: $LIST_SEPARATOR, LIST_SEPARATOR; Text: $LIST_SEPARATOR; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $LIST_SEPARATOR
+Lookups: $Log::Log4perl::Levels::ALL, Log::Log4perl::Levels::ALL; Text: $Log::Log4perl::Levels::ALL; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit variable: $Log::Log4perl::Levels::ALL@UNKNOWN_VALUE
+Lookups: $Log::Log4perl::Levels::DEBUG, Log::Log4perl::Levels::DEBUG; Text: $Log::Log4perl::Levels::DEBUG; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit variable: $Log::Log4perl::Levels::DEBUG@UNKNOWN_VALUE
+Lookups: $Log::Log4perl::Levels::ERROR, Log::Log4perl::Levels::ERROR; Text: $Log::Log4perl::Levels::ERROR; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit variable: $Log::Log4perl::Levels::ERROR@UNKNOWN_VALUE
+Lookups: $Log::Log4perl::Levels::OFF, Log::Log4perl::Levels::OFF; Text: $Log::Log4perl::Levels::OFF; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit variable: $Log::Log4perl::Levels::OFF@UNKNOWN_VALUE
+Lookups: $Log::Log4perl::Levels::TRACE, Log::Log4perl::Levels::TRACE; Text: $Log::Log4perl::Levels::TRACE; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit variable: $Log::Log4perl::Levels::TRACE@UNKNOWN_VALUE
+Lookups: $OLD_PERL_VERSION, OLD_PERL_VERSION; Text: $OLD_PERL_VERSION; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $OLD_PERL_VERSION
+Lookups: $OUTPUT_FIELD_SEPARATOR, OUTPUT_FIELD_SEPARATOR; Text: $OUTPUT_FIELD_SEPARATOR; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $OUTPUT_FIELD_SEPARATOR
+Lookups: $OUTPUT_RECORD_SEPARATOR, OUTPUT_RECORD_SEPARATOR; Text: $OUTPUT_RECORD_SEPARATOR; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $OUTPUT_RECORD_SEPARATOR
+Lookups: $PREMATCH, PREMATCH; Text: $PREMATCH; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $PREMATCH
+Lookups: $PROCESS_ID, PROCESS_ID; Text: $PROCESS_ID; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $PROCESS_ID
+Lookups: $PROGRAM_NAME, PROGRAM_NAME; Text: $PROGRAM_NAME; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $PROGRAM_NAME
+Lookups: $REAL_GROUP_ID, REAL_GROUP_ID; Text: $REAL_GROUP_ID; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $REAL_GROUP_ID
+Lookups: $REAL_USER_ID, REAL_USER_ID; Text: $REAL_USER_ID; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $REAL_USER_ID
+Lookups: $SUBSCRIPT_SEPARATOR, SUBSCRIPT_SEPARATOR; Text: $SUBSCRIPT_SEPARATOR; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $SUBSCRIPT_SEPARATOR
+Lookups: $SUBSEP, SUBSEP; Text: $SUBSEP; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $SUBSEP
+Lookups: $SYSTEM_FD_MAX, SYSTEM_FD_MAX; Text: $SYSTEM_FD_MAX; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $SYSTEM_FD_MAX
+Lookups: %ERRNO, ERRNO; Text: %ERRNO; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %ERRNO
+Lookups: %LAST_PAREN_MATCH, LAST_PAREN_MATCH; Text: %LAST_PAREN_MATCH; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %LAST_PAREN_MATCH
+Lookups: %OS_ERROR, OS_ERROR; Text: %OS_ERROR; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %OS_ERROR
+Lookups: @ERRNO, ERRNO; Text: @ERRNO; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %ERRNO
+Lookups: @LAST_PAREN_MATCH, LAST_PAREN_MATCH; Text: @LAST_PAREN_MATCH; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %LAST_PAREN_MATCH
+Lookups: @MyTest::Some::Package::EXPORT_OK, MyTest::Some::Package::EXPORT_OK; Text: @MyTest::Some::Package::EXPORT_OK; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 94 in Package.pm
+Lookups: @MyTest::Some::Package::EXPORT_OK, MyTest::Some::Package::EXPORT_OK; Text: @MyTest::Some::Package::EXPORT_OK; Tail: null; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 94 in Package.pm
 Lookups: BEGIN; Text: BEGIN; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
     PsiElement: Implicit sub: BEGIN()
 Lookups: CHECK; Text: CHECK; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
@@ -14,10 +92,26 @@ Lookups: ClassAccessor->; Text: ClassAccessor->; Tail: ...; Type: null; Icon: /p
     PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@ClassAccessor at 16 in ClassAccessor.pm
 Lookups: ClassAccessor::; Text: ClassAccessor::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
     PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@ClassAccessor at 16 in ClassAccessor.pm
+Lookups: DEBUGGING, $DEBUGGING; Text: $DEBUGGING; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $DEBUGGING
 Lookups: DESTROY; Text: DESTROY; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
     PsiElement: Implicit sub: DESTROY()
 Lookups: END; Text: END; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
     PsiElement: Implicit sub: END()
+Lookups: ENV, %ENV; Text: %ENV; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %ENV
+Lookups: ENV, @ENV; Text: @ENV; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %ENV
+Lookups: ERRNO, $ERRNO; Text: $ERRNO; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $ERRNO
+Lookups: ERRNO, $ERRNO; Text: $ERRNO; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %ERRNO
+Lookups: EVAL_ERROR, $EVAL_ERROR; Text: $EVAL_ERROR; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $EVAL_ERROR
+Lookups: EXCEPTIONS_BEING_CAUGHT, $EXCEPTIONS_BEING_CAUGHT; Text: $EXCEPTIONS_BEING_CAUGHT; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $EXCEPTIONS_BEING_CAUGHT
+Lookups: EXECUTABLE_NAME, $EXECUTABLE_NAME; Text: $EXECUTABLE_NAME; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $EXECUTABLE_NAME
 Lookups: Exception1->; Text: Exception1->; Tail: ...; Type: null; Icon: /exceptionClass.svg; Type Icon: null
     PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception1; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 29 in exceptionClass.pl
 Lookups: Exception1::; Text: Exception1::; Tail: ...; Type: null; Icon: /exceptionClass.svg; Type Icon: null
@@ -38,6 +132,26 @@ Lookups: Exception5->; Text: Exception5->; Tail: ...; Type: null; Icon: /excepti
     PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception5; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 104 in exceptionClass.pl
 Lookups: Exception5::; Text: Exception5::; Tail: ...; Type: null; Icon: /exceptionClass.svg; Type Icon: null
     PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception5; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 104 in exceptionClass.pl
+Lookups: FORMAT_LINES_LEFT, $FORMAT_LINES_LEFT; Text: $FORMAT_LINES_LEFT; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $FORMAT_LINES_LEFT
+Lookups: FORMAT_LINES_PER_PAGE, $FORMAT_LINES_PER_PAGE; Text: $FORMAT_LINES_PER_PAGE; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $FORMAT_LINES_PER_PAGE
+Lookups: FORMAT_LINE_BREAK_CHARACTERS, $FORMAT_LINE_BREAK_CHARACTERS; Text: $FORMAT_LINE_BREAK_CHARACTERS; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $FORMAT_LINE_BREAK_CHARACTERS
+Lookups: FORMAT_NAME, $FORMAT_NAME; Text: $FORMAT_NAME; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $FORMAT_NAME
+Lookups: LAST_MATCH_END, $LAST_MATCH_END; Text: $LAST_MATCH_END; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: @LAST_MATCH_END
+Lookups: LAST_MATCH_END, @LAST_MATCH_END; Text: @LAST_MATCH_END; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: @LAST_MATCH_END
+Lookups: LAST_MATCH_END, @LAST_MATCH_END; Text: @LAST_MATCH_END; Tail: null; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: @LAST_MATCH_END
+Lookups: LAST_PAREN_MATCH, $LAST_PAREN_MATCH; Text: $LAST_PAREN_MATCH; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $LAST_PAREN_MATCH
+Lookups: LAST_PAREN_MATCH, $LAST_PAREN_MATCH; Text: $LAST_PAREN_MATCH; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %LAST_PAREN_MATCH
+Lookups: LAST_SUBMATCH_RESULT, $LAST_SUBMATCH_RESULT; Text: $LAST_SUBMATCH_RESULT; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $LAST_SUBMATCH_RESULT
 Lookups: Library::Exception->; Text: Library::Exception->; Tail: ...; Type: null; Icon: /exceptionClass.svg; Type Icon: null
     PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Library::Exception; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 54 in Exceptions.pm
 Lookups: Library::Exception2->; Text: Library::Exception2->; Tail: ...; Type: null; Icon: /exceptionClass.svg; Type Icon: null
@@ -54,10 +168,18 @@ Lookups: LibraryException3::; Text: LibraryException3::; Tail: ...; Type: null; 
     PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@LibraryException3; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 131 in Exceptions.pm
 Lookups: LibraryException::; Text: LibraryException::; Tail: ...; Type: null; Icon: /exceptionClass.svg; Type Icon: null
     PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@LibraryException; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 80 in Exceptions.pm
+Lookups: Log::Log4perl::Levels::FATAL, $Log::Log4perl::Levels::FATAL; Text: $Log::Log4perl::Levels::FATAL; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit variable: $Log::Log4perl::Levels::FATAL@UNKNOWN_VALUE
+Lookups: Log::Log4perl::Levels::INFO, $Log::Log4perl::Levels::INFO; Text: $Log::Log4perl::Levels::INFO; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit variable: $Log::Log4perl::Levels::INFO@UNKNOWN_VALUE
+Lookups: Log::Log4perl::Levels::WARN, $Log::Log4perl::Levels::WARN; Text: $Log::Log4perl::Levels::WARN; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit variable: $Log::Log4perl::Levels::WARN@UNKNOWN_VALUE
 Lookups: Mojolicious::Controller->; Text: Mojolicious::Controller->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
     PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Mojolicious::Controller at 0 in Controller.pm
 Lookups: Mojolicious::Controller::; Text: Mojolicious::Controller::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
     PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Mojolicious::Controller at 0 in Controller.pm
+Lookups: Mojolicious::Controller::AUTOLOAD, $Mojolicious::Controller::AUTOLOAD; Text: $Mojolicious::Controller::AUTOLOAD; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 593 in Controller.pm
 Lookups: Mojolicious::Plugin::DefaultHelpers->; Text: Mojolicious::Plugin::DefaultHelpers->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
     PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Mojolicious::Plugin::DefaultHelpers at 0 in DefaultHelpers.pm
 Lookups: Mojolicious::Plugin::DefaultHelpers::; Text: Mojolicious::Plugin::DefaultHelpers::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
@@ -78,10 +200,30 @@ Lookups: MyTest::Some::Package->; Text: MyTest::Some::Package->; Tail: ...; Type
     PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MyTest::Some::Package at 0 in Package.pm
 Lookups: MyTest::Some::Package::; Text: MyTest::Some::Package::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
     PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MyTest::Some::Package at 0 in Package.pm
+Lookups: MyTest::Some::Package::EXPORT, $MyTest::Some::Package::EXPORT; Text: $MyTest::Some::Package::EXPORT; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 36 in Package.pm
+Lookups: MyTest::Some::Package::EXPORT, @MyTest::Some::Package::EXPORT; Text: @MyTest::Some::Package::EXPORT; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 36 in Package.pm
+Lookups: MyTest::Some::Package::EXPORT, @MyTest::Some::Package::EXPORT; Text: @MyTest::Some::Package::EXPORT; Tail: null; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 36 in Package.pm
+Lookups: MyTest::Some::Package::EXPORT_OK, $MyTest::Some::Package::EXPORT_OK; Text: $MyTest::Some::Package::EXPORT_OK; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 94 in Package.pm
 Lookups: MyTest::Something->; Text: MyTest::Something->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
     PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MyTest::Something at 0 in Something.pm
 Lookups: MyTest::Something::; Text: MyTest::Something::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
     PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MyTest::Something at 0 in Something.pm
+Lookups: OSNAME, $OSNAME; Text: $OSNAME; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $OSNAME
+Lookups: OS_ERROR, $OS_ERROR; Text: $OS_ERROR; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $OS_ERROR
+Lookups: OS_ERROR, $OS_ERROR; Text: $OS_ERROR; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %OS_ERROR
+Lookups: OS_ERROR, @OS_ERROR; Text: @OS_ERROR; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %OS_ERROR
+Lookups: PERLDB, $PERLDB; Text: $PERLDB; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $PERLDB
+Lookups: PERL_VERSION, $PERL_VERSION; Text: $PERL_VERSION; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $PERL_VERSION
 Lookups: UNITCHECK; Text: UNITCHECK; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
     PsiElement: Implicit sub: UNITCHECK()
 Lookups: UNIVERSAL->; Text: UNIVERSAL->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null

@@ -99,7 +99,8 @@ public interface PerlVariable extends PsiPerlExpr, PerlLexicalScopeMember, PerlV
    * Semantic of this method is unclear
    */
   @Nullable
-  static String adjustName(@Nullable String originalName, boolean forceShortMain) {
+  static String
+  adjustName(@Nullable String originalName, boolean forceShortMain) {
     if (originalName == null || !forceShortMain || !originalName.startsWith(PerlPackageUtil.MAIN_NAMESPACE_FULL)) {
       return originalName;
     }

@@ -263,7 +263,7 @@ public class PerlCompletionTest extends PerlLightTestCase {
 
   @Test
   public void testWildCardReturns() {
-    //doTest();
+    doTest();
   }
 
   @Test

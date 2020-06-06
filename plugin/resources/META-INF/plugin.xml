@@ -672,6 +672,10 @@
       <category>Perl</category>
       <descriptionDirectoryName>ForeachToForConverter</descriptionDirectoryName>
     </intentionAction>
+
+    <experimentalFeature percentOfUsers="100" id="perl5.completion.var.without.sigil">
+      <description>Enables completion of variables without a sigil</description>
+    </experimentalFeature>
   </extensions>
 
   <actions>
