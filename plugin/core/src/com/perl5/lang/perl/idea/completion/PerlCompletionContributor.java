@@ -17,10 +17,15 @@
 package com.perl5.lang.perl.idea.completion;
 
 import com.intellij.codeInsight.completion.CompletionContributor;
+import com.intellij.codeInsight.completion.CompletionInitializationContext;
 import com.intellij.codeInsight.completion.CompletionType;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.idea.completion.providers.*;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.lexer.PerlTokenSets;
+import org.jetbrains.annotations.NotNull;
 
 
 public class PerlCompletionContributor extends CompletionContributor implements PerlElementTypes, PerlElementPatterns {
@@ -101,5 +106,22 @@ public class PerlCompletionContributor extends CompletionContributor implements 
       UNKNOWN_ANNOTATION_PATTERN,
       new PerlAnnotationCompletionProvider()
     );
+  }
+
+  @Override
+  public void beforeCompletion(@NotNull CompletionInitializationContext context) {
+    adjustIdentifierEndOffset(context);
+    super.beforeCompletion(context);
+  }
+
+  private void adjustIdentifierEndOffset(@NotNull CompletionInitializationContext context) {
+    PsiElement elementAtCaret = context.getFile().findElementAt(context.getEditor().getCaretModel().getOffset());
+    if (PerlTokenSets.VARIABLE_NAMES.contains(PsiUtilCore.getElementType(elementAtCaret)) &&
+        elementAtCaret.getTextLength() == 1) {
+      char nameChar = elementAtCaret.getNode().getChars().charAt(0);
+      if (nameChar != '_' && nameChar != '^' && !Character.isLetterOrDigit(nameChar)) {
+        context.setReplacementOffset(elementAtCaret.getTextOffset());
+      }
+    }
   }
 }

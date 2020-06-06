@@ -30,8 +30,7 @@ import com.intellij.codeInsight.highlighting.HighlightManager;
 import com.intellij.codeInsight.highlighting.actions.HighlightUsagesAction;
 import com.intellij.codeInsight.hint.ShowParameterInfoHandler;
 import com.intellij.codeInsight.intention.IntentionAction;
-import com.intellij.codeInsight.lookup.LookupElement;
-import com.intellij.codeInsight.lookup.LookupElementPresentation;
+import com.intellij.codeInsight.lookup.*;
 import com.intellij.codeInsight.navigation.actions.GotoDeclarationAction;
 import com.intellij.codeInsight.template.impl.LiveTemplateCompletionContributor;
 import com.intellij.codeInsight.template.impl.LiveTemplateLookupElementImpl;
@@ -190,6 +189,7 @@ import com.perl5.lang.pod.PodLanguage;
 import gnu.trove.THashSet;
 import gnu.trove.TIntHashSet;
 import junit.framework.AssertionFailedError;
+import org.intellij.lang.annotations.MagicConstant;
 import org.intellij.plugins.intelliLang.inject.InjectLanguageAction;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -242,6 +242,10 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   private static final String SEPARATOR_NEW_LINE_AFTER = SEPARATOR + "\n";
   private static final String SEPARATOR_NEWLINES = SEPARATOR_NEW_LINE_BEFORE + "\n";
   private final Disposable myPerlLightTestCaseDisposable = Disposer.newDisposable();
+
+  private static final String COMPLETE_PREFIX = "<complete ";
+  private String myCompletionResultLookupString = null;
+  private int myCompletionResultEditorOffset = -1;
 
   @Rule
   public final TestRule myBaseRule = (base, description) ->
@@ -554,6 +558,60 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     assertNoErrorElements();
   }
 
+  @MagicConstant(valuesFromClass = Lookup.class)
+  protected char getCompletionCompleteChar() {
+    return Lookup.NORMAL_SELECT_CHAR;
+  }
+
+  protected int getCompletionInvocationCount() {
+    return 1;
+  }
+
+  @NotNull
+  protected CompletionType getCompletionType() {
+    return CompletionType.BASIC;
+  }
+
+  protected String processCompletionResultContent(@NotNull String content) {
+    myCompletionResultEditorOffset = StringUtil.indexOf(content, COMPLETE_PREFIX);
+    if (myCompletionResultEditorOffset < 0) {
+      fail("Please, add <complete lookup_string> to your test data");
+    }
+    int endOffset = StringUtil.indexOf(content, '>', myCompletionResultEditorOffset);
+    if (endOffset < 0) {
+      fail("Unclosed `complete` tag");
+    }
+    myCompletionResultLookupString = content.substring(myCompletionResultEditorOffset + COMPLETE_PREFIX.length(), endOffset);
+    return content.substring(0, myCompletionResultEditorOffset) + content.substring(endOffset + 1);
+  }
+
+  protected void doTestCompletionResult() {
+    initWithFileSmart();
+    assertNotNull("Please, add <complete lookup_string> to your test data", myCompletionResultLookupString);
+    getEditor().getCaretModel().moveToOffset(myCompletionResultEditorOffset);
+    doTestCompletionResult(myCompletionResultLookupString, getCompletionType(), getCompletionInvocationCount(),
+                           getCompletionCompleteChar());
+  }
+
+  protected void doTestCompletionResult(@NotNull String lookupString,
+                                        @NotNull CompletionType completionType,
+                                        int invocationCount,
+                                        @MagicConstant(valuesFromClass = Lookup.class) char completeChar) {
+    LookupElement[] lookupElements = myFixture.complete(completionType, invocationCount);
+    for (LookupElement lookupElement : lookupElements) {
+      if (lookupElement.getAllLookupStrings().contains(lookupString)) {
+        LookupEx activeLookup = LookupManager.getActiveLookup(getEditor());
+        assertNotNull(activeLookup);
+        activeLookup.setCurrentItem(lookupElement);
+        myFixture.finishLookup(completeChar);
+        UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithCaretsAndSelections());
+        return;
+      }
+    }
+    fail("Unable to find lookup string: " + lookupString + " in " + Arrays.asList(lookupElements));
+  }
+
+
   public final void doTestCompletion() {
     doTestCompletion("", null);
   }
@@ -586,7 +644,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
                                        @Nullable BiPredicate<? super LookupElement, ? super LookupElementPresentation> predicate) {
     CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
     addVirtualFileFilter();
-    myFixture.complete(CompletionType.BASIC, 1);
+    myFixture.complete(getCompletionType(), getCompletionInvocationCount());
     List<String> result = new ArrayList<>();
     LookupElement[] elements = myFixture.getLookupElements();
     removeVirtualFileFilter();
@@ -668,8 +726,14 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     ((PsiManagerEx)myFixture.getPsiManager()).setAssertOnFileLoadingFilter(VirtualFileFilter.NONE, getTestRootDisposable());
   }
 
+
   public String getTestResultsFilePath() {
-    return getTestResultsFilePath("");
+    return getTestResultsFilePath(getTestResultSuffix());
+  }
+
+  @NotNull
+  protected String getTestResultSuffix() {
+    return "";
   }
 
   protected String getResultsTestDataPath() {
@@ -1996,7 +2060,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   }
 
   protected void doTestCompletionQuickDoc(@NotNull String elementPattern) {
-    myFixture.complete(CompletionType.BASIC, 1);
+    myFixture.complete(getCompletionType(), getCompletionInvocationCount());
     LookupElement[] elements = myFixture.getLookupElements();
     assertNotNull("No lookup elements", elements);
     LookupElement targetElement = getMostRelevantLookupElement(elementPattern, elements);

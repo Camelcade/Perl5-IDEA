@@ -1,0 +1,3 @@
+my $test_scalar;
+
+$<complete test_scalar>_;

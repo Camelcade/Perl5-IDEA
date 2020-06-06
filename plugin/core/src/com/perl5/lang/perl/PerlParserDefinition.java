@@ -59,16 +59,9 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes 
 
   // fixme inline this
   public static final TokenSet LITERALS = PerlTokenSets.STRING_CONTENT_TOKENSET;
-  public static final TokenSet IDENTIFIERS = TokenSet.create(
-    SUB_NAME,
-    QUALIFYING_PACKAGE,
-    SCALAR_NAME,
-    ARRAY_NAME,
-    HASH_NAME,
-    GLOB_NAME,
-    PACKAGE,
-    IDENTIFIER
-  );
+  public static final TokenSet IDENTIFIERS = TokenSet.orSet(
+    PerlTokenSets.VARIABLE_NAMES,
+    TokenSet.create(SUB_NAME, QUALIFYING_PACKAGE, PACKAGE, IDENTIFIER));
 
   @NotNull
   @Override

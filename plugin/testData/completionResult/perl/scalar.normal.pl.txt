@@ -1,0 +1,3 @@
+my $test_scalar;
+
+$test_scalar<caret>;
