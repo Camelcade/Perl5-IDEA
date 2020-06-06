@@ -100,10 +100,9 @@
   </extensions>
 
   <actions>
-    <group>
+    <action id="Perl.MarkHTMLMasonRoot" class="com.perl5.lang.htmlmason.idea.configuration.HTMLMasonMarkSourceRootAction">
       <add-to-group group-id="MarkRootGroup"/>
-      <action id="Perl.MarkHTMLMasonRoot" class="com.perl5.lang.htmlmason.idea.configuration.HTMLMasonMarkSourceRootAction"/>
-    </group>
+    </action>
   </actions>
 
 </idea-plugin>

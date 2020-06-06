@@ -118,10 +118,9 @@
   </extensions>
 
   <actions>
-    <group>
+    <action id="Perl.MarkMason2Root" class="com.perl5.lang.mason2.idea.configuration.Mason2MarkSourceRootAction">
       <add-to-group group-id="MarkRootGroup"/>
-      <action id="Perl.MarkMason2Root" class="com.perl5.lang.mason2.idea.configuration.Mason2MarkSourceRootAction"/>
-    </group>
+    </action>
   </actions>
 
 </idea-plugin>

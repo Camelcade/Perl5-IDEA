@@ -108,10 +108,9 @@
       <action id="perl5.mojo.generate.plugin" class="com.perl5.lang.mojolicious.idea.actions.MojoGeneratePluginAction"/>
     </group>
 
-    <group>
+    <action id="perl5.mojo.mark.root" class="com.perl5.lang.mojolicious.idea.modules.MojoTemplateMarkSourceRootAction">
       <add-to-group group-id="MarkRootGroup"/>
-      <action id="perl5.mojo.mark.root" class="com.perl5.lang.mojolicious.idea.modules.MojoTemplateMarkSourceRootAction"/>
-    </group>
+    </action>
   </actions>
 
 </idea-plugin>
