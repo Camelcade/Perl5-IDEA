@@ -364,4 +364,12 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
     HASH_NAME,
     GLOB_NAME
   );
+
+  TokenSet VARIABLE_OPEN_BRACES = TokenSet.create(
+    LEFT_BRACE_SCALAR,
+    LEFT_BRACE_ARRAY,
+    LEFT_BRACE_HASH,
+    LEFT_BRACE_GLOB,
+    LEFT_BRACE_CODE
+  );
 }

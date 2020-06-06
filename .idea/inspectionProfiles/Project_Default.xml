@@ -12,13 +12,12 @@
       <option name="IGNORE_METHODS_OF_DEPRECATED" value="false" />
     </inspection_tool>
     <inspection_tool class="JavadocReference" enabled="false" level="ERROR" enabled_by_default="false" />
+    <inspection_tool class="MissingOverrideAnnotation" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoreObjectMethods" value="true" />
+      <option name="ignoreAnonymousClassMethods" value="false" />
+    </inspection_tool>
     <inspection_tool class="StatefulEp" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="SystemOutErr" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="TruthinessInspection" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="WeakerAccess" enabled="false" level="WARNING" enabled_by_default="false">
-      <option name="SUGGEST_PACKAGE_LOCAL_FOR_MEMBERS" value="true" />
-      <option name="SUGGEST_PACKAGE_LOCAL_FOR_TOP_CLASSES" value="true" />
-      <option name="SUGGEST_PRIVATE_FOR_INNERS" value="false" />
-    </inspection_tool>
   </profile>
 </component>

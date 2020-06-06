@@ -56,17 +56,21 @@ public class PerlVariableCompletionProvider extends CompletionProvider<Completio
       return;
     }
 
+    PerlVariableCompletionProcessor variableCompletionProcessor = new PerlVariableCompletionProcessorImpl(
+      resultSet, subName, fullQualified, false, false);
+
     if (!fullQualified) {
-      PerlVariableCompletionUtil.fillWithLexicalVariables(subName, resultSet);
-      PerlVariableCompletionUtil.fillWithBuiltInVariables(subName, resultSet);
-      fillWithImportedVariables(subName, resultSet);
+      PerlVariableCompletionUtil.fillWithLexicalVariables(variableCompletionProcessor);
+      PerlVariableCompletionUtil.fillWithBuiltInVariables(variableCompletionProcessor);
+      fillWithImportedVariables(variableCompletionProcessor);
     }
     else {
       if (StringUtil.isNotEmpty(namespaceName)) {
-        resultSet = resultSet.withPrefixMatcher(PerlPackageUtil.join(namespaceName, resultSet.getPrefixMatcher().getPrefix()));
+        variableCompletionProcessor =
+          variableCompletionProcessor.withPrefixMatcher(PerlPackageUtil.join(namespaceName, resultSet.getPrefixMatcher().getPrefix()));
       }
     }
 
-    PerlVariableCompletionUtil.fillWithFullQualifiedVariables(subName, resultSet);
+    PerlVariableCompletionUtil.fillWithFullQualifiedVariables(variableCompletionProcessor);
   }
 }

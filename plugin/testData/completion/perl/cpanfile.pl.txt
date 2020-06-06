@@ -1,25 +1,9 @@
-Lookups: $INPUT_RECORD_SEPARATOR, INPUT_RECORD_SEPARATOR; Text: $INPUT_RECORD_SEPARATOR; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
-    PsiElement: Built-in: $INPUT_RECORD_SEPARATOR
-Lookups: $LAST_REGEXP_CODE_RESULT, LAST_REGEXP_CODE_RESULT; Text: $LAST_REGEXP_CODE_RESULT; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
-    PsiElement: Built-in: $LAST_REGEXP_CODE_RESULT
-Lookups: $OUTPUT_RECORD_SEPARATOR, OUTPUT_RECORD_SEPARATOR; Text: $OUTPUT_RECORD_SEPARATOR; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
-    PsiElement: Built-in: $OUTPUT_RECORD_SEPARATOR
-Lookups: $PREMATCH, PREMATCH; Text: $PREMATCH; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
-    PsiElement: Built-in: $PREMATCH
-Lookups: $REAL_GROUP_ID, REAL_GROUP_ID; Text: $REAL_GROUP_ID; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
-    PsiElement: Built-in: $REAL_GROUP_ID
-Lookups: $REAL_USER_ID, REAL_USER_ID; Text: $REAL_USER_ID; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
-    PsiElement: Built-in: $REAL_USER_ID
 Lookups: ${^RE_DEBUG_FLAGS}, {^RE_DEBUG_FLAGS}; Text: ${^RE_DEBUG_FLAGS}; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
     PsiElement: Built-in: $^RE_DEBUG_FLAGS
 Lookups: ${^RE_TRIE_MAXBUF}, {^RE_TRIE_MAXBUF}; Text: ${^RE_TRIE_MAXBUF}; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
     PsiElement: Built-in: $^RE_TRIE_MAXBUF
-Lookups: %LAST_PAREN_MATCH, LAST_PAREN_MATCH; Text: %LAST_PAREN_MATCH; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
-    PsiElement: Built-in: %LAST_PAREN_MATCH
 Lookups: %{^CAPTURE}, {^CAPTURE}; Text: %{^CAPTURE}; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
     PsiElement: Built-in: %^CAPTURE
-Lookups: @LAST_PAREN_MATCH, LAST_PAREN_MATCH; Text: @LAST_PAREN_MATCH; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
-    PsiElement: Built-in: %LAST_PAREN_MATCH
 Lookups: CORE->; Text: CORE->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
     PsiElement: Implicit namespace: CORE
 Lookups: CORE::; Text: CORE::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
@@ -28,14 +12,6 @@ Lookups: CORE::GLOBAL->; Text: CORE::GLOBAL->; Tail: ...; Type: null; Icon: /pac
     PsiElement: Implicit namespace: CORE::GLOBAL
 Lookups: CORE::GLOBAL::; Text: CORE::GLOBAL::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
     PsiElement: Implicit namespace: CORE::GLOBAL
-Lookups: FORMAT_LINE_BREAK_CHARACTERS, $FORMAT_LINE_BREAK_CHARACTERS; Text: $FORMAT_LINE_BREAK_CHARACTERS; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
-    PsiElement: Built-in: $FORMAT_LINE_BREAK_CHARACTERS
-Lookups: LAST_PAREN_MATCH, $LAST_PAREN_MATCH; Text: $LAST_PAREN_MATCH; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
-    PsiElement: Built-in: $LAST_PAREN_MATCH
-Lookups: LAST_PAREN_MATCH, $LAST_PAREN_MATCH; Text: $LAST_PAREN_MATCH; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
-    PsiElement: Built-in: %LAST_PAREN_MATCH
-Lookups: LAST_SUBMATCH_RESULT, $LAST_SUBMATCH_RESULT; Text: $LAST_SUBMATCH_RESULT; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
-    PsiElement: Built-in: $LAST_SUBMATCH_RESULT
 Lookups: author_requires; Text: author_requires; Tail: (@args); Type: Module::CPANfile::Environment; Icon: /method_gutter_icon.png; Type Icon: null
     PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Module::CPANfile::Environment::author_requires($self, @args) at 3237 in Environment.pm
 Lookups: break; Text: break; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
