@@ -27,6 +27,7 @@ import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlCallValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.idea.completion.inserthandlers.SubSelectionHandler;
+import com.perl5.lang.perl.idea.completion.providers.processors.PerlVariableCompletionProcessor;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import gnu.trove.THashSet;
@@ -110,7 +111,7 @@ public class PerlSubCompletionUtil {
   }
 
   /**
-   * Probably duplicate of {@link PerlVariableCompletionUtil#createVariableLookupElement(PerlGlobVariable, boolean, com.perl5.lang.perl.idea.completion.providers.PerlVariableCompletionProcessor)}
+   * Probably duplicate of {@link PerlVariableCompletionUtil#createVariableLookupElement(PerlGlobVariable, boolean, PerlVariableCompletionProcessor)}
    */
   @NotNull
   public static LookupElementBuilder getGlobLookupElement(@NotNull PerlGlobVariable globVariable,

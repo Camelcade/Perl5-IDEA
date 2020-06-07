@@ -14,39 +14,15 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.completion.providers;
+package com.perl5.lang.perl.idea.completion.providers.processors;
 
-import com.intellij.codeInsight.completion.CompletionResultSet;
-import com.intellij.codeInsight.lookup.LookupElementBuilder;
-import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 
-public class PerlDelegatingVariableCompletionProcessor extends PerlVariableCompletionProcessor implements Cloneable {
-  @NotNull
-  private PerlVariableCompletionProcessor myDelegate;
+public class PerlDelegatingVariableCompletionProcessor extends PerlDelegatingCompletionProcessor<PerlVariableCompletionProcessor>
+  implements PerlVariableCompletionProcessor {
 
   public PerlDelegatingVariableCompletionProcessor(@NotNull PerlVariableCompletionProcessor delegate) {
-    myDelegate = delegate;
-  }
-
-  @Override
-  protected @NotNull CompletionResultSet getResultSet() {
-    return getDelegate().getResultSet();
-  }
-
-  @NotNull
-  protected PerlVariableCompletionProcessor getDelegate() {
-    return myDelegate;
-  }
-
-  @Override
-  public @NotNull PsiElement getVariableNameElement() {
-    return getDelegate().getVariableNameElement();
-  }
-
-  @Override
-  public @NotNull PsiElement getVariableElement() {
-    return getDelegate().getVariableElement();
+    super(delegate);
   }
 
   @Override
@@ -65,25 +41,15 @@ public class PerlDelegatingVariableCompletionProcessor extends PerlVariableCompl
   }
 
   @Override
-  protected void addElement(@NotNull LookupElementBuilder lookupElement) {
-    getDelegate().addElement(lookupElement);
-  }
-
-  @Override
   public boolean isForceShortMain() {
     return getDelegate().isForceShortMain();
-  }
-
-  @Override
-  public boolean result() {
-    return getDelegate().result();
   }
 
   @Override
   public @NotNull PerlVariableCompletionProcessor withPrefixMatcher(@NotNull String prefix) {
     try {
       PerlDelegatingVariableCompletionProcessor clone = (PerlDelegatingVariableCompletionProcessor)clone();
-      clone.myDelegate = myDelegate.withPrefixMatcher(prefix);
+      clone.setDelegate(getDelegate().withPrefixMatcher(prefix));
       return clone;
     }
     catch (CloneNotSupportedException e) {

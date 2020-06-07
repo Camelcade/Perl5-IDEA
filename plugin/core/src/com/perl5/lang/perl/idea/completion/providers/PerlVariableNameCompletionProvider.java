@@ -26,6 +26,8 @@ import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
+import com.perl5.lang.perl.idea.completion.providers.processors.PerlVariableCompletionProcessor;
+import com.perl5.lang.perl.idea.completion.providers.processors.PerlVariableCompletionProcessorImpl;
 import com.perl5.lang.perl.idea.completion.util.PerlVariableCompletionUtil;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
@@ -73,11 +75,12 @@ public class PerlVariableNameCompletionProvider extends CompletionProvider<Compl
     if (!isDeclaration) {
       PerlVariableCompletionUtil.fillWithFullQualifiedVariables(variableCompletionProcessor);
     }
+    variableCompletionProcessor.logStatus(PerlVariableNameCompletionProvider.class);
   }
 
   static void fillWithImportedVariables(@NotNull PerlVariableCompletionProcessor variableCompletionProcessor) {
     PerlNamespaceDefinitionElement namespaceContainer =
-      PerlPackageUtil.getNamespaceContainerForElement(variableCompletionProcessor.getVariableNameElement());
+      PerlPackageUtil.getNamespaceContainerForElement(variableCompletionProcessor.getLeafElement());
 
     if (namespaceContainer == null) {
       return;
@@ -91,7 +94,7 @@ public class PerlVariableNameCompletionProvider extends CompletionProvider<Compl
     }
 
     PerlNamespaceEntityProcessor<PerlExportDescriptor> processor = null;
-    PsiElement perlVariable = variableCompletionProcessor.getVariableElement();
+    PsiElement perlVariable = variableCompletionProcessor.getLeafParentElement();
 
     if (perlVariable instanceof PsiPerlScalarVariable) {
       processor = (namespaceName, entity) -> {

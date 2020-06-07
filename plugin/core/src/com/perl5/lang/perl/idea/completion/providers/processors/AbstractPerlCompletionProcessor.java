@@ -14,42 +14,24 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.completion.providers;
+package com.perl5.lang.perl.idea.completion.providers.processors;
 
-import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressManager;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class PerlVariableCompletionProcessor {
-  protected abstract @NotNull CompletionResultSet getResultSet();
-
-  public abstract @NotNull PsiElement getVariableNameElement();
-
-  public abstract @NotNull PsiElement getVariableElement();
-
-  public abstract boolean isFullQualified();
-
-  public abstract boolean hasBraces();
-
-  public abstract boolean isDeclaration();
-
-  public abstract boolean isForceShortMain();
-
-  public @NotNull Project getProject() {
-    return getVariableNameElement().getProject();
-  }
+public abstract class AbstractPerlCompletionProcessor implements PerlCompletionProcessor {
+  protected static final Logger LOG = Logger.getInstance(AbstractPerlCompletionProcessor.class);
 
   /**
    * @return true iff {@code suggestedName} matches current prefix matcher
    */
+  @Override
   @Contract("null->false")
-  public final boolean matches(@Nullable String suggestedName) {
+  public boolean matches(@Nullable String suggestedName) {
     ProgressManager.checkCanceled();
     return StringUtil.isNotEmpty(suggestedName) && getResultSet().getPrefixMatcher().prefixMatches(suggestedName);
   }
@@ -57,23 +39,11 @@ public abstract class PerlVariableCompletionProcessor {
   /**
    * @return true iff we should go on, false if we should stop
    */
-  /**
-   * @return true iff we should go on, false if we should stop
-   */
+  @Override
   public final boolean process(@Nullable LookupElementBuilder lookupElement) {
     if (lookupElement != null) {
       addElement(lookupElement);
     }
     return result();
   }
-
-  protected abstract void addElement(@NotNull LookupElementBuilder lookupElement);
-
-  /**
-   * @return true iff we should go on, false if we should stop
-   */
-  public abstract boolean result();
-
-  @Contract(pure = true)
-  public abstract @NotNull PerlVariableCompletionProcessor withPrefixMatcher(@NotNull String prefix);
 }

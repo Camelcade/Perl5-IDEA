@@ -27,9 +27,9 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.Processor;
 import com.perl5.lang.perl.idea.PerlCompletionWeighter;
 import com.perl5.lang.perl.idea.completion.PerlInsertHandlers;
-import com.perl5.lang.perl.idea.completion.providers.PerlDelegatingVariableCompletionProcessor;
-import com.perl5.lang.perl.idea.completion.providers.PerlVariableCompletionProcessor;
-import com.perl5.lang.perl.idea.completion.providers.PerlVariableCompletionProcessorImpl;
+import com.perl5.lang.perl.idea.completion.providers.processors.PerlDelegatingVariableCompletionProcessor;
+import com.perl5.lang.perl.idea.completion.providers.processors.PerlVariableCompletionProcessor;
+import com.perl5.lang.perl.idea.completion.providers.processors.PerlVariableCompletionProcessorImpl;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.ui.PerlIconProvider;
 import com.perl5.lang.perl.internals.PerlVersion;
@@ -128,7 +128,7 @@ public class PerlVariableCompletionUtil {
   }
 
   public static void fillWithUnresolvedVars(@NotNull PerlVariableCompletionProcessorImpl completionProcessor) {
-    PsiElement variableNameElement = completionProcessor.getVariableNameElement();
+    PsiElement variableNameElement = completionProcessor.getLeafElement();
     final PerlLexicalScope lexicalScope = PsiTreeUtil.getParentOfType(variableNameElement, PerlLexicalScope.class);
     PsiElement perlVariable = variableNameElement.getParent();
     final Set<String> collectedNames = new THashSet<>();
@@ -174,7 +174,7 @@ public class PerlVariableCompletionUtil {
   }
 
   public static void fillWithLexicalVariables(@NotNull PerlVariableCompletionProcessor variableCompletionProcessor) {
-    PsiElement perlVariable = variableCompletionProcessor.getVariableElement();
+    PsiElement perlVariable = variableCompletionProcessor.getLeafParentElement();
     Processor<PerlVariableDeclarationElement> lookupProcessor = createLexicalLookupProcessor(
       variableCompletionProcessor);
 
@@ -198,7 +198,7 @@ public class PerlVariableCompletionUtil {
 
       return true;
     };
-    PerlResolveUtil.treeWalkUp(variableCompletionProcessor.getVariableNameElement(), processor);
+    PerlResolveUtil.treeWalkUp(variableCompletionProcessor.getLeafElement(), processor);
   }
 
 
@@ -212,7 +212,7 @@ public class PerlVariableCompletionUtil {
     return createVariableLookupProcessor(
       new PerlDelegatingVariableCompletionProcessor(variableCompletionProcessor) {
         @Override
-        protected void addElement(@NotNull LookupElementBuilder lookupElement) {
+        public void addElement(@NotNull LookupElementBuilder lookupElement) {
           super.addElement(setLexical(lookupElement));
         }
       });
@@ -228,7 +228,7 @@ public class PerlVariableCompletionUtil {
     return createVariableLookupProcessor(
       new PerlDelegatingVariableCompletionProcessor(perlVariableCompletionProcessor) {
         @Override
-        protected void addElement(@NotNull LookupElementBuilder lookupElement) {
+        public void addElement(@NotNull LookupElementBuilder lookupElement) {
           super.addElement(lookupElement.withBoldness(true));
         }
       });
@@ -240,7 +240,7 @@ public class PerlVariableCompletionUtil {
   @Nullable
   private static Processor<PerlVariableDeclarationElement> createVariableLookupProcessor(
     @NotNull PerlVariableCompletionProcessor variableCompletionProcessor) {
-    @Nullable PsiElement perlVariable = variableCompletionProcessor.getVariableElement();
+    @Nullable PsiElement perlVariable = variableCompletionProcessor.getLeafParentElement();
     boolean addHashSlices = hasHashSlices(perlVariable);
     if (perlVariable instanceof PsiPerlMethod || perlVariable instanceof PsiPerlPerlHandleExpr) {
       return variable -> {
@@ -330,8 +330,8 @@ public class PerlVariableCompletionUtil {
   }
 
   public static void fillWithFullQualifiedVariables(@NotNull PerlVariableCompletionProcessor variableCompletionProcessor) {
-    PsiElement variableNameElement = variableCompletionProcessor.getVariableNameElement();
-    PsiElement perlVariable = variableCompletionProcessor.getVariableElement();
+    PsiElement variableNameElement = variableCompletionProcessor.getLeafElement();
+    PsiElement perlVariable = variableCompletionProcessor.getLeafParentElement();
     boolean forceShortMain = StringUtil.startsWith(variableNameElement.getNode().getChars(), PerlPackageUtil.NAMESPACE_SEPARATOR);
     Processor<PerlVariableDeclarationElement> lookupGenerator = createVariableLookupProcessor(
       new PerlDelegatingVariableCompletionProcessor(variableCompletionProcessor) {
