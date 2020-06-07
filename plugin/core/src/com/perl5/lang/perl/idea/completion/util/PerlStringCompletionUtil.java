@@ -31,6 +31,7 @@ import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageParentsProvide
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.idea.completion.PerlStringCompletionCache;
+import com.perl5.lang.perl.idea.completion.providers.processors.PerlCompletionProcessor;
 import com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
@@ -116,10 +117,6 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
   public static void fillWithExportableEntities(@NotNull PsiElement element, @NotNull final CompletionResultSet result) {
     final String contextPackageName = PerlPackageUtil.getContextNamespaceName(element);
 
-    if (contextPackageName == null) {
-      return;
-    }
-
     element.getContainingFile().accept(
       new PerlRecursiveVisitor() {
 
@@ -147,8 +144,9 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
     );
   }
 
-  public static void fillWithUseParameters(final @NotNull PsiElement stringContentElement, @NotNull final CompletionResultSet resultSet) {
-    @SuppressWarnings("unchecked")
+  public static void fillWithUseParameters(final @NotNull PsiElement stringContentElement,
+                                           @NotNull final CompletionResultSet resultSet,
+                                           @NotNull PerlCompletionProcessor completionProcessor) {
     PerlUseStatementElement useStatement =
       PsiTreeUtil.getParentOfType(stringContentElement, PerlUseStatementElement.class, true, PsiPerlStatement.class);
 
@@ -191,7 +189,7 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
         ((PerlPackageParentsProvider)packageProcessor).hasPackageFilesOptions()) {
       PerlPackageUtil.processPackageFilesForPsiElement(stringContentElement, (packageName, file) -> {
         if (!typedStringsSet.contains(packageName)) {
-          resultSet.addElement(PerlPackageCompletionUtil.getPackageLookupElement(file, packageName, null));
+          PerlPackageCompletionUtil.processPackageLookupElement(file, packageName, null, completionProcessor);
         }
         return true;
       });

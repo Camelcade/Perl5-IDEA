@@ -24,6 +24,7 @@ import com.intellij.psi.PsiLanguageInjectionHost;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
+import com.perl5.lang.perl.idea.completion.providers.processors.PerlSimpleCompletionProcessor;
 import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionUtil;
 import com.perl5.lang.perl.idea.completion.util.PerlStringCompletionUtil;
 import com.perl5.lang.perl.psi.PsiPerlAnnotationInject;
@@ -45,6 +46,8 @@ public class PerlStringContentCompletionProvider extends CompletionProvider<Comp
       return;
     }
 
+    PerlSimpleCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(result, element);
+
     if (EXPORT_ASSIGNED_STRING_CONTENT.accepts(element)) // exporter assignments
     {
       PerlStringCompletionUtil.fillWithExportableEntities(element, result);
@@ -61,7 +64,7 @@ public class PerlStringContentCompletionProvider extends CompletionProvider<Comp
     }
     else if (USE_PARAMETERS_PATTERN.accepts(element))    // use or no parameters
     {
-      PerlStringCompletionUtil.fillWithUseParameters(element, result);
+      PerlStringCompletionUtil.fillWithUseParameters(element, result, completionProcessor);
     }
     else if (parent != null && parent.getParent() instanceof PsiPerlAnnotationInject) // #@Inject some
     {
@@ -76,7 +79,8 @@ public class PerlStringContentCompletionProvider extends CompletionProvider<Comp
     else if (STRING_CONTENT_IN_LIST_OR_STRING_START.accepts(element))    // begin of string or qw element
     {
       PerlStringCompletionUtil.fillWithRefTypes(result);
-      PerlPackageCompletionUtil.fillWithAllNamespacesNames(element, result);
+      PerlPackageCompletionUtil.fillWithAllNamespacesNames(completionProcessor);
     }
+    completionProcessor.logStatus(getClass());
   }
 }

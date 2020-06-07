@@ -203,7 +203,10 @@ public class PodCompletionSectionsTest extends PodLightTestCase {
   public void testPerlandroid() {doTest();}
 
   @Test
-  public void testPerlapi() {doTest();}
+  public void testPerlapi() {
+    setCompletionLimit(2000);
+    doTest();
+  }
 
   @Test
   public void testPerlapio() {doTest();}
@@ -332,13 +335,19 @@ public class PodCompletionSectionsTest extends PodLightTestCase {
   public void testPerlfreebsd() {doTest();}
 
   @Test
-  public void testPerlfunc() {doTest();}
+  public void testPerlfunc() {
+    setCompletionLimit(2000);
+    doTest();
+  }
 
   @Test
   public void testPerlgit() {doTest();}
 
   @Test
-  public void testPerlglossary() {doTest();}
+  public void testPerlglossary() {
+    setCompletionLimit(2000);
+    doTest();
+  }
 
   @Test
   public void testPerlgpl() {doTest();}
@@ -557,7 +566,10 @@ public class PodCompletionSectionsTest extends PodLightTestCase {
   public void testPerltie() {doTest();}
 
   @Test
-  public void testPerltoc() {doTest();}
+  public void testPerltoc() {
+    setCompletionLimit(2000);
+    doTest();
+  }
 
   @Test
   public void testPerltodo() {doTest();}

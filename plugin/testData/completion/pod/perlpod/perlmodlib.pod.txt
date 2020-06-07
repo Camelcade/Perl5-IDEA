@@ -1,7 +1,3 @@
-Lookups: Africa; Text: Africa; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 44270 in perlmodlib.pod
-Lookups: Alabama; Text: Alabama; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 54876 in perlmodlib.pod
 Lookups: Amiga::ARexx; Text: Amiga::ARexx; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5259 in perlmodlib.pod
 Lookups: Amiga::Exec; Text: Amiga::Exec; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -22,18 +18,8 @@ Lookups: Archive::Tar::File; Text: Archive::Tar::File; Tail: null; Type: List It
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5808 in perlmodlib.pod
 Lookups: Archive::Tar; Text: Archive::Tar; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5746 in perlmodlib.pod
-Lookups: Argentina; Text: Argentina; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 58420 in perlmodlib.pod
-Lookups: Arizona; Text: Arizona; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 54927 in perlmodlib.pod
-Lookups: Asia; Text: Asia; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 44688 in perlmodlib.pod
 Lookups: Attribute::Handlers; Text: Attribute::Handlers; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5893 in perlmodlib.pod
-Lookups: Australia; Text: Australia; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 57586 in perlmodlib.pod
-Lookups: Austria; Text: Austria; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 47512 in perlmodlib.pod
 Lookups: AutoLoader; Text: AutoLoader; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5962 in perlmodlib.pod
 Lookups: AutoSplit; Text: AutoSplit; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -54,20 +40,8 @@ Lookups: B::Xref; Text: B::Xref; Tail: null; Type: List Item; Icon: /perl5langua
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6498 in perlmodlib.pod
 Lookups: B; Text: B; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6063 in perlmodlib.pod
-Lookups: Bangladesh; Text: Bangladesh; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 44710 in perlmodlib.pod
-Lookups: Belarus; Text: Belarus; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 47722 in perlmodlib.pod
-Lookups: Belgium; Text: Belgium; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 47880 in perlmodlib.pod
 Lookups: Benchmark; Text: Benchmark; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6566 in perlmodlib.pod
-Lookups: Bosnia and Herzegovina; Text: Bosnia and Herzegovina; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48057 in perlmodlib.pod
-Lookups: Brazil; Text: Brazil; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 58471 in perlmodlib.pod
-Lookups: Bulgaria; Text: Bulgaria; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48141 in perlmodlib.pod
 Lookups: CORE; Text: CORE; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6763 in perlmodlib.pod
 Lookups: CPAN::API::HOWTO; Text: CPAN::API::HOWTO; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -126,16 +100,8 @@ Lookups: CPAN::Version; Text: CPAN::Version; Tail: null; Type: List Item; Icon: 
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8740 in perlmodlib.pod
 Lookups: CPAN; Text: CPAN; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6811 in perlmodlib.pod
-Lookups: California; Text: California; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 55049 in perlmodlib.pod
-Lookups: Canada; Text: Canada; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 54407 in perlmodlib.pod
 Lookups: Carp; Text: Carp; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8805 in perlmodlib.pod
-Lookups: Chile; Text: Chile; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 58582 in perlmodlib.pod
-Lookups: China; Text: China; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 44798 in perlmodlib.pod
 Lookups: Class::Struct; Text: Class::Struct; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8855 in perlmodlib.pod
 Lookups: Compress::Raw::Bzip2; Text: Compress::Raw::Bzip2; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -148,14 +114,8 @@ Lookups: Config::Perl::V; Text: Config::Perl::V; Tail: null; Type: List Item; Ic
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9191 in perlmodlib.pod
 Lookups: Config; Text: Config; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9138 in perlmodlib.pod
-Lookups: Costa Rica; Text: Costa Rica; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 54716 in perlmodlib.pod
-Lookups: Croatia; Text: Croatia; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48292 in perlmodlib.pod
 Lookups: Cwd; Text: Cwd; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9259 in perlmodlib.pod
-Lookups: Czech Republic; Text: Czech Republic; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48373 in perlmodlib.pod
 Lookups: DB; Text: DB; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9313 in perlmodlib.pod
 Lookups: DBM_Filter::compress; Text: DBM_Filter::compress; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -174,8 +134,6 @@ Lookups: DB_File; Text: DB_File; Tail: null; Type: List Item; Icon: /perl5langua
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9658 in perlmodlib.pod
 Lookups: Data::Dumper; Text: Data::Dumper; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9714 in perlmodlib.pod
-Lookups: Denmark; Text: Denmark; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48610 in perlmodlib.pod
 Lookups: Devel::PPPort; Text: Devel::PPPort; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9808 in perlmodlib.pod
 Lookups: Devel::Peek; Text: Devel::Peek; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -254,8 +212,6 @@ Lookups: Env; Text: Env; Tail: null; Type: List Item; Icon: /perl5language.png; 
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11816 in perlmodlib.pod
 Lookups: Errno; Text: Errno; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11896 in perlmodlib.pod
-Lookups: Europe; Text: Europe; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 47488 in perlmodlib.pod
 Lookups: Exporter::Heavy; Text: Exporter::Heavy; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11995 in perlmodlib.pod
 Lookups: Exporter; Text: Exporter; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -420,34 +376,18 @@ Lookups: Filter::Util::Call; Text: Filter::Util::Call; Tail: null; Type: List It
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17173 in perlmodlib.pod
 Lookups: FindBin; Text: FindBin; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17234 in perlmodlib.pod
-Lookups: Finland; Text: Finland; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48715 in perlmodlib.pod
-Lookups: France; Text: France; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48777 in perlmodlib.pod
 Lookups: GDBM_File; Text: GDBM_File; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17291 in perlmodlib.pod
-Lookups: Germany; Text: Germany; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49222 in perlmodlib.pod
 Lookups: Getopt::Long; Text: Getopt::Long; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17343 in perlmodlib.pod
 Lookups: Getopt::Std; Text: Getopt::Std; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17408 in perlmodlib.pod
-Lookups: Greece; Text: Greece; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50565 in perlmodlib.pod
-Lookups: Guidelines for Converting Perl 4 Library Scripts into Modules; Text: Guidelines for Converting Perl 4 Library Scripts into Modules; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 74384 in perlmodlib.pod
-Lookups: Guidelines for Module Creation; Text: Guidelines for Module Creation; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 63197 in perlmodlib.pod
-Lookups: Guidelines for Reusing Application Code; Text: Guidelines for Reusing Application Code; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 75854 in perlmodlib.pod
 Lookups: HTTP::Tiny; Text: HTTP::Tiny; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17485 in perlmodlib.pod
 Lookups: Hash::Util::FieldHash; Text: Hash::Util::FieldHash; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17612 in perlmodlib.pod
 Lookups: Hash::Util; Text: Hash::Util; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17545 in perlmodlib.pod
-Lookups: Hungary; Text: Hungary; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50725 in perlmodlib.pod
 Lookups: I18N::Collate; Text: I18N::Collate; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17673 in perlmodlib.pod
 Lookups: I18N::LangTags::Detect; Text: I18N::LangTags::Detect; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -528,44 +468,16 @@ Lookups: IPC::SharedMem; Text: IPC::SharedMem; Tail: null; Type: List Item; Icon
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19973 in perlmodlib.pod
 Lookups: IPC::SysV; Text: IPC::SysV; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20032 in perlmodlib.pod
-Lookups: Idaho; Text: Idaho; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 55255 in perlmodlib.pod
-Lookups: Illinois; Text: Illinois; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 55354 in perlmodlib.pod
-Lookups: India; Text: India; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 45279 in perlmodlib.pod
-Lookups: Indiana; Text: Indiana; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 55478 in perlmodlib.pod
-Lookups: Indonesia; Text: Indonesia; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 45360 in perlmodlib.pod
 Lookups: Internals; Text: Internals; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20090 in perlmodlib.pod
-Lookups: Iran; Text: Iran; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 45551 in perlmodlib.pod
-Lookups: Ireland; Text: Ireland; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50770 in perlmodlib.pod
-Lookups: Israel; Text: Israel; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 45597 in perlmodlib.pod
-Lookups: Italy; Text: Italy; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50893 in perlmodlib.pod
 Lookups: JSON::PP::Boolean; Text: JSON::PP::Boolean; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20222 in perlmodlib.pod
 Lookups: JSON::PP; Text: JSON::PP; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20167 in perlmodlib.pod
-Lookups: Japan; Text: Japan; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 45652 in perlmodlib.pod
-Lookups: Kansas; Text: Kansas; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 55605 in perlmodlib.pod
-Lookups: Kazakhstan; Text: Kazakhstan; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46102 in perlmodlib.pod
-Lookups: Latvia; Text: Latvia; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51074 in perlmodlib.pod
 Lookups: List::Util::XS; Text: List::Util::XS; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20356 in perlmodlib.pod
 Lookups: List::Util; Text: List::Util; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20289 in perlmodlib.pod
-Lookups: Lithuania; Text: Lithuania; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51116 in perlmodlib.pod
 Lookups: Locale::Codes::Changes; Text: Locale::Codes::Changes; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20504 in perlmodlib.pod
 Lookups: Locale::Codes::Country; Text: Locale::Codes::Country; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -610,8 +522,6 @@ Lookups: MIME::Base64; Text: MIME::Base64; Tail: null; Type: List Item; Icon: /p
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21848 in perlmodlib.pod
 Lookups: MIME::QuotedPrint; Text: MIME::QuotedPrint; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21909 in perlmodlib.pod
-Lookups: Massachusetts; Text: Massachusetts; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 55659 in perlmodlib.pod
 Lookups: Math::BigFloat; Text: Math::BigFloat; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21985 in perlmodlib.pod
 Lookups: Math::BigInt::Calc; Text: Math::BigInt::Calc; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -646,10 +556,6 @@ Lookups: Memoize::Storable; Text: Memoize::Storable; Tail: null; Type: List Item
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23101 in perlmodlib.pod
 Lookups: Memoize; Text: Memoize; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22575 in perlmodlib.pod
-Lookups: Mexico; Text: Mexico; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 54768 in perlmodlib.pod
-Lookups: Michigan; Text: Michigan; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 55716 in perlmodlib.pod
 Lookups: Module::CoreList::Utils; Text: Module::CoreList::Utils; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23236 in perlmodlib.pod
 Lookups: Module::CoreList; Text: Module::CoreList; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -664,8 +570,6 @@ Lookups: Module::Metadata; Text: Module::Metadata; Tail: null; Type: List Item; 
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23519 in perlmodlib.pod
 Lookups: Modules: Creation, Use, and Abuse; Text: Modules: Creation, Use, and Abuse; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 62059 in perlmodlib.pod
-Lookups: Moldova; Text: Moldova; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51199 in perlmodlib.pod
 Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 200 in perlmodlib.pod
 Lookups: NDBM_File; Text: NDBM_File; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -706,42 +610,18 @@ Lookups: Net::protoent; Text: Net::protoent; Tail: null; Type: List Item; Icon: 
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24560 in perlmodlib.pod
 Lookups: Net::servent; Text: Net::servent; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24641 in perlmodlib.pod
-Lookups: Netherlands; Text: Netherlands; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51290 in perlmodlib.pod
-Lookups: New Caledonia; Text: New Caledonia; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 57960 in perlmodlib.pod
-Lookups: New Hampshire; Text: New Hampshire; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 55923 in perlmodlib.pod
-Lookups: New Jersey; Text: New Jersey; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 55981 in perlmodlib.pod
-Lookups: New York; Text: New York; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56164 in perlmodlib.pod
-Lookups: New Zealand; Text: New Zealand; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 58110 in perlmodlib.pod
-Lookups: North America; Text: North America; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 54376 in perlmodlib.pod
-Lookups: North Carolina; Text: North Carolina; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56610 in perlmodlib.pod
-Lookups: Norway; Text: Norway; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51738 in perlmodlib.pod
 Lookups: O; Text: O; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24720 in perlmodlib.pod
 Lookups: ODBM_File; Text: ODBM_File; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24774 in perlmodlib.pod
-Lookups: Oceania; Text: Oceania; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 57561 in perlmodlib.pod
 Lookups: Opcode; Text: Opcode; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24818 in perlmodlib.pod
-Lookups: Oregon; Text: Oregon; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56708 in perlmodlib.pod
 Lookups: POSIX; Text: POSIX; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24880 in perlmodlib.pod
 Lookups: Params::Check; Text: Params::Check; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24928 in perlmodlib.pod
 Lookups: Parse::CPAN::Meta; Text: Parse::CPAN::Meta; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24994 in perlmodlib.pod
-Lookups: Pennsylvania; Text: Pennsylvania; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56824 in perlmodlib.pod
 Lookups: Perl::OSType; Text: Perl::OSType; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25069 in perlmodlib.pod
 Lookups: PerlIO::encoding; Text: PerlIO::encoding; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -756,8 +636,6 @@ Lookups: PerlIO::via; Text: PerlIO::via; Tail: null; Type: List Item; Icon: /per
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25347 in perlmodlib.pod
 Lookups: PerlIO; Text: PerlIO; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25139 in perlmodlib.pod
-Lookups: Philippines; Text: Philippines; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46186 in perlmodlib.pod
 Lookups: Pod::Checker; Text: Pod::Checker; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25493 in perlmodlib.pod
 Lookups: Pod::Escapes; Text: Pod::Escapes; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -860,22 +738,8 @@ Lookups: Pod::Text; Text: Pod::Text; Tail: null; Type: List Item; Icon: /perl5la
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28519 in perlmodlib.pod
 Lookups: Pod::Usage; Text: Pod::Usage; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28722 in perlmodlib.pod
-Lookups: Poland; Text: Poland; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51879 in perlmodlib.pod
-Lookups: Portugal; Text: Portugal; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52149 in perlmodlib.pod
 Lookups: Pragmatic Modules; Text: Pragmatic Modules; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1185 in perlmodlib.pod
-Lookups: Qatar; Text: Qatar; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46328 in perlmodlib.pod
-Lookups: RSYNC Mirrors; Text: RSYNC Mirrors; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 58674 in perlmodlib.pod
-Lookups: Republic of Korea; Text: Republic of Korea; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46403 in perlmodlib.pod
-Lookups: Romania; Text: Romania; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52285 in perlmodlib.pod
-Lookups: Russian Federation; Text: Russian Federation; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52549 in perlmodlib.pod
 Lookups: SDBM_File; Text: SDBM_File; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28795 in perlmodlib.pod
 Lookups: Safe; Text: Safe; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -888,34 +752,14 @@ Lookups: SelectSaver; Text: SelectSaver; Tail: null; Type: List Item; Icon: /per
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29037 in perlmodlib.pod
 Lookups: SelfLoader; Text: SelfLoader; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29095 in perlmodlib.pod
-Lookups: Serbia; Text: Serbia; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52894 in perlmodlib.pod
-Lookups: Singapore; Text: Singapore; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46742 in perlmodlib.pod
-Lookups: Slovakia; Text: Slovakia; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52966 in perlmodlib.pod
-Lookups: Slovenia; Text: Slovenia; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53066 in perlmodlib.pod
 Lookups: Socket; Text: Socket; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6702 in perlmodlib.pod
-Lookups: South Africa; Text: South Africa; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 44294 in perlmodlib.pod
-Lookups: South America; Text: South America; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 58389 in perlmodlib.pod
-Lookups: South Carolina; Text: South Carolina; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56936 in perlmodlib.pod
-Lookups: Spain; Text: Spain; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53166 in perlmodlib.pod
 Lookups: Standard Modules; Text: Standard Modules; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4858 in perlmodlib.pod
 Lookups: Storable; Text: Storable; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29144 in perlmodlib.pod
 Lookups: Sub::Util; Text: Sub::Util; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29198 in perlmodlib.pod
-Lookups: Sweden; Text: Sweden; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53314 in perlmodlib.pod
-Lookups: Switzerland; Text: Switzerland; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53402 in perlmodlib.pod
 Lookups: Symbol; Text: Symbol; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29280 in perlmodlib.pod
 Lookups: Sys::Hostname; Text: Sys::Hostname; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -1012,8 +856,6 @@ Lookups: TAP::Parser; Text: TAP::Parser; Tail: null; Type: List Item; Icon: /per
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30474 in perlmodlib.pod
 Lookups: THE PERL MODULE LIBRARY; Text: THE PERL MODULE LIBRARY; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 283 in perlmodlib.pod
-Lookups: Taiwan; Text: Taiwan; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46847 in perlmodlib.pod
 Lookups: Term::ANSIColor; Text: Term::ANSIColor; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32599 in perlmodlib.pod
 Lookups: Term::Cap; Text: Term::Cap; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -1156,8 +998,6 @@ Lookups: Test::use::ok; Text: Test::use::ok; Tail: null; Type: List Item; Icon: 
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37021 in perlmodlib.pod
 Lookups: Test; Text: Test; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32834 in perlmodlib.pod
-Lookups: Texas; Text: Texas; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56993 in perlmodlib.pod
 Lookups: Text::Abbrev; Text: Text::Abbrev; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37077 in perlmodlib.pod
 Lookups: Text::Balanced; Text: Text::Balanced; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -1208,14 +1048,8 @@ Lookups: Time::localtime; Text: Time::localtime; Tail: null; Type: List Item; Ic
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38517 in perlmodlib.pod
 Lookups: Time::tm; Text: Time::tm; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38599 in perlmodlib.pod
-Lookups: Turkey; Text: Turkey; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 47203 in perlmodlib.pod
 Lookups: UNIVERSAL; Text: UNIVERSAL; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38673 in perlmodlib.pod
-Lookups: Uganda; Text: Uganda; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 44554 in perlmodlib.pod
-Lookups: Ukraine; Text: Ukraine; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53541 in perlmodlib.pod
 Lookups: Unicode::Collate::CJK::Big5; Text: Unicode::Collate::CJK::Big5; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38792 in perlmodlib.pod
 Lookups: Unicode::Collate::CJK::GB2312; Text: Unicode::Collate::CJK::GB2312; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -1238,44 +1072,28 @@ Lookups: Unicode::Normalize; Text: Unicode::Normalize; Tail: null; Type: List It
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39382 in perlmodlib.pod
 Lookups: Unicode::UCD; Text: Unicode::UCD; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39437 in perlmodlib.pod
-Lookups: United Kingdom; Text: United Kingdom; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53632 in perlmodlib.pod
-Lookups: United States; Text: United States; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 54846 in perlmodlib.pod
 Lookups: User::grent; Text: User::grent; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39485 in perlmodlib.pod
 Lookups: User::pwent; Text: User::pwent; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39561 in perlmodlib.pod
-Lookups: Utah; Text: Utah; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 57037 in perlmodlib.pod
 Lookups: VMS::DCLsym; Text: VMS::DCLsym; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39637 in perlmodlib.pod
 Lookups: VMS::Filespec; Text: VMS::Filespec; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39698 in perlmodlib.pod
 Lookups: VMS::Stdio; Text: VMS::Stdio; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39775 in perlmodlib.pod
-Lookups: Viet Nam; Text: Viet Nam; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 47356 in perlmodlib.pod
-Lookups: Virginia; Text: Virginia; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 57142 in perlmodlib.pod
-Lookups: Washington; Text: Washington; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 57378 in perlmodlib.pod
 Lookups: Win32; Text: Win32; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39836 in perlmodlib.pod
 Lookups: Win32API::File; Text: Win32API::File; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39889 in perlmodlib.pod
 Lookups: Win32CORE; Text: Win32CORE; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39971 in perlmodlib.pod
-Lookups: Wisconsin; Text: Wisconsin; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 57459 in perlmodlib.pod
 Lookups: XS::APItest; Text: XS::APItest; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 40015 in perlmodlib.pod
 Lookups: XS::Typemap; Text: XS::Typemap; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 40055 in perlmodlib.pod
 Lookups: XSLoader; Text: XSLoader; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 40128 in perlmodlib.pod
-Lookups: Zimbabwe; Text: Zimbabwe; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 44601 in perlmodlib.pod
 Lookups: arybase; Text: arybase; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2087 in perlmodlib.pod
 Lookups: attributes; Text: attributes; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null

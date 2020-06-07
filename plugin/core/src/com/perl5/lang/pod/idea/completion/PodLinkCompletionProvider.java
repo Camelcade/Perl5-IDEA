@@ -30,6 +30,8 @@ import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.usageView.UsageViewUtil;
 import com.intellij.util.ProcessingContext;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.idea.completion.providers.processors.PerlCompletionProcessor;
+import com.perl5.lang.perl.idea.completion.providers.processors.PerlSimpleCompletionProcessor;
 import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.pod.filetypes.PodFileType;
@@ -67,19 +69,21 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
       return;
     }
     IElementType parentType = PsiUtilCore.getElementType(linkPart);
+    PerlSimpleCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(result, element);
 
     if (parentType == LINK_TEXT && element.getPrevSibling() == null) {
-      addFilesCompletions(linkElement, result);
+      processFilesCompletions(linkElement, completionProcessor);
     }
     if (parentType == LINK_NAME) {
-      addFilesCompletions(linkElement, result);
+      processFilesCompletions(linkElement, completionProcessor);
     }
     if (parentType == LINK_SECTION) {
-      addSectionsCompletions(result, linkElement.getTargetFile());
+      addSectionsCompletions(linkElement.getTargetFile(), completionProcessor);
     }
   }
 
-  protected static void addFilesCompletions(@NotNull PodFormatterL link, @NotNull final CompletionResultSet result) {
+  protected boolean processFilesCompletions(@NotNull PodFormatterL link,
+                                            @NotNull PerlCompletionProcessor completionProcessor) {
     final Set<String> foundPods = new HashSet<>();
     PerlPackageUtil.processIncFilesForPsiElement(link, (file, classRoot) -> {
       String className = PodFileUtil.getPackageNameFromVirtualFile(file, classRoot);
@@ -89,22 +93,21 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
           isBuiltIn = true;
           className = className.substring(5);
         }
-        if (!foundPods.contains(className)) {
-          result.addElement(LookupElementBuilder.create(file, className).withIcon(PerlIcons.POD_FILE).withBoldness(isBuiltIn));
-          foundPods.add(className);
+        if (completionProcessor.matches(className) && foundPods.add(className)) {
+          if (!completionProcessor
+            .process(LookupElementBuilder.create(file, className).withIcon(PerlIcons.POD_FILE).withBoldness(isBuiltIn))) {
+            return false;
+          }
         }
       }
-      return true;
+      return completionProcessor.result();
     }, PodFileType.INSTANCE);
 
-    PerlPackageUtil.processPackageFilesForPsiElement(link, (packageName, file) -> {
-      if (StringUtil.isNotEmpty(packageName)) {
-        if (!foundPods.contains(packageName)) {
-          result.addElement(PerlPackageCompletionUtil.getPackageLookupElement(file, packageName, null));
-          foundPods.add(packageName);
-        }
+    return PerlPackageUtil.processPackageFilesForPsiElement(link, (packageName, file) -> {
+      if (StringUtil.isNotEmpty(packageName) && completionProcessor.matches(packageName) && foundPods.add(packageName)) {
+        return PerlPackageCompletionUtil.processPackageLookupElement(file, packageName, null, completionProcessor);
       }
-      return true;
+      return completionProcessor.result();
     });
   }
 
@@ -116,20 +119,28 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
     return StringUtil.replace(title, TO_ESCAPE, ESCAPE_TO);
   }
 
-  protected static void addSectionsCompletions(@NotNull final CompletionResultSet result, PsiFile targetFile) {
+  protected static void addSectionsCompletions(PsiFile targetFile,
+                                               @NotNull PerlCompletionProcessor completionProcessor) {
     if (targetFile != null) {
       Set<String> distinctString = new HashSet<>();
 
       targetFile.accept(new PodStubsAwareRecursiveVisitor() {
         @Override
+        public void visitElement(@NotNull PsiElement element) {
+          if (completionProcessor.result()) {
+            super.visitElement(element);
+          }
+        }
+
+        @Override
         public void visitTargetableSection(PodTitledSection o) {
           String title = cleanItemText(o.getTitleText());
-          if (title != null && distinctString.add(title)) {
-            result.addElement(LookupElementBuilder.create(o, escapeTitle(title))
-                                .withLookupString(title)
-                                .withPresentableText(title)
-                                .withIcon(PerlIcons.POD_FILE)
-                                .withTypeText(UsageViewUtil.getType(o)));
+          if (completionProcessor.matches(title) && distinctString.add(title)) {
+            completionProcessor.process(LookupElementBuilder.create(o, escapeTitle(title))
+                                          .withLookupString(title)
+                                          .withPresentableText(title)
+                                          .withIcon(PerlIcons.POD_FILE)
+                                          .withTypeText(UsageViewUtil.getType(o)));
           }
           super.visitTargetableSection(o);
         }
@@ -167,6 +178,12 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
           if (StringUtil.isEmpty(indexTitle) || !distinctString.add(indexTitle)) {
             return;
           }
+
+          String escapedIndexTitle = escapeTitle(indexTitle);
+          if (!completionProcessor.matches(indexTitle) && !completionProcessor.matches(escapedIndexTitle)) {
+            return;
+          }
+
           PsiElement indexTarget = ((PodFormatterX)o).getIndexTarget();
           String targetPresentableText;
           if (indexTarget instanceof PodFile) {
@@ -183,8 +200,8 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
           if (targetPresentableText != null) {
             tailText = "(" + targetPresentableText + ")";
           }
-          result.addElement(
-            LookupElementBuilder.create(o, escapeTitle(indexTitle))
+          completionProcessor.process(
+            LookupElementBuilder.create(o, escapedIndexTitle)
               .withLookupString(indexTitle)
               .withPresentableText(indexTitle)
               .withTailText(tailText)

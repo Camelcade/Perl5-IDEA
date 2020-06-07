@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.completion.providers.processors;
 
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.util.registry.Registry;
 import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
@@ -117,11 +118,11 @@ public abstract class PerlCompletionProcessorBase extends AbstractPerlCompletion
     }
 
     boolean result() {
-      return myProcessCounter < myLimit;
+      return myProcessCounter < myLimit / 2;
     }
 
     void logStatus(@NotNull Class<?> clazz) {
-      if (LOG.isDebugEnabled()) {
+      if (LOG.isDebugEnabled() || ApplicationManager.getApplication().isUnitTestMode()) {
         LOG.debug(clazz.getSimpleName() +
                   " checked for matching " + myMatchingCounter +
                   ", processed " + myProcessCounter +

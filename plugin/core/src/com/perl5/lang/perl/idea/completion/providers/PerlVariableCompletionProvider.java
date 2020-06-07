@@ -74,6 +74,6 @@ public class PerlVariableCompletionProvider extends CompletionProvider<Completio
     }
 
     PerlVariableCompletionUtil.fillWithFullQualifiedVariables(variableCompletionProcessor);
-    variableCompletionProcessor.logStatus(PerlVariableCompletionProvider.class);
+    variableCompletionProcessor.logStatus(getClass());
   }
 }

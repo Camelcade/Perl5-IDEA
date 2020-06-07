@@ -19,7 +19,9 @@ package com.perl5.lang.perl.idea.completion.providers.processors;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -31,6 +33,18 @@ public interface PerlCompletionProcessor {
 
   default @NotNull PsiElement getLeafParentElement() {
     return getLeafElement().getParent();
+  }
+
+  default @NotNull PsiFile getContainingFile() {
+    return getLeafElement().getContainingFile();
+  }
+
+  default @NotNull PsiFile getOriginalFile() {
+    return getContainingFile().getContainingFile();
+  }
+
+  default @NotNull VirtualFile getVirtualFile() {
+    return getOriginalFile().getVirtualFile();
   }
 
   default @NotNull Project getProject() {
@@ -47,6 +61,11 @@ public interface PerlCompletionProcessor {
    * @return true iff we should go on, false if we should stop
    */
   boolean process(@Nullable LookupElementBuilder lookupElement);
+
+  /**
+   * Should be used for a single custom-created elements. For mass update, please, check texts before creation a lookup
+   */
+  boolean processSingle(@NotNull LookupElementBuilder lookupElement);
 
   @Contract(pure = true)
   @NotNull PerlCompletionProcessor withPrefixMatcher(@NotNull String prefix);

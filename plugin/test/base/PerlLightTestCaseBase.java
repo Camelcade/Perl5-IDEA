@@ -107,6 +107,7 @@ import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.ui.InputValidator;
 import com.intellij.openapi.util.*;
 import com.intellij.openapi.util.io.FileUtil;
+import com.intellij.openapi.util.registry.Registry;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.CharsetToolkit;
 import com.intellij.openapi.vfs.LocalFileSystem;
@@ -2622,5 +2623,10 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
 
   protected void assumeNotWindows() {
     Assume.assumeFalse("Not running on windows", SystemInfo.isWindows);
+  }
+
+
+  protected void setCompletionLimit(int value) {
+    Registry.get("ide.completion.variant.limit").setValue(value, getTestRootDisposable());
   }
 }

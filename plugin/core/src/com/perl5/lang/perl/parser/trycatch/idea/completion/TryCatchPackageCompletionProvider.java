@@ -20,6 +20,7 @@ import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.util.ProcessingContext;
+import com.perl5.lang.perl.idea.completion.providers.processors.PerlSimpleCompletionProcessor;
 import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -29,6 +30,6 @@ public class TryCatchPackageCompletionProvider extends CompletionProvider<Comple
   protected void addCompletions(@NotNull CompletionParameters parameters,
                                 @NotNull ProcessingContext context,
                                 @NotNull CompletionResultSet result) {
-    PerlPackageCompletionUtil.fillWithAllNamespacesNames(parameters.getPosition(), result);
+    PerlPackageCompletionUtil.fillWithAllNamespacesNames(new PerlSimpleCompletionProcessor(result, parameters.getPosition()));
   }
 }

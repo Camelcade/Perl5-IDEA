@@ -24,6 +24,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.idea.completion.PerlInsertHandlers;
+import com.perl5.lang.perl.idea.completion.providers.processors.PerlSimpleCompletionProcessor;
 import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -35,32 +36,35 @@ public class PerlPackageCompletionProvider extends CompletionProvider<Completion
                                 @NotNull CompletionResultSet result) {
     PsiElement element = parameters.getPosition();
 
+    PerlSimpleCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(result, element);
+
     if (NAMESPACE_IN_DEFINITION_PATTERN.accepts(element)) // package Foo
     {
-      PerlPackageCompletionUtil.fillWithNamespaceNameSuggestions(element, result);
+      PerlPackageCompletionUtil.fillWithNamespaceNameSuggestions(completionProcessor);
     }
     else if (NAMESPACE_IN_VARIABLE_DECLARATION_PATTERN.accepts(element)) // my Foo::Bar
     {
-      PerlPackageCompletionUtil.fillWithAllNamespacesNames(element, result);
+      PerlPackageCompletionUtil.fillWithAllNamespacesNames(completionProcessor);
     }
     else if (NAMESPACE_IN_ANNOTATION_PATTERN.accepts(element)) // #@returns / #@type
     {
-      result.addElement(LookupElementBuilder.create("ArrayRef")
-                          .withInsertHandler(PerlInsertHandlers.ARRAY_ELEMENT_INSERT_HANDLER)
-                          .withTailText("[]"));
-      result.addElement(LookupElementBuilder.create("HashRef")
-                          .withInsertHandler(PerlInsertHandlers.ARRAY_ELEMENT_INSERT_HANDLER)
-                          .withTailText("[]"));
-      PerlPackageCompletionUtil.fillWithAllNamespacesNames(element, result);
+      completionProcessor.processSingle(LookupElementBuilder.create("ArrayRef")
+                                          .withInsertHandler(PerlInsertHandlers.ARRAY_ELEMENT_INSERT_HANDLER)
+                                          .withTailText("[]"));
+      completionProcessor.processSingle(LookupElementBuilder.create("HashRef")
+                                          .withInsertHandler(PerlInsertHandlers.ARRAY_ELEMENT_INSERT_HANDLER)
+                                          .withTailText("[]"));
+      PerlPackageCompletionUtil.fillWithAllNamespacesNames(completionProcessor);
     }
     else if (NAMESPACE_IN_USE_PATTERN.accepts(element)) // use/no/require
     {
-      PerlPackageCompletionUtil.fillWithVersionNumbers(element, result);
-      PerlPackageCompletionUtil.fillWithAllPackageFiles(element, result);
+      PerlPackageCompletionUtil.fillWithVersionNumbers(completionProcessor);
+      PerlPackageCompletionUtil.fillWithAllPackageFiles(completionProcessor);
     }
     else // fallback
     {
-      PerlPackageCompletionUtil.fillWithAllNamespacesNames(element, result);
+      PerlPackageCompletionUtil.fillWithAllNamespacesNames(completionProcessor);
     }
+    completionProcessor.logStatus(getClass());
   }
 }

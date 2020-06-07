@@ -21,6 +21,7 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.util.text.StringUtil;
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class AbstractPerlCompletionProcessor implements PerlCompletionProcessor {
@@ -43,6 +44,17 @@ public abstract class AbstractPerlCompletionProcessor implements PerlCompletionP
   public final boolean process(@Nullable LookupElementBuilder lookupElement) {
     if (lookupElement != null) {
       addElement(lookupElement);
+    }
+    return result();
+  }
+
+  @Override
+  public final boolean processSingle(@NotNull LookupElementBuilder lookupElement) {
+    for (String string : lookupElement.getAllLookupStrings()) {
+      if (matches(string)) {
+        process(lookupElement);
+        break;
+      }
     }
     return result();
   }

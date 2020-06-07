@@ -522,8 +522,9 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
     }
   }
 
-  public static void processPackageFilesForPsiElement(@NotNull PsiElement element, @NotNull PairProcessor<String, VirtualFile> processor) {
-    processIncFilesForPsiElement(
+  public static boolean processPackageFilesForPsiElement(@NotNull PsiElement element,
+                                                         @NotNull PairProcessor<String, VirtualFile> processor) {
+    return processIncFilesForPsiElement(
       element,
       (file, classRoot) -> {
         String relativePath = VfsUtil.getRelativePath(file, classRoot);
@@ -531,7 +532,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
         return processor.process(packageName, file);
       },
       PerlFileTypePackage.INSTANCE)
-    ;
+      ;
   }
 
   @SuppressWarnings("UnusedReturnValue")

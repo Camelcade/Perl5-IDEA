@@ -20,12 +20,11 @@ import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.completion.PlainPrefixMatcher;
-import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
-import com.perl5.lang.perl.idea.PerlCompletionWeighter;
+import com.perl5.lang.perl.idea.completion.providers.processors.PerlSimpleCompletionProcessor;
 import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionUtil;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -50,16 +49,16 @@ public class PerlPackageSubCompletionProvider extends CompletionProvider<Complet
       (explicitNamespace == null ? currentPrefixMatcher : (explicitNamespace + PerlPackageUtil.NAMESPACE_SEPARATOR) + currentPrefixMatcher);
     result = result.withPrefixMatcher(new PlainPrefixMatcher(newPrefixMathcer));
 
+    PerlSimpleCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(result, parameters.getPosition());
     if (!((PsiPerlMethod)method).isObjectMethod()) {
-      PerlPackageCompletionUtil.fillWithAllNamespacesNamesWithAutocompletion(parameters.getPosition(), result);
+      PerlPackageCompletionUtil.processAllNamespacesNamesWithAutocompletion(completionProcessor);
     }
     else {
       if (!StringUtil.equals(PerlPackageUtil.SUPER_NAMESPACE_FULL, newPrefixMathcer)) {
-        LookupElementBuilder newElement =
-          PerlPackageCompletionUtil.getPackageLookupElementWithAutocomplete(null, PerlPackageUtil.SUPER_NAMESPACE_FULL, null);
-        newElement.putUserData(PerlCompletionWeighter.WEIGHT, -1);
-        result.addElement(newElement);
+        PerlPackageCompletionUtil.processPackageLookupElementWithAutocomplete(null, PerlPackageUtil.SUPER_NAMESPACE_FULL, null,
+                                                                              completionProcessor);
       }
     }
+    completionProcessor.logStatus(getClass());
   }
 }

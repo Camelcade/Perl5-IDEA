@@ -75,7 +75,7 @@ public class PerlVariableNameCompletionProvider extends CompletionProvider<Compl
     if (!isDeclaration) {
       PerlVariableCompletionUtil.fillWithFullQualifiedVariables(variableCompletionProcessor);
     }
-    variableCompletionProcessor.logStatus(PerlVariableNameCompletionProvider.class);
+    variableCompletionProcessor.logStatus(getClass());
   }
 
   static void fillWithImportedVariables(@NotNull PerlVariableCompletionProcessor variableCompletionProcessor) {
