@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.idea.completion.util;
 
-import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
@@ -27,6 +26,7 @@ import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlCallValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.idea.completion.inserthandlers.SubSelectionHandler;
+import com.perl5.lang.perl.idea.completion.providers.processors.PerlCompletionProcessor;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlVariableCompletionProcessor;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -41,24 +41,27 @@ public class PerlSubCompletionUtil {
   public static final SubSelectionHandler SUB_SELECTION_HANDLER = new SubSelectionHandler();
 
 
-  @NotNull
-  public static LookupElementBuilder getSubDefinitionLookupElement(@NotNull PerlSubDefinitionElement subDefinition) {
-    return getSubDefinitionLookupElement(subDefinition, null);
+  public static boolean processSubDefinitionLookupElement(@NotNull PerlSubDefinitionElement subDefinition,
+                                                          @NotNull PerlCompletionProcessor completionProcessor) {
+    return processSubDefinitionLookupElement(subDefinition, null, completionProcessor);
   }
 
-  @NotNull
-  public static LookupElementBuilder getSubDefinitionLookupElement(@NotNull PerlSubDefinitionElement subDefinition,
-                                                                   @Nullable PerlExportDescriptor exportDescriptor) {
-    return getSubDefinitionLookupElement(
+  public static boolean processSubDefinitionLookupElement(@NotNull PerlSubDefinitionElement subDefinition,
+                                                          @Nullable PerlExportDescriptor exportDescriptor,
+                                                          @NotNull PerlCompletionProcessor completionProcessor) {
+    return processSubDefinitionLookupElement(
       exportDescriptor == null ? subDefinition.getSubName() : exportDescriptor.getImportedName(),
-      subDefinition);
+      subDefinition, completionProcessor);
   }
 
-  @NotNull
-  public static LookupElementBuilder getSubDefinitionLookupElement(@NotNull String subName,
-                                                                   @NotNull PerlSubDefinitionElement subDefinition) {
+  public static boolean processSubDefinitionLookupElement(@NotNull String nameToUse,
+                                                          @NotNull PerlSubDefinitionElement subDefinition,
+                                                          @NotNull PerlCompletionProcessor completionProcessor) {
+    if (!completionProcessor.matches(nameToUse)) {
+      return completionProcessor.result();
+    }
     LookupElementBuilder newElement = LookupElementBuilder
-      .create(subDefinition, subName)
+      .create(subDefinition, nameToUse)
       .withIcon(subDefinition.getIcon(0))
       .withStrikeoutness(subDefinition.isDeprecated())
       .withTypeText(subDefinition.getNamespaceName(), true);
@@ -71,69 +74,88 @@ public class PerlSubCompletionUtil {
         .withTailText(argsString);
     }
 
-    return newElement;
+    return completionProcessor.process(newElement);
   }
 
-  public static LookupElementBuilder getImportedEntityLookupElement(@NotNull PsiElement element,
-                                                                    @NotNull PerlExportDescriptor exportDescriptor) {
+  public static boolean processImportedEntityLookupElement(@NotNull PsiElement element,
+                                                           @NotNull PerlExportDescriptor exportDescriptor,
+                                                           @NotNull PerlCompletionProcessor completionProcessor) {
     if (element instanceof PerlSubDefinitionElement) {
-      return getSubDefinitionLookupElement((PerlSubDefinitionElement)element, exportDescriptor);
+      return processSubDefinitionLookupElement((PerlSubDefinitionElement)element, exportDescriptor, completionProcessor);
     }
     else if (element instanceof PerlSubDeclarationElement) {
-      return getSubDeclarationLookupElement((PerlSubDeclarationElement)element, exportDescriptor);
+      return processSubDeclarationLookupElement((PerlSubDeclarationElement)element, exportDescriptor, completionProcessor);
     }
     else if (element instanceof PerlGlobVariable) {
-      return getGlobLookupElement((PerlGlobVariable)element, exportDescriptor);
+      return processGlobLookupElement((PerlGlobVariable)element, exportDescriptor, completionProcessor);
     }
     throw new RuntimeException("Don't know how to make lookup element for " + element.getClass());
   }
 
-  @NotNull
-  public static LookupElementBuilder getSubDeclarationLookupElement(@NotNull PerlSubDeclarationElement subDeclaration) {
-    return getSubDeclarationLookupElement(subDeclaration, null);
+  public static boolean processSubDeclarationLookupElement(@NotNull PerlSubDeclarationElement subDeclaration,
+                                                           @NotNull PerlCompletionProcessor completionProcessor) {
+    return processSubDeclarationLookupElement(subDeclaration, null, completionProcessor);
   }
 
-  @NotNull
-  public static LookupElementBuilder getSubDeclarationLookupElement(@NotNull PerlSubDeclarationElement subDeclaration,
-                                                                    @Nullable PerlExportDescriptor exportDescriptor) {
-    return LookupElementBuilder
-      .create(subDeclaration, subDeclaration.getSubName())
-      .withIcon(subDeclaration.getIcon(0))
-      .withStrikeoutness(subDeclaration.isDeprecated())
-      .withInsertHandler(SUB_SELECTION_HANDLER)
-      .withTypeText(subDeclaration.getNamespaceName(), true)
-      ;
+  public static boolean processSubDeclarationLookupElement(@NotNull PerlSubDeclarationElement subDeclaration,
+                                                           @Nullable PerlExportDescriptor exportDescriptor,
+                                                           @NotNull PerlCompletionProcessor completionProcessor) {
+
+    String lookupString = exportDescriptor == null ? subDeclaration.getSubName() : exportDescriptor.getImportedName();
+    if (!completionProcessor.matches(lookupString)) {
+      return completionProcessor.result();
+    }
+
+    return completionProcessor.process(LookupElementBuilder
+                                         .create(subDeclaration, lookupString)
+                                         .withIcon(subDeclaration.getIcon(0))
+                                         .withStrikeoutness(subDeclaration.isDeprecated())
+                                         .withInsertHandler(SUB_SELECTION_HANDLER)
+                                         .withTypeText(subDeclaration.getNamespaceName(), true)
+    );
   }
 
-  @NotNull
-  public static LookupElementBuilder getGlobLookupElement(@NotNull PerlGlobVariable globVariable) {
-    return getGlobLookupElement(globVariable, null);
+  public static boolean processGlobLookupElement(@NotNull PerlGlobVariable globVariable,
+                                                 @NotNull PerlCompletionProcessor completionProcessor) {
+    return processGlobLookupElement(globVariable, null, completionProcessor);
   }
 
   /**
    * Probably duplicate of {@link PerlVariableCompletionUtil#createVariableLookupElement(PerlGlobVariable, boolean, PerlVariableCompletionProcessor)}
    */
-  @NotNull
-  public static LookupElementBuilder getGlobLookupElement(@NotNull PerlGlobVariable globVariable,
-                                                          @Nullable PerlExportDescriptor exportDescriptor) {
+  public static boolean processGlobLookupElement(@NotNull PerlGlobVariable globVariable,
+                                                 @Nullable PerlExportDescriptor exportDescriptor,
+                                                 @NotNull PerlCompletionProcessor completionProcessor) {
     String lookupString = exportDescriptor == null ? globVariable.getName() : exportDescriptor.getImportedName();
-    return LookupElementBuilder
-      .create(globVariable, StringUtil.notNullize(lookupString))
-      .withIcon(globVariable.getIcon(0))
-      .withInsertHandler(SUB_SELECTION_HANDLER)
-      .withTypeText(globVariable.getNamespaceName(), true)
-      ;
+    if (!completionProcessor.matches(lookupString)) {
+      return completionProcessor.result();
+    }
+
+    return completionProcessor.process(LookupElementBuilder
+                                         .create(globVariable, StringUtil.notNullize(lookupString))
+                                         .withIcon(globVariable.getIcon(0))
+                                         .withInsertHandler(SUB_SELECTION_HANDLER)
+                                         .withTypeText(globVariable.getNamespaceName(), true)
+    );
   }
 
-  public static void fillWithUnresolvedSubs(@NotNull PerlSubElement subDefinition, @NotNull CompletionResultSet resultSet) {
+  public static boolean processUnresolvedSubsLookups(@NotNull PerlSubElement subDefinition,
+                                                     @NotNull PerlCompletionProcessor completionProcessor) {
     final String packageName = subDefinition.getNamespaceName();
     if (packageName == null) {
-      return;
+      return completionProcessor.result();
     }
 
     final Set<String> namesSet = new THashSet<>();
     PsiFile containingFile = subDefinition.getContainingFile();
     containingFile.accept(new PerlRecursiveVisitor() {
+      @Override
+      public void visitElement(@NotNull PsiElement element) {
+        if (completionProcessor.result()) {
+          super.visitElement(element);
+        }
+      }
+
       @Override
       protected boolean shouldVisitLightElements() {
         return true;
@@ -141,52 +163,60 @@ public class PerlSubCompletionUtil {
 
       @Override
       public void visitMethod(@NotNull PsiPerlMethod method) {
+        doVisitMethod(method);
+        super.visitMethod(method);
+      }
+
+      private void doVisitMethod(@NotNull PsiPerlMethod method) {
         PerlCallValue methodValue = PerlCallValue.from(method);
         if (methodValue == null) {
-          super.visitMethod(method);
           return;
         }
 
         PerlValue namespaceValue = methodValue.getNamespaceNameValue();
 
-        if (namespaceValue.canRepresentNamespace(packageName)) {
-          PerlSubNameElement subNameElement = method.getSubNameElement();
+        if (!namespaceValue.canRepresentNamespace(packageName)) {
+          return;
+        }
+        PerlSubNameElement subNameElement = method.getSubNameElement();
 
-          if (subNameElement != null && subNameElement.isValid()) {
+        if (subNameElement == null || !subNameElement.isValid()) {
+          return;
+        }
 
-            String subName = subNameElement.getName();
+        String subName = subNameElement.getName();
 
-            if (StringUtil.isNotEmpty(subName) && !namesSet.contains(subName)) {
-              PsiReference[] references = subNameElement.getReferences();
-              if (references.length == 0) {
-                super.visitMethod(method);
-                return;
-              }
+        if (StringUtil.isEmpty(subName) || namesSet.contains(subName) || !completionProcessor.matches(subName)) {
+          return;
+        }
+        PsiReference[] references = subNameElement.getReferences();
+        if (references.length == 0) {
+          return;
+        }
 
-              for (PsiReference reference : references) {
-                if (reference.resolve() != null) {
-                  super.visitMethod(method);
-                  return;
-                }
-              }
-              // unresolved
-              namesSet.add(subName);
-              resultSet.addElement(LookupElementBuilder.create(subName));
-            }
+        for (PsiReference reference : references) {
+          if (reference.resolve() != null) {
+            return;
           }
         }
-        super.visitMethod(method);
+        // unresolved
+        namesSet.add(subName);
+        completionProcessor.process(LookupElementBuilder.create(subName));
       }
     });
+    return completionProcessor.result();
   }
 
-  public static void fillWithNotOverridedSubs(@NotNull PerlSubElement subDefinition, @NotNull CompletionResultSet resultSet) {
+  public static void processWithNotOverriddenSubs(@NotNull PerlSubElement subDefinition,
+                                                  @NotNull PerlCompletionProcessor completionProcessor) {
     PerlPackageUtil.processNotOverridedMethods(
       PsiTreeUtil.getParentOfType(subDefinition, PerlNamespaceDefinitionElement.class),
-      subDefinitionBase ->
-      {
-        resultSet.addElement(LookupElementBuilder.create(subDefinitionBase, subDefinitionBase.getSubName()));
-        return true;
+      subDefinitionBase -> {
+        String lookupString = subDefinitionBase.getSubName();
+        if (completionProcessor.matches(lookupString)) {
+          return completionProcessor.process(LookupElementBuilder.create(subDefinitionBase, lookupString));
+        }
+        return completionProcessor.result();
       }
     );
   }

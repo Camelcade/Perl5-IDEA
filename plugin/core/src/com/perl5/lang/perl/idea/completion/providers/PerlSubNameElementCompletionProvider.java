@@ -21,20 +21,27 @@ import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
+import com.perl5.lang.perl.idea.completion.providers.processors.PerlCompletionProcessor;
+import com.perl5.lang.perl.idea.completion.providers.processors.PerlSimpleCompletionProcessor;
 import com.perl5.lang.perl.idea.completion.util.PerlSubCompletionUtil;
 import com.perl5.lang.perl.psi.PerlSubElement;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlSubNameElementCompletionProvider extends CompletionProvider<CompletionParameters> {
+  @Override
   public void addCompletions(@NotNull CompletionParameters parameters,
                              @NotNull ProcessingContext context,
                              @NotNull CompletionResultSet resultSet) {
     PsiElement element = parameters.getPosition();
 
-    if (element.getParent() instanceof PerlSubElement) {
-      PerlSubElement subDefinitionBase = (PerlSubElement)element.getParent();
-      PerlSubCompletionUtil.fillWithUnresolvedSubs(subDefinitionBase, resultSet);
-      PerlSubCompletionUtil.fillWithNotOverridedSubs(subDefinitionBase, resultSet);
+    if (!(element.getParent() instanceof PerlSubElement)) {
+      return;
     }
+    PerlCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(resultSet, element);
+
+    PerlSubElement subDefinitionBase = (PerlSubElement)element.getParent();
+    PerlSubCompletionUtil.processUnresolvedSubsLookups(subDefinitionBase, completionProcessor);
+    PerlSubCompletionUtil.processWithNotOverriddenSubs(subDefinitionBase, completionProcessor);
+    completionProcessor.logStatus(getClass());
   }
 }

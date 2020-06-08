@@ -27,6 +27,7 @@ import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlCallStaticValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlCallValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlNamespaceItemProcessor;
+import com.perl5.lang.perl.idea.completion.providers.processors.PerlSimpleCompletionProcessor;
 import com.perl5.lang.perl.idea.completion.util.PerlSubCompletionUtil;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
 import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
@@ -37,6 +38,7 @@ import org.jetbrains.annotations.NotNull;
 
 
 public class PerlSubCallCompletionProvider extends CompletionProvider<CompletionParameters> {
+  @Override
   public void addCompletions(@NotNull CompletionParameters parameters,
                              @NotNull ProcessingContext context,
                              @NotNull CompletionResultSet resultSet) {
@@ -49,6 +51,8 @@ public class PerlSubCallCompletionProvider extends CompletionProvider<Completion
       return;
     }
 
+    PerlSimpleCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(resultSet, position);
+
     boolean isStatic = perlValue instanceof PerlCallStaticValue;
 
     perlValue.processTargetNamespaceElements(
@@ -56,38 +60,38 @@ public class PerlSubCallCompletionProvider extends CompletionProvider<Completion
         @Override
         public boolean processItem(@NotNull PsiNamedElement element) {
           if (element instanceof PerlImplicitSubDefinition && ((PerlImplicitSubDefinition)element).isAnonymous()) {
-            return true;
+            return completionProcessor.result();
           }
           if (element instanceof PerlSubDefinitionElement && !((PerlSubDefinitionElement)element).isAnonymous() &&
               (isStatic && ((PerlSubDefinitionElement)element).isStatic() || ((PerlSubDefinitionElement)element).isMethod())) {
-            resultSet.addElement(PerlSubCompletionUtil.getSubDefinitionLookupElement((PerlSubDefinitionElement)element));
+            return PerlSubCompletionUtil.processSubDefinitionLookupElement((PerlSubDefinitionElement)element, completionProcessor);
           }
           if (element instanceof PerlSubDeclarationElement &&
               (isStatic && ((PerlSubDeclarationElement)element).isStatic() || ((PerlSubDeclarationElement)element).isMethod())) {
-            resultSet.addElement(PerlSubCompletionUtil.getSubDeclarationLookupElement((PerlSubDeclarationElement)element));
+            return PerlSubCompletionUtil.processSubDeclarationLookupElement((PerlSubDeclarationElement)element, completionProcessor);
           }
           if (element instanceof PerlGlobVariable && ((PerlGlobVariable)element).isLeftSideOfAssignment()) {
             if (StringUtil.isNotEmpty(element.getName())) {
-              resultSet.addElement(PerlSubCompletionUtil.getGlobLookupElement((PerlGlobVariable)element));
+              return PerlSubCompletionUtil.processGlobLookupElement((PerlGlobVariable)element, completionProcessor);
             }
           }
-          return true;
+          return completionProcessor.result();
         }
 
         @Override
         public boolean processImportedItem(@NotNull PsiNamedElement element,
                                            @NotNull PerlExportDescriptor exportDescriptor) {
-          resultSet.addElement(PerlSubCompletionUtil.getImportedEntityLookupElement(element, exportDescriptor));
-          return true;
+          return PerlSubCompletionUtil.processImportedEntityLookupElement(element, exportDescriptor, completionProcessor);
         }
 
         @Override
         public boolean processOrphanDescriptor(@NotNull PerlExportDescriptor exportDescriptor) {
           if (exportDescriptor.isSub()) {
-            resultSet.addElement(exportDescriptor.getLookupElement());
+            return exportDescriptor.processLookupElement(completionProcessor);
           }
-          return true;
+          return completionProcessor.result();
         }
       });
+    completionProcessor.logStatus(getClass());
   }
 }

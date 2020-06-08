@@ -19,6 +19,7 @@ package com.perl5.lang.perl.extensions.packageprocessor;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.util.text.StringUtil;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.idea.completion.providers.processors.PerlCompletionProcessor;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -107,18 +108,22 @@ public class PerlExportDescriptor {
 
   @Override
   public int hashCode() {
-    int result = (int)mySigil;
+    int result = mySigil;
     result = 31 * result + getImportedName().hashCode();
     result = 31 * result + getRealName().hashCode();
     result = 31 * result + getRealPackage().hashCode();
     return result;
   }
 
-  @NotNull
-  public LookupElementBuilder getLookupElement() {
-    return LookupElementBuilder.create(this, getImportedName())
-      .withIcon(getIcon())
-      .withTypeText(getRealPackage(), true);
+  public boolean processLookupElement(@NotNull PerlCompletionProcessor completionProcessor) {
+    String lookupString = getImportedName();
+    if (completionProcessor.matches(lookupString)) {
+      return completionProcessor.process(
+        LookupElementBuilder.create(this, lookupString)
+          .withIcon(getIcon())
+          .withTypeText(getRealPackage(), true));
+    }
+    return completionProcessor.result();
   }
 
   @Nullable

@@ -24,6 +24,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
+import com.perl5.lang.perl.idea.completion.providers.processors.PerlSimpleCompletionProcessor;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -34,26 +35,35 @@ public class PerlLabelCompletionProvider extends CompletionProvider<CompletionPa
                                 @NotNull ProcessingContext context,
                                 final @NotNull CompletionResultSet result) {
     final PsiElement element = parameters.getOriginalPosition();
+    if (element == null) {
+      return;
+    }
+    PerlSimpleCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(result, element);
     if (LABEL_DECLARATION_PATTERN.accepts(element)) {
       // unresolved labels should be here
     }
     else if (LABEL_IN_GOTO_PATTERN.accepts(element)) {
-      PerlPsiUtil.processGotoLabelDeclarations(element, perlLabelDeclaration ->
-      {
-        if (perlLabelDeclaration != null && StringUtil.isNotEmpty(perlLabelDeclaration.getName())) {
-          result.addElement(LookupElementBuilder.create(perlLabelDeclaration, perlLabelDeclaration.getName()));
+      PerlPsiUtil.processGotoLabelDeclarations(element, perlLabelDeclaration -> {
+        if (perlLabelDeclaration != null) {
+          String labelName = perlLabelDeclaration.getName();
+          if (StringUtil.isNotEmpty(labelName) && completionProcessor.matches(labelName)) {
+            return completionProcessor.process(LookupElementBuilder.create(perlLabelDeclaration, labelName));
+          }
         }
-        return true;
+        return completionProcessor.result();
       });
     }
     else if (LABEL_IN_NEXT_LAST_REDO_PATTERN.accepts(element)) {
-      PerlPsiUtil.processNextRedoLastLabelDeclarations(element, perlLabelDeclaration ->
-      {
-        if (perlLabelDeclaration != null && StringUtil.isNotEmpty(perlLabelDeclaration.getName())) {
-          result.addElement(LookupElementBuilder.create(perlLabelDeclaration, perlLabelDeclaration.getName()));
+      PerlPsiUtil.processNextRedoLastLabelDeclarations(element, perlLabelDeclaration -> {
+        if (perlLabelDeclaration != null) {
+          String labelName = perlLabelDeclaration.getName();
+          if (StringUtil.isNotEmpty(labelName) && completionProcessor.matches(labelName)) {
+            return completionProcessor.process(LookupElementBuilder.create(perlLabelDeclaration, labelName));
+          }
         }
-        return true;
+        return completionProcessor.result();
       });
     }
+    completionProcessor.logStatus(getClass());
   }
 }

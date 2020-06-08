@@ -584,7 +584,8 @@ public class PerlCompletionTest extends PerlLightTestCase {
 
   @Test
   public void testImportPosix() {
-    doTest();
+    setCompletionLimit(4000);
+    doTestCompletion(withType("POSIX"));
   }
 
   @Test

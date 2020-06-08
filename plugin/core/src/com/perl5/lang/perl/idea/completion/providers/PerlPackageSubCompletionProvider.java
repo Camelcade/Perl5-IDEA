@@ -45,8 +45,9 @@ public class PerlPackageSubCompletionProvider extends CompletionProvider<Complet
     }
     String explicitNamespace = ((PsiPerlMethod)method).getExplicitNamespaceName();
     String currentPrefixMatcher = result.getPrefixMatcher().getPrefix();
-    String newPrefixMathcer =
-      (explicitNamespace == null ? currentPrefixMatcher : (explicitNamespace + PerlPackageUtil.NAMESPACE_SEPARATOR) + currentPrefixMatcher);
+    String newPrefixMathcer = explicitNamespace == null
+                              ? currentPrefixMatcher
+                              : PerlPackageUtil.join(explicitNamespace, currentPrefixMatcher);
     result = result.withPrefixMatcher(new PlainPrefixMatcher(newPrefixMathcer));
 
     PerlSimpleCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(result, parameters.getPosition());
@@ -55,8 +56,8 @@ public class PerlPackageSubCompletionProvider extends CompletionProvider<Complet
     }
     else {
       if (!StringUtil.equals(PerlPackageUtil.SUPER_NAMESPACE_FULL, newPrefixMathcer)) {
-        PerlPackageCompletionUtil.processPackageLookupElementWithAutocomplete(null, PerlPackageUtil.SUPER_NAMESPACE_FULL, null,
-                                                                              completionProcessor);
+        PerlPackageCompletionUtil.processPackageLookupElementWithAutocomplete(
+          null, PerlPackageUtil.SUPER_NAMESPACE_FULL, null, completionProcessor);
       }
     }
     completionProcessor.logStatus(getClass());

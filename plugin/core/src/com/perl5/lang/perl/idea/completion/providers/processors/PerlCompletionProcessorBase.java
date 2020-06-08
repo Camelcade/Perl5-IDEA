@@ -70,7 +70,7 @@ public abstract class PerlCompletionProcessorBase extends AbstractPerlCompletion
   }
 
   @Override
-  public final void addElement(@NotNull LookupElementBuilder lookupElement) {
+  public void addElement(@NotNull LookupElementBuilder lookupElement) {
     myCounters.countProcessing();
     getResultSet().addElement(lookupElement);
   }
