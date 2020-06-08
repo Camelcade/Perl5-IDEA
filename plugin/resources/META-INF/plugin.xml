@@ -40,13 +40,13 @@
     <extensionPoint name="subCallHandler" beanClass="com.perl5.lang.perl.psi.PerlSubCallHandler$Bean" dynamic="true">
       <with attribute="implementationClass" implements="com.perl5.lang.perl.psi.PerlSubCallHandler"/>
     </extensionPoint>
-    <extensionPoint name="hostHandler" beanClass="com.perl5.lang.perl.idea.sdk.PerlHandlerBean">
+    <extensionPoint name="hostHandler" beanClass="com.perl5.lang.perl.idea.sdk.PerlHandlerBean" dynamic="true">
       <with attribute="implementationClass" implements="com.perl5.lang.perl.idea.sdk.host.PerlHostHandler"/>
     </extensionPoint>
-    <extensionPoint name="implementationHandler" beanClass="com.perl5.lang.perl.idea.sdk.PerlHandlerBean">
+    <extensionPoint name="implementationHandler" beanClass="com.perl5.lang.perl.idea.sdk.PerlHandlerBean" dynamic="true">
       <with attribute="implementationClass" implements="com.perl5.lang.perl.idea.sdk.implementation.PerlImplementationHandler"/>
     </extensionPoint>
-    <extensionPoint name="versionManagerHandler" beanClass="com.perl5.lang.perl.idea.sdk.PerlHandlerBean">
+    <extensionPoint name="versionManagerHandler" beanClass="com.perl5.lang.perl.idea.sdk.PerlHandlerBean" dynamic="true">
       <with attribute="implementationClass" implements="com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerHandler"/>
     </extensionPoint>
     <extensionPoint name="fileTypeProvider" interface="com.perl5.lang.perl.fileTypes.PerlFileTypeProvider" dynamic="true"/>

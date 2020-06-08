@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.sdk;
 
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.SdkAdditionalData;
+import com.intellij.openapi.util.JDOMUtil;
 import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostHandler;
@@ -73,11 +74,29 @@ public class PerlSdkAdditionalData implements SdkAdditionalData {
     myVersionManagerData.save(target);
   }
 
-  static @NotNull PerlSdkAdditionalData load(@NotNull Element source) {
+  static @NotNull SdkAdditionalData load(@NotNull Element source) {
     // fixme shouldn't we handle data corruption?
-    return new PerlSdkAdditionalData(
-      PerlHostHandler.load(source),
-      PerlVersionManagerHandler.load(source),
-      PerlImplementationHandler.load(source));
+    PerlHostData<?, ?> hostData = PerlHostHandler.load(source);
+    PerlVersionManagerData<?, ?> versionManagerData = PerlVersionManagerHandler.load(source);
+    PerlImplementationData<?, ?> implementationData = PerlImplementationHandler.load(source);
+    if (hostData != null && versionManagerData != null && implementationData != null) {
+      return new PerlSdkAdditionalData(
+        hostData,
+        versionManagerData,
+        implementationData);
+    }
+    return new UnknownSdkAdditionalData(source);
+  }
+
+  private static class UnknownSdkAdditionalData implements SdkAdditionalData {
+    private final @NotNull Element myAdditionalElement;
+
+    UnknownSdkAdditionalData(@NotNull Element element) {
+      myAdditionalElement = element.clone();
+    }
+
+    void save(@NotNull Element additional) {
+      JDOMUtil.copyMissingContent(myAdditionalElement, additional);
+    }
   }
 }

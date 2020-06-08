@@ -255,20 +255,15 @@ public abstract class PerlHostHandler<Data extends PerlHostData<Data, Handler>, 
   /**
    * Attempts to load {@link PerlHostData} from the {@code parentElement}
    *
-   * @return data read or new empty data created by defaultHandler
+   * @return data read or null if EP not found
    */
-  public static @NotNull PerlHostData<?, ?> load(@NotNull Element parentElement) {
+  public static @Nullable PerlHostData<?, ?> load(@NotNull Element parentElement) {
     Element element = parentElement.getChild(TAG_NAME);
-    if (element != null) {
-      PerlHostHandler<?, ?> handler = EP.findSingle(element.getAttributeValue(ID_ATTRIBUTE));
-      if (handler != null) {
-        PerlHostData<?, ?> data = handler.loadData(element);
-        if (data != null) {
-          return data;
-        }
-      }
+    if (element == null) {
+      return null;
     }
-    return getDefaultHandler().createData();
+    PerlHostHandler<?, ?> handler = EP.findSingle(element.getAttributeValue(ID_ATTRIBUTE));
+    return handler != null ? handler.loadData(element) : null;
   }
 
   public static @NotNull PerlHostHandler<?, ?> getDefaultHandler() {

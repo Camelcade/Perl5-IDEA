@@ -100,20 +100,15 @@ public abstract class PerlImplementationHandler<Data extends PerlImplementationD
   /**
    * Attempts to load {@link PerlImplementationData} from the {@code parentElement}
    *
-   * @return data read or new empty data created by defaultHandler
+   * @return data read or null if data can't be read
    */
-  public static @NotNull PerlImplementationData<?, ?> load(@NotNull Element parentElement) {
+  public static @Nullable PerlImplementationData<?, ?> load(@NotNull Element parentElement) {
     Element element = parentElement.getChild(TAG_NAME);
-    if (element != null) {
-      PerlImplementationHandler<?, ?> handler = EP.findSingle(element.getAttributeValue(ID_ATTRIBUTE));
-      if (handler != null) {
-        PerlImplementationData<?, ?> data = handler.loadData(element);
-        if (data != null) {
-          return data;
-        }
-      }
+    if (element == null) {
+      return null;
     }
-    return getDefaultHandler().createData();
+    PerlImplementationHandler<?, ?> handler = EP.findSingle(element.getAttributeValue(ID_ATTRIBUTE));
+    return handler != null ? handler.loadData(element) : null;
   }
 
   public static @NotNull PerlImplementationHandler<?, ?> getDefaultHandler() {

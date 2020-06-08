@@ -70,13 +70,11 @@ public class PerlSdkType extends SdkType {
 
   @Override
   public void saveAdditionalData(@NotNull SdkAdditionalData sdkAdditionalData, @NotNull Element element) {
-    if (sdkAdditionalData instanceof PerlSdkAdditionalData) {
-      ((PerlSdkAdditionalData)sdkAdditionalData).save(element);
-    }
+    ((PerlSdkAdditionalData)sdkAdditionalData).save(element);
   }
 
   @Override
-  public @NotNull PerlSdkAdditionalData loadAdditionalData(@NotNull Element additional) {
+  public @NotNull SdkAdditionalData loadAdditionalData(@NotNull Element additional) {
     return PerlSdkAdditionalData.load(additional);
   }
 

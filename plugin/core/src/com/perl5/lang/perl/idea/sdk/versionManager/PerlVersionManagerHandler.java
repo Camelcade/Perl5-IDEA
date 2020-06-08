@@ -114,20 +114,15 @@ public abstract class PerlVersionManagerHandler<Data extends PerlVersionManagerD
   /**
    * Attempts to load {@link PerlVersionManagerData} from the {@code parentElement}
    *
-   * @return data read or new empty data created by defaultHandler
+   * @return data read or null if data can't be read
    */
-  public static @NotNull PerlVersionManagerData<?, ?> load(@NotNull Element parentElement) {
+  public static @Nullable PerlVersionManagerData<?, ?> load(@NotNull Element parentElement) {
     Element element = parentElement.getChild(TAG_NAME);
-    if (element != null) {
-      PerlVersionManagerHandler<?, ?> handler = EP.findSingle(element.getAttributeValue(ID_ATTRIBUTE));
-      if (handler != null) {
-        PerlVersionManagerData<?, ?> data = handler.loadData(element);
-        if (data != null) {
-          return data;
-        }
-      }
+    if (element == null) {
+      return null;
     }
-    return getDefaultHandler().createData();
+    PerlVersionManagerHandler<?, ?> handler = EP.findSingle(element.getAttributeValue(ID_ATTRIBUTE));
+    return handler != null ? handler.loadData(element) : null;
   }
 
   public static @NotNull PerlVersionManagerHandler<?, ?> getDefaultHandler() {
