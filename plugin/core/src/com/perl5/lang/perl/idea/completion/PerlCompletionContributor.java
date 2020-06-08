@@ -16,9 +16,8 @@
 
 package com.perl5.lang.perl.idea.completion;
 
-import com.intellij.codeInsight.completion.CompletionContributor;
-import com.intellij.codeInsight.completion.CompletionInitializationContext;
-import com.intellij.codeInsight.completion.CompletionType;
+import com.intellij.codeInsight.completion.*;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
@@ -29,6 +28,7 @@ import org.jetbrains.annotations.NotNull;
 
 
 public class PerlCompletionContributor extends CompletionContributor implements PerlElementTypes, PerlElementPatterns {
+  private static final Logger LOG = Logger.getInstance(PerlCompletionContributor.class);
   public PerlCompletionContributor() {
     extend(
       CompletionType.BASIC,
@@ -106,6 +106,13 @@ public class PerlCompletionContributor extends CompletionContributor implements 
       UNKNOWN_ANNOTATION_PATTERN,
       new PerlAnnotationCompletionProvider()
     );
+  }
+
+  @Override
+  public void fillCompletionVariants(@NotNull CompletionParameters parameters, @NotNull CompletionResultSet result) {
+    long start = System.currentTimeMillis();
+    super.fillCompletionVariants(parameters, result);
+    LOG.debug("Completion finished in " + (System.currentTimeMillis() - start));
   }
 
   @Override
