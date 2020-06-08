@@ -703,7 +703,7 @@
       <add-to-group group-id="NewGroup" anchor="first"/>
     </action>
 
-    <group>
+    <group id="perl5.GenerateGroup">
       <add-to-group group-id="GenerateGroup" anchor="first"/>
 
       <action class="com.perl5.lang.perl.idea.generation.GeneratePerlConstructorAction" id="Perl5NewConstructor"

@@ -100,7 +100,7 @@
       <add-to-group group-id="perl5.install"/>
     </action>
 
-    <group>
+    <group id="perl5.mojo.NewGroup">
       <add-to-group group-id="NewGroup" relative-to-action="Perl5.NewFile" anchor="after"/>
       <action id="perl5.mojo.new.file" class="com.perl5.lang.mojolicious.idea.ide.MojoCreateFileFromTemplateAction"/>
       <action id="perl5.mojo.generate.app" class="com.perl5.lang.mojolicious.idea.actions.MojoGenerateAppAction"/>
