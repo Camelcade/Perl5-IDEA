@@ -121,7 +121,7 @@ public class PerlSubCompletionUtil {
   }
 
   /**
-   * Probably duplicate of {@link PerlVariableCompletionUtil#createVariableLookupElement(PerlGlobVariable, boolean, PerlVariableCompletionProcessor)}
+   * Probably duplicate of {@link PerlVariableCompletionUtil#processVariableLookupElement(PerlGlobVariable, boolean, PerlVariableCompletionProcessor)}
    */
   public static boolean processGlobLookupElement(@NotNull PerlGlobVariable globVariable,
                                                  @Nullable PerlExportDescriptor exportDescriptor,

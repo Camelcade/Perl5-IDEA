@@ -50,19 +50,19 @@ import java.util.Set;
 public class PerlVariableCompletionUtil {
 
   @NotNull
-  public static LookupElementBuilder createVariableLookupElement(@NotNull String name, @NotNull PerlVariableType variableType) {
+  public static LookupElementBuilder processVariableLookupElement(@NotNull String name, @NotNull PerlVariableType variableType) {
     return LookupElementBuilder.create(PerlVariable.braceName(name)).withIcon(PerlIconProvider.getIcon(variableType));
   }
 
   @NotNull
   public static LookupElementBuilder createArrayElementLookupElement(@NotNull String name, @NotNull PerlVariableType variableType) {
-    return createVariableLookupElement(name, variableType)
+    return processVariableLookupElement(name, variableType)
       .withInsertHandler(PerlInsertHandlers.ARRAY_ELEMENT_INSERT_HANDLER).withTailText("[]");
   }
 
   @NotNull
-  public static LookupElementBuilder createHashElementLookupElement(@NotNull String name, @NotNull PerlVariableType variableType) {
-    return createVariableLookupElement(name, variableType)
+  public static LookupElementBuilder processHashElementLookupElement(@NotNull String name, @NotNull PerlVariableType variableType) {
+    return processVariableLookupElement(name, variableType)
       .withInsertHandler(PerlInsertHandlers.HASH_ELEMENT_INSERT_HANDLER).withTailText("{}");
   }
 
@@ -77,25 +77,24 @@ public class PerlVariableCompletionUtil {
   /**
    * @param sigilToPrepend '_' means we don't need to prepend
    */
-  @Nullable
-  public static LookupElementBuilder createVariableLookupElement(@NotNull PerlVariableDeclarationElement element,
-                                                                 char sigilToPrepend,
-                                                                 @NotNull PerlVariableCompletionProcessor variableCompletionProcessor) {
-    String variableName = computeVariableName(element, variableCompletionProcessor.isForceShortMain());
-    if (!variableCompletionProcessor.matches(variableName)) {
-      return null;
+  public static boolean processVariableLookupElement(@NotNull PerlVariableDeclarationElement element,
+                                                     char sigilToPrepend,
+                                                     @NotNull PerlVariableCompletionProcessor completionProcessor) {
+    String variableName = computeVariableName(element, completionProcessor.isForceShortMain());
+    if (!completionProcessor.matches(variableName)) {
+      return completionProcessor.result();
     }
     String lookupString = sigilToPrepend == '_' ? variableName :
                           sigilToPrepend + variableName;
     LookupElementBuilder elementBuilder = LookupElementBuilder.create(element, lookupString)
       .withIcon(PerlIconProvider.getIcon(element));
-    return sigilToPrepend == '_' ? elementBuilder : elementBuilder.withLookupString(variableName);
+    return completionProcessor.process(sigilToPrepend == '_' ? elementBuilder : elementBuilder.withLookupString(variableName));
   }
 
   @Nullable
-  public static LookupElementBuilder createVariableLookupElement(@NotNull PerlGlobVariable typeGlob,
-                                                                 boolean withSigil,
-                                                                 @NotNull PerlVariableCompletionProcessor variableCompletionProcessor) {
+  public static LookupElementBuilder processVariableLookupElement(@NotNull PerlGlobVariable typeGlob,
+                                                                  boolean withSigil,
+                                                                  @NotNull PerlVariableCompletionProcessor variableCompletionProcessor) {
     String variableName = StringUtil.notNullize(typeGlob.getCanonicalName());
     if (!variableCompletionProcessor.matches(variableName)) {
       return null;
@@ -106,25 +105,6 @@ public class PerlVariableCompletionUtil {
 
     LookupElementBuilder elementBuilder = LookupElementBuilder.create(typeGlob, lookupString).withIcon(PerlIconProvider.getIcon(typeGlob));
     return withSigil ? elementBuilder.withLookupString(variableName) : elementBuilder;
-  }
-
-
-  @Nullable
-  public static LookupElementBuilder createHashElementLookupElement(@NotNull PerlVariableDeclarationElement element,
-                                                                    char sigilToPrepend,
-                                                                    @NotNull PerlVariableCompletionProcessor variableCompletionProcessor) {
-    LookupElementBuilder baseLookup = createVariableLookupElement(element, sigilToPrepend, variableCompletionProcessor);
-    return baseLookup == null ? null : baseLookup
-      .withInsertHandler(PerlInsertHandlers.HASH_ELEMENT_INSERT_HANDLER).withTailText("{}");
-  }
-
-  @Nullable
-  public static LookupElementBuilder createArrayElementLookupElement(@NotNull PerlVariableDeclarationElement element,
-                                                                     char sigilToPrepend,
-                                                                     @NotNull PerlVariableCompletionProcessor variableCompletionProcessor) {
-    LookupElementBuilder baseLookup = createVariableLookupElement(element, sigilToPrepend, variableCompletionProcessor);
-    return baseLookup == null ? null : baseLookup
-      .withInsertHandler(PerlInsertHandlers.ARRAY_ELEMENT_INSERT_HANDLER).withTailText("[]");
   }
 
   public static void fillWithUnresolvedVars(@NotNull PerlVariableCompletionProcessorImpl completionProcessor) {
@@ -239,85 +219,94 @@ public class PerlVariableCompletionUtil {
    */
   @Nullable
   private static Processor<PerlVariableDeclarationElement> createVariableLookupProcessor(
-    @NotNull PerlVariableCompletionProcessor variableCompletionProcessor) {
-    @Nullable PsiElement perlVariable = variableCompletionProcessor.getLeafParentElement();
+    @NotNull PerlVariableCompletionProcessor completionProcessor) {
+
+    PsiElement perlVariable = completionProcessor.getLeafParentElement();
     boolean addHashSlices = hasHashSlices(perlVariable);
+
+    PerlDelegatingVariableCompletionProcessor hashElementCompletionProcessor =
+      new PerlDelegatingVariableCompletionProcessor(completionProcessor) {
+        @Override
+        public void addElement(@NotNull LookupElementBuilder lookupElement) {
+          super.addElement(lookupElement.withInsertHandler(PerlInsertHandlers.HASH_ELEMENT_INSERT_HANDLER).withTailText("{}"));
+        }
+      };
+    PerlDelegatingVariableCompletionProcessor arrayElementCompletionProcessor =
+      new PerlDelegatingVariableCompletionProcessor(completionProcessor) {
+        @Override
+        public void addElement(@NotNull LookupElementBuilder lookupElement) {
+          super.addElement(lookupElement.withInsertHandler(PerlInsertHandlers.ARRAY_ELEMENT_INSERT_HANDLER).withTailText("[]"));
+        }
+      };
+
     if (perlVariable instanceof PsiPerlMethod || perlVariable instanceof PsiPerlPerlHandleExpr) {
       return variable -> {
         PerlVariableType variableType = variable.getActualType();
         if (variableType == PerlVariableType.SCALAR) {
-          return variableCompletionProcessor.process(
-            createVariableLookupElement(variable, PerlVariableType.SCALAR.getSigil(), variableCompletionProcessor));
+          return processVariableLookupElement(variable, PerlVariableType.SCALAR.getSigil(), completionProcessor);
         }
         else if (variableType == PerlVariableType.ARRAY) {
-          variableCompletionProcessor.process(
-            createVariableLookupElement(variable, PerlVariableType.ARRAY.getSigil(), variableCompletionProcessor));
-          variableCompletionProcessor.process(
-            createArrayElementLookupElement(variable, PerlVariableType.SCALAR.getSigil(), variableCompletionProcessor));
-          return variableCompletionProcessor.process(
-            createArrayElementLookupElement(variable, PerlVariableType.ARRAY.getSigil(), variableCompletionProcessor));
+          return processVariableLookupElement(variable, PerlVariableType.ARRAY.getSigil(), completionProcessor) &&
+                 processVariableLookupElement(variable, PerlVariableType.SCALAR.getSigil(), arrayElementCompletionProcessor) &&
+                 processVariableLookupElement(variable, PerlVariableType.ARRAY.getSigil(), arrayElementCompletionProcessor);
         }
         else if (variable.getActualType() == PerlVariableType.HASH) {
-          variableCompletionProcessor.process(
-            createVariableLookupElement(variable, PerlVariableType.HASH.getSigil(), variableCompletionProcessor));
-          variableCompletionProcessor.process(
-            createHashElementLookupElement(variable, PerlVariableType.SCALAR.getSigil(), variableCompletionProcessor));
-          return variableCompletionProcessor.process(
-            createHashElementLookupElement(variable, PerlVariableType.ARRAY.getSigil(), variableCompletionProcessor));
+          return processVariableLookupElement(variable, PerlVariableType.HASH.getSigil(), completionProcessor) &&
+                 processVariableLookupElement(variable, PerlVariableType.SCALAR.getSigil(), hashElementCompletionProcessor) &&
+                 processVariableLookupElement(variable, PerlVariableType.ARRAY.getSigil(), hashElementCompletionProcessor);
         }
-        return true;
+        return completionProcessor.result();
       };
     }
     if (perlVariable instanceof PsiPerlScalarVariable) {
       return variable -> {
         if (variable.getActualType() == PerlVariableType.SCALAR) {
-          return variableCompletionProcessor.process(createVariableLookupElement(variable, '_', variableCompletionProcessor));
+          return processVariableLookupElement(variable, '_', completionProcessor);
         }
         else if (variable.getActualType() == PerlVariableType.ARRAY) {
-          return variableCompletionProcessor.process(createArrayElementLookupElement(variable, '_', variableCompletionProcessor));
+          return processVariableLookupElement(variable, '_', arrayElementCompletionProcessor);
         }
         else if (variable.getActualType() == PerlVariableType.HASH) {
-          return variableCompletionProcessor.process(createHashElementLookupElement(variable, '_', variableCompletionProcessor));
+          return processVariableLookupElement(variable, '_', hashElementCompletionProcessor);
         }
-        return true;
+        return completionProcessor.result();
       };
     }
     else if (perlVariable instanceof PsiPerlArrayVariable) {
       return variable -> {
         if (variable.getActualType() == PerlVariableType.ARRAY) {
-          variableCompletionProcessor.process(createVariableLookupElement(variable, '_', variableCompletionProcessor));
-          return variableCompletionProcessor.process(createArrayElementLookupElement(variable, '_', variableCompletionProcessor));
+          return processVariableLookupElement(variable, '_', completionProcessor) &&
+                 processVariableLookupElement(variable, '_', arrayElementCompletionProcessor);
         }
         else if (variable.getActualType() == PerlVariableType.HASH) {
-          return variableCompletionProcessor.process(createHashElementLookupElement(variable, '_', variableCompletionProcessor));
+          return processVariableLookupElement(variable, '_', hashElementCompletionProcessor);
         }
-        return true;
+        return completionProcessor.result();
       };
     }
     else if (perlVariable instanceof PsiPerlArrayIndexVariable) {
       return variable -> {
         if (variable.getActualType() == PerlVariableType.ARRAY) {
-          return variableCompletionProcessor.process(createVariableLookupElement(variable, '_', variableCompletionProcessor));
+          return processVariableLookupElement(variable, '_', completionProcessor);
         }
-        return true;
+        return completionProcessor.result();
       };
     }
     else if (perlVariable instanceof PsiPerlHashVariable) {
       return variable -> {
         PerlVariableType variableType = variable.getActualType();
         if (variableType == PerlVariableType.HASH) {
-          return variableCompletionProcessor.process(createVariableLookupElement(variable, '_', variableCompletionProcessor)) &&
-                 (!addHashSlices ||
-                  variableCompletionProcessor.process(createHashElementLookupElement(variable, '_', variableCompletionProcessor)));
+          return processVariableLookupElement(variable, '_', completionProcessor) &&
+                 (!addHashSlices || processVariableLookupElement(variable, '_', hashElementCompletionProcessor));
         }
         else if (addHashSlices && variableType == PerlVariableType.ARRAY) {
-          return variableCompletionProcessor.process(createArrayElementLookupElement(variable, '_', variableCompletionProcessor));
+          return processVariableLookupElement(variable, '_', arrayElementCompletionProcessor);
         }
-        return true;
+        return completionProcessor.result();
       };
     }
     else if (perlVariable instanceof PerlGlobVariable) {
-      return variable -> variableCompletionProcessor.process(createVariableLookupElement(variable, '_', variableCompletionProcessor));
+      return variable -> processVariableLookupElement(variable, '_', completionProcessor);
     }
     return null;
   }
@@ -360,7 +349,7 @@ public class PerlVariableCompletionUtil {
 
       // globs
       PerlGlobUtil.processDefinedGlobsNames(project, resolveScope, typeglob ->
-        variableCompletionProcessor.process(createVariableLookupElement(
+        variableCompletionProcessor.process(processVariableLookupElement(
           typeglob, perlVariable instanceof PsiPerlMethod, variableCompletionProcessor)));
     }
     else if (perlVariable instanceof PsiPerlArrayVariable) {

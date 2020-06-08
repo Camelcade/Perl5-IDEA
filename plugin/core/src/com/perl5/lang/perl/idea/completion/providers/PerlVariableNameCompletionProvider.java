@@ -104,13 +104,13 @@ public class PerlVariableNameCompletionProvider extends CompletionProvider<Compl
           return variableCompletionProcessor.result();
         }
         if (entity.isScalar()) {
-          lookupElement = PerlVariableCompletionUtil.createVariableLookupElement(entityName, PerlVariableType.SCALAR);
+          lookupElement = PerlVariableCompletionUtil.processVariableLookupElement(entityName, PerlVariableType.SCALAR);
         }
         else if (entity.isArray()) {
-          lookupElement = PerlVariableCompletionUtil.createVariableLookupElement(entityName, PerlVariableType.ARRAY);
+          lookupElement = PerlVariableCompletionUtil.processVariableLookupElement(entityName, PerlVariableType.ARRAY);
         }
         else if (entity.isHash()) {
-          lookupElement = PerlVariableCompletionUtil.createVariableLookupElement(entityName, PerlVariableType.HASH);
+          lookupElement = PerlVariableCompletionUtil.processVariableLookupElement(entityName, PerlVariableType.HASH);
         }
 
         if (lookupElement != null) {
@@ -130,7 +130,7 @@ public class PerlVariableNameCompletionProvider extends CompletionProvider<Compl
           lookupElement = PerlVariableCompletionUtil.createArrayElementLookupElement(entityName, PerlVariableType.ARRAY);
         }
         else if (entity.isHash()) {
-          lookupElement = PerlVariableCompletionUtil.createHashElementLookupElement(entityName, PerlVariableType.HASH);
+          lookupElement = PerlVariableCompletionUtil.processHashElementLookupElement(entityName, PerlVariableType.HASH);
         }
 
         if (lookupElement != null) {
@@ -147,7 +147,7 @@ public class PerlVariableNameCompletionProvider extends CompletionProvider<Compl
           if (!variableCompletionProcessor.matches(entityName)) {
             return variableCompletionProcessor.result();
           }
-          lookupElement = PerlVariableCompletionUtil.createVariableLookupElement(entityName, PerlVariableType.HASH);
+          lookupElement = PerlVariableCompletionUtil.processVariableLookupElement(entityName, PerlVariableType.HASH);
         }
 
         if (lookupElement != null) {
