@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -148,14 +148,7 @@ public class PerlSubCompletionUtil {
 
     final Set<String> namesSet = new THashSet<>();
     PsiFile containingFile = subDefinition.getContainingFile();
-    containingFile.accept(new PerlRecursiveVisitor() {
-      @Override
-      public void visitElement(@NotNull PsiElement element) {
-        if (completionProcessor.result()) {
-          super.visitElement(element);
-        }
-      }
-
+    containingFile.accept(new PerlCompletionRecursiveVisitor(completionProcessor) {
       @Override
       protected boolean shouldVisitLightElements() {
         return true;

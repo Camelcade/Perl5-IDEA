@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,10 +16,10 @@
 
 package com.perl5.lang.perl.idea.completion.util;
 
-import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.lang.Language;
 import com.intellij.openapi.progress.ProgressManager;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
@@ -61,17 +61,20 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
     "Regexp"
   };
 
-  public static void fillWithHashIndexes(final @NotNull PsiElement element, @NotNull final CompletionResultSet result) {
-    Set<String> hashIndexesCache = PerlStringCompletionCache.getInstance(element.getProject()).getHashIndexesCache();
+  public static void fillWithHashIndexes(@NotNull PerlCompletionProcessor completionProcessor) {
+    Set<String> hashIndexesCache = PerlStringCompletionCache.getInstance(completionProcessor.getProject()).getHashIndexesCache();
 
     for (String text : hashIndexesCache) {
-      result.addElement(LookupElementBuilder.create(text));
+      if (completionProcessor.matches(text) && !completionProcessor.process(LookupElementBuilder.create(text))) {
+        return;
+      }
     }
 
-    PsiFile file = element.getContainingFile();
+    PsiElement element = completionProcessor.getLeafElement();
+    PsiFile file = completionProcessor.getContainingFile();
 
     file.accept(
-      new PerlRecursiveVisitor() {
+      new PerlCompletionRecursiveVisitor(completionProcessor) {
         @Override
         public void visitStringContentElement(@NotNull PerlStringContentElementImpl o) {
           if (o != element && SIMPLE_HASH_INDEX.accepts(o)) {
@@ -106,24 +109,27 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
 
         protected void processStringElement(PerlStringContentElement stringContentElement) {
           String text = stringContentElement.getText();
-          if (StringUtil.isNotEmpty(text) && !hashIndexesCache.contains(text) && IDENTIFIER_PATTERN.matcher(text).matches()) {
-            hashIndexesCache.add(text);
-            result.addElement(LookupElementBuilder.create(stringContentElement, text));
+          if (StringUtil.isNotEmpty(text) && hashIndexesCache.add(text) &&
+              completionProcessor.matches(text) && IDENTIFIER_PATTERN.matcher(text).matches()) {
+            completionProcessor.process(LookupElementBuilder.create(stringContentElement, text));
           }
         }
       });
   }
 
-  public static void fillWithExportableEntities(@NotNull PsiElement element, @NotNull final CompletionResultSet result) {
+  public static void fillWithExportableEntities(@NotNull PerlCompletionProcessor completionProcessor) {
+    PsiElement element = completionProcessor.getLeafElement();
     final String contextPackageName = PerlPackageUtil.getContextNamespaceName(element);
 
     element.getContainingFile().accept(
-      new PerlRecursiveVisitor() {
-
+      new PerlCompletionRecursiveVisitor(completionProcessor) {
         @Override
         public void visitSubDeclarationElement(@NotNull PerlSubDeclarationElement o) {
           if (contextPackageName.equals(o.getNamespaceName())) {
-            result.addElement(LookupElementBuilder.create(o, o.getSubName()));
+            String subName = o.getSubName();
+            if (completionProcessor.matches(subName)) {
+              completionProcessor.process(LookupElementBuilder.create(o, subName));
+            }
           }
           super.visitSubDeclarationElement(o);
         }
@@ -136,7 +142,10 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
         @Override
         public void visitPerlSubDefinitionElement(@NotNull PerlSubDefinitionElement o) {
           if (contextPackageName.equals(o.getNamespaceName())) {
-            result.addElement(LookupElementBuilder.create(o, o.getSubName()));
+            String subName = o.getSubName();
+            if (completionProcessor.matches(subName)) {
+              completionProcessor.process(LookupElementBuilder.create(o, subName));
+            }
           }
           super.visitPerlSubDefinitionElement(o);
         }
@@ -144,11 +153,10 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
     );
   }
 
-  public static void fillWithUseParameters(final @NotNull PsiElement stringContentElement,
-                                           @NotNull final CompletionResultSet resultSet,
-                                           @NotNull PerlCompletionProcessor completionProcessor) {
+  public static void fillWithUseParameters(@NotNull PerlCompletionProcessor completionProcessor) {
+    PsiElement baseElement = completionProcessor.getLeafElement();
     PerlUseStatementElement useStatement =
-      PsiTreeUtil.getParentOfType(stringContentElement, PerlUseStatementElement.class, true, PsiPerlStatement.class);
+      PsiTreeUtil.getParentOfType(baseElement, PerlUseStatementElement.class, true, PsiPerlStatement.class);
 
     if (useStatement == null) {
       return;
@@ -163,36 +171,29 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
       Map<String, String> options = ((PerlPackageOptionsProvider)packageProcessor).getOptions();
 
       for (Map.Entry<String, String> option : options.entrySet()) {
-        if (!typedStringsSet.contains(option.getKey())) {
-          resultSet.addElement(LookupElementBuilder
-                                 .create(option.getKey())
-                                 .withTypeText(option.getValue(), true)
-                                 .withIcon(PerlIcons.PERL_OPTION)
-          );
+        String lookupString = option.getKey();
+        if (!typedStringsSet.contains(lookupString) && completionProcessor.matches(lookupString) && !completionProcessor.process(
+          LookupElementBuilder.create(lookupString).withTypeText(option.getValue(), true).withIcon(PerlIcons.PERL_OPTION))) {
+          return;
         }
       }
 
       options = ((PerlPackageOptionsProvider)packageProcessor).getOptionsBundles();
 
       for (Map.Entry<String, String> option : options.entrySet()) {
-        if (!typedStringsSet.contains(option.getKey())) {
-          resultSet.addElement(LookupElementBuilder
-                                 .create(option.getKey())
-                                 .withTypeText(option.getValue(), true)
-                                 .withIcon(PerlIcons.PERL_OPTIONS)
-          );
+        String lookupString = option.getKey();
+        if (!typedStringsSet.contains(lookupString) && completionProcessor.matches(lookupString) && !completionProcessor.process(
+          LookupElementBuilder.create(lookupString).withTypeText(option.getValue(), true).withIcon(PerlIcons.PERL_OPTIONS))) {
+          return;
         }
       }
     }
 
-    if (packageProcessor instanceof PerlPackageParentsProvider &&
-        ((PerlPackageParentsProvider)packageProcessor).hasPackageFilesOptions()) {
-      PerlPackageUtil.processPackageFilesForPsiElement(stringContentElement, (packageName, file) -> {
-        if (!typedStringsSet.contains(packageName)) {
-          PerlPackageCompletionUtil.processPackageLookupElement(file, packageName, null, completionProcessor);
-        }
-        return true;
-      });
+    if (packageProcessor instanceof PerlPackageParentsProvider && ((PerlPackageParentsProvider)packageProcessor).hasPackageFilesOptions() &&
+        !PerlPackageUtil.processPackageFilesForPsiElement(baseElement, (packageName, file) ->
+          typedStringsSet.contains(packageName) ||
+          PerlPackageCompletionUtil.processPackageLookupElement(file, packageName, null, completionProcessor))) {
+      return;
     }
 
     Set<String> export = new HashSet<>();
@@ -201,35 +202,34 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
     exportOk.removeAll(export);
 
     for (String subName : export) {
-      if (!typedStringsSet.contains(subName)) {
-        resultSet.addElement(LookupElementBuilder
-                               .create(subName)
-                               .withIcon(PerlIcons.SUB_GUTTER_ICON)
-                               .withTypeText("default", true)
-        );
+      if (!typedStringsSet.contains(subName) && completionProcessor.matches(subName) && !completionProcessor.process(
+        LookupElementBuilder.create(subName).withIcon(PerlIcons.SUB_GUTTER_ICON).withTypeText("default", true))) {
+        return;
       }
     }
     for (String subName : exportOk) {
-      if (!typedStringsSet.contains(subName)) {
-        resultSet.addElement(LookupElementBuilder
-                               .create(subName)
-                               .withIcon(PerlIcons.SUB_GUTTER_ICON)
-                               .withTypeText("optional", true)
-        );
+      if (!typedStringsSet.contains(subName) && completionProcessor.matches(subName) && !completionProcessor.process(
+        LookupElementBuilder.create(subName).withIcon(PerlIcons.SUB_GUTTER_ICON).withTypeText("optional", true))) {
+        return;
       }
     }
   }
 
-  public static void fillWithRefTypes(@NotNull final CompletionResultSet resultSet) {
+  public static void fillWithRefTypes(@NotNull PerlCompletionProcessor completionProcessor) {
     for (String refType : REF_TYPES) {
-      resultSet.addElement(LookupElementBuilder.create(refType));
+      if (completionProcessor.matches(refType) && !completionProcessor.process(LookupElementBuilder.create(refType))) {
+        return;
+      }
     }
   }
 
-  public static void fillWithInjectableMarkers(@NotNull PsiElement element, @NotNull final CompletionResultSet resultSet) {
+  public static void fillWithInjectableMarkers(@NotNull PerlCompletionProcessor completionProcessor) {
     // injectable markers
-    PerlInjectionMarkersService injectionService = PerlInjectionMarkersService.getInstance(element.getProject());
+    PerlInjectionMarkersService injectionService = PerlInjectionMarkersService.getInstance(completionProcessor.getProject());
     for (String marker : injectionService.getSupportedMarkers()) {
+      if (!completionProcessor.matches(marker)) {
+        continue;
+      }
       Language language = injectionService.getLanguageByMarker(marker);
       if (language == null) {
         continue;
@@ -243,35 +243,37 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
         newItem = newItem.withIcon(language.getAssociatedFileType().getIcon());
       }
 
-      resultSet.addElement(newItem);
+      if (!completionProcessor.process(newItem)) {
+        return;
+      }
     }
   }
 
-  public static void fillWithHeredocOpeners(@NotNull PsiElement element, @NotNull final CompletionResultSet resultSet) {
-    Set<String> heredocOpenersCache = PerlStringCompletionCache.getInstance(element.getProject()).getHeredocOpenersCache();
+  public static void fillWithHeredocOpeners(@NotNull PerlCompletionProcessor completionProcessor) {
+    Project project = completionProcessor.getProject();
+    Set<String> heredocOpenersCache = PerlStringCompletionCache.getInstance(project).getHeredocOpenersCache();
     // cached values
     for (String marker : heredocOpenersCache) {
-      resultSet.addElement(LookupElementBuilder.create(marker));
+      if (completionProcessor.matches(marker) && !completionProcessor.process(LookupElementBuilder.create(marker))) {
+        return;
+      }
     }
 
-    PerlInjectionMarkersService injectionService = PerlInjectionMarkersService.getInstance(element.getProject());
+    PerlInjectionMarkersService injectionService = PerlInjectionMarkersService.getInstance(project);
 
     // collect new values
-    PsiFile file = element.getContainingFile();
-    if (file != null) {
-      file.accept(new PerlRecursiveVisitor() {
-        @Override
-        public void visitHeredocOpener(@NotNull PsiPerlHeredocOpener o) {
-          String openerName = o.getName();
-          if (StringUtil.isNotEmpty(openerName) &&
-              !heredocOpenersCache.contains(openerName) &&
-              injectionService.getLanguageByMarker(openerName) == null) {
-            heredocOpenersCache.add(openerName);
-            resultSet.addElement(LookupElementBuilder.create(o, openerName));
-          }
-          super.visitHeredocOpener(o);
+    PsiFile file = completionProcessor.getContainingFile();
+    file.accept(new PerlCompletionRecursiveVisitor(completionProcessor) {
+      @Override
+      public void visitHeredocOpener(@NotNull PsiPerlHeredocOpener o) {
+        String openerName = o.getName();
+        if (StringUtil.isNotEmpty(openerName) && heredocOpenersCache.add(openerName) &&
+            injectionService.getLanguageByMarker(openerName) == null &&
+            !completionProcessor.process(LookupElementBuilder.create(o, openerName))) {
+          return;
         }
-      });
-    }
+        super.visitHeredocOpener(o);
+      }
+    });
   }
 }

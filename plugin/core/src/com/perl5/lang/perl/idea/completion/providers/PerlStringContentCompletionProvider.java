@@ -50,35 +50,35 @@ public class PerlStringContentCompletionProvider extends PerlCompletionProvider 
 
     if (EXPORT_ASSIGNED_STRING_CONTENT.accepts(element)) // exporter assignments
     {
-      PerlStringCompletionUtil.fillWithExportableEntities(element, result);
+      PerlStringCompletionUtil.fillWithExportableEntities(completionProcessor);
     }
     else if (SIMPLE_HASH_INDEX.accepts(element))    // hash indexes
     {
       PsiPerlHashIndex indexElement = PsiTreeUtil.getParentOfType(element, PsiPerlHashIndex.class);
       if (indexElement != null && indexElement.getParent() instanceof PsiPerlGlobSlot) {
-        PerlStringCompletionUtil.fillWithRefTypes(result);
+        PerlStringCompletionUtil.fillWithRefTypes(completionProcessor);
       }
       else {
-        PerlStringCompletionUtil.fillWithHashIndexes(element, result);
+        PerlStringCompletionUtil.fillWithHashIndexes(completionProcessor);
       }
     }
     else if (USE_PARAMETERS_PATTERN.accepts(element))    // use or no parameters
     {
-      PerlStringCompletionUtil.fillWithUseParameters(element, result, completionProcessor);
+      PerlStringCompletionUtil.fillWithUseParameters(completionProcessor);
     }
     else if (parent != null && parent.getParent() instanceof PsiPerlAnnotationInject) // #@Inject some
     {
-      PerlStringCompletionUtil.fillWithInjectableMarkers(element, result);
+      PerlStringCompletionUtil.fillWithInjectableMarkers(completionProcessor);
       result.stopHere();
     }
     else if (STRING_CONTENT_IN_HEREDOC_OPENER_PATTERN.accepts(element)) // HERE-DOC openers
     {
-      PerlStringCompletionUtil.fillWithInjectableMarkers(element, result);
-      PerlStringCompletionUtil.fillWithHeredocOpeners(element, result);
+      PerlStringCompletionUtil.fillWithInjectableMarkers(completionProcessor);
+      PerlStringCompletionUtil.fillWithHeredocOpeners(completionProcessor);
     }
     else if (STRING_CONTENT_IN_LIST_OR_STRING_START.accepts(element))    // begin of string or qw element
     {
-      PerlStringCompletionUtil.fillWithRefTypes(result);
+      PerlStringCompletionUtil.fillWithRefTypes(completionProcessor);
       PerlPackageCompletionUtil.fillWithAllNamespacesNames(completionProcessor);
     }
     completionProcessor.logStatus(getClass());

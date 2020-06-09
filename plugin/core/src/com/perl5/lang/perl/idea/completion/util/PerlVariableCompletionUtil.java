@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -117,14 +117,14 @@ public class PerlVariableCompletionUtil {
       final int minOffset = variableNameElement.getTextOffset();
       final PerlVariableType actualType = ((PerlVariable)perlVariable).getActualType();
 
-      lexicalScope.accept(new PerlRecursiveVisitor() {
+      lexicalScope.accept(new PerlCompletionRecursiveVisitor(completionProcessor) {
         @Override
         public void visitPerlVariable(@NotNull PerlVariable perlVariable) {
           if (perlVariable.isValid() &&
               !(perlVariable.getParent() instanceof PerlVariableDeclarationElement) &&
               perlVariable.getTextOffset() > minOffset &&
               actualType == perlVariable.getActualType()
-            ) {
+          ) {
             String variableName = perlVariable.getName();
             if (completionProcessor.matches(variableName) &&
                 collectedNames.add(variableName) &&
