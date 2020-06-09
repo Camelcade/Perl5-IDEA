@@ -1,13 +1,3 @@
-Lookups: MyTest::Some::Package::ARRAY_VAR; Text: MyTest::Some::Package::ARRAY_VAR; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
-    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 171 in Package.pm
-Lookups: MyTest::Some::Package::EXPORT; Text: MyTest::Some::Package::EXPORT; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
-    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 36 in Package.pm
-Lookups: MyTest::Some::Package::EXPORT_OK; Text: MyTest::Some::Package::EXPORT_OK; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
-    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 94 in Package.pm
-Lookups: MyTest::Some::Package::HASH_VAR; Text: MyTest::Some::Package::HASH_VAR; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
-    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 187 in Package.pm
-Lookups: MyTest::Some::Package::HASH_VAR; Text: MyTest::Some::Package::HASH_VAR; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
-    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 187 in Package.pm
 Lookups: main::array; Text: main::array; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
     PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 12 in hashSlices520global.pl
 Lookups: main::hash; Text: main::hash; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null

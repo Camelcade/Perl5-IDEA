@@ -28,6 +28,27 @@ public abstract class PerlCompletionResultTestCase extends PerlLightTestCase {
   }
 
   @Test
+  public void testScalarGlobal() {doTest();}
+
+  @Test
+  public void testScalarGlobalEnd() {doTest();}
+
+  @Test
+  public void testScalarGlobalEndNotStarting() {doTest();}
+
+  @Test
+  public void testScalarGlobalEndSep() {doTest();}
+
+  @Test
+  public void testScalarGlobalMid() {doTest();}
+
+  @Test
+  public void testScalarGlobalMidNotStarting() {doTest();}
+
+  @Test
+  public void testScalarGlobalMidSep() {doTest();}
+
+  @Test
   public void testScalar() {doTest();}
 
   @Test

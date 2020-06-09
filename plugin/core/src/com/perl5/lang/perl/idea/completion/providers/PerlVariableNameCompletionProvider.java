@@ -16,11 +16,13 @@
 
 package com.perl5.lang.perl.idea.completion.providers;
 
+import com.intellij.codeInsight.completion.CompletionData;
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.patterns.StandardPatterns;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ProcessingContext;
@@ -45,6 +47,12 @@ public class PerlVariableNameCompletionProvider extends CompletionProvider<Compl
                              @NotNull ProcessingContext context,
                              @NotNull CompletionResultSet resultSet) {
     PsiElement variableNameElement = parameters.getPosition();
+
+    PsiElement position = parameters.getOriginalPosition();
+    if (position instanceof PerlVariableNameElement) {
+      resultSet = resultSet.withPrefixMatcher(CompletionData.findPrefixDefault(
+        variableNameElement, parameters.getOffset(), StandardPatterns.alwaysFalse()));
+    }
 
     boolean isDeclaration = VARIABLE_NAME_IN_DECLARATION_PATTERN.accepts(variableNameElement);
     boolean isFullQualified = PerlPackageUtil.isFullQualifiedName(variableNameElement.getText());
