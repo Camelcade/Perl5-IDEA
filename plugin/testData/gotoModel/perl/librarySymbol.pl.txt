@@ -1,6 +1,15 @@
 $Mojolicious::Controller::AUTOLOAD
 AUTOLOAD in Mojolicious::Controller; /scalar_gutter_icon.png; null
 ----------
+$MyTest::Some::Package::SCALAR_VAR
+SCALAR_VAR in MyTest::Some::Package; /scalar_gutter_icon.png; null
+----------
+%MyTest::Some::Package::HASH_VAR
+HASH_VAR in MyTest::Some::Package; /hash_gutter_icon.png; null
+----------
+@MyTest::Some::Package::ARRAY_VAR
+ARRAY_VAR in MyTest::Some::Package; /array_gutter_icon.png; null
+----------
 @MyTest::Some::Package::EXPORT
 EXPORT in MyTest::Some::Package; /array_gutter_icon.png; null
 ----------

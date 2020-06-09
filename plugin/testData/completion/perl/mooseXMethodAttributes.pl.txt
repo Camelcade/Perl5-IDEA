@@ -126,6 +126,8 @@ Lookups: $Log::Log4perl::Levels::TRACE, Log::Log4perl::Levels::TRACE; Text: $Log
     PsiElement: Implicit variable: $Log::Log4perl::Levels::TRACE@UNKNOWN_VALUE
 Lookups: $MATCH, MATCH; Text: $MATCH; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
     PsiElement: Built-in: $MATCH
+Lookups: $MyTest::Some::Package::ARRAY_VAR, MyTest::Some::Package::ARRAY_VAR; Text: $MyTest::Some::Package::ARRAY_VAR; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 171 in Package.pm
 Lookups: $NR, NR; Text: $NR; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
     PsiElement: Built-in: $NR
 Lookups: $OFMT, OFMT; Text: $OFMT; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
@@ -352,6 +354,8 @@ Lookups: @MyTest::Some::Package::EXPORT_OK, MyTest::Some::Package::EXPORT_OK; Te
     PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 94 in Package.pm
 Lookups: @MyTest::Some::Package::EXPORT_OK, MyTest::Some::Package::EXPORT_OK; Text: @MyTest::Some::Package::EXPORT_OK; Tail: null; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
     PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 94 in Package.pm
+Lookups: @MyTest::Some::Package::HASH_VAR, MyTest::Some::Package::HASH_VAR; Text: @MyTest::Some::Package::HASH_VAR; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 187 in Package.pm
 Lookups: @^H, ^H; Text: @^H; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
     PsiElement: Built-in: %^H
 Lookups: ACCUMULATOR, $ACCUMULATOR; Text: $ACCUMULATOR; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
@@ -486,6 +490,10 @@ Lookups: MyTest::Some::Package->; Text: MyTest::Some::Package->; Tail: ...; Type
     PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MyTest::Some::Package at 0 in Package.pm
 Lookups: MyTest::Some::Package::; Text: MyTest::Some::Package::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
     PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MyTest::Some::Package at 0 in Package.pm
+Lookups: MyTest::Some::Package::ARRAY_VAR, @MyTest::Some::Package::ARRAY_VAR; Text: @MyTest::Some::Package::ARRAY_VAR; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 171 in Package.pm
+Lookups: MyTest::Some::Package::ARRAY_VAR, @MyTest::Some::Package::ARRAY_VAR; Text: @MyTest::Some::Package::ARRAY_VAR; Tail: null; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 171 in Package.pm
 Lookups: MyTest::Some::Package::EXPORT, $MyTest::Some::Package::EXPORT; Text: $MyTest::Some::Package::EXPORT; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
     PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 36 in Package.pm
 Lookups: MyTest::Some::Package::EXPORT, @MyTest::Some::Package::EXPORT; Text: @MyTest::Some::Package::EXPORT; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
@@ -494,6 +502,12 @@ Lookups: MyTest::Some::Package::EXPORT, @MyTest::Some::Package::EXPORT; Text: @M
     PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 36 in Package.pm
 Lookups: MyTest::Some::Package::EXPORT_OK, $MyTest::Some::Package::EXPORT_OK; Text: $MyTest::Some::Package::EXPORT_OK; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
     PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 94 in Package.pm
+Lookups: MyTest::Some::Package::HASH_VAR, $MyTest::Some::Package::HASH_VAR; Text: $MyTest::Some::Package::HASH_VAR; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 187 in Package.pm
+Lookups: MyTest::Some::Package::HASH_VAR, %MyTest::Some::Package::HASH_VAR; Text: %MyTest::Some::Package::HASH_VAR; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 187 in Package.pm
+Lookups: MyTest::Some::Package::SCALAR_VAR, $MyTest::Some::Package::SCALAR_VAR; Text: $MyTest::Some::Package::SCALAR_VAR; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 154 in Package.pm
 Lookups: MyTest::Something->; Text: MyTest::Something->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
     PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MyTest::Something at 0 in Something.pm
 Lookups: MyTest::Something::; Text: MyTest::Something::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null

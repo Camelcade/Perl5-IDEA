@@ -12,9 +12,12 @@ our @EXPORT_OK = qw/
 	MULTICONST2
 /;
 
+our $SCALAR_VAR;
+our @ARRAY_VAR;
+our %HASH_VAR;
 
-sub somesub1{}
-sub somesub2{}
+sub somesub1 {}
+sub somesub2 {}
 use constant someconst1 => 1;
 use constant SOMECONST2 => 1;
 use constant {
