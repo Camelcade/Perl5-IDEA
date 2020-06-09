@@ -25,6 +25,7 @@ import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.Processor;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.idea.PerlCompletionWeighter;
 import com.perl5.lang.perl.idea.completion.PerlInsertHandlers;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlDelegatingVariableCompletionProcessor;
@@ -40,12 +41,12 @@ import com.perl5.lang.perl.psi.references.PerlBuiltInVariablesService;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.*;
+import com.perl5.lang.perl.util.processors.PerlNamespaceEntityProcessor;
 import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
-
 
 public class PerlVariableCompletionUtil {
 
@@ -366,6 +367,108 @@ public class PerlVariableCompletionUtil {
       if (hasHashSlices(perlVariable)) {
         PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, lookupGenerator);
       }
+    }
+  }
+
+  public static void fillWithVariables(@NotNull PerlVariableCompletionProcessor variableCompletionProcessor,
+                                       boolean fullQualified,
+                                       @Nullable String namespaceName) {
+    if (!fullQualified) {
+      fillWithLexicalVariables(variableCompletionProcessor);
+      fillWithBuiltInVariables(variableCompletionProcessor);
+      fillWithImportedVariables(variableCompletionProcessor);
+    }
+    else {
+      if (StringUtil.isNotEmpty(namespaceName)) {
+        variableCompletionProcessor =
+          variableCompletionProcessor.withPrefixMatcher(PerlPackageUtil.join(namespaceName, variableCompletionProcessor.getPrefix()));
+      }
+    }
+
+    fillWithFullQualifiedVariables(variableCompletionProcessor);
+  }
+
+  public static void fillWithImportedVariables(@NotNull PerlVariableCompletionProcessor variableCompletionProcessor) {
+    PerlNamespaceDefinitionElement namespaceContainer =
+      PerlPackageUtil.getNamespaceContainerForElement(variableCompletionProcessor.getLeafElement());
+
+    if (namespaceContainer == null) {
+      return;
+    }
+
+    String packageName = namespaceContainer.getNamespaceName();
+
+    if (StringUtil.isEmpty(packageName)) // incomplete package definition
+    {
+      return;
+    }
+
+    PerlNamespaceEntityProcessor<PerlExportDescriptor> processor = null;
+    PsiElement perlVariable = variableCompletionProcessor.getLeafParentElement();
+
+    if (perlVariable instanceof PsiPerlScalarVariable) {
+      processor = (namespaceName, entity) -> {
+        LookupElementBuilder lookupElement = null;
+        String entityName = entity.getImportedName();
+        if (!variableCompletionProcessor.matches(entityName)) {
+          return variableCompletionProcessor.result();
+        }
+        if (entity.isScalar()) {
+          lookupElement = processVariableLookupElement(entityName, PerlVariableType.SCALAR);
+        }
+        else if (entity.isArray()) {
+          lookupElement = processVariableLookupElement(entityName, PerlVariableType.ARRAY);
+        }
+        else if (entity.isHash()) {
+          lookupElement = processVariableLookupElement(entityName, PerlVariableType.HASH);
+        }
+
+        if (lookupElement != null) {
+          return variableCompletionProcessor.process(lookupElement.withTypeText(entity.getRealPackage(), true));
+        }
+        return variableCompletionProcessor.result();
+      };
+    }
+    else if (perlVariable instanceof PsiPerlArrayVariable || perlVariable instanceof PsiPerlArrayIndexVariable) {
+      processor = (namespaceName, entity) -> {
+        LookupElementBuilder lookupElement = null;
+        String entityName = entity.getImportedName();
+        if (!variableCompletionProcessor.matches(entityName)) {
+          return variableCompletionProcessor.result();
+        }
+        if (entity.isArray()) {
+          lookupElement = createArrayElementLookupElement(entityName, PerlVariableType.ARRAY);
+        }
+        else if (entity.isHash()) {
+          lookupElement = processHashElementLookupElement(entityName, PerlVariableType.HASH);
+        }
+
+        if (lookupElement != null) {
+          return variableCompletionProcessor.process(lookupElement.withTypeText(entity.getRealPackage(), true));
+        }
+        return variableCompletionProcessor.result();
+      };
+    }
+    else if (perlVariable instanceof PsiPerlHashVariable) {
+      processor = (namespaceName, entity) -> {
+        LookupElementBuilder lookupElement = null;
+        if (entity.isHash()) {
+          String entityName = entity.getImportedName();
+          if (!variableCompletionProcessor.matches(entityName)) {
+            return variableCompletionProcessor.result();
+          }
+          lookupElement = processVariableLookupElement(entityName, PerlVariableType.HASH);
+        }
+
+        if (lookupElement != null) {
+          return variableCompletionProcessor.process(lookupElement.withTypeText(entity.getRealPackage(), true));
+        }
+        return variableCompletionProcessor.result();
+      };
+    }
+
+    if (processor != null) {
+      namespaceContainer.processExportDescriptors(processor);
     }
   }
 }

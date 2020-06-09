@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.completion.providers.processors;
 
 import com.intellij.codeInsight.completion.CompletionResultSet;
+import com.intellij.codeInsight.completion.PrefixMatcher;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -78,4 +79,14 @@ public interface PerlCompletionProcessor {
   boolean result();
 
   void addElement(@NotNull LookupElementBuilder lookupElement);
+
+  @NotNull
+  default PrefixMatcher getPrefixMatcher() {
+    return getResultSet().getPrefixMatcher();
+  }
+
+  @NotNull
+  default String getPrefix() {
+    return getPrefixMatcher().getPrefix();
+  }
 }

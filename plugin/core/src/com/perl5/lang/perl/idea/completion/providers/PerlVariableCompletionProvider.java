@@ -19,7 +19,6 @@ package com.perl5.lang.perl.idea.completion.providers;
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.openapi.application.Experiments;
-import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlCompletionProvider;
@@ -28,10 +27,7 @@ import com.perl5.lang.perl.idea.completion.providers.processors.PerlVariableComp
 import com.perl5.lang.perl.idea.completion.util.PerlVariableCompletionUtil;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
 import com.perl5.lang.perl.psi.PsiPerlPerlHandleExpr;
-import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
-
-import static com.perl5.lang.perl.idea.completion.providers.PerlVariableNameCompletionProvider.fillWithImportedVariables;
 
 public class PerlVariableCompletionProvider extends PerlCompletionProvider {
   @Override
@@ -61,19 +57,7 @@ public class PerlVariableCompletionProvider extends PerlCompletionProvider {
     PerlVariableCompletionProcessor variableCompletionProcessor = new PerlVariableCompletionProcessorImpl(
       withFqnSafeMatcher(resultSet), subName, fullQualified, false, false);
 
-    if (!fullQualified) {
-      PerlVariableCompletionUtil.fillWithLexicalVariables(variableCompletionProcessor);
-      PerlVariableCompletionUtil.fillWithBuiltInVariables(variableCompletionProcessor);
-      fillWithImportedVariables(variableCompletionProcessor);
-    }
-    else {
-      if (StringUtil.isNotEmpty(namespaceName)) {
-        variableCompletionProcessor =
-          variableCompletionProcessor.withPrefixMatcher(PerlPackageUtil.join(namespaceName, resultSet.getPrefixMatcher().getPrefix()));
-      }
-    }
-
-    PerlVariableCompletionUtil.fillWithFullQualifiedVariables(variableCompletionProcessor);
+    PerlVariableCompletionUtil.fillWithVariables(variableCompletionProcessor, fullQualified, namespaceName);
     variableCompletionProcessor.logStatus(getClass());
   }
 }

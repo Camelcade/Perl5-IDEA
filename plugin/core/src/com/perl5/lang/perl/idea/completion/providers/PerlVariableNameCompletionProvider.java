@@ -19,21 +19,15 @@ package com.perl5.lang.perl.idea.completion.providers;
 import com.intellij.codeInsight.completion.CompletionData;
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionResultSet;
-import com.intellij.codeInsight.lookup.LookupElementBuilder;
-import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.patterns.StandardPatterns;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ProcessingContext;
-import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlCompletionProvider;
-import com.perl5.lang.perl.idea.completion.providers.processors.PerlVariableCompletionProcessor;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlVariableCompletionProcessorImpl;
 import com.perl5.lang.perl.idea.completion.util.PerlVariableCompletionUtil;
-import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.utils.PerlVariableType;
+import com.perl5.lang.perl.psi.PerlVariableNameElement;
 import com.perl5.lang.perl.util.PerlPackageUtil;
-import com.perl5.lang.perl.util.processors.PerlNamespaceEntityProcessor;
 import org.jetbrains.annotations.NotNull;
 
 import static com.perl5.lang.perl.idea.PerlElementPatterns.VARIABLE_NAME_IN_DECLARATION_PATTERN;
@@ -78,7 +72,7 @@ public class PerlVariableNameCompletionProvider extends PerlCompletionProvider {
 
     // imports
     if (!isDeclaration && !isFullQualified) {
-      fillWithImportedVariables(variableCompletionProcessor);
+      PerlVariableCompletionUtil.fillWithImportedVariables(variableCompletionProcessor);
     }
 
     // fqn names
@@ -86,89 +80,5 @@ public class PerlVariableNameCompletionProvider extends PerlCompletionProvider {
       PerlVariableCompletionUtil.fillWithFullQualifiedVariables(variableCompletionProcessor);
     }
     variableCompletionProcessor.logStatus(getClass());
-  }
-
-  static void fillWithImportedVariables(@NotNull PerlVariableCompletionProcessor variableCompletionProcessor) {
-    PerlNamespaceDefinitionElement namespaceContainer =
-      PerlPackageUtil.getNamespaceContainerForElement(variableCompletionProcessor.getLeafElement());
-
-    if (namespaceContainer == null) {
-      return;
-    }
-
-    String packageName = namespaceContainer.getNamespaceName();
-
-    if (StringUtil.isEmpty(packageName)) // incomplete package definition
-    {
-      return;
-    }
-
-    PerlNamespaceEntityProcessor<PerlExportDescriptor> processor = null;
-    PsiElement perlVariable = variableCompletionProcessor.getLeafParentElement();
-
-    if (perlVariable instanceof PsiPerlScalarVariable) {
-      processor = (namespaceName, entity) -> {
-        LookupElementBuilder lookupElement = null;
-        String entityName = entity.getImportedName();
-        if (!variableCompletionProcessor.matches(entityName)) {
-          return variableCompletionProcessor.result();
-        }
-        if (entity.isScalar()) {
-          lookupElement = PerlVariableCompletionUtil.processVariableLookupElement(entityName, PerlVariableType.SCALAR);
-        }
-        else if (entity.isArray()) {
-          lookupElement = PerlVariableCompletionUtil.processVariableLookupElement(entityName, PerlVariableType.ARRAY);
-        }
-        else if (entity.isHash()) {
-          lookupElement = PerlVariableCompletionUtil.processVariableLookupElement(entityName, PerlVariableType.HASH);
-        }
-
-        if (lookupElement != null) {
-          return variableCompletionProcessor.process(lookupElement.withTypeText(entity.getRealPackage(), true));
-        }
-        return variableCompletionProcessor.result();
-      };
-    }
-    else if (perlVariable instanceof PsiPerlArrayVariable || perlVariable instanceof PsiPerlArrayIndexVariable) {
-      processor = (namespaceName, entity) -> {
-        LookupElementBuilder lookupElement = null;
-        String entityName = entity.getImportedName();
-        if (!variableCompletionProcessor.matches(entityName)) {
-          return variableCompletionProcessor.result();
-        }
-        if (entity.isArray()) {
-          lookupElement = PerlVariableCompletionUtil.createArrayElementLookupElement(entityName, PerlVariableType.ARRAY);
-        }
-        else if (entity.isHash()) {
-          lookupElement = PerlVariableCompletionUtil.processHashElementLookupElement(entityName, PerlVariableType.HASH);
-        }
-
-        if (lookupElement != null) {
-          return variableCompletionProcessor.process(lookupElement.withTypeText(entity.getRealPackage(), true));
-        }
-        return variableCompletionProcessor.result();
-      };
-    }
-    else if (perlVariable instanceof PsiPerlHashVariable) {
-      processor = (namespaceName, entity) -> {
-        LookupElementBuilder lookupElement = null;
-        if (entity.isHash()) {
-          String entityName = entity.getImportedName();
-          if (!variableCompletionProcessor.matches(entityName)) {
-            return variableCompletionProcessor.result();
-          }
-          lookupElement = PerlVariableCompletionUtil.processVariableLookupElement(entityName, PerlVariableType.HASH);
-        }
-
-        if (lookupElement != null) {
-          return variableCompletionProcessor.process(lookupElement.withTypeText(entity.getRealPackage(), true));
-        }
-        return variableCompletionProcessor.result();
-      };
-    }
-
-    if (processor != null) {
-      namespaceContainer.processExportDescriptors(processor);
-    }
   }
 }
