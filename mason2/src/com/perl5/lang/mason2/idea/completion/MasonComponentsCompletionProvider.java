@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,9 @@
 
 package com.perl5.lang.mason2.idea.completion;
 
-import com.intellij.codeInsight.completion.*;
+import com.intellij.codeInsight.completion.CompletionInitializationContext;
+import com.intellij.codeInsight.completion.CompletionParameters;
+import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
@@ -32,11 +34,12 @@ import com.perl5.lang.htmlmason.MasonCoreUtil;
 import com.perl5.lang.mason2.filetypes.MasonPurePerlComponentFileType;
 import com.perl5.lang.mason2.idea.configuration.MasonSettings;
 import com.perl5.lang.mason2.psi.impl.MasonFileImpl;
+import com.perl5.lang.perl.idea.completion.providers.processors.PerlCompletionProvider;
 import com.perl5.lang.perl.psi.PerlString;
 import org.jetbrains.annotations.NotNull;
 
 
-public class MasonComponentsCompletionProvider extends CompletionProvider<CompletionParameters> {
+public class MasonComponentsCompletionProvider extends PerlCompletionProvider {
   @Override
   protected void addCompletions(@NotNull CompletionParameters parameters,
                                 @NotNull ProcessingContext context,
@@ -51,7 +54,7 @@ public class MasonComponentsCompletionProvider extends CompletionProvider<Comple
       String fullPrefix = ElementManipulators.getValueText(parent)
         .replace(CompletionInitializationContext.DUMMY_IDENTIFIER, "")
         .replace(CompletionInitializationContext.DUMMY_IDENTIFIER_TRIMMED, "");
-      result = result.withPrefixMatcher(new PlainPrefixMatcher(fullPrefix));
+      result = withFqnSafeMatcher(result, fullPrefix);
 
       final CompletionResultSet finalResultSet = result;
 

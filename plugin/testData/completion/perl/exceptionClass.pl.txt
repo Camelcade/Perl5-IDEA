@@ -64,12 +64,28 @@ Lookups: $SUBSEP, SUBSEP; Text: $SUBSEP; Tail: null; Type: null; Icon: /scalar_g
     PsiElement: Built-in: $SUBSEP
 Lookups: $SYSTEM_FD_MAX, SYSTEM_FD_MAX; Text: $SYSTEM_FD_MAX; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
     PsiElement: Built-in: $SYSTEM_FD_MAX
+Lookups: $^E, ^E; Text: $^E; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^E
+Lookups: ${^GLOBAL_PHASE}, {^GLOBAL_PHASE}; Text: ${^GLOBAL_PHASE}; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^GLOBAL_PHASE
+Lookups: ${^RE_DEBUG_FLAGS}, {^RE_DEBUG_FLAGS}; Text: ${^RE_DEBUG_FLAGS}; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^RE_DEBUG_FLAGS
+Lookups: ${^RE_TRIE_MAXBUF}, {^RE_TRIE_MAXBUF}; Text: ${^RE_TRIE_MAXBUF}; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^RE_TRIE_MAXBUF
+Lookups: ${^UNICODE}, {^UNICODE}; Text: ${^UNICODE}; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^UNICODE
+Lookups: ${^UTF8CACHE}, {^UTF8CACHE}; Text: ${^UTF8CACHE}; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^UTF8CACHE
+Lookups: ${^UTF8LOCALE}, {^UTF8LOCALE}; Text: ${^UTF8LOCALE}; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^UTF8LOCALE
 Lookups: %ERRNO, ERRNO; Text: %ERRNO; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
     PsiElement: Built-in: %ERRNO
 Lookups: %LAST_PAREN_MATCH, LAST_PAREN_MATCH; Text: %LAST_PAREN_MATCH; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
     PsiElement: Built-in: %LAST_PAREN_MATCH
 Lookups: %OS_ERROR, OS_ERROR; Text: %OS_ERROR; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
     PsiElement: Built-in: %OS_ERROR
+Lookups: %{^CAPTURE}, {^CAPTURE}; Text: %{^CAPTURE}; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %^CAPTURE
 Lookups: @ERRNO, ERRNO; Text: @ERRNO; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
     PsiElement: Built-in: %ERRNO
 Lookups: @LAST_PAREN_MATCH, LAST_PAREN_MATCH; Text: @LAST_PAREN_MATCH; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
@@ -244,3 +260,27 @@ Lookups: UNIVERSAL->; Text: UNIVERSAL->; Tail: ...; Type: null; Icon: /package_g
     PsiElement: Implicit namespace: UNIVERSAL
 Lookups: UNIVERSAL::; Text: UNIVERSAL::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
     PsiElement: Implicit namespace: UNIVERSAL
+Lookups: {^CAPTURE_ALL}, ${^CAPTURE_ALL}; Text: ${^CAPTURE_ALL}; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %^CAPTURE_ALL
+Lookups: {^CAPTURE_ALL}, %{^CAPTURE_ALL}; Text: %{^CAPTURE_ALL}; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %^CAPTURE_ALL
+Lookups: {^CAPTURE_ALL}, @{^CAPTURE_ALL}; Text: @{^CAPTURE_ALL}; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %^CAPTURE_ALL
+Lookups: {^CAPTURE}, ${^CAPTURE}; Text: ${^CAPTURE}; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: @^CAPTURE
+Lookups: {^CAPTURE}, ${^CAPTURE}; Text: ${^CAPTURE}; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %^CAPTURE
+Lookups: {^CAPTURE}, @{^CAPTURE}; Text: @{^CAPTURE}; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: @^CAPTURE
+Lookups: {^CAPTURE}, @{^CAPTURE}; Text: @{^CAPTURE}; Tail: null; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: @^CAPTURE
+Lookups: {^CAPTURE}, @{^CAPTURE}; Text: @{^CAPTURE}; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %^CAPTURE
+Lookups: {^CHILD_ERROR_NATIVE}, ${^CHILD_ERROR_NATIVE}; Text: ${^CHILD_ERROR_NATIVE}; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^CHILD_ERROR_NATIVE
+Lookups: {^ENCODING}, ${^ENCODING}; Text: ${^ENCODING}; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^ENCODING
+Lookups: {^OPEN}, ${^OPEN}; Text: ${^OPEN}; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^OPEN
+Lookups: {^PREMATCH}, ${^PREMATCH}; Text: ${^PREMATCH}; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^PREMATCH

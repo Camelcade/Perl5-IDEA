@@ -1,0 +1,2 @@
+#@returns some<caret>
+sub something{}

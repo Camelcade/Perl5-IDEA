@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,13 +17,13 @@
 package com.perl5.lang.perl.idea.completion.providers;
 
 import com.intellij.codeInsight.completion.CompletionParameters;
-import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiLanguageInjectionHost;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
+import com.perl5.lang.perl.idea.completion.providers.processors.PerlCompletionProvider;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlSimpleCompletionProcessor;
 import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionUtil;
 import com.perl5.lang.perl.idea.completion.util.PerlStringCompletionUtil;
@@ -34,7 +34,7 @@ import com.perl5.lang.perl.util.PerlInjectionUtil;
 import org.jetbrains.annotations.NotNull;
 
 
-public class PerlStringContentCompletionProvider extends CompletionProvider<CompletionParameters> implements PerlElementPatterns {
+public class PerlStringContentCompletionProvider extends PerlCompletionProvider implements PerlElementPatterns {
   @Override
   protected void addCompletions(@NotNull CompletionParameters parameters,
                                 @NotNull ProcessingContext context,
@@ -46,7 +46,7 @@ public class PerlStringContentCompletionProvider extends CompletionProvider<Comp
       return;
     }
 
-    PerlSimpleCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(result, element);
+    PerlSimpleCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(withFqnSafeMatcher(result), element);
 
     if (EXPORT_ASSIGNED_STRING_CONTENT.accepts(element)) // exporter assignments
     {

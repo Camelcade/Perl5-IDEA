@@ -18,7 +18,6 @@ package com.perl5.lang.perl.idea.completion.providers;
 
 import com.intellij.codeInsight.completion.CompletionData;
 import com.intellij.codeInsight.completion.CompletionParameters;
-import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.util.text.StringUtil;
@@ -27,7 +26,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
-import com.perl5.lang.perl.idea.PerlElementPatterns;
+import com.perl5.lang.perl.idea.completion.providers.processors.PerlCompletionProvider;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlVariableCompletionProcessor;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlVariableCompletionProcessorImpl;
 import com.perl5.lang.perl.idea.completion.util.PerlVariableCompletionUtil;
@@ -37,10 +36,12 @@ import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.processors.PerlNamespaceEntityProcessor;
 import org.jetbrains.annotations.NotNull;
 
+import static com.perl5.lang.perl.idea.PerlElementPatterns.VARIABLE_NAME_IN_DECLARATION_PATTERN;
+import static com.perl5.lang.perl.idea.PerlElementPatterns.VARIABLE_NAME_IN_LOCAL_DECLARATION_PATTERN;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.VARIABLE_OPEN_BRACES;
 
 
-public class PerlVariableNameCompletionProvider extends CompletionProvider<CompletionParameters> implements PerlElementPatterns {
+public class PerlVariableNameCompletionProvider extends PerlCompletionProvider {
 
   @Override
   public void addCompletions(@NotNull CompletionParameters parameters,
@@ -58,7 +59,8 @@ public class PerlVariableNameCompletionProvider extends CompletionProvider<Compl
     boolean isFullQualified = PerlPackageUtil.isFullQualifiedName(variableNameElement.getText());
     boolean hasBraces = VARIABLE_OPEN_BRACES.contains(PsiUtilCore.getElementType(variableNameElement.getPrevSibling()));
     PerlVariableCompletionProcessorImpl variableCompletionProcessor =
-      new PerlVariableCompletionProcessorImpl(resultSet, variableNameElement, isFullQualified, hasBraces, isDeclaration);
+      new PerlVariableCompletionProcessorImpl(withFqnSafeMatcher(resultSet), variableNameElement, isFullQualified, hasBraces,
+                                              isDeclaration);
 
     // declaration helper
     if (isDeclaration) {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,11 +17,11 @@
 package com.perl5.lang.perl.idea.completion.providers;
 
 import com.intellij.codeInsight.completion.CompletionParameters;
-import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
+import com.perl5.lang.perl.idea.completion.providers.processors.PerlCompletionProvider;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlSimpleCompletionProcessor;
 import com.perl5.lang.perl.idea.completion.util.PerlSubCompletionUtil;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
@@ -29,7 +29,7 @@ import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService;
 import org.jetbrains.annotations.NotNull;
 
 
-public class PerlSubBuiltInCompletionProvider extends CompletionProvider<CompletionParameters> {
+public class PerlSubBuiltInCompletionProvider extends PerlCompletionProvider {
   @Override
   public void addCompletions(@NotNull CompletionParameters parameters,
                              @NotNull ProcessingContext context,

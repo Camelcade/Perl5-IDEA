@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,13 +17,12 @@
 package com.perl5.lang.perl.idea.completion.providers;
 
 import com.intellij.codeInsight.completion.CompletionParameters;
-import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
-import com.intellij.codeInsight.completion.PlainPrefixMatcher;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
+import com.perl5.lang.perl.idea.completion.providers.processors.PerlCompletionProvider;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlSimpleCompletionProcessor;
 import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionUtil;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
@@ -31,7 +30,7 @@ import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
 
-public class PerlPackageSubCompletionProvider extends CompletionProvider<CompletionParameters> {
+public class PerlPackageSubCompletionProvider extends PerlCompletionProvider {
   private static final Logger LOG = Logger.getInstance(PerlPackageSubCompletionProvider.class);
 
   @Override
@@ -48,7 +47,7 @@ public class PerlPackageSubCompletionProvider extends CompletionProvider<Complet
     String newPrefixMathcer = explicitNamespace == null
                               ? currentPrefixMatcher
                               : PerlPackageUtil.join(explicitNamespace, currentPrefixMatcher);
-    result = result.withPrefixMatcher(new PlainPrefixMatcher(newPrefixMathcer));
+    result = withFqnSafeMatcher(result, newPrefixMathcer);
 
     PerlSimpleCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(result, parameters.getPosition());
     if (!((PsiPerlMethod)method).isObjectMethod()) {

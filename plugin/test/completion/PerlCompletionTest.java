@@ -49,6 +49,39 @@ public class PerlCompletionTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testPackageSomeReturns() {doTest();}
+
+  @Test
+  public void testPackageSomeType() {doTest();}
+
+  @Test
+  public void testPackageSomeLocal() {doTest();}
+
+  @Test
+  public void testPackageSomeMy() {doTest();}
+
+  @Test
+  public void testPackageSomeNo() {doTest();}
+
+  @Test
+  public void testPackageSomeOur() {doTest();}
+
+  @Test
+  public void testPackageSomeRequire() {doTest();}
+
+  @Test
+  public void testPackageSomeState() {doTest();}
+
+  @Test
+  public void testPackageSomeString() {doTest();}
+
+  @Test
+  public void testPackageSomeUse() {doTest();}
+
+  @Test
+  public void testPackageSome() {doTest();}
+
+  @Test
   public void testVariableInHeredocDq() {doTest();}
 
   @Test

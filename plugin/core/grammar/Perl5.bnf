@@ -1017,7 +1017,7 @@ private variable_declaration ::=
     | variable_declaration_local
 
 // @todo attributes support
-variable_declaration_local ::=  'local' [any_package]  local_variable_declaration_variation {pin=1}
+variable_declaration_local ::=  'local' local_variable_declaration_variation {pin=1}
 variable_declaration_lexical ::=  ('my' | 'state') [any_package] variable_declaration_variation [var_attributes] {pin=1}
 variable_declaration_global ::=  'our' [any_package] variable_declaration_variation [var_attributes] {pin=1}
 

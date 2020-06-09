@@ -17,12 +17,12 @@
 package com.perl5.lang.perl.idea.completion.providers;
 
 import com.intellij.codeInsight.completion.CompletionParameters;
-import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.openapi.application.Experiments;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
+import com.perl5.lang.perl.idea.completion.providers.processors.PerlCompletionProvider;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlVariableCompletionProcessor;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlVariableCompletionProcessorImpl;
 import com.perl5.lang.perl.idea.completion.util.PerlVariableCompletionUtil;
@@ -33,7 +33,7 @@ import org.jetbrains.annotations.NotNull;
 
 import static com.perl5.lang.perl.idea.completion.providers.PerlVariableNameCompletionProvider.fillWithImportedVariables;
 
-public class PerlVariableCompletionProvider extends CompletionProvider<CompletionParameters> {
+public class PerlVariableCompletionProvider extends PerlCompletionProvider {
   @Override
   protected void addCompletions(@NotNull CompletionParameters parameters,
                                 @NotNull ProcessingContext context,
@@ -59,7 +59,7 @@ public class PerlVariableCompletionProvider extends CompletionProvider<Completio
     }
 
     PerlVariableCompletionProcessor variableCompletionProcessor = new PerlVariableCompletionProcessorImpl(
-      resultSet, subName, fullQualified, false, false);
+      withFqnSafeMatcher(resultSet), subName, fullQualified, false, false);
 
     if (!fullQualified) {
       PerlVariableCompletionUtil.fillWithLexicalVariables(variableCompletionProcessor);

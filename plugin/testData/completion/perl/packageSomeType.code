@@ -1,0 +1,3 @@
+#@type some<caret>
+my $var;
+
