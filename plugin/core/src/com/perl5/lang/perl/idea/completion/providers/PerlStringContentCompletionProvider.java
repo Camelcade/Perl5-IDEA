@@ -25,8 +25,10 @@ import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlCompletionProvider;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlSimpleCompletionProcessor;
+import com.perl5.lang.perl.idea.completion.providers.processors.PerlVariableCompletionProcessorImpl;
 import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionUtil;
 import com.perl5.lang.perl.idea.completion.util.PerlStringCompletionUtil;
+import com.perl5.lang.perl.idea.completion.util.PerlVariableCompletionUtil;
 import com.perl5.lang.perl.psi.PsiPerlAnnotationInject;
 import com.perl5.lang.perl.psi.PsiPerlGlobSlot;
 import com.perl5.lang.perl.psi.PsiPerlHashIndex;
@@ -60,6 +62,8 @@ public class PerlStringContentCompletionProvider extends PerlCompletionProvider 
       }
       else {
         PerlStringCompletionUtil.fillWithHashIndexes(completionProcessor);
+        PerlVariableCompletionUtil.fillWithVariables(
+          new PerlVariableCompletionProcessorImpl(completionProcessor, false, false, false), null);
       }
     }
     else if (USE_PARAMETERS_PATTERN.accepts(element))    // use or no parameters

@@ -36,6 +36,16 @@ public class PerlVariableCompletionProcessorImpl extends PerlCompletionProcessor
     myIsDeclaration = isDeclaration;
   }
 
+  public PerlVariableCompletionProcessorImpl(@NotNull PerlCompletionProcessor processor,
+                                             boolean isFullQualified,
+                                             boolean hasBraces,
+                                             boolean isDeclaration) {
+    super(processor);
+    myIsFullQualified = isFullQualified;
+    myHasBraces = hasBraces;
+    myIsDeclaration = isDeclaration;
+  }
+
   private PerlVariableCompletionProcessorImpl(@NotNull PerlVariableCompletionProcessorImpl original,
                                               @NotNull String newPrefixMatcher) {
     super(original, newPrefixMatcher);

@@ -49,6 +49,9 @@ public class PerlCompletionTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testVariablesInBraces() {doTest();}
+
+  @Test
   public void testPackageSomeReturns() {doTest();}
 
   @Test

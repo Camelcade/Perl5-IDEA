@@ -37,6 +37,17 @@ public abstract class PerlCompletionProcessorBase extends AbstractPerlCompletion
     this(resultSet, leafElement, new Counters());
   }
 
+  protected PerlCompletionProcessorBase(@NotNull PerlCompletionProcessor completionProcessor) {
+    myResultSet = completionProcessor.getResultSet();
+    myLeafElement = completionProcessor.getLeafElement();
+    PerlCompletionProcessor run = completionProcessor;
+    while (run instanceof PerlDelegatingCompletionProcessor) {
+      run = ((PerlDelegatingCompletionProcessor<?>)run).getDelegate();
+    }
+    LOG.assertTrue(run instanceof PerlCompletionProcessorBase, "Got " + run);
+    myCounters = ((PerlCompletionProcessorBase)run).myCounters;
+  }
+
   protected PerlCompletionProcessorBase(@NotNull PerlCompletionProcessorBase original,
                                         @NotNull String newPrefixMatcher) {
     this(original.getResultSet().withPrefixMatcher(newPrefixMatcher),
