@@ -219,6 +219,7 @@
     <projectService serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings"/>
     <projectService serviceImplementation="com.perl5.lang.perl.xsubs.PerlXSubsState"/>
     <projectService serviceImplementation="com.perl5.lang.perl.idea.project.PerlProjectManager"/>
+    <projectService serviceImplementation="com.perl5.lang.perl.idea.project.PerlDirectoryIndex"/>
     <projectService serviceImplementation="com.perl5.lang.perl.idea.project.PerlNamesCache"/>
 
     <postStartupActivity implementation="com.perl5.lang.perl.xsubs.PerlXSubsStartupActivity"/>

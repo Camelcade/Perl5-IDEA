@@ -51,6 +51,7 @@ import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlScalarValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.manipulators.PerlNamespaceElementManipulator;
+import com.perl5.lang.perl.idea.project.PerlDirectoryIndex;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.refactoring.rename.RenameRefactoringQueue;
 import com.perl5.lang.perl.internals.PerlVersion;
@@ -694,18 +695,21 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
    * @return vartual file
    */
   public static @Nullable VirtualFile resolveRelativePathToVirtualFile(@NotNull PsiFile psiFile, String relativePath) {
-    if (relativePath != null) {
-      for (VirtualFile classRoot : getIncDirsForPsiElement(psiFile)) {
-        if (classRoot != null) {
-          VirtualFile targetFile = classRoot.findFileByRelativePath(relativePath);
-          if (targetFile != null) {
-            String foundRelativePath = VfsUtil.getRelativePath(targetFile, classRoot);
+    if (relativePath == null) {
+      return null;
+    }
+    for (VirtualFile classRoot : getIncDirsForPsiElement(psiFile)) {
+      if (classRoot == null) {
+        continue;
+      }
+      VirtualFile targetFile = classRoot.findFileByRelativePath(relativePath);
+      if (targetFile == null) {
+        continue;
+      }
+      String foundRelativePath = VfsUtil.getRelativePath(targetFile, classRoot);
 
-            if (StringUtil.isNotEmpty(foundRelativePath) && StringUtil.equals(foundRelativePath, relativePath)) {
-              return targetFile;
-            }
-          }
-        }
+      if (StringUtil.isNotEmpty(foundRelativePath) && StringUtil.equals(foundRelativePath, relativePath)) {
+        return targetFile;
       }
     }
 
@@ -718,7 +722,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
    * @param psiElement to resolve for
    * @return list of lib dirs
    */
-  public static @NotNull List<VirtualFile> getIncDirsForPsiElement(@NotNull PsiElement psiElement) {
+  private static @NotNull List<VirtualFile> getIncDirsForPsiElement(@NotNull PsiElement psiElement) {
     PsiFile psiFile = psiElement.getContainingFile().getOriginalFile();
     List<VirtualFile> result = new ArrayList<>();
 
@@ -828,46 +832,20 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
   }
 
   /**
-   * Searches for innermost source root for a file
-   *
-   * @param project project to search in
-   * @param file    containing file
-   * @return innermost root
+   * @return innermost @INC root for a file
+   * @apiNote this method may work wrong, because it is not accounts for dynamic lib paths, e.g. use lib
    */
   @Contract("_,null->null")
   public static @Nullable VirtualFile getFileClassRoot(@NotNull Project project, @Nullable VirtualFile file) {
-    if (file == null) {
-      return null;
-    }
-    VirtualFile result = null;
-    for (VirtualFile classRoot : PerlProjectManager.getInstance(project).getAllLibraryRoots()) {
-      if (VfsUtil.isAncestor(classRoot, file, false) && (result == null || VfsUtil.isAncestor(result, classRoot, true))) {
-        result = classRoot;
-      }
-    }
-
-    return result;
+    return PerlDirectoryIndex.getInstance(project).getRoot(file);
   }
 
   /**
-   * Searches for innermost source root for a file by it's absolute path
-   *
-   * @param project  module to search in
-   * @param filePath containing filename
-   * @return innermost root
+   * @return innermost @INC root for a file by path
+   * @apiNote this method may work wrong, because it is not accounts for dynamic lib paths, e.g. use lib
    */
   public static @Nullable VirtualFile getFileClassRoot(@NotNull Project project, @NotNull String filePath) {
-    File file = new File(filePath);
-    VirtualFile result = null;
-
-    for (VirtualFile classRoot : PerlProjectManager.getInstance(project).getAllLibraryRoots()) {
-      File sourceRootFile = new File(classRoot.getPath());
-      if (VfsUtil.isAncestor(sourceRootFile, file, false) && (result == null || VfsUtil.isAncestor(result, classRoot, true))) {
-        result = classRoot;
-      }
-    }
-
-    return result;
+    return getFileClassRoot(project, VfsUtil.findFileByIoFile(new File(filePath), false));
   }
 
   public interface ClassRootVirtualFileProcessor {
