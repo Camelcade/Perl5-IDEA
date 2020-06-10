@@ -37,8 +37,8 @@ import java.util.Objects;
 public class PerlConfigurationUtil {
   public static final int WIDGET_HEIGHT = 90;
 
-  public static JPanel createSubstituteExtensionPanel(@NotNull final CollectionListModel<String> substitutedExtensionsModel,
-                                                      @NotNull final JBList<String> substitutedExtensionsList
+  public static JPanel createSubstituteExtensionPanel(final @NotNull CollectionListModel<String> substitutedExtensionsModel,
+                                                      final @NotNull JBList<String> substitutedExtensionsList
   ) {
     return ToolbarDecorator
       .createDecorator(substitutedExtensionsList)

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,9 +27,8 @@ class PerlRunConfigurationEditor extends GenericPerlRunConfigurationEditor<PerlR
     super(project);
   }
 
-  @NotNull
   @Override
-  protected GenericPerlRunConfigurationEditorPanel<PerlRunConfiguration> createCommonParametersPanel() {
+  protected @NotNull GenericPerlRunConfigurationEditorPanel<PerlRunConfiguration> createCommonParametersPanel() {
     return new ParametersPanel(myProject);
   }
 
@@ -38,9 +37,8 @@ class PerlRunConfigurationEditor extends GenericPerlRunConfigurationEditor<PerlR
       super(project);
     }
 
-    @NotNull
     @Override
-    protected GenericPerlRunConfigurationProducer<PerlRunConfiguration> getRunConfigurationProducer() {
+    protected @NotNull GenericPerlRunConfigurationProducer<PerlRunConfiguration> getRunConfigurationProducer() {
       return PerlRunConfigurationProducer.getInstance();
     }
   }

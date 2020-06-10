@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,9 +33,8 @@ public abstract class Mason2TemplatingLexerBase extends PerlTemplatingLexer impl
     return -1;
   };
 
-  @Nullable
   @Override
-  protected CommentEndCalculator getCommentEndCalculator() {
+  protected @Nullable CommentEndCalculator getCommentEndCalculator() {
     return COMMENT_END_CALCULATOR;
   }
 }

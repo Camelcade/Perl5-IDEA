@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,15 +50,13 @@ public class PerlSublistValue extends PerlOperationValue {
     serializer.writeVarInt(myEndOffset);
   }
 
-  @NotNull
   @Override
-  protected PerlValue computeResolve(@NotNull PerlValue resolvedListValue, @NotNull PerlValueResolver resolver) {
+  protected @NotNull PerlValue computeResolve(@NotNull PerlValue resolvedListValue, @NotNull PerlValueResolver resolver) {
     return computeStrictResolve(resolvedListValue, myStartOffset, myEndOffset);
   }
 
-  @Nullable
   @Override
-  protected PerlContextType getContextType() {
+  protected @Nullable PerlContextType getContextType() {
     return PerlContextType.LIST;
   }
 
@@ -108,13 +106,11 @@ public class PerlSublistValue extends PerlOperationValue {
     return result;
   }
 
-  @NotNull
-  private static PerlValue computeStrictResolve(@NotNull PerlValue listValue, int startOffset, int endOffset) {
+  private static @NotNull PerlValue computeStrictResolve(@NotNull PerlValue listValue, int startOffset, int endOffset) {
     return ObjectUtils.notNull(computeResolve(listValue, startOffset, endOffset), UNKNOWN_VALUE);
   }
 
-  @Nullable
-  private static PerlValue computeResolve(@NotNull PerlValue listValue, int startOffset, int endOffset) {
+  private static @Nullable PerlValue computeResolve(@NotNull PerlValue listValue, int startOffset, int endOffset) {
     if (!(listValue instanceof PerlArrayValue)) {
       return null;
     }
@@ -141,8 +137,7 @@ public class PerlSublistValue extends PerlOperationValue {
     return PerlArrayValue.builder().addElements(elements.subList(startOffset, listSize - endOffset)).build();
   }
 
-  @NotNull
-  public static PerlValue createShiftValue(@NotNull PerlValue listValue) {
+  public static @NotNull PerlValue createShiftValue(@NotNull PerlValue listValue) {
     return create(listValue, 1, 0);
   }
 
@@ -159,8 +154,7 @@ public class PerlSublistValue extends PerlOperationValue {
     return PerlValuesManager.intern(result);
   }
 
-  @NotNull
-  public static PerlValue createPopValue(@NotNull PerlValue listValue) {
+  public static @NotNull PerlValue createPopValue(@NotNull PerlValue listValue) {
     return create(listValue, 0, 1);
   }
 }

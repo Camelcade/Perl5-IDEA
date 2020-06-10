@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,17 +41,15 @@ public class PerlInterpreterEditorNotification extends EditorNotifications.Provi
     this.myProject = myProject;
   }
 
-  @NotNull
   @Override
-  public Key<EditorNotificationPanel> getKey() {
+  public @NotNull Key<EditorNotificationPanel> getKey() {
     return KEY;
   }
 
-  @Nullable
   @Override
-  public EditorNotificationPanel createNotificationPanel(@NotNull VirtualFile virtualFile,
-                                                         @NotNull FileEditor fileEditor,
-                                                         @NotNull Project project) {
+  public @Nullable EditorNotificationPanel createNotificationPanel(@NotNull VirtualFile virtualFile,
+                                                                   @NotNull FileEditor fileEditor,
+                                                                   @NotNull Project project) {
     if (virtualFile.getFileType() instanceof PerlFileType && !(virtualFile instanceof LightVirtualFile)) {
       final PerlLocalSettings perlLocalSettings = PerlLocalSettings.getInstance(myProject);
       if (perlLocalSettings.DISABLE_NO_INTERPRETER_WARNING) {

@@ -48,9 +48,8 @@ public class MojoHelperDefinition extends PerlLightMethodDefinitionElement<PerlS
     return true;
   }
 
-  @Nullable
   @Override
-  public Icon getIcon(int flags) {
+  public @Nullable Icon getIcon(int flags) {
     return MojoIcons.MOJO_FILE;
   }
 }

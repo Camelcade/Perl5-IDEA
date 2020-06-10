@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,9 +35,8 @@ public class TemplateToolkitCloseTagMacro extends TemplateToolkitOpenTagMacro {
     return "tt2CloseMarker()";
   }
 
-  @Nullable
   @Override
-  protected Result getResultByTokenType(Project project, IElementType tokenType) {
+  protected @Nullable Result getResultByTokenType(Project project, IElementType tokenType) {
     if (tokenType == TT2_OUTLINE_TAG) {
       return new TextResult("");
     }

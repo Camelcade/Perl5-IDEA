@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,18 +24,15 @@ import org.jetbrains.annotations.Nullable;
  * Represents hash pair - key and value
  */
 public class PerlHashEntry {
-  @NotNull
-  public PsiElement keyElement;
-  @Nullable
-  public PsiElement valueElement;
+  public @NotNull PsiElement keyElement;
+  public @Nullable PsiElement valueElement;
 
   private PerlHashEntry(@NotNull PsiElement keyElement, @Nullable PsiElement valueElement) {
     this.keyElement = keyElement;
     this.valueElement = valueElement;
   }
 
-  @Nullable
-  public String getValueString() {
+  public @Nullable String getValueString() {
     return PerlScalarUtil.getStringContent(valueElement);
   }
 
@@ -43,8 +40,7 @@ public class PerlHashEntry {
     return valueElement != null;
   }
 
-  @NotNull
-  public PsiElement getNonNullValueElement() {
+  public @NotNull PsiElement getNonNullValueElement() {
     assert valueElement != null : "This method should be invoked only after isComplete() check";
     return valueElement;
   }

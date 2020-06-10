@@ -38,27 +38,23 @@ public class MasonPurePerlComponentFileType extends PurePerlFileType {
     super(language);
   }
 
-  @NotNull
   @Override
-  public String getName() {
+  public @NotNull String getName() {
     return "Mason2 Pure Perl5 Component";
   }
 
-  @NotNull
   @Override
-  public String getDescription() {
+  public @NotNull String getDescription() {
     return "Mason2 pure Perl component";
   }
 
-  @NotNull
   @Override
-  public String getDefaultExtension() {
+  public @NotNull String getDefaultExtension() {
     return PURE_PERL_COMPONENT_EXTENSION;
   }
 
-  @Nullable
   @Override
-  public Icon getIcon() {
+  public @Nullable Icon getIcon() {
     return Mason2Icons.MASON_PURE_PERL_COMPONENT_ICON;
   }
 

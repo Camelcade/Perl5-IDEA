@@ -34,9 +34,8 @@ public interface MojoliciousElementTypes extends MojoliciousSyntaxElements {
   IElementType MOJO_POD_TEMPLATE_DATA = new PodTemplatingElementType("MOJO_POD_TEMPLATE_DATA", MojoliciousLanguage.INSTANCE);
 
   IElementType MOJO_HELPER_METHOD = new MojoliciousTokenType(KEYWORD_MOJO_HELPER_METHOD) {
-    @NotNull
     @Override
-    public ASTNode createLeafNode(@NotNull CharSequence leafText) {
+    public @NotNull ASTNode createLeafNode(@NotNull CharSequence leafText) {
       return new PerlSubNameElementImpl(this, leafText);
     }
   };

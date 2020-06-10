@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,9 +36,8 @@ import java.util.regex.Pattern;
 public class HTMLMasonComponentReferencesProvider extends PsiReferenceProvider implements HTMLMasonSyntaxElements {
   public static final Pattern METHOD_CALL_PATTERN = Pattern.compile("(.+?):([\\w._-]+\\s*)?");
 
-  @NotNull
   @Override
-  public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context) {
+  public @NotNull PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context) {
     if (element.getChildren().length == 0) {
       assert element instanceof PerlString;
       String content = ElementManipulators.getValueText(element);

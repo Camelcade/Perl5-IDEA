@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,9 +32,8 @@ public class MasonAroundMethodModifierImpl extends MasonMethodModifierImpl imple
     super(node);
   }
 
-  @NotNull
   @Override
-  protected List<PerlVariableDeclarationElement> buildImplicitVariables() {
+  protected @NotNull List<PerlVariableDeclarationElement> buildImplicitVariables() {
     List<PerlVariableDeclarationElement> newImplicitVariables = super.buildImplicitVariables();
     newImplicitVariables.add(PerlImplicitVariableDeclaration.createLexical(this, ORIG_VARIABLE_NAME));
     return newImplicitVariables;

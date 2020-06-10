@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,19 +43,16 @@ public class PerlScalarContextValue extends PerlOperationValue {
     super(deserializer);
   }
 
-  @NotNull
   @Override
-  protected PerlValue computeResolve(@NotNull PerlValue resolvedTarget, @NotNull PerlValueResolver resolver) {
+  protected @NotNull PerlValue computeResolve(@NotNull PerlValue resolvedTarget, @NotNull PerlValueResolver resolver) {
     return doComputeStrictResolve(resolvedTarget);
   }
 
-  @NotNull
-  private static PerlValue doComputeStrictResolve(@NotNull PerlValue resolvedTarget) {
+  private static @NotNull PerlValue doComputeStrictResolve(@NotNull PerlValue resolvedTarget) {
     return ObjectUtils.notNull(doComputeResolve(resolvedTarget), UNKNOWN_VALUE);
   }
 
-  @Nullable
-  private static PerlValue doComputeResolve(@NotNull PerlValue targetValue) {
+  private static @Nullable PerlValue doComputeResolve(@NotNull PerlValue targetValue) {
     if (targetValue.isUnknown()) {
       return UNKNOWN_VALUE;
     }
@@ -86,14 +83,12 @@ public class PerlScalarContextValue extends PerlOperationValue {
     return "scalar " + getBaseValue().toString();
   }
 
-  @NotNull
   @Override
-  public String getPresentableText() {
+  public @NotNull String getPresentableText() {
     return "scalar " + getBaseValue().getPresentableText();
   }
 
-  @NotNull
-  public static PerlValue create(@NotNull PerlValue baseValue) {
+  public static @NotNull PerlValue create(@NotNull PerlValue baseValue) {
     if (baseValue.isDeterministic()) {
       return PerlValuesBuilder.convert(baseValue, PerlScalarContextValue::doComputeStrictResolve);
     }

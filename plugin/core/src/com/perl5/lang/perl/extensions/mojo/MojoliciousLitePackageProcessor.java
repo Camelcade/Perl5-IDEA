@@ -61,9 +61,8 @@ public class MojoliciousLitePackageProcessor extends PerlPackageProcessorBase im
     return false;
   }
 
-  @NotNull
   @Override
-  public List<PerlDelegatingLightNamedElement<?>> computeLightElementsFromPsi(@NotNull PerlUseStatementElement useStatementElement) {
+  public @NotNull List<PerlDelegatingLightNamedElement<?>> computeLightElementsFromPsi(@NotNull PerlUseStatementElement useStatementElement) {
     List<PerlDelegatingLightNamedElement<?>> result = new ArrayList<>();
     String contextNamespace = useStatementElement.getNamespaceName();
     List<PerlValue> constructorArguments = Arrays.asList(PerlScalarValue.create("moniker"), PerlValues.DUMMY_SCALAR);
@@ -88,11 +87,10 @@ public class MojoliciousLitePackageProcessor extends PerlPackageProcessorBase im
     return result;
   }
 
-  @NotNull
-  public MojoLightDelegatingSubDefinition createLightMethod(@NotNull PerlUseStatementElement useStatementElement,
-                                                            String contextNamespace,
-                                                            String methodName,
-                                                            PerlValue app) {
+  public @NotNull MojoLightDelegatingSubDefinition createLightMethod(@NotNull PerlUseStatementElement useStatementElement,
+                                                                     String contextNamespace,
+                                                                     String methodName,
+                                                                     PerlValue app) {
     return new MojoLightDelegatingSubDefinition(
       useStatementElement,
       contextNamespace, methodName,
@@ -100,10 +98,9 @@ public class MojoliciousLitePackageProcessor extends PerlPackageProcessorBase im
     );
   }
 
-  @NotNull
   @Override
-  public List<PerlDelegatingLightNamedElement<?>> computeLightElementsFromStubs(@NotNull PerlUseStatementElement useStatementElement,
-                                                                                @NotNull PerlUseStatementStub useStatementStub) {
+  public @NotNull List<PerlDelegatingLightNamedElement<?>> computeLightElementsFromStubs(@NotNull PerlUseStatementElement useStatementElement,
+                                                                                         @NotNull PerlUseStatementStub useStatementStub) {
     return computeLightElementsFromPsi(useStatementElement);
   }
 }

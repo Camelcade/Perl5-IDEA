@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,21 +29,18 @@ class PerlSystemData extends PerlVersionManagerData<PerlSystemData, PerlSystemHa
     super(handler);
   }
 
-  @NotNull
   @Override
-  protected PerlSystemData self() {
+  protected @NotNull PerlSystemData self() {
     return this;
   }
 
-  @NotNull
   @Override
-  public PerlCommandLine patchCommandLine(@NotNull PerlCommandLine originalCommandLine) {
+  public @NotNull PerlCommandLine patchCommandLine(@NotNull PerlCommandLine originalCommandLine) {
     return originalCommandLine;
   }
 
-  @Nullable
   @Override
-  public String getSecondaryShortName() {
+  public @Nullable String getSecondaryShortName() {
     return null;
   }
 
@@ -52,9 +49,8 @@ class PerlSystemData extends PerlVersionManagerData<PerlSystemData, PerlSystemHa
     CpanminusAdapter.install(project);
   }
 
-  @Nullable
   @Override
-  public InstallPerlHandler getInstallPerlHandler() {
+  public @Nullable InstallPerlHandler getInstallPerlHandler() {
     return null;
   }
 }

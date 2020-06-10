@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,24 +32,21 @@ class PodSurrounderLink extends PodSurrounder {
     return 'L';
   }
 
-  @NotNull
   @Override
-  protected String adjustContent(@NotNull String originalContent) {
+  protected @NotNull String adjustContent(@NotNull String originalContent) {
     return super.adjustContent(originalContent) + "|";
   }
 
-  @Nullable
   @Override
-  public TextRange surroundElements(@NotNull Project project, @NotNull Editor editor, @NotNull PsiElement[] elements)
+  public @Nullable TextRange surroundElements(@NotNull Project project, @NotNull Editor editor, @NotNull PsiElement[] elements)
     throws IncorrectOperationException {
     TextRange range = super.surroundElements(project, editor, elements);
     AutoPopupController.getInstance(project).scheduleAutoPopup(editor);
     return range;
   }
 
-  @NotNull
   @Override
-  protected String getFormatterDescription() {
+  protected @NotNull String getFormatterDescription() {
     return PerlBundle.message("pod.intention.wrap.description.l");
   }
 }

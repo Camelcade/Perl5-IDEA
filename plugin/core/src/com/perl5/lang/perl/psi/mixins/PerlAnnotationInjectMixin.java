@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,9 +29,8 @@ public abstract class PerlAnnotationInjectMixin extends PerlCompositeElementImpl
     super(node);
   }
 
-  @Nullable
   @Override
-  public String getLanguageMarker() {
+  public @Nullable String getLanguageMarker() {
     PsiPerlStringBare stringBare = getStringBare();
     return stringBare == null ? null : stringBare.getText();
   }

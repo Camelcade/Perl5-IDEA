@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,15 +27,13 @@ import java.util.Collection;
 import java.util.Objects;
 
 public class PerlRunAnythingHelpGroup extends RunAnythingHelpGroup<PerlRunAnythingProvider> {
-  @NotNull
   @Override
-  public Collection<PerlRunAnythingProvider> getProviders() {
+  public @NotNull Collection<PerlRunAnythingProvider> getProviders() {
     throw new RuntimeException("NYI");
   }
 
-  @NotNull
   @Override
-  public String getTitle() {
+  public @NotNull String getTitle() {
     return Objects.requireNonNull(RunAnythingProvider.EP_NAME.findExtension(PerlRunAnythingProvider.class)).getHelpGroupTitle();
   }
 
@@ -44,9 +42,8 @@ public class PerlRunAnythingHelpGroup extends RunAnythingHelpGroup<PerlRunAnythi
     return 10;
   }
 
-  @NotNull
   @Override
-  public Collection<RunAnythingItem> getGroupItems(@NotNull DataContext dataContext, @NotNull String pattern) {
+  public @NotNull Collection<RunAnythingItem> getGroupItems(@NotNull DataContext dataContext, @NotNull String pattern) {
     return ContainerUtil.filter(
       Objects.requireNonNull(RunAnythingProvider.EP_NAME.findExtension(PerlRunAnythingProvider.class)).getHelpItems(dataContext),
       Objects::nonNull);

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -222,15 +222,13 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
     return getForeignIndent();
   }
 
-  @NotNull
-  protected Indent getForeignIndent() {
+  protected @NotNull Indent getForeignIndent() {
     //noinspection ConstantConditions
     return getForeignIndent(Indent.getNoneIndent());
   }
 
 
-  @Nullable
-  protected Indent getForeignIndent(@Nullable Indent defaultIndent) {
+  protected @Nullable Indent getForeignIndent(@Nullable Indent defaultIndent) {
     // any element that is the direct descendant of a foreign block gets an indent
     // (unless that foreign element has been configured to not indent its children)
     DataLanguageBlockWrapper foreignParent = getForeignBlockParent(true);
@@ -295,9 +293,8 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
   }
 
 
-  @Nullable
   @Override
-  protected Indent getChildIndent() {
+  protected @Nullable Indent getChildIndent() {
     IElementType elementType = myNode.getElementType();
     if (NORMAL_CHILD_INDENTED_CONTAINERS.contains(elementType)) {
       return Indent.getNormalIndent();
@@ -308,9 +305,8 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
     return super.getChildIndent();
   }
 
-  @Nullable
   @Override
-  public Alignment getAlignment() {
+  public @Nullable Alignment getAlignment() {
     // we could use pattern here, but we need to find parent node, so this method is more effective i guess
     IElementType nodeType = myNode.getElementType();
     ASTNode parentNode = myNode.getTreeParent();
@@ -344,9 +340,8 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
     return super.buildChildren();
   }
 
-  @Nullable
   @Override
-  public Spacing getSpacing(@Nullable Block child1, @NotNull Block child2) {
+  public @Nullable Spacing getSpacing(@Nullable Block child1, @NotNull Block child2) {
     Spacing result = null;
 
     if (child1 instanceof TemplateToolkitFormattingBlock && child2 instanceof TemplateToolkitFormattingBlock) {

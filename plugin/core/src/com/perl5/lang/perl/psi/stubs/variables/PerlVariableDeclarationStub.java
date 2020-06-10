@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,16 +29,11 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class PerlVariableDeclarationStub extends StubBase<PerlVariableDeclarationElement> implements PerlVariableDeclaration {
-  @NotNull
-  private final String myNamespaceName;
-  @NotNull
-  private final String myVariableName;
-  @NotNull
-  private final PerlVariableType myVariableType;
-  @Nullable
-  private final PerlVariableAnnotations myPerlVariableAnnotations;
-  @NotNull
-  private final PerlValue myDeclaredValue;
+  private final @NotNull String myNamespaceName;
+  private final @NotNull String myVariableName;
+  private final @NotNull PerlVariableType myVariableType;
+  private final @Nullable PerlVariableAnnotations myPerlVariableAnnotations;
+  private final @NotNull PerlValue myDeclaredValue;
 
   public PerlVariableDeclarationStub(
     StubElement parent,
@@ -57,39 +52,33 @@ public class PerlVariableDeclarationStub extends StubBase<PerlVariableDeclaratio
     myPerlVariableAnnotations = variableAnnotations;
   }
 
-  @NotNull
   @Override
-  public String getExplicitNamespaceName() {
+  public @NotNull String getExplicitNamespaceName() {
     return myNamespaceName;
   }
 
-  @NotNull
   @Override
-  public String getNamespaceName() {
+  public @NotNull String getNamespaceName() {
     return getExplicitNamespaceName();
   }
 
-  @NotNull
   @Override
-  public String getVariableName() {
+  public @NotNull String getVariableName() {
     return myVariableName;
   }
 
   @Override
-  @NotNull
-  public PerlValue getDeclaredValue() {
+  public @NotNull PerlValue getDeclaredValue() {
     return myDeclaredValue;
   }
 
-  @NotNull
   @Override
-  public PerlVariableType getActualType() {
+  public @NotNull PerlVariableType getActualType() {
     return myVariableType;
   }
 
-  @Nullable
   @Override
-  public PerlVariableAnnotations getVariableAnnotations() {
+  public @Nullable PerlVariableAnnotations getVariableAnnotations() {
     return myPerlVariableAnnotations;
   }
 

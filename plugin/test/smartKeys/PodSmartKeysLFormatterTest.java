@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,9 +19,8 @@ package smartKeys;
 import org.jetbrains.annotations.NotNull;
 
 public class PodSmartKeysLFormatterTest extends PodSmartKeysFormattersTestCase {
-  @NotNull
   @Override
-  protected String formatter() {
+  protected @NotNull String formatter() {
     return "L";
   }
 }

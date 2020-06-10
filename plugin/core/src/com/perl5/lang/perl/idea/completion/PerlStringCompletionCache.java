@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,8 +42,7 @@ public class PerlStringCompletionCache {
     myHeredocOpenersCache.clear();
   }
 
-  @NotNull
-  public static PerlStringCompletionCache getInstance(@NotNull Project project) {
+  public static @NotNull PerlStringCompletionCache getInstance(@NotNull Project project) {
     return ServiceManager.getService(project, PerlStringCompletionCache.class);
   }
 }

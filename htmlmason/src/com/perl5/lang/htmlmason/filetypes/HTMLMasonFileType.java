@@ -36,27 +36,23 @@ public class HTMLMasonFileType extends PerlFileType implements FileTypeIdentifia
     super(HTMLMasonLanguage.INSTANCE);
   }
 
-  @NotNull
   @Override
-  public String getName() {
+  public @NotNull String getName() {
     return "HTML::Mason Component";
   }
 
-  @NotNull
   @Override
-  public String getDescription() {
+  public @NotNull String getDescription() {
     return "HTML::Mason component";
   }
 
-  @NotNull
   @Override
-  public String getDefaultExtension() {
+  public @NotNull String getDefaultExtension() {
     return DEFAULT_EXTENSION;
   }
 
-  @Nullable
   @Override
-  public Icon getIcon() {
+  public @Nullable Icon getIcon() {
     return HTMLMasonIcons.HTML_MASON_COMPONENT_ICON;
   }
 

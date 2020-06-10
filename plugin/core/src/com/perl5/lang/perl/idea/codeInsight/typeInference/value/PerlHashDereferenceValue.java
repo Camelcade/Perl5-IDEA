@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,15 +38,13 @@ public class PerlHashDereferenceValue extends PerlOperationValue {
     super(deserializer);
   }
 
-  @Nullable
   @Override
-  protected PerlContextType getContextType() {
+  protected @Nullable PerlContextType getContextType() {
     return PerlContextType.LIST;
   }
 
-  @NotNull
   @Override
-  protected PerlValue computeResolve(@NotNull PerlValue resolvedReference, @NotNull PerlValueResolver resolver) {
+  protected @NotNull PerlValue computeResolve(@NotNull PerlValue resolvedReference, @NotNull PerlValueResolver resolver) {
     return doComputeStrictResolve(resolvedReference);
   }
 
@@ -64,8 +62,7 @@ public class PerlHashDereferenceValue extends PerlOperationValue {
     return ObjectUtils.notNull(doComputeResolve(referenceValue), UNKNOWN_VALUE);
   }
 
-  @Nullable
-  private static PerlValue doComputeResolve(@NotNull PerlValue referenceValue) {
+  private static @Nullable PerlValue doComputeResolve(@NotNull PerlValue referenceValue) {
     if (referenceValue instanceof PerlReferenceValue) {
       PerlValue referenceTarget = ((PerlReferenceValue)referenceValue).getTarget();
       if (referenceTarget instanceof PerlHashValue) {
@@ -75,8 +72,7 @@ public class PerlHashDereferenceValue extends PerlOperationValue {
     return null;
   }
 
-  @NotNull
-  public static PerlValue create(@NotNull PerlValue referenceValue) {
+  public static @NotNull PerlValue create(@NotNull PerlValue referenceValue) {
     if (referenceValue.isDeterministic()) {
       return PerlValuesBuilder.convert(referenceValue, PerlHashDereferenceValue::doComputeStrictResolve);
     }

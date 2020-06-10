@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,8 +32,7 @@ public class PerlHashValue extends PerlMapValue {
   /**
    * Transient map for faster seek operations
    */
-  @Nullable
-  private Map<PerlValue, PerlValue> myMap;
+  private @Nullable Map<PerlValue, PerlValue> myMap;
 
   public PerlHashValue(@NotNull List<PerlValue> elements) {
     super(elements);
@@ -43,8 +42,7 @@ public class PerlHashValue extends PerlMapValue {
     super(deserializer);
   }
 
-  @NotNull
-  public Map<PerlValue, PerlValue> getMap() {
+  public @NotNull Map<PerlValue, PerlValue> getMap() {
     if (myMap == null) {
       Map<PerlValue, PerlValue> map = new HashMap<>();
       List<PerlValue> elements = getElements();
@@ -59,8 +57,7 @@ public class PerlHashValue extends PerlMapValue {
   /**
    * @return a value for the {@code key}
    */
-  @NotNull
-  public PerlValue get(@NotNull PerlValue key) {
+  public @NotNull PerlValue get(@NotNull PerlValue key) {
     return ObjectUtils.notNull(getMap().get(key), UNDEF_VALUE);
   }
 

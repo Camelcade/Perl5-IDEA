@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,17 +39,15 @@ public class PerlNamespaceReference extends PerlCachingReference<PsiElement> {
     super(element, textRange);
   }
 
-  @NotNull
-  private String getNamspaceName() {
+  private @NotNull String getNamspaceName() {
     if (myElement instanceof PerlNamespaceElement) {
       return ((PerlNamespaceElement)myElement).getCanonicalName();
     }
     return getRangeInElement().substring(myElement.getText());
   }
 
-  @NotNull
   @Override
-  protected ResolveResult[] resolveInner(boolean incompleteCode) {
+  protected @NotNull ResolveResult[] resolveInner(boolean incompleteCode) {
     String namespaceName = getNamspaceName();
     if (namespaceName.isEmpty()) {
       namespaceName = PerlPackageUtil.MAIN_NAMESPACE_NAME;

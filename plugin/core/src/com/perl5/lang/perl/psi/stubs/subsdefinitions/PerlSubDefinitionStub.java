@@ -29,10 +29,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class PerlSubDefinitionStub extends PerlSubStub<PerlSubDefinitionElement> implements PerlSubDefinition {
-  @NotNull
-  private final List<PerlSubArgument> myArguments;
-  @NotNull
-  private final PerlValue myReturnValueFromCode;
+  private final @NotNull List<PerlSubArgument> myArguments;
+  private final @NotNull PerlValue myReturnValueFromCode;
 
   public PerlSubDefinitionStub(StubElement parent,
                                String packageName,
@@ -46,15 +44,13 @@ public class PerlSubDefinitionStub extends PerlSubStub<PerlSubDefinitionElement>
     myReturnValueFromCode = returnValueFromCode;
   }
 
-  @NotNull
   @Override
-  public PerlValue getReturnValueFromCode() {
+  public @NotNull PerlValue getReturnValueFromCode() {
     return myReturnValueFromCode;
   }
 
   @Override
-  @NotNull
-  public List<PerlSubArgument> getSubArgumentsList() {
+  public @NotNull List<PerlSubArgument> getSubArgumentsList() {
     return myArguments;
   }
 

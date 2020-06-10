@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,14 +37,12 @@ public class TemplateToolkitOpenTagMacro extends Macro implements TemplateToolki
     return "tt2OpenMarker()";
   }
 
-  @Nullable
   @Override
-  public Result calculateQuickResult(@NotNull Expression[] params, ExpressionContext context) {
+  public @Nullable Result calculateQuickResult(@NotNull Expression[] params, ExpressionContext context) {
     return getResultByTokenType(context.getProject(), TemplateToolkitPsiUtil.getLastOpenMarker(context.getEditor()));
   }
 
-  @Nullable
-  protected Result getResultByTokenType(Project project, IElementType tokenType) {
+  protected @Nullable Result getResultByTokenType(Project project, IElementType tokenType) {
     if (tokenType == TT2_OUTLINE_TAG) {
       return new TextResult(TemplateToolkitSettings.getInstance(project).OUTLINE_TAG);
     }
@@ -56,9 +54,8 @@ public class TemplateToolkitOpenTagMacro extends Macro implements TemplateToolki
   }
 
 
-  @Nullable
   @Override
-  public Result calculateResult(@NotNull Expression[] params, ExpressionContext context) {
+  public @Nullable Result calculateResult(@NotNull Expression[] params, ExpressionContext context) {
     return calculateQuickResult(params, context);
   }
 

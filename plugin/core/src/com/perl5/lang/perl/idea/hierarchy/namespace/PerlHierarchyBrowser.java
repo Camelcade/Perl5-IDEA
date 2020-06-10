@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,15 +56,13 @@ public class PerlHierarchyBrowser extends TypeHierarchyBrowserBase {
     return null;
   }
 
-  @Nullable
   @Override
-  protected String getContentDisplayName(@NotNull String typeName, @NotNull PsiElement element) {
+  protected @Nullable String getContentDisplayName(@NotNull String typeName, @NotNull PsiElement element) {
     return super.getContentDisplayName(typeName, element);
   }
 
-  @Nullable
   @Override
-  protected PsiElement getElementFromDescriptor(@NotNull HierarchyNodeDescriptor descriptor) {
+  protected @Nullable PsiElement getElementFromDescriptor(@NotNull HierarchyNodeDescriptor descriptor) {
     if (!(descriptor instanceof PerlHierarchyNodeDescriptor)) {
       return null;
     }
@@ -79,16 +77,15 @@ public class PerlHierarchyBrowser extends TypeHierarchyBrowserBase {
   }
 
   @Override
-  protected void prependActions(@NotNull final DefaultActionGroup actionGroup) {
+  protected void prependActions(final @NotNull DefaultActionGroup actionGroup) {
     actionGroup.add(new ViewSupertypesHierarchyAction());
     actionGroup.add(new ViewSubtypesHierarchyAction());
     actionGroup.add(new AlphaSortAction());
   }
 
 
-  @Nullable
   @Override
-  protected JPanel createLegendPanel() {
+  protected @Nullable JPanel createLegendPanel() {
     return null;
   }
 
@@ -97,9 +94,8 @@ public class PerlHierarchyBrowser extends TypeHierarchyBrowserBase {
     return element instanceof PerlNamespaceDefinitionElement;
   }
 
-  @Nullable
   @Override
-  protected HierarchyTreeStructure createHierarchyTreeStructure(@NotNull String typeName, @NotNull PsiElement psiElement) {
+  protected @Nullable HierarchyTreeStructure createHierarchyTreeStructure(@NotNull String typeName, @NotNull PsiElement psiElement) {
     if (SUPERTYPES_HIERARCHY_TYPE.equals(typeName)) {
       return getSuperTypesHierarchyStructure(psiElement);
     }
@@ -112,24 +108,20 @@ public class PerlHierarchyBrowser extends TypeHierarchyBrowserBase {
     return null;
   }
 
-  @Nullable
   @Override
-  protected Comparator<NodeDescriptor<?>> getComparator() {
+  protected @Nullable Comparator<NodeDescriptor<?>> getComparator() {
     return null;
   }
 
-  @Nullable
-  protected HierarchyTreeStructure getSuperTypesHierarchyStructure(PsiElement psiElement) {
+  protected @Nullable HierarchyTreeStructure getSuperTypesHierarchyStructure(PsiElement psiElement) {
     return new PerlSuperTypesHierarchyTreeStructure(psiElement);
   }
 
-  @Nullable
-  protected HierarchyTreeStructure getSubTypesHierarchyStructure(PsiElement psiElement) {
+  protected @Nullable HierarchyTreeStructure getSubTypesHierarchyStructure(PsiElement psiElement) {
     return new PerlSubTypesHierarchyTreeStructure(psiElement);
   }
 
-  @Nullable
-  protected HierarchyTreeStructure getTypesHierarchyStructure(PsiElement psiElement) {
+  protected @Nullable HierarchyTreeStructure getTypesHierarchyStructure(PsiElement psiElement) {
     return null;
   }
 }

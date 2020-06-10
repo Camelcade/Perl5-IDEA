@@ -492,8 +492,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     return StringUtil.replace(content, PER_TEST_CODE, getPerTestCode());
   }
 
-  @NotNull
-  protected String getPerTestCode() {
+  protected @NotNull String getPerTestCode() {
     return "Implement getPerTestCode() method in test";
   }
 
@@ -568,8 +567,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     return 1;
   }
 
-  @NotNull
-  protected CompletionType getCompletionType() {
+  protected @NotNull CompletionType getCompletionType() {
     return CompletionType.BASIC;
   }
 
@@ -732,8 +730,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     return getTestResultsFilePath(getTestResultSuffix());
   }
 
-  @NotNull
-  protected String getTestResultSuffix() {
+  protected @NotNull String getTestResultSuffix() {
     return "";
   }
 
@@ -745,13 +742,11 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     return getResultsTestDataPath() + "/" + computeAnswerFileName(appendix);
   }
 
-  @NotNull
-  protected String computeAnswerFileName(@NotNull String appendix) {
+  protected @NotNull String computeAnswerFileName(@NotNull String appendix) {
     return getTestName(true) + appendix + "." + getResultsFileExtension();
   }
 
-  @NotNull
-  protected String getResultsFileExtension() {
+  protected @NotNull String getResultsFileExtension() {
     return getFileExtension() + ".txt";
   }
 
@@ -982,14 +977,12 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     return getEditorTextWithMacroses(addCaretsMacroses(new ArrayList<>()));
   }
 
-  @NotNull
-  private List<Pair<Integer, String>> addCaretsMacroses(@NotNull List<Pair<Integer, String>> macroses) {
+  private @NotNull List<Pair<Integer, String>> addCaretsMacroses(@NotNull List<Pair<Integer, String>> macroses) {
     getEditor().getCaretModel().getAllCarets().forEach(caret -> addCaretInfo(caret, macroses));
     return macroses;
   }
 
-  @NotNull
-  private String getEditorTextWithMacroses(List<Pair<Integer, String>> macros) {
+  private @NotNull String getEditorTextWithMacroses(List<Pair<Integer, String>> macros) {
     ContainerUtil.sort(macros, Comparator.comparingInt(pair -> pair.first));
     StringBuilder sb = new StringBuilder(getEditorText());
 
@@ -1245,8 +1238,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   }
 
 
-  @NotNull
-  protected <T extends PsiElement> T getElementAtCaret(@NotNull Class<T> clazz) {
+  protected @NotNull <T extends PsiElement> T getElementAtCaret(@NotNull Class<T> clazz) {
     int offset = myFixture.getEditor().getCaretModel().getOffset();
     PsiElement focused = myFixture.getFile().findElementAt(offset);
     return ObjectUtils.assertNotNull(PsiTreeUtil.getParentOfType(focused, clazz, false));
@@ -1256,8 +1248,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     return ObjectUtils.assertNotNull(PsiTreeUtil.getParentOfType(getElementAtCaretWithoutInjection(), clazz, false));
   }
 
-  @NotNull
-  protected PsiElement getElementAtCaretWithoutInjection() {
+  protected @NotNull PsiElement getElementAtCaretWithoutInjection() {
     PsiElement result = getFile().getViewProvider().findElementAt(getEditor().getCaretModel().getOffset());
     assertNotNull(result);
     PsiFile leafFile = result.getContainingFile();
@@ -1309,8 +1300,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     doTestIntentionWithoutLoad(quickFixNamePrefix);
   }
 
-  @Nullable
-  protected IntentionAction getSingleIntentionSafe(@NotNull String prefixOrName) {
+  protected @Nullable IntentionAction getSingleIntentionSafe(@NotNull String prefixOrName) {
     IntentionAction intention = null;
     for (IntentionAction intentionAction : myFixture.getAvailableIntentions()) {
       if (intentionAction.getText().equals(prefixOrName)) {
@@ -1327,8 +1317,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     return intention;
   }
 
-  @NotNull
-  protected IntentionAction getSingleIntention(@NotNull String prefixOrName) {
+  protected @NotNull IntentionAction getSingleIntention(@NotNull String prefixOrName) {
     IntentionAction intention = getSingleIntentionSafe(prefixOrName);
     assertNotNull("Couldn't find intention: " + prefixOrName, intention);
     return intention;
@@ -1455,8 +1444,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     }
   }
 
-  @NotNull
-  protected String serializePresentation(@Nullable ItemPresentation presentation) {
+  protected @NotNull String serializePresentation(@Nullable ItemPresentation presentation) {
     if (presentation == null) {
       return "null";
     }
@@ -1678,12 +1666,11 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), stringifiedControlFlow);
   }
 
-  @NotNull
-  private String getSvgDataPath() {
+  private @NotNull String getSvgDataPath() {
     return FileUtil.join(getTestDataPath(), "svg", getTestName(true) + ".svg");
   }
 
-  private void saveSvgFile(@NotNull final String outSvgFile, @NotNull final ControlFlow flow) throws IOException, ExecutionException {
+  private void saveSvgFile(final @NotNull String outSvgFile, final @NotNull ControlFlow flow) throws IOException, ExecutionException {
     String dotUtilName = SystemInfoRt.isUnix ? "dot" : "dot.exe";
     File dotFullPath = PathEnvironmentVariableUtil.findInPath(dotUtilName);
     if (dotFullPath == null) {
@@ -1706,8 +1693,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     }
   }
 
-  @NotNull
-  private String convertControlFlowToDot(@NotNull final ControlFlow flow) {
+  private @NotNull String convertControlFlowToDot(final @NotNull ControlFlow flow) {
     StringBuilder builder = new StringBuilder();
     builder.append("digraph {");
     for (Instruction instruction : flow.getInstructions()) {
@@ -1901,8 +1887,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
   }
 
-  @NotNull
-  private String getUsageGroups(@NotNull Usage usage, @NotNull UsageGroupingRule groupingRule) {
+  private @NotNull String getUsageGroups(@NotNull Usage usage, @NotNull UsageGroupingRule groupingRule) {
     StringBuilder sb = new StringBuilder();
     groupingRule.getParentGroupsFor(usage, UsageTarget.EMPTY_ARRAY).forEach(usageGroup -> {
       if (sb.length() > 0) {
@@ -1913,8 +1898,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     return sb.toString();
   }
 
-  @NotNull
-  private String serializeUsageGroup(@NotNull UsageGroup usageGroup) {
+  private @NotNull String serializeUsageGroup(@NotNull UsageGroup usageGroup) {
     if (usageGroup instanceof PsiElementUsageGroupBase) {
       return "PsiElement: " + serializePsiElement(((PsiElementUsageGroupBase<?>)usageGroup).getElement());
     }
@@ -1924,8 +1908,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   /**
    * Copy-paste of {@link UsageViewImpl#getActiveGroupingRules(com.intellij.openapi.project.Project, com.intellij.usages.UsageViewSettings)}
    */
-  @NotNull
-  private List<UsageGroupingRule> getActiveGroupingRules(@NotNull UsageViewSettings usageViewSettings) {
+  private @NotNull List<UsageGroupingRule> getActiveGroupingRules(@NotNull UsageViewSettings usageViewSettings) {
     final List<UsageGroupingRuleProvider> providers = UsageGroupingRuleProvider.EP_NAME.getExtensionList();
     List<UsageGroupingRule> list = new ArrayList<>(providers.size());
     for (UsageGroupingRuleProvider provider : providers) {
@@ -2050,8 +2033,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   /**
    * @return a builtin keyword for from the test name. E.g: {@code testScalar} => {@code scalar}, {@code testFiletestx} => {@code -x}
    */
-  @NotNull
-  protected String getBuiltInFromTestName() {
+  protected @NotNull String getBuiltInFromTestName() {
     String name = getTestName(true);
     return isFileTestTest() ? "-" + name.substring(name.length() - 1) : name;
   }
@@ -2082,8 +2064,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), generatedDoc);
   }
 
-  @Nullable
-  private LookupElement getMostRelevantLookupElement(@NotNull String pattern, @NotNull LookupElement[] lookupElements) {
+  private @Nullable LookupElement getMostRelevantLookupElement(@NotNull String pattern, @NotNull LookupElement[] lookupElements) {
     LookupElement mostRelevantElement = null;
     int extraSymbols = -1;
 
@@ -2260,8 +2241,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
   }
 
-  @NotNull
-  private String serializeTextAttributeKey(@Nullable TextAttributesKey key) {
+  private @NotNull String serializeTextAttributeKey(@Nullable TextAttributesKey key) {
     if (key == null) {
       return "";
     }
@@ -2422,8 +2402,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
    *
    * @return pair of target element and generated documentation
    */
-  @NotNull
-  protected Pair<PsiElement, String> getContextAndDocumentationAtCaret() {
+  protected @NotNull Pair<PsiElement, String> getContextAndDocumentationAtCaret() {
     Editor editor = getEditor();
     PsiFile file = getFile();
     PsiElement elementAtCaret = file != null ? file.findElementAt(editor.getCaretModel().getOffset()) : null;
@@ -2463,8 +2442,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   /**
    * Part of {@link DocumentationManager#navigateByLink(com.intellij.codeInsight.documentation.DocumentationComponent, java.lang.String)}
    */
-  @Nullable
-  private PsiElement getLinkTarget(@NotNull PsiElement psiElement, @NotNull String refText) {
+  private @Nullable PsiElement getLinkTarget(@NotNull PsiElement psiElement, @NotNull String refText) {
     PsiManager manager = psiElement.getManager();
     DocumentationProvider provider = DocumentationManager.getProviderFromElement(psiElement);
     PsiElement targetElement = provider.getDocumentationElementForLink(manager, refText, psiElement);
@@ -2578,8 +2556,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
   }
 
-  @NotNull
-  protected String serializeRunAnythingItem(@Nullable RunAnythingItem runAnythingItem) {
+  protected @NotNull String serializeRunAnythingItem(@Nullable RunAnythingItem runAnythingItem) {
     if (runAnythingItem == null) {
       return "null";
     }
@@ -2606,8 +2583,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     doTestNameValidator(name, false);
   }
 
-  @NotNull
-  protected InputValidator getValidator() {
+  protected @NotNull InputValidator getValidator() {
     throw new RuntimeException("Test should implement this method");
   }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,9 +41,8 @@ public abstract class PerlSubDeclarationBase extends PerlSubBase<PerlSubDeclarat
     super(stub, nodeType);
   }
 
-  @Nullable
   @Override
-  public Icon getIcon(int flags) {
+  public @Nullable Icon getIcon(int flags) {
     return isXSub()
            ? PerlIcons.XSUB_GUTTER_ICON
            : PerlIcons.SUB_DECLARATION_GUTTER_ICON;
@@ -69,6 +68,5 @@ public abstract class PerlSubDeclarationBase extends PerlSubBase<PerlSubDeclarat
     return StringUtil.equals(getContainingFile().getName(), PerlXSubsState.DEPARSED_FILE_NAME);
   }
 
-  @Nullable
-  public PsiPerlExpr getExpr() {return null;}
+  public @Nullable PsiPerlExpr getExpr() {return null;}
 }

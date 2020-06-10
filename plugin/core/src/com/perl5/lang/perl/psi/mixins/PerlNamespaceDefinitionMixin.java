@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -62,27 +62,23 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
     super(stub, nodeType);
   }
 
-  @Nullable
   @Override
-  public PsiPerlNamespaceContent getNamespaceContent() {
+  public @Nullable PsiPerlNamespaceContent getNamespaceContent() {
     return PsiTreeUtil.getChildOfType(this, PsiPerlNamespaceContent.class);
   }
 
-  @Nullable
   @Override
-  public String getName() {
+  public @Nullable String getName() {
     return getNamespaceName();
   }
 
-  @Nullable
   @Override
-  public PerlNamespaceElement getNamespaceElement() {
+  public @Nullable PerlNamespaceElement getNamespaceElement() {
     return findChildByClass(PerlNamespaceElement.class);
   }
 
-  @Nullable
   @Override
-  public PsiElement getNameIdentifier() {
+  public @Nullable PsiElement getNameIdentifier() {
     return getNamespaceElement();
   }
 
@@ -92,9 +88,8 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
   }
 
 
-  @Nullable
   @Override
-  public String getNamespaceName() {
+  public @Nullable String getNamespaceName() {
     PerlNamespaceDefinitionStub stub = getGreenStub();
     if (stub != null) {
       return stub.getNamespaceName();
@@ -112,9 +107,8 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
     return null;
   }
 
-  @NotNull
   @Override
-  public List<String> getParentNamespacesNames() {
+  public @NotNull List<String> getParentNamespacesNames() {
     PerlNamespaceDefinitionStub stub = getGreenStub();
     if (stub != null) {
       return stub.getParentNamespacesNames();
@@ -122,9 +116,8 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
     return PerlPackageUtil.collectParentNamespacesFromPsi(this);
   }
 
-  @Nullable
   @Override
-  public Icon getIcon(int flags) {
+  public @Nullable Icon getIcon(int flags) {
     return PerlIcons.PACKAGE_GUTTER_ICON;
   }
 
@@ -133,9 +126,8 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
     return new PerlItemPresentationSimple(this, getPresentableName());
   }
 
-  @NotNull
   @Override
-  public PerlMroType getMroType() {
+  public @NotNull PerlMroType getMroType() {
     PerlNamespaceDefinitionStub stub = getGreenStub();
     if (stub != null) {
       return stub.getMroType();
@@ -149,10 +141,8 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
   }
 
 
-
-  @NotNull
   @Override
-  public List<String> getEXPORT() {
+  public @NotNull List<String> getEXPORT() {
     PerlNamespaceDefinitionStub stub = getGreenStub();
     if (stub != null) {
       return stub.getEXPORT();
@@ -161,9 +151,8 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
     return getExporterInfo().getEXPORT();
   }
 
-  @NotNull
   @Override
-  public List<String> getEXPORT_OK() {
+  public @NotNull List<String> getEXPORT_OK() {
     PerlNamespaceDefinitionStub stub = getGreenStub();
     if (stub != null) {
       return stub.getEXPORT_OK();
@@ -172,9 +161,8 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
     return getExporterInfo().getEXPORT_OK();
   }
 
-  @NotNull
   @Override
-  public Map<String, List<String>> getEXPORT_TAGS() {
+  public @NotNull Map<String, List<String>> getEXPORT_TAGS() {
     PerlNamespaceDefinitionStub stub = getGreenStub();
     if (stub != null) {
       return stub.getEXPORT_TAGS();
@@ -192,8 +180,7 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
            : nameIdentifier.getTextOffset();
   }
 
-  @NotNull
-  public ExporterInfo getExporterInfo() {
+  public @NotNull ExporterInfo getExporterInfo() {
     return CachedValuesManager.getCachedValue(this, () -> {
       ExporterInfo result = new ExporterInfo();
       PerlPsiUtil.processNamespaceStatements(this, result);
@@ -201,9 +188,8 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
     });
   }
 
-  @Nullable
   @Override
-  public PerlNamespaceAnnotations getAnnotations() {
+  public @Nullable PerlNamespaceAnnotations getAnnotations() {
     PerlNamespaceDefinitionStub stub = getGreenStub();
     if (stub != null) {
       return stub.getAnnotations();
@@ -214,8 +200,7 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
     }
   }
 
-  @Nullable
-  public PerlNamespaceAnnotations getLocalAnnotations() {
+  public @Nullable PerlNamespaceAnnotations getLocalAnnotations() {
     return PerlNamespaceAnnotations.tryToFindAnnotations(this);
   }
 
@@ -226,8 +211,7 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
 
   public static class MroSearcher implements Processor<PsiElement> {
     public int counter = 0;
-    @NotNull
-    private PerlMroType myResult = PerlMroType.DFS;
+    private @NotNull PerlMroType myResult = PerlMroType.DFS;
 
     @Override
     public boolean process(PsiElement element) {
@@ -241,19 +225,15 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
       return true;
     }
 
-    @NotNull
-    public PerlMroType getResult() {
+    public @NotNull PerlMroType getResult() {
       return myResult;
     }
   }
 
   public static class ExporterInfo implements Processor<PsiElement> {
-    @NotNull
-    private final List<String> EXPORT = new ArrayList<>();
-    @NotNull
-    private final List<String> EXPORT_OK = new ArrayList<>();
-    @NotNull
-    private final Map<String, List<String>> EXPORT_TAGS = Collections.emptyMap();
+    private final @NotNull List<String> EXPORT = new ArrayList<>();
+    private final @NotNull List<String> EXPORT_OK = new ArrayList<>();
+    private final @NotNull Map<String, List<String>> EXPORT_TAGS = Collections.emptyMap();
 
     @Override
     public boolean process(PsiElement element) {
@@ -300,18 +280,15 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
       return result;
     }
 
-    @NotNull
-    public List<String> getEXPORT() {
+    public @NotNull List<String> getEXPORT() {
       return EXPORT;
     }
 
-    @NotNull
-    public List<String> getEXPORT_OK() {
+    public @NotNull List<String> getEXPORT_OK() {
       return EXPORT_OK;
     }
 
-    @NotNull
-    public Map<String, List<String>> getEXPORT_TAGS() {
+    public @NotNull Map<String, List<String>> getEXPORT_TAGS() {
       return EXPORT_TAGS;
     }
   }

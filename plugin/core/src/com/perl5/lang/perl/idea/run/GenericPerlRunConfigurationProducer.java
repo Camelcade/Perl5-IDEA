@@ -36,8 +36,7 @@ import java.util.function.Consumer;
 
 public abstract class GenericPerlRunConfigurationProducer<Configuration extends GenericPerlRunConfiguration>
   extends LazyRunConfigurationProducer<Configuration> {
-  @NotNull
-  private List<VirtualFile> computeTargetFiles(ConfigurationContext configurationContext) {
+  private @NotNull List<VirtualFile> computeTargetFiles(ConfigurationContext configurationContext) {
     if (configurationContext.containsMultipleSelection() && !allowMultipleFiles()) {
       return Collections.emptyList();
     }

@@ -55,15 +55,13 @@ public abstract class AbstractMasonSettingsConfigurable implements Configurable 
     this.windowTitle = windowTitle;
   }
 
-  @Nls
   @Override
-  public String getDisplayName() {
+  public @Nls String getDisplayName() {
     return windowTitle;
   }
 
-  @Nullable
   @Override
-  public String getHelpTopic() {
+  public @Nullable String getHelpTopic() {
     return null;
   }
 
@@ -127,9 +125,8 @@ public abstract class AbstractMasonSettingsConfigurable implements Configurable 
       super("Variable name");
     }
 
-    @Nullable
     @Override
-    public String valueOf(VariableDescription variableDescription) {
+    public @Nullable String valueOf(VariableDescription variableDescription) {
       return variableDescription.variableName;
     }
 
@@ -163,9 +160,8 @@ public abstract class AbstractMasonSettingsConfigurable implements Configurable 
       super("Variable type");
     }
 
-    @Nullable
     @Override
-    public String valueOf(VariableDescription variableDescription) {
+    public @Nullable String valueOf(VariableDescription variableDescription) {
       return variableDescription.variableType;
     }
 

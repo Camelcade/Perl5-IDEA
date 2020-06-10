@@ -62,30 +62,25 @@ public abstract class PerlMultiplePsiFilesPerDocumentFileViewProvider
   /**
    * Returns TemplateDataElementType for the templating part
    */
-  @NotNull
-  protected abstract IElementType getTemplateContentElementType();
+  protected abstract @NotNull IElementType getTemplateContentElementType();
 
   /**
    * Returns TemplateDataElementType for the pod part
    */
-  @NotNull
-  protected abstract IElementType getPODContentElementType();
+  protected abstract @NotNull IElementType getPODContentElementType();
 
   @Override
-  @NotNull
-  public Language getTemplateDataLanguage() {
+  public @NotNull Language getTemplateDataLanguage() {
     return myTemplateLanguage;
   }
 
   @Override
-  @NotNull
-  public Set<Language> getLanguages() {
+  public @NotNull Set<Language> getLanguages() {
     return myRelevantLanguages;
   }
 
   @Override
-  @Nullable
-  protected PsiFile createFile(@NotNull final Language lang) {
+  protected @Nullable PsiFile createFile(final @NotNull Language lang) {
     if (lang != PodLanguage.INSTANCE && lang != getBaseLanguage() && lang != getTemplateDataLanguage()) {
       return null;
     }
@@ -105,8 +100,7 @@ public abstract class PerlMultiplePsiFilesPerDocumentFileViewProvider
     return null;
   }
 
-  @NotNull
-  protected static Language calcTemplateLanguage(PsiManager manager, VirtualFile file) {
+  protected static @NotNull Language calcTemplateLanguage(PsiManager manager, VirtualFile file) {
     Language result = TemplateDataLanguageMappings.getInstance(manager.getProject()).getMapping(file);
     return result == null ? HTMLLanguage.INSTANCE : result;
   }

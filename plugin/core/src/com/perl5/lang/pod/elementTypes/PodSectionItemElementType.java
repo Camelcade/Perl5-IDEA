@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,15 +35,13 @@ public class PodSectionItemElementType extends PodStubBasedTitledSectionElementT
     return new PsiItemSectionImpl(stub, this);
   }
 
-  @NotNull
   @Override
-  public PsiElement getPsiElement(@NotNull ASTNode node) {
+  public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
     return new PsiItemSectionImpl(node);
   }
 
-  @NotNull
   @Override
-  public PodSectionStub createStub(@NotNull PodSectionItem psi, StubElement parentStub) {
+  public @NotNull PodSectionStub createStub(@NotNull PodSectionItem psi, StubElement parentStub) {
     char prefix = psi.isTargetable() ? '+' : '-';
     return new PodSectionStub(parentStub, this, "" + prefix + psi.getPresentableText());
   }

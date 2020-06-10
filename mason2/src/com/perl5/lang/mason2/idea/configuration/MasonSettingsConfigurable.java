@@ -49,9 +49,8 @@ public class MasonSettingsConfigurable extends AbstractMasonSettingsConfigurable
   }
 
 
-  @Nullable
   @Override
-  public JComponent createComponent() {
+  public @Nullable JComponent createComponent() {
     FormBuilder builder = FormBuilder.createFormBuilder();
     builder.getPanel().setLayout(new VerticalFlowLayout());
 

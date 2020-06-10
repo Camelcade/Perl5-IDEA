@@ -53,7 +53,7 @@ public class PerlAnnotator extends PerlBaseAnnotator {
   }
 
   @Override
-  public void annotate(@NotNull final PsiElement element, @NotNull AnnotationHolder holder) {
+  public void annotate(final @NotNull PsiElement element, @NotNull AnnotationHolder holder) {
     IElementType elementType = PsiUtilCore.getElementType(element);
     BiConsumer<String, TextAttributesKey> defaultAnnotationProducer = (msg, key) -> createInfoAnnotation(holder, element, msg, key);
     Consumer<TextAttributesKey> defaultSilentProducer = (key) -> createInfoAnnotation(holder, element, null, key);

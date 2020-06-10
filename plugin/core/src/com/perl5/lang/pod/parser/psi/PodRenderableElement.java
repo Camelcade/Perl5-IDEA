@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,8 +38,7 @@ public interface PodRenderableElement extends PsiElement {
   /**
    * @return html representation of element contents
    */
-  @NotNull
-  default String getAsHTML() {
+  default @NotNull String getAsHTML() {
     StringBuilder builder = new StringBuilder();
     renderElementAsHTML(builder, new PodRenderingContext());
     return builder.toString();
@@ -48,8 +47,7 @@ public interface PodRenderableElement extends PsiElement {
   /**
    * @return text representation of element contents
    */
-  @NotNull
-  default String getAsText() {
+  default @NotNull String getAsText() {
     StringBuilder builder = new StringBuilder();
     renderElementAsText(builder, new PodRenderingContext());
     return builder.toString();

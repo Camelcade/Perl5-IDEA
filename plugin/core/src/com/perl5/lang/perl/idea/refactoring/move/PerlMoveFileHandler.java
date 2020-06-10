@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -101,9 +101,11 @@ public class PerlMoveFileHandler extends MoveFileHandler {
     }
   }
 
-  @Nullable
   @Override
-  public List<UsageInfo> findUsages(PsiFile psiFile, PsiDirectory newParent, boolean searchInComments, boolean searchInNonJavaFiles) {
+  public @Nullable List<UsageInfo> findUsages(PsiFile psiFile,
+                                              PsiDirectory newParent,
+                                              boolean searchInComments,
+                                              boolean searchInNonJavaFiles) {
     return null;
   }
 

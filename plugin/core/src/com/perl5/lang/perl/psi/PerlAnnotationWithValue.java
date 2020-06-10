@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,8 +39,7 @@ public interface PerlAnnotationWithValue extends PsiElement, PerlAnnotation {
    * @deprecated use {@link com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue}
    */
   @Deprecated
-  @Nullable
-  default PerlNamespaceElement getType() {
+  default @Nullable PerlNamespaceElement getType() {
     return PsiTreeUtil.getChildOfType(this, PerlNamespaceElement.class);
   }
 
@@ -48,8 +47,7 @@ public interface PerlAnnotationWithValue extends PsiElement, PerlAnnotation {
    * @deprecated use {@link com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue}
    */
   @Deprecated
-  @Nullable
-  default String getReturnClass() {
+  default @Nullable String getReturnClass() {
     PerlNamespaceElement namespaceElement = getType();
     if (namespaceElement != null) {
       return namespaceElement.getCanonicalName();
@@ -69,8 +67,7 @@ public interface PerlAnnotationWithValue extends PsiElement, PerlAnnotation {
   /**
    * @return a value described in this annotation
    */
-  @NotNull
-  default PerlValue getValue() {
+  default @NotNull PerlValue getValue() {
     String returnClass = getReturnClass();
     return returnClass == null ? UNKNOWN_VALUE :
            returnClass.equals(NAMESPACE_ANY) ? NAMESPACE_ANY_VALUE : PerlScalarValue.create(returnClass);

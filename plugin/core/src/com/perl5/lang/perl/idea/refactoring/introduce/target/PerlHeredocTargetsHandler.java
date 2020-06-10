@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,9 +49,8 @@ public class PerlHeredocTargetsHandler extends PerlGenericStringTargetsHandler {
     return false;
   }
 
-  @NotNull
   @Override
-  protected List<PsiElement> getChildren(@NotNull PsiElement element) {
+  protected @NotNull List<PsiElement> getChildren(@NotNull PsiElement element) {
     return ((PerlHeredocElementImpl)element).getAllChildrenList();
   }
 
@@ -60,15 +59,13 @@ public class PerlHeredocTargetsHandler extends PerlGenericStringTargetsHandler {
     return isTargetableHeredocElement(element);
   }
 
-  @NotNull
   @Override
-  protected String createDeclarationStatementText(@NotNull String variableName, @NotNull PerlIntroduceTarget target) {
+  protected @NotNull String createDeclarationStatementText(@NotNull String variableName, @NotNull PerlIntroduceTarget target) {
     return "my " + doComputeVariableType(target).getSigil() + variableName + " = " + createTargetExpressionText(target);
   }
 
-  @NotNull
   @Override
-  protected String createTargetExpressionText(@NotNull PerlIntroduceTarget target) {
+  protected @NotNull String createTargetExpressionText(@NotNull PerlIntroduceTarget target) {
     PsiElement targetPlace = target.getPlace();
     if (!(targetPlace instanceof PerlHeredocElementImpl)) {
       LOG.error("Got wrong target element: " + target);
@@ -85,9 +82,8 @@ public class PerlHeredocTargetsHandler extends PerlGenericStringTargetsHandler {
     return "substr <<EOM, 0, -1;\n" + subSequence + "\nEOM\n";
   }
 
-  @NotNull
   @Override
-  protected List<PsiElement> replaceTarget(@NotNull List<PerlIntroduceTarget> occurrences, @NotNull PsiElement replacement) {
+  protected @NotNull List<PsiElement> replaceTarget(@NotNull List<PerlIntroduceTarget> occurrences, @NotNull PsiElement replacement) {
     CharSequence replacementChars = replacement.getNode().getChars();
     assert replacement instanceof PerlVariable : "Got " + replacement;
 

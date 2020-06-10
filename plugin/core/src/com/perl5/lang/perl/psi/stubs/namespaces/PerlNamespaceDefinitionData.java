@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,20 +34,13 @@ import java.util.Objects;
  * Data for namespace definition stubs
  */
 public class PerlNamespaceDefinitionData implements PerlNamespaceDefinition {
-  @NotNull
-  private final String myNamespaceName;
-  @NotNull
-  private final PerlMroType myMroType;
-  @NotNull
-  private final List<String> myParentNamespaces;
-  @NotNull
-  private final List<String> myEXPORT;
-  @NotNull
-  private final List<String> myEXPORT_OK;
-  @NotNull
-  private final Map<String, List<String>> myEXPORT_TAGS;
-  @Nullable
-  private final PerlNamespaceAnnotations myPerlNamespaceAnnotations;
+  private final @NotNull String myNamespaceName;
+  private final @NotNull PerlMroType myMroType;
+  private final @NotNull List<String> myParentNamespaces;
+  private final @NotNull List<String> myEXPORT;
+  private final @NotNull List<String> myEXPORT_OK;
+  private final @NotNull Map<String, List<String>> myEXPORT_TAGS;
+  private final @Nullable PerlNamespaceAnnotations myPerlNamespaceAnnotations;
 
   public PerlNamespaceDefinitionData(@NotNull PerlNamespaceDefinition namespaceDefinition) {
     this(Objects.requireNonNull(namespaceDefinition.getNamespaceName()), namespaceDefinition);
@@ -56,7 +49,7 @@ public class PerlNamespaceDefinitionData implements PerlNamespaceDefinition {
   /**
    * @return true iff this data is empty, has no parents or exports data
    */
-  public boolean isEmpty(){
+  public boolean isEmpty() {
     return myParentNamespaces.isEmpty() && myEXPORT.isEmpty() && myEXPORT_OK.isEmpty() && myEXPORT_TAGS.isEmpty();
   }
 
@@ -87,45 +80,38 @@ public class PerlNamespaceDefinitionData implements PerlNamespaceDefinition {
     myPerlNamespaceAnnotations = perlNamespaceAnnotations;
   }
 
-  @NotNull
   @Override
-  public List<String> getParentNamespacesNames() {
+  public @NotNull List<String> getParentNamespacesNames() {
     return myParentNamespaces;
   }
 
-  @Nullable
   @Override
-  public PerlNamespaceAnnotations getAnnotations() {
+  public @Nullable PerlNamespaceAnnotations getAnnotations() {
     return myPerlNamespaceAnnotations;
   }
 
-  @NotNull
   @Override
-  public String getNamespaceName() {
+  public @NotNull String getNamespaceName() {
     return myNamespaceName;
   }
 
-  @NotNull
   @Override
-  public PerlMroType getMroType() {
+  public @NotNull PerlMroType getMroType() {
     return myMroType;
   }
 
-  @NotNull
   @Override
-  public List<String> getEXPORT() {
+  public @NotNull List<String> getEXPORT() {
     return myEXPORT;
   }
 
-  @NotNull
   @Override
-  public List<String> getEXPORT_OK() {
+  public @NotNull List<String> getEXPORT_OK() {
     return myEXPORT_OK;
   }
 
-  @NotNull
   @Override
-  public Map<String, List<String>> getEXPORT_TAGS() {
+  public @NotNull Map<String, List<String>> getEXPORT_TAGS() {
     return myEXPORT_TAGS;
   }
 
@@ -147,8 +133,7 @@ public class PerlNamespaceDefinitionData implements PerlNamespaceDefinition {
     }
   }
 
-  @NotNull
-  public static PerlNamespaceDefinitionData deserialize(@NotNull StubInputStream dataStream) throws IOException {
+  public static @NotNull PerlNamespaceDefinitionData deserialize(@NotNull StubInputStream dataStream) throws IOException {
     String packageName = PerlStubSerializationUtil.readString(dataStream);
     PerlMroType mroType = PerlMroType.valueOf(PerlStubSerializationUtil.readString(dataStream));
     List<String> parentNamespaces = PerlStubSerializationUtil.readStringsList(dataStream);

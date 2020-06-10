@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,8 +29,7 @@ import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
 
 public class PerlValueDeserializer {
 
-  @NotNull
-  private final StubInputStream myInputStream;
+  private final @NotNull StubInputStream myInputStream;
   private final TIntObjectHashMap<PerlValue> myDryMap = new TIntObjectHashMap<>();
 
   public PerlValueDeserializer(@NotNull StubInputStream inputStream) {
@@ -64,8 +63,7 @@ public class PerlValueDeserializer {
     return PerlValuesManager.intern(value);
   }
 
-  @NotNull
-  private PerlValue readValue(int valueId) throws IOException {
+  private @NotNull PerlValue readValue(int valueId) throws IOException {
     if (valueId == SCALAR_ID) {
       return new PerlScalarValue(this);
     }
@@ -164,8 +162,7 @@ public class PerlValueDeserializer {
     return Collections.unmodifiableSet(elements);
   }
 
-  @Nullable
-  public String readNameString() throws IOException {
+  public @Nullable String readNameString() throws IOException {
     return myInputStream.readNameString();
   }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,9 +43,8 @@ public class PerlMooseAugmentStatementImpl extends PerlStubBasedPsiElementBase<P
     super(stub, nodeType);
   }
 
-  @Nullable
   @Override
-  public String getSubName() {
+  public @Nullable String getSubName() {
     PerlMooseAugmentStatementStub stub = getGreenStub();
     if (stub != null) {
       return stub.getSubName();
@@ -53,8 +52,7 @@ public class PerlMooseAugmentStatementImpl extends PerlStubBasedPsiElementBase<P
     return getSubNameFromPsi();
   }
 
-  @Nullable
-  protected String getSubNameFromPsi() {
+  protected @Nullable String getSubNameFromPsi() {
     PsiElement nameIdentifier = getNameIdentifier();
     if (nameIdentifier != null) {
       return ElementManipulators.getValueText(nameIdentifier);
@@ -63,9 +61,8 @@ public class PerlMooseAugmentStatementImpl extends PerlStubBasedPsiElementBase<P
     return null;
   }
 
-  @Nullable
   @Override
-  public PsiElement getNameIdentifier() {
+  public @Nullable PsiElement getNameIdentifier() {
     PsiElement expr = getExpr();
 
     if (expr instanceof PsiPerlParenthesisedExpr) {
@@ -98,15 +95,13 @@ public class PerlMooseAugmentStatementImpl extends PerlStubBasedPsiElementBase<P
     return PerlPsiUtil.renameNamedElement(this, name);
   }
 
-  @Nullable
   @Override
-  public PsiReference[] getReferences(PsiElement element) {
+  public @Nullable PsiReference[] getReferences(PsiElement element) {
     return PerlMoosePsiUtil.getModifiersNameReference(getExpr(), element);
   }
 
   @Override
-  @Nullable
-  public PsiPerlExpr getExpr() {
+  public @Nullable PsiPerlExpr getExpr() {
     return findChildByClass(PsiPerlExpr.class);
   }
 }

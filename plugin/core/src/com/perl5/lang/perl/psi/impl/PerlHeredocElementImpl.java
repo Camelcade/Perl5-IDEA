@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,7 +48,7 @@ public class PerlHeredocElementImpl extends PerlCompositeElementImpl implements 
   }
 
   @Override
-  public PsiLanguageInjectionHost updateText(@NotNull final String text) {
+  public PsiLanguageInjectionHost updateText(final @NotNull String text) {
     return ElementManipulators.handleContentChange(this, text);
   }
 
@@ -63,9 +63,8 @@ public class PerlHeredocElementImpl extends PerlCompositeElementImpl implements 
     }
   }
 
-  @NotNull
   @Override
-  public LiteralTextEscaper<PerlHeredocElementImpl> createLiteralTextEscaper() {
+  public @NotNull LiteralTextEscaper<PerlHeredocElementImpl> createLiteralTextEscaper() {
     return new PerlHeredocLiteralEscaper(this);
   }
 
@@ -73,8 +72,7 @@ public class PerlHeredocElementImpl extends PerlCompositeElementImpl implements 
     return PsiUtilCore.getElementType(getTerminatorElement()) == HEREDOC_END_INDENTABLE;
   }
 
-  @Nullable
-  public PerlHeredocTerminatorElement getTerminatorElement() {
+  public @Nullable PerlHeredocTerminatorElement getTerminatorElement() {
     return CachedValuesManager.getCachedValue(this, () -> {
       PsiElement terminator = getNextSibling();
       while (terminator instanceof PsiWhiteSpace) {
@@ -103,8 +101,7 @@ public class PerlHeredocElementImpl extends PerlCompositeElementImpl implements 
   /**
    * @return here-doc opener element or null of here-doc is unclosed
    */
-  @Nullable
-  public PsiElement getHeredocOpener() {
+  public @Nullable PsiElement getHeredocOpener() {
     PerlHeredocTerminatorElement terminatorElement = getTerminatorElement();
     if (terminatorElement == null) {
       return null;
@@ -115,8 +112,7 @@ public class PerlHeredocElementImpl extends PerlCompositeElementImpl implements 
   /**
    * @return all children, including leaf ones
    */
-  @NotNull
-  public List<PsiElement> getAllChildrenList() {
+  public @NotNull List<PsiElement> getAllChildrenList() {
     PsiElement run = getFirstChild();
 
     if (run == null) {

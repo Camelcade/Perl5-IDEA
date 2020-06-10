@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,9 +45,8 @@ public class MasonAugmentMethodModifierImpl extends PerlMooseAugmentStatementImp
     super(stub, nodeType);
   }
 
-  @Nullable
   @Override
-  public PsiReference[] getReferences(PsiElement element) {
+  public @Nullable PsiReference[] getReferences(PsiElement element) {
     return null;
   }
 
@@ -60,18 +59,16 @@ public class MasonAugmentMethodModifierImpl extends PerlMooseAugmentStatementImp
     return newImplicitVariables;
   }
 
-  @NotNull
   @Override
-  public List<PerlVariableDeclarationElement> getImplicitVariables() {
+  public @NotNull List<PerlVariableDeclarationElement> getImplicitVariables() {
     if (myImplicitVariables == null) {
       myImplicitVariables = buildImplicitVariables();
     }
     return myImplicitVariables;
   }
 
-  @Nullable
   @Override
-  protected String getSubNameFromPsi() {
+  protected @Nullable String getSubNameFromPsi() {
     PsiElement nameIdentifier = getNameIdentifier();
     if (nameIdentifier != null) {
       return nameIdentifier.getText();
@@ -79,9 +76,8 @@ public class MasonAugmentMethodModifierImpl extends PerlMooseAugmentStatementImp
     return null;
   }
 
-  @Nullable
   @Override
-  public PsiElement getNameIdentifier() {
+  public @Nullable PsiElement getNameIdentifier() {
     ASTNode node = getNode();
     ASTNode modifierNode = node.findChildByType(MASON_METHOD_MODIFIER_NAME);
     if (modifierNode != null) {

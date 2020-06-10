@@ -21,8 +21,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public interface PerlSignatureElement extends PerlLexicalVariableDeclarationMarker {
-  @Nullable
-  default PsiElement getTypeConstraintElement() {
+  default @Nullable PsiElement getTypeConstraintElement() {
     PsiElement[] children = getChildren();
     if (children.length == 3) {
       return children[0];
@@ -33,8 +32,7 @@ public interface PerlSignatureElement extends PerlLexicalVariableDeclarationMark
     return isDeclarationElement(children[1]) ? children[0] : null;
   }
 
-  @Nullable
-  default PsiElement getDeclarationElement() {
+  default @Nullable PsiElement getDeclarationElement() {
     PsiElement[] children = getChildren();
     if (children.length == 3) {
       return children[1];
@@ -52,8 +50,7 @@ public interface PerlSignatureElement extends PerlLexicalVariableDeclarationMark
     return psiElement instanceof PerlVariableDeclaration || psiElement instanceof PsiPerlSubSignatureElementIgnore;
   }
 
-  @Nullable
-  default PsiElement getDefaultValueElement() {
+  default @Nullable PsiElement getDefaultValueElement() {
     PsiElement[] children = getChildren();
     if (children.length == 3) {
       return children[2];

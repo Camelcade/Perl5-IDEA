@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,16 +37,14 @@ public class HTMLMasonMethodDefinitionImpl extends HTMLMasonStubBasedNamedElemen
     super(stub, nodeType);
   }
 
-  @Nullable
   @Override
-  protected String getNameFromStub() {
+  protected @Nullable String getNameFromStub() {
     HTMLMasonMethodDefinitionStub stub = getGreenStub();
     return stub == null ? null : stub.getName();
   }
 
-  @Nullable
   @Override
-  public Icon getIcon(int flags) {
+  public @Nullable Icon getIcon(int flags) {
     return HTMLMasonIcons.HTML_MASON_METHOD_ICON;
   }
 }

@@ -34,9 +34,8 @@ import java.util.Objects;
 
 
 public class PerlGotoDeclarationHandler implements GotoDeclarationHandler {
-  @Nullable
   @Override
-  public PsiElement[] getGotoDeclarationTargets(@Nullable PsiElement sourceElement, int offset, Editor editor) {
+  public @Nullable PsiElement[] getGotoDeclarationTargets(@Nullable PsiElement sourceElement, int offset, Editor editor) {
     if (sourceElement == null) {
       return null;
     }
@@ -120,9 +119,8 @@ public class PerlGotoDeclarationHandler implements GotoDeclarationHandler {
     return result.isEmpty() ? null : result.toArray(new PsiElement[result.size()]);
   }
 
-  @Nullable
   @Override
-  public String getActionText(@NotNull DataContext context) {
+  public @Nullable String getActionText(@NotNull DataContext context) {
     return null;
   }
 }

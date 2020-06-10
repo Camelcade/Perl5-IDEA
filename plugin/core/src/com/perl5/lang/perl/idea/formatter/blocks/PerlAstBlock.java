@@ -35,13 +35,11 @@ public interface PerlAstBlock extends ASTBlock {
     return this;
   }
 
-  @NotNull
-  default IElementType getElementType() {
+  default @NotNull IElementType getElementType() {
     return Objects.requireNonNull(PsiUtilCore.getElementType(getNode()));
   }
 
-  @Nullable
-  default IElementType getChildElementType(int blockIndex) {
+  default @Nullable IElementType getChildElementType(int blockIndex) {
     if (blockIndex < 0) {
       return null;
     }
@@ -52,8 +50,7 @@ public interface PerlAstBlock extends ASTBlock {
     return ASTBlock.getElementType(subBlocks.get(blockIndex));
   }
 
-  @Nullable
-  default Block getLastSubBlock() {
+  default @Nullable Block getLastSubBlock() {
     return ContainerUtil.getLastItem(getSubBlocks());
   }
 }

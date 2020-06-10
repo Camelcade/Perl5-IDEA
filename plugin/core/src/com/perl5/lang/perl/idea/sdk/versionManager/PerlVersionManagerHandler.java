@@ -57,22 +57,19 @@ public abstract class PerlVersionManagerHandler<Data extends PerlVersionManagerD
   /**
    * @return title for menu item in add interpreter dialog
    */
-  @NotNull
-  public abstract String getMenuItemTitle();
+  public abstract @NotNull String getMenuItemTitle();
 
   /**
    * @return short lowercased name, for interpreters list
    */
-  @NotNull
-  public String getShortName() {
+  public @NotNull String getShortName() {
     return getPresentableName();
   }
 
   /**
    * @return Version Manager presentable name
    */
-  @NotNull
-  public abstract String getPresentableName();
+  public abstract @NotNull String getPresentableName();
 
   /**
    * @return true iff version manager is supported by OS described with {@code osHandler}
@@ -81,14 +78,12 @@ public abstract class PerlVersionManagerHandler<Data extends PerlVersionManagerD
    */
   public abstract boolean isApplicable(@Nullable PerlOsHandler osHandler);
 
-  @NotNull
   @Override
-  protected final String getTagName() {
+  protected final @NotNull String getTagName() {
     return TAG_NAME;
   }
 
-  @NotNull
-  public static List<PerlVersionManagerHandler<?, ?>> all() {
+  public static @NotNull List<PerlVersionManagerHandler<?, ?>> all() {
     return EP.getExtensionsList();
   }
 
@@ -96,14 +91,12 @@ public abstract class PerlVersionManagerHandler<Data extends PerlVersionManagerD
     all().forEach(action);
   }
 
-  @NotNull
-  public static Stream<? extends PerlVersionManagerHandler<?, ?>> stream() {
+  public static @NotNull Stream<? extends PerlVersionManagerHandler<?, ?>> stream() {
     return all().stream();
   }
 
   @Contract("null->null")
-  @Nullable
-  static PerlVersionManagerHandler<?, ?> from(@Nullable Sdk sdk) {
+  static @Nullable PerlVersionManagerHandler<?, ?> from(@Nullable Sdk sdk) {
     PerlVersionManagerData<?, ?> versionManagerData = PerlVersionManagerData.from(sdk);
     return versionManagerData == null ? null : versionManagerData.getHandler();
   }
@@ -123,8 +116,7 @@ public abstract class PerlVersionManagerHandler<Data extends PerlVersionManagerD
    *
    * @return data read or new empty data created by defaultHandler
    */
-  @NotNull
-  public static PerlVersionManagerData<?, ?> load(@NotNull Element parentElement) {
+  public static @NotNull PerlVersionManagerData<?, ?> load(@NotNull Element parentElement) {
     Element element = parentElement.getChild(TAG_NAME);
     if (element != null) {
       PerlVersionManagerHandler<?, ?> handler = EP.findSingle(element.getAttributeValue(ID_ATTRIBUTE));
@@ -138,8 +130,7 @@ public abstract class PerlVersionManagerHandler<Data extends PerlVersionManagerD
     return getDefaultHandler().createData();
   }
 
-  @NotNull
-  public static PerlVersionManagerHandler<?, ?> getDefaultHandler() {
+  public static @NotNull PerlVersionManagerHandler<?, ?> getDefaultHandler() {
     return Objects.requireNonNull(EP.findSingle("system"), "System perl handler must always present");
   }
 }

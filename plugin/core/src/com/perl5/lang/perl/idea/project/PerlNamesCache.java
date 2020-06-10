@@ -85,8 +85,7 @@ public class PerlNamesCache implements Disposable {
     return myKnownNamespaces;
   }
 
-  @NotNull
-  public static PerlNamesCache getInstance(@NotNull Project project) {
+  public static @NotNull PerlNamesCache getInstance(@NotNull Project project) {
     return project.getService(PerlNamesCache.class);
   }
 

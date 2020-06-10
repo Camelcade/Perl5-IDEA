@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,23 +24,19 @@ public class PerlLoadedFileDescriptor {
   private String path;
   private String name;
 
-  @NotNull
-  public String getPath() {
+  public @NotNull String getPath() {
     return path;
   }
 
-  @Nullable
-  public String getName() {
+  public @Nullable String getName() {
     return name;
   }
 
-  @NotNull
-  public String getNameOrPath() {
+  public @NotNull String getNameOrPath() {
     return name == null ? path : name;
   }
 
-  @NotNull
-  public String getPresentableName() {
+  public @NotNull String getPresentableName() {
     return isEval() && name != null ? name : path;
   }
 

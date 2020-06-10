@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,8 +36,7 @@ public enum PerlVariableType {
     return mySigil;
   }
 
-  @Nullable
-  public static PerlVariableType bySigil(char sigil) {
+  public static @Nullable PerlVariableType bySigil(char sigil) {
     for (PerlVariableType value : PerlVariableType.values()) {
       if (value.getSigil() == sigil) {
         return value;
@@ -45,5 +44,4 @@ public enum PerlVariableType {
     }
     return null;
   }
-
-};
+}

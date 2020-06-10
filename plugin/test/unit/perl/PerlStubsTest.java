@@ -96,9 +96,8 @@ public class PerlStubsTest extends PerlLightTestCase {
   @Test
   public void testNestedPodSections_pl() {doTest();}
 
-  @NotNull
   @Override
-  protected String computeAnswerFileName(@NotNull String appendix) {
+  protected @NotNull String computeAnswerFileName(@NotNull String appendix) {
     return getTestName(true).replace('_', '.') + ".txt";
   }
 

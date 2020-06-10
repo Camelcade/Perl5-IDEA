@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,8 +29,7 @@ public class PerlEditorUtil {
   /**
    * Iterates back until atEnd or non-space token
    */
-  @NotNull
-  public static HighlighterIterator moveToPreviousMeaningfulToken(@NotNull HighlighterIterator iterator) {
+  public static @NotNull HighlighterIterator moveToPreviousMeaningfulToken(@NotNull HighlighterIterator iterator) {
     while (!iterator.atEnd()) {
       IElementType tokenType = iterator.getTokenType();
       if (tokenType != TokenType.WHITE_SPACE) {
@@ -44,8 +43,7 @@ public class PerlEditorUtil {
   /**
    * Iterates forward until atEnd or non-space token
    */
-  @NotNull
-  public static HighlighterIterator moveToNextMeaningfulToken(@NotNull HighlighterIterator iterator) {
+  public static @NotNull HighlighterIterator moveToNextMeaningfulToken(@NotNull HighlighterIterator iterator) {
     iterator.advance();
     while (!iterator.atEnd()) {
       IElementType tokenType = iterator.getTokenType();
@@ -60,8 +58,7 @@ public class PerlEditorUtil {
   /**
    * @return previous non-space token type
    */
-  @Nullable
-  public static IElementType getPreviousTokenType(@NotNull HighlighterIterator iterator) {
+  public static @Nullable IElementType getPreviousTokenType(@NotNull HighlighterIterator iterator) {
     moveToPreviousMeaningfulToken(iterator);
     return iterator.atEnd() ? null : iterator.getTokenType();
   }
@@ -69,8 +66,7 @@ public class PerlEditorUtil {
   /**
    * @return next non-space token type; NB: current token is skipped
    */
-  @Nullable
-  public static IElementType getNextTokenType(@NotNull HighlighterIterator iterator) {
+  public static @Nullable IElementType getNextTokenType(@NotNull HighlighterIterator iterator) {
     moveToNextMeaningfulToken(iterator);
     return iterator.atEnd() ? null : iterator.getTokenType();
   }

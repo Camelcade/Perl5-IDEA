@@ -38,9 +38,8 @@ public class PerlSubReference extends PerlSubReferenceSimple {
     super(psiElement);
   }
 
-  @NotNull
   @Override
-  protected ResolveResult[] resolveInner(boolean incompleteCode) {
+  protected @NotNull ResolveResult[] resolveInner(boolean incompleteCode) {
     PsiElement element = getElement();
     assert element instanceof PerlSubNameElement;
 

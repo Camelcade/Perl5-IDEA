@@ -126,8 +126,7 @@ import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.NO_STATEMENT;
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.USE_STATEMENT;
 
 public class PerlSpacingBuilderFactory {
-  @NotNull
-  static SpacingBuilder createSpacingBuilder(CommonCodeStyleSettings settings, PerlCodeStyleSettings perlSettings) {
+  static @NotNull SpacingBuilder createSpacingBuilder(CommonCodeStyleSettings settings, PerlCodeStyleSettings perlSettings) {
     return new SpacingBuilder(settings)
       .before(COMMENT_LINE).spaceIf(perlSettings.ALIGN_COMMENTS_ON_CONSEQUENT_LINES)
       .after(COMMENT_LINE).lineBreakOrForceSpace(true, false)

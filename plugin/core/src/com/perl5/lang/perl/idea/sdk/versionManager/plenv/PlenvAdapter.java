@@ -50,9 +50,8 @@ public class PlenvAdapter extends PerlVersionManagerAdapter {
     super(versionManagerPath, hostData);
   }
 
-  @Nullable
   @Override
-  protected List<String> execWith(@NotNull String distributionId, @NotNull String... commands) {
+  protected @Nullable List<String> execWith(@NotNull String distributionId, @NotNull String... commands) {
     return getOutput(new PerlCommandLine(getVersionManagerPath())
                        .withParameters(PLENV_EXEC)
                        .withParameters(commands)
@@ -74,21 +73,18 @@ public class PlenvAdapter extends PerlVersionManagerAdapter {
     );
   }
 
-  @Nullable
   @Override
-  protected Icon getIcon() {
+  protected @Nullable Icon getIcon() {
     return PLENV_ICON;
   }
 
-  @Nullable
   @Override
-  protected List<String> getInstallableDistributionsList() {
+  protected @Nullable List<String> getInstallableDistributionsList() {
     return parseInstallableDistributionsList(getOutput(PLENV_INSTALL, "-l"));
   }
 
-  @Nullable
   @Override
-  protected List<String> getInstalledDistributionsList() {
+  protected @Nullable List<String> getInstalledDistributionsList() {
     return parseInstalledDistributionsList(getOutput(PLENV_VERSIONS));
   }
 
@@ -125,21 +121,18 @@ public class PlenvAdapter extends PerlVersionManagerAdapter {
                           .withEnvironment(PLENV_VERSION, distributionId), packageName);
   }
 
-  @NotNull
   @Override
-  protected String getErrorNotificationTitle() {
+  protected @NotNull String getErrorNotificationTitle() {
     return PerlBundle.message("perl.vm.plenv.notification.title");
   }
 
   @Contract("null->null")
-  @Nullable
-  public static PlenvAdapter create(@Nullable Project project) {
+  public static @Nullable PlenvAdapter create(@Nullable Project project) {
     return create(PerlProjectManager.getSdk(project));
   }
 
   @Contract("null->null")
-  @Nullable
-  public static PlenvAdapter create(@Nullable Sdk perlSdk) {
+  public static @Nullable PlenvAdapter create(@Nullable Sdk perlSdk) {
     PlenvData plenvData = PlenvData.from(perlSdk);
     return plenvData == null ? null : new PlenvAdapter(plenvData.getVersionManagerPath(), PerlHostData.notNullFrom(perlSdk));
   }

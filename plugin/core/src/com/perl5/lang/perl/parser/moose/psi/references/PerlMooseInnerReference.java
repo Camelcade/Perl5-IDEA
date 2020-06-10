@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,9 +48,8 @@ public class PerlMooseInnerReference extends PerlCachingReference<PsiElement> {
     return myElement;
   }
 
-  @NotNull
   @Override
-  protected ResolveResult[] resolveInner(boolean incompleteCode) {
+  protected @NotNull ResolveResult[] resolveInner(boolean incompleteCode) {
     List<ResolveResult> result = new ArrayList<>();
     PsiElement element = getElement();
 
@@ -103,7 +102,7 @@ public class PerlMooseInnerReference extends PerlCachingReference<PsiElement> {
     }
   }
 
-  private static List<PsiElement> getAugmentStatements(@NotNull final PsiElement childNamespace) {
+  private static List<PsiElement> getAugmentStatements(final @NotNull PsiElement childNamespace) {
     return CachedValuesManager.getCachedValue(childNamespace,
                                               () -> CachedValueProvider.Result.create(PerlPsiUtil.collectNamespaceMembers(childNamespace,
                                                                                                                           PerlMooseAugmentStatement.class),

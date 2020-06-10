@@ -42,9 +42,8 @@ class BerryBrewAdapter extends PerlVersionManagerAdapter {
     super(versionManagerPath, hostData);
   }
 
-  @Nullable
   @Override
-  protected List<String> execWith(@NotNull String distributionId, @NotNull String... commands) {
+  protected @Nullable List<String> execWith(@NotNull String distributionId, @NotNull String... commands) {
     List<String> commandsList = ContainerUtil.newArrayList(BERRYBREW_EXEC, BERRYBREW_WITH, distributionId);
     commandsList.addAll(Arrays.asList(commands));
     return getOutput(commandsList);
@@ -65,15 +64,13 @@ class BerryBrewAdapter extends PerlVersionManagerAdapter {
     );
   }
 
-  @Nullable
   @Override
-  protected Icon getIcon() {
+  protected @Nullable Icon getIcon() {
     return PerlIcons.STRAWBERRY_ICON;
   }
 
-  @Nullable
   @Override
-  protected List<String> getInstalledDistributionsList() {
+  protected @Nullable List<String> getInstalledDistributionsList() {
     List<String> output = getOutput("list");
     if (output == null) {
       return null;
@@ -81,9 +78,8 @@ class BerryBrewAdapter extends PerlVersionManagerAdapter {
     return ContainerUtil.map(output, it -> it.replaceAll("\\[.+?]", "").replaceAll("\\*", "").trim());
   }
 
-  @Nullable
   @Override
-  protected List<String> getInstallableDistributionsList() {
+  protected @Nullable List<String> getInstallableDistributionsList() {
     List<String> output = getOutput(BERRYBREW_AVAILABLE);
     if (output == null) {
       return null;
@@ -97,9 +93,8 @@ class BerryBrewAdapter extends PerlVersionManagerAdapter {
     });
   }
 
-  @NotNull
   @Override
-  protected String getErrorNotificationTitle() {
+  protected @NotNull String getErrorNotificationTitle() {
     return PerlBundle.message("perl.vm.berrybrew.notification.title");
   }
 }

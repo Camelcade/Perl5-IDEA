@@ -39,9 +39,8 @@ public class Mason2ParserDefinition extends PerlParserDefinition implements Maso
                                                            MASON_TEMPLATE_BLOCK_HTML
                                                          ));
 
-  @NotNull
   @Override
-  public Lexer createLexer(Project project) {
+  public @NotNull Lexer createLexer(Project project) {
     return new PerlMergingLexerAdapter(project);
   }
 
@@ -56,14 +55,12 @@ public class Mason2ParserDefinition extends PerlParserDefinition implements Maso
   }
 
   @Override
-  @NotNull
-  public TokenSet getCommentTokens() {
+  public @NotNull TokenSet getCommentTokens() {
     return COMMENTS;
   }
 
-  @NotNull
   @Override
-  public PsiParser createParser(Project project) {
+  public @NotNull PsiParser createParser(Project project) {
     return new Mason2ParserImpl();
   }
 }

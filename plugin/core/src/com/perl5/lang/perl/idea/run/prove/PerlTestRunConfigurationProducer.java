@@ -23,9 +23,8 @@ import com.perl5.lang.perl.idea.run.GenericPerlRunConfigurationProducer;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlTestRunConfigurationProducer extends GenericPerlRunConfigurationProducer<PerlTestRunConfiguration> {
-  @NotNull
   @Override
-  public ConfigurationFactory getConfigurationFactory() {
+  public @NotNull ConfigurationFactory getConfigurationFactory() {
     return PerlTestRunConfigurationType.getInstance().getConfigurationFactories()[0];
   }
 
@@ -34,8 +33,7 @@ public class PerlTestRunConfigurationProducer extends GenericPerlRunConfiguratio
     return virtualFiles.isDirectory() || virtualFiles.getFileType() == PerlFileTypeTest.INSTANCE;
   }
 
-  @NotNull
-  public static PerlTestRunConfigurationProducer getInstance() {
+  public static @NotNull PerlTestRunConfigurationProducer getInstance() {
     return getInstance(PerlTestRunConfigurationProducer.class);
   }
 

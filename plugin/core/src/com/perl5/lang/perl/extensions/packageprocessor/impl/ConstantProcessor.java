@@ -43,9 +43,8 @@ import java.util.stream.Collectors;
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.LIGHT_SUB_DEFINITION;
 
 public class ConstantProcessor extends PerlPragmaProcessorBase {
-  @NotNull
   @Override
-  public List<PerlDelegatingLightNamedElement<?>> computeLightElementsFromPsi(@NotNull PerlUseStatementElement useStatementElement) {
+  public @NotNull List<PerlDelegatingLightNamedElement<?>> computeLightElementsFromPsi(@NotNull PerlUseStatementElement useStatementElement) {
     PsiPerlExpr useArguments = useStatementElement.getExpr();
     if (useArguments == null) {
       return Collections.emptyList();
@@ -73,19 +72,17 @@ public class ConstantProcessor extends PerlPragmaProcessorBase {
     return result;
   }
 
-  @NotNull
   @Override
-  public List<PerlDelegatingLightNamedElement<?>> computeLightElementsFromStubs(@NotNull PerlUseStatementElement useStatementElement,
-                                                                                @NotNull PerlUseStatementStub useStatementStub) {
+  public @NotNull List<PerlDelegatingLightNamedElement<?>> computeLightElementsFromStubs(@NotNull PerlUseStatementElement useStatementElement,
+                                                                                         @NotNull PerlUseStatementStub useStatementStub) {
     return useStatementStub.getLightNamedElementsStubs().stream()
       .filter(childStub -> childStub.getStubType() == LIGHT_SUB_DEFINITION)
       .map(childStub -> new PerlLightConstantDefinitionElement(useStatementElement, (PerlSubDefinitionStub)childStub))
       .collect(Collectors.toList());
   }
 
-  @Nullable
   @Override
-  public String getArgumentsFoldingText(@NotNull PerlUseStatementElementBase useStatementElement) {
+  public @Nullable String getArgumentsFoldingText(@NotNull PerlUseStatementElementBase useStatementElement) {
     return PerlBundle.message("perl.fold.ph.text.constant");
   }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,27 +33,23 @@ import java.util.Collection;
  * GoToClassContributor looks up namespaces (packages names) - windows shortcut Ctrl+N
  */
 public class PerlGoToClassContributor implements ChooseByNameContributor, GotoClassContributor {
-  @Nullable
   @Override
-  public String getQualifiedName(NavigationItem navigationItem) {
+  public @Nullable String getQualifiedName(NavigationItem navigationItem) {
     return navigationItem.getName();
   }
 
-  @Nullable
   @Override
-  public String getQualifiedNameSeparator() {
+  public @Nullable String getQualifiedNameSeparator() {
     return PerlPackageUtil.NAMESPACE_SEPARATOR;
   }
 
-  @NotNull
   @Override
-  public String[] getNames(Project project, boolean b) {
+  public @NotNull String[] getNames(Project project, boolean b) {
     return ArrayUtil.toStringArray(PerlPackageUtil.getKnownNamespaceNames(project));
   }
 
-  @NotNull
   @Override
-  public NavigationItem[] getItemsByName(String packageName, String searchTerm, Project project, boolean includeNonProjectItems) {
+  public @NotNull NavigationItem[] getItemsByName(String packageName, String searchTerm, Project project, boolean includeNonProjectItems) {
     if (PerlPackageUtil.MAIN_NAMESPACE_NAME.equals(packageName)) {
       return NavigationItem.EMPTY_NAVIGATION_ITEM_ARRAY;
     }

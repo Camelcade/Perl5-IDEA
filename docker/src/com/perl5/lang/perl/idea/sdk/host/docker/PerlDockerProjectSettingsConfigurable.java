@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,8 +31,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 class PerlDockerProjectSettingsConfigurable implements UnnamedConfigurable {
-  @NotNull
-  private final PerlDockerProjectSettings mySettings;
+  private final @NotNull PerlDockerProjectSettings mySettings;
 
   private RawCommandLineEditor myArgumentsEditor;
   private RawCommandLineEditor myPreviewEditor;
@@ -41,9 +40,8 @@ class PerlDockerProjectSettingsConfigurable implements UnnamedConfigurable {
     mySettings = PerlDockerProjectSettings.getInstance(project);
   }
 
-  @Nullable
   @Override
-  public JComponent createComponent() {
+  public @Nullable JComponent createComponent() {
     FormBuilder builder = FormBuilder.createFormBuilder();
 
     myArgumentsEditor = new RawCommandLineEditor();

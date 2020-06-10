@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,9 +25,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class PerlResolveScopeProvider extends ResolveScopeProvider {
-  @Nullable
   @Override
-  public GlobalSearchScope getResolveScope(@NotNull VirtualFile file, Project project) {
+  public @Nullable GlobalSearchScope getResolveScope(@NotNull VirtualFile file, Project project) {
     if (file.getFileType() instanceof PerlPluginBaseFileType) {
       return GlobalSearchScope.allScope(project);
     }

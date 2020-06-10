@@ -32,9 +32,8 @@ public class MojoStubsTest extends PerlLightTestCase {
   @Test
   public void testHelperLite_pl() {doTest();}
 
-  @NotNull
   @Override
-  protected String computeAnswerFileName(@NotNull String appendix) {
+  protected @NotNull String computeAnswerFileName(@NotNull String appendix) {
     return getTestName(true).replace('_', '.') + ".txt";
   }
 

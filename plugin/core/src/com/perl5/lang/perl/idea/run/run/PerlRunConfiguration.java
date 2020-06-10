@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,9 +30,8 @@ class PerlRunConfiguration extends GenericPerlRunConfiguration {
     super(project, factory, name);
   }
 
-  @NotNull
   @Override
-  public SettingsEditor<? extends RunConfiguration> getConfigurationEditor() {
+  public @NotNull SettingsEditor<? extends RunConfiguration> getConfigurationEditor() {
     return new PerlRunConfigurationEditor(getProject());
   }
 }

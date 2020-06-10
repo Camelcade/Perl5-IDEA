@@ -37,15 +37,13 @@ public class PerlNoStatementElement extends PerlUseStatementElementBase {
     super(stub, nodeType);
   }
 
-  @NotNull
   @Override
-  public final List<PerlDelegatingLightNamedElement<?>> computeLightElementsFromPsi() {
+  public final @NotNull List<PerlDelegatingLightNamedElement<?>> computeLightElementsFromPsi() {
     return Collections.emptyList();
   }
 
-  @NotNull
   @Override
-  protected final List<PerlDelegatingLightNamedElement<?>> computeLightElementsFromStubs(@NotNull PerlUseStatementStub stub) {
+  protected final @NotNull List<PerlDelegatingLightNamedElement<?>> computeLightElementsFromStubs(@NotNull PerlUseStatementStub stub) {
     return Collections.emptyList();
   }
 

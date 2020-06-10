@@ -58,9 +58,8 @@ public abstract class PerlPolyNamedElementType<Stub extends PerlPolyNamedElement
     super(debugName, PerlLanguage.INSTANCE);
   }
 
-  @NotNull
   @Override
-  public final Stub createStub(@NotNull Psi psi, StubElement parentStub) {
+  public final @NotNull Stub createStub(@NotNull Psi psi, StubElement parentStub) {
     List<StubElement<?>> lightNamedElements = new ArrayList<>();
     Stub result = createStub(psi, parentStub, lightNamedElements);
 
@@ -75,12 +74,12 @@ public abstract class PerlPolyNamedElementType<Stub extends PerlPolyNamedElement
     return result;
   }
 
-  @NotNull
-  protected abstract Stub createStub(@NotNull Psi psi, StubElement<?> parentStub, @NotNull List<StubElement<?>> lightElementsStubs);
+  protected abstract @NotNull Stub createStub(@NotNull Psi psi,
+                                              StubElement<?> parentStub,
+                                              @NotNull List<StubElement<?>> lightElementsStubs);
 
-  @NotNull
   @Override
-  public final String getExternalId() {
+  public final @NotNull String getExternalId() {
     return "perl.poly." + super.toString();
   }
 
@@ -101,9 +100,8 @@ public abstract class PerlPolyNamedElementType<Stub extends PerlPolyNamedElement
     // to save additional data in subclasses
   }
 
-  @NotNull
   @Override
-  public final Stub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
+  public final @NotNull Stub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
     int size = dataStream.readVarInt();
     List<StubElement<?>> childStubs = new ArrayList<>(size);
     Stub result = deserialize(dataStream, parentStub, childStubs);
@@ -115,10 +113,9 @@ public abstract class PerlPolyNamedElementType<Stub extends PerlPolyNamedElement
     return result;
   }
 
-  @NotNull
-  protected abstract Stub deserialize(@NotNull StubInputStream dataStream,
-                                      StubElement<?> parentStub,
-                                      @NotNull List<StubElement<?>> lightElementsStubs) throws IOException;
+  protected abstract @NotNull Stub deserialize(@NotNull StubInputStream dataStream,
+                                               StubElement<?> parentStub,
+                                               @NotNull List<StubElement<?>> lightElementsStubs) throws IOException;
 
   @Override
   public final void indexStub(@NotNull Stub stub, @NotNull IndexSink sink) {
@@ -145,8 +142,7 @@ public abstract class PerlPolyNamedElementType<Stub extends PerlPolyNamedElement
     throw new IllegalArgumentException("Unregistered stub element class:" + stubElement.getStubType());
   }
 
-  @NotNull
-  private static IStubElementType<?, ?> getElementTypeById(int id) {
+  private static @NotNull IStubElementType<?, ?> getElementTypeById(int id) {
     assert id > 0;
     IStubElementType<?, ?> type = REVERSE_MAP.get(id);
     if (type != null) {

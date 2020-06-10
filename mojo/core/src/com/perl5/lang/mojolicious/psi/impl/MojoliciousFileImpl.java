@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,8 +39,7 @@ import java.util.List;
 
 
 public class MojoliciousFileImpl extends PerlFileImpl implements MojoliciousFile {
-  @NotNull
-  private final String myNamespaceName;
+  private final @NotNull String myNamespaceName;
   private List<PerlVariableDeclarationElement> myImplicitVariables;
 
   public MojoliciousFileImpl(@NotNull FileViewProvider viewProvider) {
@@ -74,15 +73,13 @@ public class MojoliciousFileImpl extends PerlFileImpl implements MojoliciousFile
     return null;
   }
 
-  @NotNull
   @Override
-  public String getNamespaceName() {
+  public @NotNull String getNamespaceName() {
     return myNamespaceName;
   }
 
-  @NotNull
   @Override
-  public List<PerlVariableDeclarationElement> getImplicitVariables() {
+  public @NotNull List<PerlVariableDeclarationElement> getImplicitVariables() {
     if (myImplicitVariables == null) {
       List<PerlVariableDeclarationElement> implicitVariables = new ArrayList<>();
       implicitVariables
@@ -95,9 +92,8 @@ public class MojoliciousFileImpl extends PerlFileImpl implements MojoliciousFile
     return myImplicitVariables;
   }
 
-  @NotNull
   @Override
-  public PerlValue getSelfType() {
+  public @NotNull PerlValue getSelfType() {
     return PerlScalarValue.create(MOJO_CONTROLLER_NS); // fixme this is a hack for #1497
   }
 }

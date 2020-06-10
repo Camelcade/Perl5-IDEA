@@ -37,9 +37,8 @@ import static com.perl5.lang.mojolicious.psi.impl.MojoliciousFile.MOJO_CONTROLLE
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.LIGHT_METHOD_DEFINITION;
 
 public class MojoHelperHandler extends PerlSubCallHandlerWithEmptyData {
-  @NotNull
   @Override
-  public List<? extends PerlDelegatingLightNamedElement<?>> computeLightElementsFromPsi(@NotNull PerlSubCallElement psiElement) {
+  public @NotNull List<? extends PerlDelegatingLightNamedElement<?>> computeLightElementsFromPsi(@NotNull PerlSubCallElement psiElement) {
     List<PsiElement> listElements = psiElement.getCallArgumentsList();
     if (listElements.size() != 2) {
       return Collections.emptyList();
@@ -64,19 +63,17 @@ public class MojoHelperHandler extends PerlSubCallHandlerWithEmptyData {
       psiElement, subName, LIGHT_METHOD_DEFINITION, identifierElement, MOJO_CONTROLLER_NS, (PerlSubExpr)bodyElement));
   }
 
-  @NotNull
   @Override
-  public List<? extends PerlDelegatingLightNamedElement<?>> computeLightElementsFromStubs(@NotNull PerlSubCallElement psiElement,
-                                                                                          @NotNull PerlSubCallElementStub stubElement) {
+  public @NotNull List<? extends PerlDelegatingLightNamedElement<?>> computeLightElementsFromStubs(@NotNull PerlSubCallElement psiElement,
+                                                                                                   @NotNull PerlSubCallElementStub stubElement) {
     return stubElement.getLightNamedElementsStubs().stream()
       .filter(childStub -> childStub.getStubType() == LIGHT_METHOD_DEFINITION)
       .map(childStub -> new MojoHelperDefinition(psiElement, (PerlSubDefinitionStub)childStub))
       .collect(Collectors.toList());
   }
 
-  @NotNull
   @Override
-  public PerlValue getSelfType() {
+  public @NotNull PerlValue getSelfType() {
     return PerlScalarValue.create(MOJO_CONTROLLER_NS);
   }
 }

@@ -38,21 +38,18 @@ public interface PerlSubDefinitionElement extends PerlSubDefinition, PerlSubElem
   /**
    * @return code block of this sub definition
    */
-  @Nullable
-  default PsiPerlBlock getSubDefinitionBody() {
+  default @Nullable PsiPerlBlock getSubDefinitionBody() {
     return null;
   }
 
   /**
    * @return sub arguments, extracted from PSI structure of code block
    */
-  @NotNull
-  default List<PerlSubArgument> getPerlSubArgumentsFromBody() {
+  default @NotNull List<PerlSubArgument> getPerlSubArgumentsFromBody() {
     return getPerlSubArgumentsFromBody(getSubDefinitionBody());
   }
 
-  @NotNull
-  static List<PerlSubArgument> getPerlSubArgumentsFromBody(@Nullable PsiPerlBlock subBlock) {
+  static @NotNull List<PerlSubArgument> getPerlSubArgumentsFromBody(@Nullable PsiPerlBlock subBlock) {
     if (subBlock == null || !subBlock.isValid()) {
       return Collections.emptyList();
     }
@@ -75,8 +72,7 @@ public interface PerlSubDefinitionElement extends PerlSubDefinition, PerlSubElem
   /**
    * @return a psi element for the control flow building if available
    */
-  @Nullable
-  default PsiElement getControlFlowElement() {
+  default @Nullable PsiElement getControlFlowElement() {
     return this;
   }
 }

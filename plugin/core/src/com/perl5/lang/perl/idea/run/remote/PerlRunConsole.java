@@ -24,22 +24,19 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class PerlRunConsole extends ConsoleViewImpl implements PerlConsoleView {
-  @Nullable
-  private PerlHostData<?, ?> myHostData;
+  private @Nullable PerlHostData<?, ?> myHostData;
 
   public PerlRunConsole(@NotNull Project project) {
     super(project, true);
   }
 
-  @Nullable
   @Override
-  public PerlHostData<?, ?> getHostData() {
+  public @Nullable PerlHostData<?, ?> getHostData() {
     return myHostData;
   }
 
   @Override
-  @NotNull
-  public PerlRunConsole withHostData(@Nullable PerlHostData<?, ?> hostData) {
+  public @NotNull PerlRunConsole withHostData(@Nullable PerlHostData<?, ?> hostData) {
     myHostData = hostData;
     return this;
   }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,9 +42,8 @@ import java.util.List;
 
 
 public class PerlUnresolvedPackageFileInspection extends PerlInspection {
-  @NotNull
   @Override
-  public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
+  public @NotNull PsiElementVisitor buildVisitor(final @NotNull ProblemsHolder holder, boolean isOnTheFly) {
     return new PerlVisitor() {
 
       @Override
@@ -92,28 +91,22 @@ public class PerlUnresolvedPackageFileInspection extends PerlInspection {
   }
 
   private static class InstallPackageQuickfix implements LocalQuickFix {
-    @NotNull
-    private final PackageManagerAdapter myAdapter;
+    private final @NotNull PackageManagerAdapter myAdapter;
 
-    @NotNull
-    private final String myPackageName;
+    private final @NotNull String myPackageName;
 
     public InstallPackageQuickfix(@NotNull PackageManagerAdapter adapter, @NotNull String packageName) {
       myAdapter = adapter;
       myPackageName = packageName;
     }
 
-    @Nls(capitalization = Nls.Capitalization.Sentence)
-    @NotNull
     @Override
-    public String getFamilyName() {
+    public @Nls(capitalization = Nls.Capitalization.Sentence) @NotNull String getFamilyName() {
       return PerlBundle.message("perl.quickfix.install.family", myAdapter.getPresentableName());
     }
 
-    @Nls(capitalization = Nls.Capitalization.Sentence)
-    @NotNull
     @Override
-    public String getName() {
+    public @Nls(capitalization = Nls.Capitalization.Sentence) @NotNull String getName() {
       return PerlBundle.message("perl.quickfix.install.name", myPackageName, myAdapter.getPresentableName());
     }
 

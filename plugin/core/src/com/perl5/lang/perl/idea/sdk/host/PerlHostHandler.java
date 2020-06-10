@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -198,20 +198,17 @@ public abstract class PerlHostHandler<Data extends PerlHostData<Data, Handler>, 
    *
    * @return host data or null if user cancelled the process
    */
-  @Nullable
-  protected abstract Data createDataInteractively();
+  protected abstract @Nullable Data createDataInteractively();
 
   /**
    * @return a menu item title for this handler, used in UI. E.g. new interpreter menu item
    */
-  @NotNull
-  public abstract String getMenuItemTitle();
+  public abstract @NotNull String getMenuItemTitle();
 
   /**
    * @return short lowercased name, for interpreters list
    */
-  @NotNull
-  public abstract String getShortName();
+  public abstract @NotNull String getShortName();
 
   /**
    * @return true iff this handler can be used in the application. E.g. has proper os, proper plugins, etc.
@@ -221,28 +218,23 @@ public abstract class PerlHostHandler<Data extends PerlHostData<Data, Handler>, 
   /**
    * @return an OS handler for this host if it's available without data. E.g for local, wsl, docker cases
    */
-  @Nullable
-  public abstract PerlOsHandler getOsHandler();
+  public abstract @Nullable PerlOsHandler getOsHandler();
 
-  @NotNull
   @Override
-  protected final String getTagName() {
+  protected final @NotNull String getTagName() {
     return TAG_NAME;
   }
 
   /**
    * @return configurable for the {@code project} settings related to this host data type if any. E.g. docker has additional cli arguments on project level
    */
-  @Nullable
-  public UnnamedConfigurable getSettingsConfigurable(@NotNull Project project) {
+  public @Nullable UnnamedConfigurable getSettingsConfigurable(@NotNull Project project) {
     return null;
   }
 
-  @Nullable
-  public abstract Icon getIcon();
+  public abstract @Nullable Icon getIcon();
 
-  @NotNull
-  public static List<? extends PerlHostHandler<?, ?>> all() {
+  public static @NotNull List<? extends PerlHostHandler<?, ?>> all() {
     return EP.getExtensionsList();
   }
 
@@ -250,14 +242,12 @@ public abstract class PerlHostHandler<Data extends PerlHostData<Data, Handler>, 
     all().forEach(action);
   }
 
-  @NotNull
-  public static Stream<? extends PerlHostHandler<?, ?>> stream() {
+  public static @NotNull Stream<? extends PerlHostHandler<?, ?>> stream() {
     return all().stream();
   }
 
   @Contract("null->null")
-  @Nullable
-  public static PerlHostHandler<?, ?> from(@Nullable Sdk sdk) {
+  public static @Nullable PerlHostHandler<?, ?> from(@Nullable Sdk sdk) {
     PerlHostData<?, ?> perlHostData = PerlHostData.from(sdk);
     return perlHostData == null ? null : perlHostData.getHandler();
   }
@@ -267,8 +257,7 @@ public abstract class PerlHostHandler<Data extends PerlHostData<Data, Handler>, 
    *
    * @return data read or new empty data created by defaultHandler
    */
-  @NotNull
-  public static PerlHostData<?, ?> load(@NotNull Element parentElement) {
+  public static @NotNull PerlHostData<?, ?> load(@NotNull Element parentElement) {
     Element element = parentElement.getChild(TAG_NAME);
     if (element != null) {
       PerlHostHandler<?, ?> handler = EP.findSingle(element.getAttributeValue(ID_ATTRIBUTE));
@@ -282,8 +271,7 @@ public abstract class PerlHostHandler<Data extends PerlHostData<Data, Handler>, 
     return getDefaultHandler().createData();
   }
 
-  @NotNull
-  public static PerlHostHandler<?, ?> getDefaultHandler() {
+  public static @NotNull PerlHostHandler<?, ?> getDefaultHandler() {
     return Objects.requireNonNull(EP.findSingle("localhost"), "Local handler MUST always present");
   }
 }

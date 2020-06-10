@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -52,9 +52,8 @@ public class MasonSettings extends AbstractMasonSettings implements PersistentSt
     return Mason2SourceRootType.INSTANCE;
   }
 
-  @Nullable
   @Override
-  public MasonSettings getState() {
+  public @Nullable MasonSettings getState() {
     return this;
   }
 

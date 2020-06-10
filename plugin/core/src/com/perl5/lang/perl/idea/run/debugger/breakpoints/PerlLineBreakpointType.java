@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,9 +32,8 @@ public class PerlLineBreakpointType extends XLineBreakpointType<PerlLineBreakpoi
     super("perl_line_breakpoint", "Perl Line Breakpoint");
   }
 
-  @Nullable
   @Override
-  public PerlLineBreakpointProperties createBreakpointProperties(@NotNull VirtualFile file, int line) {
+  public @Nullable PerlLineBreakpointProperties createBreakpointProperties(@NotNull VirtualFile file, int line) {
     return new PerlLineBreakpointProperties();
   }
 
@@ -44,10 +43,9 @@ public class PerlLineBreakpointType extends XLineBreakpointType<PerlLineBreakpoi
     return file.getFileType() instanceof PerlFileType;
   }
 
-  @Nullable
   @Override
-  public XDebuggerEditorsProvider getEditorsProvider(@NotNull XLineBreakpoint<PerlLineBreakpointProperties> breakpoint,
-                                                     @NotNull Project project) {
+  public @Nullable XDebuggerEditorsProvider getEditorsProvider(@NotNull XLineBreakpoint<PerlLineBreakpointProperties> breakpoint,
+                                                               @NotNull Project project) {
     return PerlDebuggerEditorsProvider.INSTANCE;
   }
 }

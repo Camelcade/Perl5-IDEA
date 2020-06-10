@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,8 +25,7 @@ import java.io.IOException;
 import java.util.Collection;
 
 final class PerlValueSerializer {
-  @NotNull
-  private final StubOutputStream myOutputStream;
+  private final @NotNull StubOutputStream myOutputStream;
   private final TObjectIntHashMap<PerlValue> myDryMap = new TObjectIntHashMap<>();
 
   public PerlValueSerializer(@NotNull StubOutputStream outputStream) {
@@ -56,7 +55,7 @@ final class PerlValueSerializer {
     }
   }
 
-  public void writeName(@Nullable final String arg) throws IOException {
+  public void writeName(final @Nullable String arg) throws IOException {
     myOutputStream.writeName(arg);
   }
 

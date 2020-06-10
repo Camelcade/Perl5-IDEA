@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -64,9 +64,8 @@ public class PerlDebugProcess extends XDebugProcess {
     myDebugThread.start();
   }
 
-  @NotNull
   @Override
-  public XDebuggerEditorsProvider getEditorsProvider() {
+  public @NotNull XDebuggerEditorsProvider getEditorsProvider() {
     return PerlDebuggerEditorsProvider.INSTANCE;
   }
 
@@ -78,9 +77,8 @@ public class PerlDebugProcess extends XDebugProcess {
     return true;
   }
 
-  @NotNull
   @Override
-  public XBreakpointHandler<?>[] getBreakpointHandlers() {
+  public @NotNull XBreakpointHandler<?>[] getBreakpointHandlers() {
     return new XBreakpointHandler[]{new PerlLineBreakpointHandler(myDebugThread)};
   }
 
@@ -163,21 +161,18 @@ public class PerlDebugProcess extends XDebugProcess {
     }
   }
 
-  @Nullable
   @Override
-  protected ProcessHandler doGetProcessHandler() {
+  protected @Nullable ProcessHandler doGetProcessHandler() {
     return myExecutionResult.getProcessHandler();
   }
 
-  @NotNull
   @Override
-  public ExecutionConsole createConsole() {
+  public @NotNull ExecutionConsole createConsole() {
     return myExecutionResult.getExecutionConsole();
   }
 
-  @NotNull
   @Override
-  public XDebugTabLayouter createTabLayouter() {
+  public @NotNull XDebugTabLayouter createTabLayouter() {
     return new XDebugTabLayouter() {
       @Override
       public void registerAdditionalContent(@NotNull RunnerLayoutUi ui) {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,9 +30,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class PodUsageGroupingRule extends SingleParentUsageGroupingRule {
-  @Nullable
   @Override
-  protected UsageGroup getParentGroupFor(@NotNull Usage usage, @NotNull UsageTarget[] targets) {
+  protected @Nullable UsageGroup getParentGroupFor(@NotNull Usage usage, @NotNull UsageTarget[] targets) {
     if (!(usage instanceof PsiElementUsage)) {
       return null;
     }

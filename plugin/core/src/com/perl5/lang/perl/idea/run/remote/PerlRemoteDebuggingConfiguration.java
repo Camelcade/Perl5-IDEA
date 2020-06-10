@@ -62,9 +62,8 @@ public class PerlRemoteDebuggingConfiguration extends RunConfigurationBase
     super(project, factory, name);
   }
 
-  @NotNull
   @Override
-  public SettingsEditor<? extends RunConfiguration> getConfigurationEditor() {
+  public @NotNull SettingsEditor<? extends RunConfiguration> getConfigurationEditor() {
     return new PerlRemoteDebuggingConfigurationEditor(getProject());
   }
 
@@ -85,9 +84,8 @@ public class PerlRemoteDebuggingConfiguration extends RunConfigurationBase
     XmlSerializer.serializeInto(this, element);
   }
 
-  @Nullable
   @Override
-  public PerlRemoteDebuggingRunProfileState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment environment) {
+  public @Nullable PerlRemoteDebuggingRunProfileState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment environment) {
     if (executor instanceof DefaultDebugExecutor) {
       return new PerlRemoteDebuggingRunProfileState(environment);
     }
@@ -189,12 +187,11 @@ public class PerlRemoteDebuggingConfiguration extends RunConfigurationBase
     myIsReconnect = reconnect;
   }
 
-  @NotNull
   @Override
-  public XDebugProcess createDebugProcess(@NotNull InetSocketAddress socketAddress,
-                                          @NotNull XDebugSession session,
-                                          @Nullable ExecutionResult executionResult,
-                                          @NotNull ExecutionEnvironment environment) throws ExecutionException {
+  public @NotNull XDebugProcess createDebugProcess(@NotNull InetSocketAddress socketAddress,
+                                                   @NotNull XDebugSession session,
+                                                   @Nullable ExecutionResult executionResult,
+                                                   @NotNull ExecutionEnvironment environment) throws ExecutionException {
     PerlRemoteDebuggingRunProfileState runProfileState = Objects.requireNonNull(getState(environment.getExecutor(), environment));
     return new PerlDebugProcess(session, runProfileState, runProfileState.execute(environment.getExecutor()));
   }

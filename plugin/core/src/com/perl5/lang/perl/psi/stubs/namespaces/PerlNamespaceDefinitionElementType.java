@@ -47,15 +47,13 @@ public class PerlNamespaceDefinitionElementType extends IStubElementType<PerlNam
     return new PsiPerlNamespaceDefinitionImpl(stub, this);
   }
 
-  @NotNull
   @Override
-  public PsiElement getPsiElement(@NotNull ASTNode node) {
+  public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
     return new PsiPerlNamespaceDefinitionImpl(node);
   }
 
-  @NotNull
   @Override
-  public PerlNamespaceDefinitionStub createStub(@NotNull PerlNamespaceDefinitionElement psi, StubElement parentStub) {
+  public @NotNull PerlNamespaceDefinitionStub createStub(@NotNull PerlNamespaceDefinitionElement psi, StubElement parentStub) {
     return createStubElement(parentStub, new PerlNamespaceDefinitionData(psi));
   }
 
@@ -63,9 +61,8 @@ public class PerlNamespaceDefinitionElementType extends IStubElementType<PerlNam
     return new PerlNamespaceDefinitionStub(parentStub, this, data);
   }
 
-  @NotNull
   @Override
-  public String getExternalId() {
+  public @NotNull String getExternalId() {
     return "perl." + super.toString();
   }
 
@@ -94,9 +91,8 @@ public class PerlNamespaceDefinitionElementType extends IStubElementType<PerlNam
     stub.getData().serialize(dataStream);
   }
 
-  @NotNull
   @Override
-  public PerlNamespaceDefinitionStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
+  public @NotNull PerlNamespaceDefinitionStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
     return createStubElement(parentStub, PerlNamespaceDefinitionData.deserialize(dataStream));
   }
 

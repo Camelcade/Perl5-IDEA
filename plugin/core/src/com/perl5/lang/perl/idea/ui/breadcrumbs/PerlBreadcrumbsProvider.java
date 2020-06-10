@@ -50,15 +50,13 @@ public class PerlBreadcrumbsProvider implements BreadcrumbsProvider {
            element instanceof PerlNamespaceDefinitionElement && ((PerlNamespaceDefinitionElement)element).getNamespaceName() != null;
   }
 
-  @Nullable
   @Override
-  public PsiElement getParent(@NotNull PsiElement element) {
+  public @Nullable PsiElement getParent(@NotNull PsiElement element) {
     PsiElement structuralParent = getStructuralParentElement(element);
     return structuralParent instanceof PsiFile ? null : structuralParent;
   }
 
-  @Nullable
-  public static PsiElement getStructuralParentElement(@NotNull PsiElement element) {
+  public static @Nullable PsiElement getStructuralParentElement(@NotNull PsiElement element) {
     if (element instanceof PerlFile) {
       return null;
     }
@@ -103,15 +101,13 @@ public class PerlBreadcrumbsProvider implements BreadcrumbsProvider {
     return nearestParent;
   }
 
-  @Nullable
   @Override
-  public Icon getElementIcon(@NotNull PsiElement element) {
+  public @Nullable Icon getElementIcon(@NotNull PsiElement element) {
     return element.getIcon(0);
   }
 
-  @NotNull
   @Override
-  public String getElementInfo(@NotNull PsiElement element) {
+  public @NotNull String getElementInfo(@NotNull PsiElement element) {
     if (element instanceof PerlFile) {
       return ((PerlFile)element).getName();
     }

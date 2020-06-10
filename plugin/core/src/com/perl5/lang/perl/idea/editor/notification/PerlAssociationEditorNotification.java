@@ -45,24 +45,21 @@ import java.util.Optional;
 public class PerlAssociationEditorNotification extends EditorNotifications.Provider<EditorNotificationPanel> implements DumbAware {
   private static final Key<EditorNotificationPanel> KEY = Key.create("perl.wrong.file.association");
   private static final Map<FileNameMatcher, FileType> PERL_FILE_TYPES = new HashMap<>();
-  @NotNull
-  private final Project myProject;
+  private final @NotNull Project myProject;
 
   public PerlAssociationEditorNotification(@NotNull Project project) {
     myProject = project;
   }
 
-  @NotNull
   @Override
-  public Key<EditorNotificationPanel> getKey() {
+  public @NotNull Key<EditorNotificationPanel> getKey() {
     return KEY;
   }
 
-  @Nullable
   @Override
-  public EditorNotificationPanel createNotificationPanel(@NotNull VirtualFile file,
-                                                         @NotNull FileEditor fileEditor,
-                                                         @NotNull Project project) {
+  public @Nullable EditorNotificationPanel createNotificationPanel(@NotNull VirtualFile file,
+                                                                   @NotNull FileEditor fileEditor,
+                                                                   @NotNull Project project) {
     PerlLocalSettings perlLocalSettings = PerlLocalSettings.getInstance(myProject);
     if (perlLocalSettings.DISABLE_ASSOCIATIONS_CHECKING || ScratchUtil.isScratch(file)) {
       return null;

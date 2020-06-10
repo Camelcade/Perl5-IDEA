@@ -49,11 +49,9 @@ import java.util.List;
 
 public abstract class GenericPerlRunConfigurationEditorPanel<Configuration extends GenericPerlRunConfiguration>
   extends CommonProgramParametersPanel implements Perl5SdkManipulator {
-  @Nullable
-  private Sdk mySdkProxy;
+  private @Nullable Sdk mySdkProxy;
 
-  @NotNull
-  private Project myProject;
+  private @NotNull final Project myProject;
 
   private LabeledComponent<?> myScriptLabeledField;
   private JPanel myScriptField;
@@ -89,13 +87,11 @@ public abstract class GenericPerlRunConfigurationEditorPanel<Configuration exten
     createScriptField();
   }
 
-  @NotNull
-  protected List<LabeledComponent<?>> getLabeledComponents() {
+  protected @NotNull List<LabeledComponent<?>> getLabeledComponents() {
     return Arrays.asList(myScriptLabeledField, myLabeledConsoleCharset, myLabeledPerlParametersPanel);
   }
 
-  @NotNull
-  protected String getProgramParametersLabel() {
+  protected @NotNull String getProgramParametersLabel() {
     return PerlBundle.message("perl.run.option.script.parameters");
   }
 
@@ -112,8 +108,7 @@ public abstract class GenericPerlRunConfigurationEditorPanel<Configuration exten
     myLabeledConsoleCharset.setLabelLocation(BorderLayout.WEST);
   }
 
-  @NotNull
-  protected TextFieldWithBrowseButton createTextFieldForScript() {
+  protected @NotNull TextFieldWithBrowseButton createTextFieldForScript() {
     TextFieldWithBrowseButton fieldWithBrowseButton = new TextFieldWithBrowseButton();
     fieldWithBrowseButton.addBrowseFolderListener(
       PerlBundle.message("perl.run.config.select.script.header"),
@@ -124,8 +119,7 @@ public abstract class GenericPerlRunConfigurationEditorPanel<Configuration exten
     return fieldWithBrowseButton;
   }
 
-  @NotNull
-  protected JPanel doCreateScriptField() {
+  protected @NotNull JPanel doCreateScriptField() {
     TextFieldWithBrowseButton scriptField = createTextFieldForScript();
 
     scriptField.getTextField().getDocument().addDocumentListener(new DocumentAdapter() {
@@ -143,8 +137,7 @@ public abstract class GenericPerlRunConfigurationEditorPanel<Configuration exten
     return scriptField;
   }
 
-  @NotNull
-  protected String getScriptFieldLabelText() {
+  protected @NotNull String getScriptFieldLabelText() {
     return PerlBundle.message("perl.run.option.script");
   }
 
@@ -157,8 +150,7 @@ public abstract class GenericPerlRunConfigurationEditorPanel<Configuration exten
     myScriptLabeledField.setLabelLocation(BorderLayout.WEST);
   }
 
-  @NotNull
-  private JPanel createAlternativeSdkPanel() {
+  private @NotNull JPanel createAlternativeSdkPanel() {
     JPanel alternativeSdkPanel = new JPanel(new MigLayout("ins 0, gap 10, fill, flowx"));
     myAlternativeSdkCheckbox = new JBCheckBox();
     mySdkConfigurable = new Perl5SdkConfigurable(this, null);
@@ -226,6 +218,5 @@ public abstract class GenericPerlRunConfigurationEditorPanel<Configuration exten
   /**
    * @return a run configuration producer for the run configuration
    */
-  @NotNull
-  protected abstract GenericPerlRunConfigurationProducer<Configuration> getRunConfigurationProducer();
+  protected abstract @NotNull GenericPerlRunConfigurationProducer<Configuration> getRunConfigurationProducer();
 }

@@ -56,22 +56,14 @@ public class PerlRunAnythingProvider extends RunAnythingProviderBase<List<PerlRu
   private static final String PARAMETER_PLACEHOLDER_KEY = "parameterPlaceholder";
   private static final String DESCRIPTION_KEY = "description";
 
-  @NotNull
-  private final String myCommand;
-  @NotNull
-  private final String myHelpGroupName;
-  @NotNull
-  private final String myCompletionGroupName;
-  @NotNull
-  private final Set<String> myOptions;
-  @NotNull
-  private final Set<String> myCommands;
-  @NotNull
-  private final Set<OptionDescriptor> myOptionDescriptors;
-  @NotNull
-  private final Set<CommandDescriptor> myCommandDescriptors;
-  @NotNull
-  private final Map<String, OptionDescriptor> myAllOptionsAndCommands;
+  private final @NotNull String myCommand;
+  private final @NotNull String myHelpGroupName;
+  private final @NotNull String myCompletionGroupName;
+  private final @NotNull Set<String> myOptions;
+  private final @NotNull Set<String> myCommands;
+  private final @NotNull Set<OptionDescriptor> myOptionDescriptors;
+  private final @NotNull Set<CommandDescriptor> myCommandDescriptors;
+  private final @NotNull Map<String, OptionDescriptor> myAllOptionsAndCommands;
 
   private final boolean myIsOptionsFirst;
 
@@ -129,14 +121,12 @@ public class PerlRunAnythingProvider extends RunAnythingProviderBase<List<PerlRu
   }
 
 
-  @NotNull
   @Override
-  public RunAnythingItem getMainListItem(@NotNull DataContext dataContext, @NotNull List<CommandElement> value) {
+  public @NotNull RunAnythingItem getMainListItem(@NotNull DataContext dataContext, @NotNull List<CommandElement> value) {
     return new RunAnythingHelpItem(getItemPresentableText(value), getCommand(value), getItemDescription(value), getIcon(value));
   }
 
-  @NotNull
-  protected String getItemPresentableText(@NotNull List<CommandElement> value) {
+  protected @NotNull String getItemPresentableText(@NotNull List<CommandElement> value) {
     if (value.isEmpty()) {
       return getCommand();
     }
@@ -151,8 +141,7 @@ public class PerlRunAnythingProvider extends RunAnythingProviderBase<List<PerlRu
     return lastElementDescriptor.value + " <" + lastElementDescriptor.placeholder + ">";
   }
 
-  @Nullable
-  protected String getItemDescription(@NotNull List<CommandElement> value) {
+  protected @Nullable String getItemDescription(@NotNull List<CommandElement> value) {
     if (value.isEmpty()) {
       return null;
     }
@@ -168,8 +157,7 @@ public class PerlRunAnythingProvider extends RunAnythingProviderBase<List<PerlRu
   /**
    * @return our cli model built from the pattern or null if it's empty or not our pattern
    */
-  @Nullable
-  protected List<CommandElement> buildModel(@NotNull String pattern) {
+  protected @Nullable List<CommandElement> buildModel(@NotNull String pattern) {
     // fixme more sophisticated splitting
     String[] patternChunks = pattern.trim().split("\\s+");
     if (patternChunks.length == 0) {
@@ -215,9 +203,8 @@ public class PerlRunAnythingProvider extends RunAnythingProviderBase<List<PerlRu
     return commandModel;
   }
 
-  @NotNull
   @Override
-  public Collection<List<CommandElement>> getValues(@NotNull DataContext dataContext, @NotNull String pattern) {
+  public @NotNull Collection<List<CommandElement>> getValues(@NotNull DataContext dataContext, @NotNull String pattern) {
     List<CommandElement> commandModel = buildModel(pattern);
     if (commandModel == null) {
       return Collections.emptyList();
@@ -277,9 +264,8 @@ public class PerlRunAnythingProvider extends RunAnythingProviderBase<List<PerlRu
     return result;
   }
 
-  @Nullable
   @Override
-  public List<CommandElement> findMatchingValue(@NotNull DataContext dataContext, @NotNull String pattern) {
+  public @Nullable List<CommandElement> findMatchingValue(@NotNull DataContext dataContext, @NotNull String pattern) {
     return buildModel(pattern);
   }
 
@@ -300,26 +286,22 @@ public class PerlRunAnythingProvider extends RunAnythingProviderBase<List<PerlRu
     PerlRunUtil.runInConsole(new PerlCommandLine(getCommand(value)).withProject(project));
   }
 
-  @Nullable
   @Override
-  public String getCompletionGroupTitle() {
+  public @Nullable String getCompletionGroupTitle() {
     return myCompletionGroupName;
   }
 
   @Override
-  @NotNull
-  public String getHelpGroupTitle() {
+  public @NotNull String getHelpGroupTitle() {
     return myHelpGroupName;
   }
 
-  @Nullable
   @Override
-  public Icon getIcon(@NotNull List<CommandElement> value) {
+  public @Nullable Icon getIcon(@NotNull List<CommandElement> value) {
     return PerlIcons.PERL_LANGUAGE_ICON;
   }
 
-  @NotNull
-  public Collection<RunAnythingHelpItem> getHelpItems(@NotNull DataContext dataContext) {
+  public @NotNull Collection<RunAnythingHelpItem> getHelpItems(@NotNull DataContext dataContext) {
     List<RunAnythingHelpItem> result = new ArrayList<>();
     for (CommandDescriptor commandDescriptor : myCommandDescriptors) {
       CommandElement blankElement = CommandElement.createBlank(commandDescriptor);
@@ -333,14 +315,12 @@ public class PerlRunAnythingProvider extends RunAnythingProviderBase<List<PerlRu
   /**
    * @return command this provider serves
    */
-  @NotNull
-  public String getCommand() {
+  public @NotNull String getCommand() {
     return myCommand;
   }
 
-  @NotNull
   @Override
-  public String getCommand(@NotNull List<CommandElement> value) {
+  public @NotNull String getCommand(@NotNull List<CommandElement> value) {
     List<String> result = new ArrayList<>();
     result.add(getCommand());
     List<CommandElement> commands = new ArrayList<>();
@@ -366,33 +346,28 @@ public class PerlRunAnythingProvider extends RunAnythingProviderBase<List<PerlRu
     return StringUtil.join(ContainerUtil.filter(result, StringUtil::isNotEmpty), " ");
   }
 
-  @NotNull
   @Override
-  public String getHelpCommand() {
+  public @NotNull String getHelpCommand() {
     throw new RuntimeException("NYI");
   }
 
-  @Nullable
   @Override
-  public String getHelpCommandPlaceholder() {
+  public @Nullable String getHelpCommandPlaceholder() {
     throw new RuntimeException("NYI");
   }
 
-  @Nullable
   @Override
-  public RunAnythingHelpItem getHelpItem(@NotNull DataContext dataContext) {
+  public @Nullable RunAnythingHelpItem getHelpItem(@NotNull DataContext dataContext) {
     return null;
   }
 
-  @Nullable
   @Override
-  public Icon getHelpIcon() {
+  public @Nullable Icon getHelpIcon() {
     throw new RuntimeException("NYI");
   }
 
-  @NotNull
-  private static Set<String> readOptions(@Nullable Element optionsElement,
-                                         @NotNull Map<String, OptionDescriptor> allOptionsMap) {
+  private static @NotNull Set<String> readOptions(@Nullable Element optionsElement,
+                                                  @NotNull Map<String, OptionDescriptor> allOptionsMap) {
     if (optionsElement == null) {
       return Collections.emptySet();
     }
@@ -426,9 +401,8 @@ public class PerlRunAnythingProvider extends RunAnythingProviderBase<List<PerlRu
     return optionsNames.isEmpty() ? Collections.emptySet() : Collections.unmodifiableSet(optionsNames);
   }
 
-  @NotNull
-  private static Set<String> readCommands(@Nullable Element commandsElement,
-                                          @NotNull Map<String, OptionDescriptor> allOptionsMap) {
+  private static @NotNull Set<String> readCommands(@Nullable Element commandsElement,
+                                                   @NotNull Map<String, OptionDescriptor> allOptionsMap) {
     if (commandsElement == null) {
       return Collections.emptySet();
     }
@@ -475,10 +449,10 @@ public class PerlRunAnythingProvider extends RunAnythingProviderBase<List<PerlRu
 
   private static class OptionDescriptor {
     private static final OptionDescriptor UNKNOWN = new OptionDescriptor("", null, null, null);
-    @NotNull final String value;
-    @Nullable final String placeholder;
-    @Nullable final String description;
-    @Nullable final String alias;
+    final @NotNull String value;
+    final @Nullable String placeholder;
+    final @Nullable String description;
+    final @Nullable String alias;
 
     protected OptionDescriptor(@NotNull String value, @Nullable String placeholder, @Nullable String description, @Nullable String alias) {
       this.value = value;
@@ -487,8 +461,7 @@ public class PerlRunAnythingProvider extends RunAnythingProviderBase<List<PerlRu
       this.alias = StringUtil.nullize(alias);
     }
 
-    @NotNull
-    public String getPresentablePlaceholder() {
+    public @NotNull String getPresentablePlaceholder() {
       return "<" + placeholder + ">";
     }
 
@@ -507,7 +480,7 @@ public class PerlRunAnythingProvider extends RunAnythingProviderBase<List<PerlRu
   }
 
   private static class CommandDescriptor extends OptionDescriptor {
-    @NotNull final Set<OptionDescriptor> applicableOptions;
+    final @NotNull Set<OptionDescriptor> applicableOptions;
 
     public CommandDescriptor(@NotNull String value,
                              @Nullable String placeholder,
@@ -533,8 +506,8 @@ public class PerlRunAnythingProvider extends RunAnythingProviderBase<List<PerlRu
   }
 
   public static class CommandElement {
-    @NotNull final OptionDescriptor descriptor;
-    @NotNull final List<String> parameters = new ArrayList<>();
+    final @NotNull OptionDescriptor descriptor;
+    final @NotNull List<String> parameters = new ArrayList<>();
 
     public CommandElement(@NotNull OptionDescriptor descriptor) {
       this.descriptor = descriptor;
@@ -576,8 +549,7 @@ public class PerlRunAnythingProvider extends RunAnythingProviderBase<List<PerlRu
                                         : descriptor.value + " " + StringUtil.join(parameters, " ");
     }
 
-    @NotNull
-    public static CommandElement createBlank(@NotNull OptionDescriptor descriptor) {
+    public static @NotNull CommandElement createBlank(@NotNull OptionDescriptor descriptor) {
       CommandElement result = new CommandElement(descriptor);
       if (descriptor.isParametrized()) {
         result.addParameter(descriptor.getPresentablePlaceholder().replace(' ', '_'));

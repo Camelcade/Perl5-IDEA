@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,8 +28,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class PerlHeredocInjectionTestCase extends PerlLightTestCase {
-  @NotNull
-  protected PerlHeredocElementImpl getHeredocUnderCursor() {
+  protected @NotNull PerlHeredocElementImpl getHeredocUnderCursor() {
     return getElementAtCaretWithoutInjection(PerlHeredocElementImpl.class);
   }
 
@@ -39,18 +38,16 @@ public abstract class PerlHeredocInjectionTestCase extends PerlLightTestCase {
     LiteralTextEscaper<PerlHeredocElementImpl> escaper = heredocElement.createLiteralTextEscaper();
     // host MUST be auto-injected with our own injector
     new PerlHeredocLanguageInjector().getLanguagesToInject(new MultiHostRegistrar() {
-      @NotNull
       @Override
-      public MultiHostRegistrar startInjecting(@NotNull Language language) {
+      public @NotNull MultiHostRegistrar startInjecting(@NotNull Language language) {
         return this;
       }
 
-      @NotNull
       @Override
-      public MultiHostRegistrar addPlace(@Nullable String prefix,
-                                         @Nullable String suffix,
-                                         @NotNull PsiLanguageInjectionHost host,
-                                         @NotNull TextRange rangeInsideHost) {
+      public @NotNull MultiHostRegistrar addPlace(@Nullable String prefix,
+                                                  @Nullable String suffix,
+                                                  @NotNull PsiLanguageInjectionHost host,
+                                                  @NotNull TextRange rangeInsideHost) {
         escaper.decode(rangeInsideHost, sb);
         return this;
       }

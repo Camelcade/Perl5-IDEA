@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -58,8 +58,7 @@ public class PerlNamespaceAnnotations {
     return new PerlNamespaceAnnotations(flags);
   }
 
-  @Nullable
-  private static PerlNamespaceAnnotations createFromAnnotationsList(List<PerlAnnotation> annotations) {
+  private static @Nullable PerlNamespaceAnnotations createFromAnnotationsList(List<PerlAnnotation> annotations) {
     if (annotations.isEmpty()) {
       return null;
     }
@@ -81,8 +80,7 @@ public class PerlNamespaceAnnotations {
    * @param baseElements elements to process, e.g. identifier or use constant
    * @return Sub annotations
    */
-  @Nullable
-  public static PerlNamespaceAnnotations tryToFindAnnotations(@NotNull PsiElement... baseElements) {
+  public static @Nullable PerlNamespaceAnnotations tryToFindAnnotations(@NotNull PsiElement... baseElements) {
     for (PsiElement element : baseElements) {
       List<PerlAnnotation> annotations = PerlPsiUtil.collectAnnotations(element);
       if (!annotations.isEmpty()) {

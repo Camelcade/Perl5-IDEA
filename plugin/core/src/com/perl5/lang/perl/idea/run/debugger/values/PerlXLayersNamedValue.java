@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,8 +29,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class PerlXLayersNamedValue extends XNamedValue {
-  @NotNull
-  private final PerlLayersDescriptor myLayersDescriptor;
+  private final @NotNull PerlLayersDescriptor myLayersDescriptor;
 
   public PerlXLayersNamedValue(@NotNull PerlLayersDescriptor layersDescriptor) {
     super("IO Layers");
@@ -63,10 +62,8 @@ public class PerlXLayersNamedValue extends XNamedValue {
   }
 
   private static class PerlLayers extends XNamedValue {
-    @NotNull
-    private final List<PerlLayerDescriptor> myLayersDescriptors;
-    @NotNull
-    private final Icon myIcon;
+    private final @NotNull List<PerlLayerDescriptor> myLayersDescriptors;
+    private final @NotNull Icon myIcon;
 
     public PerlLayers(@NotNull String name,
                       @NotNull Icon icon,
@@ -93,8 +90,7 @@ public class PerlXLayersNamedValue extends XNamedValue {
   }
 
   private static class PerlLayer extends XNamedValue {
-    @NotNull
-    private final PerlLayerDescriptor myLayerDescriptor;
+    private final @NotNull PerlLayerDescriptor myLayerDescriptor;
 
     public PerlLayer(int index, @NotNull PerlLayerDescriptor layerDescriptor) {
       super("[" + index + "]");

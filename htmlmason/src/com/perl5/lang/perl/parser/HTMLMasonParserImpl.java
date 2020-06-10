@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -77,21 +77,18 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
 	}
 */
 
-  @NotNull
   @Override
-  public TokenSet getAnonHashSuffixTokens() {
+  public @NotNull TokenSet getAnonHashSuffixTokens() {
     return ANON_HASH_SUFFIX_TOKENS;
   }
 
-  @NotNull
   @Override
-  public TokenSet getUnconsumableSemicolonTokens() {
+  public @NotNull TokenSet getUnconsumableSemicolonTokens() {
     return UNCONSUMABLE_SEMI_TOKENS;
   }
 
-  @NotNull
   @Override
-  public TokenSet getBadCharacterForbiddenTokens() {
+  public @NotNull TokenSet getBadCharacterForbiddenTokens() {
     return BAD_CHARACTER_FORBIDDEN_TOKENS;
   }
 
@@ -112,7 +109,6 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
             b.advanceLexer();
 
             while (PerlParserUtil.consumeToken(b, HTML_MASON_DEFAULT_ESCAPER_NAME)) {
-              ;
             }
 
             if (!PerlParserUtil.consumeToken(b, COMMA)) {
@@ -251,7 +247,6 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
 
     if (PerlParserUtil.consumeToken(b, HTML_MASON_ARGS_OPENER)) {
       while (parseArgument(b, l) || parseHardNewline(b)) {
-        ;
       }
     }
 

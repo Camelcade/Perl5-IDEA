@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,9 +46,8 @@ class PerlTestRunConfigurationEditor extends GenericPerlRunConfigurationEditor<P
     super(project);
   }
 
-  @NotNull
   @Override
-  protected ParametersPanel createCommonParametersPanel() {
+  protected @NotNull ParametersPanel createCommonParametersPanel() {
     return new ParametersPanel(myProject);
   }
 
@@ -64,9 +63,8 @@ class PerlTestRunConfigurationEditor extends GenericPerlRunConfigurationEditor<P
       super(project);
     }
 
-    @NotNull
     @Override
-    protected String getProgramParametersLabel() {
+    protected @NotNull String getProgramParametersLabel() {
       return PerlBundle.message("perl.run.prove.option.parameters");
     }
 
@@ -104,24 +102,21 @@ class PerlTestRunConfigurationEditor extends GenericPerlRunConfigurationEditor<P
       runConfiguration.setTestScriptParameters(myTestScriptParametersEditor.getText());
     }
 
-    @NotNull
     @Override
-    protected List<LabeledComponent<?>> getLabeledComponents() {
+    protected @NotNull List<LabeledComponent<?>> getLabeledComponents() {
       List<LabeledComponent<?>> parentComponents = new ArrayList<>(super.getLabeledComponents());
       parentComponents.add(myLabeledJobsCombobox);
       parentComponents.add(myLabeledTestScriptParametersEditor);
       return parentComponents;
     }
 
-    @NotNull
     @Override
-    protected String getScriptFieldLabelText() {
+    protected @NotNull String getScriptFieldLabelText() {
       return PerlBundle.message("perl.run.prove.option.script.label");
     }
 
-    @NotNull
     @Override
-    protected TextFieldWithBrowseButton createTextFieldForScript() {
+    protected @NotNull TextFieldWithBrowseButton createTextFieldForScript() {
       TextFieldWithBrowseButton fieldWithBrowseButton = new TextFieldWithBrowseButton(new ExpandableTextField(FILES_PARSER, FILES_JOINER));
       fieldWithBrowseButton.addActionListener(e -> {
         FileChooserDescriptor fileChooserDescriptor = new FileChooserDescriptor(true, true, false, false, false, true) {
@@ -142,9 +137,8 @@ class PerlTestRunConfigurationEditor extends GenericPerlRunConfigurationEditor<P
       return fieldWithBrowseButton;
     }
 
-    @NotNull
     @Override
-    protected GenericPerlRunConfigurationProducer<PerlTestRunConfiguration> getRunConfigurationProducer() {
+    protected @NotNull GenericPerlRunConfigurationProducer<PerlTestRunConfiguration> getRunConfigurationProducer() {
       return PerlTestRunConfigurationProducer.getInstance();
     }
   }

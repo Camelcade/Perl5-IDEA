@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,8 +32,7 @@ public interface PerlBlockCompound extends PerlLoop, PerlCompound {
   /**
    * @return a nested block. This method is aware about lazy parsable blocks
    */
-  @Nullable
-  default PsiPerlBlock getBlockSmart() {
+  default @Nullable PsiPerlBlock getBlockSmart() {
     PsiPerlBlock block = getBlock();
     if (block != null) {
       return block;

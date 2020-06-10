@@ -57,8 +57,7 @@ class HeredocCollector extends PerlRecursiveVisitor {
   /**
    * @return body psi element for opener if any
    */
-  @Nullable
-  public PerlHeredocElementImpl getBody(@NotNull PsiPerlHeredocOpener opener) {
+  public @Nullable PerlHeredocElementImpl getBody(@NotNull PsiPerlHeredocOpener opener) {
     int openerIndex = myOpeners.indexOf(opener);
     if (openerIndex == -1 || myBodies.size() <= openerIndex) {
       return null;

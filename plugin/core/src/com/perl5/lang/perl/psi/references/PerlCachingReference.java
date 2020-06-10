@@ -45,18 +45,15 @@ public abstract class PerlCachingReference<T extends PsiElement> extends PsiPoly
     myExplicitRange = range;
   }
 
-  @NotNull
   @Override
-  public Object[] getVariants() {
+  public @NotNull Object[] getVariants() {
     return EMPTY_ARRAY;
   }
 
-  @NotNull
-  protected abstract ResolveResult[] resolveInner(boolean incompleteCode);
+  protected abstract @NotNull ResolveResult[] resolveInner(boolean incompleteCode);
 
-  @NotNull
   @Override
-  public final ResolveResult[] multiResolve(boolean incompleteCode) {
+  public final @NotNull ResolveResult[] multiResolve(boolean incompleteCode) {
     return ResolveCache.getInstance(myElement.getProject()).resolveWithCaching(this, RESOLVER, true, incompleteCode);
   }
 

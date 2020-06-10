@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,15 +40,13 @@ public class ModernPerlPackageProcessor extends PerlPackageProcessorBase impleme
     "IO::Handle"
   ));
 
-  @NotNull
   @Override
-  public PerlMroType getMroType(PerlUseStatementElement useStatement) {
+  public @NotNull PerlMroType getMroType(PerlUseStatementElement useStatement) {
     return PerlMroType.C3;
   }
 
   @Override
-  @NotNull
-  public List<String> getLoadedPackageNames(PerlUseStatementElement useStatement) {
+  public @NotNull List<String> getLoadedPackageNames(PerlUseStatementElement useStatement) {
     return LOADED_PACKAGES;
   }
 

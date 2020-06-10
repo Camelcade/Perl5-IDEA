@@ -56,8 +56,7 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
   }
 
   @Override
-  @Nullable
-  public String getExplicitNamespaceName() {
+  public @Nullable String getExplicitNamespaceName() {
     PerlVariableNameElement variableNameElement = getVariableNameElement();
     if (variableNameElement == null) {
       return null;
@@ -76,15 +75,13 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
     return PerlPackageUtil.getCanonicalNamespaceName(qualifiedRanges.first.subSequence(variableName).toString());
   }
 
-  @Nullable
   @Override
-  public PerlVariableNameElement getVariableNameElement() {
+  public @Nullable PerlVariableNameElement getVariableNameElement() {
     return findChildByClass(PerlVariableNameElement.class);
   }
 
-  @NotNull
   @Override
-  public PerlValue computePerlValue() {
+  public @NotNull PerlValue computePerlValue() {
     PerlVariableNameElement variableNameElement = getVariableNameElement();
 
     if (variableNameElement == null) {

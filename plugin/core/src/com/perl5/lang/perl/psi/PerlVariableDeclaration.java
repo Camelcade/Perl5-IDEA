@@ -39,8 +39,7 @@ public interface PerlVariableDeclaration extends PerlDeprecatable, PerlPackageMe
 
   String getVariableName();
 
-  @NotNull
-  default PerlValue getDeclaredValue() {
+  default @NotNull PerlValue getDeclaredValue() {
     PerlVariableAnnotations variableAnnotations = getVariableAnnotations();
     return variableAnnotations != null ? variableAnnotations.getAnnotatedValue() : UNKNOWN_VALUE;
   }
@@ -72,8 +71,7 @@ public interface PerlVariableDeclaration extends PerlDeprecatable, PerlPackageMe
    * @return fqn or null if name is missing
    */
   @Override
-  @Nullable
-  default String getCanonicalName() {
+  default @Nullable String getCanonicalName() {
     String variableName = getVariableName();
     if (StringUtil.isEmpty(variableName)) {
       return null;

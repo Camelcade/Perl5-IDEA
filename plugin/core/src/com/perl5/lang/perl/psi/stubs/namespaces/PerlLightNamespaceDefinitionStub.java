@@ -25,8 +25,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class PerlLightNamespaceDefinitionStub extends PerlNamespaceDefinitionStub implements PerlLightElementStub {
-  @Nullable
-  private final StubElement<?> myParent;
+  private final @Nullable StubElement<?> myParent;
 
   private boolean myIsImplicit = false;
 
@@ -42,9 +41,8 @@ public class PerlLightNamespaceDefinitionStub extends PerlNamespaceDefinitionStu
     return myParent;
   }
 
-  @Nullable
   @Override
-  public <E extends PsiElement> E getParentStubOfType(@NotNull Class<E> parentClass) {
+  public @Nullable <E extends PsiElement> E getParentStubOfType(@NotNull Class<E> parentClass) {
     throw new IncorrectOperationException("NYI");
   }
 

@@ -30,13 +30,12 @@ import org.jetbrains.annotations.Nullable;
 
 
 public class PerlTargetElementEvaluatorEx2 extends TargetElementEvaluatorEx2 implements TargetElementEvaluatorEx {
-  @Nullable
   @Override
-  public PsiElement adjustReferenceOrReferencedElement(@NotNull PsiFile file,
-                                                       @NotNull Editor editor,
-                                                       int offset,
-                                                       int flags,
-                                                       @Nullable PsiElement refElement) {
+  public @Nullable PsiElement adjustReferenceOrReferencedElement(@NotNull PsiFile file,
+                                                                 @NotNull Editor editor,
+                                                                 int offset,
+                                                                 int flags,
+                                                                 @Nullable PsiElement refElement) {
     if (refElement == null) {
       PsiReference ref = TargetElementUtil.findReference(editor, offset);
       if (ref instanceof PerlCachingReference) {
@@ -50,14 +49,12 @@ public class PerlTargetElementEvaluatorEx2 extends TargetElementEvaluatorEx2 imp
   }
 
 
-  @Nullable
   @Override
-  public PsiElement getNamedElement(@NotNull PsiElement element) {
+  public @Nullable PsiElement getNamedElement(@NotNull PsiElement element) {
     return getLightNameIdentifierOwner(element);
   }
 
-  @Nullable
-  public static PsiElement getLightNameIdentifierOwner(@NotNull PsiElement element) {
+  public static @Nullable PsiElement getLightNameIdentifierOwner(@NotNull PsiElement element) {
     PerlPolyNamedElement<?> polyNamedElement = PsiTreeUtil.getParentOfType(element, PerlPolyNamedElement.class);
     if (polyNamedElement == null) {
       return null;
@@ -73,9 +70,9 @@ public class PerlTargetElementEvaluatorEx2 extends TargetElementEvaluatorEx2 imp
   }
 
 
-  @Nullable
-  @Override // fixme WTF?
-  public PsiElement getElementByReference(@NotNull PsiReference ref, int flags) {
+  // fixme WTF?
+  @Override
+  public @Nullable PsiElement getElementByReference(@NotNull PsiReference ref, int flags) {
     return null;
   }
 

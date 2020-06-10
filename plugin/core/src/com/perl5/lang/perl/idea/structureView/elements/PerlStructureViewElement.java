@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,8 +50,7 @@ import java.util.*;
 
 public abstract class PerlStructureViewElement extends PsiTreeElementBase<PsiElement> implements SortableTreeElement {
   protected boolean myIsInherited;
-  @Nullable
-  private PerlExportDescriptor myExportDescriptor;
+  private @Nullable PerlExportDescriptor myExportDescriptor;
 
   public PerlStructureViewElement(PsiElement psiElement) {
     super(psiElement);
@@ -75,14 +74,12 @@ public abstract class PerlStructureViewElement extends PsiTreeElementBase<PsiEle
     return this;
   }
 
-  @Nullable
-  public PerlExportDescriptor getExportDescriptor() {
+  public @Nullable PerlExportDescriptor getExportDescriptor() {
     return myExportDescriptor;
   }
 
-  @NotNull
   @Override
-  public String getAlphaSortKey() {
+  public @NotNull String getAlphaSortKey() {
     PsiElement element = getElement();
     if (!(element instanceof PsiNamedElement)) {
       return "";
@@ -98,15 +95,13 @@ public abstract class PerlStructureViewElement extends PsiTreeElementBase<PsiEle
     return name;
   }
 
-  @Nullable
   @Override
-  public String getPresentableText() {
+  public @Nullable String getPresentableText() {
     throw new RuntimeException("Should not be invoked or should be overrode");
   }
 
-  @NotNull
   @Override
-  public ItemPresentation getPresentation() {
+  public @NotNull ItemPresentation getPresentation() {
 
     ItemPresentation itemPresentation = createPresentation();
 
@@ -128,8 +123,7 @@ public abstract class PerlStructureViewElement extends PsiTreeElementBase<PsiEle
     return itemPresentation;
   }
 
-  @NotNull
-  protected ItemPresentation createPresentation() {
+  protected @NotNull ItemPresentation createPresentation() {
     ItemPresentation result = null;
     PsiElement element = getElement();
     if (element instanceof NavigationItem) {
@@ -139,9 +133,8 @@ public abstract class PerlStructureViewElement extends PsiTreeElementBase<PsiEle
     return result == null ? new PerlItemPresentationSimple(element, "FIXME") : result;
   }
 
-  @NotNull
   @Override
-  public Collection<StructureViewTreeElement> getChildrenBase() {
+  public @NotNull Collection<StructureViewTreeElement> getChildrenBase() {
 
     PsiElement psiElement = getElement();
     if (psiElement == null) {

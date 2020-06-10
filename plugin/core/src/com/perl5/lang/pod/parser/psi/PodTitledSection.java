@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,17 +31,15 @@ public interface PodTitledSection extends PodSection,
                                           PsiNameIdentifierOwner,
                                           NavigationItem {
 
-  @Nullable
   @Override
-  default String getPresentableText() {
+  default @Nullable String getPresentableText() {
     return getTitleText();
   }
 
   /**
    * @return text representation of section
    */
-  @Nullable
-  default String getTitleText() {
+  default @Nullable String getTitleText() {
     PsiElement titleElement = getTitleElement();
 
     if (titleElement == null) {
@@ -66,8 +64,7 @@ public interface PodTitledSection extends PodSection,
   /**
    * @return a text of the section title with all formatting codes but indexes, or null if there is no title section
    */
-  @Nullable
-  default String getTitleTextWithoutIndexes() {
+  default @Nullable String getTitleTextWithoutIndexes() {
     PsiElement titleElement = getTitleElement();
     if (titleElement == null) {
       return null;
@@ -94,8 +91,7 @@ public interface PodTitledSection extends PodSection,
   /**
    * @return an element containing title of this section, probably with formatting codes
    */
-  @Nullable
-  default PsiElement getTitleElement() {
+  default @Nullable PsiElement getTitleElement() {
     return PsiTreeUtil.getChildOfType(this, PodSectionTitle.class);
   }
 

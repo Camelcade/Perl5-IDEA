@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -55,9 +55,8 @@ public class PerlMemberInplaceRenamer extends MemberInplaceRenamer {
     return topLevelFile == null || topLevelFile1 == null || topLevelFile.getViewProvider() != topLevelFile1.getViewProvider();
   }
 
-  @NotNull
   @Override
-  protected TextRange getRangeToRename(@NotNull PsiElement element) {
+  protected @NotNull TextRange getRangeToRename(@NotNull PsiElement element) {
     PsiElement namedElement = TargetElementUtil.getInstance().getNamedElement(element, 0);
     return namedElement instanceof PerlIdentifierRangeProvider
            ? ((PerlIdentifierRangeProvider)namedElement).getRangeInIdentifier()
@@ -79,9 +78,8 @@ public class PerlMemberInplaceRenamer extends MemberInplaceRenamer {
     return references;
   }
 
-  @Nullable
   @Override
-  protected PsiNamedElement getVariable() {
+  protected @Nullable PsiNamedElement getVariable() {
     PsiNamedElement variable = super.getVariable();
     if (variable != null) {
       return variable;

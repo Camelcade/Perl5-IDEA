@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,8 +37,7 @@ public class PerlHeredocFormattingBlock extends PerlFormattingBlock {
     assert node.getPsi() instanceof PerlHeredocElementImpl : "Got " + node + "instead of heredoc.";
   }
 
-  @NotNull
-  private PerlHeredocElementImpl getPsi() {
+  private @NotNull PerlHeredocElementImpl getPsi() {
     return (PerlHeredocElementImpl)myNode.getPsi();
   }
 
@@ -48,15 +47,13 @@ public class PerlHeredocFormattingBlock extends PerlFormattingBlock {
     return InjectedLanguageManager.getInstance(psi.getProject()).getInjectedPsiFiles(psi) == null;
   }
 
-  @NotNull
   @Override
-  protected List<Block> buildSubBlocks() {
+  protected @NotNull List<Block> buildSubBlocks() {
     return PerlInjectedLanguageBlocksBuilder.compute(myContext.getSettings().getRootSettings(), getNode(), getTextRange());
   }
 
-  @NotNull
   @Override
-  public TextRange getTextRange() {
+  public @NotNull TextRange getTextRange() {
     TextRange originalRange = super.getTextRange();
     if (originalRange.isEmpty()) {
       return originalRange;

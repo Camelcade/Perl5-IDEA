@@ -59,14 +59,12 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
   /**
    * @return an OS handler for this host
    */
-  @NotNull
-  public abstract PerlOsHandler getOsHandler();
+  public abstract @NotNull PerlOsHandler getOsHandler();
 
   /**
    * @return short lowercased name, for interpreters list
    */
-  @NotNull
-  public final String getShortName() {
+  public final @NotNull String getShortName() {
     String secondaryShortName = getSecondaryShortName();
     return secondaryShortName == null ? getPrimaryShortName() : getPrimaryShortName() + getSecondaryShortName();
   }
@@ -74,40 +72,34 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
   /**
    * @return primary part of short name, e.g. 'docker'
    */
-  @NotNull
-  public final String getPrimaryShortName() {
+  public final @NotNull String getPrimaryShortName() {
     return getHandler().getShortName();
   }
 
   /**
    * @return optional secondary short name, e.g. '[docker_image_name]'
    */
-  @Nullable
-  public abstract String getSecondaryShortName();
+  public abstract @Nullable String getSecondaryShortName();
 
   /**
    * @param disposable if filesystem is temporary, it may be bound by this disposable
    * @return a filesystem for this host if available
    */
-  @Nullable
-  public abstract VirtualFileSystem getFileSystem(@NotNull Disposable disposable);
+  public abstract @Nullable VirtualFileSystem getFileSystem(@NotNull Disposable disposable);
 
   /**
    * Attempts to find a file at host
    */
-  @Nullable
-  public abstract File findFileByName(@NotNull String fileName);
+  public abstract @Nullable File findFileByName(@NotNull String fileName);
 
   /**
    * Creates a process and process handler to be run in console.
    */
-  @NotNull
-  protected ProcessHandler doCreateConsoleProcessHandler(@NotNull PerlCommandLine commandLine) throws ExecutionException {
+  protected @NotNull ProcessHandler doCreateConsoleProcessHandler(@NotNull PerlCommandLine commandLine) throws ExecutionException {
     KillableProcessHandler processHandler = new KillableProcessHandler(
       createConsoleProcess(commandLine), commandLine.getCommandLineString(), commandLine.getCharset()) {
-      @NotNull
       @Override
-      protected BaseOutputReader.Options readerOptions() {
+      protected @NotNull BaseOutputReader.Options readerOptions() {
         return new BaseOutputReader.Options() {
           @Override
           public BaseDataReader.SleepingPolicy policy() {
@@ -133,34 +125,29 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
   /**
    * @return process created from {@code commandLine} to execute in console
    */
-  @NotNull
-  protected Process createConsoleProcess(@NotNull PerlCommandLine commandLine) throws ExecutionException {
+  protected @NotNull Process createConsoleProcess(@NotNull PerlCommandLine commandLine) throws ExecutionException {
     return createProcess(commandLine);
   }
 
   /**
    * Creates a process and process handler to be run in background.
    */
-  @NotNull
-  protected BaseProcessHandler<?> doCreateProcessHandler(@NotNull PerlCommandLine commandLine) throws ExecutionException {
+  protected @NotNull BaseProcessHandler<?> doCreateProcessHandler(@NotNull PerlCommandLine commandLine) throws ExecutionException {
     return new KillableProcessHandler(createProcess(commandLine), commandLine.getCommandLineString(), commandLine.getCharset());
   }
 
   /***
    * @return process created from {@code commandLine} to execute directly
    */
-  @NotNull
-  protected abstract Process createProcess(@NotNull PerlCommandLine commandLine) throws ExecutionException;
+  protected abstract @NotNull Process createProcess(@NotNull PerlCommandLine commandLine) throws ExecutionException;
 
   /**
    * @return a path on local machine to the file identified by {@code remotePath}
    */
-  @Nullable
-  protected abstract String doGetLocalPath(@NotNull String remotePath);
+  protected abstract @Nullable String doGetLocalPath(@NotNull String remotePath);
 
   @Contract("null->null")
-  @Nullable
-  public final String getLocalPath(@Nullable String remotePathname) {
+  public final @Nullable String getLocalPath(@Nullable String remotePathname) {
     if (remotePathname == null) {
       return null;
     }
@@ -182,12 +169,10 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
   /**
    * @return file transfer object, responsible for syncing files and helpers
    */
-  @NotNull
-  public abstract PerlHostFileTransfer<Data> getFileTransfer();
+  public abstract @NotNull PerlHostFileTransfer<Data> getFileTransfer();
 
   @Contract("null->null")
-  @Nullable
-  public final File getLocalPath(@Nullable File remotePath) {
+  public final @Nullable File getLocalPath(@Nullable File remotePath) {
     if (remotePath == null) {
       return null;
     }
@@ -199,12 +184,10 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
    * @return a path on remote machine to the file identified by {@code localPath}
    * @apiNote this method invoked after checking that file is not under helpers root and not cached copy of remote files
    */
-  @Nullable
-  protected abstract String doGetRemotePath(@NotNull String localPath);
+  protected abstract @Nullable String doGetRemotePath(@NotNull String localPath);
 
   @Contract("null->null")
-  @Nullable
-  public final String getRemotePath(@Nullable String localPathName) {
+  public final @Nullable String getRemotePath(@Nullable String localPathName) {
     if (localPathName == null) {
       return null;
     }
@@ -235,8 +218,7 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
   }
 
   @Contract("null->null")
-  @Nullable
-  public final File getRemotePath(@Nullable File localPath) {
+  public final @Nullable File getRemotePath(@Nullable File localPath) {
     if (localPath == null) {
       return null;
     }
@@ -247,23 +229,20 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
   /**
    * @return a path to a local cache of the remote files or null if we have a direct access to the FS   *
    */
-  @Nullable
-  public abstract String getLocalCacheRoot();
+  public abstract @Nullable String getLocalCacheRoot();
 
   /**
    * @return path to the helpers root on the target host
    * @see PerlPluginUtil#getPluginHelpersRoot()
    */
-  @NotNull
-  public abstract String getHelpersRootPath();
+  public abstract @NotNull String getHelpersRootPath();
 
   @Override
   public String toString() {
     return getShortName();
   }
 
-  @NotNull
-  public static ProcessOutput execAndGetOutput(@NotNull PerlCommandLine commandLine) throws ExecutionException {
+  public static @NotNull ProcessOutput execAndGetOutput(@NotNull PerlCommandLine commandLine) throws ExecutionException {
     return getOutput(createProcessHandler(commandLine));
   }
 
@@ -275,8 +254,7 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
     return adapter.getOutput();
   }
 
-  @NotNull
-  public static BaseProcessHandler<?> createProcessHandler(@NotNull PerlCommandLine commandLine) throws ExecutionException {
+  public static @NotNull BaseProcessHandler<?> createProcessHandler(@NotNull PerlCommandLine commandLine) throws ExecutionException {
     PerlVersionManagerData<?, ?> versionManagerData = commandLine.getEffectiveVersionManagerData();
     if (versionManagerData != null) {
       commandLine = versionManagerData.patchCommandLine(commandLine);
@@ -295,24 +273,20 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
   /**
    * @return stream of existing sdks from this host
    */
-  @NotNull
-  public final Stream<Sdk> getHostSdkStream() {
+  public final @NotNull Stream<Sdk> getHostSdkStream() {
     return PerlSdkTable.getInstance().getInterpreters().stream().filter(it -> this.equals(PerlHostData.from(it)));
   }
 
   @Contract("null->null")
-  @Nullable
-  public static PerlHostData<?, ?> from(@Nullable Sdk sdk) {
+  public static @Nullable PerlHostData<?, ?> from(@Nullable Sdk sdk) {
     return ObjectUtils.doIfNotNull(PerlSdkAdditionalData.from(sdk), PerlSdkAdditionalData::getHostData);
   }
 
-  @NotNull
-  public static PerlHostData<?, ?> notNullFrom(@NotNull Sdk sdk) {
+  public static @NotNull PerlHostData<?, ?> notNullFrom(@NotNull Sdk sdk) {
     return Objects.requireNonNull(from(sdk), () -> "No host data in " + sdk);
   }
 
-  @NotNull
-  public static ProcessHandler createConsoleProcessHandler(@NotNull PerlCommandLine commandLine) throws ExecutionException {
+  public static @NotNull ProcessHandler createConsoleProcessHandler(@NotNull PerlCommandLine commandLine) throws ExecutionException {
     PerlHostData<?, ?> hostData = commandLine.getEffectiveHostData();
     if (hostData == null) {
       throw new ExecutionException("No host data in the command line " + commandLine);

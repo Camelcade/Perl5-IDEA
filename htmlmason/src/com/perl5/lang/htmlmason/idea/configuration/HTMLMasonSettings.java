@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -69,8 +69,7 @@ public class HTMLMasonSettings extends AbstractMasonSettings implements Persiste
     changeCounter++;
   }
 
-  @NotNull
-  private Map<String, HTMLMasonCustomTag> computeCustomTagsMap() {
+  private @NotNull Map<String, HTMLMasonCustomTag> computeCustomTagsMap() {
     if (customTags.isEmpty()) {
       return Collections.emptyMap();
     }
@@ -84,9 +83,8 @@ public class HTMLMasonSettings extends AbstractMasonSettings implements Persiste
     return result;
   }
 
-  @Nullable
   @Override
-  public HTMLMasonSettings getState() {
+  public @Nullable HTMLMasonSettings getState() {
     return this;
   }
 
@@ -96,8 +94,7 @@ public class HTMLMasonSettings extends AbstractMasonSettings implements Persiste
     changeCounter++;
   }
 
-  @NotNull
-  private List<FileNameMatcher> computeMatchers() {
+  private @NotNull List<FileNameMatcher> computeMatchers() {
     List<FileNameMatcher> result = new ArrayList<>();
     FileTypeManager fileTypeManager = FileTypeManager.getInstance();
     for (FileType fileType : fileTypeManager.getRegisteredFileTypes()) {
@@ -134,8 +131,7 @@ public class HTMLMasonSettings extends AbstractMasonSettings implements Persiste
     myCustomTagsMapProvider.drop();
   }
 
-  @NotNull
-  private Map<String, String> computeOpenCloseMap() {
+  private @NotNull Map<String, String> computeOpenCloseMap() {
     Map<String, String> openCloseMap = new HashMap<>();
     openCloseMap.put(KEYWORD_PERL_OPENER, KEYWORD_PERL_CLOSER);
     openCloseMap.put(KEYWORD_INIT_OPENER, KEYWORD_INIT_CLOSER);
@@ -160,18 +156,15 @@ public class HTMLMasonSettings extends AbstractMasonSettings implements Persiste
     return openCloseMap;
   }
 
-  @NotNull
-  public Map<String, String> getOpenCloseMap() {
+  public @NotNull Map<String, String> getOpenCloseMap() {
     return myOpenCloseMapProvider.getValue();
   }
 
-  @Nullable
-  public Map<String, HTMLMasonCustomTag> getCustomTagsMap() {
+  public @Nullable Map<String, HTMLMasonCustomTag> getCustomTagsMap() {
     return myCustomTagsMapProvider.getValue();
   }
 
-  @NotNull
-  public static HTMLMasonSettings getInstance(@NotNull Project project) {
+  public static @NotNull HTMLMasonSettings getInstance(@NotNull Project project) {
     return ServiceManager.getService(project, HTMLMasonSettings.class);
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,13 +32,11 @@ public class PodSectionFormattedMixin extends PodSectionMixin implements PodSect
     super(node);
   }
 
-  @Nullable
-  protected PsiElement getFormatterElement() {
+  protected @Nullable PsiElement getFormatterElement() {
     return findChildByClass(PsiPodSectionFormat.class);
   }
 
-  @Nullable
-  protected PsiElement getFormatterNameElement() {
+  protected @Nullable PsiElement getFormatterNameElement() {
     PsiElement formatterElement = getFormatterElement();
 
     if (formatterElement != null) {
@@ -49,8 +47,7 @@ public class PodSectionFormattedMixin extends PodSectionMixin implements PodSect
     return null;
   }
 
-  @Nullable
-  public String getFormatterName() {
+  public @Nullable String getFormatterName() {
     PsiElement formatterNameElement = getFormatterNameElement();
     return formatterNameElement == null ? null : formatterNameElement.getText();
   }

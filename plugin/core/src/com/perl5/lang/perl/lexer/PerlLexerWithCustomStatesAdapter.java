@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import java.io.IOException;
 
 
 public class PerlLexerWithCustomStatesAdapter extends LexerBase {
-  private PerlLexerWithCustomStates myFlex;
+  private final PerlLexerWithCustomStates myFlex;
   private IElementType myTokenType = null;
   private CharSequence myText;
 
@@ -41,7 +41,7 @@ public class PerlLexerWithCustomStatesAdapter extends LexerBase {
   }
 
   @Override
-  public void start(@NotNull final CharSequence buffer, int startOffset, int endOffset, int initialState) {
+  public void start(final @NotNull CharSequence buffer, int startOffset, int endOffset, int initialState) {
     myText = buffer;
     myEnd = endOffset;
 
@@ -51,7 +51,7 @@ public class PerlLexerWithCustomStatesAdapter extends LexerBase {
     }
     else if (initialState > 255)    // properly packed state
     {
-      myFlex.setCustomState((int)(initialState / 255));
+      myFlex.setCustomState(initialState / 255);
       initialState = initialState % 255;
     }
     else {
@@ -102,9 +102,8 @@ public class PerlLexerWithCustomStatesAdapter extends LexerBase {
     myTokenType = null;
   }
 
-  @NotNull
   @Override
-  public CharSequence getBufferSequence() {
+  public @NotNull CharSequence getBufferSequence() {
     return myText;
   }
 

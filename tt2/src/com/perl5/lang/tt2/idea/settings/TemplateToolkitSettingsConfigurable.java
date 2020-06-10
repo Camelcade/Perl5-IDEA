@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,21 +50,18 @@ public class TemplateToolkitSettingsConfigurable implements Configurable {
     myProject = project;
   }
 
-  @Nls
   @Override
-  public String getDisplayName() {
+  public @Nls String getDisplayName() {
     return "Template Toolkit 2";
   }
 
-  @Nullable
   @Override
-  public String getHelpTopic() {
+  public @Nullable String getHelpTopic() {
     return null;
   }
 
-  @Nullable
   @Override
-  public JComponent createComponent() {
+  public @Nullable JComponent createComponent() {
     FormBuilder builder = FormBuilder.createFormBuilder();
     builder.getPanel().setLayout(new VerticalFlowLayout());
 

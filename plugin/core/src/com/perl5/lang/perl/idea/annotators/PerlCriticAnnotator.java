@@ -53,15 +53,13 @@ public class PerlCriticAnnotator extends ExternalAnnotator<PerlFile, List<PerlCr
   private static final String PACKAGE_NAME = "Perl::Critic";
   private static final Logger LOG = Logger.getInstance(PerlCriticAnnotator.class);
 
-  @Nullable
   @Override
-  public PerlFile collectInformation(@NotNull PsiFile file) {
+  public @Nullable PerlFile collectInformation(@NotNull PsiFile file) {
     return file instanceof PerlFile && file.isPhysical() && PerlSharedSettings.getInstance(file.getProject()).PERL_CRITIC_ENABLED
            ? (PerlFile)file : null;
   }
 
-  @Nullable
-  protected PerlCommandLine getPerlCriticCommandLine(Project project) {
+  protected @Nullable PerlCommandLine getPerlCriticCommandLine(Project project) {
     PerlSharedSettings sharedSettings = PerlSharedSettings.getInstance(project);
     VirtualFile perlCriticScript =
       ReadAction.compute(() -> PerlRunUtil.findLibraryScriptWithNotification(project, SCRIPT_NAME, PACKAGE_NAME));
@@ -82,9 +80,8 @@ public class PerlCriticAnnotator extends ExternalAnnotator<PerlFile, List<PerlCr
   }
 
 
-  @Nullable
   @Override
-  public List<PerlCriticErrorDescriptor> doAnnotate(final PerlFile sourcePsiFile) {
+  public @Nullable List<PerlCriticErrorDescriptor> doAnnotate(final PerlFile sourcePsiFile) {
     if (sourcePsiFile == null) {
       return null;
     }

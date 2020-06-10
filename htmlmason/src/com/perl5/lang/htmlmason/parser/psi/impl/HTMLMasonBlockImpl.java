@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -107,9 +107,8 @@ public class HTMLMasonBlockImpl extends PsiPerlBlockImpl implements HTMLMasonBlo
     return true;
   }
 
-  @NotNull
   @Override
-  public List<HTMLMasonCompositeElement> getArgsBlocks() {
+  public @NotNull List<HTMLMasonCompositeElement> getArgsBlocks() {
     return getBlocksMap().get(HTMLMasonArgsBlock.class);
   }
 

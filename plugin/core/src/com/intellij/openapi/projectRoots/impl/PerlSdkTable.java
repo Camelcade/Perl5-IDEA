@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -79,9 +79,8 @@ public class PerlSdkTable extends ProjectJdkTable implements PersistentStateComp
     return element;
   }
 
-  @Nullable
   @Override
-  public Sdk findJdk(@Nullable String name) {
+  public @Nullable Sdk findJdk(@Nullable String name) {
     for (Sdk interpreter : myInterpretersList) {
       if (StringUtil.equals(name, interpreter.getName())) {
         return interpreter;
@@ -90,9 +89,8 @@ public class PerlSdkTable extends ProjectJdkTable implements PersistentStateComp
     return null;
   }
 
-  @Nullable
   @Override
-  public Sdk findJdk(@NotNull String name, @NotNull String type) {
+  public @Nullable Sdk findJdk(@NotNull String name, @NotNull String type) {
     return findJdk(name);
   }
 
@@ -100,20 +98,17 @@ public class PerlSdkTable extends ProjectJdkTable implements PersistentStateComp
    * @deprecated use com.intellij.openapi.projectRoots.impl.PerlSdkTable#getInterpreters() instead
    */
   @Deprecated
-  @NotNull
   @Override
-  public Sdk[] getAllJdks() {
+  public @NotNull Sdk[] getAllJdks() {
     return myInterpretersList.toArray(new Sdk[0]);
   }
 
-  @NotNull
-  public List<Sdk> getInterpreters() {
+  public @NotNull List<Sdk> getInterpreters() {
     return new ArrayList<>(myInterpretersList);
   }
 
-  @NotNull
   @Override
-  public List<Sdk> getSdksOfType(@NotNull SdkTypeId type) {
+  public @NotNull List<Sdk> getSdksOfType(@NotNull SdkTypeId type) {
     throw new IncorrectOperationException();
   }
 
@@ -142,7 +137,7 @@ public class PerlSdkTable extends ProjectJdkTable implements PersistentStateComp
       throw new RuntimeException("Missing copyTo method");
     }
     try {
-      method.invoke(modifiedJdk, (ProjectJdkImpl)originalJdk);
+      method.invoke(modifiedJdk, originalJdk);
     }
     catch (Exception e) {
       throw new RuntimeException(e);
@@ -154,26 +149,22 @@ public class PerlSdkTable extends ProjectJdkTable implements PersistentStateComp
     }
   }
 
-  @NotNull
   @Override
-  public SdkTypeId getDefaultSdkType() {
+  public @NotNull SdkTypeId getDefaultSdkType() {
     return PerlSdkType.INSTANCE;
   }
 
-  @NotNull
   @Override
-  public SdkTypeId getSdkTypeByName(@NotNull String name) {
+  public @NotNull SdkTypeId getSdkTypeByName(@NotNull String name) {
     return PerlSdkType.INSTANCE;
   }
 
-  @NotNull
   @Override
-  public Sdk createSdk(@NotNull String name, @NotNull SdkTypeId sdkType) {
+  public @NotNull Sdk createSdk(@NotNull String name, @NotNull SdkTypeId sdkType) {
     return ProjectJdkTable.getInstance().createSdk(name, PerlSdkType.INSTANCE);
   }
 
-  @NotNull
-  public ProjectJdkImpl createSdk(@NotNull String name) {
+  public @NotNull ProjectJdkImpl createSdk(@NotNull String name) {
     return (ProjectJdkImpl)createSdk(name, PerlSdkType.INSTANCE);
   }
 

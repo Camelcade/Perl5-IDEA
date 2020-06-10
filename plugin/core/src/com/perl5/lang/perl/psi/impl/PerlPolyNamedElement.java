@@ -51,8 +51,7 @@ public abstract class PerlPolyNamedElement<Stub extends PerlPolyNamedElementStub
     super(node);
   }
 
-  @NotNull
-  public final List<? extends PerlDelegatingLightNamedElement<?>> getLightElements() {
+  public final @NotNull List<? extends PerlDelegatingLightNamedElement<?>> getLightElements() {
     return CachedValuesManager.getCachedValue(this, () -> CachedValueProvider.Result.create(computeLightElements(), this)
     );
   }
@@ -60,8 +59,7 @@ public abstract class PerlPolyNamedElement<Stub extends PerlPolyNamedElementStub
   /**
    * Calculates light elements from stubs or psi
    */
-  @NotNull
-  public final List<? extends PerlDelegatingLightNamedElement<?>> computeLightElements() {
+  public final @NotNull List<? extends PerlDelegatingLightNamedElement<?>> computeLightElements() {
     Stub stub = getGreenStub();
     if (stub != null) {
       return computeLightElementsFromStubs(stub);
@@ -72,14 +70,12 @@ public abstract class PerlPolyNamedElement<Stub extends PerlPolyNamedElementStub
   /**
    * Internal sub for calculating light elements from psi
    */
-  @NotNull
-  public abstract List<? extends PerlDelegatingLightNamedElement<?>> computeLightElementsFromPsi();
+  public abstract @NotNull List<? extends PerlDelegatingLightNamedElement<?>> computeLightElementsFromPsi();
 
   /**
    * Internal sub for calculating light elements from stubs
    */
-  @NotNull
-  protected abstract List<? extends PerlDelegatingLightNamedElement<?>> computeLightElementsFromStubs(@NotNull Stub stub);
+  protected abstract @NotNull List<? extends PerlDelegatingLightNamedElement<?>> computeLightElementsFromStubs(@NotNull Stub stub);
 
   /**
    * @implNote we need to accept light elements here, because in non-recursive visitors case, platform collects elements by itself by

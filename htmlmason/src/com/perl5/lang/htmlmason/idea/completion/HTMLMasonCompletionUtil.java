@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -58,7 +58,7 @@ public class HTMLMasonCompletionUtil implements HTMLMasonSyntaxElements {
     }
   }
 
-  public static void fillWithMethods(@NotNull final CompletionResultSet resultSet, @NotNull HTMLMasonFileImpl component) {
+  public static void fillWithMethods(final @NotNull CompletionResultSet resultSet, @NotNull HTMLMasonFileImpl component) {
     component.processMethodDefinitionsInThisOrParents(element -> {
       String name = element.getName();
       if (name != null) {
@@ -82,7 +82,7 @@ public class HTMLMasonCompletionUtil implements HTMLMasonSyntaxElements {
     }
   }
 
-  public static void fillWithAbsoluteSubcomponents(@NotNull final CompletionResultSet resultSet, @NotNull Project project) {
+  public static void fillWithAbsoluteSubcomponents(final @NotNull CompletionResultSet resultSet, @NotNull Project project) {
     HTMLMasonSettings masonSettings = HTMLMasonSettings.getInstance(project);
 
     for (VirtualFile componentRoot : masonSettings.getComponentsRoots()) {

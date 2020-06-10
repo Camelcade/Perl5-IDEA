@@ -24,9 +24,8 @@ public class PerlSimpleDelegatingCompletionProcessor extends PerlDelegatingCompl
     super(processor);
   }
 
-  @NotNull
   @Override
-  public PerlSimpleDelegatingCompletionProcessor withPrefixMatcher(@NotNull String prefix) {
+  public @NotNull PerlSimpleDelegatingCompletionProcessor withPrefixMatcher(@NotNull String prefix) {
     try {
       PerlSimpleDelegatingCompletionProcessor clone = (PerlSimpleDelegatingCompletionProcessor)clone();
       clone.setDelegate(getDelegate().withPrefixMatcher(prefix));

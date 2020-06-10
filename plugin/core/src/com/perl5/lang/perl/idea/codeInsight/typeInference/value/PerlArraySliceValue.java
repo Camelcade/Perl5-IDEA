@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,23 +42,20 @@ public class PerlArraySliceValue extends PerlParametrizedOperationValue {
     super(deserializer);
   }
 
-  @Nullable
   @Override
-  protected PerlContextType getContextType() {
+  protected @Nullable PerlContextType getContextType() {
     return PerlContextType.LIST;
   }
 
-  @NotNull
   @Override
-  protected PerlValue computeResolve(@NotNull PerlValue resolvedArrayValue,
-                                     @NotNull PerlValue resolvedIndexesValue,
-                                     @NotNull PerlValueResolver resolver) {
+  protected @NotNull PerlValue computeResolve(@NotNull PerlValue resolvedArrayValue,
+                                              @NotNull PerlValue resolvedIndexesValue,
+                                              @NotNull PerlValueResolver resolver) {
     return computeStrictResolve(resolvedArrayValue, resolvedIndexesValue);
   }
 
-  @NotNull
-  private static PerlValue computeStrictResolve(@NotNull PerlValue resolvedArrayValue,
-                                                @NotNull PerlValue resolvedIndexesValue) {
+  private static @NotNull PerlValue computeStrictResolve(@NotNull PerlValue resolvedArrayValue,
+                                                         @NotNull PerlValue resolvedIndexesValue) {
     return ObjectUtils.notNull(computeResolve(resolvedArrayValue, resolvedIndexesValue), UNKNOWN_VALUE);
   }
 
@@ -87,8 +84,7 @@ public class PerlArraySliceValue extends PerlParametrizedOperationValue {
     return "ArraySlice: " + getBaseValue() + "[" + getParameter() + "]";
   }
 
-  @NotNull
-  public static PerlValue create(@NotNull PerlValue arrayValue, @NotNull PerlValue indexValue) {
+  public static @NotNull PerlValue create(@NotNull PerlValue arrayValue, @NotNull PerlValue indexValue) {
     if (arrayValue.isDeterministic() && indexValue.isDeterministic()) {
       return PerlValuesBuilder.convert(arrayValue, indexValue, PerlArraySliceValue::computeStrictResolve);
     }

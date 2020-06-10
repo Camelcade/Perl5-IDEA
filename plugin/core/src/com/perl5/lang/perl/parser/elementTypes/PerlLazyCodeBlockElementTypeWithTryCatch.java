@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,9 +28,8 @@ public class PerlLazyCodeBlockElementTypeWithTryCatch extends PerlLazyCodeBlockE
     super(debugName);
   }
 
-  @NotNull
   @Override
-  protected PerlSublexingLexerAdapter getInnerLexer(@NotNull Project project) {
+  protected @NotNull PerlSublexingLexerAdapter getInnerLexer(@NotNull Project project) {
     return super.getInnerLexer(project).withTryCatchSyntax();
   }
 }

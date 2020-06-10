@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,27 +29,23 @@ public class PerlLibrarySourceRootEditHandler extends PerlSourceRootEditHandler 
     super(PerlLibrarySourceRootType.INSTANCE);
   }
 
-  @NotNull
   @Override
-  public String getRootTypeName() {
+  public @NotNull String getRootTypeName() {
     return PerlBundle.message("perl.action.lib.root.type");
   }
 
-  @NotNull
   @Override
-  public Icon getRootIcon() {
+  public @NotNull Icon getRootIcon() {
     return PerlIcons.LIB_ROOT;
   }
 
-  @NotNull
   @Override
-  public String getRootsGroupTitle() {
+  public @NotNull String getRootsGroupTitle() {
     return PerlBundle.message("perl.root.group.lib");
   }
 
-  @NotNull
   @Override
-  public String getUnmarkRootButtonText() {
+  public @NotNull String getUnmarkRootButtonText() {
     return PerlBundle.message("perl.action.unmark.perl.lib");
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,9 +40,8 @@ public class HTMLMasonArgsBlockImpl extends HTMLMasonStubBasedElement<HTMLMasonA
     super(node);
   }
 
-  @NotNull
   @Override
-  public List<PerlSubArgument> getArgumentsList() {
+  public @NotNull List<PerlSubArgument> getArgumentsList() {
     HTMLMasonArgsBlockStub stub = getGreenStub();
     if (stub != null) {
       return stub.getArgumentsList();
@@ -51,8 +50,7 @@ public class HTMLMasonArgsBlockImpl extends HTMLMasonStubBasedElement<HTMLMasonA
     return getArgumentsListHeavy();
   }
 
-  @NotNull
-  protected List<PerlSubArgument> getArgumentsListHeavy() {
+  protected @NotNull List<PerlSubArgument> getArgumentsListHeavy() {
     List<PerlSubArgument> result = new ArrayList<>();
     PsiElement run = getFirstChild();
 

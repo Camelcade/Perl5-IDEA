@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,9 +36,8 @@ public abstract class PodStubBasedSectionElementType<Psi extends PodStubBasedSec
     super(debugName, PodLanguage.INSTANCE);
   }
 
-  @NotNull
   @Override
-  public String getExternalId() {
+  public @NotNull String getExternalId() {
     return "PodSection " + super.toString();
   }
 
@@ -47,9 +46,8 @@ public abstract class PodStubBasedSectionElementType<Psi extends PodStubBasedSec
     dataStream.writeName(stub.getContent());
   }
 
-  @NotNull
   @Override
-  public PodSectionStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
+  public @NotNull PodSectionStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
     return new PodSectionStub(parentStub, this, Objects.requireNonNull(PerlStubSerializationUtil.readString(dataStream)));
   }
 

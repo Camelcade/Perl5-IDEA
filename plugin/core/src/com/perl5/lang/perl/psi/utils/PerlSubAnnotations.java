@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,8 +42,7 @@ public class PerlSubAnnotations {
 
   private byte myFlags = 0;
 
-  @NotNull
-  private PerlValue myReturnValue = UNKNOWN_VALUE;
+  private @NotNull PerlValue myReturnValue = UNKNOWN_VALUE;
 
   public PerlSubAnnotations() {
   }
@@ -90,8 +89,7 @@ public class PerlSubAnnotations {
     myFlags |= IS_OVERRIDE;
   }
 
-  @NotNull
-  public PerlValue getReturnValue() {
+  public @NotNull PerlValue getReturnValue() {
     return myReturnValue;
   }
 
@@ -118,7 +116,7 @@ public class PerlSubAnnotations {
 
   @Override
   public int hashCode() {
-    int result = (int)myFlags;
+    int result = myFlags;
     result = 31 * result + myReturnValue.hashCode();
     return result;
   }
@@ -136,8 +134,7 @@ public class PerlSubAnnotations {
    * @param baseElements elements to process, e.g. identifier or use constant
    * @return Sub annotations
    */
-  @Nullable
-  public static PerlSubAnnotations tryToFindAnnotations(@NotNull PsiElement... baseElements) {
+  public static @Nullable PerlSubAnnotations tryToFindAnnotations(@NotNull PsiElement... baseElements) {
     for (PsiElement element : baseElements) {
       List<PerlAnnotation> annotations = PerlPsiUtil.collectAnnotations(element);
       if (!annotations.isEmpty()) {
@@ -148,13 +145,11 @@ public class PerlSubAnnotations {
     return null;
   }
 
-  @Nullable
-  public static PerlSubAnnotations tryToFindAnnotations(@NotNull List<PsiElement> baseElements) {
+  public static @Nullable PerlSubAnnotations tryToFindAnnotations(@NotNull List<PsiElement> baseElements) {
     return tryToFindAnnotations(baseElements.toArray(PsiElement.EMPTY_ARRAY));
   }
 
-  @Nullable
-  public static PerlSubAnnotations createFromAnnotationsList(List<PerlAnnotation> annotations) {
+  public static @Nullable PerlSubAnnotations createFromAnnotationsList(List<PerlAnnotation> annotations) {
     if (annotations.isEmpty()) {
       return null;
     }
@@ -182,8 +177,7 @@ public class PerlSubAnnotations {
     return result;
   }
 
-  @Nullable
-  public static PerlSubAnnotations computeForLightElement(@NotNull PsiElement delegate, @NotNull PsiElement nameIdentifier) {
+  public static @Nullable PerlSubAnnotations computeForLightElement(@NotNull PsiElement delegate, @NotNull PsiElement nameIdentifier) {
     List<PsiElement> baseElements = new ArrayList<>();
     PsiPerlStatement containingStatement = PsiTreeUtil.getParentOfType(delegate, PsiPerlStatement.class);
     if (containingStatement != null) {

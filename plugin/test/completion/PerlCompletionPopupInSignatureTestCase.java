@@ -41,108 +41,96 @@ public abstract class PerlCompletionPopupInSignatureTestCase extends PerlComplet
 
   public static class After extends PerlCompletionPopupInSignatureTestCase {
 
-    @NotNull
     @Override
-    protected String getPerTestCode() {
+    protected @NotNull String getPerTestCode() {
       return "after somemethod";
     }
   }
 
   public static class Around extends PerlCompletionPopupInSignatureTestCase {
 
-    @NotNull
     @Override
-    protected String getPerTestCode() {
+    protected @NotNull String getPerTestCode() {
       return "around somemethod";
     }
   }
 
   public static class Augment extends PerlCompletionPopupInSignatureTestCase {
 
-    @NotNull
     @Override
-    protected String getPerTestCode() {
+    protected @NotNull String getPerTestCode() {
       return "augment somemethod";
     }
   }
 
   public static class Before extends PerlCompletionPopupInSignatureTestCase {
 
-    @NotNull
     @Override
-    protected String getPerTestCode() {
+    protected @NotNull String getPerTestCode() {
       return "before somemethod";
     }
   }
 
   public static class Fun extends PerlCompletionPopupInSignatureTestCase {
 
-    @NotNull
     @Override
-    protected String getPerTestCode() {
+    protected @NotNull String getPerTestCode() {
       return "fun somefun";
     }
   }
 
   public static class Func extends PerlCompletionPopupInSignatureTestCase {
 
-    @NotNull
     @Override
-    protected String getPerTestCode() {
+    protected @NotNull String getPerTestCode() {
       return "func somefunc";
     }
   }
 
   public static class FunExpr extends PerlCompletionPopupInSignatureTestCase {
 
-    @NotNull
     @Override
-    protected String getPerTestCode() {
+    protected @NotNull String getPerTestCode() {
       return "fun";
     }
   }
 
   public static class Method extends PerlCompletionPopupInSignatureTestCase {
 
-    @NotNull
     @Override
-    protected String getPerTestCode() {
+    protected @NotNull String getPerTestCode() {
       return "method somemethod";
     }
   }
 
   public static class MethodExpr extends PerlCompletionPopupInSignatureTestCase {
 
-    @NotNull
     @Override
-    protected String getPerTestCode() {
+    protected @NotNull String getPerTestCode() {
       return "method";
     }
   }
 
   public static class OverrideKw extends PerlCompletionPopupInSignatureTestCase {
 
-    @NotNull
     @Override
-    protected String getPerTestCode() {
+    protected @NotNull String getPerTestCode() {
       return "override somemethod";
     }
   }
 
   public static class Sub extends PerlCompletionPopupInSignatureTestCase {
 
-    @NotNull
     @Override
-    protected String getPerTestCode() {
+    protected @NotNull String getPerTestCode() {
       return "sub somesub";
     }
   }
 
   public static class SubExpr extends PerlCompletionPopupInSignatureTestCase {
 
-    @NotNull
     @Override
-    protected String getPerTestCode() {
+    protected @NotNull String getPerTestCode() {
       return "sub";
     }
   }

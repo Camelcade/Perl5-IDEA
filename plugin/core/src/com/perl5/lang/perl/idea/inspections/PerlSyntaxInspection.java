@@ -50,9 +50,8 @@ import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.LEFT_PAREN;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.RIGHT_PAREN;
 
 public class PerlSyntaxInspection extends PerlInspection {
-  @NotNull
   @Override
-  public PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean isOnTheFly) {
+  public @NotNull PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean isOnTheFly) {
     PerlVersion selectedVersion = PerlSharedSettings.getInstance(holder.getProject()).getTargetPerlVersion();
     return new PerlVisitor() {
 
@@ -131,15 +130,12 @@ public class PerlSyntaxInspection extends PerlInspection {
         }
       }
 
-      @NotNull
-      private LocalQuickFix getFlipElementsQuickFix(@NotNull PsiElement attributes) {
+      private @NotNull LocalQuickFix getFlipElementsQuickFix(@NotNull PsiElement attributes) {
         SmartPsiElementPointer<?> attributesPointer =
           SmartPointerManager.getInstance(attributes.getProject()).createSmartPsiElementPointer(attributes);
         return new MyTopQuickFix() {
-          @Nls
-          @NotNull
           @Override
-          public String getFamilyName() {
+          public @Nls @NotNull String getFamilyName() {
             return PerlBundle.message("perl.quickfix.switch.signature.with.attributes");
           }
 
@@ -173,14 +169,11 @@ public class PerlSyntaxInspection extends PerlInspection {
         };
       }
 
-      @NotNull
-      private LocalQuickFix[] buildChangePerlVersionQuickFixes(@NotNull Predicate<PerlVersion> versionPredicate) {
+      private @NotNull LocalQuickFix[] buildChangePerlVersionQuickFixes(@NotNull Predicate<PerlVersion> versionPredicate) {
         List<LocalQuickFix> result = new ArrayList<>();
         result.add(new LocalQuickFix() {
-          @Nls
-          @NotNull
           @Override
-          public String getFamilyName() {
+          public @Nls @NotNull String getFamilyName() {
             return PerlBundle.message("perl.quickfix.change.language.level");
           }
 
@@ -191,10 +184,8 @@ public class PerlSyntaxInspection extends PerlInspection {
         });
 
         PerlVersion.ALL_VERSIONS.stream().filter(versionPredicate).forEach(it -> result.add(new LocalQuickFix() {
-          @Nls
-          @NotNull
           @Override
-          public String getFamilyName() {
+          public @Nls @NotNull String getFamilyName() {
             return PerlBundle.message("perl.quickfix.set.language.level", it.getStrictDottedVersion());
           }
 

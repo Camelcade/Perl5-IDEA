@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,21 +35,18 @@ class PerlLocalHostHandler extends PerlHostHandler<PerlLocalHostData, PerlLocalH
     super(bean);
   }
 
-  @NotNull
   @Override
-  public String getMenuItemTitle() {
+  public @NotNull String getMenuItemTitle() {
     return PerlBundle.message("perl.host.handler.localhost.menu.title");
   }
 
-  @NotNull
   @Override
-  public String getShortName() {
+  public @NotNull String getShortName() {
     return PerlBundle.message("perl.host.handler.localhost.short.name");
   }
 
-  @NotNull
   @Override
-  public PerlLocalHostData createData() {
+  public @NotNull PerlLocalHostData createData() {
     return DATA_INSTANCE;
   }
 
@@ -58,9 +55,8 @@ class PerlLocalHostHandler extends PerlHostHandler<PerlLocalHostData, PerlLocalH
     return SystemInfo.isMac;
   }
 
-  @Nullable
   @Override
-  protected PerlLocalHostData createDataInteractively() {
+  protected @Nullable PerlLocalHostData createDataInteractively() {
     return DATA_INSTANCE;
   }
 
@@ -69,15 +65,13 @@ class PerlLocalHostHandler extends PerlHostHandler<PerlLocalHostData, PerlLocalH
     return true;
   }
 
-  @Nullable
   @Override
-  public Icon getIcon() {
+  public @Nullable Icon getIcon() {
     return getOsHandler().getIcon();
   }
 
-  @NotNull
   @Override
-  public PerlOsHandler getOsHandler() {
+  public @NotNull PerlOsHandler getOsHandler() {
     return SystemInfo.isWin10OrNewer ? WINDOWS10 :
            SystemInfo.isWindows ? WINDOWS :
            SystemInfo.isMac ? MACOS :

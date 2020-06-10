@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,8 +27,7 @@ import java.util.List;
  * Represents an expression which may have an argument or use the implicit one
  */
 public interface PerlImplicitArgumentExpr extends PsiPerlExpr {
-  @NotNull
-  default PsiElement getArgument() {
+  default @NotNull PsiElement getArgument() {
     List<PsiElement> filteredChildren = ContainerUtil.filter(getChildren(), it -> !(it instanceof PerlAnnotationContainer));
     if (filteredChildren.isEmpty()) {
       return getImplicitArgument();

@@ -116,8 +116,7 @@ public class PerlResolveUtil {
    * @param variable variable to search declaration for
    * @return variable in declaration term or null if there is no such one
    */
-  @Nullable
-  public static PerlVariableDeclarationElement getLexicalDeclaration(PerlVariable variable) {
+  public static @Nullable PerlVariableDeclarationElement getLexicalDeclaration(PerlVariable variable) {
     if (variable instanceof PerlVariableDeclarationElement) {
       return (PerlVariableDeclarationElement)variable;
     }
@@ -188,8 +187,7 @@ public class PerlResolveUtil {
    * @see PerlControlFlowBuilder
    * @see PerlValue
    */
-  @NotNull
-  public static PerlValue inferVariableValue(@NotNull PerlVariable variable) {
+  public static @NotNull PerlValue inferVariableValue(@NotNull PerlVariable variable) {
     PerlVariableDeclarationElement lexicalDeclaration = getLexicalDeclaration(variable);
 
     PsiElement stopElement = lexicalDeclaration;
@@ -204,8 +202,7 @@ public class PerlResolveUtil {
     return getValueFromControlFlow(variable, namespaceName, variableName, actualType, lexicalDeclaration, stopElement);
   }
 
-  @NotNull
-  public static PerlValue inferVariableValue(@NotNull PerlBuiltInVariable variable, @NotNull PsiElement contextElement) {
+  public static @NotNull PerlValue inferVariableValue(@NotNull PerlBuiltInVariable variable, @NotNull PsiElement contextElement) {
     return getValueFromControlFlow(
       contextElement,
       null,
@@ -220,8 +217,7 @@ public class PerlResolveUtil {
    * Computes stop element for resolving a built in variable. For {@code @_} it's a wrapping sub. For {@code $_} it may vary: wrapping
    * iterator or smth.
    */
-  @Nullable
-  private static PsiElement computeStopElement(@NotNull PerlBuiltInVariable variable, @NotNull PsiElement contextElement) {
+  private static @Nullable PsiElement computeStopElement(@NotNull PerlBuiltInVariable variable, @NotNull PsiElement contextElement) {
     if (!variable.getName().equals("_")) {
       return null;
     }
@@ -245,13 +241,12 @@ public class PerlResolveUtil {
    * @return a value of found variable or {@link PerlValues#UNKNOWN_VALUE}
    * @see PerlControlFlowBuilder#getControlFlowScope(com.intellij.psi.PsiElement)
    */
-  @NotNull
-  private static PerlValue getValueFromControlFlow(@NotNull PsiElement element,
-                                                   @Nullable String namespaceName,
-                                                   @NotNull String variableName,
-                                                   @NotNull PerlVariableType actualType,
-                                                   @Nullable PerlVariableDeclarationElement lexicalDeclaration,
-                                                   @Nullable PsiElement stopElement) {
+  private static @NotNull PerlValue getValueFromControlFlow(@NotNull PsiElement element,
+                                                            @Nullable String namespaceName,
+                                                            @NotNull String variableName,
+                                                            @NotNull PerlVariableType actualType,
+                                                            @Nullable PerlVariableDeclarationElement lexicalDeclaration,
+                                                            @Nullable PsiElement stopElement) {
     PsiElement controlFlowScope = PerlControlFlowBuilder.getControlFlowScope(element);
     if (controlFlowScope == null) {
       VirtualFile virtualFile = PsiUtilCore.getVirtualFile(element);
@@ -362,8 +357,7 @@ public class PerlResolveUtil {
   /**
    * @see #computeReturnValueFromControlFlow(PsiElement)
    */
-  @NotNull
-  public static AtomicNotNullLazyValue<PerlValue> computeReturnValueFromControlFlowLazy(@Nullable PsiElement subElement) {
+  public static @NotNull AtomicNotNullLazyValue<PerlValue> computeReturnValueFromControlFlowLazy(@Nullable PsiElement subElement) {
     if (subElement == null) {
       return UNKNOWN_VALUE_PROVIDER;
     }
@@ -380,8 +374,7 @@ public class PerlResolveUtil {
    * @return a perl value for the psi element, computed from the control flow graph
    * @apiNote should be used for subs and subs expressions
    */
-  @NotNull
-  public static PerlValue computeReturnValueFromControlFlow(PsiElement subElement) {
+  public static @NotNull PerlValue computeReturnValueFromControlFlow(PsiElement subElement) {
     PerlOneOfValue.Builder valueBuilder = PerlOneOfValue.builder();
     Instruction[] instructions = PerlControlFlowBuilder.getFor(subElement).getInstructions();
     Instruction exitInstruction = instructions[instructions.length - 1];

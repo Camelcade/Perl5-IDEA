@@ -32,8 +32,7 @@ import java.util.function.BiPredicate;
 
 public class PerlCompletionTest extends PerlLightTestCase {
 
-  @NotNull
-  private static BiPredicate<LookupElement, LookupElementPresentation> withType(@NotNull String type){
+  private static @NotNull BiPredicate<LookupElement, LookupElementPresentation> withType(@NotNull String type) {
     return (__, presentation) -> StringUtil.contains(StringUtil.notNullize(presentation.getTypeText()), type);
   }
 

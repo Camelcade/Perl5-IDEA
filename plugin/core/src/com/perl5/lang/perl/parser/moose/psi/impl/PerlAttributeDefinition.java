@@ -55,15 +55,13 @@ public class PerlAttributeDefinition extends PerlLightMethodDefinitionElement<Pe
     super(wrapper, stub);
   }
 
-  @NotNull
   @Override
-  public Function<String, String> getNameComputation() {
+  public @NotNull Function<String, String> getNameComputation() {
     return DEFAULT_NAME_COMPUTATION;
   }
 
-  @NotNull
   @Override
-  public TextRange getRangeInIdentifier() {
+  public @NotNull TextRange getRangeInIdentifier() {
     PsiElement nameIdentifier = getNameIdentifier();
     if (nameIdentifier == null) {
       return TextRange.EMPTY_RANGE;
@@ -75,9 +73,8 @@ public class PerlAttributeDefinition extends PerlLightMethodDefinitionElement<Pe
            : defaultRange;
   }
 
-  @NotNull
   @Override
-  public PsiElement getPodAnchor() {
+  public @NotNull PsiElement getPodAnchor() {
     return getDelegate();
   }
 }

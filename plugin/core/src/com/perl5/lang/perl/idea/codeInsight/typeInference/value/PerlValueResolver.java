@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,14 +28,11 @@ import java.util.Objects;
 import java.util.function.Function;
 
 public abstract class PerlValueResolver {
-  @NotNull
-  private final GlobalSearchScope myResolveScope;
+  private final @NotNull GlobalSearchScope myResolveScope;
 
-  @NotNull
-  private final PerlValuesCacheService myCacheService;
+  private final @NotNull PerlValuesCacheService myCacheService;
 
-  @Nullable
-  private final PsiFile myContextFile;
+  private final @Nullable PsiFile myContextFile;
 
   public PerlValueResolver(@NotNull PsiElement contextElement) {
     myResolveScope = contextElement.getResolveScope();
@@ -43,8 +40,7 @@ public abstract class PerlValueResolver {
     myContextFile = ObjectUtils.doIfNotNull(contextElement.getContainingFile(), PsiFile::getOriginalFile);
   }
 
-  @NotNull
-  public PerlValue resolve(@NotNull PerlValue unresolvedValue) {
+  public @NotNull PerlValue resolve(@NotNull PerlValue unresolvedValue) {
     PerlValue substitutedUnresolvedValue = substitute(unresolvedValue);
     if (substitutedUnresolvedValue.isUndef() || substitutedUnresolvedValue.isUnknown() || substitutedUnresolvedValue.isDeterministic()) {
       return substitutedUnresolvedValue;
@@ -52,28 +48,23 @@ public abstract class PerlValueResolver {
     return substitute(myCacheService.getResolvedValue(substitutedUnresolvedValue, this));
   }
 
-  @Nullable
-  public PsiFile getContextFile() {
+  public @Nullable PsiFile getContextFile() {
     return myContextFile;
   }
 
-  @NotNull
-  public final GlobalSearchScope getResolveScope() {
+  public final @NotNull GlobalSearchScope getResolveScope() {
     return myResolveScope;
   }
 
-  @NotNull
-  public final Project getProject() {
+  public final @NotNull Project getProject() {
     return Objects.requireNonNull(myResolveScope.getProject());
   }
 
-  @NotNull
-  protected PerlValue substitute(@NotNull PerlValue perlValue) {
+  protected @NotNull PerlValue substitute(@NotNull PerlValue perlValue) {
     return perlValue;
   }
 
-  @NotNull
-  public PerlValue resolve(@NotNull PerlValue unresolvedParameter, @NotNull Function<PerlValue, PerlValue> converter) {
+  public @NotNull PerlValue resolve(@NotNull PerlValue unresolvedParameter, @NotNull Function<PerlValue, PerlValue> converter) {
     return PerlValuesBuilder.convert(resolve(unresolvedParameter), converter);
   }
 

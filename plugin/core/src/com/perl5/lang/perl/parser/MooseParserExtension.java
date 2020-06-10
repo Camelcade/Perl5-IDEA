@@ -100,9 +100,8 @@ public class MooseParserExtension extends PerlParserExtension implements MooseEl
            super.parseTerm(b, l);
   }
 
-  @NotNull
   @Override
-  public List<Pair<IElementType, TokenSet>> getExtensionSets() {
+  public @NotNull List<Pair<IElementType, TokenSet>> getExtensionSets() {
     return EXTENSION_SET;
   }
 

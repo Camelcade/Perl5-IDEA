@@ -33,9 +33,8 @@ public class PerlModuleType extends ModuleType<ModuleBuilder> {
     super(PERL_MODULE_TYPE_ID);
   }
 
-  @NotNull
   @Override
-  public ModuleBuilder createModuleBuilder() {
+  public @NotNull ModuleBuilder createModuleBuilder() {
     return new EmptyModuleBuilder() {
       @Override
       protected boolean isAvailable() {
@@ -49,21 +48,18 @@ public class PerlModuleType extends ModuleType<ModuleBuilder> {
     };
   }
 
-  @NotNull
   @Override
-  public String getName() {
+  public @NotNull String getName() {
     return PerlBundle.message("perl.module.name");
   }
 
-  @NotNull
   @Override
-  public String getDescription() {
+  public @NotNull String getDescription() {
     return PerlBundle.message("perl.module.description");
   }
 
-  @NotNull
   @Override
-  public Icon getNodeIcon(@Deprecated boolean isOpened) {
+  public @NotNull Icon getNodeIcon(@Deprecated boolean isOpened) {
     return PerlIcons.PERL_LANGUAGE_ICON;
   }
 

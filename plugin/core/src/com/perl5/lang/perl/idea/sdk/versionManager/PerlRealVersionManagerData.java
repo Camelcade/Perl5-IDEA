@@ -55,29 +55,24 @@ public abstract class PerlRealVersionManagerData<Data extends PerlRealVersionMan
     }
   }
 
-  @NotNull
-  public String getVersionManagerPath() {
+  public @NotNull String getVersionManagerPath() {
     return Objects.requireNonNull(myVersionManagerPath);
   }
 
-  @Nullable
   @Override
-  public String getSecondaryShortName() {
+  public @Nullable String getSecondaryShortName() {
     return "[" + getDistributionId() + "]";
   }
 
-  @NotNull
-  public String getPerlVersionString() {
+  public @NotNull String getPerlVersionString() {
     return Objects.requireNonNull(myPerlVersionString);
   }
 
-  @Nullable
-  public String getLibName() {
+  public @Nullable String getLibName() {
     return myLibName;
   }
 
-  @NotNull
-  public String getDistributionId() {
+  public @NotNull String getDistributionId() {
     String versionString = getPerlVersionString();
     String libName = getLibName();
     return StringUtil.isEmpty(libName) ? versionString :
@@ -85,8 +80,7 @@ public abstract class PerlRealVersionManagerData<Data extends PerlRealVersionMan
            versionString + LIB_SEPARATOR + libName;
   }
 
-  @NotNull
-  public static PerlRealVersionManagerData<?, ?> notNullFrom(@NotNull Sdk sdk) {
+  public static @NotNull PerlRealVersionManagerData<?, ?> notNullFrom(@NotNull Sdk sdk) {
     PerlVersionManagerData<?, ?> data = PerlVersionManagerData.notNullFrom(sdk);
     if (data instanceof PerlRealVersionManagerData) {
       return (PerlRealVersionManagerData<?, ?>)data;
@@ -99,9 +93,8 @@ public abstract class PerlRealVersionManagerData<Data extends PerlRealVersionMan
     return getHandler().getShortName() + "[" + getDistributionId() + "]";
   }
 
-  @Nullable
   @Override
-  public InstallPerlHandler getInstallPerlHandler() {
+  public @Nullable InstallPerlHandler getInstallPerlHandler() {
     return getHandler().createInstallHandler(getVersionManagerPath());
   }
 }

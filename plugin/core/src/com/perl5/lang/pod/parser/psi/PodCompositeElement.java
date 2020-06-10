@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,15 +51,13 @@ public interface PodCompositeElement extends PsiElement, PodRenderableElement, I
     return 0;
   }
 
-  @Nullable
   @Override
-  default String getPresentableText() {
+  default @Nullable String getPresentableText() {
     return null;
   }
 
-  @Nullable
   @Override
-  default String getLocationString() {
+  default @Nullable String getLocationString() {
     PsiFile file = getContainingFile();
     if (file == null) {
       return null;
@@ -72,9 +70,8 @@ public interface PodCompositeElement extends PsiElement, PodRenderableElement, I
     return StringUtil.isNotEmpty(filePresentableText) ? filePresentableText : null;
   }
 
-  @Nullable
   @Override
-  default Icon getIcon(boolean unused) {
+  default @Nullable Icon getIcon(boolean unused) {
     PsiFile file = getContainingFile();
     return file == null ? null : file.getIcon(0);
   }

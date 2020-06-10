@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,8 +33,7 @@ public interface Perl5SdkManipulator {
    * @see com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5ParentSdkWrapper
    * @see com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5TextSdkWrapper
    */
-  @NotNull
-  default List<Perl5SdkWrapper> getAllSdkWrappers() {
+  default @NotNull List<Perl5SdkWrapper> getAllSdkWrappers() {
     List<Sdk> interpreters = PerlSdkTable.getInstance().getInterpreters();
     interpreters.sort(Comparator.comparing(Sdk::getName));
     return ContainerUtil.map(interpreters, Perl5RealSdkWrapper::new);

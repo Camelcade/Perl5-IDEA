@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,9 +26,8 @@ import com.perl5.lang.perl.psi.PsiPerlNamespaceContent;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlDeclarationRangeHandler implements DeclarationRangeHandler<PsiElement> {
-  @NotNull
   @Override
-  public TextRange getDeclarationRange(@NotNull PsiElement container) {
+  public @NotNull TextRange getDeclarationRange(@NotNull PsiElement container) {
     if (container instanceof PerlSubDefinitionElement) {
       PsiPerlBlock body = ((PerlSubDefinitionElement)container).getSubDefinitionBody();
       if (body == null) {

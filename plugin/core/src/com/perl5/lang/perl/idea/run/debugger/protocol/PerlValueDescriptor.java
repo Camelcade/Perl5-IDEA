@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,15 +31,11 @@ public class PerlValueDescriptor {
   private boolean expandable;
   private boolean blessed;
   private boolean is_utf;
-  @Nullable
-  private String fileno;
-  @Nullable
-  private PerlLayersDescriptor layers;
-  @Nullable
-  private PerlValueDescriptor tied_with;
+  private @Nullable String fileno;
+  private @Nullable PerlLayersDescriptor layers;
+  private @Nullable PerlValueDescriptor tied_with;
 
-  @Nullable
-  public String getFileno() {
+  public @Nullable String getFileno() {
     return fileno;
   }
 
@@ -87,13 +83,11 @@ public class PerlValueDescriptor {
     return render_error;
   }
 
-  @Nullable
-  public PerlLayersDescriptor getLayers() {
+  public @Nullable PerlLayersDescriptor getLayers() {
     return layers;
   }
 
-  @Nullable
-  public PerlValueDescriptor getTiedWith() {
+  public @Nullable PerlValueDescriptor getTiedWith() {
     return tied_with;
   }
 

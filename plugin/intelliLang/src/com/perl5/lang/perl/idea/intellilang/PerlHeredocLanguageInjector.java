@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -55,8 +55,7 @@ public class PerlHeredocLanguageInjector implements MultiHostInjector {
     registrar.doneInjecting();
   }
 
-  @Nullable
-  private Language getInjectedLanguage(@NotNull PerlHeredocElementImpl heredocElement) {
+  private @Nullable Language getInjectedLanguage(@NotNull PerlHeredocElementImpl heredocElement) {
     PerlHeredocTerminatorElement terminator = heredocElement.getTerminatorElement();
 
     if (terminator == null) {
@@ -118,9 +117,8 @@ public class PerlHeredocLanguageInjector implements MultiHostInjector {
     }
   }
 
-  @NotNull
   @Override
-  public List<? extends Class<? extends PsiElement>> elementsToInjectIn() {
+  public @NotNull List<? extends Class<? extends PsiElement>> elementsToInjectIn() {
     return ELEMENTS_TO_INJECT;
   }
 }

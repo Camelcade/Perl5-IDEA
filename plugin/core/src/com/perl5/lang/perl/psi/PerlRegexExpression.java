@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,8 +28,7 @@ public interface PerlRegexExpression extends PsiElement {
   /**
    * @return first opening quote element of the regex
    */
-  @Nullable
-  default PsiElement getOpenQuoteElement() {
+  default @Nullable PsiElement getOpenQuoteElement() {
     PsiElement run = getFirstChild();
     while (run != null) {
       if (PerlTokenSets.REGEX_QUOTE_OPEN.contains(PsiUtilCore.getElementType(run))) {

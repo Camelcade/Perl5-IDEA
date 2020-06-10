@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,9 +48,8 @@ public class Mason2FileViewProvider extends MultiplePsiFilesPerDocumentFileViewP
     super(manager, virtualFile, eventSystemEnabled);
   }
 
-  @Nullable
   @Override
-  protected PsiFile createFile(@NotNull Language lang) {
+  protected @Nullable PsiFile createFile(@NotNull Language lang) {
     if (lang != Mason2Language.INSTANCE && lang != PodLanguage.INSTANCE) {
       return null;
     }
@@ -70,27 +69,23 @@ public class Mason2FileViewProvider extends MultiplePsiFilesPerDocumentFileViewP
     return null;
   }
 
-  @NotNull
   @Override
-  public Set<Language> getLanguages() {
+  public @NotNull Set<Language> getLanguages() {
     return myLanguages;
   }
 
-  @NotNull
   @Override
-  public Language getBaseLanguage() {
+  public @NotNull Language getBaseLanguage() {
     return Mason2Language.INSTANCE;
   }
 
-  @NotNull
   @Override
-  protected MultiplePsiFilesPerDocumentFileViewProvider cloneInner(@NotNull VirtualFile fileCopy) {
+  protected @NotNull MultiplePsiFilesPerDocumentFileViewProvider cloneInner(@NotNull VirtualFile fileCopy) {
     return new Mason2FileViewProvider(getManager(), fileCopy, false);
   }
 
-  @NotNull
   @Override
-  public Language getTemplateDataLanguage() {
+  public @NotNull Language getTemplateDataLanguage() {
     return PodLanguage.INSTANCE;
   }
 }

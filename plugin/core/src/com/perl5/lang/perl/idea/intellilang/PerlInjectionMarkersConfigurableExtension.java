@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,9 +23,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class PerlInjectionMarkersConfigurableExtension implements Perl5SettingsConfigurableExtension {
-  @Nullable
   @Override
-  public Configurable createProjectConfigurable(@NotNull Project project) {
+  public @Nullable Configurable createProjectConfigurable(@NotNull Project project) {
     return new PerlInjectionMarkersTable(project);
   }
 }

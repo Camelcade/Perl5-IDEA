@@ -38,9 +38,8 @@ public class PodLinkToFileReference extends PerlCachingReference<PodFormatterL> 
     super(element, range);
   }
 
-  @NotNull
   @Override
-  protected ResolveResult[] resolveInner(boolean incompleteCode) {
+  protected @NotNull ResolveResult[] resolveInner(boolean incompleteCode) {
     PodFormatterL podLink = getElement();
     PodLinkDescriptor descriptor = podLink.getLinkDescriptor();
 

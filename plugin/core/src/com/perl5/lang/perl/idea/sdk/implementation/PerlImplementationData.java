@@ -34,8 +34,7 @@ public abstract class PerlImplementationData<Data extends PerlImplementationData
   }
 
   @Contract("null->null")
-  @Nullable
-  static PerlImplementationData<?, ?> from(@Nullable Sdk sdk) {
+  static @Nullable PerlImplementationData<?, ?> from(@Nullable Sdk sdk) {
     return ObjectUtils.doIfNotNull(PerlSdkAdditionalData.from(sdk), PerlSdkAdditionalData::getImplementationData);
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,9 +32,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
   public static IElementType getElementType(String name) {
     if (name.equals("ADD_EXPR")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiAddExprImpl(node);
         }
       };
@@ -42,9 +41,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("AND_EXPR")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiAndExprImpl(node);
         }
       };
@@ -52,9 +50,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("ANON_BLOCK")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiAnonBlockImpl(node);
         }
       };
@@ -62,9 +59,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("ANON_BLOCK_DIRECTIVE")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiAnonBlockDirectiveImpl(node);
         }
       };
@@ -72,9 +68,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("ARRAY_EXPR")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiArrayExprImpl(node);
         }
       };
@@ -82,9 +77,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("ASSIGN_EXPR")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiAssignExprImpl(node);
         }
       };
@@ -92,9 +86,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("BLOCK_COMMENT")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiBlockCommentImpl(node);
         }
       };
@@ -102,9 +95,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("BLOCK_DIRECTIVE")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiBlockDirectiveImpl(node);
         }
       };
@@ -112,9 +104,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("BLOCK_NAME")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiBlockNameImpl(node);
         }
       };
@@ -122,9 +113,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("CALL_ARGUMENTS")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiCallArgumentsImpl(node);
         }
       };
@@ -132,9 +122,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("CALL_DIRECTIVE")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiCallDirectiveImpl(node);
         }
       };
@@ -142,9 +131,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("CALL_EXPR")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiCallExprImpl(node);
         }
       };
@@ -152,9 +140,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("CASE_BLOCK")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiCaseBlockImpl(node);
         }
       };
@@ -162,9 +149,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("CASE_DIRECTIVE")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiCaseDirectiveImpl(node);
         }
       };
@@ -172,9 +158,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("CATCH_BRANCH")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiCatchBranchImpl(node);
         }
       };
@@ -182,9 +167,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("CATCH_DIRECTIVE")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiCatchDirectiveImpl(node);
         }
       };
@@ -192,9 +176,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("CLEAR_DIRECTIVE")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiClearDirectiveImpl(node);
         }
       };
@@ -202,9 +185,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("COMPARE_EXPR")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiCompareExprImpl(node);
         }
       };
@@ -212,9 +194,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("DEBUG_DIRECTIVE")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiDebugDirectiveImpl(node);
         }
       };
@@ -222,9 +203,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("DEBUG_FORMAT")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiDebugFormatImpl(node);
         }
       };
@@ -232,9 +212,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("DEFAULT_DIRECTIVE")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiDefaultDirectiveImpl(node);
         }
       };
@@ -242,9 +221,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("DIRECTIVE_POSTFIX")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiDirectivePostfixImpl(node);
         }
       };
@@ -252,9 +230,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("DQ_STRING_EXPR")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiDqStringExprImpl(node);
         }
       };
@@ -262,9 +239,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("ELSE_BRANCH")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiElseBranchImpl(node);
         }
       };
@@ -272,9 +248,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("ELSE_DIRECTIVE")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiElseDirectiveImpl(node);
         }
       };
@@ -282,9 +257,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("ELSIF_BRANCH")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiElsifBranchImpl(node);
         }
       };
@@ -292,9 +266,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("ELSIF_DIRECTIVE")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiElsifDirectiveImpl(node);
         }
       };
@@ -302,9 +275,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("END_DIRECTIVE")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiEndDirectiveImpl(node);
         }
       };
@@ -312,9 +284,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("EQUAL_EXPR")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiEqualExprImpl(node);
         }
       };
@@ -322,9 +293,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("EXCEPTION_ARGS")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiExceptionArgsImpl(node);
         }
       };
@@ -332,9 +302,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("EXCEPTION_MESSAGE")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiExceptionMessageImpl(node);
         }
       };
@@ -342,9 +311,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("EXCEPTION_TYPE")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiExceptionTypeImpl(node);
         }
       };
@@ -352,9 +320,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("EXPR")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           throw new RuntimeException("Instantiating " + node);
         }
       };
@@ -362,9 +329,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("FILTER_BLOCK")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiFilterBlockImpl(node);
         }
       };
@@ -372,9 +338,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("FILTER_DIRECTIVE")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiFilterDirectiveImpl(node);
         }
       };
@@ -382,9 +347,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("FILTER_ELEMENT_EXPR")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiFilterElementExprImpl(node);
         }
       };
@@ -392,9 +356,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("FINAL_BRANCH")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiFinalBranchImpl(node);
         }
       };
@@ -402,9 +365,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("FINAL_DIRECTIVE")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiFinalDirectiveImpl(node);
         }
       };
@@ -412,9 +374,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("FOREACH_BLOCK")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiForeachBlockImpl(node);
         }
       };
@@ -422,9 +383,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("FOREACH_DIRECTIVE")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiForeachDirectiveImpl(node);
         }
       };
@@ -432,9 +392,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("FOREACH_ITERABLE")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiForeachIterableImpl(node);
         }
       };
@@ -442,9 +401,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("FOREACH_ITERATOR")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiForeachIteratorImpl(node);
         }
       };
@@ -452,9 +410,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("GET_DIRECTIVE")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiGetDirectiveImpl(node);
         }
       };
@@ -462,9 +419,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("HASH_EXPR")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiHashExprImpl(node);
         }
       };
@@ -472,9 +428,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("IDENTIFIER_EXPR")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiIdentifierExprImpl(node);
         }
       };
@@ -482,9 +437,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("IF_BLOCK")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiIfBlockImpl(node);
         }
       };
@@ -492,9 +446,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("IF_BRANCH")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiIfBranchImpl(node);
         }
       };
@@ -502,9 +455,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("IF_DIRECTIVE")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiIfDirectiveImpl(node);
         }
       };
@@ -512,9 +464,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("INCLUDE_DIRECTIVE")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiIncludeDirectiveImpl(node);
         }
       };
@@ -522,9 +473,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("INSERT_DIRECTIVE")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiInsertDirectiveImpl(node);
         }
       };
@@ -532,9 +482,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("LAST_DIRECTIVE")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiLastDirectiveImpl(node);
         }
       };
@@ -542,9 +491,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("MACRO_CONTENT")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiMacroContentImpl(node);
         }
       };
@@ -552,9 +500,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("MACRO_DIRECTIVE")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiMacroDirectiveImpl(node);
         }
       };
@@ -562,9 +509,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("MACRO_NAME")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiMacroNameImpl(node);
         }
       };
@@ -572,9 +518,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("META_DIRECTIVE")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiMetaDirectiveImpl(node);
         }
       };
@@ -582,9 +527,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("MODULE_NAME")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiModuleNameImpl(node);
         }
       };
@@ -592,9 +536,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("MODULE_PARAMS")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiModuleParamsImpl(node);
         }
       };
@@ -602,9 +545,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("MUL_EXPR")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiMulExprImpl(node);
         }
       };
@@ -612,9 +554,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("NAMED_BLOCK")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiNamedBlockImpl(node);
         }
       };
@@ -622,9 +563,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("NEXT_DIRECTIVE")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiNextDirectiveImpl(node);
         }
       };
@@ -632,9 +572,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("OR_EXPR")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiOrExprImpl(node);
         }
       };
@@ -642,9 +581,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("PAIR_EXPR")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiPairExprImpl(node);
         }
       };
@@ -652,9 +590,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("PARENTHESISED_EXPR")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiParenthesisedExprImpl(node);
         }
       };
@@ -662,9 +599,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("PERL_BLOCK")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiPerlBlockImpl(node);
         }
       };
@@ -672,9 +608,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("PERL_DIRECTIVE")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiPerlDirectiveImpl(node);
         }
       };
@@ -682,9 +617,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("PROCESS_DIRECTIVE")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiProcessDirectiveImpl(node);
         }
       };
@@ -692,9 +626,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("RANGE_EXPR")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiRangeExprImpl(node);
         }
       };
@@ -702,9 +635,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("RAWPERL_BLOCK")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiRawperlBlockImpl(node);
         }
       };
@@ -712,9 +644,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("RAWPERL_DIRECTIVE")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiRawperlDirectiveImpl(node);
         }
       };
@@ -722,9 +653,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("RETURN_DIRECTIVE")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiReturnDirectiveImpl(node);
         }
       };
@@ -732,9 +662,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("SET_DIRECTIVE")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiSetDirectiveImpl(node);
         }
       };
@@ -742,9 +671,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("SQ_STRING_EXPR")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiSqStringExprImpl(node);
         }
       };
@@ -752,9 +680,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("STOP_DIRECTIVE")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiStopDirectiveImpl(node);
         }
       };
@@ -762,9 +689,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("SWITCH_BLOCK")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiSwitchBlockImpl(node);
         }
       };
@@ -772,9 +698,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("SWITCH_DIRECTIVE")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiSwitchDirectiveImpl(node);
         }
       };
@@ -782,9 +707,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("TAGS_DIRECTIVE")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiTagsDirectiveImpl(node);
         }
       };
@@ -792,9 +716,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("TERM_EXPR")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiTermExprImpl(node);
         }
       };
@@ -802,9 +725,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("TERNAR_EXPR")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiTernarExprImpl(node);
         }
       };
@@ -812,9 +734,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("THROW_DIRECTIVE")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiThrowDirectiveImpl(node);
         }
       };
@@ -822,9 +743,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("TRY_BRANCH")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiTryBranchImpl(node);
         }
       };
@@ -832,9 +752,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("TRY_CATCH_BLOCK")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiTryCatchBlockImpl(node);
         }
       };
@@ -842,9 +761,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("TRY_DIRECTIVE")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiTryDirectiveImpl(node);
         }
       };
@@ -852,9 +770,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("UNARY_EXPR")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiUnaryExprImpl(node);
         }
       };
@@ -862,9 +779,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("UNLESS_BLOCK")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiUnlessBlockImpl(node);
         }
       };
@@ -872,9 +788,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("UNLESS_BRANCH")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiUnlessBranchImpl(node);
         }
       };
@@ -882,9 +797,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("UNLESS_DIRECTIVE")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiUnlessDirectiveImpl(node);
         }
       };
@@ -892,9 +806,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("USE_DIRECTIVE")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiUseDirectiveImpl(node);
         }
       };
@@ -902,9 +815,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("USE_INSTANCE")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiUseInstanceImpl(node);
         }
       };
@@ -912,9 +824,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("VARIABLE_EXPR")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiVariableExprImpl(node);
         }
       };
@@ -922,9 +833,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("WHILE_BLOCK")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiWhileBlockImpl(node);
         }
       };
@@ -932,9 +842,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("WHILE_DIRECTIVE")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiWhileDirectiveImpl(node);
         }
       };
@@ -942,9 +851,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("WRAPPER_BLOCK")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiWrapperBlockImpl(node);
         }
       };
@@ -952,9 +860,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("WRAPPER_DIRECTIVE")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiWrapperDirectiveImpl(node);
         }
       };
@@ -962,9 +869,8 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
 
     if (name.equals("EMPTY_DIRECTIVE")) {
       return new TemplateToolkitElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new TemplateToolkitCompositeElementImpl(node);
         }
       };

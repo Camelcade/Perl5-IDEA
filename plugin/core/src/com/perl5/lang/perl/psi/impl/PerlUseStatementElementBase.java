@@ -59,9 +59,8 @@ public abstract class PerlUseStatementElementBase extends PerlPolyNamedElement<P
     return isPragma() || isVersion();
   }
 
-  @Nullable
   @Override
-  public String getPackageName() {
+  public @Nullable String getPackageName() {
     PerlUseStatementStub stub = getGreenStub();
     if (stub != null) {
       return stub.getPackageName();
@@ -74,9 +73,8 @@ public abstract class PerlUseStatementElementBase extends PerlPolyNamedElement<P
     return null;
   }
 
-  @Nullable
   @Override
-  public PerlNamespaceElement getNamespaceElement() {
+  public @Nullable PerlNamespaceElement getNamespaceElement() {
     return findChildByClass(PerlNamespaceElement.class);
   }
 
@@ -85,8 +83,7 @@ public abstract class PerlUseStatementElementBase extends PerlPolyNamedElement<P
   }
 
   @Override
-  @Nullable
-  public List<String> getImportParameters() {
+  public @Nullable List<String> getImportParameters() {
     PerlUseStatementStub stub = getGreenStub();
     if (stub != null) {
       return stub.getImportParameters();
@@ -106,8 +103,7 @@ public abstract class PerlUseStatementElementBase extends PerlPolyNamedElement<P
     }
   }
 
-  @NotNull
-  public PerlPackageProcessor getPackageProcessor() {
+  public @NotNull PerlPackageProcessor getPackageProcessor() {
     PerlPackageProcessor packageProcessor = null;
 
     // package name processor
@@ -122,9 +118,8 @@ public abstract class PerlUseStatementElementBase extends PerlPolyNamedElement<P
     return packageProcessor == null ? PerlPackageProcessorDefault.INSTANCE : packageProcessor;
   }
 
-  @NotNull
   @Override
-  public String getNamespaceName() {
+  public @NotNull String getNamespaceName() {
     PerlUseStatementStub stub = getGreenStub();
     if (stub != null) {
       return stub.getNamespaceName();
@@ -134,16 +129,14 @@ public abstract class PerlUseStatementElementBase extends PerlPolyNamedElement<P
   }
 
   @Override
-  @Nullable
-  public PsiPerlExpr getExpr() {
+  public @Nullable PsiPerlExpr getExpr() {
     return findChildByClass(PsiPerlExpr.class);
   }
 
   /**
    * @return text that should be shown in folded block of use arguments
    */
-  @Nullable
-  public String getArgumentsFoldingText() {
+  public @Nullable String getArgumentsFoldingText() {
     return getPackageProcessor().getArgumentsFoldingText(this);
   }
 

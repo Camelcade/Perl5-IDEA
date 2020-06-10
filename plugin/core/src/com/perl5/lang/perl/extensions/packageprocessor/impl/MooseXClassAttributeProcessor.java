@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,12 +27,11 @@ import java.util.List;
 import static com.perl5.lang.perl.util.PerlPackageUtil.PACKAGE_MOOSE_X_CLASSATTRIBUTE;
 
 public class MooseXClassAttributeProcessor extends PerlPackageProcessorBase {
-  private static List<PerlExportDescriptor> EXPORTS =
+  private static final List<PerlExportDescriptor> EXPORTS =
     Collections.singletonList(PerlExportDescriptor.create(PACKAGE_MOOSE_X_CLASSATTRIBUTE, "class_has"));
 
-  @NotNull
   @Override
-  public List<PerlExportDescriptor> getImports(@NotNull PerlUseStatementElement useStatement) {
+  public @NotNull List<PerlExportDescriptor> getImports(@NotNull PerlUseStatementElement useStatement) {
     return EXPORTS;
   }
 }

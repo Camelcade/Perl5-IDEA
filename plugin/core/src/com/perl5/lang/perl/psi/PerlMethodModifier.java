@@ -27,8 +27,7 @@ import org.jetbrains.annotations.NotNull;
  * We actually have some legacy modifiers, but they are most likely need to be reworked.
  */
 public interface PerlMethodModifier extends PerlBlockOwner, PerlDieScope, PerlLabelScope, PerlLexicalScope, NavigationItem {
-  @NotNull
-  default String getModifierText() {
+  default @NotNull String getModifierText() {
     return getFirstChild().getText();
   }
 }

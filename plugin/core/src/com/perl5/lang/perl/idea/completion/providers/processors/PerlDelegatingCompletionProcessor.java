@@ -24,8 +24,7 @@ import org.jetbrains.annotations.Nullable;
 
 public abstract class PerlDelegatingCompletionProcessor<Delegate extends PerlCompletionProcessor>
   extends AbstractPerlCompletionProcessor {
-  @NotNull
-  private Delegate myDelegate;
+  private @NotNull Delegate myDelegate;
 
   public PerlDelegatingCompletionProcessor(@NotNull Delegate delegate) {
     myDelegate = delegate;
@@ -36,8 +35,7 @@ public abstract class PerlDelegatingCompletionProcessor<Delegate extends PerlCom
     return getDelegate().getResultSet();
   }
 
-  @NotNull
-  protected final Delegate getDelegate() {
+  protected final @NotNull Delegate getDelegate() {
     return myDelegate;
   }
 

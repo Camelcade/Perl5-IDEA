@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,12 +29,10 @@ public abstract class PerlMutationInstruction extends InstructionImpl {
     super(builder, element);
   }
 
-  @Nullable
-  public abstract PsiElement getLeftSide();
+  public abstract @Nullable PsiElement getLeftSide();
 
   /**
    * @return a new value of the operation target.
    */
-  @NotNull
-  public abstract PerlValue createValue();
+  public abstract @NotNull PerlValue createValue();
 }

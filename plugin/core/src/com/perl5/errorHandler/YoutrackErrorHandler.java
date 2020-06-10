@@ -70,9 +70,8 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
   private static final String SERVER_ISSUE_URL = SERVER_REST_URL + "issue";
   private static final String LOGIN_URL = SERVER_REST_URL + "user/login";
 
-  @NotNull
   @Override
-  public String getReportActionText() {
+  public @NotNull String getReportActionText() {
     return PerlBundle.message("perl.issue.report");
   }
 
@@ -158,11 +157,10 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
     return reportInfo;
   }
 
-  @Nullable
-  public String submit(@Nullable String desc,
-                       @NotNull String body,
-                       @Nullable String affectedVersion,
-                       @NotNull List<Attachment> attachments) {
+  public @Nullable String submit(@Nullable String desc,
+                                 @NotNull String body,
+                                 @Nullable String affectedVersion,
+                                 @NotNull List<Attachment> attachments) {
     if (isEmpty(desc)) {
       throw new RuntimeException(DiagnosticBundle.message("error.report.failure.message"));
     }

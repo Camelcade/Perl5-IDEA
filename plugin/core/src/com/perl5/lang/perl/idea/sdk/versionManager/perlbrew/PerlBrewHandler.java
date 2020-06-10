@@ -41,38 +41,32 @@ class PerlBrewHandler extends PerlRealVersionManagerHandler<PerlBrewData, PerlBr
     super(bean);
   }
 
-  @NotNull
   @Override
-  protected String getExecutableName() {
+  protected @NotNull String getExecutableName() {
     return "perlbrew";
   }
 
-  @NotNull
   @Override
-  public PerlVersionManagerAdapter createAdapter(@NotNull String pathToVersionManager, @NotNull PerlHostData<?, ?> hostData) {
+  public @NotNull PerlVersionManagerAdapter createAdapter(@NotNull String pathToVersionManager, @NotNull PerlHostData<?, ?> hostData) {
     return new PerlBrewAdapter(pathToVersionManager, hostData);
   }
 
-  @NotNull
   @Override
-  public String getPresentableName() {
+  public @NotNull String getPresentableName() {
     return PerlBundle.message("perl.vm.perlbrew.presentable.name");
   }
 
-  @NotNull
   @Override
-  public PerlBrewData createData() {
+  public @NotNull PerlBrewData createData() {
     return new PerlBrewData(this);
   }
 
-  @NotNull
   @Override
-  protected PerlBrewData createData(@NotNull PerlVersionManagerAdapter vmAdapter, @NotNull String distributionId) {
+  protected @NotNull PerlBrewData createData(@NotNull PerlVersionManagerAdapter vmAdapter, @NotNull String distributionId) {
     return new PerlBrewData(vmAdapter.getVersionManagerPath(), distributionId, this, computeInfoData((PerlBrewAdapter)vmAdapter));
   }
 
-  @NotNull
-  static PerlBrewHandler getInstance() {
+  static @NotNull PerlBrewHandler getInstance() {
     for (PerlVersionManagerHandler<?, ?> handler : PerlVersionManagerHandler.all()) {
       if (handler instanceof PerlBrewHandler) {
         return (PerlBrewHandler)handler;
@@ -84,8 +78,7 @@ class PerlBrewHandler extends PerlRealVersionManagerHandler<PerlBrewData, PerlBr
   /**
    * Builds a map of key-val from {@code perlbrew info}
    */
-  @NotNull
-  static Map<String, String> computeInfoData(@NotNull PerlBrewAdapter adapter) {
+  static @NotNull Map<String, String> computeInfoData(@NotNull PerlBrewAdapter adapter) {
     List<String> infoOutput = adapter.getInfo();
     if (infoOutput == null || infoOutput.isEmpty()) {
       return Collections.emptyMap();
@@ -100,15 +93,13 @@ class PerlBrewHandler extends PerlRealVersionManagerHandler<PerlBrewData, PerlBr
     return result;
   }
 
-  @NotNull
   @Override
-  public Icon getIcon() {
+  public @NotNull Icon getIcon() {
     return PerlIcons.PERLBREW_ICON;
   }
 
-  @Nullable
   @Override
-  public InstallPerlHandler createInstallHandler(@NotNull String pathToVersionManager) {
+  public @Nullable InstallPerlHandler createInstallHandler(@NotNull String pathToVersionManager) {
     return new PerlBrewInstallPerlHandler(pathToVersionManager, this);
   }
 }

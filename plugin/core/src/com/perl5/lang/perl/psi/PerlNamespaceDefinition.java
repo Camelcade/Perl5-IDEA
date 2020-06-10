@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -52,8 +52,7 @@ public interface PerlNamespaceDefinition extends PerlDeprecatable {
    *
    * @return mro class instance
    */
-  @NotNull
-  default PerlMro getMro() {
+  default @NotNull PerlMro getMro() {
     return getMroType() == PerlMroType.C3 ? PerlMroC3.INSTANCE : PerlMroDfs.INSTANCE;
   }
 

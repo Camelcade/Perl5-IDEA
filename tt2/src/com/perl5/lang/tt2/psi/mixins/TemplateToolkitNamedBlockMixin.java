@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,9 +39,8 @@ public abstract class TemplateToolkitNamedBlockMixin extends TemplateToolkitComp
     super(node);
   }
 
-  @Nullable
   @Override
-  public PsiElement getNameIdentifier() {
+  public @Nullable PsiElement getNameIdentifier() {
     PsiBlockName blockName = getBlockDirective().getBlockName();
     if (blockName == null) {
       return null;
@@ -64,9 +63,8 @@ public abstract class TemplateToolkitNamedBlockMixin extends TemplateToolkitComp
     return this;
   }
 
-  @NotNull
   @Override
-  public SearchScope getUseScope() {
+  public @NotNull SearchScope getUseScope() {
     return super.getUseScope();
   }
 
@@ -82,9 +80,8 @@ public abstract class TemplateToolkitNamedBlockMixin extends TemplateToolkitComp
     return nameIdentifier == null ? super.getTextOffset() : nameIdentifier.getTextOffset();
   }
 
-  @Nullable
   @Override
-  public Icon getIcon(int flags) {
+  public @Nullable Icon getIcon(int flags) {
     return TemplateToolkitIcons.TTK2_BLOCK_ICON;
   }
 }

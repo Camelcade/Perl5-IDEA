@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,9 +51,8 @@ public class PerlBraceMatcher implements PairedBraceMatcher, PerlElementTypes {
     new BracePair(LEFT_BRACE_GLOB, RIGHT_BRACE_GLOB, true),
   };
 
-  @NotNull
   @Override
-  public BracePair[] getPairs() {
+  public @NotNull BracePair[] getPairs() {
     return PAIRS;
   }
 

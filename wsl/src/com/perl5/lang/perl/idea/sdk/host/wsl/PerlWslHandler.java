@@ -38,8 +38,7 @@ class PerlWslHandler extends PerlHostWithFileSystemHandler<PerlWslData, PerlWslH
   }
 
   @Override
-  @Nullable
-  protected PerlWslData createDataInteractively() {
+  protected @Nullable PerlWslData createDataInteractively() {
     String[] ids = ArrayUtil.toStringArray(ContainerUtil.map(WSLUtil.getAvailableDistributions(), WSLDistribution::getId));
     if (ids.length < 1) {
       return null;
@@ -61,15 +60,13 @@ class PerlWslHandler extends PerlHostWithFileSystemHandler<PerlWslData, PerlWslH
     return hostData;
   }
 
-  @NotNull
   @Override
-  public String getMenuItemTitle() {
+  public @NotNull String getMenuItemTitle() {
     return PerlWslBundle.message("perl.host.handler.wsl.menu.title");
   }
 
-  @NotNull
   @Override
-  public String getShortName() {
+  public @NotNull String getShortName() {
     return PerlWslBundle.message("perl.host.handler.wsl.short.name");
   }
 
@@ -78,21 +75,18 @@ class PerlWslHandler extends PerlHostWithFileSystemHandler<PerlWslData, PerlWslH
     return WSLUtil.hasAvailableDistributions();
   }
 
-  @NotNull
   @Override
-  public PerlOsHandler getOsHandler() {
+  public @NotNull PerlOsHandler getOsHandler() {
     return PerlOsHandlers.LINUX;
   }
 
-  @NotNull
   @Override
-  public PerlWslData createData() {
+  public @NotNull PerlWslData createData() {
     return new PerlWslData(this);
   }
 
-  @Nullable
   @Override
-  public Icon getIcon() {
+  public @Nullable Icon getIcon() {
     return PerlIcons.LINUX_ICON;
   }
 }

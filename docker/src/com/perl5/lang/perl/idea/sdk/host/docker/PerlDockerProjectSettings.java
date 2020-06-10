@@ -35,12 +35,9 @@ import org.jetbrains.annotations.Nullable;
   }
 )
 class PerlDockerProjectSettings implements PersistentStateComponent<PerlDockerProjectSettings> {
-  @Tag("additional-params")
-  @NotNull
-  private String myAdditionalDockerParameters = "";
+  @Tag("additional-params") private @NotNull String myAdditionalDockerParameters = "";
 
-  @NotNull
-  public String getAdditionalDockerParameters() {
+  public @NotNull String getAdditionalDockerParameters() {
     return myAdditionalDockerParameters;
   }
 
@@ -48,9 +45,8 @@ class PerlDockerProjectSettings implements PersistentStateComponent<PerlDockerPr
     myAdditionalDockerParameters = additionalDockerParameters;
   }
 
-  @Nullable
   @Override
-  public PerlDockerProjectSettings getState() {
+  public @Nullable PerlDockerProjectSettings getState() {
     return this;
   }
 

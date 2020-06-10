@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,15 +49,13 @@ public class PerlMooseAugmentStatementElementType extends IStubElementType<PerlM
     return new PerlMooseAugmentStatementImpl(stub, this);
   }
 
-  @NotNull
   @Override
-  public PerlMooseAugmentStatementStub createStub(@NotNull PerlMooseAugmentStatement psi, StubElement parentStub) {
+  public @NotNull PerlMooseAugmentStatementStub createStub(@NotNull PerlMooseAugmentStatement psi, StubElement parentStub) {
     return new PerlMooseAugmentStatementStubImpl(parentStub, this, psi.getSubName());
   }
 
-  @NotNull
   @Override
-  public String getExternalId() {
+  public @NotNull String getExternalId() {
     return "perl." + super.toString();
   }
 
@@ -66,9 +64,9 @@ public class PerlMooseAugmentStatementElementType extends IStubElementType<PerlM
     dataStream.writeName(stub.getSubName());
   }
 
-  @NotNull
   @Override
-  public PerlMooseAugmentStatementStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
+  public @NotNull PerlMooseAugmentStatementStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub)
+    throws IOException {
     return new PerlMooseAugmentStatementStubImpl(parentStub, this, PerlStubSerializationUtil.readString(dataStream));
   }
 
@@ -76,9 +74,8 @@ public class PerlMooseAugmentStatementElementType extends IStubElementType<PerlM
   public void indexStub(@NotNull PerlMooseAugmentStatementStub stub, @NotNull IndexSink sink) {
   }
 
-  @NotNull
   @Override
-  public PsiElement getPsiElement(@NotNull ASTNode node) {
+  public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
     return new PerlMooseAugmentStatementImpl(node);
   }
 

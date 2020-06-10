@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,11 +43,10 @@ public class PerlRenameFileProcessor extends RenamePsiFileProcessor {
     return element instanceof PerlFileImpl && ((PerlFileImpl)element).getVirtualFile().getFileType() == PerlFileTypePackage.INSTANCE;
   }
 
-  @Nullable
   @Override
-  public Runnable getPostRenameCallback(@NotNull final PsiElement element,
-                                        @NotNull String newName,
-                                        @NotNull RefactoringElementListener elementListener) {
+  public @Nullable Runnable getPostRenameCallback(final @NotNull PsiElement element,
+                                                  @NotNull String newName,
+                                                  @NotNull RefactoringElementListener elementListener) {
     if (newName.endsWith(".pm")) {
       final Project project = element.getProject();
       final String currentPackageName = ((PerlFileImpl)element).getFilePackageName();

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,9 +27,8 @@ public class PerlLazySuperExtendedMatchRegexpElementType extends PerlLazyBlockEl
     super(debugName);
   }
 
-  @NotNull
   @Override
-  protected Lexer getInnerLexer(@NotNull Project project) {
+  protected @NotNull Lexer getInnerLexer(@NotNull Project project) {
     return PerlSubLexerAdapter.forExtendedMatchRegex(project);
   }
 }

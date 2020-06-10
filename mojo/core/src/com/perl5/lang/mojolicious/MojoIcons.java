@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,13 +32,11 @@ public final class MojoIcons {
   private static final NotNullLazyValue<Icon> MOJO_ROOT = PerlIcons.createLazyIconWithModifier(PerlIcons.TEMPLATE_ROOT, MOJO_LOGO);
   private static final NotNullLazyValue<Icon> MOJO_PLUGIN_LOGO = PerlIcons.createLazyIconWithModifier(AllIcons.Nodes.Plugin, MOJO_LOGO);
 
-  @NotNull
-  public static Icon pluginIcon() {
+  public static @NotNull Icon pluginIcon() {
     return MOJO_PLUGIN_LOGO.getValue();
   }
 
-  @NotNull
-  public static Icon rootIcon() {
+  public static @NotNull Icon rootIcon() {
     return MOJO_ROOT.getValue();
   }
 

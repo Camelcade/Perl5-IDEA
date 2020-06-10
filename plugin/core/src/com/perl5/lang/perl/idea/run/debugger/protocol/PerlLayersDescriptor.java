@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,18 +21,14 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class PerlLayersDescriptor {
-  @Nullable
-  private List<PerlLayerDescriptor> input;
-  @Nullable
-  private List<PerlLayerDescriptor> output;
+  private @Nullable List<PerlLayerDescriptor> input;
+  private @Nullable List<PerlLayerDescriptor> output;
 
-  @Nullable
-  public List<PerlLayerDescriptor> getInput() {
+  public @Nullable List<PerlLayerDescriptor> getInput() {
     return input;
   }
 
-  @Nullable
-  public List<PerlLayerDescriptor> getOutput() {
+  public @Nullable List<PerlLayerDescriptor> getOutput() {
     return output;
   }
 }

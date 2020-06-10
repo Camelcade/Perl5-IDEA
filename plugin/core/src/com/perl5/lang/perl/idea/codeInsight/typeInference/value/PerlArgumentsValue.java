@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,9 +38,8 @@ final class PerlArgumentsValue extends PerlSpecialValue {
     return UNKNOWN_VALUE;
   }
 
-  @NotNull
   @Override
-  protected PerlContextType getContextType() {
+  protected @NotNull PerlContextType getContextType() {
     return PerlContextType.LIST;
   }
 
@@ -49,9 +48,8 @@ final class PerlArgumentsValue extends PerlSpecialValue {
     return ARGUMENTS_ID;
   }
 
-  @NotNull
   @Override
-  public String getPresentableText() {
+  public @NotNull String getPresentableText() {
     return PerlBundle.message("perl.value.sub.arguments");
   }
 

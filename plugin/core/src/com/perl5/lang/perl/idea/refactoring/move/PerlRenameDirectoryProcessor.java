@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,8 +42,8 @@ public class PerlRenameDirectoryProcessor extends RenamePsiFileProcessor {
   }
 
   @Override
-  public void prepareRenaming(@NotNull final PsiElement element,
-                              @NotNull final String newName,
+  public void prepareRenaming(final @NotNull PsiElement element,
+                              final @NotNull String newName,
                               @NotNull Map<PsiElement, String> allRenames) {
     allRenames.clear();
     ApplicationManager.getApplication().runWriteAction(() -> renamePsiElement(element, newName));

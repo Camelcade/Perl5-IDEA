@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,8 +45,7 @@ public class PerlMooseExtendsStatementImpl extends PsiPerlStatementImpl implemen
     currentList.addAll(getParentsList());
   }
 
-  @NotNull
-  protected List<String> getParentsList() {
+  protected @NotNull List<String> getParentsList() {
     List<String> result = new ArrayList<>();
 
     PsiElement expr = getExpr();
@@ -85,9 +84,8 @@ public class PerlMooseExtendsStatementImpl extends PsiPerlStatementImpl implemen
     return result;
   }
 
-  @Nullable
   @Override
-  public PsiReference[] getReferences(PsiElement element) {
+  public @Nullable PsiReference[] getReferences(PsiElement element) {
     PsiElement string = element.getParent();
     if (string != null) {
       PsiElement meOrCommaSequence = string.getParent();

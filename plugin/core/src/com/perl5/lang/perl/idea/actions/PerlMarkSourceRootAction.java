@@ -34,8 +34,7 @@ import java.util.List;
 import java.util.Locale;
 
 public abstract class PerlMarkSourceRootAction extends PerlSourceRootAction {
-  @NotNull
-  private final PerlSourceRootType myType;
+  private final @NotNull PerlSourceRootType myType;
 
   public PerlMarkSourceRootAction(@NotNull PerlSourceRootType type) {
     myType = type;
@@ -47,8 +46,7 @@ public abstract class PerlMarkSourceRootAction extends PerlSourceRootAction {
     presentation.setIcon(editHandler.getRootIcon());
   }
 
-  @NotNull
-  public PerlSourceRootType getType() {
+  public @NotNull PerlSourceRootType getType() {
     return myType;
   }
 

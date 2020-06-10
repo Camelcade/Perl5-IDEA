@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,15 +26,13 @@ public class PerlFileTypeCpanfile extends PerlFileTypeScript {
   public static final PerlFileTypeCpanfile INSTANCE = new PerlFileTypeCpanfile();
   static final String CPANFILE = "cpanfile";
 
-  @NotNull
   @Override
-  public String getName() {
+  public @NotNull String getName() {
     return "Cpanfile";
   }
 
-  @Nullable
   @Override
-  public Icon getIcon() {
+  public @Nullable Icon getIcon() {
     return PerlIcons.METACPAN;
   }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,9 +35,8 @@ public abstract class PerlFindUsagesProviderBase implements FindUsagesProvider {
     return psiElement instanceof PsiNamedElement;
   }
 
-  @Nullable
   @Override
-  public String getHelpId(@NotNull PsiElement psiElement) {
+  public @Nullable String getHelpId(@NotNull PsiElement psiElement) {
     return null;
   }
 
@@ -45,15 +44,13 @@ public abstract class PerlFindUsagesProviderBase implements FindUsagesProvider {
    * @implNote invoked if {@link ElementDescriptionProvider} failed to resolve {@link com.intellij.usageView.UsageViewTypeLocation#INSTANCE}
    * @see ElementDescriptionProvider#getElementDescription(com.intellij.psi.PsiElement, com.intellij.psi.ElementDescriptionLocation)
    */
-  @NotNull
   @Override
-  public String getType(@NotNull PsiElement element) {
+  public @NotNull String getType(@NotNull PsiElement element) {
     return "";
   }
 
-  @NotNull
   @Override
-  public String getDescriptiveName(@NotNull PsiElement element) {
+  public @NotNull String getDescriptiveName(@NotNull PsiElement element) {
     return StringUtil.notNullize(UsageViewUtil.getLongName(element));
   }
 
@@ -61,9 +58,8 @@ public abstract class PerlFindUsagesProviderBase implements FindUsagesProvider {
    * @implNote invoked if {@link ElementDescriptionProvider} failed to resolve {@link UsageViewNodeTextLocation#INSTANCE}
    * @see UsageViewNodeTextLocation#DEFAULT_PROVIDER
    */
-  @NotNull
   @Override
-  public String getNodeText(@NotNull PsiElement element, boolean useFullName) {
+  public @NotNull String getNodeText(@NotNull PsiElement element, boolean useFullName) {
     LOG.warn("Unhandled element " + element);
     return "Unhandled element " + element;
   }

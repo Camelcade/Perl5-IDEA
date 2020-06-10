@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,8 +35,7 @@ public abstract class PerlDebugProfileStateBase extends PerlRunProfileState {
 
   public abstract String mapPathToRemote(@NotNull String localPath);
 
-  @NotNull
-  public abstract String mapPathToLocal(@NotNull String remotePath);
+  public abstract @NotNull String mapPathToLocal(@NotNull String remotePath);
 
   public Integer getDebugPort() throws ExecutionException {
     if (myDebugPort == null) {
@@ -59,8 +58,7 @@ public abstract class PerlDebugProfileStateBase extends PerlRunProfileState {
    *
    * @return passed {@code processHandler}
    */
-  @NotNull
-  public static ProcessHandler markAsReady(@NotNull ProcessHandler processHandler) {
+  public static @NotNull ProcessHandler markAsReady(@NotNull ProcessHandler processHandler) {
     READY_TO_CONNECT_KEY.set(processHandler, Boolean.TRUE);
     return processHandler;
   }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,15 +34,13 @@ public class MasonLiveTemplatesProcessor extends AbstractMasonLiveTemplateProces
     return file instanceof MasonTemplatingFileImpl;
   }
 
-  @NotNull
   @Override
-  protected Language getMyLanguage() {
+  protected @NotNull Language getMyLanguage() {
     return Mason2TemplatingLanguage.INSTANCE;
   }
 
-  @Nullable
   @Override
-  protected PsiElement getOutlineElement(PsiElement firstElement) {
+  protected @Nullable PsiElement getOutlineElement(PsiElement firstElement) {
     return PsiUtilCore.getElementType(firstElement) == Mason2ElementTypes.MASON_LINE_OPENER ? firstElement : null;
   }
 }

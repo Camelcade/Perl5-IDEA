@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -55,9 +55,8 @@ public class PerlRenameSubProcessor extends RenamePsiElementProcessor {
     }
   }
 
-  @Nullable
   @Override
-  public PsiElement substituteElementToRename(@NotNull PsiElement element, @Nullable Editor editor) {
+  public @Nullable PsiElement substituteElementToRename(@NotNull PsiElement element, @Nullable Editor editor) {
     if (PsiElementRenameHandler.isVetoed(element)) {
       return null;
     }
@@ -69,8 +68,7 @@ public class PerlRenameSubProcessor extends RenamePsiElementProcessor {
     return super.substituteElementToRename(element, editor);
   }
 
-  @NotNull
-  private PsiElement suggestSuperMethod(@NotNull PerlSubElement subBase) {
+  private @NotNull PsiElement suggestSuperMethod(@NotNull PerlSubElement subBase) {
     PerlSubElement topLevelSuperMethod = subBase.getTopmostSuperMethod();
     String canonicalName = topLevelSuperMethod.getCanonicalName();
 
@@ -92,8 +90,7 @@ public class PerlRenameSubProcessor extends RenamePsiElementProcessor {
    * @return related items for sub declaration or definition. All synonymous definitions, declarations and typeglobs from
    * the {@link GlobalSearchScope#allScope(com.intellij.openapi.project.Project) all scope}
    */
-  @NotNull
-  public static Set<PsiElement> computeRelatedItems(@NotNull PerlSubElement subElement) {
+  public static @NotNull Set<PsiElement> computeRelatedItems(@NotNull PerlSubElement subElement) {
     String canonicalName = subElement.getCanonicalName();
     if (StringUtil.isEmpty(canonicalName)) {
       return Collections.emptySet();

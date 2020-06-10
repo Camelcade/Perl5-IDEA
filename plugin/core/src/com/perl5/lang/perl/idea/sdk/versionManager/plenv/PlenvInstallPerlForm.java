@@ -40,22 +40,19 @@ class PlenvInstallPerlForm extends PerlInstallFormOptions {
     configureThreadsCombobox(myThreads);
   }
 
-  @NotNull
   @Override
-  public JPanel getRootPanel() {
+  public @NotNull JPanel getRootPanel() {
     return myRootPanel;
   }
 
-  @NotNull
   @Override
-  public String getTargetName(@NotNull String distributionId) {
+  public @NotNull String getTargetName(@NotNull String distributionId) {
     String userText = StringUtil.notNullize(myTargetName.getText()).trim();
     return StringUtil.isEmpty(userText) ? distributionId : userText;
   }
 
-  @NotNull
   @Override
-  public List<String> buildParametersList() {
+  public @NotNull List<String> buildParametersList() {
     List<String> buildParams = new ArrayList<>();
 
     Integer threads = ObjectUtils.tryCast(myThreads.getSelectedItem(), Integer.class);

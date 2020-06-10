@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,29 +41,25 @@ public class PerlHashSliceValue extends PerlParametrizedOperationValue {
     super(deserializer);
   }
 
-  @Nullable
   @Override
-  protected PerlContextType getContextType() {
+  protected @Nullable PerlContextType getContextType() {
     return PerlContextType.LIST;
   }
 
-  @NotNull
   @Override
-  protected PerlValue computeResolve(@NotNull PerlValue resolvedHashValue,
-                                     @NotNull PerlValue resolvedKeysValue,
-                                     @NotNull PerlValueResolver resolver) {
+  protected @NotNull PerlValue computeResolve(@NotNull PerlValue resolvedHashValue,
+                                              @NotNull PerlValue resolvedKeysValue,
+                                              @NotNull PerlValueResolver resolver) {
     return computeStrictResolve(resolvedHashValue, resolvedKeysValue);
   }
 
-  @NotNull
-  private static PerlValue computeStrictResolve(@NotNull PerlValue resolvedHashValue,
-                                                @NotNull PerlValue resolvedKeysValue) {
+  private static @NotNull PerlValue computeStrictResolve(@NotNull PerlValue resolvedHashValue,
+                                                         @NotNull PerlValue resolvedKeysValue) {
     return ObjectUtils.notNull(computeResolve(resolvedHashValue, resolvedKeysValue), UNKNOWN_VALUE);
   }
 
-  @Nullable
-  private static PerlValue computeResolve(@NotNull PerlValue resolvedHashValue,
-                                          @NotNull PerlValue resolvedKeysValue) {
+  private static @Nullable PerlValue computeResolve(@NotNull PerlValue resolvedHashValue,
+                                                    @NotNull PerlValue resolvedKeysValue) {
     if (!(resolvedHashValue instanceof PerlHashValue)) {
       return null;
     }
@@ -88,8 +84,7 @@ public class PerlHashSliceValue extends PerlParametrizedOperationValue {
     return "HashSlice: " + getBaseValue() + "{" + getParameter() + "}";
   }
 
-  @NotNull
-  public static PerlValue create(@NotNull PerlValue hashValue, @NotNull PerlValue keysValue) {
+  public static @NotNull PerlValue create(@NotNull PerlValue hashValue, @NotNull PerlValue keysValue) {
     if (hashValue.isDeterministic() && keysValue.isDeterministic()) {
       return PerlValuesBuilder.convert(hashValue, keysValue, PerlHashSliceValue::computeStrictResolve);
     }

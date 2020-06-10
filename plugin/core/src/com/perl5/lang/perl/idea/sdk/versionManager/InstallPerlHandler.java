@@ -37,10 +37,8 @@ import javax.swing.*;
 import java.util.List;
 
 public abstract class InstallPerlHandler {
-  @NotNull
-  private final String myVersionManagerPath;
-  @NotNull
-  private final PerlRealVersionManagerHandler<?, ?> myVersionManageHandler;
+  private final @NotNull String myVersionManagerPath;
+  private final @NotNull PerlRealVersionManagerHandler<?, ?> myVersionManageHandler;
 
   public InstallPerlHandler(@NotNull String versionManagerPath,
                             @NotNull PerlRealVersionManagerHandler<?, ?> versionManageHandler) {
@@ -99,34 +97,28 @@ public abstract class InstallPerlHandler {
     });
   }
 
-  @NotNull
-  public PerlRealVersionManagerHandler<?, ?> getVersionManageHandler() {
+  public @NotNull PerlRealVersionManagerHandler<?, ?> getVersionManageHandler() {
     return myVersionManageHandler;
   }
 
-  @NotNull
-  protected abstract String doCleanDistributionItem(@NotNull String rawItem);
+  protected abstract @NotNull String doCleanDistributionItem(@NotNull String rawItem);
 
   protected abstract boolean doIsInstalled(@NotNull String rawItem);
 
-  @NotNull
-  protected abstract PerlVersionManagerAdapter createAdapter(@NotNull String vmPath, @NotNull PerlHostData<?, ?> hostData);
+  protected abstract @NotNull PerlVersionManagerAdapter createAdapter(@NotNull String vmPath, @NotNull PerlHostData<?, ?> hostData);
 
-  @NotNull
-  protected abstract PerlInstallFormOptions createOptionsForm();
+  protected abstract @NotNull PerlInstallFormOptions createOptionsForm();
 
   protected int doCompareVersions(String a, String b) {
     return VersionComparatorUtil.compare(b, a);
   }
 
-  @Nullable
-  public Icon doGetIcon(@NotNull String distribution) {
+  public @Nullable Icon doGetIcon(@NotNull String distribution) {
     return PerlIcons.PERL_LANGUAGE_ICON;
   }
 
   private class MyDialog extends DialogWrapper implements PerlInstallForm.InstallFormHelper {
-    @NotNull
-    private PerlInstallForm myForm;
+    private @NotNull final PerlInstallForm myForm;
 
     public MyDialog(@Nullable Project project, @Nullable PerlInstallFormOptions optionsPanel, @NotNull List<String> distributions) {
       super(project, true, IdeModalityType.PROJECT);
@@ -152,9 +144,8 @@ public abstract class InstallPerlHandler {
       return doCompareVersions(o1, o2);
     }
 
-    @Nullable
     @Override
-    public Icon getIcon(@NotNull String distribution) {
+    public @Nullable Icon getIcon(@NotNull String distribution) {
       return doGetIcon(distribution);
     }
 
@@ -168,14 +159,12 @@ public abstract class InstallPerlHandler {
       return doIsInstalled(rawItem);
     }
 
-    @NotNull
-    public PerlInstallForm getForm() {
+    public @NotNull PerlInstallForm getForm() {
       return myForm;
     }
 
-    @Nullable
     @Override
-    protected JComponent createCenterPanel() {
+    protected @Nullable JComponent createCenterPanel() {
       return myForm.getRootPanel();
     }
   }

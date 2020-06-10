@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -186,15 +186,13 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements Perl
     myProject = project;
   }
 
-  @NotNull
   @Override
-  public Lexer getHighlightingLexer() {
+  public @NotNull Lexer getHighlightingLexer() {
     return new PerlHighlightingLexerAdapter(myProject);
   }
 
-  @NotNull
   @Override
-  public TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
+  public @NotNull TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
     // fixme unify this somehow
     if (tokenType.getLanguage() == PodLanguage.INSTANCE) {
       return PodSyntaxHighlighter.getPodHighlights(tokenType);
@@ -203,11 +201,11 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements Perl
     return pack(COLORS_MAP.get(tokenType));
   }
 
-  protected static void safeMap(@NotNull final IElementType type, @NotNull final TextAttributesKey value) {
+  protected static void safeMap(final @NotNull IElementType type, final @NotNull TextAttributesKey value) {
     safeMap(COLORS_MAP, type, value);
   }
 
-  protected static void safeMap(@NotNull final TokenSet tokens, @NotNull final TextAttributesKey value) {
+  protected static void safeMap(final @NotNull TokenSet tokens, final @NotNull TextAttributesKey value) {
     safeMap(COLORS_MAP, tokens, value);
   }
 

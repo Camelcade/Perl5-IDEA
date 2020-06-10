@@ -85,16 +85,11 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
   /**
    * Contains a bitmask of lines with comments not started with newline
    */
-  @NotNull
-  private final BitSet myCommentsLines;
-  @Nullable
-  private final Document myDocument;
-  @NotNull
-  private final CommonCodeStyleSettings mySettings;
-  @NotNull
-  private final PerlCodeStyleSettings myPerlSettings;
-  @NotNull
-  private final SpacingBuilder mySpacingBuilder;
+  private final @NotNull BitSet myCommentsLines;
+  private final @Nullable Document myDocument;
+  private final @NotNull CommonCodeStyleSettings mySettings;
+  private final @NotNull PerlCodeStyleSettings myPerlSettings;
+  private final @NotNull SpacingBuilder mySpacingBuilder;
   private final List<TextRange> myHeredocRangesList = new ArrayList<>();
 
   private static final MultiMap<IElementType, IElementType> OPERATOR_COLLISIONS_MAP = new MultiMap<>();
@@ -126,8 +121,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
    * registers an ASTNode in some internal structure if it's necessary.
    * e.g. comments, here-docs
    */
-  @NotNull
-  public ASTNode registerNode(@NotNull ASTNode node) {
+  public @NotNull ASTNode registerNode(@NotNull ASTNode node) {
     if (getDocument() == null) {
       return node;
     }
@@ -147,23 +141,19 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     return node;
   }
 
-  @NotNull
-  public CommonCodeStyleSettings getSettings() {
+  public @NotNull CommonCodeStyleSettings getSettings() {
     return mySettings;
   }
 
-  @NotNull
-  public PerlCodeStyleSettings getPerlSettings() {
+  public @NotNull PerlCodeStyleSettings getPerlSettings() {
     return myPerlSettings;
   }
 
-  @NotNull
-  public SpacingBuilder getSpacingBuilder() {
+  public @NotNull SpacingBuilder getSpacingBuilder() {
     return mySpacingBuilder;
   }
 
-  @Nullable
-  private Document getDocument() {
+  private @Nullable Document getDocument() {
     return myDocument;
   }
 
@@ -189,8 +179,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
   }
 
 
-  @Nullable
-  public Spacing getSpacing(@NotNull ASTBlock parent, @Nullable Block child1, @NotNull Block child2) {
+  public @Nullable Spacing getSpacing(@NotNull ASTBlock parent, @Nullable Block child1, @NotNull Block child2) {
     if (parent instanceof PerlSyntheticBlock) {
       parent = ((PerlSyntheticBlock)parent).getRealBlock();
     }
@@ -323,8 +312,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     return true;
   }
 
-  @Nullable
-  public Alignment getAlignment(@NotNull ASTNode childNode) {
+  public @Nullable Alignment getAlignment(@NotNull ASTNode childNode) {
     ASTNode parentNode = childNode.getTreeParent();
     IElementType parentNodeType = PsiUtilCore.getElementType(parentNode);
     IElementType childNodeType = PsiUtilCore.getElementType(childNode);
@@ -399,8 +387,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
    *
    * @param alignmentsMap map for caching line-based values
    */
-  @Nullable
-  private Alignment getLineBasedAlignment(@NotNull ASTNode childNode, @NotNull Map<Integer, Alignment> alignmentsMap) {
+  private @Nullable Alignment getLineBasedAlignment(@NotNull ASTNode childNode, @NotNull Map<Integer, Alignment> alignmentsMap) {
     int nodeLine = getNodeLine(childNode);
     if (nodeLine < 0) {
       return null;
@@ -420,14 +407,12 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     return alignment;
   }
 
-  @Nullable
-  private ASTNode getPrevNonSpaceNode(@NotNull ASTNode node) {
+  private @Nullable ASTNode getPrevNonSpaceNode(@NotNull ASTNode node) {
     ASTNode prevNode = node.getTreePrev();
     return PsiUtilCore.getElementType(prevNode) != TokenType.WHITE_SPACE ? prevNode : prevNode.getTreePrev();
   }
 
-  @Nullable
-  public Wrap getWrap(@NotNull ASTNode childNode) {
+  public @Nullable Wrap getWrap(@NotNull ASTNode childNode) {
     ASTNode parentNode = childNode.getTreeParent();
     IElementType parentNodeType = PsiUtilCore.getElementType(parentNode);
     IElementType childNodeType = PsiUtilCore.getElementType(childNode);
@@ -505,13 +490,11 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
            PsiUtilCore.getElementType(PerlPsiUtil.getPrevSignificantSibling(node.getPsi())) != COLON;
   }
 
-  @NotNull
-  private Wrap getWrapBySettings(@NotNull ASTNode parentNode, int settingsOption, boolean wrapFirst) {
+  private @NotNull Wrap getWrapBySettings(@NotNull ASTNode parentNode, int settingsOption, boolean wrapFirst) {
     return getWrap(parentNode, getWrapType(settingsOption), wrapFirst);
   }
 
-  @NotNull
-  private WrapType getWrapType(int settingsOption) {
+  private @NotNull WrapType getWrapType(int settingsOption) {
     if ((settingsOption & WRAP_ON_EVERY_ITEM) != 0) {
       return CHOP_DOWN_IF_LONG;
     }
@@ -524,18 +507,15 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     return NONE;
   }
 
-  @NotNull
-  private Wrap getWrap(@NotNull ASTNode parentNode, @NotNull WrapType type, boolean wrapFirst) {
+  private @NotNull Wrap getWrap(@NotNull ASTNode parentNode, @NotNull WrapType type, boolean wrapFirst) {
     return myWrapMap.computeIfAbsent(parentNode, key -> Wrap.createWrap(type, wrapFirst));
   }
 
-  @NotNull
-  public final ChildAttributes getChildAttributes(@NotNull PerlAstBlock block, int newChildIndex) {
+  public final @NotNull ChildAttributes getChildAttributes(@NotNull PerlAstBlock block, int newChildIndex) {
     return new ChildAttributes(getIndentProcessor().getChildIndent(block, newChildIndex), getChildAlignment(block, newChildIndex));
   }
 
-  @Nullable
-  public Alignment getChildAlignment(@NotNull PerlAstBlock block, int newChildIndex) {
+  public @Nullable Alignment getChildAlignment(@NotNull PerlAstBlock block, int newChildIndex) {
     ASTNode node = block.getNode();
     IElementType elementType = PsiUtilCore.getElementType(node);
     ASTNode parentNode = node == null ? null : node.getTreeParent();
@@ -580,8 +560,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     return null;
   }
 
-  @Nullable
-  public Boolean isIncomplete(@NotNull PerlAstBlock block) {
+  public @Nullable Boolean isIncomplete(@NotNull PerlAstBlock block) {
     ASTNode blockNode = block.getNode();
     if (blockNode == null) {
       return null;

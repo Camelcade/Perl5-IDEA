@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,22 +44,19 @@ public class HTMLMasonFlagsStatementElementType extends IStubElementType<HTMLMas
     return new HTMLMasonFlagsStatementImpl(stub, this);
   }
 
-  @NotNull
   @Override
-  public PsiElement getPsiElement(@NotNull ASTNode node) {
+  public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
     return new HTMLMasonFlagsStatementImpl(node);
   }
 
 
-  @NotNull
   @Override
-  public HTMLMasonFlagsStatementStub createStub(@NotNull HTMLMasonFlagsStatement psi, StubElement parentStub) {
+  public @NotNull HTMLMasonFlagsStatementStub createStub(@NotNull HTMLMasonFlagsStatement psi, StubElement parentStub) {
     return new HTMLMasonFlagsStatementStubImpl(parentStub, this, psi.getParentComponentPath());
   }
 
-  @NotNull
   @Override
-  public String getExternalId() {
+  public @NotNull String getExternalId() {
     return "HTML::Mason::" + super.toString();
   }
 
@@ -76,9 +73,8 @@ public class HTMLMasonFlagsStatementElementType extends IStubElementType<HTMLMas
     dataStream.writeName(parentComponentPath);
   }
 
-  @NotNull
   @Override
-  public HTMLMasonFlagsStatementStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
+  public @NotNull HTMLMasonFlagsStatementStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
     if (!dataStream.readBoolean()) {
       return new HTMLMasonFlagsStatementStubImpl(parentStub, this, HTMLMasonFlagsStatement.UNDEF_RESULT);
     }

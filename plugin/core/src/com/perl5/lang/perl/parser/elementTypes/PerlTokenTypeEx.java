@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,8 +35,7 @@ public class PerlTokenTypeEx extends PerlTokenType implements ILeafElementType {
     myInstanceFactory = createInstanceFactory(clazz);
   }
 
-  @NotNull
-  private static BiFunction<IElementType, CharSequence, ASTNode> createInstanceFactory(Class<? extends ASTNode> clazz) {
+  private static @NotNull BiFunction<IElementType, CharSequence, ASTNode> createInstanceFactory(Class<? extends ASTNode> clazz) {
     Constructor<? extends ASTNode> constructor;
     try {
       constructor = clazz.getDeclaredConstructor(IElementType.class, CharSequence.class);
@@ -56,9 +55,8 @@ public class PerlTokenTypeEx extends PerlTokenType implements ILeafElementType {
     };
   }
 
-  @NotNull
   @Override
-  public ASTNode createLeafNode(@NotNull CharSequence leafText) {
+  public @NotNull ASTNode createLeafNode(@NotNull CharSequence leafText) {
     return myInstanceFactory.apply(this, leafText);
   }
 }

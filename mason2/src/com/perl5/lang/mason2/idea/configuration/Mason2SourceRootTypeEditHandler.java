@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,21 +28,18 @@ public class Mason2SourceRootTypeEditHandler extends PerlTemplatesRootEditHandle
     super(Mason2SourceRootType.INSTANCE);
   }
 
-  @NotNull
   @Override
-  public String getRootTypeName() {
+  public @NotNull String getRootTypeName() {
     return MasonBundle.message("mason2.root.type");
   }
 
-  @NotNull
   @Override
-  public Icon getRootIcon() {
+  public @NotNull Icon getRootIcon() {
     return Mason2Icons.ROOT_ICON;
   }
 
-  @NotNull
   @Override
-  public String getUnmarkRootButtonText() {
+  public @NotNull String getUnmarkRootButtonText() {
     return MasonBundle.message("mason2.root.unmark");
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -59,9 +59,8 @@ public class PerlSubReferenceSimple extends PerlCachingReference<PsiElement> {
     super(element, textRange);
   }
 
-  @NotNull
   @Override
-  protected ResolveResult[] resolveInner(boolean incompleteCode) {
+  protected @NotNull ResolveResult[] resolveInner(boolean incompleteCode) {
     // fixme not dry with super resolver, need some generics fix
     PsiElement element = getElement();
     List<PsiElement> relatedItems = new ArrayList<>();
@@ -146,8 +145,7 @@ public class PerlSubReferenceSimple extends PerlCachingReference<PsiElement> {
     FLAGS |= FLAG_IMPORTED;
   }
 
-  @NotNull
-  public List<ResolveResult> getResolveResults(List<PsiElement> relatedItems) {
+  public @NotNull List<ResolveResult> getResolveResults(List<PsiElement> relatedItems) {
     List<ResolveResult> result = new ArrayList<>();
 
     resetFlags();

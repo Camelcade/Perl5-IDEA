@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,9 +40,8 @@ public class PerlMooseOverrideStatement extends PerlSubDefinitionBase implements
     super(stub, nodeType);
   }
 
-  @Nullable
   @Override
-  public PsiReference[] getReferences(PsiElement element) {
+  public @Nullable PsiReference[] getReferences(PsiElement element) {
     return PerlMoosePsiUtil.getModifiersNameReference(getExpr(), element);
   }
 
@@ -52,21 +51,18 @@ public class PerlMooseOverrideStatement extends PerlSubDefinitionBase implements
     return null;
   }
 
-  @Nullable
   @Override
-  protected PsiElement getSignatureContainer() {
+  protected @Nullable PsiElement getSignatureContainer() {
     return null;
   }
 
 
-  @Nullable
-  public PsiPerlExpr getExpr() {
+  public @Nullable PsiPerlExpr getExpr() {
     return findChildByClass(PsiPerlExpr.class);
   }
 
-  @Nullable
   @Override
-  public PsiElement getNameIdentifier() {
+  public @Nullable PsiElement getNameIdentifier() {
     PsiElement expr = getExpr();
 
     if (expr instanceof PsiPerlParenthesisedExpr) {

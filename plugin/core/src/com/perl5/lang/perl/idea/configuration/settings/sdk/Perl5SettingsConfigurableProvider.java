@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,16 +24,14 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class Perl5SettingsConfigurableProvider extends ConfigurableProvider {
-  @NotNull
-  private final Project myProject;
+  private final @NotNull Project myProject;
 
   public Perl5SettingsConfigurableProvider(@NotNull Project project) {
     myProject = project;
   }
 
-  @Nullable
   @Override
-  public Configurable createConfigurable() {
+  public @Nullable Configurable createConfigurable() {
     return new Perl5SettingsConfigurable(myProject);
   }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,8 +44,8 @@ public class PerlRunProfileState extends CommandLineState {
   }
 
   @Override
-  @NotNull
-  public final ExecutionResult execute(@NotNull final Executor executor, @NotNull final ProgramRunner runner) throws ExecutionException {
+  public final @NotNull ExecutionResult execute(final @NotNull Executor executor, final @NotNull ProgramRunner runner)
+    throws ExecutionException {
     return execute(executor);
   }
 
@@ -53,8 +53,7 @@ public class PerlRunProfileState extends CommandLineState {
    * Copy paste of {@link CommandLineState#execute(com.intellij.execution.Executor, com.intellij.execution.runners.ProgramRunner)} without
    * a runner argument
    */
-  @NotNull
-  public ExecutionResult execute(@NotNull final Executor executor) throws ExecutionException {
+  public @NotNull ExecutionResult execute(final @NotNull Executor executor) throws ExecutionException {
     final ProcessHandler processHandler = startProcess();
     final ConsoleView console = createConsole(executor);
     if (console != null) {
@@ -66,25 +65,22 @@ public class PerlRunProfileState extends CommandLineState {
       createActions(console, processHandler, executor));
   }
 
-  @NotNull
   @Override
-  protected ProcessHandler startProcess() throws ExecutionException {
+  protected @NotNull ProcessHandler startProcess() throws ExecutionException {
     return PerlHostData.createConsoleProcessHandler(createCommandLine());
   }
 
-  @NotNull
-  protected PerlCommandLine createCommandLine() throws ExecutionException {
+  protected @NotNull PerlCommandLine createCommandLine() throws ExecutionException {
     return ((GenericPerlRunConfiguration)getEnvironment().getRunProfile()).createCommandLine(this);
   }
 
-  @Nullable
   @Override
-  protected ConsoleView createConsole(@NotNull Executor executor) throws ExecutionException {
+  protected @Nullable ConsoleView createConsole(@NotNull Executor executor) throws ExecutionException {
     return ((GenericPerlRunConfiguration)getEnvironment().getRunProfile()).createConsole(this);
   }
 
-  @NotNull
-  public List<String> getAdditionalPerlParameters(@NotNull GenericPerlRunConfiguration perlRunConfiguration) throws ExecutionException {
+  public @NotNull List<String> getAdditionalPerlParameters(@NotNull GenericPerlRunConfiguration perlRunConfiguration)
+    throws ExecutionException {
     return Collections.emptyList();
   }
 

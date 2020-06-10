@@ -47,9 +47,8 @@ public class PodStubsTest extends PodLightTestCase {
   @Test
   public void testIndexedSectionContent_pod() {doTest();}
 
-  @NotNull
   @Override
-  protected String computeAnswerFileName(@NotNull String appendix) {
+  protected @NotNull String computeAnswerFileName(@NotNull String appendix) {
     return getTestName(true).replace('_', '.') + ".txt";
   }
 

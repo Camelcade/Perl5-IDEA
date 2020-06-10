@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,9 +34,8 @@ import org.jetbrains.annotations.Nullable;
 
 
 public class PerlTypeHierarchyProvider implements HierarchyProvider {
-  @Nullable
   @Override
-  public PsiElement getTarget(@NotNull DataContext dataContext) {
+  public @Nullable PsiElement getTarget(@NotNull DataContext dataContext) {
     PsiElement element = CommonDataKeys.PSI_ELEMENT.getData(dataContext);
     if (element == null) {
       final Editor editor = CommonDataKeys.EDITOR.getData(dataContext);
@@ -58,9 +57,8 @@ public class PerlTypeHierarchyProvider implements HierarchyProvider {
     return element;
   }
 
-  @NotNull
   @Override
-  public HierarchyBrowser createHierarchyBrowser(@NotNull PsiElement target) {
+  public @NotNull HierarchyBrowser createHierarchyBrowser(@NotNull PsiElement target) {
     return new PerlHierarchyBrowser(target);
   }
 

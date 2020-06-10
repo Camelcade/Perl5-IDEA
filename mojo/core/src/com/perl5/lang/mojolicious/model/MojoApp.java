@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,24 +29,21 @@ public class MojoApp extends MojoProject {
     super(root);
   }
 
-  @NotNull
   @Override
-  public Icon getIcon() {
+  public @NotNull Icon getIcon() {
     return MojoIcons.MOJO_APP_ICON;
   }
 
-  @NotNull
   @Override
-  public String getTypeName() {
+  public @NotNull String getTypeName() {
     return MojoBundle.message("mojo.app.type.name");
   }
 
   public static class NameValidator extends MojoProject.NameValidator {
     private static final Pattern NAME_PATTERN = Pattern.compile("^[A-Z](?:\\w|::)+$");
 
-    @NotNull
     @Override
-    protected Pattern getPattern() {
+    protected @NotNull Pattern getPattern() {
       return NAME_PATTERN;
     }
   }

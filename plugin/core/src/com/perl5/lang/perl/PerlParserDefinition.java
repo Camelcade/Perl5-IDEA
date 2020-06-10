@@ -63,33 +63,28 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes 
     PerlTokenSets.VARIABLE_NAMES,
     TokenSet.create(SUB_NAME, QUALIFYING_PACKAGE, PACKAGE, IDENTIFIER));
 
-  @NotNull
   @Override
-  public Lexer createLexer(Project project) {
+  public @NotNull Lexer createLexer(Project project) {
     return new PerlMergingLexerAdapter(project);
   }
 
   @Override
-  @NotNull
-  public TokenSet getWhitespaceTokens() {
+  public @NotNull TokenSet getWhitespaceTokens() {
     return WHITE_SPACES;
   }
 
   @Override
-  @NotNull
-  public TokenSet getCommentTokens() {
+  public @NotNull TokenSet getCommentTokens() {
     return COMMENTS;
   }
 
   @Override
-  @NotNull
-  public TokenSet getStringLiteralElements() {
+  public @NotNull TokenSet getStringLiteralElements() {
     return LITERALS;
   }
 
   @Override
-  @NotNull
-  public PsiParser createParser(final Project project) {
+  public @NotNull PsiParser createParser(final Project project) {
     return PerlParserImpl.INSTANCE;
   }
 
@@ -109,8 +104,7 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes 
   }
 
   @Override
-  @NotNull
-  public PsiElement createElement(ASTNode node) {
+  public @NotNull PsiElement createElement(ASTNode node) {
     try {
       return ((PsiElementProvider)node.getElementType()).getPsiElement(node);
     }

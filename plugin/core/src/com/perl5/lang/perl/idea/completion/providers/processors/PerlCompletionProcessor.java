@@ -80,13 +80,11 @@ public interface PerlCompletionProcessor {
 
   void addElement(@NotNull LookupElementBuilder lookupElement);
 
-  @NotNull
-  default PrefixMatcher getPrefixMatcher() {
+  default @NotNull PrefixMatcher getPrefixMatcher() {
     return getResultSet().getPrefixMatcher();
   }
 
-  @NotNull
-  default String getPrefix() {
+  default @NotNull String getPrefix() {
     return getPrefixMatcher().getPrefix();
   }
 }

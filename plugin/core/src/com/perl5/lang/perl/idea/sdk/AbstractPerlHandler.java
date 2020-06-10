@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,8 +24,7 @@ import org.jetbrains.annotations.Nullable;
 public abstract class AbstractPerlHandler<Data extends AbstractPerlData<Data, Handler>, Handler extends AbstractPerlHandler<Data, Handler>> {
   protected static final String ID_ATTRIBUTE = "id";
 
-  @NotNull
-  private final String myId;
+  private final @NotNull String myId;
 
   public AbstractPerlHandler(@NotNull PerlHandlerBean bean) {
     myId = bean.getKey();
@@ -34,29 +33,25 @@ public abstract class AbstractPerlHandler<Data extends AbstractPerlData<Data, Ha
   /**
    * @return new instance of the data, associated with this handler
    */
-  @NotNull
-  public abstract Data createData();
+  public abstract @NotNull Data createData();
 
   /**
    * @return unique ID of the handler. Id should be unique on the EP level. Meaning there can be HostHandler and ImplementationHandler with same id
    * @implSpec this id MUST be the same as {@code key} in plugin.xml
    */
-  @NotNull
-  public final String getId() {
+  public final @NotNull String getId() {
     return myId;
   }
 
   /**
    * @return name of the tag for this handler to serialize data in xml
    */
-  @NotNull
-  protected abstract String getTagName();
+  protected abstract @NotNull String getTagName();
 
   /**
    * @return {@link Data} loaded from the {@code element} or null if data is corrupted
    */
-  @Nullable
-  public final Data loadData(@NotNull Element element) {
+  public final @Nullable Data loadData(@NotNull Element element) {
     return doLoadData(element, createData());
   }
 
@@ -65,8 +60,7 @@ public abstract class AbstractPerlHandler<Data extends AbstractPerlData<Data, Ha
    *
    * @return {@code} data passed
    */
-  @Nullable
-  protected Data doLoadData(@NotNull Element element, @NotNull Data data) {
+  protected @Nullable Data doLoadData(@NotNull Element element, @NotNull Data data) {
     XmlSerializer.deserializeInto(data, element);
     return data;
   }

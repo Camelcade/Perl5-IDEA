@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,17 +21,15 @@ import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlSimpleValueResolver extends PerlValueResolver {
-  @NotNull
-  private final PsiElement myContextElement;
+  private final @NotNull PsiElement myContextElement;
 
   public PerlSimpleValueResolver(@NotNull PsiElement contextElement) {
     super(contextElement);
     myContextElement = contextElement;
   }
 
-  @NotNull
   @Override
-  protected PerlValue substitute(@NotNull PerlValue perlValue) {
+  protected @NotNull PerlValue substitute(@NotNull PerlValue perlValue) {
     if (perlValue == PerlValues.ARGUMENTS_VALUE) {
       return PerlValuesManager.intern(PerlArrayValue.create(PerlPackageUtil.getExpectedSelfValue(myContextElement)));
     }

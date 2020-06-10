@@ -33,9 +33,8 @@ class PerlBrewInstallPerlHandler extends InstallPerlHandler {
     super(versionManagerPath, versionManageHandler);
   }
 
-  @NotNull
   @Override
-  protected PerlInstallFormOptions createOptionsForm() {
+  protected @NotNull PerlInstallFormOptions createOptionsForm() {
     return new PerlBrewInstallPerlForm();
   }
 
@@ -48,21 +47,18 @@ class PerlBrewInstallPerlHandler extends InstallPerlHandler {
     return super.doCompareVersions(a, b);
   }
 
-  @Nullable
   @Override
-  public Icon doGetIcon(@NotNull String distribution) {
+  public @Nullable Icon doGetIcon(@NotNull String distribution) {
     return StringUtil.contains(distribution, "cperl") ? null : super.doGetIcon(distribution);
   }
 
-  @NotNull
   @Override
-  protected PerlVersionManagerAdapter createAdapter(@NotNull String vmPath, @NotNull PerlHostData<?, ?> hostData) {
+  protected @NotNull PerlVersionManagerAdapter createAdapter(@NotNull String vmPath, @NotNull PerlHostData<?, ?> hostData) {
     return new PerlBrewAdapter(vmPath, hostData);
   }
 
-  @NotNull
   @Override
-  protected String doCleanDistributionItem(@NotNull String rawItem) {
+  protected @NotNull String doCleanDistributionItem(@NotNull String rawItem) {
     return StringUtil.trimStart(rawItem, "i ").trim();
   }
 

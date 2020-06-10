@@ -62,8 +62,7 @@ public abstract class HTMLMasonStubBasedNamedElementImpl<T extends StubElement<?
     return this;
   }
 
-  @Nullable
-  protected abstract String getNameFromStub();
+  protected abstract @Nullable String getNameFromStub();
 
 
   @Override
@@ -80,9 +79,8 @@ public abstract class HTMLMasonStubBasedNamedElementImpl<T extends StubElement<?
     return super.getName();
   }
 
-  @Nullable
   @Override
-  public PsiElement getNameIdentifier() {
+  public @Nullable PsiElement getNameIdentifier() {
     PsiElement firstChild = getFirstChild();
     if (firstChild != null) {
       firstChild = PerlPsiUtil.getNextSignificantSibling(firstChild);
@@ -103,8 +101,7 @@ public abstract class HTMLMasonStubBasedNamedElementImpl<T extends StubElement<?
   }
 
 
-  @NotNull
-  public List<HTMLMasonCompositeElement> getArgsBlocks() {
+  public @NotNull List<HTMLMasonCompositeElement> getArgsBlocks() {
     StubElement<?> rootStub = getGreenStub();
 
     //noinspection Duplicates duplicates file implementation

@@ -33,17 +33,14 @@ import org.jetbrains.annotations.NotNull;
 import javax.swing.*;
 
 public abstract class PerlModuleBuilderBase<Settings extends PerlProjectGenerationSettings> extends ModuleBuilder {
-  @NotNull
-  private final AtomicNotNullLazyValue<PerlProjectGeneratorPeerBase<Settings>> myPeerProvider =
+  private final @NotNull AtomicNotNullLazyValue<PerlProjectGeneratorPeerBase<Settings>> myPeerProvider =
     AtomicNotNullLazyValue.createValue(() -> getGenerator().createPeer());
 
-  @NotNull
-  public final PerlProjectGeneratorPeerBase<Settings> getPeer() {
+  public final @NotNull PerlProjectGeneratorPeerBase<Settings> getPeer() {
     return myPeerProvider.getValue();
   }
 
-  @NotNull
-  public final Settings getSettings() {
+  public final @NotNull Settings getSettings() {
     return getPeer().getSettings();
   }
 
@@ -52,9 +49,8 @@ public abstract class PerlModuleBuilderBase<Settings extends PerlProjectGenerati
     return getGenerator().getLogo();
   }
 
-  @Nls(capitalization = Nls.Capitalization.Title)
   @Override
-  public final String getPresentableName() {
+  public final @Nls(capitalization = Nls.Capitalization.Title) String getPresentableName() {
     return getGenerator().getName();
   }
 
@@ -62,8 +58,7 @@ public abstract class PerlModuleBuilderBase<Settings extends PerlProjectGenerati
    * @return generator paired with this builder. All work is delegated to the generator and it's peer. This builder is just a wrapper
    * fixme this should just seek for existing generator, but seem they gonna be disabled for now
    */
-  @NotNull
-  protected abstract PerlProjectGeneratorBase<Settings> getGenerator();
+  protected abstract @NotNull PerlProjectGeneratorBase<Settings> getGenerator();
 
   @Override
   public ModuleType<?> getModuleType() {

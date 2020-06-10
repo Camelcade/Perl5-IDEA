@@ -64,13 +64,12 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
   );
 
 
-  @NotNull
   @Override
-  public Result beforeCharTyped(char c,
-                                @NotNull Project project,
-                                @NotNull Editor editor,
-                                @NotNull PsiFile file,
-                                @NotNull FileType fileType) {
+  public @NotNull Result beforeCharTyped(char c,
+                                         @NotNull Project project,
+                                         @NotNull Editor editor,
+                                         @NotNull PsiFile file,
+                                         @NotNull FileType fileType) {
     CaretModel caretModel = editor.getCaretModel();
     int currentOffset = caretModel.getOffset();
     Document document = editor.getDocument();
@@ -115,9 +114,8 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
     return Result.CONTINUE;
   }
 
-  @NotNull
   @Override
-  public Result charTyped(char typedChar, @NotNull Project project, @NotNull Editor editor, @NotNull PsiFile file) {
+  public @NotNull Result charTyped(char typedChar, @NotNull Project project, @NotNull Editor editor, @NotNull PsiFile file) {
     final int offset = editor.getCaretModel().getOffset() - 1;
     if (offset < 0) {
       return Result.CONTINUE;
@@ -211,8 +209,7 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
     }
   }
 
-  @Nullable
-  private Result tryToAddFatComma(@NotNull Editor editor, @NotNull PsiFile file, int offset) {
+  private @Nullable Result tryToAddFatComma(@NotNull Editor editor, @NotNull PsiFile file, int offset) {
     if (!Perl5CodeInsightSettings.getInstance().SMART_COMMA_SEQUENCE_TYPING) {
       return null;
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,16 +28,14 @@ public interface PerlReturnExpr extends PsiElement {
   /**
    * @return PsiElement representing return value, if any
    */
-  @Nullable
-  default PsiPerlExpr getReturnValueExpr() {
+  default @Nullable PsiPerlExpr getReturnValueExpr() {
     return PsiTreeUtil.getChildOfType(this, PsiPerlExpr.class);
   }
 
   /**
    * @return PsiElement we are returning from
    */
-  @NotNull
-  default PerlReturnScope getReturnScope() {
+  default @NotNull PerlReturnScope getReturnScope() {
     return Objects.requireNonNull(PsiTreeUtil.getParentOfType(this, PerlReturnScope.class));
   }
 }

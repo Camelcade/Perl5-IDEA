@@ -27,17 +27,14 @@ import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 
 class ReplaceWithExpressionQuickFix implements LocalQuickFix {
-  @NotNull
-  private final String myTargetKeyword;
+  private final @NotNull String myTargetKeyword;
 
   public ReplaceWithExpressionQuickFix(@NotNull String targetKeyword) {
     myTargetKeyword = targetKeyword;
   }
 
-  @Nls
-  @NotNull
   @Override
-  public String getFamilyName() {
+  public @Nls @NotNull String getFamilyName() {
     return PerlBundle.message("perl.inspection.loop.control.convert", myTargetKeyword);
   }
 

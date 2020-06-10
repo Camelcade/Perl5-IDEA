@@ -40,34 +40,25 @@ import java.util.*;
 
 public class PerlCommandLine extends GeneralCommandLine {
   private static final Logger LOG = Logger.getInstance(PerlCommandLine.class);
-  @Nullable
-  private Sdk mySdk;
+  private @Nullable Sdk mySdk;
 
-  @Nullable
-  private PerlHostData<?, ?> myHostData;
+  private @Nullable PerlHostData<?, ?> myHostData;
 
-  @Nullable
-  private PerlVersionManagerData<?, ?> myVersionManagerData;
+  private @Nullable PerlVersionManagerData<?, ?> myVersionManagerData;
 
   private boolean myUsePty = false;
 
-  @Nullable
-  private Project myProject;
+  private @Nullable Project myProject;
 
-  @Nullable
-  private Module myModule;
+  private @Nullable Module myModule;
 
-  @Nullable
-  private String myConsoleTitle;
+  private @Nullable String myConsoleTitle;
 
-  @Nullable
-  private Icon myConsoleIcon;
+  private @Nullable Icon myConsoleIcon;
 
-  @NotNull
-  private List<ProcessListener> myProcessListeners = Collections.emptyList();
+  private @NotNull List<ProcessListener> myProcessListeners = Collections.emptyList();
 
-  @NotNull
-  private Set<PortMapping> myPortMappings = Collections.emptySet();
+  private @NotNull Set<PortMapping> myPortMappings = Collections.emptySet();
 
   private boolean myWithMissingPackageListener = true;
 
@@ -111,60 +102,50 @@ public class PerlCommandLine extends GeneralCommandLine {
   /**
    * @see #isWithMissingPackageListener()
    */
-  @NotNull
-  public PerlCommandLine withMissingPackageListener(boolean withMissingPackageListener) {
+  public @NotNull PerlCommandLine withMissingPackageListener(boolean withMissingPackageListener) {
     myWithMissingPackageListener = withMissingPackageListener;
     return this;
   }
 
-  @NotNull
   @Override
-  public PerlCommandLine withEnvironment(@Nullable Map<String, String> environment) {
+  public @NotNull PerlCommandLine withEnvironment(@Nullable Map<String, String> environment) {
     return (PerlCommandLine)super.withEnvironment(environment);
   }
 
-  @NotNull
   @Override
-  public PerlCommandLine withEnvironment(@NotNull String key, @NotNull String value) {
+  public @NotNull PerlCommandLine withEnvironment(@NotNull String key, @NotNull String value) {
     return (PerlCommandLine)super.withEnvironment(key, value);
   }
 
-  @NotNull
   @Override
-  public PerlCommandLine withParameters(@NotNull String... parameters) {
+  public @NotNull PerlCommandLine withParameters(@NotNull String... parameters) {
     return (PerlCommandLine)super.withParameters(parameters);
   }
 
-  @NotNull
-  public PerlCommandLine withParameters(@NotNull Set<String> parameters) {
+  public @NotNull PerlCommandLine withParameters(@NotNull Set<String> parameters) {
     return withParameters(new ArrayList<>(parameters));
   }
 
-  @NotNull
   @Override
-  public PerlCommandLine withWorkDirectory(@Nullable String path) {
+  public @NotNull PerlCommandLine withWorkDirectory(@Nullable String path) {
     return (PerlCommandLine)super.withWorkDirectory(path);
   }
 
-  @NotNull
   @Override
-  public PerlCommandLine withWorkDirectory(@Nullable File workDirectory) {
+  public @NotNull PerlCommandLine withWorkDirectory(@Nullable File workDirectory) {
     return (PerlCommandLine)super.withWorkDirectory(workDirectory);
   }
 
-  @NotNull
   @Override
-  public PerlCommandLine withParameters(@NotNull List<String> parameters) {
+  public @NotNull PerlCommandLine withParameters(@NotNull List<String> parameters) {
     return (PerlCommandLine)super.withParameters(parameters);
   }
 
-  @Nullable
-  public Sdk getEffectiveSdk() {
+  public @Nullable Sdk getEffectiveSdk() {
     return mySdk != null ? mySdk : PerlProjectManager.getSdk(getEffectiveProject());
   }
 
-  @NotNull
-  public PerlCommandLine withSdk(@Nullable Sdk sdk) {
+  public @NotNull PerlCommandLine withSdk(@Nullable Sdk sdk) {
     mySdk = sdk;
     return this;
   }
@@ -172,13 +153,11 @@ public class PerlCommandLine extends GeneralCommandLine {
   /**
    * @return explicit data or data from sdk if any, null otherwise
    */
-  @Nullable
-  public PerlHostData<?, ?> getEffectiveHostData() {
+  public @Nullable PerlHostData<?, ?> getEffectiveHostData() {
     return myHostData == null ? PerlHostData.from(getEffectiveSdk()) : myHostData;
   }
 
-  @NotNull
-  public PerlCommandLine withHostData(@Nullable PerlHostData<?, ?> hostData) {
+  public @NotNull PerlCommandLine withHostData(@Nullable PerlHostData<?, ?> hostData) {
     myHostData = hostData;
     return this;
   }
@@ -186,30 +165,25 @@ public class PerlCommandLine extends GeneralCommandLine {
   /**
    * @return explicit data or data from sdk if any, null otherwise
    */
-  @Nullable
-  public PerlVersionManagerData<?, ?> getEffectiveVersionManagerData() {
+  public @Nullable PerlVersionManagerData<?, ?> getEffectiveVersionManagerData() {
     return myVersionManagerData == null ? PerlVersionManagerData.from(getEffectiveSdk()) : myVersionManagerData;
   }
 
-  @NotNull
-  public PerlCommandLine withVersionManagerData(@Nullable PerlVersionManagerData<?, ?> versionManagerData) {
+  public @NotNull PerlCommandLine withVersionManagerData(@Nullable PerlVersionManagerData<?, ?> versionManagerData) {
     myVersionManagerData = versionManagerData;
     return this;
   }
 
-  @Nullable
-  public String getConsoleTitle() {
+  public @Nullable String getConsoleTitle() {
     return myConsoleTitle;
   }
 
-  @NotNull
-  public PerlCommandLine withConsoleTitle(@Nullable String consoleTitle) {
+  public @NotNull PerlCommandLine withConsoleTitle(@Nullable String consoleTitle) {
     myConsoleTitle = consoleTitle;
     return this;
   }
 
-  @NotNull
-  public PerlCommandLine prependLineWith(@NotNull String... commands) {
+  public @NotNull PerlCommandLine prependLineWith(@NotNull String... commands) {
     ArrayList<String> commandsList = ContainerUtil.newArrayList(commands);
     commandsList.add(getExePath());
     setExePath(commandsList.remove(0));
@@ -220,21 +194,18 @@ public class PerlCommandLine extends GeneralCommandLine {
     return this;
   }
 
-  @NotNull
-  public List<ProcessListener> getProcessListeners() {
+  public @NotNull List<ProcessListener> getProcessListeners() {
     return Collections.unmodifiableList(myProcessListeners);
   }
 
-  @NotNull
-  public PerlCommandLine withProcessListener(@NotNull ProcessListener... listeners) {
+  public @NotNull PerlCommandLine withProcessListener(@NotNull ProcessListener... listeners) {
     myProcessListeners = new ArrayList<>(myProcessListeners);
     myProcessListeners.addAll(Arrays.asList(listeners));
     return this;
   }
 
-  @NotNull
   @Override
-  public PerlCommandLine withCharset(@NotNull Charset charset) {
+  public @NotNull PerlCommandLine withCharset(@NotNull Charset charset) {
     return (PerlCommandLine)super.withCharset(charset);
   }
 
@@ -242,69 +213,58 @@ public class PerlCommandLine extends GeneralCommandLine {
     return myUsePty;
   }
 
-  @NotNull
-  public PerlCommandLine withPty(boolean usePty) {
+  public @NotNull PerlCommandLine withPty(boolean usePty) {
     myUsePty = usePty;
     return this;
   }
 
-  @Nullable
-  public Project getEffectiveProject() {
+  public @Nullable Project getEffectiveProject() {
     return myProject != null ? myProject : ObjectUtils.doIfNotNull(getModule(), Module::getProject);
   }
 
-  @NotNull
-  public Project getNonNullEffectiveProject() {
+  public @NotNull Project getNonNullEffectiveProject() {
     return Objects.requireNonNull(getEffectiveProject());
   }
 
-  @NotNull
-  public PerlCommandLine withProject(@Nullable Project project) {
+  public @NotNull PerlCommandLine withProject(@Nullable Project project) {
     myProject = project;
     return this;
   }
 
-  @Nullable
-  public Module getModule() {
+  public @Nullable Module getModule() {
     return myModule;
   }
 
-  @NotNull
-  public PerlCommandLine withModule(@Nullable Module module) {
+  public @NotNull PerlCommandLine withModule(@Nullable Module module) {
     myModule = module;
     return this;
   }
 
-  @Nullable
-  public Icon getConsoleIcon() {
+  public @Nullable Icon getConsoleIcon() {
     return myConsoleIcon;
   }
 
-  @NotNull
-  public PerlCommandLine withConsoleIcon(@Nullable Icon consoleIcon) {
+  public @NotNull PerlCommandLine withConsoleIcon(@Nullable Icon consoleIcon) {
     myConsoleIcon = consoleIcon;
     return this;
   }
 
-  @NotNull
-  public Set<PortMapping> getPortMappings() {
+  public @NotNull Set<PortMapping> getPortMappings() {
     return Collections.unmodifiableSet(myPortMappings);
   }
 
   /**
    * Appends mappings of ports
    */
-  @NotNull
-  public PerlCommandLine withPortMappings(PortMapping... mappings) {
+  public @NotNull PerlCommandLine withPortMappings(PortMapping... mappings) {
     Set<PortMapping> newMappings = ContainerUtil.newHashSet(mappings);
     newMappings.addAll(myPortMappings);
     myPortMappings = newMappings;
     return this;
   }
 
-  @NotNull
   @Override
-  public Process createProcess() throws ExecutionException {
+  public @NotNull Process createProcess() throws ExecutionException {
     LOG.info("Executing: " + getCommandLineString());
     LOG.info("  environment: " + getEnvironment() + " (+" + getParentEnvironmentType() + ")");
     LOG.info("  working dir: " + getWorkDirectory());

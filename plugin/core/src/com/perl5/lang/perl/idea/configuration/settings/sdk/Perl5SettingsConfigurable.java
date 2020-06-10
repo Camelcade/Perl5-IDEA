@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,27 +36,23 @@ public class Perl5SettingsConfigurable extends ModuleAwareProjectConfigurable<Un
     super(project, PerlBundle.message("perl.perl5"), null);
   }
 
-  @NotNull
   @Override
-  protected UnnamedConfigurable createModuleConfigurable(Module module) {
+  protected @NotNull UnnamedConfigurable createModuleConfigurable(Module module) {
     return new Perl5ModuleConfigurable(module);
   }
 
-  @Nullable
   @Override
-  protected UnnamedConfigurable createProjectConfigurable() {
+  protected @Nullable UnnamedConfigurable createProjectConfigurable() {
     return new Perl5ProjectConfigurableWrapper(getProject());
   }
 
-  @NotNull
   @Override
-  protected String getProjectConfigurableItemName() {
+  protected @NotNull String getProjectConfigurableItemName() {
     return PerlBundle.message("perl.settings.project");
   }
 
-  @Nullable
   @Override
-  protected Icon getProjectConfigurableItemIcon() {
+  protected @Nullable Icon getProjectConfigurableItemIcon() {
     return AllIcons.General.GearPlain;
   }
 

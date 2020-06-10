@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,9 +51,8 @@ public class PerlLineBreakPointDescriptor {
     return condition;
   }
 
-  @Nullable
-  public static PerlLineBreakPointDescriptor createFromBreakpoint(XLineBreakpoint<PerlLineBreakpointProperties> breakpoint,
-                                                                  PerlDebugThread debugThread) {
+  public static @Nullable PerlLineBreakPointDescriptor createFromBreakpoint(XLineBreakpoint<PerlLineBreakpointProperties> breakpoint,
+                                                                            PerlDebugThread debugThread) {
     String fileUrl = breakpoint.getFileUrl();
 
     VirtualFile virtualFile = VirtualFileManager.getInstance().findFileByUrl(fileUrl);
@@ -85,9 +84,8 @@ public class PerlLineBreakPointDescriptor {
     return descriptor;
   }
 
-  @Nullable
-  public static PerlLineBreakPointDescriptor createRemoveFromBreakpoint(XLineBreakpoint<PerlLineBreakpointProperties> breakpoint,
-                                                                        PerlDebugThread debugThread) {
+  public static @Nullable PerlLineBreakPointDescriptor createRemoveFromBreakpoint(XLineBreakpoint<PerlLineBreakpointProperties> breakpoint,
+                                                                                  PerlDebugThread debugThread) {
     PerlLineBreakPointDescriptor descriptor = createFromBreakpoint(breakpoint, debugThread);
 
     if (descriptor != null) {
@@ -97,8 +95,7 @@ public class PerlLineBreakPointDescriptor {
     return descriptor;
   }
 
-  @Nullable
-  public static PerlLineBreakPointDescriptor createFromSourcePosition(XSourcePosition position, PerlDebugThread debugThread) {
+  public static @Nullable PerlLineBreakPointDescriptor createFromSourcePosition(XSourcePosition position, PerlDebugThread debugThread) {
     VirtualFile virtualFile = position.getFile();
     String virtualFilePath = virtualFile.getCanonicalPath();
     if (virtualFilePath == null) {

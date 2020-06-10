@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,78 +48,63 @@ public class PerlTokenHistory implements PerlElementTypes {
     }
   }
 
-  @Nullable
-  public PerlTokenHistoryElement getLastToken() {
+  public @Nullable PerlTokenHistoryElement getLastToken() {
     return myLastToken;
   }
 
-  @Nullable
-  public IElementType getLastTokenType() {
+  public @Nullable IElementType getLastTokenType() {
     return myLastToken == null ? null : myLastToken.getTokenType();
   }
 
-  @Nullable
-  public CharSequence getLastTokenText() {
+  public @Nullable CharSequence getLastTokenText() {
     return myLastToken == null ? null : myLastToken.getTokenText();
   }
 
-  @Nullable
-  public PerlTokenHistoryElement getLastSignificantToken() {
+  public @Nullable PerlTokenHistoryElement getLastSignificantToken() {
     return myLastSignificantToken;
   }
 
-  @Nullable
-  public IElementType getLastSignificantTokenType() {
+  public @Nullable IElementType getLastSignificantTokenType() {
     return myLastSignificantToken == null ? null : myLastSignificantToken.getTokenType();
   }
 
-  @Nullable
-  public CharSequence getLastSignificantTokenText() {
+  public @Nullable CharSequence getLastSignificantTokenText() {
     return myLastSignificantToken == null ? null : myLastSignificantToken.getTokenText();
   }
 
-  @Nullable
-  public PerlTokenHistoryElement getLastUnbracedToken() {
+  public @Nullable PerlTokenHistoryElement getLastUnbracedToken() {
     return myLastUnbracedToken;
   }
 
-  @Nullable
-  public IElementType getLastUnbracedTokenType() {
+  public @Nullable IElementType getLastUnbracedTokenType() {
     return myLastUnbracedToken == null ? null : myLastUnbracedToken.getTokenType();
   }
 
-  @Nullable
-  public CharSequence getLastUnbracedTokenText() {
+  public @Nullable CharSequence getLastUnbracedTokenText() {
     return myLastUnbracedToken == null ? null : myLastUnbracedToken.getTokenText();
   }
 
-  @Nullable
-  public PerlTokenHistoryElement getLastUnparenToken() {
+  public @Nullable PerlTokenHistoryElement getLastUnparenToken() {
     return myLastUnparenToken;
   }
 
-  @Nullable
-  public IElementType getLastUnparenTokenType() {
+  public @Nullable IElementType getLastUnparenTokenType() {
     return myLastUnparenToken == null ? null : myLastUnparenToken.getTokenType();
   }
 
-  @Nullable
-  public CharSequence getLastUnparenTokenText() {
+  public @Nullable CharSequence getLastUnparenTokenText() {
     return myLastUnparenToken == null ? null : myLastUnparenToken.getTokenText();
   }
 
-  @Nullable
-  public String getLastUnparenTokenTextAsString() {
+  public @Nullable String getLastUnparenTokenTextAsString() {
     return myLastUnparenToken == null ? null : myLastUnparenToken.getTokenTextAsString();
   }
 
-  @NotNull
-  public List<PerlTokenHistoryElement> getHistory() {
+  public @NotNull List<PerlTokenHistoryElement> getHistory() {
     return myHistory;
   }
 
-  @Nullable
-  public PerlTokenHistoryElement getPreviousToken(PerlTokenHistoryElement token) {
+  public @Nullable PerlTokenHistoryElement getPreviousToken(PerlTokenHistoryElement token) {
     int index = getHistory().lastIndexOf(token);
     if (index > 0) {
       return getHistory().get(index - 1);

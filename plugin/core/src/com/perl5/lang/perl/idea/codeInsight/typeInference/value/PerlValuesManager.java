@@ -132,8 +132,7 @@ public final class PerlValuesManager {
   /**
    * @return a value for {@code element} or {@link PerlValues#UNKNOWN_VALUE} if element is null/not valuable.
    */
-  @NotNull
-  public static PerlValue from(@Nullable PsiElement element) {
+  public static @NotNull PerlValue from(@Nullable PsiElement element) {
     if (element == null) {
       return UNKNOWN_VALUE;
     }
@@ -165,8 +164,7 @@ public final class PerlValuesManager {
       });
   }
 
-  @NotNull
-  private static PerlValue computeValue(@NotNull PsiElement element) {
+  private static @NotNull PerlValue computeValue(@NotNull PsiElement element) {
     if (element instanceof PerlVariableDeclarationExpr) {
       if (((PerlVariableDeclarationExpr)element).isParenthesized()) {
         return PerlArrayValue.builder().addPsiElements(Arrays.asList(element.getChildren())).build();
@@ -301,22 +299,20 @@ public final class PerlValuesManager {
     return UNKNOWN_VALUE;
   }
 
-  @NotNull
-  private static PerlValue createShiftPopValue(@NotNull PerlShiftPopExpr shiftPopExpr, @NotNull PerlValue indexValue){
+  private static @NotNull PerlValue createShiftPopValue(@NotNull PerlShiftPopExpr shiftPopExpr, @NotNull PerlValue indexValue) {
     return PerlArrayElementValue.create(createShiftPopArgumentValue(shiftPopExpr), indexValue);
   }
 
   /**
    * @return value of the argument for shift/pop operations before operation been performed
    */
-  @NotNull
-  public static PerlValue createShiftPopArgumentValue(@NotNull PerlShiftPopExpr shiftPopExpr) {
+  public static @NotNull PerlValue createShiftPopArgumentValue(@NotNull PerlShiftPopExpr shiftPopExpr) {
     PsiElement target = shiftPopExpr.getTarget();
     PerlValue targetValue;
-    if( target instanceof PerlBuiltInVariable){
+    if (target instanceof PerlBuiltInVariable) {
       targetValue = PerlResolveUtil.inferVariableValue((PerlBuiltInVariable)target, shiftPopExpr);
     }
-    else{
+    else {
       targetValue = from(target);
     }
     return targetValue;
@@ -325,8 +321,7 @@ public final class PerlValuesManager {
   /**
    * @return when {@code value} has list context, returns it. Wraps in array otherwise
    */
-  @NotNull
-  private static PerlValue listContext(@NotNull PerlValue value) {
+  private static @NotNull PerlValue listContext(@NotNull PerlValue value) {
     return value.getContextType() == PerlContextType.LIST ? value : PerlArrayValue.builder().addElement(value).build();
   }
 
@@ -346,9 +341,8 @@ public final class PerlValuesManager {
     return !isUnknown(type);
   }
 
-  @NotNull
-  public static PerlValue from(@NotNull PsiElement target,
-                               @Nullable PerlAssignExpression.PerlAssignValueDescriptor assignValueDescriptor) {
+  public static @NotNull PerlValue from(@NotNull PsiElement target,
+                                        @Nullable PerlAssignExpression.PerlAssignValueDescriptor assignValueDescriptor) {
     if (assignValueDescriptor == null) {
       return UNKNOWN_VALUE;
     }
@@ -380,16 +374,14 @@ public final class PerlValuesManager {
   /**
    * @return {@code value} wrapped with atomic producer
    */
-  @NotNull
-  public static AtomicNotNullLazyValue<PerlValue> lazy(@NotNull PerlValue value) {
+  public static @NotNull AtomicNotNullLazyValue<PerlValue> lazy(@NotNull PerlValue value) {
     return value.isUnknown() ? UNKNOWN_VALUE_PROVIDER : AtomicNotNullLazyValue.createValue(() -> value);
   }
 
   /**
    * @return lazy-computable value for the {@code element}
    */
-  @NotNull
-  public static AtomicNotNullLazyValue<PerlValue> lazy(@Nullable PsiElement element) {
+  public static @NotNull AtomicNotNullLazyValue<PerlValue> lazy(@Nullable PsiElement element) {
     if (element == null) {
       return UNKNOWN_VALUE_PROVIDER;
     }

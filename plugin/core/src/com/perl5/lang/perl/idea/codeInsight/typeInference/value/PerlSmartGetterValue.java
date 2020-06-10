@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,19 +37,18 @@ public class PerlSmartGetterValue extends PerlOperationValue {
     super(deserializer);
   }
 
-  @NotNull
   @Override
-  protected PerlValue computeResolve(@NotNull PerlValue resolvedRealValue, @NotNull PerlValueResolver resolver) {
+  protected @NotNull PerlValue computeResolve(@NotNull PerlValue resolvedRealValue, @NotNull PerlValueResolver resolver) {
     LOG.assertTrue(resolver instanceof PerlSubValueResolver);
     PerlValue resolvedArguments = resolver.resolve(PerlValues.ARGUMENTS_VALUE);
-    if(!(resolvedArguments instanceof PerlArrayValue)){
+    if (!(resolvedArguments instanceof PerlArrayValue)) {
       return UNKNOWN_VALUE;
     }
     List<PerlValue> argumentElements = ((PerlArrayValue)resolvedArguments).getElements();
-    if( argumentElements.isEmpty()){
+    if (argumentElements.isEmpty()) {
       return UNKNOWN_VALUE;
     }
-    return argumentElements.size() == 1 ? resolvedRealValue: argumentElements.get(0);
+    return argumentElements.size() == 1 ? resolvedRealValue : argumentElements.get(0);
   }
 
   @Override

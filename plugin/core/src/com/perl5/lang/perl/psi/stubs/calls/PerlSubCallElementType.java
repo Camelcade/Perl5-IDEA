@@ -36,11 +36,10 @@ public class PerlSubCallElementType extends PerlPolyNamedElementType<PerlSubCall
     super(debugName);
   }
 
-  @NotNull
   @Override
-  protected PerlSubCallElementStub createStub(@NotNull PerlSubCallElement element,
-                                              StubElement<?> parentStub,
-                                              @NotNull List<StubElement<?>> lightElementsStubs) {
+  protected @NotNull PerlSubCallElementStub createStub(@NotNull PerlSubCallElement element,
+                                                       StubElement<?> parentStub,
+                                                       @NotNull List<StubElement<?>> lightElementsStubs) {
     return new PerlSubCallElementStub(parentStub,
                                       this,
                                       lightElementsStubs,
@@ -48,18 +47,16 @@ public class PerlSubCallElementType extends PerlPolyNamedElementType<PerlSubCall
                                       Objects.requireNonNull(element.getCallData()));
   }
 
-  @NotNull
   @Override
-  protected PerlSubCallElementStub deserialize(@NotNull StubInputStream dataStream,
-                                               StubElement<?> parentStub,
-                                               @NotNull List<StubElement<?>> lightElementsStubs) throws IOException {
+  protected @NotNull PerlSubCallElementStub deserialize(@NotNull StubInputStream dataStream,
+                                                        StubElement<?> parentStub,
+                                                        @NotNull List<StubElement<?>> lightElementsStubs) throws IOException {
     String subName = Objects.requireNonNull(dataStream.readNameString());
     PerlSubCallHandler<?> provider = getProvider(subName);
     return new PerlSubCallElementStub(parentStub, this, lightElementsStubs, subName, provider.deserialize(dataStream));
   }
 
-  @NotNull
-  private PerlSubCallHandler<?> getProvider(String subName) {
+  private @NotNull PerlSubCallHandler<?> getProvider(String subName) {
     return Objects.requireNonNull(PerlSubCallHandler.getHandler(subName),
                                   "Unable to find call handler for " + subName);
   }
@@ -75,9 +72,8 @@ public class PerlSubCallElementType extends PerlPolyNamedElementType<PerlSubCall
     return new PsiPerlSubCallImpl(stub, this);
   }
 
-  @NotNull
   @Override
-  public PsiElement getPsiElement(@NotNull ASTNode node) {
+  public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
     return new PsiPerlSubCallImpl(node);
   }
 }

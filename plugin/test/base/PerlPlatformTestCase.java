@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -69,9 +69,8 @@ public abstract class PerlPlatformTestCase extends PlatformTestCase {
     };
   private final Disposable myPerlLightTestCaseDisposable = Disposer.newDisposable();
 
-  @NotNull
   @Override
-  protected Module doCreateRealModule(@NotNull String moduleName) {
+  protected @NotNull Module doCreateRealModule(@NotNull String moduleName) {
     Module module = super.doCreateRealModule(moduleName);
     try {
       VirtualFile moduleRoot = getProject().getBaseDir().createChildDirectory(this, moduleName);
@@ -83,8 +82,7 @@ public abstract class PerlPlatformTestCase extends PlatformTestCase {
     return module;
   }
 
-  @NotNull
-  protected VirtualFile getMainContentRoot() {
+  protected @NotNull VirtualFile getMainContentRoot() {
     return ModuleRootManager.getInstance(getModule()).getContentRoots()[0];
   }
 
@@ -133,13 +131,11 @@ public abstract class PerlPlatformTestCase extends PlatformTestCase {
     PerlRunUtil.refreshSdkDirs(sdk, getProject());
   }
 
-  @Nullable
-  protected Sdk getSdk() {
+  protected @Nullable Sdk getSdk() {
     return PerlProjectManager.getSdk(getModule());
   }
 
-  @NotNull
-  protected String getPerl526DistibutionId(@Nullable String libraryName) {
+  protected @NotNull String getPerl526DistibutionId(@Nullable String libraryName) {
     return StringUtil.isEmpty(libraryName) ? PERL_526 : PERL_526 + MOJO_LIB_SEPARATOR + libraryName;
   }
 
@@ -169,14 +165,12 @@ public abstract class PerlPlatformTestCase extends PlatformTestCase {
     Assume.assumeTrue(getPerlbrewFile() != null);
   }
 
-  @NotNull
-  protected static String getPerlbrewPath() {
+  protected static @NotNull String getPerlbrewPath() {
     assumePerlbrewAvailable();
     return Objects.requireNonNull(getPerlbrewFile()).getPath();
   }
 
-  @Nullable
-  protected static File getPerlbrewFile() {
+  protected static @Nullable File getPerlbrewFile() {
     String perlbrewHome = FileUtil.expandUserHome(PERLBREW_HOME);
     File perlbrewFile = new File(perlbrewHome);
     return perlbrewFile.exists() ? perlbrewFile : null;

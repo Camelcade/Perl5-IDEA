@@ -49,15 +49,13 @@ public class PodFormatterX extends PodStubBasedTitledSection implements PodForma
   public void renderElementAsText(StringBuilder builder, PodRenderingContext context) {
   }
 
-  @Nullable
   @Override
-  public PsiElement getTitleElement() {
+  public @Nullable PsiElement getTitleElement() {
     return getContentBlock();
   }
 
-  @Nullable
   @Override
-  public String getPodLink() {
+  public @Nullable String getPodLink() {
     return PodRenderUtil.getPodLinkForElement(this);
   }
 
@@ -71,9 +69,8 @@ public class PodFormatterX extends PodStubBasedTitledSection implements PodForma
     return super.getName();
   }
 
-  @Nullable
   @Override
-  public PsiElement getNameIdentifier() {
+  public @Nullable PsiElement getNameIdentifier() {
     return getTitleElement();
   }
 
@@ -100,8 +97,7 @@ public class PodFormatterX extends PodStubBasedTitledSection implements PodForma
   /**
    * @return a real target of this index. Outer item, heading or file.
    */
-  @Nullable
-  public PsiElement getIndexTarget() {
+  public @Nullable PsiElement getIndexTarget() {
     PodSectionStub stub = getStub();
     if (stub != null) {
       StubElement<?> parentStub = stub.getParentStub();

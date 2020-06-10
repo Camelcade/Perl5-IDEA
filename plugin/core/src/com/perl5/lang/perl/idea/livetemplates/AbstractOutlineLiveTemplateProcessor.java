@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,14 +46,12 @@ public abstract class AbstractOutlineLiveTemplateProcessor implements TemplateOp
   /**
    * Returns base language of the file, could take from psiFile though
    */
-  @NotNull
-  protected abstract Language getMyLanguage();
+  protected abstract @NotNull Language getMyLanguage();
 
   /**
    * Returns outline marker text to insert
    */
-  @NotNull
-  protected abstract String getOutlineMarker();
+  protected abstract @NotNull String getOutlineMarker();
 
   /**
    * Attempts to find an outline marker by the first psi element in the line.
@@ -61,12 +59,10 @@ public abstract class AbstractOutlineLiveTemplateProcessor implements TemplateOp
    * @param firstElement first element of the line
    * @return outline marker or null if not found
    */
-  @Nullable
-  protected abstract PsiElement getOutlineElement(PsiElement firstElement);
+  protected abstract @Nullable PsiElement getOutlineElement(PsiElement firstElement);
 
-  @Nls
   @Override
-  public String getOptionName() {
+  public @Nls String getOptionName() {
     return "Please report a bug";
   }
 

@@ -35,9 +35,9 @@ public class PerlCoverageProfileState extends PerlRunProfileState {
     super(environment);
   }
 
-  @NotNull
   @Override
-  public List<String> getAdditionalPerlParameters(@NotNull GenericPerlRunConfiguration perlRunConfiguration) throws ExecutionException {
+  public @NotNull List<String> getAdditionalPerlParameters(@NotNull GenericPerlRunConfiguration perlRunConfiguration)
+    throws ExecutionException {
     String coverageBasePath =
       CoverageEnabledConfiguration.getOrCreate((GenericPerlRunConfiguration)getEnvironment().getRunProfile()).getCoverageFilePath();
 

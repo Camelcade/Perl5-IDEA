@@ -39,15 +39,12 @@ public class PerlDelegatingLightNamedElement<Delegate extends PerlPolyNamedEleme
   implements PsiNameIdentifierOwner {
   public static final Function<String, String> DEFAULT_NAME_COMPUTATION = name -> name;
 
-  @NotNull
-  protected String myName;
-  @Nullable
-  private PsiElement myNameIdentifier;
+  protected @NotNull String myName;
+  private @Nullable PsiElement myNameIdentifier;
 
   private boolean myIsImplicit = false;
 
-  @NotNull
-  private Function<String, String> myNameComputation = DEFAULT_NAME_COMPUTATION;
+  private @NotNull Function<String, String> myNameComputation = DEFAULT_NAME_COMPUTATION;
 
   public PerlDelegatingLightNamedElement(@NotNull Delegate delegate,
                                          @NotNull String name,
@@ -64,9 +61,8 @@ public class PerlDelegatingLightNamedElement<Delegate extends PerlPolyNamedEleme
     myNameIdentifier = nameIdentifier;
   }
 
-  @NotNull
   @Override
-  public String getName() {
+  public @NotNull String getName() {
     return myName;
   }
 
@@ -80,9 +76,8 @@ public class PerlDelegatingLightNamedElement<Delegate extends PerlPolyNamedEleme
     return this;
   }
 
-  @Nullable
   @Override
-  public PsiElement getNameIdentifier() {
+  public @Nullable PsiElement getNameIdentifier() {
     if (myIsImplicit) {
       return null;
     }
@@ -117,8 +112,7 @@ public class PerlDelegatingLightNamedElement<Delegate extends PerlPolyNamedEleme
     return this;
   }
 
-  @NotNull
-  public Function<String, String> getNameComputation() {
+  public @NotNull Function<String, String> getNameComputation() {
     return myNameComputation;
   }
 
@@ -141,9 +135,8 @@ public class PerlDelegatingLightNamedElement<Delegate extends PerlPolyNamedEleme
     myIsImplicit = implicit;
   }
 
-  @NotNull
   @Override
-  public PsiElement getNavigationElement() {
+  public @NotNull PsiElement getNavigationElement() {
     return myIsImplicit ? getDelegate() : Objects.requireNonNull(getNameIdentifier());
   }
 
@@ -200,9 +193,8 @@ public class PerlDelegatingLightNamedElement<Delegate extends PerlPolyNamedEleme
     }
   }
 
-  @NotNull
   @Override
-  public PsiElement[] getChildren() {
+  public @NotNull PsiElement[] getChildren() {
     return super.getChildren();
   }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -53,8 +53,7 @@ public abstract class PerlImplicitDeclarationsProvider {
    * @return path to XML resource with entities description or null if there is no one
    * @see PerlImplicitDeclarationsService#readSubs(java.lang.ClassLoader, java.lang.String)
    */
-  @Nullable
-  protected abstract String getDataFileName();
+  protected abstract @Nullable String getDataFileName();
 
   /**
    * Registers implicit entities with project-level {@link PerlImplicitDeclarationsService}
@@ -141,8 +140,7 @@ public abstract class PerlImplicitDeclarationsProvider {
     declarationsService.registerSub(subDefinition);
   }
 
-  @NotNull
-  private List<PerlSubArgument> readArguments(@Nullable Element argumentsElement, @NotNull String subName) {
+  private @NotNull List<PerlSubArgument> readArguments(@Nullable Element argumentsElement, @NotNull String subName) {
     if (argumentsElement == null) {
       return Collections.emptyList();
     }
@@ -168,8 +166,7 @@ public abstract class PerlImplicitDeclarationsProvider {
     return result;
   }
 
-  @Nullable
-  private PerlSubArgument readArgument(@NotNull Element element, boolean isOptional, String subName) {
+  private @Nullable PerlSubArgument readArgument(@NotNull Element element, boolean isOptional, String subName) {
     String variableName = element.getAttributeValue("name");
     if (StringUtil.isEmpty(variableName)) {
       LOG.warn("Missing argument name for " + subName);

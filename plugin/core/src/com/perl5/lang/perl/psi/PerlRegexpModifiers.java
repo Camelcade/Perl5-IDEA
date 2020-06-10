@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,8 +56,7 @@ public class PerlRegexpModifiers {
 
   private static final PerlRegexpModifiers EMPTY_MODIFIERS = new PerlRegexpModifiers();
 
-  @NotNull
-  private final BitSet myModifiers = new BitSet();
+  private final @NotNull BitSet myModifiers = new BitSet();
 
   private PerlRegexpModifiers() {
   }
@@ -235,9 +234,8 @@ public class PerlRegexpModifiers {
    * @return a model of regexp modifiers from {@code element} or null if {@code element} is not a {@link PerlElementTypesGenerated#PERL_REGEX_MODIFIERS}
    * if passed {@code element} is null, we return {@link #EMPTY_MODIFIERS}
    */
-  @Nullable
   @Contract("null -> null")
-  public static PerlRegexpModifiers create(@Nullable PsiElement element) {
+  public static @Nullable PerlRegexpModifiers create(@Nullable PsiElement element) {
     if (element == null) {
       return EMPTY_MODIFIERS;
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,9 +42,8 @@ public class PerlCoverageSuite extends BaseCoverageSuite {
     super(name, fileProvider, lastCoverageTimeStamp, coverageByTestEnabled, tracingEnabled, trackTestFolders, coverageRunner, project);
   }
 
-  @NotNull
   @Override
-  public GenericPerlRunConfiguration getConfiguration() {
+  public @NotNull GenericPerlRunConfiguration getConfiguration() {
     return Objects.requireNonNull((GenericPerlRunConfiguration)super.getConfiguration());
   }
 
@@ -56,9 +55,8 @@ public class PerlCoverageSuite extends BaseCoverageSuite {
     super.setConfiguration(configuration);
   }
 
-  @NotNull
   @Override
-  public CoverageEngine getCoverageEngine() {
+  public @NotNull CoverageEngine getCoverageEngine() {
     return PerlCoverageEngine.getInstance();
   }
 }

@@ -49,9 +49,7 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
   @Attribute("distribution-id")
   private String myDistributionId;
 
-  @Transient
-  @Nullable
-  private PerlWslFileSystem myFileSystem;
+  @Transient private @Nullable PerlWslFileSystem myFileSystem;
 
   @Transient
   private final PerlWslFileTransfer myFileTransfer = new PerlWslFileTransfer(this);
@@ -69,15 +67,13 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
     myDistributionId = distributionId;
   }
 
-  @Nullable
   @Override
-  public String getSecondaryShortName() {
+  public @Nullable String getSecondaryShortName() {
     return "[" + myDistributionId.toLowerCase() + "]";
   }
 
   @Override
-  @Nullable
-  public synchronized PerlHostVirtualFileSystem getFileSystem(@NotNull Disposable disposable) {
+  public synchronized @Nullable PerlHostVirtualFileSystem getFileSystem(@NotNull Disposable disposable) {
     if (myFileSystem == null) {
       WSLDistributionWithRoot distribution = getDistribution();
       if (distribution == null) {
@@ -115,9 +111,8 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
     throw new IOException("No distribution for " + myDistributionId);
   }
 
-  @NotNull
   @Override
-  public String getHelpersRootPath() {
+  public @NotNull String getHelpersRootPath() {
     WSLDistributionWithRoot distribution = getDistribution();
     if (distribution == null) {
       throw new RuntimeException("No distribution for " + myDistributionId);
@@ -125,15 +120,13 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
     return Objects.requireNonNull(distribution.getWslPath(PerlPluginUtil.getPluginHelpersRoot()));
   }
 
-  @NotNull
   @Override
-  public PerlOsHandler getOsHandler() {
+  public @NotNull PerlOsHandler getOsHandler() {
     return getHandler().getOsHandler();
   }
 
-  @NotNull
   @Override
-  public String getLocalCacheRoot() {
+  public @NotNull String getLocalCacheRoot() {
     String cachesPath = PerlPluginUtil.getRemotesCachePath();
     File cacheRoot = new File(cachesPath, "wsl_" + getDistributionId());
     FileUtil.createDirectory(cacheRoot);
@@ -152,9 +145,8 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
     return distribution.getWindowsPath(remotePathName) != null;
   }
 
-  @Nullable
   @Override
-  public String doGetLocalPath(@NotNull String remotePathName) {
+  public @Nullable String doGetLocalPath(@NotNull String remotePathName) {
     WSLDistributionWithRoot distribution = getDistribution();
     if (distribution == null) {
       LOG.warn("Distribution unavailable: " + myDistributionId);
@@ -164,9 +156,8 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
     return windowsPath != null ? windowsPath : FileUtil.toSystemDependentName(new File(getLocalCacheRoot(), remotePathName).getPath());
   }
 
-  @Nullable
   @Override
-  public String doGetRemotePath(@NotNull String localPathName) {
+  public @Nullable String doGetRemotePath(@NotNull String localPathName) {
     WSLDistributionWithRoot distribution = getDistribution();
     if (distribution == null) {
       LOG.error(PerlWslBundle.message("perl.host.handler.distribution.unavailable", myDistributionId));
@@ -176,9 +167,8 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
   }
 
 
-  @Nullable
   @Override
-  public File findFileByName(@NotNull String fileName) {
+  public @Nullable File findFileByName(@NotNull String fileName) {
     WSLDistributionWithRoot distribution = getDistribution();
     if (distribution == null) {
       return null;
@@ -195,9 +185,8 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
     }
   }
 
-  @NotNull
   @Override
-  protected Process createProcess(@NotNull PerlCommandLine commandLine) throws ExecutionException {
+  protected @NotNull Process createProcess(@NotNull PerlCommandLine commandLine) throws ExecutionException {
     return patchCommandLine(commandLine).createProcess();
   }
 
@@ -215,15 +204,13 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
       false);
   }
 
-  @NotNull
   @Override
-  public PerlHostFileTransfer<PerlWslData> getFileTransfer() {
+  public @NotNull PerlHostFileTransfer<PerlWslData> getFileTransfer() {
     return myFileTransfer;
   }
 
-  @NotNull
   @Override
-  protected PerlWslData self() {
+  protected @NotNull PerlWslData self() {
     return this;
   }
 }

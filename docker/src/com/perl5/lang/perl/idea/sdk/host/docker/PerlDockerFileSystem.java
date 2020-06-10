@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,8 +36,7 @@ class PerlDockerFileSystem extends PerlPluggableVirtualFileSystem {
 
   private final Map<String, VirtualFile> myFiles = ContainerUtil.newConcurrentMap();
 
-  @NotNull
-  private final PerlDockerFileTransfer myTransfer;
+  private final @NotNull PerlDockerFileTransfer myTransfer;
 
 
   private PerlDockerFileSystem(@NotNull PerlDockerData dockerData) {
@@ -48,9 +47,8 @@ class PerlDockerFileSystem extends PerlPluggableVirtualFileSystem {
     myTransfer = fileTransfer;
   }
 
-  @Nullable
   @Override
-  public VirtualFile findFileByPath(@NotNull String path) {
+  public @Nullable VirtualFile findFileByPath(@NotNull String path) {
     return myFiles.computeIfAbsent(FileUtil.toSystemIndependentName(path), it -> {
       if (it.equals("/")) {
         return new PerlDockerVirtualFile(PerlFileDescriptor.ROOT_DESCRIPTOR);
@@ -70,14 +68,12 @@ class PerlDockerFileSystem extends PerlPluggableVirtualFileSystem {
     });
   }
 
-  @NotNull
-  private List<PerlFileDescriptor> listFiles(@NotNull String path) throws IOException {
+  private @NotNull List<PerlFileDescriptor> listFiles(@NotNull String path) throws IOException {
     return myTransfer.getAdapter().listFiles(myTransfer.getContainerName(), FileUtil.toSystemIndependentName(path));
   }
 
-  @Nullable
   @Override
-  public VirtualFile refreshAndFindFileByPath(@NotNull String path) {
+  public @Nullable VirtualFile refreshAndFindFileByPath(@NotNull String path) {
     return findFileByPath(path);
   }
 
@@ -99,17 +95,15 @@ class PerlDockerFileSystem extends PerlPluggableVirtualFileSystem {
   }
 
   private class PerlDockerVirtualFile extends PerlPluggableVirtualFile {
-    @NotNull
-    private final PerlFileDescriptor myDescriptor;
+    private final @NotNull PerlFileDescriptor myDescriptor;
     private VirtualFile[] myChildren;
 
     public PerlDockerVirtualFile(@NotNull PerlFileDescriptor descriptor) {
       myDescriptor = descriptor;
     }
 
-    @NotNull
     @Override
-    public String getPath() {
+    public @NotNull String getPath() {
       return myDescriptor.getPath();
     }
 
@@ -128,9 +122,8 @@ class PerlDockerFileSystem extends PerlPluggableVirtualFileSystem {
         it -> new PerlDockerVirtualFile(Objects.requireNonNull(myDescriptor.getParentDescriptor())));
     }
 
-    @NotNull
     @Override
-    public String getName() {
+    public @NotNull String getName() {
       return myDescriptor.getName();
     }
 

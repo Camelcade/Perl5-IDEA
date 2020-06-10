@@ -34,22 +34,19 @@ public class PerlRunConfigurationType extends ConfigurationTypeBase {
     super("#PerlConfigurationType", "Perl", "Runs perl5 scripts", PerlIcons.PERL_LANGUAGE_ICON);
 
     addFactory(new ConfigurationFactory(this) {
-      @NotNull
       @Override
-      public String getId() {
+      public @NotNull String getId() {
         return "Perl";
       }
 
-      @NotNull
       @Override
-      public RunConfiguration createTemplateConfiguration(@NotNull Project project) {
+      public @NotNull RunConfiguration createTemplateConfiguration(@NotNull Project project) {
         return new PerlRunConfiguration(project, this, "Unnamed");
       }
     });
   }
 
-  @NotNull
-  public static PerlRunConfigurationType getInstance() {
+  public static @NotNull PerlRunConfigurationType getInstance() {
     return Objects.requireNonNull(CONFIGURATION_TYPE_EP.findExtension(PerlRunConfigurationType.class));
   }
 }

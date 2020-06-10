@@ -53,15 +53,13 @@ public class PerlSubDefinitionElementType extends IStubElementType<PerlSubDefini
     return new PsiPerlSubDefinitionImpl(stub, this);
   }
 
-  @NotNull
   @Override
-  public PsiElement getPsiElement(@NotNull ASTNode node) {
+  public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
     return new PsiPerlSubDefinitionImpl(node);
   }
 
-  @NotNull
   @Override
-  public PerlSubDefinitionStub createStub(@NotNull PerlSubDefinitionElement psi, StubElement parentStub) {
+  public @NotNull PerlSubDefinitionStub createStub(@NotNull PerlSubDefinitionElement psi, StubElement parentStub) {
     return createStubElement(parentStub,
                              psi.getNamespaceName(),
                              psi.getSubName(),
@@ -71,9 +69,8 @@ public class PerlSubDefinitionElementType extends IStubElementType<PerlSubDefini
   }
 
 
-  @NotNull
   @Override
-  public String getExternalId() {
+  public @NotNull String getExternalId() {
     return "perl." + super.toString();
   }
 
@@ -116,9 +113,8 @@ public class PerlSubDefinitionElementType extends IStubElementType<PerlSubDefini
     stub.getReturnValueFromCode().serialize(dataStream);
   }
 
-  @NotNull
   @Override
-  public PerlSubDefinitionStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
+  public @NotNull PerlSubDefinitionStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
     //noinspection ConstantConditions
     String packageName = dataStream.readName().getString();
     //noinspection ConstantConditions
@@ -134,8 +130,7 @@ public class PerlSubDefinitionElementType extends IStubElementType<PerlSubDefini
     return createStubElement(parentStub, packageName, functionName, arguments, PerlValuesManager.readValue(dataStream), annotations);
   }
 
-  @NotNull
-  protected PerlSubDefinitionStub createStubElement(
+  protected @NotNull PerlSubDefinitionStub createStubElement(
     StubElement<?> parentStub,
     String packageName,
     String functionName,

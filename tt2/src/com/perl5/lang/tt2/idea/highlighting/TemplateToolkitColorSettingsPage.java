@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,21 +44,18 @@ public class TemplateToolkitColorSettingsPage implements ColorSettingsPage {
     new AttributesDescriptor("Strings, double quoted", TemplateToolkitSyntaxHighlighter.TT2_DQ_STRING_KEY),
   };
 
-  @Nullable
   @Override
-  public Icon getIcon() {
+  public @Nullable Icon getIcon() {
     return TemplateToolkitIcons.TTK2_ICON;
   }
 
-  @NotNull
   @Override
-  public SyntaxHighlighter getHighlighter() {
+  public @NotNull SyntaxHighlighter getHighlighter() {
     return new TemplateToolkitSyntaxHighlighter(null);
   }
 
-  @NotNull
   @Override
-  public String getDemoText() {
+  public @NotNull String getDemoText() {
     return "%% <kw>SET</kw> <id>somekey</id> <op>=</op> <sqs>'single quoted string'</sqs>\n" +
            "[% <kw>SET</kw> <id>somekey</id> <op>=</op> <dqs>\"double quoted string\"</dqs> %]\n" +
            "[% <kw>SET</kw> <id>somekey</id> <op>=</op> 42 %]\n" +
@@ -67,9 +64,8 @@ public class TemplateToolkitColorSettingsPage implements ColorSettingsPage {
            "[%# block comment  %]\n";
   }
 
-  @Nullable
   @Override
-  public Map<String, TextAttributesKey> getAdditionalHighlightingTagToDescriptorMap() {
+  public @Nullable Map<String, TextAttributesKey> getAdditionalHighlightingTagToDescriptorMap() {
     //noinspection unchecked
     return ContainerUtil.newHashMap(
       Pair.create("kw", TemplateToolkitSyntaxHighlighter.TT2_KEYWORD_KEY),
@@ -80,21 +76,18 @@ public class TemplateToolkitColorSettingsPage implements ColorSettingsPage {
     );
   }
 
-  @NotNull
   @Override
-  public AttributesDescriptor[] getAttributeDescriptors() {
+  public @NotNull AttributesDescriptor[] getAttributeDescriptors() {
     return DESCRIPTORS;
   }
 
-  @NotNull
   @Override
-  public ColorDescriptor[] getColorDescriptors() {
+  public @NotNull ColorDescriptor[] getColorDescriptors() {
     return ColorDescriptor.EMPTY_ARRAY;
   }
 
-  @NotNull
   @Override
-  public String getDisplayName() {
+  public @NotNull String getDisplayName() {
     return TemplateToolkitLanguage.NAME;
   }
 }

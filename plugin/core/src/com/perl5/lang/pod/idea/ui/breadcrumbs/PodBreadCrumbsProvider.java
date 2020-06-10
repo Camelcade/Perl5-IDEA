@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,20 +42,17 @@ public class PodBreadCrumbsProvider implements BreadcrumbsProvider {
            !(element instanceof PodSectionItem && ((PodSectionItem)element).isBulleted());
   }
 
-  @Nullable
   @Override
-  public Icon getElementIcon(@NotNull PsiElement element) {
+  public @Nullable Icon getElementIcon(@NotNull PsiElement element) {
     return element.getIcon(0);
   }
 
-  @Nullable
   @Override
-  public PsiElement getParent(@NotNull PsiElement element) {
+  public @Nullable PsiElement getParent(@NotNull PsiElement element) {
     return getStructuralParentElement(element);
   }
 
-  @Nullable
-  public static PsiElement getStructuralParentElement(@NotNull PsiElement element) {
+  public static @Nullable PsiElement getStructuralParentElement(@NotNull PsiElement element) {
     PodTitledSection parentSection = PsiTreeUtil.getParentOfType(element, PodTitledSection.class);
     if (parentSection == null) {
       return null;
@@ -67,9 +64,8 @@ public class PodBreadCrumbsProvider implements BreadcrumbsProvider {
     return parentSection;
   }
 
-  @NotNull
   @Override
-  public String getElementInfo(@NotNull PsiElement element) {
+  public @NotNull String getElementInfo(@NotNull PsiElement element) {
     if (element instanceof PodTitledSection) {
       return Objects.requireNonNull(((PodTitledSection)element).getTitleText());
     }

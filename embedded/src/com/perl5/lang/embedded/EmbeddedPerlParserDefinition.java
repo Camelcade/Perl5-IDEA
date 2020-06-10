@@ -40,15 +40,13 @@ public class EmbeddedPerlParserDefinition extends PerlParserDefinition implement
                                                            EMBED_MARKER_CLOSE
                                                          ));
 
-  @NotNull
   @Override
-  public TokenSet getCommentTokens() {
+  public @NotNull TokenSet getCommentTokens() {
     return COMMENTS;
   }
 
-  @NotNull
   @Override
-  public Lexer createLexer(Project project) {
+  public @NotNull Lexer createLexer(Project project) {
     return new EmbeddedPerlLexerAdapter(project);
   }
 

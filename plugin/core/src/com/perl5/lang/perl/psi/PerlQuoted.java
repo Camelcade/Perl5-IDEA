@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,8 +28,7 @@ public interface PerlQuoted extends PsiElement {
   /**
    * @return open quote element if any
    */
-  @Nullable
-  default PsiElement getOpenQuoteElement() {
+  default @Nullable PsiElement getOpenQuoteElement() {
     PsiElement run = getFirstChild();
 
     while (run != null) {
@@ -56,8 +55,7 @@ public interface PerlQuoted extends PsiElement {
   /**
    * @return close quote element if any
    */
-  @Nullable
-  default PsiElement getCloseQuoteElement() {
+  default @Nullable PsiElement getCloseQuoteElement() {
     PsiElement lastChild = getLastChild();
     return lastChild != null && PerlParserUtil.CLOSE_QUOTES.contains(PsiUtilCore.getElementType(lastChild)) ? lastChild : null;
   }

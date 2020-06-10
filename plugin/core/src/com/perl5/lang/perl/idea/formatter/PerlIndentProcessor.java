@@ -62,8 +62,7 @@ public class PerlIndentProcessor implements PerlElementTypes {
     return PerlFormattingTokenSets.UNINDENTABLE_TOKENS;
   }
 
-  @NotNull
-  public Indent getNodeIndent(@NotNull ASTNode node) {
+  public @NotNull Indent getNodeIndent(@NotNull ASTNode node) {
     IElementType nodeType = node.getElementType();
     ASTNode parent = node.getTreeParent();
     ASTNode grandParent = parent != null ? parent.getTreeParent() : null;
@@ -163,8 +162,7 @@ public class PerlIndentProcessor implements PerlElementTypes {
     return forceFirstIndent ? Indent.getContinuationIndent() : Indent.getContinuationWithoutFirstIndent();
   }
 
-  @Nullable
-  public Indent getChildIndent(@NotNull PerlAstBlock block, int newChildIndex) {
+  public @Nullable Indent getChildIndent(@NotNull PerlAstBlock block, int newChildIndex) {
     ASTNode node = block.getNode();
     IElementType elementType = PsiUtilCore.getElementType(node);
     ASTNode parentNode = node == null ? null : node.getTreeParent();

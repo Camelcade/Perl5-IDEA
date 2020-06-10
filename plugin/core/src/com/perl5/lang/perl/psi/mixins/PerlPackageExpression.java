@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,9 +30,8 @@ public abstract class PerlPackageExpression extends PsiPerlExprImpl implements P
     super(node);
   }
 
-  @NotNull
   @Override
-  public PerlValue computePerlValue() {
+  public @NotNull PerlValue computePerlValue() {
     String elementText = getText();
     return PerlPackageUtil.__PACKAGE__.equals(elementText)
            ? PerlPackageUtil.getContextType(this)

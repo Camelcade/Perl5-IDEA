@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,10 +23,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class PerlIterateInstruction extends InstructionImpl {
-  @Nullable
-  private final PsiElement myTargetElement;
-  @Nullable
-  private final PsiElement mySourceElement;
+  private final @Nullable PsiElement myTargetElement;
+  private final @Nullable PsiElement mySourceElement;
 
   public PerlIterateInstruction(@NotNull ControlFlowBuilder builder,
                                 @Nullable PsiElement element,
@@ -37,19 +35,16 @@ public class PerlIterateInstruction extends InstructionImpl {
     mySourceElement = sourceElement;
   }
 
-  @Nullable
-  public PsiElement getTargetElement() {
+  public @Nullable PsiElement getTargetElement() {
     return myTargetElement;
   }
 
-  @Nullable
-  public PsiElement getSourceElement() {
+  public @Nullable PsiElement getSourceElement() {
     return mySourceElement;
   }
 
-  @NotNull
   @Override
-  public String getElementPresentation() {
+  public @NotNull String getElementPresentation() {
     return "iterate " + mySourceElement + " using " + myTargetElement;
   }
 }

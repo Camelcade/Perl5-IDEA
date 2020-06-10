@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,9 +35,8 @@ public class PerlNamespaceFileReference extends PerlCachingReference<PerlNamespa
     return myElement.getCanonicalName();
   }
 
-  @NotNull
   @Override
-  protected ResolveResult[] resolveInner(boolean incompleteCode) {
+  protected @NotNull ResolveResult[] resolveInner(boolean incompleteCode) {
     PerlNamespaceElement myElement = getElement();
     PsiFile file = myElement.getContainingFile();
     PsiFile targetFile;

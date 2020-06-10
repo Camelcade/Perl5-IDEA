@@ -102,8 +102,7 @@ public interface PerlSub extends PerlDeprecatable, PerlPackageMember {
    * @param arguments      invocation arguments
    * @return type of return value if can be calculated, or {@link PerlValues#UNKNOWN_VALUE}
    */
-  @NotNull
-  default PerlValue getReturnValue() {
+  default @NotNull PerlValue getReturnValue() {
     PerlValue valueFromCode = getReturnValueFromCode();
     PerlValue annotationsValue = getReturnValueFromAnnotations();
     if (valueFromCode.isUnknown()) {
@@ -115,13 +114,11 @@ public interface PerlSub extends PerlDeprecatable, PerlPackageMember {
     return PerlOneOfValue.builder().addVariant(valueFromCode).addVariant(annotationsValue).build();
   }
 
-  @NotNull
-  default PerlValue getReturnValueFromCode() {
+  default @NotNull PerlValue getReturnValueFromCode() {
     return UNKNOWN_VALUE;
   }
 
-  @NotNull
-  default PerlValue getReturnValueFromAnnotations() {
+  default @NotNull PerlValue getReturnValueFromAnnotations() {
     PerlSubAnnotations subAnnotations = getAnnotations();
     if (subAnnotations == null) {
       return UNKNOWN_VALUE;

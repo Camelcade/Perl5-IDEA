@@ -75,9 +75,8 @@ public class PerlSdkType extends SdkType {
     }
   }
 
-  @NotNull
   @Override
-  public PerlSdkAdditionalData loadAdditionalData(@NotNull Element additional) {
+  public @NotNull PerlSdkAdditionalData loadAdditionalData(@NotNull Element additional) {
     return PerlSdkAdditionalData.load(additional);
   }
 
@@ -192,34 +191,29 @@ public class PerlSdkType extends SdkType {
   }
 
 
-  @Nullable
   @Override
-  public String suggestHomePath() {
+  public @Nullable String suggestHomePath() {
     throw new RuntimeException("unsupported");
   }
 
-  @Nullable
   @Override
-  public AdditionalDataConfigurable createAdditionalDataConfigurable(@NotNull SdkModel sdkModel,
-                                                                     @NotNull SdkModificator sdkModificator) {
+  public @Nullable AdditionalDataConfigurable createAdditionalDataConfigurable(@NotNull SdkModel sdkModel,
+                                                                               @NotNull SdkModificator sdkModificator) {
     return null;
   }
 
-  @NotNull
   @Override
-  public String getPresentableName() {
+  public @NotNull String getPresentableName() {
     return PerlBundle.message("perl.config.interpreter.title");
   }
 
-  @NotNull
   @Override
-  public String suggestSdkName(String currentSdkName, String sdkHome) {
+  public @NotNull String suggestSdkName(String currentSdkName, String sdkHome) {
     throw new RuntimeException("Should not be invoked");
   }
 
-  @Nullable
   @Override
-  public String getVersionString(@NotNull Sdk sdk) {
+  public @Nullable String getVersionString(@NotNull Sdk sdk) {
     return ObjectUtils.doIfNotNull(
       getPerlVersionDescriptor(PerlProjectManager.getInterpreterPath(sdk),
                                PerlHostData.notNullFrom(sdk),
@@ -227,8 +221,7 @@ public class PerlSdkType extends SdkType {
       VersionDescriptor::getVersionString);
   }
 
-  @NotNull
-  private static List<String> computeIncPaths(@NotNull Sdk sdk) {
+  private static @NotNull List<String> computeIncPaths(@NotNull Sdk sdk) {
     return ContainerUtil.filter(PerlRunUtil.getOutputFromPerl(sdk, PerlRunUtil.PERL_LE, "print for @INC"), it -> !".".equals(it));
   }
 
@@ -237,9 +230,8 @@ public class PerlSdkType extends SdkType {
     throw new RuntimeException("Unsupported");
   }
 
-  @NotNull
   @Override
-  public String adjustSelectedSdkHome(@NotNull String homePath) {
+  public @NotNull String adjustSelectedSdkHome(@NotNull String homePath) {
     File file = new File(homePath);
     if (file.isDirectory()) {
       return homePath;
@@ -248,8 +240,7 @@ public class PerlSdkType extends SdkType {
     return parentFile != null && parentFile.isDirectory() ? parentFile.getPath() : homePath;
   }
 
-  @NotNull
-  public String getPerlExecutableName() {
+  public @NotNull String getPerlExecutableName() {
     return SystemInfo.isWindows ? "perl.exe" : "perl";
   }
 
@@ -258,26 +249,23 @@ public class PerlSdkType extends SdkType {
     return PerlIcons.PERL_LANGUAGE_ICON;
   }
 
-  @NotNull
   @Override
-  public Icon getIconForAddAction() {
+  public @NotNull Icon getIconForAddAction() {
     return getIcon();
   }
 
-  @NotNull
-  private static String suggestSdkName(@Nullable VersionDescriptor descriptor,
-                                       @NotNull PerlHostData<?, ?> hostData,
-                                       @NotNull PerlVersionManagerData<?, ?> versionManagerData) {
+  private static @NotNull String suggestSdkName(@Nullable VersionDescriptor descriptor,
+                                                @NotNull PerlHostData<?, ?> hostData,
+                                                @NotNull PerlVersionManagerData<?, ?> versionManagerData) {
     return StringUtil.capitalize(hostData.getShortName()) + ", " +
            StringUtil.capitalize(versionManagerData.getShortName()) + ": " +
            "Perl" + (descriptor == null ? "" : " " + descriptor.version);
   }
 
   @Contract("null, _,_->null")
-  @Nullable
-  public static VersionDescriptor getPerlVersionDescriptor(@Nullable String interpreterPath,
-                                                           @NotNull PerlHostData<?, ?> hostData,
-                                                           @NotNull PerlVersionManagerData<?, ?> versionManagerData) {
+  public static @Nullable VersionDescriptor getPerlVersionDescriptor(@Nullable String interpreterPath,
+                                                                     @NotNull PerlHostData<?, ?> hostData,
+                                                                     @NotNull PerlVersionManagerData<?, ?> versionManagerData) {
     if (StringUtil.isEmpty(interpreterPath)) {
       return null;
     }
@@ -291,9 +279,9 @@ public class PerlSdkType extends SdkType {
   /**
    * @deprecated use {@link #INSTANCE} instead
    */
-  @Deprecated // use INSTANCE instead
-  @NotNull
-  public static PerlSdkType getInstance() {
+  // use INSTANCE instead
+  @Deprecated
+  public static @NotNull PerlSdkType getInstance() {
     return INSTANCE;
   }
 
@@ -351,8 +339,7 @@ public class PerlSdkType extends SdkType {
     private String version;
     private String platform;
 
-    @Nullable
-    private static VersionDescriptor create(@NotNull List<String> perlResponse) {
+    private static @Nullable VersionDescriptor create(@NotNull List<String> perlResponse) {
       if (perlResponse.size() != 3 || !StringUtil.equals("perl", perlResponse.get(0))) {
         LOG.warn("Got inappropriate response from perl: " + StringUtil.join(perlResponse, "\n"));
         return null;
@@ -364,8 +351,7 @@ public class PerlSdkType extends SdkType {
       return result;
     }
 
-    @NotNull
-    public String getVersionString() {
+    public @NotNull String getVersionString() {
       return PerlBundle.message("perl.version.string", version, platform);
     }
   }

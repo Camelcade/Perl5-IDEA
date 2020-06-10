@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -55,27 +55,23 @@ public class PodSyntaxHighlighter extends SyntaxHighlighterBase {
     safeMap(ATTRIBUTES_MAP, PodTokenSets.POD_FORMATTERS_TOKENSET, POD_FORMATTER_TAG_KEY);
   }
 
-  @Nullable
-  private final Project myProject;
+  private final @Nullable Project myProject;
 
   public PodSyntaxHighlighter(@Nullable Project project) {
     myProject = project;
   }
 
-  @NotNull
   @Override
-  public Lexer getHighlightingLexer() {
+  public @NotNull Lexer getHighlightingLexer() {
     return new PodLexerAdapter(myProject);
   }
 
-  @NotNull
   @Override
-  public TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
+  public @NotNull TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
     return getPodHighlights(tokenType);
   }
 
-  @NotNull
-  public static TextAttributesKey[] getPodHighlights(IElementType tokenType) {
+  public static @NotNull TextAttributesKey[] getPodHighlights(IElementType tokenType) {
     return pack(POD_TEXT_KEY, ATTRIBUTES_MAP.get(tokenType));
   }
 }

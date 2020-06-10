@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -145,8 +145,7 @@ public abstract class PodTemplateContextType extends TemplateContextType impleme
       return super.isInContext(element) && PsiTreeUtil.getParentOfType(element, PodOverSectionContent.class) != null;
     }
 
-    @Nullable
-    protected PodSectionItem getFirstSectionItem(PsiElement element) {
+    protected @Nullable PodSectionItem getFirstSectionItem(PsiElement element) {
       PodOverSectionContent sectionContent = PsiTreeUtil.getParentOfType(element, PodOverSectionContent.class);
       return sectionContent == null ? null : sectionContent.getFirstItem();
     }

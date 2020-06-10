@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,15 +35,13 @@ public class Mason2TemplatingParserDefinition extends Mason2ParserDefinition {
     return COMPONENT_FILE;
   }
 
-  @NotNull
   @Override
-  public Lexer createLexer(Project project) {
+  public @NotNull Lexer createLexer(Project project) {
     return new Mason2TemplatingLexerAdapter(project);
   }
 
-  @NotNull
   @Override
-  public PsiParser createParser(Project project) {
+  public @NotNull PsiParser createParser(Project project) {
     return new Mason2TemplatingParserImpl();
   }
 

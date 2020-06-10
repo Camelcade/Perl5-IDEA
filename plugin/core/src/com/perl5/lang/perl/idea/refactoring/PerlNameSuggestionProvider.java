@@ -142,20 +142,18 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
   }
 
 
-  @Nullable
   @Override
-  public SuggestedNameInfo getSuggestedNames(@Nullable PsiElement targetElement,
-                                             @Nullable PsiElement contextElement,
-                                             @NotNull Set<String> result) {
+  public @Nullable SuggestedNameInfo getSuggestedNames(@Nullable PsiElement targetElement,
+                                                       @Nullable PsiElement contextElement,
+                                                       @NotNull Set<String> result) {
     suggestAndAddRecommendedName(targetElement, contextElement, result);
     return SuggestedNameInfo.NULL_INFO;
   }
 
   @Contract("null, _, _ -> null")
-  @Nullable
-  private String suggestAndAddRecommendedName(@Nullable PsiElement targetElement,
-                                              @Nullable PsiElement contextElement,
-                                              @NotNull Set<String> result) {
+  private @Nullable String suggestAndAddRecommendedName(@Nullable PsiElement targetElement,
+                                                        @Nullable PsiElement contextElement,
+                                                        @NotNull Set<String> result) {
     if (targetElement == null || !targetElement.getLanguage().isKindOf(PerlLanguage.INSTANCE)) {
       return null;
     }
@@ -194,10 +192,9 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
    * Attempts for figure out a variable name from {@code declaration} and/or {@code contextElement}. Adds suggestions to the {@code result}
    * and return recommended name if any
    */
-  @Nullable
-  private String suggestAndAddRecommendedName(@NotNull PerlVariableDeclarationElement declaration,
-                                              @Nullable PsiElement contextElement,
-                                              @NotNull Set<String> result) {
+  private @Nullable String suggestAndAddRecommendedName(@NotNull PerlVariableDeclarationElement declaration,
+                                                        @Nullable PsiElement contextElement,
+                                                        @NotNull Set<String> result) {
     PerlAssignExpression assignmentExpression = PerlAssignExpression.getAssignmentExpression(declaration);
     if (assignmentExpression == null) {
       return null;
@@ -215,8 +212,7 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
     return suggestAndAddRecommendedName(elements.get(0), result);
   }
 
-  @Nullable
-  private String suggestAndAddRecommendedName(@Nullable PsiElement expression, @NotNull Set<String> result) {
+  private @Nullable String suggestAndAddRecommendedName(@Nullable PsiElement expression, @NotNull Set<String> result) {
     if (expression instanceof PsiPerlParenthesisedExpr) {
       return suggestAndAddRecommendedName(((PsiPerlParenthesisedExpr)expression).getExpr(), result);
     }
@@ -399,9 +395,8 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
     return STRING;
   }
 
-  @Nullable
   @Contract("null->null")
-  private static String getBaseName(@Nullable PsiElement element) {
+  private static @Nullable String getBaseName(@Nullable PsiElement element) {
     if (element == null) {
       return null;
     }
@@ -466,12 +461,11 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
    * @param recommendation base recommendation name
    * @return recommended name
    */
-  @NotNull
-  private static String suggestNamesForElements(@Nullable PsiElement baseExpr,
-                                                boolean derefBase,
-                                                @Nullable PsiElement indexExpr,
-                                                @NotNull Set<String> result,
-                                                @NotNull String recommendation) {
+  private static @NotNull String suggestNamesForElements(@Nullable PsiElement baseExpr,
+                                                         boolean derefBase,
+                                                         @Nullable PsiElement indexExpr,
+                                                         @NotNull Set<String> result,
+                                                         @NotNull String recommendation) {
     String singularName = null;
     String baseExprName = getBaseName(baseExpr);
     if (derefBase) {
@@ -508,17 +502,15 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
     return recommendation;
   }
 
-  @NotNull
-  private static Collection<String> getVariantsFromEntityValueNamespaces(@Nullable PerlValuableEntity valuableEntity) {
+  private static @NotNull Collection<String> getVariantsFromEntityValueNamespaces(@Nullable PerlValuableEntity valuableEntity) {
     if (valuableEntity == null) {
       return Collections.emptyList();
     }
     return getVariantsFromPerlValueNamespaces(valuableEntity, PerlValuesManager.from(valuableEntity));
   }
 
-  @NotNull
-  private static Collection<String> getVariantsFromPerlValueNamespaces(@NotNull PerlValuableEntity valuableEntity,
-                                                                       @Nullable PerlValue perlValue) {
+  private static @NotNull Collection<String> getVariantsFromPerlValueNamespaces(@NotNull PerlValuableEntity valuableEntity,
+                                                                                @Nullable PerlValue perlValue) {
     if (PerlValuesManager.isUnknown(perlValue)) {
       return Collections.emptyList();
     }
@@ -527,8 +519,7 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
     return result;
   }
 
-  @NotNull
-  private static List<String> getVariantsFromNamespaceName(@Nullable String packageName) {
+  private static @NotNull List<String> getVariantsFromNamespaceName(@Nullable String packageName) {
     if (StringUtil.isEmptyOrSpaces(packageName)) {
       return Collections.emptyList();
     }
@@ -545,8 +536,7 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
     return result;
   }
 
-  @NotNull
-  private static List<String> getVariantsFromPath(@NotNull String pathName) {
+  private static @NotNull List<String> getVariantsFromPath(@NotNull String pathName) {
     File file = new File(pathName);
     String fileName = file.getName();
     if (StringUtil.isEmptyOrSpaces(fileName)) {
@@ -575,18 +565,16 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
   /**
    * Fills {@code result} with names suggested for the {@code targetElement} and returns the recommended name
    */
-  @NotNull
-  public static String getRecommendedName(@NotNull PsiElement expression,
-                                          @NotNull PsiElement contextElement,
-                                          @NotNull PerlVariableType variableType) {
+  public static @NotNull String getRecommendedName(@NotNull PsiElement expression,
+                                                   @NotNull PsiElement contextElement,
+                                                   @NotNull PerlVariableType variableType) {
     String suggestedName = getInstance().suggestAndAddRecommendedName(expression, new LinkedHashSet<>());
     return StringUtil.notNullize(
       adjustNamesToBeUniqueFor(contextElement, variableType, null, suggestedName, Collections.emptySet()),
       EXPRESSION);
   }
 
-  @NotNull
-  private static PerlNameSuggestionProvider getInstance() {
+  private static @NotNull PerlNameSuggestionProvider getInstance() {
     return Objects.requireNonNull(EP_NAME.findExtension(PerlNameSuggestionProvider.class));
   }
 
@@ -595,13 +583,11 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
   }
 
   @Contract("null->null")
-  @Nullable
-  private static String join(@Nullable String @Nullable ... source) {
+  private static @Nullable String join(@Nullable String @Nullable ... source) {
     return source == null ? null : join(Arrays.asList(source));
   }
 
-  @Nullable
-  private static String join(@NotNull List<String> source) {
+  private static @Nullable String join(@NotNull List<String> source) {
     for (String element : source) {
       if (StringUtil.isEmptyOrSpaces(element)) {
         return null;
@@ -610,20 +596,17 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
     return validateName(StringUtil.join(ContainerUtil.map(source, it -> it.toLowerCase(Locale.getDefault())), "_"));
   }
 
-  @Nullable
-  private static String spacedToSnakeCase(@NotNull String source) {
+  private static @Nullable String spacedToSnakeCase(@NotNull String source) {
     return join(source.toLowerCase(Locale.getDefault()).split("\\s+"));
   }
 
   @Contract("null->null")
-  @Nullable
-  private static String validateName(@Nullable String name) {
+  private static @Nullable String validateName(@Nullable String name) {
     return StringUtil.isNotEmpty(name) && name.length() <= MAX_GENERATED_NAME_LENGTH && PerlNamesValidator.isIdentifier(name) ? name : null;
   }
 
   @Contract("null->null")
-  @Nullable
-  private static String getNameFromManipulator(@Nullable PsiElement element) {
+  private static @Nullable String getNameFromManipulator(@Nullable PsiElement element) {
     if (element == null) {
       return null;
     }
@@ -634,18 +617,16 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
     return spacedToSnakeCase(ElementManipulators.getValueText(element));
   }
 
-  @Nullable
   @Contract("null->null")
-  private static String derefName(@Nullable String name) {
+  private static @Nullable String derefName(@Nullable String name) {
     return removeChunk(removeChunk(name, REFERENCE + "s?"), REF + "s?");
   }
 
   /**
    * @return original {@code name} with {@code chunk} removed. Chunk removed with underscore prefix
    */
-  @Nullable
   @Contract("null,_->null")
-  private static String removeChunk(@Nullable String name, @NotNull String chunk) {
+  private static @Nullable String removeChunk(@Nullable String name, @NotNull String chunk) {
     if (name == null) {
       return null;
     }
@@ -658,13 +639,12 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
    *
    * @return potentially adjusted {@code recommendedName}
    */
-  @Nullable
   @Contract("_,_,_,null,_->null")
-  public static String adjustNamesToBeUniqueFor(@NotNull PsiElement contextElement,
-                                                @NotNull PerlVariableType variableType,
-                                                @Nullable String currentName,
-                                                @Nullable String recommendedName,
-                                                @NotNull Set<String> names) {
+  public static @Nullable String adjustNamesToBeUniqueFor(@NotNull PsiElement contextElement,
+                                                          @NotNull PerlVariableType variableType,
+                                                          @Nullable String currentName,
+                                                          @Nullable String recommendedName,
+                                                          @NotNull Set<String> names) {
     if (names.isEmpty() && recommendedName == null) {
       return null;
     }
@@ -698,8 +678,7 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
   /**
    * Traverses a subtree after a baseElement and walk ups from the baseElement, collecting all variable names.
    */
-  @NotNull
-  public static Set<String> collectExistingNames(@Nullable PsiElement baseElement, @NotNull PerlVariableType variableType) {
+  public static @NotNull Set<String> collectExistingNames(@Nullable PsiElement baseElement, @NotNull PerlVariableType variableType) {
     if (baseElement == null) {
       return Collections.emptySet();
     }

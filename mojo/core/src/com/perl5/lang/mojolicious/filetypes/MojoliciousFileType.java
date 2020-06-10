@@ -33,27 +33,23 @@ public class MojoliciousFileType extends PerlFileType {
     super(MojoliciousLanguage.INSTANCE);
   }
 
-  @NotNull
   @Override
-  public String getName() {
+  public @NotNull String getName() {
     return "Mojolicious Perl5 Template";
   }
 
-  @NotNull
   @Override
-  public String getDescription() {
+  public @NotNull String getDescription() {
     return "Mojolicious Perl5 template";
   }
 
-  @NotNull
   @Override
-  public String getDefaultExtension() {
+  public @NotNull String getDefaultExtension() {
     return MOJO_DEFAULT_EXTENSION;
   }
 
-  @Nullable
   @Override
-  public Icon getIcon() {
+  public @Nullable Icon getIcon() {
     return MojoIcons.MOJO_FILE;
   }
 

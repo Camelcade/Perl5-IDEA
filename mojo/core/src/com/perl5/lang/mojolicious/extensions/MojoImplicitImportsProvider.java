@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -90,9 +90,8 @@ public class MojoImplicitImportsProvider implements PerlImportsProvider {
     return namespaceDefinitionElement instanceof MojoliciousFileImpl;
   }
 
-  @NotNull
   @Override
-  public List<PerlExportDescriptor> getExportDescriptors(@NotNull PerlNamespaceDefinitionElement namespaceElement) {
+  public @NotNull List<PerlExportDescriptor> getExportDescriptors(@NotNull PerlNamespaceDefinitionElement namespaceElement) {
     return CachedValuesManager.getCachedValue(namespaceElement, () -> {
       List<PerlExportDescriptor> result = new ArrayList<>(MojoImplicitImportsProvider.HARDCODED_DESCRIPTORS);
       PerlLightSubDefinitionsReverseIndex

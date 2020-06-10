@@ -83,9 +83,8 @@ public class Mason2ParserImpl extends PerlParserImpl implements MasonParser {
     return false;
   }
 
-  @NotNull
   @Override
-  public TokenSet getBadCharacterForbiddenTokens() {
+  public @NotNull TokenSet getBadCharacterForbiddenTokens() {
     return BAD_CHARACTER_FORBIDDEN_TOKENS;
   }
 }

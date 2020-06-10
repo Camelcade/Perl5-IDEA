@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,9 +36,8 @@ public class Perl5RegexpParserDefinition extends RegExpParserDefinition {
     POSIX_BRACKET_EXPRESSIONS
   );
 
-  @NotNull
   @Override
-  public Lexer createLexer(Project project) {
+  public @NotNull Lexer createLexer(Project project) {
     return new RegExpLexer(CAPABILITIES);
   }
 

@@ -35,15 +35,13 @@ class PerlSMTRunnerConsoleView extends SMTRunnerConsoleView implements PerlConso
   }
 
   @Override
-  @NotNull
-  public PerlSMTRunnerConsoleView withHostData(@Nullable PerlHostData<?, ?> hostData) {
+  public @NotNull PerlSMTRunnerConsoleView withHostData(@Nullable PerlHostData<?, ?> hostData) {
     myHostData = hostData;
     return this;
   }
 
-  @Nullable
   @Override
-  public PerlHostData<?, ?> getHostData() {
+  public @Nullable PerlHostData<?, ?> getHostData() {
     return myHostData;
   }
 }

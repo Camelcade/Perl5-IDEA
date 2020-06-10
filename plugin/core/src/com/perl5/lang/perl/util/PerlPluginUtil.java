@@ -37,16 +37,14 @@ public class PerlPluginUtil {
   private static final String PERL_DIR = "perl5";
   private static final String REMOTES_DIR = "remote";
 
-  @NotNull
-  public static IdeaPluginDescriptor getPlugin() {
+  public static @NotNull IdeaPluginDescriptor getPlugin() {
     return Objects.requireNonNull(PluginManagerCore.getPlugin(PluginId.getId(PLUGIN_ID)));
   }
 
   /**
    * @return disposable for the plugin. Need to be replaced with proper plugin disposable later
    */
-  @NotNull
-  public static Disposable getPluginDisposable() {
+  public static @NotNull Disposable getPluginDisposable() {
     return PerlFileTypeService.getInstance();
   }
 
@@ -54,18 +52,15 @@ public class PerlPluginUtil {
    * @return project-level disposable for a plugin. It's eol happens on project service unloading what may
    * happen when project is closed or plugin unloaded.
    */
-  @NotNull
-  public static Disposable getProjectPluginDisposable(@NotNull Project project) {
+  public static @NotNull Disposable getProjectPluginDisposable(@NotNull Project project) {
     return PerlProjectManager.getInstance(project);
   }
 
-  @NotNull
-  public static String getPluginVersion() {
+  public static @NotNull String getPluginVersion() {
     return Objects.requireNonNull(getPlugin().getVersion());
   }
 
-  @NotNull
-  public static String getPluginRoot() {
+  public static @NotNull String getPluginRoot() {
     IdeaPluginDescriptor plugin = PerlPluginUtil.getPlugin();
     try {
       return FileUtil.toSystemIndependentName(plugin.getPath().getCanonicalPath());
@@ -78,16 +73,14 @@ public class PerlPluginUtil {
   /**
    * @return path to IDE perl helper scripts
    */
-  @NotNull
-  public static String getPluginHelpersRoot() {
+  public static @NotNull String getPluginHelpersRoot() {
     return FileUtil.toSystemIndependentName(new File(getPluginRoot(), "perl").getPath());
   }
 
   /**
    * @return path to the helpers libs dir
    */
-  @NotNull
-  public static String getHelpersLibPath() {
+  public static @NotNull String getHelpersLibPath() {
     return getHelperPath("lib");
   }
 
@@ -101,8 +94,7 @@ public class PerlPluginUtil {
   /**
    * @return perl5 dir in the ide's {@code system} dir
    */
-  @NotNull
-  public static String getPerlSystemPath() {
+  public static @NotNull String getPerlSystemPath() {
     String systemPath = PathManager.getSystemPath();
     String perlDirectory = FileUtil.join(systemPath, PERL_DIR);
     FileUtil.createDirectory(new File(perlDirectory));
@@ -112,8 +104,7 @@ public class PerlPluginUtil {
   /**
    * @return root for remote filesystems cache
    */
-  @NotNull
-  public static String getRemotesCachePath() {
+  public static @NotNull String getRemotesCachePath() {
     String remotesCachePath = FileUtil.join(getPerlSystemPath(), REMOTES_DIR);
     FileUtil.createDirectory(new File(remotesCachePath));
     return remotesCachePath;

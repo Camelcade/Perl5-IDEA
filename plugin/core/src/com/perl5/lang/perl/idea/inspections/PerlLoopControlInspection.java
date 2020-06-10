@@ -38,9 +38,8 @@ public class PerlLoopControlInspection extends PerlInspection {
     MAP_EXPR, GREP_EXPR
   );
 
-  @NotNull
   @Override
-  public PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean isOnTheFly) {
+  public @NotNull PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean isOnTheFly) {
     return new PerlVisitor() {
       private void problem(@NotNull PsiElement anchor,
                            @NotNull @PropertyKey(resourceBundle = PATH_TO_BUNDLE) String key,

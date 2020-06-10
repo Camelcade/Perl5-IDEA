@@ -50,9 +50,8 @@ public class PerlCpanfileImportProvider implements PerlImportsProvider {
     BINDINGS.forEach(name -> DESCRIPTORS.add(PerlExportDescriptor.create(NAMESPACE, name)));
   }
 
-  @NotNull
   @Override
-  public List<PerlExportDescriptor> getExportDescriptors(PerlNamespaceDefinitionElement namespaceElement) {
+  public @NotNull List<PerlExportDescriptor> getExportDescriptors(PerlNamespaceDefinitionElement namespaceElement) {
     return DESCRIPTORS;
   }
 

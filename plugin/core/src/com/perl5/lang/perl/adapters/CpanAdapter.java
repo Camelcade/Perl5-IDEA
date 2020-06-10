@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,29 +38,25 @@ public class CpanAdapter extends PackageManagerAdapter {
     super(sdk, project);
   }
 
-  @NotNull
   @Override
-  public String getPresentableName() {
+  public @NotNull String getPresentableName() {
     return "cpan";
   }
 
-  @NotNull
   @Override
-  protected String getManagerScriptName() {
+  protected @NotNull String getManagerScriptName() {
     return SCRIPT_NAME;
   }
 
-  @NotNull
   @Override
-  protected String getManagerPackageName() {
+  protected @NotNull String getManagerPackageName() {
     return PACKAGE_NAME;
   }
 
-  @NotNull
-  public static AnAction createInstallAction(@NotNull Sdk sdk,
-                                             @Nullable Project project,
-                                             @NotNull Collection<String> libraryNames,
-                                             @Nullable Runnable actionCallback) {
+  public static @NotNull AnAction createInstallAction(@NotNull Sdk sdk,
+                                                      @Nullable Project project,
+                                                      @NotNull Collection<String> libraryNames,
+                                                      @Nullable Runnable actionCallback) {
     return new DumbAwareAction(createInstallActionTitle(libraryNames, SCRIPT_NAME)) {
       @Override
       public void actionPerformed(@NotNull AnActionEvent e) {
@@ -85,20 +81,17 @@ public class CpanAdapter extends PackageManagerAdapter {
   /**
    * @return action title for installing {@code libraryNames} with tool identified by {@code toolName}
    */
-  @NotNull
-  public static String createInstallActionTitle(@NotNull Collection<String> libraryNames, @NotNull String toolName) {
+  public static @NotNull String createInstallActionTitle(@NotNull Collection<String> libraryNames, @NotNull String toolName) {
     return PerlBundle.message("perl.quickfix.install.family", toolName);
   }
 
   @Contract("null->null")
-  @Nullable
-  public static CpanAdapter create(@Nullable Project project) {
+  public static @Nullable CpanAdapter create(@Nullable Project project) {
     Sdk sdk = PerlProjectManager.getSdk(project);
     return sdk == null ? null : new CpanAdapter(sdk, project);
   }
 
-  @NotNull
-  public static CpanAdapter createNonNull(@NotNull Project project) {
+  public static @NotNull CpanAdapter createNonNull(@NotNull Project project) {
     return Objects.requireNonNull(create(project));
   }
 

@@ -34,9 +34,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class MooseMultiAttributeAccessorInspection extends PerlInspection {
-  @NotNull
   @Override
-  public PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean isOnTheFly) {
+  public @NotNull PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean isOnTheFly) {
     return new PerlVisitor() {
       @Override
       public void visitSubCall(@NotNull PsiPerlSubCall o) {

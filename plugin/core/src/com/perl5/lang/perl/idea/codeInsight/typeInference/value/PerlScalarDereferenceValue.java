@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,9 +38,8 @@ public class PerlScalarDereferenceValue extends PerlOperationValue {
     super(deserializer);
   }
 
-  @NotNull
   @Override
-  protected PerlValue computeResolve(@NotNull PerlValue resolvedReference, @NotNull PerlValueResolver resolver) {
+  protected @NotNull PerlValue computeResolve(@NotNull PerlValue resolvedReference, @NotNull PerlValueResolver resolver) {
     return doComputeStrictResolve(resolvedReference);
   }
 
@@ -48,8 +47,7 @@ public class PerlScalarDereferenceValue extends PerlOperationValue {
     return ObjectUtils.notNull(doComputeResolve(referenceValue), UNKNOWN_VALUE);
   }
 
-  @Nullable
-  private static PerlValue doComputeResolve(@NotNull PerlValue referenceValue) {
+  private static @Nullable PerlValue doComputeResolve(@NotNull PerlValue referenceValue) {
     if (referenceValue instanceof PerlReferenceValue) {
       PerlValue referenceTarget = ((PerlReferenceValue)referenceValue).getTarget();
       if (referenceTarget.getContextType() == PerlContextType.SCALAR) {
@@ -69,8 +67,7 @@ public class PerlScalarDereferenceValue extends PerlOperationValue {
     return "ScalarDeref: " + getBaseValue();
   }
 
-  @NotNull
-  public static PerlValue create(@NotNull PerlValue referenceValue) {
+  public static @NotNull PerlValue create(@NotNull PerlValue referenceValue) {
     if (referenceValue.isDeterministic()) {
       return PerlValuesBuilder.convert(referenceValue, PerlScalarDereferenceValue::doComputeStrictResolve);
     }

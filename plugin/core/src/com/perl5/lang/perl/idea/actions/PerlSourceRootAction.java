@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,8 +37,7 @@ public abstract class PerlSourceRootAction extends MarkRootActionBase {
     return isEnabled(getFilesFromSelection(selection), module);
   }
 
-  @NotNull
-  protected final List<VirtualFile> getFilesFromSelection(@NotNull RootsSelection selection) {
+  protected final @NotNull List<VirtualFile> getFilesFromSelection(@NotNull RootsSelection selection) {
     List<VirtualFile> roots = new ArrayList<>();
     roots.addAll(selection.mySelectedDirectories);
     roots.addAll(ContainerUtil.map(selection.mySelectedRoots, ContentFolder::getFile));

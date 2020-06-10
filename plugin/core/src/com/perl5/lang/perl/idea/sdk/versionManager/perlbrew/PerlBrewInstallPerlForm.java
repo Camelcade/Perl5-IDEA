@@ -48,21 +48,18 @@ class PerlBrewInstallPerlForm extends PerlInstallFormOptions {
   }
 
   @Override
-  @NotNull
-  public JPanel getRootPanel() {
+  public @NotNull JPanel getRootPanel() {
     return myRootPanel;
   }
 
   @Override
-  @NotNull
-  public String getTargetName(@NotNull String distributionId) {
+  public @NotNull String getTargetName(@NotNull String distributionId) {
     String userText = StringUtil.notNullize(myNameTextField.getText()).trim();
     return StringUtil.isEmpty(userText) ? distributionId : userText;
   }
 
   @Override
-  @NotNull
-  public List<String> buildParametersList() {
+  public @NotNull List<String> buildParametersList() {
     List<String> buildParams = new ArrayList<>();
     if (myForceInstallationCheckBox.isSelected()) {
       buildParams.add("--force");

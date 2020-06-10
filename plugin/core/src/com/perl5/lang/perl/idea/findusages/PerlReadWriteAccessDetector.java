@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -78,18 +78,16 @@ public class PerlReadWriteAccessDetector extends ReadWriteAccessDetector {
     return false;
   }
 
-  @NotNull
   @Override
-  public Access getReferenceAccess(@NotNull PsiElement referencedElement, @NotNull PsiReference reference) {
+  public @NotNull Access getReferenceAccess(@NotNull PsiElement referencedElement, @NotNull PsiReference reference) {
     if (referencedElement instanceof PerlNamespaceDefinitionElement || referencedElement instanceof PerlSubDefinitionElement) {
       return Access.Read;
     }
     return getExpressionAccess(reference.getElement());
   }
 
-  @NotNull
   @Override
-  public Access getExpressionAccess(@NotNull PsiElement expression) {
+  public @NotNull Access getExpressionAccess(@NotNull PsiElement expression) {
     if (expression instanceof PerlVariableNameElement) {
       return getVariableAccess(expression.getParent(), expression);
     }

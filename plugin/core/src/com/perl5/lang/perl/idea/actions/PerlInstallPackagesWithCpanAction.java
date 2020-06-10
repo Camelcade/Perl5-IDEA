@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,9 +27,8 @@ public class PerlInstallPackagesWithCpanAction extends PerlInstallPackageActionB
     super(CpanAdapter.SCRIPT_NAME);
   }
 
-  @Nullable
   @Override
-  protected PackageManagerAdapter getAdapter(@NotNull AnActionEvent e) {
+  protected @Nullable PackageManagerAdapter getAdapter(@NotNull AnActionEvent e) {
     return CpanAdapter.create(e.getProject());
   }
 }

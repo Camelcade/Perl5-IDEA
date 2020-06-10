@@ -33,12 +33,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Objects;
 
 public class PerlSdkAdditionalData implements SdkAdditionalData {
-  @NotNull
-  private final PerlHostData<?, ?> myHostData;
-  @NotNull
-  private final PerlVersionManagerData<?, ?> myVersionManagerData;
-  @NotNull
-  private final PerlImplementationData<?, ?> myImplementationData;
+  private final @NotNull PerlHostData<?, ?> myHostData;
+  private final @NotNull PerlVersionManagerData<?, ?> myVersionManagerData;
+  private final @NotNull PerlImplementationData<?, ?> myImplementationData;
 
 
   public PerlSdkAdditionalData(@NotNull PerlHostData<?, ?> hostData,
@@ -49,29 +46,24 @@ public class PerlSdkAdditionalData implements SdkAdditionalData {
     myImplementationData = implementationData;
   }
 
-  @NotNull
-  public PerlHostData<?, ?> getHostData() {
+  public @NotNull PerlHostData<?, ?> getHostData() {
     return myHostData;
   }
 
-  @NotNull
-  public PerlVersionManagerData<?, ?> getVersionManagerData() {
+  public @NotNull PerlVersionManagerData<?, ?> getVersionManagerData() {
     return myVersionManagerData;
   }
 
-  @NotNull
-  public PerlImplementationData<?, ?> getImplementationData() {
+  public @NotNull PerlImplementationData<?, ?> getImplementationData() {
     return myImplementationData;
   }
 
   @Contract("null -> null")
-  @Nullable
-  public static PerlSdkAdditionalData from(@Nullable Sdk sdk) {
+  public static @Nullable PerlSdkAdditionalData from(@Nullable Sdk sdk) {
     return sdk == null ? null : ObjectUtils.tryCast(sdk.getSdkAdditionalData(), PerlSdkAdditionalData.class);
   }
 
-  @NotNull
-  public static PerlSdkAdditionalData notNullFrom(@NotNull Sdk sdk) {
+  public static @NotNull PerlSdkAdditionalData notNullFrom(@NotNull Sdk sdk) {
     return Objects.requireNonNull(from(sdk), () -> "No additional data in " + sdk);
   }
 
@@ -81,8 +73,7 @@ public class PerlSdkAdditionalData implements SdkAdditionalData {
     myVersionManagerData.save(target);
   }
 
-  @NotNull
-  static PerlSdkAdditionalData load(@NotNull Element source) {
+  static @NotNull PerlSdkAdditionalData load(@NotNull Element source) {
     // fixme shouldn't we handle data corruption?
     return new PerlSdkAdditionalData(
       PerlHostHandler.load(source),

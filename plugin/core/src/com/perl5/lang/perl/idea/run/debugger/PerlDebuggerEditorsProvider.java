@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,15 +42,13 @@ public class PerlDebuggerEditorsProvider extends XDebuggerEditorsProviderBase {
     return fileFromText;
   }
 
-  @NotNull
   @Override
-  public FileType getFileType() {
+  public @NotNull FileType getFileType() {
     return PerlFileTypeScript.INSTANCE;
   }
 
   @TestOnly
-  @NotNull
-  public PsiFile createFile(@NotNull Project project, @NotNull String text, @NotNull PsiElement context) {
+  public @NotNull PsiFile createFile(@NotNull Project project, @NotNull String text, @NotNull PsiElement context) {
     return createExpressionCodeFragment(project, text, context, true);
   }
 }

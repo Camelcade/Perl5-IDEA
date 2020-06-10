@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,39 +21,33 @@ import org.jetbrains.annotations.Nullable;
 
 
 public class PerlCommenter implements IndentedCommenter {
-  @Nullable
   @Override
-  public String getLineCommentPrefix() {
+  public @Nullable String getLineCommentPrefix() {
     return "# ";
   }
 
-  @Nullable
   @Override
-  public String getBlockCommentPrefix() {
+  public @Nullable String getBlockCommentPrefix() {
     return null;
   }
 
-  @Nullable
   @Override
-  public String getBlockCommentSuffix() {
+  public @Nullable String getBlockCommentSuffix() {
     return null;
   }
 
-  @Nullable
   @Override
-  public String getCommentedBlockCommentPrefix() {
+  public @Nullable String getCommentedBlockCommentPrefix() {
     return null;
   }
 
-  @Nullable
   @Override
-  public String getCommentedBlockCommentSuffix() {
+  public @Nullable String getCommentedBlockCommentSuffix() {
     return null;
   }
 
-  @Nullable
   @Override
-  public Boolean forceIndentedLineComment() {
+  public @Nullable Boolean forceIndentedLineComment() {
     return true;
   }
 }

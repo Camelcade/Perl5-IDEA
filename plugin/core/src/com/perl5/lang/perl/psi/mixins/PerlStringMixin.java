@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,9 +41,8 @@ public abstract class PerlStringMixin extends PerlStringBareMixin implements Psi
     return ElementManipulators.handleContentChange(this, text);
   }
 
-  @NotNull
   @Override
-  public LiteralTextEscaper<? extends PsiLanguageInjectionHost> createLiteralTextEscaper() {
+  public @NotNull LiteralTextEscaper<? extends PsiLanguageInjectionHost> createLiteralTextEscaper() {
     return new PerlStringLiteralEscaper(this);
   }
 
@@ -57,17 +56,14 @@ public abstract class PerlStringMixin extends PerlStringBareMixin implements Psi
 
     if (parentType == PerlElementTypes.COMMA_SEQUENCE_EXPR) {
       IElementType grandParentType = PsiUtilCore.getElementType(parent.getParent());
-      if (grandParentType == PerlElementTypes.HASH_INDEX) {
-        return false;
-      }
+      return grandParentType != PerlElementTypes.HASH_INDEX;
     }
 
     return true;
   }
 
-  @Nullable
   @Override
-  public PsiElement getFirstContentToken() {
+  public @Nullable PsiElement getFirstContentToken() {
     PsiElement openQuote = getOpenQuoteElement();
     if (openQuote == null) {
       return null;
@@ -83,9 +79,8 @@ public abstract class PerlStringMixin extends PerlStringBareMixin implements Psi
   }
 
   // fixme see #1981
-  @Nullable
   @Override
-  public PsiElement getOpenQuoteElement() {
+  public @Nullable PsiElement getOpenQuoteElement() {
     PsiElement run = getFirstChild();
 
     while (run != null) {
@@ -98,9 +93,8 @@ public abstract class PerlStringMixin extends PerlStringBareMixin implements Psi
   }
 
   // fixme see #1981
-  @Nullable
   @Override
-  public PsiElement getCloseQuoteElement() {
+  public @Nullable PsiElement getCloseQuoteElement() {
     PsiElement lastChild = getLastChild();
     return lastChild != null && PerlParserUtil.CLOSE_QUOTES.contains(PsiUtilCore.getElementType(lastChild)) ? lastChild : null;
   }

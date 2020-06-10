@@ -41,11 +41,10 @@ public class PerlHighlightExitPointsHandlerFactory extends HighlightUsagesHandle
     RESERVED_RETURN, RESERVED_EXIT
   );
 
-  @Nullable
   @Override
-  public HighlightUsagesHandlerBase<?> createHighlightUsagesHandler(@NotNull Editor editor,
-                                                                    @NotNull PsiFile file,
-                                                                    @NotNull PsiElement target) {
+  public @Nullable HighlightUsagesHandlerBase<?> createHighlightUsagesHandler(@NotNull Editor editor,
+                                                                              @NotNull PsiFile file,
+                                                                              @NotNull PsiElement target) {
     if (target instanceof PerlSubNameElement &&
         target.getParent() instanceof PsiPerlMethod &&
         target.getParent().getParent() instanceof PerlSubCallElement &&

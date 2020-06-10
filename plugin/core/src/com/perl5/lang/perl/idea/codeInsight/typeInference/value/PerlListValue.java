@@ -28,8 +28,7 @@ import java.util.Collections;
 import java.util.List;
 
 abstract class PerlListValue extends PerlValue {
-  @NotNull
-  private final List<PerlValue> myElements;
+  private final @NotNull List<PerlValue> myElements;
 
   protected PerlListValue(@NotNull List<PerlValue> elements) {
     myElements = elements.isEmpty() ? Collections.emptyList() : Collections.unmodifiableList(elements);
@@ -50,24 +49,20 @@ abstract class PerlListValue extends PerlValue {
     return isDeterministic(getElements());
   }
 
-  @NotNull
   @Override
-  final PerlValue computeResolve(@NotNull PerlValueResolver resolver) {
+  final @NotNull PerlValue computeResolve(@NotNull PerlValueResolver resolver) {
     return computeResolve(resolver, ContainerUtil.map(myElements, resolver::resolve));
   }
 
-  @NotNull
-  protected abstract PerlValue computeResolve(@NotNull PerlValueResolver resolver,
-                                              @NotNull List<PerlValue> resolvedElements);
+  protected abstract @NotNull PerlValue computeResolve(@NotNull PerlValueResolver resolver,
+                                                       @NotNull List<PerlValue> resolvedElements);
 
-  @NotNull
   @Override
-  protected final PerlContextType getContextType() {
+  protected final @NotNull PerlContextType getContextType() {
     return PerlContextType.LIST;
   }
 
-  @NotNull
-  public final List<PerlValue> getElements() {
+  public final @NotNull List<PerlValue> getElements() {
     return myElements;
   }
 

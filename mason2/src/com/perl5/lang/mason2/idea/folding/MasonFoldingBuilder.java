@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,18 +47,16 @@ public class MasonFoldingBuilder extends AbstractMasonFoldingBuilder implements 
       MASON_TEMPLATE_BLOCK_HTML
     ));
 
-  @NotNull
   @Override
-  public FoldingDescriptor[] buildFoldRegions(@NotNull PsiElement root, @NotNull Document document, boolean quick) {
+  public @NotNull FoldingDescriptor[] buildFoldRegions(@NotNull PsiElement root, @NotNull Document document, boolean quick) {
     List<FoldingDescriptor> masonDescriptors =
       new ArrayList<>(Arrays.asList(super.buildFoldRegions(root, document, quick)));
     root.accept(new MasonFoldingRegionsCollector(document, masonDescriptors));
     return masonDescriptors.toArray(new FoldingDescriptor[masonDescriptors.size()]);
   }
 
-  @Nullable
   @Override
-  public String getPlaceholderText(@NotNull ASTNode node, @NotNull TextRange range) {
+  public @Nullable String getPlaceholderText(@NotNull ASTNode node, @NotNull TextRange range) {
     IElementType tokenType = node.getElementType();
     if (tokenType == MASON_ABSTRACT_BLOCK) {
       return PH_CODE_BLOCK;
@@ -72,9 +70,8 @@ public class MasonFoldingBuilder extends AbstractMasonFoldingBuilder implements 
     return super.getPlaceholderText(node, range);
   }
 
-  @NotNull
   @Override
-  protected TokenSet getCommentExcludedTokens() {
+  protected @NotNull TokenSet getCommentExcludedTokens() {
     return COMMENT_EXCLUDED_TOKENS;
   }
 

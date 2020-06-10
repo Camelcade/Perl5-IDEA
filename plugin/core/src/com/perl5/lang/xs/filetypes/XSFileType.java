@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,27 +32,23 @@ public class XSFileType extends PerlPluginBaseFileType {
     super(XSLanguage.INSTANCE);
   }
 
-  @NotNull
   @Override
-  public String getName() {
+  public @NotNull String getName() {
     return "Perl5 Extension";
   }
 
-  @NotNull
   @Override
-  public String getDescription() {
+  public @NotNull String getDescription() {
     return "Perl5 extension in C";
   }
 
-  @NotNull
   @Override
-  public String getDefaultExtension() {
+  public @NotNull String getDefaultExtension() {
     return "xs";
   }
 
-  @Nullable
   @Override
-  public Icon getIcon() {
+  public @Nullable Icon getIcon() {
     return PerlIcons.XS_FILE;
   }
 }

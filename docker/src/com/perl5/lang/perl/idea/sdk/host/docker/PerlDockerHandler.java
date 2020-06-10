@@ -41,9 +41,8 @@ class PerlDockerHandler extends PerlHostWithFileSystemHandler<PerlDockerData, Pe
     super(bean);
   }
 
-  @Nullable
   @Override
-  protected PerlDockerData createDataInteractively() {
+  protected @Nullable PerlDockerData createDataInteractively() {
     PerlDockerData hostData = createData();
     List<String> images;
     try {
@@ -81,15 +80,13 @@ class PerlDockerHandler extends PerlHostWithFileSystemHandler<PerlDockerData, Pe
     ));
   }
 
-  @NotNull
   @Override
-  public String getMenuItemTitle() {
+  public @NotNull String getMenuItemTitle() {
     return PerlDockerBundle.message("perl.host.handler.docker.menu.title");
   }
 
-  @NotNull
   @Override
-  public String getShortName() {
+  public @NotNull String getShortName() {
     return PerlDockerBundle.message("perl.host.handler.docker.short.name");
   }
 
@@ -98,27 +95,23 @@ class PerlDockerHandler extends PerlHostWithFileSystemHandler<PerlDockerData, Pe
     return PathEnvironmentVariableUtil.findInPath(PerlDockerAdapter.DOCKER_EXECUTABLE) != null;
   }
 
-  @Nullable
   @Override
-  public PerlOsHandler getOsHandler() {
+  public @Nullable PerlOsHandler getOsHandler() {
     return PerlOsHandlers.LINUX;
   }
 
-  @NotNull
   @Override
-  public PerlDockerData createData() {
+  public @NotNull PerlDockerData createData() {
     return new PerlDockerData(this);
   }
 
-  @Nullable
   @Override
-  public UnnamedConfigurable getSettingsConfigurable(@NotNull Project project) {
+  public @Nullable UnnamedConfigurable getSettingsConfigurable(@NotNull Project project) {
     return new PerlDockerProjectSettingsConfigurable(project);
   }
 
-  @Nullable
   @Override
-  public Icon getIcon() {
+  public @Nullable Icon getIcon() {
     return PerlIcons.DOCKER_ICON;
   }
 }

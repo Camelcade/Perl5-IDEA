@@ -216,9 +216,8 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
   /**
    * @return anchor statement to add a declaration statement before. Or null if anchor can't be found
    */
-  @Nullable
-  private PsiElement computeAnchor(@NotNull PerlIntroduceTarget target,
-                                   @NotNull List<PerlIntroduceTarget> occurrences) {
+  private @Nullable PsiElement computeAnchor(@NotNull PerlIntroduceTarget target,
+                                             @NotNull List<PerlIntroduceTarget> occurrences) {
     PsiElement enclosingScope = PerlIntroduceTargetOccurrencesCollector.computeTargetScope(target);
     if (enclosingScope == null) {
       LOG.error("Unable find enclosing scope for " + target);
@@ -264,12 +263,11 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
    *
    * @return variable introduced by the statement
    */
-  @Nullable
-  private PerlVariableDeclarationElement introduceVariable(@NotNull PerlIntroduceTarget target,
-                                                           @NotNull Pair<PsiElement, PsiElement> declarationBlock,
-                                                           @NotNull List<PerlIntroduceTarget> occurrences,
-                                                           @NotNull PsiElement anchor,
-                                                           @NotNull List<SmartPsiElementPointer<PsiElement>> psiOccurrences) {
+  private @Nullable PerlVariableDeclarationElement introduceVariable(@NotNull PerlIntroduceTarget target,
+                                                                     @NotNull Pair<PsiElement, PsiElement> declarationBlock,
+                                                                     @NotNull List<PerlIntroduceTarget> occurrences,
+                                                                     @NotNull PsiElement anchor,
+                                                                     @NotNull List<SmartPsiElementPointer<PsiElement>> psiOccurrences) {
     Project project = declarationBlock.first.getProject();
     return WriteCommandAction.writeCommandAction(project).compute(() -> {
       final RefactoringEventData afterData = new RefactoringEventData();
@@ -334,8 +332,7 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
     }).getElement();
   }
 
-  @NotNull
-  private String getRefactoringId() {
+  private @NotNull String getRefactoringId() {
     return "perl.introduce.variable";
   }
 

@@ -48,9 +48,8 @@ import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.*;
 public class ExceptionClassProcessor extends PerlPackageProcessorBase {
   public static final String FIELDS_METHOD_NAME = "Fields";
 
-  @NotNull
   @Override
-  public List<PerlDelegatingLightNamedElement<?>> computeLightElementsFromPsi(@NotNull PerlUseStatementElement useStatementElement) {
+  public @NotNull List<PerlDelegatingLightNamedElement<?>> computeLightElementsFromPsi(@NotNull PerlUseStatementElement useStatementElement) {
     PsiPerlExpr expr = useStatementElement.getExpr();
     if (expr == null) {
       return Collections.emptyList();
@@ -65,10 +64,9 @@ public class ExceptionClassProcessor extends PerlPackageProcessorBase {
     return result;
   }
 
-  @NotNull
   @Override
-  public List<PerlDelegatingLightNamedElement<?>> computeLightElementsFromStubs(@NotNull PerlUseStatementElement useStatementElement,
-                                                                                @NotNull PerlUseStatementStub useStatementStub) {
+  public @NotNull List<PerlDelegatingLightNamedElement<?>> computeLightElementsFromStubs(@NotNull PerlUseStatementElement useStatementElement,
+                                                                                         @NotNull PerlUseStatementStub useStatementStub) {
     return useStatementStub.getLightNamedElementsStubs().stream()
       .map(childStub -> {
         IStubElementType<?, ?> stubType = childStub.getStubType();

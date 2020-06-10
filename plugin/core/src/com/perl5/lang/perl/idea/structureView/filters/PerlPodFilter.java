@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,15 +31,13 @@ public class PerlPodFilter extends PerlFilter {
     return true;
   }
 
-  @NotNull
   @Override
-  public ActionPresentation getPresentation() {
+  public @NotNull ActionPresentation getPresentation() {
     return new ActionPresentationData("Show documentation", null, PerlIcons.POD_FILE);
   }
 
-  @NotNull
   @Override
-  public String getName() {
+  public @NotNull String getName() {
     return ID;
   }
 }

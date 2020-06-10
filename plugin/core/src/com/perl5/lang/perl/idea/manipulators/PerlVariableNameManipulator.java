@@ -29,9 +29,8 @@ import org.jetbrains.annotations.NotNull;
 public class PerlVariableNameManipulator extends AbstractElementManipulator<PerlVariableNameElement> {
   private static final Logger LOG = Logger.getInstance(PerlVariableNameManipulator.class);
 
-  @NotNull
   @Override
-  public TextRange getRangeInElement(@NotNull PerlVariableNameElement element) {
+  public @NotNull TextRange getRangeInElement(@NotNull PerlVariableNameElement element) {
     String elementText = element.getText();
     if (StringUtil.endsWithChar(elementText, ':')) {
       return TextRange.EMPTY_RANGE;

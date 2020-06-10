@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,9 +49,8 @@ public class MojoLightDelegatingSubDefinition extends PerlLightSubDefinitionElem
     setImplicit(true);
   }
 
-  @NotNull
   @Override
-  public List<PerlSubArgument> getSubArgumentsList() {
+  public @NotNull List<PerlSubArgument> getSubArgumentsList() {
     Ref<List<PerlSubArgument>> argumentsRef = Ref.create(super.getSubArgumentsList());
     processTargets(it -> {
       if (it instanceof PerlSubDefinition) {
@@ -67,9 +66,8 @@ public class MojoLightDelegatingSubDefinition extends PerlLightSubDefinitionElem
     return argumentsRef.get();
   }
 
-  @Nullable
   @Override
-  public PerlSubAnnotations getAnnotations() {
+  public @Nullable PerlSubAnnotations getAnnotations() {
     Ref<PerlSubAnnotations> annotationsRef = Ref.create(super.getAnnotations());
     processTargetSubs(it -> {
       PerlSubAnnotations annotations = it.getAnnotations();
@@ -82,9 +80,8 @@ public class MojoLightDelegatingSubDefinition extends PerlLightSubDefinitionElem
     return super.getAnnotations();
   }
 
-  @NotNull
   @Override
-  public PsiElement getNavigationElement() {
+  public @NotNull PsiElement getNavigationElement() {
     Ref<PsiElement> navigationRef = Ref.create(super.getNavigationElement());
     processTargets(it -> {
       navigationRef.set(it);
@@ -98,8 +95,7 @@ public class MojoLightDelegatingSubDefinition extends PerlLightSubDefinitionElem
    * @return target sub of this delegating sub or method.
    * @apiNote we may need this to obtain a signature of method
    */
-  @Nullable
-  public PerlSubElement getTargetSubElement() {
+  public @Nullable PerlSubElement getTargetSubElement() {
     Ref<PerlSubElement> targetSubRef = Ref.create();
     processTargetSubs(it -> {
       if (it instanceof PerlSubElement) {

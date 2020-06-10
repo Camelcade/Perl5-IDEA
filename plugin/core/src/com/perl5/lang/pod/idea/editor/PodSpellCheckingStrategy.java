@@ -30,9 +30,8 @@ import org.jetbrains.annotations.NotNull;
 import static com.perl5.lang.pod.lexer.PodElementTypesGenerated.POD_IDENTIFIER;
 
 public class PodSpellCheckingStrategy extends SpellcheckingStrategy {
-  @NotNull
   @Override
-  public Tokenizer<?> getTokenizer(PsiElement element) {
+  public @NotNull Tokenizer<?> getTokenizer(PsiElement element) {
     IElementType elementType = PsiUtilCore.getElementType(element);
     if (elementType == POD_IDENTIFIER) {
       PsiElement namedElement = TargetElementUtil.getInstance().getNamedElement(element, 0);

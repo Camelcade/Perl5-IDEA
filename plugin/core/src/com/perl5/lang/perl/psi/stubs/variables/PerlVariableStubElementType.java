@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,9 +43,8 @@ public class PerlVariableStubElementType extends IStubElementType<PerlVariableDe
     super(debugName, PerlLanguage.INSTANCE);
   }
 
-  @NotNull
   @Override
-  public PerlVariableDeclarationStub createStub(@NotNull PerlVariableDeclarationElement psi, StubElement parentStub) {
+  public @NotNull PerlVariableDeclarationStub createStub(@NotNull PerlVariableDeclarationElement psi, StubElement parentStub) {
     return new PerlVariableDeclarationStub(
       parentStub,
       this,
@@ -61,9 +60,8 @@ public class PerlVariableStubElementType extends IStubElementType<PerlVariableDe
     return new PsiPerlVariableDeclarationElementImpl(stub, this);
   }
 
-  @NotNull
   @Override
-  public PsiElement getPsiElement(@NotNull ASTNode node) {
+  public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
     return new PsiPerlVariableDeclarationElementImpl(node);
   }
 
@@ -77,9 +75,8 @@ public class PerlVariableStubElementType extends IStubElementType<PerlVariableDe
            StringUtil.isNotEmpty(((PerlVariableDeclarationElement)psi).getNamespaceName());
   }
 
-  @NotNull
   @Override
-  public String getExternalId() {
+  public @NotNull String getExternalId() {
     return "perl." + super.toString();
   }
 
@@ -100,9 +97,8 @@ public class PerlVariableStubElementType extends IStubElementType<PerlVariableDe
     }
   }
 
-  @NotNull
   @Override
-  public PerlVariableDeclarationStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
+  public @NotNull PerlVariableDeclarationStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
     return new PerlVariableDeclarationStub(
       parentStub,
       this,
@@ -114,8 +110,7 @@ public class PerlVariableStubElementType extends IStubElementType<PerlVariableDe
     );
   }
 
-  @Nullable
-  private PerlVariableAnnotations readAnnotations(@NotNull StubInputStream dataStream) throws IOException {
+  private @Nullable PerlVariableAnnotations readAnnotations(@NotNull StubInputStream dataStream) throws IOException {
     return dataStream.readBoolean() ? PerlVariableAnnotations.deserialize(dataStream) : null;
   }
 

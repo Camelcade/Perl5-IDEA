@@ -25,12 +25,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class PerlCompletionProcessorBase extends AbstractPerlCompletionProcessor {
-  @NotNull
-  private final CompletionResultSet myResultSet;
-  @NotNull
-  private final PsiElement myLeafElement;
-  @NotNull
-  private final Counters myCounters;
+  private final @NotNull CompletionResultSet myResultSet;
+  private final @NotNull PsiElement myLeafElement;
+  private final @NotNull Counters myCounters;
 
   protected PerlCompletionProcessorBase(@NotNull CompletionResultSet resultSet,
                                         @NotNull PsiElement leafElement) {
@@ -63,20 +60,17 @@ public abstract class PerlCompletionProcessorBase extends AbstractPerlCompletion
     myCounters = counters;
   }
 
-  @NotNull
-  private Counters getCounters() {
+  private @NotNull Counters getCounters() {
     return myCounters;
   }
 
   @Override
-  @NotNull
-  public CompletionResultSet getResultSet() {
+  public @NotNull CompletionResultSet getResultSet() {
     return myResultSet;
   }
 
   @Override
-  @NotNull
-  public PsiElement getLeafElement() {
+  public @NotNull PsiElement getLeafElement() {
     return myLeafElement;
   }
 

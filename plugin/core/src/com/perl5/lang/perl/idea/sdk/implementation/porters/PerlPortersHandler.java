@@ -30,17 +30,15 @@ class PerlPortersHandler
     super(bean);
   }
 
-  @NotNull
   @Override
-  public PerlPortersData createData() {
+  public @NotNull PerlPortersData createData() {
     return new PerlPortersData(this);
   }
 
-  @Nullable
   @Override
-  protected PerlPortersData doCreateData(@Nullable String interpreterPath,
-                                         @Nullable PerlHostData<?, ?> hostData,
-                                         @Nullable PerlVersionManagerData<?, ?> versionManagerData) {
+  protected @Nullable PerlPortersData doCreateData(@Nullable String interpreterPath,
+                                                   @Nullable PerlHostData<?, ?> hostData,
+                                                   @Nullable PerlVersionManagerData<?, ?> versionManagerData) {
     return interpreterPath == null || hostData == null || versionManagerData == null ? null : createData();
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,22 +39,19 @@ public class HTMLMasonSubcomponentDefitnitionImpl extends HTMLMasonStubBasedName
     super(node);
   }
 
-  @Nullable
   @Override
-  protected String getNameFromStub() {
+  protected @Nullable String getNameFromStub() {
     HTMLMasonSubcomponentDefinitionStub stub = getGreenStub();
     return stub == null ? null : stub.getName();
   }
 
-  @NotNull
   @Override
-  public SearchScope getUseScope() {
+  public @NotNull SearchScope getUseScope() {
     return new LocalSearchScope(getContainingFile());
   }
 
-  @Nullable
   @Override
-  public Icon getIcon(int flags) {
+  public @Nullable Icon getIcon(int flags) {
     return HTMLMasonIcons.HTML_MASON_SUBCOMPONENT_ICON;
   }
 }

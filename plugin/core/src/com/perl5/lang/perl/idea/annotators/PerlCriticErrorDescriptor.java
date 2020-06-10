@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ public class PerlCriticErrorDescriptor {
   public static final Pattern PERL_CRITIC_MESSAGE_PATTERN_ALT = Pattern.compile("(.+?) at (.+?) line (\\d+),(.+)");
   private final int myLine;
   private final int myCol;
-  private StringBuilder myMessage;
+  private final StringBuilder myMessage;
 
   private PerlCriticErrorDescriptor(StringBuilder message, int line, int col) {
     myMessage = message;
@@ -53,8 +53,7 @@ public class PerlCriticErrorDescriptor {
     return myCol;
   }
 
-  @Nullable
-  public static PerlCriticErrorDescriptor getFromString(String message) {
+  public static @Nullable PerlCriticErrorDescriptor getFromString(String message) {
     Matcher m = PERL_CRITIC_MESSAGE_PATTERN.matcher(message);
     if (m.matches()) {
       StringBuilder realMessage = new StringBuilder();

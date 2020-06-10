@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,8 +47,7 @@ public class MasonOverrideDefinition extends PerlMooseOverrideStatement implemen
     super(stub, nodeType);
   }
 
-  @NotNull
-  protected List<PerlVariableDeclarationElement> buildImplicitVariables() {
+  protected @NotNull List<PerlVariableDeclarationElement> buildImplicitVariables() {
     List<PerlVariableDeclarationElement> newImplicitVariables = new ArrayList<>();
     if (isValid()) {
       newImplicitVariables.add(PerlImplicitVariableDeclaration.createInvocant(this));
@@ -57,14 +56,12 @@ public class MasonOverrideDefinition extends PerlMooseOverrideStatement implemen
   }
 
   @Override
-  @NotNull
-  public PsiPerlBlock getSubDefinitionBody() {
+  public @NotNull PsiPerlBlock getSubDefinitionBody() {
     return findNotNullChildByClass(PsiPerlBlock.class);
   }
 
-  @Nullable
   @Override
-  public PsiElement getNameIdentifier() {
+  public @Nullable PsiElement getNameIdentifier() {
     return PsiTreeUtil.getChildOfType(this, PerlSubNameElement.class);
   }
 
@@ -89,9 +86,8 @@ public class MasonOverrideDefinition extends PerlMooseOverrideStatement implemen
     return this;
   }
 
-  @NotNull
   @Override
-  public List<PerlVariableDeclarationElement> getImplicitVariables() {
+  public @NotNull List<PerlVariableDeclarationElement> getImplicitVariables() {
     if (myImplicitVariables == null) {
       myImplicitVariables = buildImplicitVariables();
     }

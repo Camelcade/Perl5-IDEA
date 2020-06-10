@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,9 +35,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PodFoldingBuilder extends PerlFoldingBuilderBase implements PodElementTypes, DumbAware {
-  @NotNull
   @Override
-  public FoldingDescriptor[] buildFoldRegions(@NotNull PsiElement root, @NotNull Document document, boolean quick) {
+  public @NotNull FoldingDescriptor[] buildFoldRegions(@NotNull PsiElement root, @NotNull Document document, boolean quick) {
     // @todo handle this
     if (root instanceof OuterLanguageElementImpl) {
       return FoldingDescriptor.EMPTY;
@@ -55,9 +54,8 @@ public class PodFoldingBuilder extends PerlFoldingBuilderBase implements PodElem
     return false;
   }
 
-  @Nullable
   @Override
-  public String getPlaceholderText(@NotNull ASTNode node) {
+  public @Nullable String getPlaceholderText(@NotNull ASTNode node) {
     PsiElement psi = node.getPsi();
     if (!(psi instanceof PodTitledSection)) {
       return null;

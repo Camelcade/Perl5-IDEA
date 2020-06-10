@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,9 +38,8 @@ public class Perl5CodeInsightSettings implements PersistentStateComponent<Perl5C
   public boolean AUTO_INSERT_COLON = true;
   public boolean SMART_COMMA_SEQUENCE_TYPING = true;
 
-  @Nullable
   @Override
-  public Perl5CodeInsightSettings getState() {
+  public @Nullable Perl5CodeInsightSettings getState() {
     return this;
   }
 

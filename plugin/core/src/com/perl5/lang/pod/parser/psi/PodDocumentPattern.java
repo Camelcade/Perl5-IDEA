@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -62,13 +62,11 @@ public class PodDocumentPattern {
   }
 
   @Contract(pure = true)
-  @Nullable
-  public String getItemPattern() {
+  public @Nullable String getItemPattern() {
     return myItemPattern;
   }
 
-  @NotNull
-  public PodDocumentPattern withItemPattern(String itemPattern) {
+  public @NotNull PodDocumentPattern withItemPattern(String itemPattern) {
     myItemPattern = StringUtil.nullize(itemPattern);
     return this;
   }
@@ -81,13 +79,11 @@ public class PodDocumentPattern {
   }
 
   @Contract(pure = true)
-  @Nullable
-  public String getHeadingPattern() {
+  public @Nullable String getHeadingPattern() {
     return myHeadingPattern;
   }
 
-  @NotNull
-  public PodDocumentPattern withHeadingPattern(String pattern) {
+  public @NotNull PodDocumentPattern withHeadingPattern(String pattern) {
     myHeadingPattern = StringUtil.nullize(pattern);
     return this;
   }
@@ -98,13 +94,11 @@ public class PodDocumentPattern {
   }
 
   @Contract(pure = true)
-  @Nullable
-  public String getIndexKey() {
+  public @Nullable String getIndexKey() {
     return myIndexKey;
   }
 
-  @NotNull
-  public PodDocumentPattern withIndexPattern(String indexKey) {
+  public @NotNull PodDocumentPattern withIndexPattern(String indexKey) {
     myIndexKey = indexKey;
     return this;
   }
@@ -125,23 +119,19 @@ public class PodDocumentPattern {
     return isNextCharIdentifier != isPrevCharIdentifier;
   }
 
-  @NotNull
-  public static PodDocumentPattern itemPattern(@NotNull String itemText) {
+  public static @NotNull PodDocumentPattern itemPattern(@NotNull String itemText) {
     return new PodDocumentPattern().withItemPattern(itemText);
   }
 
-  @NotNull
-  public static PodDocumentPattern indexPattern(@NotNull String itemText) {
+  public static @NotNull PodDocumentPattern indexPattern(@NotNull String itemText) {
     return new PodDocumentPattern().withIndexPattern(itemText);
   }
 
-  @NotNull
-  public static PodDocumentPattern headingAndItemPattern(@NotNull String itemText) {
+  public static @NotNull PodDocumentPattern headingAndItemPattern(@NotNull String itemText) {
     return new PodDocumentPattern().withItemPattern(itemText).withHeadingPattern(itemText);
   }
 
-  @NotNull
-  public static PodDocumentPattern exactAnythingPattern(@NotNull String text) {
+  public static @NotNull PodDocumentPattern exactAnythingPattern(@NotNull String text) {
     return new PodDocumentPattern().withExactMatch().withItemPattern(text).withIndexPattern(text).withHeadingPattern(text);
   }
 }

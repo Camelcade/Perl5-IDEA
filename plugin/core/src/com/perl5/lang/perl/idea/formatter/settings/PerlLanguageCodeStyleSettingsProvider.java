@@ -328,9 +328,8 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
     indentOptions.TAB_SIZE = 4;
   }
 
-  @NotNull
   @Override
-  public Language getLanguage() {
+  public @NotNull Language getLanguage() {
     return PerlLanguage.INSTANCE;
   }
 
@@ -356,8 +355,7 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
     return settingsType == SettingsType.WRAPPING_AND_BRACES_SETTINGS ? 45 : super.getRightMargin(settingsType);
   }
 
-  @NotNull
-  private static String readCodeSample(@NotNull String name) {
+  private static @NotNull String readCodeSample(@NotNull String name) {
     return CodeStyleAbstractPanel.readFromFile(PerlLanguageCodeStyleSettingsProvider.class, name + ".code");
   }
 }

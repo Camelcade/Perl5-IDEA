@@ -27,8 +27,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class PerlImplicitElement extends LightElement {
-  @Nullable
-  private final PsiElement myParent;
+  private final @Nullable PsiElement myParent;
 
 
   public PerlImplicitElement(@NotNull PsiManager manager,
@@ -38,8 +37,7 @@ public abstract class PerlImplicitElement extends LightElement {
   }
 
   @Override
-  @Nullable
-  public PsiElement getParent() {
+  public @Nullable PsiElement getParent() {
     return myParent;
   }
 

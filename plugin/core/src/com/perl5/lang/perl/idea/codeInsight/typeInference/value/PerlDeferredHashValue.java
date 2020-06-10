@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,8 +37,7 @@ public final class PerlDeferredHashValue extends PerlMapValue {
   /**
    * @return attempts to find a key in the deferred map by iterating the most recently added scalar values
    */
-  @NotNull
-  public PerlValue tryGet(@NotNull PerlValue key) {
+  public @NotNull PerlValue tryGet(@NotNull PerlValue key) {
     if (key.isUnknown()) {
       return UNKNOWN_VALUE;
     }

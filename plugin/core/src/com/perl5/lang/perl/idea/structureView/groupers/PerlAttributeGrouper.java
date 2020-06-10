@@ -41,9 +41,8 @@ import java.util.*;
 public class PerlAttributeGrouper implements Grouper, ActionPresentation {
   private static final String GROUPER_ID = "perl.structure.group.attributes";
 
-  @NotNull
   @Override
-  public Collection<Group> group(@NotNull AbstractTreeNode<?> parent, @NotNull Collection<TreeElement> children) {
+  public @NotNull Collection<Group> group(@NotNull AbstractTreeNode<?> parent, @NotNull Collection<TreeElement> children) {
     if (children.isEmpty() || parent instanceof GroupWrapper && ((GroupWrapper)parent).getValue() instanceof AttributeGroup) {
       return Collections.emptyList();
     }
@@ -69,21 +68,18 @@ public class PerlAttributeGrouper implements Grouper, ActionPresentation {
     return new ArrayList<>(groupMap.values());
   }
 
-  @NotNull
   @Override
-  public ActionPresentation getPresentation() {
+  public @NotNull ActionPresentation getPresentation() {
     return this;
   }
 
-  @NotNull
   @Override
-  public String getName() {
+  public @NotNull String getName() {
     return GROUPER_ID;
   }
 
-  @NotNull
   @Override
-  public String getText() {
+  public @NotNull String getText() {
     return PerlBundle.message("perl.structure.group.attributes.title");
   }
 
@@ -98,10 +94,8 @@ public class PerlAttributeGrouper implements Grouper, ActionPresentation {
   }
 
   private static class AttributeGroup implements Group, ItemPresentation, PsiElementNavigationItem {
-    @NotNull
-    private final SmartPsiElementPointer<PerlSubCallElement> mySubCallElementPointer;
-    @NotNull
-    private final List<TreeElement> myChildren = new ArrayList<>();
+    private final @NotNull SmartPsiElementPointer<PerlSubCallElement> mySubCallElementPointer;
+    private final @NotNull List<TreeElement> myChildren = new ArrayList<>();
 
     public AttributeGroup(@NotNull PerlSubCallElement attributeWrapper) {
       mySubCallElementPointer = SmartPointerManager.createPointer(attributeWrapper);
@@ -111,21 +105,18 @@ public class PerlAttributeGrouper implements Grouper, ActionPresentation {
       myChildren.add(child);
     }
 
-    @NotNull
     @Override
-    public ItemPresentation getPresentation() {
+    public @NotNull ItemPresentation getPresentation() {
       return this;
     }
 
-    @NotNull
     @Override
-    public Collection<TreeElement> getChildren() {
+    public @NotNull Collection<TreeElement> getChildren() {
       return myChildren;
     }
 
-    @Nullable
     @Override
-    public String getPresentableText() {
+    public @Nullable String getPresentableText() {
       PerlSubCallElement element = mySubCallElementPointer.getElement();
       if (element == null) {
         return PerlBundle.message("perl.presentation.invalid");
@@ -135,28 +126,24 @@ public class PerlAttributeGrouper implements Grouper, ActionPresentation {
       return StringUtil.shortenPathWithEllipsis(names, 30);
     }
 
-    @Nullable
     @Override
-    public String getLocationString() {
+    public @Nullable String getLocationString() {
       PsiFile containingFile = mySubCallElementPointer.getContainingFile();
       return containingFile == null ? PerlBundle.message("perl.presentation.invalid") : containingFile.getName();
     }
 
-    @Nullable
     @Override
-    public Icon getIcon(boolean unused) {
+    public @Nullable Icon getIcon(boolean unused) {
       return PerlIcons.ATTRIBUTE_GUTTER_ICON;
     }
 
-    @Nullable
     @Override
-    public PsiElement getTargetElement() {
+    public @Nullable PsiElement getTargetElement() {
       return mySubCallElementPointer.getElement();
     }
 
-    @Nullable
     @Override
-    public String getName() {
+    public @Nullable String getName() {
       return "Attribute name";
     }
 

@@ -34,9 +34,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class PerlCoverageProgramRunner implements ProgramRunner<RunnerSettings> {
-  @NotNull
   @Override
-  public String getRunnerId() {
+  public @NotNull String getRunnerId() {
     return "PERL5_COVERAGE_RUNNER";
   }
 
@@ -45,9 +44,8 @@ public class PerlCoverageProgramRunner implements ProgramRunner<RunnerSettings> 
     return executorId.equals(CoverageExecutor.EXECUTOR_ID) && profile instanceof GenericPerlRunConfiguration;
   }
 
-  @Nullable
   @Override
-  public RunnerSettings createConfigurationData(@NotNull ConfigurationInfoProvider settingsProvider) {
+  public @Nullable RunnerSettings createConfigurationData(@NotNull ConfigurationInfoProvider settingsProvider) {
     return new CoverageRunnerData();
   }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,9 +47,8 @@ public class MojoBaseProcessor extends PerlPackageProcessorBase implements
     return currentFeaturesTable.clone();
   }
 
-  @NotNull
   @Override
-  public List<String> getLoadedPackageNames(PerlUseStatementElement useStatement) {
+  public @NotNull List<String> getLoadedPackageNames(PerlUseStatementElement useStatement) {
     List<String> loadedPackages = new ArrayList<>(Collections.singletonList(IO_HANDLE));
     List<String> allOptions = useStatement.getImportParameters();
 
@@ -64,15 +63,13 @@ public class MojoBaseProcessor extends PerlPackageProcessorBase implements
     return loadedPackages;
   }
 
-  @NotNull
   @Override
-  public Map<String, String> getOptions() {
+  public @NotNull Map<String, String> getOptions() {
     return OPTIONS;
   }
 
-  @NotNull
   @Override
-  public Map<String, String> getOptionsBundles() {
+  public @NotNull Map<String, String> getOptionsBundles() {
     return Collections.emptyMap();
   }
 

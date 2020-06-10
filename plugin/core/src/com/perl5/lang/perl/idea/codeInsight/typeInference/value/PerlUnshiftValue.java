@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,17 +42,15 @@ public class PerlUnshiftValue extends PerlParametrizedOperationValue {
     super(deserializer);
   }
 
-  @NotNull
   @Override
-  protected PerlValue computeResolve(@NotNull PerlValue resolvedArrayValue,
-                                     @NotNull PerlValue resolvedPrefixValue,
-                                     @NotNull PerlValueResolver resolver) {
+  protected @NotNull PerlValue computeResolve(@NotNull PerlValue resolvedArrayValue,
+                                              @NotNull PerlValue resolvedPrefixValue,
+                                              @NotNull PerlValueResolver resolver) {
     return computeStrictResolve(resolvedArrayValue, resolvedPrefixValue);
   }
 
-  @Nullable
   @Override
-  protected PerlContextType getContextType() {
+  protected @Nullable PerlContextType getContextType() {
     return PerlContextType.LIST;
   }
 
@@ -66,28 +64,25 @@ public class PerlUnshiftValue extends PerlParametrizedOperationValue {
     return "Unshift: [" + getParameter() + ", " + getBaseValue() + "]";
   }
 
-  @NotNull
-  private static PerlValue computeStrictResolve(@NotNull PerlValue resolvedArrayValue,
-                                                @NotNull PerlValue resolvedPrefixValue) {
+  private static @NotNull PerlValue computeStrictResolve(@NotNull PerlValue resolvedArrayValue,
+                                                         @NotNull PerlValue resolvedPrefixValue) {
     return ObjectUtils.notNull(computeResolve(resolvedArrayValue, resolvedPrefixValue), UNKNOWN_VALUE);
   }
 
-  @Nullable
-  private static PerlValue computeResolve(@NotNull PerlValue resolvedArrayValue,
-                                          @NotNull PerlValue resolvedPrefixValue) {
+  private static @Nullable PerlValue computeResolve(@NotNull PerlValue resolvedArrayValue,
+                                                    @NotNull PerlValue resolvedPrefixValue) {
     if (!(resolvedArrayValue instanceof PerlArrayValue)) {
       return null;
     }
     return PerlArrayValue.builder().addElement(resolvedPrefixValue).addElement(resolvedArrayValue).build();
   }
 
-  @NotNull
-  public static PerlValue create(@NotNull PsiPerlArrayUnshiftExpr unshiftExpr) {
+  public static @NotNull PerlValue create(@NotNull PsiPerlArrayUnshiftExpr unshiftExpr) {
     return create(unshiftExpr, PerlUnshiftValue::create);
   }
 
-  @NotNull
-  static PerlValue create(@NotNull PerlUnshiftPushExpr unshiftPushExpr, @NotNull BiFunction<PerlValue, PerlValue, PerlValue> function) {
+  static @NotNull PerlValue create(@NotNull PerlUnshiftPushExpr unshiftPushExpr,
+                                   @NotNull BiFunction<PerlValue, PerlValue, PerlValue> function) {
     PsiElement target = unshiftPushExpr.getTarget();
     if (target == null) {
       return UNKNOWN_VALUE;

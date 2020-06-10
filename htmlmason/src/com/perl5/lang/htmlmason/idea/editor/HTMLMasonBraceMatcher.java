@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,9 +44,8 @@ public class HTMLMasonBraceMatcher implements PairedBraceMatcher, HTMLMasonEleme
     new BracePair(HTML_MASON_FLAGS_OPENER, HTML_MASON_FLAGS_CLOSER, false),
   };
 
-  @NotNull
   @Override
-  public BracePair[] getPairs() {
+  public @NotNull BracePair[] getPairs() {
     return PAIRS;
   }
 

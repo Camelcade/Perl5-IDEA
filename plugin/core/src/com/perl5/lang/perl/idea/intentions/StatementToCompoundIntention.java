@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -79,24 +79,20 @@ public class StatementToCompoundIntention extends PsiElementBaseIntentionAction 
     return getStatement(element) != null;
   }
 
-  @NotNull
   @Override
-  public String getText() {
+  public @NotNull String getText() {
     return PerlBundle.message("perl.intention.convert.to.compound");
   }
 
-  @Nls
-  @NotNull
   @Override
-  public String getFamilyName() {
+  public @Nls @NotNull String getFamilyName() {
     return getText();
   }
 
   /**
    * @return statement with modifier under cursor, or null
    */
-  @Nullable
-  private static PsiPerlStatementImpl getStatement(@NotNull PsiElement elementAtCaret) {
+  private static @Nullable PsiPerlStatementImpl getStatement(@NotNull PsiElement elementAtCaret) {
     PsiPerlStatementImpl statement = PsiTreeUtil.getParentOfType(elementAtCaret, PsiPerlStatementImpl.class);
     if (PsiTreeUtil.findChildOfType(statement, PsiErrorElement.class) != null) {
       return null;

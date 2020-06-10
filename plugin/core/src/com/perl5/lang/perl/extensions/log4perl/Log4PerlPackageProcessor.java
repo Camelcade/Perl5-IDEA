@@ -57,21 +57,18 @@ public class Log4PerlPackageProcessor extends PerlPackageProcessorBase implement
     EASY, "get_logger, logging methods, :levels and :nowarn"
   );
 
-  @NotNull
   @Override
-  public Map<String, String> getOptions() {
+  public @NotNull Map<String, String> getOptions() {
     return OPTIONS;
   }
 
-  @NotNull
   @Override
-  public Map<String, String> getOptionsBundles() {
+  public @NotNull Map<String, String> getOptionsBundles() {
     return BUNDLE;
   }
 
-  @NotNull
   @Override
-  public List<PerlExportDescriptor> getImports(@NotNull PerlUseStatementElement useStatement) {
+  public @NotNull List<PerlExportDescriptor> getImports(@NotNull PerlUseStatementElement useStatement) {
     String packageName = useStatement.getPackageName();
     List<String> importParameters = useStatement.getImportParameters();
     if (packageName == null || importParameters == null || importParameters.isEmpty()) {

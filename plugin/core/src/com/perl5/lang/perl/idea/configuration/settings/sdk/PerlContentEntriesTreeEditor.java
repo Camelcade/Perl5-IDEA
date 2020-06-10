@@ -133,9 +133,8 @@ public class PerlContentEntriesTreeEditor implements UnnamedConfigurable, Dispos
     myTree.repaint();
   }
 
-  @NotNull
   @Override
-  public JComponent createComponent() {
+  public @NotNull JComponent createComponent() {
     JPanel panel = new JPanel(new VerticalFlowLayout());
     panel.add(myTreePanel);
     return panel;
@@ -209,9 +208,8 @@ public class PerlContentEntriesTreeEditor implements UnnamedConfigurable, Dispos
             AllIcons.Actions.NewFolder);
     }
 
-    @NotNull
     @Override
-    public JComponent createCustomComponent(@NotNull Presentation presentation, @NotNull String place) {
+    public @NotNull JComponent createCustomComponent(@NotNull Presentation presentation, @NotNull String place) {
       return IconWithTextAction.createCustomComponentImpl(this, presentation, place);
     }
   }

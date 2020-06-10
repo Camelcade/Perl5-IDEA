@@ -112,9 +112,8 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
     XmlSerializer.serializeInto(this, element);
   }
 
-  @Nullable
   @Override
-  public PerlRunProfileState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment executionEnvironment) {
+  public @Nullable PerlRunProfileState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment executionEnvironment) {
     if (executor instanceof DefaultDebugExecutor) {
       return new PerlDebugProfileState(executionEnvironment);
     }
@@ -125,8 +124,7 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
    * @return local path to the perl interpreter for this run configuration
    * @throws ExecutionException with human readable error message if interpreter path is empty
    */
-  @NotNull
-  protected String getEffectiveInterpreterPath() throws ExecutionException {
+  protected @NotNull String getEffectiveInterpreterPath() throws ExecutionException {
     Sdk effectiveSdk = getEffectiveSdk();
     String interpreterPath = PerlProjectManager.getInterpreterPath(effectiveSdk);
     if (StringUtil.isEmpty(interpreterPath)) {
@@ -135,8 +133,7 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
     return interpreterPath;
   }
 
-  @NotNull
-  public Sdk getEffectiveSdk() throws ExecutionException {
+  public @NotNull Sdk getEffectiveSdk() throws ExecutionException {
     Sdk perlSdk;
     if (isUseAlternativeSdk()) {
       String alternativeSdkName = getAlternativeSdkName();
@@ -164,13 +161,11 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
     return targetFiles.isEmpty() ? null : targetFiles.get(0).getName();
   }
 
-  @NotNull
-  protected List<VirtualFile> computeTargetFiles() {
+  protected @NotNull List<VirtualFile> computeTargetFiles() {
     return computeVirtualFilesFromPaths(getScriptPath());
   }
 
-  @NotNull
-  private VirtualFile computeNonNullScriptFile() throws ExecutionException {
+  private @NotNull VirtualFile computeNonNullScriptFile() throws ExecutionException {
     List<VirtualFile> targetFiles = computeTargetFiles();
     if (targetFiles.isEmpty()) {
       throw new ExecutionException(PerlBundle.message("perl.run.error.script.missing", getScriptPath()));
@@ -210,9 +205,8 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
     myUseAlternativeSdk = value;
   }
 
-  @Nullable
   @Override
-  public String getProgramParameters() {
+  public @Nullable String getProgramParameters() {
     return myScriptParameters;
   }
 
@@ -221,17 +215,15 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
     myScriptParameters = s;
   }
 
-  @Nullable
   @Override
-  public String getWorkingDirectory() {
+  public @Nullable String getWorkingDirectory() {
     return myWorkingDirectory;
   }
 
   /**
    * @return virtual file for a working directory explicitly set by user
    */
-  @Nullable
-  protected VirtualFile computeExplicitWorkingDirectory() {
+  protected @Nullable VirtualFile computeExplicitWorkingDirectory() {
     String workingDirectory = getWorkingDirectory();
     if (StringUtil.isEmpty(workingDirectory)) {
       return null;
@@ -244,9 +236,8 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
     myWorkingDirectory = s;
   }
 
-  @NotNull
   @Override
-  public Map<String, String> getEnvs() {
+  public @NotNull Map<String, String> getEnvs() {
     return myEnvironments;
   }
 
@@ -269,8 +260,7 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
     return myPerlParameters;
   }
 
-  @NotNull
-  protected List<String> getPerlParametersList() {
+  protected @NotNull List<String> getPerlParametersList() {
     String perlParameters = getPerlParameters();
     return StringUtil.isEmpty(perlParameters) ? Collections.emptyList() : StringUtil.split(perlParameters, " ");
   }
@@ -346,8 +336,7 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
     myIsCompileTimeBreakpointsEnabled = compileTimeBreakpointsEnabled;
   }
 
-  @NotNull
-  public PerlCommandLine createCommandLine(@NotNull PerlRunProfileState perlRunProfileState) throws ExecutionException {
+  public @NotNull PerlCommandLine createCommandLine(@NotNull PerlRunProfileState perlRunProfileState) throws ExecutionException {
     PerlCommandLine commandLine = createBaseCommandLine(perlRunProfileState);
     commandLine.withParentEnvironmentType(isPassParentEnvs() ? CONSOLE : NONE);
     commandLine.withWorkDirectory(computeWorkingDirectory(perlRunProfileState.getEnvironment().getProject()));
@@ -360,8 +349,7 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
     return true;
   }
 
-  @NotNull
-  protected Charset computeCharset() throws ExecutionException {
+  protected @NotNull Charset computeCharset() throws ExecutionException {
     String charsetName = getConsoleCharset();
     if (!StringUtil.isEmpty(charsetName)) {
       try {
@@ -376,8 +364,7 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
     }
   }
 
-  @Nullable
-  protected String computeWorkingDirectory(@NotNull Project project) throws ExecutionException {
+  protected @Nullable String computeWorkingDirectory(@NotNull Project project) throws ExecutionException {
     String workDirectory = getWorkingDirectory();
     if (StringUtil.isNotEmpty(workDirectory)) {
       return workDirectory;
@@ -385,8 +372,7 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
     return computeWorkingDirectory(project, computeNonNullScriptFile());
   }
 
-  @NotNull
-  protected PerlCommandLine createBaseCommandLine(@NotNull PerlRunProfileState perlRunProfileState) throws ExecutionException {
+  protected @NotNull PerlCommandLine createBaseCommandLine(@NotNull PerlRunProfileState perlRunProfileState) throws ExecutionException {
     ExecutionEnvironment executionEnvironment = perlRunProfileState.getEnvironment();
     Project project = executionEnvironment.getProject();
     List<String> additionalPerlParameters = perlRunProfileState.getAdditionalPerlParameters(this);
@@ -406,8 +392,7 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
     return commandLine;
   }
 
-  @Nullable
-  protected static String computeWorkingDirectory(@NotNull Project project, @NotNull VirtualFile virtualFile) {
+  protected static @Nullable String computeWorkingDirectory(@NotNull Project project, @NotNull VirtualFile virtualFile) {
     Module moduleForFile = ModuleUtilCore.findModuleForFile(virtualFile, project);
     if (moduleForFile != null) {
       return PathMacroUtil.getModuleDir(moduleForFile.getModuleFilePath());
@@ -415,8 +400,7 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
     return project.getBasePath();
   }
 
-  @NotNull
-  protected List<String> getScriptParameters() {
+  protected @NotNull List<String> getScriptParameters() {
     String programParameters = getProgramParameters();
     return StringUtil.isEmpty(programParameters) ? Collections.emptyList() : StringUtil.split(programParameters, " ");
   }
@@ -431,12 +415,11 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
     this.myInitCode = initCode;
   }
 
-  @NotNull
   @Override
-  public XDebugProcess createDebugProcess(@NotNull InetSocketAddress socketAddress,
-                                          @NotNull XDebugSession session,
-                                          @Nullable ExecutionResult executionResult,
-                                          @NotNull ExecutionEnvironment environment) throws ExecutionException {
+  public @NotNull XDebugProcess createDebugProcess(@NotNull InetSocketAddress socketAddress,
+                                                   @NotNull XDebugSession session,
+                                                   @Nullable ExecutionResult executionResult,
+                                                   @NotNull ExecutionEnvironment environment) throws ExecutionException {
     PerlRunProfileState runProfileState = getState(environment.getExecutor(), environment);
     if (!(runProfileState instanceof PerlDebugProfileState)) {
       throw new ExecutionException("Incorrect profile state");
@@ -447,8 +430,7 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
   /**
    * @return list of VirtualFiles pointed by  {@code paths} joined with pipe. Reverse of {@link #computePathsFromVirtualFiles(List)}
    */
-  @NotNull
-  public static List<VirtualFile> computeVirtualFilesFromPaths(@Nullable String paths) {
+  public static @NotNull List<VirtualFile> computeVirtualFilesFromPaths(@Nullable String paths) {
     if (StringUtil.isEmpty(paths)) {
       return Collections.emptyList();
     }
@@ -469,13 +451,11 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
   /**
    * @return paths of {@code virtualFiles} joined with pipe, reverse of {@link #computeVirtualFilesFromPaths(String)}
    */
-  @NotNull
-  public static String computePathsFromVirtualFiles(@NotNull List<VirtualFile> virtualFiles) {
+  public static @NotNull String computePathsFromVirtualFiles(@NotNull List<VirtualFile> virtualFiles) {
     return FILES_JOINER.fun(ContainerUtil.map(virtualFiles, VirtualFile::getPath));
   }
 
-  @NotNull
-  public ConsoleView createConsole(@NotNull PerlRunProfileState runProfileState) throws ExecutionException {
+  public @NotNull ConsoleView createConsole(@NotNull PerlRunProfileState runProfileState) throws ExecutionException {
     ExecutionEnvironment executionEnvironment = runProfileState.getEnvironment();
     return new PerlTerminalExecutionConsole(executionEnvironment.getProject()).withHostData(PerlHostData.from(getEffectiveSdk()));
   }
@@ -485,8 +465,8 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
    *
    * @return patched process handler
    */
-  @NotNull
-  protected ProcessHandler doPatchProcessHandler(@NotNull ProcessHandler processHandler, @NotNull PerlRunProfileState runProfileState) {
+  protected @NotNull ProcessHandler doPatchProcessHandler(@NotNull ProcessHandler processHandler,
+                                                          @NotNull PerlRunProfileState runProfileState) {
     return processHandler;
   }
 
@@ -522,8 +502,8 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
    * @return patched process handler
    */
   @Contract("null,_->null; !null,_->!null")
-  @Nullable
-  static ProcessHandler patchProcessHandler(@Nullable ProcessHandler processHandler, @NotNull PerlRunProfileState runProfileState) {
+  static @Nullable ProcessHandler patchProcessHandler(@Nullable ProcessHandler processHandler,
+                                                      @NotNull PerlRunProfileState runProfileState) {
     if (processHandler == null) {
       return null;
     }

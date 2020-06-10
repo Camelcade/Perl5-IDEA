@@ -32,18 +32,16 @@ import java.util.Collection;
 import java.util.Map;
 
 public class PerlTreeStructureProvider implements TreeStructureProvider {
-  @NotNull
-  private final PerlProjectManager myProjectManager;
+  private final @NotNull PerlProjectManager myProjectManager;
 
   public PerlTreeStructureProvider(Project project) {
     myProjectManager = PerlProjectManager.getInstance(project);
   }
 
-  @NotNull
   @Override
-  public Collection<AbstractTreeNode<?>> modify(@NotNull AbstractTreeNode<?> parent,
-                                                @NotNull Collection<AbstractTreeNode<?>> children,
-                                                ViewSettings settings) {
+  public @NotNull Collection<AbstractTreeNode<?>> modify(@NotNull AbstractTreeNode<?> parent,
+                                                         @NotNull Collection<AbstractTreeNode<?>> children,
+                                                         ViewSettings settings) {
     if (!myProjectManager.isPerlEnabled()) {
       return children;
     }

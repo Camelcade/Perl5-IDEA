@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,17 +33,16 @@ class PerlListTargetsHandler extends PerlSequentialElementTargetHandler {
   private PerlListTargetsHandler() {
   }
 
-  @NotNull
   @Override
-  protected String createTargetExpressionText(@NotNull PerlIntroduceTarget target) {
+  protected @NotNull String createTargetExpressionText(@NotNull PerlIntroduceTarget target) {
     String baseText = super.createTargetExpressionText(target);
     List<PsiElement> childrenInRange = target.getChildren();
     return childrenInRange.size() < 2 ? baseText : "(" + baseText + ")";
   }
 
-  @NotNull
   @Override
-  protected List<PsiElement> replaceNonTrivialTarget(@NotNull List<PerlIntroduceTarget> occurrences, @NotNull PsiElement replacement) {
+  protected @NotNull List<PsiElement> replaceNonTrivialTarget(@NotNull List<PerlIntroduceTarget> occurrences,
+                                                              @NotNull PsiElement replacement) {
     PerlIntroduceTarget baseTarget = Objects.requireNonNull(occurrences.get(0));
     PsiElement baseElement = Objects.requireNonNull(baseTarget.getPlace());
     List<PsiElement> sourceElements = PerlArrayUtil.collectListElements(baseElement);

@@ -39,17 +39,15 @@ public interface PerlLightElementProvider<Psi extends PerlPolyNamedElement<Stub>
   /**
    * @return list of the light psi elements declared by the {@code psiElement}
    */
-  @NotNull
-  default List<? extends PerlDelegatingLightNamedElement<?>> computeLightElementsFromPsi(@NotNull Psi psiElement) {
+  default @NotNull List<? extends PerlDelegatingLightNamedElement<?>> computeLightElementsFromPsi(@NotNull Psi psiElement) {
     return Collections.emptyList();
   }
 
   /**
    * @return list of the light psi elements declared by the {@code stubElement}
    */
-  @NotNull
-  default List<? extends PerlDelegatingLightNamedElement<?>> computeLightElementsFromStubs(@NotNull Psi psiElement,
-                                                                                           @NotNull Stub stubElement) {
+  default @NotNull List<? extends PerlDelegatingLightNamedElement<?>> computeLightElementsFromStubs(@NotNull Psi psiElement,
+                                                                                                    @NotNull Stub stubElement) {
     return Collections.emptyList();
   }
 }

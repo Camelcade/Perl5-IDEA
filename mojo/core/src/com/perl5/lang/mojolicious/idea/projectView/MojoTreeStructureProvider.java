@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,18 +31,16 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Collection;
 
 public class MojoTreeStructureProvider implements TreeStructureProvider {
-  @NotNull
-  private final MojoProjectManager myMojoProjectManager;
+  private final @NotNull MojoProjectManager myMojoProjectManager;
 
   public MojoTreeStructureProvider(@NotNull Project project) {
     myMojoProjectManager = MojoProjectManager.getInstance(project);
   }
 
-  @NotNull
   @Override
-  public Collection<AbstractTreeNode<?>> modify(@NotNull AbstractTreeNode<?> parent,
-                                                @NotNull Collection<AbstractTreeNode<?>> children,
-                                                ViewSettings settings) {
+  public @NotNull Collection<AbstractTreeNode<?>> modify(@NotNull AbstractTreeNode<?> parent,
+                                                         @NotNull Collection<AbstractTreeNode<?>> children,
+                                                         ViewSettings settings) {
     if (!myMojoProjectManager.isMojoAvailable()) {
       return children;
     }

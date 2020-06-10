@@ -32,9 +32,9 @@ import java.util.Objects;
 
 
 public class EmbeddedPerlHighlighter extends LayeredLexerEditorHighlighter implements EmbeddedPerlElementTypes {
-  public EmbeddedPerlHighlighter(@Nullable final Project project,
-                                 @Nullable final VirtualFile virtualFile,
-                                 @NotNull final EditorColorsScheme colors) {
+  public EmbeddedPerlHighlighter(final @Nullable Project project,
+                                 final @Nullable VirtualFile virtualFile,
+                                 final @NotNull EditorColorsScheme colors) {
     super(new EmbeddedPerlSyntaxHighlighter(project), colors);
     registerLayer(EMBED_TEMPLATE_BLOCK_HTML, new LayerDescriptor(
       Objects.requireNonNull(SyntaxHighlighterFactory.getSyntaxHighlighter(HtmlFileType.INSTANCE, project, virtualFile)), ""));

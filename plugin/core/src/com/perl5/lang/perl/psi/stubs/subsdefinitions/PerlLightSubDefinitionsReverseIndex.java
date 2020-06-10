@@ -37,9 +37,8 @@ public class PerlLightSubDefinitionsReverseIndex extends PerlStubIndexBase<PerlP
     return super.getVersion() + VERSION;
   }
 
-  @NotNull
   @Override
-  public StubIndexKey<String, PerlPolyNamedElement> getKey() {
+  public @NotNull StubIndexKey<String, PerlPolyNamedElement> getKey() {
     return KEY;
   }
 

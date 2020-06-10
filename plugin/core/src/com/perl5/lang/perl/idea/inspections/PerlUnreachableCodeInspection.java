@@ -43,9 +43,8 @@ public class PerlUnreachableCodeInspection extends PerlInspection {
     LP_OR_XOR_EXPR, EVAL_EXPR
   );
 
-  @NotNull
   @Override
-  public PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean isOnTheFly) {
+  public @NotNull PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean isOnTheFly) {
     Set<PsiElement> notifiedElements = new HashSet<>();
     return new PerlVisitor() {
       @Override

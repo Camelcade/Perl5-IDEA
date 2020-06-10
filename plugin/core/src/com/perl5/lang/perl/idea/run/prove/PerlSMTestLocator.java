@@ -35,19 +35,17 @@ import java.util.List;
 class PerlSMTestLocator implements SMTestLocator {
   private static final String FILE_PROTOCOL = "myfile";
 
-  @NotNull
-  private final PerlHostData<?, ?> myHostData;
+  private final @NotNull PerlHostData<?, ?> myHostData;
 
   public PerlSMTestLocator(@NotNull PerlHostData<?, ?> hostData) {
     myHostData = hostData;
   }
 
-  @NotNull
   @Override
-  public List<Location> getLocation(@NotNull String protocol,
-                                    @NotNull String path,
-                                    @NotNull Project project,
-                                    @NotNull GlobalSearchScope scope) {
+  public @NotNull List<Location> getLocation(@NotNull String protocol,
+                                             @NotNull String path,
+                                             @NotNull Project project,
+                                             @NotNull GlobalSearchScope scope) {
     if (FILE_PROTOCOL.equals(protocol)) {
       String localPath = myHostData.getLocalPath(path);
       if (localPath != null) {

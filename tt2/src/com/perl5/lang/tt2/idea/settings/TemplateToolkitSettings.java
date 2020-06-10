@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -117,9 +117,8 @@ public class TemplateToolkitSettings implements PersistentStateComponent<Templat
     });
   }
 
-  @Nullable
   @Override
-  public TemplateToolkitSettings getState() {
+  public @Nullable TemplateToolkitSettings getState() {
     return this;
   }
 
@@ -128,13 +127,11 @@ public class TemplateToolkitSettings implements PersistentStateComponent<Templat
     XmlSerializerUtil.copyBean(state, this);
   }
 
-  @NotNull
-  public List<VirtualFile> getTemplateRoots() {
+  public @NotNull List<VirtualFile> getTemplateRoots() {
     return PerlProjectManager.getInstance(myProject).getModulesRootsOfType(TemplateToolkitSourceRootType.INSTANCE);
   }
 
-  @NotNull
-  public Collection<PsiFileSystemItem> getTemplatePsiRoots() {
+  public @NotNull Collection<PsiFileSystemItem> getTemplatePsiRoots() {
     return myLazyPsiDirsRoots.getValue();
   }
 
@@ -161,8 +158,7 @@ public class TemplateToolkitSettings implements PersistentStateComponent<Templat
     return false;
   }
 
-  @NotNull
-  public static TemplateToolkitSettings getInstance(@NotNull Project project) {
+  public static @NotNull TemplateToolkitSettings getInstance(@NotNull Project project) {
     TemplateToolkitSettings persisted = ServiceManager.getService(project, TemplateToolkitSettings.class);
 
     if (persisted == null) {

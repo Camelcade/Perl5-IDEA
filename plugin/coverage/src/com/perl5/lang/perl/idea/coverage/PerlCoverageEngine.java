@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -52,34 +52,31 @@ public class PerlCoverageEngine extends CoverageEngine {
     return false;
   }
 
-  @NotNull
   @Override
-  public CoverageEnabledConfiguration createCoverageEnabledConfiguration(@Nullable RunConfigurationBase conf) {
+  public @NotNull CoverageEnabledConfiguration createCoverageEnabledConfiguration(@Nullable RunConfigurationBase conf) {
     return new PerlCoverageEnabledConfiguration(conf);
   }
 
-  @Nullable
   @Override
-  public CoverageSuite createCoverageSuite(@NotNull CoverageRunner covRunner,
-                                           @NotNull String name,
-                                           @NotNull CoverageFileProvider coverageDataFileProvider,
-                                           @Nullable String[] filters,
-                                           long lastCoverageTimeStamp,
-                                           @Nullable String suiteToMerge,
-                                           boolean coverageByTestEnabled,
-                                           boolean tracingEnabled,
-                                           boolean trackTestFolders,
-                                           Project project) {
+  public @Nullable CoverageSuite createCoverageSuite(@NotNull CoverageRunner covRunner,
+                                                     @NotNull String name,
+                                                     @NotNull CoverageFileProvider coverageDataFileProvider,
+                                                     @Nullable String[] filters,
+                                                     long lastCoverageTimeStamp,
+                                                     @Nullable String suiteToMerge,
+                                                     boolean coverageByTestEnabled,
+                                                     boolean tracingEnabled,
+                                                     boolean trackTestFolders,
+                                                     Project project) {
     return new PerlCoverageSuite(name, coverageDataFileProvider, lastCoverageTimeStamp, coverageByTestEnabled, tracingEnabled,
                                  trackTestFolders, covRunner, project);
   }
 
-  @Nullable
   @Override
-  public CoverageSuite createCoverageSuite(@NotNull CoverageRunner covRunner,
-                                           @NotNull String name,
-                                           @NotNull CoverageFileProvider coverageDataFileProvider,
-                                           @NotNull CoverageEnabledConfiguration config) {
+  public @Nullable CoverageSuite createCoverageSuite(@NotNull CoverageRunner covRunner,
+                                                     @NotNull String name,
+                                                     @NotNull CoverageFileProvider coverageDataFileProvider,
+                                                     @NotNull CoverageEnabledConfiguration config) {
     if (config instanceof PerlCoverageEnabledConfiguration) {
       GenericPerlRunConfiguration perlRunConfiguration = (GenericPerlRunConfiguration)config.getConfiguration();
       return createCoverageSuite(covRunner, name, coverageDataFileProvider, null, new Date().getTime(), null, false, false, true,
@@ -88,15 +85,13 @@ public class PerlCoverageEngine extends CoverageEngine {
     return null;
   }
 
-  @Nullable
   @Override
-  public CoverageSuite createEmptyCoverageSuite(@NotNull CoverageRunner coverageRunner) {
+  public @Nullable CoverageSuite createEmptyCoverageSuite(@NotNull CoverageRunner coverageRunner) {
     return new PerlCoverageSuite();
   }
 
-  @NotNull
   @Override
-  public CoverageAnnotator getCoverageAnnotator(Project project) {
+  public @NotNull CoverageAnnotator getCoverageAnnotator(Project project) {
     return PerlCoverageAnnotator.getInstance(project);
   }
 
@@ -129,15 +124,13 @@ public class PerlCoverageEngine extends CoverageEngine {
     return false;
   }
 
-  @NotNull
   @Override
-  public Set<String> getQualifiedNames(@NotNull PsiFile sourceFile) {
+  public @NotNull Set<String> getQualifiedNames(@NotNull PsiFile sourceFile) {
     return Collections.singleton(buildQualifiedName(sourceFile));
   }
 
-  @Nullable
   @Override
-  public String getQualifiedName(@NotNull File outputFile, @NotNull PsiFile sourceFile) {
+  public @Nullable String getQualifiedName(@NotNull File outputFile, @NotNull PsiFile sourceFile) {
     return buildQualifiedName(sourceFile);
   }
 
@@ -150,9 +143,8 @@ public class PerlCoverageEngine extends CoverageEngine {
     return Collections.emptyList();
   }
 
-  @Nullable
   @Override
-  public String getTestMethodName(@NotNull PsiElement element, @NotNull AbstractTestProxy testProxy) {
+  public @Nullable String getTestMethodName(@NotNull PsiElement element, @NotNull AbstractTestProxy testProxy) {
     return null;
   }
 

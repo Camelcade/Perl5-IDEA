@@ -79,9 +79,8 @@ public class PerlLightMethodDefinitionElement<Delegate extends PerlPolyNamedElem
     return true;
   }
 
-  @Nullable
   @Override
-  public Icon getIcon(int flags) {
+  public @Nullable Icon getIcon(int flags) {
     return PerlIcons.METHOD_GUTTER_ICON;
   }
 }

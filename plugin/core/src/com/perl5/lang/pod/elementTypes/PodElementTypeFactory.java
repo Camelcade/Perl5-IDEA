@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,9 +33,8 @@ public class PodElementTypeFactory {
   public static IElementType getTokenType(String debugName) {
     if (debugName.equals("identifier")) {
       return new PodTokenTypeEx(debugName) {
-        @NotNull
         @Override
-        public ASTNode createLeafNode(@NotNull CharSequence leafText) {
+        public @NotNull ASTNode createLeafNode(@NotNull CharSequence leafText) {
           return new PodIdentifierImpl(this, leafText);
         }
       };
@@ -49,9 +48,8 @@ public class PodElementTypeFactory {
     }
     if (name.equals("BEGIN_SECTION")) {
       return new PodElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiBeginSectionImpl(node);
         }
       };
@@ -59,9 +57,8 @@ public class PodElementTypeFactory {
 
     if (name.equals("BEGIN_SECTION_CONTENT")) {
       return new PodElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiBeginSectionContentImpl(node);
         }
       };
@@ -69,9 +66,8 @@ public class PodElementTypeFactory {
 
     if (name.equals("CUT_SECTION")) {
       return new PodElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiCutSectionImpl(node);
         }
       };
@@ -79,9 +75,8 @@ public class PodElementTypeFactory {
 
     if (name.equals("ENCODING_SECTION")) {
       return new PodElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiEncodingSectionImpl(node);
         }
       };
@@ -89,9 +84,8 @@ public class PodElementTypeFactory {
 
     if (name.equals("FORMATTING_SECTION_CONTENT")) {
       return new PodElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiFormattingSectionContentImpl(node);
         }
       };
@@ -99,9 +93,8 @@ public class PodElementTypeFactory {
 
     if (name.equals("FOR_SECTION")) {
       return new PodElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiForSectionImpl(node);
         }
       };
@@ -109,9 +102,8 @@ public class PodElementTypeFactory {
 
     if (name.equals("FOR_SECTION_CONTENT")) {
       return new PodElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiForSectionContentImpl(node);
         }
       };
@@ -124,9 +116,8 @@ public class PodElementTypeFactory {
           return new PsiHead1SectionImpl(stub, this);
         }
 
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiHead1SectionImpl(node);
         }
       };
@@ -134,9 +125,8 @@ public class PodElementTypeFactory {
 
     if (name.equals("HEAD_1_SECTION_CONTENT")) {
       return new PodElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiHead1SectionContentImpl(node);
         }
       };
@@ -149,9 +139,8 @@ public class PodElementTypeFactory {
           return new PsiHead2SectionImpl(stub, this);
         }
 
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiHead2SectionImpl(node);
         }
       };
@@ -159,9 +148,8 @@ public class PodElementTypeFactory {
 
     if (name.equals("HEAD_2_SECTION_CONTENT")) {
       return new PodElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiHead2SectionContentImpl(node);
         }
       };
@@ -174,9 +162,8 @@ public class PodElementTypeFactory {
           return new PsiHead3SectionImpl(stub, this);
         }
 
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiHead3SectionImpl(node);
         }
       };
@@ -184,9 +171,8 @@ public class PodElementTypeFactory {
 
     if (name.equals("HEAD_3_SECTION_CONTENT")) {
       return new PodElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiHead3SectionContentImpl(node);
         }
       };
@@ -199,9 +185,8 @@ public class PodElementTypeFactory {
           return new PsiHead4SectionImpl(stub, this);
         }
 
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiHead4SectionImpl(node);
         }
       };
@@ -209,9 +194,8 @@ public class PodElementTypeFactory {
 
     if (name.equals("HEAD_4_SECTION_CONTENT")) {
       return new PodElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiHead4SectionContentImpl(node);
         }
       };
@@ -223,9 +207,8 @@ public class PodElementTypeFactory {
 
     if (name.equals("ITEM_SECTION_CONTENT")) {
       return new PodElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiItemSectionContentImpl(node);
         }
       };
@@ -233,9 +216,8 @@ public class PodElementTypeFactory {
 
     if (name.equals("ITEM_SECTION_TITLE")) {
       return new PodElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiItemSectionTitleImpl(node);
         }
       };
@@ -243,9 +225,8 @@ public class PodElementTypeFactory {
 
     if (name.equals("OVER_SECTION")) {
       return new PodElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiOverSectionImpl(node);
         }
       };
@@ -253,9 +234,8 @@ public class PodElementTypeFactory {
 
     if (name.equals("OVER_SECTION_CONTENT")) {
       return new PodElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiOverSectionContentImpl(node);
         }
       };
@@ -263,9 +243,8 @@ public class PodElementTypeFactory {
 
     if (name.equals("POD_VERBATIM_PARAGRAPH")) {
       return new PodElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiPodVerbatimParagraphImpl(node);
         }
       };
@@ -273,9 +252,8 @@ public class PodElementTypeFactory {
 
     if (name.equals("POD_FORMAT_BOLD")) {
       return new PodElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiPodFormatBoldImpl(node);
         }
       };
@@ -283,9 +261,8 @@ public class PodElementTypeFactory {
 
     if (name.equals("POD_FORMAT_CODE")) {
       return new PodElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiPodFormatCodeImpl(node);
         }
       };
@@ -293,9 +270,8 @@ public class PodElementTypeFactory {
 
     if (name.equals("POD_FORMAT_ESCAPE")) {
       return new PodElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiPodFormatEscapeImpl(node);
         }
       };
@@ -303,9 +279,8 @@ public class PodElementTypeFactory {
 
     if (name.equals("POD_FORMAT_FILE")) {
       return new PodElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiPodFormatFileImpl(node);
         }
       };
@@ -313,9 +288,8 @@ public class PodElementTypeFactory {
 
     if (name.equals("POD_FORMAT_ITALIC")) {
       return new PodElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiPodFormatItalicImpl(node);
         }
       };
@@ -323,9 +297,8 @@ public class PodElementTypeFactory {
 
     if (name.equals("POD_FORMAT_LINK")) {
       return new PodElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiPodFormatLinkImpl(node);
         }
       };
@@ -333,9 +306,8 @@ public class PodElementTypeFactory {
 
     if (name.equals("POD_FORMAT_NBSP")) {
       return new PodElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiPodFormatNbspImpl(node);
         }
       };
@@ -343,9 +315,8 @@ public class PodElementTypeFactory {
 
     if (name.equals("POD_FORMAT_NULL")) {
       return new PodElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiPodFormatNullImpl(node);
         }
       };
@@ -358,15 +329,13 @@ public class PodElementTypeFactory {
           return new PsiPodParagraphImpl(stub, this);
         }
 
-        @NotNull
         @Override
-        public PodSectionStub createStub(@NotNull PodSectionParagraph psi, StubElement parentStub) {
+        public @NotNull PodSectionStub createStub(@NotNull PodSectionParagraph psi, StubElement parentStub) {
           return new PodSectionStub(parentStub, this, psi.getPresentableText());
         }
 
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiPodParagraphImpl(node);
         }
       };
@@ -374,9 +343,8 @@ public class PodElementTypeFactory {
 
     if (name.equals("POD_SECTION")) {
       return new PodElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiPodSectionImpl(node);
         }
       };
@@ -384,9 +352,8 @@ public class PodElementTypeFactory {
 
     if (name.equals("POD_SECTION_FORMAT")) {
       return new PodElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiPodSectionFormatImpl(node);
         }
       };
@@ -394,9 +361,8 @@ public class PodElementTypeFactory {
 
     if (name.equals("SECTION_TITLE")) {
       return new PodElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiSectionTitleImpl(node);
         }
       };
@@ -409,45 +375,40 @@ public class PodElementTypeFactory {
           return new PsiUnknownSectionImpl(stub, this);
         }
 
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiUnknownSectionImpl(node);
         }
       };
     }
     if (name.equals("LINK_TEXT")) {
       return new PodElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiLinkTextImpl(node);
         }
       };
     }
     if (name.equals("LINK_NAME")) {
       return new PodElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiLinkNameImpl(node);
         }
       };
     }
     if (name.equals("LINK_SECTION")) {
       return new PodElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiLinkSectionImpl(node);
         }
       };
     }
     if (name.equals("LINK_URL")) {
       return new PodElementType(name) {
-        @NotNull
         @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
+        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiLinkUrlImpl(node);
         }
       };

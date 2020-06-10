@@ -31,8 +31,7 @@ class PerlUnixHandler extends PerlOsHandler {
   }
 
   @Override
-  @NotNull
-  public String getPerlExecutableName() {
+  public @NotNull String getPerlExecutableName() {
     return "perl";
   }
 

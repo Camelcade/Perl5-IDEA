@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,7 +47,7 @@ public class PerlCodeMergingLexerAdapter extends LexerBase implements PerlElemen
   private int myBufferEnd;
   private int myState;
 
-  private boolean myAllowToMergeCodeBlocks;
+  private final boolean myAllowToMergeCodeBlocks;
 
   public PerlCodeMergingLexerAdapter(@Nullable Project project, boolean allowToMergeCodeBlocks) {
     myAllowToMergeCodeBlocks = allowToMergeCodeBlocks;
@@ -55,7 +55,7 @@ public class PerlCodeMergingLexerAdapter extends LexerBase implements PerlElemen
   }
 
   @Override
-  public void start(@NotNull final CharSequence buffer, int startOffset, int endOffset, final int initialState) {
+  public void start(final @NotNull CharSequence buffer, int startOffset, int endOffset, final int initialState) {
     myText = buffer;
     myTokenStart = myTokenEnd = myBufferStart = startOffset;
     myBufferEnd = endOffset;
@@ -93,9 +93,8 @@ public class PerlCodeMergingLexerAdapter extends LexerBase implements PerlElemen
     myTokenType = null;
   }
 
-  @NotNull
   @Override
-  public CharSequence getBufferSequence() {
+  public @NotNull CharSequence getBufferSequence() {
     return myText;
   }
 

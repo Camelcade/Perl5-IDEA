@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,9 +28,8 @@ import com.perl5.lang.pod.parser.psi.references.PodLinkToSectionReference;
 import org.jetbrains.annotations.Nullable;
 
 public class PodGoToDeclarationHandler implements GotoDeclarationHandler {
-  @Nullable
   @Override
-  public PsiElement[] getGotoDeclarationTargets(@Nullable PsiElement sourceElement, int offset, Editor editor) {
+  public @Nullable PsiElement[] getGotoDeclarationTargets(@Nullable PsiElement sourceElement, int offset, Editor editor) {
     if (sourceElement == null || !sourceElement.getLanguage().isKindOf(PodLanguage.INSTANCE)) {
       return null;
     }

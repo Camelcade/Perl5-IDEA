@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,23 +56,19 @@ public class PerlBuiltInVariablesService {
     PerlGlobUtil.BUILT_IN.forEach(name -> myGlobs.put(name, new PerlBuiltInVariable(myPsiManager, "*" + name)));
   }
 
-  @Nullable
-  public PerlBuiltInVariable getScalar(@Nullable String name) {
+  public @Nullable PerlBuiltInVariable getScalar(@Nullable String name) {
     return myScalars.get(name);
   }
 
-  @Nullable
-  public PerlBuiltInVariable getArray(@Nullable String name) {
+  public @Nullable PerlBuiltInVariable getArray(@Nullable String name) {
     return myArrays.get(name);
   }
 
-  @Nullable
-  public PerlBuiltInVariable getHash(@Nullable String name) {
+  public @Nullable PerlBuiltInVariable getHash(@Nullable String name) {
     return myHashes.get(name);
   }
 
-  @Nullable
-  public PerlBuiltInVariable getGlob(@Nullable String name) {
+  public @Nullable PerlBuiltInVariable getGlob(@Nullable String name) {
     return myHashes.get(name);
   }
 
@@ -96,8 +92,7 @@ public class PerlBuiltInVariablesService {
     return processVariables(myGlobs, processor);
   }
 
-  @Nullable
-  public PerlVariableDeclarationElement getVariableDeclaration(@Nullable PerlVariableType type, @Nullable String variableName) {
+  public @Nullable PerlVariableDeclarationElement getVariableDeclaration(@Nullable PerlVariableType type, @Nullable String variableName) {
     if (StringUtil.isEmpty(variableName)) {
       return null;
     }
@@ -126,24 +121,21 @@ public class PerlBuiltInVariablesService {
     return true;
   }
 
-  @NotNull
-  public static PerlBuiltInVariablesService getInstance(@NotNull Project project) {
+  public static @NotNull PerlBuiltInVariablesService getInstance(@NotNull Project project) {
     return ServiceManager.getService(project, PerlBuiltInVariablesService.class);
   }
 
   /**
    * @return {@code @_}
    */
-  @NotNull
-  public static PerlBuiltInVariable getImplicitArray(@NotNull Project project) {
+  public static @NotNull PerlBuiltInVariable getImplicitArray(@NotNull Project project) {
     return Objects.requireNonNull(getInstance(project).getArray("_"));
   }
 
   /**
    * @return {@code $_}
    */
-  @NotNull
-  public static PerlBuiltInVariable getImplicitScalar(@NotNull Project project) {
+  public static @NotNull PerlBuiltInVariable getImplicitScalar(@NotNull Project project) {
     return Objects.requireNonNull(getInstance(project).getScalar("_"));
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,27 +38,23 @@ public class PerlSdkLibrary extends SyntheticLibrary implements ItemPresentation
     myRoots = roots;
   }
 
-  @Nullable
   @Override
-  public String getPresentableText() {
+  public @Nullable String getPresentableText() {
     return mySdk.getName();
   }
 
-  @Nullable
   @Override
-  public String getLocationString() {
+  public @Nullable String getLocationString() {
     return PerlProjectManager.getInterpreterPath(mySdk);
   }
 
-  @Nullable
   @Override
-  public Icon getIcon(boolean unused) {
+  public @Nullable Icon getIcon(boolean unused) {
     return ((SdkType)mySdk.getSdkType()).getIcon();
   }
 
-  @NotNull
   @Override
-  public Collection<VirtualFile> getSourceRoots() {
+  public @NotNull Collection<VirtualFile> getSourceRoots() {
     return myRoots;
   }
 

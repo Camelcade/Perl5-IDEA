@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,14 +42,12 @@ public abstract class GenericPerlRunConfigurationEditor<Configuration extends Ge
     super.applyEditorTo(perlRunConfiguration);
   }
 
-  @NotNull
   @Override
-  protected final JComponent getGeneralComponent() {
+  protected final @NotNull JComponent getGeneralComponent() {
     return myParametersPanel = createCommonParametersPanel();
   }
 
-  @NotNull
-  protected abstract GenericPerlRunConfigurationEditorPanel<Configuration> createCommonParametersPanel();
+  protected abstract @NotNull GenericPerlRunConfigurationEditorPanel<Configuration> createCommonParametersPanel();
 
   @Override
   protected void disposeEditor() {

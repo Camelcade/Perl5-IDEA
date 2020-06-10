@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,9 +43,8 @@ public class Perl5ProjectConfigurableWrapper implements UnnamedConfigurable {
     assert !myConfigurables.isEmpty();
   }
 
-  @Nullable
   @Override
-  public JComponent createComponent() {
+  public @Nullable JComponent createComponent() {
     if (myConfigurables.size() == 1) {
       return myConfigurables.get(0).createComponent();
     }

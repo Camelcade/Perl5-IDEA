@@ -58,8 +58,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
     super(viewProvider, HTMLMasonLanguage.INSTANCE);
   }
 
-  @Nullable
-  public VirtualFile getComponentRoot() {
+  public @Nullable VirtualFile getComponentRoot() {
     return HTMLMasonUtil.getComponentRoot(getProject(), getComponentVirtualFile());
   }
 
@@ -72,8 +71,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
    *
    * @return path
    */
-  @Nullable
-  public String getAbsoluteComponentPath() {
+  public @Nullable String getAbsoluteComponentPath() {
     VirtualFile componentFile = getComponentVirtualFile();
     VirtualFile componentRoot = getComponentRoot();
 
@@ -88,8 +86,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
    *
    * @return path
    */
-  @Nullable
-  public String getAbsoluteComponentContainerPath() {
+  public @Nullable String getAbsoluteComponentContainerPath() {
     VirtualFile componentFile = getComponentVirtualFile();
     VirtualFile componentRoot = getComponentRoot();
 
@@ -99,9 +96,8 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
     return null;
   }
 
-  @NotNull
   @Override
-  public List<PerlVariableDeclarationElement> getImplicitVariables() {
+  public @NotNull List<PerlVariableDeclarationElement> getImplicitVariables() {
 
     HTMLMasonSettings settings = HTMLMasonSettings.getInstance(getProject());
     if (myImplicitVariables == null || myMasonChangeCounter != settings.getChangeCounter()) {
@@ -120,8 +116,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
     return newImplicitVariables;
   }
 
-  @Nullable
-  public HTMLMasonFileImpl getParentComponent() {
+  public @Nullable HTMLMasonFileImpl getParentComponent() {
     String parentComponentPath = getParentComponentPath();
     HTMLMasonSettings settings = HTMLMasonSettings.getInstance(getProject());
     VirtualFile parentFile = null;
@@ -179,8 +174,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
     return null;
   }
 
-  @NotNull
-  public List<HTMLMasonFileImpl> getChildComponents() {
+  public @NotNull List<HTMLMasonFileImpl> getChildComponents() {
     final List<HTMLMasonFileImpl> result = new ArrayList<>();
     VirtualFile containingFile = getComponentVirtualFile();
 
@@ -268,14 +262,12 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
     }
   }
 
-  @Nullable
-  protected String getParentComponentPath() {
+  protected @Nullable String getParentComponentPath() {
     HTMLMasonFlagsStatement statement = getFlagsStatement();
     return statement == null ? null : statement.getParentComponentPath();
   }
 
-  @Nullable
-  public HTMLMasonFlagsStatement getFlagsStatement() {
+  public @Nullable HTMLMasonFlagsStatement getFlagsStatement() {
     StubElement<?> stub = getStub();
     FlagsStatementSeeker<PsiElement> seeker;
 
@@ -416,8 +408,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
    * @param name method name
    * @return list of child components
    */
-  @NotNull
-  public List<HTMLMasonMethodDefinition> findMethodDefinitionByNameInChildComponents(String name) {
+  public @NotNull List<HTMLMasonMethodDefinition> findMethodDefinitionByNameInChildComponents(String name) {
     List<HTMLMasonMethodDefinition> result = new ArrayList<>();
     Set<HTMLMasonFileImpl> recursionSet = new THashSet<>();
 
@@ -449,8 +440,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
    * @param name method name
    * @return method definition or null
    */
-  @Nullable
-  public HTMLMasonMethodDefinition findMethodDefinitionByNameInParents(String name) {
+  public @Nullable HTMLMasonMethodDefinition findMethodDefinitionByNameInParents(String name) {
     HTMLMasonFileImpl parentComponent = getParentComponent();
     return parentComponent == null ? null : parentComponent.findMethodDefinitionByNameInThisOrParents(name);
   }
@@ -461,8 +451,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
    * @param name method name
    * @return method definition or null
    */
-  @Nullable
-  public HTMLMasonMethodDefinition findMethodDefinitionByNameInThisOrParents(String name) {
+  public @Nullable HTMLMasonMethodDefinition findMethodDefinitionByNameInThisOrParents(String name) {
     HTMLMasonMethodDefinitionSeeker seeker = new HTMLMasonMethodDefinitionSeeker(name);
     processMethodDefinitionsInThisOrParents(seeker);
     return seeker.getResult();
@@ -488,8 +477,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
     return parentComponent != null && parentComponent.processMethodDefinitionsInThisOrParents(processor, recursionSet);
   }
 
-  @Nullable
-  public HTMLMasonMethodDefinition getMethodDefinitionByName(String name) {
+  public @Nullable HTMLMasonMethodDefinition getMethodDefinitionByName(String name) {
     HTMLMasonMethodDefinitionSeeker seeker = new HTMLMasonMethodDefinitionSeeker(name);
     processMethodDefinitions(seeker);
     return seeker.getResult();
@@ -522,9 +510,8 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
     return getBlocksMap().get(HTMLMasonMethodDefinition.class);
   }
 
-  @NotNull
   @Override
-  public List<HTMLMasonCompositeElement> getArgsBlocks() {
+  public @NotNull List<HTMLMasonCompositeElement> getArgsBlocks() {
     StubElement<?> rootStub = getStub();
 
     //noinspection Duplicates in HTMLMasonStubBasedNamedElementImpl

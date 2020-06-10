@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,16 +31,14 @@ public interface PerlIfUnlessCompound extends PerlConvertableCompoundSimple {
   }
 
 
-  @Nullable
   @Override
-  default PsiPerlBlock getBlock() {
+  default @Nullable PsiPerlBlock getBlock() {
     List<PsiPerlConditionalBlock> conditionalBlockList = getConditionalBlockList();
     return conditionalBlockList.isEmpty() ? null : conditionalBlockList.get(0).getBlock();
   }
 
-  @Nullable
   @Override
-  default PsiPerlConditionExpr getConditionExpr() {
+  default @Nullable PsiPerlConditionExpr getConditionExpr() {
     List<PsiPerlConditionalBlock> conditionalBlockList = getConditionalBlockList();
     if (conditionalBlockList.size() != 1) {
       return null;

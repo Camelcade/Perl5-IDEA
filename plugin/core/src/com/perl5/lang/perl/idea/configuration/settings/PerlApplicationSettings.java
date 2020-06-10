@@ -36,9 +36,8 @@ public class PerlApplicationSettings implements PersistentStateComponent<PerlApp
   public String pluginVersion = "";
   public boolean popupShown = false;
 
-  @Nullable
   @Override
-  public PerlApplicationSettings getState() {
+  public @Nullable PerlApplicationSettings getState() {
     return this;
   }
 

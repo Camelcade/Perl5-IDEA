@@ -42,11 +42,10 @@ import static com.intellij.codeInsight.TargetElementUtil.ELEMENT_NAME_ACCEPTED;
 import static com.intellij.codeInsight.TargetElementUtil.REFERENCED_ELEMENT_ACCEPTED;
 
 public class PodUsagesHighlightingFactory extends HighlightUsagesHandlerFactoryBase {
-  @Nullable
   @Override
-  public HighlightUsagesHandlerBase<?> createHighlightUsagesHandler(@NotNull Editor editor,
-                                                                    @NotNull PsiFile file,
-                                                                    @NotNull PsiElement target) {
+  public @Nullable HighlightUsagesHandlerBase<?> createHighlightUsagesHandler(@NotNull Editor editor,
+                                                                              @NotNull PsiFile file,
+                                                                              @NotNull PsiElement target) {
     if (!target.getLanguage().isKindOf(PodLanguage.INSTANCE)) {
       return null;
     }
@@ -57,9 +56,8 @@ public class PodUsagesHighlightingFactory extends HighlightUsagesHandlerFactoryB
       return null;
     }
     return new HighlightUsagesHandlerBase<PsiElement>(editor, file) {
-      @NotNull
       @Override
-      public List<PsiElement> getTargets() {
+      public @NotNull List<PsiElement> getTargets() {
         return Collections.singletonList(targetElement);
       }
 

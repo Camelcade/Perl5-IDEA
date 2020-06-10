@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Map;
 
 public class PerlLayerDescriptor {
-  private static Map<Integer, String> FLAGS_MAP = new LinkedHashMap<>();
+  private static final Map<Integer, String> FLAGS_MAP = new LinkedHashMap<>();
   private static final int UTF_FLAG = 0x00008000;
 
   static {
@@ -51,30 +51,23 @@ public class PerlLayerDescriptor {
   }
 
 
-  @Nullable
-  private String name;
-  @Nullable
-  private String param;
-  @Nullable
-  private String flags;
+  private @Nullable String name;
+  private @Nullable String param;
+  private @Nullable String flags;
 
-  @NotNull
-  public String getName() {
+  public @NotNull String getName() {
     return name == null ? "UNKNOWN" : name;
   }
 
-  @Nullable
-  public String getParam() {
+  public @Nullable String getParam() {
     return param;
   }
 
-  @Nullable
-  public String getFlags() {
+  public @Nullable String getFlags() {
     return flags;
   }
 
-  @Nullable
-  public String getPresentableFlags() {
+  public @Nullable String getPresentableFlags() {
     if (flags == null) {
       return null;
     }
@@ -84,7 +77,7 @@ public class PerlLayerDescriptor {
 
     List<String> flagNames = new ArrayList<>();
     for (Map.Entry<Integer, String> entry : FLAGS_MAP.entrySet()) {
-      if (( flagValue & entry.getKey() ) != 0) {
+      if ((flagValue & entry.getKey()) != 0) {
         flagNames.add(entry.getValue());
       }
     }
@@ -105,13 +98,12 @@ public class PerlLayerDescriptor {
     }
   }
 
-  @NotNull
-  public String getPresentableName() {
+  public @NotNull String getPresentableName() {
     String name = ":" + getName();
     if (param != null) {
       name += "(" + param + ")";
     }
-    if (( getIntFlag() & UTF_FLAG ) != 0) {
+    if ((getIntFlag() & UTF_FLAG) != 0) {
       name += " :utf8";
     }
     return name;

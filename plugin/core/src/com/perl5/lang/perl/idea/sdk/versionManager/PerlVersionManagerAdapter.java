@@ -43,28 +43,23 @@ import java.util.List;
 public abstract class PerlVersionManagerAdapter {
   private static final Logger LOG = Logger.getInstance(PerlVersionManagerAdapter.class);
 
-  @NotNull
-  private final String myVersionManagerPath;
-  @NotNull
-  private final PerlHostData<?, ?> myHostData;
+  private final @NotNull String myVersionManagerPath;
+  private final @NotNull PerlHostData<?, ?> myHostData;
 
   public PerlVersionManagerAdapter(@NotNull String versionManagerPath, @NotNull PerlHostData<?, ?> hostData) {
     myVersionManagerPath = versionManagerPath;
     myHostData = hostData;
   }
 
-  @NotNull
-  public String getVersionManagerPath() {
+  public @NotNull String getVersionManagerPath() {
     return myVersionManagerPath;
   }
 
-  @NotNull
-  public PerlHostData<?, ?> getHostData() {
+  public @NotNull PerlHostData<?, ?> getHostData() {
     return myHostData;
   }
 
-  @Nullable
-  protected abstract Icon getIcon();
+  protected abstract @Nullable Icon getIcon();
 
   protected void runInstallInConsole(@NotNull PerlCommandLine commandLine, @NotNull String entityName) {
     PerlRunUtil.runInConsole(
@@ -83,9 +78,8 @@ public abstract class PerlVersionManagerAdapter {
     runInstallInConsole(createInstallCommandLine(project, command), packageName);
   }
 
-  @NotNull
-  protected PerlCommandLine createInstallCommandLine(@NotNull Project project,
-                                                     @NotNull String command) {
+  protected @NotNull PerlCommandLine createInstallCommandLine(@NotNull Project project,
+                                                              @NotNull String command) {
     return new PerlCommandLine(getVersionManagerPath(), command)
       .withProject(project)
       .withHostData(myHostData)
@@ -100,8 +94,7 @@ public abstract class PerlVersionManagerAdapter {
   /**
    * Executes commands in the context of {@code distributionId}
    */
-  @Nullable
-  protected abstract List<String> execWith(@NotNull String distributionId, @NotNull String... commands);
+  protected abstract @Nullable List<String> execWith(@NotNull String distributionId, @NotNull String... commands);
 
   /**
    * Installs perl to the version manager
@@ -120,25 +113,21 @@ public abstract class PerlVersionManagerAdapter {
    * @return list of installed perl distributions
    * @apiNote returned items format is version-manager specific, for perlbrew it may be a {@code version@library}
    */
-  @Nullable
-  protected abstract List<String> getInstalledDistributionsList();
+  protected abstract @Nullable List<String> getInstalledDistributionsList();
 
   /**
    * @return list of perls available for installation
    */
-  @Nullable
-  protected abstract List<String> getInstallableDistributionsList();
+  protected abstract @Nullable List<String> getInstallableDistributionsList();
 
-  @Nullable
-  protected List<String> getOutput(@NotNull List<String> parameters) {
+  protected @Nullable List<String> getOutput(@NotNull List<String> parameters) {
     return getOutput(new PerlCommandLine(getVersionManagerPath()).withParameters(parameters));
   }
 
   /**
    * @return output of perlbrew command or null if error happened
    */
-  @Nullable
-  protected List<String> getOutput(@NotNull PerlCommandLine commandLine) {
+  protected @Nullable List<String> getOutput(@NotNull PerlCommandLine commandLine) {
     ProcessOutput processOutput = getProcessOutput(commandLine.withHostData(getHostData()));
     if (processOutput == null) {
       return null;
@@ -154,8 +143,7 @@ public abstract class PerlVersionManagerAdapter {
     return null;
   }
 
-  @Nullable
-  protected ProcessOutput getProcessOutput(@NotNull PerlCommandLine commandLine) {
+  protected @Nullable ProcessOutput getProcessOutput(@NotNull PerlCommandLine commandLine) {
     try {
       return PerlHostData.execAndGetOutput(commandLine.withHostData(getHostData()));
     }
@@ -166,18 +154,15 @@ public abstract class PerlVersionManagerAdapter {
     return null;
   }
 
-  @Nullable
-  protected List<String> getOutput(@NotNull String... parameters) {
+  protected @Nullable List<String> getOutput(@NotNull String... parameters) {
     return getOutput(Arrays.asList(parameters));
   }
 
-  @NotNull
-  protected String getNotificationGroup() {
+  protected @NotNull String getNotificationGroup() {
     return PerlBundle.message("perl.vm.notification.group");
   }
 
-  @NotNull
-  protected abstract String getErrorNotificationTitle();
+  protected abstract @NotNull String getErrorNotificationTitle();
 
   private void notifyUser(@NotNull String message) {
     Notifications.Bus.notify(new Notification(

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,8 +25,7 @@ import org.jetbrains.annotations.NotNull;
  * @param <Handler> for this data
  */
 public abstract class AbstractPerlData<Data extends AbstractPerlData<Data, Handler>, Handler extends AbstractPerlHandler<Data, Handler>> {
-  @NotNull
-  private final Handler myHandler;
+  private final @NotNull Handler myHandler;
 
   protected AbstractPerlData(@NotNull Handler handler) {
     myHandler = handler;
@@ -36,11 +35,9 @@ public abstract class AbstractPerlData<Data extends AbstractPerlData<Data, Handl
     getHandler().saveData(target, self());
   }
 
-  @NotNull
-  protected abstract Data self();
+  protected abstract @NotNull Data self();
 
-  @NotNull
-  public final Handler getHandler() {
+  public final @NotNull Handler getHandler() {
     return myHandler;
   }
 }

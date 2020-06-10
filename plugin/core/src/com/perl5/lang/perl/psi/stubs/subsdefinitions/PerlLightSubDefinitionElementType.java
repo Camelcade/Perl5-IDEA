@@ -50,9 +50,8 @@ public class PerlLightSubDefinitionElementType extends PerlSubDefinitionElementT
     return PerlLightSubDefinitionsReverseIndex.KEY;
   }
 
-  @NotNull
   @Override
-  public PerlSubDefinitionStub createStub(@NotNull PerlSubDefinitionElement psi, StubElement parentStub) {
+  public @NotNull PerlSubDefinitionStub createStub(@NotNull PerlSubDefinitionElement psi, StubElement parentStub) {
     if (psi instanceof PerlLightSubDefinitionElement && ((PerlLightSubDefinitionElement<?>)psi).isImplicit()) {
       return createStubElement(parentStub,
                                psi.getNamespaceName(),
@@ -64,14 +63,13 @@ public class PerlLightSubDefinitionElementType extends PerlSubDefinitionElementT
     return super.createStub(psi, parentStub);
   }
 
-  @NotNull
   @Override
-  protected PerlSubDefinitionStub createStubElement(StubElement<?> parentStub,
-                                                    String packageName,
-                                                    String functionName,
-                                                    @NotNull List<PerlSubArgument> arguments,
-                                                    @NotNull PerlValue returnValueFromCode,
-                                                    PerlSubAnnotations annotations) {
+  protected @NotNull PerlSubDefinitionStub createStubElement(StubElement<?> parentStub,
+                                                             String packageName,
+                                                             String functionName,
+                                                             @NotNull List<PerlSubArgument> arguments,
+                                                             @NotNull PerlValue returnValueFromCode,
+                                                             PerlSubAnnotations annotations) {
     return new PerlLightSubDefinitionStub(parentStub, packageName, functionName, arguments, annotations, returnValueFromCode, this);
   }
 }

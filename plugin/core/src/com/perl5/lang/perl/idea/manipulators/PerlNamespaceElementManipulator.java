@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,14 +35,12 @@ public class PerlNamespaceElementManipulator extends AbstractElementManipulator<
     return (PerlNamespaceElement)((PerlNamespaceElementImpl)element).replaceWithText(range.replace(element.getText(), newContent));
   }
 
-  @NotNull
   @Override
-  public TextRange getRangeInElement(@NotNull PerlNamespaceElement element) {
+  public @NotNull TextRange getRangeInElement(@NotNull PerlNamespaceElement element) {
     return getRangeInString(element.getText());
   }
 
-  @NotNull
-  public static TextRange getRangeInString(CharSequence elementText) {
+  public static @NotNull TextRange getRangeInString(CharSequence elementText) {
     int endOffset = elementText.length();
     while (endOffset > 0) {
       char currentChar = elementText.charAt(endOffset - 1);

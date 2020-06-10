@@ -55,24 +55,21 @@ class PerlBrewData extends PerlRealVersionManagerData<PerlBrewData, PerlBrewHand
     myInfo.putAll(infoData);
   }
 
-  @NotNull
   @Override
-  public List<File> getBinDirsPath() {
+  public @NotNull List<File> getBinDirsPath() {
     String perlbrewRoot = getPerlbrewRoot();
     return perlbrewRoot == null ? Collections.emptyList() : Collections.singletonList(new File(perlbrewRoot, "bin"));
   }
 
-  @Nullable
-  private String getPerlbrewRoot() {
+  private @Nullable String getPerlbrewRoot() {
     return myInfo.get(PERLBREW_ROOT);
   }
 
   /**
    * @see PerlBrewAdapter#execWith(java.lang.String, java.lang.String...)
    */
-  @NotNull
   @Override
-  public PerlCommandLine patchCommandLine(@NotNull PerlCommandLine originalCommandLine) {
+  public @NotNull PerlCommandLine patchCommandLine(@NotNull PerlCommandLine originalCommandLine) {
     return originalCommandLine.prependLineWith(getVersionManagerPath(), PERLBREW_EXEC, PERLBREW_QUIET, PERLBREW_WITH, getDistributionId());
   }
 
@@ -85,15 +82,13 @@ class PerlBrewData extends PerlRealVersionManagerData<PerlBrewData, PerlBrewHand
     perlBrewAdapter.runInstallInConsole(project, CpanminusAdapter.PACKAGE_NAME, PerlBrewAdapter.PERLBREW_INSTALL_CPANM);
   }
 
-  @NotNull
   @Override
-  protected final PerlBrewData self() {
+  protected final @NotNull PerlBrewData self() {
     return this;
   }
 
   @Contract("null->null")
-  @Nullable
-  public static PerlBrewData from(@Nullable Sdk sdk) {
+  public static @Nullable PerlBrewData from(@Nullable Sdk sdk) {
     return ObjectUtils.tryCast(PerlVersionManagerData.from(sdk), PerlBrewData.class);
   }
 }

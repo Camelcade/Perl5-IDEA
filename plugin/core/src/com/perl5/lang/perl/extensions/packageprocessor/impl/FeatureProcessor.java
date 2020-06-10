@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,15 +43,13 @@ public class FeatureProcessor extends PerlPragmaProcessorBase implements PerlPac
     }
   }
 
-  @NotNull
   @Override
-  public Map<String, String> getOptions() {
+  public @NotNull Map<String, String> getOptions() {
     return OPTIONS;
   }
 
-  @NotNull
   @Override
-  public Map<String, String> getOptionsBundles() {
+  public @NotNull Map<String, String> getOptionsBundles() {
     return OPTIONS_BUNDLES;
   }
 

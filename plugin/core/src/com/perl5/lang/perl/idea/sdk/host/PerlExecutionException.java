@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,16 +21,14 @@ import com.intellij.execution.process.ProcessOutput;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlExecutionException extends ExecutionException {
-  @NotNull
-  private final ProcessOutput myProcessOutput;
+  private final @NotNull ProcessOutput myProcessOutput;
 
   public PerlExecutionException(@NotNull ProcessOutput processOutput) {
     super("");
     myProcessOutput = processOutput;
   }
 
-  @NotNull
-  public ProcessOutput getProcessOutput() {
+  public @NotNull ProcessOutput getProcessOutput() {
     return myProcessOutput;
   }
 

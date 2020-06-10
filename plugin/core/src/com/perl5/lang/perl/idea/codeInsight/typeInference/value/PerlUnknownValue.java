@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,9 +33,8 @@ final class PerlUnknownValue extends PerlSpecialValue {
     return this;
   }
 
-  @Nullable
   @Override
-  protected PerlContextType getContextType() {
+  protected @Nullable PerlContextType getContextType() {
     return null;
   }
 
@@ -49,9 +48,8 @@ final class PerlUnknownValue extends PerlSpecialValue {
     return true;
   }
 
-  @NotNull
   @Override
-  public String getPresentableText() {
+  public @NotNull String getPresentableText() {
     return PerlBundle.message("perl.value.unknown.presentable");
   }
 

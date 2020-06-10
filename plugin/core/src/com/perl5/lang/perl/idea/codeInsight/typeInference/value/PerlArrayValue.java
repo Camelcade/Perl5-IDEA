@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,14 +39,12 @@ public final class PerlArrayValue extends PerlListValue implements Iterable<Perl
     super(deserializer);
   }
 
-  @NotNull
   @Override
-  public Iterator<PerlValue> iterator() {
+  public @NotNull Iterator<PerlValue> iterator() {
     return getElements().iterator();
   }
 
-  @NotNull
-  public PerlValue get(@NotNull PerlValue indexValue) {
+  public @NotNull PerlValue get(@NotNull PerlValue indexValue) {
     if (!(indexValue instanceof PerlScalarValue) || !isDeterministic()) {
       return UNKNOWN_VALUE;
     }
@@ -68,8 +66,7 @@ public final class PerlArrayValue extends PerlListValue implements Iterable<Perl
    * @param realElementOffset current element offset in {@link #getElements()}
    * @return adjusted search state
    */
-  @NotNull
-  private ElementSearchState doComputeGet(int realElementOffset, @NotNull ElementSearchState searchState) {
+  private @NotNull ElementSearchState doComputeGet(int realElementOffset, @NotNull ElementSearchState searchState) {
     List<PerlValue> elements = getElements();
 
     if (searchState.myStep < 0) {
@@ -101,16 +98,14 @@ public final class PerlArrayValue extends PerlListValue implements Iterable<Perl
     return "Array: " + getElements().toString();
   }
 
-  @NotNull
   @Override
-  public String getPresentableText() {
+  public @NotNull String getPresentableText() {
     return PerlBundle.message("perl.value.array.presentable",
                               getElements().stream().map(PerlValue::getPresentableText).collect(Collectors.joining(", ")));
   }
 
-  @NotNull
   @Override
-  protected PerlValue computeResolve(@NotNull PerlValueResolver resolver, @NotNull List<PerlValue> resolvedElements) {
+  protected @NotNull PerlValue computeResolve(@NotNull PerlValueResolver resolver, @NotNull List<PerlValue> resolvedElements) {
     return builder().addElements(resolvedElements).build();
   }
 
@@ -121,8 +116,7 @@ public final class PerlArrayValue extends PerlListValue implements Iterable<Perl
     return PerlValuesManager.intern(new PerlArrayValue(Arrays.asList(values)));
   }
 
-  @NotNull
-  public static Builder builder() {
+  public static @NotNull Builder builder() {
     return new Builder();
   }
 
@@ -150,12 +144,9 @@ public final class PerlArrayValue extends PerlListValue implements Iterable<Perl
 
   private static class ElementSearchState {
     private final int myStep;
-    @NotNull
-    private Set<PerlValue> myFoundValues = new HashSet<>();
-    @NotNull
-    private Set<Integer> myReachedOffsets = new HashSet<>();
-    @NotNull
-    private Integer myTargetOffset;
+    private @NotNull final Set<PerlValue> myFoundValues = new HashSet<>();
+    private @NotNull final Set<Integer> myReachedOffsets = new HashSet<>();
+    private @NotNull final Integer myTargetOffset;
 
     public ElementSearchState(int targetOffset, int virtualOffset, int step) {
       myTargetOffset = targetOffset;
@@ -209,8 +200,7 @@ public final class PerlArrayValue extends PerlListValue implements Iterable<Perl
       }
     }
 
-    @NotNull
-    public Set<Integer> getOffsets() {
+    public @NotNull Set<Integer> getOffsets() {
       return Collections.unmodifiableSet(myReachedOffsets);
     }
 
@@ -223,8 +213,7 @@ public final class PerlArrayValue extends PerlListValue implements Iterable<Perl
       myFoundValues.add(value);
     }
 
-    @NotNull
-    public PerlValue buildValue() {
+    public @NotNull PerlValue buildValue() {
       if (myFoundValues.size() == 1 && myReachedOffsets.isEmpty()) {
         return myFoundValues.iterator().next();
       }

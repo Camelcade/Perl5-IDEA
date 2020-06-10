@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,7 +38,7 @@ import java.util.Map;
 public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementTypes {
   private static final Logger LOG = Logger.getInstance(FlexAdapter.class);
   private static final int LAZY_BLOCK_MINIMAL_SIZE = 140;
-  private static Map<IElementType, Integer> SUBLEXINGS_MAP = new THashMap<>();
+  private static final Map<IElementType, Integer> SUBLEXINGS_MAP = new THashMap<>();
 
   static {
     SUBLEXINGS_MAP.put(LP_STRING_QW, PerlLexer.STRING_LIST);
@@ -54,11 +54,10 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
     SUBLEXINGS_MAP.put(LP_CODE_BLOCK_WITH_TRYCATCH, PerlLexer.YYINITIAL);
   }
 
-  @Nullable
-  private final Project myProject;
-  private boolean myIsForcingSublexing;
+  private final @Nullable Project myProject;
+  private final boolean myIsForcingSublexing;
   private boolean myIsSublexing = false;
-  private Lexer myMainLexer;
+  private final Lexer myMainLexer;
   private PerlSublexingLexerAdapter mySubLexer;
   private int myTokenStart;
   private int myTokenEnd;
@@ -123,9 +122,8 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
     myTokenType = null;
   }
 
-  @NotNull
   @Override
-  public CharSequence getBufferSequence() {
+  public @NotNull CharSequence getBufferSequence() {
     return myMainLexer.getBufferSequence();
   }
 
@@ -135,8 +133,7 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
   }
 
 
-  @NotNull
-  private PerlSublexingLexerAdapter getSubLexer() {
+  private @NotNull PerlSublexingLexerAdapter getSubLexer() {
     if (mySubLexer == null) {
       mySubLexer = new PerlSublexingLexerAdapter(myProject, false, true);
     }

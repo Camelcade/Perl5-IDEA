@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,15 +44,13 @@ public class HTMLMasonMethodElementType extends IStubElementType<HTMLMasonMethod
     return new HTMLMasonMethodDefinitionImpl(stub, this);
   }
 
-  @NotNull
   @Override
-  public HTMLMasonMethodDefinitionStub createStub(@NotNull HTMLMasonMethodDefinition psi, StubElement parentStub) {
+  public @NotNull HTMLMasonMethodDefinitionStub createStub(@NotNull HTMLMasonMethodDefinition psi, StubElement parentStub) {
     return new HTMLMasonMethodDefinitionStubImpl(parentStub, this, psi.getName());
   }
 
-  @NotNull
   @Override
-  public String getExternalId() {
+  public @NotNull String getExternalId() {
     return "HTML::Mason::" + super.toString();
   }
 
@@ -61,9 +59,9 @@ public class HTMLMasonMethodElementType extends IStubElementType<HTMLMasonMethod
     dataStream.writeName(stub.getName());
   }
 
-  @NotNull
   @Override
-  public HTMLMasonMethodDefinitionStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
+  public @NotNull HTMLMasonMethodDefinitionStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub)
+    throws IOException {
     return new HTMLMasonMethodDefinitionStubImpl(parentStub, this, PerlStubSerializationUtil.readString(dataStream));
   }
 
@@ -72,9 +70,8 @@ public class HTMLMasonMethodElementType extends IStubElementType<HTMLMasonMethod
 
   }
 
-  @NotNull
   @Override
-  public PsiElement getPsiElement(@NotNull ASTNode node) {
+  public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
     return new HTMLMasonMethodDefinitionImpl(node);
   }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,21 +40,18 @@ class PerlSystemHandler
     super(bean);
   }
 
-  @NotNull
   @Override
-  public PerlSystemData createData() {
+  public @NotNull PerlSystemData createData() {
     return new PerlSystemData(this);
   }
 
-  @NotNull
   @Override
-  public String getMenuItemTitle() {
+  public @NotNull String getMenuItemTitle() {
     return PerlBundle.message("perl.vm.system.menu.title");
   }
 
-  @NotNull
   @Override
-  public String getPresentableName() {
+  public @NotNull String getPresentableName() {
     return PerlBundle.message("perl.vm.system.presentable.name");
   }
 
@@ -83,8 +80,7 @@ class PerlSystemHandler
   /**
    * Suggests a default path for a file chooser or text input
    */
-  @Nullable
-  private File suggestHomePath(@NotNull PerlHostData<?, ?> hostData) {
+  private @Nullable File suggestHomePath(@NotNull PerlHostData<?, ?> hostData) {
     return hostData.findFileByName(hostData.getOsHandler().getPerlExecutableName());
   }
 

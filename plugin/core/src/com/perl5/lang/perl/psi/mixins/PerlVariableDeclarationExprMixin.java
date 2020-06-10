@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,9 +28,8 @@ public abstract class PerlVariableDeclarationExprMixin extends PerlCompositeElem
     super(node);
   }
 
-  @Nullable
   @Override
-  public String getDeclarationType() {
+  public @Nullable String getDeclarationType() {
     PerlNamespaceElement namespaceElement = getNamespaceElement();
     if (namespaceElement != null) {
       return namespaceElement.getCanonicalName();
@@ -38,9 +37,8 @@ public abstract class PerlVariableDeclarationExprMixin extends PerlCompositeElem
     return null;
   }
 
-  @Nullable
   @Override
-  public PerlNamespaceElement getNamespaceElement() {
+  public @Nullable PerlNamespaceElement getNamespaceElement() {
     return findChildByClass(PerlNamespaceElement.class);
   }
 }

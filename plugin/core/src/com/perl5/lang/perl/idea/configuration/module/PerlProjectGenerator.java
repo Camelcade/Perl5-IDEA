@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,21 +33,18 @@ import static com.perl5.lang.perl.util.PerlPackageUtil.DEFAULT_TEST_DIR;
 
 public class PerlProjectGenerator extends PerlProjectGeneratorBase<PerlProjectGenerationSettings> {
   private static final Logger LOG = Logger.getInstance(PerlProjectGenerator.class);
-  @NotNull
   @Override
-  public String getName() {
+  public @NotNull String getName() {
     return PerlModuleType.getInstance().getName();
   }
 
-  @Nullable
   @Override
-  public Icon getLogo() {
+  public @Nullable Icon getLogo() {
     return PerlModuleType.getInstance().getIcon();
   }
 
-  @NotNull
   @Override
-  public PerlProjectGeneratorPeer createPeer() {
+  public @NotNull PerlProjectGeneratorPeer createPeer() {
     return new PerlProjectGeneratorPeer();
   }
 

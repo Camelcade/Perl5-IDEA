@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -52,16 +52,14 @@ public class PerlImplicitDeclarationsService {
   private final Map<String, PerlImplicitVariableDeclaration> myScalarsMap = new HashMap<>();
   private final Map<String, PerlImplicitVariableDeclaration> myArraysMap = new HashMap<>();
   private final Map<String, PerlImplicitVariableDeclaration> myHashesMap = new HashMap<>();
-  @NotNull
-  private final PsiManager myPsiManager;
+  private final @NotNull PsiManager myPsiManager;
 
   public PerlImplicitDeclarationsService(@NotNull Project project) {
     myPsiManager = PsiManager.getInstance(project);
     PerlImplicitDeclarationsProvider.EP_NAME.extensions().forEach(it -> it.registerDeclarations(this));
   }
 
-  @NotNull
-  public PsiManager getPsiManager() {
+  public @NotNull PsiManager getPsiManager() {
     return myPsiManager;
   }
 
@@ -85,10 +83,9 @@ public class PerlImplicitDeclarationsService {
     doRegister(mySubsMap, subDefinition);
   }
 
-  @NotNull
-  public PerlImplicitSubDefinition registerAnonSub(@NotNull String namespaceName,
-                                                   @NotNull String baseName,
-                                                   @Nullable PerlValue returnValue) {
+  public @NotNull PerlImplicitSubDefinition registerAnonSub(@NotNull String namespaceName,
+                                                            @NotNull String baseName,
+                                                            @Nullable PerlValue returnValue) {
     PerlImplicitSubDefinition subDefinition = new PerlImplicitSubDefinition(
       myPsiManager, baseName, namespaceName, Collections.emptyList(), returnValue, true);
     doRegister(mySubsMap, subDefinition);
@@ -101,19 +98,16 @@ public class PerlImplicitDeclarationsService {
     targetMap.put(canonicalName, entity);
   }
 
-  @Nullable
-  public PerlSubDefinitionElement getCoreSub(@Nullable String subName) {
+  public @Nullable PerlSubDefinitionElement getCoreSub(@Nullable String subName) {
     return getSub(CORE_NAMESPACE, subName);
   }
 
-  @Nullable
-  public PerlSubDefinitionElement getSub(@Nullable String packageName, @Nullable String subName) {
+  public @Nullable PerlSubDefinitionElement getSub(@Nullable String packageName, @Nullable String subName) {
     return getSub(packageName + NAMESPACE_SEPARATOR + subName);
   }
 
   @Contract("null->null")
-  @Nullable
-  public PerlSubDefinitionElement getSub(@Nullable String canonicalName) {
+  public @Nullable PerlSubDefinitionElement getSub(@Nullable String canonicalName) {
     return mySubsMap.get(canonicalName);
   }
 
@@ -137,20 +131,17 @@ public class PerlImplicitDeclarationsService {
   }
 
   @Contract("null->null")
-  @Nullable
-  public PerlVariableDeclarationElement getScalar(@Nullable String canonicalName) {
+  public @Nullable PerlVariableDeclarationElement getScalar(@Nullable String canonicalName) {
     return myScalarsMap.get(canonicalName);
   }
 
   @Contract("null->null")
-  @Nullable
-  public PerlVariableDeclarationElement getArray(@Nullable String canonicalName) {
+  public @Nullable PerlVariableDeclarationElement getArray(@Nullable String canonicalName) {
     return myArraysMap.get(canonicalName);
   }
 
   @Contract("null->null")
-  @Nullable
-  public PerlVariableDeclarationElement getHash(@Nullable String canonicalName) {
+  public @Nullable PerlVariableDeclarationElement getHash(@Nullable String canonicalName) {
     return myHashesMap.get(canonicalName);
   }
 
@@ -207,8 +198,7 @@ public class PerlImplicitDeclarationsService {
     return true;
   }
 
-  @NotNull
-  public static PerlImplicitDeclarationsService getInstance(@NotNull Project project) {
+  public static @NotNull PerlImplicitDeclarationsService getInstance(@NotNull Project project) {
     return ServiceManager.getService(project, PerlImplicitDeclarationsService.class);
   }
 }

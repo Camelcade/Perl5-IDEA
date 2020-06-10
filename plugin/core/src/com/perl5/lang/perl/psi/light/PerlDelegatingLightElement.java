@@ -35,8 +35,7 @@ import javax.swing.*;
 
 public class PerlDelegatingLightElement<Delegate extends PsiElement> extends LightElement {
   private final IElementType myElementType;
-  @NotNull
-  private final Delegate myDelegate;
+  private final @NotNull Delegate myDelegate;
 
   public PerlDelegatingLightElement(@NotNull Delegate delegate, @NotNull IElementType elementType) {
     super(delegate.getManager(), delegate.getLanguage());
@@ -48,8 +47,7 @@ public class PerlDelegatingLightElement<Delegate extends PsiElement> extends Lig
     return myElementType;
   }
 
-  @NotNull
-  public Delegate getDelegate() {
+  public @NotNull Delegate getDelegate() {
     return myDelegate;
   }
 
@@ -73,9 +71,8 @@ public class PerlDelegatingLightElement<Delegate extends PsiElement> extends Lig
     return getDelegate().getReference();
   }
 
-  @NotNull
   @Override
-  public PsiReference[] getReferences() {
+  public @NotNull PsiReference[] getReferences() {
     return getDelegate().getReferences();
   }
 
@@ -128,21 +125,18 @@ public class PerlDelegatingLightElement<Delegate extends PsiElement> extends Lig
     return this;
   }
 
-  @NotNull
   @Override
-  public GlobalSearchScope getResolveScope() {
+  public @NotNull GlobalSearchScope getResolveScope() {
     return getDelegate().getResolveScope();
   }
 
-  @NotNull
   @Override
-  public SearchScope getUseScope() {
+  public @NotNull SearchScope getUseScope() {
     return getDelegate().getUseScope();
   }
 
-  @NotNull
   @Override
-  public Project getProject() {
+  public @NotNull Project getProject() {
     return getDelegate().getProject();
   }
 
@@ -151,15 +145,13 @@ public class PerlDelegatingLightElement<Delegate extends PsiElement> extends Lig
     return getDelegate().isEquivalentTo(another);
   }
 
-  @Nullable
   @Override
-  public Icon getIcon(int flags) {
+  public @Nullable Icon getIcon(int flags) {
     return getDelegate().getIcon(flags);
   }
 
-  @NotNull
   @Override
-  public Language getLanguage() {
+  public @NotNull Language getLanguage() {
     return getDelegate().getLanguage();
   }
 
@@ -173,9 +165,8 @@ public class PerlDelegatingLightElement<Delegate extends PsiElement> extends Lig
     return getDelegate();
   }
 
-  @NotNull
   @Override
-  public PsiElement[] getChildren() {
+  public @NotNull PsiElement[] getChildren() {
     return EMPTY_ARRAY;
   }
 
@@ -194,9 +185,8 @@ public class PerlDelegatingLightElement<Delegate extends PsiElement> extends Lig
     return getDelegate().getStartOffsetInParent();
   }
 
-  @NotNull
   @Override
-  public char[] textToCharArray() {
+  public @NotNull char[] textToCharArray() {
     return getDelegate().textToCharArray();
   }
 
@@ -265,9 +255,8 @@ public class PerlDelegatingLightElement<Delegate extends PsiElement> extends Lig
     return getDelegate().copy();
   }
 
-  @NotNull
   @Override
-  public PsiElement getNavigationElement() {
+  public @NotNull PsiElement getNavigationElement() {
     return getDelegate().getNavigationElement();
   }
 

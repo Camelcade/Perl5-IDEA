@@ -83,9 +83,8 @@ class PerlRemoteDebuggingConfigurationEditor extends PerlConfigurationEditorBase
     super.applyEditorTo(perlConfiguration);
   }
 
-  @Nullable
   @Override
-  protected JComponent getDebuggingComponent() {
+  protected @Nullable JComponent getDebuggingComponent() {
     JComponent debugPanel = super.getDebuggingComponent();
 
     if (debugPanel == null) {

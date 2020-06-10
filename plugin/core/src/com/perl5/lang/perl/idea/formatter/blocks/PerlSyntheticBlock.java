@@ -33,22 +33,15 @@ import java.util.Objects;
  * Synthetic block for wrapping group of other blocks
  */
 public class PerlSyntheticBlock implements PerlAstBlock {
-  @NotNull
-  private final List<Block> mySubBlocks;
-  @Nullable
-  private final Wrap myWrap;
-  @Nullable
-  private final Alignment myAlignment;
-  @NotNull
-  private final PerlFormattingContext myContext;
-  @NotNull
-  private final AtomicNotNullLazyValue<TextRange> myRangeProvider = AtomicNotNullLazyValue.createValue(
+  private final @NotNull List<Block> mySubBlocks;
+  private final @Nullable Wrap myWrap;
+  private final @Nullable Alignment myAlignment;
+  private final @NotNull PerlFormattingContext myContext;
+  private final @NotNull AtomicNotNullLazyValue<TextRange> myRangeProvider = AtomicNotNullLazyValue.createValue(
     () -> TextRange.create(getFirstRealBlock().getTextRange().getStartOffset(), getLastRealBlock().getTextRange().getEndOffset())
   );
-  @Nullable
-  private Indent myIndent;
-  @NotNull
-  private final PerlAstBlock myRealBlock;
+  private @Nullable Indent myIndent;
+  private final @NotNull PerlAstBlock myRealBlock;
 
   public PerlSyntheticBlock(@NotNull PerlAstBlock realBlock,
                             @NotNull List<Block> subBlocks,
@@ -71,25 +64,21 @@ public class PerlSyntheticBlock implements PerlAstBlock {
   }
 
   @Override
-  @NotNull
-  public ASTBlock getRealBlock() {
+  public @NotNull ASTBlock getRealBlock() {
     return myRealBlock.getRealBlock();
   }
 
-  @NotNull
   @Override
-  public ASTNode getNode() {
+  public @NotNull ASTNode getNode() {
     return Objects.requireNonNull(getRealBlock().getNode());
   }
 
-  @NotNull
   @Override
-  public TextRange getTextRange() {
+  public @NotNull TextRange getTextRange() {
     return myRangeProvider.getValue();
   }
 
-  @NotNull
-  public Block getFirstRealBlock() {
+  public @NotNull Block getFirstRealBlock() {
     Block candidate = mySubBlocks.get(0);
     while (candidate instanceof PerlSyntheticBlock) {
       candidate = ((PerlSyntheticBlock)candidate).getFirstRealBlock();
@@ -97,8 +86,7 @@ public class PerlSyntheticBlock implements PerlAstBlock {
     return candidate;
   }
 
-  @NotNull
-  public Block getLastRealBlock() {
+  public @NotNull Block getLastRealBlock() {
     Block candidate = mySubBlocks.get(mySubBlocks.size() - 1);
     while (candidate instanceof PerlSyntheticBlock) {
       candidate = ((PerlSyntheticBlock)candidate).getLastRealBlock();
@@ -106,21 +94,18 @@ public class PerlSyntheticBlock implements PerlAstBlock {
     return candidate;
   }
 
-  @NotNull
   @Override
-  public List<Block> getSubBlocks() {
+  public @NotNull List<Block> getSubBlocks() {
     return mySubBlocks;
   }
 
-  @Nullable
   @Override
-  public Wrap getWrap() {
+  public @Nullable Wrap getWrap() {
     return myWrap;
   }
 
-  @Nullable
   @Override
-  public Indent getIndent() {
+  public @Nullable Indent getIndent() {
     return myIndent;
   }
 
@@ -129,21 +114,18 @@ public class PerlSyntheticBlock implements PerlAstBlock {
     myIndent = indent;
   }
 
-  @Nullable
   @Override
-  public Alignment getAlignment() {
+  public @Nullable Alignment getAlignment() {
     return myAlignment;
   }
 
-  @Nullable
   @Override
-  public Spacing getSpacing(@Nullable Block child1, @NotNull Block child2) {
+  public @Nullable Spacing getSpacing(@Nullable Block child1, @NotNull Block child2) {
     return myContext.getSpacing(this, child1, child2);
   }
 
-  @NotNull
   @Override
-  public ChildAttributes getChildAttributes(int newChildIndex) {
+  public @NotNull ChildAttributes getChildAttributes(int newChildIndex) {
     return myContext.getChildAttributes(this, newChildIndex);
   }
 

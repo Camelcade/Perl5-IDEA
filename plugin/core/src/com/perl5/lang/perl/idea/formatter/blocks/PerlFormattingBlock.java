@@ -49,8 +49,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
       PerlParserUtil.DUMMY_BLOCK
     );
 
-  @NotNull
-  protected final PerlFormattingContext myContext;
+  protected final @NotNull PerlFormattingContext myContext;
   private Indent myIndent;
   private Boolean myIsFirst;
   private Boolean myIsLast;
@@ -71,22 +70,19 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
     myIndent = indent;
   }
 
-  @NotNull
-  protected final PerlFormattingContext getContext() {
+  protected final @NotNull PerlFormattingContext getContext() {
     return myContext;
   }
 
-  @NotNull
   @Override
-  protected final List<Block> buildChildren() {
+  protected final @NotNull List<Block> buildChildren() {
     if (isLeaf()) {
       return Collections.emptyList();
     }
     return mySubBlocksProvider.getValue();
   }
 
-  @NotNull
-  protected List<Block> buildSubBlocks() {
+  protected @NotNull List<Block> buildSubBlocks() {
     final List<Block> blocks = new ArrayList<>();
 
     for (ASTNode child = myNode.getFirstChildNode(); child != null; child = child.getTreeNext()) {
@@ -97,8 +93,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
     return processSubBlocks(blocks);
   }
 
-  @NotNull
-  private List<Block> processSubBlocks(@NotNull List<Block> rawBlocks) {
+  private @NotNull List<Block> processSubBlocks(@NotNull List<Block> rawBlocks) {
     IElementType elementType = getElementType();
     if (elementType == SIGNATURE_ELEMENT && rawBlocks.size() == 1) {
       while (rawBlocks.size() == 1) {
@@ -154,9 +149,8 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
     return new PerlFormattingBlock(node, myContext);
   }
 
-  @Nullable
   @Override
-  public Spacing getSpacing(@Nullable Block child1, @NotNull Block child2) {
+  public @Nullable Spacing getSpacing(@Nullable Block child1, @NotNull Block child2) {
     return myContext.getSpacing(this, child1, child2);
   }
 
@@ -170,15 +164,13 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
     return myIndent;
   }
 
-  @Nullable
   @Override
-  protected final Indent getChildIndent() {
+  protected final @Nullable Indent getChildIndent() {
     throw new IllegalArgumentException("Formatting context must be used for this");
   }
 
-  @NotNull
   @Override
-  public final ChildAttributes getChildAttributes(int newChildIndex) {
+  public final @NotNull ChildAttributes getChildAttributes(int newChildIndex) {
     return myContext.getChildAttributes(this, newChildIndex);
   }
 

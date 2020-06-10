@@ -27,27 +27,23 @@ public class MasonInternalComponentFileType extends MasonTopLevelComponentFileTy
   public static final MasonInternalComponentFileType INSTANCE = new MasonInternalComponentFileType();
   public static final String INTERNAL_COMPONENT_EXTENSION = "mi";
 
-  @NotNull
   @Override
-  public String getName() {
+  public @NotNull String getName() {
     return "Mason2 Internal Component";
   }
 
-  @NotNull
   @Override
-  public String getDescription() {
+  public @NotNull String getDescription() {
     return "Mason2 internal component";
   }
 
-  @NotNull
   @Override
-  public String getDefaultExtension() {
+  public @NotNull String getDefaultExtension() {
     return INTERNAL_COMPONENT_EXTENSION;
   }
 
-  @Nullable
   @Override
-  public Icon getIcon() {
+  public @Nullable Icon getIcon() {
     return Mason2Icons.MASON_INTERNAL_COMPONENT_ICON;
   }
 }

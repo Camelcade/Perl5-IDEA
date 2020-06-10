@@ -46,9 +46,8 @@ public class PerlSpellCheckingStrategy extends SpellcheckingStrategy {
     }
   };
 
-  @NotNull
   @Override
-  public Tokenizer<?> getTokenizer(PsiElement element) {
+  public @NotNull Tokenizer<?> getTokenizer(PsiElement element) {
     if (STRING_CONTENT_TOKENSET.contains(PsiUtilCore.getElementType(element))) {
       PsiElement lightNameIdentifierOwner = PerlTargetElementEvaluatorEx2.getLightNameIdentifierOwner(element);
       if (lightNameIdentifierOwner != null) {

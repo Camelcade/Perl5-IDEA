@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,8 +40,7 @@ public abstract class PodStubBasedTitledSection extends PodStubBasedSection impl
   }
 
   @Override
-  @Nullable
-  public String getTitleText() {
+  public @Nullable String getTitleText() {
     PodSectionStub stub = getGreenStub();
     if (stub != null) {
       return stub.getContent();
@@ -75,21 +74,18 @@ public abstract class PodStubBasedTitledSection extends PodStubBasedSection impl
     return this;
   }
 
-  @Nullable
   @Override
-  public String getPresentableText() {
+  public @Nullable String getPresentableText() {
     return getTitleText();
   }
 
-  @Nullable
   @Override
-  public Icon getIcon(boolean unused) {
+  public @Nullable Icon getIcon(boolean unused) {
     return getContainingFile().getIcon(0);
   }
 
-  @Nullable
   @Override
-  public String getPodLinkText() {
+  public @Nullable String getPodLinkText() {
     return getTitleText();
   }
 }

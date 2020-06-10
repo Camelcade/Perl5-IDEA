@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,8 +38,7 @@ public interface PerlImportsProvider {
   @Contract("null->false")
   boolean isApplicable(@Nullable PerlNamespaceDefinitionElement namespaceDefinitionElement);
 
-  @NotNull
-  default List<PerlExportDescriptor> getExportDescriptors(PerlNamespaceDefinitionElement namespaceElement) {
+  default @NotNull List<PerlExportDescriptor> getExportDescriptors(PerlNamespaceDefinitionElement namespaceElement) {
     return Collections.emptyList();
   }
 

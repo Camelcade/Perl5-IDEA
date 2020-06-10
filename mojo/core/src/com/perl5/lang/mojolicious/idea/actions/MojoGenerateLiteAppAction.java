@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,39 +30,33 @@ public class MojoGenerateLiteAppAction extends MojoGenerateAction {
     super(MojoBundle.message("mojo.action.generate.lite.app"));
   }
 
-  @Nullable
   @Override
-  protected InputValidator getNameValidator() {
+  protected @Nullable InputValidator getNameValidator() {
     return null;
   }
 
-  @NotNull
   @Override
-  protected Icon getPromptIcon() {
+  protected @NotNull Icon getPromptIcon() {
     return MojoIcons.MOJO_LITE_APP_ICON;
   }
 
-  @NotNull
   @Override
-  protected String getPromptTitle() {
+  protected @NotNull String getPromptTitle() {
     return MojoBundle.message("mojo.action.generate.lite.app.prompt.title");
   }
 
-  @NotNull
   @Override
-  protected String getPromptMessage() {
+  protected @NotNull String getPromptMessage() {
     return MojoBundle.message("mojo.action.generate.lite.app.prompt.message");
   }
 
-  @NotNull
   @Override
-  protected String getGenerateCommand() {
+  protected @NotNull String getGenerateCommand() {
     return "lite_app";
   }
 
-  @NotNull
   @Override
-  protected String getDefaultName() {
+  protected @NotNull String getDefaultName() {
     return "myapp.pl";
   }
 }

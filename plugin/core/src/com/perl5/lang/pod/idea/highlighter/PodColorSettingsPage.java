@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,45 +40,38 @@ public class PodColorSettingsPage implements ColorSettingsPage {
     new AttributesDescriptor(PerlBundle.message("pod.color.settings.formatter.markup"), PodSyntaxHighlighter.POD_FORMATTER_MARKUP_KEY),
   };
 
-  @Nullable
   @Override
-  public Icon getIcon() {
+  public @Nullable Icon getIcon() {
     return PerlIcons.POD_FILE;
   }
 
-  @NotNull
   @Override
-  public SyntaxHighlighter getHighlighter() {
+  public @NotNull SyntaxHighlighter getHighlighter() {
     return new PodSyntaxHighlighter(null);
   }
 
-  @NotNull
   @Override
-  public String getDemoText() {
+  public @NotNull String getDemoText() {
     return CodeStyleAbstractPanel.readFromFile(PodColorSettingsPage.class, "podColorsSample.txt");
   }
 
-  @Nullable
   @Override
-  public Map<String, TextAttributesKey> getAdditionalHighlightingTagToDescriptorMap() {
+  public @Nullable Map<String, TextAttributesKey> getAdditionalHighlightingTagToDescriptorMap() {
     return null;
   }
 
-  @NotNull
   @Override
-  public AttributesDescriptor[] getAttributeDescriptors() {
+  public @NotNull AttributesDescriptor[] getAttributeDescriptors() {
     return DESCRIPTORS;
   }
 
-  @NotNull
   @Override
-  public ColorDescriptor[] getColorDescriptors() {
+  public @NotNull ColorDescriptor[] getColorDescriptors() {
     return ColorDescriptor.EMPTY_ARRAY;
   }
 
-  @NotNull
   @Override
-  public String getDisplayName() {
+  public @NotNull String getDisplayName() {
     return "Perl5 POD";
   }
 }

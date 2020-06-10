@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,8 +20,7 @@ import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlSubValueResolver extends PerlValueResolver {
-  @NotNull
-  private final PerlValue myArguments;
+  private final @NotNull PerlValue myArguments;
 
   public PerlSubValueResolver(@NotNull PsiElement contextElement,
                               @NotNull PerlValue arguments) {
@@ -29,9 +28,8 @@ public class PerlSubValueResolver extends PerlValueResolver {
     myArguments = arguments;
   }
 
-  @NotNull
   @Override
-  protected PerlValue substitute(@NotNull PerlValue perlValue) {
+  protected @NotNull PerlValue substitute(@NotNull PerlValue perlValue) {
     return perlValue == PerlValues.ARGUMENTS_VALUE ? myArguments : perlValue;
   }
 

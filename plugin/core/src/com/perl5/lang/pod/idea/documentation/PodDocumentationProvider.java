@@ -50,9 +50,8 @@ import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.POD;
 public class PodDocumentationProvider extends PerlDocumentationProviderBase implements PodElementTypes {
   private static final Logger LOG = Logger.getInstance(PodDocumentationProvider.class);
 
-  @Nullable
   @Override
-  public String generateDoc(@Nullable PsiElement element, @Nullable PsiElement originalElement) {
+  public @Nullable String generateDoc(@Nullable PsiElement element, @Nullable PsiElement originalElement) {
     return doGenerateDoc(element);
   }
 
@@ -70,12 +69,11 @@ public class PodDocumentationProvider extends PerlDocumentationProviderBase impl
     return super.getDocumentationElementForLookupItem(psiManager, object, element);
   }
 
-  @Nullable
   @Override
-  public PsiElement getCustomDocumentationElement(@NotNull Editor editor,
-                                                  @NotNull PsiFile file,
-                                                  @Nullable PsiElement contextElement,
-                                                  int targetOffset) {
+  public @Nullable PsiElement getCustomDocumentationElement(@NotNull Editor editor,
+                                                            @NotNull PsiFile file,
+                                                            @Nullable PsiElement contextElement,
+                                                            int targetOffset) {
     if (contextElement == null || contextElement.getLanguage() != PodLanguage.INSTANCE) {
       return null;
     }
@@ -94,9 +92,8 @@ public class PodDocumentationProvider extends PerlDocumentationProviderBase impl
     return PerlDocumentationProvider.findDocumentation(editor);
   }
 
-  @Nullable
   @Override
-  public PsiElement getDocumentationElementForLink(PsiManager psiManager, String link, PsiElement context) {
+  public @Nullable PsiElement getDocumentationElementForLink(PsiManager psiManager, String link, PsiElement context) {
     if (context instanceof PodCompositeElement || context instanceof PerlFile) {
       try {
         return PerlDocUtil.resolveDescriptor(PodLinkDescriptor.createFromUrl(URLDecoder.decode(link, "UTF-8")), context, false);
@@ -108,8 +105,7 @@ public class PodDocumentationProvider extends PerlDocumentationProviderBase impl
     return super.getDocumentationElementForLink(psiManager, link, context);
   }
 
-  @Nullable
-  public static String doGenerateDoc(@Nullable PsiElement element) {
+  public static @Nullable String doGenerateDoc(@Nullable PsiElement element) {
     if (element == null) {
       return null;
     }
@@ -128,8 +124,7 @@ public class PodDocumentationProvider extends PerlDocumentationProviderBase impl
     return null;
   }
 
-  @NotNull
-  private static String generateDocByIndex(@NotNull PodFormatterX element) {
+  private static @NotNull String generateDocByIndex(@NotNull PodFormatterX element) {
     String indexText = element.getPresentableText();
     List<PsiElement> targets = new ArrayList<>();
     element.getContainingFile().accept(new PodStubsAwareRecursiveVisitor() {

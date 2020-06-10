@@ -74,13 +74,11 @@ public abstract class PerlConfigurationEditorBase<Settings extends PerlDebugOpti
     perlConfiguration.setInitCode(myInitCodeTextField.getText());
   }
 
-  @Nullable
-  protected JComponent getGeneralComponent() {
+  protected @Nullable JComponent getGeneralComponent() {
     return null;
   }
 
-  @Nullable
-  protected JComponent getDebuggingComponent() {
+  protected @Nullable JComponent getDebuggingComponent() {
     JPanel panel = new JPanel();
     panel.setLayout(new VerticalFlowLayout(VerticalFlowLayout.TOP, 0, 5, true, false));
 
@@ -126,9 +124,8 @@ public abstract class PerlConfigurationEditorBase<Settings extends PerlDebugOpti
   }
 
 
-  @NotNull
   @Override
-  protected JComponent createEditor() {
+  protected @NotNull JComponent createEditor() {
     JComponent generalComponent = getGeneralComponent();
     JComponent debuggingComponent = getDebuggingComponent();
 

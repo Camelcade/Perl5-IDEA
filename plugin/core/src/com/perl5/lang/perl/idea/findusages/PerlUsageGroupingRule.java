@@ -32,9 +32,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 class PerlUsageGroupingRule extends SingleParentUsageGroupingRule {
-  @Nullable
   @Override
-  protected UsageGroup getParentGroupFor(@NotNull Usage usage, @NotNull UsageTarget[] targets) {
+  protected @Nullable UsageGroup getParentGroupFor(@NotNull Usage usage, @NotNull UsageTarget[] targets) {
     if (!(usage instanceof PsiElementUsage)) {
       return null;
     }
@@ -45,8 +44,7 @@ class PerlUsageGroupingRule extends SingleParentUsageGroupingRule {
     return computeParentGroupFor(element);
   }
 
-  @Nullable
-  private UsageGroup computeParentGroupFor(@Nullable PsiElement element) {
+  private @Nullable UsageGroup computeParentGroupFor(@Nullable PsiElement element) {
     if (element == null) {
       return null;
     }
@@ -63,9 +61,8 @@ class PerlUsageGroupingRule extends SingleParentUsageGroupingRule {
     if (structuralParentElement instanceof PerlSubDefinitionElement) {
       String name = StringUtil.notNullize(((PerlSubDefinitionElement)structuralParentElement).getCanonicalName());
       return new PsiNamedElementUsageGroupBase<PerlSubDefinitionElement>((PerlSubDefinitionElement)structuralParentElement) {
-        @NotNull
         @Override
-        public String getText(UsageView view) {
+        public @NotNull String getText(UsageView view) {
           return name;
         }
       };
@@ -77,9 +74,8 @@ class PerlUsageGroupingRule extends SingleParentUsageGroupingRule {
 
     if (structuralParentElement instanceof PerlMethodModifier) {
       return new PsiElementUsageGroupBase<PerlMethodModifier>((PerlMethodModifier)structuralParentElement) {
-        @NotNull
         @Override
-        public String getText(UsageView view) {
+        public @NotNull String getText(UsageView view) {
           PerlMethodModifier modifier = getElement();
           if (modifier != null) {
             ItemPresentation presentation = modifier.getPresentation();

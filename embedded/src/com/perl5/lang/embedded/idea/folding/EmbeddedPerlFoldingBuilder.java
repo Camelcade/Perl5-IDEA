@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,15 +32,13 @@ public class EmbeddedPerlFoldingBuilder extends PerlFoldingBuilder implements Em
       EMBED_MARKER_CLOSE
     ));
 
-  @Nullable
   @Override
-  protected IElementType getTemplateBlockElementType() {
+  protected @Nullable IElementType getTemplateBlockElementType() {
     return EMBED_TEMPLATE_BLOCK_HTML;
   }
 
-  @NotNull
   @Override
-  protected TokenSet getCommentExcludedTokens() {
+  protected @NotNull TokenSet getCommentExcludedTokens() {
     return COMMENT_EXCLUDED_TOKENS;
   }
 }

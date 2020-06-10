@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,16 +29,14 @@ import static com.perl5.lang.perl.lexer.PerlTokenSets.LAZY_CODE_BLOCKS;
  * Implement this interface if element contains block
  */
 public interface PerlBlockOwner extends PsiElement {
-  @Nullable
-  default PsiPerlBlock getBlock() {
+  default @Nullable PsiPerlBlock getBlock() {
     return PsiTreeUtil.getChildOfType(this, PsiPerlBlock.class);
   }
 
   /**
    * @return a block for the {@code blockOwner}, omitting lazy-parsable blocks if any
    */
-  @Nullable
-  static PsiPerlBlock findBlock(@NotNull PerlBlockOwner blockOwner) {
+  static @Nullable PsiPerlBlock findBlock(@NotNull PerlBlockOwner blockOwner) {
     PsiPerlBlock block = blockOwner.getBlock();
     if (block != null) {
       return block;

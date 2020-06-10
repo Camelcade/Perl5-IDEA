@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,16 +34,14 @@ public abstract class PerlParserExtension {
   /**
    * @return a set of keywords and element types to lex that can be anywhere
    */
-  @NotNull
-  public Map<String, IElementType> getCustomTokensMap() {
+  public @NotNull Map<String, IElementType> getCustomTokensMap() {
     return Collections.emptyMap();
   }
 
   /**
    * @return a map of keywords and token types for identifiers after dereference, e.g. {@code $self->mk_accessors}.
    */
-  @NotNull
-  public Map<String, IElementType> getCustomTokensAfterDereferenceMap() {
+  public @NotNull Map<String, IElementType> getCustomTokensAfterDereferenceMap() {
     return Collections.emptyMap();
   }
 
@@ -54,8 +52,7 @@ public abstract class PerlParserExtension {
    *
    * @return list of pairs to extend
    */
-  @NotNull
-  public List<Pair<IElementType, TokenSet>> getExtensionSets() {
+  public @NotNull List<Pair<IElementType, TokenSet>> getExtensionSets() {
     return Collections.emptyList();
   }
 
@@ -64,8 +61,7 @@ public abstract class PerlParserExtension {
    *
    * @return list of pairs to extend
    */
-  @NotNull
-  public TokenSet getRegexPrefixTokenSet() {
+  public @NotNull TokenSet getRegexPrefixTokenSet() {
     return TokenSet.EMPTY;
   }
 

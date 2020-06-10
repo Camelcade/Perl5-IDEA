@@ -50,15 +50,13 @@ public class MojoliciousParserDefinition extends PerlParserDefinition implements
                                                            MOJO_LINE_OPENER_TAG
                                                          ));
 
-  @NotNull
   @Override
-  public TokenSet getCommentTokens() {
+  public @NotNull TokenSet getCommentTokens() {
     return COMMENTS;
   }
 
-  @NotNull
   @Override
-  public Lexer createLexer(Project project) {
+  public @NotNull Lexer createLexer(Project project) {
     return new MojoliciousLexerAdapter(project);
   }
 
@@ -72,9 +70,8 @@ public class MojoliciousParserDefinition extends PerlParserDefinition implements
     return new MojoliciousFileImpl(viewProvider);
   }
 
-  @NotNull
   @Override
-  public PsiParser createParser(Project project) {
+  public @NotNull PsiParser createParser(Project project) {
     return new MojoliciousParser();
   }
 }

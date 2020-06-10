@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -55,8 +55,7 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
     super(stub, nodeType);
   }
 
-  @NotNull
-  protected List<PerlVariableDeclarationElement> buildImplicitVariables(MasonSettings masonSettings) {
+  protected @NotNull List<PerlVariableDeclarationElement> buildImplicitVariables(MasonSettings masonSettings) {
     List<PerlVariableDeclarationElement> newImplicitVariables = new ArrayList<>();
 
     if (isValid()) {
@@ -70,9 +69,8 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
     return null;
   }
 
-  @Nullable
   @Override
-  public String getNamespaceName() {
+  public @Nullable String getNamespaceName() {
     String absoluteComponentPath = getAbsoluteComponentPath();
     if (absoluteComponentPath != null) {
       return Mason2Util.getClassnameFromPath(absoluteComponentPath);
@@ -120,9 +118,8 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
     return parentsNamespaces;
   }
 
-  @Nullable
   @Override
-  public String getAbsoluteComponentPath() {
+  public @Nullable String getAbsoluteComponentPath() {
     VirtualFile containingFile = MasonCoreUtil.getContainingVirtualFile(getContainingFile());
     if (containingFile != null) {
       return PerlFileUtil.getPathRelativeToContentRoot(containingFile, getProject());
@@ -131,9 +128,8 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
     return null;
   }
 
-  @Nullable
   @Override
-  public String getComponentPath() {
+  public @Nullable String getComponentPath() {
     VirtualFile containingFile = MasonCoreUtil.getContainingVirtualFile(getContainingFile());
     if (containingFile != null) {
       VirtualFile containingRoot = Mason2Util.getComponentRoot(getProject(), containingFile);
@@ -144,8 +140,7 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
     return null;
   }
 
-  @Nullable
-  protected String getParentNamespaceFromAutobase() {
+  protected @Nullable String getParentNamespaceFromAutobase() {
     // autobase
     VirtualFile componentRoot = getContainingFile().getComponentRoot();
     VirtualFile containingFile = MasonCoreUtil.getContainingVirtualFile(getContainingFile());
@@ -156,9 +151,7 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
       {
         String componentPath = PerlFileUtil.getPathRelativeToContentRoot(parentComponentFile, getProject());
 
-        if (componentPath != null) {
-          return componentPath;
-        }
+        return componentPath;
       }
     }
     return null;
@@ -172,8 +165,7 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
    * @param childFile        current file (just to speed things up)
    * @return parent component virtual file or null if not found
    */
-  @Nullable
-  private VirtualFile getParentComponentFile(VirtualFile componentRoot, VirtualFile currentDirectory, VirtualFile childFile) {
+  private @Nullable VirtualFile getParentComponentFile(VirtualFile componentRoot, VirtualFile currentDirectory, VirtualFile childFile) {
     // check in current dir
     List<String> autobaseNames = new ArrayList<>(MasonSettings.getInstance(getProject()).autobaseNames);
 
@@ -196,9 +188,8 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
     return null;
   }
 
-  @NotNull
   @Override
-  public List<PerlNamespaceDefinitionElement> getChildNamespaceDefinitions() {
+  public @NotNull List<PerlNamespaceDefinitionElement> getChildNamespaceDefinitions() {
     MasonSettings masonSettings = MasonSettings.getInstance(getProject());
     final List<PerlNamespaceDefinitionElement> childNamespaces = new ArrayList<>();
 
@@ -304,15 +295,13 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
     return super.getPresentableName();
   }
 
-  @NotNull
   @Override
-  public MasonFileImpl getContainingFile() {
+  public @NotNull MasonFileImpl getContainingFile() {
     return (MasonFileImpl)super.getContainingFile();
   }
 
-  @NotNull
   @Override
-  public List<PerlVariableDeclarationElement> getImplicitVariables() {
+  public @NotNull List<PerlVariableDeclarationElement> getImplicitVariables() {
     MasonSettings settings = MasonSettings.getInstance(getProject());
     if (myImplicitVariables == null || mySettingsChangeCounter != settings.getChangeCounter()) {
       myImplicitVariables = buildImplicitVariables(settings);

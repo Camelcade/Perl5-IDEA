@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,13 +27,11 @@ import org.jetbrains.annotations.Nullable;
 
 
 public class PodStructureViewFactory implements PsiStructureViewFactory {
-  @Nullable
   @Override
-  public StructureViewBuilder getStructureViewBuilder(@NotNull final PsiFile psiFile) {
+  public @Nullable StructureViewBuilder getStructureViewBuilder(final @NotNull PsiFile psiFile) {
     return new TreeBasedStructureViewBuilder() {
-      @NotNull
       @Override
-      public StructureViewModel createStructureViewModel(@Nullable Editor editor) {
+      public @NotNull StructureViewModel createStructureViewModel(@Nullable Editor editor) {
         return new PodStructureViewModel(psiFile, editor);
       }
 

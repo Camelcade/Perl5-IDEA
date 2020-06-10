@@ -28,8 +28,7 @@ import org.jetbrains.annotations.Nullable;
  */
 @Deprecated
 public interface PerlSubOwner extends PsiElement {
-  @Nullable
-  default PsiPerlSubExpr getSub() {
+  default @Nullable PsiPerlSubExpr getSub() {
     return PsiTreeUtil.getChildOfType(this, PsiPerlSubExpr.class);
   }
 }

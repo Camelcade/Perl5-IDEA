@@ -181,8 +181,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
     return UNIVERSAL_NAMESPACE.equals(packageName);
   }
 
-  @NotNull
-  public static String join(@NotNull String... chunks) {
+  public static @NotNull String join(@NotNull String... chunks) {
     return StringUtil.join(chunks, NAMESPACE_SEPARATOR);
   }
 
@@ -198,8 +197,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
            canonicalName.substring(MAIN_NAMESPACE_FULL.length()) : canonicalName;
   }
 
-  @NotNull
-  public static String getCanonicalName(@NotNull String name) {
+  public static @NotNull String getCanonicalName(@NotNull String name) {
     String newName;
 
     if ((newName = CANONICAL_NAMES_CACHE.get(name)) != null) {
@@ -224,13 +222,11 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
     return newName;
   }
 
-  @NotNull
-  public static PerlValue getContextType(@Nullable PsiElement element) {
+  public static @NotNull PerlValue getContextType(@Nullable PsiElement element) {
     return PerlScalarValue.create(getContextNamespaceName(element));
   }
 
-  @NotNull
-  public static List<String> split(@Nullable String packageName) {
+  public static @NotNull List<String> split(@Nullable String packageName) {
     return packageName == null ? Collections.emptyList() : StringUtil.split(getCanonicalNamespaceName(packageName), NAMESPACE_SEPARATOR);
   }
 
@@ -273,8 +269,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
   }
 
   // fixme shouldn't we have recursion protection here?
-  @Nullable
-  public static PerlNamespaceDefinitionElement getNamespaceContainerForElement(@Nullable PsiElement element) {
+  public static @Nullable PerlNamespaceDefinitionElement getNamespaceContainerForElement(@Nullable PsiElement element) {
     if (element == null) {
       return null;
     }
@@ -295,9 +290,8 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
     return PsiTreeUtil.getStubOrPsiParentOfType(element, PerlNamespaceDefinitionElement.class);
   }
 
-  @NotNull
-  public static List<PerlNamespaceDefinitionElement> collectNamespaceDefinitions(@NotNull Project project,
-                                                                                 @NotNull List<String> packageNames) {
+  public static @NotNull List<PerlNamespaceDefinitionElement> collectNamespaceDefinitions(@NotNull Project project,
+                                                                                          @NotNull List<String> packageNames) {
     ArrayList<PerlNamespaceDefinitionElement> namespaceDefinitions = new ArrayList<>();
     for (String packageName : packageNames) {
       Collection<PerlNamespaceDefinitionElement> list =
@@ -378,9 +372,8 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
    * @param project project to search in
    * @return collection of definitions
    */
-  @NotNull
-  public static List<PerlNamespaceDefinitionElement> getChildNamespaces(@NotNull Project project,
-                                                                        @Nullable String packageName) {
+  public static @NotNull List<PerlNamespaceDefinitionElement> getChildNamespaces(@NotNull Project project,
+                                                                                 @Nullable String packageName) {
     if (StringUtil.isEmpty(packageName)) {
       return Collections.emptyList();
     }
@@ -391,10 +384,9 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
     return list;
   }
 
-  @NotNull
-  public static List<PerlNamespaceDefinitionElement> getChildNamespaces(@NotNull Project project,
-                                                                        @NotNull String packageName,
-                                                                        @NotNull GlobalSearchScope scope) {
+  public static @NotNull List<PerlNamespaceDefinitionElement> getChildNamespaces(@NotNull Project project,
+                                                                                 @NotNull String packageName,
+                                                                                 @NotNull GlobalSearchScope scope) {
     ArrayList<PerlNamespaceDefinitionElement> elements = new ArrayList<>();
     processChildNamespaces(packageName, project, scope, elements::add);
     return elements;
@@ -619,15 +611,14 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
     }
   }
 
-  public static List<PsiElement> collectNamespaceSubs(@NotNull final PsiElement namespace) {
+  public static List<PsiElement> collectNamespaceSubs(final @NotNull PsiElement namespace) {
     return CachedValuesManager.getCachedValue(
       namespace,
       () -> CachedValueProvider.Result
         .create(PerlPsiUtil.collectNamespaceMembers(namespace, PerlSubElement.class), namespace));
   }
 
-  @Nullable
-  public static PsiFile getPackagePsiFileByPackageName(Project project, String packageName) {
+  public static @Nullable PsiFile getPackagePsiFileByPackageName(Project project, String packageName) {
     VirtualFile packageVirtualFile = getPackageVirtualFileByPackageName(project, packageName);
 
     if (packageVirtualFile != null) {
@@ -637,8 +628,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
     return null;
   }
 
-  @Nullable
-  public static VirtualFile getPackageVirtualFileByPackageName(Project project, String packageName) {
+  public static @Nullable VirtualFile getPackageVirtualFileByPackageName(Project project, String packageName) {
     if (StringUtil.isEmpty(packageName)) {
       return null;
     }
@@ -660,8 +650,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
    * @param canonicalPackageName package name in canonical form
    * @return vartual file
    */
-  @Nullable
-  public static PsiFile resolvePackageNameToPsi(@NotNull PsiFile psiFile, String canonicalPackageName) {
+  public static @Nullable PsiFile resolvePackageNameToPsi(@NotNull PsiFile psiFile, String canonicalPackageName) {
     // resolves to a psi file
     return resolveRelativePathToPsi(psiFile, getPackagePathByName(canonicalPackageName));
   }
@@ -673,8 +662,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
    * @param canonicalPackageName package name in canonical form
    * @return vartual file
    */
-  @Nullable
-  public static VirtualFile resolvePackageNameToVirtualFile(@NotNull PsiFile psiFile, String canonicalPackageName) {
+  public static @Nullable VirtualFile resolvePackageNameToVirtualFile(@NotNull PsiFile psiFile, String canonicalPackageName) {
     // resolves to a psi file
     return resolveRelativePathToVirtualFile(psiFile, getPackagePathByName(canonicalPackageName));
   }
@@ -686,8 +674,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
    * @param relativePath relative path
    * @return vartual file
    */
-  @Nullable
-  public static PsiFile resolveRelativePathToPsi(@NotNull PsiFile psiFile, String relativePath) {
+  public static @Nullable PsiFile resolveRelativePathToPsi(@NotNull PsiFile psiFile, String relativePath) {
     VirtualFile targetFile = resolveRelativePathToVirtualFile(psiFile, relativePath);
 
     if (targetFile != null && targetFile.exists()) {
@@ -704,8 +691,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
    * @param relativePath relative path
    * @return vartual file
    */
-  @Nullable
-  public static VirtualFile resolveRelativePathToVirtualFile(@NotNull PsiFile psiFile, String relativePath) {
+  public static @Nullable VirtualFile resolveRelativePathToVirtualFile(@NotNull PsiFile psiFile, String relativePath) {
     if (relativePath != null) {
       for (VirtualFile classRoot : getIncDirsForPsiElement(psiFile)) {
         if (classRoot != null) {
@@ -730,8 +716,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
    * @param psiElement to resolve for
    * @return list of lib dirs
    */
-  @NotNull
-  public static List<VirtualFile> getIncDirsForPsiElement(@NotNull PsiElement psiElement) {
+  public static @NotNull List<VirtualFile> getIncDirsForPsiElement(@NotNull PsiElement psiElement) {
     PsiFile psiFile = psiElement.getContainingFile().getOriginalFile();
     List<VirtualFile> result = new ArrayList<>();
 
@@ -773,8 +758,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
    * @param text token text
    * @return pair of two ranges; first will be null if it's not qualified name
    */
-  @NotNull
-  public static Pair<TextRange, TextRange> getQualifiedRanges(@NotNull CharSequence text) {
+  public static @NotNull Pair<TextRange, TextRange> getQualifiedRanges(@NotNull CharSequence text) {
     if (text.length() == 1) {
       return Pair.create(null, TextRange.create(0, 1));
     }
@@ -801,8 +785,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
   /**
    * @return the expected value of the {@code $self} passed to the method. This is either context value or value from the self hinter
    */
-  @NotNull
-  public static PerlValue getExpectedSelfValue(@NotNull PsiElement psiElement) {
+  public static @NotNull PerlValue getExpectedSelfValue(@NotNull PsiElement psiElement) {
     PsiElement run = psiElement;
     while (true) {
       PerlSelfHinterElement selfHinter = PsiTreeUtil.getParentOfType(run, PerlSelfHinterElement.class);
@@ -821,14 +804,12 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
   /**
    * @return list of parent namespaces defined by different syntax constructions in the sub-tree of the {@code namespaceDefinition}
    */
-  @NotNull
-  public static List<String> collectParentNamespacesFromPsi(@NotNull PerlNamespaceDefinitionElement namespaceDefinition) {
+  public static @NotNull List<String> collectParentNamespacesFromPsi(@NotNull PerlNamespaceDefinitionElement namespaceDefinition) {
     return CachedValuesManager.getCachedValue(namespaceDefinition, () ->
       CachedValueProvider.Result.create(doCollectParentNamespacesFromPsi(namespaceDefinition), namespaceDefinition));
   }
 
-  @NotNull
-  private static List<String> doCollectParentNamespacesFromPsi(@NotNull PerlNamespaceDefinitionElement namespaceDefinition) {
+  private static @NotNull List<String> doCollectParentNamespacesFromPsi(@NotNull PerlNamespaceDefinitionElement namespaceDefinition) {
     String namespaceName = namespaceDefinition.getNamespaceName();
     if (StringUtil.isEmpty(namespaceName)) {
       return Collections.emptyList();
@@ -844,12 +825,9 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
   }
 
   public static class ParentNamespacesNamesCollector implements Processor<PsiElement> {
-    @NotNull
-    private final List<String> myParentNamespaces = new SmartList<>();
-    @NotNull
-    private final List<PerlRuntimeParentsProvider> runtimeModifiers = new SmartList<>();
-    @NotNull
-    private final String myNamespaceName;
+    private final @NotNull List<String> myParentNamespaces = new SmartList<>();
+    private final @NotNull List<PerlRuntimeParentsProvider> runtimeModifiers = new SmartList<>();
+    private final @NotNull String myNamespaceName;
 
     public ParentNamespacesNamesCollector(@NotNull String namespaceName) {
       myNamespaceName = namespaceName;
@@ -895,8 +873,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
       }
     }
 
-    @NotNull
-    public List<String> getParentNamespaces() {
+    public @NotNull List<String> getParentNamespaces() {
       return myParentNamespaces;
     }
   }

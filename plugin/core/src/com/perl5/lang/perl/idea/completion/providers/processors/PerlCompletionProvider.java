@@ -20,8 +20,7 @@ import com.intellij.codeInsight.completion.*;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class PerlCompletionProvider extends CompletionProvider<CompletionParameters> {
-  @NotNull
-  public static CompletionResultSet withFqnSafeMatcher(@NotNull CompletionResultSet resultSet) {
+  public static @NotNull CompletionResultSet withFqnSafeMatcher(@NotNull CompletionResultSet resultSet) {
     PrefixMatcher matcher = resultSet.getPrefixMatcher();
     if (matcher instanceof PlainPrefixMatcher) {
       return resultSet;
@@ -29,8 +28,7 @@ public abstract class PerlCompletionProvider extends CompletionProvider<Completi
     return withFqnSafeMatcher(resultSet, matcher.getPrefix());
   }
 
-  @NotNull
-  public static CompletionResultSet withFqnSafeMatcher(@NotNull CompletionResultSet resultSet, @NotNull String prefix) {
+  public static @NotNull CompletionResultSet withFqnSafeMatcher(@NotNull CompletionResultSet resultSet, @NotNull String prefix) {
     return resultSet.withPrefixMatcher(new PlainPrefixMatcher(prefix));
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,9 +26,8 @@ import org.jetbrains.annotations.NotNull;
 
 
 public class MojoliciousTypedHandler extends TypedHandlerDelegate implements MojoliciousElementTypes {
-  @NotNull
   @Override
-  public Result charTyped(char c, @NotNull final Project project, @NotNull final Editor editor, @NotNull PsiFile file) {
+  public @NotNull Result charTyped(char c, final @NotNull Project project, final @NotNull Editor editor, @NotNull PsiFile file) {
     if (file.getViewProvider() instanceof MojoliciousFileViewProvider) {
       if (c == ' ') {
         MojoliciousSmartKeysUtil.addCloseMarker(editor, file, " " + KEYWORD_MOJO_BLOCK_CLOSER);

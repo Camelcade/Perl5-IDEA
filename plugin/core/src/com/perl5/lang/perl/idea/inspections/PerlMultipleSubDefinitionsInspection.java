@@ -30,9 +30,8 @@ import org.jetbrains.annotations.NotNull;
 
 
 public class PerlMultipleSubDefinitionsInspection extends PerlInspection {
-  @NotNull
   @Override
-  public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
+  public @NotNull PsiElementVisitor buildVisitor(final @NotNull ProblemsHolder holder, boolean isOnTheFly) {
     return new PerlVisitor() {
       @Override
       public void visitPerlSubDefinitionElement(@NotNull PerlSubDefinitionElement o) {

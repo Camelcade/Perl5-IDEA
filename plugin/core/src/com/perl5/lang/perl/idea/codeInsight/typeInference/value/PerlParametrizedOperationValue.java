@@ -21,8 +21,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 
 abstract class PerlParametrizedOperationValue extends PerlOperationValue {
-  @NotNull
-  private final PerlValue myParameter;
+  private final @NotNull PerlValue myParameter;
 
   public PerlParametrizedOperationValue(@NotNull PerlValue baseValue,
                                         @NotNull PerlValue parameter) {
@@ -41,19 +40,16 @@ abstract class PerlParametrizedOperationValue extends PerlOperationValue {
     serializer.writeValue(myParameter);
   }
 
-  @NotNull
   @Override
-  protected final PerlValue computeResolve(@NotNull PerlValue resolvedBaseValue, @NotNull PerlValueResolver resolver) {
+  protected final @NotNull PerlValue computeResolve(@NotNull PerlValue resolvedBaseValue, @NotNull PerlValueResolver resolver) {
     return resolver.resolve(myParameter, it -> computeResolve(resolvedBaseValue, it, resolver));
   }
 
-  @NotNull
-  protected abstract PerlValue computeResolve(@NotNull PerlValue resolvedBaseValue,
-                                              @NotNull PerlValue resolvedParameter,
-                                              @NotNull PerlValueResolver resolver);
+  protected abstract @NotNull PerlValue computeResolve(@NotNull PerlValue resolvedBaseValue,
+                                                       @NotNull PerlValue resolvedParameter,
+                                                       @NotNull PerlValueResolver resolver);
 
-  @NotNull
-  protected final PerlValue getParameter() {
+  protected final @NotNull PerlValue getParameter() {
     return myParameter;
   }
 

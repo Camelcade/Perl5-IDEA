@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,8 +29,7 @@ public interface PerlBlessExpr extends PsiPerlExpr {
   /**
    * @return first argument of bless expression if any
    */
-  @Nullable
-  default PsiElement getReferenceExpression() {
+  default @Nullable PsiElement getReferenceExpression() {
     List<PsiElement> unpackedChildren = PerlArrayUtil.collectChildrenList(this);
     return unpackedChildren.size() > 0 ? unpackedChildren.get(0) : null;
   }
@@ -38,8 +37,7 @@ public interface PerlBlessExpr extends PsiPerlExpr {
   /**
    * @return second argument of bless expression if any
    */
-  @Nullable
-  default PsiElement getBlessExpression() {
+  default @Nullable PsiElement getBlessExpression() {
     List<PsiElement> unpackedChildren = PerlArrayUtil.collectChildrenList(this);
     return unpackedChildren.size() > 1 ? unpackedChildren.get(1) : null;
   }

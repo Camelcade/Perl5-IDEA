@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,8 +37,7 @@ import java.util.Set;
 
 public abstract class PerlHostFileTransfer<HostData extends PerlHostData<?, ?>> implements Closeable {
   private static final Logger LOG = Logger.getInstance(PerlHostFileTransfer.class);
-  @NotNull
-  protected final HostData myHostData;
+  protected final @NotNull HostData myHostData;
 
   public PerlHostFileTransfer(@NotNull HostData hostData) {
     myHostData = hostData;
@@ -48,8 +47,7 @@ public abstract class PerlHostFileTransfer<HostData extends PerlHostData<?, ?>> 
    * Downloads {@code remoteFile} to the local cache
    */
   @Contract("null->null; !null->!null")
-  @Nullable
-  public final File syncFile(@Nullable File remoteFile) throws IOException {
+  public final @Nullable File syncFile(@Nullable File remoteFile) throws IOException {
     if (remoteFile == null) {
       return null;
     }
@@ -60,8 +58,7 @@ public abstract class PerlHostFileTransfer<HostData extends PerlHostData<?, ?>> 
    * Downloads {@code remotePath} to the local cache
    */
   @Contract("null->null; !null->!null")
-  @Nullable
-  public final String syncFile(@Nullable String remotePath) throws IOException {
+  public final @Nullable String syncFile(@Nullable String remotePath) throws IOException {
     if (remotePath == null) {
       return null;
     }
@@ -87,8 +84,7 @@ public abstract class PerlHostFileTransfer<HostData extends PerlHostData<?, ?>> 
    * Creates a local stubs for the  {@code remoteDir}: empty files with same names
    */
   @Contract("null->null; !null->!null")
-  @Nullable
-  public final File stubFiles(@Nullable File remoteDir) throws IOException {
+  public final @Nullable File stubFiles(@Nullable File remoteDir) throws IOException {
     if (remoteDir == null) {
       return null;
     }
@@ -99,8 +95,7 @@ public abstract class PerlHostFileTransfer<HostData extends PerlHostData<?, ?>> 
    * @see #stubFiles(File)
    */
   @Contract("null->null; !null->!null")
-  @Nullable
-  private String stubFiles(@Nullable String remoteDir) throws IOException {
+  private @Nullable String stubFiles(@Nullable String remoteDir) throws IOException {
     if (remoteDir == null) {
       return null;
     }
@@ -171,8 +166,7 @@ public abstract class PerlHostFileTransfer<HostData extends PerlHostData<?, ?>> 
    * @implNote we need this method to optimize working with docker and/or ssh. Using virtual file system may cause additional container
    * start or additional connection created.
    */
-  @NotNull
-  public abstract List<VirtualFile> listFiles(@NotNull String remotePath) throws IOException;
+  public abstract @NotNull List<VirtualFile> listFiles(@NotNull String remotePath) throws IOException;
 
   /**
    * synchronizes {@code remotePath} with local cache

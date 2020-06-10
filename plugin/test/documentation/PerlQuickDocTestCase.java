@@ -21,9 +21,8 @@ import org.jetbrains.annotations.NotNull;
 
 public abstract class PerlQuickDocTestCase extends PerlLightTestCase {
 
-  @NotNull
   @Override
-  protected String getResultsFileExtension() {
+  protected @NotNull String getResultsFileExtension() {
     return "txt";
   }
 

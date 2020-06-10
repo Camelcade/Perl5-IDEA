@@ -41,12 +41,10 @@ public abstract class HTMLMasonBaseLexer extends PerlTemplatingLexer implements 
     }
     return -1;
   };
-  @Nullable
-  protected Map<String, HTMLMasonCustomTag> myCustomTagsMap;
+  protected @Nullable Map<String, HTMLMasonCustomTag> myCustomTagsMap;
 
-  @Nullable
   @Override
-  protected CommentEndCalculator getCommentEndCalculator() {
+  protected @Nullable CommentEndCalculator getCommentEndCalculator() {
     return COMMENT_END_CALCULATOR;
   }
 

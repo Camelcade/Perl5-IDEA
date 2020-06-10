@@ -34,9 +34,9 @@ import java.util.Objects;
 
 
 public class HTMLMasonHighlighter extends LayeredLexerEditorHighlighter implements HTMLMasonElementTypes {
-  public HTMLMasonHighlighter(@Nullable final Project project,
-                              @Nullable final VirtualFile virtualFile,
-                              @NotNull final EditorColorsScheme colors) {
+  public HTMLMasonHighlighter(final @Nullable Project project,
+                              final @Nullable VirtualFile virtualFile,
+                              final @NotNull EditorColorsScheme colors) {
     super(new HTMLMasonSyntaxHighlighter(project), colors);
     registerLayer(HTML_MASON_TEMPLATE_BLOCK_HTML, new LayerDescriptor(
       Objects.requireNonNull(SyntaxHighlighterFactory.getSyntaxHighlighter(HtmlFileType.INSTANCE, project, virtualFile)), ""));

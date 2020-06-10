@@ -54,8 +54,7 @@ public abstract class PerlPackageProcessorBase implements PerlPackageProcessor {
 
 
   @Override
-  @NotNull
-  public List<PerlExportDescriptor> getImports(@NotNull PerlUseStatementElement useStatement) {
+  public @NotNull List<PerlExportDescriptor> getImports(@NotNull PerlUseStatementElement useStatement) {
     List<PerlExportDescriptor> result = new ArrayList<>();
     String packageName = useStatement.getPackageName();
     if (packageName != null) {
@@ -78,8 +77,7 @@ public abstract class PerlPackageProcessorBase implements PerlPackageProcessor {
     return result;
   }
 
-  @NotNull
-  protected PerlExportDescriptor createDescriptor(@NotNull String packageName, @NotNull String name) {
+  protected @NotNull PerlExportDescriptor createDescriptor(@NotNull String packageName, @NotNull String name) {
     return PerlExportDescriptor.create(packageName, name);
   }
 
@@ -89,8 +87,7 @@ public abstract class PerlPackageProcessorBase implements PerlPackageProcessor {
    * @param useStatement use statement we are processing
    * @return list of imported parameters or null if use has no parameters
    */
-  @Nullable
-  protected List<String> getImportParameters(@NotNull PerlUseStatementElement useStatement) {
+  protected @Nullable List<String> getImportParameters(@NotNull PerlUseStatementElement useStatement) {
     return useStatement.getImportParameters();
   }
 }

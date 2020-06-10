@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,9 +47,8 @@ class PerlStringsTargetsHandler extends PerlGenericStringTargetsHandler {
     return true;
   }
 
-  @NotNull
   @Override
-  protected List<PsiElement> replaceTarget(@NotNull List<PerlIntroduceTarget> occurrences, @NotNull PsiElement replacement) {
+  protected @NotNull List<PsiElement> replaceTarget(@NotNull List<PerlIntroduceTarget> occurrences, @NotNull PsiElement replacement) {
     if (occurrences.size() == 1 && occurrences.get(0).isFullRange()) {
       return super.replaceTarget(occurrences, replacement);
     }
@@ -66,11 +65,10 @@ class PerlStringsTargetsHandler extends PerlGenericStringTargetsHandler {
     return ContainerUtil.filter(replacedString.getChildren(), it -> replacementRanges.contains(it.getTextRangeInParent()));
   }
 
-  @NotNull
-  private PsiElement replaceWithConcatenation(@NotNull List<PerlIntroduceTarget> occurrences,
-                                              @NotNull CharSequence replacementText,
-                                              @NotNull PsiPerlStringSq elementToReplace,
-                                              @NotNull Set<TextRange> replacementRanges) {
+  private @NotNull PsiElement replaceWithConcatenation(@NotNull List<PerlIntroduceTarget> occurrences,
+                                                       @NotNull CharSequence replacementText,
+                                                       @NotNull PsiPerlStringSq elementToReplace,
+                                                       @NotNull Set<TextRange> replacementRanges) {
     TextRange valueTextRange = ElementManipulators.getValueTextRange(elementToReplace);
     CharSequence valueText = valueTextRange.subSequence(elementToReplace.getNode().getChars());
     int valueOffset = valueTextRange.getStartOffset();
@@ -126,9 +124,8 @@ class PerlStringsTargetsHandler extends PerlGenericStringTargetsHandler {
     return elementToReplace.replace(statement.getFirstChild());
   }
 
-  @NotNull
   @Override
-  protected List<PsiElement> getChildren(@NotNull PsiElement element) {
+  protected @NotNull List<PsiElement> getChildren(@NotNull PsiElement element) {
     return ((PerlString)element).getAllChildrenList();
   }
 
@@ -137,18 +134,16 @@ class PerlStringsTargetsHandler extends PerlGenericStringTargetsHandler {
     return element instanceof PerlString && !(element.getParent() instanceof PerlHeredocOpener);
   }
 
-  @NotNull
   @Override
-  protected List<PerlIntroduceTarget> computeTargetsAtCaret(@NotNull PsiElement element, int caretOffset) {
+  protected @NotNull List<PerlIntroduceTarget> computeTargetsAtCaret(@NotNull PsiElement element, int caretOffset) {
     if (element instanceof PsiPerlStringBareImpl) {
       return computeBareStringTarget(element);
     }
     return super.computeTargetsAtCaret(element, caretOffset);
   }
 
-  @NotNull
   @Override
-  protected List<PerlIntroduceTarget> computeTargetsFromSelection(@NotNull PsiElement element, @NotNull TextRange selectionRange) {
+  protected @NotNull List<PerlIntroduceTarget> computeTargetsFromSelection(@NotNull PsiElement element, @NotNull TextRange selectionRange) {
     if (element.getParent() instanceof PerlHeredocOpener) {
       return Collections.emptyList();
     }
@@ -160,8 +155,7 @@ class PerlStringsTargetsHandler extends PerlGenericStringTargetsHandler {
     return super.computeTargetsFromSelection(element, selectionRange);
   }
 
-  @NotNull
-  private List<PerlIntroduceTarget> computeBareStringTarget(@NotNull PsiElement element) {
+  private @NotNull List<PerlIntroduceTarget> computeBareStringTarget(@NotNull PsiElement element) {
     PsiElement elementParent = element.getParent();
     if (PsiUtilCore.getElementType(elementParent) == LP_STRING_QW) {
       elementParent = elementParent.getParent();

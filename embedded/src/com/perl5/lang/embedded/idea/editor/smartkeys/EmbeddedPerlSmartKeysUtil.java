@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@ import org.jetbrains.annotations.NotNull;
 
 
 public class EmbeddedPerlSmartKeysUtil implements EmbeddedPerlElementTypes, PerlElementTypes {
-  public static boolean addCloseMarker(@NotNull final Editor editor, @NotNull PsiFile file, @NotNull String marker) {
+  public static boolean addCloseMarker(final @NotNull Editor editor, @NotNull PsiFile file, @NotNull String marker) {
     int offset = editor.getCaretModel().getOffset();
 
     if (offset >= 2) {

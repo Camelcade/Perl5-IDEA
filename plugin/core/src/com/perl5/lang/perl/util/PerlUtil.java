@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,8 +41,7 @@ import java.util.Set;
  */
 public class PerlUtil implements PerlElementTypes {
   @Contract("null->null")
-  @Nullable
-  public static VirtualFile getFileClassRoot(@Nullable PsiFile psiFile) {
+  public static @Nullable VirtualFile getFileClassRoot(@Nullable PsiFile psiFile) {
     return psiFile == null ? null : getFileClassRoot(psiFile.getProject(), PsiUtilCore.getVirtualFile(psiFile));
   }
 
@@ -54,8 +53,7 @@ public class PerlUtil implements PerlElementTypes {
    * @return innermost root
    */
   @Contract("_,null->null")
-  @Nullable
-  public static VirtualFile getFileClassRoot(@NotNull Project project, @Nullable VirtualFile file) {
+  public static @Nullable VirtualFile getFileClassRoot(@NotNull Project project, @Nullable VirtualFile file) {
     if (file == null) {
       return null;
     }
@@ -76,8 +74,7 @@ public class PerlUtil implements PerlElementTypes {
    * @param filePath containing filename
    * @return innermost root
    */
-  @Nullable
-  public static VirtualFile getFileClassRoot(@NotNull Project project, @NotNull String filePath) {
+  public static @Nullable VirtualFile getFileClassRoot(@NotNull Project project, @NotNull String filePath) {
     File file = new File(filePath);
     VirtualFile result = null;
 
@@ -110,8 +107,7 @@ public class PerlUtil implements PerlElementTypes {
     return result;
   }
 
-  @NotNull
-  public static String getParentsChain(@Nullable PsiElement element) {
+  public static @NotNull String getParentsChain(@Nullable PsiElement element) {
     if (element == null) {
       return "null";
     }

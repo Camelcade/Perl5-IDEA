@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,8 +29,7 @@ public interface PerlPackageOptionsProvider {
    *
    * @return HashMap of options
    */
-  @NotNull
-  public Map<String, String> getOptions();
+  @NotNull Map<String, String> getOptions();
 
   /**
    * Returns full list of available bundled options, atm they are with other icon
@@ -38,6 +37,5 @@ public interface PerlPackageOptionsProvider {
    *
    * @return HashMap of bundled options
    */
-  @NotNull
-  public Map<String, String> getOptionsBundles();
+  @NotNull Map<String, String> getOptionsBundles();
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,21 +36,18 @@ public class PerlTiedNamedValue extends XValueGroup {
     myPerlXNamedValue = new PerlXNamedValue(tiedValue, stackFrame);
   }
 
-  @Nullable
   @Override
-  public Icon getIcon() {
+  public @Nullable Icon getIcon() {
     return AllIcons.Toolwindows.ToolWindowModuleDependencies;
   }
 
-  @NotNull
   @Override
-  public String getSeparator() {
+  public @NotNull String getSeparator() {
     return ": ";
   }
 
-  @Nullable
   @Override
-  public String getComment() {
+  public @Nullable String getComment() {
     return myPerlXNamedValue.computeType();
   }
 

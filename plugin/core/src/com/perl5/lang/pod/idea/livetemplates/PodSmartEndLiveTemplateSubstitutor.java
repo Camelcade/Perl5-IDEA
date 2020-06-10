@@ -28,9 +28,8 @@ import org.jetbrains.annotations.Nullable;
 public class PodSmartEndLiveTemplateSubstitutor implements TemplateSubstitutor {
   private static final String POD_GROUP = "Perl5: POD";
 
-  @Nullable
   @Override
-  public TemplateImpl substituteTemplate(@NotNull PsiFile file, int caretOffset, @NotNull TemplateImpl template) {
+  public @Nullable TemplateImpl substituteTemplate(@NotNull PsiFile file, int caretOffset, @NotNull TemplateImpl template) {
     if (!POD_GROUP.equals(template.getGroupName()) ||
         caretOffset > 0 && PsiUtilCore.getLanguageAtOffset(file, caretOffset - 1).isKindOf(PodLanguage.INSTANCE)) {
       return null;

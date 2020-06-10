@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,8 +45,7 @@ public interface PerlVariableDeclarationExpr extends PsiPerlExpr, PerlNamespaceE
   @NotNull
   List<PsiPerlVariableDeclarationElement> getVariableDeclarationElementList();
 
-  @NotNull
-  default List<PerlVariable> getVariables() {
+  default @NotNull List<PerlVariable> getVariables() {
     return getVariableDeclarationElementList().stream()
       .map(PerlVariableDeclarationElement::getVariable)
       .collect(Collectors.toList());

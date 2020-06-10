@@ -25,19 +25,15 @@ import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import org.jetbrains.annotations.Nullable;
 
 public class PerlProjectGenerationSettings implements Perl5SdkManipulator {
-  @Nullable
-  private Sdk mySdk;
-  @Nullable
-  private Project myProject;
+  private @Nullable Sdk mySdk;
+  private @Nullable Project myProject;
 
-  @Nullable
   @Override
-  public Perl5SdkWrapper getCurrentSdkWrapper() {
+  public @Nullable Perl5SdkWrapper getCurrentSdkWrapper() {
     return Perl5RealSdkWrapper.create(mySdk);
   }
 
-  @Nullable
-  public Sdk getSdk() {
+  public @Nullable Sdk getSdk() {
     return mySdk;
   }
 
@@ -46,8 +42,7 @@ public class PerlProjectGenerationSettings implements Perl5SdkManipulator {
     mySdk = sdk;
   }
 
-  @Nullable
-  public Project getProject() {
+  public @Nullable Project getProject() {
     return myProject;
   }
 

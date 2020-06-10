@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,8 +48,7 @@ public class PerlVariableSelectionHandler extends ExtendWordSelectionHandlerBase
     return range == null ? super.getMinimalTextRangeLength(element, text, cursorOffset) : range.getLength();
   }
 
-  @Nullable
-  private static TextRange getRange(@NotNull PsiElement e) {
+  private static @Nullable TextRange getRange(@NotNull PsiElement e) {
     PsiElement variable = e.getParent();
     return variable == null ? null : variable.getTextRange();
   }

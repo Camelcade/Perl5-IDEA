@@ -141,12 +141,11 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
   private IElementType myCurrentSigilToken;
   private boolean myIsPerlSwitchEnabled = false;
 
-  @Nullable
-  private Project myProject;
+  private @Nullable Project myProject;
   private AtomicNotNullLazyValue<Set<String>> mySubNamesProvider;
   private AtomicNotNullLazyValue<Set<String>> myNamespaceNamesProvider;
   private PerlImplicitDeclarationsService myImplicitSubsService;
-  private Set<String> myLocalPackages = new THashSet<>();
+  private final Set<String> myLocalPackages = new THashSet<>();
 
   public PerlBaseLexer withProject(@Nullable Project project) {
     myProject = project;
@@ -336,8 +335,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
   /**
    * We've met identifier (variable name)
    */
-  @NotNull
-  protected IElementType getUnbracedVariableNameToken() {
+  protected @NotNull IElementType getUnbracedVariableNameToken() {
     popState();
     char currentChar;
     if (
@@ -361,8 +359,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
     return getVariableNameTokenBySigil();
   }
 
-  @NotNull
-  protected IElementType getBracedVariableNameToken() {
+  protected @NotNull IElementType getBracedVariableNameToken() {
     yybegin(YYINITIAL);
     return getVariableNameTokenBySigil();
   }
@@ -444,8 +441,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
    *
    * @return guessed token
    */
-  @NotNull
-  protected IElementType getIdentifierTokenWithoutIndex() {
+  protected @NotNull IElementType getIdentifierTokenWithoutIndex() {
     CharSequence tokenText = yytext();
     int lastIndex;
     if (StringUtil.endsWithChar(tokenText, ':')) {
@@ -461,8 +457,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
     return SUB_NAME;
   }
 
-  @NotNull
-  protected IElementType getAfterDereferenceIdentifierToken() {
+  protected @NotNull IElementType getAfterDereferenceIdentifierToken() {
     IElementType defaultToken = getIdentifierTokenWithoutIndex();
     if (defaultToken != SUB_NAME) {
       return defaultToken;
@@ -1119,8 +1114,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
     }
   }
 
-  @NotNull
-  public IElementType getLPCodeBlockElementType() {
+  public @NotNull IElementType getLPCodeBlockElementType() {
     return hasTryCatch() ? LP_CODE_BLOCK_WITH_TRYCATCH : LP_CODE_BLOCK;
   }
 

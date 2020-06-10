@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,9 +44,8 @@ public interface Mason2ElementTypes extends Mason2SyntaxElements {
   IElementType MASON_FILTERED_BLOCK_OPENER = new MasonTemplatingTokenType(KEYWORD_FILTERED_BLOCK_OPENER);
   IElementType MASON_FILTERED_BLOCK_CLOSER = new MasonTemplatingTokenType(KEYWORD_FILTERED_BLOCK_CLOSER);
   IElementType MASON_METHOD_MODIFIER_NAME = new MasonTemplatingTokenTypeEx("MASON_METHOD_MODIFIER_NAME") {
-    @NotNull
     @Override
-    public ASTNode createLeafNode(@NotNull CharSequence leafText) {
+    public @NotNull ASTNode createLeafNode(@NotNull CharSequence leafText) {
       return new MasonMethodModifierNameImpl(this, leafText);
     }
   };
@@ -113,56 +112,49 @@ public interface Mason2ElementTypes extends Mason2SyntaxElements {
   IElementType MASON_BEFORE_MODIFIER = new MasonMethodModifierElementType("MASON_BEFOE_MODIFIER");
 
   IElementType MASON_FLAGS_STATEMENT = new MasonTemplatingElementType("FLAGS_STATEMENT") {
-    @NotNull
     @Override
-    public PsiElement getPsiElement(@NotNull ASTNode node) {
+    public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
       return new MasonFlagsStatementImpl(node);
     }
   };
   IElementType MASON_CALL_STATEMENT = new MasonTemplatingElementType("MASON_CALL_STATEMENT") {
-    @NotNull
     @Override
-    public PsiElement getPsiElement(@NotNull ASTNode node) {
+    public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
       return new MasonCallStatementImpl(node);
     }
   };
 
   IElementType MASON_AROUND_MODIFIER = new MasonTemplatingElementType("MASON_AROUND_MODIFIER") {
-    @NotNull
     @Override
-    public PsiElement getPsiElement(@NotNull ASTNode node) {
+    public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
       return new MasonAroundMethodModifierImpl(node);
     }
   };
 
   IElementType MASON_ABSTRACT_BLOCK = new MasonTemplatingElementType("MASON_ABSTRACT_BLOCK") {
-    @NotNull
     @Override
-    public PsiElement getPsiElement(@NotNull ASTNode node) {
+    public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
       return new MasonAbstractBlockImpl(node);
     }
   };
 
   IElementType MASON_TEXT_BLOCK = new MasonTemplatingElementType("MASON_TEXT_BLOCK") {
-    @NotNull
     @Override
-    public PsiElement getPsiElement(@NotNull ASTNode node) {
+    public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
       return new MasonTextBlockImpl(node);
     }
   };
 
   IElementType MASON_FILTERED_BLOCK = new MasonTemplatingElementType("MASON_FILTERED_BLOCK") {
-    @NotNull
     @Override
-    public PsiElement getPsiElement(@NotNull ASTNode node) {
+    public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
       return new MasonFilteredBlockImpl(node);
     }
   };
 
   IElementType MASON_SIMPLE_DEREF_EXPR = new MasonTemplatingElementType("MASON_DEREF_EXPRESSION") {
-    @NotNull
     @Override
-    public PsiElement getPsiElement(@NotNull ASTNode node) {
+    public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
       return new MasonSimpleDerefExpressionImpl(node);
     }
   };

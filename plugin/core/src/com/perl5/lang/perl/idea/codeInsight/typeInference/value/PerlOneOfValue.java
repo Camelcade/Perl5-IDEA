@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,8 +32,7 @@ import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
 public final class PerlOneOfValue extends PerlValue implements Iterable<PerlValue> {
   private static final int MAX_VARIANTS_NUMBER = 1024;
 
-  @NotNull
-  private final Set<PerlValue> myVariants;
+  private final @NotNull Set<PerlValue> myVariants;
 
   private PerlOneOfValue(@NotNull Set<PerlValue> variants) {
     myVariants = Collections.unmodifiableSet(variants);
@@ -44,9 +43,8 @@ public final class PerlOneOfValue extends PerlValue implements Iterable<PerlValu
     myVariants = deserializer.readValuesSet();
   }
 
-  @Nullable
   @Override
-  protected PerlContextType getContextType() {
+  protected @Nullable PerlContextType getContextType() {
     if (myVariants.isEmpty()) {
       return null;
     }
@@ -65,9 +63,8 @@ public final class PerlOneOfValue extends PerlValue implements Iterable<PerlValu
     return contextType;
   }
 
-  @NotNull
   @Override
-  public Iterator<PerlValue> iterator() {
+  public @NotNull Iterator<PerlValue> iterator() {
     return myVariants.iterator();
   }
 
@@ -86,9 +83,8 @@ public final class PerlOneOfValue extends PerlValue implements Iterable<PerlValu
     return PerlListValue.isDeterministic(myVariants);
   }
 
-  @NotNull
   @Override
-  public Set<String> getNamespaceNames() {
+  public @NotNull Set<String> getNamespaceNames() {
     if (myVariants.isEmpty()) {
       return Collections.emptySet();
     }
@@ -97,9 +93,8 @@ public final class PerlOneOfValue extends PerlValue implements Iterable<PerlValu
     return result;
   }
 
-  @NotNull
   @Override
-  public Set<String> getSubNames() {
+  public @NotNull Set<String> getSubNames() {
     if (myVariants.isEmpty()) {
       return Collections.emptySet();
     }
@@ -161,22 +156,19 @@ public final class PerlOneOfValue extends PerlValue implements Iterable<PerlValu
     return "OneOf: [" + StringUtil.join(variants, ", ") + "]";
   }
 
-  @NotNull
   @Override
-  public String getPresentableText() {
+  public @NotNull String getPresentableText() {
     List<String> variants = ContainerUtil.map(myVariants, PerlValue::getPresentableText);
     ContainerUtil.sort(variants);
     return PerlBundle.message("perl.value.oneof.static.presentable", StringUtil.join(variants, ",\n"));
   }
 
-  @NotNull
-  public static Builder builder() {
+  public static @NotNull Builder builder() {
     return new Builder();
   }
 
   public static final class Builder {
-    @NotNull
-    private final Set<PerlValue> myVariants = new HashSet<>();
+    private final @NotNull Set<PerlValue> myVariants = new HashSet<>();
 
     private Builder(@NotNull PsiElement... elements) {
       addVariants(elements);
@@ -219,8 +211,7 @@ public final class PerlOneOfValue extends PerlValue implements Iterable<PerlValu
       return myVariants.isEmpty();
     }
 
-    @NotNull
-    public PerlValue build() {
+    public @NotNull PerlValue build() {
       if (myVariants.isEmpty()) {
         return UNKNOWN_VALUE;
       }

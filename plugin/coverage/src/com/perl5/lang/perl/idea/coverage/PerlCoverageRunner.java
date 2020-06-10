@@ -77,8 +77,7 @@ public class PerlCoverageRunner extends CoverageRunner {
     }
   }
 
-  @Nullable
-  private static ProjectData doLoadCoverageData(@NotNull File sessionDataFile, @NotNull PerlCoverageSuite perlCoverageSuite) {
+  private static @Nullable ProjectData doLoadCoverageData(@NotNull File sessionDataFile, @NotNull PerlCoverageSuite perlCoverageSuite) {
     Project project = perlCoverageSuite.getProject();
     Sdk effectiveSdk;
     try {
@@ -168,8 +167,7 @@ public class PerlCoverageRunner extends CoverageRunner {
     return null;
   }
 
-  @NotNull
-  private static ProjectData parsePerlFileData(@NotNull PerlHostData<?, ?> hostData, @NotNull PerlFileData[] filesData) {
+  private static @NotNull ProjectData parsePerlFileData(@NotNull PerlHostData<?, ?> hostData, @NotNull PerlFileData[] filesData) {
     ProjectData projectData = new ProjectData();
     for (PerlFileData perlFileData : filesData) {
       if (StringUtil.isEmpty(perlFileData.name) || perlFileData.lines == null) {
@@ -225,21 +223,18 @@ public class PerlCoverageRunner extends CoverageRunner {
     });
   }
 
-  @NotNull
   @Override
-  public String getPresentableName() {
+  public @NotNull String getPresentableName() {
     return PerlBundle.message("perl.perl5");
   }
 
-  @NotNull
   @Override
-  public String getId() {
+  public @NotNull String getId() {
     return "Perl5CoverageRunner";
   }
 
-  @NotNull
   @Override
-  public String getDataFileExtension() {
+  public @NotNull String getDataFileExtension() {
     return "json";
   }
 

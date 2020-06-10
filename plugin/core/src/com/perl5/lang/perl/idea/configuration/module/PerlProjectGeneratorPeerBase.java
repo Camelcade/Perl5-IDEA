@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,8 +28,7 @@ import javax.swing.*;
 
 public abstract class PerlProjectGeneratorPeerBase<Settings extends PerlProjectGenerationSettings> extends GeneratorPeerImpl<Settings>
   implements UnnamedConfigurable {
-  @NotNull
-  private final Perl5SdkConfigurable mySdkConfigurable;
+  private final @NotNull Perl5SdkConfigurable mySdkConfigurable;
   private final AtomicNotNullLazyValue<JComponent> myComponentProvider = AtomicNotNullLazyValue.createValue(
     () -> initializeComponent(super.getComponent()));
 
@@ -38,9 +37,8 @@ public abstract class PerlProjectGeneratorPeerBase<Settings extends PerlProjectG
     mySdkConfigurable = new Perl5SdkConfigurable(getSettings(), null);
   }
 
-  @NotNull
   @Override
-  public final JComponent getComponent() {
+  public final @NotNull JComponent getComponent() {
     return myComponentProvider.getValue();
   }
 
@@ -49,16 +47,14 @@ public abstract class PerlProjectGeneratorPeerBase<Settings extends PerlProjectG
     mySdkConfigurable.disposeUIResources();
   }
 
-  @NotNull
-  protected JComponent initializeComponent(@NotNull JComponent component) {
+  protected @NotNull JComponent initializeComponent(@NotNull JComponent component) {
     component.add(mySdkConfigurable.createComponent());
     mySdkConfigurable.setEnabled(PerlProjectManager.getSdk(getSettings().getProject()) == null);
     return component;
   }
 
-  @NotNull
   @Override
-  public final JComponent createComponent() {
+  public final @NotNull JComponent createComponent() {
     return getComponent();
   }
 

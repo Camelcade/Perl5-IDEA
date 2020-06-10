@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,15 +32,13 @@ public class PerlMooseMethodModifierImpl extends PsiPerlExprImpl implements Perl
     super(node);
   }
 
-  @Nullable
   @Override
-  public PsiReference[] getReferences(PsiElement element) {
+  public @Nullable PsiReference[] getReferences(PsiElement element) {
     return PerlMoosePsiUtil.getModifiersNameReference(getExpr(), element);
   }
 
   @Override
-  @Nullable
-  public PsiPerlExpr getExpr() {
+  public @Nullable PsiPerlExpr getExpr() {
     return PsiTreeUtil.getChildOfType(this, PsiPerlExpr.class);
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,9 +31,8 @@ import org.jetbrains.annotations.Nullable;
 
 
 public class HTMLMasonElementDescriptionProvider implements ElementDescriptionProvider {
-  @Nullable
   @Override
-  public String getElementDescription(@NotNull PsiElement element, @NotNull ElementDescriptionLocation location) {
+  public @Nullable String getElementDescription(@NotNull PsiElement element, @NotNull ElementDescriptionLocation location) {
     if (element instanceof HTMLMasonNamedElement) {
       if (location == UsageViewLongNameLocation.INSTANCE) // backref search results title "Find usages of {} in Project files
       {

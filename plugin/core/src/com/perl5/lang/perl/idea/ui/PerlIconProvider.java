@@ -33,14 +33,12 @@ import javax.swing.*;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 
 public class PerlIconProvider extends IconProvider {
-  @Nullable
   @Override
-  public Icon getIcon(@NotNull PsiElement element, int flags) {
+  public @Nullable Icon getIcon(@NotNull PsiElement element, int flags) {
     return getIcon(element);
   }
 
-  @Nullable
-  public static Icon getIcon(@Nullable PsiElement element) {
+  public static @Nullable Icon getIcon(@Nullable PsiElement element) {
     if (element instanceof PerlSubExpr) {
       return PerlIcons.ANON_SUB_ICON;
     }
@@ -66,8 +64,7 @@ public class PerlIconProvider extends IconProvider {
     return null;
   }
 
-  @Nullable
-  public static Icon getIcon(@Nullable PerlVariableType actualType) {
+  public static @Nullable Icon getIcon(@Nullable PerlVariableType actualType) {
     if (actualType == null) {
       return null;
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,11 +27,9 @@ import javax.swing.*;
 import java.util.Objects;
 
 public abstract class PerlOsHandler {
-  @NotNull
-  private final String myName;
+  private final @NotNull String myName;
 
-  @Nullable
-  private final Icon myIcon;
+  private final @Nullable Icon myIcon;
 
   public PerlOsHandler(@NotNull String name) {
     this(name, null);
@@ -42,14 +40,12 @@ public abstract class PerlOsHandler {
     myIcon = icon;
   }
 
-  @NotNull
-  public abstract String getPerlExecutableName();
+  public abstract @NotNull String getPerlExecutableName();
 
   /**
    * @return operation system presentable name
    */
-  @NotNull
-  public final String getPresentableName() {
+  public final @NotNull String getPresentableName() {
     return myName;
   }
 
@@ -64,19 +60,16 @@ public abstract class PerlOsHandler {
   public boolean hasWslSupport() {return false;}
 
 
-  @Nullable
-  public final Icon getIcon() {
+  public final @Nullable Icon getIcon() {
     return myIcon;
   }
 
-  @NotNull
-  public static PerlOsHandler notNullFrom(@NotNull Sdk sdk) {
+  public static @NotNull PerlOsHandler notNullFrom(@NotNull Sdk sdk) {
     return Objects.requireNonNull(from(sdk));
   }
 
   @Contract("null->null")
-  @Nullable
-  public static PerlOsHandler from(@Nullable Sdk sdk) {
+  public static @Nullable PerlOsHandler from(@Nullable Sdk sdk) {
     return ObjectUtils.doIfNotNull(PerlHostData.from(sdk), PerlHostData::getOsHandler);
   }
 }

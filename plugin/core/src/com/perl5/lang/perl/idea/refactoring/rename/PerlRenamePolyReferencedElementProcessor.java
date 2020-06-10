@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -58,9 +58,8 @@ public abstract class PerlRenamePolyReferencedElementProcessor extends RenamePsi
     }
   }
 
-  @Nullable
   @Override
-  public PsiElement substituteElementToRename(@NotNull PsiElement element, @Nullable Editor editor) {
+  public @Nullable PsiElement substituteElementToRename(@NotNull PsiElement element, @Nullable Editor editor) {
     if (PsiElementRenameHandler.isVetoed(element)) {
       return null;
     }

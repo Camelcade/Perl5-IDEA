@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,9 +35,8 @@ import java.util.Collections;
 
 public class TemplateToolkitFileReferenceHelper extends FileReferenceHelper {
 
-  @Nullable
   @Override
-  public PsiFileSystemItem findRoot(Project project, @NotNull VirtualFile file) {
+  public @Nullable PsiFileSystemItem findRoot(Project project, @NotNull VirtualFile file) {
     VirtualFile root = file;
     VirtualFile parent;
     while ((parent = root.getParent()) != null) {
@@ -46,16 +45,14 @@ public class TemplateToolkitFileReferenceHelper extends FileReferenceHelper {
     return getPsiFileSystemItem(project, root);
   }
 
-  @NotNull
   @Override
-  public Collection<PsiFileSystemItem> getContexts(Project project, @NotNull VirtualFile file) {
+  public @NotNull Collection<PsiFileSystemItem> getContexts(Project project, @NotNull VirtualFile file) {
     PsiFileSystemItem item = getPsiFileSystemItem(project, file);
     return item == null ? Collections.emptyList() : Collections.singleton(item);
   }
 
-  @NotNull
   @Override
-  public Collection<PsiFileSystemItem> getRoots(@NotNull Module module) {
+  public @NotNull Collection<PsiFileSystemItem> getRoots(@NotNull Module module) {
     Collection<PsiFileSystemItem> result = new ArrayList<>();
     PsiManager psiManager = PsiManager.getInstance(module.getProject());
     for (VirtualFile root : ManagingFS.getInstance().getLocalRoots()) {

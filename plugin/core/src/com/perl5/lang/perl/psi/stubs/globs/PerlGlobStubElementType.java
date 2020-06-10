@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,21 +43,18 @@ public class PerlGlobStubElementType extends IStubElementType<PerlGlobStub, PsiP
     return new PsiPerlGlobVariableImpl(stub, this);
   }
 
-  @NotNull
   @Override
-  public PsiElement getPsiElement(@NotNull ASTNode node) {
+  public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
     return new PsiPerlGlobVariableImpl(node);
   }
 
-  @NotNull
   @Override
-  public PerlGlobStub createStub(@NotNull PsiPerlGlobVariable psi, StubElement parentStub) {
+  public @NotNull PerlGlobStub createStub(@NotNull PsiPerlGlobVariable psi, StubElement parentStub) {
     return new PerlGlobStubImpl(parentStub, psi.getNamespaceName(), psi.getName(), psi.isLeftSideOfAssignment());
   }
 
-  @NotNull
   @Override
-  public String getExternalId() {
+  public @NotNull String getExternalId() {
     return "perl." + super.toString();
   }
 
@@ -75,9 +72,8 @@ public class PerlGlobStubElementType extends IStubElementType<PerlGlobStub, PsiP
     dataStream.writeBoolean(stub.isLeftSideOfAssignment());
   }
 
-  @NotNull
   @Override
-  public PerlGlobStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
+  public @NotNull PerlGlobStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
     return new PerlGlobStubImpl(parentStub, PerlStubSerializationUtil.readString(dataStream),
                                 PerlStubSerializationUtil.readString(dataStream), dataStream.readBoolean());
   }

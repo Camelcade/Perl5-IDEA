@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,26 +39,22 @@ public class Mason2TemplatingFileViewProvider extends PerlMultiplePsiFilesPerDoc
   }
 
   @Override
-  @NotNull
-  public Language getBaseLanguage() {
+  public @NotNull Language getBaseLanguage() {
     return Mason2TemplatingLanguage.INSTANCE;
   }
 
-  @NotNull
   @Override
-  protected IElementType getTemplateContentElementType() {
+  protected @NotNull IElementType getTemplateContentElementType() {
     return MASON_HTML_TEMPLATE_DATA;
   }
 
-  @NotNull
   @Override
-  protected IElementType getPODContentElementType() {
+  protected @NotNull IElementType getPODContentElementType() {
     return MASON_POD_TEMPLATE_DATA;
   }
 
-  @NotNull
   @Override
-  protected Mason2TemplatingFileViewProvider cloneInner(@NotNull final VirtualFile copy) {
+  protected @NotNull Mason2TemplatingFileViewProvider cloneInner(final @NotNull VirtualFile copy) {
     return new Mason2TemplatingFileViewProvider(getManager(), copy, false, getTemplateDataLanguage());
   }
 }

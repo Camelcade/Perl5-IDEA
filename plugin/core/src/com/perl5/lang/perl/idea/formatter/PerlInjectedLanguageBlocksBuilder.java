@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,15 +42,11 @@ import java.util.List;
  * N.B. This implementation supposes that suffix and prefix are meaningless
  */
 public class PerlInjectedLanguageBlocksBuilder implements PsiLanguageInjectionHost.InjectedPsiVisitor {
-  @NotNull
-  private final CodeStyleSettings mySettings;
+  private final @NotNull CodeStyleSettings mySettings;
 
-  @NotNull
-  private final List<Entry> myEntries = new ArrayList<>();
-  @NotNull
-  private final ASTNode myHostNode;
-  @NotNull
-  private final TextRange myParentRange;
+  private final @NotNull List<Entry> myEntries = new ArrayList<>();
+  private final @NotNull ASTNode myHostNode;
+  private final @NotNull TextRange myParentRange;
 
   /**
    * Used to align absolutely non-indented blocks in injected text
@@ -58,8 +54,7 @@ public class PerlInjectedLanguageBlocksBuilder implements PsiLanguageInjectionHo
   private final Alignment myAbsoluteIndentAlignment = Alignment.createAlignment();
 
   int injectedLength = 0;
-  @Nullable
-  private PsiFile myInjectedPsiFile;
+  private @Nullable PsiFile myInjectedPsiFile;
 
   private PerlInjectedLanguageBlocksBuilder(@NotNull CodeStyleSettings settings,
                                             @NotNull ASTNode hostNode,
@@ -89,13 +84,11 @@ public class PerlInjectedLanguageBlocksBuilder implements PsiLanguageInjectionHo
     return injectedLength == 0;
   }
 
-  @Nullable
-  private PsiElement getHostPsi() {
+  private @Nullable PsiElement getHostPsi() {
     return myHostNode.getPsi();
   }
 
-  @NotNull
-  private TextRange getInjectedTreeRange() {
+  private @NotNull TextRange getInjectedTreeRange() {
     return TextRange.from(0, injectedLength);
   }
 
@@ -108,8 +101,7 @@ public class PerlInjectedLanguageBlocksBuilder implements PsiLanguageInjectionHo
     return getInjectedBuilder() != null;
   }
 
-  @NotNull
-  private List<Block> calcInjectedBlocks() {
+  private @NotNull List<Block> calcInjectedBlocks() {
     if (enumerate()) {
       Block wrapper = getInjectedLanguageRoot();
       return wrapper == null ? Collections.emptyList() : Collections.singletonList(wrapper);
@@ -117,8 +109,7 @@ public class PerlInjectedLanguageBlocksBuilder implements PsiLanguageInjectionHo
     return Collections.emptyList();
   }
 
-  @Nullable
-  private Block getInjectedLanguageRoot() {
+  private @Nullable Block getInjectedLanguageRoot() {
     if (myInjectedPsiFile == null ||
         StringUtil.isEmptyOrSpaces(getInjectedTreeRange().subSequence(myInjectedPsiFile.getNode().getChars()))) {
       return null;
@@ -133,8 +124,7 @@ public class PerlInjectedLanguageBlocksBuilder implements PsiLanguageInjectionHo
     return new PerlInjectedLanguageBlockWrapper(childModel.getRootBlock(), this);
   }
 
-  @Nullable
-  public TextRange getRangeInHostDocument(@NotNull TextRange rangeInInjected) {
+  public @Nullable TextRange getRangeInHostDocument(@NotNull TextRange rangeInInjected) {
     TextRange mappedRange = TextRange.create(
       getOffsetInHostDocument(rangeInInjected.getStartOffset()),
       getOffsetInHostDocument(rangeInInjected.getEndOffset())
@@ -155,8 +145,7 @@ public class PerlInjectedLanguageBlocksBuilder implements PsiLanguageInjectionHo
     throw new IllegalArgumentException("Unable to map offset:" + offsetInInjected);
   }
 
-  @Nullable
-  private FormattingModelBuilder getInjectedBuilder() {
+  private @Nullable FormattingModelBuilder getInjectedBuilder() {
     return myInjectedPsiFile == null ? null : LanguageFormatting.INSTANCE.forContext(myInjectedPsiFile);
   }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,15 +33,13 @@ public class TemplateToolkitFileContextProvider extends FileContextProvider {
     return file instanceof TemplateToolkitFile;
   }
 
-  @NotNull
   @Override
-  public Collection<PsiFileSystemItem> getContextFolders(PsiFile file) {
+  public @NotNull Collection<PsiFileSystemItem> getContextFolders(PsiFile file) {
     return TemplateToolkitSettings.getInstance(file.getProject()).getTemplatePsiRoots();
   }
 
-  @Nullable
   @Override
-  public PsiFile getContextFile(PsiFile file) {
+  public @Nullable PsiFile getContextFile(PsiFile file) {
     return null;
   }
 }

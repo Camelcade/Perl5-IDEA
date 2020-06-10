@@ -162,17 +162,15 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     }
   }
 
-  @NotNull
   @Override
-  public Instruction startNode(@Nullable PsiElement element) {
+  public @NotNull Instruction startNode(@Nullable PsiElement element) {
     if (NO_RESULT_INSTRUCTIONS.contains(PsiUtilCore.getElementType(element))) {
       return startNoResultNode(element);
     }
     return super.startNode(element);
   }
 
-  @NotNull
-  public Instruction startNoResultNode(@Nullable PsiElement element) {
+  public @NotNull Instruction startNoResultNode(@Nullable PsiElement element) {
     final Instruction instruction = new PerlNoResultInstruction(this, element);
     addNodeAndCheckPending(instruction);
     return instruction;
@@ -202,8 +200,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     return instruction;
   }
 
-  @NotNull
-  private TransparentInstruction createNextInstruction(@NotNull PsiElement element) {
+  private @NotNull TransparentInstruction createNextInstruction(@NotNull PsiElement element) {
     return new TransparentInstructionImpl(this, element, "next");
   }
 
@@ -213,9 +210,8 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
    *
    * @return new instruction or null if element is null
    */
-  @Nullable
   @Contract("null -> null")
-  private Instruction startNodeSmart(@Nullable PsiElement element) {
+  private @Nullable Instruction startNodeSmart(@Nullable PsiElement element) {
     IElementType elementType = PsiUtilCore.getElementType(element);
     if (TRANSPARENT_CONTAINERS.contains(elementType)) {
       return startTransparentNode(element, "");
@@ -236,27 +232,23 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
   /**
    * @return nearest scope for die/croak/confess
    */
-  @NotNull
-  private static PsiElement getDieScopeBlock(@NotNull PsiElement element) {
+  private static @NotNull PsiElement getDieScopeBlock(@NotNull PsiElement element) {
     return getNestedBlockOrElement(getDieScope(element));
   }
 
-  @NotNull
-  private static PsiElement getGotoScope(@NotNull PsiPerlGotoExpr o) {
+  private static @NotNull PsiElement getGotoScope(@NotNull PsiPerlGotoExpr o) {
     return Objects.requireNonNull(getDieScopeBlock(o));
   }
 
 
-  @NotNull
-  private static PsiElement getReturnScopeBlock(@NotNull PsiPerlReturnExpr o) {
+  private static @NotNull PsiElement getReturnScopeBlock(@NotNull PsiPerlReturnExpr o) {
     return getNestedBlockOrElement(o.getReturnScope());
   }
 
   /**
    * @return nested block if any
    */
-  @NotNull
-  private static PsiElement getNestedBlockOrElement(@NotNull PsiElement element) {
+  private static @NotNull PsiElement getNestedBlockOrElement(@NotNull PsiElement element) {
     if (element instanceof PerlSubDefinitionElement) {
       PsiPerlBlock body = ((PerlSubDefinitionElement)element).getSubDefinitionBody();
       if (body != null) {
@@ -288,8 +280,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
    * @return a scope for which control flow need to be built for the resolve purposes or null if there is none
    * @implSpec returns non-inlined sub expression, sub definition or file
    */
-  @Nullable
-  public static PsiElement getControlFlowScope(@NotNull PsiElement element) {
+  public static @Nullable PsiElement getControlFlowScope(@NotNull PsiElement element) {
     PsiElement elementContext = element.getContext();
     if (elementContext == null) {
       return null;
@@ -310,8 +301,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
   private class PerlControlFlowVisitor extends PerlRecursiveVisitor {
     private final Map<PsiElement, Instruction> myLoopNextInstructions = new HashMap<>();
     private final Map<PsiElement, Instruction> myLoopRedoInstructions = new HashMap<>();
-    @NotNull
-    private final PsiElement myElement;
+    private final @NotNull PsiElement myElement;
     private final AtomicNotNullLazyValue<HeredocCollector> myCollectorProvider = AtomicNotNullLazyValue.createValue(
       () -> {
         HeredocCollector collector = new HeredocCollector();
@@ -324,8 +314,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       myElement = element;
     }
 
-    @NotNull
-    public PsiElement getElement() {
+    public @NotNull PsiElement getElement() {
       return myElement;
     }
 
@@ -985,8 +974,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       flowAbrupted();
     }
 
-    @Nullable
-    private PsiElement getWhenOrDefaultScope(@NotNull PsiPerlContinueExpr o) {
+    private @Nullable PsiElement getWhenOrDefaultScope(@NotNull PsiPerlContinueExpr o) {
       PsiPerlStatement enclosingStatement = PsiTreeUtil.getParentOfType(o, PsiPerlStatement.class);
       if (enclosingStatement instanceof PerlStatementMixin &&
           ((PerlStatementMixin)enclosingStatement).getModifier() instanceof PsiPerlWhenStatementModifier) {
@@ -1015,14 +1003,14 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
   }
 
   public static void iteratePrev(@Nullable PsiElement element,
-                                 @NotNull final Function<? super Instruction, ControlFlowUtil.Operation> processor) {
+                                 final @NotNull Function<? super Instruction, ControlFlowUtil.Operation> processor) {
     if (element != null) {
       iteratePrev(PerlControlFlowBuilder.getFor(element).getInstructions(), processor);
     }
   }
 
   public static void iteratePrev(@NotNull Instruction[] instructions,
-                                 @NotNull final Function<? super Instruction, ControlFlowUtil.Operation> processor) {
+                                 final @NotNull Function<? super Instruction, ControlFlowUtil.Operation> processor) {
     ControlFlowUtil.iteratePrev(instructions.length - 1, instructions, processor);
   }
 

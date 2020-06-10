@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,8 +30,7 @@ import java.util.List;
 import java.util.Map;
 
 public class PerlNamespaceDefinitionStub extends StubBase<PerlNamespaceDefinitionElement> implements PerlNamespaceDefinition {
-  @NotNull
-  private final PerlNamespaceDefinitionData myData;
+  private final @NotNull PerlNamespaceDefinitionData myData;
 
   public PerlNamespaceDefinitionStub(@Nullable StubElement parent,
                                      @NotNull IStubElementType elementType,
@@ -40,50 +39,42 @@ public class PerlNamespaceDefinitionStub extends StubBase<PerlNamespaceDefinitio
     myData = data;
   }
 
-  @NotNull
-  public PerlNamespaceDefinitionData getData() {
+  public @NotNull PerlNamespaceDefinitionData getData() {
     return myData;
   }
 
-  @NotNull
   @Override
-  public String getNamespaceName() {
+  public @NotNull String getNamespaceName() {
     return myData.getNamespaceName();
   }
 
-  @NotNull
   @Override
-  public PerlMroType getMroType() {
+  public @NotNull PerlMroType getMroType() {
     return myData.getMroType();
   }
 
-  @NotNull
   @Override
-  public List<String> getParentNamespacesNames() {
+  public @NotNull List<String> getParentNamespacesNames() {
     return myData.getParentNamespacesNames();
   }
 
-  @Nullable
   @Override
-  public PerlNamespaceAnnotations getAnnotations() {
+  public @Nullable PerlNamespaceAnnotations getAnnotations() {
     return myData.getAnnotations();
   }
 
-  @NotNull
   @Override
-  public List<String> getEXPORT() {
+  public @NotNull List<String> getEXPORT() {
     return myData.getEXPORT();
   }
 
-  @NotNull
   @Override
-  public List<String> getEXPORT_OK() {
+  public @NotNull List<String> getEXPORT_OK() {
     return myData.getEXPORT_OK();
   }
 
-  @NotNull
   @Override
-  public Map<String, List<String>> getEXPORT_TAGS() {
+  public @NotNull Map<String, List<String>> getEXPORT_TAGS() {
     return myData.getEXPORT_TAGS();
   }
 

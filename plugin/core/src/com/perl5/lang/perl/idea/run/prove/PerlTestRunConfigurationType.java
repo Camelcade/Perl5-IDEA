@@ -33,22 +33,19 @@ public class PerlTestRunConfigurationType extends ConfigurationTypeBase {
           PerlBundle.message("perl.run.prove.configuration.group.description"),
           PerlIcons.PERL_TEST_CONFIGURATION);
     addFactory(new ConfigurationFactory(this) {
-      @NotNull
       @Override
-      public String getId() {
+      public @NotNull String getId() {
         return "Perl5 Test";
       }
 
-      @NotNull
       @Override
-      public RunConfiguration createTemplateConfiguration(@NotNull Project project) {
+      public @NotNull RunConfiguration createTemplateConfiguration(@NotNull Project project) {
         return new PerlTestRunConfiguration(project, this, "Unnamed");
       }
     });
   }
 
-  @NotNull
-  public static PerlTestRunConfigurationType getInstance() {
+  public static @NotNull PerlTestRunConfigurationType getInstance() {
     return Objects.requireNonNull(CONFIGURATION_TYPE_EP.findExtension(PerlTestRunConfigurationType.class));
   }
 }

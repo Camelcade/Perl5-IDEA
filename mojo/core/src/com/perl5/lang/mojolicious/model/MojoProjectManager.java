@@ -55,14 +55,10 @@ import static com.perl5.lang.mojolicious.model.MojoProjectListener.MOJO_PROJECT_
 
 public class MojoProjectManager implements Disposable {
   static final Logger LOG = Logger.getInstance(MojoProjectManager.class);
-  @NotNull
-  private final Project myProject;
-  @NotNull
-  private final MergingUpdateQueue myUpdateQueue;
-  @NotNull
-  private final AtomicBoolean myUpdatingModel = new AtomicBoolean(false);
-  @NotNull
-  private volatile Model myModel = new Model(Collections.emptySet());
+  private final @NotNull Project myProject;
+  private final @NotNull MergingUpdateQueue myUpdateQueue;
+  private final @NotNull AtomicBoolean myUpdatingModel = new AtomicBoolean(false);
+  private volatile @NotNull Model myModel = new Model(Collections.emptySet());
 
   public MojoProjectManager(@NotNull Project project) {
     myProject = project;
@@ -114,13 +110,11 @@ public class MojoProjectManager implements Disposable {
   }
 
   @Contract("null->null")
-  @Nullable
-  public MojoProject getMojoProject(@Nullable VirtualFile root) {
+  public @Nullable MojoProject getMojoProject(@Nullable VirtualFile root) {
     return myModel.myProjectRoots.get(root);
   }
 
-  @NotNull
-  public List<MojoProject> getMojoProjects() {
+  public @NotNull List<MojoProject> getMojoProjects() {
     return Collections.unmodifiableList(new ArrayList<>(myModel.myProjectRoots.values()));
   }
 
@@ -206,8 +200,7 @@ public class MojoProjectManager implements Disposable {
   /**
    * @return a set of mojo entities in project
    */
-  @NotNull
-  private Set<MojoProject> findAllProjects() {
+  private @NotNull Set<MojoProject> findAllProjects() {
     if (!MojoUtil.isMojoAvailable(myProject)) {
       LOG.debug("Mojo is not available in project");
       return Collections.emptySet();
@@ -248,8 +241,7 @@ public class MojoProjectManager implements Disposable {
   /**
    * @return a directory in project, containing a {@code lib} directory, containing current class or null
    */
-  @Nullable
-  private VirtualFile findLibContainer(@NotNull PerlNamespaceDefinitionElement namespaceDefinition) {
+  private @Nullable VirtualFile findLibContainer(@NotNull PerlNamespaceDefinitionElement namespaceDefinition) {
     VirtualFile namespaceFile = PsiUtilCore.getVirtualFile(namespaceDefinition);
     if (namespaceFile == null) {
       LOG.debug("Namespace without a virtual file");
@@ -268,8 +260,7 @@ public class MojoProjectManager implements Disposable {
     return null;
   }
 
-  @NotNull
-  public static MojoProjectManager getInstance(@NotNull Project project) {
+  public static @NotNull MojoProjectManager getInstance(@NotNull Project project) {
     return ServiceManager.getService(project, MojoProjectManager.class);
   }
 
@@ -291,8 +282,7 @@ public class MojoProjectManager implements Disposable {
   }
 
   private static class Model {
-    @NotNull
-    private final Map<VirtualFile, MojoProject> myProjectRoots;
+    private final @NotNull Map<VirtualFile, MojoProject> myProjectRoots;
 
     private Model(@NotNull Set<? extends MojoProject> mojoProjects) {
       if (mojoProjects.isEmpty()) {

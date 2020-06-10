@@ -52,33 +52,28 @@ public class TemplateToolkitFileViewProvider extends MultiplePsiFilesPerDocument
     myRelevantLanguages.add(myTemplateLanguage = calcTemplateLanguage(manager, virtualFile));
   }
 
-  @NotNull
   @Override
-  public Set<Language> getLanguages() {
+  public @NotNull Set<Language> getLanguages() {
     return myRelevantLanguages;
   }
 
-  @NotNull
   @Override
-  public Language getBaseLanguage() {
+  public @NotNull Language getBaseLanguage() {
     return myBaseLanguage;
   }
 
-  @NotNull
   @Override
-  protected MultiplePsiFilesPerDocumentFileViewProvider cloneInner(@NotNull VirtualFile fileCopy) {
+  protected @NotNull MultiplePsiFilesPerDocumentFileViewProvider cloneInner(@NotNull VirtualFile fileCopy) {
     return new TemplateToolkitFileViewProvider(getManager(), fileCopy, false);
   }
 
-  @NotNull
   @Override
-  public Language getTemplateDataLanguage() {
+  public @NotNull Language getTemplateDataLanguage() {
     return myTemplateLanguage;
   }
 
-  @Nullable
   @Override
-  protected PsiFile createFile(@NotNull Language lang) {
+  protected @Nullable PsiFile createFile(@NotNull Language lang) {
     if (lang == getTemplateDataLanguage()) {
       ParserDefinition parserDefinition = LanguageParserDefinitions.INSTANCE.forLanguage(getTemplateDataLanguage());
 
@@ -98,8 +93,7 @@ public class TemplateToolkitFileViewProvider extends MultiplePsiFilesPerDocument
   }
 
   @Override
-  @Nullable
-  public PsiElement findElementAt(int offset, @NotNull Class<? extends Language> lang) {
+  public @Nullable PsiElement findElementAt(int offset, @NotNull Class<? extends Language> lang) {
     final PsiFile mainRoot = getPsi(getBaseLanguage());
     PsiElement ret = null;
     for (final Language language : getLanguages()) {

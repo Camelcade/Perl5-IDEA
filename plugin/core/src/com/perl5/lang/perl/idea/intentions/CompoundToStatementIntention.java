@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,16 +54,13 @@ public class CompoundToStatementIntention extends PsiElementBaseIntentionAction 
     return getCompound(element) != null;
   }
 
-  @NotNull
   @Override
-  public String getText() {
+  public @NotNull String getText() {
     return PerlBundle.message("perl.intention.convert.to.statement");
   }
 
-  @Nls
-  @NotNull
   @Override
-  public String getFamilyName() {
+  public @Nls @NotNull String getFamilyName() {
     return getText();
   }
 
@@ -105,8 +102,7 @@ public class CompoundToStatementIntention extends PsiElementBaseIntentionAction 
    * @param statementExpr statement expression
    * @return adjusted text or null if something went wrong
    */
-  @NotNull
-  private static String computeStatementText(@NotNull PerlForeachCompound forCompound, @NotNull PsiPerlExpr statementExpr) {
+  private static @NotNull String computeStatementText(@NotNull PerlForeachCompound forCompound, @NotNull PsiPerlExpr statementExpr) {
     String statementText = statementExpr.getText();
     PsiPerlForeachIterator foreachIterator = forCompound.getForeachIterator();
     if (foreachIterator == null) {
@@ -223,8 +219,7 @@ public class CompoundToStatementIntention extends PsiElementBaseIntentionAction 
    *
    * @return expression text or null if no statement or statement has modifier
    */
-  @NotNull
-  private static PsiPerlExpr getStatementExpression(@NotNull PerlConvertableCompound convertibleCompound)
+  private static @NotNull PsiPerlExpr getStatementExpression(@NotNull PerlConvertableCompound convertibleCompound)
     throws IncorrectOperationException {
     PsiPerlBlock block = convertibleCompound.getBlock();
     if (block == null) {
@@ -252,8 +247,7 @@ public class CompoundToStatementIntention extends PsiElementBaseIntentionAction 
   /**
    * @return convertible compound statement wrapping element under cursor
    */
-  @Nullable
-  private static PerlConvertableCompound getCompound(@NotNull PsiElement elementAtCursor) {
+  private static @Nullable PerlConvertableCompound getCompound(@NotNull PsiElement elementAtCursor) {
     PerlConvertableCompound targetCompound = PsiTreeUtil.getParentOfType(elementAtCursor, PerlConvertableCompound.class);
     return targetCompound != null && targetCompound.isConvertableToModifier() ? targetCompound : null;
   }

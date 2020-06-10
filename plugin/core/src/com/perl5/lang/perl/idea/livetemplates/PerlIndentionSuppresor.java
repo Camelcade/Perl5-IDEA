@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ public class PerlIndentionSuppresor implements TemplateOptionalProcessor {
   // pattern for getting marker
   public static final Pattern HEREDOC_OPENER_PATTERN = Pattern.compile("<<(.+?)");
   public static final Pattern HEREDOC_OPENER_PATTERN_DQ = Pattern.compile("<<(\\s*)(\")(.*?)\"");
-  public static final Pattern HEREDOC_OPENER_PATTERN_SQ = Pattern.compile("<<(\\s*)(\')(.*?)\'");
+  public static final Pattern HEREDOC_OPENER_PATTERN_SQ = Pattern.compile("<<(\\s*)(')(.*?)'");
   public static final Pattern HEREDOC_OPENER_PATTERN_XQ = Pattern.compile("<<(\\s*)(`)(.*?)`");
 
 
@@ -53,9 +53,8 @@ public class PerlIndentionSuppresor implements TemplateOptionalProcessor {
     }
   }
 
-  @Nls
   @Override
-  public String getOptionName() {
+  public @Nls String getOptionName() {
     return null;
   }
 

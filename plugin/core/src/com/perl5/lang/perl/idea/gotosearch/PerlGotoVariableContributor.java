@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,9 +33,8 @@ import java.util.Collection;
 
 
 public class PerlGotoVariableContributor implements ChooseByNameContributor {
-  @NotNull
   @Override
-  public String[] getNames(Project project, boolean includeNonProjectItems) {
+  public @NotNull String[] getNames(Project project, boolean includeNonProjectItems) {
     Collection<String> result = new ArrayList<>();
 
     for (String name : PerlScalarUtil.getDefinedGlobalScalarNames(project)) {
@@ -57,9 +56,8 @@ public class PerlGotoVariableContributor implements ChooseByNameContributor {
     return result.toArray(new String[result.size()]);
   }
 
-  @NotNull
   @Override
-  public NavigationItem[] getItemsByName(String name, String pattern, Project project, boolean includeNonProjectItems) {
+  public @NotNull NavigationItem[] getItemsByName(String name, String pattern, Project project, boolean includeNonProjectItems) {
 
     if (name.length() > 0) {
       Collection<PerlVariableDeclarationElement> result;

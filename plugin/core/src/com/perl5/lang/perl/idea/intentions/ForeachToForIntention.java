@@ -31,17 +31,13 @@ import org.jetbrains.annotations.NotNull;
 
 
 public class ForeachToForIntention extends PsiElementBaseIntentionAction {
-  @Nls
-  @NotNull
   @Override
-  public String getText() {
+  public @Nls @NotNull String getText() {
     return PerlBundle.message("perl.intention.foreach.to.for");
   }
 
-  @Nls
-  @NotNull
   @Override
-  public String getFamilyName() {
+  public @Nls @NotNull String getFamilyName() {
     return getText();
   }
 

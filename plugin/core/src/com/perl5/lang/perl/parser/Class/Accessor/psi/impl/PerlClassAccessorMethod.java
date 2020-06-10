@@ -93,14 +93,12 @@ public class PerlClassAccessorMethod extends PerlLightMethodDefinitionElement<Pe
     return isFollowBestPractice() && getSubName().startsWith(SETTER_PREFIX);
   }
 
-  @NotNull
   @Override
-  public String getName() {
+  public @NotNull String getName() {
     return getBaseName();
   }
 
-  @NotNull
-  public String getBaseName() {
+  public @NotNull String getBaseName() {
     String name = getSubName();
     return isFollowBestPractice() ?
            hasGetterName() ? name.substring(GETTER_PREFIX.length()) : name.substring(SETTER_PREFIX.length()) :
@@ -115,8 +113,7 @@ public class PerlClassAccessorMethod extends PerlLightMethodDefinitionElement<Pe
     return isFollowBestPractice() && hasGetterName() ? SETTER_PREFIX + getBaseName() : getSubName();
   }
 
-  @Nullable
-  public PerlClassAccessorMethod getPairedMethod() {
+  public @Nullable PerlClassAccessorMethod getPairedMethod() {
     if (!isFollowBestPractice()) {
       return null;
     }
@@ -132,9 +129,8 @@ public class PerlClassAccessorMethod extends PerlLightMethodDefinitionElement<Pe
     return null;
   }
 
-  @NotNull
   @Override
-  public String getSubstitutedUsageName(@NotNull String newName, @NotNull PsiElement element) {
+  public @NotNull String getSubstitutedUsageName(@NotNull String newName, @NotNull PsiElement element) {
     if (isFollowBestPractice()) {
       String currentValue = element.getText();
       if (getGetterName().equals(currentValue)) {

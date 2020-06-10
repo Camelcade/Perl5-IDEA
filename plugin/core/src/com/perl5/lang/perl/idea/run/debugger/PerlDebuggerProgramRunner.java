@@ -32,9 +32,8 @@ import org.jetbrains.annotations.NotNull;
 
 
 public class PerlDebuggerProgramRunner implements ProgramRunner<RunnerSettings> {
-  @NotNull
   @Override
-  public String getRunnerId() {
+  public @NotNull String getRunnerId() {
     return "Perl Debugger";
   }
 
@@ -48,9 +47,8 @@ public class PerlDebuggerProgramRunner implements ProgramRunner<RunnerSettings> 
     FileDocumentManager.getInstance().saveAllDocuments();
     ExecutionManager.getInstance(env.getProject()).startRunProfile(env, state -> {
       XDebugSession xDebugSession = XDebuggerManager.getInstance(env.getProject()).startSession(env, new XDebugProcessStarter() {
-        @NotNull
         @Override
-        public XDebugProcess start(@NotNull XDebugSession session) throws ExecutionException {
+        public @NotNull XDebugProcess start(@NotNull XDebugSession session) throws ExecutionException {
           return ((PerlDebuggableRunConfiguration)env.getRunProfile())
             .createDebugProcess(((PerlDebuggableRunConfiguration)env.getRunProfile()).computeDebugAddress(null), session, null, env);
         }

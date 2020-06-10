@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,8 +50,7 @@ public class PodOverSectionContent extends PodCompositeElementMixin {
    *
    * @return item or null if not any
    */
-  @Nullable
-  public PodSectionItem getFirstItem() {
+  public @Nullable PodSectionItem getFirstItem() {
     return ObjectUtils.tryCast(getFirstChild(), PodSectionItem.class);
   }
 

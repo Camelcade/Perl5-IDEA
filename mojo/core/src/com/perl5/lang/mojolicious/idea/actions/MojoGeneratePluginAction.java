@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,39 +28,33 @@ public class MojoGeneratePluginAction extends MojoGenerateAction {
     super(MojoBundle.message("mojo.action.generate.plugin"), MojoIcons.pluginIcon());
   }
 
-  @NotNull
   @Override
-  protected MojoPlugin.NameValidator getNameValidator() {
+  protected @NotNull MojoPlugin.NameValidator getNameValidator() {
     return new MojoPlugin.NameValidator();
   }
 
-  @NotNull
   @Override
-  protected Icon getPromptIcon() {
+  protected @NotNull Icon getPromptIcon() {
     return MojoIcons.pluginIcon();
   }
 
-  @NotNull
   @Override
-  protected String getPromptTitle() {
+  protected @NotNull String getPromptTitle() {
     return MojoBundle.message("mojo.action.generate.plugin.prompt.title");
   }
 
-  @NotNull
   @Override
-  protected String getPromptMessage() {
+  protected @NotNull String getPromptMessage() {
     return MojoBundle.message("mojo.action.generate.plugin.prompt.message");
   }
 
-  @NotNull
   @Override
-  protected String getGenerateCommand() {
+  protected @NotNull String getGenerateCommand() {
     return "plugin";
   }
 
-  @NotNull
   @Override
-  protected String getDefaultName() {
+  protected @NotNull String getDefaultName() {
     return "MyPlugin";
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,19 +38,16 @@ public class PerlArithmeticNegationValue extends PerlOperationValue {
     super(deserializer);
   }
 
-  @NotNull
   @Override
-  protected PerlValue computeResolve(@NotNull PerlValue resolvedBaseValue, @NotNull PerlValueResolver resolver) {
+  protected @NotNull PerlValue computeResolve(@NotNull PerlValue resolvedBaseValue, @NotNull PerlValueResolver resolver) {
     return doComputeStrictResolve(resolvedBaseValue);
   }
 
-  @NotNull
-  private static PerlValue doComputeStrictResolve(@NotNull PerlValue target) {
+  private static @NotNull PerlValue doComputeStrictResolve(@NotNull PerlValue target) {
     return ObjectUtils.notNull(doComputeResolve(target), UNKNOWN_VALUE);
   }
 
-  @Nullable
-  private static PerlValue doComputeResolve(@NotNull PerlValue target) {
+  private static @Nullable PerlValue doComputeResolve(@NotNull PerlValue target) {
     if (target instanceof PerlArithmeticNegationValue) {
       return ((PerlArithmeticNegationValue)target).getBaseValue();
     }
@@ -81,8 +78,7 @@ public class PerlArithmeticNegationValue extends PerlOperationValue {
     return "-" + getBaseValue();
   }
 
-  @NotNull
-  public static PerlValue create(@NotNull PerlValue baseValue) {
+  public static @NotNull PerlValue create(@NotNull PerlValue baseValue) {
     if (baseValue.isDeterministic()) {
       return PerlValuesBuilder.convert(baseValue, PerlArithmeticNegationValue::doComputeStrictResolve);
     }

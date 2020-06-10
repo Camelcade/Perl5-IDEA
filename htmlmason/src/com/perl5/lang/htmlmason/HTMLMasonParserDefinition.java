@@ -40,9 +40,8 @@ public class HTMLMasonParserDefinition extends PerlParserDefinition implements H
                                                            HTML_MASON_TEMPLATE_BLOCK_HTML
                                                          ));
 
-  @NotNull
   @Override
-  public Lexer createLexer(Project project) {
+  public @NotNull Lexer createLexer(Project project) {
     return new HTMLMasonLexerAdapter(project);
   }
 
@@ -57,14 +56,12 @@ public class HTMLMasonParserDefinition extends PerlParserDefinition implements H
   }
 
   @Override
-  @NotNull
-  public TokenSet getCommentTokens() {
+  public @NotNull TokenSet getCommentTokens() {
     return COMMENTS;
   }
 
-  @NotNull
   @Override
-  public PsiParser createParser(Project project) {
+  public @NotNull PsiParser createParser(Project project) {
     return new HTMLMasonParserImpl();
   }
 }

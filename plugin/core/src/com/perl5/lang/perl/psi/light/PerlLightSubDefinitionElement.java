@@ -43,17 +43,12 @@ import java.util.List;
 
 public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement<?>> extends PerlDelegatingLightNamedElement<Delegate>
   implements PerlSubDefinitionElement {
-  @Nullable
-  private final String myNamespaceName;
-  @NotNull
-  private final AtomicNullableLazyValue<PerlSubAnnotations> myAnnotationsProvider;
-  @NotNull
-  private AtomicNotNullLazyValue<List<PerlSubArgument>> mySubArgumentsProvider;
-  @NotNull
-  private AtomicNotNullLazyValue<PerlValue> myReturnValueFromCodeProvider;
+  private final @Nullable String myNamespaceName;
+  private final @NotNull AtomicNullableLazyValue<PerlSubAnnotations> myAnnotationsProvider;
+  private @NotNull AtomicNotNullLazyValue<List<PerlSubArgument>> mySubArgumentsProvider;
+  private @NotNull AtomicNotNullLazyValue<PerlValue> myReturnValueFromCodeProvider;
   // fixme should we actualize this on fly, like identifier?
-  @Nullable
-  private PsiPerlBlock mySubDefinitionBody;
+  private @Nullable PsiPerlBlock mySubDefinitionBody;
 
   public PerlLightSubDefinitionElement(@NotNull Delegate delegate,
                                        @NotNull String name,
@@ -101,15 +96,13 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
     mySubArgumentsProvider = AtomicNotNullLazyValue.createValue(() -> subArguments);
   }
 
-  @Nullable
   @Override
-  public String getNamespaceName() {
+  public @Nullable String getNamespaceName() {
     return myNamespaceName;
   }
 
-  @NotNull
   @Override
-  public List<PerlSubArgument> getSubArgumentsList() {
+  public @NotNull List<PerlSubArgument> getSubArgumentsList() {
     return mySubArgumentsProvider.getValue();
   }
 
@@ -118,15 +111,13 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
     return myName;
   }
 
-  @Nullable
   @Override
-  public PerlSubAnnotations getAnnotations() {
+  public @Nullable PerlSubAnnotations getAnnotations() {
     return myAnnotationsProvider.getValue();
   }
 
-  @Nullable
   @Override
-  public String getExplicitNamespaceName() {
+  public @Nullable String getExplicitNamespaceName() {
     return myNamespaceName;
   }
 
@@ -162,9 +153,8 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
     return result;
   }
 
-  @Nullable
   @Override
-  public Icon getIcon(int flags) {
+  public @Nullable Icon getIcon(int flags) {
     if (isMethod()) {
       return PerlIcons.METHOD_GUTTER_ICON;
     }
@@ -189,8 +179,7 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
   }
 
   @Override
-  @Nullable
-  public PsiPerlBlock getSubDefinitionBody() {
+  public @Nullable PsiPerlBlock getSubDefinitionBody() {
     return mySubDefinitionBody;
   }
 
@@ -199,9 +188,8 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
     return super.toString() + "@" + getCanonicalName();
   }
 
-  @NotNull
   @Override
-  public PerlValue getReturnValueFromCode() {
+  public @NotNull PerlValue getReturnValueFromCode() {
     return myReturnValueFromCodeProvider.getValue();
   }
 
@@ -209,9 +197,8 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
     myReturnValueFromCodeProvider = PerlValuesManager.lazy(returnValueFromCode);
   }
 
-  @Nullable
   @Override
-  public PsiElement getControlFlowElement() {
+  public @Nullable PsiElement getControlFlowElement() {
     return getSubDefinitionBody();
   }
 }

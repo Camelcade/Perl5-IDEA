@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,8 +50,7 @@ import static com.perl5.lang.perl.util.PerlSubUtil.SUB_AUTOLOAD;
  * Represents a method call value
  */
 public abstract class PerlCallValue extends PerlParametrizedOperationValue {
-  @NotNull
-  protected final List<PerlValue> myArguments;
+  protected final @NotNull List<PerlValue> myArguments;
 
   protected PerlCallValue(@NotNull PerlValue namespaceNameValue,
                           @NotNull PerlValue subNameValue,
@@ -65,11 +64,10 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
     myArguments = deserializer.readValuesList();
   }
 
-  @NotNull
   @Override
-  protected PerlValue computeResolve(@NotNull PerlValue resolvedNamespaceValue,
-                                     @NotNull PerlValue resolvedSubNameValue,
-                                     @NotNull PerlValueResolver resolver) {
+  protected @NotNull PerlValue computeResolve(@NotNull PerlValue resolvedNamespaceValue,
+                                              @NotNull PerlValue resolvedSubNameValue,
+                                              @NotNull PerlValueResolver resolver) {
     Set<String> subNames = resolvedSubNameValue.getSubNames();
     if (subNames.isEmpty()) {
       return UNKNOWN_VALUE;
@@ -105,8 +103,7 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
   /**
    * @return set of a namepsaces names that should be used for the {@code resolvedNamespaceValue}
    */
-  @NotNull
-  protected Set<String> computeNamespaceNames(@NotNull PerlValue resolvedNamespaceValue) {
+  protected @NotNull Set<String> computeNamespaceNames(@NotNull PerlValue resolvedNamespaceValue) {
     return resolvedNamespaceValue.getNamespaceNames();
   }
 
@@ -124,12 +121,12 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
                                              @NotNull PerlOneOfValue.Builder builder,
                                              @NotNull PerlValue resolvedNamespaceValue,
                                              @NotNull PerlValueResolver resolver);
+
   /**
    * @return a list of arguments that passed to the call, resolved in the context of {@code contextElement}
    */
-  @NotNull
-  protected List<PerlValue> computeResolvedArguments(@NotNull PerlValue resolvedNamespaceValue,
-                                                     @NotNull PerlValueResolver valueResolver) {
+  protected @NotNull List<PerlValue> computeResolvedArguments(@NotNull PerlValue resolvedNamespaceValue,
+                                                              @NotNull PerlValueResolver valueResolver) {
     return ContainerUtil.map(myArguments, valueResolver::resolve);
   }
 
@@ -139,19 +136,16 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
     serializer.writeValuesList(myArguments);
   }
 
-  @NotNull
   @Override
-  protected final PerlContextType getContextType() {
+  protected final @NotNull PerlContextType getContextType() {
     return PerlContextType.LIST;
   }
 
-  @NotNull
-  public PerlValue getNamespaceNameValue() {
+  public @NotNull PerlValue getNamespaceNameValue() {
     return getBaseValue();
   }
 
-  @NotNull
-  public PerlValue getSubNameValue() {
+  public @NotNull PerlValue getSubNameValue() {
     return getParameter();
   }
 
@@ -303,13 +297,13 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
 
   /**
    * Adjust search scope if necessary. Used to handle simple main resolution
+   *
    * @return original or adjusted scope to search
    */
-  @NotNull
-  protected static GlobalSearchScope getEffectiveScope(@NotNull Project project,
-                                                       @NotNull GlobalSearchScope originalScope,
-                                                       @NotNull String namespaceName,
-                                                       @Nullable PsiElement contextElement) {
+  protected static @NotNull GlobalSearchScope getEffectiveScope(@NotNull Project project,
+                                                                @NotNull GlobalSearchScope originalScope,
+                                                                @NotNull String namespaceName,
+                                                                @Nullable PsiElement contextElement) {
     PsiFile contextFile = contextElement == null ? null : contextElement.getContainingFile().getOriginalFile();
     if (PerlPackageUtil.MAIN_NAMESPACE_NAME.equals(namespaceName) &&
         PerlSharedSettings.getInstance(project).SIMPLE_MAIN_RESOLUTION && contextFile != null) {
@@ -337,8 +331,7 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
     public boolean processBuiltIns = true;
   }
 
-  @NotNull
-  protected final String getPresentableArguments() {
+  protected final @NotNull String getPresentableArguments() {
     return StringUtil.join(ContainerUtil.map(myArguments, PerlValue::getPresentableText), ", ");
   }
 
@@ -347,9 +340,8 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
   }
 
   @SuppressWarnings("NullableProblems")
-  @Nullable
   @Contract("null->null")
-  public static PerlCallValue from(@Nullable PsiElement element) {
+  public static @Nullable PerlCallValue from(@Nullable PsiElement element) {
     return ObjectUtils.tryCast(PerlValuesManager.from(element), PerlCallValue.class);
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,9 +40,8 @@ class BerryBrewData extends PerlRealVersionManagerData<BerryBrewData, BerryBrewH
     super(versionManagerPath, distributionId, handler);
   }
 
-  @NotNull
   @Override
-  public PerlCommandLine patchCommandLine(@NotNull PerlCommandLine originalCommandLine) {
+  public @NotNull PerlCommandLine patchCommandLine(@NotNull PerlCommandLine originalCommandLine) {
     return originalCommandLine.prependLineWith(getVersionManagerPath(), BERRYBREW_EXEC, BERRYBREW_WITH, getDistributionId());
   }
 
@@ -51,14 +50,12 @@ class BerryBrewData extends PerlRealVersionManagerData<BerryBrewData, BerryBrewH
     CpanminusAdapter.install(project);
   }
 
-  @NotNull
   @Override
-  protected BerryBrewData self() {
+  protected @NotNull BerryBrewData self() {
     return this;
   }
 
-  @Nullable
-  public static BerryBrewData from(@Nullable Sdk sdk) {
+  public static @Nullable BerryBrewData from(@Nullable Sdk sdk) {
     return ObjectUtils.tryCast(PerlVersionManagerData.from(sdk), BerryBrewData.class);
   }
 }

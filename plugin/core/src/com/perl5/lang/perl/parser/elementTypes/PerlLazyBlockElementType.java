@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -60,17 +60,14 @@ public abstract class PerlLazyBlockElementType extends ILazyParseableElementType
   }
 
 
-  @NotNull
-  protected Lexer getLexer(@NotNull Project project) {
+  protected @NotNull Lexer getLexer(@NotNull Project project) {
     return new PerlMergingLexerAdapter(getInnerLexer(project));
   }
 
-  @NotNull
-  protected abstract Lexer getInnerLexer(@NotNull Project project);
+  protected abstract @NotNull Lexer getInnerLexer(@NotNull Project project);
 
-  @NotNull
   @Override
-  public final PsiElement getPsiElement(@NotNull ASTNode node) {
+  public final @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
     return myInstanceFactory.apply(node);
   }
 }

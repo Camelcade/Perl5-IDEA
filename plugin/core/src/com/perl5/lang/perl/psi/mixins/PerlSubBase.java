@@ -54,9 +54,8 @@ public abstract class PerlSubBase<Stub extends PerlSubStub<?>> extends PerlStubB
     super(stub, nodeType);
   }
 
-  @Nullable
   @Override
-  public String getNamespaceName() {
+  public @Nullable String getNamespaceName() {
     Stub stub = getGreenStub();
     if (stub != null) {
       return stub.getNamespaceName();
@@ -97,28 +96,24 @@ public abstract class PerlSubBase<Stub extends PerlSubStub<?>> extends PerlStubB
     return subNameElement == null ? null : subNameElement.getText();
   }
 
-  @Nullable
   @Override
-  public String getExplicitNamespaceName() {
+  public @Nullable String getExplicitNamespaceName() {
     PerlNamespaceElement namespaceElement = getNamespaceElement();
     return namespaceElement != null ? namespaceElement.getCanonicalName() : null;
   }
 
-  @Nullable
   @Override
-  public PsiElement getNameIdentifier() {
+  public @Nullable PsiElement getNameIdentifier() {
     return findChildByType(SUB_NAME);
   }
 
-  @Nullable
   @Override
-  public PerlNamespaceElement getNamespaceElement() {
+  public @Nullable PerlNamespaceElement getNamespaceElement() {
     return findChildByClass(PerlNamespaceElement.class);
   }
 
-  @Nullable
   @Override
-  public PerlSubAnnotations getAnnotations() {
+  public @Nullable PerlSubAnnotations getAnnotations() {
     Stub stub = getGreenStub();
     if (stub != null) {
       return stub.getAnnotations();
@@ -126,9 +121,8 @@ public abstract class PerlSubBase<Stub extends PerlSubStub<?>> extends PerlStubB
     return PerlSubAnnotations.createFromAnnotationsList(PerlPsiUtil.collectAnnotations(this));
   }
 
-  @Nullable
   @Override
-  public Icon getIcon(int flags) {
+  public @Nullable Icon getIcon(int flags) {
     if (isMethod()) {
       return PerlIcons.METHOD_GUTTER_ICON;
     }

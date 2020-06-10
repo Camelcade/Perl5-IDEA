@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,9 +49,8 @@ public abstract class PerlGlobVariableMixin extends PerlStubBasedPsiElementBase<
     super(stub, nodeType);
   }
 
-  @Nullable
   @Override
-  public String getNamespaceName() {
+  public @Nullable String getNamespaceName() {
     PerlGlobStub stub = getGreenStub();
     if (stub != null) {
       return stub.getNamespaceName();
@@ -82,14 +81,12 @@ public abstract class PerlGlobVariableMixin extends PerlStubBasedPsiElementBase<
     return delimiterIndex == -1 ? variableNameText : variableNameText.substring(delimiterIndex + 1);
   }
 
-  @Nullable
-  protected String getContextNamespaceName() {
+  protected @Nullable String getContextNamespaceName() {
     return PerlPackageUtil.getContextNamespaceName(this);
   }
 
-  @Nullable
   @Override
-  public String getExplicitNamespaceName() {
+  public @Nullable String getExplicitNamespaceName() {
     PerlVariableNameElement variableNameElement = getVariableNameElement();
     if (variableNameElement == null) {
       return null;
@@ -120,9 +117,8 @@ public abstract class PerlGlobVariableMixin extends PerlStubBasedPsiElementBase<
     return false;
   }
 
-  @Nullable
   @Override
-  public PsiElement getNameIdentifier() {
+  public @Nullable PsiElement getNameIdentifier() {
     return getVariableNameElement();
   }
 
@@ -131,9 +127,8 @@ public abstract class PerlGlobVariableMixin extends PerlStubBasedPsiElementBase<
     return PerlPsiUtil.renameNamedElement(this, name);
   }
 
-  @Nullable
   @Override
-  public String getCanonicalName() {
+  public @Nullable String getCanonicalName() {
 
     String packageName = getNamespaceName();
     if (packageName == null) {
@@ -143,9 +138,8 @@ public abstract class PerlGlobVariableMixin extends PerlStubBasedPsiElementBase<
   }
 
 
-  @Nullable
   @Override
-  public Icon getIcon(int flags) {
+  public @Nullable Icon getIcon(int flags) {
     return PerlIcons.GLOB_GUTTER_ICON;
   }
 

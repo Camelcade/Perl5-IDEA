@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,9 +27,8 @@ import org.jetbrains.annotations.NotNull;
 public class FileSpecFunctionsProcessor extends PerlPackageProcessorBase {
   private static final String UNIX_IMPLEMENTATION_PACKAGE = "File::Spec::Unix";
 
-  @NotNull
   @Override
-  protected PerlExportDescriptor createDescriptor(@NotNull String packageName, @NotNull String name) {
+  protected @NotNull PerlExportDescriptor createDescriptor(@NotNull String packageName, @NotNull String name) {
     return super.createDescriptor(UNIX_IMPLEMENTATION_PACKAGE, name);
   }
 }

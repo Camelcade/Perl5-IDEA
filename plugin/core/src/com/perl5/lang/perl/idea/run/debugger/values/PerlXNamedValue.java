@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,7 +51,7 @@ import java.lang.reflect.Method;
 
 public class PerlXNamedValue extends XNamedValue {
   private static final Logger LOG = Logger.getInstance(PerlXNamedValue.class);
-  private static Method mySourcePositionMethod;
+  private static final Method mySourcePositionMethod;
   private static Method myLegacyMethod;
 
   static {
@@ -64,7 +64,7 @@ public class PerlXNamedValue extends XNamedValue {
 
   private final PerlStackFrame myStackFrame;
   private final PerlValueDescriptor myPerlValueDescriptor;
-  private int[] offset = new int[]{0};
+  private final int[] offset = new int[]{0};
 
   public PerlXNamedValue(@NotNull PerlValueDescriptor descriptor, PerlStackFrame stackFrame) {
     super(descriptor.getName());
@@ -136,8 +136,7 @@ public class PerlXNamedValue extends XNamedValue {
     return type;
   }
 
-  @Nullable
-  protected Icon calculateIcon() {
+  protected @Nullable Icon calculateIcon() {
     String type = myPerlValueDescriptor.getType();
     if (StringUtil.isEmpty(type)) {
       return null;
@@ -180,7 +179,7 @@ public class PerlXNamedValue extends XNamedValue {
     }
   }
 
-  protected boolean computeMySourcePosition(@Nullable XNavigatable navigatable, @Nullable final XInlineDebuggerDataCallback callback) {
+  protected boolean computeMySourcePosition(@Nullable XNavigatable navigatable, final @Nullable XInlineDebuggerDataCallback callback) {
     String name = myPerlValueDescriptor.getName();
 
     if (StringUtil.isEmpty(name) || name.length() < 2) {
@@ -280,9 +279,8 @@ public class PerlXNamedValue extends XNamedValue {
   }
 
 
-  @NotNull
   @Override
-  public ThreeState computeInlineDebuggerData(@NotNull XInlineDebuggerDataCallback callback) {
+  public @NotNull ThreeState computeInlineDebuggerData(@NotNull XInlineDebuggerDataCallback callback) {
     return computeMySourcePosition(null, callback) ? ThreeState.YES : ThreeState.NO;
   }
 }

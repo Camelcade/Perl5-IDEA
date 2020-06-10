@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,9 +36,8 @@ public abstract class PerlDoExprMixin extends PerlStubBasedPsiElementBase<PerlRu
     super(stub, nodeType);
   }
 
-  @Nullable
   @Override
-  public String getImportPath() {
+  public @Nullable String getImportPath() {
     PerlRuntimeImportStub stub = getGreenStub();
     if (stub != null) {
       return stub.getImportPath();
@@ -47,8 +46,7 @@ public abstract class PerlDoExprMixin extends PerlStubBasedPsiElementBase<PerlRu
     return findImportPath();
   }
 
-  @Nullable
-  protected String findImportPath() {
+  protected @Nullable String findImportPath() {
     PsiElement lastChild = getLastChild();
     if (lastChild instanceof PerlString)    // seems we've got require "...";
     {

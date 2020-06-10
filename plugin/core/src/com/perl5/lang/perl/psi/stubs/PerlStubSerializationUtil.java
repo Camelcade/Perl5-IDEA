@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,13 +27,11 @@ import java.util.*;
 
 
 public class PerlStubSerializationUtil {
-  @NotNull
-  public static String readNotNullString(@NotNull StubInputStream dataStream) throws IOException {
+  public static @NotNull String readNotNullString(@NotNull StubInputStream dataStream) throws IOException {
     return Objects.requireNonNull(readString(dataStream));
   }
 
-  @Nullable
-  public static String readString(@NotNull StubInputStream dataStream) throws IOException {
+  public static @Nullable String readString(@NotNull StubInputStream dataStream) throws IOException {
     return StringRef.toString(dataStream.readName());
   }
 
@@ -50,8 +48,7 @@ public class PerlStubSerializationUtil {
     }
   }
 
-  @Nullable
-  public static List<String> readStringsList(@NotNull StubInputStream dataStream) throws IOException {
+  public static @Nullable List<String> readStringsList(@NotNull StubInputStream dataStream) throws IOException {
     int listSize = dataStream.readVarInt();
 
     if (listSize == 0) {

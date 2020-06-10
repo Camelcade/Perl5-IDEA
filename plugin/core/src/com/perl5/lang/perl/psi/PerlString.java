@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -55,8 +55,7 @@ public interface PerlString extends PerlQuoted, PerlValuableEntity  {
   /**
    * @return all children, including leaf ones
    */
-  @NotNull
-  default List<PsiElement> getAllChildrenList() {
+  default @NotNull List<PsiElement> getAllChildrenList() {
     PsiElement run = getFirstContentToken();
 
     if (run == null) {
@@ -72,9 +71,8 @@ public interface PerlString extends PerlQuoted, PerlValuableEntity  {
     return result;
   }
 
-  @NotNull
   @Override
-  default PerlValue computePerlValue() {
+  default @NotNull PerlValue computePerlValue() {
     return PerlScalarValue.create(ElementManipulators.getValueText(this));
   }
 
@@ -88,9 +86,8 @@ public interface PerlString extends PerlQuoted, PerlValuableEntity  {
     return text != null && FILE_PATH_PATTERN.matcher(text).matches();
   }
 
-  @Nullable
   @Contract("null->null")
-  static String getContentFileName(@Nullable String text) {
+  static @Nullable String getContentFileName(@Nullable String text) {
     if (looksLikePath(text)) {
       Matcher m = FILE_PATH_PATTERN.matcher(text);
       if (m.matches()) {

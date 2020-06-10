@@ -26,8 +26,7 @@ public abstract class PerlFunctionParametersParserTestCase extends PerlParserTes
     return "testData/parser/perl/functionParameters/" + getDataDirName();
   }
 
-  @NotNull
-  protected abstract String getDataDirName();
+  protected abstract @NotNull String getDataDirName();
 
   @Test
   public void testJoined() {doTest(false);}
@@ -102,33 +101,29 @@ public abstract class PerlFunctionParametersParserTestCase extends PerlParserTes
   public void testInvocantWithPositionalNamed() {doTest();}
 
   public static class AfterTest extends PerlFunctionParametersParserTestCase {
-    @NotNull
     @Override
-    protected String getDataDirName() {
+    protected @NotNull String getDataDirName() {
       return "after";
     }
   }
 
   public static class AroundTest extends PerlFunctionParametersParserTestCase {
-    @NotNull
     @Override
-    protected String getDataDirName() {
+    protected @NotNull String getDataDirName() {
       return "around";
     }
   }
 
   public static class AugmentTest extends PerlFunctionParametersParserTestCase {
-    @NotNull
     @Override
-    protected String getDataDirName() {
+    protected @NotNull String getDataDirName() {
       return "augment";
     }
   }
 
   public static class BeforeTest extends PerlFunctionParametersParserTestCase {
-    @NotNull
     @Override
-    protected String getDataDirName() {
+    protected @NotNull String getDataDirName() {
       return "before";
     }
   }
@@ -152,33 +147,29 @@ public abstract class PerlFunctionParametersParserTestCase extends PerlParserTes
   }
 
   public static class FunctionTest extends FunctionTestCase {
-    @NotNull
     @Override
-    protected String getDataDirName() {
+    protected @NotNull String getDataDirName() {
       return "fun";
     }
   }
 
   public static class FunctionAnonTest extends FunctionTestCase {
-    @NotNull
     @Override
-    protected String getDataDirName() {
+    protected @NotNull String getDataDirName() {
       return "funAnon";
     }
   }
 
   public static class MethodAnonTest extends FunctionTestCase {
-    @NotNull
     @Override
-    protected String getDataDirName() {
+    protected @NotNull String getDataDirName() {
       return "methodAnon";
     }
   }
 
   public static class MethodTest extends PerlFunctionParametersParserTestCase {
-    @NotNull
     @Override
-    protected String getDataDirName() {
+    protected @NotNull String getDataDirName() {
       return "method";
     }
 
@@ -188,9 +179,8 @@ public abstract class PerlFunctionParametersParserTestCase extends PerlParserTes
   }
 
   public static class OverrideTest extends PerlFunctionParametersParserTestCase {
-    @NotNull
     @Override
-    protected String getDataDirName() {
+    protected @NotNull String getDataDirName() {
       return "override";
     }
   }

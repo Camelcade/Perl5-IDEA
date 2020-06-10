@@ -31,8 +31,7 @@ import static com.perl5.lang.perl.util.PerlPackageUtil.__PACKAGE__;
 public class PerlElementTypeFactory {
   private static final Logger LOG = Logger.getInstance(PerlElementTypeFactory.class);
 
-  @NotNull
-  public static IElementType getTokenType(@NotNull String name) {
+  public static @NotNull IElementType getTokenType(@NotNull String name) {
     switch (name) {
       case "STRING_CONTENT":
       case "STRING_CONTENT_QQ":
@@ -65,8 +64,7 @@ public class PerlElementTypeFactory {
     return new PerlTokenType(name);
   }
 
-  @NotNull
-  public static IElementType getElementType(@NotNull String name) {
+  public static @NotNull IElementType getElementType(@NotNull String name) {
     switch (name) {
       case "PARSABLE_STRING_USE_VARS":
         return new PerlLazyUseVarsElementType(name);
@@ -194,9 +192,8 @@ public class PerlElementTypeFactory {
         return new PerlElementTypeEx(name, PsiPerlEvalExprImpl.class);
       case "EXPR":
         return new PerlElementTypeEx(name) {
-          @NotNull
           @Override
-          public PsiElement getPsiElement(@NotNull ASTNode node) {
+          public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
             throw new RuntimeException("Instantiating " + node);
           }
         };
@@ -212,9 +209,8 @@ public class PerlElementTypeFactory {
         return new PerlElementTypeEx(name, PsiPerlForeachCompoundImpl.class);
       case "FOR_OR_FOREACH":
         return new PerlElementTypeEx(name) {
-          @NotNull
           @Override
-          public PsiElement getPsiElement(@NotNull ASTNode node) {
+          public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
             throw new RuntimeException("Instantiating " + node);
           }
         };
@@ -352,9 +348,8 @@ public class PerlElementTypeFactory {
         return new PerlElementTypeEx(name, PsiPerlStatementImpl.class);
       case "STATEMENT_MODIFIER":
         return new PerlElementTypeEx(name) {
-          @NotNull
           @Override
-          public PsiElement getPsiElement(@NotNull ASTNode node) {
+          public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
             throw new RuntimeException("Instantiating " + node);
           }
         };

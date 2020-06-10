@@ -93,20 +93,17 @@ public class PerlIcons {
   /**
    * @see #createIconWithModifier(Icon, Icon)
    */
-  @NotNull
-  public static NotNullLazyValue<Icon> createLazyIconWithModifier(@NotNull Icon baseIcon, @NotNull Icon modifierIcon) {
+  public static @NotNull NotNullLazyValue<Icon> createLazyIconWithModifier(@NotNull Icon baseIcon, @NotNull Icon modifierIcon) {
     return NotNullLazyValue.createValue(() -> createIconWithModifier(baseIcon, modifierIcon));
   }
 
-  @NotNull
-  public static NotNullLazyValue<Icon> createLazyIconWithModifier(@NotNull Icon baseIcon,
-                                                                  @NotNull Icon modifierIcon,
-                                                                  float modifierScale) {
+  public static @NotNull NotNullLazyValue<Icon> createLazyIconWithModifier(@NotNull Icon baseIcon,
+                                                                           @NotNull Icon modifierIcon,
+                                                                           float modifierScale) {
     return NotNullLazyValue.createValue(() -> createIconWithModifier(baseIcon, modifierIcon, modifierScale));
   }
 
-  @NotNull
-  public static Icon createIconWithModifier(@NotNull Icon baseIcon, @NotNull Icon modifierIcon) {
+  public static @NotNull Icon createIconWithModifier(@NotNull Icon baseIcon, @NotNull Icon modifierIcon) {
     return createIconWithModifier(baseIcon, modifierIcon, 0.5f);
   }
 
@@ -115,10 +112,9 @@ public class PerlIcons {
    *
    * @apiNote modifier icon is scaled in {@code modifierScale} and put into right bottom corner of the base icon
    */
-  @NotNull
-  private static Icon createIconWithModifier(@NotNull Icon baseIcon,
-                                             @NotNull Icon modifierIcon,
-                                             float modifierScale) {
+  private static @NotNull Icon createIconWithModifier(@NotNull Icon baseIcon,
+                                                      @NotNull Icon modifierIcon,
+                                                      float modifierScale) {
     LayeredIcon result = new LayeredIcon(2);
     result.setIcon(baseIcon, 0);
     Icon modifier = IconUtil.scale(modifierIcon, null, modifierScale);

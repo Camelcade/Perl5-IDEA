@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,22 +42,19 @@ public abstract class PerlMapValue extends PerlListValue {
     return "Hash: " + getElements().toString();
   }
 
-  @NotNull
   @Override
-  protected PerlValue computeResolve(@NotNull PerlValueResolver resolver, @NotNull List<PerlValue> resolvedElements) {
+  protected @NotNull PerlValue computeResolve(@NotNull PerlValueResolver resolver, @NotNull List<PerlValue> resolvedElements) {
     return builder().addElements(resolvedElements).build();
   }
 
-  @NotNull
   @Override
-  public String getPresentableText() {
+  public @NotNull String getPresentableText() {
     return PerlBundle.message("perl.value.hash.presentable", getValuesPresentableText());
   }
 
   protected abstract String getValuesPresentableText();
 
-  @NotNull
-  public static Builder builder() {
+  public static @NotNull Builder builder() {
     return new Builder();
   }
 

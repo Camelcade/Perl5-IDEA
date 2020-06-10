@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,69 +39,58 @@ class PerlLocalHostData extends PerlHostData<PerlLocalHostData, PerlLocalHostHan
     super(handler);
   }
 
-  @NotNull
   @Override
-  public PerlOsHandler getOsHandler() {
+  public @NotNull PerlOsHandler getOsHandler() {
     return getHandler().getOsHandler();
   }
 
-  @NotNull
   @Override
-  protected Process createProcess(@NotNull PerlCommandLine commandLine) throws ExecutionException {
+  protected @NotNull Process createProcess(@NotNull PerlCommandLine commandLine) throws ExecutionException {
     return commandLine.createProcess();
   }
 
-  @Nullable
   @Override
-  public String getSecondaryShortName() {
+  public @Nullable String getSecondaryShortName() {
     return null;
   }
 
-  @NotNull
   @Override
-  public String getHelpersRootPath() {
+  public @NotNull String getHelpersRootPath() {
     return PerlPluginUtil.getPluginHelpersRoot();
   }
 
-  @Nullable
   @Override
-  public VirtualFileSystem getFileSystem(@NotNull Disposable disposable) {
+  public @Nullable VirtualFileSystem getFileSystem(@NotNull Disposable disposable) {
     return LocalFileSystem.getInstance();
   }
 
-  @Nullable
   @Override
-  public File findFileByName(@NotNull String fileName) {
+  public @Nullable File findFileByName(@NotNull String fileName) {
     return ContainerUtil.getFirstItem(PathEnvironmentVariableUtil.findAllExeFilesInPath(fileName));
   }
 
-  @NotNull
   @Override
-  public String doGetLocalPath(@NotNull String remotePath) {
+  public @NotNull String doGetLocalPath(@NotNull String remotePath) {
     return remotePath;
   }
 
-  @Nullable
   @Override
-  public String getLocalCacheRoot() {
+  public @Nullable String getLocalCacheRoot() {
     return null;
   }
 
-  @NotNull
   @Override
-  public String doGetRemotePath(@NotNull String localPath) {
+  public @NotNull String doGetRemotePath(@NotNull String localPath) {
     return localPath;
   }
 
-  @NotNull
   @Override
-  protected PerlLocalHostData self() {
+  protected @NotNull PerlLocalHostData self() {
     return this;
   }
 
-  @NotNull
   @Override
-  public PerlHostFileTransfer<PerlLocalHostData> getFileTransfer() {
+  public @NotNull PerlHostFileTransfer<PerlLocalHostData> getFileTransfer() {
     return FILE_TRANSFER;
   }
 }

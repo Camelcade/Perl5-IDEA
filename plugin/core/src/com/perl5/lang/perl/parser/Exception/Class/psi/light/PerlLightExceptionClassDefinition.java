@@ -49,9 +49,8 @@ public class PerlLightExceptionClassDefinition extends PerlLightNamespaceDefinit
     super(delegate, name, elementType, nameIdentifier, mroType, parentNamespacesNames, annotations, export, exportOk, exportTags);
   }
 
-  @Nullable
   @Override
-  public Icon getIcon(int flags) {
+  public @Nullable Icon getIcon(int flags) {
     return AllIcons.Nodes.ExceptionClass;
   }
 }

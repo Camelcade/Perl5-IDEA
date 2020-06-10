@@ -22,8 +22,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.swing.*;
 
 class PerlDelegatingModuleWizardStep extends ModuleWizardStep {
-  @NotNull
-  private final PerlProjectGeneratorPeerBase<?> myPeer;
+  private final @NotNull PerlProjectGeneratorPeerBase<?> myPeer;
 
   public PerlDelegatingModuleWizardStep(@NotNull PerlProjectGeneratorPeerBase<?> peer) {
     myPeer = peer;

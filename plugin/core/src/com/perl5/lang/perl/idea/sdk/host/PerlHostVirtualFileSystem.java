@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,18 +27,15 @@ import java.util.Objects;
 public class PerlHostVirtualFileSystem extends DeprecatedVirtualFileSystem {
   private static final String PROTOCOL = "perlhost";
 
-  @Nullable
-  private PerlPluggableVirtualFileSystem myDelegate;
+  private @Nullable PerlPluggableVirtualFileSystem myDelegate;
 
-  @NotNull
   @Override
-  public String getProtocol() {
+  public @NotNull String getProtocol() {
     return PROTOCOL;
   }
 
-  @Nullable
   @Override
-  public VirtualFile findFileByPath(@NotNull String path) {
+  public @Nullable VirtualFile findFileByPath(@NotNull String path) {
     return myDelegate == null ? null : myDelegate.findFileByPath(path);
   }
 
@@ -49,9 +46,8 @@ public class PerlHostVirtualFileSystem extends DeprecatedVirtualFileSystem {
     }
   }
 
-  @Nullable
   @Override
-  public VirtualFile refreshAndFindFileByPath(@NotNull String path) {
+  public @Nullable VirtualFile refreshAndFindFileByPath(@NotNull String path) {
     return myDelegate == null ? null : myDelegate.refreshAndFindFileByPath(path);
   }
 
@@ -75,8 +71,7 @@ public class PerlHostVirtualFileSystem extends DeprecatedVirtualFileSystem {
     }
   }
 
-  @NotNull
-  public static PerlHostVirtualFileSystem getInstance() {
+  public static @NotNull PerlHostVirtualFileSystem getInstance() {
     return ((PerlHostVirtualFileSystem)Objects.requireNonNull(VirtualFileManager.getInstance().getFileSystem(PROTOCOL)));
   }
 }

@@ -108,20 +108,18 @@ public class PerlRunUtil {
    *
    * @return command line if perl support for project or scriptFile is enabled
    */
-  @Nullable
-  public static PerlCommandLine getPerlCommandLine(@NotNull Project project,
-                                                   @Nullable VirtualFile scriptFile,
-                                                   String... perlParameters) {
+  public static @Nullable PerlCommandLine getPerlCommandLine(@NotNull Project project,
+                                                             @Nullable VirtualFile scriptFile,
+                                                             String... perlParameters) {
     return getPerlCommandLine(
       project, PerlProjectManager.getSdk(project, scriptFile), scriptFile, Arrays.asList(perlParameters), Collections.emptyList());
   }
 
-  @Nullable
-  public static PerlCommandLine getPerlCommandLine(@NotNull Project project,
-                                                   @Nullable Sdk perlSdk,
-                                                   @Nullable VirtualFile scriptFile,
-                                                   @NotNull List<String> perlParameters,
-                                                   @NotNull List<String> scriptParameters) {
+  public static @Nullable PerlCommandLine getPerlCommandLine(@NotNull Project project,
+                                                             @Nullable Sdk perlSdk,
+                                                             @Nullable VirtualFile scriptFile,
+                                                             @NotNull List<String> perlParameters,
+                                                             @NotNull List<String> scriptParameters) {
     if (perlSdk == null) {
       perlSdk = PerlProjectManager.getSdk(project, scriptFile);
     }
@@ -139,12 +137,11 @@ public class PerlRunUtil {
    *
    * @return new perl command line or null if sdk is missing or corrupted
    */
-  @Nullable
-  public static PerlCommandLine getPerlCommandLine(@NotNull Project project,
-                                                   @Nullable Sdk perlSdk,
-                                                   @Nullable String localScriptPath,
-                                                   @NotNull List<String> perlParameters,
-                                                   @NotNull List<String> scriptParameters) {
+  public static @Nullable PerlCommandLine getPerlCommandLine(@NotNull Project project,
+                                                             @Nullable Sdk perlSdk,
+                                                             @Nullable String localScriptPath,
+                                                             @NotNull List<String> perlParameters,
+                                                             @NotNull List<String> scriptParameters) {
     if (perlSdk == null) {
       perlSdk = PerlProjectManager.getSdk(project);
     }
@@ -187,10 +184,9 @@ public class PerlRunUtil {
    * @param libraryName library to suggest if script was not found; notification won't be shown if lib is null/empty
    * @return script's virtual file if any
    */
-  @Nullable
-  public static VirtualFile findLibraryScriptWithNotification(@NotNull Project project,
-                                                              @NotNull String scriptName,
-                                                              @Nullable String libraryName) {
+  public static @Nullable VirtualFile findLibraryScriptWithNotification(@NotNull Project project,
+                                                                        @NotNull String scriptName,
+                                                                        @Nullable String libraryName) {
     return ObjectUtils.doIfNotNull(
       PerlProjectManager.getSdkWithNotification(project),
       it -> findLibraryScriptWithNotification(it, project, scriptName, libraryName));
@@ -206,11 +202,10 @@ public class PerlRunUtil {
    * @param libraryName library to suggest if script was not found, notification won't be shown if lib is null/empty
    * @return script's virtual file if any
    */
-  @Nullable
-  public static VirtualFile findLibraryScriptWithNotification(@NotNull Sdk sdk,
-                                                              @Nullable Project project,
-                                                              @NotNull String scriptName,
-                                                              @Nullable String libraryName) {
+  public static @Nullable VirtualFile findLibraryScriptWithNotification(@NotNull Sdk sdk,
+                                                                        @Nullable Project project,
+                                                                        @NotNull String scriptName,
+                                                                        @Nullable String libraryName) {
     VirtualFile scriptFile = findScript(sdk, scriptName);
     if (scriptFile != null) {
       return scriptFile;
@@ -295,8 +290,7 @@ public class PerlRunUtil {
    * @param scriptName script name to find
    * @return script's virtual file if available
    **/
-  @Nullable
-  public static VirtualFile findScript(@Nullable Project project, @Nullable String scriptName) {
+  public static @Nullable VirtualFile findScript(@Nullable Project project, @Nullable String scriptName) {
     return findScript(PerlProjectManager.getSdk(project), scriptName);
   }
 
@@ -309,8 +303,7 @@ public class PerlRunUtil {
    * @apiNote returns virtual file of local file, not remote
    **/
   @Contract("null,_->null; _,null->null")
-  @Nullable
-  public static VirtualFile findScript(@Nullable Sdk sdk, @Nullable String scriptName) {
+  public static @Nullable VirtualFile findScript(@Nullable Sdk sdk, @Nullable String scriptName) {
     if (sdk == null || StringUtil.isEmpty(scriptName)) {
       return null;
     }
@@ -332,8 +325,7 @@ public class PerlRunUtil {
   /**
    * @return list of perl bin directories where script from library may be located
    **/
-  @NotNull
-  public static Stream<VirtualFile> getBinDirectories(@Nullable Sdk sdk) {
+  public static @NotNull Stream<VirtualFile> getBinDirectories(@Nullable Sdk sdk) {
     if (sdk == null) {
       return Stream.empty();
     }
@@ -362,8 +354,7 @@ public class PerlRunUtil {
    * @return bin root or null if not available
    * @implSpec for now we are traversing tree up to lib dir and resolving {@code ../bin}
    */
-  @Nullable
-  private static VirtualFile findLibsBin(@Nullable VirtualFile libraryRoot) {
+  private static @Nullable VirtualFile findLibsBin(@Nullable VirtualFile libraryRoot) {
     if (libraryRoot == null || !libraryRoot.isValid()) {
       return null;
     }
@@ -377,8 +368,7 @@ public class PerlRunUtil {
    * @return bin root path or null if not found
    * @implSpec for now we are traversing tree up to {@code lib} dir and resolving {@code ../bin}
    */
-  @Nullable
-  public static File findLibsBin(@Nullable File libraryRoot) {
+  public static @Nullable File findLibsBin(@Nullable File libraryRoot) {
     if (libraryRoot == null) {
       return null;
     }
@@ -395,8 +385,7 @@ public class PerlRunUtil {
    * @param hostData host to execute command on
    * @return version string or null if response was wrong
    */
-  @Nullable
-  public static String getPathFromPerl(@NotNull PerlHostData<?, ?> hostData) {
+  public static @Nullable String getPathFromPerl(@NotNull PerlHostData<?, ?> hostData) {
     List<String> perlPathLines = getOutputFromProgram(
       hostData, hostData.getOsHandler().getPerlExecutableName(), PERL_LE, PERL_CTRL_X);
     return perlPathLines.size() == 1 ? perlPathLines.get(0) : null;
@@ -405,8 +394,7 @@ public class PerlRunUtil {
   /**
    * Gets stdout from executing a perl command with a given parameters, command represented by {@code parameters}.
    */
-  @NotNull
-  public static List<String> getOutputFromPerl(@NotNull Sdk perlSdk, @NotNull String... parameters) {
+  public static @NotNull List<String> getOutputFromPerl(@NotNull Sdk perlSdk, @NotNull String... parameters) {
     String interpreterPath = PerlProjectManager.getInterpreterPath(perlSdk);
     if (StringUtil.isEmpty(interpreterPath)) {
       LOG.warn("Empty interpreter path from " + perlSdk);
@@ -421,10 +409,9 @@ public class PerlRunUtil {
    * Gets stdout from executing a command represented by {@code commands} on the host represented by {@code hostData}
    * Commands are going to be patched with version manager, represented by {@code versionManagerData}
    */
-  @NotNull
-  public static List<String> getOutputFromProgram(@NotNull PerlHostData<?, ?> hostData,
-                                                  @NotNull PerlVersionManagerData<?, ?> versionManagerData,
-                                                  @NotNull String... commands) {
+  public static @NotNull List<String> getOutputFromProgram(@NotNull PerlHostData<?, ?> hostData,
+                                                           @NotNull PerlVersionManagerData<?, ?> versionManagerData,
+                                                           @NotNull String... commands) {
     return getOutputFromProgram(new PerlCommandLine(commands).withHostData(hostData).withVersionManagerData(versionManagerData));
   }
 
@@ -433,16 +420,14 @@ public class PerlRunUtil {
    *
    * @apiNote MUST not be used for executing perl scripts
    */
-  @NotNull
-  public static List<String> getOutputFromProgram(@NotNull PerlHostData<?, ?> hostData, @NotNull String... commands) {
+  public static @NotNull List<String> getOutputFromProgram(@NotNull PerlHostData<?, ?> hostData, @NotNull String... commands) {
     return getOutputFromProgram(new PerlCommandLine(commands).withHostData(hostData));
   }
 
   /**
    * Gets stdout from a {@code commandLine} at host represented by {@code hostData}
    */
-  @NotNull
-  private static List<String> getOutputFromProgram(@NotNull PerlCommandLine commandLine) {
+  private static @NotNull List<String> getOutputFromProgram(@NotNull PerlCommandLine commandLine) {
     try {
       return PerlHostData.execAndGetOutput(commandLine).getStdoutLines();
     }
@@ -510,8 +495,7 @@ public class PerlRunUtil {
   /**
    * Creates a listener watching process output and showing notifications about missing libraries
    */
-  @Nullable
-  private static ProcessListener createMissingPackageListener(@Nullable Project project, @Nullable Sdk sdk) {
+  private static @Nullable ProcessListener createMissingPackageListener(@Nullable Project project, @Nullable Sdk sdk) {
     if (project == null) {
       return null;
     }
@@ -573,8 +557,7 @@ public class PerlRunUtil {
    *
    * @return old indicator text
    */
-  @Nullable
-  public static String setProgressText(@Nullable String newText) {
+  public static @Nullable String setProgressText(@Nullable String newText) {
     ProgressIndicator indicator = ProgressManager.getInstance().getProgressIndicator();
     if (indicator != null) {
       String oldText = indicator.getText();
@@ -589,8 +572,7 @@ public class PerlRunUtil {
    *
    * @return old indicator text
    */
-  @Nullable
-  public static String setProgressText2(@Nullable String newText) {
+  public static @Nullable String setProgressText2(@Nullable String newText) {
     ProgressIndicator indicator = ProgressManager.getInstance().getProgressIndicator();
     if (indicator != null) {
       String oldText = indicator.getText2();

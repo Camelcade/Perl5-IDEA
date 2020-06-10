@@ -34,9 +34,8 @@ public class PerlHeredocReference extends PerlCachingReference<PerlHeredocTermin
     super(psiElement);
   }
 
-  @NotNull
   @Override
-  protected ResolveResult[] resolveInner(boolean incompleteCode) {
+  protected @NotNull ResolveResult[] resolveInner(boolean incompleteCode) {
     PsiElement run = getElement().getPrevSibling();
 
     // skip heading spaces of indented terminator and new-line for empty heredoc

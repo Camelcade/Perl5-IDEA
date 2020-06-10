@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,8 +33,7 @@ import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
  */
 public final class PerlScalarValue extends PerlValue {
 
-  @NotNull
-  private final String myValue;
+  private final @NotNull String myValue;
 
   private PerlScalarValue(@NotNull String value) {
     myValue = value;
@@ -51,9 +50,8 @@ public final class PerlScalarValue extends PerlValue {
     return this;
   }
 
-  @NotNull
   @Override
-  protected final PerlContextType getContextType() {
+  protected final @NotNull PerlContextType getContextType() {
     return PerlContextType.SCALAR;
   }
 
@@ -67,8 +65,7 @@ public final class PerlScalarValue extends PerlValue {
     return PerlValuesManager.SCALAR_ID;
   }
 
-  @NotNull
-  public String getValue() {
+  public @NotNull String getValue() {
     return myValue;
   }
 
@@ -77,15 +74,13 @@ public final class PerlScalarValue extends PerlValue {
     return true;
   }
 
-  @NotNull
   @Override
-  public Set<String> getSubNames() {
+  public @NotNull Set<String> getSubNames() {
     return Collections.singleton(myValue);
   }
 
-  @NotNull
   @Override
-  public Set<String> getNamespaceNames() {
+  public @NotNull Set<String> getNamespaceNames() {
     return Collections.singleton(myValue);
   }
 
@@ -121,18 +116,15 @@ public final class PerlScalarValue extends PerlValue {
   }
 
 
-  @NotNull
-  public static AtomicNotNullLazyValue<PerlValue> createLazy(@Nullable String value) {
+  public static @NotNull AtomicNotNullLazyValue<PerlValue> createLazy(@Nullable String value) {
     return PerlValuesManager.lazy(create(value));
   }
 
-  @NotNull
-  public static PerlValue create(@Nullable String value) {
+  public static @NotNull PerlValue create(@Nullable String value) {
     return value == null ? UNKNOWN_VALUE : PerlValuesManager.intern(new PerlScalarValue(value));
   }
 
-  @NotNull
-  public static PerlValue create(int value) {
+  public static @NotNull PerlValue create(int value) {
     return new PerlScalarValue(String.valueOf(value));
   }
 

@@ -31,8 +31,7 @@ public interface PerlSortExpr extends PsiElement, PerlLabelScope, PerlBlockOwner
   /**
    * @return psi element to sort if any
    */
-  @Nullable
-  default PsiElement getTarget() {
+  default @Nullable PsiElement getTarget() {
     PsiElement[] children = getChildren();
     return children.length == 2 ? children[1] : null;
   }

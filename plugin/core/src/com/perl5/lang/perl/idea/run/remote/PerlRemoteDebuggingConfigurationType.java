@@ -31,22 +31,19 @@ public class PerlRemoteDebuggingConfigurationType extends ConfigurationTypeBase 
     super("#PerlRemoteDebuggingConfigurationType", "Perl Remote Debugging", "", PerlIcons.PERL_LANGUAGE_ICON);
 
     addFactory(new ConfigurationFactory(this) {
-      @NotNull
       @Override
-      public String getId() {
+      public @NotNull String getId() {
         return "Perl Remote Debugging";
       }
 
-      @NotNull
       @Override
-      public RunConfiguration createTemplateConfiguration(@NotNull Project project) {
+      public @NotNull RunConfiguration createTemplateConfiguration(@NotNull Project project) {
         return new PerlRemoteDebuggingConfiguration(project, this, "Unnamed");
       }
     });
   }
 
-  @NotNull
-  public static PerlRemoteDebuggingConfigurationType getInstance() {
+  public static @NotNull PerlRemoteDebuggingConfigurationType getInstance() {
     return Objects.requireNonNull(CONFIGURATION_TYPE_EP.findExtension(PerlRemoteDebuggingConfigurationType.class));
   }
 }

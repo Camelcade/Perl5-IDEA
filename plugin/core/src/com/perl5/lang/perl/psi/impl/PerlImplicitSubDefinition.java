@@ -33,14 +33,10 @@ import javax.swing.*;
 import java.util.List;
 
 public class PerlImplicitSubDefinition extends PerlImplicitElement implements PerlSubDefinitionElement {
-  @NotNull
-  private final String mySubName;
-  @NotNull
-  private final String myNamespaceName;
-  @NotNull
-  private final List<PerlSubArgument> mySubArguments;
-  @NotNull
-  private final PerlValue myReturnValue;
+  private final @NotNull String mySubName;
+  private final @NotNull String myNamespaceName;
+  private final @NotNull List<PerlSubArgument> mySubArguments;
+  private final @NotNull PerlValue myReturnValue;
 
   final boolean myIsAnonymous;
 
@@ -80,9 +76,8 @@ public class PerlImplicitSubDefinition extends PerlImplicitElement implements Pe
     return myIsAnonymous;
   }
 
-  @NotNull
   @Override
-  public PerlValue getReturnValueFromCode() {
+  public @NotNull PerlValue getReturnValueFromCode() {
     return myReturnValue;
   }
 
@@ -91,9 +86,8 @@ public class PerlImplicitSubDefinition extends PerlImplicitElement implements Pe
     return "Implicit sub: " + getPresentableName();
   }
 
-  @Nullable
   @Override
-  public PsiElement getNameIdentifier() {
+  public @Nullable PsiElement getNameIdentifier() {
     return null;
   }
 
@@ -102,27 +96,23 @@ public class PerlImplicitSubDefinition extends PerlImplicitElement implements Pe
     return this;
   }
 
-  @NotNull
   @Override
-  public String getExplicitNamespaceName() {
+  public @NotNull String getExplicitNamespaceName() {
     return myNamespaceName;
   }
 
   @Override
-  @NotNull
-  public String getNamespaceName() {
+  public @NotNull String getNamespaceName() {
     return getExplicitNamespaceName();
   }
 
-  @NotNull
   @Override
-  public List<PerlSubArgument> getSubArgumentsList() {
+  public @NotNull List<PerlSubArgument> getSubArgumentsList() {
     return mySubArguments;
   }
 
-  @NotNull
   @Override
-  public String getSubName() {
+  public @NotNull String getSubName() {
     return myIsAnonymous ? "ANON-" + mySubName : mySubName;
   }
 
@@ -131,15 +121,13 @@ public class PerlImplicitSubDefinition extends PerlImplicitElement implements Pe
     return getSubName();
   }
 
-  @Nullable
   @Override
-  public PerlSubAnnotations getAnnotations() {
+  public @Nullable PerlSubAnnotations getAnnotations() {
     return null;
   }
 
-  @Nullable
   @Override
-  public Icon getIcon(int flags) {
+  public @Nullable Icon getIcon(int flags) {
     return PerlIcons.SUB_GUTTER_ICON;
   }
 
@@ -183,9 +171,8 @@ public class PerlImplicitSubDefinition extends PerlImplicitElement implements Pe
     return result;
   }
 
-  @Nullable
   @Override
-  public PsiElement getControlFlowElement() {
+  public @Nullable PsiElement getControlFlowElement() {
     return null;
   }
 }

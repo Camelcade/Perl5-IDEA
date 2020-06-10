@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,8 +42,7 @@ public class PerlBuiltInNamespacesService {
     myNamespacesMap.put(UNIVERSAL_NAMESPACE, new PerlBuiltInNamespaceDefinition(psiManager, UNIVERSAL_NAMESPACE));
   }
 
-  @Nullable
-  public PerlBuiltInNamespaceDefinition getNamespaceDefinition(@Nullable String name) {
+  public @Nullable PerlBuiltInNamespaceDefinition getNamespaceDefinition(@Nullable String name) {
     return name == null ? null : myNamespacesMap.get(PerlPackageUtil.getCanonicalName(name));
   }
 
@@ -56,8 +55,7 @@ public class PerlBuiltInNamespacesService {
     return true;
   }
 
-  @NotNull
-  public static PerlBuiltInNamespacesService getInstance(@NotNull Project project) {
+  public static @NotNull PerlBuiltInNamespacesService getInstance(@NotNull Project project) {
     return ServiceManager.getService(project, PerlBuiltInNamespacesService.class);
   }
 }

@@ -60,8 +60,7 @@ public interface PerlPackageProcessor extends PerlLightElementProvider<PerlUseSt
   /**
    * @return text that should be shown in folded block of use arguments
    */
-  @Nullable
-  default String getArgumentsFoldingText(@NotNull PerlUseStatementElementBase useStatementElement) {
+  default @Nullable String getArgumentsFoldingText(@NotNull PerlUseStatementElementBase useStatementElement) {
     return PerlBundle.message("perl.fold.ph.text.default");
   }
 

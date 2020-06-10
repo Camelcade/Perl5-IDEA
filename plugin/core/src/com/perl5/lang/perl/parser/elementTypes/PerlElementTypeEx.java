@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,8 +39,7 @@ public class PerlElementTypeEx extends PerlElementType implements PsiElementProv
     myInstanceFactory = createInstanceFactory(clazz);
   }
 
-  @NotNull
-  static Function<ASTNode, PsiElement> createInstanceFactory(Class<? extends PsiElement> clazz) {
+  static @NotNull Function<ASTNode, PsiElement> createInstanceFactory(Class<? extends PsiElement> clazz) {
     Constructor<? extends PsiElement> constructor;
     try {
       constructor = clazz.getDeclaredConstructor(ASTNode.class);
@@ -60,9 +59,8 @@ public class PerlElementTypeEx extends PerlElementType implements PsiElementProv
     };
   }
 
-  @NotNull
   @Override
-  public PsiElement getPsiElement(@NotNull ASTNode node) {
+  public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
     return myInstanceFactory.apply(node);
   }
 }

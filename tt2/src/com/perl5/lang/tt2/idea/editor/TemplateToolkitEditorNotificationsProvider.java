@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,17 +39,15 @@ public class TemplateToolkitEditorNotificationsProvider extends EditorNotificati
     myProject = project;
   }
 
-  @NotNull
   @Override
-  public Key<EditorNotificationPanel> getKey() {
+  public @NotNull Key<EditorNotificationPanel> getKey() {
     return KEY;
   }
 
-  @Nullable
   @Override
-  public EditorNotificationPanel createNotificationPanel(@NotNull VirtualFile file,
-                                                         @NotNull FileEditor fileEditor,
-                                                         @NotNull Project project) {
+  public @Nullable EditorNotificationPanel createNotificationPanel(@NotNull VirtualFile file,
+                                                                   @NotNull FileEditor fileEditor,
+                                                                   @NotNull Project project) {
     if (file.getFileType() == TemplateToolkitFileType.INSTANCE) {
       TemplateToolkitSettings settings = TemplateToolkitSettings.getInstance(myProject);
       if (!settings.isVirtualFileUnderRoot(file)) {

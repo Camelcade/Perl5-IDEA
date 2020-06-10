@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,9 +50,8 @@ public class PerlStringManipulator extends PerlTextContainerManipulator<PerlStri
     return super.handleContentChange(element, range, newContent.replaceAll("(?<!\\\\)" + closeQuote, "\\\\" + closeQuote));
   }
 
-  @NotNull
   @Override
-  public TextRange getRangeInElement(@NotNull PerlStringMixin element) {
+  public @NotNull TextRange getRangeInElement(@NotNull PerlStringMixin element) {
     return new TextRange(getOpenQuoteOffsetInParent(element) + 1, getCloseQuoteOffsetInParent(element));
   }
 
@@ -70,13 +69,11 @@ public class PerlStringManipulator extends PerlTextContainerManipulator<PerlStri
     return getOpeningQuote(element).getNode().getStartOffset() - element.getNode().getStartOffset();
   }
 
-  @Nullable
-  private PsiElement getClosingQuote(@NotNull PerlStringMixin element) {
+  private @Nullable PsiElement getClosingQuote(@NotNull PerlStringMixin element) {
     return element.getCloseQuoteElement();
   }
 
-  @NotNull
-  public PsiElement getOpeningQuote(@NotNull PerlStringMixin element) {
+  public @NotNull PsiElement getOpeningQuote(@NotNull PerlStringMixin element) {
     return Objects.requireNonNull(element.getOpenQuoteElement(), element.getText());
   }
 }

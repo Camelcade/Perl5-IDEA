@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,9 +38,8 @@ public abstract class PerlItemPresentationBase implements ColoredItemPresentatio
                       : null;
   }
 
-  @Nullable
   @Override
-  public String getLocationString() {
+  public @Nullable String getLocationString() {
     if (!myElement.isValid()) {
       return null;
     }
@@ -48,9 +47,8 @@ public abstract class PerlItemPresentationBase implements ColoredItemPresentatio
     return containingFile == null ? null : containingFile.getName();// + suffix;
   }
 
-  @Nullable
   @Override
-  public Icon getIcon(boolean unused) {
+  public @Nullable Icon getIcon(boolean unused) {
     return myElement.getIcon(0);
   }
 
@@ -58,9 +56,8 @@ public abstract class PerlItemPresentationBase implements ColoredItemPresentatio
     return myElement;
   }
 
-  @Nullable
   @Override
-  public TextAttributesKey getTextAttributesKey() {
+  public @Nullable TextAttributesKey getTextAttributesKey() {
     return myAttributesKey;
   }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -134,8 +134,7 @@ public class PerlScalarUtil implements PerlElementTypes, PerlBuiltInScalars {
    * @param string psi element that may be StringElement or stringcontentElement
    * @return string content or null
    */
-  @Nullable
-  public static String getStringContent(@Nullable PsiElement string) {
+  public static @Nullable String getStringContent(@Nullable PsiElement string) {
     return string instanceof PerlString || string instanceof PerlStringContentElement ? ElementManipulators.getValueText(string) : null;
   }
 }

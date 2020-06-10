@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,8 +41,7 @@ public class PerlRemoteFileSystem extends DeprecatedVirtualFileSystem {
   private final Map<String, VirtualFile> virtualFilesMap = new HashMap<>();
 
   @Override
-  @Nullable
-  public VirtualFile findFileByPath(@NotNull String path) {
+  public @Nullable VirtualFile findFileByPath(@NotNull String path) {
     return virtualFilesMap.get(path);
   }
 
@@ -60,8 +59,7 @@ public class PerlRemoteFileSystem extends DeprecatedVirtualFileSystem {
     virtualFilesMap.clear();
   }
 
-  @Nullable
-  public VirtualFile registerRemoteFile(@NotNull String filePath, @NotNull String fileSource) {
+  public @Nullable VirtualFile registerRemoteFile(@NotNull String filePath, @NotNull String fileSource) {
     String fileName;
     if (filePath.startsWith(PerlStackFrameDescriptor.EVAL_PREFIX)) // make name for eval
     {
@@ -75,8 +73,7 @@ public class PerlRemoteFileSystem extends DeprecatedVirtualFileSystem {
     return registerRemoteFile(fileName, filePath, fileSource);
   }
 
-  @NotNull
-  public VirtualFile registerRemoteFile(@NotNull String fileName, @NotNull String filePath, @NotNull String fileSource) {
+  public @NotNull VirtualFile registerRemoteFile(@NotNull String fileName, @NotNull String filePath, @NotNull String fileSource) {
     //		System.err.println("Registering file: "+ fileName + " " + filePath);
     LightVirtualFile newVirtualFile = new PerlRemoteVirtualFile(fileName, filePath, fileSource);
     virtualFilesMap.put(filePath, newVirtualFile);
@@ -84,8 +81,7 @@ public class PerlRemoteFileSystem extends DeprecatedVirtualFileSystem {
   }
 
   @Override
-  @NotNull
-  public String getProtocol() {
+  public @NotNull String getProtocol() {
     return PROTOCOL;
   }
 
@@ -103,12 +99,11 @@ public class PerlRemoteFileSystem extends DeprecatedVirtualFileSystem {
     throw new UnsupportedOperationException();
   }
 
-  @NotNull
   @Override
-  public VirtualFile copyFile(Object requestor,
-                              @NotNull VirtualFile vFile,
-                              @NotNull VirtualFile newParent,
-                              @NotNull final String copyName) {
+  public @NotNull VirtualFile copyFile(Object requestor,
+                                       @NotNull VirtualFile vFile,
+                                       @NotNull VirtualFile newParent,
+                                       final @NotNull String copyName) {
     throw new UnsupportedOperationException();
   }
 
@@ -117,15 +112,14 @@ public class PerlRemoteFileSystem extends DeprecatedVirtualFileSystem {
     throw new UnsupportedOperationException();
   }
 
-  @NotNull
   @Override
-  public VirtualFile createChildFile(Object requestor, @NotNull VirtualFile vDir, @NotNull String fileName) {
+  public @NotNull VirtualFile createChildFile(Object requestor, @NotNull VirtualFile vDir, @NotNull String fileName) {
     throw new UnsupportedOperationException();
   }
 
   @Override
-  @NotNull
-  public VirtualFile createChildDirectory(Object requestor, @NotNull VirtualFile vDir, @NotNull String dirName) throws IOException {
+  public @NotNull VirtualFile createChildDirectory(Object requestor, @NotNull VirtualFile vDir, @NotNull String dirName)
+    throws IOException {
     throw new IOException();
   }
 
@@ -134,8 +128,7 @@ public class PerlRemoteFileSystem extends DeprecatedVirtualFileSystem {
     return findFileByPath(path);
   }
 
-  @NotNull
-  public static PerlRemoteFileSystem getInstance() {
+  public static @NotNull PerlRemoteFileSystem getInstance() {
     return ((PerlRemoteFileSystem)Objects.requireNonNull(VirtualFileManager.getInstance().getFileSystem(PROTOCOL)));
   }
 
@@ -148,8 +141,7 @@ public class PerlRemoteFileSystem extends DeprecatedVirtualFileSystem {
     }
 
     @Override
-    @NotNull
-    public VirtualFileSystem getFileSystem() {
+    public @NotNull VirtualFileSystem getFileSystem() {
       return PerlRemoteFileSystem.this;
     }
 
@@ -158,9 +150,8 @@ public class PerlRemoteFileSystem extends DeprecatedVirtualFileSystem {
       return false;
     }
 
-    @NotNull
     @Override
-    public String getPath() {
+    public @NotNull String getPath() {
       return myPath;
     }
   }

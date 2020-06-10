@@ -57,34 +57,29 @@ public final class PerlFileElementType extends IStubFileElementType<PerlFileStub
     return getParser(psi).parse(this, getBuilder(psi, chameleon)).getFirstChildNode();
   }
 
-  @Nullable
-  protected Lexer getLexer(PsiElement psi) {
+  protected @Nullable Lexer getLexer(PsiElement psi) {
     return null;
   }
 
-  @NotNull
-  protected PsiParser getParser(PsiElement psi) {
+  protected @NotNull PsiParser getParser(PsiElement psi) {
     return LanguageParserDefinitions.INSTANCE.forLanguage(getLanguageForParser(psi)).createParser(psi.getProject());
   }
 
-  @NotNull
-  protected PsiBuilder getBuilder(PsiElement psi, ASTNode chameleon) {
+  protected @NotNull PsiBuilder getBuilder(PsiElement psi, ASTNode chameleon) {
     return PsiBuilderFactory.getInstance()
       .createBuilder(psi.getProject(), chameleon, getLexer(psi), getLanguageForParser(psi), chameleon.getChars());
   }
 
-  @NotNull
   @Override
-  public String getExternalId() {
+  public @NotNull String getExternalId() {
     return "perl5.file." + toString();
   }
 
   @Override
   public StubBuilder getBuilder() {
     return new DefaultStubBuilder() {
-      @NotNull
       @Override
-      protected StubElement<?> createStubForFile(@NotNull PsiFile file) {
+      protected @NotNull StubElement<?> createStubForFile(@NotNull PsiFile file) {
         return new PerlFileStub((PerlFile)file, PerlFileElementType.this);
       }
     };
@@ -108,9 +103,8 @@ public final class PerlFileElementType extends IStubFileElementType<PerlFileStub
     stub.getData().serialize(dataStream);
   }
 
-  @NotNull
   @Override
-  public PerlFileStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
+  public @NotNull PerlFileStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
     return new PerlFileStub(PerlNamespaceDefinitionData.deserialize(dataStream), this);
   }
 }

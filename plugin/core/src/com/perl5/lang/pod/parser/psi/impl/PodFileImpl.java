@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,9 +43,8 @@ public class PodFileImpl extends PsiFileBase implements PodFile {
     super(viewProvider, PodLanguage.INSTANCE);
   }
 
-  @NotNull
   @Override
-  public FileType getFileType() {
+  public @NotNull FileType getFileType() {
     return PodFileType.INSTANCE;
   }
 
@@ -65,8 +64,7 @@ public class PodFileImpl extends PsiFileBase implements PodFile {
     PodRenderUtil.renderPsiRangeAsHTML(getFirstNamedBlock(), null, builder, context);
   }
 
-  @Nullable
-  public PsiElement getFirstNamedBlock() {
+  public @Nullable PsiElement getFirstNamedBlock() {
     return findChildByClass(PodTitledSection.class);
   }
 
@@ -95,9 +93,8 @@ public class PodFileImpl extends PsiFileBase implements PodFile {
     return this;
   }
 
-  @Nullable
   @Override
-  public String getPresentableText() {
+  public @Nullable String getPresentableText() {
     String packageName = getNormalizedPackageName();
     return packageName == null ? getName() : packageName;
   }
@@ -107,8 +104,7 @@ public class PodFileImpl extends PsiFileBase implements PodFile {
    *
    * @return POD package name or null if this is a script file file or smth
    */
-  @Nullable
-  private String getNormalizedPackageName() {
+  private @Nullable String getNormalizedPackageName() {
     String packageName = PodFileUtil.getPackageName(this);
     if (StringUtil.isEmpty(packageName)) {
       return null;
@@ -116,9 +112,8 @@ public class PodFileImpl extends PsiFileBase implements PodFile {
     return StringUtil.trimStart(packageName, "pod::");
   }
 
-  @Nullable
   @Override
-  public String getLocationString() {
+  public @Nullable String getLocationString() {
     final PsiDirectory psiDirectory = getParent();
     if (psiDirectory != null) {
       return psiDirectory.getVirtualFile().getPresentableUrl();
@@ -126,15 +121,13 @@ public class PodFileImpl extends PsiFileBase implements PodFile {
     return null;
   }
 
-  @Nullable
   @Override
-  public Icon getIcon(boolean unused) {
+  public @Nullable Icon getIcon(boolean unused) {
     return getFileType().getIcon();
   }
 
-  @Nullable
   @Override
-  public String getPodLink() {
+  public @Nullable String getPodLink() {
     String normalizedPackageName = getNormalizedPackageName();
     if (StringUtil.isNotEmpty(normalizedPackageName)) {
       return normalizedPackageName;
@@ -142,9 +135,8 @@ public class PodFileImpl extends PsiFileBase implements PodFile {
     return null;
   }
 
-  @Nullable
   @Override
-  public String getPodLinkText() {
+  public @Nullable String getPodLinkText() {
     String normalizedPackageName = getNormalizedPackageName();
     if (StringUtil.isNotEmpty(normalizedPackageName)) {
       return normalizedPackageName;

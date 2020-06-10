@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,8 +28,7 @@ import org.jetbrains.annotations.Nullable;
 
 
 public class TemplateToolkitPsiUtil {
-  @Nullable
-  public static PsiElement getPrevSignificantSibling(PsiElement element) {
+  public static @Nullable PsiElement getPrevSignificantSibling(PsiElement element) {
     PsiElement result = element.getPrevSibling();
     while (true) {
       if (result == null) {
@@ -46,9 +45,8 @@ public class TemplateToolkitPsiUtil {
     return result;
   }
 
-  @Nullable
   @Contract("null -> null")
-  public static IElementType getLastOpenMarker(@Nullable Editor editor) {
+  public static @Nullable IElementType getLastOpenMarker(@Nullable Editor editor) {
     if (editor == null) {
       return null;
     }

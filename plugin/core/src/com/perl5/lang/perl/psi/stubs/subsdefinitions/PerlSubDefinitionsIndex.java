@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,9 +36,8 @@ public class PerlSubDefinitionsIndex extends PerlStubIndexBase<PerlSubDefinition
     return super.getVersion() + VERSION;
   }
 
-  @NotNull
   @Override
-  public StubIndexKey<String, PerlSubDefinitionElement> getKey() {
+  public @NotNull StubIndexKey<String, PerlSubDefinitionElement> getKey() {
     return KEY;
   }
 

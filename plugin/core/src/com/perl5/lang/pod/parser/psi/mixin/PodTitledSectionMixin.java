@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,21 +39,18 @@ public class PodTitledSectionMixin extends PodStubBasedTitledSection {
     super(stub, nodeType);
   }
 
-  @Nullable
   @Override
-  public String getPodLink() {
+  public @Nullable String getPodLink() {
     return PodRenderUtil.getPodLinkForElement(this);
   }
 
-  @Nullable
   @Override
-  public String getPodLinkText() {
+  public @Nullable String getPodLinkText() {
     return getTitleText();
   }
 
-  @Nullable
   @Override
-  public PsiElement getNameIdentifier() {
+  public @Nullable PsiElement getNameIdentifier() {
     return getTitleElement();
   }
 

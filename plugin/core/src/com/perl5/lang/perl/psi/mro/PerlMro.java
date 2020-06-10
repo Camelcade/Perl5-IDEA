@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -60,12 +60,11 @@ public abstract class PerlMro {
    * @deprecated use {@link #processTargets(Project, GlobalSearchScope, String, Set, boolean, Processor)}
    */
   @Deprecated
-  @NotNull
-  public static Collection<PsiElement> resolveSub(@NotNull Project project,
-                                                  @NotNull GlobalSearchScope searchScope,
-                                                  @Nullable String namespaceName,
-                                                  @Nullable String subName,
-                                                  boolean isSuper) {
+  public static @NotNull Collection<PsiElement> resolveSub(@NotNull Project project,
+                                                           @NotNull GlobalSearchScope searchScope,
+                                                           @Nullable String namespaceName,
+                                                           @Nullable String subName,
+                                                           boolean isSuper) {
     if (subName == null) {
       return Collections.emptyList();
     }

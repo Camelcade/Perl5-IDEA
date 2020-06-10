@@ -101,16 +101,13 @@ public class StringToLastHeredocIntention extends PsiElementBaseIntentionAction 
            (parent instanceof PsiPerlStringDq || parent instanceof PsiPerlStringSq || parent instanceof PsiPerlStringXq);
   }
 
-  @Nls
-  @NotNull
   @Override
-  public String getFamilyName() {
+  public @Nls @NotNull String getFamilyName() {
     return getText();
   }
 
-  @NotNull
   @Override
-  public String getText() {
+  public @NotNull String getText() {
     return PerlBundle.message("perl.intention.heredoc.last.prefix") + HEREDOC_MARKER;
   }
 }

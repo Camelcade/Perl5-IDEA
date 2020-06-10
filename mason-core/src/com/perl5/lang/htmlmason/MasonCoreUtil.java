@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,8 +35,7 @@ import java.util.List;
 
 
 public class MasonCoreUtil {
-  @Nullable
-  public static VirtualFile getComponentRoot(@NotNull AbstractMasonSettings masonSettings, @Nullable VirtualFile file) {
+  public static @Nullable VirtualFile getComponentRoot(@NotNull AbstractMasonSettings masonSettings, @Nullable VirtualFile file) {
     if (file != null) {
       if (file instanceof FakeVirtualFile) {
         file = file.getParent();
@@ -44,7 +43,7 @@ public class MasonCoreUtil {
 
       if (file != null) {
         //noinspection unchecked
-        for (VirtualFile componentRoot : (List<VirtualFile>)masonSettings.getComponentsRoots()) {
+        for (VirtualFile componentRoot : masonSettings.getComponentsRoots()) {
           if (VfsUtil.isAncestor(componentRoot, file, false)) {
             return componentRoot;
           }
@@ -59,8 +58,7 @@ public class MasonCoreUtil {
    *
    * @return virtual file or null
    */
-  @Nullable
-  public static VirtualFile getContainingVirtualFile(PsiFile psiFile) {
+  public static @Nullable VirtualFile getContainingVirtualFile(PsiFile psiFile) {
     VirtualFile originalFile = psiFile.getViewProvider().getVirtualFile();
 
     if (originalFile instanceof LightVirtualFile) {

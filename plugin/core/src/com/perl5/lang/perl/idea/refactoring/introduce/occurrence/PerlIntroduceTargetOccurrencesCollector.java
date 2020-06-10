@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,17 +32,14 @@ import java.util.Objects;
 import static com.perl5.lang.perl.idea.refactoring.introduce.target.PerlIntroduceTargetsHandler.*;
 
 public abstract class PerlIntroduceTargetOccurrencesCollector {
-  @NotNull
-  private final PerlIntroduceTarget myTarget;
-  @Nullable
-  private List<PerlIntroduceTarget> myOccurrences;
+  private final @NotNull PerlIntroduceTarget myTarget;
+  private @Nullable List<PerlIntroduceTarget> myOccurrences;
 
   protected PerlIntroduceTargetOccurrencesCollector(@NotNull PerlIntroduceTarget target) {
     myTarget = target;
   }
 
-  @NotNull
-  protected final List<PerlIntroduceTarget> getOccurrences() {
+  protected final @NotNull List<PerlIntroduceTarget> getOccurrences() {
     return myOccurrences == null ? Collections.singletonList(myTarget) : Collections.unmodifiableList(myOccurrences);
   }
 
@@ -59,18 +56,15 @@ public abstract class PerlIntroduceTargetOccurrencesCollector {
     }
   }
 
-  @NotNull
-  protected final PerlIntroduceTarget getTarget() {
+  protected final @NotNull PerlIntroduceTarget getTarget() {
     return myTarget;
   }
 
-  @Nullable
-  protected final PsiElement getTargetElement() {
+  protected final @Nullable PsiElement getTargetElement() {
     return getTarget().getPlace();
   }
 
-  @NotNull
-  private List<PerlIntroduceTarget> collectOccurrences() {
+  private @NotNull List<PerlIntroduceTarget> collectOccurrences() {
     PsiElement searchScope = computeTargetScope(myTarget);
     if (searchScope == null) {
       return getOccurrences();
@@ -102,8 +96,7 @@ public abstract class PerlIntroduceTargetOccurrencesCollector {
   /**
    * @return psi element we should search for occurrences of the searcher's target.
    */
-  @Nullable
-  public static PsiElement computeTargetScope(@NotNull PerlIntroduceTarget target) {
+  public static @Nullable PsiElement computeTargetScope(@NotNull PerlIntroduceTarget target) {
     PsiElement targetElement = target.getPlace();
     PsiElement scope = PsiTreeUtil.getParentOfType(targetElement, PerlSubDefinitionElement.class);
     return scope != null ? scope : PsiTreeUtil.getParentOfType(targetElement, PerlNamespaceDefinitionElement.class);
@@ -119,8 +112,7 @@ public abstract class PerlIntroduceTargetOccurrencesCollector {
   /**
    * @return occurrences collector for the {@code target}
    */
-  @NotNull
-  public static PerlIntroduceTargetOccurrencesCollector create(@NotNull PerlIntroduceTarget target) {
+  public static @NotNull PerlIntroduceTargetOccurrencesCollector create(@NotNull PerlIntroduceTarget target) {
     PsiElement targetElement = target.getPlace();
     if (targetElement instanceof PerlDerefExpression) {
       return new PerlDerefOccurrencesCollector(target);
@@ -146,8 +138,7 @@ public abstract class PerlIntroduceTargetOccurrencesCollector {
   /**
    * @return all known {@code target} occurrences
    */
-  @NotNull
-  public static List<PerlIntroduceTarget> collect(@NotNull PerlIntroduceTarget target) {
+  public static @NotNull List<PerlIntroduceTarget> collect(@NotNull PerlIntroduceTarget target) {
     return create(target).collectOccurrences();
   }
 }

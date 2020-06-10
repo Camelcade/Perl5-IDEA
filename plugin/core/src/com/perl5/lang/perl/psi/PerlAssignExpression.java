@@ -45,8 +45,7 @@ public interface PerlAssignExpression extends PsiPerlExpr {
    *
    * @return left side
    */
-  @NotNull
-  default PsiElement getLeftSide() {
+  default @NotNull PsiElement getLeftSide() {
     return getFirstChild();
   }
 
@@ -55,8 +54,7 @@ public interface PerlAssignExpression extends PsiPerlExpr {
    *
    * @return rightmost side or null if expression is incomplete
    */
-  @Nullable
-  default PsiElement getRightSide() {
+  default @Nullable PsiElement getRightSide() {
     PsiElement lastChild = getLastChild();
     PsiElement firstChild = getFirstChild();
 
@@ -80,8 +78,7 @@ public interface PerlAssignExpression extends PsiPerlExpr {
    * In case of {@code my @arr = ($var1, $var2)} will return a descriptor of {@code $var1} and {@code $var2} and zero index.
    * fixme use real right part. To handle my $var = undef = $var;
    */
-  @Nullable
-  default PerlAssignValueDescriptor getRightPartOfAssignment(@NotNull PsiElement leftPartElement) {
+  default @Nullable PerlAssignValueDescriptor getRightPartOfAssignment(@NotNull PsiElement leftPartElement) {
     List<PsiElement> children = PerlPsiUtil.cleanupChildren(getChildren());
     if (children.size() < 2) {
       return null;
@@ -150,9 +147,8 @@ public interface PerlAssignExpression extends PsiPerlExpr {
    * @return an assignment expression if {@code element} is a part of one.
    * Unwraps multi-variable declarations and passing through any empty wrappers, e.g. variable declaration
    */
-  @Nullable
   @Contract("null->null")
-  static PerlAssignExpression getAssignmentExpression(@Nullable PsiElement element) {
+  static @Nullable PerlAssignExpression getAssignmentExpression(@Nullable PsiElement element) {
     if (element == null) {
       return null;
     }
@@ -177,8 +173,7 @@ public interface PerlAssignExpression extends PsiPerlExpr {
    *
    * @return Flattered list of assignment participants
    */
-  @NotNull
-  static List<PsiElement> flattenAssignmentPart(@NotNull PsiElement element) {
+  static @NotNull List<PsiElement> flattenAssignmentPart(@NotNull PsiElement element) {
     List<PsiElement> result = new SmartList<>();
     for (PsiElement listElement : PerlArrayUtil.collectListElements(element)) {
       if (listElement instanceof PerlVariableDeclarationExpr) {
@@ -195,8 +190,7 @@ public interface PerlAssignExpression extends PsiPerlExpr {
   class PerlAssignValueDescriptor {
     public static final PerlAssignValueDescriptor EMPTY = new PerlAssignValueDescriptor(Collections.emptyList(), 0);
 
-    @NotNull
-    private final List<PsiElement> myElements;
+    private final @NotNull List<PsiElement> myElements;
     private final int myStartIndex;
 
     public PerlAssignValueDescriptor(@NotNull PsiElement element) {
@@ -268,8 +262,7 @@ public interface PerlAssignExpression extends PsiPerlExpr {
       return result;
     }
 
-    @NotNull
-    public List<PsiElement> getElements() {
+    public @NotNull List<PsiElement> getElements() {
       return myElements;
     }
 
@@ -290,8 +283,7 @@ public interface PerlAssignExpression extends PsiPerlExpr {
              (myStartIndex == 0 ? "" : " [" + myStartIndex + "]");
     }
 
-    @Nullable
-    public String getText() {
+    public @Nullable String getText() {
       if (myElements.isEmpty()) {
         return null;
       }

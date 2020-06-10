@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,9 +28,8 @@ import org.jetbrains.annotations.Nullable;
 
 
 public class MojoliciousCommenterProvider implements MultipleLangCommentProvider {
-  @Nullable
   @Override
-  public Commenter getLineCommenter(PsiFile file, Editor editor, Language lineStartLanguage, Language lineEndLanguage) {
+  public @Nullable Commenter getLineCommenter(PsiFile file, Editor editor, Language lineStartLanguage, Language lineEndLanguage) {
     return LanguageCommenters.INSTANCE.forLanguage(lineStartLanguage);
   }
 

@@ -40,13 +40,10 @@ import static com.perl5.lang.perl.util.PerlScalarUtil.DEFAULT_SELF_NAME;
 
 public class PerlSubArgument {
 
-  @NotNull
-  private PerlVariableType myArgumentType;
-  @NotNull
-  private String myArgumentName;
+  private @NotNull final PerlVariableType myArgumentType;
+  private @NotNull final String myArgumentName;
 
-  @NotNull
-  private String myVariableClass;
+  private @NotNull final String myVariableClass;
 
   private Boolean myIsOptional;
 
@@ -60,13 +57,11 @@ public class PerlSubArgument {
     myVariableClass = variableClass;
   }
 
-  @NotNull
-  public PerlVariableType getArgumentType() {
+  public @NotNull PerlVariableType getArgumentType() {
     return myArgumentType;
   }
 
-  @NotNull
-  public String getArgumentName() {
+  public @NotNull String getArgumentName() {
     return myArgumentName;
   }
 
@@ -78,8 +73,7 @@ public class PerlSubArgument {
     myIsOptional = optional;
   }
 
-  @NotNull
-  public String getVariableClass() {
+  public @NotNull String getVariableClass() {
     return myVariableClass;
   }
 
@@ -192,8 +186,7 @@ public class PerlSubArgument {
     return PerlSubArgument.create(argumentType, argumentName, variableClass, isOptional);
   }
 
-  @NotNull
-  public static List<PerlSubArgument> deserializeList(@NotNull StubInputStream dataStream) throws IOException {
+  public static @NotNull List<PerlSubArgument> deserializeList(@NotNull StubInputStream dataStream) throws IOException {
     int argumentsNumber = dataStream.readVarInt();
 
     if (argumentsNumber <= 0) {

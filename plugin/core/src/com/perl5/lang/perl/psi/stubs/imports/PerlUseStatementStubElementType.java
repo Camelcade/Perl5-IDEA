@@ -48,17 +48,15 @@ public class PerlUseStatementStubElementType extends PerlPolyNamedElementType<Pe
     return new PerlUseStatementElement(stub, this);
   }
 
-  @NotNull
   @Override
-  public PsiElement getPsiElement(@NotNull ASTNode node) {
+  public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
     return new PerlUseStatementElement(node);
   }
 
-  @NotNull
   @Override
-  protected PerlUseStatementStub createStub(@NotNull PerlUseStatementElement psi,
-                                            StubElement<?> parentStub,
-                                            @NotNull List<StubElement<?>> lightElementsStubs) {
+  protected @NotNull PerlUseStatementStub createStub(@NotNull PerlUseStatementElement psi,
+                                                     StubElement<?> parentStub,
+                                                     @NotNull List<StubElement<?>> lightElementsStubs) {
     return new PerlUseStatementStub(
       parentStub,
       psi.getNamespaceName(),
@@ -68,11 +66,10 @@ public class PerlUseStatementStubElementType extends PerlPolyNamedElementType<Pe
     );
   }
 
-  @NotNull
   @Override
-  protected PerlUseStatementStub deserialize(@NotNull StubInputStream dataStream,
-                                             StubElement<?> parentStub,
-                                             @NotNull List<StubElement<?>> lightElementsStubs) throws IOException {
+  protected @NotNull PerlUseStatementStub deserialize(@NotNull StubInputStream dataStream,
+                                                      StubElement<?> parentStub,
+                                                      @NotNull List<StubElement<?>> lightElementsStubs) throws IOException {
     return new PerlUseStatementStub(parentStub,
                                     Objects.requireNonNull(readString(dataStream)),
                                     Objects.requireNonNull(readString(dataStream)),

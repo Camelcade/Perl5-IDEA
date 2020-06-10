@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,16 +41,14 @@ public class PartialConditionalInstructionImpl extends ConditionalInstructionImp
     myLastConditionElement = lastConditionElement;
   }
 
-  @NotNull
   @TestOnly
-  public String getConditionText() {
+  public @NotNull String getConditionText() {
     return Objects.requireNonNull(getCondition()).getText()
       .substring(0, myLastConditionElement.getStartOffsetInParent() + myLastConditionElement.getTextLength());
   }
 
-  @NotNull
   @Override
-  public String toString() {
+  public @NotNull String toString() {
     return super.toString() + "; Partial condition: " + getConditionText();
   }
 }

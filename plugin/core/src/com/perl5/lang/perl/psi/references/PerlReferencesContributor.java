@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,9 +37,8 @@ public class PerlReferencesContributor extends PsiReferenceContributor implement
     registrar.registerReferenceProvider(VARIABLE_NAME_PATTERN, new PerlVariableReferencesProvider());
 
     registrar.registerReferenceProvider(LABEL_EXPR_PATTERN, new PsiReferenceProvider() {
-      @NotNull
       @Override
-      public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context) {
+      public @NotNull PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context) {
         return new PsiReference[]{new PerlLabelReference((PsiPerlLabelExpr)element)};
       }
     });

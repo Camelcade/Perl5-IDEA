@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,15 +22,13 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public interface PerlTryCatchCompound extends PsiElement {
-  @NotNull
-  default PerlTryExpr getTryExpression() {
+  default @NotNull PerlTryExpr getTryExpression() {
     PerlTryExpr tryExpr = PsiTreeUtil.getChildOfType(this, PerlTryExpr.class);
     assert tryExpr != null : "No try expression in " + getText();
     return tryExpr;
   }
 
-  @Nullable
-  default PerlCatchExpr getCatchExpression() {
+  default @Nullable PerlCatchExpr getCatchExpression() {
     return PsiTreeUtil.getChildOfType(this, PerlCatchExpr.class);
   }
 }

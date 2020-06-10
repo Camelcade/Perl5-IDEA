@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,9 +32,8 @@ public class PerlStringListMixin extends PerlCompositeElementImpl implements Per
     super(node);
   }
 
-  @NotNull
   @Override
-  public List<String> getStringContents() {
+  public @NotNull List<String> getStringContents() {
     List<String> result = new ArrayList<>();
     PerlPsiUtil.processStringElements(getFirstChild(), stringContent -> {
       result.add(ElementManipulators.getValueText(stringContent));

@@ -32,27 +32,23 @@ public class MasonTopLevelComponentFileType extends MasonPurePerlComponentFileTy
     super(Mason2TemplatingLanguage.INSTANCE);
   }
 
-  @NotNull
   @Override
-  public String getName() {
+  public @NotNull String getName() {
     return "Mason2 Top-Level Component";
   }
 
-  @NotNull
   @Override
-  public String getDescription() {
+  public @NotNull String getDescription() {
     return "Mason2 top-level component";
   }
 
-  @NotNull
   @Override
-  public String getDefaultExtension() {
+  public @NotNull String getDefaultExtension() {
     return TOP_LEVEL_COMPONENT_EXTENSION;
   }
 
-  @Nullable
   @Override
-  public Icon getIcon() {
+  public @Nullable Icon getIcon() {
     return Mason2Icons.MASON_TOP_LEVEL_COMPONENT_ICON;
   }
 

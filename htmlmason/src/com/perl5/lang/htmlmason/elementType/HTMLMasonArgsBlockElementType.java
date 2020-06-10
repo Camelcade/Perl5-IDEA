@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,9 +38,8 @@ public class HTMLMasonArgsBlockElementType extends IStubElementType<HTMLMasonArg
     super(debugName, HTMLMasonLanguage.INSTANCE);
   }
 
-  @NotNull
   @Override
-  public PsiElement getPsiElement(@NotNull ASTNode node) {
+  public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
     return new HTMLMasonArgsBlockImpl(node);
   }
 
@@ -50,15 +49,13 @@ public class HTMLMasonArgsBlockElementType extends IStubElementType<HTMLMasonArg
     return new HTMLMasonArgsBlockImpl(stub, this);
   }
 
-  @NotNull
   @Override
-  public HTMLMasonArgsBlockStub createStub(@NotNull HTMLMasonArgsBlock psi, StubElement parentStub) {
+  public @NotNull HTMLMasonArgsBlockStub createStub(@NotNull HTMLMasonArgsBlock psi, StubElement parentStub) {
     return new HTMLMasonArgsBlockStubImpl(parentStub, this, psi.getArgumentsList());
   }
 
-  @NotNull
   @Override
-  public String getExternalId() {
+  public @NotNull String getExternalId() {
     return "HTML::Mason::" + super.toString();
   }
 
@@ -67,9 +64,8 @@ public class HTMLMasonArgsBlockElementType extends IStubElementType<HTMLMasonArg
     PerlSubArgument.serializeList(dataStream, stub.getArgumentsList());
   }
 
-  @NotNull
   @Override
-  public HTMLMasonArgsBlockStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
+  public @NotNull HTMLMasonArgsBlockStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
     return new HTMLMasonArgsBlockStubImpl(parentStub, this, PerlSubArgument.deserializeList(dataStream));
   }
 

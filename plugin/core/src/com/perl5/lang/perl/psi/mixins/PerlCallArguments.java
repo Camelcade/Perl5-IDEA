@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,8 +32,7 @@ public class PerlCallArguments extends PerlCompositeElementImpl {
     super(node);
   }
 
-  @NotNull
-  public List<PsiElement> getArgumentsList() {
+  public @NotNull List<PsiElement> getArgumentsList() {
     PsiPerlExpr argumentExpression = findChildByClass(PsiPerlExpr.class);
     return argumentExpression == null ? Collections.emptyList() : PerlArrayUtil.collectListElements(argumentExpression);
   }

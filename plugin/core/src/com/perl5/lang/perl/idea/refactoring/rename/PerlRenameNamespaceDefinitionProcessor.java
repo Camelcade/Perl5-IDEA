@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -52,19 +52,16 @@ public class PerlRenameNamespaceDefinitionProcessor extends PerlRenamePolyRefere
     if (virtualFile.getFileType() == PerlFileTypePackage.INSTANCE) {
       VirtualFile classRoot = PerlUtil.getFileClassRoot(namespaceDefinition.getProject(), virtualFile);
 
-      if (classRoot != null &&
-          currentPackageName.equals(PerlPackageUtil.getPackageNameByPath(VfsUtil.getRelativePath(virtualFile, classRoot)))) {
-        return true;
-      }
+      return classRoot != null &&
+             currentPackageName.equals(PerlPackageUtil.getPackageNameByPath(VfsUtil.getRelativePath(virtualFile, classRoot)));
     }
     return false;
   }
 
-  @Nullable
   @Override
-  public Runnable getPostRenameCallback(@NotNull PsiElement element,
-                                        @NotNull final String newName,
-                                        @NotNull RefactoringElementListener elementListener) {
+  public @Nullable Runnable getPostRenameCallback(@NotNull PsiElement element,
+                                                  final @NotNull String newName,
+                                                  @NotNull RefactoringElementListener elementListener) {
     if (element instanceof PerlNamespaceDefinitionWithIdentifier && isFileToBeRenamed((PerlNamespaceDefinitionWithIdentifier)element)) {
       final PsiFile file = element.getContainingFile();
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,19 +35,16 @@ public interface PerlMethodContainer extends PsiElement, PerlValuableEntity {
   @Nullable
   PsiPerlMethod getMethod();
 
-  @NotNull
   @Override
-  default PerlValue computePerlValue() {
+  default @NotNull PerlValue computePerlValue() {
     return PerlValuesManager.from(getMethod());
   }
 
-  @Nullable
-  default PsiPerlCallArguments getCallArguments() {
+  default @Nullable PsiPerlCallArguments getCallArguments() {
     return PsiTreeUtil.getChildOfType(this, PsiPerlCallArguments.class);
   }
 
-  @NotNull
-  default List<PsiElement> getCallArgumentsList() {
+  default @NotNull List<PsiElement> getCallArgumentsList() {
     PsiPerlCallArguments callArguments = getCallArguments();
     if (callArguments == null) {
       return Collections.emptyList();

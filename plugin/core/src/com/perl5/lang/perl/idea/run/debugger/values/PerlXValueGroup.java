@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -68,15 +68,13 @@ public class PerlXValueGroup extends XValueGroup {
     }
   }
 
-  @Nullable
   @Override
-  public Icon getIcon() {
+  public @Nullable Icon getIcon() {
     return myIcon;
   }
 
-  @Nullable
   @Override
-  public String getComment() {
+  public @Nullable String getComment() {
     return myComment;
   }
 
@@ -92,9 +90,8 @@ public class PerlXValueGroup extends XValueGroup {
     return myVariables.length;
   }
 
-  @NotNull
   @Override
-  public String getName() {
+  public @NotNull String getName() {
     return super.getName() + "(" + getSize() + ")";
   }
 }

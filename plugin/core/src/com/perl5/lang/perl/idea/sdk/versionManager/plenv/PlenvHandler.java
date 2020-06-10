@@ -34,45 +34,38 @@ class PlenvHandler extends PerlRealVersionManagerHandler<PlenvData, PlenvHandler
     super(bean);
   }
 
-  @NotNull
   @Override
-  public String getPresentableName() {
+  public @NotNull String getPresentableName() {
     return PerlBundle.message("perl.vm.plenv.presentable.name");
   }
 
-  @NotNull
   @Override
-  protected String getExecutableName() {
+  protected @NotNull String getExecutableName() {
     return "plenv";
   }
 
-  @NotNull
   @Override
-  public PlenvData createData() {
+  public @NotNull PlenvData createData() {
     return new PlenvData(this);
   }
 
-  @NotNull
   @Override
-  public PerlVersionManagerAdapter createAdapter(@NotNull String pathToVersionManager, @NotNull PerlHostData<?, ?> hostData) {
+  public @NotNull PerlVersionManagerAdapter createAdapter(@NotNull String pathToVersionManager, @NotNull PerlHostData<?, ?> hostData) {
     return new PlenvAdapter(pathToVersionManager, hostData);
   }
 
-  @NotNull
   @Override
-  protected PlenvData createData(@NotNull PerlVersionManagerAdapter vmAdapter, @NotNull String distributionId) {
+  protected @NotNull PlenvData createData(@NotNull PerlVersionManagerAdapter vmAdapter, @NotNull String distributionId) {
     return new PlenvData(vmAdapter.getVersionManagerPath(), distributionId, this);
   }
 
-  @NotNull
   @Override
-  public Icon getIcon() {
+  public @NotNull Icon getIcon() {
     return PerlIcons.PLENV_ICON;
   }
 
-  @Nullable
   @Override
-  public InstallPerlHandler createInstallHandler(@NotNull String pathToVersionManager) {
+  public @Nullable InstallPerlHandler createInstallHandler(@NotNull String pathToVersionManager) {
     return new PlenvInstallPerlHandler(pathToVersionManager, this);
   }
 }

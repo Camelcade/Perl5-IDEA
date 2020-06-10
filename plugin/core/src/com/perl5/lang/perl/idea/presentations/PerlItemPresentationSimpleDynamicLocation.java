@@ -32,9 +32,8 @@ public class PerlItemPresentationSimpleDynamicLocation extends PerlItemPresentat
     super(element, presentableText);
   }
 
-  @Nullable
   @Override
-  public String getLocationString() {
+  public @Nullable String getLocationString() {
     PsiFile containingFile = getElement().getContainingFile();
 
     if (containingFile == null) {

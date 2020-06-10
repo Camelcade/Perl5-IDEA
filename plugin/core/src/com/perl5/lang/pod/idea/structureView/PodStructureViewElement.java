@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,9 +44,8 @@ public class PodStructureViewElement extends PsiTreeElementBase<PsiElement> {
     super(element);
   }
 
-  @Nullable
   @Override
-  public String getPresentableText() {
+  public @Nullable String getPresentableText() {
     PsiElement element = getElement();
     if (element == null) {
       return null;
@@ -60,15 +59,13 @@ public class PodStructureViewElement extends PsiTreeElementBase<PsiElement> {
     return null;
   }
 
-  @Nullable
   @Override
-  public String getLocationString() {
+  public @Nullable String getLocationString() {
     return null;
   }
 
-  @Nullable
   @Override
-  public Icon getIcon(boolean unused) {
+  public @Nullable Icon getIcon(boolean unused) {
     PsiElement element = getElement();
     if (element == null) {
       return null;
@@ -76,9 +73,8 @@ public class PodStructureViewElement extends PsiTreeElementBase<PsiElement> {
     return element instanceof PsiFile ? PerlIcons.POD_FILE : element.getIcon(0);
   }
 
-  @NotNull
   @Override
-  public Collection<StructureViewTreeElement> getChildrenBase() {
+  public @NotNull Collection<StructureViewTreeElement> getChildrenBase() {
     PsiElement psiElement = getElement();
     if (psiElement == null) {
       return Collections.emptyList();

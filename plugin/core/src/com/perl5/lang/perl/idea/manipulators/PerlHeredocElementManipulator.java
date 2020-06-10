@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -53,8 +53,7 @@ public class PerlHeredocElementManipulator extends AbstractElementManipulator<Pe
     return (PerlHeredocElementImpl)element.replace(replacement);
   }
 
-  @NotNull
-  private static String getIndenter(@NotNull Project project, int indentSize) {
+  private static @NotNull String getIndenter(@NotNull Project project, int indentSize) {
     CommonCodeStyleSettings.IndentOptions indentOptions =
       CodeStyle.getSettings(project).getCommonSettings(PerlLanguage.INSTANCE).getIndentOptions();
 

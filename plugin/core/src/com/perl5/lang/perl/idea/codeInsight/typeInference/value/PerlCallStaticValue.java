@@ -153,9 +153,8 @@ public final class PerlCallStaticValue extends PerlCallValue {
     return getNamespaceNameValue() + "::" + getSubNameValue() + getArgumentsAsString();
   }
 
-  @NotNull
   @Override
-  public String getPresentableText() {
+  public @NotNull String getPresentableText() {
     return PerlBundle.message(
       "perl.value.call.static.presentable",
       getNamespaceNameValue().getPresentableText(),

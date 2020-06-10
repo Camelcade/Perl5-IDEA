@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,9 +51,8 @@ public class PerlFileViewProvider extends MultiplePsiFilesPerDocumentFileViewPro
     super(manager, virtualFile, eventSystemEnabled);
   }
 
-  @Nullable
   @Override
-  protected PsiFile createFile(@NotNull Language lang) {
+  protected @Nullable PsiFile createFile(@NotNull Language lang) {
     if (lang != PerlLanguage.INSTANCE && lang != PodLanguage.INSTANCE) {
       return null;
     }
@@ -73,9 +72,8 @@ public class PerlFileViewProvider extends MultiplePsiFilesPerDocumentFileViewPro
     return null;
   }
 
-  @NotNull
   @Override
-  public Set<Language> getLanguages() {
+  public @NotNull Set<Language> getLanguages() {
     if (myActAsSingleFile) {
       return Collections.singleton(getBaseLanguage());
     }
@@ -84,21 +82,18 @@ public class PerlFileViewProvider extends MultiplePsiFilesPerDocumentFileViewPro
     }
   }
 
-  @NotNull
   @Override
-  public Language getBaseLanguage() {
+  public @NotNull Language getBaseLanguage() {
     return PerlLanguage.INSTANCE;
   }
 
-  @NotNull
   @Override
-  protected MultiplePsiFilesPerDocumentFileViewProvider cloneInner(@NotNull VirtualFile fileCopy) {
+  protected @NotNull MultiplePsiFilesPerDocumentFileViewProvider cloneInner(@NotNull VirtualFile fileCopy) {
     return new PerlFileViewProvider(getManager(), fileCopy, false);
   }
 
-  @NotNull
   @Override
-  public Language getTemplateDataLanguage() {
+  public @NotNull Language getTemplateDataLanguage() {
     return PodLanguage.INSTANCE;
   }
 
@@ -106,9 +101,8 @@ public class PerlFileViewProvider extends MultiplePsiFilesPerDocumentFileViewPro
     this.myActAsSingleFile = myActAsSingleFile;
   }
 
-  @NotNull
   @Override
-  public List<PsiFile> getAllFiles() {
+  public @NotNull List<PsiFile> getAllFiles() {
     if (myActAsSingleFile) {
       return ContainerUtil.createMaybeSingletonList(getPsi(getBaseLanguage()));
     }

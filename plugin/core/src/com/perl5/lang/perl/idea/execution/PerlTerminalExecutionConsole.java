@@ -31,8 +31,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class PerlTerminalExecutionConsole extends TerminalExecutionConsole implements PerlConsoleView {
-  @Nullable
-  private PerlHostData<?, ?> myHostData;
+  private @Nullable PerlHostData<?, ?> myHostData;
 
   public PerlTerminalExecutionConsole(@NotNull Project project) {
     super(project, null);
@@ -40,14 +39,12 @@ public class PerlTerminalExecutionConsole extends TerminalExecutionConsole imple
   }
 
   @Override
-  @Nullable
-  public PerlHostData<?, ?> getHostData() {
+  public @Nullable PerlHostData<?, ?> getHostData() {
     return myHostData;
   }
 
   @Override
-  @NotNull
-  public PerlTerminalExecutionConsole withHostData(@Nullable PerlHostData<?, ?> hostData) {
+  public @NotNull PerlTerminalExecutionConsole withHostData(@Nullable PerlHostData<?, ?> hostData) {
     myHostData = hostData;
     return this;
   }

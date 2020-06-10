@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,9 +27,8 @@ import org.jetbrains.annotations.NotNull;
 
 
 public class PerlPreFormatProcessor implements PreFormatProcessor {
-  @NotNull
   @Override
-  public TextRange process(@NotNull ASTNode element, @NotNull TextRange range) {
+  public @NotNull TextRange process(@NotNull ASTNode element, @NotNull TextRange range) {
     PsiElement psiElement = element.getPsi();
     if (psiElement == null) {
       return range;

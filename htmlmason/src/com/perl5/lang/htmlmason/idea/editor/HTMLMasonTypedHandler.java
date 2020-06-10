@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,9 +37,8 @@ import java.util.Map;
 
 public class HTMLMasonTypedHandler extends TypedHandlerDelegate
   implements HTMLMasonElementTypes, XmlTokenType, PerlElementTypes, HTMLMasonElementPatterns {
-  @NotNull
   @Override
-  public Result charTyped(char c, @NotNull Project project, @NotNull Editor editor, @NotNull PsiFile file) {
+  public @NotNull Result charTyped(char c, @NotNull Project project, @NotNull Editor editor, @NotNull PsiFile file) {
     if (file.getViewProvider() instanceof HTMLMasonFileViewProvider) {
       if (c == '>') {
         PsiElement element = file.findElementAt(editor.getCaretModel().getOffset() - 2);

@@ -107,8 +107,7 @@ public class PerlParameterInfoHandlerBuiltInRightwardTest extends PerlParameterI
   public void testFiletestUpperC() {doTest();}
 
   @Override
-  @NotNull
-  protected String getCodeFromName(@NotNull String name) {
+  protected @NotNull String getCodeFromName(@NotNull String name) {
     return name + " <caret> ";
   }
 }

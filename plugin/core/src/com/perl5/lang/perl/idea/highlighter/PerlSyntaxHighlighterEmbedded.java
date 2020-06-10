@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,9 +28,8 @@ public abstract class PerlSyntaxHighlighterEmbedded extends PerlSyntaxHighlighte
     super(project);
   }
 
-  @NotNull
   @Override
-  public TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
+  public @NotNull TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
     if (getMarkersTokenSet().contains(tokenType)) {
       return PerlSyntaxHighlighter.EMBED_MARKER_KEYS;
     }

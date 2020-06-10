@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -59,8 +59,7 @@ public class PortMapping {
     return result;
   }
 
-  @NotNull
-  public static PortMapping create(int port) {
+  public static @NotNull PortMapping create(int port) {
     return new PortMapping(port, port);
   }
 }

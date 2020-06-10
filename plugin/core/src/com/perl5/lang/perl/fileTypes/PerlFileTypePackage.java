@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,27 +28,23 @@ public class PerlFileTypePackage extends PurePerlFileType {
 
   public static final PerlFileTypePackage INSTANCE = new PerlFileTypePackage();
 
-  @NotNull
   @Override
-  public String getName() {
+  public @NotNull String getName() {
     return "Perl5 Package";
   }
 
-  @NotNull
   @Override
-  public String getDescription() {
+  public @NotNull String getDescription() {
     return "Perl5 package";
   }
 
-  @NotNull
   @Override
-  public String getDefaultExtension() {
+  public @NotNull String getDefaultExtension() {
     return EXTENSION;
   }
 
-  @Nullable
   @Override
-  public Icon getIcon() {
+  public @Nullable Icon getIcon() {
     return PerlIcons.PM_FILE;
   }
 }

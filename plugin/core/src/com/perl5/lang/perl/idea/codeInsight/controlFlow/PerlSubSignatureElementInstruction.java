@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,8 +27,7 @@ import org.jetbrains.annotations.Nullable;
 public class PerlSubSignatureElementInstruction extends PerlMutationInstruction {
   private final int myIndex;
 
-  @Nullable
-  private final PsiElement myDefaultValue;
+  private final @Nullable PsiElement myDefaultValue;
 
   public PerlSubSignatureElementInstruction(@NotNull ControlFlowBuilder builder,
                                             @NotNull PerlVariable element,
@@ -39,15 +38,13 @@ public class PerlSubSignatureElementInstruction extends PerlMutationInstruction 
     myDefaultValue = defaultValue;
   }
 
-  @Nullable
   @Override
-  public PsiElement getLeftSide() {
+  public @Nullable PsiElement getLeftSide() {
     return getElement();
   }
 
-  @NotNull
   @Override
-  public PerlValue createValue() {
+  public @NotNull PerlValue createValue() {
     PerlValue mainValue = PerlContextType.isScalar(myElement) ?
                           PerlArrayElementValue.create(PerlValues.ARGUMENTS_VALUE, PerlScalarValue.create(myIndex)) :
                           PerlSublistValue.create(PerlValues.ARGUMENTS_VALUE, myIndex, 0);
@@ -55,9 +52,8 @@ public class PerlSubSignatureElementInstruction extends PerlMutationInstruction 
     return defaultValue.isUnknown() ? mainValue : PerlDefaultArgumentValue.create(mainValue, defaultValue, myIndex);
   }
 
-  @NotNull
   @Override
-  public String getElementPresentation() {
+  public @NotNull String getElementPresentation() {
     return "Argument " + myIndex + " " + myElement;
   }
 }

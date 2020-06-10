@@ -33,27 +33,23 @@ public class EmbeddedPerlFileType extends PerlFileType {
     super(EmbeddedPerlLanguage.INSTANCE);
   }
 
-  @NotNull
   @Override
-  public String getName() {
+  public @NotNull String getName() {
     return "Embedded Perl";
   }
 
-  @NotNull
   @Override
-  public String getDescription() {
+  public @NotNull String getDescription() {
     return "Embedded perl file";
   }
 
-  @NotNull
   @Override
-  public String getDefaultExtension() {
+  public @NotNull String getDefaultExtension() {
     return DEFAULT_EXTENSION;
   }
 
-  @Nullable
   @Override
-  public Icon getIcon() {
+  public @Nullable Icon getIcon() {
     return EmbeddedPerlIcons.EMBEDDED_PERL_FILE;
   }
 

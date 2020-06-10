@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,12 +31,9 @@ public class PerlExportDescriptor {
   public static final String ALL_SIGILS = "$@%*&";
 
   private final char mySigil;
-  @NotNull
-  private final String myImportedName;
-  @NotNull
-  private final String myRealName;
-  @NotNull
-  private final String myRealPackage;
+  private final @NotNull String myImportedName;
+  private final @NotNull String myRealName;
+  private final @NotNull String myRealPackage;
 
   private PerlExportDescriptor(@NotNull String realPackage, @NotNull String realName, @NotNull String importedName) {
     myRealPackage = realPackage;
@@ -53,23 +50,20 @@ public class PerlExportDescriptor {
       myRealName = realName;
     }
   }
-  @NotNull
-  public String getImportedName() {
+
+  public @NotNull String getImportedName() {
     return myImportedName;
   }
 
-  @NotNull
-  public String getTargetCanonicalName() {
+  public @NotNull String getTargetCanonicalName() {
     return getRealPackage() + PerlPackageUtil.NAMESPACE_SEPARATOR + getRealName();
   }
 
-  @NotNull
-  public String getRealName() {
+  public @NotNull String getRealName() {
     return myRealName;
   }
 
-  @NotNull
-  public String getRealPackage() {
+  public @NotNull String getRealPackage() {
     return myRealPackage;
   }
 
@@ -126,8 +120,7 @@ public class PerlExportDescriptor {
     return completionProcessor.result();
   }
 
-  @Nullable
-  public Icon getIcon() {
+  public @Nullable Icon getIcon() {
     if (isHash()) {
       return PerlIcons.HASH_GUTTER_ICON;
     }

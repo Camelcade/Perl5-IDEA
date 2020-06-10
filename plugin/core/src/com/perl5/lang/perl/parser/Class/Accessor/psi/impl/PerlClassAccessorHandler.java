@@ -52,9 +52,8 @@ import static com.perl5.lang.perl.parser.Class.Accessor.psi.impl.PerlClassAccess
 public abstract class PerlClassAccessorHandler extends PerlSubCallHandler<PerlClassAccessorCallData> {
   private static final Logger LOG = Logger.getInstance(PerlClassAccessorHandler.class);
 
-  @NotNull
   @Override
-  public List<? extends PerlDelegatingLightNamedElement<?>> computeLightElementsFromPsi(@NotNull PerlSubCallElement psiElement) {
+  public @NotNull List<? extends PerlDelegatingLightNamedElement<?>> computeLightElementsFromPsi(@NotNull PerlSubCallElement psiElement) {
     String packageName = PerlPackageUtil.getContextNamespaceName(psiElement);
     if (StringUtil.isEmpty(packageName)) {
       return Collections.emptyList();
@@ -87,30 +86,26 @@ public abstract class PerlClassAccessorHandler extends PerlSubCallHandler<PerlCl
     return result;
   }
 
-  @NotNull
   @Override
-  public List<? extends PerlDelegatingLightNamedElement<?>> computeLightElementsFromStubs(@NotNull PerlSubCallElement psiElement,
-                                                                                          @NotNull PerlSubCallElementStub stubElement) {
+  public @NotNull List<? extends PerlDelegatingLightNamedElement<?>> computeLightElementsFromStubs(@NotNull PerlSubCallElement psiElement,
+                                                                                                   @NotNull PerlSubCallElementStub stubElement) {
     return stubElement.getLightNamedElementsStubs().stream()
       .filter(childStub -> childStub.getStubType() == CLASS_ACCESSOR_METHOD)
       .map(childStub -> new PerlClassAccessorMethod(psiElement, (PerlSubDefinitionStub)childStub))
       .collect(Collectors.toList());
   }
 
-  @NotNull
-  private List<Function<String, String>> getNamesComputations(@NotNull PerlSubCallElement psiElement) {
+  private @NotNull List<Function<String, String>> getNamesComputations(@NotNull PerlSubCallElement psiElement) {
     if (!isFollowBestPractice(psiElement)) {
       return Collections.singletonList(PerlClassAccessorMethod.SIMPLE_COMPUTATION);
     }
     return getNamesComputationsImpl(psiElement);
   }
 
-  @NotNull
-  protected abstract List<Function<String, String>> getNamesComputationsImpl(@NotNull PerlSubCallElement psiElement);
+  protected abstract @NotNull List<Function<String, String>> getNamesComputationsImpl(@NotNull PerlSubCallElement psiElement);
 
-  @NotNull
   @Override
-  public PerlClassAccessorCallData computeCallData(@NotNull PerlSubCallElement subCallElement) {
+  public @NotNull PerlClassAccessorCallData computeCallData(@NotNull PerlSubCallElement subCallElement) {
     return new PerlClassAccessorCallData(isFollowBestPractice(subCallElement));
   }
 
@@ -153,25 +148,22 @@ public abstract class PerlClassAccessorHandler extends PerlSubCallHandler<PerlCl
   }
 
   public static class PerlClassAccessorRoHandler extends PerlClassAccessorHandler {
-    @NotNull
     @Override
-    protected List<Function<String, String>> getNamesComputationsImpl(@NotNull PerlSubCallElement psiElement) {
+    protected @NotNull List<Function<String, String>> getNamesComputationsImpl(@NotNull PerlSubCallElement psiElement) {
       return Collections.singletonList(GETTER_COMPUTATION);
     }
   }
 
   public static class PerlClassAccessorWoHandler extends PerlClassAccessorHandler {
-    @NotNull
     @Override
-    protected List<Function<String, String>> getNamesComputationsImpl(@NotNull PerlSubCallElement psiElement) {
+    protected @NotNull List<Function<String, String>> getNamesComputationsImpl(@NotNull PerlSubCallElement psiElement) {
       return Collections.singletonList(SETTER_COMPUTATION);
     }
   }
 
   public static class PerlClassAccessorRWHandler extends PerlClassAccessorHandler {
-    @NotNull
     @Override
-    protected List<Function<String, String>> getNamesComputationsImpl(@NotNull PerlSubCallElement psiElement) {
+    protected @NotNull List<Function<String, String>> getNamesComputationsImpl(@NotNull PerlSubCallElement psiElement) {
       return Arrays.asList(GETTER_COMPUTATION, SETTER_COMPUTATION);
     }
   }

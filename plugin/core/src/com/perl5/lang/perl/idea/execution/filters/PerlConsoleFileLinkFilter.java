@@ -32,19 +32,16 @@ public class PerlConsoleFileLinkFilter implements Filter {
   private static final Logger LOG = Logger.getInstance(PerlConsoleFileLinkFilter.class);
   private static final String FILE_PATH_REGEXP = "((?:(?:\\p{Alpha}:)|/:)?[0-9a-z_A-Z\\-\\\\./]+)";
   private static final Pattern DIE_PATH_PATTERN = Pattern.compile("\\bat " + FILE_PATH_REGEXP + " line (\\d+)\\.?\\b");
-  @NotNull
-  private final Project myProject;
-  @NotNull
-  private final PerlHostDataProvider myHostDataContainer;
+  private final @NotNull Project myProject;
+  private final @NotNull PerlHostDataProvider myHostDataContainer;
 
   public PerlConsoleFileLinkFilter(@NotNull Project project, @NotNull PerlHostDataProvider hostDataContainer) {
     myProject = project;
     myHostDataContainer = hostDataContainer;
   }
 
-  @Nullable
   @Override
-  public Result applyFilter(@NotNull String textLine, int endOffset) {
+  public @Nullable Result applyFilter(@NotNull String textLine, int endOffset) {
     if (StringUtil.isEmpty(textLine)) {
       return null;
     }

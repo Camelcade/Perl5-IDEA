@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,9 +38,8 @@ public class PerlMooseSuperReference extends PerlCachingReference<PsiElement> {
     super(psiElement);
   }
 
-  @NotNull
   @Override
-  protected ResolveResult[] resolveInner(boolean incompleteCode) {
+  protected @NotNull ResolveResult[] resolveInner(boolean incompleteCode) {
     // fixme not really dry with simpleresolver and superresolver. Need some generics magic
     List<ResolveResult> result = new ArrayList<>();
     PsiElement element = getElement();

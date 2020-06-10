@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,9 +36,8 @@ public abstract class PerlDerefExpressionMixin extends PsiPerlExprImpl implement
     super(node);
   }
 
-  @Nullable
   @Override
-  public PsiElement getPreviousElement(@Nullable PsiElement currentElement) {
+  public @Nullable PsiElement getPreviousElement(@Nullable PsiElement currentElement) {
     if (currentElement == null) {
       return null;
     }
@@ -51,9 +50,8 @@ public abstract class PerlDerefExpressionMixin extends PsiPerlExprImpl implement
     return currentElement;
   }
 
-  @NotNull
   @Override
-  public PerlValue computePerlValue() {
+  public @NotNull PerlValue computePerlValue() {
     return PerlValuesManager.from(getLastChild());
   }
 }

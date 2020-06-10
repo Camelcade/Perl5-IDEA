@@ -27,8 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class PerlPolyNamedElementStub<Psi extends PerlPolyNamedElement<?>> extends StubBase<Psi> {
-  @NotNull
-  private final List<StubElement<?>> myLightNamedElementsStubs;
+  private final @NotNull List<StubElement<?>> myLightNamedElementsStubs;
 
   public PerlPolyNamedElementStub(StubElement<?> parent,
                                   IStubElementType<?, ?> elementType,
@@ -37,8 +36,7 @@ public abstract class PerlPolyNamedElementStub<Psi extends PerlPolyNamedElement<
     myLightNamedElementsStubs = lightNamedElementsStubs;
   }
 
-  @NotNull
-  public List<StubElement<?>> getLightNamedElementsStubs() {
+  public @NotNull List<StubElement<?>> getLightNamedElementsStubs() {
     return myLightNamedElementsStubs;
   }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,9 +46,8 @@ public class PerlUseVarsQuickFix extends LocalQuickFixOnPsiElement {
 
   public boolean isRemoval() {return myVariablesProvider.getValue().isEmpty();}
 
-  @NotNull
   @Override
-  public String getText() {
+  public @NotNull String getText() {
     return isRemoval() ?
            PerlBundle.message("perl.remove.redundant.code") :
            PerlBundle.message("perl.quickfix.use.vars");
@@ -77,10 +76,8 @@ public class PerlUseVarsQuickFix extends LocalQuickFixOnPsiElement {
     }
   }
 
-  @Nls
-  @NotNull
   @Override
-  public String getFamilyName() {
+  public @Nls @NotNull String getFamilyName() {
     return getName();
   }
 }

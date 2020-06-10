@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,21 +42,18 @@ public class HTMLMasonHierarchyBrowser extends PerlHierarchyBrowser {
     super.prependActions(actionGroup);
   }
 
-  @Nullable
   @Override
-  protected HierarchyTreeStructure getTypesHierarchyStructure(PsiElement psiElement) {
+  protected @Nullable HierarchyTreeStructure getTypesHierarchyStructure(PsiElement psiElement) {
     return new HTMLMasonTypeHierarchyTreeStructure(psiElement);
   }
 
-  @Nullable
   @Override
-  protected HierarchyTreeStructure getSuperTypesHierarchyStructure(PsiElement psiElement) {
+  protected @Nullable HierarchyTreeStructure getSuperTypesHierarchyStructure(PsiElement psiElement) {
     return new HTMLMasonSuperTypeHierarchyStructure(psiElement);
   }
 
-  @Nullable
   @Override
-  protected HierarchyTreeStructure getSubTypesHierarchyStructure(PsiElement psiElement) {
+  protected @Nullable HierarchyTreeStructure getSubTypesHierarchyStructure(PsiElement psiElement) {
     return new HTMLMasonSubTypeHierarchyStructure(psiElement);
   }
 }

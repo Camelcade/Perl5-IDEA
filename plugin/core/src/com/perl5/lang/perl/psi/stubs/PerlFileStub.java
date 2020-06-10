@@ -53,9 +53,8 @@ public class PerlFileStub extends PsiFileStubImpl<PerlFile> implements PerlNames
     return myData.isEmpty();
   }
 
-  @NotNull
   @Override
-  public final IStubFileElementType<?> getType() {
+  public final @NotNull IStubFileElementType<?> getType() {
     return myElementType;
   }
 
@@ -63,45 +62,38 @@ public class PerlFileStub extends PsiFileStubImpl<PerlFile> implements PerlNames
     return myData;
   }
 
-  @NotNull
   @Override
-  public String getNamespaceName() {
+  public @NotNull String getNamespaceName() {
     return myData.getNamespaceName();
   }
 
-  @NotNull
   @Override
-  public PerlMroType getMroType() {
+  public @NotNull PerlMroType getMroType() {
     return myData.getMroType();
   }
 
-  @NotNull
   @Override
-  public List<String> getParentNamespacesNames() {
+  public @NotNull List<String> getParentNamespacesNames() {
     return myData.getParentNamespacesNames();
   }
 
-  @Nullable
   @Override
-  public PerlNamespaceAnnotations getAnnotations() {
+  public @Nullable PerlNamespaceAnnotations getAnnotations() {
     return myData.getAnnotations();
   }
 
-  @NotNull
   @Override
-  public List<String> getEXPORT() {
+  public @NotNull List<String> getEXPORT() {
     return myData.getEXPORT();
   }
 
-  @NotNull
   @Override
-  public List<String> getEXPORT_OK() {
+  public @NotNull List<String> getEXPORT_OK() {
     return myData.getEXPORT_OK();
   }
 
-  @NotNull
   @Override
-  public Map<String, List<String>> getEXPORT_TAGS() {
+  public @NotNull Map<String, List<String>> getEXPORT_TAGS() {
     return myData.getEXPORT_TAGS();
   }
 

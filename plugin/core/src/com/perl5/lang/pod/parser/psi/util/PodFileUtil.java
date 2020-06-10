@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,8 +50,7 @@ public class PodFileUtil {
     PerlFileTypePackage.EXTENSION
   ));
 
-  @Nullable
-  public static String getPackageName(PsiFile file) {
+  public static @Nullable String getPackageName(PsiFile file) {
     VirtualFile virtualFile = file.getVirtualFile();
     VirtualFile classRoot = PerlUtil.getFileClassRoot(file);
 
@@ -72,8 +71,7 @@ public class PodFileUtil {
    * @param podFile pod psi file
    * @return perl psi file if found
    */
-  @Nullable
-  public static PsiFile getTargetPerlFile(PsiFile podFile) {
+  public static @Nullable PsiFile getTargetPerlFile(PsiFile podFile) {
     if (podFile == null) {
       return null;
     }
@@ -105,8 +103,7 @@ public class PodFileUtil {
     return neighborPackageFile == null ? null : PsiManager.getInstance(project).findFile(neighborPackageFile);
   }
 
-  @Nullable
-  public static String getPackageNameFromVirtualFile(VirtualFile file, VirtualFile classRoot) {
+  public static @Nullable String getPackageNameFromVirtualFile(VirtualFile file, VirtualFile classRoot) {
     String relativePath = VfsUtil.getRelativePath(file, classRoot);
     if (relativePath != null) {
       return StringUtil.join(relativePath.replaceAll(PM_OR_POD_EXTENSION_PATTERN, "").split("/"), PerlPackageUtil.NAMESPACE_SEPARATOR);
@@ -120,8 +117,7 @@ public class PodFileUtil {
            PodFileType.EXTENSION;
   }
 
-  @Nullable
-  public static PsiFile getPodOrPackagePsiByDescriptor(Project project, PodLinkDescriptor descriptor) {
+  public static @Nullable PsiFile getPodOrPackagePsiByDescriptor(Project project, PodLinkDescriptor descriptor) {
     final List<PsiFile> result = new ArrayList<>();
 
     PodFileUtil.processPodFilesByDescriptor(project, descriptor, psiFile -> {

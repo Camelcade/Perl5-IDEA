@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -87,8 +87,7 @@ public interface PerlVariable extends PsiPerlExpr, PerlLexicalScopeMember, PerlV
   /**
    * @return original or braced name if it's non-single char control variable
    */
-  @NotNull
-  static String braceName(@NotNull String variableName) {
+  static @NotNull String braceName(@NotNull String variableName) {
     if (variableName.startsWith("^") && variableName.length() > 2 && variableName.charAt(1) != '{') {
       return "{" + variableName + "}";
     }
@@ -98,8 +97,7 @@ public interface PerlVariable extends PsiPerlExpr, PerlLexicalScopeMember, PerlV
   /**
    * Semantic of this method is unclear
    */
-  @Nullable
-  static String
+  static @Nullable String
   adjustName(@Nullable String originalName, boolean forceShortMain) {
     if (originalName == null || !forceShortMain || !originalName.startsWith(PerlPackageUtil.MAIN_NAMESPACE_FULL)) {
       return originalName;

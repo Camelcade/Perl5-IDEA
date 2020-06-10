@@ -55,14 +55,12 @@ public class MojoliciousLiveTemplateProcessor extends AbstractOutlineLiveTemplat
   }
 
   @Override
-  @NotNull
-  protected Language getMyLanguage() {
+  protected @NotNull Language getMyLanguage() {
     return MojoliciousLanguage.INSTANCE;
   }
 
   @Override
-  @Nullable
-  protected PsiElement getOutlineElement(PsiElement firstElement) {
+  protected @Nullable PsiElement getOutlineElement(PsiElement firstElement) {
     while (firstElement instanceof PsiWhiteSpace) {
       firstElement = firstElement.getNextSibling();
     }
@@ -71,8 +69,7 @@ public class MojoliciousLiveTemplateProcessor extends AbstractOutlineLiveTemplat
   }
 
   @Override
-  @NotNull
-  protected String getOutlineMarker() {
+  protected @NotNull String getOutlineMarker() {
     return "% ";
   }
 }

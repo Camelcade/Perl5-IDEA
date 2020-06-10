@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,15 +40,13 @@ public class PerlDoExprElementType extends IStubElementType<PerlRuntimeImportStu
     return new PsiPerlDoExprImpl(stub, this);
   }
 
-  @NotNull
   @Override
-  public PsiElement getPsiElement(@NotNull ASTNode node) {
+  public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
     return new PsiPerlDoExprImpl(node);
   }
 
-  @NotNull
   @Override
-  public PerlRuntimeImportStub createStub(@NotNull PerlDoExpr psi, StubElement parentStub) {
+  public @NotNull PerlRuntimeImportStub createStub(@NotNull PerlDoExpr psi, StubElement parentStub) {
     return new PerlRuntimeImportStubImpl(
       parentStub,
       this,
@@ -56,9 +54,8 @@ public class PerlDoExprElementType extends IStubElementType<PerlRuntimeImportStu
     );
   }
 
-  @NotNull
   @Override
-  public String getExternalId() {
+  public @NotNull String getExternalId() {
     return "perl." + super.toString();
   }
 
@@ -72,9 +69,8 @@ public class PerlDoExprElementType extends IStubElementType<PerlRuntimeImportStu
     dataStream.writeName(importPath);
   }
 
-  @NotNull
   @Override
-  public PerlRuntimeImportStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
+  public @NotNull PerlRuntimeImportStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
     String importPath = PerlStubSerializationUtil.readString(dataStream);
     if (StringUtil.isEmpty(importPath)) {
       importPath = null;

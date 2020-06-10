@@ -40,7 +40,7 @@ public class PerlStringContentCompletionProvider extends PerlCompletionProvider 
   @Override
   protected void addCompletions(@NotNull CompletionParameters parameters,
                                 @NotNull ProcessingContext context,
-                                @NotNull final CompletionResultSet result) {
+                                final @NotNull CompletionResultSet result) {
     PsiElement element = parameters.getPosition();
     PsiElement parent = element.getParent();
 

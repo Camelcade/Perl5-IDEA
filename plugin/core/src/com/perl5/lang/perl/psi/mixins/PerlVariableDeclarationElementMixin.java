@@ -57,15 +57,13 @@ public class PerlVariableDeclarationElementMixin extends PerlStubBasedPsiElement
     super(stub, nodeType);
   }
 
-  @NotNull
   @Override
-  public PerlVariable getVariable() {
+  public @NotNull PerlVariable getVariable() {
     return Objects.requireNonNull(findChildByClass(PerlVariable.class), () -> "Unable to find variable in: " + getText());
   }
 
-  @Nullable
   @Override
-  public PsiElement getNameIdentifier() {
+  public @Nullable PsiElement getNameIdentifier() {
     return getVariable().getVariableNameElement();
   }
 
@@ -99,15 +97,13 @@ public class PerlVariableDeclarationElementMixin extends PerlStubBasedPsiElement
            : nameIdentifier.getTextOffset();
   }
 
-  @Nullable
   @Override
-  public String getExplicitNamespaceName() {
+  public @Nullable String getExplicitNamespaceName() {
     return getVariable().getExplicitNamespaceName();
   }
 
-  @NotNull
   @Override
-  public PerlValue getDeclaredValue() {
+  public @NotNull PerlValue getDeclaredValue() {
     PerlValue valueFromAnnotations = PerlVariableDeclarationElement.super.getDeclaredValue();
     if (!valueFromAnnotations.isUnknown()) {
       return valueFromAnnotations;
@@ -115,8 +111,7 @@ public class PerlVariableDeclarationElementMixin extends PerlStubBasedPsiElement
     return getPsiDeclaredValue();
   }
 
-  @NotNull
-  public PerlValue getPsiDeclaredValue() {
+  public @NotNull PerlValue getPsiDeclaredValue() {
     PerlVariableDeclarationStub stub = getGreenStub();
     if (stub != null) {
       return stub.getDeclaredValue();
@@ -126,15 +121,13 @@ public class PerlVariableDeclarationElementMixin extends PerlStubBasedPsiElement
            PerlScalarValue.create(declaration.getDeclarationType());
   }
 
-  @Nullable
-  private PerlVariableDeclarationExpr getPerlDeclaration() {
+  private @Nullable PerlVariableDeclarationExpr getPerlDeclaration() {
     return PsiTreeUtil.getParentOfType(this, PerlVariableDeclarationExpr.class);
   }
 
 
-  @NotNull
   @Override
-  public String getNamespaceName() {
+  public @NotNull String getNamespaceName() {
     PerlVariableDeclarationStub stub = getGreenStub();
     if (stub != null) {
       return stub.getNamespaceName();
@@ -155,9 +148,8 @@ public class PerlVariableDeclarationElementMixin extends PerlStubBasedPsiElement
     return getVariable().getActualType();
   }
 
-  @NotNull
   @Override
-  public SearchScope getUseScope() {
+  public @NotNull SearchScope getUseScope() {
     if (isLexicalDeclaration()) {
       PerlLexicalScope lexicalScope = getVariable().getLexicalScope();
       if (lexicalScope != null) {
@@ -199,16 +191,14 @@ public class PerlVariableDeclarationElementMixin extends PerlStubBasedPsiElement
   }
 
 
-  @Nullable
   @Override
-  public Icon getIcon(int flags) {
+  public @Nullable Icon getIcon(int flags) {
     Icon iconByType = getIconByType(getActualType());
     return iconByType == null ? super.getIcon(flags) : iconByType;
   }
 
-  @Nullable
   @Override
-  public PerlVariableAnnotations getVariableAnnotations() {
+  public @Nullable PerlVariableAnnotations getVariableAnnotations() {
     PerlVariableAnnotations variableAnnotations;
 
     PerlVariableDeclarationStub stub = getGreenStub();
@@ -227,9 +217,8 @@ public class PerlVariableDeclarationElementMixin extends PerlStubBasedPsiElement
     return getExternalVariableAnnotations();
   }
 
-  @Nullable
   @Override
-  public PerlVariableAnnotations getLocalVariableAnnotations() {
+  public @Nullable PerlVariableAnnotations getLocalVariableAnnotations() {
     List<PerlAnnotation> perlAnnotations = PerlPsiUtil.collectAnnotations(this);
     if (perlAnnotations.isEmpty()) {
       perlAnnotations = PerlPsiUtil.collectAnnotations(getPerlDeclaration());
@@ -237,9 +226,8 @@ public class PerlVariableDeclarationElementMixin extends PerlStubBasedPsiElement
     return PerlVariableAnnotations.createFromAnnotationsList(perlAnnotations);
   }
 
-  @Nullable
   @Override
-  public PerlVariableAnnotations getExternalVariableAnnotations() {
+  public @Nullable PerlVariableAnnotations getExternalVariableAnnotations() {
     // fixme NYI
     return null;
   }

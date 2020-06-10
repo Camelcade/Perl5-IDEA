@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,13 +56,11 @@ public abstract class PodSurrounder implements Surrounder {
   /**
    * @return a pod formatter description - bold, italic, etc
    */
-  @NotNull
-  protected abstract String getFormatterDescription();
+  protected abstract @NotNull String getFormatterDescription();
 
 
-  @Nullable
   @Override
-  public TextRange surroundElements(@NotNull Project project, @NotNull Editor editor, @NotNull PsiElement[] elements)
+  public @Nullable TextRange surroundElements(@NotNull Project project, @NotNull Editor editor, @NotNull PsiElement[] elements)
     throws IncorrectOperationException {
     SelectionModel selectionModel = editor.getSelectionModel();
     if (!selectionModel.hasSelection()) {
@@ -127,8 +125,7 @@ public abstract class PodSurrounder implements Surrounder {
   /**
    * @return make pre-insertion content adjustment, e.g. adding tailing pipe for a link
    */
-  @NotNull
-  protected String adjustContent(@NotNull String originalContent) {
+  protected @NotNull String adjustContent(@NotNull String originalContent) {
     return originalContent.trim();
   }
 }

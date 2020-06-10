@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -76,8 +76,7 @@ public class PerlFileTypeService implements Disposable {
     return ServiceManager.getService(PerlFileTypeService.class);
   }
 
-  @Nullable
-  public static FileType getFileType(@Nullable VirtualFile virtualFile) {
+  public static @Nullable FileType getFileType(@Nullable VirtualFile virtualFile) {
     VirtualFile fileForAncestryCheck = virtualFile instanceof FakeVirtualFile ? virtualFile.getParent() : virtualFile;
     return getInstance().myDirectoryIndex.getInfoForFile(fileForAncestryCheck).apply(virtualFile);
   }

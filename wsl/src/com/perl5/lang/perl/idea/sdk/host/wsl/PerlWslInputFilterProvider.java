@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,16 +35,15 @@ public class PerlWslInputFilterProvider implements ConsoleInputFilterProvider {
 
   private static final InputFilter[] EMPTY_ARRAY = new InputFilter[0];
 
-  @NotNull
   @Override
-  public InputFilter[] getDefaultFilters(@NotNull Project project) {
+  public @NotNull InputFilter[] getDefaultFilters(@NotNull Project project) {
     return PerlWslData.from(PerlProjectManager.getSdk(project)) == null ? EMPTY_ARRAY : new InputFilter[]{new WslFilter()};
   }
 
   private static class WslFilter implements InputFilter {
-    @Nullable
     @Override
-    public List<Pair<String, ConsoleViewContentType>> applyFilter(@NotNull String text, @NotNull ConsoleViewContentType contentType) {
+    public @Nullable List<Pair<String, ConsoleViewContentType>> applyFilter(@NotNull String text,
+                                                                            @NotNull ConsoleViewContentType contentType) {
       int oscIndex;
 
       while ((oscIndex = text.indexOf(OSC)) > -1) {
@@ -60,7 +59,6 @@ public class PerlWslInputFilterProvider implements ConsoleInputFilterProvider {
           break;
         }
       }
-      ;
       return Collections.singletonList(Pair.create(text, contentType));
     }
   }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -396,8 +396,7 @@ public class PerlDebugThread extends Thread {
     return builder.excludeFieldsWithModifiers(Modifier.TRANSIENT).create();
   }
 
-  @Nullable
-  public PerlDebuggingTransactionHandler getTransactionHandler(int transactionId) {
+  public @Nullable PerlDebuggingTransactionHandler getTransactionHandler(int transactionId) {
     return transactionsMap.remove(transactionId);
   }
 
@@ -409,8 +408,7 @@ public class PerlDebugThread extends Thread {
     return myEvalsListPanel;
   }
 
-  @Nullable
-  public VirtualFile loadRemoteSource(String filePath) {
+  public @Nullable VirtualFile loadRemoteSource(String filePath) {
     if (DEV_MODE) {
       LOG.debug("Loading file " + filePath);
     }

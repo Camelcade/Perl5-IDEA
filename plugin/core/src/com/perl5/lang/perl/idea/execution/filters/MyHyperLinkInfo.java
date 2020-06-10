@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,8 +26,7 @@ import org.jetbrains.annotations.Nullable;
 import java.io.File;
 
 class MyHyperLinkInfo extends FileHyperlinkInfoBase {
-  @NotNull
-  private final String myFilePath;
+  private final @NotNull String myFilePath;
 
   private final int myLine; // testing purposes
 
@@ -37,9 +36,8 @@ class MyHyperLinkInfo extends FileHyperlinkInfoBase {
     myLine = documentLine;
   }
 
-  @Nullable
   @Override
-  protected VirtualFile getVirtualFile() {
+  protected @Nullable VirtualFile getVirtualFile() {
     return VfsUtil.findFileByIoFile(new File(myFilePath), false);
   }
 

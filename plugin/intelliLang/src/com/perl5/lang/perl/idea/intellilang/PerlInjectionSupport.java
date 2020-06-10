@@ -24,9 +24,8 @@ import org.jetbrains.annotations.NotNull;
 public class PerlInjectionSupport extends AbstractLanguageInjectionSupport {
   private static final Class<?>[] PATTERNS_CLASSES = new Class[]{PerlInjectionPatterns.class};
 
-  @NotNull
   @Override
-  public String getId() {
+  public @NotNull String getId() {
     return "perl5";
   }
 
@@ -40,9 +39,8 @@ public class PerlInjectionSupport extends AbstractLanguageInjectionSupport {
     return true;
   }
 
-  @NotNull
   @Override
-  public Class<?>[] getPatternClasses() {
+  public @NotNull Class<?>[] getPatternClasses() {
     return PATTERNS_CLASSES;
   }
 }

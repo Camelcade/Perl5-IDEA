@@ -26,8 +26,7 @@ import org.jetbrains.annotations.Nullable;
  * Represents match regexp and qr regexp
  */
 public interface PerlSimpleRegex extends PerlRegexExpression {
-  @Nullable
-  default PsiPerlPerlRegex getRegex() {
+  default @Nullable PsiPerlPerlRegex getRegex() {
     PsiElement[] children = getChildren();
     if (children.length == 0) {
       return null;

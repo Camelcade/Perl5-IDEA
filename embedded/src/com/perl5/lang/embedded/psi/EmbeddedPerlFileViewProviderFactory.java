@@ -25,11 +25,10 @@ import org.jetbrains.annotations.NotNull;
 
 public class EmbeddedPerlFileViewProviderFactory implements FileViewProviderFactory {
   @Override
-  @NotNull
-  public FileViewProvider createFileViewProvider(@NotNull VirtualFile file,
-                                                 com.intellij.lang.Language language,
-                                                 @NotNull PsiManager manager,
-                                                 boolean eventSystemEnabled) {
+  public @NotNull FileViewProvider createFileViewProvider(@NotNull VirtualFile file,
+                                                          com.intellij.lang.Language language,
+                                                          @NotNull PsiManager manager,
+                                                          boolean eventSystemEnabled) {
     return new EmbeddedPerlFileViewProvider(manager, file, eventSystemEnabled);
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -72,8 +72,7 @@ public class MojoProjectTest extends PerlPlatformTestCase {
     assertNotNull(mainContentRoot.findChild("my_lite_app.pl"));
   }
 
-  @NotNull
-  private MojoProjectManager refreshAndRescanForProjects() {
+  private @NotNull MojoProjectManager refreshAndRescanForProjects() {
     getMainContentRoot().refresh(false, true);
     PlatformTestUtil.dispatchAllInvocationEventsInIdeEventQueue();
     MojoProjectManager mojoProjectManager = MojoProjectManager.getInstance(getProject());

@@ -50,9 +50,8 @@ public final class PerlHandlerBean extends AbstractExtensionPointBean
     }
   });
 
-  @NotNull
   @Override
-  public AbstractPerlHandler<?, ?> getInstance() {
+  public @NotNull AbstractPerlHandler<?, ?> getInstance() {
     return myHandler.getValue();
   }
 

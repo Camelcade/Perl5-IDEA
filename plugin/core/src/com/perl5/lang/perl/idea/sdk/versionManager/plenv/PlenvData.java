@@ -42,9 +42,8 @@ class PlenvData extends PerlRealVersionManagerData<PlenvData, PlenvHandler> {
     super(versionManagerPath, distributionId, handler);
   }
 
-  @NotNull
   @Override
-  public PerlCommandLine patchCommandLine(@NotNull PerlCommandLine originalCommandLine) {
+  public @NotNull PerlCommandLine patchCommandLine(@NotNull PerlCommandLine originalCommandLine) {
     originalCommandLine.setExePath(new File(originalCommandLine.getExePath()).getName());
     return originalCommandLine.prependLineWith(getVersionManagerPath(), PLENV_EXEC).withEnvironment(PLENV_VERSION, getDistributionId());
   }
@@ -58,15 +57,13 @@ class PlenvData extends PerlRealVersionManagerData<PlenvData, PlenvHandler> {
     plenvAdapter.runInstallInConsole(project, PACKAGE_NAME, PLENV_INSTALL_CPANM, getDistributionId());
   }
 
-  @NotNull
   @Override
-  protected PlenvData self() {
+  protected @NotNull PlenvData self() {
     return this;
   }
 
   @Contract("null->null")
-  @Nullable
-  public static PlenvData from(@Nullable Sdk sdk) {
+  public static @Nullable PlenvData from(@Nullable Sdk sdk) {
     return ObjectUtils.tryCast(PerlVersionManagerData.from(sdk), PlenvData.class);
   }
 }

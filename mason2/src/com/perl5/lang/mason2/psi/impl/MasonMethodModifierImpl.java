@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,14 +38,12 @@ public class MasonMethodModifierImpl extends PerlMooseMethodModifierImpl impleme
   }
 
 
-  @Nullable
   @Override
-  public PsiReference[] getReferences(PsiElement element) {
+  public @Nullable PsiReference[] getReferences(PsiElement element) {
     return null;
   }
 
-  @NotNull
-  protected List<PerlVariableDeclarationElement> buildImplicitVariables() {
+  protected @NotNull List<PerlVariableDeclarationElement> buildImplicitVariables() {
     List<PerlVariableDeclarationElement> newImplicitVariables = new ArrayList<>();
     if (isValid()) {
       newImplicitVariables.add(PerlImplicitVariableDeclaration.createInvocant(this));
@@ -54,9 +52,8 @@ public class MasonMethodModifierImpl extends PerlMooseMethodModifierImpl impleme
   }
 
 
-  @NotNull
   @Override
-  public List<PerlVariableDeclarationElement> getImplicitVariables() {
+  public @NotNull List<PerlVariableDeclarationElement> getImplicitVariables() {
     if (myImplicitVariables == null) {
       myImplicitVariables = buildImplicitVariables();
     }

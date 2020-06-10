@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,9 +42,8 @@ public class HTMLMasonTypeHierarchyProvider extends PerlTypeHierarchyProvider {
     return element;
   }
 
-  @NotNull
   @Override
-  public HierarchyBrowser createHierarchyBrowser(@NotNull PsiElement target) {
+  public @NotNull HierarchyBrowser createHierarchyBrowser(@NotNull PsiElement target) {
     return new HTMLMasonHierarchyBrowser(target);
   }
 

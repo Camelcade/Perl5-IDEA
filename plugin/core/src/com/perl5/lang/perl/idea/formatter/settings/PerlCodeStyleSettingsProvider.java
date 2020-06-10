@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,21 +28,18 @@ import org.jetbrains.annotations.Nullable;
 
 public class PerlCodeStyleSettingsProvider extends CodeStyleSettingsProvider {
 
-  @NotNull
   @Override
-  public CodeStyleConfigurable createConfigurable(@NotNull CodeStyleSettings settings, @NotNull CodeStyleSettings modelSettings) {
+  public @NotNull CodeStyleConfigurable createConfigurable(@NotNull CodeStyleSettings settings, @NotNull CodeStyleSettings modelSettings) {
     return new PerlCodeStyleConfigurable(settings, modelSettings);
   }
 
-  @Nullable
   @Override
-  public CustomCodeStyleSettings createCustomSettings(CodeStyleSettings settings) {
+  public @Nullable CustomCodeStyleSettings createCustomSettings(CodeStyleSettings settings) {
     return new PerlCodeStyleSettings(settings);
   }
 
-  @Nullable
   @Override
-  public Language getLanguage() {
+  public @Nullable Language getLanguage() {
     return PerlLanguage.INSTANCE;
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,9 +32,8 @@ import org.jetbrains.annotations.Nullable;
 
 
 public class PerlStringNameIdentifierInplaceRenameHandler extends VariableInplaceRenameHandler {
-  @Nullable
   @Override
-  protected VariableInplaceRenamer createRenamer(@NotNull PsiElement elementToRename, @NotNull Editor editor) {
+  protected @Nullable VariableInplaceRenamer createRenamer(@NotNull PsiElement elementToRename, @NotNull Editor editor) {
     return new PerlVariableInplaceRenamer((PsiNamedElement)elementToRename, editor);
   }
 

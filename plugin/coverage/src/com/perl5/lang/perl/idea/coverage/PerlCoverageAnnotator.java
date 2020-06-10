@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,20 +29,17 @@ public class PerlCoverageAnnotator extends SimpleCoverageAnnotator {
     super(project);
   }
 
-  @NotNull
-  public static PerlCoverageAnnotator getInstance(@NotNull Project project) {
+  public static @NotNull PerlCoverageAnnotator getInstance(@NotNull Project project) {
     return ServiceManager.getService(project, PerlCoverageAnnotator.class);
   }
 
-  @Nullable
   @Override
-  protected FileCoverageInfo fillInfoForUncoveredFile(@NotNull File file) {
+  protected @Nullable FileCoverageInfo fillInfoForUncoveredFile(@NotNull File file) {
     return new FileCoverageInfo();
   }
 
-  @Nullable
   @Override
-  protected String getLinesCoverageInformationString(@NotNull FileCoverageInfo info) {
+  protected @Nullable String getLinesCoverageInformationString(@NotNull FileCoverageInfo info) {
     if (info.totalLineCount == 0) {
       return null;
     }
@@ -52,9 +49,8 @@ public class PerlCoverageAnnotator extends SimpleCoverageAnnotator {
     return (int)((double)info.coveredLineCount * 100. / (double)info.totalLineCount) + "% lines covered";
   }
 
-  @Nullable
   @Override
-  protected String getFilesCoverageInformationString(@NotNull DirCoverageInfo info) {
+  protected @Nullable String getFilesCoverageInformationString(@NotNull DirCoverageInfo info) {
     if (info.totalFilesCount == 0 || info.coveredFilesCount == 0) {
       return null;
     }

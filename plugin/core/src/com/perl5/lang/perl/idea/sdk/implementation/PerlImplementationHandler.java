@@ -54,19 +54,16 @@ public abstract class PerlImplementationHandler<Data extends PerlImplementationD
    * @implSpec handler is free to adjust sdk with necessary data
    */
   @Contract("null, _, _ -> null; _, null, _ -> null; _, _, null -> null")
-  @Nullable
-  protected abstract Data doCreateData(@Nullable String interpreterPath,
-                                       @Nullable PerlHostData<?, ?> hostData,
-                                       @Nullable PerlVersionManagerData<?, ?> versionManagerData);
+  protected abstract @Nullable Data doCreateData(@Nullable String interpreterPath,
+                                                 @Nullable PerlHostData<?, ?> hostData,
+                                                 @Nullable PerlVersionManagerData<?, ?> versionManagerData);
 
-  @NotNull
   @Override
-  protected final String getTagName() {
+  protected final @NotNull String getTagName() {
     return TAG_NAME;
   }
 
-  @NotNull
-  public static List<? extends PerlImplementationHandler<?, ?>> all() {
+  public static @NotNull List<? extends PerlImplementationHandler<?, ?>> all() {
     return EP.getExtensionsList();
   }
 
@@ -75,14 +72,12 @@ public abstract class PerlImplementationHandler<Data extends PerlImplementationD
   }
 
   @Contract("null->null")
-  @Nullable
-  static PerlImplementationHandler<?, ?> from(@Nullable Sdk sdk) {
+  static @Nullable PerlImplementationHandler<?, ?> from(@Nullable Sdk sdk) {
     PerlImplementationData<?, ?> perlImplementationData = PerlImplementationData.from(sdk);
     return perlImplementationData == null ? null : perlImplementationData.getHandler();
   }
 
-  @NotNull
-  public static Stream<? extends PerlImplementationHandler<?, ?>> stream() {
+  public static @NotNull Stream<? extends PerlImplementationHandler<?, ?>> stream() {
     return all().stream();
   }
 
@@ -96,10 +91,9 @@ public abstract class PerlImplementationHandler<Data extends PerlImplementationD
    * @implSpec handler is free to adjust sdk with necessary data. Current implementation just uses a default handler
    */
   @Contract("null, _, _ -> null; _, null, _ -> null; _, _, null -> null")
-  @Nullable
-  public static PerlImplementationData<?, ?> createData(@Nullable String interpreterPath,
-                                                        @Nullable PerlHostData<?, ?> hostData,
-                                                        @Nullable PerlVersionManagerData<?, ?> versionManagerData) {
+  public static @Nullable PerlImplementationData<?, ?> createData(@Nullable String interpreterPath,
+                                                                  @Nullable PerlHostData<?, ?> hostData,
+                                                                  @Nullable PerlVersionManagerData<?, ?> versionManagerData) {
     return getDefaultHandler().doCreateData(interpreterPath, hostData, versionManagerData);
   }
 
@@ -108,8 +102,7 @@ public abstract class PerlImplementationHandler<Data extends PerlImplementationD
    *
    * @return data read or new empty data created by defaultHandler
    */
-  @NotNull
-  public static PerlImplementationData<?, ?> load(@NotNull Element parentElement) {
+  public static @NotNull PerlImplementationData<?, ?> load(@NotNull Element parentElement) {
     Element element = parentElement.getChild(TAG_NAME);
     if (element != null) {
       PerlImplementationHandler<?, ?> handler = EP.findSingle(element.getAttributeValue(ID_ATTRIBUTE));
@@ -123,8 +116,7 @@ public abstract class PerlImplementationHandler<Data extends PerlImplementationD
     return getDefaultHandler().createData();
   }
 
-  @NotNull
-  public static PerlImplementationHandler<?, ?> getDefaultHandler() {
+  public static @NotNull PerlImplementationHandler<?, ?> getDefaultHandler() {
     return Objects.requireNonNull(EP.findSingle("porters"), "Perl porters implementation handler must always present");
   }
 }

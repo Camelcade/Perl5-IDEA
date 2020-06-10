@@ -39,8 +39,7 @@ public class MasonFilterDefinition extends MasonMethodDefinition {
   }
 
   @Override
-  @NotNull
-  protected List<PerlVariableDeclarationElement> buildImplicitVariables() {
+  protected @NotNull List<PerlVariableDeclarationElement> buildImplicitVariables() {
     List<PerlVariableDeclarationElement> newImplicitVariables = new ArrayList<>(super.buildImplicitVariables());
     newImplicitVariables.add(PerlImplicitVariableDeclaration.createLexical(this, YIELD_VARIABLE_NAME));
     return newImplicitVariables;

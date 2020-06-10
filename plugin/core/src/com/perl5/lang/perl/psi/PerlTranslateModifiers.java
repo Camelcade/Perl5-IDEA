@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,8 +39,7 @@ public class PerlTranslateModifiers {
   private static final int R_MODIFIER = 3;
   private static final PerlTranslateModifiers EMPTY_MODIFIERS = new PerlTranslateModifiers();
 
-  @NotNull
-  private final BitSet myModifiers = new BitSet();
+  private final @NotNull BitSet myModifiers = new BitSet();
 
   private PerlTranslateModifiers() {
   }
@@ -96,9 +95,8 @@ public class PerlTranslateModifiers {
    * @return a model of transliterate modifiers from {@code element} or null if {@code element} is not a {@link PerlElementTypesGenerated#TR_MODIFIERS}
    * If passed {@code element} is null, returns {@link #EMPTY_MODIFIERS}
    */
-  @Nullable
   @Contract("null -> null")
-  public static PerlTranslateModifiers create(@Nullable PsiElement element) {
+  public static @Nullable PerlTranslateModifiers create(@Nullable PsiElement element) {
     if (element == null) {
       return EMPTY_MODIFIERS;
     }

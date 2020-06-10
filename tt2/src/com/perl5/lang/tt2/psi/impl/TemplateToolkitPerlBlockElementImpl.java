@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,17 +37,15 @@ public class TemplateToolkitPerlBlockElementImpl extends TemplateToolkitComposit
     super(node);
   }
 
-  @NotNull
-  protected List<PerlVariableDeclarationElement> buildImplicitVariables() {
+  protected @NotNull List<PerlVariableDeclarationElement> buildImplicitVariables() {
     List<PerlVariableDeclarationElement> variables = new ArrayList<>();
     variables.add(PerlImplicitVariableDeclaration.createLexical(this, "$context", "Template::Context"));
     variables.add(PerlImplicitVariableDeclaration.createLexical(this, "$stash", "Template::Stash"));
     return variables;
   }
 
-  @NotNull
   @Override
-  public List<PerlVariableDeclarationElement> getImplicitVariables() {
+  public @NotNull List<PerlVariableDeclarationElement> getImplicitVariables() {
     if (myImplicitVariables == null) {
       myImplicitVariables = buildImplicitVariables();
     }

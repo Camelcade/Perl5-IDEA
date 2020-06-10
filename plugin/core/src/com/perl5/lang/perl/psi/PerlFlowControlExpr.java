@@ -38,8 +38,7 @@ import static com.perl5.lang.perl.psi.PerlBlock.LOOPS_CONTAINERS;
  * We suppose the proper control flow of next/last/redo
  */
 public interface PerlFlowControlExpr extends PsiPerlExpr {
-  @Nullable
-  default PsiPerlLabelExpr getLabelExpr() {
+  default @Nullable PsiPerlLabelExpr getLabelExpr() {
     return ObjectUtils.tryCast(getExpr(), PsiPerlLabelExpr.class);
   }
 
@@ -49,8 +48,7 @@ public interface PerlFlowControlExpr extends PsiPerlExpr {
    * but this logic more like real life
    * We also have labels reference resolve logic, which duplicates too. Need to unite.
    */
-  @NotNull
-  default PsiElement getTargetScope() {
+  default @NotNull PsiElement getTargetScope() {
     PsiPerlLabelExpr labelExpr = getLabelExpr();
     String labelName = labelExpr == null ? null : labelExpr.getText();
 
@@ -103,8 +101,7 @@ public interface PerlFlowControlExpr extends PsiPerlExpr {
   /**
    * @return wrapping stement for {@code element} if it has for modifier
    */
-  @Nullable
-  static PsiPerlStatementImpl getWrappingStatementWithForModifier(@NotNull PsiElement element) {
+  static @Nullable PsiPerlStatementImpl getWrappingStatementWithForModifier(@NotNull PsiElement element) {
     PsiPerlStatementImpl containingStatementWithForModifier = PsiTreeUtil.getParentOfType(element, PsiPerlStatementImpl.class);
     if (containingStatementWithForModifier != null &&
         ObjectUtils.tryCast(containingStatementWithForModifier.getModifier(), PsiPerlForStatementModifier.class) == null) {

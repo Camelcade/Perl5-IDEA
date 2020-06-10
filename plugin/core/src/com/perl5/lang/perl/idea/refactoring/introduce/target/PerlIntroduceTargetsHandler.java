@@ -79,29 +79,25 @@ public abstract class PerlIntroduceTargetsHandler {
            (!(element.getParent() instanceof PerlHeredocElementImpl) || isTargetableHeredocElement(element.getParent()));
   }
 
-  @NotNull
-  protected List<PerlIntroduceTarget> computeTargetsAtCaret(@NotNull PsiElement element, int caretOffset) {
+  protected @NotNull List<PerlIntroduceTarget> computeTargetsAtCaret(@NotNull PsiElement element, int caretOffset) {
     return isApplicable(element) ? Collections.singletonList(PerlIntroduceTarget.create(element)) : Collections.emptyList();
   }
 
-  @NotNull
-  protected List<PerlIntroduceTarget> computeTargetsFromSelection(@NotNull PsiElement element, @NotNull TextRange selectionRange) {
+  protected @NotNull List<PerlIntroduceTarget> computeTargetsFromSelection(@NotNull PsiElement element, @NotNull TextRange selectionRange) {
     return isApplicable(element) ? Collections.singletonList(PerlIntroduceTarget.create(element)) : Collections.emptyList();
   }
 
   /**
    * Generates a text for decaration of variable with {@code variableName} expression representing by {@code target}
    */
-  @NotNull
-  protected String createDeclarationStatementText(@NotNull String variableName, @NotNull PerlIntroduceTarget target) {
+  protected @NotNull String createDeclarationStatementText(@NotNull String variableName, @NotNull PerlIntroduceTarget target) {
     return "my " + doComputeVariableType(target).getSigil() + variableName + " = " + createTargetExpressionText(target) + ";";
   }
 
   /**
    * @return a sigil for variable, that can represent a {@code target}
    */
-  @NotNull
-  protected PerlVariableType doComputeVariableType(@NotNull PerlIntroduceTarget target) {
+  protected @NotNull PerlVariableType doComputeVariableType(@NotNull PerlIntroduceTarget target) {
     PsiElement targetPlace = target.getPlace();
     IElementType targetType = PsiUtilCore.getElementType(targetPlace);
     if (ARRAY_CONTEXT_TOKENSET.contains(targetType)) {
@@ -114,8 +110,7 @@ public abstract class PerlIntroduceTargetsHandler {
     return PerlVariableType.SCALAR;
   }
 
-  @Nullable
-  public static PerlVariableType computeVariableType(@NotNull PerlIntroduceTarget target) {
+  public static @Nullable PerlVariableType computeVariableType(@NotNull PerlIntroduceTarget target) {
     PsiElement targetPlace = target.getPlace();
     if (targetPlace == null) {
       LOG.error("Unable to get target place for " + target);
@@ -127,8 +122,7 @@ public abstract class PerlIntroduceTargetsHandler {
   /**
    * @return text of expression on the right side of declaration statement
    */
-  @NotNull
-  protected String createTargetExpressionText(@NotNull PerlIntroduceTarget target) {
+  protected @NotNull String createTargetExpressionText(@NotNull PerlIntroduceTarget target) {
     PsiElement targetElement = target.getPlace();
     if (targetElement == null) {
       return reportEmptyPlace();
@@ -169,8 +163,7 @@ public abstract class PerlIntroduceTargetsHandler {
    * @return list of inserted elements
    * @apiNote all occurrences should be from the same element. This api implemented for multi-replacements
    */
-  @NotNull
-  protected List<PsiElement> replaceTarget(@NotNull List<PerlIntroduceTarget> occurrences, @NotNull PsiElement replacement) {
+  protected @NotNull List<PsiElement> replaceTarget(@NotNull List<PerlIntroduceTarget> occurrences, @NotNull PsiElement replacement) {
     if (occurrences.size() > 1) {
       LOG.error(
         "Unexpected multiple occurrences: " + occurrences.stream().map(PerlIntroduceTarget::toString).collect(Collectors.joining("; ")));
@@ -199,8 +192,7 @@ public abstract class PerlIntroduceTargetsHandler {
     return Collections.emptyList();
   }
 
-  @NotNull
-  static String reportEmptyPlace() {
+  static @NotNull String reportEmptyPlace() {
     LOG.error("Invalid target");
     return "'Something went wrong, please, report to developers with source sample'";
   }
@@ -228,8 +220,7 @@ public abstract class PerlIntroduceTargetsHandler {
   /**
    * @return List of possible introduce targets for {@code file} opened in {@code editor}
    */
-  @NotNull
-  public static List<PerlIntroduceTarget> getIntroduceTargets(@NotNull Editor editor, @NotNull PsiFile file) {
+  public static @NotNull List<PerlIntroduceTarget> getIntroduceTargets(@NotNull Editor editor, @NotNull PsiFile file) {
     if (editor.getSelectionModel().hasSelection()) {
       return computeIntroduceTargetsFromSelection(editor, file);
     }
@@ -284,8 +275,7 @@ public abstract class PerlIntroduceTargetsHandler {
   /**
    * Computes a target expression element
    */
-  @Nullable
-  public static PsiElement createTargetExpressionElement(@NotNull PerlIntroduceTarget target) {
+  public static @Nullable PsiElement createTargetExpressionElement(@NotNull PerlIntroduceTarget target) {
     PsiElement targetElement = target.getPlace();
     PerlIntroduceTargetsHandler handler = getHandler(targetElement);
     if (handler == null) {
@@ -342,8 +332,7 @@ public abstract class PerlIntroduceTargetsHandler {
            ((PerlHeredocElementImpl)element).getHeredocOpener() != null;
   }
 
-  @NotNull
-  private static List<PerlIntroduceTarget> computeIntroduceTargetsFromSelection(@NotNull Editor editor, @NotNull PsiFile file) {
+  private static @NotNull List<PerlIntroduceTarget> computeIntroduceTargetsFromSelection(@NotNull Editor editor, @NotNull PsiFile file) {
     SelectionModel selectionModel = editor.getSelectionModel();
     int selectionStart = selectionModel.getSelectionStart();
     int selectionEnd = selectionModel.getSelectionEnd();
@@ -377,10 +366,9 @@ public abstract class PerlIntroduceTargetsHandler {
   /**
    * @return a range of psi elements representing declaration of variable with {@code name} assigned with {@code target} or null if something went wrong
    */
-  @Nullable
-  public static Pair<PsiElement, PsiElement> createTargetDeclarationStatement(@NotNull Project project,
-                                                                              @NotNull PerlIntroduceTarget target,
-                                                                              @NotNull String variableName) {
+  public static @Nullable Pair<PsiElement, PsiElement> createTargetDeclarationStatement(@NotNull Project project,
+                                                                                        @NotNull PerlIntroduceTarget target,
+                                                                                        @NotNull String variableName) {
     String targetExpressionText =
       getHandler(Objects.requireNonNull(target.getPlace())).createDeclarationStatementText(variableName, target);
     PsiElement file = PerlElementFactory.createFile(project, targetExpressionText);
@@ -406,8 +394,8 @@ public abstract class PerlIntroduceTargetsHandler {
    * @return list of inserted elements
    * @apiNote all occurrences should be from the same element. This api implemented for multi-replacements
    */
-  @NotNull
-  public static List<PsiElement> replaceOccurences(@NotNull List<PerlIntroduceTarget> occurrences, @NotNull PsiElement replacement) {
+  public static @NotNull List<PsiElement> replaceOccurences(@NotNull List<PerlIntroduceTarget> occurrences,
+                                                            @NotNull PsiElement replacement) {
     if (occurrences.isEmpty()) {
       LOG.warn("Empty occurrences passed to replacement");
     }

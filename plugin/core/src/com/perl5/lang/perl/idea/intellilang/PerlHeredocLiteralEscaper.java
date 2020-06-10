@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,13 +40,12 @@ public class PerlHeredocLiteralEscaper extends LiteralTextEscaper<PerlHeredocEle
   }
 
   @Override
-  public int getOffsetInHost(int offsetInDecoded, @NotNull final TextRange rangeInsideHost) {
+  public int getOffsetInHost(int offsetInDecoded, final @NotNull TextRange rangeInsideHost) {
     return offsetInDecoded + rangeInsideHost.getStartOffset();
   }
 
-  @NotNull
   @Override
-  public TextRange getRelevantTextRange() {
+  public @NotNull TextRange getRelevantTextRange() {
     return ElementManipulators.getManipulator(myHost).getRangeInElement(myHost);
   }
 }

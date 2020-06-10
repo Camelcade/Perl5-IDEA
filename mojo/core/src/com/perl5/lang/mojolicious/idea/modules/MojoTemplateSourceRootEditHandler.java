@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,21 +28,18 @@ public class MojoTemplateSourceRootEditHandler extends PerlTemplatesRootEditHand
     super(MojoTemplateSourceRootType.INSTANCE);
   }
 
-  @NotNull
   @Override
-  public String getRootTypeName() {
+  public @NotNull String getRootTypeName() {
     return MojoBundle.message("mojo.root.type");
   }
 
-  @NotNull
   @Override
-  public Icon getRootIcon() {
+  public @NotNull Icon getRootIcon() {
     return MojoIcons.rootIcon();
   }
 
-  @NotNull
   @Override
-  public String getUnmarkRootButtonText() {
+  public @NotNull String getUnmarkRootButtonText() {
     return MojoBundle.message("mojo.root.unmark");
   }
 }

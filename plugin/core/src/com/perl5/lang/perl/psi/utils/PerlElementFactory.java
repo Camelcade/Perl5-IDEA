@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,11 +47,10 @@ public class PerlElementFactory {
 
 
   @Contract(pure = true)
-  @NotNull
-  public static PsiPerlDerefExpr createMethodCall(@NotNull Project project,
-                                                  @NotNull String packageName,
-                                                  @NotNull String subName,
-                                                  @NotNull String arguments) {
+  public static @NotNull PsiPerlDerefExpr createMethodCall(@NotNull Project project,
+                                                           @NotNull String packageName,
+                                                           @NotNull String subName,
+                                                           @NotNull String arguments) {
     PerlFileImpl file = createFile(project, String.format("%s->%s%s;", packageName, subName, arguments));
     return Objects.requireNonNull(PsiTreeUtil.findChildOfType(file, PsiPerlDerefExpr.class));
   }
@@ -68,8 +67,7 @@ public class PerlElementFactory {
   /**
    * @return a statement psi element created from {@code statementText} or null if something went wrong, statement could not be created
    */
-  @Nullable
-  public static PsiElement createStatement(@NotNull Project project, @NotNull String statementText) {
+  public static @Nullable PsiElement createStatement(@NotNull Project project, @NotNull String statementText) {
     PerlFileImpl perlFile = createFile(project, statementText + ";");
     PsiElement[] children = perlFile.getChildren();
     return children.length == 0 ? null : children[0];
@@ -90,9 +88,8 @@ public class PerlElementFactory {
    * @param newText         new element text
    * @return new generated element
    */
-  @NotNull
-  public static PerlHeredocElementImpl createHeredocBodyReplacement(@NotNull PerlHeredocElementImpl originalElement,
-                                                                    @NotNull String newText) {
+  public static @NotNull PerlHeredocElementImpl createHeredocBodyReplacement(@NotNull PerlHeredocElementImpl originalElement,
+                                                                             @NotNull String newText) {
     StringBuilder sb = new StringBuilder("<<");
     String marker = getSafeHeredocMarker(newText);
     IElementType originalElementType = PsiUtilCore.getElementType(originalElement);
@@ -185,8 +182,7 @@ public class PerlElementFactory {
     return result;
   }
 
-  @NotNull
-  public static PsiElement createSpace(@NotNull Project project) {
+  public static @NotNull PsiElement createSpace(@NotNull Project project) {
     return Objects.requireNonNull(createFile(project, " ").getFirstChild());
   }
 

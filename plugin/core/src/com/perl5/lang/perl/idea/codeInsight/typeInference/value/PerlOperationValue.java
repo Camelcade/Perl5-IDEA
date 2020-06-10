@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,8 +26,7 @@ import java.io.IOException;
  * Represents non-mutation operation value on some base value. E.g. item, slice, keys, scalar
  */
 abstract class PerlOperationValue extends PerlValue {
-  @NotNull
-  private final PerlValue myBaseValue;
+  private final @NotNull PerlValue myBaseValue;
 
   public PerlOperationValue(@NotNull PerlValue baseValue) {
     myBaseValue = baseValue;
@@ -38,14 +37,12 @@ abstract class PerlOperationValue extends PerlValue {
     myBaseValue = deserializer.readValue();
   }
 
-  @Nullable
   @Override
-  protected PerlContextType getContextType() {
+  protected @Nullable PerlContextType getContextType() {
     return PerlContextType.SCALAR;
   }
 
-  @NotNull
-  protected final PerlValue getBaseValue() {
+  protected final @NotNull PerlValue getBaseValue() {
     return myBaseValue;
   }
 
@@ -54,15 +51,13 @@ abstract class PerlOperationValue extends PerlValue {
     serializer.writeValue(myBaseValue);
   }
 
-  @NotNull
   @Override
-  final PerlValue computeResolve(@NotNull PerlValueResolver resolver) {
+  final @NotNull PerlValue computeResolve(@NotNull PerlValueResolver resolver) {
     return resolver.resolve(myBaseValue, it -> computeResolve(it, resolver));
   }
 
-  @NotNull
-  protected abstract PerlValue computeResolve(@NotNull PerlValue resolvedBaseValue,
-                                              @NotNull PerlValueResolver resolver);
+  protected abstract @NotNull PerlValue computeResolve(@NotNull PerlValue resolvedBaseValue,
+                                                       @NotNull PerlValueResolver resolver);
 
   @Override
   public boolean equals(Object o) {

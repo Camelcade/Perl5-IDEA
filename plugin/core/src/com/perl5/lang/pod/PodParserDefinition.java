@@ -40,33 +40,28 @@ public class PodParserDefinition implements ParserDefinition, PodElementTypes {
   public static final TokenSet ALL_WHITE_SPACES = TokenSet.create(TokenType.WHITE_SPACE, POD_NEWLINE);
   public static final TokenSet COMMENTS = TokenSet.create(POD_OUTER);
 
-  @NotNull
   @Override
-  public Lexer createLexer(Project project) {
+  public @NotNull Lexer createLexer(Project project) {
     return new PodDebuggingLexerAdapter(project);
   }
 
   @Override
-  @NotNull
-  public TokenSet getWhitespaceTokens() {
+  public @NotNull TokenSet getWhitespaceTokens() {
     return WHITE_SPACES;
   }
 
   @Override
-  @NotNull
-  public TokenSet getCommentTokens() {
+  public @NotNull TokenSet getCommentTokens() {
     return COMMENTS;
   }
 
   @Override
-  @NotNull
-  public TokenSet getStringLiteralElements() {
+  public @NotNull TokenSet getStringLiteralElements() {
     return TokenSet.EMPTY;
   }
 
   @Override
-  @NotNull
-  public PsiParser createParser(final Project project) {
+  public @NotNull PsiParser createParser(final Project project) {
     return new PodParser();
   }
 
@@ -86,8 +81,7 @@ public class PodParserDefinition implements ParserDefinition, PodElementTypes {
   }
 
   @Override
-  @NotNull
-  public PsiElement createElement(ASTNode node) {
+  public @NotNull PsiElement createElement(ASTNode node) {
     return ((PsiElementProvider)node.getElementType()).getPsiElement(node);
   }
 }

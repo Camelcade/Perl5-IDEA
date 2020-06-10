@@ -38,11 +38,9 @@ public abstract class PerlSourceRootType extends JpsElementTypeWithDummyProperti
   /**
    * @return key for xml file on serialization
    */
-  @NotNull
-  public abstract String getSerializationKey();
+  public abstract @NotNull String getSerializationKey();
 
-  @NotNull
-  public final List<VirtualFile> getRoots(@NotNull Project project) {
+  public final @NotNull List<VirtualFile> getRoots(@NotNull Project project) {
     List<VirtualFile> result = new ArrayList<>();
     for (Module module : ModuleManager.getInstance(project).getModules()) {
       result.addAll(getRoots(module));
@@ -50,13 +48,11 @@ public abstract class PerlSourceRootType extends JpsElementTypeWithDummyProperti
     return ContainerUtil.filter(result, VirtualFile::isValid);
   }
 
-  @NotNull
-  public final List<VirtualFile> getRoots(@NotNull Module module) {
+  public final @NotNull List<VirtualFile> getRoots(@NotNull Module module) {
     return PerlModuleExtension.getInstance(module).getRootsByType(getRootType());
   }
 
-  @NotNull
-  public final ModuleSourceRootEditHandler<?> getEditHandler() {
+  public final @NotNull ModuleSourceRootEditHandler<?> getEditHandler() {
     ModuleSourceRootEditHandler<JpsDummyElement> handler = ModuleSourceRootEditHandler.getEditHandler(getRootType());
     if (handler == null) {
       throw new IncorrectOperationException("Couldn't find handler for " + getRootType());

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,15 +48,13 @@ abstract class PerlGenericStringTargetsHandler extends PerlIntroduceTargetsHandl
   /**
    * @return children of the {@code element} if it's handled by this collector
    */
-  @NotNull
-  protected abstract List<PsiElement> getChildren(@NotNull PsiElement element);
+  protected abstract @NotNull List<PsiElement> getChildren(@NotNull PsiElement element);
 
   @Contract("null->false")
   protected abstract boolean isApplicable(@Nullable PsiElement element);
 
-  @NotNull
   @Override
-  protected List<PerlIntroduceTarget> computeTargetsAtCaret(@NotNull PsiElement element, int caretOffset) {
+  protected @NotNull List<PerlIntroduceTarget> computeTargetsAtCaret(@NotNull PsiElement element, int caretOffset) {
     if (!isApplicable(element)) {
       LOG.error("Incorrect element passed to collector: " + element + " " + element.getClass());
       return Collections.emptyList();
@@ -114,9 +112,8 @@ abstract class PerlGenericStringTargetsHandler extends PerlIntroduceTargetsHandl
    */
   protected abstract boolean shouldAddElementAsTarget();
 
-  @NotNull
   @Override
-  protected List<PerlIntroduceTarget> computeTargetsFromSelection(@NotNull PsiElement element, @NotNull TextRange selectionRange) {
+  protected @NotNull List<PerlIntroduceTarget> computeTargetsFromSelection(@NotNull PsiElement element, @NotNull TextRange selectionRange) {
     if (!isApplicable(element)) {
       LOG.error("Incorrect element passed to collector: " + element + " " + element.getClass());
       return Collections.emptyList();
@@ -160,9 +157,8 @@ abstract class PerlGenericStringTargetsHandler extends PerlIntroduceTargetsHandl
            Collections.singletonList(PerlIntroduceTarget.create(element, startOffset - elementStartOffset, endOffset - elementStartOffset));
   }
 
-  @NotNull
   @Override
-  protected String createTargetExpressionText(@NotNull PerlIntroduceTarget target) {
+  protected @NotNull String createTargetExpressionText(@NotNull PerlIntroduceTarget target) {
     PsiElement targetPlace = target.getPlace();
     if (targetPlace instanceof PsiPerlStringBare) {
       return PerlPsiUtil.createSingleQuotedString(targetPlace.getText());
@@ -225,19 +221,16 @@ abstract class PerlGenericStringTargetsHandler extends PerlIntroduceTargetsHandl
     return elementToReplace.replace(replacementElement);
   }
 
-  @NotNull
-  abstract PsiElement createReplacementFromText(@NotNull PsiElement originalElement, @NotNull String text);
+  abstract @NotNull PsiElement createReplacementFromText(@NotNull PsiElement originalElement, @NotNull String text);
 
-  @NotNull
-  static CharSequence braceVariableText(@NotNull CharSequence unbracedVariableText) {
+  static @NotNull CharSequence braceVariableText(@NotNull CharSequence unbracedVariableText) {
     return unbracedVariableText.length() < 2 ? unbracedVariableText :
            unbracedVariableText.charAt(0) + "{" + unbracedVariableText.subSequence(1, unbracedVariableText.length()) + "}";
   }
 
-  @NotNull
-  static String quoteTextSafelyWithSingleQuotes(@NotNull CharSequence text,
-                                                @NotNull String safePrefix,
-                                                @NotNull String safeSuffix) {
+  static @NotNull String quoteTextSafelyWithSingleQuotes(@NotNull CharSequence text,
+                                                         @NotNull String safePrefix,
+                                                         @NotNull String safeSuffix) {
     return !StringUtil.contains(text, "'") ? "'" + text + "'" : safePrefix + text + safeSuffix;
   }
 }

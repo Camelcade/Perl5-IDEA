@@ -35,26 +35,22 @@ public class EmbeddedPerlFileViewProvider extends PerlMultiplePsiFilesPerDocumen
   }
 
   @Override
-  @NotNull
-  public Language getBaseLanguage() {
+  public @NotNull Language getBaseLanguage() {
     return EmbeddedPerlLanguage.INSTANCE;
   }
 
   @Override
-  @NotNull
-  protected IElementType getTemplateContentElementType() {
+  protected @NotNull IElementType getTemplateContentElementType() {
     return EmbeddedPerlElementTypes.EMBED_HTML_TEMPLATE_DATA;
   }
 
-  @NotNull
   @Override
-  protected IElementType getPODContentElementType() {
+  protected @NotNull IElementType getPODContentElementType() {
     return EmbeddedPerlElementTypes.EMBED_POD_TEMPLATE_DATA;
   }
 
-  @NotNull
   @Override
-  protected EmbeddedPerlFileViewProvider cloneInner(@NotNull final VirtualFile copy) {
+  protected @NotNull EmbeddedPerlFileViewProvider cloneInner(final @NotNull VirtualFile copy) {
     return new EmbeddedPerlFileViewProvider(getManager(), copy, false, getTemplateDataLanguage());
   }
 }

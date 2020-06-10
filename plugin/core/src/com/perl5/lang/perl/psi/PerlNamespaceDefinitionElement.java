@@ -48,29 +48,24 @@ public interface PerlNamespaceDefinitionElement extends PerlNamespaceDefinition,
       getProject(), GlobalSearchScope.fileScope(getContainingFile().getOriginalFile()), namespaceName, processor);
   }
 
-  @NotNull
-  default List<PerlExportDescriptor> collectImportDescriptors(@NotNull PerlImportsCollector collector) {
+  default @NotNull List<PerlExportDescriptor> collectImportDescriptors(@NotNull PerlImportsCollector collector) {
     processExportDescriptors(collector);
     return collector.getResult();
   }
 
-  @NotNull
-  default List<PerlExportDescriptor> getImportedSubsDescriptors() {
+  default @NotNull List<PerlExportDescriptor> getImportedSubsDescriptors() {
     return collectImportDescriptors(new PerlSubImportsCollector());
   }
 
-  @NotNull
-  default List<PerlExportDescriptor> getImportedScalarDescriptors() {
+  default @NotNull List<PerlExportDescriptor> getImportedScalarDescriptors() {
     return collectImportDescriptors(new PerlScalarImportsCollector());
   }
 
-  @NotNull
-  default List<PerlExportDescriptor> getImportedArrayDescriptors() {
+  default @NotNull List<PerlExportDescriptor> getImportedArrayDescriptors() {
     return collectImportDescriptors(new PerlArrayImportsCollector());
   }
 
-  @NotNull
-  default List<PerlExportDescriptor> getImportedHashDescriptors() {
+  default @NotNull List<PerlExportDescriptor> getImportedHashDescriptors() {
     return collectImportDescriptors(new PerlHashImportsCollector());
   }
 
@@ -78,8 +73,7 @@ public interface PerlNamespaceDefinitionElement extends PerlNamespaceDefinition,
     return PerlPackageUtil.collectNamespaceDefinitions(getProject(), getParentNamespacesNames());
   }
 
-  @NotNull
-  default List<PerlNamespaceDefinitionElement> getChildNamespaceDefinitions() {
+  default @NotNull List<PerlNamespaceDefinitionElement> getChildNamespaceDefinitions() {
     return PerlPackageUtil.getChildNamespaces(getProject(), getNamespaceName());
   }
 
@@ -87,10 +81,9 @@ public interface PerlNamespaceDefinitionElement extends PerlNamespaceDefinition,
     getMro().getLinearISA(getProject(), getParentNamespaceDefinitions(), recursionMap, result);
   }
 
-  @NotNull
-  static Set<PerlExportDescriptor> getExportDescriptors(@NotNull Project project,
-                                                        @NotNull GlobalSearchScope searchScope,
-                                                        @NotNull String namespaceName) {
+  static @NotNull Set<PerlExportDescriptor> getExportDescriptors(@NotNull Project project,
+                                                                 @NotNull GlobalSearchScope searchScope,
+                                                                 @NotNull String namespaceName) {
     Set<PerlExportDescriptor> result = new HashSet<>();
     PerlNamespaceDefinitionElement.processExportDescriptors(
       project, searchScope, namespaceName, (__, it) -> {

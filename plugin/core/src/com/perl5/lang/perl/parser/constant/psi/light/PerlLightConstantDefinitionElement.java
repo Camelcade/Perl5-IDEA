@@ -48,9 +48,8 @@ public class PerlLightConstantDefinitionElement extends PerlLightSubDefinitionEl
     super(delegate, stub);
   }
 
-  @Nullable
   @Override
-  public Icon getIcon(int flags) {
+  public @Nullable Icon getIcon(int flags) {
     return PerlIcons.CONSTANT_GUTTER_ICON;
   }
 

@@ -152,14 +152,12 @@ public abstract class PerlSubsFormatterEnterTest extends PerlFormatterTestCase {
     doTest("signatureAfterCommaContinuationMiddle");
   }
 
-  @NotNull
   @Override
-  protected String computeAnswerFileName(@NotNull String appendix) {
+  protected @NotNull String computeAnswerFileName(@NotNull String appendix) {
     return super.computeAnswerFileName("." + getResultAppendix());
   }
 
-  @NotNull
-  protected abstract String getResultAppendix();
+  protected abstract @NotNull String getResultAppendix();
 
   protected void doTest() {
     doTestEnter();
@@ -170,169 +168,145 @@ public abstract class PerlSubsFormatterEnterTest extends PerlFormatterTestCase {
   }
 
   public static class After extends PerlSubsFormatterEnterTest {
-    @NotNull
     @Override
-    protected String getResultAppendix() {
+    protected @NotNull String getResultAppendix() {
       return "after";
     }
 
-    @NotNull
     @Override
-    protected String getPerTestCode() {
+    protected @NotNull String getPerTestCode() {
       return "after somemethod";
     }
   }
 
   public static class Around extends PerlSubsFormatterEnterTest {
-    @NotNull
     @Override
-    protected String getResultAppendix() {
+    protected @NotNull String getResultAppendix() {
       return "around";
     }
 
-    @NotNull
     @Override
-    protected String getPerTestCode() {
+    protected @NotNull String getPerTestCode() {
       return "around somemethod";
     }
   }
 
   public static class Augment extends PerlSubsFormatterEnterTest {
-    @NotNull
     @Override
-    protected String getResultAppendix() {
+    protected @NotNull String getResultAppendix() {
       return "augment";
     }
 
-    @NotNull
     @Override
-    protected String getPerTestCode() {
+    protected @NotNull String getPerTestCode() {
       return "augment somemethod";
     }
   }
 
   public static class Before extends PerlSubsFormatterEnterTest {
-    @NotNull
     @Override
-    protected String getResultAppendix() {
+    protected @NotNull String getResultAppendix() {
       return "before";
     }
 
-    @NotNull
     @Override
-    protected String getPerTestCode() {
+    protected @NotNull String getPerTestCode() {
       return "before somemethod";
     }
   }
 
   public static class Fun extends PerlSubsFormatterEnterTest {
-    @NotNull
     @Override
-    protected String getResultAppendix() {
+    protected @NotNull String getResultAppendix() {
       return "fun";
     }
 
-    @NotNull
     @Override
-    protected String getPerTestCode() {
+    protected @NotNull String getPerTestCode() {
       return "fun somefun";
     }
   }
 
   public static class Func extends PerlSubsFormatterEnterTest {
-    @NotNull
     @Override
-    protected String getResultAppendix() {
+    protected @NotNull String getResultAppendix() {
       return "func";
     }
 
-    @NotNull
     @Override
-    protected String getPerTestCode() {
+    protected @NotNull String getPerTestCode() {
       return "func somefunc";
     }
   }
 
   public static class FunExpr extends PerlSubsFormatterEnterTest {
-    @NotNull
     @Override
-    protected String getResultAppendix() {
+    protected @NotNull String getResultAppendix() {
       return "funExpr";
     }
 
-    @NotNull
     @Override
-    protected String getPerTestCode() {
+    protected @NotNull String getPerTestCode() {
       return "fun";
     }
   }
 
   public static class Method extends PerlSubsFormatterEnterTest {
-    @NotNull
     @Override
-    protected String getResultAppendix() {
+    protected @NotNull String getResultAppendix() {
       return "method";
     }
 
-    @NotNull
     @Override
-    protected String getPerTestCode() {
+    protected @NotNull String getPerTestCode() {
       return "method somemethod";
     }
   }
 
   public static class MethodExpr extends PerlSubsFormatterEnterTest {
-    @NotNull
     @Override
-    protected String getResultAppendix() {
+    protected @NotNull String getResultAppendix() {
       return "methodExpr";
     }
 
-    @NotNull
     @Override
-    protected String getPerTestCode() {
+    protected @NotNull String getPerTestCode() {
       return "method";
     }
   }
 
   public static class OverrideKw extends PerlSubsFormatterEnterTest {
-    @NotNull
     @Override
-    protected String getResultAppendix() {
+    protected @NotNull String getResultAppendix() {
       return "override";
     }
 
-    @NotNull
     @Override
-    protected String getPerTestCode() {
+    protected @NotNull String getPerTestCode() {
       return "override somemethod";
     }
   }
 
   public static class Sub extends PerlSubsFormatterEnterTest {
-    @NotNull
     @Override
-    protected String getResultAppendix() {
+    protected @NotNull String getResultAppendix() {
       return "sub";
     }
 
-    @NotNull
     @Override
-    protected String getPerTestCode() {
+    protected @NotNull String getPerTestCode() {
       return "sub somesub";
     }
   }
 
   public static class SubExpr extends PerlSubsFormatterEnterTest {
-    @NotNull
     @Override
-    protected String getResultAppendix() {
+    protected @NotNull String getResultAppendix() {
       return "subExpr";
     }
 
-    @NotNull
     @Override
-    protected String getPerTestCode() {
+    protected @NotNull String getPerTestCode() {
       return "sub";
     }
   }

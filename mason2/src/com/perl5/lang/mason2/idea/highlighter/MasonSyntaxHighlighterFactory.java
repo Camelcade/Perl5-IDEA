@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,8 +28,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class MasonSyntaxHighlighterFactory extends PerlSyntaxHighlighterFactory {
   @Override
-  @NotNull
-  public SyntaxHighlighter getSyntaxHighlighter(@Nullable Project project, @Nullable VirtualFile virtualFile) {
+  public @NotNull SyntaxHighlighter getSyntaxHighlighter(@Nullable Project project, @Nullable VirtualFile virtualFile) {
     if (virtualFile != null && virtualFile.getFileType() == MasonPurePerlComponentFileType.INSTANCE) {
       return new PerlSyntaxHighlighter(project);
     }

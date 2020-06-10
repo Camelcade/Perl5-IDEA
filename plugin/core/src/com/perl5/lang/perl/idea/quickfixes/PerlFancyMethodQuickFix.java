@@ -38,16 +38,13 @@ public class PerlFancyMethodQuickFix implements LocalQuickFix {
     myNewForm = newForm;
   }
 
-  @Nls
-  @NotNull
   @Override
-  public String getName() {
+  public @Nls @NotNull String getName() {
     return PerlBundle.message("perl.quickfix.fancy.method.prefix") + myNewForm + "()";
   }
 
-  @NotNull
   @Override
-  public String getFamilyName() {
+  public @NotNull String getFamilyName() {
     return PerlBundle.message("perl.quickfix.fancy.method.family");
   }
 

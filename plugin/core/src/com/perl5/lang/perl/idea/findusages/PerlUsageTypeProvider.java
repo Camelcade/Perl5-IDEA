@@ -27,9 +27,8 @@ import org.jetbrains.annotations.Nullable;
 public class PerlUsageTypeProvider implements UsageTypeProvider {
   public static final UsageType DOCUMENT_USAGE = new UsageType(() -> PerlBundle.message("perl.usage.type.documentation"));
 
-  @Nullable
   @Override
-  public UsageType getUsageType(PsiElement element) {
+  public @Nullable UsageType getUsageType(PsiElement element) {
     if (element.getLanguage() == PodLanguage.INSTANCE) {
       return DOCUMENT_USAGE;
     }

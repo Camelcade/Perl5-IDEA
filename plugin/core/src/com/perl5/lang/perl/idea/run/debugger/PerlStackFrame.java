@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -86,9 +86,8 @@ public class PerlStackFrame extends XStackFrame {
     component.setIcon(AllIcons.Debugger.Frame);
   }
 
-  @Nullable
   @Override
-  public XSourcePosition getSourcePosition() {
+  public @Nullable XSourcePosition getSourcePosition() {
     VirtualFile virtualFile = myVirtualFile.getValue();
     if (virtualFile != null) {
       return XSourcePositionImpl.create(virtualFile, myFrameDescriptor.getLine());
@@ -137,13 +136,12 @@ public class PerlStackFrame extends XStackFrame {
     return myPerlExecutionStack;
   }
 
-  @Nullable
   @Override
-  public XDebuggerEvaluator getEvaluator() {
+  public @Nullable XDebuggerEvaluator getEvaluator() {
     return new XDebuggerEvaluator() {
       @Override
       public void evaluate(@NotNull String expression,
-                           @NotNull final XEvaluationCallback callback,
+                           final @NotNull XEvaluationCallback callback,
                            @Nullable XSourcePosition expressionPosition) {
         PerlDebugThread thread = myPerlExecutionStack.getSuspendContext().getDebugThread();
 

@@ -27,10 +27,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PerlSubCallElementStub extends PerlPolyNamedElementStub<PerlSubCallElement> {
-  @NotNull
-  private final String mySubName;
-  @NotNull
-  private final PerlSubCallElementData myCallData;
+  private final @NotNull String mySubName;
+  private final @NotNull PerlSubCallElementData myCallData;
 
   public PerlSubCallElementStub(StubElement<?> parent,
                                 IStubElementType<?, ?> elementType,
@@ -42,13 +40,11 @@ public class PerlSubCallElementStub extends PerlPolyNamedElementStub<PerlSubCall
     myCallData = callData;
   }
 
-  @NotNull
-  public String getSubName() {
+  public @NotNull String getSubName() {
     return mySubName;
   }
 
-  @NotNull
-  public PerlSubCallElementData getCallData() {
+  public @NotNull PerlSubCallElementData getCallData() {
     return myCallData;
   }
 

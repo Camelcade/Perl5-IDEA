@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,8 +50,7 @@ public interface PerlFile
   /**
    * @return namespace definition psi element from built-in service or synthetic one
    */
-  @Nullable
-  default PerlNamespaceDefinitionElement getNamespaceDefinitionElement() {
+  default @Nullable PerlNamespaceDefinitionElement getNamespaceDefinitionElement() {
     String packageName = getNamespaceName();
     if (StringUtil.isEmpty(packageName)) {
       return null;

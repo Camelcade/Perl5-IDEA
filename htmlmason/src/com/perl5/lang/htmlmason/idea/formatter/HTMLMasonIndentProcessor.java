@@ -105,9 +105,8 @@ public class HTMLMasonIndentProcessor extends PerlIndentProcessor implements HTM
     return BLOCK_LIKE_CONTAINERS;
   }
 
-  @Nullable
   @Override
-  public Indent getChildIndent(@NotNull PerlAstBlock block, int newChildIndex) {
+  public @Nullable Indent getChildIndent(@NotNull PerlAstBlock block, int newChildIndex) {
     IElementType elementType = block.getElementType();
     if (elementType == HTML_MASON_ARGS_BLOCK || elementType == HTML_MASON_ATTR_BLOCK) {
       return Indent.getNormalIndent();

@@ -27,23 +27,19 @@ import java.util.regex.Pattern;
  * Base class for mojo-based projects: applications and plugins
  */
 public abstract class MojoProject {
-  @NotNull
-  private final VirtualFile myRoot;
+  private final @NotNull VirtualFile myRoot;
 
   public MojoProject(@NotNull VirtualFile root) {
     myRoot = root;
   }
 
-  @NotNull
-  public VirtualFile getRoot() {
+  public @NotNull VirtualFile getRoot() {
     return myRoot;
   }
 
-  @NotNull
-  public abstract Icon getIcon();
+  public abstract @NotNull Icon getIcon();
 
-  @NotNull
-  public abstract String getTypeName();
+  public abstract @NotNull String getTypeName();
 
   public boolean isValid() {
     return myRoot.isValid();
@@ -74,8 +70,7 @@ public abstract class MojoProject {
   }
 
   protected abstract static class NameValidator implements InputValidator {
-    @NotNull
-    protected abstract Pattern getPattern();
+    protected abstract @NotNull Pattern getPattern();
 
     @Override
     public boolean checkInput(String inputString) {

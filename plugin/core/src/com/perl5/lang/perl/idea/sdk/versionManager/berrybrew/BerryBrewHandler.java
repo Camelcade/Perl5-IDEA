@@ -35,27 +35,23 @@ class BerryBrewHandler extends PerlRealVersionManagerHandler<BerryBrewData, Berr
   }
 
 
-  @NotNull
   @Override
-  protected BerryBrewData createData(@NotNull PerlVersionManagerAdapter vmAdapter, @NotNull String distributionId) {
+  protected @NotNull BerryBrewData createData(@NotNull PerlVersionManagerAdapter vmAdapter, @NotNull String distributionId) {
     return new BerryBrewData(vmAdapter.getVersionManagerPath(), distributionId, this);
   }
 
-  @NotNull
   @Override
-  protected String getExecutableName() {
+  protected @NotNull String getExecutableName() {
     return "berrybrew.exe";
   }
 
-  @NotNull
   @Override
-  public PerlVersionManagerAdapter createAdapter(@NotNull String pathToVersionManager, @NotNull PerlHostData<?, ?> hostData) {
+  public @NotNull PerlVersionManagerAdapter createAdapter(@NotNull String pathToVersionManager, @NotNull PerlHostData<?, ?> hostData) {
     return new BerryBrewAdapter(pathToVersionManager, hostData);
   }
 
-  @NotNull
   @Override
-  public String getPresentableName() {
+  public @NotNull String getPresentableName() {
     return PerlBundle.message("perl.vm.berrybrew.presentable.name");
   }
 
@@ -64,21 +60,18 @@ class BerryBrewHandler extends PerlRealVersionManagerHandler<BerryBrewData, Berr
     return osHandler == null || osHandler.isMsWindows();
   }
 
-  @NotNull
   @Override
-  public BerryBrewData createData() {
+  public @NotNull BerryBrewData createData() {
     return new BerryBrewData(this);
   }
 
-  @NotNull
   @Override
-  public Icon getIcon() {
+  public @NotNull Icon getIcon() {
     return PerlIcons.STRAWBERRY_ICON;
   }
 
-  @Nullable
   @Override
-  public InstallPerlHandler createInstallHandler(@NotNull String pathToVersionManager) {
+  public @Nullable InstallPerlHandler createInstallHandler(@NotNull String pathToVersionManager) {
     return new BerryBrewInstallPerlHandler(pathToVersionManager, this);
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,13 +31,11 @@ import java.util.stream.Stream;
 public interface Perl5SettingsConfigurableExtension {
   ExtensionPointName<Perl5SettingsConfigurableExtension> EP_NAME = ExtensionPointName.create("com.perl5.settings.configurable.extension");
 
-  @NotNull
-  default List<PerlSourceRootType> getSourceRootTypes() {
+  default @NotNull List<PerlSourceRootType> getSourceRootTypes() {
     return Collections.emptyList();
   }
 
-  @Nullable
-  default Configurable createProjectConfigurable(@NotNull Project project) {return null;}
+  default @Nullable Configurable createProjectConfigurable(@NotNull Project project) {return null;}
 
   static Stream<Perl5SettingsConfigurableExtension> stream() {
     return EP_NAME.getExtensionList().stream();

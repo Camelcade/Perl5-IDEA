@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,9 +39,8 @@ public class PodSectionItem extends PodTitledSectionMixin {
     super(stub, nodeType);
   }
 
-  @Nullable
   @Override
-  public String getPresentableText() {
+  public @Nullable String getPresentableText() {
     PodSectionStub greenStub = getGreenStub();
     if (greenStub != null) {
       String content = greenStub.getContent();
@@ -58,9 +57,8 @@ public class PodSectionItem extends PodTitledSectionMixin {
     return PodLinkCompletionProvider.trimItemText(PodRenderUtil.renderPsiElementAsText(contentBlock));
   }
 
-  @Nullable
   @Override
-  public String getTitleText() {
+  public @Nullable String getTitleText() {
     PodSectionStub greenStub = getGreenStub();
     if (greenStub != null) {
       String content = greenStub.getContent();

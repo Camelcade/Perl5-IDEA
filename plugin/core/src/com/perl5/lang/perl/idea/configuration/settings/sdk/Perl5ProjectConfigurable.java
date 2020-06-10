@@ -59,13 +59,11 @@ import static com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SdkConfig
 public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulator {
   private static final int ourRowsCount = 5;
 
-  @NotNull
-  private final Project myProject;
+  private final @NotNull Project myProject;
   private final PerlSharedSettings mySharedSettings;
   private final PerlLocalSettings myLocalSettings;
 
-  @NotNull
-  private Perl5SdkConfigurable myPerl5SdkConfigurable;
+  private @NotNull final Perl5SdkConfigurable myPerl5SdkConfigurable;
 
   private final JPanel mySdkProjectSettingsPanel = new JPanel(new BorderLayout());
 
@@ -95,9 +93,8 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
     myPerl5SdkConfigurable = new Perl5SdkConfigurable(this, project);
   }
 
-  @Nullable
   @Override
-  public JComponent createComponent() {
+  public @Nullable JComponent createComponent() {
     FormBuilder builder = FormBuilder.createFormBuilder();
     builder.getPanel().setLayout(new VerticalFlowLayout());
 
@@ -213,9 +210,8 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
     return builder.getPanel();
   }
 
-  @Nls
   @Override
-  public String getDisplayName() {
+  public @Nls String getDisplayName() {
     return PerlBundle.message("perl.perl5");
   }
 
@@ -385,9 +381,8 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
     mySdkProjectSettingsPanel.setVisible(myHostProjectConfigurable != null);
   }
 
-  @NotNull
   @Override
-  public List<Perl5SdkWrapper> getAllSdkWrappers() {
+  public @NotNull List<Perl5SdkWrapper> getAllSdkWrappers() {
     List<Perl5SdkWrapper> defaultItems = new ArrayList<>(Perl5SdkManipulator.super.getAllSdkWrappers());
     defaultItems.add(0, DISABLE_PERL_ITEM);
     return defaultItems;
@@ -406,9 +401,8 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
     myHostConfigurablesMap.clear();
   }
 
-  @NotNull
   @Override
-  public Perl5SdkWrapper getCurrentSdkWrapper() {
+  public @NotNull Perl5SdkWrapper getCurrentSdkWrapper() {
     Sdk projectSdk = PerlProjectManager.getInstance(myProject).getProjectSdk();
     return projectSdk == null ? DISABLE_PERL_ITEM : new Perl5RealSdkWrapper(projectSdk);
   }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,26 +36,22 @@ public class HTMLMasonFileViewProvider extends PerlMultiplePsiFilesPerDocumentFi
 
 
   @Override
-  @NotNull
-  public Language getBaseLanguage() {
+  public @NotNull Language getBaseLanguage() {
     return HTMLMasonLanguage.INSTANCE;
   }
 
-  @NotNull
   @Override
-  protected IElementType getTemplateContentElementType() {
+  protected @NotNull IElementType getTemplateContentElementType() {
     return HTML_MASON_HTML_TEMPLATE_DATA;
   }
 
-  @NotNull
   @Override
-  protected IElementType getPODContentElementType() {
+  protected @NotNull IElementType getPODContentElementType() {
     return HTML_MASON_POD_TEMPLATE_DATA;
   }
 
-  @NotNull
   @Override
-  protected HTMLMasonFileViewProvider cloneInner(@NotNull final VirtualFile copy) {
+  protected @NotNull HTMLMasonFileViewProvider cloneInner(final @NotNull VirtualFile copy) {
     return new HTMLMasonFileViewProvider(getManager(), copy, false, getTemplateDataLanguage());
   }
 }

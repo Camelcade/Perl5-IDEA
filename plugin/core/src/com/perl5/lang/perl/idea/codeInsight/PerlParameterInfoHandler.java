@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,9 +40,8 @@ import org.jetbrains.annotations.Nullable;
 
 
 public class PerlParameterInfoHandler implements ParameterInfoHandler<PsiPerlCallArgumentsImpl, PerlParameterInfo>, PerlElementTypes {
-  @Nullable
   @Override
-  public PsiPerlCallArgumentsImpl findElementForParameterInfo(@NotNull CreateParameterInfoContext context) {
+  public @Nullable PsiPerlCallArgumentsImpl findElementForParameterInfo(@NotNull CreateParameterInfoContext context) {
     PsiPerlCallArgumentsImpl callArguments = findCallArguments(context);
 
     if (callArguments != null) {
@@ -62,9 +61,8 @@ public class PerlParameterInfoHandler implements ParameterInfoHandler<PsiPerlCal
     context.showHint(container, container.getTextOffset(), this);
   }
 
-  @Nullable
   @Override
-  public PsiPerlCallArgumentsImpl findElementForUpdatingParameterInfo(@NotNull UpdateParameterInfoContext context) {
+  public @Nullable PsiPerlCallArgumentsImpl findElementForUpdatingParameterInfo(@NotNull UpdateParameterInfoContext context) {
     return findCallArguments(context);
   }
 
@@ -83,9 +81,8 @@ public class PerlParameterInfoHandler implements ParameterInfoHandler<PsiPerlCal
     return false;
   }
 
-  @Nullable
   @Override
-  public Object[] getParametersForLookup(LookupElement item, ParameterInfoContext context) {
+  public @Nullable Object[] getParametersForLookup(LookupElement item, ParameterInfoContext context) {
     return ArrayUtil.EMPTY_OBJECT_ARRAY;  // we don't
   }
 
@@ -152,8 +149,7 @@ public class PerlParameterInfoHandler implements ParameterInfoHandler<PsiPerlCal
     return currentIndex;
   }
 
-  @Nullable
-  private static PsiPerlCallArgumentsImpl findCallArguments(ParameterInfoContext context) {
+  private static @Nullable PsiPerlCallArgumentsImpl findCallArguments(ParameterInfoContext context) {
     PsiPerlCallArgumentsImpl callArguments =
       ParameterInfoUtils.findParentOfType(context.getFile(), context.getOffset(), PsiPerlCallArgumentsImpl.class);
     if (callArguments != null || context.getOffset() == 0) {
@@ -168,16 +164,14 @@ public class PerlParameterInfoHandler implements ParameterInfoHandler<PsiPerlCal
     return ParameterInfoUtils.findParentOfType(context.getFile(), context.getOffset() + 1, PsiPerlCallArgumentsImpl.class);
   }
 
-  @Nullable
-  private static PerlParameterInfo[] getTargetParameterInfo(@Nullable PsiElement target) {
+  private static @Nullable PerlParameterInfo[] getTargetParameterInfo(@Nullable PsiElement target) {
     if (!(target instanceof PerlSubDefinitionElement)) {
       return null;
     }
     return PerlParameterInfo.wrapArguments(((PerlSubDefinitionElement)target).getSubArgumentsListWithoutSelf());
   }
 
-  @Nullable
-  private static PerlParameterInfo[] getMethodCallArguments(@NotNull PsiPerlCallArgumentsImpl arguments) {
+  private static @Nullable PerlParameterInfo[] getMethodCallArguments(@NotNull PsiPerlCallArgumentsImpl arguments) {
     PsiElement run = arguments.getPrevSibling();
     while (run != null) {
       if (run instanceof PerlMethodMixin) {

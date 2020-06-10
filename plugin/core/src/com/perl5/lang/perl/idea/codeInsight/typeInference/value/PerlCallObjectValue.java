@@ -35,8 +35,7 @@ import java.util.List;
 import java.util.Set;
 
 public final class PerlCallObjectValue extends PerlCallValue {
-  @Nullable
-  private final String mySuperContext;
+  private final @Nullable String mySuperContext;
 
   private PerlCallObjectValue(@NotNull PerlValue namespaceNameValue,
                              @NotNull PerlValue subNameValue,
@@ -57,9 +56,9 @@ public final class PerlCallObjectValue extends PerlCallValue {
     serializer.writeName(mySuperContext);
   }
 
-  @NotNull
   @Override
-  protected List<PerlValue> computeResolvedArguments(@NotNull PerlValue resolvedNamespaceValue, @NotNull PerlValueResolver valueResolver) {
+  protected @NotNull List<PerlValue> computeResolvedArguments(@NotNull PerlValue resolvedNamespaceValue,
+                                                              @NotNull PerlValueResolver valueResolver) {
     return ContainerUtil.prepend(super.computeResolvedArguments(resolvedNamespaceValue, valueResolver), resolvedNamespaceValue);
   }
 
@@ -87,14 +86,12 @@ public final class PerlCallObjectValue extends PerlCallValue {
     return mySuperContext != null;
   }
 
-  @NotNull
-  private String getEffectiveNamespaceName(String contextNamespace) {
+  private @NotNull String getEffectiveNamespaceName(String contextNamespace) {
     return ObjectUtils.notNull(mySuperContext, contextNamespace);
   }
 
-  @NotNull
   @Override
-  protected Set<String> computeNamespaceNames(@NotNull PerlValue resolvedNamespaceValue) {
+  protected @NotNull Set<String> computeNamespaceNames(@NotNull PerlValue resolvedNamespaceValue) {
     return resolvedNamespaceValue.isUnknown() ? Collections.singleton(PerlPackageUtil.UNIVERSAL_NAMESPACE) :
            super.computeNamespaceNames(resolvedNamespaceValue);
   }
@@ -163,9 +160,8 @@ public final class PerlCallObjectValue extends PerlCallValue {
     return getNamespaceNameValue() + "->" + (isSuper() ? mySuperContext + "::SUPER::" : "") + getSubNameValue() + getArgumentsAsString();
   }
 
-  @NotNull
   @Override
-  public String getPresentableText() {
+  public @NotNull String getPresentableText() {
     return PerlBundle.message(
       "perl.value.call.object.presentable",
       getNamespaceNameValue().getPresentableText(),
@@ -173,41 +169,37 @@ public final class PerlCallObjectValue extends PerlCallValue {
       getPresentableArguments());
   }
 
-  @NotNull
-  public static PerlCallObjectValue create(@NotNull PerlValue namespaceValue, @NotNull String name) {
+  public static @NotNull PerlCallObjectValue create(@NotNull PerlValue namespaceValue, @NotNull String name) {
     return create(namespaceValue, name, Collections.emptyList(), null);
   }
 
-  @NotNull
-  public static PerlCallObjectValue create(@NotNull PerlValue namespaceValue, @NotNull String name, @Nullable String superContext) {
+  public static @NotNull PerlCallObjectValue create(@NotNull PerlValue namespaceValue,
+                                                    @NotNull String name,
+                                                    @Nullable String superContext) {
     return create(namespaceValue, name, Collections.emptyList(), superContext);
   }
 
-  @NotNull
-  public static PerlCallObjectValue create(@NotNull String namespace, @NotNull String name, @NotNull List<PerlValue> arguments) {
+  public static @NotNull PerlCallObjectValue create(@NotNull String namespace, @NotNull String name, @NotNull List<PerlValue> arguments) {
     return create(PerlScalarValue.create(namespace), name, arguments, null);
   }
 
-  @NotNull
-  public static PerlCallObjectValue create(@NotNull PerlValue namespaceNameValue,
-                                           @NotNull String name,
-                                           @NotNull List<PerlValue> arguments) {
+  public static @NotNull PerlCallObjectValue create(@NotNull PerlValue namespaceNameValue,
+                                                    @NotNull String name,
+                                                    @NotNull List<PerlValue> arguments) {
     return create(namespaceNameValue, PerlScalarValue.create(name), arguments, null);
   }
 
-  @NotNull
-  public static PerlCallObjectValue create(@NotNull PerlValue namespaceNameValue,
-                                           @NotNull String name,
-                                           @NotNull List<PerlValue> arguments,
-                                           @Nullable String superContext) {
+  public static @NotNull PerlCallObjectValue create(@NotNull PerlValue namespaceNameValue,
+                                                    @NotNull String name,
+                                                    @NotNull List<PerlValue> arguments,
+                                                    @Nullable String superContext) {
     return create(namespaceNameValue, PerlScalarValue.create(name), arguments, superContext);
   }
 
-  @NotNull
-  public static PerlCallObjectValue create(@NotNull PerlValue namespaceNameValue,
-                                           @NotNull PerlValue nameValue,
-                                           @NotNull List<PerlValue> arguments,
-                                           @Nullable String superContext) {
+  public static @NotNull PerlCallObjectValue create(@NotNull PerlValue namespaceNameValue,
+                                                    @NotNull PerlValue nameValue,
+                                                    @NotNull List<PerlValue> arguments,
+                                                    @Nullable String superContext) {
     return PerlValuesManager.intern(new PerlCallObjectValue(namespaceNameValue, nameValue, arguments, superContext));
   }
 }

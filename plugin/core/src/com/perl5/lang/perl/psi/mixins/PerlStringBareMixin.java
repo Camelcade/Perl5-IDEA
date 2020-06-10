@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,9 +31,8 @@ public class PerlStringBareMixin extends PerlCompositeElementImpl implements Per
     super(node);
   }
 
-  @NotNull
   @Override
-  public PsiReference[] getReferences() {
+  public @NotNull PsiReference[] getReferences() {
     return ReferenceProvidersRegistry.getReferencesFromProviders(this);
   }
 
@@ -43,21 +42,18 @@ public class PerlStringBareMixin extends PerlCompositeElementImpl implements Per
     return references.length == 0 ? null : references[0];
   }
 
-  @Nullable
   @Override
-  public PsiElement getFirstContentToken() {
+  public @Nullable PsiElement getFirstContentToken() {
     return getFirstChild();
   }
 
-  @Nullable
   @Override
-  public PsiElement getOpenQuoteElement() {
+  public @Nullable PsiElement getOpenQuoteElement() {
     return null;
   }
 
-  @Nullable
   @Override
-  public PsiElement getCloseQuoteElement() {
+  public @Nullable PsiElement getCloseQuoteElement() {
     return null;
   }
 }

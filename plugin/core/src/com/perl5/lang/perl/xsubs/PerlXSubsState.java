@@ -91,9 +91,8 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
     this.myProject = myProject;
   }
 
-  @Nullable
   @Override
-  public PerlXSubsState getState() {
+  public @Nullable PerlXSubsState getState() {
     return this;
   }
 
@@ -341,8 +340,7 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
     return persisted;
   }
 
-  @NotNull
-  private static String getXSBinaryExtension() {
+  private static @NotNull String getXSBinaryExtension() {
     return SystemInfo.isWindows ? "xs.dll" : "so";
   }
 }

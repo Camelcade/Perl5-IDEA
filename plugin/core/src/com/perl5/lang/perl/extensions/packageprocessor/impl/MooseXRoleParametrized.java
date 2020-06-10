@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,16 +27,15 @@ import java.util.List;
 import static com.perl5.lang.perl.util.PerlPackageUtil.PACKAGE_MOOSE_X_ROLE_PARAMETRIZIED;
 
 public class MooseXRoleParametrized extends PerlPackageProcessorBase {
-  private static List<PerlExportDescriptor> EXPORTS = new ArrayList<>(MooseRoleProcessor.EXPORTS);
+  private static final List<PerlExportDescriptor> EXPORTS = new ArrayList<>(MooseRoleProcessor.EXPORTS);
 
   static {
     EXPORTS.add(PerlExportDescriptor.create(PACKAGE_MOOSE_X_ROLE_PARAMETRIZIED, "parameter"));
     EXPORTS.add(PerlExportDescriptor.create(PACKAGE_MOOSE_X_ROLE_PARAMETRIZIED, "role"));
   }
 
-  @NotNull
   @Override
-  public List<PerlExportDescriptor> getImports(@NotNull PerlUseStatementElement useStatement) {
+  public @NotNull List<PerlExportDescriptor> getImports(@NotNull PerlUseStatementElement useStatement) {
     return EXPORTS;
   }
 }

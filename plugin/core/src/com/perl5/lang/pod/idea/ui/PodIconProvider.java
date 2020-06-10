@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,9 +27,8 @@ import javax.swing.*;
 
 public class PodIconProvider extends IconProvider {
 
-  @Nullable
   @Override
-  public Icon getIcon(@NotNull PsiElement element, int flags) {
+  public @Nullable Icon getIcon(@NotNull PsiElement element, int flags) {
     if (element instanceof PodTitledSection) {
       return PerlIcons.POD_FILE;
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,7 +38,7 @@ public class MojoliciousSmartKeysUtil implements MojoliciousElementTypes, PerlEl
     MOJO_BLOCK_EXPR_NOSPACE_CLOSER
   );
 
-  public static boolean addCloseMarker(@NotNull final Editor editor, @NotNull PsiFile file, @NotNull String marker) {
+  public static boolean addCloseMarker(final @NotNull Editor editor, @NotNull PsiFile file, @NotNull String marker) {
     PsiElement element = file.findElementAt(editor.getCaretModel().getOffset() - 2);
     IElementType elementType = PsiUtilCore.getElementType(element);
     if (elementType == MOJO_BLOCK_OPENER || elementType == MOJO_BLOCK_EXPR_OPENER || elementType == MOJO_BLOCK_EXPR_ESCAPED_OPENER) {
@@ -51,14 +51,14 @@ public class MojoliciousSmartKeysUtil implements MojoliciousElementTypes, PerlEl
     return false;
   }
 
-  public static boolean addEndMarker(@NotNull final Editor editor, @NotNull PsiFile file, @NotNull String marker) {
+  public static boolean addEndMarker(final @NotNull Editor editor, @NotNull PsiFile file, @NotNull String marker) {
     PsiElement element = file.findElementAt(editor.getCaretModel().getOffset() - 2);
     IElementType elementType = PsiUtilCore.getElementType(element);
     if (elementType == MOJO_BEGIN) {
       ASTNode nextSibling = PerlPsiUtil.getNextSignificantSibling(element.getNode());
       if (nextSibling == null || nextSibling.getElementType() != BLOCK ||
           nextSibling.getTreeNext() == null || nextSibling.getTreeNext().getElementType() != MOJO_END
-        ) {
+      ) {
         EditorModificationUtil.insertStringAtCaret(editor, marker, false, false);
         return true;
       }

@@ -39,20 +39,17 @@ public class PerlAbsolutePathConsoleFilter implements Filter {
     "[-@\\w./~:\\\\]+[-@\\w.~])"
   );
 
-  @NotNull
-  private final Project myProject;
+  private final @NotNull Project myProject;
 
-  @NotNull
-  private final PerlHostDataProvider myHostDataContainer;
+  private final @NotNull PerlHostDataProvider myHostDataContainer;
 
   public PerlAbsolutePathConsoleFilter(@NotNull Project project, @NotNull PerlHostDataProvider hostDataContainer) {
     myProject = project;
     myHostDataContainer = hostDataContainer;
   }
 
-  @Nullable
   @Override
-  public Result applyFilter(String line, int entireLength) {
+  public @Nullable Result applyFilter(String line, int entireLength) {
     int startOffset = entireLength - line.length();
     List<ResultItem> resultList = new ArrayList<>();
     Matcher matcher = PATTERN.matcher(line);

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,22 +32,19 @@ public abstract class PerlSourceRootEditHandler extends ModuleSourceRootEditHand
     super(rootType);
   }
 
-  @Nullable
   @Override
-  public Icon getFolderUnderRootIcon() {
+  public @Nullable Icon getFolderUnderRootIcon() {
     return null;
   }
 
-  @Nullable
   @Override
-  public CustomShortcutSet getMarkRootShortcutSet() {
+  public @Nullable CustomShortcutSet getMarkRootShortcutSet() {
     return null;
   }
 
 
-  @NotNull
   @Override
-  public Color getRootsGroupColor() {
+  public @NotNull Color getRootsGroupColor() {
     return new JBColor(new Color(76, 94, 133), new Color(76, 94, 133));
   }
 

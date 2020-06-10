@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,22 +42,19 @@ public class PerlSubDeclarationElementType extends IStubElementType<PerlSubDecla
     return new PsiPerlSubDeclarationImpl(stub, this);
   }
 
-  @NotNull
   @Override
-  public PsiElement getPsiElement(@NotNull ASTNode node) {
+  public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
     return new PsiPerlSubDeclarationImpl(node);
   }
 
-  @NotNull
   @Override
-  public PerlSubDeclarationStub createStub(@NotNull PerlSubDeclarationElement psi, StubElement parentStub) {
+  public @NotNull PerlSubDeclarationStub createStub(@NotNull PerlSubDeclarationElement psi, StubElement parentStub) {
     return new PerlSubDeclarationStub(parentStub, psi.getNamespaceName(), psi.getSubName(), psi.getAnnotations(), this);
   }
 
 
-  @NotNull
   @Override
-  public String getExternalId() {
+  public @NotNull String getExternalId() {
     return "perl." + super.toString();
   }
 
@@ -75,9 +72,8 @@ public class PerlSubDeclarationElementType extends IStubElementType<PerlSubDecla
     }
   }
 
-  @NotNull
   @Override
-  public PerlSubDeclarationStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
+  public @NotNull PerlSubDeclarationStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
     String packageName = PerlStubSerializationUtil.readString(dataStream);
     String subName = PerlStubSerializationUtil.readString(dataStream);
     PerlSubAnnotations annotations = null;

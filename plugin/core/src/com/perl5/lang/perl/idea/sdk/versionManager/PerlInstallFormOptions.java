@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,22 +26,19 @@ import java.util.List;
  * Additional possible options for version manager perl installation
  */
 public abstract class PerlInstallFormOptions {
-  @NotNull
-  public JPanel getRootPanel() {
+  public @NotNull JPanel getRootPanel() {
     return new JPanel();
   }
 
   /**
    * Returns target perl installation id. perlbrew allows to override target name
    */
-  @NotNull
-  public String getTargetName(@NotNull String distributionId) {
+  public @NotNull String getTargetName(@NotNull String distributionId) {
     return distributionId;
   }
 
   /**
    * Builds command line parameters based on form options
    */
-  @NotNull
-  public List<String> buildParametersList() {return Collections.emptyList();}
+  public @NotNull List<String> buildParametersList() {return Collections.emptyList();}
 }

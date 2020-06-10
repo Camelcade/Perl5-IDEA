@@ -24,8 +24,7 @@ import org.junit.Test;
 
 public class MojoAppNameValidatorTest extends MojoLightTestCase {
   @Override
-  @NotNull
-  protected InputValidator getValidator() {
+  protected @NotNull InputValidator getValidator() {
     return new MojoApp.NameValidator();
   }
 

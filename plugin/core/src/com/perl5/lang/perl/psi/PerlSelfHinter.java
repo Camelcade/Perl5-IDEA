@@ -24,8 +24,7 @@ import org.jetbrains.annotations.NotNull;
  * Implement this interface to wrappers, that should hint a type for self, like mojo helpers
  */
 public interface PerlSelfHinter {
-  @NotNull
-  default PerlValue getSelfType() {
+  default @NotNull PerlValue getSelfType() {
     return PerlValues.UNKNOWN_VALUE;
   }
 }

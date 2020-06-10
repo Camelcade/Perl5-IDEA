@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,9 +44,8 @@ public class MasonTypedHandler extends TypedHandlerDelegate implements Mason2Ele
     SIMPLE_COMPLETION_MAP.put(KEYWORD_TEXT_OPENER_UNCLOSED, KEYWORD_TEXT_CLOSER);
   }
 
-  @NotNull
   @Override
-  public Result charTyped(char c, @NotNull final Project project, @NotNull final Editor editor, @NotNull PsiFile file) {
+  public @NotNull Result charTyped(char c, final @NotNull Project project, final @NotNull Editor editor, @NotNull PsiFile file) {
     if (file.getViewProvider() instanceof Mason2TemplatingFileViewProvider) {
       if (c == '>') {
         PsiElement element = file.findElementAt(editor.getCaretModel().getOffset() - 2);

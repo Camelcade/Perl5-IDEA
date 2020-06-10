@@ -45,8 +45,7 @@ public abstract class PerlMethodMixin extends PerlCompositeElementImpl implement
   }
 
   @Override
-  @Nullable
-  public String getExplicitNamespaceName() {
+  public @Nullable String getExplicitNamespaceName() {
     PerlNamespaceElement namespaceElement = getNamespaceElement();
     return namespaceElement != null ? namespaceElement.getCanonicalName() : null;
   }
@@ -57,9 +56,8 @@ public abstract class PerlMethodMixin extends PerlCompositeElementImpl implement
     return subNameElement == null ? null : subNameElement.getText();
   }
 
-  @NotNull
   @Override
-  public PerlValue computePerlValue() {
+  public @NotNull PerlValue computePerlValue() {
     PerlValue subNameValue = PerlScalarValue.create(getName());
     if (subNameValue == UNKNOWN_VALUE) {
       return UNKNOWN_VALUE;
@@ -125,9 +123,8 @@ public abstract class PerlMethodMixin extends PerlCompositeElementImpl implement
       ;
   }
 
-  @Nullable
   @Override
-  public PerlNamespaceElement getNamespaceElement() {
+  public @Nullable PerlNamespaceElement getNamespaceElement() {
     PsiElement childByType = findChildByType(QUALIFYING_PACKAGE);
     if (childByType == null) {
       childByType = findChildByType(PACKAGE);
@@ -135,9 +132,8 @@ public abstract class PerlMethodMixin extends PerlCompositeElementImpl implement
     return childByType == null ? null : (PerlNamespaceElement)childByType;
   }
 
-  @Nullable
   @Override
-  public PerlSubNameElement getSubNameElement() {
+  public @Nullable PerlSubNameElement getSubNameElement() {
     return findChildByClass(PerlSubNameElement.class);
   }
 }

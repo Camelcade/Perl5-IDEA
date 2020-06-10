@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,7 +35,7 @@ public class TemplateToolkitBlocksCompletionProvider extends CompletionProvider<
   @Override
   protected void addCompletions(@NotNull CompletionParameters parameters,
                                 @NotNull ProcessingContext context,
-                                @NotNull final CompletionResultSet result) {
+                                final @NotNull CompletionResultSet result) {
     PsiElement element = parameters.getOriginalPosition();
 
     if (element == null) {

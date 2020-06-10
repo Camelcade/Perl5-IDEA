@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,9 +20,8 @@ import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsProvider;
 import org.jetbrains.annotations.NotNull;
 
 public class ReadonlyImplicitDeclarationsProvider extends PerlImplicitDeclarationsProvider {
-  @NotNull
   @Override
-  public String getDataFileName() {
+  public @NotNull String getDataFileName() {
     return "perlData/Readonly.xml";
   }
 }

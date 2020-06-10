@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,8 +36,7 @@ public class PerlVariableAnnotations {
 
   private byte myFlags = 0;
 
-  @NotNull
-  private PerlValue myValue = UNKNOWN_VALUE;
+  private @NotNull PerlValue myValue = UNKNOWN_VALUE;
 
   private PerlVariableAnnotations() {
   }
@@ -60,8 +59,7 @@ public class PerlVariableAnnotations {
     myFlags |= IS_DEPRECATED;
   }
 
-  @NotNull
-  public PerlValue getAnnotatedValue() {
+  public @NotNull PerlValue getAnnotatedValue() {
     return myValue;
   }
 
@@ -76,8 +74,7 @@ public class PerlVariableAnnotations {
     );
   }
 
-  @Nullable
-  public static PerlVariableAnnotations createFromAnnotationsList(List<PerlAnnotation> annotations) {
+  public static @Nullable PerlVariableAnnotations createFromAnnotationsList(List<PerlAnnotation> annotations) {
     if (annotations.isEmpty()) {
       return null;
     }

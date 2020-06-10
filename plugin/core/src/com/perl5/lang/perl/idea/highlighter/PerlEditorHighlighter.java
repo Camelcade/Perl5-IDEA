@@ -31,9 +31,9 @@ import java.util.Objects;
 
 
 public class PerlEditorHighlighter extends LayeredLexerEditorHighlighter implements PerlElementTypes {
-  public PerlEditorHighlighter(@Nullable final Project project,
-                               @Nullable final VirtualFile virtualFile,
-                               @NotNull final EditorColorsScheme colors) {
+  public PerlEditorHighlighter(final @Nullable Project project,
+                               final @Nullable VirtualFile virtualFile,
+                               final @NotNull EditorColorsScheme colors) {
     super(new PerlSyntaxHighlighter(project), colors);
     registerLayer(POD, new LayerDescriptor(
       Objects.requireNonNull(SyntaxHighlighterFactory.getSyntaxHighlighter(PodFileType.INSTANCE, project, virtualFile)),

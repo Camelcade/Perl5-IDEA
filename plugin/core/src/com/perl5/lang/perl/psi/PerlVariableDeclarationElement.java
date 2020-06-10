@@ -44,8 +44,7 @@ public interface PerlVariableDeclarationElement
   @NotNull
   PerlVariable getVariable();
 
-  @Nullable
-  default Icon getIconByType(@NotNull PerlVariableType type) {
+  default @Nullable Icon getIconByType(@NotNull PerlVariableType type) {
     if (type == PerlVariableType.ARRAY) {
       return PerlIcons.ARRAY_GUTTER_ICON;
     }

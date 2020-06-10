@@ -36,15 +36,13 @@ public class PerlUseStatementElement extends PerlUseStatementElementBase {
     super(stub, nodeType);
   }
 
-  @NotNull
   @Override
-  public final List<? extends PerlDelegatingLightNamedElement<?>> computeLightElementsFromPsi() {
+  public final @NotNull List<? extends PerlDelegatingLightNamedElement<?>> computeLightElementsFromPsi() {
     return getPackageProcessor().computeLightElementsFromPsi(this);
   }
 
-  @NotNull
   @Override
-  protected final List<? extends PerlDelegatingLightNamedElement<?>> computeLightElementsFromStubs(@NotNull PerlUseStatementStub stub) {
+  protected final @NotNull List<? extends PerlDelegatingLightNamedElement<?>> computeLightElementsFromStubs(@NotNull PerlUseStatementStub stub) {
     return getPackageProcessor().computeLightElementsFromStubs(this, stub);
   }
 

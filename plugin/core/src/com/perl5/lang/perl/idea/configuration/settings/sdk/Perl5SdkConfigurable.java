@@ -62,12 +62,9 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
   public static final Perl5SdkWrapper NOT_SELECTED_ITEM = new Perl5TextSdkWrapper(PerlBundle.message("perl.settings.sdk.not.selected"));
 
   private Perl5SdkPanel myPanel;
-  @NotNull
-  private final MessageBusConnection myConnection;
-  @NotNull
-  private final Perl5SdkManipulator mySdkManipulator;
-  @Nullable
-  private Project myProject;
+  private final @NotNull MessageBusConnection myConnection;
+  private final @NotNull Perl5SdkManipulator mySdkManipulator;
+  private @Nullable Project myProject;
 
   private final Disposable myDisposable = Disposer.newDisposable();
 
@@ -86,9 +83,8 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
     myProject = project;
   }
 
-  @NotNull
   @Override
-  public JComponent createComponent() {
+  public @NotNull JComponent createComponent() {
     if (myPanel == null) {
       initPanel();
     }
@@ -147,9 +143,8 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
           }).collect(Collectors.toList());
 
         ActionGroup hostActionGroup = new ActionGroup(hostHandler.getMenuItemTitle(), true) {
-          @NotNull
           @Override
-          public AnAction[] getChildren(@Nullable AnActionEvent e) {
+          public @NotNull AnAction[] getChildren(@Nullable AnActionEvent e) {
             return groupItems.toArray(AnAction.EMPTY_ARRAY);
           }
         };
@@ -205,14 +200,12 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
     mySdkManipulator.selectionChanged(itemToSelect);
   }
 
-  @Nullable
-  public Sdk getSelectedSdk() {
+  public @Nullable Sdk getSelectedSdk() {
     Perl5SdkWrapper selectedWrapper = getSelectedSdkWrapper();
     return selectedWrapper instanceof Perl5RealSdkWrapper ? ((Perl5RealSdkWrapper)selectedWrapper).getSdk() : null;
   }
 
-  @Nullable
-  public Perl5SdkWrapper getSelectedSdkWrapper() {
+  public @Nullable Perl5SdkWrapper getSelectedSdkWrapper() {
     ComboBox<Perl5SdkWrapper> sdkComboBox = myPanel.getSdkComboBox();
     return sdkComboBox == null ? null : (Perl5SdkWrapper)sdkComboBox.getSelectedItem();
   }

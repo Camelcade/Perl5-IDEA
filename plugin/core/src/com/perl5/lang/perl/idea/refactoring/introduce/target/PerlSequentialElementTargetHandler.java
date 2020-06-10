@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,9 +39,8 @@ import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.LP_STRING_QW;
 abstract class PerlSequentialElementTargetHandler extends PerlIntroduceTargetsHandler {
   private static final Logger LOG = Logger.getInstance(PerlSequentialElementTargetHandler.class);
 
-  @NotNull
   @Override
-  protected List<PerlIntroduceTarget> computeTargetsAtCaret(@NotNull PsiElement element, int caretOffset) {
+  protected @NotNull List<PerlIntroduceTarget> computeTargetsAtCaret(@NotNull PsiElement element, int caretOffset) {
     PsiElement[] children = element.getChildren();
     if (children.length == 1 && PsiUtilCore.getElementType(children[0]) == LP_STRING_QW) {
       children = children[0].getChildren();
@@ -69,9 +68,8 @@ abstract class PerlSequentialElementTargetHandler extends PerlIntroduceTargetsHa
     return result;
   }
 
-  @NotNull
   @Override
-  protected List<PerlIntroduceTarget> computeTargetsFromSelection(@NotNull PsiElement element, @NotNull TextRange selectionRange) {
+  protected @NotNull List<PerlIntroduceTarget> computeTargetsFromSelection(@NotNull PsiElement element, @NotNull TextRange selectionRange) {
     PsiElement[] children = element.getChildren();
     if (children.length == 1 && PsiUtilCore.getElementType(children[0]) == LP_STRING_QW) {
       children = children[0].getChildren();
@@ -96,18 +94,16 @@ abstract class PerlSequentialElementTargetHandler extends PerlIntroduceTargetsHa
     return Collections.singletonList(PerlIntroduceTarget.create(element, firstChildToInclude, lastChildToInclude));
   }
 
-  @NotNull
   @Override
-  protected final List<PsiElement> replaceTarget(@NotNull List<PerlIntroduceTarget> occurrences, @NotNull PsiElement replacement) {
+  protected final @NotNull List<PsiElement> replaceTarget(@NotNull List<PerlIntroduceTarget> occurrences, @NotNull PsiElement replacement) {
     if (occurrences.size() == 1 && occurrences.get(0).isFullRange()) {
       return super.replaceTarget(occurrences, replacement);
     }
     return replaceNonTrivialTarget(occurrences, replacement);
   }
 
-  @NotNull
-  protected List<PsiElement> replaceNonTrivialTarget(@NotNull List<PerlIntroduceTarget> occurrences,
-                                                     @NotNull PsiElement replacement) {
+  protected @NotNull List<PsiElement> replaceNonTrivialTarget(@NotNull List<PerlIntroduceTarget> occurrences,
+                                                              @NotNull PsiElement replacement) {
     PsiElement occurrencePlace = occurrences.get(0).getPlace();
     if (occurrencePlace == null) {
       reportEmptyPlace();
@@ -136,9 +132,8 @@ abstract class PerlSequentialElementTargetHandler extends PerlIntroduceTargetsHa
     return result;
   }
 
-  @NotNull
   @Override
-  protected String createTargetExpressionText(@NotNull PerlIntroduceTarget target) {
+  protected @NotNull String createTargetExpressionText(@NotNull PerlIntroduceTarget target) {
     if (target.isFullRange()) {
       return super.createTargetExpressionText(target);
     }
@@ -154,10 +149,9 @@ abstract class PerlSequentialElementTargetHandler extends PerlIntroduceTargetsHa
    *
    * @return list of psiElements representing {@code replacement}
    */
-  @NotNull
-  final List<PsiElement> replaceSequenceWithFlatter(@NotNull PsiElement baseElement,
-                                                    @NotNull PsiElement replacement,
-                                                    @NotNull List<PsiElement> sequenceElement) {
+  final @NotNull List<PsiElement> replaceSequenceWithFlatter(@NotNull PsiElement baseElement,
+                                                             @NotNull PsiElement replacement,
+                                                             @NotNull List<PsiElement> sequenceElement) {
     Set<TextRange> replacementsRanges = new HashSet<>();
     StringBuilder sb = new StringBuilder("(");
     for (PsiElement element : sequenceElement) {

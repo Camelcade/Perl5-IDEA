@@ -59,8 +59,7 @@ public class PerlFormatWithPerlTidyAction extends PurePerlActionBase {
     super(PerlBundle.message("perl.action.reformat.perl.tidy"));
   }
 
-  @NotNull
-  private String getGroup() {
+  private @NotNull String getGroup() {
     return PerlBundle.message("perl.action.perl.tidy.notification.group");
   }
 
@@ -80,8 +79,7 @@ public class PerlFormatWithPerlTidyAction extends PurePerlActionBase {
     return true;
   }
 
-  @Nullable
-  private PerlCommandLine getPerlTidyCommandLine(@NotNull Project project) {
+  private @Nullable PerlCommandLine getPerlTidyCommandLine(@NotNull Project project) {
     PerlSharedSettings sharedSettings = PerlSharedSettings.getInstance(project);
     VirtualFile perlTidyScript =
       ReadAction.compute(() -> PerlRunUtil.findLibraryScriptWithNotification(project, SCRIPT_NAME, PACKAGE_NAME));

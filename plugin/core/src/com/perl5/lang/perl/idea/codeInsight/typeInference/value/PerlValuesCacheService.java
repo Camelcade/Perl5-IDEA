@@ -33,8 +33,7 @@ import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
 
 public class PerlValuesCacheService implements PsiModificationTracker.Listener, Disposable {
   private static final Logger LOG = Logger.getInstance(PerlValuesCacheService.class);
-  @NotNull
-  private final Map<Pair<PerlValue, PerlValueResolver>, PerlValue> myResolveMap = ContainerUtil.createConcurrentWeakMap();
+  private final @NotNull Map<Pair<PerlValue, PerlValueResolver>, PerlValue> myResolveMap = ContainerUtil.createConcurrentWeakMap();
 
   private final AtomicLong myResolveRequests = new AtomicLong();
   private final AtomicLong myResolveBuilds = new AtomicLong();
@@ -48,8 +47,7 @@ public class PerlValuesCacheService implements PsiModificationTracker.Listener, 
 
   }
 
-  @NotNull
-  public PerlValue getResolvedValue(@NotNull PerlValue deferredValue, @NotNull PerlValueResolver resolver) {
+  public @NotNull PerlValue getResolvedValue(@NotNull PerlValue deferredValue, @NotNull PerlValueResolver resolver) {
     Pair<PerlValue, PerlValueResolver> key = Pair.create(deferredValue, resolver);
     myResolveRequests.incrementAndGet();
     PerlValue result = myResolveMap.get(key);
@@ -79,8 +77,7 @@ public class PerlValuesCacheService implements PsiModificationTracker.Listener, 
     myResolveBuilds.set(0);
   }
 
-  @NotNull
-  public static PerlValuesCacheService getInstance(@NotNull Project project) {
+  public static @NotNull PerlValuesCacheService getInstance(@NotNull Project project) {
     return ServiceManager.getService(project, PerlValuesCacheService.class);
   }
 }

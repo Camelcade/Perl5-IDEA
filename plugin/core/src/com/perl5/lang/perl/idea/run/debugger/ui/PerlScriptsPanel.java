@@ -48,8 +48,7 @@ import java.util.List;
 public class PerlScriptsPanel extends JPanel {
   private static final Comparator<PerlLoadedFileDescriptor> compareEntries =
     (o1, o2) -> StringUtil.compare(o1.getPresentableName(), o2.getPresentableName(), false);
-  @NotNull
-  private final Project myProject;
+  private final @NotNull Project myProject;
   private final PerlDebugThread myDebugThread;
   private final SortedListModel<PerlLoadedFileDescriptor> myModel = SortedListModel.create(compareEntries);
 
@@ -61,8 +60,7 @@ public class PerlScriptsPanel extends JPanel {
   }
 
 
-  @Nullable
-  private VirtualFile getVirtualFileByName(String virtualFileName) {
+  private @Nullable VirtualFile getVirtualFileByName(String virtualFileName) {
     VirtualFile result = VfsUtil.findFileByIoFile(new File(virtualFileName), true);
 
     if (result != null) {

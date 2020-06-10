@@ -46,9 +46,8 @@ public class MasonNamespaceElementType extends PerlNamespaceDefinitionElementTyp
     return new MasonNamespaceDefinitionImpl(stub, this);
   }
 
-  @NotNull
   @Override
-  public PerlNamespaceDefinitionStub createStub(@NotNull PerlNamespaceDefinitionElement psi, StubElement parentStub) {
+  public @NotNull PerlNamespaceDefinitionStub createStub(@NotNull PerlNamespaceDefinitionElement psi, StubElement parentStub) {
     assert psi instanceof MasonNamespaceDefinitionImpl;
     return new PerlNamespaceDefinitionStub(parentStub, this, new PerlNamespaceDefinitionData(
       StringUtil.notNullize(((MasonNamespaceDefinitionImpl)psi).getAbsoluteComponentPath()), psi));
@@ -77,9 +76,8 @@ public class MasonNamespaceElementType extends PerlNamespaceDefinitionElementTyp
            StringUtil.isNotEmpty(((MasonNamespaceDefinition)psi).getAbsoluteComponentPath());
   }
 
-  @NotNull
   @Override
-  public PsiElement getPsiElement(@NotNull ASTNode node) {
+  public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
     return new MasonNamespaceDefinitionImpl(node);
   }
 }

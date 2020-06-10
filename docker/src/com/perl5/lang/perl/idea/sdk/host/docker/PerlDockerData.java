@@ -46,32 +46,25 @@ class PerlDockerData extends PerlHostData<PerlDockerData, PerlDockerHandler> {
   static final String HELPERS_ROOT = CONTAINER_ROOT + PerlFileUtil.linuxisePath(PerlPluginUtil.getPluginHelpersRoot());
   private static final Logger LOG = Logger.getInstance(PerlDockerData.class);
 
-  @Transient
-  @Nullable
-  private PerlDockerFileSystem myFileSystem;
+  @Transient private @Nullable PerlDockerFileSystem myFileSystem;
 
-  @Nullable
-  @Tag("image-name")
-  private String myImageName;
+  @Tag("image-name") private @Nullable String myImageName;
 
   public PerlDockerData(@NotNull PerlDockerHandler handler) {
     super(handler);
   }
 
-  @NotNull
   @Override
-  public PerlOsHandler getOsHandler() {
+  public @NotNull PerlOsHandler getOsHandler() {
     return PerlOsHandlers.LINUX;
   }
 
-  @Nullable
   @Override
-  public String getSecondaryShortName() {
+  public @Nullable String getSecondaryShortName() {
     return "[" + myImageName + "]";
   }
 
-  @NotNull
-  public String getImageName() {
+  public @NotNull String getImageName() {
     return Objects.requireNonNull(myImageName);
   }
 
@@ -79,15 +72,13 @@ class PerlDockerData extends PerlHostData<PerlDockerData, PerlDockerHandler> {
     return getImageName().replaceAll("[:/]", "_");
   }
 
-  @NotNull
-  public PerlDockerData withImageName(@NotNull String imageName) {
+  public @NotNull PerlDockerData withImageName(@NotNull String imageName) {
     myImageName = imageName;
     return this;
   }
 
-  @NotNull
   @Override
-  public synchronized PerlHostVirtualFileSystem getFileSystem(@NotNull Disposable disposable) {
+  public synchronized @NotNull PerlHostVirtualFileSystem getFileSystem(@NotNull Disposable disposable) {
     if (myFileSystem == null) {
       myFileSystem = PerlDockerFileSystem.create(this);
       Disposer.register(disposable, () -> {
@@ -105,9 +96,8 @@ class PerlDockerData extends PerlHostData<PerlDockerData, PerlDockerHandler> {
     return hostSystem;
   }
 
-  @Nullable
   @Override
-  public File findFileByName(@NotNull String fileName) {
+  public @Nullable File findFileByName(@NotNull String fileName) {
     try {
       ProcessOutput output = execAndGetOutput(new PerlCommandLine("\\which", fileName).withHostData(this));
       int exitCode = output.getExitCode();
@@ -124,15 +114,13 @@ class PerlDockerData extends PerlHostData<PerlDockerData, PerlDockerHandler> {
     return null;
   }
 
-  @NotNull
   @Override
-  protected Process createProcess(@NotNull PerlCommandLine commandLine) throws ExecutionException {
+  protected @NotNull Process createProcess(@NotNull PerlCommandLine commandLine) throws ExecutionException {
     return new PerlDockerAdapter(this).createProcess(commandLine);
   }
 
-  @Nullable
   @Override
-  protected String doGetLocalPath(@NotNull String remotePath) {
+  protected @Nullable String doGetLocalPath(@NotNull String remotePath) {
     File remoteFile = new File(remotePath);
     if (FileUtil.isAncestor(CONTAINER_ROOT_FILE, remoteFile, false)) {
       return PerlFileUtil.unLinuxisePath('/' + FileUtil.getRelativePath(CONTAINER_ROOT_FILE, remoteFile));
@@ -140,36 +128,31 @@ class PerlDockerData extends PerlHostData<PerlDockerData, PerlDockerHandler> {
     return FileUtil.toSystemIndependentName(FileUtil.join(getLocalCacheRoot(), remotePath));
   }
 
-  @Nullable
   @Override
-  protected String doGetRemotePath(@NotNull String localPath) {
+  protected @Nullable String doGetRemotePath(@NotNull String localPath) {
     return FileUtil.toSystemIndependentName(new File(CONTAINER_ROOT_FILE, PerlFileUtil.linuxisePath(localPath)).getPath());
   }
 
-  @NotNull
   @Override
-  public String getLocalCacheRoot() {
+  public @NotNull String getLocalCacheRoot() {
     String cachesPath = PerlPluginUtil.getRemotesCachePath();
     File cacheRoot = new File(cachesPath, "docker_" + getSafeImageName());
     FileUtil.createDirectory(cacheRoot);
     return cacheRoot.getAbsolutePath();
   }
 
-  @NotNull
   @Override
-  public PerlHostFileTransfer<PerlDockerData> getFileTransfer() {
+  public @NotNull PerlHostFileTransfer<PerlDockerData> getFileTransfer() {
     return new PerlDockerFileTransfer(this);
   }
 
-  @NotNull
   @Override
-  public String getHelpersRootPath() {
+  public @NotNull String getHelpersRootPath() {
     return HELPERS_ROOT;
   }
 
-  @NotNull
   @Override
-  protected PerlDockerData self() {
+  protected @NotNull PerlDockerData self() {
     return this;
   }
 }

@@ -63,21 +63,18 @@ public class PerlDebugProfileState extends PerlDebugProfileStateBase {
     }
   };
 
-  @Nullable
-  private PerlHostData<?, ?> myHostData;
+  private @Nullable PerlHostData<?, ?> myHostData;
 
   public PerlDebugProfileState(ExecutionEnvironment environment) {
     super(environment);
   }
 
-  @NotNull
-  private PerlHostData<?, ?> getHostData() {
+  private @NotNull PerlHostData<?, ?> getHostData() {
     return Objects.requireNonNull(myHostData);
   }
 
-  @NotNull
   @Override
-  protected ProcessHandler startProcess() throws ExecutionException {
+  protected @NotNull ProcessHandler startProcess() throws ExecutionException {
     ProcessHandler processHandler = super.startProcess();
     RunProfile runProfile = getEnvironment().getRunProfile();
     if (runProfile instanceof GenericPerlRunConfiguration) {
@@ -90,15 +87,13 @@ public class PerlDebugProfileState extends PerlDebugProfileStateBase {
     return processHandler;
   }
 
-  @NotNull
   @Override
-  public List<String> getAdditionalPerlParameters(@NotNull GenericPerlRunConfiguration perlRunConfiguration) {
+  public @NotNull List<String> getAdditionalPerlParameters(@NotNull GenericPerlRunConfiguration perlRunConfiguration) {
     return Collections.singletonList(DEBUG_ARGUMENT);
   }
 
-  @NotNull
   @Override
-  protected PerlCommandLine createCommandLine() throws ExecutionException {
+  protected @NotNull PerlCommandLine createCommandLine() throws ExecutionException {
     return super.createCommandLine().withPortMappings(PortMapping.create(getDebugPort()));
   }
 
@@ -119,8 +114,7 @@ public class PerlDebugProfileState extends PerlDebugProfileStateBase {
   }
 
   @Override
-  @NotNull
-  public String mapPathToLocal(@NotNull String remotePath) {
+  public @NotNull String mapPathToLocal(@NotNull String remotePath) {
     String localPath = getHostData().getLocalPath(remotePath);
     return localPath == null ? remotePath : localPath;
   }

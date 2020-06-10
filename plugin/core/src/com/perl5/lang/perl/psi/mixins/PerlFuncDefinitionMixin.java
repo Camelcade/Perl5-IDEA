@@ -39,9 +39,8 @@ public abstract class PerlFuncDefinitionMixin extends PerlSubDefinitionBase {
     return false;
   }
 
-  @Nullable
   @Override
-  protected PsiElement getSignatureContainer() {
+  protected @Nullable PsiElement getSignatureContainer() {
     return ((PsiPerlFuncDefinition)this).getSignatureContent();
   }
 }

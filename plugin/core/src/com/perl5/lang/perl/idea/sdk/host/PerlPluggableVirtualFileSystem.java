@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,9 +31,8 @@ public abstract class PerlPluggableVirtualFileSystem extends DeprecatedVirtualFi
   public void refresh(boolean asynchronous) {
   }
 
-  @NotNull
   @Override
-  public final String getProtocol() {
+  public final @NotNull String getProtocol() {
     throw new RuntimeException("This should neve be called, PerlHostVirtualFileSystem is a frontend");
   }
 
@@ -43,9 +42,8 @@ public abstract class PerlPluggableVirtualFileSystem extends DeprecatedVirtualFi
       return false;
     }
 
-    @NotNull
     @Override
-    public final VirtualFileSystem getFileSystem() {
+    public final @NotNull VirtualFileSystem getFileSystem() {
       return PerlHostVirtualFileSystem.getInstance();
     }
   }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,12 +30,9 @@ import java.io.File;
 public class PerlFileDescriptor {
   public static final PerlFileDescriptor ROOT_DESCRIPTOR = new PerlFileDescriptor("/", "", Type.DIRECTORY, 0);
   private static final Logger LOG = Logger.getInstance(PerlFileDescriptor.class);
-  @NotNull
-  private final String myPath;
-  @NotNull
-  private final String myName;
-  @NotNull
-  private final Type myType;
+  private final @NotNull String myPath;
+  private final @NotNull String myName;
+  private final @NotNull Type myType;
   // in kilobytes
   private final int mySize;
 
@@ -46,8 +43,7 @@ public class PerlFileDescriptor {
     mySize = size;
   }
 
-  @Nullable
-  public PerlFileDescriptor getParentDescriptor() {
+  public @Nullable PerlFileDescriptor getParentDescriptor() {
     if (this == ROOT_DESCRIPTOR) {
       return null;
     }
@@ -58,18 +54,15 @@ public class PerlFileDescriptor {
     return new PerlFileDescriptor(FileUtil.toSystemIndependentName(parentFile.getParent()), parentFile.getName(), Type.DIRECTORY, 0);
   }
 
-  @NotNull
-  public String getPath() {
+  public @NotNull String getPath() {
     return myPath + myName;
   }
 
-  @NotNull
-  public String getName() {
+  public @NotNull String getName() {
     return myName;
   }
 
-  @NotNull
-  public Type getType() {
+  public @NotNull Type getType() {
     return myType;
   }
 
@@ -111,8 +104,7 @@ public class PerlFileDescriptor {
    * @implNote Prefixes are:
    */
   @Contract("_, null->null")
-  @Nullable
-  public static PerlFileDescriptor create(@NotNull String basePath, @Nullable String input) {
+  public static @Nullable PerlFileDescriptor create(@NotNull String basePath, @Nullable String input) {
     if (input == null) {
       return null;
     }

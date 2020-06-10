@@ -27,8 +27,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Locale;
 
 public class PerlToggleSourceRootAction extends ToggleAction {
-  @NotNull
-  private final PerlContentEntriesTreeEditor myEditor;
+  private final @NotNull PerlContentEntriesTreeEditor myEditor;
   private final ModuleSourceRootEditHandler<?> myHandler;
 
   public PerlToggleSourceRootAction(@NotNull PerlContentEntriesTreeEditor editor,

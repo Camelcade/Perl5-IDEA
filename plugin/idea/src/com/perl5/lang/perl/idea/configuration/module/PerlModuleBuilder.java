@@ -20,8 +20,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class PerlModuleBuilder extends PerlModuleBuilderBase<PerlProjectGenerationSettings> {
   @Override
-  @NotNull
-  protected PerlProjectGenerator getGenerator() {
+  protected @NotNull PerlProjectGenerator getGenerator() {
     return new PerlProjectGenerator();
   }
 }

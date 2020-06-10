@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,23 +39,20 @@ public final class PerlArrayElementValue extends PerlParametrizedOperationValue 
     super(deserializer);
   }
 
-  @NotNull
   @Override
-  protected PerlValue computeResolve(@NotNull PerlValue resolvedArrayValue,
-                                     @NotNull PerlValue resolvedIndexValue,
-                                     @NotNull PerlValueResolver resolver) {
+  protected @NotNull PerlValue computeResolve(@NotNull PerlValue resolvedArrayValue,
+                                              @NotNull PerlValue resolvedIndexValue,
+                                              @NotNull PerlValueResolver resolver) {
     return computeStrictResolve(resolvedArrayValue, resolvedIndexValue);
   }
 
-  @NotNull
-  private static PerlValue computeStrictResolve(@NotNull PerlValue resolvedArrayValue,
-                                                @NotNull PerlValue resolvedIndexValue) {
+  private static @NotNull PerlValue computeStrictResolve(@NotNull PerlValue resolvedArrayValue,
+                                                         @NotNull PerlValue resolvedIndexValue) {
     return ObjectUtils.notNull(computeResolve(resolvedArrayValue, resolvedIndexValue), UNKNOWN_VALUE);
   }
 
-  @Nullable
-  private static PerlValue computeResolve(@NotNull PerlValue resolvedArrayValue,
-                                          @NotNull PerlValue resolvedIndexValue) {
+  private static @Nullable PerlValue computeResolve(@NotNull PerlValue resolvedArrayValue,
+                                                    @NotNull PerlValue resolvedIndexValue) {
     return resolvedArrayValue instanceof PerlArrayValue ? ((PerlArrayValue)resolvedArrayValue).get(resolvedIndexValue) : null;
   }
 
@@ -64,13 +61,11 @@ public final class PerlArrayElementValue extends PerlParametrizedOperationValue 
     return ARRAY_ELEMENT_ID;
   }
 
-  @NotNull
-  public PerlValue getArray() {
+  public @NotNull PerlValue getArray() {
     return getBaseValue();
   }
 
-  @NotNull
-  public PerlValue getIndex() {
+  public @NotNull PerlValue getIndex() {
     return getParameter();
   }
 
@@ -79,8 +74,7 @@ public final class PerlArrayElementValue extends PerlParametrizedOperationValue 
     return "ArrayItem: " + getBaseValue() + "[" + getParameter() + "]";
   }
 
-  @NotNull
-  public static PerlValue create(@NotNull PerlValue arrayValue, @NotNull PerlValue indexValue) {
+  public static @NotNull PerlValue create(@NotNull PerlValue arrayValue, @NotNull PerlValue indexValue) {
     if (arrayValue.isDeterministic() && indexValue.isDeterministic()) {
       return PerlValuesBuilder.convert(arrayValue, indexValue, PerlArrayElementValue::computeStrictResolve);
     }

@@ -109,53 +109,46 @@ public interface HTMLMasonElementTypes extends HTMLMasonSyntaxElements {
   HTMLMasonArgsBlockElementType HTML_MASON_ARGS_BLOCK = new HTMLMasonArgsBlockElementType("HTML_MASON_ARGS_BLOCK");
 
   IElementType HTML_MASON_ONCE_BLOCK = new HTMLMasonElementType("HTML_MASON_ONCE_BLOCK") {
-    @NotNull
     @Override
-    public PsiElement getPsiElement(@NotNull ASTNode node) {
+    public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
       return new HTMLMasonOnceBlockImpl(node);
     }
   };
   IElementType HTML_MASON_INIT_BLOCK = new HTMLMasonElementType("HTML_MASON_INIT_BLOCK") {
-    @NotNull
     @Override
-    public PsiElement getPsiElement(@NotNull ASTNode node) {
+    public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
       return new HTMLMasonInitBlockImpl(node);
     }
   };
   IElementType HTML_MASON_CLEANUP_BLOCK = new HTMLMasonElementType("HTML_MASON_CLEANUP_BLOCK") {
-    @NotNull
     @Override
-    public PsiElement getPsiElement(@NotNull ASTNode node) {
+    public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
       return new HTMLMasonCleanupBlockImpl(node);
     }
   };
   IElementType HTML_MASON_SHARED_BLOCK = new HTMLMasonElementType("HTML_MASON_SHARED_BLOCK") {
-    @NotNull
     @Override
-    public PsiElement getPsiElement(@NotNull ASTNode node) {
+    public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
       return new HTMLMasonSharedBlockImpl(node);
     }
   };
   IElementType HTML_MASON_FILTERED_BLOCK = new HTMLMasonElementType("HTML_MASON_FILTERED_BLOCK") {
-    @NotNull
     @Override
-    public PsiElement getPsiElement(@NotNull ASTNode node) {
+    public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
       return new HTMLMasonCompositeElementImpl(node);
     }
   };
 
   IElementType HTML_MASON_FILTER_BLOCK = new HTMLMasonElementType("HTML_MASON_FILTER_BLOCK") {
-    @NotNull
     @Override
-    public PsiElement getPsiElement(@NotNull ASTNode node) {
+    public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
       return new HTMLMasonFilterBlockImpl(node);
     }
   };
 
   IElementType HTML_MASON_BLOCK = new HTMLMasonElementType("HTML_MASON_BLOCK") {
-    @NotNull
     @Override
-    public PsiElement getPsiElement(@NotNull ASTNode node) {
+    public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
       return new HTMLMasonBlockImpl(node);
     }
   };

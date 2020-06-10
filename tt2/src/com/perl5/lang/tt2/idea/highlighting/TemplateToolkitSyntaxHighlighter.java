@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -53,15 +53,13 @@ public class TemplateToolkitSyntaxHighlighter extends SyntaxHighlighterBase impl
     myProject = project;
   }
 
-  @NotNull
   @Override
-  public Lexer getHighlightingLexer() {
+  public @NotNull Lexer getHighlightingLexer() {
     return new TemplateToolkitLexerAdapter(myProject);
   }
 
-  @NotNull
   @Override
-  public TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
+  public @NotNull TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
     if (myMarkers.contains(tokenType)) {
       return TT2_MARKER_KEYS;
     }

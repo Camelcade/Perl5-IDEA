@@ -50,25 +50,23 @@ import java.util.Set;
 
 public class PerlVariableCompletionUtil {
 
-  @NotNull
-  public static LookupElementBuilder processVariableLookupElement(@NotNull String name, @NotNull PerlVariableType variableType) {
+  public static @NotNull LookupElementBuilder processVariableLookupElement(@NotNull String name, @NotNull PerlVariableType variableType) {
     return LookupElementBuilder.create(PerlVariable.braceName(name)).withIcon(PerlIconProvider.getIcon(variableType));
   }
 
-  @NotNull
-  public static LookupElementBuilder createArrayElementLookupElement(@NotNull String name, @NotNull PerlVariableType variableType) {
+  public static @NotNull LookupElementBuilder createArrayElementLookupElement(@NotNull String name,
+                                                                              @NotNull PerlVariableType variableType) {
     return processVariableLookupElement(name, variableType)
       .withInsertHandler(PerlInsertHandlers.ARRAY_ELEMENT_INSERT_HANDLER).withTailText("[]");
   }
 
-  @NotNull
-  public static LookupElementBuilder processHashElementLookupElement(@NotNull String name, @NotNull PerlVariableType variableType) {
+  public static @NotNull LookupElementBuilder processHashElementLookupElement(@NotNull String name,
+                                                                              @NotNull PerlVariableType variableType) {
     return processVariableLookupElement(name, variableType)
       .withInsertHandler(PerlInsertHandlers.HASH_ELEMENT_INSERT_HANDLER).withTailText("{}");
   }
 
-  @NotNull
-  private static String computeVariableName(@NotNull PerlVariableDeclarationElement element, boolean forceShortMain) {
+  private static @NotNull String computeVariableName(@NotNull PerlVariableDeclarationElement element, boolean forceShortMain) {
     if (element.isGlobalDeclaration() && !(element instanceof PerlBuiltInVariable)) {
       return StringUtil.notNullize(PerlVariable.adjustName(element.getCanonicalName(), forceShortMain));
     }
@@ -92,10 +90,9 @@ public class PerlVariableCompletionUtil {
     return completionProcessor.process(sigilToPrepend == '_' ? elementBuilder : elementBuilder.withLookupString(variableName));
   }
 
-  @Nullable
-  public static LookupElementBuilder processVariableLookupElement(@NotNull PerlGlobVariable typeGlob,
-                                                                  boolean withSigil,
-                                                                  @NotNull PerlVariableCompletionProcessor variableCompletionProcessor) {
+  public static @Nullable LookupElementBuilder processVariableLookupElement(@NotNull PerlGlobVariable typeGlob,
+                                                                            boolean withSigil,
+                                                                            @NotNull PerlVariableCompletionProcessor variableCompletionProcessor) {
     String variableName = StringUtil.notNullize(typeGlob.getCanonicalName());
     if (!variableCompletionProcessor.matches(variableName)) {
       return null;
@@ -139,8 +136,7 @@ public class PerlVariableCompletionUtil {
     }
   }
 
-  @NotNull
-  public static <T extends LookupElement> T setLexical(@NotNull T element) {
+  public static @NotNull <T extends LookupElement> T setLexical(@NotNull T element) {
     element.putUserData(PerlCompletionWeighter.WEIGHT, 1);
     return element;
   }
@@ -208,8 +204,7 @@ public class PerlVariableCompletionUtil {
   /**
    * @return processor of variable declarations, generating lookup elements for them and feeding to the {@code lookupConsumer}
    */
-  @NotNull
-  private static Processor<PerlVariableDeclarationElement> createVariableLookupProcessor(
+  private static @NotNull Processor<PerlVariableDeclarationElement> createVariableLookupProcessor(
     @NotNull PerlVariableCompletionProcessor completionProcessor) {
 
     PsiElement perlVariable = completionProcessor.getLeafParentElement();

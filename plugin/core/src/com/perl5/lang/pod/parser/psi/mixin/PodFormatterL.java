@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -99,14 +99,12 @@ public class PodFormatterL extends PodSectionMixin implements PodFormatter, PodS
     return references.toArray(PsiReference.EMPTY_ARRAY);
   }
 
-  @Nullable
-  public PodLinkDescriptor getLinkDescriptor() {
+  public @Nullable PodLinkDescriptor getLinkDescriptor() {
     return CachedValuesManager.getCachedValue(this, () -> CachedValueProvider.Result.create(
       PodLinkDescriptor.create(this), PodFormatterL.this));
   }
 
-  @Nullable
-  public PsiFile getTargetFile() {
+  public @Nullable PsiFile getTargetFile() {
     PsiReference[] references = getReferences();
 
     for (PsiReference reference : references) {
@@ -118,23 +116,19 @@ public class PodFormatterL extends PodSectionMixin implements PodFormatter, PodS
     return getContainingFile();
   }
 
-  @Nullable
-  public PsiLinkText getLinkTextElement() {
+  public @Nullable PsiLinkText getLinkTextElement() {
     return PsiTreeUtil.getChildOfType(getContentBlock(), PsiLinkText.class);
   }
 
-  @Nullable
-  public PsiLinkName getLinkNameElement() {
+  public @Nullable PsiLinkName getLinkNameElement() {
     return PsiTreeUtil.getChildOfType(getContentBlock(), PsiLinkName.class);
   }
 
-  @Nullable
-  public PsiLinkSection getLinkSectionElement() {
+  public @Nullable PsiLinkSection getLinkSectionElement() {
     return PsiTreeUtil.getChildOfType(getContentBlock(), PsiLinkSection.class);
   }
 
-  @Nullable
-  public PsiLinkUrl getLinkUrlElement() {
+  public @Nullable PsiLinkUrl getLinkUrlElement() {
     return PsiTreeUtil.getChildOfType(getContentBlock(), PsiLinkUrl.class);
   }
 

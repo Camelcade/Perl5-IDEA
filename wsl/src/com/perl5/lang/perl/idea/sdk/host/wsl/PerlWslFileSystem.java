@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,16 +43,14 @@ import java.util.Objects;
 class PerlWslFileSystem extends PerlPluggableVirtualFileSystem {
   private static final Logger LOG = Logger.getInstance(PerlWslFileSystem.class);
 
-  @NotNull
-  private final WSLDistributionWithRoot myDistribution;
+  private final @NotNull WSLDistributionWithRoot myDistribution;
 
   private PerlWslFileSystem(@NotNull WSLDistributionWithRoot distribution) {
     myDistribution = distribution;
   }
 
-  @Nullable
   @Override
-  public VirtualFile findFileByPath(@NotNull String path) {
+  public @Nullable VirtualFile findFileByPath(@NotNull String path) {
     String windowsPath = myDistribution.getWindowsPath(path);
     VirtualFile realFile = windowsPath == null ? null : VfsUtil.findFileByIoFile(new File(windowsPath), false);
     return realFile == null ? null : new WslVirtualFile(realFile, path);
@@ -66,9 +64,8 @@ class PerlWslFileSystem extends PerlPluggableVirtualFileSystem {
     }
   }
 
-  @Nullable
   @Override
-  public VirtualFile refreshAndFindFileByPath(@NotNull String path) {
+  public @Nullable VirtualFile refreshAndFindFileByPath(@NotNull String path) {
     String windowsPath = myDistribution.getWindowsPath(path);
     VirtualFile realFile = windowsPath == null ? null : LocalFileSystem.getInstance().refreshAndFindFileByPath(windowsPath);
     return realFile == null ? null : new WslVirtualFile(realFile, path);
@@ -80,17 +77,15 @@ class PerlWslFileSystem extends PerlPluggableVirtualFileSystem {
 
   private class WslVirtualFile extends PerlPluggableVirtualFile {
     // fixme this is introduced because wsl improperly map root file
-    @NotNull
-    private final String myPath;
+    private final @NotNull String myPath;
 
     public WslVirtualFile(@NotNull VirtualFile originalVirtualFile, @NotNull String path) {
       setOriginalFile(originalVirtualFile);
       myPath = FileUtil.toSystemIndependentName(path);
     }
 
-    @NotNull
     @Override
-    public String getPath() {
+    public @NotNull String getPath() {
       return myPath;
     }
 
@@ -121,21 +116,18 @@ class PerlWslFileSystem extends PerlPluggableVirtualFileSystem {
       return getOriginalFile().getLength();
     }
 
-    @NotNull
     @Override
-    public String getName() {
+    public @NotNull String getName() {
       return getOriginalFile().getName();
     }
 
-    @Nullable
     @Override
-    public String getExtension() {
+    public @Nullable String getExtension() {
       return getOriginalFile().getExtension();
     }
 
-    @NotNull
     @Override
-    public String getNameWithoutExtension() {
+    public @NotNull String getNameWithoutExtension() {
       return getOriginalFile().getNameWithoutExtension();
     }
 

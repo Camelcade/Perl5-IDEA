@@ -28,12 +28,9 @@ import java.util.List;
 
 public class PerlUseStatementStub extends PerlPolyNamedElementStub<PerlUseStatementElement> implements StubElement<PerlUseStatementElement>,
                                                                                                        PerlUseStatement {
-  @NotNull
-  private final String myPackageName;
-  @NotNull
-  private final String myNamespaceName;
-  @Nullable
-  private final List<String> myImportOptions;
+  private final @NotNull String myPackageName;
+  private final @NotNull String myNamespaceName;
+  private final @Nullable List<String> myImportOptions;
 
   public PerlUseStatementStub(StubElement<?> parent,
                               @NotNull String namespaceName,
@@ -46,21 +43,18 @@ public class PerlUseStatementStub extends PerlPolyNamedElementStub<PerlUseStatem
     myImportOptions = importOptions;
   }
 
-  @NotNull
   @Override
-  public String getPackageName() {
+  public @NotNull String getPackageName() {
     return myPackageName;
   }
 
-  @NotNull
   @Override
-  public String getNamespaceName() {
+  public @NotNull String getNamespaceName() {
     return myNamespaceName;
   }
 
-  @Nullable
   @Override
-  public List<String> getImportParameters() {
+  public @Nullable List<String> getImportParameters() {
     return myImportOptions;
   }
 

@@ -36,27 +36,23 @@ public class TemplateToolkitFileType extends PerlPluginBaseFileType implements F
     super(TemplateToolkitLanguage.INSTANCE);
   }
 
-  @NotNull
   @Override
-  public String getName() {
+  public @NotNull String getName() {
     return "Template Toolkit";
   }
 
-  @NotNull
   @Override
-  public String getDescription() {
+  public @NotNull String getDescription() {
     return "Template toolkit template";
   }
 
-  @NotNull
   @Override
-  public String getDefaultExtension() {
+  public @NotNull String getDefaultExtension() {
     return "tt";
   }
 
-  @Nullable
   @Override
-  public Icon getIcon() {
+  public @Nullable Icon getIcon() {
     return TemplateToolkitIcons.TTK2_ICON;
   }
 

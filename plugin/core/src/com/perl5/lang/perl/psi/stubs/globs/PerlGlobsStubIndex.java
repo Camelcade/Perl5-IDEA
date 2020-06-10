@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,9 +37,8 @@ public class PerlGlobsStubIndex extends PerlStubIndexBase<PsiPerlGlobVariable> {
     return super.getVersion() + VERSION;
   }
 
-  @NotNull
   @Override
-  public StubIndexKey<String, PsiPerlGlobVariable> getKey() {
+  public @NotNull StubIndexKey<String, PsiPerlGlobVariable> getKey() {
     return KEY;
   }
 

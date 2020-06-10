@@ -71,9 +71,8 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
   private static final TokenSet FORCE_AS_FUNC_TOKENSET = TokenSet.orSet(TAGS_TOKEN_SET, TokenSet.create(BLOCK_NAME, OPERATOR_FILETEST));
   private static final String SECTION_DESCRIPTION = "DESCRIPTION";
 
-  @Nullable
   @Override
-  public String getQuickNavigateInfo(PsiElement element, PsiElement originalElement) {
+  public @Nullable String getQuickNavigateInfo(PsiElement element, PsiElement originalElement) {
     if (originalElement instanceof PerlVariableNameElement) {
       return getQuickNavigateInfo(element, originalElement.getParent());
     }
@@ -94,12 +93,11 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
     return super.getDocumentationElementForLookupItem(psiManager, object, element);
   }
 
-  @Nullable
   @Override
-  public PsiElement getCustomDocumentationElement(@NotNull Editor editor,
-                                                  @NotNull PsiFile file,
-                                                  @Nullable PsiElement contextElement,
-                                                  int targetOffset) {
+  public @Nullable PsiElement getCustomDocumentationElement(@NotNull Editor editor,
+                                                            @NotNull PsiFile file,
+                                                            @Nullable PsiElement contextElement,
+                                                            int targetOffset) {
     if (contextElement == null || contextElement.getLanguage() != PerlLanguage.INSTANCE) {
       return null;
     }
@@ -136,8 +134,7 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
   /**
    * @return some {@code Function::Parameters} specific documentation if available
    */
-  @Nullable
-  private PsiElement computeFunctionParametersDoc(@NotNull PsiElement contextElement) {
+  private @Nullable PsiElement computeFunctionParametersDoc(@NotNull PsiElement contextElement) {
     IElementType elementType = PsiUtilCore.getElementType(contextElement);
     if (elementType == RESERVED_AFTER_FP) {
       return PerlDocUtil.resolveDescriptor(PodLinkDescriptor.create(FUNCTION_PARAMETERS, KEYWORD_AFTER), contextElement, false);
@@ -183,8 +180,7 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
   /**
    * @return a documentation element related to the perl element pointed by the current editor with caret on declaration or reference
    */
-  @Nullable
-  public static PsiElement findDocumentation(@NotNull Editor editor) {
+  public static @Nullable PsiElement findDocumentation(@NotNull Editor editor) {
     PsiElement targetElement = TargetElementUtil.findTargetElement(
       editor, TargetElementUtil.ELEMENT_NAME_ACCEPTED | TargetElementUtil.REFERENCED_ELEMENT_ACCEPTED);
     if (targetElement instanceof MojoLightDelegatingSubDefinition) {
@@ -214,8 +210,7 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
    * @return corresponding pod element for the {@code element} if any
    */
   @Contract("null->null")
-  @Nullable
-  private static PsiElement findPodElement(@Nullable PsiElement element) {
+  private static @Nullable PsiElement findPodElement(@Nullable PsiElement element) {
     if (element == null) {
       return null;
     }
@@ -246,8 +241,7 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
   /**
    * Finds documentation for sub declaration or definition
    */
-  @Nullable
-  private static PsiElement findPodElement(@NotNull PerlSubElement perlSub) {
+  private static @Nullable PsiElement findPodElement(@NotNull PerlSubElement perlSub) {
     String namespaceName = perlSub.getNamespaceName();
     String subName = perlSub.getSubName();
     if (StringUtil.isNotEmpty(namespaceName) && StringUtil.isNotEmpty(subName)) {
@@ -262,8 +256,7 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
   /**
    * Finds  documentation for namespace definition
    */
-  @Nullable
-  private static PsiElement findPodElement(@NotNull PerlNamespaceDefinitionElement namespaceDefinition) {
+  private static @Nullable PsiElement findPodElement(@NotNull PerlNamespaceDefinitionElement namespaceDefinition) {
     String namespaceName = namespaceDefinition.getNamespaceName();
     if (StringUtil.isNotEmpty(namespaceName)) {
       PsiElement docElement = PerlDocUtil.resolveDoc(namespaceName, null, namespaceDefinition, false);
@@ -277,8 +270,7 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
   /**
    * Finds  documentation for a file
    */
-  @Nullable
-  private static PsiElement findPodElement(@NotNull PerlFileImpl perlFile) {
+  private static @Nullable PsiElement findPodElement(@NotNull PerlFileImpl perlFile) {
     PsiFile nestedPodFile = perlFile.getViewProvider().getPsi(PodLanguage.INSTANCE);
 
     if (nestedPodFile != null) {

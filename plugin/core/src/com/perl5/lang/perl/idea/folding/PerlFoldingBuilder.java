@@ -51,9 +51,8 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
 
   protected static final TokenSet COMMENT_EXCLUDED_TOKENS = TokenSet.EMPTY;
 
-  @NotNull
   @Override
-  public FoldingDescriptor[] buildFoldRegions(@NotNull PsiElement root, @NotNull Document document, boolean quick) {
+  public @NotNull FoldingDescriptor[] buildFoldRegions(@NotNull PsiElement root, @NotNull Document document, boolean quick) {
     // @todo handle this
     if (root instanceof OuterLanguageElementImpl) {
       return FoldingDescriptor.EMPTY;
@@ -239,9 +238,8 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
     return descriptors;
   }
 
-  @Nullable
   @Override
-  public String getPlaceholderText(@NotNull ASTNode node) {
+  public @Nullable String getPlaceholderText(@NotNull ASTNode node) {
     IElementType elementType = node.getElementType();
 
     if (elementType == BLOCK) {
@@ -320,16 +318,14 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
     }
   }
 
-  @Nullable
-  protected IElementType getTemplateBlockElementType() {
+  protected @Nullable IElementType getTemplateBlockElementType() {
     return null;
   }
 
   /**
    * @return list of tokens in PSIComment that should not be included in folding regions
    */
-  @NotNull
-  protected TokenSet getCommentExcludedTokens() {
+  protected @NotNull TokenSet getCommentExcludedTokens() {
     return COMMENT_EXCLUDED_TOKENS;
   }
 

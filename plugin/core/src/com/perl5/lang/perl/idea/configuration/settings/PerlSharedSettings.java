@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -72,9 +72,8 @@ public class PerlSharedSettings implements PersistentStateComponent<PerlSharedSe
     myProject = project;
   }
 
-  @Nullable
   @Override
-  public PerlSharedSettings getState() {
+  public @Nullable PerlSharedSettings getState() {
     return this;
   }
 
@@ -83,13 +82,11 @@ public class PerlSharedSettings implements PersistentStateComponent<PerlSharedSe
     XmlSerializerUtil.copyBean(state, this);
   }
 
-  @NotNull
-  public PerlVersion getTargetPerlVersion() {
+  public @NotNull PerlVersion getTargetPerlVersion() {
     return myTargetPerlVersion;
   }
 
-  @NotNull
-  public PerlSharedSettings setTargetPerlVersion(@NotNull PerlVersion targetPerlVersion) {
+  public @NotNull PerlSharedSettings setTargetPerlVersion(@NotNull PerlVersion targetPerlVersion) {
     myTargetPerlVersion = targetPerlVersion;
     return this;
   }
@@ -114,13 +111,11 @@ public class PerlSharedSettings implements PersistentStateComponent<PerlSharedSe
     PERL_DEPARSE_ARGUMENTS = optionsString;
   }
 
-  @NotNull
-  public static PerlSharedSettings getInstance(@NotNull Project project) {
+  public static @NotNull PerlSharedSettings getInstance(@NotNull Project project) {
     return ServiceManager.getService(project, PerlSharedSettings.class);
   }
 
-  @NotNull
-  public static PerlSharedSettings getInstance(@NotNull PsiElement psiElement) {
+  public static @NotNull PerlSharedSettings getInstance(@NotNull PsiElement psiElement) {
     return getInstance(psiElement.getProject());
   }
 }

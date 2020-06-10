@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,27 +51,23 @@ public class TemplateToolkitFilterNameMacro extends Macro implements TemplateToo
     return "tt2FilterName()";
   }
 
-  @NotNull
   @Override
-  public String getDefaultValue() {
+  public @NotNull String getDefaultValue() {
     return "filtername";
   }
 
-  @Nullable
   @Override
-  public Result calculateResult(@NotNull Expression[] params, ExpressionContext context) {
+  public @Nullable Result calculateResult(@NotNull Expression[] params, ExpressionContext context) {
     return null;
   }
 
-  @Nullable
   @Override
-  public Result calculateQuickResult(@NotNull Expression[] params, ExpressionContext context) {
+  public @Nullable Result calculateQuickResult(@NotNull Expression[] params, ExpressionContext context) {
     return calculateResult(params, context);
   }
 
-  @Nullable
   @Override
-  public LookupElement[] calculateLookupItems(@NotNull Expression[] params, ExpressionContext context) {
+  public @Nullable LookupElement[] calculateLookupItems(@NotNull Expression[] params, ExpressionContext context) {
     return LOOKUP_ELEMENTS;
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,8 +44,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 final class PerlInjectionMarkersTable extends JBTable implements Configurable {
-  @NotNull
-  private final Project myProject;
+  private final @NotNull Project myProject;
 
   public PerlInjectionMarkersTable(@NotNull Project project) {
     super(new MyModel());
@@ -75,15 +74,13 @@ final class PerlInjectionMarkersTable extends JBTable implements Configurable {
     languageColumn.setPreferredWidth(600);
   }
 
-  @Nls(capitalization = Nls.Capitalization.Title)
   @Override
-  public String getDisplayName() {
+  public @Nls(capitalization = Nls.Capitalization.Title) String getDisplayName() {
     return PerlBundle.message("perl.settings.markers.label.text");
   }
 
-  @NotNull
   @Override
-  public JComponent createComponent() {
+  public @NotNull JComponent createComponent() {
     JTextPane textPane = new JTextPane();
     textPane.setText(PerlBundle.message("perl.settings.markers.language.description"));
     JPanel panel = FormBuilder.createFormBuilder()
@@ -206,9 +203,8 @@ final class PerlInjectionMarkersTable extends JBTable implements Configurable {
       super(PerlBundle.message("perl.settings.markers.column.marker.title"));
     }
 
-    @Nullable
     @Override
-    public Comparator<Item> getComparator() {
+    public @Nullable Comparator<Item> getComparator() {
       return Comparator.comparing(it -> it.marker);
     }
 
@@ -217,9 +213,8 @@ final class PerlInjectionMarkersTable extends JBTable implements Configurable {
       return true;
     }
 
-    @Nullable
     @Override
-    public String valueOf(Item item) {
+    public @Nullable String valueOf(Item item) {
       return item.marker;
     }
 
@@ -239,9 +234,8 @@ final class PerlInjectionMarkersTable extends JBTable implements Configurable {
       return true;
     }
 
-    @Nullable
     @Override
-    public Comparator<Item> getComparator() {
+    public @Nullable Comparator<Item> getComparator() {
       return Comparator.comparing(this::valueOf);
     }
 
@@ -250,9 +244,8 @@ final class PerlInjectionMarkersTable extends JBTable implements Configurable {
       item.languageId = value;
     }
 
-    @Nullable
     @Override
-    public String valueOf(Item item) {
+    public @Nullable String valueOf(Item item) {
       Language language = Language.findLanguageByID(item.languageId);
       return language == null ?
              PerlBundle.message("perl.settings.markers.language.unsupported", item.languageId) :

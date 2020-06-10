@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,8 +30,7 @@ import java.util.Comparator;
 import java.util.List;
 
 public class PerlInstallForm {
-  @NotNull
-  private final InstallFormHelper myHelper;
+  private final @NotNull InstallFormHelper myHelper;
 
   private JComboBox<String> myDistributionsComboBox;
   private JPanel myRootPanel;
@@ -88,8 +87,7 @@ public class PerlInstallForm {
     return mySetInstalledPerl5ForCheckBox.isSelected();
   }
 
-  @NotNull
-  public String getSelectedDistributionId() {
+  public @NotNull String getSelectedDistributionId() {
     return myHelper.cleanDistributionItem(ObjectUtils.notNull((String)myDistributionsComboBox.getSelectedItem(), ""));
   }
 

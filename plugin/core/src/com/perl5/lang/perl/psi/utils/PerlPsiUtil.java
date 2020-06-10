@@ -84,8 +84,7 @@ public class PerlPsiUtil implements PerlElementTypes {
   /**
    * @return list of all meaningful children of the {@code psiElement} inside the {@code rangeInElement} skipping spaces, comments and so on
    */
-  @NotNull
-  public static List<PsiElement> getMeaningfulChildrenWithLeafs(@Nullable PsiElement psiElement) {
+  public static @NotNull List<PsiElement> getMeaningfulChildrenWithLeafs(@Nullable PsiElement psiElement) {
     return psiElement == null ? Collections.emptyList() :
            getMeaningfulChildrenWithLeafs(psiElement, TextRange.from(0, psiElement.getTextLength()));
   }
@@ -93,8 +92,8 @@ public class PerlPsiUtil implements PerlElementTypes {
   /**
    * @return list of all meaningful children of the {@code psiElement} inside the {@code rangeInElement} skipping spaces, comments and so on
    */
-  @NotNull
-  public static List<PsiElement> getMeaningfulChildrenWithLeafs(@Nullable PsiElement psiElement, @Nullable TextRange rangeInElement) {
+  public static @NotNull List<PsiElement> getMeaningfulChildrenWithLeafs(@Nullable PsiElement psiElement,
+                                                                         @Nullable TextRange rangeInElement) {
     if (psiElement == null || rangeInElement == null || rangeInElement.isEmpty()) {
       return Collections.emptyList();
     }
@@ -149,8 +148,7 @@ public class PerlPsiUtil implements PerlElementTypes {
     }
   }
 
-  @NotNull
-  public static List<String> collectStringContents(PsiElement startWith) {
+  public static @NotNull List<String> collectStringContents(PsiElement startWith) {
     if (startWith == null) {
       return Collections.emptyList();
     }
@@ -183,8 +181,7 @@ public class PerlPsiUtil implements PerlElementTypes {
    * @param element PsiElement to search manipulator for
    * @return manipulator
    */
-  @NotNull
-  public static ElementManipulator<? super PsiElement> getManipulator(PsiElement element) {
+  public static @NotNull ElementManipulator<? super PsiElement> getManipulator(PsiElement element) {
     ElementManipulator<? super PsiElement> manipulator = ElementManipulators.getManipulator(element);
     if (manipulator == null) {
       throw new IncorrectOperationException("Unable to find manipulator for " + element.getClass().getName());
@@ -193,8 +190,7 @@ public class PerlPsiUtil implements PerlElementTypes {
   }
 
 
-  @NotNull
-  public static PsiElement renameNamedElement(@NotNull PsiNameIdentifierOwner nameIdentifierOwner, @Nullable String newName) {
+  public static @NotNull PsiElement renameNamedElement(@NotNull PsiNameIdentifierOwner nameIdentifierOwner, @Nullable String newName) {
     renameElement(nameIdentifierOwner.getNameIdentifier(), newName);
     return nameIdentifierOwner;
   }
@@ -203,9 +199,8 @@ public class PerlPsiUtil implements PerlElementTypes {
    * Renaming PsiElement using manipulator
    */
   @SuppressWarnings("UnusedReturnValue")
-  @Nullable
   @Contract("null, _ -> null; !null, null -> !null")
-  public static PsiElement renameElement(@Nullable PsiElement element, @Nullable String newName) {
+  public static @Nullable PsiElement renameElement(@Nullable PsiElement element, @Nullable String newName) {
     if (element == null) {
       return null;
     }
@@ -216,8 +211,7 @@ public class PerlPsiUtil implements PerlElementTypes {
   }
 
 
-  @Nullable
-  public static PsiElement getNextSignificantSibling(PsiElement element) {
+  public static @Nullable PsiElement getNextSignificantSibling(PsiElement element) {
     PsiElement result = element.getNextSibling();
     while (isCommentOrSpace(result)) {
       result = result.getNextSibling();
@@ -225,9 +219,9 @@ public class PerlPsiUtil implements PerlElementTypes {
     return result;
   }
 
-  @Deprecated // this one is bad. What about comments and so on?
-  @Nullable
-  public static ASTNode getNextSignificantSibling(ASTNode node) {
+  // this one is bad. What about comments and so on?
+  @Deprecated
+  public static @Nullable ASTNode getNextSignificantSibling(ASTNode node) {
     ASTNode result = node.getTreeNext();
     while (result != null && result.getElementType() == WHITE_SPACE) {
       result = result.getTreeNext();
@@ -235,9 +229,8 @@ public class PerlPsiUtil implements PerlElementTypes {
     return result;
   }
 
-  @Nullable
   @Contract("null -> null")
-  public static PsiElement getPrevSignificantSibling(@Nullable PsiElement element) {
+  public static @Nullable PsiElement getPrevSignificantSibling(@Nullable PsiElement element) {
     if (element == null) {
       return null;
     }
@@ -248,10 +241,9 @@ public class PerlPsiUtil implements PerlElementTypes {
     return result;
   }
 
-  @Nullable
-  public static PsiElement getParentElementOrStub(PsiElement currentElement,
-                                                  @Nullable final Class<? extends StubElement<?>> stubClass,
-                                                  @NotNull final Class<? extends PsiElement> psiClass
+  public static @Nullable PsiElement getParentElementOrStub(PsiElement currentElement,
+                                                            final @Nullable Class<? extends StubElement<?>> stubClass,
+                                                            final @NotNull Class<? extends PsiElement> psiClass
   ) {
 
     Stub stub = currentElement instanceof StubBasedPsiElement ? ((StubBasedPsiElement<?>)currentElement).getStub() : null;
@@ -264,8 +256,7 @@ public class PerlPsiUtil implements PerlElementTypes {
     }
   }
 
-  @Nullable
-  public static Stub getParentStubOfType(Stub currentStubElement, Class<? extends Stub> stubClass) {
+  public static @Nullable Stub getParentStubOfType(Stub currentStubElement, Class<? extends Stub> stubClass) {
     while (true) {
       if (currentStubElement == null) {
         return null;
@@ -283,9 +274,8 @@ public class PerlPsiUtil implements PerlElementTypes {
     }
   }
 
-  @NotNull
-  public static List<PsiElement> collectNamespaceMembers(@NotNull final PsiElement rootElement,
-                                                         @NotNull final Class<? extends PsiElement> psiClass
+  public static @NotNull List<PsiElement> collectNamespaceMembers(final @NotNull PsiElement rootElement,
+                                                                  final @NotNull Class<? extends PsiElement> psiClass
   ) {
     final List<PsiElement> result = new ArrayList<>();
 
@@ -499,8 +489,7 @@ public class PerlPsiUtil implements PerlElementTypes {
     }
   }
 
-  @NotNull
-  public static List<PerlAnnotation> collectAnnotations(@Nullable PsiElement element) {
+  public static @NotNull List<PerlAnnotation> collectAnnotations(@Nullable PsiElement element) {
     if (element == null) {
       return Collections.emptyList();
     }
@@ -520,8 +509,8 @@ public class PerlPsiUtil implements PerlElementTypes {
    * @param annotationClass annotation class
    * @return annotation or null
    */
-  @Nullable
-  public static <T extends PerlAnnotation> T getAnyAnnotationByClass(@NotNull PsiElement element, final Class<T> annotationClass) {
+  public static @Nullable <T extends PerlAnnotation> T getAnyAnnotationByClass(@NotNull PsiElement element,
+                                                                               final Class<T> annotationClass) {
     // before element
     T annotation = PerlPsiUtil.getAnnotationByClass(element, annotationClass);
     if (annotation != null) {
@@ -536,8 +525,7 @@ public class PerlPsiUtil implements PerlElementTypes {
     return null;
   }
 
-  @Nullable
-  public static <T extends PerlAnnotation> T getAnnotationByClass(@NotNull PsiElement element, final Class<T> annotationClass) {
+  public static @Nullable <T extends PerlAnnotation> T getAnnotationByClass(@NotNull PsiElement element, final Class<T> annotationClass) {
     final PerlAnnotation[] result = new PerlAnnotation[]{null};
     processElementAnnotations(element, perlAnnotation -> {
       if (annotationClass.isInstance(perlAnnotation)) {
@@ -651,8 +639,7 @@ public class PerlPsiUtil implements PerlElementTypes {
     return isSelfShortcut(derefExpr.getFirstChild());
   }
 
-  @NotNull
-  public static PsiElement getClosest(@NotNull PsiElement existingElement, @Nullable PsiElement possibleElement) {
+  public static @NotNull PsiElement getClosest(@NotNull PsiElement existingElement, @Nullable PsiElement possibleElement) {
     if (possibleElement == null) {
       return existingElement;
     }
@@ -837,8 +824,7 @@ public class PerlPsiUtil implements PerlElementTypes {
   /**
    * @return if {@code block} contains only single statement with single expression, returns it. False otherwise.
    */
-  @Nullable
-  public static PsiPerlExpr getSingleBlockExpression(@Nullable PsiPerlBlock block) {
+  public static @Nullable PsiPerlExpr getSingleBlockExpression(@Nullable PsiPerlBlock block) {
     if (block == null) {
       return null;
     }
@@ -955,8 +941,7 @@ public class PerlPsiUtil implements PerlElementTypes {
   /**
    * @return a single quoted string with content. Attempts to select proper quotes
    */
-  @NotNull
-  public static String createSingleQuotedString(@NotNull String content) {
+  public static @NotNull String createSingleQuotedString(@NotNull String content) {
     char openQuoteChar = PerlString.suggestOpenQuoteChar(content, SINGLE_QUOTE_CHAR);
     return openQuoteChar == 0 ? SINGLE_QUOTE + StringUtil.escapeChar(content, SINGLE_QUOTE_CHAR) + SINGLE_QUOTE :
            openQuoteChar == SINGLE_QUOTE_CHAR ? SINGLE_QUOTE + content + SINGLE_QUOTE :
@@ -967,8 +952,7 @@ public class PerlPsiUtil implements PerlElementTypes {
    * Tries to get stub from passed {@code element} if available
    */
   @Contract("null->null")
-  @Nullable
-  public static StubElement<?> getStubFromElement(@Nullable PsiElement element) {
+  public static @Nullable StubElement<?> getStubFromElement(@Nullable PsiElement element) {
     StubElement<?> stubElement = null;
     if (element instanceof PsiFileImpl) {
       stubElement = ((PsiFileImpl)element).getStub();
@@ -999,8 +983,7 @@ public class PerlPsiUtil implements PerlElementTypes {
   /**
    * @return removes meaningless elements from the {@code source} list
    */
-  @NotNull
-  public static <T extends PsiElement> List<T> cleanupChildren(@NotNull T[] source) {
+  public static @NotNull <T extends PsiElement> List<T> cleanupChildren(@NotNull T[] source) {
     return ContainerUtil.filter(source, it -> !PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(PsiUtilCore.getElementType(it)));
   }
 }

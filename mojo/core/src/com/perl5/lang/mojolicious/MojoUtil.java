@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,8 +41,7 @@ public final class MojoUtil {
    * @return a mojo script virtual file for {@code sdk} if any
    */
   @Contract("null->null")
-  @Nullable
-  public static VirtualFile getMojoScript(@Nullable Sdk sdk) {
+  public static @Nullable VirtualFile getMojoScript(@Nullable Sdk sdk) {
     return PerlRunUtil.findScript(sdk, MOJO_SCRIPT_NAME);
   }
 
@@ -50,8 +49,7 @@ public final class MojoUtil {
    * @return a mojo script virtual file for {@code event} if any
    */
   @Contract("null->null")
-  @Nullable
-  public static VirtualFile getMojoScript(@Nullable AnActionEvent event) {
+  public static @Nullable VirtualFile getMojoScript(@Nullable AnActionEvent event) {
     return getMojoScript(PerlProjectManager.getSdk(event));
   }
 
@@ -59,8 +57,7 @@ public final class MojoUtil {
    * @return a mojo script virtual file for {@code project} if any
    */
   @Contract("null->null")
-  @Nullable
-  public static VirtualFile getMojoScript(@Nullable Project project) {
+  public static @Nullable VirtualFile getMojoScript(@Nullable Project project) {
     return getMojoScript(PerlProjectManager.getSdk(project));
   }
 
@@ -68,8 +65,7 @@ public final class MojoUtil {
    * @return a mojo script virtual file for {@code module} if any
    */
   @Contract("null->null")
-  @Nullable
-  public static VirtualFile getMojoScript(@Nullable Module module) {
+  public static @Nullable VirtualFile getMojoScript(@Nullable Module module) {
     return getMojoScript(PerlProjectManager.getSdk(module));
   }
 

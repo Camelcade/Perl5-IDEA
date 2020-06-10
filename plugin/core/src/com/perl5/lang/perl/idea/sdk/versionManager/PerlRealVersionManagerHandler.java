@@ -63,18 +63,15 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
     return osHandler == null || !osHandler.isMsWindows();
   }
 
-  @NotNull
-  protected abstract Data createData(@NotNull PerlVersionManagerAdapter vmAdapter, @NotNull String distributionId);
+  protected abstract @NotNull Data createData(@NotNull PerlVersionManagerAdapter vmAdapter, @NotNull String distributionId);
 
   /**
    * @return version manager's executable name;
    */
-  @NotNull
-  protected abstract String getExecutableName();
+  protected abstract @NotNull String getExecutableName();
 
-  @NotNull
   @Override
-  public String getMenuItemTitle() {
+  public @NotNull String getMenuItemTitle() {
     return PerlBundle.message("perl.vm.menu.title", getPresentableName());
   }
 
@@ -105,8 +102,7 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
    * @implSpec for now we are trying to find a path in the existing sdks from the same host, supported by the same version manager, or
    * just trying to find the executable file on the host
    */
-  @Nullable
-  protected File suggestDefaultVersionManagerPath(@NotNull PerlHostData<?, ?> hostData, @NotNull Disposable disposable) {
+  protected @Nullable File suggestDefaultVersionManagerPath(@NotNull PerlHostData<?, ?> hostData, @NotNull Disposable disposable) {
     VirtualFileSystem fileSystem = hostData.getFileSystem(disposable);
     if (fileSystem == null) {
       return null;
@@ -119,8 +115,8 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
       .findFirst().orElseGet(() -> hostData.findFileByName(getExecutableName()));
   }
 
-  @NotNull
-  public abstract PerlVersionManagerAdapter createAdapter(@NotNull String pathToVersionManager, @NotNull PerlHostData<?, ?> hostData);
+  public abstract @NotNull PerlVersionManagerAdapter createAdapter(@NotNull String pathToVersionManager,
+                                                                   @NotNull PerlHostData<?, ?> hostData);
 
   private void createSdkInteractively(@Nullable Project project,
                                       @Nullable String selectedPath,
@@ -174,14 +170,12 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
     createInterpreter(installation, vmAdapter, sdkConsumer, project);
   }
 
-  @Nullable
-  public abstract InstallPerlHandler createInstallHandler(@NotNull String pathToVersionManager);
+  public abstract @Nullable InstallPerlHandler createInstallHandler(@NotNull String pathToVersionManager);
 
   /**
    * @return icon for this version manager
    */
-  @NotNull
-  public abstract Icon getIcon();
+  public abstract @NotNull Icon getIcon();
 
   /**
    * Creates an interpreter for version manager.

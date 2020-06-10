@@ -39,31 +39,25 @@ public abstract class PackageManagerAdapter {
   private static final MergingUpdateQueue QUEUE =
     new MergingUpdateQueue("perl.installer.queue", 300, true, null, ApplicationManager.getApplication());
 
-  @NotNull
-  private final Sdk mySdk;
+  private final @NotNull Sdk mySdk;
 
-  @Nullable
-  private final Project myProject;
+  private final @Nullable Project myProject;
 
   public PackageManagerAdapter(@NotNull Sdk sdk, @Nullable Project project) {
     mySdk = sdk;
     myProject = project;
   }
 
-  @NotNull
-  public abstract String getPresentableName();
+  public abstract @NotNull String getPresentableName();
 
-  @NotNull
-  protected abstract String getManagerScriptName();
+  protected abstract @NotNull String getManagerScriptName();
 
-  @NotNull
-  protected abstract String getManagerPackageName();
+  protected abstract @NotNull String getManagerPackageName();
 
   /**
    * @return list of parameters for manager's script to install a package with {@code packageName}
    */
-  @NotNull
-  protected List<String> getInstallParameters(@NotNull Collection<String> packageNames) {
+  protected @NotNull List<String> getInstallParameters(@NotNull Collection<String> packageNames) {
     return new ArrayList<>(packageNames);
   }
 
@@ -131,30 +125,25 @@ public abstract class PackageManagerAdapter {
     return result;
   }
 
-  @NotNull
-  public Sdk getSdk() {
+  public @NotNull Sdk getSdk() {
     return mySdk;
   }
 
-  @Nullable
-  private Project getProject() {
+  private @Nullable Project getProject() {
     return myProject;
   }
 
   /**
    * Creates an adapter, prefers cpanminus over cpan
    */
-  @NotNull
-  public static PackageManagerAdapter create(@NotNull Sdk sdk, @Nullable Project project) {
+  public static @NotNull PackageManagerAdapter create(@NotNull Sdk sdk, @Nullable Project project) {
     return CpanminusAdapter.isAvailable(sdk) ? new CpanminusAdapter(sdk, project) : new CpanAdapter(sdk, project);
   }
 
   private static final class InstallUpdate extends Update {
-    @NotNull
-    private final PackageManagerAdapter myAdapter;
+    private final @NotNull PackageManagerAdapter myAdapter;
 
-    @NotNull
-    private final Set<String> myPackages = new HashSet<>();
+    private final @NotNull Set<String> myPackages = new HashSet<>();
 
     public InstallUpdate(@NotNull PackageManagerAdapter adapter, @NotNull Collection<String> packageNames) {
       super(Pair.create(adapter, packageNames));

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,9 +46,8 @@ public class PodLinkToSectionReference extends PerlCachingReference<PodFormatter
       PodLinkCompletionProvider.escapeTitle(PodElementFactory.getHeaderText(myElement.getProject(), newElementName)));
   }
 
-  @NotNull
   @Override
-  protected ResolveResult[] resolveInner(boolean incompleteCode) {
+  protected @NotNull ResolveResult[] resolveInner(boolean incompleteCode) {
     PodFormatterL podLink = getElement();
     PodLinkDescriptor descriptor = podLink.getLinkDescriptor();
 
@@ -93,9 +92,8 @@ public class PodLinkToSectionReference extends PerlCachingReference<PodFormatter
     return PsiElementResolveResult.createResults(results);
   }
 
-  @Nullable
   @Override
-  public PsiElement resolve() {
+  public @Nullable PsiElement resolve() {
     ResolveResult[] results = multiResolve(false);
     return results.length > 0 ? results[0].getElement() : null;
   }
@@ -103,8 +101,7 @@ public class PodLinkToSectionReference extends PerlCachingReference<PodFormatter
   /**
    * @return list of all section synonymous to {@link titledSection}
    */
-  @NotNull
-  public static List<PodTitledSection> getAllSynonymousSections(@NotNull PodTitledSection titledSection) {
+  public static @NotNull List<PodTitledSection> getAllSynonymousSections(@NotNull PodTitledSection titledSection) {
     List<PodTitledSection> result = new ArrayList<>();
     String titleText = titledSection.getTitleText();
     titledSection.getContainingFile().accept(new PodStubsAwareRecursiveVisitor() {

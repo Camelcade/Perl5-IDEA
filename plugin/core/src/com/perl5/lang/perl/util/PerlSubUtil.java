@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -247,13 +247,11 @@ public class PerlSubUtil implements PerlElementTypes {
   }
 
 
-  @NotNull
-  public static List<PerlSubElement> collectOverridingSubs(PerlSubElement subBase) {
+  public static @NotNull List<PerlSubElement> collectOverridingSubs(PerlSubElement subBase) {
     return collectOverridingSubs(subBase, new THashSet<>());
   }
 
-  @NotNull
-  public static List<PerlSubElement> collectOverridingSubs(@NotNull PerlSubElement subBase, @NotNull Set<String> recursionSet) {
+  public static @NotNull List<PerlSubElement> collectOverridingSubs(@NotNull PerlSubElement subBase, @NotNull Set<String> recursionSet) {
     List<PerlSubElement> result;
     result = new ArrayList<>();
     for (PerlSubElement directDescendant : subBase.getDirectOverridingSubs()) {

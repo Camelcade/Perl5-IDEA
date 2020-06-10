@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,9 +26,8 @@ import org.jetbrains.annotations.NotNull;
 
 
 public class MasonFormattingModelBuilder extends PerlFormattingModelBuilder {
-  @NotNull
   @Override
-  public FormattingModel createModel(PsiElement element, CodeStyleSettings settings) {
+  public @NotNull FormattingModel createModel(PsiElement element, CodeStyleSettings settings) {
     PerlFormattingBlock block = new MasonFormattingBlock(element.getNode(), new MasonFormattingContext(element, settings));
     return FormattingModelProvider.createFormattingModelForPsiFile(element.getContainingFile(), block, settings);
   }

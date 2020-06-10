@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class PerlInjectedLanguageBlockWrapper implements Block {
-  @Nullable private static final Method IS_ABSOLUTE = ReflectionUtil.getDeclaredMethod(IndentImpl.class, "isAbsolute");
+  private static final @Nullable Method IS_ABSOLUTE = ReflectionUtil.getDeclaredMethod(IndentImpl.class, "isAbsolute");
   protected final PerlInjectedLanguageBlocksBuilder myBuilder;
   private final Block myOriginal;
   private final AtomicNullableLazyValue<TextRange> myRangeProvider;
@@ -45,34 +45,29 @@ public class PerlInjectedLanguageBlockWrapper implements Block {
       .collect(Collectors.toList()));
   }
 
-  @NotNull
   @Override
-  public TextRange getTextRange() {
+  public @NotNull TextRange getTextRange() {
     TextRange textRange = getTextRangeInner();
     assert textRange != null;
     return textRange;
   }
 
-  @Nullable
-  private TextRange getTextRangeInner() {
+  private @Nullable TextRange getTextRangeInner() {
     return myRangeProvider.getValue();
   }
 
-  @NotNull
   @Override
-  public List<Block> getSubBlocks() {
+  public @NotNull List<Block> getSubBlocks() {
     return myChildBlocksProvider.getValue();
   }
 
-  @Nullable
   @Override
-  public Wrap getWrap() {
+  public @Nullable Wrap getWrap() {
     return myOriginal.getWrap();
   }
 
-  @Nullable
   @Override
-  public Indent getIndent() {
+  public @Nullable Indent getIndent() {
     Indent indent = myOriginal.getIndent();
     return isAbsoluteNoneIndent(indent) ? Indent.getNoneIndent() : indent;
   }
@@ -90,24 +85,21 @@ public class PerlInjectedLanguageBlockWrapper implements Block {
     }
   }
 
-  @Nullable
   @Override
-  public Alignment getAlignment() {
+  public @Nullable Alignment getAlignment() {
     Indent indent = myOriginal.getIndent();
     return isAbsoluteNoneIndent(indent) ? myBuilder.getAbsoluteIndentAlignment() : myOriginal.getAlignment();
   }
 
-  @Nullable
   @Override
-  public Spacing getSpacing(@Nullable Block child1, @NotNull Block child2) {
+  public @Nullable Spacing getSpacing(@Nullable Block child1, @NotNull Block child2) {
     assert child1 instanceof PerlInjectedLanguageBlockWrapper;
     assert child2 instanceof PerlInjectedLanguageBlockWrapper;
     return myOriginal.getSpacing(child1, child2);
   }
 
-  @NotNull
   @Override
-  public ChildAttributes getChildAttributes(int newChildIndex) {
+  public @NotNull ChildAttributes getChildAttributes(int newChildIndex) {
     return myOriginal.getChildAttributes(newChildIndex);
   }
 
@@ -126,9 +118,8 @@ public class PerlInjectedLanguageBlockWrapper implements Block {
       super(original, builder);
     }
 
-    @Nullable
     @Override
-    public Alignment getAlignment() {
+    public @Nullable Alignment getAlignment() {
       return myBuilder.getAbsoluteIndentAlignment();
     }
   }

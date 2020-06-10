@@ -46,28 +46,24 @@ public abstract class PerlSubCallElement extends PerlPolyNamedElement<PerlSubCal
     super(node);
   }
 
-  @NotNull
   @Override
-  public final List<? extends PerlDelegatingLightNamedElement<?>> computeLightElementsFromPsi() {
+  public final @NotNull List<? extends PerlDelegatingLightNamedElement<?>> computeLightElementsFromPsi() {
     PerlSubCallHandler<?> lightElementProvider = getHandler();
     return lightElementProvider == null ? Collections.emptyList() : lightElementProvider.computeLightElementsFromPsi(this);
   }
 
-  @NotNull
   @Override
-  protected List<? extends PerlDelegatingLightNamedElement<?>> computeLightElementsFromStubs(@NotNull PerlSubCallElementStub stub) {
+  protected @NotNull List<? extends PerlDelegatingLightNamedElement<?>> computeLightElementsFromStubs(@NotNull PerlSubCallElementStub stub) {
     PerlSubCallHandler<?> lightElementProvider = getHandler();
     return lightElementProvider == null ? Collections.emptyList() : lightElementProvider.computeLightElementsFromStubs(this, stub);
   }
 
   @Override
-  @Nullable
-  public PsiPerlMethod getMethod() {
+  public @Nullable PsiPerlMethod getMethod() {
     return findChildByClass(PsiPerlMethod.class);
   }
 
-  @Nullable
-  public String getSubName() {
+  public @Nullable String getSubName() {
     PerlSubCallElementStub stub = getGreenStub();
     if (stub != null) {
       return stub.getSubName();
@@ -80,8 +76,7 @@ public abstract class PerlSubCallElement extends PerlPolyNamedElement<PerlSubCal
     return subNameElement == null ? null : subNameElement.getName();
   }
 
-  @NotNull
-  public PerlSubCallElementData getCallData() {
+  public @NotNull PerlSubCallElementData getCallData() {
     PerlSubCallHandler<?> lightElementProvider = getHandler();
     if (lightElementProvider == null) {
       LOG.error("Trying to get call data for: " + getText());
@@ -90,15 +85,13 @@ public abstract class PerlSubCallElement extends PerlPolyNamedElement<PerlSubCal
     return lightElementProvider.getCallData(this);
   }
 
-  @NotNull
   @Override
-  public PerlValue getSelfType() {
+  public @NotNull PerlValue getSelfType() {
     PerlSubCallHandler<?> callHandler = getHandler();
     return callHandler == null ? PerlValues.UNKNOWN_VALUE : callHandler.getSelfType();
   }
 
-  @Nullable
-  public PerlSubCallHandler<?> getHandler() {
+  public @Nullable PerlSubCallHandler<?> getHandler() {
     return PerlSubCallHandler.getHandler(getSubName());
   }
 

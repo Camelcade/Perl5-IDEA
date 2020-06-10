@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -68,22 +68,19 @@ public class Perl5RegexpHost implements RegExpLanguageHost {
     return PROPERTIES_PROVIDER.isValidCategory(category);
   }
 
-  @NotNull
   @Override
-  public String[][] getAllKnownProperties() {
+  public @NotNull String[][] getAllKnownProperties() {
     // todo: http://perldoc.perl.org/perluniprops.html and /Perl5/lib/unicore/
     return PROPERTIES_PROVIDER.getAllKnownProperties();
   }
 
-  @Nullable
   @Override
-  public String getPropertyDescription(@Nullable String name) {
+  public @Nullable String getPropertyDescription(@Nullable String name) {
     return PROPERTIES_PROVIDER.getPropertyDescription(name);
   }
 
-  @NotNull
   @Override
-  public String[][] getKnownCharacterClasses() {
+  public @NotNull String[][] getKnownCharacterClasses() {
     return PROPERTIES_PROVIDER.getKnownCharacterClasses();
   }
 }

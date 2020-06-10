@@ -41,8 +41,7 @@ public abstract class PerlImportsCollector implements PerlNamespaceEntityProcess
     return true;
   }
 
-  @NotNull
-  public List<PerlExportDescriptor> getResult() {
+  public @NotNull List<PerlExportDescriptor> getResult() {
     return myResult.isEmpty() ? Collections.emptyList() : myResult;
   }
 }

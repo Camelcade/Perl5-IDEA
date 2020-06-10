@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,8 +42,7 @@ public abstract class PerlInstallPackageActionBase extends PerlActionBase {
     return true;
   }
 
-  @Nullable
-  protected abstract PackageManagerAdapter getAdapter(@NotNull AnActionEvent e);
+  protected abstract @Nullable PackageManagerAdapter getAdapter(@NotNull AnActionEvent e);
 
   @Override
   public void actionPerformed(@NotNull AnActionEvent e) {

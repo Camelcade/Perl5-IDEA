@@ -85,13 +85,16 @@ public class PerlDocUtil implements PerlElementTypes {
     VARIABLES_LINKS.put("$VERSION", PodLinkDescriptor.create("perlobj", "VERSION"));
   }
 
-  @Nullable
-  public static PsiElement resolveDoc(@NotNull String file, @Nullable String section, @NotNull PsiElement origin, boolean exactMatch) {
+  public static @Nullable PsiElement resolveDoc(@NotNull String file,
+                                                @Nullable String section,
+                                                @NotNull PsiElement origin,
+                                                boolean exactMatch) {
     return resolveDescriptor(PodLinkDescriptor.create(file, section), origin, exactMatch);
   }
 
-  @Nullable
-  public static PsiElement resolveDescriptor(@Nullable PodLinkDescriptor descriptor, @NotNull PsiElement origin, boolean exactMatch) {
+  public static @Nullable PsiElement resolveDescriptor(@Nullable PodLinkDescriptor descriptor,
+                                                       @NotNull PsiElement origin,
+                                                       boolean exactMatch) {
     final Project project = origin.getProject();
 
     if (descriptor == null) {
@@ -143,8 +146,7 @@ public class PerlDocUtil implements PerlElementTypes {
     return resolveDescriptor(PodLinkDescriptor.create("perlre", anchor), element, false);
   }
 
-  @Nullable
-  public static PsiElement getPerlVarDoc(PerlVariable variable) {
+  public static @Nullable PsiElement getPerlVarDoc(PerlVariable variable) {
     final Project project = variable.getProject();
 
     PerlVariableType actualType = variable.getActualType();
@@ -173,8 +175,7 @@ public class PerlDocUtil implements PerlElementTypes {
     return null;
   }
 
-  @Nullable
-  public static PsiElement getPerlFuncDoc(PsiElement element) {
+  public static @Nullable PsiElement getPerlFuncDoc(PsiElement element) {
     IElementType elementType = PsiUtilCore.getElementType(element);
     CharSequence tokenChars = element.getNode().getChars();
 
@@ -216,8 +217,7 @@ public class PerlDocUtil implements PerlElementTypes {
     return searchPodElementInFile(element.getProject(), PERL_FUNC_FILE_NAME, PodDocumentPattern.itemPattern(text));
   }
 
-  @Nullable
-  public static PsiElement getPerlOpDoc(@NotNull PsiElement element) {
+  public static @Nullable PsiElement getPerlOpDoc(@NotNull PsiElement element) {
     final Project project = element.getProject();
     String text = element.getText();
 
@@ -251,8 +251,7 @@ public class PerlDocUtil implements PerlElementTypes {
     return null;
   }
 
-  @Nullable
-  public static PodCompositeElement searchPodElement(@Nullable PsiFile psiFile, final PodDocumentPattern pattern) {
+  public static @Nullable PodCompositeElement searchPodElement(@Nullable PsiFile psiFile, final PodDocumentPattern pattern) {
     if (psiFile == null) {
       return null;
     }
@@ -303,9 +302,8 @@ public class PerlDocUtil implements PerlElementTypes {
    *
    * @return POD block or null if not found
    */
-  @Nullable
   @Contract("null -> null")
-  public static PsiElement findPrependingPodBlock(@Nullable PsiElement element) {
+  public static @Nullable PsiElement findPrependingPodBlock(@Nullable PsiElement element) {
     if (element == null || element instanceof PsiFile || !element.getLanguage().isKindOf(PerlLanguage.INSTANCE)) {
       return null;
     }
@@ -334,8 +332,7 @@ public class PerlDocUtil implements PerlElementTypes {
    * @param podElement POD element of the perl file
    * @return generated documentation or null
    */
-  @Nullable
-  public static String renderPodElement(@NotNull PsiElement podElement) {
+  public static @Nullable String renderPodElement(@NotNull PsiElement podElement) {
     PsiFile podPsi = podElement.getContainingFile().getViewProvider().getPsi(PodLanguage.INSTANCE);
     if (podPsi == null) {
       return null;
@@ -365,8 +362,7 @@ public class PerlDocUtil implements PerlElementTypes {
   }
 
   @Contract("null->null")
-  @Nullable
-  public static String renderElement(@Nullable PodSection podSection) {
+  public static @Nullable String renderElement(@Nullable PodSection podSection) {
     if (podSection == null) {
       return null;
     }

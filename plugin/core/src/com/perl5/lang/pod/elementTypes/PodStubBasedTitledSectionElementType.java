@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,9 +30,8 @@ public abstract class PodStubBasedTitledSectionElementType<Psi extends PodStubBa
     super(debugName);
   }
 
-  @NotNull
   @Override
-  public PodSectionStub createStub(@NotNull PodStubBasedTitledSection psi, StubElement parentStub) {
+  public @NotNull PodSectionStub createStub(@NotNull PodStubBasedTitledSection psi, StubElement parentStub) {
     return new PodSectionStub(parentStub, this, Objects.requireNonNull(psi.getTitleText()));
   }
 

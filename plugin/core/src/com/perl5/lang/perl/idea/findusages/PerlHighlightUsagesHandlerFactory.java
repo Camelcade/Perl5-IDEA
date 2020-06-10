@@ -38,9 +38,8 @@ import java.util.List;
 
 public class PerlHighlightUsagesHandlerFactory implements HighlightUsagesHandlerFactory {
 
-  @Nullable
   @Override
-  public HighlightUsagesHandlerBase<?> createHighlightUsagesHandler(@NotNull Editor editor, @NotNull PsiFile file) {
+  public @Nullable HighlightUsagesHandlerBase<?> createHighlightUsagesHandler(@NotNull Editor editor, @NotNull PsiFile file) {
     int offset = TargetElementUtil.adjustOffset(file, editor.getDocument(), editor.getCaretModel().getOffset());
     PsiElement target = file.getViewProvider().findElementAt(offset, PerlLanguage.INSTANCE);
     return target == null ? null : new PerlHighlightUsagesHandler(editor, file, target, offset);
@@ -56,9 +55,8 @@ public class PerlHighlightUsagesHandlerFactory implements HighlightUsagesHandler
       myAdjustedOffset = adjustedOffset;
     }
 
-    @NotNull
     @Override
-    public List<PsiElement> getTargets() {
+    public @NotNull List<PsiElement> getTargets() {
       PsiElement namedElement =
         TargetElementUtil.getInstance().getNamedElement(myElement, myAdjustedOffset - myElement.getNode().getStartOffset());
       if (namedElement != null) {

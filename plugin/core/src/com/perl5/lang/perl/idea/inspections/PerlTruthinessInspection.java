@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,9 +45,8 @@ public class PerlTruthinessInspection extends PerlInspection {
     FOREACH_COMPOUND, FOR_STATEMENT_MODIFIER, GIVEN_COMPOUND, WHEN_COMPOUND
   );
 
-  @NotNull
   @Override
-  public PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean isOnTheFly) {
+  public @NotNull PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean isOnTheFly) {
     return new PerlVisitor() {
       @Override
       public void visitConditionExpr(@NotNull PsiPerlConditionExpr o) {
@@ -87,8 +86,7 @@ public class PerlTruthinessInspection extends PerlInspection {
    * @return ambiguous expression inside the {@code expression} if any
    */
   @Contract("null->null")
-  @Nullable
-  private static PsiElement getAmbiguousExpression(@Nullable PsiElement expression) {
+  private static @Nullable PsiElement getAmbiguousExpression(@Nullable PsiElement expression) {
     if (expression == null) {
       return null;
     }
@@ -116,8 +114,7 @@ public class PerlTruthinessInspection extends PerlInspection {
    * @return a wrapping negation expression if any. Skips parenthesized expressions
    */
   @Contract("null->null")
-  @Nullable
-  private static PsiElement getParentNegation(@Nullable PsiElement expression) {
+  private static @Nullable PsiElement getParentNegation(@Nullable PsiElement expression) {
     if (expression == null) {
       return null;
     }
@@ -152,17 +149,14 @@ public class PerlTruthinessInspection extends PerlInspection {
      * @return pair of element to replace and element to replace with.
      */
     @Contract("null->null")
-    @Nullable
-    protected abstract Pair<PsiElement, PsiElement> getReplacementAndAnchor(@Nullable PsiElement ambiguousExpression);
+    protected abstract @Nullable Pair<PsiElement, PsiElement> getReplacementAndAnchor(@Nullable PsiElement ambiguousExpression);
   }
 
   private static class DefinedQuickFix extends ReplacementQuickFix {
     private static final DefinedQuickFix INSTANCE = new DefinedQuickFix();
 
-    @Nls(capitalization = Nls.Capitalization.Sentence)
-    @NotNull
     @Override
-    public String getFamilyName() {
+    public @Nls(capitalization = Nls.Capitalization.Sentence) @NotNull String getFamilyName() {
       return PerlBundle.message("perl.inspection.truthness.add.defined");
     }
 
@@ -178,7 +172,7 @@ public class PerlTruthinessInspection extends PerlInspection {
 
   private abstract static class ReplacementWithNegationQuickFix extends ReplacementQuickFix {
     @Override
-    protected Pair<PsiElement, PsiElement> getReplacementAndAnchor(@Nullable final PsiElement ambiguousExpression) {
+    protected Pair<PsiElement, PsiElement> getReplacementAndAnchor(final @Nullable PsiElement ambiguousExpression) {
       if (ambiguousExpression == null) {
         return null;
       }
@@ -193,23 +187,19 @@ public class PerlTruthinessInspection extends PerlInspection {
       return Pair.create(anchor, PsiTreeUtil.findChildOfType(file, PsiPerlExpr.class));
     }
 
-    @NotNull
-    protected abstract String getReplacementText(@NotNull String baseText, boolean isNegated);
+    protected abstract @NotNull String getReplacementText(@NotNull String baseText, boolean isNegated);
   }
 
   private static class ZeroEqualityFix extends ReplacementWithNegationQuickFix {
     private static final ZeroEqualityFix INSTANCE = new ZeroEqualityFix();
 
-    @Nls(capitalization = Nls.Capitalization.Sentence)
-    @NotNull
     @Override
-    public String getFamilyName() {
+    public @Nls(capitalization = Nls.Capitalization.Sentence) @NotNull String getFamilyName() {
       return PerlBundle.message("perl.inspection.truthness.add.numeric");
     }
 
-    @NotNull
     @Override
-    protected String getReplacementText(@NotNull String baseText, boolean isNegated) {
+    protected @NotNull String getReplacementText(@NotNull String baseText, boolean isNegated) {
       return isNegated ? baseText + " == 0" : baseText + " != 0";
     }
   }
@@ -217,16 +207,13 @@ public class PerlTruthinessInspection extends PerlInspection {
   private static final class EmptyStringEqualityFix extends ReplacementWithNegationQuickFix {
     private static final EmptyStringEqualityFix INSTANCE = new EmptyStringEqualityFix();
 
-    @Nls(capitalization = Nls.Capitalization.Sentence)
-    @NotNull
     @Override
-    public String getFamilyName() {
+    public @Nls(capitalization = Nls.Capitalization.Sentence) @NotNull String getFamilyName() {
       return PerlBundle.message("perl.inspection.truthness.add.string");
     }
 
-    @NotNull
     @Override
-    protected String getReplacementText(@NotNull String baseText, boolean isNegated) {
+    protected @NotNull String getReplacementText(@NotNull String baseText, boolean isNegated) {
       return isNegated ? baseText + " eq ''" : baseText + " ne ''";
     }
   }

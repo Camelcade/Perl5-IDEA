@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,9 +36,8 @@ public abstract class PerlHeredocOpenerMixin extends PerlCompositeElementImpl im
     super(node);
   }
 
-  @Nullable
   @Override
-  public PsiElement getNameIdentifier() {
+  public @Nullable PsiElement getNameIdentifier() {
     PerlString string = PsiTreeUtil.findChildOfType(this, PerlString.class);
     if (string != null) {
       if (string instanceof PsiPerlStringBare) {
@@ -64,9 +63,8 @@ public abstract class PerlHeredocOpenerMixin extends PerlCompositeElementImpl im
            : nameIdentifier.getTextOffset();
   }
 
-  @Nullable
   @Override
-  public String getName() {
+  public @Nullable String getName() {
     PsiElement nameIdentifier = getNameIdentifier();
     return nameIdentifier == null ? null : nameIdentifier.getText();
   }
@@ -85,9 +83,8 @@ public abstract class PerlHeredocOpenerMixin extends PerlCompositeElementImpl im
     return this;
   }
 
-  @NotNull
   @Override
-  public SearchScope getUseScope() {
+  public @NotNull SearchScope getUseScope() {
     return new LocalSearchScope(getContainingFile());
   }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,21 +36,18 @@ public class TestMoreProcessor extends PerlPackageProcessorBase implements PerlP
     OPTIONS.put("tests", "Number of tests expected");
   }
 
-  @Nullable
   @Override
-  protected List<String> getImportParameters(@NotNull PerlUseStatementElement useStatement) {
+  protected @Nullable List<String> getImportParameters(@NotNull PerlUseStatementElement useStatement) {
     return null; // this will cause descriptors to ignore parameters above
   }
 
-  @NotNull
   @Override
-  public Map<String, String> getOptions() {
+  public @NotNull Map<String, String> getOptions() {
     return OPTIONS;
   }
 
-  @NotNull
   @Override
-  public Map<String, String> getOptionsBundles() {
+  public @NotNull Map<String, String> getOptionsBundles() {
     return Collections.emptyMap();
   }
 }

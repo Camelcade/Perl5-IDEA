@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,15 +41,13 @@ public class PodElementDescriptionProvider extends PerlElementDescriptionProvide
     return super.isMyElement(element) && element instanceof PodStubBasedTitledSection;
   }
 
-  @Nullable
   @Override
-  protected String getShortName(@NotNull PsiElement element) {
+  protected @Nullable String getShortName(@NotNull PsiElement element) {
     return getLongName(element);
   }
 
-  @Nullable
   @Override
-  protected String getTypeName(@NotNull PsiElement element) {
+  protected @Nullable String getTypeName(@NotNull PsiElement element) {
     if (element instanceof PodFile) {
       return "POD file";
     }
@@ -80,9 +78,8 @@ public class PodElementDescriptionProvider extends PerlElementDescriptionProvide
     return "Unhandled type for " + element;
   }
 
-  @Nullable
   @Override
-  protected String getLongName(@NotNull PsiElement element) {
+  protected @Nullable String getLongName(@NotNull PsiElement element) {
     if (element instanceof PodTitledSection) {
       return ((PodTitledSection)element).getTitleTextWithoutIndexes();
     }

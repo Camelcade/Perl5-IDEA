@@ -28,8 +28,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class Perl5RealSdkWrapper implements Perl5SdkWrapper {
-  @NotNull
-  private final Sdk mySdk;
+  private final @NotNull Sdk mySdk;
 
   public Perl5RealSdkWrapper(@NotNull Sdk sdk) {
     mySdk = sdk;
@@ -43,8 +42,7 @@ public class Perl5RealSdkWrapper implements Perl5SdkWrapper {
   }
 
   @Override
-  @NotNull
-  public Sdk getSdk() {
+  public @NotNull Sdk getSdk() {
     return mySdk;
   }
 
@@ -87,8 +85,7 @@ public class Perl5RealSdkWrapper implements Perl5SdkWrapper {
   }
 
   @Contract("null->null;!null->!null")
-  @Nullable
-  public static Perl5RealSdkWrapper create(@Nullable Sdk sdk) {
+  public static @Nullable Perl5RealSdkWrapper create(@Nullable Sdk sdk) {
     return sdk == null ? null : new Perl5RealSdkWrapper(sdk);
   }
 }

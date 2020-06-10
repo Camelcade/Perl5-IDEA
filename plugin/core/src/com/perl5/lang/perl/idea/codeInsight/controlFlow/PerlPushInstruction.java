@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,23 +30,20 @@ public class PerlPushInstruction extends PerlMutationInstruction {
     super(builder, pushExpr);
   }
 
-  @Nullable
   @Override
-  public PsiElement getLeftSide() {
+  public @Nullable PsiElement getLeftSide() {
     assert myElement != null;
     return ((PsiPerlArrayPushExpr)myElement).getTarget();
   }
 
-  @NotNull
   @Override
-  public PerlValue createValue() {
+  public @NotNull PerlValue createValue() {
     assert myElement != null;
     return PerlPushValue.create((PsiPerlArrayPushExpr)myElement);
   }
 
-  @NotNull
   @Override
-  public String getElementPresentation() {
+  public @NotNull String getElementPresentation() {
     return "push " + myElement;
   }
 }

@@ -35,8 +35,7 @@ import java.util.List;
 import java.util.Set;
 
 public interface PerlSubElement extends PerlSub, PsiElement, PerlIdentifierOwner {
-  @Nullable
-  default PerlSubElement getDirectSuperMethod() {
+  default @Nullable PerlSubElement getDirectSuperMethod() {
     if (!isMethod()) {
       return null;
     }
@@ -56,8 +55,7 @@ public interface PerlSubElement extends PerlSub, PsiElement, PerlIdentifierOwner
     return null;
   }
 
-  @NotNull
-  default PerlSubElement getTopmostSuperMethod() {
+  default @NotNull PerlSubElement getTopmostSuperMethod() {
     Set<String> classRecursion = new THashSet<>();
 
     PerlSubElement run = this;

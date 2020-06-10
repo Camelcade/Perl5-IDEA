@@ -35,8 +35,7 @@ import java.util.List;
  * @see IntroduceTargetChooser.MyIntroduceTarget
  */
 public class PerlIntroduceTarget extends PsiIntroduceTarget<PsiElement> {
-  @NotNull
-  private final TextRange myTextRangeInElement;
+  private final @NotNull TextRange myTextRangeInElement;
 
 
   private PerlIntroduceTarget(@NotNull PsiElement element, @NotNull TextRange textRangeInElement) {
@@ -49,14 +48,12 @@ public class PerlIntroduceTarget extends PsiIntroduceTarget<PsiElement> {
     return isValid() ? getPlace() + ";" + getTextRange() + "; " + render() : "INVALID";
   }
 
-  @NotNull
-  public TextRange getTextRangeInElement() {
+  public @NotNull TextRange getTextRangeInElement() {
     return myTextRangeInElement;
   }
 
-  @NotNull
   @Override
-  public String render() {
+  public @NotNull String render() {
     String elementText = super.render();
     return myTextRangeInElement.getEndOffset() > elementText.length() ?
            elementText : myTextRangeInElement.subSequence(elementText).toString();
@@ -71,8 +68,7 @@ public class PerlIntroduceTarget extends PsiIntroduceTarget<PsiElement> {
   }
 
   @Override
-  @NotNull
-  public TextRange getTextRange() {
+  public @NotNull TextRange getTextRange() {
     Segment elementRange = super.getTextRange();
     return TextRange.from(elementRange.getStartOffset() + getTextRangeInElement().getStartOffset(), getTextRangeInElement().getLength());
   }
@@ -80,8 +76,7 @@ public class PerlIntroduceTarget extends PsiIntroduceTarget<PsiElement> {
   /**
    * @return matching children of the {@code target}
    */
-  @NotNull
-  public final List<PsiElement> getChildren() {
+  public final @NotNull List<PsiElement> getChildren() {
     PsiElement place = getPlace();
     return place == null ? Collections.emptyList() : getChildrenInRange(place, getTextRangeInElement());
   }
@@ -89,27 +84,23 @@ public class PerlIntroduceTarget extends PsiIntroduceTarget<PsiElement> {
   /**
    * @return matching children of the {@code target}
    */
-  @NotNull
-  public final List<PsiElement> getMeaningfulChildrenWithLeafs() {
+  public final @NotNull List<PsiElement> getMeaningfulChildrenWithLeafs() {
     PsiElement place = getPlace();
     return place == null ? Collections.emptyList() : PerlPsiUtil.getMeaningfulChildrenWithLeafs(place, getTextRangeInElement());
   }
 
-  @NotNull
-  public static PerlIntroduceTarget create(@NotNull PsiElement element) {
+  public static @NotNull PerlIntroduceTarget create(@NotNull PsiElement element) {
     return new PerlIntroduceTarget(element, TextRange.create(0, element.getTextLength()));
   }
 
-  @NotNull
-  public static PerlIntroduceTarget create(@NotNull PsiElement element, @NotNull PsiElement lastChildToInclude) {
+  public static @NotNull PerlIntroduceTarget create(@NotNull PsiElement element, @NotNull PsiElement lastChildToInclude) {
     if (!element.equals(lastChildToInclude.getParent())) {
       throw new RuntimeException("Last child is not a child of an element");
     }
     return new PerlIntroduceTarget(element, TextRange.create(0, lastChildToInclude.getTextRangeInParent().getEndOffset()));
   }
 
-  @NotNull
-  public static PerlIntroduceTarget create(@NotNull PsiElement element, @NotNull TextRange textRangeInElement) {
+  public static @NotNull PerlIntroduceTarget create(@NotNull PsiElement element, @NotNull TextRange textRangeInElement) {
     if (textRangeInElement.getStartOffset() < 0 || textRangeInElement.getEndOffset() > element.getTextLength()) {
       throw new RuntimeException("Incorrect element range: " +
                                  "element: " + element + "; " +
@@ -120,10 +111,9 @@ public class PerlIntroduceTarget extends PsiIntroduceTarget<PsiElement> {
     return new PerlIntroduceTarget(element, textRangeInElement);
   }
 
-  @NotNull
-  public static PerlIntroduceTarget create(@NotNull PsiElement element,
-                                           @NotNull PsiElement firstDescendantToInclude,
-                                           @NotNull PsiElement lastDescendantToInclude) {
+  public static @NotNull PerlIntroduceTarget create(@NotNull PsiElement element,
+                                                    @NotNull PsiElement firstDescendantToInclude,
+                                                    @NotNull PsiElement lastDescendantToInclude) {
     if (!PsiTreeUtil.isAncestor(element, lastDescendantToInclude, true)) {
       throw new RuntimeException("Last descendant is not under an element: " +
                                  "element: " + element + "; " +
@@ -155,10 +145,9 @@ public class PerlIntroduceTarget extends PsiIntroduceTarget<PsiElement> {
       element, TextRange.create(firstChildStartOffset, lastChildEndOffset).shiftLeft(element.getTextRange().getStartOffset()));
   }
 
-  @NotNull
-  public static PerlIntroduceTarget create(@NotNull PsiElement element,
-                                           int startOffsetInParent,
-                                           int endOffsetInParent) {
+  public static @NotNull PerlIntroduceTarget create(@NotNull PsiElement element,
+                                                    int startOffsetInParent,
+                                                    int endOffsetInParent) {
     if (startOffsetInParent > endOffsetInParent) {
       throw new RuntimeException(
         "Inconsistent offsets: " +
@@ -173,8 +162,7 @@ public class PerlIntroduceTarget extends PsiIntroduceTarget<PsiElement> {
   /**
    * @return all children of {@code element} inside {@code rangeInElement}
    */
-  @NotNull
-  private static List<PsiElement> getChildrenInRange(@NotNull PsiElement element, TextRange rangeInElement) {
+  private static @NotNull List<PsiElement> getChildrenInRange(@NotNull PsiElement element, TextRange rangeInElement) {
     List<PsiElement> result = new ArrayList<>();
     for (PsiElement child : element.getChildren()) {
       if (rangeInElement.contains(child.getTextRangeInParent())) {

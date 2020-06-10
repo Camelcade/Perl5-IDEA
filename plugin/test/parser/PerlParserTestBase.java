@@ -65,8 +65,7 @@ public abstract class PerlParserTestBase extends PerlLightTestCaseBase {
     }
   }
 
-  @NotNull
-  protected String myFileExt;
+  protected @NotNull String myFileExt;
   public PerlParserTestBase() {
     this(PerlFileTypeScript.EXTENSION_PL);
   }

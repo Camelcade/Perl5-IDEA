@@ -31,9 +31,8 @@ import org.jetbrains.annotations.NotNull;
 
 
 public class PerlUnresolvedSubInspection extends PerlInspection implements PerlElementPatterns {
-  @NotNull
   @Override
-  public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
+  public @NotNull PsiElementVisitor buildVisitor(final @NotNull ProblemsHolder holder, boolean isOnTheFly) {
     return new PerlVisitor() {
       @Override
       public void visitStringContentElement(@NotNull PerlStringContentElementImpl o) {

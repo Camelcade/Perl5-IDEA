@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,8 +27,7 @@ import org.jetbrains.annotations.Nullable;
 
 
 public class HTMLMasonElementFactory {
-  @Nullable
-  public static PerlString getBareCallString(Project project, String content) {
+  public static @Nullable PerlString getBareCallString(Project project, String content) {
     String fileContent = "<& " + content + "&>";
     HTMLMasonFileImpl file = createFile(project, fileContent);
     return PsiTreeUtil.findChildOfType(file, PerlString.class);

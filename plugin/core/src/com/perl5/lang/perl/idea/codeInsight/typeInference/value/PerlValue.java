@@ -53,8 +53,7 @@ public abstract class PerlValue {
   /**
    * @return set of package name from the index, conforming current type
    */
-  @NotNull
-  public Set<String> getNamespaceNames() {
+  public @NotNull Set<String> getNamespaceNames() {
     return Collections.emptySet();
   }
 
@@ -62,8 +61,7 @@ public abstract class PerlValue {
   /**
    * @return a current value resolved in the context of the {@code contextElement}.
    */
-  @NotNull
-  public final PerlValue resolve(@NotNull PsiElement contextElement) {
+  public final @NotNull PerlValue resolve(@NotNull PsiElement contextElement) {
     return new PerlSimpleValueResolver(contextElement).resolve(this);
   }
 
@@ -72,14 +70,12 @@ public abstract class PerlValue {
    * @apiNote DO NOT use this method directly, use {@link #resolve(PsiElement)} (Project)}
    * @implSpec feel free to use indexes, resolve and any heavy activity you need
    */
-  @NotNull
-  abstract PerlValue computeResolve(@NotNull PerlValueResolver resolver);
+  abstract @NotNull PerlValue computeResolve(@NotNull PerlValueResolver resolver);
 
   /**
    * @return set of sub names which may be represented by the current value
    */
-  @NotNull
-  public Set<String> getSubNames() {
+  public @NotNull Set<String> getSubNames() {
     return Collections.emptySet();
   }
 
@@ -128,8 +124,7 @@ public abstract class PerlValue {
   /**
    * @return a context type for this value. Or null if context can't be determined (can be any)
    */
-  @Nullable
-  protected abstract PerlContextType getContextType();
+  protected abstract @Nullable PerlContextType getContextType();
 
   /**
    * @return true iff this value is deterministic and don't need to be computed
@@ -160,8 +155,7 @@ public abstract class PerlValue {
   /**
    * @return presentable text for tooltips
    */
-  @NotNull
-  public String getPresentableText() {
+  public @NotNull String getPresentableText() {
     return toString();
   }
 

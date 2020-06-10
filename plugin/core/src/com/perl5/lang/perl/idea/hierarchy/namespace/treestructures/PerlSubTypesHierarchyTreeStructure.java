@@ -39,9 +39,8 @@ public class PerlSubTypesHierarchyTreeStructure extends HierarchyTreeStructure {
     super(project, baseDescriptor);
   }
 
-  @NotNull
   @Override
-  protected Object[] buildChildren(@NotNull HierarchyNodeDescriptor descriptor) {
+  protected @NotNull Object[] buildChildren(@NotNull HierarchyNodeDescriptor descriptor) {
     List<PerlHierarchyNodeDescriptor> result = new ArrayList<>();
 
     if (descriptor instanceof PerlHierarchyNodeDescriptor) {

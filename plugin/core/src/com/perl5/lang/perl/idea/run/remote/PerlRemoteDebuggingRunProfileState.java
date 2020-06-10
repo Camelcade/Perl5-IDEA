@@ -36,10 +36,8 @@ import java.util.Objects;
  * For attaching to the remote process
  */
 public class PerlRemoteDebuggingRunProfileState extends PerlDebugProfileStateBase {
-  @NotNull
-  private final File myLocalProjectPath;
-  @NotNull
-  private final File myRemoteProjectPath;
+  private final @NotNull File myLocalProjectPath;
+  private final @NotNull File myRemoteProjectPath;
 
   public PerlRemoteDebuggingRunProfileState(ExecutionEnvironment environment) {
     super(environment);
@@ -50,9 +48,8 @@ public class PerlRemoteDebuggingRunProfileState extends PerlDebugProfileStateBas
     myRemoteProjectPath = new File(debuggingConfiguration.getRemoteProjectRoot());
   }
 
-  @NotNull
   @Override
-  public ExecutionResult execute(@NotNull Executor executor) throws ExecutionException {
+  public @NotNull ExecutionResult execute(@NotNull Executor executor) throws ExecutionException {
     return new DefaultExecutionResult(createConsole(executor), markAsReady(new DefaultDebugProcessHandler()));
   }
 
@@ -70,15 +67,13 @@ public class PerlRemoteDebuggingRunProfileState extends PerlDebugProfileStateBas
   }
 
   @SuppressWarnings("RedundantThrows")
-  @Nullable
   @Override
-  protected ConsoleView createConsole(@NotNull Executor executor) throws ExecutionException {
+  protected @Nullable ConsoleView createConsole(@NotNull Executor executor) throws ExecutionException {
     return new PerlRunConsole(getEnvironment().getProject());
   }
 
-  @NotNull
   @Override
-  public String mapPathToLocal(@NotNull String remotePathName) {
+  public @NotNull String mapPathToLocal(@NotNull String remotePathName) {
     File remotePath = new File(remotePathName);
     if (FileUtil.isAncestor(myRemoteProjectPath, remotePath, false)) {
       return FileUtil.toSystemDependentName(

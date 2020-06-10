@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,9 +27,8 @@ public class PerlBuiltInVariable extends PerlImplicitVariableDeclaration {
     super(manager, variableName, PerlPackageUtil.MAIN_NAMESPACE_NAME, null, false, false, false, null);
   }
 
-  @Nullable
   @Override
-  public String getExplicitNamespaceName() {
+  public @Nullable String getExplicitNamespaceName() {
     return null;
   }
 

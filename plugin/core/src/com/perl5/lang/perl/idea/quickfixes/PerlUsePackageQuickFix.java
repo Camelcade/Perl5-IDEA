@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,16 +44,13 @@ public class PerlUsePackageQuickFix implements LocalQuickFix {
     myPackageName = packageName;
   }
 
-  @Nls
-  @NotNull
   @Override
-  public String getName() {
+  public @Nls @NotNull String getName() {
     return PerlBundle.message("perl.quickfix.add.use.name", myPackageName);
   }
 
-  @NotNull
   @Override
-  public String getFamilyName() {
+  public @NotNull String getFamilyName() {
     return PerlBundle.message("perl.quickfix.add.use.family");
   }
 

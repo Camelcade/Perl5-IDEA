@@ -45,8 +45,7 @@ import java.util.Collection;
 
 
 public class PerlDebugUtil {
-  @Nullable
-  public static XLineBreakpoint<?> findBreakpoint(final Project project, final PerlDebuggingEventBreakpoint breakpointBase) {
+  public static @Nullable XLineBreakpoint<?> findBreakpoint(final Project project, final PerlDebuggingEventBreakpoint breakpointBase) {
     final XLineBreakpoint<?>[] result = new XLineBreakpoint<?>[]{null};
 
     ApplicationManager.getApplication().runReadAction(() -> {
@@ -76,7 +75,7 @@ public class PerlDebugUtil {
     return result[0];
   }
 
-  public static void requestAndComputeChildren(@NotNull final XCompositeNode node,
+  public static void requestAndComputeChildren(final @NotNull XCompositeNode node,
                                                final PerlStackFrame perlStackFrame,
                                                final int[] offset,
                                                final int size,

@@ -33,9 +33,9 @@ import java.util.Objects;
 
 
 public class MojoliciousHighlighter extends LayeredLexerEditorHighlighter implements MojoliciousElementTypes {
-  public MojoliciousHighlighter(@Nullable final Project project,
-                                @Nullable final VirtualFile virtualFile,
-                                @NotNull final EditorColorsScheme colors) {
+  public MojoliciousHighlighter(final @Nullable Project project,
+                                final @Nullable VirtualFile virtualFile,
+                                final @NotNull EditorColorsScheme colors) {
     super(new MojoliciousSyntaxHighlighter(project), colors);
     registerLayer(MOJO_TEMPLATE_BLOCK_HTML, new LayerDescriptor(
       Objects.requireNonNull(SyntaxHighlighterFactory.getSyntaxHighlighter(HtmlFileType.INSTANCE, project, virtualFile)), ""));

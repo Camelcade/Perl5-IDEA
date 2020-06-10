@@ -43,8 +43,7 @@ public class PerlElementDescriptionProvider extends PerlElementDescriptionProvid
 
 
   @Override
-  @Nullable
-  protected String getShortName(@NotNull PsiElement element) {
+  protected @Nullable String getShortName(@NotNull PsiElement element) {
     if (element instanceof PsiNamedElement) {
       return ((PsiNamedElement)element).getName();
     }
@@ -52,8 +51,7 @@ public class PerlElementDescriptionProvider extends PerlElementDescriptionProvid
   }
 
   @Override
-  @Nullable
-  protected String getTypeName(@NotNull PsiElement element) {
+  protected @Nullable String getTypeName(@NotNull PsiElement element) {
     if (element instanceof PerlAttributeDefinition) {
       return PerlBundle.message("perl.type.attribute");
     }
@@ -112,8 +110,7 @@ public class PerlElementDescriptionProvider extends PerlElementDescriptionProvid
   }
 
   @Override
-  @Nullable
-  protected String getLongName(@NotNull PsiElement element) {
+  protected @Nullable String getLongName(@NotNull PsiElement element) {
     return MessageFormat.format("{0} ''{1}''", UsageViewUtil.getType(element), UsageViewUtil.getShortName(element));
   }
 }

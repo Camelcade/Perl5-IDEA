@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -95,22 +95,19 @@ public class PerlColorSettingsPage implements ColorSettingsPage {
     new AttributesDescriptor("Angles", PerlSyntaxHighlighter.PERL_ANGLE)
   };
 
-  @Nullable
   @Override
-  public Icon getIcon() {
+  public @Nullable Icon getIcon() {
     return PerlIcons.PERL_LANGUAGE_ICON;
   }
 
-  @NotNull
   @Override
-  public SyntaxHighlighter getHighlighter() {
+  public @NotNull SyntaxHighlighter getHighlighter() {
     return new PerlSyntaxHighlighter(null);
   }
 
 
-  @NotNull
   @Override
-  public String getDemoText() {
+  public @NotNull String getDemoText() {
     // fixme remove redundant kw tags after and if https://youtrack.jetbrains.com/issue/IJSDK-80 will be resolved
     return "#!/usr/bin/perl\n" +
            "<kw>use</kw> <pragma>strict</pragma>;\n" +
@@ -147,9 +144,8 @@ public class PerlColorSettingsPage implements ColorSettingsPage {
            "\n";
   }
 
-  @Nullable
   @Override
-  public Map<String, TextAttributesKey> getAdditionalHighlightingTagToDescriptorMap() {
+  public @Nullable Map<String, TextAttributesKey> getAdditionalHighlightingTagToDescriptorMap() {
     //noinspection unchecked
     return ContainerUtil.newHashMap(
       Pair.create("package", PerlSyntaxHighlighter.PERL_PACKAGE),
@@ -188,21 +184,18 @@ public class PerlColorSettingsPage implements ColorSettingsPage {
     );
   }
 
-  @NotNull
   @Override
-  public AttributesDescriptor[] getAttributeDescriptors() {
+  public @NotNull AttributesDescriptor[] getAttributeDescriptors() {
     return DESCRIPTORS;
   }
 
-  @NotNull
   @Override
-  public ColorDescriptor[] getColorDescriptors() {
+  public @NotNull ColorDescriptor[] getColorDescriptors() {
     return ColorDescriptor.EMPTY_ARRAY;
   }
 
-  @NotNull
   @Override
-  public String getDisplayName() {
+  public @NotNull String getDisplayName() {
     return PerlLanguage.NAME;
   }
 }

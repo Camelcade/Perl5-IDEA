@@ -35,9 +35,8 @@ public abstract class PerlSubCallHandlerWithEmptyData extends PerlSubCallHandler
     return EmptyCallData.INSTANCE;
   }
 
-  @NotNull
   @Override
-  public final EmptyCallData computeCallData(@NotNull PerlSubCallElement subCallElement) {
+  public final @NotNull EmptyCallData computeCallData(@NotNull PerlSubCallElement subCallElement) {
     return EmptyCallData.INSTANCE;
   }
 }

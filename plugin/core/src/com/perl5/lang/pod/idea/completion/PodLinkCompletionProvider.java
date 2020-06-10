@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -114,8 +114,7 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
   /**
    * @return section title with escaped {@code < > | /} chars
    */
-  @NotNull
-  public static String escapeTitle(@NotNull String title) {
+  public static @NotNull String escapeTitle(@NotNull String title) {
     return StringUtil.replace(title, TO_ESCAPE, ESCAPE_TO);
   }
 
@@ -156,8 +155,7 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
         }
 
         @Contract("null->null")
-        @Nullable
-        private String cleanItemText(@Nullable String itemText) {
+        private @Nullable String cleanItemText(@Nullable String itemText) {
           if (itemText == null) {
             return null;
           }

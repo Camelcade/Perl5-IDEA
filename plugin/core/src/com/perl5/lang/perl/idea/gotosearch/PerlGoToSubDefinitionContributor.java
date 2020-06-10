@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,15 +28,13 @@ import java.util.Collection;
 
 
 public class PerlGoToSubDefinitionContributor implements ChooseByNameContributor {
-  @NotNull
   @Override
-  public String[] getNames(Project project, boolean includeNonProjectItems) {
+  public @NotNull String[] getNames(Project project, boolean includeNonProjectItems) {
     return PerlSubUtil.getDefinedSubsNames(project).toArray(new String[]{});
   }
 
-  @NotNull
   @Override
-  public NavigationItem[] getItemsByName(String name, String pattern, Project project, boolean includeNonProjectItems) {
+  public @NotNull NavigationItem[] getItemsByName(String name, String pattern, Project project, boolean includeNonProjectItems) {
     Collection<PerlSubDefinitionElement> result = PerlSubUtil.getSubDefinitions(
       project,
       name,

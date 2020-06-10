@@ -26,10 +26,8 @@ import com.perl5.lang.perl.psi.PerlAssignExpression.PerlAssignValueDescriptor;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlAssignInstruction extends PerlMutationInstruction {
-  @NotNull
-  private final PerlAssignValueDescriptor myRightSide;
-  @NotNull
-  private final PsiElement myOperation;
+  private final @NotNull PerlAssignValueDescriptor myRightSide;
+  private final @NotNull PsiElement myOperation;
 
   public PerlAssignInstruction(@NotNull ControlFlowBuilder builder,
                                @NotNull PsiElement leftSide,
@@ -41,37 +39,31 @@ public class PerlAssignInstruction extends PerlMutationInstruction {
   }
 
   @Override
-  @NotNull
-  public PsiElement getLeftSide() {
+  public @NotNull PsiElement getLeftSide() {
     // you can't create this instruction with nullable element
     //noinspection ConstantConditions
     return myElement;
   }
 
-  @NotNull
-  public PerlAssignValueDescriptor getRightSide() {
+  public @NotNull PerlAssignValueDescriptor getRightSide() {
     return myRightSide;
   }
 
-  @NotNull
-  public IElementType getOperationType() {
+  public @NotNull IElementType getOperationType() {
     return PsiUtilCore.getElementType(myOperation);
   }
 
-  @NotNull
-  public PsiElement getOperation() {
+  public @NotNull PsiElement getOperation() {
     return myOperation;
   }
 
   @Override
-  @NotNull
-  public PerlValue createValue() {
+  public @NotNull PerlValue createValue() {
     return PerlValuesManager.from(getLeftSide(), getRightSide());
   }
 
-  @NotNull
   @Override
-  public String getElementPresentation() {
+  public @NotNull String getElementPresentation() {
     return "assign " + myElement + " " + getOperationType() + " " + myRightSide;
   }
 }

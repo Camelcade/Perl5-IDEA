@@ -62,9 +62,8 @@ public class Perl5RegexpInjector implements MultiHostInjector {
     }
   }
 
-  @NotNull
   @Override
-  public List<? extends Class<? extends PsiElement>> elementsToInjectIn() {
+  public @NotNull List<? extends Class<? extends PsiElement>> elementsToInjectIn() {
     return ELEMENTS_TO_INJECT;
   }
 }

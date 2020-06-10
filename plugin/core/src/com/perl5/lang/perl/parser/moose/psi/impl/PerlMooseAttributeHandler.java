@@ -58,9 +58,8 @@ public class PerlMooseAttributeHandler extends PerlSubCallHandlerWithEmptyData {
     READER_KEY, MUTATOR_KEY, ACCESSOR_KEY, "predicate", "clearer"
   );
 
-  @NotNull
   @Override
-  public List<? extends PerlDelegatingLightNamedElement<?>> computeLightElementsFromPsi(@NotNull PerlSubCallElement subCallElement) {
+  public @NotNull List<? extends PerlDelegatingLightNamedElement<?>> computeLightElementsFromPsi(@NotNull PerlSubCallElement subCallElement) {
     Pair<List<PsiElement>, List<PsiElement>> lists = getIdentifiersAndListElements(subCallElement);
     if (lists == null) {
       return Collections.emptyList();
@@ -69,10 +68,9 @@ public class PerlMooseAttributeHandler extends PerlSubCallHandlerWithEmptyData {
            createMojoAttributes(subCallElement, lists) : createMooseAttributes(subCallElement, lists.first, lists.second);
   }
 
-  @NotNull
   @Override
-  public List<? extends PerlDelegatingLightNamedElement<?>> computeLightElementsFromStubs(@NotNull PerlSubCallElement psiElement,
-                                                                                          @NotNull PerlSubCallElementStub stubElement) {
+  public @NotNull List<? extends PerlDelegatingLightNamedElement<?>> computeLightElementsFromStubs(@NotNull PerlSubCallElement psiElement,
+                                                                                                   @NotNull PerlSubCallElementStub stubElement) {
     return stubElement.getLightNamedElementsStubs().stream()
       .map(childStub -> {
         IStubElementType<?, ?> stubType = childStub.getStubType();
@@ -91,8 +89,7 @@ public class PerlMooseAttributeHandler extends PerlSubCallHandlerWithEmptyData {
    * @return pair of lists: identifiers lists and list of has arguments
    * null if something went wrong
    */
-  @Nullable
-  private Pair<List<PsiElement>, List<PsiElement>> getIdentifiersAndListElements(@NotNull PerlSubCallElement subCallElement) {
+  private @Nullable Pair<List<PsiElement>, List<PsiElement>> getIdentifiersAndListElements(@NotNull PerlSubCallElement subCallElement) {
     PsiPerlCallArguments arguments = subCallElement.getCallArguments();
     if (arguments == null) {
       return null;
@@ -113,9 +110,8 @@ public class PerlMooseAttributeHandler extends PerlSubCallHandlerWithEmptyData {
     return Pair.create(identifiers, listElements);
   }
 
-  @NotNull
-  private List<PerlDelegatingLightNamedElement<?>> createMojoAttributes(@NotNull PerlSubCallElement subCallElement,
-                                                                        @NotNull Pair<List<PsiElement>, List<PsiElement>> lists) {
+  private @NotNull List<PerlDelegatingLightNamedElement<?>> createMojoAttributes(@NotNull PerlSubCallElement subCallElement,
+                                                                                 @NotNull Pair<List<PsiElement>, List<PsiElement>> lists) {
     List<PsiElement> arguments = lists.second.subList(1, lists.second.size());
     PsiElement argument = ContainerUtil.getFirstItem(arguments);
     PerlSubExpr subExpr = ObjectUtils.tryCast(argument, PerlSubExpr.class);
@@ -143,8 +139,7 @@ public class PerlMooseAttributeHandler extends PerlSubCallHandlerWithEmptyData {
     return result;
   }
 
-  @NotNull
-  public List<String> getAttributesNames(@NotNull PerlSubCallElement subCallElement) {
+  public @NotNull List<String> getAttributesNames(@NotNull PerlSubCallElement subCallElement) {
     // fixme we have no stubs here
     /*
     PerlMooseAttributeWrapperStub stub = getGreenStub();
@@ -159,10 +154,9 @@ public class PerlMooseAttributeHandler extends PerlSubCallHandlerWithEmptyData {
     return lists.first.stream().map(ElementManipulators::getValueText).collect(Collectors.toList());
   }
 
-  @NotNull
-  private List<PerlDelegatingLightNamedElement<?>> createMooseAttributes(@NotNull PerlSubCallElement subCallElement,
-                                                                         @NotNull List<PsiElement> identifiers,
-                                                                         @NotNull List<PsiElement> listElements) {
+  private @NotNull List<PerlDelegatingLightNamedElement<?>> createMooseAttributes(@NotNull PerlSubCallElement subCallElement,
+                                                                                  @NotNull List<PsiElement> identifiers,
+                                                                                  @NotNull List<PsiElement> listElements) {
 
     List<PerlDelegatingLightNamedElement<?>> result = new ArrayList<>();
     String packageName = PerlPackageUtil.getContextNamespaceName(subCallElement);

@@ -36,23 +36,17 @@ import java.util.Map;
 public class PerlLightNamespaceDefinitionElement extends PerlDelegatingLightNamedElement<PerlPolyNamedElement<?>>
   implements PerlNamespaceDefinitionWithIdentifier {
 
-  @NotNull
-  private final PerlMroType myMroType;
+  private final @NotNull PerlMroType myMroType;
 
-  @NotNull
-  private final List<String> myParentNamespacesNames;
+  private final @NotNull List<String> myParentNamespacesNames;
 
-  @Nullable
-  private final PerlNamespaceAnnotations myAnnotations;
+  private final @Nullable PerlNamespaceAnnotations myAnnotations;
 
-  @NotNull
-  private final List<String> myExport;
+  private final @NotNull List<String> myExport;
 
-  @NotNull
-  private final List<String> myExportOk;
+  private final @NotNull List<String> myExportOk;
 
-  @NotNull
-  private final Map<String, List<String>> myExportTags;
+  private final @NotNull Map<String, List<String>> myExportTags;
 
   public PerlLightNamespaceDefinitionElement(@NotNull PerlPolyNamedElement<?> delegate, @NotNull PerlNamespaceDefinitionStub stub) {
     super(delegate, stub.getNamespaceName(), stub.getStubType());
@@ -83,51 +77,43 @@ public class PerlLightNamespaceDefinitionElement extends PerlDelegatingLightName
     myExportTags = exportTags;
   }
 
-  @NotNull
   @Override
-  public String getNamespaceName() {
+  public @NotNull String getNamespaceName() {
     return getName();
   }
 
-  @NotNull
   @Override
-  public PerlMroType getMroType() {
+  public @NotNull PerlMroType getMroType() {
     return myMroType;
   }
 
-  @NotNull
   @Override
-  public List<String> getParentNamespacesNames() {
+  public @NotNull List<String> getParentNamespacesNames() {
     return myParentNamespacesNames;
   }
 
-  @Nullable
   @Override
-  public PerlNamespaceAnnotations getAnnotations() {
+  public @Nullable PerlNamespaceAnnotations getAnnotations() {
     return myAnnotations;
   }
 
-  @NotNull
   @Override
-  public List<String> getEXPORT() {
+  public @NotNull List<String> getEXPORT() {
     return myExport;
   }
 
-  @NotNull
   @Override
-  public List<String> getEXPORT_OK() {
+  public @NotNull List<String> getEXPORT_OK() {
     return myExportOk;
   }
 
-  @NotNull
   @Override
-  public Map<String, List<String>> getEXPORT_TAGS() {
+  public @NotNull Map<String, List<String>> getEXPORT_TAGS() {
     return myExportTags;
   }
 
-  @Nullable
   @Override
-  public PerlNamespaceElement getNamespaceElement() {
+  public @Nullable PerlNamespaceElement getNamespaceElement() {
     throw new IncorrectOperationException("should not");
   }
 

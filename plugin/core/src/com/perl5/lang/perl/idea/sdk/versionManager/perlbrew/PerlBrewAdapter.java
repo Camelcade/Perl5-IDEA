@@ -67,8 +67,7 @@ public class PerlBrewAdapter extends PerlVersionManagerAdapter {
    * @see PerlBrewData#patchCommandLine(com.perl5.lang.perl.idea.execution.PerlCommandLine)
    */
   @Override
-  @Nullable
-  protected List<String> execWith(@NotNull String distributionId, @NotNull String... commands) {
+  protected @Nullable List<String> execWith(@NotNull String distributionId, @NotNull String... commands) {
     List<String> commandsList = ContainerUtil.newArrayList(PERLBREW_EXEC, PERLBREW_QUIET, PERLBREW_WITH, distributionId);
     commandsList.addAll(Arrays.asList(commands));
     return getOutput(commandsList);
@@ -97,14 +96,12 @@ public class PerlBrewAdapter extends PerlVersionManagerAdapter {
    * @return list of {@code perlbrew list} items trimmed or null if error happened
    */
   @Override
-  @Nullable
-  protected List<String> getInstalledDistributionsList() {
+  protected @Nullable List<String> getInstalledDistributionsList() {
     return parseInstalledDistributionsList(getOutput(PERLBREW_LIST));
   }
 
-  @Nullable
   @Override
-  protected List<String> getInstallableDistributionsList() {
+  protected @Nullable List<String> getInstallableDistributionsList() {
     List<String> rawAvailable = getOutput(PERLBREW_AVAILABLE);
     return parseInstallableDistributionsList(rawAvailable);
   }
@@ -124,9 +121,8 @@ public class PerlBrewAdapter extends PerlVersionManagerAdapter {
     );
   }
 
-  @Nullable
   @Override
-  protected Icon getIcon() {
+  protected @Nullable Icon getIcon() {
     return PERLBREW_ICON;
   }
 
@@ -151,21 +147,18 @@ public class PerlBrewAdapter extends PerlVersionManagerAdapter {
     return output.stream().map(String::trim).filter(StringUtil::isNotEmpty).collect(Collectors.toList());
   }
 
-  @NotNull
   @Override
-  protected String getErrorNotificationTitle() {
+  protected @NotNull String getErrorNotificationTitle() {
     return PerlBundle.message("perl.vm.perlbrew.notification.title");
   }
 
   @Contract("null->null")
-  @Nullable
-  public static PerlBrewAdapter create(@Nullable Project project) {
+  public static @Nullable PerlBrewAdapter create(@Nullable Project project) {
     return create(PerlProjectManager.getSdk(project));
   }
 
   @Contract("null->null")
-  @Nullable
-  public static PerlBrewAdapter create(@Nullable Sdk perlSdk) {
+  public static @Nullable PerlBrewAdapter create(@Nullable Sdk perlSdk) {
     PerlBrewData perlBrewData = PerlBrewData.from(perlSdk);
     return perlBrewData == null ? null : new PerlBrewAdapter(perlBrewData.getVersionManagerPath(), PerlHostData.notNullFrom(perlSdk));
   }

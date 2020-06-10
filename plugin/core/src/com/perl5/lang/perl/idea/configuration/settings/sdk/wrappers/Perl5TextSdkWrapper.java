@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,8 +20,7 @@ import com.intellij.ui.ColoredListCellRenderer;
 import org.jetbrains.annotations.NotNull;
 
 public class Perl5TextSdkWrapper implements Perl5SdkWrapper {
-  @NotNull
-  private final String myText;
+  private final @NotNull String myText;
 
   public Perl5TextSdkWrapper(@NotNull String text) {
     myText = text;

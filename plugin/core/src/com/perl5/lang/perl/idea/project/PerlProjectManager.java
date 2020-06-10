@@ -66,8 +66,7 @@ import java.util.*;
 import static com.intellij.ProjectTopics.PROJECT_ROOTS;
 
 public class PerlProjectManager implements Disposable {
-  @NotNull
-  private final Project myProject;
+  private final @NotNull Project myProject;
   private final PerlLocalSettings myPerlSettings;
   private final Map<PerlSourceRootType, List<VirtualFile>> myModulesRootsProvider;
   private volatile AtomicNullableLazyValue<Sdk> mySdkProvider;
@@ -220,8 +219,7 @@ public class PerlProjectManager implements Disposable {
 
   public List<SyntheticLibrary> getProjectLibraries() { return myLibrariesProvider.getValue();}
 
-  @Nullable
-  public Sdk getProjectSdk() {
+  public @Nullable Sdk getProjectSdk() {
     return mySdkProvider.getValue();
   }
 
@@ -278,8 +276,7 @@ public class PerlProjectManager implements Disposable {
 
 
   @Contract("null->null")
-  @Nullable
-  public static Sdk getSdk(@Nullable Module module) {
+  public static @Nullable Sdk getSdk(@Nullable Module module) {
     return module == null ? null : getInstance(module.getProject()).getProjectSdk();
   }
 
@@ -313,13 +310,11 @@ public class PerlProjectManager implements Disposable {
   }
 
   @Contract("null->null")
-  @Nullable
-  public static Sdk getSdk(@Nullable Project project) {
+  public static @Nullable Sdk getSdk(@Nullable Project project) {
     return project == null ? null : getInstance(project).getProjectSdk();
   }
 
-  @Nullable
-  public static String getInterpreterPath(@Nullable Module module) {
+  public static @Nullable String getInterpreterPath(@Nullable Module module) {
     return getInterpreterPath(getSdk(module));
   }
 
@@ -330,8 +325,7 @@ public class PerlProjectManager implements Disposable {
    * @return path to interpreter
    */
   @Contract("null->null")
-  @Nullable
-  public static String getInterpreterPath(@Nullable Sdk sdk) {
+  public static @Nullable String getInterpreterPath(@Nullable Sdk sdk) {
     if (sdk == null) {
       return null;
     }
@@ -345,13 +339,11 @@ public class PerlProjectManager implements Disposable {
     return homePath;
   }
 
-  @Nullable
-  public static String getInterpreterPath(@Nullable Project project) {
+  public static @Nullable String getInterpreterPath(@Nullable Project project) {
     return getInterpreterPath(getSdk(project));
   }
 
-  @Nullable
-  public static Sdk getSdk(@NotNull Project project, @Nullable VirtualFile virtualFile) {
+  public static @Nullable Sdk getSdk(@NotNull Project project, @Nullable VirtualFile virtualFile) {
     if (virtualFile == null) {
       return getSdk(project);
     }
@@ -372,8 +364,7 @@ public class PerlProjectManager implements Disposable {
   }
 
   @Contract("null->null")
-  @Nullable
-  public static Sdk getSdk(@Nullable AnActionEvent event) {
+  public static @Nullable Sdk getSdk(@Nullable AnActionEvent event) {
     return event == null ? null : getSdk(event.getProject());
   }
 }

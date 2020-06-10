@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -117,13 +117,12 @@ public class PodTypedHandler extends PerlTypedHandlerDelegate implements PodElem
     return insertedChars + 2;
   }
 
-  @NotNull
   @Override
-  public Result beforeCharTyped(char c,
-                                @NotNull Project project,
-                                @NotNull Editor editor,
-                                @NotNull PsiFile file,
-                                @NotNull FileType fileType) {
+  public @NotNull Result beforeCharTyped(char c,
+                                         @NotNull Project project,
+                                         @NotNull Editor editor,
+                                         @NotNull PsiFile file,
+                                         @NotNull FileType fileType) {
     CaretModel caretModel = editor.getCaretModel();
     final int offset = caretModel.getOffset();
     final int prevCharOffset = offset - 1;

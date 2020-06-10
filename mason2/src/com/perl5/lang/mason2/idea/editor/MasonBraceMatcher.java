@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,9 +44,8 @@ public class MasonBraceMatcher implements PairedBraceMatcher, Mason2ElementTypes
     new BracePair(MASON_FILTERED_BLOCK_OPENER, MASON_FILTERED_BLOCK_CLOSER, false),
   };
 
-  @NotNull
   @Override
-  public BracePair[] getPairs() {
+  public @NotNull BracePair[] getPairs() {
     return PAIRS;
   }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,8 +46,7 @@ public class MasonFlagsStatementImpl extends PsiPerlStatementImpl implements Mas
   }
 
 
-  @Nullable
-  private String getExtendsFlagValue() {
+  private @Nullable String getExtendsFlagValue() {
     PsiElement expr = getExpr();
     // fixme this can be a prototype for scanning a hash to map
     if (expr instanceof PsiPerlCommaSequenceExpr) {

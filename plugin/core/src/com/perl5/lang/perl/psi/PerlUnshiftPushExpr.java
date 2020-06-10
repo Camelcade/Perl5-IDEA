@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,8 +31,7 @@ public interface PerlUnshiftPushExpr extends PsiPerlExpr {
   /**
    * @return element representing target of this operation, first argument
    */
-  @Nullable
-  default PsiElement getTarget() {
+  default @Nullable PsiElement getTarget() {
     PsiPerlCallArguments callArguments = getCallArguments();
     if (callArguments == null) {
       return null;
@@ -44,8 +43,7 @@ public interface PerlUnshiftPushExpr extends PsiPerlExpr {
   /**
    * @return list of elements to push or unshift to the {@link #getTarget() target}
    */
-  @NotNull
-  default List<PsiElement> getModification() {
+  default @NotNull List<PsiElement> getModification() {
     PsiPerlCallArguments callArguments = getCallArguments();
     if (callArguments == null) {
       return Collections.emptyList();

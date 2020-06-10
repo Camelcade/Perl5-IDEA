@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,15 +31,13 @@ import java.util.List;
 
 public class PerlLibraryProvider extends AdditionalLibraryRootsProvider {
 
-  @NotNull
   @Override
-  public Collection<SyntheticLibrary> getAdditionalProjectLibraries(@NotNull Project project) {
+  public @NotNull Collection<SyntheticLibrary> getAdditionalProjectLibraries(@NotNull Project project) {
     return PerlProjectManager.getInstance(project).getProjectLibraries();
   }
 
-  @NotNull
   @Override
-  public Collection<VirtualFile> getRootsToWatch(@NotNull Project project) {
+  public @NotNull Collection<VirtualFile> getRootsToWatch(@NotNull Project project) {
     List<VirtualFile> libraryRoots = PerlProjectManager.getInstance(project).getAllLibraryRoots();
     Sdk sdk = PerlProjectManager.getSdk(project);
     if (sdk != null) {

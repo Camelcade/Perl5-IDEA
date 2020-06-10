@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -57,9 +57,8 @@ public class TemplateToolkitParserDefinition implements ParserDefinition, Templa
     TT2_IDENTIFIER
   );
 
-  @NotNull
   @Override
-  public Lexer createLexer(Project project) {
+  public @NotNull Lexer createLexer(Project project) {
     return new TemplateToolkitLexerAdapter(project);
   }
 
@@ -73,27 +72,23 @@ public class TemplateToolkitParserDefinition implements ParserDefinition, Templa
     return TT2_FILE;
   }
 
-  @NotNull
   @Override
-  public TokenSet getWhitespaceTokens() {
+  public @NotNull TokenSet getWhitespaceTokens() {
     return WHITE_SPACES;
   }
 
-  @NotNull
   @Override
-  public TokenSet getCommentTokens() {
+  public @NotNull TokenSet getCommentTokens() {
     return COMMENTS;
   }
 
-  @NotNull
   @Override
-  public TokenSet getStringLiteralElements() {
+  public @NotNull TokenSet getStringLiteralElements() {
     return LITERALS;
   }
 
-  @NotNull
   @Override
-  public PsiElement createElement(ASTNode node) {
+  public @NotNull PsiElement createElement(ASTNode node) {
     return ((PsiElementProvider)node.getElementType()).getPsiElement(node);
   }
 

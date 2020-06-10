@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,14 +34,10 @@ import org.jetbrains.annotations.Nullable;
 public class PodLinkDescriptor {
   private static final Logger LOG = Logger.getInstance(PodLinkDescriptor.class);
 
-  @Nullable
-  private final String myName;
-  @Nullable
-  private final String mySection;
-  @Nullable
-  private final String myText;
-  @Nullable
-  private final String myHtmlText;
+  private final @Nullable String myName;
+  private final @Nullable String mySection;
+  private final @Nullable String myText;
+  private final @Nullable String myHtmlText;
 
   private final boolean myIsUrl;
 
@@ -66,23 +62,19 @@ public class PodLinkDescriptor {
     return super.toString() + getLink();
   }
 
-  @Nullable
-  public String getName() {
+  public @Nullable String getName() {
     return myName;
   }
 
-  @Nullable
-  public String getSection() {
+  public @Nullable String getSection() {
     return mySection;
   }
 
-  @NotNull
-  public String getText() {
+  public @NotNull String getText() {
     return myText != null ? myText : buildTitle(myName, mySection, myIsSameFile);
   }
 
-  @NotNull
-  public String getHtmlText() {
+  public @NotNull String getHtmlText() {
     return myHtmlText != null ? myHtmlText : getText();
   }
 
@@ -94,34 +86,29 @@ public class PodLinkDescriptor {
     return myIsSameFile;
   }
 
-  @NotNull
-  public String getLink() {
+  public @NotNull String getLink() {
     return buildLink(myName, mySection);
   }
 
-  @NotNull
-  public static PodLinkDescriptor create(@NotNull String file, @Nullable String section) {
+  public static @NotNull PodLinkDescriptor create(@NotNull String file, @Nullable String section) {
     return new PodLinkDescriptor(file, section, null, null, false, false);
   }
 
-  @NotNull
-  private static String buildLink(@Nullable String file, @Nullable String section) {
+  private static @NotNull String buildLink(@Nullable String file, @Nullable String section) {
     if (file == null) {
       return section == null ? "" : "/" + section;
     }
     return file + buildLink(null, section);
   }
 
-  @NotNull
-  private static String buildTitle(@Nullable String file, @Nullable String section, boolean isSameFile) {
+  private static @NotNull String buildTitle(@Nullable String file, @Nullable String section, boolean isSameFile) {
     if (file == null) {
       return StringUtil.notNullize(section);
     }
     return section == null ? file : isSameFile ? section : (section + " in " + file);
   }
 
-  @Nullable
-  public static PodLinkDescriptor create(@NotNull PodFormatterL formatterL) {
+  public static @Nullable PodLinkDescriptor create(@NotNull PodFormatterL formatterL) {
     PsiLinkText textElement = formatterL.getLinkTextElement();
     PsiLinkName nameElement = formatterL.getLinkNameElement();
     PsiLinkSection sectionElement = formatterL.getLinkSectionElement();
@@ -177,8 +164,7 @@ public class PodLinkDescriptor {
     return new PodLinkDescriptor(linkName, linkSection, linkTextText, linkTextHtml, isUrl, isSameFile);
   }
 
-  @NotNull
-  public static PodLinkDescriptor createFromUrl(@NotNull String link) {
+  public static @NotNull PodLinkDescriptor createFromUrl(@NotNull String link) {
     int fileIdEndOffset = link.indexOf('/');
     if (fileIdEndOffset == -1) {
       return create(link, null);

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -57,15 +57,13 @@ public class MojoliciousSyntaxHighlighter extends PerlSyntaxHighlighterEmbedded 
     return MARKER_TOKENS;
   }
 
-  @NotNull
   @Override
-  public Lexer getHighlightingLexer() {
+  public @NotNull Lexer getHighlightingLexer() {
     return new PerlHighlightingLexerAdapter(myProject, new MojoliciousLexerAdapter(myProject));
   }
 
-  @NotNull
   @Override
-  public TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
+  public @NotNull TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
     if (tokenType == MOJO_BEGIN || tokenType == MOJO_END) {
       tokenType = RESERVED_IF;
     }

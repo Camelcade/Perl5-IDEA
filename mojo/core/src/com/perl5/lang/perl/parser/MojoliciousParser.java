@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -81,21 +81,18 @@ public class MojoliciousParser extends PerlParserImpl implements MojoliciousElem
     return super.parseStatementSemi(b, l);
   }
 
-  @NotNull
   @Override
-  public TokenSet getBadCharacterForbiddenTokens() {
+  public @NotNull TokenSet getBadCharacterForbiddenTokens() {
     return BAD_CAHARACTER_FORBIDDEN_TOKENS;
   }
 
-  @NotNull
   @Override
-  public TokenSet getConsumableSemicolonTokens() {
+  public @NotNull TokenSet getConsumableSemicolonTokens() {
     return CONSUMABLE_SEMI_TOKENS;
   }
 
-  @NotNull
   @Override
-  public TokenSet getUnconsumableSemicolonTokens() {
+  public @NotNull TokenSet getUnconsumableSemicolonTokens() {
     return UNCONSUMABLE_SEMI_TOKENS;
   }
 }

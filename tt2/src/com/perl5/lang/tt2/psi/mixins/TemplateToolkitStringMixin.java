@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -57,9 +57,8 @@ public class TemplateToolkitStringMixin extends TemplateToolkitCompositeElementI
 
     if (FILES_TARGETED_CONTAINERS.contains(parentElementType)) {
       references.addAll(Arrays.asList(new FileReferenceSet(TemplateToolkitStringMixin.this) {
-        @NotNull
         @Override
-        public Collection<PsiFileSystemItem> computeDefaultContexts() {
+        public @NotNull Collection<PsiFileSystemItem> computeDefaultContexts() {
           String path = getPathString();
           PsiFile containingFile = getContainingFile();
           if (StringUtil.startsWith(path, ".") && containingFile != null && containingFile.getParent() != null) {

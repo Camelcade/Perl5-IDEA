@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -59,9 +59,8 @@ public class TemplateToolkitFormattingModelBuilder extends TemplateLanguageForma
    * causing a stack-overflowing loop of polite format-delegation.
    */
 
-  @NotNull
   @Override
-  public FormattingModel createModel(PsiElement element, CodeStyleSettings settings) {
+  public @NotNull FormattingModel createModel(PsiElement element, CodeStyleSettings settings) {
     if (mySpacingBuilder == null) {
       createSpacingBuilder(settings);
     }
@@ -147,8 +146,7 @@ public class TemplateToolkitFormattingModelBuilder extends TemplateLanguageForma
     return false;
   }
 
-  @NotNull
-  public Alignment getAssignAlignment(@NotNull ASTNode defaultDirectiveNode) {
+  public @NotNull Alignment getAssignAlignment(@NotNull ASTNode defaultDirectiveNode) {
     Alignment result = myAssignAlignmentMap.get(defaultDirectiveNode);
     if (result != null) {
       return result;

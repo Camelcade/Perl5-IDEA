@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,17 +27,15 @@ import javax.swing.*;
 
 public class Perl5ModuleConfigurable implements UnnamedConfigurable {
   private final Disposable myDisposable = Disposer.newDisposable(Perl5ModuleConfigurable.class.toString());
-  @NotNull
-  private final Module myModule;
+  private final @NotNull Module myModule;
   private PerlContentEntriesTreeEditor myPerlContentEntriesTreeEditor;
 
   public Perl5ModuleConfigurable(@NotNull Module module) {
     myModule = module;
   }
 
-  @Nullable
   @Override
-  public JComponent createComponent() {
+  public @Nullable JComponent createComponent() {
     myPerlContentEntriesTreeEditor = new PerlContentEntriesTreeEditor(myModule, myDisposable);
     return myPerlContentEntriesTreeEditor.createComponent();
   }

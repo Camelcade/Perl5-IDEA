@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,8 +23,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public interface PerlTryCatchExpr extends PsiElement {
-  @NotNull
-  default PerlTryExpr getTryExpression() {
+  default @NotNull PerlTryExpr getTryExpression() {
     PerlTryExpr tryExpr = PsiTreeUtil.getChildOfType(this, PerlTryExpr.class);
     assert tryExpr != null : "No try expression in " + getText();
     return tryExpr;
@@ -33,28 +32,23 @@ public interface PerlTryCatchExpr extends PsiElement {
   /**
    * @return list of catch and continuation expressions in natural order. Continuation is just a hacky catch for continuation exceptions
    */
-  @NotNull
-  default List<PerlCatchExpr> getCatchExpressions() {
+  default @NotNull List<PerlCatchExpr> getCatchExpressions() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PerlCatchExpr.class);
   }
 
-  @NotNull
-  default List<PsiPerlFinallyExpr> getFinallyExpressions() {
+  default @NotNull List<PsiPerlFinallyExpr> getFinallyExpressions() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PsiPerlFinallyExpr.class);
   }
 
-  @NotNull
-  default List<PsiPerlExceptExpr> getExceptExpressions() {
+  default @NotNull List<PsiPerlExceptExpr> getExceptExpressions() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PsiPerlExceptExpr.class);
   }
 
-  @NotNull
-  default List<PsiPerlContinuationExpr> getContinuationExpressions() {
+  default @NotNull List<PsiPerlContinuationExpr> getContinuationExpressions() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PsiPerlContinuationExpr.class);
   }
 
-  @NotNull
-  default List<PsiPerlOtherwiseExpr> getOtherwiseExpressions() {
+  default @NotNull List<PsiPerlOtherwiseExpr> getOtherwiseExpressions() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PsiPerlOtherwiseExpr.class);
   }
 }

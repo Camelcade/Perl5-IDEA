@@ -51,15 +51,13 @@ public class PerlInjectionMarkersService implements PersistentStateComponent<Per
   private final transient ClearableLazyValue<Map<String, Language>> myLanguageMapProvider =
     AtomicClearableLazyValue.create(this::computeMarkersMap);
 
-  @Nullable
   @Override
-  public PerlInjectionMarkersService getState() {
+  public @Nullable PerlInjectionMarkersService getState() {
     return this;
   }
 
   @Transient
-  @NotNull
-  public Set<String> getSupportedMarkers() {
+  public @NotNull Set<String> getSupportedMarkers() {
     return new HashSet<>(myLanguageMapProvider.getValue().keySet());
   }
 
@@ -87,8 +85,7 @@ public class PerlInjectionMarkersService implements PersistentStateComponent<Per
    * @return language which should be injected for this marker or null if not available
    */
   @Contract(value = "null -> null", pure = true)
-  @Nullable
-  public Language getLanguageByMarker(@Nullable String marker) {
+  public @Nullable Language getLanguageByMarker(@Nullable String marker) {
     return myLanguageMapProvider.getValue().get(marker);
   }
 
@@ -99,15 +96,13 @@ public class PerlInjectionMarkersService implements PersistentStateComponent<Per
     setCustomMarkersMap(state.myCustomMarkersMap);
   }
 
-  @NotNull
-  private Map<String, Language> computeMarkersMap() {
+  private @NotNull Map<String, Language> computeMarkersMap() {
     HashMap<String, Language> result = new HashMap<>();
     computeMergedMarkersMap().forEach((marker, languageid) -> result.put(marker, Language.findLanguageByID(languageid)));
     return result;
   }
 
-  @NotNull
-  public static PerlInjectionMarkersService getInstance(@NotNull Project project) {
+  public static @NotNull PerlInjectionMarkersService getInstance(@NotNull Project project) {
     return ServiceManager.getService(project, PerlInjectionMarkersService.class);
   }
 }

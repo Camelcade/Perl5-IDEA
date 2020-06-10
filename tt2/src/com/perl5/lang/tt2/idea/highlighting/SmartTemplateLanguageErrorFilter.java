@@ -33,22 +33,20 @@ import java.util.*;
  */
 public abstract class SmartTemplateLanguageErrorFilter extends HighlightErrorFilter {
   private static final Key<Class<?>> TEMPLATE_VIEW_PROVIDER_CLASS_KEY = Key.create("TEMPLATE_VIEW_PROVIDER_CLASS");
-  @NotNull
-  private final TokenSet myTemplateExpressionStartTokens;
-  @NotNull
-  private final Class<?> myTemplateFileViewProviderClass;
+  private final @NotNull TokenSet myTemplateExpressionStartTokens;
+  private final @NotNull Class<?> myTemplateFileViewProviderClass;
   private final Set<Language> knownLanguageSet;
 
   protected SmartTemplateLanguageErrorFilter(
-    @NotNull final TokenSet templateExpressionStartTokens,
-    @NotNull final Class<?> templateFileViewProviderClass) {
+    final @NotNull TokenSet templateExpressionStartTokens,
+    final @NotNull Class<?> templateFileViewProviderClass) {
     this(templateExpressionStartTokens, templateFileViewProviderClass, new String[0]);
   }
 
   protected SmartTemplateLanguageErrorFilter(
-    @NotNull final TokenSet templateExpressionStartTokens,
-    @NotNull final Class<?> templateFileViewProviderClass,
-    @NotNull final String... knownSubLanguageNames) {
+    final @NotNull TokenSet templateExpressionStartTokens,
+    final @NotNull Class<?> templateFileViewProviderClass,
+    final @NotNull String... knownSubLanguageNames) {
     myTemplateExpressionStartTokens = TokenSet.create(templateExpressionStartTokens.getTypes());
     myTemplateFileViewProviderClass = templateFileViewProviderClass;
 
@@ -153,7 +151,7 @@ public abstract class SmartTemplateLanguageErrorFilter extends HighlightErrorFil
     return PsiTreeUtil.getChildOfType(errorContainer, OuterLanguageElement.class) != null;
   }
 
-  protected boolean isKnownSubLanguage(@NotNull final Language language) {
+  protected boolean isKnownSubLanguage(final @NotNull Language language) {
     for (Language knownLanguage : knownLanguageSet) {
       if (language.is(knownLanguage)) {
         return true;

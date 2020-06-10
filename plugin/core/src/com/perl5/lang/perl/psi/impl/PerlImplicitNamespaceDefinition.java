@@ -34,8 +34,7 @@ import java.util.List;
 import java.util.Map;
 
 public class PerlImplicitNamespaceDefinition extends PerlImplicitElement implements PerlNamespaceDefinitionWithIdentifier {
-  @NotNull
-  private final String myNamespaceName;
+  private final @NotNull String myNamespaceName;
 
   public PerlImplicitNamespaceDefinition(@NotNull PsiManager manager,
                                          @NotNull String namespaceName,
@@ -49,9 +48,8 @@ public class PerlImplicitNamespaceDefinition extends PerlImplicitElement impleme
     return "Implicit namespace: " + getPresentableName();
   }
 
-  @NotNull
   @Override
-  public PerlMroType getMroType() {
+  public @NotNull PerlMroType getMroType() {
     return PerlMroType.DFS;
   }
 
@@ -60,45 +58,38 @@ public class PerlImplicitNamespaceDefinition extends PerlImplicitElement impleme
     return getNamespaceName();
   }
 
-  @NotNull
   @Override
-  public String getNamespaceName() {
+  public @NotNull String getNamespaceName() {
     return myNamespaceName;
   }
 
-  @Nullable
   @Override
-  public Icon getIcon(int flags) {
+  public @Nullable Icon getIcon(int flags) {
     return PerlIcons.PACKAGE_GUTTER_ICON;
   }
 
-  @NotNull
   @Override
-  public List<String> getParentNamespacesNames() {
+  public @NotNull List<String> getParentNamespacesNames() {
     return Collections.emptyList();
   }
 
-  @Nullable
   @Override
-  public PerlNamespaceAnnotations getAnnotations() {
+  public @Nullable PerlNamespaceAnnotations getAnnotations() {
     return null;
   }
 
-  @NotNull
   @Override
-  public List<String> getEXPORT() {
+  public @NotNull List<String> getEXPORT() {
     return Collections.emptyList();
   }
 
-  @NotNull
   @Override
-  public List<String> getEXPORT_OK() {
+  public @NotNull List<String> getEXPORT_OK() {
     return Collections.emptyList();
   }
 
-  @NotNull
   @Override
-  public Map<String, List<String>> getEXPORT_TAGS() {
+  public @NotNull Map<String, List<String>> getEXPORT_TAGS() {
     return Collections.emptyMap();
   }
 
@@ -120,9 +111,8 @@ public class PerlImplicitNamespaceDefinition extends PerlImplicitElement impleme
     return result;
   }
 
-  @Nullable
   @Override
-  public PsiElement getNameIdentifier() {
+  public @Nullable PsiElement getNameIdentifier() {
     return null;
   }
 
@@ -131,9 +121,8 @@ public class PerlImplicitNamespaceDefinition extends PerlImplicitElement impleme
     return this;
   }
 
-  @Nullable
   @Override
-  public PerlNamespaceElement getNamespaceElement() {
+  public @Nullable PerlNamespaceElement getNamespaceElement() {
     return null;
   }
 }

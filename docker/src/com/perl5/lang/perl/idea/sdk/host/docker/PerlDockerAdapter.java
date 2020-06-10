@@ -80,8 +80,7 @@ class PerlDockerAdapter {
   private static final String WORKING_DIRECTORY = "-w";
   static final String DOCKER_EXECUTABLE = SystemInfo.isWindows ? "docker.exe" : "docker";
 
-  @NotNull
-  private final PerlDockerData myData;
+  private final @NotNull PerlDockerData myData;
 
   public PerlDockerAdapter(@NotNull PerlDockerData data) {
     myData = data;
@@ -90,8 +89,7 @@ class PerlDockerAdapter {
   /**
    * @return new container name, generated from {@code containerNameSeed}
    */
-  @NotNull
-  public String createContainer(@NotNull String containerNameSeed) throws ExecutionException {
+  public @NotNull String createContainer(@NotNull String containerNameSeed) throws ExecutionException {
     String containerName = createContainerName(containerNameSeed);
     runCommand(CONTAINER, CREATE, WITH_CONTAINER_NAME, containerName, myData.getImageName());
     return containerName;
@@ -100,8 +98,7 @@ class PerlDockerAdapter {
   /**
    * @return new container name, generated from {@code containerNameSeed}
    */
-  @NotNull
-  public String createRunningContainer(@NotNull String containerNameSeed) throws ExecutionException {
+  public @NotNull String createRunningContainer(@NotNull String containerNameSeed) throws ExecutionException {
     String containerName = createContainerName(containerNameSeed);
     runCommand(RUN, AS_DAEMON, WITH_AUTOREMOVE, WITH_CONTAINER_NAME,
                containerName, myData.getImageName(), "bash", "-c", "while true;do sleep 1000000;done");
@@ -133,24 +130,21 @@ class PerlDockerAdapter {
     runCommand(CONTAINER, REMOVE, containerName);
   }
 
-  @NotNull
-  private ProcessOutput checkOutput(@NotNull ProcessOutput output) throws ExecutionException {
+  private @NotNull ProcessOutput checkOutput(@NotNull ProcessOutput output) throws ExecutionException {
     if (output.getExitCode() != 0) {
       throw new PerlExecutionException(output);
     }
     return output;
   }
 
-  @NotNull
-  public PerlDockerData getData() {
+  public @NotNull PerlDockerData getData() {
     return myData;
   }
 
   /**
    * @return contents of {@code path} in the container.
    */
-  @NotNull
-  public List<PerlFileDescriptor> listFiles(@NotNull String containerName, @NotNull String path) {
+  public @NotNull List<PerlFileDescriptor> listFiles(@NotNull String containerName, @NotNull String path) {
     try {
       if (ApplicationManager.getApplication().isDispatchThread()) {
         return ProgressManager.getInstance().runProcessWithProgressSynchronously(
@@ -170,8 +164,7 @@ class PerlDockerAdapter {
     }
   }
 
-  @NotNull
-  private List<PerlFileDescriptor> doListFiles(@NotNull String containerName, @NotNull String path) throws ExecutionException {
+  private @NotNull List<PerlFileDescriptor> doListFiles(@NotNull String containerName, @NotNull String path) throws ExecutionException {
     ProcessOutput output = runCommand(EXEC, containerName, "ls", "-LAs", "--classify", path);
     return output.getStdoutLines().stream()
       .map(it -> PerlFileDescriptor.create(path, it))
@@ -183,8 +176,7 @@ class PerlDockerAdapter {
     return CONTAINER_NAME_PREFIX + seed + "_" + System.currentTimeMillis();
   }
 
-  @NotNull
-  private ProcessOutput runCommand(@NotNull String... params) throws ExecutionException {
+  private @NotNull ProcessOutput runCommand(@NotNull String... params) throws ExecutionException {
     return checkOutput(PerlHostData.execAndGetOutput(baseCommandLine().withParameters(params)));
   }
 
@@ -252,8 +244,7 @@ class PerlDockerAdapter {
     return new PerlCommandLine(DOCKER_EXECUTABLE).withHostData(PerlHostHandler.getDefaultHandler().createData());
   }
 
-  @NotNull
-  static PerlCommandLine buildBaseProcessCommandLine(@NotNull PerlCommandLine commandLine) {
+  static @NotNull PerlCommandLine buildBaseProcessCommandLine(@NotNull PerlCommandLine commandLine) {
     PerlCommandLine dockerCommandLine = baseCommandLine()
       .withParameters(RUN, WITH_AUTOREMOVE, INTERACTIVELY)
       .withParameters(WITH_ATTACHED, STDOUT, WITH_ATTACHED, STDERR, WITH_ATTACHED, STDIN)
@@ -272,8 +263,7 @@ class PerlDockerAdapter {
     return dockerCommandLine;
   }
 
-  @NotNull
-  private File createCommandScript(@NotNull PerlCommandLine commandLine) throws ExecutionException {
+  private @NotNull File createCommandScript(@NotNull PerlCommandLine commandLine) throws ExecutionException {
     StringBuilder sb = new StringBuilder();
     commandLine.getEnvironment().forEach((key, val) -> sb.append("export ").append(key).append('=')
       .append('\'').append(StringUtil.escapeChars(val, '\'')).append("'\n"));

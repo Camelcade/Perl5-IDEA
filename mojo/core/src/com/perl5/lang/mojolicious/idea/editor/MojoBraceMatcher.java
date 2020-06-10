@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,9 +39,8 @@ public class MojoBraceMatcher implements PairedBraceMatcher, MojoliciousElementT
     new BracePair(MOJO_BEGIN, MOJO_END, false),
   };
 
-  @NotNull
   @Override
-  public BracePair[] getPairs() {
+  public @NotNull BracePair[] getPairs() {
     return PAIRS;
   }
 

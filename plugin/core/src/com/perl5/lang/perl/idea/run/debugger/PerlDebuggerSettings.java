@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,18 +51,16 @@ public class PerlDebuggerSettings extends XDebuggerSettings<PerlDebuggerSettings
     super("perl5");
   }
 
-  @NotNull
   @Override
-  public Collection<? extends Configurable> createConfigurables(@NotNull DebuggerSettingsCategory category) {
+  public @NotNull Collection<? extends Configurable> createConfigurables(@NotNull DebuggerSettingsCategory category) {
     if (category == DebuggerSettingsCategory.DATA_VIEWS) {
       return Collections.singletonList(new DataViewsConfigurable());
     }
     return super.createConfigurables(category);
   }
 
-  @Nullable
   @Override
-  public PerlDebuggerSettings getState() {
+  public @Nullable PerlDebuggerSettings getState() {
     return this;
   }
 
@@ -75,8 +73,7 @@ public class PerlDebuggerSettings extends XDebuggerSettings<PerlDebuggerSettings
     myDataRenderers = new ArrayList<>(ContainerUtil.filter(state.myDataRenderers, Item::isValid));
   }
 
-  @NotNull
-  public static PerlDebuggerSettings getInstance() {
+  public static @NotNull PerlDebuggerSettings getInstance() {
     return getInstance(PerlDebuggerSettings.class);
   }
 
@@ -141,9 +138,8 @@ public class PerlDebuggerSettings extends XDebuggerSettings<PerlDebuggerSettings
       super(PerlBundle.message("perl.debugger.settings.class.column.title"));
     }
 
-    @Nullable
     @Override
-    public String valueOf(Item item) {
+    public @Nullable String valueOf(Item item) {
       return item.namespaceName;
     }
 
@@ -163,9 +159,8 @@ public class PerlDebuggerSettings extends XDebuggerSettings<PerlDebuggerSettings
       super(PerlBundle.message("perl.debugger.settings.renderer.column.title"));
     }
 
-    @Nullable
     @Override
-    public String valueOf(Item entry) {
+    public @Nullable String valueOf(Item entry) {
       return entry.renderExpression;
     }
 
@@ -185,21 +180,18 @@ public class PerlDebuggerSettings extends XDebuggerSettings<PerlDebuggerSettings
       super(new MyModel());
     }
 
-    @NotNull
     @Override
-    public String getId() {
+    public @NotNull String getId() {
       return "perl5.debugger.type.renderers";
     }
 
-    @Nls(capitalization = Nls.Capitalization.Title)
     @Override
-    public String getDisplayName() {
+    public @Nls(capitalization = Nls.Capitalization.Title) String getDisplayName() {
       return PerlBundle.message("perl.debugger.settings.type.renderers.title");
     }
 
-    @Nullable
     @Override
-    public JComponent createComponent() {
+    public @Nullable JComponent createComponent() {
       JTextPane textPane = new JTextPane();
       textPane.setText(PerlBundle.message("perl.debugger.settings.type.renderers.explanation"));
       JPanel panel = FormBuilder.createFormBuilder()

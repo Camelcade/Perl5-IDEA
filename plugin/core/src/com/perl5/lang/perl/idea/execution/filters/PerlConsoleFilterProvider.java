@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,14 +26,12 @@ import org.jetbrains.annotations.NotNull;
 
 public class PerlConsoleFilterProvider extends ConsoleDependentFilterProvider {
 
-  @NotNull
   @Override
-  public Filter[] getDefaultFilters(@NotNull ConsoleView consoleView, @NotNull Project project, @NotNull GlobalSearchScope scope) {
+  public @NotNull Filter[] getDefaultFilters(@NotNull ConsoleView consoleView, @NotNull Project project, @NotNull GlobalSearchScope scope) {
     return consoleView instanceof PerlHostDataProvider ? createFilters(project, (PerlHostDataProvider)consoleView) : Filter.EMPTY_ARRAY;
   }
 
-  @NotNull
-  private Filter[] createFilters(@NotNull Project project, PerlHostDataProvider hostDataProvider) {
+  private @NotNull Filter[] createFilters(@NotNull Project project, PerlHostDataProvider hostDataProvider) {
     return new Filter[]{
       new PerlConsoleFileLinkFilter(project, hostDataProvider),
       new PerlAbsolutePathConsoleFilter(project, hostDataProvider)

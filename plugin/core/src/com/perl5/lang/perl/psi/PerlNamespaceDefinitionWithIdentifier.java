@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,11 +24,9 @@ public interface PerlNamespaceDefinitionWithIdentifier extends PerlNamespaceDefi
                                                                PerlNamespaceElementContainer,
                                                                PerlIdentifierOwner {
 
-  @Nullable
-  default PsiPerlBlock getBlock() {
+  default @Nullable PsiPerlBlock getBlock() {
     return null;
   }
 
-  @Nullable
-  default PsiPerlNamespaceContent getNamespaceContent() {return null;}
+  default @Nullable PsiPerlNamespaceContent getNamespaceContent() {return null;}
 }

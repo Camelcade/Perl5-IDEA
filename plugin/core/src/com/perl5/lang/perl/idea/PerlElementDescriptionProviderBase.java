@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,16 +32,14 @@ import org.jetbrains.annotations.Nullable;
 public abstract class PerlElementDescriptionProviderBase implements ElementDescriptionProvider {
   private static final Logger LOG = Logger.getInstance(PerlElementDescriptionProviderBase.class);
 
-  @NotNull
-  private final Language myLanguage;
+  private final @NotNull Language myLanguage;
 
   protected PerlElementDescriptionProviderBase(@NotNull Language language) {
     myLanguage = language;
   }
 
-  @Nullable
   @Override
-  public final String getElementDescription(@NotNull PsiElement element, @NotNull ElementDescriptionLocation location) {
+  public final @Nullable String getElementDescription(@NotNull PsiElement element, @NotNull ElementDescriptionLocation location) {
     if (!isMyElement(element)) {
       return null;
     }
@@ -80,12 +78,9 @@ public abstract class PerlElementDescriptionProviderBase implements ElementDescr
     return element.getLanguage().isKindOf(myLanguage);
   }
 
-  @Nullable
-  protected abstract String getShortName(@NotNull PsiElement element);
+  protected abstract @Nullable String getShortName(@NotNull PsiElement element);
 
-  @Nullable
-  protected abstract String getTypeName(@NotNull PsiElement element);
+  protected abstract @Nullable String getTypeName(@NotNull PsiElement element);
 
-  @Nullable
-  protected abstract String getLongName(@NotNull PsiElement element);
+  protected abstract @Nullable String getLongName(@NotNull PsiElement element);
 }

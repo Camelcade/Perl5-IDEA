@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -60,9 +60,8 @@ public class MasonSyntaxHighlighter extends PerlSyntaxHighlighterEmbedded implem
     return MARKER_TOKENS;
   }
 
-  @NotNull
   @Override
-  public Lexer getHighlightingLexer() {
+  public @NotNull Lexer getHighlightingLexer() {
     return new PerlHighlightingLexerAdapter(myProject, new Mason2TemplatingLexerAdapter(myProject));
   }
 }

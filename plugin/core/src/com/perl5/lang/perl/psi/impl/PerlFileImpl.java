@@ -74,9 +74,8 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
     super(viewProvider, PerlLanguage.INSTANCE);
   }
 
-  @NotNull
   @Override
-  public FileType getFileType() {
+  public @NotNull FileType getFileType() {
     VirtualFile virtualFile = getVirtualFile();
 
     if (virtualFile != null) {
@@ -101,8 +100,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
    *
    * @return canonical package name or null if it's not pm file or it's not in source root
    */
-  @Nullable
-  public String getFilePackageName() {
+  public @Nullable String getFilePackageName() {
     VirtualFile containingFile = getVirtualFile();
 
     if (containingFile != null && containingFile.getFileType() == PerlFileTypePackage.INSTANCE) {
@@ -121,15 +119,13 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
     myElementsResolveScope = null;
   }
 
-  @NotNull
   @Override
-  public String getNamespaceName() {
+  public @NotNull String getNamespaceName() {
     return PerlPackageUtil.MAIN_NAMESPACE_NAME;
   }
 
-  @NotNull
   @Override
-  public PerlMroType getMroType() {
+  public @NotNull PerlMroType getMroType() {
     return PerlMroType.DFS;
   }
 
@@ -293,16 +289,14 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
     return this;
   }
 
-  @Nullable
   @Override
-  public String getPresentableText() {
+  public @Nullable String getPresentableText() {
     String result = getFilePackageName();
     return result == null ? getName() : result;
   }
 
-  @Nullable
   @Override
-  public String getLocationString() {
+  public @Nullable String getLocationString() {
     VirtualFile virtualFile = PsiUtilCore.getVirtualFile(this);
     if (virtualFile == null) {
       return null;
@@ -320,21 +314,18 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
     return VfsUtil.getRelativePath(parentFile, contentRoot);
   }
 
-  @Nullable
   @Override
-  public Icon getIcon(boolean unused) {
+  public @Nullable Icon getIcon(boolean unused) {
     return getFileType().getIcon();
   }
 
-  @Nullable
   @Override
-  public String getPodLink() {
+  public @Nullable String getPodLink() {
     return getFilePackageName();
   }
 
-  @Nullable
   @Override
-  public String getPodLinkText() {
+  public @Nullable String getPodLinkText() {
     return getPodLink();
   }
 
@@ -362,37 +353,32 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
     return clone;
   }
 
-  @NotNull
   @Override
-  public List<String> getParentNamespacesNames() {
+  public @NotNull List<String> getParentNamespacesNames() {
     StubElement<?> stub = getGreenStub();
-    if( stub instanceof PerlFileStub){
+    if (stub instanceof PerlFileStub) {
       return ((PerlFileStub)stub).getParentNamespacesNames();
     }
     return PerlPackageUtil.collectParentNamespacesFromPsi(this);
   }
 
-  @Nullable
   @Override
-  public PerlNamespaceAnnotations getAnnotations() {
+  public @Nullable PerlNamespaceAnnotations getAnnotations() {
     return null;
   }
 
-  @NotNull
   @Override
-  public List<String> getEXPORT() {
+  public @NotNull List<String> getEXPORT() {
     return Collections.emptyList();
   }
 
-  @NotNull
   @Override
-  public List<String> getEXPORT_OK() {
+  public @NotNull List<String> getEXPORT_OK() {
     return Collections.emptyList();
   }
 
-  @NotNull
   @Override
-  public Map<String, List<String>> getEXPORT_TAGS() {
+  public @NotNull Map<String, List<String>> getEXPORT_TAGS() {
     return Collections.emptyMap();
   }
 }

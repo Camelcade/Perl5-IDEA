@@ -103,9 +103,8 @@ class PerlTestRunConfiguration extends GenericPerlRunConfiguration {
     return StringUtil.isEmpty(testScriptParameters) ? Collections.emptyList() : StringUtil.split(testScriptParameters, " ");
   }
 
-  @NotNull
   @Override
-  public SettingsEditor<? extends RunConfiguration> getConfigurationEditor() {
+  public @NotNull SettingsEditor<? extends RunConfiguration> getConfigurationEditor() {
     return new PerlTestRunConfigurationEditor(getProject());
   }
 
@@ -122,9 +121,8 @@ class PerlTestRunConfiguration extends GenericPerlRunConfiguration {
     return super.suggestedName();
   }
 
-  @NotNull
   @Override
-  protected PerlCommandLine createBaseCommandLine(@NotNull PerlRunProfileState perlRunProfileState) throws ExecutionException {
+  protected @NotNull PerlCommandLine createBaseCommandLine(@NotNull PerlRunProfileState perlRunProfileState) throws ExecutionException {
     ExecutionEnvironment executionEnvironment = perlRunProfileState.getEnvironment();
     Project project = executionEnvironment.getProject();
     List<String> additionalPerlParameters = perlRunProfileState.getAdditionalPerlParameters(this);
@@ -198,9 +196,8 @@ class PerlTestRunConfiguration extends GenericPerlRunConfiguration {
     return commandLine;
   }
 
-  @NotNull
   @Override
-  protected List<String> getScriptParameters() {
+  protected @NotNull List<String> getScriptParameters() {
 
     List<String> userParameters = super.getScriptParameters();
     for (Iterator<String> iterator = userParameters.iterator(); iterator.hasNext(); ) {
@@ -224,9 +221,8 @@ class PerlTestRunConfiguration extends GenericPerlRunConfiguration {
     return true;
   }
 
-  @NotNull
   @Override
-  public ConsoleView createConsole(@NotNull PerlRunProfileState runProfileState) throws ExecutionException {
+  public @NotNull ConsoleView createConsole(@NotNull PerlRunProfileState runProfileState) throws ExecutionException {
     PerlSMTRunnerConsoleProperties consoleProperties =
       new PerlSMTRunnerConsoleProperties(this, PROVE_FRAMEWORK_NAME, runProfileState.getEnvironment().getExecutor());
     String splitterPropertyName = SMTestRunnerConnectionUtil.getSplitterPropertyName(PROVE_FRAMEWORK_NAME);
@@ -241,9 +237,9 @@ class PerlTestRunConfiguration extends GenericPerlRunConfiguration {
     return false;
   }
 
-  @NotNull
   @Override
-  protected ProcessHandler doPatchProcessHandler(@NotNull ProcessHandler processHandler, @NotNull PerlRunProfileState runProfileState) {
+  protected @NotNull ProcessHandler doPatchProcessHandler(@NotNull ProcessHandler processHandler,
+                                                          @NotNull PerlRunProfileState runProfileState) {
     try {
       Sdk effectiveSdk = getEffectiveSdk();
       processHandler.addProcessListener(new ProcessAdapter() {

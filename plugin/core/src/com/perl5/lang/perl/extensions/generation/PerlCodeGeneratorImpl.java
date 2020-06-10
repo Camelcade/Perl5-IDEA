@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -59,9 +59,8 @@ import java.util.Set;
 public class PerlCodeGeneratorImpl implements PerlCodeGenerator {
   public static final PerlCodeGenerator INSTANCE = new PerlCodeGeneratorImpl();
 
-  @Nullable
   @Override
-  public String getOverrideCodeText(PsiElement subBase) {
+  public @Nullable String getOverrideCodeText(PsiElement subBase) {
     if (subBase instanceof PerlSubElement) {
       PerlSubElement perlSubBase = (PerlSubElement)subBase;
       StringBuilder code = new StringBuilder();
@@ -160,9 +159,8 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator {
     return null;
   }
 
-  @Nullable
   @Override
-  public String getMethodModifierCodeText(PsiElement subBase, String modifierType) {
+  public @Nullable String getMethodModifierCodeText(PsiElement subBase, String modifierType) {
     return null;
   }
 
@@ -186,9 +184,8 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator {
           @Override
           protected SpeedSearchComparator getSpeedSearchComparator() {
             return new SpeedSearchComparator(false) {
-              @Nullable
               @Override
-              public Iterable<TextRange> matchingFragments(@NotNull String pattern, @NotNull String text) {
+              public @Nullable Iterable<TextRange> matchingFragments(@NotNull String pattern, @NotNull String text) {
                 return super.matchingFragments(PerlMethodMember.trimUnderscores(pattern), text);
               }
             };
@@ -207,7 +204,7 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator {
         return;
       }
 
-      StringBuilder generatedCode = new StringBuilder("");
+      StringBuilder generatedCode = new StringBuilder();
 
       if (chooser.getSelectedElements() != null) {
         for (PerlMethodMember methodMember : chooser.getSelectedElements()) {

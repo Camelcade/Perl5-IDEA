@@ -31,9 +31,8 @@ class BerryBrewInstallPerlHandler extends InstallPerlHandler {
     super(versionManagerPath, versionManageHandler);
   }
 
-  @NotNull
   @Override
-  protected String doCleanDistributionItem(@NotNull String rawItem) {
+  protected @NotNull String doCleanDistributionItem(@NotNull String rawItem) {
     return rawItem.replace(INSTALLED_MARK, "").replaceAll("\\*", "").trim();
   }
 
@@ -42,15 +41,13 @@ class BerryBrewInstallPerlHandler extends InstallPerlHandler {
     return rawItem.indexOf(INSTALLED_MARK) > 0;
   }
 
-  @NotNull
   @Override
-  protected PerlVersionManagerAdapter createAdapter(@NotNull String vmPath, @NotNull PerlHostData<?, ?> hostData) {
+  protected @NotNull PerlVersionManagerAdapter createAdapter(@NotNull String vmPath, @NotNull PerlHostData<?, ?> hostData) {
     return new BerryBrewAdapter(vmPath, hostData);
   }
 
-  @NotNull
   @Override
-  protected PerlInstallFormOptions createOptionsForm() {
+  protected @NotNull PerlInstallFormOptions createOptionsForm() {
     return new PerlInstallFormOptions() {
     };
   }

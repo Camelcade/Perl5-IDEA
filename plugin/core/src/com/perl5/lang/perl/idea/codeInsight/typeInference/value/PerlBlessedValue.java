@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,33 +36,28 @@ public final class PerlBlessedValue extends PerlParametrizedOperationValue {
     super(deserializer);
   }
 
-  @NotNull
-  public PerlValue getBless() {
+  public @NotNull PerlValue getBless() {
     return getParameter();
   }
 
-  @NotNull
-  public PerlValue getTarget() {
+  public @NotNull PerlValue getTarget() {
     return getBaseValue();
   }
 
-  @NotNull
   @Override
-  protected PerlValue computeResolve(@NotNull PerlValue resolvedValue,
-                                     @NotNull PerlValue resolvedBless,
-                                     @NotNull PerlValueResolver resolver) {
+  protected @NotNull PerlValue computeResolve(@NotNull PerlValue resolvedValue,
+                                              @NotNull PerlValue resolvedBless,
+                                              @NotNull PerlValueResolver resolver) {
     return computeStrictResolve(resolvedValue, resolvedBless);
   }
 
-  @NotNull
   @Override
-  protected PerlContextType getContextType() {
+  protected @NotNull PerlContextType getContextType() {
     return PerlContextType.SCALAR;
   }
 
-  @NotNull
   @Override
-  public String getPresentableText() {
+  public @NotNull String getPresentableText() {
     return PerlBundle.message("perl.value.presentable.blessed", getTarget(), getParameter());
   }
 
@@ -76,23 +71,20 @@ public final class PerlBlessedValue extends PerlParametrizedOperationValue {
     return BLESSED_ID;
   }
 
-  @NotNull
-  private static PerlValue computeStrictResolve(@NotNull PerlValue resolvedValue,
-                                                @NotNull PerlValue resolvedBless) {
+  private static @NotNull PerlValue computeStrictResolve(@NotNull PerlValue resolvedValue,
+                                                         @NotNull PerlValue resolvedBless) {
     return ObjectUtils.notNull(computeResolve(resolvedValue, resolvedBless), UNKNOWN_VALUE);
   }
 
-  @Nullable
-  private static PerlValue computeResolve(@NotNull PerlValue resolvedValue,
-                                          @NotNull PerlValue resolvedBless) {
+  private static @Nullable PerlValue computeResolve(@NotNull PerlValue resolvedValue,
+                                                    @NotNull PerlValue resolvedBless) {
     if (resolvedValue instanceof PerlReferenceValue) {
       return PerlReferenceValue.create(((PerlReferenceValue)resolvedValue).getTarget(), resolvedBless);
     }
     return null;
   }
 
-  @NotNull
-  public static PerlValue create(@NotNull PerlValue targetValue, @NotNull PerlValue blessValue) {
+  public static @NotNull PerlValue create(@NotNull PerlValue targetValue, @NotNull PerlValue blessValue) {
     if (targetValue.isDeterministic()) {
       return PerlValuesBuilder.convert(targetValue, blessValue, PerlBlessedValue::computeStrictResolve);
     }

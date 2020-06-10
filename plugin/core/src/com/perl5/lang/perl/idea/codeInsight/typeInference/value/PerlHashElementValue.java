@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,23 +44,20 @@ public final class PerlHashElementValue extends PerlParametrizedOperationValue {
     return HASH_ELEMENT_VALUE;
   }
 
-  @NotNull
   @Override
-  protected PerlValue computeResolve(@NotNull PerlValue resolvedHashValue,
-                                     @NotNull PerlValue resolvedKeyValue,
-                                     @NotNull PerlValueResolver resolver) {
+  protected @NotNull PerlValue computeResolve(@NotNull PerlValue resolvedHashValue,
+                                              @NotNull PerlValue resolvedKeyValue,
+                                              @NotNull PerlValueResolver resolver) {
     return computeStrictResolve(resolvedHashValue, resolvedKeyValue);
   }
 
-  @NotNull
-  private static PerlValue computeStrictResolve(@NotNull PerlValue hashValue,
-                                                @NotNull PerlValue keyValue) {
+  private static @NotNull PerlValue computeStrictResolve(@NotNull PerlValue hashValue,
+                                                         @NotNull PerlValue keyValue) {
     return ObjectUtils.notNull(computeResolve(hashValue, keyValue), UNKNOWN_VALUE);
   }
 
-  @Nullable
-  private static PerlValue computeResolve(@NotNull PerlValue hashValue,
-                                          @NotNull PerlValue keyValue) {
+  private static @Nullable PerlValue computeResolve(@NotNull PerlValue hashValue,
+                                                    @NotNull PerlValue keyValue) {
     if (keyValue.isUnknown() || keyValue.isUndef()) {
       return null;
     }
@@ -77,8 +74,7 @@ public final class PerlHashElementValue extends PerlParametrizedOperationValue {
     return getBaseValue();
   }
 
-  @NotNull
-  public PerlValue getKey() {
+  public @NotNull PerlValue getKey() {
     return getParameter();
   }
 
@@ -87,8 +83,7 @@ public final class PerlHashElementValue extends PerlParametrizedOperationValue {
     return "HashItem: " + getBaseValue() + "{" + getParameter() + "}";
   }
 
-  @NotNull
-  public static PerlValue create(@NotNull PerlValue hashValue, @NotNull PerlValue keyValue) {
+  public static @NotNull PerlValue create(@NotNull PerlValue hashValue, @NotNull PerlValue keyValue) {
     if (hashValue.isDeterministic() && keyValue.isDeterministic()) {
       return PerlValuesBuilder.convert(hashValue, keyValue, PerlHashElementValue::computeStrictResolve);
     }

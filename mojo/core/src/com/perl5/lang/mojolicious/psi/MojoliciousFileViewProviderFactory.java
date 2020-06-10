@@ -25,11 +25,10 @@ import org.jetbrains.annotations.NotNull;
 
 public class MojoliciousFileViewProviderFactory implements FileViewProviderFactory {
   @Override
-  @NotNull
-  public FileViewProvider createFileViewProvider(@NotNull VirtualFile file,
-                                                 com.intellij.lang.Language language,
-                                                 @NotNull PsiManager manager,
-                                                 boolean eventSystemEnabled) {
+  public @NotNull FileViewProvider createFileViewProvider(@NotNull VirtualFile file,
+                                                          com.intellij.lang.Language language,
+                                                          @NotNull PsiManager manager,
+                                                          boolean eventSystemEnabled) {
     return new MojoliciousFileViewProvider(manager, file, eventSystemEnabled);
   }
 }

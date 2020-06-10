@@ -22,8 +22,7 @@ import com.perl5.lang.perl.psi.PerlRecursiveVisitor;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class PerlCompletionRecursiveVisitor extends PerlRecursiveVisitor {
-  @NotNull
-  private final PerlCompletionProcessor myProcessor;
+  private final @NotNull PerlCompletionProcessor myProcessor;
 
   public PerlCompletionRecursiveVisitor(@NotNull PerlCompletionProcessor processor) {
     myProcessor = processor;

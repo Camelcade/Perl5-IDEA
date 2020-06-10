@@ -35,15 +35,13 @@ public abstract class PerlMethodModifierMixin extends PerlCompositeElementImpl i
     super(node);
   }
 
-  @Nullable
   @Override
-  public String getName() {
+  public @Nullable String getName() {
     PerlSubNameElement subNameElement = getSubNameElement();
     return subNameElement == null ? null : subNameElement.getText();
   }
 
-  @Nullable
-  private PerlSubNameElement getSubNameElement() {
+  private @Nullable PerlSubNameElement getSubNameElement() {
     return PsiTreeUtil.getChildOfType(this, PerlSubNameElement.class);
   }
 
@@ -60,9 +58,8 @@ public abstract class PerlMethodModifierMixin extends PerlCompositeElementImpl i
       getModifierText() + " " + name + "()");
   }
 
-  @NotNull
   @Override
-  public PsiElement getNavigationElement() {
+  public @NotNull PsiElement getNavigationElement() {
     PerlSubNameElement subNameElement = getSubNameElement();
     return subNameElement == null ? this : subNameElement;
   }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,9 +45,8 @@ public class TemplateToolkitStringManipulator extends AbstractElementManipulator
     return element;
   }
 
-  @NotNull
   @Override
-  public TextRange getRangeInElement(@NotNull TemplateToolkitString element) {
+  public @NotNull TextRange getRangeInElement(@NotNull TemplateToolkitString element) {
     int startOffset = 0;
     int endOffset = element.getTextLength();
 

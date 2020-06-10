@@ -74,9 +74,8 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
     mySettings = HTMLMasonSettings.getInstance(myProject);
   }
 
-  @Nullable
   @Override
-  public JComponent createComponent() {
+  public @Nullable JComponent createComponent() {
     FormBuilder builder = FormBuilder.createFormBuilder();
     builder.getPanel().setLayout(new VerticalFlowLayout());
 
@@ -265,9 +264,8 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
       this.myCustomTagsModel = myCustomTagsModel;
     }
 
-    @Nullable
     @Override
-    public String valueOf(HTMLMasonCustomTag customTag) {
+    public @Nullable String valueOf(HTMLMasonCustomTag customTag) {
       return customTag.getText();
     }
 
@@ -300,9 +298,8 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
       super("Parse");
     }
 
-    @Nullable
     @Override
-    public HTMLMasonCustomTagRole valueOf(HTMLMasonCustomTag customTag) {
+    public @Nullable HTMLMasonCustomTagRole valueOf(HTMLMasonCustomTag customTag) {
       return customTag.getRole();
     }
 

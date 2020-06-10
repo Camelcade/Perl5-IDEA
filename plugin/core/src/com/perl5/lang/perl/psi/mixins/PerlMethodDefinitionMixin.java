@@ -48,8 +48,7 @@ public abstract class PerlMethodDefinitionMixin extends PerlSubDefinitionBase im
     super(stub, nodeType);
   }
 
-  @NotNull
-  protected List<PerlVariableDeclarationElement> buildImplicitVariables() {
+  protected @NotNull List<PerlVariableDeclarationElement> buildImplicitVariables() {
     return Collections.singletonList(PerlImplicitVariableDeclaration.createInvocant(this));
   }
 
@@ -58,9 +57,8 @@ public abstract class PerlMethodDefinitionMixin extends PerlSubDefinitionBase im
     return true;
   }
 
-  @Nullable
   @Override
-  protected PsiElement getSignatureContainer() {
+  protected @Nullable PsiElement getSignatureContainer() {
     return ((PsiPerlMethodDefinitionImpl)this).getSignatureContent();
   }
 
@@ -92,9 +90,8 @@ public abstract class PerlMethodDefinitionMixin extends PerlSubDefinitionBase im
     return signatureContainer != null && signatureContainer.getFirstChild() instanceof PsiPerlMethodSignatureInvocant;
   }
 
-  @NotNull
   @Override
-  public List<PerlVariableDeclarationElement> getImplicitVariables() {
+  public @NotNull List<PerlVariableDeclarationElement> getImplicitVariables() {
     if (hasExplicitInvocant()) {
       return Collections.emptyList();
     }
@@ -106,8 +103,7 @@ public abstract class PerlMethodDefinitionMixin extends PerlSubDefinitionBase im
     }
   }
 
-  @NotNull
-  public static String getDefaultInvocantName() {
+  public static @NotNull String getDefaultInvocantName() {
     // fixme see #717
     return DEFAULT_SELF_SCALAR_NAME;
   }

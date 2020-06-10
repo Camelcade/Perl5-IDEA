@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,20 +40,18 @@ public final class PerlReferenceValue extends PerlParametrizedOperationValue {
     return PerlValuesManager.REFERENCE_ID;
   }
 
-  @NotNull
   @Override
-  protected PerlValue computeResolve(@NotNull PerlValue resolvedTarget,
-                                     @NotNull PerlValue resolvedBless,
-                                     @NotNull PerlValueResolver resolver) {
+  protected @NotNull PerlValue computeResolve(@NotNull PerlValue resolvedTarget,
+                                              @NotNull PerlValue resolvedBless,
+                                              @NotNull PerlValueResolver resolver) {
     // fixme casts dereferences should be here
     return resolvedTarget.equals(getTarget()) && resolvedBless.equals(getBless())
            ? this
            : new PerlReferenceValue(resolvedTarget, resolvedBless);
   }
 
-  @NotNull
   @Override
-  public Set<String> getNamespaceNames() {
+  public @NotNull Set<String> getNamespaceNames() {
     return getBless().getNamespaceNames();
   }
 
@@ -67,13 +65,11 @@ public final class PerlReferenceValue extends PerlParametrizedOperationValue {
     return getBaseValue().isDeterministic() && getBless().isDeterministic();
   }
 
-  @NotNull
-  public PerlValue getTarget() {
+  public @NotNull PerlValue getTarget() {
     return getBaseValue();
   }
 
-  @NotNull
-  public PerlValue getBless() {
+  public @NotNull PerlValue getBless() {
     return getParameter();
   }
 
@@ -84,21 +80,18 @@ public final class PerlReferenceValue extends PerlParametrizedOperationValue {
     return bless.isUndef() ? baseName : baseName + " blessed with " + bless;
   }
 
-  @NotNull
   @Override
-  public String getPresentableText() {
+  public @NotNull String getPresentableText() {
     return getBless().isUndef() ? PerlBundle.message("perl.value.reference.presentable", getTarget().getPresentableText()) :
            PerlBundle
              .message("perl.value.reference.blessed.presentable", getTarget().getPresentableText(), getBless().getPresentableText());
   }
 
-  @NotNull
-  public static PerlValue create(@NotNull PerlValue referent) {
+  public static @NotNull PerlValue create(@NotNull PerlValue referent) {
     return create(referent, UNDEF_VALUE);
   }
 
-  @NotNull
-  public static PerlValue create(@NotNull PerlValue referent, @NotNull PerlValue bless) {
+  public static @NotNull PerlValue create(@NotNull PerlValue referent, @NotNull PerlValue bless) {
     return referent.isUnknown() ? referent : new PerlReferenceValue(referent, bless);
   }
 }

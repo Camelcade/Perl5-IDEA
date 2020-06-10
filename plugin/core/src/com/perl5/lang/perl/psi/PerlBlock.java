@@ -59,8 +59,7 @@ public interface PerlBlock extends PerlLexicalScope {
    * @return container of this block, omitting lazy-parsable part if any.
    */
   @Contract(pure = true)
-  @NotNull
-  default PsiElement getContainer(){
+  default @NotNull PsiElement getContainer() {
     PsiElement container = getParent();
     if (LAZY_CODE_BLOCKS.contains(PsiUtilCore.getElementType(container))) {
       container = container.getParent();
@@ -72,8 +71,7 @@ public interface PerlBlock extends PerlLexicalScope {
    * @return compound container of this block. Similar to {@link #getContainer()}, but passes continue blocks and eval anon subs.
    */
   @Contract(pure = true)
-  @NotNull
-  default PsiElement getCompoundContainer() {
+  default @NotNull PsiElement getCompoundContainer() {
     PsiElement container = getContainer();
     if (container instanceof PsiPerlContinueBlock) {
       return container.getParent();
@@ -89,8 +87,7 @@ public interface PerlBlock extends PerlLexicalScope {
    * @return closest parent PerlBlock element if any
    */
   @Contract("null -> null")
-  @Nullable
-  static PerlBlock getClosestTo(@Nullable PsiElement element) {
+  static @Nullable PerlBlock getClosestTo(@Nullable PsiElement element) {
     return PsiTreeUtil.getParentOfType(element, PerlBlock.class);
   }
 
@@ -98,8 +95,7 @@ public interface PerlBlock extends PerlLexicalScope {
    * @return container of closest parent block for the {@code position}
    */
   @Contract("null -> null")
-  @Nullable
-  static PsiElement getClosestBlockCompoundContainer(@Nullable PsiElement position) {
+  static @Nullable PsiElement getClosestBlockCompoundContainer(@Nullable PsiElement position) {
     return ObjectUtils.doIfNotNull(getClosestTo(position), PerlBlock::getCompoundContainer);
   }
 }

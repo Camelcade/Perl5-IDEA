@@ -60,9 +60,8 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
     return !arguments.isEmpty() && arguments.get(0).isSelf(getProject());
   }
 
-  @NotNull
   @Override
-  public List<PerlSubArgument> getSubArgumentsList() {
+  public @NotNull List<PerlSubArgument> getSubArgumentsList() {
     PerlSubDefinitionStub stub = getGreenStub();
     if (stub != null) {
       return new ArrayList<>(stub.getSubArgumentsList());
@@ -77,9 +76,8 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
     return arguments;
   }
 
-  @NotNull
   @Override
-  public PerlValue getReturnValueFromCode() {
+  public @NotNull PerlValue getReturnValueFromCode() {
     PerlValue returnValue = PerlSubDefinitionElement.super.getReturnValueFromCode();
     if (!returnValue.isUnknown()) {
       return returnValue;
@@ -99,8 +97,7 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
    *
    * @return list of arguments or null if there is no signature
    */
-  @Nullable
-  private List<PerlSubArgument> getPerlSubArgumentsFromSignature() {
+  private @Nullable List<PerlSubArgument> getPerlSubArgumentsFromSignature() {
     List<PerlSubArgument> arguments = null;
     PsiElement signatureContainer = getSignatureContainer();
 
@@ -146,8 +143,7 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
   }
 
   @Override
-  @Nullable
-  public PsiPerlBlock getSubDefinitionBody() {
+  public @Nullable PsiPerlBlock getSubDefinitionBody() {
     return PerlBlockOwner.findBlock(this);
   }
 }

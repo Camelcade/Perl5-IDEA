@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,15 +27,13 @@ import java.util.Collections;
 import java.util.List;
 
 public class Perl5SettingsConfigurableExtensionImpl implements Perl5SettingsConfigurableExtension {
-  @NotNull
   @Override
-  public List<PerlSourceRootType> getSourceRootTypes() {
+  public @NotNull List<PerlSourceRootType> getSourceRootTypes() {
     return Collections.singletonList(PerlLibrarySourceRootType.INSTANCE);
   }
 
-  @Nullable
   @Override
-  public Configurable createProjectConfigurable(@NotNull Project project) {
+  public @Nullable Configurable createProjectConfigurable(@NotNull Project project) {
     return new Perl5ProjectConfigurable(project);
   }
 }

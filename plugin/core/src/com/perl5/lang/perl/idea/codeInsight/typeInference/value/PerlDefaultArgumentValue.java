@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,11 +42,10 @@ public class PerlDefaultArgumentValue extends PerlParametrizedOperationValue {
     serializer.writeVarInt(myArgumentIndex);
   }
 
-  @NotNull
   @Override
-  protected PerlValue computeResolve(@NotNull PerlValue resolvedMainValue,
-                                     @NotNull PerlValue resolvedDefaultValue,
-                                     @NotNull PerlValueResolver resolver) {
+  protected @NotNull PerlValue computeResolve(@NotNull PerlValue resolvedMainValue,
+                                              @NotNull PerlValue resolvedDefaultValue,
+                                              @NotNull PerlValueResolver resolver) {
     if (resolver instanceof PerlSubValueResolver) {
       PerlValue resolvedArguments = resolver.resolve(PerlValues.ARGUMENTS_VALUE);
       if (!(resolvedArguments instanceof PerlArrayValue)) {

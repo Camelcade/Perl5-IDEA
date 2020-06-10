@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,8 +46,7 @@ public abstract class PerlVersionManagerData<Data extends PerlVersionManagerData
    *
    * @apiNote returns paths on the target host, not local
    */
-  @NotNull
-  public List<File> getBinDirsPath() {
+  public @NotNull List<File> getBinDirsPath() {
     return Collections.emptyList();
   }
 
@@ -57,14 +56,12 @@ public abstract class PerlVersionManagerData<Data extends PerlVersionManagerData
    * @param originalCommandLine non-patched commandline
    * @return patched or original commandline
    */
-  @NotNull
-  public abstract PerlCommandLine patchCommandLine(@NotNull PerlCommandLine originalCommandLine);
+  public abstract @NotNull PerlCommandLine patchCommandLine(@NotNull PerlCommandLine originalCommandLine);
 
   /**
    * @return short lowercased name, for interpreters list
    */
-  @NotNull
-  public final String getShortName() {
+  public final @NotNull String getShortName() {
     String secondaryShortName = getSecondaryShortName();
     return secondaryShortName == null ? getPrimaryShortName() : getPrimaryShortName() + getSecondaryShortName();
   }
@@ -72,22 +69,19 @@ public abstract class PerlVersionManagerData<Data extends PerlVersionManagerData
   /**
    * @return primary part of short name, e.g. 'perlbrew'
    */
-  @NotNull
-  public final String getPrimaryShortName() {
+  public final @NotNull String getPrimaryShortName() {
     return getHandler().getShortName();
   }
 
   /**
    * @return handler to install a Perl for this version manager or null if installation is not supported
    */
-  @Nullable
-  public abstract InstallPerlHandler getInstallPerlHandler();
+  public abstract @Nullable InstallPerlHandler getInstallPerlHandler();
 
   /**
    * @return optional secondary short name, e.g. '[perlVersion@library]'
    */
-  @Nullable
-  public abstract String getSecondaryShortName();
+  public abstract @Nullable String getSecondaryShortName();
 
   @Override
   public String toString() {
@@ -96,22 +90,19 @@ public abstract class PerlVersionManagerData<Data extends PerlVersionManagerData
 
   public abstract void installCpanminus(@Nullable Project project);
 
-  @NotNull
-  public static PerlVersionManagerData<?, ?> notNullFrom(@NotNull Sdk sdk) {
+  public static @NotNull PerlVersionManagerData<?, ?> notNullFrom(@NotNull Sdk sdk) {
     return Objects.requireNonNull(from(sdk), () -> "No version manager data in " + sdk);
   }
 
   @Contract("null->null")
-  @Nullable
-  public static PerlVersionManagerData<?, ?> from(@Nullable Sdk sdk) {
+  public static @Nullable PerlVersionManagerData<?, ?> from(@Nullable Sdk sdk) {
     return ObjectUtils.doIfNotNull(PerlSdkAdditionalData.from(sdk), PerlSdkAdditionalData::getVersionManagerData);
   }
 
   /**
    * @return default, system version manager. Is necessary to avoid patching of external executions
    */
-  @NotNull
-  public static PerlVersionManagerData<?, ?> getDefault() {
+  public static @NotNull PerlVersionManagerData<?, ?> getDefault() {
     return PerlVersionManagerHandler.getDefaultHandler().createData();
   }
 }

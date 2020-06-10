@@ -57,8 +57,7 @@ public abstract class PerlSubCallHandler<CallData extends PerlSubCallElementData
     return VERSION_PROVIDER.getValue();
   }
 
-  @NotNull
-  public final CallData getCallData(@NotNull PerlSubCallElement subCallElement) {
+  public final @NotNull CallData getCallData(@NotNull PerlSubCallElement subCallElement) {
     PerlSubCallElementStub stub = subCallElement.getGreenStub();
     if (stub != null) {
       //noinspection unchecked
@@ -67,17 +66,15 @@ public abstract class PerlSubCallHandler<CallData extends PerlSubCallElementData
     return computeCallData(subCallElement);
   }
 
-  @NotNull
-  public abstract CallData computeCallData(@NotNull PerlSubCallElement subCallElement);
+  public abstract @NotNull CallData computeCallData(@NotNull PerlSubCallElement subCallElement);
 
   public void serialize(@NotNull PerlSubCallElementData callData, @NotNull StubOutputStream dataStream) throws IOException {
   }
 
   public abstract CallData deserialize(@NotNull StubInputStream dataStream) throws IOException;
 
-  @Nullable
   @Contract("null -> null")
-  public static PerlSubCallHandler<?> getHandler(@Nullable String subName) {
+  public static @Nullable PerlSubCallHandler<?> getHandler(@Nullable String subName) {
     if (subName == null) {
       return null;
     }

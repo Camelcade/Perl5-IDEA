@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,8 +31,7 @@ public class PerlFileUtil {
   /**
    * Linuxies path if local system is windows. Changing {@code c:\some\path} to {@code /c/some/path}
    */
-  @NotNull
-  public static String linuxisePath(@NotNull String localPath) {
+  public static @NotNull String linuxisePath(@NotNull String localPath) {
     if (!SystemInfo.isWindows || localPath.isEmpty()) {
       return localPath;
     }
@@ -44,8 +43,7 @@ public class PerlFileUtil {
   /**
    * Reverse operation for {@link #linuxisePath(String)}
    */
-  @NotNull
-  public static String unLinuxisePath(@NotNull String linuxisedPath) {
+  public static @NotNull String unLinuxisePath(@NotNull String linuxisedPath) {
     if (!SystemInfo.isWindows || linuxisedPath.length() < 2) {
       return linuxisedPath;
     }
@@ -63,17 +61,15 @@ public class PerlFileUtil {
   /**
    * @return a content root for the {@code virtualFile} in the context of {@code project} or null if file is not in content
    */
-  @Nullable
-  public static VirtualFile getContentRoot(@NotNull Project project, @Nullable VirtualFile virtualFile) {
+  public static @Nullable VirtualFile getContentRoot(@NotNull Project project, @Nullable VirtualFile virtualFile) {
     return virtualFile == null ? null : ProjectFileIndex.getInstance(project).getContentRootForFile(virtualFile);
   }
 
   /**
    * @return a path to the {@code virtualFile} relative to the nearest content root in the context of {@code project}
    */
-  @Nullable
-  public static String getPathRelativeToContentRoot(@Nullable VirtualFile virtualFile,
-                                                    @NotNull Project project) {
+  public static @Nullable String getPathRelativeToContentRoot(@Nullable VirtualFile virtualFile,
+                                                              @NotNull Project project) {
     VirtualFile root = getContentRoot(project, virtualFile);
     return root == null ? null : VfsUtilCore.getRelativePath(virtualFile, root);
   }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -71,28 +71,23 @@ public class PerlParserImpl extends PerlParserGenerated implements PerlParser {
     return false;
   }
 
-  @NotNull
-  public TokenSet getBadCharacterForbiddenTokens() {
+  public @NotNull TokenSet getBadCharacterForbiddenTokens() {
     return BAD_CHARACTER_FORBIDDEN_TOKENS;
   }
 
-  @NotNull
-  public TokenSet getStatementRecoveryConsumableTokenSet() {
+  public @NotNull TokenSet getStatementRecoveryConsumableTokenSet() {
     return STATEMENT_RECOVERY_CONSUMABLE_TOKENS;
   }
 
-  @NotNull
-  public TokenSet getConsumableSemicolonTokens() {
+  public @NotNull TokenSet getConsumableSemicolonTokens() {
     return CONSUMABLE_SEMI_TOKENS;
   }
 
-  @NotNull
-  public TokenSet getAnonHashSuffixTokens() {
+  public @NotNull TokenSet getAnonHashSuffixTokens() {
     return ANON_HASH_TOKEN_SUFFIXES;
   }
 
-  @NotNull
-  public TokenSet getUnconsumableSemicolonTokens() {
+  public @NotNull TokenSet getUnconsumableSemicolonTokens() {
     return UNCONSUMABLE_SEMI_TOKENS;
   }
 

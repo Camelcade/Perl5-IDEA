@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,8 +32,7 @@ import java.util.Collections;
 import java.util.List;
 
 class PerlHighlightExitPointsHandler extends HighlightUsagesHandlerBase<PsiElement> {
-  @NotNull
-  private final PsiElement myTarget;
+  private final @NotNull PsiElement myTarget;
 
   public PerlHighlightExitPointsHandler(@NotNull Editor editor,
                                         @NotNull PsiFile file,
@@ -42,9 +41,8 @@ class PerlHighlightExitPointsHandler extends HighlightUsagesHandlerBase<PsiEleme
     myTarget = target;
   }
 
-  @NotNull
   @Override
-  public List<PsiElement> getTargets() {
+  public @NotNull List<PsiElement> getTargets() {
     return Collections.emptyList();
   }
 

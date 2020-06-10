@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,20 +32,17 @@ import java.util.List;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 
 public interface PerlReplacementRegex extends PerlRegexExpression {
-  @Nullable
-  default PsiPerlPerlRegex getMatchRegex() {
+  default @Nullable PsiPerlPerlRegex getMatchRegex() {
     List<PsiElement> parts = getParts();
     return parts.isEmpty() ? null : ObjectUtils.tryCast(parts.get(0), PsiPerlPerlRegex.class);
   }
 
-  @Nullable
-  default PsiPerlPerlRegex getReplaceRegex() {
+  default @Nullable PsiPerlPerlRegex getReplaceRegex() {
     List<PsiElement> parts = getParts();
     return parts.size() < 2 ? null : ObjectUtils.tryCast(parts.get(1), PsiPerlPerlRegex.class);
   }
 
-  @Nullable
-  default PerlBlock getReplaceBlock() {
+  default @Nullable PerlBlock getReplaceBlock() {
     List<PsiElement> parts = getParts();
     return parts.size() < 2 ? null : ObjectUtils.tryCast(parts.get(1), PerlBlock.class);
   }
@@ -54,8 +51,7 @@ public interface PerlReplacementRegex extends PerlRegexExpression {
    * @return parts of regexp, regex and block or two regexes. Incomplete regex may have only one regex.
    * method flatterns lazy parsable blocks
    */
-  @NotNull
-  default List<PsiElement> getParts() {
+  default @NotNull List<PsiElement> getParts() {
     List<PsiElement> result = new ArrayList<>();
     PsiElement run = getFirstChild();
     while (run != null) {

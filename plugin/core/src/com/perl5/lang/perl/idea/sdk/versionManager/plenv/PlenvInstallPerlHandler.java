@@ -29,9 +29,8 @@ class PlenvInstallPerlHandler extends InstallPerlHandler {
     super(versionManagerPath, versionManageHandler);
   }
 
-  @NotNull
   @Override
-  protected String doCleanDistributionItem(@NotNull String rawItem) {
+  protected @NotNull String doCleanDistributionItem(@NotNull String rawItem) {
     return rawItem;
   }
 
@@ -40,15 +39,13 @@ class PlenvInstallPerlHandler extends InstallPerlHandler {
     return false;
   }
 
-  @NotNull
   @Override
-  protected PerlVersionManagerAdapter createAdapter(@NotNull String vmPath, @NotNull PerlHostData<?, ?> hostData) {
+  protected @NotNull PerlVersionManagerAdapter createAdapter(@NotNull String vmPath, @NotNull PerlHostData<?, ?> hostData) {
     return new PlenvAdapter(vmPath, hostData);
   }
 
-  @NotNull
   @Override
-  protected PerlInstallFormOptions createOptionsForm() {
+  protected @NotNull PerlInstallFormOptions createOptionsForm() {
     return new PlenvInstallPerlForm();
   }
 }

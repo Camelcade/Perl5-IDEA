@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,9 +28,8 @@ import java.util.List;
 
 public class PerlSourceTypesSerializationExtension extends JpsModelSerializerExtension {
 
-  @NotNull
   @Override
-  public List<? extends JpsModuleSourceRootPropertiesSerializer<?>> getModuleSourceRootPropertiesSerializers() {
+  public @NotNull List<? extends JpsModuleSourceRootPropertiesSerializer<?>> getModuleSourceRootPropertiesSerializers() {
     List<JpsModuleSourceRootDummyPropertiesSerializer> result = new ArrayList<>();
     Perl5SettingsConfigurableExtension.forEach(extension -> extension.getSourceRootTypes().forEach(
       type -> result.add(new JpsModuleSourceRootDummyPropertiesSerializer(type, type.getSerializationKey()))

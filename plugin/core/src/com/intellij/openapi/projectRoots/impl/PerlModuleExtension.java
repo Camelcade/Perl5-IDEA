@@ -69,9 +69,8 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
     myOriginal = original;
   }
 
-  @NotNull
   @Override
-  public ModuleExtension getModifiableModel(boolean writable) {
+  public @NotNull ModuleExtension getModifiableModel(boolean writable) {
     return new PerlModuleExtension(this, writable);
   }
 
@@ -119,8 +118,7 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
       .collect(Collectors.toList());
   }
 
-  @Nullable
-  public PerlSourceRootType getRootType(@NotNull VirtualFile virtualFile) {
+  public @Nullable PerlSourceRootType getRootType(@NotNull VirtualFile virtualFile) {
     return myRoots.get(virtualFile);
   }
 
@@ -136,9 +134,8 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
     return myModificationTracker;
   }
 
-  @Nullable
   @Override
-  public Element getState() {
+  public @Nullable Element getState() {
     Element perlConfig = new Element(PERL_CONFIG);
 
     PathMacroManager macroManager = ModulePathMacroManager.getInstance(myModule);
@@ -198,8 +195,7 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
     return ModuleRootManager.getInstance(module).getModuleExtension(PerlModuleExtension.class);
   }
 
-  @Nullable
-  private static JpsModuleSourceRootPropertiesSerializer<?> getSerializer(Predicate<JpsModuleSourceRootPropertiesSerializer<?>> predicate) {
+  private static @Nullable JpsModuleSourceRootPropertiesSerializer<?> getSerializer(Predicate<JpsModuleSourceRootPropertiesSerializer<?>> predicate) {
     for (JpsModelSerializerExtension extension : JpsModelSerializerExtension.getExtensions()) {
       for (JpsModuleSourceRootPropertiesSerializer<?> serializer : extension.getModuleSourceRootPropertiesSerializers()) {
         if (predicate.apply(serializer)) {

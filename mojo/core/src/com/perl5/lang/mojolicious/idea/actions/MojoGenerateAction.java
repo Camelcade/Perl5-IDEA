@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -90,43 +90,36 @@ public abstract class MojoGenerateAction extends MojoScriptAction {
   /**
    * Should return generation parameters or null if generation should not be performed
    */
-  @Nullable
-  protected List<String> computeGenerationParameters(@NotNull AnActionEvent e, @NotNull VirtualFile mojoScript) {
+  protected @Nullable List<String> computeGenerationParameters(@NotNull AnActionEvent e, @NotNull VirtualFile mojoScript) {
     String entityName = Messages.showInputDialog(
       e.getProject(), getPromptMessage(), getPromptTitle(), getPromptIcon(), getDefaultName(), getNameValidator());
 
     return StringUtil.isEmpty(entityName) ? null : Arrays.asList(getGenerateCommand(), entityName);
   }
 
-  @NotNull
-  protected abstract String getDefaultName();
+  protected abstract @NotNull String getDefaultName();
 
-  @Nullable
-  protected abstract InputValidator getNameValidator();
+  protected abstract @Nullable InputValidator getNameValidator();
 
   /**
    * @return icon for name prompt dialog
    */
-  @NotNull
-  protected abstract Icon getPromptIcon();
+  protected abstract @NotNull Icon getPromptIcon();
 
   /**
    * @return title for name prompt dialog
    */
-  @NotNull
-  protected abstract String getPromptTitle();
+  protected abstract @NotNull String getPromptTitle();
 
   /**
    * @return message for name prompt dialog
    */
-  @NotNull
-  protected abstract String getPromptMessage();
+  protected abstract @NotNull String getPromptMessage();
 
   /**
    * @return a command that should be used to generate entity
    */
-  @NotNull
-  protected abstract String getGenerateCommand();
+  protected abstract @NotNull String getGenerateCommand();
 
   protected VirtualFile getTargetDirectory(@NotNull AnActionEvent event) {
     Project project = event.getProject();

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,11 +32,10 @@ import org.jetbrains.annotations.NotNull;
 
 
 public class PerlMemberInplaceRenameHandler extends MemberInplaceRenameHandler {
-  @NotNull
   @Override
-  protected MemberInplaceRenamer createMemberRenamer(@NotNull PsiElement element,
-                                                     @NotNull PsiNameIdentifierOwner elementToRename,
-                                                     @NotNull Editor editor) {
+  protected @NotNull MemberInplaceRenamer createMemberRenamer(@NotNull PsiElement element,
+                                                              @NotNull PsiNameIdentifierOwner elementToRename,
+                                                              @NotNull Editor editor) {
     return new PerlMemberInplaceRenamer(elementToRename, element, editor);
   }
 
