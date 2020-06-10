@@ -314,29 +314,29 @@ Lookups: a; Text: a; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type
     PsiElement: Built-in: $a
 Lookups: b; Text: b; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
     PsiElement: Built-in: $b
-Lookups: main::groupedarray; Text: main::groupedarray; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+Lookups: groupedarray; Text: groupedarray; Tail: []; Type: main; Icon: /array_gutter_icon.png; Type Icon: null
     PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 23 in variableScalarOur.pl
+Lookups: groupedhash; Text: groupedhash; Tail: {}; Type: main; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 38 in variableScalarOur.pl
+Lookups: groupedscalar; Text: groupedscalar; Tail: null; Type: main; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 7 in variableScalarOur.pl
 Lookups: main::groupedarray; Text: main::groupedarray; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
     PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 23 in variableScalarOur.pl
 Lookups: main::groupedhash; Text: main::groupedhash; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
     PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 38 in variableScalarOur.pl
-Lookups: main::groupedhash; Text: main::groupedhash; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
-    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 38 in variableScalarOur.pl
-Lookups: main::groupedscalar; Text: main::groupedscalar; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
-    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 7 in variableScalarOur.pl
 Lookups: main::groupedscalar; Text: main::groupedscalar; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
     PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 7 in variableScalarOur.pl
 Lookups: main::somearray; Text: main::somearray; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
     PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 57 in variableScalarOur.pl
-Lookups: main::somearray; Text: main::somearray; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
-    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 57 in variableScalarOur.pl
-Lookups: main::somehash; Text: main::somehash; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
-    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 73 in variableScalarOur.pl
 Lookups: main::somehash; Text: main::somehash; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
     PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 73 in variableScalarOur.pl
 Lookups: main::somescalar; Text: main::somescalar; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
     PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 88 in variableScalarOur.pl
-Lookups: main::somescalar; Text: main::somescalar; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+Lookups: somearray; Text: somearray; Tail: []; Type: main; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 57 in variableScalarOur.pl
+Lookups: somehash; Text: somehash; Tail: {}; Type: main; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 73 in variableScalarOur.pl
+Lookups: somescalar; Text: somescalar; Tail: null; Type: main; Icon: /scalar_gutter_icon.png; Type Icon: null
     PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 88 in variableScalarOur.pl
 Lookups: {^CAPTURE_ALL}; Text: {^CAPTURE_ALL}; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
     PsiElement: Built-in: %^CAPTURE_ALL

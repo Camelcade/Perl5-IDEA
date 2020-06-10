@@ -55,7 +55,7 @@ public class PerlVariableCompletionProvider extends PerlCompletionProvider {
     }
 
     PerlVariableCompletionProcessor variableCompletionProcessor = new PerlVariableCompletionProcessorImpl(
-      withFqnSafeMatcher(resultSet), subName, fullQualified, false, false);
+      withFqnSafeMatcher(resultSet), subName, fullQualified, false, false, false);
 
     PerlVariableCompletionUtil.fillWithVariables(variableCompletionProcessor, namespaceName);
     variableCompletionProcessor.logStatus(getClass());

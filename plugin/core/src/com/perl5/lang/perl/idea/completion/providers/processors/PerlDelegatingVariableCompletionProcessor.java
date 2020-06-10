@@ -46,6 +46,11 @@ public class PerlDelegatingVariableCompletionProcessor extends PerlDelegatingCom
   }
 
   @Override
+  public boolean isLexical() {
+    return getDelegate().isLexical();
+  }
+
+  @Override
   public @NotNull PerlVariableCompletionProcessor withPrefixMatcher(@NotNull String prefix) {
     try {
       PerlDelegatingVariableCompletionProcessor clone = (PerlDelegatingVariableCompletionProcessor)clone();

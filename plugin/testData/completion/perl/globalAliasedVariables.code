@@ -1,0 +1,36 @@
+package Foo::Bar;
+
+our $SCALAR_VAR = 1;
+our @ARRAY_VAR = ('array');
+our %HASH_VAR = (key => 42);
+
+my $scalar_var = 1;
+my @array_var = ('array');
+my %hash_var = (key => 42);
+
+package Baz::Zoo;
+
+our $SCALAR1_VAR = 2;
+our @ARRAY1_VAR = ('array1');
+our %HASH1_VAR = (key1 => 43);
+
+my $scalar1_var = 2;
+my @array1_var = ('array1');
+my %hash1_var = (key1 => 43);
+
+
+say $SCALAR_VAR;
+say $SCALAR1_VAR;
+say @ARRAY_VAR;
+say @ARRAY1_VAR;
+say %HASH_VAR;
+say %HASH1_VAR;
+
+say $scalar_var;
+say $scalar1_var;
+say @array_var;
+say @array1_var;
+say %hash_var;
+say %hash1_var;
+
+var<caret>

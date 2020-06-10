@@ -48,6 +48,9 @@ public class PerlCompletionTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testGlobalAliasedVariables() {doTest();}
+
+  @Test
   public void testVariablesInBraces() {doTest();}
 
   @Test

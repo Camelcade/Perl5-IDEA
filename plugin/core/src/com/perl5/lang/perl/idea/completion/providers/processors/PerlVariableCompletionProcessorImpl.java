@@ -24,26 +24,31 @@ public class PerlVariableCompletionProcessorImpl extends PerlCompletionProcessor
   private final boolean myIsFullQualified;
   private final boolean myHasBraces;
   private final boolean myIsDeclaration;
+  private final boolean myIsLexical;
 
   public PerlVariableCompletionProcessorImpl(@NotNull CompletionResultSet resultSet,
                                              @NotNull PsiElement leafElement,
                                              boolean isFullQualified,
                                              boolean hasBraces,
-                                             boolean isDeclaration) {
+                                             boolean isDeclaration,
+                                             boolean isLexical) {
     super(resultSet, leafElement);
     myIsFullQualified = isFullQualified;
     myHasBraces = hasBraces;
     myIsDeclaration = isDeclaration;
+    myIsLexical = isLexical;
   }
 
   public PerlVariableCompletionProcessorImpl(@NotNull PerlCompletionProcessor processor,
                                              boolean isFullQualified,
                                              boolean hasBraces,
-                                             boolean isDeclaration) {
+                                             boolean isDeclaration,
+                                             boolean isLexical) {
     super(processor);
     myIsFullQualified = isFullQualified;
     myHasBraces = hasBraces;
     myIsDeclaration = isDeclaration;
+    myIsLexical = isLexical;
   }
 
   private PerlVariableCompletionProcessorImpl(@NotNull PerlVariableCompletionProcessorImpl original,
@@ -52,6 +57,12 @@ public class PerlVariableCompletionProcessorImpl extends PerlCompletionProcessor
     myIsFullQualified = original.isFullQualified();
     myHasBraces = original.hasBraces();
     myIsDeclaration = original.isDeclaration();
+    myIsLexical = original.isLexical();
+  }
+
+  @Override
+  public boolean isLexical() {
+    return myIsLexical;
   }
 
   @Override

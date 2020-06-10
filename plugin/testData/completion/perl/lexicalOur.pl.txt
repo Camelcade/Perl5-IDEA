@@ -312,19 +312,19 @@ Lookups: `; Text: `; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type
     PsiElement: Built-in: $`
 Lookups: a; Text: a; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
     PsiElement: Built-in: $a
+Lookups: arrayname; Text: arrayname; Tail: []; Type: main; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 21 in lexicalOur.pl
 Lookups: b; Text: b; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
     PsiElement: Built-in: $b
-Lookups: main::arrayname; Text: main::arrayname; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
-    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 21 in lexicalOur.pl
-Lookups: main::arrayname; Text: main::arrayname; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
-    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 21 in lexicalOur.pl
-Lookups: main::hashname; Text: main::hashname; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+Lookups: hashname; Text: hashname; Tail: {}; Type: main; Icon: /hash_gutter_icon.png; Type Icon: null
     PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 37 in lexicalOur.pl
+Lookups: main::arrayname; Text: main::arrayname; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 21 in lexicalOur.pl
 Lookups: main::hashname; Text: main::hashname; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
     PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 37 in lexicalOur.pl
 Lookups: main::scalarname; Text: main::scalarname; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
     PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 4 in lexicalOur.pl
-Lookups: main::scalarname; Text: main::scalarname; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+Lookups: scalarname; Text: scalarname; Tail: null; Type: main; Icon: /scalar_gutter_icon.png; Type Icon: null
     PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 4 in lexicalOur.pl
 Lookups: {^CAPTURE_ALL}; Text: {^CAPTURE_ALL}; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
     PsiElement: Built-in: %^CAPTURE_ALL

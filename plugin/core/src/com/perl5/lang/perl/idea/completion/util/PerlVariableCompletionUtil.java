@@ -66,9 +66,10 @@ public class PerlVariableCompletionUtil {
       .withInsertHandler(PerlInsertHandlers.HASH_ELEMENT_INSERT_HANDLER).withTailText("{}");
   }
 
-  private static @NotNull String computeVariableName(@NotNull PerlVariableDeclarationElement element, boolean forceShortMain) {
-    if (element.isGlobalDeclaration() && !(element instanceof PerlBuiltInVariable)) {
-      return StringUtil.notNullize(PerlVariable.adjustName(element.getCanonicalName(), forceShortMain));
+  private static @NotNull String computeVariableName(@NotNull PerlVariableDeclarationElement element,
+                                                     @NotNull PerlVariableCompletionProcessor completionProcessor) {
+    if (!completionProcessor.isLexical() && element.isGlobalDeclaration() && !(element instanceof PerlBuiltInVariable)) {
+      return StringUtil.notNullize(PerlVariable.adjustName(element.getCanonicalName(), completionProcessor.isForceShortMain()));
     }
     return PerlVariable.braceName(element.getVariableName());
   }
@@ -79,7 +80,7 @@ public class PerlVariableCompletionUtil {
   public static boolean processVariableLookupElement(@NotNull PerlVariableDeclarationElement element,
                                                      char sigilToPrepend,
                                                      @NotNull PerlVariableCompletionProcessor completionProcessor) {
-    String variableName = computeVariableName(element, completionProcessor.isForceShortMain());
+    String variableName = computeVariableName(element, completionProcessor);
     if (!completionProcessor.matches(variableName)) {
       return completionProcessor.result();
     }
@@ -87,6 +88,11 @@ public class PerlVariableCompletionUtil {
                           sigilToPrepend + variableName;
     LookupElementBuilder elementBuilder = LookupElementBuilder.create(element, lookupString)
       .withIcon(PerlIconProvider.getIcon(element));
+
+    if (element.isGlobalDeclaration() && completionProcessor.isLexical()) {
+      elementBuilder = elementBuilder.withTypeText(element.getNamespaceName(), true);
+    }
+
     return completionProcessor.process(sigilToPrepend == '_' ? elementBuilder : elementBuilder.withLookupString(variableName));
   }
 
@@ -149,7 +155,12 @@ public class PerlVariableCompletionUtil {
   public static void fillWithLexicalVariables(@NotNull PerlVariableCompletionProcessor variableCompletionProcessor) {
     PsiElement perlVariable = variableCompletionProcessor.getLeafParentElement();
     Processor<PerlVariableDeclarationElement> lookupProcessor = createLexicalLookupProcessor(
-      variableCompletionProcessor);
+      new PerlDelegatingVariableCompletionProcessor(variableCompletionProcessor) {
+        @Override
+        public boolean isLexical() {
+          return true;
+        }
+      });
 
     PsiScopeProcessor processor = (element, __) -> {
       if (!(element instanceof PerlVariableDeclarationElement)) {

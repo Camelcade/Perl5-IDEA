@@ -28,6 +28,8 @@ public interface PerlVariableCompletionProcessor extends PerlCompletionProcessor
 
   boolean isForceShortMain();
 
+  boolean isLexical();
+
   @Override
   @Contract(pure = true)
   @NotNull PerlVariableCompletionProcessor withPrefixMatcher(@NotNull String prefix);
