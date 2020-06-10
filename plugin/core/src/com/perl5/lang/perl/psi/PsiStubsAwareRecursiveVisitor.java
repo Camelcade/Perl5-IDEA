@@ -40,6 +40,7 @@ public class PsiStubsAwareRecursiveVisitor extends PsiRecursiveElementVisitor im
     }
   }
 
+  @Override
   public boolean isStopped() {
     return myStopped;
   }

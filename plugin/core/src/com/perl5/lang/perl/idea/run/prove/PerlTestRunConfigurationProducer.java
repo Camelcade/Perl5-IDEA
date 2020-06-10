@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,6 +29,7 @@ public class PerlTestRunConfigurationProducer extends GenericPerlRunConfiguratio
     return PerlTestRunConfigurationType.getInstance().getConfigurationFactories()[0];
   }
 
+  @Override
   public boolean isOurFile(@NotNull VirtualFile virtualFiles) {
     return virtualFiles.isDirectory() || virtualFiles.getFileType() == PerlFileTypeTest.INSTANCE;
   }

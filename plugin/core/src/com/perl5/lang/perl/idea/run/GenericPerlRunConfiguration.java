@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -284,6 +284,7 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
     return myStartMode;
   }
 
+  @Override
   public void setStartMode(String startMode) {
     this.myStartMode = startMode;
   }
@@ -320,6 +321,7 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
     return myScriptCharset;
   }
 
+  @Override
   public void setScriptCharset(String scriptCharset) {
     this.myScriptCharset = scriptCharset;
   }
@@ -329,6 +331,7 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
     return myIsNonInteractiveModeEnabled;
   }
 
+  @Override
   public void setNonInteractiveModeEnabled(boolean nonInteractiveModeEnabled) {
     myIsNonInteractiveModeEnabled = nonInteractiveModeEnabled;
   }
@@ -338,6 +341,7 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
     return myIsCompileTimeBreakpointsEnabled;
   }
 
+  @Override
   public void setCompileTimeBreakpointsEnabled(boolean compileTimeBreakpointsEnabled) {
     myIsCompileTimeBreakpointsEnabled = compileTimeBreakpointsEnabled;
   }
@@ -422,6 +426,7 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
     return myInitCode;
   }
 
+  @Override
   public void setInitCode(String initCode) {
     this.myInitCode = initCode;
   }

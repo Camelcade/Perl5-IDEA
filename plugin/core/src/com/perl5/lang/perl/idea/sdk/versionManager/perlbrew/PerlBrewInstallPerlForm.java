@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,17 +47,20 @@ class PerlBrewInstallPerlForm extends PerlInstallFormOptions {
     configureThreadsCombobox(myThreadsComboBox);
   }
 
+  @Override
   @NotNull
   public JPanel getRootPanel() {
     return myRootPanel;
   }
 
+  @Override
   @NotNull
   public String getTargetName(@NotNull String distributionId) {
     String userText = StringUtil.notNullize(myNameTextField.getText()).trim();
     return StringUtil.isEmpty(userText) ? distributionId : userText;
   }
 
+  @Override
   @NotNull
   public List<String> buildParametersList() {
     List<String> buildParams = new ArrayList<>();

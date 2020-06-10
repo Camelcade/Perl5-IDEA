@@ -70,6 +70,7 @@ public class PerlIntroduceTarget extends PsiIntroduceTarget<PsiElement> {
     return element != null && myTextRangeInElement.getStartOffset() == 0 && myTextRangeInElement.getEndOffset() == element.getTextLength();
   }
 
+  @Override
   @NotNull
   public TextRange getTextRange() {
     Segment elementRange = super.getTextRange();

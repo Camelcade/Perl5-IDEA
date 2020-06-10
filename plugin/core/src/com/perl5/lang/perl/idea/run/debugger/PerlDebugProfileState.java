@@ -112,11 +112,13 @@ public class PerlDebugProfileState extends PerlDebugProfileStateBase {
     return stringStringMap;
   }
 
+  @Override
   public String mapPathToRemote(@NotNull String localPath) {
     String remotePath = getHostData().getRemotePath(localPath);
     return remotePath == null ? localPath : remotePath;
   }
 
+  @Override
   @NotNull
   public String mapPathToLocal(@NotNull String remotePath) {
     String localPath = getHostData().getLocalPath(remotePath);

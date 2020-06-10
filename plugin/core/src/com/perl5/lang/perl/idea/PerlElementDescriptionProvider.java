@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,6 +42,7 @@ public class PerlElementDescriptionProvider extends PerlElementDescriptionProvid
   }
 
 
+  @Override
   @Nullable
   protected String getShortName(@NotNull PsiElement element) {
     if (element instanceof PsiNamedElement) {
@@ -50,6 +51,7 @@ public class PerlElementDescriptionProvider extends PerlElementDescriptionProvid
     return null;
   }
 
+  @Override
   @Nullable
   protected String getTypeName(@NotNull PsiElement element) {
     if (element instanceof PerlAttributeDefinition) {
@@ -109,6 +111,7 @@ public class PerlElementDescriptionProvider extends PerlElementDescriptionProvid
     return null;
   }
 
+  @Override
   @Nullable
   protected String getLongName(@NotNull PsiElement element) {
     return MessageFormat.format("{0} ''{1}''", UsageViewUtil.getType(element), UsageViewUtil.getShortName(element));

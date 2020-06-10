@@ -42,6 +42,7 @@ public class Perl5RealSdkWrapper implements Perl5SdkWrapper {
     appendSdkString(renderer, mySdk);
   }
 
+  @Override
   @NotNull
   public Sdk getSdk() {
     return mySdk;

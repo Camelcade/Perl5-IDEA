@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,6 +38,7 @@ public interface PerlSimpleRegex extends PerlRegexExpression {
     return children.length == 0 ? null : ObjectUtils.tryCast(children[0], PsiPerlPerlRegex.class);
   }
 
+  @Override
   @Nullable
   PsiPerlPerlRegexModifiers getPerlRegexModifiers();
 }

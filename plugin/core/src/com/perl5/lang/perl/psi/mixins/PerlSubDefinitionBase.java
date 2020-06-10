@@ -135,6 +135,7 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
     return false;
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof PerlVisitor) {
       ((PerlVisitor)visitor).visitPerlSubDefinitionElement(this);
@@ -144,6 +145,7 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
     }
   }
 
+  @Override
   @Nullable
   public PsiPerlBlock getSubDefinitionBody() {
     return PerlBlockOwner.findBlock(this);

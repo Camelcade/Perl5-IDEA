@@ -134,15 +134,19 @@ public abstract class PerlFunctionParametersParserTestCase extends PerlParserTes
   }
 
   public static abstract class FunctionTestCase extends PerlFunctionParametersParserTestCase {
+    @Override
     @Test
     public void testInvocant() {doTest(false);}
 
+    @Override
     @Test
     public void testInvocantWithNamed() {doTest(false);}
 
+    @Override
     @Test
     public void testInvocantWithPositional() {doTest(false);}
 
+    @Override
     @Test
     public void testInvocantWithPositionalNamed() {doTest(false);}
   }
@@ -178,6 +182,7 @@ public abstract class PerlFunctionParametersParserTestCase extends PerlParserTes
       return "method";
     }
 
+    @Override
     @Test
     public void testNoSignatureAttrs() {doTest();}
   }

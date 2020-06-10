@@ -54,6 +54,7 @@ public abstract class PerlSubDefinitionMixin extends PerlSubDefinitionBase imple
     return true;
   }
 
+  @Override
   @Nullable
   protected PsiElement getSignatureContainer() {
     return getSignatureContent();

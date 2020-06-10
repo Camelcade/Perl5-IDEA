@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ import com.intellij.refactoring.RenameRefactoring;
 
 public class RenameRefactoringQueue implements Runnable {
   private final RenameRefactoring[] myRefactoring = {null};
-  private Project myProject;
+  private final Project myProject;
 
   public RenameRefactoringQueue(Project project) {
     myProject = project;
@@ -43,6 +43,7 @@ public class RenameRefactoringQueue implements Runnable {
     }
   }
 
+  @Override
   public void run() {
     if (myRefactoring[0] != null) {
       ApplicationManager.getApplication().invokeLater(myRefactoring[0]::run);

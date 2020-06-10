@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -69,21 +69,25 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes 
     return new PerlMergingLexerAdapter(project);
   }
 
+  @Override
   @NotNull
   public TokenSet getWhitespaceTokens() {
     return WHITE_SPACES;
   }
 
+  @Override
   @NotNull
   public TokenSet getCommentTokens() {
     return COMMENTS;
   }
 
+  @Override
   @NotNull
   public TokenSet getStringLiteralElements() {
     return LITERALS;
   }
 
+  @Override
   @NotNull
   public PsiParser createParser(final Project project) {
     return PerlParserImpl.INSTANCE;
@@ -94,6 +98,7 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes 
     return PerlStubElementTypes.FILE;
   }
 
+  @Override
   public PsiFile createFile(FileViewProvider viewProvider) {
     return new PerlFileImpl(viewProvider);
   }
@@ -103,6 +108,7 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes 
     return SpaceRequirements.MAY;
   }
 
+  @Override
   @NotNull
   public PsiElement createElement(ASTNode node) {
     try {

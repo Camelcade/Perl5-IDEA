@@ -256,6 +256,7 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
     return Result.CONTINUE;
   }
 
+  @Override
   protected boolean shouldShowPopup(char typedChar,
                                     @NotNull Project project,
                                     @NotNull Editor editor,

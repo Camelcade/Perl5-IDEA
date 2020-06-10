@@ -66,18 +66,22 @@ public class PerlVisitor extends PsiPerlVisitor {
     visitExpr(o);
   }
 
+  @Override
   public void visitArrayIndexVariable(@NotNull PsiPerlArrayIndexVariable o) {
     visitPerlVariable(o);
   }
 
+  @Override
   public void visitArrayVariable(@NotNull PsiPerlArrayVariable o) {
     visitPerlVariable(o);
   }
 
+  @Override
   public void visitHashVariable(@NotNull PsiPerlHashVariable o) {
     visitPerlVariable(o);
   }
 
+  @Override
   public void visitScalarVariable(@NotNull PsiPerlScalarVariable o) {
     visitPerlVariable(o);
   }
@@ -170,14 +174,17 @@ public class PerlVisitor extends PsiPerlVisitor {
     visitSubDeclarationElement(o);
   }
 
+  @Override
   public void visitVariableDeclarationGlobal(@NotNull PsiPerlVariableDeclarationGlobal o) {
     visitPerlVariableDeclarationExpr(o);
   }
 
+  @Override
   public void visitVariableDeclarationLexical(@NotNull PsiPerlVariableDeclarationLexical o) {
     visitPerlVariableDeclarationExpr(o);
   }
 
+  @Override
   public void visitVariableDeclarationLocal(@NotNull PsiPerlVariableDeclarationLocal o) {
     visitPerlVariableDeclarationExpr(o);
   }

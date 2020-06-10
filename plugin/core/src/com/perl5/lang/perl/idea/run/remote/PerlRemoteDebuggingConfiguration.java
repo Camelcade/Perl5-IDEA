@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -94,6 +94,7 @@ public class PerlRemoteDebuggingConfiguration extends RunConfigurationBase
     return null;
   }
 
+  @Override
   public String getHostToBind() {
     return debugHost;
   }
@@ -102,6 +103,7 @@ public class PerlRemoteDebuggingConfiguration extends RunConfigurationBase
     this.debugHost = debugHost;
   }
 
+  @Override
   public int getDebugPort() {
     return debugPort;
   }
@@ -110,6 +112,7 @@ public class PerlRemoteDebuggingConfiguration extends RunConfigurationBase
     this.debugPort = debugPort;
   }
 
+  @Override
   public String getRemoteProjectRoot() {
     return remoteProjectRoot;
   }
@@ -118,10 +121,12 @@ public class PerlRemoteDebuggingConfiguration extends RunConfigurationBase
     this.remoteProjectRoot = remoteWorkingDirectory;
   }
 
+  @Override
   public String getScriptCharset() {
     return scriptCharset;
   }
 
+  @Override
   public void setScriptCharset(String scriptCharset) {
     this.scriptCharset = scriptCharset;
   }
@@ -131,6 +136,7 @@ public class PerlRemoteDebuggingConfiguration extends RunConfigurationBase
     return startMode;
   }
 
+  @Override
   public void setStartMode(String startMode) {
     this.startMode = startMode;
   }
@@ -149,6 +155,7 @@ public class PerlRemoteDebuggingConfiguration extends RunConfigurationBase
     return isNonInteractiveModeEnabled;
   }
 
+  @Override
   public void setNonInteractiveModeEnabled(boolean nonInteractiveModeEnabled) {
     isNonInteractiveModeEnabled = nonInteractiveModeEnabled;
   }
@@ -158,6 +165,7 @@ public class PerlRemoteDebuggingConfiguration extends RunConfigurationBase
     return isCompileTimeBreakpointsEnabled;
   }
 
+  @Override
   public void setCompileTimeBreakpointsEnabled(boolean compileTimeBreakpointsEnabled) {
     isCompileTimeBreakpointsEnabled = compileTimeBreakpointsEnabled;
   }
@@ -167,6 +175,7 @@ public class PerlRemoteDebuggingConfiguration extends RunConfigurationBase
     return initCode;
   }
 
+  @Override
   public void setInitCode(String initCode) {
     this.initCode = initCode;
   }

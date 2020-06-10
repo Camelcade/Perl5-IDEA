@@ -37,10 +37,12 @@ public abstract class PerlDebuggingEventBreakpointBase extends PerlDebuggingEven
 
   protected abstract void processBreakPoint(@NotNull XLineBreakpoint<?> breakpoint, XDebugSession session);
 
+  @Override
   public String getPath() {
     return path;
   }
 
+  @Override
   public int getLine() {
     return line;
   }

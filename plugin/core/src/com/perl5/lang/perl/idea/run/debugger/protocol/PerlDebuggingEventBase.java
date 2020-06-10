@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,18 +25,22 @@ public abstract class PerlDebuggingEventBase implements PerlDebuggingEvent {
   private transient XDebugSession myDebugSession;
   private transient PerlDebugThread myDebugThread;
 
+  @Override
   public XDebugSession getDebugSession() {
     return myDebugSession;
   }
 
+  @Override
   public void setDebugSession(XDebugSession debugSession) {
     myDebugSession = debugSession;
   }
 
+  @Override
   public PerlDebugThread getDebugThread() {
     return myDebugThread;
   }
 
+  @Override
   public void setDebugThread(PerlDebugThread debugThread) {
     myDebugThread = debugThread;
   }

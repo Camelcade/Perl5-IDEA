@@ -344,10 +344,12 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
     return getText().getBytes(getVirtualFile().getCharset());
   }
 
+  @Override
   public PsiElement getContext() {
     return fileContext == null ? super.getContext() : fileContext;
   }
 
+  @Override
   public void setFileContext(PsiElement fileContext) {
     this.fileContext = fileContext;
   }

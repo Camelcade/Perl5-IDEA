@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -306,6 +306,7 @@ public class PerlRunAnythingProvider extends RunAnythingProviderBase<List<PerlRu
     return myCompletionGroupName;
   }
 
+  @Override
   @NotNull
   public String getHelpGroupTitle() {
     return myHelpGroupName;
@@ -520,6 +521,7 @@ public class PerlRunAnythingProvider extends RunAnythingProviderBase<List<PerlRu
     /**
      * fixme this should be configurable via xml
      */
+    @Override
     public int getMaxArgumentsNumber() {
       return placeholder != null ? Integer.MAX_VALUE : 0;
     }

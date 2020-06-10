@@ -45,6 +45,7 @@ public abstract class HTMLMasonStubBasedElement<T extends StubElement<?>> extend
     return lastParent == null || processDeclarationsForReal(processor, state, lastParent, place);
   }
 
+  @Override
   public boolean processDeclarationsForReal(@NotNull PsiScopeProcessor processor,
                                             @NotNull ResolveState state,
                                             PsiElement lastParent,

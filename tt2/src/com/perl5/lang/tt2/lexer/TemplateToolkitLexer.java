@@ -23,7 +23,6 @@ import com.perl5.lang.perl.lexer.PerlLexerWithCustomStates;
 import com.perl5.lang.tt2.idea.settings.TemplateToolkitSettings;
 
 import java.io.IOException;
-import java.io.Reader;
 
 
 public class TemplateToolkitLexer extends TemplateToolkitLexerGenerated implements PerlLexerWithCustomStates {
@@ -34,7 +33,7 @@ public class TemplateToolkitLexer extends TemplateToolkitLexerGenerated implemen
   private boolean isEscaped = false;
 
   public TemplateToolkitLexer(Project project) {
-    super((Reader)null);
+    super(null);
     myProject = project;
     mySettings = myProject == null ? null : TemplateToolkitSettings.getInstance(project);
   }
@@ -223,10 +222,12 @@ public class TemplateToolkitLexer extends TemplateToolkitLexerGenerated implemen
     return myProject;
   }
 
+  @Override
   public int getCustomState() {
     return customState;
   }
 
+  @Override
   public void setCustomState(int newState) {
     customState = newState;
   }

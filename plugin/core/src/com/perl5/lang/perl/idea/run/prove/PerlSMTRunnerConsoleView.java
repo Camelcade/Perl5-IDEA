@@ -34,6 +34,7 @@ class PerlSMTRunnerConsoleView extends SMTRunnerConsoleView implements PerlConso
     PerlTerminalExecutionConsole.addFiltersToConsole(project, this);
   }
 
+  @Override
   @NotNull
   public PerlSMTRunnerConsoleView withHostData(@Nullable PerlHostData<?, ?> hostData) {
     myHostData = hostData;

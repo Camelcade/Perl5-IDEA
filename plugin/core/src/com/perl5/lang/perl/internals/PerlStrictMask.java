@@ -57,6 +57,7 @@ public class PerlStrictMask implements Cloneable {
 
   boolean hintReFlags = false;        //#define HINT_RE_FLAGS       	0x02000000 /* re '/xism' pragma */
 
+  @Override
   public PerlStrictMask clone() {
     try {
       return (PerlStrictMask)super.clone();

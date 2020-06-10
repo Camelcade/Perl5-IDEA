@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,21 +46,25 @@ public class PodParserDefinition implements ParserDefinition, PodElementTypes {
     return new PodDebuggingLexerAdapter(project);
   }
 
+  @Override
   @NotNull
   public TokenSet getWhitespaceTokens() {
     return WHITE_SPACES;
   }
 
+  @Override
   @NotNull
   public TokenSet getCommentTokens() {
     return COMMENTS;
   }
 
+  @Override
   @NotNull
   public TokenSet getStringLiteralElements() {
     return TokenSet.EMPTY;
   }
 
+  @Override
   @NotNull
   public PsiParser createParser(final Project project) {
     return new PodParser();
@@ -71,6 +75,7 @@ public class PodParserDefinition implements ParserDefinition, PodElementTypes {
     return FILE;
   }
 
+  @Override
   public PsiFile createFile(FileViewProvider viewProvider) {
     return new PodFileImpl(viewProvider);
   }
@@ -80,6 +85,7 @@ public class PodParserDefinition implements ParserDefinition, PodElementTypes {
     return SpaceRequirements.MAY;
   }
 
+  @Override
   @NotNull
   public PsiElement createElement(ASTNode node) {
     return ((PsiElementProvider)node.getElementType()).getPsiElement(node);

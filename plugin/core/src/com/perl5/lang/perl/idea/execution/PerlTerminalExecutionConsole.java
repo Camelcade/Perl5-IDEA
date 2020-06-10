@@ -39,11 +39,13 @@ public class PerlTerminalExecutionConsole extends TerminalExecutionConsole imple
     addFiltersToConsole(project, this);
   }
 
+  @Override
   @Nullable
   public PerlHostData<?, ?> getHostData() {
     return myHostData;
   }
 
+  @Override
   @NotNull
   public PerlTerminalExecutionConsole withHostData(@Nullable PerlHostData<?, ?> hostData) {
     myHostData = hostData;

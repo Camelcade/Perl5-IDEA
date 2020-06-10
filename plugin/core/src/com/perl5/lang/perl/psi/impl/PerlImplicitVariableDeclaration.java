@@ -205,6 +205,7 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
     return myVariableType;
   }
 
+  @Override
   @NotNull
   public String getVariableName() {
     return myVariableName;
