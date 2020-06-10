@@ -40,8 +40,8 @@ public class MooseParserExtension extends PerlParserExtension implements MooseEl
   protected static final THashMap<IElementType, IElementType> RESERVED_TO_STATEMENT_MAP = new THashMap<>();
   @SuppressWarnings("unchecked")
   protected static final List<Pair<IElementType, TokenSet>> EXTENSION_SET = new ArrayList<>();
-  final static GeneratedParserUtilBase.Parser SUPER_PARSER = (builder_, level_) -> consumeToken(builder_, RESERVED_SUPER);
-  final static GeneratedParserUtilBase.Parser INNER_PARSER = (builder_, level_) -> consumeToken(builder_, RESERVED_INNER);
+  static final GeneratedParserUtilBase.Parser SUPER_PARSER = (builder_, level_) -> consumeToken(builder_, RESERVED_SUPER);
+  static final GeneratedParserUtilBase.Parser INNER_PARSER = (builder_, level_) -> consumeToken(builder_, RESERVED_INNER);
   protected static TokenSet PARSER_TOKEN_SET;
   public static final TokenSet MOOSE_RESERVED_TOKENSET;
 

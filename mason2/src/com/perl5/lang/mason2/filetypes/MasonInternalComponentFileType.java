@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ import javax.swing.*;
 
 
 public class MasonInternalComponentFileType extends MasonTopLevelComponentFileType {
-  public final static MasonInternalComponentFileType INSTANCE = new MasonInternalComponentFileType();
+  public static final MasonInternalComponentFileType INSTANCE = new MasonInternalComponentFileType();
   public static final String INTERNAL_COMPONENT_EXTENSION = "mi";
 
   @NotNull

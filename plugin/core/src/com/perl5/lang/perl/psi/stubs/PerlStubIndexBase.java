@@ -24,7 +24,7 @@ import com.perl5.lang.perl.psi.PerlSubCallHandler;
 
 
 public abstract class PerlStubIndexBase<Psi extends PsiElement> extends StringStubIndexExtension<Psi> {
-  private final static int VERSION = 9;
+  private static final int VERSION = 9;
 
   @Override
   public int getVersion() {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,10 +46,10 @@ public class Mason2ParserImpl extends PerlParserImpl implements MasonParser {
     ));
 
 
-  protected final static TokenSet SIMPLE_MASON_NAMED_BLOCKS;
+  protected static final TokenSet SIMPLE_MASON_NAMED_BLOCKS;
 
-  protected final static THashMap<IElementType, IElementType> RESERVED_OPENER_TO_CLOSER_MAP = new THashMap<>();
-  protected final static THashMap<IElementType, IElementType> RESERVED_TO_STATEMENT_MAP = new THashMap<>();
+  protected static final THashMap<IElementType, IElementType> RESERVED_OPENER_TO_CLOSER_MAP = new THashMap<>();
+  protected static final THashMap<IElementType, IElementType> RESERVED_TO_STATEMENT_MAP = new THashMap<>();
 
   static {
     RESERVED_TO_STATEMENT_MAP.put(MASON_AROUND_OPENER, MASON_AROUND_MODIFIER);

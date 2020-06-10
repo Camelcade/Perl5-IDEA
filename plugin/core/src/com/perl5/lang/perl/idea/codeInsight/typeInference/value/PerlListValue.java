@@ -104,7 +104,7 @@ abstract class PerlListValue extends PerlValue {
     return result;
   }
 
-  protected static abstract class Builder<Self extends PerlListValue.Builder<?>> {
+  protected abstract static class Builder<Self extends PerlListValue.Builder<?>> {
     protected final List<PerlValue> myElements = new ArrayList<>();
 
     protected Builder() {

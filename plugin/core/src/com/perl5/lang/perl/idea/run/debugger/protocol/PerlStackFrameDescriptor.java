@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ package com.perl5.lang.perl.idea.run.debugger.protocol;
 
 
 public class PerlStackFrameDescriptor {
-  public transient static final String EVAL_PREFIX = "(eval ";
+  public static final transient String EVAL_PREFIX = "(eval ";
 
   PerlLoadedFileDescriptor file;
   private int line;

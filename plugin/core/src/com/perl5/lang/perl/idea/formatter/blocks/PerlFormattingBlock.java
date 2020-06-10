@@ -43,7 +43,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
   /**
    * Composite elements that should be treated as leaf elements, no children
    */
-  public final static TokenSet LEAF_ELEMENTS =
+  public static final TokenSet LEAF_ELEMENTS =
     TokenSet.create(
       POD,
       PerlParserUtil.DUMMY_BLOCK

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import java.util.List;
 
 
 public abstract class PerlImportsCollector implements PerlNamespaceEntityProcessor<PerlExportDescriptor> {
-  final protected List<PerlExportDescriptor> myResult;
+  protected final List<PerlExportDescriptor> myResult;
 
   public PerlImportsCollector() {
     myResult = new ArrayList<>();

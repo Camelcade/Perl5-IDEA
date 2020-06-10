@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ import org.jetbrains.annotations.Nullable;
  * Third level of lexer adapter merges necessary tokens
  */
 public class PerlMergingLexerAdapter extends MergingLexerAdapter implements PerlElementTypes {
-  public final static TokenSet TOKENS_TO_MERGE = TokenSet.create(
+  public static final TokenSet TOKENS_TO_MERGE = TokenSet.create(
     STRING_CONTENT, REGEX_TOKEN, STRING_CONTENT_QQ, STRING_CONTENT_XQ, TokenType.WHITE_SPACE, COMMENT_BLOCK
   );
 

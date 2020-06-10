@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ import javax.swing.*;
 
 
 public class MasonPurePerlComponentFileType extends PurePerlFileType {
-  public final static MasonPurePerlComponentFileType INSTANCE = new MasonPurePerlComponentFileType();
+  public static final MasonPurePerlComponentFileType INSTANCE = new MasonPurePerlComponentFileType();
   public static final String PURE_PERL_COMPONENT_EXTENSION = "mp";
 
   public MasonPurePerlComponentFileType() {

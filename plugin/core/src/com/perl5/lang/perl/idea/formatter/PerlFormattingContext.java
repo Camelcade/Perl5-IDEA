@@ -97,7 +97,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
   private final SpacingBuilder mySpacingBuilder;
   private final List<TextRange> myHeredocRangesList = new ArrayList<>();
 
-  private final static MultiMap<IElementType, IElementType> OPERATOR_COLLISIONS_MAP = new MultiMap<>();
+  private static final MultiMap<IElementType, IElementType> OPERATOR_COLLISIONS_MAP = new MultiMap<>();
 
   static {
     OPERATOR_COLLISIONS_MAP.putValue(OPERATOR_PLUS_PLUS, OPERATOR_PLUS);

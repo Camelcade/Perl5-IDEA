@@ -133,7 +133,7 @@ public abstract class PerlFunctionParametersParserTestCase extends PerlParserTes
     }
   }
 
-  public static abstract class FunctionTestCase extends PerlFunctionParametersParserTestCase {
+  public abstract static class FunctionTestCase extends PerlFunctionParametersParserTestCase {
     @Override
     @Test
     public void testInvocant() {doTest(false);}

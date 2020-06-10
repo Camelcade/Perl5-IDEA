@@ -28,7 +28,7 @@ import java.util.Objects;
 
 
 public abstract class PerlCachingReference<T extends PsiElement> extends PsiPolyVariantReferenceBase<T> {
-  private final static ResolveCache.PolyVariantResolver<PerlCachingReference<?>> RESOLVER = PerlCachingReference::resolveInner;
+  private static final ResolveCache.PolyVariantResolver<PerlCachingReference<?>> RESOLVER = PerlCachingReference::resolveInner;
 
   private final TextRange myExplicitRange;
 

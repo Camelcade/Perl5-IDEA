@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ import com.perl5.lang.perl.lexer.adapters.PerlTemplatingMergingLexerAdapter;
 
 
 public class EmbeddedPerlLexerAdapter extends PerlTemplatingMergingLexerAdapter implements EmbeddedPerlElementTypes {
-  private final static TokenSet TOKENS_TO_MERGE = TokenSet.orSet(
+  private static final TokenSet TOKENS_TO_MERGE = TokenSet.orSet(
     PerlMergingLexerAdapter.TOKENS_TO_MERGE,
     TokenSet.create(EMBED_TEMPLATE_BLOCK_HTML)
   );

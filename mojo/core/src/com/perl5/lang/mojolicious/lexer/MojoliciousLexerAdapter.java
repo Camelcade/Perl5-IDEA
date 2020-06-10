@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ import com.perl5.lang.perl.lexer.adapters.PerlTemplatingMergingLexerAdapter;
  * Copy-pasted FlexAdapter because of private variables and no setters
  */
 public class MojoliciousLexerAdapter extends PerlTemplatingMergingLexerAdapter implements MojoliciousElementTypes {
-  private final static TokenSet TOKENS_TO_MERGE = TokenSet.orSet(
+  private static final TokenSet TOKENS_TO_MERGE = TokenSet.orSet(
     PerlMergingLexerAdapter.TOKENS_TO_MERGE,
     TokenSet.create(MOJO_TEMPLATE_BLOCK_HTML)
   );

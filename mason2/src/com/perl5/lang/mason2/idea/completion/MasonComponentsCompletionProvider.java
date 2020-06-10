@@ -104,7 +104,7 @@ public class MasonComponentsCompletionProvider extends PerlCompletionProvider {
     }
   }
 
-  public static abstract class MasonRootsProcessor implements Processor<VirtualFile> {
+  public abstract static class MasonRootsProcessor implements Processor<VirtualFile> {
     private final VirtualFile myRoot;
 
     public MasonRootsProcessor(VirtualFile myRoot) {

@@ -234,7 +234,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   private TextAttributes myReadAttributes;
   private TextAttributes myWriteAttributes;
   private Perl5CodeInsightSettings myCodeInsightSettings;
-  private final static boolean ENABLE_SVG_GENERATION = Boolean.parseBoolean(System.getenv("CAMELCADE_GENERATE_SVG"));
+  private static final boolean ENABLE_SVG_GENERATION = Boolean.parseBoolean(System.getenv("CAMELCADE_GENERATE_SVG"));
   private PerlSharedSettings mySharedSettings;
   private PerlLocalSettings myLocalSettings;
   private PerlInjectionMarkersService myInjectionMarkersService;

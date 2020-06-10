@@ -979,7 +979,7 @@ public class PerlPsiUtil implements PerlElementTypes {
     return stubElement;
   }
 
-  static public abstract class HeredocProcessor implements Processor<PsiElement> {
+  public abstract static class HeredocProcessor implements Processor<PsiElement> {
     protected final int lineEndOffset;
 
     public HeredocProcessor(int lineEndOffset) {
