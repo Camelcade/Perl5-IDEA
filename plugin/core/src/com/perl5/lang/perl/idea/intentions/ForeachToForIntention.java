@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -59,7 +59,11 @@ public class ForeachToForIntention extends PsiElementBaseIntentionAction {
 
   @Override
   public boolean isAvailable(@NotNull Project project, Editor editor, @NotNull PsiElement element) {
-    return getForeachStatement(element) != null;
+    PerlForeachCompound foreachStatement = getForeachStatement(element);
+    if (foreachStatement == null) {
+      return false;
+    }
+    return foreachStatement.getConditionExpr() != null;
   }
 
   @Override
@@ -74,6 +78,7 @@ public class ForeachToForIntention extends PsiElementBaseIntentionAction {
     assert variableDeclaration instanceof PsiPerlVariableDeclarationLexical;
 
     PsiPerlExpr iterableList = forCompound.getConditionExpr();
+    assert iterableList != null;
 
     PsiPerlBlock block = forCompound.getBlock();
     assert block != null;

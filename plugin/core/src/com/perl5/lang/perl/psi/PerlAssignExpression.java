@@ -163,9 +163,6 @@ public interface PerlAssignExpression extends PsiPerlExpr {
 
     TextRange elementTextRange = element.getTextRange();
     PsiElement container = ContainerUtil.find(assignExpression.getChildren(), it -> it.getTextRange().contains(elementTextRange));
-    if (container == null) {
-      return null;
-    }
 
     if (container.equals(element)) {
       return assignExpression;

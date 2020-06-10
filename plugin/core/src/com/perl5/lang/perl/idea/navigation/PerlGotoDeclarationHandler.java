@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -90,7 +90,7 @@ public class PerlGotoDeclarationHandler implements GotoDeclarationHandler {
         String fileName = Objects.requireNonNull(PerlString.getContentFileName(continuosText));
 
         for (String file : FilenameIndex.getAllFilenames(project)) {
-          if (file != null && file.contains(fileName)) {
+          if (file.contains(fileName)) {
             // fixme somehow if includeDirectories is true - no files found
             for (PsiFileSystemItem fileItem : FilenameIndex.getFilesByName(project, file, GlobalSearchScope.allScope(project))) {
               String canonicalPath = fileItem.getVirtualFile().getCanonicalPath();

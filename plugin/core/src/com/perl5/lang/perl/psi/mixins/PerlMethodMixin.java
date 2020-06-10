@@ -44,6 +44,7 @@ public abstract class PerlMethodMixin extends PerlCompositeElementImpl implement
     super(node);
   }
 
+  @Override
   @Nullable
   public String getExplicitNamespaceName() {
     PerlNamespaceElement namespaceElement = getNamespaceElement();
@@ -83,7 +84,7 @@ public abstract class PerlMethodMixin extends PerlCompositeElementImpl implement
     if (isNestedCall && parentElement.getPrevSibling() != null) {
       boolean isSuper = PerlPackageUtil.isSUPER(explicitNamespaceName);
       if (hasExplicitNamespace && !isSuper) { // awkward $var->Foo::Bar::method->
-        return new PerlCallStaticValue(PerlScalarValue.create(explicitNamespaceName), subNameValue, callArguments, hasExplicitNamespace);
+        return new PerlCallStaticValue(PerlScalarValue.create(explicitNamespaceName), subNameValue, callArguments, true);
       }
       String superContext = isSuper ? PerlPackageUtil.getContextNamespaceName(this): null;
       if (!(derefExpression instanceof PerlDerefExpression)) {
@@ -102,11 +103,11 @@ public abstract class PerlMethodMixin extends PerlCompositeElementImpl implement
       return PerlCallObjectValue.create(PerlScalarValue.create(explicitNamespaceName), subNameValue, callArguments, null);
     }
     else if (hasExplicitNamespace) {
-      return new PerlCallStaticValue(PerlScalarValue.create(explicitNamespaceName), subNameValue, callArguments, hasExplicitNamespace);
+      return new PerlCallStaticValue(PerlScalarValue.create(explicitNamespaceName), subNameValue, callArguments, true);
     }
     else {
       return new PerlCallStaticValue(
-        PerlScalarValue.create(PerlPackageUtil.getContextNamespaceName(this)), subNameValue, callArguments, hasExplicitNamespace);
+        PerlScalarValue.create(PerlPackageUtil.getContextNamespaceName(this)), subNameValue, callArguments, false);
     }
   }
 

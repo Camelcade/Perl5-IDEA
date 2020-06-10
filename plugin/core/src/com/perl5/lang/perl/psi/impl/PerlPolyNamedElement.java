@@ -33,6 +33,7 @@ import com.perl5.lang.perl.psi.PerlStubBasedPsiElementBase;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -118,6 +119,7 @@ public abstract class PerlPolyNamedElement<Stub extends PerlPolyNamedElementStub
   /**
    * Checks if we can treat this element as text identifier. Atm: no interpolation, no XQ strings
    */
+  @Contract("null->false")
   public boolean isAcceptableIdentifierElement(@Nullable PsiElement identifierElement) {
     if (identifierElement == null) {
       return false;

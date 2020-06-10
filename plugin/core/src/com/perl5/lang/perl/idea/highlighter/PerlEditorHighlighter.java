@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,6 +27,8 @@ import com.perl5.lang.pod.filetypes.PodFileType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
+
 
 public class PerlEditorHighlighter extends LayeredLexerEditorHighlighter implements PerlElementTypes {
   public PerlEditorHighlighter(@Nullable final Project project,
@@ -34,7 +36,7 @@ public class PerlEditorHighlighter extends LayeredLexerEditorHighlighter impleme
                                @NotNull final EditorColorsScheme colors) {
     super(new PerlSyntaxHighlighter(project), colors);
     registerLayer(POD, new LayerDescriptor(
-      SyntaxHighlighterFactory.getSyntaxHighlighter(PodFileType.INSTANCE, project, virtualFile),
+      Objects.requireNonNull(SyntaxHighlighterFactory.getSyntaxHighlighter(PodFileType.INSTANCE, project, virtualFile)),
       ""
     ));
   }

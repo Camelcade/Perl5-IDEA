@@ -26,7 +26,6 @@ import com.intellij.openapi.util.io.FileUtil;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeService;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
@@ -60,10 +59,9 @@ public class PerlPluginUtil {
     return PerlProjectManager.getInstance(project);
   }
 
-  @Nullable
+  @NotNull
   public static String getPluginVersion() {
-    IdeaPluginDescriptor plugin = getPlugin();
-    return plugin.getVersion();
+    return Objects.requireNonNull(getPlugin().getVersion());
   }
 
   @NotNull

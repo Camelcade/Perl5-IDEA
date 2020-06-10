@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +23,8 @@ import com.intellij.openapi.project.Project;
 import com.perl5.PerlIcons;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 
 public class PerlRemoteDebuggingConfigurationType extends ConfigurationTypeBase {
   public PerlRemoteDebuggingConfigurationType() {
@@ -45,6 +47,6 @@ public class PerlRemoteDebuggingConfigurationType extends ConfigurationTypeBase 
 
   @NotNull
   public static PerlRemoteDebuggingConfigurationType getInstance() {
-    return CONFIGURATION_TYPE_EP.findExtension(PerlRemoteDebuggingConfigurationType.class);
+    return Objects.requireNonNull(CONFIGURATION_TYPE_EP.findExtension(PerlRemoteDebuggingConfigurationType.class));
   }
 }

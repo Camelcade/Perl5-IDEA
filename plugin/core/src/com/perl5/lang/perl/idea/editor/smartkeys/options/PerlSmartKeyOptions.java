@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,15 +28,16 @@ import javax.swing.*;
 public class PerlSmartKeyOptions extends BeanConfigurable<Perl5CodeInsightSettings> implements UnnamedConfigurable {
   public PerlSmartKeyOptions() {
     super(Perl5CodeInsightSettings.getInstance());
+    Perl5CodeInsightSettings settings = Perl5CodeInsightSettings.getInstance();
     checkBox(PerlBundle.message("perl.options.auto.heredoc"),
-             () -> getInstance().HEREDOC_AUTO_INSERTION,
-             value -> getInstance().HEREDOC_AUTO_INSERTION = value);
+             () -> settings.HEREDOC_AUTO_INSERTION,
+             value -> settings.HEREDOC_AUTO_INSERTION = value);
     checkBox(PerlBundle.message("perl.options.auto.colon"),
-             () -> getInstance().AUTO_INSERT_COLON,
-             value -> getInstance().AUTO_INSERT_COLON = value);
+             () -> settings.AUTO_INSERT_COLON,
+             value -> settings.AUTO_INSERT_COLON = value);
     checkBox(PerlBundle.message("perl.options.smart.comma.sequence"),
-             () -> getInstance().SMART_COMMA_SEQUENCE_TYPING,
-             value -> getInstance().SMART_COMMA_SEQUENCE_TYPING = value);
+             () -> settings.SMART_COMMA_SEQUENCE_TYPING,
+             value -> settings.SMART_COMMA_SEQUENCE_TYPING = value);
   }
 
   @Override

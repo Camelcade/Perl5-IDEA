@@ -29,6 +29,8 @@ import com.perl5.lang.pod.filetypes.PodFileType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
+
 
 public class MojoliciousHighlighter extends LayeredLexerEditorHighlighter implements MojoliciousElementTypes {
   public MojoliciousHighlighter(@Nullable final Project project,
@@ -36,9 +38,9 @@ public class MojoliciousHighlighter extends LayeredLexerEditorHighlighter implem
                                 @NotNull final EditorColorsScheme colors) {
     super(new MojoliciousSyntaxHighlighter(project), colors);
     registerLayer(MOJO_TEMPLATE_BLOCK_HTML, new LayerDescriptor(
-      SyntaxHighlighterFactory.getSyntaxHighlighter(HtmlFileType.INSTANCE, project, virtualFile), ""));
+      Objects.requireNonNull(SyntaxHighlighterFactory.getSyntaxHighlighter(HtmlFileType.INSTANCE, project, virtualFile)), ""));
     registerLayer(PerlElementTypes.POD, new LayerDescriptor(
-      SyntaxHighlighterFactory.getSyntaxHighlighter(PodFileType.INSTANCE, project, virtualFile),
+      Objects.requireNonNull(SyntaxHighlighterFactory.getSyntaxHighlighter(PodFileType.INSTANCE, project, virtualFile)),
       ""
     ));
   }

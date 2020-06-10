@@ -63,7 +63,7 @@ public class PlenvAdapter extends PerlVersionManagerAdapter {
   public void installPerl(@Nullable Project project,
                           @NotNull String distributionId,
                           @NotNull List<String> params,
-                          @Nullable ProcessListener processListener) {
+                          @NotNull ProcessListener processListener) {
     runInstallInConsole(
       new PerlCommandLine(getVersionManagerPath(), PLENV_INSTALL, distributionId)
         .withParameters(params)

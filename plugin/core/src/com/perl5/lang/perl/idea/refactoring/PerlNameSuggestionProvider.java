@@ -244,7 +244,7 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
                                                resultString);
     }
     else if (expressionType == DEREF_EXPR) {
-      recommendation = suggestAndGetForDereference(expression, result, recommendation);
+      recommendation = suggestAndGetForDereference(expression, result, null);
     }
     else if (expressionType == GREP_EXPR) {
       recommendation = suggestAndGetGrepMapSortNames(expression, GREPPED, result);
@@ -256,7 +256,7 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
       recommendation = suggestAndGetGrepMapSortNames(expression, SORTED, result);
     }
     else if (expressionType == SUB_CALL) {
-      recommendation = suggestAndGetForCall((PerlSubCallElement)expression, result, recommendation);
+      recommendation = suggestAndGetForCall((PerlSubCallElement)expression, result, null);
     }
     else if (expressionType == SUB_EXPR) {
       result.addAll(BASE_ANON_SUB_NAMES);
@@ -594,9 +594,10 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
     getInstance().suggestAndAddRecommendedName((PsiElement)variableDeclarationElement, null, result);
   }
 
+  @Contract("null->null")
   @Nullable
-  private static String join(@NotNull String... source) {
-    return join(Arrays.asList(source));
+  private static String join(@Nullable String @Nullable ... source) {
+    return source == null ? null : join(Arrays.asList(source));
   }
 
   @Nullable
@@ -665,7 +666,7 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
                                                 @Nullable String recommendedName,
                                                 @NotNull Set<String> names) {
     if (names.isEmpty() && recommendedName == null) {
-      return recommendedName;
+      return null;
     }
     Set<String> existingNames = collectExistingNames(contextElement, variableType);
     Function<String, String> fun = originalName -> {

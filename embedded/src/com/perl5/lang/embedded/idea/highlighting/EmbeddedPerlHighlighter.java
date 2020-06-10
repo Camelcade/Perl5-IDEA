@@ -28,6 +28,8 @@ import com.perl5.lang.pod.filetypes.PodFileType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
+
 
 public class EmbeddedPerlHighlighter extends LayeredLexerEditorHighlighter implements EmbeddedPerlElementTypes {
   public EmbeddedPerlHighlighter(@Nullable final Project project,
@@ -35,9 +37,9 @@ public class EmbeddedPerlHighlighter extends LayeredLexerEditorHighlighter imple
                                  @NotNull final EditorColorsScheme colors) {
     super(new EmbeddedPerlSyntaxHighlighter(project), colors);
     registerLayer(EMBED_TEMPLATE_BLOCK_HTML, new LayerDescriptor(
-      SyntaxHighlighterFactory.getSyntaxHighlighter(HtmlFileType.INSTANCE, project, virtualFile), ""));
+      Objects.requireNonNull(SyntaxHighlighterFactory.getSyntaxHighlighter(HtmlFileType.INSTANCE, project, virtualFile)), ""));
     registerLayer(POD, new LayerDescriptor(
-      SyntaxHighlighterFactory.getSyntaxHighlighter(PodFileType.INSTANCE, project, virtualFile),
+      Objects.requireNonNull(SyntaxHighlighterFactory.getSyntaxHighlighter(PodFileType.INSTANCE, project, virtualFile)),
       ""
     ));
   }

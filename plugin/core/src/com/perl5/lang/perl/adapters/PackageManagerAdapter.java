@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -80,8 +80,12 @@ public abstract class PackageManagerAdapter {
     if (script == null) {
       return;
     }
+    String remotePath = PerlHostData.notNullFrom(mySdk).getRemotePath(script.getPath());
+    if (remotePath == null) {
+      return;
+    }
     PerlRunUtil.runInConsole(
-      new PerlCommandLine(PerlHostData.notNullFrom(mySdk).getRemotePath(script.getPath()))
+      new PerlCommandLine(remotePath)
         .withParameters(getInstallParameters(packageNames))
         .withSdk(getSdk())
         .withProject(getProject())

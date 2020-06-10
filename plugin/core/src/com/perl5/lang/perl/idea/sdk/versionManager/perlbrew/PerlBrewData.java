@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ import com.perl5.lang.perl.adapters.CpanminusAdapter;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlRealVersionManagerData;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -90,6 +91,7 @@ class PerlBrewData extends PerlRealVersionManagerData<PerlBrewData, PerlBrewHand
     return this;
   }
 
+  @Contract("null->null")
   @Nullable
   public static PerlBrewData from(@Nullable Sdk sdk) {
     return ObjectUtils.tryCast(PerlVersionManagerData.from(sdk), PerlBrewData.class);

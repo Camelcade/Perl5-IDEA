@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -57,7 +57,6 @@ public class MasonNamespaceElementType extends PerlNamespaceDefinitionElementTyp
   @Override
   public void indexStub(@NotNull PerlNamespaceDefinitionStub stub, @NotNull IndexSink sink) {
     String name = stub.getNamespaceName();
-    assert name != null;
     sink.occurrence(MasonNamespaceDefitnitionsStubIndex.KEY, name);
 
     // fixme this is kinda hack to make MRO work. But, it should be smarter

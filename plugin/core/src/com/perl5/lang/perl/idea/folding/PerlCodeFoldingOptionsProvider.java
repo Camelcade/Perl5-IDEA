@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,30 +19,31 @@ package com.perl5.lang.perl.idea.folding;
 import com.intellij.application.options.editor.CodeFoldingOptionsProvider;
 import com.intellij.openapi.options.BeanConfigurable;
 import com.perl5.PerlBundle;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 
 
 public class PerlCodeFoldingOptionsProvider extends BeanConfigurable<PerlFoldingSettings> implements CodeFoldingOptionsProvider {
-  public PerlCodeFoldingOptionsProvider(PerlFoldingSettings beanInstance) {
+  public PerlCodeFoldingOptionsProvider(@NotNull PerlFoldingSettings beanInstance) {
     super(beanInstance);
 
     checkBox(PerlBundle.message("perl.options.fold.comments"),
-             () -> getInstance().COLLAPSE_COMMENTS, value -> getInstance().COLLAPSE_COMMENTS = value);
+             () -> beanInstance.COLLAPSE_COMMENTS, value -> beanInstance.COLLAPSE_COMMENTS = value);
     checkBox(PerlBundle.message("perl.options.fold.constants"),
-             () -> getInstance().COLLAPSE_CONSTANT_BLOCKS, value -> getInstance().COLLAPSE_CONSTANT_BLOCKS = value);
+             () -> beanInstance.COLLAPSE_CONSTANT_BLOCKS, value -> beanInstance.COLLAPSE_CONSTANT_BLOCKS = value);
     checkBox(PerlBundle.message("perl.options.fold.arrays"),
-             () -> getInstance().COLLAPSE_ANON_ARRAYS, value -> getInstance().COLLAPSE_ANON_ARRAYS = value);
+             () -> beanInstance.COLLAPSE_ANON_ARRAYS, value -> beanInstance.COLLAPSE_ANON_ARRAYS = value);
     checkBox(PerlBundle.message("perl.options.fold.hashes"),
-             () -> getInstance().COLLAPSE_ANON_HASHES, value -> getInstance().COLLAPSE_ANON_HASHES = value);
+             () -> beanInstance.COLLAPSE_ANON_HASHES, value -> beanInstance.COLLAPSE_ANON_HASHES = value);
     checkBox(PerlBundle.message("perl.options.fold.parens"),
-             () -> getInstance().COLLAPSE_PARENTHESISED, value -> getInstance().COLLAPSE_PARENTHESISED = value);
+             () -> beanInstance.COLLAPSE_PARENTHESISED, value -> beanInstance.COLLAPSE_PARENTHESISED = value);
     checkBox(PerlBundle.message("perl.options.fold.heredocs"),
-             () -> getInstance().COLLAPSE_HEREDOCS, value -> getInstance().COLLAPSE_HEREDOCS = value);
+             () -> beanInstance.COLLAPSE_HEREDOCS, value -> beanInstance.COLLAPSE_HEREDOCS = value);
     checkBox(PerlBundle.message("perl.options.fold.templates"),
-             () -> getInstance().COLLAPSE_TEMPLATES, value -> getInstance().COLLAPSE_TEMPLATES = value);
+             () -> beanInstance.COLLAPSE_TEMPLATES, value -> beanInstance.COLLAPSE_TEMPLATES = value);
     checkBox(PerlBundle.message("perl.options.fold.qw"),
-             () -> getInstance().COLLAPSE_QW, value -> getInstance().COLLAPSE_QW = value);
+             () -> beanInstance.COLLAPSE_QW, value -> beanInstance.COLLAPSE_QW = value);
   }
 
   @Override

@@ -109,12 +109,12 @@ public abstract class PerlVersionManagerAdapter {
    * @param project         context project
    * @param distributionId  perl to install
    * @param params          additional params
-   * @param processListener optional process listener
+   * @param processListener process listener
    */
   public abstract void installPerl(@Nullable Project project,
                                    @NotNull String distributionId,
                                    @NotNull List<String> params,
-                                   @Nullable ProcessListener processListener);
+                                   @NotNull ProcessListener processListener);
 
   /**
    * @return list of installed perl distributions

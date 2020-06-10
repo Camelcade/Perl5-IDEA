@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,6 +27,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Synthetic block for wrapping group of other blocks
@@ -47,7 +48,7 @@ public class PerlSyntheticBlock implements PerlAstBlock {
   @Nullable
   private Indent myIndent;
   @NotNull
-  private PerlAstBlock myRealBlock;
+  private final PerlAstBlock myRealBlock;
 
   public PerlSyntheticBlock(@NotNull PerlAstBlock realBlock,
                             @NotNull List<Block> subBlocks,
@@ -78,7 +79,7 @@ public class PerlSyntheticBlock implements PerlAstBlock {
   @NotNull
   @Override
   public ASTNode getNode() {
-    return getRealBlock().getNode();
+    return Objects.requireNonNull(getRealBlock().getNode());
   }
 
   @NotNull

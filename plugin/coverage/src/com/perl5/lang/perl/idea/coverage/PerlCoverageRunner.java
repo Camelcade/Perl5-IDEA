@@ -106,11 +106,21 @@ public class PerlCoverageRunner extends CoverageRunner {
         Collections.emptyList());
 
       if (commandLine == null) {
-        return null; // fixme should be a notification
+        LOG.warn("Unable to create a command line: " +
+                 " project: " + project +
+                 "; sdk:" + effectiveSdk +
+                 "; coverageFile: " + coverFile);
+        return null;
+      }
+
+      String remotePath = hostData.getRemotePath(sessionDataFile.getAbsolutePath());
+      if (StringUtil.isEmpty(remotePath)) {
+        LOG.warn("Unable to map remote path for: " + sessionDataFile.getAbsolutePath() + " in " + hostData);
+        return null;
       }
 
       commandLine
-        .addParameters("--silent", "--nosummary", "-report", "camelcade", hostData.getRemotePath(sessionDataFile.getAbsolutePath()));
+        .addParameters("--silent", "--nosummary", "-report", "camelcade", remotePath);
       commandLine.withSdk(effectiveSdk);
       commandLine.withProject(project);
 

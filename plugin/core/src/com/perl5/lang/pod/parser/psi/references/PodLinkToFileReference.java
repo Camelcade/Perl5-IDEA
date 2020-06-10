@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -60,15 +60,14 @@ public class PodLinkToFileReference extends PerlCachingReference<PodFormatterL> 
     if (descriptor != null) {
       String currentName = descriptor.getName();
 
-      if (StringUtil.isNotEmpty(currentName) && newElementName.endsWith("." + PerlFileTypePackage.EXTENSION) ||
-          newElementName.endsWith("." + PodFileType.EXTENSION)) {
+      if (StringUtil.isNotEmpty(currentName) &&
+          (newElementName.endsWith("." + PerlFileTypePackage.EXTENSION) || newElementName.endsWith("." + PodFileType.EXTENSION))) {
         String[] nameChunks = currentName.split(PerlPackageUtil.NAMESPACE_SEPARATOR);
         nameChunks[nameChunks.length - 1] = newElementName.replaceFirst(PodFileUtil.PM_OR_POD_EXTENSION_PATTERN, "");
         newElementName = StringUtils.join(nameChunks, PerlPackageUtil.NAMESPACE_SEPARATOR);
 
         return super.handleElementRename(newElementName);
       }
-      //			throw new IncorrectOperationException("Can't bind package use/require to a non-pm file: " + newElementName);
     }
     return myElement;
   }

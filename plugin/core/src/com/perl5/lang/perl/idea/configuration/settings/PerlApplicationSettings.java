@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -53,10 +53,8 @@ public class PerlApplicationSettings implements PersistentStateComponent<PerlApp
 
   private void updateVersion() {
     String newVersion = PerlPluginUtil.getPluginVersion();
-    if (newVersion != null) {
-      pluginVersion = newVersion;
-      popupShown = false;
-    }
+    pluginVersion = newVersion;
+    popupShown = false;
   }
 
   public void setAnnounceShown() {

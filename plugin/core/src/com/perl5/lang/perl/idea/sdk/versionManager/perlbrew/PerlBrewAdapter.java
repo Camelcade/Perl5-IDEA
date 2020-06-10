@@ -66,6 +66,7 @@ public class PerlBrewAdapter extends PerlVersionManagerAdapter {
   /**
    * @see PerlBrewData#patchCommandLine(com.perl5.lang.perl.idea.execution.PerlCommandLine)
    */
+  @Override
   @Nullable
   protected List<String> execWith(@NotNull String distributionId, @NotNull String... commands) {
     List<String> commandsList = ContainerUtil.newArrayList(PERLBREW_EXEC, PERLBREW_QUIET, PERLBREW_WITH, distributionId);
@@ -95,6 +96,7 @@ public class PerlBrewAdapter extends PerlVersionManagerAdapter {
   /**
    * @return list of {@code perlbrew list} items trimmed or null if error happened
    */
+  @Override
   @Nullable
   protected List<String> getInstalledDistributionsList() {
     return parseInstalledDistributionsList(getOutput(PERLBREW_LIST));
@@ -107,10 +109,11 @@ public class PerlBrewAdapter extends PerlVersionManagerAdapter {
     return parseInstallableDistributionsList(rawAvailable);
   }
 
+  @Override
   public void installPerl(@Nullable Project project,
                           @NotNull String distributionId,
                           @NotNull List<String> params,
-                          @Nullable ProcessListener processListener) {
+                          @NotNull ProcessListener processListener) {
     runInstallInConsole(
       new PerlCommandLine(getVersionManagerPath(), PERLBREW_INSTALL, PERLBREW_VERBOSE, distributionId)
         .withParameters(params)

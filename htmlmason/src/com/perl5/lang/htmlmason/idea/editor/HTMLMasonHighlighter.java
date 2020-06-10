@@ -30,6 +30,8 @@ import com.perl5.lang.pod.filetypes.PodFileType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
+
 
 public class HTMLMasonHighlighter extends LayeredLexerEditorHighlighter implements HTMLMasonElementTypes {
   public HTMLMasonHighlighter(@Nullable final Project project,
@@ -37,9 +39,9 @@ public class HTMLMasonHighlighter extends LayeredLexerEditorHighlighter implemen
                               @NotNull final EditorColorsScheme colors) {
     super(new HTMLMasonSyntaxHighlighter(project), colors);
     registerLayer(HTML_MASON_TEMPLATE_BLOCK_HTML, new LayerDescriptor(
-      SyntaxHighlighterFactory.getSyntaxHighlighter(HtmlFileType.INSTANCE, project, virtualFile), ""));
+      Objects.requireNonNull(SyntaxHighlighterFactory.getSyntaxHighlighter(HtmlFileType.INSTANCE, project, virtualFile)), ""));
     registerLayer(PerlElementTypes.POD, new LayerDescriptor(
-      SyntaxHighlighterFactory.getSyntaxHighlighter(PodFileType.INSTANCE, project, virtualFile),
+      Objects.requireNonNull(SyntaxHighlighterFactory.getSyntaxHighlighter(PodFileType.INSTANCE, project, virtualFile)),
       ""
     ));
   }

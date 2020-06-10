@@ -40,6 +40,7 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 public abstract class PerlConfigurationEditorBase<Settings extends PerlDebugOptions> extends SettingsEditor<Settings> {
@@ -67,7 +68,7 @@ public abstract class PerlConfigurationEditorBase<Settings extends PerlDebugOpti
   @Override
   protected void applyEditorTo(@NotNull Settings perlConfiguration) throws ConfigurationException {
     perlConfiguration.setScriptCharset(myScriptCharset.getText());
-    perlConfiguration.setStartMode(myStartMode.getSelectedItem().toString());
+    perlConfiguration.setStartMode(Objects.requireNonNull(myStartMode.getSelectedItem()).toString());
     perlConfiguration.setNonInteractiveModeEnabled(myIsNonInteractiveModeEnabled.isSelected());
     perlConfiguration.setCompileTimeBreakpointsEnabled(myIsCompileTimeBreakpointsEnabled.isSelected());
     perlConfiguration.setInitCode(myInitCodeTextField.getText());

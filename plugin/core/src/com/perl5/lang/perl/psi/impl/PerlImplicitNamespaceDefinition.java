@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -110,13 +110,13 @@ public class PerlImplicitNamespaceDefinition extends PerlImplicitElement impleme
 
     PerlImplicitNamespaceDefinition that = (PerlImplicitNamespaceDefinition)o;
 
-    return getNamespaceName() != null ? getNamespaceName().equals(that.getNamespaceName()) : that.getNamespaceName() == null;
+    return getNamespaceName().equals(that.getNamespaceName());
   }
 
   @Override
   public int hashCode() {
     int result = super.hashCode();
-    result = 31 * result + (getNamespaceName() != null ? getNamespaceName().hashCode() : 0);
+    result = 31 * result + getNamespaceName().hashCode();
     return result;
   }
 

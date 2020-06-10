@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -99,7 +99,7 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
     final Project project = CommonDataKeys.PROJECT.getData(dataContext);
     final IdeaLoggingEvent ideaLoggingEvent = ideaLoggingEvents[0];
     final String throwableText = ideaLoggingEvent.getThrowableText();
-    String description = throwableText.substring(0, Math.min(Math.max(80, throwableText.length()), 80));
+    String description = throwableText.substring(0, Math.min(80, throwableText.length()));
 
     StringBuilder descBuilder = new StringBuilder();
 

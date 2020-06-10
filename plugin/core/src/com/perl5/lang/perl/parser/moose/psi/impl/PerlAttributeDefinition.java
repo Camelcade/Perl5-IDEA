@@ -65,6 +65,9 @@ public class PerlAttributeDefinition extends PerlLightMethodDefinitionElement<Pe
   @Override
   public TextRange getRangeInIdentifier() {
     PsiElement nameIdentifier = getNameIdentifier();
+    if (nameIdentifier == null) {
+      return TextRange.EMPTY_RANGE;
+    }
     ElementManipulator<PsiElement> manipulator = ElementManipulators.getNotNullManipulator(nameIdentifier);
     TextRange defaultRange = manipulator.getRangeInElement(nameIdentifier);
     return StringUtil.startsWith(defaultRange.subSequence(nameIdentifier.getNode().getChars()), "+")

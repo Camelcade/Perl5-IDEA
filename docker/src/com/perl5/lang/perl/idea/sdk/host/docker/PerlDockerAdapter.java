@@ -230,6 +230,10 @@ class PerlDockerAdapter {
     // we sure that command script is under system dir
     File script = createCommandScript(commandLine);
     String dockerScriptPath = myData.getRemotePath(script.getPath());
+    if (StringUtil.isEmpty(dockerScriptPath)) {
+      throw new ExecutionException("Unable to map path for " + script.getPath() + " in " + myData);
+    }
+
     return dockerCommandLine.withParameters(myData.getImageName(), "sh", dockerScriptPath).createProcess();
   }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@ import org.jetbrains.annotations.NotNull;
 public class PodTreePatcher extends SimpleTreePatcher implements PodElementTypes {
   @Override
   public void insert(@NotNull CompositeElement parent, TreeElement anchorBefore, @NotNull OuterLanguageElement toInsert) {
-    while (anchorBefore.getTreePrev() == null && !(parent instanceof FileElement)) {
+    while (anchorBefore != null && anchorBefore.getTreePrev() == null && !(parent instanceof FileElement)) {
       anchorBefore = anchorBefore.getTreeParent();
       parent = anchorBefore.getTreeParent();
     }

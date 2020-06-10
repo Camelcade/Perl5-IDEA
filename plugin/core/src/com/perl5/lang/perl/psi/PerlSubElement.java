@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -101,7 +101,7 @@ public interface PerlSubElement extends PerlSub, PsiElement, PerlIdentifierOwner
       NAMESPACE:
       for (PerlNamespaceDefinitionElement childNamespace : PerlPackageUtil.getChildNamespaces(project, packageName)) {
         String childNamespaceName = childNamespace.getNamespaceName();
-        if (recursionSet.add(childNamespaceName)) {
+        if (StringUtil.isNotEmpty(childNamespaceName) && recursionSet.add(childNamespaceName)) {
           for (PerlSubDefinitionElement subDefinition : PerlSubUtil.getSubDefinitionsInPackage(project, childNamespaceName)) {
             if (subName.equals(subDefinition.getSubName()) && subDefinition.getDirectSuperMethod() == this) {
               processor.process(subDefinition);

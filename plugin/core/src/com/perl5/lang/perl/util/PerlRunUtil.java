@@ -407,8 +407,13 @@ public class PerlRunUtil {
    */
   @NotNull
   public static List<String> getOutputFromPerl(@NotNull Sdk perlSdk, @NotNull String... parameters) {
+    String interpreterPath = PerlProjectManager.getInterpreterPath(perlSdk);
+    if (StringUtil.isEmpty(interpreterPath)) {
+      LOG.warn("Empty interpreter path from " + perlSdk);
+      return Collections.emptyList();
+    }
     return getOutputFromProgram(new PerlCommandLine(
-      PerlProjectManager.getInterpreterPath(perlSdk)).withParameters(parameters).withSdk(perlSdk));
+      interpreterPath).withParameters(parameters).withSdk(perlSdk));
   }
 
 

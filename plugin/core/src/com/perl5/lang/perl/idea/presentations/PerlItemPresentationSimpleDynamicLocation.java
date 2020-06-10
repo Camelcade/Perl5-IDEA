@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,14 +16,14 @@
 
 package com.perl5.lang.perl.idea.presentations;
 
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
 import com.intellij.openapi.roots.ex.ProjectRootManagerEx;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
-import com.perl5.lang.perl.util.PerlUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlUtil;
 import org.jetbrains.annotations.Nullable;
 
 public class PerlItemPresentationSimpleDynamicLocation extends PerlItemPresentationSimple {
@@ -36,13 +36,12 @@ public class PerlItemPresentationSimpleDynamicLocation extends PerlItemPresentat
   @Override
   public String getLocationString() {
     PsiFile containingFile = getElement().getContainingFile();
-    String locationString = null;
 
     if (containingFile == null) {
-      return locationString;
+      return null;
     }
 
-    locationString = containingFile.getName();
+    String locationString = containingFile.getName();
     VirtualFile virtualFile = containingFile.getVirtualFile();
 
     if (virtualFile == null) {

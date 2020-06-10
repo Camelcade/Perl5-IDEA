@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -70,7 +70,7 @@ public class PerlAssociationEditorNotification extends EditorNotifications.Provi
 
     Optional<Map.Entry<FileNameMatcher, FileType>> matchedEntry =
       PERL_FILE_TYPES.entrySet().stream().filter(entry -> entry.getKey().acceptsCharSequence(file.getName())).findFirst();
-    if (matchedEntry == null || !matchedEntry.isPresent()) {
+    if (!matchedEntry.isPresent()) {
       return null;
     }
 

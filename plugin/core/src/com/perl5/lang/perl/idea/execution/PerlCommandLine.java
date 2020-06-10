@@ -228,7 +228,7 @@ public class PerlCommandLine extends GeneralCommandLine {
   @NotNull
   public PerlCommandLine withProcessListener(@NotNull ProcessListener... listeners) {
     myProcessListeners = new ArrayList<>(myProcessListeners);
-    myProcessListeners.addAll(ContainerUtil.filter(listeners, Objects::nonNull));
+    myProcessListeners.addAll(Arrays.asList(listeners));
     return this;
   }
 

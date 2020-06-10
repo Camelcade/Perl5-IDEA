@@ -146,22 +146,14 @@ public class PerlVariableCompletionUtil {
   }
 
   public static void fillWithBuiltInVariables(@NotNull PerlVariableCompletionProcessor completionProcessor) {
-    Processor<PerlVariableDeclarationElement> processor = createBuiltInVariablesLookupProcessor(completionProcessor);
-    if (processor == null) {
-      return;
-    }
-
-    PerlBuiltInVariablesService.getInstance(completionProcessor.getProject()).processVariables(processor);
+    PerlBuiltInVariablesService.getInstance(
+      completionProcessor.getProject()).processVariables(createBuiltInVariablesLookupProcessor(completionProcessor));
   }
 
   public static void fillWithLexicalVariables(@NotNull PerlVariableCompletionProcessor variableCompletionProcessor) {
     PsiElement perlVariable = variableCompletionProcessor.getLeafParentElement();
     Processor<PerlVariableDeclarationElement> lookupProcessor = createLexicalLookupProcessor(
       variableCompletionProcessor);
-
-    if (lookupProcessor == null) {
-      return;
-    }
 
     PsiScopeProcessor processor = (element, __) -> {
       if (!(element instanceof PerlVariableDeclarationElement)) {
@@ -187,8 +179,7 @@ public class PerlVariableCompletionUtil {
    * @return lookup generator for lexical variables
    * @see #createLookupGenerator(Processor, boolean, PerlVariableCompletionProcessor)
    */
-  @Nullable
-  private static Processor<PerlVariableDeclarationElement> createLexicalLookupProcessor(
+  private static @NotNull Processor<PerlVariableDeclarationElement> createLexicalLookupProcessor(
     @NotNull PerlVariableCompletionProcessor variableCompletionProcessor) {
     return createVariableLookupProcessor(
       new PerlDelegatingVariableCompletionProcessor(variableCompletionProcessor) {
@@ -203,8 +194,7 @@ public class PerlVariableCompletionUtil {
    * @return lookup generator for built-in variables
    * @see #createLookupGenerator(Processor, boolean, PerlVariableCompletionProcessor)
    */
-  @Nullable
-  private static Processor<PerlVariableDeclarationElement> createBuiltInVariablesLookupProcessor(
+  private static @NotNull Processor<PerlVariableDeclarationElement> createBuiltInVariablesLookupProcessor(
     @NotNull PerlVariableCompletionProcessor perlVariableCompletionProcessor) {
     return createVariableLookupProcessor(
       new PerlDelegatingVariableCompletionProcessor(perlVariableCompletionProcessor) {

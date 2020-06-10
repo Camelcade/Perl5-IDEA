@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,8 @@ import com.intellij.openapi.vfs.VirtualFileSystem;
 import com.perl5.lang.perl.idea.sdk.PerlHandlerBean;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 public abstract class PerlHostWithFileSystemHandler<Data extends PerlHostData<Data, Handler>, Handler extends PerlHostWithFileSystemHandler<Data, Handler>>
   extends PerlHostHandler<Data, Handler> {
   public PerlHostWithFileSystemHandler(@NotNull PerlHandlerBean bean) {
@@ -31,6 +33,6 @@ public abstract class PerlHostWithFileSystemHandler<Data extends PerlHostData<Da
   protected void customizeFileChooser(@NotNull FileChooserDescriptor descriptor, @NotNull VirtualFileSystem fileSystem) {
     descriptor.setForcedToUseIdeaFileChooser(true);
     descriptor.setShowFileSystemRoots(false);
-    descriptor.setRoots(fileSystem.findFileByPath("/"));
+    descriptor.setRoots(Objects.requireNonNull(fileSystem.findFileByPath("/")));
   }
 }
