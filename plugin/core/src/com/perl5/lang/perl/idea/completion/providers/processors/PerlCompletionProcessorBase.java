@@ -78,6 +78,9 @@ public abstract class PerlCompletionProcessorBase extends AbstractPerlCompletion
   public void addElement(@NotNull LookupElementBuilder lookupElement) {
     myCounters.countProcessing();
     getResultSet().addElement(lookupElement);
+    if (myCounters.exactLimit()) {
+      myResultSet.restartCompletionOnAnyPrefixChange();
+    }
   }
 
   @Override
@@ -126,7 +129,12 @@ public abstract class PerlCompletionProcessorBase extends AbstractPerlCompletion
       return myProcessCounter < myLimit / 2;
     }
 
+    boolean exactLimit() {
+      return myProcessCounter == myLimit / 2;
+    }
+
     void logStatus(@NotNull Class<?> clazz) {
+
       if (LOG.isDebugEnabled() || ApplicationManager.getApplication().isUnitTestMode()) {
         LOG.debug(clazz.getSimpleName() +
                   " checked for matching " + myMatchingCounter +
