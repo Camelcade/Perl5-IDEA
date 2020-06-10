@@ -30,7 +30,6 @@ import com.intellij.psi.PsiManager;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.search.FileTypeIndex;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.psi.search.GlobalSearchScopesCore;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.util.CachedValueProvider;
@@ -73,6 +72,7 @@ import org.jetbrains.annotations.Nullable;
 import java.io.File;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
 import java.util.regex.Pattern;
 
 
@@ -536,25 +536,15 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
                                                      @NotNull FileType fileType) {
     List<VirtualFile> incDirsForPsiElement = getIncDirsForPsiElement(element);
     Project project = element.getProject();
-    for (VirtualFile incDir : incDirsForPsiElement) {
-      GlobalSearchScope searchScope = GlobalSearchScopesCore.directoryScope(project, incDir, true);
-      for (VirtualFile otherIncDir : incDirsForPsiElement) {
-        if (VfsUtil.isAncestor(incDir, otherIncDir, true)) {
-          searchScope = searchScope.intersectWith(
-            GlobalSearchScope.notScope(GlobalSearchScopesCore.directoryScope(project, otherIncDir, true)));
-        }
-      }
-
-      if (!FileTypeIndex.processFiles(
-        fileType, virtualFile -> {
-          ProgressManager.checkCanceled();
-          return processor.process(virtualFile, incDir);
-        },
-        searchScope)) {
-        return false;
-      }
-    }
-    return true;
+    Function<VirtualFile, VirtualFile> rootsComputator = PerlDirectoryIndex.getInstance(project).createRootComputator(incDirsForPsiElement);
+    return FileTypeIndex.processFiles(
+      fileType,
+      virtualFile -> {
+        ProgressManager.checkCanceled();
+        VirtualFile incDir = rootsComputator.apply(virtualFile);
+        return incDir == null || processor.process(virtualFile, incDir);
+      },
+      GlobalSearchScope.allScope(project));
   }
 
   public static void processNotOverridedMethods(final PerlNamespaceDefinitionElement namespaceDefinition,
