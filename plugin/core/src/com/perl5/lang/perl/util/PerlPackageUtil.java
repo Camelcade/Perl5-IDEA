@@ -36,6 +36,7 @@ import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.PairProcessor;
 import com.intellij.util.Processor;
 import com.intellij.util.SmartList;
@@ -68,6 +69,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.File;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
@@ -428,13 +430,13 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
    */
   public static void collectNestedPackageDefinitionsFromFile(@NotNull RenameRefactoringQueue queue, VirtualFile file, String oldPath) {
     Project project = queue.getProject();
-    VirtualFile newInnermostRoot = PerlUtil.getFileClassRoot(project, file);
+    VirtualFile newInnermostRoot = getFileClassRoot(project, file);
 
     if (newInnermostRoot != null) {
       String newRelativePath = VfsUtil.getRelativePath(file, newInnermostRoot);
       String newPackageName = getPackageNameByPath(newRelativePath);
 
-      VirtualFile oldInnermostRoot = PerlUtil.getFileClassRoot(project, oldPath);
+      VirtualFile oldInnermostRoot = getFileClassRoot(project, oldPath);
 
       if (oldInnermostRoot != null) {
         String oldRelativePath = oldPath.substring(oldInnermostRoot.getPath().length());
@@ -464,13 +466,13 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
    */
   public static void collectNestedPackageDefinitions(RenameRefactoringQueue queue, VirtualFile directory, String oldPath) {
     Project project = queue.getProject();
-    VirtualFile directorySourceRoot = PerlUtil.getFileClassRoot(project, directory);
+    VirtualFile directorySourceRoot = getFileClassRoot(project, directory);
 
     if (directorySourceRoot != null) {
       for (VirtualFile file : VfsUtil.collectChildrenRecursively(directory)) {
         if (!file.isDirectory() &&
             file.getFileType() == PerlFileTypePackage.INSTANCE &&
-            directorySourceRoot.equals(PerlUtil.getFileClassRoot(project, file))) {
+            directorySourceRoot.equals(getFileClassRoot(project, file))) {
           String relativePath = VfsUtil.getRelativePath(file, directory);
           String oldFilePath = oldPath + "/" + relativePath;
           collectNestedPackageDefinitionsFromFile(queue, file, oldFilePath);
@@ -487,20 +489,20 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
    * @param newPath   new directory path
    */
   public static void adjustNestedFiles(Project project, VirtualFile directory, String newPath) {
-    VirtualFile oldDirectorySourceRoot = PerlUtil.getFileClassRoot(project, directory);
+    VirtualFile oldDirectorySourceRoot = getFileClassRoot(project, directory);
     PsiManager psiManager = PsiManager.getInstance(project);
 
     if (oldDirectorySourceRoot != null) {
       for (VirtualFile file : VfsUtil.collectChildrenRecursively(directory)) {
         if (!file.isDirectory() &&
             file.getFileType() == PerlFileTypePackage.INSTANCE &&
-            oldDirectorySourceRoot.equals(PerlUtil.getFileClassRoot(project, file))) {
+            oldDirectorySourceRoot.equals(getFileClassRoot(project, file))) {
           PsiFile psiFile = psiManager.findFile(file);
 
           if (psiFile != null) {
             for (PsiReference inboundReference : ReferencesSearch.search(psiFile)) {
               String newPackagePath = newPath + "/" + VfsUtil.getRelativePath(file, directory);
-              VirtualFile newInnermostRoot = PerlUtil.getFileClassRoot(project, newPackagePath);
+              VirtualFile newInnermostRoot = getFileClassRoot(project, newPackagePath);
               if (newInnermostRoot != null) {
                 String newRelativePath = newPackagePath.substring(newInnermostRoot.getPath().length());
                 String newPackageName = getPackageNameByPath(newRelativePath);
@@ -818,6 +820,54 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
     PerlPsiUtil.processNamespaceStatements(namespaceDefinition, collector);
     collector.applyRunTimeModifiers();
     return collector.getParentNamespaces();
+  }
+
+  @Contract("null->null")
+  public static @Nullable VirtualFile getFileClassRoot(@Nullable PsiFile psiFile) {
+    return psiFile == null ? null : getFileClassRoot(psiFile.getProject(), PsiUtilCore.getVirtualFile(psiFile));
+  }
+
+  /**
+   * Searches for innermost source root for a file
+   *
+   * @param project project to search in
+   * @param file    containing file
+   * @return innermost root
+   */
+  @Contract("_,null->null")
+  public static @Nullable VirtualFile getFileClassRoot(@NotNull Project project, @Nullable VirtualFile file) {
+    if (file == null) {
+      return null;
+    }
+    VirtualFile result = null;
+    for (VirtualFile classRoot : PerlProjectManager.getInstance(project).getAllLibraryRoots()) {
+      if (VfsUtil.isAncestor(classRoot, file, false) && (result == null || VfsUtil.isAncestor(result, classRoot, true))) {
+        result = classRoot;
+      }
+    }
+
+    return result;
+  }
+
+  /**
+   * Searches for innermost source root for a file by it's absolute path
+   *
+   * @param project  module to search in
+   * @param filePath containing filename
+   * @return innermost root
+   */
+  public static @Nullable VirtualFile getFileClassRoot(@NotNull Project project, @NotNull String filePath) {
+    File file = new File(filePath);
+    VirtualFile result = null;
+
+    for (VirtualFile classRoot : PerlProjectManager.getInstance(project).getAllLibraryRoots()) {
+      File sourceRootFile = new File(classRoot.getPath());
+      if (VfsUtil.isAncestor(sourceRootFile, file, false) && (result == null || VfsUtil.isAncestor(result, classRoot, true))) {
+        result = classRoot;
+      }
+    }
+
+    return result;
   }
 
   public interface ClassRootVirtualFileProcessor {

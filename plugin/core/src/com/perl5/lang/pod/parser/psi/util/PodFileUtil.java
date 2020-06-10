@@ -29,7 +29,6 @@ import com.intellij.util.Processor;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.util.PerlPackageUtil;
-import com.perl5.lang.perl.util.PerlUtil;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.filetypes.PodFileType;
 import com.perl5.lang.pod.parser.psi.PodLinkDescriptor;
@@ -52,7 +51,7 @@ public class PodFileUtil {
 
   public static @Nullable String getPackageName(PsiFile file) {
     VirtualFile virtualFile = file.getVirtualFile();
-    VirtualFile classRoot = PerlUtil.getFileClassRoot(file);
+    VirtualFile classRoot = PerlPackageUtil.getFileClassRoot(file);
 
     if (virtualFile != null && myClassLikeExtensions.contains(virtualFile.getExtension())) {
       if (classRoot == null) {

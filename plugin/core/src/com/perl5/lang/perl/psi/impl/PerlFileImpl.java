@@ -51,7 +51,6 @@ import com.perl5.lang.perl.psi.stubs.imports.runtime.PerlRuntimeImportStub;
 import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
-import com.perl5.lang.perl.util.PerlUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -104,7 +103,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
     VirtualFile containingFile = getVirtualFile();
 
     if (containingFile != null && containingFile.getFileType() == PerlFileTypePackage.INSTANCE) {
-      VirtualFile innermostSourceRoot = PerlUtil.getFileClassRoot(getProject(), containingFile);
+      VirtualFile innermostSourceRoot = PerlPackageUtil.getFileClassRoot(getProject(), containingFile);
       if (innermostSourceRoot != null) {
         String relativePath = VfsUtil.getRelativePath(containingFile, innermostSourceRoot);
         return PerlPackageUtil.getPackageNameByPath(relativePath);

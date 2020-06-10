@@ -28,7 +28,6 @@ import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionWithIdentifier;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
-import com.perl5.lang.perl.util.PerlUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -50,7 +49,7 @@ public class PerlRenameNamespaceDefinitionProcessor extends PerlRenamePolyRefere
     VirtualFile virtualFile = namespaceDefinition.getContainingFile().getVirtualFile();
 
     if (virtualFile.getFileType() == PerlFileTypePackage.INSTANCE) {
-      VirtualFile classRoot = PerlUtil.getFileClassRoot(namespaceDefinition.getProject(), virtualFile);
+      VirtualFile classRoot = PerlPackageUtil.getFileClassRoot(namespaceDefinition.getProject(), virtualFile);
 
       return classRoot != null &&
              currentPackageName.equals(PerlPackageUtil.getPackageNameByPath(VfsUtil.getRelativePath(virtualFile, classRoot)));
@@ -80,7 +79,7 @@ public class PerlRenameNamespaceDefinitionProcessor extends PerlRenamePolyRefere
 
           // move file
           VirtualFile containingDir = file.getVirtualFile().getParent();
-          VirtualFile newContainingDir = PerlUtil.getFileClassRoot(file.getProject(), containingDir);
+          VirtualFile newContainingDir = PerlPackageUtil.getFileClassRoot(file.getProject(), containingDir);
 
           for (int i = 0; i < newPackageChunks.size() - 1; i++) {
             String subDirName = newPackageChunks.get(i);

@@ -23,7 +23,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.refactoring.move.moveFilesOrDirectories.MoveFilesOrDirectoriesProcessor;
 import com.intellij.refactoring.rename.RenamePsiFileProcessor;
-import com.perl5.lang.perl.util.PerlUtil;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
@@ -38,7 +38,7 @@ public class PerlRenameDirectoryProcessor extends RenamePsiFileProcessor {
   }
 
   protected boolean canProcessDir(PsiDirectory dir) {
-    return PerlUtil.getFileClassRoot(dir.getProject(), dir.getVirtualFile()) != null;
+    return PerlPackageUtil.getFileClassRoot(dir.getProject(), dir.getVirtualFile()) != null;
   }
 
   @Override

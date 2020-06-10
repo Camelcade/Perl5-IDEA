@@ -17,22 +17,17 @@
 package com.perl5.lang.perl.util;
 
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.VfsUtil;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.stubs.StubIndexKey;
 import com.intellij.psi.util.PsiUtilCore;
-import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.util.processors.PerlInternalIndexKeysProcessor;
 import gnu.trove.THashSet;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.File;
 import java.util.Collection;
 import java.util.Set;
 
@@ -40,53 +35,6 @@ import java.util.Set;
  * Misc helper methods
  */
 public class PerlUtil implements PerlElementTypes {
-  @Contract("null->null")
-  public static @Nullable VirtualFile getFileClassRoot(@Nullable PsiFile psiFile) {
-    return psiFile == null ? null : getFileClassRoot(psiFile.getProject(), PsiUtilCore.getVirtualFile(psiFile));
-  }
-
-  /**
-   * Searches for innermost source root for a file
-   *
-   * @param project project to search in
-   * @param file    containing file
-   * @return innermost root
-   */
-  @Contract("_,null->null")
-  public static @Nullable VirtualFile getFileClassRoot(@NotNull Project project, @Nullable VirtualFile file) {
-    if (file == null) {
-      return null;
-    }
-    VirtualFile result = null;
-    for (VirtualFile classRoot : PerlProjectManager.getInstance(project).getAllLibraryRoots()) {
-      if (VfsUtil.isAncestor(classRoot, file, false) && (result == null || VfsUtil.isAncestor(result, classRoot, true))) {
-        result = classRoot;
-      }
-    }
-
-    return result;
-  }
-
-  /**
-   * Searches for innermost source root for a file by it's absolute path
-   *
-   * @param project  module to search in
-   * @param filePath containing filename
-   * @return innermost root
-   */
-  public static @Nullable VirtualFile getFileClassRoot(@NotNull Project project, @NotNull String filePath) {
-    File file = new File(filePath);
-    VirtualFile result = null;
-
-    for (VirtualFile classRoot : PerlProjectManager.getInstance(project).getAllLibraryRoots()) {
-      File sourceRootFile = new File(classRoot.getPath());
-      if (VfsUtil.isAncestor(sourceRootFile, file, false) && (result == null || VfsUtil.isAncestor(result, classRoot, true))) {
-        result = classRoot;
-      }
-    }
-
-    return result;
-  }
 
   @Deprecated // make reverse index and use it
   public static Collection<String> getIndexKeysWithoutInternals(@NotNull StubIndexKey<String, ?> key, @NotNull Project project) {

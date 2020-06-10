@@ -23,7 +23,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.util.PerlPackageUtil;
-import com.perl5.lang.perl.util.PerlUtil;
 import org.jetbrains.annotations.Nullable;
 
 public class PerlItemPresentationSimpleDynamicLocation extends PerlItemPresentationSimple {
@@ -48,7 +47,7 @@ public class PerlItemPresentationSimpleDynamicLocation extends PerlItemPresentat
     }
 
     if (virtualFile.getFileType() == PerlFileTypePackage.INSTANCE) {
-      VirtualFile innerMostClassRoot = PerlUtil.getFileClassRoot(containingFile.getProject(), virtualFile);
+      VirtualFile innerMostClassRoot = PerlPackageUtil.getFileClassRoot(containingFile.getProject(), virtualFile);
 
       if (innerMostClassRoot != null) {
         String relativePath = VfsUtil.getRelativePath(virtualFile, innerMostClassRoot);

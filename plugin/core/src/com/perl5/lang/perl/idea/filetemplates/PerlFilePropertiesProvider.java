@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,6 @@ import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDirectory;
 import com.perl5.lang.perl.util.PerlPackageUtil;
-import com.perl5.lang.perl.util.PerlUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Properties;
@@ -31,7 +30,7 @@ public class PerlFilePropertiesProvider implements DefaultTemplatePropertiesProv
   @Override
   public void fillProperties(@NotNull PsiDirectory directory, @NotNull Properties props) {
     VirtualFile directoryFile = directory.getVirtualFile();
-    VirtualFile newInnermostRoot = PerlUtil.getFileClassRoot(directory.getProject(), directoryFile);
+    VirtualFile newInnermostRoot = PerlPackageUtil.getFileClassRoot(directory.getProject(), directoryFile);
 
     if (newInnermostRoot != null) {
       String newRelativePath = VfsUtil.getRelativePath(directoryFile, newInnermostRoot);
