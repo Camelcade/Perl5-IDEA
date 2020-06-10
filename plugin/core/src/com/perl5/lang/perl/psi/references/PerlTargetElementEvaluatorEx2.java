@@ -80,7 +80,7 @@ public class PerlTargetElementEvaluatorEx2 extends TargetElementEvaluatorEx2 imp
   }
 
   @Override
-  public boolean isIdentifierPart(PsiFile file, CharSequence text, int offset) {
+  public boolean isIdentifierPart(PsiFile file, @NotNull CharSequence text, int offset) {
     return file.findElementAt(offset) instanceof PerlVariableNameElement;
   }
 }
