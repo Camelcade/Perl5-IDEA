@@ -54,14 +54,14 @@ public interface PerlVariable extends PsiPerlExpr, PerlLexicalScopeMember, PerlV
    *
    * @return list of global declarations
    */
-  List<PerlVariableDeclarationElement> getGlobalDeclarations();
+  @NotNull List<PerlVariableDeclarationElement> getGlobalDeclarations();
 
   /**
    * Looking for globs, sutable for current variable
    *
    * @return list of globs
    */
-  List<PerlGlobVariable> getRelatedGlobs();
+  @NotNull List<PerlGlobVariable> getRelatedGlobs();
 
   /**
    * Returns line number of element in the document

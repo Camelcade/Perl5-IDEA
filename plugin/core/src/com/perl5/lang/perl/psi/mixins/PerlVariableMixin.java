@@ -208,7 +208,7 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
 
   // fixme this need to be moved to PerlResolveUtil or Resolver
   @Override
-  public List<PerlVariableDeclarationElement> getGlobalDeclarations() {
+  public @NotNull List<PerlVariableDeclarationElement> getGlobalDeclarations() {
     List<PerlVariableDeclarationElement> result = new ArrayList<>();
     PerlVariableType myType = getActualType();
 
@@ -243,7 +243,7 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
   }
 
   @Override
-  public List<PerlGlobVariable> getRelatedGlobs() {
+  public @NotNull List<PerlGlobVariable> getRelatedGlobs() {
     List<PerlGlobVariable> result = new ArrayList<>();
     processContainingNamespaceItems(it -> {
       result.addAll(PerlGlobUtil.getGlobsDefinitions(getProject(), it));

@@ -155,6 +155,11 @@ public class PerlRenameTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testGlobPreviousRename() {
+    doTestRename();
+  }
+
+  @Test
   public void testLexicalVariable() {
     doTestRename();
   }

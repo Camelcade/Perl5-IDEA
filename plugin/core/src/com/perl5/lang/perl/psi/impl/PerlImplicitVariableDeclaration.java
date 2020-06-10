@@ -36,6 +36,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -155,13 +156,13 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
   }
 
   @Override
-  public List<PerlVariableDeclarationElement> getGlobalDeclarations() {
-    return null;
+  public @NotNull List<PerlVariableDeclarationElement> getGlobalDeclarations() {
+    return Collections.emptyList();
   }
 
   @Override
-  public List<PerlGlobVariable> getRelatedGlobs() {
-    return null;
+  public @NotNull List<PerlGlobVariable> getRelatedGlobs() {
+    return Collections.emptyList();
   }
 
   @Override

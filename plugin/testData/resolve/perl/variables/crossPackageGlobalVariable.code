@@ -1,0 +1,34 @@
+package Foo::Bar;
+
+our $SCALAR = 1;
+our @ARRAY = ('array');
+our %HASH = (key => 42);
+
+my $scalar = 1;
+my @array = ('array');
+my %hash = (key => 42);
+
+package Baz::Zoo;
+
+our $SCALAR1 = 2;
+our @ARRAY1 = ('array1');
+our %HASH1 = (key1 => 43);
+
+my $scalar1 = 2;
+my @array1 = ('array1');
+my %hash1 = (key1 => 43);
+
+
+say $SCALAR;
+say $SCALAR1;
+say @ARRAY;
+say @ARRAY1;
+say %HASH;
+say %HASH1;
+
+say $scalar;
+say $scalar1;
+say @array;
+say @array1;
+say %hash;
+say %hash1;

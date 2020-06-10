@@ -1,0 +1,36 @@
+PerlVariableReference at (316,322); text in range: 'SCALAR' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 23 in crossPackageGlobalVariable.pl
+
+PerlVariableReference at (329,336); text in range: 'SCALAR1' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 173 in crossPackageGlobalVariable.pl
+
+PerlVariableReference at (343,348); text in range: 'ARRAY' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 40 in crossPackageGlobalVariable.pl
+
+PerlVariableReference at (355,361); text in range: 'ARRAY1' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 191 in crossPackageGlobalVariable.pl
+
+PerlVariableReference at (368,372); text in range: 'HASH' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 64 in crossPackageGlobalVariable.pl
+
+PerlVariableReference at (379,384); text in range: 'HASH1' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 217 in crossPackageGlobalVariable.pl
+
+PerlVariableReference at (392,398); text in range: 'scalar' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 89 in crossPackageGlobalVariable.pl
+
+PerlVariableReference at (405,412); text in range: 'scalar1' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 244 in crossPackageGlobalVariable.pl
+
+PerlVariableReference at (419,424); text in range: 'array' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 105 in crossPackageGlobalVariable.pl
+
+PerlVariableReference at (431,437); text in range: 'array1' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 261 in crossPackageGlobalVariable.pl
+
+PerlVariableReference at (444,448); text in range: 'hash' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 128 in crossPackageGlobalVariable.pl
+
+PerlVariableReference at (455,460); text in range: 'hash1' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 286 in crossPackageGlobalVariable.pl
+

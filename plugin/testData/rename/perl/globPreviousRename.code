@@ -1,0 +1,17 @@
+use strict;
+use warnings FATAL => 'all';
+use v5.10;
+package Foo::Bar;
+
+our $SCALAR = 1;
+our @SCALAR = ('array');
+our %SCALAR = (key => 42);
+say *Foo::Bar::SCALAR;
+
+package Baz::Zoo;
+
+our $SCALAR1 = 2;
+our @ARRAY1 = ('array1');
+our %HASH1 = (key1 => 43);
+
+say $SCAL<caret>AR;
