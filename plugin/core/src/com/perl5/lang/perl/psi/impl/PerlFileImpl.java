@@ -103,7 +103,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
     VirtualFile containingFile = getVirtualFile();
 
     if (containingFile != null && containingFile.getFileType() == PerlFileTypePackage.INSTANCE) {
-      VirtualFile innermostSourceRoot = PerlPackageUtil.getFileClassRoot(getProject(), containingFile);
+      VirtualFile innermostSourceRoot = PerlPackageUtil.getClosestIncRoot(getProject(), containingFile);
       if (innermostSourceRoot != null) {
         String relativePath = VfsUtil.getRelativePath(containingFile, innermostSourceRoot);
         return PerlPackageUtil.getPackageNameByPath(relativePath);

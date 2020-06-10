@@ -47,7 +47,7 @@ public class PerlItemPresentationSimpleDynamicLocation extends PerlItemPresentat
     }
 
     if (virtualFile.getFileType() == PerlFileTypePackage.INSTANCE) {
-      VirtualFile innerMostClassRoot = PerlPackageUtil.getFileClassRoot(containingFile.getProject(), virtualFile);
+      VirtualFile innerMostClassRoot = PerlPackageUtil.getClosestIncRoot(containingFile.getProject(), virtualFile);
 
       if (innerMostClassRoot != null) {
         String relativePath = VfsUtil.getRelativePath(virtualFile, innerMostClassRoot);

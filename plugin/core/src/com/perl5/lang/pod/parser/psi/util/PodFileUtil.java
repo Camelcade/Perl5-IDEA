@@ -51,7 +51,7 @@ public class PodFileUtil {
 
   public static @Nullable String getPackageName(PsiFile file) {
     VirtualFile virtualFile = file.getVirtualFile();
-    VirtualFile classRoot = PerlPackageUtil.getFileClassRoot(file);
+    VirtualFile classRoot = PerlPackageUtil.getClosestIncRoot(file);
 
     if (virtualFile != null && myClassLikeExtensions.contains(virtualFile.getExtension())) {
       if (classRoot == null) {

@@ -55,7 +55,7 @@ public class PerlMoveFileHandler extends MoveFileHandler {
     file.putUserData(ORIGINAL_PACKAGE_NAME, ((PerlFileImpl)file).getFilePackageName());
 
     String newFilePath = moveDestination.getVirtualFile().getPath() + '/' + file.getName();
-    VirtualFile newClassRoot = PerlPackageUtil.getFileClassRoot(moveDestination.getProject(), newFilePath);
+    VirtualFile newClassRoot = PerlPackageUtil.getClosestIncRoot(moveDestination.getProject(), newFilePath);
 
     if (newClassRoot != null) {
       String newRelativePath = newFilePath.substring(newClassRoot.getPath().length());
@@ -74,7 +74,7 @@ public class PerlMoveFileHandler extends MoveFileHandler {
     String originalPackageName = file.getUserData(ORIGINAL_PACKAGE_NAME);
     Project project = file.getProject();
     VirtualFile virtualFile = file.getVirtualFile();
-    VirtualFile newInnermostRoot = PerlPackageUtil.getFileClassRoot(project, virtualFile);
+    VirtualFile newInnermostRoot = PerlPackageUtil.getClosestIncRoot(project, virtualFile);
 
     if (newInnermostRoot != null && originalPackageName != null) {
       String newRelativePath = VfsUtil.getRelativePath(virtualFile, newInnermostRoot);

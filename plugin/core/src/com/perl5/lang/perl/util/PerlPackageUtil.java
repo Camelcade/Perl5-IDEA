@@ -431,13 +431,13 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
    */
   public static void collectNestedPackageDefinitionsFromFile(@NotNull RenameRefactoringQueue queue, VirtualFile file, String oldPath) {
     Project project = queue.getProject();
-    VirtualFile newInnermostRoot = getFileClassRoot(project, file);
+    VirtualFile newInnermostRoot = getClosestIncRoot(project, file);
 
     if (newInnermostRoot != null) {
       String newRelativePath = VfsUtil.getRelativePath(file, newInnermostRoot);
       String newPackageName = getPackageNameByPath(newRelativePath);
 
-      VirtualFile oldInnermostRoot = getFileClassRoot(project, oldPath);
+      VirtualFile oldInnermostRoot = getClosestIncRoot(project, oldPath);
 
       if (oldInnermostRoot != null) {
         String oldRelativePath = oldPath.substring(oldInnermostRoot.getPath().length());
@@ -467,13 +467,13 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
    */
   public static void collectNestedPackageDefinitions(RenameRefactoringQueue queue, VirtualFile directory, String oldPath) {
     Project project = queue.getProject();
-    VirtualFile directorySourceRoot = getFileClassRoot(project, directory);
+    VirtualFile directorySourceRoot = getClosestIncRoot(project, directory);
 
     if (directorySourceRoot != null) {
       for (VirtualFile file : VfsUtil.collectChildrenRecursively(directory)) {
         if (!file.isDirectory() &&
             file.getFileType() == PerlFileTypePackage.INSTANCE &&
-            directorySourceRoot.equals(getFileClassRoot(project, file))) {
+            directorySourceRoot.equals(getClosestIncRoot(project, file))) {
           String relativePath = VfsUtil.getRelativePath(file, directory);
           String oldFilePath = oldPath + "/" + relativePath;
           collectNestedPackageDefinitionsFromFile(queue, file, oldFilePath);
@@ -490,20 +490,20 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
    * @param newPath   new directory path
    */
   public static void adjustNestedFiles(Project project, VirtualFile directory, String newPath) {
-    VirtualFile oldDirectorySourceRoot = getFileClassRoot(project, directory);
+    VirtualFile oldDirectorySourceRoot = getClosestIncRoot(project, directory);
     PsiManager psiManager = PsiManager.getInstance(project);
 
     if (oldDirectorySourceRoot != null) {
       for (VirtualFile file : VfsUtil.collectChildrenRecursively(directory)) {
         if (!file.isDirectory() &&
             file.getFileType() == PerlFileTypePackage.INSTANCE &&
-            oldDirectorySourceRoot.equals(getFileClassRoot(project, file))) {
+            oldDirectorySourceRoot.equals(getClosestIncRoot(project, file))) {
           PsiFile psiFile = psiManager.findFile(file);
 
           if (psiFile != null) {
             for (PsiReference inboundReference : ReferencesSearch.search(psiFile)) {
               String newPackagePath = newPath + "/" + VfsUtil.getRelativePath(file, directory);
-              VirtualFile newInnermostRoot = getFileClassRoot(project, newPackagePath);
+              VirtualFile newInnermostRoot = getClosestIncRoot(project, newPackagePath);
               if (newInnermostRoot != null) {
                 String newRelativePath = newPackagePath.substring(newInnermostRoot.getPath().length());
                 String newPackageName = getPackageNameByPath(newRelativePath);
@@ -827,8 +827,8 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
   }
 
   @Contract("null->null")
-  public static @Nullable VirtualFile getFileClassRoot(@Nullable PsiFile psiFile) {
-    return psiFile == null ? null : getFileClassRoot(psiFile.getProject(), PsiUtilCore.getVirtualFile(psiFile));
+  public static @Nullable VirtualFile getClosestIncRoot(@Nullable PsiFile psiFile) {
+    return psiFile == null ? null : getClosestIncRoot(psiFile.getProject(), PsiUtilCore.getVirtualFile(psiFile));
   }
 
   /**
@@ -836,7 +836,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
    * @apiNote this method may work wrong, because it is not accounts for dynamic lib paths, e.g. use lib
    */
   @Contract("_,null->null")
-  public static @Nullable VirtualFile getFileClassRoot(@NotNull Project project, @Nullable VirtualFile file) {
+  public static @Nullable VirtualFile getClosestIncRoot(@NotNull Project project, @Nullable VirtualFile file) {
     return PerlDirectoryIndex.getInstance(project).getRoot(file);
   }
 
@@ -844,8 +844,8 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
    * @return innermost @INC root for a file by path
    * @apiNote this method may work wrong, because it is not accounts for dynamic lib paths, e.g. use lib
    */
-  public static @Nullable VirtualFile getFileClassRoot(@NotNull Project project, @NotNull String filePath) {
-    return getFileClassRoot(project, VfsUtil.findFileByIoFile(new File(filePath), false));
+  public static @Nullable VirtualFile getClosestIncRoot(@NotNull Project project, @NotNull String filePath) {
+    return getClosestIncRoot(project, VfsUtil.findFileByIoFile(new File(filePath), false));
   }
 
   public interface ClassRootVirtualFileProcessor {

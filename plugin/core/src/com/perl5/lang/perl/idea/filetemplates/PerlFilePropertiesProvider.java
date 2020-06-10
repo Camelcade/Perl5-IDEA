@@ -30,7 +30,7 @@ public class PerlFilePropertiesProvider implements DefaultTemplatePropertiesProv
   @Override
   public void fillProperties(@NotNull PsiDirectory directory, @NotNull Properties props) {
     VirtualFile directoryFile = directory.getVirtualFile();
-    VirtualFile newInnermostRoot = PerlPackageUtil.getFileClassRoot(directory.getProject(), directoryFile);
+    VirtualFile newInnermostRoot = PerlPackageUtil.getClosestIncRoot(directory.getProject(), directoryFile);
 
     if (newInnermostRoot != null) {
       String newRelativePath = VfsUtil.getRelativePath(directoryFile, newInnermostRoot);

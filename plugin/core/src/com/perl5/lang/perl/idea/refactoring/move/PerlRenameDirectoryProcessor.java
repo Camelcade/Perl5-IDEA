@@ -38,7 +38,7 @@ public class PerlRenameDirectoryProcessor extends RenamePsiFileProcessor {
   }
 
   protected boolean canProcessDir(PsiDirectory dir) {
-    return PerlPackageUtil.getFileClassRoot(dir.getProject(), dir.getVirtualFile()) != null;
+    return PerlPackageUtil.getClosestIncRoot(dir.getProject(), dir.getVirtualFile()) != null;
   }
 
   @Override

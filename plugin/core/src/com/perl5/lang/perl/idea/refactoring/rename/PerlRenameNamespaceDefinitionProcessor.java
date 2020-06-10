@@ -49,7 +49,7 @@ public class PerlRenameNamespaceDefinitionProcessor extends PerlRenamePolyRefere
     VirtualFile virtualFile = namespaceDefinition.getContainingFile().getVirtualFile();
 
     if (virtualFile.getFileType() == PerlFileTypePackage.INSTANCE) {
-      VirtualFile classRoot = PerlPackageUtil.getFileClassRoot(namespaceDefinition.getProject(), virtualFile);
+      VirtualFile classRoot = PerlPackageUtil.getClosestIncRoot(namespaceDefinition.getProject(), virtualFile);
 
       return classRoot != null &&
              currentPackageName.equals(PerlPackageUtil.getPackageNameByPath(VfsUtil.getRelativePath(virtualFile, classRoot)));
@@ -79,7 +79,7 @@ public class PerlRenameNamespaceDefinitionProcessor extends PerlRenamePolyRefere
 
           // move file
           VirtualFile containingDir = file.getVirtualFile().getParent();
-          VirtualFile newContainingDir = PerlPackageUtil.getFileClassRoot(file.getProject(), containingDir);
+          VirtualFile newContainingDir = PerlPackageUtil.getClosestIncRoot(file.getProject(), containingDir);
 
           for (int i = 0; i < newPackageChunks.size() - 1; i++) {
             String subDirName = newPackageChunks.get(i);
