@@ -315,14 +315,7 @@ public class PerlVariableCompletionUtil {
   public static void fillWithFullQualifiedVariables(@NotNull PerlVariableCompletionProcessor variableCompletionProcessor) {
     PsiElement variableNameElement = variableCompletionProcessor.getLeafElement();
     PsiElement perlVariable = variableCompletionProcessor.getLeafParentElement();
-    boolean forceShortMain = StringUtil.startsWith(variableNameElement.getNode().getChars(), PerlPackageUtil.NAMESPACE_SEPARATOR);
-    Processor<PerlVariableDeclarationElement> lookupGenerator = createVariableLookupProcessor(
-      new PerlDelegatingVariableCompletionProcessor(variableCompletionProcessor) {
-        @Override
-        public boolean isForceShortMain() {
-          return forceShortMain;
-        }
-      });
+    Processor<PerlVariableDeclarationElement> lookupGenerator = createVariableLookupProcessor(variableCompletionProcessor);
 
     Project project = variableNameElement.getProject();
     GlobalSearchScope resolveScope = variableNameElement.getResolveScope();
@@ -359,17 +352,17 @@ public class PerlVariableCompletionUtil {
     }
   }
 
-  public static void fillWithVariables(@NotNull PerlVariableCompletionProcessor variableCompletionProcessor,
-                                       @Nullable String namespaceName) {
+  public static void fillWithVariables(@NotNull PerlVariableCompletionProcessor variableCompletionProcessor) {
     if (!variableCompletionProcessor.isFullQualified()) {
       fillWithLexicalVariables(variableCompletionProcessor);
       fillWithBuiltInVariables(variableCompletionProcessor);
       fillWithImportedVariables(variableCompletionProcessor);
     }
     else {
-      if (StringUtil.isNotEmpty(namespaceName)) {
+      if (StringUtil.isNotEmpty(variableCompletionProcessor.getExplicitNamespaceName())) {
         variableCompletionProcessor =
-          variableCompletionProcessor.withPrefixMatcher(PerlPackageUtil.join(namespaceName, variableCompletionProcessor.getPrefix()));
+          variableCompletionProcessor.withPrefixMatcher(
+            PerlPackageUtil.join(variableCompletionProcessor.getExplicitNamespaceName(), variableCompletionProcessor.getPrefix()));
       }
     }
 

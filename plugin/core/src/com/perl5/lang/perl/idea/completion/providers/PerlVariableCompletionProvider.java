@@ -19,14 +19,17 @@ package com.perl5.lang.perl.idea.completion.providers;
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.openapi.application.Experiments;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlCompletionProvider;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlVariableCompletionProcessor;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlVariableCompletionProcessorImpl;
 import com.perl5.lang.perl.idea.completion.util.PerlVariableCompletionUtil;
+import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
 import com.perl5.lang.perl.psi.PsiPerlPerlHandleExpr;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlVariableCompletionProvider extends PerlCompletionProvider {
@@ -42,20 +45,24 @@ public class PerlVariableCompletionProvider extends PerlCompletionProvider {
     PsiElement method = subName.getParent();
 
     String namespaceName = null;
+    boolean forceShortMain = false;
     if (method instanceof PsiPerlMethod) {
       if (((PsiPerlMethod)method).isObjectMethod()) {
         return;
       }
       namespaceName = ((PsiPerlMethod)method).getExplicitNamespaceName();
+      PerlNamespaceElement namespaceElement = ((PsiPerlMethod)method).getNamespaceElement();
+      forceShortMain = namespaceElement != null &&
+                       StringUtil.startsWith(namespaceElement.getNode().getChars(), PerlPackageUtil.NAMESPACE_SEPARATOR);
     }
     else if (!(method instanceof PsiPerlPerlHandleExpr)) {
       return;
     }
 
     PerlVariableCompletionProcessor variableCompletionProcessor = new PerlVariableCompletionProcessorImpl(
-      withFqnSafeMatcher(resultSet), subName, false, false, false, namespaceName);
+      withFqnSafeMatcher(resultSet), subName, namespaceName, false, false, false, forceShortMain);
 
-    PerlVariableCompletionUtil.fillWithVariables(variableCompletionProcessor, namespaceName);
+    PerlVariableCompletionUtil.fillWithVariables(variableCompletionProcessor);
     variableCompletionProcessor.logStatus(getClass());
   }
 }

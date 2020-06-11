@@ -25,31 +25,36 @@ public class PerlVariableCompletionProcessorImpl extends PerlCompletionProcessor
   private final boolean myHasBraces;
   private final boolean myIsDeclaration;
   private final boolean myIsLexical;
+  private final boolean myIsForceShortMain;
   private final @Nullable String myExplicitNamespaceName;
 
   public PerlVariableCompletionProcessorImpl(@NotNull CompletionResultSet resultSet,
                                              @NotNull PsiElement leafElement,
+                                             @Nullable String explicitNamespaceName,
                                              boolean hasBraces,
                                              boolean isDeclaration,
                                              boolean isLexical,
-                                             @Nullable String explicitNamespaceName) {
+                                             boolean isForceShortMain) {
     super(resultSet, leafElement);
     myHasBraces = hasBraces;
     myIsDeclaration = isDeclaration;
     myIsLexical = isLexical;
     myExplicitNamespaceName = explicitNamespaceName;
+    myIsForceShortMain = isForceShortMain;
   }
 
   public PerlVariableCompletionProcessorImpl(@NotNull PerlCompletionProcessor processor,
+                                             @Nullable String explicitNamespaceName,
                                              boolean hasBraces,
                                              boolean isDeclaration,
                                              boolean isLexical,
-                                             @Nullable String explicitNamespaceName) {
+                                             boolean isForceShortMain) {
     super(processor);
     myHasBraces = hasBraces;
     myIsDeclaration = isDeclaration;
     myIsLexical = isLexical;
     myExplicitNamespaceName = explicitNamespaceName;
+    myIsForceShortMain = isForceShortMain;
   }
 
   private PerlVariableCompletionProcessorImpl(@NotNull PerlVariableCompletionProcessorImpl original,
@@ -59,6 +64,7 @@ public class PerlVariableCompletionProcessorImpl extends PerlCompletionProcessor
     myIsDeclaration = original.isDeclaration();
     myIsLexical = original.isLexical();
     myExplicitNamespaceName = original.getExplicitNamespaceName();
+    myIsForceShortMain = original.isForceShortMain();
   }
 
   @Override
@@ -83,7 +89,7 @@ public class PerlVariableCompletionProcessorImpl extends PerlCompletionProcessor
 
   @Override
   public boolean isForceShortMain() {
-    return false;
+    return myIsForceShortMain;
   }
 
   @Override

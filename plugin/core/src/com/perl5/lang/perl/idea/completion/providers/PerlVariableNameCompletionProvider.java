@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.completion.providers;
 import com.intellij.codeInsight.completion.CompletionData;
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionResultSet;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.patterns.StandardPatterns;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiUtilCore;
@@ -28,6 +29,7 @@ import com.perl5.lang.perl.idea.completion.providers.processors.PerlVariableComp
 import com.perl5.lang.perl.idea.completion.util.PerlVariableCompletionUtil;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableNameElement;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
 import static com.perl5.lang.perl.idea.PerlElementPatterns.VARIABLE_NAME_IN_DECLARATION_PATTERN;
@@ -57,8 +59,13 @@ public class PerlVariableNameCompletionProvider extends PerlCompletionProvider {
     boolean isDeclaration = VARIABLE_NAME_IN_DECLARATION_PATTERN.accepts(variableNameElement);
     boolean hasBraces = VARIABLE_OPEN_BRACES.contains(PsiUtilCore.getElementType(variableNameElement.getPrevSibling()));
     PerlVariableCompletionProcessorImpl variableCompletionProcessor =
-      new PerlVariableCompletionProcessorImpl(withFqnSafeMatcher(resultSet), variableNameElement, hasBraces,
-                                              isDeclaration, false, namespaceName);
+      new PerlVariableCompletionProcessorImpl(
+        withFqnSafeMatcher(resultSet),
+        variableNameElement,
+        namespaceName, hasBraces,
+        isDeclaration,
+        false,
+        StringUtil.startsWith(variableNameElement.getText(), PerlPackageUtil.NAMESPACE_SEPARATOR));
 
     // declaration helper
     if (isDeclaration) {

@@ -25,14 +25,29 @@ public interface PerlVariableCompletionProcessor extends PerlCompletionProcessor
     return getExplicitNamespaceName() != null;
   }
 
+  /**
+   * @return true iff braces are typed by user, e.g. {@code ${<caret>}}
+   */
   boolean hasBraces();
 
+  /**
+   * @return true iff we are at variable declaration, not usage.
+   */
   boolean isDeclaration();
 
+  /**
+   * @return true iff we must use short for of main, {@code ::} instead of {@code main::}
+   */
   boolean isForceShortMain();
 
+  /**
+   * @return true iff we are currently at lexical variables pass, therefore global variables should be used without a namespace
+   */
   boolean isLexical();
 
+  /**
+   * @return explicit namespace typed by user if any
+   */
   @Nullable String getExplicitNamespaceName();
 
   @Override
