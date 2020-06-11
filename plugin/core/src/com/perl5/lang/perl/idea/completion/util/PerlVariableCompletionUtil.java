@@ -66,24 +66,24 @@ public class PerlVariableCompletionUtil {
       .withInsertHandler(PerlInsertHandlers.HASH_ELEMENT_INSERT_HANDLER).withTailText("{}");
   }
 
+  private static @NotNull String computeVariableName(@NotNull PerlVariableDeclarationElement element,
+                                                     @NotNull PerlVariableCompletionProcessor completionProcessor) {
+    if (!completionProcessor.isLexical() && element.isGlobalDeclaration() && !(element instanceof PerlBuiltInVariable)) {
+      return StringUtil.notNullize(PerlVariable.adjustName(element.getCanonicalName(), completionProcessor.isForceShortMain()));
+    }
+    return PerlVariable.braceName(element.getVariableName());
+  }
+
   /**
    * @param sigilToPrepend '_' means we don't need to prepend
    */
   public static boolean processVariableLookupElement(@NotNull PerlVariableDeclarationElement element,
                                                      char sigilToPrepend,
                                                      @NotNull PerlVariableCompletionProcessor completionProcessor) {
-    String variableName;
-    if (completionProcessor.isLexical() || !element.isGlobalDeclaration() || element instanceof PerlBuiltInVariable) {
-      variableName = PerlVariable.braceName(element.getVariableName());
-    }
-    else {
-      variableName = StringUtil.notNullize(PerlVariable.adjustName(element.getCanonicalName(), completionProcessor.isForceShortMain()));
-    }
-
+    String variableName = computeVariableName(element, completionProcessor);
     if (!completionProcessor.matches(variableName)) {
       return completionProcessor.result();
     }
-
     String lookupString = sigilToPrepend == '_' ? variableName :
                           sigilToPrepend + variableName;
     LookupElementBuilder elementBuilder = LookupElementBuilder.create(element, lookupString)
