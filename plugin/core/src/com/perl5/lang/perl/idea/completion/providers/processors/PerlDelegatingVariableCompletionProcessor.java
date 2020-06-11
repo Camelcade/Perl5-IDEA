@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.completion.providers.processors;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class PerlDelegatingVariableCompletionProcessor extends PerlDelegatingCompletionProcessor<PerlVariableCompletionProcessor>
   implements PerlVariableCompletionProcessor {
@@ -48,6 +49,11 @@ public class PerlDelegatingVariableCompletionProcessor extends PerlDelegatingCom
   @Override
   public boolean isLexical() {
     return getDelegate().isLexical();
+  }
+
+  @Override
+  public @Nullable String getExplicitNamespaceName() {
+    return getDelegate().getExplicitNamespaceName();
   }
 
   @Override

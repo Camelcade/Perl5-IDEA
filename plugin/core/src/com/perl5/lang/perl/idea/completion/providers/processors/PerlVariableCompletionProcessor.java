@@ -18,9 +18,12 @@ package com.perl5.lang.perl.idea.completion.providers.processors;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public interface PerlVariableCompletionProcessor extends PerlCompletionProcessor {
-  boolean isFullQualified();
+  default boolean isFullQualified() {
+    return getExplicitNamespaceName() != null;
+  }
 
   boolean hasBraces();
 
@@ -29,6 +32,8 @@ public interface PerlVariableCompletionProcessor extends PerlCompletionProcessor
   boolean isForceShortMain();
 
   boolean isLexical();
+
+  @Nullable String getExplicitNamespaceName();
 
   @Override
   @Contract(pure = true)

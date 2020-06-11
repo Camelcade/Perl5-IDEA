@@ -41,13 +41,11 @@ public class PerlVariableCompletionProvider extends PerlCompletionProvider {
     PsiElement subName = parameters.getPosition();
     PsiElement method = subName.getParent();
 
-    boolean fullQualified = false;
     String namespaceName = null;
     if (method instanceof PsiPerlMethod) {
       if (((PsiPerlMethod)method).isObjectMethod()) {
         return;
       }
-      fullQualified = ((PsiPerlMethod)method).hasExplicitNamespace();
       namespaceName = ((PsiPerlMethod)method).getExplicitNamespaceName();
     }
     else if (!(method instanceof PsiPerlPerlHandleExpr)) {
@@ -55,7 +53,7 @@ public class PerlVariableCompletionProvider extends PerlCompletionProvider {
     }
 
     PerlVariableCompletionProcessor variableCompletionProcessor = new PerlVariableCompletionProcessorImpl(
-      withFqnSafeMatcher(resultSet), subName, fullQualified, false, false, false);
+      withFqnSafeMatcher(resultSet), subName, false, false, false, namespaceName);
 
     PerlVariableCompletionUtil.fillWithVariables(variableCompletionProcessor, namespaceName);
     variableCompletionProcessor.logStatus(getClass());

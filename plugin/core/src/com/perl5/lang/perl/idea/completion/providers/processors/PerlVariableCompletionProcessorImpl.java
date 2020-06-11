@@ -19,55 +19,51 @@ package com.perl5.lang.perl.idea.completion.providers.processors;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class PerlVariableCompletionProcessorImpl extends PerlCompletionProcessorBase implements PerlVariableCompletionProcessor {
-  private final boolean myIsFullQualified;
   private final boolean myHasBraces;
   private final boolean myIsDeclaration;
   private final boolean myIsLexical;
+  private final @Nullable String myExplicitNamespaceName;
 
   public PerlVariableCompletionProcessorImpl(@NotNull CompletionResultSet resultSet,
                                              @NotNull PsiElement leafElement,
-                                             boolean isFullQualified,
                                              boolean hasBraces,
                                              boolean isDeclaration,
-                                             boolean isLexical) {
+                                             boolean isLexical,
+                                             @Nullable String explicitNamespaceName) {
     super(resultSet, leafElement);
-    myIsFullQualified = isFullQualified;
     myHasBraces = hasBraces;
     myIsDeclaration = isDeclaration;
     myIsLexical = isLexical;
+    myExplicitNamespaceName = explicitNamespaceName;
   }
 
   public PerlVariableCompletionProcessorImpl(@NotNull PerlCompletionProcessor processor,
-                                             boolean isFullQualified,
                                              boolean hasBraces,
                                              boolean isDeclaration,
-                                             boolean isLexical) {
+                                             boolean isLexical,
+                                             @Nullable String explicitNamespaceName) {
     super(processor);
-    myIsFullQualified = isFullQualified;
     myHasBraces = hasBraces;
     myIsDeclaration = isDeclaration;
     myIsLexical = isLexical;
+    myExplicitNamespaceName = explicitNamespaceName;
   }
 
   private PerlVariableCompletionProcessorImpl(@NotNull PerlVariableCompletionProcessorImpl original,
                                               @NotNull String newPrefixMatcher) {
     super(original, newPrefixMatcher);
-    myIsFullQualified = original.isFullQualified();
     myHasBraces = original.hasBraces();
     myIsDeclaration = original.isDeclaration();
     myIsLexical = original.isLexical();
+    myExplicitNamespaceName = original.getExplicitNamespaceName();
   }
 
   @Override
   public boolean isLexical() {
     return myIsLexical;
-  }
-
-  @Override
-  public boolean isFullQualified() {
-    return myIsFullQualified;
   }
 
   @Override
@@ -80,6 +76,10 @@ public class PerlVariableCompletionProcessorImpl extends PerlCompletionProcessor
     return myIsDeclaration;
   }
 
+  @Override
+  public @Nullable String getExplicitNamespaceName() {
+    return myExplicitNamespaceName;
+  }
 
   @Override
   public boolean isForceShortMain() {

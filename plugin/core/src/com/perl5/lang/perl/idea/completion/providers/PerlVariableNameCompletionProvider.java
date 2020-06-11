@@ -26,8 +26,8 @@ import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlCompletionProvider;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlVariableCompletionProcessorImpl;
 import com.perl5.lang.perl.idea.completion.util.PerlVariableCompletionUtil;
+import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableNameElement;
-import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
 import static com.perl5.lang.perl.idea.PerlElementPatterns.VARIABLE_NAME_IN_DECLARATION_PATTERN;
@@ -43,24 +43,28 @@ public class PerlVariableNameCompletionProvider extends PerlCompletionProvider {
                              @NotNull CompletionResultSet resultSet) {
     PsiElement variableNameElement = parameters.getPosition();
 
-    PsiElement position = parameters.getOriginalPosition();
-    if (position instanceof PerlVariableNameElement) {
+    PsiElement originalElement = parameters.getOriginalPosition();
+    String namespaceName = null;
+    if (originalElement instanceof PerlVariableNameElement) {
       resultSet = resultSet.withPrefixMatcher(CompletionData.findPrefixDefault(
         variableNameElement, parameters.getOffset(), StandardPatterns.alwaysFalse()));
+      PsiElement variable = originalElement.getParent();
+      if (variable instanceof PerlVariable) {
+        namespaceName = ((PerlVariable)variable).getExplicitNamespaceName();
+      }
     }
 
     boolean isDeclaration = VARIABLE_NAME_IN_DECLARATION_PATTERN.accepts(variableNameElement);
-    boolean isFullQualified = PerlPackageUtil.isFullQualifiedName(variableNameElement.getText());
     boolean hasBraces = VARIABLE_OPEN_BRACES.contains(PsiUtilCore.getElementType(variableNameElement.getPrevSibling()));
     PerlVariableCompletionProcessorImpl variableCompletionProcessor =
-      new PerlVariableCompletionProcessorImpl(withFqnSafeMatcher(resultSet), variableNameElement, isFullQualified, hasBraces,
-                                              isDeclaration, false);
+      new PerlVariableCompletionProcessorImpl(withFqnSafeMatcher(resultSet), variableNameElement, hasBraces,
+                                              isDeclaration, false, namespaceName);
 
     // declaration helper
     if (isDeclaration) {
       PerlVariableCompletionUtil.fillWithUnresolvedVars(variableCompletionProcessor);
     }
-    else if (!isFullQualified) {
+    else if (!variableCompletionProcessor.isFullQualified()) {
       PerlVariableCompletionUtil.fillWithLexicalVariables(variableCompletionProcessor);
       PerlVariableCompletionUtil.fillWithBuiltInVariables(variableCompletionProcessor);
     }
@@ -71,7 +75,7 @@ public class PerlVariableNameCompletionProvider extends PerlCompletionProvider {
     }
 
     // imports
-    if (!isDeclaration && !isFullQualified) {
+    if (!isDeclaration && !variableCompletionProcessor.isFullQualified()) {
       PerlVariableCompletionUtil.fillWithImportedVariables(variableCompletionProcessor);
     }
 
