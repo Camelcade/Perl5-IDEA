@@ -102,7 +102,7 @@ Caret offset: 46
   say 'hi';
     do
     {
-      <caret>  
+        <caret>
     }
 }
 
@@ -298,7 +298,7 @@ Caret offset: 67
   say 'hi';
     do
     {
-      <caret>  
+        <caret>
     }
 } continue {}
 
@@ -493,7 +493,7 @@ Caret offset: 93
 say 'hi'
 do
     {
-    <caret>    
+        <caret>
     };
 
 my $var = 1 + 2;
@@ -2165,7 +2165,7 @@ foreach($a){}continue{}
 given($a){
     do
     {
-      <caret>  
+        <caret>
     }
 }
 
@@ -2265,7 +2265,7 @@ given($a){
   when($b){}
     do
     {
-      <caret>  
+        <caret>
     }
 }
 
@@ -2365,7 +2365,7 @@ given($a){
   when($b){}
     do
     {
-      <caret>  
+        <caret>
     }
     when($b){}
 }
@@ -2466,7 +2466,7 @@ given($a){
   when($b){}
     do
     {
-      <caret>  
+        <caret>
     }
     default{}
 }

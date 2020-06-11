@@ -33,7 +33,7 @@ Caret offset: 32
 
 {
     try {
-    <caret>    
+        <caret>
     }
 }
 
@@ -165,5 +165,3 @@ catch{}
 try {
     <caret>
 }
-
-
