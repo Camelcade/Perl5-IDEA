@@ -1,15 +1,15 @@
-Text: main::array; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+Text: array; Tail: []; Type: main; Icon: /array_gutter_icon.png; Type Icon: null
 	Lookups: main::array
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 12 in hashSlices520global.pl
-Text: main::hash; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+Text: hash; Tail: null; Type: main; Icon: /hash_gutter_icon.png; Type Icon: null
 	Lookups: main::hash
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 19 in hashSlices520global.pl
-Text: main::hash; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+Text: hash; Tail: {}; Type: main; Icon: /hash_gutter_icon.png; Type Icon: null
 	Lookups: main::hash
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 19 in hashSlices520global.pl
-Text: main::otherhash; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+Text: otherhash; Tail: null; Type: main; Icon: /hash_gutter_icon.png; Type Icon: null
 	Lookups: main::otherhash
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 25 in hashSlices520global.pl
-Text: main::otherhash; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+Text: otherhash; Tail: {}; Type: main; Icon: /hash_gutter_icon.png; Type Icon: null
 	Lookups: main::otherhash
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 25 in hashSlices520global.pl

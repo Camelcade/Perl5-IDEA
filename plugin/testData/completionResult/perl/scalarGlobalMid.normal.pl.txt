@@ -1,1 +1,1 @@
-$MyTest::Some::Package::SCALAR_VAR<caret>est;
+$MyTest::Some::Package::<caret>est;

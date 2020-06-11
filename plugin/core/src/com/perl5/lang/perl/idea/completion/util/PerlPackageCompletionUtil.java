@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,6 +28,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.ObjectUtils;
+import com.intellij.util.Processor;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlCompletionProcessor;
@@ -111,68 +112,80 @@ public class PerlPackageCompletionUtil {
     final Project project = element.getProject();
     GlobalSearchScope resolveScope = element.getResolveScope();
 
-    PerlBuiltInNamespacesService.getInstance(project).processNamespaces(
-      namespace -> PerlPackageCompletionUtil.processNamespaceLookupElement(namespace, completionProcessor));
+    Processor<PerlNamespaceDefinitionElement> namespaceProcessor =
+      namespace -> PerlPackageCompletionUtil.processNamespaceLookupElement(namespace, completionProcessor);
 
+    PerlBuiltInNamespacesService.getInstance(project).processNamespaces(namespaceProcessor);
     PerlPackageCompletionUtil.processPackageLookupElement(null, __PACKAGE__, PACKAGE_GUTTER_ICON, completionProcessor);
-    for (String packageName : PerlPackageUtil.getKnownNamespaceNames(project)) {
-      PerlPackageUtil.processNamespaces(packageName, project, resolveScope, namespace -> {
-        String name = namespace.getNamespaceName();
-        if (StringUtil.isNotEmpty(name)) {
-          char firstChar = name.charAt(0);
-          if (firstChar == '_' || Character.isLetterOrDigit(firstChar)) {
-            PerlPackageCompletionUtil.processPackageLookupElement(namespace, name, namespace.getIcon(0), completionProcessor);
-            return false;
-          }
-        }
-        return completionProcessor.result();
-      });
-    }
+    processFirstNamespaceForEachName(completionProcessor, project, resolveScope, namespaceProcessor);
   }
 
-  public static boolean processAllNamespacesNamesWithAutocompletion(@NotNull PerlCompletionProcessor completionProcessor) {
+  public static boolean processAllNamespacesNamesWithAutocompletion(@NotNull PerlCompletionProcessor completionProcessor,
+                                                                    boolean withStaticExpanding,
+                                                                    boolean withObjectExpanding) {
+    if (!withStaticExpanding && !withObjectExpanding) {
+      return completionProcessor.result();
+    }
     PsiElement element = completionProcessor.getLeafElement();
     final Project project = element.getProject();
     GlobalSearchScope resolveScope = element.getResolveScope();
 
-    PerlBuiltInNamespacesService.getInstance(project).processNamespaces(
-      namespace -> processExpandablePackageElement(namespace, namespace.getNamespaceName(), completionProcessor));
+    Processor<PerlNamespaceDefinitionElement> namespaceProcessor = namespace -> processExpandablePackageElement(
+      namespace, namespace.getNamespaceName(), completionProcessor, withStaticExpanding, withObjectExpanding);
 
+    PerlBuiltInNamespacesService.getInstance(project).processNamespaces(namespaceProcessor);
+    return processFirstNamespaceForEachName(completionProcessor, project, resolveScope, namespaceProcessor);
+  }
+
+  /**
+   * Iterates all namespaces in {@code project} and {@code searchScope}, and processes the first element with each name with
+   * {@code namespaceProcessor}
+   */
+  public static boolean processFirstNamespaceForEachName(@NotNull PerlCompletionProcessor completionProcessor,
+                                                         @NotNull Project project,
+                                                         @NotNull GlobalSearchScope searchScope,
+                                                         @NotNull Processor<PerlNamespaceDefinitionElement> namespaceProcessor) {
     for (String packageName : PerlPackageUtil.getKnownNamespaceNames(project)) {
-      PerlPackageUtil.processNamespaces(packageName, project, resolveScope, namespace -> {
+      PerlPackageUtil.processNamespaces(packageName, project, searchScope, namespace -> {
         String name = namespace.getNamespaceName();
         if (StringUtil.isNotEmpty(name)) {
           char firstChar = name.charAt(0);
           if (firstChar == '_' || Character.isLetterOrDigit(firstChar)) {
-            processExpandablePackageElement(namespace, packageName, completionProcessor);
+            namespaceProcessor.process(namespace);
             return false;
           }
         }
-        return completionProcessor.result();
+        return false;
       });
       if (!completionProcessor.result()) {
         return false;
       }
     }
-    return true;
+    return completionProcessor.result();
   }
 
   protected static boolean processExpandablePackageElement(@NotNull PerlNamespaceDefinitionElement namespaceDefinitionElement,
                                                            @Nullable String packageName,
-                                                           @NotNull PerlCompletionProcessor completionProcessor) {
+                                                           @NotNull PerlCompletionProcessor completionProcessor,
+                                                           boolean withStaticExpanding,
+                                                           boolean withObjectExpanding) {
     String prefix = completionProcessor.getResultSet().getPrefixMatcher().getPrefix();
-    String name = packageName + PerlPackageUtil.NAMESPACE_SEPARATOR;
-    if (!StringUtil.equals(name, prefix)) {
-      if (!PerlPackageCompletionUtil.processPackageLookupElementWithAutocomplete(
-        namespaceDefinitionElement, name, namespaceDefinitionElement.getIcon(0), completionProcessor)) {
-        return false;
+    if (withStaticExpanding) {
+      String name = packageName + PerlPackageUtil.NAMESPACE_SEPARATOR;
+      if (!StringUtil.equals(name, prefix)) {
+        if (!PerlPackageCompletionUtil.processPackageLookupElementWithAutocomplete(
+          namespaceDefinitionElement, name, namespaceDefinitionElement.getIcon(0), completionProcessor)) {
+          return false;
+        }
       }
     }
 
-    name = packageName + PerlPackageUtil.DEREFERENCE_OPERATOR;
-    if (!StringUtil.equals(name, prefix)) {
-      return PerlPackageCompletionUtil.processPackageLookupElementWithAutocomplete(
-        namespaceDefinitionElement, name, namespaceDefinitionElement.getIcon(0), completionProcessor);
+    if (withObjectExpanding) {
+      String name = packageName + PerlPackageUtil.DEREFERENCE_OPERATOR;
+      if (!StringUtil.equals(name, prefix)) {
+        return PerlPackageCompletionUtil.processPackageLookupElementWithAutocomplete(
+          namespaceDefinitionElement, name, namespaceDefinitionElement.getIcon(0), completionProcessor);
+      }
     }
     return completionProcessor.result();
   }

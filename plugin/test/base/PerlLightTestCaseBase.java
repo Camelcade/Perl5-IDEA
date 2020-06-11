@@ -585,11 +585,14 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   }
 
   protected void doTestCompletionResult() {
+    doTestCompletionResult(getCompletionCompleteChar());
+  }
+
+  protected void doTestCompletionResult(@MagicConstant(valuesFromClass = Lookup.class) char completeChar) {
     initWithFileSmart();
     assertNotNull("Please, add <complete lookup_string> to your test data", myCompletionResultLookupString);
     getEditor().getCaretModel().moveToOffset(myCompletionResultEditorOffset);
-    doTestCompletionResult(myCompletionResultLookupString, getCompletionType(), getCompletionInvocationCount(),
-                           getCompletionCompleteChar());
+    doTestCompletionResult(myCompletionResultLookupString, getCompletionType(), getCompletionInvocationCount(), completeChar);
   }
 
   protected void doTestCompletionResult(@NotNull String lookupString,

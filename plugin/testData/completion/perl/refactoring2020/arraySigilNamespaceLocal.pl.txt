@@ -1,0 +1,6 @@
+Text: ARRAY_VAR; Tail: []; Type: Foo::Bar; Icon: /array_gutter_icon.png; Type Icon: null
+	Lookups: Foo::Bar::ARRAY_VAR
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 37 in arraySigilNamespaceLocal.pl
+Text: ARRAY_VAR; Tail: null; Type: Foo::Bar; Icon: /array_gutter_icon.png; Type Icon: null
+	Lookups: Foo::Bar::ARRAY_VAR
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 37 in arraySigilNamespaceLocal.pl

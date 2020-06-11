@@ -1,0 +1,3 @@
+Text: HASH_VAR; Tail: null; Type: Foo::Bar; Icon: /hash_gutter_icon.png; Type Icon: null
+	Lookups: Foo::Bar::HASH_VAR
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 36 in hashSigilNamespaceLocal.pl

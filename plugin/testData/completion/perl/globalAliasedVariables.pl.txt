@@ -1,147 +1,105 @@
-Text: $ARRAY1_VAR; Tail: []; Type: Baz::Zoo; Icon: /array_gutter_icon.png; Type Icon: null
+Text: ARRAY1_VAR; Tail: []; Type: Baz::Zoo; Icon: /array_gutter_icon.png; Type Icon: null
 	Lookups: $ARRAY1_VAR, ARRAY1_VAR
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 219 in globalAliasedVariables.pl
-Text: $ARRAY_VAR; Tail: []; Type: Foo::Bar; Icon: /array_gutter_icon.png; Type Icon: null
+Text: ARRAY1_VAR; Tail: []; Type: Baz::Zoo; Icon: /array_gutter_icon.png; Type Icon: null
+	Lookups: @ARRAY1_VAR, ARRAY1_VAR
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 219 in globalAliasedVariables.pl
+Text: ARRAY1_VAR; Tail: null; Type: Baz::Zoo; Icon: /array_gutter_icon.png; Type Icon: null
+	Lookups: @ARRAY1_VAR, ARRAY1_VAR
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 219 in globalAliasedVariables.pl
+Text: ARRAY_VAR; Tail: []; Type: Foo::Bar; Icon: /array_gutter_icon.png; Type Icon: null
 	Lookups: $ARRAY_VAR, ARRAY_VAR
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 44 in globalAliasedVariables.pl
-Text: $Baz::Zoo::ARRAY1_VAR; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
-	Lookups: $Baz::Zoo::ARRAY1_VAR, Baz::Zoo::ARRAY1_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 219 in globalAliasedVariables.pl
-Text: $Baz::Zoo::HASH1_VAR; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
-	Lookups: $Baz::Zoo::HASH1_VAR, Baz::Zoo::HASH1_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 249 in globalAliasedVariables.pl
-Text: $Baz::Zoo::SCALAR1_VAR; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
-	Lookups: $Baz::Zoo::SCALAR1_VAR, Baz::Zoo::SCALAR1_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 197 in globalAliasedVariables.pl
-Text: $Foo::Bar::ARRAY_VAR; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
-	Lookups: $Foo::Bar::ARRAY_VAR, Foo::Bar::ARRAY_VAR
+Text: ARRAY_VAR; Tail: []; Type: Foo::Bar; Icon: /array_gutter_icon.png; Type Icon: null
+	Lookups: @ARRAY_VAR, ARRAY_VAR
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 44 in globalAliasedVariables.pl
-Text: $Foo::Bar::HASH_VAR; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
-	Lookups: $Foo::Bar::HASH_VAR, Foo::Bar::HASH_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 72 in globalAliasedVariables.pl
-Text: $Foo::Bar::SCALAR_VAR; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
-	Lookups: $Foo::Bar::SCALAR_VAR, Foo::Bar::SCALAR_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 23 in globalAliasedVariables.pl
-Text: $HASH1_VAR; Tail: {}; Type: Baz::Zoo; Icon: /hash_gutter_icon.png; Type Icon: null
-	Lookups: $HASH1_VAR, HASH1_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 249 in globalAliasedVariables.pl
-Text: $HASH_VAR; Tail: {}; Type: Foo::Bar; Icon: /hash_gutter_icon.png; Type Icon: null
-	Lookups: $HASH_VAR, HASH_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 72 in globalAliasedVariables.pl
-Text: $MyTest::Some::Package::ARRAY_VAR; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
-	Lookups: $MyTest::Some::Package::ARRAY_VAR, MyTest::Some::Package::ARRAY_VAR
+Text: ARRAY_VAR; Tail: []; Type: MyTest::Some::Package; Icon: /array_gutter_icon.png; Type Icon: null
+	Lookups: $MyTest::Some::Package::ARRAY_VAR, ARRAY_VAR
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 171 in Package.pm
-Text: $MyTest::Some::Package::HASH_VAR; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
-	Lookups: $MyTest::Some::Package::HASH_VAR, MyTest::Some::Package::HASH_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 187 in Package.pm
-Text: $MyTest::Some::Package::SCALAR_VAR; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
-	Lookups: $MyTest::Some::Package::SCALAR_VAR, MyTest::Some::Package::SCALAR_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 154 in Package.pm
-Text: $SCALAR1_VAR; Tail: null; Type: Baz::Zoo; Icon: /scalar_gutter_icon.png; Type Icon: null
-	Lookups: $SCALAR1_VAR, SCALAR1_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 197 in globalAliasedVariables.pl
-Text: $SCALAR_VAR; Tail: null; Type: Foo::Bar; Icon: /scalar_gutter_icon.png; Type Icon: null
-	Lookups: $SCALAR_VAR, SCALAR_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 23 in globalAliasedVariables.pl
-Text: $array1_var; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
-	Lookups: $array1_var, array1_var
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 301 in globalAliasedVariables.pl
-Text: $array_var; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
-	Lookups: $array_var, array_var
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 121 in globalAliasedVariables.pl
-Text: $hash1_var; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
-	Lookups: $hash1_var, hash1_var
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 330 in globalAliasedVariables.pl
-Text: $hash_var; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
-	Lookups: $hash_var, hash_var
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 148 in globalAliasedVariables.pl
-Text: $scalar1_var; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
-	Lookups: $scalar1_var, scalar1_var
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 280 in globalAliasedVariables.pl
-Text: $scalar_var; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
-	Lookups: $scalar_var, scalar_var
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 101 in globalAliasedVariables.pl
-Text: %Baz::Zoo::HASH1_VAR; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
-	Lookups: %Baz::Zoo::HASH1_VAR, Baz::Zoo::HASH1_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 249 in globalAliasedVariables.pl
-Text: %Foo::Bar::HASH_VAR; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
-	Lookups: %Foo::Bar::HASH_VAR, Foo::Bar::HASH_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 72 in globalAliasedVariables.pl
-Text: %HASH1_VAR; Tail: null; Type: Baz::Zoo; Icon: /hash_gutter_icon.png; Type Icon: null
+Text: ARRAY_VAR; Tail: []; Type: MyTest::Some::Package; Icon: /array_gutter_icon.png; Type Icon: null
+	Lookups: @MyTest::Some::Package::ARRAY_VAR, ARRAY_VAR
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 171 in Package.pm
+Text: ARRAY_VAR; Tail: null; Type: Foo::Bar; Icon: /array_gutter_icon.png; Type Icon: null
+	Lookups: @ARRAY_VAR, ARRAY_VAR
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 44 in globalAliasedVariables.pl
+Text: ARRAY_VAR; Tail: null; Type: MyTest::Some::Package; Icon: /array_gutter_icon.png; Type Icon: null
+	Lookups: @MyTest::Some::Package::ARRAY_VAR, ARRAY_VAR
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 171 in Package.pm
+Text: HASH1_VAR; Tail: null; Type: Baz::Zoo; Icon: /hash_gutter_icon.png; Type Icon: null
 	Lookups: %HASH1_VAR, HASH1_VAR
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 249 in globalAliasedVariables.pl
-Text: %HASH_VAR; Tail: null; Type: Foo::Bar; Icon: /hash_gutter_icon.png; Type Icon: null
-	Lookups: %HASH_VAR, HASH_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 72 in globalAliasedVariables.pl
-Text: %MyTest::Some::Package::HASH_VAR; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
-	Lookups: %MyTest::Some::Package::HASH_VAR, MyTest::Some::Package::HASH_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 187 in Package.pm
-Text: %hash1_var; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
-	Lookups: %hash1_var, hash1_var
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 330 in globalAliasedVariables.pl
-Text: %hash_var; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
-	Lookups: %hash_var, hash_var
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 148 in globalAliasedVariables.pl
-Text: @ARRAY1_VAR; Tail: []; Type: Baz::Zoo; Icon: /array_gutter_icon.png; Type Icon: null
-	Lookups: @ARRAY1_VAR, ARRAY1_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 219 in globalAliasedVariables.pl
-Text: @ARRAY1_VAR; Tail: null; Type: Baz::Zoo; Icon: /array_gutter_icon.png; Type Icon: null
-	Lookups: @ARRAY1_VAR, ARRAY1_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 219 in globalAliasedVariables.pl
-Text: @ARRAY_VAR; Tail: []; Type: Foo::Bar; Icon: /array_gutter_icon.png; Type Icon: null
-	Lookups: @ARRAY_VAR, ARRAY_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 44 in globalAliasedVariables.pl
-Text: @ARRAY_VAR; Tail: null; Type: Foo::Bar; Icon: /array_gutter_icon.png; Type Icon: null
-	Lookups: @ARRAY_VAR, ARRAY_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 44 in globalAliasedVariables.pl
-Text: @Baz::Zoo::ARRAY1_VAR; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
-	Lookups: @Baz::Zoo::ARRAY1_VAR, Baz::Zoo::ARRAY1_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 219 in globalAliasedVariables.pl
-Text: @Baz::Zoo::ARRAY1_VAR; Tail: null; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
-	Lookups: @Baz::Zoo::ARRAY1_VAR, Baz::Zoo::ARRAY1_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 219 in globalAliasedVariables.pl
-Text: @Baz::Zoo::HASH1_VAR; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
-	Lookups: @Baz::Zoo::HASH1_VAR, Baz::Zoo::HASH1_VAR
+Text: HASH1_VAR; Tail: {}; Type: Baz::Zoo; Icon: /hash_gutter_icon.png; Type Icon: null
+	Lookups: $HASH1_VAR, HASH1_VAR
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 249 in globalAliasedVariables.pl
-Text: @Foo::Bar::ARRAY_VAR; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
-	Lookups: @Foo::Bar::ARRAY_VAR, Foo::Bar::ARRAY_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 44 in globalAliasedVariables.pl
-Text: @Foo::Bar::ARRAY_VAR; Tail: null; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
-	Lookups: @Foo::Bar::ARRAY_VAR, Foo::Bar::ARRAY_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 44 in globalAliasedVariables.pl
-Text: @Foo::Bar::HASH_VAR; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
-	Lookups: @Foo::Bar::HASH_VAR, Foo::Bar::HASH_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 72 in globalAliasedVariables.pl
-Text: @HASH1_VAR; Tail: {}; Type: Baz::Zoo; Icon: /hash_gutter_icon.png; Type Icon: null
+Text: HASH1_VAR; Tail: {}; Type: Baz::Zoo; Icon: /hash_gutter_icon.png; Type Icon: null
 	Lookups: @HASH1_VAR, HASH1_VAR
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 249 in globalAliasedVariables.pl
-Text: @HASH_VAR; Tail: {}; Type: Foo::Bar; Icon: /hash_gutter_icon.png; Type Icon: null
+Text: HASH_VAR; Tail: null; Type: Foo::Bar; Icon: /hash_gutter_icon.png; Type Icon: null
+	Lookups: %HASH_VAR, HASH_VAR
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 72 in globalAliasedVariables.pl
+Text: HASH_VAR; Tail: null; Type: MyTest::Some::Package; Icon: /hash_gutter_icon.png; Type Icon: null
+	Lookups: %MyTest::Some::Package::HASH_VAR, HASH_VAR
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 187 in Package.pm
+Text: HASH_VAR; Tail: {}; Type: Foo::Bar; Icon: /hash_gutter_icon.png; Type Icon: null
+	Lookups: $HASH_VAR, HASH_VAR
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 72 in globalAliasedVariables.pl
+Text: HASH_VAR; Tail: {}; Type: Foo::Bar; Icon: /hash_gutter_icon.png; Type Icon: null
 	Lookups: @HASH_VAR, HASH_VAR
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 72 in globalAliasedVariables.pl
-Text: @MyTest::Some::Package::ARRAY_VAR; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
-	Lookups: @MyTest::Some::Package::ARRAY_VAR, MyTest::Some::Package::ARRAY_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 171 in Package.pm
-Text: @MyTest::Some::Package::ARRAY_VAR; Tail: null; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
-	Lookups: @MyTest::Some::Package::ARRAY_VAR, MyTest::Some::Package::ARRAY_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 171 in Package.pm
-Text: @MyTest::Some::Package::HASH_VAR; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
-	Lookups: @MyTest::Some::Package::HASH_VAR, MyTest::Some::Package::HASH_VAR
+Text: HASH_VAR; Tail: {}; Type: MyTest::Some::Package; Icon: /hash_gutter_icon.png; Type Icon: null
+	Lookups: $MyTest::Some::Package::HASH_VAR, HASH_VAR
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 187 in Package.pm
-Text: @array1_var; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+Text: HASH_VAR; Tail: {}; Type: MyTest::Some::Package; Icon: /hash_gutter_icon.png; Type Icon: null
+	Lookups: @MyTest::Some::Package::HASH_VAR, HASH_VAR
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 187 in Package.pm
+Text: SCALAR1_VAR; Tail: null; Type: Baz::Zoo; Icon: /scalar_gutter_icon.png; Type Icon: null
+	Lookups: $SCALAR1_VAR, SCALAR1_VAR
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 197 in globalAliasedVariables.pl
+Text: SCALAR_VAR; Tail: null; Type: Foo::Bar; Icon: /scalar_gutter_icon.png; Type Icon: null
+	Lookups: $SCALAR_VAR, SCALAR_VAR
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 23 in globalAliasedVariables.pl
+Text: SCALAR_VAR; Tail: null; Type: MyTest::Some::Package; Icon: /scalar_gutter_icon.png; Type Icon: null
+	Lookups: $MyTest::Some::Package::SCALAR_VAR, SCALAR_VAR
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 154 in Package.pm
+Text: array1_var; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+	Lookups: $array1_var, array1_var
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 301 in globalAliasedVariables.pl
+Text: array1_var; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
 	Lookups: @array1_var, array1_var
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 301 in globalAliasedVariables.pl
-Text: @array1_var; Tail: null; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+Text: array1_var; Tail: null; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
 	Lookups: @array1_var, array1_var
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 301 in globalAliasedVariables.pl
-Text: @array_var; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+Text: array_var; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+	Lookups: $array_var, array_var
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 121 in globalAliasedVariables.pl
+Text: array_var; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
 	Lookups: @array_var, array_var
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 121 in globalAliasedVariables.pl
-Text: @array_var; Tail: null; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+Text: array_var; Tail: null; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
 	Lookups: @array_var, array_var
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 121 in globalAliasedVariables.pl
-Text: @hash1_var; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+Text: hash1_var; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+	Lookups: %hash1_var, hash1_var
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 330 in globalAliasedVariables.pl
+Text: hash1_var; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+	Lookups: $hash1_var, hash1_var
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 330 in globalAliasedVariables.pl
+Text: hash1_var; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
 	Lookups: @hash1_var, hash1_var
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 330 in globalAliasedVariables.pl
-Text: @hash_var; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+Text: hash_var; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+	Lookups: %hash_var, hash_var
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 148 in globalAliasedVariables.pl
+Text: hash_var; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+	Lookups: $hash_var, hash_var
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 148 in globalAliasedVariables.pl
+Text: hash_var; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
 	Lookups: @hash_var, hash_var
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 148 in globalAliasedVariables.pl
+Text: scalar1_var; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+	Lookups: $scalar1_var, scalar1_var
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 280 in globalAliasedVariables.pl
+Text: scalar_var; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+	Lookups: $scalar_var, scalar_var
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 101 in globalAliasedVariables.pl

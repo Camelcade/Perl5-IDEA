@@ -1,0 +1,9 @@
+Text: HASH_VAR; Tail: {}; Type: Foo::Bar; Icon: /hash_gutter_icon.png; Type Icon: null
+	Lookups: HASH_VAR
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 36 in hashSigilScalar.pl
+Text: HASH_VAR; Tail: {}; Type: MyTest::Some::Package; Icon: /hash_gutter_icon.png; Type Icon: null
+	Lookups: MyTest::Some::Package::HASH_VAR
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 187 in Package.pm
+Text: hash_var; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+	Lookups: hash_var
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 21 in hashSigilScalar.pl

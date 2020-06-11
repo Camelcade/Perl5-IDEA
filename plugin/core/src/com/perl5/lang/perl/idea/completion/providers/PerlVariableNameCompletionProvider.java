@@ -19,17 +19,16 @@ package com.perl5.lang.perl.idea.completion.providers;
 import com.intellij.codeInsight.completion.CompletionData;
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionResultSet;
-import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.patterns.StandardPatterns;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlCompletionProvider;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlVariableCompletionProcessorImpl;
+import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionUtil;
 import com.perl5.lang.perl.idea.completion.util.PerlVariableCompletionUtil;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableNameElement;
-import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
 import static com.perl5.lang.perl.idea.PerlElementPatterns.VARIABLE_NAME_IN_DECLARATION_PATTERN;
@@ -48,8 +47,8 @@ public class PerlVariableNameCompletionProvider extends PerlCompletionProvider {
     PsiElement originalElement = parameters.getOriginalPosition();
     String namespaceName = null;
     if (originalElement instanceof PerlVariableNameElement) {
-      resultSet = resultSet.withPrefixMatcher(CompletionData.findPrefixDefault(
-        variableNameElement, parameters.getOffset(), StandardPatterns.alwaysFalse()));
+      resultSet = resultSet.withPrefixMatcher(
+        CompletionData.findPrefixDefault(originalElement, parameters.getOffset(), StandardPatterns.alwaysFalse()));
       PsiElement variable = originalElement.getParent();
       if (variable instanceof PerlVariable) {
         namespaceName = ((PerlVariable)variable).getExplicitNamespaceName();
@@ -60,12 +59,13 @@ public class PerlVariableNameCompletionProvider extends PerlCompletionProvider {
     boolean hasBraces = VARIABLE_OPEN_BRACES.contains(PsiUtilCore.getElementType(variableNameElement.getPrevSibling()));
     PerlVariableCompletionProcessorImpl variableCompletionProcessor =
       new PerlVariableCompletionProcessorImpl(
-        withFqnSafeMatcher(resultSet),
+        resultSet.caseInsensitive(),
         variableNameElement,
-        namespaceName, hasBraces,
+        namespaceName,
+        hasBraces,
         isDeclaration,
-        false,
-        StringUtil.startsWith(variableNameElement.getText(), PerlPackageUtil.NAMESPACE_SEPARATOR));
+        false
+      );
 
     // declaration helper
     if (isDeclaration) {
@@ -88,6 +88,7 @@ public class PerlVariableNameCompletionProvider extends PerlCompletionProvider {
 
     // fqn names
     if (!isDeclaration) {
+      PerlPackageCompletionUtil.processAllNamespacesNamesWithAutocompletion(variableCompletionProcessor, true, false);
       PerlVariableCompletionUtil.fillWithFullQualifiedVariables(variableCompletionProcessor);
     }
     variableCompletionProcessor.logStatus(getClass());

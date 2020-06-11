@@ -63,7 +63,7 @@ public class PerlStringContentCompletionProvider extends PerlCompletionProvider 
       else {
         PerlStringCompletionUtil.fillWithHashIndexes(completionProcessor);
         PerlVariableCompletionUtil.fillWithVariables(
-          new PerlVariableCompletionProcessorImpl(completionProcessor, null, false, false, false, false));
+          new PerlVariableCompletionProcessorImpl(completionProcessor, null, false, false, false));
       }
     }
     else if (USE_PARAMETERS_PATTERN.accepts(element))    // use or no parameters

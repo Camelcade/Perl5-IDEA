@@ -1,42 +1,90 @@
-Text: !; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+Text: !; Tail: null; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: null
 	Lookups: !
 	PsiElement: Built-in: %!
-Text: +; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+Text: +; Tail: null; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: null
 	Lookups: +
 	PsiElement: Built-in: %+
-Text: -; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+Text: -; Tail: null; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: null
 	Lookups: -
 	PsiElement: Built-in: %-
-Text: ENV; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+Text: CORE::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+	Lookups: CORE::
+	PsiElement: Implicit namespace: CORE
+Text: CORE::GLOBAL::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+	Lookups: CORE::GLOBAL::
+	PsiElement: Implicit namespace: CORE::GLOBAL
+Text: ClassAccessor::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+	Lookups: ClassAccessor::
+	PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@ClassAccessor at 16 in ClassAccessor.pm
+Text: ENV; Tail: null; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: null
 	Lookups: ENV
 	PsiElement: Built-in: %ENV
-Text: ERRNO; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+Text: ERRNO; Tail: null; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: null
 	Lookups: ERRNO
 	PsiElement: Built-in: %ERRNO
-Text: INC; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
-	Lookups: INC
-	PsiElement: Built-in: %INC
-Text: LAST_PAREN_MATCH; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
-	Lookups: LAST_PAREN_MATCH
-	PsiElement: Built-in: %LAST_PAREN_MATCH
-Text: MyTest::Some::Package::HASH_VAR; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+Text: HASH_VAR; Tail: null; Type: MyTest::Some::Package; Icon: /hash_gutter_icon.png; Type Icon: null
 	Lookups: MyTest::Some::Package::HASH_VAR
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 187 in Package.pm
-Text: OS_ERROR; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+Text: INC; Tail: null; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: null
+	Lookups: INC
+	PsiElement: Built-in: %INC
+Text: LAST_PAREN_MATCH; Tail: null; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: null
+	Lookups: LAST_PAREN_MATCH
+	PsiElement: Built-in: %LAST_PAREN_MATCH
+Text: Library::Exception2::; Tail: ...; Type: null; Icon: /exceptionClass.svg; Type Icon: null
+	Lookups: Library::Exception2::
+	PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Library::Exception2; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 111 in Exceptions.pm
+Text: Library::Exception::; Tail: ...; Type: null; Icon: /exceptionClass.svg; Type Icon: null
+	Lookups: Library::Exception::
+	PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Library::Exception; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 54 in Exceptions.pm
+Text: LibraryException3::; Tail: ...; Type: null; Icon: /exceptionClass.svg; Type Icon: null
+	Lookups: LibraryException3::
+	PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@LibraryException3; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 131 in Exceptions.pm
+Text: LibraryException::; Tail: ...; Type: null; Icon: /exceptionClass.svg; Type Icon: null
+	Lookups: LibraryException::
+	PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@LibraryException; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 80 in Exceptions.pm
+Text: Mojolicious::Controller::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+	Lookups: Mojolicious::Controller::
+	PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Mojolicious::Controller at 0 in Controller.pm
+Text: Mojolicious::Plugin::DefaultHelpers::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+	Lookups: Mojolicious::Plugin::DefaultHelpers::
+	PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Mojolicious::Plugin::DefaultHelpers at 0 in DefaultHelpers.pm
+Text: Mojolicious::Plugin::TagHelpers::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+	Lookups: Mojolicious::Plugin::TagHelpers::
+	PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Mojolicious::Plugin::TagHelpers at 0 in TagHelpers.pm
+Text: MyTest::Constants::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+	Lookups: MyTest::Constants::
+	PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MyTest::Constants at 0 in Constants.pm
+Text: MyTest::Exceptions::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+	Lookups: MyTest::Exceptions::
+	PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MyTest::Exceptions at 0 in Exceptions.pm
+Text: MyTest::Some::Package::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+	Lookups: MyTest::Some::Package::
+	PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MyTest::Some::Package at 0 in Package.pm
+Text: MyTest::Something::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+	Lookups: MyTest::Something::
+	PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MyTest::Something at 0 in Something.pm
+Text: OS_ERROR; Tail: null; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: null
 	Lookups: OS_ERROR
 	PsiElement: Built-in: %OS_ERROR
-Text: SIG; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+Text: SIG; Tail: null; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: null
 	Lookups: SIG
 	PsiElement: Built-in: %SIG
-Text: ^H; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+Text: UNIVERSAL::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+	Lookups: UNIVERSAL::
+	PsiElement: Implicit namespace: UNIVERSAL
+Text: ^H; Tail: null; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: null
 	Lookups: ^H
 	PsiElement: Built-in: %^H
+Text: main::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+	Lookups: main::
+	PsiElement: Implicit namespace: main
 Text: somevar; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
 	Lookups: somevar
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 4 in variableHashInHash.pl
-Text: {^CAPTURE_ALL}; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+Text: {^CAPTURE_ALL}; Tail: null; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: null
 	Lookups: {^CAPTURE_ALL}
 	PsiElement: Built-in: %^CAPTURE_ALL
-Text: {^CAPTURE}; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+Text: {^CAPTURE}; Tail: null; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: null
 	Lookups: {^CAPTURE}
 	PsiElement: Built-in: %^CAPTURE

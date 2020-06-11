@@ -1,0 +1,5 @@
+package Foo::Bar;
+my %hash_var;
+our %HASH_VAR;
+
+%hash<caret>

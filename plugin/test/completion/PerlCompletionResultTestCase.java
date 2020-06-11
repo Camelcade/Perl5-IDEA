@@ -28,31 +28,31 @@ public abstract class PerlCompletionResultTestCase extends PerlLightTestCase {
   }
 
   @Test
-  public void testhashIndexScalar() {doTest();}
+  public void testHashIndexScalar() {doTest();}
 
   @Test
-  public void testhashIndexArrayElement() {doTest();}
+  public void testHashIndexArrayElement() {doTest();}
 
   @Test
-  public void testhashIndexHashElement() {doTest();}
+  public void testHashIndexHashElement() {doTest();}
 
   @Test
-  public void testhashIndexScalarMid() {doTest();}
+  public void testHashIndexScalarMid() {doTest();}
 
   @Test
-  public void testhashIndexArrayElementMid() {doTest();}
+  public void testHashIndexArrayElementMid() {doTest();}
 
   @Test
-  public void testhashIndexHashElementMid() {doTest();}
+  public void testHashIndexHashElementMid() {doTest();}
 
   @Test
-  public void testhashIndexScalarGlobal() {doTest();}
+  public void testHashIndexScalarGlobal() {doTest();}
 
   @Test
-  public void testhashIndexArrayElementGlobal() {doTest();}
+  public void testHashIndexArrayElementGlobal() {doTest();}
 
   @Test
-  public void testhashIndexHashElementGlobal() {doTest();}
+  public void testHashIndexHashElementGlobal() {doTest();}
 
   @Test
   public void testScalarGlobal() {doTest();}

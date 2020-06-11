@@ -1,0 +1,3 @@
+Text: SCALAR_VAR; Tail: null; Type: Foo::Bar; Icon: /scalar_gutter_icon.png; Type Icon: null
+	Lookups: $Foo::Bar::SCALAR_VAR, SCALAR_VAR
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 38 in noSigilNamespaceLocal.pl

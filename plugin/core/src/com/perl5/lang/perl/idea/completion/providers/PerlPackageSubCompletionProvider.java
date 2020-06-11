@@ -51,7 +51,7 @@ public class PerlPackageSubCompletionProvider extends PerlCompletionProvider {
 
     PerlSimpleCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(result, parameters.getPosition());
     if (!((PsiPerlMethod)method).isObjectMethod()) {
-      PerlPackageCompletionUtil.processAllNamespacesNamesWithAutocompletion(completionProcessor);
+      PerlPackageCompletionUtil.processAllNamespacesNamesWithAutocompletion(completionProcessor, true, true);
     }
     else {
       if (!StringUtil.equals(PerlPackageUtil.SUPER_NAMESPACE_FULL, newPrefixMathcer)) {

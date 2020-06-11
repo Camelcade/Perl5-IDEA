@@ -26,7 +26,6 @@ import com.perl5.lang.perl.idea.completion.providers.processors.PerlCompletionPr
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlVariableCompletionProcessor;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlVariableCompletionProcessorImpl;
 import com.perl5.lang.perl.idea.completion.util.PerlVariableCompletionUtil;
-import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
 import com.perl5.lang.perl.psi.PsiPerlPerlHandleExpr;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -45,22 +44,21 @@ public class PerlVariableCompletionProvider extends PerlCompletionProvider {
     PsiElement method = subName.getParent();
 
     String namespaceName = null;
-    boolean forceShortMain = false;
     if (method instanceof PsiPerlMethod) {
       if (((PsiPerlMethod)method).isObjectMethod()) {
         return;
       }
       namespaceName = ((PsiPerlMethod)method).getExplicitNamespaceName();
-      PerlNamespaceElement namespaceElement = ((PsiPerlMethod)method).getNamespaceElement();
-      forceShortMain = namespaceElement != null &&
-                       StringUtil.startsWith(namespaceElement.getNode().getChars(), PerlPackageUtil.NAMESPACE_SEPARATOR);
+      if (StringUtil.isNotEmpty(namespaceName)) {
+        resultSet = resultSet.withPrefixMatcher(PerlPackageUtil.join(namespaceName, resultSet.getPrefixMatcher().getPrefix()));
+      }
     }
     else if (!(method instanceof PsiPerlPerlHandleExpr)) {
       return;
     }
 
     PerlVariableCompletionProcessor variableCompletionProcessor = new PerlVariableCompletionProcessorImpl(
-      withFqnSafeMatcher(resultSet), subName, namespaceName, false, false, false, forceShortMain);
+      resultSet.caseInsensitive(), subName, namespaceName, false, false, false);
 
     PerlVariableCompletionUtil.fillWithVariables(variableCompletionProcessor);
     variableCompletionProcessor.logStatus(getClass());

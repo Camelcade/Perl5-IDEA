@@ -66,7 +66,7 @@ public class PerlScalarUtil implements PerlElementTypes, PerlBuiltInScalars {
         result.add(it);
       }
       return true;
-    });
+    }, true);
     return result;
   }
 
@@ -84,43 +84,41 @@ public class PerlScalarUtil implements PerlElementTypes, PerlBuiltInScalars {
   /**
    * Processes all global scalars with specific processor
    *
-   * @param project   project to search in
-   * @param processor string processor for suitable strings
-   * @return collection of constants names
+   * @param processAll if false, only one entry per name going to be processed. May be need when filling completion
    */
   public static boolean processDefinedGlobalScalars(@NotNull Project project,
                                                     @NotNull GlobalSearchScope scope,
-                                                    @NotNull Processor<PerlVariableDeclarationElement> processor) {
+                                                    @NotNull Processor<PerlVariableDeclarationElement> processor,
+                                                    boolean processAll) {
     return PerlImplicitDeclarationsService.getInstance(project).processScalars(processor) &&
-           processDefinedGlobalVariables(PerlVariablesStubIndex.KEY_SCALAR, project, scope, processor);
+           processDefinedGlobalVariables(PerlVariablesStubIndex.KEY_SCALAR, project, scope, processor, processAll);
   }
 
   /**
    * Method for processing global indexed variables
    *
-   * @param key       stub index key
-   * @param project   project
-   * @param scope     scope to search
-   * @param processor process to process
-   * @return false if we should stop processing
+   * @param processAll if false, only one entry per name going to be processed. May be need when filling completion
    */
-  public static boolean processDefinedGlobalVariables(
-    @NotNull StubIndexKey<String, PerlVariableDeclarationElement> key,
-    @NotNull Project project,
-    @NotNull GlobalSearchScope scope,
-    @NotNull Processor<PerlVariableDeclarationElement> processor) {
+  public static boolean processDefinedGlobalVariables(@NotNull StubIndexKey<String, PerlVariableDeclarationElement> key,
+                                                      @NotNull Project project,
+                                                      @NotNull GlobalSearchScope scope,
+                                                      @NotNull Processor<PerlVariableDeclarationElement> processor,
+                                                      boolean processAll) {
     StubIndex stubIndex = StubIndex.getInstance();
     for (String variableName : stubIndex.getAllKeys(key, project)) {
       if (variableName.length() == 0) {
-        return true;
+        continue;
       }
 
       char firstChar = variableName.charAt(0);
       if (firstChar == '_' || Character.isLetterOrDigit(firstChar)) {
-        if (!stubIndex.processElements(key, variableName, project, scope, PerlVariableDeclarationElement.class, element -> {
+        boolean[] result = new boolean[]{true};
+        stubIndex.processElements(key, variableName, project, scope, PerlVariableDeclarationElement.class, element -> {
           ProgressManager.checkCanceled();
-          return processor.process(element);
-        })) {
+          result[0] = processor.process(element);
+          return processAll && result[0];
+        });
+        if (!result[0]) {
           return false;
         }
       }

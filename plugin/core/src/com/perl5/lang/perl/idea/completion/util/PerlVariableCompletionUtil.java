@@ -49,7 +49,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Set;
 
 public class PerlVariableCompletionUtil {
-
   public static @NotNull LookupElementBuilder processVariableLookupElement(@NotNull String name, @NotNull PerlVariableType variableType) {
     return LookupElementBuilder.create(PerlVariable.braceName(name)).withIcon(PerlIconProvider.getIcon(variableType));
   }
@@ -66,30 +65,53 @@ public class PerlVariableCompletionUtil {
       .withInsertHandler(PerlInsertHandlers.HASH_ELEMENT_INSERT_HANDLER).withTailText("{}");
   }
 
-  private static @NotNull String computeVariableName(@NotNull PerlVariableDeclarationElement element,
-                                                     @NotNull PerlVariableCompletionProcessor completionProcessor) {
-    if (!completionProcessor.isLexical() && element.isGlobalDeclaration() && !(element instanceof PerlBuiltInVariable)) {
-      return StringUtil.notNullize(PerlVariable.adjustName(element.getCanonicalName(), completionProcessor.isForceShortMain()));
-    }
-    return PerlVariable.braceName(element.getVariableName());
-  }
-
   /**
    * @param sigilToPrepend '_' means we don't need to prepend
    */
   public static boolean processVariableLookupElement(@NotNull PerlVariableDeclarationElement element,
                                                      char sigilToPrepend,
                                                      @NotNull PerlVariableCompletionProcessor completionProcessor) {
-    String variableName = computeVariableName(element, completionProcessor);
-    if (!completionProcessor.matches(variableName)) {
+    String variableName = PerlVariable.braceName(StringUtil.notNullize(element.getName()));
+
+    boolean isBuiltIn = element instanceof PerlBuiltInVariable;
+
+    String explicitNamespaceName = completionProcessor.getExplicitNamespaceName();
+    if (StringUtil.isNotEmpty(explicitNamespaceName) && !isBuiltIn && element.isGlobalDeclaration() &&
+        !explicitNamespaceName.equals(element.getNamespaceName())) {
       return completionProcessor.result();
     }
-    String lookupString = sigilToPrepend == '_' ? variableName :
-                          sigilToPrepend + variableName;
-    LookupElementBuilder elementBuilder = LookupElementBuilder.create(element, lookupString)
-      .withIcon(PerlIconProvider.getIcon(element));
 
-    if (element.isGlobalDeclaration() && completionProcessor.isLexical()) {
+    String lookupString = variableName;
+    if (!isBuiltIn && element.isGlobalDeclaration() && !completionProcessor.isLexical()) {
+      lookupString = element.getCanonicalName();
+      if (StringUtil.isEmpty(lookupString)) {
+        return completionProcessor.result();
+      }
+    }
+
+    if (completionProcessor.isFullQualified()) {
+      if (!completionProcessor.matches(lookupString)) {
+        return completionProcessor.result();
+      }
+    }
+    else {
+      if (!completionProcessor.matches(variableName)) {
+        return completionProcessor.result();
+      }
+    }
+
+    if (sigilToPrepend != '_') {
+      lookupString = sigilToPrepend + lookupString;
+    }
+
+    LookupElementBuilder elementBuilder = LookupElementBuilder.create(element, lookupString)
+      .withIcon(PerlIconProvider.getIcon(element))
+      .withPresentableText(variableName);
+
+    if (isBuiltIn) {
+      elementBuilder = elementBuilder.withTypeText("Built-in");
+    }
+    else if (element.isGlobalDeclaration()) {
       elementBuilder = elementBuilder.withTypeText(element.getNamespaceName(), true);
     }
 
@@ -173,7 +195,11 @@ public class PerlVariableCompletionUtil {
       }
 
       if (StringUtil.isNotEmpty(variable.getName())) {
-        return lookupProcessor.process(variable);
+        boolean processResult = lookupProcessor.process(variable);
+        if (processResult && variable.isGlobalDeclaration()) {
+          variableCompletionProcessor.register(variable.getCanonicalNameWithSigil());
+        }
+        return processResult;
       }
 
       return true;
@@ -315,40 +341,47 @@ public class PerlVariableCompletionUtil {
   public static void fillWithFullQualifiedVariables(@NotNull PerlVariableCompletionProcessor variableCompletionProcessor) {
     PsiElement variableNameElement = variableCompletionProcessor.getLeafElement();
     PsiElement perlVariable = variableCompletionProcessor.getLeafParentElement();
-    Processor<PerlVariableDeclarationElement> lookupGenerator = createVariableLookupProcessor(variableCompletionProcessor);
+    Processor<PerlVariableDeclarationElement> variableProcessor = createVariableLookupProcessor(variableCompletionProcessor);
+    Processor<PerlVariableDeclarationElement> lookupGenerator = it -> {
+      String idString = it.getCanonicalNameWithSigil();
+      if (!variableCompletionProcessor.isRegistered(idString)) {
+        return variableProcessor.process(it);
+      }
+      return variableCompletionProcessor.result();
+    };
 
     Project project = variableNameElement.getProject();
     GlobalSearchScope resolveScope = variableNameElement.getResolveScope();
 
     if (perlVariable instanceof PsiPerlScalarVariable) {
-      PerlScalarUtil.processDefinedGlobalScalars(project, resolveScope, lookupGenerator);
-      PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, lookupGenerator);
-      PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, lookupGenerator);
+      PerlScalarUtil.processDefinedGlobalScalars(project, resolveScope, lookupGenerator, false);
+      PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, lookupGenerator, false);
+      PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, lookupGenerator, false);
     }
     else if (perlVariable instanceof PsiPerlArrayVariable) {
-      PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, lookupGenerator);
-      PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, lookupGenerator);
+      PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, lookupGenerator, false);
+      PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, lookupGenerator, false);
     }
     else if (perlVariable instanceof PsiPerlArrayIndexVariable) {
       // global arrays
-      PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, lookupGenerator);
+      PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, lookupGenerator, false);
     }
     else if (perlVariable instanceof PsiPerlHashVariable) {
       // global hashes
-      PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, lookupGenerator);
+      PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, lookupGenerator, false);
       if (hasHashSlices(perlVariable)) {
-        PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, lookupGenerator);
+        PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, lookupGenerator, false);
       }
     }
     else {
-      PerlScalarUtil.processDefinedGlobalScalars(project, resolveScope, lookupGenerator);
-      PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, lookupGenerator);
-      PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, lookupGenerator);
+      PerlScalarUtil.processDefinedGlobalScalars(project, resolveScope, lookupGenerator, false);
+      PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, lookupGenerator, false);
+      PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, lookupGenerator, false);
 
       // globs
-      PerlGlobUtil.processDefinedGlobsNames(project, resolveScope, typeglob ->
+      PerlGlobUtil.processDefinedGlobs(project, resolveScope, null, typeglob ->
         variableCompletionProcessor.process(processVariableLookupElement(
-          typeglob, perlVariable instanceof PsiPerlMethod, variableCompletionProcessor)));
+          typeglob, perlVariable instanceof PsiPerlMethod, variableCompletionProcessor)), false);
     }
   }
 
@@ -357,13 +390,6 @@ public class PerlVariableCompletionUtil {
       fillWithLexicalVariables(variableCompletionProcessor);
       fillWithBuiltInVariables(variableCompletionProcessor);
       fillWithImportedVariables(variableCompletionProcessor);
-    }
-    else {
-      if (StringUtil.isNotEmpty(variableCompletionProcessor.getExplicitNamespaceName())) {
-        variableCompletionProcessor =
-          variableCompletionProcessor.withPrefixMatcher(
-            PerlPackageUtil.join(variableCompletionProcessor.getExplicitNamespaceName(), variableCompletionProcessor.getPrefix()));
-      }
     }
 
     fillWithFullQualifiedVariables(variableCompletionProcessor);

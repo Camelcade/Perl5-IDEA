@@ -36,11 +36,6 @@ public interface PerlVariableCompletionProcessor extends PerlCompletionProcessor
   boolean isDeclaration();
 
   /**
-   * @return true iff we must use short for of main, {@code ::} instead of {@code main::}
-   */
-  boolean isForceShortMain();
-
-  /**
    * @return true iff we are currently at lexical variables pass, therefore global variables should be used without a namespace
    */
   boolean isLexical();

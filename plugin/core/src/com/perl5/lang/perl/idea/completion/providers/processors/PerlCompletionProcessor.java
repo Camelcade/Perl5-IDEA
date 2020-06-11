@@ -87,4 +87,15 @@ public interface PerlCompletionProcessor {
   default @NotNull String getPrefix() {
     return getPrefixMatcher().getPrefix();
   }
+
+  /**
+   * @return true iff {@code elementId} was not registered with this processor before. E.g. variable fqn
+   */
+  boolean register(@Nullable String elementId);
+
+  /**
+   * @return true iff {@code elementId} was registered with this processor before. E.g. variable fqn
+   */
+  @Contract("null->false")
+  boolean isRegistered(@Nullable String elementId);
 }

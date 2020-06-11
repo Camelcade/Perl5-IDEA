@@ -1,1 +1,1 @@
-$So<complete MyTest::Some::Package::SCALAR_VAR>me;
+$So<complete MyTest::Some::Package::>me;

@@ -1,0 +1,5 @@
+package Foo::Bar;
+my $scalar_var;
+our $SCALAR_VAR;
+
+@MyTest::Some::Package::<complete MyTest::Some::Package::ARRAY_VAR>;

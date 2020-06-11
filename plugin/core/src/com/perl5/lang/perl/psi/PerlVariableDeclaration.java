@@ -83,4 +83,15 @@ public interface PerlVariableDeclaration extends PerlDeprecatable, PerlPackageMe
     }
     return PerlPackageUtil.join(packageName, variableName);
   }
+
+  /**
+   * @return variable fqn with sigil
+   */
+  default @Nullable String getCanonicalNameWithSigil() {
+    String canonicalName = getCanonicalName();
+    if (canonicalName == null) {
+      return null;
+    }
+    return getActualType().getSigil() + canonicalName;
+  }
 }

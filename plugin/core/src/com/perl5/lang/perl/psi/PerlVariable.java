@@ -20,7 +20,6 @@ import com.perl5.lang.perl.psi.properties.PerlLexicalScopeMember;
 import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
 import com.perl5.lang.perl.psi.properties.PerlVariableNameElementContainer;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
-import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -92,18 +91,5 @@ public interface PerlVariable extends PsiPerlExpr, PerlLexicalScopeMember, PerlV
       return "{" + variableName + "}";
     }
     return variableName;
-  }
-
-  /**
-   * Semantic of this method is unclear
-   */
-  static @Nullable String
-  adjustName(@Nullable String originalName, boolean forceShortMain) {
-    if (originalName == null || !forceShortMain || !originalName.startsWith(PerlPackageUtil.MAIN_NAMESPACE_FULL)) {
-      return originalName;
-    }
-    else {
-      return originalName.substring(4);
-    }
   }
 }

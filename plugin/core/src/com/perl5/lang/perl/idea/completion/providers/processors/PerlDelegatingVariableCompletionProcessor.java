@@ -42,11 +42,6 @@ public class PerlDelegatingVariableCompletionProcessor extends PerlDelegatingCom
   }
 
   @Override
-  public boolean isForceShortMain() {
-    return getDelegate().isForceShortMain();
-  }
-
-  @Override
   public boolean isLexical() {
     return getDelegate().isLexical();
   }

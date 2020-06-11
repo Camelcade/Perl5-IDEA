@@ -92,7 +92,7 @@ public class PerlHashUtil implements PerlElementTypes {
         result.add(it);
       }
       return true;
-    });
+    }, true);
     return result;
   }
 
@@ -110,15 +110,14 @@ public class PerlHashUtil implements PerlElementTypes {
   /**
    * Processes all global hashes names with specific processor
    *
-   * @param project   project to search in
-   * @param processor string processor for suitable strings
-   * @return collection of constants names
+   * @param processAll if false, only one entry per name going to be processed. May be need when filling completion
    */
   public static boolean processDefinedGlobalHashes(@NotNull Project project,
                                                    @NotNull GlobalSearchScope scope,
-                                                   @NotNull Processor<PerlVariableDeclarationElement> processor) {
+                                                   @NotNull Processor<PerlVariableDeclarationElement> processor,
+                                                   boolean processAll) {
     return PerlImplicitDeclarationsService.getInstance(project).processHashes(processor) &&
-           PerlScalarUtil.processDefinedGlobalVariables(PerlVariablesStubIndex.KEY_HASH, project, scope, processor);
+           PerlScalarUtil.processDefinedGlobalVariables(PerlVariablesStubIndex.KEY_HASH, project, scope, processor, processAll);
   }
 
   /**

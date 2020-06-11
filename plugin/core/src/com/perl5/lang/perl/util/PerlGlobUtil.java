@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,9 @@
 
 package com.perl5.lang.perl.util;
 
+import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.util.Processor;
@@ -25,11 +27,13 @@ import com.perl5.lang.perl.psi.PerlGlobVariable;
 import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
 import com.perl5.lang.perl.psi.stubs.globs.PerlGlobsStubIndex;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.function.Predicate;
 
 
 public class PerlGlobUtil implements PerlElementTypes {
@@ -79,16 +83,26 @@ public class PerlGlobUtil implements PerlElementTypes {
   /**
    * Processes all globs names with specific processor
    *
-   * @param project   project to search in
-   * @param processor string processor for suitable strings
-   * @return collection of constants names
+   * @param processAll if false, only one entry per name going to be processed. May be need when filling completion
    */
-  public static boolean processDefinedGlobsNames(@NotNull Project project,
-                                                 @NotNull GlobalSearchScope scope,
-                                                 @NotNull Processor<PerlGlobVariable> processor) {
+  public static boolean processDefinedGlobs(@NotNull Project project,
+                                            @NotNull GlobalSearchScope scope,
+                                            @Nullable Predicate<String> namesFilter,
+                                            @NotNull Processor<PerlGlobVariable> processor,
+                                            boolean processAll) {
     StubIndex stubIndex = StubIndex.getInstance();
     for (String globName : stubIndex.getAllKeys(PerlGlobsStubIndex.KEY, project)) {
-      if (!stubIndex.processElements(PerlGlobsStubIndex.KEY, globName, project, scope, PsiPerlGlobVariable.class, processor)) {
+      if (StringUtil.isEmpty(globName) || namesFilter != null && !namesFilter.test(globName)) {
+        continue;
+      }
+
+      boolean[] result = new boolean[]{true};
+      stubIndex.processElements(PerlGlobsStubIndex.KEY, globName, project, scope, PsiPerlGlobVariable.class, it -> {
+        ProgressManager.checkCanceled();
+        result[0] = processor.process(it);
+        return processAll && result[0];
+      });
+      if (!result[0]) {
         return false;
       }
     }

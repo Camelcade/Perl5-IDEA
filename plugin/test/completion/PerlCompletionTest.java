@@ -17,30 +17,14 @@
 package completion;
 
 
-import base.PerlLightTestCase;
-import com.intellij.codeInsight.lookup.LookupElement;
-import com.intellij.codeInsight.lookup.LookupElementPresentation;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
-import com.perl5.lang.perl.idea.project.PerlNamesCache;
 import com.perl5.lang.perl.internals.PerlVersion;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
-import java.util.function.BiPredicate;
-
-public class PerlCompletionTest extends PerlLightTestCase {
-
-  private static @NotNull BiPredicate<LookupElement, LookupElementPresentation> withType(@NotNull String type) {
-    return (__, presentation) -> StringUtil.contains(StringUtil.notNullize(presentation.getTypeText()), type);
-  }
-
-  @Override
-  protected void setUp() throws Exception {
-    super.setUp();
-    PerlNamesCache.getInstance(getProject()).forceCacheUpdate();
-  }
+public class PerlCompletionTest extends PerlCompletionTestCase {
 
   @Override
   protected String getBaseDataPath() {
@@ -767,7 +751,8 @@ public class PerlCompletionTest extends PerlLightTestCase {
   @Test
   public void testGlobSlots() {doTest();}
 
-  private void doTest() {
+
+  protected void doTest() {
     doTestCompletion();
   }
 }

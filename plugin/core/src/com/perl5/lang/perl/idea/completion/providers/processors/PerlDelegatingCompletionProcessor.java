@@ -69,5 +69,15 @@ public abstract class PerlDelegatingCompletionProcessor<Delegate extends PerlCom
   }
 
   @Override
+  public boolean register(@Nullable String elementId) {
+    return getDelegate().register(elementId);
+  }
+
+  @Override
+  public boolean isRegistered(@Nullable String elementId) {
+    return getDelegate().isRegistered(elementId);
+  }
+
+  @Override
   public abstract @NotNull Delegate withPrefixMatcher(@NotNull String prefix);
 }

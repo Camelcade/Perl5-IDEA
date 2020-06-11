@@ -24,14 +24,18 @@ import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public abstract class PerlCompletionProcessorBase extends AbstractPerlCompletionProcessor {
   private final @NotNull CompletionResultSet myResultSet;
   private final @NotNull PsiElement myLeafElement;
   private final @NotNull Counters myCounters;
+  private final @NotNull Set<String> myRegisteredElements;
 
   protected PerlCompletionProcessorBase(@NotNull CompletionResultSet resultSet,
                                         @NotNull PsiElement leafElement) {
-    this(resultSet, leafElement, new Counters());
+    this(resultSet, leafElement, new Counters(), new HashSet<>());
   }
 
   protected PerlCompletionProcessorBase(@NotNull PerlCompletionProcessor completionProcessor) {
@@ -42,26 +46,44 @@ public abstract class PerlCompletionProcessorBase extends AbstractPerlCompletion
       run = ((PerlDelegatingCompletionProcessor<?>)run).getDelegate();
     }
     LOG.assertTrue(run instanceof PerlCompletionProcessorBase, "Got " + run);
-    myCounters = ((PerlCompletionProcessorBase)run).myCounters;
+    myCounters = ((PerlCompletionProcessorBase)run).getCounters();
+    myRegisteredElements = ((PerlCompletionProcessorBase)run).getRegisteredElements();
   }
 
   protected PerlCompletionProcessorBase(@NotNull PerlCompletionProcessorBase original,
                                         @NotNull String newPrefixMatcher) {
     this(original.getResultSet().withPrefixMatcher(newPrefixMatcher),
          original.getLeafElement(),
-         original.getCounters());
+         original.getCounters(),
+         original.getRegisteredElements());
   }
 
   private PerlCompletionProcessorBase(@NotNull CompletionResultSet resultSet,
                                       @NotNull PsiElement leafElement,
-                                      @NotNull Counters counters) {
+                                      @NotNull Counters counters,
+                                      @NotNull Set<String> registeredElements) {
     myResultSet = resultSet;
     myLeafElement = leafElement;
     myCounters = counters;
+    myRegisteredElements = registeredElements;
   }
 
   private @NotNull Counters getCounters() {
     return myCounters;
+  }
+
+  @Override
+  public boolean register(@Nullable String elementId) {
+    return elementId != null && myRegisteredElements.add(elementId);
+  }
+
+  @Override
+  public boolean isRegistered(@Nullable String elementId) {
+    return elementId != null && myRegisteredElements.contains(elementId);
+  }
+
+  private @NotNull Set<String> getRegisteredElements() {
+    return myRegisteredElements;
   }
 
   @Override
