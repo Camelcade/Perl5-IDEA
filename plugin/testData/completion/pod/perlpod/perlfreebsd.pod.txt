@@ -1,10 +1,15 @@
-Lookups: $^X doesn't always contain a full path in FreeBSD; Text: $^X doesn't always contain a full path in FreeBSD; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: $^X doesn't always contain a full path in FreeBSD; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: $^X doesn't always contain a full path in FreeBSD
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 856 in perlfreebsd.pod
-Lookups: AUTHOR; Text: AUTHOR; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: AUTHOR; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: AUTHOR
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1423 in perlfreebsd.pod
-Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: DESCRIPTION
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 244 in perlfreebsd.pod
-Lookups: FreeBSD core dumps from readdir_r with ithreads; Text: FreeBSD core dumps from readdir_r with ithreads; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: FreeBSD core dumps from readdir_r with ithreads; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: FreeBSD core dumps from readdir_r with ithreads
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 400 in perlfreebsd.pod
-Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: NAME
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 182 in perlfreebsd.pod

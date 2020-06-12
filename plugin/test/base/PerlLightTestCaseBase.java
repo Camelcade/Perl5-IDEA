@@ -657,9 +657,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
         }
         StringBuilder sb = new StringBuilder();
 
-        sb.append("Lookups: ")
-          .append(StringUtil.join(lookupElement.getAllLookupStrings(), ", "))
-          .append("; Text: ")
+        sb.append("Text: ")
           .append(presentation.getItemText())
           .append("; Tail: ")
           .append(presentation.getTailText())
@@ -669,6 +667,8 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
           .append(getIconText(presentation.getIcon()))
           .append("; Type Icon: ")
           .append(getIconText(presentation.getTypeIcon()))
+          .append("\nLookups: ")
+          .append(StringUtil.join(lookupElement.getAllLookupStrings(), ", "))
         ;
 
         Object lookupObject = lookupElement.getObject();

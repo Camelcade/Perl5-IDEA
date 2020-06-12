@@ -1,2 +1,3 @@
-Lookups: packageDefinition; Text: packageDefinition; Tail: null; Type: null; Icon: null; Type Icon: null
+Text: packageDefinition; Tail: null; Type: null; Icon: null; Type Icon: null
+Lookups: packageDefinition
     VirtualFile: packageDefinition.pm

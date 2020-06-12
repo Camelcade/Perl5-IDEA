@@ -1,6 +1,9 @@
-Lookups: MyTest::Some::Package::SCALAR_VAR, $MyTest::Some::Package::SCALAR_VAR; Text: $MyTest::Some::Package::SCALAR_VAR; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+Text: $MyTest::Some::Package::SCALAR_VAR; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+Lookups: MyTest::Some::Package::SCALAR_VAR, $MyTest::Some::Package::SCALAR_VAR
     PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 154 in Package.pm
-Lookups: Scalar1; Text: Scalar1; Tail: null; Type: Readonly; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Text: Scalar1; Tail: null; Type: Readonly; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: Scalar1
     PsiElement: Implicit sub: Scalar1()
-Lookups: Scalar; Text: Scalar; Tail: null; Type: Readonly; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Text: Scalar; Tail: null; Type: Readonly; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: Scalar
     PsiElement: Implicit sub: Scalar()

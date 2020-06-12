@@ -1,64 +1,96 @@
-Lookups: 5.6.0; Text: 5.6.0; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Text: 5.6.0; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: 5.6.0
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13586 in perlce.pod
-Lookups: 5.8.0; Text: 5.8.0; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Text: 5.8.0; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: 5.8.0
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13845 in perlce.pod
-Lookups: 5.9.4; Text: 5.9.4; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Text: 5.9.4; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: 5.9.4
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14084 in perlce.pod
-Lookups: ACKNOWLEDGEMENTS; Text: ACKNOWLEDGEMENTS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: ACKNOWLEDGEMENTS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: ACKNOWLEDGEMENTS
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 13479 in perlce.pod
-Lookups: AUTHORS; Text: AUTHORS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: AUTHORS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: AUTHORS
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 14215 in perlce.pod
-Lookups: BUGS; Text: BUGS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: BUGS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: BUGS
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12943 in perlce.pod
-Lookups: Building Perl for WinCE; Text: Building Perl for WinCE; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: Building Perl for WinCE; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Building Perl for WinCE
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 220 in perlce.pod
-Lookups: CONSOLEFONTSIZE; Text: CONSOLEFONTSIZE; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Text: CONSOLEFONTSIZE; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: CONSOLEFONTSIZE
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11794 in perlce.pod
-Lookups: CURRENT BUILD INSTRUCTIONS; Text: CURRENT BUILD INSTRUCTIONS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: CURRENT BUILD INSTRUCTIONS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: CURRENT BUILD INSTRUCTIONS
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2381 in perlce.pod
-Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: DESCRIPTION; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: DESCRIPTION
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 751 in perlce.pod
-Lookups: Daniel Dragan; Text: Daniel Dragan; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Text: Daniel Dragan; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Daniel Dragan
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14513 in perlce.pod
-Lookups: ENVIRONMENT; Text: ENVIRONMENT; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: ENVIRONMENT; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: ENVIRONMENT
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11378 in perlce.pod
-Lookups: General explanations on cross-compiling WinCE; Text: General explanations on cross-compiling WinCE; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: General explanations on cross-compiling WinCE; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: General explanations on cross-compiling WinCE
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 927 in perlce.pod
-Lookups: HOME; Text: HOME; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Text: HOME; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: HOME
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11763 in perlce.pod
-Lookups: History of WinCE port; Text: History of WinCE port; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: History of WinCE port; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: History of WinCE port
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 13549 in perlce.pod
-Lookups: INSTALLATION; Text: INSTALLATION; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: INSTALLATION; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: INSTALLATION
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13289 in perlce.pod
-Lookups: LIMITATIONS; Text: LIMITATIONS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: LIMITATIONS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: LIMITATIONS
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11325 in perlce.pod
-Lookups: Make; Text: Make; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
+Text: Make; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Make
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 7968 in perlce.pod
-Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: NAME
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 182 in perlce.pod
-Lookups: OLD BUILD INSTRUCTIONS; Text: OLD BUILD INSTRUCTIONS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: OLD BUILD INSTRUCTIONS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: OLD BUILD INSTRUCTIONS
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7439 in perlce.pod
-Lookups: PATH; Text: PATH; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Text: PATH; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: PATH
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11558 in perlce.pod
-Lookups: PERL5LIB; Text: PERL5LIB; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Text: PERL5LIB; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: PERL5LIB
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11508 in perlce.pod
-Lookups: REGISTRY; Text: REGISTRY; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: REGISTRY; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: REGISTRY
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11932 in perlce.pod
-Lookups: ROWSE<sol>COLS, ROWS/COLS; Text: ROWS/COLS; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Text: ROWS/COLS; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: ROWSE<sol>COLS, ROWS/COLS
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11720 in perlce.pod
-Lookups: Rainer Keuchel <coyxc@rainer-keuchel.de>, Rainer Keuchel E<lt>coyxc@rainer-keuchel.deE<gt>; Text: Rainer Keuchel <coyxc@rainer-keuchel.de>; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Text: Rainer Keuchel <coyxc@rainer-keuchel.de>; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Rainer Keuchel <coyxc@rainer-keuchel.de>, Rainer Keuchel E<lt>coyxc@rainer-keuchel.deE<gt>
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14238 in perlce.pod
-Lookups: TMP; Text: TMP; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Text: TMP; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: TMP
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11598 in perlce.pod
-Lookups: Tools & SDK; Text: Tools & SDK; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
+Text: Tools & SDK; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Tools & SDK
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 7668 in perlce.pod
-Lookups: UNIXROOTPATH; Text: UNIXROOTPATH; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Text: UNIXROOTPATH; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: UNIXROOTPATH
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11621 in perlce.pod
-Lookups: Using Perl on WinCE; Text: Using Perl on WinCE; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: Using Perl on WinCE; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Using Perl on WinCE
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 10721 in perlce.pod
-Lookups: Vadim Konovalov; Text: Vadim Konovalov; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Text: Vadim Konovalov; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Vadim Konovalov
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14453 in perlce.pod
-Lookups: WARNING; Text: WARNING; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: WARNING; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: WARNING
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 252 in perlce.pod
-Lookups: XS; Text: XS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: XS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: XS
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12263 in perlce.pod

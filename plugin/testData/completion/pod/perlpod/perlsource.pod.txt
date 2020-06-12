@@ -1,22 +1,33 @@
-Lookups: AUTHORS; Text: AUTHORS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: AUTHORS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: AUTHORS
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6441 in perlsource.pod
-Lookups: Build system; Text: Build system; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: Build system; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Build system
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5764 in perlsource.pod
-Lookups: C code; Text: C code; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: C code; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: C code
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 458 in perlsource.pod
-Lookups: Core modules; Text: Core modules; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: Core modules; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Core modules
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 814 in perlsource.pod
-Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: DESCRIPTION
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 186 in perlsource.pod
-Lookups: Documentation; Text: Documentation; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: Documentation; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Documentation
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4749 in perlsource.pod
-Lookups: FINDING YOUR WAY AROUND; Text: FINDING YOUR WAY AROUND; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: FINDING YOUR WAY AROUND; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: FINDING YOUR WAY AROUND
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 352 in perlsource.pod
-Lookups: Hacking tools and documentation; Text: Hacking tools and documentation; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: Hacking tools and documentation; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Hacking tools and documentation
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5109 in perlsource.pod
-Lookups: MANIFEST; Text: MANIFEST; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: MANIFEST; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: MANIFEST
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6596 in perlsource.pod
-Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: NAME
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 127 in perlsource.pod
-Lookups: Tests; Text: Tests; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: Tests; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Tests
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2534 in perlsource.pod

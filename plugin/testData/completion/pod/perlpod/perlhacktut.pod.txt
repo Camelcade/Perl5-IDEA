@@ -1,16 +1,24 @@
-Lookups: AUTHOR; Text: AUTHOR; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: AUTHOR; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: AUTHOR
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6026 in perlhacktut.pod
-Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: DESCRIPTION
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 207 in perlhacktut.pod
-Lookups: Documenting the patch; Text: Documenting the patch; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: Documenting the patch; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Documenting the patch
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5217 in perlhacktut.pod
-Lookups: EXAMPLE OF A SIMPLE PATCH; Text: EXAMPLE OF A SIMPLE PATCH; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: EXAMPLE OF A SIMPLE PATCH; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: EXAMPLE OF A SIMPLE PATCH
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 451 in perlhacktut.pod
-Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: NAME
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 128 in perlhacktut.pod
-Lookups: Submit; Text: Submit; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: Submit; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Submit
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5953 in perlhacktut.pod
-Lookups: Testing the patch; Text: Testing the patch; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: Testing the patch; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Testing the patch
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3659 in perlhacktut.pod
-Lookups: Writing the patch; Text: Writing the patch; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: Writing the patch; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Writing the patch
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 939 in perlhacktut.pod

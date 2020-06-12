@@ -1,2 +1,3 @@
-Lookups: othersub; Text: othersub; Tail: null; Type: null; Icon: /sub_declaration_gutter_icon.png; Type Icon: null
+Text: othersub; Tail: null; Type: null; Icon: /sub_declaration_gutter_icon.png; Type Icon: null
+Lookups: othersub
     PsiElement: PsiPerlSubDeclarationImpl(SUB_DECLARATION)@test::othersub at 30 in test.pm

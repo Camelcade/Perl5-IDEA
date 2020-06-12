@@ -1,30 +1,45 @@
-Lookups: AUTHOR; Text: AUTHOR; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: AUTHOR; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: AUTHOR
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 21855 in perldebtut.pod
-Lookups: CGI; Text: CGI; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: CGI; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: CGI
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 20084 in perldebtut.pod
-Lookups: CONTRIBUTORS; Text: CONTRIBUTORS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: CONTRIBUTORS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: CONTRIBUTORS
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 21929 in perldebtut.pod
-Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: DESCRIPTION
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 51 in perldebtut.pod
-Lookups: GUIs; Text: GUIs; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: GUIs; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: GUIs
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 20394 in perldebtut.pod
-Lookups: Looking at data and -w and v; Text: Looking at data and -w and v; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: Looking at data and -w and v; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Looking at data and -w and v
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2480 in perldebtut.pod
-Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: NAME
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perldebtut.pod
-Lookups: OUTPUT TIPS; Text: OUTPUT TIPS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: OUTPUT TIPS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: OUTPUT TIPS
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 19449 in perldebtut.pod
-Lookups: Placeholder for a, w, t, T; Text: Placeholder for a, w, t, T; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: Placeholder for a, w, t, T; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Placeholder for a, w, t, T
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 18477 in perldebtut.pod
-Lookups: REGULAR EXPRESSIONS; Text: REGULAR EXPRESSIONS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: REGULAR EXPRESSIONS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: REGULAR EXPRESSIONS
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 18596 in perldebtut.pod
-Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: SEE ALSO; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: SEE ALSO
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 21780 in perldebtut.pod
-Lookups: SUMMARY; Text: SUMMARY; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: SUMMARY; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: SUMMARY
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 21066 in perldebtut.pod
-Lookups: Stepping through code; Text: Stepping through code; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: Stepping through code; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Stepping through code
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 13942 in perldebtut.pod
-Lookups: help; Text: help; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: help; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: help
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4170 in perldebtut.pod
-Lookups: use strict; Text: use strict; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: use strict; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: use strict
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 422 in perldebtut.pod

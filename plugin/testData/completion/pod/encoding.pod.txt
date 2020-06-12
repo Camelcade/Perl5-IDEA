@@ -1,2 +1,3 @@
-Lookups: UTF-8, utf-8; Text: UTF-8; Tail: null; Type: null; Icon: null; Type Icon: null
+Text: UTF-8; Tail: null; Type: null; Icon: null; Type Icon: null
+Lookups: UTF-8, utf-8
     String

@@ -1,2 +1,3 @@
-Lookups: somesubcustom; Text: somesubcustom; Tail: null; Type: null; Icon: null; Type Icon: null
+Text: somesubcustom; Tail: null; Type: null; Icon: null; Type Icon: null
+Lookups: somesubcustom
     String

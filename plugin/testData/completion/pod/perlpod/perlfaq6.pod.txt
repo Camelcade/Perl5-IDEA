@@ -1,202 +1,303 @@
-Lookups: $&; Text: $&; Tail: (Why does using $&, $`, or $' slow my program down?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: $&; Tail: (Why does using $&, $`, or $' slow my program down?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $&
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 27802 in perlfaq6.pod
-Lookups: $'; Text: $'; Tail: (Why does using $&, $`, or $' slow my program down?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: $'; Tail: (Why does using $&, $`, or $' slow my program down?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $'
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 27822 in perlfaq6.pod
-Lookups: $/, regexes in, $E<sol>, regexes in; Text: $/, regexes in; Tail: (I put a regular expression into $/ but it didn't work. What's wrong?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: $/, regexes in; Tail: (I put a regular expression into $/ but it didn't work. What's wrong?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $/, regexes in, $E<sol>, regexes in
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 6320 in perlfaq6.pod
-Lookups: $INPUT_RECORD_SEPARATOR, regexes in; Text: $INPUT_RECORD_SEPARATOR, regexes in; Tail: (I put a regular expression into $/ but it didn't work. What's wrong?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: $INPUT_RECORD_SEPARATOR, regexes in; Tail: (I put a regular expression into $/ but it didn't work. What's wrong?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $INPUT_RECORD_SEPARATOR, regexes in
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 6338 in perlfaq6.pod
-Lookups: $MATCH; Text: $MATCH; Tail: (Why does using $&, $`, or $' slow my program down?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: $MATCH; Tail: (Why does using $&, $`, or $' slow my program down?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $MATCH
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 27792 in perlfaq6.pod
-Lookups: $POSTMATCH; Text: $POSTMATCH; Tail: (Why does using $&, $`, or $' slow my program down?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: $POSTMATCH; Tail: (Why does using $&, $`, or $' slow my program down?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $POSTMATCH
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 27808 in perlfaq6.pod
-Lookups: $PREMATCH; Text: $PREMATCH; Tail: (Why does using $&, $`, or $' slow my program down?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: $PREMATCH; Tail: (Why does using $&, $`, or $' slow my program down?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $PREMATCH
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 27828 in perlfaq6.pod
-Lookups: $RS, regexes in; Text: $RS, regexes in; Tail: (I put a regular expression into $/ but it didn't work. What's wrong?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: $RS, regexes in; Tail: (I put a regular expression into $/ but it didn't work. What's wrong?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $RS, regexes in
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 6377 in perlfaq6.pod
-Lookups: $`; Text: $`; Tail: (Why does using $&, $`, or $' slow my program down?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: $`; Tail: (Why does using $&, $`, or $' slow my program down?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $`
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 27841 in perlfaq6.pod
-Lookups: ..; Text: ..; Tail: (How can I pull out lines between two patterns that are themselves on different lines?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: ..; Tail: (How can I pull out lines between two patterns that are themselves on different lines?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: ..
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 5026 in perlfaq6.pod
-Lookups: AUTHOR AND COPYRIGHT; Text: AUTHOR AND COPYRIGHT; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 39070 in perlfaq6.pod
-Lookups: Are Perl regexes DFAs or NFAs? Are they POSIX compliant?; Text: Are Perl regexes DFAs or NFAs? Are they POSIX compliant?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 32457 in perlfaq6.pod
-Lookups: Can I use Perl regular expressions to match balanced text?; Text: Can I use Perl regular expressions to match balanced text?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16484 in perlfaq6.pod
-Lookups: Comments Inside the Regex; Text: Comments Inside the Regex; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1113 in perlfaq6.pod
-Lookups: Comments Outside the Regex; Text: Comments Outside the Regex; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 838 in perlfaq6.pod
-Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 79 in perlfaq6.pod
-Lookups: DFA; Text: DFA; Tail: (Are Perl regexes DFAs or NFAs? Are they POSIX compliant?); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 32521 in perlfaq6.pod
-Lookups: Different Delimiters; Text: Different Delimiters; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2188 in perlfaq6.pod
-Lookups: E<sol>o, regular expressions, /o, regular expressions; Text: /o, regular expressions; Tail: (What is /o really for?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: /o, regular expressions; Tail: (What is /o really for?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: E<sol>o, regular expressions, /o, regular expressions
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 12167 in perlfaq6.pod
-Lookups: E<sol>x, /x; Text: /x; Tail: (How can I hope to use regular expressions without creating illegible and unmaintainable code?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: /x; Tail: (How can I hope to use regular expressions without creating illegible and unmaintainable code?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: E<sol>x, /x
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 742 in perlfaq6.pod
-Lookups: HTML; Text: HTML; Tail: (How do I match XML, HTML, or other nasty, ugly things with a regex?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: AUTHOR AND COPYRIGHT; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: AUTHOR AND COPYRIGHT
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 39070 in perlfaq6.pod
+Text: Are Perl regexes DFAs or NFAs? Are they POSIX compliant?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Are Perl regexes DFAs or NFAs? Are they POSIX compliant?
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 32457 in perlfaq6.pod
+Text: Can I use Perl regular expressions to match balanced text?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Can I use Perl regular expressions to match balanced text?
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16484 in perlfaq6.pod
+Text: Comments Inside the Regex; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Comments Inside the Regex
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1113 in perlfaq6.pod
+Text: Comments Outside the Regex; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Comments Outside the Regex
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 838 in perlfaq6.pod
+Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: DESCRIPTION
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 79 in perlfaq6.pod
+Text: DFA; Tail: (Are Perl regexes DFAs or NFAs? Are they POSIX compliant?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: DFA
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 32521 in perlfaq6.pod
+Text: Different Delimiters; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Different Delimiters
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2188 in perlfaq6.pod
+Text: HTML; Tail: (How do I match XML, HTML, or other nasty, ugly things with a regex?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: HTML
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 5792 in perlfaq6.pod
-Lookups: How can I do approximate matching?; Text: How can I do approximate matching?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: How can I do approximate matching?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: How can I do approximate matching?
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23403 in perlfaq6.pod
-Lookups: How can I hope to use regular expressions without creating illegible and unmaintainable code?; Text: How can I hope to use regular expressions without creating illegible and unmaintainable code?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: How can I hope to use regular expressions without creating illegible and unmaintainable code?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: How can I hope to use regular expressions without creating illegible and unmaintainable code?
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 564 in perlfaq6.pod
-Lookups: How can I make \w match national character sets?; Text: How can I make \w match national character sets?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: How can I make \w match national character sets?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: How can I make \w match national character sets?
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10364 in perlfaq6.pod
-Lookups: How can I match a locale-smart version of E<sol>[a-zA-Z]E<sol>?, How can I match a locale-smart version of /[a-zA-Z]/?; Text: How can I match a locale-smart version of /[a-zA-Z]/?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: How can I match a locale-smart version of /[a-zA-Z]/?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: How can I match a locale-smart version of E<sol>[a-zA-Z]E<sol>?, How can I match a locale-smart version of /[a-zA-Z]/?
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10555 in perlfaq6.pod
-Lookups: How can I match strings with multibyte characters?; Text: How can I match strings with multibyte characters?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: How can I match strings with multibyte characters?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: How can I match strings with multibyte characters?
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 33716 in perlfaq6.pod
-Lookups: How can I print out a word-frequency or line-frequency summary?; Text: How can I print out a word-frequency or line-frequency summary?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: How can I print out a word-frequency or line-frequency summary?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: How can I print out a word-frequency or line-frequency summary?
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 22512 in perlfaq6.pod
-Lookups: How can I pull out lines between two patterns that are themselves on different lines?; Text: How can I pull out lines between two patterns that are themselves on different lines?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: How can I pull out lines between two patterns that are themselves on different lines?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: How can I pull out lines between two patterns that are themselves on different lines?
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4933 in perlfaq6.pod
-Lookups: How can I quote a variable to use in a regex?; Text: How can I quote a variable to use in a regex?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: How can I quote a variable to use in a regex?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: How can I quote a variable to use in a regex?
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11007 in perlfaq6.pod
-Lookups: How do I efficiently match many regular expressions at once?; Text: How do I efficiently match many regular expressions at once?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: How do I efficiently match many regular expressions at once?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I efficiently match many regular expressions at once?
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23548 in perlfaq6.pod
-Lookups: How do I match XML, HTML, or other nasty, ugly things with a regex?; Text: How do I match XML, HTML, or other nasty, ugly things with a regex?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: How do I match XML, HTML, or other nasty, ugly things with a regex?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I match XML, HTML, or other nasty, ugly things with a regex?
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5681 in perlfaq6.pod
-Lookups: How do I match a regular expression that's in a variable?; Text: How do I match a regular expression that's in a variable?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: How do I match a regular expression that's in a variable?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I match a regular expression that's in a variable?
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 36500 in perlfaq6.pod
-Lookups: How do I process each word on each line?; Text: How do I process each word on each line?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: How do I process each word on each line?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I process each word on each line?
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 22000 in perlfaq6.pod
-Lookups: How do I substitute case-insensitively on the LHS while preserving case on the RHS?; Text: How do I substitute case-insensitively on the LHS while preserving case on the RHS?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: How do I substitute case-insensitively on the LHS while preserving case on the RHS?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I substitute case-insensitively on the LHS while preserving case on the RHS?
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7481 in perlfaq6.pod
-Lookups: How do I use a regular expression to strip C-style comments from a file?; Text: How do I use a regular expression to strip C-style comments from a file?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: How do I use a regular expression to strip C-style comments from a file?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I use a regular expression to strip C-style comments from a file?
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14376 in perlfaq6.pod
-Lookups: I put a regular expression into $E<sol> but it didn't work. What's wrong?, I put a regular expression into $/ but it didn't work. What's wrong?; Text: I put a regular expression into $/ but it didn't work. What's wrong?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: I put a regular expression into $/ but it didn't work. What's wrong?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: I put a regular expression into $E<sol> but it didn't work. What's wrong?, I put a regular expression into $/ but it didn't work. What's wrong?
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6244 in perlfaq6.pod
-Lookups: I'm having trouble matching over more than one line. What's wrong?; Text: I'm having trouble matching over more than one line. What's wrong?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: I'm having trouble matching over more than one line. What's wrong?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: I'm having trouble matching over more than one line. What's wrong?
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2737 in perlfaq6.pod
-Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: NAME
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlfaq6.pod
-Lookups: NFA; Text: NFA; Tail: (Are Perl regexes DFAs or NFAs? Are they POSIX compliant?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: NFA; Tail: (Are Perl regexes DFAs or NFAs? Are they POSIX compliant?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: NFA
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 32528 in perlfaq6.pod
-Lookups: PARNO; Text: PARNO; Tail: (Can I use Perl regular expressions to match balanced text?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: PARNO; Tail: (Can I use Perl regular expressions to match balanced text?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: PARNO
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 16677 in perlfaq6.pod
-Lookups: POSIX; Text: POSIX; Tail: (Are Perl regexes DFAs or NFAs? Are they POSIX compliant?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: POSIX; Tail: (Are Perl regexes DFAs or NFAs? Are they POSIX compliant?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: POSIX
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 32535 in perlfaq6.pod
-Lookups: Regexp::Common; Text: Regexp::Common; Tail: (Can I use Perl regular expressions to match balanced text?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: Regexp::Common; Tail: (Can I use Perl regular expressions to match balanced text?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: Regexp::Common
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 16704 in perlfaq6.pod
-Lookups: Text::Balanced; Text: Text::Balanced; Tail: (Can I use Perl regular expressions to match balanced text?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: Text::Balanced; Tail: (Can I use Perl regular expressions to match balanced text?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: Text::Balanced
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 16686 in perlfaq6.pod
-Lookups: VERSION; Text: VERSION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: VERSION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: VERSION
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 45 in perlfaq6.pod
-Lookups: What does it mean that regexes are greedy? How can I get around it?; Text: What does it mean that regexes are greedy? How can I get around it?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: What does it mean that regexes are greedy? How can I get around it?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: What does it mean that regexes are greedy? How can I get around it?
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21121 in perlfaq6.pod
-Lookups: What good is \G in a regular expression?; Text: What good is \G in a regular expression?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: What good is \G in a regular expression?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: What good is \G in a regular expression?
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 29042 in perlfaq6.pod
-Lookups: What is /o really for?, What is E<sol>o really for?; Text: What is /o really for?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: What is /o really for?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: What is /o really for?, What is E<sol>o really for?
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12134 in perlfaq6.pod
-Lookups: What's wrong with using grep in a void context?; Text: What's wrong with using grep in a void context?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: What's wrong with using grep in a void context?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: What's wrong with using grep in a void context?
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 33169 in perlfaq6.pod
-Lookups: Why does using $&, $`, or $' slow my program down?; Text: Why does using $&, $`, or $' slow my program down?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: Why does using $&, $`, or $' slow my program down?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Why does using $&, $`, or $' slow my program down?
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 27734 in perlfaq6.pod
-Lookups: Why don't word-boundary searches with \b work for me?; Text: Why don't word-boundary searches with \b work for me?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: Why don't word-boundary searches with \b work for me?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Why don't word-boundary searches with \b work for me?
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 25690 in perlfaq6.pod
-Lookups: XML; Text: XML; Tail: (How do I match XML, HTML, or other nasty, ugly things with a regex?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: XML; Tail: (How do I match XML, HTML, or other nasty, ugly things with a regex?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: XML
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 5785 in perlfaq6.pod
-Lookups: \E, regex; Text: \E, regex; Tail: (How do I match a regular expression that's in a variable?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: \E, regex; Tail: (How do I match a regular expression that's in a variable?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: \E, regex
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 36630 in perlfaq6.pod
-Lookups: \G; Text: \G; Tail: (What good is \G in a regular expression?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: \G; Tail: (What good is \G in a regular expression?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: \G
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 29093 in perlfaq6.pod
-Lookups: \Q, regex; Text: \Q, regex; Tail: (How do I match a regular expression that's in a variable?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: \Q, regex; Tail: (How do I match a regular expression that's in a variable?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: \Q, regex
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 36617 in perlfaq6.pod
-Lookups: \b; Text: \b; Tail: (Why don't word-boundary searches with \b work for me?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: \b; Tail: (Why don't word-boundary searches with \b work for me?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: \b
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 25754 in perlfaq6.pod
-Lookups: \w; Text: \w; Tail: (How can I make \w match national character sets?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: \w; Tail: (How can I make \w match national character sets?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: \w
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 10423 in perlfaq6.pod
-Lookups: alpha; Text: alpha; Tail: (How can I match a locale-smart version of /[a-zA-Z]/?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: alpha; Tail: (How can I match a locale-smart version of /[a-zA-Z]/?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: alpha
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 10619 in perlfaq6.pod
-Lookups: backtracking; Text: backtracking; Tail: (Can I use Perl regular expressions to match balanced text?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: backtracking; Tail: (Can I use Perl regular expressions to match balanced text?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: backtracking
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 16722 in perlfaq6.pod
-Lookups: compile, regular expressions; Text: compile, regular expressions; Tail: (What is /o really for?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: compile, regular expressions; Tail: (What is /o really for?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: compile, regular expressions
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 12194 in perlfaq6.pod
-Lookups: encoding, Martian; Text: encoding, Martian; Tail: (How can I match strings with multibyte characters?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: encoding, Martian; Tail: (How can I match strings with multibyte characters?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: encoding, Martian
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 33904 in perlfaq6.pod
-Lookups: eval; Text: eval; Tail: (How do I match a regular expression that's in a variable?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: eval; Tail: (How do I match a regular expression that's in a variable?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: eval
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 36587 in perlfaq6.pod
-Lookups: frustration; Text: frustration; Tail: (How do I match XML, HTML, or other nasty, ugly things with a regex?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: frustration; Tail: (How do I match XML, HTML, or other nasty, ugly things with a regex?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: frustration
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 5808 in perlfaq6.pod
-Lookups: greediness; Text: greediness; Tail: (What does it mean that regexes are greedy? How can I get around it?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: greediness; Tail: (What does it mean that regexes are greedy? How can I get around it?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: greediness
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 21206 in perlfaq6.pod
-Lookups: greedy; Text: greedy; Tail: (What does it mean that regexes are greedy? How can I get around it?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: greedy; Tail: (What does it mean that regexes are greedy? How can I get around it?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: greedy
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 21196 in perlfaq6.pod
-Lookups: grep; Text: grep; Tail: (What's wrong with using grep in a void context?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: grep; Tail: (What's wrong with using grep in a void context?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: grep
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 33224 in perlfaq6.pod
-Lookups: martian; Text: martian; Tail: (How can I match strings with multibyte characters?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: martian; Tail: (How can I match strings with multibyte characters?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: martian
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 33893 in perlfaq6.pod
-Lookups: match, approximate; Text: match, approximate; Tail: (How can I do approximate matching?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: match, approximate; Tail: (How can I do approximate matching?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: match, approximate
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 23445 in perlfaq6.pod
-Lookups: matching, approximate; Text: matching, approximate; Tail: (How can I do approximate matching?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: matching, approximate; Tail: (How can I do approximate matching?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: matching, approximate
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 23467 in perlfaq6.pod
-Lookups: pain; Text: pain; Tail: (How do I match XML, HTML, or other nasty, ugly things with a regex?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: pain; Tail: (How do I match XML, HTML, or other nasty, ugly things with a regex?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: pain
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 5800 in perlfaq6.pod
-Lookups: possessive; Text: possessive; Tail: (Can I use Perl regular expressions to match balanced text?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: possessive; Tail: (Can I use Perl regular expressions to match balanced text?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: possessive
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 16663 in perlfaq6.pod
-Lookups: qrE<sol>E<sol>, qr//; Text: qr//; Tail: (How do I match a regular expression that's in a variable?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: qr//; Tail: (How do I match a regular expression that's in a variable?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: qrE<sol>E<sol>, qr//
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 36643 in perlfaq6.pod
-Lookups: quotemeta; Text: quotemeta; Tail: (How do I match a regular expression that's in a variable?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: quotemeta; Tail: (How do I match a regular expression that's in a variable?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: quotemeta
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 36604 in perlfaq6.pod
-Lookups: recursion; Text: recursion; Tail: (Can I use Perl regular expressions to match balanced text?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: recursion; Tail: (Can I use Perl regular expressions to match balanced text?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: recursion
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 16738 in perlfaq6.pod
-Lookups: regex, HTML; Text: regex, HTML; Tail: (How do I match XML, HTML, or other nasty, ugly things with a regex?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: regex, HTML; Tail: (How do I match XML, HTML, or other nasty, ugly things with a regex?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: regex, HTML
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 5770 in perlfaq6.pod
-Lookups: regex, XML; Text: regex, XML; Tail: (How do I match XML, HTML, or other nasty, ugly things with a regex?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: regex, XML; Tail: (How do I match XML, HTML, or other nasty, ugly things with a regex?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: regex, XML
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 5756 in perlfaq6.pod
-Lookups: regex, and multibyte characters; Text: regex, and multibyte characters; Tail: (How can I match strings with multibyte characters?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: regex, and multibyte characters; Tail: (How can I match strings with multibyte characters?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: regex, and multibyte characters
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 33774 in perlfaq6.pod
-Lookups: regex, efficiency; Text: regex, efficiency; Tail: (How do I efficiently match many regular expressions at once?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: regex, efficiency; Tail: (How do I efficiently match many regular expressions at once?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: regex, efficiency
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 23616 in perlfaq6.pod
-Lookups: regex, escaping; Text: regex, escaping; Tail: (How can I quote a variable to use in a regex?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: regex, escaping; Tail: (How can I quote a variable to use in a regex?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: regex, escaping
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 11060 in perlfaq6.pod
-Lookups: regex, in variable; Text: regex, in variable; Tail: (How do I match a regular expression that's in a variable?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: regex, in variable; Tail: (How do I match a regular expression that's in a variable?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: regex, in variable
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 36565 in perlfaq6.pod
-Lookups: regex, legibility; Text: regex, legibility; Tail: (How can I hope to use regular expressions without creating illegible and unmaintainable code?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: regex, legibility; Tail: (How can I hope to use regular expressions without creating illegible and unmaintainable code?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: regex, legibility
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 665 in perlfaq6.pod
-Lookups: regex, matching balanced test; Text: regex, matching balanced test; Tail: (Can I use Perl regular expressions to match balanced text?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: regex, matching balanced test; Tail: (Can I use Perl regular expressions to match balanced text?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: regex, matching balanced test
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 16550 in perlfaq6.pod
-Lookups: regex, multiline; Text: regex, multiline; Tail: (I'm having trouble matching over more than one line. What's wrong?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: regex, multiline; Tail: (I'm having trouble matching over more than one line. What's wrong?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: regex, multiline
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 2811 in perlfaq6.pod
-Lookups: regex; Text: regex; Tail: (How do I match a regular expression that's in a variable?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: regex; Tail: (How do I match a regular expression that's in a variable?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: regex
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 36595 in perlfaq6.pod
-Lookups: regexp, and multibyte characters; Text: regexp, and multibyte characters; Tail: (How can I match strings with multibyte characters?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: regexp, and multibyte characters; Tail: (How can I match strings with multibyte characters?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: regexp, and multibyte characters
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 33809 in perlfaq6.pod
-Lookups: regexp, efficiency; Text: regexp, efficiency; Tail: (How do I efficiently match many regular expressions at once?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: regexp, efficiency; Tail: (How do I efficiently match many regular expressions at once?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: regexp, efficiency
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 23637 in perlfaq6.pod
-Lookups: regexp, escaping; Text: regexp, escaping; Tail: (How can I quote a variable to use in a regex?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: regexp, escaping; Tail: (How can I quote a variable to use in a regex?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: regexp, escaping
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 11079 in perlfaq6.pod
-Lookups: regexp, legibility; Text: regexp, legibility; Tail: (How can I hope to use regular expressions without creating illegible and unmaintainable code?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: regexp, legibility; Tail: (How can I hope to use regular expressions without creating illegible and unmaintainable code?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: regexp, legibility
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 686 in perlfaq6.pod
-Lookups: regexp, matching balanced test; Text: regexp, matching balanced test; Tail: (Can I use Perl regular expressions to match balanced text?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: regexp, matching balanced test; Tail: (Can I use Perl regular expressions to match balanced text?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: regexp, matching balanced test
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 16583 in perlfaq6.pod
-Lookups: regexp, multiline; Text: regexp, multiline; Tail: (I'm having trouble matching over more than one line. What's wrong?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: regexp, multiline; Tail: (I'm having trouble matching over more than one line. What's wrong?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: regexp, multiline
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 2831 in perlfaq6.pod
-Lookups: regular expression, and multibyte characters; Text: regular expression, and multibyte characters; Tail: (How can I match strings with multibyte characters?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: regular expression, and multibyte characters; Tail: (How can I match strings with multibyte characters?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: regular expression, and multibyte characters
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 33845 in perlfaq6.pod
-Lookups: regular expression, efficiency; Text: regular expression, efficiency; Tail: (How do I efficiently match many regular expressions at once?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: regular expression, efficiency; Tail: (How do I efficiently match many regular expressions at once?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: regular expression, efficiency
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 23659 in perlfaq6.pod
-Lookups: regular expression, escaping; Text: regular expression, escaping; Tail: (How can I quote a variable to use in a regex?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: regular expression, escaping; Tail: (How can I quote a variable to use in a regex?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: regular expression, escaping
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 11099 in perlfaq6.pod
-Lookups: regular expression, legibility; Text: regular expression, legibility; Tail: (How can I hope to use regular expressions without creating illegible and unmaintainable code?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: regular expression, legibility; Tail: (How can I hope to use regular expressions without creating illegible and unmaintainable code?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: regular expression, legibility
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 708 in perlfaq6.pod
-Lookups: regular expression, matching balanced test; Text: regular expression, matching balanced test; Tail: (Can I use Perl regular expressions to match balanced text?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: regular expression, matching balanced test; Tail: (Can I use Perl regular expressions to match balanced text?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: regular expression, matching balanced test
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 16617 in perlfaq6.pod
-Lookups: regular expression, multiline; Text: regular expression, multiline; Tail: (I'm having trouble matching over more than one line. What's wrong?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: regular expression, multiline; Tail: (I'm having trouble matching over more than one line. What's wrong?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: regular expression, multiline
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 2852 in perlfaq6.pod
-Lookups: replace, case preserving; Text: replace, case preserving; Tail: (How do I substitute case-insensitively on the LHS while preserving case on the RHS?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: replace, case preserving; Tail: (How do I substitute case-insensitively on the LHS while preserving case on the RHS?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: replace, case preserving
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 7572 in perlfaq6.pod
-Lookups: s, case preserving; Text: s, case preserving; Tail: (How do I substitute case-insensitively on the LHS while preserving case on the RHS?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: s, case preserving; Tail: (How do I substitute case-insensitively on the LHS while preserving case on the RHS?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: s, case preserving
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 7664 in perlfaq6.pod
-Lookups: substitute, case preserving; Text: substitute, case preserving; Tail: (How do I substitute case-insensitively on the LHS while preserving case on the RHS?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: substitute, case preserving; Tail: (How do I substitute case-insensitively on the LHS while preserving case on the RHS?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: substitute, case preserving
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 7600 in perlfaq6.pod
-Lookups: substitution, case preserving; Text: substitution, case preserving; Tail: (How do I substitute case-insensitively on the LHS while preserving case on the RHS?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: substitution, case preserving; Tail: (How do I substitute case-insensitively on the LHS while preserving case on the RHS?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: substitution, case preserving
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 7631 in perlfaq6.pod
-Lookups: sucking out, will to live; Text: sucking out, will to live; Tail: (How do I match XML, HTML, or other nasty, ugly things with a regex?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: sucking out, will to live; Tail: (How do I match XML, HTML, or other nasty, ugly things with a regex?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: sucking out, will to live
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 5823 in perlfaq6.pod
-Lookups: word; Text: word; Tail: (How do I process each word on each line?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: word; Tail: (How do I process each word on each line?); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: word
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 22048 in perlfaq6.pod

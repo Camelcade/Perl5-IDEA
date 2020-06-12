@@ -1,22 +1,33 @@
-Lookups: ARRAY; Text: ARRAY; Tail: null; Type: null; Icon: null; Type Icon: null
+Text: ARRAY; Tail: null; Type: null; Icon: null; Type Icon: null
+Lookups: ARRAY
     String
-Lookups: CODE; Text: CODE; Tail: null; Type: null; Icon: null; Type Icon: null
+Text: CODE; Tail: null; Type: null; Icon: null; Type Icon: null
+Lookups: CODE
     String
-Lookups: FORMAT; Text: FORMAT; Tail: null; Type: null; Icon: null; Type Icon: null
+Text: FORMAT; Tail: null; Type: null; Icon: null; Type Icon: null
+Lookups: FORMAT
     String
-Lookups: GLOB; Text: GLOB; Tail: null; Type: null; Icon: null; Type Icon: null
+Text: GLOB; Tail: null; Type: null; Icon: null; Type Icon: null
+Lookups: GLOB
     String
-Lookups: HASH; Text: HASH; Tail: null; Type: null; Icon: null; Type Icon: null
+Text: HASH; Tail: null; Type: null; Icon: null; Type Icon: null
+Lookups: HASH
     String
-Lookups: IO; Text: IO; Tail: null; Type: null; Icon: null; Type Icon: null
+Text: IO; Tail: null; Type: null; Icon: null; Type Icon: null
+Lookups: IO
     String
-Lookups: LVALUE; Text: LVALUE; Tail: null; Type: null; Icon: null; Type Icon: null
+Text: LVALUE; Tail: null; Type: null; Icon: null; Type Icon: null
+Lookups: LVALUE
     String
-Lookups: REF; Text: REF; Tail: null; Type: null; Icon: null; Type Icon: null
+Text: REF; Tail: null; Type: null; Icon: null; Type Icon: null
+Lookups: REF
     String
-Lookups: Regexp; Text: Regexp; Tail: null; Type: null; Icon: null; Type Icon: null
+Text: Regexp; Tail: null; Type: null; Icon: null; Type Icon: null
+Lookups: Regexp
     String
-Lookups: SCALAR; Text: SCALAR; Tail: null; Type: null; Icon: null; Type Icon: null
+Text: SCALAR; Tail: null; Type: null; Icon: null; Type Icon: null
+Lookups: SCALAR
     String
-Lookups: VSTRING; Text: VSTRING; Tail: null; Type: null; Icon: null; Type Icon: null
+Text: VSTRING; Tail: null; Type: null; Icon: null; Type Icon: null
+Lookups: VSTRING
     String

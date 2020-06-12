@@ -1,16 +1,24 @@
-Lookups: ALL; Text: ALL; Tail: null; Type: Log::Log4perl::Levels; Icon: /scalar_gutter_icon.png; Type Icon: null
+Text: ALL; Tail: null; Type: Log::Log4perl::Levels; Icon: /scalar_gutter_icon.png; Type Icon: null
+Lookups: ALL
     String
-Lookups: DEBUG; Text: DEBUG; Tail: null; Type: Log::Log4perl::Levels; Icon: /scalar_gutter_icon.png; Type Icon: null
+Text: DEBUG; Tail: null; Type: Log::Log4perl::Levels; Icon: /scalar_gutter_icon.png; Type Icon: null
+Lookups: DEBUG
     String
-Lookups: ERROR; Text: ERROR; Tail: null; Type: Log::Log4perl::Levels; Icon: /scalar_gutter_icon.png; Type Icon: null
+Text: ERROR; Tail: null; Type: Log::Log4perl::Levels; Icon: /scalar_gutter_icon.png; Type Icon: null
+Lookups: ERROR
     String
-Lookups: FATAL; Text: FATAL; Tail: null; Type: Log::Log4perl::Levels; Icon: /scalar_gutter_icon.png; Type Icon: null
+Text: FATAL; Tail: null; Type: Log::Log4perl::Levels; Icon: /scalar_gutter_icon.png; Type Icon: null
+Lookups: FATAL
     String
-Lookups: INFO; Text: INFO; Tail: null; Type: Log::Log4perl::Levels; Icon: /scalar_gutter_icon.png; Type Icon: null
+Text: INFO; Tail: null; Type: Log::Log4perl::Levels; Icon: /scalar_gutter_icon.png; Type Icon: null
+Lookups: INFO
     String
-Lookups: OFF; Text: OFF; Tail: null; Type: Log::Log4perl::Levels; Icon: /scalar_gutter_icon.png; Type Icon: null
+Text: OFF; Tail: null; Type: Log::Log4perl::Levels; Icon: /scalar_gutter_icon.png; Type Icon: null
+Lookups: OFF
     String
-Lookups: TRACE; Text: TRACE; Tail: null; Type: Log::Log4perl::Levels; Icon: /scalar_gutter_icon.png; Type Icon: null
+Text: TRACE; Tail: null; Type: Log::Log4perl::Levels; Icon: /scalar_gutter_icon.png; Type Icon: null
+Lookups: TRACE
     String
-Lookups: WARN; Text: WARN; Tail: null; Type: Log::Log4perl::Levels; Icon: /scalar_gutter_icon.png; Type Icon: null
+Text: WARN; Tail: null; Type: Log::Log4perl::Levels; Icon: /scalar_gutter_icon.png; Type Icon: null
+Lookups: WARN
     String

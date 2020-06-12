@@ -1,130 +1,195 @@
-Lookups: -E<gt>, ->; Text: ->; Tail: (Speaking of things like @{$AoA[$i]}, the following are actually the same thing:); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: ->; Tail: (Speaking of things like @{$AoA[$i]}, the following are actually the same thing:); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: -E<gt>, ->
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 9454 in perldsc.pod
-Lookups: ARRAYS OF ARRAYS; Text: ARRAYS OF ARRAYS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: ARRAYS OF ARRAYS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: ARRAYS OF ARRAYS
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 12307 in perldsc.pod
-Lookups: ARRAYS OF HASHES; Text: ARRAYS OF HASHES; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: ARRAYS OF HASHES; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: ARRAYS OF HASHES
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 15411 in perldsc.pod
-Lookups: AUTHOR; Text: AUTHOR; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: AUTHOR; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: AUTHOR
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 25560 in perldsc.pod
-Lookups: Access and Printing of a HASH OF ARRAYS; Text: Access and Printing of a HASH OF ARRAYS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: Access and Printing of a HASH OF ARRAYS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Access and Printing of a HASH OF ARRAYS
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14440 in perldsc.pod
-Lookups: Access and Printing of a HASH OF HASHES; Text: Access and Printing of a HASH OF HASHES; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: Access and Printing of a HASH OF HASHES; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Access and Printing of a HASH OF HASHES
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18858 in perldsc.pod
-Lookups: Access and Printing of an ARRAY OF ARRAYS; Text: Access and Printing of an ARRAY OF ARRAYS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: Access and Printing of an ARRAY OF ARRAYS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Access and Printing of an ARRAY OF ARRAYS
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12880 in perldsc.pod
-Lookups: Access and Printing of an ARRAY OF HASHES; Text: Access and Printing of an ARRAY OF HASHES; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: Access and Printing of an ARRAY OF HASHES; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Access and Printing of an ARRAY OF HASHES
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16598 in perldsc.pod
-Lookups: AoA, debugging; Text: AoA, debugging; Tail: (DEBUGGING); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: AoA, debugging; Tail: (DEBUGGING); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: AoA, debugging
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 11381 in perldsc.pod
-Lookups: AoA; Text: AoA; Tail: (ARRAYS OF ARRAYS); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: AoA; Tail: (ARRAYS OF ARRAYS); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: AoA
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 12350 in perldsc.pod
-Lookups: AoH, debugging; Text: AoH, debugging; Tail: (DEBUGGING); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: AoH, debugging; Tail: (DEBUGGING); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: AoH, debugging
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 11417 in perldsc.pod
-Lookups: AoH; Text: AoH; Tail: (ARRAYS OF HASHES); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: AoH; Tail: (ARRAYS OF HASHES); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: AoH
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 15454 in perldsc.pod
-Lookups: CAVEAT ON PRECEDENCE; Text: CAVEAT ON PRECEDENCE; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: CAVEAT ON PRECEDENCE; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: CAVEAT ON PRECEDENCE
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 9286 in perldsc.pod
-Lookups: CODE EXAMPLES; Text: CODE EXAMPLES; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: CODE EXAMPLES; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: CODE EXAMPLES
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 12124 in perldsc.pod
-Lookups: COMMON MISTAKES; Text: COMMON MISTAKES; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: COMMON MISTAKES; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: COMMON MISTAKES
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4241 in perldsc.pod
-Lookups: DEBUGGING; Text: DEBUGGING; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: DEBUGGING; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: DEBUGGING
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 11298 in perldsc.pod
-Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: DESCRIPTION
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 108 in perldsc.pod
-Lookups: Database Ties; Text: Database Ties; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: Database Ties; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Database Ties
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 25028 in perldsc.pod
-Lookups: Declaration of MORE ELABORATE RECORDS; Text: Declaration of MORE ELABORATE RECORDS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: Declaration of MORE ELABORATE RECORDS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Declaration of MORE ELABORATE RECORDS
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20467 in perldsc.pod
-Lookups: Declaration of a HASH OF ARRAYS; Text: Declaration of a HASH OF ARRAYS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: Declaration of a HASH OF ARRAYS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Declaration of a HASH OF ARRAYS
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13421 in perldsc.pod
-Lookups: Declaration of a HASH OF COMPLEX RECORDS; Text: Declaration of a HASH OF COMPLEX RECORDS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: Declaration of a HASH OF COMPLEX RECORDS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Declaration of a HASH OF COMPLEX RECORDS
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21332 in perldsc.pod
-Lookups: Declaration of a HASH OF HASHES; Text: Declaration of a HASH OF HASHES; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: Declaration of a HASH OF HASHES; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Declaration of a HASH OF HASHES
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17330 in perldsc.pod
-Lookups: Declaration of an ARRAY OF ARRAYS; Text: Declaration of an ARRAY OF ARRAYS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: Declaration of an ARRAY OF ARRAYS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Declaration of an ARRAY OF ARRAYS
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12358 in perldsc.pod
-Lookups: Declaration of an ARRAY OF HASHES; Text: Declaration of an ARRAY OF HASHES; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: Declaration of an ARRAY OF HASHES; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Declaration of an ARRAY OF HASHES
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15462 in perldsc.pod
-Lookups: Generation of a HASH OF ARRAYS; Text: Generation of a HASH OF ARRAYS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: Generation of a HASH OF ARRAYS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Generation of a HASH OF ARRAYS
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13654 in perldsc.pod
-Lookups: Generation of a HASH OF COMPLEX RECORDS; Text: Generation of a HASH OF COMPLEX RECORDS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: Generation of a HASH OF COMPLEX RECORDS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Generation of a HASH OF COMPLEX RECORDS
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 22503 in perldsc.pod
-Lookups: Generation of a HASH OF HASHES; Text: Generation of a HASH OF HASHES; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: Generation of a HASH OF HASHES; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Generation of a HASH OF HASHES
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17796 in perldsc.pod
-Lookups: Generation of an ARRAY OF ARRAYS; Text: Generation of an ARRAY OF ARRAYS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: Generation of an ARRAY OF ARRAYS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Generation of an ARRAY OF ARRAYS
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12527 in perldsc.pod
-Lookups: Generation of an ARRAY OF HASHES; Text: Generation of an ARRAY OF HASHES; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: Generation of an ARRAY OF HASHES; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Generation of an ARRAY OF HASHES
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15845 in perldsc.pod
-Lookups: HASHES OF ARRAYS; Text: HASHES OF ARRAYS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: HASHES OF ARRAYS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: HASHES OF ARRAYS
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 13371 in perldsc.pod
-Lookups: HASHES OF HASHES; Text: HASHES OF HASHES; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: HASHES OF HASHES; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: HASHES OF HASHES
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 17280 in perldsc.pod
-Lookups: HoA, debugging; Text: HoA, debugging; Tail: (DEBUGGING); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: HoA, debugging; Tail: (DEBUGGING); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: HoA, debugging
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 11399 in perldsc.pod
-Lookups: HoA; Text: HoA; Tail: (HASHES OF ARRAYS); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: HoA; Tail: (HASHES OF ARRAYS); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: HoA
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 13413 in perldsc.pod
-Lookups: HoH, debugging; Text: HoH, debugging; Tail: (DEBUGGING); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: HoH, debugging; Tail: (DEBUGGING); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: HoH, debugging
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 11435 in perldsc.pod
-Lookups: HoH; Text: HoH; Tail: (HASHES OF HASHES); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: HoH; Tail: (HASHES OF HASHES); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: HoH
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17322 in perldsc.pod
-Lookups: MORE ELABORATE RECORDS; Text: MORE ELABORATE RECORDS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: MORE ELABORATE RECORDS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: MORE ELABORATE RECORDS
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 20403 in perldsc.pod
-Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: NAME
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perldsc.pod
-Lookups: REFERENCES; Text: REFERENCES; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: REFERENCES; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: REFERENCES
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1836 in perldsc.pod
-Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: SEE ALSO; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: SEE ALSO
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 25494 in perldsc.pod
-Lookups: WHY YOU SHOULD ALWAYS use strict; Text: WHY YOU SHOULD ALWAYS use strict; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: WHY YOU SHOULD ALWAYS use strict; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: WHY YOU SHOULD ALWAYS use strict
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 10424 in perldsc.pod
-Lookups: []; Text: []; Tail: (The problem is that both rp and dp are pointers to the same location in memory!  In C, you'd have to remember to malloc() yourself some n...); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: []; Tail: (The problem is that both rp and dp are pointers to the same location in memory!  In C, you'd have to remember to malloc() yourself some n...); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: []
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 6291 in perldsc.pod
-Lookups: array of arrays, debugging; Text: array of arrays, debugging; Tail: (DEBUGGING); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: array of arrays, debugging; Tail: (DEBUGGING); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: array of arrays, debugging
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 11453 in perldsc.pod
-Lookups: array of arrays; Text: array of arrays; Tail: (ARRAYS OF ARRAYS); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: array of arrays; Tail: (ARRAYS OF ARRAYS); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: array of arrays
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 12331 in perldsc.pod
-Lookups: array of hashes, debugging; Text: array of hashes, debugging; Tail: (DEBUGGING); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: array of hashes, debugging; Tail: (DEBUGGING); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: array of hashes, debugging
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 11512 in perldsc.pod
-Lookups: array of hashes; Text: array of hashes; Tail: (ARRAYS OF HASHES); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: array of hashes; Tail: (ARRAYS OF HASHES); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: array of hashes
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 15435 in perldsc.pod
-Lookups: array, multidimensional; Text: array, multidimensional; Tail: (The most important thing to understand about all data structures in Perl--including multidimensional arrays--is that even though they mig...); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: array, multidimensional; Tail: (The most important thing to understand about all data structures in Perl--including multidimensional arrays--is that even though they mig...); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: array, multidimensional
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 2355 in perldsc.pod
-Lookups: complex data structure, debugging; Text: complex data structure, debugging; Tail: (DEBUGGING); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: complex data structure, debugging; Tail: (DEBUGGING); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: complex data structure, debugging
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 11344 in perldsc.pod
-Lookups: complex data structure; Text: complex data structure; Tail: (NAME); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: complex data structure; Tail: (NAME); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: complex data structure
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 30 in perldsc.pod
-Lookups: data structure, debugging; Text: data structure, debugging; Tail: (DEBUGGING); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: data structure, debugging; Tail: (DEBUGGING); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: data structure, debugging
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 11315 in perldsc.pod
-Lookups: data structure; Text: data structure; Tail: (NAME); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: data structure; Tail: (NAME); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: data structure
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 12 in perldsc.pod
-Lookups: dereference, precedence; Text: dereference, precedence; Tail: (CAVEAT ON PRECEDENCE); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: dereference, precedence; Tail: (CAVEAT ON PRECEDENCE); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: dereference, precedence
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 9314 in perldsc.pod
-Lookups: dereference; Text: dereference; Tail: (REFERENCES); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: dereference; Tail: (REFERENCES); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: dereference
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 1867 in perldsc.pod
-Lookups: dereferencing, precedence; Text: dereferencing, precedence; Tail: (CAVEAT ON PRECEDENCE); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: dereferencing, precedence; Tail: (CAVEAT ON PRECEDENCE); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: dereferencing, precedence
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 9341 in perldsc.pod
-Lookups: dereferencing; Text: dereferencing; Tail: (REFERENCES); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: dereferencing; Tail: (REFERENCES); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: dereferencing
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 1882 in perldsc.pod
-Lookups: hash of arrays, debugging; Text: hash of arrays, debugging; Tail: (DEBUGGING); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: hash of arrays, debugging; Tail: (DEBUGGING); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: hash of arrays, debugging
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 11483 in perldsc.pod
-Lookups: hash of arrays; Text: hash of arrays; Tail: (HASHES OF ARRAYS); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: hash of arrays; Tail: (HASHES OF ARRAYS); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: hash of arrays
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 13395 in perldsc.pod
-Lookups: hash of hashes, debugging; Text: hash of hashes, debugging; Tail: (DEBUGGING); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: hash of hashes, debugging; Tail: (DEBUGGING); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: hash of hashes, debugging
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 11542 in perldsc.pod
-Lookups: hash of hashes; Text: hash of hashes; Tail: (HASHES OF HASHES); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: hash of hashes; Tail: (HASHES OF HASHES); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: hash of hashes
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17304 in perldsc.pod
-Lookups: multidimensional array; Text: multidimensional array; Tail: (The most important thing to understand about all data structures in Perl--including multidimensional arrays--is that even though they mig...); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: multidimensional array; Tail: (The most important thing to understand about all data structures in Perl--including multidimensional arrays--is that even though they mig...); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: multidimensional array
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 2329 in perldsc.pod
-Lookups: pointer; Text: pointer; Tail: (REFERENCES); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: pointer; Tail: (REFERENCES); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: pointer
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 1899 in perldsc.pod
-Lookups: record; Text: record; Tail: (MORE ELABORATE RECORDS); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: record; Tail: (MORE ELABORATE RECORDS); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: record
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 20433 in perldsc.pod
-Lookups: reference; Text: reference; Tail: (REFERENCES); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: reference; Tail: (REFERENCES); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: reference
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 1854 in perldsc.pod
-Lookups: struct; Text: struct; Tail: (NAME); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: struct; Tail: (NAME); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: struct
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 56 in perldsc.pod
-Lookups: structure; Text: structure; Tail: (MORE ELABORATE RECORDS); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: structure; Tail: (MORE ELABORATE RECORDS); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: structure
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 20443 in perldsc.pod
-Lookups: {}; Text: {}; Tail: (The problem is that both rp and dp are pointers to the same location in memory!  In C, you'd have to remember to malloc() yourself some n...); Type: Index; Icon: /perl5language.png; Type Icon: null
+Text: {}; Tail: (The problem is that both rp and dp are pointers to the same location in memory!  In C, you'd have to remember to malloc() yourself some n...); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: {}
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 6297 in perldsc.pod

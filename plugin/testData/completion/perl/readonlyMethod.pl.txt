@@ -1,16 +1,24 @@
-Lookups: Array1; Text: Array1; Tail: null; Type: Readonly; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Text: Array1; Tail: null; Type: Readonly; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: Array1
     PsiElement: Implicit sub: Array1()
-Lookups: Array; Text: Array; Tail: null; Type: Readonly; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Text: Array; Tail: null; Type: Readonly; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: Array
     PsiElement: Implicit sub: Array()
-Lookups: Clone; Text: Clone; Tail: null; Type: Readonly; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Text: Clone; Tail: null; Type: Readonly; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: Clone
     PsiElement: Implicit sub: Clone()
-Lookups: Hash1; Text: Hash1; Tail: null; Type: Readonly; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Text: Hash1; Tail: null; Type: Readonly; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: Hash1
     PsiElement: Implicit sub: Hash1()
-Lookups: Hash; Text: Hash; Tail: null; Type: Readonly; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Text: Hash; Tail: null; Type: Readonly; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: Hash
     PsiElement: Implicit sub: Hash()
-Lookups: Readonly; Text: Readonly; Tail: null; Type: Readonly; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Text: Readonly; Tail: null; Type: Readonly; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: Readonly
     PsiElement: Implicit sub: Readonly()
-Lookups: Scalar1; Text: Scalar1; Tail: null; Type: Readonly; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Text: Scalar1; Tail: null; Type: Readonly; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: Scalar1
     PsiElement: Implicit sub: Scalar1()
-Lookups: Scalar; Text: Scalar; Tail: null; Type: Readonly; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Text: Scalar; Tail: null; Type: Readonly; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: Scalar
     PsiElement: Implicit sub: Scalar()

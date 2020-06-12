@@ -1,28 +1,42 @@
-Lookups: AUTHORS; Text: AUTHORS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: AUTHORS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: AUTHORS
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6788 in perlko.pod
-Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: DESCRIPTION
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 163 in perlko.pod
-Lookups: Encode 모듈; Text: Encode 모듈; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Text: Encode 모듈; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Encode 모듈
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3327 in perlko.pod
-Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: NAME
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 127 in perlko.pod
-Lookups: Perl 관련 자료; Text: Perl 관련 자료; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: Perl 관련 자료; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Perl 관련 자료
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 5664 in perlko.pod
-Lookups: Perl에 관하여; Text: Perl에 관하여; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: Perl에 관하여; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Perl에 관하여
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 692 in perlko.pod
-Lookups: 라이센스; Text: 라이센스; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: 라이센스; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: 라이센스
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6733 in perlko.pod
-Lookups: 모범 사례; Text: 모범 사례; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
+Text: 모범 사례; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: 모범 사례
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 4749 in perlko.pod
-Lookups: 변환 예제; Text: 변환 예제; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
+Text: 변환 예제; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: 변환 예제
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 4247 in perlko.pod
-Lookups: 설치; Text: 설치; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: 설치; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: 설치
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1197 in perlko.pod
-Lookups: 실행에 어려움을 겪는다면; Text: 실행에 어려움을 겪는다면; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: 실행에 어려움을 겪는다면; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: 실행에 어려움을 겪는다면
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1738 in perlko.pod
-Lookups: 유니코드 및 한국어 인코딩 관련 자료; Text: 유니코드 및 한국어 인코딩 관련 자료; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
+Text: 유니코드 및 한국어 인코딩 관련 자료; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: 유니코드 및 한국어 인코딩 관련 자료
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 5080 in perlko.pod
-Lookups: 인코딩; Text: 인코딩; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Text: 인코딩; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: 인코딩
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2540 in perlko.pod
-Lookups: 지원 인코딩; Text: 지원 인코딩; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
+Text: 지원 인코딩; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: 지원 인코딩
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 3345 in perlko.pod

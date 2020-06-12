@@ -1,4 +1,6 @@
-Lookups: main::hash; Text: main::hash; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+Text: main::hash; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+Lookups: main::hash
     PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 19 in hashSlices520global.pl
-Lookups: main::otherhash; Text: main::otherhash; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+Text: main::otherhash; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+Lookups: main::otherhash
     PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 25 in hashSlices520global.pl
