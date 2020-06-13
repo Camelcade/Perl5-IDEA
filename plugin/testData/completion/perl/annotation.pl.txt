@@ -1,24 +1,24 @@
 Text: abstract; Tail: null; Type: null; Icon: /annotation_gutter_icon.png; Type Icon: null
-Lookups: abstract
-    Export: Perl5: #@abstract
+	Lookups: abstract
+	Export: Perl5: #@abstract
 Text: deprecated; Tail: null; Type: null; Icon: /annotation_gutter_icon.png; Type Icon: null
-Lookups: deprecated
-    Export: Perl5: #@deprecated
+	Lookups: deprecated
+	Export: Perl5: #@deprecated
 Text: inject; Tail: null; Type: null; Icon: /annotation_gutter_icon.png; Type Icon: null
-Lookups: inject
-    Export: Perl5: #@inject
+	Lookups: inject
+	Export: Perl5: #@inject
 Text: method; Tail: null; Type: null; Icon: /annotation_gutter_icon.png; Type Icon: null
-Lookups: method
-    Export: Perl5: #@method
+	Lookups: method
+	Export: Perl5: #@method
 Text: noinspection; Tail: null; Type: null; Icon: /annotation_gutter_icon.png; Type Icon: null
-Lookups: noinspection
-    Export: Perl5: #@noinspection
+	Lookups: noinspection
+	Export: Perl5: #@noinspection
 Text: override; Tail: null; Type: null; Icon: /annotation_gutter_icon.png; Type Icon: null
-Lookups: override
-    Export: Perl5: #@override
+	Lookups: override
+	Export: Perl5: #@override
 Text: returns; Tail: null; Type: null; Icon: /annotation_gutter_icon.png; Type Icon: null
-Lookups: returns
-    Export: Perl5: #@returns
+	Lookups: returns
+	Export: Perl5: #@returns
 Text: type; Tail: null; Type: null; Icon: /annotation_gutter_icon.png; Type Icon: null
-Lookups: type
-    Export: Perl5: #@type
+	Lookups: type
+	Export: Perl5: #@type

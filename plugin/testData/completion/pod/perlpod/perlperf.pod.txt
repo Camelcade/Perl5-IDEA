@@ -1,87 +1,87 @@
 Text: ANOTHER STEP SIDEWAYS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: ANOTHER STEP SIDEWAYS
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2072 in perlperf.pod
+	Lookups: ANOTHER STEP SIDEWAYS
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2072 in perlperf.pod
 Text: AUTHOR; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: AUTHOR
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 49803 in perlperf.pod
+	Lookups: AUTHOR
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 49803 in perlperf.pod
 Text: Assigning and Dereferencing Variables.; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Assigning and Dereferencing Variables.
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5722 in perlperf.pod
+	Lookups: Assigning and Dereferencing Variables.
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5722 in perlperf.pod
 Text: BENCHMARKS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: BENCHMARKS
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 5627 in perlperf.pod
+	Lookups: BENCHMARKS
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 5627 in perlperf.pod
 Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: DESCRIPTION
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 70 in perlperf.pod
+	Lookups: DESCRIPTION
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 70 in perlperf.pod
 Text: Devel::DProf; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Devel::DProf
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12865 in perlperf.pod
+	Lookups: Devel::DProf
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12865 in perlperf.pod
 Text: Devel::FastProf; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Devel::FastProf
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21440 in perlperf.pod
+	Lookups: Devel::FastProf
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21440 in perlperf.pod
 Text: Devel::NYTProf; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Devel::NYTProf
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23405 in perlperf.pod
+	Lookups: Devel::NYTProf
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23405 in perlperf.pod
 Text: Devel::Profiler; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Devel::Profiler
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15780 in perlperf.pod
+	Lookups: Devel::Profiler
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15780 in perlperf.pod
 Text: Devel::SmallProf; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Devel::SmallProf
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18685 in perlperf.pod
+	Lookups: Devel::SmallProf
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18685 in perlperf.pod
 Text: Elapsed Real Time; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: Elapsed Real Time
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 40929 in perlperf.pod
+	Lookups: Elapsed Real Time
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 40929 in perlperf.pod
 Text: GENERAL GUIDELINES; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: GENERAL GUIDELINES
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2380 in perlperf.pod
+	Lookups: GENERAL GUIDELINES
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2380 in perlperf.pod
 Text: LOGGING; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: LOGGING
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 43328 in perlperf.pod
+	Lookups: LOGGING
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 43328 in perlperf.pod
 Text: Logging if DEBUG (constant); Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Logging if DEBUG (constant)
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 45959 in perlperf.pod
+	Lookups: Logging if DEBUG (constant)
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 45959 in perlperf.pod
 Text: MAN PAGES; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: MAN PAGES
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 48823 in perlperf.pod
+	Lookups: MAN PAGES
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 48823 in perlperf.pod
 Text: MODULES; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: MODULES
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 48851 in perlperf.pod
+	Lookups: MODULES
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 48851 in perlperf.pod
 Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: NAME
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlperf.pod
+	Lookups: NAME
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlperf.pod
 Text: ONE STEP FORWARD; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: ONE STEP FORWARD
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1634 in perlperf.pod
+	Lookups: ONE STEP FORWARD
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1634 in perlperf.pod
 Text: ONE STEP SIDEWAYS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: ONE STEP SIDEWAYS
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1183 in perlperf.pod
+	Lookups: ONE STEP SIDEWAYS
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1183 in perlperf.pod
 Text: OVERVIEW; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: OVERVIEW
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 603 in perlperf.pod
+	Lookups: OVERVIEW
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 603 in perlperf.pod
 Text: PERLDOCS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: PERLDOCS
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 48689 in perlperf.pod
+	Lookups: PERLDOCS
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 48689 in perlperf.pod
 Text: POSTSCRIPT; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: POSTSCRIPT
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 47994 in perlperf.pod
+	Lookups: POSTSCRIPT
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 47994 in perlperf.pod
 Text: PROFILING TOOLS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: PROFILING TOOLS
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 9788 in perlperf.pod
+	Lookups: PROFILING TOOLS
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 9788 in perlperf.pod
 Text: SEE ALSO; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: SEE ALSO
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 48607 in perlperf.pod
+	Lookups: SEE ALSO
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 48607 in perlperf.pod
 Text: SORTING; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: SORTING
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 33610 in perlperf.pod
+	Lookups: SORTING
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 33610 in perlperf.pod
 Text: Search and replace or tr; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Search and replace or tr
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8325 in perlperf.pod
+	Lookups: Search and replace or tr
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8325 in perlperf.pod
 Text: System CPU Time; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: System CPU Time
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 41380 in perlperf.pod
+	Lookups: System CPU Time
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 41380 in perlperf.pod
 Text: URLS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: URLS
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 49369 in perlperf.pod
+	Lookups: URLS
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 49369 in perlperf.pod
 Text: User CPU Time; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: User CPU Time
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 41236 in perlperf.pod
+	Lookups: User CPU Time
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 41236 in perlperf.pod

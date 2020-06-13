@@ -1,51 +1,51 @@
 Text: API; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: API
-    String
+	Lookups: API
+	String: API
 Text: ATTRIBUTES; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: ATTRIBUTES
-    String
+	Lookups: ATTRIBUTES
+	String: ATTRIBUTES
 Text: AUTHORS; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: AUTHORS
-    String
+	Lookups: AUTHORS
+	String: AUTHORS
 Text: CONTRIBUTORS; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: CONTRIBUTORS
-    String
+	Lookups: CONTRIBUTORS
+	String: CONTRIBUTORS
 Text: COPYRIGHT AND LICENSE; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: COPYRIGHT AND LICENSE
-    String
+	Lookups: COPYRIGHT AND LICENSE
+	String: COPYRIGHT AND LICENSE
 Text: DESCRIPTION; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: DESCRIPTION
-    String
+	Lookups: DESCRIPTION
+	String: DESCRIPTION
 Text: FUNCTIONS; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: FUNCTIONS
-    String
+	Lookups: FUNCTIONS
+	String: FUNCTIONS
 Text: INSTALLATION; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: INSTALLATION
-    String
+	Lookups: INSTALLATION
+	String: INSTALLATION
 Text: METHODS; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: METHODS
-    String
+	Lookups: METHODS
+	String: METHODS
 Text: NAME; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: NAME
-    String
+	Lookups: NAME
+	String: NAME
 Text: SYNOPSIS; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: SYNOPSIS
-    String
+	Lookups: SYNOPSIS
+	String: SYNOPSIS
 Text: VERSION; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: VERSION
-    String
+	Lookups: VERSION
+	String: VERSION
 Text: mojo_attr([$new_value]); Tail: null; Type: null; Icon: /method_gutter_icon.png; Type Icon: null
-Lookups: mojo_attr([$new_value])
-    PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@main::mojo_attr($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 84 in header1.pl
+	Lookups: mojo_attr([$new_value])
+	PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@main::mojo_attr($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 84 in header1.pl
 Text: moose_attr([$new_value]); Tail: null; Type: null; Icon: /method_gutter_icon.png; Type Icon: null
-Lookups: moose_attr([$new_value])
-    PsiElement: PerlAttributeDefinition(LIGHT_ATTRIBUTE)@main::moose_attr($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 111 in header1.pl
+	Lookups: moose_attr([$new_value])
+	PsiElement: PerlAttributeDefinition(LIGHT_ATTRIBUTE)@main::moose_attr($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 111 in header1.pl
 Text: somefunc(); Tail: null; Type: null; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: somefunc()
-    PsiElement: PsiPerlFuncDefinitionImpl(FUNC_DEFINITION)@main::somefunc at 61 in header1.pl
+	Lookups: somefunc()
+	PsiElement: PsiPerlFuncDefinitionImpl(FUNC_DEFINITION)@main::somefunc at 61 in header1.pl
 Text: somemethod(); Tail: null; Type: null; Icon: /method_gutter_icon.png; Type Icon: null
-Lookups: somemethod()
-    PsiElement: PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)@main::somemethod at 38 in header1.pl
+	Lookups: somemethod()
+	PsiElement: PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)@main::somemethod at 38 in header1.pl
 Text: somesub(); Tail: null; Type: null; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: somesub()
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::somesub at 21 in header1.pl
+	Lookups: somesub()
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::somesub at 21 in header1.pl

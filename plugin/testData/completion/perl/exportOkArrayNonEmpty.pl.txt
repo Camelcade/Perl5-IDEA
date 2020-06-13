@@ -1,15 +1,15 @@
 Text: MULTICONST2; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: MULTICONST2
-    PsiElement: PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Foo::Bar::MULTICONST2; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 204 in exportOkArrayNonEmpty.pl
+	Lookups: MULTICONST2
+	PsiElement: PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Foo::Bar::MULTICONST2; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 204 in exportOkArrayNonEmpty.pl
 Text: multiconst; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: multiconst
-    PsiElement: PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Foo::Bar::multiconst; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 183 in exportOkArrayNonEmpty.pl
+	Lookups: multiconst
+	PsiElement: PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Foo::Bar::multiconst; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 183 in exportOkArrayNonEmpty.pl
 Text: singleconst; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: singleconst
-    PsiElement: PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Foo::Bar::singleconst; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 144 in exportOkArrayNonEmpty.pl
+	Lookups: singleconst
+	PsiElement: PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Foo::Bar::singleconst; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 144 in exportOkArrayNonEmpty.pl
 Text: something; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: something
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Foo::Bar::something at 89 in exportOkArrayNonEmpty.pl
+	Lookups: something
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Foo::Bar::something at 89 in exportOkArrayNonEmpty.pl
 Text: somethingelse; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: somethingelse
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Foo::Bar::somethingelse at 108 in exportOkArrayNonEmpty.pl
+	Lookups: somethingelse
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Foo::Bar::somethingelse at 108 in exportOkArrayNonEmpty.pl

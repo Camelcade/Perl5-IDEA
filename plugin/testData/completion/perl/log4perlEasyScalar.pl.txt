@@ -1,24 +1,24 @@
 Text: ALL; Tail: null; Type: Log::Log4perl::Levels; Icon: /scalar_gutter_icon.png; Type Icon: null
-Lookups: ALL
-    String
+	Lookups: ALL
+	String: ALL
 Text: DEBUG; Tail: null; Type: Log::Log4perl::Levels; Icon: /scalar_gutter_icon.png; Type Icon: null
-Lookups: DEBUG
-    String
+	Lookups: DEBUG
+	String: DEBUG
 Text: ERROR; Tail: null; Type: Log::Log4perl::Levels; Icon: /scalar_gutter_icon.png; Type Icon: null
-Lookups: ERROR
-    String
+	Lookups: ERROR
+	String: ERROR
 Text: FATAL; Tail: null; Type: Log::Log4perl::Levels; Icon: /scalar_gutter_icon.png; Type Icon: null
-Lookups: FATAL
-    String
+	Lookups: FATAL
+	String: FATAL
 Text: INFO; Tail: null; Type: Log::Log4perl::Levels; Icon: /scalar_gutter_icon.png; Type Icon: null
-Lookups: INFO
-    String
+	Lookups: INFO
+	String: INFO
 Text: OFF; Tail: null; Type: Log::Log4perl::Levels; Icon: /scalar_gutter_icon.png; Type Icon: null
-Lookups: OFF
-    String
+	Lookups: OFF
+	String: OFF
 Text: TRACE; Tail: null; Type: Log::Log4perl::Levels; Icon: /scalar_gutter_icon.png; Type Icon: null
-Lookups: TRACE
-    String
+	Lookups: TRACE
+	String: TRACE
 Text: WARN; Tail: null; Type: Log::Log4perl::Levels; Icon: /scalar_gutter_icon.png; Type Icon: null
-Lookups: WARN
-    String
+	Lookups: WARN
+	String: WARN

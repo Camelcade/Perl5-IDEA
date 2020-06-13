@@ -1,162 +1,162 @@
 Text: after; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: after
-    String
+	Lookups: after
+	String: after
 Text: after_incl; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: after_incl
-    String
+	Lookups: after_incl
+	String: after_incl
 Text: all; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: all
-    String
+	Lookups: all
+	String: all
 Text: all_u; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: all_u
-    String
+	Lookups: all_u
+	String: all_u
 Text: any; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: any
-    String
+	Lookups: any
+	String: any
 Text: any_u; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: any_u
-    String
+	Lookups: any_u
+	String: any_u
 Text: apply; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: apply
-    String
+	Lookups: apply
+	String: apply
 Text: before; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: before
-    String
+	Lookups: before
+	String: before
 Text: before_incl; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: before_incl
-    String
+	Lookups: before_incl
+	String: before_incl
 Text: bsearch; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: bsearch
-    String
+	Lookups: bsearch
+	String: bsearch
 Text: bsearch_index; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: bsearch_index
-    String
+	Lookups: bsearch_index
+	String: bsearch_index
 Text: bsearchidx; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: bsearchidx
-    String
+	Lookups: bsearchidx
+	String: bsearchidx
 Text: distinct; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: distinct
-    String
+	Lookups: distinct
+	String: distinct
 Text: each_array; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: each_array
-    String
+	Lookups: each_array
+	String: each_array
 Text: each_arrayref; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: each_arrayref
-    String
+	Lookups: each_arrayref
+	String: each_arrayref
 Text: false; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: false
-    String
+	Lookups: false
+	String: false
 Text: first_index; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: first_index
-    String
+	Lookups: first_index
+	String: first_index
 Text: first_result; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: first_result
-    String
+	Lookups: first_result
+	String: first_result
 Text: first_value; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: first_value
-    String
+	Lookups: first_value
+	String: first_value
 Text: firstidx; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: firstidx
-    String
+	Lookups: firstidx
+	String: firstidx
 Text: firstres; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: firstres
-    String
+	Lookups: firstres
+	String: firstres
 Text: firstval; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: firstval
-    String
+	Lookups: firstval
+	String: firstval
 Text: indexes; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: indexes
-    String
+	Lookups: indexes
+	String: indexes
 Text: insert_after; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: insert_after
-    String
+	Lookups: insert_after
+	String: insert_after
 Text: insert_after_string; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: insert_after_string
-    String
+	Lookups: insert_after_string
+	String: insert_after_string
 Text: last_index; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: last_index
-    String
+	Lookups: last_index
+	String: last_index
 Text: last_result; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: last_result
-    String
+	Lookups: last_result
+	String: last_result
 Text: last_value; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: last_value
-    String
+	Lookups: last_value
+	String: last_value
 Text: lastidx; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: lastidx
-    String
+	Lookups: lastidx
+	String: lastidx
 Text: lastres; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: lastres
-    String
+	Lookups: lastres
+	String: lastres
 Text: lastval; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: lastval
-    String
+	Lookups: lastval
+	String: lastval
 Text: mesh; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: mesh
-    String
+	Lookups: mesh
+	String: mesh
 Text: minmax; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: minmax
-    String
+	Lookups: minmax
+	String: minmax
 Text: natatime; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: natatime
-    String
+	Lookups: natatime
+	String: natatime
 Text: none; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: none
-    String
+	Lookups: none
+	String: none
 Text: none_u; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: none_u
-    String
+	Lookups: none_u
+	String: none_u
 Text: notall; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: notall
-    String
+	Lookups: notall
+	String: notall
 Text: notall_u; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: notall_u
-    String
+	Lookups: notall_u
+	String: notall_u
 Text: nsort_by; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: nsort_by
-    String
+	Lookups: nsort_by
+	String: nsort_by
 Text: one; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: one
-    String
+	Lookups: one
+	String: one
 Text: one_u; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: one_u
-    String
+	Lookups: one_u
+	String: one_u
 Text: only_index; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: only_index
-    String
+	Lookups: only_index
+	String: only_index
 Text: only_result; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: only_result
-    String
+	Lookups: only_result
+	String: only_result
 Text: only_value; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: only_value
-    String
+	Lookups: only_value
+	String: only_value
 Text: onlyidx; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: onlyidx
-    String
+	Lookups: onlyidx
+	String: onlyidx
 Text: onlyres; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: onlyres
-    String
+	Lookups: onlyres
+	String: onlyres
 Text: onlyval; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: onlyval
-    String
+	Lookups: onlyval
+	String: onlyval
 Text: pairwise; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: pairwise
-    String
+	Lookups: pairwise
+	String: pairwise
 Text: part; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: part
-    String
+	Lookups: part
+	String: part
 Text: singleton; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: singleton
-    String
+	Lookups: singleton
+	String: singleton
 Text: sort_by; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: sort_by
-    String
+	Lookups: sort_by
+	String: sort_by
 Text: true; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: true
-    String
+	Lookups: true
+	String: true
 Text: uniq; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: uniq
-    String
+	Lookups: uniq
+	String: uniq
 Text: zip; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: zip
-    String
+	Lookups: zip
+	String: zip

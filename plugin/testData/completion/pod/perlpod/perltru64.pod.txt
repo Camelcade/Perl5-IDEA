@@ -1,42 +1,42 @@
 Text: 64-bit Perl on Tru64; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: 64-bit Perl on Tru64
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5326 in perltru64.pod
+	Lookups: 64-bit Perl on Tru64
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5326 in perltru64.pod
 Text: AUTHOR; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: AUTHOR
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 8440 in perltru64.pod
+	Lookups: AUTHOR
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 8440 in perltru64.pod
 Text: Compiling Perl 5 on Tru64; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Compiling Perl 5 on Tru64
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 532 in perltru64.pod
+	Lookups: Compiling Perl 5 on Tru64
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 532 in perltru64.pod
 Text: DB_File tests failing on Tru64; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: DB_File tests failing on Tru64
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4102 in perltru64.pod
+	Lookups: DB_File tests failing on Tru64
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4102 in perltru64.pod
 Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: DESCRIPTION
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 297 in perltru64.pod
+	Lookups: DESCRIPTION
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 297 in perltru64.pod
 Text: Long Doubles on Tru64; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Long Doubles on Tru64
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3252 in perltru64.pod
+	Lookups: Long Doubles on Tru64
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3252 in perltru64.pod
 Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: NAME
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 178 in perltru64.pod
+	Lookups: NAME
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 178 in perltru64.pod
 Text: Perl Fails Because Of Unresolved Symbol sockatmark; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Perl Fails Because Of Unresolved Symbol sockatmark
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 7305 in perltru64.pod
+	Lookups: Perl Fails Because Of Unresolved Symbol sockatmark
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 7305 in perltru64.pod
 Text: Testing Perl on Tru64; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Testing Perl on Tru64
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6725 in perltru64.pod
+	Lookups: Testing Perl on Tru64
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6725 in perltru64.pod
 Text: Threaded Perl on Tru64; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Threaded Perl on Tru64
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2685 in perltru64.pod
+	Lookups: Threaded Perl on Tru64
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2685 in perltru64.pod
 Text: Using Large Files with Perl on Tru64; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Using Large Files with Perl on Tru64
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2419 in perltru64.pod
+	Lookups: Using Large Files with Perl on Tru64
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2419 in perltru64.pod
 Text: Warnings about floating-point overflow when compiling Perl on Tru64; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Warnings about floating-point overflow when compiling Perl on Tru64
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5589 in perltru64.pod
+	Lookups: Warnings about floating-point overflow when compiling Perl on Tru64
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5589 in perltru64.pod
 Text: ext/ODBM_File/odbm Test Failing With Static Builds; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: extE<sol>ODBM_FileE<sol>odbm Test Failing With Static Builds, ext/ODBM_File/odbm Test Failing With Static Builds
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6936 in perltru64.pod
+	Lookups: extE<sol>ODBM_FileE<sol>odbm Test Failing With Static Builds, ext/ODBM_File/odbm Test Failing With Static Builds
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6936 in perltru64.pod
 Text: read_cur_obj_info: bad file magic number; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: read_cur_obj_info: bad file magic number
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 7809 in perltru64.pod
+	Lookups: read_cur_obj_info: bad file magic number
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 7809 in perltru64.pod

@@ -1,12 +1,12 @@
 Text: AUTHOR; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: AUTHOR
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1482 in perlriscos.pod
+	Lookups: AUTHOR
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1482 in perlriscos.pod
 Text: BUILD; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: BUILD
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 515 in perlriscos.pod
+	Lookups: BUILD
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 515 in perlriscos.pod
 Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: DESCRIPTION
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 236 in perlriscos.pod
+	Lookups: DESCRIPTION
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 236 in perlriscos.pod
 Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: NAME
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 182 in perlriscos.pod
+	Lookups: NAME
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 182 in perlriscos.pod

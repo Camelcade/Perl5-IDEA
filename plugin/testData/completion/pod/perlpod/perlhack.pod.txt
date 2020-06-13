@@ -1,156 +1,156 @@
 Text: "The Road goes ever on and on, down from the door where it began."; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: "The Road goes ever on and on, down from the door where it began."
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 40500 in perlhack.pod
+	Lookups: "The Road goes ever on and on, down from the door where it began."
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 40500 in perlhack.pod
 Text: #p5p on IRC; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: #p5p on IRC
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4675 in perlhack.pod
+	Lookups: #p5p on IRC
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4675 in perlhack.pod
 Text: AUTHOR; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: AUTHOR
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 43066 in perlhack.pod
+	Lookups: AUTHOR
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 43066 in perlhack.pod
 Text: BUG REPORTING; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: BUG REPORTING
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3274 in perlhack.pod
+	Lookups: BUG REPORTING
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3274 in perlhack.pod
 Text: Backwards compatibility; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Backwards compatibility
-    PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 19295 in perlhack.pod
+	Lookups: Backwards compatibility
+	PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 19295 in perlhack.pod
 Text: Building perl at older commits; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Building perl at older commits
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 34574 in perlhack.pod
+	Lookups: Building perl at older commits
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 34574 in perlhack.pod
 Text: CPAN TESTERS AND PERL SMOKERS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: CPAN TESTERS AND PERL SMOKERS
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 38819 in perlhack.pod
+	Lookups: CPAN TESTERS AND PERL SMOKERS
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 38819 in perlhack.pod
 Text: Comments, Comments, Comments; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Comments, Comments, Comments
-    PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 12068 in perlhack.pod
+	Lookups: Comments, Comments, Comments
+	PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 12068 in perlhack.pod
 Text: Commit message; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Commit message
-    PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 9843 in perlhack.pod
+	Lookups: Commit message
+	PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 9843 in perlhack.pod
 Text: Could it be a module instead?; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Could it be a module instead?
-    PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 19825 in perlhack.pod
+	Lookups: Could it be a module instead?
+	PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 19825 in perlhack.pod
 Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: DESCRIPTION
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 170 in perlhack.pod
+	Lookups: DESCRIPTION
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 170 in perlhack.pod
 Text: Does it create too much work?; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Does it create too much work?
-    PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 22848 in perlhack.pod
+	Lookups: Does it create too much work?
+	PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 22848 in perlhack.pod
 Text: Does it potentially introduce new bugs?; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Does it potentially introduce new bugs?
-    PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 20660 in perlhack.pod
+	Lookups: Does it potentially introduce new bugs?
+	PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 20660 in perlhack.pod
 Text: Does it preclude other desirable features?; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Does it preclude other desirable features?
-    PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 20973 in perlhack.pod
+	Lookups: Does it preclude other desirable features?
+	PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 20973 in perlhack.pod
 Text: Does the concept match the general goals of Perl?; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Does the concept match the general goals of Perl?
-    PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 18506 in perlhack.pod
+	Lookups: Does the concept match the general goals of Perl?
+	PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 18506 in perlhack.pod
 Text: GETTING THE PERL SOURCE; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: GETTING THE PERL SOURCE
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4848 in perlhack.pod
+	Lookups: GETTING THE PERL SOURCE
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4848 in perlhack.pod
 Text: Getting your patch accepted; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Getting your patch accepted
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8603 in perlhack.pod
+	Lookups: Getting your patch accepted
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8603 in perlhack.pod
 Text: How big is it?; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How big is it?
-    PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 20808 in perlhack.pod
+	Lookups: How big is it?
+	PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 20808 in perlhack.pod
 Text: Is the feature generic enough?; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Is the feature generic enough?
-    PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 20376 in perlhack.pod
+	Lookups: Is the feature generic enough?
+	PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 20376 in perlhack.pod
 Text: Is the implementation generic enough to be portable?; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Is the implementation generic enough to be portable?
-    PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 21574 in perlhack.pod
+	Lookups: Is the implementation generic enough to be portable?
+	PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 21574 in perlhack.pod
 Text: Is the implementation robust?; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Is the implementation robust?
-    PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 21302 in perlhack.pod
+	Lookups: Is the implementation robust?
+	PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 21302 in perlhack.pod
 Text: Is the implementation tested?; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Is the implementation tested?
-    PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 21781 in perlhack.pod
+	Lookups: Is the implementation tested?
+	PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 21781 in perlhack.pod
 Text: Is there another way to do it?; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Is there another way to do it?
-    PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 22572 in perlhack.pod
+	Lookups: Is there another way to do it?
+	PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 22572 in perlhack.pod
 Text: Is there enough documentation?; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Is there enough documentation?
-    PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 22306 in perlhack.pod
+	Lookups: Is there enough documentation?
+	PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 22306 in perlhack.pod
 Text: MORE READING FOR GUTS HACKERS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: MORE READING FOR GUTS HACKERS
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 36838 in perlhack.pod
+	Lookups: MORE READING FOR GUTS HACKERS
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 36838 in perlhack.pod
 Text: Metaphoric Quotations; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Metaphoric Quotations
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 40719 in perlhack.pod
+	Lookups: Metaphoric Quotations
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 40719 in perlhack.pod
 Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: NAME
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 125 in perlhack.pod
+	Lookups: NAME
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 125 in perlhack.pod
 Text: Other environment variables that may influence tests; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Other environment variables that may influence tests
-    PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 32666 in perlhack.pod
+	Lookups: Other environment variables that may influence tests
+	PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 32666 in perlhack.pod
 Text: PATCHING PERL; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: PATCHING PERL
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6728 in perlhack.pod
+	Lookups: PATCHING PERL
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6728 in perlhack.pod
 Text: PERL 5 PORTERS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: PERL 5 PORTERS
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3975 in perlhack.pod
+	Lookups: PERL 5 PORTERS
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3975 in perlhack.pod
 Text: Parallel tests; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Parallel tests
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 29533 in perlhack.pod
+	Lookups: Parallel tests
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 29533 in perlhack.pod
 Text: Patch style; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Patch style
-    PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 8762 in perlhack.pod
+	Lookups: Patch style
+	PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 8762 in perlhack.pod
 Text: Patches speak louder than words; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Patches speak louder than words
-    PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 22995 in perlhack.pod
+	Lookups: Patches speak louder than words
+	PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 22995 in perlhack.pod
 Text: Patching a core module; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Patching a core module
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16312 in perlhack.pod
+	Lookups: Patching a core module
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16312 in perlhack.pod
 Text: Performance testing; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Performance testing
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 33475 in perlhack.pod
+	Lookups: Performance testing
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 33475 in perlhack.pod
 Text: Read access via Git; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Read access via Git
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5194 in perlhack.pod
+	Lookups: Read access via Git
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5194 in perlhack.pod
 Text: Read access via rsync; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Read access via rsync
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5984 in perlhack.pod
+	Lookups: Read access via rsync
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5984 in perlhack.pod
 Text: Read access via the web; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Read access via the web
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5635 in perlhack.pod
+	Lookups: Read access via the web
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5635 in perlhack.pod
 Text: Running tests by hand; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Running tests by hand
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 30366 in perlhack.pod
+	Lookups: Running tests by hand
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 30366 in perlhack.pod
 Text: SUPER QUICK PATCH GUIDE; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: SUPER QUICK PATCH GUIDE
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 411 in perlhack.pod
+	Lookups: SUPER QUICK PATCH GUIDE
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 411 in perlhack.pod
 Text: Special make test targets; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Special make test targets
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 27876 in perlhack.pod
+	Lookups: Special make test targets
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 27876 in perlhack.pod
 Text: Style; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Style
-    PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 12569 in perlhack.pod
+	Lookups: Style
+	PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 12569 in perlhack.pod
 Text: Submitting patches; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Submitting patches
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6973 in perlhack.pod
+	Lookups: Submitting patches
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6973 in perlhack.pod
 Text: TESTING; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: TESTING
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 23407 in perlhack.pod
+	Lookups: TESTING
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 23407 in perlhack.pod
 Text: Test suite; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Test suite
-    PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 14527 in perlhack.pod
+	Lookups: Test suite
+	PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 14527 in perlhack.pod
 Text: Updating perldelta; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Updating perldelta
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17256 in perlhack.pod
+	Lookups: Updating perldelta
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17256 in perlhack.pod
 Text: Using t/harness for testing; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Using tE<sol>harness for testing, Using t/harness for testing
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 30670 in perlhack.pod
+	Lookups: Using tE<sol>harness for testing, Using t/harness for testing
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 30670 in perlhack.pod
 Text: WHAT NEXT?; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: WHAT NEXT?
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 39544 in perlhack.pod
+	Lookups: WHAT NEXT?
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 39544 in perlhack.pod
 Text: What makes for a good patch?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: What makes for a good patch?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18260 in perlhack.pod
+	Lookups: What makes for a good patch?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18260 in perlhack.pod
 Text: Where is the implementation?; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Where is the implementation?
-    PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 18945 in perlhack.pod
+	Lookups: Where is the implementation?
+	PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 18945 in perlhack.pod
 Text: Write access via git; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Write access via git
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6619 in perlhack.pod
+	Lookups: Write access via git
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6619 in perlhack.pod
 Text: perl-changes mailing list; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: perl-changes mailing list
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4395 in perlhack.pod
+	Lookups: perl-changes mailing list
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4395 in perlhack.pod

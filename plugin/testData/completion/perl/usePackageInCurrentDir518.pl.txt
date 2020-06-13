@@ -1,3 +1,3 @@
 Text: MyCustomPackage; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
-Lookups: MyCustomPackage
-    VirtualFile: MyCustomPackage.pm
+	Lookups: MyCustomPackage
+	VirtualFile: MyCustomPackage.pm

@@ -1,21 +1,21 @@
 Text: :easy; Tail: null; Type: get_logger, logging methods, :levels and :nowarn; Icon: /options.png; Type Icon: null
-Lookups: :easy
-    String
+	Lookups: :easy
+	String: :easy
 Text: :levels; Tail: null; Type: Exports log levels from Log4perl::Level; Icon: /option.png; Type Icon: null
-Lookups: :levels
-    String
+	Lookups: :levels
+	String: :levels
 Text: :no_extra_logdie_message; Tail: null; Type: Suppresses extra LOGDIE message; Icon: /option.png; Type Icon: null
-Lookups: :no_extra_logdie_message
-    String
+	Lookups: :no_extra_logdie_message
+	String: :no_extra_logdie_message
 Text: :nostrict; Tail: null; Type: Put Log4perl in a more permissive mode; Icon: /option.png; Type Icon: null
-Lookups: :nostrict
-    String
+	Lookups: :nostrict
+	String: :nostrict
 Text: :nowarn; Tail: null; Type: No warnings about non-initialized usage; Icon: /option.png; Type Icon: null
-Lookups: :nowarn
-    String
+	Lookups: :nowarn
+	String: :nowarn
 Text: :resurrect; Tail: null; Type: Resurrects buried statements before running; Icon: /option.png; Type Icon: null
-Lookups: :resurrect
-    String
+	Lookups: :resurrect
+	String: :resurrect
 Text: get_logger; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: get_logger
-    String
+	Lookups: get_logger
+	String: get_logger

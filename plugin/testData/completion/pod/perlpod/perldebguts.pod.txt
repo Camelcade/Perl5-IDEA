@@ -1,105 +1,105 @@
 Text: &DB::lsub; Tail: (If the call is to an lvalue subroutine, and &DB::lsub is defined &DB::lsub(args) is called instead, otherwise falling back to &DB::sub(ar...); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: &DB::lsub
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 3944 in perldebguts.pod
+	Lookups: &DB::lsub
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 3944 in perldebguts.pod
 Text: Compile-time Output; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Compile-time Output
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15533 in perldebguts.pod
+	Lookups: Compile-time Output
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15533 in perldebguts.pod
 Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: DESCRIPTION
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 52 in perldebguts.pod
+	Lookups: DESCRIPTION
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 52 in perldebguts.pod
 Text: Debugger Customization Functions; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Debugger Customization Functions
-    PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 7658 in perldebguts.pod
+	Lookups: Debugger Customization Functions
+	PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 7658 in perldebguts.pod
 Text: Debugger Internal Variables; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Debugger Internal Variables
-    PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 6646 in perldebguts.pod
+	Lookups: Debugger Internal Variables
+	PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 6646 in perldebguts.pod
 Text: Debugger Internals; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Debugger Internals
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 348 in perldebguts.pod
+	Lookups: Debugger Internals
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 348 in perldebguts.pod
 Text: Debugging Perl Memory Usage; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Debugging Perl Memory Usage
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 33772 in perldebguts.pod
+	Lookups: Debugging Perl Memory Usage
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 33772 in perldebguts.pod
 Text: Debugging Regular Expressions; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Debugging Regular Expressions
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 15188 in perldebguts.pod
+	Lookups: Debugging Regular Expressions
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 15188 in perldebguts.pod
 Text: Environment Variables; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Environment Variables
-    PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 5208 in perldebguts.pod
+	Lookups: Environment Variables
+	PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 5208 in perldebguts.pod
 Text: Frame Listing Output Examples; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Frame Listing Output Examples
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 8659 in perldebguts.pod
+	Lookups: Frame Listing Output Examples
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 8659 in perldebguts.pod
 Text: Free/Used; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: FreeE<sol>Used, Free/Used
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38020 in perldebguts.pod
+	Lookups: FreeE<sol>Used, Free/Used
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38020 in perldebguts.pod
 Text: GPOS; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: GPOS
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18088 in perldebguts.pod
+	Lookups: GPOS
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18088 in perldebguts.pod
 Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: NAME
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perldebguts.pod
+	Lookups: NAME
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perldebguts.pod
 Text: Run-time Output; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Run-time Output
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 32020 in perldebguts.pod
+	Lookups: Run-time Output
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 32020 in perldebguts.pod
 Text: SEE ALSO; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: SEE ALSO
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 39860 in perldebguts.pod
+	Lookups: SEE ALSO
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 39860 in perldebguts.pod
 Text: Total sbrk(): SBRKed/SBRKs:CONTINUOUS; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: Total sbrk(): SBRKedE<sol>SBRKs:CONTINUOUS, Total sbrk(): SBRKed/SBRKs:CONTINUOUS
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38735 in perldebguts.pod
+	Lookups: Total sbrk(): SBRKedE<sol>SBRKs:CONTINUOUS, Total sbrk(): SBRKed/SBRKs:CONTINUOUS
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38735 in perldebguts.pod
 Text: Types of Nodes; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Types of Nodes
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19076 in perldebguts.pod
+	Lookups: Types of Nodes
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19076 in perldebguts.pod
 Text: Using $ENV{PERL_DEBUG_MSTATS}; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Using $ENV{PERL_DEBUG_MSTATS}
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 35826 in perldebguts.pod
+	Lookups: Using $ENV{PERL_DEBUG_MSTATS}
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 35826 in perldebguts.pod
 Text: Writing Your Own Debugger; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Writing Your Own Debugger
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5174 in perldebguts.pod
+	Lookups: Writing Your Own Debugger
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5174 in perldebguts.pod
 Text: anchored STRING at POS; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: anchored STRING at POS
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17593 in perldebguts.pod
+	Lookups: anchored STRING at POS
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17593 in perldebguts.pod
 Text: anchored(TYPE); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: anchored(TYPE)
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18383 in perldebguts.pod
+	Lookups: anchored(TYPE)
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18383 in perldebguts.pod
 Text: buckets SMALLEST(APPROX)..GREATEST(APPROX); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: buckets SMALLEST(APPROX)..GREATEST(APPROX)
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37161 in perldebguts.pod
+	Lookups: buckets SMALLEST(APPROX)..GREATEST(APPROX)
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37161 in perldebguts.pod
 Text: chain: 0; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: chain: 0
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39426 in perldebguts.pod
+	Lookups: chain: 0
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39426 in perldebguts.pod
 Text: floating STRING at POS1..POS2; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: floating STRING at POS1..POS2
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17635 in perldebguts.pod
+	Lookups: floating STRING at POS1..POS2
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17635 in perldebguts.pod
 Text: heads: 2192; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: heads: 2192
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39233 in perldebguts.pod
+	Lookups: heads: 2192
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39233 in perldebguts.pod
 Text: implicit; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: implicit
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18219 in perldebguts.pod
+	Lookups: implicit
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18219 in perldebguts.pod
 Text: isall; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: isall
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17928 in perldebguts.pod
+	Lookups: isall
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17928 in perldebguts.pod
 Text: matching floating/anchored; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: matching floatingE<sol>anchored, matching floating/anchored
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17696 in perldebguts.pod
+	Lookups: matching floatingE<sol>anchored, matching floating/anchored
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17696 in perldebguts.pod
 Text: minlen; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: minlen
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17766 in perldebguts.pod
+	Lookups: minlen
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17766 in perldebguts.pod
 Text: noscan; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: noscan
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17873 in perldebguts.pod
+	Lookups: noscan
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17873 in perldebguts.pod
 Text: pad: 0; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: pad: 0
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39152 in perldebguts.pod
+	Lookups: pad: 0
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39152 in perldebguts.pod
 Text: plus; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: plus
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18139 in perldebguts.pod
+	Lookups: plus
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18139 in perldebguts.pod
 Text: stclass TYPE; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: stclass TYPE
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17817 in perldebguts.pod
+	Lookups: stclass TYPE
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17817 in perldebguts.pod
 Text: tail: 6144; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: tail: 6144
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39674 in perldebguts.pod
+	Lookups: tail: 6144
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39674 in perldebguts.pod
 Text: with eval; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: with eval
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18277 in perldebguts.pod
+	Lookups: with eval
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18277 in perldebguts.pod

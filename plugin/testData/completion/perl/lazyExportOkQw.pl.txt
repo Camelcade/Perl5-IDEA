@@ -1,267 +1,267 @@
 Text: array_search; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: array_search
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::array_search at 2587 in lazyExportOkQw.pl
+	Lookups: array_search
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::array_search at 2587 in lazyExportOkQw.pl
 Text: assert_arrayref; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: assert_arrayref
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_arrayref at 2308 in lazyExportOkQw.pl
+	Lookups: assert_arrayref
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_arrayref at 2308 in lazyExportOkQw.pl
 Text: assert_can; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: assert_can
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_can at 2392 in lazyExportOkQw.pl
+	Lookups: assert_can
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_can at 2392 in lazyExportOkQw.pl
 Text: assert_datetime; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: assert_datetime
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_datetime at 2248 in lazyExportOkQw.pl
+	Lookups: assert_datetime
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_datetime at 2248 in lazyExportOkQw.pl
 Text: assert_defined; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: assert_defined
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_defined at 2448 in lazyExportOkQw.pl
+	Lookups: assert_defined
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_defined at 2448 in lazyExportOkQw.pl
 Text: assert_email; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: assert_email
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_email at 2568 in lazyExportOkQw.pl
+	Lookups: assert_email
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_email at 2568 in lazyExportOkQw.pl
 Text: assert_empty; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: assert_empty
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_empty at 2606 in lazyExportOkQw.pl
+	Lookups: assert_empty
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_empty at 2606 in lazyExportOkQw.pl
 Text: assert_equals; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: assert_equals
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_equals at 2409 in lazyExportOkQw.pl
+	Lookups: assert_equals
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_equals at 2409 in lazyExportOkQw.pl
 Text: assert_has_moose_role; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: assert_has_moose_role
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_has_moose_role at 2330 in lazyExportOkQw.pl
+	Lookups: assert_has_moose_role
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_has_moose_role at 2330 in lazyExportOkQw.pl
 Text: assert_hashref; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: assert_hashref
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_hashref at 2287 in lazyExportOkQw.pl
+	Lookups: assert_hashref
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_hashref at 2287 in lazyExportOkQw.pl
 Text: assert_i18n; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: assert_i18n
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_i18n at 2358 in lazyExportOkQw.pl
+	Lookups: assert_i18n
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_i18n at 2358 in lazyExportOkQw.pl
 Text: assert_in; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: assert_in
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_in at 2376 in lazyExportOkQw.pl
+	Lookups: assert_in
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_in at 2376 in lazyExportOkQw.pl
 Text: assert_isa; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: assert_isa
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_isa at 2270 in lazyExportOkQw.pl
+	Lookups: assert_isa
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_isa at 2270 in lazyExportOkQw.pl
 Text: assert_iso8601; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: assert_iso8601
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_iso8601 at 2528 in lazyExportOkQw.pl
+	Lookups: assert_iso8601
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_iso8601 at 2528 in lazyExportOkQw.pl
 Text: assert_keys_in; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: assert_keys_in
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_keys_in at 2507 in lazyExportOkQw.pl
+	Lookups: assert_keys_in
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_keys_in at 2507 in lazyExportOkQw.pl
 Text: assert_length; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: assert_length
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_length at 2469 in lazyExportOkQw.pl
+	Lookups: assert_length
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_length at 2469 in lazyExportOkQw.pl
 Text: assert_numeric; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: assert_numeric
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_numeric at 2197 in lazyExportOkQw.pl
+	Lookups: assert_numeric
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_numeric at 2197 in lazyExportOkQw.pl
 Text: assert_numeric_in_range; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: assert_numeric_in_range
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_numeric_in_range at 2218 in lazyExportOkQw.pl
+	Lookups: assert_numeric_in_range
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_numeric_in_range at 2218 in lazyExportOkQw.pl
 Text: assert_required; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: assert_required
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_required at 2175 in lazyExportOkQw.pl
+	Lookups: assert_required
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_required at 2175 in lazyExportOkQw.pl
 Text: assert_sql02; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: assert_sql02
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_sql02 at 2549 in lazyExportOkQw.pl
+	Lookups: assert_sql02
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_sql02 at 2549 in lazyExportOkQw.pl
 Text: assert_undef; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: assert_undef
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_undef at 2429 in lazyExportOkQw.pl
+	Lookups: assert_undef
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_undef at 2429 in lazyExportOkQw.pl
 Text: assert_uuid; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: assert_uuid
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_uuid at 2489 in lazyExportOkQw.pl
+	Lookups: assert_uuid
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_uuid at 2489 in lazyExportOkQw.pl
 Text: capture_stack_trace; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: capture_stack_trace
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::capture_stack_trace at 3146 in lazyExportOkQw.pl
+	Lookups: capture_stack_trace
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::capture_stack_trace at 3146 in lazyExportOkQw.pl
 Text: clean_currency_string; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: clean_currency_string
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::clean_currency_string at 3404 in lazyExportOkQw.pl
+	Lookups: clean_currency_string
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::clean_currency_string at 3404 in lazyExportOkQw.pl
 Text: coalesce; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: coalesce
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::coalesce at 2850 in lazyExportOkQw.pl
+	Lookups: coalesce
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::coalesce at 2850 in lazyExportOkQw.pl
 Text: coalesce_undef; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: coalesce_undef
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::coalesce_undef at 2865 in lazyExportOkQw.pl
+	Lookups: coalesce_undef
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::coalesce_undef at 2865 in lazyExportOkQw.pl
 Text: create_ein_search; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: create_ein_search
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::create_ein_search at 2826 in lazyExportOkQw.pl
+	Lookups: create_ein_search
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::create_ein_search at 2826 in lazyExportOkQw.pl
 Text: create_phone_search; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: create_phone_search
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::create_phone_search at 2776 in lazyExportOkQw.pl
+	Lookups: create_phone_search
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::create_phone_search at 2776 in lazyExportOkQw.pl
 Text: create_query_arg_string; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: create_query_arg_string
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::create_query_arg_string at 3172 in lazyExportOkQw.pl
+	Lookups: create_query_arg_string
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::create_query_arg_string at 3172 in lazyExportOkQw.pl
 Text: create_ssn_search; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: create_ssn_search
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::create_ssn_search at 2802 in lazyExportOkQw.pl
+	Lookups: create_ssn_search
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::create_ssn_search at 2802 in lazyExportOkQw.pl
 Text: debug; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: debug
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::debug at 1736 in lazyExportOkQw.pl
+	Lookups: debug
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::debug at 1736 in lazyExportOkQw.pl
 Text: determine_transaction_entry_type; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: determine_transaction_entry_type
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::determine_transaction_entry_type at 2933 in lazyExportOkQw.pl
+	Lookups: determine_transaction_entry_type
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::determine_transaction_entry_type at 2933 in lazyExportOkQw.pl
 Text: extract_arrayref; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: extract_arrayref
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::extract_arrayref at 3040 in lazyExportOkQw.pl
+	Lookups: extract_arrayref
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::extract_arrayref at 3040 in lazyExportOkQw.pl
 Text: extract_datetime; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: extract_datetime
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::extract_datetime at 3017 in lazyExportOkQw.pl
+	Lookups: extract_datetime
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::extract_datetime at 3017 in lazyExportOkQw.pl
 Text: extract_hashref; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: extract_hashref
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::extract_hashref at 3063 in lazyExportOkQw.pl
+	Lookups: extract_hashref
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::extract_hashref at 3063 in lazyExportOkQw.pl
 Text: extract_iso8601; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: extract_iso8601
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::extract_iso8601 at 3104 in lazyExportOkQw.pl
+	Lookups: extract_iso8601
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::extract_iso8601 at 3104 in lazyExportOkQw.pl
 Text: extract_numeric; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: extract_numeric
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::extract_numeric at 2972 in lazyExportOkQw.pl
+	Lookups: extract_numeric
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::extract_numeric at 2972 in lazyExportOkQw.pl
 Text: extract_required; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: extract_required
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::extract_required at 2994 in lazyExportOkQw.pl
+	Lookups: extract_required
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::extract_required at 2994 in lazyExportOkQw.pl
 Text: extract_sql92; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: extract_sql92
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::extract_sql92 at 3126 in lazyExportOkQw.pl
+	Lookups: extract_sql92
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::extract_sql92 at 3126 in lazyExportOkQw.pl
 Text: extract_uuid; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: extract_uuid
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::extract_uuid at 3085 in lazyExportOkQw.pl
+	Lookups: extract_uuid
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::extract_uuid at 3085 in lazyExportOkQw.pl
 Text: from_file; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: from_file
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::from_file at 3279 in lazyExportOkQw.pl
+	Lookups: from_file
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::from_file at 3279 in lazyExportOkQw.pl
 Text: from_file_binary; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: from_file_binary
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::from_file_binary at 3295 in lazyExportOkQw.pl
+	Lookups: from_file_binary
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::from_file_binary at 3295 in lazyExportOkQw.pl
 Text: get_exception; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: get_exception
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::get_exception at 3340 in lazyExportOkQw.pl
+	Lookups: get_exception
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::get_exception at 3340 in lazyExportOkQw.pl
 Text: info; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: info
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::info at 1725 in lazyExportOkQw.pl
+	Lookups: info
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::info at 1725 in lazyExportOkQw.pl
 Text: is_array; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: is_array
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_array at 1938 in lazyExportOkQw.pl
+	Lookups: is_array
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_array at 1938 in lazyExportOkQw.pl
 Text: is_arrayref; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: is_arrayref
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_arrayref at 1984 in lazyExportOkQw.pl
+	Lookups: is_arrayref
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_arrayref at 1984 in lazyExportOkQw.pl
 Text: is_blessed; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: is_blessed
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_blessed at 1861 in lazyExportOkQw.pl
+	Lookups: is_blessed
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_blessed at 1861 in lazyExportOkQw.pl
 Text: is_can; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: is_can
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_can at 1907 in lazyExportOkQw.pl
+	Lookups: is_can
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_can at 1907 in lazyExportOkQw.pl
 Text: is_datetime; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: is_datetime
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_datetime at 1920 in lazyExportOkQw.pl
+	Lookups: is_datetime
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_datetime at 1920 in lazyExportOkQw.pl
 Text: is_email; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: is_email
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_email at 3248 in lazyExportOkQw.pl
+	Lookups: is_email
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_email at 3248 in lazyExportOkQw.pl
 Text: is_empty; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: is_empty
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_empty at 1813 in lazyExportOkQw.pl
+	Lookups: is_empty
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_empty at 1813 in lazyExportOkQw.pl
 Text: is_equals; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: is_equals
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_equals at 1797 in lazyExportOkQw.pl
+	Lookups: is_equals
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_equals at 1797 in lazyExportOkQw.pl
 Text: is_filepath; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: is_filepath
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_filepath at 3386 in lazyExportOkQw.pl
+	Lookups: is_filepath
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_filepath at 3386 in lazyExportOkQw.pl
 Text: is_hash; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: is_hash
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_hash at 1953 in lazyExportOkQw.pl
+	Lookups: is_hash
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_hash at 1953 in lazyExportOkQw.pl
 Text: is_hashref; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: is_hashref
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_hashref at 1967 in lazyExportOkQw.pl
+	Lookups: is_hashref
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_hashref at 1967 in lazyExportOkQw.pl
 Text: is_in; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: is_in
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_in at 2017 in lazyExportOkQw.pl
+	Lookups: is_in
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_in at 2017 in lazyExportOkQw.pl
 Text: is_integration_username; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: is_integration_username
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_integration_username at 2095 in lazyExportOkQw.pl
+	Lookups: is_integration_username
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_integration_username at 2095 in lazyExportOkQw.pl
 Text: is_isa; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: is_isa
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_isa at 1894 in lazyExportOkQw.pl
+	Lookups: is_isa
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_isa at 1894 in lazyExportOkQw.pl
 Text: is_iso8601; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: is_iso8601
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_iso8601 at 2043 in lazyExportOkQw.pl
+	Lookups: is_iso8601
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_iso8601 at 2043 in lazyExportOkQw.pl
 Text: is_number; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: is_number
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_number at 1828 in lazyExportOkQw.pl
+	Lookups: is_number
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_number at 1828 in lazyExportOkQw.pl
 Text: is_numeric; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: is_numeric
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_numeric at 1844 in lazyExportOkQw.pl
+	Lookups: is_numeric
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_numeric at 1844 in lazyExportOkQw.pl
 Text: is_phone_number; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: is_phone_number
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_phone_number at 2125 in lazyExportOkQw.pl
+	Lookups: is_phone_number
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_phone_number at 2125 in lazyExportOkQw.pl
 Text: is_scalar; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: is_scalar
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_scalar at 1878 in lazyExportOkQw.pl
+	Lookups: is_scalar
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_scalar at 1878 in lazyExportOkQw.pl
 Text: is_sql92; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: is_sql92
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_sql92 at 2060 in lazyExportOkQw.pl
+	Lookups: is_sql92
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_sql92 at 2060 in lazyExportOkQw.pl
 Text: is_sql92_date; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: is_sql92_date
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_sql92_date at 2075 in lazyExportOkQw.pl
+	Lookups: is_sql92_date
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_sql92_date at 2075 in lazyExportOkQw.pl
 Text: is_tax_id; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: is_tax_id
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_tax_id at 3263 in lazyExportOkQw.pl
+	Lookups: is_tax_id
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_tax_id at 3263 in lazyExportOkQw.pl
 Text: is_undef; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: is_undef
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_undef at 2002 in lazyExportOkQw.pl
+	Lookups: is_undef
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_undef at 2002 in lazyExportOkQw.pl
 Text: is_uuid; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: is_uuid
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_uuid at 2029 in lazyExportOkQw.pl
+	Lookups: is_uuid
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_uuid at 2029 in lazyExportOkQw.pl
 Text: load_module_by_name; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: load_module_by_name
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::load_module_by_name at 3360 in lazyExportOkQw.pl
+	Lookups: load_module_by_name
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::load_module_by_name at 3360 in lazyExportOkQw.pl
 Text: ltrim; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: ltrim
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::ltrim at 1759 in lazyExportOkQw.pl
+	Lookups: ltrim
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::ltrim at 1759 in lazyExportOkQw.pl
 Text: optional_arrayref; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: optional_arrayref
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::optional_arrayref at 2732 in lazyExportOkQw.pl
+	Lookups: optional_arrayref
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::optional_arrayref at 2732 in lazyExportOkQw.pl
 Text: optional_datetime; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: optional_datetime
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::optional_datetime at 2648 in lazyExportOkQw.pl
+	Lookups: optional_datetime
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::optional_datetime at 2648 in lazyExportOkQw.pl
 Text: optional_hashref; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: optional_hashref
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::optional_hashref at 2691 in lazyExportOkQw.pl
+	Lookups: optional_hashref
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::optional_hashref at 2691 in lazyExportOkQw.pl
 Text: optional_in; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: optional_in
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::optional_in at 2714 in lazyExportOkQw.pl
+	Lookups: optional_in
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::optional_in at 2714 in lazyExportOkQw.pl
 Text: optional_isa; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: optional_isa
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::optional_isa at 2672 in lazyExportOkQw.pl
+	Lookups: optional_isa
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::optional_isa at 2672 in lazyExportOkQw.pl
 Text: optional_numeric; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: optional_numeric
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::optional_numeric at 2625 in lazyExportOkQw.pl
+	Lookups: optional_numeric
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::optional_numeric at 2625 in lazyExportOkQw.pl
 Text: optional_uuid; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: optional_uuid
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::optional_uuid at 2756 in lazyExportOkQw.pl
+	Lookups: optional_uuid
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::optional_uuid at 2756 in lazyExportOkQw.pl
 Text: parse_datetime_iso8601; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: parse_datetime_iso8601
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::parse_datetime_iso8601 at 2904 in lazyExportOkQw.pl
+	Lookups: parse_datetime_iso8601
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::parse_datetime_iso8601 at 2904 in lazyExportOkQw.pl
 Text: random_alphanumeric_string; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: random_alphanumeric_string
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::random_alphanumeric_string at 3202 in lazyExportOkQw.pl
+	Lookups: random_alphanumeric_string
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::random_alphanumeric_string at 3202 in lazyExportOkQw.pl
 Text: replace_all; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: replace_all
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::replace_all at 2886 in lazyExportOkQw.pl
+	Lookups: replace_all
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::replace_all at 2886 in lazyExportOkQw.pl
 Text: rtrim; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: rtrim
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::rtrim at 1771 in lazyExportOkQw.pl
+	Lookups: rtrim
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::rtrim at 1771 in lazyExportOkQw.pl
 Text: shell; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: shell
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::shell at 3432 in lazyExportOkQw.pl
+	Lookups: shell
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::shell at 3432 in lazyExportOkQw.pl
 Text: sizeof; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: sizeof
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::sizeof at 3235 in lazyExportOkQw.pl
+	Lookups: sizeof
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::sizeof at 3235 in lazyExportOkQw.pl
 Text: superref; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: superref
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::superref at 2160 in lazyExportOkQw.pl
+	Lookups: superref
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::superref at 2160 in lazyExportOkQw.pl
 Text: throw_exception; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: throw_exception
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::throw_exception at 3318 in lazyExportOkQw.pl
+	Lookups: throw_exception
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::throw_exception at 3318 in lazyExportOkQw.pl
 Text: to_file; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: to_file
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::to_file at 3444 in lazyExportOkQw.pl
+	Lookups: to_file
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::to_file at 3444 in lazyExportOkQw.pl
 Text: trim; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: trim
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::trim at 1748 in lazyExportOkQw.pl
+	Lookups: trim
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::trim at 1748 in lazyExportOkQw.pl
 Text: ucwords; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: ucwords
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::ucwords at 1783 in lazyExportOkQw.pl
+	Lookups: ucwords
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::ucwords at 1783 in lazyExportOkQw.pl
 Text: unwrap; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: unwrap
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::unwrap at 2147 in lazyExportOkQw.pl
+	Lookups: unwrap
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::unwrap at 2147 in lazyExportOkQw.pl

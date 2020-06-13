@@ -1,54 +1,54 @@
 Text: Acknowledgements; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Acknowledgements
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 5232 in perl5261delta.pod
+	Lookups: Acknowledgements
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 5232 in perl5261delta.pod
 Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: DESCRIPTION
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 75 in perl5261delta.pod
+	Lookups: DESCRIPTION
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 75 in perl5261delta.pod
 Text: FreeBSD; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: FreeBSD
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2057 in perl5261delta.pod
+	Lookups: FreeBSD
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2057 in perl5261delta.pod
 Text: Give Thanks; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Give Thanks
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 7422 in perl5261delta.pod
+	Lookups: Give Thanks
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 7422 in perl5261delta.pod
 Text: Incompatible Changes; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Incompatible Changes
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1301 in perl5261delta.pod
+	Lookups: Incompatible Changes
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1301 in perl5261delta.pod
 Text: Modules and Pragmata; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Modules and Pragmata
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1494 in perl5261delta.pod
+	Lookups: Modules and Pragmata
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1494 in perl5261delta.pod
 Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: NAME
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 16 in perl5261delta.pod
+	Lookups: NAME
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 16 in perl5261delta.pod
 Text: Platform Support; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Platform Support
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1991 in perl5261delta.pod
+	Lookups: Platform Support
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1991 in perl5261delta.pod
 Text: Platform-Specific Notes; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Platform-Specific Notes
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2016 in perl5261delta.pod
+	Lookups: Platform-Specific Notes
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2016 in perl5261delta.pod
 Text: Reporting Bugs; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Reporting Bugs
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6676 in perl5261delta.pod
+	Lookups: Reporting Bugs
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6676 in perl5261delta.pod
 Text: SEE ALSO; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: SEE ALSO
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 7665 in perl5261delta.pod
+	Lookups: SEE ALSO
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 7665 in perl5261delta.pod
 Text: Security; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Security
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 329 in perl5261delta.pod
+	Lookups: Security
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 329 in perl5261delta.pod
 Text: Selected Bug Fixes; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Selected Bug Fixes
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2761 in perl5261delta.pod
+	Lookups: Selected Bug Fixes
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2761 in perl5261delta.pod
 Text: Updated Modules and Pragmata; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Updated Modules and Pragmata
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1523 in perl5261delta.pod
+	Lookups: Updated Modules and Pragmata
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1523 in perl5261delta.pod
 Text: Windows; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: Windows
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2223 in perl5261delta.pod
+	Lookups: Windows
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2223 in perl5261delta.pod
 Text: [CVE-2017-12814] $ENV{$key} stack buffer overflow on Windows; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: [CVE-2017-12814] $ENV{$key} stack buffer overflow on Windows
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1010 in perl5261delta.pod
+	Lookups: [CVE-2017-12814] $ENV{$key} stack buffer overflow on Windows
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1010 in perl5261delta.pod
 Text: [CVE-2017-12837] Heap buffer overflow in regular expression compiler; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: [CVE-2017-12837] Heap buffer overflow in regular expression compiler
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 346 in perl5261delta.pod
+	Lookups: [CVE-2017-12837] Heap buffer overflow in regular expression compiler
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 346 in perl5261delta.pod
 Text: [CVE-2017-12883] Buffer over-read in regular expression parser; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: [CVE-2017-12883] Buffer over-read in regular expression parser
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 654 in perl5261delta.pod
+	Lookups: [CVE-2017-12883] Buffer over-read in regular expression parser
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 654 in perl5261delta.pod

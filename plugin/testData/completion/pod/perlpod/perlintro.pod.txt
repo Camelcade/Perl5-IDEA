@@ -1,99 +1,99 @@
 Text: AUTHOR; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: AUTHOR
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 22066 in perlintro.pod
+	Lookups: AUTHOR
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 22066 in perlintro.pod
 Text: Arithmetic; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: Arithmetic
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13416 in perlintro.pod
+	Lookups: Arithmetic
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13416 in perlintro.pod
 Text: Arrays; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: Arrays
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6549 in perlintro.pod
+	Lookups: Arrays
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6549 in perlintro.pod
 Text: Basic syntax overview; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Basic syntax overview
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4199 in perlintro.pod
+	Lookups: Basic syntax overview
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4199 in perlintro.pod
 Text: Boolean logic; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: Boolean logic
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14012 in perlintro.pod
+	Lookups: Boolean logic
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14012 in perlintro.pod
 Text: Builtin operators and functions; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Builtin operators and functions
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12993 in perlintro.pod
+	Lookups: Builtin operators and functions
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12993 in perlintro.pod
 Text: Conditional and looping constructs; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Conditional and looping constructs
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11024 in perlintro.pod
+	Lookups: Conditional and looping constructs
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11024 in perlintro.pod
 Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: DESCRIPTION
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 69 in perlintro.pod
+	Lookups: DESCRIPTION
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 69 in perlintro.pod
 Text: Files and I/O; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Files and IE<sol>O, Files and I/O
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14682 in perlintro.pod
+	Lookups: Files and IE<sol>O, Files and I/O
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14682 in perlintro.pod
 Text: Hashes; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: Hashes
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8045 in perlintro.pod
+	Lookups: Hashes
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8045 in perlintro.pod
 Text: Miscellaneous; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: Miscellaneous
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14347 in perlintro.pod
+	Lookups: Miscellaneous
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14347 in perlintro.pod
 Text: More complex regular expressions; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: More complex regular expressions
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16967 in perlintro.pod
+	Lookups: More complex regular expressions
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16967 in perlintro.pod
 Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: NAME
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlintro.pod
+	Lookups: NAME
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlintro.pod
 Text: Numeric comparison; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: Numeric comparison
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13500 in perlintro.pod
+	Lookups: Numeric comparison
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13500 in perlintro.pod
 Text: OO Perl; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: OO Perl
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20627 in perlintro.pod
+	Lookups: OO Perl
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20627 in perlintro.pod
 Text: Other regexp features; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: Other regexp features
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19391 in perlintro.pod
+	Lookups: Other regexp features
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19391 in perlintro.pod
 Text: Parentheses for capturing; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: Parentheses for capturing
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19004 in perlintro.pod
+	Lookups: Parentheses for capturing
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19004 in perlintro.pod
 Text: Perl variable types; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Perl variable types
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5427 in perlintro.pod
+	Lookups: Perl variable types
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5427 in perlintro.pod
 Text: Regular expressions; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Regular expressions
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16125 in perlintro.pod
+	Lookups: Regular expressions
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16125 in perlintro.pod
 Text: Running Perl programs; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Running Perl programs
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2975 in perlintro.pod
+	Lookups: Running Perl programs
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2975 in perlintro.pod
 Text: Safety net; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Safety net
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3549 in perlintro.pod
+	Lookups: Safety net
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3549 in perlintro.pod
 Text: Scalars; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: Scalars
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5530 in perlintro.pod
+	Lookups: Scalars
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5530 in perlintro.pod
 Text: Simple matching; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: Simple matching
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16333 in perlintro.pod
+	Lookups: Simple matching
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16333 in perlintro.pod
 Text: Simple substitution; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: Simple substitution
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16659 in perlintro.pod
+	Lookups: Simple substitution
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16659 in perlintro.pod
 Text: String comparison; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: String comparison
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13641 in perlintro.pod
+	Lookups: String comparison
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13641 in perlintro.pod
 Text: Using Perl modules; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Using Perl modules
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21014 in perlintro.pod
+	Lookups: Using Perl modules
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21014 in perlintro.pod
 Text: Variable scoping; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Variable scoping
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9933 in perlintro.pod
+	Lookups: Variable scoping
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9933 in perlintro.pod
 Text: What is Perl?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: What is Perl?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2124 in perlintro.pod
+	Lookups: What is Perl?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2124 in perlintro.pod
 Text: Writing subroutines; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Writing subroutines
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19591 in perlintro.pod
+	Lookups: Writing subroutines
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19591 in perlintro.pod
 Text: for; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: for
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12337 in perlintro.pod
+	Lookups: for
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12337 in perlintro.pod
 Text: foreach; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: foreach
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12528 in perlintro.pod
+	Lookups: foreach
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12528 in perlintro.pod
 Text: if; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: if
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11477 in perlintro.pod
+	Lookups: if
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11477 in perlintro.pod
 Text: while; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: while
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12077 in perlintro.pod
+	Lookups: while
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12077 in perlintro.pod

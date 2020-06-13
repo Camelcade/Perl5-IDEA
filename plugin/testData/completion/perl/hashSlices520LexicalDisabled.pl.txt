@@ -1,42 +1,42 @@
 Text: !; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
-Lookups: !
-    PsiElement: Built-in: %!
+	Lookups: !
+	PsiElement: Built-in: %!
 Text: +; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
-Lookups: +
-    PsiElement: Built-in: %+
+	Lookups: +
+	PsiElement: Built-in: %+
 Text: -; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
-Lookups: -
-    PsiElement: Built-in: %-
+	Lookups: -
+	PsiElement: Built-in: %-
 Text: ENV; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
-Lookups: ENV
-    PsiElement: Built-in: %ENV
+	Lookups: ENV
+	PsiElement: Built-in: %ENV
 Text: ERRNO; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
-Lookups: ERRNO
-    PsiElement: Built-in: %ERRNO
+	Lookups: ERRNO
+	PsiElement: Built-in: %ERRNO
 Text: INC; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
-Lookups: INC
-    PsiElement: Built-in: %INC
+	Lookups: INC
+	PsiElement: Built-in: %INC
 Text: LAST_PAREN_MATCH; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
-Lookups: LAST_PAREN_MATCH
-    PsiElement: Built-in: %LAST_PAREN_MATCH
+	Lookups: LAST_PAREN_MATCH
+	PsiElement: Built-in: %LAST_PAREN_MATCH
 Text: MyTest::Some::Package::HASH_VAR; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
-Lookups: MyTest::Some::Package::HASH_VAR
-    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 187 in Package.pm
+	Lookups: MyTest::Some::Package::HASH_VAR
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 187 in Package.pm
 Text: OS_ERROR; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
-Lookups: OS_ERROR
-    PsiElement: Built-in: %OS_ERROR
+	Lookups: OS_ERROR
+	PsiElement: Built-in: %OS_ERROR
 Text: SIG; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
-Lookups: SIG
-    PsiElement: Built-in: %SIG
+	Lookups: SIG
+	PsiElement: Built-in: %SIG
 Text: ^H; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
-Lookups: ^H
-    PsiElement: Built-in: %^H
+	Lookups: ^H
+	PsiElement: Built-in: %^H
 Text: hash; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
-Lookups: hash
-    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 18 in hashSlices520lexical.pl
+	Lookups: hash
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 18 in hashSlices520lexical.pl
 Text: {^CAPTURE_ALL}; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
-Lookups: {^CAPTURE_ALL}
-    PsiElement: Built-in: %^CAPTURE_ALL
+	Lookups: {^CAPTURE_ALL}
+	PsiElement: Built-in: %^CAPTURE_ALL
 Text: {^CAPTURE}; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
-Lookups: {^CAPTURE}
-    PsiElement: Built-in: %^CAPTURE
+	Lookups: {^CAPTURE}
+	PsiElement: Built-in: %^CAPTURE

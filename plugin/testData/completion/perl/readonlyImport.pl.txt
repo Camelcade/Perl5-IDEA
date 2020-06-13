@@ -1,21 +1,21 @@
 Text: Array1; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: Array1
-    String
+	Lookups: Array1
+	String: Array1
 Text: Array; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: Array
-    String
+	Lookups: Array
+	String: Array
 Text: Hash1; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: Hash1
-    String
+	Lookups: Hash1
+	String: Hash1
 Text: Hash; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: Hash
-    String
+	Lookups: Hash
+	String: Hash
 Text: Readonly; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: Readonly
-    String
+	Lookups: Readonly
+	String: Readonly
 Text: Scalar1; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: Scalar1
-    String
+	Lookups: Scalar1
+	String: Scalar1
 Text: Scalar; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: Scalar
-    String
+	Lookups: Scalar
+	String: Scalar

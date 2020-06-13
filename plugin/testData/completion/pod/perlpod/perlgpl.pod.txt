@@ -1,12 +1,12 @@
 Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: DESCRIPTION
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 201 in perlgpl.pod
+	Lookups: DESCRIPTION
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 201 in perlgpl.pod
 Text: GNU GENERAL PUBLIC LICENSE; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: GNU GENERAL PUBLIC LICENSE
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 944 in perlgpl.pod
+	Lookups: GNU GENERAL PUBLIC LICENSE
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 944 in perlgpl.pod
 Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: NAME
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1 in perlgpl.pod
+	Lookups: NAME
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1 in perlgpl.pod
 Text: SYNOPSIS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: SYNOPSIS
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 67 in perlgpl.pod
+	Lookups: SYNOPSIS
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 67 in perlgpl.pod

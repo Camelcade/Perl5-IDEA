@@ -1,9 +1,9 @@
 Text: SUPER::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
-Lookups: SUPER::
-    String
+	Lookups: SUPER::
+	String: SUPER::
 Text: forthmethod; Tail: null; Type: Child::Package; Icon: /method_gutter_icon.png; Type Icon: null
-Lookups: forthmethod
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Child::Package::forthmethod at 211 in wildCardReturns.pl
+	Lookups: forthmethod
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Child::Package::forthmethod at 211 in wildCardReturns.pl
 Text: othermethod; Tail: null; Type: Parent::Package; Icon: /method_gutter_icon.png; Type Icon: null
-Lookups: othermethod
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Parent::Package::othermethod at 89 in wildCardReturns.pl
+	Lookups: othermethod
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Parent::Package::othermethod at 89 in wildCardReturns.pl

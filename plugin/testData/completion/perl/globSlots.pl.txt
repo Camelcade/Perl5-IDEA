@@ -1,33 +1,33 @@
 Text: ARRAY; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: ARRAY
-    String
+	Lookups: ARRAY
+	String: ARRAY
 Text: CODE; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: CODE
-    String
+	Lookups: CODE
+	String: CODE
 Text: FORMAT; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: FORMAT
-    String
+	Lookups: FORMAT
+	String: FORMAT
 Text: GLOB; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: GLOB
-    String
+	Lookups: GLOB
+	String: GLOB
 Text: HASH; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: HASH
-    String
+	Lookups: HASH
+	String: HASH
 Text: IO; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: IO
-    String
+	Lookups: IO
+	String: IO
 Text: LVALUE; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: LVALUE
-    String
+	Lookups: LVALUE
+	String: LVALUE
 Text: REF; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: REF
-    String
+	Lookups: REF
+	String: REF
 Text: Regexp; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: Regexp
-    String
+	Lookups: Regexp
+	String: Regexp
 Text: SCALAR; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: SCALAR
-    String
+	Lookups: SCALAR
+	String: SCALAR
 Text: VSTRING; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: VSTRING
-    String
+	Lookups: VSTRING
+	String: VSTRING

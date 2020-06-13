@@ -1,45 +1,45 @@
 Text: ACKNOWLEDGEMENTS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: ACKNOWLEDGEMENTS
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6174 in perlnetware.pod
+	Lookups: ACKNOWLEDGEMENTS
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6174 in perlnetware.pod
 Text: AUTHORS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: AUTHORS
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6398 in perlnetware.pod
+	Lookups: AUTHORS
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6398 in perlnetware.pod
 Text: BUILD NEW EXTENSIONS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: BUILD NEW EXTENSIONS
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3907 in perlnetware.pod
+	Lookups: BUILD NEW EXTENSIONS
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3907 in perlnetware.pod
 Text: BUILD; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: BUILD
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 585 in perlnetware.pod
+	Lookups: BUILD
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 585 in perlnetware.pod
 Text: Buildtype.bat; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: Buildtype.bat
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1528 in perlnetware.pod
+	Lookups: Buildtype.bat
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1528 in perlnetware.pod
 Text: DATE; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: DATE
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6487 in perlnetware.pod
+	Lookups: DATE
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6487 in perlnetware.pod
 Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: DESCRIPTION
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 227 in perlnetware.pod
+	Lookups: DESCRIPTION
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 227 in perlnetware.pod
 Text: Extensions; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Extensions
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3045 in perlnetware.pod
+	Lookups: Extensions
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3045 in perlnetware.pod
 Text: INSTALL; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: INSTALL
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3137 in perlnetware.pod
+	Lookups: INSTALL
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3137 in perlnetware.pod
 Text: Interpreter; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Interpreter
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2751 in perlnetware.pod
+	Lookups: Interpreter
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2751 in perlnetware.pod
 Text: Make; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Make
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2038 in perlnetware.pod
+	Lookups: Make
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2038 in perlnetware.pod
 Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: NAME
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 182 in perlnetware.pod
+	Lookups: NAME
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 182 in perlnetware.pod
 Text: SetNWBld.bat; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: SetNWBld.bat
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1265 in perlnetware.pod
+	Lookups: SetNWBld.bat
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1265 in perlnetware.pod
 Text: Setup; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Setup
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1049 in perlnetware.pod
+	Lookups: Setup
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1049 in perlnetware.pod
 Text: Tools & SDK; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Tools & SDK
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 696 in perlnetware.pod
+	Lookups: Tools & SDK
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 696 in perlnetware.pod

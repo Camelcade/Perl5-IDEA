@@ -1,9 +1,9 @@
 Text: *Foo::Bar::somehting; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: Foo::Bar::somehting, *Foo::Bar::somehting
-    PsiElement: PsiPerlGlobVariableImpl(*) at 19 in typeGlobAsStatic.pl
+	Lookups: *Foo::Bar::somehting, Foo::Bar::somehting
+	PsiElement: PsiPerlGlobVariableImpl(*) at 19 in typeGlobAsStatic.pl
 Text: *Foo::Bar::someotherthing; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: Foo::Bar::someotherthing, *Foo::Bar::someotherthing
-    PsiElement: PsiPerlGlobVariableImpl(*) at 49 in typeGlobAsStatic.pl
+	Lookups: *Foo::Bar::someotherthing, Foo::Bar::someotherthing
+	PsiElement: PsiPerlGlobVariableImpl(*) at 49 in typeGlobAsStatic.pl
 Text: somehting; Tail: null; Type: Foo::Bar; Icon: /glob_gutter_icon.png; Type Icon: null
-Lookups: somehting
-    PsiElement: PsiPerlGlobVariableImpl(*) at 19 in typeGlobAsStatic.pl
+	Lookups: somehting
+	PsiElement: PsiPerlGlobVariableImpl(*) at 19 in typeGlobAsStatic.pl

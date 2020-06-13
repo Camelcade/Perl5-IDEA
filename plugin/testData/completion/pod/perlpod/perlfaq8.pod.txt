@@ -1,252 +1,252 @@
 Text: AUTHOR AND COPYRIGHT; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: AUTHOR AND COPYRIGHT
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 49561 in perlfaq8.pod
+	Lookups: AUTHOR AND COPYRIGHT
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 49561 in perlfaq8.pod
 Text: BSD::Itimer; Tail: (How can I sleep() or alarm() for under a second?); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: BSD::Itimer
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17093 in perlfaq8.pod
+	Lookups: BSD::Itimer
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17093 in perlfaq8.pod
 Text: BSD::Resource; Tail: (How do I set CPU limits?); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: BSD::Resource
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 37741 in perlfaq8.pod
+	Lookups: BSD::Resource
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 37741 in perlfaq8.pod
 Text: CPU; Tail: (How do I set CPU limits?); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: CPU
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 37767 in perlfaq8.pod
+	Lookups: CPU
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 37767 in perlfaq8.pod
 Text: Can I use perl to run a telnet or ftp session?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Can I use perl to run a telnet or ftp session?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 32352 in perlfaq8.pod
+	Lookups: Can I use perl to run a telnet or ftp session?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 32352 in perlfaq8.pod
 Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: DESCRIPTION
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 78 in perlfaq8.pod
+	Lookups: DESCRIPTION
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 78 in perlfaq8.pod
 Text: How can I call backticks without shell processing?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How can I call backticks without shell processing?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 29988 in perlfaq8.pod
+	Lookups: How can I call backticks without shell processing?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 29988 in perlfaq8.pod
 Text: How can I call my system's unique C functions from Perl?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How can I call my system's unique C functions from Perl?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19627 in perlfaq8.pod
+	Lookups: How can I call my system's unique C functions from Perl?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19627 in perlfaq8.pod
 Text: How can I capture STDERR from an external command?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How can I capture STDERR from an external command?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 22823 in perlfaq8.pod
+	Lookups: How can I capture STDERR from an external command?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 22823 in perlfaq8.pod
 Text: How can I convert my shell script to perl?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How can I convert my shell script to perl?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31862 in perlfaq8.pod
+	Lookups: How can I convert my shell script to perl?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31862 in perlfaq8.pod
 Text: How can I do an atexit() or setjmp()/longjmp()? (Exception handling); Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How can I do an atexit() or setjmp()/longjmp()? (Exception handling), How can I do an atexit() or setjmp()E<sol>longjmp()? (Exception handling)
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17940 in perlfaq8.pod
+	Lookups: How can I do an atexit() or setjmp()E<sol>longjmp()? (Exception handling), How can I do an atexit() or setjmp()/longjmp()? (Exception handling)
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17940 in perlfaq8.pod
 Text: How can I measure time under a second?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How can I measure time under a second?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17463 in perlfaq8.pod
+	Lookups: How can I measure time under a second?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17463 in perlfaq8.pod
 Text: How can I open a pipe both to and from a command?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How can I open a pipe both to and from a command?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21740 in perlfaq8.pod
+	Lookups: How can I open a pipe both to and from a command?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21740 in perlfaq8.pod
 Text: How can I sleep() or alarm() for under a second?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How can I sleep() or alarm() for under a second?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17022 in perlfaq8.pod
+	Lookups: How can I sleep() or alarm() for under a second?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17022 in perlfaq8.pod
 Text: How can I write expect in Perl?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How can I write expect in Perl?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 33262 in perlfaq8.pod
+	Lookups: How can I write expect in Perl?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 33262 in perlfaq8.pod
 Text: How come exec() doesn't return?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How come exec() doesn't return?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 810 in perlfaq8.pod
+	Lookups: How come exec() doesn't return?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 810 in perlfaq8.pod
 Text: How do I add a directory to my include path (@INC) at runtime?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How do I add a directory to my include path (@INC) at runtime?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 47755 in perlfaq8.pod
+	Lookups: How do I add a directory to my include path (@INC) at runtime?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 47755 in perlfaq8.pod
 Text: How do I add the directory my program lives in to the module/library search path?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How do I add the directory my program lives in to the module/library search path?, How do I add the directory my program lives in to the moduleE<sol>library search path?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 46282 in perlfaq8.pod
+	Lookups: How do I add the directory my program lives in to the moduleE<sol>library search path?, How do I add the directory my program lives in to the module/library search path?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 46282 in perlfaq8.pod
 Text: How do I ask the user for a password?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How do I ask the user for a password?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7281 in perlfaq8.pod
+	Lookups: How do I ask the user for a password?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7281 in perlfaq8.pod
 Text: How do I avoid zombies on a Unix system?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How do I avoid zombies on a Unix system?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 38392 in perlfaq8.pod
+	Lookups: How do I avoid zombies on a Unix system?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 38392 in perlfaq8.pod
 Text: How do I check whether input is ready on the keyboard?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How do I check whether input is ready on the keyboard?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4682 in perlfaq8.pod
+	Lookups: How do I check whether input is ready on the keyboard?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4682 in perlfaq8.pod
 Text: How do I clear the screen?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How do I clear the screen?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5171 in perlfaq8.pod
+	Lookups: How do I clear the screen?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5171 in perlfaq8.pod
 Text: How do I close a process's filehandle without waiting for it to complete?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How do I close a process's filehandle without waiting for it to complete?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 34828 in perlfaq8.pod
+	Lookups: How do I close a process's filehandle without waiting for it to complete?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 34828 in perlfaq8.pod
 Text: How do I decode encrypted password files?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How do I decode encrypted password files?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11710 in perlfaq8.pod
+	Lookups: How do I decode encrypted password files?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11710 in perlfaq8.pod
 Text: How do I do fancy stuff with the keyboard/screen/mouse?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How do I do fancy stuff with the keyboardE<sol>screenE<sol>mouse?, How do I do fancy stuff with the keyboard/screen/mouse?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1201 in perlfaq8.pod
+	Lookups: How do I do fancy stuff with the keyboardE<sol>screenE<sol>mouse?, How do I do fancy stuff with the keyboard/screen/mouse?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1201 in perlfaq8.pod
 Text: How do I find out if I'm running interactively or not?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How do I find out if I'm running interactively or not?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 35901 in perlfaq8.pod
+	Lookups: How do I find out if I'm running interactively or not?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 35901 in perlfaq8.pod
 Text: How do I find out which operating system I'm running under?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How do I find out which operating system I'm running under?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 565 in perlfaq8.pod
+	Lookups: How do I find out which operating system I'm running under?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 565 in perlfaq8.pod
 Text: How do I fork a daemon process?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How do I fork a daemon process?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 35133 in perlfaq8.pod
+	Lookups: How do I fork a daemon process?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 35133 in perlfaq8.pod
 Text: How do I get the screen size?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How do I get the screen size?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6469 in perlfaq8.pod
+	Lookups: How do I get the screen size?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6469 in perlfaq8.pod
 Text: How do I install a module from CPAN?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How do I install a module from CPAN?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 42416 in perlfaq8.pod
+	Lookups: How do I install a module from CPAN?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 42416 in perlfaq8.pod
 Text: How do I keep my own module/library directory?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How do I keep my own moduleE<sol>library directory?, How do I keep my own module/library directory?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 44509 in perlfaq8.pod
+	Lookups: How do I keep my own moduleE<sol>library directory?, How do I keep my own module/library directory?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 44509 in perlfaq8.pod
 Text: How do I make a system() exit on control-C?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How do I make a system() exit on control-C?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 39225 in perlfaq8.pod
+	Lookups: How do I make a system() exit on control-C?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 39225 in perlfaq8.pod
 Text: How do I modify the shadow password file on a Unix system?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How do I modify the shadow password file on a Unix system?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15930 in perlfaq8.pod
+	Lookups: How do I modify the shadow password file on a Unix system?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15930 in perlfaq8.pod
 Text: How do I open a file without blocking?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How do I open a file without blocking?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 39550 in perlfaq8.pod
+	Lookups: How do I open a file without blocking?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 39550 in perlfaq8.pod
 Text: How do I print something out in color?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How do I print something out in color?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2006 in perlfaq8.pod
+	Lookups: How do I print something out in color?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2006 in perlfaq8.pod
 Text: How do I read and write the serial port?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How do I read and write the serial port?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7962 in perlfaq8.pod
+	Lookups: How do I read and write the serial port?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7962 in perlfaq8.pod
 Text: How do I read just one key without waiting for a return key?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How do I read just one key without waiting for a return key?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2527 in perlfaq8.pod
+	Lookups: How do I read just one key without waiting for a return key?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2527 in perlfaq8.pod
 Text: How do I set CPU limits?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How do I set CPU limits?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 37709 in perlfaq8.pod
+	Lookups: How do I set CPU limits?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 37709 in perlfaq8.pod
 Text: How do I set the time and date?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How do I set the time and date?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16413 in perlfaq8.pod
+	Lookups: How do I set the time and date?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16413 in perlfaq8.pod
 Text: How do I start a process in the background?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How do I start a process in the background?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12426 in perlfaq8.pod
+	Lookups: How do I start a process in the background?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12426 in perlfaq8.pod
 Text: How do I tell the difference between errors from the shell and perl?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How do I tell the difference between errors from the shell and perl?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 39953 in perlfaq8.pod
+	Lookups: How do I tell the difference between errors from the shell and perl?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 39953 in perlfaq8.pod
 Text: How do I timeout a slow event?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How do I timeout a slow event?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 37297 in perlfaq8.pod
+	Lookups: How do I timeout a slow event?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 37297 in perlfaq8.pod
 Text: How do I trap control characters/signals?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How do I trap control characters/signals?, How do I trap control charactersE<sol>signals?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14722 in perlfaq8.pod
+	Lookups: How do I trap control charactersE<sol>signals?, How do I trap control characters/signals?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14722 in perlfaq8.pod
 Text: How do I use an SQL database?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How do I use an SQL database?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 38644 in perlfaq8.pod
+	Lookups: How do I use an SQL database?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 38644 in perlfaq8.pod
 Text: I {changed directory, modified my environment} in a perl script. How come the change disappeared when I exited the script? How do I get m...; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: I {changed directory, modified my environment} in a perl script. How come the change disappeared when I exited the script? How do I get m...
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 34254 in perlfaq8.pod
+	Lookups: I {changed directory, modified my environment} in a perl script. How come the change disappeared when I exited the script? How do I get m...
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 34254 in perlfaq8.pod
 Text: Is there a way to hide perl's command line from programs such as "ps"?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Is there a way to hide perl's command line from programs such as "ps"?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 33637 in perlfaq8.pod
+	Lookups: Is there a way to hide perl's command line from programs such as "ps"?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 33637 in perlfaq8.pod
 Text: Keyboard; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: Keyboard
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1396 in perlfaq8.pod
+	Lookups: Keyboard
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1396 in perlfaq8.pod
 Text: Mouse; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: Mouse
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1736 in perlfaq8.pod
+	Lookups: Mouse
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1736 in perlfaq8.pod
 Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: NAME
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlfaq8.pod
+	Lookups: NAME
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlfaq8.pod
 Text: STDIN, STDOUT, and STDERR are shared; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: STDIN, STDOUT, and STDERR are shared
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13358 in perlfaq8.pod
+	Lookups: STDIN, STDOUT, and STDERR are shared
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13358 in perlfaq8.pod
 Text: Screen; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: Screen
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1600 in perlfaq8.pod
+	Lookups: Screen
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1600 in perlfaq8.pod
 Text: Signals; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: Signals
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13794 in perlfaq8.pod
+	Lookups: Signals
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13794 in perlfaq8.pod
 Text: Time::HiRes; Tail: (How can I sleep() or alarm() for under a second?); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: Time::HiRes
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17078 in perlfaq8.pod
+	Lookups: Time::HiRes
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17078 in perlfaq8.pod
 Text: Unix; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: Unix
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 34433 in perlfaq8.pod
+	Lookups: Unix
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 34433 in perlfaq8.pod
 Text: VERSION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: VERSION
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 44 in perlfaq8.pod
+	Lookups: VERSION
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 44 in perlfaq8.pod
 Text: What is socket.ph and where do I get it?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: What is socket.ph and where do I get it?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 49299 in perlfaq8.pod
+	Lookups: What is socket.ph and where do I get it?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 49299 in perlfaq8.pod
 Text: What's the difference between require and use?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: What's the difference between require and use?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 43555 in perlfaq8.pod
+	Lookups: What's the difference between require and use?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 43555 in perlfaq8.pod
 Text: What's wrong with using backticks in a void context?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: What's wrong with using backticks in a void context?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 28872 in perlfaq8.pod
+	Lookups: What's wrong with using backticks in a void context?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 28872 in perlfaq8.pod
 Text: Where are modules installed?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Where are modules installed?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 48602 in perlfaq8.pod
+	Lookups: Where are modules installed?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 48602 in perlfaq8.pod
 Text: Where do I get the include files to do ioctl() or syscall()?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Where do I get the include files to do ioctl() or syscall()?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20284 in perlfaq8.pod
+	Lookups: Where do I get the include files to do ioctl() or syscall()?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20284 in perlfaq8.pod
 Text: Why can't I get the output of a command with system()?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Why can't I get the output of a command with system()?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 22362 in perlfaq8.pod
+	Lookups: Why can't I get the output of a command with system()?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 22362 in perlfaq8.pod
 Text: Why can't my script read from STDIN after I gave it EOF (^D on Unix, ^Z on MS-DOS)?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Why can't my script read from STDIN after I gave it EOF (^D on Unix, ^Z on MS-DOS)?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31011 in perlfaq8.pod
+	Lookups: Why can't my script read from STDIN after I gave it EOF (^D on Unix, ^Z on MS-DOS)?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31011 in perlfaq8.pod
 Text: Why do setuid perl scripts complain about kernel problems?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Why do setuid perl scripts complain about kernel problems?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21489 in perlfaq8.pod
+	Lookups: Why do setuid perl scripts complain about kernel problems?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21489 in perlfaq8.pod
 Text: Why doesn't my sockets program work under System V (Solaris)? What does the error message "Protocol not supported" mean?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Why doesn't my sockets program work under System V (Solaris)? What does the error message "Protocol not supported" mean?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19125 in perlfaq8.pod
+	Lookups: Why doesn't my sockets program work under System V (Solaris)? What does the error message "Protocol not supported" mean?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19125 in perlfaq8.pod
 Text: Why doesn't open() return an error when a pipe open fails?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Why doesn't open() return an error when a pipe open fails?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 28071 in perlfaq8.pod
+	Lookups: Why doesn't open() return an error when a pipe open fails?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 28071 in perlfaq8.pod
 Text: Zombies; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: Zombies
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14119 in perlfaq8.pod
+	Lookups: Zombies
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14119 in perlfaq8.pod
 Text: end of line; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: end of line
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8893 in perlfaq8.pod
+	Lookups: end of line
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8893 in perlfaq8.pod
 Text: exec; Tail: (How come exec() doesn't return?); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: exec
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 849 in perlfaq8.pod
+	Lookups: exec
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 849 in perlfaq8.pod
 Text: flushing output; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: flushing output
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9706 in perlfaq8.pod
+	Lookups: flushing output
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9706 in perlfaq8.pod
 Text: fork; Tail: (How come exec() doesn't return?); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: fork
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 867 in perlfaq8.pod
+	Lookups: fork
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 867 in perlfaq8.pod
 Text: limit; Tail: (How do I set CPU limits?); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: limit
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 37758 in perlfaq8.pod
+	Lookups: limit
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 37758 in perlfaq8.pod
 Text: lockfiles; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: lockfiles
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8299 in perlfaq8.pod
+	Lookups: lockfiles
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8299 in perlfaq8.pod
 Text: non-blocking input; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: non-blocking input
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10586 in perlfaq8.pod
+	Lookups: non-blocking input
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10586 in perlfaq8.pod
 Text: open mode; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: open mode
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8501 in perlfaq8.pod
+	Lookups: open mode
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8501 in perlfaq8.pod
 Text: open; Tail: (How come exec() doesn't return?); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: open
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 875 in perlfaq8.pod
+	Lookups: open
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 875 in perlfaq8.pod
 Text: pipe; Tail: (How come exec() doesn't return?); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: pipe
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 883 in perlfaq8.pod
+	Lookups: pipe
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 883 in perlfaq8.pod
 Text: select; Tail: (How can I sleep() or alarm() for under a second?); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: select
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17117 in perlfaq8.pod
+	Lookups: select
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17117 in perlfaq8.pod
 Text: sleep; Tail: (How can I sleep() or alarm() for under a second?); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: sleep
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17108 in perlfaq8.pod
+	Lookups: sleep
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17108 in perlfaq8.pod
 Text: system; Tail: (How come exec() doesn't return?); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: system
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 857 in perlfaq8.pod
+	Lookups: system
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 857 in perlfaq8.pod
 Text: the PERL5LIB environment variable; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: the PERL5LIB environment variable
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48075 in perlfaq8.pod
+	Lookups: the PERL5LIB environment variable
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48075 in perlfaq8.pod
 Text: the PERLLIB environment variable; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: the PERLLIB environment variable
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 47972 in perlfaq8.pod
+	Lookups: the PERLLIB environment variable
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 47972 in perlfaq8.pod
 Text: the lib pragma:; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: the lib pragma:
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48264 in perlfaq8.pod
+	Lookups: the lib pragma:
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48264 in perlfaq8.pod
 Text: the local::lib module:; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: the local::lib module:
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48331 in perlfaq8.pod
+	Lookups: the local::lib module:
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48331 in perlfaq8.pod
 Text: the perl -Idir command line flag; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: the perl -Idir command line flag
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48180 in perlfaq8.pod
+	Lookups: the perl -Idir command line flag
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48180 in perlfaq8.pod

@@ -1,51 +1,51 @@
 Text: AUTHOR; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: AUTHOR
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 21904 in perlfilter.pod
+	Lookups: AUTHOR
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 21904 in perlfilter.pod
 Text: CONCEPTS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: CONCEPTS
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 588 in perlfilter.pod
+	Lookups: CONCEPTS
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 588 in perlfilter.pod
 Text: CONCLUSION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: CONCLUSION
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 18392 in perlfilter.pod
+	Lookups: CONCLUSION
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 18392 in perlfilter.pod
 Text: CREATING A SOURCE FILTER AS A SEPARATE EXECUTABLE; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: CREATING A SOURCE FILTER AS A SEPARATE EXECUTABLE
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 8440 in perlfilter.pod
+	Lookups: CREATING A SOURCE FILTER AS A SEPARATE EXECUTABLE
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 8440 in perlfilter.pod
 Text: Copyrights; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Copyrights
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 22012 in perlfilter.pod
+	Lookups: Copyrights
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 22012 in perlfilter.pod
 Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: DESCRIPTION
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 42 in perlfilter.pod
+	Lookups: DESCRIPTION
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 42 in perlfilter.pod
 Text: Decryption Filters; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: Decryption Filters
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7458 in perlfilter.pod
+	Lookups: Decryption Filters
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7458 in perlfilter.pod
 Text: LIMITATIONS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: LIMITATIONS
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 20005 in perlfilter.pod
+	Lookups: LIMITATIONS
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 20005 in perlfilter.pod
 Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: NAME
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlfilter.pod
+	Lookups: NAME
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlfilter.pod
 Text: REQUIREMENTS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: REQUIREMENTS
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 21571 in perlfilter.pod
+	Lookups: REQUIREMENTS
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 21571 in perlfilter.pod
 Text: Some Filters Clobber the DATA Handle; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: Some Filters Clobber the DATA Handle
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21145 in perlfilter.pod
+	Lookups: Some Filters Clobber the DATA Handle
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21145 in perlfilter.pod
 Text: THINGS TO LOOK OUT FOR; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: THINGS TO LOOK OUT FOR
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 21105 in perlfilter.pod
+	Lookups: THINGS TO LOOK OUT FOR
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 21105 in perlfilter.pod
 Text: USING CONTEXT: THE DEBUG FILTER; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: USING CONTEXT: THE DEBUG FILTER
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 13938 in perlfilter.pod
+	Lookups: USING CONTEXT: THE DEBUG FILTER
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 13938 in perlfilter.pod
 Text: USING FILTERS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: USING FILTERS
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2625 in perlfilter.pod
+	Lookups: USING FILTERS
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2625 in perlfilter.pod
 Text: WRITING A SOURCE FILTER IN C; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: WRITING A SOURCE FILTER IN C
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6647 in perlfilter.pod
+	Lookups: WRITING A SOURCE FILTER IN C
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6647 in perlfilter.pod
 Text: WRITING A SOURCE FILTER IN PERL; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: WRITING A SOURCE FILTER IN PERL
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 10214 in perlfilter.pod
+	Lookups: WRITING A SOURCE FILTER IN PERL
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 10214 in perlfilter.pod
 Text: WRITING A SOURCE FILTER; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: WRITING A SOURCE FILTER
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6299 in perlfilter.pod
+	Lookups: WRITING A SOURCE FILTER
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6299 in perlfilter.pod

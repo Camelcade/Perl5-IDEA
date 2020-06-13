@@ -1,27 +1,27 @@
 Text: DTD; Tail: null; Type: inject with DTD; Icon: /dtd.svg; Type Icon: null
-Lookups: DTD
-    String
+	Lookups: DTD
+	String: DTD
 Text: HTML; Tail: null; Type: inject with HTML; Icon: /html.svg; Type Icon: null
-Lookups: HTML
-    String
+	Lookups: HTML
+	String: HTML
 Text: JAVA; Tail: null; Type: inject with Java; Icon: /java.svg; Type Icon: null
-Lookups: JAVA
-    String
+	Lookups: JAVA
+	String: JAVA
 Text: JSON; Tail: null; Type: inject with JSON; Icon: /json.svg; Type Icon: null
-Lookups: JSON
-    String
+	Lookups: JSON
+	String: JSON
 Text: MANIFEST; Tail: null; Type: inject with Manifest; Icon: /manifest.svg; Type Icon: null
-Lookups: MANIFEST
-    String
+	Lookups: MANIFEST
+	String: MANIFEST
 Text: MYSUPERMARKER; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: MYSUPERMARKER
-    PsiElement: PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER) at 0 in heredocOpenerBare.pl
+	Lookups: MYSUPERMARKER
+	PsiElement: PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER) at 0 in heredocOpenerBare.pl
 Text: PERL5; Tail: null; Type: inject with Perl5; Icon: /perl5classic.png; Type Icon: null
-Lookups: PERL5
-    String
+	Lookups: PERL5
+	String: PERL5
 Text: XHTML; Tail: null; Type: inject with XHTML; Icon: /xhtml.svg; Type Icon: null
-Lookups: XHTML
-    String
+	Lookups: XHTML
+	String: XHTML
 Text: XML; Tail: null; Type: inject with XML; Icon: /xml.svg; Type Icon: null
-Lookups: XML
-    String
+	Lookups: XML
+	String: XML

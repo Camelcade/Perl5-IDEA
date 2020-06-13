@@ -1,123 +1,123 @@
 Text: AUTHOR AND COPYRIGHT; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: AUTHOR AND COPYRIGHT
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 37356 in perlfaq7.pod
+	Lookups: AUTHOR AND COPYRIGHT
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 37356 in perlfaq7.pod
 Text: Can I get a BNF/yacc/RE for the Perl language?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Can I get a BNFE<sol>yaccE<sol>RE for the Perl language?, Can I get a BNF/yacc/RE for the Perl language?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 217 in perlfaq7.pod
+	Lookups: Can I get a BNFE<sol>yaccE<sol>RE for the Perl language?, Can I get a BNF/yacc/RE for the Perl language?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 217 in perlfaq7.pod
 Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: DESCRIPTION
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 88 in perlfaq7.pod
+	Lookups: DESCRIPTION
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 88 in perlfaq7.pod
 Text: Do I always/never have to quote my strings or use semicolons and commas?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Do I alwaysE<sol>never have to quote my strings or use semicolons and commas?, Do I always/never have to quote my strings or use semicolons and commas?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1824 in perlfaq7.pod
+	Lookups: Do I alwaysE<sol>never have to quote my strings or use semicolons and commas?, Do I always/never have to quote my strings or use semicolons and commas?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1824 in perlfaq7.pod
 Text: Do I need to recompile XS modules when there is a change in the C library?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Do I need to recompile XS modules when there is a change in the C library?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 37010 in perlfaq7.pod
+	Lookups: Do I need to recompile XS modules when there is a change in the C library?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 37010 in perlfaq7.pod
 Text: How can I access a dynamic variable while a similarly named lexical is in scope?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How can I access a dynamic variable while a similarly named lexical is in scope?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18747 in perlfaq7.pod
+	Lookups: How can I access a dynamic variable while a similarly named lexical is in scope?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18747 in perlfaq7.pod
 Text: How can I catch accesses to undefined variables, functions, or methods?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How can I catch accesses to undefined variables, functions, or methods?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 26601 in perlfaq7.pod
+	Lookups: How can I catch accesses to undefined variables, functions, or methods?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 26601 in perlfaq7.pod
 Text: How can I comment out a large block of Perl code?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How can I comment out a large block of Perl code?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 29555 in perlfaq7.pod
+	Lookups: How can I comment out a large block of Perl code?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 29555 in perlfaq7.pod
 Text: How can I find out my current or calling package?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How can I find out my current or calling package?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 27924 in perlfaq7.pod
+	Lookups: How can I find out my current or calling package?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 27924 in perlfaq7.pod
 Text: How can I pass/return a {Function, FileHandle, Array, Hash, Method, Regex}?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How can I passE<sol>return a {Function, FileHandle, Array, Hash, Method, Regex}?, How can I pass/return a {Function, FileHandle, Array, Hash, Method, Regex}?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12422 in perlfaq7.pod
+	Lookups: How can I passE<sol>return a {Function, FileHandle, Array, Hash, Method, Regex}?, How can I pass/return a {Function, FileHandle, Array, Hash, Method, Regex}?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12422 in perlfaq7.pod
 Text: How can I tell if a variable is tainted?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How can I tell if a variable is tainted?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8080 in perlfaq7.pod
+	Lookups: How can I tell if a variable is tainted?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8080 in perlfaq7.pod
 Text: How can I use a variable as a variable name?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How can I use a variable as a variable name?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31581 in perlfaq7.pod
+	Lookups: How can I use a variable as a variable name?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31581 in perlfaq7.pod
 Text: How do I adopt or take over a module already on CPAN?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How do I adopt or take over a module already on CPAN?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6763 in perlfaq7.pod
+	Lookups: How do I adopt or take over a module already on CPAN?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6763 in perlfaq7.pod
 Text: How do I clear a package?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How do I clear a package?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 30853 in perlfaq7.pod
+	Lookups: How do I clear a package?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 30853 in perlfaq7.pod
 Text: How do I create a class?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How do I create a class?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7689 in perlfaq7.pod
+	Lookups: How do I create a class?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7689 in perlfaq7.pod
 Text: How do I create a module?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How do I create a module?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6140 in perlfaq7.pod
+	Lookups: How do I create a module?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6140 in perlfaq7.pod
 Text: How do I create a static variable?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How do I create a static variable?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14534 in perlfaq7.pod
+	Lookups: How do I create a static variable?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14534 in perlfaq7.pod
 Text: How do I create a switch or case statement?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How do I create a switch or case statement?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23307 in perlfaq7.pod
+	Lookups: How do I create a switch or case statement?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23307 in perlfaq7.pod
 Text: How do I declare/create a structure?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How do I declare/create a structure?, How do I declareE<sol>create a structure?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5689 in perlfaq7.pod
+	Lookups: How do I declareE<sol>create a structure?, How do I declare/create a structure?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5689 in perlfaq7.pod
 Text: How do I redefine a builtin function, operator, or method?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How do I redefine a builtin function, operator, or method?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21139 in perlfaq7.pod
+	Lookups: How do I redefine a builtin function, operator, or method?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21139 in perlfaq7.pod
 Text: How do I skip some return values?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How do I skip some return values?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2697 in perlfaq7.pod
+	Lookups: How do I skip some return values?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2697 in perlfaq7.pod
 Text: How do I temporarily block warnings?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: How do I temporarily block warnings?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3098 in perlfaq7.pod
+	Lookups: How do I temporarily block warnings?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3098 in perlfaq7.pod
 Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: NAME
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlfaq7.pod
+	Lookups: NAME
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlfaq7.pod
 Text: Passing Filehandles; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: Passing Filehandles
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13063 in perlfaq7.pod
+	Lookups: Passing Filehandles
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13063 in perlfaq7.pod
 Text: Passing Methods; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: Passing Methods
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13908 in perlfaq7.pod
+	Lookups: Passing Methods
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13908 in perlfaq7.pod
 Text: Passing Regexes; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: Passing Regexes
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13565 in perlfaq7.pod
+	Lookups: Passing Regexes
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13565 in perlfaq7.pod
 Text: Passing Variables and Functions; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: Passing Variables and Functions
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12673 in perlfaq7.pod
+	Lookups: Passing Variables and Functions
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12673 in perlfaq7.pod
 Text: VERSION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: VERSION
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 54 in perlfaq7.pod
+	Lookups: VERSION
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 54 in perlfaq7.pod
 Text: What are all these $@%&* punctuation signs, and how do I know when to use them?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: What are all these $@%&* punctuation signs, and how do I know when to use them?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 665 in perlfaq7.pod
+	Lookups: What are all these $@%&* punctuation signs, and how do I know when to use them?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 665 in perlfaq7.pod
 Text: What does "bad interpreter" mean?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: What does "bad interpreter" mean?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 35849 in perlfaq7.pod
+	Lookups: What does "bad interpreter" mean?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 35849 in perlfaq7.pod
 Text: What is variable suicide and how can I prevent it?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: What is variable suicide and how can I prevent it?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11240 in perlfaq7.pod
+	Lookups: What is variable suicide and how can I prevent it?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11240 in perlfaq7.pod
 Text: What's a closure?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: What's a closure?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8319 in perlfaq7.pod
+	Lookups: What's a closure?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8319 in perlfaq7.pod
 Text: What's an extension?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: What's an extension?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4123 in perlfaq7.pod
+	Lookups: What's an extension?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4123 in perlfaq7.pod
 Text: What's the difference between calling a function as &foo and foo()?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: What's the difference between calling a function as &foo and foo()?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21694 in perlfaq7.pod
+	Lookups: What's the difference between calling a function as &foo and foo()?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21694 in perlfaq7.pod
 Text: What's the difference between deep and shallow binding?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: What's the difference between deep and shallow binding?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19573 in perlfaq7.pod
+	Lookups: What's the difference between deep and shallow binding?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19573 in perlfaq7.pod
 Text: What's the difference between dynamic and lexical (static) scoping? Between local() and my()?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: What's the difference between dynamic and lexical (static) scoping? Between local() and my()?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16991 in perlfaq7.pod
+	Lookups: What's the difference between dynamic and lexical (static) scoping? Between local() and my()?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16991 in perlfaq7.pod
 Text: Why can't a method included in this same file be found?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Why can't a method included in this same file be found?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 26977 in perlfaq7.pod
+	Lookups: Why can't a method included in this same file be found?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 26977 in perlfaq7.pod
 Text: Why do Perl operators have different precedence than C operators?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Why do Perl operators have different precedence than C operators?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4282 in perlfaq7.pod
+	Lookups: Why do Perl operators have different precedence than C operators?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4282 in perlfaq7.pod
 Text: Why doesn't "my($foo) = <$fh>;" work right?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Why doesn't "my($foo) = <$fh>;" work right?, Why doesn't "my($foo) = E<lt>$fhE<gt>;" work right?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20180 in perlfaq7.pod
+	Lookups: Why doesn't "my($foo) = E<lt>$fhE<gt>;" work right?, Why doesn't "my($foo) = <$fh>;" work right?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20180 in perlfaq7.pod
 Text: class, creation; Tail: (How do I create a class?); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: class, creation
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 7721 in perlfaq7.pod
+	Lookups: class, creation
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 7721 in perlfaq7.pod
 Text: package; Tail: (How do I create a class?); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: package
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 7740 in perlfaq7.pod
+	Lookups: package
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 7740 in perlfaq7.pod

@@ -1,36 +1,36 @@
 Text: :html; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: :html
-    String
+	Lookups: :html
+	String: :html
 Text: :latex; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: :latex
-    String
+	Lookups: :latex
+	String: :latex
 Text: :man; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: :man
-    String
+	Lookups: :man
+	String: :man
 Text: :roff; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: :roff
-    String
+	Lookups: :roff
+	String: :roff
 Text: :tex; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: :tex
-    String
+	Lookups: :tex
+	String: :tex
 Text: :text; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: :text
-    String
+	Lookups: :text
+	String: :text
 Text: html; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: html
-    String
+	Lookups: html
+	String: html
 Text: latex; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: latex
-    String
+	Lookups: latex
+	String: latex
 Text: man; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: man
-    String
+	Lookups: man
+	String: man
 Text: roff; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: roff
-    String
+	Lookups: roff
+	String: roff
 Text: tex; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: tex
-    String
+	Lookups: tex
+	String: tex
 Text: text; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: text
-    String
+	Lookups: text
+	String: text

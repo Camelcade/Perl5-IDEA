@@ -1,15 +1,15 @@
 Text: A basic example; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: A basic example
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 378 in perlpragma.pod
+	Lookups: A basic example
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 378 in perlpragma.pod
 Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: DESCRIPTION
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 54 in perlpragma.pod
+	Lookups: DESCRIPTION
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 54 in perlpragma.pod
 Text: Implementation details; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Implementation details
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4039 in perlpragma.pod
+	Lookups: Implementation details
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4039 in perlpragma.pod
 Text: Key naming; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Key naming
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3189 in perlpragma.pod
+	Lookups: Key naming
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3189 in perlpragma.pod
 Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: NAME
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlpragma.pod
+	Lookups: NAME
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlpragma.pod

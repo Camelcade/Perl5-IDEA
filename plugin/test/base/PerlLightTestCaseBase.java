@@ -657,6 +657,14 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
         }
         StringBuilder sb = new StringBuilder();
 
+        Set<String> lookupStrings = lookupElement.getAllLookupStrings();
+        if (lookupStrings.size() > 1) {
+          Set<String> orderedSet = new LinkedHashSet<>();
+          orderedSet.add(lookupElement.getLookupString());
+          orderedSet.addAll(ContainerUtil.sorted(lookupStrings));
+          lookupStrings = orderedSet;
+        }
+
         sb.append("Text: ")
           .append(presentation.getItemText())
           .append("; Tail: ")
@@ -667,31 +675,31 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
           .append(getIconText(presentation.getIcon()))
           .append("; Type Icon: ")
           .append(getIconText(presentation.getTypeIcon()))
-          .append("\nLookups: ")
-          .append(StringUtil.join(lookupElement.getAllLookupStrings(), ", "))
+          .append("\n\tLookups: ")
+          .append(String.join(", ", lookupStrings))
         ;
 
         Object lookupObject = lookupElement.getObject();
         if (lookupObject instanceof PsiElement) {
-          sb.append("\n    PsiElement: ").append(serializePsiElement((PsiElement)lookupObject));
+          sb.append("\n\tPsiElement: ").append(serializePsiElement((PsiElement)lookupObject));
         }
         else if (lookupObject instanceof VirtualFile) {
-          sb.append("\n    VirtualFile: ").append(((VirtualFile)lookupObject).getName());
+          sb.append("\n\tVirtualFile: ").append(((VirtualFile)lookupObject).getName());
         }
         else if (lookupObject instanceof PerlExportDescriptor) {
-          sb.append("\n    Export: ").append(lookupObject);
+          sb.append("\n\tExport: ").append(lookupObject);
         }
         else if (lookupObject instanceof IElementType) {
-          sb.append("\n    Export: ").append(lookupObject);
+          sb.append("\n\tExport: ").append(lookupObject);
         }
         else if (lookupObject instanceof String) {
-          sb.append("\n    String");
+          sb.append("\n\tString: ").append(lookupObject);
         }
         else if (lookupElement instanceof LiveTemplateLookupElementImpl) {
-          sb.append("\n    Live template: ").append(((LiveTemplateLookupElementImpl)lookupElement).getTemplate());
+          sb.append("\n\tLive template: ").append(((LiveTemplateLookupElementImpl)lookupElement).getTemplate());
         }
         else {
-          sb.append("\n    ").append(lookupObject.getClass().getSimpleName());
+          sb.append("\n\t").append(lookupObject.getClass().getSimpleName());
         }
 
         result.add(sb.toString());

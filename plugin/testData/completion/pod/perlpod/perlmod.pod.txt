@@ -1,144 +1,144 @@
 Text: $?; Tail: (Inside an END code block, $? contains the value that the program is going to pass to exit().  You can modify $? to change the exit value ...); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: $?
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 14277 in perlmod.pod
+	Lookups: $?
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 14277 in perlmod.pod
 Text: %::; Tail: (Symbol Tables); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: %::
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 6289 in perlmod.pod
+	Lookups: %::
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 6289 in perlmod.pod
 Text: %main::; Tail: (Symbol Tables); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: %main::
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 6296 in perlmod.pod
+	Lookups: %main::
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 6296 in perlmod.pod
 Text: '; Tail: (The old package delimiter was a single quote, but double colon is now the preferred delimiter, in part because it's more readable to huma...); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: '
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 3617 in perlmod.pod
+	Lookups: '
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 3617 in perlmod.pod
 Text: ::; Tail: (The old package delimiter was a single quote, but double colon is now the preferred delimiter, in part because it's more readable to huma...); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: ::
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 3611 in perlmod.pod
+	Lookups: ::
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 3611 in perlmod.pod
 Text: @ISA; Tail: (Perl Classes); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: @ISA
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17264 in perlmod.pod
+	Lookups: @ISA
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17264 in perlmod.pod
 Text: BEGIN, UNITCHECK, CHECK, INIT and END; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: BEGIN, UNITCHECK, CHECK, INIT and END
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11830 in perlmod.pod
+	Lookups: BEGIN, UNITCHECK, CHECK, INIT and END
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11830 in perlmod.pod
 Text: BEGIN; Tail: (BEGIN, UNITCHECK, CHECK, INIT and END); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: BEGIN
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 11875 in perlmod.pod
+	Lookups: BEGIN
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 11875 in perlmod.pod
 Text: CHECK; Tail: (BEGIN, UNITCHECK, CHECK, INIT and END); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: CHECK
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 11897 in perlmod.pod
+	Lookups: CHECK
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 11897 in perlmod.pod
 Text: CLONE; Tail: (Making your module threadsafe); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: CLONE
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 23420 in perlmod.pod
+	Lookups: CLONE
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 23420 in perlmod.pod
 Text: CLONE_SKIP; Tail: (Making your module threadsafe); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: CLONE_SKIP
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 23429 in perlmod.pod
+	Lookups: CLONE_SKIP
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 23429 in perlmod.pod
 Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: DESCRIPTION
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 66 in perlmod.pod
+	Lookups: DESCRIPTION
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 66 in perlmod.pod
 Text: END; Tail: (BEGIN, UNITCHECK, CHECK, INIT and END); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: END
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 11914 in perlmod.pod
+	Lookups: END
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 11914 in perlmod.pod
 Text: INIT; Tail: (BEGIN, UNITCHECK, CHECK, INIT and END); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: INIT
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 11906 in perlmod.pod
+	Lookups: INIT
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 11906 in perlmod.pod
 Text: Is this the document you were after?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Is this the document you were after?
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 86 in perlmod.pod
+	Lookups: Is this the document you were after?
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 86 in perlmod.pod
 Text: Making your module threadsafe; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Making your module threadsafe
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23309 in perlmod.pod
+	Lookups: Making your module threadsafe
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23309 in perlmod.pod
 Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: NAME
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlmod.pod
+	Lookups: NAME
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlmod.pod
 Text: Packages; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Packages
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 426 in perlmod.pod
+	Lookups: Packages
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 426 in perlmod.pod
 Text: Perl Classes; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Perl Classes
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17235 in perlmod.pod
+	Lookups: Perl Classes
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17235 in perlmod.pod
 Text: Perl Modules; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Perl Modules
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17639 in perlmod.pod
+	Lookups: Perl Modules
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17639 in perlmod.pod
 Text: SEE ALSO; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: SEE ALSO
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 25747 in perlmod.pod
+	Lookups: SEE ALSO
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 25747 in perlmod.pod
 Text: Symbol Tables; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Symbol Tables
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6243 in perlmod.pod
+	Lookups: Symbol Tables
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6243 in perlmod.pod
 Text: This doc; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: This doc
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 228 in perlmod.pod
+	Lookups: This doc
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 228 in perlmod.pod
 Text: UNITCHECK; Tail: (BEGIN, UNITCHECK, CHECK, INIT and END); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: UNITCHECK
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 11884 in perlmod.pod
+	Lookups: UNITCHECK
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 11884 in perlmod.pod
 Text: alias; Tail: (Symbol Tables); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: alias
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 6327 in perlmod.pod
+	Lookups: alias
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 6327 in perlmod.pod
 Text: class; Tail: (Perl Classes); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: class
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17255 in perlmod.pod
+	Lookups: class
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17255 in perlmod.pod
 Text: constant; Tail: (Another use of symbol tables is for making "constant" scalars.); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: constant
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 9759 in perlmod.pod
+	Lookups: constant
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 9759 in perlmod.pod
 Text: glob; Tail: (Symbol Tables); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: glob
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 6319 in perlmod.pod
+	Lookups: glob
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 6319 in perlmod.pod
 Text: global variable; Tail: (Packages); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: global variable
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 486 in perlmod.pod
+	Lookups: global variable
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 486 in perlmod.pod
 Text: global; Tail: (Packages); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: global
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 505 in perlmod.pod
+	Lookups: global
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 505 in perlmod.pod
 Text: ithread; Tail: (Making your module threadsafe); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: ithread
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 23464 in perlmod.pod
+	Lookups: ithread
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 23464 in perlmod.pod
 Text: module, thread safe; Tail: (Making your module threadsafe); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: module, thread safe
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 23397 in perlmod.pod
+	Lookups: module, thread safe
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 23397 in perlmod.pod
 Text: module, threadsafe; Tail: (Making your module threadsafe); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: module, threadsafe
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 23375 in perlmod.pod
+	Lookups: module, threadsafe
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 23375 in perlmod.pod
 Text: module; Tail: (Perl Modules); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: module
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17659 in perlmod.pod
+	Lookups: module
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17659 in perlmod.pod
 Text: namespace; Tail: (Packages); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: namespace
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 453 in perlmod.pod
+	Lookups: namespace
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 453 in perlmod.pod
 Text: package; Tail: (Packages); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: package
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 442 in perlmod.pod
+	Lookups: package
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 442 in perlmod.pod
 Text: perlmodstyle; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: perlmodstyle
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 355 in perlmod.pod
+	Lookups: perlmodstyle
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 355 in perlmod.pod
 Text: perlnewmod; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: perlnewmod
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 300 in perlmod.pod
+	Lookups: perlnewmod
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 300 in perlmod.pod
 Text: scalar, constant; Tail: (Another use of symbol tables is for making "constant" scalars.); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: scalar, constant
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 9771 in perlmod.pod
+	Lookups: scalar, constant
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 9771 in perlmod.pod
 Text: stash; Tail: (Symbol Tables); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: stash
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 6280 in perlmod.pod
+	Lookups: stash
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 6280 in perlmod.pod
 Text: symbol table; Tail: (Symbol Tables); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: symbol table
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 6264 in perlmod.pod
+	Lookups: symbol table
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 6264 in perlmod.pod
 Text: thread safe; Tail: (Making your module threadsafe); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: thread safe
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 23360 in perlmod.pod
+	Lookups: thread safe
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 23360 in perlmod.pod
 Text: thread; Tail: (Making your module threadsafe); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: thread
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 23443 in perlmod.pod
+	Lookups: thread
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 23443 in perlmod.pod
 Text: threads; Tail: (Making your module threadsafe); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: threads
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 23453 in perlmod.pod
+	Lookups: threads
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 23453 in perlmod.pod
 Text: threadsafe; Tail: (Making your module threadsafe); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: threadsafe
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 23346 in perlmod.pod
+	Lookups: threadsafe
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 23346 in perlmod.pod
 Text: typeglob; Tail: (Symbol Tables); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: typeglob
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 6307 in perlmod.pod
+	Lookups: typeglob
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 6307 in perlmod.pod
 Text: variable, global; Tail: (Packages); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: variable, global
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 466 in perlmod.pod
+	Lookups: variable, global
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 466 in perlmod.pod
 Text: variable, punctuation; Tail: (Only identifiers starting with letters (or underscore) are stored in a package's symbol table.  All other symbols are kept in package mai...); Type: Index; Icon: /perl5language.png; Type Icon: null
-Lookups: variable, punctuation
-    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 4782 in perlmod.pod
+	Lookups: variable, punctuation
+	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 4782 in perlmod.pod

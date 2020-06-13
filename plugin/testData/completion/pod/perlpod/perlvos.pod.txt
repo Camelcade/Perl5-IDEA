@@ -1,30 +1,30 @@
 Text: AUTHOR; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: AUTHOR
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3747 in perlvos.pod
+	Lookups: AUTHOR
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3747 in perlvos.pod
 Text: BUILDING PERL FOR OPENVOS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: BUILDING PERL FOR OPENVOS
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 843 in perlvos.pod
+	Lookups: BUILDING PERL FOR OPENVOS
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 843 in perlvos.pod
 Text: INSTALLING PERL IN OPENVOS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: INSTALLING PERL IN OPENVOS
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1186 in perlvos.pod
+	Lookups: INSTALLING PERL IN OPENVOS
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1186 in perlvos.pod
 Text: LAST UPDATE; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: LAST UPDATE
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3799 in perlvos.pod
+	Lookups: LAST UPDATE
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3799 in perlvos.pod
 Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: NAME
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 178 in perlvos.pod
+	Lookups: NAME
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 178 in perlvos.pod
 Text: Restrictions of Perl on OpenVOS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Restrictions of Perl on OpenVOS
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2192 in perlvos.pod
+	Lookups: Restrictions of Perl on OpenVOS
+	PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2192 in perlvos.pod
 Text: SUPPORT STATUS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: SUPPORT STATUS
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3327 in perlvos.pod
+	Lookups: SUPPORT STATUS
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3327 in perlvos.pod
 Text: SYNOPSIS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: SYNOPSIS
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 227 in perlvos.pod
+	Lookups: SYNOPSIS
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 227 in perlvos.pod
 Text: TEST STATUS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: TEST STATUS
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2995 in perlvos.pod
+	Lookups: TEST STATUS
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2995 in perlvos.pod
 Text: USING PERL IN OPENVOS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: USING PERL IN OPENVOS
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2162 in perlvos.pod
+	Lookups: USING PERL IN OPENVOS
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2162 in perlvos.pod

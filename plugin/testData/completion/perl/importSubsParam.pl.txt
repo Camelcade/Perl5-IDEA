@@ -1,18 +1,18 @@
 Text: MULTICONST2; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: MULTICONST2
-    String
+	Lookups: MULTICONST2
+	String: MULTICONST2
 Text: SOMECONST2; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: SOMECONST2
-    String
+	Lookups: SOMECONST2
+	String: SOMECONST2
 Text: multiconst1; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: multiconst1
-    String
+	Lookups: multiconst1
+	String: multiconst1
 Text: someconst1; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: someconst1
-    String
+	Lookups: someconst1
+	String: someconst1
 Text: somesub1; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: somesub1
-    String
+	Lookups: somesub1
+	String: somesub1
 Text: somesub2; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: somesub2
-    String
+	Lookups: somesub2
+	String: somesub2

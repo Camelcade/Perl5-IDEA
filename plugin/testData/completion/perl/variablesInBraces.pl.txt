@@ -1,42 +1,42 @@
 Text: $MyTest::Some::Package::ARRAY_VAR; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
-Lookups: $MyTest::Some::Package::ARRAY_VAR, MyTest::Some::Package::ARRAY_VAR
-    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 171 in Package.pm
+	Lookups: $MyTest::Some::Package::ARRAY_VAR, MyTest::Some::Package::ARRAY_VAR
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 171 in Package.pm
 Text: $MyTest::Some::Package::HASH_VAR; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
-Lookups: MyTest::Some::Package::HASH_VAR, $MyTest::Some::Package::HASH_VAR
-    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 187 in Package.pm
+	Lookups: $MyTest::Some::Package::HASH_VAR, MyTest::Some::Package::HASH_VAR
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 187 in Package.pm
 Text: $MyTest::Some::Package::SCALAR_VAR; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
-Lookups: MyTest::Some::Package::SCALAR_VAR, $MyTest::Some::Package::SCALAR_VAR
-    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 154 in Package.pm
+	Lookups: $MyTest::Some::Package::SCALAR_VAR, MyTest::Some::Package::SCALAR_VAR
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 154 in Package.pm
 Text: $array_variable; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
-Lookups: $array_variable, array_variable
-    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 21 in variablesInBraces.pl
+	Lookups: $array_variable, array_variable
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 21 in variablesInBraces.pl
 Text: $hash_variable; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
-Lookups: hash_variable, $hash_variable
-    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 38 in variablesInBraces.pl
+	Lookups: $hash_variable, hash_variable
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 38 in variablesInBraces.pl
 Text: $scalar_variable; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
-Lookups: $scalar_variable, scalar_variable
-    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 3 in variablesInBraces.pl
+	Lookups: $scalar_variable, scalar_variable
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 3 in variablesInBraces.pl
 Text: %MyTest::Some::Package::HASH_VAR; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
-Lookups: MyTest::Some::Package::HASH_VAR, %MyTest::Some::Package::HASH_VAR
-    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 187 in Package.pm
+	Lookups: %MyTest::Some::Package::HASH_VAR, MyTest::Some::Package::HASH_VAR
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 187 in Package.pm
 Text: %hash_variable; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
-Lookups: %hash_variable, hash_variable
-    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 38 in variablesInBraces.pl
+	Lookups: %hash_variable, hash_variable
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 38 in variablesInBraces.pl
 Text: @MyTest::Some::Package::ARRAY_VAR; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
-Lookups: MyTest::Some::Package::ARRAY_VAR, @MyTest::Some::Package::ARRAY_VAR
-    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 171 in Package.pm
+	Lookups: @MyTest::Some::Package::ARRAY_VAR, MyTest::Some::Package::ARRAY_VAR
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 171 in Package.pm
 Text: @MyTest::Some::Package::ARRAY_VAR; Tail: null; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
-Lookups: MyTest::Some::Package::ARRAY_VAR, @MyTest::Some::Package::ARRAY_VAR
-    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 171 in Package.pm
+	Lookups: @MyTest::Some::Package::ARRAY_VAR, MyTest::Some::Package::ARRAY_VAR
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 171 in Package.pm
 Text: @MyTest::Some::Package::HASH_VAR; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
-Lookups: @MyTest::Some::Package::HASH_VAR, MyTest::Some::Package::HASH_VAR
-    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 187 in Package.pm
+	Lookups: @MyTest::Some::Package::HASH_VAR, MyTest::Some::Package::HASH_VAR
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 187 in Package.pm
 Text: @array_variable; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
-Lookups: array_variable, @array_variable
-    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 21 in variablesInBraces.pl
+	Lookups: @array_variable, array_variable
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 21 in variablesInBraces.pl
 Text: @array_variable; Tail: null; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
-Lookups: array_variable, @array_variable
-    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 21 in variablesInBraces.pl
+	Lookups: @array_variable, array_variable
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 21 in variablesInBraces.pl
 Text: @hash_variable; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
-Lookups: @hash_variable, hash_variable
-    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 38 in variablesInBraces.pl
+	Lookups: @hash_variable, hash_variable
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 38 in variablesInBraces.pl

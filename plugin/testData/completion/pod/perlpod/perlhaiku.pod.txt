@@ -1,15 +1,15 @@
 Text: BUILD AND INSTALL; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: BUILD AND INSTALL
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 339 in perlhaiku.pod
+	Lookups: BUILD AND INSTALL
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 339 in perlhaiku.pod
 Text: CONTACT; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: CONTACT
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1297 in perlhaiku.pod
+	Lookups: CONTACT
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1297 in perlhaiku.pod
 Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: DESCRIPTION
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 232 in perlhaiku.pod
+	Lookups: DESCRIPTION
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 232 in perlhaiku.pod
 Text: KNOWN PROBLEMS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: KNOWN PROBLEMS
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 670 in perlhaiku.pod
+	Lookups: KNOWN PROBLEMS
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 670 in perlhaiku.pod
 Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: NAME
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 178 in perlhaiku.pod
+	Lookups: NAME
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 178 in perlhaiku.pod

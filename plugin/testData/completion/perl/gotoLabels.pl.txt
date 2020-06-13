@@ -1,21 +1,21 @@
 Text: LABEL1; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: LABEL1
-    PsiElement: PsiPerlLabelDeclarationImpl(Perl5: LABEL_DECLARATION) at 0 in gotoLabels.pl
+	Lookups: LABEL1
+	PsiElement: PsiPerlLabelDeclarationImpl(Perl5: LABEL_DECLARATION) at 0 in gotoLabels.pl
 Text: LABEL2; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: LABEL2
-    PsiElement: PsiPerlLabelDeclarationImpl(Perl5: LABEL_DECLARATION) at 82 in gotoLabels.pl
+	Lookups: LABEL2
+	PsiElement: PsiPerlLabelDeclarationImpl(Perl5: LABEL_DECLARATION) at 82 in gotoLabels.pl
 Text: LABEL3; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: LABEL3
-    PsiElement: PsiPerlLabelDeclarationImpl(Perl5: LABEL_DECLARATION) at 186 in gotoLabels.pl
+	Lookups: LABEL3
+	PsiElement: PsiPerlLabelDeclarationImpl(Perl5: LABEL_DECLARATION) at 186 in gotoLabels.pl
 Text: LABEL4; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: LABEL4
-    PsiElement: PsiPerlLabelDeclarationImpl(Perl5: LABEL_DECLARATION) at 248 in gotoLabels.pl
+	Lookups: LABEL4
+	PsiElement: PsiPerlLabelDeclarationImpl(Perl5: LABEL_DECLARATION) at 248 in gotoLabels.pl
 Text: LABEL5; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: LABEL5
-    PsiElement: PsiPerlLabelDeclarationImpl(Perl5: LABEL_DECLARATION) at 137 in gotoLabels.pl
+	Lookups: LABEL5
+	PsiElement: PsiPerlLabelDeclarationImpl(Perl5: LABEL_DECLARATION) at 137 in gotoLabels.pl
 Text: LABEL6; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: LABEL6
-    PsiElement: PsiPerlLabelDeclarationImpl(Perl5: LABEL_DECLARATION) at 24 in gotoLabels.pl
+	Lookups: LABEL6
+	PsiElement: PsiPerlLabelDeclarationImpl(Perl5: LABEL_DECLARATION) at 24 in gotoLabels.pl
 Text: LABEL8; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: LABEL8
-    PsiElement: PsiPerlLabelDeclarationImpl(Perl5: LABEL_DECLARATION) at 377 in gotoLabels.pl
+	Lookups: LABEL8
+	PsiElement: PsiPerlLabelDeclarationImpl(Perl5: LABEL_DECLARATION) at 377 in gotoLabels.pl

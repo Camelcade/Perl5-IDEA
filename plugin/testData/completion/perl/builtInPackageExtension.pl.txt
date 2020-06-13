@@ -1,756 +1,756 @@
 Text: -A; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: -A
-    PsiElement: Implicit sub: -A([$name_or_handle])([$name_or_handle])
+	Lookups: -A
+	PsiElement: Implicit sub: -A([$name_or_handle])([$name_or_handle])
 Text: -B; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: -B
-    PsiElement: Implicit sub: -B([$name_or_handle])([$name_or_handle])
+	Lookups: -B
+	PsiElement: Implicit sub: -B([$name_or_handle])([$name_or_handle])
 Text: -C; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: -C
-    PsiElement: Implicit sub: -C([$name_or_handle])([$name_or_handle])
+	Lookups: -C
+	PsiElement: Implicit sub: -C([$name_or_handle])([$name_or_handle])
 Text: -M; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: -M
-    PsiElement: Implicit sub: -M([$name_or_handle])([$name_or_handle])
+	Lookups: -M
+	PsiElement: Implicit sub: -M([$name_or_handle])([$name_or_handle])
 Text: -O; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: -O
-    PsiElement: Implicit sub: -O([$name_or_handle])([$name_or_handle])
+	Lookups: -O
+	PsiElement: Implicit sub: -O([$name_or_handle])([$name_or_handle])
 Text: -R; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: -R
-    PsiElement: Implicit sub: -R([$name_or_handle])([$name_or_handle])
+	Lookups: -R
+	PsiElement: Implicit sub: -R([$name_or_handle])([$name_or_handle])
 Text: -S; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: -S
-    PsiElement: Implicit sub: -S([$name_or_handle])([$name_or_handle])
+	Lookups: -S
+	PsiElement: Implicit sub: -S([$name_or_handle])([$name_or_handle])
 Text: -T; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: -T
-    PsiElement: Implicit sub: -T([$name_or_handle])([$name_or_handle])
+	Lookups: -T
+	PsiElement: Implicit sub: -T([$name_or_handle])([$name_or_handle])
 Text: -W; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: -W
-    PsiElement: Implicit sub: -W([$name_or_handle])([$name_or_handle])
+	Lookups: -W
+	PsiElement: Implicit sub: -W([$name_or_handle])([$name_or_handle])
 Text: -X; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: -X
-    PsiElement: Implicit sub: -X([$name_or_handle])([$name_or_handle])
+	Lookups: -X
+	PsiElement: Implicit sub: -X([$name_or_handle])([$name_or_handle])
 Text: -b; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: -b
-    PsiElement: Implicit sub: -b([$name_or_handle])([$name_or_handle])
+	Lookups: -b
+	PsiElement: Implicit sub: -b([$name_or_handle])([$name_or_handle])
 Text: -c; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: -c
-    PsiElement: Implicit sub: -c([$name_or_handle])([$name_or_handle])
+	Lookups: -c
+	PsiElement: Implicit sub: -c([$name_or_handle])([$name_or_handle])
 Text: -d; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: -d
-    PsiElement: Implicit sub: -d([$name_or_handle])([$name_or_handle])
+	Lookups: -d
+	PsiElement: Implicit sub: -d([$name_or_handle])([$name_or_handle])
 Text: -e; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: -e
-    PsiElement: Implicit sub: -e([$name_or_handle])([$name_or_handle])
+	Lookups: -e
+	PsiElement: Implicit sub: -e([$name_or_handle])([$name_or_handle])
 Text: -f; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: -f
-    PsiElement: Implicit sub: -f([$name_or_handle])([$name_or_handle])
+	Lookups: -f
+	PsiElement: Implicit sub: -f([$name_or_handle])([$name_or_handle])
 Text: -g; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: -g
-    PsiElement: Implicit sub: -g([$name_or_handle])([$name_or_handle])
+	Lookups: -g
+	PsiElement: Implicit sub: -g([$name_or_handle])([$name_or_handle])
 Text: -k; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: -k
-    PsiElement: Implicit sub: -k([$name_or_handle])([$name_or_handle])
+	Lookups: -k
+	PsiElement: Implicit sub: -k([$name_or_handle])([$name_or_handle])
 Text: -l; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: -l
-    PsiElement: Implicit sub: -l([$name_or_handle])([$name_or_handle])
+	Lookups: -l
+	PsiElement: Implicit sub: -l([$name_or_handle])([$name_or_handle])
 Text: -o; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: -o
-    PsiElement: Implicit sub: -o([$name_or_handle])([$name_or_handle])
+	Lookups: -o
+	PsiElement: Implicit sub: -o([$name_or_handle])([$name_or_handle])
 Text: -p; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: -p
-    PsiElement: Implicit sub: -p([$name_or_handle])([$name_or_handle])
+	Lookups: -p
+	PsiElement: Implicit sub: -p([$name_or_handle])([$name_or_handle])
 Text: -r; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: -r
-    PsiElement: Implicit sub: -r([$name_or_handle])([$name_or_handle])
+	Lookups: -r
+	PsiElement: Implicit sub: -r([$name_or_handle])([$name_or_handle])
 Text: -s; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: -s
-    PsiElement: Implicit sub: -s([$name_or_handle])([$name_or_handle])
+	Lookups: -s
+	PsiElement: Implicit sub: -s([$name_or_handle])([$name_or_handle])
 Text: -t; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: -t
-    PsiElement: Implicit sub: -t([$name_or_handle])([$name_or_handle])
+	Lookups: -t
+	PsiElement: Implicit sub: -t([$name_or_handle])([$name_or_handle])
 Text: -u; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: -u
-    PsiElement: Implicit sub: -u([$name_or_handle])([$name_or_handle])
+	Lookups: -u
+	PsiElement: Implicit sub: -u([$name_or_handle])([$name_or_handle])
 Text: -w; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: -w
-    PsiElement: Implicit sub: -w([$name_or_handle])([$name_or_handle])
+	Lookups: -w
+	PsiElement: Implicit sub: -w([$name_or_handle])([$name_or_handle])
 Text: -x; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: -x
-    PsiElement: Implicit sub: -x([$name_or_handle])([$name_or_handle])
+	Lookups: -x
+	PsiElement: Implicit sub: -x([$name_or_handle])([$name_or_handle])
 Text: -z; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: -z
-    PsiElement: Implicit sub: -z([$name_or_handle])([$name_or_handle])
+	Lookups: -z
+	PsiElement: Implicit sub: -z([$name_or_handle])([$name_or_handle])
 Text: AUTOLOAD; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: AUTOLOAD
-    PsiElement: Implicit sub: AUTOLOAD()
+	Lookups: AUTOLOAD
+	PsiElement: Implicit sub: AUTOLOAD()
 Text: BEGIN; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: BEGIN
-    PsiElement: Implicit sub: BEGIN()
+	Lookups: BEGIN
+	PsiElement: Implicit sub: BEGIN()
 Text: CHECK; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: CHECK
-    PsiElement: Implicit sub: CHECK()
+	Lookups: CHECK
+	PsiElement: Implicit sub: CHECK()
 Text: CORE::GLOBAL->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
-Lookups: CORE::GLOBAL->
-    PsiElement: Implicit namespace: CORE::GLOBAL
+	Lookups: CORE::GLOBAL->
+	PsiElement: Implicit namespace: CORE::GLOBAL
 Text: CORE::GLOBAL::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
-Lookups: CORE::GLOBAL::
-    PsiElement: Implicit namespace: CORE::GLOBAL
+	Lookups: CORE::GLOBAL::
+	PsiElement: Implicit namespace: CORE::GLOBAL
 Text: DESTROY; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: DESTROY
-    PsiElement: Implicit sub: DESTROY()
+	Lookups: DESTROY
+	PsiElement: Implicit sub: DESTROY()
 Text: END; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: END
-    PsiElement: Implicit sub: END()
+	Lookups: END
+	PsiElement: Implicit sub: END()
 Text: INIT; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: INIT
-    PsiElement: Implicit sub: INIT()
+	Lookups: INIT
+	PsiElement: Implicit sub: INIT()
 Text: UNITCHECK; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: UNITCHECK
-    PsiElement: Implicit sub: UNITCHECK()
+	Lookups: UNITCHECK
+	PsiElement: Implicit sub: UNITCHECK()
 Text: __DATA__; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: __DATA__
-    PsiElement: Implicit sub: __DATA__()
+	Lookups: __DATA__
+	PsiElement: Implicit sub: __DATA__()
 Text: __END__; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: __END__
-    PsiElement: Implicit sub: __END__()
+	Lookups: __END__
+	PsiElement: Implicit sub: __END__()
 Text: __FILE__; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: __FILE__
-    PsiElement: Implicit sub: __FILE__()
+	Lookups: __FILE__
+	PsiElement: Implicit sub: __FILE__()
 Text: __LINE__; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: __LINE__
-    PsiElement: Implicit sub: __LINE__()
+	Lookups: __LINE__
+	PsiElement: Implicit sub: __LINE__()
 Text: __PACKAGE__; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: __PACKAGE__
-    PsiElement: Implicit sub: __PACKAGE__()
+	Lookups: __PACKAGE__
+	PsiElement: Implicit sub: __PACKAGE__()
 Text: __SUB__; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: __SUB__
-    PsiElement: Implicit sub: __SUB__()
+	Lookups: __SUB__
+	PsiElement: Implicit sub: __SUB__()
 Text: abs; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: abs
-    PsiElement: Implicit sub: abs()
+	Lookups: abs
+	PsiElement: Implicit sub: abs()
 Text: accept; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: accept
-    PsiElement: Implicit sub: accept()
+	Lookups: accept
+	PsiElement: Implicit sub: accept()
 Text: alarm; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: alarm
-    PsiElement: Implicit sub: alarm()
+	Lookups: alarm
+	PsiElement: Implicit sub: alarm()
 Text: atan2; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: atan2
-    PsiElement: Implicit sub: atan2()
+	Lookups: atan2
+	PsiElement: Implicit sub: atan2()
 Text: bind; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: bind
-    PsiElement: Implicit sub: bind()
+	Lookups: bind
+	PsiElement: Implicit sub: bind()
 Text: binmode; Tail: ($file_handle [, $layer]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: binmode
-    PsiElement: Implicit sub: binmode($file_handle [, $layer])($file_handle, [$layer])
+	Lookups: binmode
+	PsiElement: Implicit sub: binmode($file_handle [, $layer])($file_handle, [$layer])
 Text: bless; Tail: ($reference [, $namespace_name]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: bless
-    PsiElement: Implicit sub: bless($reference [, $namespace_name])($reference, [$namespace_name])
+	Lookups: bless
+	PsiElement: Implicit sub: bless($reference [, $namespace_name])($reference, [$namespace_name])
 Text: break; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: break
-    PsiElement: Implicit sub: break()
+	Lookups: break
+	PsiElement: Implicit sub: break()
 Text: caller; Tail: ([$frame_offset]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: caller
-    PsiElement: Implicit sub: caller([$frame_offset])([$frame_offset])
+	Lookups: caller
+	PsiElement: Implicit sub: caller([$frame_offset])([$frame_offset])
 Text: chdir; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: chdir
-    PsiElement: Implicit sub: chdir([$name_or_handle])([$name_or_handle])
+	Lookups: chdir
+	PsiElement: Implicit sub: chdir([$name_or_handle])([$name_or_handle])
 Text: chmod; Tail: ($oct_permissions, @file_names); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: chmod
-    PsiElement: Implicit sub: chmod($oct_permissions, @file_names)($oct_permissions, @file_names)
+	Lookups: chmod
+	PsiElement: Implicit sub: chmod($oct_permissions, @file_names)($oct_permissions, @file_names)
 Text: chomp; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: chomp
-    PsiElement: Implicit sub: chomp()
+	Lookups: chomp
+	PsiElement: Implicit sub: chomp()
 Text: chop; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: chop
-    PsiElement: Implicit sub: chop()
+	Lookups: chop
+	PsiElement: Implicit sub: chop()
 Text: chown; Tail: ($uid, $guid, @file_names); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: chown
-    PsiElement: Implicit sub: chown($uid, $guid, @file_names)($uid, $guid, @file_names)
+	Lookups: chown
+	PsiElement: Implicit sub: chown($uid, $guid, @file_names)($uid, $guid, @file_names)
 Text: chr; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: chr
-    PsiElement: Implicit sub: chr()
+	Lookups: chr
+	PsiElement: Implicit sub: chr()
 Text: chroot; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: chroot
-    PsiElement: Implicit sub: chroot()
+	Lookups: chroot
+	PsiElement: Implicit sub: chroot()
 Text: close; Tail: ($file_handle); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: close
-    PsiElement: Implicit sub: close($file_handle)($file_handle)
+	Lookups: close
+	PsiElement: Implicit sub: close($file_handle)($file_handle)
 Text: closedir; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: closedir
-    PsiElement: Implicit sub: closedir()
+	Lookups: closedir
+	PsiElement: Implicit sub: closedir()
 Text: connect; Tail: ($socket, $name); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: connect
-    PsiElement: Implicit sub: connect($socket, $name)($socket, $name)
+	Lookups: connect
+	PsiElement: Implicit sub: connect($socket, $name)($socket, $name)
 Text: continue; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: continue
-    PsiElement: Implicit sub: continue()
+	Lookups: continue
+	PsiElement: Implicit sub: continue()
 Text: cos; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: cos
-    PsiElement: Implicit sub: cos()
+	Lookups: cos
+	PsiElement: Implicit sub: cos()
 Text: crypt; Tail: ($text, $salt); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: crypt
-    PsiElement: Implicit sub: crypt($text, $salt)($text, $salt)
+	Lookups: crypt
+	PsiElement: Implicit sub: crypt($text, $salt)($text, $salt)
 Text: dbmclose; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: dbmclose
-    PsiElement: Implicit sub: dbmclose()
+	Lookups: dbmclose
+	PsiElement: Implicit sub: dbmclose()
 Text: dbmopen; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: dbmopen
-    PsiElement: Implicit sub: dbmopen()
+	Lookups: dbmopen
+	PsiElement: Implicit sub: dbmopen()
 Text: default; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: default
-    PsiElement: Implicit sub: default()
+	Lookups: default
+	PsiElement: Implicit sub: default()
 Text: defined; Tail: ([$expr]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: defined
-    PsiElement: Implicit sub: defined([$expr])([$expr])
+	Lookups: defined
+	PsiElement: Implicit sub: defined([$expr])([$expr])
 Text: delete; Tail: (@hash_element_or_slice); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: delete
-    PsiElement: Implicit sub: delete(@hash_element_or_slice)(@hash_element_or_slice)
+	Lookups: delete
+	PsiElement: Implicit sub: delete(@hash_element_or_slice)(@hash_element_or_slice)
 Text: die; Tail: (@messages_or_exception); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: die
-    PsiElement: Implicit sub: die(@messages_or_exception)(@messages_or_exception)
+	Lookups: die
+	PsiElement: Implicit sub: die(@messages_or_exception)(@messages_or_exception)
 Text: do; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: do
-    PsiElement: Implicit sub: do()
+	Lookups: do
+	PsiElement: Implicit sub: do()
 Text: dump; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: dump
-    PsiElement: Implicit sub: dump()
+	Lookups: dump
+	PsiElement: Implicit sub: dump()
 Text: each; Tail: (@hash_or_array); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: each
-    PsiElement: Implicit sub: each(@hash_or_array)(@hash_or_array)
+	Lookups: each
+	PsiElement: Implicit sub: each(@hash_or_array)(@hash_or_array)
 Text: endgrent; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: endgrent
-    PsiElement: Implicit sub: endgrent()
+	Lookups: endgrent
+	PsiElement: Implicit sub: endgrent()
 Text: endhostent; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: endhostent
-    PsiElement: Implicit sub: endhostent()
+	Lookups: endhostent
+	PsiElement: Implicit sub: endhostent()
 Text: endnetent; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: endnetent
-    PsiElement: Implicit sub: endnetent()
+	Lookups: endnetent
+	PsiElement: Implicit sub: endnetent()
 Text: endprotoent; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: endprotoent
-    PsiElement: Implicit sub: endprotoent()
+	Lookups: endprotoent
+	PsiElement: Implicit sub: endprotoent()
 Text: endpwent; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: endpwent
-    PsiElement: Implicit sub: endpwent()
+	Lookups: endpwent
+	PsiElement: Implicit sub: endpwent()
 Text: endservent; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: endservent
-    PsiElement: Implicit sub: endservent()
+	Lookups: endservent
+	PsiElement: Implicit sub: endservent()
 Text: eof; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: eof
-    PsiElement: Implicit sub: eof()
+	Lookups: eof
+	PsiElement: Implicit sub: eof()
 Text: eval; Tail: ([$expr_or_block]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: eval
-    PsiElement: Implicit sub: eval([$expr_or_block])([$expr_or_block])
+	Lookups: eval
+	PsiElement: Implicit sub: eval([$expr_or_block])([$expr_or_block])
 Text: evalbytes; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: evalbytes
-    PsiElement: Implicit sub: evalbytes()
+	Lookups: evalbytes
+	PsiElement: Implicit sub: evalbytes()
 Text: exec; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: exec
-    PsiElement: Implicit sub: exec()
+	Lookups: exec
+	PsiElement: Implicit sub: exec()
 Text: exists; Tail: ($hash_element); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: exists
-    PsiElement: Implicit sub: exists($hash_element)($hash_element)
+	Lookups: exists
+	PsiElement: Implicit sub: exists($hash_element)($hash_element)
 Text: exit; Tail: ([$exit_code]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: exit
-    PsiElement: Implicit sub: exit([$exit_code])([$exit_code])
+	Lookups: exit
+	PsiElement: Implicit sub: exit([$exit_code])([$exit_code])
 Text: exp; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: exp
-    PsiElement: Implicit sub: exp()
+	Lookups: exp
+	PsiElement: Implicit sub: exp()
 Text: fc; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: fc
-    PsiElement: Implicit sub: fc()
+	Lookups: fc
+	PsiElement: Implicit sub: fc()
 Text: fcntl; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: fcntl
-    PsiElement: Implicit sub: fcntl()
+	Lookups: fcntl
+	PsiElement: Implicit sub: fcntl()
 Text: fileno; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: fileno
-    PsiElement: Implicit sub: fileno()
+	Lookups: fileno
+	PsiElement: Implicit sub: fileno()
 Text: flock; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: flock
-    PsiElement: Implicit sub: flock()
+	Lookups: flock
+	PsiElement: Implicit sub: flock()
 Text: fork; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: fork
-    PsiElement: Implicit sub: fork()
+	Lookups: fork
+	PsiElement: Implicit sub: fork()
 Text: format; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: format
-    PsiElement: Implicit sub: format()
+	Lookups: format
+	PsiElement: Implicit sub: format()
 Text: formline; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: formline
-    PsiElement: Implicit sub: formline()
+	Lookups: formline
+	PsiElement: Implicit sub: formline()
 Text: getc; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: getc
-    PsiElement: Implicit sub: getc()
+	Lookups: getc
+	PsiElement: Implicit sub: getc()
 Text: getgrent; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: getgrent
-    PsiElement: Implicit sub: getgrent()
+	Lookups: getgrent
+	PsiElement: Implicit sub: getgrent()
 Text: getgrgid; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: getgrgid
-    PsiElement: Implicit sub: getgrgid()
+	Lookups: getgrgid
+	PsiElement: Implicit sub: getgrgid()
 Text: getgrnam; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: getgrnam
-    PsiElement: Implicit sub: getgrnam()
+	Lookups: getgrnam
+	PsiElement: Implicit sub: getgrnam()
 Text: gethostbyaddr; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: gethostbyaddr
-    PsiElement: Implicit sub: gethostbyaddr()
+	Lookups: gethostbyaddr
+	PsiElement: Implicit sub: gethostbyaddr()
 Text: gethostbyname; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: gethostbyname
-    PsiElement: Implicit sub: gethostbyname()
+	Lookups: gethostbyname
+	PsiElement: Implicit sub: gethostbyname()
 Text: gethostent; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: gethostent
-    PsiElement: Implicit sub: gethostent()
+	Lookups: gethostent
+	PsiElement: Implicit sub: gethostent()
 Text: getlogin; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: getlogin
-    PsiElement: Implicit sub: getlogin()
+	Lookups: getlogin
+	PsiElement: Implicit sub: getlogin()
 Text: getnetbyaddr; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: getnetbyaddr
-    PsiElement: Implicit sub: getnetbyaddr()
+	Lookups: getnetbyaddr
+	PsiElement: Implicit sub: getnetbyaddr()
 Text: getnetbyname; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: getnetbyname
-    PsiElement: Implicit sub: getnetbyname()
+	Lookups: getnetbyname
+	PsiElement: Implicit sub: getnetbyname()
 Text: getnetent; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: getnetent
-    PsiElement: Implicit sub: getnetent()
+	Lookups: getnetent
+	PsiElement: Implicit sub: getnetent()
 Text: getpeername; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: getpeername
-    PsiElement: Implicit sub: getpeername()
+	Lookups: getpeername
+	PsiElement: Implicit sub: getpeername()
 Text: getpgrp; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: getpgrp
-    PsiElement: Implicit sub: getpgrp()
+	Lookups: getpgrp
+	PsiElement: Implicit sub: getpgrp()
 Text: getppid; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: getppid
-    PsiElement: Implicit sub: getppid()
+	Lookups: getppid
+	PsiElement: Implicit sub: getppid()
 Text: getpriority; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: getpriority
-    PsiElement: Implicit sub: getpriority()
+	Lookups: getpriority
+	PsiElement: Implicit sub: getpriority()
 Text: getprotobyname; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: getprotobyname
-    PsiElement: Implicit sub: getprotobyname()
+	Lookups: getprotobyname
+	PsiElement: Implicit sub: getprotobyname()
 Text: getprotobynumber; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: getprotobynumber
-    PsiElement: Implicit sub: getprotobynumber()
+	Lookups: getprotobynumber
+	PsiElement: Implicit sub: getprotobynumber()
 Text: getprotoent; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: getprotoent
-    PsiElement: Implicit sub: getprotoent()
+	Lookups: getprotoent
+	PsiElement: Implicit sub: getprotoent()
 Text: getpwent; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: getpwent
-    PsiElement: Implicit sub: getpwent()
+	Lookups: getpwent
+	PsiElement: Implicit sub: getpwent()
 Text: getpwnam; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: getpwnam
-    PsiElement: Implicit sub: getpwnam()
+	Lookups: getpwnam
+	PsiElement: Implicit sub: getpwnam()
 Text: getpwuid; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: getpwuid
-    PsiElement: Implicit sub: getpwuid()
+	Lookups: getpwuid
+	PsiElement: Implicit sub: getpwuid()
 Text: getservbyname; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: getservbyname
-    PsiElement: Implicit sub: getservbyname()
+	Lookups: getservbyname
+	PsiElement: Implicit sub: getservbyname()
 Text: getservbyport; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: getservbyport
-    PsiElement: Implicit sub: getservbyport()
+	Lookups: getservbyport
+	PsiElement: Implicit sub: getservbyport()
 Text: getservent; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: getservent
-    PsiElement: Implicit sub: getservent()
+	Lookups: getservent
+	PsiElement: Implicit sub: getservent()
 Text: getsockname; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: getsockname
-    PsiElement: Implicit sub: getsockname()
+	Lookups: getsockname
+	PsiElement: Implicit sub: getsockname()
 Text: getsockopt; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: getsockopt
-    PsiElement: Implicit sub: getsockopt()
+	Lookups: getsockopt
+	PsiElement: Implicit sub: getsockopt()
 Text: glob; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: glob
-    PsiElement: Implicit sub: glob()
+	Lookups: glob
+	PsiElement: Implicit sub: glob()
 Text: gmtime; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: gmtime
-    PsiElement: Implicit sub: gmtime()
+	Lookups: gmtime
+	PsiElement: Implicit sub: gmtime()
 Text: goto; Tail: ($coderef_or_label); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: goto
-    PsiElement: Implicit sub: goto($coderef_or_label)($coderef_or_label)
+	Lookups: goto
+	PsiElement: Implicit sub: goto($coderef_or_label)($coderef_or_label)
 Text: grep; Tail: ($expr_or_block, @list); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: grep
-    PsiElement: Implicit sub: grep($expr_or_block, @list)($expr_or_block, @list)
+	Lookups: grep
+	PsiElement: Implicit sub: grep($expr_or_block, @list)($expr_or_block, @list)
 Text: hex; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: hex
-    PsiElement: Implicit sub: hex()
+	Lookups: hex
+	PsiElement: Implicit sub: hex()
 Text: import; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: import
-    PsiElement: Implicit sub: import()
+	Lookups: import
+	PsiElement: Implicit sub: import()
 Text: index; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: index
-    PsiElement: Implicit sub: index()
+	Lookups: index
+	PsiElement: Implicit sub: index()
 Text: int; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: int
-    PsiElement: Implicit sub: int()
+	Lookups: int
+	PsiElement: Implicit sub: int()
 Text: ioctl; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: ioctl
-    PsiElement: Implicit sub: ioctl()
+	Lookups: ioctl
+	PsiElement: Implicit sub: ioctl()
 Text: join; Tail: ($separator, @list); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: join
-    PsiElement: Implicit sub: join($separator, @list)($separator, @list)
+	Lookups: join
+	PsiElement: Implicit sub: join($separator, @list)($separator, @list)
 Text: keys; Tail: (%hash_or_array); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: keys
-    PsiElement: Implicit sub: keys(%hash_or_array)(%hash_or_array)
+	Lookups: keys
+	PsiElement: Implicit sub: keys(%hash_or_array)(%hash_or_array)
 Text: kill; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: kill
-    PsiElement: Implicit sub: kill()
+	Lookups: kill
+	PsiElement: Implicit sub: kill()
 Text: last; Tail: ([$label_or_expr]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: last
-    PsiElement: Implicit sub: last([$label_or_expr])([$label_or_expr])
+	Lookups: last
+	PsiElement: Implicit sub: last([$label_or_expr])([$label_or_expr])
 Text: lc; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: lc
-    PsiElement: Implicit sub: lc()
+	Lookups: lc
+	PsiElement: Implicit sub: lc()
 Text: lcfirst; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: lcfirst
-    PsiElement: Implicit sub: lcfirst()
+	Lookups: lcfirst
+	PsiElement: Implicit sub: lcfirst()
 Text: length; Tail: ([$string]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: length
-    PsiElement: Implicit sub: length([$string])([$string])
+	Lookups: length
+	PsiElement: Implicit sub: length([$string])([$string])
 Text: link; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: link
-    PsiElement: Implicit sub: link()
+	Lookups: link
+	PsiElement: Implicit sub: link()
 Text: listen; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: listen
-    PsiElement: Implicit sub: listen()
+	Lookups: listen
+	PsiElement: Implicit sub: listen()
 Text: local; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: local
-    PsiElement: Implicit sub: local()
+	Lookups: local
+	PsiElement: Implicit sub: local()
 Text: localtime; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: localtime
-    PsiElement: Implicit sub: localtime()
+	Lookups: localtime
+	PsiElement: Implicit sub: localtime()
 Text: lock; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: lock
-    PsiElement: Implicit sub: lock()
+	Lookups: lock
+	PsiElement: Implicit sub: lock()
 Text: log; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: log
-    PsiElement: Implicit sub: log()
+	Lookups: log
+	PsiElement: Implicit sub: log()
 Text: lstat; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: lstat
-    PsiElement: Implicit sub: lstat()
+	Lookups: lstat
+	PsiElement: Implicit sub: lstat()
 Text: map; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: map
-    PsiElement: Implicit sub: map()
+	Lookups: map
+	PsiElement: Implicit sub: map()
 Text: mkdir; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: mkdir
-    PsiElement: Implicit sub: mkdir()
+	Lookups: mkdir
+	PsiElement: Implicit sub: mkdir()
 Text: msgctl; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: msgctl
-    PsiElement: Implicit sub: msgctl()
+	Lookups: msgctl
+	PsiElement: Implicit sub: msgctl()
 Text: msgget; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: msgget
-    PsiElement: Implicit sub: msgget()
+	Lookups: msgget
+	PsiElement: Implicit sub: msgget()
 Text: msgrcv; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: msgrcv
-    PsiElement: Implicit sub: msgrcv()
+	Lookups: msgrcv
+	PsiElement: Implicit sub: msgrcv()
 Text: msgsnd; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: msgsnd
-    PsiElement: Implicit sub: msgsnd()
+	Lookups: msgsnd
+	PsiElement: Implicit sub: msgsnd()
 Text: my; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: my
-    PsiElement: Implicit sub: my()
+	Lookups: my
+	PsiElement: Implicit sub: my()
 Text: next; Tail: ([$label_or_expr]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: next
-    PsiElement: Implicit sub: next([$label_or_expr])([$label_or_expr])
+	Lookups: next
+	PsiElement: Implicit sub: next([$label_or_expr])([$label_or_expr])
 Text: no; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: no
-    PsiElement: Implicit sub: no()
+	Lookups: no
+	PsiElement: Implicit sub: no()
 Text: oct; Tail: ([$expr]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: oct
-    PsiElement: Implicit sub: oct([$expr])([$expr])
+	Lookups: oct
+	PsiElement: Implicit sub: oct([$expr])([$expr])
 Text: open; Tail: ($handle [, $mode, $name_or_ref, @args]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: open
-    PsiElement: Implicit sub: open($handle [, $mode, $name_or_ref, @args])($handle, [$mode], [$name_or_ref], [@args])
+	Lookups: open
+	PsiElement: Implicit sub: open($handle [, $mode, $name_or_ref, @args])($handle, [$mode], [$name_or_ref], [@args])
 Text: opendir; Tail: ($handle, $name); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: opendir
-    PsiElement: Implicit sub: opendir($handle, $name)($handle, $name)
+	Lookups: opendir
+	PsiElement: Implicit sub: opendir($handle, $name)($handle, $name)
 Text: ord; Tail: ([$expr]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: ord
-    PsiElement: Implicit sub: ord([$expr])([$expr])
+	Lookups: ord
+	PsiElement: Implicit sub: ord([$expr])([$expr])
 Text: pack; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: pack
-    PsiElement: Implicit sub: pack()
+	Lookups: pack
+	PsiElement: Implicit sub: pack()
 Text: package; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: package
-    PsiElement: Implicit sub: package()
+	Lookups: package
+	PsiElement: Implicit sub: package()
 Text: pipe; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: pipe
-    PsiElement: Implicit sub: pipe()
+	Lookups: pipe
+	PsiElement: Implicit sub: pipe()
 Text: pop; Tail: ([@array]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: pop
-    PsiElement: Implicit sub: pop([@array])([@array])
+	Lookups: pop
+	PsiElement: Implicit sub: pop([@array])([@array])
 Text: pos; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: pos
-    PsiElement: Implicit sub: pos()
+	Lookups: pos
+	PsiElement: Implicit sub: pos()
 Text: print; Tail: ([$file_handle, @list]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: print
-    PsiElement: Implicit sub: print([$file_handle, @list])([$file_handle], [@list])
+	Lookups: print
+	PsiElement: Implicit sub: print([$file_handle, @list])([$file_handle], [@list])
 Text: printf; Tail: ([$file_handle, $format, @list]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: printf
-    PsiElement: Implicit sub: printf([$file_handle, $format, @list])([$file_handle], [$format], [@list])
+	Lookups: printf
+	PsiElement: Implicit sub: printf([$file_handle, $format, @list])([$file_handle], [$format], [@list])
 Text: prototype; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: prototype
-    PsiElement: Implicit sub: prototype()
+	Lookups: prototype
+	PsiElement: Implicit sub: prototype()
 Text: push; Tail: (@array, @list); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: push
-    PsiElement: Implicit sub: push(@array, @list)(@array, @list)
+	Lookups: push
+	PsiElement: Implicit sub: push(@array, @list)(@array, @list)
 Text: quotemeta; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: quotemeta
-    PsiElement: Implicit sub: quotemeta()
+	Lookups: quotemeta
+	PsiElement: Implicit sub: quotemeta()
 Text: rand; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: rand
-    PsiElement: Implicit sub: rand()
+	Lookups: rand
+	PsiElement: Implicit sub: rand()
 Text: read; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: read
-    PsiElement: Implicit sub: read()
+	Lookups: read
+	PsiElement: Implicit sub: read()
 Text: readdir; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: readdir
-    PsiElement: Implicit sub: readdir()
+	Lookups: readdir
+	PsiElement: Implicit sub: readdir()
 Text: readline; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: readline
-    PsiElement: Implicit sub: readline()
+	Lookups: readline
+	PsiElement: Implicit sub: readline()
 Text: readlink; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: readlink
-    PsiElement: Implicit sub: readlink()
+	Lookups: readlink
+	PsiElement: Implicit sub: readlink()
 Text: readpipe; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: readpipe
-    PsiElement: Implicit sub: readpipe()
+	Lookups: readpipe
+	PsiElement: Implicit sub: readpipe()
 Text: recv; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: recv
-    PsiElement: Implicit sub: recv()
+	Lookups: recv
+	PsiElement: Implicit sub: recv()
 Text: redo; Tail: ([$label_or_expr]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: redo
-    PsiElement: Implicit sub: redo([$label_or_expr])([$label_or_expr])
+	Lookups: redo
+	PsiElement: Implicit sub: redo([$label_or_expr])([$label_or_expr])
 Text: ref; Tail: ([$reference]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: ref
-    PsiElement: Implicit sub: ref([$reference])([$reference])
+	Lookups: ref
+	PsiElement: Implicit sub: ref([$reference])([$reference])
 Text: rename; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: rename
-    PsiElement: Implicit sub: rename()
+	Lookups: rename
+	PsiElement: Implicit sub: rename()
 Text: require; Tail: ([$filename]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: require
-    PsiElement: Implicit sub: require([$filename])([$filename])
+	Lookups: require
+	PsiElement: Implicit sub: require([$filename])([$filename])
 Text: reset; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: reset
-    PsiElement: Implicit sub: reset()
+	Lookups: reset
+	PsiElement: Implicit sub: reset()
 Text: return; Tail: ([$scalar_or_list]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: return
-    PsiElement: Implicit sub: return([$scalar_or_list])([$scalar_or_list])
+	Lookups: return
+	PsiElement: Implicit sub: return([$scalar_or_list])([$scalar_or_list])
 Text: reverse; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: reverse
-    PsiElement: Implicit sub: reverse()
+	Lookups: reverse
+	PsiElement: Implicit sub: reverse()
 Text: rewinddir; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: rewinddir
-    PsiElement: Implicit sub: rewinddir()
+	Lookups: rewinddir
+	PsiElement: Implicit sub: rewinddir()
 Text: rindex; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: rindex
-    PsiElement: Implicit sub: rindex()
+	Lookups: rindex
+	PsiElement: Implicit sub: rindex()
 Text: rmdir; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: rmdir
-    PsiElement: Implicit sub: rmdir()
+	Lookups: rmdir
+	PsiElement: Implicit sub: rmdir()
 Text: say; Tail: ([$file_handle, @list]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: say
-    PsiElement: Implicit sub: say([$file_handle, @list])([$file_handle], [@list])
+	Lookups: say
+	PsiElement: Implicit sub: say([$file_handle, @list])([$file_handle], [@list])
 Text: scalar; Tail: (@list); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: scalar
-    PsiElement: Implicit sub: scalar(@list)(@list)
+	Lookups: scalar
+	PsiElement: Implicit sub: scalar(@list)(@list)
 Text: seek; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: seek
-    PsiElement: Implicit sub: seek()
+	Lookups: seek
+	PsiElement: Implicit sub: seek()
 Text: seekdir; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: seekdir
-    PsiElement: Implicit sub: seekdir()
+	Lookups: seekdir
+	PsiElement: Implicit sub: seekdir()
 Text: select; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: select
-    PsiElement: Implicit sub: select()
+	Lookups: select
+	PsiElement: Implicit sub: select()
 Text: semctl; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: semctl
-    PsiElement: Implicit sub: semctl()
+	Lookups: semctl
+	PsiElement: Implicit sub: semctl()
 Text: semget; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: semget
-    PsiElement: Implicit sub: semget()
+	Lookups: semget
+	PsiElement: Implicit sub: semget()
 Text: semop; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: semop
-    PsiElement: Implicit sub: semop()
+	Lookups: semop
+	PsiElement: Implicit sub: semop()
 Text: send; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: send
-    PsiElement: Implicit sub: send()
+	Lookups: send
+	PsiElement: Implicit sub: send()
 Text: setgrent; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: setgrent
-    PsiElement: Implicit sub: setgrent()
+	Lookups: setgrent
+	PsiElement: Implicit sub: setgrent()
 Text: sethostent; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: sethostent
-    PsiElement: Implicit sub: sethostent()
+	Lookups: sethostent
+	PsiElement: Implicit sub: sethostent()
 Text: setnetent; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: setnetent
-    PsiElement: Implicit sub: setnetent()
+	Lookups: setnetent
+	PsiElement: Implicit sub: setnetent()
 Text: setpgrp; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: setpgrp
-    PsiElement: Implicit sub: setpgrp()
+	Lookups: setpgrp
+	PsiElement: Implicit sub: setpgrp()
 Text: setpriority; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: setpriority
-    PsiElement: Implicit sub: setpriority()
+	Lookups: setpriority
+	PsiElement: Implicit sub: setpriority()
 Text: setprotoent; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: setprotoent
-    PsiElement: Implicit sub: setprotoent()
+	Lookups: setprotoent
+	PsiElement: Implicit sub: setprotoent()
 Text: setpwent; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: setpwent
-    PsiElement: Implicit sub: setpwent()
+	Lookups: setpwent
+	PsiElement: Implicit sub: setpwent()
 Text: setservent; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: setservent
-    PsiElement: Implicit sub: setservent()
+	Lookups: setservent
+	PsiElement: Implicit sub: setservent()
 Text: setsockopt; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: setsockopt
-    PsiElement: Implicit sub: setsockopt()
+	Lookups: setsockopt
+	PsiElement: Implicit sub: setsockopt()
 Text: shift; Tail: ([@array]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: shift
-    PsiElement: Implicit sub: shift([@array])([@array])
+	Lookups: shift
+	PsiElement: Implicit sub: shift([@array])([@array])
 Text: shmctl; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: shmctl
-    PsiElement: Implicit sub: shmctl()
+	Lookups: shmctl
+	PsiElement: Implicit sub: shmctl()
 Text: shmget; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: shmget
-    PsiElement: Implicit sub: shmget()
+	Lookups: shmget
+	PsiElement: Implicit sub: shmget()
 Text: shmread; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: shmread
-    PsiElement: Implicit sub: shmread()
+	Lookups: shmread
+	PsiElement: Implicit sub: shmread()
 Text: shmwrite; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: shmwrite
-    PsiElement: Implicit sub: shmwrite()
+	Lookups: shmwrite
+	PsiElement: Implicit sub: shmwrite()
 Text: shutdown; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: shutdown
-    PsiElement: Implicit sub: shutdown()
+	Lookups: shutdown
+	PsiElement: Implicit sub: shutdown()
 Text: sin; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: sin
-    PsiElement: Implicit sub: sin()
+	Lookups: sin
+	PsiElement: Implicit sub: sin()
 Text: sleep; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: sleep
-    PsiElement: Implicit sub: sleep()
+	Lookups: sleep
+	PsiElement: Implicit sub: sleep()
 Text: socket; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: socket
-    PsiElement: Implicit sub: socket()
+	Lookups: socket
+	PsiElement: Implicit sub: socket()
 Text: socketpair; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: socketpair
-    PsiElement: Implicit sub: socketpair()
+	Lookups: socketpair
+	PsiElement: Implicit sub: socketpair()
 Text: sort; Tail: (@list [, $subname_or_block]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: sort
-    PsiElement: Implicit sub: sort(@list [, $subname_or_block])(@list, [$subname_or_block])
+	Lookups: sort
+	PsiElement: Implicit sub: sort(@list [, $subname_or_block])(@list, [$subname_or_block])
 Text: splice; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: splice
-    PsiElement: Implicit sub: splice()
+	Lookups: splice
+	PsiElement: Implicit sub: splice()
 Text: split; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: split
-    PsiElement: Implicit sub: split()
+	Lookups: split
+	PsiElement: Implicit sub: split()
 Text: sprintf; Tail: ($format, @list); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: sprintf
-    PsiElement: Implicit sub: sprintf($format, @list)($format, @list)
+	Lookups: sprintf
+	PsiElement: Implicit sub: sprintf($format, @list)($format, @list)
 Text: sqrt; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: sqrt
-    PsiElement: Implicit sub: sqrt()
+	Lookups: sqrt
+	PsiElement: Implicit sub: sqrt()
 Text: srand; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: srand
-    PsiElement: Implicit sub: srand()
+	Lookups: srand
+	PsiElement: Implicit sub: srand()
 Text: stat; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: stat
-    PsiElement: Implicit sub: stat()
+	Lookups: stat
+	PsiElement: Implicit sub: stat()
 Text: state; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: state
-    PsiElement: Implicit sub: state()
+	Lookups: state
+	PsiElement: Implicit sub: state()
 Text: study; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: study
-    PsiElement: Implicit sub: study()
+	Lookups: study
+	PsiElement: Implicit sub: study()
 Text: substr; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: substr
-    PsiElement: Implicit sub: substr()
+	Lookups: substr
+	PsiElement: Implicit sub: substr()
 Text: symlink; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: symlink
-    PsiElement: Implicit sub: symlink()
+	Lookups: symlink
+	PsiElement: Implicit sub: symlink()
 Text: syscall; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: syscall
-    PsiElement: Implicit sub: syscall()
+	Lookups: syscall
+	PsiElement: Implicit sub: syscall()
 Text: sysopen; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: sysopen
-    PsiElement: Implicit sub: sysopen()
+	Lookups: sysopen
+	PsiElement: Implicit sub: sysopen()
 Text: sysread; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: sysread
-    PsiElement: Implicit sub: sysread()
+	Lookups: sysread
+	PsiElement: Implicit sub: sysread()
 Text: sysseek; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: sysseek
-    PsiElement: Implicit sub: sysseek()
+	Lookups: sysseek
+	PsiElement: Implicit sub: sysseek()
 Text: system; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: system
-    PsiElement: Implicit sub: system()
+	Lookups: system
+	PsiElement: Implicit sub: system()
 Text: syswrite; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: syswrite
-    PsiElement: Implicit sub: syswrite()
+	Lookups: syswrite
+	PsiElement: Implicit sub: syswrite()
 Text: tell; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: tell
-    PsiElement: Implicit sub: tell()
+	Lookups: tell
+	PsiElement: Implicit sub: tell()
 Text: telldir; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: telldir
-    PsiElement: Implicit sub: telldir()
+	Lookups: telldir
+	PsiElement: Implicit sub: telldir()
 Text: tie; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: tie
-    PsiElement: Implicit sub: tie()
+	Lookups: tie
+	PsiElement: Implicit sub: tie()
 Text: tied; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: tied
-    PsiElement: Implicit sub: tied()
+	Lookups: tied
+	PsiElement: Implicit sub: tied()
 Text: time; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: time
-    PsiElement: Implicit sub: time()
+	Lookups: time
+	PsiElement: Implicit sub: time()
 Text: times; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: times
-    PsiElement: Implicit sub: times()
+	Lookups: times
+	PsiElement: Implicit sub: times()
 Text: truncate; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: truncate
-    PsiElement: Implicit sub: truncate()
+	Lookups: truncate
+	PsiElement: Implicit sub: truncate()
 Text: uc; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: uc
-    PsiElement: Implicit sub: uc()
+	Lookups: uc
+	PsiElement: Implicit sub: uc()
 Text: ucfirst; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: ucfirst
-    PsiElement: Implicit sub: ucfirst()
+	Lookups: ucfirst
+	PsiElement: Implicit sub: ucfirst()
 Text: umask; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: umask
-    PsiElement: Implicit sub: umask()
+	Lookups: umask
+	PsiElement: Implicit sub: umask()
 Text: undef; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: undef
-    PsiElement: Implicit sub: undef()
+	Lookups: undef
+	PsiElement: Implicit sub: undef()
 Text: unlink; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: unlink
-    PsiElement: Implicit sub: unlink()
+	Lookups: unlink
+	PsiElement: Implicit sub: unlink()
 Text: unpack; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: unpack
-    PsiElement: Implicit sub: unpack()
+	Lookups: unpack
+	PsiElement: Implicit sub: unpack()
 Text: unshift; Tail: (@array, @list); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: unshift
-    PsiElement: Implicit sub: unshift(@array, @list)(@array, @list)
+	Lookups: unshift
+	PsiElement: Implicit sub: unshift(@array, @list)(@array, @list)
 Text: untie; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: untie
-    PsiElement: Implicit sub: untie()
+	Lookups: untie
+	PsiElement: Implicit sub: untie()
 Text: use; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: use
-    PsiElement: Implicit sub: use()
+	Lookups: use
+	PsiElement: Implicit sub: use()
 Text: utime; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: utime
-    PsiElement: Implicit sub: utime()
+	Lookups: utime
+	PsiElement: Implicit sub: utime()
 Text: values; Tail: (%hash_or_array); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: values
-    PsiElement: Implicit sub: values(%hash_or_array)(%hash_or_array)
+	Lookups: values
+	PsiElement: Implicit sub: values(%hash_or_array)(%hash_or_array)
 Text: vec; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: vec
-    PsiElement: Implicit sub: vec()
+	Lookups: vec
+	PsiElement: Implicit sub: vec()
 Text: wait; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: wait
-    PsiElement: Implicit sub: wait()
+	Lookups: wait
+	PsiElement: Implicit sub: wait()
 Text: waitpid; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: waitpid
-    PsiElement: Implicit sub: waitpid()
+	Lookups: waitpid
+	PsiElement: Implicit sub: waitpid()
 Text: wantarray; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: wantarray
-    PsiElement: Implicit sub: wantarray()
+	Lookups: wantarray
+	PsiElement: Implicit sub: wantarray()
 Text: warn; Tail: (@messages); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: warn
-    PsiElement: Implicit sub: warn(@messages)(@messages)
+	Lookups: warn
+	PsiElement: Implicit sub: warn(@messages)(@messages)
 Text: write; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: write
-    PsiElement: Implicit sub: write()
+	Lookups: write
+	PsiElement: Implicit sub: write()
 Text: x; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: x
-    PsiElement: Implicit sub: x()
+	Lookups: x
+	PsiElement: Implicit sub: x()

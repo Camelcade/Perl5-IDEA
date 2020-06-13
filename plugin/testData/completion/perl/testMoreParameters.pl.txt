@@ -1,93 +1,93 @@
 Text: $TODO; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: $TODO
-    String
+	Lookups: $TODO
+	String: $TODO
 Text: BAIL_OUT; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: BAIL_OUT
-    String
+	Lookups: BAIL_OUT
+	String: BAIL_OUT
 Text: can_ok; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: can_ok
-    String
+	Lookups: can_ok
+	String: can_ok
 Text: cmp_ok; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: cmp_ok
-    String
+	Lookups: cmp_ok
+	String: cmp_ok
 Text: diag; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: diag
-    String
+	Lookups: diag
+	String: diag
 Text: done_testing; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: done_testing
-    String
+	Lookups: done_testing
+	String: done_testing
 Text: eq_array; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: eq_array
-    String
+	Lookups: eq_array
+	String: eq_array
 Text: eq_hash; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: eq_hash
-    String
+	Lookups: eq_hash
+	String: eq_hash
 Text: eq_set; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: eq_set
-    String
+	Lookups: eq_set
+	String: eq_set
 Text: explain; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: explain
-    String
+	Lookups: explain
+	String: explain
 Text: fail; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: fail
-    String
+	Lookups: fail
+	String: fail
 Text: is; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: is
-    String
+	Lookups: is
+	String: is
 Text: is_deeply; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: is_deeply
-    String
+	Lookups: is_deeply
+	String: is_deeply
 Text: isa_ok; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: isa_ok
-    String
+	Lookups: isa_ok
+	String: isa_ok
 Text: isnt; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: isnt
-    String
+	Lookups: isnt
+	String: isnt
 Text: like; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: like
-    String
+	Lookups: like
+	String: like
 Text: new_ok; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: new_ok
-    String
+	Lookups: new_ok
+	String: new_ok
 Text: no_plan; Tail: null; Type: ; Icon: /option.png; Type Icon: null
-Lookups: no_plan
-    String
+	Lookups: no_plan
+	String: no_plan
 Text: note; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: note
-    String
+	Lookups: note
+	String: note
 Text: ok; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: ok
-    String
+	Lookups: ok
+	String: ok
 Text: pass; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: pass
-    String
+	Lookups: pass
+	String: pass
 Text: plan; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: plan
-    String
+	Lookups: plan
+	String: plan
 Text: require_ok; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: require_ok
-    String
+	Lookups: require_ok
+	String: require_ok
 Text: skip; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: skip
-    String
+	Lookups: skip
+	String: skip
 Text: skip_all; Tail: null; Type: Skip all tests; Icon: /option.png; Type Icon: null
-Lookups: skip_all
-    String
+	Lookups: skip_all
+	String: skip_all
 Text: subtest; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: subtest
-    String
+	Lookups: subtest
+	String: subtest
 Text: tests; Tail: null; Type: Number of tests expected; Icon: /option.png; Type Icon: null
-Lookups: tests
-    String
+	Lookups: tests
+	String: tests
 Text: todo; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: todo
-    String
+	Lookups: todo
+	String: todo
 Text: todo_skip; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: todo_skip
-    String
+	Lookups: todo_skip
+	String: todo_skip
 Text: unlike; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: unlike
-    String
+	Lookups: unlike
+	String: unlike
 Text: use_ok; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: use_ok
-    String
+	Lookups: use_ok
+	String: use_ok

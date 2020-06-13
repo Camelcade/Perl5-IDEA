@@ -1,33 +1,33 @@
 Text: AUTHORS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: AUTHORS
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2957 in perlmroapi.pod
+	Lookups: AUTHORS
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2957 in perlmroapi.pod
 Text: Caching; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Caching
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2028 in perlmroapi.pod
+	Lookups: Caching
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2028 in perlmroapi.pod
 Text: Callbacks; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Callbacks
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1068 in perlmroapi.pod
+	Lookups: Callbacks
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1068 in perlmroapi.pod
 Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: DESCRIPTION
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 67 in perlmroapi.pod
+	Lookups: DESCRIPTION
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 67 in perlmroapi.pod
 Text: Examples; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: Examples
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2771 in perlmroapi.pod
+	Lookups: Examples
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2771 in perlmroapi.pod
 Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
-Lookups: NAME
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlmroapi.pod
+	Lookups: NAME
+	PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlmroapi.pod
 Text: hash; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: hash
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 997 in perlmroapi.pod
+	Lookups: hash
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 997 in perlmroapi.pod
 Text: kflags; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: kflags
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 851 in perlmroapi.pod
+	Lookups: kflags
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 851 in perlmroapi.pod
 Text: length; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: length
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 816 in perlmroapi.pod
+	Lookups: length
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 816 in perlmroapi.pod
 Text: name; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: name
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 755 in perlmroapi.pod
+	Lookups: name
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 755 in perlmroapi.pod
 Text: resolve; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-Lookups: resolve
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 683 in perlmroapi.pod
+	Lookups: resolve
+	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 683 in perlmroapi.pod

@@ -1,15 +1,15 @@
 Text: MULTICONST2; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: MULTICONST2
-    PsiElement: PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Foo::Bar::MULTICONST2; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 189 in exportArrayEmpty.pl
+	Lookups: MULTICONST2
+	PsiElement: PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Foo::Bar::MULTICONST2; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 189 in exportArrayEmpty.pl
 Text: multiconst; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: multiconst
-    PsiElement: PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Foo::Bar::multiconst; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 168 in exportArrayEmpty.pl
+	Lookups: multiconst
+	PsiElement: PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Foo::Bar::multiconst; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 168 in exportArrayEmpty.pl
 Text: singleconst; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: singleconst
-    PsiElement: PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Foo::Bar::singleconst; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 129 in exportArrayEmpty.pl
+	Lookups: singleconst
+	PsiElement: PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Foo::Bar::singleconst; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 129 in exportArrayEmpty.pl
 Text: something; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: something
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Foo::Bar::something at 73 in exportArrayEmpty.pl
+	Lookups: something
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Foo::Bar::something at 73 in exportArrayEmpty.pl
 Text: somethingelse; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: somethingelse
-    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Foo::Bar::somethingelse at 92 in exportArrayEmpty.pl
+	Lookups: somethingelse
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Foo::Bar::somethingelse at 92 in exportArrayEmpty.pl
