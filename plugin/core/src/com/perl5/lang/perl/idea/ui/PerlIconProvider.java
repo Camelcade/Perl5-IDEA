@@ -65,20 +65,7 @@ public class PerlIconProvider extends IconProvider {
   }
 
   public static @Nullable Icon getIcon(@Nullable PerlVariableType actualType) {
-    if (actualType == null) {
-      return null;
-    }
-    switch (actualType) {
-      case SCALAR:
-        return PerlIcons.SCALAR_GUTTER_ICON;
-      case ARRAY:
-        return PerlIcons.ARRAY_GUTTER_ICON;
-      case HASH:
-        return PerlIcons.HASH_GUTTER_ICON;
-      case GLOB:
-        return PerlIcons.GLOB_GUTTER_ICON;
-    }
-    return null;
+    return actualType == null ? null : actualType.getIcon();
   }
 }
 

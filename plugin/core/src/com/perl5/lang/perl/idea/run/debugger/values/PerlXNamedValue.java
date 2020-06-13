@@ -187,7 +187,7 @@ public class PerlXNamedValue extends XNamedValue {
     }
 
     final PerlVariableType variableType = PerlVariableType.bySigil(name.charAt(0));
-    if (variableType == null || variableType == PerlVariableType.CODE) {
+    if (variableType == PerlVariableType.CODE) {
       return false;
     }
 

@@ -16,32 +16,41 @@
 
 package com.perl5.lang.perl.psi.utils;
 
-import org.jetbrains.annotations.Nullable;
+import com.perl5.PerlIcons;
+import org.jetbrains.annotations.NotNull;
+
+import javax.swing.*;
 
 
 public enum PerlVariableType {
-  SCALAR('$'),
-  ARRAY('@'),
-  HASH('%'),
-  GLOB('*'),
-  CODE('&');
+  SCALAR('$', PerlIcons.SCALAR_GUTTER_ICON),
+  ARRAY('@', PerlIcons.ARRAY_GUTTER_ICON),
+  HASH('%', PerlIcons.HASH_GUTTER_ICON),
+  GLOB('*', PerlIcons.GLOB_GUTTER_ICON),
+  CODE('&', PerlIcons.SUB_GUTTER_ICON);
 
   private final char mySigil;
+  private final @NotNull Icon myIcon;
 
-  PerlVariableType(char sigil) {
+  PerlVariableType(char sigil, @NotNull Icon icon) {
     mySigil = sigil;
+    myIcon = icon;
   }
 
   public char getSigil() {
     return mySigil;
   }
 
-  public static @Nullable PerlVariableType bySigil(char sigil) {
+  public @NotNull Icon getIcon() {
+    return myIcon;
+  }
+
+  public static @NotNull PerlVariableType bySigil(char sigil) {
     for (PerlVariableType value : PerlVariableType.values()) {
       if (value.getSigil() == sigil) {
         return value;
       }
     }
-    return null;
+    throw new RuntimeException("Uknown sigil: " + sigil);
   }
 }

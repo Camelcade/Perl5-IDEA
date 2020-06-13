@@ -173,13 +173,12 @@ public abstract class PerlImplicitDeclarationsProvider {
       return null;
     }
 
-    PerlVariableType variableType;
     String type = element.getAttributeValue("type");
-    if (type == null || type.length() != 1 || (variableType = PerlVariableType.bySigil(type.charAt(0))) == null) {
+    if (type == null || type.length() != 1) {
       LOG.warn("Unknown type modifier for argument: " + variableName + " in " + subName);
       return null;
     }
-    return PerlSubArgument.create(variableType, variableName, isOptional);
+    return PerlSubArgument.create(PerlVariableType.bySigil(type.charAt(0)), variableName, isOptional);
   }
 
 }

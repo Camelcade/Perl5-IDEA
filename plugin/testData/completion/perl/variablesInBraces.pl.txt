@@ -1,8 +1,8 @@
 Text: ARRAY_VAR; Tail: []; Type: MyTest::Some::Package; Icon: /array_gutter_icon.png; Type Icon: null
-	Lookups: $MyTest::Some::Package::ARRAY_VAR, ARRAY_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 171 in Package.pm
-Text: ARRAY_VAR; Tail: []; Type: MyTest::Some::Package; Icon: /array_gutter_icon.png; Type Icon: null
 	Lookups: @MyTest::Some::Package::ARRAY_VAR, ARRAY_VAR
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 171 in Package.pm
+Text: ARRAY_VAR; Tail: []; Type: MyTest::Some::Package; Icon: /scalar_gutter_icon.png; Type Icon: null
+	Lookups: $MyTest::Some::Package::ARRAY_VAR, ARRAY_VAR
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 171 in Package.pm
 Text: ARRAY_VAR; Tail: null; Type: MyTest::Some::Package; Icon: /array_gutter_icon.png; Type Icon: null
 	Lookups: @MyTest::Some::Package::ARRAY_VAR, ARRAY_VAR
@@ -10,20 +10,20 @@ Text: ARRAY_VAR; Tail: null; Type: MyTest::Some::Package; Icon: /array_gutter_ic
 Text: HASH_VAR; Tail: null; Type: MyTest::Some::Package; Icon: /hash_gutter_icon.png; Type Icon: null
 	Lookups: %MyTest::Some::Package::HASH_VAR, HASH_VAR
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 187 in Package.pm
-Text: HASH_VAR; Tail: {}; Type: MyTest::Some::Package; Icon: /hash_gutter_icon.png; Type Icon: null
-	Lookups: $MyTest::Some::Package::HASH_VAR, HASH_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 187 in Package.pm
-Text: HASH_VAR; Tail: {}; Type: MyTest::Some::Package; Icon: /hash_gutter_icon.png; Type Icon: null
+Text: HASH_VAR; Tail: {}; Type: MyTest::Some::Package; Icon: /array_gutter_icon.png; Type Icon: null
 	Lookups: @MyTest::Some::Package::HASH_VAR, HASH_VAR
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 187 in Package.pm
+Text: HASH_VAR; Tail: {}; Type: MyTest::Some::Package; Icon: /scalar_gutter_icon.png; Type Icon: null
+	Lookups: $MyTest::Some::Package::HASH_VAR, HASH_VAR
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 187 in Package.pm
 Text: SCALAR_VAR; Tail: null; Type: MyTest::Some::Package; Icon: /scalar_gutter_icon.png; Type Icon: null
 	Lookups: $MyTest::Some::Package::SCALAR_VAR, SCALAR_VAR
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 154 in Package.pm
 Text: array_variable; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
-	Lookups: $array_variable, array_variable
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 21 in variablesInBraces.pl
-Text: array_variable; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
 	Lookups: @array_variable, array_variable
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 21 in variablesInBraces.pl
+Text: array_variable; Tail: []; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+	Lookups: $array_variable, array_variable
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 21 in variablesInBraces.pl
 Text: array_variable; Tail: null; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
 	Lookups: @array_variable, array_variable
@@ -31,11 +31,11 @@ Text: array_variable; Tail: null; Type: null; Icon: /array_gutter_icon.png; Type
 Text: hash_variable; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
 	Lookups: %hash_variable, hash_variable
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 38 in variablesInBraces.pl
-Text: hash_variable; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
-	Lookups: $hash_variable, hash_variable
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 38 in variablesInBraces.pl
-Text: hash_variable; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+Text: hash_variable; Tail: {}; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
 	Lookups: @hash_variable, hash_variable
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 38 in variablesInBraces.pl
+Text: hash_variable; Tail: {}; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+	Lookups: $hash_variable, hash_variable
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 38 in variablesInBraces.pl
 Text: scalar_variable; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
 	Lookups: $scalar_variable, scalar_variable

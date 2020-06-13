@@ -46,6 +46,7 @@ import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.swing.*;
 import java.util.Objects;
 import java.util.Set;
 
@@ -103,12 +104,17 @@ public class PerlVariableCompletionUtil {
       }
     }
 
+    Icon icon;
     if (sigilToPrepend != '_') {
       lookupString = sigilToPrepend + lookupString;
+      icon = PerlVariableType.bySigil(sigilToPrepend).getIcon();
+    }
+    else {
+      icon = PerlIconProvider.getIcon(element);
     }
 
     LookupElementBuilder elementBuilder = LookupElementBuilder.create(element, lookupString)
-      .withIcon(PerlIconProvider.getIcon(element))
+      .withIcon(icon)
       .withPresentableText(variableName);
 
     if (isBuiltIn) {

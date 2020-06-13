@@ -1,14 +1,14 @@
 Text: ARRAY_VAR; Tail: []; Type: Foo::Bar; Icon: /array_gutter_icon.png; Type Icon: null
-	Lookups: $ARRAY_VAR, ARRAY_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 37 in noSigilArray.pl
-Text: ARRAY_VAR; Tail: []; Type: Foo::Bar; Icon: /array_gutter_icon.png; Type Icon: null
 	Lookups: @ARRAY_VAR, ARRAY_VAR
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 37 in noSigilArray.pl
-Text: ARRAY_VAR; Tail: []; Type: MyTest::Some::Package; Icon: /array_gutter_icon.png; Type Icon: null
-	Lookups: $MyTest::Some::Package::ARRAY_VAR, ARRAY_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 171 in Package.pm
+Text: ARRAY_VAR; Tail: []; Type: Foo::Bar; Icon: /scalar_gutter_icon.png; Type Icon: null
+	Lookups: $ARRAY_VAR, ARRAY_VAR
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 37 in noSigilArray.pl
 Text: ARRAY_VAR; Tail: []; Type: MyTest::Some::Package; Icon: /array_gutter_icon.png; Type Icon: null
 	Lookups: @MyTest::Some::Package::ARRAY_VAR, ARRAY_VAR
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 171 in Package.pm
+Text: ARRAY_VAR; Tail: []; Type: MyTest::Some::Package; Icon: /scalar_gutter_icon.png; Type Icon: null
+	Lookups: $MyTest::Some::Package::ARRAY_VAR, ARRAY_VAR
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 171 in Package.pm
 Text: ARRAY_VAR; Tail: null; Type: Foo::Bar; Icon: /array_gutter_icon.png; Type Icon: null
 	Lookups: @ARRAY_VAR, ARRAY_VAR
@@ -17,10 +17,10 @@ Text: ARRAY_VAR; Tail: null; Type: MyTest::Some::Package; Icon: /array_gutter_ic
 	Lookups: @MyTest::Some::Package::ARRAY_VAR, ARRAY_VAR
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 171 in Package.pm
 Text: array_var; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
-	Lookups: $array_var, array_var
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 21 in noSigilArray.pl
-Text: array_var; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
 	Lookups: @array_var, array_var
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 21 in noSigilArray.pl
+Text: array_var; Tail: []; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+	Lookups: $array_var, array_var
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 21 in noSigilArray.pl
 Text: array_var; Tail: null; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
 	Lookups: @array_var, array_var

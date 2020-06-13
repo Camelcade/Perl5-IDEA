@@ -22,11 +22,11 @@ Text: LAST_PAREN_MATCH; Tail: null; Type: Built-in; Icon: /hash_gutter_icon.png;
 Text: LAST_PAREN_MATCH; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
 	Lookups: $LAST_PAREN_MATCH, LAST_PAREN_MATCH
 	PsiElement: Built-in: $LAST_PAREN_MATCH
-Text: LAST_PAREN_MATCH; Tail: {}; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: null
-	Lookups: $LAST_PAREN_MATCH, LAST_PAREN_MATCH
-	PsiElement: Built-in: %LAST_PAREN_MATCH
-Text: LAST_PAREN_MATCH; Tail: {}; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: null
+Text: LAST_PAREN_MATCH; Tail: {}; Type: Built-in; Icon: /array_gutter_icon.png; Type Icon: null
 	Lookups: @LAST_PAREN_MATCH, LAST_PAREN_MATCH
+	PsiElement: Built-in: %LAST_PAREN_MATCH
+Text: LAST_PAREN_MATCH; Tail: {}; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
+	Lookups: $LAST_PAREN_MATCH, LAST_PAREN_MATCH
 	PsiElement: Built-in: %LAST_PAREN_MATCH
 Text: LAST_REGEXP_CODE_RESULT; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
 	Lookups: $LAST_REGEXP_CODE_RESULT, LAST_REGEXP_CODE_RESULT
@@ -52,17 +52,17 @@ Text: Readonly; Tail: null; Type: Readonly; Icon: /subroutine_gutter_icon.png; T
 Text: {^CAPTURE_ALL}; Tail: null; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: null
 	Lookups: %{^CAPTURE_ALL}, {^CAPTURE_ALL}
 	PsiElement: Built-in: %^CAPTURE_ALL
-Text: {^CAPTURE_ALL}; Tail: {}; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: null
-	Lookups: ${^CAPTURE_ALL}, {^CAPTURE_ALL}
-	PsiElement: Built-in: %^CAPTURE_ALL
-Text: {^CAPTURE_ALL}; Tail: {}; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: null
+Text: {^CAPTURE_ALL}; Tail: {}; Type: Built-in; Icon: /array_gutter_icon.png; Type Icon: null
 	Lookups: @{^CAPTURE_ALL}, {^CAPTURE_ALL}
 	PsiElement: Built-in: %^CAPTURE_ALL
-Text: {^CAPTURE}; Tail: []; Type: Built-in; Icon: /array_gutter_icon.png; Type Icon: null
-	Lookups: ${^CAPTURE}, {^CAPTURE}
-	PsiElement: Built-in: @^CAPTURE
+Text: {^CAPTURE_ALL}; Tail: {}; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
+	Lookups: ${^CAPTURE_ALL}, {^CAPTURE_ALL}
+	PsiElement: Built-in: %^CAPTURE_ALL
 Text: {^CAPTURE}; Tail: []; Type: Built-in; Icon: /array_gutter_icon.png; Type Icon: null
 	Lookups: @{^CAPTURE}, {^CAPTURE}
+	PsiElement: Built-in: @^CAPTURE
+Text: {^CAPTURE}; Tail: []; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
+	Lookups: ${^CAPTURE}, {^CAPTURE}
 	PsiElement: Built-in: @^CAPTURE
 Text: {^CAPTURE}; Tail: null; Type: Built-in; Icon: /array_gutter_icon.png; Type Icon: null
 	Lookups: @{^CAPTURE}, {^CAPTURE}
@@ -70,11 +70,11 @@ Text: {^CAPTURE}; Tail: null; Type: Built-in; Icon: /array_gutter_icon.png; Type
 Text: {^CAPTURE}; Tail: null; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: null
 	Lookups: %{^CAPTURE}, {^CAPTURE}
 	PsiElement: Built-in: %^CAPTURE
-Text: {^CAPTURE}; Tail: {}; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: null
-	Lookups: ${^CAPTURE}, {^CAPTURE}
-	PsiElement: Built-in: %^CAPTURE
-Text: {^CAPTURE}; Tail: {}; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: null
+Text: {^CAPTURE}; Tail: {}; Type: Built-in; Icon: /array_gutter_icon.png; Type Icon: null
 	Lookups: @{^CAPTURE}, {^CAPTURE}
+	PsiElement: Built-in: %^CAPTURE
+Text: {^CAPTURE}; Tail: {}; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
+	Lookups: ${^CAPTURE}, {^CAPTURE}
 	PsiElement: Built-in: %^CAPTURE
 Text: {^PREMATCH}; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
 	Lookups: ${^PREMATCH}, {^PREMATCH}
