@@ -46,7 +46,10 @@ import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
 import java.util.Set;
+
+import static com.perl5.PerlIcons.GLOB_GUTTER_ICON;
 
 public class PerlVariableCompletionUtil {
   public static @NotNull LookupElementBuilder processVariableLookupElement(@NotNull String name, @NotNull PerlVariableType variableType) {
@@ -129,7 +132,11 @@ public class PerlVariableCompletionUtil {
                           PerlVariableType.GLOB.getSigil() + variableName :
                           variableName;
 
-    LookupElementBuilder elementBuilder = LookupElementBuilder.create(typeGlob, lookupString).withIcon(PerlIconProvider.getIcon(typeGlob));
+    LookupElementBuilder elementBuilder = LookupElementBuilder
+      .create(typeGlob, lookupString)
+      .withPresentableText(Objects.requireNonNull(typeGlob.getName()))
+      .withTypeText(typeGlob.getNamespaceName(), true)
+      .withIcon(GLOB_GUTTER_ICON);
     return withSigil ? elementBuilder.withLookupString(variableName) : elementBuilder;
   }
 
