@@ -34,7 +34,7 @@ import com.perl5.lang.htmlmason.MasonCoreUtil;
 import com.perl5.lang.mason2.filetypes.MasonPurePerlComponentFileType;
 import com.perl5.lang.mason2.idea.configuration.MasonSettings;
 import com.perl5.lang.mason2.psi.impl.MasonFileImpl;
-import com.perl5.lang.perl.idea.completion.providers.processors.PerlCompletionProvider;
+import com.perl5.lang.perl.idea.completion.providers.PerlCompletionProvider;
 import com.perl5.lang.perl.psi.PerlString;
 import org.jetbrains.annotations.NotNull;
 
