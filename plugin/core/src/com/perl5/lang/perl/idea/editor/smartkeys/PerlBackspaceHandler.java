@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.editor.smartkeys;
 
 import com.intellij.codeInsight.editorActions.BackspaceHandlerDelegate;
 import com.intellij.openapi.editor.CaretModel;
+import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.ex.EditorEx;
 import com.intellij.openapi.editor.highlighter.EditorHighlighter;
@@ -25,6 +26,7 @@ import com.intellij.openapi.editor.highlighter.HighlighterIterator;
 import com.intellij.openapi.util.Key;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
@@ -65,6 +67,17 @@ public class PerlBackspaceHandler extends BackspaceHandlerDelegate {
           POST_HANDLER.set(editor, () -> true);
         }
         editor.getDocument().deleteString(startOffsetToDelete, iterator.getEnd());
+      }
+    }
+    else if (c == ':' && Perl5CodeInsightSettings.getInstance().AUTO_INSERT_COLON &&
+             currentOffset > 0 && (tokenToDelete == PACKAGE || tokenToDelete == QUALIFYING_PACKAGE)) {
+      Document document = editor.getDocument();
+      CharSequence documentCharsSequence = document.getCharsSequence();
+      if (documentCharsSequence.charAt(currentOffset - 1) == ':') {
+        document.deleteString(currentOffset - 1, currentOffset);
+      }
+      else if (currentOffset + 1 < documentCharsSequence.length() && documentCharsSequence.charAt(currentOffset + 1) == ':') {
+        document.deleteString(currentOffset + 1, currentOffset + 2);
       }
     }
   }

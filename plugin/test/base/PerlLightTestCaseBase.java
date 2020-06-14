@@ -2612,8 +2612,15 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     Assume.assumeFalse("Not running on windows", SystemInfo.isWindows);
   }
 
-
   protected void setCompletionLimit(int value) {
     Registry.get("ide.completion.variant.limit").setValue(value, getTestRootDisposable());
+  }
+
+  protected void disableAutoColon() {
+    Perl5CodeInsightSettings.getInstance().AUTO_INSERT_COLON = false;
+  }
+
+  protected void enableAutoColon() {
+    Perl5CodeInsightSettings.getInstance().AUTO_INSERT_COLON = true;
   }
 }

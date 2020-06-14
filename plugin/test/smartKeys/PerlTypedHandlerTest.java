@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,29 +49,5 @@ public class PerlTypedHandlerTest extends PerlSmartKeysTestCase {
   private void doTestSmartCommaSequence(boolean enabled) {
     Perl5CodeInsightSettings.getInstance().SMART_COMMA_SEQUENCE_TYPING = enabled;
     doTest(" ");
-  }
-
-  @Test
-  public void testDoubleColonInUseEnabled() {
-    Perl5CodeInsightSettings.getInstance().AUTO_INSERT_COLON = true;
-    doTest("use Mojolicious<caret>", ":", "use Mojolicious::<caret>");
-  }
-
-  @Test
-  public void testDoubleColonInUseDisabled() {
-    Perl5CodeInsightSettings.getInstance().AUTO_INSERT_COLON = false;
-    doTest("use Mojolicious<caret>", ":", "use Mojolicious:<caret>");
-  }
-
-  @Test
-  public void testExtraDoubleColonInUseEnabled() {
-    Perl5CodeInsightSettings.getInstance().AUTO_INSERT_COLON = true;
-    doTest("use Mojolicious::<caret>", ":", "use Mojolicious::<caret>");
-  }
-
-  @Test
-  public void testExtraDoubleColonInUseDisabled() {
-    Perl5CodeInsightSettings.getInstance().AUTO_INSERT_COLON = false;
-    doTest("use Mojolicious::<caret>", ":", "use Mojolicious:::<caret>");
   }
 }

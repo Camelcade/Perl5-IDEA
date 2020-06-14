@@ -39,6 +39,7 @@ import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ObjectUtils;
+import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
@@ -70,6 +71,9 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
                                          @NotNull Editor editor,
                                          @NotNull PsiFile file,
                                          @NotNull FileType fileType) {
+    if (!isMyFile(file)) {
+      return Result.CONTINUE;
+    }
     CaretModel caretModel = editor.getCaretModel();
     int currentOffset = caretModel.getOffset();
     Document document = editor.getDocument();
@@ -95,13 +99,16 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
       return Result.STOP;
     }
 
-    if (c == ':' && nextTokenType == PACKAGE && Perl5CodeInsightSettings.getInstance().AUTO_INSERT_COLON) {
-      if( currentOffset > 0 && documentSequence.charAt(currentOffset-1) != ':'){
-        document.insertString(currentOffset, "::");
-        caretModel.moveToOffset(currentOffset + 2);
+    if (c == ':' && Perl5CodeInsightSettings.getInstance().AUTO_INSERT_COLON && currentOffset > 0) {
+      HighlighterIterator precedingIterator = highlighter.createIterator(currentOffset - 1);
+      if (isPreColonSuffix(precedingIterator)) {
+        if (documentSequence.charAt(currentOffset - 1) != ':') {
+          document.insertString(currentOffset, "::");
+          caretModel.moveToOffset(currentOffset + 2);
+        }
+        AutoPopupController.getInstance(project).scheduleAutoPopup(editor);
+        return Result.STOP;
       }
-      AutoPopupController.getInstance(project).scheduleAutoPopup(editor);
-      return Result.STOP;
     }
 
     if (c == ' ') {
@@ -114,8 +121,30 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
     return Result.CONTINUE;
   }
 
+  /**
+   * @return true if we are at proper place for inserting two colons
+   */
+  private boolean isPreColonSuffix(HighlighterIterator precedingIterator) {
+    IElementType tokenType = precedingIterator.getTokenType();
+    if (tokenType == PACKAGE || tokenType == QUALIFYING_PACKAGE) {
+      return true;
+    }
+    if (tokenType != SUB_NAME) {
+      return false;
+    }
+    precedingIterator.retreat();
+    return !precedingIterator.atEnd() && precedingIterator.getTokenType() == QUALIFYING_PACKAGE;
+  }
+
+  private boolean isMyFile(@NotNull PsiFile file) {
+    return file.getLanguage().isKindOf(PerlLanguage.INSTANCE);
+  }
+
   @Override
   public @NotNull Result charTyped(char typedChar, @NotNull Project project, @NotNull Editor editor, @NotNull PsiFile file) {
+    if (!isMyFile(file)) {
+      return Result.CONTINUE;
+    }
     final int offset = editor.getCaretModel().getOffset() - 1;
     if (offset < 0) {
       return Result.CONTINUE;
