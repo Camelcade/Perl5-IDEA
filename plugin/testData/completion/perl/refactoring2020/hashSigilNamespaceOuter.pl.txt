@@ -1,6 +1,6 @@
 Text: EXPORT_TAGS; Tail: null; Type: MyTest::Some::Package; Icon: /hash_gutter_icon.png; Type Icon: null
 	Lookups: MyTest::Some::Package::EXPORT_TAGS
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 412 in Package.pm
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 413 in Package.pm
 Text: HASH_VAR; Tail: null; Type: MyTest::Some::Package; Icon: /hash_gutter_icon.png; Type Icon: null
 	Lookups: MyTest::Some::Package::HASH_VAR
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 187 in Package.pm

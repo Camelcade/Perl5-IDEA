@@ -1,4 +1,4 @@
-@array = (this => is => key => scalar Foo::Bar->something(1), 42, 69);
+@array = (this => is => key => scalar Foo::Bar::->something(1), 42, 69);
 
 %hash = @array;
 

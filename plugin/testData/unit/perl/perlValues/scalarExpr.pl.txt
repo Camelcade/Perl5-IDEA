@@ -1,4 +1,4 @@
-@array = (this => is => key => scalar Foo::Bar->something(1), 42, 69);
+@array = (this => is => key => scalar Foo::Bar::->something(1), 42, 69);
 
 %hash = @array;
 
@@ -7,7 +7,7 @@ $var = $hash{key};
 $v<caret>ar;
 ----------
 $var
-PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 109 in scalarExpr.pl
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 111 in scalarExpr.pl
 scalar Foo::Bar->something(1)
 ----------
 Resolved
