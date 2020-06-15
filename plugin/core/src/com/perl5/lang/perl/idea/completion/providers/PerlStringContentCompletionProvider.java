@@ -47,7 +47,7 @@ public class PerlStringContentCompletionProvider extends PerlCompletionProvider 
       return;
     }
 
-    PerlSimpleCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(withFqnSafeMatcher(result), element);
+    PerlSimpleCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(result, element);
 
     if (EXPORT_ASSIGNED_STRING_CONTENT.accepts(element)) // exporter assignments
     {

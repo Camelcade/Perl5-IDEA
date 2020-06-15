@@ -124,7 +124,11 @@ public class PerlVariableCompletionUtil {
       elementBuilder = elementBuilder.withTypeText(element.getNamespaceName(), true);
     }
 
-    return completionProcessor.process(sigilToPrepend == '_' ? elementBuilder : elementBuilder.withLookupString(variableName));
+    return completionProcessor.process(
+      sigilToPrepend == '_' ?
+      elementBuilder :
+      elementBuilder.withLookupString(
+        completionProcessor.isFullQualified() ? StringUtil.notNullize(element.getCanonicalName()) : variableName));
   }
 
   public static @Nullable LookupElementBuilder processVariableLookupElement(@NotNull PerlGlobVariable typeGlob,

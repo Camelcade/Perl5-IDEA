@@ -1,44 +1,44 @@
 Text: ARRAY_VAR; Tail: []; Type: MyTest::Some::Package; Icon: /array_gutter_icon.png; Type Icon: null
-	Lookups: @MyTest::Some::Package::ARRAY_VAR, ARRAY_VAR
+	Lookups: @MyTest::Some::Package::ARRAY_VAR, MyTest::Some::Package::ARRAY_VAR
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 171 in Package.pm
 Text: ARRAY_VAR; Tail: []; Type: MyTest::Some::Package; Icon: /scalar_gutter_icon.png; Type Icon: null
-	Lookups: $MyTest::Some::Package::ARRAY_VAR, ARRAY_VAR
+	Lookups: $MyTest::Some::Package::ARRAY_VAR, MyTest::Some::Package::ARRAY_VAR
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 171 in Package.pm
 Text: ARRAY_VAR; Tail: null; Type: MyTest::Some::Package; Icon: /array_gutter_icon.png; Type Icon: null
-	Lookups: @MyTest::Some::Package::ARRAY_VAR, ARRAY_VAR
+	Lookups: @MyTest::Some::Package::ARRAY_VAR, MyTest::Some::Package::ARRAY_VAR
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 171 in Package.pm
 Text: EXPORT; Tail: []; Type: MyTest::Some::Package; Icon: /array_gutter_icon.png; Type Icon: null
-	Lookups: @MyTest::Some::Package::EXPORT, EXPORT
+	Lookups: @MyTest::Some::Package::EXPORT, MyTest::Some::Package::EXPORT
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 36 in Package.pm
 Text: EXPORT; Tail: []; Type: MyTest::Some::Package; Icon: /scalar_gutter_icon.png; Type Icon: null
-	Lookups: $MyTest::Some::Package::EXPORT, EXPORT
+	Lookups: $MyTest::Some::Package::EXPORT, MyTest::Some::Package::EXPORT
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 36 in Package.pm
 Text: EXPORT; Tail: null; Type: MyTest::Some::Package; Icon: /array_gutter_icon.png; Type Icon: null
-	Lookups: @MyTest::Some::Package::EXPORT, EXPORT
+	Lookups: @MyTest::Some::Package::EXPORT, MyTest::Some::Package::EXPORT
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 36 in Package.pm
 Text: EXPORT_OK; Tail: []; Type: MyTest::Some::Package; Icon: /array_gutter_icon.png; Type Icon: null
-	Lookups: @MyTest::Some::Package::EXPORT_OK, EXPORT_OK
+	Lookups: @MyTest::Some::Package::EXPORT_OK, MyTest::Some::Package::EXPORT_OK
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 94 in Package.pm
 Text: EXPORT_OK; Tail: []; Type: MyTest::Some::Package; Icon: /scalar_gutter_icon.png; Type Icon: null
-	Lookups: $MyTest::Some::Package::EXPORT_OK, EXPORT_OK
+	Lookups: $MyTest::Some::Package::EXPORT_OK, MyTest::Some::Package::EXPORT_OK
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 94 in Package.pm
 Text: EXPORT_OK; Tail: null; Type: MyTest::Some::Package; Icon: /array_gutter_icon.png; Type Icon: null
-	Lookups: @MyTest::Some::Package::EXPORT_OK, EXPORT_OK
+	Lookups: @MyTest::Some::Package::EXPORT_OK, MyTest::Some::Package::EXPORT_OK
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 94 in Package.pm
 Text: HASH_VAR; Tail: null; Type: MyTest::Some::Package; Icon: /hash_gutter_icon.png; Type Icon: null
-	Lookups: %MyTest::Some::Package::HASH_VAR, HASH_VAR
+	Lookups: %MyTest::Some::Package::HASH_VAR, MyTest::Some::Package::HASH_VAR
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 187 in Package.pm
 Text: HASH_VAR; Tail: {}; Type: MyTest::Some::Package; Icon: /array_gutter_icon.png; Type Icon: null
-	Lookups: @MyTest::Some::Package::HASH_VAR, HASH_VAR
+	Lookups: @MyTest::Some::Package::HASH_VAR, MyTest::Some::Package::HASH_VAR
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 187 in Package.pm
 Text: HASH_VAR; Tail: {}; Type: MyTest::Some::Package; Icon: /scalar_gutter_icon.png; Type Icon: null
-	Lookups: $MyTest::Some::Package::HASH_VAR, HASH_VAR
+	Lookups: $MyTest::Some::Package::HASH_VAR, MyTest::Some::Package::HASH_VAR
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 187 in Package.pm
 Text: MULTICONST2; Tail: null; Type: MyTest::Some::Package; Icon: /constant_gutter_icon.png; Type Icon: null
 	Lookups: MULTICONST2
 	PsiElement: PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@MyTest::Some::Package::MULTICONST2; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 326 in Package.pm
 Text: SCALAR_VAR; Tail: null; Type: MyTest::Some::Package; Icon: /scalar_gutter_icon.png; Type Icon: null
-	Lookups: $MyTest::Some::Package::SCALAR_VAR, SCALAR_VAR
+	Lookups: $MyTest::Some::Package::SCALAR_VAR, MyTest::Some::Package::SCALAR_VAR
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 154 in Package.pm
 Text: SOMECONST2; Tail: null; Type: MyTest::Some::Package; Icon: /constant_gutter_icon.png; Type Icon: null
 	Lookups: SOMECONST2

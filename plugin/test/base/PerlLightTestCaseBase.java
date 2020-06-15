@@ -610,7 +610,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
         return;
       }
     }
-    fail("Unable to find lookup string: " + lookupString + " in " + Arrays.asList(lookupElements));
+    fail("Unable to find lookup string: " + lookupString + " in " + renderLookupElementsToString(lookupElements, null));
   }
 
 
@@ -647,71 +647,83 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
     addVirtualFileFilter();
     myFixture.complete(getCompletionType(), getCompletionInvocationCount());
-    List<String> result = new ArrayList<>();
     LookupElement[] elements = myFixture.getLookupElements();
     removeVirtualFileFilter();
-    if (elements != null) {
-      for (LookupElement lookupElement : elements) {
-        LookupElementPresentation presentation = new LookupElementPresentation();
-        lookupElement.renderElement(presentation);
+    UsefulTestCase.assertSameLinesWithFile(
+      getTestResultsFilePath(answerSuffix),
+      renderLookupElementsToString(elements, predicate));
+  }
 
-        if (predicate != null && !predicate.test(lookupElement, presentation)) {
-          continue;
-        }
-        StringBuilder sb = new StringBuilder();
+  protected @NotNull String renderLookupElementsToString(@Nullable LookupElement[] elements,
+                                                         @Nullable BiPredicate<? super LookupElement, ? super LookupElementPresentation> predicate) {
+    return String.join("\n", renderLookupElementsToList(elements, predicate));
+  }
 
-        Set<String> lookupStrings = lookupElement.getAllLookupStrings();
-        if (lookupStrings.size() > 1) {
-          Set<String> orderedSet = new LinkedHashSet<>();
-          orderedSet.add(lookupElement.getLookupString());
-          orderedSet.addAll(ContainerUtil.sorted(lookupStrings));
-          lookupStrings = orderedSet;
-        }
+  protected @NotNull List<String> renderLookupElementsToList(@Nullable LookupElement[] elements,
+                                                             @Nullable BiPredicate<? super LookupElement, ? super LookupElementPresentation> predicate) {
+    if (elements == null) {
+      return Collections.emptyList();
+    }
+    List<String> result = new ArrayList<>();
+    for (LookupElement lookupElement : elements) {
+      LookupElementPresentation presentation = new LookupElementPresentation();
+      lookupElement.renderElement(presentation);
 
-        sb.append("Text: ")
-          .append(presentation.getItemText())
-          .append("; Tail: ")
-          .append(presentation.getTailText())
-          .append("; Type: ")
-          .append(presentation.getTypeText())
-          .append("; Icon: ")
-          .append(getIconText(presentation.getIcon()))
-          .append("; Type Icon: ")
-          .append(getIconText(presentation.getTypeIcon()))
-          .append("\n\tLookups: ")
-          .append(String.join(", ", lookupStrings))
-        ;
-
-        Object lookupObject = lookupElement.getObject();
-        if (lookupObject instanceof PsiElement) {
-          sb.append("\n\tPsiElement: ").append(serializePsiElement((PsiElement)lookupObject));
-        }
-        else if (lookupObject instanceof VirtualFile) {
-          sb.append("\n\tVirtualFile: ").append(((VirtualFile)lookupObject).getName());
-        }
-        else if (lookupObject instanceof PerlExportDescriptor) {
-          sb.append("\n\tExport: ").append(lookupObject);
-        }
-        else if (lookupObject instanceof IElementType) {
-          sb.append("\n\tExport: ").append(lookupObject);
-        }
-        else if (lookupObject instanceof String) {
-          sb.append("\n\tString: ").append(lookupObject);
-        }
-        else if (lookupElement instanceof LiveTemplateLookupElementImpl) {
-          sb.append("\n\tLive template: ").append(((LiveTemplateLookupElementImpl)lookupElement).getTemplate());
-        }
-        else {
-          sb.append("\n\t").append(lookupObject.getClass().getSimpleName());
-        }
-
-        result.add(sb.toString());
+      if (predicate != null && !predicate.test(lookupElement, presentation)) {
+        continue;
       }
+      StringBuilder sb = new StringBuilder();
+
+      Set<String> lookupStrings = lookupElement.getAllLookupStrings();
+      if (lookupStrings.size() > 1) {
+        Set<String> orderedSet = new LinkedHashSet<>();
+        orderedSet.add(lookupElement.getLookupString());
+        orderedSet.addAll(ContainerUtil.sorted(lookupStrings));
+        lookupStrings = orderedSet;
+      }
+
+      sb.append("Text: ")
+        .append(presentation.getItemText())
+        .append("; Tail: ")
+        .append(presentation.getTailText())
+        .append("; Type: ")
+        .append(presentation.getTypeText())
+        .append("; Icon: ")
+        .append(getIconText(presentation.getIcon()))
+        .append("; Type Icon: ")
+        .append(getIconText(presentation.getTypeIcon()))
+        .append("\n\tLookups: ")
+        .append(String.join(", ", lookupStrings))
+      ;
+
+      Object lookupObject = lookupElement.getObject();
+      if (lookupObject instanceof PsiElement) {
+        sb.append("\n\tPsiElement: ").append(serializePsiElement((PsiElement)lookupObject));
+      }
+      else if (lookupObject instanceof VirtualFile) {
+        sb.append("\n\tVirtualFile: ").append(((VirtualFile)lookupObject).getName());
+      }
+      else if (lookupObject instanceof PerlExportDescriptor) {
+        sb.append("\n\tExport: ").append(lookupObject);
+      }
+      else if (lookupObject instanceof IElementType) {
+        sb.append("\n\tExport: ").append(lookupObject);
+      }
+      else if (lookupObject instanceof String) {
+        sb.append("\n\tString: ").append(lookupObject);
+      }
+      else if (lookupElement instanceof LiveTemplateLookupElementImpl) {
+        sb.append("\n\tLive template: ").append(((LiveTemplateLookupElementImpl)lookupElement).getTemplate());
+      }
+      else {
+        sb.append("\n\t").append(lookupObject.getClass().getSimpleName());
+      }
+
+      result.add(sb.toString());
     }
 
     ContainerUtil.sort(result);
-
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(answerSuffix), StringUtil.join(result, "\n"));
+    return result;
   }
 
   protected String getIconText(@Nullable Icon icon) {

@@ -58,7 +58,7 @@ public class PerlVariableNameCompletionProvider extends PerlCompletionProvider {
     boolean hasBraces = VARIABLE_OPEN_BRACES.contains(PsiUtilCore.getElementType(variableNameElement.getPrevSibling()));
     PerlVariableCompletionProcessorImpl variableCompletionProcessor =
       new PerlVariableCompletionProcessorImpl(
-        resultSet.caseInsensitive(),
+        resultSet,
         variableNameElement,
         namespaceName,
         hasBraces,

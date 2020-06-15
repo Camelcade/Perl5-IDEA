@@ -54,7 +54,7 @@ public class MasonComponentsCompletionProvider extends PerlCompletionProvider {
       String fullPrefix = ElementManipulators.getValueText(parent)
         .replace(CompletionInitializationContext.DUMMY_IDENTIFIER, "")
         .replace(CompletionInitializationContext.DUMMY_IDENTIFIER_TRIMMED, "");
-      result = withFqnSafeMatcher(result, fullPrefix);
+      result = result.withPrefixMatcher(fullPrefix);
 
       final CompletionResultSet finalResultSet = result;
 

@@ -2,4 +2,4 @@ package Foo::Bar;
 my @array_var;
 our @ARRAY_VAR;
 
-$array<complete ARRAY_VAR>;
+$Array<complete ARRAY_VAR>;

@@ -16,19 +16,8 @@
 
 package com.perl5.lang.perl.idea.completion.providers;
 
-import com.intellij.codeInsight.completion.*;
-import org.jetbrains.annotations.NotNull;
+import com.intellij.codeInsight.completion.CompletionParameters;
+import com.intellij.codeInsight.completion.CompletionProvider;
 
 public abstract class PerlCompletionProvider extends CompletionProvider<CompletionParameters> {
-  public static @NotNull CompletionResultSet withFqnSafeMatcher(@NotNull CompletionResultSet resultSet) {
-    PrefixMatcher matcher = resultSet.getPrefixMatcher();
-    if (matcher instanceof PlainPrefixMatcher) {
-      return resultSet;
-    }
-    return withFqnSafeMatcher(resultSet, matcher.getPrefix());
-  }
-
-  public static @NotNull CompletionResultSet withFqnSafeMatcher(@NotNull CompletionResultSet resultSet, @NotNull String prefix) {
-    return resultSet.withPrefixMatcher(new PlainPrefixMatcher(prefix));
-  }
 }

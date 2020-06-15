@@ -1,9 +1,3 @@
-Text: SCALAR_VAR; Tail: null; Type: Foo::Bar; Icon: /scalar_gutter_icon.png; Type Icon: null
-	Lookups: SCALAR_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 38 in scalarSigil.pl
-Text: SCALAR_VAR; Tail: null; Type: MyTest::Some::Package; Icon: /scalar_gutter_icon.png; Type Icon: null
-	Lookups: MyTest::Some::Package::SCALAR_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 154 in Package.pm
 Text: scalar_var; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
 	Lookups: scalar_var
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 21 in scalarSigil.pl

@@ -1,21 +1,3 @@
-Text: HASH_VAR; Tail: null; Type: Foo::Bar; Icon: /hash_gutter_icon.png; Type Icon: null
-	Lookups: %HASH_VAR, HASH_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 36 in noSigilHash.pl
-Text: HASH_VAR; Tail: null; Type: MyTest::Some::Package; Icon: /hash_gutter_icon.png; Type Icon: null
-	Lookups: %MyTest::Some::Package::HASH_VAR, HASH_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 187 in Package.pm
-Text: HASH_VAR; Tail: {}; Type: Foo::Bar; Icon: /array_gutter_icon.png; Type Icon: null
-	Lookups: @HASH_VAR, HASH_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 36 in noSigilHash.pl
-Text: HASH_VAR; Tail: {}; Type: Foo::Bar; Icon: /scalar_gutter_icon.png; Type Icon: null
-	Lookups: $HASH_VAR, HASH_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 36 in noSigilHash.pl
-Text: HASH_VAR; Tail: {}; Type: MyTest::Some::Package; Icon: /array_gutter_icon.png; Type Icon: null
-	Lookups: @MyTest::Some::Package::HASH_VAR, HASH_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 187 in Package.pm
-Text: HASH_VAR; Tail: {}; Type: MyTest::Some::Package; Icon: /scalar_gutter_icon.png; Type Icon: null
-	Lookups: $MyTest::Some::Package::HASH_VAR, HASH_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 187 in Package.pm
 Text: hash_var; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
 	Lookups: %hash_var, hash_var
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 21 in noSigilHash.pl

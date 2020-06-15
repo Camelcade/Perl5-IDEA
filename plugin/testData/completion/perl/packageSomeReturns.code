@@ -1,2 +1,2 @@
-#@returns some<caret>
+#@returns Some<caret>
 sub something{}

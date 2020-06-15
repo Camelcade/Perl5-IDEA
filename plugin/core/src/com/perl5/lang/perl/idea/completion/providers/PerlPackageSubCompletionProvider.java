@@ -46,7 +46,7 @@ public class PerlPackageSubCompletionProvider extends PerlCompletionProvider {
     String newPrefixMathcer = explicitNamespace == null
                               ? currentPrefixMatcher
                               : PerlPackageUtil.join(explicitNamespace, currentPrefixMatcher);
-    result = withFqnSafeMatcher(result, newPrefixMathcer);
+    result = result.withPrefixMatcher(newPrefixMathcer);
 
     PerlSimpleCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(result, parameters.getPosition());
     if (!((PsiPerlMethod)method).isObjectMethod()) {

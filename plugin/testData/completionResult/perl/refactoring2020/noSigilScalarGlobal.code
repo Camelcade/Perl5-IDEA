@@ -2,4 +2,4 @@ package Foo::Bar;
 my $scalar_var;
 our $SCALAR_VAR;
 
-scalar<complete SCALAR_VAR>
+Scalar<complete SCALAR_VAR>

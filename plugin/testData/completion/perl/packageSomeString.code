@@ -1,1 +1,1 @@
-use parent qw/some<caret>/;
+use parent qw/Some<caret>/;

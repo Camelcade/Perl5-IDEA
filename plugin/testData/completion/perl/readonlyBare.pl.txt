@@ -49,39 +49,3 @@ Text: REAL_USER_ID; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; T
 Text: Readonly; Tail: null; Type: Readonly; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: Readonly
 	PsiElement: Implicit sub: Readonly()
-Text: {^CAPTURE_ALL}; Tail: null; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: null
-	Lookups: %{^CAPTURE_ALL}, {^CAPTURE_ALL}
-	PsiElement: Built-in: %^CAPTURE_ALL
-Text: {^CAPTURE_ALL}; Tail: {}; Type: Built-in; Icon: /array_gutter_icon.png; Type Icon: null
-	Lookups: @{^CAPTURE_ALL}, {^CAPTURE_ALL}
-	PsiElement: Built-in: %^CAPTURE_ALL
-Text: {^CAPTURE_ALL}; Tail: {}; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
-	Lookups: ${^CAPTURE_ALL}, {^CAPTURE_ALL}
-	PsiElement: Built-in: %^CAPTURE_ALL
-Text: {^CAPTURE}; Tail: []; Type: Built-in; Icon: /array_gutter_icon.png; Type Icon: null
-	Lookups: @{^CAPTURE}, {^CAPTURE}
-	PsiElement: Built-in: @^CAPTURE
-Text: {^CAPTURE}; Tail: []; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
-	Lookups: ${^CAPTURE}, {^CAPTURE}
-	PsiElement: Built-in: @^CAPTURE
-Text: {^CAPTURE}; Tail: null; Type: Built-in; Icon: /array_gutter_icon.png; Type Icon: null
-	Lookups: @{^CAPTURE}, {^CAPTURE}
-	PsiElement: Built-in: @^CAPTURE
-Text: {^CAPTURE}; Tail: null; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: null
-	Lookups: %{^CAPTURE}, {^CAPTURE}
-	PsiElement: Built-in: %^CAPTURE
-Text: {^CAPTURE}; Tail: {}; Type: Built-in; Icon: /array_gutter_icon.png; Type Icon: null
-	Lookups: @{^CAPTURE}, {^CAPTURE}
-	PsiElement: Built-in: %^CAPTURE
-Text: {^CAPTURE}; Tail: {}; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
-	Lookups: ${^CAPTURE}, {^CAPTURE}
-	PsiElement: Built-in: %^CAPTURE
-Text: {^PREMATCH}; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
-	Lookups: ${^PREMATCH}, {^PREMATCH}
-	PsiElement: Built-in: $^PREMATCH
-Text: {^RE_DEBUG_FLAGS}; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
-	Lookups: ${^RE_DEBUG_FLAGS}, {^RE_DEBUG_FLAGS}
-	PsiElement: Built-in: $^RE_DEBUG_FLAGS
-Text: {^RE_TRIE_MAXBUF}; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
-	Lookups: ${^RE_TRIE_MAXBUF}, {^RE_TRIE_MAXBUF}
-	PsiElement: Built-in: $^RE_TRIE_MAXBUF

@@ -2,4 +2,4 @@ package Foo::Bar;
 my @array_var;
 our @ARRAY_VAR;
 
-$ar<complete MyTest::Some::Package::ARRAY_VAR>ray;
+$Ar<complete MyTest::Some::Package::ARRAY_VAR>ray;

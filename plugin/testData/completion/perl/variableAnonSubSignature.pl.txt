@@ -1,39 +1,3 @@
-Text: ARGV; Tail: []; Type: Built-in; Icon: /array_gutter_icon.png; Type Icon: null
-	Lookups: ARGV
-	PsiElement: Built-in: @ARGV
-Text: ARGV; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
-	Lookups: ARGV
-	PsiElement: Built-in: $ARGV
-Text: ARRAY_VAR; Tail: []; Type: MyTest::Some::Package; Icon: /array_gutter_icon.png; Type Icon: null
-	Lookups: MyTest::Some::Package::ARRAY_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 171 in Package.pm
-Text: EFFECTIVE_GROUP_ID; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
-	Lookups: EFFECTIVE_GROUP_ID
-	PsiElement: Built-in: $EFFECTIVE_GROUP_ID
-Text: EFFECTIVE_USER_ID; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
-	Lookups: EFFECTIVE_USER_ID
-	PsiElement: Built-in: $EFFECTIVE_USER_ID
-Text: ENV; Tail: {}; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: null
-	Lookups: ENV
-	PsiElement: Built-in: %ENV
-Text: EVAL_ERROR; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
-	Lookups: EVAL_ERROR
-	PsiElement: Built-in: $EVAL_ERROR
-Text: HASH_VAR; Tail: {}; Type: MyTest::Some::Package; Icon: /hash_gutter_icon.png; Type Icon: null
-	Lookups: MyTest::Some::Package::HASH_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 187 in Package.pm
-Text: OLD_PERL_VERSION; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
-	Lookups: OLD_PERL_VERSION
-	PsiElement: Built-in: $OLD_PERL_VERSION
-Text: PERL_VERSION; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
-	Lookups: PERL_VERSION
-	PsiElement: Built-in: $PERL_VERSION
-Text: SCALAR_VAR; Tail: null; Type: MyTest::Some::Package; Icon: /scalar_gutter_icon.png; Type Icon: null
-	Lookups: MyTest::Some::Package::SCALAR_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 154 in Package.pm
-Text: UNIVERSAL::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
-	Lookups: UNIVERSAL::
-	PsiElement: Implicit namespace: UNIVERSAL
 Text: ^V; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
 	Lookups: ^V
 	PsiElement: Built-in: $^V
