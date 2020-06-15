@@ -70,7 +70,7 @@ public class PerlBackspaceHandler extends BackspaceHandlerDelegate {
       }
     }
     else if (c == ':' && Perl5CodeInsightSettings.getInstance().AUTO_INSERT_COLON &&
-             currentOffset > 0 && (tokenToDelete == PACKAGE || tokenToDelete == QUALIFYING_PACKAGE)) {
+             currentOffset > 0 && PerlTypedHandler.COLON_HANDLING_TOKENS.contains(tokenToDelete)) {
       Document document = editor.getDocument();
       CharSequence documentCharsSequence = document.getCharsSequence();
       if (documentCharsSequence.charAt(currentOffset - 1) == ':') {

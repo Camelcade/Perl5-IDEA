@@ -192,4 +192,76 @@ public class PerlAutoColonTest extends PerlSmartKeysTestCase {
     disableAutoColon();
     doTest("Foo::B<caret>ar::nonexistent;", ":", "Foo::B:<caret>ar::nonexistent;");
   }
+
+  @Test
+  public void testAddColonInGlobEndEnabled() {
+    enableAutoColon();
+    doTestWithBS("*Foo<caret>", ":", "*Foo::<caret>");
+  }
+
+  @Test
+  public void testAddColonInScalarEndEnabled() {
+    enableAutoColon();
+    doTestWithBS("$Foo<caret>", ":", "$Foo::<caret>");
+  }
+
+  @Test
+  public void testAddColonInArrayEndEnabled() {
+    enableAutoColon();
+    doTestWithBS("@Foo<caret>", ":", "@Foo::<caret>");
+  }
+
+  @Test
+  public void testAddColonInHashEndEnabled() {
+    enableAutoColon();
+    doTestWithBS("%Foo<caret>", ":", "%Foo::<caret>");
+  }
+
+  @Test
+  public void testAddColonInGlobMidEnabled() {
+    enableAutoColon();
+    doTestWithBS("*Foo<caret>Bar", ":", "*Foo::<caret>Bar");
+  }
+
+  @Test
+  public void testAddColonInScalarMidEnabled() {
+    enableAutoColon();
+    doTestWithBS("$Foo<caret>Bar", ":", "$Foo::<caret>Bar");
+  }
+
+  @Test
+  public void testAddColonInArrayMidEnabled() {
+    enableAutoColon();
+    doTestWithBS("@Foo<caret>Bar", ":", "@Foo::<caret>Bar");
+  }
+
+  @Test
+  public void testAddColonInHashMidEnabled() {
+    enableAutoColon();
+    doTest("%Foo<caret>Bar", ":", "%Foo::<caret>Bar");
+  }
+
+  @Test
+  public void testRemoveColonInGlobMidEnabled() {
+    enableAutoColon();
+    doTestBS("*Foo:<caret>:Bar", "*Foo<caret>Bar");
+  }
+
+  @Test
+  public void testRemoveColonInScalarMidEnabled() {
+    enableAutoColon();
+    doTestBS("$Foo:<caret>:Bar", "$Foo<caret>Bar");
+  }
+
+  @Test
+  public void testRemoveColonInArrayMidEnabled() {
+    enableAutoColon();
+    doTestBS("@Foo:<caret>:Bar", "@Foo<caret>Bar");
+  }
+
+  @Test
+  public void testRemoveColonInHashMidEnabled() {
+    enableAutoColon();
+    doTestBS("%Foo:<caret>:Bar", "%Foo<caret>Bar");
+  }
 }

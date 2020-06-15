@@ -121,12 +121,16 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
     return Result.CONTINUE;
   }
 
+  static final TokenSet COLON_HANDLING_TOKENS = TokenSet.create(
+    PACKAGE, QUALIFYING_PACKAGE, SCALAR_NAME, ARRAY_NAME, HASH_NAME, GLOB_NAME
+  );
+
   /**
    * @return true if we are at proper place for inserting two colons
    */
   private boolean isPreColonSuffix(HighlighterIterator precedingIterator) {
     IElementType tokenType = precedingIterator.getTokenType();
-    if (tokenType == PACKAGE || tokenType == QUALIFYING_PACKAGE) {
+    if (COLON_HANDLING_TOKENS.contains(tokenType)) {
       return true;
     }
     if (tokenType != SUB_NAME) {
