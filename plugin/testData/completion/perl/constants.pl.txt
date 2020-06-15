@@ -394,24 +394,6 @@ Text: EXCEPTIONS_BEING_CAUGHT; Tail: null; Type: Built-in; Icon: /scalar_gutter_
 Text: EXECUTABLE_NAME; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
 	Lookups: $EXECUTABLE_NAME, EXECUTABLE_NAME
 	PsiElement: Built-in: $EXECUTABLE_NAME
-Text: EXPORT; Tail: []; Type: MyTest::Some::Package; Icon: /array_gutter_icon.png; Type Icon: null
-	Lookups: @MyTest::Some::Package::EXPORT, EXPORT
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 36 in Package.pm
-Text: EXPORT; Tail: []; Type: MyTest::Some::Package; Icon: /scalar_gutter_icon.png; Type Icon: null
-	Lookups: $MyTest::Some::Package::EXPORT, EXPORT
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 36 in Package.pm
-Text: EXPORT; Tail: null; Type: MyTest::Some::Package; Icon: /array_gutter_icon.png; Type Icon: null
-	Lookups: @MyTest::Some::Package::EXPORT, EXPORT
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 36 in Package.pm
-Text: EXPORT_OK; Tail: []; Type: MyTest::Some::Package; Icon: /array_gutter_icon.png; Type Icon: null
-	Lookups: @MyTest::Some::Package::EXPORT_OK, EXPORT_OK
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 94 in Package.pm
-Text: EXPORT_OK; Tail: []; Type: MyTest::Some::Package; Icon: /scalar_gutter_icon.png; Type Icon: null
-	Lookups: $MyTest::Some::Package::EXPORT_OK, EXPORT_OK
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 94 in Package.pm
-Text: EXPORT_OK; Tail: null; Type: MyTest::Some::Package; Icon: /array_gutter_icon.png; Type Icon: null
-	Lookups: @MyTest::Some::Package::EXPORT_OK, EXPORT_OK
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 94 in Package.pm
 Text: EXTENDED_OS_ERROR; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
 	Lookups: $EXTENDED_OS_ERROR, EXTENDED_OS_ERROR
 	PsiElement: Built-in: $EXTENDED_OS_ERROR

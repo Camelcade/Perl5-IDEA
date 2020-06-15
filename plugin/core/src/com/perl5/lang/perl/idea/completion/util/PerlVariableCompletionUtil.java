@@ -25,6 +25,7 @@ import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.Processor;
+import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.idea.PerlCompletionWeighter;
 import com.perl5.lang.perl.idea.completion.PerlInsertHandlers;
@@ -355,11 +356,19 @@ public class PerlVariableCompletionUtil {
     return !PerlSharedSettings.getInstance(psiElement).getTargetPerlVersion().lesserThan(PerlVersion.V5_20);
   }
 
+  private static final Set<String> VARIABLES_AVAILABLE_ONLY_WITH_FQN = ContainerUtil.newHashSet(
+    "ISA", "EXPORT", "EXPORT_OK", "EXPORT_TAGS", "EXPORT_FAIL", "VERSION"
+  );
+
   public static void fillWithFullQualifiedVariables(@NotNull PerlVariableCompletionProcessor variableCompletionProcessor) {
     PsiElement variableNameElement = variableCompletionProcessor.getLeafElement();
     PsiElement perlVariable = variableCompletionProcessor.getLeafParentElement();
     Processor<PerlVariableDeclarationElement> variableProcessor = createVariableLookupProcessor(variableCompletionProcessor);
     Processor<PerlVariableDeclarationElement> lookupGenerator = it -> {
+      if (!variableCompletionProcessor.isFullQualified() && VARIABLES_AVAILABLE_ONLY_WITH_FQN.contains(it.getName())) {
+        return variableCompletionProcessor.result();
+      }
+
       String idString = it.getCanonicalNameWithSigil();
       if (!variableCompletionProcessor.isRegistered(idString)) {
         return variableProcessor.process(it);

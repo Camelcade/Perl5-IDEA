@@ -37,7 +37,7 @@ import org.jetbrains.annotations.Nullable;
 import java.io.IOException;
 
 public final class PerlFileElementType extends IStubFileElementType<PerlFileStub> {
-  private static final int VERSION = 1;
+  private static final int VERSION = 3;
 
   public PerlFileElementType(String debugName, Language language) {
     super(debugName, language);

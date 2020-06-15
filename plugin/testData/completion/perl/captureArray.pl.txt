@@ -52,18 +52,6 @@ Text: ENV; Tail: {}; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: nul
 Text: ERRNO; Tail: {}; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: null
 	Lookups: ERRNO
 	PsiElement: Built-in: %ERRNO
-Text: EXPORT; Tail: []; Type: MyTest::Some::Package; Icon: /array_gutter_icon.png; Type Icon: null
-	Lookups: MyTest::Some::Package::EXPORT
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 36 in Package.pm
-Text: EXPORT; Tail: null; Type: MyTest::Some::Package; Icon: /array_gutter_icon.png; Type Icon: null
-	Lookups: MyTest::Some::Package::EXPORT
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 36 in Package.pm
-Text: EXPORT_OK; Tail: []; Type: MyTest::Some::Package; Icon: /array_gutter_icon.png; Type Icon: null
-	Lookups: MyTest::Some::Package::EXPORT_OK
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 94 in Package.pm
-Text: EXPORT_OK; Tail: null; Type: MyTest::Some::Package; Icon: /array_gutter_icon.png; Type Icon: null
-	Lookups: MyTest::Some::Package::EXPORT_OK
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 94 in Package.pm
 Text: F; Tail: []; Type: Built-in; Icon: /array_gutter_icon.png; Type Icon: null
 	Lookups: F
 	PsiElement: Built-in: @F

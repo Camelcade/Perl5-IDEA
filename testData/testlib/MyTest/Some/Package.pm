@@ -25,6 +25,14 @@ use constant {
 	MULTICONST2 => 2,
 };
 
-sub unimportedsub{}
+sub unimportedsub {}
 
 use constant unimportedconstant => 1;
+
+our %EXPORT_TAGS = qw//;
+
+our $VERSION;
+
+our @EXPORT_FAIL;
+
+our @ISA;
