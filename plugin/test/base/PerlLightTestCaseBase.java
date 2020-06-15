@@ -402,6 +402,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
         perlProjectManager.addExternalLibrary(libdir);
 
         CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
+        PerlNamesCache.getInstance(getProject()).forceCacheUpdate();
       }));
   }
 

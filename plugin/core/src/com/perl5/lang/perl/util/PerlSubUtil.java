@@ -151,8 +151,8 @@ public class PerlSubUtil implements PerlElementTypes {
    */
   public static Collection<String> getDefinedSubsNames(Project project) {
     // fixme honor scope
-    Collection<String> result = StubIndex.getInstance().getAllKeys(PerlSubDefinitionsIndex.KEY, project);
-    result.addAll(StubIndex.getInstance().getAllKeys(PerlLightSubDefinitionsIndex.KEY, project));
+    Collection<String> result = PerlSubDefinitionsIndex.getAllNames(project);
+    result.addAll(PerlLightSubDefinitionsIndex.getAllNames(project));
     return result;
   }
 
@@ -172,17 +172,6 @@ public class PerlSubUtil implements PerlElementTypes {
       return Collections.emptyList();
     }
     return StubIndex.getElements(PerlSubDeclarationIndex.KEY, canonicalName, project, scope, PerlSubDeclarationElement.class);
-  }
-
-  /**
-   * Returns list of declared subs names
-   *
-   * @param project project to search in
-   * @return collection of sub names
-   */
-  public static Collection<String> getDeclaredSubsNames(Project project) {
-    // fixme honor scope
-    return StubIndex.getInstance().getAllKeys(PerlSubDeclarationIndex.KEY, project);
   }
 
   /**

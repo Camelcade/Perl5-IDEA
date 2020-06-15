@@ -40,7 +40,6 @@ public class PerlGoToSubDefinitionContributor implements ChooseByNameContributor
       name,
       (includeNonProjectItems ? GlobalSearchScope.allScope(project) : GlobalSearchScope.projectScope(project))
     );
-    //noinspection SuspiciousToArrayCall
-    return result.toArray(new NavigationItem[result.size()]);
+    return result.toArray(NavigationItem.EMPTY_NAVIGATION_ITEM_ARRAY);
   }
 }

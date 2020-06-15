@@ -26,6 +26,8 @@ import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
 import com.perl5.lang.perl.psi.stubs.PerlStubIndexBase;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collection;
+
 
 public class PerlSubDeclarationIndex extends PerlStubIndexBase<PerlSubDeclarationElement> {
   public static final int VERSION = 6;
@@ -42,13 +44,22 @@ public class PerlSubDeclarationIndex extends PerlStubIndexBase<PerlSubDeclaratio
   }
 
   public static boolean processSubDeclarations(@NotNull Project project,
-                                               @NotNull String packageName,
+                                               @NotNull String canonicalName,
                                                @NotNull GlobalSearchScope scope,
                                                @NotNull Processor<PerlSubDeclarationElement> processor) {
-    return StubIndex.getInstance().processElements(KEY, packageName, project, scope, PerlSubDeclarationElement.class, element -> {
+    return StubIndex.getInstance().processElements(KEY, canonicalName, project, scope, PerlSubDeclarationElement.class, element -> {
       ProgressManager.checkCanceled();
       return processor.process(element);
     });
   }
 
+  /**
+   * Returns list of declared subs names
+   *
+   * @param project project to search in
+   * @return collection of sub names
+   */
+  public static Collection<String> getAllNames(Project project) {
+    return StubIndex.getInstance().getAllKeys(KEY, project);
+  }
 }

@@ -31,7 +31,6 @@ import com.intellij.psi.PsiReference;
 import com.intellij.psi.search.FileTypeIndex;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.search.searches.ReferencesSearch;
-import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.psi.util.PsiTreeUtil;
@@ -338,8 +337,8 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
    * fixme process only from current project
    */
   public static Collection<String> getKnownNamespaceNames(Project project) {
-    Collection<String> keys = StubIndex.getInstance().getAllKeys(PerlNamespaceIndex.KEY, project);
-    keys.addAll(StubIndex.getInstance().getAllKeys(PerlLightNamespaceIndex.KEY, project));
+    Collection<String> keys = PerlNamespaceIndex.getAllNames(project);
+    keys.addAll(PerlLightNamespaceIndex.getAllNames(project));
     return keys;
   }
 

@@ -26,6 +26,8 @@ import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.stubs.PerlStubIndexBase;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collection;
+
 
 public class PerlNamespaceIndex extends PerlStubIndexBase<PerlNamespaceDefinitionElement> {
   public static final int VERSION = 1;
@@ -49,5 +51,9 @@ public class PerlNamespaceIndex extends PerlStubIndexBase<PerlNamespaceDefinitio
       ProgressManager.checkCanceled();
       return processor.process(element);
     });
+  }
+
+  public static @NotNull Collection<String> getAllNames(Project project) {
+    return StubIndex.getInstance().getAllKeys(KEY, project);
   }
 }

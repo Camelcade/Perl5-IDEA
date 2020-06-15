@@ -28,6 +28,8 @@ import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.stubs.PerlStubIndexBase;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collection;
+
 public class PerlLightNamespaceIndex extends PerlStubIndexBase<PerlPolyNamedElement> {
   public static final int VERSION = 1;
   public static final StubIndexKey<String, PerlPolyNamedElement> KEY = StubIndexKey.createIndexKey("perl.package.light.direct");
@@ -62,4 +64,7 @@ public class PerlLightNamespaceIndex extends PerlStubIndexBase<PerlPolyNamedElem
     });
   }
 
+  public static @NotNull Collection<String> getAllNames(Project project) {
+    return StubIndex.getInstance().getAllKeys(KEY, project);
+  }
 }

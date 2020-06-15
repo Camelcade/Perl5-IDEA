@@ -18,13 +18,24 @@ package com.perl5.lang.perl.idea.project;
 
 import com.intellij.ide.lightEdit.LightEdit;
 import com.intellij.openapi.Disposable;
+import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.application.ReadAction;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProcessCanceledException;
-import com.intellij.openapi.project.DumbService;
+import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
-import com.perl5.lang.perl.util.PerlGlobUtil;
+import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.util.Processor;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
+import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
+import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
+import com.perl5.lang.perl.psi.stubs.namespaces.PerlLightNamespaceIndex;
+import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceIndex;
+import com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationIndex;
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlLightSubDefinitionsIndex;
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionsIndex;
 import com.perl5.lang.perl.util.PerlPackageUtil;
-import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
@@ -33,6 +44,7 @@ import java.util.Set;
 
 
 public class PerlNamesCache implements Disposable {
+  private static final Logger LOG = Logger.getInstance(PerlNamesCache.class);
   private final NamesCacheUpdater myUpdaterRunner = new NamesCacheUpdater();
   private final Project myProject;
   private Set<String> myKnownSubs = Collections.emptySet();
@@ -43,19 +55,53 @@ public class PerlNamesCache implements Disposable {
       if (LightEdit.owns(myProject)) {
         return;
       }
-      DumbService.getInstance(myProject).runReadActionInSmartMode(() -> {
+      ReadAction.nonBlocking(() -> {
+        long start = System.currentTimeMillis();
         Set<String> subsSet = new HashSet<>();
-        subsSet.addAll(PerlSubUtil.getDeclaredSubsNames(myProject));
-        subsSet.addAll(PerlSubUtil.getDefinedSubsNames(myProject));
-        subsSet.addAll(PerlGlobUtil.getDefinedGlobsNames(myProject));
 
-        Set<String> namespacesSet = new HashSet<>();
-        namespacesSet.addAll(PerlPackageUtil.CORE_PACKAGES_ALL);
-        namespacesSet.addAll(PerlPackageUtil.getKnownNamespaceNames(myProject));
+        GlobalSearchScope scope = GlobalSearchScope.allScope(myProject);
+        Processor<PerlSubDeclarationElement> processor = it -> {
+          subsSet.add(it.getCanonicalName());
+          return false;
+        };
+        for (String subName : PerlSubDeclarationIndex.getAllNames(myProject)) {
+          ProgressManager.checkCanceled();
+          PerlSubDeclarationIndex.processSubDeclarations(myProject, subName, scope, processor);
+        }
 
+        Processor<PerlSubDefinitionElement> perlSubDefinitionElementProcessor = it -> {
+          subsSet.add(it.getCanonicalName());
+          return false;
+        };
+        for (String subName : PerlSubDefinitionsIndex.getAllNames(myProject)) {
+          ProgressManager.checkCanceled();
+          PerlSubDefinitionsIndex.processSubDefinitions(myProject, subName, scope, perlSubDefinitionElementProcessor);
+        }
+        for (String subName : PerlLightSubDefinitionsIndex.getAllNames(myProject)) {
+          ProgressManager.checkCanceled();
+          PerlLightSubDefinitionsIndex.processSubDefinitions(myProject, subName, scope, perlSubDefinitionElementProcessor);
+        }
         myKnownSubs = Collections.unmodifiableSet(subsSet);
+
+        Set<String> namespacesSet = new HashSet<>(PerlPackageUtil.CORE_PACKAGES_ALL);
+
+        Processor<PerlNamespaceDefinitionElement> namespaceDefinitionElementProcessor = it -> {
+          namespacesSet.add(it.getNamespaceName());
+          return false;
+        };
+        for (String namespaceName : PerlNamespaceIndex.getAllNames(myProject)) {
+          ProgressManager.checkCanceled();
+          PerlNamespaceIndex.processNamespaces(myProject, namespaceName, scope, namespaceDefinitionElementProcessor);
+        }
+        for (String namespaceName : PerlLightNamespaceIndex.getAllNames(myProject)) {
+          ProgressManager.checkCanceled();
+          PerlLightNamespaceIndex.processNamespaces(myProject, namespaceName, scope, namespaceDefinitionElementProcessor);
+        }
+
         myKnownNamespaces = Collections.unmodifiableSet(namespacesSet);
-      });
+
+        LOG.debug("Names cache updated in " + (System.currentTimeMillis() - start) + " ms");
+      }).inSmartMode(myProject).expireWhen(myProject::isDisposed).executeSynchronously();
     }
   };
   //	long notifyCounter = 0;
@@ -63,7 +109,10 @@ public class PerlNamesCache implements Disposable {
 
   public PerlNamesCache(Project project) {
     this.myProject = project;
-    ApplicationManager.getApplication().executeOnPooledThread(myUpdaterRunner);
+    Application application = ApplicationManager.getApplication();
+    if (!application.isUnitTestMode()) {
+      application.executeOnPooledThread(myUpdaterRunner);
+    }
   }
 
   public void forceCacheUpdate() {

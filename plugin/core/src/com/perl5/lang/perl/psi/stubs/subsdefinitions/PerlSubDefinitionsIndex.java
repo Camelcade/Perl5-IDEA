@@ -26,6 +26,8 @@ import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.stubs.PerlStubIndexBase;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collection;
+
 
 public class PerlSubDefinitionsIndex extends PerlStubIndexBase<PerlSubDefinitionElement> {
   public static final int VERSION = 4;
@@ -51,4 +53,7 @@ public class PerlSubDefinitionsIndex extends PerlStubIndexBase<PerlSubDefinition
     });
   }
 
+  public static @NotNull Collection<String> getAllNames(Project project) {
+    return StubIndex.getInstance().getAllKeys(KEY, project);
+  }
 }
