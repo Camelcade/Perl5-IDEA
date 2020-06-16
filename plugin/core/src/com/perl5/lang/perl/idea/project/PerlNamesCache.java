@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.project;
 
+import com.intellij.ProjectTopics;
 import com.intellij.ide.lightEdit.LightEdit;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ReadAction;
@@ -23,8 +24,14 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.roots.ModuleRootEvent;
+import com.intellij.openapi.roots.ModuleRootListener;
+import com.intellij.psi.PsiManager;
+import com.intellij.psi.PsiTreeChangeAdapter;
+import com.intellij.psi.PsiTreeChangeEvent;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.Processor;
+import com.intellij.util.messages.MessageBusConnection;
 import com.intellij.util.ui.update.MergingUpdateQueue;
 import com.intellij.util.ui.update.Update;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
@@ -41,21 +48,78 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 
 public class PerlNamesCache implements Disposable {
   private static final Logger LOG = Logger.getInstance(PerlNamesCache.class);
   private final MergingUpdateQueue myQueue = new MergingUpdateQueue("Perl names cache updater", 1000, true, null, this, null, false);
   private final Project myProject;
+  private final AtomicBoolean myIsUpdating = new AtomicBoolean(false);
   private volatile Set<String> myKnownSubs = Collections.emptySet();
   private volatile Set<String> myKnownNamespaces = Collections.emptySet();
 
   public PerlNamesCache(Project project) {
     myProject = project;
+    if (LightEdit.owns(myProject)) {
+      return;
+    }
+    MessageBusConnection connection = project.getMessageBus().connect(this);
+    connection.subscribe(ProjectTopics.PROJECT_ROOTS, new ModuleRootListener() {
+      @Override
+      public void rootsChanged(@NotNull ModuleRootEvent event) {
+        queueUpdate();
+      }
+    });
+    PsiManager.getInstance(myProject).addPsiTreeChangeListener(new PsiTreeChangeAdapter() {
+      @Override
+      public void childAdded(@NotNull PsiTreeChangeEvent event) {
+        queueUpdate();
+      }
+
+      @Override
+      public void childRemoved(@NotNull PsiTreeChangeEvent event) {
+        queueUpdate();
+      }
+
+      @Override
+      public void childReplaced(@NotNull PsiTreeChangeEvent event) {
+        queueUpdate();
+      }
+
+      @Override
+      public void childMoved(@NotNull PsiTreeChangeEvent event) {
+        queueUpdate();
+      }
+
+      @Override
+      public void childrenChanged(@NotNull PsiTreeChangeEvent event) {
+        queueUpdate();
+      }
+
+      @Override
+      public void propertyChanged(@NotNull PsiTreeChangeEvent event) {
+        queueUpdate();
+      }
+    }, this);
   }
 
   private void queueUpdate() {
-    myQueue.queue(Update.create(this, this::doUpdateCache));
+    myQueue.queue(Update.create(this, this::doUpdateSingleThread));
+  }
+
+  private void doUpdateSingleThread() {
+    if (myIsUpdating.compareAndSet(false, true)) {
+      try {
+        doUpdateCache();
+      }
+      finally {
+        myIsUpdating.set(false);
+      }
+    }
+    else {
+      queueUpdate();
+    }
   }
 
   private void doUpdateCache() {
@@ -66,7 +130,6 @@ public class PerlNamesCache implements Disposable {
       queueUpdate();
       return;
     }
-    LOG.debug("Strting to update cache");
     ReadAction.nonBlocking(() -> {
       long start = System.currentTimeMillis();
       Set<String> subsSet = new HashSet<>();
@@ -114,12 +177,10 @@ public class PerlNamesCache implements Disposable {
 
       LOG.debug("Names cache updated in " + (System.currentTimeMillis() - start) + " ms");
     }).inSmartMode(myProject).expireWhen(myProject::isDisposed).executeSynchronously();
-    LOG.debug("Finished updating cache");
   }
 
-
   public void forceCacheUpdate() {
-    doUpdateCache();
+    doUpdateSingleThread();
   }
 
   @Override
@@ -127,12 +188,10 @@ public class PerlNamesCache implements Disposable {
   }
 
   public Set<String> getSubsNamesSet() {
-    queueUpdate();
     return myKnownSubs;
   }
 
   public Set<String> getNamespacesNamesSet() {
-    queueUpdate();
     return myKnownNamespaces;
   }
 
