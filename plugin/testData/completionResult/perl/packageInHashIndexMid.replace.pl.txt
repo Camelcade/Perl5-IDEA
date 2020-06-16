@@ -1,0 +1,2 @@
+
+$hash{MyTest::Constants::<caret>};

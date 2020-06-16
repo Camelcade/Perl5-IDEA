@@ -28,6 +28,12 @@ public abstract class PerlCompletionResultTestCase extends PerlLightTestCase {
   }
 
   @Test
+  public void testPackageInHashIndexEnd() {doTest();}
+
+  @Test
+  public void testPackageInHashIndexMid() {doTest();}
+
+  @Test
   public void testHashIndexScalar() {doTest();}
 
   @Test

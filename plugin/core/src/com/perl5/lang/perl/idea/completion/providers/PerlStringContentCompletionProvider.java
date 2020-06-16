@@ -63,6 +63,7 @@ public class PerlStringContentCompletionProvider extends PerlCompletionProvider 
         PerlStringCompletionUtil.fillWithHashIndexes(completionProcessor);
         PerlVariableCompletionUtil.fillWithVariables(
           new PerlVariableCompletionProcessorImpl(completionProcessor, null, false, false, false));
+        PerlPackageCompletionUtil.processAllNamespacesNamesWithAutocompletion(completionProcessor, true, true);
       }
     }
     else if (USE_PARAMETERS_PATTERN.accepts(element))    // use or no parameters

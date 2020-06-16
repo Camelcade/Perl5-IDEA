@@ -32,6 +32,9 @@ public class PerlCompletionTest extends PerlCompletionTestCase {
   }
 
   @Test
+  public void testPackageInHashIndex() {doTest();}
+
+  @Test
   public void testGlobalAliasedVariables() {doTest();}
 
   @Test
