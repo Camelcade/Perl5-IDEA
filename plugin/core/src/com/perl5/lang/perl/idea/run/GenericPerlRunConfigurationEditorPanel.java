@@ -51,7 +51,7 @@ public abstract class GenericPerlRunConfigurationEditorPanel<Configuration exten
   extends CommonProgramParametersPanel implements Perl5SdkManipulator {
   private @Nullable Sdk mySdkProxy;
 
-  private @NotNull final Project myProject;
+  private final @NotNull Project myProject;
 
   private LabeledComponent<?> myScriptLabeledField;
   private JPanel myScriptField;

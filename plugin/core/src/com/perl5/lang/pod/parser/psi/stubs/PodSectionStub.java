@@ -23,7 +23,7 @@ import com.perl5.lang.pod.parser.psi.mixin.PodStubBasedSection;
 import org.jetbrains.annotations.NotNull;
 
 public class PodSectionStub extends StubBase<PodStubBasedSection> implements StubElement<PodStubBasedSection> {
-  private @NotNull final String myContent;
+  private final @NotNull String myContent;
 
   public PodSectionStub(StubElement parent, IStubElementType elementType, @NotNull String myContent) {
     super(parent, elementType);

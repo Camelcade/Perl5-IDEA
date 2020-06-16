@@ -63,7 +63,7 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
   private final PerlSharedSettings mySharedSettings;
   private final PerlLocalSettings myLocalSettings;
 
-  private @NotNull final Perl5SdkConfigurable myPerl5SdkConfigurable;
+  private final @NotNull Perl5SdkConfigurable myPerl5SdkConfigurable;
 
   private final JPanel mySdkProjectSettingsPanel = new JPanel(new BorderLayout());
 

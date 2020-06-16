@@ -144,9 +144,9 @@ public final class PerlArrayValue extends PerlListValue implements Iterable<Perl
 
   private static class ElementSearchState {
     private final int myStep;
-    private @NotNull final Set<PerlValue> myFoundValues = new HashSet<>();
-    private @NotNull final Set<Integer> myReachedOffsets = new HashSet<>();
-    private @NotNull final Integer myTargetOffset;
+    private final @NotNull Set<PerlValue> myFoundValues = new HashSet<>();
+    private final @NotNull Set<Integer> myReachedOffsets = new HashSet<>();
+    private final @NotNull Integer myTargetOffset;
 
     public ElementSearchState(int targetOffset, int virtualOffset, int step) {
       myTargetOffset = targetOffset;

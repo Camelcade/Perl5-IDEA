@@ -118,7 +118,7 @@ public abstract class InstallPerlHandler {
   }
 
   private class MyDialog extends DialogWrapper implements PerlInstallForm.InstallFormHelper {
-    private @NotNull final PerlInstallForm myForm;
+    private final @NotNull PerlInstallForm myForm;
 
     public MyDialog(@Nullable Project project, @Nullable PerlInstallFormOptions optionsPanel, @NotNull List<String> distributions) {
       super(project, true, IdeModalityType.PROJECT);

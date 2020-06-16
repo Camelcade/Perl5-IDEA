@@ -40,10 +40,10 @@ import static com.perl5.lang.perl.util.PerlScalarUtil.DEFAULT_SELF_NAME;
 
 public class PerlSubArgument {
 
-  private @NotNull final PerlVariableType myArgumentType;
-  private @NotNull final String myArgumentName;
+  private final @NotNull PerlVariableType myArgumentType;
+  private final @NotNull String myArgumentName;
 
-  private @NotNull final String myVariableClass;
+  private final @NotNull String myVariableClass;
 
   private Boolean myIsOptional;
 
