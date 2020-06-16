@@ -1,2 +1,0 @@
-
-$hash{MyTest::Constants::<caret>te};

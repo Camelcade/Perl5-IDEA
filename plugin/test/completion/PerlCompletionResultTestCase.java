@@ -16,114 +16,19 @@
 
 package completion;
 
-import base.PerlLightTestCase;
 import com.intellij.codeInsight.lookup.Lookup;
-import org.jetbrains.annotations.NotNull;
-import org.junit.Test;
 
-public abstract class PerlCompletionResultTestCase extends PerlLightTestCase {
-  @Override
-  protected String getBaseDataPath() {
-    return "testData/completionResult/perl";
-  }
-
-  @Test
-  public void testPackageInHashIndexEnd() {doTest();}
-
-  @Test
-  public void testPackageInHashIndexMid() {doTest();}
-
-  @Test
-  public void testHashIndexScalar() {doTest();}
-
-  @Test
-  public void testHashIndexArrayElement() {doTest();}
-
-  @Test
-  public void testHashIndexHashElement() {doTest();}
-
-  @Test
-  public void testHashIndexScalarMid() {doTest();}
-
-  @Test
-  public void testHashIndexArrayElementMid() {doTest();}
-
-  @Test
-  public void testHashIndexHashElementMid() {doTest();}
-
-  @Test
-  public void testHashIndexScalarGlobal() {doTest();}
-
-  @Test
-  public void testHashIndexArrayElementGlobal() {doTest();}
-
-  @Test
-  public void testHashIndexHashElementGlobal() {doTest();}
-
-  @Test
-  public void testScalarGlobal() {doTest();}
-
-  @Test
-  public void testScalarGlobalEnd() {doTest();}
-
-  @Test
-  public void testScalarGlobalEndNotStarting() {doTest();}
-
-  @Test
-  public void testScalarGlobalEndSep() {doTest();}
-
-  @Test
-  public void testScalarGlobalMid() {doTest();}
-
-  @Test
-  public void testScalarGlobalMidNotStarting() {doTest();}
-
-  @Test
-  public void testScalarGlobalMidSep() {doTest();}
-
-  @Test
-  public void testScalar() {doTest();}
-
-  @Test
-  public void testScalarUnderscore() {doTest();}
-
-  @Test
-  public void testScalarBraced() {doTest();}
-
-  @Test
-  public void testScalarNoSigil() {doTest();}
-
-
+public abstract class PerlCompletionResultTestCase extends PerlCompletionTestCase {
   @Override
   public void initWithFileContent(String filename, String extension, String content) {
     super.initWithFileContent(filename, extension, processCompletionResultContent(content));
   }
 
-  private void doTest() {
-    doTestCompletionResult();
+  protected void doTestInsert() {
+    doTestCompletionResult(Lookup.NORMAL_SELECT_CHAR);
   }
 
-  public static class NormalTest extends PerlCompletionResultTestCase {
-    @Override
-    protected @NotNull String getTestResultSuffix() {
-      return ".normal";
-    }
-
-    @Override
-    protected char getCompletionCompleteChar() {
-      return Lookup.NORMAL_SELECT_CHAR;
-    }
-  }
-
-  public static class ReplaceTest extends PerlCompletionResultTestCase {
-    @Override
-    protected @NotNull String getTestResultSuffix() {
-      return ".replace";
-    }
-
-    @Override
-    protected char getCompletionCompleteChar() {
-      return Lookup.REPLACE_SELECT_CHAR;
-    }
+  protected void doTestReplace() {
+    doTestCompletionResult(Lookup.REPLACE_SELECT_CHAR);
   }
 }

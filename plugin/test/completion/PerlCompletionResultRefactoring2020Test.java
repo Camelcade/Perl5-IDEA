@@ -16,10 +16,9 @@
 
 package completion;
 
-import com.intellij.codeInsight.lookup.Lookup;
 import org.junit.Test;
 
-public class PerlCompletionResultRefactoring2020Test extends PerlCompletionTestCase {
+public class PerlCompletionResultRefactoring2020Test extends PerlCompletionResultTestCase {
   @Override
   protected String getBaseDataPath() {
     return "testData/completionResult/perl/refactoring2020";
@@ -156,17 +155,4 @@ public class PerlCompletionResultRefactoring2020Test extends PerlCompletionTestC
 
   @Test
   public void testScalarSigilNamespaceOuter() {doTestInsert();}
-
-  @Override
-  public void initWithFileContent(String filename, String extension, String content) {
-    super.initWithFileContent(filename, extension, processCompletionResultContent(content));
-  }
-
-  private void doTestInsert() {
-    doTestCompletionResult(Lookup.NORMAL_SELECT_CHAR);
-  }
-
-  private void doTestReplace() {
-    doTestCompletionResult(Lookup.REPLACE_SELECT_CHAR);
-  }
 }

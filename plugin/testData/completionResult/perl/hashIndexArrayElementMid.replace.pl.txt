@@ -1,3 +1,0 @@
-my($scalar_variable, @array_variable, %hash_variable);
-
-$hash_variable{$array_variable[<caret>]};

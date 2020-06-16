@@ -1,1 +1,0 @@
-$MyTest::Some::Package::<caret>;
