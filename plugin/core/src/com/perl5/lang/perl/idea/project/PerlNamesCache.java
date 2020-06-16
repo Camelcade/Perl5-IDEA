@@ -18,15 +18,15 @@ package com.perl5.lang.perl.idea.project;
 
 import com.intellij.ide.lightEdit.LightEdit;
 import com.intellij.openapi.Disposable;
-import com.intellij.openapi.application.Application;
-import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.ReadAction;
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.progress.ProcessCanceledException;
 import com.intellij.openapi.progress.ProgressManager;
+import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.Processor;
+import com.intellij.util.ui.update.MergingUpdateQueue;
+import com.intellij.util.ui.update.Update;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
@@ -45,142 +45,98 @@ import java.util.Set;
 
 public class PerlNamesCache implements Disposable {
   private static final Logger LOG = Logger.getInstance(PerlNamesCache.class);
-  private final NamesCacheUpdater myUpdaterRunner = new NamesCacheUpdater();
+  private final MergingUpdateQueue myQueue = new MergingUpdateQueue("Perl names cache updater", 1000, true, null, this, null, false);
   private final Project myProject;
-  private Set<String> myKnownSubs = Collections.emptySet();
-  private Set<String> myKnownNamespaces = Collections.emptySet();
-  private final Runnable myCacheUpdaterWorker = new Runnable() {
-    @Override
-    public void run() {
-      if (LightEdit.owns(myProject)) {
-        return;
-      }
-      ReadAction.nonBlocking(() -> {
-        long start = System.currentTimeMillis();
-        Set<String> subsSet = new HashSet<>();
-
-        GlobalSearchScope scope = GlobalSearchScope.allScope(myProject);
-        Processor<PerlSubDeclarationElement> processor = it -> {
-          subsSet.add(it.getCanonicalName());
-          return false;
-        };
-        for (String subName : PerlSubDeclarationIndex.getAllNames(myProject)) {
-          ProgressManager.checkCanceled();
-          PerlSubDeclarationIndex.processSubDeclarations(myProject, subName, scope, processor);
-        }
-
-        Processor<PerlSubDefinitionElement> perlSubDefinitionElementProcessor = it -> {
-          subsSet.add(it.getCanonicalName());
-          return false;
-        };
-        for (String subName : PerlSubDefinitionsIndex.getAllNames(myProject)) {
-          ProgressManager.checkCanceled();
-          PerlSubDefinitionsIndex.processSubDefinitions(myProject, subName, scope, perlSubDefinitionElementProcessor);
-        }
-        for (String subName : PerlLightSubDefinitionsIndex.getAllNames(myProject)) {
-          ProgressManager.checkCanceled();
-          PerlLightSubDefinitionsIndex.processSubDefinitions(myProject, subName, scope, perlSubDefinitionElementProcessor);
-        }
-        myKnownSubs = Collections.unmodifiableSet(subsSet);
-
-        Set<String> namespacesSet = new HashSet<>(PerlPackageUtil.CORE_PACKAGES_ALL);
-
-        Processor<PerlNamespaceDefinitionElement> namespaceDefinitionElementProcessor = it -> {
-          namespacesSet.add(it.getNamespaceName());
-          return false;
-        };
-        for (String namespaceName : PerlNamespaceIndex.getAllNames(myProject)) {
-          ProgressManager.checkCanceled();
-          PerlNamespaceIndex.processNamespaces(myProject, namespaceName, scope, namespaceDefinitionElementProcessor);
-        }
-        for (String namespaceName : PerlLightNamespaceIndex.getAllNames(myProject)) {
-          ProgressManager.checkCanceled();
-          PerlLightNamespaceIndex.processNamespaces(myProject, namespaceName, scope, namespaceDefinitionElementProcessor);
-        }
-
-        myKnownNamespaces = Collections.unmodifiableSet(namespacesSet);
-
-        LOG.debug("Names cache updated in " + (System.currentTimeMillis() - start) + " ms");
-      }).inSmartMode(myProject).expireWhen(myProject::isDisposed).executeSynchronously();
-    }
-  };
-  //	long notifyCounter = 0;
-  private boolean isNotified = false;
+  private volatile Set<String> myKnownSubs = Collections.emptySet();
+  private volatile Set<String> myKnownNamespaces = Collections.emptySet();
 
   public PerlNamesCache(Project project) {
-    this.myProject = project;
-    Application application = ApplicationManager.getApplication();
-    if (!application.isUnitTestMode()) {
-      application.executeOnPooledThread(myUpdaterRunner);
-    }
+    myProject = project;
   }
 
+  private void queueUpdate() {
+    myQueue.queue(Update.create(this, this::doUpdateCache));
+  }
+
+  private void doUpdateCache() {
+    if (LightEdit.owns(myProject)) {
+      return;
+    }
+    if (DumbService.isDumb(myProject)) {
+      queueUpdate();
+      return;
+    }
+    LOG.debug("Strting to update cache");
+    ReadAction.nonBlocking(() -> {
+      long start = System.currentTimeMillis();
+      Set<String> subsSet = new HashSet<>();
+
+      GlobalSearchScope scope = GlobalSearchScope.allScope(myProject);
+      Processor<PerlSubDeclarationElement> processor = it -> {
+        subsSet.add(it.getCanonicalName());
+        return false;
+      };
+      for (String subName : PerlSubDeclarationIndex.getAllNames(myProject)) {
+        ProgressManager.checkCanceled();
+        PerlSubDeclarationIndex.processSubDeclarations(myProject, subName, scope, processor);
+      }
+
+      Processor<PerlSubDefinitionElement> perlSubDefinitionElementProcessor = it -> {
+        subsSet.add(it.getCanonicalName());
+        return false;
+      };
+      for (String subName : PerlSubDefinitionsIndex.getAllNames(myProject)) {
+        ProgressManager.checkCanceled();
+        PerlSubDefinitionsIndex.processSubDefinitions(myProject, subName, scope, perlSubDefinitionElementProcessor);
+      }
+      for (String subName : PerlLightSubDefinitionsIndex.getAllNames(myProject)) {
+        ProgressManager.checkCanceled();
+        PerlLightSubDefinitionsIndex.processSubDefinitions(myProject, subName, scope, perlSubDefinitionElementProcessor);
+      }
+      myKnownSubs = Collections.unmodifiableSet(subsSet);
+
+      Set<String> namespacesSet = new HashSet<>(PerlPackageUtil.CORE_PACKAGES_ALL);
+
+      Processor<PerlNamespaceDefinitionElement> namespaceDefinitionElementProcessor = it -> {
+        namespacesSet.add(it.getNamespaceName());
+        return false;
+      };
+      for (String namespaceName : PerlNamespaceIndex.getAllNames(myProject)) {
+        ProgressManager.checkCanceled();
+        PerlNamespaceIndex.processNamespaces(myProject, namespaceName, scope, namespaceDefinitionElementProcessor);
+      }
+      for (String namespaceName : PerlLightNamespaceIndex.getAllNames(myProject)) {
+        ProgressManager.checkCanceled();
+        PerlLightNamespaceIndex.processNamespaces(myProject, namespaceName, scope, namespaceDefinitionElementProcessor);
+      }
+
+      myKnownNamespaces = Collections.unmodifiableSet(namespacesSet);
+
+      LOG.debug("Names cache updated in " + (System.currentTimeMillis() - start) + " ms");
+    }).inSmartMode(myProject).expireWhen(myProject::isDisposed).executeSynchronously();
+    LOG.debug("Finished updating cache");
+  }
+
+
   public void forceCacheUpdate() {
-    myCacheUpdaterWorker.run();
+    doUpdateCache();
   }
 
   @Override
   public void dispose() {
-    myUpdaterRunner.stopUpdater();
   }
 
   public Set<String> getSubsNamesSet() {
-    myUpdaterRunner.update();
+    queueUpdate();
     return myKnownSubs;
   }
 
   public Set<String> getNamespacesNamesSet() {
-    myUpdaterRunner.update();
+    queueUpdate();
     return myKnownNamespaces;
   }
 
   public static @NotNull PerlNamesCache getInstance(@NotNull Project project) {
     return project.getService(PerlNamesCache.class);
-  }
-
-  protected class NamesCacheUpdater implements Runnable {
-    private static final long TTL = 1000;
-    private boolean stopThis = false;
-    private long lastUpdate = 0;
-
-    @Override
-    public void run() {
-
-      while (!stopThis) {
-        try {
-          myCacheUpdaterWorker.run();
-        }
-        catch (ProcessCanceledException ignore) {
-        }
-
-        lastUpdate = System.currentTimeMillis();
-        isNotified = false;
-
-        synchronized (this) {
-          try {
-            wait();
-          }
-          catch (Exception e) {
-            break;
-          }
-        }
-      }
-    }
-
-    public void update() {
-      if (!isNotified && lastUpdate + TTL < System.currentTimeMillis()) {
-        synchronized (this) {
-          isNotified = true;
-          notify();
-        }
-      }
-    }
-
-    public void stopUpdater() {
-      stopThis = true;
-      synchronized (this) {
-        notify();
-      }
-    }
   }
 }
