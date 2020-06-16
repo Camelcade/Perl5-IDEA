@@ -679,9 +679,23 @@ public class PerlCompletionTest extends PerlCompletionTestCase {
 
   @Test
   public void testHashIndexBare() {
-    doTestCompletionFromText("$$a{testindex}; $b->{<caret>}");
+    doTestCompletionFromText("$a{testindex}; $b->{tes<caret>}");
   }
 
+  @Test
+  public void testHashIndexBareBuiltIn() {
+    doTestCompletionFromText("$b->{scal<caret>}");
+  }
+
+  @Test
+  public void testHashIndexBarePackage() {
+    doTestCompletionFromText("$b->{Mytes<caret>}");
+  }
+
+  @Test
+  public void testHashIndexBareSub() {
+    doTestCompletionFromText("sub some_test_sub{} $b->{some<caret>}");
+  }
 
   @Test
   public void testAnnotation() {

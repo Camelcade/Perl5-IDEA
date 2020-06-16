@@ -1,0 +1,6 @@
+Text: scalar; Tail: (@list); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: scalar
+	PsiElement: Implicit sub: scalar(@list)(@list)
+Text: syscall; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: syscall
+	PsiElement: Implicit sub: syscall()
