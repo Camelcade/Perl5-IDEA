@@ -18,13 +18,11 @@ package com.perl5.lang.perl.idea.completion.providers;
 
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionResultSet;
-import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlSimpleCompletionProcessor;
 import com.perl5.lang.perl.idea.completion.util.PerlSubCompletionUtil;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
-import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService;
 import org.jetbrains.annotations.NotNull;
 
 
@@ -41,18 +39,8 @@ public class PerlSubBuiltInCompletionProvider extends PerlCompletionProvider {
       return;
     }
 
-    PerlSimpleCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(resultSet, subNameElement) {
-      @Override
-      public void addElement(@NotNull LookupElementBuilder lookupElement) {
-        super.addElement(lookupElement.withBoldness(true));
-      }
-    };
-
-    PerlImplicitDeclarationsService.getInstance(method.getProject()).processSubs(sub -> sub.isBuiltIn()
-                                                                                        ? PerlSubCompletionUtil
-                                                                                          .processSubDefinitionLookupElement(sub,
-                                                                                                                             completionProcessor)
-                                                                                        : completionProcessor.result());
+    PerlSimpleCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(resultSet, subNameElement);
+    PerlSubCompletionUtil.processBuiltInSubsLookupElements(completionProcessor);
     completionProcessor.logStatus(getClass());
   }
 }

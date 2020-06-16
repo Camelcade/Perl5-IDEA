@@ -339,7 +339,6 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
     return "(" + StringUtil.join(ContainerUtil.map(myArguments, PerlValue::toString), ", ") + ")";
   }
 
-  @SuppressWarnings("NullableProblems")
   @Contract("null->null")
   public static @Nullable PerlCallValue from(@Nullable PsiElement element) {
     return ObjectUtils.tryCast(PerlValuesManager.from(element), PerlCallValue.class);

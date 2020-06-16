@@ -18,21 +18,13 @@ package com.perl5.lang.perl.idea.completion.providers;
 
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionResultSet;
-import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiNamedElement;
 import com.intellij.util.ProcessingContext;
-import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlCallStaticValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlCallValue;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlNamespaceItemProcessor;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlSimpleCompletionProcessor;
 import com.perl5.lang.perl.idea.completion.util.PerlSubCompletionUtil;
-import com.perl5.lang.perl.psi.PerlGlobVariable;
-import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
-import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
-import com.perl5.lang.perl.psi.impl.PerlImplicitSubDefinition;
 import org.jetbrains.annotations.NotNull;
 
 
@@ -49,48 +41,8 @@ public class PerlSubCallCompletionProvider extends PerlCompletionProvider {
     if (perlValue == null) {
       return;
     }
-
-    PerlSimpleCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(resultSet, position);
-
-    boolean isStatic = perlValue instanceof PerlCallStaticValue;
-
-    perlValue.processTargetNamespaceElements(
-      position, new PerlNamespaceItemProcessor<PsiNamedElement>() {
-        @Override
-        public boolean processItem(@NotNull PsiNamedElement element) {
-          if (element instanceof PerlImplicitSubDefinition && ((PerlImplicitSubDefinition)element).isAnonymous()) {
-            return completionProcessor.result();
-          }
-          if (element instanceof PerlSubDefinitionElement && !((PerlSubDefinitionElement)element).isAnonymous() &&
-              (isStatic && ((PerlSubDefinitionElement)element).isStatic() || ((PerlSubDefinitionElement)element).isMethod())) {
-            return PerlSubCompletionUtil.processSubDefinitionLookupElement((PerlSubDefinitionElement)element, completionProcessor);
-          }
-          if (element instanceof PerlSubDeclarationElement &&
-              (isStatic && ((PerlSubDeclarationElement)element).isStatic() || ((PerlSubDeclarationElement)element).isMethod())) {
-            return PerlSubCompletionUtil.processSubDeclarationLookupElement((PerlSubDeclarationElement)element, completionProcessor);
-          }
-          if (element instanceof PerlGlobVariable && ((PerlGlobVariable)element).isLeftSideOfAssignment()) {
-            if (StringUtil.isNotEmpty(element.getName())) {
-              return PerlSubCompletionUtil.processGlobLookupElement((PerlGlobVariable)element, completionProcessor);
-            }
-          }
-          return completionProcessor.result();
-        }
-
-        @Override
-        public boolean processImportedItem(@NotNull PsiNamedElement element,
-                                           @NotNull PerlExportDescriptor exportDescriptor) {
-          return PerlSubCompletionUtil.processImportedEntityLookupElement(element, exportDescriptor, completionProcessor);
-        }
-
-        @Override
-        public boolean processOrphanDescriptor(@NotNull PerlExportDescriptor exportDescriptor) {
-          if (exportDescriptor.isSub()) {
-            return exportDescriptor.processLookupElement(completionProcessor);
-          }
-          return completionProcessor.result();
-        }
-      });
-    completionProcessor.logStatus(getClass());
+    PerlSubCompletionUtil.processSubsCompletionsForCallValue(new PerlSimpleCompletionProcessor(resultSet, position), perlValue,
+                                                             perlValue instanceof PerlCallStaticValue);
+    new PerlSimpleCompletionProcessor(resultSet, position).logStatus(getClass());
   }
 }

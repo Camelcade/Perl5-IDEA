@@ -20,15 +20,21 @@ import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlCallValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlNamespaceItemProcessor;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.idea.completion.inserthandlers.SubSelectionHandler;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlCompletionProcessor;
+import com.perl5.lang.perl.idea.completion.providers.processors.PerlSimpleCompletionProcessor;
+import com.perl5.lang.perl.idea.completion.providers.processors.PerlSimpleDelegatingCompletionProcessor;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlVariableCompletionProcessor;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.impl.PerlImplicitSubDefinition;
+import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
@@ -212,5 +218,60 @@ public class PerlSubCompletionUtil {
         return completionProcessor.result();
       }
     );
+  }
+
+  public static boolean processSubsCompletionsForCallValue(@NotNull PerlSimpleCompletionProcessor completionProcessor,
+                                                           @NotNull PerlCallValue perlValue,
+                                                           boolean isStatic) {
+    return perlValue.processTargetNamespaceElements(
+      completionProcessor.getLeafElement(), new PerlNamespaceItemProcessor<PsiNamedElement>() {
+        @Override
+        public boolean processItem(@NotNull PsiNamedElement element) {
+          if (element instanceof PerlImplicitSubDefinition && ((PerlImplicitSubDefinition)element).isAnonymous()) {
+            return completionProcessor.result();
+          }
+          if (element instanceof PerlSubDefinitionElement && !((PerlSubDefinitionElement)element).isAnonymous() &&
+              (isStatic && ((PerlSubDefinitionElement)element).isStatic() || ((PerlSubDefinitionElement)element).isMethod())) {
+            return processSubDefinitionLookupElement((PerlSubDefinitionElement)element, completionProcessor);
+          }
+          if (element instanceof PerlSubDeclarationElement &&
+              (isStatic && ((PerlSubDeclarationElement)element).isStatic() || ((PerlSubDeclarationElement)element).isMethod())) {
+            return processSubDeclarationLookupElement((PerlSubDeclarationElement)element, completionProcessor);
+          }
+          if (element instanceof PerlGlobVariable && ((PerlGlobVariable)element).isLeftSideOfAssignment()) {
+            if (StringUtil.isNotEmpty(element.getName())) {
+              return processGlobLookupElement((PerlGlobVariable)element, completionProcessor);
+            }
+          }
+          return completionProcessor.result();
+        }
+
+        @Override
+        public boolean processImportedItem(@NotNull PsiNamedElement element,
+                                           @NotNull PerlExportDescriptor exportDescriptor) {
+          return processImportedEntityLookupElement(element, exportDescriptor, completionProcessor);
+        }
+
+        @Override
+        public boolean processOrphanDescriptor(@NotNull PerlExportDescriptor exportDescriptor) {
+          if (exportDescriptor.isSub()) {
+            return exportDescriptor.processLookupElement(completionProcessor);
+          }
+          return completionProcessor.result();
+        }
+      });
+  }
+
+  public static void processBuiltInSubsLookupElements(PerlSimpleCompletionProcessor completionProcessor) {
+    PerlCompletionProcessor builtInCompletionProcessor = new PerlSimpleDelegatingCompletionProcessor(completionProcessor) {
+      @Override
+      public void addElement(@NotNull LookupElementBuilder lookupElement) {
+        super.addElement(lookupElement.withBoldness(true));
+      }
+    };
+
+    PerlImplicitDeclarationsService.getInstance(completionProcessor.getProject()).processSubs(
+      sub -> sub.isBuiltIn() ? processSubDefinitionLookupElement(sub, builtInCompletionProcessor)
+                             : builtInCompletionProcessor.result());
   }
 }
