@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.completion.providers;
 import com.intellij.codeInsight.completion.CompletionData;
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionResultSet;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.patterns.StandardPatterns;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiUtilCore;
@@ -56,6 +57,7 @@ public class PerlVariableNameCompletionProvider extends PerlCompletionProvider {
 
     boolean isDeclaration = VARIABLE_NAME_IN_DECLARATION_PATTERN.accepts(variableNameElement);
     boolean hasBraces = VARIABLE_OPEN_BRACES.contains(PsiUtilCore.getElementType(variableNameElement.getPrevSibling()));
+    boolean isCapped = StringUtil.startsWithChar(resultSet.getPrefixMatcher().getPrefix(), '^');
     PerlVariableCompletionProcessorImpl variableCompletionProcessor =
       new PerlVariableCompletionProcessorImpl(
         resultSet,
@@ -71,7 +73,9 @@ public class PerlVariableNameCompletionProvider extends PerlCompletionProvider {
       PerlVariableCompletionUtil.fillWithUnresolvedVars(variableCompletionProcessor);
     }
     else if (!variableCompletionProcessor.isFullQualified()) {
-      PerlVariableCompletionUtil.fillWithLexicalVariables(variableCompletionProcessor);
+      if (!isCapped) {
+        PerlVariableCompletionUtil.fillWithLexicalVariables(variableCompletionProcessor);
+      }
       PerlVariableCompletionUtil.fillWithBuiltInVariables(variableCompletionProcessor);
     }
 
@@ -81,12 +85,12 @@ public class PerlVariableNameCompletionProvider extends PerlCompletionProvider {
     }
 
     // imports
-    if (!isDeclaration && !variableCompletionProcessor.isFullQualified()) {
+    if (!isCapped && !isDeclaration && !variableCompletionProcessor.isFullQualified()) {
       PerlVariableCompletionUtil.fillWithImportedVariables(variableCompletionProcessor);
     }
 
     // fqn names
-    if (!isDeclaration) {
+    if (!isCapped && !isDeclaration) {
       PerlPackageCompletionUtil.processAllNamespacesNamesWithAutocompletion(variableCompletionProcessor, true, false);
       PerlVariableCompletionUtil.fillWithFullQualifiedVariables(variableCompletionProcessor);
     }

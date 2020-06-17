@@ -1,0 +1,15 @@
+Text: ^H; Tail: {}; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: null
+	Lookups: ^H
+	PsiElement: Built-in: %^H
+Text: {^CAPTURE_ALL}; Tail: {}; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: null
+	Lookups: {^CAPTURE_ALL}
+	PsiElement: Built-in: %^CAPTURE_ALL
+Text: {^CAPTURE}; Tail: []; Type: Built-in; Icon: /array_gutter_icon.png; Type Icon: null
+	Lookups: {^CAPTURE}
+	PsiElement: Built-in: @^CAPTURE
+Text: {^CAPTURE}; Tail: null; Type: Built-in; Icon: /array_gutter_icon.png; Type Icon: null
+	Lookups: {^CAPTURE}
+	PsiElement: Built-in: @^CAPTURE
+Text: {^CAPTURE}; Tail: {}; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: null
+	Lookups: {^CAPTURE}
+	PsiElement: Built-in: %^CAPTURE
