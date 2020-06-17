@@ -71,6 +71,12 @@ public class PerlNamesCache implements Disposable {
         queueUpdate();
       }
     });
+    connection.subscribe(DumbService.DUMB_MODE, new DumbService.DumbModeListener() {
+      @Override
+      public void exitDumbMode() {
+        queueUpdate();
+      }
+    });
     PsiManager.getInstance(myProject).addPsiTreeChangeListener(new PsiTreeChangeAdapter() {
       @Override
       public void childAdded(@NotNull PsiTreeChangeEvent event) {
