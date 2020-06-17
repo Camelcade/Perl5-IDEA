@@ -1,0 +1,3 @@
+Text: some_var; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+	Lookups: $some_var, some_var
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 3 in handleInOpenDir.pl

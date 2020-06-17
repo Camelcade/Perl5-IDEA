@@ -19,41 +19,26 @@ package com.perl5.lang.perl.idea.completion.providers;
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.openapi.application.Experiments;
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
+import com.perl5.lang.perl.idea.completion.providers.processors.PerlSimpleCompletionProcessor;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlVariableCompletionProcessor;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlVariableCompletionProcessorImpl;
 import com.perl5.lang.perl.idea.completion.util.PerlVariableCompletionUtil;
-import com.perl5.lang.perl.psi.PsiPerlMethod;
-import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
-public class PerlVariableCompletionProvider extends PerlCompletionProvider {
+public class PerlHandleCompletionProvider extends PerlCompletionProvider {
   @Override
   protected void addCompletions(@NotNull CompletionParameters parameters,
                                 @NotNull ProcessingContext context,
-                                @NotNull CompletionResultSet resultSet) {
-    if (!Experiments.getInstance().isFeatureEnabled("perl5.completion.var.without.sigil")) {
-      return;
+                                @NotNull CompletionResultSet result) {
+    PerlSimpleCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(result, parameters.getPosition());
+
+    if (Experiments.getInstance().isFeatureEnabled("perl5.completion.var.without.sigil")) {
+      PerlVariableCompletionProcessor variableCompletionProcessor = new PerlVariableCompletionProcessorImpl(
+        completionProcessor, null, false, false, false);
+      PerlVariableCompletionUtil.fillWithVariables(variableCompletionProcessor);
     }
 
-    PsiElement subName = parameters.getPosition();
-    PsiElement method = subName.getParent();
-
-    String namespaceName = null;
-    if (!(method instanceof PsiPerlMethod) || ((PsiPerlMethod)method).isObjectMethod()) {
-      return;
-    }
-    namespaceName = ((PsiPerlMethod)method).getExplicitNamespaceName();
-    if (StringUtil.isNotEmpty(namespaceName)) {
-      resultSet = resultSet.withPrefixMatcher(PerlPackageUtil.join(namespaceName, resultSet.getPrefixMatcher().getPrefix()));
-    }
-
-    PerlVariableCompletionProcessor variableCompletionProcessor = new PerlVariableCompletionProcessorImpl(
-      resultSet, subName, namespaceName, false, false, false);
-
-    PerlVariableCompletionUtil.fillWithVariables(variableCompletionProcessor);
-    variableCompletionProcessor.logStatus(getClass());
+    completionProcessor.logStatus(getClass());
   }
 }
