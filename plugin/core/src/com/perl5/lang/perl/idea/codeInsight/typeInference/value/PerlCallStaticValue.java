@@ -49,6 +49,10 @@ public final class PerlCallStaticValue extends PerlCallValue {
     myHasExplicitNamespace = deserializer.readBoolean();
   }
 
+  public boolean hasExplicitNamespace() {
+    return myHasExplicitNamespace;
+  }
+
   @Override
   protected void serializeData(@NotNull PerlValueSerializer serializer) throws IOException {
     super.serializeData(serializer);

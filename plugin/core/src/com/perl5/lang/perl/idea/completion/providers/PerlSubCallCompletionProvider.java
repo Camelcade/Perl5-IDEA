@@ -41,8 +41,11 @@ public class PerlSubCallCompletionProvider extends PerlCompletionProvider {
     if (perlValue == null) {
       return;
     }
-    PerlSubCompletionUtil.processSubsCompletionsForCallValue(new PerlSimpleCompletionProcessor(resultSet, position), perlValue,
-                                                             perlValue instanceof PerlCallStaticValue);
-    new PerlSimpleCompletionProcessor(resultSet, position).logStatus(getClass());
+    PerlSimpleCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(resultSet, position);
+    if (perlValue instanceof PerlCallStaticValue && !((PerlCallStaticValue)perlValue).hasExplicitNamespace()) {
+      PerlSubCompletionUtil.processBuiltInSubsLookupElements(completionProcessor);
+    }
+    PerlSubCompletionUtil.processSubsCompletionsForCallValue(completionProcessor, perlValue, perlValue instanceof PerlCallStaticValue);
+    completionProcessor.logStatus(getClass());
   }
 }
