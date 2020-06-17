@@ -602,13 +602,18 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
                                         @MagicConstant(valuesFromClass = Lookup.class) char completeChar) {
     LookupElement[] lookupElements = myFixture.complete(completionType, invocationCount);
     for (LookupElement lookupElement : lookupElements) {
-      if (lookupElement.getAllLookupStrings().contains(lookupString)) {
-        LookupEx activeLookup = LookupManager.getActiveLookup(getEditor());
-        assertNotNull(activeLookup);
-        activeLookup.setCurrentItem(lookupElement);
-        myFixture.finishLookup(completeChar);
-        UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithCaretsAndSelections());
-        return;
+      LookupElementPresentation presentation = new LookupElementPresentation();
+      lookupElement.renderElement(presentation);
+      String tailText = StringUtil.notNullize(presentation.getTailText());
+      for (String elementLookupString : lookupElement.getAllLookupStrings()) {
+        if (StringUtil.equals(lookupString, elementLookupString + tailText) || StringUtil.equals(lookupString, elementLookupString)) {
+          LookupEx activeLookup = LookupManager.getActiveLookup(getEditor());
+          assertNotNull(activeLookup);
+          activeLookup.setCurrentItem(lookupElement);
+          myFixture.finishLookup(completeChar);
+          UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithCaretsAndSelections());
+          return;
+        }
       }
     }
     fail("Unable to find lookup string: " + lookupString + " in " + renderLookupElementsToString(lookupElements, null));
