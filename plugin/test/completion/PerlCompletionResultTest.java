@@ -25,6 +25,15 @@ public class PerlCompletionResultTest extends PerlCompletionResultTestCase {
   }
 
   @Test
+  public void testCappedScalar() {doTestInsert();}
+
+  @Test
+  public void testCappedArray() {doTestInsert();}
+
+  @Test
+  public void testCappedHash() {doTestInsert();}
+
+  @Test
   public void testPackageInHashIndexEnd() {doTestInsert();}
 
   @Test

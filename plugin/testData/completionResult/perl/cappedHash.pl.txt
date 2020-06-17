@@ -1,0 +1,1 @@
+%{^CAPTURE_ALL}<caret>
