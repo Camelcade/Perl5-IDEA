@@ -23,6 +23,7 @@ import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlSimpleCompletionProcessor;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlVariableCompletionProcessor;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlVariableCompletionProcessorImpl;
+import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionUtil;
 import com.perl5.lang.perl.idea.completion.util.PerlVariableCompletionUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -32,6 +33,7 @@ public class PerlHandleCompletionProvider extends PerlCompletionProvider {
                                 @NotNull ProcessingContext context,
                                 @NotNull CompletionResultSet result) {
     PerlSimpleCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(result, parameters.getPosition());
+    PerlPackageCompletionUtil.processAllNamespacesNamesWithAutocompletion(completionProcessor, true, true);
 
     if (Experiments.getInstance().isFeatureEnabled("perl5.completion.var.without.sigil")) {
       PerlVariableCompletionProcessor variableCompletionProcessor = new PerlVariableCompletionProcessorImpl(

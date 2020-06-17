@@ -44,6 +44,18 @@ public class PerlCompletionTest extends PerlCompletionTestCase {
   public void testHandleInSay() {doTest();}
 
   @Test
+  public void testHandleInOpenCaps() {doTest();}
+
+  @Test
+  public void testHandleInOpenDirCaps() {doTest();}
+
+  @Test
+  public void testHandleInReadDirCaps() {doTest();}
+
+  @Test
+  public void testHandleInSayCaps() {doTest();}
+
+  @Test
   public void testCappedScalar() {doTest();}
 
   @Test
