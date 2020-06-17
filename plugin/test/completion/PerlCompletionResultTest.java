@@ -16,6 +16,7 @@
 
 package completion;
 
+import com.perl5.lang.perl.internals.PerlVersion;
 import org.junit.Test;
 
 public class PerlCompletionResultTest extends PerlCompletionResultTestCase {
@@ -25,13 +26,34 @@ public class PerlCompletionResultTest extends PerlCompletionResultTestCase {
   }
 
   @Test
+  public void testBracedArrayElement() {doTestInsert();}
+
+  @Test
+  public void testBracedHashElement() {doTestInsert();}
+
+  @Test
   public void testCappedScalar() {doTestInsert();}
 
   @Test
   public void testCappedArray() {doTestInsert();}
 
   @Test
-  public void testCappedHash() {doTestInsert();}
+  public void testCappedHash() {
+    setTargetPerlVersion(PerlVersion.V5_20);
+    doTestInsert();
+  }
+
+  @Test
+  public void testCappedScalarBraced() {doTestInsert();}
+
+  @Test
+  public void testCappedArrayBraced() {doTestInsert();}
+
+  @Test
+  public void testCappedHashBraced() {
+    setTargetPerlVersion(PerlVersion.V5_20);
+    doTestInsert();
+  }
 
   @Test
   public void testPackageInHashIndexEnd() {doTestInsert();}

@@ -1,0 +1,3 @@
+my %lexical_hash;
+
+${lexical_hash}{<caret>};

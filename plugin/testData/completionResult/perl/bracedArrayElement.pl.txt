@@ -1,0 +1,3 @@
+my @lexical_array;
+
+${lexical_array}[<caret>];

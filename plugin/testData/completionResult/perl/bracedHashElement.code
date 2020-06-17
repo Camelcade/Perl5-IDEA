@@ -1,0 +1,3 @@
+my %lexical_hash;
+
+${lexi<complete lexical_hash{}>};

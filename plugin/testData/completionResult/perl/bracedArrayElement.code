@@ -1,0 +1,3 @@
+my @lexical_array;
+
+${lexi<complete lexical_array[]>};
