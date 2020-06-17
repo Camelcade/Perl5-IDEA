@@ -76,7 +76,10 @@ public class PerlVariableCompletionUtil {
   public static boolean processVariableLookupElement(@NotNull PerlVariableDeclarationElement element,
                                                      char sigilToPrepend,
                                                      @NotNull PerlVariableCompletionProcessor completionProcessor) {
-    String variableName = PerlVariable.braceName(StringUtil.notNullize(element.getName()));
+    String variableName = StringUtil.notNullize(element.getName());
+    if (!completionProcessor.hasBraces()) {
+      variableName = PerlVariable.braceName(variableName);
+    }
 
     boolean isBuiltIn = element instanceof PerlBuiltInVariable;
 
