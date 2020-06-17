@@ -24,9 +24,7 @@ import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlCallValue;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlNamespaceItemProcessor;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.*;
 import com.perl5.lang.perl.idea.completion.inserthandlers.SubSelectionHandler;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlCompletionProcessor;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlSimpleCompletionProcessor;
@@ -40,6 +38,7 @@ import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collections;
 import java.util.Set;
 
 
@@ -262,7 +261,7 @@ public class PerlSubCompletionUtil {
       });
   }
 
-  public static void processBuiltInSubsLookupElements(PerlSimpleCompletionProcessor completionProcessor) {
+  public static boolean processBuiltInSubsLookupElements(PerlSimpleCompletionProcessor completionProcessor) {
     PerlCompletionProcessor builtInCompletionProcessor = new PerlSimpleDelegatingCompletionProcessor(completionProcessor) {
       @Override
       public void addElement(@NotNull LookupElementBuilder lookupElement) {
@@ -270,8 +269,21 @@ public class PerlSubCompletionUtil {
       }
     };
 
-    PerlImplicitDeclarationsService.getInstance(completionProcessor.getProject()).processSubs(
+    return PerlImplicitDeclarationsService.getInstance(completionProcessor.getProject()).processSubs(
       sub -> sub.isBuiltIn() ? processSubDefinitionLookupElement(sub, builtInCompletionProcessor)
                              : builtInCompletionProcessor.result());
+  }
+
+  /**
+   * Processes all subs applicable at current context. Declarations, imports, built-ins.
+   */
+  public static boolean processContextSubsLookupElements(@NotNull PerlSimpleCompletionProcessor completionProcessor) {
+    if (!PerlSubCompletionUtil.processBuiltInSubsLookupElements(completionProcessor)) {
+      return false;
+    }
+    PerlCallStaticValue callValue = new PerlCallStaticValue(
+      PerlPackageUtil.getContextType(completionProcessor.getLeafElement()), PerlScalarValue.create("dummy"), Collections.emptyList(),
+      false);
+    return processSubsCompletionsForCallValue(completionProcessor, callValue, true);
   }
 }

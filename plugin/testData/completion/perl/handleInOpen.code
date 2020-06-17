@@ -1,3 +1,5 @@
+package Foo::Bar;
+sub some_sub{}
 my $some_var;
 
 open so<caret>

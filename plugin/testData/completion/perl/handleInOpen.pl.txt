@@ -16,9 +16,12 @@ Text: socket; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Ic
 Text: socketpair; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: socketpair
 	PsiElement: Implicit sub: socketpair()
+Text: some_sub; Tail: null; Type: Foo::Bar; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: some_sub
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Foo::Bar::some_sub at 18 in handleInOpen.pl
 Text: some_var; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
 	Lookups: $some_var, some_var
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 3 in handleInOpen.pl
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 36 in handleInOpen.pl
 Text: sort; Tail: (@list [, $subname_or_block]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: sort
 	PsiElement: Implicit sub: sort(@list [, $subname_or_block])(@list, [$subname_or_block])

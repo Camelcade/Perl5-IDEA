@@ -23,8 +23,6 @@ import com.intellij.psi.PsiLanguageInjectionHost;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlCallStaticValue;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlScalarValue;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlSimpleCompletionProcessor;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlVariableCompletionProcessorImpl;
 import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionUtil;
@@ -35,10 +33,7 @@ import com.perl5.lang.perl.psi.PsiPerlAnnotationInject;
 import com.perl5.lang.perl.psi.PsiPerlGlobSlot;
 import com.perl5.lang.perl.psi.PsiPerlHashIndex;
 import com.perl5.lang.perl.util.PerlInjectionUtil;
-import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Collections;
 
 
 public class PerlStringContentCompletionProvider extends PerlCompletionProvider implements PerlElementPatterns {
@@ -69,10 +64,7 @@ public class PerlStringContentCompletionProvider extends PerlCompletionProvider 
         PerlStringCompletionUtil.fillWithHashIndexes(completionProcessor);
         PerlVariableCompletionUtil.fillWithVariables(
           new PerlVariableCompletionProcessorImpl(completionProcessor, null, false, false, false));
-        PerlSubCompletionUtil.processBuiltInSubsLookupElements(completionProcessor);
-        PerlCallStaticValue callValue = new PerlCallStaticValue(
-          PerlPackageUtil.getContextType(element), PerlScalarValue.create("dummy"), Collections.emptyList(), false);
-        PerlSubCompletionUtil.processSubsCompletionsForCallValue(completionProcessor, callValue, true);
+        PerlSubCompletionUtil.processContextSubsLookupElements(completionProcessor);
         PerlPackageCompletionUtil.processAllNamespacesNamesWithAutocompletion(completionProcessor, true, true);
       }
     }
