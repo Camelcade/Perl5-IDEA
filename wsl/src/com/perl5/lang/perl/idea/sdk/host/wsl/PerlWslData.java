@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.sdk.host.wsl;
 
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.process.ProcessOutput;
+import com.intellij.execution.wsl.WSLDistribution;
 import com.intellij.execution.wsl.WSLDistributionWithRoot;
 import com.intellij.execution.wsl.WSLUtil;
 import com.intellij.openapi.Disposable;
@@ -75,7 +76,7 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
   @Override
   public synchronized @Nullable PerlHostVirtualFileSystem getFileSystem(@NotNull Disposable disposable) {
     if (myFileSystem == null) {
-      WSLDistributionWithRoot distribution = getDistribution();
+      WSLDistribution distribution = getDistribution();
       if (distribution == null) {
         LOG.error(PerlWslBundle.message("perl.host.handler.distribution.unavailable", myDistributionId));
         return null;
@@ -96,9 +97,8 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
     return hostFileSystem;
   }
 
-  @Nullable
-  WSLDistributionWithRoot getDistribution() {
-    return ObjectUtils.doIfNotNull(WSLUtil.getDistributionById(getDistributionId()), WSLDistributionWithRoot::new);
+  @Nullable WSLDistribution getDistribution() {
+    return WSLUtil.getDistributionById(getDistributionId());
   }
 
   @NotNull
@@ -113,7 +113,7 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
 
   @Override
   public @NotNull String getHelpersRootPath() {
-    WSLDistributionWithRoot distribution = getDistribution();
+    WSLDistribution distribution = getDistribution();
     if (distribution == null) {
       throw new RuntimeException("No distribution for " + myDistributionId);
     }
@@ -138,7 +138,7 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
    * @implNote it should be returned by {@link #doGetLocalPath(String)} and we don't need to download it
    */
   boolean isFileDirectlyAvailable(@NotNull String remotePathName) {
-    WSLDistributionWithRoot distribution = getDistribution();
+    WSLDistribution distribution = getDistribution();
     if (distribution == null) {
       return false;
     }
@@ -147,7 +147,7 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
 
   @Override
   public @Nullable String doGetLocalPath(@NotNull String remotePathName) {
-    WSLDistributionWithRoot distribution = getDistribution();
+    WSLDistribution distribution = getDistribution();
     if (distribution == null) {
       LOG.warn("Distribution unavailable: " + myDistributionId);
       return null;
@@ -158,7 +158,7 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
 
   @Override
   public @Nullable String doGetRemotePath(@NotNull String localPathName) {
-    WSLDistributionWithRoot distribution = getDistribution();
+    WSLDistribution distribution = getDistribution();
     if (distribution == null) {
       LOG.error(PerlWslBundle.message("perl.host.handler.distribution.unavailable", myDistributionId));
       return null;
@@ -169,7 +169,7 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
 
   @Override
   public @Nullable File findFileByName(@NotNull String fileName) {
-    WSLDistributionWithRoot distribution = getDistribution();
+    WSLDistribution distribution = getDistribution();
     if (distribution == null) {
       return null;
     }
@@ -191,7 +191,7 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
   }
 
   private PerlCommandLine patchCommandLine(@NotNull PerlCommandLine perlCommandLine) throws ExecutionException {
-    WSLDistributionWithRoot distribution = getDistribution();
+    WSLDistribution distribution = getDistribution();
     if (distribution == null) {
       throw new ExecutionException(PerlWslBundle.message("perl.host.handler.distribution.unavailable", getDistributionId()));
     }

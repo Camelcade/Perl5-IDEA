@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.sdk.host.wsl;
 
+import com.intellij.execution.wsl.WSLDistribution;
 import com.intellij.execution.wsl.WSLDistributionWithRoot;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.io.FileUtil;
@@ -71,8 +72,8 @@ class PerlWslFileSystem extends PerlPluggableVirtualFileSystem {
     return realFile == null ? null : new WslVirtualFile(realFile, path);
   }
 
-  static PerlWslFileSystem create(@NotNull WSLDistributionWithRoot distributionWithRoot) {
-    return new PerlWslFileSystem(distributionWithRoot);
+  static PerlWslFileSystem create(@NotNull WSLDistribution wslDistribution) {
+    return new PerlWslFileSystem(new WSLDistributionWithRoot(wslDistribution));
   }
 
   private class WslVirtualFile extends PerlPluggableVirtualFile {

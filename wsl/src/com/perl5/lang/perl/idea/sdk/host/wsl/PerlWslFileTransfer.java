@@ -67,7 +67,7 @@ class PerlWslFileTransfer extends PerlHostFileTransfer<PerlWslData> {
 
     try {
       ProcessOutput output = distribution.copyFromWsl(
-        remotePath, localPath, ContainerUtil.newArrayList("-v", "--exclude", "'*.so'", "--delete"),
+        remotePath, localPath, ContainerUtil.newArrayList("--verbose", "--delete-before", "--exclude", "'*.so'", "--delete"),
         it -> it.addProcessListener(
           new ProcessAdapter() {
             @Override
