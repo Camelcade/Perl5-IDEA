@@ -22,6 +22,7 @@ import com.intellij.openapi.vfs.VirtualFileManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.nio.file.Path;
 import java.util.Objects;
 
 public class PerlHostVirtualFileSystem extends DeprecatedVirtualFileSystem {
@@ -63,6 +64,11 @@ public class PerlHostVirtualFileSystem extends DeprecatedVirtualFileSystem {
 
   public void setDelegate(@NotNull PerlPluggableVirtualFileSystem delegate) {
     myDelegate = delegate;
+  }
+
+  @Override
+  public @Nullable Path getNioPath(@NotNull VirtualFile file) {
+    return myDelegate != null ? myDelegate.getNioPath(file) : super.getNioPath(file);
   }
 
   public void resetDelegate(@NotNull PerlPluggableVirtualFileSystem delegate) {

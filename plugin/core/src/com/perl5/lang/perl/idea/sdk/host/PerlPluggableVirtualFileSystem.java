@@ -17,15 +17,25 @@
 package com.perl5.lang.perl.idea.sdk.host;
 
 import com.intellij.openapi.vfs.DeprecatedVirtualFileSystem;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileSystem;
 import com.intellij.testFramework.LightVirtualFile;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public abstract class PerlPluggableVirtualFileSystem extends DeprecatedVirtualFileSystem {
   /**
    * Should clean the data if necessary
    */
   public void clean() {}
+
+  @Override
+  public @Nullable Path getNioPath(@NotNull VirtualFile file) {
+    return Paths.get(file.getPath());
+  }
 
   @Override
   public void refresh(boolean asynchronous) {
