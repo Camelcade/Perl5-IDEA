@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright 2015-2019 Alexandr Evstigneev
+  ~ Copyright 2015-2020 Alexandr Evstigneev
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -14,8 +14,35 @@
   ~ limitations under the License.
   -->
 
-<p>Fixes:</p>
 <ul>
-  <li>Parsing problem for <code>defined or</code> operator after keywords introduced in 2019.2, by <a
-      href="https://github.com/Camelcade/Perl5-IDEA/issues/2084">@aldem</a></li>
+  <li>Added support for <code>Function::Parameters</code> syntax [WIP], <a
+      href="https://github.com/Camelcade/Perl5-IDEA/issues/1674">#1674</a></li>
+  <li>Improved automatic second colon insertion/deletion handling (optional smart keys feature), <a
+      href="https://github.com/Camelcade/Perl5-IDEA/issues/2199">#2199</a></li>
+  <li>Improved files downloading for Docker and WSL based interpreters, should be much faster now, <a
+      href="https://github.com/Camelcade/Perl5-IDEA/issues/2179">#2179</a></li>
+  <li>Fixed type inferrence for return-less simple expression methods, <a
+      href="https://github.com/Camelcade/Perl5-IDEA/issues/2142">#2142</a></li>
+  <li>Code completion:
+    <ul>
+      <li>You may now complete variables without typing a sigil, just with variable name (experimental feature), <a
+          href="https://github.com/Camelcade/Perl5-IDEA/issues/2170">#2170</a></li>
+      <li>Completion has been reworked and now should be much faster and relevant than before, <a
+          href="https://github.com/Camelcade/Perl5-IDEA/issues/2197">#2197</a></li>
+      <li>Global variables are now shown in the short form: only variable name. Namespace specified in the left side, <a
+          href="https://github.com/Camelcade/Perl5-IDEA/issues/2187">#2187</a></li>
+      <li>Global variables aliased with <code>our</code> keyword in the current file are now available in completion with their short names,
+        <a href="https://github.com/Camelcade/Perl5-IDEA/issues/2191">#2191</a></li>
+      <li>Global variables are now completable by name only, namespace inserted automatically (except spammy ones, like @ISA, @EXPORT and
+        friends, $VERSION), <a href="https://github.com/Camelcade/Perl5-IDEA/issues/2185">#2185</a></li>
+      <li>Completion at bare filehandle now suggests namespaces, subs and variables, <a
+          href="https://github.com/Camelcade/Perl5-IDEA/issues/2202">#2202</a></li>
+      <li>Completion at bare hash index now suggests namespaces, subs and variables, <a
+          href="https://github.com/Camelcade/Perl5-IDEA/issues/2184">#2184</a></li>
+      <li>Fixed problems with variables completion if name is already braced, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/2183">#2183</a>
+      </li>
+      <li>Completion of variable is no longer eats punctuation after a sigil, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/2182">#2182</a>
+      </li>
+    </ul>
+  </li>
 </ul>
