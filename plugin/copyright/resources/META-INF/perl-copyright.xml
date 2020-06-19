@@ -15,7 +15,8 @@
   -->
 
 <idea-plugin>
-  <extensions defaultExtensionNs="com.intellij">
-    <copyright.updater filetype="Perl5 Package" implementationClass="com.perl5.lang.perl.idea.copyright.PerlUpdateCopyrightsProvider"/>
+  <extensions defaultExtensionNs="com.intellij.copyright">
+    <updater filetype="Perl5 Package" implementationClass="com.perl5.lang.perl.idea.copyright.PerlUpdateCopyrightsProvider"/>
+    <variablesProvider filetype="Perl5 Package" implementationClass="com.perl5.lang.perl.idea.copyright.PerlCopyrightsVariablesProvider"/>
   </extensions>
 </idea-plugin>

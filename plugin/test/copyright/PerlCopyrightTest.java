@@ -18,6 +18,7 @@ package copyright;
 
 import base.PerlLightTestCase;
 import com.intellij.copyright.CopyrightManager;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.testFramework.UsefulTestCase;
 import com.maddyhome.idea.copyright.CopyrightProfile;
 import com.maddyhome.idea.copyright.options.LanguageOptions;
@@ -31,6 +32,15 @@ import java.util.function.Consumer;
 
 public class PerlCopyrightTest extends PerlLightTestCase {
   private LanguageOptions myLanguageOptions;
+
+  @Test
+  public void testPackageNameVariable() {
+    VirtualFile packageFile = myFixture.copyFileToProject("Bar.pm", "lib/Some/Foo/Bar.pm");
+    markAsLibRoot(packageFile.getParent().getParent().getParent(), true);
+    myFixture.configureFromExistingVirtualFile(packageFile);
+    doTestWithoutInit("Copyright of the package ${perlfile.packageName}\n" +
+                      "or ${file.className}");
+  }
 
   @Test
   public void testAddLine() {
@@ -186,9 +196,13 @@ public class PerlCopyrightTest extends PerlLightTestCase {
 
   private void doTest() {
     initWithFileSmart();
+    String notice = "Copyright test\nMulti-lined with ${file.fileName} ";
+    doTestWithoutInit(notice);
+  }
 
+  private void doTestWithoutInit(String notice) {
     final CopyrightProfile profile = new CopyrightProfile();
-    profile.setNotice("Copyright test\nMulti-lined with ${file.fileName} ");
+    profile.setNotice(notice);
 
     final UpdateCopyright updateCopyright =
       UpdateCopyrightFactory.createUpdateCopyright(getProject(), getModule(), myFixture.getFile(), profile);

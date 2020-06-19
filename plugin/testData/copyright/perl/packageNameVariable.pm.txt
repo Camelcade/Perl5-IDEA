@@ -1,0 +1,5 @@
+#  Copyright of the package Some::Foo::Bar
+#  or Bar.pm
+
+package Some::Foo::Bar;
+1;
