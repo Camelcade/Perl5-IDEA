@@ -17,6 +17,7 @@
 dependencies{
   compile project(":perl5.core")
   compile project(":perl5.core.idea")
+  compile project(":perl5.core.copyright")
   compile project(":perl5.core.coverage")
   compile project(":perl5.core.intelliLang")
   compile project(":perl5.transport.docker")
@@ -35,7 +36,7 @@ sourceSets {
 
 intellij {
   type 'IC'
-  intellij.plugins = ["PsiViewer:$psiViewerVersion", intelliLangPlugin, 'coverage', 'java']
+  intellij.plugins = ["PsiViewer:$psiViewerVersion", intelliLangPlugin, 'copyright', 'coverage', 'java']
 }
 
 prepareSandbox {

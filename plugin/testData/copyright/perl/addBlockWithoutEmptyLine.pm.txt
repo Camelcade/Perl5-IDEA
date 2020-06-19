@@ -1,0 +1,9 @@
+=head1 COPYRIGHT AND LICENSE
+
+   Copyright test
+   Multi-lined with addBlockWithoutEmptyLine.pm
+
+=cut
+package Foo::Bar;
+
+1;

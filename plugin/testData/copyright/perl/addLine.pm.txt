@@ -1,0 +1,6 @@
+#  Copyright test
+#  Multi-lined with addLine.pm
+
+package Foo::Bar;
+
+1;

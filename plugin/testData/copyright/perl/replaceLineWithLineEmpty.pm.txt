@@ -1,0 +1,2 @@
+#  Copyright test
+#  Multi-lined with replaceLineWithLineEmpty.pm

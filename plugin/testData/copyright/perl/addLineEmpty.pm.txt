@@ -1,0 +1,3 @@
+#  Copyright test
+#  Multi-lined with addLineEmpty.pm
+

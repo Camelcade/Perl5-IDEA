@@ -28,6 +28,7 @@
   <depends optional="true" config-file="plugin-ultimate.xml">com.intellij.modules.ultimate</depends>
   <depends optional="true" config-file="perl-intellilang.xml">org.intellij.intelliLang</depends>
   <depends optional="true" config-file="perl-idea.xml">com.intellij.modules.java</depends>
+  <depends optional="true" config-file="perl-copyright.xml">com.intellij.copyright</depends>
   <depends optional="true" config-file="perl-coverage.xml">com.intellij.modules.coverage</depends>
 
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="perl-pod.xml" xpointer="xpointer(/idea-plugin/*)"/>

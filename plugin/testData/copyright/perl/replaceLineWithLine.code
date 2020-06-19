@@ -1,0 +1,6 @@
+#  Copyright test old
+#  Multi-lined old
+
+package Foo::Bar;
+
+1;

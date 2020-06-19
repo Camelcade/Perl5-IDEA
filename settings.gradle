@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,8 @@ include 'perl5.core'
 project(':perl5.core').projectDir = file('plugin/core')
 include 'perl5.core.idea'
 project(':perl5.core.idea').projectDir = file('plugin/idea')
+include 'perl5.core.copyright'
+project(':perl5.core.copyright').projectDir = file('plugin/copyright')
 include 'perl5.core.coverage'
 project(':perl5.core.coverage').projectDir = file('plugin/coverage')
 include 'perl5.core.intelliLang'

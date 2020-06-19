@@ -1,0 +1,5 @@
+#  Copyright test
+#  Multi-lined with addLineWithoutEmptyLine.pm
+package Foo::Bar;
+
+1;

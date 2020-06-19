@@ -1,0 +1,7 @@
+=head1 COPYRIGHT AND LICENSE
+
+   Copyright test
+   Multi-lined with addBlockEmpty.pm
+
+=cut
+

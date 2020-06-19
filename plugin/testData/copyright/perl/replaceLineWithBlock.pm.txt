@@ -1,0 +1,10 @@
+=head1 COPYRIGHT AND LICENSE
+
+   Copyright test
+   Multi-lined with replaceLineWithBlock.pm
+
+=cut
+
+package Foo::Bar;
+
+1;
