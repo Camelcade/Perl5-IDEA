@@ -43,6 +43,8 @@ public class PerlElementTypeFactory {
       case "GLOB_NAME":
       case "CODE_NAME":
         return new PerlTokenTypeEx(name, PerlVariableNameElementImpl.class);
+      case "POD":
+        return new PerlTokenTypeEx(name, PerlPodElement.class);
       case "subname":
       case "list":
       case "unary":
