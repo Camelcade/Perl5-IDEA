@@ -34,6 +34,42 @@ public class PerlCopyrightTest extends PerlLightTestCase {
   private LanguageOptions myLanguageOptions;
 
   @Test
+  public void testAddBlockToPod() {
+    blockWithBlankLine();
+    doTest();
+  }
+
+  @Test
+  public void testReplaceBlockInPodWithBlock() {
+    blockWithBlankLine();
+    doTest();
+  }
+
+  @Test
+  public void testReplaceBlockInPodWithBlockOnTop() {
+    blockWithBlankLine();
+    doTest();
+  }
+
+  @Test
+  public void testReplaceBlockInPodWithLine() {
+    lineWithoutBlankLine();
+    doTest();
+  }
+
+  @Test
+  public void testReplaceBlockInPodWithLineOnTop() {
+    lineWithoutBlankLine();
+    doTest();
+  }
+
+  @Test
+  public void testReplaceLineWithBlockInPod() {
+    blockWithoutBlankLine();
+    doTest();
+  }
+
+  @Test
   public void testPackageNameVariable() {
     VirtualFile packageFile = myFixture.copyFileToProject("Bar.pm", "lib/Some/Foo/Bar.pm");
     markAsLibRoot(packageFile.getParent().getParent().getParent(), true);
