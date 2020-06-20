@@ -1,10 +1,3 @@
-=head1 COPYRIGHT AND LICENSE
-
-   Copyright test
-   Multi-lined with addBlockToPod.pm
-
-=cut
-
 package Foo::Bar;
 
 1;
@@ -14,3 +7,8 @@ __DATA__
 =head1 SYNOPSIS
 
 Test documentation
+
+=head1 COPYRIGHT AND LICENSE
+
+   Copyright test
+   Multi-lined with addBlockToPod.pm

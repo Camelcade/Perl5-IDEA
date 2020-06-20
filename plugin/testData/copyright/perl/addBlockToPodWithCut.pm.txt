@@ -11,8 +11,6 @@ Test documentation
 =head1 COPYRIGHT AND LICENSE
 
    Copyright test
-   Multi-lined with replaceBlockInPodWithBlock.pm
+   Multi-lined with addBlockToPodWithCut.pm
 
-=head1 OTHER STUFF
-
-Stuff is here
+=cut

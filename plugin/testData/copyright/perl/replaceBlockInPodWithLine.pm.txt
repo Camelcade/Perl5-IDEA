@@ -10,11 +10,6 @@ __DATA__
 
 Test documentation
 
-=head1 COPYRIGHT AND LICENSE
-
-   Copyright test
-   Multi-lined with addBlock.pm
-
 =head1 OTHER STUFF
 
 Stuff is here

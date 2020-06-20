@@ -40,6 +40,12 @@ public class PerlCopyrightTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testAddBlockToPodWithCut() {
+    blockWithBlankLine();
+    doTest();
+  }
+
+  @Test
   public void testReplaceBlockInPodWithBlock() {
     blockWithBlankLine();
     doTest();
