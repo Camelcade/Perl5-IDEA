@@ -50,6 +50,8 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
     OPERATOR_LT_NUMERIC,
     OPERATOR_GT_NUMERIC,
 
+    OPERATOR_ISA,
+
     OPERATOR_CMP_STR,
     OPERATOR_LE_STR,
     OPERATOR_GE_STR,

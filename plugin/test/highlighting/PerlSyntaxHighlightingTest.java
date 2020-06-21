@@ -28,6 +28,9 @@ public class PerlSyntaxHighlightingTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testIsaExpr() {doTest();}
+
+  @Test
   public void testFunctionParametersSyntax() {doTest();}
 
   @Test
