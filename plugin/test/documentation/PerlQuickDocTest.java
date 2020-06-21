@@ -32,6 +32,12 @@ public class PerlQuickDocTest extends PerlQuickDocTestCase {
   }
 
   @Test
+  public void testIsaOperator() {
+    withPerlPod532();
+    doTest();
+  }
+
+  @Test
   public void testAsyncSub() {
     withFuture();
     doTest();

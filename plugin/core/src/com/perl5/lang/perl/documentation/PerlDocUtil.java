@@ -77,6 +77,7 @@ public class PerlDocUtil implements PerlElementTypes {
     OPERATORS_LINKS.put("s", PodLinkDescriptor.create("perlop", "s/PATTERN/"));
     OPERATORS_LINKS.put("m", PodLinkDescriptor.create("perlop", "m/PATTERN/"));
     OPERATORS_LINKS.put("=>", PodLinkDescriptor.create("perlop", "Comma Operator"));
+    OPERATORS_LINKS.put("isa", PodLinkDescriptor.create("perlop", "isa operator"));
 
     VARIABLES_LINKS.put("@ISA", PodLinkDescriptor.create("perlobj", "A Class is Simply a Package"));
     VARIABLES_LINKS.put("@EXPORT", PodLinkDescriptor.create("Exporter", "How to Export"));
