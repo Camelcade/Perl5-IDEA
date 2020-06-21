@@ -926,8 +926,8 @@ regex_expr ::= expr ('=~'|'!~') expr
 mul_expr ::= expr ({'*'|'/'|'%'|'x'} expr)+
 add_expr ::= expr ({'+'|'-'|'.'} expr)+
 shift_expr ::= expr ({'<<'|'>>'} expr)+
-compare_expr ::= expr ({'>='|'<='|'>'|'<'|'ge'|'le'|'gt'|'lt'}) expr
-equal_expr ::= expr {'=='|'!='|'<=>'|'eq'|'ne'|'cmp'|'~~'} expr
+compare_expr ::= expr ({'>='|'<='|'>'|'<'|'ge'|'le'|'gt'|'lt'} expr )+
+equal_expr ::= expr ({'<=>'|'cmp'|'~~'|'=='|'!='|'eq'|'ne'} expr)+
 isa_expr ::= expr 'isa' expr
 bitwise_and_expr ::= expr ('&' expr)+
 bitwise_or_xor_expr ::= expr ({'|'|'^'} expr)+
