@@ -42,6 +42,9 @@ public class PerlParserTest extends PerlParserTestBase {
   }
 
   @Test
+  public void testIsaExpr() {doTest();}
+
+  @Test
   public void testSignatureTrailingComma() {
     doTest();
   }

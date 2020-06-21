@@ -250,6 +250,8 @@
     OPERATOR_XOR_LP='xor'
     OPERATOR_NOT_LP='not'
 
+    OPERATOR_ISA='isa'
+
     OPERATOR_LT_STR='lt'
     OPERATOR_GT_STR='gt'
     OPERATOR_LE_STR='le'
@@ -785,17 +787,18 @@ expr ::=
     | and_expr              // 8
     | bitwise_or_xor_expr   // 9
     | bitwise_and_expr      // 10
-    | equal_expr            // 11
-    | compare_expr          // 12
-    | shift_expr            // 13  for unary
-    | add_expr              // 14
-    | mul_expr              // 15
-    | regex_expr            // 16
-    | op_5_expr             // 17
-    | pow_expr              // 18
-    | op_3_expr             // 19
-    | deref_expr            // 20 for a single argument
-    | term_expr             // 21
+    | isa_expr              // 11
+    | equal_expr            // 12
+    | compare_expr          // 13
+    | shift_expr            // 14  for unary
+    | add_expr              // 15
+    | mul_expr              // 16
+    | regex_expr            // 17
+    | op_5_expr             // 18
+    | pow_expr              // 19
+    | op_3_expr             // 20
+    | deref_expr            // 21 for a single argument
+    | term_expr             // 22
 
 // above list operators
 private parse_list_expr ::= <<parseExpressionLevel 2>>
@@ -806,10 +809,10 @@ private parse_scalar_expr ::= <<parseExpressionLevel 3>>
 private parse_list_element ::=  <<parseExpressionLevel 4>>
 
 // Unary expression argument
-private unary_expr ::= <<parseExpressionLevel 12>>
+private unary_expr ::= <<parseExpressionLevel 13>>
 private optional_unary_expr ::= [unary_expr]
 
-private single_argument_expr ::= <<parseExpressionLevel 19>>
+private single_argument_expr ::= <<parseExpressionLevel 20>>
 
 // ordered for best performance of perltidy
 term_expr ::=
@@ -925,6 +928,7 @@ add_expr ::= expr ({'+'|'-'|'.'} expr)+
 shift_expr ::= expr ({'<<'|'>>'} expr)+
 compare_expr ::= expr ({'>='|'<='|'>'|'<'|'ge'|'le'|'gt'|'lt'}) expr
 equal_expr ::= expr {'=='|'!='|'<=>'|'eq'|'ne'|'cmp'|'~~'} expr
+isa_expr ::= expr 'isa' expr
 bitwise_and_expr ::= expr ('&' expr)+
 bitwise_or_xor_expr ::= expr ({'|'|'^'} expr)+
 and_expr ::= expr ( '&&' expr)+

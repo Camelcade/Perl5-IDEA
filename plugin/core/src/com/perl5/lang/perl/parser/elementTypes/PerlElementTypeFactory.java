@@ -156,6 +156,8 @@ public class PerlElementTypeFactory {
         return new PerlElementTypeEx(name, PsiPerlAssignExprImpl.class);
       case "ATTRIBUTE":
         return new PerlElementTypeEx(name, PsiPerlAttributeImpl.class);
+      case "ISA_EXPR":
+        return new PerlElementTypeEx(name, PsiPerlIsaExprImpl.class);
       case "BITWISE_AND_EXPR":
         return new PerlElementTypeEx(name, PsiPerlBitwiseAndExprImpl.class);
       case "BITWISE_OR_XOR_EXPR":
