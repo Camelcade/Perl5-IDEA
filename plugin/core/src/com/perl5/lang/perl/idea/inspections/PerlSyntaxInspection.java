@@ -44,8 +44,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-import static com.perl5.lang.perl.internals.PerlVersion.V5_20;
-import static com.perl5.lang.perl.internals.PerlVersion.V5_28;
+import static com.perl5.lang.perl.internals.PerlVersion.*;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.LEFT_PAREN;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.RIGHT_PAREN;
 
@@ -54,6 +53,16 @@ public class PerlSyntaxInspection extends PerlInspection {
   public @NotNull PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean isOnTheFly) {
     PerlVersion selectedVersion = PerlSharedSettings.getInstance(holder.getProject()).getTargetPerlVersion();
     return new PerlVisitor() {
+      @Override
+      public void visitIsaExpr(@NotNull PsiPerlIsaExpr o) {
+        if (selectedVersion.lesserThan(V5_32)) {
+          registerProblem(
+            holder, o,
+            PerlBundle.message("perl.inspection.isa.expr.unavailable"),
+            buildChangePerlVersionQuickFixes(GREATER_OR_EQUAL_V532));
+        }
+        super.visitIsaExpr(o);
+      }
 
       @Override
       public void visitHashHashSlice(@NotNull PsiPerlHashHashSlice o) {

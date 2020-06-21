@@ -1,0 +1,12 @@
+package Unknown::Package;
+
+<error descr="`isa` expression available only in perl 5.32+">$a isa 'Unknown::Package'</error>;
+<error descr="`isa` expression available only in perl 5.32+">$a isa "Unknown::Package"</error>;
+<error descr="`isa` expression available only in perl 5.32+">$a isa Unknown::Package</error>;
+<error descr="`isa` expression available only in perl 5.32+">$a isa Unknown::Package::sub()</error>;
+<error descr="`isa` expression available only in perl 5.32+">$a isa $package_name</error>;
+
+UNIVERSAL::isa($a, $b);
+UNIVERSAL->isa($a, $b);
+Unknown::Package::isa($a, $b);
+Unknown::Package->isa($a, $b);

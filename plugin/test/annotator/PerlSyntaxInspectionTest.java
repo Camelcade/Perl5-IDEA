@@ -33,6 +33,12 @@ public class PerlSyntaxInspectionTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testIsaExpr530() {doTest(V5_30);}
+
+  @Test
+  public void testIsaExpr532() {doTest(V5_32);}
+
+  @Test
   public void testFunctionParametersSignatures518() {doTest(V5_18);}
 
   @Test
