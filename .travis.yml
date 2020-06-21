@@ -33,7 +33,7 @@ before_install:
   - printenv | sort | grep java
 install: true
 script:
-  - ./gradlew test
+  - ./gradlew test -PincludeHeavy=1
 after_success:
   - ./gradlew coveralls
 
