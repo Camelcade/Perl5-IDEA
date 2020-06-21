@@ -21,20 +21,13 @@ import org.junit.Test;
 public class PerlQuickDocTest extends PerlQuickDocTestCase {
 
   @Override
-  protected void setUp() throws Exception {
-    super.setUp();
-    withPerlPod528();
-  }
-
-  @Override
   protected String getBaseDataPath() {
     return "testData/documentation/perl/quickdoc";
   }
 
   @Test
   public void testIsaOperator() {
-    withPerlPod532();
-    doTest();
+    doTest532();
   }
 
   @Test
@@ -214,4 +207,14 @@ public class PerlQuickDocTest extends PerlQuickDocTestCase {
   @Test
   public void testNamespaceDefinitionInline() {doTest();}
 
+  protected void doTest532() {
+    withPerlPod532();
+    super.doTest();
+  }
+
+  @Override
+  protected void doTest() {
+    withPerlPod528();
+    super.doTest();
+  }
 }
