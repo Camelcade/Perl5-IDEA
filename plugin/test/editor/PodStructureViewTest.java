@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ import java.io.IOException;
 public class PodStructureViewTest extends PodLightTestCase {
   @Override
   protected String getBaseDataPath() {
-    return "testData/testLibSets/perldoc/pod";
+    return "testData/testLibSets/perldoc528/pod";
   }
 
   @Override

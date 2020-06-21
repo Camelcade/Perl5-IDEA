@@ -30,7 +30,7 @@ public class PodLiveTemplatesPopupTest extends PerlCompletionPopupTestCase {
   @Override
   protected void setUp() throws Exception {
     super.setUp();
-    withPerlPod();
+    withPerlPod528();
     enableLiveTemplatesTesting();
     myFixture.copyFileToProject("test.pm");
   }

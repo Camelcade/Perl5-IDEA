@@ -23,7 +23,7 @@ public class PerlQuickDocTest extends PerlQuickDocTestCase {
   @Override
   protected void setUp() throws Exception {
     super.setUp();
-    withPerlPod();
+    withPerlPod528();
   }
 
   @Override

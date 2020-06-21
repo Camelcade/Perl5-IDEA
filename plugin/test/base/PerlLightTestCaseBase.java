@@ -2373,7 +2373,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
 
   protected void withFuture() {addTestLibrary("future");}
 
-  protected void withPerlPod() {addTestLibrary("perldoc");}
+  protected void withPerlPod528() {addTestLibrary("perldoc528");}
 
   protected void withPerlPod532() {addTestLibrary("perldoc532");}
 
