@@ -1,0 +1,10 @@
+package Foo::Bar;
+
+1;
+if( $a isa Foo::Bar){
+  2;
+}
+else{
+  3;
+}
+4;

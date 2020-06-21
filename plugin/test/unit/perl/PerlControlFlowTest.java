@@ -27,6 +27,9 @@ public class PerlControlFlowTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testIsaExpr() {doTest();}
+
+  @Test
   public void testOutsideAfterModifier() {doTest();}
 
   @Test
