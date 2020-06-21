@@ -188,7 +188,7 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     OPERATOR_CMP_NUMERIC
   );
 
-  TokenSet OPERATORS_STR = TokenSet.create(
+  TokenSet OPERATORS_ALPHABETICAL = TokenSet.create(
     OPERATOR_GE_STR,
     OPERATOR_LE_STR,
     OPERATOR_GT_STR,
@@ -199,7 +199,8 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     OPERATOR_OR_LP,
     OPERATOR_AND_LP,
     OPERATOR_NOT_LP,
-    OPERATOR_XOR_LP
+    OPERATOR_XOR_LP,
+    OPERATOR_ISA
   );
 
   TokenSet BINARY_EXPRESSIONS = TokenSet.create(
@@ -253,7 +254,7 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     OPERATORS_LOGICAL,
     OPERATORS_RANGE,
     OPERATORS_MULTIPLICATIVE,
-    OPERATORS_STR,
+    OPERATORS_ALPHABETICAL,
     OPERATORS_SHIFT
   );
 

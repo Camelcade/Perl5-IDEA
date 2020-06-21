@@ -386,7 +386,7 @@ public class PerlSpacingBuilderFactory {
       // unconditional
       .before(SEMICOLON).spaces(0)
       .before(HEREDOC_END).none()
-      .around(OPERATORS_STR).spaces(1)
+      .around(OPERATORS_ALPHABETICAL).spaces(1)
 
       // perl specific
       .after(RESERVED_VARIABLE_DECLARATION).spaceIf(perlSettings.SPACE_AFTER_VARIABLE_DECLARATION_KEYWORD)
