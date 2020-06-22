@@ -43,6 +43,7 @@ public class PerlVersion implements PerlVersionRegexps, Comparable<PerlVersion> 
   public static final PerlVersion V5_30 = new PerlVersion(5.030);
   public static final PerlVersion V5_32 = new PerlVersion(5.032);
   public static final Predicate<PerlVersion> GREATER_OR_EQUAL_V520 = version -> !version.lesserThan(V5_20);
+  public static final Predicate<PerlVersion> GREATER_OR_EQUAL_V522 = version -> !version.lesserThan(V5_22);
   public static final Predicate<PerlVersion> GREATER_OR_EQUAL_V532 = version -> !version.lesserThan(V5_32);
   public static final List<PerlVersion> ALL_VERSIONS = ContainerUtil.immutableList(
     V5_10, V5_12, V5_14, V5_16, V5_18, V5_20, V5_22, V5_24, V5_26, V5_28, V5_30, V5_32

@@ -33,6 +33,12 @@ public class PerlSyntaxInspectionTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testStringBitwiseOperators510() {doTest(V5_10);}
+
+  @Test
+  public void testStringBitwiseOperators522() {doTest(V5_22);}
+
+  @Test
   public void testChainedOperators510() {doTest(V5_10);}
 
   @Test

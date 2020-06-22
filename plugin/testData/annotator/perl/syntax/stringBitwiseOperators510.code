@@ -1,0 +1,13 @@
+
+say <error descr="String binary expressions available in perl 5.22+">$a ^. $b</error>;
+say <error descr="String binary expressions available in perl 5.22+">$a |. $b</error>;
+say <error descr="String binary expressions available in perl 5.22+">$a &. $b</error>;
+say ~. $b;
+
+$a &= $b;
+$a |= $b;
+$a ^= $b;
+<error descr="String binary expressions available in perl 5.22+">$a &.= $b</error>;
+<error descr="String binary expressions available in perl 5.22+">$a |.= $b</error>;
+<error descr="String binary expressions available in perl 5.22+">$a ^.= $b</error>;
+

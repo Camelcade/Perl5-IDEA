@@ -48,12 +48,61 @@ import java.util.function.Predicate;
 import static com.perl5.lang.perl.internals.PerlVersion.*;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.LEFT_PAREN;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.RIGHT_PAREN;
+import static com.perl5.lang.perl.lexer.PerlTokenSets.BITWISE_ASSIGN_OPERATORS_TOKENSET;
+import static com.perl5.lang.perl.lexer.PerlTokenSets.BITWISE_OPERATORS_TOKENSET;
 
 public class PerlSyntaxInspection extends PerlInspection {
   @Override
   public @NotNull PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean isOnTheFly) {
     PerlVersion selectedVersion = PerlSharedSettings.getInstance(holder.getProject()).getTargetPerlVersion();
     return new PerlVisitor() {
+      @Override
+      public void visitAssignExpr(@NotNull PsiPerlAssignExpr o) {
+        if (selectedVersion.lesserThan(V5_22)) {
+          PsiElement run = o.getFirstChild();
+          while (run != null) {
+            if (BITWISE_ASSIGN_OPERATORS_TOKENSET.contains(PsiUtilCore.getElementType(run)) && run.getTextLength() > 2) {
+              registerProblem(
+                holder, o,
+                PerlBundle.message("perl.inspection.string.binary.unavailable"),
+                buildChangePerlVersionQuickFixes(GREATER_OR_EQUAL_V522));
+              break;
+            }
+            run = run.getNextSibling();
+          }
+        }
+        super.visitAssignExpr(o);
+      }
+
+      @Override
+      public void visitBitwiseAndExpr(@NotNull PsiPerlBitwiseAndExpr o) {
+        processBinaryExpression(o);
+        super.visitBitwiseAndExpr(o);
+      }
+
+      private void processBinaryExpression(@NotNull PsiPerlExpr o) {
+        if (!selectedVersion.lesserThan(V5_22)) {
+          return;
+        }
+        PsiElement run = o.getFirstChild();
+        while (run != null) {
+          if (BITWISE_OPERATORS_TOKENSET.contains(PsiUtilCore.getElementType(run)) && run.getTextLength() > 1) {
+            registerProblem(
+              holder, o,
+              PerlBundle.message("perl.inspection.string.binary.unavailable"),
+              buildChangePerlVersionQuickFixes(GREATER_OR_EQUAL_V522));
+            break;
+          }
+          run = run.getNextSibling();
+        }
+      }
+
+      @Override
+      public void visitBitwiseOrXorExpr(@NotNull PsiPerlBitwiseOrXorExpr o) {
+        processBinaryExpression(o);
+        super.visitBitwiseOrXorExpr(o);
+      }
+
       @Override
       public void visitEqualExpr(@NotNull PsiPerlEqualExpr o) {
         if (o.getChildren().length > 2) {

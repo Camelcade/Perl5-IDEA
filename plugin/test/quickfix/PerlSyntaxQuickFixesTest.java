@@ -134,6 +134,11 @@ public class PerlSyntaxQuickFixesTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testStringBitwiseOperators() {
+    doTestVersionChange(V5_10, V5_22);
+  }
+
+  @Test
   public void testIsaExpr510() {
     doTestVersionChange(V5_10, V5_32);
   }
