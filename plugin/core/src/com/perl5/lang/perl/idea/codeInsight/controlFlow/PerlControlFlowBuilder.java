@@ -726,6 +726,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
             if (lastRun != null) {
               if (elementType == OPERATOR_AND || elementType == OPERATOR_AND_LP) {
                 instructionsToLink.add(prevInstruction);
+                // fixme we should put simple conditional instruction here and below with last composite element in it.
                 startPartialConditionalNode(run, o, lastRun, true);
               }
               else if (elementType == OPERATOR_OR || elementType == OPERATOR_OR_LP || elementType == OPERATOR_OR_DEFINED) {
