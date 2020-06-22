@@ -27,6 +27,9 @@ public class PerlControlFlowTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testStringBitwiseOperators() {doTest();}
+
+  @Test
   public void testChainedComparison() {doTest();}
 
   @Test

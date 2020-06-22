@@ -42,6 +42,9 @@ public class PerlParserTest extends PerlParserTestBase {
   }
 
   @Test
+  public void testStringBitwiseOperators() {doTest();}
+
+  @Test
   public void testChainedComparison() {doTest();}
 
   @Test

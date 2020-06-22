@@ -841,7 +841,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
           "**"	{yybegin(YYINITIAL);return OPERATOR_POW;}
           "%=" 	{yybegin(YYINITIAL);return OPERATOR_MOD_ASSIGN;}
           "*=" 	{yybegin(YYINITIAL);return OPERATOR_MUL_ASSIGN;}
-          "&=" 	{yybegin(YYINITIAL);return OPERATOR_BITWISE_AND_ASSIGN;}
+          "&" "."? "=" 	{yybegin(YYINITIAL);return OPERATOR_BITWISE_AND_ASSIGN;}
           "**=" 	{yybegin(YYINITIAL);return OPERATOR_POW_ASSIGN;}
           "&&="	{yybegin(YYINITIAL);return OPERATOR_AND_ASSIGN;}
 
@@ -1126,8 +1126,8 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 	"-="	{yybegin(YYINITIAL);return OPERATOR_MINUS_ASSIGN;}
 	".=" 	{yybegin(YYINITIAL);return OPERATOR_CONCAT_ASSIGN;}
 	"x=" 	{yybegin(YYINITIAL);return OPERATOR_X_ASSIGN;}
-	"|=" 	{yybegin(YYINITIAL);return OPERATOR_BITWISE_OR_ASSIGN;}
-	"^=" 	{yybegin(YYINITIAL);return OPERATOR_BITWISE_XOR_ASSIGN;}
+	"|" "."? "=" 	{yybegin(YYINITIAL);return OPERATOR_BITWISE_OR_ASSIGN;}
+	"^" "."? "=" 	{yybegin(YYINITIAL);return OPERATOR_BITWISE_XOR_ASSIGN;}
 	"<<=" 	{yybegin(YYINITIAL);return OPERATOR_SHIFT_LEFT_ASSIGN;}
 	">>=" 	{yybegin(YYINITIAL);return OPERATOR_SHIFT_RIGHT_ASSIGN;}
 	"||=" 	{yybegin(YYINITIAL);return OPERATOR_OR_ASSIGN;}
@@ -1142,13 +1142,15 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 	">>" 	{yybegin(YYINITIAL);return OPERATOR_SHIFT_RIGHT;}
 
 	"?"  	{yybegin(YYINITIAL);return QUESTION;}
-	"|" 	{yybegin(YYINITIAL);return OPERATOR_BITWISE_OR;}
-	"^" 	{yybegin(YYINITIAL);return OPERATOR_BITWISE_XOR;}
+
+	"&." 	        {yybegin(YYINITIAL);return OPERATOR_BITWISE_AND;}
+	"|" "."? 	{yybegin(YYINITIAL);return OPERATOR_BITWISE_OR;}
+	"^" "."? 	{yybegin(YYINITIAL);return OPERATOR_BITWISE_XOR;}
 
 	"+" 		{yybegin(YYINITIAL);return OPERATOR_PLUS;}
-	"-" 		{yybegin(YYINITIAL);return OPERATOR_MINUS;}
+	"-" "."? 		{yybegin(YYINITIAL);return OPERATOR_MINUS;}
 	"!" 		{yybegin(YYINITIAL);return OPERATOR_NOT;}
-	"~" 		{yybegin(YYINITIAL);return OPERATOR_BITWISE_NOT;}
+	"~" "."? 		{yybegin(YYINITIAL);return OPERATOR_BITWISE_NOT;}
 	"\\" 		{yybegin(YYINITIAL);return OPERATOR_REFERENCE;}
 
 	".." 	{yybegin(YYINITIAL);return OPERATOR_FLIP_FLOP;}
