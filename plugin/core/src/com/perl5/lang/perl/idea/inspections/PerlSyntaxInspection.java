@@ -32,6 +32,7 @@ import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurable;
 import com.perl5.lang.perl.internals.PerlVersion;
+import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PsiPerlSubDefinitionImpl;
 import com.perl5.lang.perl.psi.impl.PsiPerlSubExprImpl;
@@ -53,6 +54,41 @@ public class PerlSyntaxInspection extends PerlInspection {
   public @NotNull PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean isOnTheFly) {
     PerlVersion selectedVersion = PerlSharedSettings.getInstance(holder.getProject()).getTargetPerlVersion();
     return new PerlVisitor() {
+      @Override
+      public void visitEqualExpr(@NotNull PsiPerlEqualExpr o) {
+        if (o.getChildren().length > 2) {
+          reportOperatorsChainingAvailability(o);
+          PsiElement run = o.getFirstChild();
+          while (run != null) {
+            if (PerlTokenSets.UNCHAINABLE_OPERATORS.contains(PsiUtilCore.getElementType(run))) {
+              registerProblem(
+                holder, o,
+                PerlBundle.message("perl.inspection.chained.expr.invalid"));
+              break;
+            }
+            run = run.getNextSibling();
+          }
+        }
+        super.visitEqualExpr(o);
+      }
+
+      private void reportOperatorsChainingAvailability(@NotNull PsiElement o) {
+        if (selectedVersion.lesserThan(V5_32)) {
+          registerProblem(
+            holder, o,
+            PerlBundle.message("perl.inspection.chained.expr.unavailable"),
+            buildChangePerlVersionQuickFixes(GREATER_OR_EQUAL_V532));
+        }
+      }
+
+      @Override
+      public void visitCompareExpr(@NotNull PsiPerlCompareExpr o) {
+        if (o.getChildren().length > 2) {
+          reportOperatorsChainingAvailability(o);
+        }
+        super.visitCompareExpr(o);
+      }
+
       @Override
       public void visitIsaExpr(@NotNull PsiPerlIsaExpr o) {
         if (selectedVersion.lesserThan(V5_32)) {

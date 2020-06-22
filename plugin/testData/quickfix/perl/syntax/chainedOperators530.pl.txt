@@ -1,0 +1,8 @@
+say $var1 >= $var2 <= $var3 > $var4 < $var5 ge $var6 le $var7 gt $var8 lt $var9;
+say $var1 == $var2 != $var3 eq $var4 ne $var5 ;
+say $var1 == $var2 != $var3 eq $var4 ne $var5 <=> $var6 ;
+say $var1 == $var2 != $var3 eq $var4 ne $var5 cmp $var6 ;
+say $var1 == $var2 != $var3 eq $var4 ne $var5 ~~ $var6 ;
+say $var5 <=> $var6 ;
+say $var5 cmp $var6 ;
+say $var5 ~~ $var6 ;

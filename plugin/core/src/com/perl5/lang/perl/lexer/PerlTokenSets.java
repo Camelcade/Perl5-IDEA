@@ -382,4 +382,8 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
     RIGHT_BRACE_GLOB,
     RIGHT_BRACE_CODE
   );
+
+  TokenSet UNCHAINABLE_OPERATORS = TokenSet.create(
+    OPERATOR_CMP_NUMERIC, OPERATOR_CMP_STR, OPERATOR_SMARTMATCH
+  );
 }

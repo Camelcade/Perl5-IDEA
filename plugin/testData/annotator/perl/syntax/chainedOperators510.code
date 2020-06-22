@@ -1,0 +1,8 @@
+say <error descr="Chaining comparisons and equality operators available only in perl 5.32+">$var1 >= $var2 <= $var3 > $var4 < $var5 ge $var6 le $var7 gt $var8 lt $var9</error>;
+say <error descr="Chaining comparisons and equality operators available only in perl 5.32+">$var1 == $var2 != $var3 eq $var4 ne $var5</error> ;
+say <error descr="Chaining comparisons and equality operators available only in perl 5.32+"><error descr="It's not possible to chain certain equality operators: <=>, cmp and ~~">$var1 == $var2 != $var3 eq $var4 ne $var5 <=> $var6</error></error> ;
+say <error descr="Chaining comparisons and equality operators available only in perl 5.32+"><error descr="It's not possible to chain certain equality operators: <=>, cmp and ~~">$var1 == $var2 != $var3 eq $var4 ne $var5 cmp $var6</error></error> ;
+say <error descr="Chaining comparisons and equality operators available only in perl 5.32+"><error descr="It's not possible to chain certain equality operators: <=>, cmp and ~~">$var1 == $var2 != $var3 eq $var4 ne $var5 ~~ $var6</error></error> ;
+say $var5 <=> $var6 ;
+say $var5 cmp $var6 ;
+say $var5 ~~ $var6 ;

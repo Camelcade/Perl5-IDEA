@@ -129,6 +129,11 @@ public class PerlSyntaxQuickFixesTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testChainedOperators530() {
+    doTestVersionChange(V5_30, V5_32);
+  }
+
+  @Test
   public void testIsaExpr510() {
     doTestVersionChange(V5_10, V5_32);
   }
