@@ -1,0 +1,5 @@
+1;
+if( $var1 >= $var2 <= $var3 > $var4->method < $var5 ge $var6 le $var7 gt $var8 lt $var9 ){
+  2;
+}
+3;

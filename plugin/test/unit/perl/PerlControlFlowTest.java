@@ -27,6 +27,12 @@ public class PerlControlFlowTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testChainedComparison() {doTest();}
+
+  @Test
+  public void testChainedEquality() {doTest();}
+
+  @Test
   public void testIsaExpr() {doTest();}
 
   @Test

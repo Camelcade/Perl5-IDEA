@@ -1,0 +1,5 @@
+1;
+if( $var1->method == $var2 != $var3 eq $var4 ne $var5 <=> $var6 ~~ $var7 cmp $var8 ){
+  2;
+}
+3;

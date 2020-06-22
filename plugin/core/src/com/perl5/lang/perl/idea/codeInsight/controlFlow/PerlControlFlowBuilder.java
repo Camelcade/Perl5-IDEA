@@ -682,6 +682,38 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     }
 
     @Override
+    public void visitCompareExpr(@NotNull PsiPerlCompareExpr o) {
+      processChainableExpression(o);
+    }
+
+    @Override
+    public void visitEqualExpr(@NotNull PsiPerlEqualExpr o) {
+      processChainableExpression(o);
+    }
+
+    private void processChainableExpression(PsiPerlExpr o) {
+      List<Instruction> instructionsToLink = new ArrayList<>();
+      int argumentsCounter = 0;
+      PsiElement previousChild = null;
+      for (PsiElement child : o.getChildren()) {
+        if (PerlPsiUtil.isCommentOrSpace(child)) {
+          continue;
+        }
+        if (argumentsCounter > 1) {
+          instructionsToLink.add(prevInstruction);
+          startPartialConditionalNode(child, o, previousChild, true);
+        }
+
+        child.accept(this);
+        argumentsCounter++;
+        previousChild = child;
+      }
+
+      Instruction outerInstruction = startNodeSmart(o);
+      instructionsToLink.forEach(instruction -> addEdge(instruction, outerInstruction));
+    }
+
+    @Override
     public void visitExpr(@NotNull PsiPerlExpr o) {
       List<Instruction> instructionsToLink = new ArrayList<>();
       if (!(o instanceof PerlDieScope) || ((PerlDieScope)o).includeInControlFlow()) {
