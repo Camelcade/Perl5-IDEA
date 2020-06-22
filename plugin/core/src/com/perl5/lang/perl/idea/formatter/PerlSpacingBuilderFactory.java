@@ -137,7 +137,7 @@ public class PerlSpacingBuilderFactory {
       .around(OPERATORS_EQUALITY).spaceIf(settings.SPACE_AROUND_EQUALITY_OPERATORS)
       .around(OPERATORS_RELATIONAL).spaceIf(settings.SPACE_AROUND_RELATIONAL_OPERATORS)
       .around(OPERATORS_LOGICAL).spaceIf(settings.SPACE_AROUND_LOGICAL_OPERATORS)
-      .around(OPERATORS_BITWISE).spaceIf(settings.SPACE_AROUND_BITWISE_OPERATORS)
+      .around(BITWISE_BINARY_OPERATORS_TOKENSET).spaceIf(settings.SPACE_AROUND_BITWISE_OPERATORS)
       .after(OPERATOR_REFERENCE).spaces(0)
 
       .between(FUNCTION_PARAMETERS_KEYWORDS_TOKENSET, SUB_NAME).spacing(1, 1, 0, false, 0)
