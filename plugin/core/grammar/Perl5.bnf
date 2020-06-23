@@ -966,7 +966,7 @@ private sub_expr_simple ::= <<sub_expr parse_block>>
 
 meta sub_expr ::=  <<x1>>  // fixme make sure that this one checked after definition and declaration
 
-file_read_expr ::= LEFT_ANGLE perl_handle_expr RIGHT_ANGLE
+file_read_expr ::= LEFT_ANGLE [perl_handle_expr] RIGHT_ANGLE
 
 
 ////////////////////////// regular expressions /////////////////////////////////////////////////////////////////////////

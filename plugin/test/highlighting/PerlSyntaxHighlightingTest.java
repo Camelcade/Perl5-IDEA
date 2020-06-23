@@ -28,6 +28,9 @@ public class PerlSyntaxHighlightingTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testAngledHandles() {doTest();}
+
+  @Test
   public void testStringBitwiseOperators() {doTest();}
 
   @Test

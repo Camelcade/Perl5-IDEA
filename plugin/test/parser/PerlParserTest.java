@@ -30,6 +30,9 @@ public class PerlParserTest extends PerlParserTestBase {
   public void testShiftPopPushUnshift() {doTest();}
 
   @Test
+  public void testAngledHandles() {doTest();}
+
+  @Test
   public void testCpanfile() {
     String ext = myFileExt;
     try {

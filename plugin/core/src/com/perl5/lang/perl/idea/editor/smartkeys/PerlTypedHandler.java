@@ -86,7 +86,7 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
     HighlighterIterator iterator = highlighter.createIterator(currentOffset);
     IElementType nextTokenType = iterator.atEnd() ? null : iterator.getTokenType();
     char nextChar = currentOffset == documentSequence.length() ? 0 : documentSequence.charAt(currentOffset);
-    if (c == '<' && nextTokenType == QUOTE_DOUBLE_CLOSE && nextChar == '>' &&
+    if (c == '<' && nextTokenType == RIGHT_ANGLE &&
         currentOffset > 0 && documentSequence.charAt(currentOffset - 1) == '<' &&
         (currentOffset < 3 || PerlEditorUtil.getPreviousTokenType(highlighter.createIterator(currentOffset - 2)) != RESERVED_QQ)) {
       document.replaceString(currentOffset, currentOffset + 1, "<");

@@ -188,7 +188,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 %xstate SUB_ATTRIBUTES, SUB_PROTOTYPE
 %xstate SUB_ATTRIBUTE
 
-%state HANDLE_WITH_ANGLE
+%state HANDLE_WITH_ANGLE, DOUBLE_ANGLE_CLOSE
 
 %state VARIABLE_DECLARATION,VARIABLE_DECLARATION_STRICT,VAR_ATTRIBUTES,VAR_ATTRIBUTES_START
 
@@ -666,7 +666,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 {LINE_COMMENT}				{return COMMENT_LINE;}
 
 <HANDLE_WITH_ANGLE>{
-	{IDENTIFIER} 	{return HANDLE;}
+	{IDENTIFIER} 	                {return HANDLE;}
 	">"				{yybegin(AFTER_IDENTIFIER);return RIGHT_ANGLE;}
 	[^]				{yybegin(YYINITIAL);yypushback(1);break;}
 }
@@ -931,14 +931,16 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 	"--" 	{yybegin(YYINITIAL);return OPERATOR_MINUS_MINUS;}
 }
 
+<DOUBLE_ANGLE_CLOSE> ">>" {yybegin(AFTER_IDENTIFIER);return RIGHT_ANGLE;}
 
 // operands and starters
 <YYINITIAL,BLOCK_AS_VALUE,AFTER_COMMA>{
         <AFTER_IDENTIFIER,AFTER_VARIABLE> {
-          "<" / {IDENTIFIER}">"  		{yybegin(HANDLE_WITH_ANGLE);return LEFT_ANGLE;}
+          "<" / {IDENTIFIER}? ">"  		{yybegin(HANDLE_WITH_ANGLE);return LEFT_ANGLE;}
           "<" / "$"{IDENTIFIER}">"  		{yybegin(AFTER_VALUE);pushState();yybegin(QUOTE_LIKE_OPENER_QQ);return captureString();}
+          "<<" / ">>"                           {yybegin(DOUBLE_ANGLE_CLOSE);return LEFT_ANGLE;}
         }
-	"<"							{yybegin(AFTER_VALUE);pushState();yybegin(QUOTE_LIKE_OPENER_QQ);return captureString();}
+	"<"					{yybegin(AFTER_VALUE);pushState();yybegin(QUOTE_LIKE_OPENER_QQ);return captureString();}
 }
 
 <AFTER_VALUE,AFTER_VARIABLE,AFTER_IDENTIFIER>{
