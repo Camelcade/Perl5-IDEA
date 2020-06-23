@@ -53,10 +53,13 @@ public class PerlInstallForm {
     myDistributionsComboBox.setRenderer(new ColoredListCellRenderer<String>() {
       @Override
       protected void customizeCellRenderer(@NotNull JList<? extends String> list,
-                                           String value,
+                                           @Nullable String value,
                                            int index,
                                            boolean selected,
                                            boolean hasFocus) {
+        if (value == null) {
+          return;
+        }
         setIcon(myHelper.getIcon(value));
         if (myHelper.isInstalled(value)) {
           append(myHelper.cleanDistributionItem(value)).append(" (installed)", SimpleTextAttributes.GRAY_ATTRIBUTES);
