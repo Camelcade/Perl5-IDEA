@@ -30,6 +30,18 @@ public class PerlFormatterSpacingTest extends PerlFormatterTestCase {
   public void testStringBitwiseOperators() {doFormatTest();}
 
   @Test
+  public void testFunctionLikeExprTrue() {
+    getSettings().SPACE_WITHIN_METHOD_CALL_PARENTHESES = true;
+    doTestSingleSource("functionLikeExpr");
+  }
+
+  @Test
+  public void testFunctionLikeExprFalse() {
+    getSettings().SPACE_WITHIN_METHOD_CALL_PARENTHESES = false;
+    doTestSingleSource("functionLikeExpr");
+  }
+
+  @Test
   public void testIsaExpr() {doFormatTest();}
 
   @Test

@@ -237,6 +237,9 @@ public class PerlSpacingBuilderFactory {
       .afterInside(LEFT_PAREN, PARENTHESISED_CALL_ARGUMENTS).spaceIf(settings.SPACE_WITHIN_METHOD_CALL_PARENTHESES)
       .beforeInside(RIGHT_PAREN, PARENTHESISED_CALL_ARGUMENTS).spaceIf(settings.SPACE_WITHIN_METHOD_CALL_PARENTHESES)
 
+      .afterInside(LEFT_PAREN, FUNCTION_LIKE_EXPR).spaceIf(settings.SPACE_WITHIN_METHOD_CALL_PARENTHESES)
+      .beforeInside(RIGHT_PAREN, FUNCTION_LIKE_EXPR).spaceIf(settings.SPACE_WITHIN_METHOD_CALL_PARENTHESES)
+
       .beforeInside(COMMA, SIGNATURE_CONTENT).spacing(
         (settings.SPACE_BEFORE_COMMA ? 1 : 0),
         (settings.SPACE_BEFORE_COMMA ? 1 : 0),
@@ -303,6 +306,7 @@ public class PerlSpacingBuilderFactory {
       .between(CUSTOM_EXPR_KEYWORDS, SEMICOLON).spaces(0)
       .between(RESERVED_RETURN, PARENTHESISED_EXPR).spaces(1)
       .between(CUSTOM_EXPR_KEYWORDS, PARENTHESISED_EXPR).spaces(0)
+      .between(CUSTOM_EXPR_KEYWORDS, LEFT_PAREN).spaces(0)
       .after(CUSTOM_EXPR_KEYWORDS).spaces(1)
       .after(MOOSE_RESERVED_TOKENSET).spaces(1)
 

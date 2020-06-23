@@ -149,6 +149,28 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
       OPERATOR_SMARTMATCH
     ));
 
+  TokenSet FUNCTION_LIKE_EXPR = TokenSet.create(
+    GREP_EXPR,
+    MAP_EXPR,
+    SORT_EXPR,
+    EXIT_EXPR,
+    SCALAR_EXPR,
+    KEYS_EXPR,
+    VALUES_EXPR,
+    REQUIRE_EXPR,
+    UNDEF_EXPR,
+    EACH_EXPR,
+    DEFINED_EXPR,
+    WANTARRAY_EXPR,
+    DELETE_EXPR,
+    SPLICE_EXPR,
+    BLESS_EXPR,
+    ARRAY_UNSHIFT_EXPR,
+    ARRAY_PUSH_EXPR,
+    ARRAY_SHIFT_EXPR,
+    ARRAY_POP_EXPR
+  );
+
   TokenSet CUSTOM_EXPR_KEYWORDS = TokenSet.create(
     RESERVED_GREP,
     RESERVED_MAP,
@@ -164,6 +186,7 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
 
     RESERVED_UNDEF,
     RESERVED_RETURN,
+    RESERVED_EXIT,
 
     RESERVED_SHIFT,
     RESERVED_UNSHIFT,

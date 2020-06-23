@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.properties.PerlBlockOwner;
 import com.perl5.lang.perl.psi.properties.PerlLabelScope;
 import com.perl5.lang.perl.psi.properties.PerlReturnScope;
@@ -25,8 +26,9 @@ import org.jetbrains.annotations.Nullable;
 
 public interface PerlSortExpr extends PsiElement, PerlLabelScope, PerlBlockOwner, PerlReturnScope {
 
-  @Nullable
-  PsiPerlMethod getMethod();
+  default @Nullable PsiPerlMethod getMethod() {
+    return PsiTreeUtil.getChildOfType(this, PsiPerlMethod.class);
+  }
 
   /**
    * @return psi element to sort if any

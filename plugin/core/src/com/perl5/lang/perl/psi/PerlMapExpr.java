@@ -17,13 +17,14 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.properties.PerlBlockOwner;
 import com.perl5.lang.perl.psi.properties.PerlLabelScope;
 import org.jetbrains.annotations.Nullable;
 
 
 public interface PerlMapExpr extends PsiElement, PerlLabelScope, PerlBlockOwner {
-  @Nullable
-  PsiPerlExpr getExpr();
-
+  default @Nullable PsiPerlExpr getExpr() {
+    return PsiTreeUtil.getChildOfType(this, PsiPerlExpr.class);
+  }
 }

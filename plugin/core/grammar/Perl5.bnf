@@ -722,17 +722,23 @@ next_expr ::=  'next' [lnr_param] {pin=1}
 redo_expr ::=  'redo' [lnr_param] {pin=1}
 goto_expr ::=  'goto' [goto_param] {pin=1}
 
+private optional_scalar_expr_arguments ::= <<custom_expr_arguments optional_scalar_expr>>
+private unary_expr_arguments ::= <<custom_expr_arguments unary_expr>>
+private optional_unary_expr_arguments ::= <<custom_expr_arguments optional_unary_expr>>
+private list_expr_arguments ::= <<custom_expr_arguments parse_list_expr>>
+private custom_single_expr_argument ::= <<custom_expr_arguments single_argument_expr>>
+
 return_expr ::=  'return' [parse_list_expr] {pin=1}
-exit_expr ::= 'exit' [parse_scalar_expr] {pin=1}
-scalar_expr ::= 'scalar' single_argument_expr {pin=1}
-keys_expr ::= 'keys' single_argument_expr {pin=1}
-values_expr ::= 'values' single_argument_expr {pin=1}
-each_expr ::= 'each' single_argument_expr {pin=1}
-defined_expr ::= 'defined' [unary_expr] {pin=1}
+exit_expr ::= 'exit' [optional_scalar_expr_arguments] {pin=1}
+scalar_expr ::= 'scalar' custom_single_expr_argument {pin=1}
+keys_expr ::= 'keys' custom_single_expr_argument {pin=1}
+values_expr ::= 'values' custom_single_expr_argument {pin=1}
+each_expr ::= 'each' custom_single_expr_argument {pin=1}
+defined_expr ::= 'defined' [optional_unary_expr_arguments] {pin=1}
 wantarray_expr ::= 'wantarray' [default_parenthesised_call_arguments] {pin=1}
-delete_expr ::= 'delete' unary_expr {pin=1}
-splice_expr ::= 'splice' parse_list_expr {pin=1}
-bless_expr ::= 'bless' parse_list_expr {pin=1}
+delete_expr ::= 'delete' unary_expr_arguments {pin=1}
+splice_expr ::= 'splice' list_expr_arguments {pin=1}
+bless_expr ::= 'bless' list_expr_arguments {pin=1}
 
 array_unshift_expr ::= 'unshift' list_call_arguments {pin=1 implements="com.perl5.lang.perl.psi.PerlUnshiftPushExpr"}
 array_push_expr ::= 'push' list_call_arguments {pin=1 implements="com.perl5.lang.perl.psi.PerlUnshiftPushExpr"}
@@ -802,9 +808,11 @@ expr ::=
 
 // above list operators
 private parse_list_expr ::= <<parseExpressionLevel 2>>
+private optional_list_expr ::= [parse_list_expr]
 
 // List expression elements
 private parse_scalar_expr ::= <<parseExpressionLevel 3>>
+private optional_scalar_expr ::= [parse_scalar_expr]
 
 private parse_list_element ::=  <<parseExpressionLevel 4>>
 
@@ -879,9 +887,7 @@ continue_expr ::= 'continue' ['(' ')'] {pin=1}
 grep_expr ::=  'grep' parse_grep_map_arguments {pin=1}
 map_expr ::=  'map' parse_grep_map_arguments {pin=1}
 
-private parse_grep_map_arguments ::=
-    '(' grep_map_arguments_variants ')' !'['
-    | grep_map_arguments_variants
+private parse_grep_map_arguments ::= <<custom_expr_arguments grep_map_arguments_variants>>
 
 private grep_map_arguments_variants ::=
     grep_map_sort_with_block |
@@ -892,10 +898,10 @@ private grep_map_sort_with_block ::= parse_block [comma] grep_map_sort_tail
 
 private grep_map_sort_tail ::= parse_list_expr
 
+private meta custom_expr_arguments ::='(' <<x1>> ')' !'[' | <<x1>>
+
 sort_expr ::=  'sort' parse_sort_arguments {pin=1}
-private parse_sort_arguments ::=
-    '(' sort_arguments_variants ')' !'['
-    | sort_arguments_variants
+private parse_sort_arguments ::= <<custom_expr_arguments  sort_arguments_variants>>
 
 private sort_arguments_variants ::=
     grep_map_sort_with_block |
