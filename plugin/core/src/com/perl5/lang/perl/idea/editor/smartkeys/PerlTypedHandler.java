@@ -83,12 +83,11 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
     }
 
     EditorHighlighter highlighter = ((EditorEx)editor).getHighlighter();
-    HighlighterIterator iterator = highlighter.createIterator(currentOffset);
-    IElementType nextTokenType = iterator.atEnd() ? null : iterator.getTokenType();
+    HighlighterIterator nextPositionIterator = highlighter.createIterator(currentOffset);
+    IElementType nextTokenType = PerlEditorUtil.getTokenType(nextPositionIterator);
+
     char nextChar = currentOffset == documentSequence.length() ? 0 : documentSequence.charAt(currentOffset);
-    if (c == '<' && nextTokenType == RIGHT_ANGLE &&
-        currentOffset > 0 && documentSequence.charAt(currentOffset - 1) == '<' &&
-        (currentOffset < 3 || PerlEditorUtil.getPreviousTokenType(highlighter.createIterator(currentOffset - 2)) != RESERVED_QQ)) {
+    if (c == '<' && nextTokenType == RIGHT_ANGLE && currentOffset > 0 && documentSequence.charAt(currentOffset - 1) == '<') {
       document.replaceString(currentOffset, currentOffset + 1, "<");
       caretModel.moveToOffset(currentOffset + 1);
       return Result.STOP;
@@ -170,7 +169,7 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
       char openChar = text.charAt(offset);
       char closeChar = PerlString.getQuoteCloseChar(openChar);
       iterator.advance();
-      IElementType possibleCloseQuoteType = iterator.atEnd() ? null : iterator.getTokenType();
+      IElementType possibleCloseQuoteType = PerlEditorUtil.getTokenType(iterator);
       if (QUOTE_CLOSE_FIRST_ANY.contains(possibleCloseQuoteType) && closeChar == text.charAt(iterator.getStart())) {
         if (COMPLEX_QUOTE_OPENERS.contains(quotePrefixType) && StringUtil.containsChar(HANDLED_BY_BRACE_MATCHER, openChar)) {
           iterator.advance();

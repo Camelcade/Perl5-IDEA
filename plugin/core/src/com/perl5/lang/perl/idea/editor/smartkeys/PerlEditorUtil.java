@@ -20,6 +20,7 @@ import com.intellij.openapi.editor.ex.EditorEx;
 import com.intellij.openapi.editor.highlighter.HighlighterIterator;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -60,7 +61,23 @@ public class PerlEditorUtil {
    */
   public static @Nullable IElementType getPreviousTokenType(@NotNull HighlighterIterator iterator) {
     moveToPreviousMeaningfulToken(iterator);
-    return iterator.atEnd() ? null : iterator.getTokenType();
+    return getTokenType(iterator);
+  }
+
+  @Contract("null->null")
+  public static @Nullable IElementType getTokenType(@Nullable HighlighterIterator iterator) {
+    return iterator == null || iterator.atEnd() ? null : iterator.getTokenType();
+  }
+
+  public static int getTokenLength(@Nullable HighlighterIterator iterator) {
+    return iterator == null || iterator.atEnd() ? -1 : iterator.getEnd() - iterator.getStart();
+  }
+
+  @Contract("null->null")
+  public static @Nullable CharSequence getTokenChars(@Nullable HighlighterIterator iterator) {
+    return iterator == null || iterator.atEnd() ?
+           null :
+           iterator.getDocument().getCharsSequence().subSequence(iterator.getStart(), iterator.getEnd());
   }
 
   /**
@@ -68,7 +85,7 @@ public class PerlEditorUtil {
    */
   public static @Nullable IElementType getNextTokenType(@NotNull HighlighterIterator iterator) {
     moveToNextMeaningfulToken(iterator);
-    return iterator.atEnd() ? null : iterator.getTokenType();
+    return getTokenType(iterator);
   }
 
   /**

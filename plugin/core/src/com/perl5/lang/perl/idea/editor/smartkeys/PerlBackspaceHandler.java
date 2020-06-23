@@ -45,7 +45,7 @@ public class PerlBackspaceHandler extends BackspaceHandlerDelegate {
     }
     EditorHighlighter highlighter = ((EditorEx)editor).getHighlighter();
     HighlighterIterator iterator = highlighter.createIterator(currentOffset);
-    IElementType tokenToDelete = iterator.atEnd() ? null : iterator.getTokenType();
+    IElementType tokenToDelete = PerlEditorUtil.getTokenType(iterator);
     if (QUOTE_OPEN_ANY.contains(tokenToDelete)) {
       PerlEditorUtil.moveToNextMeaningfulToken(iterator);
       if (iterator.atEnd()) {
