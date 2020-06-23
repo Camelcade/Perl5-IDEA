@@ -85,22 +85,27 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
     EditorHighlighter highlighter = ((EditorEx)editor).getHighlighter();
     HighlighterIterator nextPositionIterator = highlighter.createIterator(currentOffset);
     IElementType nextTokenType = PerlEditorUtil.getTokenType(nextPositionIterator);
+    int nextTokenLength = PerlEditorUtil.getTokenLength(nextPositionIterator);
 
-    char nextChar = currentOffset == documentSequence.length() ? 0 : documentSequence.charAt(currentOffset);
-    if (c == '<' && nextTokenType == RIGHT_ANGLE && currentOffset > 0 && documentSequence.charAt(currentOffset - 1) == '<') {
+    HighlighterIterator prevPositionIterator = currentOffset > 0 ? highlighter.createIterator(currentOffset - 1) : null;
+    IElementType prevTokenType = PerlEditorUtil.getTokenType(prevPositionIterator);
+    int prevTokenLength = PerlEditorUtil.getTokenLength(prevPositionIterator);
+
+    if (c == '<' && prevTokenType == LEFT_ANGLE && prevTokenLength == 1 && nextTokenType == RIGHT_ANGLE && nextTokenLength == 1) {
       document.replaceString(currentOffset, currentOffset + 1, "<");
       caretModel.moveToOffset(currentOffset + 1);
       return Result.STOP;
     }
 
+    char nextChar = currentOffset == documentSequence.length() ? 0 : documentSequence.charAt(currentOffset);
     if (QUOTE_CLOSE_FIRST_ANY.contains(nextTokenType) && c == nextChar) {
       caretModel.moveToOffset(currentOffset + 1);
       return Result.STOP;
     }
 
     if (c == ':' && Perl5CodeInsightSettings.getInstance().AUTO_INSERT_COLON && currentOffset > 0) {
-      HighlighterIterator precedingIterator = highlighter.createIterator(currentOffset - 1);
-      if (isPreColonSuffix(precedingIterator)) {
+      assert prevPositionIterator != null;
+      if (isPreColonSuffix(prevPositionIterator)) {
         if (documentSequence.charAt(currentOffset - 1) != ':') {
           document.insertString(currentOffset, "::");
           caretModel.moveToOffset(currentOffset + 2);

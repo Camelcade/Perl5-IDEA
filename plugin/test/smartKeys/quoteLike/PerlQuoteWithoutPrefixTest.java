@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,10 @@ public class PerlQuoteWithoutPrefixTest extends PerlSmartKeysTestCase {
   public void testHeredocReplace() {doTest("<<caret>>", "<", "<<<caret>");}
 
   @Test
-  public void testHeredocNotReplace() {doTest("qq<<caret>>", "<", "qq<<<caret>>");}
+  public void testHeredocNotReplaceFat() {doTest("<<<caret>>>", "<", "<<<<caret>>>");}
+
+  @Test
+  public void testHeredocNotReplaceQQ() {doTest("qq<<caret>>", "<", "qq<<<caret>>");}
 
   @Test
   public void testHeredocReplaceWithOffset() {doTest("say <<caret>>", "<", "say <<<caret>");}
