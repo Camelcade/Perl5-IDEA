@@ -1,0 +1,8 @@
+my @list;
+@list = <>;
+@list = <FH>;
+@list = <Foo::Bar::FH>;
+@list = <Foo'Bar'FH>;
+@list = <$foo>;
+@list = <*.txt>;
+@list = <error descr="Double diamond available in perl 5.22+"><<>></error>;

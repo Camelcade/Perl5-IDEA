@@ -149,6 +149,9 @@ public class PerlSyntaxQuickFixesTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testDoubleDiamond510() {doTestVersionChange(V5_10, V5_22);}
+
+  @Test
   public void testSlices520Array() {
     doTestVersionChange(V5_10, V5_20);
   }

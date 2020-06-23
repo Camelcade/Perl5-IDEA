@@ -46,8 +46,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import static com.perl5.lang.perl.internals.PerlVersion.*;
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.LEFT_PAREN;
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.RIGHT_PAREN;
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.BITWISE_ASSIGN_OPERATORS_TOKENSET;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.BITWISE_OPERATORS_TOKENSET;
 
@@ -72,6 +71,22 @@ public class PerlSyntaxInspection extends PerlInspection {
           }
         }
         super.visitAssignExpr(o);
+      }
+
+      @Override
+      public void visitFileReadExpr(@NotNull PsiPerlFileReadExpr o) {
+        if (selectedVersion.lesserThan(V5_22)) {
+          PsiElement firstChild = o.getFirstChild();
+          PsiElement lastChild = o.getLastChild();
+          if (PsiUtilCore.getElementType(firstChild) == LEFT_ANGLE && firstChild.getTextLength() > 1 ||
+              PsiUtilCore.getElementType(lastChild) == RIGHT_ANGLE && lastChild.getTextLength() > 1) {
+            registerProblem(
+              holder, o,
+              PerlBundle.message("perl.inspection.double.diamond.unavailable"),
+              buildChangePerlVersionQuickFixes(GREATER_OR_EQUAL_V522));
+          }
+        }
+        super.visitFileReadExpr(o);
       }
 
       @Override
