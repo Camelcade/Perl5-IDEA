@@ -219,6 +219,11 @@ public class PerlDocUtil implements PerlElementTypes {
   }
 
   public static @Nullable PsiElement getPerlOpDoc(@NotNull PsiElement element) {
+    IElementType elementType = PsiUtilCore.getElementType(element);
+    if (elementType == LEFT_ANGLE || elementType == RIGHT_ANGLE) {
+      return resolveDescriptor(PodLinkDescriptor.create("perlop", "operator, i/o"), element, true);
+    }
+
     final Project project = element.getProject();
     String text = element.getText();
 

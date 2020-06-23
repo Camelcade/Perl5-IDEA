@@ -65,7 +65,10 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
 
       RESERVED_S,
       RESERVED_M,
-      RESERVED_QR
+      RESERVED_QR,
+
+      LEFT_ANGLE,
+      RIGHT_ANGLE
     )
   );
   private static final TokenSet FORCE_AS_FUNC_TOKENSET = TokenSet.orSet(TAGS_TOKEN_SET, TokenSet.create(BLOCK_NAME, OPERATOR_FILETEST));

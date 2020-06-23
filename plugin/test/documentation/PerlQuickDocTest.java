@@ -26,6 +26,16 @@ public class PerlQuickDocTest extends PerlQuickDocTestCase {
   }
 
   @Test
+  public void testDiamondSingle() {
+    doTest();
+  }
+
+  @Test
+  public void testDiamondDouble() {
+    doTest();
+  }
+
+  @Test
   public void testIsaOperator() {
     doTest532();
   }
