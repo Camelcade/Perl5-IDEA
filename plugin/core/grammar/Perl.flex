@@ -1057,7 +1057,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 	{CORE_PREFIX}"defined" / {MAY_BE_SPACES_OR_COMMENTS} "//"	{ yybegin(AFTER_IDENTIFIER); return RESERVED_DEFINED;}
 	{CORE_PREFIX}"defined"	                                { yybegin(YYINITIAL); return RESERVED_DEFINED;}
 
-	{CORE_PREFIX}"scalar"	 { yybegin(AFTER_IDENTIFIER); return RESERVED_SCALAR;}
+	{CORE_PREFIX}"scalar"	 { yybegin(YYINITIAL); return RESERVED_SCALAR;}
 	{CORE_PREFIX}"keys"	 { yybegin(YYINITIAL); return RESERVED_KEYS;}
 	{CORE_PREFIX}"values"	 { yybegin(YYINITIAL); return RESERVED_VALUES;}
 	{CORE_PREFIX}"each"	 { yybegin(YYINITIAL); return RESERVED_EACH;}
