@@ -4,5 +4,8 @@ my @list;
 @list = <Foo::Bar::FH>;
 @list = <Foo'Bar'FH>;
 @list = <$foo>;
+@list = <$Foo::Bar::foo>;
+@list = <something/$foo*>;
+@list = <something/$Foo::Bar::foo*>;
 @list = <*.txt>;
 @list = <<>>;

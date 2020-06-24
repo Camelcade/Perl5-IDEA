@@ -1,0 +1,35 @@
+PerlVariableReference at (21,25); text in range: 'list' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 3 in angledHandles.pl
+
+PerlVariableReference at (30,32); text in range: 'fh' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 14 in angledHandles.pl
+
+PerlVariableReference at (36,40); text in range: 'list' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 3 in angledHandles.pl
+
+PerlNamespaceReference at (44,65); text in range: 'MyTest::Some::Package' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MyTest::Some::Package at 0 in Package.pm
+
+PerlVariableReference at (73,77); text in range: 'list' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 3 in angledHandles.pl
+
+PerlNamespaceReference at (82,103); text in range: 'MyTest::Some::Package' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MyTest::Some::Package at 0 in Package.pm
+
+PerlVariableReference at (105,115); text in range: 'SCALAR_VAR' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 154 in Package.pm
+
+PerlVariableReference at (119,123); text in range: 'list' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 3 in angledHandles.pl
+
+PerlVariableReference at (138,140); text in range: 'fh' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 14 in angledHandles.pl
+
+PerlVariableReference at (145,149); text in range: 'list' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 3 in angledHandles.pl
+
+PerlNamespaceReference at (164,185); text in range: 'MyTest::Some::Package' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MyTest::Some::Package at 0 in Package.pm
+
+PerlVariableReference at (187,197); text in range: 'SCALAR_VAR' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 154 in Package.pm

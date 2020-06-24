@@ -65,8 +65,11 @@ FARROW = "=>"
 BAREWORD_MINUS = "-" ? {IDENTIFIER}
 
 // qualified identifer can't start with ', but variable can
-QUALIFIED_IDENTIFIER_TAIL = ("::"+ "'" ? | "::"* "'" ) {IDENTIFIER_CONTINUE}
-QUALIFIED_IDENTIFIER = ("::"+ "'" ?) ? {IDENTIFIER} {QUALIFIED_IDENTIFIER_TAIL}*  "::" *
+PACKAGE_SEPARATOR = "::"+ "'" ? | "::"* "'"
+QUALIFIED_IDENTIFIER_TAIL = {PACKAGE_SEPARATOR} {IDENTIFIER_CONTINUE}
+QUALIFIED_IDENTIFIER_WITHOUT_TRAILING_SEPARATOR = ("::"+ "'" ?) ? {IDENTIFIER} {QUALIFIED_IDENTIFIER_TAIL}*
+QUALIFIED_IDENTIFIER = {QUALIFIED_IDENTIFIER_WITHOUT_TRAILING_SEPARATOR}  "::" *
+QUALIFYING_PACKAGE = {QUALIFIED_IDENTIFIER_WITHOUT_TRAILING_SEPARATOR}  {PACKAGE_SEPARATOR}
 VARIABLE_QUALIFIED_IDENTIFIER = ("::"* "'" ?) ? {IDENTIFIER} {QUALIFIED_IDENTIFIER_TAIL}*  "::" *
 
 DQ_STRING = "\"" ([^\"]|"\\\\"|"\\\"" )* "\""?
@@ -666,9 +669,10 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 {LINE_COMMENT}				{return COMMENT_LINE;}
 
 <HANDLE_WITH_ANGLE>{
-	{IDENTIFIER} 	                {return HANDLE;}
-	">"				{yybegin(AFTER_IDENTIFIER);return RIGHT_ANGLE;}
-	[^]				{yybegin(YYINITIAL);yypushback(1);break;}
+        {QUALIFYING_PACKAGE} / {IDENTIFIER_CONTINUE} ">"   {return QUALIFYING_PACKAGE;}
+	{IDENTIFIER} 	                                   {return HANDLE;}
+	">"				                   {yybegin(AFTER_IDENTIFIER);return RIGHT_ANGLE;}
+	[^]				                   {yybegin(YYINITIAL);yypushback(1);break;}
 }
 
 <END_BLOCK>{
@@ -936,7 +940,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 // operands and starters
 <YYINITIAL,BLOCK_AS_VALUE,AFTER_COMMA>{
         <AFTER_IDENTIFIER,AFTER_VARIABLE> {
-          "<" / {IDENTIFIER}? ">"  		{yybegin(HANDLE_WITH_ANGLE);return LEFT_ANGLE;}
+          "<" / {QUALIFIED_IDENTIFIER_WITHOUT_TRAILING_SEPARATOR}? ">"		{yybegin(HANDLE_WITH_ANGLE);return LEFT_ANGLE;}
           "<" / "$"{IDENTIFIER}">"  		{yybegin(AFTER_VALUE);pushState();yybegin(QUOTE_LIKE_OPENER_QQ);return captureString();}
           "<<" / ">>"                           {yybegin(DOUBLE_ANGLE_CLOSE);return LEFT_ANGLE;}
         }

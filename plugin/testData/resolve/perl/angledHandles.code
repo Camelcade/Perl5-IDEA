@@ -1,0 +1,9 @@
+my @list;
+
+my $fh;
+
+@list = <$fh>;
+@list = <MyTest::Some::Package::FH>;
+@list = <$MyTest::Some::Package::SCALAR_VAR>;
+@list = <something/$fh*>;
+@list = <something/$MyTest::Some::Package::SCALAR_VAR*>;

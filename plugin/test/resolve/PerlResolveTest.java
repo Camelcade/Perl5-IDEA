@@ -28,6 +28,11 @@ public class PerlResolveTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testAngledHandles() {
+    doTest();
+  }
+
+  @Test
   public void testFunctionParametersMethodModifiers() {doTest();}
 
   @Test

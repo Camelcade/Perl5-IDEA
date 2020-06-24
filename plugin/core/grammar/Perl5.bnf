@@ -1187,7 +1187,7 @@ label_declaration ::= <<parseLabelDeclaration>> // custom faster method
 label_expr ::= IDENTIFIER|'subname' !'('
 private perl_version ::= <<parsePerlVersion>>
 private perl_handle ::=  perl_handle_expr | parse_block | scalar_variable !('{'|'['|<<isOperatorToken>>)
-perl_handle_expr ::= HANDLE
+perl_handle_expr ::= [QUALIFYING_PACKAGE] HANDLE
 
 //////////////////////////////////// constants /////////////////////////////////////////////////////////////////////////
 
