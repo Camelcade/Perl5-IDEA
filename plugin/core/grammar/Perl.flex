@@ -912,6 +912,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 <YYINITIAL,BLOCK_AS_VALUE,AFTER_COMMA,AFTER_POSSIBLE_SIGIL>{
 	"%"		{return startUnbracedVariable(AFTER_VARIABLE, SIGIL_HASH);}
 	"*"		{return startUnbracedVariable(AFTER_VARIABLE, SIGIL_GLOB);}
+        "&&" 	        {yybegin(YYINITIAL);return OPERATOR_AND;}
 	"&"		{return startUnbracedVariable(AFTER_VARIABLE, SIGIL_CODE);}
 }
 
@@ -921,6 +922,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
         "&" / {MAY_BE_SPACES_OR_COMMENTS} "~"  {yybegin(AFTER_POSSIBLE_SIGIL);return OPERATOR_BITWISE_AND;}
 	"%" / {AMBIGUOUS_SIGIL_SUFFIX}	{return startUnbracedVariable(AFTER_VARIABLE, SIGIL_HASH);}
 	"*"	/ {AMBIGUOUS_SIGIL_SUFFIX}	{return startUnbracedVariable(AFTER_VARIABLE, SIGIL_GLOB);}
+        "&&" 	{yybegin(YYINITIAL);return OPERATOR_AND;}
 	"&"	/ {AMBIGUOUS_SIGIL_SUFFIX}	{return startUnbracedVariable(AFTER_VARIABLE, SIGIL_CODE);}
 }
 

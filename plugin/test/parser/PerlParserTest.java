@@ -27,6 +27,9 @@ public class PerlParserTest extends PerlParserTestBase {
   }
 
   @Test
+  public void testDefinedAndLength() {doTest();}
+
+  @Test
   public void testShiftPopPushUnshift() {doTest();}
 
   @Test

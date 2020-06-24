@@ -1,0 +1,5 @@
+grep {defined && length} @smth;
+return grep {defined && !/$builtin/} @attrs;
+next unless defined && -d && -w _;
+for ($path, $query) { s/\#.*$// if defined && length }; # dumb clients sending URI fragments
+next unless defined && -d && -w _;
