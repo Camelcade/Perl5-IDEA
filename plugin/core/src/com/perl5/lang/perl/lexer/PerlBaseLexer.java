@@ -63,6 +63,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
   private static final List<IElementType> SQ_TOKENS = Arrays.asList(QUOTE_SINGLE_OPEN, STRING_CONTENT, QUOTE_SINGLE_CLOSE);
   private static final List<IElementType> XQ_TOKENS = Arrays.asList(QUOTE_TICK_OPEN, LP_STRING_QX, QUOTE_TICK_CLOSE);
   private static final List<IElementType> QW_TOKENS = Arrays.asList(QUOTE_SINGLE_OPEN, LP_STRING_QW, QUOTE_SINGLE_CLOSE);
+  private static final List<IElementType> GLOB_TOKENS = Arrays.asList(LEFT_ANGLE, LP_STRING_QQ, RIGHT_ANGLE);
 
   private static final Map<IElementType, Trinity<IElementType, IElementType, IElementType>> SIGILS_TO_TOKENS_MAP = new HashMap<>();
 
@@ -544,6 +545,9 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
     }
     if (currentState == QUOTE_LIKE_OPENER_QW || currentState == QUOTE_LIKE_OPENER_QW_NOSHARP) {
       return QW_TOKENS;
+    }
+    if (currentState == QUOTE_LIKE_OPENER_GLOB) {
+      return GLOB_TOKENS;
     }
 
     throw new RuntimeException("Unknown lexical state for string token " + currentState);

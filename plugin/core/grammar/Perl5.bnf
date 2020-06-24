@@ -872,6 +872,7 @@ term_expr ::=
     | compile_regex
     | tr_regex
     | file_read_expr
+    | file_glob_expr
     | require_expr
     | perl_handle_expr
     | <<parseParserExtensionTerm>>
@@ -966,8 +967,8 @@ private sub_expr_simple ::= <<sub_expr parse_block>>
 
 meta sub_expr ::=  <<x1>>  // fixme make sure that this one checked after definition and declaration
 
-file_read_expr ::= LEFT_ANGLE [perl_handle_expr] RIGHT_ANGLE
-
+file_read_expr ::= LEFT_ANGLE [perl_handle_expr|scalar_variable] RIGHT_ANGLE
+file_glob_expr ::= LEFT_ANGLE qq_string_content_with_lp RIGHT_ANGLE
 
 ////////////////////////// regular expressions /////////////////////////////////////////////////////////////////////////
 // pinning quotes leads to bug with replacement block
@@ -1198,7 +1199,8 @@ number_constant ::= NUMBER | NUMBER_VERSION | NUMBER_SIMPLE
 private string ::= string_bare | string_sq | string_dq | string_xq | heredoc_opener
 
 string_dq ::= [ 'qq'] quoted_qq_string
-private quoted_qq_string ::= QUOTE_DOUBLE_OPEN [<<consumeTokens 'LP_STRING_QQ'>> | qq_string_content ] QUOTE_DOUBLE_CLOSE {pin=1}
+private quoted_qq_string ::= QUOTE_DOUBLE_OPEN [qq_string_content_with_lp] QUOTE_DOUBLE_CLOSE {pin=1}
+private qq_string_content_with_lp ::= <<consumeTokens 'LP_STRING_QQ'>> | qq_string_content
 private qq_string_content ::= (STRING_CONTENT_QQ | interpolated_constructs)+
 
 string_xq ::= [ 'qx'] quoted_xq_string

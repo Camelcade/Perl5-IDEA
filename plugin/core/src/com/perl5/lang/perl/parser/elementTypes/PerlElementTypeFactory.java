@@ -203,6 +203,8 @@ public class PerlElementTypeFactory {
         };
       case "FILE_READ_EXPR":
         return new PerlElementTypeEx(name, PsiPerlFileReadExprImpl.class);
+      case "FILE_GLOB_EXPR":
+        return new PerlElementTypeEx(name, PsiPerlFileGlobExprImpl.class);
       case "FLIPFLOP_EXPR":
         return new PerlElementTypeEx(name, PsiPerlFlipflopExprImpl.class);
       case "FORMAT_DEFINITION":
