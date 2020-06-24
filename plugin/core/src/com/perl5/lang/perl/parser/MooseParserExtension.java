@@ -56,6 +56,16 @@ public class MooseParserExtension extends PerlParserExtension implements MooseEl
   public static final String KEYWORD_EXTENDS = "extends";
   public static final String KEYWORD_WITH = "with";
   public static final String KEYWORD_INNER = "inner";
+  private static final GeneratedParserUtilBase.Parser FALLBACK_METHOD_PARSER = (builder, level) -> {
+    IElementType tokenType = builder.getTokenType();
+    if (tokenType != RESERVED_HAS && !PARSER_TOKEN_SET.contains(tokenType)) {
+      return false;
+    }
+    PsiBuilder.Marker m = builder.mark();
+    builder.advanceLexer();
+    m.collapse(SUB_NAME);
+    return true;
+  };
 
   static {
     // in regular case, these tokens should be created in extension class
@@ -124,8 +134,8 @@ public class MooseParserExtension extends PerlParserExtension implements MooseEl
       m.done(SUB_CALL);
       return true;
     }
-    m.error("Incomplete has expression");
-    return true;
+    m.rollbackTo();
+    return PerlParserImpl.method(b, l, FALLBACK_METHOD_PARSER);
   }
 
   private static boolean parseAnnotatedSimpleStatement(PerlBuilder b, int l, IElementType keywordToken, IElementType statementToken) {
@@ -144,19 +154,21 @@ public class MooseParserExtension extends PerlParserExtension implements MooseEl
   }
 
   private static boolean parseDefault(PerlBuilder b, int l) {
-    PerlBuilder.Marker m = b.mark();
 
     IElementType tokenType = b.getTokenType();
-    if (PARSER_TOKEN_SET.contains(tokenType)) {
-      b.advanceLexer();
-      if (PerlParserImpl.expr(b, l, -1)) {
-        PerlParserUtil.parseStatementModifier(b, l);
-        m.done(RESERVED_TO_STATEMENT_MAP.get(tokenType));
-        return true;
-      }
+    if (!PARSER_TOKEN_SET.contains(tokenType)) {
+      return false;
+    }
+
+    PerlBuilder.Marker m = b.mark();
+    b.advanceLexer();
+    if (PerlParserImpl.expr(b, l, -1)) {
+      PerlParserUtil.parseStatementModifier(b, l);
+      m.done(RESERVED_TO_STATEMENT_MAP.get(tokenType));
+      return true;
     }
 
     m.rollbackTo();
-    return false;
+    return PerlParserImpl.method(b, l, FALLBACK_METHOD_PARSER);
   }
 }

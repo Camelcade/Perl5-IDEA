@@ -1,0 +1,10 @@
+%e = (extends , sub{
+    eval"no $_[0]()";
+    @{$P . ISA} = $_[0]
+},has, sub {
+    my $n = shift;
+    my $m = sub {$#_ ? $_[0]{$n} = $_[1] : $_[0]{$n}};
+    @_ = (default, @_) if !($#_ % 2);
+    $m = $o{$_}->($m, $n, @_) for sort keys %o;
+    *{$P . $n} = $m
+}, %e,);

@@ -27,6 +27,9 @@ public class PerlParserTest extends PerlParserTestBase {
   }
 
   @Test
+  public void testMooseDefaultFallback() {doTest();}
+
+  @Test
   public void testNotAnnotationComment() {doTest();}
 
   @Test

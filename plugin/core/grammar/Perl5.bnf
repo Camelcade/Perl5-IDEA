@@ -1176,7 +1176,7 @@ private normal_method ::= <<method method_tokens>>
 private method_tokens ::= 'list' | 'unary' | 'unary_custom'| 'argumentless' |
   'package::name::' 'subname' |
   'subname' ['package::name'] |
-  'method' | 'func' |
+  'method' | 'func' | 'default' |
   'finally' | 'try' | 'catch' |
   'switch' | 'case'
 
