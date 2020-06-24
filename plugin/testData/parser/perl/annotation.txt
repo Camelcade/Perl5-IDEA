@@ -55,10 +55,7 @@ Perl5
       PsiElement(Perl5: #@noinspection)('#@noinspection')
       PsiErrorElement:Perl5: STRING_CONTENT expected
         <empty list>
-  PerlAnnotationContainerImpl(COMMENT_ANNOTATION)
-    PsiErrorElement:<comment annotation> expected
-      <empty list>
-    PsiComment(Perl5: COMMENT_LINE)('#@')
+  PsiComment(Perl5: COMMENT_LINE)('#@')
 --------------------------------------------------------------------------------
 Subtree: Perl5 POD (Perl5 POD)
 POD file
