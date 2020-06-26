@@ -39,10 +39,10 @@ public abstract class PerlDereferenceElementType extends PerlReparseableElementT
   }
 
   @Override
-  protected boolean isReparseable(@NotNull ASTNode parent,
-                                  @NotNull CharSequence buffer,
-                                  @NotNull Language fileLanguage,
-                                  @NotNull Project project) {
+  protected boolean isReparseableOld(@NotNull ASTNode parent,
+                                     @NotNull CharSequence buffer,
+                                     @NotNull Language fileLanguage,
+                                     @NotNull Project project) {
     Lexer lexer = createLexer(parent, this);
     boolean result = hasProperTokensStructure(buffer, lexer);
     if (LOG.isDebugEnabled()) {

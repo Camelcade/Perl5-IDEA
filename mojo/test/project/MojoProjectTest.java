@@ -19,7 +19,7 @@ package project;
 import base.PerlPlatformTestCase;
 import categories.Heavy;
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.ui.TestDialogManager;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.testFramework.PlatformTestUtil;
 import com.perl5.lang.mojolicious.MojoUtil;
@@ -49,7 +49,7 @@ public class MojoProjectTest extends PerlPlatformTestCase {
   @Test
   public void testGenerateAppAction() {
     assertMojoAvailable();
-    Messages.setTestInputDialog(message -> "Test::App");
+    TestDialogManager.setTestInputDialog(message -> "Test::App");
     runAction(new MojoGenerateAppAction(), getMainContentRoot());
     List<MojoProject> projects = refreshAndRescanForProjects().getMojoProjects();
     if (projects.size() != 1) {
@@ -63,7 +63,7 @@ public class MojoProjectTest extends PerlPlatformTestCase {
   public void testGenerateLiteAppAction() {
     assertMojoAvailable();
     VirtualFile mainContentRoot = getMainContentRoot();
-    Messages.setTestInputDialog(message -> "my_lite_app.pl");
+    TestDialogManager.setTestInputDialog(message -> "my_lite_app.pl");
     runAction(new MojoGenerateLiteAppAction(), mainContentRoot);
     refreshAndRescanForProjects().getMojoProjects();
     assertNotNull(mainContentRoot.findChild("my_lite_app.pl"));
@@ -80,7 +80,7 @@ public class MojoProjectTest extends PerlPlatformTestCase {
   @Test
   public void testGeneratePluginAction() {
     assertMojoAvailable();
-    Messages.setTestInputDialog(message -> "Test::Plugin");
+    TestDialogManager.setTestInputDialog(message -> "Test::Plugin");
     runAction(new MojoGeneratePluginAction(), getMainContentRoot());
     List<MojoProject> projects = refreshAndRescanForProjects().getMojoProjects();
     if (projects.size() != 1) {

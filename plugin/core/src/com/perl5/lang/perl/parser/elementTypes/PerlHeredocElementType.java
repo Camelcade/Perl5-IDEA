@@ -48,10 +48,10 @@ public class PerlHeredocElementType extends PerlReparseableElementType {
   @ApiStatus.ScheduledForRemoval(inVersion = "2020.3")
   @Deprecated
   @Override
-  protected boolean isReparseable(@NotNull ASTNode parent,
-                                  @NotNull CharSequence buffer,
-                                  @NotNull Language fileLanguage,
-                                  @NotNull Project project) {
+  protected boolean isReparseableOld(@NotNull ASTNode parent,
+                                     @NotNull CharSequence buffer,
+                                     @NotNull Language fileLanguage,
+                                     @NotNull Project project) {
     ASTNode run = parent.getFirstChildNode();
     if (run == null) {
       return false;

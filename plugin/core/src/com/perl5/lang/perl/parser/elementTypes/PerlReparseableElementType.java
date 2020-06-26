@@ -111,7 +111,7 @@ public abstract class PerlReparseableElementType extends IReparseableElementType
     if (parent == null || !isParentOk(parent)) {
       return false;
     }
-    return isReparseable(parent, buffer, fileLanguage, project);
+    return isReparseableOld(parent, buffer, fileLanguage, project);
   }
 
   protected boolean isParentOk(@NotNull ASTNode parent) {
@@ -125,10 +125,10 @@ public abstract class PerlReparseableElementType extends IReparseableElementType
     return true;
   }
 
-  protected abstract boolean isReparseable(@NotNull ASTNode parent,
-                                           @NotNull CharSequence buffer,
-                                           @NotNull Language fileLanguage,
-                                           @NotNull Project project);
+  protected abstract boolean isReparseableOld(@NotNull ASTNode parent,
+                                              @NotNull CharSequence buffer,
+                                              @NotNull Language fileLanguage,
+                                              @NotNull Project project);
 
 
   @Override

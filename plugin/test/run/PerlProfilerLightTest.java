@@ -125,12 +125,7 @@ public class PerlProfilerLightTest extends PerlLightTestCase {
         .append(serializePresentation(elementPresentation))
         .append(SEPARATOR_NEWLINES);
       navigatablePsiElement.navigate(true);
-      try {
-        PlatformTestUtil.dispatchAllEventsInIdeEventQueue();
-      }
-      catch (InterruptedException e) {
-        throw new RuntimeException(e);
-      }
+      PlatformTestUtil.dispatchAllEventsInIdeEventQueue();
       FileEditorManager fileEditorManager = FileEditorManager.getInstance(getProject());
       var selectedFileEditor = fileEditorManager.getSelectedEditor();
       assertInstanceOf(selectedFileEditor, TextEditor.class);

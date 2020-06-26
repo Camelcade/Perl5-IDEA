@@ -59,7 +59,7 @@ public abstract class PerlPolyNamedElementType<Stub extends PerlPolyNamedElement
   }
 
   @Override
-  public final @NotNull Stub createStub(@NotNull Psi psi, StubElement parentStub) {
+  public @NotNull Stub createStub(@NotNull Psi psi, StubElement<?> parentStub) {
     List<StubElement<?>> lightNamedElements = new ArrayList<>();
     Stub result = createStub(psi, parentStub, lightNamedElements);
 

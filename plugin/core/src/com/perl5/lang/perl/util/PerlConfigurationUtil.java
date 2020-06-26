@@ -67,7 +67,7 @@ public class PerlConfigurationUtil {
           BaseListPopupStep<FileNameMatcher> fileNameMatcherBaseListPopupStep =
             new BaseListPopupStep<FileNameMatcher>("Select Extension", possibleItems, itemsIcons) {
               @Override
-              public PopupStep<FileNameMatcher> onChosen(FileNameMatcher selectedValue, boolean finalChoice) {
+              public PopupStep<?> onChosen(FileNameMatcher selectedValue, boolean finalChoice) {
                 substitutedExtensionsModel.add(selectedValue.getPresentableString());
                 //noinspection unchecked
                 return super.onChosen(selectedValue, finalChoice);

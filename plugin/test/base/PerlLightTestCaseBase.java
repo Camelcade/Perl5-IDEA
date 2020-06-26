@@ -114,7 +114,6 @@ import com.intellij.openapi.vfs.CharsetToolkit;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileFilter;
-import com.intellij.openapi.vfs.newvfs.impl.VfsRootAccess;
 import com.intellij.psi.*;
 import com.intellij.psi.codeStyle.CodeStyleManager;
 import com.intellij.psi.impl.BlockSupportImpl;
@@ -270,7 +269,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   protected void setUp() throws Exception {
     super.setUp();
     LiveTemplateCompletionContributor.setShowTemplatesInTests(true, getTestRootDisposable());
-    VfsRootAccess.allowRootAccess(getTestRootDisposable(), "/");
+    //VfsRootAccess.allowRootAccess(getTestRootDisposable(), "/");
     ElementManipulators.INSTANCE.addExplicitExtension(PerlStringMixin.class, new PerlStringManipulator());
     ElementManipulators.INSTANCE.addExplicitExtension(PerlStringBareMixin.class, new PerlBareStringManipulator());
     ElementManipulators.INSTANCE.addExplicitExtension(PerlStringContentElement.class, new PerlStringContentManipulator());

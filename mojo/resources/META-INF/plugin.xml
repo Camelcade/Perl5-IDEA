@@ -48,7 +48,6 @@
                                implementationClass="com.perl5.lang.mojolicious.filetypes.MojoliciousEditorHighlighterProvider"/>
     <lang.parserDefinition language="Mojolicious Perl"
                            implementationClass="com.perl5.lang.mojolicious.MojoliciousParserDefinition"/>
-    <lang.ast.factory language="Mojolicious Perl" implementationClass="com.perl5.lang.mojolicious.MojoliciousAstFactory"/>
     <lang.fileViewProviderFactory language="Mojolicious Perl"
                                   implementationClass="com.perl5.lang.mojolicious.psi.MojoliciousFileViewProviderFactory"/>
     <lang.syntaxHighlighterFactory language="Mojolicious Perl"

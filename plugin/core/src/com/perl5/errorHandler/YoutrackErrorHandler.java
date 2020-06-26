@@ -76,10 +76,10 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
   }
 
   @Override
-  public boolean submit(@NotNull IdeaLoggingEvent[] events,
+  public boolean submit(IdeaLoggingEvent @NotNull [] events,
                         @Nullable String additionalInfo,
                         @NotNull Component parentComponent,
-                        @NotNull Consumer<SubmittedReportInfo> consumer) {
+                        @NotNull Consumer<? super SubmittedReportInfo> consumer) {
     final DataContext dataContext = DataManager.getInstance().getDataContext(parentComponent);
     final Project project = CommonDataKeys.PROJECT.getData(dataContext);
 

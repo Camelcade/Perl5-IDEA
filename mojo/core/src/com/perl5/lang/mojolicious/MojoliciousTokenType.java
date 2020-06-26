@@ -19,10 +19,13 @@ package com.perl5.lang.mojolicious;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.impl.source.tree.PsiCommentImpl;
+import com.intellij.psi.templateLanguages.OuterLanguageElementImpl;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.ILeafElementType;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
+
+import static com.perl5.lang.mojolicious.MojoliciousElementTypes.MOJO_OUTER_ELEMENT_TYPE;
 
 
 public class MojoliciousTokenType extends IElementType implements ILeafElementType {
@@ -38,6 +41,9 @@ public class MojoliciousTokenType extends IElementType implements ILeafElementTy
   public @NotNull ASTNode createLeafNode(@NotNull CharSequence leafText) {
     if (MojoliciousParserDefinition.COMMENTS.contains(this)) {
       return new PsiCommentImpl(this, leafText);
+    }
+    else if (this == MOJO_OUTER_ELEMENT_TYPE) {
+      return new OuterLanguageElementImpl(this, leafText);
     }
     else {
       return new LeafPsiElement(this, leafText);

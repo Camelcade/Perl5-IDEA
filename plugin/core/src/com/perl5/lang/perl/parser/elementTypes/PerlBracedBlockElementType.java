@@ -35,10 +35,10 @@ public abstract class PerlBracedBlockElementType extends PerlReparseableElementT
   }
 
   @Override
-  protected boolean isReparseable(@NotNull ASTNode parent,
-                                  @NotNull CharSequence buffer,
-                                  @NotNull Language fileLanguage,
-                                  @NotNull Project project) {
+  protected boolean isReparseableOld(@NotNull ASTNode parent,
+                                     @NotNull CharSequence buffer,
+                                     @NotNull Language fileLanguage,
+                                     @NotNull Project project) {
     Lexer lexer = createLexer(parent, this);
     boolean result = hasProperBraceBalance(buffer, lexer, getOpeningBraceType());
     if (LOG.isDebugEnabled()) {

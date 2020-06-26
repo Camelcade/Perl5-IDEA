@@ -18,15 +18,15 @@ package rename;
 
 
 import base.PerlLightTestCase;
-import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.ui.TestDialog;
+import com.intellij.openapi.ui.TestDialogManager;
 import org.junit.Test;
 
 public class PerlRenameTest extends PerlLightTestCase {
   @Override
   protected void tearDown() throws Exception {
     try {
-      Messages.setTestDialog(TestDialog.DEFAULT);
+      TestDialogManager.setTestDialog(TestDialog.DEFAULT);
     }
     finally {
       super.tearDown();
@@ -40,13 +40,13 @@ public class PerlRenameTest extends PerlLightTestCase {
 
   @Test
   public void testFunctionParametersMethodModifiers() {
-    Messages.setTestDialog(TestDialog.OK);
+    TestDialogManager.setTestDialog(TestDialog.OK);
     doTestRename();
   }
 
   @Test
   public void testFunctionParametersMethodModifiersCurrent() {
-    Messages.setTestDialog(TestDialog.NO);
+    TestDialogManager.setTestDialog(TestDialog.NO);
     doTestRename();
   }
 

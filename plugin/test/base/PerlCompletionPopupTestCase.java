@@ -21,6 +21,7 @@ import com.intellij.codeInsight.lookup.LookupManager;
 import com.intellij.codeInsight.template.impl.editorActions.ExpandLiveTemplateByTabAction;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.testFramework.fixtures.CompletionAutoPopupTester;
+import com.intellij.util.ThrowableRunnable;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class PerlCompletionPopupTestCase extends PerlLightTestCaseBase {
@@ -38,8 +39,8 @@ public abstract class PerlCompletionPopupTestCase extends PerlLightTestCaseBase 
   }
 
   @Override
-  protected final void invokeTestRunnable(@NotNull Runnable runnable) {
-    myTester.runWithAutoPopupEnabled(runnable);
+  protected void runTestRunnable(@NotNull ThrowableRunnable<Throwable> testRunnable) throws Throwable {
+    myTester.runWithAutoPopupEnabled(testRunnable);
   }
 
   protected void doTest(@NotNull String initial, @NotNull String toType) {
