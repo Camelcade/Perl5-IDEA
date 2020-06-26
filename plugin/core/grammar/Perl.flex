@@ -154,13 +154,6 @@ REGEX_POSIX_CHARGROUPS = "alpha"|"alnum"|"ascii"|"cntrl"|"digit"|"graph"|"lower"
 POSIX_CHARGROUP = "[:" "^"? {REGEX_POSIX_CHARGROUPS} ":]"
 POSIX_CHARGROUP_DOUBLE = "[[:" "^"? {REGEX_POSIX_CHARGROUPS} ":]]"
 POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
-//REGEX_POSIX_OPEN = "[:"
-//REGEX_POSIX_CLOSE = ":]"
-//REGEX_POSIX_END = "^"? {REGEX_POSIX_CHARGROUPS}? {REGEX_POSIX_CLOSE}
-
-//REGEX_NUMBER_OCTAL = "0"[0-7]+
-//REGEX_NUMBER_HEX = [xX][0-9a-fA-F]+
-//REGEX_ESCAPES = '\\' ([nNtra]| {REGEX_NUMBER_OCTAL} | {REGEX_NUMBER_HEX})
 
 %state LEX_HANDLE, LEX_HANDLE_STRICT,LEX_PRINT_HANDLE,LEX_PRINT_HANDLE_STRICT
 %xstate END_BLOCK
@@ -460,36 +453,6 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 	[^]										{yypushback(1);popState();}
 	<<EOF>>									{yybegin(YYINITIAL);}
 }
-
-
-//////////////////////////////////// REGULAR EXPRESSION ////////////////////////////////////////////////////////////////
-
-/*
-<REGEX_POSIX_CHAR_CLASS>{
-	{REGEX_POSIX_CHARGROUPS}	{return REGEX_POSIX_CLASS_NAME;}
-	"^"							{return OPERATOR_BITWISE_XOR;}
-	{REGEX_POSIX_CLOSE}			{yybegin(LEX_REGEX_CHAR_CLASS);return REGEX_POSIX_RIGHT_BRACKET;}
-}
-
-<LEX_REGEX_CHAR_CLASS_START>{
-	"^" / "-"					{return OPERATOR_BITWISE_XOR;}
-	"^"							{yybegin(LEX_REGEX_CHAR_CLASS); return OPERATOR_BITWISE_XOR;}
-	"-"							{yybegin(LEX_REGEX_CHAR_CLASS); return REGEX_CHAR_CLASS;}
-	[^]							{yypushback(1);yybegin(LEX_REGEX_CHAR_CLASS);}
-}
-
-<LEX_REGEX_CHAR_CLASS>{
-	"]"										{popState();return REGEX_RIGHT_BRACKET;}
-	"-" / "]"								{return REGEX_CHAR_CLASS;}
-	"@" / [\]%\\]							{return REGEX_CHAR_CLASS;}
-	"$" / \s+ "]"							{return REGEX_CHAR_CLASS;}
-	{REGEX_POSIX_OPEN} / {REGEX_POSIX_END}	{yybegin(REGEX_POSIX_CHAR_CLASS);return REGEX_POSIX_LEFT_BRACKET;}
-	{REGEX_CHAR_CLASS}						{return REGEX_CHAR_CLASS;}
-	"\\".									{return REGEX_CHAR_CLASS;}
-	"-"										{return OPERATOR_MINUS;}
-	[^]										{return REGEX_CHAR_CLASS;}
-}
-*/
 
 <REGEX_CHARCLASS_X, REGEX_CHARCLASS_XX>{
   {POSIX_CHARGROUP_ANY} {return REGEX_TOKEN;}
