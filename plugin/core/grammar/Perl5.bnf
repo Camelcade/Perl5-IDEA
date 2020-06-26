@@ -83,6 +83,33 @@
     NUMBER='NUMBER'
     NUMBER_SIMPLE='NUMBER_SIMPLE' // fixme get rid of
 
+    STRING_SPECIAL_TAB='\t'
+    STRING_SPECIAL_NEWLINE='\n'
+    STRING_SPECIAL_RETURN='\r'
+    STRING_SPECIAL_FORMFEED='\f'
+    STRING_SPECIAL_BACKSPACE='\b'
+    STRING_SPECIAL_ALARM='\a'
+    STRING_SPECIAL_ESCAPE='\e'
+
+    STRING_SPECIAL_LCFIRST='\l'
+    STRING_SPECIAL_TCFIRST='\\u'
+
+    STRING_SPECIAL_CONTROL='\c['
+    STRING_SPECIAL_CONTROL_OTHER='\c*'
+
+    STRING_SPECIAL_HEX='\x{'
+    STRING_SPECIAL_HEX_RESTRICTED='\x'
+    STRING_SPECIAL_UNICODE_NAME='\N{'
+    STRING_SPECIAL_UNICODE_CODE='\N{U'
+    STRING_SPECIAL_OCTAL='\o{'
+    STRING_SPECIAL_OCTAL_RESTRICTED='\0'
+
+    STRING_SPECIAL_LOWERCASE_START='\L'
+    STRING_SPECIAL_UPPERCASE_START='\U'
+    STRING_SPECIAL_FOLDCASE_START='\F'
+    STRING_SPECIAL_QUOTE_START='\Q'
+    STRING_SPECIAL_MODIFIER_END='\E'
+
     RESERVED_IF='if'
     RESERVED_UNLESS='unless'
     RESERVED_ELSIF='elsif'
@@ -1201,11 +1228,15 @@ private string ::= string_bare | string_sq | string_dq | string_xq | heredoc_ope
 string_dq ::= [ 'qq'] quoted_qq_string
 private quoted_qq_string ::= QUOTE_DOUBLE_OPEN [qq_string_content_with_lp] QUOTE_DOUBLE_CLOSE {pin=1}
 private qq_string_content_with_lp ::= <<consumeTokens 'LP_STRING_QQ'>> | qq_string_content
-private qq_string_content ::= (STRING_CONTENT_QQ | interpolated_constructs)+
+private qq_string_content ::= qq_string_element+
+private qq_string_element ::= STRING_CONTENT_QQ | special_constructs | interpolated_constructs
+private special_constructs ::= '\t'|'\n'|'\r'|'\f'|'\b'|'\a'|'\e'|'\l'|'\\u'|'\c['|'\c*'|
+                               '\L'|'\U'|'\F'|'\Q'|'\E'
 
 string_xq ::= [ 'qx'] quoted_xq_string
-private quoted_xq_string ::= QUOTE_TICK_OPEN [<<consumeTokens 'LP_STRING_QX'>> | xq_string_content] QUOTE_TICK_CLOSE {pin=1}
-private xq_string_content ::= (STRING_CONTENT_XQ | interpolated_constructs)+
+private quoted_xq_string ::= QUOTE_TICK_OPEN [<<consumeTokens 'LP_STRING_QX'>> | qx_string_content] QUOTE_TICK_CLOSE {pin=1}
+private qx_string_content ::= qx_string_element+
+private qx_string_element ::= STRING_CONTENT_XQ | special_constructs |interpolated_constructs
 
 private interpolated_constructs ::= deref_expr
 
@@ -1309,7 +1340,7 @@ annotation_noinspection ::=  '#@noinspection' string_bare {pin=1}
 /******************************************* Lazy parsable elements *******************************************************/
 lp_string_qq ::= qq_string_content {extraRoot=true}
 lp_string_q ::= sq_string_content {extraRoot=true}
-lp_string_qx ::= xq_string_content{extraRoot=true}
+lp_string_qx ::= qx_string_content{extraRoot=true}
 lp_string_qw ::= qw_string_content{extraRoot=true}
 
 lp_regex ::= perl_regex {extraRoot=true}
@@ -1323,7 +1354,7 @@ parsable_string_use_vars ::= use_vars_declarations {extraRoot=true}
 comment_annotation ::= annotation {extraRoot=true}
 heredoc ::= sq_string_content {extraRoot=true}
 heredoc_qq ::= qq_string_content {extraRoot=true}
-heredoc_qx ::= xq_string_content{extraRoot=true}
+heredoc_qx ::= qx_string_content{extraRoot=true}
 /******************************************* End of Lazy parsable elements *******************************************************/
 
 /**********************************************************  switch.pm ******************************************************************/

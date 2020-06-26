@@ -350,8 +350,6 @@ The try block died with:
     PERL_ARRAY => DEFAULT_IDENTIFIER => TEXT
 _
     PERL_ARRAY => DEFAULT_IDENTIFIER => TEXT
-\n
-    PERL_DQ_STRING => DEFAULT_STRING
 "
     PERL_DQ_STRING => DEFAULT_STRING
 ;
@@ -366,7 +364,7 @@ print
     PERL_KEYWORD => DEFAULT_KEYWORD
 "
     PERL_DQ_STRING => DEFAULT_STRING
-The try block ran without error.\n
+The try block ran without error.
     PERL_DQ_STRING => DEFAULT_STRING
 "
     PERL_DQ_STRING => DEFAULT_STRING

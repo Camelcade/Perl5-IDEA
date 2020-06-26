@@ -472,7 +472,7 @@ E
     PERL_COMMA => DEFAULT_COMMA
 "
     PERL_DQ_STRING => DEFAULT_STRING
- had a problem\n
+ had a problem
     PERL_DQ_STRING => DEFAULT_STRING
 "
     PERL_DQ_STRING => DEFAULT_STRING
@@ -564,7 +564,7 @@ STDERR
     PERL_HANDLE => PERL_GLOB => DEFAULT_IDENTIFIER => TEXT
 "
     PERL_DQ_STRING => DEFAULT_STRING
-Well I don't know what to say\n
+Well I don't know what to say
     PERL_DQ_STRING => DEFAULT_STRING
 "
     PERL_DQ_STRING => DEFAULT_STRING

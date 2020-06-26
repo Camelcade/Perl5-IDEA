@@ -599,18 +599,41 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 	"$" /  {NON_SPACE_AHEAD}   	{pushState();yybegin(INTERPOLATED_VARIABLE_SUFFIX);return startUnbracedVariable(SIGIL_SCALAR); }
 }
 
+<STRING_QQ,STRING_QX>{
+        "\\t"     {return STRING_SPECIAL_TAB;}
+        "\\n"     {return STRING_SPECIAL_NEWLINE;}
+        "\\r"     {return STRING_SPECIAL_RETURN;}
+        "\\f"     {return STRING_SPECIAL_FORMFEED;}
+        "\\b"     {return STRING_SPECIAL_BACKSPACE;}
+        "\\a"     {return STRING_SPECIAL_ALARM;}
+        "\\e"     {return STRING_SPECIAL_ESCAPE;}
+
+        "\\l"     {return STRING_SPECIAL_LCFIRST;}
+        "\\u"     {return STRING_SPECIAL_TCFIRST;}
+
+        "\\c["        {return STRING_SPECIAL_CONTROL;}
+        "\\c"[?-_a-z] {return STRING_SPECIAL_CONTROL_OTHER;}
+
+        "\\L"     {return STRING_SPECIAL_LOWERCASE_START;}
+        "\\U"     {return STRING_SPECIAL_UPPERCASE_START;}
+        "\\F"     {return STRING_SPECIAL_FOLDCASE_START;}
+        "\\Q"     {return STRING_SPECIAL_QUOTE_START;}
+        // fixme this need to be smarter, and lex this way only if there is an opened block
+        "\\E"     {return STRING_SPECIAL_MODIFIER_END;}
+}
+
 <STRING_QQ>{
 	"\\"[\$\@]					{return STRING_CONTENT_QQ;}
 	// chars with special treatments
 	[^$\@\\]+					{return STRING_CONTENT_QQ;}
-	[^]							{return STRING_CONTENT_QQ;}
+	[^]						{return STRING_CONTENT_QQ;}
 }
 
 <STRING_QX>{
 	"\\"[\$\@]					{return STRING_CONTENT_XQ;}
 	// chars with special treatments
 	[^\$\@\\]+					{return STRING_CONTENT_XQ;}
-	[^]							{return STRING_CONTENT_XQ;}
+	[^]						{return STRING_CONTENT_XQ;}
 }
 
 <STRING_LIST>

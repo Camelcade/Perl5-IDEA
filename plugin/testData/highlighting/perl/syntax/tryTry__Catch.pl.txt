@@ -106,7 +106,7 @@ print
     PERL_KEYWORD => DEFAULT_KEYWORD
 "
     PERL_DQ_STRING => DEFAULT_STRING
-finally was called\n
+finally was called
     PERL_DQ_STRING => DEFAULT_STRING
 "
     PERL_DQ_STRING => DEFAULT_STRING
