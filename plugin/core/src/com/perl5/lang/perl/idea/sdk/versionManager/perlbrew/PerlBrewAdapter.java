@@ -34,7 +34,9 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static com.perl5.PerlIcons.PERLBREW_ICON;
@@ -53,6 +55,7 @@ public class PerlBrewAdapter extends PerlVersionManagerAdapter {
   static final String PERLBREW_LIST = "list";
   static final String PERLBREW_INFO = "info";
   static final String PERLBREW_AVAILABLE = "available";
+  static final String PERLBREW_AVAILABLE_ALL = "--all";
   static final String PERLBREW_WITH = "--with";
   static final String PERLBREW_QUIET = "-q";
   static final String PERLBREW_VERBOSE = "--verbose";
@@ -102,8 +105,20 @@ public class PerlBrewAdapter extends PerlVersionManagerAdapter {
 
   @Override
   protected @Nullable List<String> getInstallableDistributionsList() {
-    List<String> rawAvailable = getOutput(PERLBREW_AVAILABLE);
-    return parseInstallableDistributionsList(rawAvailable);
+    List<String> filteredDistributions = parseInstallableDistributionsList(getOutput(PERLBREW_AVAILABLE, PERLBREW_AVAILABLE_ALL));
+    if (filteredDistributions == null) {
+      return null;
+    }
+
+    List<String> installedDistributionsList = getInstalledDistributionsList();
+    if (installedDistributionsList == null) {
+      return filteredDistributions;
+    }
+
+    Set<String> installedNames = new HashSet<>(installedDistributionsList);
+
+    return ContainerUtil.map(filteredDistributions, it ->
+      installedNames.contains(it) ? PerlBrewInstallPerlHandler.INSTALLED_PREFIX + it : it);
   }
 
   @Override
@@ -144,7 +159,11 @@ public class PerlBrewAdapter extends PerlVersionManagerAdapter {
     if (output == null) {
       return null;
     }
-    return output.stream().map(String::trim).filter(StringUtil::isNotEmpty).collect(Collectors.toList());
+    return output.stream()
+      .map(s -> s.trim().replace(".tar.bz2", ""))
+      .filter(StringUtil::isNotEmpty)
+      .filter(it -> !StringUtil.startsWith(it, "perl5"))
+      .collect(Collectors.toList());
   }
 
   @Override

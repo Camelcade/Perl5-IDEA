@@ -28,6 +28,9 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 
 class PerlBrewInstallPerlHandler extends InstallPerlHandler {
+
+  static final String INSTALLED_PREFIX = "i ";
+
   public PerlBrewInstallPerlHandler(@NotNull String versionManagerPath,
                                     @NotNull PerlRealVersionManagerHandler<?, ?> versionManageHandler) {
     super(versionManagerPath, versionManageHandler);
@@ -59,11 +62,11 @@ class PerlBrewInstallPerlHandler extends InstallPerlHandler {
 
   @Override
   protected @NotNull String doCleanDistributionItem(@NotNull String rawItem) {
-    return StringUtil.trimStart(rawItem, "i ").trim();
+    return StringUtil.trimStart(rawItem, INSTALLED_PREFIX).trim();
   }
 
   @Override
   protected boolean doIsInstalled(@NotNull String rawItem) {
-    return rawItem.startsWith("i ");
+    return rawItem.startsWith(INSTALLED_PREFIX);
   }
 }
