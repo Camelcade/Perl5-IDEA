@@ -1,38 +1,38 @@
-say "\c a\c1 b\cФc\с
+say "\c a\c1 b\cФc\c
 a\c";
 
-say `\c a\c1 b\cФc\с
+say `\c a\c1 b\cФc\c
 a\c`;
 
-say '\c a\c1 b\cФc\с
+say '\c a\c1 b\cФc\c
 a\c';
 
-say qq"\c a\c1 b\cФc\с
+say qq"\c a\c1 b\cФc\c
 a\c";
 
-say qx`\c a\c1 b\cФc\с
+say qx`\c a\c1 b\cФc\c
 a\c`;
 
-say q'\c a\c1 b\cФc\с
+say q'\c a\c1 b\cФc\c
 a\c';
 
 say <<"EOM";
-\c a\c1 b\cФc\с
+\c a\c1 b\cФc\c
 a\c
 EOM
 
 say <<EOM;
-\c a\c1 b\cФc\с
+\c a\c1 b\cФc\c
 a\c
 EOM
 
 say <<`EOM`;
-\c a\c1 b\cФc\с
+\c a\c1 b\cФc\c
 a\c
 EOM
 
 say <<'EOM';
-\c a\c1 b\cФc\с
+\c a\c1 b\cФc\c
 a\c
 EOM
 

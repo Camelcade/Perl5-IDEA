@@ -612,7 +612,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
         "\\u"     {return STRING_SPECIAL_TCFIRST;}
 
         "\\c["     {return STRING_SPECIAL_CONTROL;}
-        "\\c" .?   {return STRING_SPECIAL_CONTROL_OTHER;}
+        "\\c" [^]? {return STRING_SPECIAL_CONTROL_OTHER;}
 
         "\\L"     {return STRING_SPECIAL_LOWERCASE_START;}
         "\\U"     {return STRING_SPECIAL_UPPERCASE_START;}
@@ -626,14 +626,14 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 <STRING_QX> "\\Q"                {yybegin(STRING_QX_METAQUOTED);return STRING_SPECIAL_QUOTE_START;}
 
 <STRING_QQ,STRING_QQ_METAQUOTED>{
-	"\\".					        {return STRING_CONTENT_QQ;}
+	"\\"[^]					        {return STRING_CONTENT_QQ;}
 	// chars with special treatments
 	[^$\@\\]+					{return STRING_CONTENT_QQ;}
 	[^]						{return STRING_CONTENT_QQ;}
 }
 
 <STRING_QX,STRING_QX_METAQUOTED>{
-	"\\".   					{return STRING_CONTENT_XQ;}
+	"\\"[^]   					{return STRING_CONTENT_XQ;}
 	// chars with special treatments
 	[^\$\@\\]+					{return STRING_CONTENT_XQ;}
 	[^]						{return STRING_CONTENT_XQ;}
