@@ -1,0 +1,47 @@
+say "\Qt\th\ni\rs\f \bi\as \la\u \Lt\Ue\Fst$scalar g\c[a\c?b\c@a\c[g\c\c] \c^t\c_ext";
+say "\Qgarb\cAa\cBg\cCe\cD \cEt\cFe\cGx\cHt\cI@array \cJt\cKh\cLi\cMs\cN \cOi\cPs\cQ \cRs\cSo\cTm\cUe\cV \cWg\cXa\cYr\cZb";
+say "\Qgarb\caa\cbg\cce\cc \cet\cfe\cgx\cht\ci$array[0] \cjt\ckh\cli\cms\cn \coi\cps\cq \crs\cso\ctm\cue\cv \cwg\cxa\cyr\czb";
+
+say qq|\Qt\th\ni\rs\f \bi\as \la\u \Lt\Ue\Fst$scalar g\c[a\c?b\c@a\c[g\c\c] \c^t\c_ext|;
+say qq|\Qgarb\cAa\cBg\cCe\cD \cEt\cFe\cGx\cHt\cI@array \cJt\cKh\cLi\cMs\cN \cOi\cPs\cQ \cRs\cSo\cTm\cUe\cV \cWg\cXa\cYr\cZb|;
+say qq|\Qgarb\caa\cbg\cce\cc \cet\cfe\cgx\cht\ci$array[0] \cjt\ckh\cli\cms\cn \coi\cps\cq \crs\cso\ctm\cue\cv \cwg\cxa\cyr\czb|;
+
+say <<"EOM";
+\Qt\th\ni\rs\f \bi\as \la\u \Lt\Ue\Fst$scalar g\c[a\c?b\c@a\c[g\c\c] \c^t\c_ext
+garb\cAa\cBg\cCe\cD \cEt\cFe\cGx\cHt\cI@array \cJt\cKh\cLi\cMs\cN \cOi\cPs\cQ \cRs\cSo\cTm\cUe\cV \cWg\cXa\cYr\cZb
+garb\caa\cbg\cce\cc \cet\cfe\cgx\cht\ci$array[0] \cjt\ckh\cli\cms\cn \coi\cps\cq \crs\cso\ctm\cue\cv \cwg\cxa\cyr\czb
+EOM
+say <<EOM;
+\Qt\th\ni\rs\f \bi\as \la\u \Lt\Ue\Fst$scalar g\c[a\c?b\c@a\c[g\c\c] \c^t\c_ext
+garb\cAa\cBg\cCe\cD \cEt\cFe\cGx\cHt\cI@array \cJt\cKh\cLi\cMs\cN \cOi\cPs\cQ \cRs\cSo\cTm\cUe\cV \cWg\cXa\cYr\cZb
+garb\caa\cbg\cce\cc \cet\cfe\cgx\cht\ci$array[0] \cjt\ckh\cli\cms\cn \coi\cps\cq \crs\cso\ctm\cue\cv \cwg\cxa\cyr\czb
+EOM
+
+say '\Qt\th\ni\rs\f \bi\as \la\u \Lt\Ue\Fst$scalar g\c[a\c?b\c@a\c[g\c\c] \c^t\c_ext';
+say '\Qgarb\cAa\cBg\cCe\cD \cEt\cFe\cGx\cHt\cI@array \cJt\cKh\cLi\cMs\cN \cOi\cPs\cQ \cRs\cSo\cTm\cUe\cV \cWg\cXa\cYr\cZb';
+say '\Qgarb\caa\cbg\cce\cc \cet\cfe\cgx\cht\ci$array[0] \cjt\ckh\cli\cms\cn \coi\cps\cq \crs\cso\ctm\cue\cv \cwg\cxa\cyr\czb';
+
+say q|\Qt\th\ni\rs\f \bi\as \la\u \Lt\Ue\Fst$scalar g\c[a\c?b\c@a\c[g\c\c] \c^t\c_ext|;
+say q|\Qgarb\cAa\cBg\cCe\cD \cEt\cFe\cGx\cHt\cI@array \cJt\cKh\cLi\cMs\cN \cOi\cPs\cQ \cRs\cSo\cTm\cUe\cV \cWg\cXa\cYr\cZb|;
+say q|\Qgarb\caa\cbg\cce\cc \cet\cfe\cgx\cht\ci$array[0] \cjt\ckh\cli\cms\cn \coi\cps\cq \crs\cso\ctm\cue\cv \cwg\cxa\cyr\czb|;
+
+say <<'EOM';
+\Qt\th\ni\rs\f \bi\as \la\u \Lt\Ue\Fst$scalar g\c[a\c?b\c@a\c[g\c\c] \c^t\c_ext
+garb\cAa\cBg\cCe\cD \cEt\cFe\cGx\cHt\cI@array \cJt\cKh\cLi\cMs\cN \cOi\cPs\cQ \cRs\cSo\cTm\cUe\cV \cWg\cXa\cYr\cZb
+garb\caa\cbg\cce\cc \cet\cfe\cgx\cht\ci$array[0] \cjt\ckh\cli\cms\cn \coi\cps\cq \crs\cso\ctm\cue\cv \cwg\cxa\cyr\czb
+EOM
+
+say `\Qecho t\th\ni\rs\f \bi\as \la\u \Lt\Ue\Fst$scalar g\c[a\c?b\c@a\c[g\c\c] \c^t\c_ext`;
+say `\Qecho garb\cAa\cBg\cCe\cD \cEt\cFe\cGx\cHt\cI@array \cJt\cKh\cLi\cMs\cN \cOi\cPs\cQ \cRs\cSo\cTm\cUe\cV \cWg\cXa\cYr\cZb`;
+say `\Qecho garb\caa\cbg\cce\cc \cet\cfe\cgx\cht\ci$array[0] \cjt\ckh\cli\cms\cn \coi\cps\cq \crs\cso\ctm\cue\cv \cwg\cxa\cyr\czb`;
+
+say qx|\Qecho t\th\ni\rs\f \bi\as \la\u \Lt\Ue\Fst$scalar g\c[a\c?b\c@a\c[g\c\c] \c^t\c_ext|;
+say qx|\Qecho garb\cAa\cBg\cCe\cD \cEt\cFe\cGx\cHt\cI@array \cJt\cKh\cLi\cMs\cN \cOi\cPs\cQ \cRs\cSo\cTm\cUe\cV \cWg\cXa\cYr\cZb|;
+say qx|\Qecho garb\caa\cbg\cce\cc \cet\cfe\cgx\cht\ci$array[0] \cjt\ckh\cli\cms\cn \coi\cps\cq \crs\cso\ctm\cue\cv \cwg\cxa\cyr\czb|;
+
+say <<`EOM`;
+\Qt\th\ni\rs\f \bi\as \la\u \Lt\Ue\Fst$scalar g\c[a\c?b\c@a\c[g\c\c] \c^t\c_ext
+garb\cAa\cBg\cCe\cD \cEt\cFe\cGx\cHt\cI@array \cJt\cKh\cLi\cMs\cN \cOi\cPs\cQ \cRs\cSo\cTm\cUe\cV \cWg\cXa\cYr\cZb
+garb\caa\cbg\cce\cc \cet\cfe\cgx\cht\ci$array[0] \cjt\ckh\cli\cms\cn \coi\cps\cq \crs\cso\ctm\cue\cv \cwg\cxa\cyr\czb
+EOM
+

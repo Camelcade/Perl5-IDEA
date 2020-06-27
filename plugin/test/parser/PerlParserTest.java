@@ -33,6 +33,9 @@ public class PerlParserTest extends PerlParserTestBase {
   public void testControlSequencesInStrings() {doTest();}
 
   @Test
+  public void testControlSequencesInStringsMetaQuoted() {doTest();}
+
+  @Test
   public void testMooseDefaultFallback() {doTest();}
 
   @Test
