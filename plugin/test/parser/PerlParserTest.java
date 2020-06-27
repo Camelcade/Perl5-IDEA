@@ -27,6 +27,9 @@ public class PerlParserTest extends PerlParserTestBase {
   }
 
   @Test
+  public void testControlSequenceCVariants() {doTest();}
+
+  @Test
   public void testControlSequencesInStrings() {doTest();}
 
   @Test
