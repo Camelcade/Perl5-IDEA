@@ -623,14 +623,14 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 }
 
 <STRING_QQ>{
-	"\\"[\$\@]					{return STRING_CONTENT_QQ;}
+	"\\".					        {return STRING_CONTENT_QQ;}
 	// chars with special treatments
 	[^$\@\\]+					{return STRING_CONTENT_QQ;}
 	[^]						{return STRING_CONTENT_QQ;}
 }
 
 <STRING_QX>{
-	"\\"[\$\@]					{return STRING_CONTENT_XQ;}
+	"\\".   					{return STRING_CONTENT_XQ;}
 	// chars with special treatments
 	[^\$\@\\]+					{return STRING_CONTENT_XQ;}
 	[^]						{return STRING_CONTENT_XQ;}
