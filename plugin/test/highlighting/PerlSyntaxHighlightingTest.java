@@ -28,6 +28,15 @@ public class PerlSyntaxHighlightingTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testControlSequenceCVariants() {doTest();}
+
+  @Test
+  public void testControlSequencesInStrings() {doTest();}
+
+  @Test
+  public void testControlSequencesInStringsMetaQuoted() {doTest();}
+
+  @Test
   public void testAngledHandles() {doTest();}
 
   @Test
