@@ -90,6 +90,7 @@
     STRING_SPECIAL_BACKSPACE='\b'
     STRING_SPECIAL_ALARM='\a'
     STRING_SPECIAL_ESCAPE='\e'
+    STRING_SPECIAL_ESCAPE_CHAR='\\"'
 
     STRING_SPECIAL_LCFIRST='\l'
     STRING_SPECIAL_TCFIRST='\\u'
@@ -1231,6 +1232,7 @@ private qq_string_content_with_lp ::= <<consumeTokens 'LP_STRING_QQ'>> | qq_stri
 private qq_string_content ::= qq_string_element+
 private qq_string_element ::= STRING_CONTENT_QQ | special_constructs | interpolated_constructs
 private special_constructs ::= '\t'|'\n'|'\r'|'\f'|'\b'|'\a'|'\e'|'\l'|'\\u'|'\c['|'\c*'|
+                               '\\"'|
                                '\L'|'\U'|'\F'|'\Q'|'\E'
 
 string_xq ::= [ 'qx'] quoted_xq_string

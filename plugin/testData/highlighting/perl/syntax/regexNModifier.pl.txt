@@ -386,7 +386,9 @@ undef
     PERL_COMMA => DEFAULT_COMMA
 "
     PERL_DQ_STRING => DEFAULT_STRING
-/n prevents capture in \$1
+/n prevents capture in 
+    PERL_DQ_STRING => DEFAULT_STRING
+$1
     PERL_DQ_STRING => DEFAULT_STRING
 "
     PERL_DQ_STRING => DEFAULT_STRING
@@ -410,7 +412,9 @@ undef
     PERL_COMMA => DEFAULT_COMMA
 "
     PERL_DQ_STRING => DEFAULT_STRING
-/n prevents capture in \$2
+/n prevents capture in 
+    PERL_DQ_STRING => DEFAULT_STRING
+$2
     PERL_DQ_STRING => DEFAULT_STRING
 "
     PERL_DQ_STRING => DEFAULT_STRING
@@ -738,7 +742,7 @@ a
     PERL_COMMA => DEFAULT_COMMA
 "
     PERL_DQ_STRING => DEFAULT_STRING
-\$+{a} is correct
+$+{a} is correct
     PERL_DQ_STRING => DEFAULT_STRING
 "
     PERL_DQ_STRING => DEFAULT_STRING
@@ -780,7 +784,7 @@ b
     PERL_COMMA => DEFAULT_COMMA
 "
     PERL_DQ_STRING => DEFAULT_STRING
-\$+{b} is correct
+$+{b} is correct
     PERL_DQ_STRING => DEFAULT_STRING
 "
     PERL_DQ_STRING => DEFAULT_STRING
