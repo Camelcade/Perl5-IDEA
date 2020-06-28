@@ -95,15 +95,21 @@
     STRING_SPECIAL_LCFIRST='\l'
     STRING_SPECIAL_TCFIRST='\\u'
 
-    STRING_SPECIAL_CONTROL='\c['
-    STRING_SPECIAL_CONTROL_OTHER='\c*'
+    STRING_SPECIAL_SUBST='\c*'
+    STRING_SPECIAL_BACKREF = '\1'
 
-    STRING_SPECIAL_HEX='\x{'
-    STRING_SPECIAL_HEX_RESTRICTED='\x'
-    STRING_SPECIAL_UNICODE_NAME='\N{'
-    STRING_SPECIAL_UNICODE_CODE='\N{U'
-    STRING_SPECIAL_OCTAL='\o{'
-    STRING_SPECIAL_OCTAL_RESTRICTED='\0'
+    STRING_SPECIAL_HEX='\x'
+    STRING_SPECIAL_OCTAL='\o'
+
+    STRING_SPECIAL_UNICODE='\N'
+    STRING_SPECIAL_UNICODE_CODE_PREFIX='U+'
+
+    STRING_CHAR_NAME='charname'
+    STRING_CHAR_CODE_HEX='hexcode'
+    STRING_CHAR_CODE_OCT='octcode'
+
+    STRING_SPECIAL_LEFT_BRACE='"{'
+    STRING_SPECIAL_RIGHT_BRACE='}"'
 
     STRING_SPECIAL_LOWERCASE_START='\L'
     STRING_SPECIAL_UPPERCASE_START='\U'
@@ -1231,9 +1237,27 @@ private quoted_qq_string ::= QUOTE_DOUBLE_OPEN [qq_string_content_with_lp] QUOTE
 private qq_string_content_with_lp ::= <<consumeTokens 'LP_STRING_QQ'>> | qq_string_content
 private qq_string_content ::= qq_string_element+
 private qq_string_element ::= STRING_CONTENT_QQ | special_constructs | interpolated_constructs
-private special_constructs ::= '\t'|'\n'|'\r'|'\f'|'\b'|'\a'|'\e'|'\l'|'\\u'|'\c['|'\c*'|
+private special_constructs ::= '\t'|'\n'|'\r'|'\f'|'\b'|'\a'|'\e'|'\l'|'\\u'|'\c*'| '\1' |
                                '\\"'|
-                               '\L'|'\U'|'\F'|'\Q'|'\E'
+                               '\L'|'\U'|'\F'|'\Q'|'\E'|
+                               unicode_char |
+                               hex_char |
+                               oct_char
+
+private unicode_char ::= '\N' unicode_char_body {pin=1}
+private unicode_char_body ::= '"{' unicode_char_body_content '}"' {pin=1}
+private unicode_char_body_content ::= unicode_char_body_named | 'charname'
+private unicode_char_body_named ::= 'U+' 'hexcode' {pin=1}
+
+private hex_char ::= '\x' hex_char_body {pin=1}
+private hex_char_body ::= hex_char_body_content | hex_char_body_braced
+private hex_char_body_braced ::= '"{' hex_char_body_content '}"' {pin=1}
+private hex_char_body_content ::= 'hexcode'
+
+private oct_char ::= '\o' oct_char_body {pin=1}
+private oct_char_body ::= oct_char_body_content | oct_char_body_braced
+private oct_char_body_braced ::= '"{' oct_char_body_content '}"' {pin=1}
+private oct_char_body_content ::= 'octcode'
 
 string_xq ::= [ 'qx'] quoted_xq_string
 private quoted_xq_string ::= QUOTE_TICK_OPEN [<<consumeTokens 'LP_STRING_QX'>> | qx_string_content] QUOTE_TICK_CLOSE {pin=1}

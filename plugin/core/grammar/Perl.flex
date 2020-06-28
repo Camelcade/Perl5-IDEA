@@ -612,8 +612,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
         "\\l"     {return STRING_SPECIAL_LCFIRST;}
         "\\u"     {return STRING_SPECIAL_TCFIRST;}
 
-        "\\c["     {return STRING_SPECIAL_CONTROL;}
-        "\\c" [^]? {return STRING_SPECIAL_CONTROL_OTHER;}
+        "\\c" [^]? {return STRING_SPECIAL_SUBST;}
 
         "\\L"     {return STRING_SPECIAL_LOWERCASE_START;}
         "\\U"     {return STRING_SPECIAL_UPPERCASE_START;}
