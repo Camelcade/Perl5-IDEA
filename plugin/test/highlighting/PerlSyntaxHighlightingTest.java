@@ -28,6 +28,9 @@ public class PerlSyntaxHighlightingTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testUnicodeSubstitutionsCorrect() {doTest();}
+
+  @Test
   public void testControlSequenceCVariants() {doTest();}
 
   @Test

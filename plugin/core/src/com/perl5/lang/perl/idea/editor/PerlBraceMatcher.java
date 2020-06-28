@@ -49,6 +49,7 @@ public class PerlBraceMatcher implements PairedBraceMatcher, PerlElementTypes {
     new BracePair(LEFT_BRACE_HASH, RIGHT_BRACE_HASH, true),
     new BracePair(LEFT_BRACE_CODE, RIGHT_BRACE_CODE, true),
     new BracePair(LEFT_BRACE_GLOB, RIGHT_BRACE_GLOB, true),
+    new BracePair(STRING_SPECIAL_LEFT_BRACE, STRING_SPECIAL_RIGHT_BRACE, false),
   };
 
   @Override

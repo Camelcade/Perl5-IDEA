@@ -445,8 +445,6 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
     STRING_SPECIAL_UNICODE,
     STRING_SPECIAL_UNICODE_CODE_PREFIX,
 
-    STRING_CHAR_NAME,
-
     STRING_SPECIAL_LEFT_BRACE,
     STRING_SPECIAL_RIGHT_BRACE,
 

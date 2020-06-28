@@ -91,6 +91,8 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements Perl
     createTextAttributesKey("PERL_SUB_PROTOTYPE", DefaultLanguageHighlighterColors.PARAMETER);
   public static final TextAttributesKey
     PERL_STRING_SPECIAL = createTextAttributesKey("PERL_STRING_SPECIAL", DefaultLanguageHighlighterColors.VALID_STRING_ESCAPE);
+  public static final TextAttributesKey
+    PERL_STRING_CHAR_NAME = createTextAttributesKey("STRING_CHAR_NAME", DefaultLanguageHighlighterColors.CONSTANT);
   public static final TextAttributesKey PERL_SQ_STRING = createTextAttributesKey("PERL_SQ_STRING", DefaultLanguageHighlighterColors.STRING);
   public static final TextAttributesKey PERL_DQ_STRING = createTextAttributesKey("PERL_DQ_STRING", DefaultLanguageHighlighterColors.STRING);
   public static final TextAttributesKey PERL_DX_STRING = createTextAttributesKey("PERL_DX_STRING", DefaultLanguageHighlighterColors.STRING);
@@ -155,6 +157,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements Perl
     safeMap(PERL_DX_STRING, QUOTE_TICK, QUOTE_TICK_OPEN, QUOTE_TICK_CLOSE, STRING_CONTENT_XQ);
 
     safeMap(PERL_STRING_SPECIAL, SPECIAL_STRING_TOKENS);
+    safeMap(STRING_CHAR_NAME, PERL_STRING_CHAR_NAME);
 
     safeMap(SEMICOLON, PERL_SEMICOLON);
 

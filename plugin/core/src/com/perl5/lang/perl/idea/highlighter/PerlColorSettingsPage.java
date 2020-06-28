@@ -86,6 +86,7 @@ public class PerlColorSettingsPage implements ColorSettingsPage {
     new AttributesDescriptor("String, double-quoted", PerlSyntaxHighlighter.PERL_DQ_STRING),
     new AttributesDescriptor("String, backticked", PerlSyntaxHighlighter.PERL_DX_STRING),
     new AttributesDescriptor("String, control chars", PerlSyntaxHighlighter.PERL_STRING_SPECIAL),
+    new AttributesDescriptor("String, character name", PerlSyntaxHighlighter.PERL_STRING_CHAR_NAME),
 
     new AttributesDescriptor("Regex quote", PerlSyntaxHighlighter.PERL_REGEX_QUOTE),
     new AttributesDescriptor("Regex element", PerlSyntaxHighlighter.PERL_REGEX_TOKEN),
@@ -141,7 +142,7 @@ public class PerlColorSettingsPage implements ColorSettingsPage {
            "<label>START</label>: <kw>print</kw> <q>'Single quoted string'</q>;\n" +
            "<kw>say</kw> <qq>\"Double quoted string\"</qq>;\n" +
            "<kw>say</kw> __LINE__;\n" +
-           "say \"Something \\Qhere\\E \\uthere \";\n" +
+           "say \"Something \\Qhere\\E \\uthere \\N{LATIN CAPITAL LETTER A} \\N{U+0028}\";\n" +
            "my $sum = 42 + 0x42 + 0b1010101 + 042;" +
            "<kw>say</kw> <<<q>'MOJO'</q>;\n" +
            "    <em>%=</em> <kw>print</kw> <qq>\"Mojo perl code\"</qq>\n" +

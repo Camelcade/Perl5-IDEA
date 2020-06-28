@@ -1244,10 +1244,14 @@ private special_constructs ::= '\t'|'\n'|'\r'|'\f'|'\b'|'\a'|'\e'|'\l'|'\\u'|'\c
                                hex_char |
                                oct_char
 
-private unicode_char ::= '\N' unicode_char_body {pin=1}
+unicode_char ::= '\N' unicode_char_body {pin=1}
 private unicode_char_body ::= '"{' unicode_char_body_content '}"' {pin=1}
-private unicode_char_body_content ::= unicode_char_body_named | 'charname'
-private unicode_char_body_named ::= 'U+' NUMBER_HEX {pin=1}
+private unicode_char_body_content ::= unicode_char_body_numbered | unicode_char_name {recoverWhile=recover_unicode_braces}
+private unicode_char_name ::= 'charname' {name="character name"}
+private unicode_char_body_numbered ::= 'U+' unicode_char_number {pin=1 name="character code with U+ prefix" }
+private unicode_char_number ::= NUMBER_HEX {name="character code"}
+
+private recover_unicode_braces ::= !('}"')
 
 private hex_char ::= '\x' hex_char_body {pin=1}
 private hex_char_body ::= hex_char_body_content | hex_char_body_braced

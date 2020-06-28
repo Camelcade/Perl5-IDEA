@@ -1,0 +1,10 @@
+use charnames <open0>'</open0>:full<close0>'</close0>;
+print <open1>"</open1>\N<open2>{</open2>GREEK SMALL LETTER SIGMA<close2>}</close2> is called sigma.\n<close1>"</close1>;
+print <open3>"</open3>\N<open4>{</open4>LATIN CAPITAL LETTER E WITH VERTICAL LINE BELOW<close4>}<close3></close4>"</close3>;
+print <open5>"</open5>\N<open6>{</open6>Greek small-letter  sigma<close6>}<close5></close6>"</close5>;
+print <open7>"</open7>\N<open8>{</open8>greek:Sigma<close8>}</close8> is an upper-case sigma.\n<close7>"</close7>;
+print <open9>"</open9>\N<open10>{</open10>sigma<close10>}</close10> is Greek sigma, and \N<open11>{</open11>be<close11>}</close11> is Cyrillic b.\n<close9>"</close9>;
+print <open12>"</open12>\N<open13>{</open13>e_ACUTE<close13>}</close13> is a small letter e with an acute.\n<close12>"</close12>;
+print <open14>"</open14>\N<open15>{</open15>mychar<close15>}</close15> allows me to name private use characters.\n<close14>"</close14>;
+print <open16>"</open16> such as \N<open17>{</open17>自転車に乗る人<close17>}</close17> for \"BICYCLIST (U+1F6B4)\n<close16>"</close16>;
+say <open18>"</open18>Hello man \N<open19>{</open19>U+21<close19>}</close19> \N<open20>{</open20>U+021<close20>}</close20> \N<open21>{</open21>U+0021<close21>}</close21> \N<open22>{</open22>U+00021<close22>}<close18></close22>"</close18>;

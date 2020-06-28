@@ -1,0 +1,10 @@
+use charnames ':full';
+print "\N{GREEK SMALL LETTER SIGMA} is called sigma.\n";
+print "\N{LATIN CAPITAL LETTER E WITH VERTICAL LINE BELOW}";
+print "\N{Greek small-letter  sigma}";
+print "\N{greek:Sigma} is an upper-case sigma.\n";
+print "\N{sigma} is Greek sigma, and \N{be} is Cyrillic b.\n";
+print "\N{e_ACUTE} is a small letter e with an acute.\n";
+print "\N{mychar} allows me to name private use characters.\n";
+print " such as \N{自転車に乗る人} for \"BICYCLIST (U+1F6B4)\n";
+say "Hello man \N{U+21} \N{U+021} \N{U+0021} \N{U+00021}";

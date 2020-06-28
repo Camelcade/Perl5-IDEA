@@ -1,0 +1,11 @@
+say "some \N test \N{U+42}";
+say "some \N{ test \N{U+42}";
+say "some \N{} test \N{U+42}";
+say "some \N} test \N{U+42}";
+say "some \N{U+} test \N{U+42}";
+say "some \N{U+ test \N{U+42}";
+say "some \N{U+zzzzzz} test \N{U+42}";
+say "some \N{U+123zzzzzz} test \N{U+42}";
+say "some \N{asdfasdf} test \N{U+42}";
+say "some \N{asdfasdf^&%&^%} test \N{U+42}";
+say "some \N{^&%&^%} test \N{U+42}";
