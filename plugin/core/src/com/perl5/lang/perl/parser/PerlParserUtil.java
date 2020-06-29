@@ -73,7 +73,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
     "(" +
     BASIC_IDENTIFIER_PATTERN_TEXT +
     ")");
-  private static WhitespacesAndCommentsBinder NAMESPACE_RIGHT_BINDER = (tokens, atStreamEdge, getter) -> {
+  private static final WhitespacesAndCommentsBinder NAMESPACE_RIGHT_BINDER = (tokens, atStreamEdge, getter) -> {
     int result = tokens.size();
     if (atStreamEdge || tokens.isEmpty()) {
       return result;
@@ -297,7 +297,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
       while (b.getTokenType() == TokenType.BAD_CHARACTER) {
         b.advanceLexer();
       }
-      m.error("Unexpected tokens, plugin currently supports only ASCII identifiers");
+      m.error("Unexpected token");
     }
     else if (tokenType == RIGHT_PAREN) {
       m.error("Unopened closing parenthesis");
