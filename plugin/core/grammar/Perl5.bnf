@@ -81,7 +81,9 @@
 
     NUMBER_VERSION='NUMBER_VERSION'
     NUMBER='NUMBER'
-    NUMBER_SIMPLE='NUMBER_SIMPLE' // fixme get rid of
+    NUMBER_HEX = 'NUMBER_HEX'
+    NUMBER_OCT = 'NUMBER_OCT'
+    NUMBER_BIN = 'NUMBER_BIN'
 
     STRING_SPECIAL_TAB='\t'
     STRING_SPECIAL_NEWLINE='\n'
@@ -105,8 +107,6 @@
     STRING_SPECIAL_UNICODE_CODE_PREFIX='U+'
 
     STRING_CHAR_NAME='charname'
-    STRING_CHAR_CODE_HEX='hexcode'
-    STRING_CHAR_CODE_OCT='octcode'
 
     STRING_SPECIAL_LEFT_BRACE='"{'
     STRING_SPECIAL_RIGHT_BRACE='}"'
@@ -1228,7 +1228,7 @@ perl_handle_expr ::= [QUALIFYING_PACKAGE] HANDLE
 
 tag_scalar ::= TAG
 
-number_constant ::= NUMBER | NUMBER_VERSION | NUMBER_SIMPLE
+number_constant ::= NUMBER | NUMBER_VERSION | NUMBER_HEX | NUMBER_OCT | NUMBER_BIN
 
 private string ::= string_bare | string_sq | string_dq | string_xq | heredoc_opener
 
@@ -1247,17 +1247,17 @@ private special_constructs ::= '\t'|'\n'|'\r'|'\f'|'\b'|'\a'|'\e'|'\l'|'\\u'|'\c
 private unicode_char ::= '\N' unicode_char_body {pin=1}
 private unicode_char_body ::= '"{' unicode_char_body_content '}"' {pin=1}
 private unicode_char_body_content ::= unicode_char_body_named | 'charname'
-private unicode_char_body_named ::= 'U+' 'hexcode' {pin=1}
+private unicode_char_body_named ::= 'U+' NUMBER_HEX {pin=1}
 
 private hex_char ::= '\x' hex_char_body {pin=1}
 private hex_char_body ::= hex_char_body_content | hex_char_body_braced
 private hex_char_body_braced ::= '"{' hex_char_body_content '}"' {pin=1}
-private hex_char_body_content ::= 'hexcode'
+private hex_char_body_content ::= NUMBER_HEX
 
 private oct_char ::= '\o' oct_char_body {pin=1}
 private oct_char_body ::= oct_char_body_content | oct_char_body_braced
 private oct_char_body_braced ::= '"{' oct_char_body_content '}"' {pin=1}
-private oct_char_body_content ::= 'octcode'
+private oct_char_body_content ::= NUMBER_OCT
 
 string_xq ::= [ 'qx'] quoted_xq_string
 private quoted_xq_string ::= QUOTE_TICK_OPEN [<<consumeTokens 'LP_STRING_QX'>> | qx_string_content] QUOTE_TICK_CLOSE {pin=1}

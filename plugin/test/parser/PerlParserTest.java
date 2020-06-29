@@ -707,4 +707,7 @@ public class PerlParserTest extends PerlParserTestBase {
 
   @Test
   public void testAsyncStatement() {doTest();}
+
+  @Test
+  public void testNumbers() {doTest();}
 }

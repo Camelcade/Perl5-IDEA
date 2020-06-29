@@ -636,6 +636,9 @@ public class PerlSyntaxHighlightingTest extends PerlLightTestCase {
   @Test
   public void testOperatorsAfterLoopControl() {doTest();}
 
+  @Test
+  public void testNumbers() {doTest();}
+
   private void doTest() {
     doTest(true);
   }

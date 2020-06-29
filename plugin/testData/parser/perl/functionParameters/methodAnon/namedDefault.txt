@@ -27,7 +27,7 @@ Perl5
               PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('color')
           PsiElement(Perl5: =)('=')
           PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
-            PsiElement(Perl5: NUMBER)('0x00_00_00')
+            PsiElement(Perl5: NUMBER_HEX)('0x00_00_00')
       PsiElement(Perl5: ))(')')
       PsiPerlBlockImpl(Perl5: BLOCK)
         PsiElement(Perl5: {)('{')

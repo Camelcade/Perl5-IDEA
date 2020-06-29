@@ -226,7 +226,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
 
         if (run != null) {
           IElementType runType = run.getElementType();
-          if (runType == NUMBER_SIMPLE || runType == NUMBER && StringUtil.endsWith(run.getText(), ".")) {
+          if (runType == NUMBER && StringUtil.endsWith(run.getText(), ".")) {
             return Spacing.createSpacing(1, 1, 0, true, 1);
           }
         }

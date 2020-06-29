@@ -47,6 +47,9 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements Perl
     createTextAttributesKey("PERL_EMBED_MARKER", DefaultLanguageHighlighterColors.TEMPLATE_LANGUAGE_COLOR);
   public static final TextAttributesKey[] EMBED_MARKER_KEYS = new TextAttributesKey[]{EMBED_MARKER_KEY};
   public static final TextAttributesKey PERL_NUMBER = createTextAttributesKey("PERL_NUMBER", DefaultLanguageHighlighterColors.NUMBER);
+  public static final TextAttributesKey PERL_NUMBER_HEX = createTextAttributesKey("PERL_NUMBER_HEX", PERL_NUMBER);
+  public static final TextAttributesKey PERL_NUMBER_OCT = createTextAttributesKey("PERL_NUMBER_OCT", PERL_NUMBER);
+  public static final TextAttributesKey PERL_NUMBER_BIN = createTextAttributesKey("PERL_NUMBER_BIN", PERL_NUMBER);
   public static final TextAttributesKey PERL_VERSION = createTextAttributesKey("PERL_VERSION", PERL_NUMBER);
   public static final TextAttributesKey PERL_COMMENT =
     createTextAttributesKey("PERL_COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT);
@@ -162,7 +165,10 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements Perl
             RIGHT_BRACKET); //, REGEX_LEFT_BRACKET, REGEX_RIGHT_BRACKET, REGEX_POSIX_LEFT_BRACKET, REGEX_POSIX_RIGHT_BRACKET
     safeMap(PERL_PAREN, LEFT_PAREN, RIGHT_PAREN); // , REGEX_LEFT_PAREN, REGEX_RIGHT_PAREN
 
-    safeMap(PERL_NUMBER, NUMBER, NUMBER_SIMPLE);
+    safeMap(PERL_NUMBER, NUMBER);
+    safeMap(PERL_NUMBER_HEX, NUMBER_HEX);
+    safeMap(PERL_NUMBER_OCT, NUMBER_OCT);
+    safeMap(PERL_NUMBER_BIN, NUMBER_BIN);
     safeMap(NUMBER_VERSION, PERL_VERSION);
 
     safeMap(PERL_TAG, TAG, TAG_END, TAG_DATA);

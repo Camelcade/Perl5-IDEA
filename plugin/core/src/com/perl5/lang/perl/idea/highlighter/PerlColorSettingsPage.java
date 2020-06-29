@@ -37,6 +37,9 @@ public class PerlColorSettingsPage implements ColorSettingsPage {
   private static final AttributesDescriptor[] DESCRIPTORS = new AttributesDescriptor[]{
     new AttributesDescriptor("Version", PerlSyntaxHighlighter.PERL_VERSION),
     new AttributesDescriptor("Number", PerlSyntaxHighlighter.PERL_NUMBER),
+    new AttributesDescriptor("Number, binary", PerlSyntaxHighlighter.PERL_NUMBER_BIN),
+    new AttributesDescriptor("Number, octal", PerlSyntaxHighlighter.PERL_NUMBER_OCT),
+    new AttributesDescriptor("Number, hexadecimal", PerlSyntaxHighlighter.PERL_NUMBER_HEX),
 
     new AttributesDescriptor("Line comment", PerlSyntaxHighlighter.PERL_COMMENT),
 
@@ -139,6 +142,7 @@ public class PerlColorSettingsPage implements ColorSettingsPage {
            "<kw>say</kw> <qq>\"Double quoted string\"</qq>;\n" +
            "<kw>say</kw> __LINE__;\n" +
            "say \"Something \\Qhere\\E \\uthere \";\n" +
+           "my $sum = 42 + 0x42 + 0b1010101 + 042;" +
            "<kw>say</kw> <<<q>'MOJO'</q>;\n" +
            "    <em>%=</em> <kw>print</kw> <qq>\"Mojo perl code\"</qq>\n" +
            "    <em><%</em> <kw>print</kw> <qq>\"Some more Mojo code\"</qq>; <em>%></em>\n" +

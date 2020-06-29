@@ -88,6 +88,7 @@ NUMBER_EXP = [eE][+-]?[0-9_]+
 NUMBER_INT = [0-9][0-9_]*
 NUMBER_HEX = "0"[xX][0-9a-fA-F_]+
 NUMBER_BIN = "0"[bB][01_]+
+NUMBER_OCT = "0"[0-7_]+
 
 SPECIAL_VARIABLE_NAME = [\"\'\[\]\`\\\!\%\&\(\)\+\,\-\.\/\;\<\=\>\|\~\?\:\*\^\@\_\$]
 NUMERIC_VARIABLE_NAME = "0" | [1-9] \d*
@@ -1165,8 +1166,9 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 	// fixme optimize via merging?
 	{BAREWORD_MINUS} / {MAY_BE_SPACES_OR_COMMENTS}* {FARROW}	{yybegin(AFTER_VALUE);return STRING_CONTENT;}
 
-	{NUMBER_BIN}									 {yybegin(AFTER_VALUE);return NUMBER;}
-	{NUMBER_HEX}									 {yybegin(AFTER_VALUE);return NUMBER;}
+	{NUMBER_OCT}									 {yybegin(AFTER_VALUE);return NUMBER_OCT;}
+	{NUMBER_BIN}									 {yybegin(AFTER_VALUE);return NUMBER_BIN;}
+	{NUMBER_HEX}									 {yybegin(AFTER_VALUE);return NUMBER_HEX;}
 	{NUMBER_INT} / ".."                              {yybegin(AFTER_VALUE);return NUMBER;}
 	"." {NUMBER_INT} {NUMBER_EXP}?	 				 {yybegin(AFTER_VALUE);return NUMBER;}
 	{NUMBER_INT} ("." {NUMBER_INT}? )? {NUMBER_EXP}? {yybegin(AFTER_VALUE);return NUMBER;}

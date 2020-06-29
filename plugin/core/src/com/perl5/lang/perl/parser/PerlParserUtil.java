@@ -40,7 +40,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 
   public static final TokenSet VERSION_TOKENS = TokenSet.create(
     NUMBER,
-    NUMBER_SIMPLE,
     NUMBER_VERSION
   );
   public static final TokenSet OPEN_QUOTES = TokenSet.create(
