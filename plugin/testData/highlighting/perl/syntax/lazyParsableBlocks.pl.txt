@@ -134,17 +134,17 @@ somevar
    very   
     PERL_DQ_STRING => DEFAULT_STRING
 \
-    PERL_STRING_SPECIAL => DEFAULT_IDENTIFIER => TEXT
+    PERL_STRING_SPECIAL => DEFAULT_VALID_STRING_ESCAPE
   large   
     PERL_DQ_STRING => DEFAULT_STRING
 \
-    PERL_STRING_SPECIAL => DEFAULT_IDENTIFIER => TEXT
+    PERL_STRING_SPECIAL => DEFAULT_VALID_STRING_ESCAPE
 $somevar text    enough    to be    leazy    parsable
     this     is a     very     large    text    enough   # to be    leazy    parsable
     this     is a     very     large    text    enough   
     PERL_DQ_STRING => DEFAULT_STRING
 \
-    PERL_STRING_SPECIAL => DEFAULT_IDENTIFIER => TEXT
+    PERL_STRING_SPECIAL => DEFAULT_VALID_STRING_ESCAPE
 # to be    leazy    parsable
     this     is a     very     large    text    (?#enough    to be)    leazy    parsable
     
@@ -198,17 +198,17 @@ somevar
    very   
     PERL_DX_STRING => DEFAULT_STRING
 \
-    PERL_STRING_SPECIAL => DEFAULT_IDENTIFIER => TEXT
+    PERL_STRING_SPECIAL => DEFAULT_VALID_STRING_ESCAPE
   large   
     PERL_DX_STRING => DEFAULT_STRING
 \
-    PERL_STRING_SPECIAL => DEFAULT_IDENTIFIER => TEXT
+    PERL_STRING_SPECIAL => DEFAULT_VALID_STRING_ESCAPE
 $somevar text    enough    to be    leazy    parsable
     this     is a     very     large    text    enough   # to be    leazy    parsable
     this     is a     very     large    text    enough   
     PERL_DX_STRING => DEFAULT_STRING
 \
-    PERL_STRING_SPECIAL => DEFAULT_IDENTIFIER => TEXT
+    PERL_STRING_SPECIAL => DEFAULT_VALID_STRING_ESCAPE
 # to be    leazy    parsable
     this     is a     very     large    text    (?#enough    to be)    leazy    parsable
     

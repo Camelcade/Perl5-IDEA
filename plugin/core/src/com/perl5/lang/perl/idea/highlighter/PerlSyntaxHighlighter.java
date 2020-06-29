@@ -90,7 +90,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements Perl
   public static final TextAttributesKey PERL_SUB_PROTOTYPE_TOKEN =
     createTextAttributesKey("PERL_SUB_PROTOTYPE", DefaultLanguageHighlighterColors.PARAMETER);
   public static final TextAttributesKey
-    PERL_STRING_SPECIAL = createTextAttributesKey("PERL_STRING_SPECIAL", DefaultLanguageHighlighterColors.IDENTIFIER);
+    PERL_STRING_SPECIAL = createTextAttributesKey("PERL_STRING_SPECIAL", DefaultLanguageHighlighterColors.VALID_STRING_ESCAPE);
   public static final TextAttributesKey PERL_SQ_STRING = createTextAttributesKey("PERL_SQ_STRING", DefaultLanguageHighlighterColors.STRING);
   public static final TextAttributesKey PERL_DQ_STRING = createTextAttributesKey("PERL_DQ_STRING", DefaultLanguageHighlighterColors.STRING);
   public static final TextAttributesKey PERL_DX_STRING = createTextAttributesKey("PERL_DX_STRING", DefaultLanguageHighlighterColors.STRING);
