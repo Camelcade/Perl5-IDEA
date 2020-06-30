@@ -83,7 +83,7 @@ Perl5
           PsiElement(Perl5: \N)('\N')
           PsiElement(Perl5: "{)('{')
           PsiElement(Perl5: U+)('U+')
-          PsiErrorElement:<character code> expected, got '}'
+          PsiErrorElement:<hex character code> expected, got '}'
             <empty list>
           PsiElement(Perl5: }")('}')
         PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)(' test ')
@@ -105,7 +105,7 @@ Perl5
           PsiElement(Perl5: \N)('\N')
           PsiElement(Perl5: "{)('{')
           PsiElement(Perl5: U+)('U+')
-          PsiErrorElement:<character code> expected, got 'test \N{U+42'
+          PsiErrorElement:<hex character code> expected, got 'test \N{U+42'
             <empty list>
           PsiElement(BAD_CHARACTER)(' test \N{U+42')
           PsiElement(Perl5: }")('}')
@@ -121,7 +121,7 @@ Perl5
           PsiElement(Perl5: \N)('\N')
           PsiElement(Perl5: "{)('{')
           PsiElement(Perl5: U+)('U+')
-          PsiErrorElement:<character code> expected, got 'zzzzzz'
+          PsiErrorElement:<hex character code> expected, got 'zzzzzz'
             <empty list>
           PsiElement(BAD_CHARACTER)('zzzzzz')
           PsiElement(Perl5: }")('}')

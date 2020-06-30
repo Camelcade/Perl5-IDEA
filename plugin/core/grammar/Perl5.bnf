@@ -1246,22 +1246,23 @@ private special_constructs ::= '\t'|'\n'|'\r'|'\f'|'\b'|'\a'|'\e'|'\l'|'\\u'|'\c
 
 unicode_char ::= '\N' unicode_char_body {pin=1}
 private unicode_char_body ::= '"{' unicode_char_body_content '}"' {pin=1}
-private unicode_char_body_content ::= unicode_char_body_numbered | unicode_char_name {recoverWhile=recover_unicode_braces}
+private unicode_char_body_content ::= unicode_char_body_numbered | unicode_char_name {recoverWhile=recover_string_braces}
 private unicode_char_name ::= 'charname' {name="character name"}
-private unicode_char_body_numbered ::= 'U+' unicode_char_number {pin=1 name="character code with U+ prefix" }
-private unicode_char_number ::= NUMBER_HEX {name="character code"}
+private unicode_char_body_numbered ::= 'U+' char_code_hex {pin=1 name="character code with U+ prefix" }
+private char_code_hex ::= NUMBER_HEX {name="hex character code"}
 
-private recover_unicode_braces ::= !('}"')
+private recover_string_braces ::= !('}"')
 
 private hex_char ::= '\x' hex_char_body {pin=1}
-private hex_char_body ::= hex_char_body_content | hex_char_body_braced
-private hex_char_body_braced ::= '"{' hex_char_body_content '}"' {pin=1}
-private hex_char_body_content ::= NUMBER_HEX
+private hex_char_body ::= char_code_hex | hex_char_body_braced
+private hex_char_body_braced ::= '"{' hex_char_body_content_in_brace '}"' {pin=1 name="braced character code"}
+private hex_char_body_content_in_brace ::= char_code_hex {recoverWhile=recover_string_braces}
 
 private oct_char ::= '\o' oct_char_body {pin=1}
-private oct_char_body ::= oct_char_body_content | oct_char_body_braced
-private oct_char_body_braced ::= '"{' oct_char_body_content '}"' {pin=1}
-private oct_char_body_content ::= NUMBER_OCT
+private oct_char_body ::= char_code_oct | oct_char_body_braced
+private oct_char_body_braced ::= '"{' oct_char_body_content_braced '}"' {pin=1}
+private oct_char_body_content_braced ::= char_code_oct {recoverWhile=recover_string_braces}
+private char_code_oct ::= NUMBER_OCT {name="octal characcter code"}
 
 string_xq ::= [ 'qx'] quoted_xq_string
 private quoted_xq_string ::= QUOTE_TICK_OPEN [<<consumeTokens 'LP_STRING_QX'>> | qx_string_content] QUOTE_TICK_CLOSE {pin=1}
