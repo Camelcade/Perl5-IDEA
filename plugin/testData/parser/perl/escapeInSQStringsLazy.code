@@ -1,0 +1,44 @@
+say 'some \{  \} \<  \> \| \[ \] \( \) \" \` some \' te xt \\ text this is making text lazy  this is making text lazy  this is making text lazy  this is making text lazy ';
+say 'some  \\ \{  \} \<  \> \| \[ \] \( \) \" \` some \' te xt \\ text this is making text lazy  this is making text lazy  this is making text lazy  this is making text lazy ';
+say '\\some \{  \} \<  \> \| \[ \] \( \) \" \` some \' te xt \\ text this is making text lazy  this is making text lazy  this is making text lazy  this is making text lazy ';
+say '\'some \{  \} \<  \> \| \[ \] \( \) \" \` some \' te xt \\ text this is making text lazy  this is making text lazy  this is making text lazy  this is making text lazy ';
+say 'some \{  \} \<  \> \| \[ \] \( \) \" \` some \' te xt \\ text\\ this is making text lazy  this is making text lazy  this is making text lazy  this is making text lazy ';
+say 'some \{  \} \<  \> \| \[ \] \( \) \" \` some \' te xt \\ text\' this is making text lazy  this is making text lazy  this is making text lazy  this is making text lazy ';
+
+say q'some \{  \} \<  \> \| \[ \] \( \) \" \` some \' te xt \\ text this is making text lazy  this is making text lazy  this is making text lazy  this is making text lazy ';
+say q'some  \\ \{  \} \<  \> \| \[ \] \( \) \" \` some \' te xt \\ text this is making text lazy  this is making text lazy  this is making text lazy  this is making text lazy ';
+say q'\\some \{  \} \<  \> \| \[ \] \( \) \" \` some \' te xt \\ text this is making text lazy  this is making text lazy  this is making text lazy  this is making text lazy ';
+say q'\'some \{  \} \<  \> \| \[ \] \( \) \" \` some \' te xt \\ text this is making text lazy  this is making text lazy  this is making text lazy  this is making text lazy ';
+say q'some \{  \} \<  \> \| \[ \] \( \) \" \` some \' te xt \\ text\\ this is making text lazy  this is making text lazy  this is making text lazy  this is making text lazy ';
+say q'some \{  \} \<  \> \| \[ \] \( \) \" \` some \' te xt \\ text\' this is making text lazy  this is making text lazy  this is making text lazy  this is making text lazy ';
+
+say q{some \{  \} \<  \> \| \[ \] \( \) \" \` some \' te xt \\ text this is making text lazy  this is making text lazy  this is making text lazy  this is making text lazy };
+say q(some  \\ \{  \} \<  \> \| \[ \] \( \) \" \` some \' te xt \\ text this is making text lazy  this is making text lazy  this is making text lazy  this is making text lazy );
+say q[\\some \{  \} \<  \> \| \[ \] \( \) \" \` some \' te xt \\ text this is making text lazy  this is making text lazy  this is making text lazy  this is making text lazy ];
+say q<\'some \{  \} \<  \> \| \[ \] \( \) \" \` some \' te xt \\ text this is making text lazy  this is making text lazy  this is making text lazy  this is making text lazy >;
+say q"some \{  \} \<  \> \| \[ \] \( \) \" \` some \' te xt \\ text this is making text lazy  this is making text lazy  this is making text lazy  this is making text lazy ";
+say q`some \{  \} \<  \> \| \[ \] \( \) \" \` some \' te xt \\ text this is making text lazy  this is making text lazy  this is making text lazy  this is making text lazy `;
+
+say <<'EOM'
+HEREDOC
+say 'some \{  \} \<  \> \| \[ \] \( \) \" \` some \' te xt \\ text this is making text lazy  this is making text lazy  this is making text lazy  this is making text lazy ';
+say 'some  \\ \{  \} \<  \> \| \[ \] \( \) \" \` some \' te xt \\ text this is making text lazy  this is making text lazy  this is making text lazy  this is making text lazy ';
+say '\\some \{  \} \<  \> \| \[ \] \( \) \" \` some \' te xt \\ text this is making text lazy  this is making text lazy  this is making text lazy  this is making text lazy ';
+say '\'some \{  \} \<  \> \| \[ \] \( \) \" \` some \' te xt \\ text this is making text lazy  this is making text lazy  this is making text lazy  this is making text lazy ';
+say 'some \{  \} \<  \> \| \[ \] \( \) \" \` some \' te xt \\ text\\ this is making text lazy  this is making text lazy  this is making text lazy  this is making text lazy ';
+say 'some \{  \} \<  \> \| \[ \] \( \) \" \` some \' te xt \\ text\' this is making text lazy  this is making text lazy  this is making text lazy  this is making text lazy ';
+
+say q'some \{  \} \<  \> \| \[ \] \( \) \" \` some \' te xt \\ text this is making text lazy  this is making text lazy  this is making text lazy  this is making text lazy ';
+say q'some  \\ \{  \} \<  \> \| \[ \] \( \) \" \` some \' te xt \\ text this is making text lazy  this is making text lazy  this is making text lazy  this is making text lazy ';
+say q'\\some \{  \} \<  \> \| \[ \] \( \) \" \` some \' te xt \\ text this is making text lazy  this is making text lazy  this is making text lazy  this is making text lazy ';
+say q'\'some \{  \} \<  \> \| \[ \] \( \) \" \` some \' te xt \\ text this is making text lazy  this is making text lazy  this is making text lazy  this is making text lazy ';
+say q'some \{  \} \<  \> \| \[ \] \( \) \" \` some \' te xt \\ text\\ this is making text lazy  this is making text lazy  this is making text lazy  this is making text lazy ';
+say q'some \{  \} \<  \> \| \[ \] \( \) \" \` some \' te xt \\ text\' this is making text lazy  this is making text lazy  this is making text lazy  this is making text lazy ';
+
+say q{some \{  \} \<  \> \| \[ \] \( \) \" \` some \' te xt \\ text this is making text lazy  this is making text lazy  this is making text lazy  this is making text lazy };
+say q(some  \\ \{  \} \<  \> \| \[ \] \( \) \" \` some \' te xt \\ text this is making text lazy  this is making text lazy  this is making text lazy  this is making text lazy );
+say q[\\some \{  \} \<  \> \| \[ \] \( \) \" \` some \' te xt \\ text this is making text lazy  this is making text lazy  this is making text lazy  this is making text lazy ];
+say q<\'some \{  \} \<  \> \| \[ \] \( \) \" \` some \' te xt \\ text this is making text lazy  this is making text lazy  this is making text lazy  this is making text lazy >;
+say q"some \{  \} \<  \> \| \[ \] \( \) \" \` some \' te xt \\ text this is making text lazy  this is making text lazy  this is making text lazy  this is making text lazy ";
+say q`some \{  \} \<  \> \| \[ \] \( \) \" \` some \' te xt \\ text this is making text lazy  this is making text lazy  this is making text lazy  this is making text lazy `;
+EOM1

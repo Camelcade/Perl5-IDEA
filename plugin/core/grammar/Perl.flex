@@ -181,7 +181,8 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 %state VERSION_OR_OPERAND_USE, BAREWORD_USE
 %state PACKAGE_DECLARATION_ARGUMENTS
 
-%xstate STRING_Q, STRING_LIST
+%xstate STRING_Q, STRING_Q_CHAR, STRING_Q_ESC, STRING_Q_CONTINUE
+%xstate STRING_LIST
 %xstate STRING_QQ, STRING_QQ_CHAR,
 %xstate STRING_QX, STRING_QX_CHAR,
 
@@ -703,8 +704,35 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 	{ANY_SPACE}+			{return TokenType.WHITE_SPACE;}
 }
 
+// we've got some text, continuing
+<STRING_Q_CONTINUE>{
+	[^\\]+			       {}
+        "\\"                           {
+          IElementType tokenType = getSQBackSlashTokenType();
+          if( tokenType == STRING_SPECIAL_ESCAPE_CHAR){
+              yybegin(STRING_Q_ESC);
+              yypushback(1);
+              return STRING_CONTENT;
+          }
+        }
+        <<EOF>>                        {yybegin(YYINITIAL);return STRING_CONTENT;}
+}
+
+<STRING_Q_CHAR>       [^]              {yybegin(STRING_Q_CONTINUE);}
+<STRING_Q_ESC>        [^]              {yybegin(STRING_Q_CHAR);return STRING_SPECIAL_ESCAPE_CHAR;}
+
 <STRING_Q>{
-	[^]+					{return STRING_CONTENT;}
+	[^\\]+				{yybegin(STRING_Q_CONTINUE);}
+        "\\"                            {
+        IElementType tokenType = getSQBackSlashTokenType();
+        if( tokenType == STRING_CONTENT){
+            yybegin(STRING_Q_CONTINUE);
+        }
+        else{
+            yybegin(STRING_Q_CHAR);
+            return tokenType;
+        }
+      }
 }
 
 ^{POD_START} 				{yybegin(POD_STATE);}

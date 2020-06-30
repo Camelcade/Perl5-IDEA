@@ -52,19 +52,14 @@ public abstract class PerlLazyBlockElementType extends ILazyParseableElementType
     PsiBuilder builder = PsiBuilderFactory.getInstance().createBuilder(
       project,
       chameleon,
-      getLexer(parentElement.getProject()),
+      new PerlMergingLexerAdapter(getLexer(parentElement.getProject(), chameleon)),
       getLanguage(),
       chameleon.getText());
 
     return PerlParserImpl.INSTANCE.parse(this, builder).getFirstChildNode();
   }
 
-
-  protected @NotNull Lexer getLexer(@NotNull Project project) {
-    return new PerlMergingLexerAdapter(getInnerLexer(project));
-  }
-
-  protected abstract @NotNull Lexer getInnerLexer(@NotNull Project project);
+  protected abstract @NotNull Lexer getLexer(@NotNull Project project, @NotNull ASTNode chameleon);
 
   @Override
   public final @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {

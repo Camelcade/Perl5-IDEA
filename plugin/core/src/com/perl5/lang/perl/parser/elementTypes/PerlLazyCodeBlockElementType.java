@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.parser.elementTypes;
 
+import com.intellij.lang.ASTNode;
 import com.intellij.openapi.project.Project;
 import com.perl5.lang.perl.lexer.adapters.PerlSublexingLexerAdapter;
 import org.jetbrains.annotations.NonNls;
@@ -28,7 +29,8 @@ public class PerlLazyCodeBlockElementType extends PerlLazyBlockElementType {
   }
 
   @Override
-  protected @NotNull PerlSublexingLexerAdapter getInnerLexer(@NotNull Project project) {
+  protected @NotNull PerlSublexingLexerAdapter getLexer(@NotNull Project project,
+                                                        @NotNull ASTNode chameleon) {
     return new PerlSublexingLexerAdapter(project, false, false);
   }
 }

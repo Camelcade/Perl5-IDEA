@@ -64,6 +64,7 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
   private int myState;
   private IElementType myTokenType;
   private boolean myTryCatchEnabled;
+  private char mySingleOpenQuoteChar = 0;
 
   public PerlSublexingLexerAdapter(@Nullable Project project, boolean allowToMergeCodeBlocks, boolean forceSublexing) {
     this(project, new PerlCodeMergingLexerAdapter(project, allowToMergeCodeBlocks), forceSublexing);
@@ -75,6 +76,19 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
     myProject = project;
   }
 
+  /**
+   * Starts lexing of single quoted string content
+   */
+  public void start(@NotNull CharSequence buffer,
+                    int startOffset,
+                    int endOffset,
+                    int subLexingState,
+                    char openQuoteChar) {
+    LOG.assertTrue(subLexingState == PerlLexer.STRING_Q);
+    start(buffer, startOffset, endOffset, subLexingState);
+    LOG.assertTrue(myMainLexer instanceof PerlCodeMergingLexerAdapter, "Got: " + myMainLexer);
+    ((PerlCodeMergingLexerAdapter)myMainLexer).setSingleOpenQuoteChar(openQuoteChar);
+  }
 
   @Override
   public void start(@NotNull CharSequence buffer, int startOffset, int endOffset, int initialState) {
@@ -167,8 +181,13 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
       }
 
       // need to sublex
-      LexerBase subLexer = getSubLexer();
-      subLexer.start(getBufferSequence(), myTokenStart, myTokenEnd, subLexingState);
+      PerlSublexingLexerAdapter subLexer = getSubLexer();
+      if (subLexingState == PerlLexer.STRING_Q) {
+        subLexer.start(getBufferSequence(), myTokenStart, myTokenEnd, subLexingState, mySingleOpenQuoteChar);
+      }
+      else {
+        subLexer.start(getBufferSequence(), myTokenStart, myTokenEnd, subLexingState);
+      }
       myIsSublexing = true;
       myTokenType = null;
       locateToken();
@@ -184,6 +203,16 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
     myTokenType = lexer.getTokenType();
     if (myTokenType == LEFT_BRACE_CODE_START) {
       myTokenType = LEFT_BRACE;
+    }
+    else if (myTokenType == QUOTE_SINGLE_OPEN) {
+      CharSequence tokenSequence = lexer.getTokenSequence();
+      if (tokenSequence.length() != 1) {
+        LOG.error("Got: " + tokenSequence);
+      }
+      mySingleOpenQuoteChar = tokenSequence.charAt(0);
+    }
+    else if (myTokenType == QUOTE_SINGLE_CLOSE) {
+      mySingleOpenQuoteChar = 0;
     }
     myTokenStart = lexer.getTokenStart();
     myState = lexer.getState();

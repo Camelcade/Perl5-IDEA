@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.parser.elementTypes;
 
+import com.intellij.lang.ASTNode;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
 import com.perl5.lang.perl.lexer.adapters.PerlSubLexerAdapter;
@@ -29,7 +30,7 @@ public class PerlLazyReplacementRegexpElementType extends PerlLazyBlockElementTy
   }
 
   @Override
-  protected @NotNull Lexer getInnerLexer(@NotNull Project project) {
+  protected @NotNull Lexer getLexer(@NotNull Project project, @NotNull ASTNode chameleon) {
     return PerlSubLexerAdapter.forReplacementRegex(project);
   }
 }

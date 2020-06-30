@@ -28,6 +28,12 @@ public class PerlSyntaxHighlightingTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testEscapeInSQStrings() {doTest();}
+
+  @Test
+  public void testEscapeInSQStringsLazy() {doTest();}
+
+  @Test
   public void testOctSubstitutionCorrect() {doTest();}
 
   @Test

@@ -53,6 +53,9 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
 
   private static final Pattern USE_TRYCATCH_PATTERN = Pattern.compile("use\\s+TryCatch");
   private Boolean myHasTryCatch = null;
+  // this is used to lex single-quoted strings.
+  private char mySingleOpenQuoteChar = 0;
+  private char mySingleCloseQuoteChar = 0;
 
   public static final Map<IElementType, String> ALLOWED_REGEXP_MODIFIERS = new THashMap<>();
   public static final String ALLOWED_TR_MODIFIERS = "cdsr";
@@ -173,7 +176,21 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
            heredocQueue.isEmpty() &&
            myBracesStack.isEmpty() &&
            myBracketsStack.isEmpty() &&
-           myParensStack.isEmpty();
+           myParensStack.isEmpty() &&
+           mySingleOpenQuoteChar == 0;
+  }
+
+  /**
+   * @apiNote use this method to set a quote charater for currently lexed single-quoted string content.
+   */
+  public void setSingleOpenQuoteChar(char singleOpenQuoteChar) {
+    mySingleOpenQuoteChar = singleOpenQuoteChar;
+    if (singleOpenQuoteChar != 0) {
+      mySingleCloseQuoteChar = PerlString.getQuoteCloseChar(singleOpenQuoteChar);
+    }
+    else {
+      mySingleCloseQuoteChar = 0;
+    }
   }
 
   /**
@@ -401,6 +418,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
     myFormatWaiting = false;
     myIsHeredocLike = false;
     myHasTryCatch = null;
+    setSingleOpenQuoteChar((char)0);
 
     myImplicitSubsService = myProject == null ? null : PerlImplicitDeclarationsService.getInstance(myProject);
 
@@ -1145,6 +1163,16 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
    * @return token type for the back-slash we are standing on. Depends on character ahead: slash for quotes and string for the rest
    */
   protected IElementType getSQBackSlashTokenType() {
-    return STRING_CONTENT;
+    if (mySingleOpenQuoteChar == 0) {
+      return STRING_CONTENT;
+    }
+    int tokenEnd = getTokenEnd();
+    int bufferEnd = getBufferEnd();
+    if (bufferEnd <= tokenEnd) {
+      return STRING_CONTENT;
+    }
+    char nextChar = getBuffer().charAt(tokenEnd);
+    return nextChar == '\\' || nextChar == mySingleOpenQuoteChar || nextChar == mySingleCloseQuoteChar ?
+           STRING_SPECIAL_ESCAPE_CHAR : STRING_CONTENT;
   }
 }

@@ -152,4 +152,8 @@ public class PerlCodeMergingLexerAdapter extends LexerBase implements PerlElemen
     myTokenType = myPerlLexer.getLPCodeBlockElementType();
     myState = PerlLexer.YYINITIAL;
   }
+
+  void setSingleOpenQuoteChar(char singleOpenQuoteChar) {
+    myPerlLexer.setSingleOpenQuoteChar(singleOpenQuoteChar);
+  }
 }

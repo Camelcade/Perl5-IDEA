@@ -1284,7 +1284,7 @@ private qw_string_content ::= <<consumeTokens 'LP_STRING_QW'>>|string_bare+
 private quoted_sq_string ::= QUOTE_SINGLE_OPEN [smart_sq_string_content] QUOTE_SINGLE_CLOSE {pin=1}
 private smart_sq_string_content ::= <<isUseVars>> <<mapUseVars sq_string_content_element>>+ | sq_string_content
 private sq_string_content ::= sq_string_content_element +
-private sq_string_content_element ::= <<consumeTokens 'LP_STRING_Q'>> |STRING_CONTENT
+private sq_string_content_element ::= <<consumeTokens 'LP_STRING_Q'>> |STRING_CONTENT | '\\"'
 
 heredoc_opener ::= 'heredoc<<' ( '\\' string_bare | string ){pin=1}
 

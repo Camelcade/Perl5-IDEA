@@ -27,6 +27,12 @@ public class PerlParserTest extends PerlParserTestBase {
   }
 
   @Test
+  public void testEscapeInSQStrings() {doTest();}
+
+  @Test
+  public void testEscapeInSQStringsLazy() {doTest();}
+
+  @Test
   public void testSmartLongStrings() {doTest();}
 
   @Test
