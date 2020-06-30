@@ -1,0 +1,48 @@
+<<EOM;
+say "\x{263A}";
+say "\x{}";
+say "\x1";
+say "\x1b";
+say "\x{00}";
+say "\x7";
+say "\x";
+say "\xq";
+say "\x7q";
+EOM
+
+<<"EOM";
+say "\x{263A}";
+say "\x{}";
+say "\x1";
+say "\x1b";
+say "\x{00}";
+say "\x7";
+say "\x";
+say "\xq";
+say "\x7q";
+EOM
+
+<<'EOM';
+say "\x{263A}";
+say "\x{}";
+say "\x1";
+say "\x1b";
+say "\x{00}";
+say "\x7";
+say "\x";
+say "\xq";
+say "\x7q";
+EOM
+
+<<`EOM`;
+say "\x{263A}";
+say "\x{}";
+say "\x1";
+say "\x1b";
+say "\x{00}";
+say "\x7";
+say "\x";
+say "\xq";
+say "\x7q";
+EOM
+

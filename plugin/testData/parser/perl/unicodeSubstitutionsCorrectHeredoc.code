@@ -1,0 +1,103 @@
+<<EOM;
+use charnames ':full';
+print "\N{GREEK SMALL LETTER SIGMA} is called sigma.\n";
+print "\N{LATIN CAPITAL LETTER E WITH VERTICAL LINE BELOW}",
+    " is an officially named sequence of two Unicode characters\n";
+use charnames ':loose';
+print "\N{Greek small-letter  sigma}",
+    "can be used to ignore case, underscores, most blanks,",
+    "and when you aren't sure if the official name has hyphens\n";
+use charnames ':short';
+print "\N{greek:Sigma} is an upper-case sigma.\n";
+use charnames qw(cyrillic greek);
+print "\N{sigma} is Greek sigma, and \N{be} is Cyrillic b.\n";
+
+use charnames ":full", ":alias" => {
+    e_ACUTE   => "LATIN SMALL LETTER E WITH ACUTE",
+    mychar    => 0xE8000, # Private use area
+    "自転車に乗る人" => "BICYCLIST"
+};
+print "\N{e_ACUTE} is a small letter e with an acute.\n";
+print "\N{mychar} allows me to name private use characters.\n";
+print "And I can create synonyms in other languages,",
+    " such as \N{自転車に乗る人} for \"BICYCLIST (U+1F6B4)\n";
+say "Hello man \N{U+21} \N{U+021} \N{U+0021} \N{U+00021}";
+EOM
+
+<<"EOM";
+use charnames ':full';
+print "\N{GREEK SMALL LETTER SIGMA} is called sigma.\n";
+print "\N{LATIN CAPITAL LETTER E WITH VERTICAL LINE BELOW}",
+    " is an officially named sequence of two Unicode characters\n";
+use charnames ':loose';
+print "\N{Greek small-letter  sigma}",
+    "can be used to ignore case, underscores, most blanks,",
+    "and when you aren't sure if the official name has hyphens\n";
+use charnames ':short';
+print "\N{greek:Sigma} is an upper-case sigma.\n";
+use charnames qw(cyrillic greek);
+print "\N{sigma} is Greek sigma, and \N{be} is Cyrillic b.\n";
+
+use charnames ":full", ":alias" => {
+    e_ACUTE   => "LATIN SMALL LETTER E WITH ACUTE",
+    mychar    => 0xE8000, # Private use area
+    "自転車に乗る人" => "BICYCLIST"
+};
+print "\N{e_ACUTE} is a small letter e with an acute.\n";
+print "\N{mychar} allows me to name private use characters.\n";
+print "And I can create synonyms in other languages,",
+    " such as \N{自転車に乗る人} for \"BICYCLIST (U+1F6B4)\n";
+say "Hello man \N{U+21} \N{U+021} \N{U+0021} \N{U+00021}";
+EOM
+
+<<'EOM';
+use charnames ':full';
+print "\N{GREEK SMALL LETTER SIGMA} is called sigma.\n";
+print "\N{LATIN CAPITAL LETTER E WITH VERTICAL LINE BELOW}",
+    " is an officially named sequence of two Unicode characters\n";
+use charnames ':loose';
+print "\N{Greek small-letter  sigma}",
+    "can be used to ignore case, underscores, most blanks,",
+    "and when you aren't sure if the official name has hyphens\n";
+use charnames ':short';
+print "\N{greek:Sigma} is an upper-case sigma.\n";
+use charnames qw(cyrillic greek);
+print "\N{sigma} is Greek sigma, and \N{be} is Cyrillic b.\n";
+
+use charnames ":full", ":alias" => {
+    e_ACUTE   => "LATIN SMALL LETTER E WITH ACUTE",
+    mychar    => 0xE8000, # Private use area
+    "自転車に乗る人" => "BICYCLIST"
+};
+print "\N{e_ACUTE} is a small letter e with an acute.\n";
+print "\N{mychar} allows me to name private use characters.\n";
+print "And I can create synonyms in other languages,",
+    " such as \N{自転車に乗る人} for \"BICYCLIST (U+1F6B4)\n";
+say "Hello man \N{U+21} \N{U+021} \N{U+0021} \N{U+00021}";
+EOM
+
+<<`EOM`;
+use charnames ':full';
+print "\N{GREEK SMALL LETTER SIGMA} is called sigma.\n";
+print "\N{LATIN CAPITAL LETTER E WITH VERTICAL LINE BELOW}",
+    " is an officially named sequence of two Unicode characters\n";
+use charnames ':loose';
+print "\N{Greek small-letter  sigma}",
+    "can be used to ignore case, underscores, most blanks,",
+    "and when you aren't sure if the official name has hyphens\n";
+use charnames ':short';
+print "\N{greek:Sigma} is an upper-case sigma.\n";
+use charnames qw(cyrillic greek);
+print "\N{sigma} is Greek sigma, and \N{be} is Cyrillic b.\n";
+
+use charnames ":full", ":alias" => {
+    e_ACUTE   => "LATIN SMALL LETTER E WITH ACUTE",
+    mychar    => 0xE8000, # Private use area
+    "自転車に乗る人" => "BICYCLIST"
+};
+print "\N{e_ACUTE} is a small letter e with an acute.\n";
+print "\N{mychar} allows me to name private use characters.\n";
+print "And I can create synonyms in other languages,",
+    " such as \N{自転車に乗る人} for \"BICYCLIST (U+1F6B4)\n";
+say "Hello man \N{U+21} \N{U+021} \N{U+0021} \N{U+00021}";
+EOM
