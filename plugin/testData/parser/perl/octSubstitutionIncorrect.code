@@ -1,0 +1,6 @@
+
+say "text\otext \o{123}";
+say "text\o{text \o{123}";
+say "text\o{}text \o{123}";
+say "text\o{sdf1234567}text \o{123}";
+say "text\o{1234567asdf}text \o{123}";

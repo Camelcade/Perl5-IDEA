@@ -28,6 +28,9 @@ public class PerlSyntaxHighlightingTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testOctSubstitutionCorrect() {doTest();}
+
+  @Test
   public void testBackReferences() {doTest();}
 
   @Test

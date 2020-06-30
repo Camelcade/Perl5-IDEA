@@ -30,6 +30,21 @@ public class PerlParserTest extends PerlParserTestBase {
   public void testBackReferences() {doTest();}
 
   @Test
+  public void testOctSubstitutionCorrect() {doTest();}
+
+  @Test
+  public void testOctSubstitutionCorrectHeredocs() {doTest();}
+
+  @Test
+  public void testOctSubstitutionCorrectXQ() {doTest();}
+
+  @Test
+  public void testOctSubstitutionCorrectSQ() {doTest();}
+
+  @Test
+  public void testOctSubstitutionIncorrect() {doTest(false);}
+
+  @Test
   public void testHexSubstitutionsCorrect() {doTest();}
 
   @Test

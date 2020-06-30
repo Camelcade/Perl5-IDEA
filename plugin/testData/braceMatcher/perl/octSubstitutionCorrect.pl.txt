@@ -1,0 +1,2 @@
+say <open0>"</open0>text\o<open1>{</open1>0<close1>}</close1>text<close0>"</close0>;
+say <open2>"</open2>text\o<open3>{</open3>1234567<close3>}</close3>text<close2>"</close2>;

@@ -101,7 +101,9 @@
     STRING_SPECIAL_BACKREF = '\1'
 
     STRING_SPECIAL_HEX='\x'
-    STRING_SPECIAL_OCTAL='\o'
+
+    STRING_SPECIAL_OCT='\o'
+    STRING_SPECIAL_OCT_AMBIGUOUS='\0'
 
     STRING_SPECIAL_UNICODE='\N'
     STRING_SPECIAL_UNICODE_CODE_PREFIX='U+'
@@ -1258,8 +1260,9 @@ private hex_char_body ::=  hex_char_body_braced | [char_code_hex]
 private hex_char_body_braced ::= '"{' [hex_char_body_content_in_brace] '}"' {pin=1 name="braced character code"}
 private hex_char_body_content_in_brace ::= char_code_hex {recoverWhile=recover_string_braces}
 
-private oct_char ::= '\o' oct_char_body {pin=1}
-private oct_char_body ::= char_code_oct | oct_char_body_braced
+oct_char ::= oct_char_ambiguous | oct_char_unambiguous
+private oct_char_ambiguous ::= '\0' [char_code_oct] {pin=1}
+private oct_char_unambiguous ::= '\o' oct_char_body_braced {pin=1}
 private oct_char_body_braced ::= '"{' oct_char_body_content_braced '}"' {pin=1}
 private oct_char_body_content_braced ::= char_code_oct {recoverWhile=recover_string_braces}
 private char_code_oct ::= NUMBER_OCT {name="octal characcter code"}

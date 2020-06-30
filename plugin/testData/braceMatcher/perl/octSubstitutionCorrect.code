@@ -1,0 +1,2 @@
+say "text\o{0}text";
+say "text\o{1234567}text";
