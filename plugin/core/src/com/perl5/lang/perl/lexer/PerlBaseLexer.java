@@ -59,11 +59,11 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
   public static final Pattern POSIX_CHAR_CLASS_PATTERN = Pattern.compile("\\[\\[:\\^?\\w*:\\]\\]");
   public static Map<String, IElementType> CUSTOM_TOKEN_TYPES = new HashMap<>();
   public static Map<String, IElementType> CUSTOM_TOKEN_TYPES_AFTER_DEREFERENCE = new HashMap<>();
-  private static final List<IElementType> DQ_TOKENS = Arrays.asList(QUOTE_DOUBLE_OPEN, LP_STRING_QQ, QUOTE_DOUBLE_CLOSE);
-  private static final List<IElementType> SQ_TOKENS = Arrays.asList(QUOTE_SINGLE_OPEN, STRING_CONTENT, QUOTE_SINGLE_CLOSE);
-  private static final List<IElementType> XQ_TOKENS = Arrays.asList(QUOTE_TICK_OPEN, LP_STRING_QX, QUOTE_TICK_CLOSE);
+  private static final List<IElementType> DQ_TOKENS = Arrays.asList(QUOTE_DOUBLE_OPEN, LP_STRING_QQ, QUOTE_DOUBLE_CLOSE, STRING_CONTENT_QQ);
+  private static final List<IElementType> SQ_TOKENS = Arrays.asList(QUOTE_SINGLE_OPEN, LP_STRING_Q, QUOTE_SINGLE_CLOSE, STRING_CONTENT);
+  private static final List<IElementType> XQ_TOKENS = Arrays.asList(QUOTE_TICK_OPEN, LP_STRING_QX, QUOTE_TICK_CLOSE, STRING_CONTENT_XQ);
   private static final List<IElementType> QW_TOKENS = Arrays.asList(QUOTE_SINGLE_OPEN, LP_STRING_QW, QUOTE_SINGLE_CLOSE);
-  private static final List<IElementType> GLOB_TOKENS = Arrays.asList(LEFT_ANGLE, LP_STRING_QQ, RIGHT_ANGLE);
+  private static final List<IElementType> GLOB_TOKENS = Arrays.asList(LEFT_ANGLE, LP_STRING_QQ, RIGHT_ANGLE, STRING_CONTENT_QQ);
 
   private static final Map<IElementType, Trinity<IElementType, IElementType, IElementType>> SIGILS_TO_TOKENS_MAP = new HashMap<>();
 
@@ -574,6 +574,8 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
     pushPreparsedToken(currentPosition++, currentPosition, stringTokens.get(0));
 
     int contentStart = currentPosition;
+    boolean hasEscape = false;
+    boolean hasSigil = false;
 
     while (currentPosition < bufferEnd) {
       char currentChar = buffer.charAt(currentPosition);
@@ -593,16 +595,26 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
       }
 
       isEscaped = !isEscaped && currentChar == '\\';
+      hasEscape = hasEscape || currentChar == '\\';
+      hasSigil = hasSigil || currentChar == '$' || currentChar == '@';
 
       currentPosition++;
     }
 
     if (currentPosition > contentStart) {
-      pushPreparsedToken(contentStart, currentPosition, stringTokens.get(1));
+      IElementType contentTokenType = stringTokens.get(1);
+      if (contentTokenType == LP_STRING_Q && !hasEscape) {
+        contentTokenType = stringTokens.get(3);
+      }
+      else if ((contentTokenType == LP_STRING_QQ || contentTokenType == LP_STRING_QX) && !hasEscape && !hasSigil) {
+        contentTokenType = stringTokens.get(3);
+      }
+
+      pushPreparsedToken(contentStart, currentPosition, contentTokenType);
     }
 
-    if (currentPosition < bufferEnd)    // got close quote
-    {
+    if (currentPosition < bufferEnd) {
+      // got close quote
       pushPreparsedToken(currentPosition++, currentPosition, stringTokens.get(2));
     }
     popState();
@@ -1127,5 +1139,12 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
    */
   protected boolean isLastChar() {
     return getTokenEnd() == getBufferEnd();
+  }
+
+  /**
+   * @return token type for the back-slash we are standing on. Depends on character ahead: slash for quotes and string for the rest
+   */
+  protected IElementType getSQBackSlashTokenType() {
+    return STRING_CONTENT;
   }
 }

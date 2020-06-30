@@ -27,6 +27,9 @@ public class PerlParserTest extends PerlParserTestBase {
   }
 
   @Test
+  public void testSmartLongStrings() {doTest();}
+
+  @Test
   public void testBackReferences() {doTest();}
 
   @Test
