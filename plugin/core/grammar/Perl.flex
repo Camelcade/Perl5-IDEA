@@ -628,6 +628,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
         "\\Q"     {return STRING_SPECIAL_QUOTE_START;}
         "\\N"     {pushState();yybegin(UNICODE_SUBSTITUTION);return STRING_SPECIAL_UNICODE;}
         "\\x"     {pushState();yybegin(HEX_SUBSTITUTION);return STRING_SPECIAL_HEX;}
+        "\\"[1-9]\d*   {return STRING_SPECIAL_BACKREF;}
 }
 
 <STRING_QQ_CHAR> [^]             {yybegin(STRING_QQ);return STRING_CONTENT_QQ;}

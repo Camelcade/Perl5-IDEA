@@ -27,6 +27,9 @@ public class PerlParserTest extends PerlParserTestBase {
   }
 
   @Test
+  public void testBackReferences() {doTest();}
+
+  @Test
   public void testHexSubstitutionsCorrect() {doTest();}
 
   @Test

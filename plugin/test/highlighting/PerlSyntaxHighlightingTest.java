@@ -28,6 +28,9 @@ public class PerlSyntaxHighlightingTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testBackReferences() {doTest();}
+
+  @Test
   public void testHexSubstitutionsCorrect() {doTest();}
 
   @Test

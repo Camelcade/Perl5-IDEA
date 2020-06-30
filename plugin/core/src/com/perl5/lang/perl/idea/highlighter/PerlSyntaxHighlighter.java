@@ -162,6 +162,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements Perl
     safeMap(SEMICOLON, PERL_SEMICOLON);
 
     safeMap(PERL_ANGLE, LEFT_ANGLE, RIGHT_ANGLE);
+    safeMap(STRING_SPECIAL_BACKREF, PERL_SCALAR);
 
     safeMap(PERL_BRACE, LEFT_BRACE, RIGHT_BRACE); //, REGEX_LEFT_BRACE, REGEX_RIGHT_BRACE
     safeMap(PERL_BRACK, LEFT_BRACKET,

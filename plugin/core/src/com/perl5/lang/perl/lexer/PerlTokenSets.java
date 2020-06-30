@@ -423,6 +423,7 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
     OPERATOR_CMP_NUMERIC, OPERATOR_CMP_STR, OPERATOR_SMARTMATCH
   );
 
+  // these tokens are highlighted as special chars. Missing some stuff, like back-references, highlighted separately
   TokenSet SPECIAL_STRING_TOKENS = TokenSet.create(
     STRING_SPECIAL_TAB,
     STRING_SPECIAL_NEWLINE,
@@ -437,7 +438,6 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
     STRING_SPECIAL_TCFIRST,
 
     STRING_SPECIAL_SUBST,
-    STRING_SPECIAL_BACKREF,
 
     STRING_SPECIAL_HEX,
     STRING_SPECIAL_OCTAL,
