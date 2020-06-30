@@ -1,0 +1,3 @@
+say <open0>"</open0>\x<open1>{</open1>263A<close1>}<close0></close1>"</close0>;
+say <open2>"</open2>\x<open3>{</open3><close3>}<close2></close3>"</close2>;
+say <open4>"</open4>\x<open5>{</open5>00<close5>}<close4></close5>"</close4>;

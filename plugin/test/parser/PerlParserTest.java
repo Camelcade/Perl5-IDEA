@@ -27,6 +27,12 @@ public class PerlParserTest extends PerlParserTestBase {
   }
 
   @Test
+  public void testHexSubstitutionsCorrect() {doTest();}
+
+  @Test
+  public void testHexSubstitutionsIncorrect() {doTest(false);}
+
+  @Test
   public void testUnicodeSubstitutionsCorrect() {doTest();}
 
   @Test

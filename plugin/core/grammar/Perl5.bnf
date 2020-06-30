@@ -1253,9 +1253,9 @@ private char_code_hex ::= NUMBER_HEX {name="hex character code"}
 
 private recover_string_braces ::= !('}"')
 
-private hex_char ::= '\x' hex_char_body {pin=1}
-private hex_char_body ::= char_code_hex | hex_char_body_braced
-private hex_char_body_braced ::= '"{' hex_char_body_content_in_brace '}"' {pin=1 name="braced character code"}
+hex_char ::= '\x' hex_char_body {pin=1}
+private hex_char_body ::=  hex_char_body_braced | [char_code_hex]
+private hex_char_body_braced ::= '"{' [hex_char_body_content_in_brace] '}"' {pin=1 name="braced character code"}
 private hex_char_body_content_in_brace ::= char_code_hex {recoverWhile=recover_string_braces}
 
 private oct_char ::= '\o' oct_char_body {pin=1}

@@ -1,0 +1,7 @@
+say "\x{263A*(?} test \x{1}";
+say "\x{(*&-234} test \x{1}";
+say "\x{-263a} test \x{1}";
+say "\x{abcdefABCDEF1234567890} test \x{1}";
+say "\xabcdef1234567890 test \x{1}";
+say "\x{ test \x{1}";
+say "\x{A1 test \x{1}";

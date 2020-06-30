@@ -27,6 +27,9 @@ public class PerlBraceMatcherTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testHexSubstitutionsCorrect() {doTest();}
+
+  @Test
   public void testUnicodeSubstitutionsCorrect() {doTest();}
 
   @Test
