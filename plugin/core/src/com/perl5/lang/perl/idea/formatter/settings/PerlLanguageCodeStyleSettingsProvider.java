@@ -179,6 +179,12 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
       consumer.renameStandardOption("METHOD_CALL_CHAIN_WRAP", PerlBundle.message("perl.formatting.wrap.dereference"));
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
+                                "METHOD_CALL_CHAIN_SIGN_NEXT_LINE",
+                                PerlBundle.message("perl.formatting.dereference.next.line"),
+                                WRAPPING_CALL_CHAIN
+      );
+
+      consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "ALIGN_CONSECUTIVE_ASSIGNMENTS",
                                 PerlBundle.message("perl.formatting.align.consecutive.assignments"),
                                 WRAPPING_ASSIGNMENT,

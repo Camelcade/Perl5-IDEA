@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -195,25 +195,46 @@ public class PerlFormatterWrapTest extends PerlFormatterTestCase {
 
   @Test
   public void testDereferenceNone() {
-    doTestDereferenceWrap(DO_NOT_WRAP);
+    doTestDereferenceWrap(DO_NOT_WRAP, true);
   }
 
   @Test
   public void testDereferenceAlways() {
-    doTestDereferenceWrap(WRAP_ALWAYS);
+    doTestDereferenceWrap(WRAP_ALWAYS, true);
   }
 
   @Test
   public void testDereferenceLong() {
-    doTestDereferenceWrap(WRAP_AS_NEEDED);
+    doTestDereferenceWrap(WRAP_AS_NEEDED, true);
   }
 
   @Test
   public void testDereferenceChomp() {
-    doTestDereferenceWrap(WRAP_ON_EVERY_ITEM);
+    doTestDereferenceWrap(WRAP_ON_EVERY_ITEM, true);
   }
 
-  private void doTestDereferenceWrap(int wrapType) {
+  @Test
+  public void testDereferenceNoneSameLine() {
+    doTestDereferenceWrap(DO_NOT_WRAP, false);
+  }
+
+  @Test
+  public void testDereferenceAlwaysSameLine() {
+    doTestDereferenceWrap(WRAP_ALWAYS, false);
+  }
+
+  @Test
+  public void testDereferenceLongSameLine() {
+    doTestDereferenceWrap(WRAP_AS_NEEDED, false);
+  }
+
+  @Test
+  public void testDereferenceChompSameLine() {
+    doTestDereferenceWrap(WRAP_ON_EVERY_ITEM, false);
+  }
+
+  private void doTestDereferenceWrap(int wrapType, boolean signNextLine) {
+    getCustomSettings().METHOD_CALL_CHAIN_SIGN_NEXT_LINE = signNextLine;
     getSettings().METHOD_CALL_CHAIN_WRAP = wrapType;
     doWrappingTestSingleSource("dereference");
   }

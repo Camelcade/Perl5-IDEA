@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 package formatter;
 
 
+import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import org.junit.Test;
 
 import static com.intellij.psi.codeStyle.CommonCodeStyleSettings.WRAP_AS_NEEDED;
@@ -64,14 +65,63 @@ public class PerlFormatterAlignTest extends PerlFormatterTestCase {
 
   @Test
   public void testAlignDereferenceFalse() {
-    getSettings().ALIGN_MULTILINE_CHAINED_METHODS = false;
-    doFormatTest();
+    doTestAlignDereference(false, true);
   }
 
   @Test
   public void testAlignDereferenceTrue() {
-    getSettings().ALIGN_MULTILINE_CHAINED_METHODS = true;
-    doFormatTest();
+    doTestAlignDereference(true, true);
+  }
+
+  @Test
+  public void testAlignDereferenceFalseNoWrap() {
+    doTestAlignDereferenceNoWrap(false);
+  }
+
+  @Test
+  public void testAlignDereferenceTrueNoWrap() {
+    doTestAlignDereferenceNoWrap(true);
+  }
+
+  private void doTestAlignDereferenceNoWrap(boolean align) {
+    getSettings().ALIGN_MULTILINE_CHAINED_METHODS = align;
+    getCustomSettings().METHOD_CALL_CHAIN_SIGN_NEXT_LINE = true;
+    doFormatTest("alignDereferenceNoWrap", getTestName(true), "");
+  }
+
+  @Test
+  public void testAlignDereferenceFalseNoWrapSameLine() {
+    doTestAlignDereferenceNoWrapSameLine(false);
+  }
+
+  @Test
+  public void testAlignDereferenceTrueNoWrapSameLine() {
+    doTestAlignDereferenceNoWrapSameLine(true);
+  }
+
+  private void doTestAlignDereferenceNoWrapSameLine(boolean align) {
+    getSettings().ALIGN_MULTILINE_CHAINED_METHODS = align;
+    getCustomSettings().METHOD_CALL_CHAIN_SIGN_NEXT_LINE = false;
+    doFormatTest("alignDereferenceNoWrap", getTestName(true), "");
+  }
+
+  @Test
+  public void testAlignDereferenceFalseSameLine() {
+    doTestAlignDereference(false, false);
+  }
+
+  @Test
+  public void testAlignDereferenceTrueSameLine() {
+    doTestAlignDereference(true, false);
+  }
+
+  private void doTestAlignDereference(boolean align, boolean signNextLine) {
+    CommonCodeStyleSettings settings = getSettings();
+    settings.RIGHT_MARGIN = 27;
+    settings.METHOD_CALL_CHAIN_WRAP = CommonCodeStyleSettings.WRAP_AS_NEEDED;
+    settings.ALIGN_MULTILINE_CHAINED_METHODS = align;
+    getCustomSettings().METHOD_CALL_CHAIN_SIGN_NEXT_LINE = signNextLine;
+    doFormatTest("alignDereference", getTestName(true), "");
   }
 
   @Test

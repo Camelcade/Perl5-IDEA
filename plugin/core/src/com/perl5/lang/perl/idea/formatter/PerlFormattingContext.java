@@ -325,10 +325,17 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     else if (parentNodeType == TERNARY_EXPR && mySettings.ALIGN_MULTILINE_TERNARY_OPERATION) {
       return myElementsALignmentsMap.get(parentNode);
     }
-    else if (childNodeType == OPERATOR_DEREFERENCE &&
-             parentNodeType == DEREF_EXPR &&
-             mySettings.ALIGN_MULTILINE_CHAINED_METHODS) {
-      return myOperatorsAlignmentsMap.get(parentNode);
+    else if (parentNodeType == DEREF_EXPR && mySettings.ALIGN_MULTILINE_CHAINED_METHODS) {
+      if (perlCodeStyleSettings.METHOD_CALL_CHAIN_SIGN_NEXT_LINE) {
+        if (childNodeType == OPERATOR_DEREFERENCE) {
+          return myOperatorsAlignmentsMap.get(parentNode);
+        }
+      }
+      else {
+        if (childNodeType != OPERATOR_DEREFERENCE && childNode.getTreePrev() != null) {
+          return myOperatorsAlignmentsMap.get(parentNode);
+        }
+      }
     }
     else if (childNodeType == STRING_BARE &&
              (parentNodeType == STRING_LIST || parentNodeType == LP_STRING_QW) &&
@@ -453,8 +460,17 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
              (childNodeType == UNDEF_EXPR && PerlTokenSets.VARIABLE_DECLARATIONS.contains(parentNodeType))) {
       return getWrapBySettings(parentNode, myPerlSettings.VARIABLE_DECLARATION_WRAP, false);
     }
-    else if (parentNodeType == DEREF_EXPR && childNodeType == OPERATOR_DEREFERENCE) {
-      return getWrapBySettings(parentNode, mySettings.METHOD_CALL_CHAIN_WRAP, true);
+    else if (parentNodeType == DEREF_EXPR) {
+      if (myPerlSettings.METHOD_CALL_CHAIN_SIGN_NEXT_LINE) {
+        if (childNodeType == OPERATOR_DEREFERENCE) {
+          return getWrapBySettings(parentNode, mySettings.METHOD_CALL_CHAIN_WRAP, true);
+        }
+      }
+      else {
+        if (childNodeType != OPERATOR_DEREFERENCE) {
+          return getWrapBySettings(parentNode, mySettings.METHOD_CALL_CHAIN_WRAP, false);
+        }
+      }
     }
     else if (BINARY_EXPRESSIONS.contains(parentNodeType)) {
       if (mySettings.BINARY_OPERATION_SIGN_ON_NEXT_LINE && BINARY_OPERATORS.contains(childNodeType)) {

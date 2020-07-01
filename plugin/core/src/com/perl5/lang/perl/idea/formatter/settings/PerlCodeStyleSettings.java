@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,6 +49,8 @@ public class PerlCodeStyleSettings extends CustomCodeStyleSettings {
   public boolean SPACE_AROUND_RANGE_OPERATORS = true;
   public boolean SPACE_AROUND_CONCAT_OPERATOR = true;
   public boolean SPACE_WITHIN_QW_QUOTES = false;
+
+  public boolean METHOD_CALL_CHAIN_SIGN_NEXT_LINE = true;
 
   public boolean SPACE_BEFORE_ATTRIBUTE = true;
   public int ATTRIBUTES_WRAP = DO_NOT_WRAP;
