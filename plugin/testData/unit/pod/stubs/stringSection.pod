@@ -1,0 +1,24 @@
+=head2 Quote-Like Operators
+X<operator, quote-like>
+
+=over 4
+
+=item C<q/I<STRING>/>
+X<q> X<quote, single> X<'> X<''>
+
+=item C<'I<STRING>'>
+
+A single-quoted, literal string.  A backslash represents a backslash
+unless followed by the delimiter or another backslash, in which case
+the delimiter or backslash is interpolated.
+
+    $foo = q!I said, "You said, 'She said it.'"!;
+    $bar = q('This is it.');
+    $baz = '\n';		# a two-character string
+
+=item C<qq/I<STRING>/>
+X<qq> X<quote, double> X<"> X<"">
+
+=item "I<STRING>"
+
+A double-quoted, interpolated string.

@@ -461,4 +461,10 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
       STRING_SPECIAL_LEFT_BRACE,
       STRING_SPECIAL_RIGHT_BRACE
     ));
+
+  TokenSet PERL_NUMBERS = TokenSet.create(NUMBER, NUMBER_BIN, NUMBER_HEX, NUMBER_OCT);
+
+  TokenSet PERL_PARAMETRIZED_STRING_SUBSTITUTIONS = TokenSet.create(
+    UNICODE_CHAR, HEX_CHAR, OCT_CHAR
+  );
 }

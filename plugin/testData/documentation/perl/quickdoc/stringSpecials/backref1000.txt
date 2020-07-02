@@ -1,0 +1,7 @@
+<p><a href="psi_element://perlop">perlop</a>: <a href="psi_element://perlop%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://perlop%2FGory+details+of+parsing+quoted+constructs">Gory details of parsing quoted constructs</a>: <a href="psi_element://perlop%2FInterpolation">Interpolation</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">the replacement of <code>s///</code></dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Processing of <code>\Q</code>, <code>\U</code>, <code>\u</code>, <code>\L</code>, <code>\l</code>, <code>\F</code> and interpolation
+happens as with <code>qq//</code> constructs.</p>
+<p style="padding-bottom: 10px;">It is at this step that <code>\1</code> is begrudgingly converted to <code>$1</code> in
+the replacement text of <code>s///</code>, in order to correct the incorrigible
+<i>sed</i> hackers who haven't picked up the saner idiom yet.  A warning
+is emitted if the <span style="white-space: nowrap;"><code>use warnings</code></span> pragma or the <B>-w</B> command-line flag
+(that is, the <code>$^W</code> variable) was set.</p></dd></dl>

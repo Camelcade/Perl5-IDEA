@@ -1,0 +1,45 @@
+<p><a href="psi_element://perlop">perlop</a>: <a href="psi_element://perlop%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://perlop%2FQuote+and+Quote-like+Operators">Quote and Quote-like Operators</a></p><p style="padding-bottom: 10px;">The following escape sequences are available in constructs that interpolate,
+and in transliterations:
+           </p>
+<div style="padding-bottom: 10px;"><pre><code>    Sequence     Note  Description
+    \t                  tab               (HT, TAB)
+    \n                  newline           (NL)
+    \r                  return            (CR)
+    \f                  form feed         (FF)
+    \b                  backspace         (BS)
+    \a                  alarm (bell)      (BEL)
+    \e                  escape            (ESC)
+    \x{263A}     [1,8]  hex char          (example: SMILEY)
+    \x1b         [2,8]  restricted range hex char (example: ESC)
+    \N{name}     [3]    named Unicode character or character sequence
+    \N{U+263D}   [4,8]  Unicode character (example: FIRST QUARTER MOON)
+    \c[          [5]    control char      (example: chr(27))
+    \o{23072}    [6,8]  octal char        (example: SMILEY)
+    \033         [7,8]  restricted range octal char  (example: ESC)</code></pre></div><hr><p><a href="psi_element://perlop">perlop</a>: <a href="psi_element://perlop%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://perlop%2FQuote+and+Quote-like+Operators">Quote and Quote-like Operators</a></p><p style="padding-bottom: 10px;">All systems use the virtual <code>&quot;\n&quot;</code> to represent a line terminator,
+called a &quot;newline&quot;.  There is no such thing as an unvarying, physical
+newline character.  It is only an illusion that the operating system,
+device drivers, C libraries, and Perl all conspire to preserve.  Not all
+systems read <code>&quot;\r&quot;</code> as ASCII CR and <code>&quot;\n&quot;</code> as ASCII LF.  For example,
+on the ancient Macs (pre-MacOS X) of yesteryear, these used to be reversed,
+and on systems without a line terminator,
+printing <code>&quot;\n&quot;</code> might emit no actual data.  In general, use <code>&quot;\n&quot;</code> when
+you mean a &quot;newline&quot; for your system, but use the literal ASCII when you
+need an exact character.  For example, most networking protocols expect
+and prefer a CR+LF (<code>&quot;\015\012&quot;</code> or <code>&quot;\cM\cJ&quot;</code>) for line terminators,
+and although they often accept just <code>&quot;\012&quot;</code>, they seldom tolerate just
+<code>&quot;\015&quot;</code>.  If you get in the habit of using <code>&quot;\n&quot;</code> for networking,
+you may be burned some day.
+   
+  </p>
+<p style="padding-bottom: 10px;">For constructs that do interpolate, variables beginning with &quot;<code>$</code>&quot;
+or &quot;<code>@</code>&quot; are interpolated.  Subscripted variables such as <code>$a[3]</code> or
+<code>$href-&gt;{key}[0]</code> are also interpolated, as are array and hash slices.
+But method calls such as <code>$obj-&gt;meth</code> are not.</p>
+<p style="padding-bottom: 10px;">Interpolating an array or slice interpolates the elements in order,
+separated by the value of <code>$&quot;</code>, so is equivalent to interpolating
+<span style="white-space: nowrap;"><code>join $&quot;, @array</code></span>.  &quot;Punctuation&quot; arrays such as <code>@*</code> are usually
+interpolated only if the name is enclosed in braces <code>@{*}</code>, but the
+arrays <code>@_</code>, <code>@+</code>, and <code>@-</code> are interpolated even without braces.</p>
+<p style="padding-bottom: 10px;">For double-quoted strings, the quoting from <code>\Q</code> is applied after
+interpolation and escapes are processed.</p>
+<div style="padding-bottom: 10px;"><pre><code>    &quot;abc\Qfoo\tbar$s\Exyz&quot;</code></pre></div>

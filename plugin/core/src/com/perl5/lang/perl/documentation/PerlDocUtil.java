@@ -59,7 +59,8 @@ import static com.perl5.lang.perl.util.PerlSubUtil.SUB_DESTROY;
 public class PerlDocUtil implements PerlElementTypes {
   public static final String PERL_VAR_FILE_NAME = "perlvar.pod";
   public static final String PERL_FUNC_FILE_NAME = "perlfunc.pod";
-  public static final String PERL_OP_FILE_NAME = "perlop.pod";
+  static final String PERL_OP = "perlop";
+  public static final String PERL_OP_FILE_NAME = PERL_OP + ".pod";
   static final PodLinkDescriptor SWITCH_DOC_LINK = PodLinkDescriptor.create("perlsyn", "Switch Statements");
   static final PodLinkDescriptor SPECIAL_LITERALS_LINK = PodLinkDescriptor.create("perldata", "Special Literals");
   private static final PodLinkDescriptor MODIFIERS_DOC_LINK = PodLinkDescriptor.create("perlsyn", "Statement Modifiers");
@@ -71,13 +72,14 @@ public class PerlDocUtil implements PerlElementTypes {
   private static final Map<String, PodLinkDescriptor> OPERATORS_LINKS = new HashMap<>();
   private static final Map<String, PodLinkDescriptor> VARIABLES_LINKS = new HashMap<>();
 
+
   static {
-    OPERATORS_LINKS.put("~~", PodLinkDescriptor.create("perlop", "Smartmatch Operator"));
-    OPERATORS_LINKS.put("qr", PodLinkDescriptor.create("perlop", "qr/STRING/"));
-    OPERATORS_LINKS.put("s", PodLinkDescriptor.create("perlop", "s/PATTERN/"));
-    OPERATORS_LINKS.put("m", PodLinkDescriptor.create("perlop", "m/PATTERN/"));
-    OPERATORS_LINKS.put("=>", PodLinkDescriptor.create("perlop", "Comma Operator"));
-    OPERATORS_LINKS.put("isa", PodLinkDescriptor.create("perlop", "isa operator"));
+    OPERATORS_LINKS.put("~~", PodLinkDescriptor.create(PERL_OP, "Smartmatch Operator"));
+    OPERATORS_LINKS.put("qr", PodLinkDescriptor.create(PERL_OP, "qr/STRING/"));
+    OPERATORS_LINKS.put("s", PodLinkDescriptor.create(PERL_OP, "s/PATTERN/"));
+    OPERATORS_LINKS.put("m", PodLinkDescriptor.create(PERL_OP, "m/PATTERN/"));
+    OPERATORS_LINKS.put("=>", PodLinkDescriptor.create(PERL_OP, "Comma Operator"));
+    OPERATORS_LINKS.put("isa", PodLinkDescriptor.create(PERL_OP, "isa operator"));
 
     VARIABLES_LINKS.put("@ISA", PodLinkDescriptor.create("perlobj", "A Class is Simply a Package"));
     VARIABLES_LINKS.put("@EXPORT", PodLinkDescriptor.create("Exporter", "How to Export"));
@@ -221,7 +223,25 @@ public class PerlDocUtil implements PerlElementTypes {
   public static @Nullable PsiElement getPerlOpDoc(@NotNull PsiElement element) {
     IElementType elementType = PsiUtilCore.getElementType(element);
     if (elementType == LEFT_ANGLE || elementType == RIGHT_ANGLE) {
-      return resolveDescriptor(PodLinkDescriptor.create("perlop", "operator, i/o"), element, true);
+      return resolveDoc(PERL_OP, "operator, i/o", element, true);
+    }
+    else if (elementType == STRING_SPECIAL_SUBST) {
+      return resolveDoc(PERL_OP, "\\c", element, true);
+    }
+    else if (elementType == STRING_SPECIAL_OCT) {
+      return resolveDoc(PERL_OP, "\\o{}", element, true);
+    }
+    else if (elementType == STRING_SPECIAL_ESCAPE_CHAR) {
+      IElementType parentElementType = PsiUtilCore.getElementType(element.getParent());
+      if (parentElementType == STRING_SQ || parentElementType == LP_STRING_Q) {
+        return resolveDoc(PERL_OP, "'STRING'", element, true);
+      }
+      return resolveDoc(PERL_OP, "escape", element, true);
+    }
+    if (elementType == STRING_SPECIAL_LEFT_BRACE ||
+        elementType == STRING_SPECIAL_RIGHT_BRACE ||
+        elementType == STRING_CHAR_NAME) {
+      element = element.getParent().getFirstChild();
     }
 
     final Project project = element.getProject();
@@ -443,6 +463,17 @@ public class PerlDocUtil implements PerlElementTypes {
     builder.append(PodRenderUtil.renderPsiRangeAsHTML(podSection, lastSection));
     builder.append(closeTag);
     return builder.toString();
+  }
+
+  /**
+   * @return true iff {@code numberElement} is a hex or oct number parametrizing DQ string substitutions
+   */
+  static boolean isNumericArgumentToOperator(@NotNull PsiElement numberElement) {
+    IElementType elementType = PsiUtilCore.getElementType(numberElement);
+    if (elementType != NUMBER_HEX && elementType != NUMBER_OCT) {
+      return false;
+    }
+    return PERL_PARAMETRIZED_STRING_SUBSTITUTIONS.contains(PsiUtilCore.getElementType(numberElement.getParent()));
   }
 
   private static class PodTocBuilder implements PsiElementProcessor<PsiElement> {

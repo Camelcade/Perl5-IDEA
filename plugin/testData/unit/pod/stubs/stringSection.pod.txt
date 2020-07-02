@@ -1,0 +1,30 @@
+Language: Perl5 POD
+PsiFileStubImpl
+  Perl5 POD: HEAD_2_SECTION:PodSectionStub
+	Content: Quote-Like Operators
+    Perl5 POD: POD_FORMAT_INDEX:PodSectionStub
+	Content: operator, quote-like
+    Perl5 POD: ITEM_SECTION:PodSectionStub
+	Content: +q/STRING/
+      Perl5 POD: POD_FORMAT_INDEX:PodSectionStub
+	Content: q
+      Perl5 POD: POD_FORMAT_INDEX:PodSectionStub
+	Content: quote, single
+      Perl5 POD: POD_FORMAT_INDEX:PodSectionStub
+	Content: '
+      Perl5 POD: POD_FORMAT_INDEX:PodSectionStub
+	Content: ''
+    Perl5 POD: ITEM_SECTION:PodSectionStub
+	Content: +'STRING'
+    Perl5 POD: ITEM_SECTION:PodSectionStub
+	Content: +qq/STRING/
+      Perl5 POD: POD_FORMAT_INDEX:PodSectionStub
+	Content: qq
+      Perl5 POD: POD_FORMAT_INDEX:PodSectionStub
+	Content: quote, double
+      Perl5 POD: POD_FORMAT_INDEX:PodSectionStub
+	Content: "
+      Perl5 POD: POD_FORMAT_INDEX:PodSectionStub
+	Content: ""
+    Perl5 POD: ITEM_SECTION:PodSectionStub
+	Content: +"STRING"

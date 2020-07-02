@@ -16,6 +16,7 @@
 
 package com.perl5.lang.pod.parser.psi;
 
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.text.CharSequenceSubSequence;
@@ -29,6 +30,7 @@ import org.jetbrains.annotations.Nullable;
  * Pattern for searching through the pod documentation
  */
 public class PodDocumentPattern {
+  private static final Logger LOG = Logger.getInstance(PodDocumentPattern.class);
   private String myItemPattern;    // pattern to search items
   private String myHeadingPattern; // pattern to search headers
   private String myIndexKey;    // index key to search. If both defined - first wins
@@ -45,6 +47,7 @@ public class PodDocumentPattern {
     if (getItemPattern() != null && element instanceof PodSectionItem) {
       String title = ((PodTitledSection)element).getTitleText();
       if (StringUtil.isNotEmpty(title)) {
+        LOG.debug("Checking pod ", element, " with text ", title);
         return matches(title, getItemPattern(), myExactMatch);
       }
     }

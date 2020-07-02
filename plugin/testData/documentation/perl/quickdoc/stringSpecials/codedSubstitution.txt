@@ -1,0 +1,18 @@
+<p><a href="psi_element://perlop">perlop</a>: <a href="psi_element://perlop%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://perlop%2FQuote+and+Quote-like+Operators">Quote and Quote-like Operators</a></p><p style="padding-bottom: 10px;">The following escape sequences are available in constructs that interpolate,
+and in transliterations:
+           </p>
+<div style="padding-bottom: 10px;"><pre><code>    Sequence     Note  Description
+    \t                  tab               (HT, TAB)
+    \n                  newline           (NL)
+    \r                  return            (CR)
+    \f                  form feed         (FF)
+    \b                  backspace         (BS)
+    \a                  alarm (bell)      (BEL)
+    \e                  escape            (ESC)
+    \x{263A}     [1,8]  hex char          (example: SMILEY)
+    \x1b         [2,8]  restricted range hex char (example: ESC)
+    \N{name}     [3]    named Unicode character or character sequence
+    \N{U+263D}   [4,8]  Unicode character (example: FIRST QUARTER MOON)
+    \c[          [5]    control char      (example: chr(27))
+    \o{23072}    [6,8]  octal char        (example: SMILEY)
+    \033         [7,8]  restricted range octal char  (example: ESC)</code></pre></div>

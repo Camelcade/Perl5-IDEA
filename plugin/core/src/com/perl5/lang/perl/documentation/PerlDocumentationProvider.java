@@ -43,8 +43,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import static com.perl5.lang.perl.documentation.PerlDocUtil.SWITCH_DOC_LINK;
-import static com.perl5.lang.perl.lexer.PerlTokenSets.HEREDOC_BODIES_TOKENSET;
-import static com.perl5.lang.perl.lexer.PerlTokenSets.TAGS_TOKEN_SET;
+import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
 import static com.perl5.lang.perl.parser.MooseParserExtension.*;
 import static com.perl5.lang.perl.util.PerlPackageUtil.FUNCTION_PARAMETERS;
 import static com.perl5.lang.pod.lexer.PodElementTypes.POD_OUTER;
@@ -52,7 +51,10 @@ import static com.perl5.lang.pod.lexer.PodElementTypes.POD_OUTER;
 public class PerlDocumentationProvider extends PerlDocumentationProviderBase implements PerlElementTypes, PerlElementPatterns {
   private static final TokenSet FORCE_AS_OPERATORS_TOKENSET = TokenSet.orSet(
     HEREDOC_BODIES_TOKENSET,
+    SPECIAL_STRING_TOKENS,
     TokenSet.create(
+      STRING_CHAR_NAME,
+
       RESERVED_Q,
       RESERVED_QQ,
       RESERVED_QX,
@@ -126,6 +128,12 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
     }
     else if (isFunc(contextElement)) {
       return PerlDocUtil.getPerlFuncDoc(contextElement);
+    }
+    else if (elementType == STRING_SPECIAL_BACKREF) {
+      return PerlDocUtil.resolveDoc(PerlDocUtil.PERL_OP, "the replacement of s///", contextElement, true);
+    }
+    else if (PerlDocUtil.isNumericArgumentToOperator(contextElement)) {
+      return PerlDocUtil.getPerlOpDoc(contextElement.getParent().getFirstChild());
     }
     else if (isOp(contextElement)) {
       return PerlDocUtil.getPerlOpDoc(contextElement);

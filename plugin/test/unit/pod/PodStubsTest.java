@@ -27,6 +27,11 @@ public class PodStubsTest extends PodLightTestCase {
   }
 
   @Test
+  public void testStringSection_pod() {
+    doTest();
+  }
+
+  @Test
   public void testItems_pod() {
     doTest();
   }

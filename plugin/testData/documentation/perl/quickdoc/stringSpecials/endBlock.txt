@@ -1,0 +1,12 @@
+<p><a href="psi_element://perlop">perlop</a>: <a href="psi_element://perlop%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://perlop%2FQuote+and+Quote-like+Operators">Quote and Quote-like Operators</a></p><p style="padding-bottom: 10px;">The following escape sequences are available in constructs that interpolate,
+but not in transliterations.
+      </p>
+<div style="padding-bottom: 10px;"><pre><code>    \l		lowercase next character only
+    \u		titlecase (not uppercase!) next character only
+    \L		lowercase all characters till \E or end of string
+    \U		uppercase all characters till \E or end of string
+    \F		foldcase all characters till \E or end of string
+    \Q          quote (disable) pattern metacharacters till \E or
+                end of string
+    \E		end either case modification or quoted section
+		(whichever was last seen)</code></pre></div>
