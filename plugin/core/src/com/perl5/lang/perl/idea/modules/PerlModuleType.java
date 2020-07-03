@@ -37,7 +37,7 @@ public class PerlModuleType extends ModuleType<ModuleBuilder> {
   public @NotNull ModuleBuilder createModuleBuilder() {
     return new EmptyModuleBuilder() {
       @Override
-      protected boolean isAvailable() {
+      public boolean isAvailable() {
         return false;
       }
 
