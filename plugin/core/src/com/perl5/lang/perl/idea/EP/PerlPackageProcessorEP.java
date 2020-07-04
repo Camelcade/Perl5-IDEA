@@ -42,7 +42,8 @@ public class PerlPackageProcessorEP extends KeyedLazyInstanceEP<PerlPackageProce
 
   static {
     //noinspection UnstableApiUsage
-    Objects.requireNonNull(EP.getPoint()).addExtensionPointListener(VERSION_PROVIDER::drop, false, PerlPluginUtil.getPluginDisposable());
+    Objects.requireNonNull(EP.getPoint())
+      .addExtensionPointListener(VERSION_PROVIDER::drop, false, PerlPluginUtil.getUnloadAwareDisposable());
   }
 
   public static int getVersion() {

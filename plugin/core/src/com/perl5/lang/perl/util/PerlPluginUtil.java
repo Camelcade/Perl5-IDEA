@@ -44,7 +44,7 @@ public class PerlPluginUtil {
   /**
    * @return disposable for the plugin. Need to be replaced with proper plugin disposable later
    */
-  public static @NotNull Disposable getPluginDisposable() {
+  public static @NotNull Disposable getUnloadAwareDisposable() {
     return PerlFileTypeService.getInstance();
   }
 
@@ -52,7 +52,7 @@ public class PerlPluginUtil {
    * @return project-level disposable for a plugin. It's eol happens on project service unloading what may
    * happen when project is closed or plugin unloaded.
    */
-  public static @NotNull Disposable getProjectPluginDisposable(@NotNull Project project) {
+  public static @NotNull Disposable getUnloadAwareDisposable(@NotNull Project project) {
     return PerlProjectManager.getInstance(project);
   }
 

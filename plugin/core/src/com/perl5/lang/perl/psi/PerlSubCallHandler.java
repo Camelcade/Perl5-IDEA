@@ -50,7 +50,8 @@ public abstract class PerlSubCallHandler<CallData extends PerlSubCallElementData
 
   static {
     //noinspection UnstableApiUsage
-    Objects.requireNonNull(EP.getPoint()).addExtensionPointListener(VERSION_PROVIDER::drop, false, PerlPluginUtil.getPluginDisposable());
+    Objects.requireNonNull(EP.getPoint())
+      .addExtensionPointListener(VERSION_PROVIDER::drop, false, PerlPluginUtil.getUnloadAwareDisposable());
   }
 
   public static int getHandlersVersion() {

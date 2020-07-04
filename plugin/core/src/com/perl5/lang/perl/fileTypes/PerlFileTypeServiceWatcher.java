@@ -36,7 +36,7 @@ import java.util.List;
 class PerlFileTypeServiceWatcher implements StartupActivity, ModuleListener, ModuleRootListener {
   @Override
   public void runActivity(@NotNull Project project) {
-    MessageBusConnection connection = project.getMessageBus().connect(PerlPluginUtil.getProjectPluginDisposable(project));
+    MessageBusConnection connection = project.getMessageBus().connect(PerlPluginUtil.getUnloadAwareDisposable(project));
     connection.subscribe(ProjectTopics.PROJECT_ROOTS, this);
     connection.subscribe(ProjectTopics.MODULES, this);
     reset();

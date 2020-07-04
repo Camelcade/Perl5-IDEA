@@ -89,7 +89,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
   }
 
   static {
-    PerlParserExtension.EP_NAME.addExtensionPointListener(PerlBaseLexer::refreshExtensions, PerlPluginUtil.getPluginDisposable());
+    PerlParserExtension.EP_NAME.addExtensionPointListener(PerlBaseLexer::refreshExtensions, PerlPluginUtil.getUnloadAwareDisposable());
     refreshExtensions();
   }
 
