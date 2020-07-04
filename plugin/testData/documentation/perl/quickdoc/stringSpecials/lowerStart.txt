@@ -10,3 +10,66 @@ but not in transliterations.
                 end of string
     \E		end either case modification or quoted section
 		(whichever was last seen)</code></pre></div>
+<p style="padding-bottom: 10px;">See <a href="psi_element://perlfunc%2Fquotemeta">quotemeta in perlfunc</a> for the exact definition of characters that
+are quoted by <code>\Q</code>.</p>
+<p style="padding-bottom: 10px;"><code>\L</code>, <code>\U</code>, <code>\F</code>, and <code>\Q</code> can stack, in which case you need one
+<code>\E</code> for each.  For example:</p>
+<div style="padding-bottom: 10px;"><pre><code> say&quot;This \Qquoting \ubusiness \Uhere isn't quite\E done yet,\E is it?&quot;;
+ This quoting\ Business\ HERE\ ISN\'T\ QUITE\ done\ yet\, is it?</code></pre></div>
+<p style="padding-bottom: 10px;">If a <span style="white-space: nowrap;"><code>use locale</code></span> form that includes <code>LC_CTYPE</code> is in effect (see
+<a href="psi_element://perllocale">perllocale</a>), the case map used by <code>\l</code>, <code>\L</code>, <code>\u</code>, and <code>\U</code> is
+taken from the current locale.  If Unicode (for example, <code>\N{}</code> or code
+points of 0x100 or beyond) is being used, the case map used by <code>\l</code>,
+<code>\L</code>, <code>\u</code>, and <code>\U</code> is as defined by Unicode.  That means that
+case-mapping a single character can sometimes produce a sequence of
+several characters.
+Under <span style="white-space: nowrap;"><code>use locale</code></span>, <code>\F</code> produces the same results as <code>\L</code>
+for all locales but a UTF-8 one, where it instead uses the Unicode
+definition.</p>
+<p style="padding-bottom: 10px;">All systems use the virtual <code>&quot;\n&quot;</code> to represent a line terminator,
+called a &quot;newline&quot;.  There is no such thing as an unvarying, physical
+newline character.  It is only an illusion that the operating system,
+device drivers, C libraries, and Perl all conspire to preserve.  Not all
+systems read <code>&quot;\r&quot;</code> as ASCII CR and <code>&quot;\n&quot;</code> as ASCII LF.  For example,
+on the ancient Macs (pre-MacOS X) of yesteryear, these used to be reversed,
+and on systems without a line terminator,
+printing <code>&quot;\n&quot;</code> might emit no actual data.  In general, use <code>&quot;\n&quot;</code> when
+you mean a &quot;newline&quot; for your system, but use the literal ASCII when you
+need an exact character.  For example, most networking protocols expect
+and prefer a CR+LF (<code>&quot;\015\012&quot;</code> or <code>&quot;\cM\cJ&quot;</code>) for line terminators,
+and although they often accept just <code>&quot;\012&quot;</code>, they seldom tolerate just
+<code>&quot;\015&quot;</code>.  If you get in the habit of using <code>&quot;\n&quot;</code> for networking,
+you may be burned some day.
+   
+  </p>
+<p style="padding-bottom: 10px;">For constructs that do interpolate, variables beginning with &quot;<code>$</code>&quot;
+or &quot;<code>@</code>&quot; are interpolated.  Subscripted variables such as <code>$a[3]</code> or
+<code>$href-&gt;{key}[0]</code> are also interpolated, as are array and hash slices.
+But method calls such as <code>$obj-&gt;meth</code> are not.</p>
+<p style="padding-bottom: 10px;">Interpolating an array or slice interpolates the elements in order,
+separated by the value of <code>$&quot;</code>, so is equivalent to interpolating
+<span style="white-space: nowrap;"><code>join $&quot;, @array</code></span>.  &quot;Punctuation&quot; arrays such as <code>@*</code> are usually
+interpolated only if the name is enclosed in braces <code>@{*}</code>, but the
+arrays <code>@_</code>, <code>@+</code>, and <code>@-</code> are interpolated even without braces.</p>
+<p style="padding-bottom: 10px;">For double-quoted strings, the quoting from <code>\Q</code> is applied after
+interpolation and escapes are processed.</p>
+<div style="padding-bottom: 10px;"><pre><code>    &quot;abc\Qfoo\tbar$s\Exyz&quot;</code></pre></div>
+<p style="padding-bottom: 10px;">is equivalent to</p>
+<div style="padding-bottom: 10px;"><pre><code>    &quot;abc&quot; . quotemeta(&quot;foo\tbar$s&quot;) . &quot;xyz&quot;</code></pre></div>
+<p style="padding-bottom: 10px;">For the pattern of regex operators (<code>qr//</code>, <code>m//</code> and <code>s///</code>),
+the quoting from <code>\Q</code> is applied after interpolation is processed,
+but before escapes are processed.  This allows the pattern to match
+literally (except for <code>$</code> and <code>@</code>).  For example, the following matches:</p>
+<div style="padding-bottom: 10px;"><pre><code>    '\s\t' =~ /\Q\s\t/</code></pre></div>
+<p style="padding-bottom: 10px;">Because <code>$</code> or <code>@</code> trigger interpolation, you'll need to use something
+like <code>/\Quser\E\@\Qhost/</code> to match them literally.</p>
+<p style="padding-bottom: 10px;">Patterns are subject to an additional level of interpretation as a
+regular expression.  This is done as a second pass, after variables are
+interpolated, so that regular expressions may be incorporated into the
+pattern from the variables.  If this is not what you want, use <code>\Q</code> to
+interpolate a variable literally.</p>
+<p style="padding-bottom: 10px;">Apart from the behavior described above, Perl does not expand
+multiple levels of interpolation.  In particular, contrary to the
+expectations of shell programmers, back-quotes do <i>NOT</i> interpolate
+within double quotes, nor do single quotes impede evaluation of
+variables when used within double quotes.</p>

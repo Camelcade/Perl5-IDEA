@@ -365,3 +365,163 @@ value, not for its regular truth value.</p>
     print while defined($_ = &lt;STDIN&gt;);
     print while ($_ = &lt;STDIN&gt;);
     print while &lt;STDIN&gt;;</code></pre></div>
+<p style="padding-bottom: 10px;">This also behaves similarly, but assigns to a lexical variable
+instead of to <code>$_</code>:</p>
+<div style="padding-bottom: 10px;"><pre><code>    while (my $line = &lt;STDIN&gt;) { print $line }</code></pre></div>
+<p style="padding-bottom: 10px;">In these loop constructs, the assigned value (whether assignment
+is automatic or explicit) is then tested to see whether it is
+defined.  The defined test avoids problems where the line has a string
+value that would be treated as false by Perl; for example a &quot;&quot; or
+a <code>&quot;0&quot;</code> with no trailing newline.  If you really mean for such values
+to terminate the loop, they should be tested for explicitly:</p>
+<div style="padding-bottom: 10px;"><pre><code>    while (($_ = &lt;STDIN&gt;) ne '0') { ... }
+    while (&lt;STDIN&gt;) { last unless $_; ... }</code></pre></div>
+<p style="padding-bottom: 10px;">In other boolean contexts, <code>&lt;<i>FILEHANDLE</i>&gt;</code> without an
+explicit <code>defined</code> test or comparison elicits a warning if the
+<span style="white-space: nowrap;"><code>use warnings</code></span> pragma or the <B>-w</B>
+command-line switch (the <code>$^W</code> variable) is in effect.</p>
+<p style="padding-bottom: 10px;">The filehandles STDIN, STDOUT, and STDERR are predefined.  (The
+filehandles <code>stdin</code>, <code>stdout</code>, and <code>stderr</code> will also work except
+in packages, where they would be interpreted as local identifiers
+rather than global.)  Additional filehandles may be created with
+the <code>open()</code> function, amongst others.  See <a href="psi_element://perlopentut">perlopentut</a> and
+<a href="psi_element://perlfunc%2Fopen">open in perlfunc</a> for details on this.
+  </p>
+<p style="padding-bottom: 10px;">If a <code>&lt;<i>FILEHANDLE</i>&gt;</code> is used in a context that is looking for
+a list, a list comprising all input lines is returned, one line per
+list element.  It's easy to grow to a rather large data space this
+way, so use with care.</p>
+<p style="padding-bottom: 10px;"><code>&lt;<i>FILEHANDLE</i>&gt;</code>  may also be spelled <code>readline(*<i>FILEHANDLE</i>)</code>.
+See <a href="psi_element://perlfunc%2Freadline">readline in perlfunc</a>.</p>
+<p style="padding-bottom: 10px;">The null filehandle <code>&lt;&gt;</code> is special: it can be used to emulate the
+behavior of <B>sed</B> and <B>awk</B>, and any other Unix filter program
+that takes a list of filenames, doing the same to each line
+of input from all of them.  Input from <code>&lt;&gt;</code> comes either from
+standard input, or from each file listed on the command line.  Here's
+how it works: the first time <code>&lt;&gt;</code> is evaluated, the <code>@ARGV</code> array is
+checked, and if it is empty, <code>$ARGV[0]</code> is set to <code>&quot;-&quot;</code>, which when opened
+gives you standard input.  The <code>@ARGV</code> array is then processed as a list
+of filenames.  The loop</p>
+<div style="padding-bottom: 10px;"><pre><code>    while (&lt;&gt;) {
+	...			# code for each line
+    }</code></pre></div>
+<p style="padding-bottom: 10px;">is equivalent to the following Perl-like pseudo code:</p>
+<div style="padding-bottom: 10px;"><pre><code>    unshift(@ARGV, '-') unless @ARGV;
+    while ($ARGV = shift) {
+	open(ARGV, $ARGV);
+	while (&lt;ARGV&gt;) {
+	    ...		# code for each line
+	}
+    }</code></pre></div>
+<p style="padding-bottom: 10px;">except that it isn't so cumbersome to say, and will actually work.
+It really does shift the <code>@ARGV</code> array and put the current filename
+into the <code>$ARGV</code> variable.  It also uses filehandle <i>ARGV</i>
+internally.  <code>&lt;&gt;</code> is just a synonym for <code>&lt;ARGV&gt;</code>, which
+is magical.  (The pseudo code above doesn't work because it treats
+<code>&lt;ARGV&gt;</code> as non-magical.)</p>
+<p style="padding-bottom: 10px;">Since the null filehandle uses the two argument form of <a href="psi_element://perlfunc%2Fopen">open in perlfunc</a>
+it interprets special characters, so if you have a script like this:</p>
+<div style="padding-bottom: 10px;"><pre><code>    while (&lt;&gt;) {
+        print;
+    }</code></pre></div>
+<p style="padding-bottom: 10px;">and call it with <span style="white-space: nowrap;"><code>perl dangerous.pl 'rm -rfv *|'</code></span>, it actually opens a
+pipe, executes the <code>rm</code> command and reads <code>rm</code>'s output from that pipe.
+If you want all items in <code>@ARGV</code> to be interpreted as file names, you
+can use the module <code>ARGV::readonly</code> from CPAN, or use the double bracket:</p>
+<div style="padding-bottom: 10px;"><pre><code>    while (&lt;&lt;&gt;&gt;) {
+        print;
+    }</code></pre></div>
+<p style="padding-bottom: 10px;">Using double angle brackets inside of a while causes the open to use the
+three argument form (with the second argument being <code>&lt;</code>), so all
+arguments in <code>ARGV</code> are treated as literal filenames (including <code>&quot;-&quot;</code>).
+(Note that for convenience, if you use <code>&lt;&lt;&gt;&gt;</code> and if <code>@ARGV</code> is
+empty, it will still read from the standard input.)</p>
+<p style="padding-bottom: 10px;">You can modify <code>@ARGV</code> before the first <code>&lt;&gt;</code> as long as the array ends up
+containing the list of filenames you really want.  Line numbers (<code>$.</code>)
+continue as though the input were one big happy file.  See the example
+in <a href="psi_element://perlfunc%2Feof">eof in perlfunc</a> for how to reset line numbers on each file.</p>
+<p style="padding-bottom: 10px;">If you want to set <code>@ARGV</code> to your own list of files, go right ahead.
+This sets <code>@ARGV</code> to all plain text files if no <code>@ARGV</code> was given:</p>
+<div style="padding-bottom: 10px;"><pre><code>    @ARGV = grep { -f &amp;&amp; -T } glob('*') unless @ARGV;</code></pre></div>
+<p style="padding-bottom: 10px;">You can even set them to pipe commands.  For example, this automatically
+filters compressed arguments through <B>gzip</B>:</p>
+<div style="padding-bottom: 10px;"><pre><code>    @ARGV = map { /\.(gz|Z)$/ ? &quot;gzip -dc &lt; $_ |&quot; : $_ } @ARGV;</code></pre></div>
+<p style="padding-bottom: 10px;">If you want to pass switches into your script, you can use one of the
+<code>Getopts</code> modules or put a loop on the front like this:</p>
+<div style="padding-bottom: 10px;"><pre><code>    while ($_ = $ARGV[0], /^-/) {
+	shift;
+        last if /^--$/;
+	if (/^-D(.*)/) { $debug = $1 }
+	if (/^-v/)     { $verbose++  }
+	# ...		# other switches
+    }
+
+    while (&lt;&gt;) {
+	# ...		# code for each line
+    }</code></pre></div>
+<p style="padding-bottom: 10px;">The <code>&lt;&gt;</code> symbol will return <code>undef</code> for end-of-file only once.
+If you call it again after this, it will assume you are processing another
+<code>@ARGV</code> list, and if you haven't set <code>@ARGV</code>, will read input from STDIN.</p>
+<p style="padding-bottom: 10px;">If what the angle brackets contain is a simple scalar variable (for example,
+<code>$foo</code>), then that variable contains the name of the
+filehandle to input from, or its typeglob, or a reference to the
+same.  For example:</p>
+<div style="padding-bottom: 10px;"><pre><code>    $fh = \*STDIN;
+    $line = &lt;$fh&gt;;</code></pre></div>
+<p style="padding-bottom: 10px;">If what's within the angle brackets is neither a filehandle nor a simple
+scalar variable containing a filehandle name, typeglob, or typeglob
+reference, it is interpreted as a filename pattern to be globbed, and
+either a list of filenames or the next filename in the list is returned,
+depending on context.  This distinction is determined on syntactic
+grounds alone.  That means <code>&lt;$x&gt;</code> is always a <code>readline()</code> from
+an indirect handle, but <code>&lt;$hash{key}&gt;</code> is always a <code>glob()</code>.
+That's because <code>$x</code> is a simple scalar variable, but <code>$hash{key}</code> is
+not--it's a hash element.  Even <code>&lt;$x &gt;</code> (note the extra space)
+is treated as <code>glob(&quot;$x &quot;)</code>, not <code>readline($x)</code>.</p>
+<p style="padding-bottom: 10px;">One level of double-quote interpretation is done first, but you can't
+say <code>&lt;$foo&gt;</code> because that's an indirect filehandle as explained
+in the previous paragraph.  (In older versions of Perl, programmers
+would insert curly brackets to force interpretation as a filename glob:
+<code>&lt;${foo}&gt;</code>.  These days, it's considered cleaner to call the
+internal function directly as <code>glob($foo)</code>, which is probably the right
+way to have done it in the first place.)  For example:</p>
+<div style="padding-bottom: 10px;"><pre><code>    while (&lt;*.c&gt;) {
+	chmod 0644, $_;
+    }</code></pre></div>
+<p style="padding-bottom: 10px;">is roughly equivalent to:</p>
+<div style="padding-bottom: 10px;"><pre><code>    open(FOO, &quot;echo *.c | tr -s ' \t\r\f' '\\012\\012\\012\\012'|&quot;);
+    while (&lt;FOO&gt;) {
+	chomp;
+	chmod 0644, $_;
+    }</code></pre></div>
+<p style="padding-bottom: 10px;">except that the globbing is actually done internally using the standard
+<code><a href="psi_element://File%3A%3AGlob" style="color:red">File::Glob</a></code> extension.  Of course, the shortest way to do the above is:</p>
+<div style="padding-bottom: 10px;"><pre><code>    chmod 0644, &lt;*.c&gt;;</code></pre></div>
+<p style="padding-bottom: 10px;">A (file)glob evaluates its (embedded) argument only when it is
+starting a new list.  All values must be read before it will start
+over.  In list context, this isn't important because you automatically
+get them all anyway.  However, in scalar context the operator returns
+the next value each time it's called, or <code>undef</code> when the list has
+run out.  As with filehandle reads, an automatic <code>defined</code> is
+generated when the glob occurs in the test part of a <code>while</code>,
+because legal glob returns (for example,
+a file called <i>0</i>) would otherwise
+terminate the loop.  Again, <code>undef</code> is returned only once.  So if
+you're expecting a single value from a glob, it is much better to
+say</p>
+<div style="padding-bottom: 10px;"><pre><code>    ($file) = &lt;blurch*&gt;;</code></pre></div>
+<p style="padding-bottom: 10px;">than</p>
+<div style="padding-bottom: 10px;"><pre><code>    $file = &lt;blurch*&gt;;</code></pre></div>
+<p style="padding-bottom: 10px;">because the latter will alternate between returning a filename and
+returning false.</p>
+<p style="padding-bottom: 10px;">If you're trying to do variable interpolation, it's definitely better
+to use the <code>glob()</code> function, because the older notation can cause people
+to become confused with the indirect filehandle notation.</p>
+<div style="padding-bottom: 10px;"><pre><code>    @files = glob(&quot;$dir/*.[ch]&quot;);
+    @files = glob($files[$i]);</code></pre></div>
+<p style="padding-bottom: 10px;">If an angle-bracket-based globbing expression is used as the condition of
+a <code>while</code> or <code>for</code> loop, then it will be implicitly assigned to <code>$_</code>.
+If either a globbing expression or an explicit assignment of a globbing
+expression to a scalar is used as a <code>while</code>/<code>for</code> condition, then
+the condition actually tests for definedness of the expression's value,
+not for its regular truth value.</p>

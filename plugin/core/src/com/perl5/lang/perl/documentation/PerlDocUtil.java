@@ -39,6 +39,7 @@ import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.parser.psi.*;
 import com.perl5.lang.pod.parser.psi.impl.PodFileImpl;
+import com.perl5.lang.pod.parser.psi.mixin.PodFormatterX;
 import com.perl5.lang.pod.parser.psi.mixin.PodSectionItem;
 import com.perl5.lang.pod.parser.psi.util.PodFileUtil;
 import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
@@ -392,9 +393,7 @@ public class PerlDocUtil implements PerlElementTypes {
     if (podSection == null) {
       return null;
     }
-    boolean hasContent = podSection.hasContent();
     PsiElement run = podSection;
-    PsiElement lastSection = podSection;
 
     // detecting first section
     while (true) {
@@ -411,14 +410,20 @@ public class PerlDocUtil implements PerlElementTypes {
       run = prevSibling;
     }
 
+    boolean isTitledSection = podSection instanceof PodTitledSection;
+    boolean hasContent = podSection.hasContent();
+    PsiElement lastSection = podSection;
+
     // detecting last section
-    while (!hasContent) {
+    while (true) {
       PsiElement nextSibling = lastSection.getNextSibling();
 
-      if (nextSibling == null) {
+      boolean isNextTitledSection = nextSibling instanceof PodTitledSection && !(nextSibling instanceof PodFormatterX);
+
+      if (nextSibling == null || (isTitledSection && isNextTitledSection && hasContent)) {
         break;
       }
-      hasContent = nextSibling instanceof PodSection && ((PodSection)nextSibling).hasContent();
+      hasContent = hasContent || nextSibling instanceof PodSection && ((PodSection)nextSibling).hasContent();
 
       lastSection = nextSibling;
     }

@@ -8,7 +8,14 @@ names beginning with $ or @, followed by an optional bracketed
 expression as a subscript.)  The following code segment prints out &quot;The
 price is $100.&quot;</p>
 <div style="padding-bottom: 10px;"><pre><code>    $Price = '$100';	# not interpolated
-    print &quot;The price is $Price.\n&quot;;	# interpolated</code></pre></div><hr><p><a href="psi_element://perldata">perldata</a>: <a href="psi_element://perldata%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://perldata%2FScalar+value+constructors">Scalar value constructors</a></p><p style="padding-bottom: 10px;">As in some shells, you can enclose the variable name in braces to
+    print &quot;The price is $Price.\n&quot;;	# interpolated</code></pre></div>
+<p style="padding-bottom: 10px;">There is no double interpolation in Perl, so the <code>$100</code> is left as is.</p>
+<p style="padding-bottom: 10px;">By default floating point numbers substituted inside strings use the
+dot (&quot;.&quot;)  as the decimal separator.  If <code>use locale</code> is in effect,
+and POSIX::setlocale() has been called, the character used for the
+decimal separator is affected by the LC_NUMERIC locale.
+See <a href="psi_element://perllocale">perllocale</a> and <a href="psi_element://POSIX" style="color:red">POSIX</a>.</p>
+<p style="padding-bottom: 10px;">As in some shells, you can enclose the variable name in braces to
 disambiguate it from following alphanumerics (and underscores).
 You must also do
 this when interpolating a variable into a string to separate the
@@ -17,3 +24,283 @@ these would be otherwise treated as a package separator:</p>
 <div style="padding-bottom: 10px;"><pre><code>    $who = &quot;Larry&quot;;
     print PASSWD &quot;${who}::0:0:Superuser:/:/bin/perl\n&quot;;
     print &quot;We use ${who}speak when ${who}'s here.\n&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">Without the braces, Perl would have looked for a $whospeak, a
+<code>$who::0</code>, and a <code>$who's</code> variable.  The last two would be the
+$0 and the $s variables in the (presumably) non-existent package
+<code>who</code>.</p>
+<p style="padding-bottom: 10px;">In fact, a simple identifier within such curlies is forced to be
+a string, and likewise within a hash subscript.  Neither need
+quoting.  Our earlier example, <code>$days{'Feb'}</code> can be written as
+<code>$days{Feb}</code> and the quotes will be assumed automatically.  But
+anything more complicated in the subscript will be interpreted as an
+expression.  This means for example that <code>$version{2.0}++</code> is
+equivalent to <code>$version{2}++</code>, not to <code>$version{'2.0'}++</code>.</p>
+<h3>Special floating point: infinity (Inf) and not-a-number (NaN)</h3><p style="padding-bottom: 10px;">Floating point values include the special values <code>Inf</code> and <code>NaN</code>,
+for infinity and not-a-number.  The infinity can be also negative.</p>
+<p style="padding-bottom: 10px;">The infinity is the result of certain math operations that overflow
+the floating point range, like 9**9**9.  The not-a-number is the
+result when the result is undefined or unrepresentable.  Though note
+that you cannot get <code>NaN</code> from some common &quot;undefined&quot; or
+&quot;out-of-range&quot; operations like dividing by zero, or square root of
+a negative number, since Perl generates fatal errors for those.</p>
+<p style="padding-bottom: 10px;">The infinity and not-a-number have their own special arithmetic rules.
+The general rule is that they are &quot;contagious&quot;: <code>Inf</code> plus one is
+<code>Inf</code>, and <code>NaN</code> plus one is <code>NaN</code>.  Where things get interesting
+is when you combine infinities and not-a-numbers: <code>Inf</code> minus <code>Inf</code>
+and <code>Inf</code> divided by <code>Inf</code> are <code>NaN</code> (while <code>Inf</code> plus <code>Inf</code> is
+<code>Inf</code> and <code>Inf</code> times <code>Inf</code> is <code>Inf</code>).  <code>NaN</code> is also curious
+in that it does not equal any number, <i>including</i> itself:
+<code>NaN</code> != <code>NaN</code>.</p>
+<p style="padding-bottom: 10px;">Perl doesn't understand <code>Inf</code> and <code>NaN</code> as numeric literals, but
+you can have them as strings, and Perl will convert them as needed:
+&quot;Inf&quot; + 1.  (You can, however, import them from the POSIX extension;
+<code>use POSIX qw(Inf NaN);</code> and then use them as literals.)</p>
+<p style="padding-bottom: 10px;">Note that on input (string to number) Perl accepts <code>Inf</code> and <code>NaN</code>
+in many forms.   Case is ignored, and the Win32-specific forms like
+<code>1.#INF</code> are understood, but on output the values are normalized to
+<code>Inf</code> and <code>NaN</code>.</p>
+<h3>Version Strings
+  </h3><p style="padding-bottom: 10px;">A literal of the form <code>v1.20.300.4000</code> is parsed as a string composed
+of characters with the specified ordinals.  This form, known as
+v-strings, provides an alternative, more readable way to construct
+strings, rather than use the somewhat less readable interpolation form
+<code>&quot;\x{1}\x{14}\x{12c}\x{fa0}&quot;</code>.  This is useful for representing
+Unicode strings, and for comparing version &quot;numbers&quot; using the string
+comparison operators, <code>cmp</code>, <code>gt</code>, <code>lt</code> etc.  If there are two or
+more dots in the literal, the leading <code>v</code> may be omitted.</p>
+<div style="padding-bottom: 10px;"><pre><code>    print v9786;              # prints SMILEY, &quot;\x{263a}&quot;
+    print v102.111.111;       # prints &quot;foo&quot;
+    print 102.111.111;        # same</code></pre></div>
+<p style="padding-bottom: 10px;">Such literals are accepted by both <code>require</code> and <code>use</code> for
+doing a version check.  Note that using the v-strings for IPv4
+addresses is not portable unless you also use the
+inet_aton()/inet_ntoa() routines of the Socket package.</p>
+<p style="padding-bottom: 10px;">Note that since Perl 5.8.1 the single-number v-strings (like <code>v65</code>)
+are not v-strings before the <code>=&gt;</code> operator (which is usually used
+to separate a hash key from a hash value); instead they are interpreted
+as literal strings ('v65').  They were v-strings from Perl 5.6.0 to
+Perl 5.8.0, but that caused more confusion and breakage than good.
+Multi-number v-strings like <code>v65.66</code> and <code>65.66.67</code> continue to
+be v-strings always.</p>
+<h3>Special Literals
+    
+   </h3><p style="padding-bottom: 10px;">The special literals __FILE__, __LINE__, and __PACKAGE__
+represent the current filename, line number, and package name at that
+point in your program.  __SUB__ gives a reference to the current
+subroutine.  They may be used only as separate tokens; they
+will not be interpolated into strings.  If there is no current package
+(due to an empty <code>package;</code> directive), __PACKAGE__ is the undefined
+value.  (But the empty <code>package;</code> is no longer supported, as of version
+5.10.)  Outside of a subroutine, __SUB__ is the undefined value.  __SUB__
+is only available in 5.16 or higher, and only with a <code>use v5.16</code> or
+<code>use feature &quot;current_sub&quot;</code> declaration.
+   
+  </p>
+<p style="padding-bottom: 10px;">The two control characters ^D and ^Z, and the tokens __END__ and __DATA__
+may be used to indicate the logical end of the script before the actual
+end of file.  Any following text is ignored.</p>
+<p style="padding-bottom: 10px;">Text after __DATA__ may be read via the filehandle <code>PACKNAME::DATA</code>,
+where <code>PACKNAME</code> is the package that was current when the __DATA__
+token was encountered.  The filehandle is left open pointing to the
+line after __DATA__.  The program should <code>close DATA</code> when it is done
+reading from it.  (Leaving it open leaks filehandles if the module is
+reloaded for any reason, so it's a safer practice to close it.)  For
+compatibility with older scripts written before __DATA__ was
+introduced, __END__ behaves like __DATA__ in the top level script (but
+not in files loaded with <code>require</code> or <code>do</code>) and leaves the remaining
+contents of the file accessible via <code>main::DATA</code>.</p>
+<p style="padding-bottom: 10px;">The <code>DATA</code> file handle by default has whatever PerlIO layers were
+in place when Perl read the file to parse the source.  Normally that
+means that the file is being read bytewise, as if it were encoded in
+Latin-1, but there are two major ways for it to be otherwise.  Firstly,
+if the <code>__END__</code>/<code>__DATA__</code> token is in the scope of a <code>use utf8</code>
+pragma then the <code>DATA</code> handle will be in UTF-8 mode.  And secondly,
+if the source is being read from perl's standard input then the <code>DATA</code>
+file handle is actually aliased to the <code>STDIN</code> file handle, and may
+be in UTF-8 mode because of the <code>PERL_UNICODE</code> environment variable or
+perl's command-line switches.</p>
+<p style="padding-bottom: 10px;">See <a href="psi_element://SelfLoader" style="color:red">SelfLoader</a> for more description of __DATA__, and
+an example of its use.  Note that you cannot read from the DATA
+filehandle in a BEGIN block: the BEGIN block is executed as soon
+as it is seen (during compilation), at which point the corresponding
+__DATA__ (or __END__) token has not yet been seen.</p>
+<h3>Barewords</h3><p style="padding-bottom: 10px;">A word that has no other interpretation in the grammar will
+be treated as if it were a quoted string.  These are known as
+&quot;barewords&quot;.  As with filehandles and labels, a bareword that consists
+entirely of lowercase letters risks conflict with future reserved
+words, and if you use the <code>use warnings</code> pragma or the <B>-w</B> switch, 
+Perl will warn you about any such words.  Perl limits barewords (like
+identifiers) to about 250 characters.  Future versions of Perl are likely
+to eliminate these arbitrary limitations.</p>
+<p style="padding-bottom: 10px;">Some people may wish to outlaw barewords entirely.  If you
+say</p>
+<div style="padding-bottom: 10px;"><pre><code>    use strict 'subs';</code></pre></div>
+<p style="padding-bottom: 10px;">then any bareword that would NOT be interpreted as a subroutine call
+produces a compile-time error instead.  The restriction lasts to the
+end of the enclosing block.  An inner block may countermand this
+by saying <code>no strict 'subs'</code>.</p>
+<h3>Array Interpolation
+  </h3><p style="padding-bottom: 10px;">Arrays and slices are interpolated into double-quoted strings
+by joining the elements with the delimiter specified in the <code>$&quot;</code>
+variable (<code>$LIST_SEPARATOR</code> if &quot;use English;&quot; is specified), 
+space by default.  The following are equivalent:</p>
+<div style="padding-bottom: 10px;"><pre><code>    $temp = join($&quot;, @ARGV);
+    system &quot;echo $temp&quot;;
+
+    system &quot;echo @ARGV&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">Within search patterns (which also undergo double-quotish substitution)
+there is an unfortunate ambiguity:  Is <code>/$foo[bar]/</code> to be interpreted as
+<code>/${foo}[bar]/</code> (where <code>[bar]</code> is a character class for the regular
+expression) or as <code>/${foo[bar]}/</code> (where <code>[bar]</code> is the subscript to array
+@foo)?  If @foo doesn't otherwise exist, then it's obviously a
+character class.  If @foo exists, Perl takes a good guess about <code>[bar]</code>,
+and is almost always right.  If it does guess wrong, or if you're just
+plain paranoid, you can force the correct interpretation with curly
+braces as above.</p>
+<p style="padding-bottom: 10px;">If you're looking for the information on how to use here-documents,
+which used to be here, that's been moved to
+<a href="psi_element://perlop%2FQuote+and+Quote-like+Operators">Quote and Quote-like Operators in perlop</a>.</p><hr><p><a href="psi_element://perldata">perldata</a>: <a href="psi_element://perldata%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://perldata%2FScalar+value+constructors">Scalar value constructors</a></p><p style="padding-bottom: 10px;">As in some shells, you can enclose the variable name in braces to
+disambiguate it from following alphanumerics (and underscores).
+You must also do
+this when interpolating a variable into a string to separate the
+variable name from a following double-colon or an apostrophe, since
+these would be otherwise treated as a package separator:</p>
+<div style="padding-bottom: 10px;"><pre><code>    $who = &quot;Larry&quot;;
+    print PASSWD &quot;${who}::0:0:Superuser:/:/bin/perl\n&quot;;
+    print &quot;We use ${who}speak when ${who}'s here.\n&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">Without the braces, Perl would have looked for a $whospeak, a
+<code>$who::0</code>, and a <code>$who's</code> variable.  The last two would be the
+$0 and the $s variables in the (presumably) non-existent package
+<code>who</code>.</p>
+<p style="padding-bottom: 10px;">In fact, a simple identifier within such curlies is forced to be
+a string, and likewise within a hash subscript.  Neither need
+quoting.  Our earlier example, <code>$days{'Feb'}</code> can be written as
+<code>$days{Feb}</code> and the quotes will be assumed automatically.  But
+anything more complicated in the subscript will be interpreted as an
+expression.  This means for example that <code>$version{2.0}++</code> is
+equivalent to <code>$version{2}++</code>, not to <code>$version{'2.0'}++</code>.</p>
+<h3>Special floating point: infinity (Inf) and not-a-number (NaN)</h3><p style="padding-bottom: 10px;">Floating point values include the special values <code>Inf</code> and <code>NaN</code>,
+for infinity and not-a-number.  The infinity can be also negative.</p>
+<p style="padding-bottom: 10px;">The infinity is the result of certain math operations that overflow
+the floating point range, like 9**9**9.  The not-a-number is the
+result when the result is undefined or unrepresentable.  Though note
+that you cannot get <code>NaN</code> from some common &quot;undefined&quot; or
+&quot;out-of-range&quot; operations like dividing by zero, or square root of
+a negative number, since Perl generates fatal errors for those.</p>
+<p style="padding-bottom: 10px;">The infinity and not-a-number have their own special arithmetic rules.
+The general rule is that they are &quot;contagious&quot;: <code>Inf</code> plus one is
+<code>Inf</code>, and <code>NaN</code> plus one is <code>NaN</code>.  Where things get interesting
+is when you combine infinities and not-a-numbers: <code>Inf</code> minus <code>Inf</code>
+and <code>Inf</code> divided by <code>Inf</code> are <code>NaN</code> (while <code>Inf</code> plus <code>Inf</code> is
+<code>Inf</code> and <code>Inf</code> times <code>Inf</code> is <code>Inf</code>).  <code>NaN</code> is also curious
+in that it does not equal any number, <i>including</i> itself:
+<code>NaN</code> != <code>NaN</code>.</p>
+<p style="padding-bottom: 10px;">Perl doesn't understand <code>Inf</code> and <code>NaN</code> as numeric literals, but
+you can have them as strings, and Perl will convert them as needed:
+&quot;Inf&quot; + 1.  (You can, however, import them from the POSIX extension;
+<code>use POSIX qw(Inf NaN);</code> and then use them as literals.)</p>
+<p style="padding-bottom: 10px;">Note that on input (string to number) Perl accepts <code>Inf</code> and <code>NaN</code>
+in many forms.   Case is ignored, and the Win32-specific forms like
+<code>1.#INF</code> are understood, but on output the values are normalized to
+<code>Inf</code> and <code>NaN</code>.</p>
+<h3>Version Strings
+  </h3><p style="padding-bottom: 10px;">A literal of the form <code>v1.20.300.4000</code> is parsed as a string composed
+of characters with the specified ordinals.  This form, known as
+v-strings, provides an alternative, more readable way to construct
+strings, rather than use the somewhat less readable interpolation form
+<code>&quot;\x{1}\x{14}\x{12c}\x{fa0}&quot;</code>.  This is useful for representing
+Unicode strings, and for comparing version &quot;numbers&quot; using the string
+comparison operators, <code>cmp</code>, <code>gt</code>, <code>lt</code> etc.  If there are two or
+more dots in the literal, the leading <code>v</code> may be omitted.</p>
+<div style="padding-bottom: 10px;"><pre><code>    print v9786;              # prints SMILEY, &quot;\x{263a}&quot;
+    print v102.111.111;       # prints &quot;foo&quot;
+    print 102.111.111;        # same</code></pre></div>
+<p style="padding-bottom: 10px;">Such literals are accepted by both <code>require</code> and <code>use</code> for
+doing a version check.  Note that using the v-strings for IPv4
+addresses is not portable unless you also use the
+inet_aton()/inet_ntoa() routines of the Socket package.</p>
+<p style="padding-bottom: 10px;">Note that since Perl 5.8.1 the single-number v-strings (like <code>v65</code>)
+are not v-strings before the <code>=&gt;</code> operator (which is usually used
+to separate a hash key from a hash value); instead they are interpreted
+as literal strings ('v65').  They were v-strings from Perl 5.6.0 to
+Perl 5.8.0, but that caused more confusion and breakage than good.
+Multi-number v-strings like <code>v65.66</code> and <code>65.66.67</code> continue to
+be v-strings always.</p>
+<h3>Special Literals
+    
+   </h3><p style="padding-bottom: 10px;">The special literals __FILE__, __LINE__, and __PACKAGE__
+represent the current filename, line number, and package name at that
+point in your program.  __SUB__ gives a reference to the current
+subroutine.  They may be used only as separate tokens; they
+will not be interpolated into strings.  If there is no current package
+(due to an empty <code>package;</code> directive), __PACKAGE__ is the undefined
+value.  (But the empty <code>package;</code> is no longer supported, as of version
+5.10.)  Outside of a subroutine, __SUB__ is the undefined value.  __SUB__
+is only available in 5.16 or higher, and only with a <code>use v5.16</code> or
+<code>use feature &quot;current_sub&quot;</code> declaration.
+   
+  </p>
+<p style="padding-bottom: 10px;">The two control characters ^D and ^Z, and the tokens __END__ and __DATA__
+may be used to indicate the logical end of the script before the actual
+end of file.  Any following text is ignored.</p>
+<p style="padding-bottom: 10px;">Text after __DATA__ may be read via the filehandle <code>PACKNAME::DATA</code>,
+where <code>PACKNAME</code> is the package that was current when the __DATA__
+token was encountered.  The filehandle is left open pointing to the
+line after __DATA__.  The program should <code>close DATA</code> when it is done
+reading from it.  (Leaving it open leaks filehandles if the module is
+reloaded for any reason, so it's a safer practice to close it.)  For
+compatibility with older scripts written before __DATA__ was
+introduced, __END__ behaves like __DATA__ in the top level script (but
+not in files loaded with <code>require</code> or <code>do</code>) and leaves the remaining
+contents of the file accessible via <code>main::DATA</code>.</p>
+<p style="padding-bottom: 10px;">The <code>DATA</code> file handle by default has whatever PerlIO layers were
+in place when Perl read the file to parse the source.  Normally that
+means that the file is being read bytewise, as if it were encoded in
+Latin-1, but there are two major ways for it to be otherwise.  Firstly,
+if the <code>__END__</code>/<code>__DATA__</code> token is in the scope of a <code>use utf8</code>
+pragma then the <code>DATA</code> handle will be in UTF-8 mode.  And secondly,
+if the source is being read from perl's standard input then the <code>DATA</code>
+file handle is actually aliased to the <code>STDIN</code> file handle, and may
+be in UTF-8 mode because of the <code>PERL_UNICODE</code> environment variable or
+perl's command-line switches.</p>
+<p style="padding-bottom: 10px;">See <a href="psi_element://SelfLoader" style="color:red">SelfLoader</a> for more description of __DATA__, and
+an example of its use.  Note that you cannot read from the DATA
+filehandle in a BEGIN block: the BEGIN block is executed as soon
+as it is seen (during compilation), at which point the corresponding
+__DATA__ (or __END__) token has not yet been seen.</p>
+<h3>Barewords</h3><p style="padding-bottom: 10px;">A word that has no other interpretation in the grammar will
+be treated as if it were a quoted string.  These are known as
+&quot;barewords&quot;.  As with filehandles and labels, a bareword that consists
+entirely of lowercase letters risks conflict with future reserved
+words, and if you use the <code>use warnings</code> pragma or the <B>-w</B> switch, 
+Perl will warn you about any such words.  Perl limits barewords (like
+identifiers) to about 250 characters.  Future versions of Perl are likely
+to eliminate these arbitrary limitations.</p>
+<p style="padding-bottom: 10px;">Some people may wish to outlaw barewords entirely.  If you
+say</p>
+<div style="padding-bottom: 10px;"><pre><code>    use strict 'subs';</code></pre></div>
+<p style="padding-bottom: 10px;">then any bareword that would NOT be interpreted as a subroutine call
+produces a compile-time error instead.  The restriction lasts to the
+end of the enclosing block.  An inner block may countermand this
+by saying <code>no strict 'subs'</code>.</p>
+<h3>Array Interpolation
+  </h3><p style="padding-bottom: 10px;">Arrays and slices are interpolated into double-quoted strings
+by joining the elements with the delimiter specified in the <code>$&quot;</code>
+variable (<code>$LIST_SEPARATOR</code> if &quot;use English;&quot; is specified), 
+space by default.  The following are equivalent:</p>
+<div style="padding-bottom: 10px;"><pre><code>    $temp = join($&quot;, @ARGV);
+    system &quot;echo $temp&quot;;
+
+    system &quot;echo @ARGV&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">Within search patterns (which also undergo double-quotish substitution)
+there is an unfortunate ambiguity:  Is <code>/$foo[bar]/</code> to be interpreted as
+<code>/${foo}[bar]/</code> (where <code>[bar]</code> is a character class for the regular
+expression) or as <code>/${foo[bar]}/</code> (where <code>[bar]</code> is the subscript to array
+@foo)?  If @foo doesn't otherwise exist, then it's obviously a
+character class.  If @foo exists, Perl takes a good guess about <code>[bar]</code>,
+and is almost always right.  If it does guess wrong, or if you're just
+plain paranoid, you can force the correct interpretation with curly
+braces as above.</p>
+<p style="padding-bottom: 10px;">If you're looking for the information on how to use here-documents,
+which used to be here, that's been moved to
+<a href="psi_element://perlop%2FQuote+and+Quote-like+Operators">Quote and Quote-like Operators in perlop</a>.</p>
