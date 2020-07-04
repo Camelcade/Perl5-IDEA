@@ -20,6 +20,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.startup.StartupActivity;
 import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.vfs.LocalFileSystem;
+import com.perl5.lang.mason2.MasonPluginUtil;
 import com.perl5.lang.mason2.idea.vfs.MasonVirtualFileListener;
 import org.jetbrains.annotations.NotNull;
 
@@ -28,6 +29,7 @@ public class MasonPostStartupActivity implements StartupActivity {
   public void runActivity(@NotNull Project project) {
     MasonVirtualFileListener listener = new MasonVirtualFileListener(project);
     LocalFileSystem.getInstance().addVirtualFileListener(listener);
-    Disposer.register(project, () -> LocalFileSystem.getInstance().removeVirtualFileListener(listener));
+    Disposer.register(MasonPluginUtil.getUnloadAwareDisposable(project),
+                      () -> LocalFileSystem.getInstance().removeVirtualFileListener(listener));
   }
 }

@@ -42,6 +42,7 @@ import com.intellij.openapi.roots.SyntheticLibrary;
 import com.intellij.openapi.roots.ex.ProjectRootManagerEx;
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.openapi.util.AtomicNullableLazyValue;
+import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.*;
@@ -108,7 +109,7 @@ public class PerlProjectManager implements Disposable {
         resetProjectCaches();
       }
     });
-    LocalFileSystem.getInstance().addVirtualFileListener(new VirtualFileListener() {
+    VirtualFileListener listener = new VirtualFileListener() {
       @Override
       public void propertyChanged(@NotNull VirtualFilePropertyEvent event) {
         resetProjectCaches();
@@ -123,7 +124,9 @@ public class PerlProjectManager implements Disposable {
       public void fileMoved(@NotNull VirtualFileMoveEvent event) {
         resetProjectCaches();
       }
-    });
+    };
+    LocalFileSystem.getInstance().addVirtualFileListener(listener);
+    Disposer.register(this, () -> LocalFileSystem.getInstance().removeVirtualFileListener(listener));
   }
 
   @Override

@@ -16,6 +16,7 @@
 
 package com.perl5.lang.mason2.idea.configuration;
 
+import com.intellij.openapi.Disposable;
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.components.State;
@@ -39,7 +40,7 @@ import java.util.List;
 
 )
 
-public class MasonSettings extends AbstractMasonSettings implements PersistentStateComponent<MasonSettings> {
+public class MasonSettings extends AbstractMasonSettings implements PersistentStateComponent<MasonSettings>, Disposable {
   public List<String> autobaseNames = new ArrayList<>(Arrays.asList("Base.mp", "Base.mc"));
 
   public MasonSettings() {
@@ -70,5 +71,10 @@ public class MasonSettings extends AbstractMasonSettings implements PersistentSt
     }
 
     return (MasonSettings)persisted.setProject(project);
+  }
+
+  @Override
+  public void dispose() {
+
   }
 }

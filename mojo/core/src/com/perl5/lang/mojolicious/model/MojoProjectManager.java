@@ -62,7 +62,7 @@ public class MojoProjectManager implements Disposable {
 
   public MojoProjectManager(@NotNull Project project) {
     myProject = project;
-    myUpdateQueue = new MergingUpdateQueue("mojo model updating queue", 500, true, null, project, null, false);
+    myUpdateQueue = new MergingUpdateQueue("mojo model updating queue", 500, true, null, this, null, false);
     MessageBusConnection connection = myProject.getMessageBus().connect(this);
     connection.subscribe(DumbService.DUMB_MODE, new DumbService.DumbModeListener() {
       @Override
