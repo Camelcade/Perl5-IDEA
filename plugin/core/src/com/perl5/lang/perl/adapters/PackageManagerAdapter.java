@@ -28,6 +28,7 @@ import com.intellij.util.ui.update.Update;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
+import com.perl5.lang.perl.util.PerlPluginUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import com.pty4j.util.Pair;
 import org.jetbrains.annotations.NotNull;
@@ -37,7 +38,7 @@ import java.util.*;
 
 public abstract class PackageManagerAdapter {
   private static final MergingUpdateQueue QUEUE =
-    new MergingUpdateQueue("perl.installer.queue", 300, true, null, ApplicationManager.getApplication());
+    new MergingUpdateQueue("perl.installer.queue", 300, true, null, PerlPluginUtil.getUnloadAwareDisposable());
 
   private final @NotNull Sdk mySdk;
 
