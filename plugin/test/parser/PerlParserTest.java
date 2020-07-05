@@ -33,6 +33,9 @@ public class PerlParserTest extends PerlParserTestBase {
   }
 
   @Test
+  public void testSpecialCharsInReplacements() {doTest();}
+
+  @Test
   public void testEscapeInSQStrings() {doTest();}
 
   @Test

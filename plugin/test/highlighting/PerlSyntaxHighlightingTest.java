@@ -28,6 +28,9 @@ public class PerlSyntaxHighlightingTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testSpecialCharsInReplacements() {doTest();}
+
+  @Test
   public void testEscapeInSQStrings() {doTest();}
 
   @Test
