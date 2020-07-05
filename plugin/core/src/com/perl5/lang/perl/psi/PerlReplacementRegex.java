@@ -37,9 +37,9 @@ public interface PerlReplacementRegex extends PerlRegexExpression {
     return parts.isEmpty() ? null : ObjectUtils.tryCast(parts.get(0), PsiPerlPerlRegex.class);
   }
 
-  default @Nullable PsiPerlPerlRegex getReplaceRegex() {
+  default @Nullable PsiPerlRegexReplacement getReplaceRegex() {
     List<PsiElement> parts = getParts();
-    return parts.size() < 2 ? null : ObjectUtils.tryCast(parts.get(1), PsiPerlPerlRegex.class);
+    return parts.size() < 2 ? null : ObjectUtils.tryCast(parts.get(1), PsiPerlRegexReplacement.class);
   }
 
   default @Nullable PerlBlock getReplaceBlock() {
@@ -56,7 +56,7 @@ public interface PerlReplacementRegex extends PerlRegexExpression {
     PsiElement run = getFirstChild();
     while (run != null) {
       IElementType elementType = PsiUtilCore.getElementType(run);
-      if (elementType == PERL_REGEX || elementType == BLOCK) {
+      if (elementType == PERL_REGEX || elementType == BLOCK || elementType == REGEX_REPLACEMENT) {
         result.add(run);
       }
       else if (elementType == LP_CODE_BLOCK) {
@@ -73,7 +73,4 @@ public interface PerlReplacementRegex extends PerlRegexExpression {
 
   @Nullable
   PsiPerlBlock getBlock();
-
-  @NotNull
-  List<PsiPerlPerlRegex> getPerlRegexList();
 }

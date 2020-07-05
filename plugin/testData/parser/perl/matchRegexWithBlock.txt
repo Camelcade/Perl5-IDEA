@@ -478,7 +478,7 @@ Perl5
             PsiElement(Perl5: })('}')
         PsiElement(Perl5: regex)(')')
       PsiElement(Perl5: r/)('/')
-      PsiPerlPerlRegexImpl(Perl5: PERL_REGEX)
+      PsiPerlRegexReplacementImpl(Perl5: REGEX_REPLACEMENT)
         <empty list>
       PsiElement(Perl5: r})('/')
     PsiElement(Perl5: ;)(';')
@@ -499,7 +499,7 @@ Perl5
             PsiElement(Perl5: })('}')
         PsiElement(Perl5: regex)(')')
       PsiElement(Perl5: r/)('/')
-      PsiPerlPerlRegexImpl(Perl5: PERL_REGEX)
+      PsiPerlRegexReplacementImpl(Perl5: REGEX_REPLACEMENT)
         <empty list>
       PsiElement(Perl5: r})('/')
       PsiPerlPerlRegexModifiersImpl(Perl5: PERL_REGEX_MODIFIERS)
@@ -522,7 +522,7 @@ Perl5
             PsiElement(Perl5: })('}')
         PsiElement(Perl5: regex)(')')
       PsiElement(Perl5: r/)('/')
-      PsiPerlPerlRegexImpl(Perl5: PERL_REGEX)
+      PsiPerlRegexReplacementImpl(Perl5: REGEX_REPLACEMENT)
         <empty list>
       PsiElement(Perl5: r})('/')
       PsiPerlPerlRegexModifiersImpl(Perl5: PERL_REGEX_MODIFIERS)

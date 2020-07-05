@@ -48,10 +48,6 @@ public class PerlSubLexerAdapter extends FlexAdapter {
     return new PerlSubLexerAdapter(project, PerlLexer.MATCH_REGEX_XX);
   }
 
-  public static PerlSubLexerAdapter forReplacementRegex(@Nullable Project project) {
-    return new PerlSubLexerAdapter(project, PerlLexer.REPLACEMENT_REGEX);
-  }
-
   public static PerlSubLexerAdapter forCode(@Nullable Project project) {
     return new PerlSubLexerAdapter(project, PerlLexer.YYINITIAL);
   }

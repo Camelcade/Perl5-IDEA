@@ -88,8 +88,6 @@ public class PerlElementTypeFactory {
         return new PerlLazyExtendedMatchRegexpElementType(name);
       case "LP_REGEX_XX":
         return new PerlLazySuperExtendedMatchRegexpElementType(name);
-      case "LP_REGEX_REPLACEMENT":
-        return new PerlLazyReplacementRegexpElementType(name);
       case "LP_STRING_Q":
         return new PerlLazyQStringElementType(name);
       case "LP_STRING_QX":
@@ -294,6 +292,8 @@ public class PerlElementTypeFactory {
         return new PerlElementTypeEx(name, PsiPerlPerlRegexImpl.class);
       case "PERL_REGEX_MODIFIERS":
         return new PerlElementTypeEx(name, PsiPerlPerlRegexModifiersImpl.class);
+      case "REGEX_REPLACEMENT":
+        return new PerlElementTypeEx(name, PsiPerlRegexReplacementImpl.class);
       case "POW_EXPR":
         return new PerlElementTypeEx(name, PsiPerlPowExprImpl.class);
       case "PREFIX_UNARY_EXPR":

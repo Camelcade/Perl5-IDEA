@@ -480,7 +480,7 @@ Mason2 template file
                 PsiPerlPerlRegexImpl(Perl5: PERL_REGEX)
                   PsiElement(Perl5: regex)(' ')
                 PsiElement(Perl5: r/)('/')
-                PsiPerlPerlRegexImpl(Perl5: PERL_REGEX)
+                PsiPerlRegexReplacementImpl(Perl5: REGEX_REPLACEMENT)
                   <empty list>
                 PsiElement(Perl5: r})('/')
                 PsiPerlPerlRegexModifiersImpl(Perl5: PERL_REGEX_MODIFIERS)

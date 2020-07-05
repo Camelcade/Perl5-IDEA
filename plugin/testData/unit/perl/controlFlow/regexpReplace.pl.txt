@@ -6,7 +6,7 @@
 5(6) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) (InstructionImpl)
 6(7) element: PsiPerlPerlRegexImpl(Perl5: PERL_REGEX) (InstructionImpl)
 7(8) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) (InstructionImpl)
-8(9) element: PsiPerlPerlRegexImpl(Perl5: PERL_REGEX) (InstructionImpl)
+8(9) element: PsiPerlRegexReplacementImpl(Perl5: REGEX_REPLACEMENT) (InstructionImpl)
 9(10) element: PsiPerlReplacementRegexImpl(Perl5: REPLACEMENT_REGEX) (InstructionImpl)
 10(11) element: PsiPerlRegexExprImpl(Perl5: REGEX_EXPR) (InstructionImpl)
 11(12) element: PsiPerlStringSqImpl(Perl5: STRING_SQ) (InstructionImpl)

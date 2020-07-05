@@ -356,7 +356,6 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
   TokenSet LAZY_CODE_BLOCKS = TokenSet.create(LP_CODE_BLOCK, LP_CODE_BLOCK_WITH_TRYCATCH);
 
   TokenSet LAZY_PARSABLE_REGEXPS = TokenSet.create(
-    LP_REGEX_REPLACEMENT,
     LP_REGEX,
     LP_REGEX_X,
     LP_REGEX_XX

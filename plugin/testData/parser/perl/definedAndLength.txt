@@ -87,7 +87,7 @@ Perl5
           PsiPerlPerlRegexImpl(Perl5: PERL_REGEX)
             PsiElement(Perl5: regex)('\#.*$')
           PsiElement(Perl5: r/)('/')
-          PsiPerlPerlRegexImpl(Perl5: PERL_REGEX)
+          PsiPerlRegexReplacementImpl(Perl5: REGEX_REPLACEMENT)
             <empty list>
           PsiElement(Perl5: r})('/')
         PsiPerlIfStatementModifierImpl(Perl5: IF_STATEMENT_MODIFIER)

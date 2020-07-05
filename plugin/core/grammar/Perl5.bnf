@@ -1024,7 +1024,8 @@ replacement_regex ::=
 private regex_match ::= 'r{' [<<consumeTokens 'LP_REGEX'>>|<<consumeTokens 'LP_REGEX_X'>>|<<consumeTokens 'LP_REGEX_XX'>>|perl_regex]
 private regex_replace ::= regex_replace_regex | regex_replace_code
 
-private regex_replace_regex ::= {'r/' | 'r}' 'r{' } [<<consumeTokens 'LP_REGEX_REPLACEMENT'>>|perl_regex]
+private regex_replace_regex ::= {'r/' | 'r}' 'r{' } regex_replacement
+regex_replacement ::= [qq_string_content_with_lp]
 private regex_replace_code ::= {'re/' | 'r}' 're{' } [regex_code]
 private regex_code ::= <<consumeTokens 'LP_CODE_BLOCK'>> | <<block file_item*>>
 
@@ -1379,7 +1380,6 @@ lp_string_qw ::= qw_string_content{extraRoot=true}
 lp_regex ::= perl_regex {extraRoot=true}
 lp_regex_x ::= perl_regex {extraRoot=true}
 lp_regex_xx ::= perl_regex {extraRoot=true}
-lp_regex_replacement ::= perl_regex {extraRoot=true}
 
 lp_code_block ::= normal_block | braceless_block {extraRoot=true}
 lp_code_block_with_trycatch ::= normal_block | braceless_block {extraRoot=true}
