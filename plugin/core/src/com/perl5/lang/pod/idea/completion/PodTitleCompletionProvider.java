@@ -27,6 +27,7 @@ import com.intellij.psi.ResolveResult;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ProcessingContext;
+import com.perl5.lang.perl.idea.completion.providers.processors.PerlSimpleCompletionProcessor;
 import com.perl5.lang.perl.psi.PerlSubElement;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.pod.parser.PodElementPatterns;
@@ -70,9 +71,14 @@ public class PodTitleCompletionProvider extends CompletionProvider<CompletionPar
     }
 
     IElementType grandparentElementType = PsiUtilCore.getElementType(elementParent.getParent());
+    PerlSimpleCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(result, element);
 
     if (grandparentElementType == HEAD_1_SECTION) {
-      DEFAULT_POD_SECTIONS.forEach(it -> result.addElement(LookupElementBuilder.create(it)));
+      for (String sectionTitle : DEFAULT_POD_SECTIONS) {
+        if (completionProcessor.matches(sectionTitle) && !completionProcessor.process(LookupElementBuilder.create(sectionTitle))) {
+          break;
+        }
+      }
     }
 
     final PsiFile elementFile = element.getContainingFile().getOriginalFile();
@@ -108,9 +114,13 @@ public class PodTitleCompletionProvider extends CompletionProvider<CompletionPar
       }
     });
 
-    possibleTargets.forEach(it -> result.addElement(LookupElementBuilder
-                                                      .create(it, StringUtil.notNullize(it.getPresentableName()))
-                                                      .withIcon(it.getIcon(0))
-    ));
+    for (PerlSubElement subElement : possibleTargets) {
+      String lookupString = StringUtil.notNullize(subElement.getPresentableName());
+      if (completionProcessor.matches(lookupString) &&
+          !completionProcessor.process(LookupElementBuilder.create(subElement, lookupString).withIcon(subElement.getIcon(0)))) {
+        break;
+      }
+    }
+    completionProcessor.logStatus(getClass());
   }
 }
