@@ -22,6 +22,7 @@ import com.intellij.testFramework.UsefulTestCase;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
+
 public class MojoPerlRenameTest extends MojoLightTestCase {
   @Override
   protected String getBaseDataPath() {

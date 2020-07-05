@@ -112,7 +112,7 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
 
         if (commentElementType == COMMENT_BLOCK ||
             commentElementType == getTemplateBlockElementType() // template blocks are always collapsible
-          ) {
+        ) {
           isCollapsible = true;
         }
         else {
@@ -144,7 +144,7 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
           if (comment.getText().startsWith("\n") &&
               startOffset > 0 &&
               document.getCharsSequence().charAt(startOffset - 1) != '\n'
-            ) {
+          ) {
             startOffset++;
           }
           int endOffset = comment.getTextRange().getEndOffset();
@@ -157,7 +157,7 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
               !commentExcludedTokens.contains(currentComment.getNode().getElementType()) &&
               !currentComment.getText().contains("todo") &&
               !currentComment.getText().contains("fixme")
-              ) {
+            ) {
               endOffset = currentComment.getTextOffset() + currentComment.getTextLength();
               if (currentComment.getText().endsWith("\n")) {
                 endOffset--;

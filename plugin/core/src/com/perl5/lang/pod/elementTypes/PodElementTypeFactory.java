@@ -30,6 +30,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class PodElementTypeFactory {
   private static final Logger LOG = Logger.getInstance(PodElementTypeFactory.class);
+
   public static IElementType getTokenType(String debugName) {
     if (debugName.equals("identifier")) {
       return new PodTokenTypeEx(debugName) {

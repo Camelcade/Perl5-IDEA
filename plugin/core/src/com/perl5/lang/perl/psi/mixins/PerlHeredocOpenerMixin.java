@@ -87,5 +87,4 @@ public abstract class PerlHeredocOpenerMixin extends PerlCompositeElementImpl im
   public @NotNull SearchScope getUseScope() {
     return new LocalSearchScope(getContainingFile());
   }
-
 }

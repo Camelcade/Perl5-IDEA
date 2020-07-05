@@ -92,7 +92,7 @@ public final class PerlFileElementType extends IStubFileElementType<PerlFileStub
 
   @Override
   public void indexStub(@NotNull PerlFileStub stub, @NotNull IndexSink sink) {
-    if( stub.isEmpty() && stub.getNamespaceName().equals(PerlPackageUtil.MAIN_NAMESPACE_NAME)){
+    if (stub.isEmpty() && stub.getNamespaceName().equals(PerlPackageUtil.MAIN_NAMESPACE_NAME)) {
       return;
     }
     sink.occurrence(PerlNamespaceIndex.KEY, stub.getNamespaceName());

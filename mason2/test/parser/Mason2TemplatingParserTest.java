@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ package parser;
 
 import com.perl5.lang.mason2.filetypes.MasonTopLevelComponentFileType;
 import org.junit.Test;
+
 public class Mason2TemplatingParserTest extends PerlParserTestBase {
   public Mason2TemplatingParserTest() {
     super(MasonTopLevelComponentFileType.TOP_LEVEL_COMPONENT_EXTENSION);
@@ -43,5 +44,4 @@ public class Mason2TemplatingParserTest extends PerlParserTestBase {
   public void testIssue1077() {
     doTest(true);
   }
-
 }

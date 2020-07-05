@@ -180,5 +180,4 @@ public abstract class PerlImplicitDeclarationsProvider {
     }
     return PerlSubArgument.create(PerlVariableType.bySigil(type.charAt(0)), variableName, isOptional);
   }
-
 }

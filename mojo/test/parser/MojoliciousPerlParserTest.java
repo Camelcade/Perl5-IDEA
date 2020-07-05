@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,8 @@ package parser;
 
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import org.junit.Test;
-public class MojoliciousPerlParserTest extends MojoliciousParserTestBase{
+
+public class MojoliciousPerlParserTest extends MojoliciousParserTestBase {
   @Override
   protected String getBaseDataPath() {
     return "testData/parser/perl";
@@ -33,5 +34,4 @@ public class MojoliciousPerlParserTest extends MojoliciousParserTestBase{
   public void testMojoliciousHelperDeclaration() {
     doTest();
   }
-
 }

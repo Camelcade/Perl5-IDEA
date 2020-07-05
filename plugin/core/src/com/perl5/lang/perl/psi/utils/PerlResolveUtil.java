@@ -264,7 +264,7 @@ public class PerlResolveUtil {
     Instruction[] instructions = PerlControlFlowBuilder.getFor(controlFlowScope).getInstructions();
     PsiElement elementToFind = element instanceof PerlFile ? element.getContext() : element;
     int elementInstructionIndex = findElementInstruction(elementToFind, instructions, element);
-    if (elementInstructionIndex  < 0) {
+    if (elementInstructionIndex < 0) {
       String message = "Unable to find an instruction for " +
                        element.getClass() + "; " +
                        element.getText() + "; " +

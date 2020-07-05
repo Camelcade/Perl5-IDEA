@@ -75,5 +75,4 @@ public interface PodCompositeElement extends PsiElement, PodRenderableElement, I
     PsiFile file = getContainingFile();
     return file == null ? null : file.getIcon(0);
   }
-
 }

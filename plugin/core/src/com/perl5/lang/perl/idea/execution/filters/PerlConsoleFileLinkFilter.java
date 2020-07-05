@@ -56,10 +56,10 @@ public class PerlConsoleFileLinkFilter implements Filter {
     PerlHostData<?, ?> hostData = myHostDataContainer.getHostData();
     String filePath = hostData == null ? matcher.group(1) : hostData.getLocalPath(matcher.group(1));
     int line;
-    try{
+    try {
       line = Integer.parseInt(matcher.group(2)) - 1;
     }
-    catch (NumberFormatException e){
+    catch (NumberFormatException e) {
       line = 0;
       LOG.warn("Could not parse int from " + matcher.group(2) + " ; line: " + textLine);
     }

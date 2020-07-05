@@ -124,7 +124,7 @@ public class PerlElementFactory {
            heredocBody.startsWith(marker + "\n") ||
            heredocBody.endsWith(marker + "\n") ||
            heredocBody.contains("\n" + marker + "\n")
-      ) {
+    ) {
       //noinspection StringConcatenationInLoop
       marker = marker + "M";
     }

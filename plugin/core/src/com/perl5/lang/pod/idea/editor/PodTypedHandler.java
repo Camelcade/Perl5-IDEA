@@ -133,7 +133,7 @@ public class PodTypedHandler extends PerlTypedHandlerDelegate implements PodElem
         CharSequence documentChars = editor.getDocument().getCharsSequence();
 
         if (elementType == POD_IDENTIFIER && StringUtil.containsChar(POD_COMMANDS, documentChars.charAt(prevCharOffset))) {
-            EditorModificationUtil.insertStringAtCaret(editor, ">", false, false, 0);
+          EditorModificationUtil.insertStringAtCaret(editor, ">", false, false, 0);
         }
         else if (elementType == POD_ANGLE_LEFT || POD_COMMANDS_TOKENSET.contains(elementType)) {
           extendAngles(element.getParent());

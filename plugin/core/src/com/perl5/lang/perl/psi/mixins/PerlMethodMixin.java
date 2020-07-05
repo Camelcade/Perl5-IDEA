@@ -84,7 +84,7 @@ public abstract class PerlMethodMixin extends PerlCompositeElementImpl implement
       if (hasExplicitNamespace && !isSuper) { // awkward $var->Foo::Bar::method->
         return new PerlCallStaticValue(PerlScalarValue.create(explicitNamespaceName), subNameValue, callArguments, true);
       }
-      String superContext = isSuper ? PerlPackageUtil.getContextNamespaceName(this): null;
+      String superContext = isSuper ? PerlPackageUtil.getContextNamespaceName(this) : null;
       if (!(derefExpression instanceof PerlDerefExpression)) {
         LOG.warn("Expected deref expression, got " + derefExpression);
         return UNKNOWN_VALUE;

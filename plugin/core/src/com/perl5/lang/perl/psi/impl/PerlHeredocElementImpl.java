@@ -175,5 +175,4 @@ public class PerlHeredocElementImpl extends PerlCompositeElementImpl implements 
 
     return result;
   }
-
 }

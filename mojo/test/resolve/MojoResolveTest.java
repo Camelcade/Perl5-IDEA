@@ -19,6 +19,7 @@ package resolve;
 
 import base.MojoLightTestCase;
 import org.junit.Test;
+
 public class MojoResolveTest extends MojoLightTestCase {
   @Override
   protected String getBaseDataPath() {

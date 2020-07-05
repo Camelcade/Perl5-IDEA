@@ -42,5 +42,4 @@ class PerlRunConfigurationEditor extends GenericPerlRunConfigurationEditor<PerlR
       return PerlRunConfigurationProducer.getInstance();
     }
   }
-
 }

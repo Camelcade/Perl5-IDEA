@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -67,7 +67,7 @@ public class MasonVirtualFileListener implements VirtualFileListener {
       if (changedFile.getUserData(FORCE_REINDEX) != null ||
           VfsUtil.isUnder(changedFile, rootsSet) ||        // moved to component root
           containsAtLeastOneFile(changedFile, componentsRoots)
-        ) {
+      ) {
         Mason2Util.reindexProjectFile(getProject(), changedFile);
       }
     }
@@ -75,7 +75,7 @@ public class MasonVirtualFileListener implements VirtualFileListener {
     {
       if (changedFile.getUserData(FORCE_REINDEX) != null ||
           VfsUtil.isUnder(changedFile, rootsSet)
-        ) {
+      ) {
         FileBasedIndex.getInstance().requestReindex(changedFile);
       }
     }
@@ -137,7 +137,7 @@ public class MasonVirtualFileListener implements VirtualFileListener {
     if (movedFile.isDirectory()) {
       if (VfsUtil.isUnder(movedFile, rootsSet) ||    // moved from component root
           containsAtLeastOneFile(movedFile, componentsRoots) // contains component root
-        ) {
+      ) {
         movedFile.putUserData(FORCE_REINDEX, true);
       }
     }

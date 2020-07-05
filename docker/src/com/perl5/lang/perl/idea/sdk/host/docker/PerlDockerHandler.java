@@ -37,6 +37,7 @@ import java.util.List;
 
 class PerlDockerHandler extends PerlHostWithFileSystemHandler<PerlDockerData, PerlDockerHandler> {
   private static final Logger LOG = Logger.getInstance(PerlDockerHandler.class);
+
   public PerlDockerHandler(@NotNull PerlHandlerBean bean) {
     super(bean);
   }

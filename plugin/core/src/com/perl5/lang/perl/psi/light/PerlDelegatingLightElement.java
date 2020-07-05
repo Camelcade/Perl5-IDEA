@@ -272,8 +272,12 @@ public class PerlDelegatingLightElement<Delegate extends PsiElement> extends Lig
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (!(o instanceof PerlDelegatingLightElement)) return false;
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof PerlDelegatingLightElement)) {
+      return false;
+    }
 
     PerlDelegatingLightElement<?> element = (PerlDelegatingLightElement<?>)o;
 

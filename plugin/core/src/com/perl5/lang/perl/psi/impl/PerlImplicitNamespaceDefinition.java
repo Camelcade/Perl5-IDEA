@@ -95,9 +95,15 @@ public class PerlImplicitNamespaceDefinition extends PerlImplicitElement impleme
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (!(o instanceof PerlImplicitNamespaceDefinition)) return false;
-    if (!super.equals(o)) return false;
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof PerlImplicitNamespaceDefinition)) {
+      return false;
+    }
+    if (!super.equals(o)) {
+      return false;
+    }
 
     PerlImplicitNamespaceDefinition that = (PerlImplicitNamespaceDefinition)o;
 

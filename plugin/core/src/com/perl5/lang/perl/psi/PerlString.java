@@ -35,7 +35,7 @@ import java.util.regex.Pattern;
 import static com.perl5.lang.perl.parser.PerlParserUtil.AMBIGUOUS_PACKAGE_PATTERN;
 
 
-public interface PerlString extends PerlQuoted, PerlValuableEntity  {
+public interface PerlString extends PerlQuoted, PerlValuableEntity {
   String FILE_PATH_PATTERN_TEXT = "\\.?[\\p{L}\\d\\-_]+(?:\\.[\\p{L}\\d\\-_]*)*";
   String FILE_PATH_DELIMITER_PATTERN_TEXT = "(?:\\\\+|/+)";
   Pattern FILE_PATH_PATTERN = Pattern.compile(

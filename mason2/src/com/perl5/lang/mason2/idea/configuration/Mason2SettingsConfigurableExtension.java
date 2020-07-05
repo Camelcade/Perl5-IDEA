@@ -36,5 +36,4 @@ public class Mason2SettingsConfigurableExtension implements Perl5SettingsConfigu
   public @NotNull List<PerlSourceRootType> getSourceRootTypes() {
     return Collections.singletonList(Mason2SourceRootType.INSTANCE);
   }
-
 }

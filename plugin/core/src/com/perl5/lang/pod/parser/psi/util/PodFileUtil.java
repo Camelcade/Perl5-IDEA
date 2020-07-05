@@ -141,7 +141,8 @@ public class PodFileUtil {
       // seek file
       String fileId = descriptor.getName();
 
-      if (fileId.contains(PerlPackageUtil.NAMESPACE_SEPARATOR) || !StringUtil.startsWith(fileId, "perl")) // can be Foo/Bar.pod or Foo/Bar.pm
+      if (fileId.contains(PerlPackageUtil.NAMESPACE_SEPARATOR) ||
+          !StringUtil.startsWith(fileId, "perl")) // can be Foo/Bar.pod or Foo/Bar.pm
       {
         final PsiManager psiManager = PsiManager.getInstance(project);
         String podRelativePath = PodFileUtil.getFilenameFromPackage(fileId);

@@ -49,7 +49,7 @@ public class PerlFileStub extends PsiFileStubImpl<PerlFile> implements PerlNames
    * @return true iff this stub is empty and contains no useful data
    * @see PerlNamespaceDefinitionData#isEmpty()
    */
-  public boolean isEmpty(){
+  public boolean isEmpty() {
     return myData.isEmpty();
   }
 

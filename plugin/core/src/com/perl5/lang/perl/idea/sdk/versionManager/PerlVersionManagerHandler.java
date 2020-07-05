@@ -47,6 +47,7 @@ public abstract class PerlVersionManagerHandler<Data extends PerlVersionManagerD
 
   /**
    * Shows a UI to create an sdk for this version manager on the host described by the {@code hostHandler}
+   *
    * @param disposable any temporary things may be bound to the disposable which is going to be disposed by invoker
    */
   public abstract void createSdkInteractively(@Nullable Project project,

@@ -268,7 +268,7 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
             )) {
               if (namespaceDefinition.getParentNamespaceDefinitions().contains(MasonNamespaceDefinitionImpl.this)
                   && !childNamespaces.contains(namespaceDefinition)
-                ) {
+              ) {
                 childNamespaces.add(namespaceDefinition);
               }
             }

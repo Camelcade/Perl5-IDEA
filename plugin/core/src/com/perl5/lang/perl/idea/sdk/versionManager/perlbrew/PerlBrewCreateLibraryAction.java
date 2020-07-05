@@ -64,7 +64,7 @@ public class PerlBrewCreateLibraryAction extends PerlBrewActionBase implements D
       return;
     }
     new Task.Backgroundable(e.getProject(), PerlBundle.message("perl.vm.perlbrew.create.lib.progress", libraryName,
-                                                                   perlVersionString)) {
+                                                               perlVersionString)) {
       @Override
       public void run(@NotNull ProgressIndicator indicator) {
         PerlBrewAdapter perlBrewAdapter = new PerlBrewAdapter(perlBrewData.getVersionManagerPath(), hostData);

@@ -43,10 +43,10 @@ public abstract class PerlMro {
    * Method should return a sequence of packages. See http://perldoc.perl.org/mro.html#mro%3a%3aget_linear_isa(%24classname%5b%2c-%24type%5d)
    * Method should not add package itself or UNIVERSAL, only parents structure. Package itself and UNIVERSAL being added by calee
    *
-   * @param project      current project
+   * @param project              current project
    * @param namespaceDefinitions list of namespaces to check
-   * @param recursionMap map for controlling recursive inheritance
-   * @param result       list of package names to populate
+   * @param recursionMap         map for controlling recursive inheritance
+   * @param result               list of package names to populate
    */
   public abstract void getLinearISA(@NotNull Project project,
                                     @NotNull List<PerlNamespaceDefinitionElement> namespaceDefinitions,
@@ -117,9 +117,9 @@ public abstract class PerlMro {
   /**
    * Returns collection of Sub Definitions of class and it's superclasses according perl's default MRO
    *
-   * @param psiElement      anchorElement
+   * @param psiElement        anchorElement
    * @param baseNamespaceName base project
-   * @param isSuper         flag for SUPER resolutions
+   * @param isSuper           flag for SUPER resolutions
    * @return collection of definitions
    */
   public static Collection<PsiElement> getVariants(@NotNull PsiElement psiElement,

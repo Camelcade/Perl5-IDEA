@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,9 +27,9 @@ import org.jetbrains.annotations.NotNull;
 public interface PerlValuableEntity extends PsiElement {
   /**
    * @return computes a {@link PerlValue} describing this entity
-   * @deprecated do not use this method directly, use {@link PerlValuesManager#from(PsiElement)}
    * @implSpec implementations MUST NOT cache anything. Implementation MUST NOT use resolve. This method invoked on indexing phase and
    * indexes are not available.
+   * @deprecated do not use this method directly, use {@link PerlValuesManager#from(PsiElement)}
    */
   @NotNull
   @Deprecated

@@ -129,17 +129,33 @@ public class PerlLightNamespaceDefinitionElement extends PerlDelegatingLightName
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (!(o instanceof PerlLightNamespaceDefinitionElement)) return false;
-    if (!super.equals(o)) return false;
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof PerlLightNamespaceDefinitionElement)) {
+      return false;
+    }
+    if (!super.equals(o)) {
+      return false;
+    }
 
     PerlLightNamespaceDefinitionElement element = (PerlLightNamespaceDefinitionElement)o;
 
-    if (getMroType() != element.getMroType()) return false;
-    if (!getParentNamespacesNames().equals(element.getParentNamespacesNames())) return false;
-    if (getAnnotations() != null ? !getAnnotations().equals(element.getAnnotations()) : element.getAnnotations() != null) return false;
-    if (!myExport.equals(element.myExport)) return false;
-    if (!myExportOk.equals(element.myExportOk)) return false;
+    if (getMroType() != element.getMroType()) {
+      return false;
+    }
+    if (!getParentNamespacesNames().equals(element.getParentNamespacesNames())) {
+      return false;
+    }
+    if (getAnnotations() != null ? !getAnnotations().equals(element.getAnnotations()) : element.getAnnotations() != null) {
+      return false;
+    }
+    if (!myExport.equals(element.myExport)) {
+      return false;
+    }
+    if (!myExportOk.equals(element.myExportOk)) {
+      return false;
+    }
     return myExportTags.equals(element.myExportTags);
   }
 

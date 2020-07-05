@@ -50,5 +50,4 @@ public abstract class PerlSourceRootAction extends MarkRootActionBase {
   protected void modifyRoots(VirtualFile file, ContentEntry entry) {
     throw new IncorrectOperationException();
   }
-
 }

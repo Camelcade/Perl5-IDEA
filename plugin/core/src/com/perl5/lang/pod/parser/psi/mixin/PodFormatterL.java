@@ -131,5 +131,4 @@ public class PodFormatterL extends PodSectionMixin implements PodFormatter, PodS
   public @Nullable PsiLinkUrl getLinkUrlElement() {
     return PsiTreeUtil.getChildOfType(getContentBlock(), PsiLinkUrl.class);
   }
-
 }

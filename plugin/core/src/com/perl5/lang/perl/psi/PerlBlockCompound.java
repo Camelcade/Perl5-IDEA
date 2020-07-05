@@ -43,5 +43,4 @@ public interface PerlBlockCompound extends PerlLoop, PerlCompound {
     }
     return ObjectUtils.tryCast(child.getFirstChild(), PsiPerlBlock.class);
   }
-
 }

@@ -52,5 +52,4 @@ public interface PodRenderableElement extends PsiElement {
     renderElementAsText(builder, new PodRenderingContext());
     return builder.toString();
   }
-
 }

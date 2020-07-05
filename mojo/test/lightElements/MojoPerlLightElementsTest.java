@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ package lightElements;
 import base.MojoLightTestCase;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import org.junit.Test;
+
 public class MojoPerlLightElementsTest extends MojoLightTestCase {
   @Override
   protected String getBaseDataPath() {
@@ -33,6 +34,4 @@ public class MojoPerlLightElementsTest extends MojoLightTestCase {
 
   @Test
   public void testMojoHelpers() {doTestLightElements();}
-
-
 }

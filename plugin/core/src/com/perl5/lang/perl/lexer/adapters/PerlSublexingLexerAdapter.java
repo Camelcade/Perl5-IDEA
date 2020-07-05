@@ -55,8 +55,8 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
 
   private final @Nullable Project myProject;
   private final boolean myIsForcingSublexing;
-  private boolean myIsSublexing = false;
   private final Lexer myMainLexer;
+  private boolean myIsSublexing = false;
   private PerlSublexingLexerAdapter mySubLexer;
   private int myTokenStart;
   private int myTokenEnd;
