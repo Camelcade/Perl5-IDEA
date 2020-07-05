@@ -101,11 +101,13 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
       }
       return rawBlocks;
     }
-
-    if (elementType != COMMA_SEQUENCE_EXPR) {
-      return rawBlocks;
+    else if (elementType == COMMA_SEQUENCE_EXPR) {
+      return processCommaSequenceBlocks(rawBlocks);
     }
+    return rawBlocks;
+  }
 
+  private @NotNull List<Block> processCommaSequenceBlocks(@NotNull List<Block> rawBlocks) {
     List<Block> result = new ArrayList<>();
     List<Block> blocksToGroup = new ArrayList<>();
     boolean[] hasFatComma = new boolean[]{false};
