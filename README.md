@@ -1,6 +1,6 @@
 # Perl5 plugins for IntelliJ IDEA
 
-[![Build Status](https://travis-ci.org/Camelcade/Perl5-IDEA.svg?branch=master)](https://travis-ci.org/Camelcade/Perl5-IDEA) 
+![Java CI with Gradle](https://github.com/Camelcade/Perl5-IDEA/workflows/Java%20CI%20with%20Gradle/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/github/Camelcade/Perl5-IDEA/badge.svg?branch=master)](https://coveralls.io/github/Camelcade/Perl5-IDEA?branch=master)
 [![Chat on gitter](https://badges.gitter.im/Camelcade/Perl5-IDEA.png)](https://gitter.im/IntelliJ-Plugin-Perl5/Lobby)
 
