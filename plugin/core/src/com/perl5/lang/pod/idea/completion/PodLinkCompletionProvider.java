@@ -69,23 +69,24 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
       return;
     }
     IElementType parentType = PsiUtilCore.getElementType(linkPart);
-    PerlSimpleCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(result, element);
+    PerlSimpleCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(result, linkElement);
 
     if (parentType == LINK_TEXT && element.getPrevSibling() == null) {
-      processFilesCompletions(linkElement, completionProcessor);
+      processFilesCompletions(completionProcessor);
     }
     if (parentType == LINK_NAME) {
-      processFilesCompletions(linkElement, completionProcessor);
+      processFilesCompletions(completionProcessor);
     }
     if (parentType == LINK_SECTION) {
       addSectionsCompletions(linkElement.getTargetFile(), completionProcessor);
     }
+    completionProcessor.logStatus(getClass());
   }
 
-  protected boolean processFilesCompletions(@NotNull PodFormatterL link,
-                                            @NotNull PerlCompletionProcessor completionProcessor) {
+  protected boolean processFilesCompletions(@NotNull PerlCompletionProcessor completionProcessor) {
+    PodFormatterL linkElement = (PodFormatterL)completionProcessor.getLeafElement();
     final Set<String> foundPods = new HashSet<>();
-    PerlPackageUtil.processIncFilesForPsiElement(link, (file, classRoot) -> {
+    PerlPackageUtil.processIncFilesForPsiElement(linkElement, (file, classRoot) -> {
       String className = PodFileUtil.getPackageNameFromVirtualFile(file, classRoot);
       if (StringUtil.isNotEmpty(className)) {
         boolean isBuiltIn = false;
@@ -103,7 +104,7 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
       return completionProcessor.result();
     }, PodFileType.INSTANCE);
 
-    return PerlPackageUtil.processPackageFilesForPsiElement(link, (packageName, file) -> {
+    return PerlPackageUtil.processPackageFilesForPsiElement(linkElement, (packageName, file) -> {
       if (StringUtil.isNotEmpty(packageName) && completionProcessor.matches(packageName) && foundPods.add(packageName)) {
         return PerlPackageCompletionUtil.processPackageLookupElement(file, packageName, null, completionProcessor);
       }
@@ -118,97 +119,98 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
     return StringUtil.replace(title, TO_ESCAPE, ESCAPE_TO);
   }
 
-  protected static void addSectionsCompletions(PsiFile targetFile,
+  protected static void addSectionsCompletions(@Nullable PsiFile targetFile,
                                                @NotNull PerlCompletionProcessor completionProcessor) {
-    if (targetFile != null) {
-      Set<String> distinctString = new HashSet<>();
-
-      targetFile.accept(new PodStubsAwareRecursiveVisitor() {
-        @Override
-        public void visitElement(@NotNull PsiElement element) {
-          if (completionProcessor.result()) {
-            super.visitElement(element);
-          }
-        }
-
-        @Override
-        public void visitTargetableSection(PodTitledSection o) {
-          String title = cleanItemText(o.getTitleText());
-          if (completionProcessor.matches(title) && distinctString.add(title)) {
-            completionProcessor.process(LookupElementBuilder.create(o, escapeTitle(title))
-                                          .withLookupString(title)
-                                          .withPresentableText(title)
-                                          .withIcon(PerlIcons.POD_FILE)
-                                          .withTypeText(UsageViewUtil.getType(o)));
-          }
-          super.visitTargetableSection(o);
-        }
-
-        @Override
-        public void visitItemSection(@NotNull PsiItemSection o) {
-          if (((PodSectionItem)o).isTargetable()) {
-            super.visitItemSection(o);
-          }
-          else {
-            visitElement(o);
-          }
-        }
-
-        @Contract("null->null")
-        private @Nullable String cleanItemText(@Nullable String itemText) {
-          if (itemText == null) {
-            return null;
-          }
-          String trimmed = StringUtil.trimLeading(itemText.trim(), '*');
-          if (NumberUtils.isNumber(trimmed)) {
-            return null;
-          }
-          return trimItemText(trimmed);
-        }
-
-        @Override
-        public void visitPodFormatIndex(@NotNull PsiPodFormatIndex o) {
-          assert o instanceof PodFormatterX;
-          if (!((PodFormatterX)o).isMeaningful()) {
-            return;
-          }
-          String indexTitle = ((PodFormatterX)o).getTitleText();
-          if (StringUtil.isEmpty(indexTitle) || !distinctString.add(indexTitle)) {
-            return;
-          }
-
-          String escapedIndexTitle = escapeTitle(indexTitle);
-          if (!completionProcessor.matches(indexTitle) && !completionProcessor.matches(escapedIndexTitle)) {
-            return;
-          }
-
-          PsiElement indexTarget = ((PodFormatterX)o).getIndexTarget();
-          String targetPresentableText;
-          if (indexTarget instanceof PodFile) {
-            targetPresentableText = cleanItemText(((PodFile)indexTarget).getPodLinkText());
-          }
-          else if (indexTarget instanceof PodCompositeElement) {
-            targetPresentableText = cleanItemText(((PodCompositeElement)indexTarget).getPresentableText());
-          }
-          else {
-            LOG.warn("Unhandled index target: " + indexTarget);
-            return;
-          }
-          String tailText = null;
-          if (targetPresentableText != null) {
-            tailText = "(" + targetPresentableText + ")";
-          }
-          completionProcessor.process(
-            LookupElementBuilder.create(o, escapedIndexTitle)
-              .withLookupString(indexTitle)
-              .withPresentableText(indexTitle)
-              .withTailText(tailText)
-              .withTypeText(UsageViewUtil.getType(o))
-              .withIcon(PerlIcons.POD_FILE)
-          );
-        }
-      });
+    if (targetFile == null) {
+      return;
     }
+    Set<String> distinctString = new HashSet<>();
+
+    targetFile.accept(new PodStubsAwareRecursiveVisitor() {
+      @Override
+      public void visitElement(@NotNull PsiElement element) {
+        if (completionProcessor.result()) {
+          super.visitElement(element);
+        }
+      }
+
+      @Override
+      public void visitTargetableSection(PodTitledSection o) {
+        String title = cleanItemText(o.getTitleText());
+        if (completionProcessor.matches(title) && distinctString.add(title)) {
+          completionProcessor.process(LookupElementBuilder.create(o, escapeTitle(title))
+                                        .withLookupString(title)
+                                        .withPresentableText(title)
+                                        .withIcon(PerlIcons.POD_FILE)
+                                        .withTypeText(UsageViewUtil.getType(o)));
+        }
+        super.visitTargetableSection(o);
+      }
+
+      @Override
+      public void visitItemSection(@NotNull PsiItemSection o) {
+        if (((PodSectionItem)o).isTargetable()) {
+          super.visitItemSection(o);
+        }
+        else {
+          visitElement(o);
+        }
+      }
+
+      @Contract("null->null")
+      private @Nullable String cleanItemText(@Nullable String itemText) {
+        if (itemText == null) {
+          return null;
+        }
+        String trimmed = StringUtil.trimLeading(itemText.trim(), '*');
+        if (NumberUtils.isNumber(trimmed)) {
+          return null;
+        }
+        return trimItemText(trimmed);
+      }
+
+      @Override
+      public void visitPodFormatIndex(@NotNull PsiPodFormatIndex o) {
+        assert o instanceof PodFormatterX;
+        if (!((PodFormatterX)o).isMeaningful()) {
+          return;
+        }
+        String indexTitle = ((PodFormatterX)o).getTitleText();
+        if (StringUtil.isEmpty(indexTitle) || !distinctString.add(indexTitle)) {
+          return;
+        }
+
+        String escapedIndexTitle = escapeTitle(indexTitle);
+        if (!completionProcessor.matches(indexTitle) && !completionProcessor.matches(escapedIndexTitle)) {
+          return;
+        }
+
+        PsiElement indexTarget = ((PodFormatterX)o).getIndexTarget();
+        String targetPresentableText;
+        if (indexTarget instanceof PodFile) {
+          targetPresentableText = cleanItemText(((PodFile)indexTarget).getPodLinkText());
+        }
+        else if (indexTarget instanceof PodCompositeElement) {
+          targetPresentableText = cleanItemText(((PodCompositeElement)indexTarget).getPresentableText());
+        }
+        else {
+          LOG.warn("Unhandled index target: " + indexTarget);
+          return;
+        }
+        String tailText = null;
+        if (targetPresentableText != null) {
+          tailText = "(" + targetPresentableText + ")";
+        }
+        completionProcessor.process(
+          LookupElementBuilder.create(o, escapedIndexTitle)
+            .withLookupString(indexTitle)
+            .withPresentableText(indexTitle)
+            .withTailText(tailText)
+            .withTypeText(UsageViewUtil.getType(o))
+            .withIcon(PerlIcons.POD_FILE)
+        );
+      }
+    });
   }
 
   public static String trimItemText(String trimmed) {
