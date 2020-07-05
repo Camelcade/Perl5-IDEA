@@ -19,17 +19,28 @@ package com.perl5.lang.perl.parser.elementTypes;
 import com.intellij.lang.ASTNode;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
+import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.lexer.adapters.PerlSubLexerAdapter;
 import org.jetbrains.annotations.NotNull;
 
 
-public class PerlLazyQWStringElementType extends PerlLazyBlockElementType {
-  public PerlLazyQWStringElementType(String name) {
+public class PerlLazyStringElementType extends PerlLazyBlockElementType {
+  private final int myStartLexerState;
+
+  public PerlLazyStringElementType(@NotNull String name, int startLexerState) {
     super(name);
+    myStartLexerState = startLexerState;
+  }
+
+  public PerlLazyStringElementType(@NotNull String debugName,
+                                   @NotNull Class<? extends PsiElement> clazz,
+                                   int startLexerState) {
+    super(debugName, clazz);
+    myStartLexerState = startLexerState;
   }
 
   @Override
   protected @NotNull Lexer getLexer(@NotNull Project project, @NotNull ASTNode chameleon) {
-    return PerlSubLexerAdapter.forStringQW(project);
+    return new PerlSubLexerAdapter(project, myStartLexerState);
   }
 }

@@ -27,6 +27,17 @@ public class PerlParserTest extends PerlParserTestBase {
   }
 
   @Test
+  public void testQuoteLikeSingleQuotes() {
+    doTest();
+  }
+
+  @Test
+  public void testRegexpWithSingleQuotes() {
+    setSkipSpaces(false);
+    doTest();
+  }
+
+  @Test
   public void testRegexExtended() {
     setSkipSpaces(false);
     doTest();

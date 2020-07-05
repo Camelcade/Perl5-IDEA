@@ -1,0 +1,20 @@
+s{something \\ some \' $text}'$replacement \\ \t \'';
+s'something \\ some \' $text'$replacement \\ \t \'';
+s{something \\ some \' $text}'$replacement \\ \t \' super long text super long text super long text super long text super long text super long text super long text super long text super long text';
+s'something \\ some \' $text'$replacement \\ \t \' super long text super long text super long text super long text super long text super long text super long text super long text super long text';
+s{something \\ some \' $text super long text super long text super long text super long text super long text super long text super long text super long text super long text}'$replacement \\ \t \'';
+s'something \\ some \' $text super long text super long text super long text super long text super long text super long text super long text super long text super long text'$replacement \\ \t \'';
+
+s{something \\ some \' $text}'$replacement \\ \t \''x;
+s'something \\ some \' $text'$replacement \\ \t \''x;
+s{something \\ some \' $text}'$replacement \\ \t \' super long text super long text super long text super long text super long text super long text super long text super long text super long text'x;
+s'something \\ some \' $text'$replacement \\ \t \' super long text super long text super long text super long text super long text super long text super long text super long text super long text'x;
+s{something \\ some \' $text super long text super long text super long text super long text super long text super long text super long text super long text super long text}'$replacement \\ \t \''x;
+s'something \\ some \' $text super long text super long text super long text super long text super long text super long text super long text super long text super long text'$replacement \\ \t \''x;
+
+s{something \\ some \' $text}'$replacement \\ \t \''xx;
+s'something \\ some \' $text'$replacement \\ \t \''xx;
+s{something \\ some \' $text}'$replacement \\ \t \' super long text super long text super long text super long text super long text super long text super long text super long text super long text'xx;
+s'something \\ some \' $text'$replacement \\ \t \' super long text super long text super long text super long text super long text super long text super long text super long text super long text'xx;
+s{something \\ some \' $text super long text super long text super long text super long text super long text super long text super long text super long text super long text}'$replacement \\ \t \''xx;
+s'something \\ some \' $text super long text super long text super long text super long text super long text super long text super long text super long text super long text'$replacement \\ \t \''xx;

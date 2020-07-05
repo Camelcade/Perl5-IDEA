@@ -1,0 +1,13 @@
+my $text = 'interpolated';
+say 'qq';
+say qq'$text \' \" \` ';
+say qq"$text \' \" \` ";
+say qq`$text \' \" \` `;
+say 'q';
+say q'$text \' \" \` ';
+say q"$text \' \" \` ";
+say q`$text \' \" \` `;
+say 'qx';
+say qx'echo \' \' \" \" \`date\` here we are $USER';
+say qx"echo \' \' \" \" \`date\` here we are $text";
+say qx`echo \' \' \" \" \`date\` here we are $text`;

@@ -45,23 +45,23 @@ public class PerlLazyQStringElementType extends PerlLazyBlockElementType {
   protected @NotNull Lexer getLexer(@NotNull Project project, @NotNull ASTNode chameleon) {
     PerlSubLexerAdapter subLexerAdapter = PerlSubLexerAdapter.forStringSQ(project);
     ASTNode prevNode = chameleon.getTreePrev();
-    if (PsiUtilCore.getElementType(prevNode) == PerlElementTypesGenerated.QUOTE_SINGLE_OPEN) {
-      CharSequence nodeChars = prevNode.getChars();
-      if (nodeChars.length() != 1) {
-        LOG.error("Got " + nodeChars);
-      }
-      char openQuoteChar = nodeChars.charAt(0);
-
-      FlexLexer perlLexer = subLexerAdapter.getFlex();
-      LOG.assertTrue(perlLexer instanceof PerlLexer, "Got " + perlLexer);
-      return new DelegateLexer(subLexerAdapter) {
-        @Override
-        public void start(@NotNull CharSequence buffer, int startOffset, int endOffset, int initialState) {
-          super.start(buffer, startOffset, endOffset, initialState);
-          ((PerlLexer)perlLexer).setSingleOpenQuoteChar(openQuoteChar);
-        }
-      };
+    if (PsiUtilCore.getElementType(prevNode) != PerlElementTypesGenerated.QUOTE_SINGLE_OPEN) {
+      return subLexerAdapter;
     }
-    return subLexerAdapter;
+    CharSequence nodeChars = prevNode.getChars();
+    if (nodeChars.length() != 1) {
+      LOG.error("Got " + nodeChars);
+    }
+    char openQuoteChar = nodeChars.charAt(0);
+
+    FlexLexer perlLexer = subLexerAdapter.getFlex();
+    LOG.assertTrue(perlLexer instanceof PerlLexer, "Got " + perlLexer);
+    return new DelegateLexer(subLexerAdapter) {
+      @Override
+      public void start(@NotNull CharSequence buffer, int startOffset, int endOffset, int initialState) {
+        super.start(buffer, startOffset, endOffset, initialState);
+        ((PerlLexer)perlLexer).setSingleOpenQuoteChar(openQuoteChar);
+      }
+    };
   }
 }

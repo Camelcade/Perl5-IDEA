@@ -624,6 +624,9 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
       if (contentTokenType == LP_STRING_Q && !hasEscape) {
         contentTokenType = stringTokens.get(3);
       }
+      else if (contentTokenType == LP_STRING_QX && openQuote == '\'') {
+        contentTokenType = LP_STRING_QX_RESTRICTED;
+      }
       else if ((contentTokenType == LP_STRING_QQ || contentTokenType == LP_STRING_QX) && !hasEscape && !hasSigil) {
         contentTokenType = stringTokens.get(3);
       }
@@ -942,7 +945,8 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
           int secondBlockEndOffset = getRegexBlockEndOffset(currentOffset, secondBlockOpeningQuote, true);
 
           if (secondBlockEndOffset > currentOffset) {
-            secondBlockToken = new CustomToken(currentOffset, secondBlockEndOffset, LP_STRING_QQ);
+            secondBlockToken = new CustomToken(
+              currentOffset, secondBlockEndOffset, secondBlockOpeningQuote == '\'' ? LP_STRING_QQ_RESTRICTED : LP_STRING_QQ);
             pushPreparsedToken(secondBlockToken);
             currentOffset = secondBlockEndOffset;
           }

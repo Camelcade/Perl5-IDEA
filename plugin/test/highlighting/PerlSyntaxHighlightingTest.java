@@ -28,6 +28,16 @@ public class PerlSyntaxHighlightingTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testQuoteLikeSingleQuotes() {
+    doTest();
+  }
+
+  @Test
+  public void testRegexpWithSingleQuotes() {
+    doTest();
+  }
+
+  @Test
   public void testSpecialCharsInReplacements() {doTest();}
 
   @Test

@@ -183,8 +183,8 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 
 %xstate STRING_Q, STRING_Q_CHAR, STRING_Q_ESC, STRING_Q_CONTINUE
 %xstate STRING_LIST
-%xstate STRING_QQ, STRING_QQ_CHAR,
-%xstate STRING_QX, STRING_QX_CHAR,
+%xstate STRING_QQ, STRING_QQ_CHAR, STRING_QQ_RESTRICTED, STRING_QQ_RESTRICTED_CHAR
+%xstate STRING_QX, STRING_QX_CHAR, STRING_QX_RESTRICTED, STRING_QX_RESTRICTED_CHAR
 
 %xstate MATCH_REGEX, MATCH_REGEX_X, MATCH_REGEX_XX
 %xstate REGEX_CHARCLASS_X, REGEX_CHARCLASS_XX
@@ -634,6 +634,8 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 
 <STRING_QQ_CHAR> [^]             {yybegin(STRING_QQ);return STRING_CONTENT_QQ;}
 <STRING_QX_CHAR> [^]             {yybegin(STRING_QX);return STRING_CONTENT_XQ;}
+<STRING_QQ_RESTRICTED_CHAR> [^]             {yybegin(STRING_QQ_RESTRICTED);return STRING_CONTENT_QQ;}
+<STRING_QX_RESTRICTED_CHAR> [^]             {yybegin(STRING_QX_RESTRICTED);return STRING_CONTENT_XQ;}
 
 <STRING_QQ>{
         "\\"              {yybegin(STRING_QQ_CHAR);return STRING_SPECIAL_ESCAPE_CHAR;}
@@ -647,6 +649,18 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 	// chars with special treatments
 	[^\$\@\\]+					{return STRING_CONTENT_XQ;}
 	[^]						{return STRING_CONTENT_XQ;}
+}
+
+// single quoted analogs of strings, same escaping rules as in q string with single quote quote
+<STRING_QQ_RESTRICTED>{
+  [^\\]+          {return STRING_CONTENT_QQ;}
+  "\\" / ['\\]    {yybegin(STRING_QQ_RESTRICTED_CHAR);return STRING_SPECIAL_ESCAPE_CHAR;}
+  "\\"            {return STRING_CONTENT_QQ;}
+}
+<STRING_QX_RESTRICTED>{
+  [^\\]+          {return STRING_CONTENT_XQ;}
+  "\\" / ['\\]    {yybegin(STRING_QX_RESTRICTED_CHAR);return STRING_SPECIAL_ESCAPE_CHAR;}
+  "\\"            {return STRING_CONTENT_XQ;}
 }
 
 <OCT_SUBSTITUTION_AMBIGUOUS>{
