@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 {
+  parserImports=[ "static com.intellij.lang.WhitespacesBinders.*" ]
   elementTypeHolderClass="com.perl5.lang.perl.lexer.PerlElementTypesGenerated"
   parserClass="com.perl5.lang.perl.parser.PerlParserGenerated"
   extends="com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl"
@@ -1028,11 +1029,9 @@ private regex_replace_code ::= {'re/' | 'r}' 're{' } [regex_code]
 private regex_code ::= <<consumeTokens 'LP_CODE_BLOCK'>> | <<block file_item*>>
 
 perl_regex_modifiers ::= '/m' +
-perl_regex ::= perl_regex_item *
+perl_regex ::= perl_regex_item * {hooks=[rightBinder="GREEDY_RIGHT_BINDER" leftBinder="GREEDY_LEFT_BINDER"]}
 private perl_regex_item ::=
 	'regex' |
-//	'\w'	|
-//	custom_char_class |
         block_compound |
 	interpolated_constructs
 

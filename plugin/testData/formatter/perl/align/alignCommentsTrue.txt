@@ -40,13 +40,13 @@ sub subname {
 }
 
 $input_line =~ m/\G(\s*\([^\)\(\}\{\,]*\))? # PROTO
-        (\s*:)?                             # ATTRS leading ':'
-/gcx;
+                        (\s*:)? # ATTRS leading ':'
+                        /gcx;
 
 $input_line =~ m/\G\s*
-        ((?:\w*(?:'|::))*) # package - something that ends in :: or '
-        (\w+)              # NAME    - required
-/gcx;
+                        ((?:\w*(?:'|::))*) # package - something that ends in :: or '
+                        (\w+) # NAME    - required
+                        /gcx;
 
 if ($tok =~ /^[\$A-Za-z_]/) {
     # alphanumeric ..
@@ -56,7 +56,7 @@ if ($tok =~ /^[\$A-Za-z_]/) {
 }
 
 $input_line =~ m/\G\s*
-        (asdfasdf(?:\w*(? # something else
-        :'|::))*)         # package - something that ends in :: or '
-        (\w+)             # NAME    - required
-/gcx;
+    (asdfasdf(?:\w*(? # something else
+    :'|::))*)         # package - something that ends in :: or '
+    (\w+) # NAME    - required
+    /gcx;

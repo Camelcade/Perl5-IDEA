@@ -42,6 +42,8 @@ import static java.util.Objects.requireNonNull;
 
 
 public abstract class PerlParserTestBase extends PerlLightTestCaseBase {
+  private boolean mySkipSpaces = true;
+
   private static final List<String> REPLACES = Arrays.asList(
     EditorTestUtil.CARET_TAG,
     EditorTestUtil.SELECTION_START_TAG,
@@ -166,7 +168,11 @@ public abstract class PerlParserTestBase extends PerlLightTestCaseBase {
   }
 
   protected boolean skipSpaces() {
-    return true;
+    return mySkipSpaces;
+  }
+
+  protected void setSkipSpaces(boolean skipSpaces) {
+    mySkipSpaces = skipSpaces;
   }
 
   protected String getPerlTidy() {

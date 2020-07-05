@@ -1,0 +1,53 @@
+my $re_uint16   = qr/
+    [0-5]\d\d\d\d
+                # some comment
+|   6(?:[0-4]\d\d\d
+     |5(?:[0-4]\d\d\d
+       |5(?:[012]\d
+         |3[0-5]
+         )
+       )
+     )
+|   \d\d\d\d
+/x;
+
+my $re_uint16   = qr/
+       |5(?:[012]\d
+                # some comment
+         |3[0-5]
+         )
+       )
+     )
+|   \d\d\d\d
+/x;
+
+my $re_uint16   = qr/
+    [0-5]\d\d\d\d
+                # some comment
+|   6(?:[0-4]\d\d\d
+     |5(?:[0-4]\d\d\d
+       ${
+if($something > $otherthing)
+{
+do_the_thing();
+}
+       }
+       |5(?:[012]\d
+         |3[0-5]
+         )
+       )
+     )
+|   \d\d\d\d
+/x;
+
+my $re_uint16   = qr/
+     |5
+        # some comment
+       ${
+if($something > $otherthing)
+{
+do_the_thing();
+}
+}
+  |
+/x;

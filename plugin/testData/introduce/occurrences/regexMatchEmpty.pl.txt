@@ -17,7 +17,7 @@
 <occurrence>m / /xx</occurrence>;
 <occurrence>qr/ /xx</occurrence>;
 s/<occurrence></occurrence>/asdfo/;
-s/   <occurrence></occurrence>/asdfo/x;
-s/
+s/<occurrence>   </occurrence>/asdfo/x;
+s/<occurrence>
  #comment
-<occurrence></occurrence>/asdfo/xx;
+</occurrence>/asdfo/xx;

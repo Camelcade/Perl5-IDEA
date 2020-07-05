@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.formatter.blocks;
 import com.intellij.formatting.*;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
+import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.formatter.FormatterUtil;
 import com.intellij.psi.formatter.common.AbstractBlock;
@@ -37,6 +38,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static com.perl5.lang.perl.lexer.PerlTokenSets.HEREDOC_BODIES_TOKENSET;
+import static com.perl5.lang.perl.lexer.PerlTokenSets.MATCH_REGEXP_CONTAINERS;
 
 
 public class PerlFormattingBlock extends AbstractBlock implements PerlElementTypes, PerlAstBlock {
@@ -83,7 +85,11 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
   }
 
   protected @NotNull List<Block> buildSubBlocks() {
-    final List<Block> blocks = new ArrayList<>();
+    if (MATCH_REGEXP_CONTAINERS.contains(getElementType())) {
+      return buildRegexpSubBlocks();
+    }
+
+    List<Block> blocks = new ArrayList<>();
 
     for (ASTNode child = myNode.getFirstChildNode(); child != null; child = child.getTreeNext()) {
       if (shouldCreateSubBlockFor(child)) {
@@ -91,6 +97,40 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
       }
     }
     return processSubBlocks(blocks);
+  }
+
+  protected @NotNull List<Block> buildRegexpSubBlocks() {
+    ASTNode run = myNode.getFirstChildNode();
+    if (run == null) {
+      return Collections.emptyList();
+    }
+
+    List<Block> result = new ArrayList<>();
+    int startOffset = -1;
+    while (run != null) {
+      IElementType elementType = PsiUtilCore.getElementType(run);
+      if (elementType == TokenType.WHITE_SPACE || elementType == REGEX_TOKEN || elementType == COMMENT_LINE) {
+        if (startOffset < 0) {
+          startOffset = run.getStartOffset();
+        }
+      }
+      else {
+        if (startOffset >= 0) {
+          result.add(new PerlTextRangeBasedBlock(TextRange.create(startOffset, run.getStartOffset())));
+          startOffset = -1;
+        }
+        if (shouldCreateSubBlockFor(run)) {
+          result.add(createBlock(run));
+        }
+      }
+      run = run.getTreeNext();
+    }
+
+    if (startOffset >= 0) {
+      result.add(new PerlTextRangeBasedBlock(TextRange.create(startOffset, myNode.getStartOffset() + myNode.getTextLength())));
+    }
+
+    return result;
   }
 
   private @NotNull List<Block> processSubBlocks(@NotNull List<Block> rawBlocks) {

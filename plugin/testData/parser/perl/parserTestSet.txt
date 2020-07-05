@@ -1195,7 +1195,7 @@ Perl5
                         PsiComment(Perl5: COMMENT_LINE)('# empty')
                         PsiElement(Perl5: regex)(')')
                         PsiElement(Perl5: regex)('(?:,?\s+|\s*\n)?')
-                      PsiComment(Perl5: COMMENT_LINE)('# separator \(5.8.x reports did not have a ','')
+                        PsiComment(Perl5: COMMENT_LINE)('# separator \(5.8.x reports did not have a ','')
                     PsiElement(Perl5: r})('}')
                     PsiPerlPerlRegexModifiersImpl(Perl5: PERL_REGEX_MODIFIERS)
                       PsiElement(Perl5: /m)('g')

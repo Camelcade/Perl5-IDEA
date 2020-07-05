@@ -2768,15 +2768,15 @@ sub check_vms_filename {
     $base =~ s/;-?\d*$//
 
             # remove explicit . version ie two dots in filename NB ^ escapes a dot
-            or $base =~ s/( # begin capture $1
-            (?:^|[^^])\.    # match a dot not preceded by a caret
-            (?:             # followed by nothing
-            |               # or
-            .*[^^]          # anything ending in a non caret
-            )
-            )        # end capture $1
-            \.-?\d*$ # match . version number
-            /$1/x;
+            or $base =~ s/(          # begin capture $1
+                  (?:^|[^^])\. # match a dot not preceded by a caret
+                  (?:          # followed by nothing
+                    |          # or
+                    .*[^^]     # anything ending in a non caret
+                  )
+                )              # end capture $1
+                \.-?\d*$       # match . version number
+              /$1/x;
 
     # normalise filename, if there are no unescaped dots then append one
     $base .= '.' unless $base =~ /(?:^|[^^])\./;
@@ -9351,9 +9351,9 @@ sub set_white_space_flag {
                 $jmax == 0
                         && $$rtoken_type[0] eq '#'
                         && $input_line =~ /^\#   \s*
-                        line \s+ (\d+)   \s*
-                        (?:\s("?)([^"]+)\2)? \s*
-                        $/x
+                               line \s+ (\d+)   \s*
+                               (?:\s("?)([^"]+)\2)? \s*
+                               $/x
         ) {
             $is_static_block_comment = 1;
             $is_static_block_comment_without_leading_space = 1;
@@ -28571,9 +28571,9 @@ sub scan_identifier_do {
         # Look for the sub NAME
         if (
                 $input_line =~ m/\G\s*
-                        ((?:\w*(?:'|::))*) # package - something that ends in :: or '
-                        (\w+)              # NAME    - required
-                /gcx
+        ((?:\w*(?:'|::))*)  # package - something that ends in :: or '
+        (\w+)               # NAME    - required
+        /gcx
         ) {
             $match = 1;
             $subname = $2;
@@ -28600,9 +28600,9 @@ sub scan_identifier_do {
         # particular, we stop if we see any nested parens, braces, or commas.
         my $saw_opening_paren = $input_line =~ /\G\s*\(/;
         if (
-                $input_line =~ m/\G(\s*\([^\)\(\}\{\,]*\))? # PROTO
-                        (\s*:)?                             # ATTRS leading ':'
-                /gcx
+                $input_line =~ m/\G(\s*\([^\)\(\}\{\,]*\))?  # PROTO
+            (\s*:)?                              # ATTRS leading ':'
+            /gcx
                         && ($1 || $2)
         ) {
             $proto = $1;

@@ -362,11 +362,17 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
     LP_REGEX_XX
   );
 
+  TokenSet MATCH_REGEXP_CONTAINERS = TokenSet.create(
+    LP_REGEX,
+    LP_REGEX_X,
+    LP_REGEX_XX,
+    PERL_REGEX
+  );
+
   TokenSet LAZY_PARSABLE_STRINGS = TokenSet.create(
     LP_STRING_Q,
     LP_STRING_QQ,
     LP_STRING_QX
-
   );
 
   TokenSet HEREDOC_ENDS = TokenSet.create(HEREDOC_END, HEREDOC_END_INDENTABLE);

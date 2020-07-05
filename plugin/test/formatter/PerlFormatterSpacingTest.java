@@ -27,6 +27,9 @@ public class PerlFormatterSpacingTest extends PerlFormatterTestCase {
   }
 
   @Test
+  public void testRegexExtended() {doFormatTest();}
+
+  @Test
   public void testStringBitwiseOperators() {doFormatTest();}
 
   @Test
