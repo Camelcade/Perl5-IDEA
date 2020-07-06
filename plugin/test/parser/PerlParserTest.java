@@ -27,6 +27,16 @@ public class PerlParserTest extends PerlParserTestBase {
   }
 
   @Test
+  public void testTrBlocks() {
+    doTest();
+  }
+
+  @Test
+  public void testTrBlocksLazy() {
+    doTest();
+  }
+
+  @Test
   public void testQuoteLikeSingleQuotes() {
     doTest();
   }

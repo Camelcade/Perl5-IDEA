@@ -28,6 +28,16 @@ public class PerlSyntaxHighlightingTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testTrBlocks() {
+    doTest();
+  }
+
+  @Test
+  public void testTrBlocksLazy() {
+    doTest();
+  }
+
+  @Test
   public void testQuoteLikeSingleQuotes() {
     doTest();
   }

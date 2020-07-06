@@ -185,6 +185,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 %xstate STRING_LIST
 %xstate STRING_QQ, STRING_QQ_CHAR, STRING_QQ_RESTRICTED, STRING_QQ_RESTRICTED_CHAR
 %xstate STRING_QX, STRING_QX_CHAR, STRING_QX_RESTRICTED, STRING_QX_RESTRICTED_CHAR
+%xstate STRING_TR_BEGIN, STRING_TR, STRING_TR_NOT_MINUS, STRING_TR_CHAR
 
 %xstate MATCH_REGEX, MATCH_REGEX_X, MATCH_REGEX_XX
 %xstate REGEX_CHARCLASS_X, REGEX_CHARCLASS_XX
@@ -606,7 +607,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 	"$" /  {NON_SPACE_AHEAD}   	{pushState();yybegin(INTERPOLATED_VARIABLE_SUFFIX);return startUnbracedVariable(SIGIL_SCALAR); }
 }
 
-<STRING_QQ,STRING_QX>{
+<STRING_QQ,STRING_QX,STRING_TR,STRING_TR_NOT_MINUS>{
         "\\t"     {return STRING_SPECIAL_TAB;}
         "\\n"     {return STRING_SPECIAL_NEWLINE;}
         "\\r"     {return STRING_SPECIAL_RETURN;}
@@ -629,9 +630,13 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
         "\\x"     {pushState();yybegin(HEX_SUBSTITUTION);return STRING_SPECIAL_HEX;}
         "\\o"     {pushState();yybegin(OCT_SUBSTITUTION);return STRING_SPECIAL_OCT;}
         "\\0"     {pushState();yybegin(OCT_SUBSTITUTION_AMBIGUOUS);return STRING_SPECIAL_OCT_AMBIGUOUS;}
+}
+
+<STRING_QQ,STRING_QX>{
         "\\"[1-9]\d*   {return STRING_SPECIAL_BACKREF;}
 }
 
+<STRING_TR_CHAR> [^]             {yybegin(STRING_TR);return STRING_CONTENT_QQ;}
 <STRING_QQ_CHAR> [^]             {yybegin(STRING_QQ);return STRING_CONTENT_QQ;}
 <STRING_QX_CHAR> [^]             {yybegin(STRING_QX);return STRING_CONTENT_XQ;}
 <STRING_QQ_RESTRICTED_CHAR> [^]             {yybegin(STRING_QQ_RESTRICTED);return STRING_CONTENT_QQ;}
@@ -661,6 +666,20 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
   [^\\]+          {return STRING_CONTENT_XQ;}
   "\\" / ['\\]    {yybegin(STRING_QX_RESTRICTED_CHAR);return STRING_SPECIAL_ESCAPE_CHAR;}
   "\\"            {return STRING_CONTENT_XQ;}
+}
+
+<STRING_TR_BEGIN>{
+  "-"             {yybegin(STRING_TR);return STRING_CONTENT_QQ;}
+  [^]             {yypushback(1);yybegin(STRING_TR);}
+}
+
+<STRING_TR>{
+  "-" / [^]         {yybegin(STRING_TR_NOT_MINUS);return STRING_SPECIAL_RANGE;}
+  <STRING_TR_NOT_MINUS>{
+    [^\\\-]+          {return STRING_CONTENT_QQ;}
+    "-"               {return STRING_CONTENT_QQ;}
+    "\\"              {yybegin(STRING_TR_CHAR);return STRING_SPECIAL_ESCAPE_CHAR;}
+  }
 }
 
 <OCT_SUBSTITUTION_AMBIGUOUS>{

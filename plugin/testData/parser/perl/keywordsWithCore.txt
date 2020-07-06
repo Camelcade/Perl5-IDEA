@@ -243,14 +243,22 @@ Perl5
         PsiPerlTrRegexImpl(Perl5: TR_REGEX)
           PsiElement(Perl5: tr)('tr')
           PsiElement(Perl5: r{)('/')
+          PsiPerlTrSearchlistImpl(Perl5: TR_SEARCHLIST)
+            <empty list>
           PsiElement(Perl5: r/)('/')
+          PsiPerlTrReplacementlistImpl(Perl5: TR_REPLACEMENTLIST)
+            <empty list>
           PsiElement(Perl5: r})('/')
         PsiElement(Perl5: ;)(';')
       PsiPerlStatementImpl(Perl5: STATEMENT)
         PsiPerlTrRegexImpl(Perl5: TR_REGEX)
           PsiElement(Perl5: y)('y')
           PsiElement(Perl5: r{)('/')
+          PsiPerlTrSearchlistImpl(Perl5: TR_SEARCHLIST)
+            <empty list>
           PsiElement(Perl5: r/)('/')
+          PsiPerlTrReplacementlistImpl(Perl5: TR_REPLACEMENTLIST)
+            <empty list>
           PsiElement(Perl5: r})('/')
         PsiElement(Perl5: ;)(';')
       PsiPerlStatementImpl(Perl5: STATEMENT)
@@ -594,14 +602,22 @@ Perl5
         PsiPerlTrRegexImpl(Perl5: TR_REGEX)
           PsiElement(Perl5: tr)('CORE::tr')
           PsiElement(Perl5: r{)('/')
+          PsiPerlTrSearchlistImpl(Perl5: TR_SEARCHLIST)
+            <empty list>
           PsiElement(Perl5: r/)('/')
+          PsiPerlTrReplacementlistImpl(Perl5: TR_REPLACEMENTLIST)
+            <empty list>
           PsiElement(Perl5: r})('/')
         PsiElement(Perl5: ;)(';')
       PsiPerlStatementImpl(Perl5: STATEMENT)
         PsiPerlTrRegexImpl(Perl5: TR_REGEX)
           PsiElement(Perl5: y)('CORE::y')
           PsiElement(Perl5: r{)('/')
+          PsiPerlTrSearchlistImpl(Perl5: TR_SEARCHLIST)
+            <empty list>
           PsiElement(Perl5: r/)('/')
+          PsiPerlTrReplacementlistImpl(Perl5: TR_REPLACEMENTLIST)
+            <empty list>
           PsiElement(Perl5: r})('/')
         PsiElement(Perl5: ;)(';')
       PsiPerlStatementImpl(Perl5: STATEMENT)

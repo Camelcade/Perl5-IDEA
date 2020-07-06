@@ -724,7 +724,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
 
       if (!isEscaped && quotesLevel == 0 && currentChar == closeQuote) {
         if (currentOffset > blockStartOffset) {
-          pushPreparsedToken(blockStartOffset, currentOffset, STRING_CONTENT);
+          pushPreparsedToken(blockStartOffset, currentOffset, openQuote == '\'' ? LP_STRING_QQ_RESTRICTED : LP_STRING_TR);
         }
         break;
       }

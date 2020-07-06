@@ -437,7 +437,8 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
     STRING_SPECIAL_FORMFEED,
     STRING_SPECIAL_BACKSPACE,
     STRING_SPECIAL_ALARM,
-    STRING_SPECIAL_ESCAPE
+    STRING_SPECIAL_ESCAPE,
+    STRING_SPECIAL_RANGE
   );
 
   TokenSet STRING_CHAR_OPERATORS = TokenSet.create(

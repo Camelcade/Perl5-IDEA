@@ -113,6 +113,7 @@
 
     STRING_SPECIAL_LEFT_BRACE='"{'
     STRING_SPECIAL_RIGHT_BRACE='}"'
+    STRING_SPECIAL_RANGE='"-'
 
     STRING_SPECIAL_LOWERCASE_START='\L'
     STRING_SPECIAL_UPPERCASE_START='\U'
@@ -1045,9 +1046,10 @@ private perl_regex_item ::=
 
 tr_regex ::=  ('tr'|'y') tr_search tr_replacement [tr_modifiers] {pin=1}
 private tr_search ::= 'r{' [tr_searchlist] {pin=1}
-tr_searchlist ::= STRING_CONTENT
+tr_searchlist ::= [tr_block_content]
+private tr_block_content ::= {qq_string_element | '"-'}+ | <<consumeTokens 'LP_STRING_TR'>> | <<consumeTokens 'LP_STRING_QQ_RESTRICTED'>>
 private tr_replacement ::= {'r/' | 'r}' 'r{'} [tr_replacementlist] 'r}' {pin=1}
-tr_replacementlist ::= STRING_CONTENT
+tr_replacementlist ::= [tr_block_content]
 tr_modifiers ::= '/m' +
 
 ////////////////////////// end of regular expressions //////////////////////////////////////////////////////////////////
@@ -1372,6 +1374,7 @@ annotation_noinspection ::=  '#@noinspection' string_bare {pin=1}
 /******************************************* End of annotations *******************************************************/
 
 /******************************************* Lazy parsable elements *******************************************************/
+lp_string_tr ::= tr_block_content {extraRoot=true}
 lp_string_qq ::= qq_string_content {extraRoot=true}
 lp_string_qq_restricted ::= qq_string_content {extraRoot=true}
 lp_string_q ::= sq_string_content {extraRoot=true}
