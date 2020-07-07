@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,6 +28,7 @@ public class PerlFoldingSettings {
   public boolean COLLAPSE_HEREDOCS = false;
   public boolean COLLAPSE_TEMPLATES = false;
   public boolean COLLAPSE_QW = false;
+  public boolean COLLAPSE_CHAR_SUBSTITUTIONS = true;
 
   public static PerlFoldingSettings getInstance() {
     return ServiceManager.getService(PerlFoldingSettings.class);

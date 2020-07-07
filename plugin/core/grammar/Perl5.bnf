@@ -468,6 +468,12 @@
 
     extends("heredoc_opener|tag_scalar")=expr
 
+    mixin("unicode_char")="com.perl5.lang.perl.psi.mixins.PerlUnicodeSubstitutionMixin"
+    mixin("hex_char")="com.perl5.lang.perl.psi.mixins.PerlHexSubstitutionMixin"
+    mixin("oct_char")="com.perl5.lang.perl.psi.mixins.PerlOctSubstitutionMixin"
+    mixin("esc_char")="com.perl5.lang.perl.psi.mixins.PerlEscSubstitutionMixin"
+    implements("hex_char|oct_char|unicode_char|esc_char")="com.perl5.lang.perl.psi.PerlCharSubstitution"
+
     extends("string_sq|string_dq|string_xq|string_bare")=expr
     implements("string_sq|string_dq|string_xq|string_bare")="com.perl5.lang.perl.psi.PerlString"
     mixin("string_sq|string_dq|string_xq")="com.perl5.lang.perl.psi.mixins.PerlStringMixin"

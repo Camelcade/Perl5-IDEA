@@ -41,6 +41,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static com.perl5.lang.perl.lexer.PerlTokenSets.HEREDOC_BODIES_TOKENSET;
@@ -345,6 +346,39 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
         addDescriptorFor(myDescriptors, myDocument, element, 0, 0, 0, null, false);
       }
       super.visitElement(element);
+    }
+
+    @Override
+    public void visitHexChar(@NotNull PsiPerlHexChar o) {
+      processCharSubstitution(o);
+      super.visitHexChar(o);
+    }
+
+    @Override
+    public void visitEscChar(@NotNull PsiPerlEscChar o) {
+      processCharSubstitution(o);
+      super.visitEscChar(o);
+    }
+
+    @Override
+    public void visitOctChar(@NotNull PsiPerlOctChar o) {
+      processCharSubstitution(o);
+      super.visitOctChar(o);
+    }
+
+    @Override
+    public void visitUnicodeChar(@NotNull PsiPerlUnicodeChar o) {
+      processCharSubstitution(o);
+      super.visitUnicodeChar(o);
+    }
+
+    private void processCharSubstitution(@NotNull PerlCharSubstitution o) {
+      String chars = o.getNonIgnorableChars();
+      if (!chars.isEmpty()) {
+        myDescriptors.add(new FoldingDescriptor(
+          o.getNode(), o.getTextRange(), null, chars,
+          PerlFoldingSettings.getInstance().COLLAPSE_CHAR_SUBSTITUTIONS, Collections.emptySet()));
+      }
     }
 
     @Override

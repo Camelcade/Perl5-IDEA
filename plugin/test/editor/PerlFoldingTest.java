@@ -30,25 +30,32 @@ public class PerlFoldingTest extends PerlLightTestCase {
   }
 
   @Test
-  public void testFunctionParametersMethodModifiers() {doTest(PerlFileTypeScript.INSTANCE);}
+  public void testCharSubstitutions() {doTest();}
+
+  @Test
+  public void testFunctionParametersMethodModifiers() {doTest();}
 
   @Test
   public void testUseNoSequence() {
-    doTest(PerlFileTypeScript.INSTANCE);
+    doTest();
   }
 
   @Test
   public void testUseNoArguments() {
-    doTest(PerlFileTypeScript.INSTANCE);
+    doTest();
   }
 
   @Test
   public void testPerl() {
-    doTest(PerlFileTypeScript.INSTANCE);
+    doTest();
   }
 
   @Test
   public void testPodInPerl() {
+    doTest();
+  }
+
+  private void doTest() {
     doTest(PerlFileTypeScript.INSTANCE);
   }
 

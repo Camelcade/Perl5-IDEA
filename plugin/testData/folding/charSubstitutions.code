@@ -1,0 +1,23 @@
+"<fold text='☺'>\x{263A}</fold> <fold text='`'>\x60</fold> <fold text='☺'>\N{U+263A}</fold> <fold text='🚴'>\N{BICYCLIST}</fold> <fold text='o'>\c/</fold> <fold text='ʜ'>\o{1234}</fold> <fold text='`'>\c </fold> \x \x0 \0";
+`<fold text='☺'>\x{263A}</fold> <fold text='`'>\x60</fold> <fold text='☺'>\N{U+263A}</fold> <fold text='🚴'>\N{BICYCLIST}</fold> <fold text='o'>\c/</fold> <fold text='ʜ'>\o{1234}</fold> <fold text='`'>\c </fold> \x \x0 \0`;
+'\x{263A} \x60 \N{U+263A} \N{BICYCLIST} \c/ \o{1234} \c  \x \x0 \0';
+
+<<"EOM";
+<fold text='☺'>\x{263A}</fold> <fold text='`'>\x60</fold> <fold text='☺'>\N{U+263A}</fold> <fold text='🚴'>\N{BICYCLIST}</fold> <fold text='o'>\c/</fold> <fold text='ʜ'>\o{1234}</fold> <fold text='`'>\c </fold> \x \x0 \0
+EOM
+
+<<EOM;
+<fold text='☺'>\x{263A}</fold> <fold text='`'>\x60</fold> <fold text='☺'>\N{U+263A}</fold> <fold text='🚴'>\N{BICYCLIST}</fold> <fold text='o'>\c/</fold> <fold text='ʜ'>\o{1234}</fold> <fold text='`'>\c </fold> \x \x0 \0
+EOM
+
+<<`EOM`;
+<fold text='☺'>\x{263A}</fold> <fold text='`'>\x60</fold> <fold text='☺'>\N{U+263A}</fold> <fold text='🚴'>\N{BICYCLIST}</fold> <fold text='o'>\c/</fold> <fold text='ʜ'>\o{1234}</fold> <fold text='`'>\c </fold> \x \x0 \0
+EOM
+
+<<'EOM';
+\x{263A} \x60 \N{U+263A} \N{BICYCLIST} \c/ \o{1234} \c  \x \x0 \0
+EOM
+
+tr{<fold text='☺'>\x{263A}</fold> <fold text='`'>\x60</fold> <fold text='☺'>\N{U+263A}</fold> <fold text='🚴'>\N{BICYCLIST}</fold>}{<fold text='o'>\c/</fold> <fold text='ʜ'>\o{1234}</fold> <fold text='`'>\c </fold> \x \x0 \0};
+y{<fold text='☺'>\x{263A}</fold> <fold text='`'>\x60</fold> <fold text='☺'>\N{U+263A}</fold> <fold text='🚴'>\N{BICYCLIST}</fold>}{<fold text='o'>\c/</fold> <fold text='ʜ'>\o{1234}</fold> <fold text='`'>\c </fold> \x \x0 \0};
+s{\x{263A} \x60 \N{U+263A} \N{BICYCLIST}}{<fold text='o'>\c/</fold> <fold text='ʜ'>\o{1234}</fold> <fold text='`'>\c </fold> \x \x0 \0};

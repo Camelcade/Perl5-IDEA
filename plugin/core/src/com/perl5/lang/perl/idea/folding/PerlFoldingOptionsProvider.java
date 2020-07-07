@@ -43,5 +43,7 @@ public class PerlFoldingOptionsProvider extends BeanConfigurable<PerlFoldingSett
              () -> foldingSettings.COLLAPSE_TEMPLATES, value -> foldingSettings.COLLAPSE_TEMPLATES = value);
     checkBox(PerlBundle.message("perl.options.fold.qw"),
              () -> foldingSettings.COLLAPSE_QW, value -> foldingSettings.COLLAPSE_QW = value);
+    checkBox(PerlBundle.message("perl.options.fold.char.substitutions"),
+             () -> foldingSettings.COLLAPSE_CHAR_SUBSTITUTIONS, value -> foldingSettings.COLLAPSE_CHAR_SUBSTITUTIONS = value);
   }
 }
