@@ -145,6 +145,8 @@ public class PerlElementTypeFactory {
         return new PerlElementTypeEx(name, PsiPerlHexCharImpl.class);
       case "OCT_CHAR":
         return new PerlElementTypeEx(name, PsiPerlOctCharImpl.class);
+      case "ESC_CHAR":
+        return new PerlElementTypeEx(name, PsiPerlEscCharImpl.class);
       case "ANON_HASH":
         return new PerlElementTypeEx(name, PsiPerlAnonHashImpl.class);
       case "ARRAY_SLICE":

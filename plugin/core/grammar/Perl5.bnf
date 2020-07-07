@@ -1241,12 +1241,12 @@ private quoted_qq_string ::= QUOTE_DOUBLE_OPEN [qq_string_content_with_lp] QUOTE
 private qq_string_content_with_lp ::= qq_string_content | <<consumeTokens 'LP_STRING_QQ'>> | <<consumeTokens 'LP_STRING_QQ_RESTRICTED'>>
 private qq_string_content ::= qq_string_element+
 private qq_string_element ::= STRING_CONTENT_QQ | special_constructs | interpolated_constructs
-private special_constructs ::= '\t'|'\n'|'\r'|'\f'|'\b'|'\a'|'\e'|'\l'|'\\u'|'\c*'| '\1' |
+private special_constructs ::= '\t'|'\n'|'\r'|'\f'|'\b'|'\a'|'\e'|'\l'|'\\u'| '\1' |
                                '\\"'|
                                '\L'|'\U'|'\F'|'\Q'|'\E'|
-                               unicode_char |
-                               hex_char |
-                               oct_char
+                               unicode_char | hex_char | oct_char | esc_char
+
+esc_char ::= '\c*'
 
 unicode_char ::= '\N' unicode_char_body {pin=1}
 private unicode_char_body ::= '"{' unicode_char_body_content '}"' {pin=1}
