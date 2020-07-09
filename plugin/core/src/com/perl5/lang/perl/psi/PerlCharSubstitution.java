@@ -26,4 +26,9 @@ public interface PerlCharSubstitution extends PsiElement {
    */
   @NotNull
   String getNonIgnorableChars();
+
+  /**
+   * @return char code point for this substitution
+   */
+  int getCodePoint();
 }

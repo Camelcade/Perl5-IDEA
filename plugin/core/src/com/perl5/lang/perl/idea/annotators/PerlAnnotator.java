@@ -21,11 +21,13 @@ import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.HighlightSeverity;
 import com.intellij.openapi.editor.colors.CodeInsightColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.extensions.packageprocessor.impl.ConstantProcessor;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.psi.*;
@@ -86,6 +88,24 @@ public class PerlAnnotator extends PerlBaseAnnotator {
         else if (namespaceElement.isBuiltin()) {
           createInfoAnnotation(holder, namespaceElement, null, PerlSyntaxHighlighter.PERL_PACKAGE_CORE);
         }
+      }
+    }
+    else if (element instanceof PerlCharSubstitution) {
+      int codePoint = ((PerlCharSubstitution)element).getCodePoint();
+      if (codePoint >= 0) {
+        StringBuilder sb = new StringBuilder("<ul>");
+        String chars = ((PerlCharSubstitution)element).getNonIgnorableChars();
+        if (StringUtil.isEmptyOrSpaces(chars)) {
+          chars = PerlBundle.message("perl.annotator.char.non.printable");
+        }
+
+        sb.append("<li>").append(PerlBundle.message("perl.annotator.char.character")).append(": ")
+          .append(chars).append(" (").append(Character.getName(codePoint)).append(")").append("</li>");
+        sb.append("<li>").append(PerlBundle.message("perl.annotator.char.codepoint")).append(": ")
+          .append("0x").append(Integer.toHexString(codePoint).toUpperCase()).append(" (").append(codePoint).append(")").append("</li>");
+        sb.append("</ul>");
+
+        holder.newAnnotation(HighlightSeverity.INFORMATION, chars).range(element).tooltip(sb.toString()).create();
       }
     }
     else if (element instanceof PerlPolyNamedElement) {

@@ -29,7 +29,7 @@ public class PerlUnicodeSubstitutionMixin extends PerlNumericCharSubstitution {
   }
 
   @Override
-  protected int getCharCode() {
+  public int getCodePoint() {
     PsiElement charCodeElement = findChildByType(NUMBER_HEX);
     return charCodeElement == null ? getCharCodeFromName() : Integer.parseInt(charCodeElement.getText(), 16);
   }
@@ -43,6 +43,6 @@ public class PerlUnicodeSubstitutionMixin extends PerlNumericCharSubstitution {
       catch (IllegalArgumentException ignore) {
       }
     }
-    return 0;
+    return -1;
   }
 }

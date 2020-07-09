@@ -28,7 +28,7 @@ public class PerlHexSubstitutionMixin extends PerlNumericCharSubstitution {
   }
 
   @Override
-  protected int getCharCode() {
+  public int getCodePoint() {
     PsiElement charCodeElement = findChildByType(NUMBER_HEX);
     if (charCodeElement == null) {
       return 0;

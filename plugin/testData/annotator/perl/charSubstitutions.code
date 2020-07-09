@@ -1,0 +1,24 @@
+
+"<info descr="☺">\x{263A}</info> <info descr="`">\x60</info> <info descr="☿">\N{U+263F}</info> <info descr="🚴">\N{BICYCLIST}</info> <info descr="o">\c/</info> <info descr="ʜ">\o{1234}</info> <info descr="`">\c </info> <info descr="Non printable">\x</info> <info descr="Non printable">\x0</info> <info descr="Non printable">\0</info>";
+`<info descr="☺">\x{263A}</info> <info descr="`">\x60</info> <info descr="☿">\N{U+263F}</info> <info descr="🚴">\N{BICYCLIST}</info> <info descr="o">\c/</info> <info descr="ʜ">\o{1234}</info> <info descr="`">\c </info> <info descr="Non printable">\x</info> <info descr="Non printable">\x0</info> <info descr="Non printable">\0</info>`;
+'\x{263A} \x60 \N{U+263F} \N{BICYCLIST} \c/ \o{1234} \c  \x \x0 \0';
+
+<<"EOM";
+<info descr="☺">\x{263A}</info> <info descr="`">\x60</info> <info descr="☿">\N{U+263F}</info> <info descr="🚴">\N{BICYCLIST}</info> <info descr="o">\c/</info> <info descr="ʜ">\o{1234}</info> <info descr="`">\c </info> <info descr="Non printable">\x</info> <info descr="Non printable">\x0</info> <info descr="Non printable">\0</info>
+EOM
+
+<<EOM;
+<info descr="☺">\x{263A}</info> <info descr="`">\x60</info> <info descr="☿">\N{U+263F}</info> <info descr="🚴">\N{BICYCLIST}</info> <info descr="o">\c/</info> <info descr="ʜ">\o{1234}</info> <info descr="`">\c </info> <info descr="Non printable">\x</info> <info descr="Non printable">\x0</info> <info descr="Non printable">\0</info>
+EOM
+
+<<`EOM`;
+<info descr="☺">\x{263A}</info> <info descr="`">\x60</info> <info descr="☿">\N{U+263F}</info> <info descr="🚴">\N{BICYCLIST}</info> <info descr="o">\c/</info> <info descr="ʜ">\o{1234}</info> <info descr="`">\c </info> <info descr="Non printable">\x</info> <info descr="Non printable">\x0</info> <info descr="Non printable">\0</info>
+EOM
+
+<<'EOM';
+\x{263A} \x60 \N{U+263F} \N{BICYCLIST} \c/ \o{1234} \c  \x \x0 \0
+EOM
+
+tr{<info descr="☺">\x{263A}</info> <info descr="`">\x60</info> <info descr="☿">\N{U+263F}</info> <info descr="🚴">\N{BICYCLIST}</info>}{<info descr="o">\c/</info> <info descr="ʜ">\o{1234}</info> <info descr="`">\c </info> <info descr="Non printable">\x</info> <info descr="Non printable">\x0</info> <info descr="Non printable">\0</info>};
+y{<info descr="☺">\x{263A}</info> <info descr="`">\x60</info> <info descr="☿">\N{U+263F}</info> <info descr="🚴">\N{BICYCLIST}</info>}{<info descr="o">\c/</info> <info descr="ʜ">\o{1234}</info> <info descr="`">\c </info> <info descr="Non printable">\x</info> <info descr="Non printable">\x0</info> <info descr="Non printable">\0</info>};
+s{\x{263A} \x60 \N{U+263F} \N{BICYCLIST}}{<info descr="o">\c/</info> <info descr="ʜ">\o{1234}</info> <info descr="`">\c </info> <info descr="Non printable">\x</info> <info descr="Non printable">\x0</info> <info descr="Non printable">\0</info>};

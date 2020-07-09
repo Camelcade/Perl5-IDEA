@@ -28,7 +28,7 @@ public class PerlOctSubstitutionMixin extends PerlNumericCharSubstitution {
   }
 
   @Override
-  protected int getCharCode() {
+  public int getCodePoint() {
     PsiElement charCodeElement = findChildByType(NUMBER_OCT);
     if (charCodeElement == null) {
       return 0;

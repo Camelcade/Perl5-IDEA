@@ -32,6 +32,9 @@ public class PerlAnnotatorTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testCharSubstitutions() {doAnnotatorTest();}
+
+  @Test
   public void testFunctionParametersFunDeprecated() {doDeprecationTest();}
 
   @Test
@@ -229,16 +232,6 @@ public class PerlAnnotatorTest extends PerlLightTestCase {
 
   @Test
   public void testUnresolvedLabelInspection() {doInspectionTest(PerlUnresolvedLabelInspection.class);}
-
-  /*
-  @Test
-    public void testIdentifierInspection() {
-    initWithFileSmart();
-    getFile().getVirtualFile().setCharset(CharsetToolkit.US_ASCII_CHARSET);
-    myFixture.enableInspections(PerlIdentifierInspection.class);
-    myFixture.checkHighlighting(true, false, false);
-  }
-  */
 
   @Test
   public void testFancyMethodCall() {doInspectionTest(PerlFancyMethodCallInspection.class);}

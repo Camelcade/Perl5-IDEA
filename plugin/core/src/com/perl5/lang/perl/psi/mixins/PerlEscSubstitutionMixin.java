@@ -26,7 +26,7 @@ public class PerlEscSubstitutionMixin extends PerlNumericCharSubstitution {
   }
 
   @Override
-  protected int getCharCode() {
+  public int getCodePoint() {
     PsiElement child = getFirstChild();
     if (child == null) {
       return -1;

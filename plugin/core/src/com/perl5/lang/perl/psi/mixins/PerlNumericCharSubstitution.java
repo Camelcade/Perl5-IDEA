@@ -26,19 +26,13 @@ abstract class PerlNumericCharSubstitution extends PerlCompositeElementImpl impl
     super(node);
   }
 
-
   @Override
   public @NotNull String getNonIgnorableChars() {
-    int codePoint = getCharCode();
+    int codePoint = getCodePoint();
     if (!Character.isValidCodePoint(codePoint) || Character.isIdentifierIgnorable(codePoint)) {
       return "";
     }
     char[] chars = Character.toChars(codePoint);
     return chars.length == 0 ? "" : String.valueOf(chars);
   }
-
-  /**
-   * @return an integer char code for this substitution
-   */
-  protected abstract int getCharCode();
 }
