@@ -96,7 +96,7 @@ OCT_DIGIT = [0-7_]
 NUMBER_OCT = "0"{OCT_DIGIT}+
 
 SIMPLE_OCT_NUMBER={OCT_DIGIT}+
-SIMPLE_OCT_NUMBER_SHORT={OCT_DIGIT}{OCT_DIGIT}?
+SIMPLE_OCT_NUMBER_SHORT={OCT_DIGIT}({OCT_DIGIT}{OCT_DIGIT}?)?
 
 SPECIAL_VARIABLE_NAME = [\"\'\[\]\`\\\!\%\&\(\)\+\,\-\.\/\;\<\=\>\|\~\?\:\*\^\@\_\$]
 NUMERIC_VARIABLE_NAME = "0" | [1-9] \d*
@@ -183,8 +183,11 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 
 %xstate STRING_Q, STRING_Q_CHAR, STRING_Q_ESC, STRING_Q_CONTINUE
 %xstate STRING_LIST
-%xstate STRING_QQ, STRING_QQ_CHAR, STRING_QQ_RESTRICTED, STRING_QQ_RESTRICTED_CHAR
-%xstate STRING_QX, STRING_QX_CHAR, STRING_QX_RESTRICTED, STRING_QX_RESTRICTED_CHAR
+%xstate STRING_QQ, STRING_QQ_CHAR,
+%xstate STRING_QQ_RESTRICTED, STRING_QQ_RESTRICTED_CHAR
+%xstate STRING_RE, STRING_RE_CHAR
+%xstate STRING_QX, STRING_QX_CHAR
+%xstate STRING_QX_RESTRICTED, STRING_QX_RESTRICTED_CHAR
 %xstate STRING_TR_BEGIN, STRING_TR, STRING_TR_NOT_MINUS, STRING_TR_CHAR
 
 %xstate MATCH_REGEX, MATCH_REGEX_X, MATCH_REGEX_XX
@@ -600,14 +603,14 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 
 //////////////////////////////////// END OF TRY-CATCH SYNTAXES /////////////////////////////////////////////////////////
 
-<STRING_QQ,STRING_QX,MATCH_REGEX,MATCH_REGEX_X,MATCH_REGEX_XX,REGEX_QUOTED_X,REGEX_CHARCLASS_X,REGEX_CHARCLASS_XX>
+<STRING_QQ,STRING_RE,STRING_QX,MATCH_REGEX,MATCH_REGEX_X,MATCH_REGEX_XX,REGEX_QUOTED_X,REGEX_CHARCLASS_X,REGEX_CHARCLASS_XX>
 {
 	"@" /  {NON_SPACE_AHEAD} 	{pushState();yybegin(INTERPOLATED_VARIABLE_SUFFIX);return startUnbracedVariable(SIGIL_ARRAY);}
 	"$#" / {NON_SPACE_AHEAD} 	{return startUnbracedVariable(SIGIL_SCALAR_INDEX);}
 	"$" /  {NON_SPACE_AHEAD}   	{pushState();yybegin(INTERPOLATED_VARIABLE_SUFFIX);return startUnbracedVariable(SIGIL_SCALAR); }
 }
 
-<STRING_QQ,STRING_QX,STRING_TR,STRING_TR_NOT_MINUS>{
+<STRING_QQ,STRING_RE,STRING_QX,STRING_TR,STRING_TR_NOT_MINUS>{
         "\\t"     {return STRING_SPECIAL_TAB;}
         "\\n"     {return STRING_SPECIAL_NEWLINE;}
         "\\r"     {return STRING_SPECIAL_RETURN;}
@@ -628,22 +631,34 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
         "\\Q"     {return STRING_SPECIAL_QUOTE_START;}
         "\\N"     {pushState();yybegin(UNICODE_SUBSTITUTION);return STRING_SPECIAL_UNICODE;}
         "\\x"     {pushState();yybegin(HEX_SUBSTITUTION);return STRING_SPECIAL_HEX;}
-        "\\o"     {pushState();yybegin(OCT_SUBSTITUTION);return STRING_SPECIAL_OCT;}
-        "\\0"     {pushState();yybegin(OCT_SUBSTITUTION_AMBIGUOUS);return STRING_SPECIAL_OCT_AMBIGUOUS;}
+        "\\o"       {pushState();yybegin(OCT_SUBSTITUTION);return STRING_SPECIAL_OCT;}
+        "\\" / "0"  {pushState();yybegin(OCT_SUBSTITUTION_AMBIGUOUS);return STRING_SPECIAL_OCT_AMBIGUOUS;}
+}
+
+<STRING_RE>{
+        "\\"[1-9]\d*   {return STRING_SPECIAL_BACKREF;}
 }
 
 <STRING_QQ,STRING_QX>{
-        "\\"[1-9]\d*   {return STRING_SPECIAL_BACKREF;}
+        "\\" / {OCT_DIGIT}      {pushState();yybegin(OCT_SUBSTITUTION_AMBIGUOUS);return STRING_SPECIAL_OCT_AMBIGUOUS;}
 }
 
 <STRING_TR_CHAR> [^]             {yybegin(STRING_TR);return STRING_CONTENT_QQ;}
 <STRING_QQ_CHAR> [^]             {yybegin(STRING_QQ);return STRING_CONTENT_QQ;}
+<STRING_RE_CHAR> [^]             {yybegin(STRING_RE);return STRING_CONTENT_QQ;}
 <STRING_QX_CHAR> [^]             {yybegin(STRING_QX);return STRING_CONTENT_XQ;}
 <STRING_QQ_RESTRICTED_CHAR> [^]             {yybegin(STRING_QQ_RESTRICTED);return STRING_CONTENT_QQ;}
 <STRING_QX_RESTRICTED_CHAR> [^]             {yybegin(STRING_QX_RESTRICTED);return STRING_CONTENT_XQ;}
 
 <STRING_QQ>{
         "\\"              {yybegin(STRING_QQ_CHAR);return STRING_SPECIAL_ESCAPE_CHAR;}
+	// chars with special treatments
+	[^$\@\\]+					{return STRING_CONTENT_QQ;}
+	[^]						{return STRING_CONTENT_QQ;}
+}
+
+<STRING_RE>{
+        "\\"              {yybegin(STRING_RE_CHAR);return STRING_SPECIAL_ESCAPE_CHAR;}
 	// chars with special treatments
 	[^$\@\\]+					{return STRING_CONTENT_QQ;}
 	[^]						{return STRING_CONTENT_QQ;}

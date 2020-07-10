@@ -28,6 +28,11 @@ public class PerlSyntaxHighlightingTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testBackReferencesOld() {
+    doTest();
+  }
+
+  @Test
   public void testTrBlocks() {
     doTest();
   }

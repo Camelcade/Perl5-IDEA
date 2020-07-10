@@ -99,6 +99,8 @@ public class PerlElementTypeFactory {
         return new PerlLazyStringElementType(name, PerlLexer.STRING_LIST);
       case "LP_STRING_QQ":
         return new PerlLazyStringElementType(name, PerlLexer.STRING_QQ);
+      case "LP_STRING_RE":
+        return new PerlLazyStringElementType(name, PerlLexer.STRING_RE);
       case "LP_STRING_TR":
         return new PerlLazyStringElementType(name, PerlLexer.STRING_TR_BEGIN);
       case "LP_STRING_QQ_RESTRICTED":

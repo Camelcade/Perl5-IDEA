@@ -27,6 +27,11 @@ public class PerlParserTest extends PerlParserTestBase {
   }
 
   @Test
+  public void testBackReferencesOld() {
+    doTest();
+  }
+
+  @Test
   public void testTrBlocks() {
     doTest();
   }

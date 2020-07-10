@@ -1032,7 +1032,8 @@ private regex_match ::= 'r{' [<<consumeTokens 'LP_REGEX'>>|<<consumeTokens 'LP_R
 private regex_replace ::= regex_replace_regex | regex_replace_code
 
 private regex_replace_regex ::= {'r/' | 'r}' 'r{' } regex_replacement
-regex_replacement ::= [qq_string_content_with_lp]
+regex_replacement ::= regex_replacement_content
+private regex_replacement_content ::= [{qq_string_element+ | <<consumeTokens 'LP_STRING_RE'>> | <<consumeTokens 'LP_STRING_QQ_RESTRICTED'>>}]
 private regex_replace_code ::= {'re/' | 'r}' 're{' } [regex_code]
 private regex_code ::= <<consumeTokens 'LP_CODE_BLOCK'>> | <<block file_item*>>
 
@@ -1380,6 +1381,7 @@ annotation_noinspection ::=  '#@noinspection' string_bare {pin=1}
 /******************************************* End of annotations *******************************************************/
 
 /******************************************* Lazy parsable elements *******************************************************/
+lp_string_re ::= regex_replacement_content {extraRoot=true}
 lp_string_tr ::= tr_block_content {extraRoot=true}
 lp_string_qq ::= qq_string_content {extraRoot=true}
 lp_string_qq_restricted ::= qq_string_content {extraRoot=true}

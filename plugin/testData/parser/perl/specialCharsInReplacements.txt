@@ -88,7 +88,7 @@ Perl5
       PsiElement(Perl5: r})('}')
       PsiElement(Perl5: r{)('{')
       PsiPerlRegexReplacementImpl(Perl5: REGEX_REPLACEMENT)
-        PerlCompositeElementImpl(LP_STRING_QQ)
+        PerlCompositeElementImpl(LP_STRING_RE)
           PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('t')
           PsiElement(Perl5: \t)('\t')
           PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('e')

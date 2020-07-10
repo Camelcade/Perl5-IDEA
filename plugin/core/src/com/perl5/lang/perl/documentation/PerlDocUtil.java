@@ -229,7 +229,7 @@ public class PerlDocUtil implements PerlElementTypes {
     else if (elementType == STRING_SPECIAL_SUBST) {
       return resolveDoc(PERL_OP, "\\c", element, true);
     }
-    else if (elementType == STRING_SPECIAL_OCT) {
+    else if (elementType == STRING_SPECIAL_OCT || elementType == STRING_SPECIAL_OCT_AMBIGUOUS) {
       return resolveDoc(PERL_OP, "\\o{}", element, true);
     }
     else if (elementType == STRING_SPECIAL_ESCAPE_CHAR) {

@@ -116,7 +116,13 @@ public class PerlQuickDocStringSpecialsTest extends PerlQuickDocTestCase {
   public void testBackref1() {doTestDq("text \\<caret>1 text");}
 
   @Test
-  public void testBackref1000() {doTestDq("text \\100<caret>0 text");}
+  public void testBackref1000() {doTestDq("text \\10<caret>00 text");}
+
+  @Test
+  public void testBackref1Re() {doTestRe("text \\<caret>1 text");}
+
+  @Test
+  public void testBackref1000Re() {doTestRe("text \\100<caret>0 text");}
 
   @Test
   public void testEscapeCharSq() {doTestSq("test <caret>\\' text");}
@@ -124,6 +130,10 @@ public class PerlQuickDocStringSpecialsTest extends PerlQuickDocTestCase {
 
   private void doTestDq(@NotNull String stringContentWithCaret) {
     doTestText("say \"" + stringContentWithCaret + "\"");
+  }
+
+  private void doTestRe(@NotNull String stringContentWithCaret) {
+    doTestText("s/match/" + stringContentWithCaret + "/;");
   }
 
   private void doTestSq(@NotNull String stringContentWithCaret) {

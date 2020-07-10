@@ -340,7 +340,7 @@ Perl5
             PsiElement(Perl5: regex)('parsable')
         PsiElement(Perl5: r/)('/')
         PsiPerlRegexReplacementImpl(Perl5: REGEX_REPLACEMENT)
-          PerlCompositeElementImpl(LP_STRING_QQ)
+          PerlCompositeElementImpl(LP_STRING_RE)
             PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('\n    this     is a  ')
             PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
               PsiElement(Perl5: $$)('$')
