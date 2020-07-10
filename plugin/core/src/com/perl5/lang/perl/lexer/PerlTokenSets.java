@@ -373,7 +373,9 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
     LP_STRING_QQ,
     LP_STRING_QQ_RESTRICTED,
     LP_STRING_QX,
-    LP_STRING_QX_RESTRICTED
+    LP_STRING_QX_RESTRICTED,
+    LP_STRING_TR,
+    LP_STRING_RE
   );
 
   TokenSet HEREDOC_ENDS = TokenSet.create(HEREDOC_END, HEREDOC_END_INDENTABLE);

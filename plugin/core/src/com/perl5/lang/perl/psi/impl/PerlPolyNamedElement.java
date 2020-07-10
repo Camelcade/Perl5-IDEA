@@ -29,6 +29,7 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.psi.util.PsiUtilCore;
+import com.perl5.lang.perl.parser.elementTypes.PerlLazyBlockElementType;
 import com.perl5.lang.perl.psi.PerlStubBasedPsiElementBase;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
@@ -129,8 +130,10 @@ public abstract class PerlPolyNamedElement<Stub extends PerlPolyNamedElementStub
     }
     else if (elementType == STRING_DQ) {
       PsiElement[] children = identifierElement.getChildren();
-      return children.length == 0 ||
-             children.length == 1 && PsiUtilCore.getElementType(children[0]) == LP_STRING_QQ && children[0].getChildren().length == 0;
+      if (children.length == 1 && PsiUtilCore.getElementType(children[0]) instanceof PerlLazyBlockElementType) {
+        children = children[0].getChildren();
+      }
+      return children.length == 0;
     }
     return false;
   }
