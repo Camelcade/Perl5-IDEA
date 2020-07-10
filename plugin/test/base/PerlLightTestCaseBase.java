@@ -241,7 +241,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   private static final String SEPARATOR = "----------";
   private static final String SEPARATOR_NEW_LINE_BEFORE = "\n" + SEPARATOR;
   private static final String SEPARATOR_NEW_LINE_AFTER = SEPARATOR + "\n";
-  private static final String SEPARATOR_NEWLINES = SEPARATOR_NEW_LINE_BEFORE + "\n";
+  protected static final String SEPARATOR_NEWLINES = SEPARATOR_NEW_LINE_BEFORE + "\n";
   private final Disposable myPerlLightTestCaseDisposable = Disposer.newDisposable();
 
   private static final String COMPLETE_PREFIX = "<complete ";

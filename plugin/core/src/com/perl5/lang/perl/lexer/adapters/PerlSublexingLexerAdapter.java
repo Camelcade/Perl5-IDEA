@@ -18,8 +18,10 @@ package com.perl5.lang.perl.lexer.adapters;
 
 /**
  * Second level adapter, relexes lazy blocks if necessary
+ *
+ * @see com.perl5.lang.perl.lexer.adapters.PerlMergingLexerAdapter
+ * @see com.perl5.lang.perl.lexer.adapters.PerlCodeMergingLexerAdapter
  */
-
 import com.intellij.lexer.FlexAdapter;
 import com.intellij.lexer.Lexer;
 import com.intellij.lexer.LexerBase;
@@ -53,12 +55,11 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
     SUBLEXINGS_MAP.put(LP_REGEX, PerlLexer.MATCH_REGEX);
     SUBLEXINGS_MAP.put(LP_REGEX_X, PerlLexer.MATCH_REGEX_X);
     SUBLEXINGS_MAP.put(LP_REGEX_XX, PerlLexer.MATCH_REGEX_XX);
-    SUBLEXINGS_MAP.put(LP_CODE_BLOCK, PerlLexer.YYINITIAL);
-    SUBLEXINGS_MAP.put(LP_CODE_BLOCK_WITH_TRYCATCH, PerlLexer.YYINITIAL);
   }
 
   private final @Nullable Project myProject;
   private final boolean myIsForcingSublexing;
+  private final boolean myIsALlowToMergeCodeBlocks;
   private final Lexer myMainLexer;
   private boolean myIsSublexing = false;
   private PerlSublexingLexerAdapter mySubLexer;
@@ -70,13 +71,24 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
   private char mySingleOpenQuoteChar = 0;
 
   public PerlSublexingLexerAdapter(@Nullable Project project, boolean allowToMergeCodeBlocks, boolean forceSublexing) {
-    this(project, new PerlCodeMergingLexerAdapter(project, allowToMergeCodeBlocks), forceSublexing);
+    this(project, allowToMergeCodeBlocks, forceSublexing, -1);
   }
 
-  public PerlSublexingLexerAdapter(@Nullable Project project, @NotNull Lexer mainLexer, boolean forceSublexing) {
+  public PerlSublexingLexerAdapter(@Nullable Project project, boolean allowToMergeCodeBlocks, boolean forceSublexing, int initialState) {
+    this(project,
+         new PerlCodeMergingLexerAdapter(project, !forceSublexing && allowToMergeCodeBlocks, initialState),
+         allowToMergeCodeBlocks,
+         forceSublexing);
+  }
+
+  public PerlSublexingLexerAdapter(@Nullable Project project,
+                                   @NotNull Lexer mainLexer,
+                                   boolean allowToMergeCodeBlocks,
+                                   boolean forceSublexing) {
     myMainLexer = mainLexer;
     myIsForcingSublexing = forceSublexing;
     myProject = project;
+    myIsALlowToMergeCodeBlocks = allowToMergeCodeBlocks;
   }
 
   /**
@@ -152,7 +164,10 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
 
   private @NotNull PerlSublexingLexerAdapter getSubLexer() {
     if (mySubLexer == null) {
-      mySubLexer = new PerlSublexingLexerAdapter(myProject, false, true);
+      mySubLexer = new PerlSublexingLexerAdapter(myProject, myIsALlowToMergeCodeBlocks, myIsForcingSublexing, -1);
+      if (myTryCatchEnabled) {
+        mySubLexer.withTryCatchSyntax();
+      }
     }
     return mySubLexer;
   }

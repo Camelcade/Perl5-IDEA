@@ -46,6 +46,9 @@ public class PerlMooseOverrideStatement extends PerlSubDefinitionBase implements
   }
 
 
+  /**
+   * fixme probably a bug. This need to be refactored anyway
+   */
   @Override
   public PsiPerlBlock getSubDefinitionBody() {
     return null;

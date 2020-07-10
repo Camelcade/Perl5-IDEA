@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.pod.lexer.PodLexerAdapter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -30,7 +31,6 @@ public class PerlHighlightingLexerAdapter extends LayeredLexer implements PerlEl
   public PerlHighlightingLexerAdapter(@Nullable Project project) {
     this(project, new PerlMergingLexerAdapter(project, false, true));
   }
-
 
   public PerlHighlightingLexerAdapter(@Nullable Project project, @NotNull Lexer lexer) {
     super(lexer);
@@ -57,6 +57,16 @@ public class PerlHighlightingLexerAdapter extends LayeredLexer implements PerlEl
     registerSelfStoppingLayer(
       PerlSubLexerAdapter.forAnnotation(project),
       new IElementType[]{COMMENT_ANNOTATION},
+      IElementType.EMPTY_ARRAY
+    );
+    registerSelfStoppingLayer(
+      new PerlSublexingLexerAdapter(project, false, true, PerlLexer.YYINITIAL),
+      new IElementType[]{LP_CODE_BLOCK},
+      IElementType.EMPTY_ARRAY
+    );
+    registerSelfStoppingLayer(
+      new PerlSublexingLexerAdapter(project, false, true, PerlLexer.YYINITIAL).withTryCatchSyntax(),
+      new IElementType[]{LP_CODE_BLOCK_WITH_TRYCATCH},
       IElementType.EMPTY_ARRAY
     );
   }

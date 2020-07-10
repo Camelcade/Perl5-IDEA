@@ -256,7 +256,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       }
     }
     else if (element instanceof PerlBlockOwner) {
-      PsiPerlBlock block = PerlBlockOwner.findBlock((PerlBlockOwner)element);
+      PsiPerlBlock block = ((PerlBlockOwner)element).getBlockSmart();
       if (block != null) {
         return block;
       }
@@ -345,7 +345,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
         acceptSafe(subExpr);
       }
       else {
-        acceptSafe(o.getBlock());
+        acceptSafe(o.getBlockSmart());
       }
     }
 
@@ -545,7 +545,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
 
       myLoopNextInstructions.put(o, nextAnchor);
       myLoopRedoInstructions.put(o, startTransparentNode(o, "redo"));
-      acceptSafe(o.getBlock());
+      acceptSafe(o.getBlockSmart());
 
       if (mutator != null) {
         addNodeAndCheckPending(nextAnchor);
@@ -569,7 +569,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       myLoopNextInstructions.put(o, nextInstruction);
       startIteratorConditionalNode(sourceElement); // fake condition if iterator is not finished yet
       myLoopRedoInstructions.put(o, startTransparentNode(o, "redo"));
-      acceptSafe(o.getBlock());
+      acceptSafe(o.getBlockSmart());
       addNodeAndCheckPending(nextInstruction);
       acceptSafe(o.getContinueBlock());
       addEdge(prevInstruction, loopInstruction);
@@ -601,7 +601,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
 
       startConditionalNode(conditionExpr, conditionValue);
       myLoopRedoInstructions.put(o, startTransparentNode(o, "redo"));
-      acceptSafe(o.getBlock());
+      acceptSafe(o.getBlockSmart());
       addNodeAndCheckPending(nextInstruction);
       acceptSafe(o.getContinueBlock());
 
@@ -985,7 +985,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       acceptSafe(perlConditionExpr);
       Instruction elseFlow = prevInstruction;
       prevInstruction = startConditionalNode(perlConditionExpr, true);
-      acceptSafe(o.getBlock());
+      acceptSafe(o.getBlockSmart());
 
       createEdgeToTopicalizer(topicalizer);
       prevInstruction = elseFlow;

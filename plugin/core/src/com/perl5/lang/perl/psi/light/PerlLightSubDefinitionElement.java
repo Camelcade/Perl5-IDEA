@@ -75,7 +75,7 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
                                        @NotNull PerlSubExpr elementSub) {
     super(delegate, name, elementType, nameIdentifier);
     myNamespaceName = namespaceName;
-    mySubDefinitionBody = elementSub.getBlock();
+    mySubDefinitionBody = elementSub.getBlockSmart();
     myAnnotationsProvider = AtomicNullableLazyValue.createValue(
       () -> PerlSubAnnotations.computeForLightElement(delegate, nameIdentifier));
     mySubArgumentsProvider = AtomicNotNullLazyValue.createValue(

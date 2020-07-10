@@ -27,6 +27,8 @@ import org.jetbrains.annotations.Nullable;
 
 /**
  * Third level of lexer adapter merges necessary tokens
+ *
+ * @see PerlSublexingLexerAdapter
  */
 public class PerlMergingLexerAdapter extends MergingLexerAdapter implements PerlElementTypes {
   public static final TokenSet TOKENS_TO_MERGE = TokenSet.create(

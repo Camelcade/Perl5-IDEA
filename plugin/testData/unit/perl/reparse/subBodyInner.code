@@ -1,0 +1,9 @@
+sub outer_somesub {
+  say 'hi';
+  sub inner_somesub {
+      say 'hi';
+      <caret>
+      say 'hi';
+  }
+  say 'hi';
+}

@@ -1,0 +1,14 @@
+method somename() {
+    say 'hi';
+    say 'hi';<caret>
+    say 'hi';
+}
+
+----------
+Element(LP_CODE_BLOCK)
+----------
+{
+    say 'hi';
+    
+    say 'hi';
+}

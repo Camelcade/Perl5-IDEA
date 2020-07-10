@@ -1,0 +1,5 @@
+func somefunc(){
+  1;
+  2;
+    <caret>
+};

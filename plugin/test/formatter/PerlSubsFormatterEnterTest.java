@@ -34,6 +34,21 @@ public abstract class PerlSubsFormatterEnterTest extends PerlFormatterTestCase {
   }
 
   @Test
+  public void testBodyAfterOpenBrace() {
+    doTest();
+  }
+
+  @Test
+  public void testBodyAfterStatementLast() {
+    doTest();
+  }
+
+  @Test
+  public void testBodyAfterStatementMid() {
+    doTest();
+  }
+
+  @Test
   public void testSignatureElementDefaultValue() {
     doTest();
   }

@@ -315,6 +315,7 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
   TokenSet UNINDENTABLE_CONTAINERS = TokenSet.orSet(
     LAZY_PARSABLE_STRINGS,
     LAZY_PARSABLE_REGEXPS,
+    LAZY_CODE_BLOCKS,
     SUB_OR_MODIFIER_DEFINITIONS_TOKENSET,
     COMPOUND_STATEMENTS_TOKENSET,
     TokenSet.create(
@@ -348,13 +349,15 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
       LP_STRING_QW
     ));
 
-  TokenSet UNINDENTABLE_TOKENS = TokenSet.create(
-    LP_STRING_QW,
-    COMMA_SEQUENCE_EXPR,
-    CALL_ARGUMENTS,
-    REGEX_QUOTE_CLOSE,
-    ATTRIBUTES
-  );
+  TokenSet UNINDENTABLE_TOKENS = TokenSet.orSet(
+    LAZY_CODE_BLOCKS,
+    TokenSet.create(
+      LP_STRING_QW,
+      COMMA_SEQUENCE_EXPR,
+      CALL_ARGUMENTS,
+      REGEX_QUOTE_CLOSE,
+      ATTRIBUTES
+    ));
   TokenSet BLOCK_LIKE_CONTAINERS = TokenSet.create(
     BLOCK, SIGNATURE_CONTENT
   );

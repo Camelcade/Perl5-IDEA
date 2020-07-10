@@ -76,7 +76,7 @@ public class ForeachToForIntention extends PsiElementBaseIntentionAction {
     PsiPerlExpr iterableList = forCompound.getConditionExpr();
     assert iterableList != null;
 
-    PsiPerlBlock block = forCompound.getBlock();
+    PsiPerlBlock block = forCompound.getBlockSmart();
     assert block != null;
 
     PsiPerlForCompound indexedFor = createIndexedFor(project, (PsiPerlVariableDeclarationLexical)variableDeclaration, iterableList, block);

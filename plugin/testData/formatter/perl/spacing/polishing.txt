@@ -179,8 +179,7 @@ say
         $a;
 printf
         $a, $b;
-sub
-{};
+sub {};
 m
         /something/;
 m

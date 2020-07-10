@@ -84,7 +84,7 @@ public class PerlBreadcrumbsProvider implements BreadcrumbsProvider {
       return getStructuralParentElement(nearestParent.getParent());
     }
 
-    PsiPerlBlock exprBlock = ((PerlSubExpr)nearestParent).getBlock();
+    PsiPerlBlock exprBlock = ((PerlSubExpr)nearestParent).getBlockSmart();
     if (exprBlock == null) {
       return getStructuralParentElement(nearestParent.getParent());
     }

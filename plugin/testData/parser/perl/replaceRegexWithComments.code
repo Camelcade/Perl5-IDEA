@@ -1,0 +1,7 @@
+s/test/
+
+# leading comment
+say 'hi';
+# trailing comment
+
+/e;

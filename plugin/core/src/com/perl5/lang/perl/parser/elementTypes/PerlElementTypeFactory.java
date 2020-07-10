@@ -80,9 +80,9 @@ public class PerlElementTypeFactory {
       case "HEREDOC":
         return new PerlLazyStringElementType(name, PerlHeredocElementImpl.class, PerlLexer.STRING_Q);
       case "LP_CODE_BLOCK":
-        return new PerlLazyCodeBlockElementType(name);
+        return new PerlLazyCodeBlockElementType(name, PsiPerlLpCodeBlockImpl.class);
       case "LP_CODE_BLOCK_WITH_TRYCATCH":
-        return new PerlLazyCodeBlockElementTypeWithTryCatch(name);
+        return new PerlLazyCodeBlockElementTypeWithTryCatch(name, PsiPerlLpCodeBlockWithTrycatchImpl.class);
       case "LP_REGEX":
         return new PerlLazyMatchRegexpElementType(name);
       case "LP_REGEX_X":

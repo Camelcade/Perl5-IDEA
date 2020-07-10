@@ -221,7 +221,7 @@ public class CompoundToStatementIntention extends PsiElementBaseIntentionAction 
    */
   private static @NotNull PsiPerlExpr getStatementExpression(@NotNull PerlConvertableCompound convertibleCompound)
     throws IncorrectOperationException {
-    PsiPerlBlock block = convertibleCompound.getBlock();
+    PsiPerlBlock block = convertibleCompound.getBlockSmart();
     if (block == null) {
       error("perl.intention.convert.to.statement.error.no.block");
     }

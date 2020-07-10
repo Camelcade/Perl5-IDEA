@@ -19,8 +19,8 @@ package com.perl5.lang.perl.psi.properties;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.psi.PsiPerlBlock;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import static com.perl5.lang.perl.lexer.PerlTokenSets.LAZY_CODE_BLOCKS;
@@ -29,25 +29,27 @@ import static com.perl5.lang.perl.lexer.PerlTokenSets.LAZY_CODE_BLOCKS;
  * Implement this interface if element contains block
  */
 public interface PerlBlockOwner extends PsiElement {
+  /**
+   * @return use {@link #getBlockSmart()} instead. This method can't handle lazy elements, it's auto-generated
+   */
+  @Deprecated
   default @Nullable PsiPerlBlock getBlock() {
     return PsiTreeUtil.getChildOfType(this, PsiPerlBlock.class);
   }
 
   /**
-   * @return a block for the {@code blockOwner}, omitting lazy-parsable blocks if any
+   * @return a nested block. This method is aware about lazy parsable blocks
    */
-  static @Nullable PsiPerlBlock findBlock(@NotNull PerlBlockOwner blockOwner) {
-    PsiPerlBlock block = blockOwner.getBlock();
+  default @Nullable PsiPerlBlock getBlockSmart() {
+    PsiPerlBlock block = getBlock();
     if (block != null) {
       return block;
     }
 
-    ASTNode[] children = blockOwner.getNode().getChildren(LAZY_CODE_BLOCKS);
-    PsiElement lazyParsableBlock = children.length == 0 ? null : children[0].getPsi();
-    if (lazyParsableBlock != null) {
-      PsiElement possibleBlock = lazyParsableBlock.getFirstChild();
-      return possibleBlock instanceof PsiPerlBlock ? (PsiPerlBlock)possibleBlock : null;
+    ASTNode lazyNode = getNode().findChildByType(LAZY_CODE_BLOCKS);
+    if (lazyNode == null) {
+      return null;
     }
-    return null;
+    return ObjectUtils.tryCast(lazyNode.getPsi().getFirstChild(), PsiPerlBlock.class);
   }
 }

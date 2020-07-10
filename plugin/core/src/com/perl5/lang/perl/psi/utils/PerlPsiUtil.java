@@ -604,7 +604,8 @@ public class PerlPsiUtil implements PerlElementTypes {
     }
 
     PsiElement statementContainer = statement.getParent();
-    if (!(statementContainer instanceof PsiPerlBlockImpl && statementContainer.getParent() instanceof PerlSubDefinitionElement)) {
+    if (!(statementContainer instanceof PsiPerlBlockImpl &&
+          ((PsiPerlBlockImpl)statementContainer).getContainer() instanceof PerlSubDefinitionElement)) {
       return false;
     }
 

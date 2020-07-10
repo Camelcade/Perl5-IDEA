@@ -18,8 +18,22 @@ package unit.perl;
 
 
 import base.PerlLightTestCase;
+import com.intellij.openapi.command.WriteCommandAction;
+import com.intellij.openapi.editor.Document;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.PsiDocumentManager;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiManager;
+import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.testFramework.UsefulTestCase;
+import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
+import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
+
+import java.util.Objects;
+
 public class PerlStubsTest extends PerlLightTestCase {
   @Override
   protected String getBaseDataPath() {
@@ -95,6 +109,29 @@ public class PerlStubsTest extends PerlLightTestCase {
 
   @Test
   public void testNestedPodSections_pl() {doTest();}
+
+  /**
+   * We are expecting this confirms sub stubs update on lazy element modification
+   */
+  @Test
+  public void testSubDefinitionModification() {
+    VirtualFile virtualFile = myFixture.copyFileToProject("subDefinitionModification.pl");
+    CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
+    PsiFile psiFile = PsiManager.getInstance(getProject()).findFile(virtualFile);
+    assertNotNull(psiFile);
+    PsiDocumentManager documentManager = PsiDocumentManager.getInstance(getProject());
+    Document document = documentManager.getDocument(psiFile);
+    assertNotNull(document);
+    WriteCommandAction.runWriteCommandAction(getProject(), () -> {
+      document.insertString(101, "my $newvar = shift;");
+      documentManager.commitDocument(document);
+    });
+    PsiElement leafElement = psiFile.findElementAt(101);
+    assertNotNull(leafElement);
+    PerlSubDefinitionElement subDefinitionElement = PsiTreeUtil.getParentOfType(leafElement, PerlSubDefinitionElement.class);
+    assertNotNull(subDefinitionElement);
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), Objects.requireNonNull(subDefinitionElement.getPresentableName()));
+  }
 
   @Override
   protected @NotNull String computeAnswerFileName(@NotNull String appendix) {

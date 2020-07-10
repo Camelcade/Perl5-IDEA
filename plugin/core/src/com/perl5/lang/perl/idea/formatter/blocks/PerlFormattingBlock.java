@@ -37,8 +37,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static com.perl5.lang.perl.lexer.PerlTokenSets.HEREDOC_BODIES_TOKENSET;
-import static com.perl5.lang.perl.lexer.PerlTokenSets.MATCH_REGEXP_CONTAINERS;
+import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
 
 
 public class PerlFormattingBlock extends AbstractBlock implements PerlElementTypes, PerlAstBlock {
@@ -213,6 +212,12 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 
   @Override
   public final @NotNull ChildAttributes getChildAttributes(int newChildIndex) {
+    if (getElementType() == REPLACEMENT_REGEX) {
+      List<Block> subBlocks = getSubBlocks();
+      if (subBlocks.size() > newChildIndex && LAZY_CODE_BLOCKS.contains(ASTBlock.getElementType(subBlocks.get(newChildIndex)))) {
+        return ChildAttributes.DELEGATE_TO_NEXT_CHILD;
+      }
+    }
     return myContext.getChildAttributes(this, newChildIndex);
   }
 

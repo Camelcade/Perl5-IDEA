@@ -1,0 +1,5 @@
+method somemethod(){
+  1;
+  2;
+    <caret>
+};

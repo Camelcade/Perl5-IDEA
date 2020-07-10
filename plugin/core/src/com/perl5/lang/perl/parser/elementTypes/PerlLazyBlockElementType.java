@@ -16,24 +16,26 @@
 
 package com.perl5.lang.perl.parser.elementTypes;
 
+import com.intellij.lang.ASTFactory;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiBuilderFactory;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.tree.ILazyParseableElementType;
+import com.intellij.psi.tree.IReparseableElementType;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.lexer.adapters.PerlMergingLexerAdapter;
 import com.perl5.lang.perl.parser.PerlParserImpl;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Function;
 
 
-public abstract class PerlLazyBlockElementType extends ILazyParseableElementType implements PsiElementProvider {
+public abstract class PerlLazyBlockElementType extends IReparseableElementType implements PsiElementProvider {
   private final Function<ASTNode, PsiElement> myInstanceFactory;
 
   public PerlLazyBlockElementType(@NotNull @NonNls String debugName) {
@@ -43,6 +45,11 @@ public abstract class PerlLazyBlockElementType extends ILazyParseableElementType
   public PerlLazyBlockElementType(@NotNull @NonNls String debugName, @NotNull Class<? extends PsiElement> clazz) {
     super(debugName, PerlLanguage.INSTANCE);
     myInstanceFactory = PerlElementTypeEx.createInstanceFactory(clazz);
+  }
+
+  @Override
+  public @Nullable ASTNode createNode(CharSequence text) {
+    return ASTFactory.DefaultFactoryHolder.DEFAULT.createLazy(this, text);
   }
 
   @Override

@@ -28,6 +28,9 @@ public class PerlSyntaxHighlightingTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testLazyParsableNestedBlocks() {doTest();}
+
+  @Test
   public void testBackReferencesOld() {
     doTest();
   }

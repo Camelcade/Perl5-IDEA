@@ -1,0 +1,3 @@
+override somemethod(){
+    <caret>
+};

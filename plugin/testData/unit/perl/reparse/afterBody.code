@@ -1,0 +1,5 @@
+after somename() {
+    say 'hi';
+    <caret>
+    say 'hi';
+}

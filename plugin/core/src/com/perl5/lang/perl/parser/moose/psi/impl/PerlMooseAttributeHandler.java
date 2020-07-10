@@ -131,7 +131,7 @@ public class PerlMooseAttributeHandler extends PerlSubCallHandlerWithEmptyData {
         Arrays.asList(PerlSubArgument.self(), PerlSubArgument.optionalScalar("new_value")),
         PerlSubAnnotations.tryToFindAnnotations(identifier, subCallElement.getParent()),
         valueProvider,
-        subExpr == null ? null : subExpr.getBlock()
+        subExpr == null ? null : subExpr.getBlockSmart()
       );
       result.add(newMethod);
     }
@@ -141,12 +141,6 @@ public class PerlMooseAttributeHandler extends PerlSubCallHandlerWithEmptyData {
 
   public @NotNull List<String> getAttributesNames(@NotNull PerlSubCallElement subCallElement) {
     // fixme we have no stubs here
-    /*
-    PerlMooseAttributeWrapperStub stub = getGreenStub();
-    if (stub != null) {
-      return stub.getAttributesNames();
-    }
-    */
     Pair<List<PsiElement>, List<PsiElement>> lists = getIdentifiersAndListElements(subCallElement);
     if (lists == null || lists.first.isEmpty()) {
       return Collections.emptyList();

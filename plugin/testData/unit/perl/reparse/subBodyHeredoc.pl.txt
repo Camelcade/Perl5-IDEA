@@ -1,0 +1,8 @@
+sub somesub {
+    say 'hi';
+    say <<'SOMETHING';<caret>
+    say 'hi';
+}
+
+----------
+Full reparse

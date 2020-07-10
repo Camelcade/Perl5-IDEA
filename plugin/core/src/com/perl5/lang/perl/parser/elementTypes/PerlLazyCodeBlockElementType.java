@@ -17,20 +17,41 @@
 package com.perl5.lang.perl.parser.elementTypes;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.lang.Language;
+import com.intellij.lang.PsiBuilderUtil;
 import com.intellij.openapi.project.Project;
+import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.lexer.PerlElementTypesGenerated;
+import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.lexer.adapters.PerlSublexingLexerAdapter;
-import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 
 public class PerlLazyCodeBlockElementType extends PerlLazyBlockElementType {
-  public PerlLazyCodeBlockElementType(@NotNull @NonNls String debugName) {
-    super(debugName);
+  public PerlLazyCodeBlockElementType(@NotNull String debugName,
+                                      @NotNull Class<? extends PsiElement> clazz) {
+    super(debugName, clazz);
   }
 
   @Override
-  protected @NotNull PerlSublexingLexerAdapter getLexer(@NotNull Project project,
-                                                        @NotNull ASTNode chameleon) {
-    return new PerlSublexingLexerAdapter(project, false, false);
+  public boolean isParsable(@Nullable ASTNode parent,
+                            @NotNull CharSequence buffer,
+                            @NotNull Language fileLanguage,
+                            @NotNull Project project) {
+    PerlSublexingLexerAdapter lexer = getLexer(project);
+    boolean result =
+      PsiBuilderUtil.hasProperBraceBalance(buffer, lexer, PerlElementTypesGenerated.LEFT_BRACE, PerlElementTypesGenerated.RIGHT_BRACE);
+    return result && lexer.getState() == 0;
+  }
+
+  protected @NotNull PerlSublexingLexerAdapter getLexer(@NotNull Project project) {
+    return new PerlSublexingLexerAdapter(project, true, false, PerlLexer.YYINITIAL);
+  }
+
+  @Override
+  protected final @NotNull PerlSublexingLexerAdapter getLexer(@NotNull Project project,
+                                                              @NotNull ASTNode chameleon) {
+    return getLexer(project);
   }
 }

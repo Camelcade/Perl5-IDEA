@@ -1,0 +1,5 @@
+fun somename() {
+    say 'hi';
+    <caret>
+    say 'hi';
+}

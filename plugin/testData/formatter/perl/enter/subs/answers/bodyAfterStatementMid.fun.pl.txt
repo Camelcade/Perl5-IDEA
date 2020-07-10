@@ -1,0 +1,5 @@
+fun somefun(){
+  1;
+    <caret>
+  2;
+};

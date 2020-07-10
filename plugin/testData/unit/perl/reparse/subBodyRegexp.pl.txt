@@ -1,0 +1,8 @@
+sub somesub {
+    say 'hi';
+    m/<caret>
+    say 'hi';
+}
+
+----------
+Full reparse

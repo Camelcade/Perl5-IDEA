@@ -56,9 +56,8 @@ PerlVariableReference at (523,527); text in range: 'var2' => 1 results:
 PerlVariableReference at (538,542); text in range: 'var3' => 1 results:
 	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 491 in issue1723.pl
 
-PerlVariableReference at (552,556); text in range: 'var1' => 0 results:
+PerlVariableReference at (554,558); text in range: 'var1' => 0 results:
 
-PerlVariableReference at (561,565); text in range: 'var2' => 0 results:
+PerlVariableReference at (563,567); text in range: 'var2' => 0 results:
 
-PerlVariableReference at (570,574); text in range: 'var3' => 0 results:
-
+PerlVariableReference at (572,576); text in range: 'var3' => 0 results:

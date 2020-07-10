@@ -32,9 +32,10 @@ import java.io.IOException;
 
 /**
  * First level adapter, working above Flex lexer. Merges code blocks into LP_CODE_BLOCK tokens
- * fixme would be better to use lookahead adapter here; currently small code blocks may be lexed twice
+ *
+ * @see PerlSublexingLexerAdapter
  */
-public class PerlCodeMergingLexerAdapter extends LexerBase implements PerlElementTypes {
+class PerlCodeMergingLexerAdapter extends LexerBase implements PerlElementTypes {
   private static final Logger LOG = Logger.getInstance(FlexAdapter.class);
   private final PerlBaseLexer myPerlLexer;
   private int myBufferStart;
@@ -47,10 +48,13 @@ public class PerlCodeMergingLexerAdapter extends LexerBase implements PerlElemen
   private int myBufferEnd;
   private int myState;
 
+  private final int myInitialState;
+
   private final boolean myAllowToMergeCodeBlocks;
 
-  public PerlCodeMergingLexerAdapter(@Nullable Project project, boolean allowToMergeCodeBlocks) {
+  public PerlCodeMergingLexerAdapter(@Nullable Project project, boolean allowToMergeCodeBlocks, int initialState) {
     myAllowToMergeCodeBlocks = allowToMergeCodeBlocks;
+    myInitialState = initialState;
     myPerlLexer = new PerlLexer(null).withProject(project);
   }
 
@@ -59,7 +63,7 @@ public class PerlCodeMergingLexerAdapter extends LexerBase implements PerlElemen
     myText = buffer;
     myTokenStart = myTokenEnd = myBufferStart = startOffset;
     myBufferEnd = endOffset;
-    myPerlLexer.reset(myText, startOffset, endOffset, initialState);
+    myPerlLexer.reset(myText, startOffset, endOffset, myInitialState >= 0 ? myInitialState : initialState);
     myTokenType = null;
   }
 

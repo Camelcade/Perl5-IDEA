@@ -27,6 +27,15 @@ public class PerlParserTest extends PerlParserTestBase {
   }
 
   @Test
+  public void testReplaceRegexWithComments() {
+    setSkipSpaces(false);
+    doTest();
+  }
+
+  @Test
+  public void testLazyParsableNestedBlocks() {doTest();}
+
+  @Test
   public void testBackReferencesOld() {
     doTest();
   }

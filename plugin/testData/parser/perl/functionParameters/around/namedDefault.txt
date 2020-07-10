@@ -29,9 +29,10 @@ Perl5
         PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
           PsiElement(Perl5: NUMBER_HEX)('0x00_00_00')
     PsiElement(Perl5: ))(')')
-    PsiPerlBlockImpl(Perl5: BLOCK)
-      PsiElement(Perl5: {)('{')
-      PsiElement(Perl5: })('}')
+    PsiPerlLpCodeBlockImpl(LP_CODE_BLOCK)
+      PsiPerlBlockImpl(Perl5: BLOCK)
+        PsiElement(Perl5: {)('{')
+        PsiElement(Perl5: })('}')
 --------------------------------------------------------------------------------
 Subtree: Perl5 POD (Perl5 POD)
 POD file

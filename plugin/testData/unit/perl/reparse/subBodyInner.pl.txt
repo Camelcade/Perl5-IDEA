@@ -1,0 +1,18 @@
+sub outer_somesub {
+  say 'hi';
+  sub inner_somesub {
+      say 'hi';
+      say 'hi';<caret>
+      say 'hi';
+  }
+  say 'hi';
+}
+
+----------
+Element(LP_CODE_BLOCK)
+----------
+{
+      say 'hi';
+      
+      say 'hi';
+  }

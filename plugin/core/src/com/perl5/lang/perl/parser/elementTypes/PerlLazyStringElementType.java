@@ -20,7 +20,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.lexer.adapters.PerlSubLexerAdapter;
+import com.perl5.lang.perl.lexer.adapters.PerlSublexingLexerAdapter;
 import org.jetbrains.annotations.NotNull;
 
 
@@ -41,6 +41,6 @@ public class PerlLazyStringElementType extends PerlLazyBlockElementType {
 
   @Override
   protected @NotNull Lexer getLexer(@NotNull Project project, @NotNull ASTNode chameleon) {
-    return new PerlSubLexerAdapter(project, myStartLexerState);
+    return new PerlSublexingLexerAdapter(project, true, false, myStartLexerState);
   }
 }
