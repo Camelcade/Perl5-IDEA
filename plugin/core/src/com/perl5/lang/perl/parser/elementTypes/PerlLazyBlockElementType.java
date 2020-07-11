@@ -20,11 +20,11 @@ import com.intellij.lang.ASTFactory;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiBuilderFactory;
-import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IReparseableElementType;
 import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.lang.perl.lexer.PerlLexingContext;
 import com.perl5.lang.perl.lexer.adapters.PerlMergingLexerAdapter;
 import com.perl5.lang.perl.parser.PerlParserImpl;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
@@ -59,14 +59,16 @@ public abstract class PerlLazyBlockElementType extends IReparseableElementType i
     PsiBuilder builder = PsiBuilderFactory.getInstance().createBuilder(
       project,
       chameleon,
-      new PerlMergingLexerAdapter(getLexer(parentElement.getProject(), chameleon)),
+      new PerlMergingLexerAdapter(getLexingContext(parentElement.getProject(), chameleon)),
       getLanguage(),
       chameleon.getText());
 
     return PerlParserImpl.INSTANCE.parse(this, builder).getFirstChildNode();
   }
 
-  protected abstract @NotNull Lexer getLexer(@NotNull Project project, @NotNull ASTNode chameleon);
+  protected @NotNull PerlLexingContext getLexingContext(@NotNull Project project, @NotNull ASTNode chameleon) {
+    return PerlLexingContext.create(project);
+  }
 
   @Override
   public final @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {

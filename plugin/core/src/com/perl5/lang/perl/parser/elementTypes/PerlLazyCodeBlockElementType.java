@@ -22,8 +22,8 @@ import com.intellij.lang.PsiBuilderUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.lexer.PerlElementTypesGenerated;
-import com.perl5.lang.perl.lexer.PerlLexer;
-import com.perl5.lang.perl.lexer.adapters.PerlSublexingLexerAdapter;
+import com.perl5.lang.perl.lexer.PerlLexingContext;
+import com.perl5.lang.perl.lexer.adapters.PerlMergingLexerAdapter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -39,19 +39,9 @@ public class PerlLazyCodeBlockElementType extends PerlLazyBlockElementType {
                             @NotNull CharSequence buffer,
                             @NotNull Language fileLanguage,
                             @NotNull Project project) {
-    PerlSublexingLexerAdapter lexer = getLexer(project);
+    PerlMergingLexerAdapter lexer = new PerlMergingLexerAdapter(PerlLexingContext.create(project));
     boolean result =
       PsiBuilderUtil.hasProperBraceBalance(buffer, lexer, PerlElementTypesGenerated.LEFT_BRACE, PerlElementTypesGenerated.RIGHT_BRACE);
     return result && lexer.getState() == 0;
-  }
-
-  protected @NotNull PerlSublexingLexerAdapter getLexer(@NotNull Project project) {
-    return new PerlSublexingLexerAdapter(project, true, false, PerlLexer.YYINITIAL);
-  }
-
-  @Override
-  protected final @NotNull PerlSublexingLexerAdapter getLexer(@NotNull Project project,
-                                                              @NotNull ASTNode chameleon) {
-    return getLexer(project);
   }
 }

@@ -16,9 +16,10 @@
 
 package com.perl5.lang.perl.parser.elementTypes;
 
+import com.intellij.lang.ASTNode;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.lexer.adapters.PerlSublexingLexerAdapter;
+import com.perl5.lang.perl.lexer.PerlLexingContext;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -31,7 +32,7 @@ public class PerlLazyCodeBlockElementTypeWithTryCatch extends PerlLazyCodeBlockE
   }
 
   @Override
-  protected @NotNull PerlSublexingLexerAdapter getLexer(@NotNull Project project) {
-    return super.getLexer(project).withTryCatchSyntax();
+  protected @NotNull PerlLexingContext getLexingContext(@NotNull Project project, @NotNull ASTNode chameleon) {
+    return super.getLexingContext(project, chameleon).withTryCatchSyntax(true);
   }
 }

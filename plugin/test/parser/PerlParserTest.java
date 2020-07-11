@@ -74,6 +74,9 @@ public class PerlParserTest extends PerlParserTestBase {
   public void testEscapeInSQStrings() {doTest();}
 
   @Test
+  public void testEscapeInSqHeredoc() {doTest();}
+
+  @Test
   public void testEscapeInSQStringsLazy() {doTest();}
 
   @Test
@@ -625,6 +628,9 @@ public class PerlParserTest extends PerlParserTestBase {
 
   @Test
   public void testTryTryCatch() {doTest();}
+
+  @Test
+  public void testTryTryCatchInSub() {doTest();}
 
   @Test
   public void testTryTryTiny() {doTest();}

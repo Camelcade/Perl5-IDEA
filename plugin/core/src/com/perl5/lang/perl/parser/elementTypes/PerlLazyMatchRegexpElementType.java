@@ -17,9 +17,9 @@
 package com.perl5.lang.perl.parser.elementTypes;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
-import com.perl5.lang.perl.lexer.adapters.PerlSubLexerAdapter;
+import com.perl5.lang.perl.lexer.PerlLexer;
+import com.perl5.lang.perl.lexer.PerlLexingContext;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
@@ -30,7 +30,7 @@ public class PerlLazyMatchRegexpElementType extends PerlLazyBlockElementType {
   }
 
   @Override
-  protected @NotNull Lexer getLexer(@NotNull Project project, @NotNull ASTNode chameleon) {
-    return PerlSubLexerAdapter.forMatchRegex(project);
+  protected @NotNull PerlLexingContext getLexingContext(@NotNull Project project, @NotNull ASTNode chameleon) {
+    return super.getLexingContext(project, chameleon).withEnforcedInitialState(PerlLexer.MATCH_REGEX);
   }
 }

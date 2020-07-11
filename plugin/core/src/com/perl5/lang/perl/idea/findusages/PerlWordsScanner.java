@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,16 +17,16 @@
 package com.perl5.lang.perl.idea.findusages;
 
 import com.intellij.lang.cacheBuilder.DefaultWordsScanner;
-import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.lexer.PerlLexingContext;
 import com.perl5.lang.perl.lexer.adapters.PerlMergingLexerAdapter;
 
 
 public class PerlWordsScanner extends DefaultWordsScanner implements PerlElementTypes {
   public PerlWordsScanner() {
-    super(new PerlMergingLexerAdapter((Project)null),
+    super(new PerlMergingLexerAdapter(PerlLexingContext.create(null)),
           PerlParserDefinition.IDENTIFIERS,
           TokenSet.orSet(PerlParserDefinition.COMMENTS, TokenSet.create(POD)),
           PerlParserDefinition.LITERALS

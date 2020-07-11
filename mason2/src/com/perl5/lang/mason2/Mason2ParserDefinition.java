@@ -26,6 +26,7 @@ import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.mason2.elementType.Mason2ElementTypes;
 import com.perl5.lang.mason2.psi.impl.MasonFileImpl;
 import com.perl5.lang.perl.PerlParserDefinition;
+import com.perl5.lang.perl.lexer.PerlLexingContext;
 import com.perl5.lang.perl.lexer.adapters.PerlMergingLexerAdapter;
 import com.perl5.lang.perl.parser.Mason2ParserImpl;
 import org.jetbrains.annotations.NotNull;
@@ -41,7 +42,7 @@ public class Mason2ParserDefinition extends PerlParserDefinition implements Maso
 
   @Override
   public @NotNull Lexer createLexer(Project project) {
-    return new PerlMergingLexerAdapter(project);
+    return new PerlMergingLexerAdapter(PerlLexingContext.create(project));
   }
 
   @Override

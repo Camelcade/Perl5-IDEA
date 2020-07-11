@@ -22,6 +22,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexer;
+import com.perl5.lang.perl.lexer.PerlLexingContext;
 import com.perl5.lang.pod.lexer.PodLexerAdapter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -29,7 +30,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class PerlHighlightingLexerAdapter extends LayeredLexer implements PerlElementTypes {
   public PerlHighlightingLexerAdapter(@Nullable Project project) {
-    this(project, new PerlMergingLexerAdapter(project, false, true));
+    this(project, new PerlMergingLexerAdapter(PerlLexingContext.create(project).withAllowToMergeCode(false).withEnforcedSublexing(true)));
   }
 
   public PerlHighlightingLexerAdapter(@Nullable Project project, @NotNull Lexer lexer) {
@@ -39,33 +40,34 @@ public class PerlHighlightingLexerAdapter extends LayeredLexer implements PerlEl
       new IElementType[]{POD},
       IElementType.EMPTY_ARRAY
     );
+    PerlLexingContext baseContext = PerlLexingContext.create(project).withAllowToMergeCode(false).withEnforcedSublexing(true);
     registerSelfStoppingLayer(
-      PerlSubLexerAdapter.forStringSQ(project),
+      new PerlMergingLexerAdapter(baseContext.withEnforcedInitialState(PerlLexer.STRING_Q)),
       new IElementType[]{HEREDOC},
       IElementType.EMPTY_ARRAY
     );
     registerSelfStoppingLayer(
-      PerlSubLexerAdapter.forStringDQ(project),
+      new PerlMergingLexerAdapter(baseContext.withEnforcedInitialState(PerlLexer.STRING_QQ)),
       new IElementType[]{HEREDOC_QQ},
       IElementType.EMPTY_ARRAY
     );
     registerSelfStoppingLayer(
-      PerlSubLexerAdapter.forStringQX(project),
+      new PerlMergingLexerAdapter(baseContext.withEnforcedInitialState(PerlLexer.STRING_QX)),
       new IElementType[]{HEREDOC_QX},
       IElementType.EMPTY_ARRAY
     );
     registerSelfStoppingLayer(
-      PerlSubLexerAdapter.forAnnotation(project),
+      new PerlMergingLexerAdapter(baseContext.withEnforcedInitialState(PerlLexer.ANNOTATION)),
       new IElementType[]{COMMENT_ANNOTATION},
       IElementType.EMPTY_ARRAY
     );
     registerSelfStoppingLayer(
-      new PerlSublexingLexerAdapter(project, false, true, PerlLexer.YYINITIAL),
+      new PerlMergingLexerAdapter(baseContext),
       new IElementType[]{LP_CODE_BLOCK},
       IElementType.EMPTY_ARRAY
     );
     registerSelfStoppingLayer(
-      new PerlSublexingLexerAdapter(project, false, true, PerlLexer.YYINITIAL).withTryCatchSyntax(),
+      new PerlMergingLexerAdapter(baseContext.withTryCatchSyntax(true)),
       new IElementType[]{LP_CODE_BLOCK_WITH_TRYCATCH},
       IElementType.EMPTY_ARRAY
     );

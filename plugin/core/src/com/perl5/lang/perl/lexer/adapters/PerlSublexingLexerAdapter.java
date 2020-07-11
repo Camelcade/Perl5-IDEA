@@ -22,18 +22,19 @@ package com.perl5.lang.perl.lexer.adapters;
  * @see com.perl5.lang.perl.lexer.adapters.PerlMergingLexerAdapter
  * @see com.perl5.lang.perl.lexer.adapters.PerlCodeMergingLexerAdapter
  */
+
 import com.intellij.lexer.FlexAdapter;
 import com.intellij.lexer.Lexer;
 import com.intellij.lexer.LexerBase;
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.project.Project;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.perl.lexer.LexerWithContext;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexer;
+import com.perl5.lang.perl.lexer.PerlLexingContext;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 
@@ -57,38 +58,21 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
     SUBLEXINGS_MAP.put(LP_REGEX_XX, PerlLexer.MATCH_REGEX_XX);
   }
 
-  private final @Nullable Project myProject;
-  private final boolean myIsForcingSublexing;
-  private final boolean myIsALlowToMergeCodeBlocks;
-  private final Lexer myMainLexer;
+  private final LexerWithContext myMainLexerWithContext;
   private boolean myIsSublexing = false;
   private PerlSublexingLexerAdapter mySubLexer;
   private int myTokenStart;
   private int myTokenEnd;
   private int myState;
   private IElementType myTokenType;
-  private boolean myTryCatchEnabled;
   private char mySingleOpenQuoteChar = 0;
 
-  public PerlSublexingLexerAdapter(@Nullable Project project, boolean allowToMergeCodeBlocks, boolean forceSublexing) {
-    this(project, allowToMergeCodeBlocks, forceSublexing, -1);
+  public PerlSublexingLexerAdapter(@NotNull PerlLexingContext perlLexingContext) {
+    this(LexerWithContext.create(new PerlCodeMergingLexerAdapter(perlLexingContext), perlLexingContext));
   }
 
-  public PerlSublexingLexerAdapter(@Nullable Project project, boolean allowToMergeCodeBlocks, boolean forceSublexing, int initialState) {
-    this(project,
-         new PerlCodeMergingLexerAdapter(project, !forceSublexing && allowToMergeCodeBlocks, initialState),
-         allowToMergeCodeBlocks,
-         forceSublexing);
-  }
-
-  public PerlSublexingLexerAdapter(@Nullable Project project,
-                                   @NotNull Lexer mainLexer,
-                                   boolean allowToMergeCodeBlocks,
-                                   boolean forceSublexing) {
-    myMainLexer = mainLexer;
-    myIsForcingSublexing = forceSublexing;
-    myProject = project;
-    myIsALlowToMergeCodeBlocks = allowToMergeCodeBlocks;
+  public PerlSublexingLexerAdapter(@NotNull LexerWithContext lexerWithContext) {
+    myMainLexerWithContext = lexerWithContext;
   }
 
   /**
@@ -101,24 +85,21 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
                     char openQuoteChar) {
     LOG.assertTrue(subLexingState == PerlLexer.STRING_Q);
     start(buffer, startOffset, endOffset, subLexingState);
-    LOG.assertTrue(myMainLexer instanceof PerlCodeMergingLexerAdapter, "Got: " + myMainLexer);
-    ((PerlCodeMergingLexerAdapter)myMainLexer).setSingleOpenQuoteChar(openQuoteChar);
+    Lexer mainLexer = getMainLexer();
+    LOG.assertTrue(mainLexer instanceof PerlCodeMergingLexerAdapter, "Got: " + myMainLexerWithContext);
+    ((PerlCodeMergingLexerAdapter)mainLexer).getPerlLexer().setSingleOpenQuoteChar(openQuoteChar);
   }
 
   @Override
   public void start(@NotNull CharSequence buffer, int startOffset, int endOffset, int initialState) {
-    if (initialState == 0 && myTryCatchEnabled) {
-      initialState = -1;
-    }
-    myMainLexer.start(buffer, startOffset, endOffset, initialState);
+    getMainLexer().start(buffer, startOffset, endOffset, initialState);
     myTokenStart = myTokenEnd = startOffset;
     myTokenType = null;
     myIsSublexing = false;
   }
 
-  public PerlSublexingLexerAdapter withTryCatchSyntax() {
-    myTryCatchEnabled = true;
-    return this;
+  private @NotNull Lexer getMainLexer() {
+    return myMainLexerWithContext.getLexer();
   }
 
   @Override
@@ -153,21 +134,17 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
 
   @Override
   public @NotNull CharSequence getBufferSequence() {
-    return myMainLexer.getBufferSequence();
+    return getMainLexer().getBufferSequence();
   }
 
   @Override
   public int getBufferEnd() {
-    return myMainLexer.getBufferEnd();
+    return getMainLexer().getBufferEnd();
   }
-
 
   private @NotNull PerlSublexingLexerAdapter getSubLexer() {
     if (mySubLexer == null) {
-      mySubLexer = new PerlSublexingLexerAdapter(myProject, myIsALlowToMergeCodeBlocks, myIsForcingSublexing, -1);
-      if (myTryCatchEnabled) {
-        mySubLexer.withTryCatchSyntax();
-      }
+      mySubLexer = new PerlSublexingLexerAdapter(myMainLexerWithContext.getLexingContext());
     }
     return mySubLexer;
   }
@@ -190,11 +167,12 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
         myIsSublexing = false;
       }
 
-      lexToken(myMainLexer);
+      lexToken(getMainLexer());
 
       Integer subLexingState = SUBLEXINGS_MAP.get(myTokenType);
 
-      if (subLexingState == null || (myTokenEnd - myTokenStart > LAZY_BLOCK_MINIMAL_SIZE && !myIsForcingSublexing)) {
+      if (subLexingState == null ||
+          (myTokenEnd - myTokenStart > LAZY_BLOCK_MINIMAL_SIZE && !myMainLexerWithContext.getLexingContext().isEnforceSubLexing())) {
         return;
       }
 
@@ -211,7 +189,7 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
       locateToken();
     }
     catch (Exception | Error e) {
-      LOG.error(myMainLexer.getClass().getName(), e);
+      LOG.error(myMainLexerWithContext.getClass().getName(), e);
       myTokenType = TokenType.WHITE_SPACE;
       myTokenEnd = getBufferEnd();
     }

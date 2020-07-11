@@ -19,14 +19,13 @@ package com.perl5.lang.perl.lexer.adapters;
 import com.intellij.lexer.FlexAdapter;
 import com.intellij.lexer.LexerBase;
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.project.Project;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlBaseLexer;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexer;
+import com.perl5.lang.perl.lexer.PerlLexingContext;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 
@@ -48,14 +47,11 @@ class PerlCodeMergingLexerAdapter extends LexerBase implements PerlElementTypes 
   private int myBufferEnd;
   private int myState;
 
-  private final int myInitialState;
+  private final @NotNull PerlLexingContext myPerlLexingContext;
 
-  private final boolean myAllowToMergeCodeBlocks;
-
-  public PerlCodeMergingLexerAdapter(@Nullable Project project, boolean allowToMergeCodeBlocks, int initialState) {
-    myAllowToMergeCodeBlocks = allowToMergeCodeBlocks;
-    myInitialState = initialState;
-    myPerlLexer = new PerlLexer(null).withProject(project);
+  public PerlCodeMergingLexerAdapter(@NotNull PerlLexingContext perlLexingContext) {
+    myPerlLexingContext = perlLexingContext;
+    myPerlLexer = new PerlLexer(null).withProject(perlLexingContext.getProject());
   }
 
   @Override
@@ -63,7 +59,10 @@ class PerlCodeMergingLexerAdapter extends LexerBase implements PerlElementTypes 
     myText = buffer;
     myTokenStart = myTokenEnd = myBufferStart = startOffset;
     myBufferEnd = endOffset;
-    myPerlLexer.reset(myText, startOffset, endOffset, myInitialState >= 0 ? myInitialState : initialState);
+    int enforcedInitialState = myPerlLexingContext.getEnforcedInitialState();
+    myPerlLexer.reset(myText, startOffset, endOffset, enforcedInitialState >= 0 ? enforcedInitialState : initialState);
+    myPerlLexer.setSingleOpenQuoteChar(myPerlLexingContext.getOpenChar());
+    myPerlLexer.setHasTryCatch(myPerlLexingContext.isWithTryCatch());
     myTokenType = null;
   }
 
@@ -130,7 +129,7 @@ class PerlCodeMergingLexerAdapter extends LexerBase implements PerlElementTypes 
     if (myTokenType != LEFT_BRACE_CODE_START) {
       return;
     }
-    if (myTokenStart == myBufferStart || !myAllowToMergeCodeBlocks)    // block reparsing
+    if (myTokenStart == myBufferStart || !myPerlLexingContext.isAllowToMergeCode())    // block reparsing
     {
       myTokenType = LEFT_BRACE;
       return;
@@ -157,7 +156,7 @@ class PerlCodeMergingLexerAdapter extends LexerBase implements PerlElementTypes 
     myState = PerlLexer.YYINITIAL;
   }
 
-  void setSingleOpenQuoteChar(char singleOpenQuoteChar) {
-    myPerlLexer.setSingleOpenQuoteChar(singleOpenQuoteChar);
+  @NotNull PerlBaseLexer getPerlLexer() {
+    return myPerlLexer;
   }
 }

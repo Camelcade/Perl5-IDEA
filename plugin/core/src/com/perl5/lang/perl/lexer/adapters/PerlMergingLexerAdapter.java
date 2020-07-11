@@ -16,14 +16,12 @@
 
 package com.perl5.lang.perl.lexer.adapters;
 
-import com.intellij.lexer.Lexer;
 import com.intellij.lexer.MergingLexerAdapter;
-import com.intellij.openapi.project.Project;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.lexer.PerlLexingContext;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Third level of lexer adapter merges necessary tokens
@@ -35,15 +33,7 @@ public class PerlMergingLexerAdapter extends MergingLexerAdapter implements Perl
     STRING_CONTENT, REGEX_TOKEN, STRING_CONTENT_QQ, STRING_CONTENT_XQ, TokenType.WHITE_SPACE, COMMENT_BLOCK
   );
 
-  public PerlMergingLexerAdapter(@Nullable Project project) {
-    this(project, true, false);
-  }
-
-  public PerlMergingLexerAdapter(@Nullable Project project, boolean allowToMergeCodeBlocks, boolean forceSublexing) {
-    this(new PerlSublexingLexerAdapter(project, allowToMergeCodeBlocks, forceSublexing));
-  }
-
-  public PerlMergingLexerAdapter(@NotNull Lexer original) {
-    super(original, TOKENS_TO_MERGE);
+  public PerlMergingLexerAdapter(@NotNull PerlLexingContext lexingContext) {
+    super(new PerlSublexingLexerAdapter(lexingContext), TOKENS_TO_MERGE);
   }
 }

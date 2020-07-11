@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ package parser;
 
 import categories.Performance;
 import com.intellij.testFramework.PlatformTestUtil;
+import com.perl5.lang.perl.lexer.PerlLexingContext;
 import com.perl5.lang.perl.lexer.adapters.PerlMergingLexerAdapter;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -53,7 +54,8 @@ public class PerlLexerPerformanceTest extends PerlParserTestBase {
   }
 
   private long testLexing(String testData) {
-    PerlMergingLexerAdapter perlLexer = new PerlMergingLexerAdapter(getProject(), false, true);
+    PerlLexingContext lexingContext = PerlLexingContext.create(getProject()).withAllowToMergeCode(false).withEnforcedSublexing(true);
+    PerlMergingLexerAdapter perlLexer = new PerlMergingLexerAdapter(lexingContext);
     perlLexer.start(testData, 0, testData.length(), 0);
 
     long start = System.currentTimeMillis();

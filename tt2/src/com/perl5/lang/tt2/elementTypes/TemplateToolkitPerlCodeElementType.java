@@ -24,6 +24,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.ILazyParseableElementType;
 import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.lang.perl.lexer.PerlLexingContext;
 import com.perl5.lang.perl.lexer.adapters.PerlMergingLexerAdapter;
 import com.perl5.lang.perl.parser.PerlParserImpl;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
@@ -45,7 +46,7 @@ public class TemplateToolkitPerlCodeElementType extends ILazyParseableElementTyp
     PsiBuilder builder = PsiBuilderFactory.getInstance().createBuilder(
       project,
       chameleon,
-      new PerlMergingLexerAdapter(project),
+      new PerlMergingLexerAdapter(PerlLexingContext.create(project)),
       PerlLanguage.INSTANCE,
       chameleon.getText()
     );

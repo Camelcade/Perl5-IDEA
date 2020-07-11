@@ -432,14 +432,10 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
       return PerlNamesCache.getInstance(myProject).getNamespacesNamesSet();
     });
     myLocalPackages.clear();
+  }
 
-    /**
-     * This is a hack for {@link com.perl5.lang.perl.parser.elementTypes.PerlLazyCodeBlockElementTypeWithTryCatch}
-     */
-    if (yystate() == -1) {
-      yybegin(YYINITIAL);
-      myHasTryCatch = true;
-    }
+  public void setHasTryCatch(Boolean hasTryCatch) {
+    myHasTryCatch = hasTryCatch;
   }
 
   protected IElementType getNewLineToken() {

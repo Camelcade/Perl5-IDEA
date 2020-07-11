@@ -17,16 +17,13 @@
 package com.perl5.lang.perl.parser.elementTypes;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.lexer.DelegateLexer;
-import com.intellij.lexer.FlexLexer;
-import com.intellij.lexer.Lexer;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.lexer.PerlElementTypesGenerated;
 import com.perl5.lang.perl.lexer.PerlLexer;
-import com.perl5.lang.perl.lexer.adapters.PerlSubLexerAdapter;
+import com.perl5.lang.perl.lexer.PerlLexingContext;
 import org.jetbrains.annotations.NotNull;
 
 
@@ -42,26 +39,16 @@ public class PerlLazyQStringElementType extends PerlLazyBlockElementType {
   }
 
   @Override
-  protected @NotNull Lexer getLexer(@NotNull Project project, @NotNull ASTNode chameleon) {
-    PerlSubLexerAdapter subLexerAdapter = PerlSubLexerAdapter.forStringSQ(project);
+  protected @NotNull PerlLexingContext getLexingContext(@NotNull Project project, @NotNull ASTNode chameleon) {
+    PerlLexingContext baseContext = super.getLexingContext(project, chameleon).withEnforcedInitialState(PerlLexer.STRING_Q);
     ASTNode prevNode = chameleon.getTreePrev();
     if (PsiUtilCore.getElementType(prevNode) != PerlElementTypesGenerated.QUOTE_SINGLE_OPEN) {
-      return subLexerAdapter;
+      return baseContext;
     }
     CharSequence nodeChars = prevNode.getChars();
     if (nodeChars.length() != 1) {
       LOG.error("Got " + nodeChars);
     }
-    char openQuoteChar = nodeChars.charAt(0);
-
-    FlexLexer perlLexer = subLexerAdapter.getFlex();
-    LOG.assertTrue(perlLexer instanceof PerlLexer, "Got " + perlLexer);
-    return new DelegateLexer(subLexerAdapter) {
-      @Override
-      public void start(@NotNull CharSequence buffer, int startOffset, int endOffset, int initialState) {
-        super.start(buffer, startOffset, endOffset, initialState);
-        ((PerlLexer)perlLexer).setSingleOpenQuoteChar(openQuoteChar);
-      }
-    };
+    return baseContext.withOpenChar(nodeChars.charAt(0));
   }
 }

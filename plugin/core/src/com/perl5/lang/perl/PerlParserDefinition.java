@@ -28,6 +28,7 @@ import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.lexer.PerlLexingContext;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.lexer.adapters.PerlMergingLexerAdapter;
 import com.perl5.lang.perl.parser.PerlParserImpl;
@@ -65,7 +66,7 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes 
 
   @Override
   public @NotNull Lexer createLexer(Project project) {
-    return new PerlMergingLexerAdapter(project);
+    return new PerlMergingLexerAdapter(PerlLexingContext.create(project));
   }
 
   @Override
