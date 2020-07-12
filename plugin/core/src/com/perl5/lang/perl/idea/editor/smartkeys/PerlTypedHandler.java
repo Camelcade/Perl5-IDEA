@@ -43,7 +43,6 @@ import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.mixins.PerlStringBareMixin;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -300,9 +299,7 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
     return typedChar == '^' && PRE_VARIABLE_NAME_TOKENS.contains(elementType) ||
            typedChar == '>' && elementType == OPERATOR_MINUS ||
            typedChar == ':' && elementType == COLON ||
-           typedChar == ' ' && (AUTO_OPENED_TOKENS.contains(elementType) ||
-                                elementParent instanceof PerlStringBareMixin &&
-                                elementParent.getParent() instanceof PsiPerlStringList) ||
+           typedChar == ' ' && (AUTO_OPENED_TOKENS.contains(elementType) || PerlStringList.isListElement(element)) ||
            typedChar == '{' && SIGILS.contains(elementType) ||
            StringUtil.containsChar("$@%#", typedChar);
   }

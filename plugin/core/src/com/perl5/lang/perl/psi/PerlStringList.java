@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,15 @@
 
 package com.perl5.lang.perl.psi;
 
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.util.PsiUtilCore;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 
 
 public interface PerlStringList extends PerlQuoted {
@@ -29,4 +35,21 @@ public interface PerlStringList extends PerlQuoted {
    */
   @NotNull
   List<String> getStringContents();
+
+  /**
+   * @return true iff {@code element} is a string content inside the qw list
+   */
+  static boolean isListElement(@Nullable PsiElement element) {
+    if (PsiUtilCore.getElementType(element) != STRING_CONTENT) {
+      return false;
+    }
+    PsiElement parentElement = element.getParent();
+    IElementType parentElementType = PsiUtilCore.getElementType(parentElement);
+    if (parentElementType != STRING_BARE) {
+      return false;
+    }
+    PsiElement grandParentElement = parentElement.getParent();
+    IElementType grandParentElementType = PsiUtilCore.getElementType(grandParentElement);
+    return grandParentElementType == LP_STRING_QW || grandParentElementType == STRING_LIST;
+  }
 }
