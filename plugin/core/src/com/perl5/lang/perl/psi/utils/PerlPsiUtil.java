@@ -23,6 +23,8 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.*;
 import com.intellij.psi.impl.source.PsiFileImpl;
+import com.intellij.psi.impl.source.tree.CompositeElement;
+import com.intellij.psi.impl.source.tree.LazyParseableElement;
 import com.intellij.psi.search.PsiElementProcessor;
 import com.intellij.psi.stubs.PsiFileStub;
 import com.intellij.psi.stubs.Stub;
@@ -986,5 +988,31 @@ public class PerlPsiUtil implements PerlElementTypes {
    */
   public static @NotNull <T extends PsiElement> List<T> cleanupChildren(@NotNull T[] source) {
     return ContainerUtil.filter(source, it -> !PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(PsiUtilCore.getElementType(it)));
+  }
+
+  /**
+   * @return composite children of the given {@code psiElement}. If child happens to be lazy parsable, it's children collected instead of it.
+   */
+  public static @NotNull List<? extends PsiElement> getCompositeChildrenUnwrappingLazy(@Nullable PsiElement psiElement) {
+    if (psiElement == null) {
+      return Collections.emptyList();
+    }
+    @NotNull PsiElement[] rawChildren = psiElement.getChildren();
+    if (rawChildren.length == 0) {
+      return Collections.emptyList();
+    }
+
+    List<PsiElement> result = new ArrayList<>();
+    for (PsiElement child : rawChildren) {
+      ASTNode childNode = child.getNode();
+      if (childNode instanceof LazyParseableElement) {
+        result.addAll(getCompositeChildrenUnwrappingLazy(child));
+      }
+      else if (childNode instanceof CompositeElement) {
+        result.add(child);
+      }
+    }
+
+    return result;
   }
 }

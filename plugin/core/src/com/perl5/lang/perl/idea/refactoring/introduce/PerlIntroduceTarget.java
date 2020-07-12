@@ -164,8 +164,9 @@ public class PerlIntroduceTarget extends PsiIntroduceTarget<PsiElement> {
    */
   private static @NotNull List<PsiElement> getChildrenInRange(@NotNull PsiElement element, TextRange rangeInElement) {
     List<PsiElement> result = new ArrayList<>();
-    for (PsiElement child : element.getChildren()) {
-      if (rangeInElement.contains(child.getTextRangeInParent())) {
+    TextRange rangeInDocument = rangeInElement.shiftRight(element.getNode().getStartOffset());
+    for (PsiElement child : PerlPsiUtil.getCompositeChildrenUnwrappingLazy(element)) {
+      if (rangeInDocument.contains(child.getTextRange())) {
         result.add(child);
       }
     }
