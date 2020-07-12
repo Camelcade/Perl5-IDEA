@@ -36,6 +36,7 @@ import com.intellij.util.Function;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.lexer.PerlSyntax;
+import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.PerlAssignExpression.PerlAssignValueDescriptor;
 import com.perl5.lang.perl.psi.impl.PerlBuiltInVariable;
@@ -76,8 +77,9 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
    * Mostly these are structural elements without any perl value
    */
   private static final TokenSet TRANSPARENT_CONTAINERS = TokenSet.orSet(
-    LAZY_CODE_BLOCKS,
+    LAZY_CODE_BLOCKS, PerlTokenSets.LAZY_PARSABLE_REGEXPS, PerlTokenSets.LAZY_PARSABLE_STRINGS,
     TokenSet.create(
+      LP_STRING_QW,
       NAMESPACE_CONTENT, NAMESPACE_DEFINITION,
       DO_BLOCK_EXPR,
       SIGNATURE_CONTENT, SIGNATURE_ELEMENT,
