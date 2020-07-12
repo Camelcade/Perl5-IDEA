@@ -50,6 +50,10 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
       PerlParserUtil.DUMMY_BLOCK
     );
 
+  private static final TokenSet TRANSPARENT_ELEMENT_TYPES = TokenSet.orSet(
+    LAZY_PARSABLE_STRINGS, TokenSet.create(LP_STRING_QW)
+  );
+
   protected final @NotNull PerlFormattingContext myContext;
   private Indent myIndent;
   private Boolean myIsFirst;
@@ -87,15 +91,20 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
     if (MATCH_REGEXP_CONTAINERS.contains(getElementType())) {
       return buildRegexpSubBlocks();
     }
-
     List<Block> blocks = new ArrayList<>();
+    buildSubBlocksForNode(blocks, myNode);
+    return processSubBlocks(blocks);
+  }
 
-    for (ASTNode child = myNode.getFirstChildNode(); child != null; child = child.getTreeNext()) {
-      if (shouldCreateSubBlockFor(child)) {
+  private void buildSubBlocksForNode(@NotNull List<Block> blocks, @NotNull ASTNode node) {
+    for (ASTNode child = node.getFirstChildNode(); child != null; child = child.getTreeNext()) {
+      if (TRANSPARENT_ELEMENT_TYPES.contains(PsiUtilCore.getElementType(child))) {
+        buildSubBlocksForNode(blocks, child);
+      }
+      else if (shouldCreateSubBlockFor(child)) {
         blocks.add(createBlock(child));
       }
     }
-    return processSubBlocks(blocks);
   }
 
   protected @NotNull List<Block> buildRegexpSubBlocks() {

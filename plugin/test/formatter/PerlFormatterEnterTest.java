@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -77,6 +77,18 @@ public class PerlFormatterEnterTest extends PerlFormatterTestCase {
 
   @Test
   public void testQwList() {doTest();}
+
+  @Test
+  public void testAnonHashInBlock() {doTest();}
+
+  @Test
+  public void testAnonListInBlock() {doTest();}
+
+  @Test
+  public void testAnonArrayInBlock() {doTest();}
+
+  @Test
+  public void testQwListInBlock() {doTest();}
 
   @Test
   public void testCommaSequenceTop() {doTest();}
