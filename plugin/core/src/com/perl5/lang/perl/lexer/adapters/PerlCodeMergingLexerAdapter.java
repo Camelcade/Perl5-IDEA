@@ -129,8 +129,7 @@ class PerlCodeMergingLexerAdapter extends LexerBase implements PerlElementTypes 
     if (myTokenType != LEFT_BRACE_CODE_START) {
       return;
     }
-    if (myTokenStart == myBufferStart || !myPerlLexingContext.isAllowToMergeCode())    // block reparsing
-    {
+    if (myTokenStart == myBufferStart || !myPerlLexingContext.isAllowToMergeCode() || myPerlLexingContext.isEnforceSubLexing()) {
       myTokenType = LEFT_BRACE;
       return;
     }

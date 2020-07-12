@@ -33,15 +33,16 @@ import com.perl5.lang.perl.lexer.LexerWithContext;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.lexer.PerlLexingContext;
-import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementTypes {
   private static final Logger LOG = Logger.getInstance(FlexAdapter.class);
   private static final int LAZY_BLOCK_MINIMAL_SIZE = 140;
-  private static final Map<IElementType, Integer> SUBLEXINGS_MAP = new THashMap<>();
+  private static final Map<IElementType, Integer> SUBLEXINGS_MAP = new HashMap<>();
+  private static final Map<IElementType, Integer> ENFORCED_SUBLEXINGS_MAP = new HashMap<>();
 
   static {
     SUBLEXINGS_MAP.put(LP_STRING_QW, PerlLexer.STRING_LIST);
@@ -56,6 +57,12 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
     SUBLEXINGS_MAP.put(LP_REGEX, PerlLexer.MATCH_REGEX);
     SUBLEXINGS_MAP.put(LP_REGEX_X, PerlLexer.MATCH_REGEX_X);
     SUBLEXINGS_MAP.put(LP_REGEX_XX, PerlLexer.MATCH_REGEX_XX);
+
+    ENFORCED_SUBLEXINGS_MAP.put(COMMENT_ANNOTATION, PerlLexer.ANNOTATION);
+    ENFORCED_SUBLEXINGS_MAP.put(HEREDOC, PerlLexer.STRING_Q);
+    ENFORCED_SUBLEXINGS_MAP.put(LP_CODE_BLOCK, PerlLexer.YYINITIAL);
+    ENFORCED_SUBLEXINGS_MAP.put(HEREDOC_QQ, PerlLexer.STRING_QQ);
+    ENFORCED_SUBLEXINGS_MAP.put(HEREDOC_QX, PerlLexer.STRING_QX);
   }
 
   private final LexerWithContext myMainLexerWithContext;
@@ -171,28 +178,35 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
 
       Integer subLexingState = SUBLEXINGS_MAP.get(myTokenType);
 
-      if (subLexingState == null ||
-          (myTokenEnd - myTokenStart > LAZY_BLOCK_MINIMAL_SIZE && !myMainLexerWithContext.getLexingContext().isEnforceSubLexing())) {
-        return;
+      boolean enforceSubLexing = myMainLexerWithContext.getLexingContext().isEnforceSubLexing();
+      if (subLexingState != null && (myTokenEnd - myTokenStart <= LAZY_BLOCK_MINIMAL_SIZE || enforceSubLexing)) {
+        subLexCurrentToken(subLexingState);
       }
-
-      // need to sublex
-      PerlSublexingLexerAdapter subLexer = getSubLexer();
-      if (subLexingState == PerlLexer.STRING_Q) {
-        subLexer.start(getBufferSequence(), myTokenStart, myTokenEnd, subLexingState, mySingleOpenQuoteChar);
+      else if (enforceSubLexing) {
+        Integer initialState = ENFORCED_SUBLEXINGS_MAP.get(myTokenType);
+        if (initialState != null) {
+          subLexCurrentToken(initialState);
+        }
       }
-      else {
-        subLexer.start(getBufferSequence(), myTokenStart, myTokenEnd, subLexingState);
-      }
-      myIsSublexing = true;
-      myTokenType = null;
-      locateToken();
     }
     catch (Exception | Error e) {
       LOG.error(myMainLexerWithContext.getClass().getName(), e);
       myTokenType = TokenType.WHITE_SPACE;
       myTokenEnd = getBufferEnd();
     }
+  }
+
+  private void subLexCurrentToken(Integer subLexingState) {
+    PerlSublexingLexerAdapter subLexer = getSubLexer();
+    if (subLexingState == PerlLexer.STRING_Q) {
+      subLexer.start(getBufferSequence(), myTokenStart, myTokenEnd, subLexingState, mySingleOpenQuoteChar);
+    }
+    else {
+      subLexer.start(getBufferSequence(), myTokenStart, myTokenEnd, subLexingState);
+    }
+    myIsSublexing = true;
+    myTokenType = null;
+    locateToken();
   }
 
   private void lexToken(Lexer lexer) {
