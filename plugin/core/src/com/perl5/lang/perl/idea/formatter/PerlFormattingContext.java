@@ -453,7 +453,8 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     }
     else if ((parentNodeType == STRING_LIST || parentNodeType == LP_STRING_QW) &&
              (childNodeType == STRING_BARE || childNodeType == QUOTE_SINGLE_CLOSE)) {
-      return getWrapBySettings(parentNode, myPerlSettings.QW_LIST_WRAP, false);
+      ASTNode anchorNode = parentNodeType == LP_STRING_QW ? parentNode.getTreeParent() : parentNode;
+      return getWrapBySettings(anchorNode, myPerlSettings.QW_LIST_WRAP, false);
     }
     else if (childNodeType == VARIABLE_DECLARATION_ELEMENT && parentNodeType != SIGNATURE_ELEMENT ||
              (childNodeType == UNDEF_EXPR && PerlTokenSets.VARIABLE_DECLARATIONS.contains(parentNodeType))) {

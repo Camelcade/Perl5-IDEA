@@ -55,7 +55,8 @@ my @list = qw/
         list
         of
         different
-        strings/;
+        strings
+/;
 
 my @list = qw/
         this
