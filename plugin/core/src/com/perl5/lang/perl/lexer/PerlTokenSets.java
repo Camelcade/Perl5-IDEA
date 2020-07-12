@@ -378,6 +378,10 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
     LP_STRING_RE
   );
 
+  TokenSet TRANSPARENT_ELEMENT_TYPES = TokenSet.orSet(
+    LAZY_PARSABLE_STRINGS, TokenSet.create(LP_STRING_QW), LAZY_CODE_BLOCKS, LAZY_PARSABLE_REGEXPS
+  );
+
   TokenSet HEREDOC_ENDS = TokenSet.create(HEREDOC_END, HEREDOC_END_INDENTABLE);
 
   TokenSet LOOP_CONTROL_KEYWORDS = TokenSet.create(

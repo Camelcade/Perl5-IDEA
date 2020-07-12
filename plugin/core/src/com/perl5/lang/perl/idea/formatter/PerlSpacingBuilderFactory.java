@@ -53,9 +53,6 @@ import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.IF_STAT
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.LEFT_BRACE;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.LEFT_BRACKET;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.LEFT_PAREN;
-import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.LP_CODE_BLOCK;
-import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.LP_CODE_BLOCK_WITH_TRYCATCH;
-import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.LP_STRING_QW;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.METHOD_DEFINITION;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.METHOD_EXPR;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.NAMESPACE_DEFINITION;
@@ -198,7 +195,6 @@ public class PerlSpacingBuilderFactory {
       .between(NUMBER_CONSTANT, OPERATOR_CONCAT).spaces(1)
       .aroundInside(OPERATOR_CONCAT, ADD_EXPR).spaceIf(perlSettings.SPACE_AROUND_CONCAT_OPERATOR)
 
-      .betweenInside(STRING_BARE, STRING_BARE, LP_STRING_QW).spaces(1)
       .betweenInside(STRING_BARE, STRING_BARE, STRING_LIST).spaces(1)
 
       .betweenInside(QUOTE_SINGLE_OPEN, QUOTE_SINGLE_CLOSE, STRING_LIST).spaces(0)
@@ -323,22 +319,6 @@ public class PerlSpacingBuilderFactory {
       .afterInside(VERSION_ELEMENT, NO_STATEMENT).spaces(1)
 
       .beforeInside(BLOCK, SUB_OR_MODIFIER_DEFINITIONS_TOKENSET).spacing(
-        settings.SPACE_BEFORE_IF_LBRACE ? 1 : 0,
-        settings.SPACE_BEFORE_IF_LBRACE ? 1 : 0,
-        perlSettings.BRACE_STYLE_SUB == SAME_LINE ? 0 : 1,
-        false,
-        0
-      )
-
-      .beforeInside(LP_CODE_BLOCK, SUB_OR_MODIFIER_DEFINITIONS_TOKENSET).spacing(
-        settings.SPACE_BEFORE_IF_LBRACE ? 1 : 0,
-        settings.SPACE_BEFORE_IF_LBRACE ? 1 : 0,
-        perlSettings.BRACE_STYLE_SUB == SAME_LINE ? 0 : 1,
-        false,
-        0
-      )
-
-      .beforeInside(LP_CODE_BLOCK_WITH_TRYCATCH, SUB_OR_MODIFIER_DEFINITIONS_TOKENSET).spacing(
         settings.SPACE_BEFORE_IF_LBRACE ? 1 : 0,
         settings.SPACE_BEFORE_IF_LBRACE ? 1 : 0,
         perlSettings.BRACE_STYLE_SUB == SAME_LINE ? 0 : 1,

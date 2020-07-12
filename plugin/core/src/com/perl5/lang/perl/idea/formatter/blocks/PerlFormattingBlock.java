@@ -50,10 +50,6 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
       PerlParserUtil.DUMMY_BLOCK
     );
 
-  private static final TokenSet TRANSPARENT_ELEMENT_TYPES = TokenSet.orSet(
-    LAZY_PARSABLE_STRINGS, TokenSet.create(LP_STRING_QW)
-  );
-
   protected final @NotNull PerlFormattingContext myContext;
   private Indent myIndent;
   private Boolean myIsFirst;
@@ -221,12 +217,6 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 
   @Override
   public final @NotNull ChildAttributes getChildAttributes(int newChildIndex) {
-    if (getElementType() == REPLACEMENT_REGEX) {
-      List<Block> subBlocks = getSubBlocks();
-      if (subBlocks.size() > newChildIndex && LAZY_CODE_BLOCKS.contains(ASTBlock.getElementType(subBlocks.get(newChildIndex)))) {
-        return ChildAttributes.DELEGATE_TO_NEXT_CHILD;
-      }
-    }
     return myContext.getChildAttributes(this, newChildIndex);
   }
 

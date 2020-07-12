@@ -344,15 +344,12 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
       DO_BLOCK_EXPR,
       EVAL_EXPR,
       SUB_EXPR,
-      PerlStubElementTypes.FILE,
-
-      LP_STRING_QW
+      PerlStubElementTypes.FILE
     ));
 
   TokenSet UNINDENTABLE_TOKENS = TokenSet.orSet(
     LAZY_CODE_BLOCKS,
     TokenSet.create(
-      LP_STRING_QW,
       COMMA_SEQUENCE_EXPR,
       CALL_ARGUMENTS,
       REGEX_QUOTE_CLOSE,

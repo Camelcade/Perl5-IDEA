@@ -35,8 +35,7 @@ package Foo::Bar {
     for (;;) {}
     foreach (;;) {}
 
-    sub
-    {say 'hi'};
+    sub {say 'hi'};
     eval {say 'hi'};
     do {say 'hi'};
     map {defined} @INC;

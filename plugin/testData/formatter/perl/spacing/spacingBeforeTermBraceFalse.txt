@@ -1,6 +1,6 @@
 do{};
 eval{};
-sub {};
+sub{};
 map{} @INC;
 grep{} @INC;
 sort{} @INC;
@@ -9,7 +9,7 @@ grep{}, @INC;
 sort{}, @INC;
 do{say $a};
 eval{say $a};
-sub {say $a};
+sub{say $a};
 map{say $a} @INC;
 grep{say $a} @INC;
 sort{say $a} @INC;

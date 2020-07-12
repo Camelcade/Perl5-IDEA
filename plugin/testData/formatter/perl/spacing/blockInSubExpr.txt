@@ -1,4 +1,5 @@
-sub {
+sub
+{
     say 'hi';
 };
 
@@ -11,7 +12,8 @@ $a = sub {
 
 };
 
-$a = sub {
+$a = sub
+{
     say 'hi';
 
 };
@@ -23,7 +25,8 @@ $a =
         };
 
 $a =
-        sub {
+        sub
+        {
             say 'hi';
 
         };

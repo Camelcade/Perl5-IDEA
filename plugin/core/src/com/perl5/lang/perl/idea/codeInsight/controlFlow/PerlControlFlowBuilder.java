@@ -53,7 +53,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
-import static com.perl5.lang.perl.lexer.PerlTokenSets.LAZY_CODE_BLOCKS;
 
 public class PerlControlFlowBuilder extends ControlFlowBuilder {
   public static final Set<String> DIE_SUBS = ContainerUtil.newHashSet(
@@ -77,9 +76,8 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
    * Mostly these are structural elements without any perl value
    */
   private static final TokenSet TRANSPARENT_CONTAINERS = TokenSet.orSet(
-    LAZY_CODE_BLOCKS, PerlTokenSets.LAZY_PARSABLE_REGEXPS, PerlTokenSets.LAZY_PARSABLE_STRINGS,
+    PerlTokenSets.TRANSPARENT_ELEMENT_TYPES,
     TokenSet.create(
-      LP_STRING_QW,
       NAMESPACE_CONTENT, NAMESPACE_DEFINITION,
       DO_BLOCK_EXPR,
       SIGNATURE_CONTENT, SIGNATURE_ELEMENT,

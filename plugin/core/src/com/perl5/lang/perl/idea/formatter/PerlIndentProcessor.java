@@ -129,7 +129,7 @@ public class PerlIndentProcessor implements PerlElementTypes {
       return Indent.getNoneIndent();
     }
 
-    if (nodeType == STRING_BARE && (parentNodeType == STRING_LIST || parentNodeType == LP_STRING_QW)) {
+    if (nodeType == STRING_BARE && parentNodeType == STRING_LIST) {
       return Indent.getContinuationIndent();
     }
 
@@ -192,6 +192,15 @@ public class PerlIndentProcessor implements PerlElementTypes {
 
     if (getBlockLikeContainers().contains(elementType)) {
       return Indent.getNormalIndent();
+    }
+
+    if (elementType == REPLACEMENT_REGEX) {
+      List<Block> subBlocks = block.getSubBlocks();
+      IElementType currentBlockElementType = subBlocks.size() > newChildIndex
+                                             ? ASTBlock.getElementType(subBlocks.get(newChildIndex)) : null;
+      if (currentBlockElementType == BLOCK || currentBlockElementType == REGEX_QUOTE_CLOSE) {
+        return Indent.getNormalIndent();
+      }
     }
 
     if (parentNode != null && block instanceof PerlSyntheticBlock && block.getSubBlocks().size() == newChildIndex) {
