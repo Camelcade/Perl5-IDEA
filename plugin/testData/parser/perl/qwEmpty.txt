@@ -1,0 +1,14 @@
+Subtree: Perl5 (Perl5)
+Perl5
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlStringListImpl(Perl5: STRING_LIST)
+      PsiElement(Perl5: qw)('qw')
+      PsiElement(Perl5: QUOTE_SINGLE_OPEN)('/')
+      PerlCompositeElementImpl(LP_STRING_QW)
+      PsiElement(Perl5: QUOTE_SINGLE_CLOSE)('/')
+    PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('qw/ /;')
+--------------------------------------------------------------------------------

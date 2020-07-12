@@ -257,7 +257,14 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
   public static boolean mapUseVars(PsiBuilder b, int l, Parser parser) {
     PsiBuilder.Marker m = b.mark();
 
-    boolean r = parser.parse(b, l);
+    boolean r;
+    if (b.getTokenType() == LP_STRING_QW) {
+      b.advanceLexer();
+      r = true;
+    }
+    else {
+      r = parser.parse(b, l);
+    }
 
     // fixme prepend last done marker
     if (r) {

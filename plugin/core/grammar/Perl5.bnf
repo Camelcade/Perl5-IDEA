@@ -1288,8 +1288,8 @@ string_bare ::= STRING_CONTENT
 string_sq ::= [ 'q'] quoted_sq_string
 string_list ::=  'qw' qw_string {pin=1}
 private qw_string ::= QUOTE_SINGLE_OPEN [parse_qw_string_content] QUOTE_SINGLE_CLOSE {pin=1}
-private parse_qw_string_content ::= <<isUseVars>> <<mapUseVars qw_string_content>>+|qw_string_content
-private qw_string_content ::= string_bare+ | <<consumeTokens 'LP_STRING_QW'>>
+private parse_qw_string_content ::= <<isUseVars>> <<mapUseVars qw_string_content>>+| qw_string_content | <<consumeTokens 'LP_STRING_QW'>>
+private qw_string_content ::= string_bare+
 private quoted_sq_string ::= QUOTE_SINGLE_OPEN [smart_sq_string_content] QUOTE_SINGLE_CLOSE {pin=1}
 private smart_sq_string_content ::= <<isUseVars>> <<mapUseVars sq_string_content_element>>+ | sq_string_content
 private sq_string_content ::= sq_string_content_element +
@@ -1388,7 +1388,7 @@ lp_string_qq_restricted ::= qq_string_content {extraRoot=true}
 lp_string_q ::= sq_string_content {extraRoot=true}
 lp_string_qx ::= qx_string_content{extraRoot=true}
 lp_string_qx_restricted ::= qx_string_content{extraRoot=true}
-lp_string_qw ::= qw_string_content{extraRoot=true}
+lp_string_qw ::= [qw_string_content] {extraRoot=true}
 
 lp_regex ::= perl_regex {extraRoot=true}
 lp_regex_x ::= perl_regex {extraRoot=true}
