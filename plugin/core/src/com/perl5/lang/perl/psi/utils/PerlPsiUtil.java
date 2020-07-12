@@ -541,7 +541,7 @@ public class PerlPsiUtil implements PerlElementTypes {
   }
 
   /**
-   * Checking the tree before the {@code element} and looking for annotions in code. Each annotation is processed by {@code annotationProcessor}
+   * Checking the tree before the {@code element} and looking for annotations in code. Each annotation is processed by {@code annotationProcessor}
    */
   public static void processElementAnnotations(@NotNull PsiElement element, @NotNull Processor<PerlAnnotation> annotationProcessor) {
     if (element instanceof PsiFile) {
@@ -549,9 +549,11 @@ public class PerlPsiUtil implements PerlElementTypes {
     }
     PsiElement run = element.getPrevSibling();
 
-    boolean isListItem = element.getParent() instanceof PerlStringList;
+    PsiElement parentElement = element.getParent();
+    IElementType parentElementType = PsiUtilCore.getElementType(parentElement);
+    boolean isListItem = parentElementType == LP_STRING_QW || parentElementType == STRING_LIST;
     if (run == null || isListItem) {
-      run = isListItem ? element.getParent() : element;
+      run = !isListItem ? element : parentElementType == STRING_LIST ? parentElement : parentElement.getParent();
       int elementOffset = element.getNode().getStartOffset();
       while (true) {
         PsiElement parent = run.getParent();
