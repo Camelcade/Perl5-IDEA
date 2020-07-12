@@ -45,7 +45,6 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
   private static final Map<IElementType, Integer> ENFORCED_SUBLEXINGS_MAP = new HashMap<>();
 
   static {
-    SUBLEXINGS_MAP.put(LP_STRING_QW, PerlLexer.STRING_LIST);
     SUBLEXINGS_MAP.put(LP_STRING_Q, PerlLexer.STRING_Q);
     SUBLEXINGS_MAP.put(LP_STRING_QQ, PerlLexer.STRING_QQ);
     SUBLEXINGS_MAP.put(LP_STRING_TR, PerlLexer.STRING_TR_BEGIN);
@@ -55,8 +54,10 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
     SUBLEXINGS_MAP.put(LP_STRING_QX_RESTRICTED, PerlLexer.STRING_QX_RESTRICTED);
 
     SUBLEXINGS_MAP.put(LP_REGEX, PerlLexer.MATCH_REGEX);
-    SUBLEXINGS_MAP.put(LP_REGEX_X, PerlLexer.MATCH_REGEX_X);
-    SUBLEXINGS_MAP.put(LP_REGEX_XX, PerlLexer.MATCH_REGEX_XX);
+
+    ENFORCED_SUBLEXINGS_MAP.put(LP_STRING_QW, PerlLexer.STRING_LIST);
+    ENFORCED_SUBLEXINGS_MAP.put(LP_REGEX_X, PerlLexer.MATCH_REGEX_X);
+    ENFORCED_SUBLEXINGS_MAP.put(LP_REGEX_XX, PerlLexer.MATCH_REGEX_XX);
 
     ENFORCED_SUBLEXINGS_MAP.put(COMMENT_ANNOTATION, PerlLexer.ANNOTATION);
     ENFORCED_SUBLEXINGS_MAP.put(HEREDOC, PerlLexer.STRING_Q);
@@ -151,7 +152,7 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
 
   private @NotNull PerlSublexingLexerAdapter getSubLexer() {
     if (mySubLexer == null) {
-      mySubLexer = new PerlSublexingLexerAdapter(myMainLexerWithContext.getLexingContext());
+      mySubLexer = new PerlSublexingLexerAdapter(myMainLexerWithContext.getLexingContext().withOpenChar((char)0));
     }
     return mySubLexer;
   }
