@@ -4,15 +4,20 @@
 [![Coverage Status](https://coveralls.io/repos/github/Camelcade/Perl5-IDEA/badge.svg?branch=master)](https://coveralls.io/github/Camelcade/Perl5-IDEA?branch=master)
 [![Chat on gitter](https://badges.gitter.im/Camelcade/Perl5-IDEA.png)](https://gitter.im/IntelliJ-Plugin-Perl5/Lobby)
 
-This repo contains a bundle of Perl5-related plugins for [JetBrains IDEs](https://www.jetbrains.com/). 
+[Support with PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HJCUADZKY5G7E)
+|
+[Support with Yandex.Money](https://money.yandex.ru/to/41001227135087)
+
+This repo contains a bundle of Perl5-related plugins for [JetBrains IDEs](https://www.jetbrains.com/).
 
 Current versions of plugins may be found in [JetBrains repo](https://plugins.jetbrains.com/).
 
 #### This repository contains following plugins:
 
-- Perl plugin (`plugin`) - base plugin with perl & pod support and all basic features ([repo](https://plugins.jetbrains.com/plugin/7796-perl)).
+- Perl plugin (`plugin`) - base plugin with perl & pod support and all basic
+  features ([repo](https://plugins.jetbrains.com/plugin/7796-perl)).
 - [Template Toolkit](http://www.template-toolkit.org/) Support (`lang.tt2`)
-- [Mojolicious](https://mojolicious.org/) Support (`lang.mojo`) 
+- [Mojolicious](https://mojolicious.org/) Support (`lang.mojo`)
 - Mason framework (`lang.mason.framework`) - core plugin of Mason plugins:
   - [HTML::Mason](https://metacpan.org/pod/HTML::Mason) Support (`lang.mason.htmlmason`) 
   - [Mason2](https://metacpan.org/pod/Mason) Support (`lang.mason.mason2`) 
@@ -27,8 +32,6 @@ You can always build and install current development version of any plugin:
 5. Choose plugin file in the `build/distributions` directory of the respective plugin root  
 
 If you want to participate in development, don't forget to read our [contribution policy](https://github.com/hurricup/Perl5-IDEA/wiki/Contribution-policy).
-
-[![Donate to support Project](https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HJCUADZKY5G7E)
 
 * [Camelcade twitter](https://twitter.com/CamelcadeIDE) - here you may find links to the most recent dev builds
 * [Camelcade wiki](https://github.com/hurricup/Perl5-IDEA/wiki)

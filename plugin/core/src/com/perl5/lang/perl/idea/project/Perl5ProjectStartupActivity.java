@@ -57,7 +57,9 @@ public class Perl5ProjectStartupActivity implements StartupActivity {
           .addAction(new BrowseNotificationAction(PerlBundle.message("plugin.update.baloon.tracker"),
                                                   "https://github.com/hurricup/Perl5-IDEA/issues"))
           .addAction(new BrowseNotificationAction(PerlBundle.message("plugin.update.baloon.support"),
-                                                  "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HJCUADZKY5G7E"));
+                                                  "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HJCUADZKY5G7E"))
+          .addAction(new BrowseNotificationAction(PerlBundle.message("plugin.update.baloon.support.ym"),
+                                                  "https://money.yandex.ru/to/41001227135087"));
 
         Notifications.Bus.notify(notification);
       });
