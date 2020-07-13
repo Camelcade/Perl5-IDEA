@@ -34,15 +34,15 @@ Text: LAST_MATCH_START; Tail: null; Type: Built-in; Icon: /array_gutter_icon.png
 Text: LAST_PAREN_MATCH; Tail: {}; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: null
 	Lookups: LAST_PAREN_MATCH
 	PsiElement: Built-in: %LAST_PAREN_MATCH
-Text: Library::Exception2::; Tail: ...; Type: null; Icon: /exceptionClass.svg; Type Icon: null
+Text: Library::Exception2::; Tail: null; Type: null; Icon: /exceptionClass.svg; Type Icon: null
 	Lookups: Library::Exception2::
 	PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Library::Exception2; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 111 in Exceptions.pm
-Text: Library::Exception::; Tail: ...; Type: null; Icon: /exceptionClass.svg; Type Icon: null
+Text: Library::Exception::; Tail: null; Type: null; Icon: /exceptionClass.svg; Type Icon: null
 	Lookups: Library::Exception::
 	PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Library::Exception; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 54 in Exceptions.pm
-Text: LibraryException3::; Tail: ...; Type: null; Icon: /exceptionClass.svg; Type Icon: null
+Text: LibraryException3::; Tail: null; Type: null; Icon: /exceptionClass.svg; Type Icon: null
 	Lookups: LibraryException3::
 	PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@LibraryException3; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 131 in Exceptions.pm
-Text: LibraryException::; Tail: ...; Type: null; Icon: /exceptionClass.svg; Type Icon: null
+Text: LibraryException::; Tail: null; Type: null; Icon: /exceptionClass.svg; Type Icon: null
 	Lookups: LibraryException::
 	PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@LibraryException; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 80 in Exceptions.pm

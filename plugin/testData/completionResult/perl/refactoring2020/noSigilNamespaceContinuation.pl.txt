@@ -2,4 +2,4 @@ package Foo::Bar;
 my $scalar_var;
 our $SCALAR_VAR;
 
-MyTest::Some::Package::<caret>
+MyTest::Some::Package<caret>

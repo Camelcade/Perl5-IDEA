@@ -88,11 +88,8 @@ Text: BEGIN; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Ico
 Text: CHECK; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: CHECK
 	PsiElement: Implicit sub: CHECK()
-Text: CORE::GLOBAL->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
-	Lookups: CORE::GLOBAL->
-	PsiElement: Implicit namespace: CORE::GLOBAL
-Text: CORE::GLOBAL::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
-	Lookups: CORE::GLOBAL::
+Text: CORE::GLOBAL; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+	Lookups: CORE::GLOBAL
 	PsiElement: Implicit namespace: CORE::GLOBAL
 Text: DESTROY; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: DESTROY

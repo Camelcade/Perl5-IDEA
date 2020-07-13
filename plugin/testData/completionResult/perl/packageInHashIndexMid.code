@@ -1,2 +1,2 @@
 
-$hash{My<complete MyTest::Constants::>te};
+$hash{My<complete MyTest::Constants>te};

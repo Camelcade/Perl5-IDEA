@@ -1,6 +1,3 @@
-Text: Some::Thing->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
-	Lookups: Some::Thing->
-	PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Some::Thing at 0 in multipleNamespaces.pl
-Text: Some::Thing::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
-	Lookups: Some::Thing::
+Text: Some::Thing; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+	Lookups: Some::Thing
 	PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Some::Thing at 0 in multipleNamespaces.pl

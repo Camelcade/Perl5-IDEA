@@ -58,10 +58,14 @@ public class PerlPackageCompletionUtil {
   };
 
   public static boolean processNamespaceLookupElement(@NotNull PerlNamespaceDefinitionElement namespaceDefinition,
-                                                      @NotNull PerlCompletionProcessor completionProcessor) {
+                                                      @NotNull PerlCompletionProcessor completionProcessor,
+                                                      boolean appendNamespaceSeparator) {
+    String namespaceName = namespaceDefinition.getNamespaceName();
+    if (StringUtil.isEmpty(namespaceName)) {
+      return completionProcessor.result();
+    }
     return processPackageLookupElement(
-      namespaceDefinition, ObjectUtils.notNull(namespaceDefinition.getNamespaceName(), "unnamed"), namespaceDefinition.getIcon(0),
-      completionProcessor);
+      namespaceDefinition, namespaceName, namespaceDefinition.getIcon(0), completionProcessor, appendNamespaceSeparator);
   }
 
   /**
@@ -70,10 +74,15 @@ public class PerlPackageCompletionUtil {
   public static boolean processPackageLookupElement(@Nullable Object lookupObject,
                                                     @NotNull String packageName,
                                                     @Nullable Icon icon,
-                                                    @NotNull PerlCompletionProcessor completionProcessor) {
+                                                    @NotNull PerlCompletionProcessor completionProcessor,
+                                                    boolean appendNamespaceSeparator) {
     if (!completionProcessor.matches(packageName)) {
       return completionProcessor.result();
     }
+    if (appendNamespaceSeparator) {
+      packageName += PerlPackageUtil.NAMESPACE_SEPARATOR;
+    }
+
     LookupElementBuilder result = LookupElementBuilder.create(ObjectUtils.notNull(lookupObject, packageName), packageName);
 
     if (PerlPackageUtil.isBuiltIn(packageName)) {
@@ -85,6 +94,10 @@ public class PerlPackageCompletionUtil {
     }
     else {
       result = result.withIcon(icon == null ? PACKAGE_GUTTER_ICON : icon);
+    }
+
+    if (appendNamespaceSeparator) {
+      result = result.withInsertHandler(COMPLETION_REOPENER);
     }
 
     return completionProcessor.process(result);
@@ -104,7 +117,7 @@ public class PerlPackageCompletionUtil {
         public void addElement(@NotNull LookupElementBuilder lookupElement) {
           super.addElement(lookupElement.withInsertHandler(COMPLETION_REOPENER).withTailText("..."));
         }
-      });
+      }, false);
   }
 
   public static void fillWithAllNamespacesNames(@NotNull PerlCompletionProcessor completionProcessor) {
@@ -113,26 +126,20 @@ public class PerlPackageCompletionUtil {
     GlobalSearchScope resolveScope = element.getResolveScope();
 
     Processor<PerlNamespaceDefinitionElement> namespaceProcessor =
-      namespace -> PerlPackageCompletionUtil.processNamespaceLookupElement(namespace, completionProcessor);
+      namespace -> PerlPackageCompletionUtil.processNamespaceLookupElement(namespace, completionProcessor, false);
 
     PerlBuiltInNamespacesService.getInstance(project).processNamespaces(namespaceProcessor);
-    PerlPackageCompletionUtil.processPackageLookupElement(null, __PACKAGE__, PACKAGE_GUTTER_ICON, completionProcessor);
+    PerlPackageCompletionUtil.processPackageLookupElement(null, __PACKAGE__, PACKAGE_GUTTER_ICON, completionProcessor, false);
     processFirstNamespaceForEachName(completionProcessor, project, resolveScope, namespaceProcessor);
   }
 
-  public static boolean processAllNamespacesNamesWithAutocompletion(@NotNull PerlCompletionProcessor completionProcessor,
-                                                                    boolean withStaticExpanding,
-                                                                    boolean withObjectExpanding) {
-    if (!withStaticExpanding && !withObjectExpanding) {
-      return completionProcessor.result();
-    }
+  public static boolean processAllNamespacesNames(@NotNull PerlCompletionProcessor completionProcessor, boolean appendNamespaceSeparator) {
     PsiElement element = completionProcessor.getLeafElement();
     final Project project = element.getProject();
     GlobalSearchScope resolveScope = element.getResolveScope();
 
-    Processor<PerlNamespaceDefinitionElement> namespaceProcessor = namespace -> processExpandablePackageElement(
-      namespace, namespace.getNamespaceName(), completionProcessor, withStaticExpanding, withObjectExpanding);
-
+    Processor<PerlNamespaceDefinitionElement> namespaceProcessor =
+      namespace -> processNamespaceLookupElement(namespace, completionProcessor, appendNamespaceSeparator);
     PerlBuiltInNamespacesService.getInstance(project).processNamespaces(namespaceProcessor);
     return processFirstNamespaceForEachName(completionProcessor, project, resolveScope, namespaceProcessor);
   }
@@ -164,36 +171,9 @@ public class PerlPackageCompletionUtil {
     return completionProcessor.result();
   }
 
-  protected static boolean processExpandablePackageElement(@NotNull PerlNamespaceDefinitionElement namespaceDefinitionElement,
-                                                           @Nullable String packageName,
-                                                           @NotNull PerlCompletionProcessor completionProcessor,
-                                                           boolean withStaticExpanding,
-                                                           boolean withObjectExpanding) {
-    String prefix = completionProcessor.getResultSet().getPrefixMatcher().getPrefix();
-    if (withStaticExpanding) {
-      String name = packageName + PerlPackageUtil.NAMESPACE_SEPARATOR;
-      if (!StringUtil.equals(name, prefix)) {
-        if (!PerlPackageCompletionUtil.processPackageLookupElementWithAutocomplete(
-          namespaceDefinitionElement, name, namespaceDefinitionElement.getIcon(0), completionProcessor)) {
-          return false;
-        }
-      }
-    }
-
-    if (withObjectExpanding) {
-      String name = packageName + PerlPackageUtil.DEREFERENCE_OPERATOR;
-      if (!StringUtil.equals(name, prefix)) {
-        return PerlPackageCompletionUtil.processPackageLookupElementWithAutocomplete(
-          namespaceDefinitionElement, name, namespaceDefinitionElement.getIcon(0), completionProcessor);
-      }
-    }
-    return completionProcessor.result();
-  }
-
-
   public static void fillWithAllPackageFiles(@NotNull PerlCompletionProcessor completionProcessor) {
     PerlPackageUtil.processPackageFilesForPsiElement(completionProcessor.getLeafElement(), (packageName, file) ->
-      PerlPackageCompletionUtil.processPackageLookupElement(file, packageName, null, completionProcessor));
+      PerlPackageCompletionUtil.processPackageLookupElement(file, packageName, null, completionProcessor, false));
   }
 
   public static void fillWithVersionNumbers(@NotNull PerlCompletionProcessor completionProcessor) {

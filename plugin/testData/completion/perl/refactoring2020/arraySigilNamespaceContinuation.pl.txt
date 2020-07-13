@@ -1,12 +1,12 @@
-Text: MyTest::Constants::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+Text: MyTest::Constants::; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 	Lookups: MyTest::Constants::
 	PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MyTest::Constants at 0 in Constants.pm
-Text: MyTest::Exceptions::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+Text: MyTest::Exceptions::; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 	Lookups: MyTest::Exceptions::
 	PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MyTest::Exceptions at 0 in Exceptions.pm
-Text: MyTest::Some::Package::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+Text: MyTest::Some::Package::; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 	Lookups: MyTest::Some::Package::
 	PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MyTest::Some::Package at 0 in Package.pm
-Text: MyTest::Something::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+Text: MyTest::Something::; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 	Lookups: MyTest::Something::
 	PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MyTest::Something at 0 in Something.pm

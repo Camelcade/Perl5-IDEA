@@ -1,15 +1,9 @@
-Text: CORE->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
-	Lookups: CORE->
-	PsiElement: Implicit namespace: CORE
-Text: CORE::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
-	Lookups: CORE::
-	PsiElement: Implicit namespace: CORE
-Text: CORE::GLOBAL->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
-	Lookups: CORE::GLOBAL->
+Text: CORE::GLOBAL; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+	Lookups: CORE::GLOBAL
 	PsiElement: Implicit namespace: CORE::GLOBAL
-Text: CORE::GLOBAL::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
-	Lookups: CORE::GLOBAL::
-	PsiElement: Implicit namespace: CORE::GLOBAL
+Text: CORE; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+	Lookups: CORE
+	PsiElement: Implicit namespace: CORE
 Text: FORMAT_LINE_BREAK_CHARACTERS; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
 	Lookups: $FORMAT_LINE_BREAK_CHARACTERS, FORMAT_LINE_BREAK_CHARACTERS
 	PsiElement: Built-in: $FORMAT_LINE_BREAK_CHARACTERS

@@ -106,7 +106,7 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
 
     return PerlPackageUtil.processPackageFilesForPsiElement(linkElement, (packageName, file) -> {
       if (StringUtil.isNotEmpty(packageName) && completionProcessor.matches(packageName) && foundPods.add(packageName)) {
-        return PerlPackageCompletionUtil.processPackageLookupElement(file, packageName, null, completionProcessor);
+        return PerlPackageCompletionUtil.processPackageLookupElement(file, packageName, null, completionProcessor, false);
       }
       return completionProcessor.result();
     });

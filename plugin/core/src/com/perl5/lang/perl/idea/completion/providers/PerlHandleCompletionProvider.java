@@ -52,7 +52,7 @@ public class PerlHandleCompletionProvider extends PerlCompletionProvider {
     }
 
     PerlSimpleCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(parameters, result, position);
-    PerlPackageCompletionUtil.processAllNamespacesNamesWithAutocompletion(completionProcessor, true, true);
+    PerlPackageCompletionUtil.processAllNamespacesNames(completionProcessor, false);
     PerlSubCompletionUtil.processContextSubsLookupElements(completionProcessor);
 
     if (Experiments.getInstance().isFeatureEnabled("perl5.completion.var.without.sigil")) {

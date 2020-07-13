@@ -65,7 +65,7 @@ public class PerlStringContentCompletionProvider extends PerlCompletionProvider 
         PerlVariableCompletionUtil.fillWithVariables(
           new PerlVariableCompletionProcessorImpl(completionProcessor, null, false, false, false));
         PerlSubCompletionUtil.processContextSubsLookupElements(completionProcessor);
-        PerlPackageCompletionUtil.processAllNamespacesNamesWithAutocompletion(completionProcessor, true, true);
+        PerlPackageCompletionUtil.processAllNamespacesNames(completionProcessor, false);
       }
     }
     else if (USE_PARAMETERS_PATTERN.accepts(element))    // use or no parameters
