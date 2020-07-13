@@ -568,9 +568,12 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
   }
 
   /**
-   * Captures string token from current position according to the current lexical state
+   * Finds opening quote, body and close quote of the quote-like structure. Pushes them as pre-parsed tokens.
    *
-   * @return string token
+   * @return token of the opening quote for the string.
+   * @see #checkQuoteLikeBodyConsistency(java.lang.CharSequence, char)
+   * @see #captureRegex()
+   * @see #captureTr()
    */
   protected IElementType captureString() {
     CharSequence buffer = getBuffer();
@@ -578,11 +581,6 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
     int bufferEnd = getBufferEnd();
 
     char openQuote = buffer.charAt(currentPosition);
-    char closeQuote = PerlString.getQuoteCloseChar(openQuote);
-    boolean quotesDiffer = openQuote != closeQuote;
-
-    boolean isEscaped = false;
-    int quotesDepth = 0;    // for using with different quotes
 
     List<IElementType> stringTokens = getStringTokens();
     pushPreparsedToken(currentPosition++, currentPosition, stringTokens.get(0));
@@ -590,6 +588,11 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
     int contentStart = currentPosition;
     boolean hasEscape = false;
     boolean hasSigil = false;
+
+    boolean isEscaped = false;
+    int quotesDepth = 0;
+    char closeQuote = PerlString.getQuoteCloseChar(openQuote);
+    boolean quotesDiffer = openQuote != closeQuote;
 
     while (currentPosition < bufferEnd) {
       char currentChar = buffer.charAt(currentPosition);
@@ -636,6 +639,47 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
     }
     popState();
     return getPreParsedToken();
+  }
+
+  /**
+   * @return true iff {@code buffer} is properly escaped sequence with balanced quotes defined by {@code openingQuote}
+   * @apiNote this might be used to analyze if {@code buffer} is reparseable for quote-like operations
+   * @implNote fixme must be consistent with {@link #captureString()} and {@link #getRegexBlockEndOffset(int, char, boolean)}. The latter
+   * one has hacks for char groups in matching regular expressions, but we can ignore them for our purposes
+   * @see #captureString()
+   * @see #captureRegex()
+   * @see #captureTr()
+   */
+  public static boolean checkQuoteLikeBodyConsistency(CharSequence buffer, char openQuote) {
+    int currentPosition = 0;
+    int bufferEnd = buffer.length();
+
+    boolean isEscaped = false;
+    int quotesDepth = 0;
+    char closeQuote = PerlString.getQuoteCloseChar(openQuote);
+    boolean quotesDiffer = openQuote != closeQuote;
+
+    while (currentPosition < bufferEnd) {
+      char currentChar = buffer.charAt(currentPosition);
+
+      if (!isEscaped && quotesDepth == 0 && currentChar == closeQuote) {
+        break;
+      }
+
+      //noinspection Duplicates
+      if (!isEscaped && quotesDiffer) {
+        if (currentChar == openQuote) {
+          quotesDepth++;
+        }
+        else if (currentChar == closeQuote) {
+          quotesDepth--;
+        }
+      }
+
+      isEscaped = !isEscaped && currentChar == '\\';
+      currentPosition++;
+    }
+    return currentPosition == bufferEnd && quotesDepth == 0;
   }
 
   /**
@@ -889,7 +933,10 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
    * Parses regexp from the current position (opening delimiter) and preserves tokens in preparsedTokensList
    * REGEX_MODIFIERS = [msixpodualgcerxx]
    *
-   * @return opening delimiter type
+   * @return opening delimiter type of the regular expressions
+   * @see #captureTr()
+   * @see #captureString()
+   * @see #checkQuoteLikeBodyConsistency(CharSequence, char)
    */
   public IElementType captureRegex() {
     popState();
