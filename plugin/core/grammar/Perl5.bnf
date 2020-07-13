@@ -420,6 +420,16 @@
     ANNOTATION_TYPE_KEY='#@type'
     ANNOTATION_NOINSPECTION_KEY='#@noinspection'
     ANNOTATION_UNKNOWN_KEY='#@unknown'
+
+    // lazy parsable tokens parsed in-place
+    LP_STRING_RE = "LP_STRING_RE"
+    LP_STRING_TR = "LP_STRING_TR"
+    LP_STRING_QQ = "LP_STRING_QQ"
+    LP_STRING_QQ_RESTRICTED = "LP_STRING_QQ_RESTRICTED"
+    LP_STRING_Q = "LP_STRING_Q"
+    LP_STRING_QX = "LP_STRING_QX"
+    LP_STRING_QX_RESTRICTED = "LP_STRING_QX_RESTRICTED"
+    LP_REGEX = "LP_REGEX"
   ]
 
     extends(".+expr")=expr
@@ -1028,12 +1038,12 @@ replacement_regex ::=
     [perl_regex_modifiers]
     {pin=1}
 
-private regex_match ::= 'r{' [<<consumeTokens 'LP_REGEX'>>|<<consumeTokens 'LP_REGEX_X'>>|<<consumeTokens 'LP_REGEX_XX'>>|perl_regex]
+private regex_match ::= 'r{' [<<consumeTokens 'LP_REGEX_X'>>|<<consumeTokens 'LP_REGEX_XX'>>|perl_regex]
 private regex_replace ::= regex_replace_regex | regex_replace_code
 
 private regex_replace_regex ::= {'r/' | 'r}' 'r{' } regex_replacement
 regex_replacement ::= regex_replacement_content
-private regex_replacement_content ::= [{qq_string_element+ | <<consumeTokens 'LP_STRING_RE'>> | <<consumeTokens 'LP_STRING_QQ_RESTRICTED'>>}]
+private regex_replacement_content ::= [qq_string_content]
 private regex_replace_code ::= {'re/' | 'r}' 're{' } [regex_code]
 private regex_code ::= <<consumeTokens 'LP_CODE_BLOCK'>> | braceless_block
 
@@ -1054,7 +1064,7 @@ private perl_regex_item ::=
 tr_regex ::=  ('tr'|'y') tr_search tr_replacement [tr_modifiers] {pin=1}
 private tr_search ::= 'r{' [tr_searchlist] {pin=1}
 tr_searchlist ::= [tr_block_content]
-private tr_block_content ::= {qq_string_element | '"-'}+ | <<consumeTokens 'LP_STRING_TR'>> | <<consumeTokens 'LP_STRING_QQ_RESTRICTED'>>
+private tr_block_content ::= {qq_string_element | '"-'}+
 private tr_replacement ::= {'r/' | 'r}' 'r{'} [tr_replacementlist] 'r}' {pin=1}
 tr_replacementlist ::= [tr_block_content]
 tr_modifiers ::= '/m' +
@@ -1245,7 +1255,7 @@ private string ::= string_bare | string_sq | string_dq | string_xq | heredoc_ope
 
 string_dq ::= [ 'qq'] quoted_qq_string
 private quoted_qq_string ::= QUOTE_DOUBLE_OPEN [qq_string_content_with_lp] QUOTE_DOUBLE_CLOSE {pin=1}
-private qq_string_content_with_lp ::= qq_string_content | <<consumeTokens 'LP_STRING_QQ'>> | <<consumeTokens 'LP_STRING_QQ_RESTRICTED'>>
+private qq_string_content_with_lp ::= qq_string_content
 private qq_string_content ::= qq_string_element+
 private qq_string_element ::= STRING_CONTENT_QQ | special_constructs | interpolated_constructs
 private special_constructs ::= '\t'|'\n'|'\r'|'\f'|'\b'|'\a'|'\e'|'\l'|'\\u'| '\1' |
@@ -1277,7 +1287,7 @@ private oct_char_body_content_braced ::= char_code_oct {recoverWhile=recover_str
 private char_code_oct ::= NUMBER_OCT {name="octal characcter code"}
 
 string_xq ::= [ 'qx'] quoted_xq_string
-private quoted_xq_string ::= QUOTE_TICK_OPEN [qx_string_content|<<consumeTokens 'LP_STRING_QX'>>|<<consumeTokens 'LP_STRING_QX_RESTRICTED'>>] QUOTE_TICK_CLOSE {pin=1}
+private quoted_xq_string ::= QUOTE_TICK_OPEN [qx_string_content] QUOTE_TICK_CLOSE {pin=1}
 private qx_string_content ::= qx_string_element+
 private qx_string_element ::= STRING_CONTENT_XQ | special_constructs |interpolated_constructs
 
@@ -1293,7 +1303,7 @@ private qw_string_content ::= string_bare+
 private quoted_sq_string ::= QUOTE_SINGLE_OPEN [smart_sq_string_content] QUOTE_SINGLE_CLOSE {pin=1}
 private smart_sq_string_content ::= <<isUseVars>> <<mapUseVars sq_string_content_element>>+ | sq_string_content
 private sq_string_content ::= sq_string_content_element +
-private sq_string_content_element ::= STRING_CONTENT | '\\"' | <<consumeTokens 'LP_STRING_Q'>>
+private sq_string_content_element ::= STRING_CONTENT | '\\"'
 
 heredoc_opener ::= 'heredoc<<' ( '\\' string_bare | string ){pin=1}
 
@@ -1381,16 +1391,8 @@ annotation_noinspection ::=  '#@noinspection' string_bare {pin=1}
 /******************************************* End of annotations *******************************************************/
 
 /******************************************* Lazy parsable elements *******************************************************/
-lp_string_re ::= regex_replacement_content {extraRoot=true}
-lp_string_tr ::= tr_block_content {extraRoot=true}
-lp_string_qq ::= qq_string_content {extraRoot=true}
-lp_string_qq_restricted ::= qq_string_content {extraRoot=true}
-lp_string_q ::= sq_string_content {extraRoot=true}
-lp_string_qx ::= qx_string_content{extraRoot=true}
-lp_string_qx_restricted ::= qx_string_content{extraRoot=true}
 lp_string_qw ::= [qw_string_content] {extraRoot=true}
 
-lp_regex ::= perl_regex {extraRoot=true}
 lp_regex_x ::= perl_regex {extraRoot=true}
 lp_regex_xx ::= perl_regex {extraRoot=true}
 

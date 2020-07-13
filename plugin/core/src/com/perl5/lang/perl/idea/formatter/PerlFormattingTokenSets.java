@@ -313,7 +313,6 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
 
   // containers which has none indentation
   TokenSet UNINDENTABLE_CONTAINERS = TokenSet.orSet(
-    LAZY_PARSABLE_STRINGS,
     LAZY_PARSABLE_REGEXPS,
     LAZY_CODE_BLOCKS,
     SUB_OR_MODIFIER_DEFINITIONS_TOKENSET,

@@ -17,29 +17,34 @@
 package com.perl5.lang.perl.parser.elementTypes;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiElement;
+import com.intellij.psi.util.PsiUtilCore;
+import com.perl5.lang.perl.lexer.PerlElementTypesGenerated;
+import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.lexer.PerlLexingContext;
 import org.jetbrains.annotations.NotNull;
 
 
-public class PerlLazyStringElementType extends PerlLazyBlockElementType {
-  private final int myStartLexerState;
+public class PerlLazyStringListElementType extends PerlLazyBlockElementType {
+  private static final Logger LOG = Logger.getInstance(PerlLazyStringListElementType.class);
 
-  public PerlLazyStringElementType(@NotNull String name, int startLexerState) {
+  public PerlLazyStringListElementType(String name) {
     super(name);
-    myStartLexerState = startLexerState;
-  }
-
-  public PerlLazyStringElementType(@NotNull String debugName,
-                                   @NotNull Class<? extends PsiElement> clazz,
-                                   int startLexerState) {
-    super(debugName, clazz);
-    myStartLexerState = startLexerState;
   }
 
   @Override
   protected @NotNull PerlLexingContext getLexingContext(@NotNull Project project, @NotNull ASTNode chameleon) {
-    return super.getLexingContext(project, chameleon).withEnforcedInitialState(myStartLexerState);
+    PerlLexingContext baseContext = super.getLexingContext(project, chameleon).withEnforcedInitialState(PerlLexer.STRING_LIST);
+    ASTNode prevNode = chameleon.getTreePrev();
+    if (PsiUtilCore.getElementType(prevNode) != PerlElementTypesGenerated.QUOTE_SINGLE_OPEN) {
+      LOG.error("Unable to find opening quote, got: " + prevNode);
+      return baseContext;
+    }
+    CharSequence nodeChars = prevNode.getChars();
+    if (nodeChars.length() != 1) {
+      LOG.error("Got " + nodeChars);
+    }
+    return baseContext.withOpenChar(nodeChars.charAt(0));
   }
 }

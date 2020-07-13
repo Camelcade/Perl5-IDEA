@@ -234,7 +234,7 @@ public class PerlDocUtil implements PerlElementTypes {
     }
     else if (elementType == STRING_SPECIAL_ESCAPE_CHAR) {
       IElementType parentElementType = PsiUtilCore.getElementType(element.getParent());
-      if (parentElementType == STRING_SQ || parentElementType == LP_STRING_Q) {
+      if (parentElementType == STRING_SQ) {
         return resolveDoc(PERL_OP, "'STRING'", element, true);
       }
       return resolveDoc(PERL_OP, "escape", element, true);

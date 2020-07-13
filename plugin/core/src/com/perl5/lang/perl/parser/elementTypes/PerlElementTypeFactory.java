@@ -74,37 +74,21 @@ public class PerlElementTypeFactory {
       case "COMMENT_ANNOTATION":
         return new PerlLazyAnnotationElementType(name);
       case "HEREDOC_QQ":
-        return new PerlLazyStringElementType(name, PerlHeredocElementImpl.class, PerlLexer.STRING_QQ);
+        return new PerlLazyHeredocElementType(name, PerlHeredocElementImpl.class, PerlLexer.STRING_QQ);
       case "HEREDOC_QX":
-        return new PerlLazyStringElementType(name, PerlHeredocElementImpl.class, PerlLexer.STRING_QX);
+        return new PerlLazyHeredocElementType(name, PerlHeredocElementImpl.class, PerlLexer.STRING_QX);
       case "HEREDOC":
-        return new PerlLazyStringElementType(name, PerlHeredocElementImpl.class, PerlLexer.STRING_Q);
+        return new PerlLazyHeredocElementType(name, PerlHeredocElementImpl.class, PerlLexer.STRING_Q);
       case "LP_CODE_BLOCK":
         return new PerlLazyCodeBlockElementType(name, PsiPerlLpCodeBlockImpl.class);
       case "LP_CODE_BLOCK_WITH_TRYCATCH":
         return new PerlLazyCodeBlockElementTypeWithTryCatch(name, PsiPerlLpCodeBlockWithTrycatchImpl.class);
-      case "LP_REGEX":
-        return new PerlLazyMatchRegexpElementType(name);
       case "LP_REGEX_X":
         return new PerlLazyExtendedMatchRegexpElementType(name);
       case "LP_REGEX_XX":
         return new PerlLazySuperExtendedMatchRegexpElementType(name);
-      case "LP_STRING_Q":
-        return new PerlLazyQStringElementType(name);
-      case "LP_STRING_QX":
-        return new PerlLazyStringElementType(name, PerlLexer.STRING_QX);
-      case "LP_STRING_QX_RESTRICTED":
-        return new PerlLazyStringElementType(name, PerlLexer.STRING_QX_RESTRICTED);
       case "LP_STRING_QW":
-        return new PerlLazyStringElementType(name, PerlLexer.STRING_LIST);
-      case "LP_STRING_QQ":
-        return new PerlLazyStringElementType(name, PerlLexer.STRING_QQ);
-      case "LP_STRING_RE":
-        return new PerlLazyStringElementType(name, PerlLexer.STRING_RE);
-      case "LP_STRING_TR":
-        return new PerlLazyStringElementType(name, PerlLexer.STRING_TR_BEGIN);
-      case "LP_STRING_QQ_RESTRICTED":
-        return new PerlLazyStringElementType(name, PerlLexer.STRING_QQ_RESTRICTED);
+        return new PerlLazyStringListElementType(name);
       case "SUB_DEFINITION":
         return PerlStubElementTypes.SUB_DEFINITION;
       case "METHOD_DEFINITION":
