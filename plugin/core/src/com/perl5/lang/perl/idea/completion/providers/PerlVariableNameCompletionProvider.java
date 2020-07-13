@@ -60,7 +60,7 @@ public class PerlVariableNameCompletionProvider extends PerlCompletionProvider {
     boolean isCapped = StringUtil.startsWithChar(resultSet.getPrefixMatcher().getPrefix(), '^');
     PerlVariableCompletionProcessorImpl variableCompletionProcessor =
       new PerlVariableCompletionProcessorImpl(
-        resultSet,
+        parameters, resultSet,
         variableNameElement,
         namespaceName,
         hasBraces,

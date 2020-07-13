@@ -1,0 +1,6 @@
+Text: GLOBAL_HASH; Tail: null; Type: main; Icon: /hash_gutter_icon.png; Type Icon: null
+	Lookups: GLOBAL_HASH
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 82 in hash.pl
+Text: HASH_VAR; Tail: null; Type: MyTest::Some::Package; Icon: /hash_gutter_icon.png; Type Icon: null
+	Lookups: MyTest::Some::Package::HASH_VAR
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 187 in Package.pm

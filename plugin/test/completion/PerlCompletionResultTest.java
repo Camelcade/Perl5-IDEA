@@ -80,16 +80,28 @@ public class PerlCompletionResultTest extends PerlCompletionResultTestCase {
   public void testHashIndexHashElementMid() {doTestReplace();}
 
   @Test
-  public void testHashIndexScalarGlobal() {doTestInsert();}
+  public void testHashIndexScalarGlobal() {
+    setCompletionInvocationCount(1);
+    doTestInsert();
+  }
 
   @Test
-  public void testHashIndexArrayElementGlobal() {doTestInsert();}
+  public void testHashIndexArrayElementGlobal() {
+    setCompletionInvocationCount(1);
+    doTestInsert();
+  }
 
   @Test
-  public void testHashIndexHashElementGlobal() {doTestInsert();}
+  public void testHashIndexHashElementGlobal() {
+    setCompletionInvocationCount(1);
+    doTestInsert();
+  }
 
   @Test
-  public void testScalarGlobal() {doTestInsert();}
+  public void testScalarGlobal() {
+    setCompletionInvocationCount(1);
+    doTestInsert();
+  }
 
   @Test
   public void testScalarGlobalEnd() {doTestInsert();}

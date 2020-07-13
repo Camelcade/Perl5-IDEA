@@ -1,0 +1,9 @@
+Text: GLOBAL_SCALAR; Tail: null; Type: main; Icon: /scalar_gutter_icon.png; Type Icon: null
+	Lookups: $GLOBAL_SCALAR, GLOBAL_SCALAR
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 51 in scalarNoSigil.pl
+Text: SCALAR_VAR; Tail: null; Type: MyTest::Some::Package; Icon: /scalar_gutter_icon.png; Type Icon: null
+	Lookups: $MyTest::Some::Package::SCALAR_VAR, SCALAR_VAR
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 154 in Package.pm
+Text: SUBSCRIPT_SEPARATOR; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
+	Lookups: $SUBSCRIPT_SEPARATOR, SUBSCRIPT_SEPARATOR
+	PsiElement: Built-in: $SUBSCRIPT_SEPARATOR

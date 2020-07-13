@@ -56,12 +56,6 @@ public class PerlCompletionContributor extends CompletionContributor implements 
 
     extend(
       CompletionType.BASIC,
-      SUB_NAME_PATTERN,
-      new PerlVariableCompletionProvider()
-    );
-
-    extend(
-      CompletionType.BASIC,
       HANDLE_PATTERN,
       new PerlHandleCompletionProvider()
     );
@@ -98,6 +92,13 @@ public class PerlCompletionContributor extends CompletionContributor implements 
       CompletionType.BASIC,
       UNKNOWN_ANNOTATION_PATTERN,
       new PerlAnnotationCompletionProvider()
+    );
+
+    // this is really heavy, so should be last
+    extend(
+      CompletionType.BASIC,
+      SUB_NAME_PATTERN,
+      new PerlVariableCompletionProvider()
     );
   }
 

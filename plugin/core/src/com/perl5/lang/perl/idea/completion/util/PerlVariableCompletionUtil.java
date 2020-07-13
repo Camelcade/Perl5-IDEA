@@ -364,6 +364,9 @@ public class PerlVariableCompletionUtil {
   );
 
   public static void fillWithFullQualifiedVariables(@NotNull PerlVariableCompletionProcessor variableCompletionProcessor) {
+    if (!variableCompletionProcessor.isFullQualified() && variableCompletionProcessor.getCompletionParameters().getInvocationCount() == 0) {
+      return;
+    }
     PsiElement variableNameElement = variableCompletionProcessor.getLeafElement();
     PsiElement perlVariable = variableCompletionProcessor.getLeafParentElement();
     Processor<PerlVariableDeclarationElement> variableProcessor = createVariableLookupProcessor(variableCompletionProcessor);

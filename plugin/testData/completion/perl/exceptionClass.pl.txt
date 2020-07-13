@@ -28,9 +28,6 @@ Text: ClassAccessor->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Ty
 Text: ClassAccessor::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 	Lookups: ClassAccessor::
 	PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@ClassAccessor at 16 in ClassAccessor.pm
-Text: DEBUG; Tail: null; Type: Log::Log4perl::Levels; Icon: /scalar_gutter_icon.png; Type Icon: null
-	Lookups: $Log::Log4perl::Levels::DEBUG, DEBUG
-	PsiElement: Implicit variable: $Log::Log4perl::Levels::DEBUG@UNKNOWN_VALUE
 Text: DEBUGGING; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
 	Lookups: $DEBUGGING, DEBUGGING
 	PsiElement: Built-in: $DEBUGGING
@@ -70,9 +67,6 @@ Text: ERRNO; Tail: {}; Type: Built-in; Icon: /array_gutter_icon.png; Type Icon: 
 Text: ERRNO; Tail: {}; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
 	Lookups: $ERRNO, ERRNO
 	PsiElement: Built-in: %ERRNO
-Text: ERROR; Tail: null; Type: Log::Log4perl::Levels; Icon: /scalar_gutter_icon.png; Type Icon: null
-	Lookups: $Log::Log4perl::Levels::ERROR, ERROR
-	PsiElement: Implicit variable: $Log::Log4perl::Levels::ERROR@UNKNOWN_VALUE
 Text: EUID; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
 	Lookups: $EUID, EUID
 	PsiElement: Built-in: $EUID
@@ -298,9 +292,6 @@ Text: SUBSEP; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Ic
 Text: SYSTEM_FD_MAX; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
 	Lookups: $SYSTEM_FD_MAX, SYSTEM_FD_MAX
 	PsiElement: Built-in: $SYSTEM_FD_MAX
-Text: TRACE; Tail: null; Type: Log::Log4perl::Levels; Icon: /scalar_gutter_icon.png; Type Icon: null
-	Lookups: $Log::Log4perl::Levels::TRACE, TRACE
-	PsiElement: Implicit variable: $Log::Log4perl::Levels::TRACE@UNKNOWN_VALUE
 Text: UNITCHECK; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: UNITCHECK
 	PsiElement: Implicit sub: UNITCHECK()

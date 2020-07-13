@@ -36,7 +36,7 @@ public class PerlPackageCompletionProvider extends PerlCompletionProvider {
                                 @NotNull CompletionResultSet result) {
     PsiElement element = parameters.getPosition();
 
-    PerlSimpleCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(result, element);
+    PerlSimpleCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(parameters, result, element);
 
     if (NAMESPACE_IN_DEFINITION_PATTERN.accepts(element)) // package Foo
     {

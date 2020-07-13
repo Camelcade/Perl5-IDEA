@@ -71,7 +71,7 @@ public class PodTitleCompletionProvider extends CompletionProvider<CompletionPar
     }
 
     IElementType grandparentElementType = PsiUtilCore.getElementType(elementParent.getParent());
-    PerlSimpleCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(result, element);
+    PerlSimpleCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(parameters, result, element);
 
     if (grandparentElementType == HEAD_1_SECTION) {
       for (String sectionTitle : DEFAULT_POD_SECTIONS) {

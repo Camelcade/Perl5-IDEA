@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.completion.providers.processors;
 
+import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.psi.PsiElement;
@@ -33,6 +34,11 @@ public abstract class PerlDelegatingCompletionProcessor<Delegate extends PerlCom
   @Override
   public @NotNull CompletionResultSet getResultSet() {
     return getDelegate().getResultSet();
+  }
+
+  @Override
+  public @NotNull CompletionParameters getCompletionParameters() {
+    return getDelegate().getCompletionParameters();
   }
 
   protected final @NotNull Delegate getDelegate() {

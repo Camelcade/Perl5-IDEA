@@ -38,7 +38,7 @@ public class PerlLabelCompletionProvider extends PerlCompletionProvider {
     if (element == null) {
       return;
     }
-    PerlSimpleCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(result, element);
+    PerlSimpleCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(parameters, result, element);
     if (LABEL_DECLARATION_PATTERN.accepts(element)) {
       // unresolved labels should be here
     }

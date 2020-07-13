@@ -36,7 +36,7 @@ public class PerlSubNameElementCompletionProvider extends PerlCompletionProvider
     if (!(element.getParent() instanceof PerlSubElement)) {
       return;
     }
-    PerlCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(resultSet, element);
+    PerlCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(parameters, resultSet, element);
 
     PerlSubElement subDefinitionBase = (PerlSubElement)element.getParent();
     PerlSubCompletionUtil.processUnresolvedSubsLookups(subDefinitionBase, completionProcessor);

@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.completion.providers.processors;
 
+import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.application.ApplicationManager;
@@ -29,13 +30,15 @@ import java.util.Set;
 
 public abstract class PerlCompletionProcessorBase extends AbstractPerlCompletionProcessor {
   private final @NotNull CompletionResultSet myResultSet;
+  private final @NotNull CompletionParameters myCompletionParameters;
   private final @NotNull PsiElement myLeafElement;
   private final @NotNull Counters myCounters;
   private final @NotNull Set<String> myRegisteredElements;
 
-  protected PerlCompletionProcessorBase(@NotNull CompletionResultSet resultSet,
+  protected PerlCompletionProcessorBase(@NotNull CompletionParameters completionParameters,
+                                        @NotNull CompletionResultSet resultSet,
                                         @NotNull PsiElement leafElement) {
-    this(resultSet, leafElement, new Counters(), new HashSet<>());
+    this(completionParameters, resultSet, leafElement, new Counters(), new HashSet<>());
   }
 
   protected PerlCompletionProcessorBase(@NotNull PerlCompletionProcessor completionProcessor) {
@@ -48,17 +51,20 @@ public abstract class PerlCompletionProcessorBase extends AbstractPerlCompletion
     LOG.assertTrue(run instanceof PerlCompletionProcessorBase, "Got " + run);
     myCounters = ((PerlCompletionProcessorBase)run).getCounters();
     myRegisteredElements = ((PerlCompletionProcessorBase)run).getRegisteredElements();
+    myCompletionParameters = completionProcessor.getCompletionParameters();
   }
 
   protected PerlCompletionProcessorBase(@NotNull PerlCompletionProcessorBase original,
                                         @NotNull String newPrefixMatcher) {
-    this(original.getResultSet().withPrefixMatcher(newPrefixMatcher),
+    this(original.getCompletionParameters(),
+         original.getResultSet().withPrefixMatcher(newPrefixMatcher),
          original.getLeafElement(),
          original.getCounters(),
          original.getRegisteredElements());
   }
 
-  private PerlCompletionProcessorBase(@NotNull CompletionResultSet resultSet,
+  private PerlCompletionProcessorBase(@NotNull CompletionParameters completionParameters,
+                                      @NotNull CompletionResultSet resultSet,
                                       @NotNull PsiElement leafElement,
                                       @NotNull Counters counters,
                                       @NotNull Set<String> registeredElements) {
@@ -66,10 +72,16 @@ public abstract class PerlCompletionProcessorBase extends AbstractPerlCompletion
     myLeafElement = leafElement;
     myCounters = counters;
     myRegisteredElements = registeredElements;
+    myCompletionParameters = completionParameters;
   }
 
   private @NotNull Counters getCounters() {
     return myCounters;
+  }
+
+  @Override
+  public @NotNull CompletionParameters getCompletionParameters() {
+    return myCompletionParameters;
   }
 
   @Override

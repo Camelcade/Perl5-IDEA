@@ -142,9 +142,6 @@ Text: @; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: n
 Text: ACCUMULATOR; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
 	Lookups: ACCUMULATOR
 	PsiElement: Built-in: $ACCUMULATOR
-Text: ALL; Tail: null; Type: Log::Log4perl::Levels; Icon: /scalar_gutter_icon.png; Type Icon: null
-	Lookups: Log::Log4perl::Levels::ALL
-	PsiElement: Implicit variable: $Log::Log4perl::Levels::ALL@UNKNOWN_VALUE
 Text: ARG; Tail: []; Type: Built-in; Icon: /array_gutter_icon.png; Type Icon: null
 	Lookups: ARG
 	PsiElement: Built-in: @ARG
@@ -157,12 +154,6 @@ Text: ARGV; Tail: []; Type: Built-in; Icon: /array_gutter_icon.png; Type Icon: n
 Text: ARGV; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
 	Lookups: ARGV
 	PsiElement: Built-in: $ARGV
-Text: ARRAY_VAR; Tail: []; Type: MyTest::Some::Package; Icon: /array_gutter_icon.png; Type Icon: null
-	Lookups: MyTest::Some::Package::ARRAY_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 171 in Package.pm
-Text: AUTOLOAD; Tail: null; Type: Mojolicious::Controller; Icon: /scalar_gutter_icon.png; Type Icon: null
-	Lookups: Mojolicious::Controller::AUTOLOAD
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 593 in Controller.pm
 Text: BASETIME; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
 	Lookups: BASETIME
 	PsiElement: Built-in: $BASETIME
@@ -181,9 +172,6 @@ Text: CORE::GLOBAL::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Typ
 Text: ClassAccessor::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 	Lookups: ClassAccessor::
 	PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@ClassAccessor at 16 in ClassAccessor.pm
-Text: DEBUG; Tail: null; Type: Log::Log4perl::Levels; Icon: /scalar_gutter_icon.png; Type Icon: null
-	Lookups: Log::Log4perl::Levels::DEBUG
-	PsiElement: Implicit variable: $Log::Log4perl::Levels::DEBUG@UNKNOWN_VALUE
 Text: DEBUGGING; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
 	Lookups: DEBUGGING
 	PsiElement: Built-in: $DEBUGGING
@@ -205,9 +193,6 @@ Text: ERRNO; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Ico
 Text: ERRNO; Tail: {}; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: null
 	Lookups: ERRNO
 	PsiElement: Built-in: %ERRNO
-Text: ERROR; Tail: null; Type: Log::Log4perl::Levels; Icon: /scalar_gutter_icon.png; Type Icon: null
-	Lookups: Log::Log4perl::Levels::ERROR
-	PsiElement: Implicit variable: $Log::Log4perl::Levels::ERROR@UNKNOWN_VALUE
 Text: EUID; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
 	Lookups: EUID
 	PsiElement: Built-in: $EUID
@@ -226,9 +211,6 @@ Text: EXTENDED_OS_ERROR; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.p
 Text: F; Tail: []; Type: Built-in; Icon: /array_gutter_icon.png; Type Icon: null
 	Lookups: F
 	PsiElement: Built-in: @F
-Text: FATAL; Tail: null; Type: Log::Log4perl::Levels; Icon: /scalar_gutter_icon.png; Type Icon: null
-	Lookups: Log::Log4perl::Levels::FATAL
-	PsiElement: Implicit variable: $Log::Log4perl::Levels::FATAL@UNKNOWN_VALUE
 Text: FORMAT_FORMFEED; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
 	Lookups: FORMAT_FORMFEED
 	PsiElement: Built-in: $FORMAT_FORMFEED
@@ -253,18 +235,12 @@ Text: FORMAT_TOP_NAME; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png
 Text: GID; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
 	Lookups: GID
 	PsiElement: Built-in: $GID
-Text: HASH_VAR; Tail: {}; Type: MyTest::Some::Package; Icon: /hash_gutter_icon.png; Type Icon: null
-	Lookups: MyTest::Some::Package::HASH_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 187 in Package.pm
 Text: INC; Tail: []; Type: Built-in; Icon: /array_gutter_icon.png; Type Icon: null
 	Lookups: INC
 	PsiElement: Built-in: @INC
 Text: INC; Tail: {}; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: null
 	Lookups: INC
 	PsiElement: Built-in: %INC
-Text: INFO; Tail: null; Type: Log::Log4perl::Levels; Icon: /scalar_gutter_icon.png; Type Icon: null
-	Lookups: Log::Log4perl::Levels::INFO
-	PsiElement: Implicit variable: $Log::Log4perl::Levels::INFO@UNKNOWN_VALUE
 Text: INPLACE_EDIT; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
 	Lookups: INPLACE_EDIT
 	PsiElement: Built-in: $INPLACE_EDIT
@@ -337,9 +313,6 @@ Text: MyTest::Something::; Tail: ...; Type: null; Icon: /package_gutter_icon.png
 Text: NR; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
 	Lookups: NR
 	PsiElement: Built-in: $NR
-Text: OFF; Tail: null; Type: Log::Log4perl::Levels; Icon: /scalar_gutter_icon.png; Type Icon: null
-	Lookups: Log::Log4perl::Levels::OFF
-	PsiElement: Implicit variable: $Log::Log4perl::Levels::OFF@UNKNOWN_VALUE
 Text: OFMT; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
 	Lookups: OFMT
 	PsiElement: Built-in: $OFMT
@@ -400,9 +373,6 @@ Text: REAL_USER_ID; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; T
 Text: RS; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
 	Lookups: RS
 	PsiElement: Built-in: $RS
-Text: SCALAR_VAR; Tail: null; Type: MyTest::Some::Package; Icon: /scalar_gutter_icon.png; Type Icon: null
-	Lookups: MyTest::Some::Package::SCALAR_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 154 in Package.pm
 Text: SIG; Tail: {}; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: null
 	Lookups: SIG
 	PsiElement: Built-in: %SIG
@@ -415,18 +385,12 @@ Text: SUBSEP; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Ic
 Text: SYSTEM_FD_MAX; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
 	Lookups: SYSTEM_FD_MAX
 	PsiElement: Built-in: $SYSTEM_FD_MAX
-Text: TRACE; Tail: null; Type: Log::Log4perl::Levels; Icon: /scalar_gutter_icon.png; Type Icon: null
-	Lookups: Log::Log4perl::Levels::TRACE
-	PsiElement: Implicit variable: $Log::Log4perl::Levels::TRACE@UNKNOWN_VALUE
 Text: UID; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
 	Lookups: UID
 	PsiElement: Built-in: $UID
 Text: UNIVERSAL::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 	Lookups: UNIVERSAL::
 	PsiElement: Implicit namespace: UNIVERSAL
-Text: WARN; Tail: null; Type: Log::Log4perl::Levels; Icon: /scalar_gutter_icon.png; Type Icon: null
-	Lookups: Log::Log4perl::Levels::WARN
-	PsiElement: Implicit variable: $Log::Log4perl::Levels::WARN@UNKNOWN_VALUE
 Text: WARNING; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
 	Lookups: WARNING
 	PsiElement: Built-in: $WARNING

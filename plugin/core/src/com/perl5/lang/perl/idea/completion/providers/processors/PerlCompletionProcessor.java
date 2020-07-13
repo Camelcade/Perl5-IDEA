@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.completion.providers.processors;
 
+import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.completion.PrefixMatcher;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
@@ -29,6 +30,8 @@ import org.jetbrains.annotations.Nullable;
 
 public interface PerlCompletionProcessor {
   @NotNull CompletionResultSet getResultSet();
+
+  @NotNull CompletionParameters getCompletionParameters();
 
   @NotNull PsiElement getLeafElement();
 

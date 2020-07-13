@@ -69,7 +69,7 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
       return;
     }
     IElementType parentType = PsiUtilCore.getElementType(linkPart);
-    PerlSimpleCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(result, linkElement);
+    PerlSimpleCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(parameters, result, linkElement);
 
     if (parentType == LINK_TEXT && element.getPrevSibling() == null) {
       processFilesCompletions(completionProcessor);

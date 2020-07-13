@@ -247,6 +247,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   private static final String COMPLETE_PREFIX = "<complete ";
   private String myCompletionResultLookupString = null;
   private int myCompletionResultEditorOffset = -1;
+  private int myCompletionInvocationCount = 0;
 
   @Rule
   public final TestRule myBaseRule = (base, description) ->
@@ -564,8 +565,12 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     return Lookup.NORMAL_SELECT_CHAR;
   }
 
-  protected int getCompletionInvocationCount() {
-    return 1;
+  protected final int getCompletionInvocationCount() {
+    return myCompletionInvocationCount;
+  }
+
+  protected void setCompletionInvocationCount(int completionInvocationCount) {
+    myCompletionInvocationCount = completionInvocationCount;
   }
 
   protected @NotNull CompletionType getCompletionType() {

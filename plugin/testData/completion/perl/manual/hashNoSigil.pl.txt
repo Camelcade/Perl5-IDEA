@@ -1,0 +1,21 @@
+Text: FORMAT_LINE_BREAK_CHARACTERS; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
+	Lookups: $FORMAT_LINE_BREAK_CHARACTERS, FORMAT_LINE_BREAK_CHARACTERS
+	PsiElement: Built-in: $FORMAT_LINE_BREAK_CHARACTERS
+Text: GLOBAL_HASH; Tail: null; Type: main; Icon: /hash_gutter_icon.png; Type Icon: null
+	Lookups: %GLOBAL_HASH, GLOBAL_HASH
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 82 in hashNoSigil.pl
+Text: GLOBAL_HASH; Tail: {}; Type: main; Icon: /array_gutter_icon.png; Type Icon: null
+	Lookups: @GLOBAL_HASH, GLOBAL_HASH
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 82 in hashNoSigil.pl
+Text: GLOBAL_HASH; Tail: {}; Type: main; Icon: /scalar_gutter_icon.png; Type Icon: null
+	Lookups: $GLOBAL_HASH, GLOBAL_HASH
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 82 in hashNoSigil.pl
+Text: HASH_VAR; Tail: null; Type: MyTest::Some::Package; Icon: /hash_gutter_icon.png; Type Icon: null
+	Lookups: %MyTest::Some::Package::HASH_VAR, HASH_VAR
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 187 in Package.pm
+Text: HASH_VAR; Tail: {}; Type: MyTest::Some::Package; Icon: /array_gutter_icon.png; Type Icon: null
+	Lookups: @MyTest::Some::Package::HASH_VAR, HASH_VAR
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 187 in Package.pm
+Text: HASH_VAR; Tail: {}; Type: MyTest::Some::Package; Icon: /scalar_gutter_icon.png; Type Icon: null
+	Lookups: $MyTest::Some::Package::HASH_VAR, HASH_VAR
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 187 in Package.pm

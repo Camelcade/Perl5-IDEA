@@ -1,0 +1,48 @@
+Text: ARG; Tail: []; Type: Built-in; Icon: /array_gutter_icon.png; Type Icon: null
+	Lookups: ARG
+	PsiElement: Built-in: @ARG
+Text: ARG; Tail: null; Type: Built-in; Icon: /array_gutter_icon.png; Type Icon: null
+	Lookups: ARG
+	PsiElement: Built-in: @ARG
+Text: ARGV; Tail: []; Type: Built-in; Icon: /array_gutter_icon.png; Type Icon: null
+	Lookups: ARGV
+	PsiElement: Built-in: @ARGV
+Text: ARGV; Tail: null; Type: Built-in; Icon: /array_gutter_icon.png; Type Icon: null
+	Lookups: ARGV
+	PsiElement: Built-in: @ARGV
+Text: ARRAY_VAR; Tail: []; Type: MyTest::Some::Package; Icon: /array_gutter_icon.png; Type Icon: null
+	Lookups: MyTest::Some::Package::ARRAY_VAR
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 171 in Package.pm
+Text: ARRAY_VAR; Tail: null; Type: MyTest::Some::Package; Icon: /array_gutter_icon.png; Type Icon: null
+	Lookups: MyTest::Some::Package::ARRAY_VAR
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 171 in Package.pm
+Text: GLOBAL_ARRAY; Tail: []; Type: main; Icon: /array_gutter_icon.png; Type Icon: null
+	Lookups: GLOBAL_ARRAY
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 67 in array.pl
+Text: GLOBAL_ARRAY; Tail: null; Type: main; Icon: /array_gutter_icon.png; Type Icon: null
+	Lookups: GLOBAL_ARRAY
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 67 in array.pl
+Text: HASH_VAR; Tail: {}; Type: MyTest::Some::Package; Icon: /hash_gutter_icon.png; Type Icon: null
+	Lookups: MyTest::Some::Package::HASH_VAR
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 187 in Package.pm
+Text: LAST_MATCH_START; Tail: []; Type: Built-in; Icon: /array_gutter_icon.png; Type Icon: null
+	Lookups: LAST_MATCH_START
+	PsiElement: Built-in: @LAST_MATCH_START
+Text: LAST_MATCH_START; Tail: null; Type: Built-in; Icon: /array_gutter_icon.png; Type Icon: null
+	Lookups: LAST_MATCH_START
+	PsiElement: Built-in: @LAST_MATCH_START
+Text: LAST_PAREN_MATCH; Tail: {}; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: null
+	Lookups: LAST_PAREN_MATCH
+	PsiElement: Built-in: %LAST_PAREN_MATCH
+Text: Library::Exception2::; Tail: ...; Type: null; Icon: /exceptionClass.svg; Type Icon: null
+	Lookups: Library::Exception2::
+	PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Library::Exception2; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 111 in Exceptions.pm
+Text: Library::Exception::; Tail: ...; Type: null; Icon: /exceptionClass.svg; Type Icon: null
+	Lookups: Library::Exception::
+	PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Library::Exception; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 54 in Exceptions.pm
+Text: LibraryException3::; Tail: ...; Type: null; Icon: /exceptionClass.svg; Type Icon: null
+	Lookups: LibraryException3::
+	PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@LibraryException3; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 131 in Exceptions.pm
+Text: LibraryException::; Tail: ...; Type: null; Icon: /exceptionClass.svg; Type Icon: null
+	Lookups: LibraryException::
+	PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@LibraryException; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 80 in Exceptions.pm

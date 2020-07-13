@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.completion.providers.processors;
 
+import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
@@ -27,13 +28,14 @@ public class PerlVariableCompletionProcessorImpl extends PerlCompletionProcessor
   private final boolean myIsLexical;
   private final @Nullable String myExplicitNamespaceName;
 
-  public PerlVariableCompletionProcessorImpl(@NotNull CompletionResultSet resultSet,
+  public PerlVariableCompletionProcessorImpl(@NotNull CompletionParameters completionParameters,
+                                             @NotNull CompletionResultSet resultSet,
                                              @NotNull PsiElement leafElement,
                                              @Nullable String explicitNamespaceName,
                                              boolean hasBraces,
                                              boolean isDeclaration,
                                              boolean isLexical) {
-    super(resultSet, leafElement);
+    super(completionParameters, resultSet, leafElement);
     myHasBraces = hasBraces;
     myIsDeclaration = isDeclaration;
     myIsLexical = isLexical;

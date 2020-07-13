@@ -51,7 +51,7 @@ public class PerlHandleCompletionProvider extends PerlCompletionProvider {
       return;
     }
 
-    PerlSimpleCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(result, position);
+    PerlSimpleCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(parameters, result, position);
     PerlPackageCompletionUtil.processAllNamespacesNamesWithAutocompletion(completionProcessor, true, true);
     PerlSubCompletionUtil.processContextSubsLookupElements(completionProcessor);
 

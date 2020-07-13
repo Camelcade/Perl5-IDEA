@@ -1,0 +1,4 @@
+my($local_scalar, @local_arrray, %local_hash);
+our($GLOBAL_SCALAR, @GLOBAL_ARRAY, %GLOBAL_HASH);
+
+%HA<caret>

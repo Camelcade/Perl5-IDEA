@@ -28,9 +28,6 @@ Text: Foo::Bar::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Ic
 Text: Foo::Baz::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 	Lookups: Foo::Baz::
 	PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Baz at 225 in importHashes.pl
-Text: HASH_VAR; Tail: null; Type: MyTest::Some::Package; Icon: /hash_gutter_icon.png; Type Icon: null
-	Lookups: MyTest::Some::Package::HASH_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 187 in Package.pm
 Text: INC; Tail: null; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: null
 	Lookups: INC
 	PsiElement: Built-in: %INC
@@ -85,9 +82,6 @@ Text: ^H; Tail: null; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: nu
 Text: main::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 	Lookups: main::
 	PsiElement: Implicit namespace: main
-Text: somehash; Tail: null; Type: Foo::Bar; Icon: /hash_gutter_icon.png; Type Icon: null
-	Lookups: Foo::Bar::somehash
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 175 in importHashes.pl
 Text: somehash; Tail: null; Type: Foo::Bar; Icon: /hash_gutter_icon.png; Type Icon: null
 	Lookups: somehash
 	String: somehash

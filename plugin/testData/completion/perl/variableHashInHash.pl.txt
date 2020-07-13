@@ -22,9 +22,6 @@ Text: ENV; Tail: null; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: n
 Text: ERRNO; Tail: null; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: null
 	Lookups: ERRNO
 	PsiElement: Built-in: %ERRNO
-Text: HASH_VAR; Tail: null; Type: MyTest::Some::Package; Icon: /hash_gutter_icon.png; Type Icon: null
-	Lookups: MyTest::Some::Package::HASH_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 187 in Package.pm
 Text: INC; Tail: null; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: null
 	Lookups: INC
 	PsiElement: Built-in: %INC

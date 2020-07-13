@@ -16,14 +16,16 @@
 
 package com.perl5.lang.perl.idea.completion.providers.processors;
 
+import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlSimpleCompletionProcessor extends PerlCompletionProcessorBase {
-  public PerlSimpleCompletionProcessor(@NotNull CompletionResultSet resultSet,
+  public PerlSimpleCompletionProcessor(@NotNull CompletionParameters completionParameters,
+                                       @NotNull CompletionResultSet resultSet,
                                        @NotNull PsiElement leafElement) {
-    super(resultSet, leafElement);
+    super(completionParameters, resultSet, leafElement);
   }
 
   private PerlSimpleCompletionProcessor(@NotNull PerlCompletionProcessorBase original,

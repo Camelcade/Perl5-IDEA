@@ -37,7 +37,10 @@ public class PerlCompletionResultRefactoring2020Test extends PerlCompletionResul
   public void testArraySigilArrayMidGlobal() {doTestReplace();}
 
   @Test
-  public void testArraySigilArrayMidGlobalOuter() {doTestReplace();}
+  public void testArraySigilArrayMidGlobalOuter() {
+    setCompletionInvocationCount(1);
+    doTestReplace();
+  }
 
   @Test
   public void testArraySigilScalarGlobal() {doTestInsert();}
@@ -46,10 +49,16 @@ public class PerlCompletionResultRefactoring2020Test extends PerlCompletionResul
   public void testArraySigilScalarGlobalMid() {doTestReplace();}
 
   @Test
-  public void testArraySigilScalarGlobalOuter() {doTestInsert();}
+  public void testArraySigilScalarGlobalOuter() {
+    setCompletionInvocationCount(1);
+    doTestInsert();
+  }
 
   @Test
-  public void testArraySigilScalarGlobalOuterMid() {doTestReplace();}
+  public void testArraySigilScalarGlobalOuterMid() {
+    setCompletionInvocationCount(1);
+    doTestReplace();
+  }
 
   @Test
   public void testArraySigilScalarGlobalOuterMidWithNs() {doTestReplace();}
@@ -61,7 +70,10 @@ public class PerlCompletionResultRefactoring2020Test extends PerlCompletionResul
   public void testNoSigilScalarGlobalMid() {doTestReplace();}
 
   @Test
-  public void testNoSigilScalarGlobalOuter() {doTestInsert();}
+  public void testNoSigilScalarGlobalOuter() {
+    setCompletionInvocationCount(1);
+    doTestInsert();
+  }
 
   @Test
   public void testNoSigilScalarGlobalOuterMid() {doTestReplace();}

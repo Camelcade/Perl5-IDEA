@@ -48,7 +48,7 @@ public class PerlStringContentCompletionProvider extends PerlCompletionProvider 
       return;
     }
 
-    PerlSimpleCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(result, element);
+    PerlSimpleCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(parameters, result, element);
 
     if (EXPORT_ASSIGNED_STRING_CONTENT.accepts(element)) // exporter assignments
     {

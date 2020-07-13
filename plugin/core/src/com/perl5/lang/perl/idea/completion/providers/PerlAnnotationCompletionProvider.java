@@ -33,7 +33,7 @@ public class PerlAnnotationCompletionProvider extends PerlCompletionProvider {
   protected void addCompletions(@NotNull CompletionParameters parameters,
                                 @NotNull ProcessingContext context,
                                 @NotNull CompletionResultSet resultSet) {
-    PerlSimpleCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(resultSet, parameters.getPosition());
+    PerlSimpleCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(parameters, resultSet, parameters.getPosition());
     for (String annotation : TOKENS_MAP.keySet()) {
       if (completionProcessor.matches(annotation)) {
         if (!completionProcessor.process(

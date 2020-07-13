@@ -31,12 +31,6 @@ Text: ARGV; Tail: []; Type: Built-in; Icon: /array_gutter_icon.png; Type Icon: n
 Text: ARGV; Tail: null; Type: Built-in; Icon: /array_gutter_icon.png; Type Icon: null
 	Lookups: ARGV
 	PsiElement: Built-in: @ARGV
-Text: ARRAY_VAR; Tail: []; Type: MyTest::Some::Package; Icon: /array_gutter_icon.png; Type Icon: null
-	Lookups: MyTest::Some::Package::ARRAY_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 171 in Package.pm
-Text: ARRAY_VAR; Tail: null; Type: MyTest::Some::Package; Icon: /array_gutter_icon.png; Type Icon: null
-	Lookups: MyTest::Some::Package::ARRAY_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 171 in Package.pm
 Text: CORE::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 	Lookups: CORE::
 	PsiElement: Implicit namespace: CORE
@@ -58,9 +52,6 @@ Text: F; Tail: []; Type: Built-in; Icon: /array_gutter_icon.png; Type Icon: null
 Text: F; Tail: null; Type: Built-in; Icon: /array_gutter_icon.png; Type Icon: null
 	Lookups: F
 	PsiElement: Built-in: @F
-Text: HASH_VAR; Tail: {}; Type: MyTest::Some::Package; Icon: /hash_gutter_icon.png; Type Icon: null
-	Lookups: MyTest::Some::Package::HASH_VAR
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 187 in Package.pm
 Text: INC; Tail: []; Type: Built-in; Icon: /array_gutter_icon.png; Type Icon: null
 	Lookups: INC
 	PsiElement: Built-in: @INC
