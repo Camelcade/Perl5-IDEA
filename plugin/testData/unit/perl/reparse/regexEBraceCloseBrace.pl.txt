@@ -1,0 +1,10 @@
+sub something{
+  s{test}{
+    say 'hi';
+    # something }<caret>
+    say 'hi'
+  }e;
+}
+
+----------
+Full reparse

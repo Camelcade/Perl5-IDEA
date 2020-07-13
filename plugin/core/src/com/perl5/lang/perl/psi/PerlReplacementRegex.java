@@ -70,7 +70,4 @@ public interface PerlReplacementRegex extends PerlRegexExpression {
 
     return result;
   }
-
-  @Nullable
-  PsiPerlBlock getBlock();
 }

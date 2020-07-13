@@ -36,6 +36,48 @@ public class PerlRepaseTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testRegexESlashCode() {doTestRegexESlash("say 'hi';");}
+
+  @Test
+  public void testRegexEBraceCode() {doTestRegexEBrace("say 'hi';");}
+
+  @Test
+  public void testRegexESlashSlash() {doTestRegexESlash("# something /");}
+
+  @Test
+  public void testRegexEBraceSlash() {doTestRegexEBrace("# something /");}
+
+  @Test
+  public void testRegexESlashSlashEscaped() {doTestRegexESlash("# something \\/");}
+
+  @Test
+  public void testRegexEBraceSlashEscaped() {doTestRegexEBrace("# something \\/");}
+
+  @Test
+  public void testRegexESlashOpenBrace() {doTestRegexESlash("# something {");}
+
+  @Test
+  public void testRegexEBraceOpenBrace() {doTestRegexEBrace("# something {");}
+
+  @Test
+  public void testRegexESlashCloseBrace() {doTestRegexESlash("# something }");}
+
+  @Test
+  public void testRegexEBraceCloseBrace() {doTestRegexEBrace("# something }");}
+
+  @Test
+  public void testRegexESlashCloseBraceEscaped() {doTestRegexESlash("# something \\}");}
+
+  @Test
+  public void testRegexEBraceCloseBraceEscaped() {doTestRegexEBrace("# something \\}");}
+
+  @Test
+  public void testRegexESlashBraces() {doTestRegexESlash("{}");}
+
+  @Test
+  public void testRegexEBraceBraces() {doTestRegexEBrace("{}");}
+
+  @Test
   public void testAfterBody() {doTest("say 'hi';");}
 
   @Test
@@ -85,6 +127,16 @@ public class PerlRepaseTest extends PerlLightTestCase {
 
   private void doTestSub(@NotNull String textToInsert) {
     initWithFileSmart("subBody");
+    doTestWithoutInit(textToInsert);
+  }
+
+  private void doTestRegexEBrace(@NotNull String textToInsert) {
+    initWithFileSmart("regexEBrace");
+    doTestWithoutInit(textToInsert);
+  }
+
+  private void doTestRegexESlash(@NotNull String textToInsert) {
+    initWithFileSmart("regexESlash");
     doTestWithoutInit(textToInsert);
   }
 

@@ -1,0 +1,7 @@
+sub something{
+  s/test/
+    say 'hi';
+    <caret>
+    say 'hi'
+  /e;
+}
