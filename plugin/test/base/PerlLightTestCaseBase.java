@@ -605,6 +605,14 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
                                         @NotNull CompletionType completionType,
                                         int invocationCount,
                                         @MagicConstant(valuesFromClass = Lookup.class) char completeChar) {
+    doCompleteLookupString(lookupString, completionType, invocationCount, completeChar);
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithCaretsAndSelections());
+  }
+
+  protected void doCompleteLookupString(@NotNull String lookupString,
+                                        @NotNull CompletionType completionType,
+                                        int invocationCount,
+                                        @MagicConstant(valuesFromClass = Lookup.class) char completeChar) {
     LookupElement[] lookupElements = myFixture.complete(completionType, invocationCount);
     for (LookupElement lookupElement : lookupElements) {
       LookupElementPresentation presentation = new LookupElementPresentation();
@@ -615,15 +623,16 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
           LookupEx activeLookup = LookupManager.getActiveLookup(getEditor());
           assertNotNull(activeLookup);
           activeLookup.setCurrentItem(lookupElement);
-          myFixture.finishLookup(completeChar);
-          UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithCaretsAndSelections());
+          ApplicationManager.getApplication().invokeAndWait(() -> myFixture.finishLookup(completeChar));
           return;
         }
       }
     }
-    fail("Unable to find lookup string: " + lookupString + " in " + renderLookupElementsToString(lookupElements, null));
+    fail("Unable to find lookup string: " +
+         lookupString +
+         " in " +
+         ReadAction.compute(() -> renderLookupElementsToString(lookupElements, null)));
   }
-
 
   public final void doTestCompletion() {
     doTestCompletion("", null);

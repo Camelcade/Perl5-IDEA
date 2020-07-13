@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -172,6 +172,17 @@ public class PerlCompletionPopupTest extends PerlCompletionPopupTestCase {
   public void testHashGlobIndexOpen() {doTest("say $a->{something};say *b<caret>", "{");}
 
   @Test
-  public void testSpaceBug() {doTestNegative("qw//<caret>", ";");}
+  public void testNamespaceInScalar() {doTestPopupAfterCompletion("$My<caret>", "MyTest::Some::Package::", true);}
 
+  @Test
+  public void testNamespaceInArray() {doTestPopupAfterCompletion("@My<caret>", "MyTest::Some::Package::", true);}
+
+  @Test
+  public void testNamespaceInHash() {doTestPopupAfterCompletion("%$My<caret>", "MyTest::Some::Package::", true);}
+
+  @Test
+  public void testNamespaceInCode() {doTestPopupAfterCompletion("My<caret>", "MyTest::Some::Package", false);}
+
+  @Test
+  public void testSpaceBug() {doTestNegative("qw//<caret>", ";");}
 }

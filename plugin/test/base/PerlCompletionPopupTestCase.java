@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,6 +45,21 @@ public abstract class PerlCompletionPopupTestCase extends PerlLightTestCaseBase 
   protected void doTest(@NotNull String initial, @NotNull String toType) {
     initWithTextSmart(initial);
     doCompletionOnTypingTest(toType, true);
+  }
+
+  protected void doTestPopupAfterCompletion(@NotNull String initial,
+                                            @NotNull String lookupToChoose,
+                                            boolean shouldPresent) {
+    initWithTextSmart(initial);
+    doCompleteLookupString(lookupToChoose, getCompletionType(), getCompletionInvocationCount(), getCompletionCompleteChar());
+    myTester.joinAutopopup();// for the autopopup handler's alarm, or the restartCompletion's invokeLater
+    myTester.joinCompletion();
+    if (shouldPresent) {
+      assertNotNull(LookupManager.getActiveLookup(getEditor()));
+    }
+    else {
+      assertNull(LookupManager.getActiveLookup(getEditor()));
+    }
   }
 
   protected void doTest(@NotNull String toType) {
