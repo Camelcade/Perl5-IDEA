@@ -40,7 +40,6 @@ import java.util.Map;
 
 public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementTypes {
   private static final Logger LOG = Logger.getInstance(FlexAdapter.class);
-  private static final int LAZY_BLOCK_MINIMAL_SIZE = 140;
   private static final Map<IElementType, Integer> SUBLEXINGS_MAP = new HashMap<>();
   private static final Map<IElementType, Integer> ENFORCED_SUBLEXINGS_MAP = new HashMap<>();
 
@@ -52,7 +51,6 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
     SUBLEXINGS_MAP.put(LP_STRING_QX, PerlLexer.STRING_QX);
     SUBLEXINGS_MAP.put(LP_STRING_QQ_RESTRICTED, PerlLexer.STRING_QQ_RESTRICTED);
     SUBLEXINGS_MAP.put(LP_STRING_QX_RESTRICTED, PerlLexer.STRING_QX_RESTRICTED);
-
     SUBLEXINGS_MAP.put(LP_REGEX, PerlLexer.MATCH_REGEX);
 
     ENFORCED_SUBLEXINGS_MAP.put(LP_STRING_QW, PerlLexer.STRING_LIST);
@@ -180,7 +178,7 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
       Integer subLexingState = SUBLEXINGS_MAP.get(myTokenType);
 
       boolean enforceSubLexing = myMainLexerWithContext.getLexingContext().isEnforceSubLexing();
-      if (subLexingState != null && (myTokenEnd - myTokenStart <= LAZY_BLOCK_MINIMAL_SIZE || enforceSubLexing)) {
+      if (subLexingState != null) {
         subLexCurrentToken(subLexingState);
       }
       else if (enforceSubLexing) {
