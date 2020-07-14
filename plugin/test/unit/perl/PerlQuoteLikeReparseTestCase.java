@@ -72,7 +72,7 @@ public abstract class PerlQuoteLikeReparseTestCase extends PerlLightTestCase {
 
   @Override
   protected @NotNull String computeAnswerFileName(@NotNull String appendix) {
-    return super.computeAnswerFileName(getClass().getSimpleName());
+    return super.computeAnswerFileName("_" + getClass().getSimpleName());
   }
 
   public static class QwQuote extends PerlQuoteLikeReparseTestCase {
