@@ -67,6 +67,36 @@ public class PerlReparseTest extends PerlLightTestCase {
   public void testQwBracesCloseBraceEscaped() {doTestQwList('{', "\\}");}
 
   @Test
+  public void testUseVarsQwQuoteNewItem() {doTestUseVars('"', "new_item");}
+
+  @Test
+  public void testUseVarsQwQuoteQuote() {doTestUseVars('"', "\"");}
+
+  @Test
+  public void testUseVarsQwQuoteQuoteEscaped() {doTestUseVars('"', "\\\"");}
+
+  @Test
+  public void testUseVarsQwBracesNewItem() {doTestUseVars('{', "new_item");}
+
+  @Test
+  public void testUseVarsQwBracesQuote() {doTestUseVars('{', "\"");}
+
+  @Test
+  public void testUseVarsQwBracesQuoteEscaped() {doTestUseVars('{', "\\\"");}
+
+  @Test
+  public void testUseVarsQwBracesOpenBrace() {doTestUseVars('{', "{");}
+
+  @Test
+  public void testUseVarsQwBracesOpenBraceEscaped() {doTestUseVars('{', "\\{");}
+
+  @Test
+  public void testUseVarsQwBracesCloseBrace() {doTestUseVars('{', "}");}
+
+  @Test
+  public void testUseVarsQwBracesCloseBraceEscaped() {doTestUseVars('{', "\\}");}
+
+  @Test
   public void testBeginSay() {doTestNamedBlock("BEGIN", "say 'hi';");}
 
   @Test
@@ -226,6 +256,21 @@ public class PerlReparseTest extends PerlLightTestCase {
                      "}";
     initWithTextSmartWithoutErrors(content);
 
+    doTestWithoutInit(textToInsert);
+  }
+
+  private void doTestUseVars(char openQuote, @NotNull String textToInsert) {
+    char closeChar = PerlString.getQuoteCloseChar(openQuote);
+    String content = "BEGIN {\n" +
+                     "  say 'begin start';\n" +
+                     " use vars qw" + openQuote + "\n" +
+                     "   $item1\n" +
+                     "   <caret>\n" +
+                     "   @item2\n" +
+                     closeChar + ";\n" +
+                     "  say 'begin end';\n" +
+                     "}";
+    initWithTextSmartWithoutErrors(content);
     doTestWithoutInit(textToInsert);
   }
 
