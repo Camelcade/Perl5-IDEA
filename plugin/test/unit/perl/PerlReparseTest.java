@@ -30,7 +30,7 @@ import com.perl5.lang.perl.psi.PerlString;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
-public class PerlRepaseTest extends PerlLightTestCase {
+public class PerlReparseTest extends PerlLightTestCase {
   @Override
   protected String getBaseDataPath() {
     return "testData/unit/perl/reparse";
