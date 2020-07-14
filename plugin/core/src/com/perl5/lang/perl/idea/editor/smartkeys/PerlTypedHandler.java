@@ -103,7 +103,6 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
     }
 
     if (c == ':' && Perl5CodeInsightSettings.getInstance().AUTO_INSERT_COLON && currentOffset > 0) {
-      assert prevPositionIterator != null;
       if (isPreColonSuffix(prevPositionIterator)) {
         if (documentSequence.charAt(currentOffset - 1) != ':') {
           document.insertString(currentOffset, "::");
@@ -152,7 +151,8 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
     if (!isMyFile(file)) {
       return Result.CONTINUE;
     }
-    final int offset = editor.getCaretModel().getOffset() - 1;
+    final int currentOffset = editor.getCaretModel().getOffset();
+    final int offset = currentOffset - 1;
     if (offset < 0) {
       return Result.CONTINUE;
     }
@@ -163,7 +163,7 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
     Document document = editor.getDocument();
     CharSequence text = document.getCharsSequence();
     if (QUOTE_OPEN_ANY.contains(elementTokenType) && CodeInsightSettings.getInstance().AUTOINSERT_PAIR_QUOTE) {
-      IElementType quotePrefixType = offset > 0 ? PerlEditorUtil.getPreviousTokenType(highlighter.createIterator(offset - 1)) : null;
+      IElementType quotePrefixType = offset > 0 ? PerlEditorUtil.getPreviousTokenType(highlighter.createIterator(offset - 1), false) : null;
       if (offset > text.length() - 1 || text.charAt(offset) != typedChar) {
         return Result.CONTINUE;
       }

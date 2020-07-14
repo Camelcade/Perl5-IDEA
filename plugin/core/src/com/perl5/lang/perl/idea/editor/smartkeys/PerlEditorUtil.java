@@ -20,6 +20,7 @@ import com.intellij.openapi.editor.ex.EditorEx;
 import com.intellij.openapi.editor.highlighter.HighlighterIterator;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.perl.PerlParserDefinition;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -30,10 +31,10 @@ public class PerlEditorUtil {
   /**
    * Iterates back until atEnd or non-space token
    */
-  public static @NotNull HighlighterIterator moveToPreviousMeaningfulToken(@NotNull HighlighterIterator iterator) {
+  public static @NotNull HighlighterIterator moveToPreviousMeaningfulToken(@NotNull HighlighterIterator iterator, boolean ignoreComments) {
     while (!iterator.atEnd()) {
       IElementType tokenType = iterator.getTokenType();
-      if (tokenType != TokenType.WHITE_SPACE) {
+      if (tokenType != TokenType.WHITE_SPACE && !(ignoreComments && PerlParserDefinition.COMMENTS.contains(tokenType))) {
         break;
       }
       iterator.retreat();
@@ -44,11 +45,11 @@ public class PerlEditorUtil {
   /**
    * Iterates forward until atEnd or non-space token
    */
-  public static @NotNull HighlighterIterator moveToNextMeaningfulToken(@NotNull HighlighterIterator iterator) {
+  public static @NotNull HighlighterIterator moveToNextMeaningfulToken(@NotNull HighlighterIterator iterator, boolean ignoreComments) {
     iterator.advance();
     while (!iterator.atEnd()) {
       IElementType tokenType = iterator.getTokenType();
-      if (tokenType != TokenType.WHITE_SPACE) {
+      if (tokenType != TokenType.WHITE_SPACE && !(ignoreComments && PerlParserDefinition.COMMENTS.contains(tokenType))) {
         break;
       }
       iterator.advance();
@@ -59,8 +60,8 @@ public class PerlEditorUtil {
   /**
    * @return previous non-space token type
    */
-  public static @Nullable IElementType getPreviousTokenType(@NotNull HighlighterIterator iterator) {
-    moveToPreviousMeaningfulToken(iterator);
+  public static @Nullable IElementType getPreviousTokenType(@NotNull HighlighterIterator iterator, boolean ignoreComments) {
+    moveToPreviousMeaningfulToken(iterator, ignoreComments);
     return getTokenType(iterator);
   }
 
@@ -83,8 +84,8 @@ public class PerlEditorUtil {
   /**
    * @return next non-space token type; NB: current token is skipped
    */
-  public static @Nullable IElementType getNextTokenType(@NotNull HighlighterIterator iterator) {
-    moveToNextMeaningfulToken(iterator);
+  public static @Nullable IElementType getNextTokenType(@NotNull HighlighterIterator iterator, boolean ignoreComments) {
+    moveToNextMeaningfulToken(iterator, ignoreComments);
     return getTokenType(iterator);
   }
 

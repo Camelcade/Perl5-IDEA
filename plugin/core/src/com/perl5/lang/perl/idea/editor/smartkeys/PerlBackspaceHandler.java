@@ -47,7 +47,7 @@ public class PerlBackspaceHandler extends BackspaceHandlerDelegate {
     HighlighterIterator iterator = highlighter.createIterator(currentOffset);
     IElementType tokenToDelete = PerlEditorUtil.getTokenType(iterator);
     if (QUOTE_OPEN_ANY.contains(tokenToDelete)) {
-      PerlEditorUtil.moveToNextMeaningfulToken(iterator);
+      PerlEditorUtil.moveToNextMeaningfulToken(iterator, false);
       if (iterator.atEnd()) {
         return;
       }
@@ -57,7 +57,7 @@ public class PerlBackspaceHandler extends BackspaceHandlerDelegate {
 
         if (currentOffset > 0 && QUOTE_MIDDLE.contains(tokenToDelete)) {
           HighlighterIterator preQuoteIterator =
-            PerlEditorUtil.moveToPreviousMeaningfulToken(highlighter.createIterator(currentOffset - 1));
+            PerlEditorUtil.moveToPreviousMeaningfulToken(highlighter.createIterator(currentOffset - 1), false);
           if (!preQuoteIterator.atEnd() && QUOTE_OPEN_ANY.contains(preQuoteIterator.getTokenType())) {
             startOffsetToDelete = preQuoteIterator.getEnd();
             caretModel.moveToOffset(preQuoteIterator.getEnd());

@@ -63,14 +63,14 @@ public class PerlEnterInBracketsHandler extends EnterHandlerDelegateAdapter {
     CharSequence documentChars = document.getCharsSequence();
 
     HighlighterIterator highlighterIterator = editorHighlighter.createIterator(currentOffset - 1);
-    IElementType previousTokenType = PerlEditorUtil.getPreviousTokenType(highlighterIterator);
+    IElementType previousTokenType = PerlEditorUtil.getPreviousTokenType(highlighterIterator, false);
     if (highlighterIterator.atEnd() ||
         StringUtil.containsLineBreak(documentChars.subSequence(highlighterIterator.getStart(), currentOffset))) {
       return Result.Continue;
     }
     int openTokenStart = highlighterIterator.getStart();
 
-    IElementType nextTokenType = PerlEditorUtil.getNextTokenType(highlighterIterator);
+    IElementType nextTokenType = PerlEditorUtil.getNextTokenType(highlighterIterator, false);
     if (highlighterIterator.atEnd() ||
         StringUtil.containsLineBreak(documentChars.subSequence(currentOffset, highlighterIterator.getEnd()))) {
       return Result.Continue;
@@ -80,7 +80,7 @@ public class PerlEnterInBracketsHandler extends EnterHandlerDelegateAdapter {
       doIndent(file, editor, dataContext, originalHandler, document);
     }
     else if (previousTokenType == QUOTE_SINGLE_OPEN && nextTokenType == QUOTE_SINGLE_CLOSE && openTokenStart > 0) {
-      IElementType qwTokenType = PerlEditorUtil.getPreviousTokenType(editorHighlighter.createIterator(openTokenStart - 1));
+      IElementType qwTokenType = PerlEditorUtil.getPreviousTokenType(editorHighlighter.createIterator(openTokenStart - 1), false);
       if (qwTokenType == RESERVED_QW) {
         doIndent(file, editor, dataContext, originalHandler, document);
       }
