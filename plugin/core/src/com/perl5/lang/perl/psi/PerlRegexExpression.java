@@ -24,10 +24,11 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Common parent for m/s/qr regular expression expressions
  */
-public interface PerlRegexExpression extends PsiElement {
+public interface PerlRegexExpression extends PsiElement, PerlQuoted {
   /**
    * @return first opening quote element of the regex
    */
+  @Override
   default @Nullable PsiElement getOpenQuoteElement() {
     PsiElement run = getFirstChild();
     while (run != null) {
@@ -39,16 +40,16 @@ public interface PerlRegexExpression extends PsiElement {
     return null;
   }
 
-  /**
-   * @return opening quote character if any or 0 if not found.
-   */
-  default char getOpenQuote() {
-    PsiElement openQuoteElement = getOpenQuoteElement();
-    if (openQuoteElement == null) {
-      return 0;
+  @Override
+  default @Nullable PsiElement getCloseQuoteElement() {
+    PsiElement run = getFirstChild();
+    while (run != null) {
+      if (PerlTokenSets.QUOTE_CLOSE_FIRST_ANY.contains(PsiUtilCore.getElementType(run))) {
+        return run;
+      }
+      run = run.getNextSibling();
     }
-    CharSequence quoteChars = openQuoteElement.getNode().getChars();
-    return quoteChars.length() == 1 ? quoteChars.charAt(0) : 0;
+    return null;
   }
 
   @Nullable
