@@ -36,6 +36,48 @@ public class PerlRepaseTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testBeginSay() {doTestNamedBlock("BEGIN", "say 'hi';");}
+
+  @Test
+  public void testUnitcheckSay() {doTestNamedBlock("UNITCHECK", "say 'hi';");}
+
+  @Test
+  public void testCheckSay() {doTestNamedBlock("CHECK", "say 'hi';");}
+
+  @Test
+  public void testInitSay() {doTestNamedBlock("INIT", "say 'hi';");}
+
+  @Test
+  public void testEndSay() {doTestNamedBlock("END", "say 'hi';");}
+
+  @Test
+  public void testAutoloadSay() {doTestNamedBlock("AUTOLOAD", "say 'hi';");}
+
+  @Test
+  public void testDestorySay() {doTestNamedBlock("DESTROY", "say 'hi';");}
+
+  @Test
+  public void testBeginOpenBrace() {doTestNamedBlock("BEGIN", "grep {");}
+
+  @Test
+  public void testUnitcheckOpenBrace() {doTestNamedBlock("UNITCHECK", "grep {");}
+
+  @Test
+  public void testCheckOpenBrace() {doTestNamedBlock("CHECK", "grep {");}
+
+  @Test
+  public void testInitOpenBrace() {doTestNamedBlock("INIT", "grep {");}
+
+  @Test
+  public void testEndOpenBrace() {doTestNamedBlock("END", "grep {");}
+
+  @Test
+  public void testAutoloadOpenBrace() {doTestNamedBlock("AUTOLOAD", "grep {");}
+
+  @Test
+  public void testDestoryOpenBrace() {doTestNamedBlock("DESTROY", "grep {");}
+
+  @Test
   public void testRegexESlashCode() {doTestRegexESlash("say 'hi';");}
 
   @Test
@@ -137,6 +179,21 @@ public class PerlRepaseTest extends PerlLightTestCase {
 
   private void doTestRegexESlash(@NotNull String textToInsert) {
     initWithFileSmart("regexESlash");
+    doTestWithoutInit(textToInsert);
+  }
+
+  private void doTestNamedBlock(@NotNull String blockName, @NotNull String textToInsert) {
+    String content = "sub something {\n" +
+                     "  say 'sub start';\n" +
+                     blockName + " {\n" +
+                     "   say 'block start';\n" +
+                     "   <caret>\n" +
+                     "   say 'block end';\n" +
+                     "  }\n" +
+                     "  say 'sub end';\n" +
+                     "}";
+    initWithTextSmartWithoutErrors(content);
+
     doTestWithoutInit(textToInsert);
   }
 

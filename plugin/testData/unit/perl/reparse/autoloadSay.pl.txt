@@ -1,0 +1,17 @@
+sub something {
+  say 'sub start';
+AUTOLOAD {
+   say 'block start';
+   say 'hi';<caret>
+   say 'block end';
+  }
+  say 'sub end';
+}
+----------
+Element(LP_CODE_BLOCK)
+----------
+{
+   say 'block start';
+   
+   say 'block end';
+  }

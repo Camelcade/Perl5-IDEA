@@ -1,0 +1,11 @@
+sub something {
+  say 'sub start';
+DESTROY {
+   say 'block start';
+   grep {<caret>
+   say 'block end';
+  }
+  say 'sub end';
+}
+----------
+Full reparse
