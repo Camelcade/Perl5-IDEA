@@ -35,8 +35,8 @@ import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ObjectUtils;
+import com.perl5.lang.perl.idea.editor.smartkeys.PerlEditorUtil;
 import com.perl5.lang.perl.idea.editor.smartkeys.PerlTypedHandlerDelegate;
-import com.perl5.lang.perl.psi.utils.PerlEditorUtils;
 import com.perl5.lang.pod.lexer.PodElementTypes;
 import com.perl5.lang.pod.lexer.PodTokenSets;
 import com.perl5.lang.pod.parser.psi.PodElementFactory;
@@ -169,7 +169,7 @@ public class PodTypedHandler extends PerlTypedHandlerDelegate implements PodElem
 
     return typedChar == '=' && isCommandPosition(editor, elementType, elementChars) ||
            typedChar == ':' && elementNode != null &&
-           PerlEditorUtils.isPreviousToken(editor, elementNode.getStartOffset(), FORMAT_ACCEPTING_COMMANDS) ||
+           PerlEditorUtil.isPreviousToken(editor, elementNode.getStartOffset(), FORMAT_ACCEPTING_COMMANDS) ||
            typedChar == ' ' && PodTokenSets.POD_COMMANDS_TOKENSET.contains(elementType) ||
            typedChar == '<' && elementType == POD_IDENTIFIER && StringUtil.equals("L", elementChars) ||
            typedChar == '|' && parentType == LINK_NAME ||

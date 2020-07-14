@@ -16,10 +16,12 @@
 
 package com.perl5.lang.perl.idea.editor.smartkeys;
 
+import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.ex.EditorEx;
 import com.intellij.openapi.editor.highlighter.HighlighterIterator;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.PerlParserDefinition;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -132,5 +134,12 @@ public class PerlEditorUtil {
         return areMarkersBalanced(editor, offset, LEFT_PAREN, RIGHT_PAREN);
     }
     throw new RuntimeException("Incorrect char: " + openChar);
+  }
+
+  /**
+   * True iff previous non-space token is one of the {@code elementTypes}
+   */
+  public static boolean isPreviousToken(@NotNull Editor editor, int offset, @NotNull TokenSet elementTypes) {
+    return elementTypes.contains(getPreviousTokenType(((EditorEx)editor).getHighlighter().createIterator(offset), false));
   }
 }
