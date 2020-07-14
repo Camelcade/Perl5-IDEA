@@ -17,13 +17,17 @@
 package com.perl5.lang.perl.parser.elementTypes;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.lang.Language;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.lexer.PerlElementTypesGenerated;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.lexer.PerlLexingContext;
+import com.perl5.lang.perl.psi.PerlStringList;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 
 public class PerlLazyStringListElementType extends PerlLazyBlockElementType {
@@ -34,9 +38,28 @@ public class PerlLazyStringListElementType extends PerlLazyBlockElementType {
   }
 
   @Override
+  public boolean isParsable(@Nullable ASTNode parent,
+                            @NotNull CharSequence buffer,
+                            @NotNull Language fileLanguage,
+                            @NotNull Project project) {
+    if (parent == null) {
+      return false;
+    }
+    PsiElement psiElement = parent.getPsi();
+    if (!(psiElement instanceof PerlStringList)) {
+      return false;
+    }
+    char openQuote = ((PerlStringList)psiElement).getOpenQuote();
+    if (openQuote == 0) {
+      return false;
+    }
+    return PerlLexer.checkQuoteLikeBodyConsistency(buffer, openQuote);
+  }
+
+  @Override
   protected @NotNull PerlLexingContext getLexingContext(@NotNull Project project, @NotNull ASTNode chameleon) {
     PerlLexingContext baseContext = super.getLexingContext(project, chameleon).withEnforcedInitialState(PerlLexer.STRING_LIST);
-    ASTNode prevNode = chameleon.getTreePrev();
+    ASTNode prevNode = getRealNode(chameleon).getTreePrev();
     if (PsiUtilCore.getElementType(prevNode) != PerlElementTypesGenerated.QUOTE_SINGLE_OPEN) {
       LOG.error("Unable to find opening quote, got: " + prevNode);
       return baseContext;

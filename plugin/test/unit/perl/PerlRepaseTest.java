@@ -26,6 +26,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.impl.BlockSupportImpl;
 import com.intellij.psi.impl.source.PsiFileImpl;
 import com.intellij.testFramework.UsefulTestCase;
+import com.perl5.lang.perl.psi.PerlString;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
@@ -34,6 +35,36 @@ public class PerlRepaseTest extends PerlLightTestCase {
   protected String getBaseDataPath() {
     return "testData/unit/perl/reparse";
   }
+
+  @Test
+  public void testQwQuoteNewItem() {doTestQwList('"', "new_item");}
+
+  @Test
+  public void testQwQuoteQuote() {doTestQwList('"', "\"");}
+
+  @Test
+  public void testQwQuoteQuoteEscaped() {doTestQwList('"', "\\\"");}
+
+  @Test
+  public void testQwBracesNewItem() {doTestQwList('{', "new_item");}
+
+  @Test
+  public void testQwBracesQuote() {doTestQwList('{', "\"");}
+
+  @Test
+  public void testQwBracesQuoteEscaped() {doTestQwList('{', "\\\"");}
+
+  @Test
+  public void testQwBracesOpenBrace() {doTestQwList('{', "{");}
+
+  @Test
+  public void testQwBracesOpenBraceEscaped() {doTestQwList('{', "\\{");}
+
+  @Test
+  public void testQwBracesCloseBrace() {doTestQwList('{', "}");}
+
+  @Test
+  public void testQwBracesCloseBraceEscaped() {doTestQwList('{', "\\}");}
 
   @Test
   public void testBeginSay() {doTestNamedBlock("BEGIN", "say 'hi';");}
@@ -182,6 +213,22 @@ public class PerlRepaseTest extends PerlLightTestCase {
     doTestWithoutInit(textToInsert);
   }
 
+  private void doTestQwList(char openQuote, @NotNull String textToInsert) {
+    char closeChar = PerlString.getQuoteCloseChar(openQuote);
+    String content = "sub something {\n" +
+                     "  say 'sub start';\n" +
+                     "qw" + openQuote + "\n" +
+                     "   item1\n" +
+                     "   <caret>\n" +
+                     "   item2\n" +
+                     closeChar + ";\n" +
+                     "  say 'sub end';\n" +
+                     "}";
+    initWithTextSmartWithoutErrors(content);
+
+    doTestWithoutInit(textToInsert);
+  }
+
   private void doTestNamedBlock(@NotNull String blockName, @NotNull String textToInsert) {
     String content = "sub something {\n" +
                      "  say 'sub start';\n" +
@@ -213,7 +260,6 @@ public class PerlRepaseTest extends PerlLightTestCase {
     Couple<ASTNode> roots =
       BlockSupportImpl.findReparseableRoots((PsiFileImpl)psiFile, fileNode, TextRange.create(offset, offset), newText);
 
-
     StringBuilder result = new StringBuilder(newText).append(SEPARATOR_NEWLINES);
     result.insert(offset + textToInsert.length(), "<caret>");
 
@@ -224,6 +270,8 @@ public class PerlRepaseTest extends PerlLightTestCase {
       result.append(roots.first).append(SEPARATOR_NEWLINES);
       result.append(roots.first.getChars());
     }
+
+    myFixture.type(textToInsert);
 
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), result.toString());
   }

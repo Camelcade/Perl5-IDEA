@@ -21,7 +21,9 @@ import com.intellij.lang.ASTNode;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiBuilderFactory;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.Pair;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.text.BlockSupport;
 import com.intellij.psi.tree.IReparseableElementType;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.lexer.PerlLexingContext;
@@ -64,6 +66,14 @@ public abstract class PerlLazyBlockElementType extends IReparseableElementType i
       chameleon.getText());
 
     return PerlParserImpl.INSTANCE.parse(this, builder).getFirstChildNode();
+  }
+
+  /**
+   * @return real node for reparsing or current node for lazy parsing.
+   */
+  protected ASTNode getRealNode(@NotNull ASTNode chameleon) {
+    Pair<ASTNode, CharSequence> originalNodeData = BlockSupport.TREE_TO_BE_REPARSED.get(chameleon);
+    return originalNodeData == null ? chameleon : originalNodeData.first;
   }
 
   protected @NotNull PerlLexingContext getLexingContext(@NotNull Project project, @NotNull ASTNode chameleon) {

@@ -1,0 +1,11 @@
+sub something {
+  say 'sub start';
+qw"
+   item1
+   "<caret>
+   item2
+";
+  say 'sub end';
+}
+----------
+Full reparse
