@@ -132,4 +132,108 @@ public abstract class PerlQuoteLikeReparseTestCase extends PerlLightTestCase {
              "}\n";
     }
   }
+
+  public static class MatchRegexXSlash extends PerlQuoteLikeReparseTestCase {
+    @Override
+    protected @NotNull String buildCodeSample() {
+      return "sub something{\n" +
+             "  m/test\n" +
+             "    say 'hi';\n" +
+             "    <caret>\n" +
+             "    say 'hi'\n" +
+             "  /x;\n" +
+             "}\n";
+    }
+  }
+
+  public static class MatchRegexXXSlash extends PerlQuoteLikeReparseTestCase {
+    @Override
+    protected @NotNull String buildCodeSample() {
+      return "sub something{\n" +
+             "  m/test\n" +
+             "    say 'hi';\n" +
+             "    <caret>\n" +
+             "    say 'hi'\n" +
+             "  /xx;\n" +
+             "}\n";
+    }
+  }
+
+  public static class MatchRegexXBrace extends PerlQuoteLikeReparseTestCase {
+    @Override
+    protected @NotNull String buildCodeSample() {
+      return "sub something{\n" +
+             "  m{test\n" +
+             "    say 'hi';\n" +
+             "    <caret>\n" +
+             "    say 'hi'\n" +
+             "  }x;\n" +
+             "}\n";
+    }
+  }
+
+  public static class MatchRegexXXBrace extends PerlQuoteLikeReparseTestCase {
+    @Override
+    protected @NotNull String buildCodeSample() {
+      return "sub something{\n" +
+             "  m{test\n" +
+             "    say 'hi';\n" +
+             "    <caret>\n" +
+             "    say 'hi'\n" +
+             "  }xx;\n" +
+             "}\n";
+    }
+  }
+
+  public static class ReplaceRegexXSlash extends PerlQuoteLikeReparseTestCase {
+    @Override
+    protected @NotNull String buildCodeSample() {
+      return "sub something{\n" +
+             "  s/test\n" +
+             "    say 'hi';\n" +
+             "    <caret>\n" +
+             "    say 'hi'\n" +
+             "  /replacement $1/x;\n" +
+             "}\n";
+    }
+  }
+
+  public static class ReplaceRegexXXSlash extends PerlQuoteLikeReparseTestCase {
+    @Override
+    protected @NotNull String buildCodeSample() {
+      return "sub something{\n" +
+             "  m/test\n" +
+             "    say 'hi';\n" +
+             "    <caret>\n" +
+             "    say 'hi'\n" +
+             "  /replacement $2/xx;\n" +
+             "}\n";
+    }
+  }
+
+  public static class ReplaceRegexXBrace extends PerlQuoteLikeReparseTestCase {
+    @Override
+    protected @NotNull String buildCodeSample() {
+      return "sub something{\n" +
+             "  m{test\n" +
+             "    say 'hi';\n" +
+             "    <caret>\n" +
+             "    say 'hi'\n" +
+             "  }<replacement $3>x;\n" +
+             "}\n";
+    }
+  }
+
+  public static class ReplaceRegexXXBrace extends PerlQuoteLikeReparseTestCase {
+    @Override
+    protected @NotNull String buildCodeSample() {
+      return "sub something{\n" +
+             "  m{test\n" +
+             "    say 'hi';\n" +
+             "    <caret>\n" +
+             "    say 'hi'\n" +
+             "  } | replacement $4|xx;\n" +
+             "}\n";
+    }
+  }
 }

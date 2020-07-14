@@ -1,0 +1,18 @@
+sub something{
+  s/test
+    say 'hi';
+    # comment /<caret>
+    say 'hi'
+  /replacement $1/x;
+}
+
+----------
+Element(LP_CODE_BLOCK)
+----------
+{
+  s/test
+    say 'hi';
+    
+    say 'hi'
+  /replacement $1/x;
+}

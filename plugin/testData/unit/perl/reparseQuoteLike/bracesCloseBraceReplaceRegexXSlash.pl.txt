@@ -1,0 +1,16 @@
+sub something{
+  s/test
+    say 'hi';
+    # comment }<caret>
+    say 'hi'
+  /replacement $1/x;
+}
+
+----------
+Element(LP_REGEX_X)
+----------
+test
+    say 'hi';
+    
+    say 'hi'
+  
