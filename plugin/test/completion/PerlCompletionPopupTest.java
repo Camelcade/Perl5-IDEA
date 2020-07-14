@@ -21,6 +21,7 @@ import base.PerlCompletionPopupTestCase;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings;
 import org.junit.Test;
+
 public class PerlCompletionPopupTest extends PerlCompletionPopupTestCase {
 
   @Override
@@ -185,4 +186,28 @@ public class PerlCompletionPopupTest extends PerlCompletionPopupTestCase {
 
   @Test
   public void testSpaceBug() {doTestNegative("qw//<caret>", ";");}
+
+  @Test
+  public void testAfterPackage() {doTest("MyTest::Constants<caret>", "-");}
+
+  @Test
+  public void testAfterPackageWithSep() {doTest("MyTest::Constants::<caret>", "-");}
+
+  @Test
+  public void testAfterPackageDeref() {doTest("MyTest::Constants-><caret>", ">");}
+
+  @Test
+  public void testAfterPackageWithSepDeref() {doTest("MyTest::Constants::-><caret>", ">");}
+
+  @Test
+  public void testAfterPackageDerefAndComment() {doTest("MyTest::Constants-> # comment \n<caret>", ">");}
+
+  @Test
+  public void testAfterPackageWithSepDerefAndComment() {doTest("MyTest::Constants::-> # comment \n<caret>", ">");}
+
+  @Test
+  public void testAfterPackageWithComment() {doTest("MyTest::Constants #comment\n<caret>", "-");}
+
+  @Test
+  public void testAfterPackageWithSepWithComment() {doTest("MyTest::Constants:: #comment\n<caret>", "-");}
 }

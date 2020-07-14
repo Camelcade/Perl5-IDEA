@@ -120,6 +120,11 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
       }
     }
 
+    if (c == '>' && PerlEditorUtil.getPreviousTokenType(prevPositionIterator, true) == OPERATOR_DEREFERENCE) {
+      AutoPopupController.getInstance(project).scheduleAutoPopup(editor);
+      return Result.STOP;
+    }
+
     return Result.CONTINUE;
   }
 
@@ -211,6 +216,14 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
     }
     else if (typedChar == '=' && !iterator.atEnd()) {
       handleEqualSign(editor, file, offset, iterator, document);
+    }
+    else if (typedChar == '-' && offset > 0) {
+      iterator.retreat();
+      if (PerlEditorUtil.getPreviousTokenType(iterator, true) == PACKAGE &&
+          (currentOffset == text.length() || text.charAt(currentOffset) != '>')) {
+        EditorModificationUtil.insertStringAtCaret(editor, ">");
+        AutoPopupController.getInstance(project).scheduleAutoPopup(editor, CompletionType.BASIC, null);
+      }
     }
 
     return Result.CONTINUE;

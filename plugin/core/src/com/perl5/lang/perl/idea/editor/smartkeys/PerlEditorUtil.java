@@ -62,7 +62,11 @@ public class PerlEditorUtil {
   /**
    * @return previous non-space token type
    */
-  public static @Nullable IElementType getPreviousTokenType(@NotNull HighlighterIterator iterator, boolean ignoreComments) {
+  @Contract("null,_->null")
+  public static @Nullable IElementType getPreviousTokenType(@Nullable HighlighterIterator iterator, boolean ignoreComments) {
+    if (iterator == null) {
+      return null;
+    }
     moveToPreviousMeaningfulToken(iterator, ignoreComments);
     return getTokenType(iterator);
   }
