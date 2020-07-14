@@ -1,0 +1,16 @@
+sub something {
+  say 'sub start';
+qw"
+   item1
+   # comment {}<caret>
+   item2
+";
+  say 'sub end';
+}
+----------
+Element(LP_STRING_QW)
+----------
+
+   item1
+   
+   item2

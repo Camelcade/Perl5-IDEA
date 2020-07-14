@@ -63,10 +63,7 @@ import com.intellij.ide.util.gotoByName.GotoFileModel;
 import com.intellij.ide.util.gotoByName.GotoSymbolModel2;
 import com.intellij.ide.util.treeView.smartTree.*;
 import com.intellij.injected.editor.EditorWindow;
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.Language;
-import com.intellij.lang.LanguageDocumentation;
-import com.intellij.lang.LanguageStructureViewBuilder;
+import com.intellij.lang.*;
 import com.intellij.lang.documentation.DocumentationProvider;
 import com.intellij.lang.injection.InjectedLanguageManager;
 import com.intellij.lang.parameterInfo.ParameterInfoHandler;
@@ -116,6 +113,7 @@ import com.intellij.openapi.vfs.VirtualFileFilter;
 import com.intellij.openapi.vfs.newvfs.impl.VfsRootAccess;
 import com.intellij.psi.*;
 import com.intellij.psi.codeStyle.CodeStyleManager;
+import com.intellij.psi.impl.BlockSupportImpl;
 import com.intellij.psi.impl.DebugUtil;
 import com.intellij.psi.impl.PsiManagerEx;
 import com.intellij.psi.impl.source.PsiFileImpl;
@@ -2655,5 +2653,37 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
 
   protected void enableAutoColon() {
     Perl5CodeInsightSettings.getInstance().AUTO_INSERT_COLON = true;
+  }
+
+  protected void doTestReparse(@NotNull String textToInsert) {
+    initWithFileSmart();
+    doTestReparseWithoutInit(textToInsert);
+  }
+
+  protected void doTestReparseWithoutInit(@NotNull String textToInsert) {
+    PsiFile psiFile = getFile();
+    assertInstanceOf(psiFile, PsiFileImpl.class);
+    FileASTNode fileNode = psiFile.getNode();
+    Editor editor = getEditor();
+    int offset = editor.getCaretModel().getOffset();
+    CharSequence documentText = editor.getDocument().getCharsSequence();
+    String newText = documentText.subSequence(0, offset) + textToInsert + documentText.subSequence(offset, documentText.length());
+    Couple<ASTNode> roots =
+      BlockSupportImpl.findReparseableRoots((PsiFileImpl)psiFile, fileNode, TextRange.create(offset, offset), newText);
+
+    StringBuilder result = new StringBuilder(newText).append(SEPARATOR_NEWLINES);
+    result.insert(offset + textToInsert.length(), "<caret>");
+
+    if (roots == null) {
+      result.append("Full reparse");
+    }
+    else {
+      result.append(roots.first).append(SEPARATOR_NEWLINES);
+      result.append(roots.first.getChars());
+    }
+
+    myFixture.type(textToInsert);
+
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), result.toString());
   }
 }

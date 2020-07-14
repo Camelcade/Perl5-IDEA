@@ -1,0 +1,11 @@
+BEGIN {
+  say 'begin start';
+ use vars qw'
+   $item1
+   '<caret>
+   @item2
+';
+  say 'begin end';
+}
+----------
+Full reparse

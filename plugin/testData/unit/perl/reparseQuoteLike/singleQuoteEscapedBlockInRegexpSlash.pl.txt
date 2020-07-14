@@ -1,0 +1,16 @@
+sub something{
+  s/test/
+    say 'hi';
+    \'<caret>
+    say 'hi'
+  /e;
+}
+
+----------
+Element(LP_CODE_BLOCK)
+----------
+
+    say 'hi';
+    
+    say 'hi'
+  
