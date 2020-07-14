@@ -21,20 +21,20 @@ import com.intellij.lang.Language;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.util.PsiUtilCore;
-import com.perl5.lang.perl.lexer.PerlElementTypesGenerated;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.lexer.PerlLexingContext;
-import com.perl5.lang.perl.psi.PerlStringList;
+import com.perl5.lang.perl.psi.PerlQuoted;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+public class PerlQuoteLikeContentLazyElementType extends PerlLazyBlockElementType {
+  private static final Logger LOG = Logger.getInstance(PerlQuoteLikeContentLazyElementType.class);
 
-public class PerlLazyStringListElementType extends PerlLazyBlockElementType {
-  private static final Logger LOG = Logger.getInstance(PerlLazyStringListElementType.class);
+  private final int myInitialState;
 
-  public PerlLazyStringListElementType(String name) {
-    super(name);
+  public PerlQuoteLikeContentLazyElementType(@NotNull String debugName, int initialState) {
+    super(debugName);
+    myInitialState = initialState;
   }
 
   @Override
@@ -42,32 +42,38 @@ public class PerlLazyStringListElementType extends PerlLazyBlockElementType {
                             @NotNull CharSequence buffer,
                             @NotNull Language fileLanguage,
                             @NotNull Project project) {
-    if (parent == null) {
-      return false;
-    }
-    PsiElement psiElement = parent.getPsi();
-    if (!(psiElement instanceof PerlStringList)) {
-      return false;
-    }
-    char openQuote = ((PerlStringList)psiElement).getOpenQuote();
-    if (openQuote == 0) {
-      return false;
-    }
-    return PerlLexer.checkQuoteLikeBodyConsistency(buffer, openQuote);
+    char openQuote = getOpenQuoteCharacter(parent);
+    return openQuote != 0 && PerlLexer.checkQuoteLikeBodyConsistency(buffer, openQuote);
   }
 
+  protected char getOpenQuoteCharacter(@Nullable ASTNode parent) {
+    if (parent == null) {
+      return 0;
+    }
+    PsiElement psiElement = parent.getPsi();
+    return psiElement instanceof PerlQuoted ? ((PerlQuoted)psiElement).getOpenQuote() : 0;
+  }
+
+  /**
+   * @implNote we need to check tree (basically, tokens, because container may be a DUMMY_HOLDER), but we need to lex
+   * this properly for stubs.
+   */
   @Override
   protected @NotNull PerlLexingContext getLexingContext(@NotNull Project project, @NotNull ASTNode chameleon) {
-    PerlLexingContext baseContext = super.getLexingContext(project, chameleon).withEnforcedInitialState(PerlLexer.STRING_LIST);
-    ASTNode prevNode = getRealNode(chameleon).getTreePrev();
-    if (PsiUtilCore.getElementType(prevNode) != PerlElementTypesGenerated.QUOTE_SINGLE_OPEN) {
-      LOG.error("Unable to find opening quote, got: " + prevNode);
+    PerlLexingContext baseContext = super.getLexingContext(project, chameleon).withEnforcedInitialState(myInitialState);
+
+    ASTNode quoteNode = getRealNode(chameleon).getTreePrev();
+    if (quoteNode == null) {
+      LOG.error("Missing quote node for " + chameleon);
       return baseContext;
     }
-    CharSequence nodeChars = prevNode.getChars();
-    if (nodeChars.length() != 1) {
-      LOG.error("Got " + nodeChars);
+
+    CharSequence quoteChars = quoteNode.getChars();
+    if (quoteChars.length() != 1) {
+      LOG.error("Non-single character quote: " + quoteChars);
+      return baseContext;
     }
-    return baseContext.withOpenChar(nodeChars.charAt(0));
+
+    return baseContext.withOpenChar(quoteChars.charAt(0));
   }
 }

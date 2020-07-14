@@ -70,7 +70,7 @@ public class PerlElementTypeFactory {
   public static @NotNull IElementType getElementType(@NotNull String name) {
     switch (name) {
       case "PARSABLE_STRING_USE_VARS":
-        return new PerlLazyUseVarsElementType(name);
+        return new PerlQuoteLikeContentLazyElementType(name, PerlLexer.USE_VARS_STRING);
       case "COMMENT_ANNOTATION":
         return new PerlLazyAnnotationElementType(name);
       case "HEREDOC_QQ":
@@ -84,11 +84,11 @@ public class PerlElementTypeFactory {
       case "LP_CODE_BLOCK_WITH_TRYCATCH":
         return new PerlLazyCodeBlockElementTypeWithTryCatch(name, PsiPerlLpCodeBlockWithTrycatchImpl.class);
       case "LP_REGEX_X":
-        return new PerlLazyExtendedMatchRegexpElementType(name);
+        return new PerlQuoteLikeContentLazyElementType(name, PerlLexer.MATCH_REGEX_X);
       case "LP_REGEX_XX":
-        return new PerlLazySuperExtendedMatchRegexpElementType(name);
+        return new PerlQuoteLikeContentLazyElementType(name, PerlLexer.MATCH_REGEX_XX);
       case "LP_STRING_QW":
-        return new PerlLazyStringListElementType(name);
+        return new PerlQuoteLikeContentLazyElementType(name, PerlLexer.STRING_LIST);
       case "SUB_DEFINITION":
         return PerlStubElementTypes.SUB_DEFINITION;
       case "METHOD_DEFINITION":

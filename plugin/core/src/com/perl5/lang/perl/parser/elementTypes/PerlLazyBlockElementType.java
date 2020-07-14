@@ -71,7 +71,7 @@ public abstract class PerlLazyBlockElementType extends IReparseableElementType i
   /**
    * @return real node for reparsing or current node for lazy parsing.
    */
-  protected ASTNode getRealNode(@NotNull ASTNode chameleon) {
+  protected @NotNull ASTNode getRealNode(@NotNull ASTNode chameleon) {
     Pair<ASTNode, CharSequence> originalNodeData = BlockSupport.TREE_TO_BE_REPARSED.get(chameleon);
     return originalNodeData == null ? chameleon : originalNodeData.first;
   }
