@@ -1,0 +1,80 @@
+sub something {
+    say 'sub start';
+
+    say <<'MARKER_Q1';
+    start q1
+MARKER_Q1
+
+    say <<'MARKER_Q2';
+    start q2
+MARKER_Q2
+
+    say <<~'MARKER_Q1';
+        start q3
+    MARKER_Q1
+
+    say <<~'MARKER_Q3';
+        start q4
+    MARKER_Q3
+
+    # dq quoted
+    say <<"MARKER_QQ1";
+    start qq1
+MARKER_QQ1
+
+    say <<"MARKER_QQ2";
+    start qq2
+MARKER_QQ2
+
+    say <<~"MARKER_QQ1";
+        start qq3
+    MARKER_QQ1
+
+    say <<~"MARKER_QQ3";
+        start qq4
+    MARKER_QQ3
+
+    # dq bare
+    say <<MARKER_QQ1;
+    start qq5
+    MARKER_Q1<caret>
+    end qq5
+MARKER_QQ1
+
+    say <<MARKER_QQ2;
+    start qq6
+MARKER_QQ2
+
+    say <<~MARKER_QQ1;
+        start qq7
+    MARKER_QQ1
+
+    say <<~MARKER_QQ3;
+        start qq8
+    MARKER_QQ3
+
+    # xq quoted
+    say <<`MARKER_QX1`;
+    start qx1
+MARKER_QX1
+
+    say <<`MARKER_QX2`;
+    start qx2
+MARKER_QX2
+
+    say <<~`MARKER_QX1`;
+        start qx3
+    MARKER_QX1
+
+    say <<~`MARKER_QX3`;
+        start qx4
+    MARKER_QX3
+
+    say 'sub end';
+}
+----------
+Element(HEREDOC_QQ)
+----------
+    start qq5
+
+    end qq5
