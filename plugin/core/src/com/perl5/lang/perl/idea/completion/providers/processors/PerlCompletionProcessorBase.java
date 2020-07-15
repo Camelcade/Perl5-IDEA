@@ -20,6 +20,7 @@ import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.util.registry.Registry;
 import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
@@ -119,6 +120,7 @@ public abstract class PerlCompletionProcessorBase extends AbstractPerlCompletion
 
   @Override
   public boolean matches(@Nullable String suggestedName) {
+    ProgressManager.checkCanceled();
     myCounters.countMatching();
     return super.matches(suggestedName);
   }
