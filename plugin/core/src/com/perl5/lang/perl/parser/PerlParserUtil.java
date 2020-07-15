@@ -517,4 +517,19 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
     mark.rollbackTo();
     return false;
   }
+
+  public static boolean parseBareString(@NotNull PsiBuilder b, int l) {
+    IElementType type = b.getTokenType();
+    if (type != STRING_CONTENT && type != STRING_SPECIAL_ESCAPE_CHAR) {
+      return false;
+    }
+    while (true) {
+      IElementType nextRawTokenType = b.rawLookup(1);
+      boolean shouldContinue = nextRawTokenType == STRING_CONTENT || nextRawTokenType == STRING_SPECIAL_ESCAPE_CHAR;
+      b.advanceLexer();
+      if (!shouldContinue) {
+        return true;
+      }
+    }
+  }
 }

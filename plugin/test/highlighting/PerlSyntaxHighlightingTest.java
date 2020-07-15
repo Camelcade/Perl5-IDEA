@@ -28,6 +28,9 @@ public class PerlSyntaxHighlightingTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testStringListWithEscapes() {doTest();}
+
+  @Test
   public void testLazyParsableNestedBlocks() {doTest();}
 
   @Test

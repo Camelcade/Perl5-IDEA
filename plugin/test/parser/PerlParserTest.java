@@ -27,6 +27,9 @@ public class PerlParserTest extends PerlParserTestBase {
   }
 
   @Test
+  public void testStringListWithEscapes() {doTest();}
+
+  @Test
   public void testReplaceRegexWithComments() {
     setSkipSpaces(false);
     doTest();

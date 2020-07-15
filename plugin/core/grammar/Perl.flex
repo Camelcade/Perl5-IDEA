@@ -182,7 +182,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 %state PACKAGE_DECLARATION_ARGUMENTS
 
 %xstate STRING_Q, STRING_Q_CHAR, STRING_Q_ESC, STRING_Q_CONTINUE
-%xstate STRING_LIST
+%xstate STRING_LIST, STRING_LIST_CHAR
 %xstate STRING_QQ, STRING_QQ_CHAR,
 %xstate STRING_QQ_RESTRICTED, STRING_QQ_RESTRICTED_CHAR
 %xstate STRING_RE, STRING_RE_CHAR
@@ -740,10 +740,19 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
   [^\}]+              {return TokenType.BAD_CHARACTER;}
 }
 
+<STRING_LIST_CHAR> [^]                  {yybegin(STRING_LIST);return STRING_CONTENT;}
+
 <STRING_LIST>
 {
-	{NON_SPACE}+			{return STRING_CONTENT;}
-	{ANY_SPACE}+			{return TokenType.WHITE_SPACE;}
+  {ANY_SPACE}            {return TokenType.WHITE_SPACE;}
+  [^\\\s]+               {return STRING_CONTENT;}
+  "\\"                   {
+    IElementType tokenType = getSQBackSlashTokenType();
+    if( tokenType == STRING_SPECIAL_ESCAPE_CHAR){
+        yybegin(STRING_LIST_CHAR);
+    }
+    return tokenType;
+  }
 }
 
 // we've got some text, continuing

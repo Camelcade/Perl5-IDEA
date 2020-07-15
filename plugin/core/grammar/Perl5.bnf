@@ -1293,7 +1293,7 @@ private qx_string_element ::= STRING_CONTENT_XQ | special_constructs |interpolat
 
 private interpolated_constructs ::= deref_expr
 
-string_bare ::= STRING_CONTENT
+string_bare ::= &(STRING_CONTENT|'\\"')<<parseBareString>>
 
 string_sq ::= [ 'q'] quoted_sq_string
 string_list ::=  'qw' qw_string {pin=1}

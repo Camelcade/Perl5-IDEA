@@ -89,7 +89,7 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
                     int endOffset,
                     int subLexingState,
                     char openQuoteChar) {
-    LOG.assertTrue(subLexingState == PerlLexer.STRING_Q);
+    LOG.assertTrue(subLexingState == PerlLexer.STRING_Q || subLexingState == PerlLexer.STRING_LIST);
     start(buffer, startOffset, endOffset, subLexingState);
     Lexer mainLexer = getMainLexer();
     LOG.assertTrue(mainLexer instanceof PerlCodeMergingLexerAdapter, "Got: " + myMainLexerWithContext);
@@ -197,7 +197,7 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
 
   private void subLexCurrentToken(Integer subLexingState) {
     PerlSublexingLexerAdapter subLexer = getSubLexer();
-    if (subLexingState == PerlLexer.STRING_Q) {
+    if (subLexingState == PerlLexer.STRING_Q || subLexingState == PerlLexer.STRING_LIST) {
       subLexer.start(getBufferSequence(), myTokenStart, myTokenEnd, subLexingState, mySingleOpenQuoteChar);
     }
     else {
