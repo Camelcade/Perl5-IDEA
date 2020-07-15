@@ -28,6 +28,33 @@ public class PerlTypedHandlerTest extends PerlSmartKeysTestCase {
   }
 
   @Test
+  public void testUnicode() {doTest("qq|test<caret>test|", "\\N", "qq|test\\N{<caret>}test|");}
+
+  @Test
+  public void testHexEnabled() {
+    Perl5CodeInsightSettings.getInstance().AUTO_BRACE_HEX_SUBSTITUTION = true;
+    doTest("qx{test<caret>test}", "\\x", "qx{test\\x{<caret>}test}");
+  }
+
+  @Test
+  public void testOctEnabled() {
+    Perl5CodeInsightSettings.getInstance().AUTO_BRACE_OCT_SUBSTITUTION = true;
+    doTest("\"test<caret>test\"", "\\o", "\"test\\o{<caret>}test\"");
+  }
+
+  @Test
+  public void testHexDisabled() {
+    Perl5CodeInsightSettings.getInstance().AUTO_BRACE_HEX_SUBSTITUTION = false;
+    doTest("qx{test<caret>test}", "\\x", "qx{test\\x<caret>test}");
+  }
+
+  @Test
+  public void testOctDisabled() {
+    Perl5CodeInsightSettings.getInstance().AUTO_BRACE_OCT_SUBSTITUTION = false;
+    doTest("\"test<caret>test\"", "\\o", "\"test\\o<caret>test\"");
+  }
+
+  @Test
   public void testSmartHashLonger() {
     doTestSmartCommaSequence();
   }

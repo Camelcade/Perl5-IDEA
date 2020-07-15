@@ -38,7 +38,6 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
-import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
@@ -162,6 +161,7 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
       return Result.CONTINUE;
     }
 
+    Perl5CodeInsightSettings perlCodeInsightSettings = Perl5CodeInsightSettings.getInstance();
     EditorHighlighter highlighter = ((EditorEx)editor).getHighlighter();
     HighlighterIterator iterator = highlighter.createIterator(offset);
     IElementType elementTokenType = iterator.getTokenType();
@@ -206,6 +206,14 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
       }
 
       EditorModificationUtil.insertStringAtCaret(editor, textToAppend.toString(), false, false);
+    }
+    else if (elementTokenType == STRING_SPECIAL_HEX && perlCodeInsightSettings.AUTO_BRACE_HEX_SUBSTITUTION ||
+             elementTokenType == STRING_SPECIAL_OCT && perlCodeInsightSettings.AUTO_BRACE_OCT_SUBSTITUTION) {
+      EditorModificationUtil.insertStringAtCaret(editor, "{}", false, 1);
+    }
+    else if (elementTokenType == STRING_SPECIAL_UNICODE) {
+      EditorModificationUtil.insertStringAtCaret(editor, "{}", false, 1);
+      AutoPopupController.getInstance(project).scheduleAutoPopup(editor, CompletionType.BASIC, null);
     }
     else if (elementTokenType == LEFT_BRACE) {
       AutoPopupController.getInstance(project).scheduleAutoPopup(editor, CompletionType.BASIC, psiFile -> {
@@ -308,12 +316,11 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
                                     @NotNull Editor editor,
                                     @Nullable PsiElement element) {
     IElementType elementType = PsiUtilCore.getElementType(element);
-    PsiElement elementParent = ObjectUtils.doIfNotNull(element, PsiElement::getParent);
     return typedChar == '^' && PRE_VARIABLE_NAME_TOKENS.contains(elementType) ||
            typedChar == '>' && elementType == OPERATOR_MINUS ||
            typedChar == ':' && elementType == COLON ||
            typedChar == ' ' && (AUTO_OPENED_TOKENS.contains(elementType) || PerlStringList.isListElement(element)) ||
-           typedChar == '{' && SIGILS.contains(elementType) ||
+           typedChar == '{' && (elementType == STRING_SPECIAL_UNICODE || SIGILS.contains(elementType)) ||
            StringUtil.containsChar("$@%#", typedChar);
   }
 }

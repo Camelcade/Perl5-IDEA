@@ -37,6 +37,8 @@ public class Perl5CodeInsightSettings implements PersistentStateComponent<Perl5C
   public boolean HEREDOC_AUTO_INSERTION = true;
   public boolean AUTO_INSERT_COLON = true;
   public boolean SMART_COMMA_SEQUENCE_TYPING = true;
+  public boolean AUTO_BRACE_HEX_SUBSTITUTION = true;
+  public boolean AUTO_BRACE_OCT_SUBSTITUTION = true;
 
   @Override
   public @Nullable Perl5CodeInsightSettings getState() {

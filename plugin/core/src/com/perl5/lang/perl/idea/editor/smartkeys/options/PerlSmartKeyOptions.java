@@ -35,6 +35,12 @@ public class PerlSmartKeyOptions extends BeanConfigurable<Perl5CodeInsightSettin
     checkBox(PerlBundle.message("perl.options.auto.colon"),
              () -> settings.AUTO_INSERT_COLON,
              value -> settings.AUTO_INSERT_COLON = value);
+    checkBox(PerlBundle.message("perl.options.auto.brace.substitution.hex"),
+             () -> settings.AUTO_BRACE_HEX_SUBSTITUTION,
+             value -> settings.AUTO_BRACE_HEX_SUBSTITUTION = value);
+    checkBox(PerlBundle.message("perl.options.auto.brace.substitution.oct"),
+             () -> settings.AUTO_BRACE_OCT_SUBSTITUTION,
+             value -> settings.AUTO_BRACE_OCT_SUBSTITUTION = value);
     checkBox(PerlBundle.message("perl.options.smart.comma.sequence"),
              () -> settings.SMART_COMMA_SEQUENCE_TYPING,
              value -> settings.SMART_COMMA_SEQUENCE_TYPING = value);

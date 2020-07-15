@@ -68,6 +68,12 @@ public class PerlCompletionPopupTest extends PerlCompletionPopupTestCase {
   public void testHashCtrl() {doTest("%<caret>", "^");}
 
   @Test
+  public void testUnicode() {doTest("qq|test<caret>test|", "\\N");}
+
+  @Test
+  public void testUnicodeBraces() {doTest("qx|test\\N<caret>test|", "{");}
+
+  @Test
   public void testScalarIndexCtrl() {doTest("$#<caret>", "^");}
 
   @Test
