@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.completion;
 import com.intellij.codeInsight.completion.*;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.idea.completion.providers.*;
@@ -94,6 +95,12 @@ public class PerlCompletionContributor extends CompletionContributor implements 
       new PerlAnnotationCompletionProvider()
     );
 
+    extend(
+      CompletionType.BASIC,
+      STRING_CHAR_NAME_PATTERN,
+      new PerlUnicodeNamesCompletionProvider()
+    );
+
     // this is really heavy, so should be last
     extend(
       CompletionType.BASIC,
@@ -117,12 +124,16 @@ public class PerlCompletionContributor extends CompletionContributor implements 
 
   private void adjustIdentifierEndOffset(@NotNull CompletionInitializationContext context) {
     PsiElement elementAtCaret = context.getFile().findElementAt(context.getEditor().getCaretModel().getOffset());
-    if (PerlTokenSets.VARIABLE_NAMES.contains(PsiUtilCore.getElementType(elementAtCaret)) &&
+    IElementType elementType = PsiUtilCore.getElementType(elementAtCaret);
+    if (PerlTokenSets.VARIABLE_NAMES.contains(elementType) &&
         elementAtCaret.getTextLength() == 1) {
       char nameChar = elementAtCaret.getNode().getChars().charAt(0);
       if (nameChar != '_' && nameChar != '^' && !Character.isLetterOrDigit(nameChar)) {
         context.setReplacementOffset(elementAtCaret.getTextOffset());
       }
+    }
+    else if (elementType == STRING_CHAR_NAME) {
+      context.setReplacementOffset(elementAtCaret.getTextRange().getEndOffset());
     }
   }
 }

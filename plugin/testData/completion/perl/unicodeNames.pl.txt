@@ -1,0 +1,270 @@
+Text: ALARM CLOCK; Tail: null; Type: ⏰; Icon: null; Type Icon: null
+	Lookups: ALARM CLOCK
+	String: ALARM CLOCK
+Text: ANTICLOCKWISE CLOSED CIRCLE ARROW; Tail: null; Type: ⥀; Icon: null; Type Icon: null
+	Lookups: ANTICLOCKWISE CLOSED CIRCLE ARROW
+	String: ANTICLOCKWISE CLOSED CIRCLE ARROW
+Text: ANTICLOCKWISE CONTOUR INTEGRAL; Tail: null; Type: ∳; Icon: null; Type Icon: null
+	Lookups: ANTICLOCKWISE CONTOUR INTEGRAL
+	String: ANTICLOCKWISE CONTOUR INTEGRAL
+Text: ANTICLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS; Tail: null; Type: 🔄; Icon: null; Type Icon: null
+	Lookups: ANTICLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS
+	String: ANTICLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS
+Text: ANTICLOCKWISE GAPPED CIRCLE ARROW; Tail: null; Type: ⟲; Icon: null; Type Icon: null
+	Lookups: ANTICLOCKWISE GAPPED CIRCLE ARROW
+	String: ANTICLOCKWISE GAPPED CIRCLE ARROW
+Text: ANTICLOCKWISE INTEGRATION; Tail: null; Type: ⨑; Icon: null; Type Icon: null
+	Lookups: ANTICLOCKWISE INTEGRATION
+	String: ANTICLOCKWISE INTEGRATION
+Text: ANTICLOCKWISE OPEN CIRCLE ARROW; Tail: null; Type: ↺; Icon: null; Type Icon: null
+	Lookups: ANTICLOCKWISE OPEN CIRCLE ARROW
+	String: ANTICLOCKWISE OPEN CIRCLE ARROW
+Text: ANTICLOCKWISE TOP SEMICIRCLE ARROW; Tail: null; Type: ↶; Icon: null; Type Icon: null
+	Lookups: ANTICLOCKWISE TOP SEMICIRCLE ARROW
+	String: ANTICLOCKWISE TOP SEMICIRCLE ARROW
+Text: ANTICLOCKWISE TRIANGLE-HEADED BOTTOM U-SHAPED ARROW; Tail: null; Type: ⮍; Icon: null; Type Icon: null
+	Lookups: ANTICLOCKWISE TRIANGLE-HEADED BOTTOM U-SHAPED ARROW
+	String: ANTICLOCKWISE TRIANGLE-HEADED BOTTOM U-SHAPED ARROW
+Text: ANTICLOCKWISE TRIANGLE-HEADED LEFT U-SHAPED ARROW; Tail: null; Type: ⮎; Icon: null; Type Icon: null
+	Lookups: ANTICLOCKWISE TRIANGLE-HEADED LEFT U-SHAPED ARROW
+	String: ANTICLOCKWISE TRIANGLE-HEADED LEFT U-SHAPED ARROW
+Text: ANTICLOCKWISE TRIANGLE-HEADED OPEN CIRCLE ARROW; Tail: null; Type: ⭯; Icon: null; Type Icon: null
+	Lookups: ANTICLOCKWISE TRIANGLE-HEADED OPEN CIRCLE ARROW
+	String: ANTICLOCKWISE TRIANGLE-HEADED OPEN CIRCLE ARROW
+Text: ANTICLOCKWISE TRIANGLE-HEADED RIGHT U-SHAPED ARROW; Tail: null; Type: ⮌; Icon: null; Type Icon: null
+	Lookups: ANTICLOCKWISE TRIANGLE-HEADED RIGHT U-SHAPED ARROW
+	String: ANTICLOCKWISE TRIANGLE-HEADED RIGHT U-SHAPED ARROW
+Text: ANTICLOCKWISE TRIANGLE-HEADED TOP U-SHAPED ARROW; Tail: null; Type: ⮏; Icon: null; Type Icon: null
+	Lookups: ANTICLOCKWISE TRIANGLE-HEADED TOP U-SHAPED ARROW
+	String: ANTICLOCKWISE TRIANGLE-HEADED TOP U-SHAPED ARROW
+Text: BOTTOM ARC ANTICLOCKWISE ARROW; Tail: null; Type: ⤻; Icon: null; Type Icon: null
+	Lookups: BOTTOM ARC ANTICLOCKWISE ARROW
+	String: BOTTOM ARC ANTICLOCKWISE ARROW
+Text: CIRCLED ANTICLOCKWISE-ROTATED DIVISION SIGN; Tail: null; Type: ⦼; Icon: null; Type Icon: null
+	Lookups: CIRCLED ANTICLOCKWISE-ROTATED DIVISION SIGN
+	String: CIRCLED ANTICLOCKWISE-ROTATED DIVISION SIGN
+Text: CLOCK FACE EIGHT OCLOCK; Tail: null; Type: 🕗; Icon: null; Type Icon: null
+	Lookups: CLOCK FACE EIGHT OCLOCK
+	String: CLOCK FACE EIGHT OCLOCK
+Text: CLOCK FACE EIGHT-THIRTY; Tail: null; Type: 🕣; Icon: null; Type Icon: null
+	Lookups: CLOCK FACE EIGHT-THIRTY
+	String: CLOCK FACE EIGHT-THIRTY
+Text: CLOCK FACE ELEVEN OCLOCK; Tail: null; Type: 🕚; Icon: null; Type Icon: null
+	Lookups: CLOCK FACE ELEVEN OCLOCK
+	String: CLOCK FACE ELEVEN OCLOCK
+Text: CLOCK FACE ELEVEN-THIRTY; Tail: null; Type: 🕦; Icon: null; Type Icon: null
+	Lookups: CLOCK FACE ELEVEN-THIRTY
+	String: CLOCK FACE ELEVEN-THIRTY
+Text: CLOCK FACE FIVE OCLOCK; Tail: null; Type: 🕔; Icon: null; Type Icon: null
+	Lookups: CLOCK FACE FIVE OCLOCK
+	String: CLOCK FACE FIVE OCLOCK
+Text: CLOCK FACE FIVE-THIRTY; Tail: null; Type: 🕠; Icon: null; Type Icon: null
+	Lookups: CLOCK FACE FIVE-THIRTY
+	String: CLOCK FACE FIVE-THIRTY
+Text: CLOCK FACE FOUR OCLOCK; Tail: null; Type: 🕓; Icon: null; Type Icon: null
+	Lookups: CLOCK FACE FOUR OCLOCK
+	String: CLOCK FACE FOUR OCLOCK
+Text: CLOCK FACE FOUR-THIRTY; Tail: null; Type: 🕟; Icon: null; Type Icon: null
+	Lookups: CLOCK FACE FOUR-THIRTY
+	String: CLOCK FACE FOUR-THIRTY
+Text: CLOCK FACE NINE OCLOCK; Tail: null; Type: 🕘; Icon: null; Type Icon: null
+	Lookups: CLOCK FACE NINE OCLOCK
+	String: CLOCK FACE NINE OCLOCK
+Text: CLOCK FACE NINE-THIRTY; Tail: null; Type: 🕤; Icon: null; Type Icon: null
+	Lookups: CLOCK FACE NINE-THIRTY
+	String: CLOCK FACE NINE-THIRTY
+Text: CLOCK FACE ONE OCLOCK; Tail: null; Type: 🕐; Icon: null; Type Icon: null
+	Lookups: CLOCK FACE ONE OCLOCK
+	String: CLOCK FACE ONE OCLOCK
+Text: CLOCK FACE ONE-THIRTY; Tail: null; Type: 🕜; Icon: null; Type Icon: null
+	Lookups: CLOCK FACE ONE-THIRTY
+	String: CLOCK FACE ONE-THIRTY
+Text: CLOCK FACE SEVEN OCLOCK; Tail: null; Type: 🕖; Icon: null; Type Icon: null
+	Lookups: CLOCK FACE SEVEN OCLOCK
+	String: CLOCK FACE SEVEN OCLOCK
+Text: CLOCK FACE SEVEN-THIRTY; Tail: null; Type: 🕢; Icon: null; Type Icon: null
+	Lookups: CLOCK FACE SEVEN-THIRTY
+	String: CLOCK FACE SEVEN-THIRTY
+Text: CLOCK FACE SIX OCLOCK; Tail: null; Type: 🕕; Icon: null; Type Icon: null
+	Lookups: CLOCK FACE SIX OCLOCK
+	String: CLOCK FACE SIX OCLOCK
+Text: CLOCK FACE SIX-THIRTY; Tail: null; Type: 🕡; Icon: null; Type Icon: null
+	Lookups: CLOCK FACE SIX-THIRTY
+	String: CLOCK FACE SIX-THIRTY
+Text: CLOCK FACE TEN OCLOCK; Tail: null; Type: 🕙; Icon: null; Type Icon: null
+	Lookups: CLOCK FACE TEN OCLOCK
+	String: CLOCK FACE TEN OCLOCK
+Text: CLOCK FACE TEN-THIRTY; Tail: null; Type: 🕥; Icon: null; Type Icon: null
+	Lookups: CLOCK FACE TEN-THIRTY
+	String: CLOCK FACE TEN-THIRTY
+Text: CLOCK FACE THREE OCLOCK; Tail: null; Type: 🕒; Icon: null; Type Icon: null
+	Lookups: CLOCK FACE THREE OCLOCK
+	String: CLOCK FACE THREE OCLOCK
+Text: CLOCK FACE THREE-THIRTY; Tail: null; Type: 🕞; Icon: null; Type Icon: null
+	Lookups: CLOCK FACE THREE-THIRTY
+	String: CLOCK FACE THREE-THIRTY
+Text: CLOCK FACE TWELVE OCLOCK; Tail: null; Type: 🕛; Icon: null; Type Icon: null
+	Lookups: CLOCK FACE TWELVE OCLOCK
+	String: CLOCK FACE TWELVE OCLOCK
+Text: CLOCK FACE TWELVE-THIRTY; Tail: null; Type: 🕧; Icon: null; Type Icon: null
+	Lookups: CLOCK FACE TWELVE-THIRTY
+	String: CLOCK FACE TWELVE-THIRTY
+Text: CLOCK FACE TWO OCLOCK; Tail: null; Type: 🕑; Icon: null; Type Icon: null
+	Lookups: CLOCK FACE TWO OCLOCK
+	String: CLOCK FACE TWO OCLOCK
+Text: CLOCK FACE TWO-THIRTY; Tail: null; Type: 🕝; Icon: null; Type Icon: null
+	Lookups: CLOCK FACE TWO-THIRTY
+	String: CLOCK FACE TWO-THIRTY
+Text: CLOCKWISE CLOSED CIRCLE ARROW; Tail: null; Type: ⥁; Icon: null; Type Icon: null
+	Lookups: CLOCKWISE CLOSED CIRCLE ARROW
+	String: CLOCKWISE CLOSED CIRCLE ARROW
+Text: CLOCKWISE CONTOUR INTEGRAL; Tail: null; Type: ∲; Icon: null; Type Icon: null
+	Lookups: CLOCKWISE CONTOUR INTEGRAL
+	String: CLOCKWISE CONTOUR INTEGRAL
+Text: CLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS; Tail: null; Type: 🔃; Icon: null; Type Icon: null
+	Lookups: CLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS
+	String: CLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS
+Text: CLOCKWISE GAPPED CIRCLE ARROW; Tail: null; Type: ⟳; Icon: null; Type Icon: null
+	Lookups: CLOCKWISE GAPPED CIRCLE ARROW
+	String: CLOCKWISE GAPPED CIRCLE ARROW
+Text: CLOCKWISE INTEGRAL; Tail: null; Type: ∱; Icon: null; Type Icon: null
+	Lookups: CLOCKWISE INTEGRAL
+	String: CLOCKWISE INTEGRAL
+Text: CLOCKWISE OPEN CIRCLE ARROW; Tail: null; Type: ↻; Icon: null; Type Icon: null
+	Lookups: CLOCKWISE OPEN CIRCLE ARROW
+	String: CLOCKWISE OPEN CIRCLE ARROW
+Text: CLOCKWISE RIGHT AND LEFT SEMICIRCLE ARROWS; Tail: null; Type: 🗘; Icon: null; Type Icon: null
+	Lookups: CLOCKWISE RIGHT AND LEFT SEMICIRCLE ARROWS
+	String: CLOCKWISE RIGHT AND LEFT SEMICIRCLE ARROWS
+Text: CLOCKWISE RIGHTWARDS AND LEFTWARDS OPEN CIRCLE ARROWS WITH CIRCLED ONE OVERLAY; Tail: null; Type: 🔂; Icon: null; Type Icon: null
+	Lookups: CLOCKWISE RIGHTWARDS AND LEFTWARDS OPEN CIRCLE ARROWS WITH CIRCLED ONE OVERLAY
+	String: CLOCKWISE RIGHTWARDS AND LEFTWARDS OPEN CIRCLE ARROWS WITH CIRCLED ONE OVERLAY
+Text: CLOCKWISE RIGHTWARDS AND LEFTWARDS OPEN CIRCLE ARROWS; Tail: null; Type: 🔁; Icon: null; Type Icon: null
+	Lookups: CLOCKWISE RIGHTWARDS AND LEFTWARDS OPEN CIRCLE ARROWS
+	String: CLOCKWISE RIGHTWARDS AND LEFTWARDS OPEN CIRCLE ARROWS
+Text: CLOCKWISE TOP SEMICIRCLE ARROW; Tail: null; Type: ↷; Icon: null; Type Icon: null
+	Lookups: CLOCKWISE TOP SEMICIRCLE ARROW
+	String: CLOCKWISE TOP SEMICIRCLE ARROW
+Text: CLOCKWISE TRIANGLE-HEADED OPEN CIRCLE ARROW; Tail: null; Type: ⭮; Icon: null; Type Icon: null
+	Lookups: CLOCKWISE TRIANGLE-HEADED OPEN CIRCLE ARROW
+	String: CLOCKWISE TRIANGLE-HEADED OPEN CIRCLE ARROW
+Text: CLOSED LOCK WITH KEY; Tail: null; Type: 🔐; Icon: null; Type Icon: null
+	Lookups: CLOSED LOCK WITH KEY
+	String: CLOSED LOCK WITH KEY
+Text: COMBINING ANTICLOCKWISE ARROW ABOVE; Tail: null; Type: ⃔; Icon: null; Type Icon: null
+	Lookups: COMBINING ANTICLOCKWISE ARROW ABOVE
+	String: COMBINING ANTICLOCKWISE ARROW ABOVE
+Text: COMBINING ANTICLOCKWISE RING OVERLAY; Tail: null; Type: ⃚; Icon: null; Type Icon: null
+	Lookups: COMBINING ANTICLOCKWISE RING OVERLAY
+	String: COMBINING ANTICLOCKWISE RING OVERLAY
+Text: COMBINING CLOCKWISE ARROW ABOVE; Tail: null; Type: ⃕; Icon: null; Type Icon: null
+	Lookups: COMBINING CLOCKWISE ARROW ABOVE
+	String: COMBINING CLOCKWISE ARROW ABOVE
+Text: COMBINING CLOCKWISE RING OVERLAY; Tail: null; Type: ⃙; Icon: null; Type Icon: null
+	Lookups: COMBINING CLOCKWISE RING OVERLAY
+	String: COMBINING CLOCKWISE RING OVERLAY
+Text: END OF TRANSMISSION BLOCK; Tail: null; Type: ; Icon: null; Type Icon: null
+	Lookups: END OF TRANSMISSION BLOCK
+	String: END OF TRANSMISSION BLOCK
+Text: FOUR CORNER ARROWS CIRCLING ANTICLOCKWISE; Tail: null; Type: ⮔; Icon: null; Type Icon: null
+	Lookups: FOUR CORNER ARROWS CIRCLING ANTICLOCKWISE
+	String: FOUR CORNER ARROWS CIRCLING ANTICLOCKWISE
+Text: FULL BLOCK; Tail: null; Type: █; Icon: null; Type Icon: null
+	Lookups: FULL BLOCK
+	String: FULL BLOCK
+Text: INTERLOCKED FEMALE AND MALE SIGN; Tail: null; Type: ⚤; Icon: null; Type Icon: null
+	Lookups: INTERLOCKED FEMALE AND MALE SIGN
+	String: INTERLOCKED FEMALE AND MALE SIGN
+Text: LEFT FIVE EIGHTHS BLOCK; Tail: null; Type: ▋; Icon: null; Type Icon: null
+	Lookups: LEFT FIVE EIGHTHS BLOCK
+	String: LEFT FIVE EIGHTHS BLOCK
+Text: LEFT HALF BLOCK; Tail: null; Type: ▌; Icon: null; Type Icon: null
+	Lookups: LEFT HALF BLOCK
+	String: LEFT HALF BLOCK
+Text: LEFT ONE EIGHTH BLOCK; Tail: null; Type: ▏; Icon: null; Type Icon: null
+	Lookups: LEFT ONE EIGHTH BLOCK
+	String: LEFT ONE EIGHTH BLOCK
+Text: LEFT ONE QUARTER BLOCK; Tail: null; Type: ▎; Icon: null; Type Icon: null
+	Lookups: LEFT ONE QUARTER BLOCK
+	String: LEFT ONE QUARTER BLOCK
+Text: LEFT SEVEN EIGHTHS BLOCK; Tail: null; Type: ▉; Icon: null; Type Icon: null
+	Lookups: LEFT SEVEN EIGHTHS BLOCK
+	String: LEFT SEVEN EIGHTHS BLOCK
+Text: LEFT THREE EIGHTHS BLOCK; Tail: null; Type: ▍; Icon: null; Type Icon: null
+	Lookups: LEFT THREE EIGHTHS BLOCK
+	String: LEFT THREE EIGHTHS BLOCK
+Text: LEFT THREE QUARTERS BLOCK; Tail: null; Type: ▊; Icon: null; Type Icon: null
+	Lookups: LEFT THREE QUARTERS BLOCK
+	String: LEFT THREE QUARTERS BLOCK
+Text: LEFT-SIDE ARC ANTICLOCKWISE ARROW; Tail: null; Type: ⤹; Icon: null; Type Icon: null
+	Lookups: LEFT-SIDE ARC ANTICLOCKWISE ARROW
+	String: LEFT-SIDE ARC ANTICLOCKWISE ARROW
+Text: LOCK WITH INK PEN; Tail: null; Type: 🔏; Icon: null; Type Icon: null
+	Lookups: LOCK WITH INK PEN
+	String: LOCK WITH INK PEN
+Text: LOCK; Tail: null; Type: 🔒; Icon: null; Type Icon: null
+	Lookups: LOCK
+	String: LOCK
+Text: LOWER FIVE EIGHTHS BLOCK; Tail: null; Type: ▅; Icon: null; Type Icon: null
+	Lookups: LOWER FIVE EIGHTHS BLOCK
+	String: LOWER FIVE EIGHTHS BLOCK
+Text: LOWER HALF BLOCK; Tail: null; Type: ▄; Icon: null; Type Icon: null
+	Lookups: LOWER HALF BLOCK
+	String: LOWER HALF BLOCK
+Text: LOWER LEFT SEMICIRCULAR ANTICLOCKWISE ARROW; Tail: null; Type: ⤿; Icon: null; Type Icon: null
+	Lookups: LOWER LEFT SEMICIRCULAR ANTICLOCKWISE ARROW
+	String: LOWER LEFT SEMICIRCULAR ANTICLOCKWISE ARROW
+Text: LOWER ONE EIGHTH BLOCK; Tail: null; Type: ▁; Icon: null; Type Icon: null
+	Lookups: LOWER ONE EIGHTH BLOCK
+	String: LOWER ONE EIGHTH BLOCK
+Text: LOWER ONE QUARTER BLOCK; Tail: null; Type: ▂; Icon: null; Type Icon: null
+	Lookups: LOWER ONE QUARTER BLOCK
+	String: LOWER ONE QUARTER BLOCK
+Text: LOWER RIGHT SEMICIRCULAR CLOCKWISE ARROW; Tail: null; Type: ⤾; Icon: null; Type Icon: null
+	Lookups: LOWER RIGHT SEMICIRCULAR CLOCKWISE ARROW
+	String: LOWER RIGHT SEMICIRCULAR CLOCKWISE ARROW
+Text: LOWER SEVEN EIGHTHS BLOCK; Tail: null; Type: ▇; Icon: null; Type Icon: null
+	Lookups: LOWER SEVEN EIGHTHS BLOCK
+	String: LOWER SEVEN EIGHTHS BLOCK
+Text: LOWER THREE EIGHTHS BLOCK; Tail: null; Type: ▃; Icon: null; Type Icon: null
+	Lookups: LOWER THREE EIGHTHS BLOCK
+	String: LOWER THREE EIGHTHS BLOCK
+Text: LOWER THREE QUARTERS BLOCK; Tail: null; Type: ▆; Icon: null; Type Icon: null
+	Lookups: LOWER THREE QUARTERS BLOCK
+	String: LOWER THREE QUARTERS BLOCK
+Text: MANTELPIECE CLOCK; Tail: null; Type: 🕰; Icon: null; Type Icon: null
+	Lookups: MANTELPIECE CLOCK
+	String: MANTELPIECE CLOCK
+Text: OPEN LOCK; Tail: null; Type: 🔓; Icon: null; Type Icon: null
+	Lookups: OPEN LOCK
+	String: OPEN LOCK
+Text: RIGHT HALF BLOCK; Tail: null; Type: ▐; Icon: null; Type Icon: null
+	Lookups: RIGHT HALF BLOCK
+	String: RIGHT HALF BLOCK
+Text: RIGHT ONE EIGHTH BLOCK; Tail: null; Type: ▕; Icon: null; Type Icon: null
+	Lookups: RIGHT ONE EIGHTH BLOCK
+	String: RIGHT ONE EIGHTH BLOCK
+Text: RIGHT-SIDE ARC CLOCKWISE ARROW; Tail: null; Type: ⤸; Icon: null; Type Icon: null
+	Lookups: RIGHT-SIDE ARC CLOCKWISE ARROW
+	String: RIGHT-SIDE ARC CLOCKWISE ARROW
+Text: SYMBOL FOR END OF TRANSMISSION BLOCK; Tail: null; Type: ␗; Icon: null; Type Icon: null
+	Lookups: SYMBOL FOR END OF TRANSMISSION BLOCK
+	String: SYMBOL FOR END OF TRANSMISSION BLOCK
+Text: TIMER CLOCK; Tail: null; Type: ⏲; Icon: null; Type Icon: null
+	Lookups: TIMER CLOCK
+	String: TIMER CLOCK
+Text: TOP ARC ANTICLOCKWISE ARROW WITH PLUS; Tail: null; Type: ⤽; Icon: null; Type Icon: null
+	Lookups: TOP ARC ANTICLOCKWISE ARROW WITH PLUS
+	String: TOP ARC ANTICLOCKWISE ARROW WITH PLUS
+Text: TOP ARC ANTICLOCKWISE ARROW; Tail: null; Type: ⤺; Icon: null; Type Icon: null
+	Lookups: TOP ARC ANTICLOCKWISE ARROW
+	String: TOP ARC ANTICLOCKWISE ARROW
+Text: TOP ARC CLOCKWISE ARROW WITH MINUS; Tail: null; Type: ⤼; Icon: null; Type Icon: null
+	Lookups: TOP ARC CLOCKWISE ARROW WITH MINUS
+	String: TOP ARC CLOCKWISE ARROW WITH MINUS
+Text: UPPER HALF BLOCK; Tail: null; Type: ▀; Icon: null; Type Icon: null
+	Lookups: UPPER HALF BLOCK
+	String: UPPER HALF BLOCK
+Text: UPPER ONE EIGHTH BLOCK; Tail: null; Type: ▔; Icon: null; Type Icon: null
+	Lookups: UPPER ONE EIGHTH BLOCK
+	String: UPPER ONE EIGHTH BLOCK

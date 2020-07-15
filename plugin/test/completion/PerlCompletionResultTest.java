@@ -26,6 +26,12 @@ public class PerlCompletionResultTest extends PerlCompletionResultTestCase {
   }
 
   @Test
+  public void testCharNameInsert() {doTestInsert();}
+
+  @Test
+  public void testCharNameReplace() {doTestReplace();}
+
+  @Test
   public void testBracedArrayElement() {doTestInsert();}
 
   @Test

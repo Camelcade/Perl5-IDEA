@@ -32,6 +32,9 @@ public class PerlCompletionTest extends PerlCompletionTestCase {
   }
 
   @Test
+  public void testUnicodeNames() {doTest();}
+
+  @Test
   public void testHandleInOpen() {doTest();}
 
   @Test

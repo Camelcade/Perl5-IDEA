@@ -111,6 +111,7 @@ public interface PerlElementPatterns extends PerlElementTypes {
     VARIABLE_NAME_PATTERN.inside(true, psiElement(PsiPerlVariableDeclarationLocal.class));
 
   PsiElementPattern.Capture<PsiElement> UNKNOWN_ANNOTATION_PATTERN = psiElement(ANNOTATION_UNKNOWN_KEY);
+  PsiElementPattern.Capture<PsiElement> STRING_CHAR_NAME_PATTERN = psiElement(STRING_CHAR_NAME);
 
 
   // @ISA = ()
