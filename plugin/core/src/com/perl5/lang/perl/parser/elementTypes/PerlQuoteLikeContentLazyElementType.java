@@ -18,7 +18,6 @@ package com.perl5.lang.perl.parser.elementTypes;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.lexer.PerlLexer;
@@ -28,8 +27,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class PerlQuoteLikeContentLazyElementType extends PerlLazyBlockElementType {
-  private static final Logger LOG = Logger.getInstance(PerlQuoteLikeContentLazyElementType.class);
-
   private final int myInitialState;
 
   public PerlQuoteLikeContentLazyElementType(@NotNull String debugName, int initialState) {

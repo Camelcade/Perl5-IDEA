@@ -20,6 +20,7 @@ import com.intellij.lang.ASTFactory;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiBuilderFactory;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Pair;
 import com.intellij.psi.PsiElement;
@@ -30,6 +31,7 @@ import com.perl5.lang.perl.lexer.PerlLexingContext;
 import com.perl5.lang.perl.lexer.adapters.PerlMergingLexerAdapter;
 import com.perl5.lang.perl.parser.PerlParserImpl;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
+import com.perl5.lang.perl.util.PerlTimeLogger;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -38,6 +40,7 @@ import java.util.function.Function;
 
 
 public abstract class PerlLazyBlockElementType extends IReparseableElementType implements PsiElementProvider {
+  protected static final Logger LOG = Logger.getInstance(PerlLazyBlockElementType.class);
   private final Function<ASTNode, PsiElement> myInstanceFactory;
 
   public PerlLazyBlockElementType(@NotNull @NonNls String debugName) {
@@ -56,16 +59,22 @@ public abstract class PerlLazyBlockElementType extends IReparseableElementType i
 
   @Override
   public ASTNode parseContents(@NotNull ASTNode chameleon) {
+    PerlTimeLogger logger = LOG.isDebugEnabled() ? new PerlTimeLogger(LOG) : null;
     PsiElement parentElement = chameleon.getTreeParent().getPsi();
     Project project = parentElement.getProject();
+    CharSequence newChars = chameleon.getChars();
     PsiBuilder builder = PsiBuilderFactory.getInstance().createBuilder(
       project,
       chameleon,
       new PerlMergingLexerAdapter(getLexingContext(parentElement.getProject(), chameleon)),
       getLanguage(),
-      chameleon.getText());
+      newChars);
 
-    return PerlParserImpl.INSTANCE.parse(this, builder).getFirstChildNode();
+    ASTNode result = PerlParserImpl.INSTANCE.parse(this, builder).getFirstChildNode();
+    if (logger != null) {
+      logger.debug("Parsed: ", newChars.length(), " bytes of ", this);
+    }
+    return result;
   }
 
   /**

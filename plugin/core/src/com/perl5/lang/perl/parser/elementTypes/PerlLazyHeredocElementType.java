@@ -18,7 +18,6 @@ package com.perl5.lang.perl.parser.elementTypes;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
@@ -40,7 +39,6 @@ import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.HEREDOC_END_IN
 
 
 public class PerlLazyHeredocElementType extends PerlLazyBlockElementType {
-  private static final Logger LOG = Logger.getInstance(PerlLazyHeredocElementType.class);
   private final int myStartLexerState;
 
   public PerlLazyHeredocElementType(@NotNull String name, int startLexerState) {
