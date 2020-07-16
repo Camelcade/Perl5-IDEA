@@ -16,20 +16,22 @@
 
 package com.perl5.lang.perl.extensions.packageprocessor;
 
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.search.GlobalSearchScope;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import com.perl5.lang.perl.util.PerlPackageUtil;
-import gnu.trove.THashSet;
+import com.perl5.lang.perl.util.PerlScopesUtil;
+import com.perl5.lang.perl.util.PerlTimeLogger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 
 public abstract class PerlPackageProcessorBase implements PerlPackageProcessor {
+  protected static final Logger LOG = Logger.getInstance(PerlPackageProcessorBase.class);
   @Override
   public boolean isPragma() {
     return false;
@@ -44,8 +46,9 @@ public abstract class PerlPackageProcessorBase implements PerlPackageProcessor {
     }
 
     // fixme handle tags
+    GlobalSearchScope scope = PerlScopesUtil.allScopeWithoutCurrentWithAst(useStatement);
     for (PerlNamespaceDefinitionElement namespaceDefinition : PerlPackageUtil
-      .getNamespaceDefinitions(useStatement.getProject(), packageName)) {
+      .getNamespaceDefinitions(useStatement.getProject(), scope, packageName)) {
       export.addAll(namespaceDefinition.getEXPORT());
       exportOk.addAll(namespaceDefinition.getEXPORT_OK());
     }
@@ -55,25 +58,30 @@ public abstract class PerlPackageProcessorBase implements PerlPackageProcessor {
 
   @Override
   public @NotNull List<PerlExportDescriptor> getImports(@NotNull PerlUseStatementElement useStatement) {
-    List<PerlExportDescriptor> result = new ArrayList<>();
     String packageName = useStatement.getPackageName();
-    if (packageName != null) {
-      List<String> importParameters = getImportParameters(useStatement);
-      Set<String> exportNames = new THashSet<>();
-      Set<String> exportOkNames = new THashSet<>();
+    if (packageName == null) {
+      return Collections.emptyList();
+    }
+    PerlTimeLogger logger = PerlTimeLogger.create(LOG);
+    List<PerlExportDescriptor> result = new ArrayList<>();
+    List<String> importParameters = getImportParameters(useStatement);
+    Set<String> exportNames = new HashSet<>();
+    Set<String> exportOkNames = new HashSet<>();
 
-      addExports(useStatement, exportNames, exportOkNames);
+    addExports(useStatement, exportNames, exportOkNames);
 
-      if (importParameters == null) {
-        exportNames.forEach(name -> result.add(createDescriptor(packageName, name)));
-      }
-      else {
-        importParameters.stream()
-          .filter(exportOkNames::contains)
-          .forEach(name -> result.add(createDescriptor(packageName, name)));
-      }
+    if (importParameters == null) {
+      exportNames.forEach(name -> result.add(createDescriptor(packageName, name)));
+    }
+    else {
+      importParameters.stream()
+        .filter(exportOkNames::contains)
+        .forEach(name -> result.add(createDescriptor(packageName, name)));
     }
 
+    if (logger != null) {
+      logger.debug("Collected imports for ", packageName);
+    }
     return result;
   }
 
