@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,9 +21,24 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiRecursiveVisitor;
 import org.jetbrains.annotations.NotNull;
 
-public class PerlRecursiveVisitor extends PerlVisitor implements PsiRecursiveVisitor {
+public class PerlRecursiveVisitor extends PerlVisitor implements PsiRecursiveVisitor, SelfStoppingVisitor {
+  private boolean myStopped = false;
+
+  @Override
+  public boolean isStopped() {
+    return myStopped;
+  }
+
+  @Override
+  public void stop() {
+    myStopped = true;
+  }
+
   @Override
   public void visitElement(@NotNull PsiElement element) {
+    if (myStopped) {
+      return;
+    }
     ProgressManager.checkCanceled();
     element.acceptChildren(this);
   }
