@@ -29,6 +29,7 @@ import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionUtil;
 import com.perl5.lang.perl.idea.completion.util.PerlVariableCompletionUtil;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableNameElement;
+import com.perl5.lang.perl.util.PerlTimeLogger;
 import org.jetbrains.annotations.NotNull;
 
 import static com.perl5.lang.perl.idea.PerlElementPatterns.VARIABLE_NAME_IN_DECLARATION_PATTERN;
@@ -68,31 +69,40 @@ public class PerlVariableNameCompletionProvider extends PerlCompletionProvider {
         false
       );
 
+    PerlTimeLogger timeLogger = new PerlTimeLogger(getClass());
+
     // declaration helper
     if (isDeclaration) {
       PerlVariableCompletionUtil.fillWithUnresolvedVars(variableCompletionProcessor);
+      timeLogger.debug("Filled with unresolved variables");
     }
     else if (!variableCompletionProcessor.isFullQualified()) {
       if (!isCapped) {
         PerlVariableCompletionUtil.fillWithLexicalVariables(variableCompletionProcessor);
+        timeLogger.debug("Filled with lexical variables");
       }
       PerlVariableCompletionUtil.fillWithBuiltInVariables(variableCompletionProcessor);
+      timeLogger.debug("Filled with built in variables");
     }
 
     // built ins
     if (VARIABLE_NAME_IN_LOCAL_DECLARATION_PATTERN.accepts(variableNameElement)) {
       PerlVariableCompletionUtil.fillWithBuiltInVariables(variableCompletionProcessor);
+      timeLogger.debug("Filled with built in variables");
     }
 
     // imports
     if (!isCapped && !isDeclaration && !variableCompletionProcessor.isFullQualified()) {
       PerlVariableCompletionUtil.fillWithImportedVariables(variableCompletionProcessor);
+      timeLogger.debug("Filled with imported variables");
     }
 
     // fqn names
     if (!isCapped && !isDeclaration) {
       PerlPackageCompletionUtil.processAllNamespacesNames(variableCompletionProcessor, true);
+      timeLogger.debug("Filled with namespace names");
       PerlVariableCompletionUtil.fillWithFullQualifiedVariables(variableCompletionProcessor);
+      timeLogger.debug("Filled with full qualified variables");
     }
     variableCompletionProcessor.logStatus(getClass());
   }
