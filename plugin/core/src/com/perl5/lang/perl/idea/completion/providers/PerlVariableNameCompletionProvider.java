@@ -99,7 +99,7 @@ public class PerlVariableNameCompletionProvider extends PerlCompletionProvider {
 
     // fqn names
     if (!isCapped && !isDeclaration) {
-      PerlPackageCompletionUtil.processAllNamespacesNames(variableCompletionProcessor, true);
+      PerlPackageCompletionUtil.processAllNamespacesNames(variableCompletionProcessor, true, false);
       timeLogger.debug("Filled with namespace names");
       PerlVariableCompletionUtil.fillWithFullQualifiedVariables(variableCompletionProcessor);
       timeLogger.debug("Filled with full qualified variables");

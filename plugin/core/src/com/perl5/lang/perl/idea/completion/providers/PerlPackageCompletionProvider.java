@@ -44,7 +44,7 @@ public class PerlPackageCompletionProvider extends PerlCompletionProvider {
     }
     else if (NAMESPACE_IN_VARIABLE_DECLARATION_PATTERN.accepts(element)) // my Foo::Bar
     {
-      PerlPackageCompletionUtil.fillWithAllNamespacesNames(completionProcessor);
+      PerlPackageCompletionUtil.processAllNamespacesNames(completionProcessor);
     }
     else if (NAMESPACE_IN_ANNOTATION_PATTERN.accepts(element)) // #@returns / #@type
     {
@@ -54,7 +54,7 @@ public class PerlPackageCompletionProvider extends PerlCompletionProvider {
       completionProcessor.processSingle(LookupElementBuilder.create("HashRef")
                                           .withInsertHandler(PerlInsertHandlers.ARRAY_ELEMENT_INSERT_HANDLER)
                                           .withTailText("[]"));
-      PerlPackageCompletionUtil.fillWithAllNamespacesNames(completionProcessor);
+      PerlPackageCompletionUtil.processAllNamespacesNames(completionProcessor);
     }
     else if (NAMESPACE_IN_USE_PATTERN.accepts(element)) // use/no/require
     {
@@ -63,7 +63,7 @@ public class PerlPackageCompletionProvider extends PerlCompletionProvider {
     }
     else // fallback
     {
-      PerlPackageCompletionUtil.fillWithAllNamespacesNames(completionProcessor);
+      PerlPackageCompletionUtil.processAllNamespacesNames(completionProcessor);
     }
     completionProcessor.logStatus(getClass());
   }

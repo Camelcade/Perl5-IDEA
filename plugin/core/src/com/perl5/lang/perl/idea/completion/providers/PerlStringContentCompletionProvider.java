@@ -65,7 +65,7 @@ public class PerlStringContentCompletionProvider extends PerlCompletionProvider 
         PerlVariableCompletionUtil.fillWithVariables(
           new PerlVariableCompletionProcessorImpl(completionProcessor, null, false, false, false));
         PerlSubCompletionUtil.processContextSubsLookupElements(completionProcessor);
-        PerlPackageCompletionUtil.processAllNamespacesNames(completionProcessor, false);
+        PerlPackageCompletionUtil.processAllNamespacesNames(completionProcessor, false, false);
       }
     }
     else if (USE_PARAMETERS_PATTERN.accepts(element))    // use or no parameters
@@ -85,7 +85,7 @@ public class PerlStringContentCompletionProvider extends PerlCompletionProvider 
     else if (STRING_CONTENT_IN_LIST_OR_STRING_START.accepts(element))    // begin of string or qw element
     {
       PerlStringCompletionUtil.fillWithRefTypes(completionProcessor);
-      PerlPackageCompletionUtil.fillWithAllNamespacesNames(completionProcessor);
+      PerlPackageCompletionUtil.processAllNamespacesNames(completionProcessor);
     }
     completionProcessor.logStatus(getClass());
   }

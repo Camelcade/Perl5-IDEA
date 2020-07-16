@@ -30,6 +30,6 @@ public class TryCatchPackageCompletionProvider extends CompletionProvider<Comple
   protected void addCompletions(@NotNull CompletionParameters parameters,
                                 @NotNull ProcessingContext context,
                                 @NotNull CompletionResultSet result) {
-    PerlPackageCompletionUtil.fillWithAllNamespacesNames(new PerlSimpleCompletionProcessor(parameters, result, parameters.getPosition()));
+    PerlPackageCompletionUtil.processAllNamespacesNames(new PerlSimpleCompletionProcessor(parameters, result, parameters.getPosition()));
   }
 }

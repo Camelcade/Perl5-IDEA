@@ -120,20 +120,13 @@ public class PerlPackageCompletionUtil {
       }, false);
   }
 
-  public static void fillWithAllNamespacesNames(@NotNull PerlCompletionProcessor completionProcessor) {
-    PsiElement element = completionProcessor.getLeafElement();
-    final Project project = element.getProject();
-    GlobalSearchScope resolveScope = element.getResolveScope();
-
-    Processor<PerlNamespaceDefinitionElement> namespaceProcessor =
-      namespace -> PerlPackageCompletionUtil.processNamespaceLookupElement(namespace, completionProcessor, false);
-
-    PerlBuiltInNamespacesService.getInstance(project).processNamespaces(namespaceProcessor);
-    PerlPackageCompletionUtil.processPackageLookupElement(null, __PACKAGE__, PACKAGE_GUTTER_ICON, completionProcessor, false);
-    processFirstNamespaceForEachName(completionProcessor, project, resolveScope, namespaceProcessor);
+  public static boolean processAllNamespacesNames(@NotNull PerlCompletionProcessor completionProcessor) {
+    return processAllNamespacesNames(completionProcessor, false, true);
   }
 
-  public static boolean processAllNamespacesNames(@NotNull PerlCompletionProcessor completionProcessor, boolean appendNamespaceSeparator) {
+  public static boolean processAllNamespacesNames(@NotNull PerlCompletionProcessor completionProcessor,
+                                                  boolean appendNamespaceSeparator,
+                                                  boolean addPackageTag) {
     PsiElement element = completionProcessor.getLeafElement();
     final Project project = element.getProject();
     GlobalSearchScope resolveScope = element.getResolveScope();
@@ -141,6 +134,10 @@ public class PerlPackageCompletionUtil {
     Processor<PerlNamespaceDefinitionElement> namespaceProcessor =
       namespace -> processNamespaceLookupElement(namespace, completionProcessor, appendNamespaceSeparator);
     PerlBuiltInNamespacesService.getInstance(project).processNamespaces(namespaceProcessor);
+    if (addPackageTag &&
+        !PerlPackageCompletionUtil.processPackageLookupElement(null, __PACKAGE__, PACKAGE_GUTTER_ICON, completionProcessor, false)) {
+      return false;
+    }
     return processFirstNamespaceForEachName(completionProcessor, project, resolveScope, namespaceProcessor);
   }
 
