@@ -223,7 +223,7 @@ public class PerlSubCompletionUtil {
                                                            @NotNull PerlCallValue perlValue,
                                                            boolean isStatic) {
     return perlValue.processTargetNamespaceElements(
-      completionProcessor.getLeafElement(), new PerlNamespaceItemProcessor<PsiNamedElement>() {
+      completionProcessor.getLeafElement(), new PerlNamespaceItemProcessor<>() {
         @Override
         public boolean processItem(@NotNull PsiNamedElement element) {
           if (element instanceof PerlImplicitSubDefinition && ((PerlImplicitSubDefinition)element).isAnonymous()) {
