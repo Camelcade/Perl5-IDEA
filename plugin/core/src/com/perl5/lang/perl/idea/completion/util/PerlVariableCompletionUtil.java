@@ -506,7 +506,7 @@ public class PerlVariableCompletionUtil {
     }
 
     if (processor != null) {
-      namespaceContainer.processExportDescriptors(processor);
+      namespaceContainer.processExportDescriptorsWithAst(processor);
     }
   }
 }

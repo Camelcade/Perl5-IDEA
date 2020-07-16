@@ -23,7 +23,9 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiInvalidElementAccessException;
 import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.util.Processor;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
+import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import com.perl5.lang.perl.psi.stubs.imports.PerlUseStatementsIndex;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlTimeLogger;
@@ -36,12 +38,55 @@ import java.util.List;
 import java.util.Set;
 
 public interface PerlNamespaceDefinitionElement extends PerlNamespaceDefinition, PsiNamedElement, NavigationItem {
-  Logger LOG = Logger.getInstance(PerlNamespaceDefinitionElement.class);
+  Logger LOG_STUBS = Logger.getInstance("#perl5.namespce.stubs");
+  Logger LOG_AST = Logger.getInstance("#perl5.namespce.ast");
 
   @Override
   @NotNull
   @Contract(pure = true)
   Project getProject() throws PsiInvalidElementAccessException;
+
+  default boolean processExportDescriptorsWithAst(@NotNull PerlNamespaceEntityProcessor<PerlExportDescriptor> processor) {
+    String namespaceName = getNamespaceName();
+    if (StringUtil.isEmpty(namespaceName)) {
+      return true;
+    }
+
+    PerlTimeLogger logger = PerlTimeLogger.create(LOG_AST);
+    PerlTimeLogger.Counter useStatementsCounter = logger == null ? null : logger.getCounter("use");
+    PerlTimeLogger.Counter exportsCounter = logger == null ? null : logger.getCounter("export");
+
+    Processor<PerlUseStatementElement> useStatementsProcessor =
+      createUseStatementsProcessor(processor, useStatementsCounter, exportsCounter);
+
+    PerlRecursiveVisitor visitor = new PerlRecursiveVisitor() {
+      @Override
+      public void visitStatement(@NotNull PsiPerlStatement o) {
+      }
+
+      @Override
+      public void visitExpr(@NotNull PsiPerlExpr o) {
+      }
+
+      @Override
+      public void visitUseStatement(@NotNull PerlUseStatementElement o) {
+        if (o.getNamespaceElement() != null && namespaceName.equals(getNamespaceName())) {
+          if (!useStatementsProcessor.process(o)) {
+            stop();
+          }
+        }
+      }
+    };
+    getContainingFile().getOriginalFile().accept(visitor);
+
+    if (logger != null) {
+      logger.debug("AST processed: ",
+                   useStatementsCounter.get(), " use statements; ",
+                   exportsCounter.get(), " exports");
+    }
+
+    return !visitor.isStopped();
+  }
 
   default boolean processExportDescriptors(@NotNull PerlNamespaceEntityProcessor<PerlExportDescriptor> processor) {
     String namespaceName = getNamespaceName();
@@ -101,11 +146,25 @@ public interface PerlNamespaceDefinitionElement extends PerlNamespaceDefinition,
                                           @NotNull GlobalSearchScope searchScope,
                                           @NotNull String namespaceName,
                                           @NotNull PerlNamespaceEntityProcessor<? super PerlExportDescriptor> processor) {
-    PerlTimeLogger logger = !LOG.isDebugEnabled() ? null : new PerlTimeLogger(PerlNamespaceDefinitionElement.class);
+    PerlTimeLogger logger = PerlTimeLogger.create(LOG_STUBS);
     PerlTimeLogger.Counter useStatementsCounter = logger == null ? null : logger.getCounter("use");
     PerlTimeLogger.Counter exportsCounter = logger == null ? null : logger.getCounter("export");
 
-    boolean result = PerlUseStatementsIndex.processElements(project, searchScope, namespaceName, it -> {
+    boolean result = PerlUseStatementsIndex.processElements(
+      project, searchScope, namespaceName, createUseStatementsProcessor(processor, useStatementsCounter, exportsCounter));
+
+    if (logger != null) {
+      logger.debug("Processed: ", useStatementsCounter.get(), " use statements; ",
+                   exportsCounter.get(), " exports");
+    }
+
+    return result;
+  }
+
+  private static @NotNull Processor<PerlUseStatementElement> createUseStatementsProcessor(@NotNull PerlNamespaceEntityProcessor<? super PerlExportDescriptor> processor,
+                                                                                          PerlTimeLogger.Counter useStatementsCounter,
+                                                                                          PerlTimeLogger.Counter exportsCounter) {
+    Processor<PerlUseStatementElement> useStatementsProcessor = it -> {
       if (useStatementsCounter != null) {
         useStatementsCounter.inc();
       }
@@ -123,13 +182,7 @@ public interface PerlNamespaceDefinitionElement extends PerlNamespaceDefinition,
         }
       }
       return true;
-    });
-
-    if (logger != null) {
-      logger.debug("Processed: ", useStatementsCounter.get(), " use statements; ",
-                   exportsCounter.get(), " exports");
-    }
-
-    return result;
+    };
+    return useStatementsProcessor;
   }
 }
