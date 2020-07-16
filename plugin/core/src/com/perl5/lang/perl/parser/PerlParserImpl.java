@@ -16,16 +16,20 @@
 
 package com.perl5.lang.perl.parser;
 
+import com.intellij.lang.ASTNode;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
+import com.perl5.lang.perl.util.PerlTimeLogger;
 import org.jetbrains.annotations.NotNull;
 
 
 public class PerlParserImpl extends PerlParserGenerated implements PerlParser {
+  private static final Logger LOG = Logger.getInstance(PerlParserImpl.class);
   public static final PsiParser INSTANCE = new PerlParserImpl();
 
   private static final TokenSet[] EXTENDS_SETS_BACKUP = new TokenSet[EXTENDS_SETS_.length];
@@ -43,6 +47,16 @@ public class PerlParserImpl extends PerlParserGenerated implements PerlParser {
   }
 
   public PerlParserImpl() {
+  }
+
+  @Override
+  public @NotNull ASTNode parse(IElementType root_, PsiBuilder builder_) {
+    PerlTimeLogger logger = PerlTimeLogger.create(LOG);
+    ASTNode parsedNode = super.parse(root_, builder_);
+    if (logger != null) {
+      logger.debug("Parsed ", root_, " ", PerlTimeLogger.kb(parsedNode.getChars().length()), " kb");
+    }
+    return parsedNode;
   }
 
   public boolean parseStatement(PsiBuilder b, int l) {

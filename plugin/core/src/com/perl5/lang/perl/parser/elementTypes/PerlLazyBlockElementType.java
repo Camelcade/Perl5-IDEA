@@ -59,7 +59,7 @@ public abstract class PerlLazyBlockElementType extends IReparseableElementType i
 
   @Override
   public ASTNode parseContents(@NotNull ASTNode chameleon) {
-    PerlTimeLogger logger = LOG.isDebugEnabled() ? new PerlTimeLogger(LOG) : null;
+    PerlTimeLogger logger = PerlTimeLogger.create(LOG);
     PsiElement parentElement = chameleon.getTreeParent().getPsi();
     Project project = parentElement.getProject();
     CharSequence newChars = chameleon.getChars();
@@ -72,7 +72,7 @@ public abstract class PerlLazyBlockElementType extends IReparseableElementType i
 
     ASTNode result = PerlParserImpl.INSTANCE.parse(this, builder).getFirstChildNode();
     if (logger != null) {
-      logger.debug("Parsed: ", newChars.length(), " bytes of ", this);
+      logger.debug("Parsed: ", PerlTimeLogger.kb(newChars.length()), " kb of ", this);
     }
     return result;
   }

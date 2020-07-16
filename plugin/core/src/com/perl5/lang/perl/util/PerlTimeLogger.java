@@ -17,7 +17,9 @@
 package com.perl5.lang.perl.util;
 
 import com.intellij.openapi.diagnostic.Logger;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -64,5 +66,14 @@ public class PerlTimeLogger {
     public int get() {
       return myCounter;
     }
+  }
+
+  public static @NotNull String kb(int bytes) {
+    return String.format("%.2f", (float)bytes / 1024);
+  }
+
+  @Contract("null->null")
+  public static @Nullable PerlTimeLogger create(@Nullable Logger logger) {
+    return logger != null && logger.isDebugEnabled() ? new PerlTimeLogger(logger) : null;
   }
 }
