@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,4 +21,9 @@ public interface SelfStoppingVisitor {
    * @return true iff we should not visit any other elements
    */
   boolean isStopped();
+
+  /**
+   * Should be invoked to stop visiting
+   */
+  void stop();
 }
