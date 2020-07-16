@@ -19,17 +19,42 @@ package com.perl5.lang.perl.util;
 import com.intellij.openapi.diagnostic.Logger;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class PerlTimeLogger {
   private final Logger myLogger;
   long myLastTime = System.currentTimeMillis();
+  private Map<String, Counter> myCounters;
 
   public PerlTimeLogger(@NotNull Class<?> clazz) {
     myLogger = Logger.getInstance(clazz);
   }
 
-  public void debug(@NotNull String text) {
-    long newLastTime = System.currentTimeMillis();
-    myLogger.debug("+", (newLastTime - myLastTime), "ms. ", text);
-    myLastTime = newLastTime;
+  public void debug(@NotNull Object... data) {
+    if (myLogger.isDebugEnabled()) {
+      long newLastTime = System.currentTimeMillis();
+      myLogger.debug("" + (newLastTime - myLastTime) + " ms. ", data);
+      myLastTime = newLastTime;
+    }
+  }
+
+  public @NotNull Counter getCounter(@NotNull String name) {
+    if (myCounters == null) {
+      myCounters = new HashMap<>();
+    }
+    return myCounters.computeIfAbsent(name, it -> new Counter());
+  }
+
+  public static class Counter {
+    private int myCounter = 0;
+
+    public void inc() {
+      myCounter++;
+    }
+
+    public int get() {
+      return myCounter;
+    }
   }
 }
