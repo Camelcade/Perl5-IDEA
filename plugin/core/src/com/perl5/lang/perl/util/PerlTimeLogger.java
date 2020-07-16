@@ -31,6 +31,14 @@ public class PerlTimeLogger {
     myLogger = Logger.getInstance(clazz);
   }
 
+  public PerlTimeLogger(@NotNull String id) {
+    myLogger = Logger.getInstance(id);
+  }
+
+  public PerlTimeLogger(@NotNull Logger logger) {
+    myLogger = logger;
+  }
+
   public void debug(@NotNull Object... data) {
     if (myLogger.isDebugEnabled()) {
       long newLastTime = System.currentTimeMillis();
