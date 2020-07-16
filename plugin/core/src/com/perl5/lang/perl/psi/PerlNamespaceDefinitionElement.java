@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.navigation.NavigationItem;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiInvalidElementAccessException;
@@ -25,6 +26,7 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.psi.stubs.imports.PerlUseStatementsIndex;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlTimeLogger;
 import com.perl5.lang.perl.util.processors.*;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -34,6 +36,8 @@ import java.util.List;
 import java.util.Set;
 
 public interface PerlNamespaceDefinitionElement extends PerlNamespaceDefinition, PsiNamedElement, NavigationItem {
+  Logger LOG = Logger.getInstance(PerlNamespaceDefinitionElement.class);
+
   @Override
   @NotNull
   @Contract(pure = true)
@@ -97,18 +101,35 @@ public interface PerlNamespaceDefinitionElement extends PerlNamespaceDefinition,
                                           @NotNull GlobalSearchScope searchScope,
                                           @NotNull String namespaceName,
                                           @NotNull PerlNamespaceEntityProcessor<? super PerlExportDescriptor> processor) {
-    return PerlUseStatementsIndex.processElements(project, searchScope, namespaceName, it -> {
+    PerlTimeLogger logger = !LOG.isDebugEnabled() ? null : new PerlTimeLogger(PerlNamespaceDefinitionElement.class);
+    PerlTimeLogger.Counter useStatementsCounter = logger == null ? null : logger.getCounter("use");
+    PerlTimeLogger.Counter exportsCounter = logger == null ? null : logger.getCounter("export");
+
+    boolean result = PerlUseStatementsIndex.processElements(project, searchScope, namespaceName, it -> {
+      if (useStatementsCounter != null) {
+        useStatementsCounter.inc();
+      }
       String packageName = it.getPackageName();
 
       if (packageName == null) {
         return true;
       }
       for (PerlExportDescriptor entry : it.getPackageProcessor().getImports(it)) {
+        if (exportsCounter != null) {
+          exportsCounter.inc();
+        }
         if (!processor.process(packageName, entry)) {
           return false;
         }
       }
       return true;
     });
+
+    if (logger != null) {
+      logger.debug("Processed: ", useStatementsCounter.get(), " use statements; ",
+                   exportsCounter.get(), " exports");
+    }
+
+    return result;
   }
 }
