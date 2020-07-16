@@ -153,6 +153,9 @@ public class PerlPackageCompletionUtil {
                                                          @NotNull GlobalSearchScope searchScope,
                                                          @NotNull Processor<PerlNamespaceDefinitionElement> namespaceProcessor) {
     for (String packageName : PerlPackageUtil.getKnownNamespaceNames(project)) {
+      if (!completionProcessor.matches(packageName)) {
+        continue;
+      }
       PerlPackageUtil.processNamespaces(packageName, project, searchScope, namespace -> {
         String name = namespace.getNamespaceName();
         if (StringUtil.isNotEmpty(name)) {
