@@ -16,24 +16,49 @@
 
 package com.perl5.lang.perl.idea.formatter;
 
+import com.intellij.formatting.FormatTextRanges;
+import com.intellij.formatting.FormattingMode;
 import com.intellij.formatting.FormattingModel;
-import com.intellij.formatting.FormattingModelBuilder;
+import com.intellij.formatting.FormattingModelBuilderEx;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
+import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlFormattingBlock;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 
-public class PerlFormattingModelBuilder implements FormattingModelBuilder {
+public class PerlFormattingModelBuilder implements FormattingModelBuilderEx {
+  @Override
+  public @NotNull FormattingModel createModel(@NotNull PsiElement element,
+                                              @NotNull CodeStyleSettings settings,
+                                              @NotNull FormattingMode mode) {
+    throw new RuntimeException("Should never happen");
+  }
+
+  @Override
+  public @NotNull FormattingModel createModel(@NotNull PsiElement element,
+                                              @NotNull TextRange range,
+                                              @NotNull CodeStyleSettings settings,
+                                              @NotNull FormattingMode mode) {
+    PerlFormattingBlock rootBlock = new PerlFormattingBlock(
+      element.getNode(), new PerlFormattingContext(element, range, settings, mode));
+    return new PerlDocumentBasedFormattingModel(rootBlock, element, settings);
+  }
 
   @Override
   public @NotNull FormattingModel createModel(PsiElement element, CodeStyleSettings settings) {
-    PerlFormattingBlock rootBlock = new PerlFormattingBlock(element.getNode(), new PerlFormattingContext(element, settings));
-    return new PerlDocumentBasedFormattingModel(rootBlock, element, settings);
+    throw new RuntimeException("Should never happen");
+  }
+
+  @Override
+  public CommonCodeStyleSettings.@Nullable IndentOptions getIndentOptionsToUse(@NotNull PsiFile file,
+                                                                               @NotNull FormatTextRanges ranges,
+                                                                               @NotNull CodeStyleSettings settings) {
+    return null;
   }
 
   @Override

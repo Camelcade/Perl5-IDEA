@@ -16,8 +16,10 @@
 
 package com.perl5.lang.mojolicious.idea.formatter;
 
+import com.intellij.formatting.FormattingMode;
 import com.intellij.formatting.FormattingModel;
 import com.intellij.formatting.FormattingModelProvider;
+import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.perl5.lang.mojolicious.idea.formatter.blocks.MojoliciousFormattingBlock;
@@ -28,8 +30,12 @@ import org.jetbrains.annotations.NotNull;
 
 public class MojoliciousFormattingModelBuilder extends PerlFormattingModelBuilder {
   @Override
-  public @NotNull FormattingModel createModel(PsiElement element, CodeStyleSettings settings) {
-    PerlFormattingBlock block = new MojoliciousFormattingBlock(element.getNode(), new MojoliciousFormattingContext(element, settings));
+  public @NotNull FormattingModel createModel(@NotNull PsiElement element,
+                                              @NotNull TextRange range,
+                                              @NotNull CodeStyleSettings settings,
+                                              @NotNull FormattingMode mode) {
+    PerlFormattingBlock block = new MojoliciousFormattingBlock(element.getNode(), new MojoliciousFormattingContext(element, range, settings,
+                                                                                                                   mode));
     return FormattingModelProvider.createFormattingModelForPsiFile(element.getContainingFile(), block, settings);
   }
 }

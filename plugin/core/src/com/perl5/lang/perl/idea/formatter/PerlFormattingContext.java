@@ -89,6 +89,8 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
   private final @NotNull CommonCodeStyleSettings mySettings;
   private final @NotNull PerlCodeStyleSettings myPerlSettings;
   private final @NotNull SpacingBuilder mySpacingBuilder;
+  private final @NotNull TextRange myTextRange;
+  private final @NotNull FormattingMode myFormattingMode;
   private final List<TextRange> myHeredocRangesList = new ArrayList<>();
 
   private static final MultiMap<IElementType, IElementType> OPERATOR_COLLISIONS_MAP = new MultiMap<>();
@@ -103,13 +105,18 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     OPERATOR_COLLISIONS_MAP.putValue(OPERATOR_SMARTMATCH, OPERATOR_BITWISE_NOT);
   }
 
-  public PerlFormattingContext(@NotNull PsiElement element, @NotNull CodeStyleSettings settings) {
+  public PerlFormattingContext(@NotNull PsiElement element,
+                               @NotNull TextRange textRange,
+                               @NotNull CodeStyleSettings settings,
+                               @NotNull FormattingMode formattingMode) {
     mySettings = settings.getCommonSettings(PerlLanguage.INSTANCE);
     myPerlSettings = settings.getCustomSettings(PerlCodeStyleSettings.class);
     mySpacingBuilder = createSpacingBuilder();
     PsiFile containingFile = element.getContainingFile();
     myDocument = containingFile == null ? null : containingFile.getViewProvider().getDocument();
     myCommentsLines = myDocument == null ? new BitSet() : new BitSet(myDocument.getLineCount());
+    myFormattingMode = formattingMode;
+    myTextRange = textRange;
   }
 
   protected SpacingBuilder createSpacingBuilder() {
@@ -619,5 +626,13 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
   private int getNodeLine(@Nullable ASTNode node) {
     Document document = getDocument();
     return node == null || document == null ? -1 : document.getLineNumber(node.getStartOffset());
+  }
+
+  public @NotNull FormattingMode getFormattingMode() {
+    return myFormattingMode;
+  }
+
+  public @NotNull TextRange getTextRange() {
+    return myTextRange;
   }
 }

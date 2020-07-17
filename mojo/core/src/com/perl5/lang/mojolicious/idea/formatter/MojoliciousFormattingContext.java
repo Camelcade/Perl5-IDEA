@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,10 @@
 
 package com.perl5.lang.mojolicious.idea.formatter;
 
+import com.intellij.formatting.FormattingMode;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.editor.Document;
+import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
@@ -36,8 +38,11 @@ public class MojoliciousFormattingContext extends PerlFormattingContext {
     MOJO_LINE_OPENER, MOJO_LINE_EXPR_OPENER, MOJO_LINE_EXPR_ESCAPED_OPENER
   );
 
-  public MojoliciousFormattingContext(@NotNull PsiElement element, @NotNull CodeStyleSettings settings) {
-    super(element, settings);
+  public MojoliciousFormattingContext(@NotNull PsiElement element,
+                                      @NotNull TextRange range,
+                                      @NotNull CodeStyleSettings settings,
+                                      @NotNull FormattingMode mode) {
+    super(element, range, settings, mode);
   }
 
   @Override
@@ -75,9 +80,7 @@ public class MojoliciousFormattingContext extends PerlFormattingContext {
         firstElement = firstElement.getNextSibling();
       }
 
-      if (LINE_OPENERS.contains(PsiUtilCore.getElementType(firstElement))) {
-        return true;
-      }
+      return LINE_OPENERS.contains(PsiUtilCore.getElementType(firstElement));
     }
 
     return false;

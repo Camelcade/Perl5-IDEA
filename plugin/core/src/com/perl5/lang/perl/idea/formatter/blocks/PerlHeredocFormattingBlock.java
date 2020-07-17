@@ -49,7 +49,7 @@ public class PerlHeredocFormattingBlock extends PerlFormattingBlock {
 
   @Override
   protected @NotNull List<Block> buildSubBlocks() {
-    return PerlInjectedLanguageBlocksBuilder.compute(myContext.getSettings().getRootSettings(), getNode(), getTextRange());
+    return PerlInjectedLanguageBlocksBuilder.compute(myContext, getNode(), getTextRange());
   }
 
   @Override

@@ -16,10 +16,7 @@
 
 package com.perl5.lang.perl.idea.formatter;
 
-import com.intellij.formatting.Alignment;
-import com.intellij.formatting.Block;
-import com.intellij.formatting.FormattingModel;
-import com.intellij.formatting.FormattingModelBuilder;
+import com.intellij.formatting.*;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.LanguageFormatting;
 import com.intellij.lang.injection.InjectedLanguageManager;
@@ -29,7 +26,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiLanguageInjectionHost;
 import com.intellij.psi.PsiLanguageInjectionHost.Shred;
-import com.intellij.psi.codeStyle.CodeStyleSettings;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -42,7 +38,7 @@ import java.util.List;
  * N.B. This implementation supposes that suffix and prefix are meaningless
  */
 public class PerlInjectedLanguageBlocksBuilder implements PsiLanguageInjectionHost.InjectedPsiVisitor {
-  private final @NotNull CodeStyleSettings mySettings;
+  private final @NotNull PerlFormattingContext myContext;
 
   private final @NotNull List<Entry> myEntries = new ArrayList<>();
   private final @NotNull ASTNode myHostNode;
@@ -56,11 +52,11 @@ public class PerlInjectedLanguageBlocksBuilder implements PsiLanguageInjectionHo
   int injectedLength = 0;
   private @Nullable PsiFile myInjectedPsiFile;
 
-  private PerlInjectedLanguageBlocksBuilder(@NotNull CodeStyleSettings settings,
+  private PerlInjectedLanguageBlocksBuilder(@NotNull PerlFormattingContext context,
                                             @NotNull ASTNode hostNode,
                                             @NotNull TextRange parentRange
   ) {
-    mySettings = settings;
+    myContext = context;
     myHostNode = hostNode;
     myParentRange = parentRange;
   }
@@ -120,7 +116,8 @@ public class PerlInjectedLanguageBlocksBuilder implements PsiLanguageInjectionHo
       return null;
     }
 
-    final FormattingModel childModel = builder.createModel(myInjectedPsiFile, mySettings);
+    final FormattingModel childModel = CoreFormatterUtil.buildModel(
+      builder, myInjectedPsiFile, myContext.getTextRange(), myContext.getSettings().getRootSettings(), myContext.getFormattingMode());
     return new PerlInjectedLanguageBlockWrapper(childModel.getRootBlock(), this);
   }
 
@@ -168,11 +165,11 @@ public class PerlInjectedLanguageBlocksBuilder implements PsiLanguageInjectionHo
     return myAbsoluteIndentAlignment;
   }
 
-  public static List<Block> compute(@NotNull CodeStyleSettings settings,
+  public static List<Block> compute(@NotNull PerlFormattingContext context,
                                     @NotNull ASTNode hostNode,
                                     @NotNull TextRange rangeInHost
   ) {
-    return new PerlInjectedLanguageBlocksBuilder(settings, hostNode, rangeInHost).calcInjectedBlocks();
+    return new PerlInjectedLanguageBlocksBuilder(context, hostNode, rangeInHost).calcInjectedBlocks();
   }
 
   private static class Entry {

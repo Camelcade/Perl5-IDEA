@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,10 @@
 
 package com.perl5.lang.htmlmason.idea.formatter;
 
+import com.intellij.formatting.FormattingMode;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.editor.Document;
+import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
@@ -27,8 +29,11 @@ import com.perl5.lang.perl.idea.formatter.PerlFormattingContext;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class AbstractMasonFormattingContext extends PerlFormattingContext {
-  public AbstractMasonFormattingContext(@NotNull PsiElement element, @NotNull CodeStyleSettings settings) {
-    super(element, settings);
+  public AbstractMasonFormattingContext(@NotNull PsiElement element,
+                                        @NotNull TextRange range,
+                                        @NotNull CodeStyleSettings settings,
+                                        @NotNull FormattingMode mode) {
+    super(element, range, settings, mode);
   }
 
   protected abstract IElementType getLineOpenerToken();
@@ -48,9 +53,7 @@ public abstract class AbstractMasonFormattingContext extends PerlFormattingConte
       int lineStartOffset = document.getLineStartOffset(lineNumber);
       PsiElement firstElement = file.findElementAt(lineStartOffset);
 
-      if (firstElement != null && firstElement.getNode().getElementType() == getLineOpenerToken()) {
-        return true;
-      }
+      return firstElement != null && firstElement.getNode().getElementType() == getLineOpenerToken();
     }
 
     return false;
