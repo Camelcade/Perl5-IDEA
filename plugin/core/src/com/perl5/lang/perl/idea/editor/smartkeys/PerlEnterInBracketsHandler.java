@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.idea.editor.smartkeys;
 
 import com.intellij.codeInsight.CodeInsightSettings;
-import com.intellij.codeInsight.editorActions.enter.EnterHandlerDelegateAdapter;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Document;
@@ -38,16 +37,16 @@ import org.jetbrains.annotations.NotNull;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 
-public class PerlEnterInBracketsHandler extends EnterHandlerDelegateAdapter {
+public class PerlEnterInBracketsHandler extends PerlEnterHandler {
   private static final Logger LOG = Logger.getInstance(PerlEnterInBracketsHandler.class);
 
   @Override
-  public Result preprocessEnter(@NotNull PsiFile file,
-                                @NotNull Editor editor,
-                                @NotNull Ref<Integer> caretOffset,
-                                @NotNull Ref<Integer> caretAdvance,
-                                @NotNull DataContext dataContext,
-                                EditorActionHandler originalHandler) {
+  public Result doPreprocessEnter(@NotNull PsiFile file,
+                                  @NotNull Editor editor,
+                                  @NotNull Ref<Integer> caretOffset,
+                                  @NotNull Ref<Integer> caretAdvance,
+                                  @NotNull DataContext dataContext,
+                                  EditorActionHandler originalHandler) {
 
     if (!file.getLanguage().is(PerlLanguage.INSTANCE) || !CodeInsightSettings.getInstance().SMART_INDENT_ON_ENTER) {
       return Result.Continue;

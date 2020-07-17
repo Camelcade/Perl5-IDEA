@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.idea.editor.smartkeys;
 
-import com.intellij.codeInsight.editorActions.enter.EnterHandlerDelegateAdapter;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.editor.Document;
@@ -40,12 +39,11 @@ import java.util.regex.Pattern;
 import static com.perl5.lang.perl.psi.utils.PerlPsiUtil.*;
 
 
-public class PerlEnterHeredocClosingHandler extends EnterHandlerDelegateAdapter {
+public class PerlEnterHeredocClosingHandler extends PerlEnterHandler {
   private static final Pattern EMPTY_OPENER_PATTERN = Pattern.compile("<<\\s*(?:\"\"|''|``)");
 
-
   @Override
-  public Result postProcessEnter(@NotNull PsiFile file, @NotNull Editor editor, @NotNull DataContext dataContext) {
+  public Result doPostProcessEnter(@NotNull PsiFile file, @NotNull Editor editor, @NotNull DataContext dataContext) {
     if (!file.getLanguage().is(PerlLanguage.INSTANCE)) {
       return Result.Continue;
     }
