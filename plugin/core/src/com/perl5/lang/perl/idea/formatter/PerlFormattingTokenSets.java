@@ -64,6 +64,10 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     CONTINUATION_EXPR
   );
 
+  /**
+   * @deprecated looks like {@link PerlTokenSets#COMPOUND_STATEMENTS}
+   */
+  @Deprecated
   TokenSet COMPOUND_STATEMENTS_TOKENSET = TokenSet.create(
     IF_COMPOUND,
     UNLESS_COMPOUND,
@@ -373,5 +377,36 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     FORMAT_TERMINATOR,
     TAG_DATA,
     TAG_END
+  );
+
+  /**
+   * These are minimal blocks we need formatting model for to compute indent, alignment properly.
+   */
+  TokenSet FORMATTING_SUFFICIENT_BLOCKS = TokenSet.orSet(
+    TRANSPARENT_ELEMENT_TYPES,
+    HEREDOC_BODIES_TOKENSET,
+    COMPOUND_STATEMENTS,
+    TokenSet.create(BLOCK, ANON_HASH, ANON_ARRAY, NAMESPACE_CONTENT, NAMESPACE_DEFINITION, SIGNATURE_CONTENT)
+  );
+
+  /**
+   * These tokens can limit self-sufficient block range. E.g:
+   * <pre>
+   *
+   * if(something){
+   *   ...
+   * }
+   *
+   * &lt;selection&gt;say 'hi';&lt;/selection&gt;
+   *
+   * if( otherthing ){
+   *
+   * }
+   *
+   * </pre>
+   * We don't need if compounds for proper formatting and therefore don't need to include them to the model.
+   */
+  TokenSet FORMATTING_RANGE_EDGE_ELEMENTS = TokenSet.orSet(
+    COMPOUND_STATEMENTS, TokenSet.create(NAMESPACE_DEFINITION)
   );
 }

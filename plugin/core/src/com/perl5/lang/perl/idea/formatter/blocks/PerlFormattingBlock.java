@@ -84,22 +84,52 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
   }
 
   protected @NotNull List<Block> buildSubBlocks() {
+    ASTNode run = myNode.getFirstChildNode();
+    if (run == null) {
+      return Collections.emptyList();
+    }
+
     if (MATCH_REGEXP_CONTAINERS.contains(getElementType())) {
       return buildRegexpSubBlocks();
     }
     List<Block> blocks = new ArrayList<>();
     buildSubBlocksForNode(blocks, myNode);
-    return processSubBlocks(blocks);
+    return processSubBlocks(blocks.isEmpty() ? Collections.emptyList() : blocks);
   }
 
   private void buildSubBlocksForNode(@NotNull List<Block> blocks, @NotNull ASTNode node) {
-    for (ASTNode child = node.getFirstChildNode(); child != null; child = child.getTreeNext()) {
-      if (TRANSPARENT_ELEMENT_TYPES.contains(PsiUtilCore.getElementType(child))) {
-        buildSubBlocksForNode(blocks, child);
+    TextRange formattedRange = myContext.getTextRange();
+
+    ASTNode run = node.getFirstChildNode();
+    int startOffset = run.getStartOffset();
+
+    ASTNode lastCoverableNode = null;
+    while (!run.getTextRange().intersects(formattedRange)) {
+      if (shouldCreateSubBlockFor(run)) {
+        lastCoverableNode = run;
       }
-      else if (shouldCreateSubBlockFor(child)) {
-        blocks.add(createBlock(child));
+      run = run.getTreeNext();
+    }
+
+    if (lastCoverableNode != null) {
+      while (TRANSPARENT_ELEMENT_TYPES.contains(PsiUtilCore.getElementType(lastCoverableNode)) &&
+             lastCoverableNode.getLastChildNode() != null) {
+        lastCoverableNode = lastCoverableNode.getLastChildNode();
       }
+      blocks.add(new PerlTextRangeBasedBlock(TextRange.create(startOffset, lastCoverableNode.getTextRange().getEndOffset())));
+    }
+
+    for (; run != null && run.getTextRange().intersects(formattedRange); run = run.getTreeNext()) {
+      if (TRANSPARENT_ELEMENT_TYPES.contains(PsiUtilCore.getElementType(run))) {
+        buildSubBlocksForNode(blocks, run);
+      }
+      else if (shouldCreateSubBlockFor(run)) {
+        blocks.add(createBlock(run));
+      }
+    }
+
+    if (run != null) {
+      blocks.add(new PerlTextRangeBasedBlock(TextRange.create(run.getStartOffset(), node.getTextRange().getEndOffset())));
     }
   }
 

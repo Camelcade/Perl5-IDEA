@@ -47,7 +47,10 @@ import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.BitSet;
+import java.util.List;
+import java.util.Map;
 
 import static com.intellij.formatting.WrapType.*;
 import static com.intellij.psi.codeStyle.CommonCodeStyleSettings.*;
@@ -258,9 +261,10 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
         }
 
         // small inline blocks
-        if (grandParentElementType != GREP_EXPR && grandParentElementType != SORT_EXPR && grandParentElementType != MAP_EXPR) {
+        if (child1Node != null && grandParentElementType != GREP_EXPR &&
+            grandParentElementType != SORT_EXPR && grandParentElementType != MAP_EXPR) {
           boolean isSmallBlock = blockHasLessChildrenThan(parentNode, 2);
-          boolean isNewLineAllowed = !isNewLineForbiddenAt(Objects.requireNonNull(child1Node));
+          boolean isNewLineAllowed = !isNewLineForbiddenAt(child1Node);
           if (!isSmallBlock && (afterOpener || beforeCloser) && isNewLineAllowed) {
             return Spacing.createSpacing(0, 0, 1, true, 1);
           }

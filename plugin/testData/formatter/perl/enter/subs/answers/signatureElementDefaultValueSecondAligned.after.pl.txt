@@ -1,7 +1,7 @@
 after somemethod(
     $firstvarlong = 42,
     $somevar
-            <caret>
+                  <caret>
 ) :attribute
 {
 }

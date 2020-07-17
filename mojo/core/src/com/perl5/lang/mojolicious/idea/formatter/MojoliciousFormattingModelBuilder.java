@@ -23,19 +23,20 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.perl5.lang.mojolicious.idea.formatter.blocks.MojoliciousFormattingBlock;
-import com.perl5.lang.perl.idea.formatter.PerlFormattingModelBuilder;
+import com.perl5.lang.perl.idea.formatter.PerlTemplatingFormattingModelBuilder;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlFormattingBlock;
 import org.jetbrains.annotations.NotNull;
 
 
-public class MojoliciousFormattingModelBuilder extends PerlFormattingModelBuilder {
+public class MojoliciousFormattingModelBuilder extends PerlTemplatingFormattingModelBuilder {
   @Override
   public @NotNull FormattingModel createModel(@NotNull PsiElement element,
                                               @NotNull TextRange range,
                                               @NotNull CodeStyleSettings settings,
                                               @NotNull FormattingMode mode) {
-    PerlFormattingBlock block = new MojoliciousFormattingBlock(element.getNode(), new MojoliciousFormattingContext(element, range, settings,
-                                                                                                                   mode));
+    PerlFormattingBlock block = new MojoliciousFormattingBlock(
+      element.getNode(), new MojoliciousFormattingContext(element, element.getTextRange(), settings,
+                                                          mode));
     return FormattingModelProvider.createFormattingModelForPsiFile(element.getContainingFile(), block, settings);
   }
 }

@@ -1,7 +1,7 @@
 fun(
     $firstvarlong = 42,
     $somevar
-            <caret>
+                  <caret>
     ,
     $thirdvar
 ) :attribute

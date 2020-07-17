@@ -1,7 +1,7 @@
 override somemethod(
     $firstvarlong = 42,
     $somevar
-            <caret>
+                  <caret>
 ) :attribute
 {
 }

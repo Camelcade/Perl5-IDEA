@@ -22,18 +22,19 @@ import com.intellij.formatting.FormattingModelProvider;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
-import com.perl5.lang.perl.idea.formatter.PerlFormattingModelBuilder;
+import com.perl5.lang.perl.idea.formatter.PerlTemplatingFormattingModelBuilder;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlFormattingBlock;
 import org.jetbrains.annotations.NotNull;
 
 
-public class MasonFormattingModelBuilder extends PerlFormattingModelBuilder {
+public class MasonFormattingModelBuilder extends PerlTemplatingFormattingModelBuilder {
   @Override
   public @NotNull FormattingModel createModel(@NotNull PsiElement element,
                                               @NotNull TextRange range,
                                               @NotNull CodeStyleSettings settings,
                                               @NotNull FormattingMode mode) {
-    PerlFormattingBlock block = new MasonFormattingBlock(element.getNode(), new MasonFormattingContext(element, range, settings, mode));
+    PerlFormattingBlock block = new MasonFormattingBlock(
+      element.getNode(), new MasonFormattingContext(element, element.getTextRange(), settings, mode));
     return FormattingModelProvider.createFormattingModelForPsiFile(element.getContainingFile(), block, settings);
   }
 }
