@@ -1,0 +1,8 @@
+use vars qw{
+        $VERSION
+        @ISA
+        @EXPORT
+        $missing_file_spec
+        $fh_stderr
+        $rOpts_character_encoding
+};

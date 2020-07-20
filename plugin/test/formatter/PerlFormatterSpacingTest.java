@@ -27,6 +27,9 @@ public class PerlFormatterSpacingTest extends PerlFormatterTestCase {
   }
 
   @Test
+  public void testUseVars() {doFormatTest();}
+
+  @Test
   public void testReplaceRegexWithComments() {doFormatTest();}
 
   @Test

@@ -367,7 +367,7 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
   );
 
   TokenSet TRANSPARENT_ELEMENT_TYPES = TokenSet.orSet(
-    TokenSet.create(LP_STRING_QW), LAZY_CODE_BLOCKS, LAZY_PARSABLE_REGEXPS
+    TokenSet.create(LP_STRING_QW, PARSABLE_STRING_USE_VARS), LAZY_CODE_BLOCKS, LAZY_PARSABLE_REGEXPS
   );
 
   TokenSet HEREDOC_ENDS = TokenSet.create(HEREDOC_END, HEREDOC_END_INDENTABLE);
