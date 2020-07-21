@@ -60,9 +60,8 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
   );
 
   public PerlFormattingBlock(@NotNull ASTNode node, @NotNull PerlFormattingContext context) {
-    super(context.registerNode(node), context.getWrap(node), context.getAlignment(node));
+    super(node, context.getWrap(node), context.getAlignment(node));
     myContext = context;
-    buildChildren();
     myIndent = context.getIndentProcessor().getNodeIndent(node);
   }
 
