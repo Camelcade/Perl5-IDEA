@@ -28,6 +28,7 @@ import com.intellij.psi.TokenType;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.intellij.psi.impl.source.tree.CompositeElement;
+import com.intellij.psi.impl.source.tree.LeafElement;
 import com.intellij.psi.impl.source.tree.TreeUtil;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
@@ -45,11 +46,11 @@ import com.perl5.lang.perl.psi.PerlSignatureElement;
 import com.perl5.lang.perl.psi.PsiPerlStatementModifier;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import gnu.trove.THashMap;
+import gnu.trove.TIntIntHashMap;
 import gnu.trove.TIntObjectHashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -143,7 +144,10 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
   private final @NotNull SpacingBuilder mySpacingBuilder;
   private final @NotNull TextRange myTextRange;
   private final @NotNull FormattingMode myFormattingMode;
-  private final List<TextRange> myHeredocRangesList = new ArrayList<>();
+  /**
+   * Maps line numbers to the offset of first here-doc openers. Or {@link Integer.MAX_VALUE} if there is none
+   */
+  private final TIntIntHashMap myHeredocForbiddenOffsets = new TIntIntHashMap();
 
   private static final MultiMap<IElementType, IElementType> OPERATOR_COLLISIONS_MAP = new MultiMap<>();
 
@@ -174,24 +178,6 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     return PerlSpacingBuilderFactory.createSpacingBuilder(mySettings, myPerlSettings);
   }
 
-  /**
-   * registers an ASTNode in some internal structure if it's necessary.
-   * e.g. comments, here-docs
-   */
-  public @NotNull ASTNode registerNode(@NotNull ASTNode node) {
-    if (getDocument() == null) {
-      return node;
-    }
-    IElementType nodeType = PsiUtilCore.getElementType(node);
-    if (nodeType == HEREDOC_OPENER) {
-      myHeredocRangesList.add(
-        TextRange.create(node.getStartOffset() + 1, getDocument().getLineEndOffset(getNodeLine(node)))
-      );
-    }
-
-    return node;
-  }
-
   public @NotNull CommonCodeStyleSettings getSettings() {
     return mySettings;
   }
@@ -219,14 +205,42 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
    * @return check result
    */
   public boolean isNewLineForbiddenAt(@NotNull ASTNode node) {
-    int startOffset = node.getStartOffset();
-    for (TextRange range : myHeredocRangesList) {
-      if (range.contains(startOffset)) {
-        return true;
-      }
+    if (myDocument == null) {
+      return true;
+    }
+    int nodeLine = getNodeLine(node);
+    if (myHeredocForbiddenOffsets.contains(nodeLine)) {
+      return node.getStartOffset() > myHeredocForbiddenOffsets.get(nodeLine);
     }
 
-    return false;
+    int heredocOffset = Integer.MAX_VALUE;
+    LeafElement firstLeaf = TreeUtil.findFirstLeaf(node);
+    ASTNode run = firstLeaf;
+    while (run != null) {
+      if (run.getElementType() == OPERATOR_HEREDOC) {
+        heredocOffset = run.getStartOffset();
+      }
+      else if (StringUtil.containsLineBreak(run.getChars())) {
+        break;
+      }
+      run = TreeUtil.prevLeaf(run);
+    }
+
+    if (heredocOffset == Integer.MAX_VALUE) {
+      run = firstLeaf;
+      while (run != null) {
+        if (run.getElementType() == OPERATOR_HEREDOC) {
+          heredocOffset = run.getStartOffset();
+          break;
+        }
+        else if (StringUtil.containsLineBreak(run.getChars())) {
+          break;
+        }
+        run = TreeUtil.nextLeaf(run);
+      }
+    }
+    myHeredocForbiddenOffsets.put(nodeLine, heredocOffset);
+    return node.getStartOffset() > heredocOffset;
   }
 
 
