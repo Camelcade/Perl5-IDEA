@@ -1,0 +1,5 @@
+PerlNamespaceFileReference at (37,55); text in range: 'TestExportOK::Util' => 0 results:
+
+PerlSubReference at (1599,1614); text in range: 'assert_required' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_required at 2109 in lazyExportOkQw.pl
+

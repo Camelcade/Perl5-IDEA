@@ -295,6 +295,12 @@ public class PerlResolveTest extends PerlLightTestCase {
   @Test
   public void testLazyExportOkQw() {doTest();}
 
+  @Test
+  public void testLazyExportOkQwImport() {
+    myFixture.copyFileToProject("lazyExportOkQw.code", "lazyExportOkQw.pl");
+    doTest();
+  }
+
   private void doTest() {
     doTestResolve();
   }

@@ -274,6 +274,4 @@ PerlSubReferenceSimple at (1643,1650); text in range: 'to_file' => 1 results:
 
 PerlNamespaceFileReference at (3430,3448); text in range: 'TestExportOK::Util' => 0 results:
 
-PerlSubReference at (4992,5007); text in range: 'assert_required' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_required at 2109 in lazyExportOkQw.pl
-
+PerlSubReference at (4992,5007); text in range: 'assert_required' => 0 results:

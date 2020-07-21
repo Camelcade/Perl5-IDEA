@@ -1,0 +1,16 @@
+package Foo::Bar
+{
+	use Exporter qw/import/;
+	our @EXPORT = qw/
+		$somescalar
+		@somearray
+		%somehash
+		&somecode
+		someothercode
+	/;
+	our $somescalar;
+	our @somearray;
+	our %somehash;
+	sub somecode{}
+	sub someothercode{}
+}

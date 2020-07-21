@@ -1,0 +1,8 @@
+package Bar::Baz;
+
+our @EXPORT = qw/something/;
+
+#@method
+sub something{
+}
+

@@ -3,4 +3,4 @@ Text: SUPER::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon:
 	String: SUPER::
 Text: something; Tail: null; Type: Bar::Baz; Icon: /method_gutter_icon.png; Type Icon: null
 	Lookups: something
-	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Bar::Baz::something at 58 in importInSuperClass.pl
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Bar::Baz::something at 58 in importInSuperClassExport.pl

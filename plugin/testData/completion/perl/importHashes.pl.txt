@@ -24,10 +24,10 @@ Text: ERRNO; Tail: null; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon:
 	PsiElement: Built-in: %ERRNO
 Text: Foo::Bar::; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 	Lookups: Foo::Bar::
-	PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bar at 0 in importHashes.pl
+	PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bar at 0 in importHashesExport.pl
 Text: Foo::Baz::; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 	Lookups: Foo::Baz::
-	PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Baz at 225 in importHashes.pl
+	PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Baz at 0 in importHashes.pl
 Text: INC; Tail: null; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: null
 	Lookups: INC
 	PsiElement: Built-in: %INC

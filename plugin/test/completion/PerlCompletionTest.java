@@ -19,6 +19,7 @@ package completion;
 
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.internals.PerlVersion;
 import org.jetbrains.annotations.NotNull;
@@ -232,6 +233,7 @@ public class PerlCompletionTest extends PerlCompletionTestCase {
 
   @Test
   public void testImportInSuperClass() {
+    myFixture.copyFileToProject("importInSuperClassExport.code", "importInSuperClassExport.pl");
     doTest();
   }
 
@@ -610,21 +612,26 @@ public class PerlCompletionTest extends PerlCompletionTestCase {
 
   @Test
   public void testImportSubs() {
+    myFixture.copyFileToProject("importSubsExport.code", "importSubsExport.pl");
     doTest();
   }
 
   @Test
   public void testImportHashes() {
+    myFixture.copyFileToProject("importHashesExport.code", "importHashesExport.pl");
     doTest();
   }
 
   @Test
   public void testImportArrays() {
+    myFixture.copyFileToProject("importArraysExport.code", "importArraysExport.pl");
     doTest();
   }
 
   @Test
   public void testImportScalars() {
+    myFixture.copyFileToProject("importScalarsExport.code", "importScalarsExport.pl");
+    CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
     doTest();
   }
 

@@ -54,10 +54,10 @@ Text: F; Tail: null; Type: Built-in; Icon: /array_gutter_icon.png; Type Icon: nu
 	PsiElement: Built-in: @F
 Text: Foo::Bar::; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 	Lookups: Foo::Bar::
-	PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bar at 0 in importArrays.pl
+	PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bar at 0 in importArraysExport.pl
 Text: Foo::Baz::; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 	Lookups: Foo::Baz::
-	PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Baz at 225 in importArrays.pl
+	PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Baz at 0 in importArrays.pl
 Text: INC; Tail: []; Type: Built-in; Icon: /array_gutter_icon.png; Type Icon: null
 	Lookups: INC
 	PsiElement: Built-in: @INC
