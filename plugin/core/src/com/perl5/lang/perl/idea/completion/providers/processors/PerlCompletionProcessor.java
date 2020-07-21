@@ -44,7 +44,7 @@ public interface PerlCompletionProcessor {
   }
 
   default @NotNull PsiFile getOriginalFile() {
-    return getContainingFile().getContainingFile();
+    return getContainingFile().getOriginalFile();
   }
 
   default @NotNull VirtualFile getVirtualFile() {
