@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.util;
 
 import com.intellij.openapi.diagnostic.Logger;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -25,6 +24,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PerlTimeLogger {
+  private static final PerlTimeLogger EMPTY_LOGGER = new PerlTimeLogger("") {
+    @Override
+    public void debug(@NotNull Object... data) {
+    }
+
+    @Override
+    public @NotNull Counter getCounter(@NotNull String name) {
+      return Counter.EMPTY_COUNTER;
+    }
+  };
+
   private final Logger myLogger;
   long myLastTime = System.currentTimeMillis();
   private Map<String, Counter> myCounters;
@@ -57,6 +67,17 @@ public class PerlTimeLogger {
   }
 
   public static class Counter {
+    private static final Counter EMPTY_COUNTER = new Counter() {
+      @Override
+      public void inc() {
+      }
+
+      @Override
+      public int get() {
+        return 0;
+      }
+    };
+
     private int myCounter = 0;
 
     public void inc() {
@@ -72,8 +93,7 @@ public class PerlTimeLogger {
     return String.format("%.2f", (float)bytes / 1024);
   }
 
-  @Contract("null->null")
-  public static @Nullable PerlTimeLogger create(@Nullable Logger logger) {
-    return logger != null && logger.isDebugEnabled() ? new PerlTimeLogger(logger) : null;
+  public static @NotNull PerlTimeLogger create(@Nullable Logger logger) {
+    return logger != null && logger.isDebugEnabled() ? new PerlTimeLogger(logger) : EMPTY_LOGGER;
   }
 }
