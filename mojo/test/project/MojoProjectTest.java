@@ -17,6 +17,7 @@
 package project;
 
 import base.PerlPlatformTestCase;
+import categories.Heavy;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -31,10 +32,12 @@ import com.perl5.lang.mojolicious.model.MojoProject;
 import com.perl5.lang.mojolicious.model.MojoProjectManager;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.Description;
 
 import java.util.List;
 
+@Category(Heavy.class)
 public class MojoProjectTest extends PerlPlatformTestCase {
   private static final Logger LOG = Logger.getInstance(MojoProjectTest.class);
 
