@@ -71,7 +71,9 @@ public class PerlFormattingModelBuilder implements FormattingModelBuilderEx {
                    "; range: ", range,
                    "; settings: ", settings,
                    "; mode: ", mode);
-      LOG.debug("Tree size: ", computeTreeSize(rootBlock));
+      if (LOG.isTraceEnabled()) {
+        LOG.trace("Tree size: " + computeTreeSize(rootBlock));
+      }
     }
     return model;
   }
