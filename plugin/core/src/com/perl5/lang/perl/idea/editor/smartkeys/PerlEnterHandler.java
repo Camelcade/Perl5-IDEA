@@ -41,9 +41,7 @@ public abstract class PerlEnterHandler extends EnterHandlerDelegateAdapter {
                                       EditorActionHandler originalHandler) {
     PerlTimeLogger logger = PerlTimeLogger.create(LOG);
     Result result = doPreprocessEnter(file, editor, caretOffset, caretAdvance, dataContext, originalHandler);
-    if (logger != null) {
-      logger.debug("Pre processed enter with " + getClass().getSimpleName());
-    }
+    logger.debug("Pre processed enter with " + getClass().getSimpleName());
     return result;
   }
 
@@ -61,9 +59,7 @@ public abstract class PerlEnterHandler extends EnterHandlerDelegateAdapter {
   public final Result postProcessEnter(@NotNull PsiFile file, @NotNull Editor editor, @NotNull DataContext dataContext) {
     PerlTimeLogger logger = PerlTimeLogger.create(LOG);
     Result result = doPostProcessEnter(file, editor, dataContext);
-    if (logger != null) {
-      logger.debug("Post processed enter with " + getClass().getSimpleName());
-    }
+    logger.debug("Post processed enter with " + getClass().getSimpleName());
     return result;
   }
 

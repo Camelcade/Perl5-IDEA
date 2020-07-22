@@ -66,7 +66,7 @@ public class PerlFormattingModelBuilder implements FormattingModelBuilderEx {
     PerlFormattingBlock rootBlock = new PerlFormattingBlock(
       element.getNode(), new PerlFormattingContext(element, range, settings, mode));
     PerlDocumentBasedFormattingModel model = new PerlDocumentBasedFormattingModel(rootBlock, element, settings);
-    if (logger != null) {
+    if (LOG.isDebugEnabled()) {
       logger.debug("Created model for: ", element.getNode(),
                    "; range: ", range,
                    "; settings: ", settings,

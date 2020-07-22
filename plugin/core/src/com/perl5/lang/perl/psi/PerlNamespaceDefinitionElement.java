@@ -53,8 +53,8 @@ public interface PerlNamespaceDefinitionElement extends PerlNamespaceDefinition,
     }
 
     PerlTimeLogger logger = PerlTimeLogger.create(LOG_AST);
-    PerlTimeLogger.Counter useStatementsCounter = logger == null ? null : logger.getCounter("use");
-    PerlTimeLogger.Counter exportsCounter = logger == null ? null : logger.getCounter("export");
+    PerlTimeLogger.Counter useStatementsCounter = logger.getCounter("use");
+    PerlTimeLogger.Counter exportsCounter = logger.getCounter("export");
 
     Processor<PerlUseStatementElement> useStatementsProcessor =
       createUseStatementsProcessor(processor, useStatementsCounter, exportsCounter);
@@ -79,11 +79,9 @@ public interface PerlNamespaceDefinitionElement extends PerlNamespaceDefinition,
     };
     getContainingFile().getOriginalFile().accept(visitor);
 
-    if (logger != null) {
-      logger.debug("AST processed: ",
-                   useStatementsCounter.get(), " use statements; ",
-                   exportsCounter.get(), " exports");
-    }
+    logger.debug("AST processed: ",
+                 useStatementsCounter.get(), " use statements; ",
+                 exportsCounter.get(), " exports");
 
     return !visitor.isStopped();
   }
@@ -147,36 +145,30 @@ public interface PerlNamespaceDefinitionElement extends PerlNamespaceDefinition,
                                           @NotNull String namespaceName,
                                           @NotNull PerlNamespaceEntityProcessor<? super PerlExportDescriptor> processor) {
     PerlTimeLogger logger = PerlTimeLogger.create(LOG_STUBS);
-    PerlTimeLogger.Counter useStatementsCounter = logger == null ? null : logger.getCounter("use");
-    PerlTimeLogger.Counter exportsCounter = logger == null ? null : logger.getCounter("export");
+    PerlTimeLogger.Counter useStatementsCounter = logger.getCounter("use");
+    PerlTimeLogger.Counter exportsCounter = logger.getCounter("export");
 
     boolean result = PerlUseStatementsIndex.getInstance().processElements(
       project, namespaceName, searchScope, createUseStatementsProcessor(processor, useStatementsCounter, exportsCounter));
 
-    if (logger != null) {
-      logger.debug("Processed: ", useStatementsCounter.get(), " use statements; ",
-                   exportsCounter.get(), " exports");
-    }
+    logger.debug("Processed: ", useStatementsCounter.get(), " use statements; ",
+                 exportsCounter.get(), " exports");
 
     return result;
   }
 
   private static @NotNull Processor<PerlUseStatementElement> createUseStatementsProcessor(@NotNull PerlNamespaceEntityProcessor<? super PerlExportDescriptor> processor,
-                                                                                          PerlTimeLogger.Counter useStatementsCounter,
-                                                                                          PerlTimeLogger.Counter exportsCounter) {
+                                                                                          @NotNull PerlTimeLogger.Counter useStatementsCounter,
+                                                                                          @NotNull PerlTimeLogger.Counter exportsCounter) {
     return it -> {
-      if (useStatementsCounter != null) {
-        useStatementsCounter.inc();
-      }
+      useStatementsCounter.inc();
       String packageName = it.getPackageName();
 
       if (packageName == null) {
         return true;
       }
       for (PerlExportDescriptor entry : it.getPackageProcessor().getImports(it)) {
-        if (exportsCounter != null) {
-          exportsCounter.inc();
-        }
+        exportsCounter.inc();
         if (!processor.process(packageName, entry)) {
           return false;
         }

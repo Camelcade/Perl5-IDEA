@@ -71,9 +71,7 @@ public abstract class PerlLazyBlockElementType extends IReparseableElementType i
       newChars);
 
     ASTNode result = PerlParserImpl.INSTANCE.parse(this, builder).getFirstChildNode();
-    if (logger != null) {
-      logger.debug("Parsed: ", PerlTimeLogger.kb(newChars.length()), " kb of ", this);
-    }
+    logger.debug("Parsed: ", PerlTimeLogger.kb(newChars.length()), " kb of ", this);
     return result;
   }
 

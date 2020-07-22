@@ -53,18 +53,14 @@ public class PerlParserImpl extends PerlParserGenerated implements PerlParser {
   public void parseLight(IElementType root_, PsiBuilder builder_) {
     PerlTimeLogger logger = PerlTimeLogger.create(LOG);
     super.parseLight(root_, builder_);
-    if (logger != null) {
-      logger.debug("Light parsed ", root_, " ", PerlTimeLogger.kb(builder_.getOriginalText().length()), " kb");
-    }
+    logger.debug("Light parsed ", root_, " ", PerlTimeLogger.kb(builder_.getOriginalText().length()), " kb");
   }
 
   @Override
   public @NotNull ASTNode parse(IElementType root_, PsiBuilder builder_) {
     PerlTimeLogger logger = PerlTimeLogger.create(LOG);
     ASTNode parsedNode = super.parse(root_, builder_);
-    if (logger != null) {
-      logger.debug("Parsed ", root_, " ", PerlTimeLogger.kb(parsedNode.getTextLength()), " kb");
-    }
+    logger.debug("Parsed ", root_, " ", PerlTimeLogger.kb(parsedNode.getTextLength()), " kb");
     return parsedNode;
   }
 

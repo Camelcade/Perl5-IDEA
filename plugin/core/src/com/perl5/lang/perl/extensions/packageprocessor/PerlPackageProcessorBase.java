@@ -79,9 +79,7 @@ public abstract class PerlPackageProcessorBase implements PerlPackageProcessor {
         .forEach(name -> result.add(createDescriptor(packageName, name)));
     }
 
-    if (logger != null) {
-      logger.debug("Collected imports for ", packageName);
-    }
+    logger.debug("Collected imports for ", packageName);
     return result;
   }
 
