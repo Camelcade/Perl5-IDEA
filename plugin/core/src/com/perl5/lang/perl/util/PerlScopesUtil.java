@@ -30,11 +30,17 @@ public final class PerlScopesUtil {
    * @return a global search scope for the psi element excluding current file, if we can detect that current file has AST
    */
   public static @NotNull GlobalSearchScope allScopeWithoutCurrentWithAst(@NotNull PsiElement psiElement) {
-    GlobalSearchScope allScope = GlobalSearchScope.allScope(psiElement.getProject());
+    return scopeWithoutCurrentFileWithAst(GlobalSearchScope.allScope(psiElement.getProject()), psiElement);
+  }
+
+  /**
+   * @return adjusted {@code fullScope}, excluding file containing the {@code psiElement} if file has AST tree
+   */
+  public static GlobalSearchScope scopeWithoutCurrentFileWithAst(@NotNull GlobalSearchScope fullScope, @NotNull PsiElement psiElement) {
     PsiFile originalFile = psiElement.getContainingFile().getOriginalFile();
     if (originalFile instanceof PsiFileEx && !((PsiFileEx)originalFile).isContentsLoaded()) {
-      return allScope;
+      return fullScope;
     }
-    return allScope.intersectWith(GlobalSearchScope.notScope(GlobalSearchScope.fileScope(psiElement.getContainingFile())));
+    return fullScope.intersectWith(GlobalSearchScope.notScope(GlobalSearchScope.fileScope(originalFile)));
   }
 }
