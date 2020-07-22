@@ -128,23 +128,6 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
     return PerlMroType.DFS;
   }
 
-  //	@Override
-  //	@NotNull
-  //	public GlobalSearchScope getElementsResolveScope()
-  //	{
-  //		if (myElementsResolveScope != null)
-  //			return myElementsResolveScope;
-  //
-  //		long t = System.currentTimeMillis();
-  //		Set<VirtualFile> filesToSearch = new THashSet<VirtualFile>();
-  //		collectIncludedFiles(filesToSearch);
-  //		myElementsResolveScope = GlobalSearchScope.filesScope(getProject(), filesToSearch);
-  //
-  //		System.err.println("Collected in ms: " + (System.currentTimeMillis() - t) / 1000);
-  //
-  //		return myElementsResolveScope;
-  //	}
-
   @Override
   public void collectIncludedFiles(Set<VirtualFile> includedVirtualFiles) {
     if (!includedVirtualFiles.contains(getVirtualFile())) {
@@ -153,11 +136,9 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
       StubElement<?> fileStub = getStub();
 
       if (fileStub == null) {
-        //				System.err.println("Collecting from psi for " + getVirtualFile());
         collectRequiresFromPsi(this, includedVirtualFiles);
       }
       else {
-        //				System.err.println("Collecting from stubs for " + getVirtualFile());
         collectRequiresFromStub(fileStub, includedVirtualFiles);
       }
     }
@@ -169,11 +150,9 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
 
       ObjectStubTree<?> objectStubTree = StubTreeLoader.getInstance().readOrBuild(getProject(), virtualFile, null);
       if (objectStubTree != null) {
-        //				System.err.println("Collecting from stub for " + virtualFile);
         collectRequiresFromStub((PsiFileStub<?>)objectStubTree.getRoot(), includedVirtualFiles);
       }
       else {
-        //				System.err.println("Collecting from psi for " + virtualFile);
         PsiFile targetPsiFile = PsiManager.getInstance(getProject()).findFile(virtualFile);
         if (targetPsiFile != null) {
           collectRequiresFromPsi(targetPsiFile, includedVirtualFiles);
@@ -247,41 +226,6 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
   public PerlCodeGenerator getCodeGenerator() {
     return PerlCodeGeneratorImpl.INSTANCE;
   }
-
-/* This method is to get ElementTypes stats from PsiFile using PSIViewer
-        public String getTokensStats()
-	{
-		final Map<IElementType, Integer> TOKENS_STATS = new THashMap<IElementType, Integer>();
-
-		accept(new PerlRecursiveVisitor(){
-
-			@Override
-			public void visitElement(PsiElement element)
-			{
-				IElementType elementType = element.getNode().getElementType();
-				if( elementType instanceof PerlElementType)
-				{
-					if (!TOKENS_STATS.containsKey(elementType))
-					{
-						TOKENS_STATS.put(elementType, 1);
-					}
-					else
-					{
-						TOKENS_STATS.put(elementType, TOKENS_STATS.get(elementType) + 1);
-					}
-				}
-				super.visitElement(element);
-			}
-		});
-
-		for (IElementType type: TOKENS_STATS.keySet())
-		{
-			System.err.println(type+ ";" + TOKENS_STATS.get(type));
-		}
-
-		return "";
-	}
-*/
 
   @Override
   public ItemPresentation getPresentation() {
