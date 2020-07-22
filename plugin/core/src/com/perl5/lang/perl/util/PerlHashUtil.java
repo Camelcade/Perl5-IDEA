@@ -117,7 +117,7 @@ public class PerlHashUtil implements PerlElementTypes {
                                                    @NotNull Processor<PerlVariableDeclarationElement> processor,
                                                    boolean processAll) {
     return PerlImplicitDeclarationsService.getInstance(project).processHashes(processor) &&
-           PerlScalarUtil.processDefinedGlobalVariables(PerlVariablesStubIndex.KEY_HASH, project, scope, processor, processAll);
+           PerlVariableUtil.processGlobalVariables(PerlVariablesStubIndex.KEY_HASH, project, scope, processor, processAll);
   }
 
   /**

@@ -16,13 +16,10 @@
 
 package com.perl5.lang.perl.util;
 
-import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.psi.stubs.StubIndex;
-import com.intellij.psi.stubs.StubIndexKey;
 import com.intellij.util.Processor;
 import com.intellij.util.SmartList;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
@@ -91,39 +88,7 @@ public class PerlScalarUtil implements PerlElementTypes, PerlBuiltInScalars {
                                                     @NotNull Processor<PerlVariableDeclarationElement> processor,
                                                     boolean processAll) {
     return PerlImplicitDeclarationsService.getInstance(project).processScalars(processor) &&
-           processDefinedGlobalVariables(PerlVariablesStubIndex.KEY_SCALAR, project, scope, processor, processAll);
-  }
-
-  /**
-   * Method for processing global indexed variables
-   *
-   * @param processAll if false, only one entry per name going to be processed. May be need when filling completion
-   */
-  public static boolean processDefinedGlobalVariables(@NotNull StubIndexKey<String, PerlVariableDeclarationElement> key,
-                                                      @NotNull Project project,
-                                                      @NotNull GlobalSearchScope scope,
-                                                      @NotNull Processor<PerlVariableDeclarationElement> processor,
-                                                      boolean processAll) {
-    StubIndex stubIndex = StubIndex.getInstance();
-    for (String variableName : stubIndex.getAllKeys(key, project)) {
-      if (variableName.length() == 0) {
-        continue;
-      }
-
-      char firstChar = variableName.charAt(0);
-      if (firstChar == '_' || Character.isLetterOrDigit(firstChar)) {
-        boolean[] result = new boolean[]{true};
-        stubIndex.processElements(key, variableName, project, scope, PerlVariableDeclarationElement.class, element -> {
-          ProgressManager.checkCanceled();
-          result[0] = processor.process(element);
-          return processAll && result[0];
-        });
-        if (!result[0]) {
-          return false;
-        }
-      }
-    }
-    return true;
+           PerlVariableUtil.processGlobalVariables(PerlVariablesStubIndex.KEY_SCALAR, project, scope, processor, processAll);
   }
 
   /**

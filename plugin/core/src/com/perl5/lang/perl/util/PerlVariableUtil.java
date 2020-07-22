@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,12 +16,26 @@
 
 package com.perl5.lang.perl.util;
 
+import com.intellij.openapi.progress.ProgressManager;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Comparing;
+import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.stubs.StubIndex;
+import com.intellij.psi.stubs.StubIndexKey;
+import com.intellij.util.Processor;
 import com.perl5.lang.perl.psi.PerlVariable;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
+import gnu.trove.THashSet;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Set;
 
-public class PerlVariableUtil {
+
+public final class PerlVariableUtil {
+  private PerlVariableUtil() {
+  }
+
   /**
    * Compares two variables by actual type, packageName and name. They can be from different declarations
    * builds AST
@@ -34,5 +48,48 @@ public class PerlVariableUtil {
     return v1.getActualType().equals(v2.getActualType()) &&
            Comparing.equal(v1.getExplicitNamespaceName(), v2.getExplicitNamespaceName()) &&
            Comparing.equal(v1.getName(), v2.getName());
+  }
+
+  /**
+   * Processes variables indexed with {@code indexKey}
+   *
+   * @param onePerName if true, only one variable per name is going to the processor
+   */
+  public static boolean processGlobalVariables(@NotNull StubIndexKey<String, PerlVariableDeclarationElement> indexKey,
+                                               @NotNull Project project,
+                                               @NotNull GlobalSearchScope scope,
+                                               @NotNull Processor<PerlVariableDeclarationElement> processor,
+                                               @NotNull String textKey,
+                                               boolean onePerName) {
+    Set<String> uniqueNames = onePerName ? new THashSet<>() : null;
+    return StubIndex.getInstance().processElements(indexKey, textKey, project, scope, PerlVariableDeclarationElement.class, element -> {
+      ProgressManager.checkCanceled();
+      if (!onePerName || uniqueNames.add(element.getCanonicalName())) {
+        return processor.process(element);
+      }
+      return true;
+    });
+  }
+
+  /**
+   * Processes all variables indexed with {@code indexKey}
+   *
+   * @param processAll if false, only one entry per name going to be processed. May be need when filling completion
+   */
+  public static boolean processGlobalVariables(@NotNull StubIndexKey<String, PerlVariableDeclarationElement> indexKey,
+                                               @NotNull Project project,
+                                               @NotNull GlobalSearchScope scope,
+                                               @NotNull Processor<PerlVariableDeclarationElement> processor,
+                                               boolean processAll) {
+    for (String variableName : PerlStubUtil.getAllKeys(indexKey, scope)) {
+      if (variableName.length() == 0 || variableName.charAt(0) == '*') {
+        continue;
+      }
+
+      if (!processGlobalVariables(indexKey, project, scope, processor, variableName, !processAll)) {
+        return false;
+      }
+    }
+    return true;
   }
 }

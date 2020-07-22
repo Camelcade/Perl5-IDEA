@@ -99,7 +99,7 @@ public class PerlArrayUtil implements PerlElementTypes {
                                                    @NotNull Processor<PerlVariableDeclarationElement> processor,
                                                    boolean processAll) {
     return PerlImplicitDeclarationsService.getInstance(project).processArrays(processor) &&
-           PerlScalarUtil.processDefinedGlobalVariables(PerlVariablesStubIndex.KEY_ARRAY, project, scope, processor, processAll);
+           PerlVariableUtil.processGlobalVariables(PerlVariablesStubIndex.KEY_ARRAY, project, scope, processor, processAll);
   }
 
   /**
