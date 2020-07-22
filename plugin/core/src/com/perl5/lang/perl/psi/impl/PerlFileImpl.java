@@ -19,6 +19,7 @@ package com.perl5.lang.perl.psi.impl;
 import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.lang.Language;
 import com.intellij.navigation.ItemPresentation;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.roots.impl.DirectoryInfo;
@@ -33,6 +34,8 @@ import com.intellij.psi.stubs.ObjectStubTree;
 import com.intellij.psi.stubs.PsiFileStub;
 import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.stubs.StubTreeLoader;
+import com.intellij.psi.util.CachedValueProvider;
+import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ObjectUtils;
@@ -41,8 +44,7 @@ import com.perl5.lang.perl.extensions.PerlCodeGenerator;
 import com.perl5.lang.perl.extensions.generation.PerlCodeGeneratorImpl;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
-import com.perl5.lang.perl.psi.PerlDoExpr;
-import com.perl5.lang.perl.psi.PerlFile;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.stubs.PerlFileStub;
@@ -51,17 +53,16 @@ import com.perl5.lang.perl.psi.stubs.imports.runtime.PerlRuntimeImportStub;
 import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlTimeLogger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 
 public class PerlFileImpl extends PsiFileBase implements PerlFile {
+  private static final Logger LOG = Logger.getInstance(PerlFileImpl.class);
   protected GlobalSearchScope myElementsResolveScope;
   protected PsiElement fileContext;
 
@@ -323,5 +324,36 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
   @Override
   public @NotNull Map<String, List<String>> getEXPORT_TAGS() {
     return Collections.emptyMap();
+  }
+
+  @Override
+  public final @NotNull PerlFileData getPerlFileData() {
+    if (!isContentsLoaded()) {
+      return PerlFileData.EMPTY_DATA;
+    }
+    return CachedValuesManager.getCachedValue(this, () -> {
+      PerlFileData newData = computePerlFileData();
+      return CachedValueProvider.Result.create(newData, this);
+    });
+  }
+
+  protected @NotNull PerlFileData computePerlFileData() {
+    PerlTimeLogger logger = PerlTimeLogger.create(LOG);
+    List<PerlNamespaceDefinitionElement> namespaces = new ArrayList<>();
+    accept(new PerlRecursiveVisitor() {
+      @Override
+      protected boolean shouldVisitLightElements() {
+        return true;
+      }
+
+      @Override
+      public void visitPerlNamespaceDefinitionWithIdentifier(@NotNull PerlNamespaceDefinitionWithIdentifier o) {
+        namespaces.add(o);
+        super.visitPerlNamespaceDefinitionWithIdentifier(o);
+      }
+    });
+    PerlFileData result = new PerlFileData(namespaces);
+    logger.debug("Collected data from AST");
+    return result;
   }
 }

@@ -32,6 +32,7 @@ import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.references.PerlBuiltInNamespacesService;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.pod.parser.psi.PodLinkTarget;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
@@ -86,4 +87,9 @@ public interface PerlFile
    * @param fileContext new file context
    */
   void setFileContext(@Nullable PsiElement fileContext);
+
+  /**
+   * @return data with meaningful nodes from PsiFile
+   */
+  @NotNull PerlFileData getPerlFileData();
 }
