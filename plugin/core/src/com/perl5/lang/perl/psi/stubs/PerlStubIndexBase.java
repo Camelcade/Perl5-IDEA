@@ -23,12 +23,15 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StringStubIndexExtension;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.util.Processor;
+import com.intellij.util.Processors;
 import com.perl5.lang.perl.idea.EP.PerlPackageProcessorEP;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
 import com.perl5.lang.perl.psi.PerlSubCallHandler;
+import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
+import java.util.Set;
 
 
 public abstract class PerlStubIndexBase<Psi extends PsiElement> extends StringStubIndexExtension<Psi> {
@@ -43,8 +46,14 @@ public abstract class PerlStubIndexBase<Psi extends PsiElement> extends StringSt
            PerlPackageProcessorEP.getVersion();
   }
 
-  public @NotNull Collection<String> getAllNames(Project project) {
+  public @NotNull Collection<String> getAllNames(@NotNull Project project) {
     return StubIndex.getInstance().getAllKeys(getKey(), project);
+  }
+
+  public @NotNull Collection<String> getAllNames(@NotNull GlobalSearchScope globalSearchScope) {
+    Set<String> allKeys = new THashSet<>();
+    StubIndex.getInstance().processAllKeys(getKey(), Processors.cancelableCollectProcessor(allKeys), globalSearchScope, null);
+    return allKeys;
   }
 
   protected abstract @NotNull Class<Psi> getPsiClass();

@@ -334,11 +334,16 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
    *
    * @param project project to search in
    * @return collection of package names
-   * fixme process only from current project
    */
   public static Collection<String> getKnownNamespaceNames(Project project) {
     Collection<String> keys = PerlNamespaceIndex.getInstance().getAllNames(project);
     keys.addAll(PerlLightNamespaceIndex.getInstance().getAllNames(project));
+    return keys;
+  }
+
+  public static @NotNull Collection<String> getKnownNamespaceNames(@NotNull GlobalSearchScope scope) {
+    Collection<String> keys = PerlNamespaceIndex.getInstance().getAllNames(scope);
+    keys.addAll(PerlLightNamespaceIndex.getInstance().getAllNames(scope));
     return keys;
   }
 
