@@ -286,9 +286,6 @@ Text: LibraryException::; Tail: null; Type: null; Icon: /exceptionClass.svg; Typ
 Text: MATCH; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
 	Lookups: MATCH
 	PsiElement: Built-in: $MATCH
-Text: Mojo::Template::Sandbox::439858593178CD18E9988AE8B076F139::; Tail: null; Type: null; Icon: /mojolicious.png, null]; Type Icon: null
-	Lookups: Mojo::Template::Sandbox::439858593178CD18E9988AE8B076F139::
-	PsiElement: Mojolicious Perl5 Template at 0 in scalars.ep
 Text: Mojolicious::Controller::; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 	Lookups: Mojolicious::Controller::
 	PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Mojolicious::Controller at 0 in Controller.pm

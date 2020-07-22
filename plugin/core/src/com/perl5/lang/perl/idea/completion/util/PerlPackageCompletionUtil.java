@@ -21,6 +21,7 @@ import com.intellij.codeInsight.completion.InsertHandler;
 import com.intellij.codeInsight.lookup.Lookup;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -35,14 +36,19 @@ import com.perl5.lang.perl.idea.completion.providers.processors.PerlCompletionPr
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlSimpleDelegatingCompletionProcessor;
 import com.perl5.lang.perl.internals.PerlFeaturesTable;
 import com.perl5.lang.perl.internals.PerlVersion;
+import com.perl5.lang.perl.psi.PerlFile;
+import com.perl5.lang.perl.psi.PerlFileData;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.references.PerlBuiltInNamespacesService;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlScopesUtil;
+import com.perl5.lang.perl.util.PerlTimeLogger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -51,6 +57,8 @@ import static com.perl5.lang.perl.util.PerlPackageUtil.__PACKAGE__;
 
 
 public class PerlPackageCompletionUtil {
+  private static final Logger LOG = Logger.getInstance(PerlPackageCompletionUtil.class);
+
   public static final InsertHandler<LookupElement> COMPLETION_REOPENER = (context, item) -> {
     if (context.getCompletionChar() != Lookup.AUTO_INSERT_SELECT_CHAR) {
       AutoPopupController.getInstance(context.getProject()).scheduleAutoPopup(context.getEditor());
@@ -129,7 +137,6 @@ public class PerlPackageCompletionUtil {
                                                   boolean addPackageTag) {
     PsiElement element = completionProcessor.getLeafElement();
     final Project project = element.getProject();
-    GlobalSearchScope resolveScope = element.getResolveScope();
 
     Processor<PerlNamespaceDefinitionElement> namespaceProcessor =
       namespace -> processNamespaceLookupElement(namespace, completionProcessor, appendNamespaceSeparator);
@@ -138,7 +145,7 @@ public class PerlPackageCompletionUtil {
         !PerlPackageCompletionUtil.processPackageLookupElement(null, __PACKAGE__, PACKAGE_GUTTER_ICON, completionProcessor, false)) {
       return false;
     }
-    return processFirstNamespaceForEachName(completionProcessor, project, resolveScope, namespaceProcessor);
+    return processFirstNamespaceForEachName(completionProcessor, project, element.getResolveScope(), namespaceProcessor);
   }
 
   /**
@@ -149,7 +156,11 @@ public class PerlPackageCompletionUtil {
                                                          @NotNull Project project,
                                                          @NotNull GlobalSearchScope searchScope,
                                                          @NotNull Processor<PerlNamespaceDefinitionElement> namespaceProcessor) {
-    for (String packageName : PerlPackageUtil.getKnownNamespaceNames(project)) {
+    searchScope = PerlScopesUtil.scopeWithoutCurrentFileWithAst(searchScope, completionProcessor.getContainingFile());
+    PerlTimeLogger logger = PerlTimeLogger.create(LOG);
+    Collection<String> names = PerlPackageUtil.getKnownNamespaceNames(searchScope);
+    logger.debug("Collected all namespaces names: ", names.size());
+    for (String packageName : names) {
       if (!completionProcessor.matches(packageName)) {
         continue;
       }
@@ -159,15 +170,38 @@ public class PerlPackageCompletionUtil {
           char firstChar = name.charAt(0);
           if (firstChar == '_' || Character.isLetterOrDigit(firstChar)) {
             namespaceProcessor.process(namespace);
+            completionProcessor.register(namespace.getNamespaceName());
             return false;
           }
         }
         return false;
       });
       if (!completionProcessor.result()) {
+        LOG.debug("Processor is full");
         return false;
       }
     }
+    logger.debug("Collected namespaces from indexes");
+
+    PsiFile originalFile = completionProcessor.getOriginalFile();
+    if (originalFile instanceof PerlFile) {
+      PerlFileData perlFileData = ((PerlFile)originalFile).getPerlFileData();
+      logger.debug("Obtained perl file data");
+      for (PerlNamespaceDefinitionElement namespace : perlFileData.getNamespaces()) {
+        String namespaceName = namespace.getNamespaceName();
+        if (completionProcessor.matches(namespaceName) && !completionProcessor.isRegistered(namespaceName)) {
+          completionProcessor.register(namespaceName);
+          if (!namespaceProcessor.process(namespace)) {
+            break;
+          }
+        }
+      }
+      logger.debug("Collected namespaces from AST of the current file");
+    }
+    else {
+      logger.debug("Not a perl file to process AST");
+    }
+
     return completionProcessor.result();
   }
 

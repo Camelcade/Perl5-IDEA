@@ -1018,9 +1018,6 @@ Text: lstat; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Ico
 Text: main; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 	Lookups: main
 	PsiElement: Implicit namespace: main
-Text: main; Tail: null; Type: null; Icon: /perl5classic.png, null]; Type Icon: null
-	Lookups: main
-	PsiElement: Perl5 at 0 in mooseImports.pl
 Text: map; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: map
 	PsiElement: Implicit sub: map()
