@@ -58,7 +58,7 @@ public class PerlHandleCompletionProvider extends PerlCompletionProvider {
     if (Experiments.getInstance().isFeatureEnabled("perl5.completion.var.without.sigil")) {
       PerlVariableCompletionProcessor variableCompletionProcessor = new PerlVariableCompletionProcessorImpl(
         completionProcessor, null, false, false, false);
-      PerlVariableCompletionUtil.fillWithVariables(variableCompletionProcessor);
+      PerlVariableCompletionUtil.processVariables(variableCompletionProcessor);
     }
 
     completionProcessor.logStatus(getClass());

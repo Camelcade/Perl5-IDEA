@@ -62,7 +62,7 @@ public class PerlStringContentCompletionProvider extends PerlCompletionProvider 
       }
       else {
         PerlStringCompletionUtil.fillWithHashIndexes(completionProcessor);
-        PerlVariableCompletionUtil.fillWithVariables(
+        PerlVariableCompletionUtil.processVariables(
           new PerlVariableCompletionProcessorImpl(completionProcessor, null, false, false, false));
         PerlSubCompletionUtil.processContextSubsLookupElements(completionProcessor);
         PerlPackageCompletionUtil.processAllNamespacesNames(completionProcessor, false, false);

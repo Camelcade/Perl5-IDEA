@@ -363,9 +363,9 @@ public class PerlVariableCompletionUtil {
     "ISA", "EXPORT", "EXPORT_OK", "EXPORT_TAGS", "EXPORT_FAIL", "VERSION"
   );
 
-  public static void fillWithFullQualifiedVariables(@NotNull PerlVariableCompletionProcessor variableCompletionProcessor) {
+  public static boolean processFullQualifiedVariables(@NotNull PerlVariableCompletionProcessor variableCompletionProcessor) {
     if (!variableCompletionProcessor.isFullQualified() && variableCompletionProcessor.getCompletionParameters().getInvocationCount() == 0) {
-      return;
+      return variableCompletionProcessor.result();
     }
     PsiElement variableNameElement = variableCompletionProcessor.getLeafElement();
     PsiElement perlVariable = variableCompletionProcessor.getLeafParentElement();
@@ -386,45 +386,41 @@ public class PerlVariableCompletionUtil {
     GlobalSearchScope resolveScope = variableNameElement.getResolveScope();
 
     if (perlVariable instanceof PsiPerlScalarVariable) {
-      PerlScalarUtil.processDefinedGlobalScalars(project, resolveScope, lookupGenerator, false);
-      PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, lookupGenerator, false);
-      PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, lookupGenerator, false);
+      return PerlScalarUtil.processDefinedGlobalScalars(project, resolveScope, lookupGenerator, false) &&
+             PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, lookupGenerator, false) &&
+             PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, lookupGenerator, false);
     }
     else if (perlVariable instanceof PsiPerlArrayVariable) {
-      PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, lookupGenerator, false);
-      PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, lookupGenerator, false);
+      return PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, lookupGenerator, false) &&
+             PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, lookupGenerator, false);
     }
     else if (perlVariable instanceof PsiPerlArrayIndexVariable) {
       // global arrays
-      PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, lookupGenerator, false);
+      return PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, lookupGenerator, false);
     }
     else if (perlVariable instanceof PsiPerlHashVariable) {
       // global hashes
-      PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, lookupGenerator, false);
-      if (hasHashSlices(perlVariable)) {
-        PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, lookupGenerator, false);
-      }
+      return PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, lookupGenerator, false) &&
+             (!hasHashSlices(perlVariable) || PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, lookupGenerator, false));
     }
     else {
-      PerlScalarUtil.processDefinedGlobalScalars(project, resolveScope, lookupGenerator, false);
-      PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, lookupGenerator, false);
-      PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, lookupGenerator, false);
-
-      // globs
-      PerlGlobUtil.processDefinedGlobs(project, resolveScope, null, typeglob ->
-        variableCompletionProcessor.process(processVariableLookupElement(
-          typeglob, perlVariable instanceof PsiPerlMethod, variableCompletionProcessor)), false);
+      return PerlScalarUtil.processDefinedGlobalScalars(project, resolveScope, lookupGenerator, false) &&
+             PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, lookupGenerator, false) &&
+             PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, lookupGenerator, false) &&
+             PerlGlobUtil.processDefinedGlobs(project, resolveScope, null, typeglob ->
+               variableCompletionProcessor.process(processVariableLookupElement(
+                 typeglob, perlVariable instanceof PsiPerlMethod, variableCompletionProcessor)), false);
     }
   }
 
-  public static void fillWithVariables(@NotNull PerlVariableCompletionProcessor variableCompletionProcessor) {
+  public static void processVariables(@NotNull PerlVariableCompletionProcessor variableCompletionProcessor) {
     if (!variableCompletionProcessor.isFullQualified()) {
       fillWithLexicalVariables(variableCompletionProcessor);
       fillWithBuiltInVariables(variableCompletionProcessor);
       fillWithImportedVariables(variableCompletionProcessor);
     }
 
-    fillWithFullQualifiedVariables(variableCompletionProcessor);
+    processFullQualifiedVariables(variableCompletionProcessor);
   }
 
   public static void fillWithImportedVariables(@NotNull PerlVariableCompletionProcessor variableCompletionProcessor) {
