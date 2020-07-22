@@ -16,21 +16,14 @@
 
 package com.perl5.lang.perl.psi.stubs.subsdefinitions;
 
-import com.intellij.openapi.progress.ProgressManager;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.psi.stubs.StubIndex;
+import com.intellij.psi.stubs.StubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
-import com.intellij.util.Processor;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.impl.PerlPolyNamedElement;
-import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
-import com.perl5.lang.perl.psi.stubs.PerlStubIndexBase;
+import com.perl5.lang.perl.psi.stubs.PerlLightElementsIndex;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collection;
-
-public class PerlLightSubDefinitionsIndex extends PerlStubIndexBase<PerlPolyNamedElement> {
+public class PerlLightSubDefinitionsIndex extends PerlLightElementsIndex<PerlSubDefinitionElement> {
   public static final int VERSION = 2;
   public static final StubIndexKey<String, PerlPolyNamedElement> KEY = StubIndexKey.createIndexKey("perl.sub.polynamed");
 
@@ -44,26 +37,22 @@ public class PerlLightSubDefinitionsIndex extends PerlStubIndexBase<PerlPolyName
     return KEY;
   }
 
-  public static boolean processSubDefinitions(@NotNull Project project,
-                                              @NotNull String canonicalName,
-                                              @NotNull GlobalSearchScope scope,
-                                              @NotNull Processor<PerlSubDefinitionElement> processor) {
-    return StubIndex.getInstance().processElements(KEY, canonicalName, project, scope, PerlPolyNamedElement.class, polyNamedElement -> {
-      ProgressManager.checkCanceled();
-      for (PerlDelegatingLightNamedElement<?> lightNamedElement : ((PerlPolyNamedElement<?>)polyNamedElement).getLightElements()) {
-        if (lightNamedElement instanceof PerlSubDefinitionElement &&
-            canonicalName.equals(((PerlSubDefinitionElement)lightNamedElement).getCanonicalName())) {
-          if (!processor.process((PerlSubDefinitionElement)lightNamedElement)) {
-            return false;
-          }
-        }
-      }
-
-      return true;
-    });
+  @Override
+  protected @NotNull Class<PerlPolyNamedElement> getPsiClass() {
+    return PerlPolyNamedElement.class;
   }
 
-  public static @NotNull Collection<String> getAllNames(Project project) {
-    return StubIndex.getInstance().getAllKeys(KEY, project);
+  @Override
+  protected Class<PerlSubDefinitionElement> getLightPsiClass() {
+    return PerlSubDefinitionElement.class;
+  }
+
+  @Override
+  protected boolean matchesKey(@NotNull String key, @NotNull PerlSubDefinitionElement element) {
+    return key.equals(element.getCanonicalName());
+  }
+
+  public static @NotNull PerlLightSubDefinitionsIndex getInstance() {
+    return StubIndexExtension.EP_NAME.findExtensionOrFail(PerlLightSubDefinitionsIndex.class);
   }
 }

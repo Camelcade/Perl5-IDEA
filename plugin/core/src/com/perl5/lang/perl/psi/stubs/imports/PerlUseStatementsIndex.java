@@ -16,11 +16,8 @@
 
 package com.perl5.lang.perl.psi.stubs.imports;
 
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.psi.stubs.StubIndex;
+import com.intellij.psi.stubs.StubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
-import com.intellij.util.Processor;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import com.perl5.lang.perl.psi.stubs.PerlStubIndexBase;
 import org.jetbrains.annotations.NotNull;
@@ -42,10 +39,12 @@ public class PerlUseStatementsIndex extends PerlStubIndexBase<PerlUseStatementEl
     return KEY;
   }
 
-  public static boolean processElements(@NotNull Project project,
-                                        @NotNull GlobalSearchScope scope,
-                                        @NotNull String namespaceName,
-                                        @NotNull Processor<? super PerlUseStatementElement> processor) {
-    return StubIndex.getInstance().processElements(KEY, namespaceName, project, scope, PerlUseStatementElement.class, processor);
+  @Override
+  protected @NotNull Class<PerlUseStatementElement> getPsiClass() {
+    return PerlUseStatementElement.class;
+  }
+
+  public static @NotNull PerlUseStatementsIndex getInstance() {
+    return StubIndexExtension.EP_NAME.findExtensionOrFail(PerlUseStatementsIndex.class);
   }
 }

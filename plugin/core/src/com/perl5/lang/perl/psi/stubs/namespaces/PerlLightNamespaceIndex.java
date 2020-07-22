@@ -16,21 +16,14 @@
 
 package com.perl5.lang.perl.psi.stubs.namespaces;
 
-import com.intellij.openapi.progress.ProgressManager;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.psi.stubs.StubIndex;
+import com.intellij.psi.stubs.StubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
-import com.intellij.util.Processor;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.impl.PerlPolyNamedElement;
-import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
-import com.perl5.lang.perl.psi.stubs.PerlStubIndexBase;
+import com.perl5.lang.perl.psi.stubs.PerlLightElementsIndex;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collection;
-
-public class PerlLightNamespaceIndex extends PerlStubIndexBase<PerlPolyNamedElement> {
+public class PerlLightNamespaceIndex extends PerlLightElementsIndex<PerlNamespaceDefinitionElement> {
   public static final int VERSION = 1;
   public static final StubIndexKey<String, PerlPolyNamedElement> KEY = StubIndexKey.createIndexKey("perl.package.light.direct");
 
@@ -44,27 +37,22 @@ public class PerlLightNamespaceIndex extends PerlStubIndexBase<PerlPolyNamedElem
     return KEY;
   }
 
-  public static boolean processNamespaces(@NotNull Project project,
-                                          @NotNull String packageName,
-                                          @NotNull GlobalSearchScope scope,
-                                          @NotNull Processor<? super PerlNamespaceDefinitionElement> processor) {
-
-    return StubIndex.getInstance().processElements(KEY, packageName, project, scope, PerlPolyNamedElement.class, polyNamedElement -> {
-      ProgressManager.checkCanceled();
-      for (PerlDelegatingLightNamedElement<?> lightNamedElement : ((PerlPolyNamedElement<?>)polyNamedElement).getLightElements()) {
-        if (lightNamedElement instanceof PerlNamespaceDefinitionElement &&
-            packageName.equals(((PerlNamespaceDefinitionElement)lightNamedElement).getNamespaceName())) {
-          if (!processor.process((PerlNamespaceDefinitionElement)lightNamedElement)) {
-            return false;
-          }
-        }
-      }
-
-      return true;
-    });
+  @Override
+  protected @NotNull Class<PerlPolyNamedElement> getPsiClass() {
+    return PerlPolyNamedElement.class;
   }
 
-  public static @NotNull Collection<String> getAllNames(Project project) {
-    return StubIndex.getInstance().getAllKeys(KEY, project);
+  @Override
+  protected Class<PerlNamespaceDefinitionElement> getLightPsiClass() {
+    return PerlNamespaceDefinitionElement.class;
+  }
+
+  @Override
+  protected boolean matchesKey(@NotNull String key, @NotNull PerlNamespaceDefinitionElement element) {
+    return key.equals(element.getNamespaceName());
+  }
+
+  public static @NotNull PerlLightNamespaceIndex getInstance() {
+    return StubIndexExtension.EP_NAME.findExtensionOrFail(PerlLightNamespaceIndex.class);
   }
 }

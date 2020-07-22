@@ -34,6 +34,11 @@ public class HTMLMasonFlagsStubIndex extends PerlStubIndexBase<HTMLMasonFlagsSta
   }
 
   @Override
+  protected @NotNull Class<HTMLMasonFlagsStatement> getPsiClass() {
+    return HTMLMasonFlagsStatement.class;
+  }
+
+  @Override
   public @NotNull StubIndexKey<String, HTMLMasonFlagsStatement> getKey() {
     return KEY;
   }

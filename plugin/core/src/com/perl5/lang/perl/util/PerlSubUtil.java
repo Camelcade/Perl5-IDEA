@@ -115,15 +115,15 @@ public class PerlSubUtil implements PerlElementTypes {
                                                        @NotNull GlobalSearchScope scope,
                                                        @NotNull Processor<PerlSubDefinitionElement> processor) {
     return PerlImplicitDeclarationsService.getInstance(project).processSubsInPackage(packageName, processor) &&
-           PerlSubDefinitionReverseIndex.processSubDefinitionsInPackage(project, packageName, scope, processor) &&
-           PerlLightSubDefinitionsReverseIndex.processSubDefinitionsInPackage(project, packageName, scope, processor);
+           PerlSubDefinitionReverseIndex.getInstance().processElements(project, packageName, scope, processor) &&
+           PerlLightSubDefinitionsReverseIndex.getInstance().processLightElements(project, packageName, scope, processor);
   }
 
   public static boolean processSubDeclarationsInPackage(@NotNull Project project,
                                                         @NotNull String packageName,
                                                         @NotNull GlobalSearchScope scope,
                                                         @NotNull Processor<PerlSubDeclarationElement> processor) {
-    return PerlSubDeclarationReverseIndex.processSubDeclarationsInPackage(project, packageName, scope, processor);
+    return PerlSubDeclarationReverseIndex.getInstance().processElements(project, packageName, scope, processor);
   }
 
   public static boolean processSubDefinitions(@NotNull Project project,
@@ -131,15 +131,15 @@ public class PerlSubUtil implements PerlElementTypes {
                                               @NotNull GlobalSearchScope scope,
                                               @NotNull Processor<PerlSubDefinitionElement> processor) {
     return PerlImplicitDeclarationsService.getInstance(project).processSubs(canonicalName, processor) &&
-           PerlSubDefinitionsIndex.processSubDefinitions(project, canonicalName, scope, processor) &&
-           PerlLightSubDefinitionsIndex.processSubDefinitions(project, canonicalName, scope, processor);
+           PerlSubDefinitionsIndex.getInstance().processElements(project, canonicalName, scope, processor) &&
+           PerlLightSubDefinitionsIndex.getInstance().processLightElements(project, canonicalName, scope, processor);
   }
 
   public static boolean processSubDeclarations(@NotNull Project project,
                                                @NotNull String canonicalName,
                                                @NotNull GlobalSearchScope scope,
                                                @NotNull Processor<PerlSubDeclarationElement> processor) {
-    return PerlSubDeclarationIndex.processSubDeclarations(project, canonicalName, scope, processor);
+    return PerlSubDeclarationIndex.getInstance().processElements(project, canonicalName, scope, processor);
   }
 
 
@@ -151,8 +151,8 @@ public class PerlSubUtil implements PerlElementTypes {
    */
   public static Collection<String> getDefinedSubsNames(Project project) {
     // fixme honor scope
-    Collection<String> result = PerlSubDefinitionsIndex.getAllNames(project);
-    result.addAll(PerlLightSubDefinitionsIndex.getAllNames(project));
+    Collection<String> result = PerlSubDefinitionsIndex.getInstance().getAllNames(project);
+    result.addAll(PerlLightSubDefinitionsIndex.getInstance().getAllNames(project));
     return result;
   }
 
@@ -286,6 +286,6 @@ public class PerlSubUtil implements PerlElementTypes {
                                                      @NotNull String packageName,
                                                      @NotNull Processor<? super PsiNamedElement> processor) {
     return processRelatedSubsInPackage(project, searchScope, packageName, processor) &&
-           PerlGlobsStubIndex.processElements(project, "*" + packageName, searchScope, processor);
+           PerlGlobsStubIndex.getInstance().processElements(project, "*" + packageName, searchScope, processor);
   }
 }

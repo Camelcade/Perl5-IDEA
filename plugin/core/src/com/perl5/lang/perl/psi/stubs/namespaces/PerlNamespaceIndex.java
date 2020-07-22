@@ -16,17 +16,11 @@
 
 package com.perl5.lang.perl.psi.stubs.namespaces;
 
-import com.intellij.openapi.progress.ProgressManager;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.psi.stubs.StubIndex;
+import com.intellij.psi.stubs.StubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
-import com.intellij.util.Processor;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.stubs.PerlStubIndexBase;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Collection;
 
 
 public class PerlNamespaceIndex extends PerlStubIndexBase<PerlNamespaceDefinitionElement> {
@@ -43,17 +37,12 @@ public class PerlNamespaceIndex extends PerlStubIndexBase<PerlNamespaceDefinitio
     return KEY;
   }
 
-  public static boolean processNamespaces(@NotNull Project project,
-                                          @NotNull String packageName,
-                                          @NotNull GlobalSearchScope scope,
-                                          @NotNull Processor<? super PerlNamespaceDefinitionElement> processor) {
-    return StubIndex.getInstance().processElements(KEY, packageName, project, scope, PerlNamespaceDefinitionElement.class, element -> {
-      ProgressManager.checkCanceled();
-      return processor.process(element);
-    });
+  @Override
+  protected @NotNull Class<PerlNamespaceDefinitionElement> getPsiClass() {
+    return PerlNamespaceDefinitionElement.class;
   }
 
-  public static @NotNull Collection<String> getAllNames(Project project) {
-    return StubIndex.getInstance().getAllKeys(KEY, project);
+  public static @NotNull PerlNamespaceIndex getInstance() {
+    return StubIndexExtension.EP_NAME.findExtensionOrFail(PerlNamespaceIndex.class);
   }
 }

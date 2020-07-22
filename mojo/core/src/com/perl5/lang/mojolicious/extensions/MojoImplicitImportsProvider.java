@@ -94,8 +94,8 @@ public class MojoImplicitImportsProvider implements PerlImportsProvider {
   public @NotNull List<PerlExportDescriptor> getExportDescriptors(@NotNull PerlNamespaceDefinitionElement namespaceElement) {
     return CachedValuesManager.getCachedValue(namespaceElement, () -> {
       List<PerlExportDescriptor> result = new ArrayList<>(MojoImplicitImportsProvider.HARDCODED_DESCRIPTORS);
-      PerlLightSubDefinitionsReverseIndex
-        .processSubDefinitionsInPackage(namespaceElement.getProject(), MOJO_CONTROLLER_NS, namespaceElement.getResolveScope(), sub -> {
+      PerlLightSubDefinitionsReverseIndex.getInstance().processLightElements(
+        namespaceElement.getProject(), MOJO_CONTROLLER_NS, namespaceElement.getResolveScope(), sub -> {
           if (sub instanceof MojoHelperDefinition) {
             String packageName = sub.getNamespaceName();
             assert packageName != null;

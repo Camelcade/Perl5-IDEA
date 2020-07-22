@@ -150,8 +150,8 @@ public interface PerlNamespaceDefinitionElement extends PerlNamespaceDefinition,
     PerlTimeLogger.Counter useStatementsCounter = logger == null ? null : logger.getCounter("use");
     PerlTimeLogger.Counter exportsCounter = logger == null ? null : logger.getCounter("export");
 
-    boolean result = PerlUseStatementsIndex.processElements(
-      project, searchScope, namespaceName, createUseStatementsProcessor(processor, useStatementsCounter, exportsCounter));
+    boolean result = PerlUseStatementsIndex.getInstance().processElements(
+      project, namespaceName, searchScope, createUseStatementsProcessor(processor, useStatementsCounter, exportsCounter));
 
     if (logger != null) {
       logger.debug("Processed: ", useStatementsCounter.get(), " use statements; ",
@@ -164,7 +164,7 @@ public interface PerlNamespaceDefinitionElement extends PerlNamespaceDefinition,
   private static @NotNull Processor<PerlUseStatementElement> createUseStatementsProcessor(@NotNull PerlNamespaceEntityProcessor<? super PerlExportDescriptor> processor,
                                                                                           PerlTimeLogger.Counter useStatementsCounter,
                                                                                           PerlTimeLogger.Counter exportsCounter) {
-    Processor<PerlUseStatementElement> useStatementsProcessor = it -> {
+    return it -> {
       if (useStatementsCounter != null) {
         useStatementsCounter.inc();
       }
@@ -183,6 +183,5 @@ public interface PerlNamespaceDefinitionElement extends PerlNamespaceDefinition,
       }
       return true;
     };
-    return useStatementsProcessor;
   }
 }

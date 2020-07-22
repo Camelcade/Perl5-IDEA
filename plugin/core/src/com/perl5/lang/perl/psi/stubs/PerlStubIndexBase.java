@@ -16,11 +16,19 @@
 
 package com.perl5.lang.perl.psi.stubs;
 
+import com.intellij.openapi.progress.ProgressManager;
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StringStubIndexExtension;
+import com.intellij.psi.stubs.StubIndex;
+import com.intellij.util.Processor;
 import com.perl5.lang.perl.idea.EP.PerlPackageProcessorEP;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
 import com.perl5.lang.perl.psi.PerlSubCallHandler;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Collection;
 
 
 public abstract class PerlStubIndexBase<Psi extends PsiElement> extends StringStubIndexExtension<Psi> {
@@ -33,5 +41,21 @@ public abstract class PerlStubIndexBase<Psi extends PsiElement> extends StringSt
            PerlValuesManager.VERSION +
            PerlSubCallHandler.getHandlersVersion() +
            PerlPackageProcessorEP.getVersion();
+  }
+
+  public @NotNull Collection<String> getAllNames(Project project) {
+    return StubIndex.getInstance().getAllKeys(getKey(), project);
+  }
+
+  protected abstract @NotNull Class<Psi> getPsiClass();
+
+  public boolean processElements(@NotNull Project project,
+                                 @NotNull String keyText,
+                                 @NotNull GlobalSearchScope scope,
+                                 @NotNull Processor<? super Psi> processor) {
+    return StubIndex.getInstance().processElements(getKey(), keyText, project, scope, getPsiClass(), element -> {
+      ProgressManager.checkCanceled();
+      return processor.process(element);
+    });
   }
 }

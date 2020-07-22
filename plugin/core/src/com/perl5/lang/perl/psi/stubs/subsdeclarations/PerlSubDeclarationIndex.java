@@ -16,17 +16,11 @@
 
 package com.perl5.lang.perl.psi.stubs.subsdeclarations;
 
-import com.intellij.openapi.progress.ProgressManager;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.psi.stubs.StubIndex;
+import com.intellij.psi.stubs.StubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
-import com.intellij.util.Processor;
 import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
 import com.perl5.lang.perl.psi.stubs.PerlStubIndexBase;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Collection;
 
 
 public class PerlSubDeclarationIndex extends PerlStubIndexBase<PerlSubDeclarationElement> {
@@ -43,23 +37,12 @@ public class PerlSubDeclarationIndex extends PerlStubIndexBase<PerlSubDeclaratio
     return KEY;
   }
 
-  public static boolean processSubDeclarations(@NotNull Project project,
-                                               @NotNull String canonicalName,
-                                               @NotNull GlobalSearchScope scope,
-                                               @NotNull Processor<PerlSubDeclarationElement> processor) {
-    return StubIndex.getInstance().processElements(KEY, canonicalName, project, scope, PerlSubDeclarationElement.class, element -> {
-      ProgressManager.checkCanceled();
-      return processor.process(element);
-    });
+  @Override
+  protected @NotNull Class<PerlSubDeclarationElement> getPsiClass() {
+    return PerlSubDeclarationElement.class;
   }
 
-  /**
-   * Returns list of declared subs names
-   *
-   * @param project project to search in
-   * @return collection of sub names
-   */
-  public static Collection<String> getAllNames(Project project) {
-    return StubIndex.getInstance().getAllKeys(KEY, project);
+  public static @NotNull PerlSubDeclarationIndex getInstance() {
+    return StubIndexExtension.EP_NAME.findExtensionOrFail(PerlSubDeclarationIndex.class);
   }
 }

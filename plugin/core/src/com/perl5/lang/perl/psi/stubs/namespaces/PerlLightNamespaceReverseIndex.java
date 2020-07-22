@@ -16,19 +16,14 @@
 
 package com.perl5.lang.perl.psi.stubs.namespaces;
 
-import com.intellij.openapi.progress.ProgressManager;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.psi.stubs.StubIndex;
+import com.intellij.psi.stubs.StubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
-import com.intellij.util.Processor;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.impl.PerlPolyNamedElement;
-import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
-import com.perl5.lang.perl.psi.stubs.PerlStubIndexBase;
+import com.perl5.lang.perl.psi.stubs.PerlLightElementsIndex;
 import org.jetbrains.annotations.NotNull;
 
-public class PerlLightNamespaceReverseIndex extends PerlStubIndexBase<PerlPolyNamedElement> {
+public class PerlLightNamespaceReverseIndex extends PerlLightElementsIndex<PerlNamespaceDefinitionElement> {
   public static final int VERSION = 1;
   public static final StubIndexKey<String, PerlPolyNamedElement> KEY = StubIndexKey.createIndexKey("perl.package.light.reverse");
 
@@ -42,22 +37,22 @@ public class PerlLightNamespaceReverseIndex extends PerlStubIndexBase<PerlPolyNa
     return KEY;
   }
 
-  public static boolean processChildNamespaces(@NotNull Project project,
-                                               @NotNull String parentPackageName,
-                                               @NotNull GlobalSearchScope scope,
-                                               @NotNull Processor<PerlNamespaceDefinitionElement> processor) {
-    return StubIndex.getInstance().processElements(KEY, parentPackageName, project, scope, PerlPolyNamedElement.class, polyNamedElement -> {
-      ProgressManager.checkCanceled();
-      for (PerlDelegatingLightNamedElement<?> lightNamedElement : ((PerlPolyNamedElement<?>)polyNamedElement).getLightElements()) {
-        if (lightNamedElement instanceof PerlNamespaceDefinitionElement &&
-            ((PerlNamespaceDefinitionElement)lightNamedElement).getParentNamespacesNames().contains(parentPackageName)) {
-          if (!processor.process((PerlNamespaceDefinitionElement)lightNamedElement)) {
-            return false;
-          }
-        }
-      }
+  @Override
+  protected @NotNull Class<PerlPolyNamedElement> getPsiClass() {
+    return PerlPolyNamedElement.class;
+  }
 
-      return true;
-    });
+  @Override
+  protected Class<PerlNamespaceDefinitionElement> getLightPsiClass() {
+    return PerlNamespaceDefinitionElement.class;
+  }
+
+  @Override
+  protected boolean matchesKey(@NotNull String key, @NotNull PerlNamespaceDefinitionElement element) {
+    return element.getParentNamespacesNames().contains(key);
+  }
+
+  public static @NotNull PerlLightNamespaceReverseIndex getInstance() {
+    return StubIndexExtension.EP_NAME.findExtensionOrFail(PerlLightNamespaceReverseIndex.class);
   }
 }

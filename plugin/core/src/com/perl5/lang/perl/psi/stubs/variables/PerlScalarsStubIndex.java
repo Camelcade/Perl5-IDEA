@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.psi.stubs.variables;
 
+import com.intellij.psi.stubs.StubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import org.jetbrains.annotations.NotNull;
@@ -25,5 +26,9 @@ public class PerlScalarsStubIndex extends PerlVariablesStubIndex {
   @Override
   public @NotNull StubIndexKey<String, PerlVariableDeclarationElement> getKey() {
     return KEY_SCALAR;
+  }
+
+  public static @NotNull PerlScalarsStubIndex getInstance() {
+    return StubIndexExtension.EP_NAME.findExtensionOrFail(PerlScalarsStubIndex.class);
   }
 }

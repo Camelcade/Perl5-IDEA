@@ -145,22 +145,25 @@ public class PerlNamesCache implements Disposable {
         subsSet.add(it.getCanonicalName());
         return false;
       };
-      for (String subName : PerlSubDeclarationIndex.getAllNames(myProject)) {
+      PerlSubDeclarationIndex subDeclarationIndex = PerlSubDeclarationIndex.getInstance();
+      for (String subName : subDeclarationIndex.getAllNames(myProject)) {
         ProgressManager.checkCanceled();
-        PerlSubDeclarationIndex.processSubDeclarations(myProject, subName, scope, processor);
+        subDeclarationIndex.processElements(myProject, subName, scope, processor);
       }
 
       Processor<PerlSubDefinitionElement> perlSubDefinitionElementProcessor = it -> {
         subsSet.add(it.getCanonicalName());
         return false;
       };
-      for (String subName : PerlSubDefinitionsIndex.getAllNames(myProject)) {
+      PerlSubDefinitionsIndex subDefinitionsIndex = PerlSubDefinitionsIndex.getInstance();
+      for (String subName : subDefinitionsIndex.getAllNames(myProject)) {
         ProgressManager.checkCanceled();
-        PerlSubDefinitionsIndex.processSubDefinitions(myProject, subName, scope, perlSubDefinitionElementProcessor);
+        subDefinitionsIndex.processElements(myProject, subName, scope, perlSubDefinitionElementProcessor);
       }
-      for (String subName : PerlLightSubDefinitionsIndex.getAllNames(myProject)) {
+      PerlLightSubDefinitionsIndex lightSubDefinitionsIndex = PerlLightSubDefinitionsIndex.getInstance();
+      for (String subName : lightSubDefinitionsIndex.getAllNames(myProject)) {
         ProgressManager.checkCanceled();
-        PerlLightSubDefinitionsIndex.processSubDefinitions(myProject, subName, scope, perlSubDefinitionElementProcessor);
+        lightSubDefinitionsIndex.processLightElements(myProject, subName, scope, perlSubDefinitionElementProcessor);
       }
       myKnownSubs = Collections.unmodifiableSet(subsSet);
 
@@ -170,13 +173,15 @@ public class PerlNamesCache implements Disposable {
         namespacesSet.add(it.getNamespaceName());
         return false;
       };
-      for (String namespaceName : PerlNamespaceIndex.getAllNames(myProject)) {
+      PerlNamespaceIndex namespaceIndex = PerlNamespaceIndex.getInstance();
+      for (String namespaceName : namespaceIndex.getAllNames(myProject)) {
         ProgressManager.checkCanceled();
-        PerlNamespaceIndex.processNamespaces(myProject, namespaceName, scope, namespaceDefinitionElementProcessor);
+        namespaceIndex.processElements(myProject, namespaceName, scope, namespaceDefinitionElementProcessor);
       }
-      for (String namespaceName : PerlLightNamespaceIndex.getAllNames(myProject)) {
+      PerlLightNamespaceIndex lightNamespaceIndex = PerlLightNamespaceIndex.getInstance();
+      for (String namespaceName : lightNamespaceIndex.getAllNames(myProject)) {
         ProgressManager.checkCanceled();
-        PerlLightNamespaceIndex.processNamespaces(myProject, namespaceName, scope, namespaceDefinitionElementProcessor);
+        lightNamespaceIndex.processLightElements(myProject, namespaceName, scope, namespaceDefinitionElementProcessor);
       }
 
       myKnownNamespaces = Collections.unmodifiableSet(namespacesSet);

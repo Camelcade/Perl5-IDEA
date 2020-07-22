@@ -337,8 +337,8 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
    * fixme process only from current project
    */
   public static Collection<String> getKnownNamespaceNames(Project project) {
-    Collection<String> keys = PerlNamespaceIndex.getAllNames(project);
-    keys.addAll(PerlLightNamespaceIndex.getAllNames(project));
+    Collection<String> keys = PerlNamespaceIndex.getInstance().getAllNames(project);
+    keys.addAll(PerlLightNamespaceIndex.getInstance().getAllNames(project));
     return keys;
   }
 
@@ -354,8 +354,8 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
                                           @NotNull Project project,
                                           @NotNull GlobalSearchScope scope,
                                           @NotNull Processor<? super PerlNamespaceDefinitionElement> processor) {
-    return PerlNamespaceIndex.processNamespaces(project, packageName, scope, processor) &&
-           PerlLightNamespaceIndex.processNamespaces(project, packageName, scope, processor);
+    return PerlNamespaceIndex.getInstance().processElements(project, packageName, scope, processor) &&
+           PerlLightNamespaceIndex.getInstance().processLightElements(project, packageName, scope, processor);
   }
 
   @SuppressWarnings("UnusedReturnValue")
@@ -363,8 +363,8 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
                                                @NotNull Project project,
                                                @NotNull GlobalSearchScope scope,
                                                @NotNull Processor<PerlNamespaceDefinitionElement> processor) {
-    return PerlNamespaceReverseIndex.processChildNamespaces(project, parentPackageName, scope, processor) &&
-           PerlLightNamespaceReverseIndex.processChildNamespaces(project, parentPackageName, scope, processor);
+    return PerlNamespaceReverseIndex.getInstance().processElements(project, parentPackageName, scope, processor) &&
+           PerlLightNamespaceReverseIndex.getInstance().processLightElements(project, parentPackageName, scope, processor);
   }
 
 

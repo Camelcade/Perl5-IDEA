@@ -16,12 +16,8 @@
 
 package com.perl5.lang.perl.psi.stubs.subsdefinitions;
 
-import com.intellij.openapi.progress.ProgressManager;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.psi.stubs.StubIndex;
+import com.intellij.psi.stubs.StubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
-import com.intellij.util.Processor;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.stubs.PerlStubIndexBase;
 import org.jetbrains.annotations.NotNull;
@@ -43,13 +39,12 @@ public class PerlSubDefinitionReverseIndex extends PerlStubIndexBase<PerlSubDefi
     return KEY;
   }
 
-  public static boolean processSubDefinitionsInPackage(@NotNull Project project,
-                                                       @NotNull String packageName,
-                                                       @NotNull GlobalSearchScope scope,
-                                                       @NotNull Processor<PerlSubDefinitionElement> processor) {
-    return StubIndex.getInstance().processElements(KEY, packageName, project, scope, PerlSubDefinitionElement.class, element -> {
-      ProgressManager.checkCanceled();
-      return processor.process(element);
-    });
+  @Override
+  protected @NotNull Class<PerlSubDefinitionElement> getPsiClass() {
+    return PerlSubDefinitionElement.class;
+  }
+
+  public static @NotNull PerlSubDefinitionReverseIndex getInstance() {
+    return StubIndexExtension.EP_NAME.findExtensionOrFail(PerlSubDefinitionReverseIndex.class);
   }
 }

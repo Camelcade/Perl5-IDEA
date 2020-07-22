@@ -16,6 +16,7 @@
 
 package com.perl5.lang.mason2.psi.stubs;
 
+import com.intellij.psi.stubs.StubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
 import com.perl5.lang.mason2.psi.MasonNamespaceDefinition;
 import com.perl5.lang.perl.psi.stubs.PerlStubIndexBase;
@@ -32,7 +33,16 @@ public class MasonNamespaceDefitnitionsStubIndex extends PerlStubIndexBase<Mason
   }
 
   @Override
+  protected @NotNull Class<MasonNamespaceDefinition> getPsiClass() {
+    return MasonNamespaceDefinition.class;
+  }
+
+  @Override
   public @NotNull StubIndexKey<String, MasonNamespaceDefinition> getKey() {
     return KEY;
+  }
+
+  public static @NotNull MasonNamespaceDefitnitionsStubIndex getInstance() {
+    return StubIndexExtension.EP_NAME.findExtensionOrFail(MasonNamespaceDefitnitionsStubIndex.class);
   }
 }
