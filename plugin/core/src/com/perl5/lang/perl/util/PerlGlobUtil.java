@@ -26,13 +26,11 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
 import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
 import com.perl5.lang.perl.psi.stubs.globs.PerlGlobsStubIndex;
+import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
+import java.util.*;
 import java.util.function.Predicate;
 
 
@@ -77,32 +75,46 @@ public class PerlGlobUtil implements PerlElementTypes {
    * @return collection of globs names
    */
   public static Collection<String> getDefinedGlobsNames(Project project) {
-    return PerlUtil.getIndexKeysWithoutInternals(PerlGlobsStubIndex.KEY, project);
+    return PerlStubUtil.getIndexKeysWithoutInternals(PerlGlobsStubIndex.KEY, project);
   }
 
   /**
    * Processes all globs names with specific processor
+   * fixme: this need to be refactored, duplicates variable logic
    *
-   * @param processAll if false, only one entry per name going to be processed. May be need when filling completion
+   * @param processAll    if false, only one entry per name going to be processed. May be need when filling completion
+   * @param namespaceName optional namespace filter
    */
   public static boolean processDefinedGlobs(@NotNull Project project,
                                             @NotNull GlobalSearchScope scope,
                                             @Nullable Predicate<String> namesFilter,
                                             @NotNull Processor<PerlGlobVariable> processor,
-                                            boolean processAll) {
-    StubIndex stubIndex = StubIndex.getInstance();
-    for (String globName : stubIndex.getAllKeys(PerlGlobsStubIndex.KEY, project)) {
-      if (StringUtil.isEmpty(globName) || namesFilter != null && !namesFilter.test(globName)) {
-        continue;
+                                            boolean processAll,
+                                            @Nullable String namespaceName) {
+    List<String> namesToProcess;
+    if (namespaceName == null) {
+      namesToProcess = new ArrayList<>();
+      for (String globName : PerlStubUtil.getAllKeys(PerlGlobsStubIndex.KEY, scope)) {
+        if (StringUtil.isEmpty(globName) || namesFilter != null && !namesFilter.test(globName)) {
+          continue;
+        }
+        namesToProcess.add(globName);
       }
+    }
+    else {
+      namesToProcess = Collections.singletonList("*" + namespaceName);
+    }
 
-      boolean[] result = new boolean[]{true};
-      stubIndex.processElements(PerlGlobsStubIndex.KEY, globName, project, scope, PsiPerlGlobVariable.class, it -> {
+    Set<String> processedNames = processAll ? null : new THashSet<>();
+    StubIndex stubIndex = StubIndex.getInstance();
+    for (String key : namesToProcess) {
+      if (!stubIndex.processElements(PerlGlobsStubIndex.KEY, key, project, scope, PsiPerlGlobVariable.class, it -> {
         ProgressManager.checkCanceled();
-        result[0] = processor.process(it);
-        return processAll && result[0];
-      });
-      if (!result[0]) {
+        if (processAll || processedNames.add(it.getCanonicalName())) {
+          return processor.process(it);
+        }
+        return true;
+      })) {
         return false;
       }
     }

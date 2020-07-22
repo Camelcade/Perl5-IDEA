@@ -27,13 +27,14 @@ import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService;
-import com.perl5.lang.perl.psi.stubs.variables.PerlVariablesStubIndex;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+
+import static com.perl5.lang.perl.psi.stubs.variables.PerlVariablesStubIndex.KEY_SCALAR;
 
 
 public class PerlScalarUtil implements PerlElementTypes, PerlBuiltInScalars {
@@ -63,7 +64,7 @@ public class PerlScalarUtil implements PerlElementTypes, PerlBuiltInScalars {
         result.add(it);
       }
       return true;
-    }, true);
+    }, true, null);
     return result;
   }
 
@@ -75,20 +76,26 @@ public class PerlScalarUtil implements PerlElementTypes, PerlBuiltInScalars {
    * @return collection of variable canonical names
    */
   public static Collection<String> getDefinedGlobalScalarNames(Project project) {
-    return PerlUtil.getIndexKeysWithoutInternals(PerlVariablesStubIndex.KEY_SCALAR, project);
+    return PerlStubUtil.getIndexKeysWithoutInternals(KEY_SCALAR, project);
   }
 
   /**
    * Processes all global scalars with specific processor
    *
-   * @param processAll if false, only one entry per name going to be processed. May be need when filling completion
+   * @param processAll    if false, only one entry per name going to be processed. May be need when filling completion
+   * @param namespaceName optional namespace filter
    */
   public static boolean processDefinedGlobalScalars(@NotNull Project project,
                                                     @NotNull GlobalSearchScope scope,
                                                     @NotNull Processor<PerlVariableDeclarationElement> processor,
-                                                    boolean processAll) {
-    return PerlImplicitDeclarationsService.getInstance(project).processScalars(processor) &&
-           PerlVariableUtil.processGlobalVariables(PerlVariablesStubIndex.KEY_SCALAR, project, scope, processor, processAll);
+                                                    boolean processAll,
+                                                    @Nullable String namespaceName) {
+    if (!PerlImplicitDeclarationsService.getInstance(project).processScalars(processor)) {
+      return false;
+    }
+    return namespaceName == null ?
+           PerlVariableUtil.processGlobalVariables(KEY_SCALAR, project, scope, processor, processAll) :
+           PerlVariableUtil.processGlobalVariables(KEY_SCALAR, project, scope, processor, "*" + namespaceName, !processAll);
   }
 
   /**

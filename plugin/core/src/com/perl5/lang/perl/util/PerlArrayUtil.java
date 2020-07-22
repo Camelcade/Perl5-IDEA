@@ -30,11 +30,12 @@ import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.PsiPerlCommaSequenceExpr;
 import com.perl5.lang.perl.psi.PsiPerlParenthesisedExpr;
 import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService;
-import com.perl5.lang.perl.psi.stubs.variables.PerlVariablesStubIndex;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
+
+import static com.perl5.lang.perl.psi.stubs.variables.PerlVariablesStubIndex.KEY_ARRAY;
 
 
 public class PerlArrayUtil implements PerlElementTypes {
@@ -75,7 +76,7 @@ public class PerlArrayUtil implements PerlElementTypes {
         result.add(it);
       }
       return true;
-    }, true);
+    }, true, null);
     return result;
   }
 
@@ -86,20 +87,26 @@ public class PerlArrayUtil implements PerlElementTypes {
    * @return collection of variable canonical names
    */
   public static Collection<String> getDefinedGlobalArrayNames(Project project) {
-    return PerlUtil.getIndexKeysWithoutInternals(PerlVariablesStubIndex.KEY_ARRAY, project);
+    return PerlStubUtil.getIndexKeysWithoutInternals(KEY_ARRAY, project);
   }
 
   /**
    * Processes all global arrays names with specific processor
    *
-   * @param processAll if false, only one entry per name going to be processed. May be need when filling completion
+   * @param processAll    if false, only one entry per name going to be processed. May be need when filling completion
+   * @param namespaceName optional namespace filter
    */
   public static boolean processDefinedGlobalArrays(@NotNull Project project,
                                                    @NotNull GlobalSearchScope scope,
                                                    @NotNull Processor<PerlVariableDeclarationElement> processor,
-                                                   boolean processAll) {
-    return PerlImplicitDeclarationsService.getInstance(project).processArrays(processor) &&
-           PerlVariableUtil.processGlobalVariables(PerlVariablesStubIndex.KEY_ARRAY, project, scope, processor, processAll);
+                                                   boolean processAll,
+                                                   @Nullable String namespaceName) {
+    if (!PerlImplicitDeclarationsService.getInstance(project).processArrays(processor)) {
+      return false;
+    }
+    return namespaceName == null ?
+           PerlVariableUtil.processGlobalVariables(KEY_ARRAY, project, scope, processor, processAll) :
+           PerlVariableUtil.processGlobalVariables(KEY_ARRAY, project, scope, processor, "*" + namespaceName, !processAll);
   }
 
   /**

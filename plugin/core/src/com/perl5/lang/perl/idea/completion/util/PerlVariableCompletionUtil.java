@@ -384,32 +384,34 @@ public class PerlVariableCompletionUtil {
 
     Project project = variableNameElement.getProject();
     GlobalSearchScope resolveScope = variableNameElement.getResolveScope();
+    String namespaceName = variableCompletionProcessor.getExplicitNamespaceName();
 
     if (perlVariable instanceof PsiPerlScalarVariable) {
-      return PerlScalarUtil.processDefinedGlobalScalars(project, resolveScope, lookupGenerator, false) &&
-             PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, lookupGenerator, false) &&
-             PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, lookupGenerator, false);
+      return PerlScalarUtil.processDefinedGlobalScalars(project, resolveScope, lookupGenerator, false, null) &&
+             PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, lookupGenerator, false, null) &&
+             PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, lookupGenerator, false, null);
     }
     else if (perlVariable instanceof PsiPerlArrayVariable) {
-      return PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, lookupGenerator, false) &&
-             PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, lookupGenerator, false);
+      return PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, lookupGenerator, false, null) &&
+             PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, lookupGenerator, false, null);
     }
     else if (perlVariable instanceof PsiPerlArrayIndexVariable) {
       // global arrays
-      return PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, lookupGenerator, false);
+      return PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, lookupGenerator, false, null);
     }
     else if (perlVariable instanceof PsiPerlHashVariable) {
       // global hashes
-      return PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, lookupGenerator, false) &&
-             (!hasHashSlices(perlVariable) || PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, lookupGenerator, false));
+      return PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, lookupGenerator, false, null) &&
+             (!hasHashSlices(perlVariable) ||
+              PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, lookupGenerator, false, null));
     }
     else {
-      return PerlScalarUtil.processDefinedGlobalScalars(project, resolveScope, lookupGenerator, false) &&
-             PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, lookupGenerator, false) &&
-             PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, lookupGenerator, false) &&
+      return PerlScalarUtil.processDefinedGlobalScalars(project, resolveScope, lookupGenerator, false, null) &&
+             PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, lookupGenerator, false, null) &&
+             PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, lookupGenerator, false, null) &&
              PerlGlobUtil.processDefinedGlobs(project, resolveScope, null, typeglob ->
                variableCompletionProcessor.process(processVariableLookupElement(
-                 typeglob, perlVariable instanceof PsiPerlMethod, variableCompletionProcessor)), false);
+                 typeglob, perlVariable instanceof PsiPerlMethod, variableCompletionProcessor)), false, null);
     }
   }
 
