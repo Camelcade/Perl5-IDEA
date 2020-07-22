@@ -150,7 +150,7 @@ public class PerlCoverageRunner extends CoverageRunner {
       }
 
       try {
-        PerlFileData[] filesData = new Gson().fromJson(stdout, PerlFileData[].class);
+        PerlFileCoverageData[] filesData = new Gson().fromJson(stdout, PerlFileCoverageData[].class);
         if (filesData != null) {
           return parsePerlFileData(PerlHostData.notNullFrom(effectiveSdk), filesData);
         }
@@ -167,19 +167,19 @@ public class PerlCoverageRunner extends CoverageRunner {
     return null;
   }
 
-  private static @NotNull ProjectData parsePerlFileData(@NotNull PerlHostData<?, ?> hostData, @NotNull PerlFileData[] filesData) {
+  private static @NotNull ProjectData parsePerlFileData(@NotNull PerlHostData<?, ?> hostData, @NotNull PerlFileCoverageData[] filesData) {
     ProjectData projectData = new ProjectData();
-    for (PerlFileData perlFileData : filesData) {
-      if (StringUtil.isEmpty(perlFileData.name) || perlFileData.lines == null) {
-        LOG.warn("Name or lines is null in " + perlFileData);
+    for (PerlFileCoverageData perlFileCoverageData : filesData) {
+      if (StringUtil.isEmpty(perlFileCoverageData.name) || perlFileCoverageData.lines == null) {
+        LOG.warn("Name or lines is null in " + perlFileCoverageData);
         continue;
       }
-      String localPath = hostData.getLocalPath(perlFileData.name);
+      String localPath = hostData.getLocalPath(perlFileCoverageData.name);
       if (localPath == null) {
         continue;
       }
       ClassData classData = projectData.getOrCreateClassData(FileUtil.toSystemIndependentName(localPath));
-      Set<Map.Entry<Integer, PerlLineData>> linesEntries = perlFileData.lines.entrySet();
+      Set<Map.Entry<Integer, PerlLineData>> linesEntries = perlFileCoverageData.lines.entrySet();
       Integer maxLineNumber = linesEntries.stream().map(Map.Entry::getKey).max(Integer::compare).orElse(0);
       LineData[] linesData = new LineData[maxLineNumber + 1];
       for (Map.Entry<Integer, PerlLineData> lineEntry : linesEntries) {
