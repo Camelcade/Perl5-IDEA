@@ -31,6 +31,9 @@ public class PerlFileDataCollector extends PerlRecursiveVisitor {
   private static final Logger LOG = Logger.getInstance(PerlFileDataCollector.class);
   private final List<PerlNamespaceDefinitionElement> myNamespaces = new SmartList<>();
   private final List<PerlUseStatementElement> myUseStatements = new SmartList<>();
+  private final List<PerlVariableDeclarationElement> myGlobalVariables = new SmartList<>();
+  private final List<PerlGlobVariable> myTypeGlobs = new SmartList<>();
+
   private final @NotNull PsiElement myRoot;
 
   public PerlFileDataCollector(@NotNull PsiElement root) {
@@ -51,6 +54,8 @@ public class PerlFileDataCollector extends PerlRecursiveVisitor {
     PerlFileData subtreeData = element.getPerlFileData();
     myNamespaces.addAll(subtreeData.getNamespaces());
     myUseStatements.addAll(subtreeData.getUseStatements());
+    myGlobalVariables.addAll(subtreeData.getGlobalVariables());
+    myTypeGlobs.addAll(subtreeData.getTypeGlobs());
   }
 
   @Override
@@ -65,6 +70,20 @@ public class PerlFileDataCollector extends PerlRecursiveVisitor {
   }
 
   @Override
+  public void visitGlobVariable(@NotNull PsiPerlGlobVariable o) {
+    myTypeGlobs.add(o);
+    super.visitGlobVariable(o);
+  }
+
+  @Override
+  public void visitVariableDeclarationElement(@NotNull PsiPerlVariableDeclarationElement o) {
+    if (o.isGlobalDeclaration()) {
+      myGlobalVariables.add(o);
+    }
+    super.visitVariableDeclarationElement(o);
+  }
+
+  @Override
   public void visitUseStatement(@NotNull PerlUseStatementElement o) {
     myUseStatements.add(o);
     super.visitUseStatement(o);
@@ -72,7 +91,7 @@ public class PerlFileDataCollector extends PerlRecursiveVisitor {
 
   public @NotNull PerlFileData build() {
     myRoot.accept(this);
-    return new PerlFileData(myNamespaces, myUseStatements);
+    return new PerlFileData(myNamespaces, myUseStatements, myGlobalVariables, myTypeGlobs);
   }
 
   public static @NotNull ClearableLazyValue<PerlFileData> createLazyBuilder(@NotNull PsiElement psiElement) {
@@ -88,7 +107,10 @@ public class PerlFileDataCollector extends PerlRecursiveVisitor {
       logger.debug("Collected data from AST for ", psiElement, suffix,
                    "; size: ", PerlTimeLogger.kb(psiElement.getTextLength()), " kb ",
                    "; namespaces: ", perlFileData.getNamespaces().size(),
-                   "; use statements: ", perlFileData.getUseStatements().size());
+                   "; use statements: ", perlFileData.getUseStatements().size(),
+                   "; global variables: ", perlFileData.getGlobalVariables().size(),
+                   "; typeglobs: ", perlFileData.getTypeGlobs().size()
+      );
     }
     return perlFileData;
   }

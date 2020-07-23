@@ -22,6 +22,7 @@ import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.util.PsiTreeUtil;
@@ -51,10 +52,16 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import static com.perl5.PerlIcons.GLOB_GUTTER_ICON;
 
 public class PerlVariableCompletionUtil {
+  public static final Predicate<PerlVariableType> ARRAY_OR_HASH_PREDICATE =
+    it -> it.equals(PerlVariableType.ARRAY) || it.equals(PerlVariableType.HASH);
+  public static final Predicate<PerlVariableType> SCALAR_ARRAY_OR_HASH_PREDICATE =
+    it -> it.equals(PerlVariableType.SCALAR) || ARRAY_OR_HASH_PREDICATE.test(it);
+
   public static @NotNull LookupElementBuilder processVariableLookupElement(@NotNull String name, @NotNull PerlVariableType variableType) {
     return LookupElementBuilder.create(PerlVariable.braceName(name)).withIcon(PerlIconProvider.getIcon(variableType));
   }
@@ -384,36 +391,75 @@ public class PerlVariableCompletionUtil {
     };
 
     Project project = variableNameElement.getProject();
-    GlobalSearchScope resolveScope = variableNameElement.getResolveScope();
+    GlobalSearchScope resolveScope = PerlScopesUtil.scopeWithoutCurrentFileWithAst(
+      variableNameElement.getResolveScope(), variableNameElement);
     String namespaceName = variableCompletionProcessor.getExplicitNamespaceName();
 
     if (perlVariable instanceof PsiPerlScalarVariable) {
       return PerlScalarUtil.processDefinedGlobalScalars(project, resolveScope, lookupGenerator, false, namespaceName) &&
              PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, lookupGenerator, false, namespaceName) &&
-             PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, lookupGenerator, false, namespaceName);
+             PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, lookupGenerator, false, namespaceName) &&
+             processGlobalVariablesInAst(variableNameElement, SCALAR_ARRAY_OR_HASH_PREDICATE, lookupGenerator);
     }
     else if (perlVariable instanceof PsiPerlArrayVariable) {
       return PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, lookupGenerator, false, namespaceName) &&
-             PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, lookupGenerator, false, namespaceName);
+             PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, lookupGenerator, false, namespaceName) &&
+             processGlobalVariablesInAst(variableNameElement, ARRAY_OR_HASH_PREDICATE, lookupGenerator);
     }
     else if (perlVariable instanceof PsiPerlArrayIndexVariable) {
       // global arrays
-      return PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, lookupGenerator, false, namespaceName);
+      return PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, lookupGenerator, false, namespaceName) &&
+             processGlobalVariablesInAst(variableNameElement, it -> it.equals(PerlVariableType.ARRAY), lookupGenerator);
     }
     else if (perlVariable instanceof PsiPerlHashVariable) {
       // global hashes
       return PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, lookupGenerator, false, namespaceName) &&
              (!hasHashSlices(perlVariable) ||
-              PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, lookupGenerator, false, namespaceName));
+              PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, lookupGenerator, false, namespaceName)) &&
+             processGlobalVariablesInAst(
+               variableNameElement,
+               it -> it.equals(PerlVariableType.HASH) || hasHashSlices(perlVariable) && it.equals(PerlVariableType.ARRAY),
+               lookupGenerator);
     }
     else {
+      Processor<PerlGlobVariable> typeGlobProcessor = typeglob -> variableCompletionProcessor.process(
+        processVariableLookupElement(typeglob, perlVariable instanceof PsiPerlMethod, variableCompletionProcessor));
       return PerlScalarUtil.processDefinedGlobalScalars(project, resolveScope, lookupGenerator, false, namespaceName) &&
              PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, lookupGenerator, false, namespaceName) &&
              PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, lookupGenerator, false, namespaceName) &&
-             PerlGlobUtil.processDefinedGlobs(project, resolveScope, null, typeglob ->
-               variableCompletionProcessor.process(processVariableLookupElement(
-                 typeglob, perlVariable instanceof PsiPerlMethod, variableCompletionProcessor)), false, namespaceName);
+             PerlGlobUtil.processDefinedGlobs(project, resolveScope, null, typeGlobProcessor, false, namespaceName) &&
+             processTypeGlobsInAst(variableNameElement, typeGlobProcessor) &&
+             processGlobalVariablesInAst(variableNameElement, SCALAR_ARRAY_OR_HASH_PREDICATE, lookupGenerator);
     }
+  }
+
+  private static boolean processGlobalVariablesInAst(@NotNull PsiElement anchor,
+                                                     @NotNull Predicate<PerlVariableType> typePredicate,
+                                                     @NotNull Processor<PerlVariableDeclarationElement> processor) {
+    PsiFile file = anchor.getContainingFile().getOriginalFile();
+    if (!(file instanceof PerlFile)) {
+      return true;
+    }
+    for (PerlVariableDeclarationElement variable : ((PerlFile)file).getPerlFileData().getGlobalVariables()) {
+      if (typePredicate.test(variable.getActualType()) && !processor.process(variable)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  private static boolean processTypeGlobsInAst(@NotNull PsiElement anchor,
+                                               @NotNull Processor<PerlGlobVariable> processor) {
+    PsiFile file = anchor.getContainingFile().getOriginalFile();
+    if (!(file instanceof PerlFile)) {
+      return true;
+    }
+    for (PerlGlobVariable variable : ((PerlFile)file).getPerlFileData().getTypeGlobs()) {
+      if (!processor.process(variable)) {
+        return false;
+      }
+    }
+    return true;
   }
 
   public static void processVariables(@NotNull PerlVariableCompletionProcessor variableCompletionProcessor) {

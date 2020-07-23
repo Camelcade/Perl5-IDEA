@@ -26,15 +26,23 @@ import java.util.List;
  * Data collected from the perl file's AST-based PSI
  */
 public class PerlFileData {
-  public static final PerlFileData EMPTY_DATA = new PerlFileData(Collections.emptyList(), Collections.emptyList());
+  public static final PerlFileData EMPTY_DATA = new PerlFileData(
+    Collections.emptyList(), Collections.emptyList(), Collections.emptyList(), Collections.emptyList());
 
   private final @NotNull List<PerlNamespaceDefinitionElement> myNamespaces;
   private final @NotNull List<PerlUseStatementElement> myUseStatements;
+  private final @NotNull List<PerlVariableDeclarationElement> myGlobalVariables;
+  private final @NotNull List<PerlGlobVariable> myTypeGlobs;
 
   public PerlFileData(@NotNull List<PerlNamespaceDefinitionElement> namespaces,
-                      @NotNull List<PerlUseStatementElement> useStatements) {
+                      @NotNull List<PerlUseStatementElement> useStatements,
+                      @NotNull List<PerlVariableDeclarationElement> globalVariables,
+                      @NotNull List<PerlGlobVariable> typeGlobs
+  ) {
     myNamespaces = namespaces.isEmpty() ? Collections.emptyList() : List.copyOf(namespaces);
     myUseStatements = useStatements.isEmpty() ? Collections.emptyList() : List.copyOf(useStatements);
+    myGlobalVariables = globalVariables.isEmpty() ? Collections.emptyList() : List.copyOf(globalVariables);
+    myTypeGlobs = typeGlobs.isEmpty() ? Collections.emptyList() : List.copyOf(typeGlobs);
   }
 
   public @NotNull List<PerlNamespaceDefinitionElement> getNamespaces() {
@@ -43,5 +51,13 @@ public class PerlFileData {
 
   public @NotNull List<PerlUseStatementElement> getUseStatements() {
     return myUseStatements;
+  }
+
+  public @NotNull List<PerlGlobVariable> getTypeGlobs() {
+    return myTypeGlobs;
+  }
+
+  public @NotNull List<PerlVariableDeclarationElement> getGlobalVariables() {
+    return myGlobalVariables;
   }
 }
