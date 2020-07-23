@@ -44,6 +44,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
@@ -209,35 +210,34 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
   // fixme this need to be moved to PerlResolveUtil or Resolver
   @Override
   public @NotNull List<PerlVariableDeclarationElement> getGlobalDeclarations() {
+    String variableName = getName();
+    if (variableName == null) {
+      return Collections.emptyList();
+    }
+
     List<PerlVariableDeclarationElement> result = new ArrayList<>();
     PerlVariableType myType = getActualType();
 
     PsiElement parent = getParent(); // wrapper if any
+    String namespaceName = ObjectUtils.notNull(getExplicitNamespaceName(), PerlPackageUtil.getContextNamespaceName(this));
+    String fullQualifiedName = PerlPackageUtil.join(namespaceName, variableName);
 
-    processContainingNamespaceItems(canonicalName -> {
-      if (myType == PerlVariableType.SCALAR) {
-        for (PerlVariableDeclarationElement variable : PerlScalarUtil.getGlobalScalarDefinitions(getProject(), canonicalName)) {
-          if (!variable.equals(parent)) {
-            result.add(variable);
-          }
-        }
-      }
-      else if (myType == PerlVariableType.ARRAY) {
-        for (PerlVariableDeclarationElement variable : PerlArrayUtil.getGlobalArrayDefinitions(getProject(), canonicalName)) {
-          if (!variable.equals(parent)) {
-            result.add(variable);
-          }
-        }
-      }
-      else if (myType == PerlVariableType.HASH) {
-        for (PerlVariableDeclarationElement variable : PerlHashUtil.getGlobalHashDefinitions(getProject(), canonicalName)) {
-          if (!variable.equals(parent)) {
-            result.add(variable);
-          }
-        }
+    Processor<PerlVariableDeclarationElement> variableProcessor = it -> {
+      // fixme we must check fqn, because atm implicit variables are processed without NS restriction
+      if (!it.equals(parent) && fullQualifiedName.equals(it.getCanonicalName())) {
+        result.add(it);
       }
       return true;
-    });
+    };
+    if (myType == PerlVariableType.SCALAR) {
+      PerlScalarUtil.processDefinedGlobalScalars(getProject(), getResolveScope(), variableProcessor, true, namespaceName);
+    }
+    else if (myType == PerlVariableType.ARRAY) {
+      PerlArrayUtil.processDefinedGlobalArrays(getProject(), getResolveScope(), variableProcessor, true, namespaceName);
+    }
+    else if (myType == PerlVariableType.HASH) {
+      PerlHashUtil.processDefinedGlobalHashes(getProject(), getResolveScope(), variableProcessor, true, namespaceName);
+    }
 
     return result;
   }
