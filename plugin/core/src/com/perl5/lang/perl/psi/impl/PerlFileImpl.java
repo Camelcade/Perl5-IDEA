@@ -331,6 +331,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
     if (!isContentsLoaded()) {
       return PerlFileData.EMPTY_DATA;
     }
+    LOG.assertTrue(getVirtualFile() != null, "Do not collect file data for light files, use original ones");
     return CachedValuesManager.getCachedValue(this, () -> {
       PerlFileData newData = computePerlFileData();
       return CachedValueProvider.Result.create(newData, this);
@@ -340,6 +341,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
   protected @NotNull PerlFileData computePerlFileData() {
     PerlTimeLogger logger = PerlTimeLogger.create(LOG);
     List<PerlNamespaceDefinitionElement> namespaces = new ArrayList<>();
+    List<PerlUseStatementElement> useStatements = new ArrayList<>();
     accept(new PerlRecursiveVisitor() {
       @Override
       protected boolean shouldVisitLightElements() {
@@ -351,9 +353,17 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
         namespaces.add(o);
         super.visitPerlNamespaceDefinitionWithIdentifier(o);
       }
+
+      @Override
+      public void visitUseStatement(@NotNull PerlUseStatementElement o) {
+        useStatements.add(o);
+        super.visitUseStatement(o);
+      }
     });
-    PerlFileData result = new PerlFileData(namespaces);
-    logger.debug("Collected data from AST");
+    PerlFileData result = new PerlFileData(namespaces, useStatements);
+    logger.debug("Collected data from AST for ", this, " ", getVirtualFile(),
+                 "; namespaces: ", namespaces.size(),
+                 "; use statements: ", useStatements.size());
     return result;
   }
 }

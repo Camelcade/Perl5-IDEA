@@ -16,6 +16,9 @@
 
 package com.perl5.lang.perl.psi;
 
+import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -23,15 +26,22 @@ import java.util.List;
  * Data collected from the perl file's AST-based PSI
  */
 public class PerlFileData {
-  public static final PerlFileData EMPTY_DATA = new PerlFileData(Collections.emptyList());
+  public static final PerlFileData EMPTY_DATA = new PerlFileData(Collections.emptyList(), Collections.emptyList());
 
-  private final List<PerlNamespaceDefinitionElement> myNamespaces;
+  private final @NotNull List<PerlNamespaceDefinitionElement> myNamespaces;
+  private final @NotNull List<PerlUseStatementElement> myUseStatements;
 
-  public PerlFileData(List<PerlNamespaceDefinitionElement> namespaces) {
+  public PerlFileData(@NotNull List<PerlNamespaceDefinitionElement> namespaces,
+                      @NotNull List<PerlUseStatementElement> useStatements) {
     myNamespaces = namespaces.isEmpty() ? Collections.emptyList() : List.copyOf(namespaces);
+    myUseStatements = useStatements.isEmpty() ? Collections.emptyList() : List.copyOf(useStatements);
   }
 
-  public List<PerlNamespaceDefinitionElement> getNamespaces() {
+  public @NotNull List<PerlNamespaceDefinitionElement> getNamespaces() {
     return myNamespaces;
+  }
+
+  public @NotNull List<PerlUseStatementElement> getUseStatements() {
+    return myUseStatements;
   }
 }

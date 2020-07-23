@@ -20,6 +20,7 @@ import com.intellij.navigation.NavigationItem;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiInvalidElementAccessException;
 import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.search.GlobalSearchScope;
@@ -47,6 +48,11 @@ public interface PerlNamespaceDefinitionElement extends PerlNamespaceDefinition,
   Project getProject() throws PsiInvalidElementAccessException;
 
   default boolean processExportDescriptorsWithAst(@NotNull PerlNamespaceEntityProcessor<PerlExportDescriptor> processor) {
+    PsiFile containingFile = getContainingFile();
+    if (!(containingFile instanceof PerlFile)) {
+      return true;
+    }
+
     String namespaceName = getNamespaceName();
     if (StringUtil.isEmpty(namespaceName)) {
       return true;
@@ -59,31 +65,20 @@ public interface PerlNamespaceDefinitionElement extends PerlNamespaceDefinition,
     Processor<PerlUseStatementElement> useStatementsProcessor =
       createUseStatementsProcessor(processor, useStatementsCounter, exportsCounter);
 
-    PerlRecursiveVisitor visitor = new PerlRecursiveVisitor() {
-      @Override
-      public void visitStatement(@NotNull PsiPerlStatement o) {
+    boolean processingResult = true;
+    PerlFileData perlFileData = ((PerlFile)containingFile).getPerlFileData();
+    for (PerlUseStatementElement useStatement : perlFileData.getUseStatements()) {
+      if (namespaceName.equals(PerlPackageUtil.getContextNamespaceName(useStatement)) && !useStatementsProcessor.process(useStatement)) {
+        processingResult = false;
+        break;
       }
-
-      @Override
-      public void visitExpr(@NotNull PsiPerlExpr o) {
-      }
-
-      @Override
-      public void visitUseStatement(@NotNull PerlUseStatementElement o) {
-        if (o.getNamespaceElement() != null && namespaceName.equals(getNamespaceName())) {
-          if (!useStatementsProcessor.process(o)) {
-            stop();
-          }
-        }
-      }
-    };
-    getContainingFile().getOriginalFile().accept(visitor);
+    }
 
     logger.debug("AST processed: ",
                  useStatementsCounter.get(), " use statements; ",
                  exportsCounter.get(), " exports");
 
-    return !visitor.isStopped();
+    return processingResult;
   }
 
   default boolean processExportDescriptors(@NotNull PerlNamespaceEntityProcessor<PerlExportDescriptor> processor) {

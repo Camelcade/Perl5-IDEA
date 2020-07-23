@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.completion.util;
 
+import com.intellij.codeInsight.completion.CompletionUtil;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.project.Project;
@@ -432,6 +433,8 @@ public class PerlVariableCompletionUtil {
     if (namespaceContainer == null) {
       return;
     }
+
+    namespaceContainer = CompletionUtil.getOriginalOrSelf(namespaceContainer);
 
     String packageName = namespaceContainer.getNamespaceName();
 
