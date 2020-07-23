@@ -21,7 +21,6 @@ import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.TextRange;
-import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
@@ -197,16 +196,6 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
     return resultRef.get();
   }
 
-  private boolean processContainingNamespaceItems(@NotNull Processor<String> processor) {
-    String variableName = getName();
-    if (StringUtil.isEmpty(variableName)) {
-      return true;
-    }
-
-    String namespaceName = ObjectUtils.notNull(getExplicitNamespaceName(), PerlPackageUtil.getContextNamespaceName(this));
-    return processor.process(PerlPackageUtil.join(namespaceName, variableName));
-  }
-
   // fixme this need to be moved to PerlResolveUtil or Resolver
   @Override
   public @NotNull List<PerlVariableDeclarationElement> getGlobalDeclarations() {
@@ -244,11 +233,15 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
 
   @Override
   public @NotNull List<PerlGlobVariable> getRelatedGlobs() {
+    String variableName = getName();
+    if (variableName == null) {
+      return Collections.emptyList();
+    }
+    String namespaceName = ObjectUtils.notNull(getExplicitNamespaceName(), PerlPackageUtil.getContextNamespaceName(this));
+    String fullQualifiedName = PerlPackageUtil.join(namespaceName, variableName);
+
     List<PerlGlobVariable> result = new ArrayList<>();
-    processContainingNamespaceItems(it -> {
-      result.addAll(PerlGlobUtil.getGlobsDefinitions(getProject(), it));
-      return true;
-    });
+    PerlGlobUtil.processDefinedGlobs(getProject(), getResolveScope(), fullQualifiedName::equals, result::add, true, namespaceName);
     return result;
   }
 

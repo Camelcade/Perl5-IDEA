@@ -110,7 +110,9 @@ public class PerlGlobUtil implements PerlElementTypes {
     for (String key : namesToProcess) {
       if (!stubIndex.processElements(PerlGlobsStubIndex.KEY, key, project, scope, PsiPerlGlobVariable.class, it -> {
         ProgressManager.checkCanceled();
-        if (processAll || processedNames.add(it.getCanonicalName())) {
+        String canonicalName = it.getCanonicalName();
+        if ((namesFilter == null || namesFilter.test(canonicalName)) &&
+            (processAll || processedNames.add(canonicalName))) {
           return processor.process(it);
         }
         return true;
