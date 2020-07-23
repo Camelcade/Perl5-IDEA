@@ -52,9 +52,9 @@ public class PerlScalarUtil implements PerlElementTypes, PerlBuiltInScalars {
     return getGlobalScalarDefinitions(project, canonicalName, GlobalSearchScope.allScope(project));
   }
 
-  public static Collection<PerlVariableDeclarationElement> getGlobalScalarDefinitions(Project project,
-                                                                                      @Nullable String canonicalName,
-                                                                                      GlobalSearchScope scope) {
+  public static @NotNull Collection<PerlVariableDeclarationElement> getGlobalScalarDefinitions(@NotNull Project project,
+                                                                                               @Nullable String canonicalName,
+                                                                                               @NotNull GlobalSearchScope scope) {
     if (canonicalName == null) {
       return Collections.emptyList();
     }
