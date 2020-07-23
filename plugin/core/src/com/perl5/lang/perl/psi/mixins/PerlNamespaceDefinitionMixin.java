@@ -18,6 +18,7 @@ package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
+import com.intellij.openapi.util.ClearableLazyValue;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.StubBasedPsiElement;
@@ -53,7 +54,10 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
   implements StubBasedPsiElement<PerlNamespaceDefinitionStub>,
              PerlNamespaceDefinitionWithIdentifier,
              PerlElementPatterns,
-             PerlCompositeElement {
+             PerlCompositeElement,
+             PerlFileDataOwner {
+  private final ClearableLazyValue<PerlFileData> mySubtreeFileData = PerlFileDataCollector.createLazyBuilder(this);
+
   public PerlNamespaceDefinitionMixin(@NotNull ASTNode node) {
     super(node);
   }
@@ -228,6 +232,16 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
     public @NotNull PerlMroType getResult() {
       return myResult;
     }
+  }
+
+  @Override
+  public @NotNull PerlFileData getPerlFileData() {
+    return mySubtreeFileData.getValue();
+  }
+
+  @Override
+  public void subtreeChanged() {
+    mySubtreeFileData.drop();
   }
 
   public static class ExporterInfo implements Processor<PsiElement> {

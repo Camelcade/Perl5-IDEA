@@ -44,7 +44,10 @@ import com.perl5.lang.perl.extensions.PerlCodeGenerator;
 import com.perl5.lang.perl.extensions.generation.PerlCodeGeneratorImpl;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PerlDoExpr;
+import com.perl5.lang.perl.psi.PerlFile;
+import com.perl5.lang.perl.psi.PerlFileData;
+import com.perl5.lang.perl.psi.PerlFileDataCollector;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.stubs.PerlFileStub;
@@ -53,12 +56,14 @@ import com.perl5.lang.perl.psi.stubs.imports.runtime.PerlRuntimeImportStub;
 import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
-import com.perl5.lang.perl.util.PerlTimeLogger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 
 public class PerlFileImpl extends PsiFileBase implements PerlFile {
@@ -332,38 +337,6 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
       return PerlFileData.EMPTY_DATA;
     }
     LOG.assertTrue(getVirtualFile() != null, "Do not collect file data for light files, use original ones");
-    return CachedValuesManager.getCachedValue(this, () -> {
-      PerlFileData newData = computePerlFileData();
-      return CachedValueProvider.Result.create(newData, this);
-    });
-  }
-
-  protected @NotNull PerlFileData computePerlFileData() {
-    PerlTimeLogger logger = PerlTimeLogger.create(LOG);
-    List<PerlNamespaceDefinitionElement> namespaces = new ArrayList<>();
-    List<PerlUseStatementElement> useStatements = new ArrayList<>();
-    accept(new PerlRecursiveVisitor() {
-      @Override
-      protected boolean shouldVisitLightElements() {
-        return true;
-      }
-
-      @Override
-      public void visitPerlNamespaceDefinitionWithIdentifier(@NotNull PerlNamespaceDefinitionWithIdentifier o) {
-        namespaces.add(o);
-        super.visitPerlNamespaceDefinitionWithIdentifier(o);
-      }
-
-      @Override
-      public void visitUseStatement(@NotNull PerlUseStatementElement o) {
-        useStatements.add(o);
-        super.visitUseStatement(o);
-      }
-    });
-    PerlFileData result = new PerlFileData(namespaces, useStatements);
-    logger.debug("Collected data from AST for ", this, " ", getVirtualFile(),
-                 "; namespaces: ", namespaces.size(),
-                 "; use statements: ", useStatements.size());
-    return result;
+    return CachedValuesManager.getCachedValue(this, () -> CachedValueProvider.Result.create(PerlFileDataCollector.build(this), this));
   }
 }
