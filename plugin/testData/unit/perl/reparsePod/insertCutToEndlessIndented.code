@@ -1,0 +1,8 @@
+say 'hi';
+
+=head1 DESC
+
+
+<caret>
+
+say 'bye'

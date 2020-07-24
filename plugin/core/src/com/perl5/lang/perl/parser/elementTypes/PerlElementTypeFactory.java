@@ -45,7 +45,7 @@ public class PerlElementTypeFactory {
       case "CODE_NAME":
         return new PerlTokenTypeEx(name, PerlVariableNameElementImpl.class);
       case "POD":
-        return new PerlTokenTypeEx(name, PerlPodElement.class);
+        return new PerlPodTokenType();
       case "subname":
       case "list":
       case "unary":

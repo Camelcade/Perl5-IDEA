@@ -1,0 +1,12 @@
+say 'hi';
+
+=head1 DESC
+
+
+=cut<caret>
+
+=cut
+
+say 'bye'
+----------
+Full reparse

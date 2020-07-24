@@ -1,0 +1,17 @@
+say 'hi';
+
+=head1 DESC
+
+
+ =cut<caret>
+
+say 'bye'
+----------
+PsiElement(Perl5: POD)
+----------
+=head1 DESC
+
+
+
+
+say 'bye'
