@@ -1,0 +1,18 @@
+Subtree: Perl5 (Perl5)
+Perl5
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER)
+      PsiElement(Perl5: heredoc<<)('<<')
+      PsiPerlStringSqImpl(Perl5: STRING_SQ)
+        PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
+        PerlStringContentElementImpl(Perl5: STRING_CONTENT)('EOM')
+        PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
+    PsiElement(Perl5: ;)(';')
+  PerlHeredocElementImpl(HEREDOC)
+    PerlStringContentElementImpl(Perl5: STRING_CONTENT)('  1;\n  1;\n')
+  PsiComment(Perl5: HEREDOC_END)('EOM')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('<<'EOM';\n  1;\n  1;\nEOM')
+--------------------------------------------------------------------------------

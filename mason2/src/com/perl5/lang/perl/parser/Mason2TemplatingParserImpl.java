@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -116,7 +116,7 @@ public class Mason2TemplatingParserImpl extends Mason2ParserImpl {
       if (PerlParserUtil.consumeToken(b, SUB_NAME) && PerlParserUtil.consumeToken(b, MASON_TAG_CLOSER)) {
         PsiBuilder.Marker blockMarker = b.mark();
         PerlParserProxy.block_content(b, l);
-        blockMarker.done(BLOCK);
+        blockMarker.done(BLOCK_FAKE);
         blockMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
 
         if (r = PerlParserUtil.consumeToken(b, closeToken)) {
@@ -180,7 +180,7 @@ public class Mason2TemplatingParserImpl extends Mason2ParserImpl {
         PerlParserProxy.block_content(b, l);
 
         if (b.getTokenType() == closeToken) {
-          blockMarker.done(BLOCK);
+          blockMarker.done(BLOCK_FAKE);
           blockMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
           b.advanceLexer();
           methodMarker.done(statementTokenType);

@@ -56,7 +56,7 @@ public class MojoliciousSmartKeysUtil implements MojoliciousElementTypes, PerlEl
     IElementType elementType = PsiUtilCore.getElementType(element);
     if (elementType == MOJO_BEGIN) {
       ASTNode nextSibling = PerlPsiUtil.getNextSignificantSibling(element.getNode());
-      if (nextSibling == null || nextSibling.getElementType() != BLOCK ||
+      if (nextSibling == null || nextSibling.getElementType() != BLOCK_FAKE ||
           nextSibling.getTreeNext() == null || nextSibling.getTreeNext().getElementType() != MOJO_END
       ) {
         EditorModificationUtil.insertStringAtCaret(editor, marker, false, false);

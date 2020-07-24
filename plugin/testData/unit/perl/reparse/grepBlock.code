@@ -1,0 +1,5 @@
+grep {
+  say 'hi';
+  <caret>
+  say 'bye';
+} @args;

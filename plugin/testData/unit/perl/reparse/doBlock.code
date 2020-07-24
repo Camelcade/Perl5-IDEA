@@ -1,0 +1,5 @@
+do{
+  say 'hi';
+  <caret>
+  say 'bye';
+};

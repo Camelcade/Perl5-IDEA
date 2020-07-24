@@ -1,0 +1,5 @@
+if( $a ){
+  say 'hi';
+  <caret>
+  say 'bye';
+}

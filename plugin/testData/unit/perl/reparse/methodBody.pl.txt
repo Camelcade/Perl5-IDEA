@@ -5,7 +5,7 @@ method somename() {
 }
 
 ----------
-Element(LP_CODE_BLOCK)
+Element(Perl5: BLOCK)
 ----------
 {
     say 'hi';

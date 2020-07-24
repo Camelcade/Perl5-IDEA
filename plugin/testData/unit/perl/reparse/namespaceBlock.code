@@ -1,0 +1,5 @@
+package Foo::Bar {
+  say 'hi';
+  <caret>
+  say 'bye';
+}

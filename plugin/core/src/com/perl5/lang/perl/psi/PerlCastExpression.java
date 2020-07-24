@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,14 +16,16 @@
 
 package com.perl5.lang.perl.psi;
 
+import com.intellij.psi.util.PsiTreeUtil;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * This is interface for deref expressions. named cast to make all names consistent. todo rename all related entities
  */
 public interface PerlCastExpression extends PsiPerlExpr {
-  @Nullable
-  PsiPerlBlock getBlock();
+  default @Nullable PsiPerlBlock getBlock() {
+    return PsiTreeUtil.getChildOfType(this, PsiPerlBlock.class);
+  }
 
   @Nullable
   PsiPerlExpr getExpr();

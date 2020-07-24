@@ -8,7 +8,7 @@ UNITCHECK {
   say 'sub end';
 }
 ----------
-Element(LP_CODE_BLOCK)
+Element(Perl5: BLOCK)
 ----------
 {
    say 'block start';

@@ -1,0 +1,5 @@
+eval {
+  say 'hi';
+  <caret>
+  say 'bye';
+};

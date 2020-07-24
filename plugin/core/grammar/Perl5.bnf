@@ -623,17 +623,16 @@ private statement_item ::=
 // invoked from PerlUseVarsDeclarationsParser
 private use_vars_declarations ::= {variable_declaration_element|glob_variable|code_variable}*
 
-namespace_definition ::= namespace_definition_name (normal_block | <<parseSemicolon>> <<parseNamespaceContent>>) {pin=1 recoverWhile=recover_statement}
+namespace_definition ::= namespace_definition_name (block | <<parseSemicolon>> <<parseNamespaceContent>>) {pin=1 recoverWhile=recover_statement}
 private namespace_definition_name ::= 'package' any_package [perl_version] {pin=1 recoverWhile=recover_statement}
 namespace_content ::= real_namespace_content
-private real_namespace_content ::= {!'package' file_item} *  {extends=normal_block recoverWhile=recover_statement} //
+private real_namespace_content ::= {!'package' file_item} *  {extends=block recoverWhile=recover_statement} //
 
-private parse_block ::= normal_block
-normal_block ::= braced_block_content {elementType=block} // !-> pin disabled for dereference of anon hash; probably this slows us down
 // used in com.perl5.lang.perl.parser.PerlLazyBlockParser
-braceless_block ::= file_items {elementType=block hooks=[rightBinder="GREEDY_RIGHT_BINDER" leftBinder="GREEDY_LEFT_BINDER"]}
-meta block ::= <<x1>>
-private braced_block_content ::= '{' block_content '}' {pin=1}
+block_braceless ::= file_items {extends=block hooks=[rightBinder="GREEDY_RIGHT_BINDER" leftBinder="GREEDY_LEFT_BINDER"]}
+block ::= '{' block_content '}' {extraRoot=true pin=1}
+// this is uncertain or derivative block. should be not reparseable, may be a hash
+block_fake ::= '{' block_content '}' {extends=block pin=1}
 private block_content ::= file_item * {recoverWhile=recover_statement}
 
 nyi_statement ::= 'nyi'
@@ -661,13 +660,13 @@ private compound_statement ::=
     | cases_sequence
 
 
-named_block ::= BLOCK_NAME parse_block
+named_block ::= BLOCK_NAME block
 
 if_compound ::=  'if' conditional_block if_compound_elsif * [if_compound_else]  {pin=1}
 unless_compound ::=  'unless' conditional_block if_compound_elsif * [if_compound_else]  {pin=1}
 private if_compound_elsif ::= [POD]  'elsif' conditional_block  {pin=2}
 private if_compound_else ::= [POD]  'else' unconditional_block {pin=2}
-unconditional_block ::= parse_block
+unconditional_block ::= block
 
 /*
  Hybrid parsing for try/catch/finally.
@@ -679,9 +678,9 @@ unconditional_block ::= parse_block
  - https://metacpan.org/pod/Error
  - https://metacpan.org/pod/Dancer::Exception
  */
-trycatch_compound ::= 'TryCatch::' <<try_expr parse_block>> [<<catch_expr parse_block>>]
+trycatch_compound ::= 'TryCatch::' <<try_expr block>> [<<catch_expr block>>]
 
-trycatch_expr ::= <<try_expr sub_expr_simple>> (<<catch_expr sub_expr_simple>>|finally_expr|except_expr|otherwise_expr|continuation_expr)*
+trycatch_expr ::= <<try_expr sub_expr_simple_ensured>> (<<catch_expr sub_expr_simple_ensured>>|finally_expr|except_expr|otherwise_expr|continuation_expr)*
 meta try_expr ::= 'try' <<x1>> {pin=1}
 meta catch_expr ::= 'catch' [catch_condition] <<x1>> {pin=1}
 catch_condition ::= catch_condition_parenthesised | catch_condition_with
@@ -692,35 +691,35 @@ private where_clause ::= expr
 private catch_condition_type ::=  [type_constraints]
 type_constraints ::= any_package ['[' expr ']']
 
-finally_expr ::= 'finally' sub_expr_simple {pin=1}
-except_expr ::= 'except' sub_expr_simple {pin=1}
-otherwise_expr ::= 'otherwise' sub_expr_simple {pin=1}
-continuation_expr ::= 'continuation' sub_expr_simple {pin=1}
+finally_expr ::= 'finally' sub_expr_simple_ensured {pin=1}
+except_expr ::= 'except' sub_expr_simple_ensured {pin=1}
+otherwise_expr ::= 'otherwise' sub_expr_simple_ensured {pin=1}
+continuation_expr ::= 'continuation' sub_expr_simple_ensured {pin=1}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 conditional_block ::= parse_conditional_block
-private parse_conditional_block ::= condition_expr parse_block {pin=1}
+private parse_conditional_block ::= condition_expr block {pin=1}
 condition_expr ::= parse_parenthesised_expr
 
 given_compound ::=  'given' parse_conditional_block  {pin=1}
 when_compound ::=  'when' parse_conditional_block  {pin=1}
-default_compound ::=  'default' parse_block {pin=1}
+default_compound ::=  'default' block {pin=1}
 
 while_compound ::=  'while' parse_conditional_block [[POD] continue_block]  {pin=1}
 until_compound ::=  'until' parse_conditional_block [[POD] continue_block]  {pin=1}
 
-continue_block ::= continue_block_opener parse_block {pin=1}
+continue_block ::= continue_block_opener block {pin=1}
 private continue_block_opener ::= 'continue' &'{'
 
 block_compound ::= parse_block_compound
-private parse_block_compound ::= parse_block [[POD] continue_block]
+private parse_block_compound ::= block [[POD] continue_block]
 
 // for/foreach
 // fixme why the heck there is no parsing error on "for" and there is an error on "use", both pinned
 // fixme add recover
 private for_or_foreach ::= for_compound|foreach_compound
 
-for_compound ::= {'for'|'foreach'} for_iterator parse_block {pin=2}
+for_compound ::= {'for'|'foreach'} for_iterator block {pin=2}
 private for_iterator ::= '(' [for_init]  ';' [for_condition] ';' [for_mutator] ')' {pin=3}
 for_init ::= expr {recoverWhile=recover_parenthesised}
 for_condition ::= expr {recoverWhile=recover_parenthesised}
@@ -738,7 +737,7 @@ private normal_statement ::= expr [<<parseStatementModifier>>] {pin=1}
 //private normal_statement_body ::= expr {recoverWhile=recover_statement}
 
 // fixme adjust parsing of this thing to avoid duplicates
-sub_definition ::=  ['my'|'our'|'state'|'async'] 'sub' sub_names_token sub_definition_parameters parse_block
+sub_definition ::=  ['my'|'our'|'state'|'async'] 'sub' sub_names_token sub_definition_parameters block
 sub_declaration ::=  ['my'|'our'|'state'] 'sub' sub_names_token sub_declaration_parameters <<statementSemi>>
 private sub_declaration_parameters ::= sub_definition_parameters {recoverWhile=recover_statement}
 
@@ -821,7 +820,7 @@ private parse_use_statement ::=  'use' <<parseUseParameters use_no_parameters>> 
 private parse_no_statement ::=  'no' use_no_parameters <<statementSemi>> {pin=1}
 
 private use_no_parameters ::= use_module_parameters | use_version_parameters {recoverWhile=recover_statement}
-private use_module_parameters ::= any_package [perl_version [comma]] [expr];
+private use_module_parameters ::= any_package [perl_version [comma]] [anon_hash_ensured | expr];
 private use_version_parameters ::= perl_version;
 
 undef_expr ::=  'undef' (undef_params | '(' undef_params ')') ? {pin=1}
@@ -906,7 +905,7 @@ term_expr ::=
     | undef_expr
     | print_expr
     | replacement_regex
-    | sub_expr_full
+    | sub_expr
     | fun_expr
     | method_expr
     | eval_expr
@@ -948,7 +947,7 @@ private grep_map_arguments_variants ::=
     parse_scalar_expr comma grep_map_sort_tail |
     expr
 
-private grep_map_sort_with_block ::= parse_block [comma] grep_map_sort_tail
+private grep_map_sort_with_block ::= block [comma] grep_map_sort_tail
 
 private grep_map_sort_tail ::= parse_list_expr
 
@@ -1013,12 +1012,9 @@ lp_or_xor_expr ::= expr ({'or'|'xor'} expr)+
 print_expr ::=  ('print'|'printf'|'say') ( <<parenthesised_call_arguments [print_arguments] >> | [print_arguments] ) {pin=1}
 private print_arguments ::= perl_handle expr | expr
 
-private sub_expr_full ::= <<sub_expr parse_sub_expr_full>>
-private parse_sub_expr_full ::= 'sub' sub_definition_parameters parse_block
-
-private sub_expr_simple ::= <<sub_expr parse_block>>
-
-meta sub_expr ::=  <<x1>>  // fixme make sure that this one checked after definition and declaration
+sub_expr_simple ::= block_fake {elementType=sub_expr}
+sub_expr_simple_ensured ::= block {elementType=sub_expr}
+sub_expr ::=  'sub' sub_definition_parameters block  // fixme make sure that this one checked after definition and declaration
 
 file_read_expr ::= LEFT_ANGLE [perl_handle_expr|scalar_variable] RIGHT_ANGLE
 file_glob_expr ::= LEFT_ANGLE qq_string_content_with_lp RIGHT_ANGLE
@@ -1044,7 +1040,7 @@ private regex_replace_regex ::= {'r/' | 'r}' 'r{' } regex_replacement
 regex_replacement ::= regex_replacement_content
 private regex_replacement_content ::= [qq_string_content]
 private regex_replace_code ::= {'re/' | 'r}' 're{' } [regex_code]
-private regex_code ::= braceless_block
+private regex_code ::= block_braceless
 
 perl_regex_modifiers ::= '/m' +
 perl_regex ::= perl_regex_item * {hooks=[rightBinder="GREEDY_RIGHT_BINDER" leftBinder="GREEDY_LEFT_BINDER"]}
@@ -1070,11 +1066,11 @@ tr_modifiers ::= '/m' +
 
 ////////////////////////// end of regular expressions //////////////////////////////////////////////////////////////////
 
-do_block_expr ::=  'do' parse_block
+do_block_expr ::=  'do' block
 do_expr ::= 'do' expr {pin=1}
 
 eval_expr ::=  'eval' [eval_argument] {pin=1}
-private eval_argument ::= parenthesised_expr | parse_block | expr
+private eval_argument ::= parenthesised_expr | block | expr
 
 private variable_declaration ::=
     variable_declaration_global
@@ -1104,6 +1100,7 @@ variable_declaration_element ::= '\\'? lexical_variable
 /////////////////////////////////// REFERENCES /////////////////////////////////////////////////////////////////////////
 anon_array ::= '[' [expr] ']' //{pin=1}
 anon_hash ::= '{' [expr] '}' <<validateAnonHashSuffix>>  // fixme pin here after solving problem with code block and prototypes
+anon_hash_ensured ::= '{' [expr] '}' {pin=1 elementType=anon_hash}
 
 //////////////////////////// END OF REFERENCES /////////////////////////////////////////////////////////////////////////
 
@@ -1116,20 +1113,20 @@ left array_slice ::= array_index
 left hash_slice ::= hash_index
 
 array_cast_expr ::= '$@' array_cast_target
-private array_cast_target ::= {<<block array_braced_cast_target>> | scalar_primitive}
-private array_braced_cast_target ::= '@{' block_content '@}' {pin=1}
+private array_cast_target ::= {block_array | scalar_primitive}
+block_array ::= '@{' block_content '@}' {extends=block pin=1}
 
 hash_cast_expr ::= '$%' hash_cast_target
-private hash_cast_target ::= {<<block hash_braced_cast_target >> | scalar_primitive}
-private hash_braced_cast_target ::= '%{' block_content '%}' {pin=1}
+private hash_cast_target ::= { block_hash  | scalar_primitive}
+block_hash ::= '%{' block_content '%}' {extends=block pin=1}
 
 private scalar_primitive ::= scalar_variable | scalar_cast_expr | undef_expr  // shouldn't it be in term ? (check declarations)
 
 // |'$}'|'@}'|'%}'|'*}'|'&}'
 scalar_cast_expr ::= '$$' scalar_cast_target
 scalar_index_cast_expr ::= '$#' scalar_cast_target
-private scalar_cast_target ::= {<<block scalar_braced_cast_target>> | scalar_primitive}
-private scalar_braced_cast_target ::= '${' block_content '$}' {pin=1}
+private scalar_cast_target ::= {block_scalar | scalar_primitive}
+block_scalar ::= '${' block_content '$}' {extends=block pin=1}
 
 private scalar_or_element ::= scalar_primitive [array_element|hash_element]
 
@@ -1140,15 +1137,15 @@ private glob_or_element ::= glob_primitive [glob_slot]
 private glob_primitive ::= glob_variable | glob_cast_expr
 
 glob_cast_expr ::= '$*' glob_cast_target
-private glob_cast_target ::= {<<block glob_braced_cast_target>> | scalar_primitive}
-private glob_braced_cast_target ::= '*{' block_content '*}' {pin=1}
+private glob_cast_target ::= {block_glob | scalar_primitive}
+block_glob ::= '*{' block_content '*}' {extends=block pin=1}
 
 left glob_slot ::= hash_index
 
 private code_primitive ::= code_variable | code_cast_expr
 code_cast_expr ::= '$&' code_cast_target
-private code_cast_target ::= {<<block code_braced_cast_target>> | scalar_primitive}
-private code_braced_cast_target ::= '&{' block_content '&}' {pin=1}
+private code_cast_target ::= {block_code | scalar_primitive}
+block_code ::= '&{' block_content '&}' {extends=block pin=1}
 
 
 // extended nested element for using in ()
@@ -1241,7 +1238,7 @@ private method_tokens ::= 'list' | 'unary' | 'unary_custom'| 'argumentless' |
 label_declaration ::= <<parseLabelDeclaration>> // custom faster method
 label_expr ::= IDENTIFIER|'subname' !'('
 private perl_version ::= <<parsePerlVersion>>
-private perl_handle ::=  perl_handle_expr | parse_block | scalar_variable !('{'|'['|<<isOperatorToken>>)
+private perl_handle ::=  perl_handle_expr | block | scalar_variable !('{'|'['|<<isOperatorToken>>)
 perl_handle_expr ::= [QUALIFYING_PACKAGE] HANDLE
 
 //////////////////////////////////// constants /////////////////////////////////////////////////////////////////////////
@@ -1327,7 +1324,7 @@ fun_expr ::= 'fun' func_body
 method_expr ::= 'fp_method' method_body
 private method_body ::= [method_signature] func_or_method_body
 private func_body ::= [func_signature] func_or_method_body
-private func_or_method_body ::= [sub_attributes] parse_block
+private func_or_method_body ::= [sub_attributes] block
 
 private fp_modifier_named_body ::= sub_names_token method_signature func_or_method_body
 
@@ -1403,10 +1400,10 @@ heredoc_qx ::= qx_string_content{extraRoot=true}
 /******************************************* End of Lazy parsable elements *******************************************************/
 
 /**********************************************************  switch.pm ******************************************************************/
-switch_compound ::= 'switch' switch_condition normal_block {pin=1}
+switch_compound ::= 'switch' switch_condition block {pin=1}
 switch_condition ::= '(' parse_scalar_expr ')'
 private cases_sequence ::= case_compound + [case_default]
-case_compound ::= 'case' case_condition normal_block {pin=1}
-case_condition ::= '(' parse_scalar_expr ')' | normal_block | string | number_constant | anon_array | match_regex | compile_regex
+case_compound ::= 'case' case_condition block {pin=1}
+case_condition ::= '(' parse_scalar_expr ')' | block | string | number_constant | anon_array | match_regex | compile_regex
 case_default ::= if_compound_else
 /******************************************************* end of switch.pm ***************************************************************/

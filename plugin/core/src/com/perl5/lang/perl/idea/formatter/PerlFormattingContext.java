@@ -57,8 +57,7 @@ import java.util.Map;
 import static com.intellij.formatting.WrapType.*;
 import static com.intellij.psi.codeStyle.CommonCodeStyleSettings.*;
 import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.*;
-import static com.perl5.lang.perl.lexer.PerlTokenSets.ALL_QUOTE_OPENERS;
-import static com.perl5.lang.perl.lexer.PerlTokenSets.STATEMENTS;
+import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
 
 public class PerlFormattingContext implements PerlFormattingTokenSets {
   private static final Logger LOG = Logger.getInstance(PerlFormattingContext.class);
@@ -308,7 +307,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
         }
       }
 
-      if (parentNodeType == BLOCK) {
+      if (BLOCK_LIKE_CONTAINERS.contains(parentNodeType)) {
         boolean afterOpener = BLOCK_OPENERS.contains(child1Type) && ((PerlFormattingBlock)child1).isFirst();
         boolean beforeCloser = BLOCK_CLOSERS.contains(child2Type) && ((PerlFormattingBlock)child2).isLast();
         IElementType grandParentElementType = PsiUtilCore.getElementType(parentNode.getTreeParent());

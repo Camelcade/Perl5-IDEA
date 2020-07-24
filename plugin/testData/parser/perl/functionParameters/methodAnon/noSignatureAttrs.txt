@@ -9,7 +9,7 @@ Perl5
         PsiElement(Perl5: method)('method')
       PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
         PsiPerlSubExprImpl(Perl5: SUB_EXPR)
-          PsiPerlBlockImpl(Perl5: BLOCK)
+          PsiPerlBlockFakeImpl(Perl5: BLOCK_FAKE)
             PsiElement(Perl5: {)('{')
             PsiPerlStatementImpl(Perl5: STATEMENT)
               PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)

@@ -426,7 +426,7 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
     else if (elementType == HASH_SLICE) {
       return join(getBaseName(((PsiPerlHashSlice)element).getExpr()), SLICE);
     }
-    else if (elementType == BLOCK) {
+    else if (BLOCK_LIKE_CONTAINERS.contains(elementType)) {
       PsiElement[] blockChildren = element.getChildren();
       if (blockChildren.length == 1) {
         PsiElement perlStatement = blockChildren[0];

@@ -37,8 +37,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.*;
-import static com.perl5.lang.perl.lexer.PerlTokenSets.HEREDOC_BODIES_TOKENSET;
-import static com.perl5.lang.perl.lexer.PerlTokenSets.VARIABLE_DECLARATIONS;
+import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.NO_STATEMENT;
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.USE_STATEMENT;
 
@@ -51,7 +50,7 @@ public class PerlIndentProcessor implements PerlElementTypes {
   }
 
   public TokenSet getBlockLikeContainers() {
-    return PerlFormattingTokenSets.BLOCK_LIKE_CONTAINERS;
+    return PerlFormattingTokenSets.FORMATTING_BLOCK_LIKE_CONTAINERS;
   }
 
   public TokenSet getUnindentableContainers() {
@@ -111,7 +110,8 @@ public class PerlIndentProcessor implements PerlElementTypes {
       return Indent.getAbsoluteNoneIndent();
     }
 
-    if ((nodeType == BLOCK || nodeType == SUB_EXPR) && PerlFormattingTokenSets.MULTI_PARAM_BLOCK_CONTAINERS.contains(parentNodeType)) {
+    if ((BLOCK_LIKE_CONTAINERS.contains(nodeType) || nodeType == SUB_EXPR) &&
+        PerlFormattingTokenSets.MULTI_PARAM_BLOCK_CONTAINERS.contains(parentNodeType)) {
       return Indent.getNoneIndent();
     }
 
@@ -198,7 +198,7 @@ public class PerlIndentProcessor implements PerlElementTypes {
       List<Block> subBlocks = block.getSubBlocks();
       IElementType currentBlockElementType = subBlocks.size() > newChildIndex
                                              ? ASTBlock.getElementType(subBlocks.get(newChildIndex)) : null;
-      if (currentBlockElementType == BLOCK || currentBlockElementType == REGEX_QUOTE_CLOSE) {
+      if (BLOCK_LIKE_CONTAINERS.contains(currentBlockElementType) || currentBlockElementType == REGEX_QUOTE_CLOSE) {
         return Indent.getNormalIndent();
       }
     }
@@ -210,7 +210,7 @@ public class PerlIndentProcessor implements PerlElementTypes {
     List<Block> subBlocks = block.getSubBlocks();
     if (subBlocks.size() > newChildIndex) {
       Block nextBlock = subBlocks.get(newChildIndex);
-      if (nextBlock instanceof ASTBlock && PsiUtilCore.getElementType(((ASTBlock)nextBlock).getNode()) == BLOCK) {
+      if (nextBlock instanceof ASTBlock && BLOCK_LIKE_CONTAINERS.contains(PsiUtilCore.getElementType(((ASTBlock)nextBlock).getNode()))) {
         return Indent.getNormalIndent();
       }
     }

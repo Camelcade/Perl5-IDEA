@@ -37,7 +37,7 @@ Perl5
         PsiElement(Perl5: ,)(',')
         PsiPerlArrayCastExprImpl(Perl5: ARRAY_CAST_EXPR)
           PsiElement(Perl5: $@)('@')
-          PsiPerlBlockImpl(Perl5: BLOCK)
+          PsiPerlBlockArrayImpl(Perl5: BLOCK_ARRAY)
             PsiElement(Perl5: @{)('{')
             PsiPerlStatementImpl(Perl5: STATEMENT)
               PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)

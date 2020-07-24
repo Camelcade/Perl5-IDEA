@@ -1,0 +1,5 @@
+foreach( @args ){
+  say 'hi';
+  <caret>
+  say 'bye';
+}

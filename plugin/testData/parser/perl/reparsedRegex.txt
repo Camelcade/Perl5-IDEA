@@ -1,0 +1,21 @@
+Subtree: Perl5 (Perl5)
+Perl5
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlReplacementRegexImpl(Perl5: REPLACEMENT_REGEX)
+      PsiElement(Perl5: s)('s')
+      PsiElement(Perl5: r{)('{')
+      PsiPerlPerlRegexImpl(Perl5: PERL_REGEX)
+        PsiElement(Perl5: regex)('so 1; me')
+      PsiElement(Perl5: r})('}')
+      PsiElement(Perl5: re{)('{')
+      PsiPerlBlockBracelessImpl(Perl5: BLOCK_BRACELESS)
+        <empty list>
+      PsiElement(Perl5: r})('}')
+      PsiPerlPerlRegexModifiersImpl(Perl5: PERL_REGEX_MODIFIERS)
+        PsiElement(Perl5: /m)('e')
+    PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('s{so 1; me}{}e;')
+--------------------------------------------------------------------------------

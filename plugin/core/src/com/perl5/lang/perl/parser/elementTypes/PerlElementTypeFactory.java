@@ -158,7 +158,21 @@ public class PerlElementTypeFactory {
       case "BITWISE_OR_XOR_EXPR":
         return new PerlElementTypeEx(name, PsiPerlBitwiseOrXorExprImpl.class);
       case "BLOCK":
-        return new PerlElementTypeEx(name, PsiPerlBlockImpl.class);
+        return new PerlLazyCodeBlockElementType(name, PsiPerlBlockImpl.class);
+      case "BLOCK_BRACELESS":
+        return new PerlElementTypeEx(name, PsiPerlBlockBracelessImpl.class);
+      case "BLOCK_SCALAR":
+        return new PerlElementTypeEx(name, PsiPerlBlockScalarImpl.class);
+      case "BLOCK_ARRAY":
+        return new PerlElementTypeEx(name, PsiPerlBlockArrayImpl.class);
+      case "BLOCK_HASH":
+        return new PerlElementTypeEx(name, PsiPerlBlockHashImpl.class);
+      case "BLOCK_GLOB":
+        return new PerlElementTypeEx(name, PsiPerlBlockGlobImpl.class);
+      case "BLOCK_CODE":
+        return new PerlElementTypeEx(name, PsiPerlBlockCodeImpl.class);
+      case "BLOCK_FAKE":
+        return new PerlElementTypeEx(name, PsiPerlBlockFakeImpl.class);
       case "BLOCK_COMPOUND":
         return new PerlElementTypeEx(name, PsiPerlBlockCompoundImpl.class);
       case "CALL_ARGUMENTS":

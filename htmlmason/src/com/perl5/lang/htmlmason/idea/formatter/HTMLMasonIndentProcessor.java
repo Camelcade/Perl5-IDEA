@@ -79,7 +79,7 @@ public class HTMLMasonIndentProcessor extends PerlIndentProcessor implements HTM
     ));
 
   public static final TokenSet BLOCK_LIKE_CONTAINERS = TokenSet.orSet(
-    PerlFormattingTokenSets.BLOCK_LIKE_CONTAINERS,
+    PerlFormattingTokenSets.FORMATTING_BLOCK_LIKE_CONTAINERS,
     TokenSet.create(
       HTML_MASON_BLOCK
     ));

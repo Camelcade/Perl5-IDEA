@@ -1,0 +1,4 @@
+sub something {
+  <caret>
+  1;
+}

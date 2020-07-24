@@ -1,0 +1,13 @@
+foreach( @args ){
+  say 'hi';
+  say 'hi';<caret>
+  say 'bye';
+}
+----------
+Element(Perl5: BLOCK)
+----------
+{
+  say 'hi';
+  
+  say 'bye';
+}

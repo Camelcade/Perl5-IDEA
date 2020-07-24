@@ -1,0 +1,8 @@
+if( $a ){
+  say 'if';
+}
+elsif($b) {
+  say 'hi';
+  <caret>
+  say 'bye';
+}

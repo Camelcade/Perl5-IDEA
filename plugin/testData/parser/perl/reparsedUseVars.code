@@ -1,0 +1,4 @@
+qw/
+  <caret>
+  $firstvar
+/;

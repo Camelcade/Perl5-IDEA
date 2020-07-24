@@ -22,6 +22,7 @@ import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.LineColumn;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.CharsetToolkit;
+import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiErrorElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiRecursiveElementVisitor;
@@ -45,7 +46,6 @@ public abstract class PerlParserTestBase extends PerlLightTestCaseBase {
   private boolean mySkipSpaces = true;
 
   private static final List<String> REPLACES = Arrays.asList(
-    EditorTestUtil.CARET_TAG,
     EditorTestUtil.SELECTION_START_TAG,
     EditorTestUtil.SELECTION_END_TAG,
     EditorTestUtil.BLOCK_SELECTION_START_TAG,
@@ -100,6 +100,17 @@ public abstract class PerlParserTestBase extends PerlLightTestCaseBase {
 
   protected void doTest(boolean ensureNoErrorElements) {
     initWithFileSmart();
+    doTestWithoutInit(ensureNoErrorElements);
+  }
+
+  protected void doTestWithTyping(@NotNull String toType) {
+    initWithFileSmart();
+    myFixture.type(toType);
+    WriteAction.run(() -> PsiDocumentManager.getInstance(getProject()).commitAllDocuments());
+    doTestWithoutInit(true);
+  }
+
+  protected void doTestWithoutInit(boolean ensureNoErrorElements) {
     PsiFile psiFile = getFile();
     String text = psiFile.getText();
 

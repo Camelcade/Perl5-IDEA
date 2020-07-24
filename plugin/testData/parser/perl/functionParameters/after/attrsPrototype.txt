@@ -33,7 +33,7 @@ Perl5
             PsiPerlCommaSequenceExprImpl(Perl5: COMMA_SEQUENCE_EXPR)
               PsiPerlArrayCastExprImpl(Perl5: ARRAY_CAST_EXPR)
                 PsiElement(Perl5: $@)('@')
-                PsiPerlBlockImpl(Perl5: BLOCK)
+                PsiPerlBlockArrayImpl(Perl5: BLOCK_ARRAY)
                   PsiElement(Perl5: @{)('{')
                   PsiPerlStatementImpl(Perl5: STATEMENT)
                     PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)

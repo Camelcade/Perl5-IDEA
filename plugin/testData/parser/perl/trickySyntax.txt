@@ -146,7 +146,7 @@ Perl5
               PsiElement(Perl5: regex)(')([\[\{]?)')
             PsiElement(Perl5: r})('}')
             PsiElement(Perl5: re{)('<')
-            PsiPerlBlockImpl(Perl5: BLOCK)
+            PsiPerlBlockBracelessImpl(Perl5: BLOCK_BRACELESS)
               PsiPerlIfCompoundImpl(Perl5: IF_COMPOUND)
                 PsiElement(Perl5: if)('if')
                 PsiPerlConditionalBlockImpl(Perl5: CONDITIONAL_BLOCK)

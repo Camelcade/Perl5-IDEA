@@ -44,6 +44,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static com.perl5.lang.perl.lexer.PerlTokenSets.BLOCK_LIKE_CONTAINERS;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.HEREDOC_BODIES_TOKENSET;
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.USE_STATEMENT;
 
@@ -243,7 +244,7 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
   public @Nullable String getPlaceholderText(@NotNull ASTNode node) {
     IElementType elementType = node.getElementType();
 
-    if (elementType == BLOCK) {
+    if (BLOCK_LIKE_CONTAINERS.contains(elementType)) {
       return PH_CODE_BLOCK;
     }
     if (elementType == STRING_LIST) {
@@ -290,7 +291,7 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
     else if (elementType == USE_STATEMENT || elementType == REQUIRE_EXPR) {
       return CodeFoldingSettings.getInstance().COLLAPSE_IMPORTS;
     }
-    else if (elementType == BLOCK) {
+    else if (BLOCK_LIKE_CONTAINERS.contains(elementType)) {
       return CodeFoldingSettings.getInstance().COLLAPSE_METHODS;
     }
     else if (elementType == COMMENT_LINE || elementType == COMMENT_BLOCK) {

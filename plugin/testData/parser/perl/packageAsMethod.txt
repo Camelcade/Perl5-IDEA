@@ -57,7 +57,7 @@ Perl5
             PsiElement(Perl5: ,)(',')
             PsiPerlScalarCastExprImpl(Perl5: SCALAR_CAST_EXPR)
               PsiElement(Perl5: $$)('$')
-              PsiPerlBlockImpl(Perl5: BLOCK)
+              PsiPerlBlockScalarImpl(Perl5: BLOCK_SCALAR)
                 PsiElement(Perl5: ${)('{')
                 PsiPerlStatementImpl(Perl5: STATEMENT)
                   PsiPerlTernaryExprImpl(Perl5: TERNARY_EXPR)

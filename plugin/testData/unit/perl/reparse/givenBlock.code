@@ -1,0 +1,5 @@
+given($a) {
+  say 'hi';
+  <caret>
+  say 'bye';
+}

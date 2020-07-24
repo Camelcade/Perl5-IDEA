@@ -1529,7 +1529,7 @@ Perl5
             PsiPerlGlobSlotImpl(Perl5: GLOB_SLOT)
               PsiPerlGlobCastExprImpl(Perl5: GLOB_CAST_EXPR)
                 PsiElement(Perl5: $*)('*')
-                PsiPerlBlockImpl(Perl5: BLOCK)
+                PsiPerlBlockGlobImpl(Perl5: BLOCK_GLOB)
                   PsiElement(Perl5: *{)('{')
                   PsiPerlStatementImpl(Perl5: STATEMENT)
                     PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)

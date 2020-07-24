@@ -342,7 +342,7 @@ Perl5
                 PsiElement(Perl5: regex)('content')
             PsiElement(Perl5: r})(')')
             PsiElement(Perl5: re{)('/')
-            PsiPerlBlockImpl(Perl5: BLOCK)
+            PsiPerlBlockBracelessImpl(Perl5: BLOCK_BRACELESS)
               PsiPerlStatementImpl(Perl5: STATEMENT)
                 PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
                   PsiElement(Perl5: say)('say')

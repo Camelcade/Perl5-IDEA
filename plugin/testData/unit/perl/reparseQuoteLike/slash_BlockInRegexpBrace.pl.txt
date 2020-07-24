@@ -7,10 +7,12 @@ sub something{
 }
 
 ----------
-Element(LP_CODE_BLOCK)
+Element(Perl5: BLOCK)
 ----------
-
+{
+  s{test}{
     say 'hi';
     
     say 'hi'
-  
+  }e;
+}

@@ -36,6 +36,36 @@ public class PerlParserTest extends PerlParserTestBase {
   }
 
   @Test
+  public void testReparsedBlockSub() {doTestWithTyping("1;");}
+
+  @Test
+  public void testReparsedBlockInRegexp() {doTestWithTyping("1;");}
+
+  @Test
+  public void testReparsedHeredoc() {doTestWithTyping("1;");}
+
+  @Test
+  public void testReparsedHeredocQQ() {doTestWithTyping("1;");}
+
+  @Test
+  public void testReparsedHeredocQX() {doTestWithTyping("1;");}
+
+  @Test
+  public void testReparsedQw() {doTestWithTyping("1;");}
+
+  @Test
+  public void testReparsedUseVars() {doTestWithTyping("$othervar");}
+
+  @Test
+  public void testReparsedRegex() {doTestWithTyping("1;");}
+
+  @Test
+  public void testReparsedRegexX() {doTestWithTyping("1;");}
+
+  @Test
+  public void testReparsedRegexXX() {doTestWithTyping("1;");}
+
+  @Test
   public void testLazyParsableNestedBlocks() {doTest();}
 
   @Test

@@ -368,6 +368,10 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
     TokenSet.create(LP_STRING_QW, PARSABLE_STRING_USE_VARS), LAZY_PARSABLE_REGEXPS
   );
 
+  TokenSet BLOCK_LIKE_CONTAINERS = TokenSet.create(
+    BLOCK, BLOCK_FAKE, BLOCK_SCALAR, BLOCK_ARRAY, BLOCK_HASH, BLOCK_GLOB, BLOCK_CODE, BLOCK_BRACELESS
+  );
+
   TokenSet HEREDOC_ENDS = TokenSet.create(HEREDOC_END, HEREDOC_END_INDENTABLE);
 
   TokenSet LOOP_CONTROL_KEYWORDS = TokenSet.create(

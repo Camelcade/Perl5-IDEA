@@ -69,6 +69,60 @@ public class PerlReparseTest extends PerlLightTestCase {
   public void testDestoryOpenBrace() {doTestNamedBlock("DESTROY", "grep {");}
 
   @Test
+  public void testDoBlock() {doTest("say 'hi';");}
+
+  @Test
+  public void testElseBlock() {doTest("say 'hi';");}
+
+  @Test
+  public void testElsifBlock() {doTest("say 'hi';");}
+
+  @Test
+  public void testEvalBlock() {doTest("say 'hi';");}
+
+  @Test
+  public void testForBlock() {doTest("say 'hi';");}
+
+  @Test
+  public void testForeachBlock() {doTest("say 'hi';");}
+
+  @Test
+  public void testGivenBlock() {doTest("say 'hi';");}
+
+  @Test
+  public void testGrepBlock() {doTest("say 'hi';");}
+
+  @Test
+  public void testHandleBlock() {doTest("say 'hi';");}
+
+  @Test
+  public void testIfBlock() {doTest("say 'hi';");}
+
+  @Test
+  public void testMapBlock() {doTest("say 'hi';");}
+
+  @Test
+  public void testNamespaceBlock() {doTest("say 'hi';");}
+
+  @Test
+  public void testSortBlock() {doTest("say 'hi';");}
+
+  @Test
+  public void testSubAnonBlock() {doTest("say 'hi';");}
+
+  @Test
+  public void testUnlessBlock() {doTest("say 'hi';");}
+
+  @Test
+  public void testUntilBlock() {doTest("say 'hi';");}
+
+  @Test
+  public void testWhenBlock() {doTest("say 'hi';");}
+
+  @Test
+  public void testWhileBlock() {doTest("say 'hi';");}
+
+  @Test
   public void testAfterBody() {doTest("say 'hi';");}
 
   @Test

@@ -1,0 +1,21 @@
+Subtree: Perl5 (Perl5)
+Perl5
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::something
+    PsiElement(Perl5: sub)('sub')
+    PerlSubNameElementImpl(Perl5: subname)('something')
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
+          PsiElement(Perl5: NUMBER)('1')
+        PsiElement(Perl5: ;)(';')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
+          PsiElement(Perl5: NUMBER)('1')
+        PsiElement(Perl5: ;)(';')
+      PsiElement(Perl5: })('}')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('sub something {\n  1;\n  1;\n}')
+--------------------------------------------------------------------------------

@@ -73,7 +73,7 @@ MARKER_QX1<caret>
     say 'sub end';
 }
 ----------
-Element(LP_CODE_BLOCK)
+Element(Perl5: BLOCK)
 ----------
 {
     say 'sub start';

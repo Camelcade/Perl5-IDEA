@@ -1,0 +1,5 @@
+say {
+  say 'hi';
+  <caret>
+  say 'bye';
+} 42;

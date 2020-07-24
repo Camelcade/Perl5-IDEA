@@ -1,0 +1,5 @@
+sort {
+  say 'hi';
+  <caret>
+  say 'bye';
+} @args;

@@ -56,7 +56,7 @@ public interface PerlReplacementRegex extends PerlRegexExpression {
     PsiElement run = getFirstChild();
     while (run != null) {
       IElementType elementType = PsiUtilCore.getElementType(run);
-      if (elementType == PERL_REGEX || elementType == BLOCK || elementType == REGEX_REPLACEMENT) {
+      if (elementType == PERL_REGEX || elementType == BLOCK_BRACELESS || elementType == REGEX_REPLACEMENT) {
         result.add(run);
       }
       else if (PerlTokenSets.LAZY_PARSABLE_REGEXPS.contains(elementType)) {

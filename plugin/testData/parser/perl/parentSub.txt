@@ -7,7 +7,7 @@ Perl5
         PerlSubNameElementImpl(Perl5: subname)('parent')
       PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
         PsiPerlSubExprImpl(Perl5: SUB_EXPR)
-          PsiPerlBlockImpl(Perl5: BLOCK)
+          PsiPerlBlockFakeImpl(Perl5: BLOCK_FAKE)
             PsiElement(Perl5: {)('{')
             PsiPerlStatementImpl(Perl5: STATEMENT)
               PsiPerlAssignExprImpl(Perl5: ASSIGN_EXPR)
