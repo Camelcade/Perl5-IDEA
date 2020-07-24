@@ -30,13 +30,9 @@ import com.intellij.psi.PsiManager;
 import com.intellij.psi.PsiTreeChangeAdapter;
 import com.intellij.psi.PsiTreeChangeEvent;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.util.Processor;
 import com.intellij.util.messages.MessageBusConnection;
 import com.intellij.util.ui.update.MergingUpdateQueue;
 import com.intellij.util.ui.update.Update;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
-import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
-import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlLightNamespaceIndex;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceIndex;
 import com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationIndex;
@@ -141,69 +137,39 @@ public class PerlNamesCache implements Disposable {
     ReadAction.nonBlocking(() -> {
       PerlTimeLogger logger = PerlTimeLogger.create(LOG);
       logger.debug("Starting to update names cache at");
-      Set<String> subsSet = new HashSet<>();
 
       GlobalSearchScope scope = GlobalSearchScope.allScope(myProject);
-      Processor<PerlSubDeclarationElement> processor = it -> {
-        subsSet.add(it.getCanonicalName());
-        return false;
-      };
       PerlSubDeclarationIndex subDeclarationIndex = PerlSubDeclarationIndex.getInstance();
       Collection<String> declarationsNames = subDeclarationIndex.getAllNames(myProject);
+      Set<String> subsSet = new HashSet<>(declarationsNames);
       logger.debug("Got declarations names: ", declarationsNames.size());
-      for (String subName : declarationsNames) {
-        ProgressManager.checkCanceled();
-        subDeclarationIndex.processElements(myProject, subName, scope, processor);
-      }
-      logger.debug("Processed declarations");
+      ProgressManager.checkCanceled();
 
-      Processor<PerlSubDefinitionElement> perlSubDefinitionElementProcessor = it -> {
-        subsSet.add(it.getCanonicalName());
-        return false;
-      };
       PerlSubDefinitionsIndex subDefinitionsIndex = PerlSubDefinitionsIndex.getInstance();
       Collection<String> definitionsNames = subDefinitionsIndex.getAllNames(myProject);
+      subsSet.addAll(definitionsNames);
       logger.debug("Got definitions names: ", definitionsNames.size());
-      for (String subName : definitionsNames) {
-        ProgressManager.checkCanceled();
-        subDefinitionsIndex.processElements(myProject, subName, scope, perlSubDefinitionElementProcessor);
-      }
-      logger.debug("Processed definitions");
+      ProgressManager.checkCanceled();
 
       PerlLightSubDefinitionsIndex lightSubDefinitionsIndex = PerlLightSubDefinitionsIndex.getInstance();
       Collection<String> lightDefinitionsNames = lightSubDefinitionsIndex.getAllNames(myProject);
+      subsSet.addAll(lightDefinitionsNames);
       logger.debug("Got light definitions names: ", lightDefinitionsNames.size());
-      for (String subName : lightDefinitionsNames) {
-        ProgressManager.checkCanceled();
-        lightSubDefinitionsIndex.processLightElements(myProject, subName, scope, perlSubDefinitionElementProcessor);
-      }
-      logger.debug("Processed light definitions");
+      ProgressManager.checkCanceled();
       myKnownSubs = Collections.unmodifiableSet(subsSet);
 
       Set<String> namespacesSet = new HashSet<>(PerlPackageUtil.CORE_PACKAGES_ALL);
 
-      Processor<PerlNamespaceDefinitionElement> namespaceDefinitionElementProcessor = it -> {
-        namespacesSet.add(it.getNamespaceName());
-        return false;
-      };
       PerlNamespaceIndex namespaceIndex = PerlNamespaceIndex.getInstance();
       Collection<String> namespacesNames = namespaceIndex.getAllNames(myProject);
+      namespacesSet.addAll(namespacesNames);
       logger.debug("Got namespaces names: ", namespacesNames.size());
-      for (String namespaceName : namespacesNames) {
-        ProgressManager.checkCanceled();
-        namespaceIndex.processElements(myProject, namespaceName, scope, namespaceDefinitionElementProcessor);
-      }
-      logger.debug("Processed namespaces");
+      ProgressManager.checkCanceled();
 
       PerlLightNamespaceIndex lightNamespaceIndex = PerlLightNamespaceIndex.getInstance();
       Collection<String> lightNamespacesNames = lightNamespaceIndex.getAllNames(myProject);
+      namespacesSet.addAll(lightNamespacesNames);
       logger.debug("Got light namespaces names: ", lightNamespacesNames.size());
-      for (String namespaceName : lightNamespacesNames) {
-        ProgressManager.checkCanceled();
-        lightNamespaceIndex.processLightElements(myProject, namespaceName, scope, namespaceDefinitionElementProcessor);
-      }
-      logger.debug("Processed light namespaces");
-
       myKnownNamespaces = Collections.unmodifiableSet(namespacesSet);
 
       logger.debug("Names cache updated");
