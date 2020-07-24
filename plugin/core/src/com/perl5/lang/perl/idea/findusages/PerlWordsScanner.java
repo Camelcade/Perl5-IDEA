@@ -26,7 +26,7 @@ import com.perl5.lang.perl.lexer.adapters.PerlMergingLexerAdapter;
 
 public class PerlWordsScanner extends DefaultWordsScanner implements PerlElementTypes {
   public PerlWordsScanner() {
-    super(new PerlMergingLexerAdapter(PerlLexingContext.create(null).withAllowToMergeCode(false).withEnforcedSublexing(true)),
+    super(new PerlMergingLexerAdapter(PerlLexingContext.create(null).withEnforcedSublexing(true)),
           PerlParserDefinition.IDENTIFIERS,
           TokenSet.orSet(PerlParserDefinition.COMMENTS, TokenSet.create(POD)),
           PerlParserDefinition.LITERALS

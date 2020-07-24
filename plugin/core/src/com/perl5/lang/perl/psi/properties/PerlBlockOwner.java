@@ -16,14 +16,10 @@
 
 package com.perl5.lang.perl.psi.properties;
 
-import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.psi.PsiPerlBlock;
 import org.jetbrains.annotations.Nullable;
-
-import static com.perl5.lang.perl.lexer.PerlTokenSets.LAZY_CODE_BLOCKS;
 
 /**
  * Implement this interface if element contains block
@@ -41,15 +37,6 @@ public interface PerlBlockOwner extends PsiElement {
    * @return a nested block. This method is aware about lazy parsable blocks
    */
   default @Nullable PsiPerlBlock getBlockSmart() {
-    PsiPerlBlock block = getBlock();
-    if (block != null) {
-      return block;
-    }
-
-    ASTNode lazyNode = getNode().findChildByType(LAZY_CODE_BLOCKS);
-    if (lazyNode == null) {
-      return null;
-    }
-    return ObjectUtils.tryCast(lazyNode.getPsi().getFirstChild(), PsiPerlBlock.class);
+    return getBlock();
   }
 }

@@ -24,7 +24,7 @@ import com.perl5.lang.perl.lexer.PerlLexingContext;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Third level of lexer adapter merges necessary tokens
+ * Second level of lexer adapter merges necessary tokens
  *
  * @see PerlSublexingLexerAdapter
  */

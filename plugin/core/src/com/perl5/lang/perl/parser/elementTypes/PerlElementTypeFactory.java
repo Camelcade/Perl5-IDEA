@@ -79,10 +79,6 @@ public class PerlElementTypeFactory {
         return new PerlLazyHeredocElementType(name, PerlHeredocElementImpl.class, PerlLexer.STRING_QX);
       case "HEREDOC":
         return new PerlLazyHeredocElementType(name, PerlHeredocElementImpl.class, PerlLexer.STRING_Q);
-      case "LP_CODE_BLOCK":
-        return new PerlLazyCodeBlockElementType(name, PsiPerlLpCodeBlockImpl.class);
-      case "LP_CODE_BLOCK_WITH_TRYCATCH":
-        return new PerlLazyCodeBlockElementTypeWithTryCatch(name, PsiPerlLpCodeBlockWithTrycatchImpl.class);
       case "LP_REGEX_X":
         return new PerlQuoteLikeContentLazyElementType(name, PerlLexer.MATCH_REGEX_X);
       case "LP_REGEX_XX":

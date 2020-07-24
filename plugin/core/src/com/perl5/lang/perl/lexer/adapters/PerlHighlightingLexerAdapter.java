@@ -29,7 +29,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class PerlHighlightingLexerAdapter extends LayeredLexer implements PerlElementTypes {
   public PerlHighlightingLexerAdapter(@Nullable Project project) {
-    this(project, new PerlMergingLexerAdapter(PerlLexingContext.create(project).withAllowToMergeCode(false).withEnforcedSublexing(true)));
+    this(project, new PerlMergingLexerAdapter(PerlLexingContext.create(project).withEnforcedSublexing(true)));
   }
 
   public PerlHighlightingLexerAdapter(@Nullable Project project, @NotNull Lexer lexer) {
@@ -37,12 +37,6 @@ public class PerlHighlightingLexerAdapter extends LayeredLexer implements PerlEl
     registerSelfStoppingLayer(
       new PodLexerAdapter(project),
       new IElementType[]{POD},
-      IElementType.EMPTY_ARRAY
-    );
-    PerlLexingContext baseContext = PerlLexingContext.create(project).withAllowToMergeCode(false).withEnforcedSublexing(true);
-    registerSelfStoppingLayer(
-      new PerlMergingLexerAdapter(baseContext.withTryCatchSyntax(true)),
-      new IElementType[]{LP_CODE_BLOCK_WITH_TRYCATCH},
       IElementType.EMPTY_ARRAY
     );
   }

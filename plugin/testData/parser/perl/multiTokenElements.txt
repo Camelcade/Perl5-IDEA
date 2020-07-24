@@ -52,10 +52,9 @@ Perl5
   PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::something
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('something')
-    PsiPerlLpCodeBlockImpl(LP_CODE_BLOCK)
-      PsiPerlBlockImpl(Perl5: BLOCK)
-        PsiElement(Perl5: {)('{')
-        PsiElement(Perl5: })('}')
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiElement(Perl5: })('}')
   PsiPerlSubDeclarationImpl(SUB_DECLARATION)@main::something
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('something')

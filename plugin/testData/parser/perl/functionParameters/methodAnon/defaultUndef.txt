@@ -32,11 +32,10 @@ Perl5
           PsiPerlUndefExprImpl(Perl5: UNDEF_EXPR)
             PsiElement(Perl5: undef)('undef')
       PsiElement(Perl5: ))(')')
-      PsiPerlLpCodeBlockImpl(LP_CODE_BLOCK)
-        PsiPerlBlockImpl(Perl5: BLOCK)
-          PsiElement(Perl5: {)('{')
-          PsiComment(Perl5: COMMENT_LINE)('# three arguments, all optional')
-          PsiElement(Perl5: })('}')
+      PsiPerlBlockImpl(Perl5: BLOCK)
+        PsiElement(Perl5: {)('{')
+        PsiComment(Perl5: COMMENT_LINE)('# three arguments, all optional')
+        PsiElement(Perl5: })('}')
 --------------------------------------------------------------------------------
 Subtree: Perl5 POD (Perl5 POD)
 POD file

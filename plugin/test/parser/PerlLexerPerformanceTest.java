@@ -54,7 +54,7 @@ public class PerlLexerPerformanceTest extends PerlParserTestBase {
   }
 
   private long testLexing(String testData) {
-    PerlLexingContext lexingContext = PerlLexingContext.create(getProject()).withAllowToMergeCode(false).withEnforcedSublexing(true);
+    PerlLexingContext lexingContext = PerlLexingContext.create(getProject()).withEnforcedSublexing(true);
     PerlMergingLexerAdapter perlLexer = new PerlMergingLexerAdapter(lexingContext);
     perlLexer.start(testData, 0, testData.length(), 0);
 

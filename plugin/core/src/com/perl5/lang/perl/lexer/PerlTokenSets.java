@@ -353,8 +353,6 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
     STATEMENT, USE_STATEMENT, NO_STATEMENT
   );
 
-  TokenSet LAZY_CODE_BLOCKS = TokenSet.create(LP_CODE_BLOCK, LP_CODE_BLOCK_WITH_TRYCATCH);
-
   TokenSet LAZY_PARSABLE_REGEXPS = TokenSet.create(
     LP_REGEX_X,
     LP_REGEX_XX
@@ -367,7 +365,7 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
   );
 
   TokenSet TRANSPARENT_ELEMENT_TYPES = TokenSet.orSet(
-    TokenSet.create(LP_STRING_QW, PARSABLE_STRING_USE_VARS), LAZY_CODE_BLOCKS, LAZY_PARSABLE_REGEXPS
+    TokenSet.create(LP_STRING_QW, PARSABLE_STRING_USE_VARS), LAZY_PARSABLE_REGEXPS
   );
 
   TokenSet HEREDOC_ENDS = TokenSet.create(HEREDOC_END, HEREDOC_END_INDENTABLE);

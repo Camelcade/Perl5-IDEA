@@ -4,10 +4,9 @@ Perl5
     PsiElement(Perl5: async)('async')
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('somesub')
-    PsiPerlLpCodeBlockImpl(LP_CODE_BLOCK)
-      PsiPerlBlockImpl(Perl5: BLOCK)
-        PsiElement(Perl5: {)('{')
-        PsiElement(Perl5: })('}')
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiElement(Perl5: })('}')
 --------------------------------------------------------------------------------
 Subtree: Perl5 POD (Perl5 POD)
 POD file

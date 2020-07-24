@@ -19,7 +19,6 @@ package com.perl5.lang.perl.psi;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import org.jetbrains.annotations.Contract;
@@ -27,7 +26,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
-import static com.perl5.lang.perl.lexer.PerlTokenSets.LAZY_CODE_BLOCKS;
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.FILE;
 
 /**
@@ -60,11 +58,7 @@ public interface PerlBlock extends PerlLexicalScope {
    */
   @Contract(pure = true)
   default @NotNull PsiElement getContainer() {
-    PsiElement container = getParent();
-    if (LAZY_CODE_BLOCKS.contains(PsiUtilCore.getElementType(container))) {
-      container = container.getParent();
-    }
-    return container;
+    return getParent();
   }
 
   /**

@@ -57,7 +57,8 @@ import java.util.Map;
 import static com.intellij.formatting.WrapType.*;
 import static com.intellij.psi.codeStyle.CommonCodeStyleSettings.*;
 import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.*;
-import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
+import static com.perl5.lang.perl.lexer.PerlTokenSets.ALL_QUOTE_OPENERS;
+import static com.perl5.lang.perl.lexer.PerlTokenSets.STATEMENTS;
 
 public class PerlFormattingContext implements PerlFormattingTokenSets {
   private static final Logger LOG = Logger.getInstance(PerlFormattingContext.class);
@@ -669,7 +670,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       PsiElement lastLeaf = PsiTreeUtil.getDeepestLast(blockNode.getPsi());
       return PsiUtilCore.getElementType(lastLeaf) != SEMICOLON;
     }
-    else if (LAZY_CODE_BLOCKS.contains(elementType) && PsiUtilCore.getElementType(blockNode.getTreeParent()) == REPLACEMENT_REGEX) {
+    else if (PsiUtilCore.getElementType(blockNode) == REPLACEMENT_REGEX) {
       return true;
     }
 

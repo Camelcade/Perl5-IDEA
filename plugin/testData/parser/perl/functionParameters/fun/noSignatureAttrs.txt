@@ -8,7 +8,7 @@ Perl5
         PsiPerlSubCallImpl(SUB_CALL)
           PsiPerlMethodImpl(Perl5: METHOD)
             PerlSubNameElementImpl(Perl5: subname)('somefunc')
-    PsiErrorElement:<expression>, <statement modifier>, LP_CODE_BLOCK, LP_CODE_BLOCK_WITH_TRYCATCH, Perl5: (, Perl5: ,, Perl5: =>, Perl5: package::name or Perl5: { expected, got ':'
+    PsiErrorElement:<expression>, <statement modifier>, Perl5: (, Perl5: ,, Perl5: =>, Perl5: package::name or Perl5: { expected, got ':'
       PsiElement(Perl5: :)(':')
     PsiErrorElement:Semicolon expected
       <empty list>

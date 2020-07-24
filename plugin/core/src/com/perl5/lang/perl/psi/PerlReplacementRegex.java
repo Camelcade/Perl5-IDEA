@@ -59,9 +59,6 @@ public interface PerlReplacementRegex extends PerlRegexExpression {
       if (elementType == PERL_REGEX || elementType == BLOCK || elementType == REGEX_REPLACEMENT) {
         result.add(run);
       }
-      else if (elementType == LP_CODE_BLOCK) {
-        ContainerUtil.addIfNotNull(result, PsiTreeUtil.findChildOfType(run, PsiPerlBlock.class));
-      }
       else if (PerlTokenSets.LAZY_PARSABLE_REGEXPS.contains(elementType)) {
         ContainerUtil.addIfNotNull(result, PsiTreeUtil.findChildOfType(run, PsiPerlPerlRegex.class));
       }

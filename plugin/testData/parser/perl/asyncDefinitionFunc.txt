@@ -14,10 +14,9 @@ Perl5
                 PerlSubNameElementImpl(Perl5: subname)('somesub')
               PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
                 PsiPerlSubExprImpl(Perl5: SUB_EXPR)
-                  PsiPerlLpCodeBlockImpl(LP_CODE_BLOCK)
-                    PsiPerlBlockImpl(Perl5: BLOCK)
-                      PsiElement(Perl5: {)('{')
-                      PsiElement(Perl5: })('}')
+                  PsiPerlBlockImpl(Perl5: BLOCK)
+                    PsiElement(Perl5: {)('{')
+                    PsiElement(Perl5: })('}')
 --------------------------------------------------------------------------------
 Subtree: Perl5 POD (Perl5 POD)
 POD file

@@ -372,9 +372,6 @@
     LEFT_PAREN='('
     RIGHT_PAREN=')'
 
-	// abstract token to make code blocks
-    LEFT_BRACE_CODE_START='code{'
-
     LEFT_BRACE='{'
     RIGHT_BRACE='}'
 
@@ -422,6 +419,8 @@
     ANNOTATION_UNKNOWN_KEY='#@unknown'
 
     // lazy parsable tokens parsed in-place
+    LP_CODE_BLOCK = "LP_CODE_BLOCK"
+    LP_CODE_BLOCK_WITH_TRYCATCH = "LP_CODE_BLOCK_WITH_TRYCATCH"
     LP_STRING_RE = "LP_STRING_RE"
     LP_STRING_TR = "LP_STRING_TR"
     LP_STRING_QQ = "LP_STRING_QQ"
@@ -629,7 +628,7 @@ private namespace_definition_name ::= 'package' any_package [perl_version] {pin=
 namespace_content ::= real_namespace_content
 private real_namespace_content ::= {!'package' file_item} *  {extends=normal_block recoverWhile=recover_statement} //
 
-private parse_block ::= <<consumeTokens 'LP_CODE_BLOCK'>> | <<consumeTokens 'LP_CODE_BLOCK_WITH_TRYCATCH'>> | normal_block
+private parse_block ::= normal_block
 normal_block ::= braced_block_content {elementType=block} // !-> pin disabled for dereference of anon hash; probably this slows us down
 // used in com.perl5.lang.perl.parser.PerlLazyBlockParser
 braceless_block ::= file_items {elementType=block hooks=[rightBinder="GREEDY_RIGHT_BINDER" leftBinder="GREEDY_LEFT_BINDER"]}
@@ -1045,7 +1044,7 @@ private regex_replace_regex ::= {'r/' | 'r}' 'r{' } regex_replacement
 regex_replacement ::= regex_replacement_content
 private regex_replacement_content ::= [qq_string_content]
 private regex_replace_code ::= {'re/' | 'r}' 're{' } [regex_code]
-private regex_code ::= <<consumeTokens 'LP_CODE_BLOCK'>> | braceless_block
+private regex_code ::= braceless_block
 
 perl_regex_modifiers ::= '/m' +
 perl_regex ::= perl_regex_item * {hooks=[rightBinder="GREEDY_RIGHT_BINDER" leftBinder="GREEDY_LEFT_BINDER"]}
@@ -1396,8 +1395,6 @@ lp_string_qw ::= [qw_string_content] {extraRoot=true}
 lp_regex_x ::= perl_regex {extraRoot=true}
 lp_regex_xx ::= perl_regex {extraRoot=true}
 
-lp_code_block ::= normal_block | braceless_block {extraRoot=true implements="com.perl5.lang.perl.psi.properties.PerlStatementsContainer"}
-lp_code_block_with_trycatch ::= normal_block | braceless_block {extraRoot=true implements="com.perl5.lang.perl.psi.properties.PerlStatementsContainer"}
 parsable_string_use_vars ::= use_vars_declarations {extraRoot=true}
 comment_annotation ::= annotation {extraRoot=true}
 heredoc ::= sq_string_content {extraRoot=true}

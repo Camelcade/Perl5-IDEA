@@ -17,10 +17,9 @@
 package com.perl5.lang.perl.lexer.adapters;
 
 /**
- * Second level adapter, relexes lazy blocks if necessary
+ * First level adapter, relexes lazy blocks if necessary
  *
  * @see com.perl5.lang.perl.lexer.adapters.PerlMergingLexerAdapter
- * @see com.perl5.lang.perl.lexer.adapters.PerlCodeMergingLexerAdapter
  */
 
 import com.intellij.lexer.FlexAdapter;
@@ -29,11 +28,12 @@ import com.intellij.lexer.LexerBase;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.lexer.LexerWithContext;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.lexer.PerlLexingContext;
+import com.perl5.lang.perl.lexer.PerlProtoLexer;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -52,6 +52,8 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
     SUBLEXINGS_MAP.put(LP_STRING_QQ_RESTRICTED, PerlLexer.STRING_QQ_RESTRICTED);
     SUBLEXINGS_MAP.put(LP_STRING_QX_RESTRICTED, PerlLexer.STRING_QX_RESTRICTED);
     SUBLEXINGS_MAP.put(LP_REGEX, PerlLexer.MATCH_REGEX);
+    SUBLEXINGS_MAP.put(LP_CODE_BLOCK, PerlLexer.YYINITIAL);
+    SUBLEXINGS_MAP.put(LP_CODE_BLOCK_WITH_TRYCATCH, PerlLexer.YYINITIAL);
 
     ENFORCED_SUBLEXINGS_MAP.put(LP_STRING_QW, PerlLexer.STRING_LIST);
     ENFORCED_SUBLEXINGS_MAP.put(LP_REGEX_X, PerlLexer.MATCH_REGEX_X);
@@ -59,12 +61,13 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
 
     ENFORCED_SUBLEXINGS_MAP.put(COMMENT_ANNOTATION, PerlLexer.ANNOTATION);
     ENFORCED_SUBLEXINGS_MAP.put(HEREDOC, PerlLexer.STRING_Q);
-    ENFORCED_SUBLEXINGS_MAP.put(LP_CODE_BLOCK, PerlLexer.YYINITIAL);
     ENFORCED_SUBLEXINGS_MAP.put(HEREDOC_QQ, PerlLexer.STRING_QQ);
     ENFORCED_SUBLEXINGS_MAP.put(HEREDOC_QX, PerlLexer.STRING_QX);
   }
 
-  private final LexerWithContext myMainLexerWithContext;
+  private final @NotNull PerlProtoLexer myPerlLexer;
+  private final @NotNull FlexAdapter myFlexAdapter;
+  private final @NotNull PerlLexingContext myLexingContext;
   private boolean myIsSublexing = false;
   private PerlSublexingLexerAdapter mySubLexer;
   private int myTokenStart;
@@ -74,11 +77,13 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
   private char mySingleOpenQuoteChar = 0;
 
   public PerlSublexingLexerAdapter(@NotNull PerlLexingContext perlLexingContext) {
-    this(LexerWithContext.create(new PerlCodeMergingLexerAdapter(perlLexingContext), perlLexingContext));
+    this(new PerlLexer(null).withProject(perlLexingContext.getProject()), perlLexingContext);
   }
 
-  public PerlSublexingLexerAdapter(@NotNull LexerWithContext lexerWithContext) {
-    myMainLexerWithContext = lexerWithContext;
+  public PerlSublexingLexerAdapter(@NotNull PerlProtoLexer perlLexer, @NotNull PerlLexingContext lexingContext) {
+    myPerlLexer = perlLexer;
+    myFlexAdapter = new FlexAdapter(perlLexer);
+    myLexingContext = lexingContext;
   }
 
   /**
@@ -91,21 +96,39 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
                     char openQuoteChar) {
     LOG.assertTrue(subLexingState == PerlLexer.STRING_Q || subLexingState == PerlLexer.STRING_LIST);
     start(buffer, startOffset, endOffset, subLexingState);
-    Lexer mainLexer = getMainLexer();
-    LOG.assertTrue(mainLexer instanceof PerlCodeMergingLexerAdapter, "Got: " + myMainLexerWithContext);
-    ((PerlCodeMergingLexerAdapter)mainLexer).getPerlLexer().setSingleOpenQuoteChar(openQuoteChar);
+    PerlLexer perlLexer = getPerlLexer();
+    if (perlLexer == null) {
+      LOG.error("Expected to get perl lexer, got " + myPerlLexer);
+      return;
+    }
+    perlLexer.setSingleOpenQuoteChar(openQuoteChar);
   }
 
   @Override
   public void start(@NotNull CharSequence buffer, int startOffset, int endOffset, int initialState) {
-    getMainLexer().start(buffer, startOffset, endOffset, initialState);
+    PerlLexingContext lexingContext = getLexingContext();
+    int enforcedInitialState = lexingContext.getEnforcedInitialState();
+    getFlexAdapter().start(buffer, startOffset, endOffset, enforcedInitialState >= 0 ? enforcedInitialState : initialState);
+    PerlLexer perlLexer = getPerlLexer();
+    if (perlLexer != null) {
+      perlLexer.setSingleOpenQuoteChar(lexingContext.getOpenChar());
+      perlLexer.setHasTryCatch(lexingContext.isWithTryCatch());
+    }
     myTokenStart = myTokenEnd = startOffset;
     myTokenType = null;
     myIsSublexing = false;
   }
 
-  private @NotNull Lexer getMainLexer() {
-    return myMainLexerWithContext.getLexer();
+  private @Nullable PerlLexer getPerlLexer() {
+    return myPerlLexer instanceof PerlLexer ? (PerlLexer)myPerlLexer : null;
+  }
+
+  private @NotNull FlexAdapter getFlexAdapter() {
+    return myFlexAdapter;
+  }
+
+  private @NotNull PerlLexingContext getLexingContext() {
+    return myLexingContext;
   }
 
   @Override
@@ -140,17 +163,17 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
 
   @Override
   public @NotNull CharSequence getBufferSequence() {
-    return getMainLexer().getBufferSequence();
+    return getFlexAdapter().getBufferSequence();
   }
 
   @Override
   public int getBufferEnd() {
-    return getMainLexer().getBufferEnd();
+    return getFlexAdapter().getBufferEnd();
   }
 
   private @NotNull PerlSublexingLexerAdapter getSubLexer() {
     if (mySubLexer == null) {
-      mySubLexer = new PerlSublexingLexerAdapter(myMainLexerWithContext.getLexingContext().withOpenChar((char)0));
+      mySubLexer = new PerlSublexingLexerAdapter(getLexingContext().withOpenChar((char)0));
     }
     return mySubLexer;
   }
@@ -173,11 +196,11 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
         myIsSublexing = false;
       }
 
-      lexToken(getMainLexer());
+      lexToken(getFlexAdapter());
 
       Integer subLexingState = SUBLEXINGS_MAP.get(myTokenType);
 
-      boolean enforceSubLexing = myMainLexerWithContext.getLexingContext().isEnforceSubLexing();
+      boolean enforceSubLexing = getLexingContext().isEnforceSubLexing();
       if (subLexingState != null) {
         subLexCurrentToken(subLexingState);
       }
@@ -189,7 +212,7 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
       }
     }
     catch (Exception | Error e) {
-      LOG.error(myMainLexerWithContext.getClass().getName(), e);
+      LOG.error(myPerlLexer.getClass().getName(), e);
       myTokenType = TokenType.WHITE_SPACE;
       myTokenEnd = getBufferEnd();
     }
@@ -210,10 +233,7 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
 
   private void lexToken(Lexer lexer) {
     myTokenType = lexer.getTokenType();
-    if (myTokenType == LEFT_BRACE_CODE_START) {
-      myTokenType = LEFT_BRACE;
-    }
-    else if (myTokenType == QUOTE_SINGLE_OPEN) {
+    if (myTokenType == QUOTE_SINGLE_OPEN) {
       CharSequence tokenSequence = lexer.getTokenSequence();
       if (tokenSequence.length() != 1) {
         LOG.error("Got: " + tokenSequence);

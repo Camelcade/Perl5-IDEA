@@ -24,20 +24,17 @@ public class PerlLexingContext {
   private final @Nullable Project myProject;
 
   private final boolean myEnforceSubLexing;
-  private final boolean myAllowToMergeCode;
   private final boolean myWithTryCatch;
   private final char myOpenChar;
   private final int myEnforcedInitialState;
 
   private PerlLexingContext(@Nullable Project project,
                             boolean enforceSubLexing,
-                            boolean allowToMergeCode,
                             boolean withTryCatch,
                             char openChar,
                             int enforcedInitialState) {
     myProject = project;
     myEnforceSubLexing = enforceSubLexing;
-    myAllowToMergeCode = allowToMergeCode;
     myWithTryCatch = withTryCatch;
     myOpenChar = openChar;
     myEnforcedInitialState = enforcedInitialState;
@@ -49,10 +46,6 @@ public class PerlLexingContext {
 
   public boolean isEnforceSubLexing() {
     return myEnforceSubLexing;
-  }
-
-  public boolean isAllowToMergeCode() {
-    return myAllowToMergeCode;
   }
 
   public boolean isWithTryCatch() {
@@ -68,26 +61,22 @@ public class PerlLexingContext {
   }
 
   public @NotNull PerlLexingContext withEnforcedSublexing(boolean enforceSubLexing) {
-    return new PerlLexingContext(myProject, enforceSubLexing, myAllowToMergeCode, myWithTryCatch, myOpenChar, myEnforcedInitialState);
-  }
-
-  public @NotNull PerlLexingContext withAllowToMergeCode(boolean allowToMergeCode) {
-    return new PerlLexingContext(myProject, myEnforceSubLexing, allowToMergeCode, myWithTryCatch, myOpenChar, myEnforcedInitialState);
+    return new PerlLexingContext(myProject, enforceSubLexing, myWithTryCatch, myOpenChar, myEnforcedInitialState);
   }
 
   public @NotNull PerlLexingContext withTryCatchSyntax(boolean withTryCatch) {
-    return new PerlLexingContext(myProject, myEnforceSubLexing, myAllowToMergeCode, withTryCatch, myOpenChar, myEnforcedInitialState);
+    return new PerlLexingContext(myProject, myEnforceSubLexing, withTryCatch, myOpenChar, myEnforcedInitialState);
   }
 
   public @NotNull PerlLexingContext withOpenChar(char openChar) {
-    return new PerlLexingContext(myProject, myEnforceSubLexing, myAllowToMergeCode, myWithTryCatch, openChar, myEnforcedInitialState);
+    return new PerlLexingContext(myProject, myEnforceSubLexing, myWithTryCatch, openChar, myEnforcedInitialState);
   }
 
   public @NotNull PerlLexingContext withEnforcedInitialState(int enforcedInitialState) {
-    return new PerlLexingContext(myProject, myEnforceSubLexing, myAllowToMergeCode, myWithTryCatch, myOpenChar, enforcedInitialState);
+    return new PerlLexingContext(myProject, myEnforceSubLexing, myWithTryCatch, myOpenChar, enforcedInitialState);
   }
 
   public static @NotNull PerlLexingContext create(@Nullable Project project) {
-    return new PerlLexingContext(project, false, true, false, (char)0, -1);
+    return new PerlLexingContext(project, false, false, (char)0, -1);
   }
 }

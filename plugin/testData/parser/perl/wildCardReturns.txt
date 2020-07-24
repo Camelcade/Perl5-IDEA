@@ -15,10 +15,9 @@ Perl5
       PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Parent::Package::somemethod
         PsiElement(Perl5: sub)('sub')
         PerlSubNameElementImpl(Perl5: subname)('somemethod')
-        PsiPerlLpCodeBlockImpl(LP_CODE_BLOCK)
-          PsiPerlBlockImpl(Perl5: BLOCK)
-            PsiElement(Perl5: {)('{')
-            PsiElement(Perl5: })('}')
+        PsiPerlBlockImpl(Perl5: BLOCK)
+          PsiElement(Perl5: {)('{')
+          PsiElement(Perl5: })('}')
       PerlAnnotationContainerImpl(COMMENT_ANNOTATION)
         PsiPerlAnnotationReturnsImpl(Perl5: ANNOTATION_RETURNS)
           PsiElement(Perl5: #@returns)('#@returns')
@@ -29,17 +28,15 @@ Perl5
       PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Parent::Package::othermethod
         PsiElement(Perl5: sub)('sub')
         PerlSubNameElementImpl(Perl5: subname)('othermethod')
-        PsiPerlLpCodeBlockImpl(LP_CODE_BLOCK)
-          PsiPerlBlockImpl(Perl5: BLOCK)
-            PsiElement(Perl5: {)('{')
-            PsiElement(Perl5: })('}')
+        PsiPerlBlockImpl(Perl5: BLOCK)
+          PsiElement(Perl5: {)('{')
+          PsiElement(Perl5: })('}')
       PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Parent::Package::thirdmethod
         PsiElement(Perl5: sub)('sub')
         PerlSubNameElementImpl(Perl5: subname)('thirdmethod')
-        PsiPerlLpCodeBlockImpl(LP_CODE_BLOCK)
-          PsiPerlBlockImpl(Perl5: BLOCK)
-            PsiElement(Perl5: {)('{')
-            PsiElement(Perl5: })('}')
+        PsiPerlBlockImpl(Perl5: BLOCK)
+          PsiElement(Perl5: {)('{')
+          PsiElement(Perl5: })('}')
 --------------------------------------------------------------------------------
 Subtree: Perl5 POD (Perl5 POD)
 POD file
