@@ -19,17 +19,15 @@ package com.perl5.lang.perl.parser.elementTypes;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
 import com.intellij.lang.PsiBuilderUtil;
+import com.intellij.lexer.FlexAdapter;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.util.PsiUtilCore;
-import com.perl5.lang.perl.lexer.PerlElementTypesGenerated;
 import com.perl5.lang.perl.lexer.PerlLexer;
-import com.perl5.lang.perl.lexer.PerlLexingContext;
-import com.perl5.lang.perl.lexer.adapters.PerlMergingLexerAdapter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.LEFT_BRACE;
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.RIGHT_BRACE;
 
 
 public class PerlLazyCodeBlockElementType extends PerlLazyBlockElementType {
@@ -45,28 +43,15 @@ public class PerlLazyCodeBlockElementType extends PerlLazyBlockElementType {
                             @NotNull Language fileLanguage,
                             @NotNull Project project) {
     // fixme we should probably check file for use TryCatch, hacky but still
-    if (PsiUtilCore.getElementType(parent) == REPLACEMENT_REGEX) {
-      ASTNode openQuoteNode = parent.findChildByType(REGEX_QUOTE_E);
-      if (openQuoteNode == null) {
-        openQuoteNode = parent.findChildByType(REGEX_QUOTE_OPEN_E);
-      }
-      if (openQuoteNode == null) {
-        return false;
-      }
-      char openQuoteChar = openQuoteNode.getChars().charAt(0);
-      return PerlLexer.checkQuoteLikeBodyConsistency(buffer, openQuoteChar);
+    FlexAdapter lexer = new FlexAdapter(new PerlLexer(null).withProject(project));
+    boolean result =
+      PsiBuilderUtil.hasProperBraceBalance(buffer, lexer, LEFT_BRACE, RIGHT_BRACE);
+    if (LOG.isDebugEnabled()) {
+      LOG.debug("Block reparseable: ", result && lexer.getState() == 0,
+                "; balanced: ", result,
+                "; lexer state: ", lexer.getState());
     }
-    else {
-      PerlMergingLexerAdapter lexer = new PerlMergingLexerAdapter(PerlLexingContext.create(project));
-      boolean result =
-        PsiBuilderUtil.hasProperBraceBalance(buffer, lexer, PerlElementTypesGenerated.LEFT_BRACE, PerlElementTypesGenerated.RIGHT_BRACE);
-      if (LOG.isDebugEnabled()) {
-        LOG.debug("Block reparseable: ", result && lexer.getState() == 0,
-                  "; balanced: ", result,
-                  "; lexer state: ", lexer.getState());
-      }
-      return result && lexer.getState() == 0;
-    }
+    return result && lexer.getState() == 0;
   }
 
   @Override
