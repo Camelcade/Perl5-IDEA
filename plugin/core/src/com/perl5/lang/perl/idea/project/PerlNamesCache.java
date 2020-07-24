@@ -150,7 +150,7 @@ public class PerlNamesCache implements Disposable {
       };
       PerlSubDeclarationIndex subDeclarationIndex = PerlSubDeclarationIndex.getInstance();
       Collection<String> declarationsNames = subDeclarationIndex.getAllNames(myProject);
-      logger.debug("Got declarations names");
+      logger.debug("Got declarations names: ", declarationsNames.size());
       for (String subName : declarationsNames) {
         ProgressManager.checkCanceled();
         subDeclarationIndex.processElements(myProject, subName, scope, processor);
@@ -163,7 +163,7 @@ public class PerlNamesCache implements Disposable {
       };
       PerlSubDefinitionsIndex subDefinitionsIndex = PerlSubDefinitionsIndex.getInstance();
       Collection<String> definitionsNames = subDefinitionsIndex.getAllNames(myProject);
-      logger.debug("Got definitions names");
+      logger.debug("Got definitions names: ", definitionsNames.size());
       for (String subName : definitionsNames) {
         ProgressManager.checkCanceled();
         subDefinitionsIndex.processElements(myProject, subName, scope, perlSubDefinitionElementProcessor);
@@ -172,7 +172,7 @@ public class PerlNamesCache implements Disposable {
 
       PerlLightSubDefinitionsIndex lightSubDefinitionsIndex = PerlLightSubDefinitionsIndex.getInstance();
       Collection<String> lightDefinitionsNames = lightSubDefinitionsIndex.getAllNames(myProject);
-      logger.debug("Got light definitions names");
+      logger.debug("Got light definitions names: ", lightDefinitionsNames.size());
       for (String subName : lightDefinitionsNames) {
         ProgressManager.checkCanceled();
         lightSubDefinitionsIndex.processLightElements(myProject, subName, scope, perlSubDefinitionElementProcessor);
@@ -188,7 +188,7 @@ public class PerlNamesCache implements Disposable {
       };
       PerlNamespaceIndex namespaceIndex = PerlNamespaceIndex.getInstance();
       Collection<String> namespacesNames = namespaceIndex.getAllNames(myProject);
-      logger.debug("Got namespaces names", namespacesNames.size());
+      logger.debug("Got namespaces names: ", namespacesNames.size());
       for (String namespaceName : namespacesNames) {
         ProgressManager.checkCanceled();
         namespaceIndex.processElements(myProject, namespaceName, scope, namespaceDefinitionElementProcessor);
@@ -197,7 +197,7 @@ public class PerlNamesCache implements Disposable {
 
       PerlLightNamespaceIndex lightNamespaceIndex = PerlLightNamespaceIndex.getInstance();
       Collection<String> lightNamespacesNames = lightNamespaceIndex.getAllNames(myProject);
-      logger.debug("Got light namespaces names", lightNamespacesNames.size());
+      logger.debug("Got light namespaces names: ", lightNamespacesNames.size());
       for (String namespaceName : lightNamespacesNames) {
         ProgressManager.checkCanceled();
         lightNamespaceIndex.processLightElements(myProject, namespaceName, scope, namespaceDefinitionElementProcessor);
