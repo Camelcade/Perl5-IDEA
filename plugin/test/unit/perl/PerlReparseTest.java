@@ -27,6 +27,26 @@ public class PerlReparseTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testHeredocOpenerBare() {
+    doTest("A");
+  }
+
+  @Test
+  public void testHeredocOpenerSQ() {
+    doTest("A");
+  }
+
+  @Test
+  public void testHeredocOpenerQQ() {
+    doTest("A");
+  }
+
+  @Test
+  public void testHeredocOpenerQX() {
+    doTest("A");
+  }
+
+  @Test
   public void testBeginSay() {doTestNamedBlock("BEGIN", "say 'hi';");}
 
   @Test

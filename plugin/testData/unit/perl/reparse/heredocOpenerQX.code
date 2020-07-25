@@ -1,0 +1,5 @@
+{
+  say <<`E<caret>OM`;
+test text
+EOM
+}

@@ -1,0 +1,7 @@
+{
+  say <<"EA<caret>OM";
+test text
+EOM
+}
+----------
+Full reparse
