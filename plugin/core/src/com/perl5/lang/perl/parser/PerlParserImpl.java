@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.parser;
 
-import com.intellij.lang.ASTNode;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
 import com.intellij.openapi.diagnostic.Logger;
@@ -54,14 +53,6 @@ public class PerlParserImpl extends PerlParserGenerated implements PerlParser {
     PerlTimeLogger logger = PerlTimeLogger.create(LOG);
     super.parseLight(root_, builder_);
     logger.debug("Light parsed ", root_, " ", PerlTimeLogger.kb(builder_.getOriginalText().length()), " kb");
-  }
-
-  @Override
-  public @NotNull ASTNode parse(IElementType root_, PsiBuilder builder_) {
-    PerlTimeLogger logger = PerlTimeLogger.create(LOG);
-    ASTNode parsedNode = super.parse(root_, builder_);
-    logger.debug("Parsed ", root_, " ", PerlTimeLogger.kb(parsedNode.getTextLength()), " kb");
-    return parsedNode;
   }
 
   public boolean parseStatement(PsiBuilder b, int l) {
