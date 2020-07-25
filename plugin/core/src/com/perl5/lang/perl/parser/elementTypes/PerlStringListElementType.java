@@ -30,9 +30,9 @@ import org.jetbrains.annotations.Nullable;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.USE_STATEMENT;
 
-public class PerlReparseableStringListElementType extends PerlReparseableTwoQuotesQuoteLikeElementType {
-  public PerlReparseableStringListElementType(@NotNull String debugName,
-                                              @NotNull Class<? extends PsiElement> clazz) {
+public class PerlStringListElementType extends PerlReparseableTwoQuotesQuoteLikeElementType {
+  public PerlStringListElementType(@NotNull String debugName,
+                                   @NotNull Class<? extends PsiElement> clazz) {
     super(debugName, clazz);
   }
 
