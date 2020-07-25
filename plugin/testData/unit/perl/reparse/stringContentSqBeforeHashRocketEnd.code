@@ -1,0 +1,6 @@
+{
+  say 'hi';
+  my $test = {
+    some<caret> => 42
+  };
+}

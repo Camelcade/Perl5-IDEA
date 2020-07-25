@@ -1,0 +1,15 @@
+{
+  say 'hi';
+  my $test = {
+    somesome_thing<caret> => 42
+  };
+}
+----------
+Element(Perl5: BLOCK)
+----------
+{
+  say 'hi';
+  my $test = {
+    some => 42
+  };
+}

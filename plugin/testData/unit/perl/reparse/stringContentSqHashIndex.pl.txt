@@ -1,0 +1,8 @@
+{
+  say 'hi';
+  say $hash{insome_thing<caret>dex};
+}
+----------
+PerlStringContentElementImpl(Perl5: STRING_CONTENT)
+----------
+index

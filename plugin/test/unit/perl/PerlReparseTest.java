@@ -27,6 +27,27 @@ public class PerlReparseTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testStringContentQwList() {doTest("some_thing");}
+
+  @Test
+  public void testStringContentSqBeforeHashRocket() {doTest("some_thing");}
+
+  @Test
+  public void testStringContentSqHashIndex() {doTest("some_thing");}
+
+  @Test
+  public void testStringContentQwListEnd() {doTest("some_thing");}
+
+  @Test
+  public void testStringContentSqBeforeHashRocketEnd() {doTest("some_thing");}
+
+  @Test
+  public void testStringContentSqHashIndexEnd() {doTest("some_thing");}
+
+  @Test
+  public void testStringContentSqHashIndexSlash() {doTest("some thing");}
+
+  @Test
   public void testHeredocOpenerBare() {
     doTest("A");
   }

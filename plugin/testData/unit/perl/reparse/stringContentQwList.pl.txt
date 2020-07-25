@@ -1,0 +1,8 @@
+{
+  say 'hi';
+  say qw/test fisome_thing<caret>rst one/;
+}
+----------
+PerlStringContentElementImpl(Perl5: STRING_CONTENT)
+----------
+first

@@ -1,0 +1,4 @@
+{
+  say 'hi';
+  say qw/test fi<caret>rst one/;
+}

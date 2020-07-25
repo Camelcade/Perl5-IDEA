@@ -35,6 +35,7 @@ public class PerlElementTypeFactory {
   public static @NotNull IElementType getTokenType(@NotNull String name) {
     switch (name) {
       case "STRING_CONTENT":
+        return new PerlStringContentSQTokenType(name);
       case "STRING_CONTENT_QQ":
       case "STRING_CONTENT_XQ":
         return new PerlStringContentTokenType(name);

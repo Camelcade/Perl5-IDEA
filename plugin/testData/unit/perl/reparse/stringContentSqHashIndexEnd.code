@@ -1,0 +1,4 @@
+{
+  say 'hi';
+  say $hash{index<caret>};
+}

@@ -1,0 +1,10 @@
+{
+  say 'hi';
+  my $test = {
+    sosome_thing<caret>me => 42
+  };
+}
+----------
+PerlStringContentElementImpl(Perl5: STRING_CONTENT)
+----------
+some

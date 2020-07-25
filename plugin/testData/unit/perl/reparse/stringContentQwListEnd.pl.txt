@@ -1,0 +1,8 @@
+{
+  say 'hi';
+  say qw/test firstsome_thing<caret> one/;
+}
+----------
+Element(Perl5: STRING_LIST)
+----------
+qw/test first one/

@@ -1,0 +1,11 @@
+{
+  say 'hi';
+  say $hash{indexsome_thing<caret>};
+}
+----------
+Element(Perl5: BLOCK)
+----------
+{
+  say 'hi';
+  say $hash{index};
+}
