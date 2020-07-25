@@ -63,6 +63,8 @@ public class PerlElementTypeFactory {
         return new PerlTokenTypeEx(name, PerlHeredocTerminatorElementImpl.class);
       case "VERSION_ELEMENT":
         return new PerlTokenTypeEx(name, PerlVersionElementImpl.class);
+      case "COMMENT_LINE":
+        return new PerlLineCommentTokenType(name);
     }
     return new PerlTokenType(name);
   }

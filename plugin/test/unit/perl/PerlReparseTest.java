@@ -159,6 +159,21 @@ public class PerlReparseTest extends PerlLightTestCase {
   public void testSubBodyStatement() {doTestSub("say 'hi';");}
 
   @Test
+  public void testLineCommentText() {
+    doTest("text");
+  }
+
+  @Test
+  public void testLineCommentNewLine() {
+    doTest("\n");
+  }
+
+  @Test
+  public void testLineCommentAnnotation() {
+    doTest("@method ");
+  }
+
+  @Test
   public void testSubBodyHeredoc() {doTestSub("say <<'SOMETHING';");}
 
   @Test

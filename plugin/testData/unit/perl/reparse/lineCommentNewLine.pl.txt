@@ -1,0 +1,12 @@
+{
+  #
+<caret>this is a comment
+  say 'hi';
+}
+----------
+Element(Perl5: BLOCK)
+----------
+{
+  #this is a comment
+  say 'hi';
+}

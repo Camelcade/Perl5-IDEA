@@ -29,6 +29,9 @@ public class PerlParserReparseTest extends PerlParserTestBase {
   public void testReparsedBlockSub() {doTest();}
 
   @Test
+  public void testLineComment() {doTest();}
+
+  @Test
   public void testReparsedBlockInRegexp() {doTest();}
 
   @Test

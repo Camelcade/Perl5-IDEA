@@ -1,0 +1,8 @@
+{
+  #text<caret>this is a comment
+  say 'hi';
+}
+----------
+PsiComment(Perl5: COMMENT_LINE)
+----------
+#this is a comment

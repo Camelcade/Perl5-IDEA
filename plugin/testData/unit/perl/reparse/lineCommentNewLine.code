@@ -1,0 +1,4 @@
+{
+  #<caret>this is a comment
+  say 'hi';
+}
