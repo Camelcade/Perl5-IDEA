@@ -71,6 +71,13 @@ public abstract class PerlReparseableTwoQuotesQuoteLikeElementType extends PerlR
       return false;
     }
     flexAdapter.advance();
+    if (!checkAfterCloseQuote(flexAdapter)) {
+      return false;
+    }
     return flexAdapter.getTokenType() == null && flexAdapter.getState() == PerlLexer.AFTER_VALUE;
+  }
+
+  protected boolean checkAfterCloseQuote(@NotNull FlexAdapter flexAdapter) {
+    return true;
   }
 }

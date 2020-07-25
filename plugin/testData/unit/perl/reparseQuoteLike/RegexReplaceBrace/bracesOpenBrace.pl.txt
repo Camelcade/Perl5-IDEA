@@ -1,0 +1,10 @@
+sub something{
+  s{test
+    say 'hi';
+    # comment {<caret>
+    say 'hi'
+  }<replacement $3>;
+}
+
+----------
+Full reparse

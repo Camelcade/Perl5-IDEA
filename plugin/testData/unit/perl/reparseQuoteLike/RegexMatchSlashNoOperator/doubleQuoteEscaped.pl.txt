@@ -1,0 +1,16 @@
+sub something{
+  /test
+    say 'hi';
+    \"<caret>
+    say 'hi'
+  /;
+}
+
+----------
+Element(Perl5: MATCH_REGEX)
+----------
+/test
+    say 'hi';
+    
+    say 'hi'
+  /

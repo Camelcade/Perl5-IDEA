@@ -180,7 +180,7 @@ public class PerlElementTypeFactory {
       case "COMPARE_EXPR":
         return new PerlElementTypeEx(name, PsiPerlCompareExprImpl.class);
       case "COMPILE_REGEX":
-        return new PerlElementTypeEx(name, PsiPerlCompileRegexImpl.class);
+        return new PerlCompileRegexpElementType(name, PsiPerlCompileRegexImpl.class);
       case "CONDITIONAL_BLOCK":
         return new PerlElementTypeEx(name, PsiPerlConditionalBlockImpl.class);
       case "UNCONDITIONAL_BLOCK":
@@ -264,7 +264,7 @@ public class PerlElementTypeFactory {
       case "MAP_EXPR":
         return new PerlElementTypeEx(name, PsiPerlMapExprImpl.class);
       case "MATCH_REGEX":
-        return new PerlElementTypeEx(name, PsiPerlMatchRegexImpl.class);
+        return new PerlMatchRegexpElementType(name, PsiPerlMatchRegexImpl.class);
       case "METHOD":
         return new PerlElementTypeEx(name, PsiPerlMethodImpl.class);
       case "METHOD_SIGNATURE_INVOCANT":
@@ -367,13 +367,13 @@ public class PerlElementTypeFactory {
       case "STRING_BARE":
         return new PerlElementTypeEx(name, PsiPerlStringBareImpl.class);
       case "STRING_DQ":
-        return new PerlElementTypeEx(name, PsiPerlStringDqImpl.class);
+        return new PerlQQStringElementType(name, PsiPerlStringDqImpl.class);
       case "STRING_LIST":
         return new PerlStringListElementType(name, PsiPerlStringListImpl.class);
       case "STRING_SQ":
-        return new PerlElementTypeEx(name, PsiPerlStringSqImpl.class);
+        return new PerlQStringElementType(name, PsiPerlStringSqImpl.class);
       case "STRING_XQ":
-        return new PerlElementTypeEx(name, PsiPerlStringXqImpl.class);
+        return new PerlQXStringElementType(name, PsiPerlStringXqImpl.class);
       case "SUB_CALL":
         return new PerlSubCallElementType(name);
       case "SUB_EXPR":

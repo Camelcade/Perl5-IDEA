@@ -1,0 +1,21 @@
+BEGIN {
+  say 'begin start';
+ use vars qw'
+   $item1
+   $something<caret>
+   @item2
+';
+  say 'begin end';
+}
+----------
+Element(Perl5: BLOCK)
+----------
+{
+  say 'begin start';
+ use vars qw'
+   $item1
+   
+   @item2
+';
+  say 'begin end';
+}

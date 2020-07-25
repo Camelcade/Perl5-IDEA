@@ -1,0 +1,13 @@
+Subtree: Perl5 (Perl5)
+Perl5
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlStringDqImpl(Perl5: STRING_DQ)
+      PsiElement(Perl5: QUOTE_DOUBLE_OPEN)('"')
+      PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('so 1; me')
+      PsiElement(Perl5: QUOTE_DOUBLE_CLOSE)('"')
+    PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('"so 1; me";')
+--------------------------------------------------------------------------------

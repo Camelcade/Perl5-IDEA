@@ -1024,8 +1024,8 @@ file_glob_expr ::= LEFT_ANGLE qq_string_content_with_lp RIGHT_ANGLE
 
 ////////////////////////// regular expressions /////////////////////////////////////////////////////////////////////////
 // pinning quotes leads to bug with replacement block
-compile_regex ::=   'qr' match_regex_body {pin=1}
-match_regex ::=   ['m'] match_regex_body
+compile_regex ::=   'qr' match_regex_body {pin=1 extraRoot=true}
+match_regex ::=   ['m'] match_regex_body {extraRoot=true}
 private match_regex_body ::= regex_match REGEX_QUOTE_CLOSE [perl_regex_modifiers]
 
 replacement_regex ::=
@@ -1252,7 +1252,7 @@ number_constant ::= NUMBER | NUMBER_VERSION | NUMBER_HEX | NUMBER_OCT | NUMBER_B
 
 private string ::= string_bare | string_sq | string_dq | string_xq | heredoc_opener
 
-string_dq ::= [ 'qq'] quoted_qq_string
+string_dq ::= [ 'qq'] quoted_qq_string {extraRoot=true}
 private quoted_qq_string ::= QUOTE_DOUBLE_OPEN [qq_string_content_with_lp] QUOTE_DOUBLE_CLOSE {pin=1}
 private qq_string_content_with_lp ::= qq_string_content
 private qq_string_content ::= qq_string_element+
@@ -1285,7 +1285,7 @@ private oct_char_body_braced ::= '"{' oct_char_body_content_braced '}"' {pin=1}
 private oct_char_body_content_braced ::= char_code_oct {recoverWhile=recover_string_braces}
 private char_code_oct ::= NUMBER_OCT {name="octal characcter code"}
 
-string_xq ::= [ 'qx'] quoted_xq_string
+string_xq ::= [ 'qx'] quoted_xq_string {extraRoot=true}
 private quoted_xq_string ::= QUOTE_TICK_OPEN [qx_string_content] QUOTE_TICK_CLOSE {pin=1}
 private qx_string_content ::= qx_string_element+
 private qx_string_element ::= STRING_CONTENT_XQ | special_constructs |interpolated_constructs
@@ -1294,7 +1294,7 @@ private interpolated_constructs ::= deref_expr
 
 string_bare ::= &(STRING_CONTENT|'\\"')<<parseBareString>>
 
-string_sq ::= [ 'q'] quoted_sq_string
+string_sq ::= [ 'q'] quoted_sq_string {extraRoot=true}
 string_list ::=  'qw' qw_string {pin=1 extraRoot=true}
 private qw_string ::= QUOTE_SINGLE_OPEN [parse_qw_string_content] QUOTE_SINGLE_CLOSE {pin=1}
 private parse_qw_string_content ::= <<isUseVars>> <<mapUseVars qw_string_content>>+| qw_string_content

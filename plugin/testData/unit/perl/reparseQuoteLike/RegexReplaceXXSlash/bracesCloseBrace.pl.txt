@@ -1,0 +1,18 @@
+sub something{
+  s/test
+    say 'hi';
+    # comment }<caret>
+    say 'hi'
+  /replacement $2/xx;
+}
+
+----------
+Element(Perl5: BLOCK)
+----------
+{
+  s/test
+    say 'hi';
+    
+    say 'hi'
+  /replacement $2/xx;
+}

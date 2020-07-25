@@ -174,7 +174,7 @@ public abstract class PerlParserTestBase extends PerlLightTestCaseBase {
     doTest(check);
   }
 
-  public void doTest() {
+  protected void doTest() {
     doTest(true);
   }
 

@@ -1,0 +1,8 @@
+sub something{
+  qq'test  # comment \}<caret> other';
+}
+
+----------
+Element(Perl5: STRING_DQ)
+----------
+qq'test   other'

@@ -1,0 +1,6 @@
+sub something{
+  qx'test  '<caret> other';
+}
+
+----------
+Full reparse

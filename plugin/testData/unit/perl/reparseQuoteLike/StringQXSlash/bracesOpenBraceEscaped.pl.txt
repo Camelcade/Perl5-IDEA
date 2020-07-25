@@ -1,0 +1,8 @@
+sub something{
+  qx/test  # comment \{<caret> other/;
+}
+
+----------
+Element(Perl5: STRING_XQ)
+----------
+qx/test   other/

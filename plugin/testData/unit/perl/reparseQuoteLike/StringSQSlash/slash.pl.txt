@@ -1,0 +1,10 @@
+sub something{
+  q/test  # comment /<caret> other/;
+}
+
+----------
+Element(Perl5: BLOCK)
+----------
+{
+  q/test   other/;
+}

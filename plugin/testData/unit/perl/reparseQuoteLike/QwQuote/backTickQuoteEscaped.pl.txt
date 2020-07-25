@@ -1,0 +1,17 @@
+sub something {
+  say 'sub start';
+qw"
+   item1
+   #comment \`<caret>
+   item2
+";
+  say 'sub end';
+}
+----------
+Element(Perl5: STRING_LIST)
+----------
+qw"
+   item1
+   
+   item2
+"

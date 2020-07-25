@@ -1,0 +1,15 @@
+Subtree: Perl5 (Perl5)
+Perl5
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlCompileRegexImpl(Perl5: COMPILE_REGEX)
+      PsiElement(Perl5: qr)('qr')
+      PsiElement(Perl5: r{)('{')
+      PsiPerlPerlRegexImpl(Perl5: PERL_REGEX)
+        PsiElement(Perl5: regex)('so 1; me')
+      PsiElement(Perl5: r})('}')
+    PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('qr{so 1; me};')
+--------------------------------------------------------------------------------

@@ -1,0 +1,18 @@
+sub something{
+  s{test}{
+    say 'hi';
+    ${say $something}<caret>
+    say 'hi'
+  }e;
+}
+
+----------
+Element(Perl5: BLOCK)
+----------
+{
+  s{test}{
+    say 'hi';
+    
+    say 'hi'
+  }e;
+}

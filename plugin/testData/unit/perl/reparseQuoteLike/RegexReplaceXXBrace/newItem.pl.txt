@@ -1,0 +1,18 @@
+sub something{
+  s{test
+    say 'hi';
+    new_item<caret>
+    say 'hi'
+  } | replacement $4|xx;
+}
+
+----------
+Element(Perl5: BLOCK)
+----------
+{
+  s{test
+    say 'hi';
+    
+    say 'hi'
+  } | replacement $4|xx;
+}

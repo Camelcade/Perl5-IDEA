@@ -1,0 +1,6 @@
+sub something{
+  qq{test  # comment }<caret> other};
+}
+
+----------
+Full reparse

@@ -1,0 +1,18 @@
+sub something{
+  qr/test
+    say 'hi';
+    # comment /<caret>
+    say 'hi'
+  /;
+}
+
+----------
+Element(Perl5: BLOCK)
+----------
+{
+  qr/test
+    say 'hi';
+    
+    say 'hi'
+  /;
+}

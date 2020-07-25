@@ -1,0 +1,16 @@
+sub something{
+  qr/test
+    say 'hi';
+    $something<caret>
+    say 'hi'
+  /x;
+}
+
+----------
+Element(Perl5: COMPILE_REGEX)
+----------
+qr/test
+    say 'hi';
+    
+    say 'hi'
+  /x
