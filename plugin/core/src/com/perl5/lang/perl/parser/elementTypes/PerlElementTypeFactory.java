@@ -369,7 +369,7 @@ public class PerlElementTypeFactory {
       case "STRING_DQ":
         return new PerlElementTypeEx(name, PsiPerlStringDqImpl.class);
       case "STRING_LIST":
-        return new PerlElementTypeEx(name, PsiPerlStringListImpl.class);
+        return new PerlReparseableStringListElementType(name, PsiPerlStringListImpl.class);
       case "STRING_SQ":
         return new PerlElementTypeEx(name, PsiPerlStringSqImpl.class);
       case "STRING_XQ":

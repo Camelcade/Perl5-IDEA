@@ -8,14 +8,10 @@ qw"
   say 'sub end';
 }
 ----------
-Element(Perl5: BLOCK)
+Element(Perl5: STRING_LIST)
 ----------
-{
-  say 'sub start';
 qw"
    item1
    
    item2
-";
-  say 'sub end';
-}
+"

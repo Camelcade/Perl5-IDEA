@@ -1295,7 +1295,7 @@ private interpolated_constructs ::= deref_expr
 string_bare ::= &(STRING_CONTENT|'\\"')<<parseBareString>>
 
 string_sq ::= [ 'q'] quoted_sq_string
-string_list ::=  'qw' qw_string {pin=1}
+string_list ::=  'qw' qw_string {pin=1 extraRoot=true}
 private qw_string ::= QUOTE_SINGLE_OPEN [parse_qw_string_content] QUOTE_SINGLE_CLOSE {pin=1}
 private parse_qw_string_content ::= <<isUseVars>> <<mapUseVars qw_string_content>>+| qw_string_content
 private qw_string_content ::= string_bare+
