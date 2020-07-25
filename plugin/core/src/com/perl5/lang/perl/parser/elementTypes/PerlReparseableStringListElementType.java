@@ -18,24 +18,47 @@ package com.perl5.lang.perl.parser.elementTypes;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
-import com.intellij.lexer.FlexAdapter;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
-import com.perl5.lang.perl.lexer.PerlLexer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.USE_STATEMENT;
 
-public class PerlReparseableStringListElementType extends PerlReparseableQuoteLikeElementType {
+public class PerlReparseableStringListElementType extends PerlReparseableTwoQuotesQuoteLikeElementType {
   public PerlReparseableStringListElementType(@NotNull String debugName,
                                               @NotNull Class<? extends PsiElement> clazz) {
     super(debugName, clazz);
+  }
+
+  @Override
+  protected boolean isOperatorToken(@Nullable IElementType tokenType) {
+    return tokenType == RESERVED_QW;
+  }
+
+  @Override
+  protected boolean isOperatorMandatory() {
+    return true;
+  }
+
+  @Override
+  protected boolean isOpenQuoteToken(@Nullable IElementType tokenType) {
+    return tokenType == QUOTE_SINGLE_OPEN;
+  }
+
+  @Override
+  protected boolean isContentToken(@Nullable IElementType tokenType) {
+    return tokenType == LP_STRING_QW;
+  }
+
+  @Override
+  protected boolean isCloseQuoteToken(@Nullable IElementType tokenType) {
+    return tokenType == QUOTE_SINGLE_CLOSE;
   }
 
   @Override
@@ -49,28 +72,6 @@ public class PerlReparseableStringListElementType extends PerlReparseableQuoteLi
         return false;
       }
     }
-
-    FlexAdapter flexAdapter = new FlexAdapter(new PerlLexer(null).withProject(project));
-    flexAdapter.start(buffer);
-
-    IElementType firstTokenType = flexAdapter.getTokenType();
-    if (firstTokenType != RESERVED_QW) {
-      return false;
-    }
-
-    flexAdapter.advance();
-    skipSpaces(flexAdapter);
-    if (flexAdapter.getTokenType() != QUOTE_SINGLE_OPEN) {
-      return false;
-    }
-    flexAdapter.advance();
-    if (flexAdapter.getTokenType() == LP_STRING_QW) {
-      flexAdapter.advance();
-    }
-    if (flexAdapter.getTokenType() != QUOTE_SINGLE_CLOSE) {
-      return false;
-    }
-    flexAdapter.advance();
-    return flexAdapter.getTokenType() == null;
+    return super.isParsable(parent, buffer, fileLanguage, project);
   }
 }

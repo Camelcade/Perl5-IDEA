@@ -17,14 +17,23 @@
 package com.perl5.lang.perl.parser.elementTypes;
 
 import com.intellij.lexer.FlexAdapter;
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.TokenType;
+import com.perl5.lang.perl.lexer.PerlLexer;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Common parent for all quote-like operators available: stirngs, regexps, replacements, transliterations
+ */
 public abstract class PerlReparseableQuoteLikeElementType extends PerlLazyBlockElementType {
   public PerlReparseableQuoteLikeElementType(@NotNull String debugName,
                                              @NotNull Class<? extends PsiElement> clazz) {
     super(debugName, clazz);
+  }
+
+  protected static @NotNull FlexAdapter createLexer(@NotNull Project project) {
+    return new FlexAdapter(new PerlLexer(null).withProject(project));
   }
 
   protected static void skipSpaces(@NotNull FlexAdapter flexAdapter) {
