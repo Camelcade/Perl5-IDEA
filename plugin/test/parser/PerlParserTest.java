@@ -54,7 +54,10 @@ public class PerlParserTest extends PerlParserTestBase {
   public void testReparsedQw() {doTestWithTyping("1;");}
 
   @Test
-  public void testReparsedUseVars() {doTestWithTyping("$othervar");}
+  public void testReparsedUseVars() {
+    setSkipSpaces(false);
+    doTestWithTyping("$othervar");
+  }
 
   @Test
   public void testReparsedRegex() {doTestWithTyping("1;");}
@@ -433,6 +436,7 @@ public class PerlParserTest extends PerlParserTestBase {
 
   @Test
   public void testUseVars() {
+    setSkipSpaces(false);
     doTest();
   }
 

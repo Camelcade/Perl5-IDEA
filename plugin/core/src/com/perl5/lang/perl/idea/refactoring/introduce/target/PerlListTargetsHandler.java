@@ -19,12 +19,14 @@ package com.perl5.lang.perl.idea.refactoring.introduce.target;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
-import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.util.PerlArrayUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
+
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.STRING_LIST;
 
 class PerlListTargetsHandler extends PerlSequentialElementTargetHandler {
   private static final Logger LOG = Logger.getInstance(PerlListTargetsHandler.class);
@@ -77,7 +79,7 @@ class PerlListTargetsHandler extends PerlSequentialElementTargetHandler {
           }
           sameParentReplacement = sameParentReplacement &&
                                   parent.equals(stringElementParent) &&
-                                  !PerlPsiUtil.isInStringList(stringElement);
+                                  PsiUtilCore.getElementType(stringElement.getParent()) != STRING_LIST;
           replacementsMap.computeIfAbsent(occurrence, __ -> new ArrayList<>()).add(stringElement);
           iterator.remove();
           replaced = true;

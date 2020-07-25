@@ -403,9 +403,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
         }
       }
     }
-    else if (childNodeType == STRING_BARE &&
-             (parentNodeType == STRING_LIST || parentNodeType == LP_STRING_QW) &&
-             perlCodeStyleSettings.ALIGN_QW_ELEMENTS) {
+    else if (childNodeType == STRING_BARE && parentNodeType == STRING_LIST && perlCodeStyleSettings.ALIGN_QW_ELEMENTS) {
       return myStringListAlignmentMap.get(parentNode).get(childNode);
     }
     else if (childNodeType == COMMENT_LINE && myPerlSettings.ALIGN_COMMENTS_ON_CONSEQUENT_LINES) {
@@ -514,10 +512,8 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
         return getWrapBySettings(parentNode, mySettings.ARRAY_INITIALIZER_WRAP, false);
       }
     }
-    else if ((parentNodeType == STRING_LIST || parentNodeType == LP_STRING_QW) &&
-             (childNodeType == STRING_BARE || childNodeType == QUOTE_SINGLE_CLOSE)) {
-      ASTNode anchorNode = parentNodeType == LP_STRING_QW ? parentNode.getTreeParent() : parentNode;
-      return getWrapBySettings(anchorNode, myPerlSettings.QW_LIST_WRAP, false);
+    else if (parentNodeType == STRING_LIST && (childNodeType == STRING_BARE || childNodeType == QUOTE_SINGLE_CLOSE)) {
+      return getWrapBySettings(parentNode, myPerlSettings.QW_LIST_WRAP, false);
     }
     else if (childNodeType == VARIABLE_DECLARATION_ELEMENT && parentNodeType != SIGNATURE_ELEMENT ||
              (childNodeType == UNDEF_EXPR && PerlTokenSets.VARIABLE_DECLARATIONS.contains(parentNodeType))) {

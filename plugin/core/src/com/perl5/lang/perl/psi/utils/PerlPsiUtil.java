@@ -39,7 +39,6 @@ import com.intellij.util.Processor;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.*;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
@@ -551,9 +550,9 @@ public class PerlPsiUtil implements PerlElementTypes {
 
     PsiElement parentElement = element.getParent();
     IElementType parentElementType = PsiUtilCore.getElementType(parentElement);
-    boolean isListItem = parentElementType == LP_STRING_QW || parentElementType == STRING_LIST;
+    boolean isListItem = parentElementType == STRING_LIST;
     if (run == null || isListItem) {
-      run = !isListItem ? element : parentElementType == STRING_LIST ? parentElement : parentElement.getParent();
+      run = isListItem ? parentElement : element;
       int elementOffset = element.getNode().getStartOffset();
       while (true) {
         PsiElement parent = run.getParent();
@@ -713,9 +712,6 @@ public class PerlPsiUtil implements PerlElementTypes {
     }
 
     PsiElement elementParent = element.getParent();
-    if (PerlTokenSets.LAZY_PARSABLE_REGEXPS.contains(PsiUtilCore.getElementType(elementParent))) {
-      return elementParent.getParent() instanceof PerlReplacementRegex;
-    }
     return elementParent instanceof PerlReplacementRegex && element.equals(((PerlReplacementRegex)elementParent).getMatchRegex());
   }
 
@@ -939,8 +935,7 @@ public class PerlPsiUtil implements PerlElementTypes {
    * @return true iff element is inside the qw list
    */
   public static boolean isInStringList(@NotNull PsiElement element) {
-    IElementType parentElementType = PsiUtilCore.getElementType(element.getParent());
-    return parentElementType == LP_STRING_QW || parentElementType == STRING_LIST;
+    return PsiUtilCore.getElementType(element.getParent()) == STRING_LIST;
   }
 
   /**

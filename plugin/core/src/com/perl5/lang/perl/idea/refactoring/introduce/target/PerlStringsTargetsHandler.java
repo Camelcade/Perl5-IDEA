@@ -31,7 +31,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.LP_STRING_QW;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.RESERVED_Q;
 
 class PerlStringsTargetsHandler extends PerlGenericStringTargetsHandler {
@@ -157,10 +156,6 @@ class PerlStringsTargetsHandler extends PerlGenericStringTargetsHandler {
 
   private @NotNull List<PerlIntroduceTarget> computeBareStringTarget(@NotNull PsiElement element) {
     PsiElement elementParent = element.getParent();
-    if (PsiUtilCore.getElementType(elementParent) == LP_STRING_QW) {
-      elementParent = elementParent.getParent();
-    }
-
     return elementParent instanceof PerlStringList ?
            Collections.singletonList(PerlIntroduceTarget.create(elementParent, element, element)) :
            Collections.singletonList(PerlIntroduceTarget.create(element));

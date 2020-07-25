@@ -8,9 +8,14 @@ BEGIN {
   say 'begin end';
 }
 ----------
-Element(PARSABLE_STRING_USE_VARS)
+Element(Perl5: BLOCK)
 ----------
-
+{
+  say 'begin start';
+ use vars qw'
    $item1
    
    @item2
+';
+  say 'begin end';
+}

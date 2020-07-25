@@ -31,7 +31,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.*;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.DEREF_EXPR;
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.LP_STRING_QW;
 
 /**
  * Computes introduce targets for expr+ elements: comma sequences, lists, additions, etc
@@ -42,9 +41,6 @@ abstract class PerlSequentialElementTargetHandler extends PerlIntroduceTargetsHa
   @Override
   protected @NotNull List<PerlIntroduceTarget> computeTargetsAtCaret(@NotNull PsiElement element, int caretOffset) {
     PsiElement[] children = element.getChildren();
-    if (children.length == 1 && PsiUtilCore.getElementType(children[0]) == LP_STRING_QW) {
-      children = children[0].getChildren();
-    }
     if (children.length <= 1) {
       return Collections.emptyList();
     }
@@ -71,9 +67,6 @@ abstract class PerlSequentialElementTargetHandler extends PerlIntroduceTargetsHa
   @Override
   protected @NotNull List<PerlIntroduceTarget> computeTargetsFromSelection(@NotNull PsiElement element, @NotNull TextRange selectionRange) {
     PsiElement[] children = element.getChildren();
-    if (children.length == 1 && PsiUtilCore.getElementType(children[0]) == LP_STRING_QW) {
-      children = children[0].getChildren();
-    }
     PsiElement firstChildToInclude =
       PsiUtilCore.getElementType(element) == DEREF_EXPR ? element.getFirstChild() : null;
     PsiElement lastChildToInclude = null;

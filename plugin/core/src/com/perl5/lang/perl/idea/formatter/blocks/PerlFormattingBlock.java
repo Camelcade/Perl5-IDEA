@@ -37,7 +37,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
+import static com.perl5.lang.perl.lexer.PerlTokenSets.HEREDOC_BODIES_TOKENSET;
+import static com.perl5.lang.perl.lexer.PerlTokenSets.TRANSPARENT_ELEMENT_TYPES;
 
 
 public class PerlFormattingBlock extends AbstractBlock implements PerlElementTypes, PerlAstBlock {
@@ -88,7 +89,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
       return Collections.emptyList();
     }
 
-    if (MATCH_REGEXP_CONTAINERS.contains(getElementType())) {
+    if (getElementType() == PERL_REGEX) {
       return buildRegexpSubBlocks();
     }
     List<Block> blocks = new ArrayList<>();

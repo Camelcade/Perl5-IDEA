@@ -1,4 +1,4 @@
-qw/
+use vars qw/
   <caret>
   $firstvar
 /;

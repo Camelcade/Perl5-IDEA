@@ -8,9 +8,14 @@ qw"
   say 'sub end';
 }
 ----------
-Element(LP_STRING_QW)
+Element(Perl5: BLOCK)
 ----------
-
+{
+  say 'sub start';
+qw"
    item1
    
    item2
+";
+  say 'sub end';
+}

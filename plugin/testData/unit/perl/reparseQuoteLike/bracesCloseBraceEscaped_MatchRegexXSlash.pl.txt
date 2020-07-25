@@ -7,10 +7,12 @@ sub something{
 }
 
 ----------
-Element(LP_REGEX_X)
+Element(Perl5: BLOCK)
 ----------
-test
+{
+  m/test
     say 'hi';
     
     say 'hi'
-  
+  /x;
+}

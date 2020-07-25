@@ -31,7 +31,6 @@ import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
-import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.impl.PsiPerlPerlRegexImpl;
@@ -142,9 +141,6 @@ public abstract class PerlIntroduceTargetsHandler {
     }
     else if (targetElement instanceof PsiPerlPerlRegexImpl) {
       PsiElement container = targetElement.getParent();
-      if (PerlTokenSets.LAZY_PARSABLE_REGEXPS.contains(PsiUtilCore.getElementType(container))) {
-        container = container.getParent();
-      }
       if (container instanceof PerlReplacementRegex) {
         char openQuote = ((PerlReplacementRegex)container).getOpenQuote();
         if (openQuote > 0) {

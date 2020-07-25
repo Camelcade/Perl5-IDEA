@@ -189,10 +189,6 @@ public interface PerlElementPatterns extends PerlElementTypes {
 
   PsiElementPattern.Capture<PsiElement> EXPORT_ASSIGNED_STRING_CONTENT = psiElement().andOr(
     STRING_CONTENT_IN_QW_STRING_LIST.andOr(
-      psiElement().withSuperParent(2, psiElement(LP_STRING_QW)).andOr(
-        psiElement().withSuperParent(3, EXPORT_ASSIGNMENT),
-        psiElement().withSuperParent(4, EXPORT_ASSIGNMENT_PARENTHESISED)
-      ),
       psiElement().withSuperParent(2, EXPORT_ASSIGNMENT),
       psiElement().withSuperParent(3, EXPORT_ASSIGNMENT_PARENTHESISED)
 

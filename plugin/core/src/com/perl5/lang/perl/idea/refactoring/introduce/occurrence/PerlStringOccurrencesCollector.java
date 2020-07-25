@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.refactoring.introduce.occurrence;
 import com.intellij.openapi.util.Pair;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
 import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.PerlStringList;
@@ -28,6 +29,8 @@ import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
+
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.STRING_LIST;
 
 class PerlStringOccurrencesCollector extends PerlGenericStringsOccurrencesCollector {
   PerlStringOccurrencesCollector(@NotNull PerlIntroduceTarget target) {
@@ -41,7 +44,7 @@ class PerlStringOccurrencesCollector extends PerlGenericStringsOccurrencesCollec
     boolean isTargetExecutable = targetElement instanceof PsiPerlStringXq;
     boolean isFullRangeTarget = getTarget().isFullRange();
     if (isFullRangeTarget && isElementExecutable == isTargetExecutable && PerlPsiUtil.areElementsSame(targetElement, element)) {
-      if (element instanceof PsiPerlStringBare && PerlPsiUtil.isInStringList(element)) {
+      if (element instanceof PsiPerlStringBare && PsiUtilCore.getElementType(element.getParent()) == STRING_LIST) {
         addOccurrence(PerlIntroduceTarget.create(
           Objects.requireNonNull(PsiTreeUtil.getParentOfType(element, PerlStringList.class)), element, element));
       }

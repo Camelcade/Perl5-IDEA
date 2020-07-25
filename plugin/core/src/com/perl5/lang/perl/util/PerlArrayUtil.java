@@ -145,7 +145,6 @@ public class PerlArrayUtil implements PerlElementTypes {
 
     if (rootElement instanceof PsiPerlParenthesisedExpr ||
         rootElement instanceof PsiPerlCommaSequenceExpr ||
-        PsiUtilCore.getElementType(rootElement) == LP_STRING_QW ||
         rootElement instanceof PerlStringList) {
       for (PsiElement childElement : rootElement.getChildren()) {
         collectListElements(childElement, result);

@@ -18,11 +18,8 @@ package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ObjectUtils;
-import com.intellij.util.containers.ContainerUtil;
-import com.perl5.lang.perl.lexer.PerlTokenSets;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -58,9 +55,6 @@ public interface PerlReplacementRegex extends PerlRegexExpression {
       IElementType elementType = PsiUtilCore.getElementType(run);
       if (elementType == PERL_REGEX || elementType == BLOCK_BRACELESS || elementType == REGEX_REPLACEMENT) {
         result.add(run);
-      }
-      else if (PerlTokenSets.LAZY_PARSABLE_REGEXPS.contains(elementType)) {
-        ContainerUtil.addIfNotNull(result, PsiTreeUtil.findChildOfType(run, PsiPerlPerlRegex.class));
       }
       run = run.getNextSibling();
     }

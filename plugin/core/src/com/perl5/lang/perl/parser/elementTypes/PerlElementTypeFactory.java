@@ -79,12 +79,6 @@ public class PerlElementTypeFactory {
         return new PerlLazyHeredocElementType(name, PerlHeredocElementImpl.class, PerlLexer.STRING_QX);
       case "HEREDOC":
         return new PerlLazyHeredocElementType(name, PerlHeredocElementImpl.class, PerlLexer.STRING_Q);
-      case "LP_REGEX_X":
-        return new PerlQuoteLikeContentLazyElementType(name, PerlLexer.MATCH_REGEX_X);
-      case "LP_REGEX_XX":
-        return new PerlQuoteLikeContentLazyElementType(name, PerlLexer.MATCH_REGEX_XX);
-      case "LP_STRING_QW":
-        return new PerlQuoteLikeContentLazyElementType(name, PerlLexer.STRING_LIST);
       case "SUB_DEFINITION":
         return PerlStubElementTypes.SUB_DEFINITION;
       case "METHOD_DEFINITION":

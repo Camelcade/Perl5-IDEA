@@ -48,8 +48,6 @@ public interface PerlStringList extends PerlQuoted {
     if (parentElementType != STRING_BARE) {
       return false;
     }
-    PsiElement grandParentElement = parentElement.getParent();
-    IElementType grandParentElementType = PsiUtilCore.getElementType(grandParentElement);
-    return grandParentElementType == LP_STRING_QW || grandParentElementType == STRING_LIST;
+    return PsiUtilCore.getElementType(parentElement.getParent()) == STRING_LIST;
   }
 }

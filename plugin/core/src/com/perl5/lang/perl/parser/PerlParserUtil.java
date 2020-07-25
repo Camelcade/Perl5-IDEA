@@ -33,6 +33,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.regex.Pattern;
 
 import static com.intellij.lang.WhitespacesBinders.GREEDY_LEFT_BINDER;
+import static com.intellij.lang.WhitespacesBinders.GREEDY_RIGHT_BINDER;
 
 
 public class PerlParserUtil extends GeneratedParserUtilBase implements PerlElementTypes {
@@ -258,16 +259,11 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
     PsiBuilder.Marker m = b.mark();
 
     boolean r;
-    if (b.getTokenType() == LP_STRING_QW) {
-      b.advanceLexer();
-      r = true;
-    }
-    else {
-      r = parser.parse(b, l);
-    }
+    r = parser.parse(b, l);
 
     // fixme prepend last done marker
     if (r) {
+      m.setCustomEdgeTokenBinders(GREEDY_LEFT_BINDER, GREEDY_RIGHT_BINDER);
       m.collapse(PARSABLE_STRING_USE_VARS);
     }
     else {

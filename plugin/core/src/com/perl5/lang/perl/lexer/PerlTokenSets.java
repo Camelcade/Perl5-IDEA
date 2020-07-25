@@ -353,20 +353,7 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
     STATEMENT, USE_STATEMENT, NO_STATEMENT
   );
 
-  TokenSet LAZY_PARSABLE_REGEXPS = TokenSet.create(
-    LP_REGEX_X,
-    LP_REGEX_XX
-  );
-
-  TokenSet MATCH_REGEXP_CONTAINERS = TokenSet.create(
-    LP_REGEX_X,
-    LP_REGEX_XX,
-    PERL_REGEX
-  );
-
-  TokenSet TRANSPARENT_ELEMENT_TYPES = TokenSet.orSet(
-    TokenSet.create(LP_STRING_QW, PARSABLE_STRING_USE_VARS), LAZY_PARSABLE_REGEXPS
-  );
+  TokenSet TRANSPARENT_ELEMENT_TYPES = TokenSet.create(PARSABLE_STRING_USE_VARS);
 
   TokenSet BLOCK_LIKE_CONTAINERS = TokenSet.create(
     BLOCK, BLOCK_FAKE, BLOCK_SCALAR, BLOCK_ARRAY, BLOCK_HASH, BLOCK_GLOB, BLOCK_CODE, BLOCK_BRACELESS

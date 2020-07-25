@@ -17,9 +17,7 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ObjectUtils;
-import com.perl5.lang.perl.lexer.PerlTokenSets;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -31,10 +29,7 @@ public interface PerlSimpleRegex extends PerlRegexExpression {
     if (children.length == 0) {
       return null;
     }
-    if (PerlTokenSets.LAZY_PARSABLE_REGEXPS.contains(PsiUtilCore.getElementType(children[0]))) {
-      children = children[0].getChildren();
-    }
-    return children.length == 0 ? null : ObjectUtils.tryCast(children[0], PsiPerlPerlRegex.class);
+    return ObjectUtils.tryCast(children[0], PsiPerlPerlRegex.class);
   }
 
   @Override

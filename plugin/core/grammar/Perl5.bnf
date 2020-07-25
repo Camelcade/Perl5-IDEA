@@ -428,7 +428,10 @@
     LP_STRING_Q = "LP_STRING_Q"
     LP_STRING_QX = "LP_STRING_QX"
     LP_STRING_QX_RESTRICTED = "LP_STRING_QX_RESTRICTED"
+    LP_STRING_QW = "LP_STRING_QW"
     LP_REGEX = "LP_REGEX"
+    LP_REGEX_X = "LP_REGEX_X"
+    LP_REGEX_XX = "LP_REGEX_XX"
   ]
 
     extends(".+expr")=expr
@@ -1033,7 +1036,7 @@ replacement_regex ::=
     [perl_regex_modifiers]
     {pin=1}
 
-private regex_match ::= 'r{' [<<consumeTokens 'LP_REGEX_X'>>|<<consumeTokens 'LP_REGEX_XX'>>|perl_regex]
+private regex_match ::= 'r{' [perl_regex]
 private regex_replace ::= regex_replace_regex | regex_replace_code
 
 private regex_replace_regex ::= {'r/' | 'r}' 'r{' } regex_replacement
@@ -1294,7 +1297,7 @@ string_bare ::= &(STRING_CONTENT|'\\"')<<parseBareString>>
 string_sq ::= [ 'q'] quoted_sq_string
 string_list ::=  'qw' qw_string {pin=1}
 private qw_string ::= QUOTE_SINGLE_OPEN [parse_qw_string_content] QUOTE_SINGLE_CLOSE {pin=1}
-private parse_qw_string_content ::= <<isUseVars>> <<mapUseVars qw_string_content>>+| qw_string_content | <<consumeTokens 'LP_STRING_QW'>>
+private parse_qw_string_content ::= <<isUseVars>> <<mapUseVars qw_string_content>>+| qw_string_content
 private qw_string_content ::= string_bare+
 private quoted_sq_string ::= QUOTE_SINGLE_OPEN [smart_sq_string_content] QUOTE_SINGLE_CLOSE {pin=1}
 private smart_sq_string_content ::= <<isUseVars>> <<mapUseVars sq_string_content_element>>+ | sq_string_content
@@ -1387,11 +1390,6 @@ annotation_noinspection ::=  '#@noinspection' string_bare {pin=1}
 /******************************************* End of annotations *******************************************************/
 
 /******************************************* Lazy parsable elements *******************************************************/
-lp_string_qw ::= [qw_string_content] {extraRoot=true}
-
-lp_regex_x ::= perl_regex {extraRoot=true}
-lp_regex_xx ::= perl_regex {extraRoot=true}
-
 parsable_string_use_vars ::= use_vars_declarations {extraRoot=true}
 comment_annotation ::= annotation {extraRoot=true}
 heredoc ::= sq_string_content {extraRoot=true}
