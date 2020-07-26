@@ -2378,6 +2378,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
       initWithFileContent(targetName, getFileExtension(),
                           FileUtil.loadFile(new File("testData", "perlTidy" + getRealDataFileExtension()), CharsetToolkit.UTF8, true)
                             .trim());
+      assertNoErrorElements();
     }
     catch (IOException e) {
       throw new RuntimeException(e);
