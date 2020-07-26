@@ -1,0 +1,24 @@
+<html>
+<head>http://template-toolkit.org/docs/manual/Variables.html</head>
+<body>
+
+[% THROW food "Missing ingredients: $recipe.error" %]
+test text
+[% THROW user.login 'no user id: please login' %]
+test text
+[% THROW $myerror.type "My Error: $myerror.info" %]
+test text
+[% THROW food 'eggs' 'flour' msg='Missing Ingredients' %]
+test text
+%% THROW food "Missing ingredients: $recipe.error"
+test text
+%% THROW user.login 'no user id: please login'
+test text
+%% THROW $myerror.type "My Error: $myerror.info"
+test text
+%% THROW food 'eggs' 'flour' msg='Missing Ingredients'
+test text
+
+
+</body>
+</html>

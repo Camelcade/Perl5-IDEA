@@ -29,7 +29,7 @@ public class EmbeddedPerlLexerAdapter extends PerlTemplatingMergingLexerAdapter 
     TokenSet.create(EMBED_TEMPLATE_BLOCK_HTML)
   );
 
-  public EmbeddedPerlLexerAdapter(Project project) {
-    super(project, new EmbeddedPerlLexer(null).withProject(project), TOKENS_TO_MERGE);
+  public EmbeddedPerlLexerAdapter(Project project, boolean enforceSublexing) {
+    super(project, new EmbeddedPerlLexer(null).withProject(project), TOKENS_TO_MERGE, enforceSublexing);
   }
 }

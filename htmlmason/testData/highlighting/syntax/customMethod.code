@@ -1,0 +1,7 @@
+<%method some>
+<div><% 'hi' %></div>
+</%method>
+
+<%custommethod othermethod>
+    <div><% 'hi' %></div>
+</%custommethod>

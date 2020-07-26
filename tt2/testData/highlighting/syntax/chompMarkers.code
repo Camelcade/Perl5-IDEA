@@ -1,0 +1,26 @@
+
+
+<html>
+<head></head>
+<body>
+
+[% GET somefield %]
+
+[%- GET somefield %]
+[% GET somefield -%]
+[%- GET somefield -%]
+
+[%+ GET somefield %]
+[% GET somefield +%]
+[%+ GET somefield +%]
+
+[%= GET somefield %]
+[% GET somefield =%]
+[%= GET somefield =%]
+
+[%~ GET somefield %]
+[% GET somefield ~%]
+[%~ GET somefield ~%]
+
+</body>
+</html>

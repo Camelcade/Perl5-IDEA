@@ -1,0 +1,35 @@
+<html>
+<head>http://template-toolkit.org/docs/manual/Variables.html</head>
+<body>
+
+[% INCLUDE header %]
+[% myheader = 'my/misc/header' %]
+[% INCLUDE   myheader  %]           # 'myheader'
+[% INCLUDE  $myheader  %]           # 'my/misc/header'
+[% INCLUDE "$myheader" %]           # 'my/misc/header'
+[% title = 'Hello World' %]
+[% INCLUDE header %]
+[% INCLUDE table %]
+
+[% INCLUDE table title="Active Projects" %]
+
+[% INCLUDE table
+     title   = "Active Projects"
+     bgcolor = "80ff00"    # chartreuse
+     border  = 2
+%]
+[% foo = {
+       bar = 'Baz'
+   }
+%]
+
+[% INCLUDE somefile foo.bar='Boz' %]
+
+[% foo.bar %]           # Boz
+[% INCLUDE html/header + "site/$header" + site/menu
+     title = "My Groovy Web Site"
+%]
+
+
+</body>
+</html>

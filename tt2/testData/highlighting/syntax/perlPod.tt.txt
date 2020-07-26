@@ -1,0 +1,454 @@
+<
+    HTML_CODE => TEXT
+    HTML_TAG => DEFAULT_TAG => TEXT
+html
+    HTML_CODE => TEXT
+    HTML_TAG => DEFAULT_TAG => TEXT
+    HTML_TAG_NAME => DEFAULT_KEYWORD
+>
+    HTML_CODE => TEXT
+    HTML_TAG => DEFAULT_TAG => TEXT
+
+
+    HTML_CODE => TEXT
+<
+    HTML_CODE => TEXT
+    HTML_TAG => DEFAULT_TAG => TEXT
+head
+    HTML_CODE => TEXT
+    HTML_TAG => DEFAULT_TAG => TEXT
+    HTML_TAG_NAME => DEFAULT_KEYWORD
+>
+    HTML_CODE => TEXT
+    HTML_TAG => DEFAULT_TAG => TEXT
+http://template-toolkit.org/docs/manual/Variables.html
+    HTML_CODE => TEXT
+</
+    HTML_CODE => TEXT
+    HTML_TAG => DEFAULT_TAG => TEXT
+head
+    HTML_CODE => TEXT
+    HTML_TAG => DEFAULT_TAG => TEXT
+    HTML_TAG_NAME => DEFAULT_KEYWORD
+>
+    HTML_CODE => TEXT
+    HTML_TAG => DEFAULT_TAG => TEXT
+
+
+    HTML_CODE => TEXT
+<
+    HTML_CODE => TEXT
+    HTML_TAG => DEFAULT_TAG => TEXT
+body
+    HTML_CODE => TEXT
+    HTML_TAG => DEFAULT_TAG => TEXT
+    HTML_TAG_NAME => DEFAULT_KEYWORD
+>
+    HTML_CODE => TEXT
+    HTML_TAG => DEFAULT_TAG => TEXT
+
+
+
+    HTML_CODE => TEXT
+[%
+    TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
+%]
+    TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
+
+   
+    HTML_CODE => TEXT
+print
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+$context->include('myfile');
+    HTML_CODE => TEXT
+
+   
+    HTML_CODE => TEXT
+print
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+$stash;
+    HTML_CODE => TEXT
+
+
+
+    HTML_CODE => TEXT
+=pod
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+test
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+pod
+    HTML_CODE => TEXT
+
+
+
+    HTML_CODE => TEXT
+test
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+content
+    HTML_CODE => TEXT
+
+
+
+    HTML_CODE => TEXT
+=cut
+    HTML_CODE => TEXT
+
+
+   
+    HTML_CODE => TEXT
+print
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+$output;
+    HTML_CODE => TEXT
+
+   
+    HTML_CODE => TEXT
+print
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+$error;
+    HTML_CODE => TEXT
+
+
+    HTML_CODE => TEXT
+[%
+    TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
+%]
+    TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
+[%
+    TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
+%]
+    TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
+
+   
+    HTML_CODE => TEXT
+print
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+$context->include('myfile');
+    HTML_CODE => TEXT
+
+   
+    HTML_CODE => TEXT
+print
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+$stash;
+    HTML_CODE => TEXT
+
+   
+    HTML_CODE => TEXT
+print
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+$output;
+    HTML_CODE => TEXT
+
+   
+    HTML_CODE => TEXT
+if
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+($somethig)
+    HTML_CODE => TEXT
+
+   
+    HTML_CODE => TEXT
+{
+    HTML_CODE => TEXT
+
+      
+    HTML_CODE => TEXT
+use
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+POSIX;
+    HTML_CODE => TEXT
+
+      
+    HTML_CODE => TEXT
+POSIX::_exit();
+    HTML_CODE => TEXT
+
+      
+    HTML_CODE => TEXT
+localtime;
+    HTML_CODE => TEXT
+
+   
+    HTML_CODE => TEXT
+}
+    HTML_CODE => TEXT
+
+
+   
+    HTML_CODE => TEXT
+print
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+$error;
+    HTML_CODE => TEXT
+
+
+    HTML_CODE => TEXT
+[%
+    TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
+%]
+    TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
+[%
+    TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
+%]
+    TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
+
+   
+    HTML_CODE => TEXT
+print
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+$context->include('myfile');
+    HTML_CODE => TEXT
+
+
+    HTML_CODE => TEXT
+[%
+    TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
+%]
+    TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
+[%
+    TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
+%]
+    TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
+
+   
+    HTML_CODE => TEXT
+$stash->set(foo
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+=>
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+'bar');
+    HTML_CODE => TEXT
+
+   
+    HTML_CODE => TEXT
+print
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+"foo
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+value:
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+",
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+$stash->get('foo');
+    HTML_CODE => TEXT
+
+
+    HTML_CODE => TEXT
+[%
+    TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
+%]
+    TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
+[%
+    TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
+%]
+    TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
+
+   
+    HTML_CODE => TEXT
+print
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+"foo\n";
+    HTML_CODE => TEXT
+                           
+    HTML_CODE => TEXT
+#
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+OK
+    HTML_CODE => TEXT
+
+   
+    HTML_CODE => TEXT
+print
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+PERLOUT
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+"bar\n";
+    HTML_CODE => TEXT
+                   
+    HTML_CODE => TEXT
+#
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+OK,
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+same
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+as
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+above
+    HTML_CODE => TEXT
+
+   
+    HTML_CODE => TEXT
+print
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+Template::Perl::PERLOUT
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+"baz\n";
+    HTML_CODE => TEXT
+   
+    HTML_CODE => TEXT
+#
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+OK,
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+same
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+as
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+above
+    HTML_CODE => TEXT
+
+   
+    HTML_CODE => TEXT
+print
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+STDOUT
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+"qux\n";
+    HTML_CODE => TEXT
+                    
+    HTML_CODE => TEXT
+#
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+WRONG!
+    HTML_CODE => TEXT
+
+   
+    HTML_CODE => TEXT
+[%
+    TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
+%]
+    TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
+[%
+    TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
+%]
+    TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
+
+   
+    HTML_CODE => TEXT
+print
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+"
+    HTML_CODE => TEXT
+[%
+    TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
+%]
+    TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
+\n";
+    HTML_CODE => TEXT
+
+
+    HTML_CODE => TEXT
+[%
+    TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
+%]
+    TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
+
+
+
+
+
+    HTML_CODE => TEXT
+</
+    HTML_CODE => TEXT
+    HTML_TAG => DEFAULT_TAG => TEXT
+body
+    HTML_CODE => TEXT
+    HTML_TAG => DEFAULT_TAG => TEXT
+    HTML_TAG_NAME => DEFAULT_KEYWORD
+>
+    HTML_CODE => TEXT
+    HTML_TAG => DEFAULT_TAG => TEXT
+
+
+    HTML_CODE => TEXT
+</
+    HTML_CODE => TEXT
+    HTML_TAG => DEFAULT_TAG => TEXT
+html
+    HTML_CODE => TEXT
+    HTML_TAG => DEFAULT_TAG => TEXT
+    HTML_TAG_NAME => DEFAULT_KEYWORD
+>
+    HTML_CODE => TEXT
+    HTML_TAG => DEFAULT_TAG => TEXT
+
+
+    HTML_CODE => TEXT

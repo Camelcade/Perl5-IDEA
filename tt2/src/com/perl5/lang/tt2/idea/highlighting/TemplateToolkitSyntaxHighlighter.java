@@ -69,6 +69,6 @@ public class TemplateToolkitSyntaxHighlighter extends SyntaxHighlighterBase impl
     else if (tokenType == LINE_COMMENT) {
       return TT2_COMMENT_KEYS;
     }
-    return new TextAttributesKey[0];
+    return TextAttributesKey.EMPTY_ARRAY;
   }
 }

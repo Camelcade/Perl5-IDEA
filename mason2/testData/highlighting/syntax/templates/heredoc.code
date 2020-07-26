@@ -1,0 +1,12 @@
+<html>
+
+<%perl>
+
+say <<EOM;
+test $variable something
+EOM
+
+ </%perl>
+
+
+</html>

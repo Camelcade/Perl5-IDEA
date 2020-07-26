@@ -1,0 +1,32 @@
+<html>
+<head>http://template-toolkit.org/docs/manual/Variables.html</head>
+<body>
+
+[% #line comment in block %]
+
+[%#
+    this entire directive is ignored no
+    matter how many lines it wraps onto
+%]
+
+[%#
+    this entire directive is ignored no
+    matter how 'many lines it wraps onto
+%]
+
+[%# this entire
+    "directive is ignored no
+    matter how many lines it wraps onto
+%]
+
+[% # this is a comment
+   theta = 20      # so is' this
+   rho   = 30      # <aol>me "too!</aol>
+   blah = 69       # same here
+   comment1 = '#notcomment' # this is
+   comment2 = "#notcomment too" # this is
+%]
+
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+<html>
+<head>http://template-toolkit.org/docs/manual/Variables.html</head>
+<body>
+
+[% META
+   title   = 'The Cat in the Hat'
+   author  = 'Dr. Seuss'
+   version = 1.23
+%]
+
+
+
+</body>
+</html>
+

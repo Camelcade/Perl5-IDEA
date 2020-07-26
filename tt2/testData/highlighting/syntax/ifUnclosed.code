@@ -1,0 +1,26 @@
+<html>
+<head>http://template-toolkit.org/docs/manual/Variables.html</head>
+<body>
+
+[% IF age < 10 %]
+   Hello [% name %], does your mother know you're
+   using her AOL account?
+[% ELSIF age < 18 %]
+   Sorry, you're not old enough to enter
+   Hello [% name %], does your mother know you're
+   (and too dumb to lie about your age)
+[% ELSE %]
+   Welcome [% name %].
+   test words
+
+[% IF age < 10 %]
+   Hello [% name %], does your mother know you're
+   using her AOL account?
+
+[% IF age < 10 %]
+   Hello [% name %], does your mother know you're
+   using her AOL account?
+
+
+</body>
+</html>

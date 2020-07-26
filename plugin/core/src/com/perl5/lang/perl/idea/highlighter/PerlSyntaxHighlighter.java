@@ -30,10 +30,9 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.lexer.adapters.PerlHighlightingLexerAdapter;
+import com.perl5.lang.perl.lexer.PerlLexingContext;
+import com.perl5.lang.perl.lexer.adapters.PerlMergingLexerAdapter;
 import com.perl5.lang.perl.parser.moose.MooseElementTypes;
-import com.perl5.lang.pod.PodLanguage;
-import com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighter;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 
@@ -204,16 +203,11 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements Perl
 
   @Override
   public @NotNull Lexer getHighlightingLexer() {
-    return new PerlHighlightingLexerAdapter(myProject);
+    return new PerlMergingLexerAdapter(PerlLexingContext.create(myProject).withEnforcedSublexing(true));
   }
 
   @Override
   public @NotNull TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
-    // fixme unify this somehow
-    if (tokenType.getLanguage() == PodLanguage.INSTANCE) {
-      return PodSyntaxHighlighter.getPodHighlights(tokenType);
-    }
-
     return pack(COLORS_MAP.get(tokenType));
   }
 

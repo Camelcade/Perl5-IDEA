@@ -322,11 +322,13 @@
 
     <lang.syntaxHighlighterFactory language="Perl5"
                                    implementationClass="com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighterFactory"/>
-    <editorHighlighterProvider filetype="Perl5 script"
+    <editorHighlighterProvider filetype="Perl5 Script"
                                implementationClass="com.perl5.lang.perl.idea.highlighter.PerlEditorHighlighterProvider"/>
-    <editorHighlighterProvider filetype="Perl5 package"
+    <editorHighlighterProvider filetype="Cpanfile"
                                implementationClass="com.perl5.lang.perl.idea.highlighter.PerlEditorHighlighterProvider"/>
-    <editorHighlighterProvider filetype="Perl5 test"
+    <editorHighlighterProvider filetype="Perl5 Package"
+                               implementationClass="com.perl5.lang.perl.idea.highlighter.PerlEditorHighlighterProvider"/>
+    <editorHighlighterProvider filetype="Perl5 Test"
                                implementationClass="com.perl5.lang.perl.idea.highlighter.PerlEditorHighlighterProvider"/>
 
     <lang.psiStructureViewFactory language="Perl5"

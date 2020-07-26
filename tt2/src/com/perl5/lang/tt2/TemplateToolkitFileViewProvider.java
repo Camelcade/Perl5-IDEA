@@ -20,6 +20,7 @@ import com.intellij.lang.Language;
 import com.intellij.lang.LanguageParserDefinitions;
 import com.intellij.lang.ParserDefinition;
 import com.intellij.lang.html.HTMLLanguage;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.MultiplePsiFilesPerDocumentFileViewProvider;
 import com.intellij.psi.PsiElement;
@@ -46,7 +47,7 @@ public class TemplateToolkitFileViewProvider extends MultiplePsiFilesPerDocument
   private final Language myTemplateLanguage;
   private final Set<Language> myRelevantLanguages = new HashSet<>();
 
-  public TemplateToolkitFileViewProvider(PsiManager manager, VirtualFile virtualFile, boolean eventSystemEnabled) {
+  public TemplateToolkitFileViewProvider(@NotNull PsiManager manager, @NotNull VirtualFile virtualFile, boolean eventSystemEnabled) {
     super(manager, virtualFile, eventSystemEnabled);
     myRelevantLanguages.add(getBaseLanguage());
     myRelevantLanguages.add(myTemplateLanguage = calcTemplateLanguage(manager, virtualFile));
@@ -120,7 +121,11 @@ public class TemplateToolkitFileViewProvider extends MultiplePsiFilesPerDocument
     return ret;
   }
 
-  public static Language calcTemplateLanguage(PsiManager manager, VirtualFile file) {
+  public static Language calcTemplateLanguage(@Nullable Project project, @Nullable VirtualFile file) {
+    return calcTemplateLanguage(project == null ? null : PsiManager.getInstance(project), file);
+  }
+
+  public static Language calcTemplateLanguage(@Nullable PsiManager manager, @Nullable VirtualFile file) {
     while (file instanceof LightVirtualFile) {
       VirtualFile originalFile = ((LightVirtualFile)file).getOriginalFile();
       if (originalFile == null || originalFile == file) {
@@ -129,7 +134,7 @@ public class TemplateToolkitFileViewProvider extends MultiplePsiFilesPerDocument
       file = originalFile;
     }
 
-    Language result = TemplateDataLanguageMappings.getInstance(manager.getProject()).getMapping(file);
+    Language result = manager == null ? null : TemplateDataLanguageMappings.getInstance(manager.getProject()).getMapping(file);
     return result == null ? HTMLLanguage.INSTANCE : result;
   }
 }

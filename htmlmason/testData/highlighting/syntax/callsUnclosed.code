@@ -1,0 +1,4 @@
+<&| "outer" &>
+    Hello
+     my <% $name %>
+     is someone

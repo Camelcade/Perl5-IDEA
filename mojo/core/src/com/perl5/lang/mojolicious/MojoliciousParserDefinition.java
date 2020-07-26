@@ -57,7 +57,7 @@ public class MojoliciousParserDefinition extends PerlParserDefinition implements
 
   @Override
   public @NotNull Lexer createLexer(Project project) {
-    return new MojoliciousLexerAdapter(project);
+    return new MojoliciousLexerAdapter(project, false);
   }
 
   @Override

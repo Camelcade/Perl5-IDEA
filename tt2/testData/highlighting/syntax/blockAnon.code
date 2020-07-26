@@ -1,0 +1,33 @@
+<html>
+<head>http://template-toolkit.org/docs/manual/Variables.html</head>
+<body>
+
+[% julius = BLOCK %]
+   And Caesar's spirit, ranging for revenge,
+   [% someval %]
+   With Ate by his side come hot from hell,
+[% END %]
+
+%% julius = BLOCK
+   And Caesar's spirit, ranging for revenge,
+   [% someval %]
+   With Ate by his side come hot from hell,
+%% END
+
+%% julius = BLOCK
+   And Caesar's spirit, ranging for revenge,
+   [% someval %]
+   With Ate by his side come hot from hell,
+[% END %]
+
+[% julius = BLOCK %]
+   And Caesar's spirit, ranging for revenge,
+   [% someval %]
+   With Ate by his side come hot from hell,
+%% END
+
+[%data%]
+
+
+</body>
+</html>

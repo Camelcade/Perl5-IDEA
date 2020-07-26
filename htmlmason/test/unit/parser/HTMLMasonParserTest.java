@@ -154,6 +154,11 @@ public class HTMLMasonParserTest extends PerlParserTestBase {
   }
 
   @Test
+  public void testPerlPod() {
+    doTest();
+  }
+
+  @Test
   public void testShared() {
     doTest();
   }

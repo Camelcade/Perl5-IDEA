@@ -1,0 +1,10 @@
+<html>
+<head>http://template-toolkit.org/docs/manual/Variables.html</head>
+<body>
+
+Things:
+[% FOREACH thing IN [ foo 'Bar' "$foo Baz" ] %]
+   * [% thing %]
+
+</body>
+</html>

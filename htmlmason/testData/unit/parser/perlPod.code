@@ -1,0 +1,16 @@
+<html>
+Hi!
+<%perl>
+my $noun = 'World';
+my @time = localtime;
+
+=head1 TEST
+
+test text
+
+
+=cut
+
+say 'something';  # comment
+</%perl>
+</html>

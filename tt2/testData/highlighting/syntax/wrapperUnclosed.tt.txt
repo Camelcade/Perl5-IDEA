@@ -1,0 +1,157 @@
+<
+    HTML_CODE => TEXT
+    HTML_TAG => DEFAULT_TAG => TEXT
+html
+    HTML_CODE => TEXT
+    HTML_TAG => DEFAULT_TAG => TEXT
+    HTML_TAG_NAME => DEFAULT_KEYWORD
+>
+    HTML_CODE => TEXT
+    HTML_TAG => DEFAULT_TAG => TEXT
+
+
+    HTML_CODE => TEXT
+<
+    HTML_CODE => TEXT
+    HTML_TAG => DEFAULT_TAG => TEXT
+head
+    HTML_CODE => TEXT
+    HTML_TAG => DEFAULT_TAG => TEXT
+    HTML_TAG_NAME => DEFAULT_KEYWORD
+>
+    HTML_CODE => TEXT
+    HTML_TAG => DEFAULT_TAG => TEXT
+http://template-toolkit.org/docs/manual/Variables.html
+    HTML_CODE => TEXT
+</
+    HTML_CODE => TEXT
+    HTML_TAG => DEFAULT_TAG => TEXT
+head
+    HTML_CODE => TEXT
+    HTML_TAG => DEFAULT_TAG => TEXT
+    HTML_TAG_NAME => DEFAULT_KEYWORD
+>
+    HTML_CODE => TEXT
+    HTML_TAG => DEFAULT_TAG => TEXT
+
+
+    HTML_CODE => TEXT
+<
+    HTML_CODE => TEXT
+    HTML_TAG => DEFAULT_TAG => TEXT
+body
+    HTML_CODE => TEXT
+    HTML_TAG => DEFAULT_TAG => TEXT
+    HTML_TAG_NAME => DEFAULT_KEYWORD
+>
+    HTML_CODE => TEXT
+    HTML_TAG => DEFAULT_TAG => TEXT
+
+
+
+    HTML_CODE => TEXT
+[%
+    TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
+%]
+    TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
+
+   
+    HTML_CODE => TEXT
+Quantum
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+mechanics
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+is
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+a
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+very
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+interesting
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+subject
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+wish
+    HTML_CODE => TEXT
+
+   
+    HTML_CODE => TEXT
+should
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+prove
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+easy
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+for
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+the
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+layman
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+to
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+fully
+    HTML_CODE => TEXT
+ 
+    HTML_CODE => TEXT
+comprehend.
+    HTML_CODE => TEXT
+
+
+
+
+    HTML_CODE => TEXT
+</
+    HTML_CODE => TEXT
+    HTML_TAG => DEFAULT_TAG => TEXT
+body
+    HTML_CODE => TEXT
+    HTML_TAG => DEFAULT_TAG => TEXT
+    HTML_TAG_NAME => DEFAULT_KEYWORD
+>
+    HTML_CODE => TEXT
+    HTML_TAG => DEFAULT_TAG => TEXT
+
+
+    HTML_CODE => TEXT
+</
+    HTML_CODE => TEXT
+    HTML_TAG => DEFAULT_TAG => TEXT
+html
+    HTML_CODE => TEXT
+    HTML_TAG => DEFAULT_TAG => TEXT
+    HTML_TAG_NAME => DEFAULT_KEYWORD
+>
+    HTML_CODE => TEXT
+    HTML_TAG => DEFAULT_TAG => TEXT
+
+
+    HTML_CODE => TEXT

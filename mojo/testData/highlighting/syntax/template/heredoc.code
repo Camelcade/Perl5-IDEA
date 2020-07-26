@@ -1,0 +1,12 @@
+<html>
+
+<%
+
+<<EOM
+test $variable something
+EOM
+
+ %>
+
+
+</html>

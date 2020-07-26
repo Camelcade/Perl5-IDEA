@@ -212,6 +212,11 @@ public class TemplateToolkitParserTest extends PerlParserTestBase {
   }
 
   @Test
+  public void testPerlPod() {
+    doTest();
+  }
+
+  @Test
   public void testPerlUnclosed() {
     doTest(false);
   }

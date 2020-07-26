@@ -1,0 +1,83 @@
+<html>
+<head></head>
+<body>
+[% IF title;
+      INCLUDE header;
+   ELSE;
+      INCLUDE other/header  title="Some Other Title";
+   END
+%]
+
+[% FOREACH group IN grouplist;
+     # loop => group iterator
+     "Groups:\n" IF loop.first;
+
+     FOREACH user IN group.userlist;
+        # loop => user iterator
+        "$loop.count: $user.name\n";
+     END;
+
+     # loop => group iterator
+     "End of Groups\n" IF loop.last;
+   END
+%]
+
+[% USE CGI;
+   CGI.start_form;
+   CGI.checkbox_group( name   = 'colours',
+                       values = [ 'red' 'green' 'blue' ] );
+   CGI.popup_menu( name   = 'items',
+                   values = [ 'foo' 'bar' 'baz' ] );
+   CGI.end_form
+%]
+
+[% MACRO triple(n) PERL %]
+     my $n = $stash->get('n');
+     print $n * 3;
+[% END -%]
+
+[% TRY;
+       INCLUDE myfile;
+       USE DBI(mydsn);
+       CALL somecode;
+   CATCH file;
+       "File Error! $error.info";
+   CATCH DBI;
+       INCLUDE database/error.html;
+   CATCH;
+       error;
+   END
+%]
+
+[% TRY %]
+   ...
+[% CATCH DBI ;
+     INCLUDE database/error.html ;
+   CATCH DBI.connect ;
+     INCLUDE database/connect.html ;
+   CATCH ;
+     INCLUDE error.html ;
+   END
+%]
+
+[% TRY %]
+   [% foo %]
+[% CATCH myerr ;
+     "Error: $error" ;
+   END
+%]
+
+[% TRY %]
+   ...
+[% CATCH myerror %]
+   [% error.info.errors.size or 'no';
+      error.info.errors.size == 1 ? ' error' : ' errors' %]
+   in [% error.info.module %]:
+      [% error.info.errors.join(', ') %].
+[% END %]
+
+
+
+
+</body>
+</html>

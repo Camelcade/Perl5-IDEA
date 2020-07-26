@@ -17,13 +17,19 @@
 package unit.parser;
 
 
+import com.perl5.lang.mason2.filetypes.MasonInternalComponentFileType;
 import com.perl5.lang.mason2.filetypes.MasonTopLevelComponentFileType;
+import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 import unit.perl.parser.PerlParserTestBase;
 
 public class Mason2TemplatingParserTest extends PerlParserTestBase {
   public Mason2TemplatingParserTest() {
     super(MasonTopLevelComponentFileType.TOP_LEVEL_COMPONENT_EXTENSION);
+  }
+
+  protected Mason2TemplatingParserTest(@NotNull String fileExt) {
+    super(fileExt);
   }
 
   @Override
@@ -44,5 +50,16 @@ public class Mason2TemplatingParserTest extends PerlParserTestBase {
   @Test
   public void testIssue1077() {
     doTest(true);
+  }
+
+  public static class InternalComponent extends Mason2TemplatingParserTest {
+    public InternalComponent() {
+      super(MasonInternalComponentFileType.INTERNAL_COMPONENT_EXTENSION);
+    }
+
+    @Override
+    protected @NotNull String computeAnswerFileNameWithoutExtension(@NotNull String appendix) {
+      return super.computeAnswerFileNameWithoutExtension(appendix + ".internal");
+    }
   }
 }

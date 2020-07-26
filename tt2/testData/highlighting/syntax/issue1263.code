@@ -1,0 +1,4 @@
+<html>
+[% result = PROCESS footer %]
+[% SET result = PROCESS footer %]
+</html>

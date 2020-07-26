@@ -25,7 +25,14 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class PerlTemplatingMergingLexerAdapter extends MergingLexerAdapter {
-  public PerlTemplatingMergingLexerAdapter(@Nullable Project project, @NotNull PerlProtoLexer flexLexer, TokenSet tokensToMerge) {
-    super(new PerlSublexingLexerAdapter(flexLexer, PerlLexingContext.create(project)), tokensToMerge);
+  public PerlTemplatingMergingLexerAdapter(@Nullable Project project,
+                                           @NotNull PerlProtoLexer flexLexer,
+                                           TokenSet tokensToMerge,
+                                           boolean enforceSublexing) {
+    super(new PerlSublexingLexerAdapter(flexLexer, createLexingContext(project, enforceSublexing)), tokensToMerge);
+  }
+
+  private static @NotNull PerlLexingContext createLexingContext(@Nullable Project project, boolean enforceSublexing) {
+    return PerlLexingContext.create(project).withEnforcedSublexing(enforceSublexing);
   }
 }

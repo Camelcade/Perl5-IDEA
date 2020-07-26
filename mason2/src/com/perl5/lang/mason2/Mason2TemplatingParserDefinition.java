@@ -37,7 +37,7 @@ public class Mason2TemplatingParserDefinition extends Mason2ParserDefinition {
 
   @Override
   public @NotNull Lexer createLexer(Project project) {
-    return new Mason2TemplatingLexerAdapter(project);
+    return new Mason2TemplatingLexerAdapter(project, false);
   }
 
   @Override

@@ -42,7 +42,7 @@ public class HTMLMasonParserDefinition extends PerlParserDefinition implements H
 
   @Override
   public @NotNull Lexer createLexer(Project project) {
-    return new HTMLMasonLexerAdapter(project);
+    return new HTMLMasonLexerAdapter(project, false);
   }
 
   @Override

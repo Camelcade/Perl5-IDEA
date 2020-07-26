@@ -1,0 +1,7 @@
+<%perl>
+say 'this is a perl';
+</%perl>
+
+<%customperl>
+    say 'this is a perl';
+</%customperl>

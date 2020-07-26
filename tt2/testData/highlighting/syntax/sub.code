@@ -1,0 +1,13 @@
+<html>
+<head>http://template-toolkit.org/docs/manual/Variables.html</head>
+<body>
+[% foo = 10 %]
+[% mycode(foo, 20) %]       # received 10, 20
+[% myjoin(10, 20, 30) %]
+[% myjoin(10, 20, 30, joint = ' - ') %]
+[% myjoin(joint => ' * ', 10, 20, 30) %]
+[% r = 'Romeo' %]
+[% r(100, 99, s, t, v) %]       # outputs "Romeo"
+
+</body>
+</html>

@@ -29,8 +29,8 @@ public class HTMLMasonLexerAdapter extends PerlTemplatingMergingLexerAdapter imp
     TokenSet.create(HTML_MASON_TEMPLATE_BLOCK_HTML)
   );
 
-  public HTMLMasonLexerAdapter(Project project) {
-    super(project, new HTMLMasonLexer(null).withProject(project), TOKENS_TO_MERGE);
+  public HTMLMasonLexerAdapter(Project project, boolean enforceSublexing) {
+    super(project, new HTMLMasonLexer(null).withProject(project), TOKENS_TO_MERGE, enforceSublexing);
   }
 }
 

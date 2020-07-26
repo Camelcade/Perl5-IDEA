@@ -117,7 +117,8 @@ public abstract class PerlParserTestBase extends PerlLightTestCaseBase {
     ensureParsed(psiFile);
     assertEquals("doc text mismatch", text, requireNonNull(psiFile.getViewProvider().getDocument()).getText());
     ensureCorrectReparse(psiFile);
-    doCheckResult(getAnswersDataPath(), psiFile, checkAllPsiRoots(), getTestName(true), skipSpaces(), includeRanges(),
+    doCheckResult(getAnswersDataPath(), psiFile, checkAllPsiRoots(), computeAnswerFileNameWithoutExtension(""), skipSpaces(),
+                  includeRanges(),
                   allTreesInSingleFile());
     if (ensureNoErrorElements) {
       ensureNoErrorElements();

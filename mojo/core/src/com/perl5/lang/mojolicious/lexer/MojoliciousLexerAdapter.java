@@ -31,7 +31,7 @@ public class MojoliciousLexerAdapter extends PerlTemplatingMergingLexerAdapter i
     TokenSet.create(MOJO_TEMPLATE_BLOCK_HTML)
   );
 
-  public MojoliciousLexerAdapter(Project project) {
-    super(project, new MojoliciousLexer(null).withProject(project), TOKENS_TO_MERGE);
+  public MojoliciousLexerAdapter(Project project, boolean enforceSublexing) {
+    super(project, new MojoliciousLexer(null).withProject(project), TOKENS_TO_MERGE, enforceSublexing);
   }
 }

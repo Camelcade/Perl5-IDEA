@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,22 +16,15 @@
 
 package com.perl5.lang.perl.idea.highlighter;
 
-import com.intellij.openapi.editor.colors.EditorColorsScheme;
-import com.intellij.openapi.editor.highlighter.EditorHighlighter;
-import com.intellij.openapi.fileTypes.EditorHighlighterProvider;
-import com.intellij.openapi.fileTypes.FileType;
+import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.VirtualFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 
-public class PerlEditorHighlighterProvider implements EditorHighlighterProvider {
+public class PerlEditorHighlighterProvider extends PerlEditorHighlighterProviderBase {
   @Override
-  public EditorHighlighter getEditorHighlighter(@Nullable Project project,
-                                                @NotNull FileType fileType,
-                                                @Nullable VirtualFile virtualFile,
-                                                @NotNull EditorColorsScheme colors) {
-    return new PerlEditorHighlighter(project, virtualFile, colors);
+  protected @NotNull SyntaxHighlighter createBaseSyntaxHighlighter(@Nullable Project project) {
+    return new PerlSyntaxHighlighter(project);
   }
 }

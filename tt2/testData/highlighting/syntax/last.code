@@ -1,0 +1,13 @@
+<html>
+<head>http://template-toolkit.org/docs/manual/Variables.html</head>
+<body>
+
+[% LAST %]
+[% LAST IF some.condition %]
+[% some.var %]
+[% BREAK %]
+[% BREAK IF some.condition %]
+
+</body>
+</html>
+

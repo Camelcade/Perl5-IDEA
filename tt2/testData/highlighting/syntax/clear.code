@@ -1,0 +1,11 @@
+<html>
+<head>http://template-toolkit.org/docs/manual/Variables.html</head>
+<body>
+
+[% CLEAR %]
+[% CLEAR IF some.condition %]
+[% some.var %]
+
+</body>
+</html>
+

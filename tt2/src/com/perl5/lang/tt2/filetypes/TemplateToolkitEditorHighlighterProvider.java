@@ -16,22 +16,41 @@
 
 package com.perl5.lang.tt2.filetypes;
 
-import com.intellij.openapi.editor.colors.EditorColorsScheme;
+import com.intellij.openapi.editor.ex.util.LayerDescriptor;
+import com.intellij.openapi.editor.ex.util.LayeredLexerEditorHighlighter;
 import com.intellij.openapi.editor.highlighter.EditorHighlighter;
-import com.intellij.openapi.fileTypes.EditorHighlighterProvider;
 import com.intellij.openapi.fileTypes.FileType;
+import com.intellij.openapi.fileTypes.SyntaxHighlighter;
+import com.intellij.openapi.fileTypes.SyntaxHighlighterFactory;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.perl5.lang.tt2.idea.highlighting.TemplateToolkitHighlighter;
+import com.perl5.lang.perl.idea.highlighter.PerlEditorHighlighterProviderBase;
+import com.perl5.lang.tt2.TemplateToolkitFileViewProvider;
+import com.perl5.lang.tt2.idea.highlighting.TemplateToolkitSyntaxHighlighter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class TemplateToolkitEditorHighlighterProvider implements EditorHighlighterProvider {
+import static com.perl5.lang.tt2.lexer.TemplateToolkitElementTypesGenerated.TT2_HTML;
+
+public class TemplateToolkitEditorHighlighterProvider extends PerlEditorHighlighterProviderBase {
   @Override
-  public EditorHighlighter getEditorHighlighter(@Nullable Project project,
-                                                @NotNull FileType fileType,
-                                                @Nullable VirtualFile virtualFile,
-                                                @NotNull EditorColorsScheme colors) {
-    return new TemplateToolkitHighlighter(project, virtualFile, colors);
+  protected @NotNull EditorHighlighter registerAdditionalLayers(@NotNull LayeredLexerEditorHighlighter highlighter,
+                                                                @Nullable Project project,
+                                                                @NotNull FileType fileType,
+                                                                @Nullable VirtualFile virtualFile) {
+    highlighter.registerLayer(TT2_HTML, new LayerDescriptor(
+      SyntaxHighlighterFactory.getSyntaxHighlighter(
+        TemplateToolkitFileViewProvider.calcTemplateLanguage(project, virtualFile),
+        project,
+        virtualFile
+      ),
+      ""
+    ));
+    return highlighter;
+  }
+
+  @Override
+  protected @NotNull SyntaxHighlighter createBaseSyntaxHighlighter(@Nullable Project project) {
+    return new TemplateToolkitSyntaxHighlighter(project);
   }
 }

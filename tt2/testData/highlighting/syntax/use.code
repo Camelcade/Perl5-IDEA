@@ -1,0 +1,47 @@
+<html>
+<head>http://template-toolkit.org/docs/manual/Variables.html</head>
+<body>
+
+[% USE myplugin %]
+[% USE CGI   %]        # => Template::Plugin::CGI
+[% USE Cgi   %]        # => Template::Plugin::CGI
+[% USE cgi   %]        # => Template::Plugin::CGI
+[% USE Foo %]      # look for 'Foo' then 'foo'
+[% USE MyPlugin %]     #  => Template::Plugin::MyPlugin
+[% USE Foo.Bar  %]     #  => Template::Plugin::Foo::Bar
+[% USE file = IO.File('/tmp/mydata') %]
+
+[% WHILE (line = file.getline) %]
+   <!-- [% line %] -->
+[% END %]
+[% USE MyPlugin('foo', 123) %]
+[% USE url('/cgi-bin/foo', mode='submit', debug=1) %]
+[% USE table(mydata, rows=3) %]
+
+[% FOREACH row IN table.rows %]
+   <tr>
+   [% FOREACH item IN row %]
+    <td>[% item %]</td>
+   [% END %]
+   </tr>
+[% END %]
+
+[% USE scores = table(myscores, cols=5) %]
+
+[% FOREACH row IN scores.rows %]
+   ...
+[% END %]
+
+[% USE bold = format('<b>%s</b>') %]
+[% USE ital = format('<i>%s</i>') %]
+[% bold('This is bold')   %]
+[% ital('This is italic') %]
+
+[% USE mycgi = URL('/cgi-bin/foo.pl', debug=1) %]
+<a href="[% mycgi %]">...</a>
+<a href="[% mycgi(mode='submit') %]"></a>
+
+
+
+</body>
+</html>

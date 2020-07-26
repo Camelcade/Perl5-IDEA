@@ -1,0 +1,26 @@
+
+<html>
+
+<%attr>
+    color => 'blue'
+    fonts => {qw(arial geneva helvetica)}
+    fonts => [qw(arial geneva helvetica)]   # this is it
+
+    fonts => {qw(arial geneva helvetica)}
+</%attr>
+
+  <%attr>
+    title=>sub { "Account for $full_name" }
+</%attr>
+
+
+    <%attr>
+    body_style => 'standard'
+</%attr>
+
+   <%attr>
+    body_style => 'plain'
+</%attr>
+
+</html>
+

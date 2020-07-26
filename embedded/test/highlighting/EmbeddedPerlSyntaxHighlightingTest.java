@@ -26,6 +26,11 @@ public class EmbeddedPerlSyntaxHighlightingTest extends EmbeddedPerlLightTestCas
   }
 
   @Test
+  public void testHeredoc() {
+    doTest();
+  }
+
+  @Test
   public void testWithPod() {
     doTest();
   }

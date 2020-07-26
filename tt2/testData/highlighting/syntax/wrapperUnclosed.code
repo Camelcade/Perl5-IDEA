@@ -1,0 +1,13 @@
+<html>
+<head>http://template-toolkit.org/docs/manual/Variables.html</head>
+<body>
+
+[% WRAPPER section
+   title = 'Quantum Mechanics'
+%]
+   Quantum mechanics is a very interesting subject wish
+   should prove easy for the layman to fully comprehend.
+
+
+</body>
+</html>

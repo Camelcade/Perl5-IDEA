@@ -47,7 +47,7 @@ public class EmbeddedPerlParserDefinition extends PerlParserDefinition implement
 
   @Override
   public @NotNull Lexer createLexer(Project project) {
-    return new EmbeddedPerlLexerAdapter(project);
+    return new EmbeddedPerlLexerAdapter(project, false);
   }
 
   @Override

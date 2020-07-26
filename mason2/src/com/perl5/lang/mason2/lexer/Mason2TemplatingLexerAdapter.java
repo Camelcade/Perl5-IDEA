@@ -29,7 +29,7 @@ public class Mason2TemplatingLexerAdapter extends PerlTemplatingMergingLexerAdap
     TokenSet.create(MASON_TEMPLATE_BLOCK_HTML)
   );
 
-  public Mason2TemplatingLexerAdapter(Project project) {
-    super(project, new Mason2TemplatingLexer(null).withProject(project), TOKENS_TO_MERGE);
+  public Mason2TemplatingLexerAdapter(Project project, boolean enforceSublexing) {
+    super(project, new Mason2TemplatingLexer(null).withProject(project), TOKENS_TO_MERGE, enforceSublexing);
   }
 }

@@ -1,0 +1,11 @@
+<html>
+<head>http://template-toolkit.org/docs/manual/Variables.html</head>
+<body>
+
+[% FILTER html %]
+   HTML text may have < and > characters embedded
+   which you want converted to the correct HTML entities.
+
+
+</body>
+</html>

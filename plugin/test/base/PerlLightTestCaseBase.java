@@ -67,7 +67,6 @@ import com.intellij.lang.*;
 import com.intellij.lang.documentation.DocumentationProvider;
 import com.intellij.lang.injection.InjectedLanguageManager;
 import com.intellij.lang.parameterInfo.ParameterInfoHandler;
-import com.intellij.lexer.Lexer;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.navigation.NavigationItem;
 import com.intellij.openapi.Disposable;
@@ -84,6 +83,8 @@ import com.intellij.openapi.editor.colors.EditorColorsManager;
 import com.intellij.openapi.editor.colors.EditorColorsScheme;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.editor.ex.EditorEx;
+import com.intellij.openapi.editor.ex.util.LayeredHighlighterIterator;
+import com.intellij.openapi.editor.ex.util.LexerEditorHighlighter;
 import com.intellij.openapi.editor.highlighter.EditorHighlighter;
 import com.intellij.openapi.editor.highlighter.HighlighterIterator;
 import com.intellij.openapi.editor.markup.RangeHighlighter;
@@ -93,7 +94,6 @@ import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
-import com.intellij.openapi.fileTypes.SyntaxHighlighterFactory;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.impl.PerlModuleExtension;
 import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
@@ -784,7 +784,11 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   }
 
   protected @NotNull String computeAnswerFileName(@NotNull String appendix) {
-    return getTestName(true) + appendix + "." + getResultsFileExtension();
+    return computeAnswerFileNameWithoutExtension(appendix) + "." + getResultsFileExtension();
+  }
+
+  protected @NotNull String computeAnswerFileNameWithoutExtension(@NotNull String appendix) {
+    return getTestName(true) + appendix;
   }
 
   protected @NotNull String getResultsFileExtension() {
@@ -2256,23 +2260,23 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   }
 
   protected void doTestHighlighterWithoutInit() {
-    SyntaxHighlighter syntaxHighlighter = SyntaxHighlighterFactory.getSyntaxHighlighter(
-      getFile().getFileType(), getProject(), getFile().getVirtualFile());
-    assertNotNull(syntaxHighlighter);
-    Lexer highlightingLexer = syntaxHighlighter.getHighlightingLexer();
-    assertNotNull(highlightingLexer);
+    EditorHighlighter editorHighlighter = ((EditorEx)getEditor()).getHighlighter();
+    assertInstanceOf(editorHighlighter, LexerEditorHighlighter.class);
+    HighlighterIterator highlighterIterator = editorHighlighter.createIterator(0);
 
-    String fileText = getFile().getText();
-    highlightingLexer.start(fileText);
-    IElementType tokenType;
+    String documentText = getEditor().getDocument().getText();
     StringBuilder sb = new StringBuilder();
-    while ((tokenType = highlightingLexer.getTokenType()) != null) {
-      TextAttributesKey[] highlights = syntaxHighlighter.getTokenHighlights(tokenType);
+    while (!highlighterIterator.atEnd()) {
+      SyntaxHighlighter activeSyntaxHighlighter =
+        highlighterIterator instanceof LayeredHighlighterIterator ?
+        ((LayeredHighlighterIterator)highlighterIterator).getActiveSyntaxHighlighter() :
+        ((LexerEditorHighlighter)editorHighlighter).getSyntaxHighlighter();
+      TextAttributesKey[] highlights = activeSyntaxHighlighter.getTokenHighlights(highlighterIterator.getTokenType());
       if (highlights.length > 0) {
         if (sb.length() > 0) {
           sb.append("\n");
         }
-        sb.append(fileText, highlightingLexer.getTokenStart(), highlightingLexer.getTokenEnd())
+        sb.append(documentText, highlighterIterator.getStart(), highlighterIterator.getEnd())
           .append("\n");
         List<String> attrNames = new SmartList<>();
         for (TextAttributesKey attributesKey : highlights) {
@@ -2280,7 +2284,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
         }
         sb.append(StringUtil.join(attrNames, "\n"));
       }
-      highlightingLexer.advance();
+      highlighterIterator.advance();
     }
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
   }

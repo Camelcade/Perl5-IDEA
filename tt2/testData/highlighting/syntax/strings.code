@@ -1,0 +1,11 @@
+<html>
+<head></head>
+<body>
+[% 'single "quoted" \'string\'' %]
+%% 'single "quoted" \'string\''
+
+[% "double 'quoted' \"string\"" %]
+%% "double 'quoted' \"string\""
+
+</body>
+</html>
