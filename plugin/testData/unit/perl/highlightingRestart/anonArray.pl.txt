@@ -1,0 +1,139 @@
+File size: 537
+Re-highlighted ranges: 34
+Avg range size: 15.588235294117647
+Min range size: 1
+Max range size: 105
+10% of text has range <= 16
+20% of text has range <= 23
+30% of text has range <= 23
+40% of text has range <= 23
+50% of text has range <= 23
+60% of text has range <= 23
+70% of text has range <= 56
+80% of text has range <= 105
+Range size: 9
+say␣'hi';
+----------
+Range size: 1
+
+
+----------
+Range size: 25
+my␣$tokenization_code␣=␣[
+----------
+Range size: 10
+
+
+␣␣␣␣␣␣␣␣
+----------
+Range size: 56
+#␣no␣special␣code␣for␣these␣types␣yet,␣but␣syntax␣checks
+----------
+Range size: 9
+
+␣␣␣␣␣␣␣␣
+----------
+Range size: 16
+#␣could␣be␣added
+----------
+Range size: 2
+
+
+
+----------
+Range size: 23
+##␣␣␣␣␣␣'!'␣␣␣=>␣undef,
+----------
+Range size: 1
+
+
+----------
+Range size: 23
+##␣␣␣␣␣␣'!='␣␣=>␣undef,
+----------
+Range size: 1
+
+
+----------
+Range size: 23
+##␣␣␣␣␣␣'!~'␣␣=>␣undef,
+----------
+Range size: 1
+
+
+----------
+Range size: 23
+##␣␣␣␣␣␣'%='␣␣=>␣undef,
+----------
+Range size: 1
+
+
+----------
+Range size: 23
+##␣␣␣␣␣␣'&&='␣=>␣undef,
+----------
+Range size: 1
+
+
+----------
+Range size: 23
+##␣␣␣␣␣␣'&='␣␣=>␣undef,
+----------
+Range size: 1
+
+
+----------
+Range size: 23
+##␣␣␣␣␣␣'+='␣␣=>␣undef,
+----------
+Range size: 1
+
+
+----------
+Range size: 23
+##␣␣␣␣␣␣'-='␣␣=>␣undef,
+----------
+Range size: 1
+
+
+----------
+Range size: 23
+##␣␣␣␣␣␣'..'␣␣=>␣undef,
+----------
+Range size: 1
+
+
+----------
+Range size: 23
+##␣␣␣␣␣␣'..'␣␣=>␣undef,
+----------
+Range size: 1
+
+
+----------
+Range size: 23
+##␣␣␣␣␣␣'...'␣=>␣undef,
+----------
+Range size: 1
+
+
+----------
+Range size: 23
+##␣␣␣␣␣␣'.='␣␣=>␣undef,
+----------
+Range size: 9
+
+␣␣␣␣␣␣␣␣
+----------
+Range size: 105
+'>'␣=>␣sub␣{
+␣␣␣␣␣␣␣␣␣␣␣␣error_if_expecting_TERM()
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣if␣(␣$expecting␣==␣TERM␣);
+␣␣␣␣␣␣␣␣},
+];
+----------
+Range size: 1
+
+
+----------
+----------

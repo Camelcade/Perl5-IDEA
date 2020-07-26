@@ -249,7 +249,11 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
   protected IElementType getLeftBraceCode() {
     myBracesStack.push(0);
     pushState();
-    return getLeftBrace(LEFT_BRACE, YYINITIAL);
+    return getLeftBrace();
+  }
+
+  protected IElementType getLeftBrace() {
+    return getLeftBrace(YYINITIAL);
   }
 
   protected IElementType getLeftBrace(int newState) {

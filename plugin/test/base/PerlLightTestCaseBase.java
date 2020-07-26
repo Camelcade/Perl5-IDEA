@@ -85,6 +85,7 @@ import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.editor.ex.EditorEx;
 import com.intellij.openapi.editor.ex.util.LayeredHighlighterIterator;
 import com.intellij.openapi.editor.ex.util.LexerEditorHighlighter;
+import com.intellij.openapi.editor.ex.util.SegmentArrayWithData;
 import com.intellij.openapi.editor.highlighter.EditorHighlighter;
 import com.intellij.openapi.editor.highlighter.HighlighterIterator;
 import com.intellij.openapi.editor.markup.RangeHighlighter;
@@ -188,6 +189,7 @@ import com.perl5.lang.pod.PodLanguage;
 import gnu.trove.THashSet;
 import gnu.trove.TIntHashSet;
 import junit.framework.AssertionFailedError;
+import kotlin.collections.CollectionsKt;
 import org.intellij.lang.annotations.MagicConstant;
 import org.intellij.plugins.intelliLang.inject.InjectLanguageAction;
 import org.jetbrains.annotations.NotNull;
@@ -237,8 +239,8 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   private PerlLocalSettings myLocalSettings;
   private PerlInjectionMarkersService myInjectionMarkersService;
   private static final String SEPARATOR = "----------";
-  private static final String SEPARATOR_NEW_LINE_BEFORE = "\n" + SEPARATOR;
-  private static final String SEPARATOR_NEW_LINE_AFTER = SEPARATOR + "\n";
+  protected static final String SEPARATOR_NEW_LINE_BEFORE = "\n" + SEPARATOR;
+  protected static final String SEPARATOR_NEW_LINE_AFTER = SEPARATOR + "\n";
   protected static final String SEPARATOR_NEWLINES = SEPARATOR_NEW_LINE_BEFORE + "\n";
   private final Disposable myPerlLightTestCaseDisposable = Disposer.newDisposable();
 
@@ -2287,6 +2289,69 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
       highlighterIterator.advance();
     }
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+  }
+
+  protected void doTestHighlighterRestart() {
+    initWithFileSmart();
+    doTestHighlighterRestartWithoutInit();
+  }
+
+  protected void doTestHighlighterRestartWithoutInit() {
+    EditorHighlighter editorHighlighter = ((EditorEx)getEditor()).getHighlighter();
+    assertInstanceOf(editorHighlighter, LexerEditorHighlighter.class);
+    SegmentArrayWithData segments = ((LexerEditorHighlighter)editorHighlighter).getSegments();
+    assertNotNull(segments);
+    CharSequence documentChars = getEditor().getDocument().getCharsSequence();
+    StringBuilder result = new StringBuilder();
+    int currentOffset = 0;
+    List<Integer> rangeSizes = new ArrayList<>();
+
+    int documentLength = documentChars.length();
+    for (int i = 0; i < documentLength; i++) {
+      int previousSegmentIndex = segments.findSegmentIndex(i) - 2;
+      int startSegmentIndex = Math.max(0, previousSegmentIndex);
+      int data;
+      do {
+        data = segments.getSegmentData(startSegmentIndex);
+        if (data >= 0 || startSegmentIndex == 0) {
+          break;
+        }
+        startSegmentIndex--;
+      }
+      while (true);
+
+      int startOffset = segments.getSegmentStart(startSegmentIndex);
+      if (startOffset > currentOffset) {
+        int rangeSize = startOffset - currentOffset;
+        result.append("Range size: ").append(rangeSize).append("\n");
+        result.append(documentChars.subSequence(currentOffset, startOffset).toString().replace(' ', '␣')).append(SEPARATOR_NEWLINES);
+        rangeSizes.add(rangeSize);
+        currentOffset = startOffset;
+      }
+    }
+
+    Collections.sort(rangeSizes);
+    int rangesSize = rangeSizes.size();
+
+    StringBuilder summary = new StringBuilder("File size: " + documentLength + "\n" +
+                                              "Re-highlighted ranges: " + rangesSize + "\n" +
+                                              "Avg range size: " + CollectionsKt.averageOfInt(rangeSizes) + "\n" +
+                                              "Min range size: " + CollectionsKt.min(rangeSizes) + "\n" +
+                                              "Max range size: " + CollectionsKt.max(rangeSizes) + "\n");
+
+    int percent = 10;
+    int passed = 0;
+
+    for (Integer size : rangeSizes) {
+      passed += size;
+      if (passed >= documentLength * percent / 100) {
+        summary.append(percent).append("% of text has range <= ").append(size).append("\n");
+        percent += 10;
+      }
+    }
+
+    result.insert(0, summary).append(SEPARATOR_NEW_LINE_AFTER);
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), result.toString());
   }
 
   private @NotNull String serializeTextAttributeKey(@Nullable TextAttributesKey key) {

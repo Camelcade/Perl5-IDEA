@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.lexer;
 
 import com.intellij.lexer.FlexLexer;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
@@ -29,6 +30,7 @@ import java.util.List;
 
 
 public abstract class PerlProtoLexer implements FlexLexer {
+  private static final Logger LOG = Logger.getInstance(PerlProtoLexer.class);
   protected final LinkedList<CustomToken> preparsedTokensList = new LinkedList<>();
   protected final IntStack stateStack = new IntStack();
   protected final PerlTokenHistory myTokenHistory = new PerlTokenHistory();
@@ -121,6 +123,12 @@ public abstract class PerlProtoLexer implements FlexLexer {
   }
 
   public void popState() {
+    if (stateStack.empty()) {
+      LOG.error("Empty stack at " + getRealLexicalState() + "-" + yystate() +
+                "; tokenText: '" + yytext() + "'"
+      );
+      return;
+    }
     yybegin(stateStack.pop());
   }
 

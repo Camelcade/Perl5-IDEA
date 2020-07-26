@@ -1,0 +1,24 @@
+say 'hi';
+my $tokenization_code = (
+
+        # no special code for these types yet, but syntax checks
+        # could be added
+
+##      '!'   => undef,
+##      '!='  => undef,
+##      '!~'  => undef,
+##      '%='  => undef,
+##      '&&=' => undef,
+##      '&='  => undef,
+##      '+='  => undef,
+##      '-='  => undef,
+##      '..'  => undef,
+##      '..'  => undef,
+##      '...' => undef,
+##      '.='  => undef,
+        '>' => sub {
+            error_if_expecting_TERM()
+              if ( $expecting == TERM );
+        },
+);
+say 42;

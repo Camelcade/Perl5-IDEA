@@ -1,0 +1,13 @@
+use strinct;
+use warnings;
+
+say 'hi';
+say 'again';
+
+sub somesub{
+  say 'hi';
+  say 'again';
+}
+
+say 'hi';
+say 'again';

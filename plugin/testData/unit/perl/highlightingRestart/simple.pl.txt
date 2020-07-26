@@ -1,0 +1,80 @@
+File size: 118
+Re-highlighted ranges: 18
+Avg range size: 5.833333333333333
+Min range size: 1
+Max range size: 13
+10% of text has range <= 2
+20% of text has range <= 9
+30% of text has range <= 9
+40% of text has range <= 12
+50% of text has range <= 12
+60% of text has range <= 12
+70% of text has range <= 12
+80% of text has range <= 13
+Range size: 12
+use␣strinct;
+----------
+Range size: 1
+
+
+----------
+Range size: 13
+use␣warnings;
+----------
+Range size: 2
+
+
+
+----------
+Range size: 9
+say␣'hi';
+----------
+Range size: 1
+
+
+----------
+Range size: 12
+say␣'again';
+----------
+Range size: 2
+
+
+
+----------
+Range size: 12
+sub␣somesub{
+----------
+Range size: 3
+
+␣␣
+----------
+Range size: 9
+say␣'hi';
+----------
+Range size: 3
+
+␣␣
+----------
+Range size: 12
+say␣'again';
+----------
+Range size: 1
+
+
+----------
+Range size: 1
+}
+----------
+Range size: 2
+
+
+
+----------
+Range size: 9
+say␣'hi';
+----------
+Range size: 1
+
+
+----------
+----------
