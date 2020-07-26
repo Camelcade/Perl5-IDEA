@@ -28,6 +28,12 @@ public class PerlSyntaxHighlightingTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testPerlTidy() {
+    initWithPerlTidy();
+    doTestHighlighterWithoutInit();
+  }
+
+  @Test
   public void testStringListWithEscapes() {doTest();}
 
   @Test

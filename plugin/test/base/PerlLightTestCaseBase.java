@@ -2252,6 +2252,10 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     else {
       initWithFileSmart();
     }
+    doTestHighlighterWithoutInit();
+  }
+
+  protected void doTestHighlighterWithoutInit() {
     SyntaxHighlighter syntaxHighlighter = SyntaxHighlighterFactory.getSyntaxHighlighter(
       getFile().getFileType(), getProject(), getFile().getVirtualFile());
     assertNotNull(syntaxHighlighter);
