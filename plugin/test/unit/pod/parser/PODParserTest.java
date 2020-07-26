@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,11 @@
  * limitations under the License.
  */
 
-package parser;
+package unit.pod.parser;
 
 import org.junit.Test;
+import unit.perl.parser.PerlParserTestBase;
+
 public class PODParserTest extends PerlParserTestBase {
   public PODParserTest() {
     super("pod");
@@ -24,7 +26,7 @@ public class PODParserTest extends PerlParserTestBase {
 
   @Override
   protected String getBaseDataPath() {
-    return "testData/parser/pod";
+    return "testData/unit/pod/parser";
   }
 
   @Test

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package parser;
+package unit.perl.parser;
 
 
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
@@ -23,7 +23,7 @@ import org.junit.Test;
 public class PerlParserTest extends PerlParserTestBase {
   @Override
   protected String getBaseDataPath() {
-    return "testData/parser/perl";
+    return "testData/unit/perl/parser";
   }
 
   @Test

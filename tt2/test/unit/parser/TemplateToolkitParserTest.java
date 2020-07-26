@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
-package parser;
+package unit.parser;
 
 
 import org.junit.Test;
+import unit.perl.parser.PerlParserTestBase;
 
 public class TemplateToolkitParserTest extends PerlParserTestBase {
   public TemplateToolkitParserTest() {
@@ -26,7 +27,7 @@ public class TemplateToolkitParserTest extends PerlParserTestBase {
 
   @Override
   protected String getBaseDataPath() {
-    return "testData/parser";
+    return "testData/unit/parser";
   }
 
   @Test

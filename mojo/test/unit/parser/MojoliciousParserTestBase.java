@@ -14,24 +14,13 @@
  * limitations under the License.
  */
 
-package parser;
+package unit.parser;
 
+import org.jetbrains.annotations.NotNull;
+import unit.perl.parser.PerlParserTestBase;
 
-import com.perl5.lang.mason2.filetypes.MasonPurePerlComponentFileType;
-import org.junit.Test;
-
-public class Mason2ParserTest extends PerlParserTestBase {
-  public Mason2ParserTest() {
-    super(MasonPurePerlComponentFileType.PURE_PERL_COMPONENT_EXTENSION);
-  }
-
-  @Override
-  protected String getBaseDataPath() {
-    return "testData/parser/perl";
-  }
-
-  @Test
-  public void testTestComponent() {
-    doTest(true);
+public abstract class MojoliciousParserTestBase extends PerlParserTestBase {
+  public MojoliciousParserTestBase(@NotNull String fileExt) {
+    super(fileExt);
   }
 }

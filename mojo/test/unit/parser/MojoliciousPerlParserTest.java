@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,32 +14,24 @@
  * limitations under the License.
  */
 
-package parser;
+package unit.parser;
 
 
+import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import org.junit.Test;
-public class EmbeddedPerlParserTest extends PerlParserTestBase {
-  public EmbeddedPerlParserTest() {
-    super("thtml");
-  }
 
+public class MojoliciousPerlParserTest extends MojoliciousParserTestBase {
   @Override
   protected String getBaseDataPath() {
-    return "testData/parser";
+    return "testData/unit/perl/parser";
+  }
+
+  public MojoliciousPerlParserTest() {
+    super(PerlFileTypeScript.EXTENSION_PL);
   }
 
   @Test
-  public void testWithPod() {
-    doTest();
-  }
-
-  @Test
-  public void testParserTest() {
-    doTest();
-  }
-
-  @Test
-  public void testIncompletePerlBlock() {
+  public void testMojoliciousHelperDeclaration() {
     doTest();
   }
 }

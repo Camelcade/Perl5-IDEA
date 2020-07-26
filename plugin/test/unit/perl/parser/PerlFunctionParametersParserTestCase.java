@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package parser;
+package unit.perl.parser;
 
 
 import org.jetbrains.annotations.NotNull;
@@ -23,7 +23,7 @@ import org.junit.Test;
 public abstract class PerlFunctionParametersParserTestCase extends PerlParserTestBase {
   @Override
   protected final String getBaseDataPath() {
-    return "testData/parser/perl/functionParameters/" + getDataDirName();
+    return "testData/unit/perl/parser/functionParameters/" + getDataDirName();
   }
 
   protected abstract @NotNull String getDataDirName();

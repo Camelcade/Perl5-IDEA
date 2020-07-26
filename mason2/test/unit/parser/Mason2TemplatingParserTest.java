@@ -14,24 +14,35 @@
  * limitations under the License.
  */
 
-package parser;
+package unit.parser;
 
 
-import com.perl5.lang.mojolicious.filetypes.MojoliciousFileType;
+import com.perl5.lang.mason2.filetypes.MasonTopLevelComponentFileType;
 import org.junit.Test;
+import unit.perl.parser.PerlParserTestBase;
 
-public class MojoliciousParserTest extends MojoliciousParserTestBase {
-  public MojoliciousParserTest() {
-    super(MojoliciousFileType.MOJO_DEFAULT_EXTENSION);
+public class Mason2TemplatingParserTest extends PerlParserTestBase {
+  public Mason2TemplatingParserTest() {
+    super(MasonTopLevelComponentFileType.TOP_LEVEL_COMPONENT_EXTENSION);
   }
 
   @Override
   protected String getBaseDataPath() {
-    return "testData/parser/templates";
+    return "testData/unit/template/parser";
   }
 
   @Test
-  public void testMojoParserTest() {
-    doTest();
+  public void testTestComponent() {
+    doTest(true);
+  }
+
+  @Test
+  public void testLiveTemplates() {
+    doTest(true);
+  }
+
+  @Test
+  public void testIssue1077() {
+    doTest(true);
   }
 }

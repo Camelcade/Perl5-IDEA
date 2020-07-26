@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package parser;
+package unit.perl.parser;
 
 
 import categories.Performance;
@@ -103,7 +103,7 @@ public class PerlParsingPerformanceTest extends PerlParserTestBase {
 
   @Override
   protected String getBaseDataPath() {
-    return "testData/parser/performance";
+    return "testData/unit/perl/parser/performance";
   }
 
   @Test
@@ -112,27 +112,6 @@ public class PerlParsingPerformanceTest extends PerlParserTestBase {
     final String testData = getPerlTidy();
 
     final int iterations = 30;
-
-    /*
-    PsiFile psiFile;
-    for (int i = 0; i < iterations; i++) {
-      psiFile = createPsiFile("test", testData);
-      psiFile.getFirstChild();
-    }
-
-    final int time = 400;
-
-    PlatformTestUtil.startPerformanceTest("PerlTidy parsing", iterations * time, () ->
-    {
-      long start = System.currentTimeMillis();
-      for (int i = 0; i < iterations; i++) {
-        PsiFile psiFile1 = createPsiFile("mytest", testData);
-        psiFile1.getFirstChild();
-      }
-      long length = System.currentTimeMillis() - start;
-      System.err.println("Parsing done in " + length / iterations + " ms per iteration of " + time);
-    }).assertTiming();
-    */
 
     //		analyzeFile(psiFile);
   }

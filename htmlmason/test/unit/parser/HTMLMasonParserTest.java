@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,15 @@
  * limitations under the License.
  */
 
-package parser;
+package unit.parser;
 
 
 import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonCustomTag;
 import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonCustomTagRole;
 import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings;
 import org.junit.Test;
+import unit.perl.parser.PerlParserTestBase;
+
 public class HTMLMasonParserTest extends PerlParserTestBase {
   public HTMLMasonParserTest() {
     super("mas");
@@ -28,7 +30,7 @@ public class HTMLMasonParserTest extends PerlParserTestBase {
 
   @Override
   protected String getBaseDataPath() {
-    return "testData/parser";
+    return "testData/unit/parser";
   }
 
   private void addCustomTag(String text, HTMLMasonCustomTagRole role) {

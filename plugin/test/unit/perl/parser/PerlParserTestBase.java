@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package parser;
+package unit.perl.parser;
 
 import base.PerlLightTestCaseBase;
 import com.intellij.openapi.application.WriteAction;

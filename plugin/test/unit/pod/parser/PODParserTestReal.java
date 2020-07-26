@@ -14,9 +14,11 @@
  * limitations under the License.
  */
 
-package parser;
+package unit.pod.parser;
 
 import org.junit.Test;
+import unit.perl.parser.PerlParserTestBase;
+
 public class PODParserTestReal extends PerlParserTestBase {
   public PODParserTestReal() {
     super("pod");
@@ -29,7 +31,7 @@ public class PODParserTestReal extends PerlParserTestBase {
 
   @Override
   protected String getAnswersDataPath() {
-    return "testData/parser/pod/pod";
+    return "testData/unit/pod/parser/pod";
   }
 
   @Override

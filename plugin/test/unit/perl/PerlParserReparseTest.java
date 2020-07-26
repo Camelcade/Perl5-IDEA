@@ -17,7 +17,7 @@
 package unit.perl;
 
 import org.junit.Test;
-import parser.PerlParserTestBase;
+import unit.perl.parser.PerlParserTestBase;
 
 public class PerlParserReparseTest extends PerlParserTestBase {
   @Override
