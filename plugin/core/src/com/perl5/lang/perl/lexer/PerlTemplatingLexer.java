@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.lexer;
 
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.Nullable;
@@ -26,6 +27,7 @@ import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.COMMENT_ANNOTA
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.COMMENT_LINE;
 
 public abstract class PerlTemplatingLexer extends PerlProtoLexer {
+  private static final Logger LOG = Logger.getInstance(PerlTemplatingLexer.class);
   protected final PerlLexer myPerlLexer = new PerlLexer(null);
 
   public PerlTemplatingLexer withProject(@Nullable Project project) {
@@ -52,9 +54,29 @@ public abstract class PerlTemplatingLexer extends PerlProtoLexer {
     if (myPerlLexer.hasPreparsedTokens()) {
       IElementType result = myPerlLexer.advance();
       syncMainLexer();
+      if (LOG.isTraceEnabled()) {
+        LOG.debug("Preparsed by perl lexer: '", myPerlLexer.yytext(),
+                  "'; state: ", myPerlLexer.yystate(),
+                  "; real state: ", myPerlLexer.getRealLexicalState(),
+                  "; tokenType: ", result,
+                  "; start: ", myPerlLexer.getTokenStart(),
+                  "; end: ", myPerlLexer.getTokenEnd()
+        );
+      }
       return result;
     }
-    return super.advance();
+
+    IElementType result = super.advance();
+    if (LOG.isTraceEnabled()) {
+      LOG.debug("From template lexer: '", yytext(),
+                "'; state: ", yystate(),
+                "; real state: ", getRealLexicalState(),
+                "; tokenType: ", result,
+                "; start: ", getTokenStart(),
+                "; end: ", getTokenEnd()
+      );
+    }
+    return result;
   }
 
   @Override
