@@ -27,6 +27,16 @@ public class PerlHighlightingRestartTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testDoBlock() {
+    doTest();
+  }
+
+  @Test
+  public void testEvalBlock() {
+    doTest();
+  }
+
+  @Test
   public void testAnonHash() {
     doTest();
   }

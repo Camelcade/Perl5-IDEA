@@ -1,0 +1,6 @@
+say 'hi';
+eval{
+  say 'inner';
+  say 'inner end';
+};
+say 'bye';

@@ -1,0 +1,6 @@
+say 'hi';
+do{
+  say 'inner';
+  say 'inner end';
+};
+say 'bye';
