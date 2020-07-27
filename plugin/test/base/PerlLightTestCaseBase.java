@@ -2302,9 +2302,9 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     SegmentArrayWithData segments = ((LexerEditorHighlighter)editorHighlighter).getSegments();
     assertNotNull(segments);
     CharSequence documentChars = getEditor().getDocument().getCharsSequence();
-    StringBuilder result = new StringBuilder();
     int currentOffset = 0;
     List<Integer> rangeSizes = new ArrayList<>();
+    List<TextRange> ranges = new ArrayList<>();
 
     int documentLength = documentChars.length();
     for (int i = 0; i < documentLength; i++) {
@@ -2323,8 +2323,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
       int startOffset = segments.getSegmentStart(startSegmentIndex);
       if (startOffset > currentOffset) {
         int rangeSize = startOffset - currentOffset;
-        result.append("Range size: ").append(rangeSize).append("\n");
-        result.append(documentChars.subSequence(currentOffset, startOffset).toString().replace(' ', '␣')).append(SEPARATOR_NEWLINES);
+        ranges.add(TextRange.create(currentOffset, startOffset));
         rangeSizes.add(rangeSize);
         currentOffset = startOffset;
       }
@@ -2333,24 +2332,51 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     Collections.sort(rangeSizes);
     int rangesSize = rangeSizes.size();
 
-    StringBuilder summary = new StringBuilder("File size: " + documentLength + "\n" +
-                                              "Re-highlighted ranges: " + rangesSize + "\n" +
-                                              "Avg range size: " + CollectionsKt.averageOfInt(rangeSizes) + "\n" +
-                                              "Min range size: " + CollectionsKt.min(rangeSizes) + "\n" +
-                                              "Max range size: " + CollectionsKt.max(rangeSizes) + "\n");
+    int maxRangeSize = rangeSizes.isEmpty() ? 0 : CollectionsKt.max(rangeSizes);
+    StringBuilder result = new StringBuilder("File size: " + documentLength + "\n" +
+                                             "Re-highlighted ranges: " + rangesSize + "\n" +
+                                             "Avg range size: " + CollectionsKt.averageOfInt(rangeSizes) + "\n" +
+                                             "Min range size: " + CollectionsKt.min(rangeSizes) + "\n" +
+                                             "Max range size: " + maxRangeSize + "\n");
 
     int percent = 10;
     int passed = 0;
+    int size90 = -1;
 
     for (Integer size : rangeSizes) {
       passed += size;
       if (passed >= documentLength * percent / 100) {
-        summary.append(percent).append("% of text has range <= ").append(size).append("\n");
+        if (percent == 90) {
+          size90 = size;
+        }
+        result.append(percent).append("% of text has range <= ").append(size).append("\n");
         percent += 10;
       }
     }
 
-    result.insert(0, summary).append(SEPARATOR_NEW_LINE_AFTER);
+    result.append(SEPARATOR_NEW_LINE_AFTER);
+
+    Consumer<TextRange> rangeProcessor = it -> {
+      result.append("Range: ").append(it).append(" (").append(it.getLength()).append(")\n");
+      result.append(it.subSequence(documentChars).toString().replace(' ', '␣')).append(SEPARATOR_NEWLINES);
+    };
+
+    if (size90 > 0) {
+      int threshold = size90;
+      ranges.forEach(it -> {
+        if (it.getLength() >= threshold) {
+          rangeProcessor.consume(it);
+        }
+      });
+    }
+    else {
+      for (TextRange range : ranges) {
+        if (range.getLength() == maxRangeSize) {
+          rangeProcessor.consume(range);
+        }
+      }
+    }
+
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), result.toString());
   }
 

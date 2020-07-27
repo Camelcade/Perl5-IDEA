@@ -4,14 +4,8 @@ Avg range size: 133.0
 Min range size: 1
 Max range size: 521
 10% of text has range <= 521
-Range size: 9
-say␣'hi';
 ----------
-Range size: 1
-
-
-----------
-Range size: 521
+Range: (10,531) (521)
 my␣$tokenization_code␣=␣qw(
 
 ␣␣␣␣␣␣␣␣#␣no␣special␣code␣for␣these␣types␣yet,␣but␣syntax␣checks
@@ -34,9 +28,4 @@ my␣$tokenization_code␣=␣qw(
 ␣␣␣␣␣␣␣␣␣␣␣␣␣␣if␣(␣$expecting␣==␣TERM␣);
 ␣␣␣␣␣␣␣␣},
 );
-----------
-Range size: 1
-
-
-----------
 ----------
