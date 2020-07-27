@@ -27,6 +27,16 @@ public class PerlHighlightingRestartTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testComma() {
+    doTest();
+  }
+
+  @Test
+  public void testFatComma() {
+    doTest();
+  }
+
+  @Test
   public void testLongList() {
     doTest();
   }

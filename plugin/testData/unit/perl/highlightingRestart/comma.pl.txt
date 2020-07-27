@@ -1,0 +1,11 @@
+File size: 17
+Re-highlighted ranges: 2
+Avg range size: 6.5
+Min range size: 1
+Max range size: 12
+10% of text has range <= 1
+20% of text has range <= 12
+----------
+Range: (0,12) (12)
+'something',
+----------
