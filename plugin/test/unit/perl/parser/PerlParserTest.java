@@ -27,6 +27,12 @@ public class PerlParserTest extends PerlParserTestBase {
   }
 
   @Test
+  public void testCommaAfterAnonHash() {doTest();}
+
+  @Test
+  public void testCommaAfterAnonHashMulti() {doTest();}
+
+  @Test
   public void testStringListWithEscapes() {doTest();}
 
   @Test

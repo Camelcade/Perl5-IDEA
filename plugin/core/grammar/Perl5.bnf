@@ -823,7 +823,8 @@ private parse_use_statement ::=  'use' <<parseUseParameters use_no_parameters>> 
 private parse_no_statement ::=  'no' use_no_parameters <<statementSemi>> {pin=1}
 
 private use_no_parameters ::= use_module_parameters | use_version_parameters {recoverWhile=recover_statement}
-private use_module_parameters ::= any_package [perl_version [comma]] [anon_hash_ensured | expr];
+private use_module_parameters ::= any_package [perl_version [comma]] [use_module_hash_starting_comma_sequence_expr | expr];
+use_module_hash_starting_comma_sequence_expr ::= anon_hash_ensured (',' parse_list_element )* {elementType=comma_sequence_expr}
 private use_version_parameters ::= perl_version;
 
 undef_expr ::=  'undef' (undef_params | '(' undef_params ')') ? {pin=1}

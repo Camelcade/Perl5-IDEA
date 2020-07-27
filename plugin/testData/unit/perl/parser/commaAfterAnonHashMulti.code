@@ -1,0 +1,4 @@
+use Data::Section 0.200002 # encoding and bytes
+  { installer => Sub::Exporter::ForMethods::method_installer },
+  '-setup',
+  '-setup2';
