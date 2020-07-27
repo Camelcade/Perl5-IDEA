@@ -1,14 +1,14 @@
 File size: 63
-Re-highlighted ranges: 4
-Avg range size: 13.25
+Re-highlighted ranges: 11
+Avg range size: 4.818181818181818
 Min range size: 1
-Max range size: 42
-10% of text has range <= 9
-20% of text has range <= 42
+Max range size: 16
+10% of text has range <= 2
+20% of text has range <= 3
+30% of text has range <= 9
+40% of text has range <= 12
+50% of text has range <= 16
 ----------
-Range: (10,52) (42)
-eval{
-␣␣say␣'inner';
-␣␣say␣'inner␣end';
-};
+Range: (33,49) (16)
+say␣'inner␣end';
 ----------

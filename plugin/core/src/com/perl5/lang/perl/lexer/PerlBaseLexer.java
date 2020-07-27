@@ -365,7 +365,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
         return COMMA;
       }
       else if (currentChar == '=') {
-        yybegin(BLOCK_AS_VALUE);
+        yybegin(YYINITIAL);
         return OPERATOR_ASSIGN;
       }
       else if (currentChar == ')') {

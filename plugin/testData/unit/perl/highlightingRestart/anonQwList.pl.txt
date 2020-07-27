@@ -1,12 +1,12 @@
 File size: 539
-Re-highlighted ranges: 4
-Avg range size: 133.0
+Re-highlighted ranges: 6
+Avg range size: 88.66666666666667
 Min range size: 1
-Max range size: 521
-10% of text has range <= 521
+Max range size: 497
+10% of text has range <= 497
 ----------
-Range: (10,531) (521)
-my␣$tokenization_code␣=␣qw(
+Range: (34,531) (497)
+qw(
 
 ␣␣␣␣␣␣␣␣#␣no␣special␣code␣for␣these␣types␣yet,␣but␣syntax␣checks
 ␣␣␣␣␣␣␣␣#␣could␣be␣added

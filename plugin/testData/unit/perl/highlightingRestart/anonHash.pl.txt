@@ -1,31 +1,18 @@
 File size: 537
-Re-highlighted ranges: 4
-Avg range size: 132.5
+Re-highlighted ranges: 47
+Avg range size: 11.27659574468085
 Min range size: 1
-Max range size: 519
-10% of text has range <= 519
+Max range size: 56
+10% of text has range <= 9
+20% of text has range <= 13
+30% of text has range <= 23
+40% of text has range <= 23
+50% of text has range <= 23
+60% of text has range <= 23
+70% of text has range <= 23
+80% of text has range <= 23
+90% of text has range <= 56
 ----------
-Range: (10,529) (519)
-my␣$tokenization_code␣=␣{
-
-␣␣␣␣␣␣␣␣#␣no␣special␣code␣for␣these␣types␣yet,␣but␣syntax␣checks
-␣␣␣␣␣␣␣␣#␣could␣be␣added
-
-##␣␣␣␣␣␣'!'␣␣␣=>␣undef,
-##␣␣␣␣␣␣'!='␣␣=>␣undef,
-##␣␣␣␣␣␣'!~'␣␣=>␣undef,
-##␣␣␣␣␣␣'%='␣␣=>␣undef,
-##␣␣␣␣␣␣'&&='␣=>␣undef,
-##␣␣␣␣␣␣'&='␣␣=>␣undef,
-##␣␣␣␣␣␣'+='␣␣=>␣undef,
-##␣␣␣␣␣␣'-='␣␣=>␣undef,
-##␣␣␣␣␣␣'..'␣␣=>␣undef,
-##␣␣␣␣␣␣'..'␣␣=>␣undef,
-##␣␣␣␣␣␣'...'␣=>␣undef,
-##␣␣␣␣␣␣'.='␣␣=>␣undef,
-␣␣␣␣␣␣␣␣'>'␣=>␣sub␣{
-␣␣␣␣␣␣␣␣␣␣␣␣error_if_expecting_TERM()
-␣␣␣␣␣␣␣␣␣␣␣␣␣␣if␣(␣$expecting␣==␣TERM␣);
-␣␣␣␣␣␣␣␣},
-};
+Range: (45,101) (56)
+#␣no␣special␣code␣for␣these␣types␣yet,␣but␣syntax␣checks
 ----------
