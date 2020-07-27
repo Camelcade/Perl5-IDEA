@@ -1,0 +1,3 @@
+%= link_to url_for->base => begin
+  %= image '/mojo/noraptor.png', alt => 'Bye!', id => 'noraptor'
+% end

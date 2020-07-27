@@ -18,10 +18,11 @@ package unit.parser;
 
 
 import com.perl5.lang.mojolicious.filetypes.MojoliciousFileType;
+import org.junit.Ignore;
 import org.junit.Test;
 
-public class MojoliciousParserTest extends MojoliciousParserTestBase {
-  public MojoliciousParserTest() {
+public class MojoTemplateParserTest extends MojoliciousParserTestBase {
+  public MojoTemplateParserTest() {
     super(MojoliciousFileType.MOJO_DEFAULT_EXTENSION);
   }
 
@@ -32,6 +33,20 @@ public class MojoliciousParserTest extends MojoliciousParserTestBase {
 
   @Test
   public void testMojoParserTest() {
+    doTest();
+  }
+
+  @Ignore(value = "Need to fix begin in expression #2265")
+  @Test
+  public void testBeginAfterFatComma() {
+    setSkipSpaces(false);
+    doTest();
+  }
+
+  @Ignore(value = "Need to fix begin in expression #2265")
+  @Test
+  public void testBeginAfterFatComma2() {
+    setSkipSpaces(false);
     doTest();
   }
 }
