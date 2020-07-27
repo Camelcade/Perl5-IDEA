@@ -127,6 +127,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements Perl
   }
 
   static {
+    safeMap(IDENTIFIER, PERL_LABEL);
     safeMap(PERL_PACKAGE, PACKAGE, QUALIFYING_PACKAGE, TAG_PACKAGE);
     safeMap(PERL_SCALAR, SIGIL_SCALAR, LEFT_BRACE_SCALAR, RIGHT_BRACE_SCALAR, DEREF_SCALAR, SIGIL_SCALAR_INDEX, DEREF_SCALAR_INDEX,
             SCALAR_NAME);
