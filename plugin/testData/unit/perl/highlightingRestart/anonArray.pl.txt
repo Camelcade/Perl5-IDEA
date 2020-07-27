@@ -1,21 +1,18 @@
 File size: 537
-Re-highlighted ranges: 34
-Avg range size: 15.588235294117647
+Re-highlighted ranges: 45
+Avg range size: 11.777777777777779
 Min range size: 1
-Max range size: 105
-10% of text has range <= 16
-20% of text has range <= 23
+Max range size: 56
+10% of text has range <= 9
+20% of text has range <= 13
 30% of text has range <= 23
 40% of text has range <= 23
 50% of text has range <= 23
 60% of text has range <= 23
-70% of text has range <= 56
-80% of text has range <= 105
+70% of text has range <= 23
+80% of text has range <= 24
+90% of text has range <= 56
 ----------
-Range: (424,529) (105)
-'>'␣=>␣sub␣{
-␣␣␣␣␣␣␣␣␣␣␣␣error_if_expecting_TERM()
-␣␣␣␣␣␣␣␣␣␣␣␣␣␣if␣(␣$expecting␣==␣TERM␣);
-␣␣␣␣␣␣␣␣},
-];
+Range: (45,101) (56)
+#␣no␣special␣code␣for␣these␣types␣yet,␣but␣syntax␣checks
 ----------

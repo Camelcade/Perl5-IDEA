@@ -51,7 +51,7 @@ public class PerlLazyCodeBlockElementType extends PerlLazyBlockElementType {
                 "; balanced: ", result,
                 "; lexer state: ", lexer.getState());
     }
-    return result && lexer.getState() == 0;
+    return result && lexer.getState() == PerlLexer.AFTER_RIGHT_BRACE;
   }
 
   @Override

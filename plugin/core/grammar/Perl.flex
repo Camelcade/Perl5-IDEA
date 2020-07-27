@@ -46,6 +46,7 @@ LINE_COMMENT = "#" .*
 LINE_COMMENT_ANNOTATION = "#@"[\w] .*
 LINE_COMMENT_WITH_NEW_LINE = {LINE_COMMENT} \R
 SPACE_OR_COMMENT = {ANY_SPACE}|{LINE_COMMENT_WITH_NEW_LINE}
+MAY_BE_SPACES = {ANY_SPACE}*
 MAY_BE_SPACES_OR_COMMENTS = {SPACE_OR_COMMENT}*
 MUST_BE_SPACES_OR_COMMENTS = {SPACE_OR_COMMENT}+
 NON_SPACE_AHEAD = {MAY_BE_SPACES_OR_COMMENTS}[^ \t\f\n\r\#]
@@ -217,7 +218,8 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 
 %state VARIABLE_UNBRACED, VARIABLE_BRACED
 
-%state AFTER_VARIABLE, AFTER_IDENTIFIER, AFTER_DEREFERENCE, AFTER_COMMA, AFTER_VALUE
+%state AFTER_VARIABLE, AFTER_IDENTIFIER, AFTER_DEREFERENCE, AFTER_COMMA, AFTER_VALUE,
+%xstate AFTER_RIGHT_BRACE
 %state AFTER_POSSIBLE_SIGIL
 
 %xstate CAPTURE_FORMAT,CAPTURE_FORMAT_NON_EMPTY
@@ -787,6 +789,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 }
 
 ^{POD_START} 				{yybegin(POD_STATE);}
+
 {NEW_LINE}   				{return getNewLineToken();}
 {WHITE_SPACE}+  			{return TokenType.WHITE_SPACE;}
 {END_BLOCK}				{yybegin(END_BLOCK);yypushback(yylength()-7);return TAG_END;}
@@ -839,10 +842,10 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 	"(" 					{return startParethesizedBlock(SUB_ATTRIBUTES, YYINITIAL, SUB_SIGNATURE);}
 }
 
-<BLOCK_DECLARATION> "{"     {yybegin(YYINITIAL); return getLeftBraceCode();}
+<BLOCK_DECLARATION> "{"     {yybegin(YYINITIAL); return getLeftBrace();}
 
 <SUB_DECLARATION_CONTENT,SUB_ATTRIBUTES,METHOD_DECLARATION_CONTENT>{
-	"{"     					{popState(); return getLeftBraceCode();}
+	"{"     					{popState(); return getLeftBrace();}
 }
 
 <SUB_ATTRIBUTE>{
@@ -986,9 +989,15 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
         }
 }
 
+<AFTER_RIGHT_BRACE>{
+  "and" / {MAY_BE_SPACES} ":"	{yybegin(YYINITIAL); pushback();}
+  "or"  / {MAY_BE_SPACES} ":"	{yybegin(YYINITIAL); pushback();}
+  "xor" / {MAY_BE_SPACES} ":"	{yybegin(YYINITIAL); pushback();}
+}
+
 <AFTER_VALUE,AFTER_VARIABLE,AFTER_IDENTIFIER,LEX_HANDLE,LEX_HANDLE_STRICT,LEX_PRINT_HANDLE,LEX_PRINT_HANDLE_STRICT,AFTER_IDENTIFIER_WITH_LABEL>{
 	"x" / [\d]*	{yybegin(YYINITIAL); return OPERATOR_X;}
-        <AFTER_COMMA>{
+        <AFTER_COMMA, AFTER_RIGHT_BRACE>{
           "and"		{yybegin(YYINITIAL); return OPERATOR_AND_LP;}
           "or"		{yybegin(YYINITIAL); return OPERATOR_OR_LP;}
           "xor"		{yybegin(YYINITIAL); return OPERATOR_XOR_LP;}
@@ -1003,6 +1012,11 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
         "isa" {yybegin(YYINITIAL); return OPERATOR_ISA;}
 }
 
+<AFTER_RIGHT_BRACE> {
+  {NEW_LINE}   				{return getNewLineToken();}
+  {WHITE_SPACE}+  			{return TokenType.WHITE_SPACE;}
+  [^]   {yypushback(1);yybegin(YYINITIAL);}
+}
 
 <AFTER_IDENTIFIER_WITH_LABEL>{
         {IDENTIFIER} / "::" {yybegin(YYINITIAL);pushback();}
@@ -1248,7 +1262,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 	"["     	{return getLeftBracket(YYINITIAL);}
 	"("     	{return getLeftParen(YYINITIAL);}
 	"{"     	{return getLeftBrace(YYINITIAL);}
-	"}"     	{return getRightBrace(YYINITIAL);}
+	"}"     	{return getRightBrace(AFTER_RIGHT_BRACE);}
 	"]"     	{return getRightBracket(AFTER_VALUE);}
 	")"     	{return getRightParen(AFTER_VALUE);}
 	":"			{yybegin(YYINITIAL);return COLON;}

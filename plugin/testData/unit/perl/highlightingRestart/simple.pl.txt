@@ -1,11 +1,11 @@
 File size: 118
-Re-highlighted ranges: 18
-Avg range size: 5.833333333333333
+Re-highlighted ranges: 16
+Avg range size: 6.5625
 Min range size: 1
 Max range size: 13
-10% of text has range <= 2
+10% of text has range <= 3
 20% of text has range <= 9
-30% of text has range <= 9
+30% of text has range <= 12
 40% of text has range <= 12
 50% of text has range <= 12
 60% of text has range <= 12
