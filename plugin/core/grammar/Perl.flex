@@ -200,7 +200,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 %xstate BLOCK_DECLARATION
 %xstate SUB_DECLARATION, METHOD_DECLARATION
 %xstate SUB_DECLARATION_CONTENT, METHOD_DECLARATION_CONTENT
-%xstate SUB_ATTRIBUTES, SUB_PROTOTYPE, SUB_EXPR_ATTRIBUTES, SUB_EXPR_PROTOTYPE
+%xstate SUB_ATTRIBUTES, SUB_PROTOTYPE
 %xstate SUB_ATTRIBUTE
 
 %state HANDLE_WITH_ANGLE, DOUBLE_ANGLE_CLOSE
@@ -810,7 +810,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 
 /////////////////////////////////  subs, anon subs, methods, etc //////////////////////////////////////////////////////////
 <SUB_DECLARATION,METHOD_DECLARATION, BLOCK_DECLARATION,
-  SUB_ATTRIBUTES, SUB_ATTRIBUTE, SUB_EXPR_ATTRIBUTES,
+  SUB_ATTRIBUTES, SUB_ATTRIBUTE,
   SUB_DECLARATION_CONTENT, METHOD_DECLARATION_CONTENT>{
   {NEW_LINE}   				{return getNewLineToken();}
   {WHITE_SPACE}+  			{return TokenType.WHITE_SPACE;}
@@ -819,12 +819,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 
 <SUB_DECLARATION>{
 	{QUALIFIED_IDENTIFIER} 		{pushStateAndBegin(YYINITIAL, SUB_DECLARATION_CONTENT);return getIdentifierTokenWithoutIndex();}
-        <SUB_EXPR_ATTRIBUTES>{
-            "(" / {SUB_PROTOTYPE_WITH_SPACES}? ")"  {return startParethesizedBlock(SUB_EXPR_ATTRIBUTES, SUB_EXPR_PROTOTYPE);}
-            "(" 				    {return startParethesizedBlock(SUB_EXPR_ATTRIBUTES, YYINITIAL, SUB_SIGNATURE);}
-            ":"                                     {yybegin(SUB_EXPR_ATTRIBUTES);pushState();yybegin(SUB_ATTRIBUTE);return COLON;}
-            "{"                                     {yybegin(AFTER_VALUE); return getLeftBraceCode();}
-        }
+	("("|"{"|":")                   {pushStateAndBegin(AFTER_VALUE, SUB_DECLARATION_CONTENT);yypushback(1);}
 }
 
 <METHOD_DECLARATION>{
@@ -844,8 +839,11 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 	"(" 					{return startParethesizedBlock(SUB_ATTRIBUTES, YYINITIAL, SUB_SIGNATURE);}
 }
 
-<BLOCK_DECLARATION> "{"     {yybegin(YYINITIAL); return getLeftBrace();}
-<SUB_DECLARATION_CONTENT,SUB_ATTRIBUTES,METHOD_DECLARATION_CONTENT> "{"  {popState(); return getLeftBrace();}
+<BLOCK_DECLARATION> "{"     {yybegin(YYINITIAL); return getLeftBraceCode();}
+
+<SUB_DECLARATION_CONTENT,SUB_ATTRIBUTES,METHOD_DECLARATION_CONTENT>{
+	"{"     					{popState(); return getLeftBraceCode();}
+}
 
 <SUB_ATTRIBUTE>{
 	{IDENTIFIER} / "("	{pushState();yybegin(QUOTE_LIKE_OPENER_Q);return ATTRIBUTE_IDENTIFIER;}
@@ -855,16 +853,13 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 
 <SUB_DECLARATION_CONTENT,SUB_ATTRIBUTES, METHOD_DECLARATION_CONTENT>{
 	":"							{yybegin(SUB_ATTRIBUTES);pushState();yybegin(SUB_ATTRIBUTE);return COLON;}
-       <SUB_EXPR_ATTRIBUTES>{
-          [^]							{popState();yypushback(1);yybegin(YYINITIAL);}
-       }
+	[^]							{popState();yypushback(1);yybegin(YYINITIAL);}
 }
 
-<SUB_EXPR_PROTOTYPE> ")"                {return getRightParen(SUB_EXPR_ATTRIBUTES);}
-<SUB_PROTOTYPE,SUB_EXPR_PROTOTYPE>{
+<SUB_PROTOTYPE>{
         {WHITE_SPACE}                   {return TokenType.WHITE_SPACE;}
 	{SUB_PROTOTYPE}			{return SUB_PROTOTYPE_TOKEN;}
-	")"				{return getRightParen(SUB_ATTRIBUTES);}
+	")"						{return getRightParen(SUB_ATTRIBUTES);}
 }
 /////////////////////////////////  END OF subs, anon subs, methods, etc //////////////////////////////////////////////////////////
 
