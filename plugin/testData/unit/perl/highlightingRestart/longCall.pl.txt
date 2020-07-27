@@ -1,0 +1,27 @@
+File size: 808
+Re-highlighted ranges: 8
+Avg range size: 99.75
+Min range size: 1
+Max range size: 742
+10% of text has range <= 742
+----------
+Range: (55,797) (742)
+source_object␣␣␣␣␣␣=>␣$source_object,
+␣␣␣␣logger_object␣␣␣␣␣␣=>␣$logger_object,
+␣␣␣␣debugger_object␣␣␣␣=>␣$debugger_object,
+␣␣␣␣diagnostics_object␣=>␣$diagnostics_object,
+␣␣␣␣tabsize␣␣␣␣␣␣␣␣␣␣␣␣=>␣$tabsize,
+
+␣␣␣␣starting_level␣␣␣␣␣␣=>␣$rOpts->{'starting-indentation-level'},
+␣␣␣␣indent_columns␣␣␣␣␣␣=>␣$rOpts->{'indent-columns'},
+␣␣␣␣look_for_hash_bang␣␣=>␣$rOpts->{'look-for-hash-bang'},
+␣␣␣␣look_for_autoloader␣=>␣$rOpts->{'look-for-autoloader'},
+␣␣␣␣look_for_selfloader␣=>␣$rOpts->{'look-for-selfloader'},
+␣␣␣␣trim_qw␣␣␣␣␣␣␣␣␣␣␣␣␣=>␣$rOpts->{'trim-qw'},
+␣␣␣␣extended_syntax␣␣␣␣␣=>␣$rOpts->{'extended-syntax'},
+
+␣␣␣␣continuation_indentation␣=>
+␣␣␣␣␣␣$rOpts->{'continuation-indentation'},
+␣␣␣␣outdent_labels␣=>␣$rOpts->{'outdent-labels'},
+);
+----------

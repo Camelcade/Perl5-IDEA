@@ -27,6 +27,16 @@ public class PerlHighlightingRestartTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testLongList() {
+    doTest();
+  }
+
+  @Test
+  public void testLongCall() {
+    doTest();
+  }
+
+  @Test
   public void testDoBlock() {
     doTest();
   }
