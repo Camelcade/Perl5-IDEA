@@ -1,0 +1,15 @@
+File size: 160
+Re-highlighted ranges: 26
+Avg range size: 6.038461538461538
+Min range size: 1
+Max range size: 42
+10% of text has range <= 2
+20% of text has range <= 3
+30% of text has range <= 13
+40% of text has range <= 32
+50% of text has range <= 33
+60% of text has range <= 42
+----------
+Range: (89,131) (42)
+state␣Foo::Bar␣($var1,$var2,$var3,$var4)␣=
+----------

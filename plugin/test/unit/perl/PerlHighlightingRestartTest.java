@@ -27,6 +27,21 @@ public class PerlHighlightingRestartTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testMyVars() {
+    doTest();
+  }
+
+  @Test
+  public void testOurVars() {
+    doTest();
+  }
+
+  @Test
+  public void testStateVars() {
+    doTest();
+  }
+
+  @Test
   public void testComma() {
     doTest();
   }

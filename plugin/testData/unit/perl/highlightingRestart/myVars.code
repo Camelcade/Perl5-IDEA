@@ -1,0 +1,4 @@
+my($var1,$var2,$var3,$var4) = (1,2,3,4);
+my ($var1,$var2,$var3,$var4) = (1,2,3,4);
+my Foo::Bar ($var1,$var2,$var3,$var4) = (1,2,3,4);
+my $var1 = 1;
