@@ -1,8 +1,35 @@
+Reparsing block
+----------
+Element(Perl5: STRING_XQ)
+----------
+qx/test   other/
+----------
+After typing
+----------
 sub something{
   qx/test  \"<caret> other/;
 }
 
 ----------
-Element(Perl5: STRING_XQ)
+Psi structure
 ----------
-qx/test   other/
+Perl5
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::something
+    PsiElement(Perl5: sub)('sub')
+    PsiWhiteSpace(' ')
+    PerlSubNameElementImpl(Perl5: subname)('something')
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiWhiteSpace('\n  ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlStringXqImpl(Perl5: STRING_XQ)
+          PsiElement(Perl5: qx)('qx')
+          PsiElement(Perl5: QUOTE_TICK_OPEN)('/')
+          PerlStringContentElementImpl(Perl5: STRING_CONTENT_XQ)('test  ')
+          PsiElement(Perl5: \\")('\')
+          PerlStringContentElementImpl(Perl5: STRING_CONTENT_XQ)('" other')
+          PsiElement(Perl5: QUOTE_TICK_CLOSE)('/')
+        PsiElement(Perl5: ;)(';')
+      PsiWhiteSpace('\n')
+      PsiElement(Perl5: })('}')
+  PsiWhiteSpace('\n')

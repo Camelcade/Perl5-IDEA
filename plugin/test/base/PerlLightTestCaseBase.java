@@ -2766,13 +2766,13 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     FileASTNode fileNode = psiFile.getNode();
     Editor editor = getEditor();
     int offset = editor.getCaretModel().getOffset();
-    CharSequence documentText = editor.getDocument().getCharsSequence();
+    Document document = editor.getDocument();
+    CharSequence documentText = document.getCharsSequence();
     String newText = documentText.subSequence(0, offset) + textToInsert + documentText.subSequence(offset, documentText.length());
     Couple<ASTNode> roots =
       BlockSupportImpl.findReparseableRoots((PsiFileImpl)psiFile, fileNode, TextRange.create(offset, offset), newText);
 
-    StringBuilder result = new StringBuilder(newText).append(SEPARATOR_NEWLINES);
-    result.insert(offset + textToInsert.length(), "<caret>");
+    StringBuilder result = new StringBuilder("Reparsing block").append(SEPARATOR_NEWLINES);
 
     if (roots == null) {
       result.append("Full reparse");
@@ -2781,8 +2781,13 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
       result.append(roots.first).append(SEPARATOR_NEWLINES);
       result.append(roots.first.getChars());
     }
-
-    myFixture.type(textToInsert);
+    result.append(SEPARATOR_NEWLINES).append("After typing").append(SEPARATOR_NEWLINES);
+    result.append(newText);
+    result.insert(result.length() - (documentText.length() - offset), "<caret>");
+    WriteCommandAction.runWriteCommandAction(getProject(), () -> document.insertString(offset, textToInsert));
+    result.append(SEPARATOR_NEWLINES).append("Psi structure").append(SEPARATOR_NEWLINES);
+    PsiDocumentManager.getInstance(getProject()).commitAllDocuments();
+    result.append(DebugUtil.psiToString(getFile(), false, false));
 
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), result.toString());
   }

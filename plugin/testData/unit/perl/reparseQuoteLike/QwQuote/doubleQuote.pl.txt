@@ -1,3 +1,9 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
 sub something {
   say 'sub start';
 qw"
@@ -8,4 +14,47 @@ qw"
   say 'sub end';
 }
 ----------
-Full reparse
+Psi structure
+----------
+Perl5
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::something
+    PsiElement(Perl5: sub)('sub')
+    PsiWhiteSpace(' ')
+    PerlSubNameElementImpl(Perl5: subname)('something')
+    PsiWhiteSpace(' ')
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiWhiteSpace('\n  ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+          PsiElement(Perl5: say)('say')
+          PsiWhiteSpace(' ')
+          PsiPerlStringSqImpl(Perl5: STRING_SQ)
+            PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
+            PerlStringContentElementImpl(Perl5: STRING_CONTENT)('sub start')
+            PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
+        PsiElement(Perl5: ;)(';')
+      PsiWhiteSpace('\n')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlStringListImpl(Perl5: STRING_LIST)
+          PsiElement(Perl5: qw)('qw')
+          PsiElement(Perl5: QUOTE_SINGLE_OPEN)('"')
+          PsiWhiteSpace('\n   ')
+          PsiPerlStringBareImpl(Perl5: STRING_BARE)
+            PerlStringContentElementImpl(Perl5: STRING_CONTENT)('item1')
+          PsiWhiteSpace('\n   ')
+          PsiElement(Perl5: QUOTE_SINGLE_CLOSE)('"')
+        PsiErrorElement:Semicolon expected
+          <empty list>
+      PsiWhiteSpace('\n   ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlSubCallImpl(SUB_CALL)
+          PsiPerlMethodImpl(Perl5: METHOD)
+            PerlSubNameElementImpl(Perl5: subname)('item2')
+          PsiWhiteSpace('\n')
+          PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
+            PsiPerlStringDqImpl(Perl5: STRING_DQ)
+              PsiElement(Perl5: QUOTE_DOUBLE_OPEN)('"')
+              PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)(';\n  say 'sub end';\n}')
+              PsiErrorElement:<expr>, <oct char>, Perl5: QUOTE_DOUBLE_CLOSE, Perl5: STRING_CONTENT_QQ, Perl5: \1, Perl5: \E, Perl5: \F, Perl5: \L, Perl5: \N, Perl5: \Q, Perl5: \U, Perl5: \\", Perl5: \\u, Perl5: \a, Perl5: \b, Perl5: \c*, Perl5: \e, Perl5: \f, Perl5: \l, Perl5: \n, Perl5: \r, Perl5: \t or Perl5: \x expected
+                <empty list>

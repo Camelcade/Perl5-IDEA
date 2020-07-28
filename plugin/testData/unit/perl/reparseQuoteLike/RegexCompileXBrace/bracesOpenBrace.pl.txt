@@ -1,3 +1,9 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
 sub something{
   qr{test
     say 'hi';
@@ -7,4 +13,23 @@ sub something{
 }
 
 ----------
-Full reparse
+Psi structure
+----------
+Perl5
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::something
+    PsiElement(Perl5: sub)('sub')
+    PsiWhiteSpace(' ')
+    PerlSubNameElementImpl(Perl5: subname)('something')
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiWhiteSpace('\n  ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlCompileRegexImpl(Perl5: COMPILE_REGEX)
+          PsiElement(Perl5: qr)('qr')
+          PsiElement(Perl5: r{)('{')
+          PsiPerlPerlRegexImpl(Perl5: PERL_REGEX)
+            PsiElement(Perl5: regex)('test\n    say 'hi';\n    # comment {\n    say 'hi'\n  }x;\n')
+          PsiElement(Perl5: r})('}')
+      PsiErrorElement:Perl5: } expected
+        <empty list>
+  PsiWhiteSpace('\n')

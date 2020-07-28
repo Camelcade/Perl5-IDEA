@@ -1,3 +1,9 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
 sub something {
   say 'sub start';
 INIT {
@@ -8,4 +14,71 @@ INIT {
   say 'sub end';
 }
 ----------
-Full reparse
+Psi structure
+----------
+Perl5
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::something
+    PsiElement(Perl5: sub)('sub')
+    PsiWhiteSpace(' ')
+    PerlSubNameElementImpl(Perl5: subname)('something')
+    PsiWhiteSpace(' ')
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiWhiteSpace('\n  ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+          PsiElement(Perl5: say)('say')
+          PsiWhiteSpace(' ')
+          PsiPerlStringSqImpl(Perl5: STRING_SQ)
+            PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
+            PerlStringContentElementImpl(Perl5: STRING_CONTENT)('sub start')
+            PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
+        PsiElement(Perl5: ;)(';')
+      PsiWhiteSpace('\n')
+      PsiPerlNamedBlockImpl(Perl5: NAMED_BLOCK)
+        PsiElement(Perl5: BLOCK_NAME)('INIT')
+        PsiWhiteSpace(' ')
+        PsiPerlBlockImpl(Perl5: BLOCK)
+          PsiElement(Perl5: {)('{')
+          PsiWhiteSpace('\n   ')
+          PsiPerlStatementImpl(Perl5: STATEMENT)
+            PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+              PsiElement(Perl5: say)('say')
+              PsiWhiteSpace(' ')
+              PsiPerlStringSqImpl(Perl5: STRING_SQ)
+                PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
+                PerlStringContentElementImpl(Perl5: STRING_CONTENT)('block start')
+                PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
+            PsiElement(Perl5: ;)(';')
+          PsiWhiteSpace('\n   ')
+          PsiPerlStatementImpl(Perl5: STATEMENT)
+            PsiPerlGrepExprImpl(Perl5: GREP_EXPR)
+              PsiElement(Perl5: grep)('grep')
+              PsiWhiteSpace(' ')
+              PsiPerlBlockImpl(Perl5: BLOCK)
+                PsiElement(Perl5: {)('{')
+                PsiWhiteSpace('\n   ')
+                PsiPerlStatementImpl(Perl5: STATEMENT)
+                  PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+                    PsiElement(Perl5: say)('say')
+                    PsiWhiteSpace(' ')
+                    PsiPerlStringSqImpl(Perl5: STRING_SQ)
+                      PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
+                      PerlStringContentElementImpl(Perl5: STRING_CONTENT)('block end')
+                      PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
+                  PsiElement(Perl5: ;)(';')
+                PsiWhiteSpace('\n  ')
+                PsiElement(Perl5: })('}')
+              PsiWhiteSpace('\n  ')
+              PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+                PsiElement(Perl5: say)('say')
+                PsiWhiteSpace(' ')
+                PsiPerlStringSqImpl(Perl5: STRING_SQ)
+                  PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
+                  PerlStringContentElementImpl(Perl5: STRING_CONTENT)('sub end')
+                  PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
+            PsiElement(Perl5: ;)(';')
+          PsiWhiteSpace('\n')
+          PsiElement(Perl5: })('}')
+      PsiErrorElement:Perl5: } expected
+        <empty list>

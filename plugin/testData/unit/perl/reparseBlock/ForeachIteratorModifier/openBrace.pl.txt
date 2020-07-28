@@ -1,6 +1,53 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
 {
   say 'hi' foreach(@something + {<caret> );
 }
 
 ----------
-Full reparse
+Psi structure
+----------
+Perl5
+  PsiPerlBlockCompoundImpl(Perl5: BLOCK_COMPOUND)
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiWhiteSpace('\n  ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+          PsiElement(Perl5: say)('say')
+          PsiWhiteSpace(' ')
+          PsiPerlStringSqImpl(Perl5: STRING_SQ)
+            PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
+            PerlStringContentElementImpl(Perl5: STRING_CONTENT)('hi')
+            PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
+        PsiErrorElement:'foreach' unexpected
+          <empty list>
+        PsiErrorElement:Semicolon expected
+          <empty list>
+      PsiWhiteSpace(' ')
+      PsiPerlForeachCompoundImpl(Perl5: FOREACH_COMPOUND)
+        PsiElement(Perl5: foreach)('foreach')
+        PsiPerlConditionExprImpl(Perl5: CONDITION_EXPR)
+          PsiElement(Perl5: ()('(')
+          PsiPerlAddExprImpl(Perl5: ADD_EXPR)
+            PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE)
+              PsiElement(Perl5: $@)('@')
+              PerlVariableNameElementImpl(Perl5: ARRAY_NAME)('something')
+            PsiWhiteSpace(' ')
+            PsiElement(Perl5: +)('+')
+            PsiErrorElement:<expr>, <expression>, <match regex>, <number constant>, <string bare>, <string dq>, <string sq>, <string xq>, <tr regex>, <variable declaration lexical>, Perl5: $#, Perl5: $$, Perl5: $%, Perl5: $&, Perl5: $*, Perl5: $@, Perl5: (, Perl5: -t, Perl5: ;, Perl5: MOOSE_OVERRIDE, Perl5: TAG, Perl5: [, Perl5: argumentless, Perl5: case, Perl5: catch, Perl5: default, Perl5: finally, Perl5: func, Perl5: heredoc<<, Perl5: inner, Perl5: list, Perl5: local, Perl5: method, Perl5: our, Perl5: package::name::, Perl5: qr, Perl5: qw, Perl5: s, Perl5: subname, Perl5: super, Perl5: switch, Perl5: try, Perl5: unary, Perl5: unary_custom, Perl5: undef or Perl5: { expected, got '{'
+              <empty list>
+        PsiWhiteSpace(' ')
+        PsiPerlBlockImpl(Perl5: BLOCK)
+          PsiElement(Perl5: {)('{')
+          PsiWhiteSpace(' ')
+          PsiErrorElement:')' unexpected
+            PsiElement(Perl5: ))(')')
+          PsiElement(Perl5: ;)(';')
+          PsiWhiteSpace('\n')
+          PsiElement(Perl5: })('}')
+  PsiWhiteSpace('\n')

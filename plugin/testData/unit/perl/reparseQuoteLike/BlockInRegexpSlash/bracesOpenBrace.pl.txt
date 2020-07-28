@@ -1,11 +1,4 @@
-sub something{
-  s/test/
-    say 'hi';
-    # comment {<caret>
-    say 'hi'
-  /e;
-}
-
+Reparsing block
 ----------
 Element(Perl5: BLOCK)
 ----------
@@ -16,3 +9,62 @@ Element(Perl5: BLOCK)
     say 'hi'
   /e;
 }
+----------
+After typing
+----------
+sub something{
+  s/test/
+    say 'hi';
+    # comment {<caret>
+    say 'hi'
+  /e;
+}
+
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::something
+    PsiElement(Perl5: sub)('sub')
+    PsiWhiteSpace(' ')
+    PerlSubNameElementImpl(Perl5: subname)('something')
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiWhiteSpace('\n  ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlReplacementRegexImpl(Perl5: REPLACEMENT_REGEX)
+          PsiElement(Perl5: s)('s')
+          PsiElement(Perl5: r{)('/')
+          PsiPerlPerlRegexImpl(Perl5: PERL_REGEX)
+            PsiElement(Perl5: regex)('test')
+          PsiElement(Perl5: re/)('/')
+          PsiPerlBlockBracelessImpl(Perl5: BLOCK_BRACELESS)
+            PsiWhiteSpace('\n    ')
+            PsiPerlStatementImpl(Perl5: STATEMENT)
+              PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+                PsiElement(Perl5: say)('say')
+                PsiWhiteSpace(' ')
+                PsiPerlStringSqImpl(Perl5: STRING_SQ)
+                  PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
+                  PerlStringContentElementImpl(Perl5: STRING_CONTENT)('hi')
+                  PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
+              PsiElement(Perl5: ;)(';')
+            PsiWhiteSpace('\n    ')
+            PsiComment(Perl5: COMMENT_LINE)('# comment {')
+            PsiWhiteSpace('\n    ')
+            PsiPerlStatementImpl(Perl5: STATEMENT)
+              PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+                PsiElement(Perl5: say)('say')
+                PsiWhiteSpace(' ')
+                PsiPerlStringSqImpl(Perl5: STRING_SQ)
+                  PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
+                  PerlStringContentElementImpl(Perl5: STRING_CONTENT)('hi')
+                  PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
+            PsiWhiteSpace('\n  ')
+          PsiElement(Perl5: r})('/')
+          PsiPerlPerlRegexModifiersImpl(Perl5: PERL_REGEX_MODIFIERS)
+            PsiElement(Perl5: /m)('e')
+        PsiElement(Perl5: ;)(';')
+      PsiWhiteSpace('\n')
+      PsiElement(Perl5: })('}')
+  PsiWhiteSpace('\n')

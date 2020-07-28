@@ -1,6 +1,40 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
 sub something{
   qx'test  '<caret> other';
 }
 
 ----------
-Full reparse
+Psi structure
+----------
+Perl5
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::something
+    PsiElement(Perl5: sub)('sub')
+    PsiWhiteSpace(' ')
+    PerlSubNameElementImpl(Perl5: subname)('something')
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiWhiteSpace('\n  ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlStringXqImpl(Perl5: STRING_XQ)
+          PsiElement(Perl5: qx)('qx')
+          PsiElement(Perl5: QUOTE_TICK_OPEN)(''')
+          PerlStringContentElementImpl(Perl5: STRING_CONTENT_XQ)('test  ')
+          PsiElement(Perl5: QUOTE_TICK_CLOSE)(''')
+        PsiErrorElement:Semicolon expected
+          <empty list>
+      PsiWhiteSpace(' ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlSubCallImpl(SUB_CALL)
+          PsiPerlMethodImpl(Perl5: METHOD)
+            PerlSubNameElementImpl(Perl5: subname)('other')
+          PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
+            PsiPerlStringSqImpl(Perl5: STRING_SQ)
+              PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
+              PerlStringContentElementImpl(Perl5: STRING_CONTENT)(';\n}\n')
+              PsiErrorElement:Perl5: QUOTE_SINGLE_CLOSE, Perl5: STRING_CONTENT or Perl5: \\" expected
+                <empty list>

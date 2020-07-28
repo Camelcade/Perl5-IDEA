@@ -1,6 +1,30 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
 sub something{
   qq{test  # comment {<caret> other};
 }
 
 ----------
-Full reparse
+Psi structure
+----------
+Perl5
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::something
+    PsiElement(Perl5: sub)('sub')
+    PsiWhiteSpace(' ')
+    PerlSubNameElementImpl(Perl5: subname)('something')
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiWhiteSpace('\n  ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlStringDqImpl(Perl5: STRING_DQ)
+          PsiElement(Perl5: qq)('qq')
+          PsiElement(Perl5: QUOTE_DOUBLE_OPEN)('{')
+          PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('test  # comment { other};\n')
+          PsiElement(Perl5: QUOTE_DOUBLE_CLOSE)('}')
+      PsiErrorElement:Perl5: } expected
+        <empty list>
+  PsiWhiteSpace('\n')

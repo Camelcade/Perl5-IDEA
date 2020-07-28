@@ -1,3 +1,9 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
 {
   override something($var,{<caret>){
     say 'hi'
@@ -5,4 +11,44 @@
 }
 
 ----------
-Full reparse
+Psi structure
+----------
+Perl5
+  PsiPerlBlockCompoundImpl(Perl5: BLOCK_COMPOUND)
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiWhiteSpace('\n  ')
+      PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)@main::something
+        PsiElement(Perl5: fp_override)('override')
+        PsiWhiteSpace(' ')
+        PerlSubNameElementImpl(Perl5: subname)('something')
+        PsiElement(Perl5: ()('(')
+        PsiPerlSignatureContentImpl(Perl5: SIGNATURE_CONTENT)
+          PsiPerlSignatureElementImpl(Perl5: SIGNATURE_ELEMENT)
+            PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT)
+              PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+                PsiElement(Perl5: $$)('$')
+                PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('var')
+          PsiElement(Perl5: ,)(',')
+        PsiErrorElement:Perl5: ) expected, got '{'
+          <empty list>
+        PsiPerlBlockImpl(Perl5: BLOCK)
+          PsiElement(Perl5: {)('{')
+          PsiErrorElement:')' unexpected
+            PsiElement(Perl5: ))(')')
+          PsiPerlStatementImpl(Perl5: STATEMENT)
+            PsiPerlAnonHashImpl(Perl5: ANON_HASH)
+              PsiElement(Perl5: {)('{')
+              PsiWhiteSpace('\n    ')
+              PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+                PsiElement(Perl5: say)('say')
+                PsiWhiteSpace(' ')
+                PsiPerlStringSqImpl(Perl5: STRING_SQ)
+                  PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
+                  PerlStringContentElementImpl(Perl5: STRING_CONTENT)('hi')
+                  PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
+              PsiWhiteSpace('\n  ')
+              PsiElement(Perl5: })('}')
+          PsiWhiteSpace('\n')
+          PsiElement(Perl5: })('}')
+  PsiWhiteSpace('\n')

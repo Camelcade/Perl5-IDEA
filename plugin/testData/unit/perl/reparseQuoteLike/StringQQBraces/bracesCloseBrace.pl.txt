@@ -1,6 +1,40 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
 sub something{
   qq{test  # comment }<caret> other};
 }
 
 ----------
-Full reparse
+Psi structure
+----------
+Perl5
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::something
+    PsiElement(Perl5: sub)('sub')
+    PsiWhiteSpace(' ')
+    PerlSubNameElementImpl(Perl5: subname)('something')
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiWhiteSpace('\n  ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlStringDqImpl(Perl5: STRING_DQ)
+          PsiElement(Perl5: qq)('qq')
+          PsiElement(Perl5: QUOTE_DOUBLE_OPEN)('{')
+          PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('test  # comment ')
+          PsiElement(Perl5: QUOTE_DOUBLE_CLOSE)('}')
+        PsiErrorElement:Semicolon expected
+          <empty list>
+      PsiWhiteSpace(' ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlSubCallImpl(SUB_CALL)
+          PsiPerlMethodImpl(Perl5: METHOD)
+            PerlSubNameElementImpl(Perl5: subname)('other')
+      PsiElement(Perl5: })('}')
+  PsiElement(Perl5: ;)(';')
+  PsiWhiteSpace('\n')
+  PsiErrorElement:<func definition>, <method definition>, <statement>, <sub definition>, Perl5: #@abstract, Perl5: #@deprecated, Perl5: #@inject, Perl5: #@method, Perl5: #@noinspection, Perl5: #@override, Perl5: #@returns, Perl5: #@type, Perl5: #@unknown, Perl5: BLOCK_NAME, Perl5: POD, Perl5: TryCatch::, Perl5: __DATA__, Perl5: __END__, Perl5: case, Perl5: default, Perl5: for, Perl5: foreach, Perl5: format, Perl5: fp_after, Perl5: fp_around, Perl5: fp_augment, Perl5: fp_before, Perl5: given, Perl5: if, Perl5: nyi, Perl5: package, Perl5: switch, Perl5: unless, Perl5: until, Perl5: when, Perl5: while or Perl5: { expected, got '}'
+    PsiElement(Perl5: })('}')
+  PsiWhiteSpace('\n')

@@ -1,8 +1,46 @@
+Reparsing block
+----------
+Element(Perl5: STRING_XQ)
+----------
+qx{test   other}
+----------
+After typing
+----------
 sub something{
   qx{test  ${say $something}<caret> other};
 }
 
 ----------
-Element(Perl5: STRING_XQ)
+Psi structure
 ----------
-qx{test   other}
+Perl5
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::something
+    PsiElement(Perl5: sub)('sub')
+    PsiWhiteSpace(' ')
+    PerlSubNameElementImpl(Perl5: subname)('something')
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiWhiteSpace('\n  ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlStringXqImpl(Perl5: STRING_XQ)
+          PsiElement(Perl5: qx)('qx')
+          PsiElement(Perl5: QUOTE_TICK_OPEN)('{')
+          PerlStringContentElementImpl(Perl5: STRING_CONTENT_XQ)('test  ')
+          PsiPerlScalarCastExprImpl(Perl5: SCALAR_CAST_EXPR)
+            PsiElement(Perl5: $$)('$')
+            PsiPerlBlockScalarImpl(Perl5: BLOCK_SCALAR)
+              PsiElement(Perl5: ${)('{')
+              PsiPerlStatementImpl(Perl5: STATEMENT)
+                PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+                  PsiElement(Perl5: say)('say')
+                  PsiWhiteSpace(' ')
+                  PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+                    PsiElement(Perl5: $$)('$')
+                    PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('something')
+              PsiElement(Perl5: $})('}')
+          PerlStringContentElementImpl(Perl5: STRING_CONTENT_XQ)(' other')
+          PsiElement(Perl5: QUOTE_TICK_CLOSE)('}')
+        PsiElement(Perl5: ;)(';')
+      PsiWhiteSpace('\n')
+      PsiElement(Perl5: })('}')
+  PsiWhiteSpace('\n')

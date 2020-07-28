@@ -1,3 +1,15 @@
+Reparsing block
+----------
+Element(Perl5: MATCH_REGEX)
+----------
+/test
+    say 'hi';
+    
+    say 'hi'
+  /
+----------
+After typing
+----------
 sub something{
   /test
     say 'hi';
@@ -7,10 +19,23 @@ sub something{
 }
 
 ----------
-Element(Perl5: MATCH_REGEX)
+Psi structure
 ----------
-/test
-    say 'hi';
-    
-    say 'hi'
-  /
+Perl5
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::something
+    PsiElement(Perl5: sub)('sub')
+    PsiWhiteSpace(' ')
+    PerlSubNameElementImpl(Perl5: subname)('something')
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiWhiteSpace('\n  ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlMatchRegexImpl(Perl5: MATCH_REGEX)
+          PsiElement(Perl5: r{)('/')
+          PsiPerlPerlRegexImpl(Perl5: PERL_REGEX)
+            PsiElement(Perl5: regex)('test\n    say 'hi';\n    # comment \}\n    say 'hi'\n  ')
+          PsiElement(Perl5: r})('/')
+        PsiElement(Perl5: ;)(';')
+      PsiWhiteSpace('\n')
+      PsiElement(Perl5: })('}')
+  PsiWhiteSpace('\n')

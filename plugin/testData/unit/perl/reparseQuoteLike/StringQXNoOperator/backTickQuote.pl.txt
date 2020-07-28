@@ -1,6 +1,39 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
 sub something{
   `test  # comment `<caret> other`;
 }
 
 ----------
-Full reparse
+Psi structure
+----------
+Perl5
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::something
+    PsiElement(Perl5: sub)('sub')
+    PsiWhiteSpace(' ')
+    PerlSubNameElementImpl(Perl5: subname)('something')
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiWhiteSpace('\n  ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlStringXqImpl(Perl5: STRING_XQ)
+          PsiElement(Perl5: QUOTE_TICK_OPEN)('`')
+          PerlStringContentElementImpl(Perl5: STRING_CONTENT_XQ)('test  # comment ')
+          PsiElement(Perl5: QUOTE_TICK_CLOSE)('`')
+        PsiErrorElement:Semicolon expected
+          <empty list>
+      PsiWhiteSpace(' ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlSubCallImpl(SUB_CALL)
+          PsiPerlMethodImpl(Perl5: METHOD)
+            PerlSubNameElementImpl(Perl5: subname)('other')
+          PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
+            PsiPerlStringXqImpl(Perl5: STRING_XQ)
+              PsiElement(Perl5: QUOTE_TICK_OPEN)('`')
+              PerlStringContentElementImpl(Perl5: STRING_CONTENT_XQ)(';\n}\n')
+              PsiErrorElement:<expr>, <oct char>, Perl5: QUOTE_TICK_CLOSE, Perl5: STRING_CONTENT_XQ, Perl5: \1, Perl5: \E, Perl5: \F, Perl5: \L, Perl5: \N, Perl5: \Q, Perl5: \U, Perl5: \\", Perl5: \\u, Perl5: \a, Perl5: \b, Perl5: \c*, Perl5: \e, Perl5: \f, Perl5: \l, Perl5: \n, Perl5: \r, Perl5: \t or Perl5: \x expected
+                <empty list>

@@ -1,6 +1,49 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
 {
   say 'hi' if( $a &&  '<caret> );
 }
 
 ----------
-Full reparse
+Psi structure
+----------
+Perl5
+  PsiPerlBlockCompoundImpl(Perl5: BLOCK_COMPOUND)
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiWhiteSpace('\n  ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+          PsiElement(Perl5: say)('say')
+          PsiWhiteSpace(' ')
+          PsiPerlStringSqImpl(Perl5: STRING_SQ)
+            PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
+            PerlStringContentElementImpl(Perl5: STRING_CONTENT)('hi')
+            PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
+        PsiErrorElement:'if' unexpected
+          <empty list>
+        PsiErrorElement:Semicolon expected
+          <empty list>
+      PsiWhiteSpace(' ')
+      PsiPerlIfCompoundImpl(Perl5: IF_COMPOUND)
+        PsiElement(Perl5: if)('if')
+        PsiPerlConditionalBlockImpl(Perl5: CONDITIONAL_BLOCK)
+          PsiPerlConditionExprImpl(Perl5: CONDITION_EXPR)
+            PsiElement(Perl5: ()('(')
+            PsiWhiteSpace(' ')
+            PsiPerlAndExprImpl(Perl5: AND_EXPR)
+              PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+                PsiElement(Perl5: $$)('$')
+                PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('a')
+              PsiWhiteSpace(' ')
+              PsiElement(Perl5: &&)('&&')
+              PsiWhiteSpace('  ')
+              PsiPerlStringSqImpl(Perl5: STRING_SQ)
+                PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
+                PerlStringContentElementImpl(Perl5: STRING_CONTENT)(' );\n}\n')
+                PsiErrorElement:Perl5: QUOTE_SINGLE_CLOSE, Perl5: STRING_CONTENT or Perl5: \\" expected
+                  <empty list>

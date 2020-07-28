@@ -1,8 +1,33 @@
+Reparsing block
+----------
+PsiComment(Perl5: COMMENT_LINE)
+----------
+#this is a comment
+----------
+After typing
+----------
 {
   #text<caret>this is a comment
   say 'hi';
 }
 ----------
-PsiComment(Perl5: COMMENT_LINE)
+Psi structure
 ----------
-#this is a comment
+Perl5
+  PsiPerlBlockCompoundImpl(Perl5: BLOCK_COMPOUND)
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiWhiteSpace('\n  ')
+      PsiComment(Perl5: COMMENT_LINE)('#textthis is a comment')
+      PsiWhiteSpace('\n  ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+          PsiElement(Perl5: say)('say')
+          PsiWhiteSpace(' ')
+          PsiPerlStringSqImpl(Perl5: STRING_SQ)
+            PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
+            PerlStringContentElementImpl(Perl5: STRING_CONTENT)('hi')
+            PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
+        PsiElement(Perl5: ;)(';')
+      PsiWhiteSpace('\n')
+      PsiElement(Perl5: })('}')

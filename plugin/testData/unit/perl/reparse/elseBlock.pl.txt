@@ -1,3 +1,15 @@
+Reparsing block
+----------
+Element(Perl5: BLOCK)
+----------
+{
+  say 'hi';
+  
+  say 'bye';
+}
+----------
+After typing
+----------
 if( $a ){
   say 'if';
 }
@@ -7,10 +19,69 @@ else {
   say 'bye';
 }
 ----------
-Element(Perl5: BLOCK)
+Psi structure
 ----------
-{
-  say 'hi';
-  
-  say 'bye';
-}
+Perl5
+  PsiPerlIfCompoundImpl(Perl5: IF_COMPOUND)
+    PsiElement(Perl5: if)('if')
+    PsiPerlConditionalBlockImpl(Perl5: CONDITIONAL_BLOCK)
+      PsiPerlConditionExprImpl(Perl5: CONDITION_EXPR)
+        PsiElement(Perl5: ()('(')
+        PsiWhiteSpace(' ')
+        PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+          PsiElement(Perl5: $$)('$')
+          PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('a')
+        PsiWhiteSpace(' ')
+        PsiElement(Perl5: ))(')')
+      PsiPerlBlockImpl(Perl5: BLOCK)
+        PsiElement(Perl5: {)('{')
+        PsiWhiteSpace('\n  ')
+        PsiPerlStatementImpl(Perl5: STATEMENT)
+          PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+            PsiElement(Perl5: say)('say')
+            PsiWhiteSpace(' ')
+            PsiPerlStringSqImpl(Perl5: STRING_SQ)
+              PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
+              PerlStringContentElementImpl(Perl5: STRING_CONTENT)('if')
+              PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
+          PsiElement(Perl5: ;)(';')
+        PsiWhiteSpace('\n')
+        PsiElement(Perl5: })('}')
+    PsiWhiteSpace('\n')
+    PsiElement(Perl5: else)('else')
+    PsiWhiteSpace(' ')
+    PsiPerlUnconditionalBlockImpl(Perl5: UNCONDITIONAL_BLOCK)
+      PsiPerlBlockImpl(Perl5: BLOCK)
+        PsiElement(Perl5: {)('{')
+        PsiWhiteSpace('\n  ')
+        PsiPerlStatementImpl(Perl5: STATEMENT)
+          PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+            PsiElement(Perl5: say)('say')
+            PsiWhiteSpace(' ')
+            PsiPerlStringSqImpl(Perl5: STRING_SQ)
+              PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
+              PerlStringContentElementImpl(Perl5: STRING_CONTENT)('hi')
+              PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
+          PsiElement(Perl5: ;)(';')
+        PsiWhiteSpace('\n  ')
+        PsiPerlStatementImpl(Perl5: STATEMENT)
+          PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+            PsiElement(Perl5: say)('say')
+            PsiWhiteSpace(' ')
+            PsiPerlStringSqImpl(Perl5: STRING_SQ)
+              PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
+              PerlStringContentElementImpl(Perl5: STRING_CONTENT)('hi')
+              PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
+          PsiElement(Perl5: ;)(';')
+        PsiWhiteSpace('\n  ')
+        PsiPerlStatementImpl(Perl5: STATEMENT)
+          PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+            PsiElement(Perl5: say)('say')
+            PsiWhiteSpace(' ')
+            PsiPerlStringSqImpl(Perl5: STRING_SQ)
+              PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
+              PerlStringContentElementImpl(Perl5: STRING_CONTENT)('bye')
+              PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
+          PsiElement(Perl5: ;)(';')
+        PsiWhiteSpace('\n')
+        PsiElement(Perl5: })('}')

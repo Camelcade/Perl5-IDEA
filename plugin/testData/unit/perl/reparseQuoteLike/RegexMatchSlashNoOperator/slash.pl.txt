@@ -1,11 +1,4 @@
-sub something{
-  /test
-    say 'hi';
-    # comment /<caret>
-    say 'hi'
-  /;
-}
-
+Reparsing block
 ----------
 Element(Perl5: BLOCK)
 ----------
@@ -16,3 +9,53 @@ Element(Perl5: BLOCK)
     say 'hi'
   /;
 }
+----------
+After typing
+----------
+sub something{
+  /test
+    say 'hi';
+    # comment /<caret>
+    say 'hi'
+  /;
+}
+
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::something
+    PsiElement(Perl5: sub)('sub')
+    PsiWhiteSpace(' ')
+    PerlSubNameElementImpl(Perl5: subname)('something')
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiWhiteSpace('\n  ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlMatchRegexImpl(Perl5: MATCH_REGEX)
+          PsiElement(Perl5: r{)('/')
+          PsiPerlPerlRegexImpl(Perl5: PERL_REGEX)
+            PsiElement(Perl5: regex)('test\n    say 'hi';\n    # comment ')
+          PsiElement(Perl5: r})('/')
+        PsiErrorElement:Semicolon expected
+          <empty list>
+      PsiWhiteSpace('\n    ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlSubCallImpl(SUB_CALL)
+          PsiPerlMethodImpl(Perl5: METHOD)
+            PerlSubNameElementImpl(Perl5: subname)('say')
+          PsiWhiteSpace(' ')
+          PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
+            PsiPerlMulExprImpl(Perl5: MUL_EXPR)
+              PsiPerlStringSqImpl(Perl5: STRING_SQ)
+                PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
+                PerlStringContentElementImpl(Perl5: STRING_CONTENT)('hi')
+                PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
+              PsiWhiteSpace('\n  ')
+              PsiElement(Perl5: /)('/')
+              PsiErrorElement:<expr> expected, got ';'
+                <empty list>
+        PsiElement(Perl5: ;)(';')
+      PsiWhiteSpace('\n')
+      PsiElement(Perl5: })('}')
+  PsiWhiteSpace('\n')

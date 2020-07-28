@@ -1,3 +1,9 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
 say 'hi';
 
 =head1 DESC
@@ -9,4 +15,19 @@ say 'hi';
 
 say 'bye'
 ----------
-Full reparse
+Psi structure
+----------
+Perl5
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+      PsiElement(Perl5: say)('say')
+      PsiWhiteSpace(' ')
+      PsiPerlStringSqImpl(Perl5: STRING_SQ)
+        PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
+        PerlStringContentElementImpl(Perl5: STRING_CONTENT)('hi')
+        PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
+    PsiElement(Perl5: ;)(';')
+  PsiWhiteSpace('\n\n')
+  PsiElement(Perl5: POD)('=head1 DESC\n\n\n=cut')
+  PsiWhiteSpace('\n\n')
+  PsiElement(Perl5: POD)('=cut\n\nsay 'bye'')

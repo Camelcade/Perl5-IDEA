@@ -1,6 +1,47 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
 {
   my $test = (2 + }<caret>);
 }
 
 ----------
-Full reparse
+Psi structure
+----------
+Perl5
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlAnonHashImpl(Perl5: ANON_HASH)
+      PsiElement(Perl5: {)('{')
+      PsiWhiteSpace('\n  ')
+      PsiPerlAssignExprImpl(Perl5: ASSIGN_EXPR)
+        PsiPerlVariableDeclarationLexicalImpl(Perl5: VARIABLE_DECLARATION_LEXICAL)
+          PsiElement(Perl5: my)('my')
+          PsiWhiteSpace(' ')
+          PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT)
+            PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+              PsiElement(Perl5: $$)('$')
+              PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('test')
+        PsiWhiteSpace(' ')
+        PsiElement(Perl5: =)('=')
+        PsiWhiteSpace(' ')
+        PsiPerlParenthesisedExprImpl(Perl5: PARENTHESISED_EXPR)
+          PsiElement(Perl5: ()('(')
+          PsiPerlAddExprImpl(Perl5: ADD_EXPR)
+            PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
+              PsiElement(Perl5: NUMBER)('2')
+            PsiWhiteSpace(' ')
+            PsiElement(Perl5: +)('+')
+            PsiErrorElement:<expr> expected, got '}'
+              <empty list>
+      PsiWhiteSpace(' ')
+      PsiElement(Perl5: })('}')
+    PsiErrorElement:<statement modifier>, Perl5: , or Perl5: => expected, got ')'
+      PsiElement(Perl5: ))(')')
+    PsiElement(Perl5: ;)(';')
+  PsiWhiteSpace('\n')
+  PsiErrorElement:<func definition>, <method definition>, <statement>, <sub definition>, Perl5: #@abstract, Perl5: #@deprecated, Perl5: #@inject, Perl5: #@method, Perl5: #@noinspection, Perl5: #@override, Perl5: #@returns, Perl5: #@type, Perl5: #@unknown, Perl5: BLOCK_NAME, Perl5: POD, Perl5: TryCatch::, Perl5: __DATA__, Perl5: __END__, Perl5: case, Perl5: default, Perl5: for, Perl5: foreach, Perl5: format, Perl5: fp_after, Perl5: fp_around, Perl5: fp_augment, Perl5: fp_before, Perl5: given, Perl5: if, Perl5: nyi, Perl5: package, Perl5: switch, Perl5: unless, Perl5: until, Perl5: when, Perl5: while or Perl5: { expected, got '}'
+    PsiElement(Perl5: })('}')
+  PsiWhiteSpace('\n')

@@ -1,11 +1,4 @@
-sub something{
-  s{test
-    say 'hi';
-    ${say $something}<caret>
-    say 'hi'
-  }<replacement $3>;
-}
-
+Reparsing block
 ----------
 Element(Perl5: BLOCK)
 ----------
@@ -16,3 +9,56 @@ Element(Perl5: BLOCK)
     say 'hi'
   }<replacement $3>;
 }
+----------
+After typing
+----------
+sub something{
+  s{test
+    say 'hi';
+    ${say $something}<caret>
+    say 'hi'
+  }<replacement $3>;
+}
+
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::something
+    PsiElement(Perl5: sub)('sub')
+    PsiWhiteSpace(' ')
+    PerlSubNameElementImpl(Perl5: subname)('something')
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiWhiteSpace('\n  ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlReplacementRegexImpl(Perl5: REPLACEMENT_REGEX)
+          PsiElement(Perl5: s)('s')
+          PsiElement(Perl5: r{)('{')
+          PsiPerlPerlRegexImpl(Perl5: PERL_REGEX)
+            PsiElement(Perl5: regex)('test\n    say 'hi';\n    ')
+            PsiPerlScalarCastExprImpl(Perl5: SCALAR_CAST_EXPR)
+              PsiElement(Perl5: $$)('$')
+              PsiPerlBlockScalarImpl(Perl5: BLOCK_SCALAR)
+                PsiElement(Perl5: ${)('{')
+                PsiPerlStatementImpl(Perl5: STATEMENT)
+                  PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+                    PsiElement(Perl5: say)('say')
+                    PsiWhiteSpace(' ')
+                    PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+                      PsiElement(Perl5: $$)('$')
+                      PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('something')
+                PsiElement(Perl5: $})('}')
+            PsiElement(Perl5: regex)('\n    say 'hi'\n  ')
+          PsiElement(Perl5: r})('}')
+          PsiElement(Perl5: r{)('<')
+          PsiPerlRegexReplacementImpl(Perl5: REGEX_REPLACEMENT)
+            PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('replacement ')
+            PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+              PsiElement(Perl5: $$)('$')
+              PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('3')
+          PsiElement(Perl5: r})('>')
+        PsiElement(Perl5: ;)(';')
+      PsiWhiteSpace('\n')
+      PsiElement(Perl5: })('}')
+  PsiWhiteSpace('\n')

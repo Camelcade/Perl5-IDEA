@@ -1,3 +1,9 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
 sub something{
   s{test}{
     say 'hi';
@@ -7,4 +13,27 @@ sub something{
 }
 
 ----------
-Full reparse
+Psi structure
+----------
+Perl5
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::something
+    PsiElement(Perl5: sub)('sub')
+    PsiWhiteSpace(' ')
+    PerlSubNameElementImpl(Perl5: subname)('something')
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiWhiteSpace('\n  ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlReplacementRegexImpl(Perl5: REPLACEMENT_REGEX)
+          PsiElement(Perl5: s)('s')
+          PsiElement(Perl5: r{)('{')
+          PsiPerlPerlRegexImpl(Perl5: PERL_REGEX)
+            PsiElement(Perl5: regex)('test')
+          PsiElement(Perl5: r})('}')
+          PsiElement(Perl5: r{)('{')
+          PsiPerlRegexReplacementImpl(Perl5: REGEX_REPLACEMENT)
+            PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('\n    say 'hi';\n    # comment {\n    say 'hi'\n  }e;\n')
+          PsiElement(Perl5: r})('}')
+      PsiErrorElement:Perl5: } expected
+        <empty list>
+  PsiWhiteSpace('\n')
