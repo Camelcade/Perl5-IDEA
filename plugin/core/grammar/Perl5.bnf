@@ -1167,7 +1167,7 @@ post_deref_glob_expr ::= '$*' hash_index 						{name="Glob expr"}
 post_deref_array_slice_expr ::= '$@' {hash_index|array_index}	{name="Array slice"}
 post_deref_hash_slice_expr ::= '$%' {hash_index|array_index}	{name="Hash slice"}
 
-hash_index ::= '{' hash_index_content '}' {pin=1}
+hash_index ::= '{' hash_index_content '}' {pin=1 extraRoot=true}
 private hash_index_content ::= expr {recoverWhile=recover_braced_expression}
 private recover_braced_expression ::= !'}'
 array_index ::= '[' array_index_content ']' {pin=1}

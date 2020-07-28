@@ -1,11 +1,8 @@
 Reparsing block
 ----------
-Element(Perl5: BLOCK)
+Element(Perl5: HASH_INDEX)
 ----------
-{
-  say 'hi';
-  say $hash{index};
-}
+{index}
 ----------
 After typing
 ----------

@@ -245,7 +245,7 @@ public class PerlElementTypeFactory {
       case "HASH_CAST_EXPR":
         return new PerlElementTypeEx(name, PsiPerlHashCastExprImpl.class);
       case "HASH_INDEX":
-        return new PerlElementTypeEx(name, PsiPerlHashIndexImpl.class);
+        return new PerlHashIndexElementType(name, PsiPerlHashIndexImpl.class);
       case "HASH_VARIABLE":
         return new PerlElementTypeEx(name, PsiPerlHashVariableImpl.class);
       case "HEREDOC_OPENER":
