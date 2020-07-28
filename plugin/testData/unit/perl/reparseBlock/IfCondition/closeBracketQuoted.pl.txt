@@ -1,12 +1,8 @@
 Reparsing block
 ----------
-Element(Perl5: BLOCK)
+Element(Perl5: CONDITION_EXPR)
 ----------
-{
-  if( $a &&   ){
-    say 'hi'
-  }
-}
+( $a &&   )
 ----------
 After typing
 ----------

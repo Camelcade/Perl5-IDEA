@@ -701,7 +701,7 @@ continuation_expr ::= 'continuation' sub_expr_simple_ensured {pin=1}
 
 conditional_block ::= parse_conditional_block
 private parse_conditional_block ::= condition_expr block {pin=1}
-condition_expr ::= parse_parenthesised_expr
+condition_expr ::= parse_parenthesised_expr {extraRoot=true}
 
 given_compound ::=  'given' parse_conditional_block  {pin=1}
 when_compound ::=  'when' parse_conditional_block  {pin=1}
@@ -966,7 +966,7 @@ private sort_arguments_variants ::=
 private sorter ::= scalar_variable | normal_method
 
 private list_or_list_element ::= parenthesised_expr [array_element]
-parenthesised_expr ::= parse_parenthesised_expr
+parenthesised_expr ::= parse_parenthesised_expr {extraRoot=true}
 private parse_parenthesised_expr ::= <<parse_parenthesized_expression parenthesised_expr_content>>
 private meta parse_parenthesized_expression ::= '(' <<x1>> ')' {pin=1 name="Parenthesised expression"}
 private parenthesised_expr_content ::= [expr] {recoverWhile=recover_parenthesised}

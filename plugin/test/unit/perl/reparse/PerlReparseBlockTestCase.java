@@ -227,7 +227,7 @@ public abstract class PerlReparseBlockTestCase extends PerlReparseMultiTestCase 
     }
   }
 
-  public static class IfCondition extends PerlReparseBlockTestCase{
+  public static class IfCondition extends PerlReparseBlockTestCase {
     @Override
     protected @NotNull String buildCodeSample() {
       return "{\n" +
@@ -238,7 +238,29 @@ public abstract class PerlReparseBlockTestCase extends PerlReparseMultiTestCase 
     }
   }
 
-  public static class IfConditionModifier extends PerlReparseBlockTestCase{
+  public static class WhileCondition extends PerlReparseBlockTestCase {
+    @Override
+    protected @NotNull String buildCodeSample() {
+      return "{\n" +
+             "  while( $a &&  <caret> ){\n" +
+             "    say 'hi'\n" +
+             "  }\n" +
+             "}\n";
+    }
+  }
+
+  public static class UntilCondition extends PerlReparseBlockTestCase {
+    @Override
+    protected @NotNull String buildCodeSample() {
+      return "{\n" +
+             "  until( $a &&  <caret> ){\n" +
+             "    say 'hi'\n" +
+             "  }\n" +
+             "}\n";
+    }
+  }
+
+  public static class IfConditionModifier extends PerlReparseBlockTestCase {
     @Override
     protected @NotNull String buildCodeSample() {
       return "{\n" +

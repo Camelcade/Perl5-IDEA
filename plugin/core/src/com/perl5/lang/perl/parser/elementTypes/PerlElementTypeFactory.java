@@ -187,7 +187,7 @@ public class PerlElementTypeFactory {
       case "UNCONDITIONAL_BLOCK":
         return new PerlElementTypeEx(name, PsiPerlUnconditionalBlockImpl.class);
       case "CONDITION_EXPR":
-        return new PerlElementTypeEx(name, PsiPerlConditionExprImpl.class);
+        return new PerlParenthesizedElementType(name, PsiPerlConditionExprImpl.class);
       case "CONTINUE_BLOCK":
         return new PerlElementTypeEx(name, PsiPerlContinueBlockImpl.class);
       case "DEFAULT_COMPOUND":
@@ -285,7 +285,7 @@ public class PerlElementTypeFactory {
       case "OR_EXPR":
         return new PerlElementTypeEx(name, PsiPerlOrExprImpl.class);
       case "PARENTHESISED_EXPR":
-        return new PerlElementTypeEx(name, PsiPerlParenthesisedExprImpl.class);
+        return new PerlParenthesizedElementType(name, PsiPerlParenthesisedExprImpl.class);
       case "PERL_HANDLE_EXPR":
         return new PerlElementTypeEx(name, PsiPerlPerlHandleExprImpl.class);
       case "PERL_REGEX":
