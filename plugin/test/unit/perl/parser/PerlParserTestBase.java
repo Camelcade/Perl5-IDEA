@@ -117,16 +117,12 @@ public abstract class PerlParserTestBase extends PerlLightTestCaseBase {
     ensureParsed(psiFile);
     assertEquals("doc text mismatch", text, requireNonNull(psiFile.getViewProvider().getDocument()).getText());
     ensureCorrectReparse(psiFile);
-    doCheckResult(getAnswersDataPath(), psiFile, checkAllPsiRoots(), computeAnswerFileNameWithoutExtension(""), skipSpaces(),
+    doCheckResult(getResultsTestDataPath(), psiFile, checkAllPsiRoots(), computeAnswerFileNameWithoutExtension(""), skipSpaces(),
                   includeRanges(),
                   allTreesInSingleFile());
     if (ensureNoErrorElements) {
       ensureNoErrorElements();
     }
-  }
-
-  protected String getAnswersDataPath() {
-    return getTestDataPath();
   }
 
   protected void ensureNoErrorElements() {

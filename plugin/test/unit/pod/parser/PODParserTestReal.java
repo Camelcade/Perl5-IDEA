@@ -30,7 +30,7 @@ public class PODParserTestReal extends PerlParserTestBase {
   }
 
   @Override
-  protected String getAnswersDataPath() {
+  protected String getResultsTestDataPath() {
     return "testData/unit/pod/parser/pod";
   }
 

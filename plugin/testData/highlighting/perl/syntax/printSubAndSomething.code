@@ -1,6 +1,0 @@
-print _modtree && !_modtree->{$mod->{name}} ? '?' : ' ';
-print _modtree || !_modtree->{$mod->{name}} ? '?' : ' ';
-say _modtree && !_modtree->{$mod->{name}} ? '?' : ' ';
-say _modtree || !_modtree->{$mod->{name}} ? '?' : ' ';
-printf _modtree && !_modtree->{$mod->{name}} ? '?' : ' ';
-printf _modtree || !_modtree->{$mod->{name}} ? '?' : ' ';

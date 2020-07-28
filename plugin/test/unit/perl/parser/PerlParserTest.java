@@ -832,4 +832,14 @@ public class PerlParserTest extends PerlParserTestBase {
 
   @Test
   public void testNumbers() {doTest();}
+
+  @Test
+  public void testFunctionParametersSyntax() {
+    doTest();
+  }
+
+  @Test
+  public void testShiftLike() {
+    doTest();
+  }
 }

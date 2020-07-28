@@ -430,5 +430,4 @@ say q<\'some \{  \} \<  \> \| \[ \] \( \) \" \` some \' te xt \\ text this is ma
 say q"some \{  \} \<  \> \| \[ \] \( \) \" \` some \' te xt \\ text this is making text lazy  this is making text lazy  this is making text lazy  this is making text lazy ";
 say q`some \{  \} \<  \> \| \[ \] \( \) \" \` some \' te xt \\ text this is making text lazy  this is making text lazy  this is making text lazy  this is making text lazy `;
 EOM1
-
     PERL_SQ_STRING => DEFAULT_STRING

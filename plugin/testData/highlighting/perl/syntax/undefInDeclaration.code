@@ -1,4 +1,0 @@
-my($var1, undef, $var);
-our($var1, undef, $var);
-state($var1, undef, $var);
-local($var1, undef, $var);

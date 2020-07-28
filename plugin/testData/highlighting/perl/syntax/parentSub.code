@@ -1,2 +1,0 @@
-# Pinto::Server::Responder::Action
-parent { my $child_pid = shift; $response = $self->parent_proc( $pipe, $child_pid ) }

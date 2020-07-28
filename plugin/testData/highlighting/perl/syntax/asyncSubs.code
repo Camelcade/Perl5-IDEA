@@ -1,3 +1,0 @@
-async sub something{}
-async method something{}
-async $a;

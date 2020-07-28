@@ -1,0 +1,112 @@
+'
+    PERL_SQ_STRING => DEFAULT_STRING
+string is lazy parsable if has escape or sigil in string with interpolation string is lazy parsable if has escape or sigil in string with interpolation 
+    PERL_SQ_STRING => DEFAULT_STRING
+'
+    PERL_SQ_STRING => DEFAULT_STRING
+;
+    PERL_SEMICOLON => DEFAULT_SEMICOLON
+'
+    PERL_SQ_STRING => DEFAULT_STRING
+string is \ lazy parsable if has escape or sigil in string with interpolation string is lazy parsable if has escape or sigil in string with interpolation 
+    PERL_SQ_STRING => DEFAULT_STRING
+'
+    PERL_SQ_STRING => DEFAULT_STRING
+;
+    PERL_SEMICOLON => DEFAULT_SEMICOLON
+"
+    PERL_DQ_STRING => DEFAULT_STRING
+string is lazy parsable if has escape or sigil in string with interpolation string is lazy parsable if has escape or sigil in string with interpolation 
+    PERL_DQ_STRING => DEFAULT_STRING
+"
+    PERL_DQ_STRING => DEFAULT_STRING
+;
+    PERL_SEMICOLON => DEFAULT_SEMICOLON
+"
+    PERL_DQ_STRING => DEFAULT_STRING
+string is lazy 
+    PERL_DQ_STRING => DEFAULT_STRING
+\
+    PERL_STRING_SPECIAL => DEFAULT_VALID_STRING_ESCAPE
+ parsable if has escape or sigil in string with interpolation string is lazy parsable if has escape or sigil in string with interpolation 
+    PERL_DQ_STRING => DEFAULT_STRING
+"
+    PERL_DQ_STRING => DEFAULT_STRING
+;
+    PERL_SEMICOLON => DEFAULT_SEMICOLON
+"
+    PERL_DQ_STRING => DEFAULT_STRING
+string is lazy 
+    PERL_DQ_STRING => DEFAULT_STRING
+$
+    PERL_SCALAR => DEFAULT_IDENTIFIER => TEXT
+parsable
+    PERL_SCALAR => DEFAULT_IDENTIFIER => TEXT
+ if has escape or sigil in string with interpolation string is lazy parsable if has escape or sigil in string with interpolation 
+    PERL_DQ_STRING => DEFAULT_STRING
+"
+    PERL_DQ_STRING => DEFAULT_STRING
+;
+    PERL_SEMICOLON => DEFAULT_SEMICOLON
+"
+    PERL_DQ_STRING => DEFAULT_STRING
+string is lazy 
+    PERL_DQ_STRING => DEFAULT_STRING
+@
+    PERL_ARRAY => DEFAULT_IDENTIFIER => TEXT
+parsable
+    PERL_ARRAY => DEFAULT_IDENTIFIER => TEXT
+ if has escape or sigil in string with interpolation string is lazy parsable if has escape or sigil in string with interpolation 
+    PERL_DQ_STRING => DEFAULT_STRING
+"
+    PERL_DQ_STRING => DEFAULT_STRING
+;
+    PERL_SEMICOLON => DEFAULT_SEMICOLON
+`
+    PERL_DX_STRING => DEFAULT_STRING
+string is lazy parsable if has escape or sigil in string with interpolation string is lazy parsable if has escape or sigil in string with interpolation 
+    PERL_DX_STRING => DEFAULT_STRING
+`
+    PERL_DX_STRING => DEFAULT_STRING
+;
+    PERL_SEMICOLON => DEFAULT_SEMICOLON
+`
+    PERL_DX_STRING => DEFAULT_STRING
+string is lazy 
+    PERL_DX_STRING => DEFAULT_STRING
+\
+    PERL_STRING_SPECIAL => DEFAULT_VALID_STRING_ESCAPE
+ parsable if has escape or sigil in string with interpolation string is lazy parsable if has escape or sigil in string with interpolation 
+    PERL_DX_STRING => DEFAULT_STRING
+`
+    PERL_DX_STRING => DEFAULT_STRING
+;
+    PERL_SEMICOLON => DEFAULT_SEMICOLON
+`
+    PERL_DX_STRING => DEFAULT_STRING
+string is lazy 
+    PERL_DX_STRING => DEFAULT_STRING
+$
+    PERL_SCALAR => DEFAULT_IDENTIFIER => TEXT
+parsable
+    PERL_SCALAR => DEFAULT_IDENTIFIER => TEXT
+ if has escape or sigil in string with interpolation string is lazy parsable if has escape or sigil in string with interpolation 
+    PERL_DX_STRING => DEFAULT_STRING
+`
+    PERL_DX_STRING => DEFAULT_STRING
+;
+    PERL_SEMICOLON => DEFAULT_SEMICOLON
+`
+    PERL_DX_STRING => DEFAULT_STRING
+string is lazy 
+    PERL_DX_STRING => DEFAULT_STRING
+@
+    PERL_ARRAY => DEFAULT_IDENTIFIER => TEXT
+parsable
+    PERL_ARRAY => DEFAULT_IDENTIFIER => TEXT
+ if has escape or sigil in string with interpolation string is lazy parsable if has escape or sigil in string with interpolation 
+    PERL_DX_STRING => DEFAULT_STRING
+`
+    PERL_DX_STRING => DEFAULT_STRING
+;
+    PERL_SEMICOLON => DEFAULT_SEMICOLON

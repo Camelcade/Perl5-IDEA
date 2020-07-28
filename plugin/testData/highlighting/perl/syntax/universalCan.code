@@ -1,4 +1,0 @@
-
-use UNIVERSAL::can;
-
-UNIVERSAL::can($a);
