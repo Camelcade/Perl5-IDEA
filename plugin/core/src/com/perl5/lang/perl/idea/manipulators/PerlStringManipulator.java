@@ -35,18 +35,6 @@ public class PerlStringManipulator extends PerlTextContainerManipulator<PerlStri
     PsiElement openingQuote = getOpeningQuote(element);
     char closeQuote = PerlString.getQuoteCloseChar(openingQuote.getText().charAt(0));
 
-    /*
-    String currentContent = getNode().getText();
-
-    String newNodeContent =
-      currentContent.substring(0, getOpenQuoteOffsetInParent() + 1) +    // opening sequence
-      newContent +                                                    // new content
-      currentContent.substring(currentContent.length() - 1)            // close quote fixme handle incomplete strings
-      ;
-
-    replace(PerlElementFactory.createString(getProject(), newNodeContent));
-    */
-
     return super.handleContentChange(element, range, newContent.replaceAll("(?<!\\\\)" + closeQuote, "\\\\" + closeQuote));
   }
 
