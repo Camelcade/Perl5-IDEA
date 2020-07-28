@@ -3,10 +3,14 @@ Reparsing block
 Element(Perl5: BLOCK)
 ----------
 {
+  42;
+  {
     say 'hi';
     
     say 'hi';
   }
+
+}
 ----------
 After typing
 ----------

@@ -16,19 +16,21 @@
 
 package com.perl5.lang.perl.parser.elementTypes;
 
-import com.intellij.psi.PsiElement;
+import com.intellij.lang.ASTNode;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.lexer.PerlLexer;
+import com.perl5.lang.perl.psi.impl.PsiPerlBlockImpl;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.LEFT_BRACE;
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 
 
 public class PerlCodeBlockElementType extends PerlBracedBlockElementType {
 
-  public PerlCodeBlockElementType(@NotNull String debugName,
-                                  @NotNull Class<? extends PsiElement> clazz) {
-    super(debugName, clazz);
+  public PerlCodeBlockElementType() {
+    super("BLOCK", PsiPerlBlockImpl.class);
   }
 
   @Override
@@ -39,5 +41,29 @@ public class PerlCodeBlockElementType extends PerlBracedBlockElementType {
   @Override
   protected boolean isLexerStateOk(int lexerState) {
     return lexerState == PerlLexer.AFTER_RIGHT_BRACE;
+  }
+
+  @Override
+  protected boolean isNodeReparseable(@Nullable ASTNode parent) {
+    if (parent == null) {
+      return false;
+    }
+
+    IElementType parentType = PsiUtilCore.getElementType(parent);
+
+    // block and file level block, may turn to the hash
+    if (parentType == BLOCK_COMPOUND) {
+      return false;
+    }
+
+    IElementType firstChildType = PsiUtilCore.getElementType(parent.getFirstChildNode());
+
+    // moving up to call arguments
+    if (parentType == COMMA_SEQUENCE_EXPR) {
+      parent = parent.getTreeParent();
+      parentType = PsiUtilCore.getElementType(parent);
+    }
+
+    return parentType != CALL_ARGUMENTS || firstChildType != this;
   }
 }
