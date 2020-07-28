@@ -139,7 +139,7 @@ public class PerlElementTypeFactory {
       case "HASH_HASH_SLICE":
         return new PerlElementTypeEx(name, PsiPerlHashHashSliceImpl.class);
       case "ARRAY_INDEX":
-        return new PerlElementTypeEx(name, PsiPerlArrayIndexImpl.class);
+        return new PerlAnonArrayElementType(name, PsiPerlArrayIndexImpl.class);
       case "ARRAY_INDEX_VARIABLE":
         return new PerlElementTypeEx(name, PsiPerlArrayIndexVariableImpl.class);
       case "ARRAY_VARIABLE":

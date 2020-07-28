@@ -1170,7 +1170,7 @@ post_deref_hash_slice_expr ::= '$%' {hash_index|array_index}	{name="Hash slice"}
 hash_index ::= '{' hash_index_content '}' {pin=1 extraRoot=true}
 private hash_index_content ::= expr {recoverWhile=recover_braced_expression}
 private recover_braced_expression ::= !'}'
-array_index ::= '[' array_index_content ']' {pin=1}
+array_index ::= '[' array_index_content ']' {pin=1 extraRoot=true}
 private array_index_content ::= expr {recoverWhile=recover_bracketed_expression}
 private recover_bracketed_expression ::= !']'
 
