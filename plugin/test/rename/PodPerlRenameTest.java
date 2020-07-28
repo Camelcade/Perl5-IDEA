@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import base.PerlLightTestCase;
 import com.intellij.codeInsight.TargetElementUtil;
 import com.intellij.psi.PsiReference;
 import org.jetbrains.annotations.NotNull;
+import org.junit.Ignore;
 import org.junit.Test;
 public class PodPerlRenameTest extends PerlLightTestCase {
   @Override
@@ -37,6 +38,7 @@ public class PodPerlRenameTest extends PerlLightTestCase {
   @Test
   public void testScriptFileMethodDropsFormatting() {doTest("new_method_name", true, false);}
 
+  @Ignore("Bad elements manipulation, commit breaks psi, see #2267")
   @Test
   public void testScriptFileMethodInplace() {
     myFixture.copyFileToProject("scriptFileMethodInplace.pm");
