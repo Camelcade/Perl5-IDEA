@@ -1,11 +1,6 @@
 Reparsing block
 ----------
-Element(Perl5: ANON_HASH)
-----------
-{
-  'hi' =>
-  'hi'
-}
+Full reparse
 ----------
 After typing
 ----------

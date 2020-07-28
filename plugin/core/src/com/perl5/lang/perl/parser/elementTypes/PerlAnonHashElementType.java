@@ -16,17 +16,19 @@
 
 package com.perl5.lang.perl.parser.elementTypes;
 
-import com.intellij.psi.PsiElement;
+import com.intellij.lang.ASTNode;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.lexer.PerlLexer;
+import com.perl5.lang.perl.psi.impl.PsiPerlAnonHashImpl;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.LEFT_BRACE;
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 
 public class PerlAnonHashElementType extends PerlBracedBlockElementType {
-  public PerlAnonHashElementType(@NotNull String debugName,
-                                 @NotNull Class<? extends PsiElement> clazz) {
-    super(debugName, clazz);
+  public PerlAnonHashElementType() {
+    super("ANON_HASH", PsiPerlAnonHashImpl.class);
   }
 
   @Override
@@ -37,5 +39,37 @@ public class PerlAnonHashElementType extends PerlBracedBlockElementType {
   @Override
   protected boolean isLexerStateOk(int lexerState) {
     return lexerState == PerlLexer.AFTER_RIGHT_BRACE;
+  }
+
+  @Override
+  protected boolean isNodeReparseable(@Nullable ASTNode parent) {
+    if (parent == null) {
+      return false;
+    }
+
+    IElementType parentType = PsiUtilCore.getElementType(parent);
+
+    // explicitly, like +{}
+    if (parentType == PREFIX_UNARY_EXPR) {
+      return true;
+    }
+
+    // checking we are first in call args, comma sequence or statement
+    if (PsiUtilCore.getElementType(parent.getFirstChildNode()) != this) {
+      return true;
+    }
+
+    // block and file level anon hash
+    if (parentType == STATEMENT) {
+      return false;
+    }
+
+    // moving up to call arguments
+    if (parentType == COMMA_SEQUENCE_EXPR) {
+      parent = parent.getTreeParent();
+      parentType = PsiUtilCore.getElementType(parent);
+    }
+
+    return parentType != CALL_ARGUMENTS;
   }
 }
