@@ -315,27 +315,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
   }
 
   /**
-   * Checks if anon hash has proper suffix
-   *
-   * @param b PerlBuilder
-   * @param l parsing level
-   * @return chack result.
-   */
-  public static boolean validateAnonHashSuffix(PsiBuilder b, int l) {
-    IElementType tokenType = b.getTokenType();
-    if (tokenType == null || ((PerlBuilder)b).getPerlParser().getAnonHashSuffixTokens().contains(tokenType)) {
-      return true;
-    }
-    else {
-      PsiBuilder.Marker m = b.mark();
-      boolean r = PerlParserImpl.statement_modifier(b, l);
-      r = r && (b.getTokenType() != LEFT_BRACE);
-      m.rollbackTo();
-      return r;
-    }
-  }
-
-  /**
    * Parses and wraps declaration of scalar variable; NB: special variable names suppressed
    *
    * @param b Perl builder
@@ -473,19 +452,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
     assert PerlParserUtil.consumeTokenFast(b, PACKAGE);
     PerlParserImpl.perl_version(b, l);
     return true;
-  }
-
-  /**
-   * Attempts to parse anon hash as call argument if comma is after it
-   */
-  public static boolean parseHashSmart(@NotNull PsiBuilder b, int l) {
-    if (b.getTokenType() != LEFT_BRACE) {
-      return false;
-    }
-    PsiBuilder.Marker rollbackMarker = b.mark();
-    boolean r = PerlParserImpl.anon_hash(b, l) && b.getTokenType() == COMMA;
-    rollbackMarker.rollbackTo();
-    return r && PerlParserImpl.parse_list_expr(b, l);
   }
 
   public static boolean parseUse(@NotNull PsiBuilder b, int l) {

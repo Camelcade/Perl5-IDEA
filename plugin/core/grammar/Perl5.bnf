@@ -615,8 +615,8 @@ private statement_item ::=
         | format_definition
         | <<parseUse>>
         | <<parseNo>>
+        | block_compound
         | statement
-        | block_compound  // put it after statement to handle anon hashes before it.
         | annotation
 		| POD
 		| '__DATA__'
@@ -715,7 +715,7 @@ continue_block ::= continue_block_opener block {pin=1}
 private continue_block_opener ::= 'continue' &'{'
 
 block_compound ::= parse_block_compound
-private parse_block_compound ::= block [[POD] continue_block]
+private parse_block_compound ::= &('{') !(anon_hash_lookahead) block [[POD] continue_block] !('->')
 
 // for/foreach
 // fixme why the heck there is no parsing error on "for" and there is an error on "use", both pinned
@@ -823,8 +823,7 @@ private parse_use_statement ::=  'use' <<parseUseParameters use_no_parameters>> 
 private parse_no_statement ::=  'no' use_no_parameters <<statementSemi>> {pin=1}
 
 private use_no_parameters ::= use_module_parameters | use_version_parameters {recoverWhile=recover_statement}
-private use_module_parameters ::= any_package [perl_version [comma]] [use_module_hash_starting_comma_sequence_expr | expr];
-use_module_hash_starting_comma_sequence_expr ::= anon_hash_ensured (',' parse_list_element )* {elementType=comma_sequence_expr}
+private use_module_parameters ::= any_package [perl_version [comma]] [expr];
 private use_version_parameters ::= perl_version;
 
 undef_expr ::=  'undef' (undef_params | '(' undef_params ')') ? {pin=1}
@@ -1016,7 +1015,7 @@ lp_or_xor_expr ::= expr ({'or'|'xor'} expr)+
 print_expr ::=  ('print'|'printf'|'say') ( <<parenthesised_call_arguments [print_arguments] >> | [print_arguments] ) {pin=1}
 private print_arguments ::= perl_handle expr | expr
 
-sub_expr_simple ::= block_fake {elementType=sub_expr}
+sub_expr_simple ::= block !('->') {elementType=sub_expr}
 sub_expr_simple_ensured ::= block {elementType=sub_expr}
 sub_expr ::=  'sub' sub_definition_parameters block  // fixme make sure that this one checked after definition and declaration
 
@@ -1102,9 +1101,9 @@ private strict_variable_declaration_wrapper ::= variable_declaration_element !('
 variable_declaration_element ::= '\\'? lexical_variable
 
 /////////////////////////////////// REFERENCES /////////////////////////////////////////////////////////////////////////
-anon_array ::= '[' [expr] ']' //{pin=1}
-anon_hash ::= '{' [expr] '}' <<validateAnonHashSuffix>>  // fixme pin here after solving problem with code block and prototypes
-anon_hash_ensured ::= '{' [expr] '}' {pin=1 elementType=anon_hash}
+anon_array ::= '[' [expr] ']' // {pin=1}
+anon_hash ::= '{' [expr] '}' {pin=1}
+anon_hash_unsured ::= '{' [expr] '}' {elementType=anon_hash}
 
 //////////////////////////// END OF REFERENCES /////////////////////////////////////////////////////////////////////////
 
@@ -1220,11 +1219,16 @@ private meta rightward_call ::= <<method <<x1>>>> [rightward_call_arguments]
 private rightward_call_arguments ::= <<call_arguments parse_call_arguments>>
 private meta leftward_call ::= {<<method <<x1>>>>|code_primitive} default_parenthesised_call_arguments
 
-//// fixme this should depend on prototype
+// fixme this should depend on prototype
 private parse_call_arguments ::=
-    <<parseHashSmart>>
+    &('+'|anon_hash_lookahead) parse_list_expr
     | sub_expr_simple [[comma] parse_list_expr]
     | parse_list_expr
+private anon_hash_lookahead ::= '{' anon_hash_lookahead_body
+private anon_hash_lookahead_body ::=
+  array_or_slice '}' |
+  hash_or_slice '}' |
+  parse_list_element {','|'=>' }
 
 private normal_method ::= <<method method_tokens>>
 // the rest are fallback

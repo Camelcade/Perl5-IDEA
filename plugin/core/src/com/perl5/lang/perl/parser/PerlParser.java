@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -127,39 +127,5 @@ public interface PerlParser extends PerlElementTypes {
     RIGHT_BRACE_CODE,
     TAG_END,
     TAG_DATA
-  );
-
-  TokenSet ANON_HASH_TOKEN_SUFFIXES = TokenSet.create(
-    RIGHT_BRACE,
-    RIGHT_BRACE_SCALAR,
-    RIGHT_BRACE_HASH,
-    RIGHT_BRACE_ARRAY,
-    RIGHT_BRACE_GLOB,
-    RIGHT_BRACE_CODE,
-    RIGHT_PAREN,
-    RIGHT_BRACKET,
-    SEMICOLON,
-    COLON,
-
-    OPERATOR_HELLIP,
-    OPERATOR_FLIP_FLOP,
-    OPERATOR_CONCAT,
-
-    OPERATOR_AND,
-    OPERATOR_OR,
-    OPERATOR_OR_DEFINED,
-    OPERATOR_NOT,
-
-    COLON,
-
-    OPERATOR_AND_LP,
-    OPERATOR_OR_LP,
-    //			OPERATOR_XOR_LP,
-    OPERATOR_NOT_LP,
-
-    COMMA,
-    FAT_COMMA,
-
-    OPERATOR_DEREFERENCE
   );
 }

@@ -6,7 +6,7 @@ Perl5
         PerlSubNameElementImpl(Perl5: subname)('fun')
       PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
         PsiPerlSubExprImpl(Perl5: SUB_EXPR)
-          PsiPerlBlockFakeImpl(Perl5: BLOCK_FAKE)
+          PsiPerlBlockImpl(Perl5: BLOCK)
             PsiElement(Perl5: {)('{')
             PsiPerlStatementImpl(Perl5: STATEMENT)
               PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)

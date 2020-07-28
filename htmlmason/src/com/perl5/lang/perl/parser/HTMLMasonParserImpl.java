@@ -50,38 +50,6 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
     )
   );
 
-  protected static final TokenSet ANON_HASH_SUFFIX_TOKENS = TokenSet.orSet(
-    PerlParserImpl.ANON_HASH_TOKEN_SUFFIXES,
-    TokenSet.create(
-      HTML_MASON_CALL_CLOSER,
-
-      HTML_MASON_BLOCK_CLOSER,
-
-      // args closer and items. possibly we need to make this smarter
-      HTML_MASON_HARD_NEWLINE
-    )
-  );
-
-/*
-        @Override
-	public boolean parseFileContents(PsiBuilder b, int l)
-	{
-		CharSequence originalText = b.getOriginalText();
-		int length = 30;
-		if( originalText.length() < length)
-			length = originalText.length();
-
-		System.err.println("Parsing: " + originalText.subSequence(0, length));
-
-		return super.parseFileContents(b, l);
-	}
-*/
-
-  @Override
-  public @NotNull TokenSet getAnonHashSuffixTokens() {
-    return ANON_HASH_SUFFIX_TOKENS;
-  }
-
   @Override
   public @NotNull TokenSet getUnconsumableSemicolonTokens() {
     return UNCONSUMABLE_SEMI_TOKENS;

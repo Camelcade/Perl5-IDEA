@@ -14,8 +14,8 @@ Perl5
       PsiElement(Perl5: continue)('continue')
     PsiErrorElement:Semicolon expected
       <empty list>
-  PsiPerlStatementImpl(Perl5: STATEMENT)
-    PsiPerlAnonHashImpl(Perl5: ANON_HASH)
+  PsiPerlBlockCompoundImpl(Perl5: BLOCK_COMPOUND)
+    PsiPerlBlockImpl(Perl5: BLOCK)
       PsiElement(Perl5: {)('{')
       PsiElement(Perl5: })('}')
 --------------------------------------------------------------------------------

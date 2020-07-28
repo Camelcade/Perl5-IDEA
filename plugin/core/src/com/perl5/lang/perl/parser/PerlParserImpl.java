@@ -93,10 +93,6 @@ public class PerlParserImpl extends PerlParserGenerated implements PerlParser {
     return CONSUMABLE_SEMI_TOKENS;
   }
 
-  public @NotNull TokenSet getAnonHashSuffixTokens() {
-    return ANON_HASH_TOKEN_SUFFIXES;
-  }
-
   public @NotNull TokenSet getUnconsumableSemicolonTokens() {
     return UNCONSUMABLE_SEMI_TOKENS;
   }

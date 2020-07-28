@@ -1,0 +1,76 @@
+# bare block
+{} 
+# block
+{42}; 
+# hash
+{@list}; 
+# hash
+{@$scalar}; 
+# hash
+{@{$scalar}}; 
+# hash
+{@list[1,2,3]}; 
+# hash
+{@list{1,2,3}}; 
+# hash
+{%list}; 
+# hash
+{%$scalar}; 
+# hash
+{%{$scalar}}; 
+# hash
+{%list{1,2,3}}; 
+# hash
+{42,42}; 
+# hash
+{42 => 42}; 
+# bare hash
++{}; 
+# bare hash
+{}->[0]; 
+# return hash
+return {}; 
+# block
+something {}; 
+# block
+something {42}; 
+# hash
+something {@list}; 
+# hash
+something {@$scalar}; 
+# hash
+something {@{$scalar}}; 
+# hash
+something {@list[1,2,3]}; 
+# hash
+something {@list{1,2,3}}; 
+# hash
+something {%list}; 
+# hash
+something {%$scalar}; 
+# hash
+something {%{$scalar}}; 
+# hash
+something {%list{1,2,3}}; 
+# hash
+something {42,42}; 
+# hash
+something {42 => 42}; 
+# hash
+something +{}; 
+# block hash
+something {}, {}; 
+# block, number
+something {}, 42; 
+# block hash
+something {} {}; 
+# block, number
+something {} 42; 
+# block
+something { say 'hi' }, 42; 
+# block
+something { say 'hi'; }, 42; 
+# block
+something { say 'hi'; }, 42, 42; 
+# hash
+something {}->[0];  
