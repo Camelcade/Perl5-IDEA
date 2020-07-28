@@ -75,13 +75,13 @@ public class PerlElementTypeFactory {
       case "PARSABLE_STRING_USE_VARS":
         return new PerlQuoteLikeContentLazyElementType(name, PerlLexer.USE_VARS_STRING);
       case "COMMENT_ANNOTATION":
-        return new PerlLazyAnnotationElementType(name);
+        return new PerlAnnotationElementType(name);
       case "HEREDOC_QQ":
-        return new PerlLazyHeredocElementType(name, PerlHeredocElementImpl.class, PerlLexer.STRING_QQ);
+        return new PerlHeredocElementType(name, PerlHeredocElementImpl.class, PerlLexer.STRING_QQ);
       case "HEREDOC_QX":
-        return new PerlLazyHeredocElementType(name, PerlHeredocElementImpl.class, PerlLexer.STRING_QX);
+        return new PerlHeredocElementType(name, PerlHeredocElementImpl.class, PerlLexer.STRING_QX);
       case "HEREDOC":
-        return new PerlLazyHeredocElementType(name, PerlHeredocElementImpl.class, PerlLexer.STRING_Q);
+        return new PerlHeredocElementType(name, PerlHeredocElementImpl.class, PerlLexer.STRING_Q);
       case "SUB_DEFINITION":
         return PerlStubElementTypes.SUB_DEFINITION;
       case "METHOD_DEFINITION":

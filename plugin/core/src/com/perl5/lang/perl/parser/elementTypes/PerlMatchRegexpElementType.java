@@ -24,7 +24,7 @@ import org.jetbrains.annotations.Nullable;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 
-public class PerlMatchRegexpElementType extends PerlReparseableTwoQuotesQuoteLikeElementType {
+public class PerlMatchRegexpElementType extends PerlTwoQuotesQuoteLikeElementType {
   public PerlMatchRegexpElementType(@NotNull String debugName,
                                     @NotNull Class<? extends PsiElement> clazz) {
     super(debugName, clazz);

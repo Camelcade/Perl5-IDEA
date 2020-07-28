@@ -23,7 +23,7 @@ import org.jetbrains.annotations.Nullable;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 
-public class PerlQQStringElementType extends PerlReparseableStringElementType {
+public class PerlQQStringElementType extends PerlStringElementType {
   public PerlQQStringElementType(@NotNull String debugName,
                                  @NotNull Class<? extends PsiElement> clazz) {
     super(debugName, clazz);

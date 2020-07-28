@@ -38,10 +38,10 @@ import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.HEREDOC_END;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.HEREDOC_END_INDENTABLE;
 
 
-public class PerlLazyHeredocElementType extends PerlReparseableElementType {
+public class PerlHeredocElementType extends PerlReparseableElementType {
   private final int myStartLexerState;
 
-  public PerlLazyHeredocElementType(@NotNull String name, int startLexerState) {
+  public PerlHeredocElementType(@NotNull String name, int startLexerState) {
     super(name);
     myStartLexerState = startLexerState;
   }
@@ -81,9 +81,9 @@ public class PerlLazyHeredocElementType extends PerlReparseableElementType {
     return checker.result();
   }
 
-  public PerlLazyHeredocElementType(@NotNull String debugName,
-                                    @NotNull Class<? extends PsiElement> clazz,
-                                    int startLexerState) {
+  public PerlHeredocElementType(@NotNull String debugName,
+                                @NotNull Class<? extends PsiElement> clazz,
+                                int startLexerState) {
     super(debugName, clazz);
     myStartLexerState = startLexerState;
   }
@@ -108,7 +108,7 @@ public class PerlLazyHeredocElementType extends PerlReparseableElementType {
      */
     boolean check(@NotNull ASTNode node) {
       IElementType elementType = node.getElementType();
-      if (elementType != PerlLazyHeredocElementType.this) {
+      if (elementType != PerlHeredocElementType.this) {
         return true;
       }
 

@@ -26,10 +26,10 @@ import org.jetbrains.annotations.Nullable;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.HEREDOC_OPENER;
 
-public abstract class PerlReparseableStringElementType extends PerlReparseableTwoQuotesQuoteLikeElementType {
+public abstract class PerlStringElementType extends PerlTwoQuotesQuoteLikeElementType {
 
-  public PerlReparseableStringElementType(@NotNull String debugName,
-                                          @NotNull Class<? extends PsiElement> clazz) {
+  public PerlStringElementType(@NotNull String debugName,
+                               @NotNull Class<? extends PsiElement> clazz) {
     super(debugName, clazz);
   }
 

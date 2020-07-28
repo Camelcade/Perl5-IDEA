@@ -29,9 +29,9 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Two quoted quote-like operators element type: strings, matching regexp, string list, regex compile
  */
-public abstract class PerlReparseableTwoQuotesQuoteLikeElementType extends PerlReparseableQuoteLikeElementType {
-  public PerlReparseableTwoQuotesQuoteLikeElementType(@NotNull String debugName,
-                                                      @NotNull Class<? extends PsiElement> clazz) {
+public abstract class PerlTwoQuotesQuoteLikeElementType extends PerlQuoteLikeElementType {
+  public PerlTwoQuotesQuoteLikeElementType(@NotNull String debugName,
+                                           @NotNull Class<? extends PsiElement> clazz) {
     super(debugName, clazz);
   }
 

@@ -24,11 +24,11 @@ import com.perl5.lang.perl.lexer.PerlLexer;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Common parent for all quote-like operators available: stirngs, regexps, replacements, transliterations
+ * Common parent for all quote-like operators available: strings, regexps, replacements, transliterations
  */
-public abstract class PerlReparseableQuoteLikeElementType extends PerlReparseableElementType {
-  public PerlReparseableQuoteLikeElementType(@NotNull String debugName,
-                                             @NotNull Class<? extends PsiElement> clazz) {
+public abstract class PerlQuoteLikeElementType extends PerlReparseableElementType {
+  public PerlQuoteLikeElementType(@NotNull String debugName,
+                                  @NotNull Class<? extends PsiElement> clazz) {
     super(debugName, clazz);
   }
 
