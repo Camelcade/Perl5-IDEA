@@ -19,11 +19,9 @@ package com.perl5.lang.perl.parser.elementTypes;
 import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 
-
-public class PerlCodeBlockElementType extends PerlBracedBlockElementType {
-
-  public PerlCodeBlockElementType(@NotNull String debugName,
-                                  @NotNull Class<? extends PsiElement> clazz) {
+public class PerlAnonHashElementType extends PerlBracedBlockElementType {
+  public PerlAnonHashElementType(@NotNull String debugName,
+                                 @NotNull Class<? extends PsiElement> clazz) {
     super(debugName, clazz);
   }
 }

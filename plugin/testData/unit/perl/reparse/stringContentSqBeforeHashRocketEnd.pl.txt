@@ -1,13 +1,10 @@
 Reparsing block
 ----------
-Element(Perl5: BLOCK)
+Element(Perl5: ANON_HASH)
 ----------
 {
-  say 'hi';
-  my $test = {
     some => 42
-  };
-}
+  }
 ----------
 After typing
 ----------

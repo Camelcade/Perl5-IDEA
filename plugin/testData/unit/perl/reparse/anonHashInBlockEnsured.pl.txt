@@ -1,14 +1,12 @@
 Reparsing block
 ----------
-Element(Perl5: BLOCK)
+Element(Perl5: ANON_HASH)
 ----------
 {
-  +{
     say 'hi' =>
     ,
     say 'hi'
-  };
-}
+  }
 ----------
 After typing
 ----------

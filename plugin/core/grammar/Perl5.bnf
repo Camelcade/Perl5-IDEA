@@ -1101,7 +1101,7 @@ variable_declaration_element ::= '\\'? lexical_variable
 
 /////////////////////////////////// REFERENCES /////////////////////////////////////////////////////////////////////////
 anon_array ::= '[' [expr] ']' {pin=1 name="anonymous array"}
-anon_hash ::= '{' [expr] '}' {pin=1 name="anonymous hash"}
+anon_hash ::= '{' [expr] '}' {pin=1 name="anonymous hash" extraRoot=true}
 
 //////////////////////////// END OF REFERENCES /////////////////////////////////////////////////////////////////////////
 

@@ -127,7 +127,7 @@ public class PerlElementTypeFactory {
       case "ESC_CHAR":
         return new PerlElementTypeEx(name, PsiPerlEscCharImpl.class);
       case "ANON_HASH":
-        return new PerlElementTypeEx(name, PsiPerlAnonHashImpl.class);
+        return new PerlAnonHashElementType(name, PsiPerlAnonHashImpl.class);
       case "ARRAY_SLICE":
         return new PerlElementTypeEx(name, PsiPerlArraySliceImpl.class);
       case "HASH_ARRAY_SLICE":
