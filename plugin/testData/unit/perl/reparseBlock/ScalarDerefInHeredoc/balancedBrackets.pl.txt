@@ -1,0 +1,18 @@
+{
+  say 'hi';
+  <<EOM;
+text  ${
+    say => 'start';
+    some => []<caret>;
+    say =>'end';
+  }; text
+EOM
+}
+----------
+Element(Perl5: HEREDOC_QQ)
+----------
+text  ${
+    say => 'start';
+    some => ;
+    say =>'end';
+  }; text

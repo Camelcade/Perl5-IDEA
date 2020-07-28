@@ -1,0 +1,8 @@
+{
+  sub ($var,{}<caret>){
+    say 'hi'
+  }
+}
+
+----------
+Full reparse

@@ -1,0 +1,14 @@
+{
+  sub something($var,''<caret>){
+    say 'hi'
+  }
+}
+
+----------
+Element(Perl5: BLOCK)
+----------
+{
+  sub something($var,){
+    say 'hi'
+  }
+}

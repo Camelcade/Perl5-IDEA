@@ -26,33 +26,45 @@ public abstract class PerlReparseBlockTestCase extends PerlReparseMultiTestCase 
   }
 
   @Test
-  public void testNumber(){doTest("42");}
+  public void testNumber() {doTest("42");}
 
   @Test
-  public void testOpenBrace(){doTest("{");}
+  public void testOpenBrace() {doTest("{");}
 
   @Test
-  public void testCloseBrace(){doTest("}");}
+  public void testCloseBrace() {doTest("}");}
 
   @Test
-  public void testOpenBracket(){doTest("[");}
+  public void testBalancedBraces() {doTest("{}");}
 
   @Test
-  public void testCloseBracket(){doTest("]");}
+  public void testOpenBracket() {doTest("[");}
 
   @Test
-  public void testOpenParen(){doTest("(");}
+  public void testCloseBracket() {doTest("]");}
 
   @Test
-  public void testCloseParen(){doTest(")");}
+  public void testBalancedBrackets() {doTest("[]");}
 
   @Test
-  public void testOpenQuote(){doTest("'");}
+  public void testOpenParen() {doTest("(");}
 
   @Test
-  public void testOpenHeredoc(){doTest("<<EOM");}
+  public void testCloseParen() {doTest(")");}
 
-  public static class CodeBlock extends PerlReparseBlockTestCase{
+  @Test
+  public void testBalancedParens() {doTest("()");}
+
+  @Test
+  public void testOpenQuote() {doTest("'");}
+
+  @Test
+  public void testQuotes() {doTest("''");}
+
+  @Test
+  public void testOpenHeredoc() {doTest("<<EOM");}
+
+  public static class CodeBlock extends PerlReparseBlockTestCase {
     @Override
     protected @NotNull String buildCodeSample() {
       return "{\n" +

@@ -1,0 +1,16 @@
+{
+  say 'hi';
+  my $test = sub {
+    say 'sub';
+    some => ()<caret>;
+    say 'sub end';
+  };
+}
+----------
+Element(Perl5: BLOCK)
+----------
+{
+    say 'sub';
+    some => ;
+    say 'sub end';
+  }
