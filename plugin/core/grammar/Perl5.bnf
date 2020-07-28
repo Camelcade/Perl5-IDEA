@@ -1100,7 +1100,7 @@ private strict_variable_declaration_wrapper ::= variable_declaration_element !('
 variable_declaration_element ::= '\\'? lexical_variable
 
 /////////////////////////////////// REFERENCES /////////////////////////////////////////////////////////////////////////
-anon_array ::= '[' [expr] ']' // {pin=1}
+anon_array ::= '[' [expr] ']' {pin=1}
 anon_hash ::= '{' [expr] '}' {pin=1}
 
 //////////////////////////// END OF REFERENCES /////////////////////////////////////////////////////////////////////////
