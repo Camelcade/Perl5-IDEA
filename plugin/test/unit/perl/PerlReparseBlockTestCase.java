@@ -35,6 +35,12 @@ public abstract class PerlReparseBlockTestCase extends PerlReparseMultiTestCase 
   public void testCloseBrace() {doTest("}");}
 
   @Test
+  public void testOpenBraceQuoted() {doTest("'{'");}
+
+  @Test
+  public void testCloseBraceQuoted() {doTest("'}'");}
+
+  @Test
   public void testBalancedBraces() {doTest("{}");}
 
   @Test
@@ -44,6 +50,12 @@ public abstract class PerlReparseBlockTestCase extends PerlReparseMultiTestCase 
   public void testCloseBracket() {doTest("]");}
 
   @Test
+  public void testOpenBracketQuoted() {doTest("'['");}
+
+  @Test
+  public void testCloseBracketQuoted() {doTest("']'");}
+
+  @Test
   public void testBalancedBrackets() {doTest("[]");}
 
   @Test
@@ -51,6 +63,12 @@ public abstract class PerlReparseBlockTestCase extends PerlReparseMultiTestCase 
 
   @Test
   public void testCloseParen() {doTest(")");}
+
+  @Test
+  public void testOpenParenQuoted() {doTest("'('");}
+
+  @Test
+  public void testCloseParenQuoted() {doTest("')'");}
 
   @Test
   public void testBalancedParens() {doTest("()");}
