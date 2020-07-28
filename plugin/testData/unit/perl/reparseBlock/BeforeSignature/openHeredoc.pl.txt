@@ -1,0 +1,8 @@
+{
+  around something($var,<<EOM<caret>){
+    say 'hi'
+  }
+}
+
+----------
+Full reparse

@@ -1,0 +1,6 @@
+{
+  my $test = (2 + <<EOM<caret>);
+}
+
+----------
+Full reparse

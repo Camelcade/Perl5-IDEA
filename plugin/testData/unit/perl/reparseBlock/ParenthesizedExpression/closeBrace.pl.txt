@@ -1,0 +1,6 @@
+{
+  my $test = (2 + }<caret>);
+}
+
+----------
+Full reparse

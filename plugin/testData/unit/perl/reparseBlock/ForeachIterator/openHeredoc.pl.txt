@@ -1,0 +1,8 @@
+{
+  foreach(@something + <<EOM<caret> ){
+    say 'hi'
+  }
+}
+
+----------
+Full reparse

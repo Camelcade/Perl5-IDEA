@@ -1,0 +1,6 @@
+{
+  say 'hi' if( $a &&  }<caret> );
+}
+
+----------
+Full reparse

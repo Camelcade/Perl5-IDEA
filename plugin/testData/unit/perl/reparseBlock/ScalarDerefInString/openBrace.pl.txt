@@ -1,0 +1,16 @@
+{
+  say 'hi';
+say "text  ${
+    say => 'start';
+    some => {<caret>;
+    say =>'end';
+  }; text"
+}
+----------
+Element(Perl5: STRING_DQ)
+----------
+"text  ${
+    say => 'start';
+    some => ;
+    say =>'end';
+  }; text"

@@ -1,0 +1,10 @@
+{
+  say 'hi';
+  my $test = sub {
+    say 'sub';
+    some => '<caret>;
+    say 'sub end';
+  };
+}
+----------
+Full reparse

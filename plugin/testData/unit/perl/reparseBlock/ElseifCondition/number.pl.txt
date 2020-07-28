@@ -1,0 +1,16 @@
+{
+  if($b ){} 
+  elsif( $a &&  42<caret> ){
+    say 'hi'
+  }
+}
+
+----------
+Element(Perl5: BLOCK)
+----------
+{
+  if($b ){} 
+  elsif( $a &&   ){
+    say 'hi'
+  }
+}

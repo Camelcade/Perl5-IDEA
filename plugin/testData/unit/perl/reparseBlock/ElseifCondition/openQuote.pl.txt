@@ -1,0 +1,9 @@
+{
+  if($b ){} 
+  elsif( $a &&  '<caret> ){
+    say 'hi'
+  }
+}
+
+----------
+Full reparse

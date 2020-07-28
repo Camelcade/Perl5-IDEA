@@ -1,0 +1,10 @@
+{
+  say 'hi';
+  my $test = [
+    say => 'start',
+    some => <<EOM<caret>,
+    say =>'end'
+  ];
+}
+----------
+Full reparse

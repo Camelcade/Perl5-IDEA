@@ -1,0 +1,8 @@
+{
+  foreach(@something + {<caret> ){
+    say 'hi'
+  }
+}
+
+----------
+Full reparse

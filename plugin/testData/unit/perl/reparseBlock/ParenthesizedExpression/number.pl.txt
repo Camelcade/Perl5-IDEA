@@ -1,0 +1,10 @@
+{
+  my $test = (2 + 42<caret>);
+}
+
+----------
+Element(Perl5: BLOCK)
+----------
+{
+  my $test = (2 + );
+}

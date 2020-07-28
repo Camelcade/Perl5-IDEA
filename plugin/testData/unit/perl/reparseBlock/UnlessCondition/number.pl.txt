@@ -1,0 +1,14 @@
+{
+  unless( $a &&  42<caret> ){
+    say 'hi'
+  }
+}
+
+----------
+Element(Perl5: BLOCK)
+----------
+{
+  unless( $a &&   ){
+    say 'hi'
+  }
+}

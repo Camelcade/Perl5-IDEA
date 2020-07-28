@@ -1,0 +1,8 @@
+{
+  around something($var,}<caret>){
+    say 'hi'
+  }
+}
+
+----------
+Full reparse

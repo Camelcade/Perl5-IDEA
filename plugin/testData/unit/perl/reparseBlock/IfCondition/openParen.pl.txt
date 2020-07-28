@@ -1,0 +1,14 @@
+{
+  if( $a &&  (<caret> ){
+    say 'hi'
+  }
+}
+
+----------
+Element(Perl5: BLOCK)
+----------
+{
+  if( $a &&   ){
+    say 'hi'
+  }
+}

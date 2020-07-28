@@ -1,0 +1,9 @@
+{
+  if($b ){} 
+  elsif( $a &&  <<EOM<caret> ){
+    say 'hi'
+  }
+}
+
+----------
+Full reparse

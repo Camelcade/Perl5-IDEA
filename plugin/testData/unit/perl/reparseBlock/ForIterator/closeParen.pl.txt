@@ -1,0 +1,14 @@
+{
+  for(my $i = 0; i < 10; )<caret> ){
+    say 'hi'
+  }
+}
+
+----------
+Element(Perl5: BLOCK)
+----------
+{
+  for(my $i = 0; i < 10;  ){
+    say 'hi'
+  }
+}

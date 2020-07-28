@@ -1,0 +1,8 @@
+{
+  unless( $a &&  <<EOM<caret> ){
+    say 'hi'
+  }
+}
+
+----------
+Full reparse

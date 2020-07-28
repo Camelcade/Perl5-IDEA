@@ -1,0 +1,14 @@
+{
+  around something($var,42<caret>){
+    say 'hi'
+  }
+}
+
+----------
+Element(Perl5: BLOCK)
+----------
+{
+  around something($var,){
+    say 'hi'
+  }
+}

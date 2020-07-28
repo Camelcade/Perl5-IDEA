@@ -1,0 +1,14 @@
+{
+  foreach(@something + ]<caret> ){
+    say 'hi'
+  }
+}
+
+----------
+Element(Perl5: BLOCK)
+----------
+{
+  foreach(@something +  ){
+    say 'hi'
+  }
+}

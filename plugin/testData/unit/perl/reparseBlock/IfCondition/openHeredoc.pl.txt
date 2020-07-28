@@ -1,0 +1,8 @@
+{
+  if( $a &&  <<EOM<caret> ){
+    say 'hi'
+  }
+}
+
+----------
+Full reparse

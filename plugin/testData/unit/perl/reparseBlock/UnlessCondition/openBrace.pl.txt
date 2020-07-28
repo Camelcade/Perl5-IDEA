@@ -1,0 +1,8 @@
+{
+  unless( $a &&  {<caret> ){
+    say 'hi'
+  }
+}
+
+----------
+Full reparse

@@ -1,0 +1,6 @@
+{
+  say 'hi' foreach(@something + {<caret> );
+}
+
+----------
+Full reparse

@@ -1,0 +1,19 @@
+{
+  say 'hi';
+  %{
+    say => 'start';
+    some => 42<caret>;
+    say =>'end';
+  };
+}
+----------
+Element(Perl5: BLOCK)
+----------
+{
+  say 'hi';
+  %{
+    say => 'start';
+    some => ;
+    say =>'end';
+  };
+}

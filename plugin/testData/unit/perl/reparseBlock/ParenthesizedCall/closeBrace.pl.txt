@@ -1,0 +1,10 @@
+{
+  say 'hi';
+  test(
+    say => 'start',
+    some => }<caret>,
+    say =>'end'
+  );
+}
+----------
+Full reparse

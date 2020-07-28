@@ -1,0 +1,14 @@
+{
+  augment something($var,[<caret>){
+    say 'hi'
+  }
+}
+
+----------
+Element(Perl5: BLOCK)
+----------
+{
+  augment something($var,){
+    say 'hi'
+  }
+}

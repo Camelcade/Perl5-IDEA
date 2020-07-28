@@ -1,0 +1,14 @@
+{
+  func something($var,]<caret>){
+    say 'hi'
+  }
+}
+
+----------
+Element(Perl5: BLOCK)
+----------
+{
+  func something($var,){
+    say 'hi'
+  }
+}

@@ -16,12 +16,10 @@
 
 package unit.perl;
 
-import base.PerlLightTestCase;
-import com.intellij.openapi.util.io.FileUtil;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
-public abstract class PerlQuoteLikeReparseTestCase extends PerlLightTestCase {
+public abstract class PerlQuoteLikeReparseTestCase extends PerlReparseMultiTestCase {
   @Override
   protected String getBaseDataPath() {
     return "testData/unit/perl/reparseQuoteLike";
@@ -74,18 +72,6 @@ public abstract class PerlQuoteLikeReparseTestCase extends PerlLightTestCase {
 
   @Test
   public void testBracesCloseBraceEscaped() {doTest("# comment \\}");}
-
-  private void doTest(@NotNull String textToInsert) {
-    initWithTextSmartWithoutErrors(buildCodeSample());
-    doTestReparseWithoutInit(textToInsert);
-  }
-
-  protected abstract @NotNull String buildCodeSample();
-
-  @Override
-  protected @NotNull String computeAnswerFileName(@NotNull String appendix) {
-    return FileUtil.join(getClass().getSimpleName(), super.computeAnswerFileName(appendix));
-  }
 
   public static class QwQuote extends PerlQuoteLikeReparseTestCase {
     @Override
