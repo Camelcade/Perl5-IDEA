@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package unit.perl;
+package unit.perl.reparse;
 
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;

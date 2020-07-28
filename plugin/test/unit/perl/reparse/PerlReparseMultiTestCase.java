@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package unit.perl;
+package unit.perl.reparse;
 
 import base.PerlLightTestCase;
 import com.intellij.openapi.util.io.FileUtil;

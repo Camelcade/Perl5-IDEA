@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package unit.perl;
+package unit.perl.reparse;
 
 import org.junit.Test;
 import unit.perl.parser.PerlParserTestBase;
