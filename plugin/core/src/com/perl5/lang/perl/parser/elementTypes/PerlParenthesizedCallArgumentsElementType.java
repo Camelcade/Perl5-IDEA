@@ -16,17 +16,26 @@
 
 package com.perl5.lang.perl.parser.elementTypes;
 
+import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.util.PsiUtilCore;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.LEFT_PAREN;
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.PRINT_EXPR;
 import static com.perl5.lang.perl.lexer.PerlLexer.AFTER_VALUE;
 
 public class PerlParenthesizedCallArgumentsElementType extends PerlBracedBlockElementType {
   public PerlParenthesizedCallArgumentsElementType(@NotNull String debugName,
                                                    @NotNull Class<? extends PsiElement> clazz) {
     super(debugName, clazz);
+  }
+
+  @Override
+  protected boolean isNodeReparseable(@Nullable ASTNode parent) {
+    return PsiUtilCore.getElementType(parent) != PRINT_EXPR;
   }
 
   @Override

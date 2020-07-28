@@ -37,6 +37,9 @@ public abstract class PerlBracedBlockElementType extends PerlReparseableElementT
                                   @NotNull CharSequence buffer,
                                   @NotNull Language fileLanguage,
                                   @NotNull Project project) {
+    if (!isNodeReparseable(parent)) {
+      return false;
+    }
     FlexAdapter lexer = new FlexAdapter(new PerlLexer(null).withProject(project));
     boolean result = hasProperBraceBalance(buffer, lexer, getOpeningBraceType());
     if (LOG.isDebugEnabled()) {
@@ -45,6 +48,10 @@ public abstract class PerlBracedBlockElementType extends PerlReparseableElementT
                 "; lexer state: ", lexer.getState());
     }
     return result && isLexerStateOk(lexer.getState());
+  }
+
+  protected boolean isNodeReparseable(@Nullable ASTNode parent) {
+    return true;
   }
 
   protected abstract @NotNull IElementType getOpeningBraceType();
