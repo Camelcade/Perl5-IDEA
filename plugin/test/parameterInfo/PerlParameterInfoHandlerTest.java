@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +25,21 @@ public class PerlParameterInfoHandlerTest extends PerlLightTestCase {
   protected String getBaseDataPath() {
     return "testData/parameterInfo";
   }
+
+  @Test
+  public void testSubSignatureCode() {doTest();}
+
+  @Test
+  public void testSubSignatureCodeParens() {doTest();}
+
+  @Test
+  public void testSubSignatureCodeSecond() {doTest();}
+
+  @Test
+  public void testSubSignatureCodeSecondNoComma() {doTest();}
+
+  @Test
+  public void testSubSignatureCodeSecondParens() {doTest();}
 
   @Test
   public void testSubSignatureOptional() {doTest();}

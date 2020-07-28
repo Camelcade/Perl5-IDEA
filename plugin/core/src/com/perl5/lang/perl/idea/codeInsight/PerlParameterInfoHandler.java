@@ -27,6 +27,7 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
+import com.perl5.lang.perl.psi.PsiPerlBlock;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import com.perl5.lang.perl.psi.impl.PsiPerlCallArgumentsImpl;
 import com.perl5.lang.perl.psi.impl.PsiPerlCommaSequenceExprImpl;
@@ -34,6 +35,7 @@ import com.perl5.lang.perl.psi.impl.PsiPerlParenthesisedExprImpl;
 import com.perl5.lang.perl.psi.mixins.PerlMethodMixin;
 import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -106,19 +108,19 @@ public class PerlParameterInfoHandler implements ParameterInfoHandler<PsiPerlCal
         return currentIndex;
       }
 
+      IElementType elementType = PsiUtilCore.getElementType(element);
       if (element instanceof PsiPerlParenthesisedExprImpl || element instanceof PsiPerlCommaSequenceExprImpl) {
         currentIndex = markActiveparametersRecursively(element.getFirstChild(), parameterInfos, currentIndex, offset);
       }
       else {
-        IElementType tokenType = PsiUtilCore.getElementType(element);
-        if (tokenType == FAT_COMMA || tokenType == COMMA) {
+        if (isComma(elementType)) {
           if (parameterInfos[currentIndex].getArgument().getContextType() == PerlContextType.SCALAR) {
             currentIndex++;
           }
         }
       }
 
-      if (element.getNode().getTextRange().getEndOffset() >= offset) {
+      if (element.getTextRange().getEndOffset() >= offset) {
         if (element instanceof PerlCompositeElementImpl) {
           PerlContextType valueContextType = PerlContextType.from(element);
 
@@ -143,10 +145,20 @@ public class PerlParameterInfoHandler implements ParameterInfoHandler<PsiPerlCal
         }
         return parameterInfos.length;
       }
+      else if (elementType == SUB_EXPR && element.getFirstChild() instanceof PsiPerlBlock) {
+        PsiElement nextSibling = PerlPsiUtil.getNextSignificantSibling(element);
+        if (!isComma(PsiUtilCore.getElementType(nextSibling))) {
+          currentIndex++;
+        }
+      }
 
       element = element.getNextSibling();
     }
     return currentIndex;
+  }
+
+  private static boolean isComma(IElementType elementType) {
+    return elementType == FAT_COMMA || elementType == COMMA;
   }
 
   private static @Nullable PsiPerlCallArgumentsImpl findCallArguments(ParameterInfoContext context) {

@@ -1,0 +1,4 @@
+sub sub_signature_simple($first, $second = 1){
+}
+sub_signature_simple(<caret>)
+<$first>, [$second]

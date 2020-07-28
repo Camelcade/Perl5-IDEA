@@ -1220,13 +1220,15 @@ private meta leftward_call ::= {<<method <<x1>>>>|code_primitive} default_parent
 // fixme this should depend on prototype
 private parse_call_arguments ::=
     &('+'|anon_hash_lookahead) parse_list_expr
-    | sub_expr_simple [[comma] parse_list_expr]
+    | arguments_list_with_codeblock
     | parse_list_expr
+arguments_list_with_codeblock ::=
+  sub_expr_simple [[comma] parse_list_element {comma parse_list_element}*] {extends=expr elementType=comma_sequence_expr}
 private anon_hash_lookahead ::= '{' anon_hash_lookahead_body
 private anon_hash_lookahead_body ::=
   array_or_slice '}' |
   hash_or_slice '}' |
-  parse_list_element {','|'=>' }
+  parse_list_element comma
 
 private normal_method ::= <<method method_tokens>>
 // the rest are fallback
