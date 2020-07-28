@@ -58,7 +58,7 @@ public class MojoliciousParser extends PerlParserImpl implements MojoliciousElem
       PerlParserProxy.block_content(b, l);
 
       if (b.getTokenType() == MOJO_END) {
-        blockMarker.done(BLOCK_FAKE);
+        blockMarker.done(BLOCK_BRACELESS);
         blockMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
         subMarker.done(SUB_EXPR);
         return true;

@@ -635,7 +635,6 @@ private real_namespace_content ::= {!'package' file_item} *  {extends=block reco
 block_braceless ::= file_items {extends=block hooks=[rightBinder="GREEDY_RIGHT_BINDER" leftBinder="GREEDY_LEFT_BINDER"]}
 block ::= '{' block_content '}' {extraRoot=true pin=1}
 // this is uncertain or derivative block. should be not reparseable, may be a hash
-block_fake ::= '{' block_content '}' {extends=block pin=1}
 private block_content ::= file_item * {recoverWhile=recover_statement}
 
 nyi_statement ::= 'nyi'
@@ -1103,7 +1102,6 @@ variable_declaration_element ::= '\\'? lexical_variable
 /////////////////////////////////// REFERENCES /////////////////////////////////////////////////////////////////////////
 anon_array ::= '[' [expr] ']' // {pin=1}
 anon_hash ::= '{' [expr] '}' {pin=1}
-anon_hash_unsured ::= '{' [expr] '}' {elementType=anon_hash}
 
 //////////////////////////// END OF REFERENCES /////////////////////////////////////////////////////////////////////////
 

@@ -168,8 +168,6 @@ public class PerlElementTypeFactory {
         return new PerlElementTypeEx(name, PsiPerlBlockGlobImpl.class);
       case "BLOCK_CODE":
         return new PerlElementTypeEx(name, PsiPerlBlockCodeImpl.class);
-      case "BLOCK_FAKE":
-        return new PerlElementTypeEx(name, PsiPerlBlockFakeImpl.class);
       case "BLOCK_COMPOUND":
         return new PerlElementTypeEx(name, PsiPerlBlockCompoundImpl.class);
       case "CALL_ARGUMENTS":
