@@ -1,15 +1,12 @@
 Reparsing block
 ----------
-Element(Perl5: BLOCK)
+Element(Perl5: ANON_ARRAY)
 ----------
-{
-  say 'hi';
-  my $test = [
+[
     say => 'start',
     some => ,
     say =>'end'
-  ];
-}
+  ]
 ----------
 After typing
 ----------

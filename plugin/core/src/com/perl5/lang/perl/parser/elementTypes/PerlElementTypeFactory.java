@@ -117,7 +117,7 @@ public class PerlElementTypeFactory {
       case "AND_EXPR":
         return new PerlElementTypeEx(name, PsiPerlAndExprImpl.class);
       case "ANON_ARRAY":
-        return new PerlElementTypeEx(name, PsiPerlAnonArrayImpl.class);
+        return new PerlAnonArrayElementType(name, PsiPerlAnonArrayImpl.class);
       case "UNICODE_CHAR":
         return new PerlElementTypeEx(name, PsiPerlUnicodeCharImpl.class);
       case "HEX_CHAR":
