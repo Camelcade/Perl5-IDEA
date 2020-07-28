@@ -18,7 +18,6 @@ package com.perl5.lang.perl.parser.elementTypes;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
-import com.intellij.lang.PsiBuilderUtil;
 import com.intellij.lexer.FlexAdapter;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
@@ -27,7 +26,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.LEFT_BRACE;
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.RIGHT_BRACE;
 
 
 public class PerlCodeBlockElementType extends PerlReparseableElementType {
@@ -44,8 +42,7 @@ public class PerlCodeBlockElementType extends PerlReparseableElementType {
                             @NotNull Project project) {
     // fixme we should probably check file for use TryCatch, hacky but still
     FlexAdapter lexer = new FlexAdapter(new PerlLexer(null).withProject(project));
-    boolean result =
-      PsiBuilderUtil.hasProperBraceBalance(buffer, lexer, LEFT_BRACE, RIGHT_BRACE);
+    boolean result = hasProperBraceBalance(buffer, lexer, LEFT_BRACE);
     if (LOG.isDebugEnabled()) {
       LOG.debug("Block reparseable: ", result && lexer.getState() == 0,
                 "; balanced: ", result,

@@ -1,10 +1,6 @@
 Reparsing block
 ----------
-Element(Perl5: BLOCK)
-----------
-{
-  say 'hi' foreach(@something +  );
-}
+Full reparse
 ----------
 After typing
 ----------

@@ -1,15 +1,6 @@
 Reparsing block
 ----------
-Element(Perl5: BLOCK)
-----------
-{
-  say 'hi';
-  @{
-    say => 'start';
-    some => ;
-    say =>'end';
-  };
-}
+Full reparse
 ----------
 After typing
 ----------

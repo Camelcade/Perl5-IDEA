@@ -1,12 +1,6 @@
 Reparsing block
 ----------
-Element(Perl5: BLOCK)
-----------
-{
-  unless( $a &&   ){
-    say 'hi'
-  }
-}
+Full reparse
 ----------
 After typing
 ----------

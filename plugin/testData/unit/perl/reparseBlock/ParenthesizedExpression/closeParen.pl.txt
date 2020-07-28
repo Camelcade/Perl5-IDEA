@@ -1,10 +1,6 @@
 Reparsing block
 ----------
-Element(Perl5: BLOCK)
-----------
-{
-  my $test = (2 + );
-}
+Full reparse
 ----------
 After typing
 ----------
