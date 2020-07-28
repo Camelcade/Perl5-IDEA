@@ -73,7 +73,7 @@ MARKER_QX2
     say 'sub end';
 }
 ----------
-Element(HEREDOC_QX)
+Element(Perl5: HEREDOC_QX)
 ----------
     start qx1
 

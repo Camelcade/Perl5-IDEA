@@ -41,9 +41,4 @@ public abstract class PerlReparseableQuoteLikeElementType extends PerlLazyBlockE
       flexAdapter.advance();
     }
   }
-
-  @Override
-  public String toString() {
-    return "Perl5: " + super.toString();
-  }
 }

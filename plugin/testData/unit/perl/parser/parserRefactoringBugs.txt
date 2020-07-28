@@ -123,7 +123,7 @@ Perl5
         PsiPerlStringBareImpl(Perl5: STRING_BARE)
           PerlStringContentElementImpl(Perl5: STRING_CONTENT)('EOM')
     PsiElement(Perl5: ;)(';')
-  PerlHeredocElementImpl(HEREDOC_QQ)
+  PerlHeredocElementImpl(Perl5: HEREDOC_QQ)
     PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('These values are the main control of whitespace to the left of a token type;\nThey may be altered with the -wls parameter.\nFor a list of token types, use perltidy --dump-token-types (-dtt)\n 1 means the token wants a space to its left\n-1 means the token does not want a space to its left\n------------------------------------------------------------------------\n')
   PsiComment(Perl5: HEREDOC_END)('EOM')
   PsiPerlStatementImpl(Perl5: STATEMENT)

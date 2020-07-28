@@ -73,7 +73,7 @@ MARKER_Q3<caret>
     say 'sub end';
 }
 ----------
-Element(HEREDOC_QX)
+Element(Perl5: HEREDOC_QX)
 ----------
         start qx4
 

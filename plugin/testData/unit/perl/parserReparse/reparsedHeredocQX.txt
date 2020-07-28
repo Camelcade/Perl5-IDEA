@@ -8,7 +8,7 @@ Perl5
         PerlStringContentElementImpl(Perl5: STRING_CONTENT_XQ)('EOM')
         PsiElement(Perl5: QUOTE_TICK_CLOSE)('`')
     PsiElement(Perl5: ;)(';')
-  PerlHeredocElementImpl(HEREDOC_QX)
+  PerlHeredocElementImpl(Perl5: HEREDOC_QX)
     PerlStringContentElementImpl(Perl5: STRING_CONTENT_XQ)('  1;\n  1;\n')
   PsiComment(Perl5: HEREDOC_END)('EOM')
 --------------------------------------------------------------------------------

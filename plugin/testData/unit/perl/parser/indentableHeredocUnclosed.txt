@@ -7,7 +7,7 @@ Perl5
         PsiElement(Perl5: heredoc<<)('<<~')
         PsiPerlStringBareImpl(Perl5: STRING_BARE)
           PerlStringContentElementImpl(Perl5: STRING_CONTENT)('EOM')
-  PerlHeredocElementImpl(HEREDOC_QQ)
+  PerlHeredocElementImpl(Perl5: HEREDOC_QQ)
     PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('\nthis is a text\n\nsome')
 --------------------------------------------------------------------------------
 Subtree: Perl5 POD (Perl5 POD)

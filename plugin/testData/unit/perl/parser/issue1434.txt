@@ -6,7 +6,7 @@ Perl5
       PsiPerlStringBareImpl(Perl5: STRING_BARE)
         PerlStringContentElementImpl(Perl5: STRING_CONTENT)('S2')
     PsiElement(Perl5: ;)(';')
-  PerlHeredocElementImpl(HEREDOC_QQ)
+  PerlHeredocElementImpl(Perl5: HEREDOC_QQ)
     PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('test blah\n')
   PsiComment(Perl5: HEREDOC_END)('S2')
   PsiPerlStatementImpl(Perl5: STATEMENT)
@@ -14,7 +14,7 @@ Perl5
       PsiElement(Perl5: heredoc<<)('<<')
       PsiPerlStringBareImpl(Perl5: STRING_BARE)
         PerlStringContentElementImpl(Perl5: STRING_CONTENT)('STR2')
-  PerlHeredocElementImpl(HEREDOC_QQ)
+  PerlHeredocElementImpl(Perl5: HEREDOC_QQ)
     PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('test blah\n')
   PsiComment(Perl5: HEREDOC_END)('STR2')
 --------------------------------------------------------------------------------

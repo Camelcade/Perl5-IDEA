@@ -9,6 +9,6 @@
 8(9) element: PsiPerlSubCallImpl(SUB_CALL) (InstructionImpl)
 9(10) element: PsiPerlAnonArrayImpl(Perl5: ANON_ARRAY) (InstructionImpl)
 10(11) element: PsiPerlArrayCastExprImpl(Perl5: ARRAY_CAST_EXPR) (InstructionImpl)
-11(12) element: PerlHeredocElementImpl(HEREDOC_QQ) (InstructionImpl)
+11(12) element: PerlHeredocElementImpl(Perl5: HEREDOC_QQ) (InstructionImpl)
 12(13) element: PerlUseStatementElement(USE_STATEMENT) (InstructionImpl)
 13() element: null (InstructionImpl)

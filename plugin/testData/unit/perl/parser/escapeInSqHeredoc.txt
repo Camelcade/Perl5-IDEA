@@ -7,7 +7,7 @@ Perl5
         PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
         PerlStringContentElementImpl(Perl5: STRING_CONTENT)('EOM')
         PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
-  PerlHeredocElementImpl(HEREDOC)
+  PerlHeredocElementImpl(Perl5: HEREDOC)
     PerlStringContentElementImpl(Perl5: STRING_CONTENT)('test \\ test\n')
   PsiComment(Perl5: HEREDOC_END)('EOM')
 --------------------------------------------------------------------------------

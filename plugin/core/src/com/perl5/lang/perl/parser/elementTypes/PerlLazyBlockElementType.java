@@ -91,4 +91,9 @@ public abstract class PerlLazyBlockElementType extends IReparseableElementType i
   public final @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
     return myInstanceFactory.apply(node);
   }
+
+  @Override
+  public String toString() {
+    return "Perl5: " + super.toString();
+  }
 }

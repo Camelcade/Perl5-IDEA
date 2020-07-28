@@ -53,9 +53,4 @@ public class PerlCodeBlockElementType extends PerlLazyBlockElementType {
     }
     return result && lexer.getState() == PerlLexer.AFTER_RIGHT_BRACE;
   }
-
-  @Override
-  public String toString() {
-    return "Perl5: " + super.toString();
-  }
 }

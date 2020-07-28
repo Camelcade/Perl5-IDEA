@@ -319,7 +319,7 @@ Perl5
                 PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
           PsiElement(Perl5: ))(')')
     PsiElement(Perl5: ;)(';')
-  PerlHeredocElementImpl(HEREDOC)
+  PerlHeredocElementImpl(Perl5: HEREDOC)
     PerlStringContentElementImpl(Perl5: STRING_CONTENT)('SELECT __ESSENTIAL__\n    FROM   __TABLE__\n    WHERE  %s\n')
   PsiComment(Perl5: HEREDOC_END)('\n')
   PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::blah
