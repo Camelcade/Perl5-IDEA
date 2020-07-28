@@ -25,7 +25,7 @@ import com.perl5.lang.perl.psi.PerlQuoted;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class PerlQuoteLikeContentLazyElementType extends PerlLazyBlockElementType {
+public class PerlQuoteLikeContentLazyElementType extends PerlReparseableElementType {
   private final int myInitialState;
 
   public PerlQuoteLikeContentLazyElementType(@NotNull String debugName, int initialState) {

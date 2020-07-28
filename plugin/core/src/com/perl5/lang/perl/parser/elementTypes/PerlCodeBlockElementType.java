@@ -30,7 +30,7 @@ import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.LEFT_BRACE;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.RIGHT_BRACE;
 
 
-public class PerlCodeBlockElementType extends PerlLazyBlockElementType {
+public class PerlCodeBlockElementType extends PerlReparseableElementType {
 
   public PerlCodeBlockElementType(@NotNull String debugName,
                                   @NotNull Class<? extends PsiElement> clazz) {

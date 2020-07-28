@@ -25,7 +25,7 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 
-public class PerlLazyAnnotationElementType extends PerlLazyBlockElementType {
+public class PerlLazyAnnotationElementType extends PerlReparseableElementType {
   public PerlLazyAnnotationElementType(@NotNull @NonNls String debugName) {
     super(debugName, PerlAnnotationContainerImpl.class);
   }

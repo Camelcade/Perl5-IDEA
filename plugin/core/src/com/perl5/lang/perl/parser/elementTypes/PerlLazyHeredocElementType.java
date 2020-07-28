@@ -38,7 +38,7 @@ import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.HEREDOC_END;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.HEREDOC_END_INDENTABLE;
 
 
-public class PerlLazyHeredocElementType extends PerlLazyBlockElementType {
+public class PerlLazyHeredocElementType extends PerlReparseableElementType {
   private final int myStartLexerState;
 
   public PerlLazyHeredocElementType(@NotNull String name, int startLexerState) {

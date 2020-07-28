@@ -39,15 +39,15 @@ import org.jetbrains.annotations.Nullable;
 import java.util.function.Function;
 
 
-public abstract class PerlLazyBlockElementType extends IReparseableElementType implements PsiElementProvider {
-  protected static final Logger LOG = Logger.getInstance(PerlLazyBlockElementType.class);
+public abstract class PerlReparseableElementType extends IReparseableElementType implements PsiElementProvider {
+  protected static final Logger LOG = Logger.getInstance(PerlReparseableElementType.class);
   private final Function<ASTNode, PsiElement> myInstanceFactory;
 
-  public PerlLazyBlockElementType(@NotNull @NonNls String debugName) {
+  public PerlReparseableElementType(@NotNull @NonNls String debugName) {
     this(debugName, PerlCompositeElementImpl.class);
   }
 
-  public PerlLazyBlockElementType(@NotNull @NonNls String debugName, @NotNull Class<? extends PsiElement> clazz) {
+  public PerlReparseableElementType(@NotNull @NonNls String debugName, @NotNull Class<? extends PsiElement> clazz) {
     super(debugName, PerlLanguage.INSTANCE);
     myInstanceFactory = PerlElementTypeEx.createInstanceFactory(clazz);
   }
