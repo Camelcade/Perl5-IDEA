@@ -72,12 +72,12 @@ Perl5
                   PerlStringContentElementImpl(Perl5: STRING_CONTENT)('some')
                 PsiWhiteSpace(' ')
                 PsiElement(Perl5: =>)('=>')
-              PsiErrorElement:Semicolon expected
-                <empty list>
-            PsiWhiteSpace(' ')
-            PsiErrorElement:Unexpected token
-              PsiElement(Perl5: [)('[')
-            PsiElement(Perl5: ;)(';')
+                PsiWhiteSpace(' ')
+                PsiPerlAnonArrayImpl(Perl5: ANON_ARRAY)
+                  PsiElement(Perl5: [)('[')
+                  PsiErrorElement:<expr> or Perl5: ] expected, got ';'
+                    <empty list>
+              PsiElement(Perl5: ;)(';')
             PsiWhiteSpace('\n    ')
             PsiPerlStatementImpl(Perl5: STATEMENT)
               PsiPerlCommaSequenceExprImpl(Perl5: COMMA_SEQUENCE_EXPR)

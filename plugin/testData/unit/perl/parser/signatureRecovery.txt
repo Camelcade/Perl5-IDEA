@@ -49,7 +49,7 @@ Perl5
     PerlSubNameElementImpl(Perl5: subname)('somesub1')
     PsiElement(Perl5: ()('(')
     PsiPerlSignatureContentImpl(Perl5: SIGNATURE_CONTENT)
-      PsiErrorElement:<expression>, <sub signature element ignore>, <type specifier>, <variable declaration element>, Perl5: $$ or Perl5: : expected, got '''
+      PsiErrorElement:<expression>, <scalar>, <sub signature element ignore>, <type specifier>, <variable declaration element> or Perl5: : expected, got '''
         PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
       PerlStringContentElementImpl(Perl5: STRING_CONTENT)('somestuff')
       PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
@@ -62,7 +62,7 @@ Perl5
       PsiElement(Perl5: fp_method)('method')
       PsiElement(Perl5: ()('(')
       PsiPerlSignatureContentImpl(Perl5: SIGNATURE_CONTENT)
-        PsiErrorElement:<expression>, <sub signature element ignore>, <type specifier>, <variable declaration element>, Perl5: $$ or Perl5: : expected, got '''
+        PsiErrorElement:<expression>, <scalar>, <sub signature element ignore>, <type specifier>, <variable declaration element> or Perl5: : expected, got '''
           PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
         PerlStringContentElementImpl(Perl5: STRING_CONTENT)('somestuff')
         PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
@@ -116,7 +116,7 @@ Perl5
     PerlSubNameElementImpl(Perl5: subname)('something')
     PsiElement(Perl5: ()('(')
     PsiPerlSignatureContentImpl(Perl5: SIGNATURE_CONTENT)
-      PsiErrorElement:<expression>, <sub signature element ignore>, <type specifier>, <variable declaration element>, Perl5: $$ or Perl5: : expected, got '''
+      PsiErrorElement:<expression>, <scalar>, <sub signature element ignore>, <type specifier>, <variable declaration element> or Perl5: : expected, got '''
         PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
       PerlStringContentElementImpl(Perl5: STRING_CONTENT)('somestuff')
       PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
@@ -130,7 +130,7 @@ Perl5
     PerlSubNameElementImpl(Perl5: subname)('something')
     PsiElement(Perl5: ()('(')
     PsiPerlSignatureContentImpl(Perl5: SIGNATURE_CONTENT)
-      PsiErrorElement:<expression>, <sub signature element ignore>, <type specifier>, <variable declaration element>, Perl5: $$ or Perl5: : expected, got '''
+      PsiErrorElement:<expression>, <scalar>, <sub signature element ignore>, <type specifier>, <variable declaration element> or Perl5: : expected, got '''
         PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
       PerlStringContentElementImpl(Perl5: STRING_CONTENT)('somestuff')
       PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
@@ -144,7 +144,7 @@ Perl5
     PerlSubNameElementImpl(Perl5: subname)('something')
     PsiElement(Perl5: ()('(')
     PsiPerlSignatureContentImpl(Perl5: SIGNATURE_CONTENT)
-      PsiErrorElement:<expression>, <sub signature element ignore>, <type specifier>, <variable declaration element>, Perl5: $$ or Perl5: : expected, got '''
+      PsiErrorElement:<expression>, <scalar>, <sub signature element ignore>, <type specifier>, <variable declaration element> or Perl5: : expected, got '''
         PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
       PerlStringContentElementImpl(Perl5: STRING_CONTENT)('somestuff')
       PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
@@ -158,7 +158,7 @@ Perl5
     PerlSubNameElementImpl(Perl5: subname)('something')
     PsiElement(Perl5: ()('(')
     PsiPerlSignatureContentImpl(Perl5: SIGNATURE_CONTENT)
-      PsiErrorElement:<expression>, <sub signature element ignore>, <type specifier>, <variable declaration element>, Perl5: $$ or Perl5: : expected, got '''
+      PsiErrorElement:<expression>, <scalar>, <sub signature element ignore>, <type specifier>, <variable declaration element> or Perl5: : expected, got '''
         PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
       PerlStringContentElementImpl(Perl5: STRING_CONTENT)('somestuff')
       PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
@@ -172,7 +172,7 @@ Perl5
     PerlSubNameElementImpl(Perl5: subname)('something')
     PsiElement(Perl5: ()('(')
     PsiPerlSignatureContentImpl(Perl5: SIGNATURE_CONTENT)
-      PsiErrorElement:<expression>, <sub signature element ignore>, <type specifier>, <variable declaration element>, Perl5: $$ or Perl5: : expected, got '''
+      PsiErrorElement:<expression>, <scalar>, <sub signature element ignore>, <type specifier>, <variable declaration element> or Perl5: : expected, got '''
         PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
       PerlStringContentElementImpl(Perl5: STRING_CONTENT)('somestuff')
       PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')

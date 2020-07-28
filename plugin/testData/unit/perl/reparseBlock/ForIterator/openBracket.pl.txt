@@ -55,9 +55,11 @@ Perl5
               PsiElement(Perl5: NUMBER)('10')
         PsiElement(Perl5: ;)(';')
         PsiWhiteSpace(' ')
-        PsiElement(Perl5: [)('[')
-        PsiErrorElement:<expr> or Perl5: ] expected, got ')'
-          <empty list>
+        PsiPerlForMutatorImpl(Perl5: FOR_MUTATOR)
+          PsiPerlAnonArrayImpl(Perl5: ANON_ARRAY)
+            PsiElement(Perl5: [)('[')
+            PsiErrorElement:<expr> or Perl5: ] expected, got ')'
+              <empty list>
         PsiWhiteSpace(' ')
         PsiElement(Perl5: ))(')')
         PsiPerlBlockImpl(Perl5: BLOCK)

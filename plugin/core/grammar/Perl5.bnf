@@ -1100,8 +1100,8 @@ private strict_variable_declaration_wrapper ::= variable_declaration_element !('
 variable_declaration_element ::= '\\'? lexical_variable
 
 /////////////////////////////////// REFERENCES /////////////////////////////////////////////////////////////////////////
-anon_array ::= '[' [expr] ']' {pin=1}
-anon_hash ::= '{' [expr] '}' {pin=1}
+anon_array ::= '[' [expr] ']' {pin=1 name="anonymous array"}
+anon_hash ::= '{' [expr] '}' {pin=1 name="anonymous hash"}
 
 //////////////////////////// END OF REFERENCES /////////////////////////////////////////////////////////////////////////
 
@@ -1113,19 +1113,19 @@ private array_primitive ::= array_variable | array_cast_expr | string_list
 left array_slice ::= array_index
 left hash_slice ::= hash_index
 
-array_cast_expr ::= '$@' array_cast_target
+array_cast_expr ::= '$@' array_cast_target {name="array dereference"}
 private array_cast_target ::= {block_array | scalar_primitive}
 block_array ::= '@{' block_content '@}' {extends=block pin=1}
 
-hash_cast_expr ::= '$%' hash_cast_target
+hash_cast_expr ::= '$%' hash_cast_target {name="hash dereference"}
 private hash_cast_target ::= { block_hash  | scalar_primitive}
 block_hash ::= '%{' block_content '%}' {extends=block pin=1}
 
 private scalar_primitive ::= scalar_variable | scalar_cast_expr | undef_expr  // shouldn't it be in term ? (check declarations)
 
 // |'$}'|'@}'|'%}'|'*}'|'&}'
-scalar_cast_expr ::= '$$' scalar_cast_target
-scalar_index_cast_expr ::= '$#' scalar_cast_target
+scalar_cast_expr ::= '$$' scalar_cast_target {name="scalar dereference"}
+scalar_index_cast_expr ::= '$#' scalar_cast_target {name="array last index dereference"}
 private scalar_cast_target ::= {block_scalar | scalar_primitive}
 block_scalar ::= '${' block_content '$}' {extends=block pin=1}
 
@@ -1137,7 +1137,7 @@ left hash_element ::= hash_index
 private glob_or_element ::= glob_primitive [glob_slot]
 private glob_primitive ::= glob_variable | glob_cast_expr
 
-glob_cast_expr ::= '$*' glob_cast_target
+glob_cast_expr ::= '$*' glob_cast_target {name="typeglob dereference"}
 private glob_cast_target ::= {block_glob | scalar_primitive}
 block_glob ::= '*{' block_content '*}' {extends=block pin=1}
 
@@ -1312,12 +1312,12 @@ heredoc_opener ::= 'heredoc<<' ( '\\' string_bare | string ){pin=1}
 ///////////////////////////////////// variables ////////////////////////////////////////////////////////////////////////
 private lexical_variable ::= scalar_variable | array_variable | hash_variable
 
-array_index_variable ::= '$#' {SCALAR_NAME | '${' SCALAR_NAME '$}'}
-scalar_variable ::= '$$' {SCALAR_NAME | '${' SCALAR_NAME '$}'}
-array_variable ::= '$@' {ARRAY_NAME | '@{' ARRAY_NAME '@}'}
-hash_variable ::= '$%' {HASH_NAME | '%{' HASH_NAME '%}'}
-code_variable ::= '$&' {normal_method | '&{' normal_method '&}'}
-glob_variable ::= '$*' {GLOB_NAME | '*{' GLOB_NAME '*}'}
+array_index_variable ::= '$#' {SCALAR_NAME | '${' SCALAR_NAME '$}'} {name="array last index"}
+scalar_variable ::= '$$' {SCALAR_NAME | '${' SCALAR_NAME '$}'} {name="scalar"}
+array_variable ::= '$@' {ARRAY_NAME | '@{' ARRAY_NAME '@}'} {name="array"}
+hash_variable ::= '$%' {HASH_NAME | '%{' HASH_NAME '%}'} {name="hash"}
+code_variable ::= '$&' {normal_method | '&{' normal_method '&}'} {name="code"}
+glob_variable ::= '$*' {GLOB_NAME | '*{' GLOB_NAME '*}'} {name="typeglob"}
 
 private comma ::= ',' | '=>'
 

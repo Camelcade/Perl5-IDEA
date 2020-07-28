@@ -58,7 +58,7 @@ Perl5
                 PsiElement(Perl5: $$)('$')
                 PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('item1')
             PsiWhiteSpace('\n   ')
-            PsiErrorElement:<variable declaration element>, Perl5: $& or Perl5: $* expected, got '\'
+            PsiErrorElement:<code>, <typeglob> or <variable declaration element> expected, got '\'
               PsiElement(BAD_CHARACTER)('\')
             PsiElement(BAD_CHARACTER)('"')
             PsiWhiteSpace('\n   ')

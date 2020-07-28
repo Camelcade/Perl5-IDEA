@@ -36,7 +36,7 @@ Perl5
                 PsiElement(Perl5: $$)('$')
                 PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('var')
           PsiElement(Perl5: ,)(',')
-          PsiErrorElement:<expression>, <sub signature element ignore>, <type specifier>, <variable declaration element>, Perl5: $$, Perl5: ,, Perl5: : or Perl5: => expected, got '42'
+          PsiErrorElement:<expression>, <scalar>, <sub signature element ignore>, <type specifier>, <variable declaration element>, Perl5: ,, Perl5: : or Perl5: => expected, got '42'
             PsiElement(Perl5: NUMBER)('42')
         PsiElement(Perl5: ))(')')
         PsiPerlBlockImpl(Perl5: BLOCK)
