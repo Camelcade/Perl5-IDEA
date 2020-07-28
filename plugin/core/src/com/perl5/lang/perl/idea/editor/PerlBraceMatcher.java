@@ -29,11 +29,28 @@ import com.perl5.lang.perl.psi.PsiPerlBlock;
 import com.perl5.lang.perl.psi.PsiPerlConditionalBlock;
 import com.perl5.lang.perl.psi.PsiPerlForCompound;
 import com.perl5.lang.perl.psi.impl.PsiPerlIfCompoundImpl;
+import org.apache.groovy.util.Maps;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Map;
+
 
 public class PerlBraceMatcher implements PairedBraceMatcher, PerlElementTypes {
+  public static final Map<IElementType, IElementType> PERL_BRACES_MAP = Map.of(
+    LEFT_BRACE, RIGHT_BRACE,
+    LEFT_BRACKET, RIGHT_BRACKET,
+    LEFT_PAREN, RIGHT_PAREN,
+    LEFT_ANGLE, RIGHT_ANGLE,
+    LEFT_BRACE_SCALAR, RIGHT_BRACE_SCALAR,
+    LEFT_BRACE_ARRAY, RIGHT_BRACE_ARRAY,
+    LEFT_BRACE_HASH, RIGHT_BRACE_HASH,
+    LEFT_BRACE_CODE, RIGHT_BRACE_CODE,
+    LEFT_BRACE_GLOB, RIGHT_BRACE_GLOB
+  );
+
+  public static final Map<IElementType, IElementType> PERL_BRACES_MAP_REVERSED = Maps.inverse(PERL_BRACES_MAP);
+
   private static final BracePair[] PAIRS = new BracePair[]{
     new BracePair(REGEX_QUOTE_OPEN, REGEX_QUOTE_CLOSE, false),
     new BracePair(REGEX_QUOTE_OPEN_E, REGEX_QUOTE_CLOSE, false),

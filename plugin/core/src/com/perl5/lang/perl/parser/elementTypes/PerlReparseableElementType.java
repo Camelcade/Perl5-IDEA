@@ -16,15 +16,15 @@
 
 package com.perl5.lang.perl.parser.elementTypes;
 
-import com.intellij.lang.ASTFactory;
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.PsiBuilder;
-import com.intellij.lang.PsiBuilderFactory;
+import com.intellij.lang.*;
+import com.intellij.lexer.Lexer;
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Pair;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.text.BlockSupport;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.IReparseableElementType;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.lexer.PerlLexingContext;
@@ -36,7 +36,11 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Stack;
 import java.util.function.Function;
+
+import static com.perl5.lang.perl.idea.editor.PerlBraceMatcher.PERL_BRACES_MAP;
+import static com.perl5.lang.perl.idea.editor.PerlBraceMatcher.PERL_BRACES_MAP_REVERSED;
 
 
 public abstract class PerlReparseableElementType extends IReparseableElementType implements PsiElementProvider {
@@ -95,5 +99,51 @@ public abstract class PerlReparseableElementType extends IReparseableElementType
   @Override
   public String toString() {
     return "Perl5: " + super.toString();
+  }
+
+  /**
+   * Improved copy of {@link PsiBuilderUtil#hasProperBraceBalance(java.lang.CharSequence, com.intellij.lexer.Lexer, com.intellij.psi.tree.IElementType, com.intellij.psi.tree.IElementType)}
+   * Checks that all perl braces within range are balanced and properly nested
+   */
+  public static boolean hasProperBraceBalance(@NotNull CharSequence text,
+                                              @NotNull Lexer lexer,
+                                              @NotNull IElementType openBrace) {
+    lexer.start(text);
+
+    if (lexer.getTokenType() != openBrace) {
+      return false;
+    }
+
+    Stack<IElementType> bracesStack = new Stack<>();
+    bracesStack.push(openBrace);
+    lexer.advance();
+
+    while (true) {
+      ProgressManager.checkCanceled();
+      IElementType type = lexer.getTokenType();
+
+      if (type == null) {
+        //eof: checking balance
+        return bracesStack.isEmpty();
+      }
+
+      if (bracesStack.isEmpty()) {
+        //the last brace is not the last token
+        return false;
+      }
+
+      if (PERL_BRACES_MAP.containsKey(type)) {
+        bracesStack.push(type);
+      }
+      else {
+        IElementType opppositeBrace = PERL_BRACES_MAP_REVERSED.get(type);
+        if (opppositeBrace != null) {
+          if (bracesStack.isEmpty() || bracesStack.pop() != opppositeBrace) {
+            return false;
+          }
+        }
+      }
+      lexer.advance();
+    }
   }
 }
