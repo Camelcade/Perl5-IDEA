@@ -21,11 +21,10 @@ import com.intellij.lang.Language;
 import com.intellij.lexer.FlexAdapter;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.LEFT_BRACE;
 
 public abstract class PerlBracedBlockElementType extends PerlReparseableElementType {
   public PerlBracedBlockElementType(@NotNull String debugName,
@@ -34,18 +33,21 @@ public abstract class PerlBracedBlockElementType extends PerlReparseableElementT
   }
 
   @Override
-  public boolean isParsable(@Nullable ASTNode parent,
-                            @NotNull CharSequence buffer,
-                            @NotNull Language fileLanguage,
-                            @NotNull Project project) {
-    // fixme we should probably check file for use TryCatch, hacky but still
+  public final boolean isParsable(@Nullable ASTNode parent,
+                                  @NotNull CharSequence buffer,
+                                  @NotNull Language fileLanguage,
+                                  @NotNull Project project) {
     FlexAdapter lexer = new FlexAdapter(new PerlLexer(null).withProject(project));
-    boolean result = hasProperBraceBalance(buffer, lexer, LEFT_BRACE);
+    boolean result = hasProperBraceBalance(buffer, lexer, getOpeningBraceType());
     if (LOG.isDebugEnabled()) {
-      LOG.debug("Block reparseable: ", result && lexer.getState() == 0,
+      LOG.debug(this + " reparseable: ", result && isLexerStateOk(lexer.getState()),
                 "; balanced: ", result,
                 "; lexer state: ", lexer.getState());
     }
-    return result && lexer.getState() == PerlLexer.AFTER_RIGHT_BRACE;
+    return result && isLexerStateOk(lexer.getState());
   }
+
+  protected abstract @NotNull IElementType getOpeningBraceType();
+
+  protected abstract boolean isLexerStateOk(int lexerState);
 }

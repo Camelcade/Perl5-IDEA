@@ -17,7 +17,11 @@
 package com.perl5.lang.perl.parser.elementTypes;
 
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.perl.lexer.PerlLexer;
 import org.jetbrains.annotations.NotNull;
+
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.LEFT_BRACE;
 
 
 public class PerlCodeBlockElementType extends PerlBracedBlockElementType {
@@ -25,5 +29,15 @@ public class PerlCodeBlockElementType extends PerlBracedBlockElementType {
   public PerlCodeBlockElementType(@NotNull String debugName,
                                   @NotNull Class<? extends PsiElement> clazz) {
     super(debugName, clazz);
+  }
+
+  @Override
+  protected @NotNull IElementType getOpeningBraceType() {
+    return LEFT_BRACE;
+  }
+
+  @Override
+  protected boolean isLexerStateOk(int lexerState) {
+    return lexerState == PerlLexer.AFTER_RIGHT_BRACE;
   }
 }
