@@ -1,0 +1,6 @@
+42;
+{
+  say 'hi';
+  <caret>
+  say 'hi';
+}

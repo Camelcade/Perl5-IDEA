@@ -1,0 +1,5 @@
+something {
+  say 'hi';
+  <caret>
+  say 'hi';
+};

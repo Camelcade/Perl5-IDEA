@@ -1,0 +1,5 @@
+something {
+  'hi' =>
+  <caret>,
+  'hi'
+};

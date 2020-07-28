@@ -1,0 +1,58 @@
+Reparsing block
+----------
+Element(Perl5: BLOCK)
+----------
+{
+  say 'hi';
+  
+  say 'hi';
+}
+----------
+After typing
+----------
+something {
+  say 'hi';
+  42;<caret>
+  say 'hi';
+};
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlSubCallImpl(SUB_CALL)
+      PsiPerlMethodImpl(Perl5: METHOD)
+        PerlSubNameElementImpl(Perl5: subname)('something')
+      PsiWhiteSpace(' ')
+      PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
+        PsiPerlSubExprImpl(Perl5: SUB_EXPR)
+          PsiPerlBlockImpl(Perl5: BLOCK)
+            PsiElement(Perl5: {)('{')
+            PsiWhiteSpace('\n  ')
+            PsiPerlStatementImpl(Perl5: STATEMENT)
+              PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+                PsiElement(Perl5: say)('say')
+                PsiWhiteSpace(' ')
+                PsiPerlStringSqImpl(Perl5: STRING_SQ)
+                  PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
+                  PerlStringContentElementImpl(Perl5: STRING_CONTENT)('hi')
+                  PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
+              PsiElement(Perl5: ;)(';')
+            PsiWhiteSpace('\n  ')
+            PsiPerlStatementImpl(Perl5: STATEMENT)
+              PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
+                PsiElement(Perl5: NUMBER)('42')
+              PsiElement(Perl5: ;)(';')
+            PsiWhiteSpace('\n  ')
+            PsiPerlStatementImpl(Perl5: STATEMENT)
+              PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+                PsiElement(Perl5: say)('say')
+                PsiWhiteSpace(' ')
+                PsiPerlStringSqImpl(Perl5: STRING_SQ)
+                  PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
+                  PerlStringContentElementImpl(Perl5: STRING_CONTENT)('hi')
+                  PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
+              PsiElement(Perl5: ;)(';')
+            PsiWhiteSpace('\n')
+            PsiElement(Perl5: })('}')
+    PsiElement(Perl5: ;)(';')
