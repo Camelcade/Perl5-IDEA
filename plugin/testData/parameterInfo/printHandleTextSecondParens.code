@@ -1,0 +1,1 @@
+print (STDOUT <caret>"hi")

@@ -11,8 +11,9 @@ Perl5
             PsiPerlStatementImpl(Perl5: STATEMENT)
               PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
                 PsiElement(Perl5: say)('say')
-                PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
-                  PsiElement(Perl5: NUMBER)('123')
+                PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
+                  PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
+                    PsiElement(Perl5: NUMBER)('123')
             PsiErrorElement:Perl5: } expected, got '/'
               <empty list>
       PsiElement(Perl5: r})('/')
@@ -28,8 +29,9 @@ Perl5
             PsiPerlStatementImpl(Perl5: STATEMENT)
               PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
                 PsiElement(Perl5: say)('say')
-                PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
-                  PsiElement(Perl5: NUMBER)('123')
+                PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
+                  PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
+                    PsiElement(Perl5: NUMBER)('123')
             PsiErrorElement:Perl5: } expected, got '/'
               <empty list>
       PsiElement(Perl5: r})('/')
@@ -47,8 +49,9 @@ Perl5
             PsiPerlStatementImpl(Perl5: STATEMENT)
               PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
                 PsiElement(Perl5: say)('say')
-                PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
-                  PsiElement(Perl5: NUMBER)('123')
+                PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
+                  PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
+                    PsiElement(Perl5: NUMBER)('123')
             PsiErrorElement:Perl5: } expected, got '/'
               <empty list>
       PsiElement(Perl5: r})('/')
@@ -67,8 +70,9 @@ Perl5
             PsiPerlStatementImpl(Perl5: STATEMENT)
               PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
                 PsiElement(Perl5: say)('say')
-                PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
-                  PsiElement(Perl5: NUMBER)('123')
+                PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
+                  PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
+                    PsiElement(Perl5: NUMBER)('123')
               PsiErrorElement:<statement modifier>, Perl5: , or Perl5: => expected, got '/'
                 PsiElement(Perl5: r/)('/')
       PsiElement(Perl5: r})('/')
@@ -85,8 +89,9 @@ Perl5
             PsiPerlStatementImpl(Perl5: STATEMENT)
               PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
                 PsiElement(Perl5: say)('say')
-                PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
-                  PsiElement(Perl5: NUMBER)('123')
+                PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
+                  PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
+                    PsiElement(Perl5: NUMBER)('123')
               PsiErrorElement:<statement modifier>, Perl5: , or Perl5: => expected, got '/'
                 PsiElement(Perl5: r/)('/')
       PsiElement(Perl5: r})('/')
@@ -105,8 +110,9 @@ Perl5
             PsiPerlStatementImpl(Perl5: STATEMENT)
               PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
                 PsiElement(Perl5: say)('say')
-                PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
-                  PsiElement(Perl5: NUMBER)('123')
+                PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
+                  PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
+                    PsiElement(Perl5: NUMBER)('123')
               PsiErrorElement:<statement modifier>, Perl5: , or Perl5: => expected, got '/'
                 PsiElement(Perl5: r/)('/')
       PsiElement(Perl5: r})('/')
@@ -125,8 +131,9 @@ Perl5
             PsiPerlStatementImpl(Perl5: STATEMENT)
               PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
                 PsiElement(Perl5: say)('say')
-                PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
-                  PsiElement(Perl5: NUMBER)('123')
+                PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
+                  PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
+                    PsiElement(Perl5: NUMBER)('123')
             PsiErrorElement:Perl5: } expected, got '/'
               <empty list>
       PsiElement(Perl5: r})('/')
@@ -143,8 +150,9 @@ Perl5
             PsiPerlStatementImpl(Perl5: STATEMENT)
               PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
                 PsiElement(Perl5: say)('say')
-                PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
-                  PsiElement(Perl5: NUMBER)('123')
+                PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
+                  PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
+                    PsiElement(Perl5: NUMBER)('123')
             PsiErrorElement:Perl5: } expected, got '/'
               <empty list>
       PsiElement(Perl5: r})('/')
@@ -163,8 +171,9 @@ Perl5
             PsiPerlStatementImpl(Perl5: STATEMENT)
               PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
                 PsiElement(Perl5: say)('say')
-                PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
-                  PsiElement(Perl5: NUMBER)('123')
+                PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
+                  PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
+                    PsiElement(Perl5: NUMBER)('123')
             PsiErrorElement:Perl5: } expected, got '/'
               <empty list>
       PsiElement(Perl5: r})('/')

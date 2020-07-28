@@ -36,6 +36,7 @@ import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.BLOCK;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.CALL_ARGUMENTS;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.COLON;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.COMMA;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.COMMA_SEQUENCE_EXPR;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.COMMENT_LINE;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.CONDITIONAL_BLOCK;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.CONDITION_EXPR;
@@ -70,7 +71,6 @@ import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.PARENTH
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.PARENTHESISED_EXPR;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.PERL_HANDLE_EXPR;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.PREFIX_UNARY_EXPR;
-import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.PRINT_EXPR;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.QUESTION;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.QUOTE_SINGLE_CLOSE;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.QUOTE_SINGLE_OPEN;
@@ -297,7 +297,7 @@ public class PerlSpacingBuilderFactory {
       .between(LABEL_KEYWORDS, SEMICOLON).spaces(0)
       .after(LABEL_KEYWORDS).spaces(1)
 
-      .afterInside(PERL_HANDLE_EXPR, PRINT_EXPR).spaces(1)
+      .afterInside(PERL_HANDLE_EXPR, COMMA_SEQUENCE_EXPR).spaces(1)
 
       .between(CUSTOM_EXPR_KEYWORDS, SEMICOLON).spaces(0)
       .between(RESERVED_RETURN, PARENTHESISED_EXPR).spaces(1)

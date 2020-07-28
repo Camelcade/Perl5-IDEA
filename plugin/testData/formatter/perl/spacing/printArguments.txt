@@ -1,0 +1,26 @@
+say 1;
+say STDOUT 1;
+say 1 or die 'no';
+say STDOUT 1 or die 'no';
+say(STDOUT 1);
+say(1);
+say STDOUT 1, 2;
+say(STDOUT 1, 2);
+
+print 1;
+print STDOUT 1;
+print 1 or die 'no';
+print STDOUT 1 or die 'no';
+print(STDOUT 1);
+print(1);
+print STDOUT 1, 2;
+print(STDOUT 1, 2);
+
+printf 1;
+printf STDOUT 1;
+printf 1 or die 'no';
+printf STDOUT 1 or die 'no';
+printf(STDOUT 1);
+printf(1);
+printf STDOUT 1, 2;
+printf(STDOUT 1, 2);

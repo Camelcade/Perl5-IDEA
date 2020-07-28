@@ -1,7 +1,6 @@
 {
   {
-    'hi' =>
-    <caret>,
+    'hi' =><caret>
     'hi'
   };
 }

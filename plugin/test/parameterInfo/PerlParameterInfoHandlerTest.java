@@ -27,6 +27,30 @@ public class PerlParameterInfoHandlerTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testPrintText() {doTest();}
+
+  @Test
+  public void testPrintHandleTextFirst() {doTest();}
+
+  @Test
+  public void testPrintHandleTextSecond() {doTest();}
+
+  @Test
+  public void testPrintHandleTextThird() {doTest();}
+
+  @Test
+  public void testPrintTextParens() {doTest();}
+
+  @Test
+  public void testPrintHandleTextFirstParens() {doTest();}
+
+  @Test
+  public void testPrintHandleTextSecondParens() {doTest();}
+
+  @Test
+  public void testPrintHandleTextThirdParens() {doTest();}
+
+  @Test
   public void testSubSignatureCode() {doTest();}
 
   @Test

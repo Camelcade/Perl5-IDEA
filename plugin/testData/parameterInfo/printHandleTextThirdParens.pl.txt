@@ -1,0 +1,2 @@
+print( STDOUT "hi", <caret>42)
+[$file_handle], <[@list]>

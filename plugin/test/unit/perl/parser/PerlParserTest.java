@@ -27,6 +27,12 @@ public class PerlParserTest extends PerlParserTestBase {
   }
 
   @Test
+  public void testPrintOperators() {doTest();}
+
+  @Test
+  public void testPrintArguments() {doTest();}
+
+  @Test
   public void testAnonHashDetection() {doTest();}
 
   @Test

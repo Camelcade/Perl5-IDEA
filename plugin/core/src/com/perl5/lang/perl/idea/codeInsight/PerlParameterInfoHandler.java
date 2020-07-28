@@ -25,9 +25,7 @@ import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ArrayUtil;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
-import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
-import com.perl5.lang.perl.psi.PerlSubNameElement;
-import com.perl5.lang.perl.psi.PsiPerlBlock;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import com.perl5.lang.perl.psi.impl.PsiPerlCallArgumentsImpl;
 import com.perl5.lang.perl.psi.impl.PsiPerlCommaSequenceExprImpl;
@@ -151,10 +149,36 @@ public class PerlParameterInfoHandler implements ParameterInfoHandler<PsiPerlCal
           currentIndex++;
         }
       }
+      else if (isPrintHandleArgument(element)) {
+        currentIndex++;
+      }
 
       element = element.getNextSibling();
     }
     return currentIndex;
+  }
+
+  private static boolean isPrintHandleArgument(@NotNull PsiElement psiElement) {
+    IElementType elementType = PsiUtilCore.getElementType(psiElement);
+    if (elementType != BLOCK && elementType != PERL_HANDLE_EXPR && elementType != SCALAR_VARIABLE) {
+      return false;
+    }
+    PsiElement parent = psiElement.getParent();
+    if (!(parent instanceof PsiPerlCommaSequenceExpr)) {
+      return false;
+    }
+
+    PsiElement grandParent = parent.getParent();
+    if (!(grandParent instanceof PsiPerlCallArguments)) {
+      return false;
+    }
+
+    if (!(grandParent.getParent() instanceof PsiPerlPrintExpr)) {
+      return false;
+    }
+
+    PsiElement nextSibling = PerlPsiUtil.getNextSignificantSibling(psiElement);
+    return !isComma(PsiUtilCore.getElementType(nextSibling));
   }
 
   private static boolean isComma(IElementType elementType) {

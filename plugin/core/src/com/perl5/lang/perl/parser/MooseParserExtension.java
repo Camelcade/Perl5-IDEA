@@ -129,8 +129,7 @@ public class MooseParserExtension extends PerlParserExtension implements MooseEl
     sm.collapse(SUB_NAME);
     sm.precede().done(METHOD);
 
-    if (PerlParserImpl.default_parenthesised_call_arguments(b, l + 1) ||
-        PerlParserImpl.rightward_call_arguments(b, l + 1)) {
+    if (PerlParserImpl.any_call_arguments(b, l + 1)) {
       m.done(SUB_CALL);
       return true;
     }

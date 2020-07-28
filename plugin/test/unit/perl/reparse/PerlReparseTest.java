@@ -36,19 +36,19 @@ public class PerlReparseTest extends PerlLightTestCase {
   public void testBlockInCall() {doTest("42;");}
 
   @Test
-  public void testAnonHashInCall() {doTest("42");}
+  public void testAnonHashInCall() {doTest("42,");}
 
   @Test
   public void testAnonHashInCallEnsured() {doTest("42");}
 
   @Test
-  public void testAnonHashInBlock() {doTest("42");}
+  public void testAnonHashInBlock() {doTest("42,");}
 
   @Test
   public void testAnonHashInBlockEnsured() {doTest("42");}
 
   @Test
-  public void testAnonHashInFile() {doTest("42");}
+  public void testAnonHashInFile() {doTest("42,");}
 
   @Test
   public void testAnonHashInFileEnsured() {doTest("42");}
