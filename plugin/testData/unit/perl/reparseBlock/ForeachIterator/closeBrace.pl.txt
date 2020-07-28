@@ -4,7 +4,7 @@ Full reparse
 ----------
 After typing
 ----------
-{
+if($a){
   foreach(@something + }<caret> ){
     say 'hi'
   }
@@ -14,24 +14,32 @@ After typing
 Psi structure
 ----------
 Perl5
-  PsiPerlBlockCompoundImpl(Perl5: BLOCK_COMPOUND)
-    PsiPerlBlockImpl(Perl5: BLOCK)
-      PsiElement(Perl5: {)('{')
-      PsiWhiteSpace('\n  ')
-      PsiPerlForeachCompoundImpl(Perl5: FOREACH_COMPOUND)
-        PsiElement(Perl5: foreach)('foreach')
-        PsiPerlConditionExprImpl(Perl5: CONDITION_EXPR)
-          PsiElement(Perl5: ()('(')
-          PsiPerlAddExprImpl(Perl5: ADD_EXPR)
-            PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE)
-              PsiElement(Perl5: $@)('@')
-              PerlVariableNameElementImpl(Perl5: ARRAY_NAME)('something')
-            PsiWhiteSpace(' ')
-            PsiElement(Perl5: +)('+')
-            PsiErrorElement:<expr> or Perl5: ; expected, got '}'
-              <empty list>
-      PsiWhiteSpace(' ')
-      PsiElement(Perl5: })('}')
+  PsiPerlIfCompoundImpl(Perl5: IF_COMPOUND)
+    PsiElement(Perl5: if)('if')
+    PsiPerlConditionalBlockImpl(Perl5: CONDITIONAL_BLOCK)
+      PsiPerlConditionExprImpl(Perl5: CONDITION_EXPR)
+        PsiElement(Perl5: ()('(')
+        PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+          PsiElement(Perl5: $$)('$')
+          PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('a')
+        PsiElement(Perl5: ))(')')
+      PsiPerlBlockImpl(Perl5: BLOCK)
+        PsiElement(Perl5: {)('{')
+        PsiWhiteSpace('\n  ')
+        PsiPerlForeachCompoundImpl(Perl5: FOREACH_COMPOUND)
+          PsiElement(Perl5: foreach)('foreach')
+          PsiPerlConditionExprImpl(Perl5: CONDITION_EXPR)
+            PsiElement(Perl5: ()('(')
+            PsiPerlAddExprImpl(Perl5: ADD_EXPR)
+              PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE)
+                PsiElement(Perl5: $@)('@')
+                PerlVariableNameElementImpl(Perl5: ARRAY_NAME)('something')
+              PsiWhiteSpace(' ')
+              PsiElement(Perl5: +)('+')
+              PsiErrorElement:<expr> or Perl5: ; expected, got '}'
+                <empty list>
+        PsiWhiteSpace(' ')
+        PsiElement(Perl5: })('}')
   PsiWhiteSpace(' ')
   PsiErrorElement:')' unexpected
     PsiElement(Perl5: ))(')')

@@ -4,7 +4,7 @@ Full reparse
 ----------
 After typing
 ----------
-{
+if($a){
   until( $a &&  <<EOM<caret> ){
     say 'hi'
   }
@@ -14,32 +14,40 @@ After typing
 Psi structure
 ----------
 Perl5
-  PsiPerlBlockCompoundImpl(Perl5: BLOCK_COMPOUND)
-    PsiPerlBlockImpl(Perl5: BLOCK)
-      PsiElement(Perl5: {)('{')
-      PsiWhiteSpace('\n  ')
-      PsiPerlUntilCompoundImpl(Perl5: UNTIL_COMPOUND)
-        PsiElement(Perl5: until)('until')
-        PsiPerlConditionExprImpl(Perl5: CONDITION_EXPR)
-          PsiElement(Perl5: ()('(')
-          PsiWhiteSpace(' ')
-          PsiPerlAndExprImpl(Perl5: AND_EXPR)
-            PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
-              PsiElement(Perl5: $$)('$')
-              PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('a')
+  PsiPerlIfCompoundImpl(Perl5: IF_COMPOUND)
+    PsiElement(Perl5: if)('if')
+    PsiPerlConditionalBlockImpl(Perl5: CONDITIONAL_BLOCK)
+      PsiPerlConditionExprImpl(Perl5: CONDITION_EXPR)
+        PsiElement(Perl5: ()('(')
+        PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+          PsiElement(Perl5: $$)('$')
+          PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('a')
+        PsiElement(Perl5: ))(')')
+      PsiPerlBlockImpl(Perl5: BLOCK)
+        PsiElement(Perl5: {)('{')
+        PsiWhiteSpace('\n  ')
+        PsiPerlUntilCompoundImpl(Perl5: UNTIL_COMPOUND)
+          PsiElement(Perl5: until)('until')
+          PsiPerlConditionExprImpl(Perl5: CONDITION_EXPR)
+            PsiElement(Perl5: ()('(')
             PsiWhiteSpace(' ')
-            PsiElement(Perl5: &&)('&&')
-            PsiWhiteSpace('  ')
-            PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER)
-              PsiElement(Perl5: heredoc<<)('<<')
-              PsiPerlStringBareImpl(Perl5: STRING_BARE)
-                PerlStringContentElementImpl(Perl5: STRING_CONTENT)('EOM')
-          PsiWhiteSpace(' ')
-          PsiElement(Perl5: ))(')')
-        PsiPerlBlockImpl(Perl5: BLOCK)
-          PsiElement(Perl5: {)('{')
-          PsiErrorElement:Perl5: } expected
-            <empty list>
+            PsiPerlAndExprImpl(Perl5: AND_EXPR)
+              PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+                PsiElement(Perl5: $$)('$')
+                PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('a')
+              PsiWhiteSpace(' ')
+              PsiElement(Perl5: &&)('&&')
+              PsiWhiteSpace('  ')
+              PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER)
+                PsiElement(Perl5: heredoc<<)('<<')
+                PsiPerlStringBareImpl(Perl5: STRING_BARE)
+                  PerlStringContentElementImpl(Perl5: STRING_CONTENT)('EOM')
+            PsiWhiteSpace(' ')
+            PsiElement(Perl5: ))(')')
+          PsiPerlBlockImpl(Perl5: BLOCK)
+            PsiElement(Perl5: {)('{')
+            PsiErrorElement:Perl5: } expected
+              <empty list>
   PsiWhiteSpace('\n')
   PerlHeredocElementImpl(Perl5: HEREDOC_QQ)
     PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('    say 'hi'\n  }\n}\n')

@@ -4,7 +4,7 @@ Full reparse
 ----------
 After typing
 ----------
-{
+if($a){
   func something($var,<<EOM<caret>){
     say 'hi'
   }
@@ -14,30 +14,38 @@ After typing
 Psi structure
 ----------
 Perl5
-  PsiPerlBlockCompoundImpl(Perl5: BLOCK_COMPOUND)
-    PsiPerlBlockImpl(Perl5: BLOCK)
-      PsiElement(Perl5: {)('{')
-      PsiWhiteSpace('\n  ')
-      PsiPerlFuncDefinitionImpl(FUNC_DEFINITION)@main::something
-        PsiElement(Perl5: func)('func')
-        PsiWhiteSpace(' ')
-        PerlSubNameElementImpl(Perl5: subname)('something')
+  PsiPerlIfCompoundImpl(Perl5: IF_COMPOUND)
+    PsiElement(Perl5: if)('if')
+    PsiPerlConditionalBlockImpl(Perl5: CONDITIONAL_BLOCK)
+      PsiPerlConditionExprImpl(Perl5: CONDITION_EXPR)
         PsiElement(Perl5: ()('(')
-        PsiPerlSignatureContentImpl(Perl5: SIGNATURE_CONTENT)
-          PsiPerlSignatureElementImpl(Perl5: SIGNATURE_ELEMENT)
-            PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT)
-              PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
-                PsiElement(Perl5: $$)('$')
-                PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('var')
-          PsiElement(Perl5: ,)(',')
-          PsiErrorElement:<expression>, <sub signature element ignore>, <type specifier>, <variable declaration element>, Perl5: ,, Perl5: : or Perl5: => expected, got '<<'
-            PsiElement(Perl5: heredoc<<)('<<')
-          PerlStringContentElementImpl(Perl5: STRING_CONTENT)('EOM')
+        PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+          PsiElement(Perl5: $$)('$')
+          PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('a')
         PsiElement(Perl5: ))(')')
-        PsiPerlBlockImpl(Perl5: BLOCK)
-          PsiElement(Perl5: {)('{')
-          PsiErrorElement:Perl5: } expected
-            <empty list>
+      PsiPerlBlockImpl(Perl5: BLOCK)
+        PsiElement(Perl5: {)('{')
+        PsiWhiteSpace('\n  ')
+        PsiPerlFuncDefinitionImpl(FUNC_DEFINITION)@main::something
+          PsiElement(Perl5: func)('func')
+          PsiWhiteSpace(' ')
+          PerlSubNameElementImpl(Perl5: subname)('something')
+          PsiElement(Perl5: ()('(')
+          PsiPerlSignatureContentImpl(Perl5: SIGNATURE_CONTENT)
+            PsiPerlSignatureElementImpl(Perl5: SIGNATURE_ELEMENT)
+              PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT)
+                PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+                  PsiElement(Perl5: $$)('$')
+                  PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('var')
+            PsiElement(Perl5: ,)(',')
+            PsiErrorElement:<expression>, <sub signature element ignore>, <type specifier>, <variable declaration element>, Perl5: ,, Perl5: : or Perl5: => expected, got '<<'
+              PsiElement(Perl5: heredoc<<)('<<')
+            PerlStringContentElementImpl(Perl5: STRING_CONTENT)('EOM')
+          PsiElement(Perl5: ))(')')
+          PsiPerlBlockImpl(Perl5: BLOCK)
+            PsiElement(Perl5: {)('{')
+            PsiErrorElement:Perl5: } expected
+              <empty list>
   PsiWhiteSpace('\n')
   PerlHeredocElementImpl(Perl5: HEREDOC_QQ)
     PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('    say 'hi'\n  }\n}\n')
