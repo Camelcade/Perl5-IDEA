@@ -1,15 +1,12 @@
 Reparsing block
 ----------
-Element(Perl5: BLOCK)
+Element(Perl5: PARENTHESISED_CALL_ARGUMENTS)
 ----------
-{
-  say 'hi';
-  test(
+(
     say => 'start',
     some => ,
     say =>'end'
-  );
-}
+  )
 ----------
 After typing
 ----------

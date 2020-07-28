@@ -27,6 +27,9 @@ public class PerlReparseTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testPrintCallArguments() {doTest("42,");}
+
+  @Test
   public void testBlockInBlock() {doTest("42;");}
 
   @Test

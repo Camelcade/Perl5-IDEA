@@ -1,0 +1,26 @@
+Reparsing block
+----------
+Element(Perl5: PARENTHESISED_CALL_ARGUMENTS)
+----------
+(  )
+----------
+After typing
+----------
+print( 42,<caret> );
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+      PsiElement(Perl5: print)('print')
+      PsiPerlParenthesisedCallArgumentsImpl(Perl5: PARENTHESISED_CALL_ARGUMENTS)
+        PsiElement(Perl5: ()('(')
+        PsiWhiteSpace(' ')
+        PsiPerlCommaSequenceExprImpl(Perl5: COMMA_SEQUENCE_EXPR)
+          PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
+            PsiElement(Perl5: NUMBER)('42')
+          PsiElement(Perl5: ,)(',')
+        PsiWhiteSpace(' ')
+        PsiElement(Perl5: ))(')')
+    PsiElement(Perl5: ;)(';')

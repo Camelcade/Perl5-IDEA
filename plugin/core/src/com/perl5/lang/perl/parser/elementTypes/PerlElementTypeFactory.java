@@ -484,7 +484,7 @@ public class PerlElementTypeFactory {
       case "ANNOTATION_NOINSPECTION":
         return new PerlElementTypeEx(name, PsiPerlAnnotationNoinspectionImpl.class);
       case "PARENTHESISED_CALL_ARGUMENTS":
-        return new PerlElementTypeEx(name, PsiPerlParenthesisedCallArgumentsImpl.class);
+        return new PerlParenthesizedCallArgumentsElementType(name, PsiPerlParenthesisedCallArgumentsImpl.class);
       case "PACKAGE_EXPR":
         return new PerlElementTypeEx(name, PsiPerlPackageExprImpl.class);
       case "ARRAYREF_TYPE":

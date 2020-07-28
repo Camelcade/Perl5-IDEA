@@ -1193,7 +1193,7 @@ private parse_call_arguments ::=
 arguments_list_with_codeblock ::=
   sub_expr_simple [[comma] parse_scalar_expr {comma parse_scalar_expr}*] {extends=expr elementType=comma_sequence_expr}
 
-parenthesised_call_arguments ::= parenthesised_call_arguments_body !'['
+parenthesised_call_arguments ::= parenthesised_call_arguments_body !'[' {extraRoot=true}
 unary_call_arguments ::= unary_expr {elementType=call_arguments}
 private parenthesised_call_arguments_body ::= '(' optional_expression ')' {pin=1}
 private optional_expression ::= [expr]
