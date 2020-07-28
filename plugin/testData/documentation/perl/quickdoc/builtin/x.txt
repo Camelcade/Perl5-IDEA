@@ -1,12 +1,19 @@
-<p><a href="psi_element://perlfunc">perlfunc</a>: <a href="psi_element://perlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://perlfunc%2FNon-function+Keywords+by+Cross-reference">Non-function Keywords by Cross-reference</a>: <a href="psi_element://perlfunc%2Fperlop">perlop</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">and</dt>
-<dt style="padding-bottom:4px;font-weight:bold;">cmp</dt>
-<dt style="padding-bottom:4px;font-weight:bold;">eq</dt>
-<dt style="padding-bottom:4px;font-weight:bold;">ge</dt>
-<dt style="padding-bottom:4px;font-weight:bold;">gt</dt>
-<dt style="padding-bottom:4px;font-weight:bold;">le</dt>
-<dt style="padding-bottom:4px;font-weight:bold;">lt</dt>
-<dt style="padding-bottom:4px;font-weight:bold;">ne</dt>
-<dt style="padding-bottom:4px;font-weight:bold;">not</dt>
-<dt style="padding-bottom:4px;font-weight:bold;">or</dt>
-<dt style="padding-bottom:4px;font-weight:bold;">x</dt>
-<dt style="padding-bottom:4px;font-weight:bold;">xor</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">These operators are documented in <a href="psi_element://perlop">perlop</a>.</p></dd></dl>
+<p><a href="psi_element://perlop">perlop</a>: <a href="psi_element://perlop%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://perlop%2FMultiplicative+Operators">Multiplicative Operators</a></p><p style="padding-bottom: 10px;">Binary <code>x</code> is the repetition operator.  In scalar context, or if the
+left operand is neither enclosed in parentheses nor a <code>qw//</code> list,
+it performs a string repetition.  In that case it supplies scalar
+context to the left operand, and returns a string consisting of the
+left operand string repeated the number of times specified by the right
+operand.  If the <code>x</code> is in list context, and the left operand is either
+enclosed in parentheses or a <code>qw//</code> list, it performs a list repetition.
+In that case it supplies list context to the left operand, and returns
+a list consisting of the left operand list repeated the number of times
+specified by the right operand.
+If the right operand is zero or negative (raising a warning on
+negative), it returns an empty string
+or an empty list, depending on the context.</p>
+<div style="padding-bottom: 10px;"><pre><code>    print '-' x 80;		# print row of dashes
+
+    print &quot;\t&quot; x ($tab/8), ' ' x ($tab%8);	# tab over
+
+    @ones = (1) x 80;		# a list of 80 1's
+    @ones = (5) x @ones;	# set all elements to 5</code></pre></div>
