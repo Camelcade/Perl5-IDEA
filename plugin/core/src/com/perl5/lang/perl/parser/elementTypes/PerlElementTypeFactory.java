@@ -155,7 +155,7 @@ public class PerlElementTypeFactory {
       case "BITWISE_OR_XOR_EXPR":
         return new PerlElementTypeEx(name, PsiPerlBitwiseOrXorExprImpl.class);
       case "BLOCK":
-        return new PerlLazyCodeBlockElementType(name, PsiPerlBlockImpl.class);
+        return new PerlCodeBlockElementType(name, PsiPerlBlockImpl.class);
       case "BLOCK_BRACELESS":
         return new PerlElementTypeEx(name, PsiPerlBlockBracelessImpl.class);
       case "BLOCK_SCALAR":

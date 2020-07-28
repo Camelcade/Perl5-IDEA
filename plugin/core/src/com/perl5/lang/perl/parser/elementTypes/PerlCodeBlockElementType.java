@@ -30,10 +30,10 @@ import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.LEFT_BRACE;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.RIGHT_BRACE;
 
 
-public class PerlLazyCodeBlockElementType extends PerlLazyBlockElementType {
+public class PerlCodeBlockElementType extends PerlLazyBlockElementType {
 
-  public PerlLazyCodeBlockElementType(@NotNull String debugName,
-                                      @NotNull Class<? extends PsiElement> clazz) {
+  public PerlCodeBlockElementType(@NotNull String debugName,
+                                  @NotNull Class<? extends PsiElement> clazz) {
     super(debugName, clazz);
   }
 
