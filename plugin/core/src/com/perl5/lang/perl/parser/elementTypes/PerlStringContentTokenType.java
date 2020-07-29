@@ -53,19 +53,24 @@ public class PerlStringContentTokenType extends PerlReparseableTokenType {
       return isQuotedStringContentReparseable(newText, parent);
     }
     if (parentType == REGEX_REPLACEMENT) {
-      return isRegexReplacementContentReparseable(newText, parent);
+      return isRegexReplacementContentReparseable(newText, parent, false);
     }
-    // fixme heredocs/tr?
+    if (parentType == TR_SEARCHLIST || parentType == TR_REPLACEMENTLIST) {
+      return isRegexReplacementContentReparseable(newText, parent, true);
+    }
+    // fixme heredocs?
     return false;
   }
 
-  private boolean isRegexReplacementContentReparseable(@NotNull CharSequence newText, @NotNull ASTNode regexReplacementNode) {
+  private boolean isRegexReplacementContentReparseable(@NotNull CharSequence newText,
+                                                       @NotNull ASTNode regexReplacementNode,
+                                                       boolean allowSigils) {
     ASTNode regexQuoteNode = regexReplacementNode.getTreePrev();
     IElementType quoteType = PsiUtilCore.getElementType(regexQuoteNode);
     if (quoteType != REGEX_QUOTE_OPEN && quoteType != REGEX_QUOTE) {
       return false;
     }
-    return isGenericQuotedStringReparseable(newText, regexReplacementNode, regexQuoteNode.getChars());
+    return isGenericQuotedStringReparseable(newText, regexQuoteNode.getChars(), allowSigils);
   }
 
   private boolean isQuotedStringContentReparseable(@NotNull CharSequence newText, @NotNull ASTNode stringNode) {
@@ -73,19 +78,20 @@ public class PerlStringContentTokenType extends PerlReparseableTokenType {
     if (openQuoteNode == null) {
       return false;
     }
-    return isGenericQuotedStringReparseable(newText, stringNode, openQuoteNode.getChars());
+    return isGenericQuotedStringReparseable(
+      newText, openQuoteNode.getChars(), PsiUtilCore.getElementType(stringNode) == STRING_SQ);
   }
 
   private boolean isGenericQuotedStringReparseable(@NotNull CharSequence newText,
-                                                   @NotNull ASTNode genericQuotedStringNode,
-                                                   @NotNull CharSequence openQuoteChars) {
+                                                   @NotNull CharSequence openQuoteChars,
+                                                   boolean allowSigils) {
     if (openQuoteChars.length() != 1) {
       return false;
     }
     char openQuote = openQuoteChars.charAt(0);
     char closeQuote = PerlString.getQuoteCloseChar(openQuote);
     // fixme this may be more type-dependent.
-    String forbiddenChars = PsiUtilCore.getElementType(genericQuotedStringNode) == STRING_SQ ? "\\" + openQuote : "$@\\" + openQuote;
+    String forbiddenChars = allowSigils ? "\\" + openQuote : "$@\\" + openQuote;
     if (openQuote != closeQuote) {
       forbiddenChars += closeQuote;
     }

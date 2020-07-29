@@ -1,10 +1,8 @@
 Reparsing block
 ----------
-Element(Perl5: BLOCK)
+PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)
 ----------
-{
-  tr/matc h/r eplacement/;
-}
+matc h
 ----------
 After typing
 ----------
