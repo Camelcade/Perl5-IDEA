@@ -1,0 +1,4 @@
+if($a){
+  say 'hi';
+  say "test<caret>rst";
+}

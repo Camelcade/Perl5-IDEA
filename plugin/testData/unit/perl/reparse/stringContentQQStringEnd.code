@@ -1,0 +1,4 @@
+if($a){
+  say 'hi';
+  say qq/testrst<caret>/;
+}

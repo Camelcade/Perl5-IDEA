@@ -60,6 +60,42 @@ public class PerlReparseTest extends PerlLightTestCase {
   public void testStringContentQwList() {doTest("some_thing");}
 
   @Test
+  public void testStringContentQQString() {doTest("some_thing");}
+
+  @Test
+  public void testStringContentQQStringEnd() {doTest("some_thing");}
+
+  @Test
+  public void testStringContentQQStringQuoted() {doTest("some_thing");}
+
+  @Test
+  public void testStringContentQQStringQuotedEnd() {doTest("some_thing");}
+
+  @Test
+  public void testStringContentQString() {doTest("some_thing");}
+
+  @Test
+  public void testStringContentQStringEnd() {doTest("some_thing");}
+
+  @Test
+  public void testStringContentQStringQuoted() {doTest("some_thing");}
+
+  @Test
+  public void testStringContentQStringQuotedEnd() {doTest("some_thing");}
+
+  @Test
+  public void testStringContentQXString() {doTest("some_thing");}
+
+  @Test
+  public void testStringContentQXStringEnd() {doTest("some_thing");}
+
+  @Test
+  public void testStringContentQXStringQuoted() {doTest("some_thing");}
+
+  @Test
+  public void testStringContentQXStringQuotedEnd() {doTest("some_thing");}
+
+  @Test
   public void testStringContentSqBeforeHashRocket() {doTest("some_thing");}
 
   @Test
