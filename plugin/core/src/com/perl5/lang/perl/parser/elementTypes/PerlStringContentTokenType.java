@@ -17,19 +17,40 @@
 package com.perl5.lang.perl.parser.elementTypes;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.tree.ILeafElementType;
+import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
-import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.HEREDOC_OPENER;
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.STRING_BARE;
 
-public class PerlStringContentTokenType extends PerlTokenType implements ILeafElementType {
-  public PerlStringContentTokenType(@NotNull @NonNls String debugName) {
-    super(debugName);
+public class PerlStringContentTokenType extends PerlReparseableTokenType {
+  public PerlStringContentTokenType(@NotNull String debugName) {
+    super(debugName, PerlStringContentElementImpl.class);
   }
 
   @Override
-  public @NotNull ASTNode createLeafNode(@NotNull CharSequence leafText) {
-    return new PerlStringContentElementImpl(this, leafText);
+  protected boolean isReparseable(@NotNull ASTNode leaf, @NotNull CharSequence newText) {
+    if (newText.length() == 0) {
+      return false;
+    }
+    ASTNode parent = leaf.getTreeParent();
+    if (PsiUtilCore.getElementType(parent) != STRING_BARE ||
+        PsiUtilCore.getElementType(parent.getTreeParent()) == HEREDOC_OPENER) {
+      return false;
+    }
+
+    if (!Character.isUnicodeIdentifierStart(newText.charAt(0))) {
+      return false;
+    }
+
+    for (int i = 1; i < newText.length(); i++) {
+      char currentChar = newText.charAt(i);
+      if (!Character.isUnicodeIdentifierPart(currentChar)) {
+        return false;
+      }
+    }
+
+    return true;
   }
 }
