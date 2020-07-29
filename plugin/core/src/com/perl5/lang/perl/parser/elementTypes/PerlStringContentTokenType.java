@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.parser.elementTypes;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
 import org.jetbrains.annotations.NotNull;
@@ -35,11 +36,23 @@ public class PerlStringContentTokenType extends PerlReparseableTokenType {
       return false;
     }
     ASTNode parent = leaf.getTreeParent();
-    if (PsiUtilCore.getElementType(parent) != STRING_BARE ||
-        PsiUtilCore.getElementType(parent.getTreeParent()) == HEREDOC_OPENER) {
+    if (parent == null) {
       return false;
     }
 
+    if (PsiUtilCore.getElementType(parent.getTreeParent()) == HEREDOC_OPENER) {
+      return false;
+    }
+
+    IElementType parentType = PsiUtilCore.getElementType(parent);
+    if (parentType == STRING_BARE) {
+      return isBareStringContentReparseable(newText);
+    }
+
+    return false;
+  }
+
+  private boolean isBareStringContentReparseable(@NotNull CharSequence newText) {
     if (!Character.isUnicodeIdentifierStart(newText.charAt(0))) {
       return false;
     }
