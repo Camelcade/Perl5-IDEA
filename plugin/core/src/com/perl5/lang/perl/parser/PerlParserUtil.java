@@ -43,16 +43,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
     NUMBER,
     NUMBER_VERSION
   );
-  public static final TokenSet OPEN_QUOTES = TokenSet.create(
-    QUOTE_DOUBLE_OPEN,
-    QUOTE_TICK_OPEN,
-    QUOTE_SINGLE_OPEN
-  );
-  public static final TokenSet CLOSE_QUOTES = TokenSet.create(
-    QUOTE_DOUBLE_CLOSE,
-    QUOTE_TICK_CLOSE,
-    QUOTE_SINGLE_CLOSE
-  );
   public static final Pattern IDENTIFIER_PATTERN = Pattern.compile("[_\\p{L}][_\\p{L}\\d]*");
   private static final String BASIC_IDENTIFIER_PATTERN_TEXT = "[_\\p{L}\\d][_\\p{L}\\d]*";
   // something strange in Java with unicode props; Added digits to opener for package Encode::KR::2022_KR;

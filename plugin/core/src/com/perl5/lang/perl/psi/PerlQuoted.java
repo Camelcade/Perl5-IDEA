@@ -18,7 +18,7 @@ package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiUtilCore;
-import com.perl5.lang.perl.parser.PerlParserUtil;
+import com.perl5.lang.perl.lexer.PerlTokenSets;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -32,7 +32,7 @@ public interface PerlQuoted extends PsiElement {
     PsiElement run = getFirstChild();
 
     while (run != null) {
-      if (PerlParserUtil.OPEN_QUOTES.contains(PsiUtilCore.getElementType(run))) {
+      if (PerlTokenSets.OPEN_QUOTES.contains(PsiUtilCore.getElementType(run))) {
         return run;
       }
       run = run.getNextSibling();
@@ -57,6 +57,6 @@ public interface PerlQuoted extends PsiElement {
    */
   default @Nullable PsiElement getCloseQuoteElement() {
     PsiElement lastChild = getLastChild();
-    return lastChild != null && PerlParserUtil.CLOSE_QUOTES.contains(PsiUtilCore.getElementType(lastChild)) ? lastChild : null;
+    return lastChild != null && PerlTokenSets.CLOSE_QUOTES.contains(PsiUtilCore.getElementType(lastChild)) ? lastChild : null;
   }
 }

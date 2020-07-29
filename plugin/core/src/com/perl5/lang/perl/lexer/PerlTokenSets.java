@@ -17,11 +17,9 @@
 package com.perl5.lang.perl.lexer;
 
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.perl.parser.PerlParserUtil;
 import com.perl5.lang.perl.parser.moose.MooseElementTypes;
 
 import static com.perl5.lang.perl.parser.MooseParserExtension.MOOSE_RESERVED_TOKENSET;
-import static com.perl5.lang.perl.parser.PerlParserUtil.CLOSE_QUOTES;
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.NO_STATEMENT;
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.USE_STATEMENT;
 
@@ -318,14 +316,26 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
     HEREDOC_QX
   );
 
-
   TokenSet QUOTE_MIDDLE = TokenSet.create(REGEX_QUOTE, REGEX_QUOTE_E);
 
   TokenSet REGEX_QUOTE_OPEN = TokenSet.create(PerlElementTypesGenerated.REGEX_QUOTE_OPEN, REGEX_QUOTE_OPEN_E);
+
+  TokenSet OPEN_QUOTES = TokenSet.create(
+    QUOTE_DOUBLE_OPEN,
+    QUOTE_TICK_OPEN,
+    QUOTE_SINGLE_OPEN
+  );
+
   TokenSet QUOTE_OPEN_ANY = TokenSet.orSet(
     REGEX_QUOTE_OPEN,
-    PerlParserUtil.OPEN_QUOTES,
+    OPEN_QUOTES,
     QUOTE_MIDDLE
+  );
+
+  TokenSet CLOSE_QUOTES = TokenSet.create(
+    QUOTE_DOUBLE_CLOSE,
+    QUOTE_TICK_CLOSE,
+    QUOTE_SINGLE_CLOSE
   );
 
   TokenSet QUOTE_CLOSE_FIRST_ANY = TokenSet.orSet(
@@ -374,7 +384,9 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
 
   TokenSet VARIABLES = TokenSet.create(SCALAR_VARIABLE, ARRAY_VARIABLE, HASH_VARIABLE, CODE_VARIABLE, GLOB_VARIABLE, ARRAY_INDEX_VARIABLE);
 
-  TokenSet STRINGS = TokenSet.create(STRING_BARE, STRING_DQ, STRING_XQ, STRING_SQ);
+  TokenSet QUOTED_STRINGS = TokenSet.create(STRING_DQ, STRING_XQ, STRING_SQ);
+
+  TokenSet STRINGS = TokenSet.orSet(QUOTED_STRINGS, TokenSet.create(STRING_BARE));
 
   TokenSet VARIABLE_DECLARATIONS = TokenSet.create(
     VARIABLE_DECLARATION_GLOBAL,
