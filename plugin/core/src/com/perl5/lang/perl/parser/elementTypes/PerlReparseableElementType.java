@@ -16,7 +16,10 @@
 
 package com.perl5.lang.perl.parser.elementTypes;
 
-import com.intellij.lang.*;
+import com.intellij.lang.ASTFactory;
+import com.intellij.lang.ASTNode;
+import com.intellij.lang.PsiBuilder;
+import com.intellij.lang.PsiBuilderFactory;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressManager;
@@ -101,23 +104,7 @@ public abstract class PerlReparseableElementType extends IReparseableElementType
     return "Perl5: " + super.toString();
   }
 
-  /**
-   * Improved copy of {@link PsiBuilderUtil#hasProperBraceBalance(java.lang.CharSequence, com.intellij.lexer.Lexer, com.intellij.psi.tree.IElementType, com.intellij.psi.tree.IElementType)}
-   * Checks that all perl braces within range are balanced and properly nested
-   */
-  public static boolean hasProperBraceBalance(@NotNull CharSequence text,
-                                              @NotNull Lexer lexer,
-                                              @NotNull IElementType openBrace) {
-    lexer.start(text);
-
-    if (lexer.getTokenType() != openBrace) {
-      return false;
-    }
-
-    Stack<IElementType> bracesStack = new Stack<>();
-    bracesStack.push(openBrace);
-    lexer.advance();
-
+  protected static boolean checkBracesBalance(@NotNull Lexer lexer, Stack<IElementType> bracesStack) {
     while (true) {
       ProgressManager.checkCanceled();
       IElementType type = lexer.getTokenType();

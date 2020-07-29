@@ -18,13 +18,17 @@ package com.perl5.lang.perl.parser.elementTypes;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
+import com.intellij.lang.PsiBuilderUtil;
 import com.intellij.lexer.FlexAdapter;
+import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Stack;
 
 public abstract class PerlBracedBlockElementType extends PerlReparseableElementType {
   public PerlBracedBlockElementType(@NotNull String debugName,
@@ -57,4 +61,24 @@ public abstract class PerlBracedBlockElementType extends PerlReparseableElementT
   protected abstract @NotNull IElementType getOpeningBraceType();
 
   protected abstract boolean isLexerStateOk(int lexerState);
+
+  /**
+   * Improved copy of {@link PsiBuilderUtil#hasProperBraceBalance(CharSequence, com.intellij.lexer.Lexer, IElementType, IElementType)}
+   * Checks that all perl braces within range are balanced and properly nested
+   */
+  private static boolean hasProperBraceBalance(@NotNull CharSequence text,
+                                               @NotNull Lexer lexer,
+                                               @NotNull IElementType openBrace) {
+    lexer.start(text);
+
+    if (lexer.getTokenType() != openBrace) {
+      return false;
+    }
+
+    Stack<IElementType> bracesStack = new Stack<>();
+    bracesStack.push(openBrace);
+    lexer.advance();
+
+    return checkBracesBalance(lexer, bracesStack);
+  }
 }
