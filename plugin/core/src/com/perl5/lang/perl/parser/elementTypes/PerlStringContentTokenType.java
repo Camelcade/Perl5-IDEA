@@ -52,26 +52,40 @@ public class PerlStringContentTokenType extends PerlReparseableTokenType {
     if (PerlTokenSets.QUOTED_STRINGS.contains(parentType)) {
       return isQuotedStringContentReparseable(newText, parent);
     }
-    // fixme heredocs?
+    if (parentType == REGEX_REPLACEMENT) {
+      return isRegexReplacementContentReparseable(newText, parent);
+    }
+    // fixme heredocs/tr?
     return false;
   }
 
-  private boolean isQuotedStringContentReparseable(@NotNull CharSequence newText, @NotNull ASTNode stringNode) {
-    if (newText.length() == 0) {
+  private boolean isRegexReplacementContentReparseable(@NotNull CharSequence newText, @NotNull ASTNode regexReplacementNode) {
+    ASTNode regexQuoteNode = regexReplacementNode.getTreePrev();
+    IElementType quoteType = PsiUtilCore.getElementType(regexQuoteNode);
+    if (quoteType != REGEX_QUOTE_OPEN && quoteType != REGEX_QUOTE) {
       return false;
     }
+    return isGenericQuotedStringReparseable(newText, regexReplacementNode, regexQuoteNode.getChars());
+  }
+
+  private boolean isQuotedStringContentReparseable(@NotNull CharSequence newText, @NotNull ASTNode stringNode) {
     ASTNode openQuoteNode = stringNode.findChildByType(PerlTokenSets.OPEN_QUOTES);
     if (openQuoteNode == null) {
       return false;
     }
-    CharSequence openQuoteChars = openQuoteNode.getChars();
+    return isGenericQuotedStringReparseable(newText, stringNode, openQuoteNode.getChars());
+  }
+
+  private boolean isGenericQuotedStringReparseable(@NotNull CharSequence newText,
+                                                   @NotNull ASTNode genericQuotedStringNode,
+                                                   @NotNull CharSequence openQuoteChars) {
     if (openQuoteChars.length() != 1) {
       return false;
     }
     char openQuote = openQuoteChars.charAt(0);
     char closeQuote = PerlString.getQuoteCloseChar(openQuote);
     // fixme this may be more type-dependent.
-    String forbiddenChars = PsiUtilCore.getElementType(stringNode) == STRING_SQ ? "\\" + openQuote : "$@\\" + openQuote;
+    String forbiddenChars = PsiUtilCore.getElementType(genericQuotedStringNode) == STRING_SQ ? "\\" + openQuote : "$@\\" + openQuote;
     if (openQuote != closeQuote) {
       forbiddenChars += closeQuote;
     }

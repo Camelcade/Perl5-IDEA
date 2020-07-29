@@ -1,0 +1,44 @@
+Reparsing block
+----------
+PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)
+----------
+replacement 
+----------
+After typing
+----------
+sub something{
+  s{test
+    say 'hi';
+    say 'hi'
+  }{replace'<caret>ment $3};
+}
+
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::something
+    PsiElement(Perl5: sub)('sub')
+    PsiWhiteSpace(' ')
+    PerlSubNameElementImpl(Perl5: subname)('something')
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiWhiteSpace('\n  ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlReplacementRegexImpl(Perl5: REPLACEMENT_REGEX)
+          PsiElement(Perl5: s)('s')
+          PsiElement(Perl5: r{)('{')
+          PsiPerlPerlRegexImpl(Perl5: PERL_REGEX)
+            PsiElement(Perl5: regex)('test\n    say 'hi';\n    say 'hi'\n  ')
+          PsiElement(Perl5: r})('}')
+          PsiElement(Perl5: r{)('{')
+          PsiPerlRegexReplacementImpl(Perl5: REGEX_REPLACEMENT)
+            PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('replace'ment ')
+            PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+              PsiElement(Perl5: $$)('$')
+              PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('3')
+          PsiElement(Perl5: r})('}')
+        PsiElement(Perl5: ;)(';')
+      PsiWhiteSpace('\n')
+      PsiElement(Perl5: })('}')
+  PsiWhiteSpace('\n')

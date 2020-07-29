@@ -1,0 +1,68 @@
+Reparsing block
+----------
+Element(Perl5: BLOCK)
+----------
+{
+  s/test
+    say 'hi';
+    say 'hi'
+  /replacement $1/;
+}
+----------
+After typing
+----------
+sub something{
+  s/test
+    say 'hi';
+    say 'hi'
+  /replace# comment /<caret>ment $1/;
+}
+
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::something
+    PsiElement(Perl5: sub)('sub')
+    PsiWhiteSpace(' ')
+    PerlSubNameElementImpl(Perl5: subname)('something')
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiWhiteSpace('\n  ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlReplacementRegexImpl(Perl5: REPLACEMENT_REGEX)
+          PsiElement(Perl5: s)('s')
+          PsiElement(Perl5: r{)('/')
+          PsiPerlPerlRegexImpl(Perl5: PERL_REGEX)
+            PsiElement(Perl5: regex)('test\n    say 'hi';\n    say 'hi'\n  ')
+          PsiElement(Perl5: re/)('/')
+          PsiPerlBlockBracelessImpl(Perl5: BLOCK_BRACELESS)
+            PsiPerlStatementImpl(Perl5: STATEMENT)
+              PsiPerlSubCallImpl(SUB_CALL)
+                PsiPerlMethodImpl(Perl5: METHOD)
+                  PerlSubNameElementImpl(Perl5: subname)('replace')
+            PsiComment(Perl5: COMMENT_LINE)('# comment ')
+          PsiElement(Perl5: r})('/')
+          PsiPerlPerlRegexModifiersImpl(Perl5: PERL_REGEX_MODIFIERS)
+            PsiElement(Perl5: /m)('m')
+            PsiElement(Perl5: /m)('e')
+            PsiElement(Perl5: /m)('n')
+        PsiErrorElement:Semicolon expected
+          <empty list>
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlSubCallImpl(SUB_CALL)
+          PsiPerlMethodImpl(Perl5: METHOD)
+            PerlSubNameElementImpl(Perl5: subname)('t')
+          PsiWhiteSpace(' ')
+          PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
+            PsiPerlMulExprImpl(Perl5: MUL_EXPR)
+              PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+                PsiElement(Perl5: $$)('$')
+                PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('1')
+              PsiElement(Perl5: /)('/')
+              PsiErrorElement:<expr> expected, got ';'
+                <empty list>
+        PsiElement(Perl5: ;)(';')
+      PsiWhiteSpace('\n')
+      PsiElement(Perl5: })('}')
+  PsiWhiteSpace('\n')

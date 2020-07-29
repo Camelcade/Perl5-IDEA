@@ -326,6 +326,30 @@ public abstract class PerlQuoteLikeReparseTestCase extends PerlReparseMultiTestC
     }
   }
 
+  public static class RegexReplacementSlash extends PerlQuoteLikeReparseTestCase {
+    @Override
+    protected @NotNull String buildCodeSample() {
+      return "sub something{\n" +
+             "  s/test\n" +
+             "    say 'hi';\n" +
+             "    say 'hi'\n" +
+             "  /replace<caret>ment $1/;\n" +
+             "}\n";
+    }
+  }
+
+  public static class RegexReplacementBrace extends PerlQuoteLikeReparseTestCase {
+    @Override
+    protected @NotNull String buildCodeSample() {
+      return "sub something{\n" +
+             "  s{test\n" +
+             "    say 'hi';\n" +
+             "    say 'hi'\n" +
+             "  }{replace<caret>ment $3};\n" +
+             "}\n";
+    }
+  }
+
   public static class RegexReplaceSlash extends PerlQuoteLikeReparseTestCase {
     @Override
     protected @NotNull String buildCodeSample() {
