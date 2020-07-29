@@ -1,6 +1,6 @@
 Reparsing block
 ----------
-Element(Perl5: HEREDOC)
+PerlStringContentElementImpl(Perl5: STRING_CONTENT)
 ----------
         start q4
 

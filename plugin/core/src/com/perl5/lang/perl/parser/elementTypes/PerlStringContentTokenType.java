@@ -17,12 +17,17 @@
 package com.perl5.lang.perl.parser.elementTypes;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
+import com.intellij.util.text.CharArrayUtil;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.regex.Pattern;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 
@@ -58,7 +63,43 @@ public class PerlStringContentTokenType extends PerlReparseableTokenType {
     if (parentType == TR_SEARCHLIST || parentType == TR_REPLACEMENTLIST) {
       return isRegexReplacementContentReparseable(newText, parent, true);
     }
-    // fixme heredocs?
+    if (PerlTokenSets.HEREDOC_BODIES_TOKENSET.contains(parentType)) {
+      return isHeredocContentsReparseable(newText, parent);
+    }
+    return false;
+  }
+
+  /**
+   * fixme this logic may be reused later for {@link PerlHeredocElementType} for now we are missing node there, got only parent
+   */
+  private boolean isHeredocContentsReparseable(@NotNull CharSequence newText,
+                                               @NotNull ASTNode heredocBodyNode) {
+    ASTNode heredocTerminator = heredocBodyNode.getTreeNext();
+    if (PsiUtilCore.getElementType(heredocTerminator) == TokenType.WHITE_SPACE) {
+      heredocTerminator = heredocTerminator.getTreeNext();
+    }
+    IElementType terminatorType = PsiUtilCore.getElementType(heredocTerminator);
+    if (!PerlTokenSets.HEREDOC_ENDS.contains(terminatorType)) {
+      return false;
+    }
+    CharSequence terminatorChars = heredocTerminator.getChars();
+
+    String forbiddenChars = PsiUtilCore.getElementType(heredocBodyNode) == HEREDOC ? null : "$@\\";
+
+    if (terminatorType == HEREDOC_END) {
+      // fixme we could use some smart one-pass scan here
+      return !StringUtil.startsWith(newText, terminatorChars) &&
+             !StringUtil.contains(newText, "\n" + terminatorChars) &&
+             (forbiddenChars == null || !containsAnyChar(newText, forbiddenChars));
+    }
+    else if (terminatorType == HEREDOC_END_INDENTABLE) {
+      // fixme we could use some smart one-pass scan here
+      int startIndex = CharArrayUtil.shiftForward(newText, 0, " \t");
+      CharSequence newTextToAnalyze = newText.subSequence(startIndex, newText.length());
+      return !StringUtil.startsWith(newTextToAnalyze, terminatorChars) &&
+             (forbiddenChars == null || !containsAnyChar(newText, forbiddenChars)) &&
+             !Pattern.compile("\\n\\s*" + terminatorChars).matcher(newTextToAnalyze).find();
+    }
     return false;
   }
 
@@ -95,12 +136,16 @@ public class PerlStringContentTokenType extends PerlReparseableTokenType {
     if (openQuote != closeQuote) {
       forbiddenChars += closeQuote;
     }
+    return !containsAnyChar(newText, forbiddenChars);
+  }
+
+  private boolean containsAnyChar(@NotNull CharSequence newText, String forbiddenChars) {
     for (int i = 0; i < newText.length(); i++) {
       if (forbiddenChars.indexOf(newText.charAt(i)) > -1) {
-        return false;
+        return true;
       }
     }
-    return true;
+    return false;
   }
 
   private boolean isBareStringContentReparseable(@NotNull CharSequence newText) {
