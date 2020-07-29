@@ -1,15 +1,12 @@
 Reparsing block
 ----------
-Element(Perl5: BLOCK)
+Element(Perl5: CODE_CAST_EXPR)
 ----------
-{
-  say 'hi';
-  &{
+&{
     say => 'start';
     some => ;
     say =>'end';
-  };
-}
+  }
 ----------
 After typing
 ----------

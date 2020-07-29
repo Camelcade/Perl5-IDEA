@@ -1115,19 +1115,19 @@ private array_primitive ::= array_variable | array_cast_expr | string_list
 left array_slice ::= array_index
 left hash_slice ::= hash_index
 
-array_cast_expr ::= '$@' array_cast_target {name="array dereference"}
+array_cast_expr ::= '$@' array_cast_target {name="array dereference"  extraRoot=true}
 private array_cast_target ::= {block_array | scalar_primitive}
 block_array ::= '@{' block_content '@}' {extends=block pin=1}
 
-hash_cast_expr ::= '$%' hash_cast_target {name="hash dereference"}
+hash_cast_expr ::= '$%' hash_cast_target {name="hash dereference"  extraRoot=true}
 private hash_cast_target ::= { block_hash  | scalar_primitive}
 block_hash ::= '%{' block_content '%}' {extends=block pin=1}
 
 private scalar_primitive ::= scalar_variable | scalar_cast_expr | undef_expr  // shouldn't it be in term ? (check declarations)
 
 // |'$}'|'@}'|'%}'|'*}'|'&}'
-scalar_cast_expr ::= '$$' scalar_cast_target {name="scalar dereference"}
-scalar_index_cast_expr ::= '$#' scalar_cast_target {name="array last index dereference"}
+scalar_cast_expr ::= '$$' scalar_cast_target {name="scalar dereference" extraRoot=true}
+scalar_index_cast_expr ::= '$#' scalar_cast_target {name="array last index dereference"  extraRoot=true}
 private scalar_cast_target ::= {block_scalar | scalar_primitive}
 block_scalar ::= '${' block_content '$}' {extends=block pin=1}
 
@@ -1139,14 +1139,14 @@ left hash_element ::= hash_index
 private glob_or_element ::= glob_primitive [glob_slot]
 private glob_primitive ::= glob_variable | glob_cast_expr
 
-glob_cast_expr ::= '$*' glob_cast_target {name="typeglob dereference"}
+glob_cast_expr ::= '$*' glob_cast_target {name="typeglob dereference" extraRoot=true}
 private glob_cast_target ::= {block_glob | scalar_primitive}
 block_glob ::= '*{' block_content '*}' {extends=block pin=1}
 
 left glob_slot ::= hash_index
 
 private code_primitive ::= code_variable | code_cast_expr
-code_cast_expr ::= '$&' code_cast_target
+code_cast_expr ::= '$&' code_cast_target { extraRoot=true}
 private code_cast_target ::= {block_code | scalar_primitive}
 block_code ::= '&{' block_content '&}' {extends=block pin=1}
 

@@ -133,7 +133,7 @@ public class PerlElementTypeFactory {
       case "HASH_ARRAY_SLICE":
         return new PerlElementTypeEx(name, PsiPerlHashArraySliceImpl.class);
       case "ARRAY_CAST_EXPR":
-        return new PerlElementTypeEx(name, PsiPerlArrayCastExprImpl.class);
+        return new PerlDereferenceElementType.Array(name, PsiPerlArrayCastExprImpl.class);
       case "HASH_SLICE":
         return new PerlElementTypeEx(name, PsiPerlHashSliceImpl.class);
       case "HASH_HASH_SLICE":
@@ -173,7 +173,7 @@ public class PerlElementTypeFactory {
       case "CALL_ARGUMENTS":
         return new PerlElementTypeEx(name, PsiPerlCallArgumentsImpl.class);
       case "CODE_CAST_EXPR":
-        return new PerlElementTypeEx(name, PsiPerlCodeCastExprImpl.class);
+        return new PerlDereferenceElementType.Code(name, PsiPerlCodeCastExprImpl.class);
       case "CODE_VARIABLE":
         return new PerlElementTypeEx(name, PsiPerlCodeVariableImpl.class);
       case "COMMA_SEQUENCE_EXPR":
@@ -235,7 +235,7 @@ public class PerlElementTypeFactory {
       case "GIVEN_COMPOUND":
         return new PerlElementTypeEx(name, PsiPerlGivenCompoundImpl.class);
       case "GLOB_CAST_EXPR":
-        return new PerlElementTypeEx(name, PsiPerlGlobCastExprImpl.class);
+        return new PerlDereferenceElementType.Glob(name, PsiPerlGlobCastExprImpl.class);
       case "GLOB_SLOT":
         return new PerlElementTypeEx(name, PsiPerlGlobSlotImpl.class);
       case "GOTO_EXPR":
@@ -243,7 +243,7 @@ public class PerlElementTypeFactory {
       case "GREP_EXPR":
         return new PerlElementTypeEx(name, PsiPerlGrepExprImpl.class);
       case "HASH_CAST_EXPR":
-        return new PerlElementTypeEx(name, PsiPerlHashCastExprImpl.class);
+        return new PerlDereferenceElementType.Hash(name, PsiPerlHashCastExprImpl.class);
       case "HASH_INDEX":
         return new PerlHashIndexElementType(name, PsiPerlHashIndexImpl.class);
       case "HASH_VARIABLE":
@@ -345,11 +345,11 @@ public class PerlElementTypeFactory {
       case "SCALAR_CALL":
         return new PerlElementTypeEx(name, PsiPerlScalarCallImpl.class);
       case "SCALAR_CAST_EXPR":
-        return new PerlElementTypeEx(name, PsiPerlScalarCastExprImpl.class);
+        return new PerlDereferenceElementType.Scalar(name, PsiPerlScalarCastExprImpl.class);
       case "HASH_ELEMENT":
         return new PerlElementTypeEx(name, PsiPerlHashElementImpl.class);
       case "SCALAR_INDEX_CAST_EXPR":
-        return new PerlElementTypeEx(name, PsiPerlScalarIndexCastExprImpl.class);
+        return new PerlDereferenceElementType.ScalarIndex(name, PsiPerlScalarIndexCastExprImpl.class);
       case "SCALAR_VARIABLE":
         return new PerlElementTypeEx(name, PsiPerlScalarVariableImpl.class);
       case "SHIFT_EXPR":

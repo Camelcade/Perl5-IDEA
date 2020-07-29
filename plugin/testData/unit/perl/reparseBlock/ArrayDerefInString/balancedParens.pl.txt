@@ -1,12 +1,12 @@
 Reparsing block
 ----------
-Element(Perl5: STRING_DQ)
+Element(Perl5: ARRAY_CAST_EXPR)
 ----------
-"  text @{
+@{
     say => 'start';
     some => ;
     say =>'end';
-  }; text"
+  }
 ----------
 After typing
 ----------

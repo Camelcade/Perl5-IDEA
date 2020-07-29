@@ -20,12 +20,14 @@ import com.intellij.lang.ASTFactory;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiBuilderFactory;
+import com.intellij.lexer.FlexAdapter;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Pair;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.TokenType;
 import com.intellij.psi.text.BlockSupport;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.IReparseableElementType;
@@ -123,14 +125,20 @@ public abstract class PerlReparseableElementType extends IReparseableElementType
         bracesStack.push(type);
       }
       else {
-        IElementType opppositeBrace = PERL_BRACES_MAP_REVERSED.get(type);
-        if (opppositeBrace != null) {
-          if (bracesStack.isEmpty() || bracesStack.pop() != opppositeBrace) {
+        IElementType oppositeBrace = PERL_BRACES_MAP_REVERSED.get(type);
+        if (oppositeBrace != null) {
+          if (bracesStack.isEmpty() || bracesStack.pop() != oppositeBrace) {
             return false;
           }
         }
       }
       lexer.advance();
+    }
+  }
+
+  protected static void skipSpaces(@NotNull FlexAdapter flexAdapter) {
+    while (flexAdapter.getTokenType() == TokenType.WHITE_SPACE) {
+      flexAdapter.advance();
     }
   }
 }
