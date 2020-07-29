@@ -30,6 +30,24 @@ public abstract class PerlHeredocReparseTestCase extends PerlLightTestCase {
   public void testSomething() {doTest("something");}
 
   @Test
+  public void testScalar() {doTest("$something");}
+
+  @Test
+  public void testScalarDeref() {doTest("${\\foo();}");}
+
+  @Test
+  public void testArray() {doTest("@something");}
+
+  @Test
+  public void testArrayDeref() {doTest("@{\\foo();}");}
+
+  @Test
+  public void testEscape() {doTest("\\");}
+
+  @Test
+  public void testNewLine() {doTest("\n");}
+
+  @Test
   public void testSomethingIndented() {doTest("      something");}
 
   @Test

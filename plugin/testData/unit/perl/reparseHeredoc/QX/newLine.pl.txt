@@ -1,0 +1,399 @@
+Reparsing block
+----------
+Element(Perl5: HEREDOC_QX)
+----------
+    start qx1
+
+    end qx1
+
+----------
+After typing
+----------
+sub something {
+    say 'sub start';
+
+    say <<'MARKER_Q1';
+    start q1
+MARKER_Q1
+
+    say <<'MARKER_Q2';
+    start q2
+MARKER_Q2
+
+    say <<~'MARKER_Q1';
+        start q3
+    MARKER_Q1
+
+    say <<~'MARKER_Q3';
+        start q4
+    MARKER_Q3
+
+    # dq quoted
+    say <<"MARKER_QQ1";
+    start qq1
+MARKER_QQ1
+
+    say <<"MARKER_QQ2";
+    start qq2
+MARKER_QQ2
+
+    say <<~"MARKER_QQ1";
+        start qq3
+    MARKER_QQ1
+
+    say <<~"MARKER_QQ3";
+        start qq4
+    MARKER_QQ3
+
+    # dq bare
+    say <<MARKER_QQ1;
+    start qq5
+MARKER_QQ1
+
+    say <<MARKER_QQ2;
+    start qq6
+MARKER_QQ2
+
+    say <<~MARKER_QQ1;
+        start qq7
+    MARKER_QQ1
+
+    say <<~MARKER_QQ3;
+        start qq8
+    MARKER_QQ3
+
+    # xq quoted
+    say <<`MARKER_QX1`;
+    start qx1
+
+<caret>
+    end qx1
+MARKER_QX1
+
+    say <<`MARKER_QX2`;
+    start qx2
+MARKER_QX2
+
+    say <<~`MARKER_QX1`;
+        start qx3
+    MARKER_QX1
+
+    say <<~`MARKER_QX3`;
+        start qx4
+    MARKER_QX3
+
+    say 'sub end';
+}
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::something
+    PsiElement(Perl5: sub)('sub')
+    PsiWhiteSpace(' ')
+    PerlSubNameElementImpl(Perl5: subname)('something')
+    PsiWhiteSpace(' ')
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiWhiteSpace('\n    ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+          PsiElement(Perl5: say)('say')
+          PsiWhiteSpace(' ')
+          PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
+            PsiPerlStringSqImpl(Perl5: STRING_SQ)
+              PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
+              PerlStringContentElementImpl(Perl5: STRING_CONTENT)('sub start')
+              PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
+        PsiElement(Perl5: ;)(';')
+      PsiWhiteSpace('\n\n    ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+          PsiElement(Perl5: say)('say')
+          PsiWhiteSpace(' ')
+          PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
+            PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER)
+              PsiElement(Perl5: heredoc<<)('<<')
+              PsiPerlStringSqImpl(Perl5: STRING_SQ)
+                PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
+                PerlStringContentElementImpl(Perl5: STRING_CONTENT)('MARKER_Q1')
+                PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
+        PsiElement(Perl5: ;)(';')
+      PsiWhiteSpace('\n')
+      PerlHeredocElementImpl(Perl5: HEREDOC)
+        PerlStringContentElementImpl(Perl5: STRING_CONTENT)('    start q1\n')
+      PsiComment(Perl5: HEREDOC_END)('MARKER_Q1')
+      PsiWhiteSpace('\n\n    ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+          PsiElement(Perl5: say)('say')
+          PsiWhiteSpace(' ')
+          PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
+            PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER)
+              PsiElement(Perl5: heredoc<<)('<<')
+              PsiPerlStringSqImpl(Perl5: STRING_SQ)
+                PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
+                PerlStringContentElementImpl(Perl5: STRING_CONTENT)('MARKER_Q2')
+                PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
+        PsiElement(Perl5: ;)(';')
+      PsiWhiteSpace('\n')
+      PerlHeredocElementImpl(Perl5: HEREDOC)
+        PerlStringContentElementImpl(Perl5: STRING_CONTENT)('    start q2\n')
+      PsiComment(Perl5: HEREDOC_END)('MARKER_Q2')
+      PsiWhiteSpace('\n\n    ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+          PsiElement(Perl5: say)('say')
+          PsiWhiteSpace(' ')
+          PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
+            PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER)
+              PsiElement(Perl5: heredoc<<)('<<~')
+              PsiPerlStringSqImpl(Perl5: STRING_SQ)
+                PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
+                PerlStringContentElementImpl(Perl5: STRING_CONTENT)('MARKER_Q1')
+                PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
+        PsiElement(Perl5: ;)(';')
+      PsiWhiteSpace('\n')
+      PerlHeredocElementImpl(Perl5: HEREDOC)
+        PerlStringContentElementImpl(Perl5: STRING_CONTENT)('        start q3\n')
+      PsiWhiteSpace('    ')
+      PsiComment(Perl5: HEREDOC_END_INDENTABLE)('MARKER_Q1')
+      PsiWhiteSpace('\n\n    ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+          PsiElement(Perl5: say)('say')
+          PsiWhiteSpace(' ')
+          PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
+            PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER)
+              PsiElement(Perl5: heredoc<<)('<<~')
+              PsiPerlStringSqImpl(Perl5: STRING_SQ)
+                PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
+                PerlStringContentElementImpl(Perl5: STRING_CONTENT)('MARKER_Q3')
+                PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
+        PsiElement(Perl5: ;)(';')
+      PsiWhiteSpace('\n')
+      PerlHeredocElementImpl(Perl5: HEREDOC)
+        PerlStringContentElementImpl(Perl5: STRING_CONTENT)('        start q4\n')
+      PsiWhiteSpace('    ')
+      PsiComment(Perl5: HEREDOC_END_INDENTABLE)('MARKER_Q3')
+      PsiWhiteSpace('\n\n    ')
+      PsiComment(Perl5: COMMENT_LINE)('# dq quoted')
+      PsiWhiteSpace('\n    ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+          PsiElement(Perl5: say)('say')
+          PsiWhiteSpace(' ')
+          PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
+            PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER)
+              PsiElement(Perl5: heredoc<<)('<<')
+              PsiPerlStringDqImpl(Perl5: STRING_DQ)
+                PsiElement(Perl5: QUOTE_DOUBLE_OPEN)('"')
+                PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('MARKER_QQ1')
+                PsiElement(Perl5: QUOTE_DOUBLE_CLOSE)('"')
+        PsiElement(Perl5: ;)(';')
+      PsiWhiteSpace('\n')
+      PerlHeredocElementImpl(Perl5: HEREDOC_QQ)
+        PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('    start qq1\n')
+      PsiComment(Perl5: HEREDOC_END)('MARKER_QQ1')
+      PsiWhiteSpace('\n\n    ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+          PsiElement(Perl5: say)('say')
+          PsiWhiteSpace(' ')
+          PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
+            PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER)
+              PsiElement(Perl5: heredoc<<)('<<')
+              PsiPerlStringDqImpl(Perl5: STRING_DQ)
+                PsiElement(Perl5: QUOTE_DOUBLE_OPEN)('"')
+                PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('MARKER_QQ2')
+                PsiElement(Perl5: QUOTE_DOUBLE_CLOSE)('"')
+        PsiElement(Perl5: ;)(';')
+      PsiWhiteSpace('\n')
+      PerlHeredocElementImpl(Perl5: HEREDOC_QQ)
+        PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('    start qq2\n')
+      PsiComment(Perl5: HEREDOC_END)('MARKER_QQ2')
+      PsiWhiteSpace('\n\n    ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+          PsiElement(Perl5: say)('say')
+          PsiWhiteSpace(' ')
+          PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
+            PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER)
+              PsiElement(Perl5: heredoc<<)('<<~')
+              PsiPerlStringDqImpl(Perl5: STRING_DQ)
+                PsiElement(Perl5: QUOTE_DOUBLE_OPEN)('"')
+                PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('MARKER_QQ1')
+                PsiElement(Perl5: QUOTE_DOUBLE_CLOSE)('"')
+        PsiElement(Perl5: ;)(';')
+      PsiWhiteSpace('\n')
+      PerlHeredocElementImpl(Perl5: HEREDOC_QQ)
+        PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('        start qq3\n')
+      PsiWhiteSpace('    ')
+      PsiComment(Perl5: HEREDOC_END_INDENTABLE)('MARKER_QQ1')
+      PsiWhiteSpace('\n\n    ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+          PsiElement(Perl5: say)('say')
+          PsiWhiteSpace(' ')
+          PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
+            PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER)
+              PsiElement(Perl5: heredoc<<)('<<~')
+              PsiPerlStringDqImpl(Perl5: STRING_DQ)
+                PsiElement(Perl5: QUOTE_DOUBLE_OPEN)('"')
+                PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('MARKER_QQ3')
+                PsiElement(Perl5: QUOTE_DOUBLE_CLOSE)('"')
+        PsiElement(Perl5: ;)(';')
+      PsiWhiteSpace('\n')
+      PerlHeredocElementImpl(Perl5: HEREDOC_QQ)
+        PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('        start qq4\n')
+      PsiWhiteSpace('    ')
+      PsiComment(Perl5: HEREDOC_END_INDENTABLE)('MARKER_QQ3')
+      PsiWhiteSpace('\n\n    ')
+      PsiComment(Perl5: COMMENT_LINE)('# dq bare')
+      PsiWhiteSpace('\n    ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+          PsiElement(Perl5: say)('say')
+          PsiWhiteSpace(' ')
+          PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
+            PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER)
+              PsiElement(Perl5: heredoc<<)('<<')
+              PsiPerlStringBareImpl(Perl5: STRING_BARE)
+                PerlStringContentElementImpl(Perl5: STRING_CONTENT)('MARKER_QQ1')
+        PsiElement(Perl5: ;)(';')
+      PsiWhiteSpace('\n')
+      PerlHeredocElementImpl(Perl5: HEREDOC_QQ)
+        PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('    start qq5\n')
+      PsiComment(Perl5: HEREDOC_END)('MARKER_QQ1')
+      PsiWhiteSpace('\n\n    ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+          PsiElement(Perl5: say)('say')
+          PsiWhiteSpace(' ')
+          PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
+            PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER)
+              PsiElement(Perl5: heredoc<<)('<<')
+              PsiPerlStringBareImpl(Perl5: STRING_BARE)
+                PerlStringContentElementImpl(Perl5: STRING_CONTENT)('MARKER_QQ2')
+        PsiElement(Perl5: ;)(';')
+      PsiWhiteSpace('\n')
+      PerlHeredocElementImpl(Perl5: HEREDOC_QQ)
+        PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('    start qq6\n')
+      PsiComment(Perl5: HEREDOC_END)('MARKER_QQ2')
+      PsiWhiteSpace('\n\n    ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+          PsiElement(Perl5: say)('say')
+          PsiWhiteSpace(' ')
+          PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
+            PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER)
+              PsiElement(Perl5: heredoc<<)('<<~')
+              PsiPerlStringBareImpl(Perl5: STRING_BARE)
+                PerlStringContentElementImpl(Perl5: STRING_CONTENT)('MARKER_QQ1')
+        PsiElement(Perl5: ;)(';')
+      PsiWhiteSpace('\n')
+      PerlHeredocElementImpl(Perl5: HEREDOC_QQ)
+        PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('        start qq7\n')
+      PsiWhiteSpace('    ')
+      PsiComment(Perl5: HEREDOC_END_INDENTABLE)('MARKER_QQ1')
+      PsiWhiteSpace('\n\n    ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+          PsiElement(Perl5: say)('say')
+          PsiWhiteSpace(' ')
+          PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
+            PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER)
+              PsiElement(Perl5: heredoc<<)('<<~')
+              PsiPerlStringBareImpl(Perl5: STRING_BARE)
+                PerlStringContentElementImpl(Perl5: STRING_CONTENT)('MARKER_QQ3')
+        PsiElement(Perl5: ;)(';')
+      PsiWhiteSpace('\n')
+      PerlHeredocElementImpl(Perl5: HEREDOC_QQ)
+        PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('        start qq8\n')
+      PsiWhiteSpace('    ')
+      PsiComment(Perl5: HEREDOC_END_INDENTABLE)('MARKER_QQ3')
+      PsiWhiteSpace('\n\n    ')
+      PsiComment(Perl5: COMMENT_LINE)('# xq quoted')
+      PsiWhiteSpace('\n    ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+          PsiElement(Perl5: say)('say')
+          PsiWhiteSpace(' ')
+          PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
+            PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER)
+              PsiElement(Perl5: heredoc<<)('<<')
+              PsiPerlStringXqImpl(Perl5: STRING_XQ)
+                PsiElement(Perl5: QUOTE_TICK_OPEN)('`')
+                PerlStringContentElementImpl(Perl5: STRING_CONTENT_XQ)('MARKER_QX1')
+                PsiElement(Perl5: QUOTE_TICK_CLOSE)('`')
+        PsiElement(Perl5: ;)(';')
+      PsiWhiteSpace('\n')
+      PerlHeredocElementImpl(Perl5: HEREDOC_QX)
+        PerlStringContentElementImpl(Perl5: STRING_CONTENT_XQ)('    start qx1\n\n\n    end qx1\n')
+      PsiComment(Perl5: HEREDOC_END)('MARKER_QX1')
+      PsiWhiteSpace('\n\n    ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+          PsiElement(Perl5: say)('say')
+          PsiWhiteSpace(' ')
+          PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
+            PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER)
+              PsiElement(Perl5: heredoc<<)('<<')
+              PsiPerlStringXqImpl(Perl5: STRING_XQ)
+                PsiElement(Perl5: QUOTE_TICK_OPEN)('`')
+                PerlStringContentElementImpl(Perl5: STRING_CONTENT_XQ)('MARKER_QX2')
+                PsiElement(Perl5: QUOTE_TICK_CLOSE)('`')
+        PsiElement(Perl5: ;)(';')
+      PsiWhiteSpace('\n')
+      PerlHeredocElementImpl(Perl5: HEREDOC_QX)
+        PerlStringContentElementImpl(Perl5: STRING_CONTENT_XQ)('    start qx2\n')
+      PsiComment(Perl5: HEREDOC_END)('MARKER_QX2')
+      PsiWhiteSpace('\n\n    ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+          PsiElement(Perl5: say)('say')
+          PsiWhiteSpace(' ')
+          PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
+            PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER)
+              PsiElement(Perl5: heredoc<<)('<<~')
+              PsiPerlStringXqImpl(Perl5: STRING_XQ)
+                PsiElement(Perl5: QUOTE_TICK_OPEN)('`')
+                PerlStringContentElementImpl(Perl5: STRING_CONTENT_XQ)('MARKER_QX1')
+                PsiElement(Perl5: QUOTE_TICK_CLOSE)('`')
+        PsiElement(Perl5: ;)(';')
+      PsiWhiteSpace('\n')
+      PerlHeredocElementImpl(Perl5: HEREDOC_QX)
+        PerlStringContentElementImpl(Perl5: STRING_CONTENT_XQ)('        start qx3\n')
+      PsiWhiteSpace('    ')
+      PsiComment(Perl5: HEREDOC_END_INDENTABLE)('MARKER_QX1')
+      PsiWhiteSpace('\n\n    ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+          PsiElement(Perl5: say)('say')
+          PsiWhiteSpace(' ')
+          PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
+            PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER)
+              PsiElement(Perl5: heredoc<<)('<<~')
+              PsiPerlStringXqImpl(Perl5: STRING_XQ)
+                PsiElement(Perl5: QUOTE_TICK_OPEN)('`')
+                PerlStringContentElementImpl(Perl5: STRING_CONTENT_XQ)('MARKER_QX3')
+                PsiElement(Perl5: QUOTE_TICK_CLOSE)('`')
+        PsiElement(Perl5: ;)(';')
+      PsiWhiteSpace('\n')
+      PerlHeredocElementImpl(Perl5: HEREDOC_QX)
+        PerlStringContentElementImpl(Perl5: STRING_CONTENT_XQ)('        start qx4\n')
+      PsiWhiteSpace('    ')
+      PsiComment(Perl5: HEREDOC_END_INDENTABLE)('MARKER_QX3')
+      PsiWhiteSpace('\n\n    ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+          PsiElement(Perl5: say)('say')
+          PsiWhiteSpace(' ')
+          PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
+            PsiPerlStringSqImpl(Perl5: STRING_SQ)
+              PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
+              PerlStringContentElementImpl(Perl5: STRING_CONTENT)('sub end')
+              PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
+        PsiElement(Perl5: ;)(';')
+      PsiWhiteSpace('\n')
+      PsiElement(Perl5: })('}')
