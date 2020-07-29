@@ -1,0 +1,31 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
+sub something{
+  tr{ma# comment {<caret>tc h}<replacement $3>;
+}
+
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::something
+    PsiElement(Perl5: sub)('sub')
+    PsiWhiteSpace(' ')
+    PerlSubNameElementImpl(Perl5: subname)('something')
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiWhiteSpace('\n  ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlTrRegexImpl(Perl5: TR_REGEX)
+          PsiElement(Perl5: tr)('tr')
+          PsiElement(Perl5: r{)('{')
+          PsiPerlTrSearchlistImpl(Perl5: TR_SEARCHLIST)
+            PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('ma# comment {tc h}<replacement $3>;\n')
+          PsiErrorElement:<expr>, <oct char>, Perl5: "-, Perl5: /m, Perl5: STRING_CONTENT_QQ, Perl5: \1, Perl5: \E, Perl5: \F, Perl5: \L, Perl5: \N, Perl5: \Q, Perl5: \U, Perl5: \\", Perl5: \\u, Perl5: \a, Perl5: \b, Perl5: \c*, Perl5: \e, Perl5: \f, Perl5: \l, Perl5: \n, Perl5: \r, Perl5: \t, Perl5: \x, Perl5: r/ or Perl5: r} expected, got '}'
+            <empty list>
+  PsiElement(Perl5: r})('}')
+  PsiWhiteSpace('\n')

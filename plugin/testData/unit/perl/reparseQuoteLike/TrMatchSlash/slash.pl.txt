@@ -1,0 +1,52 @@
+Reparsing block
+----------
+Element(Perl5: BLOCK)
+----------
+{
+  tr/matc h/r eplacement/;
+}
+----------
+After typing
+----------
+sub something{
+  tr/mat# comment /<caret>c h/r eplacement/;
+}
+
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::something
+    PsiElement(Perl5: sub)('sub')
+    PsiWhiteSpace(' ')
+    PerlSubNameElementImpl(Perl5: subname)('something')
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiWhiteSpace('\n  ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlTrRegexImpl(Perl5: TR_REGEX)
+          PsiElement(Perl5: tr)('tr')
+          PsiElement(Perl5: r{)('/')
+          PsiPerlTrSearchlistImpl(Perl5: TR_SEARCHLIST)
+            PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('mat# comment ')
+          PsiElement(Perl5: r/)('/')
+          PsiPerlTrReplacementlistImpl(Perl5: TR_REPLACEMENTLIST)
+            PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('c h')
+          PsiElement(Perl5: r})('/')
+          PsiPerlTrModifiersImpl(Perl5: TR_MODIFIERS)
+            PsiElement(Perl5: /m)('r')
+        PsiErrorElement:Semicolon expected
+          <empty list>
+      PsiWhiteSpace(' ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlMulExprImpl(Perl5: MUL_EXPR)
+          PsiPerlSubCallImpl(SUB_CALL)
+            PsiPerlMethodImpl(Perl5: METHOD)
+              PerlSubNameElementImpl(Perl5: subname)('eplacement')
+          PsiElement(Perl5: /)('/')
+          PsiErrorElement:<expr> expected, got ';'
+            <empty list>
+        PsiElement(Perl5: ;)(';')
+      PsiWhiteSpace('\n')
+      PsiElement(Perl5: })('}')
+  PsiWhiteSpace('\n')

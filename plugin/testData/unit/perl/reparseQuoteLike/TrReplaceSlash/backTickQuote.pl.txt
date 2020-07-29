@@ -1,0 +1,39 @@
+Reparsing block
+----------
+Element(Perl5: BLOCK)
+----------
+{
+  tr/matc h/r eplacement/;
+}
+----------
+After typing
+----------
+sub something{
+  tr/matc h/r epl# comment `<caret>acement/;
+}
+
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::something
+    PsiElement(Perl5: sub)('sub')
+    PsiWhiteSpace(' ')
+    PerlSubNameElementImpl(Perl5: subname)('something')
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiWhiteSpace('\n  ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlTrRegexImpl(Perl5: TR_REGEX)
+          PsiElement(Perl5: tr)('tr')
+          PsiElement(Perl5: r{)('/')
+          PsiPerlTrSearchlistImpl(Perl5: TR_SEARCHLIST)
+            PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('matc h')
+          PsiElement(Perl5: r/)('/')
+          PsiPerlTrReplacementlistImpl(Perl5: TR_REPLACEMENTLIST)
+            PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('r epl# comment `acement')
+          PsiElement(Perl5: r})('/')
+        PsiElement(Perl5: ;)(';')
+      PsiWhiteSpace('\n')
+      PsiElement(Perl5: })('}')
+  PsiWhiteSpace('\n')

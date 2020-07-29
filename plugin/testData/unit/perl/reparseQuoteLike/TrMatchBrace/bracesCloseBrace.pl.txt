@@ -1,0 +1,51 @@
+Reparsing block
+----------
+Element(Perl5: BLOCK)
+----------
+{
+  tr{matc h}<replacement $3>;
+}
+----------
+After typing
+----------
+sub something{
+  tr{ma# comment }<caret>tc h}<replacement $3>;
+}
+
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::something
+    PsiElement(Perl5: sub)('sub')
+    PsiWhiteSpace(' ')
+    PerlSubNameElementImpl(Perl5: subname)('something')
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiWhiteSpace('\n  ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlTrRegexImpl(Perl5: TR_REGEX)
+          PsiElement(Perl5: tr)('tr')
+          PsiElement(Perl5: r{)('{')
+          PsiPerlTrSearchlistImpl(Perl5: TR_SEARCHLIST)
+            PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('ma# comment ')
+          PsiElement(Perl5: r})('}')
+          PsiElement(Perl5: r{)('t')
+          PsiPerlTrReplacementlistImpl(Perl5: TR_REPLACEMENTLIST)
+            PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('c h}<replacemen')
+          PsiElement(Perl5: r})('t')
+        PsiErrorElement:Semicolon expected
+          <empty list>
+      PsiWhiteSpace(' ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlCompareExprImpl(Perl5: COMPARE_EXPR)
+          PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+            PsiElement(Perl5: $$)('$')
+            PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('3')
+          PsiElement(Perl5: >)('>')
+          PsiErrorElement:<expr> expected, got ';'
+            <empty list>
+        PsiElement(Perl5: ;)(';')
+      PsiWhiteSpace('\n')
+      PsiElement(Perl5: })('}')
+  PsiWhiteSpace('\n')

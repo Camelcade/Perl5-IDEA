@@ -526,4 +526,40 @@ public abstract class PerlQuoteLikeReparseTestCase extends PerlReparseMultiTestC
              "}\n";
     }
   }
+
+  public static class TrMatchSlash extends PerlQuoteLikeReparseTestCase {
+    @Override
+    protected @NotNull String buildCodeSample() {
+      return "sub something{\n" +
+             "  tr/mat<caret>c h/r eplacement/;\n" +
+             "}\n";
+    }
+  }
+
+  public static class TrReplaceSlash extends PerlQuoteLikeReparseTestCase {
+    @Override
+    protected @NotNull String buildCodeSample() {
+      return "sub something{\n" +
+             "  tr/matc h/r epl<caret>acement/;\n" +
+             "}\n";
+    }
+  }
+
+  public static class TrMatchBrace extends PerlQuoteLikeReparseTestCase {
+    @Override
+    protected @NotNull String buildCodeSample() {
+      return "sub something{\n" +
+             "  tr{ma<caret>tc h}<replacement $3>;\n" +
+             "}\n";
+    }
+  }
+
+  public static class TrReplaceBrace extends PerlQuoteLikeReparseTestCase {
+    @Override
+    protected @NotNull String buildCodeSample() {
+      return "sub something{\n" +
+             "  tr{matc h}{repla<caret>cement 3};\n" +
+             "}\n";
+    }
+  }
 }
