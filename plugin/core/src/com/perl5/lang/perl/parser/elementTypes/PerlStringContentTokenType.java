@@ -19,11 +19,12 @@ package com.perl5.lang.perl.parser.elementTypes;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
+import com.perl5.lang.perl.lexer.PerlTokenSets;
+import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
 import org.jetbrains.annotations.NotNull;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.HEREDOC_OPENER;
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.STRING_BARE;
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 
 public class PerlStringContentTokenType extends PerlReparseableTokenType {
   public PerlStringContentTokenType(@NotNull String debugName) {
@@ -48,8 +49,38 @@ public class PerlStringContentTokenType extends PerlReparseableTokenType {
     if (parentType == STRING_BARE) {
       return isBareStringContentReparseable(newText);
     }
-
+    if (PerlTokenSets.QUOTED_STRINGS.contains(parentType)) {
+      return isQuotedStringContentReparseable(newText, parent);
+    }
+    // fixme heredocs?
     return false;
+  }
+
+  private boolean isQuotedStringContentReparseable(@NotNull CharSequence newText, @NotNull ASTNode stringNode) {
+    if (newText.length() == 0) {
+      return false;
+    }
+    ASTNode openQuoteNode = stringNode.findChildByType(PerlTokenSets.OPEN_QUOTES);
+    if (openQuoteNode == null) {
+      return false;
+    }
+    CharSequence openQuoteChars = openQuoteNode.getChars();
+    if (openQuoteChars.length() != 1) {
+      return false;
+    }
+    char openQuote = openQuoteChars.charAt(0);
+    char closeQuote = PerlString.getQuoteCloseChar(openQuote);
+    // fixme this may be more type-dependent.
+    String forbiddenChars = PsiUtilCore.getElementType(stringNode) == STRING_SQ ? "\\" + openQuote : "$@\\" + openQuote;
+    if (openQuote != closeQuote) {
+      forbiddenChars += closeQuote;
+    }
+    for (int i = 0; i < newText.length(); i++) {
+      if (forbiddenChars.indexOf(newText.charAt(i)) > -1) {
+        return false;
+      }
+    }
+    return true;
   }
 
   private boolean isBareStringContentReparseable(@NotNull CharSequence newText) {
