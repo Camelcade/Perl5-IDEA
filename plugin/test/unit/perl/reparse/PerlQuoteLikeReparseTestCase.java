@@ -29,6 +29,9 @@ public abstract class PerlQuoteLikeReparseTestCase extends PerlReparseMultiTestC
   public void testNewItem() {doTest("new_item");}
 
   @Test
+  public void testNewLine() {doTest("\n");}
+
+  @Test
   public void testDoubleQuote() {doTest("\"");}
 
   @Test
@@ -36,6 +39,12 @@ public abstract class PerlQuoteLikeReparseTestCase extends PerlReparseMultiTestC
 
   @Test
   public void testScalarCast() {doTest("${say $something}");}
+
+  @Test
+  public void testArray() {doTest("@something");}
+
+  @Test
+  public void testArrayCast() {doTest("@{say $something}");}
 
   @Test
   public void testDoubleQuoteEscaped() {doTest("\\\"");}

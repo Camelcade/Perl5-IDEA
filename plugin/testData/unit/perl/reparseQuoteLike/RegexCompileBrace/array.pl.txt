@@ -1,0 +1,46 @@
+Reparsing block
+----------
+Element(Perl5: COMPILE_REGEX)
+----------
+qr{test
+    say 'hi';
+    
+    say 'hi'
+  }
+----------
+After typing
+----------
+sub something{
+  qr{test
+    say 'hi';
+    @something<caret>
+    say 'hi'
+  };
+}
+
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::something
+    PsiElement(Perl5: sub)('sub')
+    PsiWhiteSpace(' ')
+    PerlSubNameElementImpl(Perl5: subname)('something')
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiWhiteSpace('\n  ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlCompileRegexImpl(Perl5: COMPILE_REGEX)
+          PsiElement(Perl5: qr)('qr')
+          PsiElement(Perl5: r{)('{')
+          PsiPerlPerlRegexImpl(Perl5: PERL_REGEX)
+            PsiElement(Perl5: regex)('test\n    say 'hi';\n    ')
+            PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE)
+              PsiElement(Perl5: $@)('@')
+              PerlVariableNameElementImpl(Perl5: ARRAY_NAME)('something')
+            PsiElement(Perl5: regex)('\n    say 'hi'\n  ')
+          PsiElement(Perl5: r})('}')
+        PsiElement(Perl5: ;)(';')
+      PsiWhiteSpace('\n')
+      PsiElement(Perl5: })('}')
+  PsiWhiteSpace('\n')

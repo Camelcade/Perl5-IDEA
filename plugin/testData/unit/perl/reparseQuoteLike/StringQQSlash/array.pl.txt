@@ -1,0 +1,37 @@
+Reparsing block
+----------
+Element(Perl5: STRING_DQ)
+----------
+qq/test   other/
+----------
+After typing
+----------
+sub something{
+  qq/test  @something<caret> other/;
+}
+
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::something
+    PsiElement(Perl5: sub)('sub')
+    PsiWhiteSpace(' ')
+    PerlSubNameElementImpl(Perl5: subname)('something')
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiWhiteSpace('\n  ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlStringDqImpl(Perl5: STRING_DQ)
+          PsiElement(Perl5: qq)('qq')
+          PsiElement(Perl5: QUOTE_DOUBLE_OPEN)('/')
+          PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('test  ')
+          PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE)
+            PsiElement(Perl5: $@)('@')
+            PerlVariableNameElementImpl(Perl5: ARRAY_NAME)('something')
+          PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)(' other')
+          PsiElement(Perl5: QUOTE_DOUBLE_CLOSE)('/')
+        PsiElement(Perl5: ;)(';')
+      PsiWhiteSpace('\n')
+      PsiElement(Perl5: })('}')
+  PsiWhiteSpace('\n')

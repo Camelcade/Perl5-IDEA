@@ -1,0 +1,57 @@
+Reparsing block
+----------
+Element(Perl5: MATCH_REGEX)
+----------
+m{test
+    say 'hi';
+    
+    say 'hi'
+  }x
+----------
+After typing
+----------
+sub something{
+  m{test
+    say 'hi';
+    @something<caret>
+    say 'hi'
+  }x;
+}
+
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::something
+    PsiElement(Perl5: sub)('sub')
+    PsiWhiteSpace(' ')
+    PerlSubNameElementImpl(Perl5: subname)('something')
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiWhiteSpace('\n  ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlMatchRegexImpl(Perl5: MATCH_REGEX)
+          PsiElement(Perl5: m)('m')
+          PsiElement(Perl5: r{)('{')
+          PsiPerlPerlRegexImpl(Perl5: PERL_REGEX)
+            PsiElement(Perl5: regex)('test')
+            PsiWhiteSpace('\n    ')
+            PsiElement(Perl5: regex)('say')
+            PsiWhiteSpace(' ')
+            PsiElement(Perl5: regex)(''hi';')
+            PsiWhiteSpace('\n    ')
+            PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE)
+              PsiElement(Perl5: $@)('@')
+              PerlVariableNameElementImpl(Perl5: ARRAY_NAME)('something')
+            PsiWhiteSpace('\n    ')
+            PsiElement(Perl5: regex)('say')
+            PsiWhiteSpace(' ')
+            PsiElement(Perl5: regex)(''hi'')
+            PsiWhiteSpace('\n  ')
+          PsiElement(Perl5: r})('}')
+          PsiPerlPerlRegexModifiersImpl(Perl5: PERL_REGEX_MODIFIERS)
+            PsiElement(Perl5: /m)('x')
+        PsiElement(Perl5: ;)(';')
+      PsiWhiteSpace('\n')
+      PsiElement(Perl5: })('}')
+  PsiWhiteSpace('\n')
