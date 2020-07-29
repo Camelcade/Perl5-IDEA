@@ -60,16 +60,16 @@ import java.util.List;
 import static com.intellij.psi.TokenType.NEW_LINE_INDENT;
 import static com.intellij.psi.TokenType.WHITE_SPACE;
 import static com.perl5.lang.perl.PerlParserDefinition.MEANINGLESS_TOKENS;
+import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
 
 public class PerlPsiUtil implements PerlElementTypes {
-  private static final TokenSet IGNORE_WHEN_COMPARING = TokenSet.create(
-    WHITE_SPACE, NEW_LINE_INDENT,
-    COMMENT_LINE, COMMENT_ANNOTATION,
-    LEFT_BRACE_ARRAY, LEFT_BRACE_CODE, LEFT_BRACE_GLOB, LEFT_BRACE_HASH, LEFT_BRACE_SCALAR,
-    RIGHT_BRACE_ARRAY, RIGHT_BRACE_CODE, RIGHT_BRACE_GLOB, RIGHT_BRACE_HASH, RIGHT_BRACE_SCALAR,
-    SEMICOLON,
-    HEREDOC, HEREDOC_END, HEREDOC_END_INDENTABLE, HEREDOC_QQ, HEREDOC_QX
-  );
+  private static final TokenSet IGNORE_WHEN_COMPARING = TokenSet.orSet(
+    HEREDOC_BODIES_TOKENSET,
+    HEREDOC_ENDS,
+    VARIABLE_OPEN_BRACES,
+    VARIABLE_CLOSE_BRACES,
+    TokenSet.create(WHITE_SPACE, NEW_LINE_INDENT, COMMENT_LINE, COMMENT_ANNOTATION, SEMICOLON
+    ));
 
   public static final char SINGLE_QUOTE_CHAR = '\'';
   public static final String SINGLE_QUOTE = "" + SINGLE_QUOTE_CHAR;
