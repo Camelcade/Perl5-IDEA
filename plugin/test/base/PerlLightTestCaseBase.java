@@ -136,8 +136,8 @@ import com.intellij.testFramework.LightVirtualFile;
 import com.intellij.testFramework.MapDataContext;
 import com.intellij.testFramework.ParsingTestCase;
 import com.intellij.testFramework.UsefulTestCase;
+import com.intellij.testFramework.fixtures.BasePlatformTestCase;
 import com.intellij.testFramework.fixtures.CodeInsightTestUtil;
-import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.intellij.testFramework.utils.parameterInfo.MockCreateParameterInfoContext;
 import com.intellij.ui.components.breadcrumbs.Crumb;
@@ -221,7 +221,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @RunWith(JUnit4.class)
-public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestCase {
+public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   protected static final String PER_TEST_CODE = "<per test code>";
   private static final String START_FOLD = "<fold\\stext='[^']*'(\\sexpand='[^']*')*>";
   private static final String END_FOLD = "</fold>";
@@ -304,6 +304,14 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     finally {
       super.tearDown();
     }
+  }
+
+  protected PsiFile getFile() {
+    return myFixture.getFile();
+  }
+
+  protected Editor getEditor() {
+    return myFixture.getEditor();
   }
 
   /**
