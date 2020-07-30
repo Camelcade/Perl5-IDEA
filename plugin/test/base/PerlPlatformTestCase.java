@@ -68,12 +68,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.concurrency.Promise;
 import org.junit.Assume;
-import org.junit.Rule;
-import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
-import org.junit.runners.model.Statement;
 
 import java.io.File;
 import java.io.IOException;
@@ -94,16 +91,6 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
   private static final String MOJO_LIB_SEPARATOR = "@";
   private static final Key<CapturingProcessAdapter> ADAPTER_KEY = Key.create("process.adapter");
 
-  @Rule
-  public final TestRule myBaseRule = (base, description) ->
-    new Statement() {
-      @Override
-      public void evaluate() throws Throwable {
-        setName(description.getMethodName());
-        doEvaluate(description);
-        runBare();
-      }
-    };
   protected final Disposable myPerlLightTestCaseDisposable = Disposer.newDisposable();
 
   @Override
@@ -116,7 +103,7 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
   protected @NotNull Module doCreateRealModule(@NotNull String moduleName) {
     Module module = super.doCreateRealModule(moduleName);
     try {
-      VirtualFile moduleRoot = getProject().getBaseDir().createChildDirectory(this, moduleName);
+      VirtualFile moduleRoot = getOrCreateProjectBaseDir().createChildDirectory(this, moduleName);
       ModuleRootModificationUtil.addContentRoot(module, moduleRoot);
     }
     catch (IOException e) {

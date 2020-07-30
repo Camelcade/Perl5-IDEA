@@ -204,12 +204,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.Assert;
 import org.junit.Assume;
-import org.junit.Rule;
-import org.junit.rules.TestRule;
-import org.junit.runner.Description;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
-import org.junit.runners.model.Statement;
 
 import javax.swing.*;
 import java.io.File;
@@ -256,26 +252,6 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   private String myCompletionResultLookupString = null;
   private int myCompletionResultEditorOffset = -1;
   private int myCompletionInvocationCount = 0;
-
-  @Rule
-  public final TestRule myBaseRule = (base, description) ->
-    new Statement() {
-      @Override
-      public void evaluate() throws Throwable {
-        setName(description.getMethodName());
-        doEvaluate(description);
-        runBare();
-      }
-    };
-
-  /**
-   * As far as we can't provide additional rules, because of hacky way main rule works, you should
-   * put additional logic in here
-   *
-   * @param description test method description
-   */
-  protected void doEvaluate(@NotNull Description description) {
-  }
 
   /**
    * @return test data path relative to the module root
