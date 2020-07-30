@@ -626,15 +626,13 @@ private statement_item ::=
 // invoked from PerlUseVarsDeclarationsParser
 private use_vars_declarations ::= {variable_declaration_element|glob_variable|code_variable}*
 
-namespace_definition ::= namespace_definition_name (block_lazy | <<parseSemicolon>> <<parseNamespaceContent>>) {pin=1 recoverWhile=recover_statement}
+namespace_definition ::= namespace_definition_name (block | <<parseSemicolon>> <<parseNamespaceContent>>) {pin=1 recoverWhile=recover_statement}
 private namespace_definition_name ::= 'package' any_package [perl_version] {pin=1 recoverWhile=recover_statement}
 namespace_content ::= real_namespace_content
 private real_namespace_content ::= {!'package' file_item} *  {extends=block recoverWhile=recover_statement} //
 
 // used in com.perl5.lang.perl.parser.PerlLazyBlockParser
 block_braceless ::= file_items {extends=block hooks=[rightBinder="GREEDY_RIGHT_BINDER" leftBinder="GREEDY_LEFT_BINDER"]}
-block_lazy ::= '{' <<parseLazyBlockContents>> '}' {pin=1 elementType=block hooks=[collapse]}
-//private block_lazy ::= block
 block ::= '{' block_content '}' {extraRoot=true pin=1}
 // this is uncertain or derivative block. should be not reparseable, may be a hash
 private block_content ::= file_item * {recoverWhile=recover_statement}
@@ -664,7 +662,7 @@ private compound_statement ::=
     | cases_sequence
 
 
-named_block ::= BLOCK_NAME block_lazy
+named_block ::= BLOCK_NAME block
 
 if_compound ::=  'if' conditional_block if_compound_elsif * [if_compound_else]  {pin=1}
 unless_compound ::=  'unless' conditional_block if_compound_elsif * [if_compound_else]  {pin=1}
@@ -716,7 +714,7 @@ continue_block ::= continue_block_opener block {pin=1}
 private continue_block_opener ::= 'continue' &'{'
 
 block_compound ::= parse_block_compound
-private parse_block_compound ::= &('{') !(anon_hash_lookahead) block_lazy [[POD] continue_block] !('->')
+private parse_block_compound ::= &('{') !(anon_hash_lookahead) block [[POD] continue_block] !('->')
 
 // for/foreach
 // fixme why the heck there is no parsing error on "for" and there is an error on "use", both pinned
@@ -741,7 +739,7 @@ private normal_statement ::= expr [<<parseStatementModifier>>] {pin=1}
 //private normal_statement_body ::= expr {recoverWhile=recover_statement}
 
 // fixme adjust parsing of this thing to avoid duplicates
-sub_definition ::=  ['my'|'our'|'state'|'async'] 'sub' sub_names_token sub_definition_parameters block_lazy
+sub_definition ::=  ['my'|'our'|'state'|'async'] 'sub' sub_names_token sub_definition_parameters block
 sub_declaration ::=  ['my'|'our'|'state'] 'sub' sub_names_token sub_declaration_parameters <<statementSemi>>
 private sub_declaration_parameters ::= sub_definition_parameters {recoverWhile=recover_statement}
 
@@ -1027,13 +1025,6 @@ file_glob_expr ::= LEFT_ANGLE qq_string_content_with_lp RIGHT_ANGLE
 
 ////////////////////////// regular expressions /////////////////////////////////////////////////////////////////////////
 // pinning quotes leads to bug with replacement block
-private compile_regex_lazy ::= 'qr' match_regex_body_lazy {pin=1}
-private replacement_regex_lazy ::= 's' match_regex_body_lazy [match_regex_body_lazy|match_eval_regex_body_lazy]  {pin=1}
-private match_regex_lazy ::= ['m'] match_regex_body_lazy
-private match_regex_body_lazy ::= 'r{' <<parseLazyQuotedContents 'REGEX_QUOTE_OPEN, REGEX_QUOTE_CLOSE'>> 'r}' '/m' * {pin=1}
-private match_eval_regex_body_lazy ::= 're{' <<parseLazyQuotedContents 'REGEX_QUOTE_OPEN_E, REGEX_QUOTE_CLOSE'>> 'r}' '/m' * {pin=1}
-
-
 compile_regex ::=   'qr' match_regex_body {pin=1 extraRoot=true}
 match_regex ::=   ['m'] match_regex_body {extraRoot=true}
 private match_regex_body ::= regex_match REGEX_QUOTE_CLOSE [perl_regex_modifiers]
@@ -1049,12 +1040,11 @@ replacement_regex ::=
 private regex_match ::= 'r{' [perl_regex]
 private regex_replace ::= regex_replace_regex | regex_replace_code
 
-private regex_replace_regex ::= {'r/' | 'r}' 'r{' } regex_replacement {pin=1}
-regex_replacement ::= regex_replacement_content {recoverWhile=recover_regex_replacement}
+private regex_replace_regex ::= {'r/' | 'r}' 'r{' } regex_replacement
+regex_replacement ::= regex_replacement_content
 private regex_replacement_content ::= [qq_string_content]
-private regex_replace_code ::= {'re/' | 'r}' 're{' } [regex_code] {pin=1}
-private regex_code ::= block_braceless {recoverWhile=recover_regex_replacement}
-private recover_regex_replacement ::= !('r}')
+private regex_replace_code ::= {'re/' | 'r}' 're{' } [regex_code]
+private regex_code ::= block_braceless
 
 perl_regex_modifiers ::= '/m' +
 perl_regex ::= perl_regex_item * {hooks=[rightBinder="GREEDY_RIGHT_BINDER" leftBinder="GREEDY_LEFT_BINDER"]}
@@ -1271,7 +1261,6 @@ number_constant ::= NUMBER | NUMBER_VERSION | NUMBER_HEX | NUMBER_OCT | NUMBER_B
 
 private string ::= string_bare | string_sq | string_dq | string_xq | heredoc_opener
 
-private string_dq_lazy ::= ['qq'] QUOTE_DOUBLE_OPEN <<parseLazyQuotedContents 'QUOTE_DOUBLE_OPEN, QUOTE_DOUBLE_CLOSE'>> QUOTE_DOUBLE_CLOSE  {pin=2} // elementType=string_dq hooks=[collapse]}
 string_dq ::= [ 'qq'] quoted_qq_string {extraRoot=true}
 private quoted_qq_string ::= QUOTE_DOUBLE_OPEN [qq_string_content_with_lp] QUOTE_DOUBLE_CLOSE {pin=1}
 private qq_string_content_with_lp ::= qq_string_content
@@ -1305,7 +1294,6 @@ private oct_char_body_braced ::= '"{' oct_char_body_content_braced '}"' {pin=1}
 private oct_char_body_content_braced ::= char_code_oct {recoverWhile=recover_string_braces}
 private char_code_oct ::= NUMBER_OCT {name="octal characcter code"}
 
-private string_xq_lazy ::= ['qx'] QUOTE_TICK_OPEN <<parseLazyQuotedContents 'QUOTE_TICK_OPEN, QUOTE_TICK_CLOSE'>> QUOTE_TICK_CLOSE {pin=2} // elementType=string_xq hooks=[collapse]}
 string_xq ::= [ 'qx'] quoted_xq_string {extraRoot=true}
 private quoted_xq_string ::= QUOTE_TICK_OPEN [qx_string_content] QUOTE_TICK_CLOSE {pin=1}
 private qx_string_content ::= qx_string_element+
