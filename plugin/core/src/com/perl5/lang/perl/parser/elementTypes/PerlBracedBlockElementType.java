@@ -37,6 +37,11 @@ public abstract class PerlBracedBlockElementType extends PerlReparseableElementT
   }
 
   @Override
+  public boolean reuseCollapsedTokens() {
+    return true;
+  }
+
+  @Override
   public final boolean isParsable(@Nullable ASTNode parent,
                                   @NotNull CharSequence buffer,
                                   @NotNull Language fileLanguage,

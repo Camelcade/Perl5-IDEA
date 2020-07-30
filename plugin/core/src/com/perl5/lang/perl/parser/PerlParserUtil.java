@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.parser;
 
+import com.intellij.lang.LighterASTNode;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
 import com.intellij.lang.WhitespacesAndCommentsBinder;
@@ -37,6 +38,14 @@ import static com.intellij.lang.WhitespacesBinders.GREEDY_RIGHT_BINDER;
 
 
 public class PerlParserUtil extends GeneratedParserUtilBase implements PerlElementTypes {
+  public static final Hook<Void> COLLAPSE = (builder, marker, param) -> {
+    if (marker == null) {
+      return null;
+    }
+    PsiBuilder.Marker res = marker.precede();
+    res.collapse(((LighterASTNode)marker).getTokenType());
+    return res;
+  };
 
 
   public static final TokenSet VERSION_TOKENS = TokenSet.create(
@@ -469,6 +478,71 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
     mark.rollbackTo();
     return false;
   }
+
+  public static boolean parseLazyBlockContents(@NotNull PsiBuilder b, int l) {
+    int depth = 0;
+    while (!b.eof()) {
+      IElementType tokenType = b.getTokenType();
+      if (tokenType == LEFT_BRACE) {
+        depth++;
+      }
+      else if (tokenType == RIGHT_BRACE) {
+        if (depth == 0) {
+          break;
+        }
+        depth--;
+      }
+      else if (tokenType == QUOTE_DOUBLE_OPEN || tokenType == RESERVED_QQ) {
+        PerlParserImpl.string_dq_lazy(b, l);
+        continue;
+      }
+      else if (tokenType == QUOTE_TICK_OPEN || tokenType == RESERVED_QX) {
+        PerlParserImpl.string_xq_lazy(b, l);
+        continue;
+      }
+      else if (tokenType == RESERVED_QR) {
+        PerlParserImpl.compile_regex_lazy(b, l);
+        continue;
+      }
+      else if (tokenType == RESERVED_S) {
+        PerlParserImpl.replacement_regex_lazy(b, l);
+        continue;
+      }
+      else if (tokenType == REGEX_QUOTE_OPEN || tokenType == RESERVED_M) {
+        PerlParserImpl.match_regex_lazy(b, l);
+        continue;
+      }
+      else if (depth == 0 &&
+               tokenType == QUOTE_DOUBLE_CLOSE ||
+               tokenType == QUOTE_TICK_CLOSE ||
+               tokenType == REGEX_QUOTE_E ||
+               tokenType == REGEX_QUOTE_CLOSE ||
+               tokenType == REGEX_QUOTE) {
+        break;
+      }
+      b.advanceLexer();
+    }
+    return true;
+  }
+
+  public static boolean parseLazyQuotedContents(@NotNull PsiBuilder b, int l, IElementType openQuote, IElementType closeQuote) {
+    int depth = 0;
+    while (!b.eof()) {
+      IElementType tokenType = b.getTokenType();
+      if (tokenType == openQuote) {
+        depth++;
+      }
+      else if (tokenType == closeQuote) {
+        if (depth == 0) {
+          break;
+        }
+        depth--;
+      }
+      b.advanceLexer();
+    }
+    return true;
+  }
+
 
   public static boolean parseBareString(@NotNull PsiBuilder b, int l) {
     IElementType type = b.getTokenType();

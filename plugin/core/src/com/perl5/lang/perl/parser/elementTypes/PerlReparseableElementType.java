@@ -16,10 +16,7 @@
 
 package com.perl5.lang.perl.parser.elementTypes;
 
-import com.intellij.lang.ASTFactory;
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.PsiBuilder;
-import com.intellij.lang.PsiBuilderFactory;
+import com.intellij.lang.*;
 import com.intellij.lexer.FlexAdapter;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.diagnostic.Logger;
@@ -34,7 +31,6 @@ import com.intellij.psi.tree.IReparseableElementType;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.lexer.PerlLexingContext;
 import com.perl5.lang.perl.lexer.adapters.PerlMergingLexerAdapter;
-import com.perl5.lang.perl.parser.PerlParserImpl;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import com.perl5.lang.perl.util.PerlTimeLogger;
 import org.jetbrains.annotations.NonNls;
@@ -69,17 +65,25 @@ public abstract class PerlReparseableElementType extends IReparseableElementType
   @Override
   public ASTNode parseContents(@NotNull ASTNode chameleon) {
     PerlTimeLogger logger = PerlTimeLogger.create(LOG);
-    PsiElement parentElement = chameleon.getTreeParent().getPsi();
-    Project project = parentElement.getProject();
+    PsiElement psiElement = chameleon.getPsi();
+
+    Project project = psiElement.getProject();
     CharSequence newChars = chameleon.getChars();
+    Language contextLanguage = psiElement.getContainingFile().getLanguage();
+    if (!contextLanguage.isKindOf(PerlLanguage.INSTANCE)) {
+      // assuming we are in lazy parsable perl node
+      contextLanguage = PerlLanguage.INSTANCE;
+    }
+
     PsiBuilder builder = PsiBuilderFactory.getInstance().createBuilder(
       project,
       chameleon,
-      new PerlMergingLexerAdapter(getLexingContext(parentElement.getProject(), chameleon)),
-      getLanguage(),
+      new PerlMergingLexerAdapter(getLexingContext(project, chameleon)), // this lexer should be language-dependent
+      contextLanguage,
       newChars);
 
-    ASTNode result = PerlParserImpl.INSTANCE.parse(this, builder).getFirstChildNode();
+    PsiParser parser = LanguageParserDefinitions.INSTANCE.forLanguage(contextLanguage).createParser(project);
+    ASTNode result = parser.parse(this, builder).getFirstChildNode();
     logger.debug("Parsed: ", PerlTimeLogger.kb(newChars.length()), " kb of ", this);
     return result;
   }

@@ -14,7 +14,7 @@ Perl5
             PsiPerlBlockCompoundImpl(Perl5: BLOCK_COMPOUND)
               PsiPerlBlockImpl(Perl5: BLOCK)
                 PsiElement(Perl5: {)('{')
-                PsiErrorElement:Perl5: } expected, got '/'
+                PsiErrorElement:Perl5: } expected
                   <empty list>
           PsiElement(Perl5: r})('/')
           PsiPerlPerlRegexModifiersImpl(Perl5: PERL_REGEX_MODIFIERS)
@@ -61,7 +61,7 @@ Perl5
             PsiPerlBlockCompoundImpl(Perl5: BLOCK_COMPOUND)
               PsiPerlBlockImpl(Perl5: BLOCK)
                 PsiElement(Perl5: {)('{')
-                PsiErrorElement:Perl5: } expected, got '>'
+                PsiErrorElement:Perl5: } expected
                   <empty list>
           PsiElement(Perl5: r})('>')
           PsiPerlPerlRegexModifiersImpl(Perl5: PERL_REGEX_MODIFIERS)
@@ -78,7 +78,7 @@ Perl5
             PsiPerlBlockCompoundImpl(Perl5: BLOCK_COMPOUND)
               PsiPerlBlockImpl(Perl5: BLOCK)
                 PsiElement(Perl5: {)('{')
-                PsiErrorElement:Perl5: } expected, got '/'
+                PsiErrorElement:Perl5: } expected
                   <empty list>
           PsiElement(Perl5: r})('/')
           PsiPerlPerlRegexModifiersImpl(Perl5: PERL_REGEX_MODIFIERS)
@@ -125,7 +125,7 @@ Perl5
             PsiPerlBlockCompoundImpl(Perl5: BLOCK_COMPOUND)
               PsiPerlBlockImpl(Perl5: BLOCK)
                 PsiElement(Perl5: {)('{')
-                PsiErrorElement:Perl5: } expected, got '>'
+                PsiErrorElement:Perl5: } expected
                   <empty list>
           PsiElement(Perl5: r})('>')
           PsiPerlPerlRegexModifiersImpl(Perl5: PERL_REGEX_MODIFIERS)

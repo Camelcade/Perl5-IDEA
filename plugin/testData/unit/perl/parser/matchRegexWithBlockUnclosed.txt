@@ -14,7 +14,7 @@ Perl5
                 PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
                   PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
                     PsiElement(Perl5: NUMBER)('123')
-            PsiErrorElement:Perl5: } expected, got '/'
+            PsiErrorElement:Perl5: } expected
               <empty list>
       PsiElement(Perl5: r})('/')
     PsiElement(Perl5: ;)(';')
@@ -32,7 +32,7 @@ Perl5
                 PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
                   PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
                     PsiElement(Perl5: NUMBER)('123')
-            PsiErrorElement:Perl5: } expected, got '/'
+            PsiErrorElement:Perl5: } expected
               <empty list>
       PsiElement(Perl5: r})('/')
       PsiPerlPerlRegexModifiersImpl(Perl5: PERL_REGEX_MODIFIERS)
@@ -52,7 +52,7 @@ Perl5
                 PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
                   PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
                     PsiElement(Perl5: NUMBER)('123')
-            PsiErrorElement:Perl5: } expected, got '/'
+            PsiErrorElement:Perl5: } expected
               <empty list>
       PsiElement(Perl5: r})('/')
       PsiPerlPerlRegexModifiersImpl(Perl5: PERL_REGEX_MODIFIERS)
@@ -73,8 +73,11 @@ Perl5
                 PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
                   PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
                     PsiElement(Perl5: NUMBER)('123')
-              PsiErrorElement:<statement modifier>, Perl5: , or Perl5: => expected, got '/'
-                PsiElement(Perl5: r/)('/')
+            PsiErrorElement:Perl5: } expected
+              <empty list>
+      PsiElement(Perl5: r/)('/')
+      PsiPerlRegexReplacementImpl(Perl5: REGEX_REPLACEMENT)
+        <empty list>
       PsiElement(Perl5: r})('/')
     PsiElement(Perl5: ;)(';')
   PsiPerlStatementImpl(Perl5: STATEMENT)
@@ -92,8 +95,11 @@ Perl5
                 PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
                   PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
                     PsiElement(Perl5: NUMBER)('123')
-              PsiErrorElement:<statement modifier>, Perl5: , or Perl5: => expected, got '/'
-                PsiElement(Perl5: r/)('/')
+            PsiErrorElement:Perl5: } expected
+              <empty list>
+      PsiElement(Perl5: r/)('/')
+      PsiPerlRegexReplacementImpl(Perl5: REGEX_REPLACEMENT)
+        <empty list>
       PsiElement(Perl5: r})('/')
       PsiPerlPerlRegexModifiersImpl(Perl5: PERL_REGEX_MODIFIERS)
         PsiElement(Perl5: /m)('x')
@@ -113,8 +119,11 @@ Perl5
                 PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
                   PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
                     PsiElement(Perl5: NUMBER)('123')
-              PsiErrorElement:<statement modifier>, Perl5: , or Perl5: => expected, got '/'
-                PsiElement(Perl5: r/)('/')
+            PsiErrorElement:Perl5: } expected
+              <empty list>
+      PsiElement(Perl5: r/)('/')
+      PsiPerlRegexReplacementImpl(Perl5: REGEX_REPLACEMENT)
+        <empty list>
       PsiElement(Perl5: r})('/')
       PsiPerlPerlRegexModifiersImpl(Perl5: PERL_REGEX_MODIFIERS)
         PsiElement(Perl5: /m)('xx')
@@ -134,7 +143,7 @@ Perl5
                 PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
                   PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
                     PsiElement(Perl5: NUMBER)('123')
-            PsiErrorElement:Perl5: } expected, got '/'
+            PsiErrorElement:Perl5: } expected
               <empty list>
       PsiElement(Perl5: r})('/')
     PsiElement(Perl5: ;)(';')
@@ -153,7 +162,7 @@ Perl5
                 PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
                   PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
                     PsiElement(Perl5: NUMBER)('123')
-            PsiErrorElement:Perl5: } expected, got '/'
+            PsiErrorElement:Perl5: } expected
               <empty list>
       PsiElement(Perl5: r})('/')
       PsiPerlPerlRegexModifiersImpl(Perl5: PERL_REGEX_MODIFIERS)
@@ -174,7 +183,7 @@ Perl5
                 PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
                   PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
                     PsiElement(Perl5: NUMBER)('123')
-            PsiErrorElement:Perl5: } expected, got '/'
+            PsiErrorElement:Perl5: } expected
               <empty list>
       PsiElement(Perl5: r})('/')
       PsiPerlPerlRegexModifiersImpl(Perl5: PERL_REGEX_MODIFIERS)
