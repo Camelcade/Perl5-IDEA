@@ -38,5 +38,5 @@ Perl5
               PsiElement(Perl5: $$)('$')
               PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('3')
             PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('>;\n}\n')
-          PsiErrorElement:<expr>, <oct char>, Perl5: STRING_CONTENT_QQ, Perl5: \1, Perl5: \E, Perl5: \F, Perl5: \L, Perl5: \N, Perl5: \Q, Perl5: \U, Perl5: \\", Perl5: \\u, Perl5: \a, Perl5: \b, Perl5: \c*, Perl5: \e, Perl5: \f, Perl5: \l, Perl5: \n, Perl5: \r, Perl5: \t, Perl5: \x or Perl5: r} expected
+          PsiErrorElement:Perl5: r} expected
             <empty list>

@@ -1040,11 +1040,12 @@ replacement_regex ::=
 private regex_match ::= 'r{' [perl_regex]
 private regex_replace ::= regex_replace_regex | regex_replace_code
 
-private regex_replace_regex ::= {'r/' | 'r}' 'r{' } regex_replacement
-regex_replacement ::= regex_replacement_content
+private regex_replace_regex ::= {'r/' | 'r}' 'r{' } regex_replacement {pin=1}
+regex_replacement ::= regex_replacement_content {recoverWhile=recover_regex_replacement}
 private regex_replacement_content ::= [qq_string_content]
-private regex_replace_code ::= {'re/' | 'r}' 're{' } [regex_code]
-private regex_code ::= block_braceless
+private regex_replace_code ::= {'re/' | 'r}' 're{' } [regex_code] {pin=1}
+private regex_code ::= block_braceless {recoverWhile=recover_regex_replacement}
+private recover_regex_replacement ::= !('r}')
 
 perl_regex_modifiers ::= '/m' +
 perl_regex ::= perl_regex_item * {hooks=[rightBinder="GREEDY_RIGHT_BINDER" leftBinder="GREEDY_LEFT_BINDER"]}
