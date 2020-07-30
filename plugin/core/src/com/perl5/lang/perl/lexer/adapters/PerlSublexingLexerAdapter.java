@@ -27,7 +27,6 @@ import com.intellij.lexer.Lexer;
 import com.intellij.lexer.LexerBase;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressManager;
-import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexer;
@@ -188,38 +187,31 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
       ProgressManager.checkCanceled();
     }
 
-    try {
-      if (myIsSublexing) {
-        lexToken(mySubLexer);
+    if (myIsSublexing) {
+      lexToken(mySubLexer);
 
-        if (myTokenType != null) {
-          myState = PerlLexer.PREPARSED_ITEMS;
-          return;
-        }
-
-        // sublexing finished
-        myIsSublexing = false;
+      if (myTokenType != null) {
+        myState = PerlLexer.PREPARSED_ITEMS;
+        return;
       }
 
-      lexToken(getFlexAdapter());
-
-      Integer subLexingState = SUBLEXINGS_MAP.get(myTokenType);
-
-      boolean enforceSubLexing = getLexingContext().isEnforceSubLexing();
-      if (subLexingState != null) {
-        subLexCurrentToken(subLexingState);
-      }
-      else if (enforceSubLexing) {
-        Integer initialState = ENFORCED_SUBLEXINGS_MAP.get(myTokenType);
-        if (initialState != null) {
-          subLexCurrentToken(initialState);
-        }
-      }
+      // sublexing finished
+      myIsSublexing = false;
     }
-    catch (Exception | Error e) {
-      LOG.error(myPerlLexer.getClass().getName(), e);
-      myTokenType = TokenType.WHITE_SPACE;
-      myTokenEnd = getBufferEnd();
+
+    lexToken(getFlexAdapter());
+
+    Integer subLexingState = SUBLEXINGS_MAP.get(myTokenType);
+
+    boolean enforceSubLexing = getLexingContext().isEnforceSubLexing();
+    if (subLexingState != null) {
+      subLexCurrentToken(subLexingState);
+    }
+    else if (enforceSubLexing) {
+      Integer initialState = ENFORCED_SUBLEXINGS_MAP.get(myTokenType);
+      if (initialState != null) {
+        subLexCurrentToken(initialState);
+      }
     }
   }
 
