@@ -1,0 +1,11 @@
+{
+  s/some/ { /e;
+  s/some/ } /e;
+  s{some}< } >e;
+  s{some}< { >e;
+  s/some/ { /ee;
+  s/some/ } /ee;
+  s{some}< } >ee;
+  s{some}< { >ee;
+}
+

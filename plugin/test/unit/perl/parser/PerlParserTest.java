@@ -27,6 +27,12 @@ public class PerlParserTest extends PerlParserTestBase {
   }
 
   @Test
+  public void testStringsWithBlockUnclosed() {doTest(false);}
+
+  @Test
+  public void testReplaceRegexWithBlockUnclosed() {doTest(false);}
+
+  @Test
   public void testPrintOperators() {doTest();}
 
   @Test

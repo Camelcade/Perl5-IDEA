@@ -1,0 +1,33 @@
+{
+  " some ${ { } thing";
+  ` some ${ { } thing`;
+  " some @{ { } thing";
+  ` some @{ { } thing`;
+
+  qq/ some ${ { } thing/;
+  qx/ some ${ { } thing/;
+  qq/ some @{ { } thing/;
+  qx/ some @{ { } thing/;
+
+  <<EOM;
+ some ${ { } thing
+ some ${ { } thing
+ some @{ { } thing
+ some @{ { } thing
+EOM
+
+  <<"EOM";
+ some ${ { } thing
+ some ${ { } thing
+ some @{ { } thing
+ some @{ { } thing
+EOM
+
+  <<`EOM`;
+ some ${ { } thing
+ some ${ { } thing
+ some @{ { } thing
+ some @{ { } thing
+EOM
+
+}
