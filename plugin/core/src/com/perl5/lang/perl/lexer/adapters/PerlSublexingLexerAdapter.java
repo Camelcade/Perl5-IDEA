@@ -26,6 +26,7 @@ import com.intellij.lexer.FlexAdapter;
 import com.intellij.lexer.Lexer;
 import com.intellij.lexer.LexerBase;
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
@@ -74,6 +75,7 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
   private int myState;
   private IElementType myTokenType;
   private char mySingleOpenQuoteChar = 0;
+  private int myAdvancesCounter = 0;
 
   public PerlSublexingLexerAdapter(@NotNull PerlLexingContext perlLexingContext) {
     this(new PerlLexer(null).withProject(perlLexingContext.getProject()), perlLexingContext);
@@ -180,6 +182,10 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
   protected void locateToken() {
     if (myTokenType != null) {
       return;
+    }
+
+    if (++myAdvancesCounter % 1000 == 0) {
+      ProgressManager.checkCanceled();
     }
 
     try {

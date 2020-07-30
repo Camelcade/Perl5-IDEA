@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.lexer.adapters;
 
 import com.intellij.lexer.MergingLexerAdapter;
-import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
@@ -36,11 +35,5 @@ public class PerlMergingLexerAdapter extends MergingLexerAdapter implements Perl
 
   public PerlMergingLexerAdapter(@NotNull PerlLexingContext lexingContext) {
     super(new PerlSublexingLexerAdapter(lexingContext), TOKENS_TO_MERGE);
-  }
-
-  @Override
-  public void advance() {
-    ProgressManager.checkCanceled();
-    super.advance();
   }
 }
