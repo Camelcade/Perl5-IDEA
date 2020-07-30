@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.lexer.adapters;
 
 import com.intellij.lexer.MergingLexerAdapter;
+import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.lexer.PerlLexingContext;
@@ -34,5 +35,11 @@ public abstract class PerlTemplatingMergingLexerAdapter extends MergingLexerAdap
 
   private static @NotNull PerlLexingContext createLexingContext(@Nullable Project project, boolean enforceSublexing) {
     return PerlLexingContext.create(project).withEnforcedSublexing(enforceSublexing);
+  }
+
+  @Override
+  public void advance() {
+    ProgressManager.checkCanceled();
+    super.advance();
   }
 }
