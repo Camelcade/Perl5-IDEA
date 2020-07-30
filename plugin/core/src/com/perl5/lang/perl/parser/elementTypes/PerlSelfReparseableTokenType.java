@@ -17,25 +17,16 @@
 package com.perl5.lang.perl.parser.elementTypes;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.impl.source.tree.PsiCommentImpl;
+import com.intellij.openapi.util.TextRange;
 import org.jetbrains.annotations.NotNull;
 
-public class PerlLineCommentTokenType extends PerlReparseableTokenType {
-  public PerlLineCommentTokenType(@NotNull String debugName) {
-    super(debugName, PsiCommentImpl.class);
+public class PerlSelfReparseableTokenType extends PerlReparseableTokenType {
+  public PerlSelfReparseableTokenType(@NotNull String debugName, Class<? extends ASTNode> clazz) {
+    super(debugName, clazz);
   }
 
   @Override
-  protected boolean isReparseable(@NotNull ASTNode leaf, @NotNull CharSequence newText) {
-    int length = newText.length();
-    if (length < 1 || newText.charAt(0) != '#') {
-      return false;
-    }
-    if (length > 1 && newText.charAt(1) == '@') {
-      return false;
-    }
-
-    return !StringUtil.containsLineBreak(newText);
+  protected @NotNull TextRange getLexerConfirmationRange(@NotNull ASTNode leaf) {
+    return leaf.getTextRange();
   }
 }

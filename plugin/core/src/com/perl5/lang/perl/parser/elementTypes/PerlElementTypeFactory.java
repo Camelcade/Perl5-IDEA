@@ -19,6 +19,7 @@ package com.perl5.lang.perl.parser.elementTypes;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.impl.source.tree.PsiCommentImpl;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.psi.impl.*;
@@ -45,7 +46,7 @@ public class PerlElementTypeFactory {
       case "CODE_NAME":
         return new PerlTokenTypeEx(name, PerlVariableNameElementImpl.class);
       case "POD":
-        return new PerlPodTokenType();
+        return new PerlSelfReparseableTokenType(name, PerlPodElement.class);
       case "subname":
       case "list":
       case "unary":
@@ -64,7 +65,7 @@ public class PerlElementTypeFactory {
       case "VERSION_ELEMENT":
         return new PerlTokenTypeEx(name, PerlVersionElementImpl.class);
       case "COMMENT_LINE":
-        return new PerlLineCommentTokenType(name);
+        return new PerlSelfReparseableTokenType(name, PsiCommentImpl.class);
     }
     return new PerlTokenType(name);
   }

@@ -1,13 +1,8 @@
 Reparsing block
 ----------
-Element(Perl5: BLOCK)
+PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)
 ----------
-{
-  s{test
-    say 'hi';
-    say 'hi'
-  }{replacement $3};
-}
+replacement 
 ----------
 After typing
 ----------
