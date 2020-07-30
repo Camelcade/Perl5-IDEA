@@ -243,8 +243,12 @@ intellij {
 }
 
 runIde {
-  if (project.hasProperty("nocancel")) {
-    systemProperty("idea.ProcessCanceledException", "disabled")
+  project.properties.each{ key, val ->
+    if( key.startsWith("pass.")){
+      def passedKey = key.substring(5)
+      println("Passing $passedKey => $val")
+      systemProperty(passedKey, val)
+    }
   }
   if (project.hasProperty("traverseUI")) {
     args("traverseUI", "$project.rootDir.canonicalPath/resources/search/searchableOptions.xml")
