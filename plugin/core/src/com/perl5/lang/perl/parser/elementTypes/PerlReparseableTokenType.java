@@ -20,6 +20,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.TextRange;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.impl.source.tree.FileElement;
 import com.intellij.psi.impl.source.tree.TreeElement;
 import com.intellij.psi.impl.source.tree.TreeUtil;
@@ -44,6 +45,7 @@ public abstract class PerlReparseableTokenType extends PerlTokenTypeEx implement
   protected boolean isReparseable(@NotNull ASTNode leaf, @NotNull CharSequence newText) {
     TextRange confirmationRange = getLexerConfirmationRange(leaf);
     if (confirmationRange.isEmpty()) {
+      LOG.debug("No confirmation range found for ", leaf);
       return false;
     }
     TextRange leafTextRange = leaf.getTextRange();
@@ -70,7 +72,12 @@ public abstract class PerlReparseableTokenType extends PerlTokenTypeEx implement
     String textToRelex = currentFileChars.subSequence(confirmationRange.getStartOffset(), leaf.getStartOffset()).toString() +
                          newText +
                          currentFileChars.subSequence(leaf.getStartOffset() + leaf.getTextLength(), confirmationRange.getEndOffset());
-    LOG.debug("Re-lexing for ", leaf, ": ", textToRelex);
+    if (LOG.isDebugEnabled()) {
+      LOG.debug("Re-lexing for ", leaf,
+                "; range: ", confirmationRange,
+                "; lenght: ", confirmationRange.getLength(),
+                "; text: ", StringUtil.shortenTextWithEllipsis(textToRelex, 40, 20));
+    }
     lexer.start(textToRelex);
     int newTokenStartOffset = leaf.getStartOffset() - confirmationRange.getStartOffset();
     int newTokenEndOffset = newTokenStartOffset + newText.length();
@@ -81,9 +88,11 @@ public abstract class PerlReparseableTokenType extends PerlTokenTypeEx implement
           lexer.advance();
           break;
         }
+        LOG.debug("Token end or end mismatch for  ", leaf, " with text: ", newText);
         return false;
       }
       if (lexer.getTokenEnd() > newTokenStartOffset) {
+        LOG.debug("Tokens structure different for ", leaf, " with text: ", newText);
         return false;
       }
       lexer.advance();
@@ -101,16 +110,30 @@ public abstract class PerlReparseableTokenType extends PerlTokenTypeEx implement
         return false;
       }
       if (tokenType != run.getElementType()) {
+        if (LOG.isDebugEnabled()) {
+          LOG.debug("Different token types afterwards for ", leaf,
+                    "; expected: ", run.getElementType(),
+                    "; got: ", tokenType,
+                    "; token text: ", newText);
+        }
         return false;
       }
       if (lexer.getTokenEnd() != run.getTextRange().getEndOffset() - offsetShift) {
+        if (LOG.isDebugEnabled()) {
+          LOG.debug("Different token ranges afterwards for ", leaf,
+                    "; expected: ", run.getTextRange().getEndOffset(),
+                    "; got: ", lexer.getTokenEnd() + offsetShift,
+                    "; type: ", tokenType,
+                    "; text: ", lexer.getTokenText(),
+                    "; token text: ", newText);
+        }
         return false;
       }
 
       lexer.advance();
       run = TreeUtil.nextLeaf(run);
     }
-
+    LOG.debug("Leaf ", leaf, " is reparseable with content: ", newText);
     return true;
   }
 
