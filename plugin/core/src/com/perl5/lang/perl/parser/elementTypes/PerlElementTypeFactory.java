@@ -36,6 +36,8 @@ public class PerlElementTypeFactory {
 
   public static @NotNull IElementType getTokenType(@NotNull String name) {
     switch (name) {
+      case "ATTRIBUTE_IDENTIFIER":
+        return new PerlAttributeIdentifierTokenType(name);
       case "regex":
         return new PerlRegexTokenType(name, LeafPsiElement.class);
       case "STRING_CONTENT":

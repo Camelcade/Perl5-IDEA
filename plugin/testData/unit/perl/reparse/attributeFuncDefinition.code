@@ -1,1 +1,1 @@
-fund something :m<caret>ethod {}
+func something :m<caret>ethod {}

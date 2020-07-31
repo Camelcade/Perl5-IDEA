@@ -1,35 +1,26 @@
 Reparsing block
 ----------
-Full reparse
+PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)
+----------
+method
 ----------
 After typing
 ----------
-fund something :medit<caret>ethod {}
+func something :medit<caret>ethod {}
 ----------
 Psi structure
 ----------
 Perl5
-  PsiPerlStatementImpl(Perl5: STATEMENT)
-    PsiPerlSubCallImpl(SUB_CALL)
-      PsiPerlMethodImpl(Perl5: METHOD)
-        PerlSubNameElementImpl(Perl5: subname)('fund')
-      PsiWhiteSpace(' ')
-      PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
-        PsiPerlSubCallImpl(SUB_CALL)
-          PsiPerlMethodImpl(Perl5: METHOD)
-            PerlSubNameElementImpl(Perl5: subname)('something')
+  PsiPerlFuncDefinitionImpl(FUNC_DEFINITION)@main::something
+    PsiElement(Perl5: func)('func')
     PsiWhiteSpace(' ')
-    PsiErrorElement:<call arguments>, <statement modifier>, Perl5: (, Perl5: ,, Perl5: => or Perl5: package::name expected, got ':'
+    PerlSubNameElementImpl(Perl5: subname)('something')
+    PsiWhiteSpace(' ')
+    PsiPerlAttributesImpl(Perl5: ATTRIBUTES)
       PsiElement(Perl5: :)(':')
-    PsiErrorElement:Semicolon expected
-      <empty list>
-  PsiPerlStatementImpl(Perl5: STATEMENT)
-    PsiPerlSubCallImpl(SUB_CALL)
-      PsiPerlMethodImpl(Perl5: METHOD)
-        PerlSubNameElementImpl(Perl5: subname)('meditethod')
-      PsiWhiteSpace(' ')
-      PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
-        PsiPerlSubExprImpl(Perl5: SUB_EXPR)
-          PsiPerlBlockImpl(Perl5: BLOCK)
-            PsiElement(Perl5: {)('{')
-            PsiElement(Perl5: })('}')
+      PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
+        PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('meditethod')
+    PsiWhiteSpace(' ')
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiElement(Perl5: })('}')
