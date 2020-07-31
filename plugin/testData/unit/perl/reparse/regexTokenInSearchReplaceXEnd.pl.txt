@@ -1,6 +1,8 @@
 Reparsing block
 ----------
-Full reparse
+PsiElement(Perl5: regex)
+----------
+as dfa sdf
 ----------
 After typing
 ----------

@@ -1,8 +1,8 @@
 Reparsing block
 ----------
-Element(Perl5: MATCH_REGEX)
+PsiElement(Perl5: regex)
 ----------
-m/asdfasdf/
+asdfasdf
 ----------
 After typing
 ----------

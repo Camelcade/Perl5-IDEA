@@ -19,6 +19,7 @@ package com.perl5.lang.perl.parser.elementTypes;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.impl.source.tree.PsiCommentImpl;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlLexer;
@@ -35,6 +36,8 @@ public class PerlElementTypeFactory {
 
   public static @NotNull IElementType getTokenType(@NotNull String name) {
     switch (name) {
+      case "regex":
+        return new PerlRegexTokenType(name, LeafPsiElement.class);
       case "STRING_CONTENT":
       case "STRING_CONTENT_QQ":
       case "STRING_CONTENT_XQ":

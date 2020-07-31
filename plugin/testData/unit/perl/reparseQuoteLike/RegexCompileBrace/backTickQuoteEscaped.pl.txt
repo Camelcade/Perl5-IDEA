@@ -1,12 +1,12 @@
 Reparsing block
 ----------
-Element(Perl5: COMPILE_REGEX)
+PsiElement(Perl5: regex)
 ----------
-qr{test
+test
     say 'hi';
     
     say 'hi'
-  }
+  
 ----------
 After typing
 ----------
