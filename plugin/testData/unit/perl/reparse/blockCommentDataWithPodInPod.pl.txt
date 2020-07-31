@@ -1,0 +1,37 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
+say 'hi';
+
+__DATA__
+
+This is  a test
+
+=head1 DESCRIPTION
+
+text test<caret>
+
+=cut
+
+asdfasdf
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+      PsiElement(Perl5: say)('say')
+      PsiWhiteSpace(' ')
+      PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
+        PsiPerlStringSqImpl(Perl5: STRING_SQ)
+          PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
+          PerlStringContentElementImpl(Perl5: STRING_CONTENT)('hi')
+          PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
+    PsiElement(Perl5: ;)(';')
+  PsiWhiteSpace('\n\n')
+  PsiElement(Perl5: __DATA__)('__DATA__')
+  PsiComment(Perl5: COMMENT_BLOCK)('\n\nThis is  a test\n\n')
+  PsiElement(Perl5: POD)('=head1 DESCRIPTION\n\ntext test\n\n=cut\n\nasdfasdf')

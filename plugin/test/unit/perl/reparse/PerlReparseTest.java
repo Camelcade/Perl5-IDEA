@@ -27,6 +27,24 @@ public class PerlReparseTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testBlockCommentData() {doTest("test");}
+
+  @Test
+  public void testBlockCommentEnd() {doTest("test");}
+
+  @Test
+  public void testBlockCommentDataWithPod() {doTest("test");}
+
+  @Test
+  public void testBlockCommentEndWithPod() {doTest("test");}
+
+  @Test
+  public void testBlockCommentDataWithPodInPod() {doTest("test");}
+
+  @Test
+  public void testBlockCommentEndWithPodInPod() {doTest("test");}
+
+  @Test
   public void testPrototypeSub() {doTest("$");}
 
   @Test

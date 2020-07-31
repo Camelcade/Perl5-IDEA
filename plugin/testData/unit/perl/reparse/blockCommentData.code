@@ -1,0 +1,5 @@
+say 'hi';
+
+__DATA__
+
+This is <caret> a test

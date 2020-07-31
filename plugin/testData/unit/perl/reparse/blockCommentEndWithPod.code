@@ -1,0 +1,13 @@
+say 'hi';
+
+__END__
+
+This is <caret> a test
+
+=head1 DESCRIPTION
+
+text
+
+=cut
+
+asdfasdf
