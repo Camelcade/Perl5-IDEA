@@ -2770,7 +2770,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     PsiFile psiFile = getFile();
     assertInstanceOf(psiFile, PsiFileImpl.class);
     FileASTNode fileNode = psiFile.getNode();
-    WriteCommandAction.runWriteCommandAction(getProject(), documentModifier::run);
+    WriteCommandAction.runWriteCommandAction(getProject(), documentModifier);
     String newText = getEditorText();
     TextRange changedRange = ChangedPsiRangeUtil.getChangedPsiRange(psiFile, (FileElement)fileNode, newText);
     Assert.assertNotNull("No changes", changedRange);
