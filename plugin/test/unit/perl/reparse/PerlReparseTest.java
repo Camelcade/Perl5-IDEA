@@ -27,6 +27,42 @@ public class PerlReparseTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testPrototypeSub() {doTest("$");}
+
+  @Test
+  public void testPrototypeSubAnon() {doTest("$");}
+
+  @Test
+  public void testSignatureAfter() {doTest(", $edit");}
+
+  @Test
+  public void testSignatureAround() {doTest(", $edit");}
+
+  @Test
+  public void testSignatureAugment() {doTest(", $edit");}
+
+  @Test
+  public void testSignatureBefore() {doTest(", $edit");}
+
+  @Test
+  public void testSignatureFun() {doTest(", $edit");}
+
+  @Test
+  public void testSignatureFunc() {doTest(", $edit");}
+
+  @Test
+  public void testSignatureMethod() {doTest(", $edit");}
+
+  @Test
+  public void testSignatureOverride() {doTest(", $edit");}
+
+  @Test
+  public void testSignatureSub() {doTest(", $edit");}
+
+  @Test
+  public void testSignatureSubAnon() {doTest(", $edit");}
+
+  @Test
   public void testAttributeAnonSubDefinition() {doTest("edit");}
 
   @Test

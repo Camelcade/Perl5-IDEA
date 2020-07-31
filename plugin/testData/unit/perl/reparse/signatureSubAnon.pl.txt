@@ -1,0 +1,41 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
+sub ($some, $f , $edit<caret>){}
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlSubExprImpl(Perl5: SUB_EXPR)
+      PsiElement(Perl5: sub)('sub')
+      PsiWhiteSpace(' ')
+      PsiElement(Perl5: ()('(')
+      PsiPerlSignatureContentImpl(Perl5: SIGNATURE_CONTENT)
+        PsiPerlSignatureElementImpl(Perl5: SIGNATURE_ELEMENT)
+          PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT)
+            PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+              PsiElement(Perl5: $$)('$')
+              PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('some')
+        PsiElement(Perl5: ,)(',')
+        PsiWhiteSpace(' ')
+        PsiPerlSignatureElementImpl(Perl5: SIGNATURE_ELEMENT)
+          PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT)
+            PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+              PsiElement(Perl5: $$)('$')
+              PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('f')
+        PsiWhiteSpace(' ')
+        PsiElement(Perl5: ,)(',')
+        PsiWhiteSpace(' ')
+        PsiPerlSignatureElementImpl(Perl5: SIGNATURE_ELEMENT)
+          PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT)
+            PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+              PsiElement(Perl5: $$)('$')
+              PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('edit')
+      PsiElement(Perl5: ))(')')
+      PsiPerlBlockImpl(Perl5: BLOCK)
+        PsiElement(Perl5: {)('{')
+        PsiElement(Perl5: })('}')

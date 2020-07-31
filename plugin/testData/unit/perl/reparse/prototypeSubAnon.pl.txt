@@ -1,0 +1,21 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
+sub ($@$<caret>%){}
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlSubExprImpl(Perl5: SUB_EXPR)
+      PsiElement(Perl5: sub)('sub')
+      PsiWhiteSpace(' ')
+      PsiElement(Perl5: ()('(')
+      PsiElement(Perl5: SUB_PROTOTYPE_TOKEN)('$@$%')
+      PsiElement(Perl5: ))(')')
+      PsiPerlBlockImpl(Perl5: BLOCK)
+        PsiElement(Perl5: {)('{')
+        PsiElement(Perl5: })('}')
