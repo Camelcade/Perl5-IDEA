@@ -1,0 +1,14 @@
+say 'hi';
+
+__DATA__
+
+This is  a test
+
+=head1 DESCRIPTION
+
+text <caret>
+
+
+asdfasdf
+
+=cut
