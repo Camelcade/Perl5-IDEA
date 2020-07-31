@@ -1,0 +1,35 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
+fund something :medit<caret>ethod {}
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlSubCallImpl(SUB_CALL)
+      PsiPerlMethodImpl(Perl5: METHOD)
+        PerlSubNameElementImpl(Perl5: subname)('fund')
+      PsiWhiteSpace(' ')
+      PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
+        PsiPerlSubCallImpl(SUB_CALL)
+          PsiPerlMethodImpl(Perl5: METHOD)
+            PerlSubNameElementImpl(Perl5: subname)('something')
+    PsiWhiteSpace(' ')
+    PsiErrorElement:<call arguments>, <statement modifier>, Perl5: (, Perl5: ,, Perl5: => or Perl5: package::name expected, got ':'
+      PsiElement(Perl5: :)(':')
+    PsiErrorElement:Semicolon expected
+      <empty list>
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlSubCallImpl(SUB_CALL)
+      PsiPerlMethodImpl(Perl5: METHOD)
+        PerlSubNameElementImpl(Perl5: subname)('meditethod')
+      PsiWhiteSpace(' ')
+      PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
+        PsiPerlSubExprImpl(Perl5: SUB_EXPR)
+          PsiPerlBlockImpl(Perl5: BLOCK)
+            PsiElement(Perl5: {)('{')
+            PsiElement(Perl5: })('}')

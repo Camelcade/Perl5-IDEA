@@ -1,0 +1,23 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
+sub :meedit<caret>thod {}
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlSubExprImpl(Perl5: SUB_EXPR)
+      PsiElement(Perl5: sub)('sub')
+      PsiWhiteSpace(' ')
+      PsiPerlAttributesImpl(Perl5: ATTRIBUTES)
+        PsiElement(Perl5: :)(':')
+        PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
+          PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('meeditthod')
+      PsiWhiteSpace(' ')
+      PsiPerlBlockImpl(Perl5: BLOCK)
+        PsiElement(Perl5: {)('{')
+        PsiElement(Perl5: })('}')

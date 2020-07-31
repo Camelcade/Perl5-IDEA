@@ -1,0 +1,27 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
+sub something :method(somethingedit<caret>) {}
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::something
+    PsiElement(Perl5: sub)('sub')
+    PsiWhiteSpace(' ')
+    PerlSubNameElementImpl(Perl5: subname)('something')
+    PsiWhiteSpace(' ')
+    PsiPerlAttributesImpl(Perl5: ATTRIBUTES)
+      PsiElement(Perl5: :)(':')
+      PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
+        PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('method')
+        PsiElement(Perl5: QUOTE_SINGLE_OPEN)('(')
+        PerlStringContentElementImpl(Perl5: STRING_CONTENT)('somethingedit')
+        PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(')')
+    PsiWhiteSpace(' ')
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiElement(Perl5: })('}')

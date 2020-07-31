@@ -1,0 +1,21 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
+sub something :methedit<caret>od;
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlSubDeclarationImpl(SUB_DECLARATION)@main::something
+    PsiElement(Perl5: sub)('sub')
+    PsiWhiteSpace(' ')
+    PerlSubNameElementImpl(Perl5: subname)('something')
+    PsiWhiteSpace(' ')
+    PsiPerlAttributesImpl(Perl5: ATTRIBUTES)
+      PsiElement(Perl5: :)(':')
+      PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
+        PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('metheditod')
+    PsiElement(Perl5: ;)(';')

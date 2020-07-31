@@ -27,6 +27,78 @@ public class PerlReparseTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testAttributeAnonSubDefinition() {doTest("edit");}
+
+  @Test
+  public void testAttributeAnonSubDefinitionEnd() {doTest("edit");}
+
+  @Test
+  public void testAttributeFuncDefinition() {doTest("edit");}
+
+  @Test
+  public void testAttributeFuncDefinitionEnd() {doTest("edit");}
+
+  @Test
+  public void testAttributeMethodDefinition() {doTest("edit");}
+
+  @Test
+  public void testAttributeMethodDefinitionEnd() {doTest("edit");}
+
+  @Test
+  public void testAttributeMy() {doTest("edit");}
+
+  @Test
+  public void testAttributeMyEnd() {doTest("edit");}
+
+  @Test
+  public void testAttributeMyMulti() {doTest("edit");}
+
+  @Test
+  public void testAttributeMyMultiEnd() {doTest("edit");}
+
+  @Test
+  public void testAttributeOur() {doTest("edit");}
+
+  @Test
+  public void testAttributeOurEnd() {doTest("edit");}
+
+  @Test
+  public void testAttributeOurMulti() {doTest("edit");}
+
+  @Test
+  public void testAttributeOurMultiEnd() {doTest("edit");}
+
+  @Test
+  public void testAttributeState() {doTest("edit");}
+
+  @Test
+  public void testAttributeStateEnd() {doTest("edit");}
+
+  @Test
+  public void testAttributeStateMulti() {doTest("edit");}
+
+  @Test
+  public void testAttributeStateMultiEnd() {doTest("edit");}
+
+  @Test
+  public void testAttributeSubDeclaration() {doTest("edit");}
+
+  @Test
+  public void testAttributeSubDeclarationEnd() {doTest("edit");}
+
+  @Test
+  public void testAttributeSubDefinition() {doTest("edit");}
+
+  @Test
+  public void testAttributeSubDefinitionEnd() {doTest("edit");}
+
+  @Test
+  public void testAttributeSubDefinitionWithString() {doTest("edit");}
+
+  @Test
+  public void testAttributeSubDefinitionWithStringEnd() {doTest("edit");}
+
+  @Test
   public void testNamespaceSubDeclaration() {doTest("edit");}
 
   @Test
