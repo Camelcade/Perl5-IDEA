@@ -115,9 +115,11 @@ import com.intellij.openapi.vfs.newvfs.impl.VfsRootAccess;
 import com.intellij.psi.*;
 import com.intellij.psi.codeStyle.CodeStyleManager;
 import com.intellij.psi.impl.BlockSupportImpl;
+import com.intellij.psi.impl.ChangedPsiRangeUtil;
 import com.intellij.psi.impl.DebugUtil;
 import com.intellij.psi.impl.PsiManagerEx;
 import com.intellij.psi.impl.source.PsiFileImpl;
+import com.intellij.psi.impl.source.tree.FileElement;
 import com.intellij.psi.impl.source.tree.injected.InjectedFileViewProvider;
 import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.tree.IElementType;
@@ -2761,16 +2763,18 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   }
 
   protected void doTestReparseWithoutInit(@NotNull String textToInsert) {
+    doTestReparseWithoutInit(() -> EditorModificationUtil.insertStringAtCaret(getEditor(), textToInsert));
+  }
+
+  protected void doTestReparseWithoutInit(@NotNull Runnable documentModifier) {
     PsiFile psiFile = getFile();
     assertInstanceOf(psiFile, PsiFileImpl.class);
     FileASTNode fileNode = psiFile.getNode();
-    Editor editor = getEditor();
-    int offset = editor.getCaretModel().getOffset();
-    Document document = editor.getDocument();
-    CharSequence documentText = document.getCharsSequence();
-    String newText = documentText.subSequence(0, offset) + textToInsert + documentText.subSequence(offset, documentText.length());
-    Couple<ASTNode> roots =
-      BlockSupportImpl.findReparseableRoots((PsiFileImpl)psiFile, fileNode, TextRange.create(offset, offset), newText);
+    WriteCommandAction.runWriteCommandAction(getProject(), documentModifier::run);
+    String newText = getEditorText();
+    TextRange changedRange = ChangedPsiRangeUtil.getChangedPsiRange(psiFile, (FileElement)fileNode, newText);
+    Assert.assertNotNull("No changes", changedRange);
+    Couple<ASTNode> roots = BlockSupportImpl.findReparseableRoots((PsiFileImpl)psiFile, fileNode, changedRange, newText);
 
     StringBuilder result = new StringBuilder("Reparsing block").append(SEPARATOR_NEWLINES);
 
@@ -2782,9 +2786,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
       result.append(roots.first.getChars());
     }
     result.append(SEPARATOR_NEWLINES).append("After typing").append(SEPARATOR_NEWLINES);
-    result.append(newText);
-    result.insert(result.length() - (documentText.length() - offset), "<caret>");
-    WriteCommandAction.runWriteCommandAction(getProject(), () -> document.insertString(offset, textToInsert));
+    result.append(getEditorTextWithCaretsAndSelections());
     result.append(SEPARATOR_NEWLINES).append("Psi structure").append(SEPARATOR_NEWLINES);
     PsiDocumentManager.getInstance(getProject()).commitAllDocuments();
     result.append(DebugUtil.psiToString(getFile(), false, false));
