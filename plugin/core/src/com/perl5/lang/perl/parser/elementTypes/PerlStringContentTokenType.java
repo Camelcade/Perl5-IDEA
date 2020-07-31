@@ -86,6 +86,9 @@ public class PerlStringContentTokenType extends PerlReparseableTokenType {
         return TextRange.create(heredocOperator.getStartOffset(), leaf.getTextRange().getEndOffset());
       }
     }
+    else if (parentType == ATTRIBUTE) {
+      return PerlAttributeIdentifierTokenType.getAttributeConfirmationRange(leaf, parent);
+    }
     return TextRange.EMPTY_RANGE;
   }
 

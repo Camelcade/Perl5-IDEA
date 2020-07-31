@@ -37,6 +37,10 @@ public class PerlAttributeIdentifierTokenType extends PerlReparseableTokenType {
       return TextRange.EMPTY_RANGE;
     }
 
+    return getAttributeConfirmationRange(leaf, attribute);
+  }
+
+  static @NotNull TextRange getAttributeConfirmationRange(@NotNull ASTNode leaf, ASTNode attribute) {
     ASTNode attributes = attribute.getTreeParent();
     if (PsiUtilCore.getElementType(attributes) != ATTRIBUTES) {
       return TextRange.EMPTY_RANGE;

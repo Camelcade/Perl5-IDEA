@@ -1,6 +1,8 @@
 Reparsing block
 ----------
-Full reparse
+PerlStringContentElementImpl(Perl5: STRING_CONTENT)
+----------
+something
 ----------
 After typing
 ----------
