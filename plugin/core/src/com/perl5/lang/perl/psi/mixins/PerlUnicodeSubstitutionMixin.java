@@ -31,7 +31,12 @@ public class PerlUnicodeSubstitutionMixin extends PerlNumericCharSubstitution {
   @Override
   public int getCodePoint() {
     PsiElement charCodeElement = findChildByType(NUMBER_HEX);
-    return charCodeElement == null ? getCharCodeFromName() : Integer.parseInt(charCodeElement.getText(), 16);
+    if (charCodeElement == null) {
+      return getCharCodeFromName();
+    }
+
+    String codeElementText = charCodeElement.getText().replace("_", "");
+    return codeElementText.isEmpty() ? 0 : Integer.parseInt(codeElementText, 16);
   }
 
   private int getCharCodeFromName() {

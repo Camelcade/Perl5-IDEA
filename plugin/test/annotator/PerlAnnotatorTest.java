@@ -35,6 +35,9 @@ public class PerlAnnotatorTest extends PerlLightTestCase {
   public void testCharSubstitutions() {doAnnotatorTest();}
 
   @Test
+  public void testCharSubstitutionsWithUnderscore() {doAnnotatorTest();}
+
+  @Test
   public void testFunctionParametersFunDeprecated() {doDeprecationTest();}
 
   @Test

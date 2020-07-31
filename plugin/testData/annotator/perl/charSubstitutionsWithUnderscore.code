@@ -1,0 +1,10 @@
+say "text<info descr="w">\o{1_67}</info>text";
+say "text<info descr="ŧ">\x{1_67}</info>text";
+say "text<info descr="Non printable">\o{_}</info>text";
+say "text<info descr="Non printable">\x{_}</info>text";
+say "text<info descr="Non printable">\0</info>_text";
+say "text<info descr="Non printable">\x</info>_text";
+say "text<info descr="Non printable">\0</info>_67text";
+say "text<info descr="Non printable">\x1</info>_67text";
+say "text<info descr="Non printable">\N{U+_}</info>text";
+say "text<info descr="ŧ">\N{U+1_67}</info>text";

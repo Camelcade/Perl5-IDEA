@@ -1,0 +1,10 @@
+say "text\o{1_67}text";
+say "text\x{1_67}text";
+say "text\o{_}text";
+say "text\x{_}text";
+say "text\0_text";
+say "text\x_text";
+say "text\0_67text";
+say "text\x1_67text";
+say "text\N{U+_}text";
+say "text\N{U+1_67}text";
