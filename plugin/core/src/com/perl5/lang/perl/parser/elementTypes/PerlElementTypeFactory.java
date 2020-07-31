@@ -61,7 +61,7 @@ public class PerlElementTypeFactory {
       case "constant":
       case "vars":
       case __PACKAGE__:
-        return new PerlTokenTypeEx(name, PerlNamespaceElementImpl.class);
+        return new PerlNamespaceNameTokenType(name);
       case "HEREDOC_END":
       case "HEREDOC_END_INDENTABLE":
         return new PerlTokenTypeEx(name, PerlHeredocTerminatorElementImpl.class);

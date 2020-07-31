@@ -1,6 +1,8 @@
 Reparsing block
 ----------
-Full reparse
+PerlNamespaceElementImpl(Perl5: package::name::)
+----------
+Foo::Bar::
 ----------
 After typing
 ----------
