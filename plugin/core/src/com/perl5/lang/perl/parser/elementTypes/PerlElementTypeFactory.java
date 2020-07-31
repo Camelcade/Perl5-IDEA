@@ -55,7 +55,7 @@ public class PerlElementTypeFactory {
       case "unary":
       case "unary_custom":
       case "argumentless":
-        return new PerlTokenTypeEx(name, PerlSubNameElementImpl.class);
+        return new PerlSubNameTokenType(name);
       case "package::name":
       case "package::name::":
       case "constant":

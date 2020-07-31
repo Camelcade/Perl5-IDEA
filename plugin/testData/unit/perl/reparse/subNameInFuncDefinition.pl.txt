@@ -1,6 +1,8 @@
 Reparsing block
 ----------
-Full reparse
+PerlSubNameElementImpl(Perl5: subname)
+----------
+something
 ----------
 After typing
 ----------
