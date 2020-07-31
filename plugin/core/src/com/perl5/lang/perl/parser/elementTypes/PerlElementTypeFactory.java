@@ -36,6 +36,8 @@ public class PerlElementTypeFactory {
 
   public static @NotNull IElementType getTokenType(@NotNull String name) {
     switch (name) {
+      case "COMMENT_BLOCK":
+        return new PerlBlockCommentTokenType(name);
       case "ATTRIBUTE_IDENTIFIER":
         return new PerlAttributeIdentifierTokenType(name);
       case "regex":

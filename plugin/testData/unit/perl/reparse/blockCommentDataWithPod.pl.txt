@@ -1,6 +1,12 @@
 Reparsing block
 ----------
-Full reparse
+PsiComment(Perl5: COMMENT_BLOCK)
+----------
+
+
+This is  a test
+
+
 ----------
 After typing
 ----------
