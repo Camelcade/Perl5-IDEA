@@ -48,7 +48,7 @@ public interface PerlNamespaceDefinitionElement extends PerlNamespaceDefinition,
   Project getProject() throws PsiInvalidElementAccessException;
 
   default boolean processExportDescriptorsWithAst(@NotNull PerlNamespaceEntityProcessor<PerlExportDescriptor> processor) {
-    PsiFile containingFile = getContainingFile();
+    PsiFile containingFile = getContainingFile().getOriginalFile();
     if (!(containingFile instanceof PerlFile)) {
       return true;
     }
