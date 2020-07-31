@@ -27,6 +27,96 @@ public class PerlReparseTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testSubNameInAfterDefinition() {doTest("edit");}
+
+  @Test
+  public void testSubNameInAfterDefinitionEnd() {doTest("edit");}
+
+  @Test
+  public void testSubNameInAroundDefinition() {doTest("edit");}
+
+  @Test
+  public void testSubNameInAroundDefinitionEnd() {doTest("edit");}
+
+  @Test
+  public void testSubNameInAugmentDefinition() {doTest("edit");}
+
+  @Test
+  public void testSubNameInAugmentDefinitionEnd() {doTest("edit");}
+
+  @Test
+  public void testSubNameInBeforeDefinition() {doTest("edit");}
+
+  @Test
+  public void testSubNameInBeforeDefinitionEnd() {doTest("edit");}
+
+  @Test
+  public void testSubNameInCall() {doTest("edit");}
+
+  @Test
+  public void testSubNameInCallEnd() {doTest("edit");}
+
+  @Test
+  public void testSubNameInCallFqn() {doTest("edit");}
+
+  @Test
+  public void testSubNameInCallFqnEnd() {doTest("edit");}
+
+  @Test
+  public void testSubNameInCallLegacy() {doTest("edit");}
+
+  @Test
+  public void testSubNameInCallLegacyEnd() {doTest("edit");}
+
+  @Test
+  public void testSubNameInCallNoParens() {doTest("edit");}
+
+  @Test
+  public void testSubNameInCallNoParensEnd() {doTest("edit");}
+
+  @Test
+  public void testSubNameInCallObject() {doTest("edit");}
+
+  @Test
+  public void testSubNameInCallObjectEnd() {doTest("edit");}
+
+  @Test
+  public void testSubNameInDeclaration() {doTest("edit");}
+
+  @Test
+  public void testSubNameInDeclarationEnd() {doTest("edit");}
+
+  @Test
+  public void testSubNameInFuncDefinition() {doTest("edit");}
+
+  @Test
+  public void testSubNameInFuncDefinitionEnd() {doTest("edit");}
+
+  @Test
+  public void testSubNameInFunDefinition() {doTest("edit");}
+
+  @Test
+  public void testSubNameInFunDefinitionEnd() {doTest("edit");}
+
+  @Test
+  public void testSubNameInMethodDefinition() {doTest("edit");}
+
+  @Test
+  public void testSubNameInMethodDefinitionEnd() {doTest("edit");}
+
+  @Test
+  public void testSubNameInSubDefinition() {doTest("edit");}
+
+  @Test
+  public void testSubNameInSubDefinitionEnd() {doTest("edit");}
+
+  @Test
+  public void testSubNameInVar() {doTest("edit");}
+
+  @Test
+  public void testSubNameInVarEnd() {doTest("edit");}
+
+  @Test
   public void testRegexTokenInCompile() {doTest("edit");}
 
   @Test

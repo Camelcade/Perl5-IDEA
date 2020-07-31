@@ -1,0 +1,23 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
+sub sometedit<caret>hing(){};
+
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::sometedithing
+    PsiElement(Perl5: sub)('sub')
+    PsiWhiteSpace(' ')
+    PerlSubNameElementImpl(Perl5: subname)('sometedithing')
+    PsiElement(Perl5: ()('(')
+    PsiElement(Perl5: ))(')')
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiElement(Perl5: })('}')
+  PsiElement(Perl5: ;)(';')
+  PsiWhiteSpace('\n')

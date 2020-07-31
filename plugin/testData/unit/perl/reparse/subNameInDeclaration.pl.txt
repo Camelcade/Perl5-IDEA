@@ -1,0 +1,20 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
+sub soedit<caret>mething();
+
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlSubDeclarationImpl(SUB_DECLARATION)@main::soeditmething
+    PsiElement(Perl5: sub)('sub')
+    PsiWhiteSpace(' ')
+    PerlSubNameElementImpl(Perl5: subname)('soeditmething')
+    PsiElement(Perl5: ()('(')
+    PsiElement(Perl5: ))(')')
+    PsiElement(Perl5: ;)(';')
+  PsiWhiteSpace('\n')

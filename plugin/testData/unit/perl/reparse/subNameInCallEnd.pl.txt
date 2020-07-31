@@ -1,0 +1,18 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
+somethingedit<caret>;
+
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlSubCallImpl(SUB_CALL)
+      PsiPerlMethodImpl(Perl5: METHOD)
+        PerlSubNameElementImpl(Perl5: subname)('somethingedit')
+    PsiElement(Perl5: ;)(';')
+  PsiWhiteSpace('\n')

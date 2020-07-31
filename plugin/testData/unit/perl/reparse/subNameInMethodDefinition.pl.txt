@@ -1,0 +1,25 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
+method somethiedit<caret>ng(){};
+
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)@main::somethieditng
+    PsiElement(Perl5: method)('method')
+    PsiWhiteSpace(' ')
+    PerlSubNameElementImpl(Perl5: subname)('somethieditng')
+    PsiElement(Perl5: ()('(')
+    PsiPerlSignatureContentImpl(Perl5: SIGNATURE_CONTENT)
+      <empty list>
+    PsiElement(Perl5: ))(')')
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiElement(Perl5: })('}')
+  PsiElement(Perl5: ;)(';')
+  PsiWhiteSpace('\n')

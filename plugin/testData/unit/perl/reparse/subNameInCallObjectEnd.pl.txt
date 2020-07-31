@@ -1,0 +1,22 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
+Foo::Bar::->somethingedit<caret>;
+
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlDerefExprImpl(Perl5: DEREF_EXPR)
+      PsiPerlPackageExprImpl(Perl5: PACKAGE_EXPR)
+        PerlNamespaceElementImpl(Perl5: package::name)('Foo::Bar::')
+      PsiElement(Perl5: ->)('->')
+      PsiPerlSubCallImpl(SUB_CALL)
+        PsiPerlMethodImpl(Perl5: METHOD)
+          PerlSubNameElementImpl(Perl5: subname)('somethingedit')
+    PsiElement(Perl5: ;)(';')
+  PsiWhiteSpace('\n')

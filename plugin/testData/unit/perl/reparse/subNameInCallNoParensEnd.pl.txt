@@ -1,0 +1,22 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
+somethingedit<caret> 42;
+
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlSubCallImpl(SUB_CALL)
+      PsiPerlMethodImpl(Perl5: METHOD)
+        PerlSubNameElementImpl(Perl5: subname)('somethingedit')
+      PsiWhiteSpace(' ')
+      PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
+        PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
+          PsiElement(Perl5: NUMBER)('42')
+    PsiElement(Perl5: ;)(';')
+  PsiWhiteSpace('\n')

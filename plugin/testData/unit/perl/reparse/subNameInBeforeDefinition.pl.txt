@@ -1,0 +1,25 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
+before sometedit<caret>hing(){};
+
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlBeforeModifierImpl(Perl5: BEFORE_MODIFIER)
+    PsiElement(Perl5: fp_before)('before')
+    PsiWhiteSpace(' ')
+    PerlSubNameElementImpl(Perl5: subname)('sometedithing')
+    PsiElement(Perl5: ()('(')
+    PsiPerlSignatureContentImpl(Perl5: SIGNATURE_CONTENT)
+      <empty list>
+    PsiElement(Perl5: ))(')')
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiElement(Perl5: })('}')
+  PsiElement(Perl5: ;)(';')
+  PsiWhiteSpace('\n')

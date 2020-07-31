@@ -1,0 +1,25 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
+after somethingedit<caret>(){};
+
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlAfterModifierImpl(Perl5: AFTER_MODIFIER)
+    PsiElement(Perl5: fp_after)('after')
+    PsiWhiteSpace(' ')
+    PerlSubNameElementImpl(Perl5: subname)('somethingedit')
+    PsiElement(Perl5: ()('(')
+    PsiPerlSignatureContentImpl(Perl5: SIGNATURE_CONTENT)
+      <empty list>
+    PsiElement(Perl5: ))(')')
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiElement(Perl5: })('}')
+  PsiElement(Perl5: ;)(';')
+  PsiWhiteSpace('\n')
