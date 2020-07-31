@@ -25,6 +25,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlLexer;
+import com.perl5.lang.perl.util.PerlTimeLogger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -48,6 +49,7 @@ public abstract class PerlBracedBlockElementType extends PerlReparseableElementT
     boolean result = hasProperBraceBalance(buffer, lexer, getOpeningBraceType());
     if (LOG.isDebugEnabled()) {
       LOG.debug(this + " reparseable: ", result && isLexerStateOk(lexer.getState()),
+                "; size: ", PerlTimeLogger.kb(buffer.length()), " kb",
                 "; balanced: ", result,
                 "; lexer state: ", lexer.getState());
     }
