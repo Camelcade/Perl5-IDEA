@@ -1,0 +1,15 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
+$Foo::Bar::scalar_ninsertion<caret>ame
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+      PsiElement(Perl5: $$)('$')
+      PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('Foo::Bar::scalar_ninsertioname')

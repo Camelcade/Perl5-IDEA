@@ -1,0 +1,23 @@
+Reparsing block
+----------
+Element(Perl5: STRING_DQ)
+----------
+qq/test$Foo::Bar::scalar_name test/
+----------
+After typing
+----------
+qq/test$Foo::Bar::scalar_nameinsertion<caret> test/
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlStringDqImpl(Perl5: STRING_DQ)
+      PsiElement(Perl5: qq)('qq')
+      PsiElement(Perl5: QUOTE_DOUBLE_OPEN)('/')
+      PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('test')
+      PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+        PsiElement(Perl5: $$)('$')
+        PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('Foo::Bar::scalar_nameinsertion')
+      PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)(' test')
+      PsiElement(Perl5: QUOTE_DOUBLE_CLOSE)('/')

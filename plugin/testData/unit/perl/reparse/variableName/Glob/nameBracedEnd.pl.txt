@@ -1,0 +1,17 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
+*{scalar_nameinsertion<caret>}
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlGlobVariableImpl(*)
+      PsiElement(Perl5: $*)('*')
+      PsiElement(Perl5: *{)('{')
+      PerlVariableNameElementImpl(Perl5: GLOB_NAME)('scalar_nameinsertion')
+      PsiElement(Perl5: *})('}')

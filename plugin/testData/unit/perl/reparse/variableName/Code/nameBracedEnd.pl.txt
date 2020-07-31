@@ -1,0 +1,18 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
+&{scalar_nameinsertion<caret>}
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlCodeVariableImpl(Perl5: CODE_VARIABLE)
+      PsiElement(Perl5: $&)('&')
+      PsiElement(Perl5: &{)('{')
+      PsiPerlMethodImpl(Perl5: METHOD)
+        PerlSubNameElementImpl(Perl5: subname)('scalar_nameinsertion')
+      PsiElement(Perl5: &})('}')

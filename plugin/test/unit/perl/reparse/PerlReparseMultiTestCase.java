@@ -33,5 +33,4 @@ public abstract class PerlReparseMultiTestCase extends PerlLightTestCase {
   protected @NotNull String computeAnswerFileName(@NotNull String appendix) {
     return FileUtil.join(getClass().getSimpleName(), super.computeAnswerFileName(appendix));
   }
-
 }

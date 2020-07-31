@@ -1,0 +1,16 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
+%scalar_nameinsertion<caret>;
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlHashVariableImpl(Perl5: HASH_VARIABLE)
+      PsiElement(Perl5: $%)('%')
+      PerlVariableNameElementImpl(Perl5: HASH_NAME)('scalar_nameinsertion')
+    PsiElement(Perl5: ;)(';')

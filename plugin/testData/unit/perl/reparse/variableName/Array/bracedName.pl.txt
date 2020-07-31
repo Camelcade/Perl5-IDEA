@@ -1,0 +1,17 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
+@{scalar_ninsertion<caret>ame}
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE)
+      PsiElement(Perl5: $@)('@')
+      PsiElement(Perl5: @{)('{')
+      PerlVariableNameElementImpl(Perl5: ARRAY_NAME)('scalar_ninsertioname')
+      PsiElement(Perl5: @})('}')

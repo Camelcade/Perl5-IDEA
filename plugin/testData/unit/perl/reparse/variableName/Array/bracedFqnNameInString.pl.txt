@@ -1,0 +1,25 @@
+Reparsing block
+----------
+Element(Perl5: STRING_DQ)
+----------
+qq/test@{Foo::Bar::scalar_name}test/
+----------
+After typing
+----------
+qq/test@{Foo::Bar::scalar_ninsertion<caret>ame}test/
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlStringDqImpl(Perl5: STRING_DQ)
+      PsiElement(Perl5: qq)('qq')
+      PsiElement(Perl5: QUOTE_DOUBLE_OPEN)('/')
+      PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('test')
+      PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE)
+        PsiElement(Perl5: $@)('@')
+        PsiElement(Perl5: @{)('{')
+        PerlVariableNameElementImpl(Perl5: ARRAY_NAME)('Foo::Bar::scalar_ninsertioname')
+        PsiElement(Perl5: @})('}')
+      PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('test')
+      PsiElement(Perl5: QUOTE_DOUBLE_CLOSE)('/')
