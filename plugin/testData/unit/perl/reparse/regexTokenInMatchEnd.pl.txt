@@ -1,0 +1,20 @@
+Reparsing block
+----------
+Element(Perl5: MATCH_REGEX)
+----------
+/asdfasdf/
+----------
+After typing
+----------
+/asdfasdfedit<caret>/;
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlMatchRegexImpl(Perl5: MATCH_REGEX)
+      PsiElement(Perl5: r{)('/')
+      PsiPerlPerlRegexImpl(Perl5: PERL_REGEX)
+        PsiElement(Perl5: regex)('asdfasdfedit')
+      PsiElement(Perl5: r})('/')
+    PsiElement(Perl5: ;)(';')

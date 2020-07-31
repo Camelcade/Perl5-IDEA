@@ -1,0 +1,27 @@
+Reparsing block
+----------
+Element(Perl5: COMPILE_REGEX)
+----------
+qr/as dfa sdf/x
+----------
+After typing
+----------
+qr/as dfaedit<caret> sdf/x;
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlCompileRegexImpl(Perl5: COMPILE_REGEX)
+      PsiElement(Perl5: qr)('qr')
+      PsiElement(Perl5: r{)('/')
+      PsiPerlPerlRegexImpl(Perl5: PERL_REGEX)
+        PsiElement(Perl5: regex)('as')
+        PsiWhiteSpace(' ')
+        PsiElement(Perl5: regex)('dfaedit')
+        PsiWhiteSpace(' ')
+        PsiElement(Perl5: regex)('sdf')
+      PsiElement(Perl5: r})('/')
+      PsiPerlPerlRegexModifiersImpl(Perl5: PERL_REGEX_MODIFIERS)
+        PsiElement(Perl5: /m)('x')
+    PsiElement(Perl5: ;)(';')

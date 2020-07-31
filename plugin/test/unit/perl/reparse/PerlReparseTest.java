@@ -27,6 +27,54 @@ public class PerlReparseTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testRegexTokenInCompile() {doTest("edit");}
+
+  @Test
+  public void testRegexTokenInCompileEnd() {doTest("edit");}
+
+  @Test
+  public void testRegexTokenInCompileX() {doTest("edit");}
+
+  @Test
+  public void testRegexTokenInCompileXEnd() {doTest("edit");}
+
+  @Test
+  public void testRegexTokenInMatch() {doTest("edit");}
+
+  @Test
+  public void testRegexTokenInMatchEnd() {doTest("edit");}
+
+  @Test
+  public void testRegexTokenInMatchWithOp() {doTest("edit");}
+
+  @Test
+  public void testRegexTokenInMatchWithOpEnd() {doTest("edit");}
+
+  @Test
+  public void testRegexTokenInMatchX() {doTest("edit");}
+
+  @Test
+  public void testRegexTokenInMatchXEnd() {doTest("edit");}
+
+  @Test
+  public void testRegexTokenInMatchXWithOp() {doTest("edit");}
+
+  @Test
+  public void testRegexTokenInMatchXWithOpEnd() {doTest("edit");}
+
+  @Test
+  public void testRegexTokenInSearchReplace() {doTest("edit");}
+
+  @Test
+  public void testRegexTokenInSearchReplaceEnd() {doTest("edit");}
+
+  @Test
+  public void testRegexTokenInSearchReplaceX() {doTest("edit");}
+
+  @Test
+  public void testRegexTokenInSearchReplaceXEnd() {doTest("edit");}
+
+  @Test
   public void testPrintCallArguments() {doTest("42,");}
 
   @Test

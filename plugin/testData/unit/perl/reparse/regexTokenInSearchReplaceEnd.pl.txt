@@ -1,0 +1,22 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
+s/asdfasdfedit<caret>/replacement/;
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlReplacementRegexImpl(Perl5: REPLACEMENT_REGEX)
+      PsiElement(Perl5: s)('s')
+      PsiElement(Perl5: r{)('/')
+      PsiPerlPerlRegexImpl(Perl5: PERL_REGEX)
+        PsiElement(Perl5: regex)('asdfasdfedit')
+      PsiElement(Perl5: r/)('/')
+      PsiPerlRegexReplacementImpl(Perl5: REGEX_REPLACEMENT)
+        PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('replacement')
+      PsiElement(Perl5: r})('/')
+    PsiElement(Perl5: ;)(';')
