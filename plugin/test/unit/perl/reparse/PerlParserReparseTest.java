@@ -22,7 +22,7 @@ import unit.perl.parser.PerlParserTestBase;
 public class PerlParserReparseTest extends PerlParserTestBase {
   @Override
   protected String getBaseDataPath() {
-    return "testData/unit/perl/parserReparse";
+    return "testData/unit/perl/reparse/parser";
   }
 
   @Test

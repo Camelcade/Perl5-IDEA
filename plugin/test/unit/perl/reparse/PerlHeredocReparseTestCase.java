@@ -23,7 +23,7 @@ import org.junit.Test;
 public abstract class PerlHeredocReparseTestCase extends PerlLightTestCase {
   @Override
   protected String getBaseDataPath() {
-    return "testData/unit/perl/reparseHeredoc";
+    return "testData/unit/perl/reparse/heredoc";
   }
 
   @Test

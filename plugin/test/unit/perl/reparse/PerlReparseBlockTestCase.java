@@ -22,7 +22,7 @@ import org.junit.Test;
 public abstract class PerlReparseBlockTestCase extends PerlReparseMultiTestCase {
   @Override
   protected String getBaseDataPath() {
-    return "testData/unit/perl/reparseBlock";
+    return "testData/unit/perl/reparse/block";
   }
 
   @Test

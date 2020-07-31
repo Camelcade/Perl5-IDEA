@@ -22,7 +22,7 @@ import org.junit.Test;
 public abstract class PerlQuoteLikeReparseTestCase extends PerlReparseMultiTestCase {
   @Override
   protected String getBaseDataPath() {
-    return "testData/unit/perl/reparseQuoteLike";
+    return "testData/unit/perl/reparse/quoteLike";
   }
 
   @Test

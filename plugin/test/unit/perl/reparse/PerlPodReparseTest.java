@@ -23,7 +23,7 @@ import org.junit.Test;
 public class PerlPodReparseTest extends PerlLightTestCase {
   @Override
   protected String getBaseDataPath() {
-    return "testData/unit/perl/reparsePod";
+    return "testData/unit/perl/reparse/pod";
   }
 
   @Test
