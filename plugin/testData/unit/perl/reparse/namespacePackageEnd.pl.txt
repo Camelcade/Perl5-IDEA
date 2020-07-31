@@ -1,0 +1,18 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
+package Foo::Baredit<caret>;
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Baredit
+    PsiElement(Perl5: package)('package')
+    PsiWhiteSpace(' ')
+    PerlNamespaceElementImpl(Perl5: package::name)('Foo::Baredit')
+    PsiElement(Perl5: ;)(';')
+    PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
+      <empty list>

@@ -27,6 +27,90 @@ public class PerlReparseTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testNamespaceSubDeclaration() {doTest("edit");}
+
+  @Test
+  public void testNamespaceSubDefinition() {doTest("edit");}
+
+  @Test
+  public void testNamespaceSubDeclarationEnd() {doTest("edit");}
+
+  @Test
+  public void testNamespaceSubDefinitionEnd() {doTest("edit");}
+
+  @Test
+  public void testNamespaceCallLegacy() {doTest("edit");}
+
+  @Test
+  public void testNamespaceCallLegacyEnd() {doTest("edit");}
+
+  @Test
+  public void testNamespaceCallObject() {doTest("edit");}
+
+  @Test
+  public void testNamespaceCallObjectEnd() {doTest("edit");}
+
+  @Test
+  public void testNamespaceCallStatic() {doTest("edit");}
+
+  @Test
+  public void testNamespaceCallStaticEnd() {doTest("edit");}
+
+  @Test
+  public void testNamespaceMy() {doTest("edit");}
+
+  @Test
+  public void testNamespaceMyEnd() {doTest("edit");}
+
+  @Test
+  public void testNamespaceNo() {doTest("edit");}
+
+  @Test
+  public void testNamespaceNoEnd() {doTest("edit");}
+
+  @Test
+  public void testNamespaceOur() {doTest("edit");}
+
+  @Test
+  public void testNamespaceOurEnd() {doTest("edit");}
+
+  @Test
+  public void testNamespacePackage() {doTest("edit");}
+
+  @Test
+  public void testNamespacePackageEnd() {doTest("edit");}
+
+  @Test
+  public void testNamespaceRequire() {doTest("edit");}
+
+  @Test
+  public void testNamespaceRequireEnd() {doTest("edit");}
+
+  @Test
+  public void testNamespaceReturns() {doTest("edit");}
+
+  @Test
+  public void testNamespaceReturnsEnd() {doTest("edit");}
+
+  @Test
+  public void testNamespaceState() {doTest("edit");}
+
+  @Test
+  public void testNamespaceStateEnd() {doTest("edit");}
+
+  @Test
+  public void testNamespaceType() {doTest("edit");}
+
+  @Test
+  public void testNamespaceTypeEnd() {doTest("edit");}
+
+  @Test
+  public void testNamespaceUse() {doTest("edit");}
+
+  @Test
+  public void testNamespaceUseEnd() {doTest("edit");}
+
+  @Test
   public void testSubNameInAfterDefinition() {doTest("edit");}
 
   @Test

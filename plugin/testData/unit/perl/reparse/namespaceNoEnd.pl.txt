@@ -1,0 +1,16 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
+no Foo::Baredit<caret>;
+----------
+Psi structure
+----------
+Perl5
+  PerlNoStatementElement(NO_STATEMENT)
+    PsiElement(Perl5: no)('no')
+    PsiWhiteSpace(' ')
+    PerlNamespaceElementImpl(Perl5: package::name)('Foo::Baredit')
+    PsiElement(Perl5: ;)(';')

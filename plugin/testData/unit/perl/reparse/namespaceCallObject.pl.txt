@@ -1,0 +1,20 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
+Foedit<caret>o::Bar::->subname;
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlDerefExprImpl(Perl5: DEREF_EXPR)
+      PsiPerlPackageExprImpl(Perl5: PACKAGE_EXPR)
+        PerlNamespaceElementImpl(Perl5: package::name)('Foedito::Bar::')
+      PsiElement(Perl5: ->)('->')
+      PsiPerlSubCallImpl(SUB_CALL)
+        PsiPerlMethodImpl(Perl5: METHOD)
+          PerlSubNameElementImpl(Perl5: subname)('subname')
+    PsiElement(Perl5: ;)(';')

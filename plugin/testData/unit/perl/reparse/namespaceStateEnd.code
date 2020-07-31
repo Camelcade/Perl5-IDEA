@@ -1,0 +1,1 @@
+state Foo::Bar<caret> $var;

@@ -1,0 +1,20 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
+sub Foo::Bedit<caret>ar::something{};
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Foo::Beditar::something
+    PsiElement(Perl5: sub)('sub')
+    PsiWhiteSpace(' ')
+    PerlNamespaceElementImpl(Perl5: package::name::)('Foo::Beditar::')
+    PerlSubNameElementImpl(Perl5: subname)('something')
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiElement(Perl5: })('}')
+  PsiElement(Perl5: ;)(';')

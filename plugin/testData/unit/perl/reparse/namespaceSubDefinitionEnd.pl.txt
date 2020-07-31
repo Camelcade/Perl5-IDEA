@@ -1,0 +1,20 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
+sub Foo::Bar::edit<caret>something{};
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Foo::Bar::editsomething
+    PsiElement(Perl5: sub)('sub')
+    PsiWhiteSpace(' ')
+    PerlNamespaceElementImpl(Perl5: package::name::)('Foo::Bar::')
+    PerlSubNameElementImpl(Perl5: subname)('editsomething')
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiElement(Perl5: })('}')
+  PsiElement(Perl5: ;)(';')

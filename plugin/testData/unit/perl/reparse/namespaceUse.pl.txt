@@ -1,0 +1,16 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
+use Foo::edit<caret>Bar;
+----------
+Psi structure
+----------
+Perl5
+  PerlUseStatementElement(USE_STATEMENT)
+    PsiElement(Perl5: use)('use')
+    PsiWhiteSpace(' ')
+    PerlNamespaceElementImpl(Perl5: package::name)('Foo::editBar')
+    PsiElement(Perl5: ;)(';')

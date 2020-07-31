@@ -1,0 +1,25 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
+subname Foo::Bar::edit<caret>();
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlSubCallImpl(SUB_CALL)
+      PsiPerlMethodImpl(Perl5: METHOD)
+        PerlSubNameElementImpl(Perl5: subname)('subname')
+      PsiWhiteSpace(' ')
+      PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
+        PsiPerlSubCallImpl(SUB_CALL)
+          PsiPerlMethodImpl(Perl5: METHOD)
+            PerlNamespaceElementImpl(Perl5: package::name::)('Foo::Bar::')
+            PerlSubNameElementImpl(Perl5: subname)('edit')
+          PsiPerlParenthesisedCallArgumentsImpl(Perl5: PARENTHESISED_CALL_ARGUMENTS)
+            PsiElement(Perl5: ()('(')
+            PsiElement(Perl5: ))(')')
+    PsiElement(Perl5: ;)(';')

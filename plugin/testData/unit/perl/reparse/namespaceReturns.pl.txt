@@ -1,0 +1,16 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
+#@returns Fooedit<caret>::Bar
+----------
+Psi structure
+----------
+Perl5
+  PerlAnnotationContainerImpl(Perl5: COMMENT_ANNOTATION)
+    PsiPerlAnnotationReturnsImpl(Perl5: ANNOTATION_RETURNS)
+      PsiElement(Perl5: #@returns)('#@returns')
+      PsiWhiteSpace(' ')
+      PerlNamespaceElementImpl(Perl5: package::name)('Fooedit::Bar')

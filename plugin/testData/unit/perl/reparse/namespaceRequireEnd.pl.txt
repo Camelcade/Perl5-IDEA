@@ -1,0 +1,17 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
+require Foo::Baredit<caret>;
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlRequireExprImpl(PERL_REQUIRE_EXPR)
+      PsiElement(Perl5: require)('require')
+      PsiWhiteSpace(' ')
+      PerlNamespaceElementImpl(Perl5: package::name)('Foo::Baredit')
+    PsiElement(Perl5: ;)(';')

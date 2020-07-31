@@ -1,0 +1,16 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
+no Fedit<caret>oo::Bar;
+----------
+Psi structure
+----------
+Perl5
+  PerlNoStatementElement(NO_STATEMENT)
+    PsiElement(Perl5: no)('no')
+    PsiWhiteSpace(' ')
+    PerlNamespaceElementImpl(Perl5: package::name)('Feditoo::Bar')
+    PsiElement(Perl5: ;)(';')
