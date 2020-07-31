@@ -1,8 +1,8 @@
 Reparsing block
 ----------
-Element(Perl5: STRING_DQ)
+PerlVariableNameElementImpl(Perl5: SCALAR_NAME)
 ----------
-qq/test$scalar_name something/
+scalar_name
 ----------
 After typing
 ----------

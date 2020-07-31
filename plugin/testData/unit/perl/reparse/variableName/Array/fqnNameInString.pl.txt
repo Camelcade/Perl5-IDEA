@@ -1,8 +1,8 @@
 Reparsing block
 ----------
-Element(Perl5: STRING_DQ)
+PerlVariableNameElementImpl(Perl5: ARRAY_NAME)
 ----------
-qq/test@Foo::Bar::scalar_name test/
+Foo::Bar::scalar_name
 ----------
 After typing
 ----------

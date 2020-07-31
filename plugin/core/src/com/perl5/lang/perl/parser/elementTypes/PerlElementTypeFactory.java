@@ -47,7 +47,7 @@ public class PerlElementTypeFactory {
       case "HASH_NAME":
       case "GLOB_NAME":
       case "CODE_NAME":
-        return new PerlTokenTypeEx(name, PerlVariableNameElementImpl.class);
+        return new PerlVariableNameTokenType(name);
       case "POD":
         return new PerlSelfReparseableTokenType(name, PerlPodElement.class);
       case "subname":
