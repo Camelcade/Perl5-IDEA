@@ -1240,9 +1240,10 @@ private normal_method ::= <<method method_tokens>>
 private method_tokens ::= 'list' | 'unary' | 'unary_custom'| 'argumentless' |
   'package::name::' 'subname' |
   'subname' ['package::name'] |
-  'method' | 'func' | 'default' |
+  'method' | 'func' | 'default' | 'fun' |
   'finally' | 'try' | 'catch' |
-  'switch' | 'case'
+  'switch' | 'case' |
+  'fp_override' | 'fp_after' | 'fp_before' | 'fp_around' | 'fp_augment'
 
 
 

@@ -1,0 +1,8 @@
+after some($var);
+before some($var);
+around some($var);
+augment some($var);
+method some($var);
+func some($var);
+fun some($var);
+override some($var);
