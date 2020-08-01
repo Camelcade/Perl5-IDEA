@@ -1,0 +1,3 @@
+method some($var){
+    <caret>
+}

@@ -281,6 +281,7 @@
     <defaultTemplatePropertiesProvider
         implementation="com.perl5.lang.perl.idea.filetemplates.PerlFilePropertiesProvider" order="last"/>
 
+    <lang.smartEnterProcessor language="Perl5" implementationClass="com.perl5.lang.perl.idea.editor.smartkeys.PerlSmartEnterProcessor"/>
     <typedHandler implementation="com.perl5.lang.perl.idea.editor.smartkeys.PerlTypedHandler"
                   id="PerlTypedHandler" order="first"/>
     <backspaceHandlerDelegate implementation="com.perl5.lang.perl.idea.editor.smartkeys.PerlBackspaceHandler" order="first"/>

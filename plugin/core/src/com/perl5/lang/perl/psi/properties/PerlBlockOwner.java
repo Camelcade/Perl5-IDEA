@@ -25,17 +25,15 @@ import org.jetbrains.annotations.Nullable;
  * Implement this interface if element contains block
  */
 public interface PerlBlockOwner extends PsiElement {
-  /**
-   * @return use {@link #getBlockSmart()} instead. This method can't handle lazy elements, it's auto-generated
-   */
-  @Deprecated
   default @Nullable PsiPerlBlock getBlock() {
     return PsiTreeUtil.getChildOfType(this, PsiPerlBlock.class);
   }
 
   /**
    * @return a nested block. This method is aware about lazy parsable blocks
+   * @deprecated this may be removed, use {@link #getBlock() instead}
    */
+  @Deprecated
   default @Nullable PsiPerlBlock getBlockSmart() {
     return getBlock();
   }

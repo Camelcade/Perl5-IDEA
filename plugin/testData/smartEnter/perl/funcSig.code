@@ -1,0 +1,1 @@
+func some($var<caret>)

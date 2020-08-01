@@ -1,0 +1,3 @@
+after some($var){
+    <caret>
+}

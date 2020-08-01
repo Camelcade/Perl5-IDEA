@@ -1,0 +1,2 @@
+use Foo::Bar qw/some/;
+<caret>

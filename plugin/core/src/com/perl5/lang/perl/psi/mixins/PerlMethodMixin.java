@@ -132,6 +132,9 @@ public abstract class PerlMethodMixin extends PerlCompositeElementImpl implement
     return childByType == null ? null : (PerlNamespaceElement)childByType;
   }
 
+  /**
+   * fixme this not working with fallback tokens
+   */
   @Override
   public @Nullable PerlSubNameElement getSubNameElement() {
     return findChildByClass(PerlSubNameElement.class);

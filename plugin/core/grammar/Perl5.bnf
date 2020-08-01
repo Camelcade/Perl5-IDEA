@@ -501,7 +501,7 @@
 	mixin("call_arguments")="com.perl5.lang.perl.psi.mixins.PerlCallArguments"
 	extends("parenthesised_call_arguments")=call_arguments
 
-	implements("named_block|conditional_block|unconditional_block")="com.perl5.lang.perl.psi.properties.PerlStatementsContainer"
+	implements("named_block|conditional_block|unconditional_block")="com.perl5.lang.perl.psi.PerlStatementsContainerWithBlock"
 
 	implements("label_declaration")="com.perl5.lang.perl.psi.PerlLabelDeclaration"
 	extends("label_declaration")="com.perl5.lang.perl.psi.mixins.PerlLabelDeclarationMixin"
