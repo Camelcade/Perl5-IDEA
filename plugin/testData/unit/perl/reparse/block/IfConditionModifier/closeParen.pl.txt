@@ -33,15 +33,10 @@ Perl5
                 PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
                 PerlStringContentElementImpl(Perl5: STRING_CONTENT)('hi')
                 PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
-          PsiErrorElement:'if' unexpected
-            <empty list>
-          PsiErrorElement:Semicolon expected
-            <empty list>
-        PsiWhiteSpace(' ')
-        PsiPerlIfCompoundImpl(Perl5: IF_COMPOUND)
-          PsiElement(Perl5: if)('if')
-          PsiPerlConditionalBlockImpl(Perl5: CONDITIONAL_BLOCK)
-            PsiPerlConditionExprImpl(Perl5: CONDITION_EXPR)
+          PsiWhiteSpace(' ')
+          PsiPerlIfStatementModifierImpl(Perl5: IF_STATEMENT_MODIFIER)
+            PsiElement(Perl5: if)('if')
+            PsiPerlParenthesisedExprImpl(Perl5: PARENTHESISED_EXPR)
               PsiElement(Perl5: ()('(')
               PsiWhiteSpace(' ')
               PsiPerlAndExprImpl(Perl5: AND_EXPR)
@@ -54,10 +49,10 @@ Perl5
                   <empty list>
               PsiWhiteSpace('  ')
               PsiElement(Perl5: ))(')')
-        PsiWhiteSpace(' ')
-        PsiErrorElement:')' unexpected
-          PsiElement(Perl5: ))(')')
-        PsiElement(Perl5: ;)(';')
+          PsiWhiteSpace(' ')
+          PsiErrorElement:Perl5: ,, Perl5: => or Perl5: [ expected, got ')'
+            PsiElement(Perl5: ))(')')
+          PsiElement(Perl5: ;)(';')
         PsiWhiteSpace('\n')
         PsiElement(Perl5: })('}')
   PsiWhiteSpace('\n')

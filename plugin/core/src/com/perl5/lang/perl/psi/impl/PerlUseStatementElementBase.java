@@ -146,4 +146,9 @@ public abstract class PerlUseStatementElementBase extends PerlPolyNamedElement<P
   public boolean isFoldedByDefault() {
     return getPackageProcessor().isFoldedByDefault(this);
   }
+
+  @Override
+  public @Nullable PsiPerlStatementModifier getStatementModifier() {
+    return null;
+  }
 }

@@ -735,8 +735,7 @@ statement ::= sub_declaration | statement_body <<statementSemi>>
 
 private statement_body ::= normal_statement {recoverWhile=recover_statement}
 
-private normal_statement ::= expr [<<parseStatementModifier>>] {pin=1}
-//private normal_statement_body ::= expr {recoverWhile=recover_statement}
+private normal_statement ::= expr [statement_modifier | <<parseStatementModifier>>] {pin=1}
 
 // fixme adjust parsing of this thing to avoid duplicates
 sub_definition ::=  ['my'|'our'|'state'|'async'] 'sub' sub_names_token sub_definition_parameters block
@@ -803,7 +802,8 @@ private lnr_param ::= label_expr | expr // fixme scalar_expr ?
 private goto_param ::= label_expr | code_primitive  !'(' | expr
 
 
-statement_modifier ::=
+statement_modifier ::= statement_modifier_variant !('{'|'(')
+private statement_modifier_variant ::=
     if_statement_modifier
     | unless_statement_modifier
     | while_statement_modifier
@@ -815,7 +815,7 @@ if_statement_modifier ::=    'if' expr {pin=1 name="Postfix if"}
 unless_statement_modifier ::=    'unless' expr {pin=1 name="Postfix unless"}
 while_statement_modifier ::=    'while' expr {pin=1 name="Postfix while"}
 until_statement_modifier ::=    'until' expr {pin=1 name="Postfix until"}
-for_statement_modifier ::=    {'for'|'foreach'} expr  {pin=1 name="Postfix for"}
+for_statement_modifier ::=    {{'for'|'foreach'} !(for_iterator)} expr  {pin=1 name="Postfix for"}
 when_statement_modifier ::=    'when' expr {pin=1 name="Postfix when"}
 
 private parse_use_statement ::=  'use' <<parseUseParameters use_no_parameters>> <<statementSemi>> {pin=1}

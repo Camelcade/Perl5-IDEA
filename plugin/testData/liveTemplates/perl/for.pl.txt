@@ -485,10 +485,8 @@ Caret offset: 93
 } continue {}
 
 
-say 'hi' for (my <selection>$i = 0<caret></selection>;
-$i < 0;
-$i++)
-{
+say 'hi'
+for (my <selection>$i = 0<caret></selection>; $i < 0; $i++) {
     
 };
 

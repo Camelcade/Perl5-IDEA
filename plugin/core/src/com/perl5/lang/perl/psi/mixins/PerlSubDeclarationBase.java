@@ -24,6 +24,7 @@ import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
 import com.perl5.lang.perl.psi.PsiPerlExpr;
+import com.perl5.lang.perl.psi.PsiPerlStatementModifier;
 import com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationStub;
 import com.perl5.lang.perl.xsubs.PerlXSubsState;
 import org.jetbrains.annotations.NotNull;
@@ -69,4 +70,8 @@ public abstract class PerlSubDeclarationBase extends PerlSubBase<PerlSubDeclarat
   }
 
   public @Nullable PsiPerlExpr getExpr() {return null;}
+
+  public @Nullable PsiPerlStatementModifier getStatementModifier() {
+    return null;
+  }
 }

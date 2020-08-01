@@ -104,4 +104,9 @@ public class PerlMooseAugmentStatementImpl extends PerlStubBasedPsiElementBase<P
   public @Nullable PsiPerlExpr getExpr() {
     return findChildByClass(PsiPerlExpr.class);
   }
+
+  @Override
+  public @Nullable PsiPerlStatementModifier getStatementModifier() {
+    return null;
+  }
 }

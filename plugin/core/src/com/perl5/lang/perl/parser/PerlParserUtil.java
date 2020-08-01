@@ -162,30 +162,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
   @SuppressWarnings("UnusedReturnValue")
   public static boolean parseStatementModifier(PsiBuilder b, int l) {
     assert b instanceof PerlBuilder;
-    if (((PerlBuilder)b).getPerlParser().parseStatementModifier(b, l)) {
-      return true;
-    }
-
-    PsiBuilder.Marker m = b.mark();
-
-    if (PerlParserImpl.statement_modifier(b, l)) {
-      IElementType tokenType = b.getTokenType();
-      if (((PerlBuilder)b).getPerlParser().getConsumableSemicolonTokens().contains(tokenType) ||
-          ((PerlBuilder)b).getPerlParser().getUnconsumableSemicolonTokens().contains(tokenType))    // we accepts only strict modifiers;
-      {
-        m.drop();
-        return true;
-      }
-      else    // we suppose that it's compound
-      {
-        m.rollbackTo();
-        return false;
-      }
-    }
-    else {
-      m.drop();
-      return false;
-    }
+    return ((PerlBuilder)b).getPerlParser().parseStatementModifier(b, l);
   }
 
   /**

@@ -33,24 +33,20 @@ Perl5
                 PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
                 PerlStringContentElementImpl(Perl5: STRING_CONTENT)('hi')
                 PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
-          PsiErrorElement:'foreach' unexpected
-            <empty list>
-          PsiErrorElement:Semicolon expected
-            <empty list>
-        PsiWhiteSpace(' ')
-        PsiPerlForeachCompoundImpl(Perl5: FOREACH_COMPOUND)
-          PsiElement(Perl5: foreach)('foreach')
-          PsiPerlConditionExprImpl(Perl5: CONDITION_EXPR)
-            PsiElement(Perl5: ()('(')
-            PsiPerlAddExprImpl(Perl5: ADD_EXPR)
-              PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE)
-                PsiElement(Perl5: $@)('@')
-                PerlVariableNameElementImpl(Perl5: ARRAY_NAME)('something')
-              PsiWhiteSpace(' ')
-              PsiElement(Perl5: +)('+')
-              PsiWhiteSpace(' ')
-              PsiPerlStringSqImpl(Perl5: STRING_SQ)
-                PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
-                PerlStringContentElementImpl(Perl5: STRING_CONTENT)(' );\n}\n')
-                PsiErrorElement:Perl5: ;, Perl5: QUOTE_SINGLE_CLOSE, Perl5: STRING_CONTENT or Perl5: \\" expected
-                  <empty list>
+          PsiWhiteSpace(' ')
+          PsiPerlForStatementModifierImpl(Perl5: FOR_STATEMENT_MODIFIER)
+            PsiElement(Perl5: foreach)('foreach')
+            PsiPerlParenthesisedExprImpl(Perl5: PARENTHESISED_EXPR)
+              PsiElement(Perl5: ()('(')
+              PsiPerlAddExprImpl(Perl5: ADD_EXPR)
+                PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE)
+                  PsiElement(Perl5: $@)('@')
+                  PerlVariableNameElementImpl(Perl5: ARRAY_NAME)('something')
+                PsiWhiteSpace(' ')
+                PsiElement(Perl5: +)('+')
+                PsiWhiteSpace(' ')
+                PsiPerlStringSqImpl(Perl5: STRING_SQ)
+                  PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
+                  PerlStringContentElementImpl(Perl5: STRING_CONTENT)(' );\n}\n')
+                  PsiErrorElement:Perl5: QUOTE_SINGLE_CLOSE, Perl5: STRING_CONTENT or Perl5: \\" expected
+                    <empty list>

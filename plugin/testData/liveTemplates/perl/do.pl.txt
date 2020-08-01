@@ -1482,7 +1482,7 @@ do
     <caret>
 }
 
-    for($a =1;$a < 1; $++){}
+for($a =1;$a < 1; $++){}
 
 
 foreach($a =1;$a < 1; $++){}
@@ -1580,7 +1580,7 @@ do
     <caret>
 }
 
-    foreach($a =1;$a < 1; $++){}
+foreach($a =1;$a < 1; $++){}
 
 
 while($a){}continue{}

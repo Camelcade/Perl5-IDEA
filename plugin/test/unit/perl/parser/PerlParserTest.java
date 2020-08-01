@@ -27,6 +27,9 @@ public class PerlParserTest extends PerlParserTestBase {
   }
 
   @Test
+  public void testStatementModifiers() {doTest();}
+
+  @Test
   public void testCharSubstitutionsWithUnderscore() {doTest();}
 
   @Test
