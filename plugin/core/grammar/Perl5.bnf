@@ -1035,7 +1035,7 @@ replacement_regex ::=
     regex_replace
     'r}'
     [perl_regex_modifiers]
-    {pin=1}
+    {pin=1 extraRoot=true}
 
 private regex_match ::= 'r{' [perl_regex]
 private regex_replace ::= regex_replace_regex | regex_replace_code
@@ -1061,7 +1061,7 @@ private perl_regex_item ::=
 //char_range ::= '\w' '-' '\w'
 //posix_char_class ::= '[:' ['^'] [':name:'] ':]' {pin=1}
 
-tr_regex ::=  ('tr'|'y') tr_search tr_replacement [tr_modifiers] {pin=1}
+tr_regex ::=  ('tr'|'y') tr_search tr_replacement [tr_modifiers] {pin=1 extraRoot=true}
 private tr_search ::= 'r{' [tr_searchlist] {pin=1}
 tr_searchlist ::= [tr_block_content]
 private tr_block_content ::= {qq_string_element | '"-'}+

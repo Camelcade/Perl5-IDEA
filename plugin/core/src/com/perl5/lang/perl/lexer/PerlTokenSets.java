@@ -402,4 +402,12 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
       FOR_COMPOUND, FOREACH_COMPOUND
     )
   );
+
+  TokenSet LAZY_PARSABLE_REGEX = TokenSet.create(LP_REGEX, LP_REGEX_X, LP_REGEX_XX);
+
+  TokenSet LAZY_TR_STRINGS = TokenSet.create(LP_STRING_TR, LP_STRING_QQ_RESTRICTED);
+
+  TokenSet LAZY_REGEX_STRINGS = TokenSet.create(LP_STRING_QQ_RESTRICTED, LP_STRING_RE);
+
+  TokenSet LAZY_CODE_BLOCKS = TokenSet.create(LP_CODE_BLOCK, LP_CODE_BLOCK_WITH_TRYCATCH);
 }

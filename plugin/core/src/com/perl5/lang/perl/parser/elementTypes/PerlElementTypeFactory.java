@@ -316,7 +316,7 @@ public class PerlElementTypeFactory {
       case "REGEX_EXPR":
         return new PerlElementTypeEx(name, PsiPerlRegexExprImpl.class);
       case "REPLACEMENT_REGEX":
-        return new PerlElementTypeEx(name, PsiPerlReplacementRegexImpl.class);
+        return new PerlRegexReplacementElementType(name, PsiPerlReplacementRegexImpl.class);
       case "RETURN_EXPR":
         return new PerlElementTypeEx(name, PsiPerlReturnExprImpl.class);
       case "ARRAY_SHIFT_EXPR":
@@ -409,7 +409,7 @@ public class PerlElementTypeFactory {
       case "TR_MODIFIERS":
         return new PerlElementTypeEx(name, PsiPerlTrModifiersImpl.class);
       case "TR_REGEX":
-        return new PerlElementTypeEx(name, PsiPerlTrRegexImpl.class);
+        return new PerlRegexReplacementElementType(name, PsiPerlTrRegexImpl.class);
       case "TR_REPLACEMENTLIST":
         return new PerlElementTypeEx(name, PsiPerlTrReplacementlistImpl.class);
       case "TR_SEARCHLIST":

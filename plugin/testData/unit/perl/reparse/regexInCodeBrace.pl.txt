@@ -1,0 +1,36 @@
+Reparsing block
+----------
+Element(Perl5: REPLACEMENT_REGEX)
+----------
+s{some} {thing }e
+----------
+After typing
+----------
+s{some} {thing edit<caret>}e;
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlReplacementRegexImpl(Perl5: REPLACEMENT_REGEX)
+      PsiElement(Perl5: s)('s')
+      PsiElement(Perl5: r{)('{')
+      PsiPerlPerlRegexImpl(Perl5: PERL_REGEX)
+        PsiElement(Perl5: regex)('some')
+      PsiElement(Perl5: r})('}')
+      PsiWhiteSpace(' ')
+      PsiElement(Perl5: re{)('{')
+      PsiPerlBlockBracelessImpl(Perl5: BLOCK_BRACELESS)
+        PsiPerlStatementImpl(Perl5: STATEMENT)
+          PsiPerlSubCallImpl(SUB_CALL)
+            PsiPerlMethodImpl(Perl5: METHOD)
+              PerlSubNameElementImpl(Perl5: subname)('thing')
+            PsiWhiteSpace(' ')
+            PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
+              PsiPerlSubCallImpl(SUB_CALL)
+                PsiPerlMethodImpl(Perl5: METHOD)
+                  PerlSubNameElementImpl(Perl5: subname)('edit')
+      PsiElement(Perl5: r})('}')
+      PsiPerlPerlRegexModifiersImpl(Perl5: PERL_REGEX_MODIFIERS)
+        PsiElement(Perl5: /m)('e')
+    PsiElement(Perl5: ;)(';')

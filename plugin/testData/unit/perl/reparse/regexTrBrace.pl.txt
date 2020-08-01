@@ -1,0 +1,26 @@
+Reparsing block
+----------
+Element(Perl5: TR_REGEX)
+----------
+y{some}{thing }
+----------
+After typing
+----------
+y{some} <caret>{thing };
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlTrRegexImpl(Perl5: TR_REGEX)
+      PsiElement(Perl5: y)('y')
+      PsiElement(Perl5: r{)('{')
+      PsiPerlTrSearchlistImpl(Perl5: TR_SEARCHLIST)
+        PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('some')
+      PsiElement(Perl5: r})('}')
+      PsiWhiteSpace(' ')
+      PsiElement(Perl5: r{)('{')
+      PsiPerlTrReplacementlistImpl(Perl5: TR_REPLACEMENTLIST)
+        PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('thing ')
+      PsiElement(Perl5: r})('}')
+    PsiElement(Perl5: ;)(';')

@@ -1,6 +1,8 @@
 Reparsing block
 ----------
-Full reparse
+Element(Perl5: REPLACEMENT_REGEX)
+----------
+s/asdfasdf/replacement/
 ----------
 After typing
 ----------

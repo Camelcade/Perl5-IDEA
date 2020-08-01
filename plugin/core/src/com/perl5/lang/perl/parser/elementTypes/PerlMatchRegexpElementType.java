@@ -19,6 +19,7 @@ package com.perl5.lang.perl.parser.elementTypes;
 import com.intellij.lexer.FlexAdapter;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.perl.lexer.PerlTokenSets;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -47,7 +48,7 @@ public class PerlMatchRegexpElementType extends PerlTwoQuotesQuoteLikeElementTyp
 
   @Override
   protected boolean isContentToken(@Nullable IElementType tokenType) {
-    return tokenType == LP_REGEX || tokenType == LP_REGEX_X || tokenType == LP_REGEX_XX;
+    return PerlTokenSets.LAZY_PARSABLE_REGEX.contains(tokenType);
   }
 
   @Override

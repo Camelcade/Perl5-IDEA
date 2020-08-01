@@ -1,13 +1,11 @@
 Reparsing block
 ----------
-Element(Perl5: BLOCK)
+Element(Perl5: REPLACEMENT_REGEX)
 ----------
-{
-  s/test
+s/test
     say 'hi';
     say 'hi'
-  /replacement $1/;
-}
+  /replacement $1/
 ----------
 After typing
 ----------

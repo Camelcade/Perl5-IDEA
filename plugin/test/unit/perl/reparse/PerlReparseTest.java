@@ -27,6 +27,18 @@ public class PerlReparseTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testRegexInCodeBrace() {doTest("edit");}
+
+  @Test
+  public void testRegexInCodeSlash() {doTest("edit");}
+
+  @Test
+  public void testRegexTrBrace() {doTest(" ");}
+
+  @Test
+  public void testRegexTrSlash() {doTest(" ");}
+
+  @Test
   public void testBlockCommentData() {doTest("test");}
 
   @Test
