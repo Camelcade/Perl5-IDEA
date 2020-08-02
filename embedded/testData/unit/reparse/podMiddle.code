@@ -1,0 +1,15 @@
+something <div>
+
+<?
+
+=pod HEAD1
+
+something<caret>
+
+=cut
+
+say 'hi';
+
+ ?>
+
+ </div> else

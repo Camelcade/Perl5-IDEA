@@ -21,11 +21,16 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.embedded.EmbeddedPerlLanguage;
+import com.perl5.lang.embedded.lexer.EmbeddedPerlLexer;
+import com.perl5.lang.perl.psi.PerlLexerAwareFileViewProvider;
 import com.perl5.lang.perl.psi.PerlMultiplePsiFilesPerDocumentFileViewProvider;
 import org.jetbrains.annotations.NotNull;
 
+import static com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes.EMBED_TEMPLATE_BLOCK_HTML;
 
-public class EmbeddedPerlFileViewProvider extends PerlMultiplePsiFilesPerDocumentFileViewProvider {
+
+public class EmbeddedPerlFileViewProvider extends PerlMultiplePsiFilesPerDocumentFileViewProvider implements
+                                                                                                  PerlLexerAwareFileViewProvider {
   public EmbeddedPerlFileViewProvider(final PsiManager manager, final VirtualFile virtualFile, final boolean physical) {
     super(manager, virtualFile, physical);
   }
@@ -52,5 +57,13 @@ public class EmbeddedPerlFileViewProvider extends PerlMultiplePsiFilesPerDocumen
   @Override
   protected @NotNull EmbeddedPerlFileViewProvider cloneInner(final @NotNull VirtualFile copy) {
     return new EmbeddedPerlFileViewProvider(getManager(), copy, false, getTemplateDataLanguage());
+  }
+
+  @Override
+  public int getLexerStateFor(@NotNull IElementType tokenType) {
+    if (tokenType == EMBED_TEMPLATE_BLOCK_HTML) {
+      return EmbeddedPerlLexer.YYINITIAL;
+    }
+    return EmbeddedPerlLexer.PERL;
   }
 }

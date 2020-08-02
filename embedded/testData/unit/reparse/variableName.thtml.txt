@@ -1,0 +1,35 @@
+Reparsing block
+----------
+PerlVariableNameElementImpl(Perl5: SCALAR_NAME)
+----------
+variable
+----------
+After typing
+----------
+something <div>
+
+<?
+
+
+$varedit<caret>iable;
+
+ ?>
+
+ </div> else
+----------
+Psi structure
+----------
+Embedded Perl file
+  PsiComment(Embedded Perl5: EMBED_TEMPLATE_BLOCK_HTML)('something <div>')
+  PsiWhiteSpace('\n\n')
+  PsiComment(Embedded Perl5: EMBED_MARKER_OPEN)('<?')
+  PsiWhiteSpace('\n\n\n')
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+      PsiElement(Perl5: $$)('$')
+      PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('vareditiable')
+    PsiElement(Perl5: ;)(';')
+  PsiWhiteSpace('\n\n ')
+  PsiComment(Embedded Perl5: EMBED_MARKER_CLOSE)('?>')
+  PsiWhiteSpace('\n\n ')
+  PsiComment(Embedded Perl5: EMBED_TEMPLATE_BLOCK_HTML)('</div> else')

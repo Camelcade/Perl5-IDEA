@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ import com.perl5.lang.pod.elementTypes.PodTemplatingElementType;
 
 
 public interface EmbeddedPerlElementTypes extends PerlElementTypes {
-  IElementType EMBED_TEMPLATE_BLOCK_HTML = new EmbeddedPerlTokenType("EMBED_TEMPLATE_BLOCK_HTML");
+  IElementType EMBED_TEMPLATE_BLOCK_HTML = new EmbeddedPerlTemplateTokenType();
   IElementType EMBED_OUTER_ELEMENT_TYPE = new EmbeddedPerlTokenType("EMBED_OUTER_ELEMENT_TYPE");
   IElementType EMBED_HTML_TEMPLATE_DATA =
     new TemplateDataElementType("EMBED_HTML_TEMPLATE_DATA", EmbeddedPerlLanguage.INSTANCE, EMBED_TEMPLATE_BLOCK_HTML,

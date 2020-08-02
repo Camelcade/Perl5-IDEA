@@ -1,0 +1,14 @@
+something <div>
+
+<?
+
+if( $a ){
+   ?> true <caret> branch <?
+}
+else{
+  ?>  false branch  <?
+}
+
+ ?>
+
+ </div> else

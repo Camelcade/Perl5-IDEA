@@ -1,0 +1,10 @@
+something <div>
+
+<?
+
+
+sub_<caret>name();
+
+ ?>
+
+ </div> else

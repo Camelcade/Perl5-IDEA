@@ -1,0 +1,11 @@
+something <div>
+
+<?
+
+
+say 'hi';
+
+=pod HEAD1
+
+something<caret>
+
