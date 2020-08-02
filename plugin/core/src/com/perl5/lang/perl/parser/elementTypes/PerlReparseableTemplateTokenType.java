@@ -56,7 +56,7 @@ public abstract class PerlReparseableTemplateTokenType extends PerlReparseableTo
     Language baseLanguage = fileViewProvider.getBaseLanguage();
     Lexer lexer = LanguageParserDefinitions.INSTANCE.forLanguage(baseLanguage).createLexer(psiElement.getProject());
     int alternativeInitialState = fileViewProvider instanceof PerlLexerAwareFileViewProvider ?
-                                  ((PerlLexerAwareFileViewProvider)fileViewProvider).getLexerStateFor(this) : 0;
+                                  ((PerlLexerAwareFileViewProvider)fileViewProvider).getLexerStateFor(nodeToLex) : 0;
     if (alternativeInitialState != 0) {
       return new DelegateLexer(lexer) {
         @Override

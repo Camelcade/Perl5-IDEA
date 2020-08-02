@@ -16,15 +16,27 @@
 
 package com.perl5.lang.perl.psi;
 
+import com.intellij.lang.ASTNode;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 
 public interface PerlLexerAwareFileViewProvider extends FileViewProvider {
   /**
+   * @return lexer state that need to be used in base lexer for lexing particular node.
+   * @apiNote This might be necessary for confirming leaf consistency with lexer in some tricky
+   * cases, like templating languages. Base language elements may have different states, but template state is usually the same.   *
+   */
+  default int getLexerStateFor(@NotNull ASTNode node) {
+    return getLexerStateFor(node.getElementType());
+  }
+
+  /**
    * @return lexer state that need to be used in base lexer for lexing particular token type.
    * @apiNote This might be necessary for confirming leaf consistency with lexer in some tricky
    * cases, like templating languages. Base language elements may have different states, but template state is usually the same.
    */
-  int getLexerStateFor(@NotNull IElementType tokenType);
+  default int getLexerStateFor(@NotNull IElementType tokenType) {
+    return 0;
+  }
 }
