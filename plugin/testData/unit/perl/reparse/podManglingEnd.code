@@ -1,0 +1,9 @@
+say 'hi';
+
+=head1 test
+
+test
+
+=<caret>cut
+
+say 'end';

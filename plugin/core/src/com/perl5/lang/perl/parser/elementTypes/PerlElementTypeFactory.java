@@ -53,7 +53,7 @@ public class PerlElementTypeFactory {
       case "CODE_NAME":
         return new PerlVariableNameTokenType(name);
       case "POD":
-        return new PerlSelfReparseableTokenType(name, PerlPodElement.class);
+        return new PerlPodReparseableTokenType(name);
       case "subname":
       case "list":
       case "unary":

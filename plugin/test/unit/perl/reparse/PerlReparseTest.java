@@ -27,6 +27,12 @@ public class PerlReparseTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testPodManglingStart() {doTestBS();}
+
+  @Test
+  public void testPodManglingEnd() {doTestBS();}
+
+  @Test
   public void testRegexInCodeBrace() {doTest("edit");}
 
   @Test
@@ -682,7 +688,10 @@ public class PerlReparseTest extends PerlLightTestCase {
     initWithTextSmartWithoutErrors(content);
     doTestReparseWithoutInit(textToInsert);
   }
+
   private void doTest(@NotNull String textToInsert) {
     doTestReparse(textToInsert);
   }
+
+  private void doTestBS() {doTestReparseBs();}
 }

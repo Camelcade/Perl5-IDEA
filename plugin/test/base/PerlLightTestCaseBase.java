@@ -129,6 +129,7 @@ import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.refactoring.rename.inplace.VariableInplaceRenameHandler;
 import com.intellij.refactoring.util.NonCodeSearchDescriptionLocation;
 import com.intellij.testFramework.MapDataContext;
+import com.intellij.testFramework.ParsingTestCase;
 import com.intellij.testFramework.UsefulTestCase;
 import com.intellij.testFramework.fixtures.CodeInsightTestUtil;
 import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
@@ -2762,6 +2763,20 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     doTestReparseWithoutInit(textToInsert);
   }
 
+  protected void doTestReparseBs() {
+    initWithFileSmart();
+    doTestReparseWithoutInit(() -> {
+      Editor editor = getEditor();
+      CaretModel caretModel = editor.getCaretModel();
+      Document document = editor.getDocument();
+      int offset = caretModel.getOffset();
+      if (offset > 0) {
+        document.deleteString(offset - 1, offset);
+        caretModel.moveToOffset(offset - 1);
+      }
+    });
+  }
+
   protected void doTestReparseWithoutInit(@NotNull String textToInsert) {
     doTestReparseWithoutInit(() -> EditorModificationUtil.insertStringAtCaret(getEditor(), textToInsert));
   }
@@ -2789,8 +2804,12 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     result.append(getEditorTextWithCaretsAndSelections());
     result.append(SEPARATOR_NEWLINES).append("Psi structure").append(SEPARATOR_NEWLINES);
     PsiDocumentManager.getInstance(getProject()).commitAllDocuments();
-    result.append(DebugUtil.psiToString(getFile(), false, false));
+    String psiString = DebugUtil.psiToString(getFile(), false, false);
+    result.append(psiString);
 
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), result.toString());
+    if (!psiString.contains("PsiErrorElement")) {
+      WriteAction.run(() -> ParsingTestCase.ensureCorrectReparse(getFile()));
+    }
   }
 }
