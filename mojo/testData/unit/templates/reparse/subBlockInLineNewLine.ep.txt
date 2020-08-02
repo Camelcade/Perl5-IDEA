@@ -1,0 +1,32 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
+something <div>
+
+% sub somesub(){  
+<caret>;}
+
+ </div> else
+----------
+Psi structure
+----------
+Mojolicious Perl5 Template
+  PsiComment(Mojolicious: MOJO_TEMPLATE_BLOCK_HTML)('something <div>')
+  PsiWhiteSpace('\n\n')
+  PsiComment(Mojolicious: %)('%')
+  PsiWhiteSpace(' ')
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojo::Template::Sandbox::A32391983EAC9436FC59B109418A830A::somesub
+    PsiElement(Perl5: sub)('sub')
+    PsiWhiteSpace(' ')
+    PerlSubNameElementImpl(Perl5: subname)('somesub')
+    PsiElement(Perl5: ()('(')
+    PsiElement(Perl5: ))(')')
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiErrorElement:Perl5: } expected
+        <empty list>
+  PsiWhiteSpace('  \n')
+  PsiComment(Mojolicious: MOJO_TEMPLATE_BLOCK_HTML)(';}\n\n </div> else')

@@ -27,7 +27,7 @@ import org.jetbrains.annotations.NotNull;
 
 
 public interface MojoliciousElementTypes extends MojoliciousSyntaxElements {
-  IElementType MOJO_TEMPLATE_BLOCK_HTML = new MojoliciousTokenType("MOJO_TEMPLATE_BLOCK_HTML");
+  IElementType MOJO_TEMPLATE_BLOCK_HTML = new MojoTemplateTokenType();
   IElementType MOJO_OUTER_ELEMENT_TYPE = new MojoliciousTokenType("MOJO_OUTER_ELEMENT_TYPE");
   IElementType MOJO_HTML_TEMPLATE_DATA =
     new TemplateDataElementType("MOJO_HTML_TEMPLATE_DATA", MojoliciousLanguage.INSTANCE, MOJO_TEMPLATE_BLOCK_HTML, MOJO_OUTER_ELEMENT_TYPE);

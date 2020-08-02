@@ -1,0 +1,9 @@
+something <div>
+
+<%
+
+say 'hi';
+
+ %>
+
+ </div><caret> else

@@ -1,0 +1,5 @@
+something <div>
+
+% sub somesub(){  <caret>;}
+
+ </div> else

@@ -16,21 +16,33 @@
 
 package com.perl5.lang.mojolicious;
 
+import com.intellij.lang.ASTNode;
 import com.intellij.lang.PsiParser;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.FileViewProvider;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.impl.source.DummyHolder;
+import com.intellij.psi.impl.source.tree.TreeUtil;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
+import com.perl5.lang.mojolicious.lexer.MojoliciousLexer;
 import com.perl5.lang.mojolicious.lexer.MojoliciousLexerAdapter;
 import com.perl5.lang.mojolicious.psi.impl.MojoliciousFileImpl;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.parser.MojoliciousParser;
+import com.perl5.lang.perl.psi.PerlLexerAwareParserDefinition;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
 
-public class MojoliciousParserDefinition extends PerlParserDefinition implements MojoliciousElementTypes {
+import static com.perl5.lang.mojolicious.MojoliciousElementTypes.*;
+
+
+public class MojoliciousParserDefinition extends PerlParserDefinition implements PerlLexerAwareParserDefinition {
   public static final TokenSet COMMENTS = TokenSet.orSet(PerlParserDefinition.COMMENTS,
                                                          TokenSet.create(
                                                            MOJO_TEMPLATE_BLOCK_HTML,
@@ -73,5 +85,32 @@ public class MojoliciousParserDefinition extends PerlParserDefinition implements
   @Override
   public @NotNull PsiParser createParser(Project project) {
     return new MojoliciousParser();
+  }
+
+  @Override
+  public int getLexerStateFor(@NotNull ASTNode node) {
+    IElementType tokenType = node.getElementType();
+    if (tokenType == MojoliciousElementTypes.MOJO_TEMPLATE_BLOCK_HTML) {
+      return MojoliciousLexer.YYINITIAL;
+    }
+
+    PsiElement parent = node.getPsi().getParent();
+    ASTNode run = parent instanceof DummyHolder ? Objects.requireNonNull(parent.getContext()).getNode() : node;
+
+    while (run != null) {
+      if (StringUtil.containsLineBreak(run.getChars())) {
+        return MojoliciousLexer.PERL_BLOCK;
+      }
+      IElementType elementType = run.getElementType();
+      if (MojoTokenSets.BLOCK_OPENERS.contains(elementType)) {
+        return MojoliciousLexer.PERL_BLOCK;
+      }
+      else if (MojoTokenSets.LINE_OPENERS.contains(elementType)) {
+        return MojoliciousLexer.PERL_LINE;
+      }
+      run = TreeUtil.prevLeaf(run);
+    }
+
+    return MojoliciousLexer.YYINITIAL;
   }
 }

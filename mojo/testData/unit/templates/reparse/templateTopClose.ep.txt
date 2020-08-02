@@ -1,0 +1,48 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
+something<% <caret> <div>
+
+<%
+
+say 'hi';
+
+ %>
+
+ </div> else
+----------
+Psi structure
+----------
+Mojolicious Perl5 Template
+  PsiComment(Mojolicious: MOJO_TEMPLATE_BLOCK_HTML)('something')
+  PsiComment(Mojolicious: <%)('<%')
+  PsiWhiteSpace('  ')
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlCompareExprImpl(Perl5: COMPARE_EXPR)
+      PsiPerlFileReadExprImpl(Perl5: FILE_READ_EXPR)
+        PsiElement(Perl5: LEFT_ANGLE)('<')
+        PsiPerlPerlHandleExprImpl(Perl5: PERL_HANDLE_EXPR)
+          PsiElement(Perl5: HANDLE)('div')
+        PsiElement(Perl5: RIGHT_ANGLE)('>')
+      PsiWhiteSpace('\n\n')
+      PsiElement(Perl5: <)('<')
+      PsiPerlHashVariableImpl(Perl5: HASH_VARIABLE)
+        PsiElement(Perl5: $%)('%')
+        PsiWhiteSpace('\n\n')
+        PerlVariableNameElementImpl(Perl5: HASH_NAME)('say')
+    PsiErrorElement:Semicolon expected
+      <empty list>
+  PsiWhiteSpace(' ')
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlStringSqImpl(Perl5: STRING_SQ)
+      PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
+      PerlStringContentElementImpl(Perl5: STRING_CONTENT)('hi')
+      PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
+    PsiElement(Perl5: ;)(';')
+  PsiWhiteSpace('\n\n ')
+  PsiComment(Mojolicious: %>)('%>')
+  PsiWhiteSpace('\n\n ')
+  PsiComment(Mojolicious: MOJO_TEMPLATE_BLOCK_HTML)('</div> else')

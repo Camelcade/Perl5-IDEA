@@ -1,0 +1,43 @@
+Reparsing block
+----------
+Element(Perl5: HASH_INDEX)
+----------
+{foo }
+----------
+After typing
+----------
+<div>
+<%
+
+  $test{foo edit<caret>};
+
+  %> </div>
+----------
+Psi structure
+----------
+Mojolicious Perl5 Template
+  PsiComment(Mojolicious: MOJO_TEMPLATE_BLOCK_HTML)('<div>')
+  PsiWhiteSpace('\n')
+  PsiComment(Mojolicious: <%)('<%')
+  PsiWhiteSpace('\n\n  ')
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlHashElementImpl(Perl5: HASH_ELEMENT)
+      PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+        PsiElement(Perl5: $$)('$')
+        PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('test')
+      PsiPerlHashIndexImpl(Perl5: HASH_INDEX)
+        PsiElement(Perl5: {)('{')
+        PsiPerlSubCallImpl(SUB_CALL)
+          PsiPerlMethodImpl(Perl5: METHOD)
+            PerlSubNameElementImpl(Perl5: subname)('foo')
+          PsiWhiteSpace(' ')
+          PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
+            PsiPerlSubCallImpl(SUB_CALL)
+              PsiPerlMethodImpl(Perl5: METHOD)
+                PerlSubNameElementImpl(Perl5: subname)('edit')
+        PsiElement(Perl5: })('}')
+    PsiElement(Perl5: ;)(';')
+  PsiWhiteSpace('\n\n  ')
+  PsiComment(Mojolicious: %>)('%>')
+  PsiWhiteSpace(' ')
+  PsiComment(Mojolicious: MOJO_TEMPLATE_BLOCK_HTML)('</div>')

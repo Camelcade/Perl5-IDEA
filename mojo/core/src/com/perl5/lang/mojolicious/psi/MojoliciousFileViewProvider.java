@@ -20,13 +20,15 @@ import com.intellij.lang.Language;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.mojolicious.MojoliciousElementTypes;
 import com.perl5.lang.mojolicious.MojoliciousLanguage;
 import com.perl5.lang.perl.psi.PerlMultiplePsiFilesPerDocumentFileViewProvider;
 import org.jetbrains.annotations.NotNull;
 
+import static com.perl5.lang.mojolicious.MojoliciousElementTypes.MOJO_HTML_TEMPLATE_DATA;
+import static com.perl5.lang.mojolicious.MojoliciousElementTypes.MOJO_POD_TEMPLATE_DATA;
 
-public class MojoliciousFileViewProvider extends PerlMultiplePsiFilesPerDocumentFileViewProvider implements MojoliciousElementTypes {
+
+public class MojoliciousFileViewProvider extends PerlMultiplePsiFilesPerDocumentFileViewProvider {
   public MojoliciousFileViewProvider(final PsiManager manager, final VirtualFile virtualFile, final boolean physical) {
     super(manager, virtualFile, physical);
   }

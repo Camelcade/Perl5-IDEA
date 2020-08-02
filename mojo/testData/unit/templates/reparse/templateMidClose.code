@@ -1,0 +1,17 @@
+something <div>
+
+<%
+
+say 'hi';
+
+ %>
+
+middle <caret> text
+
+<%
+
+say 'hi';
+
+ %>
+
+ </div> else

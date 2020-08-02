@@ -1,0 +1,32 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
+<div>
+
+<%
+  # comment
+<caret> test
+%>
+
+</div>
+----------
+Psi structure
+----------
+Mojolicious Perl5 Template
+  PsiComment(Mojolicious: MOJO_TEMPLATE_BLOCK_HTML)('<div>')
+  PsiWhiteSpace('\n\n')
+  PsiComment(Mojolicious: <%)('<%')
+  PsiWhiteSpace('\n  ')
+  PsiComment(Perl5: COMMENT_LINE)('# comment')
+  PsiWhiteSpace('\n ')
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlSubCallImpl(SUB_CALL)
+      PsiPerlMethodImpl(Perl5: METHOD)
+        PerlSubNameElementImpl(Perl5: subname)('test')
+  PsiWhiteSpace('\n')
+  PsiComment(Mojolicious: %>)('%>')
+  PsiWhiteSpace('\n\n')
+  PsiComment(Mojolicious: MOJO_TEMPLATE_BLOCK_HTML)('</div>')

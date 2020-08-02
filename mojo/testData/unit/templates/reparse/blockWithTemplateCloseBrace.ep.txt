@@ -1,0 +1,68 @@
+Reparsing block
+----------
+PsiComment(Mojolicious: MOJO_TEMPLATE_BLOCK_HTML)
+----------
+true }  branch
+----------
+After typing
+----------
+something <div>
+
+<%
+
+if( $a ){
+          %> true } edit<caret> branch <%
+}
+else{
+  %> false branch <%
+}
+
+ %>
+
+ </div> else
+----------
+Psi structure
+----------
+Mojolicious Perl5 Template
+  PsiComment(Mojolicious: MOJO_TEMPLATE_BLOCK_HTML)('something <div>')
+  PsiWhiteSpace('\n\n')
+  PsiComment(Mojolicious: <%)('<%')
+  PsiWhiteSpace('\n\n')
+  PsiPerlIfCompoundImpl(Perl5: IF_COMPOUND)
+    PsiElement(Perl5: if)('if')
+    PsiPerlConditionalBlockImpl(Perl5: CONDITIONAL_BLOCK)
+      PsiPerlConditionExprImpl(Perl5: CONDITION_EXPR)
+        PsiElement(Perl5: ()('(')
+        PsiWhiteSpace(' ')
+        PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+          PsiElement(Perl5: $$)('$')
+          PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('a')
+        PsiWhiteSpace(' ')
+        PsiElement(Perl5: ))(')')
+      PsiPerlBlockImpl(Perl5: BLOCK)
+        PsiElement(Perl5: {)('{')
+        PsiWhiteSpace('\n          ')
+        PsiComment(Mojolicious: %>)('%>')
+        PsiWhiteSpace(' ')
+        PsiComment(Mojolicious: MOJO_TEMPLATE_BLOCK_HTML)('true } edit branch')
+        PsiWhiteSpace(' ')
+        PsiComment(Mojolicious: <%)('<%')
+        PsiWhiteSpace('\n')
+        PsiElement(Perl5: })('}')
+    PsiWhiteSpace('\n')
+    PsiElement(Perl5: else)('else')
+    PsiPerlUnconditionalBlockImpl(Perl5: UNCONDITIONAL_BLOCK)
+      PsiPerlBlockImpl(Perl5: BLOCK)
+        PsiElement(Perl5: {)('{')
+        PsiWhiteSpace('\n  ')
+        PsiComment(Mojolicious: %>)('%>')
+        PsiWhiteSpace(' ')
+        PsiComment(Mojolicious: MOJO_TEMPLATE_BLOCK_HTML)('false branch')
+        PsiWhiteSpace(' ')
+        PsiComment(Mojolicious: <%)('<%')
+        PsiWhiteSpace('\n')
+        PsiElement(Perl5: })('}')
+  PsiWhiteSpace('\n\n ')
+  PsiComment(Mojolicious: %>)('%>')
+  PsiWhiteSpace('\n\n ')
+  PsiComment(Mojolicious: MOJO_TEMPLATE_BLOCK_HTML)('</div> else')

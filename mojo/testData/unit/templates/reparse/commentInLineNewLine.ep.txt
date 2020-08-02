@@ -1,0 +1,23 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
+<div>
+
+%  # comment
+<caret> test
+
+</div>
+----------
+Psi structure
+----------
+Mojolicious Perl5 Template
+  PsiComment(Mojolicious: MOJO_TEMPLATE_BLOCK_HTML)('<div>')
+  PsiWhiteSpace('\n\n')
+  PsiComment(Mojolicious: %)('%')
+  PsiWhiteSpace('  ')
+  PsiComment(Perl5: COMMENT_LINE)('# comment')
+  PsiWhiteSpace('\n ')
+  PsiComment(Mojolicious: MOJO_TEMPLATE_BLOCK_HTML)('test\n\n</div>')

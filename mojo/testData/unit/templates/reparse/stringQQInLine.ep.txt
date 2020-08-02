@@ -1,0 +1,29 @@
+Reparsing block
+----------
+PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)
+----------
+variable
+----------
+After typing
+----------
+something <div>
+
+% "varedit<caret>iable";
+
+ </div> else
+----------
+Psi structure
+----------
+Mojolicious Perl5 Template
+  PsiComment(Mojolicious: MOJO_TEMPLATE_BLOCK_HTML)('something <div>')
+  PsiWhiteSpace('\n\n')
+  PsiComment(Mojolicious: %)('%')
+  PsiWhiteSpace(' ')
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlStringDqImpl(Perl5: STRING_DQ)
+      PsiElement(Perl5: QUOTE_DOUBLE_OPEN)('"')
+      PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('vareditiable')
+      PsiElement(Perl5: QUOTE_DOUBLE_CLOSE)('"')
+    PsiElement(Perl5: ;)(';')
+  PsiWhiteSpace('\n\n ')
+  PsiComment(Mojolicious: MOJO_TEMPLATE_BLOCK_HTML)('</div> else')

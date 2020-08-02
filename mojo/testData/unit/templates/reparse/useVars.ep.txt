@@ -1,0 +1,57 @@
+Reparsing block
+----------
+PerlVariableNameElementImpl(Perl5: SCALAR_NAME)
+----------
+ff
+----------
+After typing
+----------
+<div>
+<%
+
+  use vars qw/
+    $var
+    $fedit<caret>f
+    $bla
+  /;
+
+  %> </div>
+----------
+Psi structure
+----------
+Mojolicious Perl5 Template
+  PsiComment(Mojolicious: MOJO_TEMPLATE_BLOCK_HTML)('<div>')
+  PsiWhiteSpace('\n')
+  PsiComment(Mojolicious: <%)('<%')
+  PsiWhiteSpace('\n\n  ')
+  PerlUseStatementElement(USE_STATEMENT)
+    PsiElement(Perl5: use)('use')
+    PsiWhiteSpace(' ')
+    PerlNamespaceElementImpl(Perl5: package::name)('vars')
+    PsiWhiteSpace(' ')
+    PsiPerlStringListImpl(Perl5: STRING_LIST)
+      PsiElement(Perl5: qw)('qw')
+      PsiElement(Perl5: QUOTE_SINGLE_OPEN)('/')
+      PerlCompositeElementImpl(Perl5: PARSABLE_STRING_USE_VARS)
+        PsiWhiteSpace('\n    ')
+        PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT)
+          PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+            PsiElement(Perl5: $$)('$')
+            PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('var')
+        PsiWhiteSpace('\n    ')
+        PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT)
+          PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+            PsiElement(Perl5: $$)('$')
+            PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('feditf')
+        PsiWhiteSpace('\n    ')
+        PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT)
+          PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+            PsiElement(Perl5: $$)('$')
+            PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('bla')
+        PsiWhiteSpace('\n  ')
+      PsiElement(Perl5: QUOTE_SINGLE_CLOSE)('/')
+    PsiElement(Perl5: ;)(';')
+  PsiWhiteSpace('\n\n  ')
+  PsiComment(Mojolicious: %>)('%>')
+  PsiWhiteSpace(' ')
+  PsiComment(Mojolicious: MOJO_TEMPLATE_BLOCK_HTML)('</div>')

@@ -1,0 +1,10 @@
+something <div>
+
+<%
+
+
+"var<caret>iable";
+
+ %>
+
+ </div> else
