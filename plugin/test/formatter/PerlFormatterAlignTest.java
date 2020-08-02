@@ -47,7 +47,6 @@ public class PerlFormatterAlignTest extends PerlFormatterTestCase {
     doWrappingTestSingleSource("alignListElements");
   }
 
-
   @Test
   public void testAlignCommentsTrue() {
     doTestAlignComments(true);

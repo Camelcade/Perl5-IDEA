@@ -33,6 +33,7 @@ import com.intellij.psi.impl.source.tree.TreeUtil;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
+import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.containers.FactoryMap;
 import com.intellij.util.containers.MultiMap;
 import com.perl5.lang.perl.PerlLanguage;
@@ -617,7 +618,13 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     if (elementType == ATTRIBUTES && myPerlSettings.ALIGN_ATTRIBUTES) {
       return myElementsALignmentsMap.get(node);
     }
-    if (PerlFormattingTokenSets.COMMA_LIKE_SEQUENCES.contains(elementType)) {
+    if (elementType == COMMA_SEQUENCE_EXPR) {
+      IElementType parentNodeType = PsiUtilCore.getElementType(parentNode);
+      if (parentNodeType == CALL_ARGUMENTS || parentNodeType == PARENTHESISED_CALL_ARGUMENTS) {
+        if (mySettings.ALIGN_MULTILINE_PARAMETERS_IN_CALLS) {
+          return myElementsALignmentsMap.get(node);
+        }
+      }
       return null;
     }
 
@@ -632,6 +639,16 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
         return alignment;
       }
     }
+
+    // trying to get alignment from the last child if incomplete
+    if (newChildIndex == subBlocks.size()) {
+      Block lastBlock = ContainerUtil.getLastItem(subBlocks);
+      if (lastBlock instanceof PerlAstBlock && lastBlock.isIncomplete()) {
+        List<Block> lastBlockSubBlocks = lastBlock.getSubBlocks();
+        return getChildAlignment((PerlAstBlock)lastBlock, lastBlockSubBlocks.size());
+      }
+    }
+
     return null;
   }
 
@@ -643,6 +660,10 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     IElementType elementType = block.getElementType();
     if (elementType == ATTRIBUTES) {
       return true;
+    }
+    if (elementType == CALL_ARGUMENTS) {
+      Block lastSubBlock = block.getLastSubBlock();
+      return lastSubBlock != null && lastSubBlock.isIncomplete();
     }
     if (elementType == SIGNATURE_ELEMENT) {
       PsiElement psiElement = blockNode.getPsi();

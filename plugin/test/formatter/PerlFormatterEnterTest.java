@@ -31,6 +31,54 @@ public class PerlFormatterEnterTest extends PerlFormatterTestCase {
   }
 
   @Test
+  public void testCallArgumentsNoParensAligned() {
+    doTestCallArgumentsNoParens(true);
+  }
+
+  @Test
+  public void testCallArgumentsNoParensNotAligned() {
+    doTestCallArgumentsNoParens(false);
+  }
+
+  public void doTestCallArgumentsNoParens(boolean value) {
+    getSettings().ALIGN_MULTILINE_PARAMETERS_IN_CALLS = value;
+    initWithFileSmart("callArgumentsNoParens");
+    doTestEnterNoInit();
+  }
+
+  @Test
+  public void testCallArgumentsNoParensLastAligned() {
+    doTestCallArgumentsNoParensLast(true);
+  }
+
+  @Test
+  public void testCallArgumentsNoParensLastNotAligned() {
+    doTestCallArgumentsNoParensLast(false);
+  }
+
+  public void doTestCallArgumentsNoParensLast(boolean value) {
+    getSettings().ALIGN_MULTILINE_PARAMETERS_IN_CALLS = value;
+    initWithFileSmartWithoutErrors("callArgumentsNoParensLast");
+    doTestEnterNoInit();
+  }
+
+  @Test
+  public void testCallArgumentsParensAligned() {
+    doTestCallArgumentsParens(true);
+  }
+
+  @Test
+  public void testCallArgumentsParensNotAligned() {
+    doTestCallArgumentsParens(false);
+  }
+
+  public void doTestCallArgumentsParens(boolean value) {
+    getSettings().ALIGN_MULTILINE_PARAMETERS_IN_CALLS = value;
+    initWithFileSmartWithoutErrors("callArgumentsParens");
+    doTestEnterNoInit();
+  }
+
+  @Test
   public void testReplacementBlockBefore() {doTest();}
 
   @Test

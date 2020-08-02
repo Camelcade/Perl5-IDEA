@@ -1,0 +1,10 @@
+{
+  somethinglongnamed 1,
+                     <caret>
+
+
+  if($a){
+
+  }
+
+}
