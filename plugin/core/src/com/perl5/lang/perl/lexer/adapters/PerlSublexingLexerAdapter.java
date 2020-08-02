@@ -107,8 +107,7 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
   @Override
   public void start(@NotNull CharSequence buffer, int startOffset, int endOffset, int initialState) {
     PerlLexingContext lexingContext = getLexingContext();
-    int enforcedInitialState = lexingContext.getEnforcedInitialState();
-    getFlexAdapter().start(buffer, startOffset, endOffset, enforcedInitialState >= 0 ? enforcedInitialState : initialState);
+    getFlexAdapter().start(buffer, startOffset, endOffset, initialState);
     PerlLexer perlLexer = getPerlLexer();
     if (perlLexer != null) {
       perlLexer.setSingleOpenQuoteChar(lexingContext.getOpenChar());

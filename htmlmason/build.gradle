@@ -35,7 +35,7 @@ task generateHTMLMasonLexer(type: GenerateLexer) {
   source = "grammar/HTMLMason.flex"
   targetDir = "gen/com/perl5/lang/htmlmason/lexer/"
   targetClass = "HTMLMasonLexer"
-  skeleton = rootProject.file(lexer_skeleton)
+  skeleton = rootProject.file(templating_lexer_skeleton)
   purgeOldFiles = true
 }
 

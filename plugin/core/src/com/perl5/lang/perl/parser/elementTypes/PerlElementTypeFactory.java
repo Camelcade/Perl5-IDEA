@@ -80,7 +80,7 @@ public class PerlElementTypeFactory {
   public static @NotNull IElementType getElementType(@NotNull String name) {
     switch (name) {
       case "PARSABLE_STRING_USE_VARS":
-        return new PerlQuoteLikeContentLazyElementType(name, PerlLexer.USE_VARS_STRING);
+        return new PerlUseVarsStringElementType();
       case "COMMENT_ANNOTATION":
         return new PerlAnnotationElementType(name);
       case "HEREDOC_QQ":

@@ -18,18 +18,15 @@ package com.perl5.lang.perl.parser.elementTypes;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
-import com.intellij.lexer.FlexAdapter;
+import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.lexer.PerlLexer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.REGEX_QUOTE_OPEN;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 import static com.perl5.lang.perl.lexer.PerlLexer.AFTER_VALUE;
-import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
 
 public class PerlRegexReplacementElementType extends PerlReparseableElementType {
   public PerlRegexReplacementElementType(@NotNull String debugName,
@@ -42,52 +39,60 @@ public class PerlRegexReplacementElementType extends PerlReparseableElementType 
                             @NotNull CharSequence buffer,
                             @NotNull Language fileLanguage,
                             @NotNull Project project) {
-    FlexAdapter flexLexer = new FlexAdapter(new PerlLexer(null).withProject(project));
-    flexLexer.start(buffer);
-
-    IElementType firstType = flexLexer.getTokenType();
-    if (firstType == RESERVED_S || firstType == RESERVED_TR || firstType == RESERVED_Y) {
-      flexLexer.advance();
-    }
-    skipSpaces(flexLexer);
-    if (flexLexer.getTokenType() != REGEX_QUOTE_OPEN) {
+    if (parent == null) {
       return false;
     }
-    flexLexer.advance();
-    IElementType contentTokenType = flexLexer.getTokenType();
-    if (LAZY_PARSABLE_REGEX.contains(contentTokenType) || LAZY_TR_STRINGS.contains(contentTokenType)) {
-      flexLexer.advance();
+    Lexer lexer = createLexer(parent);
+    lexer.start(buffer);
+
+    IElementType firstType = lexer.getTokenType();
+    if (firstType == RESERVED_S || firstType == RESERVED_TR || firstType == RESERVED_Y) {
+      lexer.advance();
+    }
+    skipSpaces(lexer);
+    if (lexer.getTokenType() != REGEX_QUOTE_OPEN) {
+      return false;
+    }
+    lexer.advance();
+
+    IElementType closeQuoteType;
+    while (true) {
+      closeQuoteType = lexer.getTokenType();
+      if (closeQuoteType == null) {
+        return false;
+      }
+      else if (closeQuoteType == REGEX_QUOTE_CLOSE || closeQuoteType == REGEX_QUOTE || closeQuoteType == REGEX_QUOTE_E) {
+        break;
+      }
+      lexer.advance();
     }
 
-    IElementType closeQuoteType = flexLexer.getTokenType();
     if (closeQuoteType == REGEX_QUOTE_CLOSE) {
-      flexLexer.advance();
-      skipSpaces(flexLexer);
-      IElementType secondOpenQuoteType = flexLexer.getTokenType();
+      lexer.advance();
+      skipSpaces(lexer);
+      IElementType secondOpenQuoteType = lexer.getTokenType();
       if (secondOpenQuoteType != REGEX_QUOTE_OPEN && secondOpenQuoteType != REGEX_QUOTE_OPEN_E) {
         return false;
       }
     }
-    else if (closeQuoteType != REGEX_QUOTE && closeQuoteType != REGEX_QUOTE_E) {
-      return false;
-    }
-    flexLexer.advance();
-    IElementType secondBlockContentType = flexLexer.getTokenType();
-    if (LAZY_CODE_BLOCKS.contains(secondBlockContentType) ||
-        LAZY_REGEX_STRINGS.contains(secondBlockContentType) ||
-        LAZY_TR_STRINGS.contains(secondBlockContentType)) {
-      flexLexer.advance();
+    lexer.advance();
+
+    while (true) {
+      closeQuoteType = lexer.getTokenType();
+      if (closeQuoteType == null) {
+        return false;
+      }
+      else if (closeQuoteType == REGEX_QUOTE_CLOSE) {
+        break;
+      }
+      lexer.advance();
     }
 
-    if (flexLexer.getTokenType() != REGEX_QUOTE_CLOSE) {
-      return false;
+    lexer.advance();
+    skipSpaces(lexer);
+    while (lexer.getTokenType() == REGEX_MODIFIER) {
+      lexer.advance();
     }
-
-    flexLexer.advance();
-    skipSpaces(flexLexer);
-    while (flexLexer.getTokenType() == REGEX_MODIFIER) {
-      flexLexer.advance();
-    }
-    return flexLexer.getTokenType() == null && flexLexer.getState() == AFTER_VALUE;
+    return lexer.getTokenType() == null && lexer.getState() == AFTER_VALUE;
   }
 }

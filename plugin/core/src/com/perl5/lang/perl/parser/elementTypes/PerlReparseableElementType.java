@@ -16,17 +16,16 @@
 
 package com.perl5.lang.perl.parser.elementTypes;
 
-import com.intellij.lang.ASTFactory;
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.PsiBuilder;
-import com.intellij.lang.PsiBuilderFactory;
-import com.intellij.lexer.FlexAdapter;
+import com.intellij.lang.*;
+import com.intellij.lexer.DelegateLexer;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Pair;
+import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.text.BlockSupport;
 import com.intellij.psi.tree.IElementType;
@@ -35,6 +34,7 @@ import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.lexer.PerlLexingContext;
 import com.perl5.lang.perl.lexer.adapters.PerlMergingLexerAdapter;
 import com.perl5.lang.perl.parser.PerlParserImpl;
+import com.perl5.lang.perl.psi.PerlLexerAwareParserDefinition;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import com.perl5.lang.perl.util.PerlTimeLogger;
 import org.jetbrains.annotations.NonNls;
@@ -75,7 +75,7 @@ public abstract class PerlReparseableElementType extends IReparseableElementType
     PsiBuilder builder = PsiBuilderFactory.getInstance().createBuilder(
       project,
       chameleon,
-      new PerlMergingLexerAdapter(getLexingContext(parentElement.getProject(), chameleon)),
+      getLexer(chameleon),
       getLanguage(),
       newChars);
 
@@ -84,16 +84,16 @@ public abstract class PerlReparseableElementType extends IReparseableElementType
     return result;
   }
 
+  protected @NotNull Lexer getLexer(@NotNull ASTNode chameleon) {
+    return createLexer(chameleon);
+  }
+
   /**
    * @return real node for reparsing or current node for lazy parsing.
    */
   protected @NotNull ASTNode getRealNode(@NotNull ASTNode chameleon) {
     Pair<ASTNode, CharSequence> originalNodeData = BlockSupport.TREE_TO_BE_REPARSED.get(chameleon);
     return originalNodeData == null ? chameleon : originalNodeData.first;
-  }
-
-  protected @NotNull PerlLexingContext getLexingContext(@NotNull Project project, @NotNull ASTNode chameleon) {
-    return PerlLexingContext.create(project);
   }
 
   @Override
@@ -136,9 +136,38 @@ public abstract class PerlReparseableElementType extends IReparseableElementType
     }
   }
 
-  protected static void skipSpaces(@NotNull FlexAdapter flexAdapter) {
+  protected static void skipSpaces(@NotNull Lexer flexAdapter) {
     while (flexAdapter.getTokenType() == TokenType.WHITE_SPACE) {
       flexAdapter.advance();
     }
+  }
+
+  /**
+   * @return a perl lexer with custom initial state. We can't start inner perl lexer inside the templating one.
+   */
+  protected static @NotNull DelegateLexer createPerlLexerWithCustomInitialState(@NotNull ASTNode chameleon, int startState) {
+    return createLexerWithCustomInitialState(
+      startState, new PerlMergingLexerAdapter(PerlLexingContext.create(chameleon.getPsi().getProject())));
+  }
+
+  protected static @NotNull DelegateLexer createLexerWithCustomInitialState(int startState, Lexer lexer) {
+    return new DelegateLexer(lexer) {
+      @Override
+      public void start(@NotNull CharSequence buffer, int startOffset, int endOffset, int initialState) {
+        super.start(buffer, startOffset, endOffset, startState);
+      }
+    };
+  }
+
+  public static @NotNull Lexer createLexer(@NotNull ASTNode nodeToLex) {
+    PsiElement psiElement = nodeToLex.getPsi();
+    PsiFile containingFile = psiElement.getContainingFile();
+    FileViewProvider fileViewProvider = containingFile.getViewProvider();
+    Language baseLanguage = fileViewProvider.getBaseLanguage();
+    ParserDefinition parserDefinition = LanguageParserDefinitions.INSTANCE.forLanguage(baseLanguage);
+    Lexer lexer = parserDefinition.createLexer(psiElement.getProject());
+    int alternativeInitialState = parserDefinition instanceof PerlLexerAwareParserDefinition ?
+                                  ((PerlLexerAwareParserDefinition)parserDefinition).getLexerStateFor(nodeToLex) : 0;
+    return alternativeInitialState == 0 ? lexer : createLexerWithCustomInitialState(alternativeInitialState, lexer);
   }
 }

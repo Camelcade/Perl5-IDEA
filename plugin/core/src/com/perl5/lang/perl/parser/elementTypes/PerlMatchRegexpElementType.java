@@ -16,7 +16,7 @@
 
 package com.perl5.lang.perl.parser.elementTypes;
 
-import com.intellij.lexer.FlexAdapter;
+import com.intellij.lexer.Lexer;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
@@ -57,7 +57,7 @@ public class PerlMatchRegexpElementType extends PerlTwoQuotesQuoteLikeElementTyp
   }
 
   @Override
-  protected boolean checkAfterCloseQuote(@NotNull FlexAdapter flexAdapter) {
+  protected boolean checkAfterCloseQuote(@NotNull Lexer flexAdapter) {
     while (flexAdapter.getTokenType() == REGEX_MODIFIER) {
       flexAdapter.advance();
     }

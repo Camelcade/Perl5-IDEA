@@ -31,7 +31,7 @@ task generateEmbeddedPerlLexer(type: GenerateLexer) {
   source = "grammar/EmbeddedPerl.flex"
   targetDir = "gen/com/perl5/lang/embedded/lexer/"
   targetClass = "EmbeddedPerlLexer"
-  skeleton = rootProject.file(lexer_skeleton)
+  skeleton = rootProject.file(templating_lexer_skeleton)
   purgeOldFiles = true
 }
 

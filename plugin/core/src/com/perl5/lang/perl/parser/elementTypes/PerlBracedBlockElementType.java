@@ -19,12 +19,10 @@ package com.perl5.lang.perl.parser.elementTypes;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
 import com.intellij.lang.PsiBuilderUtil;
-import com.intellij.lexer.FlexAdapter;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.util.PerlTimeLogger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -42,10 +40,10 @@ public abstract class PerlBracedBlockElementType extends PerlReparseableElementT
                                   @NotNull CharSequence buffer,
                                   @NotNull Language fileLanguage,
                                   @NotNull Project project) {
-    if (!isNodeReparseable(parent)) {
+    if (parent == null || !isNodeReparseable(parent)) {
       return false;
     }
-    FlexAdapter lexer = new FlexAdapter(new PerlLexer(null).withProject(project));
+    Lexer lexer = createLexer(parent);
     boolean result = hasProperBraceBalance(buffer, lexer, getOpeningBraceType());
     if (LOG.isDebugEnabled()) {
       LOG.debug(this + " reparseable: ", result && isLexerStateOk(lexer.getState()),

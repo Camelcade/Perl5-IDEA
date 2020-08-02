@@ -18,7 +18,7 @@ package com.perl5.lang.perl.parser.elementTypes;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
-import com.intellij.lexer.FlexAdapter;
+import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
@@ -50,34 +50,41 @@ public abstract class PerlTwoQuotesQuoteLikeElementType extends PerlQuoteLikeEle
                             @NotNull CharSequence buffer,
                             @NotNull Language fileLanguage,
                             @NotNull Project project) {
-    FlexAdapter flexAdapter = createLexer(project);
-    flexAdapter.start(buffer);
-    if (isOperatorToken(flexAdapter.getTokenType())) {
-      flexAdapter.advance();
-      skipSpaces(flexAdapter);
+    if (parent == null) {
+      return false;
+    }
+    Lexer lexer = createLexer(parent);
+    lexer.start(buffer);
+    if (isOperatorToken(lexer.getTokenType())) {
+      lexer.advance();
+      skipSpaces(lexer);
     }
     else if (isOperatorMandatory()) {
       return false;
     }
 
-    if (!isOpenQuoteToken(flexAdapter.getTokenType())) {
+    if (!isOpenQuoteToken(lexer.getTokenType())) {
       return false;
     }
-    flexAdapter.advance();
-    if (isContentToken(flexAdapter.getTokenType())) {
-      flexAdapter.advance();
+    lexer.advance();
+    while (true) {
+      IElementType tokenType = lexer.getTokenType();
+      if (tokenType == null) {
+        return false;
+      }
+      else if (isCloseQuoteToken(tokenType)) {
+        break;
+      }
+      lexer.advance();
     }
-    if (!isCloseQuoteToken(flexAdapter.getTokenType())) {
+    lexer.advance();
+    if (!checkAfterCloseQuote(lexer)) {
       return false;
     }
-    flexAdapter.advance();
-    if (!checkAfterCloseQuote(flexAdapter)) {
-      return false;
-    }
-    return flexAdapter.getTokenType() == null && flexAdapter.getState() == PerlLexer.AFTER_VALUE;
+    return lexer.getTokenType() == null && lexer.getState() == PerlLexer.AFTER_VALUE;
   }
 
-  protected boolean checkAfterCloseQuote(@NotNull FlexAdapter flexAdapter) {
+  protected boolean checkAfterCloseQuote(@NotNull Lexer flexAdapter) {
     return true;
   }
 }

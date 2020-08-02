@@ -17,11 +17,11 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.FileViewProvider;
+import com.intellij.lang.ParserDefinition;
 import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 
-public interface PerlLexerAwareFileViewProvider extends FileViewProvider {
+public interface PerlLexerAwareParserDefinition extends ParserDefinition {
   /**
    * @return lexer state that need to be used in base lexer for lexing particular node.
    * @apiNote This might be necessary for confirming leaf consistency with lexer in some tricky

@@ -18,15 +18,9 @@ package com.perl5.lang.perl.parser.elementTypes;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
-import com.intellij.lang.LanguageParserDefinitions;
-import com.intellij.lexer.DelegateLexer;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.MultiplePsiFilesPerDocumentFileViewProvider;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.perl5.lang.perl.psi.PerlLexerAwareFileViewProvider;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -50,21 +44,6 @@ public abstract class PerlReparseableTemplateTokenType extends PerlReparseableTo
 
   @Override
   protected @Nullable Lexer createLexer(@NotNull ASTNode nodeToLex) {
-    PsiElement psiElement = nodeToLex.getPsi();
-    PsiFile containingFile = psiElement.getContainingFile();
-    FileViewProvider fileViewProvider = containingFile.getViewProvider();
-    Language baseLanguage = fileViewProvider.getBaseLanguage();
-    Lexer lexer = LanguageParserDefinitions.INSTANCE.forLanguage(baseLanguage).createLexer(psiElement.getProject());
-    int alternativeInitialState = fileViewProvider instanceof PerlLexerAwareFileViewProvider ?
-                                  ((PerlLexerAwareFileViewProvider)fileViewProvider).getLexerStateFor(nodeToLex) : 0;
-    if (alternativeInitialState != 0) {
-      return new DelegateLexer(lexer) {
-        @Override
-        public void start(@NotNull CharSequence buffer, int startOffset, int endOffset, int initialState) {
-          super.start(buffer, startOffset, endOffset, alternativeInitialState);
-        }
-      };
-    }
-    return lexer;
+    return PerlReparseableElementType.createLexer(nodeToLex);
   }
 }

@@ -26,18 +26,15 @@ public class PerlLexingContext {
   private final boolean myEnforceSubLexing;
   private final boolean myWithTryCatch;
   private final char myOpenChar;
-  private final int myEnforcedInitialState;
 
   private PerlLexingContext(@Nullable Project project,
                             boolean enforceSubLexing,
                             boolean withTryCatch,
-                            char openChar,
-                            int enforcedInitialState) {
+                            char openChar) {
     myProject = project;
     myEnforceSubLexing = enforceSubLexing;
     myWithTryCatch = withTryCatch;
     myOpenChar = openChar;
-    myEnforcedInitialState = enforcedInitialState;
   }
 
   public @Nullable Project getProject() {
@@ -56,27 +53,19 @@ public class PerlLexingContext {
     return myOpenChar;
   }
 
-  public int getEnforcedInitialState() {
-    return myEnforcedInitialState;
-  }
-
   public @NotNull PerlLexingContext withEnforcedSublexing(boolean enforceSubLexing) {
-    return new PerlLexingContext(myProject, enforceSubLexing, myWithTryCatch, myOpenChar, myEnforcedInitialState);
+    return new PerlLexingContext(myProject, enforceSubLexing, myWithTryCatch, myOpenChar);
   }
 
   public @NotNull PerlLexingContext withTryCatchSyntax(boolean withTryCatch) {
-    return new PerlLexingContext(myProject, myEnforceSubLexing, withTryCatch, myOpenChar, myEnforcedInitialState);
+    return new PerlLexingContext(myProject, myEnforceSubLexing, withTryCatch, myOpenChar);
   }
 
   public @NotNull PerlLexingContext withOpenChar(char openChar) {
-    return new PerlLexingContext(myProject, myEnforceSubLexing, myWithTryCatch, openChar, myEnforcedInitialState);
-  }
-
-  public @NotNull PerlLexingContext withEnforcedInitialState(int enforcedInitialState) {
-    return new PerlLexingContext(myProject, myEnforceSubLexing, myWithTryCatch, myOpenChar, enforcedInitialState);
+    return new PerlLexingContext(myProject, myEnforceSubLexing, myWithTryCatch, openChar);
   }
 
   public static @NotNull PerlLexingContext create(@Nullable Project project) {
-    return new PerlLexingContext(project, false, false, (char)0, -1);
+    return new PerlLexingContext(project, false, false, (char)0);
   }
 }

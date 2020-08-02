@@ -56,7 +56,7 @@ public abstract class PerlTemplatingLexer extends PerlProtoLexer {
       syncMainLexer();
       if (LOG.isTraceEnabled()) {
         LOG.debug("Preparsed by perl lexer: '", myPerlLexer.yytext(),
-                  "'; state: ", myPerlLexer.yystate(),
+                  "'; state: ", getPerlLexerState(),
                   "; real state: ", myPerlLexer.getRealLexicalState(),
                   "; tokenType: ", result,
                   "; start: ", myPerlLexer.getTokenStart(),
@@ -77,6 +77,10 @@ public abstract class PerlTemplatingLexer extends PerlProtoLexer {
       );
     }
     return result;
+  }
+
+  public int getPerlLexerState() {
+    return myPerlLexer.yystate();
   }
 
   @Override
@@ -114,7 +118,7 @@ public abstract class PerlTemplatingLexer extends PerlProtoLexer {
 
   @Override
   public boolean isInitialState() {
-    return super.isInitialState() && myPerlLexer.yystate() == 0;
+    return super.isInitialState() && getPerlLexerState() == 0;
   }
 
   protected void startPerlExpression() {

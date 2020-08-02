@@ -19,12 +19,11 @@ package com.perl5.lang.perl.parser.elementTypes;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
 import com.intellij.lang.PsiBuilderUtil;
-import com.intellij.lexer.FlexAdapter;
+import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.idea.editor.PerlBraceMatcher;
-import com.perl5.lang.perl.lexer.PerlLexer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -47,7 +46,7 @@ public abstract class PerlDereferenceElementType extends PerlReparseableElementT
     if (!isNodeReparseable(parent)) {
       return false;
     }
-    FlexAdapter lexer = new FlexAdapter(new PerlLexer(null).withProject(project));
+    Lexer lexer = createLexer(parent);
     boolean result = hasProperTokensStructure(buffer, lexer);
     if (LOG.isDebugEnabled()) {
       LOG.debug(this + " reparseable: ", result && isLexerStateOk(lexer.getState()),
@@ -70,7 +69,7 @@ public abstract class PerlDereferenceElementType extends PerlReparseableElementT
    * Checks that all perl braces within range are balanced and properly nested
    */
   private boolean hasProperTokensStructure(@NotNull CharSequence text,
-                                           @NotNull FlexAdapter lexer) {
+                                           @NotNull Lexer lexer) {
     lexer.start(text);
 
     if (lexer.getTokenType() != getSigilTokenType()) {

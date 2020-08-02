@@ -30,7 +30,7 @@ task generateMojoliciousLexer(type: GenerateLexer) {
   source = "grammar/Mojolicious.flex"
   targetDir = "gen/com/perl5/lang/mojolicious/lexer/"
   targetClass = "MojoliciousLexer"
-  skeleton = rootProject.file(lexer_skeleton)
+  skeleton = rootProject.file(templating_lexer_skeleton)
   purgeOldFiles = true
 }
 

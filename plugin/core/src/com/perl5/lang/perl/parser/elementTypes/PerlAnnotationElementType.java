@@ -17,9 +17,8 @@
 package com.perl5.lang.perl.parser.elementTypes;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.openapi.project.Project;
+import com.intellij.lexer.Lexer;
 import com.perl5.lang.perl.lexer.PerlLexer;
-import com.perl5.lang.perl.lexer.PerlLexingContext;
 import com.perl5.lang.perl.psi.impl.PerlAnnotationContainerImpl;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
@@ -31,7 +30,7 @@ public class PerlAnnotationElementType extends PerlReparseableElementType {
   }
 
   @Override
-  protected @NotNull PerlLexingContext getLexingContext(@NotNull Project project, @NotNull ASTNode chameleon) {
-    return super.getLexingContext(project, chameleon).withEnforcedInitialState(PerlLexer.ANNOTATION);
+  protected @NotNull Lexer getLexer(@NotNull ASTNode chameleon) {
+    return createPerlLexerWithCustomInitialState(chameleon, PerlLexer.ANNOTATION);
   }
 }
