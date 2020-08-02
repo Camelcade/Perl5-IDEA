@@ -17,10 +17,12 @@
 package com.perl5.lang.perl.parser.elementTypes;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.lang.Language;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.ILeafElementType;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -32,6 +34,13 @@ public class PerlTokenTypeEx extends PerlTokenType implements ILeafElementType {
 
   public PerlTokenTypeEx(@NotNull @NonNls String debugName, Class<? extends ASTNode> clazz) {
     super(debugName);
+    myInstanceFactory = createInstanceFactory(clazz);
+  }
+
+  public PerlTokenTypeEx(@NotNull String debugName,
+                         @Nullable Language language,
+                         @NotNull Class<? extends ASTNode> clazz) {
+    super(debugName, language);
     myInstanceFactory = createInstanceFactory(clazz);
   }
 

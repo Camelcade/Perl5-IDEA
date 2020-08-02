@@ -14,26 +14,17 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser.elementTypes;
+package com.perl5.lang.perl.psi;
 
-import com.intellij.lang.Language;
+import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.PerlLanguage;
-import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-public class PerlTokenType extends IElementType {
-  public PerlTokenType(@NotNull @NonNls String debugName) {
-    this(debugName, PerlLanguage.INSTANCE);
-  }
-
-  public PerlTokenType(@NotNull String debugName, @Nullable Language language) {
-    super(debugName, language);
-  }
-
-  public String toString() {
-    return "Perl5: " + super.toString();
-  }
+public interface PerlLexerAwareFileViewProvider extends FileViewProvider {
+  /**
+   * @return lexer state that need to be used in base lexer for lexing particular token type.
+   * @apiNote This might be necessary for confirming leaf consistency with lexer in some tricky
+   * cases, like templating languages. Base language elements may have different states, but template state is usually the same.
+   */
+  int getLexerStateFor(@NotNull IElementType tokenType);
 }
-

@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.parser.elementTypes;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.lang.Language;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.TextRange;
@@ -37,6 +38,12 @@ public abstract class PerlReparseableTokenType extends PerlTokenTypeEx implement
   public PerlReparseableTokenType(@NotNull String debugName,
                                   Class<? extends ASTNode> clazz) {
     super(debugName, clazz);
+  }
+
+  public PerlReparseableTokenType(@NotNull String debugName,
+                                  @Nullable Language language,
+                                  @NotNull Class<? extends ASTNode> clazz) {
+    super(debugName, language, clazz);
   }
 
   /**

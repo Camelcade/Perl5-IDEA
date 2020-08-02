@@ -22,7 +22,7 @@ import com.intellij.psi.impl.source.tree.TreeUtil;
 import com.perl5.lang.perl.psi.impl.PerlPodElement;
 import org.jetbrains.annotations.NotNull;
 
-public class PerlPodReparseableTokenType extends PerlReparseableTokenType {
+public class PerlPodReparseableTokenType extends PerlReparseableTemplateTokenType {
   public PerlPodReparseableTokenType(@NotNull String debugName) {
     super(debugName, PerlPodElement.class);
   }
