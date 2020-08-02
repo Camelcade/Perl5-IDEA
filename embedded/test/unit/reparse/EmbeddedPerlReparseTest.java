@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package unit.parser;
+package unit.reparse;
 
 import base.EmbeddedPerlLightTestCase;
 import org.jetbrains.annotations.NotNull;
