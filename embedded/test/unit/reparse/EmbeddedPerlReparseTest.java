@@ -27,6 +27,18 @@ public class EmbeddedPerlReparseTest extends EmbeddedPerlLightTestCase {
   }
 
   @Test
+  public void testAnnotation() {doTest("edit");}
+
+  @Test
+  public void testHashIndex() {doTest("edit");}
+
+  @Test
+  public void testHeredoc() {doTest("edit");}
+
+  @Test
+  public void testUseVars() {doTest("edit");}
+
+  @Test
   public void testBlockWithTemplate() {doTest("edit");}
 
   @Test

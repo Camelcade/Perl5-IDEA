@@ -20,17 +20,21 @@ import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
+import com.perl5.lang.embedded.lexer.EmbeddedPerlLexer;
 import com.perl5.lang.embedded.lexer.EmbeddedPerlLexerAdapter;
-import com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes;
 import com.perl5.lang.embedded.psi.impl.EmbeddedPerlFileImpl;
 import com.perl5.lang.perl.PerlParserDefinition;
+import com.perl5.lang.perl.psi.PerlLexerAwareParserDefinition;
 import com.perl5.lang.perl.psi.stubs.PerlFileElementType;
 import org.jetbrains.annotations.NotNull;
 
+import static com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes.*;
 
-public class EmbeddedPerlParserDefinition extends PerlParserDefinition implements EmbeddedPerlElementTypes {
+
+public class EmbeddedPerlParserDefinition extends PerlParserDefinition implements PerlLexerAwareParserDefinition {
   public static final IFileElementType FILE = new PerlFileElementType("Embedded Perl5", EmbeddedPerlLanguage.INSTANCE);
 
   public static final TokenSet COMMENTS = TokenSet.orSet(PerlParserDefinition.COMMENTS,
@@ -58,5 +62,13 @@ public class EmbeddedPerlParserDefinition extends PerlParserDefinition implement
   @Override
   public PsiFile createFile(FileViewProvider viewProvider) {
     return new EmbeddedPerlFileImpl(viewProvider);
+  }
+
+  @Override
+  public int getLexerStateFor(@NotNull IElementType tokenType) {
+    if (tokenType == EMBED_TEMPLATE_BLOCK_HTML) {
+      return EmbeddedPerlLexer.YYINITIAL;
+    }
+    return EmbeddedPerlLexer.PERL;
   }
 }

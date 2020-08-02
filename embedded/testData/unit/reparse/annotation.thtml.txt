@@ -1,0 +1,38 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
+<div>
+<?
+
+  #@returedit<caret>
+  sub something{
+
+  }
+
+  ?> </div>
+----------
+Psi structure
+----------
+Embedded Perl file
+  PsiComment(Embedded Perl5: EMBED_TEMPLATE_BLOCK_HTML)('<div>')
+  PsiWhiteSpace('\n')
+  PsiComment(Embedded Perl5: EMBED_MARKER_OPEN)('<?')
+  PsiWhiteSpace('\n\n  ')
+  PerlAnnotationContainerImpl(Perl5: COMMENT_ANNOTATION)
+    PsiElement(Perl5: #@unknown)('#@returedit')
+  PsiWhiteSpace('\n  ')
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::something
+    PsiElement(Perl5: sub)('sub')
+    PsiWhiteSpace(' ')
+    PerlSubNameElementImpl(Perl5: subname)('something')
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiWhiteSpace('\n\n  ')
+      PsiElement(Perl5: })('}')
+  PsiWhiteSpace('\n\n  ')
+  PsiComment(Embedded Perl5: EMBED_MARKER_CLOSE)('?>')
+  PsiWhiteSpace(' ')
+  PsiComment(Embedded Perl5: EMBED_TEMPLATE_BLOCK_HTML)('</div>')

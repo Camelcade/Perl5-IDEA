@@ -1,0 +1,8 @@
+<div>
+<?
+
+  <<EOM;
+  test<caret> text
+EOM
+
+  ?> </div>

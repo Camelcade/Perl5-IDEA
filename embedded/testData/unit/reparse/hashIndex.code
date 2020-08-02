@@ -1,0 +1,6 @@
+<div>
+<?
+
+  $test{foo <caret>};
+
+  ?> </div>

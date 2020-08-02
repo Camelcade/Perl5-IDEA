@@ -1,0 +1,9 @@
+<div>
+<?
+
+  #@retur<caret>
+  sub something{
+
+  }
+
+  ?> </div>
