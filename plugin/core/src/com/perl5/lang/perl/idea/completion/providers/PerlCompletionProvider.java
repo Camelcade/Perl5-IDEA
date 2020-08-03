@@ -18,6 +18,8 @@ package com.perl5.lang.perl.idea.completion.providers;
 
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
+import com.intellij.openapi.diagnostic.Logger;
 
 public abstract class PerlCompletionProvider extends CompletionProvider<CompletionParameters> {
+  protected static final Logger LOG = Logger.getInstance(PerlCompletionProvider.class);
 }

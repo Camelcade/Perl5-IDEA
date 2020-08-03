@@ -24,6 +24,7 @@ import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.completion.PerlInsertHandlers;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlSimpleCompletionProcessor;
 import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionUtil;
+import com.perl5.lang.perl.util.PerlTimeLogger;
 import org.jetbrains.annotations.NotNull;
 
 import static com.perl5.lang.perl.idea.PerlElementPatterns.*;
@@ -38,16 +39,17 @@ public class PerlPackageCompletionProvider extends PerlCompletionProvider {
 
     PerlSimpleCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(parameters, result, element);
 
-    if (NAMESPACE_IN_DEFINITION_PATTERN.accepts(element)) // package Foo
-    {
+    PerlTimeLogger logger = PerlTimeLogger.create(LOG);
+
+    if (NAMESPACE_IN_DEFINITION_PATTERN.accepts(element)) { // package Foo
       PerlPackageCompletionUtil.fillWithNamespaceNameSuggestions(completionProcessor);
+      logger.debug("Filled with NS suggestions");
     }
-    else if (NAMESPACE_IN_VARIABLE_DECLARATION_PATTERN.accepts(element)) // my Foo::Bar
-    {
+    else if (NAMESPACE_IN_VARIABLE_DECLARATION_PATTERN.accepts(element)) { // my Foo::Bar
       PerlPackageCompletionUtil.processAllNamespacesNames(completionProcessor);
+      logger.debug("Processed all namespace names");
     }
-    else if (NAMESPACE_IN_ANNOTATION_PATTERN.accepts(element)) // #@returns / #@type
-    {
+    else if (NAMESPACE_IN_ANNOTATION_PATTERN.accepts(element)) { // #@returns / #@type
       completionProcessor.processSingle(LookupElementBuilder.create("ArrayRef")
                                           .withInsertHandler(PerlInsertHandlers.ARRAY_ELEMENT_INSERT_HANDLER)
                                           .withTailText("[]"));
@@ -55,15 +57,17 @@ public class PerlPackageCompletionProvider extends PerlCompletionProvider {
                                           .withInsertHandler(PerlInsertHandlers.ARRAY_ELEMENT_INSERT_HANDLER)
                                           .withTailText("[]"));
       PerlPackageCompletionUtil.processAllNamespacesNames(completionProcessor);
+      logger.debug("Processed all namespace names");
     }
-    else if (NAMESPACE_IN_USE_PATTERN.accepts(element)) // use/no/require
-    {
+    else if (NAMESPACE_IN_USE_PATTERN.accepts(element)) { // use/no/require
       PerlPackageCompletionUtil.fillWithVersionNumbers(completionProcessor);
+      logger.debug("Processed all version numbers");
       PerlPackageCompletionUtil.fillWithAllPackageFiles(completionProcessor);
+      logger.debug("Processed all package files");
     }
-    else // fallback
-    {
+    else { // fallback
       PerlPackageCompletionUtil.processAllNamespacesNames(completionProcessor);
+      logger.debug("Processed all namespace names");
     }
     completionProcessor.logStatus(getClass());
   }

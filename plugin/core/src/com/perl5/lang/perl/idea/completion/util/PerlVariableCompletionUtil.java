@@ -462,14 +462,19 @@ public class PerlVariableCompletionUtil {
     return true;
   }
 
-  public static void processVariables(@NotNull PerlVariableCompletionProcessor variableCompletionProcessor) {
+  public static void processVariables(@NotNull PerlVariableCompletionProcessor variableCompletionProcessor,
+                                      @NotNull PerlTimeLogger logger) {
     if (!variableCompletionProcessor.isFullQualified()) {
       fillWithLexicalVariables(variableCompletionProcessor);
+      logger.debug("Processed lexical variables");
       fillWithBuiltInVariables(variableCompletionProcessor);
+      logger.debug("Processed built in variables");
       fillWithImportedVariables(variableCompletionProcessor);
+      logger.debug("Processed imported variables");
     }
 
     processFullQualifiedVariables(variableCompletionProcessor);
+    logger.debug("Processed full qualified variables");
   }
 
   public static void fillWithImportedVariables(@NotNull PerlVariableCompletionProcessor variableCompletionProcessor) {

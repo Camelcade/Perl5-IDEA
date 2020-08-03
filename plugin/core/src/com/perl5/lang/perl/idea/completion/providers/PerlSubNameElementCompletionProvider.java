@@ -24,6 +24,7 @@ import com.perl5.lang.perl.idea.completion.providers.processors.PerlCompletionPr
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlSimpleCompletionProcessor;
 import com.perl5.lang.perl.idea.completion.util.PerlSubCompletionUtil;
 import com.perl5.lang.perl.psi.PerlSubElement;
+import com.perl5.lang.perl.util.PerlTimeLogger;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlSubNameElementCompletionProvider extends PerlCompletionProvider {
@@ -37,10 +38,12 @@ public class PerlSubNameElementCompletionProvider extends PerlCompletionProvider
       return;
     }
     PerlCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(parameters, resultSet, element);
-
+    PerlTimeLogger logger = PerlTimeLogger.create(LOG);
     PerlSubElement subDefinitionBase = (PerlSubElement)element.getParent();
     PerlSubCompletionUtil.processUnresolvedSubsLookups(subDefinitionBase, completionProcessor);
+    logger.debug("Processed unresolved subs");
     PerlSubCompletionUtil.processWithNotOverriddenSubs(subDefinitionBase, completionProcessor);
+    logger.debug("Processed not overriden subs");
     completionProcessor.logStatus(getClass());
   }
 }

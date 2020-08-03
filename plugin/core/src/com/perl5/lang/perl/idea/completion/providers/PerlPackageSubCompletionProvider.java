@@ -18,7 +18,6 @@ package com.perl5.lang.perl.idea.completion.providers;
 
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionResultSet;
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
@@ -26,12 +25,11 @@ import com.perl5.lang.perl.idea.completion.providers.processors.PerlSimpleComple
 import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionUtil;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlTimeLogger;
 import org.jetbrains.annotations.NotNull;
 
 
 public class PerlPackageSubCompletionProvider extends PerlCompletionProvider {
-  private static final Logger LOG = Logger.getInstance(PerlPackageSubCompletionProvider.class);
-
   @Override
   protected void addCompletions(@NotNull CompletionParameters parameters,
                                 @NotNull ProcessingContext context,
@@ -49,13 +47,16 @@ public class PerlPackageSubCompletionProvider extends PerlCompletionProvider {
     result = result.withPrefixMatcher(newPrefixMathcer);
 
     PerlSimpleCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(parameters, result, parameters.getPosition());
+    PerlTimeLogger logger = PerlTimeLogger.create(LOG);
     if (!((PsiPerlMethod)method).isObjectMethod()) {
       PerlPackageCompletionUtil.processAllNamespacesNames(completionProcessor, false, false);
+      logger.debug("Processed all namespace names");
     }
     else {
       if (!StringUtil.equals(PerlPackageUtil.SUPER_NAMESPACE_FULL, newPrefixMathcer)) {
         PerlPackageCompletionUtil.processPackageLookupElementWithAutocomplete(
           null, PerlPackageUtil.SUPER_NAMESPACE_FULL, null, completionProcessor);
+        logger.debug("Processed all package lookups with autocomplete");
       }
     }
     completionProcessor.logStatus(getClass());

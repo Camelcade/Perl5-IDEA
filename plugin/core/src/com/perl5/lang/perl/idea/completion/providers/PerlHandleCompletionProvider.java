@@ -32,6 +32,7 @@ import com.perl5.lang.perl.idea.completion.util.PerlVariableCompletionUtil;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
 import com.perl5.lang.perl.psi.impl.PerlSubCallElement;
+import com.perl5.lang.perl.util.PerlTimeLogger;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
@@ -50,15 +51,17 @@ public class PerlHandleCompletionProvider extends PerlCompletionProvider {
     if (!isApplicable(position)) {
       return;
     }
-
+    PerlTimeLogger logger = PerlTimeLogger.create(LOG);
     PerlSimpleCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(parameters, result, position);
     PerlPackageCompletionUtil.processAllNamespacesNames(completionProcessor, false, false);
+    logger.debug("Processed namespace names");
     PerlSubCompletionUtil.processContextSubsLookupElements(completionProcessor);
+    logger.debug("Processed context subs lookups");
 
     if (Experiments.getInstance().isFeatureEnabled("perl5.completion.var.without.sigil")) {
       PerlVariableCompletionProcessor variableCompletionProcessor = new PerlVariableCompletionProcessorImpl(
         completionProcessor, null, false, false, false);
-      PerlVariableCompletionUtil.processVariables(variableCompletionProcessor);
+      PerlVariableCompletionUtil.processVariables(variableCompletionProcessor, logger);
     }
 
     completionProcessor.logStatus(getClass());

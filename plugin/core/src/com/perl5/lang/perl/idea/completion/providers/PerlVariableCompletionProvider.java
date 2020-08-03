@@ -27,6 +27,7 @@ import com.perl5.lang.perl.idea.completion.providers.processors.PerlVariableComp
 import com.perl5.lang.perl.idea.completion.util.PerlVariableCompletionUtil;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlTimeLogger;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlVariableCompletionProvider extends PerlCompletionProvider {
@@ -53,7 +54,8 @@ public class PerlVariableCompletionProvider extends PerlCompletionProvider {
     PerlVariableCompletionProcessor variableCompletionProcessor = new PerlVariableCompletionProcessorImpl(
       parameters, resultSet, subName, namespaceName, false, false, false);
 
-    PerlVariableCompletionUtil.processVariables(variableCompletionProcessor);
+    PerlTimeLogger logger = PerlTimeLogger.create(LOG);
+    PerlVariableCompletionUtil.processVariables(variableCompletionProcessor, logger);
     variableCompletionProcessor.logStatus(getClass());
   }
 }

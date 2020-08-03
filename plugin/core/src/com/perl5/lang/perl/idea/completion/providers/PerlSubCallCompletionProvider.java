@@ -25,6 +25,7 @@ import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlCallValue;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlSimpleCompletionProcessor;
 import com.perl5.lang.perl.idea.completion.util.PerlSubCompletionUtil;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
+import com.perl5.lang.perl.util.PerlTimeLogger;
 import org.jetbrains.annotations.NotNull;
 
 
@@ -42,10 +43,13 @@ public class PerlSubCallCompletionProvider extends PerlCompletionProvider {
       return;
     }
     PerlSimpleCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(parameters, resultSet, position);
+    PerlTimeLogger logger = PerlTimeLogger.create(LOG);
     if (perlValue instanceof PerlCallStaticValue && !((PerlCallStaticValue)perlValue).hasExplicitNamespace()) {
       PerlSubCompletionUtil.processBuiltInSubsLookupElements(completionProcessor);
+      logger.debug("Processed built-in subs");
     }
     PerlSubCompletionUtil.processSubsCompletionsForCallValue(completionProcessor, perlValue, perlValue instanceof PerlCallStaticValue);
+    logger.debug("Processed subs for call value");
     completionProcessor.logStatus(getClass());
   }
 }

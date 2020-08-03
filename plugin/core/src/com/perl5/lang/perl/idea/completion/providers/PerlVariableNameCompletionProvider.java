@@ -69,7 +69,7 @@ public class PerlVariableNameCompletionProvider extends PerlCompletionProvider {
         false
       );
 
-    PerlTimeLogger timeLogger = new PerlTimeLogger(getClass());
+    PerlTimeLogger timeLogger = new PerlTimeLogger(LOG);
 
     // declaration helper
     if (isDeclaration) {

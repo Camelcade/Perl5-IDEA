@@ -33,6 +33,7 @@ import com.perl5.lang.perl.psi.PsiPerlAnnotationInject;
 import com.perl5.lang.perl.psi.PsiPerlGlobSlot;
 import com.perl5.lang.perl.psi.PsiPerlHashIndex;
 import com.perl5.lang.perl.util.PerlInjectionUtil;
+import com.perl5.lang.perl.util.PerlTimeLogger;
 import org.jetbrains.annotations.NotNull;
 
 
@@ -48,44 +49,50 @@ public class PerlStringContentCompletionProvider extends PerlCompletionProvider 
       return;
     }
 
+    PerlTimeLogger logger = PerlTimeLogger.create(LOG);
     PerlSimpleCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(parameters, result, element);
 
-    if (EXPORT_ASSIGNED_STRING_CONTENT.accepts(element)) // exporter assignments
-    {
+    if (EXPORT_ASSIGNED_STRING_CONTENT.accepts(element)) { // exporter assignments
       PerlStringCompletionUtil.fillWithExportableEntities(completionProcessor);
+      logger.debug("Filled with exportable entities");
     }
-    else if (SIMPLE_HASH_INDEX.accepts(element))    // hash indexes
-    {
+    else if (SIMPLE_HASH_INDEX.accepts(element)) {    // hash indexes
       PsiPerlHashIndex indexElement = PsiTreeUtil.getParentOfType(element, PsiPerlHashIndex.class);
       if (indexElement != null && indexElement.getParent() instanceof PsiPerlGlobSlot) {
         PerlStringCompletionUtil.fillWithRefTypes(completionProcessor);
+        logger.debug("Filled with ref types");
       }
       else {
         PerlStringCompletionUtil.fillWithHashIndexes(completionProcessor);
+        logger.debug("Filled with hash indexes");
         PerlVariableCompletionUtil.processVariables(
-          new PerlVariableCompletionProcessorImpl(completionProcessor, null, false, false, false));
+          new PerlVariableCompletionProcessorImpl(completionProcessor, null, false, false, false), logger);
         PerlSubCompletionUtil.processContextSubsLookupElements(completionProcessor);
+        logger.debug("Filled with context subs lookup elements");
         PerlPackageCompletionUtil.processAllNamespacesNames(completionProcessor, false, false);
+        logger.debug("Filled with namespace names");
       }
     }
-    else if (USE_PARAMETERS_PATTERN.accepts(element))    // use or no parameters
-    {
+    else if (USE_PARAMETERS_PATTERN.accepts(element)) {    // use or no parameters
       PerlStringCompletionUtil.fillWithUseParameters(completionProcessor);
+      logger.debug("Filled with use parameters");
     }
-    else if (parent != null && parent.getParent() instanceof PsiPerlAnnotationInject) // #@Inject some
-    {
+    else if (parent != null && parent.getParent() instanceof PsiPerlAnnotationInject) { // #@Inject some
       PerlStringCompletionUtil.fillWithInjectableMarkers(completionProcessor);
       result.stopHere();
+      logger.debug("Filled with injectable markers");
     }
-    else if (STRING_CONTENT_IN_HEREDOC_OPENER_PATTERN.accepts(element)) // HERE-DOC openers
-    {
+    else if (STRING_CONTENT_IN_HEREDOC_OPENER_PATTERN.accepts(element)) { // HERE-DOC openers
       PerlStringCompletionUtil.fillWithInjectableMarkers(completionProcessor);
+      logger.debug("Filled with injectable markers in opener");
       PerlStringCompletionUtil.fillWithHeredocOpeners(completionProcessor);
+      logger.debug("Filled with heredoc openers");
     }
-    else if (STRING_CONTENT_IN_LIST_OR_STRING_START.accepts(element))    // begin of string or qw element
-    {
+    else if (STRING_CONTENT_IN_LIST_OR_STRING_START.accepts(element)) {    // begin of string or qw element
       PerlStringCompletionUtil.fillWithRefTypes(completionProcessor);
+      logger.debug("Filled with ref types");
       PerlPackageCompletionUtil.processAllNamespacesNames(completionProcessor);
+      logger.debug("Processed namespace names");
     }
     completionProcessor.logStatus(getClass());
   }

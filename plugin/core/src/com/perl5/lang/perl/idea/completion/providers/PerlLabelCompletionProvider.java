@@ -24,6 +24,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlSimpleCompletionProcessor;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
+import com.perl5.lang.perl.util.PerlTimeLogger;
 import org.jetbrains.annotations.NotNull;
 
 import static com.perl5.lang.perl.idea.PerlElementPatterns.*;
@@ -38,6 +39,7 @@ public class PerlLabelCompletionProvider extends PerlCompletionProvider {
     if (element == null) {
       return;
     }
+    PerlTimeLogger logger = PerlTimeLogger.create(LOG);
     PerlSimpleCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(parameters, result, element);
     if (LABEL_DECLARATION_PATTERN.accepts(element)) {
       // unresolved labels should be here
@@ -52,6 +54,7 @@ public class PerlLabelCompletionProvider extends PerlCompletionProvider {
         }
         return completionProcessor.result();
       });
+      logger.debug("Processed goto label declarations");
     }
     else if (LABEL_IN_NEXT_LAST_REDO_PATTERN.accepts(element)) {
       PerlPsiUtil.processNextRedoLastLabelDeclarations(element, perlLabelDeclaration -> {
@@ -63,6 +66,7 @@ public class PerlLabelCompletionProvider extends PerlCompletionProvider {
         }
         return completionProcessor.result();
       });
+      logger.debug("Processed next redo label declarations");
     }
     completionProcessor.logStatus(getClass());
   }

@@ -19,11 +19,11 @@ package com.perl5.lang.perl.idea.completion.providers;
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlSimpleCompletionProcessor;
+import com.perl5.lang.perl.util.PerlTimeLogger;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.ref.SoftReference;
@@ -31,7 +31,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PerlUnicodeNamesCompletionProvider extends PerlCompletionProvider {
-  private static final Logger LOG = Logger.getInstance(PerlUnicodeNamesCompletionProvider.class);
   private int myCodePoint = 0;
   private int myDataSize = 0;
 
@@ -52,8 +51,11 @@ public class PerlUnicodeNamesCompletionProvider extends PerlCompletionProvider {
       myNamesCacheRef = new SoftReference<>(cache);
     }
 
+    PerlTimeLogger logger = PerlTimeLogger.create(LOG);
     fillCached(completionProcessor, cache);
+    logger.debug("Filled cached unicode names");
     lazyCache(completionProcessor, cache);
+    logger.debug("Lazily populated cache of unicode names");
 
     if (LOG.isDebugEnabled()) {
       LOG.debug("Cached entries: ", cache.size(), "; data size, mb: ", (float)myDataSize / 1024 / 1024);
