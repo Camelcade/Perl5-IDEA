@@ -46,6 +46,8 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
                                                                                                   PerlControlFlowOwner {
   private final ClearableLazyValue<PerlFileData> mySubtreeFileData = PerlFileDataCollector.createLazyBuilder(this);
   private final ClearableLazyValue<Instruction[]> myControlFlow = PerlControlFlowBuilder.createLazy(this);
+  private final ClearableLazyValue<PerlValue> myReturnValueFromCode = ClearableLazyValue.create(
+    () -> PerlResolveUtil.computeReturnValueFromControlFlow(this));
 
   public PerlSubDefinitionBase(@NotNull ASTNode node) {
     super(node);
@@ -91,7 +93,7 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
     }
     PerlSubDefinitionStub greenStub = getGreenStub();
     return greenStub != null ?
-           greenStub.getReturnValueFromCode() : PerlResolveUtil.computeReturnValueFromControlFlow(this);
+           greenStub.getReturnValueFromCode() : myReturnValueFromCode.getValue();
   }
 
   @Override
@@ -168,5 +170,6 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
   public void subtreeChanged() {
     mySubtreeFileData.drop();
     myControlFlow.drop();
+    myReturnValueFromCode.drop();
   }
 }
