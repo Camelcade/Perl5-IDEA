@@ -19,6 +19,8 @@ package com.perl5.lang.pod.elementTypes;
 import com.intellij.lang.Language;
 import com.intellij.lexer.FlexAdapter;
 import com.intellij.lexer.Lexer;
+import com.intellij.openapi.util.TextRange;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.templateLanguages.TemplateDataElementType;
 import com.intellij.psi.templateLanguages.TemplateLanguageFileViewProvider;
 import com.perl5.lang.perl.PerlLanguage;
@@ -27,6 +29,7 @@ import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.lexer.PodElementTypes;
 import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
 
 
 public class PodTemplatingElementType extends TemplateDataElementType implements PerlElementTypes, PodElementTypes {
@@ -34,6 +37,42 @@ public class PodTemplatingElementType extends TemplateDataElementType implements
     super(debugName, language, POD, POD_OUTER);
   }
 
+  @Override
+  protected CharSequence createTemplateText(@NotNull CharSequence sourceCode,
+                                            @NotNull Lexer baseLexer,
+                                            @NotNull RangeCollector rangeCollector) {
+    if (doesSourceSeemsHasPod(sourceCode)) {
+      return super.createTemplateText(sourceCode, baseLexer, rangeCollector);
+    }
+    rangeCollector.addOuterRange(TextRange.create(0, sourceCode.length()));
+    return "";
+  }
+
+  /**
+   * @return true iff {@code sourceCode} has pod-like opener.
+   */
+  private boolean doesSourceSeemsHasPod(@NotNull CharSequence sourceCode) {
+    if (sourceCode.length() > 2 && sourceCode.charAt(0) == '=' && Character.isLetter(sourceCode.charAt(1))) {
+      return true;
+    }
+    int startOffset = 0;
+    while (true) {
+      int possibleStart = StringUtil.indexOf(sourceCode, "\n=", startOffset);
+      if (possibleStart > -1) {
+        if (possibleStart < sourceCode.length() - 2 && Character.isLetter(sourceCode.charAt(possibleStart + 2))) {
+          return true;
+        }
+        startOffset = possibleStart + 1;
+      }
+      else {
+        return false;
+      }
+    }
+  }
+
+  /**
+   * @return an optimized lexer (without sublexing) to distinct perl from pod
+   */
   @Override
   protected Lexer createBaseLexer(TemplateLanguageFileViewProvider viewProvider) {
     if (viewProvider.getBaseLanguage() == PerlLanguage.INSTANCE) {
