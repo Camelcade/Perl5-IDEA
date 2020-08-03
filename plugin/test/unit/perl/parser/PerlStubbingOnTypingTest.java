@@ -20,6 +20,7 @@ import base.PerlLightTestCase;
 import categories.Performance;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.EditorModificationUtil;
@@ -32,11 +33,34 @@ import org.junit.experimental.categories.Category;
 @Ignore
 @Category(Performance.class)
 public class PerlStubbingOnTypingTest extends PerlLightTestCase {
+
+  private static final int START_OFFSET = 1133848;
+
+  @Test
+  public void testStubbingPerformanceInsideLeaf() {
+    initWithPerlTidy();
+    Editor editor = getEditor();
+    CaretModel caretModel = editor.getCaretModel();
+    caretModel.moveToOffset(START_OFFSET);
+    WriteCommandAction.runWriteCommandAction(getProject(), () -> {
+      EditorModificationUtil.insertStringAtCaret(editor, "test");
+      caretModel.moveToOffset(START_OFFSET + 2);
+      PsiDocumentManager.getInstance(getProject()).commitAllDocuments();
+    });
+    doTestTypingPerformance();
+  }
+
   @Test
   public void testStubbingPerformance() {
     initWithPerlTidy();
     Editor editor = getEditor();
     editor.getCaretModel().moveToOffset(1133848);
+    PerlNamespaceIndex.getInstance().getAllNames(getProject());
+    doTestTypingPerformance();
+  }
+
+  private void doTestTypingPerformance() {
+    Editor editor = getEditor();
     long started = System.currentTimeMillis();
     Document document = editor.getDocument();
     PsiDocumentManager documentManager = PsiDocumentManager.getInstance(getProject());
@@ -51,6 +75,7 @@ public class PerlStubbingOnTypingTest extends PerlLightTestCase {
     }
 
     long elapsed = System.currentTimeMillis() - started;
-    Logger.getInstance(PerlStubbingOnTypingTest.class).warn("Time elapsed: " + elapsed + "; per iteraton: " + (elapsed / iterations));
+    Logger.getInstance(PerlStubbingOnTypingTest.class)
+      .warn(getTestName(true) + ": time elapsed: " + elapsed + "; per iteraton: " + (elapsed / iterations));
   }
 }
