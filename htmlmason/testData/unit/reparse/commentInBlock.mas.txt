@@ -1,0 +1,28 @@
+Reparsing block
+----------
+PsiComment(Perl5: COMMENT_LINE)
+----------
+# comment test
+----------
+After typing
+----------
+<div>
+
+<%perl>
+  # commentedit<caret> test
+</%perl>
+
+</div>
+----------
+Psi structure
+----------
+HTML::Mason component
+  PsiComment(HTML::Mason: HTML_MASON_TEMPLATE_BLOCK_HTML)('<div>')
+  PsiWhiteSpace('\n\n')
+  PsiComment(HTML::Mason: <%perl>)('<%perl>')
+  PsiWhiteSpace('\n  ')
+  PsiComment(Perl5: COMMENT_LINE)('# commentedit test')
+  PsiWhiteSpace('\n')
+  PsiComment(HTML::Mason: </%perl>)('</%perl>')
+  PsiWhiteSpace('\n\n')
+  PsiComment(HTML::Mason: HTML_MASON_TEMPLATE_BLOCK_HTML)('</div>')

@@ -1,0 +1,39 @@
+Reparsing block
+----------
+PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)
+----------
+  test text
+
+----------
+After typing
+----------
+<div>
+<%perl>
+
+  <<EOM;
+  testedit<caret> text
+EOM
+
+  </%perl> </div>
+----------
+Psi structure
+----------
+HTML::Mason component
+  PsiComment(HTML::Mason: HTML_MASON_TEMPLATE_BLOCK_HTML)('<div>')
+  PsiWhiteSpace('\n')
+  PsiComment(HTML::Mason: <%perl>)('<%perl>')
+  PsiWhiteSpace('\n\n  ')
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER)
+      PsiElement(Perl5: heredoc<<)('<<')
+      PsiPerlStringBareImpl(Perl5: STRING_BARE)
+        PerlStringContentElementImpl(Perl5: STRING_CONTENT)('EOM')
+    PsiElement(Perl5: ;)(';')
+  PsiWhiteSpace('\n')
+  PerlHeredocElementImpl(Perl5: HEREDOC_QQ)
+    PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('  testedit text\n')
+  PsiComment(Perl5: HEREDOC_END)('EOM')
+  PsiWhiteSpace('\n\n  ')
+  PsiComment(HTML::Mason: </%perl>)('</%perl>')
+  PsiWhiteSpace(' ')
+  PsiComment(HTML::Mason: HTML_MASON_TEMPLATE_BLOCK_HTML)('</div>')

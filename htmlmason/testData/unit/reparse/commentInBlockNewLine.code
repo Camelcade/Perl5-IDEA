@@ -1,0 +1,7 @@
+<div>
+
+<%perl>
+  # comment<caret> test
+</%perl>
+
+</div>

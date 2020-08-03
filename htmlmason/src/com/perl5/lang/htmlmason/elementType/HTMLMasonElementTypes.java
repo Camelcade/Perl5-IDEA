@@ -29,7 +29,7 @@ import com.perl5.lang.pod.elementTypes.PodTemplatingElementType;
 import org.jetbrains.annotations.NotNull;
 
 public interface HTMLMasonElementTypes extends HTMLMasonSyntaxElements {
-  IElementType HTML_MASON_TEMPLATE_BLOCK_HTML = new HTMLMasonTokenType("HTML_MASON_TEMPLATE_BLOCK_HTML");
+  IElementType HTML_MASON_TEMPLATE_BLOCK_HTML = new HTMLMasonTemplateTokenType();
   IElementType HTML_MASON_OUTER_ELEMENT_TYPE = new HTMLMasonTokenType("HTML_MASON_OUTER_ELEMENT_TYPE");
   IElementType HTML_MASON_HTML_TEMPLATE_DATA = new TemplateDataElementType(
     "HTML_MASON_HTML_TEMPLATE_DATA",

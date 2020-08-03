@@ -1,0 +1,38 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
+<div>
+<%perl>
+
+  #@returedit<caret>
+  sub something{
+
+  }
+
+  </%perl> </div>
+----------
+Psi structure
+----------
+HTML::Mason component
+  PsiComment(HTML::Mason: HTML_MASON_TEMPLATE_BLOCK_HTML)('<div>')
+  PsiWhiteSpace('\n')
+  PsiComment(HTML::Mason: <%perl>)('<%perl>')
+  PsiWhiteSpace('\n\n  ')
+  PerlAnnotationContainerImpl(Perl5: COMMENT_ANNOTATION)
+    PsiElement(Perl5: #@unknown)('#@returedit')
+  PsiWhiteSpace('\n  ')
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::something
+    PsiElement(Perl5: sub)('sub')
+    PsiWhiteSpace(' ')
+    PerlSubNameElementImpl(Perl5: subname)('something')
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiWhiteSpace('\n\n  ')
+      PsiElement(Perl5: })('}')
+  PsiWhiteSpace('\n\n  ')
+  PsiComment(HTML::Mason: </%perl>)('</%perl>')
+  PsiWhiteSpace(' ')
+  PsiComment(HTML::Mason: HTML_MASON_TEMPLATE_BLOCK_HTML)('</div>')

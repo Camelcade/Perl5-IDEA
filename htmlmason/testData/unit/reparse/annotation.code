@@ -1,0 +1,9 @@
+<div>
+<%perl>
+
+  #@retur<caret>
+  sub something{
+
+  }
+
+  </%perl> </div>

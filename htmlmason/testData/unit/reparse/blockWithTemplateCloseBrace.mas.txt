@@ -1,0 +1,68 @@
+Reparsing block
+----------
+PsiComment(HTML::Mason: HTML_MASON_TEMPLATE_BLOCK_HTML)
+----------
+true }  branch
+----------
+After typing
+----------
+something <div>
+
+<%perl>
+
+if( $a ){
+          </%perl> true } edit<caret> branch <%perl>
+}
+else{
+  </%perl> false branch <%perl>
+}
+
+ </%perl>
+
+ </div> else
+----------
+Psi structure
+----------
+HTML::Mason component
+  PsiComment(HTML::Mason: HTML_MASON_TEMPLATE_BLOCK_HTML)('something <div>')
+  PsiWhiteSpace('\n\n')
+  PsiComment(HTML::Mason: <%perl>)('<%perl>')
+  PsiWhiteSpace('\n\n')
+  PsiPerlIfCompoundImpl(Perl5: IF_COMPOUND)
+    PsiElement(Perl5: if)('if')
+    PsiPerlConditionalBlockImpl(Perl5: CONDITIONAL_BLOCK)
+      PsiPerlConditionExprImpl(Perl5: CONDITION_EXPR)
+        PsiElement(Perl5: ()('(')
+        PsiWhiteSpace(' ')
+        PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+          PsiElement(Perl5: $$)('$')
+          PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('a')
+        PsiWhiteSpace(' ')
+        PsiElement(Perl5: ))(')')
+      PsiPerlBlockImpl(Perl5: BLOCK)
+        PsiElement(Perl5: {)('{')
+        PsiWhiteSpace('\n          ')
+        PsiComment(HTML::Mason: </%perl>)('</%perl>')
+        PsiWhiteSpace(' ')
+        PsiComment(HTML::Mason: HTML_MASON_TEMPLATE_BLOCK_HTML)('true } edit branch')
+        PsiWhiteSpace(' ')
+        PsiComment(HTML::Mason: <%perl>)('<%perl>')
+        PsiWhiteSpace('\n')
+        PsiElement(Perl5: })('}')
+    PsiWhiteSpace('\n')
+    PsiElement(Perl5: else)('else')
+    PsiPerlUnconditionalBlockImpl(Perl5: UNCONDITIONAL_BLOCK)
+      PsiPerlBlockImpl(Perl5: BLOCK)
+        PsiElement(Perl5: {)('{')
+        PsiWhiteSpace('\n  ')
+        PsiComment(HTML::Mason: </%perl>)('</%perl>')
+        PsiWhiteSpace(' ')
+        PsiComment(HTML::Mason: HTML_MASON_TEMPLATE_BLOCK_HTML)('false branch')
+        PsiWhiteSpace(' ')
+        PsiComment(HTML::Mason: <%perl>)('<%perl>')
+        PsiWhiteSpace('\n')
+        PsiElement(Perl5: })('}')
+  PsiWhiteSpace('\n\n ')
+  PsiComment(HTML::Mason: </%perl>)('</%perl>')
+  PsiWhiteSpace('\n\n ')
+  PsiComment(HTML::Mason: HTML_MASON_TEMPLATE_BLOCK_HTML)('</div> else')

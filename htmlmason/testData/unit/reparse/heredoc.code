@@ -1,0 +1,8 @@
+<div>
+<%perl>
+
+  <<EOM;
+  test<caret> text
+EOM
+
+  </%perl> </div>

@@ -1,0 +1,35 @@
+Reparsing block
+----------
+PerlVariableNameElementImpl(Perl5: SCALAR_NAME)
+----------
+variable
+----------
+After typing
+----------
+something <div>
+
+<%perl>
+
+
+$varedit<caret>iable;
+
+ </%perl>
+
+ </div> else
+----------
+Psi structure
+----------
+HTML::Mason component
+  PsiComment(HTML::Mason: HTML_MASON_TEMPLATE_BLOCK_HTML)('something <div>')
+  PsiWhiteSpace('\n\n')
+  PsiComment(HTML::Mason: <%perl>)('<%perl>')
+  PsiWhiteSpace('\n\n\n')
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+      PsiElement(Perl5: $$)('$')
+      PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('vareditiable')
+    PsiElement(Perl5: ;)(';')
+  PsiWhiteSpace('\n\n ')
+  PsiComment(HTML::Mason: </%perl>)('</%perl>')
+  PsiWhiteSpace('\n\n ')
+  PsiComment(HTML::Mason: HTML_MASON_TEMPLATE_BLOCK_HTML)('</div> else')

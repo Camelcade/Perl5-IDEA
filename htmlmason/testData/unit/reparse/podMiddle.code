@@ -1,0 +1,15 @@
+something <div>
+
+<%perl>
+
+=pod HEAD1
+
+something<caret>
+
+=cut
+
+say 'hi';
+
+ </%perl>
+
+ </div> else

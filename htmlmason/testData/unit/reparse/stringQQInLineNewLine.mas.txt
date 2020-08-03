@@ -1,0 +1,30 @@
+Reparsing block
+----------
+PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)
+----------
+variable
+----------
+After typing
+----------
+something <div>
+
+% "var
+<caret>iable";
+
+ </div> else
+----------
+Psi structure
+----------
+HTML::Mason component
+  PsiComment(HTML::Mason: HTML_MASON_TEMPLATE_BLOCK_HTML)('something <div>')
+  PsiWhiteSpace('\n\n')
+  PsiComment(HTML::Mason: %)('%')
+  PsiWhiteSpace(' ')
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlStringDqImpl(Perl5: STRING_DQ)
+      PsiElement(Perl5: QUOTE_DOUBLE_OPEN)('"')
+      PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('var\niable')
+      PsiElement(Perl5: QUOTE_DOUBLE_CLOSE)('"')
+    PsiElement(Perl5: ;)(';')
+  PsiWhiteSpace('\n\n ')
+  PsiComment(HTML::Mason: HTML_MASON_TEMPLATE_BLOCK_HTML)('</div> else')

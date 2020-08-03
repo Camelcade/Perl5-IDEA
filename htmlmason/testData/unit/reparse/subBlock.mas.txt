@@ -1,0 +1,50 @@
+Reparsing block
+----------
+Element(Perl5: BLOCK)
+----------
+{
+  ;
+}
+----------
+After typing
+----------
+something <div>
+
+<%perl>
+
+sub somesub(){
+  edit<caret>;
+}
+
+
+ </%perl>
+
+ </div> else
+----------
+Psi structure
+----------
+HTML::Mason component
+  PsiComment(HTML::Mason: HTML_MASON_TEMPLATE_BLOCK_HTML)('something <div>')
+  PsiWhiteSpace('\n\n')
+  PsiComment(HTML::Mason: <%perl>)('<%perl>')
+  PsiWhiteSpace('\n\n')
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::somesub
+    PsiElement(Perl5: sub)('sub')
+    PsiWhiteSpace(' ')
+    PerlSubNameElementImpl(Perl5: subname)('somesub')
+    PsiElement(Perl5: ()('(')
+    PsiElement(Perl5: ))(')')
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiWhiteSpace('\n  ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlSubCallImpl(SUB_CALL)
+          PsiPerlMethodImpl(Perl5: METHOD)
+            PerlSubNameElementImpl(Perl5: subname)('edit')
+        PsiElement(Perl5: ;)(';')
+      PsiWhiteSpace('\n')
+      PsiElement(Perl5: })('}')
+  PsiWhiteSpace('\n\n\n ')
+  PsiComment(HTML::Mason: </%perl>)('</%perl>')
+  PsiWhiteSpace('\n\n ')
+  PsiComment(HTML::Mason: HTML_MASON_TEMPLATE_BLOCK_HTML)('</div> else')

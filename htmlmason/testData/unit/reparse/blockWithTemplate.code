@@ -1,0 +1,14 @@
+something <div>
+
+<%perl>
+
+if( $a ){
+   </%perl> true <caret> branch <%perl>
+}
+else{
+  </%perl>  false branch  <%perl>
+}
+
+ </%perl>
+
+ </div> else

@@ -1,0 +1,12 @@
+something <div>
+
+<%perl>
+
+sub somesub(){
+  <caret>;
+}
+
+
+ </%perl>
+
+ </div> else

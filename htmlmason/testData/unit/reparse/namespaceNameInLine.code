@@ -1,0 +1,5 @@
+something <div>
+
+% Foo::<caret>Bar::->something();
+
+ </div> else

@@ -1,0 +1,10 @@
+something <div>
+
+<%perl>
+
+
+Foo::<caret>Bar::->something();
+
+ </%perl>
+
+ </div> else

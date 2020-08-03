@@ -1,0 +1,32 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
+something <div>
+
+% sub somesub(){  
+<caret>;}
+
+ </div> else
+----------
+Psi structure
+----------
+HTML::Mason component
+  PsiComment(HTML::Mason: HTML_MASON_TEMPLATE_BLOCK_HTML)('something <div>')
+  PsiWhiteSpace('\n\n')
+  PsiComment(HTML::Mason: %)('%')
+  PsiWhiteSpace(' ')
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::somesub
+    PsiElement(Perl5: sub)('sub')
+    PsiWhiteSpace(' ')
+    PerlSubNameElementImpl(Perl5: subname)('somesub')
+    PsiElement(Perl5: ()('(')
+    PsiElement(Perl5: ))(')')
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiErrorElement:Perl5: } expected
+        <empty list>
+  PsiWhiteSpace('  \n')
+  PsiComment(HTML::Mason: HTML_MASON_TEMPLATE_BLOCK_HTML)(';}\n\n </div> else')

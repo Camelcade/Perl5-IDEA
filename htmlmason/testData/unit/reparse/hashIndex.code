@@ -1,0 +1,6 @@
+<div>
+<%perl>
+
+  $test{foo <caret>};
+
+  </%perl> </div>
