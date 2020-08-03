@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -162,7 +162,7 @@ public class NamespaceParentsDetectionTest extends NamespaceTestCase {
 
   public void doTest(String fileName, @NotNull String namespaceName, String[] parentsList) {
     PerlNamespaceDefinitionMixin namespaceDefinition = getNamespaceInFile(fileName, namespaceName);
-    List<String> parents = PerlPackageUtil.collectParentNamespacesFromPsi(namespaceDefinition);
+    List<String> parents = PerlPackageUtil.collectParentNamespaceNamesFromPsi(namespaceDefinition);
     assertEquals(new ArrayList<>(Arrays.asList(parentsList)), parents);
   }
 }

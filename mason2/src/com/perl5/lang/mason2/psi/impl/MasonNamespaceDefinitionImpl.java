@@ -86,14 +86,7 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 
   @Override
   public List<PerlNamespaceDefinitionElement> getParentNamespaceDefinitions() {
-    List<String> parentsPaths;
-    PerlNamespaceDefinitionStub stub = getGreenStub();
-    if (stub != null) {
-      parentsPaths = stub.getParentNamespacesNames();
-    }
-    else {
-      parentsPaths = PerlPackageUtil.collectParentNamespacesFromPsi(this);
-    }
+    List<String> parentsPaths = getParentNamespacesNames();
 
     VirtualFile containingFile = MasonCoreUtil.getContainingVirtualFile(getContainingFile());
     List<PerlNamespaceDefinitionElement> parentsNamespaces;

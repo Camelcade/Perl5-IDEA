@@ -24,6 +24,7 @@ import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.roots.impl.DirectoryInfo;
 import com.intellij.openapi.roots.impl.ProjectFileIndexImpl;
+import com.intellij.openapi.util.ClearableLazyValue;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
@@ -70,6 +71,9 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
   private static final Logger LOG = Logger.getInstance(PerlFileImpl.class);
   protected GlobalSearchScope myElementsResolveScope;
   protected PsiElement fileContext;
+
+  private final ClearableLazyValue<List<String>> myParentNamespaces = ClearableLazyValue.create(
+    () -> PerlPackageUtil.collectParentNamespaceNamesFromPsi(this));
 
   public PerlFileImpl(@NotNull FileViewProvider viewProvider, Language language) {
     super(viewProvider, language);
@@ -122,6 +126,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
   public void subtreeChanged() {
     super.subtreeChanged();
     myElementsResolveScope = null;
+    myParentNamespaces.drop();
   }
 
   @Override
@@ -308,7 +313,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
     if (stub instanceof PerlFileStub) {
       return ((PerlFileStub)stub).getParentNamespacesNames();
     }
-    return PerlPackageUtil.collectParentNamespacesFromPsi(this);
+    return myParentNamespaces.getValue();
   }
 
   @Override

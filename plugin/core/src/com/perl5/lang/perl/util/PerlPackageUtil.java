@@ -804,12 +804,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
   /**
    * @return list of parent namespaces defined by different syntax constructions in the sub-tree of the {@code namespaceDefinition}
    */
-  public static @NotNull List<String> collectParentNamespacesFromPsi(@NotNull PerlNamespaceDefinitionElement namespaceDefinition) {
-    return CachedValuesManager.getCachedValue(namespaceDefinition, () ->
-      CachedValueProvider.Result.create(doCollectParentNamespacesFromPsi(namespaceDefinition), namespaceDefinition));
-  }
-
-  private static @NotNull List<String> doCollectParentNamespacesFromPsi(@NotNull PerlNamespaceDefinitionElement namespaceDefinition) {
+  public static @NotNull List<String> collectParentNamespaceNamesFromPsi(@NotNull PerlNamespaceDefinitionElement namespaceDefinition) {
     String namespaceName = namespaceDefinition.getNamespaceName();
     if (StringUtil.isEmpty(namespaceName)) {
       return Collections.emptyList();

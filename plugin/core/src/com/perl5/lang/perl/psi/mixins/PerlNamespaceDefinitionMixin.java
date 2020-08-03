@@ -23,8 +23,6 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.StubBasedPsiElement;
 import com.intellij.psi.stubs.IStubElementType;
-import com.intellij.psi.util.CachedValueProvider;
-import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.intellij.util.Processor;
@@ -57,6 +55,10 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
              PerlCompositeElement,
              PerlFileDataOwner {
   private final ClearableLazyValue<PerlFileData> mySubtreeFileData = PerlFileDataCollector.createLazyBuilder(this);
+  private final ClearableLazyValue<ExporterInfo> myExporterInfo = ClearableLazyValue.create(this::computeExporterInfo);
+  private final ClearableLazyValue<PerlMroType> myMroType = ClearableLazyValue.create(this::computeMroType);
+  private final ClearableLazyValue<List<String>> myParentNamespaces = ClearableLazyValue.create(
+    () -> PerlPackageUtil.collectParentNamespaceNamesFromPsi(this));
 
   public PerlNamespaceDefinitionMixin(@NotNull ASTNode node) {
     super(node);
@@ -117,7 +119,7 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
     if (stub != null) {
       return stub.getParentNamespacesNames();
     }
-    return PerlPackageUtil.collectParentNamespacesFromPsi(this);
+    return myParentNamespaces.getValue();
   }
 
   @Override
@@ -137,11 +139,13 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
       return stub.getMroType();
     }
 
-    return CachedValuesManager.getCachedValue(this, () -> {
-      MroSearcher searcher = new MroSearcher();
-      PerlPsiUtil.processNamespaceStatements(this, searcher);
-      return CachedValueProvider.Result.create(searcher.getResult(), PerlNamespaceDefinitionMixin.this);
-    });
+    return myMroType.getValue();
+  }
+
+  private @NotNull PerlMroType computeMroType() {
+    MroSearcher searcher = new MroSearcher();
+    PerlPsiUtil.processNamespaceStatements(this, searcher);
+    return searcher.getResult();
   }
 
 
@@ -185,11 +189,13 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
   }
 
   public @NotNull ExporterInfo getExporterInfo() {
-    return CachedValuesManager.getCachedValue(this, () -> {
-      ExporterInfo result = new ExporterInfo();
-      PerlPsiUtil.processNamespaceStatements(this, result);
-      return CachedValueProvider.Result.create(result, PerlNamespaceDefinitionMixin.this);
-    });
+    return myExporterInfo.getValue();
+  }
+
+  private @NotNull ExporterInfo computeExporterInfo() {
+    ExporterInfo result = new ExporterInfo();
+    PerlPsiUtil.processNamespaceStatements(this, result);
+    return result;
   }
 
   @Override
@@ -241,7 +247,11 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
 
   @Override
   public void subtreeChanged() {
+    super.subtreeChanged();
     mySubtreeFileData.drop();
+    myExporterInfo.drop();
+    myMroType.drop();
+    myParentNamespaces.drop();
   }
 
   public static class ExporterInfo implements Processor<PsiElement> {
