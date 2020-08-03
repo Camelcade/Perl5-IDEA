@@ -1,0 +1,13 @@
+something <div>
+
+% say 'hi';
+
+middle <caret> text
+
+[% WHILE total < 100 %]
+
+say 'hi';
+
+ [% END %]
+
+ </div> else

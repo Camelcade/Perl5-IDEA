@@ -1,0 +1,56 @@
+Reparsing block
+----------
+PsiComment(TT2: TT2_HTML)
+----------
+
+
+middle  text
+
+% say 'hi';
+
+ </div> else
+----------
+After typing
+----------
+something <div>
+
+[% WHILE total < 100 %]
+
+say 'hi';
+
+ [% END %]
+
+middle edit<caret> text
+
+% say 'hi';
+
+ </div> else
+----------
+Psi structure
+----------
+Template Toolkit File
+  PsiComment(TT2: TT2_HTML)('something <div>\n\n')
+  PsiWhileBlockImpl(TT2: WHILE_BLOCK)
+    PsiElement(TT2: [%)('[%')
+    PsiWhiteSpace(' ')
+    PsiWhileDirectiveImpl(TT2: WHILE_DIRECTIVE)
+      PsiElement(TT2: WHILE)('WHILE')
+      PsiWhiteSpace(' ')
+      PsiCompareExprImpl(TT2: COMPARE_EXPR)
+        PsiIdentifierExprImpl(TT2: IDENTIFIER_EXPR)
+          PsiElement(TT2: TT2_IDENTIFIER)('total')
+        PsiWhiteSpace(' ')
+        PsiElement(TT2: <)('<')
+        PsiWhiteSpace(' ')
+        PsiTermExprImpl(TT2: TERM_EXPR)
+          PsiElement(TT2: TT2_NUMBER_SIMPLE)('100')
+    PsiWhiteSpace(' ')
+    PsiElement(TT2: %])('%]')
+    PsiComment(TT2: TT2_HTML)('\n\nsay 'hi';\n\n ')
+    PsiElement(TT2: [%)('[%')
+    PsiWhiteSpace(' ')
+    PsiEndDirectiveImpl(TT2: END_DIRECTIVE)
+      PsiElement(TT2: END)('END')
+    PsiWhiteSpace(' ')
+    PsiElement(TT2: %])('%]')
+  PsiComment(TT2: TT2_HTML)('\n\nmiddle edit text\n\n% say 'hi';\n\n </div> else')

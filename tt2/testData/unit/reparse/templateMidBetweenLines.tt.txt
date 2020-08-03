@@ -1,0 +1,30 @@
+Reparsing block
+----------
+PsiComment(TT2: TT2_HTML)
+----------
+something <div>
+
+% say 'hi';
+
+middle  text
+
+% say 'hi';
+
+ </div> else
+----------
+After typing
+----------
+something <div>
+
+% say 'hi';
+
+middle edit<caret> text
+
+% say 'hi';
+
+ </div> else
+----------
+Psi structure
+----------
+Template Toolkit File
+  PsiComment(TT2: TT2_HTML)('something <div>\n\n% say 'hi';\n\nmiddle edit text\n\n% say 'hi';\n\n </div> else')

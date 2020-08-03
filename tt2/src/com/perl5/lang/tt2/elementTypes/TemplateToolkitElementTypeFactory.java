@@ -26,6 +26,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory {
   public static IElementType getTokenType(String debugName) {
+    if (debugName.equals("TT2_HTML")) {
+      return new TemplateToolkitTemplateTokenType();
+    }
     return new TemplateToolkitTokenType(debugName);
   }
 
