@@ -23,7 +23,6 @@ import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.mason2.elementType.Mason2ElementTypes;
 import com.perl5.lang.mason2.psi.impl.MasonFileImpl;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.lexer.PerlLexingContext;
@@ -31,8 +30,10 @@ import com.perl5.lang.perl.lexer.adapters.PerlMergingLexerAdapter;
 import com.perl5.lang.perl.parser.Mason2ParserImpl;
 import org.jetbrains.annotations.NotNull;
 
+import static com.perl5.lang.mason2.elementType.Mason2ElementTypes.*;
 
-public class Mason2ParserDefinition extends PerlParserDefinition implements Mason2ElementTypes {
+
+public class Mason2ParserDefinition extends PerlParserDefinition {
 
   public static final TokenSet COMMENTS = TokenSet.orSet(PerlParserDefinition.COMMENTS,
                                                          TokenSet.create(

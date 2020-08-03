@@ -18,10 +18,8 @@ package com.perl5.lang.perl.parser.elementTypes;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
-import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.lexer.PerlLexingContext;
 import com.perl5.lang.perl.psi.PerlQuoted;
 import org.jetbrains.annotations.NotNull;
@@ -47,11 +45,6 @@ public class PerlUseVarsStringElementType extends PerlReparseableElementType {
     }
     PsiElement psiElement = parent.getPsi();
     return psiElement instanceof PerlQuoted ? ((PerlQuoted)psiElement).getOpenQuote() : 0;
-  }
-
-  @Override
-  protected @NotNull Lexer getLexer(@NotNull ASTNode chameleon) {
-    return createPerlLexerWithCustomInitialState(chameleon, PerlLexer.USE_VARS_STRING);
   }
 
   /**

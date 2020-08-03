@@ -117,13 +117,8 @@
    * Returns the current lexical state.
    */
   public int yystate() {
-    int perlLexicalState = getPerlLexerState();
-    if( perlLexicalState != 0 ){
-        return perlLexicalState;
-    }
-    return isInitialState() ? zzLexicalState: -666;
+    return packState(myPerlLexer.yystate(), isInitialState() ? zzLexicalState: 0xFFFF);
   }
-
 
   /**
    * Enters a new lexical state

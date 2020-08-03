@@ -22,7 +22,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.impl.source.tree.PsiCommentImpl;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.psi.impl.*;
 import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
 import com.perl5.lang.perl.psi.stubs.calls.PerlSubCallElementType;
@@ -84,11 +83,11 @@ public class PerlElementTypeFactory {
       case "COMMENT_ANNOTATION":
         return new PerlAnnotationElementType(name);
       case "HEREDOC_QQ":
-        return new PerlHeredocElementType(name, PerlHeredocElementImpl.class, PerlLexer.STRING_QQ);
+        return new PerlHeredocElementType(name, PerlHeredocElementImpl.class);
       case "HEREDOC_QX":
-        return new PerlHeredocElementType(name, PerlHeredocElementImpl.class, PerlLexer.STRING_QX);
+        return new PerlHeredocElementType(name, PerlHeredocElementImpl.class);
       case "HEREDOC":
-        return new PerlHeredocElementType(name, PerlHeredocElementImpl.class, PerlLexer.STRING_Q);
+        return new PerlHeredocElementType(name, PerlHeredocElementImpl.class);
       case "SUB_DEFINITION":
         return PerlStubElementTypes.SUB_DEFINITION;
       case "METHOD_DEFINITION":

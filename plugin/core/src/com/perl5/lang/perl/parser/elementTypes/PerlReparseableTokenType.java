@@ -150,6 +150,7 @@ public abstract class PerlReparseableTokenType extends PerlTokenTypeEx implement
 
   /**
    * @return range of the file text which is safe to re-lex to check this token for consistency or empty range if not possible
+   * @apiNote range should start from 0 lexer state
    */
   protected abstract @NotNull TextRange getLexerConfirmationRange(@NotNull ASTNode leaf);
 

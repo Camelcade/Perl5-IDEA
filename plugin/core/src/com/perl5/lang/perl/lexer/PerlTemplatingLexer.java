@@ -56,7 +56,7 @@ public abstract class PerlTemplatingLexer extends PerlProtoLexer {
       syncMainLexer();
       if (LOG.isTraceEnabled()) {
         LOG.debug("Preparsed by perl lexer: '", myPerlLexer.yytext(),
-                  "'; state: ", getPerlLexerState(),
+                  "'; state: ", myPerlLexer.yystate(),
                   "; real state: ", myPerlLexer.getRealLexicalState(),
                   "; tokenType: ", result,
                   "; start: ", myPerlLexer.getTokenStart(),
@@ -86,7 +86,21 @@ public abstract class PerlTemplatingLexer extends PerlProtoLexer {
   @Override
   protected void resetInternals() {
     super.resetInternals();
-    myPerlLexer.reset(getBuffer(), getBufferStart(), getBufferEnd(), 0);
+    int packedLexicalState = getRealLexicalState();
+    yybegin(getTemplateLexerState(packedLexicalState));
+    myPerlLexer.reset(getBuffer(), getBufferStart(), getBufferEnd(), getPerlLexerState(packedLexicalState));
+  }
+
+  public static int packState(int perlLexerState, int templateLexerState) {
+    return (templateLexerState << 16) + perlLexerState;
+  }
+
+  public static int getPerlLexerState(int packedState) {
+    return packedState & 0xFFFF;
+  }
+
+  public static int getTemplateLexerState(int packedState) {
+    return packedState >> 16;
   }
 
   /**
@@ -114,11 +128,6 @@ public abstract class PerlTemplatingLexer extends PerlProtoLexer {
 
   protected @Nullable CommentEndCalculator getCommentEndCalculator() {
     return null;
-  }
-
-  @Override
-  public boolean isInitialState() {
-    return super.isInitialState() && getPerlLexerState() == 0;
   }
 
   protected void startPerlExpression() {

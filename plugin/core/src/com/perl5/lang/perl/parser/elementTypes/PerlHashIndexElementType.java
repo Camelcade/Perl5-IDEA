@@ -16,11 +16,9 @@
 
 package com.perl5.lang.perl.parser.elementTypes;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.lexer.Lexer;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.lexer.PerlLexer;
+import com.perl5.lang.perl.lexer.PerlTemplatingLexer;
 import org.jetbrains.annotations.NotNull;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.LEFT_BRACE;
@@ -39,11 +37,6 @@ public class PerlHashIndexElementType extends PerlBracedBlockElementType {
 
   @Override
   protected boolean isLexerStateOk(int lexerState) {
-    return lexerState == PerlLexer.AFTER_RIGHT_BRACE;
-  }
-
-  @Override
-  protected @NotNull Lexer getLexer(@NotNull ASTNode chameleon) {
-    return createPerlLexerWithCustomInitialState(chameleon, AFTER_VARIABLE);
+    return PerlTemplatingLexer.getPerlLexerState(lexerState) == AFTER_VARIABLE;
   }
 }

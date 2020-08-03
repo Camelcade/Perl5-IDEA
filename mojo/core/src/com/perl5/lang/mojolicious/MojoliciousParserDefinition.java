@@ -33,8 +33,8 @@ import com.perl5.lang.mojolicious.lexer.MojoliciousLexer;
 import com.perl5.lang.mojolicious.lexer.MojoliciousLexerAdapter;
 import com.perl5.lang.mojolicious.psi.impl.MojoliciousFileImpl;
 import com.perl5.lang.perl.PerlParserDefinition;
+import com.perl5.lang.perl.lexer.PerlTemplatingLexer;
 import com.perl5.lang.perl.parser.MojoliciousParser;
-import com.perl5.lang.perl.psi.PerlLexerAwareParserDefinition;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
@@ -42,7 +42,7 @@ import java.util.Objects;
 import static com.perl5.lang.mojolicious.MojoliciousElementTypes.*;
 
 
-public class MojoliciousParserDefinition extends PerlParserDefinition implements PerlLexerAwareParserDefinition {
+public class MojoliciousParserDefinition extends PerlParserDefinition {
   public static final TokenSet COMMENTS = TokenSet.orSet(PerlParserDefinition.COMMENTS,
                                                          TokenSet.create(
                                                            MOJO_TEMPLATE_BLOCK_HTML,
@@ -88,24 +88,24 @@ public class MojoliciousParserDefinition extends PerlParserDefinition implements
   }
 
   @Override
-  public int getLexerStateFor(@NotNull ASTNode node) {
-    IElementType tokenType = node.getElementType();
-    if (tokenType == MojoliciousElementTypes.MOJO_TEMPLATE_BLOCK_HTML) {
+  public int getLexerStateFor(@NotNull ASTNode contextNode,
+                              @NotNull IElementType elementType) {
+    return PerlTemplatingLexer.packState(super.getLexerStateFor(contextNode, elementType),
+                                         getTemplatingState(contextNode, elementType));
+  }
+
+  private int getTemplatingState(@NotNull ASTNode contextNode, @NotNull IElementType elementType) {
+    if (elementType == MojoliciousElementTypes.MOJO_TEMPLATE_BLOCK_HTML) {
       return MojoliciousLexer.YYINITIAL;
     }
-
-    PsiElement parent = node.getPsi().getParent();
-    ASTNode run = parent instanceof DummyHolder ? Objects.requireNonNull(parent.getContext()).getNode() : node;
+    PsiElement parent = contextNode.getPsi().getParent();
+    ASTNode run = parent instanceof DummyHolder ? Objects.requireNonNull(parent.getContext()).getNode() : contextNode;
 
     while (run != null) {
       if (StringUtil.containsLineBreak(run.getChars())) {
         return MojoliciousLexer.PERL_BLOCK;
       }
-      IElementType elementType = run.getElementType();
-      if (MojoTokenSets.BLOCK_OPENERS.contains(elementType)) {
-        return MojoliciousLexer.PERL_BLOCK;
-      }
-      else if (MojoTokenSets.LINE_OPENERS.contains(elementType)) {
+      else if (MojoTokenSets.LINE_OPENERS.contains(run.getElementType())) {
         return MojoliciousLexer.PERL_LINE;
       }
       run = TreeUtil.prevLeaf(run);

@@ -18,6 +18,7 @@ package com.perl5.lang.perl.parser.elementTypes;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.perl.lexer.PerlTemplatingLexer;
 import org.jetbrains.annotations.NotNull;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.LEFT_PAREN;
@@ -36,6 +37,6 @@ public class PerlParenthesizedElementType extends PerlBracedBlockElementType {
 
   @Override
   protected boolean isLexerStateOk(int lexerState) {
-    return lexerState == AFTER_VALUE;
+    return PerlTemplatingLexer.getPerlLexerState(lexerState) == AFTER_VALUE;
   }
 }

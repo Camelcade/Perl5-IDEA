@@ -43,7 +43,7 @@ public abstract class PerlBracedBlockElementType extends PerlReparseableElementT
     if (parent == null || !isNodeReparseable(parent)) {
       return false;
     }
-    Lexer lexer = createLexer(parent);
+    Lexer lexer = createLexer(parent, this);
     boolean result = hasProperBraceBalance(buffer, lexer, getOpeningBraceType());
     if (LOG.isDebugEnabled()) {
       LOG.debug(this + " reparseable: ", result && isLexerStateOk(lexer.getState()),

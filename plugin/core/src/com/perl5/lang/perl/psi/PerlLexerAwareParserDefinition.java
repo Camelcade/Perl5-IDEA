@@ -23,20 +23,10 @@ import org.jetbrains.annotations.NotNull;
 
 public interface PerlLexerAwareParserDefinition extends ParserDefinition {
   /**
-   * @return lexer state that need to be used in base lexer for lexing particular node.
+   * @param contextNode parent node or node itself for the parsed element, need to look around
+   * @return lexer state that need to be used in base lexer for lexing particular {@code elementType}.
    * @apiNote This might be necessary for confirming leaf consistency with lexer in some tricky
    * cases, like templating languages. Base language elements may have different states, but template state is usually the same.   *
    */
-  default int getLexerStateFor(@NotNull ASTNode node) {
-    return getLexerStateFor(node.getElementType());
-  }
-
-  /**
-   * @return lexer state that need to be used in base lexer for lexing particular token type.
-   * @apiNote This might be necessary for confirming leaf consistency with lexer in some tricky
-   * cases, like templating languages. Base language elements may have different states, but template state is usually the same.
-   */
-  default int getLexerStateFor(@NotNull IElementType tokenType) {
-    return 0;
-  }
+  int getLexerStateFor(@NotNull ASTNode contextNode, @NotNull IElementType elementType);
 }

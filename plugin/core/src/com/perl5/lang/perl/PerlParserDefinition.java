@@ -25,21 +25,25 @@ import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.TokenType;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.lexer.PerlLexingContext;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.lexer.adapters.PerlMergingLexerAdapter;
 import com.perl5.lang.perl.parser.PerlParserImpl;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
+import com.perl5.lang.perl.psi.PerlLexerAwareParserDefinition;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
 import org.jetbrains.annotations.NotNull;
 
+import static com.perl5.lang.perl.lexer.PerlLexer.*;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.HEREDOC_BODIES_TOKENSET;
 
-public class PerlParserDefinition implements ParserDefinition, PerlElementTypes {
+public class PerlParserDefinition implements ParserDefinition, PerlElementTypes, PerlLexerAwareParserDefinition {
   public static final TokenSet WHITE_SPACES = TokenSet.create(
     TokenType.WHITE_SPACE
   );
@@ -112,5 +116,28 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes 
     catch (Exception e) {
       throw new RuntimeException("Problem with node " + node, e);
     }
+  }
+
+  @Override
+  public int getLexerStateFor(@NotNull ASTNode contextNode, @NotNull IElementType elementType) {
+    if (elementType == HASH_INDEX) {
+      return AFTER_VARIABLE;
+    }
+    else if (elementType == COMMENT_ANNOTATION) {
+      return ANNOTATION;
+    }
+    else if (elementType == HEREDOC_QQ) {
+      return STRING_QQ;
+    }
+    else if (elementType == HEREDOC_QX) {
+      return STRING_QX;
+    }
+    else if (elementType == HEREDOC) {
+      return STRING_Q;
+    }
+    else if (elementType == PARSABLE_STRING_USE_VARS) {
+      return USE_VARS_STRING;
+    }
+    return PerlLexer.YYINITIAL;
   }
 }

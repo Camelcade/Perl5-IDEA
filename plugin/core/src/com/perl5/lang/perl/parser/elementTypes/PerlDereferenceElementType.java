@@ -24,6 +24,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.idea.editor.PerlBraceMatcher;
+import com.perl5.lang.perl.lexer.PerlTemplatingLexer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -43,10 +44,10 @@ public abstract class PerlDereferenceElementType extends PerlReparseableElementT
                                   @NotNull CharSequence buffer,
                                   @NotNull Language fileLanguage,
                                   @NotNull Project project) {
-    if (!isNodeReparseable(parent)) {
+    if (!isNodeReparseable(parent) || parent == null) {
       return false;
     }
-    Lexer lexer = createLexer(parent);
+    Lexer lexer = createLexer(parent, this);
     boolean result = hasProperTokensStructure(buffer, lexer);
     if (LOG.isDebugEnabled()) {
       LOG.debug(this + " reparseable: ", result && isLexerStateOk(lexer.getState()),
@@ -61,7 +62,7 @@ public abstract class PerlDereferenceElementType extends PerlReparseableElementT
   }
 
   private boolean isLexerStateOk(int lexerState) {
-    return lexerState == AFTER_VARIABLE;
+    return PerlTemplatingLexer.getPerlLexerState(lexerState) == AFTER_VARIABLE;
   }
 
   /**

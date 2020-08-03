@@ -16,6 +16,7 @@
 
 package com.perl5.lang.embedded;
 
+import com.intellij.lang.ASTNode;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.FileViewProvider;
@@ -27,14 +28,14 @@ import com.perl5.lang.embedded.lexer.EmbeddedPerlLexer;
 import com.perl5.lang.embedded.lexer.EmbeddedPerlLexerAdapter;
 import com.perl5.lang.embedded.psi.impl.EmbeddedPerlFileImpl;
 import com.perl5.lang.perl.PerlParserDefinition;
-import com.perl5.lang.perl.psi.PerlLexerAwareParserDefinition;
+import com.perl5.lang.perl.lexer.PerlTemplatingLexer;
 import com.perl5.lang.perl.psi.stubs.PerlFileElementType;
 import org.jetbrains.annotations.NotNull;
 
 import static com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes.*;
 
 
-public class EmbeddedPerlParserDefinition extends PerlParserDefinition implements PerlLexerAwareParserDefinition {
+public class EmbeddedPerlParserDefinition extends PerlParserDefinition {
   public static final IFileElementType FILE = new PerlFileElementType("Embedded Perl5", EmbeddedPerlLanguage.INSTANCE);
 
   public static final TokenSet COMMENTS = TokenSet.orSet(PerlParserDefinition.COMMENTS,
@@ -65,7 +66,11 @@ public class EmbeddedPerlParserDefinition extends PerlParserDefinition implement
   }
 
   @Override
-  public int getLexerStateFor(@NotNull IElementType tokenType) {
+  public int getLexerStateFor(@NotNull ASTNode contextNode, @NotNull IElementType elementType) {
+    return PerlTemplatingLexer.packState(super.getLexerStateFor(contextNode, elementType), getTemplatingStateFor(elementType));
+  }
+
+  private int getTemplatingStateFor(@NotNull IElementType tokenType) {
     if (tokenType == EMBED_TEMPLATE_BLOCK_HTML) {
       return EmbeddedPerlLexer.YYINITIAL;
     }

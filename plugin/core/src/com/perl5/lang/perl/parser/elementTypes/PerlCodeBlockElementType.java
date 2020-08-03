@@ -20,6 +20,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.lexer.PerlLexer;
+import com.perl5.lang.perl.lexer.PerlTemplatingLexer;
 import com.perl5.lang.perl.psi.impl.PsiPerlBlockImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -40,7 +41,7 @@ public class PerlCodeBlockElementType extends PerlBracedBlockElementType {
 
   @Override
   protected boolean isLexerStateOk(int lexerState) {
-    return lexerState == PerlLexer.AFTER_RIGHT_BRACE;
+    return PerlTemplatingLexer.getPerlLexerState(lexerState) == PerlLexer.AFTER_RIGHT_BRACE;
   }
 
   @Override

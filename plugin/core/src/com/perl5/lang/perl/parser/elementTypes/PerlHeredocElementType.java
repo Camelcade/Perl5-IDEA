@@ -18,7 +18,6 @@ package com.perl5.lang.perl.parser.elementTypes;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
-import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
@@ -39,11 +38,9 @@ import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.HEREDOC_END_IN
 
 
 public class PerlHeredocElementType extends PerlReparseableElementType {
-  private final int myStartLexerState;
-
-  public PerlHeredocElementType(@NotNull String name, int startLexerState) {
-    super(name);
-    myStartLexerState = startLexerState;
+  public PerlHeredocElementType(@NotNull String debugName,
+                                @NotNull Class<? extends PsiElement> clazz) {
+    super(debugName, clazz);
   }
 
   /**
@@ -79,18 +76,6 @@ public class PerlHeredocElementType extends PerlReparseableElementType {
                 "; indented checked: ", checker.myIndentedEndsChecked);
     }
     return checker.result();
-  }
-
-  public PerlHeredocElementType(@NotNull String debugName,
-                                @NotNull Class<? extends PsiElement> clazz,
-                                int startLexerState) {
-    super(debugName, clazz);
-    myStartLexerState = startLexerState;
-  }
-
-  @Override
-  protected @NotNull Lexer getLexer(@NotNull ASTNode chameleon) {
-    return createPerlLexerWithCustomInitialState(chameleon, myStartLexerState);
   }
 
   private class Checker {

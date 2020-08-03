@@ -42,7 +42,7 @@ public class PerlRegexReplacementElementType extends PerlReparseableElementType 
     if (parent == null) {
       return false;
     }
-    Lexer lexer = createLexer(parent);
+    Lexer lexer = createLexer(parent, this);
     lexer.start(buffer);
 
     IElementType firstType = lexer.getTokenType();

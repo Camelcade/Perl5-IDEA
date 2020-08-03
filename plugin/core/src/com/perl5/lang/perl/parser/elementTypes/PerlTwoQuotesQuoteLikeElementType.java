@@ -53,7 +53,7 @@ public abstract class PerlTwoQuotesQuoteLikeElementType extends PerlQuoteLikeEle
     if (parent == null) {
       return false;
     }
-    Lexer lexer = createLexer(parent);
+    Lexer lexer = createLexer(parent, this);
     lexer.start(buffer);
     if (isOperatorToken(lexer.getTokenType())) {
       lexer.advance();

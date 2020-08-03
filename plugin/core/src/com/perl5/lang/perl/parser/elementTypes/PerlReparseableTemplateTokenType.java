@@ -19,7 +19,6 @@ package com.perl5.lang.perl.parser.elementTypes;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
 import com.intellij.lexer.Lexer;
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.MultiplePsiFilesPerDocumentFileViewProvider;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -30,7 +29,6 @@ import org.jetbrains.annotations.Nullable;
  * @see MultiplePsiFilesPerDocumentFileViewProvider
  */
 public abstract class PerlReparseableTemplateTokenType extends PerlReparseableTokenType {
-  private static final Logger LOG = Logger.getInstance(PerlReparseableTemplateTokenType.class);
 
   public PerlReparseableTemplateTokenType(@NotNull String debugName,
                                           Class<? extends ASTNode> clazz) {

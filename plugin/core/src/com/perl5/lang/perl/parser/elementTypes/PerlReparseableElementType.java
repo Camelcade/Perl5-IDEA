@@ -31,8 +31,6 @@ import com.intellij.psi.text.BlockSupport;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.IReparseableElementType;
 import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.lexer.PerlLexingContext;
-import com.perl5.lang.perl.lexer.adapters.PerlMergingLexerAdapter;
 import com.perl5.lang.perl.parser.PerlParserImpl;
 import com.perl5.lang.perl.psi.PerlLexerAwareParserDefinition;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
@@ -75,17 +73,13 @@ public abstract class PerlReparseableElementType extends IReparseableElementType
     PsiBuilder builder = PsiBuilderFactory.getInstance().createBuilder(
       project,
       chameleon,
-      getLexer(chameleon),
+      createLexer(chameleon),
       getLanguage(),
       newChars);
 
     ASTNode result = PerlParserImpl.INSTANCE.parse(this, builder).getFirstChildNode();
     logger.debug("Parsed: ", PerlTimeLogger.kb(newChars.length()), " kb of ", this);
     return result;
-  }
-
-  protected @NotNull Lexer getLexer(@NotNull ASTNode chameleon) {
-    return createLexer(chameleon);
   }
 
   /**
@@ -142,14 +136,6 @@ public abstract class PerlReparseableElementType extends IReparseableElementType
     }
   }
 
-  /**
-   * @return a perl lexer with custom initial state. We can't start inner perl lexer inside the templating one.
-   */
-  protected static @NotNull DelegateLexer createPerlLexerWithCustomInitialState(@NotNull ASTNode chameleon, int startState) {
-    return createLexerWithCustomInitialState(
-      startState, new PerlMergingLexerAdapter(PerlLexingContext.create(chameleon.getPsi().getProject())));
-  }
-
   protected static @NotNull DelegateLexer createLexerWithCustomInitialState(int startState, Lexer lexer) {
     return new DelegateLexer(lexer) {
       @Override
@@ -160,14 +146,18 @@ public abstract class PerlReparseableElementType extends IReparseableElementType
   }
 
   public static @NotNull Lexer createLexer(@NotNull ASTNode nodeToLex) {
-    PsiElement psiElement = nodeToLex.getPsi();
+    return createLexer(nodeToLex, nodeToLex.getElementType());
+  }
+
+  public static @NotNull Lexer createLexer(@NotNull ASTNode context, @NotNull IElementType elementType) {
+    PsiElement psiElement = context.getPsi();
     PsiFile containingFile = psiElement.getContainingFile();
     FileViewProvider fileViewProvider = containingFile.getViewProvider();
     Language baseLanguage = fileViewProvider.getBaseLanguage();
     ParserDefinition parserDefinition = LanguageParserDefinitions.INSTANCE.forLanguage(baseLanguage);
     Lexer lexer = parserDefinition.createLexer(psiElement.getProject());
     int alternativeInitialState = parserDefinition instanceof PerlLexerAwareParserDefinition ?
-                                  ((PerlLexerAwareParserDefinition)parserDefinition).getLexerStateFor(nodeToLex) : 0;
+                                  ((PerlLexerAwareParserDefinition)parserDefinition).getLexerStateFor(context, elementType) : 0;
     return alternativeInitialState == 0 ? lexer : createLexerWithCustomInitialState(alternativeInitialState, lexer);
   }
 }
