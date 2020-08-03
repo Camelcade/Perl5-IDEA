@@ -16,33 +16,13 @@
 
 package com.perl5.lang.embedded.psi;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.TokenType;
 import com.intellij.psi.impl.source.tree.PsiCommentImpl;
-import com.intellij.psi.impl.source.tree.TreeUtil;
-import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.embedded.EmbeddedPerlLanguage;
-import com.perl5.lang.perl.parser.elementTypes.PerlReparseableTemplateTokenType;
-import org.jetbrains.annotations.NotNull;
+import com.perl5.lang.perl.parser.elementTypes.PerlReparseableTemplateTokenTypeBase;
 
-public class EmbeddedPerlTemplateTokenType extends PerlReparseableTemplateTokenType {
+public class EmbeddedPerlTemplateTokenType extends PerlReparseableTemplateTokenTypeBase {
   public EmbeddedPerlTemplateTokenType() {
     super("EMBED_TEMPLATE_BLOCK_HTML", PsiCommentImpl.class, EmbeddedPerlLanguage.INSTANCE);
-  }
-
-  @Override
-  protected @NotNull TextRange getLexerConfirmationRange(@NotNull ASTNode leaf) {
-    ASTNode nextLeaf = TreeUtil.nextLeaf(leaf);
-    while (PsiUtilCore.getElementType(nextLeaf) == TokenType.WHITE_SPACE) {
-      ASTNode lookAheadLeaf = TreeUtil.nextLeaf(nextLeaf);
-      if (lookAheadLeaf == null) {
-        break;
-      }
-      nextLeaf = lookAheadLeaf;
-    }
-    int endOffset = nextLeaf == null ? leaf.getTextRange().getEndOffset() : nextLeaf.getTextRange().getEndOffset();
-    return TextRange.create(leaf.getStartOffset(), endOffset);
   }
 
   @Override

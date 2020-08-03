@@ -16,35 +16,15 @@
 
 package com.perl5.lang.mojolicious;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.TokenType;
 import com.intellij.psi.impl.source.tree.PsiCommentImpl;
-import com.intellij.psi.impl.source.tree.TreeUtil;
-import com.intellij.psi.util.PsiUtilCore;
-import com.perl5.lang.perl.parser.elementTypes.PerlReparseableTemplateTokenType;
-import org.jetbrains.annotations.NotNull;
+import com.perl5.lang.perl.parser.elementTypes.PerlReparseableTemplateTokenTypeBase;
 
-public class MojoTemplateTokenType extends PerlReparseableTemplateTokenType {
+public class MojoTemplateTokenType extends PerlReparseableTemplateTokenTypeBase {
 
   private static final String TOKEN_NAME = "MOJO_TEMPLATE_BLOCK_HTML";
 
   public MojoTemplateTokenType() {
     super(TOKEN_NAME, PsiCommentImpl.class, MojoliciousLanguage.INSTANCE);
-  }
-
-  @Override
-  protected @NotNull TextRange getLexerConfirmationRange(@NotNull ASTNode leaf) {
-    ASTNode nextLeaf = TreeUtil.nextLeaf(leaf);
-    while (PsiUtilCore.getElementType(nextLeaf) == TokenType.WHITE_SPACE) {
-      ASTNode lookAheadLeaf = TreeUtil.nextLeaf(nextLeaf);
-      if (lookAheadLeaf == null) {
-        break;
-      }
-      nextLeaf = lookAheadLeaf;
-    }
-    int endOffset = nextLeaf == null ? leaf.getTextRange().getEndOffset() : nextLeaf.getTextRange().getEndOffset();
-    return TextRange.create(leaf.getStartOffset(), endOffset);
   }
 
   @Override
