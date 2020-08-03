@@ -58,7 +58,7 @@ class PerlHighlightExitPointsHandler extends HighlightUsagesHandlerBase<PsiEleme
     if (returnScope == null) {
       return;
     }
-    Instruction[] instructions = PerlControlFlowBuilder.getFor(returnScope).getInstructions();
+    Instruction[] instructions = PerlControlFlowBuilder.getFor(returnScope);
     Instruction exitInstruction = instructions[instructions.length - 1];
     PerlControlFlowBuilder.iteratePrev(instructions, it -> {
       if (it == exitInstruction || it.num() == 0) {

@@ -16,19 +16,13 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.intellij.navigation.NavigationItem;
-import com.perl5.lang.perl.psi.properties.PerlBlockOwner;
-import com.perl5.lang.perl.psi.properties.PerlDieScope;
-import com.perl5.lang.perl.psi.properties.PerlLabelScope;
-import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
+import com.intellij.codeInsight.controlflow.Instruction;
+import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * We actually have some legacy modifiers, but they are most likely need to be reworked.
+ * Elements implementing this interface may compute and cache their own control flow by themselves
  */
-public interface PerlMethodModifier
-  extends PerlBlockOwner, PerlDieScope, PerlLabelScope, PerlLexicalScope, NavigationItem, PerlControlFlowOwner, PerlFileDataOwner {
-  default @NotNull String getModifierText() {
-    return getFirstChild().getText();
-  }
+public interface PerlControlFlowOwner extends PsiElement {
+  @NotNull Instruction[] getControlFlow();
 }

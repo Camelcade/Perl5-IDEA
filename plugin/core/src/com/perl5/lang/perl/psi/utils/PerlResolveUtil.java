@@ -261,7 +261,7 @@ public class PerlResolveUtil {
       }
       return UNKNOWN_VALUE;
     }
-    Instruction[] instructions = PerlControlFlowBuilder.getFor(controlFlowScope).getInstructions();
+    Instruction[] instructions = PerlControlFlowBuilder.getFor(controlFlowScope);
     PsiElement elementToFind = element instanceof PerlFile ? element.getContext() : element;
     int elementInstructionIndex = findElementInstruction(elementToFind, instructions, element);
     if (elementInstructionIndex < 0) {
@@ -376,7 +376,7 @@ public class PerlResolveUtil {
    */
   public static @NotNull PerlValue computeReturnValueFromControlFlow(PsiElement subElement) {
     PerlOneOfValue.Builder valueBuilder = PerlOneOfValue.builder();
-    Instruction[] instructions = PerlControlFlowBuilder.getFor(subElement).getInstructions();
+    Instruction[] instructions = PerlControlFlowBuilder.getFor(subElement);
     Instruction exitInstruction = instructions[instructions.length - 1];
     PerlControlFlowBuilder.iteratePrev(instructions, it -> {
       if (it == exitInstruction || it.num() == 0) {

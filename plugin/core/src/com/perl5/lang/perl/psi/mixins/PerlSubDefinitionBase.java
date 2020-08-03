@@ -16,12 +16,14 @@
 
 package com.perl5.lang.perl.psi.mixins;
 
+import com.intellij.codeInsight.controlflow.Instruction;
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.util.ClearableLazyValue;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.stubs.IStubElementType;
+import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlControlFlowBuilder;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimpleDynamicLocation;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
@@ -40,8 +42,10 @@ import java.util.List;
 public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitionStub> implements PerlSubDefinitionElement,
                                                                                                   PerlLexicalScope,
                                                                                                   PerlElementTypes,
-                                                                                                  PerlFileDataOwner {
+                                                                                                  PerlFileDataOwner,
+                                                                                                  PerlControlFlowOwner {
   private final ClearableLazyValue<PerlFileData> mySubtreeFileData = PerlFileDataCollector.createLazyBuilder(this);
+  private final ClearableLazyValue<Instruction[]> myControlFlow = PerlControlFlowBuilder.createLazy(this);
 
   public PerlSubDefinitionBase(@NotNull ASTNode node) {
     super(node);
@@ -156,7 +160,13 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
   }
 
   @Override
+  public @NotNull Instruction[] getControlFlow() {
+    return myControlFlow.getValue();
+  }
+
+  @Override
   public void subtreeChanged() {
     mySubtreeFileData.drop();
+    myControlFlow.drop();
   }
 }

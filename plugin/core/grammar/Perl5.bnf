@@ -577,7 +577,9 @@
 	implements("map_expr")="com.perl5.lang.perl.psi.PerlMapExpr"
 	implements("sort_expr")="com.perl5.lang.perl.psi.PerlSortExpr"
 	implements("eval_expr")="com.perl5.lang.perl.psi.PerlEvalExpr"
-	implements("sub_expr|fun_expr|method_expr")="com.perl5.lang.perl.psi.PerlSubExpr"
+
+    implements("sub_expr|fun_expr|method_expr")="com.perl5.lang.perl.psi.PerlSubExpr"
+    mixin("sub_expr|fun_expr|method_expr")="com.perl5.lang.perl.psi.mixins.PerlSubExpression"
 
     implements("do_block_expr")="com.perl5.lang.perl.psi.PerlDoBlockExpr"
 

@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.psi.impl;
 
+import com.intellij.codeInsight.controlflow.Instruction;
 import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.lang.Language;
 import com.intellij.navigation.ItemPresentation;
@@ -35,8 +36,6 @@ import com.intellij.psi.stubs.ObjectStubTree;
 import com.intellij.psi.stubs.PsiFileStub;
 import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.stubs.StubTreeLoader;
-import com.intellij.psi.util.CachedValueProvider;
-import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ObjectUtils;
@@ -45,6 +44,7 @@ import com.perl5.lang.perl.extensions.PerlCodeGenerator;
 import com.perl5.lang.perl.extensions.generation.PerlCodeGeneratorImpl;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
+import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlControlFlowBuilder;
 import com.perl5.lang.perl.psi.PerlDoExpr;
 import com.perl5.lang.perl.psi.PerlFile;
 import com.perl5.lang.perl.psi.PerlFileData;
@@ -74,6 +74,8 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
 
   private final ClearableLazyValue<List<String>> myParentNamespaces = ClearableLazyValue.create(
     () -> PerlPackageUtil.collectParentNamespaceNamesFromPsi(this));
+  private final ClearableLazyValue<Instruction[]> myControlFlow = PerlControlFlowBuilder.createLazy(this);
+  private final ClearableLazyValue<PerlFileData> mySubtreeFileData = PerlFileDataCollector.createLazyBuilder(this);
 
   public PerlFileImpl(@NotNull FileViewProvider viewProvider, Language language) {
     super(viewProvider, language);
@@ -127,6 +129,8 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
     super.subtreeChanged();
     myElementsResolveScope = null;
     myParentNamespaces.drop();
+    mySubtreeFileData.drop();
+    myControlFlow.drop();
   }
 
   @Override
@@ -342,6 +346,11 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
       return PerlFileData.EMPTY_DATA;
     }
     LOG.assertTrue(getVirtualFile() != null, "Do not collect file data for light files, use original ones");
-    return CachedValuesManager.getCachedValue(this, () -> CachedValueProvider.Result.create(PerlFileDataCollector.build(this), this));
+    return mySubtreeFileData.getValue();
+  }
+
+  @Override
+  public @NotNull Instruction[] getControlFlow() {
+    return myControlFlow.getValue();
   }
 }

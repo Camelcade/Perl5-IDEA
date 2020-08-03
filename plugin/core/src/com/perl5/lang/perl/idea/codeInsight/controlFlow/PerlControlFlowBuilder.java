@@ -20,6 +20,7 @@ import com.intellij.codeInsight.controlflow.*;
 import com.intellij.codeInsight.controlflow.impl.TransparentInstructionImpl;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
+import com.intellij.openapi.util.ClearableLazyValue;
 import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
@@ -177,9 +178,16 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     return instruction;
   }
 
-  public static ControlFlow getFor(@NotNull PsiElement element) {
-    return CachedValuesManager
-      .getCachedValue(element, () -> CachedValueProvider.Result.create(new PerlControlFlowBuilder().build(element), element));
+  public static @NotNull ClearableLazyValue<Instruction[]> createLazy(@NotNull PsiElement element) {
+    return ClearableLazyValue.create(() -> new PerlControlFlowBuilder().build(element).getInstructions());
+  }
+
+  public static Instruction[] getFor(@NotNull PsiElement element) {
+    if (element instanceof PerlControlFlowOwner) {
+      return ((PerlControlFlowOwner)element).getControlFlow();
+    }
+    return CachedValuesManager.getCachedValue(
+      element, () -> CachedValueProvider.Result.create(new PerlControlFlowBuilder().build(element).getInstructions(), element));
   }
 
   @SuppressWarnings("UnusedReturnValue")
@@ -1039,7 +1047,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
   public static void iteratePrev(@Nullable PsiElement element,
                                  final @NotNull Function<? super Instruction, ControlFlowUtil.Operation> processor) {
     if (element != null) {
-      iteratePrev(PerlControlFlowBuilder.getFor(element).getInstructions(), processor);
+      iteratePrev(PerlControlFlowBuilder.getFor(element), processor);
     }
   }
 

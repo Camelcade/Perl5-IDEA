@@ -20,7 +20,6 @@ import com.intellij.codeInsight.TargetElementUtil;
 import com.intellij.codeInsight.actions.MultiCaretCodeInsightAction;
 import com.intellij.codeInsight.completion.CompletionType;
 import com.intellij.codeInsight.controlflow.ConditionalInstruction;
-import com.intellij.codeInsight.controlflow.ControlFlow;
 import com.intellij.codeInsight.controlflow.Instruction;
 import com.intellij.codeInsight.documentation.DocumentationManager;
 import com.intellij.codeInsight.editorActions.SelectWordHandler;
@@ -1696,8 +1695,8 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     assertNotNull(psiElement);
     PsiElement controlFlowScope = PerlControlFlowBuilder.getControlFlowScope(psiElement);
     assertNotNull(controlFlowScope);
-    ControlFlow controlFlow = PerlControlFlowBuilder.getFor(controlFlowScope);
-    final String stringifiedControlFlow = Arrays.stream(controlFlow.getInstructions())
+    Instruction[] controlFlow = PerlControlFlowBuilder.getFor(controlFlowScope);
+    final String stringifiedControlFlow = Arrays.stream(controlFlow)
       .map(it -> it.toString() + " (" + it.getClass().getSimpleName() + ")")
       .collect(Collectors.joining("\n"));
 
@@ -1719,14 +1718,15 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     return FileUtil.join(getTestDataPath(), "svg", getTestName(true) + ".svg");
   }
 
-  private void saveSvgFile(final @NotNull String outSvgFile, final @NotNull ControlFlow flow) throws IOException, ExecutionException {
+  private void saveSvgFile(final @NotNull String outSvgFile, final @NotNull Instruction[] controlFlow)
+    throws IOException, ExecutionException {
     String dotUtilName = SystemInfoRt.isUnix ? "dot" : "dot.exe";
     File dotFullPath = PathEnvironmentVariableUtil.findInPath(dotUtilName);
     if (dotFullPath == null) {
       throw new FileNotFoundException("Cannot find dot utility in path");
     }
     File tmpFile = FileUtil.createTempFile("control-flow", ".dot", true);
-    String controlFlowGraph = convertControlFlowToDot(flow);
+    String controlFlowGraph = convertControlFlowToDot(controlFlow);
     FileUtil.writeToFile(tmpFile, controlFlowGraph);
     GeneralCommandLine commandLine = new GeneralCommandLine(dotFullPath.getAbsolutePath())
       .withInput(tmpFile.getAbsoluteFile())
@@ -1742,10 +1742,10 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     }
   }
 
-  private @NotNull String convertControlFlowToDot(final @NotNull ControlFlow flow) {
+  private @NotNull String convertControlFlowToDot(final @NotNull Instruction[] controlFlow) {
     StringBuilder builder = new StringBuilder();
     builder.append("digraph {");
-    for (Instruction instruction : flow.getInstructions()) {
+    for (Instruction instruction : controlFlow) {
       printInstruction(builder, instruction);
 
       if (instruction instanceof PerlIteratorConditionInstruction) {

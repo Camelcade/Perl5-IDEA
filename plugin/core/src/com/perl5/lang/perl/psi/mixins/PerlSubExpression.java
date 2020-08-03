@@ -18,59 +18,20 @@ package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.codeInsight.controlflow.Instruction;
 import com.intellij.lang.ASTNode;
-import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.util.ClearableLazyValue;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlControlFlowBuilder;
-import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimpleDynamicLocation;
-import com.perl5.lang.perl.idea.ui.PerlIconProvider;
 import com.perl5.lang.perl.psi.PerlFileData;
 import com.perl5.lang.perl.psi.PerlFileDataCollector;
-import com.perl5.lang.perl.psi.PerlMethodModifier;
-import com.perl5.lang.perl.psi.PerlSubNameElement;
-import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
+import com.perl5.lang.perl.psi.PerlSubExpr;
+import com.perl5.lang.perl.psi.impl.PsiPerlExprImpl;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-import javax.swing.*;
-
-public abstract class PerlMethodModifierMixin extends PerlCompositeElementImpl implements PerlMethodModifier {
-
+public abstract class PerlSubExpression extends PsiPerlExprImpl implements PerlSubExpr {
   private final ClearableLazyValue<PerlFileData> mySubtreeFileData = PerlFileDataCollector.createLazyBuilder(this);
   private final ClearableLazyValue<Instruction[]> myControlFlow = PerlControlFlowBuilder.createLazy(this);
 
-  public PerlMethodModifierMixin(@NotNull ASTNode node) {
+  public PerlSubExpression(ASTNode node) {
     super(node);
-  }
-
-  @Override
-  public @Nullable String getName() {
-    PerlSubNameElement subNameElement = getSubNameElement();
-    return subNameElement == null ? null : subNameElement.getText();
-  }
-
-  private @Nullable PerlSubNameElement getSubNameElement() {
-    return PsiTreeUtil.getChildOfType(this, PerlSubNameElement.class);
-  }
-
-  @Override
-  public Icon getIcon(int flags) {
-    return PerlIconProvider.getIcon(this);
-  }
-
-  @Override
-  public ItemPresentation getPresentation() {
-    String name = getName();
-    return name == null ? null : new PerlItemPresentationSimpleDynamicLocation(
-      this,
-      getModifierText() + " " + name + "()");
-  }
-
-  @Override
-  public @NotNull PsiElement getNavigationElement() {
-    PerlSubNameElement subNameElement = getSubNameElement();
-    return subNameElement == null ? this : subNameElement;
   }
 
   @Override
