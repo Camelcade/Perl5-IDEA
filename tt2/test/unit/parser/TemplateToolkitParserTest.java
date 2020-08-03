@@ -17,11 +17,9 @@
 package unit.parser;
 
 
-import org.junit.Ignore;
 import org.junit.Test;
 import unit.perl.parser.PerlParserTestBase;
 
-@Ignore
 public class TemplateToolkitParserTest extends PerlParserTestBase {
   public TemplateToolkitParserTest() {
     super("tt");

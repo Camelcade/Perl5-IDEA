@@ -49,10 +49,10 @@ public class PerlLexerWithCustomStatesAdapter extends LexerBase {
     {
       myFlex.setCustomState(myFlex.getInitialCustomState());
     }
-    else if (initialState > 255)    // properly packed state
+    else if (initialState > 0xFFFF)    // properly packed state
     {
-      myFlex.setCustomState(initialState / 255);
-      initialState = initialState % 255;
+      myFlex.setCustomState(PerlTemplatingLexer.getTemplateLexerState(initialState));
+      initialState = PerlTemplatingLexer.getPerlLexerState(initialState);
     }
     else {
       throw new RuntimeException("Shouldn't be here, inproperly packed state");
@@ -116,10 +116,8 @@ public class PerlLexerWithCustomStatesAdapter extends LexerBase {
     int customState = myFlex.getCustomState();
     int lexerState = myFlex.yystate();
 
-    assert customState < 255;
-    assert lexerState < 255;
-
-    myState = customState * 255 + lexerState;
+    assert customState < 0x10000 && lexerState < 0x10000 : "Custom state: " + customState + "; lexerState: " + lexerState;
+    myState = PerlTemplatingLexer.packState(lexerState, customState);
   }
 
   protected void locateToken() {

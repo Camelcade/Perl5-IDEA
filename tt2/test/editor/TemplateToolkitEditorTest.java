@@ -19,10 +19,8 @@ package editor;
 
 import base.TemplateToolkitLightTestCase;
 import com.perl5.lang.tt2.idea.settings.TemplateToolkitSettings;
-import org.junit.Ignore;
 import org.junit.Test;
 
-@Ignore
 public class TemplateToolkitEditorTest extends TemplateToolkitLightTestCase {
 
   @Test

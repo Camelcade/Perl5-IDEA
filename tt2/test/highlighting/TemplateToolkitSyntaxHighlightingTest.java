@@ -17,10 +17,8 @@
 package highlighting;
 
 import base.TemplateToolkitLightTestCase;
-import org.junit.Ignore;
 import org.junit.Test;
 
-@Ignore
 public class TemplateToolkitSyntaxHighlightingTest extends TemplateToolkitLightTestCase {
   @Override
   protected String getBaseDataPath() {
