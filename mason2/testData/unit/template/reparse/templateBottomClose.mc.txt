@@ -1,0 +1,50 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
+something <div>
+
+<%perl>
+
+say 'hi';
+
+ </%perl>
+
+
+
+ </div> <%perl><caret> else
+----------
+Psi structure
+----------
+Mason2 template file
+  MasonNamespaceDefinitionImpl(MASON_PACKAGE)@/MC0::templateBottomClose_mc
+    PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
+      PsiComment(Mason2: MASON_TEMPLATE_BLOCK_HTML)('something <div>')
+      PsiWhiteSpace('\n\n')
+      MasonAbstractBlockImpl(Mason2: MASON_ABSTRACT_BLOCK)
+        PsiElement(Mason2: <%perl>)('<%perl>')
+        PsiWhiteSpace('\n\n')
+        PsiPerlStatementImpl(Perl5: STATEMENT)
+          PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+            PsiElement(Perl5: say)('say')
+            PsiWhiteSpace(' ')
+            PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
+              PsiPerlStringSqImpl(Perl5: STRING_SQ)
+                PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
+                PerlStringContentElementImpl(Perl5: STRING_CONTENT)('hi')
+                PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
+          PsiElement(Perl5: ;)(';')
+        PsiWhiteSpace('\n\n ')
+        PsiElement(Mason2: </%perl>)('</%perl>')
+      PsiWhiteSpace('\n\n\n\n ')
+      PsiComment(Mason2: MASON_TEMPLATE_BLOCK_HTML)('</div>')
+      PsiWhiteSpace(' ')
+      MasonAbstractBlockImpl(Mason2: MASON_ABSTRACT_BLOCK)
+        PsiElement(Mason2: <%perl>)('<%perl>')
+        PsiWhiteSpace(' ')
+        PsiErrorElement:Unexpected token
+          PsiElement(Perl5: else)('else')
+        PsiErrorElement:Error
+          <empty list>

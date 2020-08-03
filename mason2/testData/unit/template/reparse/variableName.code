@@ -1,0 +1,10 @@
+something <div>
+
+<%perl>
+
+
+$var<caret>iable;
+
+ </%perl>
+
+ </div> else

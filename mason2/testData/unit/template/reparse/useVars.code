@@ -1,0 +1,10 @@
+<div>
+<%perl>
+
+  use vars qw/
+    $var
+    $f<caret>f
+    $bla
+  /;
+
+  </%perl> </div>

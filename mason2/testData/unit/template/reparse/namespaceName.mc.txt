@@ -1,0 +1,45 @@
+Reparsing block
+----------
+PerlNamespaceElementImpl(Perl5: package::name)
+----------
+Foo::Bar::
+----------
+After typing
+----------
+something <div>
+
+<%perl>
+
+
+Foo::edit<caret>Bar::->something();
+
+ </%perl>
+
+ </div> else
+----------
+Psi structure
+----------
+Mason2 template file
+  MasonNamespaceDefinitionImpl(MASON_PACKAGE)@/MC0::namespaceName_mc
+    PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
+      PsiComment(Mason2: MASON_TEMPLATE_BLOCK_HTML)('something <div>')
+      PsiWhiteSpace('\n\n')
+      MasonAbstractBlockImpl(Mason2: MASON_ABSTRACT_BLOCK)
+        PsiElement(Mason2: <%perl>)('<%perl>')
+        PsiWhiteSpace('\n\n\n')
+        PsiPerlStatementImpl(Perl5: STATEMENT)
+          PsiPerlDerefExprImpl(Perl5: DEREF_EXPR)
+            PsiPerlPackageExprImpl(Perl5: PACKAGE_EXPR)
+              PerlNamespaceElementImpl(Perl5: package::name)('Foo::editBar::')
+            PsiElement(Perl5: ->)('->')
+            PsiPerlSubCallImpl(SUB_CALL)
+              PsiPerlMethodImpl(Perl5: METHOD)
+                PerlSubNameElementImpl(Perl5: subname)('something')
+              PsiPerlParenthesisedCallArgumentsImpl(Perl5: PARENTHESISED_CALL_ARGUMENTS)
+                PsiElement(Perl5: ()('(')
+                PsiElement(Perl5: ))(')')
+          PsiElement(Perl5: ;)(';')
+        PsiWhiteSpace('\n\n ')
+        PsiElement(Mason2: </%perl>)('</%perl>')
+      PsiWhiteSpace('\n\n ')
+      PsiComment(Mason2: MASON_TEMPLATE_BLOCK_HTML)('</div> else')

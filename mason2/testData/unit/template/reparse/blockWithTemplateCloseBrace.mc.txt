@@ -1,0 +1,75 @@
+Reparsing block
+----------
+PsiComment(Mason2: MASON_TEMPLATE_BLOCK_HTML)
+----------
+true }  branch
+----------
+After typing
+----------
+something <div>
+
+<%perl>
+
+if( $a ){
+          </%perl> true } edit<caret> branch <%perl>
+}
+else{
+  </%perl> false branch <%perl>
+}
+
+ </%perl>
+
+ </div> else
+----------
+Psi structure
+----------
+Mason2 template file
+  MasonNamespaceDefinitionImpl(MASON_PACKAGE)@/MC0::blockWithTemplateCloseBrace_mc
+    PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
+      PsiComment(Mason2: MASON_TEMPLATE_BLOCK_HTML)('something <div>')
+      PsiWhiteSpace('\n\n')
+      MasonAbstractBlockImpl(Mason2: MASON_ABSTRACT_BLOCK)
+        PsiElement(Mason2: <%perl>)('<%perl>')
+        PsiWhiteSpace('\n\n')
+        PsiPerlIfCompoundImpl(Perl5: IF_COMPOUND)
+          PsiElement(Perl5: if)('if')
+          PsiPerlConditionalBlockImpl(Perl5: CONDITIONAL_BLOCK)
+            PsiPerlConditionExprImpl(Perl5: CONDITION_EXPR)
+              PsiElement(Perl5: ()('(')
+              PsiWhiteSpace(' ')
+              PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+                PsiElement(Perl5: $$)('$')
+                PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('a')
+              PsiWhiteSpace(' ')
+              PsiElement(Perl5: ))(')')
+            PsiPerlBlockImpl(Perl5: BLOCK)
+              PsiElement(Perl5: {)('{')
+              PsiErrorElement:Perl5: } expected, got '</%perl>'
+                <empty list>
+        PsiWhiteSpace('\n          ')
+        PsiElement(Mason2: </%perl>)('</%perl>')
+      PsiWhiteSpace(' ')
+      PsiComment(Mason2: MASON_TEMPLATE_BLOCK_HTML)('true } edit branch')
+      PsiWhiteSpace(' ')
+      MasonAbstractBlockImpl(Mason2: MASON_ABSTRACT_BLOCK)
+        PsiElement(Mason2: <%perl>)('<%perl>')
+        PsiWhiteSpace('\n')
+        PsiErrorElement:Error
+          PsiElement(Perl5: })('}')
+          PsiWhiteSpace('\n')
+          PsiElement(Perl5: else)('else')
+          PsiElement(Perl5: {)('{')
+        PsiWhiteSpace('\n  ')
+        PsiElement(Mason2: </%perl>)('</%perl>')
+      PsiWhiteSpace(' ')
+      PsiComment(Mason2: MASON_TEMPLATE_BLOCK_HTML)('false branch')
+      PsiWhiteSpace(' ')
+      MasonAbstractBlockImpl(Mason2: MASON_ABSTRACT_BLOCK)
+        PsiElement(Mason2: <%perl>)('<%perl>')
+        PsiWhiteSpace('\n')
+        PsiErrorElement:Error
+          PsiElement(Perl5: })('}')
+        PsiWhiteSpace('\n\n ')
+        PsiElement(Mason2: </%perl>)('</%perl>')
+      PsiWhiteSpace('\n\n ')
+      PsiComment(Mason2: MASON_TEMPLATE_BLOCK_HTML)('</div> else')

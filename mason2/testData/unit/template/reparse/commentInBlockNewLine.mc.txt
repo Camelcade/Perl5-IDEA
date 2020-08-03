@@ -1,0 +1,37 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
+<div>
+
+<%perl>
+  # comment
+<caret> test
+</%perl>
+
+</div>
+----------
+Psi structure
+----------
+Mason2 template file
+  MasonNamespaceDefinitionImpl(MASON_PACKAGE)@/MC0::commentInBlockNewLine_mc
+    PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
+      PsiComment(Mason2: MASON_TEMPLATE_BLOCK_HTML)('<div>')
+      PsiWhiteSpace('\n\n')
+      MasonAbstractBlockImpl(Mason2: MASON_ABSTRACT_BLOCK)
+        PsiElement(Mason2: <%perl>)('<%perl>')
+        PsiWhiteSpace('\n  ')
+        PsiComment(Perl5: COMMENT_LINE)('# comment')
+        PsiWhiteSpace('\n ')
+        PsiPerlStatementImpl(Perl5: STATEMENT)
+          PsiPerlSubCallImpl(SUB_CALL)
+            PsiPerlMethodImpl(Perl5: METHOD)
+              PerlSubNameElementImpl(Perl5: subname)('test')
+          PsiErrorElement:Semicolon expected
+            <empty list>
+        PsiWhiteSpace('\n')
+        PsiElement(Mason2: </%perl>)('</%perl>')
+      PsiWhiteSpace('\n\n')
+      PsiComment(Mason2: MASON_TEMPLATE_BLOCK_HTML)('</div>')

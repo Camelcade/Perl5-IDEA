@@ -31,7 +31,7 @@ import org.jetbrains.annotations.NotNull;
 
 
 public interface Mason2ElementTypes extends Mason2SyntaxElements {
-  IElementType MASON_TEMPLATE_BLOCK_HTML = new MasonTemplatingTokenType("MASON_TEMPLATE_BLOCK_HTML");
+  IElementType MASON_TEMPLATE_BLOCK_HTML = new MasonTemplateTokenType();
   IElementType MASON_OUTER_ELEMENT_TYPE = new MasonTemplatingTokenType("MASON_OUTER_ELEMENT_TYPE");
   IElementType MASON_HTML_TEMPLATE_DATA = new TemplateDataElementType(
     "MASON_HTML_TEMPLATE_DATA",

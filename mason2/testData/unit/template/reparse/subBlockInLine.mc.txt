@@ -1,0 +1,40 @@
+Reparsing block
+----------
+Element(Perl5: BLOCK)
+----------
+{  ;}
+----------
+After typing
+----------
+something <div>
+
+% sub somesub(){  edit<caret>;}
+
+ </div> else
+----------
+Psi structure
+----------
+Mason2 template file
+  MasonNamespaceDefinitionImpl(MASON_PACKAGE)@/MC0::subBlockInLine_mc
+    PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
+      PsiComment(Mason2: MASON_TEMPLATE_BLOCK_HTML)('something <div>')
+      PsiWhiteSpace('\n\n')
+      PsiComment(Mason2: %)('% ')
+      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@/MC0::subBlockInLine_mc::somesub
+        PsiElement(Perl5: sub)('sub')
+        PsiWhiteSpace(' ')
+        PerlSubNameElementImpl(Perl5: subname)('somesub')
+        PsiElement(Perl5: ()('(')
+        PsiElement(Perl5: ))(')')
+        PsiPerlBlockImpl(Perl5: BLOCK)
+          PsiElement(Perl5: {)('{')
+          PsiWhiteSpace('  ')
+          PsiPerlStatementImpl(Perl5: STATEMENT)
+            PsiPerlSubCallImpl(SUB_CALL)
+              PsiPerlMethodImpl(Perl5: METHOD)
+                PerlSubNameElementImpl(Perl5: subname)('edit')
+            PsiElement(Perl5: ;)(';')
+          PsiElement(Perl5: })('}')
+      PsiElement(Perl5: ;)('\n')
+      PsiWhiteSpace('\n ')
+      PsiComment(Mason2: MASON_TEMPLATE_BLOCK_HTML)('</div> else')

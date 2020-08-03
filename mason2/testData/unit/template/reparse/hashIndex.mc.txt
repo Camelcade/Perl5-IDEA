@@ -1,0 +1,46 @@
+Reparsing block
+----------
+Element(Perl5: HASH_INDEX)
+----------
+{foo }
+----------
+After typing
+----------
+<div>
+<%perl>
+
+  $test{foo edit<caret>};
+
+  </%perl> </div>
+----------
+Psi structure
+----------
+Mason2 template file
+  MasonNamespaceDefinitionImpl(MASON_PACKAGE)@/MC0::hashIndex_mc
+    PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
+      PsiComment(Mason2: MASON_TEMPLATE_BLOCK_HTML)('<div>')
+      PsiWhiteSpace('\n')
+      MasonAbstractBlockImpl(Mason2: MASON_ABSTRACT_BLOCK)
+        PsiElement(Mason2: <%perl>)('<%perl>')
+        PsiWhiteSpace('\n\n  ')
+        PsiPerlStatementImpl(Perl5: STATEMENT)
+          PsiPerlHashElementImpl(Perl5: HASH_ELEMENT)
+            PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+              PsiElement(Perl5: $$)('$')
+              PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('test')
+            PsiPerlHashIndexImpl(Perl5: HASH_INDEX)
+              PsiElement(Perl5: {)('{')
+              PsiPerlSubCallImpl(SUB_CALL)
+                PsiPerlMethodImpl(Perl5: METHOD)
+                  PerlSubNameElementImpl(Perl5: subname)('foo')
+                PsiWhiteSpace(' ')
+                PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
+                  PsiPerlSubCallImpl(SUB_CALL)
+                    PsiPerlMethodImpl(Perl5: METHOD)
+                      PerlSubNameElementImpl(Perl5: subname)('edit')
+              PsiElement(Perl5: })('}')
+          PsiElement(Perl5: ;)(';')
+        PsiWhiteSpace('\n\n  ')
+        PsiElement(Mason2: </%perl>)('</%perl>')
+      PsiWhiteSpace(' ')
+      PsiComment(Mason2: MASON_TEMPLATE_BLOCK_HTML)('</div>')

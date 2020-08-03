@@ -1,0 +1,31 @@
+Reparsing block
+----------
+PsiComment(Perl5: COMMENT_LINE)
+----------
+# comment test
+----------
+After typing
+----------
+<div>
+
+<%perl>
+  # commentedit<caret> test
+</%perl>
+
+</div>
+----------
+Psi structure
+----------
+Mason2 template file
+  MasonNamespaceDefinitionImpl(MASON_PACKAGE)@/MC0::commentInBlock_mc
+    PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
+      PsiComment(Mason2: MASON_TEMPLATE_BLOCK_HTML)('<div>')
+      PsiWhiteSpace('\n\n')
+      MasonAbstractBlockImpl(Mason2: MASON_ABSTRACT_BLOCK)
+        PsiElement(Mason2: <%perl>)('<%perl>')
+        PsiWhiteSpace('\n  ')
+        PsiComment(Perl5: COMMENT_LINE)('# commentedit test')
+        PsiWhiteSpace('\n')
+        PsiElement(Mason2: </%perl>)('</%perl>')
+      PsiWhiteSpace('\n\n')
+      PsiComment(Mason2: MASON_TEMPLATE_BLOCK_HTML)('</div>')

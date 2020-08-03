@@ -1,0 +1,9 @@
+something<caret> <div>
+
+<%perl>
+
+say 'hi';
+
+ </%perl>
+
+ </div> else

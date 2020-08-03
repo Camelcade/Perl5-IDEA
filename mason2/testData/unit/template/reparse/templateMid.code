@@ -1,0 +1,17 @@
+something <div>
+
+<%perl>
+
+say 'hi';
+
+ </%perl>
+
+middle <caret> text
+
+<%perl>
+
+say 'hi';
+
+ </%perl>
+
+ </div> else

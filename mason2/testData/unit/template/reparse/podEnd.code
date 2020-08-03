@@ -1,0 +1,11 @@
+something <div>
+
+<%perl>
+
+
+say 'hi';
+
+=pod HEAD1
+
+something<caret>
+

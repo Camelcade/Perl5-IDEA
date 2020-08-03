@@ -1,0 +1,31 @@
+Reparsing block
+----------
+PerlStringContentElementImpl(Perl5: STRING_CONTENT_XQ)
+----------
+variable
+----------
+After typing
+----------
+something <div>
+
+% `varedit<caret>iable`;
+
+ </div> else
+----------
+Psi structure
+----------
+Mason2 template file
+  MasonNamespaceDefinitionImpl(MASON_PACKAGE)@/MC0::stringQXInLine_mc
+    PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
+      PsiComment(Mason2: MASON_TEMPLATE_BLOCK_HTML)('something <div>')
+      PsiWhiteSpace('\n\n')
+      PsiComment(Mason2: %)('% ')
+      PsiPerlStatementImpl(Perl5: STATEMENT)
+        PsiPerlStringXqImpl(Perl5: STRING_XQ)
+          PsiElement(Perl5: QUOTE_TICK_OPEN)('`')
+          PerlStringContentElementImpl(Perl5: STRING_CONTENT_XQ)('vareditiable')
+          PsiElement(Perl5: QUOTE_TICK_CLOSE)('`')
+        PsiElement(Perl5: ;)(';')
+      PsiElement(Perl5: ;)('\n')
+      PsiWhiteSpace('\n ')
+      PsiComment(Mason2: MASON_TEMPLATE_BLOCK_HTML)('</div> else')
