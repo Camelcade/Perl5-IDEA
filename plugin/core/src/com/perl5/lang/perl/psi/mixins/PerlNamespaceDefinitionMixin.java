@@ -52,9 +52,7 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
   implements StubBasedPsiElement<PerlNamespaceDefinitionStub>,
              PerlNamespaceDefinitionWithIdentifier,
              PerlElementPatterns,
-             PerlCompositeElement,
-             PerlFileDataOwner {
-  private final ClearableLazyValue<PerlFileData> mySubtreeFileData = PerlFileDataCollector.createLazyBuilder(this);
+             PerlCompositeElement {
   private final ClearableLazyValue<ExporterInfo> myExporterInfo = ClearableLazyValue.create(this::computeExporterInfo);
   private final ClearableLazyValue<PerlMroType> myMroType = ClearableLazyValue.create(this::computeMroType);
   private final ClearableLazyValue<List<String>> myParentNamespaces = ClearableLazyValue.create(
@@ -241,14 +239,8 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
   }
 
   @Override
-  public @NotNull PerlFileData getPerlFileData() {
-    return mySubtreeFileData.getValue();
-  }
-
-  @Override
   public void subtreeChanged() {
     super.subtreeChanged();
-    mySubtreeFileData.drop();
     myExporterInfo.drop();
     myMroType.drop();
     myParentNamespaces.drop();

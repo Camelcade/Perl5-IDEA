@@ -36,13 +36,10 @@ import com.perl5.lang.perl.idea.completion.providers.processors.PerlCompletionPr
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlSimpleDelegatingCompletionProcessor;
 import com.perl5.lang.perl.internals.PerlFeaturesTable;
 import com.perl5.lang.perl.internals.PerlVersion;
-import com.perl5.lang.perl.psi.PerlFile;
-import com.perl5.lang.perl.psi.PerlFileData;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.references.PerlBuiltInNamespacesService;
 import com.perl5.lang.perl.util.PerlPackageUtil;
-import com.perl5.lang.perl.util.PerlScopesUtil;
 import com.perl5.lang.perl.util.PerlTimeLogger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -156,7 +153,6 @@ public class PerlPackageCompletionUtil {
                                                          @NotNull Project project,
                                                          @NotNull GlobalSearchScope searchScope,
                                                          @NotNull Processor<PerlNamespaceDefinitionElement> namespaceProcessor) {
-    searchScope = PerlScopesUtil.scopeWithoutCurrentFileWithAst(searchScope, completionProcessor.getContainingFile());
     PerlTimeLogger logger = PerlTimeLogger.create(LOG);
     Collection<String> names = PerlPackageUtil.getKnownNamespaceNames(searchScope);
     logger.debug("Collected all namespaces names: ", names.size());
@@ -182,25 +178,6 @@ public class PerlPackageCompletionUtil {
       }
     }
     logger.debug("Collected namespaces from indexes");
-
-    PsiFile originalFile = completionProcessor.getOriginalFile();
-    if (originalFile instanceof PerlFile) {
-      PerlFileData perlFileData = ((PerlFile)originalFile).getPerlFileData();
-      logger.debug("Obtained perl file data");
-      for (PerlNamespaceDefinitionElement namespace : perlFileData.getNamespaces()) {
-        String namespaceName = namespace.getNamespaceName();
-        if (completionProcessor.matches(namespaceName) && !completionProcessor.isRegistered(namespaceName)) {
-          completionProcessor.register(namespaceName);
-          if (!namespaceProcessor.process(namespace)) {
-            break;
-          }
-        }
-      }
-      logger.debug("Collected namespaces from AST of the current file");
-    }
-    else {
-      logger.debug("Not a perl file to process AST");
-    }
 
     return completionProcessor.result();
   }

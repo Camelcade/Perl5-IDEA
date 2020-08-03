@@ -20,23 +20,15 @@ import com.intellij.codeInsight.controlflow.Instruction;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.ClearableLazyValue;
 import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlControlFlowBuilder;
-import com.perl5.lang.perl.psi.PerlFileData;
-import com.perl5.lang.perl.psi.PerlFileDataCollector;
 import com.perl5.lang.perl.psi.PerlSubExpr;
 import com.perl5.lang.perl.psi.impl.PsiPerlExprImpl;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class PerlSubExpression extends PsiPerlExprImpl implements PerlSubExpr {
-  private final ClearableLazyValue<PerlFileData> mySubtreeFileData = PerlFileDataCollector.createLazyBuilder(this);
   private final ClearableLazyValue<Instruction[]> myControlFlow = PerlControlFlowBuilder.createLazy(this);
 
   public PerlSubExpression(ASTNode node) {
     super(node);
-  }
-
-  @Override
-  public @NotNull PerlFileData getPerlFileData() {
-    return mySubtreeFileData.getValue();
   }
 
   @Override
@@ -46,7 +38,6 @@ public abstract class PerlSubExpression extends PsiPerlExprImpl implements PerlS
 
   @Override
   public void subtreeChanged() {
-    mySubtreeFileData.drop();
     myControlFlow.drop();
   }
 }

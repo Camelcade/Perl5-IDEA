@@ -42,9 +42,7 @@ import java.util.List;
 public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitionStub> implements PerlSubDefinitionElement,
                                                                                                   PerlLexicalScope,
                                                                                                   PerlElementTypes,
-                                                                                                  PerlFileDataOwner,
                                                                                                   PerlControlFlowOwner {
-  private final ClearableLazyValue<PerlFileData> mySubtreeFileData = PerlFileDataCollector.createLazyBuilder(this);
   private final ClearableLazyValue<Instruction[]> myControlFlow = PerlControlFlowBuilder.createLazy(this);
   private final ClearableLazyValue<PerlValue> myReturnValueFromCode = ClearableLazyValue.create(
     () -> PerlResolveUtil.computeReturnValueFromControlFlow(this));
@@ -157,18 +155,12 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
   }
 
   @Override
-  public @NotNull PerlFileData getPerlFileData() {
-    return mySubtreeFileData.getValue();
-  }
-
-  @Override
   public @NotNull Instruction[] getControlFlow() {
     return myControlFlow.getValue();
   }
 
   @Override
   public void subtreeChanged() {
-    mySubtreeFileData.drop();
     myControlFlow.drop();
     myReturnValueFromCode.drop();
   }

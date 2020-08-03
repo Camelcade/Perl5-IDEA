@@ -47,8 +47,6 @@ import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlControlFlowBuilder;
 import com.perl5.lang.perl.psi.PerlDoExpr;
 import com.perl5.lang.perl.psi.PerlFile;
-import com.perl5.lang.perl.psi.PerlFileData;
-import com.perl5.lang.perl.psi.PerlFileDataCollector;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.stubs.PerlFileStub;
@@ -75,7 +73,6 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
   private final ClearableLazyValue<List<String>> myParentNamespaces = ClearableLazyValue.create(
     () -> PerlPackageUtil.collectParentNamespaceNamesFromPsi(this));
   private final ClearableLazyValue<Instruction[]> myControlFlow = PerlControlFlowBuilder.createLazy(this);
-  private final ClearableLazyValue<PerlFileData> mySubtreeFileData = PerlFileDataCollector.createLazyBuilder(this);
 
   public PerlFileImpl(@NotNull FileViewProvider viewProvider, Language language) {
     super(viewProvider, language);
@@ -129,7 +126,6 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
     super.subtreeChanged();
     myElementsResolveScope = null;
     myParentNamespaces.drop();
-    mySubtreeFileData.drop();
     myControlFlow.drop();
   }
 
@@ -338,15 +334,6 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
   @Override
   public @NotNull Map<String, List<String>> getEXPORT_TAGS() {
     return Collections.emptyMap();
-  }
-
-  @Override
-  public final @NotNull PerlFileData getPerlFileData() {
-    if (!isContentsLoaded()) {
-      return PerlFileData.EMPTY_DATA;
-    }
-    LOG.assertTrue(getVirtualFile() != null, "Do not collect file data for light files, use original ones");
-    return mySubtreeFileData.getValue();
   }
 
   @Override

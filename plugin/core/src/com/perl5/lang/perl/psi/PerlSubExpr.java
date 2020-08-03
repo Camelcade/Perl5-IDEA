@@ -24,5 +24,5 @@ import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 
 
 public interface PerlSubExpr
-  extends PsiElement, PerlLabelScope, PerlLexicalScope, PerlDieScope, PerlBlockOwner, PerlControlFlowOwner, PerlFileDataOwner {
+  extends PsiElement, PerlLabelScope, PerlLexicalScope, PerlDieScope, PerlBlockOwner, PerlControlFlowOwner {
 }

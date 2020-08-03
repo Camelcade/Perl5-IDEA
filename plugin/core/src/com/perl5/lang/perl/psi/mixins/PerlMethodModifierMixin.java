@@ -25,8 +25,6 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlControlFlowBuilder;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimpleDynamicLocation;
 import com.perl5.lang.perl.idea.ui.PerlIconProvider;
-import com.perl5.lang.perl.psi.PerlFileData;
-import com.perl5.lang.perl.psi.PerlFileDataCollector;
 import com.perl5.lang.perl.psi.PerlMethodModifier;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
@@ -37,7 +35,6 @@ import javax.swing.*;
 
 public abstract class PerlMethodModifierMixin extends PerlCompositeElementImpl implements PerlMethodModifier {
 
-  private final ClearableLazyValue<PerlFileData> mySubtreeFileData = PerlFileDataCollector.createLazyBuilder(this);
   private final ClearableLazyValue<Instruction[]> myControlFlow = PerlControlFlowBuilder.createLazy(this);
 
   public PerlMethodModifierMixin(@NotNull ASTNode node) {
@@ -74,18 +71,12 @@ public abstract class PerlMethodModifierMixin extends PerlCompositeElementImpl i
   }
 
   @Override
-  public @NotNull PerlFileData getPerlFileData() {
-    return mySubtreeFileData.getValue();
-  }
-
-  @Override
   public @NotNull Instruction[] getControlFlow() {
     return myControlFlow.getValue();
   }
 
   @Override
   public void subtreeChanged() {
-    mySubtreeFileData.drop();
     myControlFlow.drop();
   }
 }
