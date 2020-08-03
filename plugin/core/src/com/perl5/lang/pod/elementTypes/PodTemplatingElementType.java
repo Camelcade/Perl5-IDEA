@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,9 +17,13 @@
 package com.perl5.lang.pod.elementTypes;
 
 import com.intellij.lang.Language;
+import com.intellij.lexer.FlexAdapter;
+import com.intellij.lexer.Lexer;
 import com.intellij.psi.templateLanguages.TemplateDataElementType;
 import com.intellij.psi.templateLanguages.TemplateLanguageFileViewProvider;
+import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.lexer.PodElementTypes;
 import org.jetbrains.annotations.NonNls;
@@ -28,6 +32,14 @@ import org.jetbrains.annotations.NonNls;
 public class PodTemplatingElementType extends TemplateDataElementType implements PerlElementTypes, PodElementTypes {
   public PodTemplatingElementType(@NonNls String debugName, Language language) {
     super(debugName, language, POD, POD_OUTER);
+  }
+
+  @Override
+  protected Lexer createBaseLexer(TemplateLanguageFileViewProvider viewProvider) {
+    if (viewProvider.getBaseLanguage() == PerlLanguage.INSTANCE) {
+      return new FlexAdapter(new PerlLexer(null).withProject(viewProvider.getManager().getProject()));
+    }
+    return super.createBaseLexer(viewProvider);
   }
 
   @Override
