@@ -22,6 +22,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.containers.IntStack;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public abstract class PerlProtoLexer implements FlexLexer {
   private static final Logger LOG = Logger.getInstance(PerlProtoLexer.class);
   protected final LinkedList<CustomToken> preparsedTokensList = new LinkedList<>();
   protected final IntStack stateStack = new IntStack();
-  protected final PerlTokenHistory myTokenHistory = new PerlTokenHistory();
+  private IElementType myLastTokenType = null;
 
   public abstract void setTokenStart(int position);
 
@@ -80,10 +81,14 @@ public abstract class PerlProtoLexer implements FlexLexer {
     }
 
     if (tokenType != null) {
-      registerToken(tokenType, yytext());
+      myLastTokenType = tokenType;
     }
 
     return tokenType;
+  }
+
+  protected @Nullable IElementType getLastTokenType() {
+    return myLastTokenType;
   }
 
   public abstract IElementType perlAdvance() throws IOException;
@@ -130,14 +135,6 @@ public abstract class PerlProtoLexer implements FlexLexer {
       return;
     }
     yybegin(stateStack.pop());
-  }
-
-  public void registerToken(IElementType tokenType, CharSequence tokenText) {
-    getTokenHistory().addToken(tokenType, tokenText);
-  }
-
-  public PerlTokenHistory getTokenHistory() {
-    return myTokenHistory;
   }
 
   /**
@@ -236,7 +233,7 @@ public abstract class PerlProtoLexer implements FlexLexer {
   }
 
   protected void resetInternals() {
-    getTokenHistory().reset();
+    myLastTokenType = null;
     preparsedTokensList.clear();
     stateStack.clear();
   }

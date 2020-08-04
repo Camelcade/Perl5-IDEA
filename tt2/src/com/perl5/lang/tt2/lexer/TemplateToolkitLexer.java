@@ -185,7 +185,7 @@ public class TemplateToolkitLexer extends TemplateToolkitLexerGenerated implemen
     int currentState = getRealLexicalState();
     return currentState != LEX_DQ_STRING &&
            currentState != LEX_SQ_STRING &&
-           getTokenHistory().getLastTokenType() != TT2_OPEN_TAG &&
+           getLastTokenType() != TT2_OPEN_TAG &&
            offset < bufferEnd &&
            buffer.charAt(offset) == '#';
   }
