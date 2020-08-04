@@ -69,7 +69,6 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
   private static final Map<IElementType, Trinity<IElementType, IElementType, IElementType>> SIGILS_TO_TOKENS_MAP = new HashMap<>();
 
   protected static final String SUB_SIGNATURE = "Sub.Signature";
-  private static TokenSet BARE_REGEX_PREFIX_TOKENSET;
 
   static {
     ALLOWED_REGEXP_MODIFIERS.put(RESERVED_S, "nmsixpodualgcer");
@@ -92,21 +91,15 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
   }
 
   private static void refreshExtensions() {
-    TokenSet bareRegexPrefixTokenSet = TokenSet.EMPTY;
     PerlParserImpl.restoreDefaultExtendsSet();
 
     for (PerlParserExtension extension : PerlParserExtension.EP_NAME.getExtensionList()) {
-
-      // add regex prefix tokenset
-      bareRegexPrefixTokenSet = TokenSet.orSet(bareRegexPrefixTokenSet, extension.getRegexPrefixTokenSet());
-
       // add extensions tokens
       List<Pair<IElementType, TokenSet>> extensionSets = extension.getExtensionSets();
       for (Pair<IElementType, TokenSet> extensionSet : extensionSets) {
         extendParserTokens(extensionSet.first, extensionSet.getSecond());
       }
     }
-    BARE_REGEX_PREFIX_TOKENSET = bareRegexPrefixTokenSet;
   }
 
   private static void extendParserTokens(IElementType setToExtend, TokenSet extendWith) {
@@ -503,7 +496,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
       tokenType = IDENTIFIER;
     }
 
-    yybegin(BARE_REGEX_PREFIX_TOKENSET.contains(tokenType) ? YYINITIAL : AFTER_IDENTIFIER);
+    yybegin(AFTER_IDENTIFIER);
 
     if (tokenType == QUALIFYING_PACKAGE) {
       int lastIndex = StringUtil.lastIndexOfAny(tokenText, ":'") + 1;

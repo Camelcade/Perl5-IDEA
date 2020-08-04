@@ -42,15 +42,6 @@ public abstract class PerlParserExtension {
   }
 
   /**
-   * Returns tokenset, containing bare regex prefixesj like =~ or case
-   *
-   * @return list of pairs to extend
-   */
-  public @NotNull TokenSet getRegexPrefixTokenSet() {
-    return TokenSet.EMPTY;
-  }
-
-  /**
    * Parse method. Attempt to parse term
    * You may re-use PerlParser static methods to implement native perl expressions
    *
