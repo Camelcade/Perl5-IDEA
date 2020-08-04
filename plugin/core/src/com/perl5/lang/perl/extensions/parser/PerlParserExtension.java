@@ -25,25 +25,10 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 
 public abstract class PerlParserExtension {
   public static final ExtensionPointName<PerlParserExtension> EP_NAME = ExtensionPointName.create("com.perl5.parserExtension");
-
-  /**
-   * @return a set of keywords and element types to lex that can be anywhere
-   */
-  public @NotNull Map<String, IElementType> getCustomTokensMap() {
-    return Collections.emptyMap();
-  }
-
-  /**
-   * @return a map of keywords and token types for identifiers after dereference, e.g. {@code $self->mk_accessors}.
-   */
-  public @NotNull Map<String, IElementType> getCustomTokensAfterDereferenceMap() {
-    return Collections.emptyMap();
-  }
 
   /**
    * Returns list of extendable tokensets. Loader will attempt to add them into builder
@@ -74,17 +59,6 @@ public abstract class PerlParserExtension {
    * @return parsing result
    */
   public boolean parseTerm(PerlBuilder b, int l) {
-    return false;
-  }
-
-  /**
-   * Parses element in dereference sequence.
-   *
-   * @param b PerlBuilder
-   * @param l parsing level
-   * @return Parsing result
-   */
-  public boolean parseNestedElement(PerlBuilder b, int l) {
     return false;
   }
 

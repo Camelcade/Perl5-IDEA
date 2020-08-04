@@ -1224,7 +1224,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 }
 
 <AFTER_DEREFERENCE>{
-	{QUALIFIED_IDENTIFIER} 		{yybegin(AFTER_VALUE);return getAfterDereferenceIdentifierToken();}
+	{QUALIFIED_IDENTIFIER} 		{yybegin(AFTER_VALUE);return getIdentifierTokenWithoutIndex();}
 }
 
 // following is for require

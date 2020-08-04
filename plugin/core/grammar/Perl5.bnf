@@ -1156,8 +1156,7 @@ block_code ::= '&{' block_content '&}' {extends=block pin=1}
 
 // extended nested element for using in ()
 private nested_element_variation ::=
-	<<parseNestedElementVariation>>
-    | hash_index
+      hash_index
     | array_index
     | regular_nested_call
     | parenthesised_call_arguments

@@ -60,8 +60,6 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
   public static final Map<IElementType, String> ALLOWED_REGEXP_MODIFIERS = new THashMap<>();
   public static final String ALLOWED_TR_MODIFIERS = "cdsr";
   public static final Pattern POSIX_CHAR_CLASS_PATTERN = Pattern.compile("\\[\\[:\\^?\\w*:\\]\\]");
-  public static Map<String, IElementType> CUSTOM_TOKEN_TYPES = new HashMap<>();
-  public static Map<String, IElementType> CUSTOM_TOKEN_TYPES_AFTER_DEREFERENCE = new HashMap<>();
   private static final List<IElementType> DQ_TOKENS = Arrays.asList(QUOTE_DOUBLE_OPEN, LP_STRING_QQ, QUOTE_DOUBLE_CLOSE, STRING_CONTENT_QQ);
   private static final List<IElementType> SQ_TOKENS = Arrays.asList(QUOTE_SINGLE_OPEN, LP_STRING_Q, QUOTE_SINGLE_CLOSE, STRING_CONTENT);
   private static final List<IElementType> XQ_TOKENS = Arrays.asList(QUOTE_TICK_OPEN, LP_STRING_QX, QUOTE_TICK_CLOSE, STRING_CONTENT_XQ);
@@ -95,15 +93,9 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
 
   private static void refreshExtensions() {
     TokenSet bareRegexPrefixTokenSet = TokenSet.EMPTY;
-    Map<String, IElementType> customTokenTypes = new HashMap<>();
-    Map<String, IElementType> customTokenTypesAfterDereference = new HashMap<>();
     PerlParserImpl.restoreDefaultExtendsSet();
 
     for (PerlParserExtension extension : PerlParserExtension.EP_NAME.getExtensionList()) {
-
-      // add tokens to lex
-      customTokenTypes.putAll(extension.getCustomTokensMap());
-      customTokenTypesAfterDereference.putAll(extension.getCustomTokensAfterDereferenceMap());
 
       // add regex prefix tokenset
       bareRegexPrefixTokenSet = TokenSet.orSet(bareRegexPrefixTokenSet, extension.getRegexPrefixTokenSet());
@@ -114,8 +106,6 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
         extendParserTokens(extensionSet.first, extensionSet.getSecond());
       }
     }
-    CUSTOM_TOKEN_TYPES = customTokenTypes;
-    CUSTOM_TOKEN_TYPES_AFTER_DEREFERENCE = customTokenTypesAfterDereference;
     BARE_REGEX_PREFIX_TOKENSET = bareRegexPrefixTokenSet;
   }
 
@@ -470,21 +460,6 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
     return SUB_NAME;
   }
 
-  protected @NotNull IElementType getAfterDereferenceIdentifierToken() {
-    IElementType defaultToken = getIdentifierTokenWithoutIndex();
-    if (defaultToken != SUB_NAME) {
-      return defaultToken;
-    }
-    String tokenText = yytext().toString();
-    IElementType tokenType = CUSTOM_TOKEN_TYPES_AFTER_DEREFERENCE.get(tokenText);
-    if (tokenType != null) {
-      return tokenType;
-    }
-
-    tokenType = CUSTOM_TOKEN_TYPES.get(yytext().toString());
-    return tokenType != null ? tokenType : defaultToken;
-  }
-
   /**
    * Bareword parser, resolves built-ins and runs additional processings where it's necessary
    *
@@ -494,42 +469,38 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
     String tokenText = yytext().toString();
     IElementType tokenType;
 
-    if ((tokenType = CUSTOM_TOKEN_TYPES.get(tokenText)) == null) {
-      if (StringUtil.endsWithChar(tokenText, ':')) {
-        tokenType = PACKAGE;
-      }
-      else if (myProject != null) {
-
-        String canonicalName = PerlPackageUtil.getCanonicalName(tokenText);
-        if (!StringUtil.containsChar(canonicalName, ':')) {
-          if (StringUtil.isCapitalized(canonicalName) &&
-              (myNamespaceNamesProvider.getValue().contains(canonicalName) || myLocalPackages.contains(canonicalName))) {
-            tokenType = PACKAGE;
-          }
-          else {
-            tokenType = SUB_NAME;
-          }
-        }
-        else if (StringUtil.equals(canonicalName, "UNIVERSAL::can")) {
-          tokenType = QUALIFYING_PACKAGE;
-        }
-        else if (myImplicitSubsService.getSub(canonicalName) != null) {
-          tokenType = QUALIFYING_PACKAGE;
-        }
-        else if (mySubNamesProvider.getValue().contains(canonicalName)) {
-          tokenType = QUALIFYING_PACKAGE;
-        }
-        else if (myNamespaceNamesProvider.getValue().contains(canonicalName) || myLocalPackages.contains(canonicalName)) {
+    if (StringUtil.endsWithChar(tokenText, ':')) {
+      tokenType = PACKAGE;
+    }
+    else if (myProject != null) {
+      String canonicalName = PerlPackageUtil.getCanonicalName(tokenText);
+      if (!StringUtil.containsChar(canonicalName, ':')) {
+        if (StringUtil.isCapitalized(canonicalName) &&
+            (myNamespaceNamesProvider.getValue().contains(canonicalName) || myLocalPackages.contains(canonicalName))) {
           tokenType = PACKAGE;
         }
         else {
-          tokenType = QUALIFYING_PACKAGE;
+          tokenType = SUB_NAME;
         }
       }
-      else    // fallback for words scanner
-      {
-        tokenType = IDENTIFIER;
+      else if (StringUtil.equals(canonicalName, "UNIVERSAL::can")) {
+        tokenType = QUALIFYING_PACKAGE;
       }
+      else if (myImplicitSubsService.getSub(canonicalName) != null) {
+        tokenType = QUALIFYING_PACKAGE;
+      }
+      else if (mySubNamesProvider.getValue().contains(canonicalName)) {
+        tokenType = QUALIFYING_PACKAGE;
+      }
+      else if (myNamespaceNamesProvider.getValue().contains(canonicalName) || myLocalPackages.contains(canonicalName)) {
+        tokenType = PACKAGE;
+      }
+      else {
+        tokenType = QUALIFYING_PACKAGE;
+      }
+    }
+    else {    // fallback for words scanner
+      tokenType = IDENTIFIER;
     }
 
     yybegin(BARE_REGEX_PREFIX_TOKENSET.contains(tokenType) ? YYINITIAL : AFTER_IDENTIFIER);
