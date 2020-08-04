@@ -37,6 +37,7 @@ public class PerlLexerPerformanceTest extends PerlParserTestBase {
 
   private static final int START_OFFSET = 1133848;
 
+  @Ignore
   @Test
   public void testStubbingPerformanceInsideLeaf() {
     initWithPerlTidy();
@@ -51,6 +52,22 @@ public class PerlLexerPerformanceTest extends PerlParserTestBase {
     doTestTypingPerformance();
   }
 
+  @Test
+  public void testStubbingPerformanceWithPod() {
+    initWithPerlTidy();
+    Editor editor = getEditor();
+    CaretModel caretModel = editor.getCaretModel();
+    caretModel.moveToOffset(0);
+    String insertion = "=pod\n\ntest\n\n=cut\n\n";
+    WriteCommandAction.runWriteCommandAction(getProject(), () -> {
+      EditorModificationUtil.insertStringAtCaret(editor, insertion);
+      PsiDocumentManager.getInstance(getProject()).commitAllDocuments();
+    });
+    caretModel.moveToOffset(START_OFFSET + insertion.length());
+    doTestTypingPerformance();
+  }
+
+  @Ignore
   @Test
   public void testStubbingPerformance() {
     initWithPerlTidy();
@@ -85,18 +102,11 @@ public class PerlLexerPerformanceTest extends PerlParserTestBase {
 
     String testData = getPerlTidy();
 
-    final int iterations = 100;
+    final int iterations = 300;
 
     Logger logger = Logger.getInstance(PerlLexerPerformanceTest.class);
 
-    logger.warn("Warming up...");
     long start = System.currentTimeMillis();
-    for (int i = 0; i < iterations; i++) {
-      testLexing(testData);
-    }
-    logger.warn("Warmed up in " + (System.currentTimeMillis() - start));
-
-    start = System.currentTimeMillis();
     for (int i = 0; i < iterations; i++) {
       testLexing(testData);
     }
