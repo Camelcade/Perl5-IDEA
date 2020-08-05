@@ -178,9 +178,6 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
     assertStoppedAtLine(debugSession, 16);
     debugSession.stepInto();
     assertStoppedAtLine(debugSession, 1);
-    debugSession.stepOver(false);
-    debugSession.stepOver(false);
-    assertStoppedAtLine(debugSession, 3);
     setBreakPointInCurrentFile(debugSession, 7);
     debugSession.stepOut();
     assertStoppedAtLine(debugSession, 7);
@@ -196,9 +193,6 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
     assertStoppedAtLine(debugSession, 16);
     debugSession.stepInto();
     assertStoppedAtLine(debugSession, 1);
-    debugSession.stepOver(false);
-    debugSession.stepOver(false);
-    assertStoppedAtLine(debugSession, 3);
     setBreakPointInCurrentFile(debugSession, 5);
     runToLine(debugSession, 17, false);
     assertStoppedAtLine(debugSession, 5);
@@ -214,9 +208,6 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
     assertStoppedAtLine(debugSession, 16);
     debugSession.stepInto();
     assertStoppedAtLine(debugSession, 1);
-    debugSession.stepOver(false);
-    debugSession.stepOver(false);
-    assertStoppedAtLine(debugSession, 3);
     setBreakPointInCurrentFile(debugSession, 5);
     runToLine(debugSession, 17, true);
     assertStoppedAtLine(debugSession, 17);
