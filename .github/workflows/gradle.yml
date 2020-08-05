@@ -74,4 +74,10 @@ jobs:
         with:
           name: Plugins binaries
           path: |
-            ./**/distributions/*.zip
+            ./plugin/build/distributions/*.zip
+            ./mason2/build/distributions/*.zip
+            ./mason-core/build/distributions/*.zip
+            ./embedded/build/distributions/*.zip
+            ./htmlmason/build/distributions/*.zip
+            ./mojo/build/distributions/*.zip
+            ./tt2/build/distributions/*.zip
