@@ -17,6 +17,7 @@
 package debugger;
 
 import base.PerlPlatformTestCase;
+import categories.Heavy;
 import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.execution.executors.DefaultDebugExecutor;
 import com.intellij.execution.runners.ExecutionEnvironment;
@@ -46,6 +47,7 @@ import com.pty4j.util.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 import java.io.File;
 import java.util.*;
@@ -54,6 +56,7 @@ import java.util.function.Consumer;
 import static base.PerlLightTestCaseBase.SEPARATOR_NEWLINES;
 import static base.PerlLightTestCaseBase.SEPARATOR_NEW_LINE_AFTER;
 
+@Category(Heavy.class)
 public class PerlDebuggerTest extends PerlPlatformTestCase {
   private static final int WAIT_TIMEOUT = 10_000;
 
