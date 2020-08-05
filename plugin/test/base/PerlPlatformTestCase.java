@@ -298,7 +298,7 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
       }
     });
 
-    Disposer.register(myPerlLightTestCaseDisposable, runContentDescriptor.getExecutionConsole());
+    Disposer.register(myPerlLightTestCaseDisposable, runContentDescriptor);
     Disposer.register(myPerlLightTestCaseDisposable, () -> {
       if (!processHandler.isProcessTerminated()) {
         processHandler.destroyProcess();
