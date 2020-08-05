@@ -66,3 +66,12 @@ jobs:
         run: |
           ./gradlew test -PincludeHeavy=1
           ./gradlew coveralls
+      - name: Building plugins
+        run: |
+          ./gradlew buildPlugin
+      - name: Publishing artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: Plugins binaries
+          path: |
+            ./**/distributions/*.zip
