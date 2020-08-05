@@ -156,6 +156,9 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
 
   @Override
   public void advance() {
+    if (++myAdvancesCounter % PerlProgressAwareAdapter.CHECK_CANCEL_EACH_TOKEN == 0) {
+      ProgressManager.checkCanceled();
+    }
     locateToken();
     myTokenType = null;
   }
@@ -180,10 +183,6 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
   protected void locateToken() {
     if (myTokenType != null) {
       return;
-    }
-
-    if (++myAdvancesCounter % 1000 == 0) {
-      ProgressManager.checkCanceled();
     }
 
     if (myIsSublexing) {
