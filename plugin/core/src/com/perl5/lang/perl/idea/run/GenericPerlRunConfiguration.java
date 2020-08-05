@@ -422,7 +422,7 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
                                                    @NotNull ExecutionEnvironment environment) throws ExecutionException {
     PerlRunProfileState runProfileState = getState(environment.getExecutor(), environment);
     if (!(runProfileState instanceof PerlDebugProfileState)) {
-      throw new ExecutionException("Incorrect profile state");
+      throw new ExecutionException("PerlDebugProfileState expected, got: " + runProfileState);
     }
     return new PerlDebugProcess(session, (PerlDebugProfileState)runProfileState, runProfileState.execute(environment.getExecutor()));
   }

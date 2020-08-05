@@ -16,27 +16,45 @@
 
 package base;
 
+import com.intellij.execution.*;
+import com.intellij.execution.actions.ConfigurationContext;
+import com.intellij.execution.actions.ConfigurationFromContext;
+import com.intellij.execution.configurations.ConfigurationFactory;
+import com.intellij.execution.configurations.RunConfiguration;
+import com.intellij.execution.process.ProcessAdapter;
+import com.intellij.execution.process.ProcessEvent;
+import com.intellij.execution.process.ProcessHandler;
+import com.intellij.execution.runners.ExecutionEnvironment;
+import com.intellij.execution.runners.ProgramRunner;
+import com.intellij.execution.ui.RunContentDescriptor;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.actionSystem.LangDataKeys;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.module.Module;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.ModuleRootModificationUtil;
 import com.intellij.openapi.util.Disposer;
+import com.intellij.openapi.util.Key;
+import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.testFramework.PlatformTestCase;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiManager;
+import com.intellij.testFramework.HeavyPlatformTestCase;
 import com.intellij.testFramework.TestActionEvent;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
+import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostHandler;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlRealVersionManagerHandler;
 import com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewTestUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
+import com.pty4j.util.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.Assume;
@@ -50,10 +68,13 @@ import org.junit.runners.model.Statement;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 @RunWith(JUnit4.class)
-public abstract class PerlPlatformTestCase extends PlatformTestCase {
+public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
   private static final String PERLBREW_HOME = "~/perl5/perlbrew/bin/perlbrew";
   private static final String PERL_526 = "perl-5.26.2";
   private static final String MOJO_LIB_SEPARATOR = "@";
@@ -174,5 +195,113 @@ public abstract class PerlPlatformTestCase extends PlatformTestCase {
     String perlbrewHome = FileUtil.expandUserHome(PERLBREW_HOME);
     File perlbrewFile = new File(perlbrewHome);
     return perlbrewFile.exists() ? perlbrewFile : null;
+  }
+
+  protected String getBaseDataPath() {
+    return "";
+  }
+
+  protected final String getTestDataPath() {
+    File file = new File(getBaseDataPath());
+    assertTrue("File not found: " + file, file.exists());
+    return file.getAbsolutePath();
+  }
+
+  protected void copyDirToModule(@NotNull String directoryName) {
+    File file = new File(getTestDataPath(), directoryName);
+    assertTrue("File not found: " + file, file.exists());
+    VirtualFile virtualFile = refreshAndFindFile(file);
+    assertNotNull("Unable to find virtual file for: " + file, virtualFile);
+    virtualFile.refresh(false, true);
+    copyDirContentsTo(virtualFile, getModuleRoot());
+  }
+
+  protected @NotNull VirtualFile getModuleRoot() {
+    try {
+      return getOrCreateModuleDir(getModule());
+    }
+    catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  protected @NotNull VirtualFile getModuleFile(@NotNull String relativePath) {
+    VirtualFile file = getModuleRoot().findFileByRelativePath(relativePath);
+    assertNotNull("Unable to find file in module: " + relativePath, file);
+    return file;
+  }
+
+  protected @NotNull GenericPerlRunConfiguration createRunConfiguration(@NotNull String relativePath) {
+    VirtualFile scriptFile = getModuleFile(relativePath);
+    PsiFile scriptPsiFile = PsiManager.getInstance(getProject()).findFile(scriptFile);
+    assertNotNull(scriptPsiFile);
+    ConfigurationContext configurationContext = new ConfigurationContext(scriptPsiFile);
+    List<ConfigurationFromContext> configurationsFromContext = configurationContext.getConfigurationsFromContext();
+    assertNotNull(configurationsFromContext);
+    assertSize(1, configurationsFromContext);
+    ConfigurationFromContext configurationFromContext = configurationsFromContext.get(0);
+    RunConfiguration runConfiguration = configurationFromContext.getConfiguration();
+    assertInstanceOf(runConfiguration, GenericPerlRunConfiguration.class);
+    return (GenericPerlRunConfiguration)runConfiguration;
+  }
+
+  /**
+   * Copy of {@link com.intellij.testFramework.PlatformTestUtil#executeConfiguration(RunConfiguration, String)} without waiting
+   */
+  protected Pair<ExecutionEnvironment, RunContentDescriptor> executeConfiguration(@NotNull RunConfiguration runConfiguration,
+                                                                                  @NotNull String executorId) throws InterruptedException {
+    Project project = runConfiguration.getProject();
+    ConfigurationFactory factory = runConfiguration.getFactory();
+    if (factory == null) {
+      fail("No factory found for: " + runConfiguration);
+    }
+    RunnerAndConfigurationSettings runnerAndConfigurationSettings =
+      RunManager.getInstance(project).createConfiguration(runConfiguration, factory);
+    ProgramRunner<?> runner = ProgramRunner.getRunner(executorId, runConfiguration);
+    if (runner == null) {
+      fail("No runner found for: " + executorId + " and " + runConfiguration);
+    }
+    Ref<RunContentDescriptor> refRunContentDescriptor = new Ref<>();
+    Executor executor = ExecutorRegistry.getInstance().getExecutorById(executorId);
+    assertNotNull("Unable to find executor: " + executorId, executor);
+    ExecutionEnvironment executionEnvironment =
+      new ExecutionEnvironment(executor, runner, runnerAndConfigurationSettings, project);
+    CountDownLatch latch = new CountDownLatch(1);
+    ProgramRunnerUtil.executeConfigurationAsync(executionEnvironment, false, false, descriptor -> {
+      LOG.debug("Process started");
+      refRunContentDescriptor.set(descriptor);
+      latch.countDown();
+    });
+    latch.await(60, TimeUnit.SECONDS);
+    RunContentDescriptor runContentDescriptor = refRunContentDescriptor.get();
+    ProcessHandler processHandler = runContentDescriptor.getProcessHandler();
+    if (processHandler == null) {
+      fail("No process handler found");
+    }
+
+    processHandler.addProcessListener(new ProcessAdapter() {
+      @Override
+      public void startNotified(@NotNull ProcessEvent event) {
+        LOG.debug("Process started");
+      }
+
+      @Override
+      public void processTerminated(@NotNull ProcessEvent event) {
+        LOG.debug("Process terminated with " + event.getExitCode());
+      }
+
+      @Override
+      public void onTextAvailable(@NotNull ProcessEvent event, @NotNull Key outputType) {
+        LOG.debug(outputType + ": " + event.getText());
+      }
+    });
+
+    Disposer.register(myPerlLightTestCaseDisposable, runContentDescriptor.getExecutionConsole());
+    Disposer.register(myPerlLightTestCaseDisposable, () -> {
+      if (!processHandler.isProcessTerminated()) {
+        processHandler.destroyProcess();
+      }
+    });
+    return Pair.create(executionEnvironment, runContentDescriptor);
   }
 }

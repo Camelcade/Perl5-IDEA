@@ -129,8 +129,10 @@ public class PerlDebugThread extends Thread {
   }
 
   private void print(@NotNull @PropertyKey(resourceBundle = PATH_TO_BUNDLE) String key, @NotNull Object... params) {
+    String textToPrint = PerlBundle.message(key, params);
+    LOG.debug("Printing: " + textToPrint);
     ((ConsoleView)myExecutionResult.getExecutionConsole()).print(
-      PerlBundle.message(key, params) + "\n", ConsoleViewContentType.SYSTEM_OUTPUT);
+      textToPrint + "\n", ConsoleViewContentType.SYSTEM_OUTPUT);
   }
 
   private void prepareAndConnect() throws ExecutionException, IOException, InterruptedException {
