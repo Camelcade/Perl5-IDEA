@@ -23,6 +23,8 @@ import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.ui.RunContentDescriptor;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.testFramework.PlatformTestUtil;
+import com.intellij.testFramework.UsefulTestCase;
+import com.intellij.util.containers.ContainerUtil;
 import com.intellij.xdebugger.XDebugSession;
 import com.intellij.xdebugger.XDebuggerManager;
 import com.intellij.xdebugger.XDebuggerUtil;
@@ -34,8 +36,12 @@ import com.intellij.xdebugger.frame.XStackFrame;
 import com.intellij.xdebugger.impl.XSourcePositionImpl;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugOptionsSets;
+import com.perl5.lang.perl.idea.run.debugger.PerlStackFrame;
 import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakpointProperties;
 import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakpointType;
+import com.perl5.lang.perl.idea.run.debugger.protocol.PerlLoadedFileDescriptor;
+import com.perl5.lang.perl.idea.run.debugger.protocol.PerlStackFrameDescriptor;
+import com.perl5.lang.perl.idea.run.debugger.protocol.PerlValueDescriptor;
 import com.pty4j.util.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -45,12 +51,20 @@ import java.io.File;
 import java.util.*;
 import java.util.function.Consumer;
 
+import static base.PerlLightTestCaseBase.SEPARATOR_NEWLINES;
+import static base.PerlLightTestCaseBase.SEPARATOR_NEW_LINE_AFTER;
+
 public class PerlDebuggerTest extends PerlPlatformTestCase {
   private static final int WAIT_TIMEOUT = 10_000;
 
   @Override
   protected String getBaseDataPath() {
     return "testData/debugger";
+  }
+
+  @Override
+  protected String getResultsTestDataPath() {
+    return super.getResultsTestDataPath() + "/answers";
   }
 
   @Override
@@ -109,6 +123,15 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
     setBreakPointCondition(8, "$scalar == 1");
     debugSession.resume();
     assertStoppedAtLine(debugSession, 8);
+  }
+
+  @Test
+  public void testFrameVariables() {
+    XDebugSession debugSession = debugScript("variables", "testscript.pl", null);
+    int line = 21;
+    runToLine(debugSession, line, false);
+    assertStoppedAtLine(debugSession, line);
+    compareFrameWithFile(debugSession.getCurrentStackFrame());
   }
 
   @Test
@@ -315,5 +338,38 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
       }
     }
     fail("There is no breakpoint at line " + line);
+  }
+
+  private void compareFrameWithFile(XStackFrame currentFrame) {
+    assertInstanceOf(currentFrame, PerlStackFrame.class);
+    PerlStackFrameDescriptor frameDescriptor = ((PerlStackFrame)currentFrame).getFrameDescriptor();
+    assertNotNull(frameDescriptor);
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(""), serializeFrameDescriptor(frameDescriptor));
+  }
+
+  private String serializeFrameDescriptor(@NotNull PerlStackFrameDescriptor frameDescriptor) {
+    StringBuilder sb = new StringBuilder();
+    PerlLoadedFileDescriptor fileDescriptor = frameDescriptor.getFileDescriptor();
+    sb.append("Name: ").append(fileDescriptor.getName()).append("; line: ").append(frameDescriptor.getLine()).append("\n");
+    sb.append("Main size: ").append(frameDescriptor.getMainSize()).append(SEPARATOR_NEWLINES);
+    sb.append("Args:").append(SEPARATOR_NEWLINES).append(serializePerlValueDescriptors(frameDescriptor.getArgs()));
+    sb.append("Lexicals:").append(SEPARATOR_NEWLINES).append(serializePerlValueDescriptors(frameDescriptor.getLexicals()));
+    sb.append("Globals:").append(SEPARATOR_NEWLINES).append(serializePerlValueDescriptors(frameDescriptor.getGlobals()));
+    return sb.toString();
+  }
+
+  private String serializePerlValueDescriptors(PerlValueDescriptor @NotNull [] descriptorsArray) {
+    if (descriptorsArray.length == 0) {
+      return "";
+    }
+    List<PerlValueDescriptor> descriptors = new ArrayList<>();
+    ContainerUtil.addAll(descriptors, descriptorsArray);
+    descriptors.sort(Comparator.comparing(PerlValueDescriptor::getName));
+    StringBuilder sb = new StringBuilder();
+    for (PerlValueDescriptor descriptor : descriptors) {
+      sb.append(descriptor.testDebugString()).append("\n");
+    }
+    sb.append(SEPARATOR_NEW_LINE_AFTER);
+    return sb.toString();
   }
 }

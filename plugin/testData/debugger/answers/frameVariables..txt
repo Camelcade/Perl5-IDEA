@@ -1,0 +1,165 @@
+Name: main::something; line: 21
+Main size: 155
+----------
+Args:
+----------
+Lexicals:
+----------
+PerlValueDescriptor{
+	name='$array_ref'
+	type='ARRAY'
+	value='size = 3'
+	ref_depth=1
+	size=3
+	expandable=true
+	blessed=false
+	is_utf=false
+	fileno='null'
+	layers=null
+	tied_with=null}
+PerlValueDescriptor{
+	name='$encoded_string'
+	type='SCALAR'
+	value='"приветик"'
+	ref_depth=0
+	size=0
+	expandable=false
+	blessed=false
+	is_utf=true
+	fileno='null'
+	layers=null
+	tied_with=null}
+PerlValueDescriptor{
+	name='$hash_ref'
+	type='HASH'
+	value='size = 2'
+	ref_depth=1
+	size=2
+	expandable=true
+	blessed=false
+	is_utf=false
+	fileno='null'
+	layers=null
+	tied_with=null}
+PerlValueDescriptor{
+	name='$scalar'
+	type='SCALAR'
+	value='"1"'
+	ref_depth=0
+	size=0
+	expandable=false
+	blessed=false
+	is_utf=false
+	fileno='null'
+	layers=null
+	tied_with=null}
+PerlValueDescriptor{
+	name='$scalar_ref'
+	type='Foo::Bar=SCALAR'
+	value='"приветик"'
+	ref_depth=1
+	size=0
+	expandable=false
+	blessed=true
+	is_utf=true
+	fileno='null'
+	layers=null
+	tied_with=null}
+PerlValueDescriptor{
+	name='$stderr_ref'
+	type='GLOB'
+	value='*main::STDERR'
+	ref_depth=1
+	size=2
+	expandable=true
+	blessed=false
+	is_utf=false
+	fileno='2'
+	layers=PerlLayersDescriptor{input=[PerlLayerDescriptor{name='unix', param='null', flags='2101760'}, PerlLayerDescriptor{name='perlio', param='null', flags='13177344'}], output=[PerlLayerDescriptor{name='unix', param='null', flags='2101760'}, PerlLayerDescriptor{name='perlio', param='null', flags='13177344'}]}
+	tied_with=null}
+PerlValueDescriptor{
+	name='$stdin_ref'
+	type='GLOB'
+	value='*main::STDIN'
+	ref_depth=1
+	size=2
+	expandable=true
+	blessed=false
+	is_utf=false
+	fileno='0'
+	layers=PerlLayersDescriptor{input=[PerlLayerDescriptor{name='unix', param='null', flags='2098176'}, PerlLayerDescriptor{name='perlio', param='null', flags='13108224'}], output=null}
+	tied_with=null}
+PerlValueDescriptor{
+	name='$stdout_ref'
+	type='GLOB'
+	value='*main::STDOUT'
+	ref_depth=1
+	size=2
+	expandable=true
+	blessed=false
+	is_utf=false
+	fileno='1'
+	layers=PerlLayersDescriptor{input=[PerlLayerDescriptor{name='unix', param='null', flags='2101760'}, PerlLayerDescriptor{name='perlio', param='null', flags='13242880'}], output=[PerlLayerDescriptor{name='unix', param='null', flags='2101760'}, PerlLayerDescriptor{name='perlio', param='null', flags='13242880'}]}
+	tied_with=null}
+PerlValueDescriptor{
+	name='$string'
+	type='Foo::Bar=SCALAR'
+	value='"приветик"'
+	ref_depth=0
+	size=0
+	expandable=false
+	blessed=true
+	is_utf=true
+	fileno='null'
+	layers=null
+	tied_with=null}
+PerlValueDescriptor{
+	name='$tied_scalar'
+	type='SCALAR'
+	value='undef'
+	ref_depth=0
+	size=0
+	expandable=false
+	blessed=false
+	is_utf=false
+	fileno='null'
+	layers=null
+	tied_with=PerlValueDescriptor{
+	name='object'
+	type='Tie::StdScalar=SCALAR'
+	value='undef'
+	ref_depth=0
+	size=0
+	expandable=false
+	blessed=true
+	is_utf=false
+	fileno='null'
+	layers=null
+	tied_with=null}}
+PerlValueDescriptor{
+	name='%hash'
+	type='HASH'
+	value='size = 2'
+	ref_depth=0
+	size=2
+	expandable=true
+	blessed=false
+	is_utf=false
+	fileno='null'
+	layers=null
+	tied_with=null}
+PerlValueDescriptor{
+	name='@array'
+	type='ARRAY'
+	value='size = 3'
+	ref_depth=0
+	size=3
+	expandable=true
+	blessed=false
+	is_utf=false
+	fileno='null'
+	layers=null
+	tied_with=null}
+----------
+Globals:
+----------

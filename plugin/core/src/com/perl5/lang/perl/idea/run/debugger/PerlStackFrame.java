@@ -38,6 +38,7 @@ import com.perl5.lang.perl.idea.run.debugger.values.PerlXNamedValue;
 import com.perl5.lang.perl.idea.run.debugger.values.PerlXValueGroup;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.TestOnly;
 
 import java.io.File;
 
@@ -134,6 +135,11 @@ public class PerlStackFrame extends XStackFrame {
 
   public PerlExecutionStack getPerlExecutionStack() {
     return myPerlExecutionStack;
+  }
+
+  @TestOnly
+  public PerlStackFrameDescriptor getFrameDescriptor() {
+    return myFrameDescriptor;
   }
 
   @Override

@@ -32,6 +32,7 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.actionSystem.LangDataKeys;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
@@ -75,6 +76,7 @@ import java.util.concurrent.TimeUnit;
 
 @RunWith(JUnit4.class)
 public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
+  protected static final Logger LOG = Logger.getInstance(PerlPlatformTestCase.class);
   private static final String PERLBREW_HOME = "~/perl5/perlbrew/bin/perlbrew";
   private static final String PERL_526 = "perl-5.26.2";
   private static final String MOJO_LIB_SEPARATOR = "@";
@@ -303,5 +305,25 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
       }
     });
     return Pair.create(executionEnvironment, runContentDescriptor);
+  }
+
+  protected String getResultsTestDataPath() {
+    return getTestDataPath();
+  }
+
+  public String getTestResultsFilePath(@NotNull String appendix) {
+    return getResultsTestDataPath() + "/" + computeAnswerFileName(appendix);
+  }
+
+  protected @NotNull String computeAnswerFileName(@NotNull String appendix) {
+    return computeAnswerFileNameWithoutExtension(appendix) + "." + getResultsFileExtension();
+  }
+
+  protected @NotNull String computeAnswerFileNameWithoutExtension(@NotNull String appendix) {
+    return getTestName(true) + appendix;
+  }
+
+  protected @NotNull String getResultsFileExtension() {
+    return ".txt";
   }
 }

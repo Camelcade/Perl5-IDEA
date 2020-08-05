@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.run.debugger.protocol;
 
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.TestOnly;
 
 
 public class PerlValueDescriptor {
@@ -110,6 +111,23 @@ public class PerlValueDescriptor {
            ", fileno='" + fileno + '\'' +
            ", layers=" + layers +
            ", tied_with=" + tied_with +
+           '}';
+  }
+
+  @TestOnly
+  public String testDebugString() {
+    return "PerlValueDescriptor{" +
+           "\n\tname='" + name + '\'' +
+           "\n\ttype='" + type.replaceAll("\\(.+\\)", "") + '\'' +
+           "\n\tvalue='" + value + '\'' +
+           "\n\tref_depth=" + ref_depth +
+           "\n\tsize=" + size +
+           "\n\texpandable=" + expandable +
+           "\n\tblessed=" + blessed +
+           "\n\tis_utf=" + is_utf +
+           "\n\tfileno='" + fileno + '\'' +
+           "\n\tlayers=" + layers +
+           "\n\ttied_with=" + (tied_with == null ? null : tied_with.testDebugString()) +
            '}';
   }
 }

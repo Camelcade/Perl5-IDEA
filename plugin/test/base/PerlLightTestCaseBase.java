@@ -240,10 +240,10 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   private PerlSharedSettings mySharedSettings;
   private PerlLocalSettings myLocalSettings;
   private PerlInjectionMarkersService myInjectionMarkersService;
-  private static final String SEPARATOR = "----------";
-  protected static final String SEPARATOR_NEW_LINE_BEFORE = "\n" + SEPARATOR;
-  protected static final String SEPARATOR_NEW_LINE_AFTER = SEPARATOR + "\n";
-  protected static final String SEPARATOR_NEWLINES = SEPARATOR_NEW_LINE_BEFORE + "\n";
+  public static final String SEPARATOR = "----------";
+  public static final String SEPARATOR_NEW_LINE_BEFORE = "\n" + SEPARATOR;
+  public static final String SEPARATOR_NEW_LINE_AFTER = SEPARATOR + "\n";
+  public static final String SEPARATOR_NEWLINES = SEPARATOR_NEW_LINE_BEFORE + "\n";
   private final Disposable myPerlLightTestCaseDisposable = Disposer.newDisposable();
 
   private static final String COMPLETE_PREFIX = "<complete ";
