@@ -39,6 +39,11 @@ intellij {
   intellij.plugins = ["PsiViewer:$psiViewerVersion", intelliLangPlugin, 'copyright', 'coverage', 'java']
 }
 
+prepareTestingSandbox{
+  inputs.dir('scripts')
+  outputs.dir("$it.destinationDir/$intellij.pluginName/perl/")
+}
+
 prepareSandbox {
   inputs.dir('scripts')
   outputs.dir("$it.destinationDir/$intellij.pluginName/perl/")
@@ -46,6 +51,13 @@ prepareSandbox {
 
 project.afterEvaluate {
   prepareSandbox.doLast {
+    def targetPath = "$it.destinationDir/$intellij.pluginName/perl/"
+    copy {
+      from 'scripts'
+      into targetPath
+    }
+  }
+  prepareTestingSandbox.doLast {
     def targetPath = "$it.destinationDir/$intellij.pluginName/perl/"
     copy {
       from 'scripts'

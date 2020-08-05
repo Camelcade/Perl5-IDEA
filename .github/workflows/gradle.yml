@@ -25,7 +25,7 @@ jobs:
         uses: actions/cache@v2
         env:
           cache-name: cache-perlbrew
-          cache-version: 2
+          cache-version: 3
         with:
           path: |
             ~/perl5
@@ -42,12 +42,13 @@ jobs:
       - name: Create test_mojo library and install mojo
         run: |
           source ~/perl5/perlbrew/etc/bashrc
+          perlbrew exec -q --with perl-5.26.2 cpan App::cpanminus
           perlbrew lib create perl-5.26.2@test_mojo || true
-          perlbrew exec -q --with perl-5.26.2@test_mojo cpan App::cpanminus
           perlbrew exec -q --with perl-5.26.2@test_mojo cpanm --notest Mojolicious
           perlbrew lib create perl-5.26.2@test_debug || true
-          perlbrew exec -q --with perl-5.26.2@test_debug cpan App::cpanminus
           perlbrew exec -q --with perl-5.26.2@test_debug cpanm --notest Devel::Camelcadedb
+          perlbrew lib create perl-5.26.2@test_coverage || true
+          perlbrew exec -q --with perl-5.26.2@test_coverage cpanm --notest Devel::Cover JSON
       - name: Cache gradle data
         uses: actions/cache@v2
         env:

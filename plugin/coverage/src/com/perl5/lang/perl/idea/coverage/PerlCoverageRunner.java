@@ -90,11 +90,13 @@ public class PerlCoverageRunner extends CoverageRunner {
 
     PerlCommandLine perlCommandLine = ReadAction.compute(() -> {
       if (project.isDisposed()) {
+        LOG.debug("Project disposed");
         return null;
       }
 
       VirtualFile coverFile = PerlRunUtil.findLibraryScriptWithNotification(effectiveSdk, project, COVER, COVER_LIB);
       if (coverFile == null) {
+        LOG.warn("No `cover` script found in " + effectiveSdk);
         return null;
       }
 
@@ -210,6 +212,7 @@ public class PerlCoverageRunner extends CoverageRunner {
   private static void showError(@NotNull Project project, @NotNull String message) {
     ReadAction.run(() -> {
       if (!project.isDisposed()) {
+        LOG.warn("Error loading coverage: " + message);
         Notifications.Bus.notify(
           new Notification(
             PerlBundle.message("perl.coverage.loading.error"),

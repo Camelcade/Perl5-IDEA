@@ -1,0 +1,21 @@
+File: testscript.pl
+----------
+sub something {
+2 |     my $scalar = 1;
+2 |     if ($scalar > 2) {
+0 |         print "false";
+    }
+    elsif ($scalar < 2) {
+2 |         print 'true';
+    }
+2 |     print 'done';
+}
+
+BEGIN{
+2 |     print 'begin block';
+}
+
+2 | print 42;
+2 | something();
+
+----------

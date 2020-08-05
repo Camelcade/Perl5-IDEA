@@ -324,6 +324,6 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
   }
 
   protected @NotNull String getResultsFileExtension() {
-    return ".txt";
+    return "txt";
   }
 }

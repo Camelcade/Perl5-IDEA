@@ -63,7 +63,7 @@ public class PerlPluginUtil {
   public static @NotNull String getPluginRoot() {
     IdeaPluginDescriptor plugin = PerlPluginUtil.getPlugin();
     try {
-      return FileUtil.toSystemIndependentName(plugin.getPath().getCanonicalPath());
+      return FileUtil.toSystemIndependentName(plugin.getPluginPath().toFile().getCanonicalPath());
     }
     catch (IOException e) {
       throw new RuntimeException(e);
