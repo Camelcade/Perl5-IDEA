@@ -1,0 +1,7 @@
+isa;
+isa();
+isa($a,$b);
+say unless isa $a, $b;
+say unless $a isa $b;
+if( isa $a, $b){}
+if( $a isa $b){}
