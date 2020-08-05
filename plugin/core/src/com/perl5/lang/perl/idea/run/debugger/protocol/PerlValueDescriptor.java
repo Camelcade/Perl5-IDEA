@@ -94,4 +94,22 @@ public class PerlValueDescriptor {
   public boolean isExpandableNode() {
     return isExpandable() || getLayers() != null || getTiedWith() != null || getFileno() != null;
   }
+
+  @Override
+  public String toString() {
+    return "PerlValueDescriptor{" +
+           "name='" + name + '\'' +
+           ", type='" + type + '\'' +
+           ", value='" + value + '\'' +
+           ", ref_depth=" + ref_depth +
+           ", key='" + key + '\'' +
+           ", size=" + size +
+           ", expandable=" + expandable +
+           ", blessed=" + blessed +
+           ", is_utf=" + is_utf +
+           ", fileno='" + fileno + '\'' +
+           ", layers=" + layers +
+           ", tied_with=" + tied_with +
+           '}';
+  }
 }

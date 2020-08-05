@@ -17,7 +17,6 @@
 package debugger;
 
 import base.PerlPlatformTestCase;
-import categories.Heavy;
 import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.execution.executors.DefaultDebugExecutor;
 import com.intellij.execution.runners.ExecutionEnvironment;
@@ -28,20 +27,24 @@ import com.intellij.xdebugger.XDebugSession;
 import com.intellij.xdebugger.XDebuggerManager;
 import com.intellij.xdebugger.XDebuggerUtil;
 import com.intellij.xdebugger.XSourcePosition;
+import com.intellij.xdebugger.breakpoints.XBreakpointManager;
+import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
+import com.intellij.xdebugger.frame.XExecutionStack;
+import com.intellij.xdebugger.frame.XStackFrame;
 import com.intellij.xdebugger.impl.XSourcePositionImpl;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugOptionsSets;
+import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakpointProperties;
+import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakpointType;
 import com.pty4j.util.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 
 import java.io.File;
-import java.util.Objects;
+import java.util.*;
 import java.util.function.Consumer;
 
-@Category(Heavy.class)
 public class PerlDebuggerTest extends PerlPlatformTestCase {
   private static final int WAIT_TIMEOUT = 10_000;
 
@@ -95,6 +98,40 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
     setBreakPointInCurrentFile(debugSession, 4);
     debugSession.stepOver(true);
     assertStoppedAtLine(debugSession, 18);
+  }
+
+  @Test
+  public void testConditionalBreakpoint() {
+    XDebugSession debugSession = debugTestScript();
+    setBreakPointInCurrentFile(debugSession, 7);
+    setBreakPointInCurrentFile(debugSession, 8);
+    setBreakPointCondition(7, "$scalar == 42");
+    setBreakPointCondition(8, "$scalar == 1");
+    debugSession.resume();
+    assertStoppedAtLine(debugSession, 8);
+  }
+
+  @Test
+  public void testStackFrames() {
+    XDebugSession debugSession = debugTestScript();
+    runToLine(debugSession, 8, false);
+    assertStoppedAtLine(debugSession, 8);
+    List<XExecutionStack> stacks = Arrays.asList(debugSession.getSuspendContext().getExecutionStacks());
+    assertEquals("Expected 1 stack, got: " + stacks, 1, stacks.size());
+    XExecutionStack mainStack = stacks.get(0);
+    List<XStackFrame> frames = new ArrayList<>();
+    mainStack.computeStackFrames(0, new XExecutionStack.XStackFrameContainer() {
+      @Override
+      public void addStackFrames(@NotNull List<? extends XStackFrame> stackFrames, boolean last) {
+        frames.addAll(stackFrames);
+      }
+
+      @Override
+      public void errorOccurred(@NotNull String errorMessage) {
+        fail("Unable to compte frames: " + errorMessage);
+      }
+    });
+    assertEquals("Got: " + frames, 2, frames.size());
   }
 
   @Test
@@ -176,6 +213,7 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
   }
 
   private @NotNull VirtualFile getCurrentVirtualFile(XDebugSession debugSession) {
+    waitForDebugger(debugSession);
     return Objects.requireNonNull(debugSession.getCurrentPosition()).getFile();
   }
 
@@ -232,6 +270,7 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
   }
 
   private void setBreakPointInCurrentFile(@NotNull XDebugSession debugSession, int line) {
+    waitForDebugger(debugSession);
     XDebuggerUtil.getInstance().toggleLineBreakpoint(getProject(), getCurrentVirtualFile(debugSession), line);
   }
 
@@ -258,5 +297,23 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
         throw new RuntimeException(e);
       }
     }
+  }
+
+  private @NotNull Collection<? extends XLineBreakpoint<PerlLineBreakpointProperties>> getLineBreakpoints() {
+    return getBreakPointManager().getBreakpoints(PerlLineBreakpointType.class);
+  }
+
+  private @NotNull XBreakpointManager getBreakPointManager() {
+    return XDebuggerManager.getInstance(getProject()).getBreakpointManager();
+  }
+
+  private void setBreakPointCondition(int line, String condition) {
+    for (XLineBreakpoint<PerlLineBreakpointProperties> breakpoint : getLineBreakpoints()) {
+      if (breakpoint.getLine() == line) {
+        breakpoint.setCondition(condition);
+        return;
+      }
+    }
+    fail("There is no breakpoint at line " + line);
   }
 }

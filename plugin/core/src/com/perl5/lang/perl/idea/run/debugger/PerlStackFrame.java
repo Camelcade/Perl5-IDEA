@@ -166,4 +166,12 @@ public class PerlStackFrame extends XStackFrame {
       }
     };
   }
+
+  @Override
+  public String toString() {
+    return "PerlStackFrame{" +
+           "myFrameDescriptor=" + myFrameDescriptor +
+           ", myVirtualFile=" + myVirtualFile.getValue() +
+           '}';
+  }
 }

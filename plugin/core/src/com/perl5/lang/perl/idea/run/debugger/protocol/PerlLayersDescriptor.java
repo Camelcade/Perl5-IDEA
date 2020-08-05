@@ -31,4 +31,12 @@ public class PerlLayersDescriptor {
   public @Nullable List<PerlLayerDescriptor> getOutput() {
     return output;
   }
+
+  @Override
+  public String toString() {
+    return "PerlLayersDescriptor{" +
+           "input=" + input +
+           ", output=" + output +
+           '}';
+  }
 }

@@ -108,4 +108,13 @@ public class PerlLayerDescriptor {
     }
     return name;
   }
+
+  @Override
+  public String toString() {
+    return "PerlLayerDescriptor{" +
+           "name='" + name + '\'' +
+           ", param='" + param + '\'' +
+           ", flags='" + flags + '\'' +
+           '}';
+  }
 }

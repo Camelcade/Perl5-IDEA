@@ -17,6 +17,8 @@
 package com.perl5.lang.perl.idea.run.debugger.protocol;
 
 
+import java.util.Arrays;
+
 public class PerlStackFrameDescriptor {
   public static final transient String EVAL_PREFIX = "(eval ";
 
@@ -49,5 +51,17 @@ public class PerlStackFrameDescriptor {
 
   public PerlValueDescriptor[] getArgs() {
     return args;
+  }
+
+  @Override
+  public String toString() {
+    return "PerlStackFrameDescriptor{" +
+           "file=" + file +
+           ", line=" + line +
+           ", main_size=" + main_size +
+           ", lexicals=" + Arrays.toString(lexicals) +
+           ", globals=" + Arrays.toString(globals) +
+           ", args=" + Arrays.toString(args) +
+           '}';
   }
 }

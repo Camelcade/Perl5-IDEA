@@ -62,4 +62,12 @@ public class PerlLoadedFileDescriptor {
   public int hashCode() {
     return getPath().hashCode();
   }
+
+  @Override
+  public String toString() {
+    return "PerlLoadedFileDescriptor{" +
+           "path='" + path + '\'' +
+           ", name='" + name + '\'' +
+           '}';
+  }
 }
