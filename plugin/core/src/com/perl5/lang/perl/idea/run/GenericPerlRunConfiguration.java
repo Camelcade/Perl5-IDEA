@@ -28,6 +28,7 @@ import com.intellij.execution.executors.DefaultDebugExecutor;
 import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.ui.ConsoleView;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.project.Project;
@@ -52,6 +53,8 @@ import com.perl5.lang.perl.idea.run.debugger.PerlDebugOptions;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugProcess;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugProfileState;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebuggableRunConfiguration;
+import com.perl5.lang.perl.idea.run.remote.PerlRunConsole;
+import com.perl5.lang.perl.idea.sdk.host.PerlConsoleView;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jdom.Element;
@@ -457,7 +460,10 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
 
   public @NotNull ConsoleView createConsole(@NotNull PerlRunProfileState runProfileState) throws ExecutionException {
     ExecutionEnvironment executionEnvironment = runProfileState.getEnvironment();
-    return new PerlTerminalExecutionConsole(executionEnvironment.getProject()).withHostData(PerlHostData.from(getEffectiveSdk()));
+    PerlConsoleView console = ApplicationManager.getApplication().isUnitTestMode() ?
+                              new PerlRunConsole(runProfileState.getEnvironment().getProject()) :
+                              new PerlTerminalExecutionConsole(executionEnvironment.getProject());
+    return console.withHostData(PerlHostData.from(getEffectiveSdk()));
   }
 
   /**
