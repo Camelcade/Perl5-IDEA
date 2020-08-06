@@ -63,13 +63,6 @@ public class PerlCoverageTest extends PerlPlatformTestCase {
     return super.getResultsTestDataPath() + "/answers";
   }
 
-  @Override
-  protected void setUp() throws Exception {
-    super.setUp();
-    addPerlBrewSdk(getPerl526DistibutionId("test_coverage"));
-  }
-
-
   @Test
   public void testCoverageRun() {
     runScriptWithCoverage("simple", "testscript.pl");

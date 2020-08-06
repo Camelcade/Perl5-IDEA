@@ -70,12 +70,6 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
     return super.getResultsTestDataPath() + "/answers";
   }
 
-  @Override
-  protected void setUp() throws Exception {
-    super.setUp();
-    addPerlBrewSdk(getPerl526DistibutionId("test_debug"));
-  }
-
   @Test
   public void testStopAtBreakPoint() {
     XDebugSession debugSession = debugTestScript(it -> {

@@ -46,12 +46,6 @@ public class MojoProjectTest extends PerlPlatformTestCase {
     assumePerlbrewAvailable();
   }
 
-  @Override
-  protected void setUp() throws Exception {
-    super.setUp();
-    addPerlBrewSdk(getPerl526DistibutionId("test_mojo"));
-  }
-
   @Test
   public void testGenerateAppAction() {
     assertMojoAvailable();

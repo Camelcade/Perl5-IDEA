@@ -43,12 +43,8 @@ jobs:
         run: |
           source ~/perl5/perlbrew/etc/bashrc
           perlbrew exec -q --with perl-5.26.2 cpan App::cpanminus
-          perlbrew lib create perl-5.26.2@test_mojo || true
-          perlbrew exec -q --with perl-5.26.2@test_mojo cpanm --notest Mojolicious
-          perlbrew lib create perl-5.26.2@test_debug || true
-          perlbrew exec -q --with perl-5.26.2@test_debug cpanm --notest Devel::Camelcadedb
-          perlbrew lib create perl-5.26.2@test_coverage || true
-          perlbrew exec -q --with perl-5.26.2@test_coverage cpanm --notest Devel::Cover JSON
+          perlbrew lib create perl-5.26.2@plugin_test || true
+          perlbrew exec -q --with perl-5.26.2@plugin_test cpanm --notest Mojolicious Devel::Camelcadedb Devel::Cover JSON
       - name: Cache gradle data
         uses: actions/cache@v2
         env:

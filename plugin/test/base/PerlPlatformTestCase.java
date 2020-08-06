@@ -93,6 +93,12 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
   private final Disposable myPerlLightTestCaseDisposable = Disposer.newDisposable();
 
   @Override
+  protected void setUp() throws Exception {
+    super.setUp();
+    addPerlBrewSdk(getPerl526DistibutionId("plugin_test"));
+  }
+
+  @Override
   protected @NotNull Module doCreateRealModule(@NotNull String moduleName) {
     Module module = super.doCreateRealModule(moduleName);
     try {
