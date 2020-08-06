@@ -90,7 +90,7 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
         runBare();
       }
     };
-  private final Disposable myPerlLightTestCaseDisposable = Disposer.newDisposable();
+  protected final Disposable myPerlLightTestCaseDisposable = Disposer.newDisposable();
 
   @Override
   protected void setUp() throws Exception {

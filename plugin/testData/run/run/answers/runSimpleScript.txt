@@ -1,0 +1,8 @@
+Exit code: 0
+----------
+Stdout: this is main body
+This is a sub
+This is an oter sub
+
+----------
+Stderr: 
