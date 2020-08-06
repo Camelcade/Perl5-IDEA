@@ -18,12 +18,17 @@ buildscript {
   repositories {
     maven { url 'http://dl.bintray.com/jetbrains/intellij-plugin-service' }
   }
+  dependencies{
+    classpath 'org.codehaus.groovy.modules.http-builder:http-builder:0.7.1'
+    classpath 'org.apache.httpcomponents:httpmime:4.5.11'
+    classpath 'org.eclipse.jgit:org.eclipse.jgit:5.5.1.201910021850-r'
+    classpath files("lib/coveralls-gradle-plugin-2020.1.jar")
+  }
 }
 
 plugins {
   id "org.jetbrains.intellij" version "$intellijGradlePluginVersion"
   id 'jacoco'
-  id 'com.github.kt3k.coveralls' version "$coverallsGradlePluginVersion"
   id 'org.jetbrains.grammarkit' version "$grammarKitGradlePluginVersion"
   id 'idea'
 }
@@ -192,6 +197,7 @@ task jacocoRootReport(type: JacocoReport, group: 'Coverage reports') {
   }
 }
 
+apply plugin: 'com.github.kt3k.coveralls'
 coveralls{
   jacocoReportPath = "$buildDir/reports/jacoco/jacocoRootReport/jacocoRootReport.xml"
 }
@@ -199,7 +205,6 @@ coveralls{
 tasks.coveralls {
   group = 'Coverage reports'
   description = 'Uploads the aggregated coverage report to Coveralls'
-
   dependsOn jacocoRootReport
 }
 
