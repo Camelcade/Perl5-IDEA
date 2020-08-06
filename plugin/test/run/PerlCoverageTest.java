@@ -77,6 +77,10 @@ public class PerlCoverageTest extends PerlPlatformTestCase {
   }
 
   private void compareCoverageSuiteWithFile() {
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(""), serializeProjectData(getProjectCoverageData()));
+  }
+
+  private @NotNull ProjectData getProjectCoverageData() {
     CoverageDataManager coverageDataManager = CoverageDataManager.getInstance(getProject());
     CoverageSuite[] suites = coverageDataManager.getSuites();
     assertSize(1, suites);
@@ -84,6 +88,10 @@ public class PerlCoverageTest extends PerlPlatformTestCase {
     assertInstanceOf(coverageSuite, PerlCoverageSuite.class);
     ProjectData projectData = coverageSuite.getCoverageData(coverageDataManager);
     assertNotNull(projectData);
+    return projectData;
+  }
+
+  private @NotNull String serializeProjectData(@NotNull ProjectData projectData) {
     Map<String, ClassData> filesData = projectData.getClasses();
     List<String> filePaths = new ArrayList<>(filesData.keySet());
     filePaths.sort(Comparator.naturalOrder());
@@ -91,27 +99,36 @@ public class PerlCoverageTest extends PerlPlatformTestCase {
     for (String filePath : filePaths) {
       ClassData fileData = filesData.get(filePath);
       assertNotNull(fileData);
-      VirtualFile coveredFile = VfsUtil.findFileByIoFile(new File(filePath), true);
-      assertNotNull(coveredFile);
-      PsiFile coveredPsiFile = PsiManager.getInstance(getProject()).findFile(coveredFile);
-      assertNotNull(coveredPsiFile);
-      Document coveredDocument = PsiDocumentManager.getInstance(getProject()).getDocument(coveredPsiFile);
-      assertNotNull(coveredDocument);
-      sb.append("File: ").append(coveredFile.getName()).append(PerlLightTestCaseBase.SEPARATOR_NEWLINES);
-
-      for (Object lineData : fileData.getLines()) {
-        if (lineData == null) {
-          continue;
-        }
-        assertInstanceOf(lineData, LineData.class);
-        int status = ((LineData)lineData).getStatus();
-        int lineNumber = ((LineData)lineData).getLineNumber() - 1;
-        int offset = coveredDocument.getLineStartOffset(lineNumber);
-        WriteCommandAction.runWriteCommandAction(getProject(), () -> coveredDocument.insertString(offset, status + " | "));
-      }
-      sb.append(coveredDocument.getText()).append(PerlLightTestCaseBase.SEPARATOR_NEWLINES);
+      sb.append(serializeFileData(filePath, fileData));
     }
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(""), sb.toString());
+    return sb.toString();
+  }
+
+  private @NotNull String serializeFileData(@NotNull String filePath, @NotNull ClassData fileData) {
+    VirtualFile coveredFile = VfsUtil.findFileByIoFile(new File(filePath), true);
+    assertNotNull(coveredFile);
+    PsiFile coveredPsiFile = PsiManager.getInstance(getProject()).findFile(coveredFile);
+    assertNotNull(coveredPsiFile);
+    Document coveredDocument = PsiDocumentManager.getInstance(getProject()).getDocument(coveredPsiFile);
+    assertNotNull(coveredDocument);
+    applyFileDataToDocument(fileData, coveredDocument);
+    return "File: " + coveredFile.getName() +
+           PerlLightTestCaseBase.SEPARATOR_NEWLINES +
+           coveredDocument.getText() +
+           PerlLightTestCaseBase.SEPARATOR_NEWLINES;
+  }
+
+  private void applyFileDataToDocument(@NotNull ClassData fileData, @NotNull Document coveredDocument) {
+    for (Object lineData : fileData.getLines()) {
+      if (lineData == null) {
+        continue;
+      }
+      assertInstanceOf(lineData, LineData.class);
+      int status = ((LineData)lineData).getStatus();
+      int lineNumber = ((LineData)lineData).getLineNumber() - 1;
+      int offset = coveredDocument.getLineStartOffset(lineNumber);
+      WriteCommandAction.runWriteCommandAction(getProject(), () -> coveredDocument.insertString(offset, status + " | "));
+    }
   }
 
   private void runScriptWithCoverage(@NotNull String directory, @NotNull String script) {
