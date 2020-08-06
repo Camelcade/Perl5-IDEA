@@ -24,12 +24,15 @@ import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.execution.process.ProcessAdapter;
 import com.intellij.execution.process.ProcessEvent;
 import com.intellij.execution.process.ProcessHandler;
+import com.intellij.execution.process.ProcessOutput;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.runners.ProgramRunner;
+import com.intellij.execution.testframework.sm.runner.SMTestProxy;
 import com.intellij.execution.ui.RunContentDescriptor;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
+import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.actionSystem.LangDataKeys;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
@@ -45,7 +48,7 @@ import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiManager;
 import com.intellij.testFramework.HeavyPlatformTestCase;
 import com.intellij.testFramework.TestActionEvent;
@@ -73,9 +76,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 
 @RunWith(JUnit4.class)
 public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
+  private static final int MAX_RUNNING_TIME = 10_000;
   protected static final Logger LOG = Logger.getInstance(PerlPlatformTestCase.class);
   private static final String PERLBREW_HOME = "~/perl5/perlbrew/bin/perlbrew";
   private static final String PERL_526 = "perl-5.26.2";
@@ -239,18 +244,46 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
     return file;
   }
 
-  protected @NotNull GenericPerlRunConfiguration createRunConfiguration(@NotNull String relativePath) {
-    VirtualFile scriptFile = getModuleFile(relativePath);
-    PsiFile scriptPsiFile = PsiManager.getInstance(getProject()).findFile(scriptFile);
-    assertNotNull(scriptPsiFile);
-    ConfigurationContext configurationContext = new ConfigurationContext(scriptPsiFile);
-    List<ConfigurationFromContext> configurationsFromContext = configurationContext.getConfigurationsFromContext();
-    assertNotNull(configurationsFromContext);
+  protected @NotNull GenericPerlRunConfiguration createOnlyRunConfiguration(@NotNull String relativePath) {
+    List<ConfigurationFromContext> configurationsFromContext = getRunConfigurationsFromFileContext(relativePath);
     assertSize(1, configurationsFromContext);
     ConfigurationFromContext configurationFromContext = configurationsFromContext.get(0);
     RunConfiguration runConfiguration = configurationFromContext.getConfiguration();
     assertInstanceOf(runConfiguration, GenericPerlRunConfiguration.class);
     return (GenericPerlRunConfiguration)runConfiguration;
+  }
+
+  protected @NotNull List<ConfigurationFromContext> getRunConfigurationsFromFileContext(@NotNull String relativePath) {
+    VirtualFile virtualFile = getModuleFile(relativePath);
+    PsiElement psiElement = getPsiElement(virtualFile);
+    ConfigurationContext configurationContext = ConfigurationContext.getFromContext(createDataContext(
+      it -> LangDataKeys.PSI_ELEMENT_ARRAY.is(it) ? new PsiElement[]{psiElement} : null));
+    List<ConfigurationFromContext> configurationsFromContext = configurationContext.getConfigurationsFromContext();
+    assertNotNull(configurationsFromContext);
+    return configurationsFromContext;
+  }
+
+  protected @NotNull PsiElement getPsiElement(VirtualFile virtualFile) {
+    PsiManager psiManager = PsiManager.getInstance(getProject());
+    PsiElement psiElement = virtualFile.isDirectory() ? psiManager.findDirectory(virtualFile) : psiManager.findFile(virtualFile);
+    assertNotNull(psiElement);
+    return psiElement;
+  }
+
+  private @NotNull DataContext createDataContext() {
+    return createDataContext(it -> null);
+  }
+
+  protected @NotNull DataContext createDataContext(@NotNull Function<String, Object> additionalData) {
+    return dataId -> {
+      if (CommonDataKeys.PROJECT.is(dataId)) {
+        return getProject();
+      }
+      else if (LangDataKeys.MODULE.is(dataId)) {
+        return getModule();
+      }
+      return additionalData.apply(dataId);
+    };
   }
 
   /**
@@ -278,32 +311,32 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
     ProgramRunnerUtil.executeConfigurationAsync(executionEnvironment, false, false, descriptor -> {
       LOG.debug("Process started");
       refRunContentDescriptor.set(descriptor);
+      ProcessHandler processHandler = descriptor.getProcessHandler();
+      assertNotNull(processHandler);
+      processHandler.addProcessListener(new ProcessAdapter() {
+        @Override
+        public void startNotified(@NotNull ProcessEvent event) {
+          LOG.debug("Process notified");
+        }
+
+        @Override
+        public void processTerminated(@NotNull ProcessEvent event) {
+          LOG.debug("Process terminated with " + event.getExitCode());
+        }
+
+        @Override
+        public void onTextAvailable(@NotNull ProcessEvent event, @NotNull Key outputType) {
+          LOG.debug(outputType + ": " + event.getText());
+        }
+      });
       latch.countDown();
     });
-    latch.await(60, TimeUnit.SECONDS);
+    if (!latch.await(60, TimeUnit.SECONDS)) {
+      fail("Process failed to start");
+    }
     RunContentDescriptor runContentDescriptor = refRunContentDescriptor.get();
     ProcessHandler processHandler = runContentDescriptor.getProcessHandler();
-    if (processHandler == null) {
-      fail("No process handler found");
-    }
-
-    processHandler.addProcessListener(new ProcessAdapter() {
-      @Override
-      public void startNotified(@NotNull ProcessEvent event) {
-        LOG.debug("Process started");
-      }
-
-      @Override
-      public void processTerminated(@NotNull ProcessEvent event) {
-        LOG.debug("Process terminated with " + event.getExitCode());
-      }
-
-      @Override
-      public void onTextAvailable(@NotNull ProcessEvent event, @NotNull Key outputType) {
-        LOG.debug(outputType + ": " + event.getText());
-      }
-    });
-
+    assertNotNull(processHandler);
     Disposer.register(myPerlLightTestCaseDisposable, runContentDescriptor);
     Disposer.register(myPerlLightTestCaseDisposable, () -> {
       if (!processHandler.isProcessTerminated()) {
@@ -331,5 +364,64 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
 
   protected @NotNull String getResultsFileExtension() {
     return "txt";
+  }
+
+  protected void waitForProcess(ProcessHandler processHandler) {
+    if (!processHandler.waitFor(MAX_RUNNING_TIME)) {
+      fail("Process failed to finish in time");
+    }
+  }
+
+  protected @NotNull String serializeOutput(@Nullable ProcessOutput processOutput) {
+    if (processOutput == null) {
+      return "null";
+    }
+    return "Exit code: " + processOutput.getExitCode() + PerlLightTestCaseBase.SEPARATOR_NEWLINES +
+           "Stdout: " + processOutput.getStdout() + PerlLightTestCaseBase.SEPARATOR_NEWLINES +
+           "Stderr: " + processOutput.getStderr();
+  }
+
+  protected @NotNull String serializeTestNode(@Nullable SMTestProxy node, @NotNull String indent) {
+    if (node == null) {
+      return "null";
+    }
+    StringBuilder sb = new StringBuilder(indent).append(node.getName());
+    String state;
+    if (node.isIgnored()) {
+      state = "ignored";
+    }
+    else if (node.isInterrupted()) {
+      state = "interrupted";
+    }
+    else if (node.isPassed()) {
+      state = "passed";
+    }
+    else {
+      state = "failed";
+    }
+    sb.append(" (").append(state);
+    if (node.isSuite()) {
+      sb.append(" suite");
+    }
+    else {
+      sb.append(" test");
+    }
+    sb.append(")");
+    String stacktrace = node.getStacktrace();
+    if (StringUtil.isNotEmpty(stacktrace)) {
+      sb.append(PerlLightTestCaseBase.SEPARATOR_NEWLINES)
+        .append(stacktrace.replaceAll("/tmp/.+?/", "/DATA_PATH/"))
+        .append(PerlLightTestCaseBase.SEPARATOR_NEWLINES);
+    }
+    else {
+      sb.append("\n");
+    }
+
+
+    for (SMTestProxy child : node.getChildren()) {
+      sb.append(StringUtil.trimEnd(serializeTestNode(child, "  " + indent), '\n')).append("\n");
+    }
+
+    return sb.toString();
   }
 }

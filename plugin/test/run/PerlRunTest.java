@@ -16,28 +16,25 @@
 
 package run;
 
-import base.PerlLightTestCaseBase;
 import base.PerlPlatformTestCase;
 import categories.Heavy;
 import com.intellij.execution.executors.DefaultRunExecutor;
 import com.intellij.execution.process.CapturingProcessAdapter;
 import com.intellij.execution.process.ProcessHandler;
-import com.intellij.execution.process.ProcessOutput;
 import com.intellij.execution.runners.ExecutionEnvironment;
+import com.intellij.execution.testframework.sm.runner.ui.SMTestRunnerResultsForm;
+import com.intellij.execution.ui.ExecutionConsole;
 import com.intellij.execution.ui.RunContentDescriptor;
 import com.intellij.openapi.util.Disposer;
 import com.intellij.testFramework.UsefulTestCase;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
+import com.perl5.lang.perl.idea.run.prove.PerlSMTRunnerConsoleView;
 import com.pty4j.util.Pair;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
 @Category(Heavy.class)
 public class PerlRunTest extends PerlPlatformTestCase {
-  private static final int MAX_RUNNING_TIME = 10_000;
-
   @Override
   protected String getBaseDataPath() {
     return "testData/run/run";
@@ -49,9 +46,30 @@ public class PerlRunTest extends PerlPlatformTestCase {
   }
 
   @Test
+  public void testRunTestDir() {
+    copyDirToModule("testMore");
+    GenericPerlRunConfiguration runConfiguration = createOnlyRunConfiguration("t");
+    Pair<ExecutionEnvironment, RunContentDescriptor> execResult;
+    try {
+      execResult = executeConfiguration(runConfiguration, DefaultRunExecutor.EXECUTOR_ID);
+    }
+    catch (InterruptedException e) {
+      throw new RuntimeException(e);
+    }
+    RunContentDescriptor contentDescriptor = execResult.second;
+    ProcessHandler processHandler = contentDescriptor.getProcessHandler();
+    assertNotNull(processHandler);
+    waitForProcess(processHandler);
+    ExecutionConsole executionConsole = contentDescriptor.getExecutionConsole();
+    assertInstanceOf(executionConsole, PerlSMTRunnerConsoleView.class);
+    SMTestRunnerResultsForm resultsViewer = ((PerlSMTRunnerConsoleView)executionConsole).getResultsViewer();
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(""), serializeTestNode(resultsViewer.getTestsRootNode(), ""));
+  }
+
+  @Test
   public void testRunSimpleScript() {
     copyDirToModule("simple");
-    GenericPerlRunConfiguration runConfiguration = createRunConfiguration("simplescript.pl");
+    GenericPerlRunConfiguration runConfiguration = createOnlyRunConfiguration("simplescript.pl");
     Pair<ExecutionEnvironment, RunContentDescriptor> execResult;
     try {
       execResult = executeConfiguration(runConfiguration, DefaultRunExecutor.EXECUTOR_ID);
@@ -65,18 +83,8 @@ public class PerlRunTest extends PerlPlatformTestCase {
     ProcessHandler processHandler = contentDescriptor.getProcessHandler();
     assertNotNull(processHandler);
     processHandler.addProcessListener(capturingProcessAdapter);
-    if (!processHandler.waitFor(MAX_RUNNING_TIME)) {
-      fail("Process failed to finish in time");
-    }
+    waitForProcess(processHandler);
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(""), serializeOutput(capturingProcessAdapter.getOutput()));
   }
 
-  private @NotNull String serializeOutput(@Nullable ProcessOutput processOutput) {
-    if (processOutput == null) {
-      return "null";
-    }
-    return "Exit code: " + processOutput.getExitCode() + PerlLightTestCaseBase.SEPARATOR_NEWLINES +
-           "Stdout: " + processOutput.getStdout() + PerlLightTestCaseBase.SEPARATOR_NEWLINES +
-           "Stderr: " + processOutput.getStderr();
-  }
 }

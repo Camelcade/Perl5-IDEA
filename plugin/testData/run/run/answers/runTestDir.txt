@@ -1,0 +1,127 @@
+[root] (failed suite)
+  t/bootstrap_failed.t (failed suite)
+    Bootstrap (failed test)
+----------
+#   Failed test 'Bootstrap'
+#   at /DATA_PATH/t/bootstrap_failed.t line 5.
+#          got: 'teamcity[enteredTheMatrix timestamp='2019-03-10T12:56:49.973']
+# teamcity[testingStarted timestamp='2019-03-10T12:56:49.973']
+# teamcity[testSuiteStarted locationHint='myfile://testData/tests/is_failed_named.t' name='testData/tests/is_failed_named.t' timestamp='2019-03-10T12:56:49.973']
+# teamcity[testStarted name='with name' timestamp='2019-03-10T12:56:49.973']
+# teamcity[testFailed actual='Actual |' |n text' details='|n#   Failed test |'with name|'|n#   at testData/tests/is_failed_named.t line 5.|n#          got: |'Actual |' |n#  text|'|n#     expected: |'Expe|'cted|n# text|'' expected='Expe|'cted|ntext' message='' name='with name' timestamp='2019-03-10T12:56:49.973' type='comparisonFailure']
+# teamcity[testFinished duration='42' name='with name' timestamp='2019-03-10T12:56:49.973']
+# teamcity[message status='WARNING' text='# Looks like you failed 1 test of 1.' timestamp='2019-03-10T12:56:49.973']
+# teamcity[testSuiteFinished locationHint='testData/tests/is_failed_named.t' name='testData/tests/is_failed_named.t' timestamp='2019-03-10T12:56:49.973']
+# 
+# Test Summary Report
+# -------------------
+# testData/tests/is_failed_named.t (Wstat: 256 Tests: 1 Failed: 1)
+#   Failed test:  1
+#   Non-zero exit status: 1
+# Files=1, Tests=1, TEST_MODE_STATS;
+# Result: FAIL
+# teamcity[testingFinished timestamp='2019-03-10T12:56:49.973']
+# '
+#     expected: 'teamcity[enteredTheMatrix timestamp='2019-03-10T12:56:49.973']
+# teamcity[testingStarted timestamp='2019-03-10T12:56:49.973']
+# teamcity[testSuiteStarted locationHint='myfile://testData/tests/is_failed_named.t' name='testData/tests/is_failed_named.t' timestamp='2019-03-10T12:56:49.973']
+# teamcity[testStarted name='with name' timestamp='2019-03-10T12:56:49.973']
+# teamcity[testFailed actual='Actual |' |n text' details='|n#   findmeFailed test |'with name|'|n#   at testData/tests/is_failed_named.t line 5.|n#          got: |'Actual |' |n#  text|'|n#     expected: |'Expe|'cted|n# text|'' expected='Expe|'cted|ntext' message='' name='with name' timestamp='2019-03-10T12:56:49.973' type='comparisonFailure']
+# teamcity[testFinished duration='42' name='with name' timestamp='2019-03-10T12:56:49.973']
+# teamcity[message status='WARNING' text='# Looks like you failed 1 test of 1.' timestamp='2019-03-10T12:56:49.973']
+# teamcity[testSuiteFinished locationHint='testData/tests/is_failed_named.t' name='testData/tests/is_failed_named.t' timestamp='2019-03-10T12:56:49.973']
+# 
+# Test Summary Report
+# -------------------
+# testData/tests/is_failed_named.t (Wstat: 256 Tests: 1 Failed: 1)
+#   Failed test:  1
+#   Non-zero exit status: 1
+# Files=1, Tests=1, TEST_MODE_STATS;
+# Result: FAIL
+# teamcity[testingFinished timestamp='2019-03-10T12:56:49.973']
+# '
+----------
+  t/bootstrap_passed.t (passed suite)
+    Bootstrap (passed test)
+  t/is_failed_named.t (failed suite)
+    with name (failed test)
+----------
+#   Failed test 'with name'
+#   at /DATA_PATH/t/is_failed_named.t line 5.
+#          got: 'Actual ' 
+#  text'
+#     expected: 'Expe'cted
+# text'
+----------
+  t/is_failed_unnamed.t (failed suite)
+    Unnamed test (#1) (failed test)
+----------
+#   Failed test at /DATA_PATH/t/is_failed_unnamed.t line 5.
+#          got: 'Actual ' 
+#  text'
+#     expected: 'Expe'cted
+# text'
+----------
+  t/is_passed_named.t (passed suite)
+    with name (passed test)
+  t/is_passed_unnamed.t (passed suite)
+    Unnamed test (#1) (passed test)
+  t/skip_tests.t (ignored suite)
+    Initial (passed test)
+    SKIP Testing skip (ignored test)
+    SKIP Testing skip (ignored test)
+    Last one (passed test)
+  t/skip_tests_unnamed.t (ignored suite)
+    Initial (passed test)
+    SKIP Testing skip (ignored test)
+    SKIP Testing skip (ignored test)
+    Last one (passed test)
+  t/subtest_is_failed_named.t (failed suite)
+    Wrapping subtest (failed suite)
+      with name (failed test)
+----------
+#   Failed test 'with name'
+#   at /DATA_PATH/t/subtest_is_failed_named.t line 6.
+#          got: 'Actual ' 
+#  text'
+#     expected: 'Expe'cted
+# text'
+# Looks like you failed 1 test of 1.
+----------
+  t/subtest_is_failed_unnamed.t (failed suite)
+    Wrapping subtest (failed suite)
+      Unnamed test (#1) (failed test)
+----------
+#   Failed test at /DATA_PATH/t/subtest_is_failed_unnamed.t line 6.
+#          got: 'Actual ' 
+#  text'
+#     expected: 'Expe'cted
+# text'
+# Looks like you failed 1 test of 1.
+----------
+  t/subtest_is_passed_named.t (passed suite)
+    Wrapping subtest (passed suite)
+      with name (passed test)
+  t/subtest_is_passed_unnamed.t (passed suite)
+    Wrapping subtest (passed suite)
+      Unnamed test (#1) (passed test)
+  t/todo_skip_tests.t (ignored suite)
+    Initial (passed test)
+    TODO & SKIP Testing skip (ignored test)
+    TODO & SKIP Testing skip (ignored test)
+    Last one (passed test)
+  t/todo_skip_tests_unnamed.t (ignored suite)
+    Initial (passed test)
+    TODO & SKIP Testing skip (ignored test)
+    TODO & SKIP Testing skip (ignored test)
+    Last one (passed test)
+  t/todo_tests.t (ignored suite)
+    Initial (passed test)
+    TODO Failed (Here is TODO reason) (ignored test)
+    TODO Passed (Here is TODO reason) (ignored test)
+    Last one (passed test)
+  t/todo_tests_unnamed.t.t (ignored suite)
+    Initial (passed test)
+    TODO Here is TODO reason (ignored test)
+    TODO Here is TODO reason (ignored test)
+    Last one (passed test)

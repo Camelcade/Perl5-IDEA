@@ -254,7 +254,7 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
                                              @NotNull String scriptName,
                                              @Nullable Consumer<GenericPerlRunConfiguration> configurator) {
     copyDirToModule(directoryName);
-    GenericPerlRunConfiguration runConfiguration = createRunConfiguration(scriptName);
+    GenericPerlRunConfiguration runConfiguration = createOnlyRunConfiguration(scriptName);
     if (configurator != null) {
       configurator.accept(runConfiguration);
     }
