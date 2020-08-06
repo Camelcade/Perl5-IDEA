@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package debugger;
+package run;
 
 import base.PerlPlatformTestCase;
 import categories.Heavy;
@@ -62,7 +62,7 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
 
   @Override
   protected String getBaseDataPath() {
-    return "testData/debugger";
+    return "testData/run/debugger";
   }
 
   @Override

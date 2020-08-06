@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package coverage;
+package run;
 
 import base.PerlLightTestCaseBase;
 import base.PerlPlatformTestCase;
@@ -55,7 +55,7 @@ public class PerlCoverageTest extends PerlPlatformTestCase {
 
   @Override
   protected String getBaseDataPath() {
-    return "testData/coverage";
+    return "testData/run/coverage";
   }
 
   @Override
