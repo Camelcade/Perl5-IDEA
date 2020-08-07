@@ -63,7 +63,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -75,7 +75,7 @@ import static com.perl5.lang.perl.idea.run.debugger.protocol.PerlDebuggingEventR
 public class PerlDebugThread extends Thread {
   static final boolean DEV_MODE = false;
   private static final Logger LOG = Logger.getInstance(PerlDebugThread.class);
-  private static final Executor ourExecutor = Executors.newSingleThreadExecutor();
+  private final ExecutorService myExecutor = Executors.newSingleThreadExecutor();
   private final ExecutionResult myExecutionResult;
   private final Gson myGson;
   private final PerlDebugProfileStateBase myDebugProfileState;
@@ -278,7 +278,7 @@ public class PerlDebugThread extends Thread {
       else {
         newEvent.setDebugSession(mySession);
         newEvent.setDebugThread(this);
-        ourExecutor.execute(newEvent);
+        myExecutor.execute(newEvent);
       }
     }
   }
@@ -340,9 +340,9 @@ public class PerlDebugThread extends Thread {
     if (myStop) {
       return;
     }
-
     myStop = true;
     closeStreamsAndSockets();
+    myExecutor.shutdownNow();
     StopProcessAction.stopProcess(myExecutionResult.getProcessHandler());
 
     print("perl.debug.disconnected");
