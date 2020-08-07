@@ -65,14 +65,14 @@ public class PerlCoverageTest extends PerlPlatformTestCase {
 
   @Test
   public void testCoverageRun() {
-    runScriptWithCoverage("simple", "testscript.pl");
+    runScriptWithCoverageAndWait("simple", "testscript.pl");
     checkCoverageResultsWithFile();
   }
 
   @Test
   public void testCoverageRunTests() {
     copyDirToModule("../run/testMore");
-    Pair<ExecutionEnvironment, RunContentDescriptor> execResults = runConfigurationWithCoverage(createTestRunConfiguration("t"));
+    Pair<ExecutionEnvironment, RunContentDescriptor> execResults = runConfigurationWithCoverageAndWait(createTestRunConfiguration("t"));
     Throwable failure = null;
     try {
       checkTestRunResultsWithFile(execResults.second);
@@ -142,12 +142,12 @@ public class PerlCoverageTest extends PerlPlatformTestCase {
     }
   }
 
-  private void runScriptWithCoverage(@NotNull String directory, @NotNull String script) {
+  private void runScriptWithCoverageAndWait(@NotNull String directory, @NotNull String script) {
     copyDirToModule(directory);
-    runConfigurationWithCoverage(createOnlyRunConfiguration(script));
+    runConfigurationWithCoverageAndWait(createOnlyRunConfiguration(script));
   }
 
-  private @NotNull Pair<ExecutionEnvironment, RunContentDescriptor> runConfigurationWithCoverage(GenericPerlRunConfiguration runConfiguration) {
+  private @NotNull Pair<ExecutionEnvironment, RunContentDescriptor> runConfigurationWithCoverageAndWait(GenericPerlRunConfiguration runConfiguration) {
     Pair<ExecutionEnvironment, RunContentDescriptor> pair;
     try {
       pair = executeConfiguration(runConfiguration, CoverageExecutor.EXECUTOR_ID);
