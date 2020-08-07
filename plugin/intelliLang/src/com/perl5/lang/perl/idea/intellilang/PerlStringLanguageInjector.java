@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,22 +31,31 @@ import org.jetbrains.annotations.NotNull;
 public class PerlStringLanguageInjector implements LanguageInjector {
   @Override
   public void getLanguagesToInject(@NotNull PsiLanguageInjectionHost host, @NotNull InjectedLanguagePlaces injectionPlacesRegistrar) {
-    if (host instanceof PerlString && host.isValidHost()) {
-      // before element
-      PerlAnnotationInject injectAnnotation = PerlPsiUtil.getAnyAnnotationByClass(host, PerlAnnotationInject.class);
-
-      if (injectAnnotation != null) {
-        String languageMarker = injectAnnotation.getLanguageMarker();
-        if (languageMarker != null) {
-          Language targetLanguage = PerlInjectionMarkersService.getInstance(host.getProject()).getLanguageByMarker(languageMarker);
-          if (targetLanguage != null) {
-            TextRange contentRange = ElementManipulators.getValueTextRange(host);
-            if (!contentRange.isEmpty()) {
-              injectionPlacesRegistrar.addPlace(targetLanguage, contentRange, null, null);
-            }
-          }
-        }
-      }
+    if (!(host instanceof PerlString) || !host.isValidHost()) {
+      return;
     }
+    // before element
+    PerlAnnotationInject injectAnnotation = PerlPsiUtil.getAnyAnnotationByClass(host, PerlAnnotationInject.class);
+    if (injectAnnotation != null) {
+      injectByAnnotation(host, injectionPlacesRegistrar, injectAnnotation);
+    }
+  }
+
+  protected void injectByAnnotation(@NotNull PsiLanguageInjectionHost host,
+                                    @NotNull InjectedLanguagePlaces injectionPlacesRegistrar,
+                                    PerlAnnotationInject injectAnnotation) {
+    String languageMarker = injectAnnotation.getLanguageMarker();
+    if (languageMarker == null) {
+      return;
+    }
+    Language targetLanguage = PerlInjectionMarkersService.getInstance(host.getProject()).getLanguageByMarker(languageMarker);
+    if (targetLanguage == null) {
+      return;
+    }
+    TextRange contentRange = ElementManipulators.getValueTextRange(host);
+    if (contentRange.isEmpty()) {
+      return;
+    }
+    injectionPlacesRegistrar.addPlace(targetLanguage, contentRange, null, null);
   }
 }
