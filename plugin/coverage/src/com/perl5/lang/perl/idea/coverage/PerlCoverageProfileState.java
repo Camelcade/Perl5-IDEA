@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.coverage;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.coverage.CoverageEnabledConfiguration;
 import com.intellij.execution.runners.ExecutionEnvironment;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
@@ -43,7 +44,9 @@ public class PerlCoverageProfileState extends PerlRunProfileState {
 
     Sdk effectiveSdk = perlRunConfiguration.getEffectiveSdk();
     PerlHostData<?, ?> hostData = PerlHostData.notNullFrom(effectiveSdk);
-
+    if (ApplicationManager.getApplication().isUnitTestMode()) {
+      return Collections.singletonList("-MDevel::Cover=-db," + hostData.getRemotePath(coverageBasePath) + ",-dir,.");
+    }
     return Collections.singletonList("-MDevel::Cover=-silent,1,-db," + hostData.getRemotePath(coverageBasePath) + ",-dir,.");
   }
 
