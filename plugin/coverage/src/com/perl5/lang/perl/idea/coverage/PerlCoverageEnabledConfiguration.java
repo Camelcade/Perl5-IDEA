@@ -50,15 +50,10 @@ public class PerlCoverageEnabledConfiguration extends CoverageEnabledConfigurati
     String coverageRootPath = PathManager.getSystemPath() + File.separator + "coverage";
     GenericPerlRunConfiguration perlRunConfiguration = getConfiguration();
     Project project = perlRunConfiguration.getProject();
-    String path = coverageRootPath + File.separator +
-                  FileUtil.sanitizeFileName(project.getName()) +
-                  this.coverageFileNameSeparator() +
-                  FileUtil.sanitizeFileName(perlRunConfiguration.getName()) + "." + coverageRunner.getDataFileExtension();
-    File coverageDir = new File(path);
-    coverageDir.mkdirs();
-    LOG.assertTrue(coverageDir.exists());
-    LOG.debug("Coverage directory created: ", coverageDir);
-    return path;
+    return coverageRootPath + File.separator +
+           FileUtil.sanitizeFileName(project.getName()) +
+           this.coverageFileNameSeparator() +
+           FileUtil.sanitizeFileName(perlRunConfiguration.getName());
   }
 
   @Override

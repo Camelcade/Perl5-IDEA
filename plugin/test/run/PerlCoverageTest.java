@@ -18,6 +18,7 @@ package run;
 
 import base.PerlLightTestCaseBase;
 import base.PerlPlatformTestCase;
+import categories.Heavy;
 import com.intellij.coverage.CoverageDataManager;
 import com.intellij.coverage.CoverageExecutor;
 import com.intellij.coverage.CoverageSuite;
@@ -26,7 +27,6 @@ import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.ui.RunContentDescriptor;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDocumentManager;
@@ -40,8 +40,8 @@ import com.perl5.lang.perl.idea.coverage.PerlCoverageSuite;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import com.pty4j.util.Pair;
 import org.jetbrains.annotations.NotNull;
-import org.junit.Assume;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -49,6 +49,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
+@Category(Heavy.class)
 public class PerlCoverageTest extends PerlPlatformTestCase {
   @Override
   protected String getBaseDataPath() {
@@ -62,14 +63,12 @@ public class PerlCoverageTest extends PerlPlatformTestCase {
 
   @Test
   public void testCoverageRun() {
-    Assume.assumeTrue(StringUtil.isEmpty(System.getenv("CI")));
     runScriptWithCoverageAndWait("simple", "testscript.pl");
     checkCoverageResultsWithFile();
   }
 
   @Test
   public void testCoverageRunTests() {
-    Assume.assumeTrue(StringUtil.isEmpty(System.getenv("CI")));
     copyDirToModule("../run/testMore");
     Pair<ExecutionEnvironment, RunContentDescriptor> execResults = runConfigurationWithCoverageAndWait(createTestRunConfiguration("t"));
     Throwable failure = null;
