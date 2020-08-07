@@ -20,6 +20,7 @@ import base.PerlPlatformTestCase;
 import categories.Heavy;
 import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.execution.executors.DefaultDebugExecutor;
+import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.ui.RunContentDescriptor;
 import com.intellij.openapi.util.Trinity;
@@ -44,6 +45,7 @@ import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakpointType;
 import com.perl5.lang.perl.idea.run.debugger.protocol.PerlLoadedFileDescriptor;
 import com.perl5.lang.perl.idea.run.debugger.protocol.PerlStackFrameDescriptor;
 import com.perl5.lang.perl.idea.run.debugger.protocol.PerlValueDescriptor;
+import com.perl5.lang.perl.idea.run.prove.PerlTestRunConfiguration;
 import com.pty4j.util.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -69,6 +71,26 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
   @Override
   protected String getResultsTestDataPath() {
     return super.getResultsTestDataPath() + "/answers";
+  }
+
+  @Test
+  public void testTestsDebugging() {
+    copyDirToModule("../run/testMore");
+    PerlTestRunConfiguration testRunConfiguration = createTestRunConfiguration("t/subtest_is_passed_named.t");
+    testRunConfiguration.setStartMode(PerlDebugOptionsSets.DEBUGGER_STARTUP_BREAKPOINT);
+
+    setBreakPoint(getModuleFile("t/subtest_is_passed_named.t"), 5);
+
+    Trinity<ExecutionEnvironment, RunContentDescriptor, XDebugSession> trinity = runConfigurationWithDebugger(testRunConfiguration);
+    XDebugSession debugSession = trinity.third;
+    assertStoppedAtLine(debugSession, 93);
+    debugSession.resume();
+    assertStoppedAtLine(debugSession, 5);
+    debugSession.resume();
+    ProcessHandler processHandler = trinity.second.getProcessHandler();
+    assertNotNull(processHandler);
+    waitForProcessFinish(processHandler);
+    checkTestRunResultsWithFile(trinity.second);
   }
 
   @Test
@@ -283,12 +305,16 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
 
   private void setBreakPointInCurrentFile(@NotNull XDebugSession debugSession, int line) {
     waitForDebugger(debugSession);
-    XDebuggerUtil.getInstance().toggleLineBreakpoint(getProject(), getCurrentVirtualFile(debugSession), line);
+    setBreakPoint(getCurrentVirtualFile(debugSession), line);
   }
 
-  private void setBreakPoint(String scriptPath, int line) {
+  private void setBreakPoint(@NotNull String scriptPath, int line) {
     VirtualFile scriptVirtualFile = refreshAndFindFile(new File(scriptPath));
     assertNotNull(scriptVirtualFile);
+    setBreakPoint(scriptVirtualFile, line);
+  }
+
+  private void setBreakPoint(@NotNull VirtualFile scriptVirtualFile, int line) {
     XDebuggerUtil.getInstance().toggleLineBreakpoint(getProject(), scriptVirtualFile, line);
   }
 

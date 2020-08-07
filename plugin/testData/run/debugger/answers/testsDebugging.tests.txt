@@ -1,0 +1,4 @@
+[root] (passed suite)
+  t/subtest_is_passed_named.t (passed suite)
+    Wrapping subtest (passed suite)
+      with name (passed test)
