@@ -26,7 +26,6 @@ import com.intellij.execution.ui.RunContentDescriptor;
 import com.intellij.openapi.util.Disposer;
 import com.intellij.testFramework.UsefulTestCase;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
-import com.perl5.lang.perl.idea.run.prove.PerlTestRunConfiguration;
 import com.pty4j.util.Pair;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -46,9 +45,7 @@ public class PerlRunTest extends PerlPlatformTestCase {
   @Test
   public void testRunTestDir() {
     copyDirToModule("testMore");
-    GenericPerlRunConfiguration runConfiguration = createOnlyRunConfiguration("t");
-    assertInstanceOf(runConfiguration, PerlTestRunConfiguration.class);
-    runTestConfigurationWithExecutorAndCheckResultsWIthFile(runConfiguration, DefaultRunExecutor.EXECUTOR_ID);
+    runTestConfigurationWithExecutorAndCheckResultsWithFile(createTestRunConfiguration("t"), DefaultRunExecutor.EXECUTOR_ID);
   }
 
   @Test

@@ -58,6 +58,7 @@ import com.intellij.testFramework.UsefulTestCase;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import com.perl5.lang.perl.idea.run.prove.PerlSMTRunnerConsoleView;
+import com.perl5.lang.perl.idea.run.prove.PerlTestRunConfiguration;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostHandler;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlRealVersionManagerHandler;
 import com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewTestUtil;
@@ -429,7 +430,7 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
     return sb.toString();
   }
 
-  protected void runTestConfigurationWithExecutorAndCheckResultsWIthFile(GenericPerlRunConfiguration runConfiguration, String executorId) {
+  protected void runTestConfigurationWithExecutorAndCheckResultsWithFile(GenericPerlRunConfiguration runConfiguration, String executorId) {
     Pair<ExecutionEnvironment, RunContentDescriptor> execResult;
     try {
       execResult = executeConfiguration(runConfiguration, executorId);
@@ -445,5 +446,11 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
     assertInstanceOf(executionConsole, PerlSMTRunnerConsoleView.class);
     SMTestRunnerResultsForm resultsViewer = ((PerlSMTRunnerConsoleView)executionConsole).getResultsViewer();
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(".tests"), serializeTestNode(resultsViewer.getTestsRootNode(), ""));
+  }
+
+  protected @NotNull PerlTestRunConfiguration createTestRunConfiguration(@NotNull String file) {
+    GenericPerlRunConfiguration runConfiguration = createOnlyRunConfiguration(file);
+    assertInstanceOf(runConfiguration, PerlTestRunConfiguration.class);
+    return (PerlTestRunConfiguration)runConfiguration;
   }
 }
