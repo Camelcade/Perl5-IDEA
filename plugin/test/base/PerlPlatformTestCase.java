@@ -371,7 +371,7 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
     return "txt";
   }
 
-  protected void waitForProcess(ProcessHandler processHandler) {
+  protected void waitForProcessFinish(ProcessHandler processHandler) {
     if (!processHandler.waitFor(MAX_RUNNING_TIME)) {
       fail("Process failed to finish in time");
     }
@@ -441,7 +441,7 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
     RunContentDescriptor contentDescriptor = execResult.second;
     ProcessHandler processHandler = contentDescriptor.getProcessHandler();
     assertNotNull(processHandler);
-    waitForProcess(processHandler);
+    waitForProcessFinish(processHandler);
     checkTestRunResultsWithFile(contentDescriptor);
   }
 

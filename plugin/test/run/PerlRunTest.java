@@ -65,7 +65,7 @@ public class PerlRunTest extends PerlPlatformTestCase {
     ProcessHandler processHandler = contentDescriptor.getProcessHandler();
     assertNotNull(processHandler);
     processHandler.addProcessListener(capturingProcessAdapter);
-    waitForProcess(processHandler);
+    waitForProcessFinish(processHandler);
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(""), serializeOutput(capturingProcessAdapter.getOutput()));
   }
 
