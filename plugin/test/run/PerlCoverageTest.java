@@ -127,7 +127,7 @@ public class PerlCoverageTest extends PerlPlatformTestCase {
   private void runScriptWithCoverage(@NotNull String directory, @NotNull String script) {
     copyDirToModule(directory);
     GenericPerlRunConfiguration runConfiguration = createOnlyRunConfiguration(script);
-    Pair<ExecutionEnvironment, RunContentDescriptor> pair = null;
+    Pair<ExecutionEnvironment, RunContentDescriptor> pair;
     try {
       pair = executeConfiguration(runConfiguration, CoverageExecutor.EXECUTOR_ID);
     }
@@ -143,5 +143,6 @@ public class PerlCoverageTest extends PerlPlatformTestCase {
     @SuppressWarnings("ConstantConditions")
     int exitCode = processHandler.getExitCode();
     assertEquals("Wrong exit code: " + exitCode, 0, exitCode);
+    LOG.debug("Coverage process finished with exit code: ", exitCode);
   }
 }
