@@ -22,13 +22,11 @@ import com.intellij.execution.executors.DefaultRunExecutor;
 import com.intellij.execution.process.CapturingProcessAdapter;
 import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.runners.ExecutionEnvironment;
-import com.intellij.execution.testframework.sm.runner.ui.SMTestRunnerResultsForm;
-import com.intellij.execution.ui.ExecutionConsole;
 import com.intellij.execution.ui.RunContentDescriptor;
 import com.intellij.openapi.util.Disposer;
 import com.intellij.testFramework.UsefulTestCase;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
-import com.perl5.lang.perl.idea.run.prove.PerlSMTRunnerConsoleView;
+import com.perl5.lang.perl.idea.run.prove.PerlTestRunConfiguration;
 import com.pty4j.util.Pair;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -49,21 +47,8 @@ public class PerlRunTest extends PerlPlatformTestCase {
   public void testRunTestDir() {
     copyDirToModule("testMore");
     GenericPerlRunConfiguration runConfiguration = createOnlyRunConfiguration("t");
-    Pair<ExecutionEnvironment, RunContentDescriptor> execResult;
-    try {
-      execResult = executeConfiguration(runConfiguration, DefaultRunExecutor.EXECUTOR_ID);
-    }
-    catch (InterruptedException e) {
-      throw new RuntimeException(e);
-    }
-    RunContentDescriptor contentDescriptor = execResult.second;
-    ProcessHandler processHandler = contentDescriptor.getProcessHandler();
-    assertNotNull(processHandler);
-    waitForProcess(processHandler);
-    ExecutionConsole executionConsole = contentDescriptor.getExecutionConsole();
-    assertInstanceOf(executionConsole, PerlSMTRunnerConsoleView.class);
-    SMTestRunnerResultsForm resultsViewer = ((PerlSMTRunnerConsoleView)executionConsole).getResultsViewer();
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(""), serializeTestNode(resultsViewer.getTestsRootNode(), ""));
+    assertInstanceOf(runConfiguration, PerlTestRunConfiguration.class);
+    runTestConfigurationWithExecutorAndCheckResultsWIthFile(runConfiguration, DefaultRunExecutor.EXECUTOR_ID);
   }
 
   @Test

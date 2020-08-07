@@ -28,6 +28,8 @@ import com.intellij.execution.process.ProcessOutput;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.runners.ProgramRunner;
 import com.intellij.execution.testframework.sm.runner.SMTestProxy;
+import com.intellij.execution.testframework.sm.runner.ui.SMTestRunnerResultsForm;
+import com.intellij.execution.ui.ExecutionConsole;
 import com.intellij.execution.ui.RunContentDescriptor;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.actionSystem.AnAction;
@@ -52,8 +54,10 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiManager;
 import com.intellij.testFramework.HeavyPlatformTestCase;
 import com.intellij.testFramework.TestActionEvent;
+import com.intellij.testFramework.UsefulTestCase;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
+import com.perl5.lang.perl.idea.run.prove.PerlSMTRunnerConsoleView;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostHandler;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlRealVersionManagerHandler;
 import com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewTestUtil;
@@ -423,5 +427,23 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
     }
 
     return sb.toString();
+  }
+
+  protected void runTestConfigurationWithExecutorAndCheckResultsWIthFile(GenericPerlRunConfiguration runConfiguration, String executorId) {
+    Pair<ExecutionEnvironment, RunContentDescriptor> execResult;
+    try {
+      execResult = executeConfiguration(runConfiguration, executorId);
+    }
+    catch (InterruptedException e) {
+      throw new RuntimeException(e);
+    }
+    RunContentDescriptor contentDescriptor = execResult.second;
+    ProcessHandler processHandler = contentDescriptor.getProcessHandler();
+    assertNotNull(processHandler);
+    waitForProcess(processHandler);
+    ExecutionConsole executionConsole = contentDescriptor.getExecutionConsole();
+    assertInstanceOf(executionConsole, PerlSMTRunnerConsoleView.class);
+    SMTestRunnerResultsForm resultsViewer = ((PerlSMTRunnerConsoleView)executionConsole).getResultsViewer();
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(""), serializeTestNode(resultsViewer.getTestsRootNode(), ""));
   }
 }

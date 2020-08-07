@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.run.prove;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.RunConfiguration;
@@ -55,7 +56,8 @@ import static com.intellij.execution.configurations.GeneralCommandLine.ParentEnv
 import static com.intellij.execution.configurations.GeneralCommandLine.ParentEnvironmentType.NONE;
 import static com.perl5.lang.perl.util.PerlRunUtil.PERL_I;
 
-class PerlTestRunConfiguration extends GenericPerlRunConfiguration {
+@VisibleForTesting
+public class PerlTestRunConfiguration extends GenericPerlRunConfiguration {
   private static final String PROVE = "prove";
   private static final String TEST_HARNESS = "Test::Harness";
   private static final String PROVE_PASS_PREFIX = "PROVE_PASS_";
