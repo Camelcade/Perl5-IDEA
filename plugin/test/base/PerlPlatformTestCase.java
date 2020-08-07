@@ -444,6 +444,6 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
     ExecutionConsole executionConsole = contentDescriptor.getExecutionConsole();
     assertInstanceOf(executionConsole, PerlSMTRunnerConsoleView.class);
     SMTestRunnerResultsForm resultsViewer = ((PerlSMTRunnerConsoleView)executionConsole).getResultsViewer();
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(""), serializeTestNode(resultsViewer.getTestsRootNode(), ""));
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(".tests"), serializeTestNode(resultsViewer.getTestsRootNode(), ""));
   }
 }

@@ -70,7 +70,7 @@ public class PerlCoverageTest extends PerlPlatformTestCase {
   }
 
   private void compareCoverageSuiteWithFile() {
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(""), serializeProjectData(getProjectCoverageData()));
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(".coverage"), serializeProjectData(getProjectCoverageData()));
   }
 
   private @NotNull ProjectData getProjectCoverageData() {
