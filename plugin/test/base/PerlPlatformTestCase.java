@@ -83,7 +83,7 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
   private static final int MAX_RUNNING_TIME = 10_000;
   protected static final Logger LOG = Logger.getInstance(PerlPlatformTestCase.class);
   private static final String PERLBREW_HOME = "~/perl5/perlbrew/bin/perlbrew";
-  private static final String PERL_526 = "perl-5.26.2";
+  private static final String PERL_532 = "perl-5.32.0";
   private static final String MOJO_LIB_SEPARATOR = "@";
   @Rule
   public final TestRule myBaseRule = (base, description) ->
@@ -100,7 +100,7 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
   @Override
   protected void setUp() throws Exception {
     super.setUp();
-    addPerlBrewSdk(getPerl526DistibutionId("plugin_test"));
+    addPerlBrewSdk(getPerl532DistibutionId("plugin_test"));
   }
 
   @Override
@@ -169,8 +169,8 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
     return PerlProjectManager.getSdk(getModule());
   }
 
-  protected @NotNull String getPerl526DistibutionId(@Nullable String libraryName) {
-    return StringUtil.isEmpty(libraryName) ? PERL_526 : PERL_526 + MOJO_LIB_SEPARATOR + libraryName;
+  protected @NotNull String getPerl532DistibutionId(@Nullable String libraryName) {
+    return StringUtil.isEmpty(libraryName) ? PERL_532 : PERL_532 + MOJO_LIB_SEPARATOR + libraryName;
   }
 
   protected void runAction(@NotNull AnAction anAction) {
