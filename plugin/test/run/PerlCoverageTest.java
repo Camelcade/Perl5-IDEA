@@ -126,7 +126,10 @@ public class PerlCoverageTest extends PerlPlatformTestCase {
 
   private void runScriptWithCoverage(@NotNull String directory, @NotNull String script) {
     copyDirToModule(directory);
-    GenericPerlRunConfiguration runConfiguration = createOnlyRunConfiguration(script);
+    runConfigurationWithCoverage(createOnlyRunConfiguration(script));
+  }
+
+  private void runConfigurationWithCoverage(GenericPerlRunConfiguration runConfiguration) {
     Pair<ExecutionEnvironment, RunContentDescriptor> pair;
     try {
       pair = executeConfiguration(runConfiguration, CoverageExecutor.EXECUTOR_ID);
