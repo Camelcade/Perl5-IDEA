@@ -53,6 +53,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiManager;
 import com.intellij.testFramework.HeavyPlatformTestCase;
+import com.intellij.testFramework.PlatformTestUtil;
 import com.intellij.testFramework.TestActionEvent;
 import com.intellij.testFramework.UsefulTestCase;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
@@ -81,11 +82,12 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
+import java.util.function.BooleanSupplier;
 import java.util.function.Function;
 
 @RunWith(JUnit4.class)
 public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
-  private static final int MAX_RUNNING_TIME = 10_000;
+  private static final int MAX_WAIT_TIME = 10_000;
   protected static final Logger LOG = Logger.getInstance(PerlPlatformTestCase.class);
   private static final String PERLBREW_HOME = "~/perl5/perlbrew/bin/perlbrew";
   private static final String PERL_532 = "perl-5.32.0";
@@ -372,9 +374,7 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
   }
 
   protected void waitForProcessFinish(ProcessHandler processHandler) {
-    if (!processHandler.waitFor(MAX_RUNNING_TIME)) {
-      fail("Process failed to finish in time");
-    }
+    waitWithEventsDispatching("Process failed to finish in time", processHandler::isProcessTerminated);
   }
 
   protected @NotNull String serializeOutput(@Nullable ProcessOutput processOutput) {
@@ -456,5 +456,24 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
     GenericPerlRunConfiguration runConfiguration = createOnlyRunConfiguration(file);
     assertInstanceOf(runConfiguration, PerlTestRunConfiguration.class);
     return (PerlTestRunConfiguration)runConfiguration;
+  }
+
+  protected void waitWithEventsDispatching(@NotNull String errorMessage, @NotNull BooleanSupplier condition) {
+    long start = System.currentTimeMillis();
+    while (true) {
+      try {
+        if (System.currentTimeMillis() - start > MAX_WAIT_TIME) {
+          fail(errorMessage);
+        }
+        if (condition.getAsBoolean()) {
+          break;
+        }
+        PlatformTestUtil.dispatchAllEventsInIdeEventQueue();
+        Thread.sleep(10);
+      }
+      catch (InterruptedException e) {
+        throw new RuntimeException(e);
+      }
+    }
   }
 }

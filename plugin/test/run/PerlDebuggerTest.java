@@ -25,7 +25,6 @@ import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.ui.RunContentDescriptor;
 import com.intellij.openapi.util.Trinity;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.testFramework.PlatformTestUtil;
 import com.intellij.testFramework.UsefulTestCase;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.xdebugger.XDebugSession;
@@ -61,7 +60,6 @@ import static base.PerlLightTestCaseBase.SEPARATOR_NEW_LINE_AFTER;
 
 @Category(Heavy.class)
 public class PerlDebuggerTest extends PerlPlatformTestCase {
-  private static final int WAIT_TIMEOUT = 10_000;
 
   @Override
   protected String getBaseDataPath() {
@@ -319,22 +317,9 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
   }
 
   private void waitForDebugger(@NotNull XDebugSession debugSession) {
-    long start = System.currentTimeMillis();
-    while (true) {
-      try {
-        if (System.currentTimeMillis() - start > WAIT_TIMEOUT) {
-          fail("Timeout waiting");
-        }
-        if (debugSession.isPaused() || debugSession.isSuspended() || debugSession.isStopped()) {
-          break;
-        }
-        PlatformTestUtil.dispatchAllEventsInIdeEventQueue();
-        Thread.sleep(100);
-      }
-      catch (InterruptedException e) {
-        throw new RuntimeException(e);
-      }
-    }
+    waitWithEventsDispatching(
+      "Timeout waiting for debugger", () -> debugSession.isPaused() || debugSession.isSuspended() || debugSession.isStopped()
+    );
   }
 
   private @NotNull Collection<? extends XLineBreakpoint<PerlLineBreakpointProperties>> getLineBreakpoints() {

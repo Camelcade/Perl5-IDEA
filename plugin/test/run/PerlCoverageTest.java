@@ -51,8 +51,6 @@ import java.util.Map;
 
 @Category(Heavy.class)
 public class PerlCoverageTest extends PerlPlatformTestCase {
-  private static final int MAX_RUNNING_TIME = 10_000;
-
   @Override
   protected String getBaseDataPath() {
     return "testData/run/coverage";
@@ -158,9 +156,7 @@ public class PerlCoverageTest extends PerlPlatformTestCase {
     RunContentDescriptor contentDescriptor = pair.second;
     ProcessHandler processHandler = contentDescriptor.getProcessHandler();
     assertNotNull(processHandler);
-    if (!processHandler.waitFor(MAX_RUNNING_TIME)) {
-      fail("Process hasn't finished in " + MAX_RUNNING_TIME);
-    }
+    waitForProcessFinish(processHandler);
     Integer exitCode = processHandler.getExitCode();
     LOG.debug("Coverage process finished with exit code: ", exitCode);
     return pair;
