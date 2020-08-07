@@ -22,6 +22,7 @@ import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.execution.executors.DefaultDebugExecutor;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.ui.RunContentDescriptor;
+import com.intellij.openapi.util.Trinity;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.testFramework.PlatformTestUtil;
 import com.intellij.testFramework.UsefulTestCase;
@@ -258,7 +259,7 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
     if (configurator != null) {
       configurator.accept(runConfiguration);
     }
-    return startConfigurationDebugging(runConfiguration);
+    return runConfigurationWithDebugger(runConfiguration).third;
   }
 
   private void assertStoppedAtLine(XDebugSession debugSession, int expected) {
@@ -268,12 +269,12 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
     assertEquals("Stopped at wrong line: ", expected, currentPosition.getLine());
   }
 
-  private @NotNull XDebugSession startConfigurationDebugging(@NotNull RunConfiguration runConfiguration) {
+  private @NotNull Trinity<ExecutionEnvironment, RunContentDescriptor, XDebugSession> runConfigurationWithDebugger(@NotNull RunConfiguration runConfiguration) {
     try {
       Pair<ExecutionEnvironment, RunContentDescriptor> pair = executeConfiguration(runConfiguration, DefaultDebugExecutor.EXECUTOR_ID);
-      RunContentDescriptor contentDescriptor = pair.second;
-      return Objects.requireNonNull(
-        XDebuggerManager.getInstance(getProject()).getDebugSession(contentDescriptor.getExecutionConsole()));
+      XDebugSession debugSession = XDebuggerManager.getInstance(getProject()).getDebugSession(pair.second.getExecutionConsole());
+      assertNotNull(debugSession);
+      return Trinity.create(pair.first, pair.second, debugSession);
     }
     catch (InterruptedException e) {
       throw new RuntimeException(e);
