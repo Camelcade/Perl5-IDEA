@@ -61,11 +61,11 @@ public class PerlRunTest extends PerlPlatformTestCase {
     }
     RunContentDescriptor contentDescriptor = execResult.second;
     Disposer.register(myPerlLightTestCaseDisposable, contentDescriptor);
-    CapturingProcessAdapter capturingProcessAdapter = new CapturingProcessAdapter();
     ProcessHandler processHandler = contentDescriptor.getProcessHandler();
     assertNotNull(processHandler);
-    processHandler.addProcessListener(capturingProcessAdapter);
     waitForProcessFinish(processHandler);
+    CapturingProcessAdapter capturingProcessAdapter = getCapturingAdapter(execResult.first);
+    assertNotNull(capturingProcessAdapter);
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(""), serializeOutput(capturingProcessAdapter.getOutput()));
   }
 

@@ -21,10 +21,7 @@ import com.intellij.execution.actions.ConfigurationContext;
 import com.intellij.execution.actions.ConfigurationFromContext;
 import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.RunConfiguration;
-import com.intellij.execution.process.ProcessAdapter;
-import com.intellij.execution.process.ProcessEvent;
-import com.intellij.execution.process.ProcessHandler;
-import com.intellij.execution.process.ProcessOutput;
+import com.intellij.execution.process.*;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.runners.ProgramRunner;
 import com.intellij.execution.testframework.TestTreeView;
@@ -95,6 +92,8 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
   private static final String PERLBREW_HOME = "~/perl5/perlbrew/bin/perlbrew";
   private static final String PERL_532 = "perl-5.32.0";
   private static final String MOJO_LIB_SEPARATOR = "@";
+  private static final Key<CapturingProcessAdapter> ADAPTER_KEY = Key.create("process.adapter");
+
   @Rule
   public final TestRule myBaseRule = (base, description) ->
     new Statement() {
@@ -323,6 +322,8 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
       refRunContentDescriptor.set(descriptor);
       ProcessHandler processHandler = descriptor.getProcessHandler();
       assertNotNull(processHandler);
+      CapturingProcessAdapter capturingAdapter = new CapturingProcessAdapter();
+      processHandler.addProcessListener(capturingAdapter);
       processHandler.addProcessListener(new ProcessAdapter() {
         @Override
         public void startNotified(@NotNull ProcessEvent event) {
@@ -339,6 +340,7 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
           LOG.debug(outputType + ": " + event.getText());
         }
       });
+      ADAPTER_KEY.set(executionEnvironment, capturingAdapter);
       latch.countDown();
     });
     if (!latch.await(60, TimeUnit.SECONDS)) {
@@ -354,6 +356,10 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
       }
     });
     return Pair.create(executionEnvironment, runContentDescriptor);
+  }
+
+  protected final @Nullable CapturingProcessAdapter getCapturingAdapter(@NotNull ExecutionEnvironment environment) {
+    return ADAPTER_KEY.get(environment);
   }
 
   protected String getResultsTestDataPath() {
