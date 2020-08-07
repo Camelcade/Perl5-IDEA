@@ -442,6 +442,10 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
     ProcessHandler processHandler = contentDescriptor.getProcessHandler();
     assertNotNull(processHandler);
     waitForProcess(processHandler);
+    checkTestRunResultsWithFile(contentDescriptor);
+  }
+
+  protected void checkTestRunResultsWithFile(RunContentDescriptor contentDescriptor) {
     ExecutionConsole executionConsole = contentDescriptor.getExecutionConsole();
     assertInstanceOf(executionConsole, PerlSMTRunnerConsoleView.class);
     SMTestRunnerResultsForm resultsViewer = ((PerlSMTRunnerConsoleView)executionConsole).getResultsViewer();

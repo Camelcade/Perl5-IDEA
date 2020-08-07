@@ -1,0 +1,188 @@
+File: is_failed_named.t
+----------
+2 | use warnings FATAL => 'all';
+2 | use strict;
+2 | use Test::More;
+
+2 | is("Actual ' \n text", "Expe'cted\ntext", 'with name');
+2 | done_testing;
+----------
+File: is_failed_unnamed.t
+----------
+2 | use warnings FATAL => 'all';
+2 | use strict;
+2 | use Test::More;
+
+2 | is("Actual ' \n text", "Expe'cted\ntext");
+2 | done_testing;
+----------
+File: is_passed_named.t
+----------
+2 | use warnings FATAL => 'all';
+2 | use strict;
+2 | use Test::More;
+
+2 | is(1, 1, 'with name');
+2 | done_testing;
+----------
+File: is_passed_unnamed.t
+----------
+2 | use warnings FATAL => 'all';
+2 | use strict;
+2 | use Test::More;
+
+2 | is(2, 2);
+2 | done_testing;
+----------
+File: skip_tests.t
+----------
+2 | use warnings FATAL => 'all';
+2 | use strict;
+2 | use Test::More;
+
+2 | pass "Initial";
+
+SKIP:{
+2 |     skip "Testing skip", 2;
+0 |     fail("Fail");
+0 |     pass("Pass");
+}
+
+2 | pass "Last one";
+
+2 | done_testing;
+----------
+File: skip_tests_unnamed.t
+----------
+2 | use warnings FATAL => 'all';
+2 | use strict;
+2 | use Test::More;
+
+2 | pass "Initial";
+
+SKIP:{
+2 |     skip "Testing skip", 2;
+0 |     fail("");
+0 |     pass("");
+}
+
+2 | pass "Last one";
+
+2 | done_testing;
+----------
+File: subtest_is_failed_named.t
+----------
+2 | use warnings FATAL => 'all';
+2 | use strict;
+2 | use Test::More;
+
+subtest 'Wrapping subtest' => sub {
+2 |     is("Actual ' \n text", "Expe'cted\ntext", 'with name');
+2 | };
+2 | done_testing;
+----------
+File: subtest_is_failed_unnamed.t
+----------
+2 | use warnings FATAL => 'all';
+2 | use strict;
+2 | use Test::More;
+
+subtest 'Wrapping subtest' => sub {
+2 |     is("Actual ' \n text", "Expe'cted\ntext");
+2 | };
+2 | done_testing;
+----------
+File: subtest_is_passed_named.t
+----------
+2 | use warnings FATAL => 'all';
+2 | use strict;
+2 | use Test::More;
+
+subtest 'Wrapping subtest' => sub {
+2 |     is(1, 1, 'with name');
+2 | };
+2 | done_testing;
+----------
+File: subtest_is_passed_unnamed.t
+----------
+2 | use warnings FATAL => 'all';
+2 | use strict;
+2 | use Test::More;
+
+subtest 'Wrapping subtest' => sub {
+2 |     is(2, 2);
+2 | };
+2 | done_testing;
+----------
+File: todo_skip_tests.t
+----------
+2 | use warnings FATAL => 'all';
+2 | use strict;
+2 | use Test::More;
+
+2 | pass "Initial";
+
+TODO:{
+2 |     todo_skip "Testing skip", 2;
+0 |     fail("Fail");
+0 |     pass("Pass");
+}
+
+2 | pass "Last one";
+
+2 | done_testing;
+----------
+File: todo_skip_tests_unnamed.t
+----------
+2 | use warnings FATAL => 'all';
+2 | use strict;
+2 | use Test::More;
+
+2 | pass "Initial";
+
+TODO:{
+2 |     todo_skip "Testing skip", 2;
+0 |     fail();
+0 |     pass();
+}
+
+2 | pass "Last one";
+
+2 | done_testing;
+----------
+File: todo_tests.t
+----------
+2 | use warnings FATAL => 'all';
+2 | use strict;
+2 | use Test::More;
+
+2 | pass "Initial";
+
+TODO:{
+2 |     local $TODO = "Here is TODO reason";
+2 |     fail("Failed");
+2 |     pass("Passed");
+}
+
+2 | pass "Last one";
+
+2 | done_testing;
+----------
+File: todo_tests_unnamed.t.t
+----------
+2 | use warnings FATAL => 'all';
+2 | use strict;
+2 | use Test::More;
+
+2 | pass "Initial";
+
+TODO:{
+2 |     local $TODO = "Here is TODO reason";
+2 |     fail();
+2 |     pass();
+}
+
+2 | pass "Last one";
+
+2 | done_testing;
+----------

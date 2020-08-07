@@ -66,10 +66,27 @@ public class PerlCoverageTest extends PerlPlatformTestCase {
   @Test
   public void testCoverageRun() {
     runScriptWithCoverage("simple", "testscript.pl");
-    compareCoverageSuiteWithFile();
+    checkCoverageResultsWithFile();
   }
 
-  private void compareCoverageSuiteWithFile() {
+  @Test
+  public void testCoverageRunTests() {
+    copyDirToModule("../run/testMore");
+    Pair<ExecutionEnvironment, RunContentDescriptor> execResults = runConfigurationWithCoverage(createTestRunConfiguration("t"));
+    Throwable failure = null;
+    try {
+      checkTestRunResultsWithFile(execResults.second);
+    }
+    catch (Throwable e) {
+      failure = e;
+    }
+    checkCoverageResultsWithFile();
+    if (failure != null) {
+      throw new RuntimeException(failure);
+    }
+  }
+
+  private void checkCoverageResultsWithFile() {
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(".coverage"), serializeProjectData(getProjectCoverageData()));
   }
 
@@ -129,7 +146,7 @@ public class PerlCoverageTest extends PerlPlatformTestCase {
     runConfigurationWithCoverage(createOnlyRunConfiguration(script));
   }
 
-  private void runConfigurationWithCoverage(GenericPerlRunConfiguration runConfiguration) {
+  private @NotNull Pair<ExecutionEnvironment, RunContentDescriptor> runConfigurationWithCoverage(GenericPerlRunConfiguration runConfiguration) {
     Pair<ExecutionEnvironment, RunContentDescriptor> pair;
     try {
       pair = executeConfiguration(runConfiguration, CoverageExecutor.EXECUTOR_ID);
@@ -143,9 +160,8 @@ public class PerlCoverageTest extends PerlPlatformTestCase {
     if (!processHandler.waitFor(MAX_RUNNING_TIME)) {
       fail("Process hasn't finished in " + MAX_RUNNING_TIME);
     }
-    @SuppressWarnings("ConstantConditions")
-    int exitCode = processHandler.getExitCode();
-    assertEquals("Wrong exit code: " + exitCode, 0, exitCode);
+    Integer exitCode = processHandler.getExitCode();
     LOG.debug("Coverage process finished with exit code: ", exitCode);
+    return pair;
   }
 }
