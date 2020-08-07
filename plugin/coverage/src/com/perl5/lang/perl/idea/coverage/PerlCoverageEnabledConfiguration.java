@@ -20,6 +20,7 @@ import com.intellij.coverage.CoverageRunner;
 import com.intellij.execution.configurations.RunConfigurationBase;
 import com.intellij.execution.configurations.coverage.CoverageEnabledConfiguration;
 import com.intellij.openapi.application.PathManager;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.io.FileUtil;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
@@ -28,6 +29,8 @@ import org.jetbrains.annotations.Nullable;
 import java.io.File;
 
 public class PerlCoverageEnabledConfiguration extends CoverageEnabledConfiguration {
+  private static final Logger LOG = Logger.getInstance(PerlCoverageEnabledConfiguration.class);
+
   public PerlCoverageEnabledConfiguration(RunConfigurationBase configuration) {
     super(configuration);
     setCoverageRunner(CoverageRunner.getInstance(PerlCoverageRunner.class));
@@ -51,7 +54,10 @@ public class PerlCoverageEnabledConfiguration extends CoverageEnabledConfigurati
                   FileUtil.sanitizeFileName(project.getName()) +
                   this.coverageFileNameSeparator() +
                   FileUtil.sanitizeFileName(perlRunConfiguration.getName()) + "." + coverageRunner.getDataFileExtension();
-    (new File(coverageRootPath)).mkdirs();
+    File coverageDir = new File(path);
+    coverageDir.mkdirs();
+    LOG.assertTrue(coverageDir.exists());
+    LOG.debug("Coverage directory created: ", coverageDir);
     return path;
   }
 
