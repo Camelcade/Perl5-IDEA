@@ -27,6 +27,7 @@ import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.process.ProcessOutput;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.runners.ProgramRunner;
+import com.intellij.execution.testframework.TestTreeView;
 import com.intellij.execution.testframework.sm.runner.SMTestProxy;
 import com.intellij.execution.testframework.sm.runner.ui.SMTestRunnerResultsForm;
 import com.intellij.execution.ui.ExecutionConsole;
@@ -56,6 +57,7 @@ import com.intellij.testFramework.HeavyPlatformTestCase;
 import com.intellij.testFramework.PlatformTestUtil;
 import com.intellij.testFramework.TestActionEvent;
 import com.intellij.testFramework.UsefulTestCase;
+import com.intellij.util.ui.tree.TreeUtil;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import com.perl5.lang.perl.idea.run.prove.PerlSMTRunnerConsoleView;
@@ -67,6 +69,7 @@ import com.perl5.lang.perl.util.PerlRunUtil;
 import com.pty4j.util.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.concurrency.Promise;
 import org.junit.Assume;
 import org.junit.Rule;
 import org.junit.rules.TestRule;
@@ -449,6 +452,10 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
     ExecutionConsole executionConsole = contentDescriptor.getExecutionConsole();
     assertInstanceOf(executionConsole, PerlSMTRunnerConsoleView.class);
     SMTestRunnerResultsForm resultsViewer = ((PerlSMTRunnerConsoleView)executionConsole).getResultsViewer();
+    TestTreeView testTreeView = resultsViewer.getTreeView();
+    assertNotNull(testTreeView);
+    Promise<?> promise = TreeUtil.promiseExpandAll(testTreeView);
+    waitWithEventsDispatching("Failed to expand tests tree", promise::isSucceeded);
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(".tests"), serializeTestNode(resultsViewer.getTestsRootNode(), ""));
   }
 
