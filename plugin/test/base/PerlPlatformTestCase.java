@@ -418,7 +418,7 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
     String stacktrace = node.getStacktrace();
     if (StringUtil.isNotEmpty(stacktrace)) {
       sb.append(PerlLightTestCaseBase.SEPARATOR_NEWLINES)
-        .append(stacktrace.replaceAll("/tmp/.+?/", "/DATA_PATH/"))
+        .append(stacktrace.replaceAll(Objects.requireNonNull(getProject().getBasePath()), "/DATA_PATH"))
         .append(PerlLightTestCaseBase.SEPARATOR_NEWLINES);
     }
     else {
