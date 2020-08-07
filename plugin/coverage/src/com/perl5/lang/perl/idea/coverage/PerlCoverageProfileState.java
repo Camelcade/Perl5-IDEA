@@ -20,7 +20,6 @@ import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.coverage.CoverageEnabledConfiguration;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import com.perl5.lang.perl.idea.run.PerlRunProfileState;
@@ -31,7 +30,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class PerlCoverageProfileState extends PerlRunProfileState {
-  private static final Logger LOG = Logger.getInstance(PerlCoverageProfileState.class);
   public PerlCoverageProfileState(ExecutionEnvironment environment) {
     super(environment);
   }
