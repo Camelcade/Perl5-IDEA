@@ -105,6 +105,7 @@ public class PerlCoverageTest extends PerlPlatformTestCase {
     Map<String, ClassData> filesData = projectData.getClasses();
     List<String> filePaths = new ArrayList<>(filesData.keySet());
     filePaths.sort(Comparator.naturalOrder());
+    LOG.debug("Got paths: ", filePaths);
     StringBuilder sb = new StringBuilder();
     for (String filePath : filePaths) {
       ClassData fileData = filesData.get(filePath);
