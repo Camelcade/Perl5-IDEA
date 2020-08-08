@@ -1,0 +1,2 @@
+my $<WRITE>somevar</WRITE>;
+eval "say \$<READ>somevar</READ>";

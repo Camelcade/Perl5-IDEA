@@ -121,6 +121,7 @@ import com.intellij.psi.impl.PsiManagerEx;
 import com.intellij.psi.impl.source.PsiFileImpl;
 import com.intellij.psi.impl.source.tree.FileElement;
 import com.intellij.psi.impl.source.tree.injected.InjectedFileViewProvider;
+import com.intellij.psi.impl.source.tree.injected.InjectedLanguageUtil;
 import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
@@ -1010,7 +1011,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
    * @return all carets offsets. Secondary carets removed
    */
   protected List<Integer> getAndRemoveCarets() {
-    CaretModel caretModel = getEditor().getCaretModel();
+    CaretModel caretModel = getTopLevelEditor().getCaretModel();
     List<Integer> caretsOffsets = ContainerUtil.map(caretModel.getAllCarets(), Caret::getOffset);
     caretModel.removeSecondaryCarets();
     return caretsOffsets;
@@ -1034,8 +1035,13 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     return DataManager.getInstance().getDataContext(myFixture.getEditor().getComponent());
   }
 
+
   private String getEditorText() {
-    return getEditor().getDocument().getText();
+    return getTopLevelEditor().getDocument().getText();
+  }
+
+  protected @NotNull Editor getTopLevelEditor() {
+    return InjectedLanguageUtil.getTopLevelEditor(getEditor());
   }
 
   /**
@@ -1214,7 +1220,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
 
     List<Integer> caretsOffsets = getAndRemoveCarets();
     HighlightManager highlightManager = HighlightManager.getInstance(getProject());
-    Editor editor = getEditor();
+    Editor editor = getTopLevelEditor();
     String result = "";
 
     for (Integer caretOffset : caretsOffsets) {

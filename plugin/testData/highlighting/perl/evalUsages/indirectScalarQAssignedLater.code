@@ -1,0 +1,4 @@
+my $s<caret>omevar;
+my $code;
+$code = 'say $s<caret>omevar';
+eval $code;

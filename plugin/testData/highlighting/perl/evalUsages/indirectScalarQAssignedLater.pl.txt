@@ -1,0 +1,4 @@
+my $<WRITE>somevar</WRITE>;
+my $code;
+$code = 'say $<READ>somevar</READ>';
+eval $code;

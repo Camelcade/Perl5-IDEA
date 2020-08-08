@@ -1,0 +1,2 @@
+my $so<caret>mevar;
+eval 'say $s<caret>omevar';

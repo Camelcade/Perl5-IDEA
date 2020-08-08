@@ -20,9 +20,12 @@ import com.intellij.codeInsight.TargetElementUtil;
 import com.intellij.codeInsight.highlighting.HighlightUsagesHandlerBase;
 import com.intellij.codeInsight.highlighting.HighlightUsagesHandlerFactory;
 import com.intellij.codeInsight.highlighting.ReadWriteAccessDetector;
+import com.intellij.lang.injection.InjectedLanguageManager;
 import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.*;
+import com.intellij.psi.impl.source.tree.injected.InjectedLanguageUtil;
 import com.intellij.psi.search.LocalSearchScope;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.util.Consumer;
@@ -40,60 +43,63 @@ public class PerlHighlightUsagesHandlerFactory implements HighlightUsagesHandler
 
   @Override
   public @Nullable HighlightUsagesHandlerBase<?> createHighlightUsagesHandler(@NotNull Editor editor, @NotNull PsiFile file) {
+    Project project = file.getProject();
     int offset = TargetElementUtil.adjustOffset(file, editor.getDocument(), editor.getCaretModel().getOffset());
-    PsiElement target = file.getViewProvider().findElementAt(offset, PerlLanguage.INSTANCE);
+    InjectedLanguageManager injectedLanguageManager = InjectedLanguageManager.getInstance(project);
+    PsiElement target = injectedLanguageManager.findInjectedElementAt(file, offset);
+    if (target != null && target.getLanguage().isKindOf(PerlLanguage.INSTANCE)) {
+      editor = InjectedLanguageUtil.getEditorForInjectedLanguageNoCommit(editor, file, offset);
+      file = target.getContainingFile();
+      offset = TargetElementUtil.adjustOffset(file, editor.getDocument(), editor.getCaretModel().getOffset());
+    }
+    else {
+      target = file.getViewProvider().findElementAt(offset, PerlLanguage.INSTANCE);
+    }
+
     return target == null ? null : new PerlHighlightUsagesHandler(editor, file, target, offset);
   }
 
   private static class PerlHighlightUsagesHandler extends HighlightUsagesHandlerBase<PsiElement> {
-    private final PsiElement myElement;
-    private final int myAdjustedOffset;
+    private final @NotNull PsiElement myElement;
+    private final int myOriginalEditorOffset;
+    private final @NotNull Editor myOriginalEditor;
 
-    public PerlHighlightUsagesHandler(Editor editor, PsiFile file, @NotNull PsiElement element, int adjustedOffset) {
-      super(editor, file);
+    public PerlHighlightUsagesHandler(@NotNull Editor editor, @NotNull PsiFile file, @NotNull PsiElement element, int offsetInTopEditor) {
+      super(InjectedLanguageUtil.getTopLevelEditor(editor), InjectedLanguageUtil.getTopLevelFile(file));
       myElement = element;
-      myAdjustedOffset = adjustedOffset;
+      myOriginalEditorOffset = offsetInTopEditor;
+      myOriginalEditor = editor;
     }
 
     @Override
     public @NotNull List<PsiElement> getTargets() {
       PsiElement namedElement =
-        TargetElementUtil.getInstance().getNamedElement(myElement, myAdjustedOffset - myElement.getNode().getStartOffset());
+        TargetElementUtil.getInstance().getNamedElement(myElement, myOriginalEditorOffset - myElement.getNode().getStartOffset());
       if (namedElement != null) {
-        PsiReference reference = ReferencesSearch.search(namedElement, new LocalSearchScope(myFile)).findFirst();
-        if (reference instanceof PsiPolyVariantReference) {
-          List<PsiElement> result = new ArrayList<>();
-
-          for (ResolveResult resolveResult : ((PsiPolyVariantReference)reference).multiResolve(false)) {
-            PsiElement targetElement = resolveResult.getElement();
-            if (targetElement != null) {
-              result.add(targetElement);
-            }
-          }
-
-
-          return result;
-        }
+        return collectReferenceTargets(ReferencesSearch.search(namedElement, new LocalSearchScope(myFile)).findFirst());
       }
       else {
-        PsiReference reference = TargetElementUtil.findReference(myEditor, myAdjustedOffset);
-        if (reference instanceof PsiPolyVariantReference) {
-          List<PsiElement> result = new ArrayList<>();
+        return collectReferenceTargets(TargetElementUtil.findReference(myOriginalEditor, myOriginalEditorOffset));
+      }
+    }
 
-          for (ResolveResult resolveResult : ((PsiPolyVariantReference)reference).multiResolve(false)) {
-            PsiElement element = resolveResult.getElement();
-            if (element != null) {
-              result.add(element);
-            }
+    protected @NotNull List<PsiElement> collectReferenceTargets(@Nullable PsiReference reference) {
+      if (reference instanceof PsiPolyVariantReference) {
+        List<PsiElement> result = new ArrayList<>();
+
+        for (ResolveResult resolveResult : ((PsiPolyVariantReference)reference).multiResolve(false)) {
+          PsiElement element = resolveResult.getElement();
+          if (element != null) {
+            result.add(element);
           }
-
-          return result;
         }
-        else if (reference != null) {
-          PsiElement target = reference.resolve();
-          if (target != null) {
-            return Collections.singletonList(target);
-          }
+
+        return result;
+      }
+      else if (reference != null) {
+        PsiElement target = reference.resolve();
+        if (target != null) {
+          return Collections.singletonList(target);
         }
       }
       return Collections.emptyList();
@@ -114,12 +120,12 @@ public class PerlHighlightUsagesHandlerFactory implements HighlightUsagesHandler
             TextRange rangeInIdentifier = target instanceof PerlIdentifierRangeProvider
                                           ? ((PerlIdentifierRangeProvider)target).getRangeInIdentifier()
                                           : ElementManipulators.getValueTextRange(nameIdentifier);
-            myWriteUsages.add(rangeInIdentifier.shiftRight(nameIdentifier.getNode().getStartOffset()));
+            myWriteUsages.add(computeHighlightingRange(nameIdentifier, rangeInIdentifier));
           }
         }
 
         for (PsiReference reference : ReferencesSearch.search(target, new LocalSearchScope(myFile)).findAll()) {
-          TextRange rangeToHighlight = reference.getRangeInElement().shiftRight(reference.getElement().getNode().getStartOffset());
+          TextRange rangeToHighlight = computeHighlightingRange(reference.getElement(), reference.getRangeInElement());
           ReadWriteAccessDetector detector = ReadWriteAccessDetector.findDetector(target);
           if (detector == null || detector.getReferenceAccess(target, reference) == ReadWriteAccessDetector.Access.Read) {
             myReadUsages.add(rangeToHighlight);
@@ -129,6 +135,11 @@ public class PerlHighlightUsagesHandlerFactory implements HighlightUsagesHandler
           }
         }
       }
+    }
+
+    protected @NotNull TextRange computeHighlightingRange(PsiElement element, TextRange rangeInElement) {
+      TextRange rangeInFile = rangeInElement.shiftRight(element.getTextRange().getStartOffset());
+      return InjectedLanguageManager.getInstance(element.getProject()).injectedToHost(element, rangeInFile);
     }
   }
 }

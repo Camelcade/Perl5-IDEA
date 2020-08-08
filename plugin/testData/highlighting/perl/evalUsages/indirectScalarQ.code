@@ -1,0 +1,3 @@
+my $som<caret>evar;
+my $code = 'say $so<caret>mevar';
+eval $code;
