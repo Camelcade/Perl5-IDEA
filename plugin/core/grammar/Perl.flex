@@ -1118,7 +1118,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 	{READONLY}                            {yybegin(AFTER_IDENTIFIER);return SUB_NAME;}
 
 	{IMPLICIT_USERS}					{yybegin(AFTER_IDENTIFIER);return BUILTIN_UNARY;}
-	{PERL_OPERATORS_FILETEST} / [^a-zA-Z0-9_] 	{yybegin(AFTER_IDENTIFIER);return OPERATOR_FILETEST;}
+	{PERL_OPERATORS_FILETEST} / [^a-zA-Z0-9_] 	{yybegin(LEX_HANDLE);return OPERATOR_FILETEST;}
 
 	{NAMED_ARGUMENTLESS}				{yybegin(AFTER_VALUE);return BUILTIN_ARGUMENTLESS;}	// fixme we can return special token here to help parser
 	{LIST_OPERATORS}					{yybegin(YYINITIAL);return BUILTIN_LIST;}

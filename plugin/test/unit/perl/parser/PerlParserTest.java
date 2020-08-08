@@ -27,6 +27,9 @@ public class PerlParserTest extends PerlParserTestBase {
   }
 
   @Test
+  public void testFileTestBareHandle() {doTest();}
+
+  @Test
   public void testIsaOperatorAsSub() {doTest();}
 
   @Test
