@@ -62,6 +62,7 @@ import com.intellij.ide.util.gotoByName.GotoFileModel;
 import com.intellij.ide.util.gotoByName.GotoSymbolModel2;
 import com.intellij.ide.util.treeView.smartTree.*;
 import com.intellij.injected.editor.EditorWindow;
+import com.intellij.injected.editor.VirtualFileWindow;
 import com.intellij.lang.*;
 import com.intellij.lang.documentation.DocumentationProvider;
 import com.intellij.lang.injection.InjectedLanguageManager;
@@ -127,6 +128,7 @@ import com.intellij.psi.util.PsiUtilBase;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.refactoring.rename.inplace.VariableInplaceRenameHandler;
 import com.intellij.refactoring.util.NonCodeSearchDescriptionLocation;
+import com.intellij.testFramework.LightVirtualFile;
 import com.intellij.testFramework.MapDataContext;
 import com.intellij.testFramework.ParsingTestCase;
 import com.intellij.testFramework.UsefulTestCase;
@@ -756,11 +758,22 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     return iconString.substring(iconString.lastIndexOf('/'));
   }
 
+  protected @Nullable PsiFile getTopLevelFile() {
+    PsiFile psiFile = getFile();
+    return psiFile == null ? null : InjectedLanguageManager.getInstance(getProject()).getTopLevelFile(psiFile);
+  }
+
   protected void addVirtualFileFilter() {
-    VirtualFile openedVirtualFile = ObjectUtils.doIfNotNull(getFile(), PsiFile::getVirtualFile);
+    VirtualFile openedVirtualFile = ObjectUtils.doIfNotNull(getTopLevelFile(), PsiFile::getVirtualFile);
     ((PsiManagerEx)myFixture.getPsiManager()).setAssertOnFileLoadingFilter(file -> {
       if (!(file.getFileType() instanceof PerlPluginBaseFileType)) {
         return false;
+      }
+      if (file instanceof VirtualFileWindow) {
+        file = ((VirtualFileWindow)file).getDelegate();
+      }
+      if (file instanceof LightVirtualFile) {
+        file = ((LightVirtualFile)file).getOriginalFile();
       }
       return !Objects.equals(openedVirtualFile, file);
     }, getTestRootDisposable());
@@ -837,6 +850,10 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(appendix), sb.toString());
   }
 
+  protected boolean withInjections() {
+    return false;
+  }
+
   private String serializeReference(PsiReference reference) {
     StringBuilder sb = new StringBuilder();
     PsiElement sourceElement = reference.getElement();
@@ -884,6 +901,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
 
   private List<PsiReference> collectFileReferences() {
     final List<PsiReference> references = new ArrayList<>();
+    InjectedLanguageManager injectedLanguageManager = InjectedLanguageManager.getInstance(getProject());
 
     getFile().getViewProvider().getAllFiles().forEach(file -> {
       if (!file.getLanguage().isKindOf(PerlLanguage.INSTANCE) && !file.getLanguage().isKindOf(PodLanguage.INSTANCE)) {
@@ -893,6 +911,16 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
         @Override
         public void visitElement(@NotNull PsiElement element) {
           Collections.addAll(references, element.getReferences());
+          if (withInjections()) {
+            if (element instanceof PsiLanguageInjectionHost) {
+              List<Pair<PsiElement, TextRange>> files = injectedLanguageManager.getInjectedPsiFiles(element);
+              if (files != null) {
+                for (Pair<PsiElement, TextRange> pair : files) {
+                  pair.first.accept(this);
+                }
+              }
+            }
+          }
           element.acceptChildren(this);
         }
       });

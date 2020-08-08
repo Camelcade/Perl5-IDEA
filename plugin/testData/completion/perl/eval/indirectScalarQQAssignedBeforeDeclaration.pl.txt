@@ -1,0 +1,3 @@
+Text: somevar; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+	Lookups: somevar
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 33 in indirectScalarQQAssignedBeforeDeclaration.pl

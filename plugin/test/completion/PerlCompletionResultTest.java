@@ -26,6 +26,18 @@ public class PerlCompletionResultTest extends PerlCompletionResultTestCase {
   }
 
   @Test
+  public void testEvalString() {doTestInsert();}
+
+  @Test
+  public void testEvalStringQQ() {doTestInsert();}
+
+  @Test
+  public void testEvalStringReplace() {doTestReplace();}
+
+  @Test
+  public void testEvalStringQQReplace() {doTestReplace();}
+
+  @Test
   public void testCharNameInsert() {doTestInsert();}
 
   @Test

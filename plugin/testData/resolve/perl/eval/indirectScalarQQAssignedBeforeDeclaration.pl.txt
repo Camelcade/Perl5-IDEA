@@ -1,0 +1,11 @@
+PerlVariableReference at (5,12); text in range: 'somevar' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 37 in indirectScalarQQAssignedBeforeDeclaration.pl
+
+PerlVariableReference at (11,15); text in range: 'code' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 3 in indirectScalarQQAssignedBeforeDeclaration.pl
+
+PerlVariableReference at (24,31); text in range: 'somevar' => 0 results:
+
+PerlVariableReference at (53,57); text in range: 'code' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 3 in indirectScalarQQAssignedBeforeDeclaration.pl
+

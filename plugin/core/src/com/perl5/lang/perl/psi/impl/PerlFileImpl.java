@@ -49,6 +49,7 @@ import com.perl5.lang.perl.psi.PerlDoExpr;
 import com.perl5.lang.perl.psi.PerlFile;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
+import com.perl5.lang.perl.psi.references.PerlFileContextSubstitutor;
 import com.perl5.lang.perl.psi.stubs.PerlFileStub;
 import com.perl5.lang.perl.psi.stubs.imports.PerlUseStatementStub;
 import com.perl5.lang.perl.psi.stubs.imports.runtime.PerlRuntimeImportStub;
@@ -291,7 +292,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
 
   @Override
   public PsiElement getContext() {
-    return fileContext == null ? super.getContext() : fileContext;
+    return PerlFileContextSubstitutor.getContext(fileContext == null ? super.getContext() : fileContext);
   }
 
   @Override

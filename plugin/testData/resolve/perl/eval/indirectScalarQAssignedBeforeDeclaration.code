@@ -1,0 +1,4 @@
+my $code;
+$code = 'say $somevar';
+my $somevar;
+eval $code;
