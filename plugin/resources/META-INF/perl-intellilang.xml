@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright 2015-2019 Alexandr Evstigneev
+  ~ Copyright 2015-2020 Alexandr Evstigneev
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -25,5 +25,9 @@
                        order="first,before TemporaryPlacesInjector"/>
     <patterns.patternClass className="com.perl5.lang.perl.idea.intellilang.PerlInjectionPatterns" alias="perl5"/>
     <applicationService serviceImplementation="com.perl5.lang.perl.idea.intellilang.PerlTemporaryInjectedLanguageDetector"/>
+    <experimentalFeature percentOfUsers="100" id="perl5.eval.auto.injection">
+      <description>Enables automatic perl injections into eval arguments</description>
+    </experimentalFeature>
+
   </extensions>
 </idea-plugin>

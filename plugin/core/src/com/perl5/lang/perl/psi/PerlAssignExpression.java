@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
@@ -66,6 +65,22 @@ public interface PerlAssignExpression extends PsiPerlExpr {
   }
 
   /**
+   * @return a left counterpart of the assignment for the right side.
+   * @implNote current implementation works properly only for simple a = b expressions.
+   */
+  default @Nullable PsiElement getLeftPartOfAssignment(@NotNull PsiElement value) {
+    PsiElement rightSide = getRightSide();
+    if (rightSide == null) {
+      return null;
+    }
+    List<PsiElement> elements = flattenAssignmentPart(getRightSide());
+    if (elements.size() != 1 || !elements.get(0).equals(value)) {
+      return null;
+    }
+    return getLeftSide();
+  }
+
+  /**
    * @return a descriptor of value assigned to the {@code leftPartElement} if any. Descriptor contains a list of {@code psiElement}s and index in
    * the element, if it's necessary. null means there is no element, or assignment, or it's the rightmost part of it.
    * <br/>
@@ -112,8 +127,6 @@ public interface PerlAssignExpression extends PsiPerlExpr {
     }
 
     if (!found) {
-      Logger.getInstance(PerlAssignExpression.class)
-        .error("Unable to find a declaration: " + this.getText() + ": " + leftPartElement.getText());
       return null;
     }
 

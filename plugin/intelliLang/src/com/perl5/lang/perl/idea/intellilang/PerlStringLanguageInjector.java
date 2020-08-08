@@ -16,16 +16,26 @@
 
 package com.perl5.lang.perl.idea.intellilang;
 
+import com.intellij.codeInsight.completion.CompletionUtil;
 import com.intellij.lang.Language;
+import com.intellij.openapi.application.Experiments;
+import com.intellij.openapi.util.RecursionManager;
 import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.ElementManipulators;
-import com.intellij.psi.InjectedLanguagePlaces;
-import com.intellij.psi.LanguageInjector;
-import com.intellij.psi.PsiLanguageInjectionHost;
-import com.perl5.lang.perl.psi.PerlAnnotationInject;
-import com.perl5.lang.perl.psi.PerlString;
+import com.intellij.psi.*;
+import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.search.searches.ReferencesSearch;
+import com.intellij.psi.util.CachedValueProvider;
+import com.intellij.psi.util.CachedValuesManager;
+import com.intellij.util.Query;
+import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
+import java.util.Objects;
 
 
 public class PerlStringLanguageInjector implements LanguageInjector {
@@ -39,6 +49,73 @@ public class PerlStringLanguageInjector implements LanguageInjector {
     if (injectAnnotation != null) {
       injectByAnnotation(host, injectionPlacesRegistrar, injectAnnotation);
     }
+
+    // program context
+    if (Experiments.getInstance().isFeatureEnabled("perl5.eval.auto.injection")) {
+      PsiElement context = getPerlInjectionContext(host);
+      if (context != null) {
+        injectLanguage(host, injectionPlacesRegistrar, PerlLanguage.INSTANCE);
+      }
+    }
+  }
+
+  @Contract("null->null;!null->!null")
+  public static @Nullable PsiElement getInjectionContextOrSelf(@Nullable PsiElement context) {
+    if (context instanceof PsiLanguageInjectionHost) {
+      return Objects.requireNonNullElse(getPerlInjectionContext((PsiLanguageInjectionHost)context), context);
+    }
+    return context;
+  }
+
+  public static @Nullable PsiElement getPerlInjectionContext(@NotNull PsiLanguageInjectionHost host) {
+    return CachedValuesManager.getCachedValue(host, () -> CachedValueProvider.Result.create(
+      RecursionManager.doPreventingRecursion(host, true, () -> computeInjectionContext(host)), host));
+  }
+
+  private static @Nullable PsiElement computeInjectionContext(@NotNull PsiLanguageInjectionHost host) {
+    if (host instanceof PsiPerlStringXq) {
+      return null;
+    }
+    PsiElement parent = host.getParent();
+    if (parent instanceof PsiPerlEvalExpr) {
+      return parent;
+    }
+
+    if (!(parent instanceof PsiPerlAssignExpr)) {
+      return null;
+    }
+
+    PsiElement variable = ((PsiPerlAssignExpr)parent).getLeftPartOfAssignment(host);
+    if (variable instanceof PerlVariableDeclarationExpr) {
+      List<PsiPerlVariableDeclarationElement> variables = ((PerlVariableDeclarationExpr)variable).getVariableDeclarationElementList();
+      if (variables.size() != 1) {
+        return null;
+      }
+      variable = variables.get(0);
+    }
+    else if (variable instanceof PsiPerlScalarVariable) {
+      PerlVariableDeclarationElement variableDeclarationElement = ((PsiPerlScalarVariable)variable).getLexicalDeclaration();
+      if (variableDeclarationElement == null) {
+        return null;
+      }
+      variable = variableDeclarationElement;
+    }
+    else {
+      return null;
+    }
+
+    PsiElement realVariable = CompletionUtil.getOriginalOrSelf(variable);
+    Query<PsiReference> references =
+      ReferencesSearch.search(realVariable, GlobalSearchScope.fileScope(host.getContainingFile().getOriginalFile()));
+    for (PsiReference reference : references) {
+      PsiElement referenceElement = reference.getElement();
+      PsiElement variableUsage = referenceElement.getParent();
+      PsiElement usageContext = variableUsage.getParent();
+      if (usageContext instanceof PsiPerlEvalExpr) {
+        return usageContext;
+      }
+    }
+    return null;
   }
 
   protected void injectByAnnotation(@NotNull PsiLanguageInjectionHost host,
@@ -48,7 +125,13 @@ public class PerlStringLanguageInjector implements LanguageInjector {
     if (languageMarker == null) {
       return;
     }
-    Language targetLanguage = PerlInjectionMarkersService.getInstance(host.getProject()).getLanguageByMarker(languageMarker);
+    injectLanguage(host, injectionPlacesRegistrar,
+                   PerlInjectionMarkersService.getInstance(host.getProject()).getLanguageByMarker(languageMarker));
+  }
+
+  private void injectLanguage(@NotNull PsiLanguageInjectionHost host,
+                              @NotNull InjectedLanguagePlaces injectionPlacesRegistrar,
+                              Language targetLanguage) {
     if (targetLanguage == null) {
       return;
     }

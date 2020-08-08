@@ -2134,7 +2134,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
 
   protected void doTestQuickDocWithoutInit() {
     List<Integer> caretsOffsets = getAndRemoveCarets();
-    CaretModel caretModel = getEditor().getCaretModel();
+    CaretModel caretModel = getTopLevelEditor().getCaretModel();
     StringBuilder sb = new StringBuilder();
     for (int i = 0; i < caretsOffsets.size(); i++) {
       Integer caretOffset = caretsOffsets.get(i);
@@ -2811,5 +2811,16 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     if (!psiString.contains("PsiErrorElement")) {
       WriteAction.run(() -> ParsingTestCase.ensureCorrectReparse(getFile()));
     }
+  }
+
+  protected void doTestInjection() {
+    initWithFileSmartWithoutErrors();
+    doTestInjectionWithoutInit();
+  }
+
+  protected void doTestInjectionWithoutInit() {
+    PsiFile file = getFile();
+    assertNotNull(file);
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), file.getLanguage() + SEPARATOR_NEWLINES + file.getText());
   }
 }
