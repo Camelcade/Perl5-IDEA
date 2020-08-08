@@ -25,6 +25,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.impl.source.PsiFileImpl;
 import com.intellij.psi.templateLanguages.TemplateLanguageFileViewProvider;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
@@ -80,6 +81,11 @@ public class PerlFileViewProvider extends MultiplePsiFilesPerDocumentFileViewPro
     else {
       return myLanguages;
     }
+  }
+
+  @Override
+  public IElementType getContentElementType(@NotNull Language language) {
+    return language == PodLanguage.INSTANCE ? POD_BLOCK : null;
   }
 
   @Override
