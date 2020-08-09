@@ -1217,10 +1217,10 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 	{CORE_PREFIX}"y"  / {QUOTE_LIKE_SUFFIX} {pushStateAndBegin(TRANS_OPENER);return RESERVED_Y;}
 	{CORE_PREFIX}"tr" / {QUOTE_LIKE_SUFFIX} {pushStateAndBegin(TRANS_OPENER);return RESERVED_TR;}
 
-	{CORE_PREFIX}"qw" / {QUOTE_LIKE_SUFFIX} {return processQuoteLikeStringOpener(RESERVED_QW);}
-	{CORE_PREFIX}"qq" / {QUOTE_LIKE_SUFFIX} {return processQuoteLikeStringOpener(RESERVED_QQ);}
-	{CORE_PREFIX}"qx" / {QUOTE_LIKE_SUFFIX} {return processQuoteLikeStringOpener(RESERVED_QX);}
-	{CORE_PREFIX}"q" / {QUOTE_LIKE_SUFFIX}  {return processQuoteLikeStringOpener(RESERVED_Q);}
+	{CORE_PREFIX}"qw" / {QUOTE_LIKE_SUFFIX} {pushStateAndBegin(AFTER_VALUE, QUOTE_LIKE_OPENER_QW);return RESERVED_QW;}
+	{CORE_PREFIX}"qq" / {QUOTE_LIKE_SUFFIX} {pushStateAndBegin(AFTER_VALUE, QUOTE_LIKE_OPENER_QQ);return RESERVED_QQ;}
+	{CORE_PREFIX}"qx" / {QUOTE_LIKE_SUFFIX} {pushStateAndBegin(AFTER_VALUE, QUOTE_LIKE_OPENER_QX);return RESERVED_QX;}
+	{CORE_PREFIX}"q" / {QUOTE_LIKE_SUFFIX}  {pushStateAndBegin(AFTER_VALUE, QUOTE_LIKE_OPENER_Q);return RESERVED_Q;}
 
 	{CORE_PREFIX}"qr" / {QUOTE_LIKE_SUFFIX} {return processRegexOpener(RESERVED_QR);}
 	{CORE_PREFIX}"m" / {QUOTE_LIKE_SUFFIX}  {return processRegexOpener(RESERVED_M);}
@@ -1308,7 +1308,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 	"<<~" / {QUOTED_HEREDOC_MARKER_NON_EMPTY} {yybegin(QUOTED_HEREDOC_OPENER_INDENTABLE);return OPERATOR_HEREDOC;}
 	"<<~" / "\\"?{UNQUOTED_HEREDOC_MARKER} 	  {yybegin(BARE_HEREDOC_OPENER_INDENTABLE);return OPERATOR_HEREDOC;}
 
-	{DQ_STRING}	{yybegin(AFTER_VALUE);pushState();yybegin(QUOTE_LIKE_OPENER_QQ);return captureString();}
+	{DQ_STRING} {yybegin(AFTER_VALUE);pushState();yybegin(QUOTE_LIKE_OPENER_QQ);return captureString();}
 	{SQ_STRING} {yybegin(AFTER_VALUE);pushState();yybegin(QUOTE_LIKE_OPENER_Q);return captureString();}
 	{XQ_STRING} {yybegin(AFTER_VALUE);pushState();yybegin(QUOTE_LIKE_OPENER_QX);return captureString();}
 

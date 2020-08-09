@@ -799,30 +799,6 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
   }
 
   /**
-   * Quote-like string procesors
-   **/
-  public IElementType processQuoteLikeStringOpener(IElementType tokenType) {
-    yybegin(AFTER_VALUE);
-    pushState();
-    if (tokenType == RESERVED_Q) {
-      yybegin(QUOTE_LIKE_OPENER_Q);
-    }
-    else if (tokenType == RESERVED_QQ) {
-      yybegin(QUOTE_LIKE_OPENER_QQ);
-    }
-    else if (tokenType == RESERVED_QX) {
-      yybegin(QUOTE_LIKE_OPENER_QX);
-    }
-    else if (tokenType == RESERVED_QW) {
-      yybegin(QUOTE_LIKE_OPENER_QW);
-    }
-    else {
-      throw new RuntimeException("Unable to switch state by token " + tokenType);
-    }
-    return tokenType;
-  }
-
-  /**
    * Sets up regex parser
    */
   public IElementType processRegexOpener(IElementType tokenType) {
