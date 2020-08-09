@@ -799,33 +799,6 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
   }
 
   /**
-   * Sets up regex parser
-   */
-  public IElementType processRegexOpener(IElementType tokenType) {
-    regexCommand = tokenType;
-
-    if (regexCommand == RESERVED_S)    // two sections s
-    {
-      sectionsNumber = 2;
-    }
-    else                        // one section qr m
-    {
-      sectionsNumber = 1;
-    }
-
-    pushState();
-    yybegin(REGEX_OPENER);
-    return tokenType;
-  }
-
-  public IElementType captureImplicitRegex() {
-    regexCommand = RESERVED_M;
-    sectionsNumber = 1;
-    pushState();
-    return captureRegex();
-  }
-
-  /**
    * Parses regexp from the current position (opening delimiter) and preserves tokens in preparsedTokensList
    * REGEX_MODIFIERS = [msixpodualgcerxx]
    *

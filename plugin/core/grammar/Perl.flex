@@ -1100,7 +1100,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 }
 
 <YYINITIAL>{
-	"/"   						{yybegin(AFTER_VALUE);return captureImplicitRegex();}
+	"/"   {regexCommand=RESERVED_M; sectionsNumber=1; pushStateAndBegin(AFTER_VALUE,AFTER_VALUE); return captureRegex();}
 }
 
 <YYINITIAL>{
@@ -1222,9 +1222,9 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 	{CORE_PREFIX}"qx" / {QUOTE_LIKE_SUFFIX} {pushStateAndBegin(AFTER_VALUE, QUOTE_LIKE_OPENER_QX);return RESERVED_QX;}
 	{CORE_PREFIX}"q" / {QUOTE_LIKE_SUFFIX}  {pushStateAndBegin(AFTER_VALUE, QUOTE_LIKE_OPENER_Q);return RESERVED_Q;}
 
-	{CORE_PREFIX}"qr" / {QUOTE_LIKE_SUFFIX} {return processRegexOpener(RESERVED_QR);}
-	{CORE_PREFIX}"m" / {QUOTE_LIKE_SUFFIX}  {return processRegexOpener(RESERVED_M);}
-	{CORE_PREFIX}"s" / {QUOTE_LIKE_SUFFIX}  {return processRegexOpener(RESERVED_S);}
+	{CORE_PREFIX}"qr" / {QUOTE_LIKE_SUFFIX} {regexCommand=RESERVED_QR; sectionsNumber=1; pushStateAndBegin(REGEX_OPENER); return regexCommand;}
+	{CORE_PREFIX}"m" / {QUOTE_LIKE_SUFFIX}  {regexCommand=RESERVED_M; sectionsNumber=1; pushStateAndBegin(REGEX_OPENER); return regexCommand;}
+	{CORE_PREFIX}"s" / {QUOTE_LIKE_SUFFIX}  {regexCommand=RESERVED_S; sectionsNumber=2; pushStateAndBegin(REGEX_OPENER); return regexCommand;}
 }
 
 <AFTER_DEREFERENCE>{
