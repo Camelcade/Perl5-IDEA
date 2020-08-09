@@ -1,3 +1,11 @@
-Language: Perl5
+Host: PsiPerlStringSqImpl(Perl5: STRING_SQ)
+Host range: (5,13)
+Host chars: 'say␣42'
 ----------
-say 42
+Injected range: (1,7)
+Text in range: say␣42
+File language: Language: Perl5
+File text: 
+----------
+say␣42
+----------

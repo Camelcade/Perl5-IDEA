@@ -1,3 +1,0 @@
-Language: Perl5
-----------
-eval `say 42`;

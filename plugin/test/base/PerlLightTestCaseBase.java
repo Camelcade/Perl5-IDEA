@@ -2395,7 +2395,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
 
     Consumer<TextRange> rangeProcessor = it -> {
       result.append("Range: ").append(it).append(" (").append(it.getLength()).append(")\n");
-      result.append(it.subSequence(documentChars).toString().replace(' ', '␣')).append(SEPARATOR_NEWLINES);
+      result.append(protectSpaces(it.subSequence(documentChars))).append(SEPARATOR_NEWLINES);
     };
 
     if (size90 > 0) {
@@ -2415,6 +2415,10 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     }
 
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), result.toString());
+  }
+
+  protected @NotNull String protectSpaces(@NotNull CharSequence charSequence) {
+    return charSequence.toString().replace(' ', '␣');
   }
 
   private @NotNull String serializeTextAttributeKey(@Nullable TextAttributesKey key) {
@@ -2853,8 +2857,36 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   }
 
   protected void doTestInjectionWithoutInit() {
-    PsiFile file = getFile();
+    PsiFile file = getTopLevelFile();
     assertNotNull(file);
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), file.getLanguage() + SEPARATOR_NEWLINES + file.getText());
+    InjectedLanguageManager injectedLanguageManager = InjectedLanguageManager.getInstance(getProject());
+    StringBuilder result = new StringBuilder();
+    file.accept(new PsiRecursiveElementVisitor() {
+      @Override
+      public void visitElement(@NotNull PsiElement element) {
+        if (element instanceof PsiLanguageInjectionHost) {
+          List<Pair<PsiElement, TextRange>> files = injectedLanguageManager.getInjectedPsiFiles(element);
+          if (files != null && !files.isEmpty()) {
+            CharSequence hostChars = element.getNode().getChars();
+            TextRange hostRange = element.getTextRange();
+            result.append("Host: ").append(element).append("\n");
+            result.append("Host range: ").append(hostRange).append("\n");
+            result.append("Host chars: ").append(protectSpaces(hostChars));
+            for (Pair<PsiElement, TextRange> pair : files) {
+              PsiElement file = pair.first;
+              TextRange range = pair.second;
+              result.append(SEPARATOR_NEWLINES).append("Injected range: ").append(range).append("\n");
+              result.append("Text in range: ").append(protectSpaces(range.subSequence(hostChars))).append("\n");
+              result.append("File language: ").append(file.getLanguage()).append("\n");
+              result.append("File text: ").append(SEPARATOR_NEWLINES);
+              result.append(protectSpaces(file.getText()));
+            }
+            result.append(SEPARATOR_NEWLINES);
+          }
+        }
+        super.visitElement(element);
+      }
+    });
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), result.toString());
   }
 }
