@@ -18,7 +18,6 @@ package com.perl5.lang.perl.idea.intellilang;
 
 import com.intellij.codeInsight.completion.CompletionUtil;
 import com.intellij.lang.Language;
-import com.intellij.lang.injection.MultiHostInjector;
 import com.intellij.lang.injection.MultiHostRegistrar;
 import com.intellij.openapi.application.Experiments;
 import com.intellij.openapi.util.RecursionManager;
@@ -45,7 +44,7 @@ import java.util.List;
 import java.util.Objects;
 
 
-public class PerlStringLanguageInjector implements MultiHostInjector {
+public class PerlStringLanguageInjector extends PerlLiteralLanguageInjector {
   @Override
   public void getLanguagesToInject(@NotNull MultiHostRegistrar registrar, @NotNull PsiElement host) {
     if (!(host instanceof PerlStringMixin) || !((PerlStringMixin)host).isValidHost()) {

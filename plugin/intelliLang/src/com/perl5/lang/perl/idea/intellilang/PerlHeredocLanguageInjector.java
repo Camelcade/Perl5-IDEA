@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.idea.intellilang;
 
 import com.intellij.lang.Language;
-import com.intellij.lang.injection.MultiHostInjector;
 import com.intellij.lang.injection.MultiHostRegistrar;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.ElementManipulators;
@@ -32,7 +31,7 @@ import java.util.Collections;
 import java.util.List;
 
 
-public class PerlHeredocLanguageInjector implements MultiHostInjector {
+public class PerlHeredocLanguageInjector extends PerlLiteralLanguageInjector {
   private static final List<? extends Class<? extends PsiElement>> ELEMENTS_TO_INJECT =
     Collections.singletonList(PerlHeredocElementImpl.class);
 
