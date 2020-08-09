@@ -56,6 +56,32 @@ public class PerlEvalInjectionTest extends PerlLightTestCase {
     doTest("my $variable; eval $variable;  $variable = 'sa<caret>y 42';");
   }
 
+  @Test
+  public void testExpressionsInStringQ() {doTest();}
+
+  @Test
+  public void testExpressionsInStringQAngles() {doTest();}
+
+  @Test
+  public void testExpressionsInStringQQ() {doTest();}
+
+  @Test
+  public void testExpressionsInStringQQAngles() {doTest();}
+
+  @Test
+  public void testExpressionsInStringQX() {doTest();}
+
+  @Test
+  public void testExpressionsInStringQXAngles() {doTest();}
+
+  private void doTest(boolean checkErrors) {
+    doTestInjection(checkErrors);
+  }
+
+  private void doTest() {
+    doTestInjection();
+  }
+
   private void doTest(@NotNull String content) {
     initWithTextSmartWithoutErrors(content);
     doTestInjectionWithoutInit();

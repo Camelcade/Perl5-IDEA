@@ -1,6 +1,2 @@
-PerlVariableReference at (5,12); text in range: 'somevar' => 1 results:
-	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 3 in directScalarQQ.pl
-
 PerlVariableReference at (24,31); text in range: 'somevar' => 1 results:
 	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 3 in directScalarQQ.pl
-

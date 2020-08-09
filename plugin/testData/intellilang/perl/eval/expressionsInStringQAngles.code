@@ -1,0 +1,17 @@
+my $variable;
+my @variable;
+my %variable;
+
+eval q <1;\f1;\b1;\a1;\<\>;1;\l1;\u1;\L1;\U1;\F1;\Q1;\E1;>;
+eval q <1;\n1;\t1;\r1;\cA1;\x201;\x{20}1;\o{123}1;\0121;\N{SMILE}1;\N{U+20}1;>;
+eval q <say 42;>;
+eval q <say $variable; say 42;>;
+eval q <say $variable{testvar}; say 42;>;
+eval q <say $variable[42]; say 42;>;
+eval q <say $variable-\>{testvar}; say 42;>;
+eval q <say $variable-\>[42]; say 42;>;
+eval q <say @variable; say 42;>;
+eval q <say @variable[1,2,3]; say 42;>;
+eval q <say @variable; say 42;>;
+eval q <say @variable{qw/bla bla/}; say 42;>;
+eval q <say @variable[1,2,3]; say 42;>;

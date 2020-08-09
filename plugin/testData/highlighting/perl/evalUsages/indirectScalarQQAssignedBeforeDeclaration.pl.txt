@@ -1,4 +1,4 @@
 my $code;
-$code = "say $<READ>somevar</READ>";
-my $<WRITE>somevar</WRITE>;
+$code = "say $somevar";
+my $somevar;
 eval $code;

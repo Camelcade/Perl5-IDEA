@@ -2852,7 +2852,16 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   }
 
   protected void doTestInjection() {
-    initWithFileSmartWithoutErrors();
+    doTestInjection(true);
+  }
+
+  protected void doTestInjection(boolean checkErrors) {
+    if (checkErrors) {
+      initWithFileSmartWithoutErrors();
+    }
+    else {
+      initWithFileSmart();
+    }
     doTestInjectionWithoutInit();
   }
 

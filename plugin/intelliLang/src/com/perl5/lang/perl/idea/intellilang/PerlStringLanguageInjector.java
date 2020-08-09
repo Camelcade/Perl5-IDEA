@@ -81,8 +81,8 @@ public class PerlStringLanguageInjector extends PerlLiteralLanguageInjector {
   }
 
   public static @Nullable PsiElement getPerlInjectionContext(@NotNull PsiLanguageInjectionHost host) {
-    return CachedValuesManager.getCachedValue(host, () -> CachedValueProvider.Result.create(
-      RecursionManager.doPreventingRecursion(host, true, () -> computeInjectionContext(host)), host));
+    return RecursionManager.doPreventingRecursion(host, false, CachedValuesManager.getCachedValue(
+      host, () -> CachedValueProvider.Result.create(() -> computeInjectionContext(host), host)));
   }
 
   private static @Nullable PsiElement computeInjectionContext(@NotNull PsiLanguageInjectionHost host) {
@@ -141,18 +141,25 @@ public class PerlStringLanguageInjector extends PerlLiteralLanguageInjector {
     injectLanguage(host, registrar, PerlInjectionMarkersService.getInstance(host.getProject()).getLanguageByMarker(languageMarker));
   }
 
-  private void injectLanguage(@NotNull PsiLanguageInjectionHost host,
+  private void injectLanguage(@NotNull PerlStringMixin perlString,
                               @NotNull MultiHostRegistrar registrar,
-                              Language targetLanguage) {
+                              @Nullable Language targetLanguage) {
     if (targetLanguage == null) {
       return;
     }
-    TextRange contentRange = ElementManipulators.getValueTextRange(host);
+    TextRange contentRange = ElementManipulators.getValueTextRange(perlString);
     if (contentRange.isEmpty()) {
       return;
     }
-    registrar.startInjecting(targetLanguage);
-    registrar.addPlace(null, null, host, contentRange);
-    registrar.doneInjecting();
+    PsiElement openQuoteElement = perlString.getOpenQuoteElement();
+    if (openQuoteElement == null) {
+      return;
+    }
+    PsiElement closeQuoteElement = perlString.getCloseQuoteElement();
+    PsiElement firstContentElement = openQuoteElement.getNextSibling();
+    if (firstContentElement == closeQuoteElement) {
+      return;
+    }
+    injectLanguageIntoPsiRange(firstContentElement, closeQuoteElement, registrar, targetLanguage);
   }
 }
