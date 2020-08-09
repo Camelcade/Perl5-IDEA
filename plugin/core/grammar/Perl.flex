@@ -1089,7 +1089,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
           "<" / "$"? {QUALIFIED_IDENTIFIER_WITHOUT_TRAILING_SEPARATOR}? ">"	{yybegin(HANDLE_WITH_ANGLE);return LEFT_ANGLE;}
           "<<" / ">>"                           {yybegin(DOUBLE_ANGLE_CLOSE);return LEFT_ANGLE;}
         }
-	"<"					{yybegin(AFTER_VALUE);pushState();yybegin(QUOTE_LIKE_OPENER_GLOB);return captureString();}
+	"<"    {pushStateAndBegin(AFTER_VALUE, QUOTE_LIKE_OPENER_GLOB);return captureString();}
 }
 
 <AFTER_VALUE,AFTER_VARIABLE,AFTER_IDENTIFIER>{
@@ -1308,9 +1308,9 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 	"<<~" / {QUOTED_HEREDOC_MARKER_NON_EMPTY} {yybegin(QUOTED_HEREDOC_OPENER_INDENTABLE);return OPERATOR_HEREDOC;}
 	"<<~" / "\\"?{UNQUOTED_HEREDOC_MARKER} 	  {yybegin(BARE_HEREDOC_OPENER_INDENTABLE);return OPERATOR_HEREDOC;}
 
-	{DQ_STRING} {yybegin(AFTER_VALUE);pushState();yybegin(QUOTE_LIKE_OPENER_QQ);return captureString();}
-	{SQ_STRING} {yybegin(AFTER_VALUE);pushState();yybegin(QUOTE_LIKE_OPENER_Q);return captureString();}
-	{XQ_STRING} {yybegin(AFTER_VALUE);pushState();yybegin(QUOTE_LIKE_OPENER_QX);return captureString();}
+	{DQ_STRING} {pushStateAndBegin(AFTER_VALUE, QUOTE_LIKE_OPENER_QQ);return captureString();}
+	{SQ_STRING} {pushStateAndBegin(AFTER_VALUE, QUOTE_LIKE_OPENER_Q);return captureString();}
+	{XQ_STRING} {pushStateAndBegin(AFTER_VALUE, QUOTE_LIKE_OPENER_QX);return captureString();}
 
 	// fixme optimize via merging?
 	{BAREWORD_MINUS} / {MAY_BE_SPACES_OR_COMMENTS}* {FARROW}	{yybegin(AFTER_VALUE);return STRING_CONTENT;}
