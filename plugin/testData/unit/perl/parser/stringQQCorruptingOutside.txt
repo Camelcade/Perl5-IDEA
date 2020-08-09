@@ -1,0 +1,29 @@
+Subtree: Perl5 (Perl5)
+Perl5
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlStringDqImpl(Perl5: STRING_DQ)
+      PsiElement(Perl5: QUOTE_DOUBLE_OPEN)('"')
+      PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('somethingn ')
+      PsiPerlHashElementImpl(Perl5: HASH_ELEMENT)
+        PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+          PsiElement(Perl5: $$)('$')
+          PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('var')
+        PsiPerlHashIndexImpl(Perl5: HASH_INDEX)
+          PsiElement(Perl5: {)('{')
+          PsiPerlSubCallImpl(SUB_CALL)
+            PsiPerlMethodImpl(Perl5: METHOD)
+              PerlSubNameElementImpl(Perl5: subname)('somsd')
+          PsiErrorElement:<call arguments>, Perl5: (, Perl5: ,, Perl5: => or Perl5: package::name expected, got '"'
+            PsiElement(Perl5: QUOTE_DOUBLE_CLOSE)('"')
+          PsiElement(Perl5: ;)(';')
+          PsiElement(Perl5: say)('say')
+          PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
+          PerlStringContentElementImpl(Perl5: STRING_CONTENT)('hi')
+          PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
+          PsiElement(Perl5: ;)(';')
+          PsiElement(Perl5: })('}')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('"somethingn $var{somsd";\nsay 'hi';\n}')
+--------------------------------------------------------------------------------
