@@ -59,8 +59,4 @@ public class PerlCoverageSuite extends BaseCoverageSuite {
   public @NotNull CoverageEngine getCoverageEngine() {
     return PerlCoverageEngine.getInstance();
   }
-
-  @Override
-  public void deleteCachedCoverageData() {
-  }
 }

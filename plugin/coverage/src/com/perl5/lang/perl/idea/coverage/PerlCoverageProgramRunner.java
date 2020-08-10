@@ -16,8 +16,8 @@
 
 package com.perl5.lang.perl.idea.coverage;
 
+import com.intellij.coverage.CoverageDataManager;
 import com.intellij.coverage.CoverageExecutor;
-import com.intellij.coverage.CoverageHelper;
 import com.intellij.coverage.CoverageRunnerData;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.ExecutionManager;
@@ -52,14 +52,15 @@ public class PerlCoverageProgramRunner implements ProgramRunner<RunnerSettings> 
   @Override
   public void execute(@NotNull ExecutionEnvironment environment) throws ExecutionException {
     ExecutionManager.getInstance(environment.getProject()).startRunProfile(environment, state -> {
+      GenericPerlRunConfiguration runConfiguration = (GenericPerlRunConfiguration)environment.getRunProfile();
       RunContentDescriptor descriptor = DefaultProgramRunnerKt.executeState(new PerlCoverageProfileState(environment), environment, this);
       if (descriptor == null) {
         return null;
       }
       ProcessHandler processHandler = descriptor.getProcessHandler();
       if (processHandler != null) {
-        CoverageHelper
-          .attachToProcess((GenericPerlRunConfiguration)environment.getRunProfile(), processHandler, environment.getRunnerSettings());
+        CoverageDataManager.getInstance(runConfiguration.getProject())
+          .attachToProcess(processHandler, runConfiguration, environment.getRunnerSettings());
       }
       return descriptor;
     });

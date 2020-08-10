@@ -16,13 +16,13 @@
 
 package com.perl5.lang.perl.idea.coverage;
 
+import com.intellij.coverage.CoverageHelper;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.coverage.CoverageEnabledConfiguration;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.util.io.FileUtil;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import com.perl5.lang.perl.idea.run.PerlRunProfileState;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
@@ -41,14 +41,13 @@ public class PerlCoverageProfileState extends PerlRunProfileState {
   @Override
   public @NotNull List<String> getAdditionalPerlParameters(@NotNull GenericPerlRunConfiguration perlRunConfiguration)
     throws ExecutionException {
+    CoverageHelper.resetCoverageSuit(perlRunConfiguration);
+
     String coverageBasePath =
       CoverageEnabledConfiguration.getOrCreate((GenericPerlRunConfiguration)getEnvironment().getRunProfile()).getCoverageFilePath();
 
     if (coverageBasePath != null) {
       File coverageDir = new File(coverageBasePath);
-      if (coverageDir.exists()) {
-        FileUtil.delete(coverageDir);
-      }
       coverageDir.mkdirs();
       LOG.debug("Coverage directory created: ", coverageDir);
     }
