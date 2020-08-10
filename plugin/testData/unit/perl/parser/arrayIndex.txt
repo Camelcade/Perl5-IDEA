@@ -1,0 +1,17 @@
+Subtree: Perl5 (Perl5)
+Perl5
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlArrayElementImpl(Perl5: ARRAY_ELEMENT)
+      PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+        PsiElement(Perl5: $$)('$')
+        PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('var')
+      PsiPerlArrayIndexImpl(Perl5: ARRAY_INDEX)
+        PsiElement(Perl5: [)('[')
+        PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
+          PsiElement(Perl5: NUMBER)('1')
+        PsiElement(Perl5: ])(']')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('$var[1]')
+--------------------------------------------------------------------------------

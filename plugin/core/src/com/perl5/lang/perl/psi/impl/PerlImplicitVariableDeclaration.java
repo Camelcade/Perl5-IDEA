@@ -395,5 +395,9 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
     return new PerlImplicitVariableDeclaration(
       psiManager, variableNameWithSigil, packageName, variableClass, isLexical, isLocal, isInvocant, parent);
   }
+
+  public @NotNull List<PsiPerlExpr> getExprList() {
+    return Collections.emptyList();
+  }
 }
 

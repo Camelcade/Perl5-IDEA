@@ -53,8 +53,6 @@ Perl5
   PerlAnnotationContainerImpl(Perl5: COMMENT_ANNOTATION)
     PsiPerlAnnotationNoinspectionImpl(Perl5: ANNOTATION_NOINSPECTION)
       PsiElement(Perl5: #@noinspection)('#@noinspection')
-      PsiErrorElement:<string bare> expected
-        <empty list>
   PsiComment(Perl5: COMMENT_LINE)('#@')
 --------------------------------------------------------------------------------
 Subtree: Perl5 POD (Perl5 POD)

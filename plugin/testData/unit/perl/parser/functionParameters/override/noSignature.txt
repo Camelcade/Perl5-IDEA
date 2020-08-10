@@ -1,7 +1,7 @@
 Subtree: Perl5 (Perl5)
 Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
-    PsiPerlTermExprImpl(Perl5: TERM_EXPR)
+    PsiPerlCustomAtomExprImpl(Perl5: CUSTOM_ATOM_EXPR)
       PerlMooseOverrideStatement(MOOSE_STATEMENT_OVERRIDE)@main::null
         PerlMooseKeywordElementImpl(Perl5: MOOSE_OVERRIDE)('override')
         PsiPerlSubCallImpl(SUB_CALL)

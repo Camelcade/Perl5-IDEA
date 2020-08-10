@@ -29,7 +29,7 @@ Perl5
           PsiPerlOctCharImpl(Perl5: OCT_CHAR)
             PsiElement(Perl5: \o)('\o')
             PsiElement(Perl5: "{)('{')
-            PsiErrorElement:<octal characcter code> expected, got 'text \o{123'
+            PsiErrorElement:<octal character code> expected, got 'text \o{123'
               PsiElement(BAD_CHARACTER)('text \o{123')
             PsiElement(Perl5: }")('}')
           PsiElement(Perl5: QUOTE_DOUBLE_CLOSE)('"')
@@ -44,7 +44,7 @@ Perl5
           PsiPerlOctCharImpl(Perl5: OCT_CHAR)
             PsiElement(Perl5: \o)('\o')
             PsiElement(Perl5: "{)('{')
-            PsiErrorElement:<octal characcter code> expected, got '}'
+            PsiErrorElement:<octal character code> expected, got '}'
               <empty list>
             PsiElement(Perl5: }")('}')
           PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('text ')
@@ -65,7 +65,7 @@ Perl5
           PsiPerlOctCharImpl(Perl5: OCT_CHAR)
             PsiElement(Perl5: \o)('\o')
             PsiElement(Perl5: "{)('{')
-            PsiErrorElement:<octal characcter code> expected, got 'sdf1234567'
+            PsiErrorElement:<octal character code> expected, got 'sdf1234567'
               PsiElement(BAD_CHARACTER)('sdf1234567')
             PsiElement(Perl5: }")('}')
           PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('text ')

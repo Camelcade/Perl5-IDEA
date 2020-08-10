@@ -3,5 +3,5 @@
 2(3) element: PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT) (InstructionImpl)
 3(4) assign PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) Perl5: = PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT) (PerlAssignInstruction)
 4(5) element: PerlMooseOverrideStatement(MOOSE_STATEMENT_OVERRIDE)@main::something (InstructionImpl)
-5(6) element: PsiPerlTermExprImpl(Perl5: TERM_EXPR) (InstructionImpl)
+5(6) element: PsiPerlCustomAtomExprImpl(Perl5: CUSTOM_ATOM_EXPR) (InstructionImpl)
 6() element: null (InstructionImpl)

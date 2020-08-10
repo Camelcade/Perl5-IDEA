@@ -23,8 +23,11 @@ import com.intellij.psi.ResolveState;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubElement;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 
 public class PerlStubBasedPsiElementBase<T extends StubElement<?>> extends StubBasedPsiElementBase<T> {
@@ -49,5 +52,9 @@ public class PerlStubBasedPsiElementBase<T extends StubElement<?>> extends StubB
 
     return PerlResolveUtil.processChildren(this, processor, state, lastParent, place) &&
            processor.execute(this, state);
+  }
+
+  public @NotNull List<PsiPerlExpr> getExprList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PsiPerlExpr.class);
   }
 }

@@ -378,11 +378,21 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
    */
   public static boolean parseCustomCallExpr(PsiBuilder b, int l, Parser tokenParser) {
     PsiBuilder.Marker m = b.mark();
-    if (PerlParserImpl.leftward_call(b, l, tokenParser) || PerlParserImpl.rightward_call(b, l, tokenParser)) {
+    if (parseCustomMethod(b, l, tokenParser) && PerlParserImpl.any_call_arguments(b, l)) {
       m.done(SUB_CALL);
       return true;
     }
     m.rollbackTo();
+    return false;
+  }
+
+  public static boolean parseCustomMethod(PsiBuilder b, int l, Parser methodParser) {
+    PsiBuilder.Marker marker = b.mark();
+    if (methodParser.parse(b, l)) {
+      marker.done(METHOD);
+      return true;
+    }
+    marker.rollbackTo();
     return false;
   }
 

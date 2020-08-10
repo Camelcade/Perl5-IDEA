@@ -933,7 +933,7 @@ Perl5
                 PsiElement(Perl5: })('}')
         PsiElement(Perl5: ;)(';')
       PsiPerlStatementImpl(Perl5: STATEMENT)
-        PsiPerlTermExprImpl(Perl5: TERM_EXPR)
+        PsiPerlCustomAtomExprImpl(Perl5: CUSTOM_ATOM_EXPR)
           PerlMooseOverrideStatement(MOOSE_STATEMENT_OVERRIDE)@My::Foo::name
             PerlMooseKeywordElementImpl(Perl5: MOOSE_OVERRIDE)('override')
             PsiPerlCommaSequenceExprImpl(Perl5: COMMA_SEQUENCE_EXPR)

@@ -55,6 +55,38 @@ public class PerlParserImpl extends PerlParserGenerated implements PerlParser {
     logger.debug("Light parsed ", root_, " ", PerlTimeLogger.kb(builder_.getOriginalText().length()), " kb");
   }
 
+  @Override
+  protected boolean parse_root_(IElementType root_, PsiBuilder builder_) {
+    if (root_ == COMPILE_REGEX) {
+      return compile_regex(builder_, 0);
+    }
+    else if (root_ == TR_REGEX) {
+      return tr_regex(builder_, 0);
+    }
+    else if (root_ == STRING_DQ) {
+      return string_dq(builder_, 0);
+    }
+    else if (root_ == STRING_SQ) {
+      return string_sq(builder_, 0);
+    }
+    else if (root_ == STRING_XQ) {
+      return string_xq(builder_, 0);
+    }
+    else if (root_ == ANON_ARRAY) {
+      return anon_array(builder_, 0);
+    }
+    else if (root_ == ANON_HASH) {
+      return anon_hash(builder_, 0);
+    }
+    else if (root_ == REPLACEMENT_REGEX) {
+      return replacement_regex(builder_, 0);
+    }
+    else if (root_ == MATCH_REGEX) {
+      return match_regex(builder_, 0);
+    }
+    return super.parse_root_(root_, builder_);
+  }
+
   public boolean parseStatement(PsiBuilder b, int l) {
     return false;
   }

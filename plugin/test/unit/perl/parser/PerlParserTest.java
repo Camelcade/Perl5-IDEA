@@ -27,6 +27,12 @@ public class PerlParserTest extends PerlParserTestBase {
   }
 
   @Test
+  public void testScalarCall() {doTest();}
+
+  @Test
+  public void testArrayIndex() {doTest();}
+
+  @Test
   public void testStringQQCorruptingOutside() {doTest(false);}
 
   @Test

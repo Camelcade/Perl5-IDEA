@@ -1,0 +1,68 @@
+--------------------------------------------------------------------------------
+Caret offset: 111
+--------------------------------------------------------------------------------
+# Switch.pm test
+
+
+
+say 'hi' $caret;
+
+switch($a){
+  
+}
+
+switch($a){
+  
+}
+
+switch($a){
+  case $b { say 'hi' }
+    else {}<caret>
+
+}
+
+switch($a){
+  case $b { say 'hi' }
+  else { say 'hi' }
+  
+}
+
+switch($a){
+  case $b { say 'hi' }
+  
+  else { say 'hi' }
+}
+--------------------------------------------------------------------------------
+Caret offset: 213
+--------------------------------------------------------------------------------
+# Switch.pm test
+
+
+
+say 'hi' $caret;
+
+switch($a){
+  
+}
+
+switch($a){
+  
+}
+
+switch($a){
+  case $b { say 'hi' }
+  
+}
+
+switch($a){
+  case $b { say 'hi' }
+  else { say 'hi' }
+  
+}
+
+switch($a){
+  case $b { say 'hi' }
+    else {}<caret>
+
+    else { say 'hi' }
+}

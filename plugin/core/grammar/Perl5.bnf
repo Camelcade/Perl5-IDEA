@@ -465,7 +465,6 @@
 	implements("signature_element")="com.perl5.lang.perl.psi.PerlSignatureElement"
 
     extends("heredoc_opener|anon_array|anon_hash")=expr
-//    extends("glob_slot")=expr
 
     mixin("package_expr")="com.perl5.lang.perl.psi.mixins.PerlPackageExpression"
 
@@ -860,7 +859,7 @@ expr ::=
     | pow_expr              // 19
     | op_3_expr             // 20
     | deref_expr            // 21 for a single argument
-    | term_expr             // 22
+    | atom_expr             // 22
 
 // above list operators
 private parse_list_expr ::= <<parseExpressionLevel 2>>
@@ -877,13 +876,11 @@ private optional_unary_expr ::= [unary_expr]
 private single_argument_expr ::= <<parseExpressionLevel 20>>
 
 // ordered for best performance of perltidy
-term_expr ::=
-    scalar_or_element
+private atom_expr ::=
+    composite_atom_expr
     | string
     | number_constant
     | variable_declaration_lexical
-    | list_or_list_element
-    | array_or_slice
     | match_regex
     | return_expr
     | scalar_expr
@@ -900,7 +897,6 @@ term_expr ::=
     | array_pop_expr
     | wantarray_expr
     | exit_expr
-    | hash_or_slice
     | array_index_variable
     | scalar_index_cast_expr
     | anon_array
@@ -920,7 +916,6 @@ term_expr ::=
     | map_expr
     | continue_expr
 
-    | glob_or_element
     | tag_scalar
     | variable_declaration_global
     | compile_regex
@@ -929,13 +924,22 @@ term_expr ::=
     | file_glob_expr
     | require_expr
     | perl_handle_expr
-    | <<parseParserExtensionTerm>>
+    | custom_atom_expr
 
     | trycatch_expr
 
-    | regular_sub_call
-    | code_primitive
+    | sub_call
     | package_expr
+
+composite_atom_expr ::=
+    scalar_or_element
+    | parenthesised_expr [array_element]
+    | array_or_slice
+    | hash_or_slice
+    | glob_or_element
+    | code_primitive
+
+custom_atom_expr ::= <<parseParserExtensionTerm>>
 
 package_expr ::= any_package
 continue_expr ::= 'continue' ['(' ')'] {pin=1}
@@ -963,9 +967,8 @@ private sort_arguments_variants ::=
     sorter grep_map_sort_tail |
     grep_map_sort_tail
 
-private sorter ::= scalar_variable | normal_method
+private sorter ::= scalar_variable | method
 
-private list_or_list_element ::= parenthesised_expr [array_element]
 parenthesised_expr ::= parse_parenthesized_expression {extraRoot=true}
 private parse_parenthesized_expression ::= '(' parenthesised_expr_content ')' {pin=1 name="Parenthesised expression"}
 private parenthesised_expr_content ::= [expr] {recoverWhile=recover_parenthesised}
@@ -1027,8 +1030,8 @@ file_glob_expr ::= LEFT_ANGLE qq_string_content_with_lp RIGHT_ANGLE
 
 ////////////////////////// regular expressions /////////////////////////////////////////////////////////////////////////
 // pinning quotes leads to bug with replacement block
-compile_regex ::=   'qr' match_regex_body {pin=1 extraRoot=true}
-match_regex ::=   ['m'] match_regex_body {extraRoot=true}
+compile_regex ::=   'qr' match_regex_body {pin=1}
+match_regex ::=   ['m'] match_regex_body
 private match_regex_body ::= regex_match REGEX_QUOTE_CLOSE [perl_regex_modifiers]
 
 replacement_regex ::=
@@ -1036,8 +1039,7 @@ replacement_regex ::=
     regex_match
     regex_replace
     'r}'
-    [perl_regex_modifiers]
-    {pin=1 extraRoot=true}
+    [perl_regex_modifiers] {pin=1}
 
 private regex_match ::= 'r{' [perl_regex]
 private regex_replace ::= regex_replace_regex | regex_replace_code
@@ -1056,14 +1058,7 @@ private perl_regex_item ::=
         block_compound |
 	interpolated_constructs
 
-//custom_char_class ::= '[[' custom_char_class_body ']]' {pin=1}
-//private custom_char_class_body ::= ['^'] regex_char_class_body_item * {recoverWhile=recover_char_class_body}
-//private regex_char_class_body_item ::= char_range | '\w' | <<remapToken 'OPERATOR_MINUS, REGEX_CHAR_CLASS'>> | posix_char_class | interpolated_constructs
-//private recover_char_class_body ::= !('\w'| ']]' | '$@' | '$$' | '$#' | 'r}' | '-')
-//char_range ::= '\w' '-' '\w'
-//posix_char_class ::= '[:' ['^'] [':name:'] ':]' {pin=1}
-
-tr_regex ::=  ('tr'|'y') tr_search tr_replacement [tr_modifiers] {pin=1 extraRoot=true}
+tr_regex ::=  ('tr'|'y') tr_search tr_replacement [tr_modifiers] {pin=1}
 private tr_search ::= 'r{' [tr_searchlist] {pin=1}
 tr_searchlist ::= [tr_block_content]
 private tr_block_content ::= {qq_string_element | '"-'}+
@@ -1105,15 +1100,15 @@ private strict_variable_declaration_wrapper ::= variable_declaration_element !('
 variable_declaration_element ::= '\\'? lexical_variable
 
 /////////////////////////////////// REFERENCES /////////////////////////////////////////////////////////////////////////
-anon_array ::= '[' [expr] ']' {pin=1 name="anonymous array" extraRoot=true}
-anon_hash ::= '{' [expr] '}' {pin=1 name="anonymous hash" extraRoot=true}
+anon_array ::= '[' [expr] ']' {pin=1 name="anonymous array"}
+anon_hash ::= '{' [expr] '}' {pin=1 name="anonymous hash"}
 
 //////////////////////////// END OF REFERENCES /////////////////////////////////////////////////////////////////////////
 
 // fixme it's not a variable, its variable expression
 private variable ::= scalar_or_element | array_or_slice | hash_variable | hash_cast_expr | glob_or_element
 
-private array_or_slice ::= array_primitive [array_slice|hash_slice]
+private array_or_slice ::= array_primitive [array_slice | hash_slice]
 private array_primitive ::= array_variable | array_cast_expr | string_list
 left array_slice ::= array_index
 left hash_slice ::= hash_index
@@ -1134,21 +1129,23 @@ scalar_index_cast_expr ::= '$#' scalar_cast_target {name="array last index deref
 private scalar_cast_target ::= {block_scalar | scalar_primitive}
 block_scalar ::= '${' block_content '$}' {extends=block pin=1}
 
-private scalar_or_element ::= scalar_primitive [array_element|hash_element]
+private scalar_or_element ::=  scalar_primitive [array_element | hash_element]
 
 left array_element ::= array_index
-left hash_element ::= hash_index
+left hash_element ::=  hash_index
 
 private glob_or_element ::= glob_primitive [glob_slot]
 private glob_primitive ::= glob_variable | glob_cast_expr
+left glob_slot ::= hash_index
 
 glob_cast_expr ::= '$*' glob_cast_target {name="typeglob dereference" extraRoot=true}
 private glob_cast_target ::= {block_glob | scalar_primitive}
 block_glob ::= '*{' block_content '*}' {extends=block pin=1}
 
-left glob_slot ::= hash_index
 
-private code_primitive ::= code_variable | code_cast_expr
+private code_primitive ::= code_primitive_variation [primitive_call]
+private code_primitive_variation ::= code_variable | code_cast_expr
+left primitive_call ::= parenthesised_call_arguments {elementType=sub_call}
 code_cast_expr ::= '$&' code_cast_target { extraRoot=true}
 private code_cast_target ::= {block_code | scalar_primitive}
 block_code ::= '&{' block_content '&}' {extends=block pin=1}
@@ -1178,14 +1175,12 @@ array_index ::= '[' array_index_content ']' {pin=1 extraRoot=true}
 private array_index_content ::= expr {recoverWhile=recover_bracketed_expression}
 private recover_bracketed_expression ::= !']'
 
-private hash_or_slice ::= hash_primitive [hash_array_slice|hash_hash_slice]
+private hash_or_slice ::= hash_primitive [hash_array_slice| hash_hash_slice]
 private hash_primitive ::= hash_variable | hash_cast_expr
-left hash_array_slice ::= array_index
-left hash_hash_slice ::= hash_index
+left hash_array_slice ::=  array_index
+left hash_hash_slice ::=  hash_index
 
 ///////////////////////////////////// CALLABLE /////////////////////////////////////////////////////////////////////////k
-meta method ::= <<x1>>
-
 call_arguments ::= parse_call_arguments
 // fixme this should depend on prototype
 private parse_call_arguments ::=
@@ -1200,34 +1195,33 @@ unary_call_arguments ::= unary_expr {elementType=call_arguments}
 private parenthesised_call_arguments_body ::= '(' optional_expression ')' {pin=1}
 private optional_expression ::= [expr]
 private any_unary_call_arguments ::= parenthesised_call_arguments | unary_call_arguments
-private any_call_arguments ::= parenthesised_call_arguments | call_arguments
+private any_call_arguments ::= parenthesised_call_arguments | [call_arguments]
 
 scalar_call ::= scalar_or_element [parenthesised_call_arguments]
 
-private regular_sub_call ::= <<sub_call parse_sub_call>>
-private regular_nested_call ::= <<sub_call regular_nested_call_variations>>
-private regular_nested_call_variations ::= parse_leftward_call | normal_method
-meta sub_call ::= <<x1>>
+sub_call ::= parse_sub_call
+regular_nested_call ::= regular_nested_call_variations {elementType=sub_call}
+private regular_nested_call_variations ::= leftward_call | method
 
 private parse_sub_call ::=
- 	parse_leftward_call |
+ 	leftward_call |
  	named_unary_call |
  	argumentless_call |
- 	<<rightward_call method_tokens>>
+ 	rightward_call
 
-private parse_leftward_call ::= <<leftward_call method_tokens>>
+private argumentless_call ::= argumentless_method
+argumentless_method ::= 'argumentless' {elementType=method}
 
-private argumentless_call ::= <<method 'argumentless'>>
+private named_unary_call ::= unary_method [unary_call_arguments]
+unary_method ::= 'unary' | 'unary_custom' | '-t' {elementType=method}
 
-private named_unary_call ::= <<method named_unary_calee>> [unary_call_arguments]
-private named_unary_calee ::= 'unary' | 'unary_custom' | '-t'
-
-type_specifier ::= parenthesised_expr | <<sub_call parse_type_specifier>>
-private parse_type_specifier ::= <<method type_specifier_tokens>> [!('$$'|'$@'|'$%')unary_call_arguments]
+type_specifier ::= parenthesised_expr | type_specifier_call
+type_specifier_call ::= type_specifier_method  [!('$$'|'$@'|'$%')unary_call_arguments] {elementType=sub_call}
+type_specifier_method ::= type_specifier_tokens {elementType=method}
 private type_specifier_tokens ::= 'unary_custom'|'subname'
 
-private meta rightward_call ::= <<method <<x1>>>> [call_arguments]
-private meta leftward_call ::= {<<method <<x1>>>>|code_primitive} parenthesised_call_arguments
+private rightward_call ::= method  [call_arguments]
+private leftward_call ::= {method|code_primitive_variation} parenthesised_call_arguments
 
 private anon_hash_lookahead ::= '{' anon_hash_lookahead_body '}'
 private anon_hash_lookahead_body ::=
@@ -1236,7 +1230,7 @@ private anon_hash_lookahead_body ::=
   // tried to optimize this, but technically not possible. E.g. if first line contains some comma sequence, see heredocWrappingTest
   parse_scalar_expr {comma parse_scalar_expr} +
 
-private normal_method ::= <<method method_tokens>>
+method ::= method_tokens
 // the rest are fallback
 private method_tokens ::= 'list' | 'unary' | 'unary_custom'| 'argumentless' |
   'package::name::' 'subname' |
@@ -1264,7 +1258,7 @@ number_constant ::= NUMBER | NUMBER_VERSION | NUMBER_HEX | NUMBER_OCT | NUMBER_B
 
 private string ::= string_bare | string_sq | string_dq | string_xq | heredoc_opener
 
-string_dq ::= [ 'qq'] quoted_qq_string {extraRoot=true}
+string_dq ::= [ 'qq'] quoted_qq_string
 private quoted_qq_string ::= QUOTE_DOUBLE_OPEN [qq_string_content_with_lp] QUOTE_DOUBLE_CLOSE {pin=1}
 private qq_string_content_with_lp ::= qq_string_content
 private qq_string_content ::= qq_string_element+
@@ -1295,9 +1289,9 @@ private oct_char_ambiguous ::= '\0' [char_code_oct] {pin=1}
 private oct_char_unambiguous ::= '\o' oct_char_body_braced {pin=1}
 private oct_char_body_braced ::= '"{' oct_char_body_content_braced '}"' {pin=1}
 private oct_char_body_content_braced ::= char_code_oct {recoverWhile=recover_string_braces}
-private char_code_oct ::= NUMBER_OCT {name="octal characcter code"}
+private char_code_oct ::= NUMBER_OCT {name="octal character code"}
 
-string_xq ::= [ 'qx'] quoted_xq_string {extraRoot=true}
+string_xq ::= [ 'qx'] quoted_xq_string
 private quoted_xq_string ::= QUOTE_TICK_OPEN [qx_string_content] QUOTE_TICK_CLOSE {pin=1}
 private qx_string_content ::= qx_string_element+
 private qx_string_element ::= STRING_CONTENT_XQ | special_constructs |interpolated_constructs
@@ -1306,7 +1300,7 @@ private interpolated_constructs ::= deref_expr
 
 string_bare ::= &(STRING_CONTENT|'\\"')<<parseBareString>>
 
-string_sq ::= [ 'q'] quoted_sq_string {extraRoot=true}
+string_sq ::= [ 'q'] quoted_sq_string
 string_list ::=  'qw' qw_string {pin=1 extraRoot=true}
 private qw_string ::= QUOTE_SINGLE_OPEN [parse_qw_string_content] QUOTE_SINGLE_CLOSE {pin=1}
 private parse_qw_string_content ::= <<isUseVars>> <<mapUseVars qw_string_content>>+| qw_string_content
@@ -1325,7 +1319,7 @@ array_index_variable ::= '$#' {SCALAR_NAME | '${' SCALAR_NAME '$}'} {name="array
 scalar_variable ::= '$$' {SCALAR_NAME | '${' SCALAR_NAME '$}'} {name="scalar"}
 array_variable ::= '$@' {ARRAY_NAME | '@{' ARRAY_NAME '@}'} {name="array"}
 hash_variable ::= '$%' {HASH_NAME | '%{' HASH_NAME '%}'} {name="hash"}
-code_variable ::= '$&' {normal_method | '&{' normal_method '&}'} {name="code"}
+code_variable ::= '$&' {method | '&{' method '&}'} {name="code"}
 glob_variable ::= '$*' {GLOB_NAME | '*{' GLOB_NAME '*}'} {name="typeglob"}
 
 private comma ::= ',' | '=>'

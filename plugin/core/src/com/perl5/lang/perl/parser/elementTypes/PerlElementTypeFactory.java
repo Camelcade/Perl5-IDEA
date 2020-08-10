@@ -401,8 +401,6 @@ public class PerlElementTypeFactory {
         return new PerlElementTypeEx(name, PsiPerlSuffPpExprImpl.class);
       case "TAG_SCALAR":
         return new PerlElementTypeEx(name, PsiPerlTagScalarImpl.class);
-      case "TERM_EXPR":
-        return new PerlElementTypeEx(name, PsiPerlTermExprImpl.class);
       case "TERNARY_EXPR":
         return new PerlElementTypeEx(name, PsiPerlTernaryExprImpl.class);
       case "TR_MODIFIERS":
@@ -511,6 +509,10 @@ public class PerlElementTypeFactory {
         return new PerlElementTypeEx(name, PsiPerlCaseDefaultImpl.class);
       case "CASE_CONDITION":
         return new PerlElementTypeEx(name, PsiPerlCaseConditionImpl.class);
+      case "CUSTOM_ATOM_EXPR":
+        return new PerlElementTypeEx(name, PsiPerlCustomAtomExprImpl.class);
+      case "COMPOSITE_ATOM_EXPR":
+        return new PerlElementTypeEx(name, PsiPerlCompositeAtomExprImpl.class);
       default: {
         LOG.error("Unknown token:" + name);
         throw new RuntimeException("Unknown token:" + name);

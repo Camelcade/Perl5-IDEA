@@ -134,7 +134,7 @@ public class MooseParserExtension extends PerlParserExtension implements MooseEl
       return true;
     }
     m.rollbackTo();
-    return PerlParserImpl.method(b, l, FALLBACK_METHOD_PARSER);
+    return PerlParserUtil.parseCustomMethod(b, l, FALLBACK_METHOD_PARSER);
   }
 
   private static boolean parseAnnotatedSimpleStatement(PerlBuilder b, int l, IElementType keywordToken, IElementType statementToken) {
@@ -168,6 +168,6 @@ public class MooseParserExtension extends PerlParserExtension implements MooseEl
     }
 
     m.rollbackTo();
-    return PerlParserImpl.method(b, l, FALLBACK_METHOD_PARSER);
+    return PerlParserUtil.parseCustomMethod(b, l, FALLBACK_METHOD_PARSER);
   }
 }
