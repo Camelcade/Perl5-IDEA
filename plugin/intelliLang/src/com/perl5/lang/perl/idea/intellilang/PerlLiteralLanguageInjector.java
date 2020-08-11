@@ -51,8 +51,11 @@ public abstract class PerlLiteralLanguageInjector implements MultiHostInjector {
   private static final TokenSet ELEMENTS_TO_REPLACE_WITH_DUMMY = TokenSet.orSet(
     PerlTokenSets.STRING_CHAR_UNRENDERABLE_ALIASES, TokenSet.create(
       STRING_SPECIAL_BACKREF,
-      SCALAR_VARIABLE, SCALAR_CAST_EXPR, ARRAY_ELEMENT, HASH_ELEMENT, DEREF_EXPR,
-      ARRAY_VARIABLE, ARRAY_INDEX_VARIABLE, ARRAY_ELEMENT, ARRAY_SLICE, HASH_ARRAY_SLICE
+      SCALAR_VARIABLE, ARRAY_VARIABLE, ARRAY_INDEX_VARIABLE,
+      SCALAR_CAST_EXPR, ARRAY_CAST_EXPR,
+      ARRAY_ELEMENT, HASH_ELEMENT,
+      DEREF_EXPR,
+      ARRAY_SLICE, HASH_SLICE, HASH_ARRAY_SLICE
     ));
 
   private static final Logger LOG = Logger.getInstance(PerlLiteralLanguageInjector.class);

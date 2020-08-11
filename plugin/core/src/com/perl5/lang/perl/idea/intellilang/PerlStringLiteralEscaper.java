@@ -23,15 +23,28 @@ import com.intellij.psi.LiteralTextEscaper;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
-import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.psi.PerlCharSubstitution;
 import com.perl5.lang.perl.psi.mixins.PerlStringMixin;
 import gnu.trove.TIntArrayList;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Map;
+
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
+
 
 public class PerlStringLiteralEscaper extends LiteralTextEscaper<PerlStringMixin> {
   private static final Logger LOG = Logger.getInstance(PerlStringLiteralEscaper.class);
+  private static final Map<IElementType, String> ALIASES_MAP = Map.of(
+    STRING_SPECIAL_TAB, "\t",
+    STRING_SPECIAL_NEWLINE, "\n",
+    STRING_SPECIAL_RETURN, "\r",
+    STRING_SPECIAL_FORMFEED, "\f",
+    STRING_SPECIAL_BACKSPACE, "\b",
+    STRING_SPECIAL_ALARM, "" + (char)11,
+    STRING_SPECIAL_ESCAPE, "" + (char)27
+  );
+
 
   private final TIntArrayList myHostOffsets = new TIntArrayList();
 
@@ -60,23 +73,26 @@ public class PerlStringLiteralEscaper extends LiteralTextEscaper<PerlStringMixin
     while (run != null && run.getTextRangeInParent().getEndOffset() <= endOffset) {
       int startOffsetInParent = run.getStartOffsetInParent();
       IElementType runType = PsiUtilCore.getElementType(run);
+      CharSequence runChars = null;
       if (run instanceof PerlCharSubstitution) {
-        lastElementEnd = run.getTextRangeInParent().getEndOffset();
         int point = ((PerlCharSubstitution)run).getCodePoint();
-        char[] runChars = Character.toChars(point);
-        outChars.append(runChars);
-        for (int i = 0; i < runChars.length; i++) {
-          myHostOffsets.add(startOffsetInParent + i);
+        runChars = String.valueOf(Character.toChars(point));
+      }
+      else {
+        runChars = ALIASES_MAP.get(runType);
+        if (runChars == null && runType != STRING_SPECIAL_ESCAPE_CHAR) {
+          runChars = run.getNode().getChars();
         }
       }
-      else if (PerlTokenSets.STRING_CONTENT_TOKENSET.contains(runType)) {
+
+      if (runChars != null) {
         lastElementEnd = run.getTextRangeInParent().getEndOffset();
-        CharSequence runChars = run.getNode().getChars();
         outChars.append(runChars);
         for (int i = 0; i < runChars.length(); i++) {
           myHostOffsets.add(startOffsetInParent + i);
         }
       }
+
       run = run.getNextSibling();
     }
     myHostOffsets.add(lastElementEnd);

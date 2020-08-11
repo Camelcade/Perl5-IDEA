@@ -33,7 +33,9 @@ Patched file content:
 ----------
 Decoded file content:
 ----------
-1;1;1;1;1;␣1;␣1;S1;
+1;
+1;	1;
+1;1;␣1;␣1;S1;
 1;⌣1;␣1;
 ----------
 Host range: (4,73) '1;\n1;\t1;\r1;\cA1;\x201;\x{20}1;\o{123}1;\0121;\N{SMILE}1;\N{U+20}1;'
@@ -188,13 +190,14 @@ Host chars: qq␣<say␣@variable{qw/bla␣bla/};␣say␣42;>
 Injected file language: Language: Perl5
 Patched file content:
 ----------
-say␣@variable{qw/bla␣bla/};␣say␣42;
+say␣perl_expression;␣say␣42;
 ----------
 Decoded file content:
 ----------
-say␣;␣say␣42;
+say␣perl_expression;␣say␣42;
 ----------
-Host range: (4,39) 'say␣@variable{qw/bla␣bla/};␣say␣42;'
+Host range: (4,8) 'say␣'
+Host range: (30,39) ';␣say␣42;'
 
 ----------
 Host: PsiPerlStringDqImpl(Perl5: STRING_DQ)
