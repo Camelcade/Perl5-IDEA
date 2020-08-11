@@ -2,7 +2,11 @@ Host: PsiPerlStringDqImpl(Perl5: STRING_DQ)
 Host range: (5,13)
 Host chars: "say␣42"
 Injected file language: Language: Perl5
-Injected file text: 
+Patched file content:
+----------
+say␣42
+----------
+Decoded file content:
 ----------
 say␣42
 ----------

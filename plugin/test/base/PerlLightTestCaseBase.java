@@ -2886,8 +2886,12 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
               if (injectedFile == null) {
                 injectedFile = pair.first;
                 result.append("\nInjected file language: ").append(injectedFile.getLanguage()).append("\n");
-                result.append("Injected file text: ").append(SEPARATOR_NEWLINES);
+                VirtualFile virtualFile = PsiUtilCore.getVirtualFile(injectedFile);
+                assertInstanceOf(virtualFile, LightVirtualFile.class);
+                result.append("Patched file content:").append(SEPARATOR_NEWLINES);
                 result.append(protectSpaces(injectedFile.getText())).append(SEPARATOR_NEWLINES);
+                result.append("Decoded file content:").append(SEPARATOR_NEWLINES);
+                result.append(protectSpaces(((LightVirtualFile)virtualFile).getContent())).append(SEPARATOR_NEWLINES);
               }
               else {
                 assertEquals(pair.first, injectedFile);

@@ -2,9 +2,13 @@ Host: PsiPerlStringDqImpl(Perl5: STRING_DQ)
 Host range: (48,99)
 Host chars: "1;\f1;\b1;\a1;\"\";1;\l1;\u1;\L1;\U1;\F1;\Q1;\E1;"
 Injected file language: Language: Perl5
-Injected file text: 
+Patched file content:
 ----------
 1;␣1;␣1;␣1;\"\";1;1;1;1;1;1;1;1;
+----------
+Decoded file content:
+----------
+1;␣1;␣1;␣1;"";1;1;1;1;1;1;1;1;
 ----------
 Host range: (1,3) '1;'
 Host range: (5,7) '1;'
@@ -23,9 +27,14 @@ Host: PsiPerlStringDqImpl(Perl5: STRING_DQ)
 Host range: (106,177)
 Host chars: "1;\n1;\t1;\r1;\cA1;\x201;\x{20}1;\o{123}1;\0121;\N{SMILE}1;\N{U+20}1;"
 Injected file language: Language: Perl5
-Injected file text: 
+Patched file content:
 ----------
 1;\n1;\t1;\r1;\cA1;\x201;\x{20}1;\o{123}1;\0121;\N{SMILE}1;\N{U+20}1;
+----------
+Decoded file content:
+----------
+1;1;1;1;1;␣1;␣1;S1;
+1;⌣1;␣1;
 ----------
 Host range: (1,70) '1;\n1;\t1;\r1;\cA1;\x201;\x{20}1;\o{123}1;\0121;\N{SMILE}1;\N{U+20}1;'
 
@@ -34,7 +43,11 @@ Host: PsiPerlStringDqImpl(Perl5: STRING_DQ)
 Host range: (184,193)
 Host chars: "say␣42;"
 Injected file language: Language: Perl5
-Injected file text: 
+Patched file content:
+----------
+say␣42;
+----------
+Decoded file content:
 ----------
 say␣42;
 ----------
@@ -45,7 +58,11 @@ Host: PsiPerlStringDqImpl(Perl5: STRING_DQ)
 Host range: (200,224)
 Host chars: "say␣$variable;␣say␣42;"
 Injected file language: Language: Perl5
-Injected file text: 
+Patched file content:
+----------
+say␣variable;␣say␣42;
+----------
+Decoded file content:
 ----------
 say␣variable;␣say␣42;
 ----------
@@ -57,7 +74,11 @@ Host: PsiPerlStringDqImpl(Perl5: STRING_DQ)
 Host range: (231,264)
 Host chars: "say␣$variable{testvar};␣say␣42;"
 Injected file language: Language: Perl5
-Injected file text: 
+Patched file content:
+----------
+say␣perl_expression;␣say␣42;
+----------
+Decoded file content:
 ----------
 say␣perl_expression;␣say␣42;
 ----------
@@ -69,7 +90,11 @@ Host: PsiPerlStringDqImpl(Perl5: STRING_DQ)
 Host range: (271,299)
 Host chars: "say␣$variable[42];␣say␣42;"
 Injected file language: Language: Perl5
-Injected file text: 
+Patched file content:
+----------
+say␣perl_expression;␣say␣42;
+----------
+Decoded file content:
 ----------
 say␣perl_expression;␣say␣42;
 ----------
@@ -81,7 +106,11 @@ Host: PsiPerlStringDqImpl(Perl5: STRING_DQ)
 Host range: (306,341)
 Host chars: "say␣$variable->{testvar};␣say␣42;"
 Injected file language: Language: Perl5
-Injected file text: 
+Patched file content:
+----------
+say␣perl_expression;␣say␣42;
+----------
+Decoded file content:
 ----------
 say␣perl_expression;␣say␣42;
 ----------
@@ -93,7 +122,11 @@ Host: PsiPerlStringDqImpl(Perl5: STRING_DQ)
 Host range: (348,378)
 Host chars: "say␣$variable->[42];␣say␣42;"
 Injected file language: Language: Perl5
-Injected file text: 
+Patched file content:
+----------
+say␣perl_expression;␣say␣42;
+----------
+Decoded file content:
 ----------
 say␣perl_expression;␣say␣42;
 ----------
@@ -105,7 +138,11 @@ Host: PsiPerlStringDqImpl(Perl5: STRING_DQ)
 Host range: (385,409)
 Host chars: "say␣@variable;␣say␣42;"
 Injected file language: Language: Perl5
-Injected file text: 
+Patched file content:
+----------
+say␣variable;␣say␣42;
+----------
+Decoded file content:
 ----------
 say␣variable;␣say␣42;
 ----------
@@ -117,7 +154,11 @@ Host: PsiPerlStringDqImpl(Perl5: STRING_DQ)
 Host range: (416,447)
 Host chars: "say␣@variable[1,2,3];␣say␣42;"
 Injected file language: Language: Perl5
-Injected file text: 
+Patched file content:
+----------
+say␣perl_expression;␣say␣42;
+----------
+Decoded file content:
 ----------
 say␣perl_expression;␣say␣42;
 ----------
@@ -129,7 +170,11 @@ Host: PsiPerlStringDqImpl(Perl5: STRING_DQ)
 Host range: (454,478)
 Host chars: "say␣@variable;␣say␣42;"
 Injected file language: Language: Perl5
-Injected file text: 
+Patched file content:
+----------
+say␣variable;␣say␣42;
+----------
+Decoded file content:
 ----------
 say␣variable;␣say␣42;
 ----------
@@ -141,9 +186,13 @@ Host: PsiPerlStringDqImpl(Perl5: STRING_DQ)
 Host range: (485,522)
 Host chars: "say␣@variable{qw/bla␣bla/};␣say␣42;"
 Injected file language: Language: Perl5
-Injected file text: 
+Patched file content:
 ----------
 say␣@variable{qw/bla␣bla/};␣say␣42;
+----------
+Decoded file content:
+----------
+say␣;␣say␣42;
 ----------
 Host range: (1,36) 'say␣@variable{qw/bla␣bla/};␣say␣42;'
 
@@ -152,7 +201,11 @@ Host: PsiPerlStringDqImpl(Perl5: STRING_DQ)
 Host range: (529,560)
 Host chars: "say␣@variable[1,2,3];␣say␣42;"
 Injected file language: Language: Perl5
-Injected file text: 
+Patched file content:
+----------
+say␣perl_expression;␣say␣42;
+----------
+Decoded file content:
 ----------
 say␣perl_expression;␣say␣42;
 ----------
@@ -164,9 +217,13 @@ Host: PsiPerlStringDqImpl(Perl5: STRING_DQ)
 Host range: (567,592)
 Host chars: "say␣\$variable;␣say␣42;"
 Injected file language: Language: Perl5
-Injected file text: 
+Patched file content:
 ----------
 say␣\$variable;␣say␣42;
+----------
+Decoded file content:
+----------
+say␣$variable;␣say␣42;
 ----------
 Host range: (1,24) 'say␣\$variable;␣say␣42;'
 
@@ -175,9 +232,13 @@ Host: PsiPerlStringDqImpl(Perl5: STRING_DQ)
 Host range: (599,633)
 Host chars: "say␣\$variable{testvar};␣say␣42;"
 Injected file language: Language: Perl5
-Injected file text: 
+Patched file content:
 ----------
 say␣\$variable{testvar};␣say␣42;
+----------
+Decoded file content:
+----------
+say␣$variable{testvar};␣say␣42;
 ----------
 Host range: (1,33) 'say␣\$variable{testvar};␣say␣42;'
 
@@ -186,9 +247,13 @@ Host: PsiPerlStringDqImpl(Perl5: STRING_DQ)
 Host range: (640,669)
 Host chars: "say␣\$variable[42];␣say␣42;"
 Injected file language: Language: Perl5
-Injected file text: 
+Patched file content:
 ----------
 say␣\$variable[42];␣say␣42;
+----------
+Decoded file content:
+----------
+say␣$variable[42];␣say␣42;
 ----------
 Host range: (1,28) 'say␣\$variable[42];␣say␣42;'
 
@@ -197,9 +262,13 @@ Host: PsiPerlStringDqImpl(Perl5: STRING_DQ)
 Host range: (676,712)
 Host chars: "say␣\$variable->{testvar};␣say␣42;"
 Injected file language: Language: Perl5
-Injected file text: 
+Patched file content:
 ----------
 say␣\$variable->{testvar};␣say␣42;
+----------
+Decoded file content:
+----------
+say␣$variable->{testvar};␣say␣42;
 ----------
 Host range: (1,35) 'say␣\$variable->{testvar};␣say␣42;'
 
@@ -208,9 +277,13 @@ Host: PsiPerlStringDqImpl(Perl5: STRING_DQ)
 Host range: (719,750)
 Host chars: "say␣\$variable->[42];␣say␣42;"
 Injected file language: Language: Perl5
-Injected file text: 
+Patched file content:
 ----------
 say␣\$variable->[42];␣say␣42;
+----------
+Decoded file content:
+----------
+say␣$variable->[42];␣say␣42;
 ----------
 Host range: (1,30) 'say␣\$variable->[42];␣say␣42;'
 
@@ -219,9 +292,13 @@ Host: PsiPerlStringDqImpl(Perl5: STRING_DQ)
 Host range: (757,782)
 Host chars: "say␣\@variable;␣say␣42;"
 Injected file language: Language: Perl5
-Injected file text: 
+Patched file content:
 ----------
 say␣\@variable;␣say␣42;
+----------
+Decoded file content:
+----------
+say␣@variable;␣say␣42;
 ----------
 Host range: (1,24) 'say␣\@variable;␣say␣42;'
 
@@ -230,9 +307,13 @@ Host: PsiPerlStringDqImpl(Perl5: STRING_DQ)
 Host range: (789,821)
 Host chars: "say␣\@variable[1,2,3];␣say␣42;"
 Injected file language: Language: Perl5
-Injected file text: 
+Patched file content:
 ----------
 say␣\@variable[1,2,3];␣say␣42;
+----------
+Decoded file content:
+----------
+say␣@variable[1,2,3];␣say␣42;
 ----------
 Host range: (1,31) 'say␣\@variable[1,2,3];␣say␣42;'
 
@@ -241,9 +322,13 @@ Host: PsiPerlStringDqImpl(Perl5: STRING_DQ)
 Host range: (828,853)
 Host chars: "say␣\@variable;␣say␣42;"
 Injected file language: Language: Perl5
-Injected file text: 
+Patched file content:
 ----------
 say␣\@variable;␣say␣42;
+----------
+Decoded file content:
+----------
+say␣@variable;␣say␣42;
 ----------
 Host range: (1,24) 'say␣\@variable;␣say␣42;'
 
@@ -252,9 +337,13 @@ Host: PsiPerlStringDqImpl(Perl5: STRING_DQ)
 Host range: (860,898)
 Host chars: "say␣\@variable{qw/bla␣bla/};␣say␣42;"
 Injected file language: Language: Perl5
-Injected file text: 
+Patched file content:
 ----------
 say␣\@variable{qw/bla␣bla/};␣say␣42;
+----------
+Decoded file content:
+----------
+say␣@variable{qw/bla␣bla/};␣say␣42;
 ----------
 Host range: (1,37) 'say␣\@variable{qw/bla␣bla/};␣say␣42;'
 
@@ -263,9 +352,13 @@ Host: PsiPerlStringDqImpl(Perl5: STRING_DQ)
 Host range: (905,937)
 Host chars: "say␣\@variable[1,2,3];␣say␣42;"
 Injected file language: Language: Perl5
-Injected file text: 
+Patched file content:
 ----------
 say␣\@variable[1,2,3];␣say␣42;
+----------
+Decoded file content:
+----------
+say␣@variable[1,2,3];␣say␣42;
 ----------
 Host range: (1,31) 'say␣\@variable[1,2,3];␣say␣42;'
 

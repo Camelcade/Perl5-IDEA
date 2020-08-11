@@ -16,22 +16,24 @@
 
 package com.perl5.lang.perl.idea.intellilang;
 
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.ElementManipulator;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.LiteralTextEscaper;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.idea.manipulators.PerlStringManipulator;
-import com.perl5.lang.perl.psi.PerlString;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.util.PsiUtilCore;
+import com.perl5.lang.perl.lexer.PerlTokenSets;
+import com.perl5.lang.perl.psi.PerlCharSubstitution;
 import com.perl5.lang.perl.psi.mixins.PerlStringMixin;
+import gnu.trove.TIntArrayList;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.HashMap;
-import java.util.Map;
 
 
 public class PerlStringLiteralEscaper extends LiteralTextEscaper<PerlStringMixin> {
-  private Map<Integer, Integer> offsetsMap;
+  private static final Logger LOG = Logger.getInstance(PerlStringLiteralEscaper.class);
+
+  private final TIntArrayList myHostOffsets = new TIntArrayList();
 
   public PerlStringLiteralEscaper(@NotNull PerlStringMixin host) {
     super(host);
@@ -39,61 +41,53 @@ public class PerlStringLiteralEscaper extends LiteralTextEscaper<PerlStringMixin
 
   @Override
   public boolean decode(@NotNull TextRange rangeInsideHost, @NotNull StringBuilder outChars) {
-    ElementManipulator<PerlStringMixin> manipulator = ElementManipulators.getNotNullManipulator(myHost);
-    assert manipulator instanceof PerlStringManipulator;
-    PsiElement openQuoteElement = ((PerlStringManipulator)manipulator).getOpeningQuote(myHost);
-    char openQuote = openQuoteElement.getText().charAt(0);
-    char closeQuote = PerlString.getQuoteCloseChar(openQuote);
-    offsetsMap = new HashMap<>();
-    CharSequence sourceText = rangeInsideHost.subSequence(myHost.getText());
-    Integer sourceOffset = 0;
-    Integer targetOffset = 0;
-    Integer sourceLength = sourceText.length();
-    boolean isEscaped = false;
+    PsiElement openQuoteElement = myHost.getOpenQuoteElement();
+    if (openQuoteElement == null) {
+      LOG.error("No open quote for " + myHost);
+      return false;
+    }
+    PsiElement run = openQuoteElement.getNextSibling();
+    int startOffset = rangeInsideHost.getStartOffset();
+    while (run != null && run.getTextRangeInParent().getStartOffset() < startOffset) {
+      run = run.getNextSibling();
+    }
+    if (run == null) {
+      return false;
+    }
 
-    while (sourceOffset < sourceLength) {
-      char currentChar = sourceText.charAt(sourceOffset);
-
-      if (isEscaped) {
-        if (currentChar != openQuote && currentChar != closeQuote) {
-          assert sourceOffset > 0;
-          outChars.append('\\');
-          offsetsMap.put(targetOffset++, sourceOffset - 1);
+    int lastElementEnd = 0;
+    int endOffset = rangeInsideHost.getEndOffset();
+    while (run != null && run.getTextRangeInParent().getEndOffset() <= endOffset) {
+      int startOffsetInParent = run.getStartOffsetInParent();
+      IElementType runType = PsiUtilCore.getElementType(run);
+      if (run instanceof PerlCharSubstitution) {
+        lastElementEnd = run.getTextRangeInParent().getEndOffset();
+        int point = ((PerlCharSubstitution)run).getCodePoint();
+        char[] runChars = Character.toChars(point);
+        outChars.append(runChars);
+        for (int i = 0; i < runChars.length; i++) {
+          myHostOffsets.add(startOffsetInParent + i);
         }
-        outChars.append(currentChar);
-        offsetsMap.put(targetOffset++, sourceOffset);
-        isEscaped = false;
       }
-      else if (currentChar == '\\') {
-        isEscaped = true;
+      else if (PerlTokenSets.STRING_CONTENT_TOKENSET.contains(runType)) {
+        lastElementEnd = run.getTextRangeInParent().getEndOffset();
+        CharSequence runChars = run.getNode().getChars();
+        outChars.append(runChars);
+        for (int i = 0; i < runChars.length(); i++) {
+          myHostOffsets.add(startOffsetInParent + i);
+        }
       }
-      else {
-        outChars.append(currentChar);
-        offsetsMap.put(targetOffset++, sourceOffset);
-      }
-
-      sourceOffset++;
+      run = run.getNextSibling();
     }
-    if (isEscaped) // end with escape, not sure if possible
-    {
-      outChars.append('\\');
-      offsetsMap.put(targetOffset++, sourceOffset - 1);
-    }
+    myHostOffsets.add(lastElementEnd);
 
-    offsetsMap.put(targetOffset, sourceOffset);    // end marker
-
-    return true;
+    return !myHostOffsets.isEmpty();
   }
 
 
   @Override
   public int getOffsetInHost(int offsetInDecoded, @NotNull TextRange rangeInsideHost) {
-    Integer offsetInEncoded = offsetsMap.get(offsetInDecoded);
-    assert offsetInEncoded != null : "Missing offset: " + offsetInDecoded +
-                                     "; text: " + rangeInsideHost.subSequence(myHost.getText()) +
-                                     "; range in host " + rangeInsideHost;
-
-    return offsetInEncoded + rangeInsideHost.getStartOffset();
+    return myHostOffsets.get(offsetInDecoded);
   }
 
   @Override

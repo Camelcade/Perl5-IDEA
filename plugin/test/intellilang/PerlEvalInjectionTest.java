@@ -30,6 +30,12 @@ public class PerlEvalInjectionTest extends PerlLightTestCase {
   public void testCharSubstitutionsMulti() {doTest();}
 
   @Test
+  public void testCharSubstitutionsMultiQQ() {doTest();}
+
+  @Test
+  public void testCharSubstitutionsMultiXQ() {doTest();}
+
+  @Test
   public void testDirectStringArgument() {
     doTest("eval 'sa<caret>y 42';");
   }
