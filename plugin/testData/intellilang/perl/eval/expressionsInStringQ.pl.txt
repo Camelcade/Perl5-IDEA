@@ -4,11 +4,9 @@ Host chars: '1;\f1;\b1;\a1;\'\';1;\l1;\u1;\L1;\U1;\F1;\Q1;\E1;'
 Injected file language: Language: Perl5
 Injected file text: 
 ----------
-1;\f1;\b1;\a1;'';1;\l1;\u1;\L1;\U1;\F1;\Q1;\E1;
+1;\f1;\b1;\a1;\'\';1;\l1;\u1;\L1;\U1;\F1;\Q1;\E1;
 ----------
-Host range: (1,15) '1;\f1;\b1;\a1;'
-Host range: (16,17) '''
-Host range: (18,50) '';1;\l1;\u1;\L1;\U1;\F1;\Q1;\E1;'
+Host range: (1,50) '1;\f1;\b1;\a1;\'\';1;\l1;\u1;\L1;\U1;\F1;\Q1;\E1;'
 
 ----------
 Host: PsiPerlStringSqImpl(Perl5: STRING_SQ)
@@ -61,11 +59,9 @@ Host chars: 'say␣$variable{\'testvar\'};␣say␣42;'
 Injected file language: Language: Perl5
 Injected file text: 
 ----------
-say␣$variable{'testvar'};␣say␣42;
+say␣$variable{\'testvar\'};␣say␣42;
 ----------
-Host range: (1,15) 'say␣$variable{'
-Host range: (16,24) ''testvar'
-Host range: (25,36) ''};␣say␣42;'
+Host range: (1,36) 'say␣$variable{\'testvar\'};␣say␣42;'
 
 ----------
 Host: PsiPerlStringSqImpl(Perl5: STRING_SQ)
@@ -85,11 +81,9 @@ Host chars: 'say␣$variable->{\'testvar\'};␣say␣42;'
 Injected file language: Language: Perl5
 Injected file text: 
 ----------
-say␣$variable->{'testvar'};␣say␣42;
+say␣$variable->{\'testvar\'};␣say␣42;
 ----------
-Host range: (1,17) 'say␣$variable->{'
-Host range: (18,26) ''testvar'
-Host range: (27,38) ''};␣say␣42;'
+Host range: (1,38) 'say␣$variable->{\'testvar\'};␣say␣42;'
 
 ----------
 Host: PsiPerlStringSqImpl(Perl5: STRING_SQ)
