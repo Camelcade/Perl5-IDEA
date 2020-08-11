@@ -2881,14 +2881,19 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
             result.append("Host: ").append(element).append("\n");
             result.append("Host range: ").append(hostRange).append("\n");
             result.append("Host chars: ").append(protectSpaces(hostChars));
+            PsiElement injectedFile = null;
             for (Pair<PsiElement, TextRange> pair : files) {
-              PsiElement file = pair.first;
+              if (injectedFile == null) {
+                injectedFile = pair.first;
+                result.append("\nInjected file language: ").append(injectedFile.getLanguage()).append("\n");
+                result.append("Injected file text: ").append(SEPARATOR_NEWLINES);
+                result.append(protectSpaces(injectedFile.getText())).append(SEPARATOR_NEWLINES);
+              }
+              else {
+                assertEquals(pair.first, injectedFile);
+              }
               TextRange range = pair.second;
-              result.append(SEPARATOR_NEWLINES).append("Injected range: ").append(range).append("\n");
-              result.append("Text in range: ").append(protectSpaces(range.subSequence(hostChars))).append("\n");
-              result.append("File language: ").append(file.getLanguage()).append("\n");
-              result.append("File text: ").append(SEPARATOR_NEWLINES);
-              result.append(protectSpaces(file.getText()));
+              result.append("Host range: ").append(range).append(" '").append(protectSpaces(range.subSequence(hostChars))).append("'\n");
             }
             result.append(SEPARATOR_NEWLINES);
           }

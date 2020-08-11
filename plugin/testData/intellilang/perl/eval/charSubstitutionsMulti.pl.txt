@@ -1,11 +1,11 @@
 Host: PsiPerlStringSqImpl(Perl5: STRING_SQ)
 Host range: (5,137)
 Host chars: '\x20\x201;\n\n1;\t\t1;\r\r1;\cA\cA1;\x20\x201;\x{20}\x{20}1;\o{40}\o{40}1;\040\0401;\N{SPACE}\N{SPACE}1;\N{U+20}\N{U+20}1;\x20\x20'
-----------
-Injected range: (1,131)
-Text in range: \x20\x201;\n\n1;\t\t1;\r\r1;\cA\cA1;\x20\x201;\x{20}\x{20}1;\o{40}\o{40}1;\040\0401;\N{SPACE}\N{SPACE}1;\N{U+20}\N{U+20}1;\x20\x20
-File language: Language: Perl5
-File text: 
+Injected file language: Language: Perl5
+Injected file text: 
 ----------
 \x20\x201;\n\n1;\t\t1;\r\r1;\cA\cA1;\x20\x201;\x{20}\x{20}1;\o{40}\o{40}1;\040\0401;\N{SPACE}\N{SPACE}1;\N{U+20}\N{U+20}1;\x20\x20
+----------
+Host range: (1,131) '\x20\x201;\n\n1;\t\t1;\r\r1;\cA\cA1;\x20\x201;\x{20}\x{20}1;\o{40}\o{40}1;\040\0401;\N{SPACE}\N{SPACE}1;\N{U+20}\N{U+20}1;\x20\x20'
+
 ----------
