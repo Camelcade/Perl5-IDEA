@@ -33,6 +33,12 @@ public class PerlSyntaxHighlightingTest extends PerlParserTest {
     doTestHighlighterWithoutInit();
   }
 
+  @Test
+  public void testPinxi() {
+    initWithPinxi();
+    doTestHighlighterWithoutInit();
+  }
+
   @Override
   protected void doTest() {
     doTest(true);

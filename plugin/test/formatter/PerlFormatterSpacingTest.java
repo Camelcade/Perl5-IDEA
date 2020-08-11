@@ -215,6 +215,13 @@ public class PerlFormatterSpacingTest extends PerlFormatterTestCase {
   }
 
   @Test
+  public void testPinxi() {
+    initWithPinxi();
+    assertNoErrorElements();
+    doFormatTestWithoutInitialization(getTestName(true), "");
+  }
+
+  @Test
   public void testNewLineAfterComment() {doFormatTest();}
 
   @Test

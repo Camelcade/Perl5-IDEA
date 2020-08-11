@@ -102,6 +102,12 @@ public class PerlHighlightingRestartTest extends PerlLightTestCase {
     doTestHighlighterRestartWithoutInit();
   }
 
+  @Test
+  public void testPinxi() {
+    initWithPinxi();
+    doTestHighlighterRestartWithoutInit();
+  }
+
   private void doTest() {
     doTestHighlighterRestart();
   }

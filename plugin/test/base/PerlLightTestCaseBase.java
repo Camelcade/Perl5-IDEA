@@ -2497,7 +2497,11 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   }
 
   public void initWithPerlTidy() {
-    initWithPerlTidy("perlTidy");
+    initWithTestDataFile("perlTidy");
+  }
+
+  public void initWithPinxi() {
+    initWithTestDataFile("pinxi");
   }
 
   protected void initWithCpanFile() {
@@ -2509,10 +2513,14 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     }
   }
 
-  public void initWithPerlTidy(@NotNull String targetName) {
+  public void initWithTestDataFile(@NotNull String sourceName) {
+    initWithTestDataFile(sourceName, sourceName);
+  }
+
+  public void initWithTestDataFile(@NotNull String sourceName, @NotNull String targetName) {
     try {
       initWithFileContent(targetName, getFileExtension(),
-                          FileUtil.loadFile(new File("testData", "perlTidy" + getRealDataFileExtension()), CharsetToolkit.UTF8, true)
+                          FileUtil.loadFile(new File("testData", sourceName + getRealDataFileExtension()), CharsetToolkit.UTF8, true)
                             .trim());
       assertNoErrorElements();
     }
