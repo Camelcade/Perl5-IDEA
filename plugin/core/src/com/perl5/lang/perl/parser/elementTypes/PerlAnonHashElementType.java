@@ -23,7 +23,6 @@ import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.lexer.PerlTemplatingLexer;
 import com.perl5.lang.perl.psi.impl.PsiPerlAnonHashImpl;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 
@@ -43,8 +42,8 @@ public class PerlAnonHashElementType extends PerlBracedBlockElementType {
   }
 
   @Override
-  protected boolean isNodeReparseable(@Nullable ASTNode parent) {
-    if (parent == null) {
+  protected boolean isParentOk(@NotNull ASTNode parent) {
+    if (!super.isParentOk(parent)) {
       return false;
     }
 

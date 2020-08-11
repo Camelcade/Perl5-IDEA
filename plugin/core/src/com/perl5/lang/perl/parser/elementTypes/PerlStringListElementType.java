@@ -62,16 +62,16 @@ public class PerlStringListElementType extends PerlTwoQuotesQuoteLikeElementType
   }
 
   @Override
-  public boolean isParsable(@Nullable ASTNode parent,
-                            @NotNull CharSequence buffer,
-                            @NotNull Language fileLanguage,
-                            @NotNull Project project) {
+  protected boolean isReparseable(@NotNull ASTNode parent,
+                                  @NotNull CharSequence buffer,
+                                  @NotNull Language fileLanguage,
+                                  @NotNull Project project) {
     if (PsiUtilCore.getElementType(parent) == USE_STATEMENT) {
       @NotNull ASTNode[] children = parent.getChildren(TokenSet.create(PACKAGE));
       if (children.length == 1 && StringUtil.equals("vars", children[0].getChars())) {
         return false;
       }
     }
-    return super.isParsable(parent, buffer, fileLanguage, project);
+    return super.isReparseable(parent, buffer, fileLanguage, project);
   }
 }

@@ -27,7 +27,6 @@ import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.text.CharArrayUtil;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -49,13 +48,10 @@ public class PerlHeredocElementType extends PerlReparseableElementType {
   @ApiStatus.ScheduledForRemoval(inVersion = "2020.3")
   @Deprecated
   @Override
-  public boolean isParsable(@Nullable ASTNode parent,
-                            @NotNull CharSequence buffer,
-                            @NotNull Language fileLanguage,
-                            @NotNull Project project) {
-    if (parent == null) {
-      return false;
-    }
+  protected boolean isReparseable(@NotNull ASTNode parent,
+                                  @NotNull CharSequence buffer,
+                                  @NotNull Language fileLanguage,
+                                  @NotNull Project project) {
     ASTNode run = parent.getFirstChildNode();
     if (run == null) {
       return false;

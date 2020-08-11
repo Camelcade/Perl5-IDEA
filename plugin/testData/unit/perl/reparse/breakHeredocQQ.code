@@ -1,0 +1,7 @@
+<<EOM
+"something ${
+  say 'hi';
+<caret>
+} blabla
+";
+EOM

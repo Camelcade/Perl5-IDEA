@@ -22,6 +22,7 @@ import com.intellij.lexer.Lexer;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.ClearableLazyValue;
 import com.intellij.openapi.util.Pair;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
@@ -30,6 +31,8 @@ import com.intellij.psi.TokenType;
 import com.intellij.psi.text.BlockSupport;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.IReparseableElementType;
+import com.intellij.psi.tree.TokenSet;
+import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.parser.PerlParserImpl;
 import com.perl5.lang.perl.psi.PerlLexerAwareParserDefinition;
@@ -44,9 +47,14 @@ import java.util.function.Function;
 
 import static com.perl5.lang.perl.idea.editor.PerlBraceMatcher.PERL_BRACES_MAP;
 import static com.perl5.lang.perl.idea.editor.PerlBraceMatcher.PERL_BRACES_MAP_REVERSED;
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 
 
 public abstract class PerlReparseableElementType extends IReparseableElementType implements PsiElementProvider {
+  private static final ClearableLazyValue<TokenSet> REPARSING_PREVENTING_CONTAINERS = ClearableLazyValue.create(
+    () -> TokenSet.create(
+      HEREDOC_QQ, HEREDOC_QX, STRING_DQ, STRING_XQ, MATCH_REGEX, COMPILE_REGEX, REPLACEMENT_REGEX
+    ));
   protected static final Logger LOG = Logger.getInstance(PerlReparseableElementType.class);
   private final Function<ASTNode, PsiElement> myInstanceFactory;
 
@@ -93,6 +101,40 @@ public abstract class PerlReparseableElementType extends IReparseableElementType
   @Override
   public final @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
     return myInstanceFactory.apply(node);
+  }
+
+  @Override
+  public final boolean isParsable(@Nullable ASTNode parent,
+                                  @NotNull CharSequence buffer,
+                                  @NotNull Language fileLanguage,
+                                  @NotNull Project project) {
+    if (parent == null || !isParentOk(parent)) {
+      return false;
+    }
+    return isReparseable(parent, buffer, fileLanguage, project);
+  }
+
+  protected boolean isParentOk(@NotNull ASTNode parent) {
+    ASTNode run = parent;
+    while (run != null) {
+      if (REPARSING_PREVENTING_CONTAINERS.getValue().contains(PsiUtilCore.getElementType(run))) {
+        return false;
+      }
+      run = run.getTreeParent();
+    }
+    return true;
+  }
+
+  protected abstract boolean isReparseable(@NotNull ASTNode parent,
+                                           @NotNull CharSequence buffer,
+                                           @NotNull Language fileLanguage,
+                                           @NotNull Project project);
+
+
+  @Override
+  public final boolean isParsable(@NotNull CharSequence buffer, @NotNull Language fileLanguage, @NotNull Project project) {
+    LOG.error("Should not be used");
+    return super.isParsable(buffer, fileLanguage, project);
   }
 
   @Override

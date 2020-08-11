@@ -25,7 +25,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.util.PerlTimeLogger;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Stack;
 
@@ -36,13 +35,10 @@ public abstract class PerlBracedBlockElementType extends PerlReparseableElementT
   }
 
   @Override
-  public final boolean isParsable(@Nullable ASTNode parent,
+  protected boolean isReparseable(@NotNull ASTNode parent,
                                   @NotNull CharSequence buffer,
                                   @NotNull Language fileLanguage,
                                   @NotNull Project project) {
-    if (parent == null || !isNodeReparseable(parent)) {
-      return false;
-    }
     Lexer lexer = createLexer(parent, this);
     boolean result = hasProperBraceBalance(buffer, lexer, getOpeningBraceType());
     if (LOG.isDebugEnabled()) {
@@ -52,10 +48,6 @@ public abstract class PerlBracedBlockElementType extends PerlReparseableElementT
                 "; lexer state: ", lexer.getState());
     }
     return result && isLexerStateOk(lexer.getState());
-  }
-
-  protected boolean isNodeReparseable(@Nullable ASTNode parent) {
-    return true;
   }
 
   protected abstract @NotNull IElementType getOpeningBraceType();

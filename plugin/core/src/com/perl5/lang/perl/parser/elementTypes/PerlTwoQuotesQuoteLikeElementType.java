@@ -46,13 +46,10 @@ public abstract class PerlTwoQuotesQuoteLikeElementType extends PerlQuoteLikeEle
   protected abstract boolean isCloseQuoteToken(@Nullable IElementType tokenType);
 
   @Override
-  public boolean isParsable(@Nullable ASTNode parent,
-                            @NotNull CharSequence buffer,
-                            @NotNull Language fileLanguage,
-                            @NotNull Project project) {
-    if (parent == null) {
-      return false;
-    }
+  protected boolean isReparseable(@NotNull ASTNode parent,
+                                  @NotNull CharSequence buffer,
+                                  @NotNull Language fileLanguage,
+                                  @NotNull Project project) {
     Lexer lexer = createLexer(parent, this);
     lexer.start(buffer);
     if (isOperatorToken(lexer.getTokenType())) {

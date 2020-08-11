@@ -27,6 +27,39 @@ public class PerlReparseTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testBreakHeredocQQ() {doTest("EOM");}
+
+  @Test
+  public void testBreakHeredocQX() {doTest("EOM");}
+
+  @Test
+  public void testBreakRegexM() {doTest(">");}
+
+  @Test
+  public void testBreakRegexQR() {doTest(">");}
+
+  @Test
+  public void testBreakRegexSMatch() {doTest(">");}
+
+  @Test
+  public void testBreakRegexSReplace() {doTest(">");}
+
+  @Test
+  public void testBreakRegexSReplaceE() {doTest(">");}
+
+  @Test
+  public void testBreakStringQQ() {doTest("\"");}
+
+  @Test
+  public void testBreakStringQQOp() {doTest(">");}
+
+  @Test
+  public void testBreakStringQX() {doTest("`");}
+
+  @Test
+  public void testBreakStringQXOp() {doTest(">");}
+
+  @Test
   public void testPodManglingStart() {doTestBS();}
 
   @Test

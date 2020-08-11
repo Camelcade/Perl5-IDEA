@@ -23,7 +23,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 import static com.perl5.lang.perl.lexer.PerlLexer.AFTER_VALUE;
@@ -35,13 +34,10 @@ public class PerlRegexReplacementElementType extends PerlReparseableElementType 
   }
 
   @Override
-  public boolean isParsable(@Nullable ASTNode parent,
-                            @NotNull CharSequence buffer,
-                            @NotNull Language fileLanguage,
-                            @NotNull Project project) {
-    if (parent == null) {
-      return false;
-    }
+  protected boolean isReparseable(@NotNull ASTNode parent,
+                                  @NotNull CharSequence buffer,
+                                  @NotNull Language fileLanguage,
+                                  @NotNull Project project) {
     Lexer lexer = createLexer(parent, this);
     lexer.start(buffer);
 

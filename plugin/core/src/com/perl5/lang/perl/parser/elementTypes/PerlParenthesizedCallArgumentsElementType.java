@@ -22,7 +22,6 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.lexer.PerlTemplatingLexer;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.LEFT_PAREN;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.PRINT_EXPR;
@@ -35,8 +34,8 @@ public class PerlParenthesizedCallArgumentsElementType extends PerlBracedBlockEl
   }
 
   @Override
-  protected boolean isNodeReparseable(@Nullable ASTNode parent) {
-    return PsiUtilCore.getElementType(parent) != PRINT_EXPR;
+  protected boolean isParentOk(@NotNull ASTNode parent) {
+    return PsiUtilCore.getElementType(parent) != PRINT_EXPR && super.isParentOk(parent);
   }
 
   @Override

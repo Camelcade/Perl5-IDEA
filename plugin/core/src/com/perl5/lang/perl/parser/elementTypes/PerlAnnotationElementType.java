@@ -16,6 +16,9 @@
 
 package com.perl5.lang.perl.parser.elementTypes;
 
+import com.intellij.lang.ASTNode;
+import com.intellij.lang.Language;
+import com.intellij.openapi.project.Project;
 import com.perl5.lang.perl.psi.impl.PerlAnnotationContainerImpl;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
@@ -24,5 +27,13 @@ import org.jetbrains.annotations.NotNull;
 public class PerlAnnotationElementType extends PerlReparseableElementType {
   public PerlAnnotationElementType(@NotNull @NonNls String debugName) {
     super(debugName, PerlAnnotationContainerImpl.class);
+  }
+
+  @Override
+  protected boolean isReparseable(@NotNull ASTNode parent,
+                                  @NotNull CharSequence buffer,
+                                  @NotNull Language fileLanguage,
+                                  @NotNull Project project) {
+    return false;
   }
 }

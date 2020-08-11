@@ -1,0 +1,52 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
+<<EOM
+"something ${
+  say 'hi';
+EOM<caret>
+} blabla
+";
+EOM
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER)
+      PsiElement(Perl5: heredoc<<)('<<')
+      PsiPerlStringBareImpl(Perl5: STRING_BARE)
+        PerlStringContentElementImpl(Perl5: STRING_CONTENT)('EOM')
+  PsiWhiteSpace('\n')
+  PerlHeredocElementImpl(Perl5: HEREDOC_QQ)
+    PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('"something ')
+    PsiPerlScalarCastExprImpl(Perl5: SCALAR_CAST_EXPR)
+      PsiElement(Perl5: $$)('$')
+      PsiPerlBlockScalarImpl(Perl5: BLOCK_SCALAR)
+        PsiElement(Perl5: ${)('{')
+        PsiWhiteSpace('\n  ')
+        PsiPerlStatementImpl(Perl5: STATEMENT)
+          PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+            PsiElement(Perl5: say)('say')
+            PsiWhiteSpace(' ')
+            PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
+              PsiPerlStringSqImpl(Perl5: STRING_SQ)
+                PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
+                PerlStringContentElementImpl(Perl5: STRING_CONTENT)('hi')
+                PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
+          PsiElement(Perl5: ;)(';')
+        PsiErrorElement:Perl5: $} expected
+          <empty list>
+    PsiWhiteSpace('\n')
+  PsiComment(Perl5: HEREDOC_END)('EOM')
+  PsiWhiteSpace('\n')
+  PsiErrorElement:<func definition>, <method definition>, <statement>, <sub definition>, Perl5: #@abstract, Perl5: #@deprecated, Perl5: #@inject, Perl5: #@method, Perl5: #@noinspection, Perl5: #@override, Perl5: #@returns, Perl5: #@type, Perl5: #@unknown, Perl5: BLOCK_NAME, Perl5: POD, Perl5: TryCatch::, Perl5: __DATA__, Perl5: __END__, Perl5: case, Perl5: default, Perl5: for, Perl5: foreach, Perl5: format, Perl5: fp_after, Perl5: fp_around, Perl5: fp_augment, Perl5: fp_before, Perl5: given, Perl5: if, Perl5: nyi, Perl5: package, Perl5: switch, Perl5: unless, Perl5: until, Perl5: when, Perl5: while or Perl5: { expected, got '}'
+    PsiElement(Perl5: })('}')
+  PsiWhiteSpace(' ')
+  PerlSubNameElementImpl(Perl5: subname)('blabla')
+  PsiWhiteSpace('\n')
+  PsiElement(Perl5: QUOTE_DOUBLE_OPEN)('"')
+  PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)(';\nEOM')

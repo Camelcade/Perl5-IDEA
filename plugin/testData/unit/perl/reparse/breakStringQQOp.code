@@ -1,0 +1,4 @@
+qq<something ${
+  say 'hi'; # <caret>
+} blabla
+>;

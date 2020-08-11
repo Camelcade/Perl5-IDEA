@@ -17,12 +17,9 @@
 package com.perl5.lang.perl.parser.elementTypes;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.lang.Language;
-import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiUtilCore;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.HEREDOC_OPENER;
 
@@ -34,13 +31,7 @@ public abstract class PerlStringElementType extends PerlTwoQuotesQuoteLikeElemen
   }
 
   @Override
-  public boolean isParsable(@Nullable ASTNode parent,
-                            @NotNull CharSequence buffer,
-                            @NotNull Language fileLanguage,
-                            @NotNull Project project) {
-    if (PsiUtilCore.getElementType(parent) == HEREDOC_OPENER) {
-      return false;
-    }
-    return super.isParsable(parent, buffer, fileLanguage, project);
+  protected boolean isParentOk(@NotNull ASTNode parent) {
+    return PsiUtilCore.getElementType(parent) != HEREDOC_OPENER && super.isParentOk(parent);
   }
 }

@@ -1,12 +1,13 @@
 Reparsing block
 ----------
-Element(Perl5: ARRAY_CAST_EXPR)
+Element(Perl5: HEREDOC_QQ)
 ----------
-@{
+  text @{
     say => 'start';
     some => ;
     say =>'end';
-  }
+  }; text
+
 ----------
 After typing
 ----------

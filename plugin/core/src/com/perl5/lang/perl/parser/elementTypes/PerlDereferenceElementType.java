@@ -26,7 +26,6 @@ import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.idea.editor.PerlBraceMatcher;
 import com.perl5.lang.perl.lexer.PerlTemplatingLexer;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Stack;
 
@@ -40,13 +39,10 @@ public abstract class PerlDereferenceElementType extends PerlReparseableElementT
   }
 
   @Override
-  public final boolean isParsable(@Nullable ASTNode parent,
+  protected boolean isReparseable(@NotNull ASTNode parent,
                                   @NotNull CharSequence buffer,
                                   @NotNull Language fileLanguage,
                                   @NotNull Project project) {
-    if (!isNodeReparseable(parent) || parent == null) {
-      return false;
-    }
     Lexer lexer = createLexer(parent, this);
     boolean result = hasProperTokensStructure(buffer, lexer);
     if (LOG.isDebugEnabled()) {
@@ -55,10 +51,6 @@ public abstract class PerlDereferenceElementType extends PerlReparseableElementT
                 "; lexer state: ", lexer.getState());
     }
     return result && isLexerStateOk(lexer.getState());
-  }
-
-  private boolean isNodeReparseable(@Nullable ASTNode parent) {
-    return true;
   }
 
   private boolean isLexerStateOk(int lexerState) {

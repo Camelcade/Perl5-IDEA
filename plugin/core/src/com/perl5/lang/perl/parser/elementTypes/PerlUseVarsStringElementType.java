@@ -31,11 +31,17 @@ public class PerlUseVarsStringElementType extends PerlReparseableElementType {
     super("PARSABLE_STRING_USE_VARS");
   }
 
+
   @Override
-  public boolean isParsable(@Nullable ASTNode parent,
-                            @NotNull CharSequence buffer,
-                            @NotNull Language fileLanguage,
-                            @NotNull Project project) {
+  protected boolean isParentOk(@NotNull ASTNode parent) {
+    return false;
+  }
+
+  @Override
+  protected boolean isReparseable(@NotNull ASTNode parent,
+                                  @NotNull CharSequence buffer,
+                                  @NotNull Language fileLanguage,
+                                  @NotNull Project project) {
     return false;
   }
 

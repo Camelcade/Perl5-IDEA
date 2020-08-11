@@ -1,0 +1,4 @@
+s<test><something ${
+  say 'hi'; # <caret>
+} blabla
+>;
