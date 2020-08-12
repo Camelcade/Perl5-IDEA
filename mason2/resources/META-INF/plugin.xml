@@ -108,6 +108,7 @@
                              implementationClass="com.perl5.lang.mason2.idea.findusages.MasonTemplatingFindUsagesProvider"/>
     <lang.parserDefinition language="Mason2 Templating Language"
                            implementationClass="com.perl5.lang.mason2.Mason2TemplatingParserDefinition"/>
+    <lang.ast.factory language="Mason2 Templating Language" implementationClass="com.perl5.lang.mason2.Mason2TemplatingAstFactory"/>
     <lang.fileViewProviderFactory language="Mason2 Templating Language"
                                   implementationClass="com.perl5.lang.mason2.psi.Mason2TemplatingFileViewProviderFactory"/>
     <lang.findUsagesProvider language="Mason2 Templating Language"

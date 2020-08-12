@@ -28,6 +28,7 @@
     <colorSettingsPage implementation="com.perl5.lang.pod.idea.highlighter.PodColorSettingsPage"/>
     <lang.treePatcher language="Perl5 POD" implementationClass="com.perl5.lang.pod.parser.PodTreePatcher"/>
     <lang.parserDefinition language="Perl5 POD" implementationClass="com.perl5.lang.pod.PodParserDefinition"/>
+    <lang.ast.factory language="Perl5 POD" implementationClass="com.perl5.lang.pod.PodAstFactory"/>
     <breadcrumbsInfoProvider implementation="com.perl5.lang.pod.idea.ui.breadcrumbs.PodBreadCrumbsProvider"/>
 
     <liveTemplateContext implementation="com.perl5.lang.pod.idea.livetemplates.PodTemplateContextType$Generic"/>

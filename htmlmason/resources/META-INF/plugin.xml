@@ -49,6 +49,7 @@
 
     <lang.parserDefinition language="HTML::Mason Templating Language"
                            implementationClass="com.perl5.lang.htmlmason.HTMLMasonParserDefinition"/>
+    <lang.ast.factory language="HTML::Mason Templating Language" implementationClass="com.perl5.lang.htmlmason.HtmlMasonAstFactory"/>
     <fileType implementationClass="com.perl5.lang.htmlmason.filetypes.HTMLMasonFileType" fieldName="INSTANCE"
               name="HTML::Mason Component" extensions="mas" language="HTML::Mason Templating Language"/>
     <editorHighlighterProvider filetype="HTML::Mason Component"

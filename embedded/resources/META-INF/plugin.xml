@@ -39,6 +39,7 @@
                                implementationClass="com.perl5.lang.embedded.filetypes.EmbeddedPerlEditorHighlighterProvider"/>
     <lang.parserDefinition language="Embedded Perl"
                            implementationClass="com.perl5.lang.embedded.EmbeddedPerlParserDefinition"/>
+    <lang.ast.factory language="Embedded Perl" implementationClass="com.perl5.lang.embedded.EmbeddedPerlAstFactory"/>
     <lang.fileViewProviderFactory language="Embedded Perl"
                                   implementationClass="com.perl5.lang.embedded.psi.EmbeddedPerlFileViewProviderFactory"/>
     <lang.syntaxHighlighterFactory language="Embedded Perl"
