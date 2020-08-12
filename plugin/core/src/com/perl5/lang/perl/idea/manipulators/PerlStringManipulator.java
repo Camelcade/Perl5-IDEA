@@ -48,7 +48,7 @@ public class PerlStringManipulator extends AbstractElementManipulator<PerlString
       encodedContent = encodeSingleQuotedString(decodedContent, charsToEscape);
     }
     else {
-      String charsToEscape = "" + openQuote + (openQuote != closeQuote ? closeQuote : "");
+      String charsToEscape = "$@\\" + openQuote + (openQuote != closeQuote ? closeQuote : "");
       encodedContent = encodeDoubleQuotedString(decodedContent, charsToEscape, true);
     }
 
@@ -90,10 +90,7 @@ public class PerlStringManipulator extends AbstractElementManipulator<PerlString
 
     for (int i = 0; i < decodedContent.length(); i++) {
       char currentChar = decodedContent.charAt(i);
-      if (currentChar == '\\') {
-        result.append('\\');
-      }
-      else if (collapseTabs && currentChar == '\n') {
+      if (collapseTabs && currentChar == '\n') {
         result.append("\\n");
         continue;
       }
@@ -123,9 +120,6 @@ public class PerlStringManipulator extends AbstractElementManipulator<PerlString
       }
       else if (!charsToEscape.isEmpty() && charsToEscape.indexOf(currentChar) >= 0) {
         result.append('\\');
-      }
-      else if (currentChar == '$' || currentChar == '@') {
-        // fixme platform fix required
       }
       else if (currentChar != ' ' && !Character.isLetterOrDigit(currentChar)) {
         int codePoint = Character.codePointAt(decodedContent, i);
