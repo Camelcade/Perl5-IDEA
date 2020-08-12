@@ -26,6 +26,8 @@ import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.intellilang.PerlStringLiteralEscaper;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
+import com.perl5.lang.perl.psi.PsiPerlStringSq;
+import com.perl5.lang.perl.psi.PsiPerlStringXq;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -93,5 +95,12 @@ public abstract class PerlStringMixin extends PerlStringBareMixin implements Psi
   public @Nullable PsiElement getCloseQuoteElement() {
     PsiElement lastChild = getLastChild();
     return lastChild != null && PerlTokenSets.CLOSE_QUOTES.contains(PsiUtilCore.getElementType(lastChild)) ? lastChild : null;
+  }
+
+  /**
+   * @return true iff content of the string supports only escapes of quotes and escape symbol
+   */
+  public boolean isRestricted() {
+    return this instanceof PsiPerlStringSq || this instanceof PsiPerlStringXq && getOpenQuote() == '\'';
   }
 }
