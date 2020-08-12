@@ -1,6 +1,6 @@
 use constant {
     CONST1     => 42,
-    'NewName'   => 42,
+    'NewName'  => 42,
     "CONST3"   => 42,
     q'CONST4'  => 42,
     qq"CONST5" => 42,

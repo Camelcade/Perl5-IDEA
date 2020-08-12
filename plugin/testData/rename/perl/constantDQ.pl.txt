@@ -1,7 +1,7 @@
 use constant {
     CONST1     => 42,
     'CONST2'   => 42,
-    "NewName"   => 42,
+    "NewName"  => 42,
     q'CONST4'  => 42,
     qq"CONST5" => 42,
     qw/

@@ -2,7 +2,7 @@ use constant {
     CONST1     => 42,
     'CONST2'   => 42,
     "CONST3"   => 42,
-    q'NewName'  => 42,
+    q'NewName' => 42,
     qq"CONST5" => 42,
     qw/
         CONST6 42
