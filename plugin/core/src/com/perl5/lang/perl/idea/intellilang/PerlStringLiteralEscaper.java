@@ -76,7 +76,7 @@ public class PerlStringLiteralEscaper extends LiteralTextEscaper<PerlStringMixin
       CharSequence runChars = null;
       if (run instanceof PerlCharSubstitution) {
         int point = ((PerlCharSubstitution)run).getCodePoint();
-        runChars = String.valueOf(Character.toChars(point));
+        runChars = Character.isValidCodePoint(point) ? String.valueOf(Character.toChars(point)) : run.getText();
       }
       else {
         runChars = ALIASES_MAP.get(runType);
