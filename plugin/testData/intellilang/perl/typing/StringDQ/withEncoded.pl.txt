@@ -1,0 +1,25 @@
+Host: PsiPerlStringDqImpl(Perl5: STRING_DQ)
+Host range: (14,122)
+Host chars: "test␣A␣\Ftext␣\Qwith\E␣\u$variable␣\land\L␣\U␣\x{263A}␣\e␣\x{263D}␣\x{263D}␣\e␣\x{263A}␣\e␣_:/+*-{}[]{}.,?"
+Injected file language: Language: HTML
+Decoded psi file content:
+----------
+test␣A␣text␣with␣variable␣and␣␣\x{263A}␣␣␣\x{263D}␣\x{263D}␣␣␣\x{263A}␣␣␣_:/+*-{}[]{}.,?
+----------
+Decoded virtual file content:
+----------
+test␣A␣text␣with␣variable␣and␣␣☺␣␣␣☽␣☽␣␣␣☺␣␣␣_:/+*-{}[]{}.,?
+----------
+Host range: (1,8) 'test␣A␣'
+Host range: (10,15) 'text␣'
+Host range: (17,21) 'with'
+Host range: (23,24) '␣'
+Host range: (35,36) '␣'
+Host range: (38,41) 'and'
+Host range: (43,44) '␣'
+Host range: (46,56) '␣\x{263A}␣'
+Host range: (58,77) '␣\x{263D}␣\x{263D}␣'
+Host range: (79,89) '␣\x{263A}␣'
+Host range: (91,107) '␣_:/+*-{}[]{}.,?'
+
+----------

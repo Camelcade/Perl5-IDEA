@@ -1,0 +1,15 @@
+Host: PsiPerlStringSqImpl(Perl5: STRING_SQ)
+Host range: (14,45)
+Host chars: 'typedtexttest␣$something␣text'
+Injected file language: Language: HTML
+Decoded psi file content:
+----------
+typedtexttest␣$something␣text
+----------
+Decoded virtual file content:
+----------
+test␣$something␣text
+----------
+Host range: (1,30) 'typedtexttest␣$something␣text'
+
+----------

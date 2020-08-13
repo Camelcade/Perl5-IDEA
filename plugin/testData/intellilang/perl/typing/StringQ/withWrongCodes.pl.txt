@@ -1,0 +1,15 @@
+Host: PsiPerlStringSqImpl(Perl5: STRING_SQ)
+Host range: (14,93)
+Host chars: 'test␣A␣␣\\x{FFFFFFFF}␣\\N{SOMETHINGWRONG}␣\\N{U+FFFFFFFF}␣\\o{77777777777777}'
+Injected file language: Language: HTML
+Decoded psi file content:
+----------
+test␣A␣␣\\x{FFFFFFFF}␣\\N{SOMETHINGWRONG}␣\\N{U+FFFFFFFF}␣\\o{77777777777777}
+----------
+Decoded virtual file content:
+----------
+test␣␣␣\x{FFFFFFFF}␣\N{SOMETHINGWRONG}␣\N{U+FFFFFFFF}␣\o{77777777777777}
+----------
+Host range: (1,78) 'test␣A␣␣\\x{FFFFFFFF}␣\\N{SOMETHINGWRONG}␣\\N{U+FFFFFFFF}␣\\o{77777777777777}'
+
+----------

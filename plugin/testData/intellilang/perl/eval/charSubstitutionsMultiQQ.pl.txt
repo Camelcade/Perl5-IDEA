@@ -2,17 +2,15 @@ Host: PsiPerlStringDqImpl(Perl5: STRING_DQ)
 Host range: (5,137)
 Host chars: "\x20\x201;\n\n1;\t\t1;\r\r1;\cA\cA1;\x20\x201;\x{20}\x{20}1;\o{40}\o{40}1;\040\0401;\N{SPACE}\N{SPACE}1;\N{U+20}\N{U+20}1;\x20\x20"
 Injected file language: Language: Perl5
-Patched file content:
+Decoded psi file content:
 ----------
 \x20\x201;\n\n1;\t\t1;\r\r1;\cA\cA1;\x20\x201;\x{20}\x{20}1;\o{40}\o{40}1;\040\0401;\N{SPACE}\N{SPACE}1;\N{U+20}\N{U+20}1;\x20\x20
 ----------
-Decoded file content:
+Decoded virtual file content:
 ----------
 ␣␣1;
 
-1;		1;
-
-1;1;␣␣1;␣␣1;␣␣1;␣␣1;␣␣1;␣␣1;␣␣
+1;		1;1;1;␣␣1;␣␣1;␣␣1;␣␣1;␣␣1;␣␣1;␣␣
 ----------
 Host range: (1,131) '\x20\x201;\n\n1;\t\t1;\r\r1;\cA\cA1;\x20\x201;\x{20}\x{20}1;\o{40}\o{40}1;\040\0401;\N{SPACE}\N{SPACE}1;\N{U+20}\N{U+20}1;\x20\x20'
 

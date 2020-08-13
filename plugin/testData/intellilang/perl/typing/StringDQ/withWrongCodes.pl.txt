@@ -1,0 +1,18 @@
+Host: PsiPerlStringDqImpl(Perl5: STRING_DQ)
+Host range: (14,89)
+Host chars: "test␣A␣␣\x{FFFFFFFF}␣\N{SOMETHINGWRONG}␣\N{U+FFFFFFFF}␣\o{77777777777777}"
+Injected file language: Language: HTML
+Decoded psi file content:
+----------
+test␣A␣␣*␣*␣*␣*
+----------
+Decoded virtual file content:
+----------
+test␣␣␣*␣*␣*␣*
+----------
+Host range: (1,9) 'test␣A␣␣'
+Host range: (21,22) '␣'
+Host range: (40,41) '␣'
+Host range: (55,56) '␣'
+
+----------

@@ -29,6 +29,7 @@ import com.intellij.codeInsight.highlighting.HighlightManager;
 import com.intellij.codeInsight.highlighting.actions.HighlightUsagesAction;
 import com.intellij.codeInsight.hint.ShowParameterInfoHandler;
 import com.intellij.codeInsight.intention.IntentionAction;
+import com.intellij.codeInsight.intention.impl.QuickEditAction;
 import com.intellij.codeInsight.lookup.*;
 import com.intellij.codeInsight.navigation.actions.GotoDeclarationAction;
 import com.intellij.codeInsight.template.impl.LiveTemplateCompletionContributor;
@@ -2876,6 +2877,10 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   protected void doTestInjectionWithoutInit() {
     PsiFile file = getTopLevelFile();
     assertNotNull(file);
+    doTestInjectionWithoutInit(file);
+  }
+
+  protected void doTestInjectionWithoutInit(@NotNull PsiFile file) {
     InjectedLanguageManager injectedLanguageManager = InjectedLanguageManager.getInstance(getProject());
     StringBuilder result = new StringBuilder();
     file.accept(new PsiRecursiveElementVisitor() {
@@ -2896,9 +2901,9 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
                 result.append("\nInjected file language: ").append(injectedFile.getLanguage()).append("\n");
                 VirtualFile virtualFile = PsiUtilCore.getVirtualFile(injectedFile);
                 assertInstanceOf(virtualFile, LightVirtualFile.class);
-                result.append("Patched file content:").append(SEPARATOR_NEWLINES);
+                result.append("Decoded psi file content:").append(SEPARATOR_NEWLINES);
                 result.append(protectSpaces(injectedFile.getText())).append(SEPARATOR_NEWLINES);
-                result.append("Decoded file content:").append(SEPARATOR_NEWLINES);
+                result.append("Decoded virtual file content:").append(SEPARATOR_NEWLINES);
                 result.append(protectSpaces(((LightVirtualFile)virtualFile).getContent())).append(SEPARATOR_NEWLINES);
               }
               else {
@@ -2914,5 +2919,26 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
       }
     });
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), result.toString());
+  }
+
+  protected void doTestInjectedTypingWithoutInit(@NotNull String textToType) {
+    var topLevelFile = getTopLevelFile();
+    assertNotNull(topLevelFile);
+    var topLevelEditor = getTopLevelEditor();
+    var topLevelDocument = topLevelEditor.getDocument();
+    var quickEditHandler = new QuickEditAction().invokeImpl(getProject(), topLevelEditor, topLevelFile);
+    var injectedVirtualFile = quickEditHandler.getNewFile().getVirtualFile();
+    assertNotNull(injectedVirtualFile);
+    var editor = getEditor();
+    assertInstanceOf(editor, EditorWindow.class);
+    var editorWindowOffset = editor.getCaretModel().getOffset();
+    myFixture.configureFromExistingVirtualFile(injectedVirtualFile);
+    getTopLevelEditor().getCaretModel().moveToOffset(editorWindowOffset);
+    myFixture.type(textToType);
+    PsiDocumentManager.getInstance(getProject()).commitAllDocuments();
+    //PsiDocumentManager.getInstance(getProject()).commitDocument(getTopLevelEditor().getDocument());
+
+    assertTrue(topLevelFile.isValid());
+    doTestInjectionWithoutInit(topLevelFile);
   }
 }

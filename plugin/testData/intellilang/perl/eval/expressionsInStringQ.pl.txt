@@ -2,11 +2,11 @@ Host: PsiPerlStringSqImpl(Perl5: STRING_SQ)
 Host range: (48,99)
 Host chars: '1;\f1;\b1;\a1;\'\';1;\l1;\u1;\L1;\U1;\F1;\Q1;\E1;'
 Injected file language: Language: Perl5
-Patched file content:
+Decoded psi file content:
 ----------
 1;\f1;\b1;\a1;\'\';1;\l1;\u1;\L1;\U1;\F1;\Q1;\E1;
 ----------
-Decoded file content:
+Decoded virtual file content:
 ----------
 1;\f1;\b1;\a1;'';1;\l1;\u1;\L1;\U1;\F1;\Q1;\E1;
 ----------
@@ -17,11 +17,11 @@ Host: PsiPerlStringSqImpl(Perl5: STRING_SQ)
 Host range: (106,177)
 Host chars: '1;\n1;\t1;\r1;\cA1;\x201;\x{20}1;\o{123}1;\0121;\N{SMILE}1;\N{U+20}1;'
 Injected file language: Language: Perl5
-Patched file content:
+Decoded psi file content:
 ----------
 1;\n1;\t1;\r1;\cA1;\x201;\x{20}1;\o{123}1;\0121;\N{SMILE}1;\N{U+20}1;
 ----------
-Decoded file content:
+Decoded virtual file content:
 ----------
 1;\n1;\t1;\r1;\cA1;\x201;\x{20}1;\o{123}1;\0121;\N{SMILE}1;\N{U+20}1;
 ----------
@@ -32,11 +32,11 @@ Host: PsiPerlStringSqImpl(Perl5: STRING_SQ)
 Host range: (184,193)
 Host chars: 'say␣42;'
 Injected file language: Language: Perl5
-Patched file content:
+Decoded psi file content:
 ----------
 say␣42;
 ----------
-Decoded file content:
+Decoded virtual file content:
 ----------
 say␣42;
 ----------
@@ -47,11 +47,11 @@ Host: PsiPerlStringSqImpl(Perl5: STRING_SQ)
 Host range: (200,224)
 Host chars: 'say␣$variable;␣say␣42;'
 Injected file language: Language: Perl5
-Patched file content:
+Decoded psi file content:
 ----------
 say␣$variable;␣say␣42;
 ----------
-Decoded file content:
+Decoded virtual file content:
 ----------
 say␣$variable;␣say␣42;
 ----------
@@ -62,11 +62,11 @@ Host: PsiPerlStringSqImpl(Perl5: STRING_SQ)
 Host range: (231,264)
 Host chars: 'say␣$variable{testvar};␣say␣42;'
 Injected file language: Language: Perl5
-Patched file content:
+Decoded psi file content:
 ----------
 say␣$variable{testvar};␣say␣42;
 ----------
-Decoded file content:
+Decoded virtual file content:
 ----------
 say␣$variable{testvar};␣say␣42;
 ----------
@@ -77,11 +77,11 @@ Host: PsiPerlStringSqImpl(Perl5: STRING_SQ)
 Host range: (271,308)
 Host chars: 'say␣$variable{\'testvar\'};␣say␣42;'
 Injected file language: Language: Perl5
-Patched file content:
+Decoded psi file content:
 ----------
 say␣$variable{\'testvar\'};␣say␣42;
 ----------
-Decoded file content:
+Decoded virtual file content:
 ----------
 say␣$variable{'testvar'};␣say␣42;
 ----------
@@ -92,11 +92,11 @@ Host: PsiPerlStringSqImpl(Perl5: STRING_SQ)
 Host range: (315,343)
 Host chars: 'say␣$variable[42];␣say␣42;'
 Injected file language: Language: Perl5
-Patched file content:
+Decoded psi file content:
 ----------
 say␣$variable[42];␣say␣42;
 ----------
-Decoded file content:
+Decoded virtual file content:
 ----------
 say␣$variable[42];␣say␣42;
 ----------
@@ -107,11 +107,11 @@ Host: PsiPerlStringSqImpl(Perl5: STRING_SQ)
 Host range: (350,389)
 Host chars: 'say␣$variable->{\'testvar\'};␣say␣42;'
 Injected file language: Language: Perl5
-Patched file content:
+Decoded psi file content:
 ----------
 say␣$variable->{\'testvar\'};␣say␣42;
 ----------
-Decoded file content:
+Decoded virtual file content:
 ----------
 say␣$variable->{'testvar'};␣say␣42;
 ----------
@@ -122,11 +122,11 @@ Host: PsiPerlStringSqImpl(Perl5: STRING_SQ)
 Host range: (396,426)
 Host chars: 'say␣$variable->[42];␣say␣42;'
 Injected file language: Language: Perl5
-Patched file content:
+Decoded psi file content:
 ----------
 say␣$variable->[42];␣say␣42;
 ----------
-Decoded file content:
+Decoded virtual file content:
 ----------
 say␣$variable->[42];␣say␣42;
 ----------
@@ -137,11 +137,11 @@ Host: PsiPerlStringSqImpl(Perl5: STRING_SQ)
 Host range: (433,457)
 Host chars: 'say␣@variable;␣say␣42;'
 Injected file language: Language: Perl5
-Patched file content:
+Decoded psi file content:
 ----------
 say␣@variable;␣say␣42;
 ----------
-Decoded file content:
+Decoded virtual file content:
 ----------
 say␣@variable;␣say␣42;
 ----------
@@ -152,11 +152,11 @@ Host: PsiPerlStringSqImpl(Perl5: STRING_SQ)
 Host range: (464,495)
 Host chars: 'say␣@variable[1,2,3];␣say␣42;'
 Injected file language: Language: Perl5
-Patched file content:
+Decoded psi file content:
 ----------
 say␣@variable[1,2,3];␣say␣42;
 ----------
-Decoded file content:
+Decoded virtual file content:
 ----------
 say␣@variable[1,2,3];␣say␣42;
 ----------
@@ -167,11 +167,11 @@ Host: PsiPerlStringSqImpl(Perl5: STRING_SQ)
 Host range: (502,526)
 Host chars: 'say␣@variable;␣say␣42;'
 Injected file language: Language: Perl5
-Patched file content:
+Decoded psi file content:
 ----------
 say␣@variable;␣say␣42;
 ----------
-Decoded file content:
+Decoded virtual file content:
 ----------
 say␣@variable;␣say␣42;
 ----------
@@ -182,11 +182,11 @@ Host: PsiPerlStringSqImpl(Perl5: STRING_SQ)
 Host range: (533,570)
 Host chars: 'say␣@variable{qw/bla␣bla/};␣say␣42;'
 Injected file language: Language: Perl5
-Patched file content:
+Decoded psi file content:
 ----------
 say␣@variable{qw/bla␣bla/};␣say␣42;
 ----------
-Decoded file content:
+Decoded virtual file content:
 ----------
 say␣@variable{qw/bla␣bla/};␣say␣42;
 ----------
@@ -197,11 +197,11 @@ Host: PsiPerlStringSqImpl(Perl5: STRING_SQ)
 Host range: (577,608)
 Host chars: 'say␣@variable[1,2,3];␣say␣42;'
 Injected file language: Language: Perl5
-Patched file content:
+Decoded psi file content:
 ----------
 say␣@variable[1,2,3];␣say␣42;
 ----------
-Decoded file content:
+Decoded virtual file content:
 ----------
 say␣@variable[1,2,3];␣say␣42;
 ----------

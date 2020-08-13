@@ -2,11 +2,11 @@ Host: PsiPerlStringSqImpl(Perl5: STRING_SQ)
 Host range: (43,51)
 Host chars: 'say␣42'
 Injected file language: Language: Perl5
-Patched file content:
+Decoded psi file content:
 ----------
 say␣42
 ----------
-Decoded file content:
+Decoded virtual file content:
 ----------
 say␣42
 ----------
