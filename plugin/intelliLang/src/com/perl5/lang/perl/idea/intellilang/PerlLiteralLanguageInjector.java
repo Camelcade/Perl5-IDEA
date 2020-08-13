@@ -28,6 +28,7 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
+import com.perl5.lang.perl.psi.PerlCharSubstitution;
 import com.perl5.lang.perl.psi.PerlVariable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -111,6 +112,11 @@ public abstract class PerlLiteralLanguageInjector implements MultiHostInjector {
       IElementType elementType = PsiUtilCore.getElementType(run);
       boolean shouldIgnore = ELEMENTS_TO_IGNORE.contains(elementType);
       boolean shouldReplace = !shouldIgnore && ELEMENTS_TO_REPLACE_WITH_DUMMY.contains(elementType);
+      if (!shouldIgnore && !shouldReplace && run instanceof PerlCharSubstitution) {
+        var codePoint = ((PerlCharSubstitution)run).getCodePoint();
+        shouldReplace = !Character.isValidCodePoint(codePoint);
+      }
+
       if (shouldIgnore || shouldReplace) {
         if (currentDescriptor != null && !currentDescriptor.inject) {
           currentDescriptor.endOffset = run.getTextRangeInParent().getEndOffset();
@@ -152,6 +158,9 @@ public abstract class PerlLiteralLanguageInjector implements MultiHostInjector {
     }
     else if (PerlTokenSets.STRING_CHAR_UNRENDERABLE_ALIASES.contains(PsiUtilCore.getElementType(elementToReplace))) {
       return " ";
+    }
+    else if (elementToReplace instanceof PerlCharSubstitution) {
+      return "*";
     }
     return "perl_expression";
   }
