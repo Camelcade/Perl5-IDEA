@@ -34,6 +34,11 @@ public class PerlOctSubstitutionMixin extends PerlNumericCharSubstitution {
       return 0;
     }
     String codePointText = charCodeElement.getText().replace("_", "");
-    return codePointText.isEmpty() ? 0 : Integer.parseInt(codePointText, 8);
+    try {
+      return codePointText.isEmpty() ? 0 : Integer.parseInt(codePointText, 8);
+    }
+    catch (NumberFormatException e) {
+      return -1;
+    }
   }
 }

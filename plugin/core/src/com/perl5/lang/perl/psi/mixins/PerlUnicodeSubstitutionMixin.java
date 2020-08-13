@@ -36,7 +36,12 @@ public class PerlUnicodeSubstitutionMixin extends PerlNumericCharSubstitution {
     }
 
     String codeElementText = charCodeElement.getText().replace("_", "");
-    return codeElementText.isEmpty() ? 0 : Integer.parseInt(codeElementText, 16);
+    try {
+      return codeElementText.isEmpty() ? 0 : Integer.parseInt(codeElementText, 16);
+    }
+    catch (NumberFormatException e) {
+      return -1;
+    }
   }
 
   private int getCharCodeFromName() {

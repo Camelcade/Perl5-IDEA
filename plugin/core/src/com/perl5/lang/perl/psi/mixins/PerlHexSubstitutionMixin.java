@@ -34,6 +34,11 @@ public class PerlHexSubstitutionMixin extends PerlNumericCharSubstitution {
       return 0;
     }
     String codeElementText = charCodeElement.getText().replace("_", "");
-    return codeElementText.isEmpty() ? 0 : Integer.parseInt(codeElementText, 16);
+    try {
+      return codeElementText.isEmpty() ? 0 : Integer.parseInt(codeElementText, 16);
+    }
+    catch (NumberFormatException e) {
+      return -1;
+    }
   }
 }
