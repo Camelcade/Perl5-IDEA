@@ -83,6 +83,9 @@ public abstract class PerlInjectedStringTypingTestCase extends PerlLightTestCase
   public void testWithWrongCodes() {doTest("A");}
 
   @Test
+  public void testExistingEscapes() {doTest("\\");}
+
+  @Test
   public void testSimpleArrayBlock() {doTestSimpleText("@{say 42}");}
 
   @Override

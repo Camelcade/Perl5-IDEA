@@ -1,0 +1,18 @@
+Host: PsiPerlStringDqImpl(Perl5: STRING_DQ)
+Host range: (14,70)
+Host chars: "␣'␣\"␣\x{60}␣\\␣\\'␣␣␣\\\"␣\\\x{60}\\␣\\\\␣\Q␣\E␣\n␣\t"
+Injected file language: Language: HTML
+Decoded psi file content:
+----------
+␣'␣\"␣\x{60}␣\\␣\\'␣␣␣\\\"␣\\\x{60}\\␣\\\\␣␣␣\n␣\t
+----------
+Decoded virtual file content:
+----------
+␣'␣"␣`␣\␣\'␣␣␣\"␣\`␣\\␣␣␣
+␣	
+----------
+Host range: (1,44) '␣'␣\"␣\x{60}␣\\␣\\'␣␣␣\\\"␣\\\x{60}\\␣\\\\␣'
+Host range: (46,47) '␣'
+Host range: (49,55) '␣\n␣\t'
+
+----------

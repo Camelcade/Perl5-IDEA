@@ -44,7 +44,7 @@ public class PerlStringManipulator extends AbstractElementManipulator<PerlString
 
     String encodedContent;
     if (element.isRestricted()) {
-      String charsToEscape = "\\" + openQuote + (openQuote != closeQuote ? closeQuote : "");
+      String charsToEscape = "" + openQuote + (openQuote != closeQuote ? closeQuote : "");
       encodedContent = encodeSingleQuotedString(decodedContent, charsToEscape);
     }
     else {
@@ -73,7 +73,13 @@ public class PerlStringManipulator extends AbstractElementManipulator<PerlString
 
     for (int i = 0; i < decodedContent.length(); i++) {
       char currentChar = decodedContent.charAt(i);
-      if (!charsToEscape.isEmpty() && charsToEscape.indexOf(currentChar) >= 0) {
+      if (currentChar == '\\') {
+        var nextChar = i < decodedContent.length() - 1 ? decodedContent.charAt(i + 1) : -1;
+        if (nextChar < 0 || nextChar == '\\' || charsToEscape.indexOf(nextChar) >= 0) {
+          result.append('\\');
+        }
+      }
+      else if (!charsToEscape.isEmpty() && charsToEscape.indexOf(currentChar) >= 0) {
         result.append('\\');
       }
       result.append(currentChar);
