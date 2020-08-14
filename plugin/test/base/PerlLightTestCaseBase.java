@@ -2925,7 +2925,6 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     var topLevelFile = getTopLevelFile();
     assertNotNull(topLevelFile);
     var topLevelEditor = getTopLevelEditor();
-    var topLevelDocument = topLevelEditor.getDocument();
     var quickEditHandler = new QuickEditAction().invokeImpl(getProject(), topLevelEditor, topLevelFile);
     var injectedVirtualFile = quickEditHandler.getNewFile().getVirtualFile();
     assertNotNull(injectedVirtualFile);
@@ -2936,7 +2935,6 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     getTopLevelEditor().getCaretModel().moveToOffset(editorWindowOffset);
     myFixture.type(textToType);
     PsiDocumentManager.getInstance(getProject()).commitAllDocuments();
-    //PsiDocumentManager.getInstance(getProject()).commitDocument(getTopLevelEditor().getDocument());
 
     assertTrue(topLevelFile.isValid());
     doTestInjectionWithoutInit(topLevelFile);
