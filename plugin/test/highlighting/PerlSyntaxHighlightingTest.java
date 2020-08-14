@@ -17,8 +17,6 @@
 package highlighting;
 
 
-import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
-import com.perl5.lang.perl.idea.project.PerlNamesCache;
 import org.junit.Test;
 import unit.perl.parser.PerlParserTest;
 
@@ -38,8 +36,6 @@ public class PerlSyntaxHighlightingTest extends PerlParserTest {
   @Test
   public void testPinxi() {
     initWithPinxi();
-    CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
-    PerlNamesCache.getInstance(getProject()).forceCacheUpdate();
     doTestHighlighterWithoutInit();
   }
 

@@ -13,6 +13,8 @@
 ##
 ## If you don't understand what Free Software is, please read (or reread)
 ## this page: http://www.gnu.org/philosophy/free-sw.html
+package JSON::XS {}
+package HTTP::Tiny {};
 
 use strict;
 use warnings;
