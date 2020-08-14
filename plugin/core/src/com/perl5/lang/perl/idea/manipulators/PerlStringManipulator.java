@@ -140,12 +140,7 @@ public class PerlStringManipulator extends AbstractElementManipulator<PerlString
   }
 
   private static boolean plainAllowedChar(char c) {
-    if (c == ' ' || Character.isLetterOrDigit(c)) {
-      return true;
-    }
-    var type = Character.getType(c);
-    return type >= Character.DASH_PUNCTUATION && type <= Character.CURRENCY_SYMBOL ||
-           type == Character.INITIAL_QUOTE_PUNCTUATION || type == Character.FINAL_QUOTE_PUNCTUATION;
+    return c >= ' ' && c < (char)127 || Character.isLetterOrDigit(c);
   }
 
   @Override
