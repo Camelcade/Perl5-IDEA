@@ -1,16 +1,16 @@
 Host: PsiPerlStringDqImpl(Perl5: STRING_DQ)
-Host range: (14,48)
-Host chars: "test␣${something}ttypedtext␣text"
+Host range: (14,50)
+Host chars: "test␣$something\x{74}ypedtext␣text"
 Injected file language: Language: HTML
 Decoded psi file content:
 ----------
-test␣somethingttypedtext␣text
+test␣something\x{74}ypedtext␣text
 ----------
 Decoded virtual file content:
 ----------
-test␣somethingttypedtext␣text
+test␣something␣text
 ----------
 Host range: (1,6) 'test␣'
-Host range: (18,33) 'ttypedtext␣text'
+Host range: (16,35) '\x{74}ypedtext␣text'
 
 ----------

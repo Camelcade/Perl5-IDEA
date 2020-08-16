@@ -61,9 +61,7 @@ public class PerlStringManipulator extends AbstractElementManipulator<PerlString
           Math.max(0, range.getStartOffset() + hostStartOffset - 1));
         var leafBeforeRangeType = PsiUtilCore.getElementType(leafBeforeRange);
         if (leafBeforeRangeType == SCALAR_NAME || leafBeforeRangeType == ARRAY_NAME) {
-          currentElementChars = leafBeforeRange.getTextRange().shiftLeft(hostStartOffset).replace(
-            currentElementChars.toString(), "{" + leafBeforeRange.getText() + "}");
-          range = range.shiftRight(2);
+          encodedContent = "\\x{" + Integer.toHexString(encodedContent.codePointAt(0)) + "}" + encodedContent.substring(1);
         }
       }
     }
