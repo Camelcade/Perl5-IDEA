@@ -67,6 +67,8 @@ import com.intellij.injected.editor.VirtualFileWindow;
 import com.intellij.lang.*;
 import com.intellij.lang.documentation.DocumentationProvider;
 import com.intellij.lang.injection.InjectedLanguageManager;
+import com.intellij.lang.injection.MultiHostInjector;
+import com.intellij.lang.injection.MultiHostRegistrar;
 import com.intellij.lang.parameterInfo.ParameterInfoHandler;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.navigation.NavigationItem;
@@ -1325,6 +1327,14 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   protected @NotNull <T extends PsiElement> T getElementAtCaret(@NotNull Class<T> clazz) {
     int offset = myFixture.getEditor().getCaretModel().getOffset();
     PsiElement focused = myFixture.getFile().findElementAt(offset);
+    return ObjectUtils.assertNotNull(PsiTreeUtil.getParentOfType(focused, clazz, false));
+  }
+
+  protected @NotNull <T extends PsiElement> T getTopLevelFileElementAtCaret(@NotNull Class<T> clazz) {
+    int offset = getTopLevelEditor().getCaretModel().getOffset();
+    var topLevelFile = getTopLevelFile();
+    assertNotNull(topLevelFile);
+    PsiElement focused = topLevelFile.findElementAt(offset);
     return ObjectUtils.assertNotNull(PsiTreeUtil.getParentOfType(focused, clazz, false));
   }
 
@@ -2925,18 +2935,85 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     var topLevelFile = getTopLevelFile();
     assertNotNull(topLevelFile);
     var topLevelEditor = getTopLevelEditor();
+    var targetOffsetInDecoded = computeOffsetInDecodedFile();
     var quickEditHandler = new QuickEditAction().invokeImpl(getProject(), topLevelEditor, topLevelFile);
     var injectedVirtualFile = quickEditHandler.getNewFile().getVirtualFile();
     assertNotNull(injectedVirtualFile);
-    var editor = getEditor();
-    assertInstanceOf(editor, EditorWindow.class);
-    var editorWindowOffset = editor.getCaretModel().getOffset();
     myFixture.configureFromExistingVirtualFile(injectedVirtualFile);
-    getTopLevelEditor().getCaretModel().moveToOffset(editorWindowOffset);
+    getTopLevelEditor().getCaretModel().moveToOffset(targetOffsetInDecoded);
     myFixture.type(textToType);
     PsiDocumentManager.getInstance(getProject()).commitAllDocuments();
 
     assertTrue(topLevelFile.isValid());
     doTestInjectionWithoutInit(topLevelFile);
+  }
+
+  /**
+   * @return editor offset in decoded injected file for the caret position in injected element
+   */
+  private int computeOffsetInDecodedFile() {
+    var injectionHost = getTopLevelFileElementAtCaret(PsiLanguageInjectionHost.class);
+    assertNotNull(injectionHost);
+    var offsetInHost = getTopLevelEditor().getCaretModel().getOffset() - injectionHost.getTextRange().getStartOffset();
+    var injector = getInjector(injectionHost);
+    StringBuilder decodedContent = new StringBuilder();
+    int[] offsetInDecoded = {-1};
+    injector.getLanguagesToInject(new MultiHostRegistrar() {
+      @Override
+      public @NotNull MultiHostRegistrar startInjecting(@NotNull Language language) {
+        return this;
+      }
+
+      @Override
+      public @NotNull MultiHostRegistrar addPlace(@Nullable String prefix,
+                                                  @Nullable String suffix,
+                                                  @NotNull PsiLanguageInjectionHost host,
+                                                  @NotNull TextRange rangeInsideHost) {
+        if (prefix != null) {
+          decodedContent.append(prefix);
+        }
+        var chunkStartOffset = decodedContent.length();
+        LiteralTextEscaper<? extends PsiLanguageInjectionHost> literalTextEscaper = injectionHost.createLiteralTextEscaper();
+        literalTextEscaper.decode(rangeInsideHost, decodedContent);
+        if (rangeInsideHost.contains(offsetInHost)) {
+          for (int i = 0; i < decodedContent.length() - chunkStartOffset; i++) {
+            if (literalTextEscaper.getOffsetInHost(i, rangeInsideHost) == offsetInHost) {
+              offsetInDecoded[0] = chunkStartOffset + i;
+              break;
+            }
+          }
+        }
+        else if (offsetInHost == rangeInsideHost.getEndOffset()) {
+          offsetInDecoded[0] = decodedContent.length();
+        }
+        if (suffix != null) {
+          decodedContent.append(suffix);
+        }
+        return this;
+      }
+
+      @Override
+      public void doneInjecting() {
+
+      }
+    }, injectionHost);
+    if (offsetInDecoded[0] < 0) {
+      fail("Unable to find offset in decoded text");
+    }
+    return offsetInDecoded[0];
+  }
+
+  protected @NotNull MultiHostInjector getInjector(@NotNull PsiLanguageInjectionHost host) {
+    var result = new ArrayList<MultiHostInjector>();
+    for (MultiHostInjector injector : MultiHostInjector.MULTIHOST_INJECTOR_EP_NAME.getExtensions(getProject())) {
+      for (Class<? extends PsiElement> aClass : injector.elementsToInjectIn()) {
+        if (!aClass.equals(PsiLanguageInjectionHost.class) && aClass.isInstance(host)) {
+          result.add(injector);
+          break;
+        }
+      }
+    }
+    assertSize(1, result);
+    return result.get(0);
   }
 }

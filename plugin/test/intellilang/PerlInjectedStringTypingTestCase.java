@@ -31,6 +31,9 @@ public abstract class PerlInjectedStringTypingTestCase extends PerlLightTestCase
   public void testStringWithInterpolationAfterVariable() {doTest(" typedtext");}
 
   @Test
+  public void testStringWithInterpolationAfterVariableJoin() {doTest("typedtext");}
+
+  @Test
   public void testStringWithInterpolationBeforeVariable() {doTest("typedtext");}
 
   @Test
