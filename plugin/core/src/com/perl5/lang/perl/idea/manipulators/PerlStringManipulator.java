@@ -21,6 +21,7 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.AbstractElementManipulator;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.PsiPerlStatement;
@@ -32,6 +33,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.ARRAY_NAME;
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.SCALAR_NAME;
+
 
 public class PerlStringManipulator extends AbstractElementManipulator<PerlStringMixin> {
   private static final Logger LOG = Logger.getInstance(PerlStringManipulator.class);
@@ -42,6 +46,7 @@ public class PerlStringManipulator extends AbstractElementManipulator<PerlString
     char openQuote = element.getOpenQuote();
     char closeQuote = PerlString.getQuoteCloseChar(openQuote);
 
+    CharSequence currentElementChars = element.getNode().getChars();
     String encodedContent;
     if (element.isRestricted()) {
       String charsToEscape = "" + openQuote + (openQuote != closeQuote ? closeQuote : "");
@@ -50,9 +55,19 @@ public class PerlStringManipulator extends AbstractElementManipulator<PerlString
     else {
       String charsToEscape = "$@\\" + openQuote + (openQuote != closeQuote ? closeQuote : "");
       encodedContent = encodeDoubleQuotedString(decodedContent, charsToEscape, true);
+      if (!encodedContent.isEmpty() && Character.isJavaIdentifierPart(encodedContent.charAt(0))) {
+        var hostStartOffset = element.getTextRange().getStartOffset();
+        var leafBeforeRange = element.getContainingFile().findElementAt(
+          Math.max(0, range.getStartOffset() + hostStartOffset - 1));
+        var leafBeforeRangeType = PsiUtilCore.getElementType(leafBeforeRange);
+        if (leafBeforeRangeType == SCALAR_NAME || leafBeforeRangeType == ARRAY_NAME) {
+          currentElementChars = leafBeforeRange.getTextRange().shiftLeft(hostStartOffset).replace(
+            currentElementChars.toString(), "{" + leafBeforeRange.getText() + "}");
+          range = range.shiftRight(2);
+        }
+      }
     }
 
-    CharSequence currentElementChars = element.getNode().getChars();
     String newElementText = range.replace(currentElementChars.toString(), encodedContent);
     PerlFileImpl file = PerlElementFactory.createFile(element.getProject(), newElementText);
     PsiElement firstChild = file.getFirstChild();
