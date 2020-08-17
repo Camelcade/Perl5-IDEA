@@ -273,7 +273,7 @@ public class PerlResolveUtil {
                        controlFlowScope.getClass() + "; " +
                        PerlUtil.getParentsChain(element);
       Application application = ApplicationManager.getApplication();
-      if (!SUPPRESS_ERRORS && (!application.isUnitTestMode() || application.isInternal())) {
+      if (!SUPPRESS_ERRORS && (application.isUnitTestMode() || application.isInternal())) {
         LOG.error(message);
       }
       else {
