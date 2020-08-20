@@ -18,6 +18,7 @@ dependencies{
   compile project(":perl5.core")
   compile project(":perl5.core.idea")
   compile project(":perl5.core.copyright")
+  compile project(":perl5.core.profiler")
   compile project(":perl5.core.coverage")
   compile project(":perl5.core.intelliLang")
   compile project(":perl5.transport.docker")

@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright 2015-2019 Alexandr Evstigneev
+  ~ Copyright 2015-2020 Alexandr Evstigneev
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -16,5 +16,6 @@
 
 <idea-plugin>
   <depends optional="true" config-file="perl-docker.xml">Docker</depends>
+  <depends optional="true" config-file="perl-profiler.xml">com.intellij.modules.profiler</depends>
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="/META-INF/perl-wsl.xml" xpointer="xpointer(/idea-plugin/*)"/>
 </idea-plugin>
