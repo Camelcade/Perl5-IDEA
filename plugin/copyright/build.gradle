@@ -14,13 +14,6 @@
  * limitations under the License.
  */
 
-sourceSets {
-  main {
-    java.srcDirs project.files('src')
-    resources.srcDir file('resources')
-  }
-}
-
 dependencies{
   compileOnly project(":perl5.core")
 }
