@@ -14,7 +14,8 @@
 ## If you don't understand what Free Software is, please read (or reread)
 ## this page: http://www.gnu.org/philosophy/free-sw.html
 package JSON::XS {}
-package HTTP::Tiny {};
+package HTTP::Tiny {}
+package Cpanel::JSON::XS {}
 
 use strict;
 use warnings;
