@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.run.run;
 
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.ExecutionManager;
+import com.intellij.execution.Executor;
 import com.intellij.execution.configurations.RunProfile;
 import com.intellij.execution.executors.DefaultRunExecutor;
 import com.intellij.execution.runners.DefaultProgramRunnerKt;
@@ -25,12 +26,20 @@ import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.perl5.lang.perl.idea.run.GenericPerlProgramRunner;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
+import com.perl5.lang.perl.idea.run.PerlRunProfileState;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class PerlRunProgramRunner extends GenericPerlProgramRunner {
   @Override
   public @NotNull String getRunnerId() {
     return "Perl Default Runner";
+  }
+
+  @Override
+  protected @Nullable PerlRunProfileState createState(@NotNull Executor executor, @NotNull ExecutionEnvironment executionEnvironment)
+    throws ExecutionException {
+    return new PerlRunProfileState(executionEnvironment);
   }
 
   @Override

@@ -24,12 +24,12 @@ import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.LocatableConfigurationBase;
 import com.intellij.execution.configurations.RunProfile;
 import com.intellij.execution.configurations.RuntimeConfigurationException;
-import com.intellij.execution.executors.DefaultDebugExecutor;
 import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.runners.RunConfigurationWithSuppressedDefaultRunAction;
 import com.intellij.execution.ui.ConsoleView;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.project.Project;
@@ -80,6 +80,7 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
   public static final Function<String, List<String>> FILES_PARSER = text -> StringUtil.split(text.trim(), "||");
   public static final Function<List<String>, String> FILES_JOINER = strings ->
     StringUtil.join(ContainerUtil.filter(strings, StringUtil::isNotEmpty), "||");
+  private static final Logger LOG = Logger.getInstance(GenericPerlRunConfiguration.class);
 
   private String myScriptPath;
   private String myScriptParameters;    // these are script parameters
@@ -118,11 +119,14 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
   }
 
   @Override
-  public @Nullable PerlRunProfileState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment executionEnvironment) {
-    if (executor instanceof DefaultDebugExecutor) {
-      return new PerlDebugProfileState(executionEnvironment);
+  public final @Nullable PerlRunProfileState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment executionEnvironment)
+    throws ExecutionException {
+    var runner = executionEnvironment.getRunner();
+    if (!(runner instanceof GenericPerlProgramRunner)) {
+      LOG.error("GenericPerlProgramRunner expected, got " + runner);
+      throw new ExecutionException("Wrong runner used to run perl configuration, please report to Perl plugin developers");
     }
-    return new PerlRunProfileState(executionEnvironment);
+    return ((GenericPerlProgramRunner)runner).createState(executor, executionEnvironment);
   }
 
   /**

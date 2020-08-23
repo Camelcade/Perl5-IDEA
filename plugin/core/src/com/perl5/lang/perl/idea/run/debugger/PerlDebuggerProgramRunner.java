@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.run.debugger;
 
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.ExecutionManager;
+import com.intellij.execution.Executor;
 import com.intellij.execution.configurations.RunProfile;
 import com.intellij.execution.executors.DefaultDebugExecutor;
 import com.intellij.execution.runners.ExecutionEnvironment;
@@ -27,7 +28,9 @@ import com.intellij.xdebugger.XDebugProcessStarter;
 import com.intellij.xdebugger.XDebugSession;
 import com.intellij.xdebugger.XDebuggerManager;
 import com.perl5.lang.perl.idea.run.GenericPerlProgramRunner;
+import com.perl5.lang.perl.idea.run.PerlRunProfileState;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 
 public class PerlDebuggerProgramRunner extends GenericPerlProgramRunner {
@@ -39,6 +42,12 @@ public class PerlDebuggerProgramRunner extends GenericPerlProgramRunner {
   @Override
   public boolean canRun(@NotNull String executorId, @NotNull RunProfile profile) {
     return executorId.equals(DefaultDebugExecutor.EXECUTOR_ID) && profile instanceof PerlDebuggableRunConfiguration;
+  }
+
+  @Override
+  protected @Nullable PerlRunProfileState createState(@NotNull Executor executor, @NotNull ExecutionEnvironment executionEnvironment)
+    throws ExecutionException {
+    return new PerlDebugProfileState(executionEnvironment);
   }
 
   @Override

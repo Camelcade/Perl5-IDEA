@@ -21,6 +21,7 @@ import com.intellij.coverage.CoverageExecutor;
 import com.intellij.coverage.CoverageRunnerData;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.ExecutionManager;
+import com.intellij.execution.Executor;
 import com.intellij.execution.configurations.ConfigurationInfoProvider;
 import com.intellij.execution.configurations.RunProfile;
 import com.intellij.execution.configurations.RunnerSettings;
@@ -30,6 +31,7 @@ import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.ui.RunContentDescriptor;
 import com.perl5.lang.perl.idea.run.GenericPerlProgramRunner;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
+import com.perl5.lang.perl.idea.run.PerlRunProfileState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -45,6 +47,12 @@ public class PerlCoverageProgramRunner extends GenericPerlProgramRunner {
   }
 
   @Override
+  protected @Nullable PerlRunProfileState createState(@NotNull Executor executor, @NotNull ExecutionEnvironment executionEnvironment)
+    throws ExecutionException {
+    return new PerlCoverageProfileState(executionEnvironment);
+  }
+
+  @Override
   public @Nullable RunnerSettings createConfigurationData(@NotNull ConfigurationInfoProvider settingsProvider) {
     return new CoverageRunnerData();
   }
@@ -53,7 +61,7 @@ public class PerlCoverageProgramRunner extends GenericPerlProgramRunner {
   public void execute(@NotNull ExecutionEnvironment environment) throws ExecutionException {
     ExecutionManager.getInstance(environment.getProject()).startRunProfile(environment, state -> {
       GenericPerlRunConfiguration runConfiguration = (GenericPerlRunConfiguration)environment.getRunProfile();
-      RunContentDescriptor descriptor = DefaultProgramRunnerKt.executeState(new PerlCoverageProfileState(environment), environment, this);
+      RunContentDescriptor descriptor = DefaultProgramRunnerKt.executeState(state, environment, this);
       if (descriptor == null) {
         return null;
       }
