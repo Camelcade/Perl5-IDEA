@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,11 +16,11 @@
 
 package com.perl5.lang.mason2;
 
-import com.intellij.AbstractBundle;
+import com.intellij.DynamicBundle;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.PropertyKey;
 
-public class MasonBundle extends AbstractBundle {
+public class MasonBundle extends DynamicBundle {
   private static final MasonBundle INSTANCE = new MasonBundle();
   private static final String PATH_TO_BUNDLE = "messages.MasonBundle";
 

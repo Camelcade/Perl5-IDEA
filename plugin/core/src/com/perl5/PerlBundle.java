@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,11 +16,11 @@
 
 package com.perl5;
 
-import com.intellij.AbstractBundle;
+import com.intellij.DynamicBundle;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.PropertyKey;
 
-public class PerlBundle extends AbstractBundle {
+public class PerlBundle extends DynamicBundle {
   private static final PerlBundle INSTANCE = new PerlBundle();
   public static final String PATH_TO_BUNDLE = "messages.PerlBundle";
 
