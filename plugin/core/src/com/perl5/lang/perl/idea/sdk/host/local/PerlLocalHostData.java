@@ -93,4 +93,9 @@ class PerlLocalHostData extends PerlHostData<PerlLocalHostData, PerlLocalHostHan
   public @NotNull PerlHostFileTransfer<PerlLocalHostData> getFileTransfer() {
     return FILE_TRANSFER;
   }
+
+  @Override
+  public void fixPermissionsRecursively(@NotNull String localPath) {
+
+  }
 }

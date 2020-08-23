@@ -22,6 +22,7 @@ import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.Disposer;
+import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.util.xmlb.annotations.Tag;
 import com.intellij.util.xmlb.annotations.Transient;
@@ -33,6 +34,7 @@ import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandler;
 import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandlers;
 import com.perl5.lang.perl.util.PerlFileUtil;
 import com.perl5.lang.perl.util.PerlPluginUtil;
+import com.sun.security.auth.module.UnixSystem;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -154,5 +156,23 @@ class PerlDockerData extends PerlHostData<PerlDockerData, PerlDockerHandler> {
   @Override
   protected @NotNull PerlDockerData self() {
     return this;
+  }
+
+  @Override
+  public void fixPermissionsRecursively(@NotNull String localPath) throws ExecutionException {
+    if (!SystemInfo.isUnix) {
+      return;
+    }
+
+    var remotePath = getRemotePath(localPath);
+    if (remotePath == null) {
+      LOG.warn("Unable to fix permissins, failed to map to remote path: " + localPath);
+      return;
+    }
+
+    UnixSystem system = new UnixSystem();
+    long gid = system.getGid();
+    long uid = system.getUid();
+    execAndGetOutput(new PerlCommandLine("chown", "-R", uid + ":" + gid, remotePath).withHostData(this));
   }
 }

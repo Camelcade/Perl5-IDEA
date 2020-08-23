@@ -213,4 +213,9 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
   protected @NotNull PerlWslData self() {
     return this;
   }
+
+  @Override
+  public void fixPermissionsRecursively(@NotNull String localPath) {
+
+  }
 }

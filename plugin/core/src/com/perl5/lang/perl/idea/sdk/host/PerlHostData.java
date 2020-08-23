@@ -232,6 +232,12 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
   public abstract @Nullable String getLocalCacheRoot();
 
   /**
+   * On unix systems updates permissions/ownership on {@code localPath} exposed to the remote (e.g. mount in docker) to be consistent
+   * with current users.
+   */
+  public abstract void fixPermissionsRecursively(@NotNull String localPath) throws ExecutionException;
+
+  /**
    * @return path to the helpers root on the target host
    * @see PerlPluginUtil#getPluginHelpersRoot()
    */
