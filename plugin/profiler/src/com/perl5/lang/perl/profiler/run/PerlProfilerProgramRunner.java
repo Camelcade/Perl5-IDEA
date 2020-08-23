@@ -22,7 +22,9 @@ import com.intellij.execution.Executor;
 import com.intellij.execution.configurations.RunProfile;
 import com.intellij.execution.runners.DefaultProgramRunnerKt;
 import com.intellij.execution.runners.ExecutionEnvironment;
+import com.intellij.openapi.application.PathManager;
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.profiler.DefaultProfilerExecutorGroup;
 import com.intellij.profiler.ProfilerToolWindowManager;
 import com.perl5.lang.perl.profiler.configuration.PerlProfilerConfigurationState;
@@ -30,6 +32,8 @@ import com.perl5.lang.perl.idea.run.GenericPerlProgramRunner;
 import com.perl5.lang.perl.idea.run.PerlRunProfileState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.io.IOException;
 
 @SuppressWarnings("UnstableApiUsage")
 public class PerlProfilerProgramRunner extends GenericPerlProgramRunner {
@@ -84,13 +88,29 @@ public class PerlProfilerProgramRunner extends GenericPerlProgramRunner {
 
     ExecutionManager.getInstance(environment.getProject()).startRunProfile(
       environment, state -> {
-        var descriptor = DefaultProgramRunnerKt.executeState(state, environment, this);
-        if (descriptor == null) {
-          return null;
-        }
         if (!(state instanceof PerlProfilerRunProfileState)) {
           LOG.error("PerlProfilerRunProfileState expected, got " + state);
           throw new ExecutionException("Incorrect run configuration state, see logs for details");
+        }
+        var profileResultsPath = ((PerlProfilerRunProfileState)state).getProfilingResultsPath();
+        LOG.info("Profiling results saved in: " + profileResultsPath);
+        if (FileUtil.isAncestor(PathManager.getSystemPath(), profileResultsPath.toString(), true)) {
+          try {
+            // fxime we probably should fix permissions here
+            FileUtil.delete(profileResultsPath);
+          }
+          catch (IOException e) {
+            throw new ExecutionException("Error removing old profiling data at " + profileResultsPath, e);
+          }
+        }
+        else {
+          LOG.error("Wrong profiler results directory: " + profileResultsPath);
+        }
+        profileResultsPath.toFile().mkdirs();
+
+        var descriptor = DefaultProgramRunnerKt.executeState(state, environment, this);
+        if (descriptor == null) {
+          return null;
         }
         var profilerProcess = new PerlProfilerProcess(environment, descriptor, ((PerlProfilerRunProfileState)state));
         ProfilerToolWindowManager.getInstance(environment.getProject()).addProfilerProcessTab(profilerProcess, false);

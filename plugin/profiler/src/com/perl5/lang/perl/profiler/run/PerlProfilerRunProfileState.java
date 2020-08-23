@@ -18,12 +18,21 @@ package com.perl5.lang.perl.profiler.run;
 
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.runners.ExecutionEnvironment;
-import com.perl5.lang.perl.profiler.configuration.PerlProfilerConfigurationState;
+import com.intellij.openapi.application.PathManager;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.util.io.FileUtil;
+import com.intellij.openapi.util.text.StringUtil;
+import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import com.perl5.lang.perl.idea.run.PerlRunProfileState;
+import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
+import com.perl5.lang.perl.profiler.configuration.PerlProfilerConfigurationState;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -41,8 +50,23 @@ public class PerlProfilerRunProfileState extends PerlRunProfileState {
     return myProfilerConfigurationState;
   }
 
+  public final @NotNull Path getProfilingResultsPath() {
+    var project = getEnvironment().getProject();
+    var perlSdk = PerlProjectManager.getSdk(project);
+    return Paths.get(PathManager.getSystemPath(),
+                     "profiling",
+                     FileUtil.sanitizeFileName(
+                       String.join("_", project.getName(),
+                                   perlSdk == null ? "null" : perlSdk.getName(),
+                                   StringUtil.notNullize(myProfilerConfigurationState.getDisplayName(), "unnamed"),
+                                   getEnvironment().getRunProfile().getName()
+                       )));
+  }
+
   public @NotNull File getDumpFile() {
-    return new File(getEnvironment().getProject().getBasePath(), "nytprof.out");
+    var profileResultsPath = getProfilingResultsPath();
+    profileResultsPath.toFile().mkdirs();
+    return profileResultsPath.resolve("nytprof.out").toFile();
   }
 
   @Override
@@ -53,8 +77,10 @@ public class PerlProfilerRunProfileState extends PerlRunProfileState {
 
   @Override
   public Map<String, String> getAdditionalEnvironmentVariables() throws ExecutionException {
+    Sdk effectiveSdk = ((GenericPerlRunConfiguration)getEnvironment().getRunProfile()).getEffectiveSdk();
+    PerlHostData<?, ?> hostData = PerlHostData.notNullFrom(effectiveSdk);
     var nytProfOptions = "stmts=0:calls=2:savesrc=0:slowops=1:sigexit=1" +
-                         ":file=" + getDumpFile().getAbsolutePath() +
+                         ":file=" + hostData.getRemotePath(getDumpFile().getAbsolutePath()) +
                          ":start=" + myProfilerConfigurationState.getStartupMode().getProfilerCommand();
     if (myProfilerConfigurationState.isOptimizerDisabled()) {
       nytProfOptions += ":optimize=0";

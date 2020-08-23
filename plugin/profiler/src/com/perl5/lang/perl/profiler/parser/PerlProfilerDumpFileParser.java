@@ -55,17 +55,19 @@ public class PerlProfilerDumpFileParser implements ProfilerDumpFileParser {
 
   @Override
   public @NotNull ProfilerDumpFileParsingResult parse(@NotNull File file, @NotNull ProgressIndicator indicator) {
+    var perlSdk = PerlProjectManager.getSdk(myProject);
+    if (perlSdk == null) {
+      return new Failure("Perl sdk is not set for the project " + myProject.getName());
+    }
+
     var nytprofcalls = ReadAction.compute(() -> PerlRunUtil.findScript(myProject, NYTPROFCALLS));
     if (nytprofcalls == null) {
       LOG.warn("Unable to find `" + NYTPROFCALLS + "` script in " + myProject);
-      var perlSdk = PerlProjectManager.getSdk(myProject);
-      if (perlSdk != null) {
-        PerlRunUtil.showMissingLibraryNotification(myProject, perlSdk, Collections.singletonList(DEVEL_NYTPROF));
-      }
+      PerlRunUtil.showMissingLibraryNotification(myProject, perlSdk, Collections.singletonList(DEVEL_NYTPROF));
       return new Failure("Unable to find `nytprofcalls` script. Make sure that " +
                          DEVEL_NYTPROF + " " +
                          "is installed in the " +
-                         (perlSdk == null ? "Perl selected" : perlSdk.getName()));
+                         perlSdk.getName());
     }
 
     var perlCommandLine = PerlRunUtil.getPerlCommandLine(myProject, nytprofcalls);
@@ -74,7 +76,24 @@ public class PerlProfilerDumpFileParser implements ProfilerDumpFileParser {
       return new Failure("Failed to create command line for parsing profiling results");
     }
 
-    perlCommandLine.withParameters(file.getAbsolutePath());
+    PerlHostData<?, ?> hostData = PerlHostData.notNullFrom(perlSdk);
+    var resultsDirectory = file.getParent();
+    try {
+      hostData.fixPermissionsRecursively(resultsDirectory);
+    }
+    catch (ExecutionException e) {
+      LOG.warn("Failed to fix permissions for " + resultsDirectory, e);
+      return new Failure("Failed to set permissions for the " + resultsDirectory);
+    }
+
+    var localPath = file.getAbsolutePath();
+    var remotePath = hostData.getRemotePath(localPath);
+    if (remotePath == null) {
+      var reason = "Unable to map local path to remote: " + localPath + " with perl " + perlSdk.getName();
+      LOG.warn(reason);
+      return new Failure(reason);
+    }
+    perlCommandLine.withParameters(remotePath);
 
     var callTreeBuilder = new DummyCallTreeBuilder<BaseCallStackElement>();
     var dumpParser = new CollapsedDumpParser<>(
