@@ -17,12 +17,14 @@
 package com.perl5.lang.perl.profiler;
 
 import com.intellij.DynamicBundle;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.PropertyKey;
 
 public class PerlProfilerBundle extends DynamicBundle {
   private static final PerlProfilerBundle INSTANCE = new PerlProfilerBundle();
   private static final String PATH_TO_BUNDLE = "messages.PerlProfilerBundle";
+  @NonNls public static final String DEVEL_NYTPROF = "Devel::NYTProf";
 
   private PerlProfilerBundle() {
     super(PATH_TO_BUNDLE);

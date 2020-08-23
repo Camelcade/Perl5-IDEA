@@ -19,6 +19,7 @@ package com.perl5.lang.perl.profiler.parser;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.process.BaseProcessHandler;
 import com.intellij.openapi.application.ReadAction;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.project.Project;
 import com.intellij.profiler.CollapsedDumpParser;
@@ -26,15 +27,22 @@ import com.intellij.profiler.DummyCallTreeBuilder;
 import com.intellij.profiler.api.*;
 import com.intellij.profiler.model.NoThreadInfoInProfilerData;
 import com.intellij.profiler.ui.NativeCallStackElementRenderer;
+import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.util.PerlRunUtil;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
+import java.util.Collections;
+
+import static com.perl5.lang.perl.profiler.PerlProfilerBundle.DEVEL_NYTPROF;
 
 public class PerlProfilerDumpFileParser implements ProfilerDumpFileParser {
+  private static final Logger LOG = Logger.getInstance(PerlProfilerDumpFileParser.class);
   private final @NotNull Project myProject;
+  @NonNls private static final String NYTPROFCALLS = "nytprofcalls";
 
   public PerlProfilerDumpFileParser(Project project) {
     myProject = project;
@@ -47,6 +55,27 @@ public class PerlProfilerDumpFileParser implements ProfilerDumpFileParser {
 
   @Override
   public @NotNull ProfilerDumpFileParsingResult parse(@NotNull File file, @NotNull ProgressIndicator indicator) {
+    var nytprofcalls = ReadAction.compute(() -> PerlRunUtil.findScript(myProject, NYTPROFCALLS));
+    if (nytprofcalls == null) {
+      LOG.warn("Unable to find `" + NYTPROFCALLS + "` script in " + myProject);
+      var perlSdk = PerlProjectManager.getSdk(myProject);
+      if (perlSdk != null) {
+        PerlRunUtil.showMissingLibraryNotification(myProject, perlSdk, Collections.singletonList(DEVEL_NYTPROF));
+      }
+      return new Failure("Unable to find `nytprofcalls` script. Make sure that " +
+                         DEVEL_NYTPROF + " " +
+                         "is installed in the " +
+                         (perlSdk == null ? "Perl selected" : perlSdk.getName()));
+    }
+
+    var perlCommandLine = PerlRunUtil.getPerlCommandLine(myProject, nytprofcalls);
+    if (perlCommandLine == null) {
+      LOG.warn("Unable to create command line for parsing results in " + myProject);
+      return new Failure("Failed to create command line for parsing profiling results");
+    }
+
+    perlCommandLine.withParameters(file.getAbsolutePath());
+
     var callTreeBuilder = new DummyCallTreeBuilder<BaseCallStackElement>();
     var dumpParser = new CollapsedDumpParser<>(
       callTreeBuilder,
@@ -54,11 +83,6 @@ public class PerlProfilerDumpFileParser implements ProfilerDumpFileParser {
       PerlCallStackElement::new,
       it -> false);
 
-    var nytprofcalls = ReadAction.compute(() -> PerlRunUtil.findScript(myProject, "nytprofcalls"));
-    var absoluteFile = file.getAbsoluteFile();
-    var perlCommandLine = PerlRunUtil.getPerlCommandLine(myProject, nytprofcalls)
-      .withParameters(absoluteFile.getPath())
-      .withWorkDirectory(absoluteFile.getParent());
     try {
       BaseProcessHandler<?> processHandler = PerlHostData.createProcessHandler(perlCommandLine);
       var processInput = processHandler.getProcess().getInputStream();
@@ -66,6 +90,7 @@ public class PerlProfilerDumpFileParser implements ProfilerDumpFileParser {
       return  new Success(new NewCallTreeOnlyProfilerData(callTreeBuilder, NativeCallStackElementRenderer.Companion.getINSTANCE()));
     }
     catch (ExecutionException e) {
+      LOG.warn("Error parsing results: " + e.getMessage());
       return new Failure(e.getMessage());
     }
   }
