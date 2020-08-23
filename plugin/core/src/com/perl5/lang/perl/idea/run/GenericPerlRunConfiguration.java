@@ -27,6 +27,7 @@ import com.intellij.execution.configurations.RuntimeConfigurationException;
 import com.intellij.execution.executors.DefaultDebugExecutor;
 import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.runners.ExecutionEnvironment;
+import com.intellij.execution.runners.RunConfigurationWithSuppressedDefaultRunAction;
 import com.intellij.execution.ui.ConsoleView;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.module.Module;
@@ -74,6 +75,7 @@ import static com.intellij.execution.configurations.GeneralCommandLine.ParentEnv
 
 public abstract class GenericPerlRunConfiguration extends LocatableConfigurationBase implements
                                                                                      CommonProgramRunConfigurationParameters,
+                                                                                     RunConfigurationWithSuppressedDefaultRunAction,
                                                                                      PerlDebuggableRunConfiguration {
   public static final Function<String, List<String>> FILES_PARSER = text -> StringUtil.split(text.trim(), "||");
   public static final Function<List<String>, String> FILES_JOINER = strings ->

@@ -19,19 +19,18 @@ package com.perl5.lang.perl.idea.run.debugger;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.ExecutionManager;
 import com.intellij.execution.configurations.RunProfile;
-import com.intellij.execution.configurations.RunnerSettings;
 import com.intellij.execution.executors.DefaultDebugExecutor;
 import com.intellij.execution.runners.ExecutionEnvironment;
-import com.intellij.execution.runners.ProgramRunner;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.xdebugger.XDebugProcess;
 import com.intellij.xdebugger.XDebugProcessStarter;
 import com.intellij.xdebugger.XDebugSession;
 import com.intellij.xdebugger.XDebuggerManager;
+import com.perl5.lang.perl.idea.run.GenericPerlProgramRunner;
 import org.jetbrains.annotations.NotNull;
 
 
-public class PerlDebuggerProgramRunner implements ProgramRunner<RunnerSettings> {
+public class PerlDebuggerProgramRunner extends GenericPerlProgramRunner {
   @Override
   public @NotNull String getRunnerId() {
     return "Perl Debugger";

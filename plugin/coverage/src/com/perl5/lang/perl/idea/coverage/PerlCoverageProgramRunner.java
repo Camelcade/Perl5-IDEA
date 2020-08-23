@@ -27,13 +27,13 @@ import com.intellij.execution.configurations.RunnerSettings;
 import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.runners.DefaultProgramRunnerKt;
 import com.intellij.execution.runners.ExecutionEnvironment;
-import com.intellij.execution.runners.ProgramRunner;
 import com.intellij.execution.ui.RunContentDescriptor;
+import com.perl5.lang.perl.idea.run.GenericPerlProgramRunner;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class PerlCoverageProgramRunner implements ProgramRunner<RunnerSettings> {
+public class PerlCoverageProgramRunner extends GenericPerlProgramRunner {
   @Override
   public @NotNull String getRunnerId() {
     return "PERL5_COVERAGE_RUNNER";
