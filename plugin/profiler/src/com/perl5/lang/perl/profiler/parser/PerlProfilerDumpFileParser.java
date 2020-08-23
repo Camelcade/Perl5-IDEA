@@ -18,10 +18,14 @@ package com.perl5.lang.perl.profiler.parser;
 
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.process.BaseProcessHandler;
+import com.intellij.execution.process.ProcessAdapter;
+import com.intellij.execution.process.ProcessEvent;
+import com.intellij.execution.process.ProcessOutputType;
 import com.intellij.openapi.application.ReadAction;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.Key;
 import com.intellij.profiler.CollapsedDumpParser;
 import com.intellij.profiler.DummyCallTreeBuilder;
 import com.intellij.profiler.api.*;
@@ -94,7 +98,7 @@ public class PerlProfilerDumpFileParser implements ProfilerDumpFileParser {
     }
 
     if (file.isDirectory()) {
-      // loading bunch of dumps
+      // loading bunch of dumps fixme we probably need to read each file separately and proxy output. Default script fails on first error
       perlCommandLine.withWorkDirectory(localPath);
       perlCommandLine.withParameters(file.list());
     }
@@ -111,9 +115,24 @@ public class PerlProfilerDumpFileParser implements ProfilerDumpFileParser {
 
     try {
       BaseProcessHandler<?> processHandler = PerlHostData.createProcessHandler(perlCommandLine);
+      processHandler.addProcessListener(new ProcessAdapter() {
+        @Override
+        public void processTerminated(@NotNull ProcessEvent event) {
+          if (event.getExitCode() != 0) {
+            LOG.warn("Dump reader exited with non-zero exit code: " + event.getExitCode() + " " + event.getText());
+          }
+        }
+
+        @Override
+        public void onTextAvailable(@NotNull ProcessEvent event, @NotNull Key outputType) {
+          if (ProcessOutputType.isStderr(outputType)) {
+            LOG.warn("Error output: " + event.getText());
+          }
+        }
+      });
       var processInput = processHandler.getProcess().getInputStream();
       dumpParser.readFromStream(processInput, indicator);
-      return  new Success(new NewCallTreeOnlyProfilerData(callTreeBuilder, NativeCallStackElementRenderer.Companion.getINSTANCE()));
+      return new Success(new NewCallTreeOnlyProfilerData(callTreeBuilder, NativeCallStackElementRenderer.Companion.getINSTANCE()));
     }
     catch (ExecutionException e) {
       LOG.warn("Error parsing results: " + e.getMessage());
