@@ -19,7 +19,6 @@ package com.perl5.lang.perl.profiler.run;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.openapi.application.PathManager;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
@@ -39,6 +38,7 @@ import java.util.Map;
 
 public class PerlProfilerRunProfileState extends PerlRunProfileState {
   private final @NotNull PerlProfilerConfigurationState myProfilerConfigurationState;
+  public static final String BASE_DUMP_NAME = "nytprof.out";
 
   public PerlProfilerRunProfileState(@NotNull ExecutionEnvironment environment,
                                      @NotNull PerlProfilerConfigurationState profilerConfigurationState) {
@@ -66,7 +66,7 @@ public class PerlProfilerRunProfileState extends PerlRunProfileState {
   public @NotNull File getDumpFile() {
     var profileResultsPath = getProfilingResultsPath();
     profileResultsPath.toFile().mkdirs();
-    return profileResultsPath.resolve("nytprof.out").toFile();
+    return profileResultsPath.resolve(BASE_DUMP_NAME).toFile();
   }
 
   @Override
@@ -79,7 +79,7 @@ public class PerlProfilerRunProfileState extends PerlRunProfileState {
   public Map<String, String> getAdditionalEnvironmentVariables() throws ExecutionException {
     Sdk effectiveSdk = ((GenericPerlRunConfiguration)getEnvironment().getRunProfile()).getEffectiveSdk();
     PerlHostData<?, ?> hostData = PerlHostData.notNullFrom(effectiveSdk);
-    var nytProfOptions = "stmts=0:calls=2:savesrc=0:slowops=1:sigexit=1" +
+    var nytProfOptions = "stmts=0:calls=2:savesrc=0:slowops=1:sigexit=1:addpid=1" +
                          ":file=" + hostData.getRemotePath(getDumpFile().getAbsolutePath()) +
                          ":start=" + myProfilerConfigurationState.getStartupMode().getProfilerCommand();
     if (myProfilerConfigurationState.isOptimizerDisabled()) {

@@ -51,7 +51,7 @@ public class PerlProfilerProcess extends FileBasedProfilerProcess<PerlTargetProc
   protected @NotNull ProfilerState readPreparedDump(@NotNull File file, @NotNull ProgressIndicator indicator)
     throws ProcessCanceledException {
     var dumpParser = new PerlProfilerDumpFileParser(myExecutionEnvironment.getProject());
-    return asProfilerState(dumpParser.parse(myPerlProfilerRunProfileState.getDumpFile(), indicator), null);
+    return asProfilerState(dumpParser.parse(myPerlProfilerRunProfileState.getDumpFile().getParentFile(), indicator), null);
   }
 
   @Override

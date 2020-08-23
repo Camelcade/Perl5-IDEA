@@ -77,13 +77,12 @@ public class PerlProfilerDumpFileParser implements ProfilerDumpFileParser {
     }
 
     PerlHostData<?, ?> hostData = PerlHostData.notNullFrom(perlSdk);
-    var resultsDirectory = file.getParent();
     try {
-      hostData.fixPermissionsRecursively(resultsDirectory);
+      hostData.fixPermissionsRecursively(file.getAbsolutePath());
     }
     catch (ExecutionException e) {
-      LOG.warn("Failed to fix permissions for " + resultsDirectory, e);
-      return new Failure("Failed to set permissions for the " + resultsDirectory);
+      LOG.warn("Failed to fix permissions for " + file, e);
+      return new Failure("Failed to set permissions for the " + file);
     }
 
     var localPath = file.getAbsolutePath();
@@ -93,7 +92,15 @@ public class PerlProfilerDumpFileParser implements ProfilerDumpFileParser {
       LOG.warn(reason);
       return new Failure(reason);
     }
-    perlCommandLine.withParameters(remotePath);
+
+    if (file.isDirectory()) {
+      // loading bunch of dumps
+      perlCommandLine.withWorkDirectory(localPath);
+      perlCommandLine.withParameters(file.list());
+    }
+    else {
+      perlCommandLine.withParameters(remotePath);
+    }
 
     var callTreeBuilder = new DummyCallTreeBuilder<BaseCallStackElement>();
     var dumpParser = new CollapsedDumpParser<>(
