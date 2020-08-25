@@ -33,6 +33,7 @@ import com.intellij.profiler.model.NoThreadInfoInProfilerData;
 import com.intellij.profiler.ui.NativeCallStackElementRenderer;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
+import com.perl5.lang.perl.util.PerlPluginUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
@@ -64,17 +65,8 @@ public class PerlProfilerDumpFileParser implements ProfilerDumpFileParser {
       return new Failure("Perl sdk is not set for the project " + myProject.getName());
     }
 
-    var nytprofcalls = ReadAction.compute(() -> PerlRunUtil.findScript(myProject, NYTPROFCALLS));
-    if (nytprofcalls == null) {
-      LOG.warn("Unable to find `" + NYTPROFCALLS + "` script in " + myProject);
-      PerlRunUtil.showMissingLibraryNotification(myProject, perlSdk, Collections.singletonList(DEVEL_NYTPROF));
-      return new Failure("Unable to find `nytprofcalls` script. Make sure that " +
-                         DEVEL_NYTPROF + " " +
-                         "is installed in the " +
-                         perlSdk.getName());
-    }
-
-    var perlCommandLine = PerlRunUtil.getPerlCommandLine(myProject, nytprofcalls);
+    var nytprofUtilPath = PerlPluginUtil.getHelperPath("nytprofcalls.pl");
+    var perlCommandLine = PerlRunUtil.getPerlCommandLine(myProject, nytprofUtilPath);
     if (perlCommandLine == null) {
       LOG.warn("Unable to create command line for parsing results in " + myProject);
       return new Failure("Failed to create command line for parsing profiling results");
@@ -97,14 +89,7 @@ public class PerlProfilerDumpFileParser implements ProfilerDumpFileParser {
       return new Failure(reason);
     }
 
-    if (file.isDirectory()) {
-      // loading bunch of dumps fixme we probably need to read each file separately and proxy output. Default script fails on first error
-      perlCommandLine.withWorkDirectory(localPath);
-      perlCommandLine.withParameters(file.list());
-    }
-    else {
-      perlCommandLine.withParameters(remotePath);
-    }
+    perlCommandLine.withParameters(remotePath);
 
     var callTreeBuilder = new DummyCallTreeBuilder<BaseCallStackElement>();
     var dumpParser = new CollapsedDumpParser<>(
