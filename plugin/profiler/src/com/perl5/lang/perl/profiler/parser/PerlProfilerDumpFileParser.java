@@ -21,15 +21,11 @@ import com.intellij.execution.process.BaseProcessHandler;
 import com.intellij.execution.process.ProcessAdapter;
 import com.intellij.execution.process.ProcessEvent;
 import com.intellij.execution.process.ProcessOutputType;
-import com.intellij.openapi.application.ReadAction;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Key;
-import com.intellij.profiler.CollapsedDumpParser;
-import com.intellij.profiler.DummyCallTreeBuilder;
 import com.intellij.profiler.api.*;
-import com.intellij.profiler.model.NoThreadInfoInProfilerData;
 import com.intellij.profiler.ui.NativeCallStackElementRenderer;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
@@ -40,9 +36,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
-import java.util.Collections;
-
-import static com.perl5.lang.perl.profiler.PerlProfilerBundle.DEVEL_NYTPROF;
 
 public class PerlProfilerDumpFileParser implements ProfilerDumpFileParser {
   private static final Logger LOG = Logger.getInstance(PerlProfilerDumpFileParser.class);
@@ -91,12 +84,7 @@ public class PerlProfilerDumpFileParser implements ProfilerDumpFileParser {
 
     perlCommandLine.withParameters(remotePath);
 
-    var callTreeBuilder = new DummyCallTreeBuilder<BaseCallStackElement>();
-    var dumpParser = new CollapsedDumpParser<>(
-      callTreeBuilder,
-      it -> NoThreadInfoInProfilerData.INSTANCE,
-      PerlCallStackElement::new,
-      it -> false);
+    var dumpParser = new PerlCollapsedDumpParser();
 
     try {
       BaseProcessHandler<?> processHandler = PerlHostData.createProcessHandler(perlCommandLine);
@@ -115,9 +103,9 @@ public class PerlProfilerDumpFileParser implements ProfilerDumpFileParser {
           }
         }
       });
-      var processInput = processHandler.getProcess().getInputStream();
-      dumpParser.readFromStream(processInput, indicator);
-      return new Success(new NewCallTreeOnlyProfilerData(callTreeBuilder, NativeCallStackElementRenderer.Companion.getINSTANCE()));
+      dumpParser.readFromStreamFixed(processHandler.getProcess().getInputStream(), indicator);
+      return new Success(
+        new NewCallTreeOnlyProfilerData(dumpParser.getCallTreeBuilder(), NativeCallStackElementRenderer.Companion.getINSTANCE()));
     }
     catch (ExecutionException e) {
       LOG.warn("Error parsing results: " + e.getMessage());
@@ -125,16 +113,4 @@ public class PerlProfilerDumpFileParser implements ProfilerDumpFileParser {
     }
   }
 
-  private static class PerlCallStackElement extends BaseCallStackElement {
-    private final @NotNull String myName;
-
-    public PerlCallStackElement(@NotNull String name) {
-      myName = name;
-    }
-
-    @Override
-    public @NotNull String fullName() {
-      return myName;
-    }
-  }
 }
