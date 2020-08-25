@@ -25,7 +25,7 @@ jobs:
         uses: actions/cache@v2
         env:
           cache-name: cache-perlbrew
-          cache-version: 6
+          cache-version: 7
         with:
           path: |
             ~/perl5
@@ -44,7 +44,7 @@ jobs:
           source ~/perl5/perlbrew/etc/bashrc
           perlbrew exec -q --with perl-5.32.0 cpan App::cpanminus
           perlbrew lib create perl-5.32.0@plugin_test || true
-          perlbrew exec -q --with perl-5.32.0@plugin_test cpanm --notest Mojolicious Devel::Camelcadedb Devel::Cover JSON App::Prove::Plugin::PassEnv TAP::Formatter::Camelcade
+          perlbrew exec -q --with perl-5.32.0@plugin_test cpanm --notest Mojolicious Devel::Camelcadedb Devel::Cover JSON App::Prove::Plugin::PassEnv TAP::Formatter::Camelcade Devel::NYTProf
       - name: Cache gradle data
         uses: actions/cache@v2
         env:

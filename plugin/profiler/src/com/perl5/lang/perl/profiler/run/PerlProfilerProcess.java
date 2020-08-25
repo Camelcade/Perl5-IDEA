@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.profiler.run;
 
+import com.intellij.execution.configurations.RunProfile;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.ui.RunContentDescriptor;
 import com.intellij.openapi.diagnostic.Logger;
@@ -27,6 +28,7 @@ import com.perl5.lang.perl.profiler.configuration.PerlProfilerConfigurationState
 import com.perl5.lang.perl.profiler.parser.PerlProfilerDumpFileParser;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.TestOnly;
 
 import java.io.File;
 import java.util.Objects;
@@ -72,5 +74,10 @@ public class PerlProfilerProcess extends FileBasedProfilerProcess<PerlTargetProc
   @Override
   public @NotNull PerlProfilerConfigurationState getProfilerConfiguration() {
     return myPerlProfilerRunProfileState.getProfilerConfigurationState();
+  }
+
+  @TestOnly
+  public @NotNull RunProfile getRunProfile() {
+    return myExecutionEnvironment.getRunProfile();
   }
 }

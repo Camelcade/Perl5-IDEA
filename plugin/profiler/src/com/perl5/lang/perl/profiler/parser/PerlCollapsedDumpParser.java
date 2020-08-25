@@ -105,5 +105,10 @@ public class PerlCollapsedDumpParser extends LineByLineParser {
     public @NotNull String fullName() {
       return myName;
     }
+
+    @Override
+    public String toString() {
+      return myName;
+    }
   }
 }

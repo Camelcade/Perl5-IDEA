@@ -1,0 +1,2 @@
+main::END
+main::END; CORE::print

@@ -25,18 +25,8 @@ dependencies{
   compile project(":perl5.transport.wsl")
 }
 
-sourceSets {
-  main {
-    resources.srcDir file('resources')
-  }
-  test {
-    java.srcDir file('test')
-    resources.srcDirs file('testData')
-  }
-}
-
 intellij {
-  type 'IC'
+  type 'IU'
   intellij.plugins = ["PsiViewer:$psiViewerVersion", intelliLangPlugin, 'copyright', 'coverage', 'java']
 }
 

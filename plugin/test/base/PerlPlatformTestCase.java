@@ -300,6 +300,13 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
    */
   protected Pair<ExecutionEnvironment, RunContentDescriptor> executeConfiguration(@NotNull RunConfiguration runConfiguration,
                                                                                   @NotNull String executorId) throws InterruptedException {
+    Executor executor = ExecutorRegistry.getInstance().getExecutorById(executorId);
+    assertNotNull("Unable to find executor: " + executorId, executor);
+    return executeConfiguration(runConfiguration, executor);
+  }
+
+  protected @NotNull Pair<ExecutionEnvironment, RunContentDescriptor> executeConfiguration(@NotNull RunConfiguration runConfiguration,
+                                                                                           Executor executor) throws InterruptedException {
     Project project = runConfiguration.getProject();
     ConfigurationFactory factory = runConfiguration.getFactory();
     if (factory == null) {
@@ -307,13 +314,11 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
     }
     RunnerAndConfigurationSettings runnerAndConfigurationSettings =
       RunManager.getInstance(project).createConfiguration(runConfiguration, factory);
-    ProgramRunner<?> runner = ProgramRunner.getRunner(executorId, runConfiguration);
+    ProgramRunner<?> runner = ProgramRunner.getRunner(executor.getId(), runConfiguration);
     if (runner == null) {
-      fail("No runner found for: " + executorId + " and " + runConfiguration);
+      fail("No runner found for: " + executor.getId() + " and " + runConfiguration);
     }
     Ref<RunContentDescriptor> refRunContentDescriptor = new Ref<>();
-    Executor executor = ExecutorRegistry.getInstance().getExecutorById(executorId);
-    assertNotNull("Unable to find executor: " + executorId, executor);
     ExecutionEnvironment executionEnvironment =
       new ExecutionEnvironment(executor, runner, runnerAndConfigurationSettings, project);
     CountDownLatch latch = new CountDownLatch(1);

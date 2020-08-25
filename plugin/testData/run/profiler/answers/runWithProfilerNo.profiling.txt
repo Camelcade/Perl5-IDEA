@@ -1,0 +1,2 @@
+CORE::print
+DB::disable_profile

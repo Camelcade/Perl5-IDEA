@@ -103,6 +103,7 @@ public class PerlProfilerDumpFileParser implements ProfilerDumpFileParser {
           }
         }
       });
+      processHandler.startNotify();
       dumpParser.readFromStreamFixed(processHandler.getProcess().getInputStream(), indicator);
       return new Success(
         new NewCallTreeOnlyProfilerData(dumpParser.getCallTreeBuilder(), NativeCallStackElementRenderer.Companion.getINSTANCE()));
