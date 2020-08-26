@@ -17,7 +17,6 @@
 package run;
 
 import base.PerlPlatformTestCase;
-import categories.Heavy;
 import com.intellij.execution.Executor;
 import com.intellij.execution.configurations.RunProfile;
 import com.intellij.execution.process.ProcessHandler;
@@ -31,20 +30,15 @@ import com.intellij.profiler.api.*;
 import com.intellij.profiler.api.configurations.ProfilerConfigurationState;
 import com.intellij.profiler.api.configurations.ProfilerRunConfigurationsManager;
 import com.intellij.testFramework.UsefulTestCase;
-import com.intellij.ui.content.Content;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import com.perl5.lang.perl.profiler.configuration.PerlProfilerConfigurationState;
-import com.perl5.lang.perl.profiler.parser.PerlCollapsedDumpParser;
 import com.perl5.lang.perl.profiler.run.PerlProfilerProcess;
 import com.perl5.lang.perl.profiler.run.PerlProfilerStartupMode;
 import com.pty4j.util.Pair;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import org.jdom.Element;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -83,28 +77,28 @@ public class PerlProfilerTest extends PerlPlatformTestCase {
   @Test
   public void testRunWithProfilerBegin() {
     modifyOnlyConfiguration(it -> it.setStartupMode(PerlProfilerStartupMode.BEGIN));
-    var executionResult = runScriptWithProfilingAndWait("simple", "testscript.pl");
-    checkProfilingResultsWithFile(getProfilingResults(executionResult.first.first.getRunProfile(), executionResult.second.second));
+    checkProfilingResultsWithFile(runScriptWithProfilingAndWait("simple", "testscript.pl"));
   }
 
   @Test
   public void testRunWithProfilerInit() {
     modifyOnlyConfiguration(it -> it.setStartupMode(PerlProfilerStartupMode.INIT));
-    var executionResult = runScriptWithProfilingAndWait("simple", "testscript.pl");
-    checkProfilingResultsWithFile(getProfilingResults(executionResult.first.first.getRunProfile(), executionResult.second.second));
+    checkProfilingResultsWithFile(runScriptWithProfilingAndWait("simple", "testscript.pl"));
   }
 
   @Test
   public void testRunWithProfilerEnd() {
     modifyOnlyConfiguration(it -> it.setStartupMode(PerlProfilerStartupMode.END));
-    var executionResult = runScriptWithProfilingAndWait("simple", "testscript.pl");
-    checkProfilingResultsWithFile(getProfilingResults(executionResult.first.first.getRunProfile(), executionResult.second.second));
+    checkProfilingResultsWithFile(runScriptWithProfilingAndWait("simple", "testscript.pl"));
   }
 
   @Test
   public void testRunWithProfilerNo() {
     modifyOnlyConfiguration(it -> it.setStartupMode(PerlProfilerStartupMode.NO));
-    var executionResult = runScriptWithProfilingAndWait("simple", "testscript_manual.pl");
+    checkProfilingResultsWithFile(runScriptWithProfilingAndWait("simple", "testscript_manual.pl"));
+  }
+
+  protected void checkProfilingResultsWithFile(Pair<Pair<ExecutionEnvironment, RunContentDescriptor>, Pair<Executor, PerlProfilerConfigurationState>> executionResult) {
     checkProfilingResultsWithFile(getProfilingResults(executionResult.first.first.getRunProfile(), executionResult.second.second));
   }
 
