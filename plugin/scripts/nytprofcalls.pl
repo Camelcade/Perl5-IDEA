@@ -21,7 +21,7 @@ our $VERSION = '6.06';
 use Data::Dumper;
 use Carp;
 
-my $file_or_directory = shift @ARGV or 'die provide path for a directory or file';
+my $file_or_directory = shift @ARGV or die 'provide path for a directory or file';
 
 my $last_subid = 0;
 my %subname2id;
