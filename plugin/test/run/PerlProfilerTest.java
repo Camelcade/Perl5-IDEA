@@ -17,6 +17,7 @@
 package run;
 
 import base.PerlPlatformTestCase;
+import categories.Heavy;
 import com.intellij.execution.Executor;
 import com.intellij.execution.configurations.RunProfile;
 import com.intellij.execution.process.ProcessHandler;
@@ -38,6 +39,7 @@ import com.pty4j.util.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 import org.jdom.Element;
+import org.junit.experimental.categories.Category;
 
 import java.util.ArrayList;
 import java.util.Collections;
