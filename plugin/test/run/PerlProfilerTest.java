@@ -30,6 +30,7 @@ import com.intellij.profiler.ProfilerProcessPanel;
 import com.intellij.profiler.api.*;
 import com.intellij.profiler.api.configurations.ProfilerConfigurationState;
 import com.intellij.profiler.api.configurations.ProfilerRunConfigurationsManager;
+import com.intellij.testFramework.PlatformTestUtil;
 import com.intellij.testFramework.UsefulTestCase;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import com.perl5.lang.perl.profiler.configuration.PerlProfilerConfigurationState;
@@ -60,6 +61,7 @@ public class PerlProfilerTest extends PerlPlatformTestCase {
   protected void tearDown() throws Exception {
     try {
       ProfilerRunConfigurationsManager.getInstance().loadState(myConfigurations);
+      PlatformTestUtil.dispatchAllEventsInIdeEventQueue();
     }
     finally {
       super.tearDown();
