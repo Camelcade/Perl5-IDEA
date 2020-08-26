@@ -63,7 +63,9 @@ public class PerlCollapsedDumpParser extends LineByLineParser {
       }
     }
     catch (IOException e) {
-      LOG.warn("Problem while reading results: ", e);
+      LOG.warn("Problem while reading results after " + (System.currentTimeMillis() - startTime) + " ms;" +
+               " lines read: " + linesCounter + "; " +
+               "bad lines: " + getBadLines() + ": ", e);
     }
     LOG.info(
       "Dump read in " + (System.currentTimeMillis() - startTime) + " ms; lines read: " + linesCounter + "; bad lines: " + getBadLines());

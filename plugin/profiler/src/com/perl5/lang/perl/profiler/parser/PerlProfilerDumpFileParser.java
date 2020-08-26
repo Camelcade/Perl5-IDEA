@@ -36,6 +36,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 public class PerlProfilerDumpFileParser implements ProfilerDumpFileParser {
   private static final Logger LOG = Logger.getInstance(PerlProfilerDumpFileParser.class);
@@ -87,6 +89,8 @@ public class PerlProfilerDumpFileParser implements ProfilerDumpFileParser {
     var dumpParser = new PerlCollapsedDumpParser();
 
     try {
+      CountDownLatch latch = new CountDownLatch(1);
+
       BaseProcessHandler<?> processHandler = PerlHostData.createProcessHandler(perlCommandLine);
       processHandler.addProcessListener(new ProcessAdapter() {
         @Override
@@ -94,6 +98,7 @@ public class PerlProfilerDumpFileParser implements ProfilerDumpFileParser {
           if (event.getExitCode() != 0) {
             LOG.warn("Dump reader exited with non-zero exit code: " + event.getExitCode() + " " + event.getText());
           }
+          latch.countDown();
         }
 
         @Override
@@ -101,10 +106,24 @@ public class PerlProfilerDumpFileParser implements ProfilerDumpFileParser {
           if (ProcessOutputType.isStderr(outputType)) {
             LOG.warn("Error output: " + event.getText());
           }
+          else if (ProcessOutputType.isStdout(outputType)) {
+            dumpParser.consumeText(event.getText(), indicator);
+          }
         }
       });
       processHandler.startNotify();
-      dumpParser.readFromStreamFixed(processHandler.getProcess().getInputStream(), indicator);
+      while (true) {
+        try {
+          if (latch.await(10, TimeUnit.MILLISECONDS)) {
+            break;
+          }
+        }
+        catch (InterruptedException e) {
+          LOG.error(e);
+          return new Failure(e.getMessage());
+        }
+        indicator.checkCanceled();
+      }
       return new Success(
         new NewCallTreeOnlyProfilerData(dumpParser.getCallTreeBuilder(), NativeCallStackElementRenderer.Companion.getINSTANCE()));
     }
