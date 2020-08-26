@@ -34,10 +34,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author VISTALL
- * @since 16-Sep-15
- */
 public class PerlRunProfileState extends CommandLineState {
   public PerlRunProfileState(ExecutionEnvironment environment) {
     super(environment);
