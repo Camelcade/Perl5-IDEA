@@ -102,6 +102,24 @@ public class PerlProfilerTest extends PerlPlatformTestCase {
     checkProfilingResultsWithFile(getProfilingResults(executionResult.first.first.getRunProfile(), executionResult.second.second));
   }
 
+  @Test
+  public void testProfilingTests() {
+    modifyOnlyConfiguration(it -> it.setStartupMode(PerlProfilerStartupMode.INIT));
+    copyDirToModule("../run/testMore");
+    var execResults = runConfigurationWithProfilingAndWait(createTestRunConfiguration("t"));
+    Throwable failure = null;
+    try {
+      checkTestRunResultsWithFile(execResults.first.second);
+    }
+    catch (Throwable e) {
+      failure = e;
+    }
+    checkProfilingResultsWithFile(execResults);
+    if (failure != null) {
+      throw new RuntimeException(failure);
+    }
+  }
+
 
   private Pair<Pair<ExecutionEnvironment, RunContentDescriptor>, Pair<Executor, PerlProfilerConfigurationState>> runScriptWithProfilingAndWait(
     @NotNull String directory,
@@ -123,7 +141,14 @@ public class PerlProfilerTest extends PerlPlatformTestCase {
       var frames = ((Stack)stack).getFrames();
       List<String> serializedStack = new ArrayList<>();
       for (Object frame : frames) {
-        serializedStack.add(frame.toString());
+        var frameString = frame.toString();
+        var prefix = "ANON__[";
+        var prefixOffset = frameString.indexOf(prefix);
+        if (prefixOffset > -1) {
+          frameString = frameString.substring(0, prefixOffset + prefix.length()) +
+                        frameString.substring(frameString.lastIndexOf('/'));
+        }
+        serializedStack.add(frameString);
       }
       serializedFrames.add(String.join("; ", serializedStack));
     }
