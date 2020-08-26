@@ -42,6 +42,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.jdom.Element;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -51,18 +52,18 @@ import java.util.function.Consumer;
 
 @Category(Heavy.class)
 public class PerlProfilerTest extends PerlPlatformTestCase {
-  private List<ProfilerConfigurationState> myConfigurations;
+  private Element myConfigurations;
 
   @Override
   protected void setUp() throws Exception {
     super.setUp();
-    myConfigurations = ProfilerRunConfigurationsManager.getInstance().getConfigurations();
+    myConfigurations = ProfilerRunConfigurationsManager.getInstance().getState();
   }
 
   @Override
   protected void tearDown() throws Exception {
     try {
-      ProfilerRunConfigurationsManager.getInstance().setConfigurations(myConfigurations);
+      ProfilerRunConfigurationsManager.getInstance().loadState(myConfigurations);
     }
     finally {
       super.tearDown();
