@@ -86,7 +86,8 @@ public class PerlTestRunConfiguration extends GenericPerlRunConfiguration {
     return myJobsNumber;
   }
 
-  void setJobsNumber(int jobsNumber) {
+  @VisibleForTesting
+  public void setJobsNumber(int jobsNumber) {
     myJobsNumber = jobsNumber;
   }
 

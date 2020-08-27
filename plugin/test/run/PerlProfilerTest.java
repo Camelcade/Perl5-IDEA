@@ -33,6 +33,7 @@ import com.intellij.profiler.api.configurations.ProfilerRunConfigurationsManager
 import com.intellij.testFramework.PlatformTestUtil;
 import com.intellij.testFramework.UsefulTestCase;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
+import com.perl5.lang.perl.idea.run.prove.PerlTestRunConfiguration;
 import com.perl5.lang.perl.profiler.configuration.PerlProfilerConfigurationState;
 import com.perl5.lang.perl.profiler.run.PerlProfilerProcess;
 import com.perl5.lang.perl.profiler.run.PerlProfilerStartupMode;
@@ -110,7 +111,22 @@ public class PerlProfilerTest extends PerlPlatformTestCase {
   public void testProfilingTests() {
     modifyOnlyConfiguration(it -> it.setStartupMode(PerlProfilerStartupMode.INIT));
     copyDirToModule("../run/testMore");
-    var execResults = runConfigurationWithProfilingAndWait(createTestRunConfiguration("t"));
+    var runConfiguration = createTestRunConfiguration("t");
+    runTestsWithPRofiler(runConfiguration);
+  }
+
+  @Test
+  public void testProfilingTestsParallel() {
+    modifyOnlyConfiguration(it -> it.setStartupMode(PerlProfilerStartupMode.INIT));
+    copyDirToModule("../run/testMore");
+    var runConfiguration = createTestRunConfiguration("t");
+    assertInstanceOf(runConfiguration, PerlTestRunConfiguration.class);
+    runConfiguration.setJobsNumber(4);
+    runTestsWithPRofiler(runConfiguration);
+  }
+
+  protected void runTestsWithPRofiler(PerlTestRunConfiguration runConfiguration) {
+    var execResults = runConfigurationWithProfilingAndWait(runConfiguration);
     Throwable failure = null;
     try {
       checkTestRunResultsWithFile(execResults.first.second);
