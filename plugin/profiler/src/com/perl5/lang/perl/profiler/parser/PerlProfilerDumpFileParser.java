@@ -31,7 +31,6 @@ import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.util.PerlPluginUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
-import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -42,7 +41,6 @@ import java.util.concurrent.TimeUnit;
 public class PerlProfilerDumpFileParser implements ProfilerDumpFileParser {
   private static final Logger LOG = Logger.getInstance(PerlProfilerDumpFileParser.class);
   private final @NotNull Project myProject;
-  @NonNls private static final String NYTPROFCALLS = "nytprofcalls";
 
   public PerlProfilerDumpFileParser(Project project) {
     myProject = project;
