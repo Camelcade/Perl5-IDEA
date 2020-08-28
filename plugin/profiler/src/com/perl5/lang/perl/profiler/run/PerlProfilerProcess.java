@@ -22,10 +22,12 @@ import com.intellij.execution.ui.RunContentDescriptor;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProcessCanceledException;
 import com.intellij.openapi.progress.ProgressIndicator;
+import com.intellij.profiler.CallTreeBuilder;
 import com.intellij.profiler.FileBasedProfilerProcess;
-import com.intellij.profiler.api.ProfilerState;
+import com.intellij.profiler.api.*;
 import com.perl5.lang.perl.profiler.configuration.PerlProfilerConfigurationState;
 import com.perl5.lang.perl.profiler.parser.PerlProfilerDumpFileParser;
+import com.perl5.lang.perl.profiler.parser.PerlProfilerDumpWriter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.TestOnly;
@@ -53,7 +55,9 @@ public class PerlProfilerProcess extends FileBasedProfilerProcess<PerlTargetProc
   protected @NotNull ProfilerState readPreparedDump(@NotNull File file, @NotNull ProgressIndicator indicator)
     throws ProcessCanceledException {
     var dumpParser = new PerlProfilerDumpFileParser(myExecutionEnvironment.getProject());
-    return asProfilerState(dumpParser.parse(myPerlProfilerRunProfileState.getDumpFile().getParentFile(), indicator), null);
+    var dumpFile = myPerlProfilerRunProfileState.getDumpFile();
+    var parsingResult = dumpParser.parse(dumpFile.getParentFile(), indicator);
+    return asProfilerState(parsingResult, PerlProfilerDumpWriter.create(dumpFile, parsingResult));
   }
 
   @Override

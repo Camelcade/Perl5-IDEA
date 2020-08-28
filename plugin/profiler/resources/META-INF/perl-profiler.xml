@@ -19,6 +19,8 @@
     <profiler.profilerConfigurationType implementation="com.perl5.lang.perl.profiler.configuration.PerlProfilerConfigurationType"/>
     <programRunner implementation="com.perl5.lang.perl.profiler.run.PerlProfilerProgramRunner"/>
     <profiler.api.ProfilerDumpParserProvider implementation="com.perl5.lang.perl.profiler.parser.PerlProfilerDumpFileParserProvider"/>
+    <profiler.api.ProfilerDumpParserProvider
+        implementation="com.perl5.lang.perl.profiler.parser.PerlProfilerCollapsedDumpFileParserProvider"/>
     <applicationConfigurable bundle="messages.PerlProfilerBundle"
                              parentId="profiler"
                              id="profiler.perl5"

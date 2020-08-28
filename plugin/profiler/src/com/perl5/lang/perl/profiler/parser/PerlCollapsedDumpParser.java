@@ -18,12 +18,18 @@ package com.perl5.lang.perl.profiler.parser;
 
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressIndicator;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.profiler.DummyCallTreeBuilder;
 import com.intellij.profiler.LineByLineParser;
 import com.intellij.profiler.api.BaseCallStackElement;
 import com.intellij.profiler.model.NoThreadInfoInProfilerData;
+import com.intellij.psi.NavigatablePsiElement;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.containers.ContainerUtil;
+import com.perl5.lang.perl.idea.project.PerlProjectManager;
+import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
@@ -31,6 +37,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -48,7 +56,7 @@ public class PerlCollapsedDumpParser extends LineByLineParser {
    */
   @ApiStatus.ScheduledForRemoval(inVersion = "2020.3")
   @Deprecated
-  void readFromStreamFixed(InputStream input, ProgressIndicator indicator) {
+  void readFromStreamFixed(InputStream input, ProgressIndicator indicator) throws IOException {
     final var startTime = System.currentTimeMillis();
     int linesCounter = 0;
     try (
@@ -61,11 +69,6 @@ public class PerlCollapsedDumpParser extends LineByLineParser {
         }
         consumeLine(line);
       }
-    }
-    catch (IOException e) {
-      LOG.warn("Problem while reading results after " + (System.currentTimeMillis() - startTime) + " ms;" +
-               " lines read: " + linesCounter + "; " +
-               "bad lines: " + getBadLines() + ": ", e);
     }
     LOG.info(
       "Dump read in " + (System.currentTimeMillis() - startTime) + " ms; lines read: " + linesCounter + "; bad lines: " + getBadLines());
@@ -106,6 +109,27 @@ public class PerlCollapsedDumpParser extends LineByLineParser {
     @Override
     public @NotNull String fullName() {
       return myName;
+    }
+
+    @Override
+    public boolean isNavigatable() {
+      return true;
+    }
+
+    @Override
+    public @NotNull NavigatablePsiElement[] calcNavigatables(@NotNull Project project) {
+      var perlSdk = PerlProjectManager.getSdk(project);
+      if (perlSdk == null) {
+        return NavigatablePsiElement.EMPTY_NAVIGATABLE_ELEMENT_ARRAY;
+      }
+      List<PsiElement> result = new ArrayList<>();
+      PerlSubUtil.processRelatedItems(project, GlobalSearchScope.allScope(project), myName, it -> {
+        if (it instanceof NavigatablePsiElement) {
+          result.add(it);
+        }
+        return true;
+      });
+      return result.toArray(NavigatablePsiElement.EMPTY_NAVIGATABLE_ELEMENT_ARRAY);
     }
 
     @Override

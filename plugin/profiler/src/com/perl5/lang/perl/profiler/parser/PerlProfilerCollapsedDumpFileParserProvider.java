@@ -22,24 +22,24 @@ import com.intellij.profiler.api.ProfilerDumpParserProvider;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class PerlProfilerDumpFileParserProvider implements ProfilerDumpParserProvider {
+public class PerlProfilerCollapsedDumpFileParserProvider implements ProfilerDumpParserProvider {
   @Override
   public @NotNull String getId() {
-    return "perl5.dump.parser";
+    return "perl5.dump.parser.collapsed";
   }
 
   @Override
   public @NotNull String getName() {
-    return "NYTProf Dump";
+    return "NYTProf Dump Backup";
   }
 
   @Override
   public @Nullable String getRequiredFileExtension() {
-    return null;
+    return "gz";
   }
 
   @Override
   public @NotNull ProfilerDumpFileParser createParser(@NotNull Project project) {
-    return new PerlProfilerDumpFileParser(project);
+    return new PerlProfilerCollapsedDumpFileParser(project);
   }
 }

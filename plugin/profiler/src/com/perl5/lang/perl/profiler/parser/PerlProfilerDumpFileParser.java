@@ -38,6 +38,9 @@ import java.io.File;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Parser for nytprof dump
+ */
 public class PerlProfilerDumpFileParser implements ProfilerDumpFileParser {
   private static final Logger LOG = Logger.getInstance(PerlProfilerDumpFileParser.class);
   private final @NotNull Project myProject;
@@ -130,5 +133,4 @@ public class PerlProfilerDumpFileParser implements ProfilerDumpFileParser {
       return new Failure(e.getMessage());
     }
   }
-
 }
