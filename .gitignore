@@ -9,7 +9,6 @@ plugin/testData/**/svg/
 .idea/*.xml
 .idea/modules/
 .idea/libraries/
-.idea/scopes/
 .idea/inspectionProfiles/
 .idea/.name
 tmp/
