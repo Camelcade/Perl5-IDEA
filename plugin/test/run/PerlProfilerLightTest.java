@@ -48,13 +48,28 @@ public class PerlProfilerLightTest extends PerlLightTestCase {
     doTestNavigation("Foo::Bar::something");
   }
 
+  @Test
+  public void testNavigateTry() {
+    doTestNavigation("Foo::Bar::try {...}");
+  }
+
+  @Test
+  public void testNavigateTrySpace() {
+    doTestNavigation("Foo::Bar::try {...} ");
+  }
+
   protected void doTestNavigation(@NotNull String frameName) {
     var stackElement = new PerlCallStackElement(frameName);
     var navigatablePsiElements = stackElement.calcNavigatables(getProject());
     assertNotNull(navigatablePsiElements);
-    StringBuilder sb = new StringBuilder(stackElement.fullName()).append("\n");
+    StringBuilder sb = new StringBuilder(stackElement.fullName()).append(SEPARATOR_NEWLINES);
     for (NavigatablePsiElement navigatablePsiElement : navigatablePsiElements) {
-      sb.append(serializePsiElement(navigatablePsiElement)).append("\n");
+      var elementPresentation = navigatablePsiElement.getPresentation();
+      sb
+        .append(serializePsiElement(navigatablePsiElement))
+        .append("\n")
+        .append(serializePresentation(elementPresentation))
+        .append(SEPARATOR_NEWLINES);
     }
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
   }

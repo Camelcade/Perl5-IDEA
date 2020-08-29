@@ -1,0 +1,14 @@
+try in Foo::Bar
+----------
+PsiPerlTryExprImpl(Perl5: TRY_EXPR) at 98 in Bar.pm; navigated to: PsiPerlTryExprImpl(Perl5: TRY_EXPR) at 98 in Bar.pm
+try {
+    "Something";
+} in Bar.pm 9; null
+----------
+PsiPerlTryExprImpl(Perl5: TRY_EXPR) at 125 in Bar.pm; navigated to: PsiPerlTryExprImpl(Perl5: TRY_EXPR) at 125 in Bar.pm
+try {
+    "otherthing"; # need to be long to shorten
+    "otherthing";
+   …g";
+} in Bar.pm 13; null
+----------
