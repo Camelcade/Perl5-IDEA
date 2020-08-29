@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.profiler.parser;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.project.Project;
@@ -99,7 +100,8 @@ public class PerlCollapsedDumpParser extends LineByLineParser {
       count);
   }
 
-  private static class PerlCallStackElement extends BaseCallStackElement {
+  @VisibleForTesting
+  public static class PerlCallStackElement extends BaseCallStackElement {
     private final @NotNull String myName;
 
     public PerlCallStackElement(@NotNull String name) {

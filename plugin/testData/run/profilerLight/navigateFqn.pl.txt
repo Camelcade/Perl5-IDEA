@@ -1,0 +1,2 @@
+MyTest::Some::Package::someconst1
+PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@MyTest::Some::Package::someconst1; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 244 in Package.pm
