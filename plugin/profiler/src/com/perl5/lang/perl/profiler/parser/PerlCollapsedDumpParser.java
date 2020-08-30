@@ -88,7 +88,7 @@ public class PerlCollapsedDumpParser extends LineByLineParser {
     var frames = StringUtil.split(framesString, ";");
     myCallTreeBuilder.addStack(
       NoThreadInfoInProfilerData.INSTANCE,
-      ContainerUtil.map(frames, it -> myCachedFrames.computeIfAbsent(it, PerlCallStackElement::new)),
+      ContainerUtil.map(frames, it -> myCachedFrames.computeIfAbsent(it, PerlCallStackElement::create)),
       count);
   }
 }

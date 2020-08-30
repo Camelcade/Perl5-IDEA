@@ -59,7 +59,7 @@ public class PerlProfilerLightTest extends PerlLightTestCase {
   }
 
   protected void doTestNavigation(@NotNull String frameName) {
-    var stackElement = new PerlCallStackElement(frameName);
+    var stackElement = PerlCallStackElement.create(frameName);
     var navigatablePsiElements = stackElement.calcNavigatables(getProject());
     assertNotNull(navigatablePsiElements);
     StringBuilder sb = new StringBuilder(stackElement.fullName()).append(SEPARATOR_NEWLINES);
