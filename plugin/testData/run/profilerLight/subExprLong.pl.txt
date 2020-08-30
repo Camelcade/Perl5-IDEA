@@ -1,0 +1,5 @@
+sub {...} in SubExpr.pm 15
+----------
+Perl5 at 0 in SubExpr.pm; navigated to: Perl5 at 0 in SubExpr.pm
+sub {...} in Foo/Baz; null
+----------

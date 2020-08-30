@@ -1,0 +1,5 @@
+sub {...} (evaled) in SubExpr.pm 8
+----------
+Perl5 at 0 in SubExpr.pm; navigated to: Perl5 at 0 in SubExpr.pm
+sub {...} in Foo/Baz; null
+----------

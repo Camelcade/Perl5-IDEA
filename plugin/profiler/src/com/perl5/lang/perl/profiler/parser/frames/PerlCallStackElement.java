@@ -32,6 +32,7 @@ import java.util.List;
 public abstract class PerlCallStackElement extends BaseCallStackElement {
   protected static final Logger LOG = Logger.getInstance(PerlCallStackElement.class);
   protected static final String TRY_TINY_SUFFIX = "::try {...}";
+  protected static final String ANON_SUB_WITH_LINE_SUFFIX = "__ANON__[";
   protected static final int MAX_FILE_TO_OPEN = 10;
 
   private final @NotNull String myFrameText;
@@ -75,6 +76,9 @@ public abstract class PerlCallStackElement extends BaseCallStackElement {
   public static @NotNull PerlCallStackElement create(@NotNull String frameText) {
     if (frameText.contains(TRY_TINY_SUFFIX)) {
       return new PerlTryStackElement(frameText);
+    }
+    else if (frameText.contains(ANON_SUB_WITH_LINE_SUFFIX)) {
+      return new PerlAnonStubStackElement(frameText);
     }
     return new PerlFqnStackElement(frameText);
   }

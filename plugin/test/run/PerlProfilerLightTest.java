@@ -17,11 +17,16 @@
 package run;
 
 import base.PerlLightTestCase;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.NavigatablePsiElement;
+import com.intellij.psi.search.FilenameIndex;
+import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.testFramework.UsefulTestCase;
 import com.perl5.lang.perl.profiler.parser.frames.PerlCallStackElement;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
+
+import java.util.ArrayList;
 
 /**
  * Tests additional stuff, like serializing, deserializing, navigation
@@ -56,6 +61,31 @@ public class PerlProfilerLightTest extends PerlLightTestCase {
   @Test
   public void testNavigateTrySpace() {
     doTestNavigation("Foo::Bar::try {...} ");
+  }
+
+  @Test
+  public void testSubExprShort() {
+    VirtualFile targetFile = getSubExprFile();
+    doTestNavigation("Foo::Baz::SubExpr::__ANON__[" + targetFile.getPath() + ":6]");
+  }
+
+  @Test
+  public void testSubExprLong() {
+    VirtualFile targetFile = getSubExprFile();
+    doTestNavigation("Foo::Baz::SubExpr::__ANON__[" + targetFile.getPath() + ":15]");
+  }
+
+  @Test
+  public void testSubExprEval() {
+    VirtualFile targetFile = getSubExprFile();
+    doTestNavigation("Foo::Baz::SubExpr::__ANON__[(eval 0)[" + targetFile.getPath() + ":8]:6]");
+  }
+
+  private @NotNull VirtualFile getSubExprFile() {
+    var virtualFiles =
+      new ArrayList<>(FilenameIndex.getVirtualFilesByName(getProject(), "SubExpr.pm", GlobalSearchScope.allScope(getProject())));
+    assertSize(1, virtualFiles);
+    return virtualFiles.get(0);
   }
 
   protected void doTestNavigation(@NotNull String frameName) {
