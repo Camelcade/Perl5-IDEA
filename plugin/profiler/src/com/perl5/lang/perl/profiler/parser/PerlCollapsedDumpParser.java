@@ -171,55 +171,55 @@ public class PerlCollapsedDumpParser extends LineByLineParser {
     private @NotNull List<NavigatablePsiElement> computeTryNavigatables(@NotNull Project project) {
       List<NavigatablePsiElement> result = new ArrayList<>();
       Set<PsiFile> processedFiles = new HashSet<>();
-      PerlPackageUtil
-        .processNamespaces(myName.substring(0, myName.length() - TRY_TINY_SUFFIX.length()), project, GlobalSearchScope.allScope(project),
-                           it -> {
-                             var psiFile = it.getContainingFile();
-                             if (processedFiles.add(psiFile)) {
-                               ProgressManager.checkCanceled();
-                               psiFile.accept(new PerlRecursiveVisitor() {
-                                 @Override
-                                 public void visitTrycatchCompound(@NotNull PsiPerlTrycatchCompound o) {
-                                   if (o instanceof NavigatablePsiElement) {
-                                     result.add(createDelegate((NavigatablePsiElement)o));
-                                   }
-                                   super.visitTrycatchCompound(o);
-                                 }
+      PerlPackageUtil.processNamespaces(
+        myName.substring(0, myName.length() - TRY_TINY_SUFFIX.length()), project, GlobalSearchScope.allScope(project),
+        it -> {
+          var psiFile = it.getContainingFile();
+          if (processedFiles.add(psiFile)) {
+            ProgressManager.checkCanceled();
+            psiFile.accept(new PerlRecursiveVisitor() {
+              @Override
+              public void visitTrycatchCompound(@NotNull PsiPerlTrycatchCompound o) {
+                if (o instanceof NavigatablePsiElement) {
+                  result.add(createDelegate((NavigatablePsiElement)o));
+                }
+                super.visitTrycatchCompound(o);
+              }
 
-                                 @Override
-                                 public void visitTryExpr(@NotNull PsiPerlTryExpr o) {
-                                   if (o instanceof NavigatablePsiElement) {
-                                     result.add(createDelegate((NavigatablePsiElement)o));
-                                   }
-                                   super.visitTryExpr(o);
-                                 }
+              @Override
+              public void visitTryExpr(@NotNull PsiPerlTryExpr o) {
+                if (o instanceof NavigatablePsiElement) {
+                  result.add(createDelegate((NavigatablePsiElement)o));
+                }
+                super.visitTryExpr(o);
+              }
 
-                                 private PerlDelegatingFakeElement createDelegate(@NotNull NavigatablePsiElement originalElement) {
-                                   return new PerlDelegatingFakeElement(originalElement) {
-                                     @Override
-                                     public String getPresentableText() {
-                                       return StringUtil.shortenTextWithEllipsis(StringUtil.notNullize(getText()), 80, 5, true);
-                                     }
+              private PerlDelegatingFakeElement createDelegate(@NotNull NavigatablePsiElement originalElement) {
+                return new PerlDelegatingFakeElement(originalElement) {
+                  @Override
+                  public String getPresentableText() {
+                    return StringUtil.shortenTextWithEllipsis(StringUtil.notNullize(getText()), 80, 5, true);
+                  }
 
-                                     @Override
-                                     public @Nullable String getLocationString() {
-                                       var containingFile = getContainingFile();
-                                       if (containingFile == null) {
-                                         return super.getLocationString();
-                                       }
-                                       var document = PsiDocumentManager.getInstance(getProject()).getDocument(containingFile);
-                                       if (document == null) {
-                                         return super.getLocationString();
-                                       }
-                                       return String
-                                         .join(" ", containingFile.getName(), Integer.toString(document.getLineNumber(getTextOffset())));
-                                     }
-                                   };
-                                 }
-                               });
-                             }
-                             return processedFiles.size() < MAX_FILE_TO_OPEN;
-                           });
+                  @Override
+                  public @Nullable String getLocationString() {
+                    var containingFile = getContainingFile();
+                    if (containingFile == null) {
+                      return super.getLocationString();
+                    }
+                    var document = PsiDocumentManager.getInstance(getProject()).getDocument(containingFile);
+                    if (document == null) {
+                      return super.getLocationString();
+                    }
+                    return String
+                      .join(" ", containingFile.getName(), Integer.toString(document.getLineNumber(getTextOffset())));
+                  }
+                };
+              }
+            });
+          }
+          return processedFiles.size() < MAX_FILE_TO_OPEN;
+        });
       return result;
     }
 
