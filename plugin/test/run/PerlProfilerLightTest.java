@@ -17,10 +17,14 @@
 package run;
 
 import base.PerlLightTestCase;
+import com.intellij.openapi.editor.impl.EditorImpl;
+import com.intellij.openapi.fileEditor.FileEditorManager;
+import com.intellij.openapi.fileEditor.TextEditor;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.NavigatablePsiElement;
 import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.testFramework.PlatformTestUtil;
 import com.intellij.testFramework.UsefulTestCase;
 import com.perl5.lang.perl.profiler.parser.frames.PerlCallStackElement;
 import org.jetbrains.annotations.NotNull;
@@ -100,6 +104,19 @@ public class PerlProfilerLightTest extends PerlLightTestCase {
         .append("\n")
         .append(serializePresentation(elementPresentation))
         .append(SEPARATOR_NEWLINES);
+      navigatablePsiElement.navigate(true);
+      try {
+        PlatformTestUtil.dispatchAllEventsInIdeEventQueue();
+      }
+      catch (InterruptedException e) {
+        throw new RuntimeException(e);
+      }
+      FileEditorManager fileEditorManager = FileEditorManager.getInstance(getProject());
+      var selectedFileEditor = fileEditorManager.getSelectedEditor();
+      assertInstanceOf(selectedFileEditor, TextEditor.class);
+      var selectedEditor = ((TextEditor)selectedFileEditor).getEditor();
+      assertInstanceOf(selectedEditor, EditorImpl.class);
+      sb.append(getEditorTextWithCaretsAndSelections(selectedEditor)).append(SEPARATOR_NEWLINES);
     }
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
   }

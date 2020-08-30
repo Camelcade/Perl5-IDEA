@@ -1031,7 +1031,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
       addCaretInfo(currentCaret, macroses);
       currentCaret.removeSelection();
     }
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithMacroses(macroses));
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithMacroses(getTopLevelEditor(), macroses));
   }
 
   private DataContext getEditorDataContext() {
@@ -1060,17 +1060,22 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   }
 
   protected String getEditorTextWithCaretsAndSelections() {
-    return getEditorTextWithMacroses(addCaretsMacroses(new ArrayList<>()));
+    return getEditorTextWithCaretsAndSelections(getTopLevelEditor());
   }
 
-  private @NotNull List<Pair<Integer, String>> addCaretsMacroses(@NotNull List<Pair<Integer, String>> macroses) {
-    getEditor().getCaretModel().getAllCarets().forEach(caret -> addCaretInfo(caret, macroses));
+  protected String getEditorTextWithCaretsAndSelections(@NotNull Editor editor) {
+    return getEditorTextWithMacroses(editor, addCaretsMacroses(editor, new ArrayList<>()));
+  }
+
+  private @NotNull List<Pair<Integer, String>> addCaretsMacroses(@NotNull Editor editor,
+                                                                 @NotNull List<Pair<Integer, String>> macroses) {
+    editor.getCaretModel().getAllCarets().forEach(caret -> addCaretInfo(caret, macroses));
     return macroses;
   }
 
-  private @NotNull String getEditorTextWithMacroses(List<Pair<Integer, String>> macros) {
+  private @NotNull String getEditorTextWithMacroses(@NotNull Editor editor, @NotNull List<Pair<Integer, String>> macros) {
     ContainerUtil.sort(macros, Comparator.comparingInt(pair -> pair.first));
-    StringBuilder sb = new StringBuilder(getEditorText());
+    StringBuilder sb = new StringBuilder(editor.getDocument().getText());
 
     for (int i = macros.size() - 1; i > -1; i--) {
       Pair<Integer, String> macro = macros.get(i);
@@ -1215,7 +1220,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
       }
       highlighterIterator.advance();
     }
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithMacroses(markers));
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithMacroses(editor, markers));
   }
 
   protected void doTestUsagesHighlighting() {
@@ -1254,7 +1259,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
         macroses.add(Pair.create(highlighter.getEndOffset(), "</" + type + ">"));
         highlightManager.removeSegmentHighlighter(editor, highlighter);
       }
-      String textWithMacroses = getEditorTextWithMacroses(macroses);
+      String textWithMacroses = getEditorTextWithMacroses(editor, macroses);
       if (result.isEmpty()) {
         result = textWithMacroses;
       }
@@ -1932,7 +1937,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
                              StringUtil.join(ContainerUtil.map(myFixture.getBreadcrumbsAtCaret(), this::serializeCrumb), ": ") +
                              ">"));
     });
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithMacroses(macros));
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithMacroses(getTopLevelEditor(), macros));
   }
 
   private String serializeCrumb(@Nullable Crumb crumb) {
@@ -2075,7 +2080,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
       macros.add(Pair.create(occurenceRange.getStartOffset(), "<occurrence>"));
       macros.add(Pair.create(occurenceRange.getEndOffset(), "</occurrence>"));
     });
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithMacroses(macros));
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithMacroses(getTopLevelEditor(), macros));
   }
 
   protected void doTestSuggesterOnRename(@NotNull VariableInplaceRenameHandler handler) {
@@ -2727,7 +2732,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
       AnAction anAction = ContainerUtil.find(actionsList, it -> it.toString().equals(actionName));
       assertNotNull("No action: " + actionName, anAction);
       ApplicationManager.getApplication().invokeAndWait(() -> myFixture.testAction(anAction));
-      sb.append(ReadAction.compute(this::getEditorTextWithCaretsAndSelections));
+      sb.append(ReadAction.compute((@NotNull ThrowableComputable<String, RuntimeException>)this::getEditorTextWithCaretsAndSelections));
     }
 
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());

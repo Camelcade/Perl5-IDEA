@@ -1,11 +1,65 @@
 Foo::Bar::something
 ----------
-PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Foo::Bar::something at 0 in Bla.pm
-something() in Foo::Baz::Bla; /subroutine_gutter_icon.png; null
-----------
 PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Foo::Bar::something at 49 in Bar.pm
 something() in Foo::Baz::Bar; /subroutine_gutter_icon.png; null
 ----------
+package Foo::Bar;
+use constant something => 42;
+
+sub <caret>something {
+    say 'hi';
+}
+
+use Try::Tiny;
+
+try {
+    "Something";
+};
+
+try {
+    "otherthing"; # need to be long to shorten
+    "otherthing";
+    "otherthing";
+    "otherthing";
+    "otherthing";
+    "otherthing";
+    "otherthing";
+};
+
+
+----------
+PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Foo::Bar::something at 0 in Bla.pm
+something() in Foo::Baz::Bla; /subroutine_gutter_icon.png; null
+----------
+sub Foo::Bar::<caret>something {
+    say 'hi';
+}
+----------
 PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Foo::Bar::something; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 31 in Bar.pm
 something in Foo::Baz::Bar; /constant_gutter_icon.png; null
+----------
+package Foo::Bar;
+use constant <caret>something => 42;
+
+sub something {
+    say 'hi';
+}
+
+use Try::Tiny;
+
+try {
+    "Something";
+};
+
+try {
+    "otherthing"; # need to be long to shorten
+    "otherthing";
+    "otherthing";
+    "otherthing";
+    "otherthing";
+    "otherthing";
+    "otherthing";
+};
+
+
 ----------

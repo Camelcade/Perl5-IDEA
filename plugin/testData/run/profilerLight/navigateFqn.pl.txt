@@ -3,3 +3,43 @@ MyTest::Some::Package::someconst1
 PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@MyTest::Some::Package::someconst1; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 244 in Package.pm
 someconst1 in MyTest::Some::Package; /constant_gutter_icon.png; null
 ----------
+package MyTest::Some::Package;
+
+our @EXPORT  = qw/
+	somesub1
+	someconst1
+	multiconst1
+/;
+
+our @EXPORT_OK = qw/
+	somesub2
+	SOMECONST2
+	MULTICONST2
+/;
+
+our $SCALAR_VAR;
+our @ARRAY_VAR;
+our %HASH_VAR;
+
+sub somesub1 {}
+sub somesub2 {}
+use constant <caret>someconst1 => 1;
+use constant SOMECONST2 => 1;
+use constant {
+	multiconst1 => 1,
+	MULTICONST2 => 2,
+};
+
+sub unimportedsub {}
+
+use constant unimportedconstant => 1;
+
+our %EXPORT_TAGS = qw//;
+
+our $VERSION;
+
+our @EXPORT_FAIL;
+
+our @ISA;
+
+----------

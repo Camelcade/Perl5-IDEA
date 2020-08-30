@@ -5,10 +5,60 @@ try {
     "Something";
 } in Bar.pm 9; null
 ----------
+package Foo::Bar;
+use constant something => 42;
+
+sub something {
+    say 'hi';
+}
+
+use Try::Tiny;
+
+<caret>try {
+    "Something";
+};
+
+try {
+    "otherthing"; # need to be long to shorten
+    "otherthing";
+    "otherthing";
+    "otherthing";
+    "otherthing";
+    "otherthing";
+    "otherthing";
+};
+
+
+----------
 PsiPerlTryExprImpl(Perl5: TRY_EXPR) at 125 in Bar.pm; navigated to: PsiPerlTryExprImpl(Perl5: TRY_EXPR) at 125 in Bar.pm
 try {
     "otherthing"; # need to be long to shorten
     "otherthing";
    …g";
 } in Bar.pm 13; null
+----------
+package Foo::Bar;
+use constant something => 42;
+
+sub something {
+    say 'hi';
+}
+
+use Try::Tiny;
+
+try {
+    "Something";
+};
+
+<caret>try {
+    "otherthing"; # need to be long to shorten
+    "otherthing";
+    "otherthing";
+    "otherthing";
+    "otherthing";
+    "otherthing";
+    "otherthing";
+};
+
+
 ----------

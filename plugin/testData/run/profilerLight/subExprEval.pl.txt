@@ -3,3 +3,20 @@ sub {...} (evaled) in SubExpr.pm 8
 Perl5 at 0 in SubExpr.pm; navigated to: Perl5 at 0 in SubExpr.pm
 sub {...} in Foo/Baz; null
 ----------
+use strict;
+use warnings FATAL => 'all';
+use v5.10;
+package Foo::Baz::SubExpr;
+
+my $code = sub {say 'hi'};
+
+<caret>eval $something;
+
+my $long_code = sub {
+    say 'hi';
+    say 'hi';
+    say 'hi';
+    say 'hi';
+};
+
+----------
