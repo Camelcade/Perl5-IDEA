@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.profiler.parser;
+package com.perl5.lang.perl.profiler.parser.frames;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.intellij.openapi.application.ReadAction;

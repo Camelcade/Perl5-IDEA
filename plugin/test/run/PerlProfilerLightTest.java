@@ -19,7 +19,7 @@ package run;
 import base.PerlLightTestCase;
 import com.intellij.psi.NavigatablePsiElement;
 import com.intellij.testFramework.UsefulTestCase;
-import com.perl5.lang.perl.profiler.parser.PerlCallStackElement;
+import com.perl5.lang.perl.profiler.parser.frames.PerlCallStackElement;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 

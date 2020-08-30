@@ -24,6 +24,7 @@ import com.intellij.profiler.LineByLineParser;
 import com.intellij.profiler.api.BaseCallStackElement;
 import com.intellij.profiler.model.NoThreadInfoInProfilerData;
 import com.intellij.util.containers.ContainerUtil;
+import com.perl5.lang.perl.profiler.parser.frames.PerlCallStackElement;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
