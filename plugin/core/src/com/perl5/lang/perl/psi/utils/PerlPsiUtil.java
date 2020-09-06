@@ -18,6 +18,7 @@ package com.perl5.lang.perl.psi.utils;
 
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
+import com.intellij.lang.Language;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
@@ -1011,5 +1012,28 @@ public class PerlPsiUtil implements PerlElementTypes {
     }
 
     return result;
+  }
+
+  /**
+   * Looks for element of {@code clazz} in range from {@code startOffset} to the {@code endOffset}. Element should not start or end inside
+   * bounds, but should be somewhere in this range.
+   */
+  @Contract(pure = true)
+  public static @Nullable <T extends PsiElement> T findElementOfClassAtRange(@NotNull PsiFile file,
+                                                                             int startOffset,
+                                                                             int endOffset,
+                                                                             @NotNull Class<T> clazz) {
+    final FileViewProvider viewProvider = file.getViewProvider();
+    for (Language lang : viewProvider.getLanguages()) {
+      PsiElement run = viewProvider.findElementAt(startOffset, lang);
+      while (run != null && run.getTextRange().getStartOffset() < endOffset) {
+        var result = PsiTreeUtil.getParentOfType(run, clazz, false);
+        if (result != null) {
+          return result;
+        }
+        run = PsiTreeUtil.nextLeaf(run);
+      }
+    }
+    return null;
   }
 }

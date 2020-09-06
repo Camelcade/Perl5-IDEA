@@ -1,0 +1,24 @@
+BEGIN in Foo::Baz::BeginNavigation 9
+----------
+PsiPerlNamedBlockImpl(Perl5: NAMED_BLOCK) at 89 in BeginNavigation.pm; navigated to: PsiPerlNamedBlockImpl(Perl5: NAMED_BLOCK) at 89 in BeginNavigation.pm
+BEGIN{
+    say 'some';
+} in BeginNavigation.pm 7; null
+----------
+package Foo::Baz::BeginNavigation;
+
+use strict;
+use warnings FATAL => 'all';
+
+say 'hi';
+
+BEGIN{
+<caret>    say 'some';
+}
+
+
+BEGIN{
+    use Foo::Bar;
+}
+
+----------

@@ -32,6 +32,7 @@ import java.util.List;
 public abstract class PerlCallStackElement extends BaseCallStackElement {
   protected static final Logger LOG = Logger.getInstance(PerlCallStackElement.class);
   protected static final String TRY_TINY_SUFFIX = "::try {...}";
+  protected static final String BEGIN_BLOCK_SUFFIX = "::BEGIN@";
   protected static final String ANON_SUB_WITH_LINE_SUFFIX = "__ANON__[";
   protected static final int MAX_FILE_TO_OPEN = 10;
 
@@ -79,6 +80,9 @@ public abstract class PerlCallStackElement extends BaseCallStackElement {
     }
     else if (frameText.contains(ANON_SUB_WITH_LINE_SUFFIX)) {
       return new PerlAnonStubStackElement(frameText);
+    }
+    else if (frameText.contains(BEGIN_BLOCK_SUFFIX)) {
+      return new PerlBeginStackElement(frameText);
     }
     return new PerlFqnStackElement(frameText);
   }

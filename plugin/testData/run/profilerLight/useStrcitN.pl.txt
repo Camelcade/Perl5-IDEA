@@ -1,0 +1,22 @@
+BEGIN in Foo::Baz::BeginNavigation 3
+----------
+PerlUseStatementElement(USE_STATEMENT) at 36 in BeginNavigation.pm
+null
+----------
+package Foo::Baz::BeginNavigation;
+
+<caret>use strict;
+use warnings FATAL => 'all';
+
+say 'hi';
+
+BEGIN{
+    say 'some';
+}
+
+
+BEGIN{
+    use Foo::Bar;
+}
+
+----------

@@ -19,18 +19,14 @@ package com.perl5.lang.perl.profiler.parser.frames;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.NavigatablePsiElement;
-import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.perl5.lang.perl.psi.PerlDelegatingFakeElement;
 import com.perl5.lang.perl.psi.PerlRecursiveVisitor;
 import com.perl5.lang.perl.psi.PsiPerlTryExpr;
 import com.perl5.lang.perl.psi.PsiPerlTrycatchCompound;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
@@ -76,7 +72,7 @@ class PerlTryStackElement extends PerlCallStackElement {
             @Override
             public void visitTrycatchCompound(@NotNull PsiPerlTrycatchCompound o) {
               if (o instanceof NavigatablePsiElement) {
-                result.add(createDelegate((NavigatablePsiElement)o));
+                result.add(new PerlTargetElementWrapper((NavigatablePsiElement)o));
               }
               super.visitTrycatchCompound(o);
             }
@@ -84,32 +80,9 @@ class PerlTryStackElement extends PerlCallStackElement {
             @Override
             public void visitTryExpr(@NotNull PsiPerlTryExpr o) {
               if (o instanceof NavigatablePsiElement) {
-                result.add(createDelegate((NavigatablePsiElement)o));
+                result.add(new PerlTargetElementWrapper((NavigatablePsiElement)o));
               }
               super.visitTryExpr(o);
-            }
-
-            private PerlDelegatingFakeElement createDelegate(@NotNull NavigatablePsiElement originalElement) {
-              return new PerlDelegatingFakeElement(originalElement) {
-                @Override
-                public String getPresentableText() {
-                  return StringUtil.shortenTextWithEllipsis(StringUtil.notNullize(getText()), 80, 5, true);
-                }
-
-                @Override
-                public @Nullable String getLocationString() {
-                  var containingFile = getContainingFile();
-                  if (containingFile == null) {
-                    return super.getLocationString();
-                  }
-                  var document = PsiDocumentManager.getInstance(getProject()).getDocument(containingFile);
-                  if (document == null) {
-                    return super.getLocationString();
-                  }
-                  return String
-                    .join(" ", containingFile.getName(), Integer.toString(document.getLineNumber(getTextOffset())));
-                }
-              };
             }
           });
         }

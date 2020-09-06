@@ -68,6 +68,26 @@ public class PerlProfilerLightTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testUseStrcit() {
+    doTestNavigation("Foo::Baz::BeginNavigation::BEGIN@3");
+  }
+
+  @Test
+  public void testUseStrcitN() {
+    doTestNavigation("Foo::Baz::BeginNavigation::BEGIN@3.3");
+  }
+
+  @Test
+  public void testBegin() {
+    doTestNavigation("Foo::Baz::BeginNavigation::BEGIN@9");
+  }
+
+  @Test
+  public void testUseInBegin() {
+    doTestNavigation("Foo::Baz::BeginNavigation::BEGIN@14");
+  }
+
+  @Test
   public void testSubExprShort() {
     VirtualFile targetFile = getSubExprFile();
     doTestNavigation("Foo::Baz::SubExpr::__ANON__[" + targetFile.getPath() + ":6]");
