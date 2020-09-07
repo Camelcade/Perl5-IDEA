@@ -18,11 +18,14 @@ package run;
 
 import base.PerlPlatformTestCase;
 import categories.Heavy;
+import com.intellij.execution.ExecutionException;
 import com.intellij.execution.Executor;
 import com.intellij.execution.configurations.RunProfile;
+import com.intellij.execution.configurations.RunProfileState;
 import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.ui.RunContentDescriptor;
+import com.intellij.openapi.progress.EmptyProgressIndicator;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowManager;
 import com.intellij.profiler.*;
@@ -35,7 +38,9 @@ import com.intellij.testFramework.UsefulTestCase;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import com.perl5.lang.perl.idea.run.prove.PerlTestRunConfiguration;
 import com.perl5.lang.perl.profiler.configuration.PerlProfilerConfigurationState;
+import com.perl5.lang.perl.profiler.parser.*;
 import com.perl5.lang.perl.profiler.run.PerlProfilerProcess;
+import com.perl5.lang.perl.profiler.run.PerlProfilerRunProfileState;
 import com.perl5.lang.perl.profiler.run.PerlProfilerStartupMode;
 import com.pty4j.util.Pair;
 import org.jetbrains.annotations.NotNull;
@@ -43,12 +48,15 @@ import org.junit.Test;
 import org.jdom.Element;
 import org.junit.experimental.categories.Category;
 
+import java.io.File;
+import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 
-@Category(Heavy.class)
+//@Category(Heavy.class)
 public class PerlProfilerTest extends PerlPlatformTestCase {
   private Element myConfigurations;
 
@@ -86,6 +94,48 @@ public class PerlProfilerTest extends PerlPlatformTestCase {
   }
 
   @Test
+  public void testProfilerSerialization() {
+    modifyOnlyConfiguration(it -> it.setStartupMode(PerlProfilerStartupMode.BEGIN));
+    var executionResult = runScriptWithProfilingAndWait("simple", "testscript.pl");
+
+    // data on execution
+    checkProfilingResultsWithFile(executionResult);
+
+    // explicit reading of the nytprof.out
+    RunProfileState runProfileState = null;
+    try {
+      runProfileState = executionResult.first.first.getState();
+    }
+    catch (ExecutionException e) {
+      fail(e.getMessage());
+    }
+    assertInstanceOf(runProfileState, PerlProfilerRunProfileState.class);
+    var resultsPath = ((PerlProfilerRunProfileState)runProfileState).getProfilingResultsPath();
+    var outputFiles = resultsPath.toFile().listFiles();
+    if (outputFiles.length != 1) {
+      fail("Expected one resulting file, got: " + Arrays.asList(outputFiles));
+    }
+    var nytprofResultsFile = outputFiles[0];
+    var nytprofParser = new PerlProfilerDumpFileParserProvider().createParser(getProject());
+    var loadedNytprofResults = nytprofParser.parse(nytprofResultsFile, new EmptyProgressIndicator());
+    assertInstanceOf(loadedNytprofResults, Success.class);
+    var treeBuilder = getCallTreeBuilder(((Success)loadedNytprofResults).getData());
+    checkProfilingResultsWithFile(treeBuilder);
+
+    // writing of collapsed tree
+    var collapsedDumpWriter = new PerlProfilerDumpWriter(nytprofResultsFile, treeBuilder);
+    var collapsedDumpFile = new File(nytprofResultsFile.getParent(), "nytprof.gz");
+    collapsedDumpWriter.writeDump(collapsedDumpFile, new EmptyProgressIndicator());
+    assertTrue("Can't find collapsed dump file: " + collapsedDumpFile, collapsedDumpFile.exists());
+
+    // reading of collapsed tree
+    var collapsedDumpParser = new PerlProfilerCollapsedDumpFileParserProvider().createParser(getProject());
+    var collapsedParsingResults = collapsedDumpParser.parse(collapsedDumpFile, new EmptyProgressIndicator());
+    assertInstanceOf(collapsedParsingResults, Success.class);
+    checkProfilingResultsWithFile(getCallTreeBuilder(((Success)collapsedParsingResults).getData()));
+  }
+
+  @Test
   public void testRunWithProfilerInit() {
     modifyOnlyConfiguration(it -> it.setStartupMode(PerlProfilerStartupMode.INIT));
     checkProfilingResultsWithFile(runScriptWithProfilingAndWait("simple", "testscript.pl"));
@@ -104,7 +154,11 @@ public class PerlProfilerTest extends PerlPlatformTestCase {
   }
 
   protected void checkProfilingResultsWithFile(Pair<Pair<ExecutionEnvironment, RunContentDescriptor>, Pair<Executor, PerlProfilerConfigurationState>> executionResult) {
-    checkProfilingResultsWithFile(getProfilingResults(executionResult.first.first.getRunProfile(), executionResult.second.second));
+    checkProfilingResultsWithFile(getProfilingResults(executionResult));
+  }
+
+  private @NotNull ProfilerState getProfilingResults(Pair<Pair<ExecutionEnvironment, RunContentDescriptor>, Pair<Executor, PerlProfilerConfigurationState>> executionResult) {
+    return getProfilingResults(executionResult.first.first.getRunProfile(), executionResult.second.second);
   }
 
   @Test
@@ -149,10 +203,10 @@ public class PerlProfilerTest extends PerlPlatformTestCase {
   }
 
   private void checkProfilingResultsWithFile(@NotNull ProfilerState profilerState) {
-    assertInstanceOf(profilerState, DataReady.class);
-    var profilerData = ((DataReady)profilerState).getData();
-    assertInstanceOf(profilerData, NewCallTreeOnlyProfilerData.class);
-    var treeBuilder = ((NewCallTreeOnlyProfilerData)profilerData).getBuilder();
+    checkProfilingResultsWithFile(getCallTreeBuilder(profilerState));
+  }
+
+  private void checkProfilingResultsWithFile(@NotNull CallTreeBuilder<BaseCallStackElement> treeBuilder) {
     assertInstanceOf(treeBuilder, DummyCallTreeBuilder.class);
     var stacks = ((DummyCallTreeBuilder)treeBuilder).getAllStacks();
     List<String> serializedFrames = new ArrayList<>();
@@ -174,6 +228,16 @@ public class PerlProfilerTest extends PerlPlatformTestCase {
     }
     Collections.sort(serializedFrames);
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(".profiling"), String.join("\n", serializedFrames));
+  }
+
+  private @NotNull CallTreeBuilder<BaseCallStackElement> getCallTreeBuilder(@NotNull ProfilerState profilerState) {
+    assertInstanceOf(profilerState, DataReady.class);
+    return getCallTreeBuilder(((DataReady)profilerState).getData());
+  }
+
+  private @NotNull CallTreeBuilder<BaseCallStackElement> getCallTreeBuilder(ProfilerData profilerData) {
+    assertInstanceOf(profilerData, NewCallTreeOnlyProfilerData.class);
+    return ((NewCallTreeOnlyProfilerData)profilerData).getBuilder();
   }
 
   private @NotNull Pair<Pair<ExecutionEnvironment, RunContentDescriptor>, Pair<Executor, PerlProfilerConfigurationState>> runConfigurationWithProfilingAndWait(

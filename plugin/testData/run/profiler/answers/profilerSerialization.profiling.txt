@@ -1,0 +1,7 @@
+CORE::print
+main::BEGIN@12
+main::BEGIN@12; CORE::print
+main::END
+main::END; CORE::print
+main::something
+main::something; CORE::print

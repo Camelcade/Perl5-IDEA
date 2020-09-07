@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.profiler.parser;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Iterables;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressIndicator;
@@ -37,8 +38,9 @@ public class PerlProfilerDumpWriter implements ProfilerDumpWriter {
   private final @NotNull File myOriginalFile;
   private final @NotNull CallTreeBuilder<BaseCallStackElement> myBuilder;
 
-  protected PerlProfilerDumpWriter(@NotNull File originalFile,
-                                   @NotNull CallTreeBuilder<BaseCallStackElement> builder) {
+  @VisibleForTesting
+  public PerlProfilerDumpWriter(@NotNull File originalFile,
+                                @NotNull CallTreeBuilder<BaseCallStackElement> builder) {
     myOriginalFile = originalFile;
     myBuilder = builder;
   }
