@@ -1,8 +1,8 @@
 Reparsing block
 ----------
-Element(Perl5: STRING_LIST)
+PerlStringContentElementImpl(Perl5: STRING_CONTENT)
 ----------
-qw/test first one/
+first
 ----------
 After typing
 ----------

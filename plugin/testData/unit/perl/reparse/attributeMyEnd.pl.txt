@@ -1,6 +1,8 @@
 Reparsing block
 ----------
-Full reparse
+PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)
+----------
+method
 ----------
 After typing
 ----------

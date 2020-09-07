@@ -1,10 +1,8 @@
 Reparsing block
 ----------
-Element(Perl5: ANON_HASH)
+PerlStringContentElementImpl(Perl5: STRING_CONTENT)
 ----------
-{
-    some => 42
-  }
+some
 ----------
 After typing
 ----------
