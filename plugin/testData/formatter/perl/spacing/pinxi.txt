@@ -13,9 +13,37 @@
 ##
 ## If you don't understand what Free Software is, please read (or reread)
 ## this page: http://www.gnu.org/philosophy/free-sw.html
-package JSON::XS {}
-package HTTP::Tiny {}
-package Cpanel::JSON::XS {}
+package JSON::XS;
+package HTTP::Tiny;
+package Cpanel::JSON::XS;
+package SelectColors;
+package SystemDebugger;
+package CheckRecommends;
+package StartClient;
+package AudioData;
+package BatteryData;
+package CpuData;
+package DiskData;
+package GraphicData;
+package MachineData;
+package NetworkData;
+package OpticalData;
+package PartitionData;
+package ProcessData;
+package RaidData;
+package RamData;
+package RepoData;
+package SensorData;
+package SlotData;
+package SwapData;
+package UnmountedData;
+package UsbData;
+package WeatherData;
+package DesktopEnvironment;
+package DistroData;
+package PackageData;
+package DeviceData;
+package USBData;
 
 use strict;
 use warnings;
@@ -19127,7 +19155,7 @@ sub get_display_manager {
             $id .= " $debian_version $debians{int($debian_version)}";
         }
         elsif ($codename) {
-            my %by_value = reverse % debians;
+            my %by_value = reverse %debians;
             my $version = (main::is_numeric($debian_version)) ? "$debian_version $codename" : $debian_version;
             $id .= " $version";
         }

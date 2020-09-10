@@ -1,6 +1,6 @@
-File size: 736197
-Re-highlighted ranges: 93317
-Avg range size: 7.888101846394548
+File size: 736765
+Re-highlighted ranges: 93378
+Avg range size: 7.889031677697102
 Min range size: 1
 Max range size: 649
 10% of text has range <= 4
@@ -13,21 +13,21 @@ Max range size: 649
 80% of text has range <= 54
 90% of text has range <= 76
 ----------
-Range: (2116,2245) (129)
+Range: (2684,2813) (129)
 my␣(%alerts,%client,%colors,%debugger,%dl,%files,%program_values,%rows,
 %sensors_disks,%sensors_gpu,%sensors_main,%system_files);
 ----------
-Range: (2325,2605) (280)
+Range: (2893,3173) (280)
 my␣(@app,@dmesg_boot,@devices_audio,@devices_graphics,@devices_network,
 @devices_hwraid,@devices_timer,@dmi,@gpudata,@ifs,@ifs_bsd,
 @paths,@proc_partitions,@ps_aux,@ps_cmd,@ps_gui,@sensors_exclude,@sensors_use,
 @sysctl,@sysctl_battery,@sysctl_sensors,@sysctl_machine,@uname,@usb);
 ----------
-Range: (2621,2749) (128)
+Range: (3189,3317) (128)
 my␣(@dm_boot_disk,@dm_boot_optical,@glabel,@gpart,@hardware_raid,@labels,
 @lsblk,@partitions,@raid,@sysctl_disks,@swaps,@uuids);
 ----------
-Range: (2787,3346) (559)
+Range: (3355,3914) (559)
 my␣($b_admin,$b_arm,$b_bb_ps,$b_block_tool,
 $b_display,$b_dmesg_boot_check,$b_dmi,$b_dmidecode_force,
 $b_fake_bsd,$b_fake_dboot,$b_fake_dmidecode,$b_fake_pciconf,$b_fake_sysctl,
@@ -39,533 +39,533 @@ $b_slot_tool,$b_soc_audio,$b_soc_gfx,$b_soc_net,$b_soc_timer,$b_sparc,
 $b_swaps,$b_sysctl,$b_usb,$b_usb_check,$b_usb_sys,$b_usb_tool,
 $b_wmctrl);
 ----------
-Range: (3362,3487) (125)
+Range: (3930,4055) (125)
 my␣($b_dm_boot_disk,$b_dm_boot_optical,$b_glabel,$b_hardware_raid,
 $b_label_uuid,$b_lsblk,$b_partitions,$b_raid,$b_smartctl);
 ----------
-Range: (4592,4668) (76)
+Range: (5160,5236) (76)
 #␣trigger␣stupid␣emoticon.␣Note:␣SEP1/SEP2␣from␣short␣form␣not␣used␣anymore.
 ----------
-Range: (7840,7919) (79)
+Range: (8408,8487) (79)
 }
 	#␣note:␣gnu/linux␣has␣sysctl␣so␣it␣may␣be␣used␣that␣for␣something␣if␣present
 ----------
-Range: (14066,14149) (83)
+Range: (14634,14717) (83)
 /(aix|bsd|cosix|dragonfly|darwin|hp-?ux|indiana|irix|sunos|solaris|ultrix|unix)/␣){
 ----------
-Range: (14341,14419) (78)
+Range: (14909,14987) (78)
 }
 	}
 }
 
 #␣This␣data␣is␣hard␣set␣top␣of␣program␣but␣due␣to␣a␣specific␣project's
 ----------
-Range: (16971,17056) (85)
+Range: (17539,17624) (85)
 }
 	#␣note,␣this␣used␣to␣be␣created/checked␣in␣specific␣instance,␣but␣we'll␣just␣do␣it
 ----------
-Range: (17269,17347) (78)
+Range: (17837,17915) (78)
 #system␣'mv',␣"-f␣$ENV{'HOME'}/.$self_name/$self_name.conf",␣$user_config_dir;
 ----------
-Range: (17350,17441) (91)
+Range: (17918,18009) (91)
 #␣print␣"WOULD:␣Moved␣$self_name.conf␣from␣$ENV{'HOME'}/.$self_name␣to␣$user_config_dir\n";
 ----------
-Range: (17616,17693) (77)
+Range: (18184,18261) (77)
 #␣print␣"WOULD:␣Moved␣data␣dir␣$ENV{'HOME'}/.$self_name␣to␣$user_data_dir\n";
 ----------
-Range: (18912,18989) (77)
+Range: (19480,19557) (77)
 #␣we␣are␣just␣going␣to␣get␣all␣the␣Xorg␣logs␣we␣can␣find,␣and␣not␣worry␣about
 ----------
-Range: (19974,20053) (79)
+Range: (20542,20621) (79)
 }
 		}
 	}
 	print␣"Xorg␣log␣file:␣$file_holder\nLast␣modified:␣$time_holder\n"␣if
 ----------
-Range: (23598,23682) (84)
+Range: (24166,24250) (84)
 }
 	#␣This␣let's␣user␣pick␣their␣color␣scheme.␣For␣IRC,␣only␣shows␣the␣color␣schemes,
 ----------
-Range: (23684,23762) (78)
+Range: (24252,24330) (78)
 #␣no␣interactive.␣The␣override␣value␣only␣will␣be␣placed␣in␣user␣config␣files.
 ----------
-Range: (26909,26999) (90)
+Range: (27477,27567) (90)
 "Welcome␣to␣$self_name!␣Please␣select␣the␣default
 		$configs{'selection'}␣color␣scheme."],
 ----------
-Range: (27033,27199) (166)
+Range: (27601,27767) (166)
 "Because␣there␣is␣no␣way␣to␣know␣your␣$configs{'selection'}
 	foreground/background␣colors,␣you␣can␣set␣your␣color␣preferences␣from
 	color␣scheme␣option␣list␣below:"],
 ----------
-Range: (27311,27401) (90)
+Range: (27879,27969) (90)
 "1-dark^or^light^backgrounds;␣2-light^backgrounds;
 	3-dark^backgrounds;␣4-miscellaneous"],
 ----------
-Range: (27490,27587) (97)
+Range: (28058,28155) (97)
 "Please␣note␣that␣this␣will␣set␣the␣$configs{'selection'}
 		preferences␣only␣for␣user:␣$whoami"],
 ----------
-Range: (28116,28248) (132)
+Range: (28684,28816) (132)
 "$i)$spacer$colors{'c1'}Card:$colors{'c2'}^nVidia^GT218
 		$colors{'c1'}Display^Server$colors{'c2'}^x11^(X.Org^1.7.7)$colors{'cn'}"],
 ----------
-Range: (28686,28927) (241)
+Range: (29254,29495) (241)
 "Simply␣type␣the␣number␣for␣the␣color␣scheme␣that␣looks␣best␣to␣your
 	eyes␣for␣your␣$configs{'selection'}␣settings␣and␣hit␣<ENTER>.␣NOTE:␣You␣can␣bring␣this
 	option␣list␣up␣by␣starting␣$self_name␣with␣option:␣-c␣plus␣one␣of␣these␣numbers:"],
 ----------
-Range: (29416,29513) (97)
+Range: (29984,30081) (97)
 "Global␣overrides␣all␣individual␣color␣schemes.␣Individual
 	schemes␣remove␣the␣global␣setting."],
 ----------
-Range: (29712,29796) (84)
+Range: (30280,30364) (84)
 "Error␣-␣Invalid␣Selection.␣You␣entered␣this:␣$response.␣Hit␣<ENTER>␣to␣continue."],
 ----------
-Range: (31447,31580) (133)
+Range: (32015,32148) (133)
 /^(CONSOLE_COLOR_SCHEME|GLOBAL_COLOR_SCHEME|IRC_COLOR_SCHEME|IRC_CONS_COLOR_SCHEME|IRC_X_TERM_COLOR_SCHEME|VIRT_TERM_COLOR_SCHEME)/){
 ----------
-Range: (32438,32647) (209)
+Range: (33006,33215) (209)
 "After␣finding␣the␣scheme␣number␣you␣like,␣simply␣run␣this␣again
 	in␣a␣terminal␣to␣set␣the␣configuration␣data␣file␣for␣your␣irc␣client.␣You␣can
 	set␣color␣schemes␣for␣the␣following:␣start␣inxi␣with␣-c␣plus:"],
 ----------
-Range: (33075,33153) (78)
+Range: (33643,33721) (78)
 }
 
 }
 
 ####␣-------------------------------------------------------------------
 ----------
-Range: (34216,34302) (86)
+Range: (34784,34870) (86)
 }
 }
 
 #␣note:␣someone␣managed␣to␣make␣a␣config␣file␣with␣corrupted␣values,␣so␣check␣int
 ----------
-Range: (39496,39574) (78)
+Range: (40064,40142) (78)
 }
 
 #␣NOTE:␣no␣logging␣available␣until␣get_parameters␣is␣run,␣since␣that's␣what
 ----------
-Range: (40580,40665) (85)
+Range: (41148,41233) (85)
 #␣print␣'timer:',␣Time::HiRes::tv_interval(\@t0,␣[Time::HiRes::gettimeofday()]),"\n";
 ----------
-Range: (44096,44172) (76)
+Range: (44664,44740) (76)
 #␣note:␣proc␣has␣some␣files␣that␣are␣apparently␣kernel␣processes,␣I've␣tried
 ----------
-Range: (44175,44258) (83)
+Range: (44743,44826) (83)
 #␣filtering␣them␣out␣but␣more␣keep␣appearing,␣so␣only␣run␣proc␣debugger␣if␣not␣root
 ----------
-Range: (45813,45913) (100)
+Range: (46381,46481) (100)
 #rmdir␣"$user_data_dir$debug_gz"␣or␣main::error_handler('remove',␣"$user_data_dir/$debug_gz",␣"$!");
 ----------
-Range: (45916,45997) (81)
+Range: (46484,46565) (81)
 print␣"Failed␣removing␣leftover␣directory:\n$user_data_dir$debug_gz␣error:␣$?"␣if
 ----------
-Range: (48401,48486) (85)
+Range: (48969,49054) (85)
 '-r␣--output␣NAME,PKNAME,TYPE,RM,FSTYPE,SIZE,LABEL,UUID,MOUNTPOINT,PHY-SEC,LOG-SEC'],
 ----------
-Range: (48498,48584) (86)
+Range: (49066,49152) (86)
 '-rb␣--output␣NAME,PKNAME,TYPE,RM,FSTYPE,SIZE,LABEL,UUID,MOUNTPOINT,PHY-SEC,LOG-SEC'],
 ----------
-Range: (48656,48742) (86)
+Range: (49224,49310) (86)
 '-Pb␣--output␣NAME,TYPE,RM,FSTYPE,SIZE,LABEL,UUID,SERIAL,MOUNTPOINT,PHY-SEC,LOG-SEC'],
 ----------
-Range: (49839,49921) (82)
+Range: (50407,50489) (82)
 print␣"Warning:␣only␣some␣of␣the␣data␣collection␣can␣occur␣if␣you␣are␣not␣in␣X\n";
 ----------
-Range: (50009,50103) (94)
+Range: (50577,50671) (94)
 print␣"Warning:␣only␣some␣of␣the␣data␣collection␣can␣occur␣if␣you␣are␣running␣as␣Root␣user\n";
 ----------
-Range: (50352,50436) (84)
+Range: (50920,51004) (84)
 }
 	#␣keep␣this␣updated␣to␣handle␣all␣possible␣locations␣we␣know␣about␣for␣Xorg.0.log
 ----------
-Range: (50438,50533) (95)
+Range: (51006,51101) (95)
 #␣not␣using␣$system_files{'xorg-log'}␣for␣now␣though␣it␣would␣be␣best␣to␣know␣what␣file␣is␣used
 ----------
-Range: (50869,50951) (82)
+Range: (51437,51519) (82)
 print␣"Collecting␣X,␣xprop,␣glxinfo,␣xrandr,␣xdpyinfo␣data,␣wayland,␣weston...\n";
 ----------
-Range: (55318,55413) (95)
+Range: (55886,55981) (95)
 #␣only␣for␣prospective␣ram␣feature␣data␣collection:␣requires␣i2c-tools␣and␣module␣eeprom␣loaded
 ----------
-Range: (57916,57994) (78)
+Range: (58484,58562) (78)
 print␣"Creating␣$self_name␣output␣file␣now.␣This␣can␣take␣a␣few␣seconds...\n";
 ----------
-Range: (58180,58313) (133)
+Range: (58748,58881) (133)
 "$self_path/$self_name␣-FRfJrploudmaxxx$i$z␣--slots␣--debug␣10␣-y␣120␣>␣$data_dir/$self_name-FRfJrploudmaxxx$iz-slots-y120.txt␣2>&1";
 ----------
-Range: (58425,58517) (92)
+Range: (58993,59085) (92)
 "$self_path/$self_name␣--recommends␣-y␣120␣>␣$data_dir/$self_name-recommends-120.txt␣2>&1");
 ----------
-Range: (63333,63410) (77)
+Range: (63901,63978) (77)
 #␣get␣rid␣pointless␣error:Can't␣cd␣to␣(/sys/kernel/)␣debug:␣Permission␣denied
 ----------
-Range: (63930,64007) (77)
+Range: (64498,64575) (77)
 #␣get␣rid␣pointless␣error:Can't␣cd␣to␣(/sys/kernel/)␣debug:␣Permission␣denied
 ----------
-Range: (66135,66214) (79)
+Range: (66703,66782) (79)
 #␣these␣choke␣on␣sudo/root:␣kmsg␣kcore␣kpage␣and␣we␣don't␣want␣keys␣or␣kallsyms
 ----------
-Range: (67848,67934) (86)
+Range: (68416,68502) (86)
 }
 		print␣"Debugger␣data␣generation␣and␣upload␣completed.␣Thank␣you␣for␣your␣help.\n";
 ----------
-Range: (69887,69963) (76)
+Range: (70455,70531) (76)
 "$dl{'dl'}␣$dl{'no-ssl-opt'}␣$ua␣$timeout␣$args␣$file␣\"$url\"␣$dl{'null'}";
 ----------
-Range: (70531,70616) (85)
+Range: (71099,71184) (85)
 #␣note:␣default␣is␣no␣verify,␣so␣default␣here␣actually␣is␣to␣verify␣unless␣overridden
 ----------
-Range: (74166,74244) (78)
+Range: (74734,74812) (78)
 "You␣can't␣run␣option␣$one␣in␣an␣IRC␣client!"␣}
 		##␣Internal/external␣options
 ----------
-Range: (74480,74565) (85)
+Range: (75048,75133) (85)
 "Option:␣$one␣has␣been␣disabled␣by␣the␣$self_name␣distribution␣maintainer."␣}
 		elsif
 ----------
-Range: (75747,75859) (112)
+Range: (76315,76427) (112)
 "Value␣for␣--output-file␣must␣be␣full␣path,␣a␣writable␣directory,␣\nand␣include␣file␣name.␣Path:␣$two"␣}
 		elsif
 ----------
-Range: (79292,79369) (77)
+Range: (79860,79937) (77)
 "$self_name␣will␣now␣begin␣checking␣for␣the␣programs␣it␣needs
 	to␣operate."],
 ----------
-Range: (79406,79503) (97)
+Range: (79974,80071) (97)
 "Check␣$self_name␣--help␣or␣the␣man␣page␣(man␣$self_name)
 	to␣see␣what␣options␣are␣available."␣],
 ----------
-Range: (80272,80413) (141)
+Range: (80840,80981) (141)
 qw(camcontrol␣dig␣dmidecode␣fdisk␣file␣glabel␣gpart␣ifconfig␣ipmi-sensors
 			ipmitool␣lsusb␣sudo␣smartctl␣sysctl␣tree␣upower␣uptime␣usbdevs);
 ----------
-Range: (80464,80628) (164)
+Range: (81032,81196) (164)
 qw(blockdev␣dig␣dmidecode␣fdisk␣file␣hddtemp␣ifconfig␣ip␣ipmitool
 			ipmi-sensors␣lsblk␣lsusb␣modinfo␣runlevel␣sensors␣smartctl␣strings␣sudo
 			tree␣upower␣uptime);
 ----------
-Range: (80684,80802) (118)
+Range: (81252,81370) (118)
 "Note:␣IPMI␣sensors␣are␣generally␣only␣found␣on␣servers.␣To␣access
 		that␣data,␣you␣only␣need␣one␣of␣the␣ipmi␣items.";
 ----------
-Range: (81335,81510) (175)
+Range: (81903,82078) (175)
 "Perl␣HTTP::Tiny␣is␣the␣default␣downloader␣tool␣if␣IO::Socket::SSL␣is␣present.
 		See␣--help␣--alt␣40-44␣options␣for␣how␣to␣override␣default␣downloader(s)␣in␣case␣of␣issues.␣";
 ----------
-Range: (81523,81631) (108)
+Range: (82091,82199) (108)
 "If␣dig␣is␣installed,␣it␣is␣the␣default␣for␣WAN␣IP␣data.
 		Strongly␣recommended.␣Dig␣is␣fast␣and␣accurate.";
 ----------
-Range: (81644,81722) (78)
+Range: (82212,82290) (78)
 ".␣However,␣you␣really␣only␣need␣dig␣in␣most␣cases.␣All␣systems␣should␣have␣";
 ----------
-Range: (81867,81957) (90)
+Range: (82435,82525) (90)
 qw(HTTP::Tiny␣IO::Socket::SSL␣Time::HiRes␣Cpanel::JSON::XS␣JSON::XS␣XML::Dumper␣Net::FTP);
 ----------
-Range: (82038,82177) (139)
+Range: (82606,82745) (139)
 "None␣of␣these␣are␣strictly␣required,␣but␣if␣you␣have␣them␣all,␣you␣can␣eliminate
 		some␣recommended␣non␣Perl␣programs␣from␣the␣install.␣";
 ----------
-Range: (82190,82338) (148)
+Range: (82758,82906) (148)
 "HTTP::Tiny␣and␣IO::Socket::SSL␣must␣both␣be␣present␣to␣use␣as␣a␣downloader␣option.
 		For␣json␣export␣Cpanel::JSON::XS␣is␣preferred␣over␣JSON::XS.";
 ----------
-Range: (82450,82551) (101)
+Range: (83018,83119) (101)
 qw(/dev␣/dev/disk/by-id␣/dev/disk/by-label␣/dev/disk/by-path
 			/dev/disk/by-uuid␣/sys/class/dmi/id);
 ----------
-Range: (82733,82921) (188)
+Range: (83301,83489) (188)
 qw(/etc/lsb-release␣/etc/os-release␣/proc/asound/cards
 			/proc/asound/version␣/proc/cpuinfo␣/proc/mdstat␣/proc/meminfo␣/proc/modules
 			/proc/mounts␣/proc/scsi/scsi␣/var/log/Xorg.0.log␣);
 ----------
-Range: (82971,83078) (107)
+Range: (83539,83646) (107)
 "Note␣that␣not␣all␣of␣these␣are␣used␣by␣every␣system,
 		so␣if␣one␣is␣missing␣it's␣usually␣not␣a␣big␣deal.";
 ----------
-Range: (86054,86131) (77)
+Range: (86622,86699) (77)
 #␣Note:␣see␣inxi-perl␣branch␣for␣details:␣docs/recommends-package-manager.txt
 ----------
-Range: (93849,93929) (80)
+Range: (94417,94497) (80)
 }
 #␣note:␣end␣will␣vary,␣but␣should␣always␣be␣treated␣as␣longest␣value␣possible.
 ----------
-Range: (94291,94368) (77)
+Range: (94859,94936) (77)
 }
 }
 
 ####␣-------------------------------------------------------------------
 ----------
-Range: (95856,95933) (77)
+Range: (96424,96501) (77)
 }
 	}
 }
 
 #␣args:␣$1,␣$2,␣version␣numbers␣to␣compare␣by␣turning␣them␣to␣strings
 ----------
-Range: (98045,98126) (81)
+Range: (98613,98694) (81)
 }
 
 #␣receives␣string,␣returns␣boolean␣1␣if␣numeric.␣tr///␣is␣4x␣faster␣than␣regex
 ----------
-Range: (99715,99800) (85)
+Range: (100283,100368) (85)
 }
 
 #␣it's␣almost␣1000␣times␣slower␣to␣load␣these␣each␣time␣program_values␣is␣called!!
 ----------
-Range: (104341,104426) (85)
+Range: (104909,104994) (85)
 #␣note,␣herbstluftwm␣when␣launched␣with␣full␣path␣returns␣full␣path␣in␣version␣string
 ----------
-Range: (106415,106500) (85)
+Range: (106983,107068) (85)
 #␣note,␣mate-session␣when␣launched␣with␣full␣path␣returns␣full␣path␣in␣version␣string
 ----------
-Range: (108419,108498) (79)
+Range: (108987,109066) (79)
 #␣out␣of␣stump,␣2␣--version,␣but␣in␣tries␣to␣start␣new␣wm␣instance␣endless␣hang
 ----------
-Range: (114089,114167) (78)
+Range: (114657,114735) (78)
 #␣5␣-␣0/1␣exit␣version␣loop␣at␣1␣[alt:␣if␣version=file␣replace␣value␣with␣\s];
 ----------
-Range: (115928,116019) (91)
+Range: (116496,116587) (91)
 }
 	#␣These␣will␣mostly␣be␣shells␣that␣require␣running␣the␣shell␣command␣-c␣to␣get␣info␣data
 ----------
-Range: (116137,116216) (79)
+Range: (116705,116784) (79)
 }
 	#␣slow:␣use␣pkg␣manager␣to␣get␣version,␣avoid␣unless␣you␣really␣want␣version
 ----------
-Range: (116780,116869) (89)
+Range: (117348,117437) (89)
 #␣sample:␣dwm-5.8.2,␣©..␣etc,␣why␣no␣space?␣who␣knows.␣Also␣get␣rid␣of␣v␣in␣number␣string
 ----------
-Range: (118158,118238) (80)
+Range: (118726,118806) (80)
 #␣mksh:␣@(#)MIRBSD␣KSH␣R56␣2018/03/09;␣lksh/pdksh:␣@(#)LEGACY␣KSH␣R56␣2018/03/09
 ----------
-Range: (118667,118750) (83)
+Range: (119235,119318) (83)
 '␣-c␣\'printf␣%s␣"$POSH_VERSION"\'␣2>/dev/null'}
 	#␣print␣"$data[0]␣::␣$data[1]\n";
 ----------
-Range: (120197,120278) (81)
+Range: (120765,120846) (81)
 #␣arg:␣1␣-␣string␣to␣be␣right␣left␣trimmed.␣Also␣slices␣off␣\n␣so␣no␣chomp␣needed
 ----------
-Range: (120279,120359) (80)
+Range: (120847,120927) (80)
 #␣this␣thing␣is␣super␣fast,␣no␣need␣to␣log␣its␣times␣etc,␣0.0001␣seconds␣or␣less
 ----------
-Range: (120678,120759) (81)
+Range: (121246,121327) (81)
 #␣note:␣turning␣off␣strict␣refs␣so␣we␣can␣pass␣it␣a␣scalar␣or␣an␣array␣reference.
 ----------
-Range: (122080,122159) (79)
+Range: (122648,122727) (79)
 }
 }
 
 #␣args:␣1␣-␣download␣url,␣not␣including␣file␣name;␣2␣-␣string␣to␣print␣out
 ----------
-Range: (123044,123123) (79)
+Range: (123612,123691) (79)
 "Updating␣$self_name␣in␣$self_path␣using␣$download_id␣as␣download␣source...\n";
 ----------
-Range: (125831,125931) (100)
+Range: (126399,126499) (100)
 print␣"Download␣and␣install␣of␣man␣page␣successful.\nCheck␣to␣make␣sure␣it␣works:␣man␣$self_name\n";
 ----------
-Range: (126325,126425) (100)
+Range: (126893,126993) (100)
 print␣"Download␣and␣install␣of␣man␣page␣successful.\nCheck␣to␣make␣sure␣it␣works:␣man␣$self_name\n";
 ----------
-Range: (126459,126541) (82)
+Range: (127027,127109) (82)
 print␣"Oh␣no!␣Something␣went␣wrong␣downloading␣the␣Man␣file␣at:\n$man_file_url\n";
 ----------
-Range: (128146,128296) (150)
+Range: (128714,128864) (150)
 my␣($b_downloader,$b_help,$b_no_man,$b_no_man_force,$b_sensors_default,
 	$b_recommends,$b_updater,$b_version,$b_use_man,$self_download,␣$download_id);
 ----------
-Range: (145111,145294) (183)
+Range: (145679,145862) (183)
 "$self_name␣supports␣the␣following␣options.␣For␣more␣detailed
 	information,␣see␣man^$self_name.␣If␣you␣start␣$self_name␣with␣no␣arguments,
 	it␣will␣display␣a␣short␣system␣summary."␣],
 ----------
-Range: (145331,145616) (285)
+Range: (145899,146184) (285)
 "You␣can␣use␣these␣options␣alone␣or␣together,
 	to␣show␣or␣add␣the␣item(s)␣you␣want␣to␣see:␣A,␣B,␣C,␣D,␣G,␣I,␣J,␣M,␣N,␣P,
 	R,␣S,␣W,␣d,␣f,␣i,␣j,␣l,␣m,␣n,␣o,␣p,␣r,␣s,␣t,␣u,␣w,␣--slots.
 	If␣you␣use␣them␣with␣-v␣[level],␣-b␣or␣-F,␣$self_name␣will␣add␣the␣requested
 	lines␣to␣the␣output."␣],
 ----------
-Range: (145653,145733) (80)
+Range: (146221,146301) (80)
 "Examples:^$self_name^-v4^-c6␣OR␣$self_name^-bDc^6␣OR
 	$self_name^-FzjJxy^80"␣],
 ----------
-Range: (145826,145974) (148)
+Range: (146394,146542) (148)
 "Adds␣advanced␣sys␣admin␣data␣(only␣works␣with
 	verbose␣or␣line␣output,␣not␣short␣form);␣check␣man␣page␣for␣explanations!;
 	also␣sets␣--extra=3:"␣],
 ----------
-Range: (146085,146311) (226)
+Range: (146653,146879) (226)
 "If␣available:␣CPU␣socket␣type,␣base/boost␣speeds
 	(dmidecode+root/sudo␣required);␣CPU␣vulnerabilities␣(bugs);
 	family,␣model-id,␣stepping␣-␣format:␣hex␣(decimal)␣if␣greater
 	than␣9,␣otherwise␣hex;␣microcode␣-␣format:␣hex."␣],
 ----------
-Range: (146332,146434) (102)
+Range: (146900,147002) (102)
 "If␣available:␣logical␣and␣physical␣block␣sizes;␣drive␣family;
 	USB␣drive␣specifics;␣SMART␣report."␣],
 ----------
-Range: (146452,146690) (238)
+Range: (147020,147258) (238)
 "If␣available:␣Xorg␣Display␣ID,␣Screens␣total,␣default␣Screen,
 	current␣Screen;␣per␣X␣Screen:␣resolution,␣dpi,␣size,␣diagonal;␣per␣Monitor:
 	resolution;␣hz;␣dpi;␣size;␣diagonal;␣list␣of␣alternate␣kernel␣modules/drivers
 	for␣device(s)."␣],
 ----------
-Range: (146708,146830) (122)
+Range: (147276,147398) (122)
 "As␣well␣as␣per␣package␣manager␣counts,␣also␣adds␣total
 	number␣of␣lib␣files␣found␣for␣each␣package␣manager␣if␣not␣-r."␣],
 ----------
-Range: (146854,146953) (99)
+Range: (147422,147521) (99)
 "For␣swap␣(if␣available):␣swappiness␣and␣vfs␣cache
 	pressure,␣and␣if␣values␣are␣default␣or␣not."␣],
 ----------
-Range: (147070,147194) (124)
+Range: (147638,147762) (124)
 "If␣available:␣raw␣size␣of␣${partition_string}s,
 	percent␣available␣for␣user,␣block␣size␣of␣file␣system␣(root␣required)."␣],
 ----------
-Range: (147474,147570) (96)
+Range: (148042,148138) (96)
 "System␣battery␣info,␣including␣charge␣and␣condition,␣plus
 	extra␣info␣(if␣battery␣present)."␣],
 ----------
-Range: (147595,147724) (129)
+Range: (148163,148292) (129)
 "Set␣color␣scheme␣(0-42).␣For␣piped␣or␣redirected␣output,
 	you␣must␣use␣an␣explicit␣color␣selector.␣Example:^$self_name^-c^11"␣],
 ----------
-Range: (147740,147861) (121)
+Range: (148308,148429) (121)
 "Color␣selectors␣let␣you␣set␣the␣config␣file␣value␣for␣the
 	selection␣(NOTE:␣IRC␣and␣global␣only␣show␣safe␣color␣set)"␣],
 ----------
-Range: (148175,148254) (79)
+Range: (148743,148822) (79)
 "Global␣-␣Overrides/removes␣all␣settings.␣Setting␣specific
 	removes␣global."␣],
 ----------
-Range: (148277,148358) (81)
+Range: (148845,148926) (81)
 "CPU␣output,␣including␣per␣CPU␣clock␣speed␣and␣max
 	CPU␣speed␣(if␣available)."␣],
 ----------
-Range: (148491,148634) (143)
+Range: (149059,149202) (143)
 "Hard␣Disk␣info,␣including␣total␣storage␣and␣details
 	for␣each␣disk.␣Disk␣total␣used␣percentage␣includes␣swap␣${partition_string}
 	size(s)."␣],
 ----------
-Range: (148754,148941) (187)
+Range: (149322,149509) (187)
 "Full␣output.␣Includes␣all␣Upper␣Case␣line␣letters
 	except␣-W,␣plus␣--swap,␣-s␣and␣-n.␣Does␣not␣show␣extra␣verbose␣options␣such
 	as␣-d␣-f␣-i␣-l␣-m␣-o␣-p␣-r␣-t␣-u␣-x,␣unless␣specified."␣],
 ----------
-Range: (148969,149114) (145)
+Range: (149537,149682) (145)
 "Graphics␣info␣(card(s),␣driver,␣display␣protocol
 	(if␣available),␣display␣server/Wayland␣compositor,␣resolution,␣renderer,
 	OpenGL␣version)."␣],
 ----------
-Range: (149136,149315) (179)
+Range: (149704,149883) (179)
 "WAN␣IP␣address␣and␣local␣interfaces␣(requires␣ifconfig
 	or␣ip␣network␣tool).␣Triggers␣-n.␣Not␣shown␣with␣-F␣for␣user␣security␣reasons.
 	You␣shouldn't␣paste␣your␣local/WAN␣IP."␣],
 ----------
-Range: (149339,149441) (102)
+Range: (149907,150009) (102)
 "General␣info,␣including␣processes,␣uptime,␣memory,
 	IRC␣client␣or␣shell␣type,␣$self_name␣version."␣],
 ----------
-Range: (149711,149972) (261)
+Range: (150279,150540) (261)
 "Memory␣(RAM)␣data.␣Requires␣root.␣Numbers␣of
 	devices␣(slots)␣supported␣and␣individual␣memory␣devices␣(sticks␣of␣memory␣etc).
 	For␣devices,␣shows␣device␣locator,␣size,␣speed,␣type␣(e.g.␣DDR3).
 	If␣neither␣-I␣nor␣-tm␣are␣selected,␣also␣shows␣RAM␣used/total."␣],
 ----------
-Range: (150085,150192) (107)
+Range: (150653,150760) (107)
 "Memory␣(RAM)␣data.␣Show␣only␣short␣Memory␣RAM␣report,
 	number␣of␣arrays,␣slots,␣modules,␣and␣RAM␣type."␣],
 ----------
-Range: (150219,150521) (302)
+Range: (150787,151089) (302)
 "Machine␣data.␣Device␣type␣(desktop,␣server,␣laptop,
 	VM␣etc.),␣motherboard,␣BIOS␣and,␣if␣␣␣␣present,␣system␣builder␣(e.g.␣Lenovo).
 	Shows␣UEFI/BIOS/UEFI␣[Legacy].␣Older␣systems/kernels␣without␣the␣required␣/sys
 	data␣can␣use␣dmidecode␣instead,␣run␣as␣root.␣Dmidecode␣can␣be␣forced␣with␣--dmidecode"␣],
 ----------
-Range: (150557,150648) (91)
+Range: (151125,151216) (91)
 "Advanced␣Network␣card␣info.␣Triggers␣-N.␣Shows
 	interface,␣speed,␣MAC␣id,␣state,␣etc.␣"␣],
 ----------
-Range: (150733,150993) (260)
+Range: (151301,151561) (260)
 "Unmounted␣$partition_string␣info␣(includes␣UUID
 	and␣Label␣if␣available).␣Shows␣file␣system␣type␣if␣you␣have␣lsblk␣installed
 	(Linux)␣or,␣for␣BSD/GNU␣Linux,␣if␣'file'␣installed␣and␣you␣are␣root␣or␣if
 	you␣have␣added␣to␣/etc/sudoers␣(sudo␣v.␣1.7␣or␣newer)."␣],
 ----------
-Range: (151100,151191) (91)
+Range: (151668,151759) (91)
 "Full␣$partition_string␣information␣(-P␣plus␣all␣other
 	detected␣${partition_string}s)."␣],
 ----------
-Range: (151221,151443) (222)
+Range: (151789,152011) (222)
 "Basic␣$partition_string␣info.␣Shows,␣if␣detected:
 	/␣/boot␣/home␣/opt␣/tmp␣/usr␣/usr/home␣/var␣/var/log␣/var/tmp.␣Swap
 	${partition_string}s␣show␣if␣--swap␣is␣not␣used.␣Use␣-p␣to␣see␣all
 	mounted␣${partition_string}s."␣],
 ----------
-Range: (151468,151630) (162)
+Range: (152036,152198) (162)
 "Distro␣repository␣data.␣Supported␣repo␣types:␣APK,
 	APT,␣CARDS,␣EOPKG,␣PACMAN,␣PACMAN-G2,␣PISI,␣PORTAGE,␣PORTS␣(BSDs),␣SLACKPKG,
 	TCE,␣URPMQ,␣XBPS,␣YUM/ZYPP."␣],
 ----------
-Range: (151654,151788) (134)
+Range: (152222,152356) (134)
 "RAID␣data.␣Shows␣RAID␣devices,␣states,␣levels,
 	and␣components.␣md-raid:␣If␣device␣is␣resyncing,␣also␣shows␣resync␣progress␣line."␣],
 ----------
-Range: (151815,152019) (204)
+Range: (152383,152587) (204)
 "Sensors␣output␣(if␣sensors␣installed/configured):
 	mobo/CPU/GPU␣temp;␣detected␣fan␣speeds.␣GPU␣temp␣only␣for␣Fglrx/Nvidia␣drivers.
 	Nvidia␣shows␣screen␣number␣for␣>␣1␣screen.␣IPMI␣sensors␣if␣present."␣],
 ----------
-Range: (152119,152203) (84)
+Range: (152687,152771) (84)
 "System␣info:␣host␣name,␣kernel,␣desktop␣environment
 	(if␣in␣X/Wayland),␣distro."␣],
 ----------
-Range: (152232,152418) (186)
+Range: (152800,152986) (186)
 "Processes.␣Requires␣extra␣options:␣c␣(CPU),␣m
 	(memory),␣cm␣(CPU+memory).␣If␣followed␣by␣numbers␣1-x,␣shows␣that␣number
 	of␣processes␣for␣each␣type␣(default:␣5;␣if␣in␣IRC,␣max:␣5).␣"␣],
 ----------
-Range: (152434,152516) (82)
+Range: (153002,153084) (82)
 "Make␣sure␣that␣there␣is␣no␣space␣between␣letters␣and
 	numbers␣(e.g.^-t^cm10)."␣],
 ----------
-Range: (152643,152745) (102)
+Range: (153211,153313) (102)
 "Set␣$self_name␣verbosity␣level␣(0-8).
 	Should␣not␣be␣used␣with␣-b␣or␣-F.␣Example:␣$self_name^-v^4"␣],
 ----------
-Range: (152878,153031) (153)
+Range: (153446,153599) (153)
 "Networking␣card␣(-N),␣Machine␣(-M),␣Battery␣(-B;␣if␣present),
 	and,␣if␣present,␣basic␣RAID␣(devices␣only;␣notes␣if␣inactive).
 	Same␣as␣$self_name^-b"␣],
 ----------
-Range: (153131,153245) (114)
+Range: (153699,153813) (114)
 "$partition_string_u␣size/used␣data␣(-P)␣for
 	(if␣present)␣/,␣/home,␣/var/,␣/boot.␣Shows␣full␣disk␣data␣(-D).␣"␣],
 ----------
-Range: (153262,153429) (167)
+Range: (153830,153997) (167)
 "Audio␣card␣(-A),␣sensors␣(-s),␣memory/RAM␣(-m),
 	$partition_string␣label^(-l),␣full␣swap␣(-j),␣UUID^(-u),␣short␣form
 	of␣optical␣drives,␣standard␣RAID␣data␣(-R).␣"␣],
 ----------
-Range: (153446,153570) (124)
+Range: (154014,154138) (124)
 "Full␣$partition_string␣(-p),
 	unmounted␣$partition_string␣(-o),␣optical␣drive␣(-d),␣USB␣(-J),
 	full␣RAID;␣triggers␣-xx."␣],
 ----------
-Range: (153644,153731) (87)
+Range: (154212,154299) (87)
 "Everything␣available,␣including␣repos␣(-r),␣processes
 	(-tcm),␣PCI␣slots␣(--slots)."],
 ----------
-Range: (153887,153987) (100)
+Range: (154455,154555) (100)
 "Local␣weather␣data/time.␣To␣check␣an␣alternate
 		location,␣see␣-W.␣NO␣AUTOMATED␣QUERIES␣ALLOWED!"],
 ----------
-Range: (154024,154426) (402)
+Range: (154592,154994) (402)
 "[location]␣Supported␣options␣for
 		[location]:␣postal␣code[,country/country␣code];␣city,␣state␣(USA)/country
 		(country/two␣character␣country␣code);␣latitude,␣longitude.␣Only␣use␣if␣you
@@ -573,673 +573,673 @@ Range: (154024,154426) (402)
 		only␣ASCII␣characters,␣replace␣spaces␣in␣city/state/country␣names␣with␣'+'.
 		Example:^$self_name^-W^[new+york,ny^london,gb^madrid,es]"],
 ----------
-Range: (154459,154540) (81)
+Range: (155027,155108) (81)
 "[1-9]␣Change␣weather␣data␣source.␣1-4␣generally
 		active,␣5-9␣check.␣See␣man."],
 ----------
-Range: (154571,154670) (99)
+Range: (155139,155238) (99)
 "Set␣weather␣units␣to␣metric␣(m),␣imperial␣(i),
 		metric/imperial␣(mi),␣or␣imperial/metric␣(im)."],
 ----------
-Range: (154735,154828) (93)
+Range: (155303,155396) (93)
 "Adds␣the␣following␣extra␣data␣(only␣works␣with
 	verbose␣or␣line␣output,␣not␣short␣form):"␣],
 ----------
-Range: (154846,154983) (137)
+Range: (155414,155551) (137)
 "Specific␣vendor/product␣information␣(if␣relevant);
 	PCI␣Bus␣ID/USB␣ID␣number␣of␣card;␣Version/port(s)/driver␣version␣(if␣available)."␣],
 ----------
-Range: (155001,155105) (104)
+Range: (155569,155673) (104)
 "Vendor/model,␣status␣(if␣available);␣attached␣devices
 	(e.g.␣wireless␣mouse,␣keyboard,␣if␣present)."␣],
 ----------
-Range: (155123,155287) (164)
+Range: (155691,155855) (164)
 "CPU␣$flags␣(short␣list,␣use␣-f␣to␣see␣full␣list),␣Bogomips
 	on␣CPU;␣CPU␣microarchitecture␣+␣	revision␣(if␣found,␣or␣unless␣--admin,
 	then␣shows␣as␣'stepping')."␣],
 ----------
-Range: (155398,155591) (193)
+Range: (155966,156159) (193)
 "HDD␣temp␣with␣disk␣data␣if␣you␣have␣hddtemp␣installed,
 	if␣you␣are␣root,␣or␣if␣you␣have␣added␣to␣/etc/sudoers␣(sudo␣v.␣1.7␣or␣newer).
 	Example:^<username>^ALL^=^NOPASSWD:^/usr/sbin/hddtemp"␣],
 ----------
-Range: (155609,155779) (170)
+Range: (156177,156347) (170)
 "Specific␣vendor/product␣information␣(if␣relevant);
 	PCI␣Bus␣ID/USB␣ID␣number␣of␣card;␣Direct␣rendering␣status␣(in␣X);␣Screen
 	number␣GPU␣is␣running␣on␣(Nvidia␣only)."␣],
 ----------
-Range: (155797,155925) (128)
+Range: (156365,156493) (128)
 "For␣IPv6,␣show␣additional␣scope␣addresses:␣Global,␣Site,
 	Temporary,␣Unknown.␣See␣--limit␣for␣large␣counts␣of␣IP␣addresses."␣],
 ----------
-Range: (155943,156205) (262)
+Range: (156511,156773) (262)
 "Default␣system␣GCC.␣With␣-xx,␣also␣shows␣other␣installed
 	GCC␣versions.␣If␣running␣in␣shell,␣not␣in␣IRC␣client,␣shows␣shell␣version
 	number,␣if␣detected.␣Init/RC␣type␣and␣runlevel␣(if␣available).␣Total
 	count␣of␣all␣packages␣discovered␣in␣system␣and␣not␣-r."␣],
 ----------
-Range: (156356,156493) (137)
+Range: (156924,157061) (137)
 "Specific␣vendor/product␣information␣(if␣relevant);
 	PCI␣Bus␣ID/USB␣ID␣number␣of␣card;␣Version/port(s)/driver␣version␣(if␣available)."␣],
 ----------
-Range: (156552,156732) (180)
+Range: (157120,157300) (180)
 "md-raid:␣second␣RAID␣Info␣line␣with␣extra␣data:
 	blocks,␣chunk␣size,␣bitmap␣(if␣present).␣Resync␣line,␣shows␣blocks
 	synced/total␣blocks.␣Hardware␣RAID␣driver␣version,␣bus␣ID."␣],
 ----------
-Range: (157086,157168) (82)
+Range: (157654,157736) (82)
 "Wind␣speed␣and␣direction,␣humidity,␣pressure,
 		and␣time␣zone,␣if␣available."␣]);
 ----------
-Range: (157231,157317) (86)
+Range: (157799,157885) (86)
 "Show␣extra,␣extra␣data␣(only␣works␣with␣verbose
 	or␣line␣output,␣not␣short␣form):"␣],
 ----------
-Range: (157620,157917) (297)
+Range: (158188,158485) (297)
 "Chip␣vendor:product␣ID␣for␣each␣video␣card;␣OpenGL
 	compatibility␣version,␣if␣free␣drivers␣and␣available;␣Xorg␣compositor;
 	alternate␣Xorg␣drivers␣(if␣available).␣Alternate␣means␣driver␣is␣on␣automatic
 	driver␣check␣list␣of␣Xorg␣for␣the␣card␣vendor,␣but␣is␣not␣installed␣on␣system;
 	Xorg␣dpi."␣],
 ----------
-Range: (157935,158170) (235)
+Range: (158503,158738) (235)
 "Other␣detected␣installed␣gcc␣versions␣(if␣present).␣System
 	default␣runlevel.␣Adds␣parent␣program␣(or␣tty)␣for␣shell␣info␣if␣not␣in
 	IRC.␣Adds␣Init␣version␣number,␣RC␣(if␣found).␣Adds␣per␣package␣manager
 	package␣counts␣if␣not␣-r."␣],
 ----------
-Range: (158536,158655) (119)
+Range: (159104,159223) (119)
 "md-raid:␣Superblock␣(if␣present),␣algorithm.␣If␣resync,
 	shows␣progress␣bar.␣Hardware␣RAID␣Chip␣vendor:product␣ID."␣],
 ----------
-Range: (158726,158888) (162)
+Range: (159294,159456) (162)
 "Display␣manager␣(dm)␣in␣desktop␣output␣(e.g.␣kdm,
 	gdm3,␣lightdm);␣active␣window␣manager␣if␣detected;␣desktop␣toolkit,
 	if␣available␣(Xfce/KDE/Trinity␣only)."␣],
 ----------
-Range: (159008,159126) (118)
+Range: (159576,159694) (118)
 "Snow,␣rain,␣precipitation,␣(last␣observed␣hour),
 		cloud␣cover,␣wind␣chill,␣dew␣point,␣heat␣index,␣if␣available."␣]);
 ----------
-Range: (159190,159283) (93)
+Range: (159758,159851) (93)
 "Show␣extra,␣extra,␣extra␣data␣(only␣works
 	with␣verbose␣or␣line␣output,␣not␣short␣form):"␣],
 ----------
-Range: (159404,159526) (122)
+Range: (159972,160094) (122)
 "CPU␣boost␣(turbo)␣enabled/disabled,␣if␣present;
 	CPU␣voltage,␣external␣clock␣speed␣(if␣root␣and␣dmidecode␣installed)."␣],
 ----------
-Range: (159544,159645) (101)
+Range: (160112,160213) (101)
 "Firmware␣rev.␣if␣available;␣partition␣scheme,␣in␣some␣cases;␣disk
 	rotation␣speed␣(if␣detected)."␣],
 ----------
-Range: (159663,159816) (153)
+Range: (160231,160384) (153)
 "For␣'Shell:'␣adds␣([su|sudo|login])␣to␣shell␣name␣if␣present;
 	adds␣default␣shell+version␣if␣different;␣for␣'running␣in:'␣adds␣(SSH)␣if␣SSH␣session."␣],
 ----------
-Range: (159941,160093) (152)
+Range: (160509,160661) (152)
 "Width␣of␣memory␣bus,␣data␣and␣total␣(if␣present␣and␣greater
 	than␣data);␣Detail␣for␣Type,␣if␣present;␣module␣voltage,␣if␣available;␣serial
 	number."␣],
 ----------
-Range: (160148,160357) (209)
+Range: (160716,160925) (209)
 "zfs-raid:␣portion␣allocated␣(used)␣by␣RAID␣devices/arrays.
 	md-raid:␣system␣md-raid␣support␣types␣(kernel␣support,␣read␣ahead,␣RAID␣events).
 	Hardware␣RAID␣rev,␣ports,␣specific␣vendor/product␣information."␣],
 ----------
-Range: (160375,160539) (164)
+Range: (160943,161107) (164)
 "Panel/tray/bar/dock␣info␣in␣desktop␣output,␣if␣in␣X␣(like␣lxpanel,
 	xfce4-panel,␣mate-panel);␣(if␣available)␣dm␣version␣number,␣window␣manager
 	version␣number."␣],
 ----------
-Range: (160619,160724) (105)
+Range: (161187,161292) (105)
 "Location␣(uses␣-z/irc␣filter),␣weather␣observation
 		time,␣altitude,␣sunrise/sunset,␣if␣available."␣]␣);
 ----------
-Range: (160784,161009) (225)
+Range: (161352,161577) (225)
 "Output␣line␣width␣max␣(integer␣>=␣80).␣Overrides␣IRC/Terminal
 	settings␣or␣actual␣widths.␣If␣no␣integer␣give,␣defaults␣to␣80.␣-1␣removes␣line␣lengths.
 	1␣switches␣output␣to␣1␣key/value␣pair␣per␣line.␣Example:^inxi^-y^130"␣],
 ----------
-Range: (161035,161180) (145)
+Range: (161603,161748) (145)
 "Adds␣security␣filters␣for␣IP/MAC␣addresses,␣serial␣numbers,
 	location␣(-w),␣user␣home␣directory␣name,␣host␣item.␣Default␣on␣for␣IRC␣clients."␣],
 ----------
-Range: (161313,161407) (94)
+Range: (161881,161975) (94)
 "Override␣for␣output␣filters.␣Useful␣for
 	debugging␣networking␣issues␣in␣IRC,␣for␣example."␣],
 ----------
-Range: (161638,161803) (165)
+Range: (162206,162371) (165)
 "Checks␣$self_name␣application␣dependencies␣+␣recommends,
 ␣	and␣directories,␣then␣shows␣what␣package(s)␣you␣need␣to␣install␣to␣add␣support
 ␣	for␣that␣feature."␣]
 	);
 ----------
-Range: (161886,162125) (239)
+Range: (162454,162693) (239)
 "Auto-update␣$self_name.␣Will␣also␣install/update␣man
 		page.␣Note:␣if␣you␣installed␣as␣root,␣you␣must␣be␣root␣to␣update,␣otherwise
 		user␣is␣fine.␣Man␣page␣installs␣require␣root.␣No␣arguments␣downloads␣from
 		main␣$self_name␣git␣repo."␣],
 ----------
-Range: (162384,162517) (133)
+Range: (162952,163085) (133)
 "Get␣a␣version␣of␣$self_name␣from␣your␣own␣server.
 		Use␣the␣full␣download␣path,␣e.g.^$self_name^-U^https://myserver.com/inxi"␣]
 		);
 ----------
-Range: (163004,163096) (92)
+Range: (163572,163664) (92)
 "Bypass␣Curl,␣Fetch,␣and␣Wget␣as␣downloader␣options.␣Forces
 	Perl␣if␣HTTP::Tiny␣present."␣],
 ----------
-Range: (163298,163377) (79)
+Range: (163866,163945) (79)
 "Force␣use␣of␣dmidecode␣data␣instead␣of␣/sys␣where␣relevant
 	(e.g.␣-M,␣-B)."␣],
 ----------
-Range: (163629,163720) (91)
+Range: (164197,164288) (91)
 "[-1;␣1-x]␣Set␣max␣output␣limit␣of␣IP␣addresses␣for␣-i
 	(default␣10;␣-1␣removes␣limit)."␣],
 ----------
-Range: (164293,164388) (95)
+Range: (164861,164956) (95)
 "Skip␣SSL␣certificate␣checks␣for␣all␣downloader␣actions
 	(Wget/Fetch/Curl/Perl-HTTP::Tiny)."␣],
 ----------
-Range: (164413,164509) (96)
+Range: (164981,165077) (96)
 "Skip␣internal␣program␣use␣of␣sudo␣features␣(not␣related
 	to␣starting␣$self_name␣with␣sudo)."␣],
 ----------
-Range: (164533,164619) (86)
+Range: (165101,165187) (86)
 "[json|screen|xml]␣Change␣data␣output␣type.␣Requires␣--output-file
 	if␣not␣screen."␣],
 ----------
-Range: (164743,164876) (133)
+Range: (165311,165444) (133)
 "[dev-base|fs|id|label|percent-used|size|uuid|used]
 	Change␣sort␣order␣of␣${partition_string}␣output.␣See␣man␣page␣for␣specifics."␣],
 ----------
-Range: (164909,165000) (91)
+Range: (165477,165568) (91)
 "Removes␣configuration␣item␣SENSORS_USE␣and␣SENSORS_EXCLUDE.
 	Same␣as␣default␣behavior."␣],
 ----------
-Range: (165033,165145) (112)
+Range: (165601,165713) (112)
 "[sensor[s]␣name,␣comma␣separated]␣Exclude␣supplied␣sensor
 	array[s]␣for␣-s␣output␣(lm-sensors,␣Linux␣only)."␣],
 ----------
-Range: (165174,165287) (113)
+Range: (165742,165855) (113)
 "[sensor[s]␣name,␣comma␣separated]␣Use␣only␣supplied␣sensor
 	array[s]␣for␣-s␣output␣(lm-sensors,␣Linux␣only)."␣],
 ----------
-Range: (165310,165488) (178)
+Range: (165878,166056) (178)
 "[0-x.x]␣Change␣CPU␣sleep␣time,␣in␣seconds,␣for␣-C
 	(default:^$cpu_sleep).␣Allows␣system␣to␣catch␣up␣and␣show␣a␣more␣accurate␣CPU
 	use.␣Example:^$self_name^-Cxxx^--sleep^0.15"␣],
 ----------
-Range: (165509,165838) (329)
+Range: (166077,166406) (329)
 "Forces␣irc␣flag␣to␣false.␣Generally␣useful␣if␣$self_name␣is␣running
 	inside␣of␣another␣tool␣like␣Chef␣or␣MOTD␣and␣returns␣corrupted␣color␣codes.␣Please␣see
 	man␣page␣or␣file␣an␣issue␣if␣you␣need␣to␣use␣this␣flag.␣Must␣use␣-y␣[width]␣option␣if
 	you␣want␣a␣specific␣output␣width.␣Always␣put␣this␣option␣first␣in␣an␣option␣list."],
 ----------
-Range: (166038,166208) (170)
+Range: (166606,166776) (170)
 "[URL]␣Skips␣dig,␣uses␣supplied␣URL␣for␣WAN␣IP␣(-i).
 	URL␣output␣must␣end␣in␣the␣IP␣address.␣See␣man.
 	Example:^$self_name^-i^--wan-ip-url^https://yoursite.com/ip.php"␣],
 ----------
-Range: (166708,166886) (178)
+Range: (167276,167454) (178)
 "The␣following␣create␣a␣tar.gz␣file␣of␣system␣data,␣plus␣$self_name
 	output.␣To␣automatically␣upload␣debugger␣data␣tar.gz␣file
 	to␣ftp.techpatterns.com:␣$self_name^--debug^21"␣],
 ----------
-Range: (166904,167057) (153)
+Range: (167472,167625) (153)
 "Full␣system␣data␣collection:␣/sys;␣xorg␣conf␣and␣log␣data,␣xrandr,
 	xprop,␣xdpyinfo,␣glxinfo␣etc.;␣data␣from␣dev,␣disks,
 	${partition_string}s,␣etc."␣],
 ----------
-Range: (167075,167211) (136)
+Range: (167643,167779) (136)
 "Upload␣debugger␣dataset␣to␣$self_name␣debugger␣server
 	automatically,␣removes␣debugger␣data␣directory,␣leaves␣tar.gz␣debugger␣file."␣],
 ----------
-Range: (167229,167361) (132)
+Range: (167797,167929) (132)
 "Upload␣debugger␣dataset␣to␣$self_name␣debugger␣server
 	automatically,␣removes␣debugger␣data␣directory␣and␣debugger␣tar.gz␣file."␣],
 ----------
-Range: (167931,168140) (209)
+Range: (168499,168708) (209)
 "Use␣with␣--debugger␣21␣to␣trigger␣an␣alternate␣FTP␣server␣for␣upload.
 	Format:^[ftp.xx.xx/yy].␣Must␣include␣a␣remote␣directory␣to␣upload␣to.
 	Example:^$self_name^--debug^21^--ftp^ftp.myserver.com/incoming"␣],
 ----------
-Range: (168679,168759) (80)
+Range: (169247,169327) (80)
 #␣in␣irc␣clients␣which␣would␣only␣matter␣if␣user␣starts␣inxi␣with␣-!␣30␣override
 ----------
-Range: (168940,169021) (81)
+Range: (169508,169589) (81)
 }
 	#␣strange␣output␣/./␣ending,␣but␣just␣trim␣it␣off,␣I␣don't␣know␣how␣it␣happens
 ----------
-Range: (169349,169433) (84)
+Range: (169917,170001) (84)
 "Forked␣from␣Infobash␣3.02:␣Copyright^(C)^2005-2007^Michiel^de^Boer^aka^locsmif."␣],
 ----------
-Range: (169931,170225) (294)
+Range: (170499,170793) (294)
 "This␣program␣is␣free␣software;␣you␣can␣redistribute␣it␣and/or␣modify
 		it␣under␣the␣terms␣of␣the␣GNU␣General␣Public␣License␣as␣published␣by␣the␣Free␣Software
 		Foundation;␣either␣version␣3␣of␣the␣License,␣or␣(at␣your␣option)␣any␣later␣version.
 		(https://www.gnu.org/licenses/gpl.html)"␣]
 		);
 ----------
-Range: (172557,172656) (99)
+Range: (173125,173224) (99)
 "Client:␣$client{'name'}␣::␣version:␣$client{'version'}␣::␣konvi:␣$client{'konvi'}␣::␣PPID:␣$ppid";
 ----------
-Range: (173600,173683) (83)
+Range: (174168,174251) (83)
 #␣the␣hexchat␣author␣decided␣to␣make␣--version/-v␣return␣a␣gtk␣dialogue␣box,␣lol...
 ----------
-Range: (173685,173766) (81)
+Range: (174253,174334) (81)
 #␣so␣we␣need␣to␣read␣the␣actual␣config␣file␣for␣hexchat.␣Note␣that␣older␣hexchats
 ----------
-Range: (173768,173855) (87)
+Range: (174336,174423) (87)
 #␣used␣xchat␣config␣file,␣so␣test␣first␣for␣default,␣then␣legacy.␣Because␣it's␣possible
 ----------
-Range: (174523,174607) (84)
+Range: (175091,175175) (84)
 }
 	#␣note:␣see␣legacy␣inxi␣konvi␣logic␣if␣we␣need␣to␣restore␣any␣of␣the␣legacy␣code.
 ----------
-Range: (175071,175150) (79)
+Range: (175639,175718) (79)
 }
 	#␣then␣do␣some␣perl␣type␣searches,␣do␣this␣last␣since␣it's␣a␣wildcard␣search
 ----------
-Range: (175246,175330) (84)
+Range: (175814,175898) (84)
 #␣Dynamic␣runpath␣detection␣is␣too␣complex␣with␣KSirc,␣because␣KSirc␣is␣started␣from
 ----------
-Range: (175333,175424) (91)
+Range: (175901,175992) (91)
 #␣kdeinit.␣/proc/<pid␣of␣the␣grandparent␣of␣this␣process>/exe␣is␣a␣link␣to␣/usr/bin/kdeinit
 ----------
-Range: (175427,175523) (96)
+Range: (175995,176091) (96)
 #␣with␣one␣parameter␣which␣contains␣parameters␣separated␣by␣spaces(??),␣first␣param␣being␣KSirc.
 ----------
-Range: (175526,175618) (92)
+Range: (176094,176186) (92)
 #␣Then,␣KSirc␣runs␣dsirc␣as␣the␣perl␣irc␣script␣and␣wraps␣around␣it.␣When␣/exec␣is␣executed,
 ----------
-Range: (175621,175709) (88)
+Range: (176189,176277) (88)
 #␣dsirc␣is␣the␣program␣that␣runs␣inxi,␣therefore␣that␣is␣the␣parent␣process␣that␣we␣see.
 ----------
-Range: (175712,175803) (91)
+Range: (176280,176371) (91)
 #␣You␣can␣imagine␣how␣hosed␣I␣am␣if␣I␣try␣to␣make␣inxi␣find␣out␣dynamically␣with␣which␣path
 ----------
-Range: (175806,175902) (96)
+Range: (176374,176470) (96)
 #␣KSirc␣was␣run␣by␣browsing␣up␣the␣process␣tree␣in␣/proc.␣That␣alone␣is␣straightjacket␣material.
 ----------
-Range: (177644,177728) (84)
+Range: (178212,178296) (84)
 #␣this␣is␣a␣hack␣to␣try␣to␣show␣konversation␣if␣inxi␣is␣running␣but␣started␣via␣/cmd
 ----------
-Range: (177782,177859) (77)
+Range: (178350,178427) (77)
 #␣main::print_line("konvi:␣"␣.␣scalar␣grep␣{␣$_␣=~␣/konversation/␣}␣@ps_cmd);
 ----------
-Range: (178222,178306) (84)
+Range: (178790,178874) (84)
 }
 	##␣NOTE:␣supybot␣only␣appears␣in␣ps␣aux␣using␣'SHELL'␣command;␣the␣'CALL'␣command
 ----------
-Range: (178308,178393) (85)
+Range: (178876,178961) (85)
 ##␣gives␣the␣user␣system␣irc␣priority,␣and␣you␣don't␣see␣supybot␣listed,␣so␣use␣SHELL
 ----------
-Range: (179286,179367) (81)
+Range: (179854,179935) (81)
 "namep:␣$client{'name-print'}␣name:␣$client{'name'}␣version:␣$client{'version'}";
 ----------
-Range: (179427,179505) (78)
+Range: (179995,180073) (78)
 }
 ##␣try␣to␣infer␣the␣use␣of␣Konversation␣>=␣1.2,␣which␣shows␣$PPID␣improperly
 ----------
-Range: (179506,179603) (97)
+Range: (180074,180171) (97)
 ##␣no␣known␣method␣of␣finding␣Konvi␣>=␣1.2␣as␣parent␣process,␣so␣we␣look␣to␣see␣if␣it␣is␣running,
 ----------
-Range: (179604,179694) (90)
+Range: (180172,180262) (90)
 ##␣and␣all␣other␣irc␣clients␣are␣not␣running.␣As␣of␣2014-03-25␣this␣isn't␣used␣in␣my␣cases
 ----------
-Range: (179873,180030) (157)
+Range: (180441,180598) (157)
 #␣main::log_data('data',"name:␣$client{'name'}␣::␣qdb:␣$client{'qdbus'}␣::␣version:␣$client{'version'}␣::␣konvi:␣$client{'konvi'}␣::␣PPID:␣$ppid")␣if␣$b_log;
 ----------
-Range: (180771,180850) (79)
+Range: (181339,181418) (79)
 #␣note:␣we␣need␣to␣change␣this␣back␣to␣a␣single␣dot␣number,␣like␣1.3,␣not␣1.3.2
 ----------
-Range: (180988,181120) (132)
+Range: (181556,181688) (132)
 "name:␣$client{'name'}␣name␣print:␣$client{'name-print'}
 	qdb:␣$client{'qdbus'}␣version:␣$konvi_version␣konvi:␣$konvi␣PID:␣$pid")␣if
 ----------
-Range: (181245,181339) (94)
+Range: (181813,181907) (94)
 #␣	system('qdbus␣org.kde.konversation',␣'/irc',␣'say',␣$client{'dserver'},␣$client{'dtarget'},
 ----------
-Range: (182026,182111) (85)
+Range: (182594,182679) (85)
 #␣there's␣no␣current␣kde␣5␣konvi␣config␣tool␣that␣we're␣aware␣of.␣Correct␣if␣changes.
 ----------
-Range: (182351,182436) (85)
+Range: (182919,183004) (85)
 }
 	#␣The␣section␣below␣is␣on␣request␣of␣Argonel␣from␣the␣Konversation␣developer␣team:
 ----------
-Range: (182438,182521) (83)
+Range: (183006,183089) (83)
 #␣it␣sources␣config␣files␣like␣$HOME/.kde/share/apps/konversation/scripts/inxi.conf
 ----------
-Range: (182667,182744) (77)
+Range: (183235,183312) (77)
 }
 }
 
 ########################################################################
 ----------
-Range: (184207,184548) (341)
+Range: (184775,185116) (341)
 s/chipset|company|components|computing|computer|corporation|communications|electronics|electrical|electric|gmbh|group|incorporation|industrial|international|\bnee\b|revision|semiconductor|software|technologies|technology|ltd\.|<ltd>|\bltd\b|inc\.|<inc>|\binc\b|intl\.|co\.|<co>|corp\.|<corp>|\(tm\)|\(r\)|®|\(rev␣..\)|\'|\"|\sinc\s*$|\?//gi;
 ----------
-Range: (184885,184962) (77)
+Range: (185453,185530) (77)
 '^Base␣Board␣.*|^Chassis␣.*|empty|Undefined.*|.*O\.E\.M\..*|.*OEM.*|^Not␣.*';
 ----------
-Range: (185054,185130) (76)
+Range: (185622,185698) (76)
 '|\[Empty\]|<Bad␣Index>|<OUT␣OF␣SPEC>|Default␣string|^\.\.$|Manufacturer.*';
 ----------
-Range: (186838,186919) (81)
+Range: (187406,187487) (81)
 'compatible\scontroller|\b(device|controller|connection|multimedia)\b|\([^)]+\)';
 ----------
-Range: (186921,186998) (77)
+Range: (187489,187566) (77)
 #␣\[[^\]]+\]$|␣not␣trimming␣off␣ending␣[...]␣initial␣type␣filters␣removes␣end
 ----------
-Range: (189920,190001) (81)
+Range: (190488,190569) (81)
 "No␣machine␣data:␣try␣newer␣kernel.␣Is␣dmidecode␣installed?␣Try␣-M␣--dmidecode.",
 ----------
-Range: (190037,190118) (81)
+Range: (190605,190686) (81)
 "No␣machine␣data:␣try␣newer␣kernel.␣Is␣dmidecode␣installed?␣Try␣-M␣--dmidecode.",
 ----------
-Range: (190331,190407) (76)
+Range: (190899,190975) (76)
 "Output␣throttled.␣IPs:␣$id;␣Limit:␣$limit;␣Override:␣--limit␣[1-x;-1␣all]",
 ----------
-Range: (197059,197137) (78)
+Range: (197627,197705) (78)
 }
 				#elsif␣(␣(␣$indent␣+␣length($holder)␣+␣length($word)␣)␣>=␣$size{'max'}){
 ----------
-Range: (198233,198317) (84)
+Range: (198801,198885) (84)
 }
 	#foreach␣my␣$key1␣(sort␣{␣(split/#/,␣$a)[0]␣<=>␣(split/#/,␣$b)[0]␣}␣keys␣%data)␣{
 ----------
-Range: (199386,199467) (81)
+Range: (199954,200035) (81)
 #foreach␣my␣$key2␣(sort␣{␣(split/#/,␣$a)[0]␣<=>␣(split/#/,␣$b)[0]␣}␣keys␣%$val1){
 ----------
-Range: (200265,200343) (78)
+Range: (200833,200911) (78)
 }
 					#␣see:␣Use␣of␣implicit␣split␣to␣@_␣is␣deprecated.␣Only␣get␣this␣warning
 ----------
-Range: (202683,202766) (83)
+Range: (203251,203334) (83)
 }
 					}
 					#␣NOTE:␣only␣these␣and␣the␣last␣fallback␣are␣used␣for␣b_single␣output
 ----------
-Range: (204311,204418) (107)
+Range: (204879,204986) (107)
 #qx('dcop␣"$client{'dport'}"␣"$client{'dobject'}"␣say␣"$client{'dserver'}"␣"$client{'dtarget'}"␣"$line␣1");
 ----------
-Range: (204628,204719) (91)
+Range: (205196,205287) (91)
 #qx(qdbus␣org.kde.konversation␣/irc␣say␣"$client{'dserver'}"␣"$client{'dtarget'}"␣"$line");
 ----------
-Range: (204852,204929) (77)
+Range: (205420,205497) (77)
 }
 }
 
 ########################################################################
 ----------
-Range: (212953,213042) (89)
+Range: (213521,213610) (89)
 #␣	cycle_count␣energy_full␣energy_full_design␣energy_now␣location␣manufacturer␣model_name
 ----------
-Range: (213043,213131) (88)
+Range: (213611,213699) (88)
 #␣	power_now␣present␣serial_number␣status␣technology␣type␣voltage_min_design␣voltage_now
 ----------
-Range: (218780,219090) (310)
+Range: (219348,219658) (310)
 qw(alarm␣capacity␣capacity_level␣charge_full␣charge_full_design␣charge_now
 	constant_charge_current␣constant_charge_current_max␣cycle_count
 	energy_full␣energy_full_design␣energy_now␣location␣manufacturer␣model_name
 	power_now␣present␣scope␣serial_number␣status␣technology␣type␣voltage_min_design␣voltage_now);
 ----------
-Range: (220964,221043) (79)
+Range: (221532,221611) (79)
 #␣NOTE:␣known␣ids:␣BAT[0-9]␣CMB[0-9].␣arm␣may␣be␣like:␣sbs-␣sbm-␣but␣just␣check
 ----------
-Range: (221047,221128) (81)
+Range: (221615,221696) (81)
 #␣if␣the␣energy/charge␣values␣exist␣for␣this␣item,␣if␣so,␣it's␣a␣battery,␣if␣not,
 ----------
-Range: (221593,221677) (84)
+Range: (222161,222245) (84)
 }
 		}
 		#␣note:voltage_now␣fluctuates,␣which␣will␣make␣capacity␣numbers␣change␣a␣bit
 ----------
-Range: (221680,221759) (79)
+Range: (222248,222327) (79)
 #␣if␣any␣of␣these␣values␣failed,␣the␣math␣will␣be␣wrong,␣but␣no␣way␣to␣fix␣that
 ----------
-Range: (221762,221838) (76)
+Range: (222330,222406) (76)
 #␣tests␣show␣more␣systems␣give␣right␣capacity/charge␣with␣voltage_min_design
 ----------
-Range: (226370,226447) (77)
+Range: (226938,227015) (77)
 my␣($b_flags,$b_speeds,$core_speeds_value,$flag_key,@flags,%cpu,@data,@rows);
 ----------
-Range: (229571,229650) (79)
+Range: (230139,230218) (79)
 #␣failure␣to␣read␣dmesg.boot:␣dmesg.boot␣permissions;␣then␣short␣-Cx␣list␣flags
 ----------
-Range: (229669,229773) (104)
+Range: (230237,230341) (104)
 /^(dmesg.boot|permissions|avx[2-9]?|lm|nx|pae|pni|(sss|ss)e([2-9])?([a-z])?(_[0-9])?|svm|vmx)$/}␣@flags;
 ----------
-Range: (235363,235444) (81)
+Range: (235931,236012) (81)
 #␣$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/cpu/arm/arm-4-core-pinebook-1.txt";
 ----------
-Range: (235446,235525) (79)
+Range: (236014,236093) (79)
 #␣$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/cpu/arm/armv6-single-core-1.txt";
 ----------
-Range: (235527,235604) (77)
+Range: (236095,236172) (77)
 #␣$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/cpu/arm/armv7-dual-core-1.txt";
 ----------
-Range: (235606,235705) (99)
+Range: (236174,236273) (99)
 #␣$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/cpu/arm/armv7-new-format-model-name-single-core.txt";
 ----------
-Range: (235707,235789) (82)
+Range: (236275,236357) (82)
 #␣$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/cpu/arm/arm-2-die-96-core-rk01.txt";
 ----------
-Range: (235791,235870) (79)
+Range: (236359,236438) (79)
 #␣$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/cpu/amd/16-core-32-mt-ryzen.txt";
 ----------
-Range: (235872,235959) (87)
+Range: (236440,236527) (87)
 #␣$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/cpu/amd/2-16-core-epyc-abucodonosor.txt";
 ----------
-Range: (235961,236041) (80)
+Range: (236529,236609) (80)
 #␣$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/cpu/amd/2-core-probook-antix.txt";
 ----------
-Range: (236043,236120) (77)
+Range: (236611,236688) (77)
 #␣$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/cpu/amd/4-core-jean-antix.txt";
 ----------
-Range: (236122,236201) (79)
+Range: (236690,236769) (79)
 #␣$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/cpu/amd/4-core-althlon-mjro.txt";
 ----------
-Range: (236203,236280) (77)
+Range: (236771,236848) (77)
 #␣$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/cpu/amd/4-core-apu-vc-box.txt";
 ----------
-Range: (236282,236360) (78)
+Range: (236850,236928) (78)
 #␣$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/cpu/amd/4-core-a10-5800k-1.txt";
 ----------
-Range: (236362,236443) (81)
+Range: (236930,237011) (81)
 #␣$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/cpu/intel/2-core-ht-atom-bruh.txt";
 ----------
-Range: (236518,236599) (81)
+Range: (237086,237167) (81)
 #␣$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/cpu/intel/8-core-i7-damentz64.txt";
 ----------
-Range: (236601,236680) (79)
+Range: (237169,237248) (79)
 #␣$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/cpu/intel/2-10-core-xeon-ht.txt";
 ----------
-Range: (236682,236776) (94)
+Range: (237250,237344) (94)
 #␣$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/cpu/intel/4-core-xeon-fake-dual-die-zyanya.txt";
 ----------
-Range: (236778,236867) (89)
+Range: (237346,237435) (89)
 #␣$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/cpu/intel/2-core-i5-fake-dual-die-hek.txt";
 ----------
-Range: (236869,236954) (85)
+Range: (237437,237522) (85)
 #␣$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/cpu/intel/2-1-core-xeon-vm-vs2017.txt";
 ----------
-Range: (236956,237042) (86)
+Range: (237524,237610) (86)
 #␣$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/cpu/intel/4-1-core-xeon-vps-frodo1.txt";
 ----------
-Range: (237044,237135) (91)
+Range: (237612,237703) (91)
 #␣$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/cpu/intel/4-6-core-xeon-no-mt-lathander.txt";
 ----------
-Range: (237137,237218) (81)
+Range: (237705,237786) (81)
 #␣$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/cpu/mips/mips-mainusg-cpuinfo.txt";
 ----------
-Range: (237220,237304) (84)
+Range: (237788,237872) (84)
 #␣$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/cpu/ppc/ppc-debian-ppc64-cpuinfo.txt";
 ----------
-Range: (237453,237532) (79)
+Range: (238021,238100) (79)
 #␣$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/cpu/elbrus/1xE2S4-3-monocub.txt";
 ----------
-Range: (238392,238472) (80)
+Range: (238960,239040) (80)
 #␣note,␣there␣con␣be␣a␣lot␣of␣processors,␣32␣core␣HT␣would␣have␣64,␣for␣example.
 ----------
-Range: (242155,242239) (84)
+Range: (242723,242807) (84)
 }
 		#␣increment␣by␣1␣for␣every␣new␣physical␣id␣we␣see.␣These␣are␣in␣almost␣all␣cases
 ----------
-Range: (242898,243017) (119)
+Range: (243466,243585) (119)
 #␣https://www.pcworld.com/article/3214635/components-processors/ryzen-threadripper-review-we-test-amds-monster-cpu.html
 ----------
-Range: (243164,243243) (79)
+Range: (243732,243811) (79)
 #␣ARM␣uses␣a␣different␣/sys␣based␣method,␣and␣ryzen␣relies␣on␣math␣on␣the␣cores
 ----------
-Range: (247016,247105) (89)
+Range: (247584,247673) (89)
 #␣openbsd␣5.6:␣AMD␣Sempron(tm)␣Processor␣3400+␣("AuthenticAMD"␣686-class,␣256KB␣L2␣cache)
 ----------
-Range: (248979,249064) (85)
+Range: (249547,249632) (85)
 }
 		#␣Freebsd␣does␣some␣voltage␣hacking␣to␣actually␣run␣at␣lowest␣listed␣frequencies.
 ----------
-Range: (249067,249151) (84)
+Range: (249635,249719) (84)
 #␣The␣cpu␣does␣not␣actually␣support␣all␣the␣speeds␣output␣here␣but␣works␣in␣freebsd.
 ----------
-Range: (250081,250165) (84)
+Range: (250649,250733) (84)
 }
 		#␣increment␣by␣1␣for␣every␣new␣physical␣id␣we␣see.␣These␣are␣in␣almost␣all␣cases
 ----------
-Range: (252410,252512) (102)
+Range: (252978,253080) (102)
 #␣note:␣elbrus␣supports␣turning␣off␣cores,␣so␣we␣need␣to␣add␣one␣for␣cases␣where␣rounds␣to␣0␣or␣1␣less
 ----------
-Range: (252717,252853) (136)
+Range: (253285,253421) (136)
 #␣print␣'model␣id:␣'␣.␣$cpu{'model_id'}␣.␣'␣arch:␣'␣.␣$cpu{'arch'}␣.␣"␣cpc:␣$cpu_cores␣phyc:␣$phyical_count␣proc:␣$processors_count␣\n";
 ----------
-Range: (254561,254646) (85)
+Range: (255129,255214) (85)
 #␣this␣is␣an␣attempt␣to␣fix␣the␣amd␣family␣15␣bug␣with␣reported␣cores␣vs␣actual␣cores
 ----------
-Range: (256238,256322) (84)
+Range: (256806,256890) (84)
 }
 	#␣last␣check,␣seeing␣some␣intel␣cpus␣and␣vms␣with␣intel␣cpus␣that␣do␣not␣show␣any
 ----------
-Range: (257052,257131) (79)
+Range: (257620,257699) (79)
 #␣seen␣a␣case␣where␣a␣xeon␣vm␣in␣a␣dual␣xeon␣system␣actually␣had␣2␣cores,␣no␣MT
 ----------
-Range: (257133,257215) (82)
+Range: (257701,257783) (82)
 #␣so␣it␣reported␣4␣siblings,␣2␣cores,␣but␣actually␣only␣had␣1␣core␣per␣virtual␣cpu
 ----------
-Range: (257217,257304) (87)
+Range: (257785,257872) (87)
 #print␣"prc:␣$processors_count␣phc:␣$phyical_count␣coc:␣$core_count␣cpc:␣$cpu_cores\n";
 ----------
-Range: (257506,257598) (92)
+Range: (258074,258166) (92)
 }
 	#print␣"pc:␣$processors_count␣s:␣$cpu{'siblings'}␣cpuc:␣$cpu_cores␣corec:␣$core_count\n";
 ----------
-Range: (257614,257698) (84)
+Range: (258182,258266) (84)
 #␣if␣>␣1␣processor␣&&␣processor␣id␣(physical␣id)␣==␣core␣id␣then␣Multi␣threaded␣(MT)
 ----------
-Range: (257700,257791) (91)
+Range: (258268,258359) (91)
 #␣if␣siblings␣>␣1␣&&␣siblings␣==␣␣2␣*␣num_of_cores␣($cpu{'cores'})␣then␣Multi␣threaded␣(MT)
 ----------
-Range: (257793,257885) (92)
+Range: (258361,258453) (92)
 #␣if␣>␣1␣processor␣&&␣processor␣id␣(physical␣id)␣!=␣core␣id␣then␣Multi-Core␣Processors␣(MCP)
 ----------
-Range: (257887,257978) (91)
+Range: (258455,258546) (91)
 #␣if␣>␣1␣processor␣&&␣processor␣ids␣(physical␣id)␣>␣1␣then␣Symmetric␣Multi␣Processing␣(SMP)
 ----------
-Range: (259208,259286) (78)
+Range: (259776,259854) (78)
 #␣the␣only␣possible␣change␣for␣bsds␣is␣if␣we␣can␣get␣phys␣counts␣in␣the␣future
 ----------
-Range: (259674,259760) (86)
+Range: (260242,260328) (86)
 }
 	##␣note:␣this␣handles␣how␣intel␣reports␣L2,␣total␣instead␣of␣per␣core␣like␣AMD␣does
 ----------
-Range: (259762,259846) (84)
+Range: (260330,260414) (84)
 #␣note␣that␣we␣need␣to␣multiply␣by␣number␣of␣actual␣cpus␣here␣to␣get␣true␣cache␣size
 ----------
-Range: (260764,260855) (91)
+Range: (261332,261423) (91)
 }
 #␣␣	elsif␣($cpu{'cur-freq'}␣&&␣$cpu{'max-freq'}␣&&␣$cpu{'cur-freq'}␣==␣$cpu{'max-freq'}){
 ----------
-Range: (260856,260932) (76)
+Range: (261424,261500) (76)
 #␣		$speed_key␣=␣($show{'short'}␣||␣$show{'cpu-basic'})␣?␣'speed'␣:␣'Speed';
 ----------
-Range: (263277,263355) (78)
+Range: (263845,263923) (78)
 }
 			}
 		}
 		#␣note:␣for␣multi␣cpu␣systems,␣we're␣hoping␣that␣these␣values␣are
 ----------
-Range: (263806,263887) (81)
+Range: (264374,264455) (81)
 #␣but␣on␣multi,␣shows␣like,␣CPU1;␣CPU␣Socket␣#2;␣Socket␣0;␣so␣check␣values␣a␣bit.
 ----------
-Range: (264268,264347) (79)
+Range: (264836,264915) (79)
 #␣older␣systems␣often␣show:␣Upgrade:␣ZIF␣Socket␣which␣is␣a␣generic␣term,␣legacy
 ----------
-Range: (269175,269258) (83)
+Range: (269743,269826) (83)
 }
 		}
 		#␣policy4/cpuinfo_max_freq:["2000000"]␣policy0/cpuinfo_max_freq:["1500000"]
 ----------
-Range: (269648,269726) (78)
+Range: (270216,270294) (78)
 }
 
 #␣right␣now␣only␣using␣this␣for␣ARM␣cpus,␣this␣is␣not␣the␣same␣in␣intel/amd
 ----------
-Range: (270141,270222) (81)
+Range: (270709,270790) (81)
 #␣returns:␣0␣-␣per␣cpu␣cores;␣1␣-␣phys␣cpu␣count;␣2␣-␣override␣model␣defaul␣names
 ----------
-Range: (271190,271288) (98)
+Range: (271758,271856) (98)
 #␣Features2=0x1e98220b<SSE3,PCLMULQDQ,MON,SSSE3,CX16,SSE4.1,SSE4.2,POPCNT,AESNI,XSAVE,OSXSAVE,AVX>
 ----------
-Range: (275491,275596) (105)
+Range: (276059,276164) (105)
 /^(60|61|62|63|64|65|66|67|68|69|6A|6B|6C|6D|6E|6F|70|71|72|73|74|75|76|77|78|79|7A|7B|7C|7D|7E|7F)$/␣)␣{
 ----------
-Range: (281171,281255) (84)
+Range: (281739,281823) (84)
 'Tremont'}
 			#␣More␣info:␣comet:␣shares␣family/model,␣need␣to␣find␣stepping␣numbers
 ----------
-Range: (281259,281351) (92)
+Range: (281827,281919) (92)
 #␣Coming:␣meteor␣lake;␣alder␣lake;␣cooper␣lake;␣granite␣rapids;␣meteor␣lake;␣saphire␣rapids;
 ----------
-Range: (283557,283640) (83)
+Range: (284125,284208) (83)
 #␣main::writer("$debugger_dir/system-repo-data-urpmq.txt",@data2)␣if␣$debugger_dir;
 ----------
-Range: (288136,288214) (78)
+Range: (288704,288782) (78)
 #␣note:␣if␣a␣string␣is␣returned␣there␣will␣be␣no␣Size␣unit␣so␣just␣use␣string.
 ----------
-Range: (289497,289575) (78)
+Range: (290065,290143) (78)
 #␣note:␣if␣a␣string␣is␣returned␣there␣will␣be␣no␣Size␣unit␣so␣just␣use␣string.
 ----------
-Range: (294099,294175) (76)
+Range: (294667,294743) (76)
 #␣searched␣for␣an␣earlier␣appearance␣of␣that␣partition␣and␣if␣it␣is␣present,
 ----------
-Range: (295452,295542) (90)
+Range: (296020,296110) (90)
 }
 		#␣See␣http://lanana.org/docs/device-list/devices-2.6+.txt␣for␣major␣numbers␣used␣below
 ----------
-Range: (295545,295638) (93)
+Range: (296113,296206) (93)
 #␣See␣https://www.mjmwired.net/kernel/Documentation/devices.txt␣for␣kernel␣4.x␣device␣numbers
 ----------
-Range: (296984,297080) (96)
+Range: (297552,297648) (96)
 my␣($block_type,$file,$firmware,$model,$path,
 	$partition_scheme,$serial,$vendor,$working_path);
 ----------
-Range: (297249,297337) (88)
+Range: (297817,297905) (88)
 #␣scsi-SATA_ST980815A_␣simply␣repeats␣ata-ST980815A_;␣same␣with␣scsi-0ATA_WDC_WD5000L31X
 ----------
-Range: (297395,297487) (92)
+Range: (297963,298055) (92)
 '^\/dev\/disk\/by-id\/(md-|lvm-|dm-|wwn-|nvme-eui|raid-|scsi-([0-9]ATA|SATA))|-part[0-9]+$';
 ----------
-Range: (297697,297778) (81)
+Range: (298265,298346) (81)
 ##␣this␣is␣now␣being␣updated␣for␣new␣/sys␣type␣paths,␣this␣may␣handle␣that␣ok␣too
 ----------
-Range: (299761,299846) (85)
+Range: (300329,300414) (85)
 ##␣ok,␣ok,␣it's␣incomprehensible,␣search␣/dev/disk/by-id␣for␣a␣line␣that␣contains␣the
 ----------
-Range: (299918,300002) (84)
+Range: (300486,300570) (84)
 #␣get␣rid␣of␣whitespace␣for␣some␣drive␣names␣and␣ids,␣and␣extra␣data␣after␣-␣in␣name
 ----------
-Range: (300424,300538) (114)
+Range: (300992,301106) (114)
 }
 					}
 				}
@@ -1247,227 +1247,227 @@ Range: (300424,300538) (114)
 		}
 		#␣note:␣an␣entire␣class␣of␣model␣names␣gets␣truncated␣by␣/sys␣so␣that␣should␣be␣the␣last
 ----------
-Range: (300628,300710) (82)
+Range: (301196,301278) (82)
 #␣NOTE:␣while␣path␣${working_path}vendor␣exists,␣it␣contains␣junk␣value,␣like:␣ATA
 ----------
-Range: (301250,301327) (77)
+Range: (301818,301895) (77)
 }
 		#␣maybe␣rework␣logic␣if␣find␣good␣scsi␣data␣example,␣but␣for␣now␣use␣this
 ----------
-Range: (301865,301951) (86)
+Range: (302433,302519) (86)
 #␣note:␣we␣only␣want␣to␣update␣type␣if␣we␣found␣a␣peripheral,␣otherwise␣preserve␣value
 ----------
-Range: (303009,303087) (78)
+Range: (303577,303655) (78)
 }
 #␣camcontrol␣identify␣<device>␣|grep␣^serial␣(this␣might␣be␣(S)ATA␣specific)
 ----------
-Range: (305946,306027) (81)
+Range: (306514,306595) (81)
 my␣($b_attributes,$b_intel,$b_kingston,$cmd,%holder,$id,@working,@result,@split);
 ----------
-Range: (311763,311856) (93)
+Range: (312331,312424) (93)
 }
 					}
 				}
 				#␣'Airflow_Temperature_Cel'␣like:␣29␣(Min/Max␣14/43)␣so␣can't␣use␣-1␣index
 ----------
-Range: (320939,321038) (99)
+Range: (321507,321606) (99)
 }
 		}
 	}
 	#␣note:␣sometimes␣with␣wwn-␣numbering␣usb␣does␣not␣appear␣in␣by-id␣but␣it␣does␣in␣by-path
 ----------
-Range: (324295,324385) (90)
+Range: (324863,324953) (90)
 #␣print␣$device,␣'::',␣Cwd::abs_path($_),'::',␣$model,␣'::',␣$vendor,␣'::',␣$serial,␣"\n";
 ----------
-Range: (324488,324568) (80)
+Range: (325056,325136) (80)
 }
 #␣0␣-␣match␣pattern;␣1␣-␣replace␣pattern;␣2␣-␣vendor␣print;␣3␣-␣serial␣pattern
 ----------
-Range: (324859,324964) (105)
+Range: (325427,325532) (105)
 '(KINGSTON|DataTraveler|DT\s?(DUO|Microduo|101)|^SMS|^SHS|^SS0|^SUV|^Ultimate␣CF|HyperX|^S[AV][1234]00)',
 ----------
-Range: (325021,325115) (94)
+Range: (325589,325683) (94)
 #␣must␣come␣before␣samsung␣MU.␣NOTE:␣toshiba␣can␣have:␣TOSHIBA_MK6475GSX:␣mush:␣MKNSSDCR120GB_
 ----------
-Range: (325263,325405) (142)
+Range: (325831,325973) (142)
 '(SAMSUNG|^MCG[0-9]+GC|^MCC|^MCBOE|^[GS]2␣Portable|^[DG]3␣Station|^DUO\b|^P3|^BGN|^BJ[NT]|^BWB|^(HM|SP)[0-9]{2}|^MZMPC|^HD[0-9]{3}[A-Z]{2}$)',
 ----------
-Range: (325475,325581) (106)
+Range: (326043,326149) (106)
 '(SanDisk|^SDS[S]?[DQ]|^SL([0-9]+)G|^AFGCE|^ABLCD|^SDW[1-9]|^U3\b|ULTRA\sFIT|Clip␣Sport|Cruzer|^Extreme)',
 ----------
-Range: (325750,325872) (122)
+Range: (326318,326440) (122)
 '(^ST[^T]|[S]?SEAGATE|^X[AFP]|^5AS|^BUP|Expansion␣Desk|^Expansion|FreeAgent|GoFlex|Backup(\+|\s?Plus)\s?(Hub)?|OneTouch)',
 ----------
-Range: (325903,326105) (202)
+Range: (326471,326673) (202)
 '^(WD|WL[0]9]|Western␣Digital|My␣(Book|Passport)|\d*LPCX|Elements|easystore|MD0|M000|EARX|EFRX|\d*EAVS|0JD|JPVX|[0-9]+(BEV|(00)?AAK|AAV|AZL|EA[CD]S)|3200[AB]|2500[BJ]|5000[AB]|6400[AB]|7500[AB]|i␣HTS)',
 ----------
-Range: (326755,326849) (94)
+Range: (327323,327417) (94)
 #␣vb:␣VB0250EAVER␣but␣clashes␣with␣vbox;␣HP_SSD_S700_120G␣;GB0500EAFYL␣GB␣starter␣too␣generic?
 ----------
-Range: (326851,326934) (83)
+Range: (327419,327502) (83)
 #␣DX110064A5xnNMRI␣ids␣as␣HP␣and␣Sandisc,␣same␣ID,␣made␣by␣sandisc␣for␣hp?␣not␣sure
 ----------
-Range: (327176,327273) (97)
+Range: (327744,327841) (97)
 '^(OCZ|APOC|D2|DEN|DEN|DRSAK|EC188|FTNC|GFGC|MANG|MMOC|NIMC|NIMR|PSIR|RALLY2|TALOS2|TMSC|TRSAK)',
 ----------
-Range: (327535,327616) (81)
+Range: (328103,328184) (81)
 #␣note:␣seen:␣KXG50ZNV512G␣NVMe␣TOSHIBA␣512GB␣|␣THNSN51T02DUK␣NVMe␣TOSHIBA␣1024GB
 ----------
-Range: (327737,327823) (86)
+Range: (328305,328391) (86)
 ##␣These␣go␣last␣because␣they␣are␣short␣and␣could␣lead␣to␣false␣ID,␣or␣are␣unlikely␣##
 ----------
-Range: (327825,327913) (88)
+Range: (328393,328481) (88)
 #␣unknown:␣AL25744_12345678;␣ADP␣may␣be␣usb␣2.5"␣adapter;␣udisk␣unknown:␣Z1E6FTKJ␣00AAKS
 ----------
-Range: (329299,329379) (80)
+Range: (329867,329947) (80)
 #␣note:␣www.cornbuy.com␣is␣both␣a␣brand␣and␣also␣sells␣other␣brands,␣like␣newegg
 ----------
-Range: (330226,330306) (80)
+Range: (330794,330874) (80)
 #␣DX1100␣is␣probably␣sandisk,␣but␣could␣be␣HP,␣or␣it␣could␣be␣hp␣branded␣sandisk
 ----------
-Range: (332585,332675) (90)
+Range: (333153,333243) (90)
 '^(lntenso|Intenso|(Alu|Basic|Business|Micro|Mobile|Rainbow|Speed|Twister)␣Line|Rainbow)',
 ----------
-Range: (334222,334299) (77)
+Range: (334790,334867) (77)
 #␣note:␣C300/400␣can␣be␣either␣micron␣or␣crucial,␣but␣C400␣is␣M4␣from␣crucial
 ----------
-Range: (337739,337820) (81)
+Range: (338307,338388) (81)
 #␣['^(SUPERSPEED)','^SUPERSPEED','SuperSpeed',''],␣#␣superspeed␣is␣a␣generic␣term
 ----------
-Range: (339609,339685) (76)
+Range: (340177,340253) (76)
 }
 
 #␣receives␣space␣separated␣string␣that␣may␣or␣may␣not␣contain␣vendor␣data
 ----------
-Range: (339842,339920) (78)
+Range: (340410,340488) (78)
 #␣0␣-␣match␣pattern;␣1␣-␣replace␣pattern;␣2␣-␣vendor␣print;␣3␣-␣serial␣pattern
 ----------
-Range: (340542,340623) (81)
+Range: (341110,341191) (81)
 }
 
 #␣Normally␣hddtemp␣requires␣root,␣but␣you␣can␣set␣user␣rights␣in␣/etc/sudoers.
 ----------
-Range: (343087,343176) (89)
+Range: (343655,343744) (89)
 }
 		#␣do␣host␣last␣because␣the␣strings␣above␣might␣have␣host␣as␣well␣as␣their␣search␣item
 ----------
-Range: (343179,343259) (80)
+Range: (343747,343827) (80)
 #␣0000:00:1f.2/host3/target3:␣increment␣by␣1␣sine␣ata␣starts␣at␣1,␣but␣host␣at␣0
 ----------
-Range: (343641,343717) (76)
+Range: (344209,344285) (76)
 #␣NOTE:␣PCIe␣3␣stopped␣using␣the␣8b/10b␣encoding␣but␣a␣sample␣pcie3␣nvme␣has
 ----------
-Range: (344165,344261) (96)
+Range: (344733,344829) (96)
 #␣http://www.tested.com/tech/457440-theoretical-vs-actual-bandwidth-pci-express-and-thunderbolt/
 ----------
-Range: (344267,344344) (77)
+Range: (344835,344912) (77)
 #␣PCIe␣1,2␣use␣“8b/10b”␣encoding:␣eight␣bits␣are␣encoded␣into␣a␣10-bit␣symbol
 ----------
-Range: (344350,344431) (81)
+Range: (344918,344999) (81)
 #␣PCIe␣3,4,5␣use␣"128b/130b"␣encoding:␣128␣bits␣are␣encoded␣into␣a␣130␣bit␣symbol
 ----------
-Range: (346480,346563) (83)
+Range: (347048,347131) (83)
 }
 	}
 	#␣note:␣not␣perfect,␣but␣we␣need␣usb␣gfx␣to␣show␣for␣all␣types,␣soc,␣pci,␣etc
 ----------
-Range: (346915,346996) (81)
+Range: (347483,347564) (81)
 #␣not␣using␣3D␣controller␣yet,␣needs␣research:␣|3D␣controller␣|display␣controller
 ----------
-Range: (346999,347077) (78)
+Range: (347567,347645) (78)
 #␣note:␣this␣is␣strange,␣but␣all␣of␣these␣can␣be␣either␣a␣separate␣or␣the␣same
 ----------
-Range: (347080,347156) (76)
+Range: (347648,347724) (76)
 #␣card.␣However,␣by␣comparing␣bus␣id,␣say:␣00:02.0␣we␣can␣determine␣that␣the
 ----------
-Range: (347159,347240) (81)
+Range: (347727,347808) (81)
 #␣cards␣are␣␣either␣the␣same␣or␣different.␣We␣want␣only␣the␣.0␣version␣as␣a␣valid
 ----------
-Range: (347243,347329) (86)
+Range: (347811,347897) (86)
 #␣card.␣.1␣would␣be␣for␣example:␣Display␣Adapter␣with␣bus␣id␣x:xx.1,␣not␣the␣right␣one
 ----------
-Range: (349291,349370) (79)
+Range: (349859,349938) (79)
 #␣note:␣for␣real␣usb␣video␣out,␣no␣generic␣drivers?␣webcams␣may␣have␣one␣though
 ----------
-Range: (350714,350794) (80)
+Range: (351282,351362) (80)
 }
 	#␣this␣gives␣better␣output␣than␣the␣failure␣last␣case,␣which␣would␣only␣show:
 ----------
-Range: (351200,351290) (90)
+Range: (351768,351858) (90)
 #␣print␣"$graphics{'x-vendor'}␣$graphics{'x-version'}␣$graphics{'x-vendor-release'}","\n";
 ----------
-Range: (351400,351497) (97)
+Range: (351968,352065) (97)
 #$version␣=␣(!$version␣&&␣$graphics{'x-vendor-release'})␣?␣"␣$graphics{'x-vendor-release'}"␣:␣'';
 ----------
-Range: (352458,352538) (80)
+Range: (353026,353106) (80)
 }
 			}
 			#␣note:␣if␣no␣xorg␣log,␣and␣if␣wayland,␣there␣will␣be␣no␣xorg␣drivers,
 ----------
-Range: (352542,352620) (78)
+Range: (353110,353188) (78)
 #␣obviously,␣so␣we␣use␣the␣last␣driver␣found␣on␣the␣card␣section␣in␣that␣case.
 ----------
-Range: (352624,352705) (81)
+Range: (353192,353273) (81)
 #␣those␣come␣from␣lscpi␣kernel␣drivers␣so␣there␣should␣be␣no␣xorg/wayland␣issues.
 ----------
-Range: (352732,352811) (79)
+Range: (353300,353379) (79)
 #␣Fallback:␣specific␣case:␣in␣Arch/Manjaro␣gdm␣run␣systems,␣their␣Xorg.0.log␣is
 ----------
-Range: (356769,356859) (90)
+Range: (357337,357427) (90)
 }
 							#␣using␣main,␣noit␣monitor,␣dpi␣because␣we␣want␣xorg␣dpi,␣not␣physical␣screen␣dpi
 ----------
-Range: (358905,358984) (79)
+Range: (359473,359552) (79)
 #␣<X␣server␣name>␣version␣:␣...etc.␣Later␣on,␣the␣normal␣textual␣version␣string
 ----------
-Range: (359031,359115) (84)
+Range: (359599,359683) (84)
 #␣A␣failover␣mechanism␣is␣in␣place:␣if␣$version␣empty,␣release␣number␣parsed␣instead
 ----------
-Range: (359837,359913) (76)
+Range: (360405,360481) (76)
 #␣so␣quick␣check␣here␣to␣make␣sure␣the␣vendor␣string␣includes␣Xorg␣in␣string
 ----------
-Range: (361037,361117) (80)
+Range: (361605,361685) (80)
 /([0-9]+)\s*x\s*([0-9]+)\s+pixels\s+\(([0-9]+)\s*x\s*([0-9]+)\s*millimeters\)/){
 ----------
-Range: (362632,362710) (78)
+Range: (363200,363278) (78)
 #␣we␣get␣a␣bit␣more␣info␣from␣xrandr␣than␣xdpyinfo,␣but␣xrandr␣fails␣to␣handle
 ----------
-Range: (362921,363036) (115)
+Range: (363489,363604) (115)
 /^([^\s]+)\s+connected\s(primary\s)?([0-9]+)\s*x\s*([0-9]+)\+[0-9+]+(\s\([^)]+\))?(\s([0-9]+)mm\sx\s([0-9]+)mm)?/){
 ----------
-Range: (365778,365854) (76)
+Range: (366346,366422) (76)
 #main::log_data('dump','@graphics{screens}',$graphics{'screens'})␣if␣$b_log;
 ----------
-Range: (366828,366909) (81)
+Range: (367396,367477) (81)
 #␣need␣to␣confirm␣that␣there's␣a␣point␣to␣this␣test,␣I␣believe␣no,␣fails␣out␣of␣x
 ----------
-Range: (368032,368121) (89)
+Range: (368600,368689) (89)
 #my␣$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/graphics/glxinfo/glxinfo-ssh-centos.txt";
 ----------
-Range: (368491,368590) (99)
+Range: (369059,369158) (99)
 my␣($b_compat,$b_nogl,@core_profile_version,@direct_render,@renderer,
 			@opengl_version,@working);
 ----------
-Range: (369075,369156) (81)
+Range: (369643,369724) (81)
 }
 				#␣dropping␣all␣conditions␣from␣this␣test␣to␣just␣show␣full␣mesa␣information
 ----------
-Range: (370840,370918) (78)
+Range: (371408,371486) (78)
 #␣non␣free␣drivers␣once␣filtered␣and␣cleaned␣show␣the␣same␣for␣core␣and␣compat
 ----------
-Range: (372932,373012) (80)
+Range: (373500,373580) (80)
 #␣$log␣=␣"$ENV{HOME}/bin/scripts/inxi/data/xorg-logs/Xorg.0-voyager-serena.log";
 ----------
-Range: (373015,373106) (91)
+Range: (373583,373674) (91)
 #␣$log␣=␣"$ENV{HOME}/bin/scripts/inxi/data/xorg-logs/loading-unload-failed-all41-mint.txt";
 ----------
-Range: (373109,373200) (91)
+Range: (373677,373768) (91)
 #␣$log␣=␣"$ENV{HOME}/bin/scripts/inxi/data/xorg-logs/loading-unload-failed-phd21-mint.txt";
 ----------
-Range: (373276,373354) (78)
+Range: (373844,373922) (78)
 #␣$log␣=␣"$ENV{HOME}/bin/scripts/inxi/data/xorg-logs/xorg-multi-driver-1.log";
 ----------
-Range: (373473,373972) (499)
+Range: (374041,374540) (499)
 qw(amdgpu␣apm␣ark␣armsoc␣atimisc␣ati
 		chips␣cirrus␣cyrix␣fbdev␣fbturbo␣fglrx␣geode␣glide␣glint
 		i128␣i740␣i810-dec100␣i810e␣i810␣i815␣i830␣i845␣i855␣i865␣i915␣i945␣i965
@@ -1478,130 +1478,130 @@ qw(amdgpu␣apm␣ark␣armsoc␣atimisc␣ati
 		tdfx␣tga␣trident␣tseng␣unichrome␣v4l␣vboxvideo␣vesa␣vga␣via␣vmware␣vmwgfx
 		voodoo);
 ----------
-Range: (373975,374053) (78)
+Range: (374543,374621) (78)
 #␣it's␣much␣cheaper␣to␣grab␣the␣simple␣pattern␣match␣then␣do␣the␣expensive␣one
 ----------
-Range: (374323,374402) (79)
+Range: (374891,374970) (79)
 #␣we␣get␣all␣the␣actually␣loaded␣drivers␣first,␣we␣will␣use␣this␣to␣compare␣the
 ----------
-Range: (374638,374717) (79)
+Range: (375206,375285) (79)
 #␣we␣get␣all␣the␣actually␣loaded␣drivers␣first,␣we␣will␣use␣this␣to␣compare␣the
 ----------
-Range: (374900,374996) (96)
+Range: (375468,375564) (96)
 }
 			}
 			#␣verify␣that␣the␣driver␣actually␣started␣the␣desktop,␣even␣with␣false␣failed␣messages
 ----------
-Range: (375079,375159) (80)
+Range: (375647,375727) (80)
 #␣note␣that␣xorg␣will␣often␣load␣several␣modules,␣like␣modesetting,fbdev,nouveau
 ----------
-Range: (376828,376904) (76)
+Range: (377396,377472) (76)
 qw(/usr/lib␣/usr/lib/xorg␣/usr/lib/xorg-server␣/usr/libexec␣/usr/X11R6/bin),
 ----------
-Range: (381533,381612) (79)
+Range: (382101,382180) (79)
 #␣0-sys_vendor␣1-product_name␣2-product_version␣3-product_serial␣4-product_uuid
 ----------
-Range: (382072,382321) (249)
+Range: (382640,382889) (249)
 my␣($bios_date,$bios_rev,$bios_romsize,$bios_vendor,$bios_version,$chassis_serial,
 	$chassis_type,$chassis_vendor,$chassis_version,␣$mobo_model,$mobo_serial,$mobo_vendor,
 	$mobo_version,$product_name,$product_serial,$product_version,$system_vendor);
 ----------
-Range: (382614,382692) (78)
+Range: (383182,383260) (78)
 }
 	#␣found␣a␣case␣of␣battery␣existing␣but␣having␣nothing␣in␣it␣on␣desktop␣mobo
 ----------
-Range: (382844,382925) (81)
+Range: (383412,383493) (81)
 #␣ibm␣/␣ibm␣can␣be␣true;␣dell␣/␣quantum␣is␣false,␣so␣in␣other␣words,␣only␣do␣this
 ----------
-Range: (382928,383008) (80)
+Range: (383496,383576) (80)
 #␣in␣case␣where␣the␣vendor␣is␣the␣same␣and␣the␣version␣is␣the␣same␣and␣not␣null,
 ----------
-Range: (383011,383092) (81)
+Range: (383579,383660) (81)
 #␣otherwise␣the␣version␣information␣is␣going␣to␣be␣different␣in␣all␣cases␣I␣think
 ----------
-Range: (384191,384267) (76)
+Range: (384759,384835) (76)
 #␣no␣point␣in␣showing␣chassis␣if␣system␣isn't␣there,␣it's␣very␣unlikely␣that
 ----------
-Range: (387077,387171) (94)
+Range: (387645,387739) (94)
 #␣this␣is␣sketchy,␣/proc/device-tree/model␣may␣be␣similar␣to␣Hardware␣value␣from␣/proc/cpuinfo
 ----------
-Range: (388531,388706) (175)
+Range: (389099,389274) (175)
 qw(bios_vendor␣bios_version␣bios_date
 	board_name␣board_serial␣board_vendor␣board_version␣chassis_type
 	product_name␣product_serial␣product_uuid␣product_version␣sys_vendor
 	);
 ----------
-Range: (390232,390311) (79)
+Range: (390800,390879) (79)
 #$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/cpu/arm/arm-shevaplug-1.2ghz.txt";
 ----------
-Range: (396995,397112) (117)
+Range: (397563,397680) (117)
 }
 		#␣bios0:at␣mainbus0:␣AT/286+␣BIOS,␣date␣06/30/06,␣BIOS32␣rev.␣0␣@␣0xf2030,␣SMBIOS␣rev.␣2.4␣@␣0xf0000␣(47␣entries)
 ----------
-Range: (397950,398032) (82)
+Range: (398518,398600) (82)
 #␣5␣-␣pizza␣box␣was␣a␣1␣U␣desktop␣enclosure,␣but␣some␣old␣laptops␣also␣id␣this␣way
 ----------
-Range: (402746,402828) (82)
+Range: (403314,403396) (82)
 }
 		#␣first␣check␣if␣it's␣a␣known␣wifi␣id'ed␣card,␣if␣so,␣no␣print␣of␣duplex/speed
 ----------
-Range: (405296,405374) (78)
+Range: (405864,405942) (78)
 my␣(@data,@rows,@temp2,$b_wifi,$driver,
 	$path,$path_id,$product,$test,$type);
 ----------
-Range: (408665,408744) (79)
+Range: (409233,409312) (79)
 }
 			}
 		}
 		#␣print␣"d1:$data1␣v:$vendor␣d2:$data2␣c:$chip␣bus_id:␣$bus_id\n";
 ----------
-Range: (409999,410081) (82)
+Range: (410567,410649) (82)
 #␣/sys/class/net/$if/wireless␣:␣nont␣always␣there,␣but␣worth␣a␣try:␣wlan/wl/ww/wlp
 ----------
-Range: (415231,415311) (80)
+Range: (415799,415879) (80)
 }
 #␣get␣ip␣using␣downloader␣to␣stdout.␣This␣is␣a␣clean,␣text␣only␣IP␣output␣url,
 ----------
-Range: (415312,415395) (83)
+Range: (415880,415963) (83)
 #␣single␣line␣only,␣ending␣in␣the␣ip␣address.␣May␣have␣to␣modify␣this␣in␣the␣future
 ----------
-Range: (415461,415538) (77)
+Range: (416029,416106) (77)
 #␣ip=$(␣echo␣␣2001:0db8:85a3:0000:0000:8a2e:0370:7334␣|␣gawk␣␣--re-interval␣'
 ----------
-Range: (415596,415678) (82)
+Range: (416164,416246) (82)
 #␣this␣generates␣a␣direct␣dns␣based␣ipv4␣ip␣address,␣but␣if␣opendns.com␣goes␣down,
 ----------
-Range: (416024,416114) (90)
+Range: (416592,416682) (90)
 "$program␣+short␣+time=1␣+tries=1␣myip.opendns.com␣\@resolver1.opendns.com␣2>/dev/null"))[
 ----------
-Range: (416414,416503) (89)
+Range: (416982,417071) (89)
 qw(␣http://whatismyip.akamai.com/
 		␣http://icanhazip.com/␣https://smxi.org/opt/ip.php)␣:
 ----------
-Range: (416982,417072) (90)
+Range: (417550,417640) (90)
 }
 
 ###␣USB␣networking␣search␣string␣data,␣because␣some␣brands␣can␣have␣other␣products␣than
 ----------
-Range: (417140,417227) (87)
+Range: (417708,417795) (87)
 ###␣putting␣the␣most␣common␣and␣likely␣first,␣then␣the␣less␣common,␣then␣some␣specifics
 ----------
-Range: (417296,417377) (81)
+Range: (417864,417945) (81)
 #␣Network.*Adapter␣802\.11␣Atheros␣Atmel␣D-Link.*Adapter␣D-Link.*Wireless␣Linksys
 ----------
-Range: (417378,417459) (81)
+Range: (417946,418027) (81)
 #␣Netgea␣Ralink␣Realtek.*Network␣Realtek.*Wireless␣Realtek.*WLAN␣Belkin.*Wireless
 ----------
-Range: (417460,417547) (87)
+Range: (418028,418115) (87)
 #␣Belkin.*WLAN␣Belkin.*Network␣Actiontec.*Wireless␣Actiontec.*Network␣AirLink.*Wireless
 ----------
-Range: (417548,417638) (90)
+Range: (418116,418206) (90)
 #␣Asus.*Network␣Asus.*Wireless␣Buffalo.*Wireless␣Davicom␣DWA-.*RangeBooster␣DWA-.*Wireless
 ----------
-Range: (417639,417720) (81)
+Range: (418207,418288) (81)
 #␣ENUWI-.*Wireless␣LG.*Wi-Fi␣Rosewill.*Wireless␣RNX-.*Wireless␣Samsung.*LinkStick
 ----------
-Range: (418121,418770) (649)
+Range: (418689,419338) (649)
 qw(wifi␣Wi-Fi.*Adapter␣Ethernet␣\bLAN\b␣WLAN␣Network\b␣Networking\b␣802\.11
 	Wireless.*Adapter␣54\sMbps␣100\/1000␣Mobile\sBroadband␣Atheros␣D-Link.*Adapter
 	Dell.*Wireless␣D-Link.*Wireless␣Linksys␣Netgea␣Ralink␣Realtek.*Network␣Realtek.*Wireless
@@ -1613,941 +1613,941 @@ qw(wifi␣Wi-Fi.*Adapter␣Ethernet␣\bLAN\b␣WLAN␣Network\b␣Networking\b�
 	Zonet.*ZEW.*Wireless␣050d:935b␣0bda:8189␣0bda:8197
 	);
 ----------
-Range: (426454,426531) (77)
+Range: (427022,427099) (77)
 #␣Get␣the␣actual␣disk␣dev␣location,␣first␣try␣default␣which␣is␣easier␣to␣run,
 ----------
-Range: (429695,429773) (78)
+Range: (430263,430341) (78)
 #␣main::row_defaults('darwin-feature')␣:␣main::row_defaults('partition-data');
 ----------
-Range: (430029,430109) (80)
+Range: (430597,430677) (80)
 my␣(@data,@data2,%part,@rows,$dev,$dev_type,$fs,$percent,$raw_size,$size,$used);
 ----------
-Range: (433556,433640) (84)
+Range: (434124,434208) (84)
 #return␣if␣$bsd_type␣&&␣$bsd_type␣eq␣'darwin';␣#␣darwin␣has␣muated␣output,␣of␣course
 ----------
-Range: (433819,433962) (143)
+Range: (434387,434530) (143)
 my␣($block_size,$blockdev,$dev_base,$dev_type,$fs,$id,$label,$percent_used,
 	$raw_size,$replace,$size_available,$size,$test,$type,$uuid,$used);
 ----------
-Range: (434731,434812) (81)
+Range: (435299,435380) (81)
 }
 		#Filesystem␣1024-blocks␣Used␣Available␣Capacity␣iused␣ifree␣%iused␣Mounted␣on
 ----------
-Range: (435310,435398) (88)
+Range: (435878,435966) (88)
 #␣new␣kernels/df␣have␣rootfs␣and␣/␣repeated,␣creating␣two␣entries␣for␣the␣same␣partition
 ----------
-Range: (435400,435490) (90)
+Range: (435968,436058) (90)
 #␣so␣check␣for␣two␣string␣endings␣of␣/␣then␣slice␣out␣the␣rootfs␣one,␣I␣could␣check␣for␣it
 ----------
-Range: (435492,435585) (93)
+Range: (436060,436153) (93)
 #␣before␣slicing␣it␣out,␣but␣doing␣that␣would␣require␣the␣same␣action␣twice␣re␣code␣execution
 ----------
-Range: (435721,435807) (86)
+Range: (436289,436375) (86)
 #␣IMPORTANT:␣check␣the␣lsblk␣completer␣tool␣check_partition_data()␣for␣matching␣lsblck
 ----------
-Range: (436072,436208) (136)
+Range: (436640,436776) (136)
 #push␣@partitions_working,␣'//mafreebox.freebox.fr/Disque␣dur␣cifs␣␣␣␣␣␣␣␣␣239216096␣␣206434016␣␣20607496␣␣␣␣␣␣91%␣/freebox/Disque␣dur';
 ----------
-Range: (436210,436341) (131)
+Range: (436778,436909) (131)
 #push␣@partitions_working,␣'//mafreebox.freebox.fr/AllPG␣␣␣␣␣␣cifs␣␣␣␣␣␣␣␣␣436616192␣␣316339304␣120276888␣␣␣␣␣␣73%␣/freebox/AllPG';
 ----------
-Range: (437192,437295) (103)
+Range: (437760,437863) (103)
 #␣NOTE:␣using␣-P␣for␣linux␣fixes␣line␣wraps,␣and␣for␣bsds,␣assuming␣they␣don't␣use␣such␣long␣file␣names
 ----------
-Range: (437338,437425) (87)
+Range: (437906,437993) (87)
 #␣this␣could␣point␣to␣by-label␣or␣by-uuid␣so␣get␣that␣first.␣In␣theory,␣abs_path␣should
 ----------
-Range: (437554,437652) (98)
+Range: (438122,438220) (98)
 }
 			#␣sometimes␣paths␣are␣set␣using␣/dev/disk/by-[label|uuid]␣so␣we␣need␣to␣get␣the␣/dev/xxx␣path
 ----------
-Range: (437931,438018) (87)
+Range: (438499,438586) (87)
 }
 		#␣this␣handles␣zfs␣type␣devices/partitions,␣which␣do␣not␣start␣with␣/␣but␣contain␣/
 ----------
-Range: (438291,438368) (77)
+Range: (438859,438936) (77)
 }
 		#␣this␣handles␣yet␣another␣fredforfaen␣special␣case␣where␣a␣mounted␣drive
 ----------
-Range: (438425,438523) (98)
+Range: (438993,439091) (98)
 /^\/$|^\/boot$|^\/var$|^\/var\/tmp$|^\/var\/log$|^\/home$|^\/opt$|^\/tmp$|^\/usr$|^\/usr\/home$/){
 ----------
-Range: (438645,438755) (110)
+Range: (439213,439323) (110)
 /^\/$|^\/boot$|^\/var$|^\/var\/tmp$|^\/var\/log$|^\/home$|^\/opt$|^\/tmp$|^\/usr$|^\/usr\/home$|^filesystem/){
 ----------
-Range: (441326,441476) (150)
+Range: (441894,442044) (150)
 my␣($cache_pressure,$dev_base,$dev_type,$label,$mount,$path,
 	$pattern1,$pattern2,$percent_used,$priority,$size,$swap_type,
 	$swappiness,$used,$uuid);
 ----------
-Range: (442260,442345) (85)
+Range: (442828,442913) (85)
 }
 	#␣now␣add␣the␣swap␣partition␣data,␣don't␣want␣to␣show␣swap␣files,␣just␣partitions,
 ----------
-Range: (442347,442432) (85)
+Range: (442915,443000) (85)
 #␣though␣this␣can␣include␣/dev/ramzswap0.␣Note:␣you␣can␣also␣use␣/proc/swaps␣for␣this
 ----------
-Range: (445252,445358) (106)
+Range: (445820,445926) (106)
 #␣/dev/sda3␣on␣/root.dev/ugw␣type␣ext3␣(rw,relatime,errors=continue,user_xattr,acl,barrier=1,data=journal)
 ----------
-Range: (447100,447207) (107)
+Range: (447668,447775) (107)
 "$program␣-bP␣--output␣NAME,TYPE,RM,FSTYPE,SIZE,LABEL,UUID,SERIAL,MOUNTPOINT,PHY-SEC,LOG-SEC␣2>/dev/null");
 ----------
-Range: (447237,447440) (203)
+Range: (447805,448008) (203)
 /NAME="([^"]*)"\s+TYPE="([^"]*)"\s+RM="([^"]*)"\s+FSTYPE="([^"]*)"\s+SIZE="([^"]*)"\s+LABEL="([^"]*)"\s+UUID="([^"]*)"\s+SERIAL="([^"]*)"\s+MOUNTPOINT="([^"]*)"\s+PHY-SEC="([^"]*)"\s+LOG-SEC="([^"]*)"/){
 ----------
-Range: (448406,448486) (80)
+Range: (448974,449054) (80)
 #␣NOTE:␣these␣filters␣must␣match␣the␣fs␣filters␣in␣the␣main␣partition␣data␣sub!!
 ----------
-Range: (449617,449694) (77)
+Range: (450185,450262) (77)
 }
 #␣args:␣1:␣blockdev␣full␣path␣(part␣only);␣2:␣block␣id;␣3:␣size␣(part␣only)
 ----------
-Range: (449769,449855) (86)
+Range: (450337,450423) (86)
 #␣0:␣calc␣block␣1:␣available␣percent␣2:␣disk␣physical␣block␣size/partition␣block␣size;
 ----------
-Range: (457928,458027) (99)
+Range: (458496,458595) (99)
 my␣(@arrays,@arrays_holder,@components,@components_good,@data,@failed,@rows,
 	@sizes,@spare,@temp);
 ----------
-Range: (458029,458147) (118)
+Range: (458597,458715) (118)
 my␣($allocated,$available,$blocks_avail,$chunk_raid,$component_string,$raid,
 	$ref2,$ref3,$report_size,$size,$status);
 ----------
-Range: (462541,462618) (77)
+Range: (463109,463186) (77)
 }
 			#␣items␣like␣cache␣may␣have␣one␣component,␣with␣a␣size␣on␣that␣component
 ----------
-Range: (465663,465750) (87)
+Range: (466231,466318) (87)
 "␣$row{'progress-bar'}"
 			}
 			$rows[$j]{main::key($num++,1,$cont_arr,'Recovering')}␣=
 ----------
-Range: (467971,468051) (80)
+Range: (468539,468619) (80)
 #$mdstat␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/raid/md-2-mirror-fserver2-1.txt";
 ----------
-Range: (468053,468135) (82)
+Range: (468621,468703) (82)
 #$mdstat␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/raid/md-2-raid10-abucodonosor.txt";
 ----------
-Range: (470296,470373) (77)
+Range: (470864,470941) (77)
 /(\[[=]*>[\.]*\]).*(resync|recovery)\s*=\s*([0-9\.]+%)?(\s\(([0-9\/]+)\))?/){
 ----------
-Range: (471083,471175) (92)
+Range: (471651,471743) (92)
 #my␣$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/raid/zpool-list-1-mirror-main-solestar.txt";
 ----------
-Range: (471177,471269) (92)
+Range: (471745,471837) (92)
 #my␣$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/raid/zpool-list-2-mirror-main-solestar.txt";
 ----------
-Range: (471271,471349) (78)
+Range: (471839,471917) (78)
 #my␣$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/raid/zpool-list-v-tank-1.txt";
 ----------
-Range: (471351,471430) (79)
+Range: (471919,471998) (79)
 #my␣$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/raid/zpool-list-v-gojev-1.txt";
 ----------
-Range: (472927,473014) (87)
+Range: (473495,473582) (87)
 #␣raid␣level␣is␣the␣second␣item␣in␣the␣output,␣unless␣it␣is␣not,␣sometimes␣it␣is␣absent
 ----------
-Range: (473891,473983) (92)
+Range: (474459,474551) (92)
 #␣␣␣␣gptid/3838f796-5c46-11e6-a931-d05099ac4dc2␣␣␣␣␣␣-␣␣␣␣␣␣-␣␣␣␣␣␣-␣␣␣␣␣␣␣␣␣-␣␣␣␣␣␣-␣␣␣␣␣␣-
 ----------
-Range: (475829,475920) (91)
+Range: (476397,476488) (91)
 #$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/raid/zpool-status-1-mirror-main-solestar.txt";
 ----------
-Range: (475923,476014) (91)
+Range: (476491,476582) (91)
 #$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/raid/zpool-status-2-mirror-main-solestar.txt";
 ----------
-Range: (482436,482513) (77)
+Range: (483004,483081) (77)
 #␣($derived_module_size,$max_cap_5,$max_cap_16,$max_module_size)␣=␣(0,0,0,0);
 ----------
-Range: (484372,484460) (88)
+Range: (484940,485028) (88)
 }
 				#␣note:␣these␣3␣have␣cleaned␣data␣in␣set_dmidecode_data,␣so␣replace␣stuff␣manually
 ----------
-Range: (485800,485888) (88)
+Range: (486368,486456) (88)
 }
 				#␣do␣not␣try␣to␣guess␣from␣installed␣modules,␣only␣use␣this␣to␣correct␣type␣5␣data
 ----------
-Range: (487252,487330) (78)
+Range: (487820,487898) (78)
 }
 			}
 			#␣because␣of␣the␣wide␣range␣of␣bank/slot␣type␣data,␣we␣will␣just␣use
 ----------
-Range: (487334,487416) (82)
+Range: (487902,487984) (82)
 #␣the␣one␣that␣seems␣most␣likely␣to␣be␣right.␣Some␣have:␣Bank:␣SO␣DIMM␣0␣slot:␣J6A
 ----------
-Range: (487420,487499) (79)
+Range: (487988,488067) (79)
 #␣so␣we␣dump␣the␣useless␣data␣and␣use␣the␣one␣most␣likely␣to␣be␣visibly␣correct
 ----------
-Range: (487819,487902) (83)
+Range: (488387,488470) (83)
 }
 			#␣sometimes␣the␣data␣is␣just␣wrong,␣they␣reverse␣total/data.␣data␣I␣believe␣is
 ----------
-Range: (487906,487995) (89)
+Range: (488474,488563) (89)
 #␣used␣for␣the␣actual␣memory␣bus␣width,␣total␣is␣some␣synthetic␣thing,␣sometimes␣missing.
 ----------
-Range: (487999,488087) (88)
+Range: (488567,488655) (88)
 #␣note␣that␣we␣do␣not␣want␣a␣regular␣string␣comparison,␣because␣128␣bit␣memory␣buses␣are
 ----------
-Range: (490231,490348) (117)
+Range: (490799,490916) (117)
 print␣"1:␣mms:␣$ref{'max-module-size'}␣:dms:␣$ref{'derived-module-size'}␣:mc:␣$max_cap␣:uc:␣$ref{'used-capacity'}\n";
 ----------
-Range: (490520,490637) (117)
+Range: (491088,491205) (117)
 print␣"2:␣mms:␣$ref{'max-module-size'}␣:dms:␣$ref{'derived-module-size'}␣:mc:␣$max_cap␣:uc:␣$ref{'used-capacity'}\n";
 ----------
-Range: (490640,490739) (99)
+Range: (491208,491307) (99)
 }
 		#␣2:␣now␣check␣to␣see␣if␣actually␣found␣module␣sizes␣are␣>␣than␣listed␣max␣module,␣replace␣if␣>
 ----------
-Range: (490971,491091) (120)
+Range: (491539,491659) (120)
 print␣"3:␣dcf:␣$ref{'device-count-found'}␣:dms:␣$ref{'derived-module-size'}␣:mc:␣$max_cap␣:uc:␣$ref{'used-capacity'}\n";
 ----------
-Range: (491094,491178) (84)
+Range: (491662,491746) (84)
 }
 		#␣note:␣some␣cases␣memory␣capacity␣==␣max␣module␣size,␣so␣one␣stick␣will␣fill␣it
 ----------
-Range: (491181,491274) (93)
+Range: (491749,491842) (93)
 #␣but␣I␣think␣only␣with␣cases␣of␣2␣slots␣does␣this␣happen,␣so␣if␣>␣2,␣use␣the␣count␣of␣slots.
 ----------
-Range: (491348,491425) (77)
+Range: (491916,491993) (77)
 #␣first␣check␣that␣actual␣memory␣found␣is␣not␣greater␣than␣listed␣max␣cap,␣or
 ----------
-Range: (492199,492302) (103)
+Range: (492767,492870) (103)
 }
 				}
 			}
 			#␣note␣that␣second␣case␣will␣never␣really␣activate␣except␣on␣virtual␣machines␣and␣maybe
 ----------
-Range: (492346,492437) (91)
+Range: (492914,493005) (91)
 #␣do␣not␣do␣this␣for␣only␣single␣modules␣found,␣max␣mod␣size␣can␣be␣equal␣to␣the␣array␣size
 ----------
-Range: (492945,493034) (89)
+Range: (493513,493602) (89)
 }
 				##␣handle␣cases␣where␣we␣have␣type␣5␣data:␣mms␣x␣device␣count␣equals␣type␣5␣max␣cap
 ----------
-Range: (493501,493618) (117)
+Range: (494069,494186) (117)
 print␣"4:␣mms:␣$ref{'max-module-size'}␣:dms:␣$ref{'derived-module-size'}␣:mc:␣$max_cap␣:uc:␣$ref{'used-capacity'}\n";
 ----------
-Range: (493622,493709) (87)
+Range: (494190,494277) (87)
 }
 			#␣some␣cases␣of␣type␣5␣have␣too␣big␣module␣max␣size,␣just␣dump␣the␣data␣then␣since
 ----------
-Range: (493928,494011) (83)
+Range: (494496,494579) (83)
 print␣"5:␣dms:␣$ref{'derived-module-size'}␣:s16:␣$ref{'slots-16'}␣:mc:␣$max_cap\n";
 ----------
-Range: (494936,495016) (80)
+Range: (495504,495584) (80)
 }
 			}
 			#␣case␣where␣listed␣max␣cap␣is␣too␣big␣for␣actual␣slots␣x␣max␣cap,␣eg:
 ----------
-Range: (498995,499098) (103)
+Range: (499563,499666) (103)
 my␣($apt_arch,$apt_comp,$apt_suites,$apt_types,@apt_urls,@apt_working,
 		$b_apt_enabled,$file,$string);
 ----------
-Range: (499455,499540) (85)
+Range: (500023,500108) (85)
 }
 		#@files␣=␣main::globber("$ENV{'HOME'}/bin/scripts/inxi/data/repo/apt/*.sources");
 ----------
-Range: (500162,500243) (81)
+Range: (500730,500811) (81)
 #␣NOTE:␣the␣syntax␣of␣deb822␣must␣be␣considered␣a␣bug,␣it's␣sloppy␣beyond␣belief.
 ----------
-Range: (503189,503268) (79)
+Range: (503757,503836) (79)
 #$slackpkg␣=␣"$ENV{HOME}/bin/scripts/inxi/data/repo/slackware/slackpkg-2.conf";
 ----------
-Range: (504207,504299) (92)
+Range: (504775,504867) (92)
 }
 				#␣MIRRORPLUS['multilib']=http://taper.alienbase.nl/mirrors/people/alien/multilib/14.1/
 ----------
-Range: (505291,505376) (85)
+Range: (505859,505944) (85)
 #push␣@files,␣"$ENV{'HOME'}/bin/scripts/inxi/data/repo/yum/rpmfusion-nonfree-1.repo";
 ----------
-Range: (505574,505657) (83)
+Range: (506142,506225) (83)
 #␣this␣is␣a␣hack,␣assuming␣that␣each␣item␣has␣these␣fields␣listed,␣we␣collect␣the␣3
 ----------
-Range: (505663,505744) (81)
+Range: (506231,506312) (81)
 #␣items␣one␣by␣one,␣then␣when␣the␣url/enabled␣fields␣are␣set,␣we␣print␣it␣out␣and
 ----------
-Range: (505750,505830) (80)
+Range: (506318,506398) (80)
 #␣reset␣the␣data.␣Not␣elegant␣but␣it␣works.␣Note␣that␣if␣enabled␣was␣not␣present
 ----------
-Range: (505836,505918) (82)
+Range: (506404,506486) (82)
 #␣we␣assume␣it␣is␣enabled␣then,␣and␣print␣the␣line,␣reset␣the␣variables.␣This␣will
 ----------
-Range: (507792,507875) (83)
+Range: (508360,508443) (83)
 #␣this␣is␣a␣hack,␣assuming␣that␣each␣item␣has␣these␣fields␣listed,␣we␣collect␣the␣3
 ----------
-Range: (507881,507962) (81)
+Range: (508449,508530) (81)
 #␣items␣one␣by␣one,␣then␣when␣the␣url/enabled␣fields␣are␣set,␣we␣print␣it␣out␣and
 ----------
-Range: (507968,508048) (80)
+Range: (508536,508616) (80)
 #␣reset␣the␣data.␣Not␣elegant␣but␣it␣works.␣Note␣that␣if␣enabled␣was␣not␣present
 ----------
-Range: (508054,508136) (82)
+Range: (508622,508704) (82)
 #␣we␣assume␣it␣is␣enabled␣then,␣and␣print␣the␣line,␣reset␣the␣variables.␣This␣will
 ----------
-Range: (511271,511348) (77)
+Range: (511839,511916) (77)
 #␣note␣this␣structure␣in␣the␣data,␣so␣store␣first␣line␣and␣make␣start␣of␣line
 ----------
-Range: (511429,511523) (94)
+Range: (511997,512091) (94)
 #␣Contrib␣ftp://ftp.uwsg.indiana.edu/linux/mandrake/official/2011/x86_64/media/contrib/release
 ----------
-Range: (511526,511628) (102)
+Range: (512094,512196) (102)
 #␣Contrib␣Updates␣ftp://ftp.uwsg.indiana.edu/linux/mandrake/official/2011/x86_64/media/contrib/updates
 ----------
-Range: (511631,511727) (96)
+Range: (512199,512295) (96)
 #␣Non-free␣ftp://ftp.uwsg.indiana.edu/linux/mandrake/official/2011/x86_64/media/non-free/release
 ----------
-Range: (511730,511834) (104)
+Range: (512298,512402) (104)
 #␣Non-free␣Updates␣ftp://ftp.uwsg.indiana.edu/linux/mandrake/official/2011/x86_64/media/non-free/updates
 ----------
-Range: (511837,511935) (98)
+Range: (512405,512503) (98)
 #␣Nonfree␣Updates␣(Local19)␣/mnt/data/mirrors/mageia/distrib/cauldron/x86_64/media/nonfree/updates
 ----------
-Range: (511959,512038) (79)
+Range: (512527,512606) (79)
 #␣need␣to␣dump␣leading/trailing␣spaces␣and␣clear␣out␣color␣codes␣for␣irc␣output
 ----------
-Range: (512207,512290) (83)
+Range: (512775,512858) (83)
 #␣rsync://,␣ftp://,␣file://,␣http://␣OR␣repo␣is␣locally␣mounted␣on␣FS␣in␣some␣cases
 ----------
-Range: (513347,513424) (77)
+Range: (513915,513992) (77)
 #␣note␣this␣structure␣in␣the␣data,␣so␣store␣first␣line␣and␣make␣start␣of␣line
 ----------
-Range: (513815,513894) (79)
+Range: (514383,514462) (79)
 #␣need␣to␣dump␣leading/trailing␣spaces␣and␣clear␣out␣color␣codes␣for␣irc␣output
 ----------
-Range: (516083,516159) (76)
+Range: (516651,516727) (76)
 #␣get␣all␣rows␣not␣starting␣with␣a␣#␣and␣starting␣with␣a␣non␣space␣character
 ----------
-Range: (529221,529321) (100)
+Range: (529789,529889) (100)
 my␣($b_cpu_0,$cmd,$file,@data,$fan_working,%sensors,@row,$sys_fan_nu,
 	$temp_working,$working_unit);
 ----------
-Range: (529452,529562) (110)
+Range: (530020,530130) (110)
 #$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/ipmitool/ipmitool-sensors-archerseven-1.txt";$program='ipmitool';
 ----------
-Range: (529564,529673) (109)
+Range: (530132,530241) (109)
 #$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/ipmitool/ipmitool-sensors-crazy-epyc-1.txt";$program='ipmitool';
 ----------
-Range: (529675,529780) (105)
+Range: (530243,530348) (105)
 #$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/ipmitool/ipmitool-sensors-RK016013.txt";$program='ipmitool';
 ----------
-Range: (529782,529867) (85)
+Range: (530350,530435) (85)
 #$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/ipmitool/ipmi-sensors-crazy-epyc-1.txt";
 ----------
-Range: (529869,529951) (82)
+Range: (530437,530519) (82)
 #$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/ipmitool/ipmi-sensors-lathander.txt";
 ----------
-Range: (529953,530031) (78)
+Range: (530521,530599) (78)
 #$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/ipmitool/ipmi-sensors-zwerg.txt";
 ----------
-Range: (531181,531260) (79)
+Range: (531749,531828) (79)
 }
 		#␣Platform␣Control␣Hub␣(PCH),␣it␣is␣the␣X370␣chip␣on␣the␣Crosshair␣VI␣Hero.
 ----------
-Range: (532079,532160) (81)
+Range: (532647,532728) (81)
 }
 		#␣for␣temp1/2␣only␣use␣temp1/2␣if␣they␣are␣null␣or␣greater␣than␣the␣last␣ones
 ----------
-Range: (532973,533052) (79)
+Range: (533541,533620) (79)
 }
 		#␣temp3␣is␣only␣used␣as␣an␣absolute␣override␣for␣systems␣with␣all␣3␣present
 ----------
-Range: (534417,534495) (78)
+Range: (534985,535063) (78)
 #␣add␣to␣array␣if␣array␣index␣does␣not␣exist␣OR␣if␣number␣is␣>␣existing␣number
 ----------
-Range: (536985,537065) (80)
+Range: (537553,537633) (80)
 #␣There␣are␣some␣guesses␣here,␣but␣with␣more␣sensors␣samples␣it␣will␣get␣closer.
 ----------
-Range: (537069,537148) (79)
+Range: (537637,537716) (79)
 #␣note:␣using␣arrays␣starting␣at␣1␣for␣all␣fan␣arrays␣to␣make␣it␣easier␣overall
 ----------
-Range: (537152,537232) (80)
+Range: (537720,537800) (80)
 #␣we␣have␣to␣be␣sure␣we␣are␣working␣with␣the␣actual␣real␣string␣before␣assigning
 ----------
-Range: (537236,537314) (78)
+Range: (537804,537882) (78)
 #␣data␣to␣real␣variables␣and␣arrays.␣Extracting␣C/F␣degree␣unit␣as␣well␣to␣use
 ----------
-Range: (537363,537445) (82)
+Range: (537931,538013) (82)
 #␣note␣that␣because␣of␣charset␣issues,␣no␣"°"␣degree␣sign␣used,␣but␣it␣is␣required
 ----------
-Range: (537449,537538) (89)
+Range: (538017,538106) (89)
 #␣in␣testing␣regex␣to␣avoid␣error.␣It␣might␣be␣because␣I␣got␣that␣data␣from␣a␣forum␣post,
 ----------
-Range: (537883,537971) (88)
+Range: (538451,538539) (88)
 }
 			}
 			#␣issue␣58␣msi/asus␣show␣wrong␣for␣CPUTIN␣so␣overwrite␣it␣if␣PECI␣0␣is␣present
 ----------
-Range: (538034,538123) (89)
+Range: (538602,538691) (89)
 #␣NOTE:␣had:␣^CPU.*\+([0-9]+):␣but␣that␣misses:␣CPUTIN␣and␣anything␣not␣with␣+␣in␣starter
 ----------
-Range: (538127,538216) (89)
+Range: (538695,538784) (89)
 #␣However,␣"CPUTIN␣is␣not␣a␣reliable␣measurement␣because␣it␣measures␣difference␣to␣Tjmax,
 ----------
-Range: (538220,538304) (84)
+Range: (538788,538872) (84)
 #␣which␣is␣the␣maximum␣CPU␣temperature␣reported␣as␣critical␣temperature␣by␣coretemp"
 ----------
-Range: (538308,538394) (86)
+Range: (538876,538962) (86)
 #␣NOTE:␣I've␣seen␣an␣inexplicable␣case␣where:␣CPU:52.0°C␣fails␣to␣match␣with␣[\s°]␣but
 ----------
-Range: (538398,538480) (82)
+Range: (538966,539048) (82)
 #␣does␣match␣with:␣[\s°]*.␣I␣can't␣account␣for␣this,␣but␣that's␣why␣the␣*␣is␣there
 ----------
-Range: (539578,539660) (82)
+Range: (540146,540228) (82)
 }
 			#␣for␣temp1/2␣only␣use␣temp1/2␣if␣they␣are␣null␣or␣greater␣than␣the␣last␣ones
 ----------
-Range: (540401,540481) (80)
+Range: (540969,541049) (80)
 }
 			#␣temp3␣is␣only␣used␣as␣an␣absolute␣override␣for␣systems␣with␣all␣3␣present
 ----------
-Range: (543107,543185) (78)
+Range: (543675,543753) (78)
 #␣add␣to␣array␣if␣array␣index␣does␣not␣exist␣OR␣if␣number␣is␣>␣existing␣number
 ----------
-Range: (544358,544450) (92)
+Range: (544926,545018) (92)
 #my␣$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/sensors/amdgpu-w-fan-speed-stretch-k10.txt";
 ----------
-Range: (544452,544528) (76)
+Range: (545020,545096) (76)
 #my␣$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/sensors/peci-tin-geggo.txt";
 ----------
-Range: (544530,544613) (83)
+Range: (545098,545181) (83)
 #my␣$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/sensors/sensors-w-other-biker.txt";
 ----------
-Range: (544615,544699) (84)
+Range: (545183,545267) (84)
 #my␣$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/sensors/sensors-asus-chassis-1.txt";
 ----------
-Range: (544701,544780) (79)
+Range: (545269,545348) (79)
 #my␣$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/sensors/sensors-devnull-1.txt";
 ----------
-Range: (544782,544859) (77)
+Range: (545350,545427) (77)
 #my␣$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/sensors/sensors-jammin1.txt";
 ----------
-Range: (544861,544945) (84)
+Range: (545429,545513) (84)
 #my␣$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/sensors/sensors-mx-incorrect-1.txt";
 ----------
-Range: (544947,545032) (85)
+Range: (545515,545600) (85)
 #␣my␣$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/sensors/sensors-maximus-arch-1.txt";
 ----------
-Range: (545034,545157) (123)
+Range: (545602,545725) (123)
 #␣@sensors_data␣=␣main::reader($file);		#␣only␣way␣to␣get␣sensor␣array␣data?␣Unless␣using␣sensors␣-j,␣but␣can't␣assume␣json
 ----------
-Range: (546906,547025) (119)
+Range: (547474,547593) (119)
 my␣($cpu_temp,$cpu2_temp,$cpu3_temp,$cpu4_temp,$index_count_fan_default,
 	$index_count_fan_main,$mobo_temp,$psu_temp)␣=
 ----------
-Range: (547178,547279) (101)
+Range: (547746,547847) (101)
 #␣first␣we␣need␣to␣handle␣the␣case␣where␣we␣have␣to␣determine␣which␣temp/fan␣to␣use␣for␣cpu␣and␣mobo:
 ----------
-Range: (547281,547381) (100)
+Range: (547849,547949) (100)
 #␣note,␣for␣rare␣cases␣of␣weird␣cool␣cpus,␣user␣can␣override␣in␣their␣prefs␣and␣force␣the␣assignment
 ----------
-Range: (547383,547481) (98)
+Range: (547951,548049) (98)
 #␣this␣is␣wrong␣for␣systems␣with␣>␣2␣tempX␣readings,␣but␣the␣logic␣is␣too␣complex␣with␣3␣variables
 ----------
-Range: (547483,547583) (100)
+Range: (548051,548151) (100)
 #␣so␣have␣to␣accept␣that␣it␣will␣be␣wrong␣in␣some␣cases,␣particularly␣for␣motherboard␣temp␣readings.
 ----------
-Range: (547707,547803) (96)
+Range: (548275,548371) (96)
 #␣first␣some␣fringe␣cases␣with␣cooler␣cpu␣than␣mobo:␣assume␣which␣is␣cpu␣temp␣based␣on␣fan␣speed
 ----------
-Range: (549163,549266) (103)
+Range: (549731,549834) (103)
 }
 		#␣then␣get␣the␣real␣cpu␣temp,␣best␣guess␣is␣hottest␣is␣real,␣though␣only␣within␣narrowed␣diff␣range
 ----------
-Range: (549906,549994) (88)
+Range: (550474,550562) (88)
 #␣using␣$sensors{'temp3'}␣is␣just␣not␣reliable␣enough,␣more␣errors␣caused␣than␣fixed␣imo
 ----------
-Range: (550104,550198) (94)
+Range: (550672,550766) (94)
 #␣there␣are␣some␣absurdly␣wrong␣$sensors{'temp1'}:␣acpitz-virtual-0␣$sensors{'temp1'}:␣+13.8°C
 ----------
-Range: (550333,550410) (77)
+Range: (550901,550978) (77)
 }
 		}
 	}
 	#␣if␣all␣else␣fails,␣use␣core0/peci␣temp␣if␣present␣and␣cpu␣is␣null
 ----------
-Range: (551330,551412) (82)
+Range: (551898,551980) (82)
 }
 		}
 		##␣NOTE:␣not␣safe␣to␣assume␣$sensors{'temp3'}␣is␣the␣mobo␣temp,␣sad␣to␣say
 ----------
-Range: (551415,551518) (103)
+Range: (551983,552086) (103)
 #if␣(␣$sensors{'temp1'}␣&&␣$sensors{'temp2'}␣&&␣$sensors{'temp3'}␣&&␣$sensors{'temp3'}␣<␣$mobo_temp␣)␣{
 ----------
-Range: (552298,552388) (90)
+Range: (552866,552956) (90)
 }
 	}
 	#␣clear␣out␣any␣duplicates.␣Primary␣fan␣real␣trumps␣fan␣working␣always␣if␣same␣speed
 ----------
-Range: (552656,552752) (96)
+Range: (553224,553320) (96)
 }
 			}
 		}
 	}
 	#␣now␣see␣if␣you␣can␣find␣the␣fast␣little␣mobo␣fan,␣>␣5000␣rpm␣and␣put␣it␣as␣mobo
 ----------
-Range: (552754,552836) (82)
+Range: (553322,553404) (82)
 #␣note␣that␣gawk␣is␣returning␣true␣for␣some␣test␣cases␣when␣$fan_default[j]␣<␣5000
 ----------
-Range: (552838,552918) (80)
+Range: (553406,553486) (80)
 #␣which␣has␣to␣be␣a␣gawk␣bug,␣unless␣there␣is␣something␣really␣weird␣with␣arrays
 ----------
-Range: (552920,552998) (78)
+Range: (553488,553566) (78)
 #␣note:␣500␣>␣$fan_default[j]␣<␣1000␣is␣the␣exact␣trigger,␣and␣if␣you␣manually
 ----------
-Range: (553000,553080) (80)
+Range: (553568,553648) (80)
 #␣assign␣that␣value␣below,␣the␣>␣5000␣test␣works␣again,␣and␣a␣print␣of␣the␣value
 ----------
-Range: (553153,553236) (83)
+Range: (553721,553804) (83)
 #␣Note:␣gensub␣is␣the␣culprit␣I␣think,␣assigning␣type␣string␣for␣range␣501-1000␣but
 ----------
-Range: (553603,553695) (92)
+Range: (554171,554263) (92)
 }
 		}
 	}
 	#␣if␣they␣are␣ALL␣null,␣print␣error␣message.␣psFan␣is␣not␣used␣in␣output␣currently
 ----------
-Range: (553830,553972) (142)
+Range: (554398,554540) (142)
 my␣($ambient_temp,$psu_fan,$psu1_fan,$psu2_fan,$psu_temp,$sodimm_temp,
 		$v_12,$v_5,$v_3_3,$v_dimm_p1,$v_dimm_p2,$v_soc_p1,$v_soc_p2,$v_vbat);
 ----------
-Range: (556636,556731) (95)
+Range: (557204,557299) (95)
 }
 			}
 		}
 		#␣do␣a␣guess,␣this␣will␣work␣for␣most␣users,␣it's␣better␣than␣nothing␣for␣out␣of␣X
 ----------
-Range: (556768,556851) (83)
+Range: (557336,557419) (83)
 }
 		#␣now␣we'll␣get␣the␣gpu␣temp␣for␣each␣screen␣discovered.␣The␣print␣out␣function
 ----------
-Range: (556854,556939) (85)
+Range: (557422,557507) (85)
 #␣will␣handle␣removing␣screen␣data␣for␣single␣gpu␣systems.␣-t␣shows␣only␣data␣we␣want
 ----------
-Range: (557174,557271) (97)
+Range: (557742,557839) (97)
 #␣ViewPortOut=1280x1024+0+0},␣DPY-1:␣nvidia-auto-select␣@1280x1024␣+1280+0␣{ViewPortIn=1280x1024,
 ----------
-Range: (557533,557611) (78)
+Range: (558101,558179) (78)
 '-q␣GPUCoreTemp␣-q␣VideoRam␣-q␣GPUCurrentClockFreqs␣-q␣PCIECurrentLinkWidth␣';
 ----------
-Range: (568434,568512) (78)
+Range: (569002,569080) (78)
 #␣note:␣for␣zfs␣using␣/dev/sda␣no␣partitions,␣this␣will␣also␣remove␣those␣from
 ----------
-Range: (570817,570912) (95)
+Range: (571385,571480) (95)
 #␣this␣will␣fail␣if␣regular␣user␣and␣no␣sudo␣present,␣but␣that's␣fine,␣it␣will␣just␣return␣null
 ----------
-Range: (570915,570997) (82)
+Range: (571483,571565) (82)
 #␣note␣the␣hack␣that␣simply␣slices␣out␣the␣first␣line␣if␣>␣1␣items␣found␣in␣string
 ----------
-Range: (571000,571082) (82)
+Range: (571568,571650) (82)
 #␣also,␣if␣grub/lilo␣is␣on␣partition␣boot␣sector,␣no␣file␣system␣data␣is␣available
 ----------
-Range: (572168,572259) (91)
+Range: (572736,572827) (91)
 my␣($b_hub,$bus_id,$chip_id,$driver,$ind_sc,$path_id,$ports,$product,$serial,$speed,$type);
 ----------
-Range: (581563,581645) (82)
+Range: (582131,582213) (82)
 #␣calculate␣and␣round,␣order␣matters␣so␣that␣rounding␣only␣happens␣after␣math␣done
 ----------
-Range: (584997,585073) (76)
+Range: (585565,585641) (76)
 #␣note:␣bug␣in␣source␣data␣uses␣ft␣for␣meters,␣not␣100%␣of␣time,␣but␣usually
 ----------
-Range: (591851,591928) (77)
+Range: (592419,592496) (77)
 #␣			#my␣$file2␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/weather/weather-1.xml";
 ----------
-Range: (591929,592009) (80)
+Range: (592497,592577) (80)
 #␣			#␣my␣$file2␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/weather/feed-oslo-1.xml";
 ----------
-Range: (593435,593511) (76)
+Range: (594003,594079) (76)
 #␣			my␣$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/weather/location-1.xml";
 ----------
-Range: (596077,596154) (77)
+Range: (596645,596722) (77)
 }
 }
 
 ####␣-------------------------------------------------------------------
 ----------
-Range: (598179,598292) (113)
+Range: (598747,598860) (113)
 my␣($b_gtk,$b_qt,$b_xprop,$desktop_session,$gdmsession,$kde_session_version,
 $xdg_desktop,@desktop,@data,@xprop);
 ----------
-Range: (598304,598393) (89)
+Range: (598872,598961) (89)
 #␣NOTE␣$XDG_CURRENT_DESKTOP␣envvar␣is␣not␣reliable,␣but␣it␣shows␣certain␣desktops␣better.
 ----------
-Range: (598395,598474) (79)
+Range: (598963,599042) (79)
 #␣most␣desktops␣are␣not␣using␣it␣as␣of␣2014-01-13␣(KDE,␣UNITY,␣LXDE.␣Not␣Gnome)
 ----------
-Range: (600120,600203) (83)
+Range: (600688,600771) (83)
 }
 	}
 	#␣works␣on␣4,␣assume␣5␣will␣id␣the␣same,␣why␣not,␣no␣need␣to␣update␣in␣future
 ----------
-Range: (600266,600345) (79)
+Range: (600834,600913) (79)
 #␣NOTE:␣as␣of␣plasma␣5,␣the␣tool:␣about-distro␣MAY␣be␣available,␣that␣will␣show
 ----------
-Range: (600347,600431) (84)
+Range: (600915,600999) (84)
 #␣actual␣desktop␣data,␣so␣once␣that's␣in␣debian/ubuntu,␣if␣it␣gets␣in,␣add␣that␣test
 ----------
-Range: (601054,601131) (77)
+Range: (601622,601699) (77)
 #␣NOTE:␣this␣command␣string␣is␣almost␣certain␣to␣change,␣and␣break,␣with␣next
 ----------
-Range: (601169,601266) (97)
+Range: (601737,601834) (97)
 #␣qdbus␣org.kde.plasmashell␣/MainApplication␣org.qtproject.Qt.QCoreApplication.applicationVersion
 ----------
-Range: (602226,602311) (85)
+Range: (602794,602879) (85)
 }
 			#␣qmake␣can␣have␣variants,␣qt4-qmake,␣qt5-qmake,␣also␣qt5-default␣but␣not␣tested
 ----------
-Range: (604207,604285) (78)
+Range: (604775,604853) (78)
 #␣Check␣if␣in␣xdg_desktop␣OR␣desktop_session␣OR␣if␣in␣$item->[6]␣and␣in␣ps_gui
 ----------
-Range: (605765,605843) (78)
+Range: (606333,606411) (78)
 #␣NOTE:␣mate-about␣and␣mate-sesssion␣vary␣which␣has␣the␣higher␣number,␣neither
 ----------
-Range: (606172,606269) (97)
+Range: (606740,606837) (97)
 }
 		}
 		#␣no␣consistent␣rule␣about␣which␣version␣is␣higher,␣so␣just␣compare␣them␣and␣take␣highest
 ----------
-Range: (606772,606852) (80)
+Range: (607340,607420) (80)
 }
 #␣note,␣GNOME_DESKTOP_SESSION_ID␣is␣deprecated␣so␣we'll␣see␣how␣that␣works␣out
 ----------
-Range: (606906,606996) (90)
+Range: (607474,607564) (90)
 #␣NOTE:␣manjaro␣is␣leaving␣XDG␣data␣null,␣which␣forces␣the␣manual␣check␣for␣gnome,␣sigh...
 ----------
-Range: (607563,607639) (76)
+Range: (608131,608207) (76)
 }
 	#␣risky:␣Debian:␣$DESKTOP_SESSION␣=␣lightdm-xsession;␣Manjaro/Arch␣=␣xfce
 ----------
-Range: (607852,607932) (80)
+Range: (608420,608500) (80)
 }
 	#␣possible␣value:␣this-is-deprecated,␣but␣I␣believe␣only␣gnome␣based␣desktops
 ----------
-Range: (609576,609671) (95)
+Range: (610144,610239) (95)
 #$desktop[1]␣=␣main::program_version('xfdesktop',$data[0],$data[1],$data[2],$data[5],$data[6]);
 ----------
-Range: (610330,610425) (95)
+Range: (610898,610993) (95)
 #$desktop[3]␣=␣main::program_version('xfdesktop',$data[0],$data[1],$data[2],$data[5],$data[6]);
 ----------
-Range: (611472,611558) (86)
+Range: (612040,612126) (86)
 }
 	#␣the␣sequence␣here␣matters,␣some␣desktops␣like␣icewm,␣razor,␣let␣you␣set␣different
 ----------
-Range: (611560,611644) (84)
+Range: (612128,612212) (84)
 #␣wm,␣so␣we␣want␣to␣get␣the␣main␣controlling␣desktop␣first,␣then␣fall␣back␣to␣the␣wm
 ----------
-Range: (611646,611726) (80)
+Range: (612214,612294) (80)
 #␣detections.␣get_ps_de_data()␣and␣get_wm()␣will␣handle␣alternate␣wm␣detections.
 ----------
-Range: (612727,612806) (79)
+Range: (613295,613374) (79)
 #␣1␣check␣program;␣2␣ps_gui␣search;␣3␣data;␣4:␣trigger␣alternate␣values/version
 ----------
-Range: (617446,617529) (83)
+Range: (618014,618097) (83)
 }
 	#␣note,␣some␣wm,␣like␣cinnamon␣muffin,␣do␣not␣appear␣in␣ps␣aux,␣but␣do␣in␣wmctrl
 ----------
-Range: (618287,618364) (77)
+Range: (618855,618932) (77)
 '9wm|aewm\+\+|aewm|afterstep|amiwm|antiwm|awesome|blackbox|bspwm|budgie-wm|';
 ----------
-Range: (621150,621231) (81)
+Range: (621718,621799) (81)
 'fancybar|fbpanel|fspanel|glx-dock|gnome-panel|hpanel|i3bar|i3status|icewmtray|';
 ----------
-Range: (623079,623249) (170)
+Range: (623647,623817) (170)
 qw(cdm.pid␣entranced.pid␣gdm.pid␣gdm3.pid␣kdm.pid␣ldm.pid
 	lightdm.pid␣lxdm.pid␣mdm.pid␣nodm.pid␣pcdm.pid␣sddm.pid␣slim.lock
 	tdm.pid␣udm.pid␣wdm.pid␣xdm.pid␣xenodm.pid);
 ----------
-Range: (623389,623466) (77)
+Range: (623957,624034) (77)
 #␣in␣most␣linux,␣/var/run␣is␣a␣sym␣link␣to␣/run,␣so␣no␣need␣to␣check␣it␣twice
 ----------
-Range: (623878,623959) (81)
+Range: (624446,624527) (81)
 #␣called␣/run/sddm/␣so␣assuming␣the␣existence␣of␣the␣pid␣inside␣a␣directory␣named
 ----------
-Range: (624077,624160) (83)
+Range: (624645,624728) (83)
 #␣note:␣there␣were␣issues␣with␣duplicated␣dm's␣in␣inxi,␣checking␣@found␣corrects␣it
 ----------
-Range: (625040,625120) (80)
+Range: (625608,625688) (80)
 }
 	}
 	#␣might␣add␣this␣in,␣but␣the␣rate␣of␣new␣dm's␣makes␣it␣more␣likely␣it's␣an
 ----------
-Range: (626319,626626) (307)
+Range: (626887,627194) (307)
 qw(antix-version␣aptosid-version␣bodhibuilder.conf␣kanotix-version
 	knoppix-version␣pclinuxos-release␣mandrake-release␣manjaro-release␣mx-version
 	pardus-release␣porteus-version␣q4os_version␣sabayon-release␣siduction-version␣sidux-version
 	slitaz-release␣solusos-release␣turbolinux-release␣zenwalk-version);
 ----------
-Range: (626679,626775) (96)
+Range: (627247,627343) (96)
 qw(altlinux-release␣arch-release␣gentoo-release␣redhat-release␣slackware-version
 	SuSE-release);
 ----------
-Range: (627646,627735) (89)
+Range: (628214,628303) (89)
 #␣note:␣OpenSuse␣Tumbleweed␣2018-05␣has␣made␣/etc/issue␣created␣by␣sym␣link␣to␣/run/issue
 ----------
-Range: (627737,627818) (81)
+Range: (628305,628386) (81)
 #␣and␣then␣made␣that␣resulting␣file␣700␣permissions,␣which␣is␣obviously␣a␣mistake
 ----------
-Range: (630420,630511) (91)
+Range: (630988,631079) (91)
 }
 	#␣this␣handles␣case␣where␣only␣one␣release/version␣file␣was␣found,␣and␣it's␣lsb-release.
 ----------
-Range: (630513,630599) (86)
+Range: (631081,631167) (86)
 #␣This␣would␣never␣apply␣for␣ubuntu␣or␣debian,␣which␣will␣filter␣down␣to␣the␣following
 ----------
-Range: (630601,630688) (87)
+Range: (631169,631256) (87)
 #␣conditions.␣In␣general␣if␣there's␣a␣specific␣distro␣release␣file␣available,␣that's␣to
 ----------
-Range: (630977,631071) (94)
+Range: (631545,631639) (94)
 }
 	#␣if␣distro␣id␣file␣was␣found␣and␣it's␣not␣in␣the␣exluded␣primary␣distro␣file␣list,␣read␣it
 ----------
-Range: (631159,631244) (85)
+Range: (631727,631812) (85)
 #␣new␣opensuse␣uses␣os-release,␣but␣older␣ones␣may␣have␣a␣similar␣syntax,␣so␣just␣use
 ----------
-Range: (631311,631392) (81)
+Range: (631879,631960) (81)
 #␣leaving␣off␣extra␣data␣since␣all␣new␣suse␣have␣it,␣in␣os-release,␣this␣file␣has
 ----------
-Range: (631503,631584) (81)
+Range: (632071,632152) (81)
 #␣for␣now,␣just␣take␣first␣occurrence,␣which␣should␣be␣the␣first␣line,␣which␣does
 ----------
-Range: (632439,632527) (88)
+Range: (633007,633095) (88)
 #␣but␣mint␣should␣use␣issue␣for␣now.␣Antergos␣uses␣arch␣os-release,␣but␣issue␣shows␣them
 ----------
-Range: (633007,633102) (95)
+Range: (633575,633670) (95)
 }
 		}
 	}
 	#␣a␣final␣check.␣If␣a␣long␣value,␣before␣assigning␣the␣debugger␣output,␣if␣os-release
 ----------
-Range: (633104,633187) (83)
+Range: (633672,633755) (83)
 #␣exists␣then␣let's␣use␣that␣if␣it␣wasn't␣tried␣already.␣Maybe␣that␣will␣be␣better.
 ----------
-Range: (633189,633270) (81)
+Range: (633757,633838) (81)
 #␣not␣handling␣the␣corrupt␣data,␣maybe␣later␣if␣needed.␣10␣+␣distro:␣(8)␣+␣string
 ----------
-Range: (633748,633824) (76)
+Range: (634316,634392) (76)
 #␣if␣the␣file␣was␣null␣but␣present,␣which␣can␣happen␣in␣some␣cases,␣then␣use
 ----------
-Range: (638456,638573) (117)
+Range: (639024,639141) (117)
 my␣($base_id,$base_name,$base_version,$distro,$distro_name,$pretty_name,
 	$lc_name,$name,$version_name,$version_id)␣=
 ----------
-Range: (639865,639950) (85)
+Range: (640433,640518) (85)
 }
 		}
 	}
 	#␣NOTE:␣tumbleweed␣has␣pretty␣name␣but␣pretty␣name␣does␣not␣have␣version␣id
 ----------
-Range: (639952,640031) (79)
+Range: (640520,640599) (79)
 #␣arco␣shows␣only␣the␣release␣name,␣like␣kirk,␣in␣pretty␣name.␣Too␣many␣distros
 ----------
-Range: (640568,640657) (89)
+Range: (641136,641225) (89)
 }
 		}
 	}
 	#␣note:␣mint␣has␣varying␣formats␣here,␣some␣have␣ubuntu␣as␣name,␣17␣and␣earlier
 ----------
-Range: (641171,641268) (97)
+Range: (641739,641836) (97)
 }
 		#␣LMDE␣2␣has␣only␣limited␣data␣in␣os-release,␣no␣_LIKE␣values.␣3␣has␣like␣and␣debian_codename
 ----------
-Range: (646951,647028) (77)
+Range: (647519,647596) (77)
 }
 		#␣missing␣data:␣note,␣runit␣can␣install␣as␣a␣dependency␣without␣being␣the
 ----------
-Range: (648916,649011) (95)
+Range: (649484,649579) (95)
 #␣Linux;␣yawn;␣4.9.0-3.1-liquorix-686-pae;␣#1␣ZEN␣SMP␣PREEMPT␣liquorix␣4.9-4␣(2017-01-14);␣i686
 ----------
-Range: (649013,649169) (156)
+Range: (649581,649737) (156)
 #␣FreeBSD;␣siwi.pair.com;␣8.2-STABLE;␣FreeBSD␣8.2-STABLE␣#0:␣Tue␣May␣31␣14:36:14␣EDT␣2016␣␣␣␣␣erik5@iddhi.pair.com:/usr/obj/usr/src/sys/82PAIRx-AMD64;␣amd64
 ----------
-Range: (652699,652779) (80)
+Range: (653267,653347) (80)
 #␣r␣b␣w␣␣␣␣avm␣␣␣␣␣fre␣␣flt␣␣re␣␣pi␣␣po␣␣fr␣␣sr␣wd0␣wd1␣␣int␣␣␣sys␣␣␣cs␣us␣sy␣id
 ----------
-Range: (652780,652860) (80)
+Range: (653348,653428) (80)
 #␣0␣0␣0␣␣55256␣1484092␣␣171␣␣␣0␣␣␣0␣␣␣0␣␣␣0␣␣␣0␣␣␣2␣␣␣0␣␣␣12␣␣␣460␣␣␣39␣␣3␣␣1␣96
 ----------
-Range: (652938,653015) (77)
+Range: (653506,653583) (77)
 #␣procs␣␣␣␣␣␣memory␣␣␣␣␣␣page␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣disks␣␣␣␣␣faults␣␣␣␣␣␣␣␣␣cpu
 ----------
-Range: (653016,653098) (82)
+Range: (653584,653666) (82)
 #␣r␣b␣w␣␣␣␣␣avm␣␣␣␣fre␣␣␣flt␣␣re␣␣pi␣␣po␣␣␣␣fr␣␣sr␣ad0␣ad1␣␣␣in␣␣␣sy␣␣␣cs␣us␣sy␣id
 ----------
-Range: (653099,653181) (82)
+Range: (653667,653749) (82)
 #␣0␣0␣0␣␣21880M␣␣6444M␣␣␣924␣␣32␣␣11␣␣␣0␣␣␣822␣827␣␣␣0␣␣␣0␣␣853␣␣832␣␣463␣␣8␣␣3␣88
 ----------
-Range: (653192,653276) (84)
+Range: (653760,653844) (84)
 #␣2␣0␣0␣14925812␣␣936448␣␣␣␣36␣␣13␣␣10␣␣␣0␣␣␣␣84␣␣35␣␣␣0␣␣␣0␣␣␣84␣␣␣30␣␣␣42␣11␣␣3␣86
 ----------
-Range: (653366,653445) (79)
+Range: (653934,654013) (79)
 #␣␣r␣b␣w␣␣␣␣␣avm␣␣␣␣fre␣␣flt␣␣re␣␣pi␣␣po␣␣fr␣␣sr␣ad0␣ad1␣␣␣in␣␣␣sy␣␣cs␣us␣sy␣id
 ----------
-Range: (653446,653527) (81)
+Range: (654014,654095) (81)
 #␣␣0␣0␣0␣␣␣␣␣␣␣0␣␣84060␣30273993␣2845␣12742␣1164␣407498171␣320960902␣␣␣0␣␣␣0␣....
 ----------
-Range: (655502,655591) (89)
+Range: (656070,656159) (89)
 "sysctl␣$$ref{'action'}"
 	}
 	#␣not␣using,␣but␣leave␣in␣place␣for␣a␣bit␣in␣case␣we␣want␣it
 ----------
-Range: (655634,655723) (89)
+Range: (656202,656291) (89)
 #␣hack:␣temp␣fix␣for␣openbsd/darwin:␣in␣case␣no␣free␣mem␣was␣detected␣but␣we␣have␣physmem
 ----------
-Range: (658909,658987) (78)
+Range: (659477,659555) (78)
 #␣older␣dpkg-query␣do␣not␣support␣-f␣values␣consistently:␣eg␣${binary:Package}
 ----------
-Range: (663204,663287) (83)
+Range: (663772,663855) (83)
 }
 	#␣http://askubuntu.com/questions/86483/how-can-i-see-or-change-default-run-level
 ----------
-Range: (663289,663365) (76)
+Range: (663857,663933) (76)
 #␣note␣that␣technically␣default␣can␣be␣changed␣at␣boot␣but␣for␣inxi␣purposes
 ----------
-Range: (664414,664491) (77)
+Range: (664982,665059) (77)
 #␣trim␣leading␣/.../␣off␣just␣in␣case.␣ps␣-p␣should␣return␣the␣name,␣not␣path
 ----------
-Range: (664853,664941) (88)
+Range: (665421,665509) (88)
 #␣			if␣(($shell␣eq␣'sh'␣||␣$shell␣eq␣'sudo'␣||␣$shell␣eq␣'su'␣)␣&&␣$shell␣ne␣$working){
 ----------
-Range: (665592,665673) (81)
+Range: (666160,666241) (81)
 }
 		#␣note:␣not␣all␣programs␣return␣version␣data.␣This␣may␣miss␣unhandled␣shells!
 ----------
-Range: (665956,666034) (78)
+Range: (666524,666602) (78)
 #␣to␣infinite␣loops␣when␣inxi␣called␣from␣a␣script␣'infos'␣that␣is␣in␣PATH␣and
 ----------
-Range: (666363,666475) (112)
+Range: (666931,667043) (112)
 #␣print␣'shell:␣'␣.␣$shell␣.'␣Start␣client␣version␣type:␣',␣get_shell_parent(get_start_parent(getppid())),␣"\n";
 ----------
-Range: (668996,669077) (81)
+Range: (669564,669645) (81)
 }
 		#␣in␣case␣sudo␣starts␣inxi,␣parent␣is␣shell␣(or␣perl␣inxi␣if␣run␣by␣debugger)
 ----------
-Range: (673135,673254) (119)
+Range: (673703,673822) (119)
 /[\S]+\s+up\s+(([0-9]+)\s+day[s]?,\s+)?(([0-9]{1,2}):([0-9]{1,2})|([0-9]+)\smin[s]?),\s+([0-9]+\s+user|load␣average)/){
 ----------
-Range: (674242,674384) (142)
+Range: (674810,674952) (142)
 my␣($busid,$busid_nu,$chip_id,$content,$device,$driver,$driver_nu,$file,
 $handle,$modules,$port,$rev,$temp,$type,$type_id,$vendor,$vendor_id);
 ----------
-Range: (676806,676937) (131)
+Range: (677374,677505) (131)
 #␣0002:01:02.0␣Ethernet␣controller␣[0200]:␣Cavium,␣Inc.␣THUNDERX␣Network␣Interface␣Controller␣virtual␣function␣[177d:a034]␣(rev␣08)
 ----------
-Range: (676953,677076) (123)
+Range: (677521,677644) (123)
 /^(([0-9a-f]{2,4}:)?[0-9a-f]{2}:[0-9a-f]{2})[.:]([0-9a-f]+)\s(.*)\s\[([0-9a-f]{4}):([0-9a-f]{4})\](\s\(rev\s([^\)]+)\))?/){
 ----------
-Range: (677715,677800) (85)
+Range: (678283,678368) (85)
 }
 
 #␣em0@pci0:6:0:0:	class=0x020000␣card=0x10d315d9␣chip=0x10d38086␣rev=0x00␣hdr=0x00
 ----------
-Range: (679009,679133) (124)
+Range: (679577,679701) (124)
 /^([^@]+)\@pci([0-9]{1,3}:[0-9]{1,3}:[0-9]{1,3}):([0-9]{1,3}).*class=([^\s]+)\scard=([^\s]+)\schip=([^\s]+)\srev=([^\s]+)/){
 ----------
-Range: (680368,680473) (105)
+Range: (680936,681041) (105)
 /^0x[\S]{4}:␣Class:␣([0-9a-f]{2})␣Subclass:␣([0-9a-f]{2})␣Interface:␣([0-9a-f]+)␣Revision:␣([0-9a-f]+)/){
 ----------
-Range: (681186,681266) (80)
+Range: (681754,681834) (80)
 #my␣$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/pcidump/pci-openbsd-6.1-vm.txt";
 ----------
-Range: (681946,682045) (99)
+Range: (682514,682613) (99)
 }
 #␣1:␣/sys/devices/platform/soc/1c30000.ethernet/uevent:["DRIVER=dwmac-sun8i",␣"OF_NAME=ethernet",
 ----------
-Range: (682046,682127) (81)
+Range: (682614,682695) (81)
 #␣"OF_FULLNAME=/soc/ethernet@1c30000",␣"OF_COMPATIBLE_0=allwinner,sun8i-h3-emac",
 ----------
-Range: (682128,682232) (104)
+Range: (682696,682800) (104)
 #␣"OF_COMPATIBLE_N=1",␣"OF_ALIAS_0=ethernet0",␣#␣"MODALIAS=of:NethernetT<NULL>Callwinner,sun8i-h3-emac"]
 ----------
-Range: (682233,682344) (111)
+Range: (682801,682912) (111)
 #␣2:␣/sys/devices/platform/soc:audio/uevent:["DRIVER=bcm2835_audio",␣"OF_NAME=audio",␣"OF_FULLNAME=/soc/audio",
 ----------
-Range: (682345,682453) (108)
+Range: (682913,683021) (108)
 #␣"OF_COMPATIBLE_0=brcm,bcm2835-audio",␣"OF_COMPATIBLE_N=1",␣"MODALIAS=of:NaudioT<NULL>Cbrcm,bcm2835-audio"]
 ----------
-Range: (682454,682553) (99)
+Range: (683022,683121) (99)
 #␣3:␣/sys/devices/platform/soc:fb/uevent:["DRIVER=bcm2708_fb",␣"OF_NAME=fb",␣"OF_FULLNAME=/soc/fb",
 ----------
-Range: (682554,682653) (99)
+Range: (683122,683221) (99)
 #␣"OF_COMPATIBLE_0=brcm,bcm2708-fb",␣"OF_COMPATIBLE_N=1",␣"MODALIAS=of:NfbT<NULL>Cbrcm,bcm2708-fb"]
 ----------
-Range: (682654,682751) (97)
+Range: (683222,683319) (97)
 #␣4:␣/sys/devices/platform/soc/1c40000.gpu/uevent:["OF_NAME=gpu",␣"OF_FULLNAME=/soc/gpu@1c40000",
 ----------
-Range: (682752,682840) (88)
+Range: (683320,683408) (88)
 #␣"OF_COMPATIBLE_0=allwinner,sun8i-h3-mali",␣"OF_COMPATIBLE_1=allwinner,sun7i-a20-mali",
 ----------
-Range: (682896,682986) (90)
+Range: (683464,683554) (90)
 #␣"MODALIAS=of:NgpuT<NULL>Callwinner,sun8i-h3-maliCallwinner,sun7i-a20-maliCarm,mali-400"]
 ----------
-Range: (683261,683340) (79)
+Range: (683829,683908) (79)
 #␣9:␣/sys/devices/platform/audio/uevent:["DRIVER=bcm2835_AUD0",␣"OF_NAME=audio"
 ----------
-Range: (683415,683500) (85)
+Range: (683983,684068) (85)
 #␣11:␣/sys/devices/platform/soc:/soc:i2c-hdmi:/i2c-2/2-0050/uevent:['OF_NAME=hdmiddc'
 ----------
-Range: (683501,683593) (92)
+Range: (684069,684161) (92)
 #␣12:␣/sys/devices/platform/soc:/soc:i2c-hdmi:/uevent:['DRIVER=i2c-gpio',␣'OF_NAME=i2c-hdmi'
 ----------
-Range: (684404,684500) (96)
+Range: (684972,685068) (96)
 #␣not␣sure␣why,␣but␣even␣as␣root/sudo,␣/subsystem|driver/uevent␣are␣unreadable␣with␣-r␣test␣true
 ----------
-Range: (684741,684828) (87)
+Range: (685309,685396) (87)
 #␣variants:␣/soc/20100000.ethernet/␣/soc/soc:audio/␣/soc:/␣/soc@0/␣/soc:/12cb0000.i2c:/
 ----------
-Range: (684948,685056) (108)
+Range: (685516,685624) (108)
 /\/sys\/devices\/(platform\/)?(soc[^\/]*\/)?([^\/]+\/)?([^\/]+\/)?([^\/\.:]+)([\.:])?([^\/:]+)?:?\/uevent$/;
 ----------
-Range: (688377,688455) (78)
+Range: (688945,689023) (78)
 #␣$device_vm␣=␣check_vm($data[4])␣if␣(␣(!$b_ppc␣&&␣!$b_mips)␣&&␣!$device_vm␣);
 ----------
-Range: (689583,689666) (83)
+Range: (690151,690234) (83)
 #␣I2S␣or␣i2s.␣I2C␣is␣i2␣controller␣|[iI]2[Ss].␣note:␣odroid␣hdmi␣item␣is␣sound␣only
 ----------
-Range: (691403,691483) (80)
+Range: (691971,692051) (80)
 #$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/dmesg-boot/bsd-disks-diabolus.txt";
 ----------
-Range: (691486,691570) (84)
+Range: (692054,692138) (84)
 #$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/dmesg-boot/freebsd-disks-solestar.txt";
 ----------
-Range: (691573,691654) (81)
+Range: (692141,692222) (81)
 #$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/dmesg-boot/freebsd-enceladus-1.txt";
 ----------
-Range: (691705,691791) (86)
+Range: (692273,692359) (86)
 #$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/dmesg-boot/openbsd-5.6-dmesg.boot-1.txt";
 ----------
-Range: (692696,692775) (79)
+Range: (693264,693343) (79)
 #␣FreeBSD:␣'da*'␣is␣a␣USB␣device␣'ada*'␣is␣a␣SATA␣device␣'mmcsd*'␣is␣an␣SD␣card
 ----------
-Range: (693821,693898) (77)
+Range: (694389,694466) (77)
 #my␣$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/dmidecode/pci-freebsd-8.2-2";
 ----------
-Range: (693901,693982) (81)
+Range: (694469,694550) (81)
 #␣my␣$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/dmidecode/dmidecode-loki-1.txt";
 ----------
-Range: (693985,694064) (79)
+Range: (694553,694632) (79)
 #my␣$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/dmidecode/dmidecode-t41-1.txt";
 ----------
-Range: (694067,694154) (87)
+Range: (694635,694722) (87)
 #my␣$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/dmidecode/dmidecode-mint-20180106.txt";
 ----------
-Range: (694157,694243) (86)
+Range: (694725,694811) (86)
 #my␣$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/dmidecode/dmidecode-vmware-ram-1.txt";
 ----------
-Range: (696316,696402) (86)
+Range: (696884,696970) (86)
 #␣my␣$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/networking/ip-addr-blue-advance.txt";
 ----------
-Range: (697637,697729) (92)
+Range: (698205,698297) (92)
 #my␣@data␣=␣reader("$ENV{'HOME'}/bin/scripts/inxi/data/if/vps-ifconfig-1.txt",'')␣or␣die␣$!;
 ----------
-Range: (697731,697810) (79)
+Range: (698299,698378) (79)
 my␣($b_skip,$broadcast,$if,@ips_bsd,$ip,@ips,$scope,$if_id,$type,@temp,@temp2);
 ----------
-Range: (701610,701694) (84)
+Range: (702178,702262) (84)
 qw(razor-desktop␣razor-session␣lxsession␣lxqt-session
 		tdelauncher␣tdeinit_phase1);
 ----------
-Range: (701730,702267) (537)
+Range: (702298,702835) (537)
 qw(3dwm␣9wm␣afterstep␣aewm␣aewm\+\+␣amiwm␣antiwm␣awesome
 		blackbox␣bspwm
 		cagebreak␣calmwm␣(sh|c?lisp).*clfswm␣(openbsd-)?cwm␣dwm␣evilwm
@@ -2560,13 +2560,13 @@ qw(3dwm␣9wm␣afterstep␣aewm␣aewm\+\+␣amiwm␣antiwm␣awesome
 		waycooler␣way-cooler␣windowlab␣WindowMaker␣wm2␣wmii2␣wmii␣wmx
 		xfdesktop␣xmonad␣yeahwm);
 ----------
-Range: (702350,702524) (174)
+Range: (702918,703092) (174)
 qw(budgie-wm␣compiz␣deepin-wm␣gala␣gnome-shell
 		twin␣kwin_wayland␣kwin_x11␣kwin␣marco
 		deepin-metacity␣metacity␣metisse␣mir␣muffin␣deepin-mutter␣mutter
 		ukwm␣xfwm4␣xfwm5);
 ----------
-Range: (702753,703255) (502)
+Range: (703321,703823) (502)
 qw(alltray␣awn␣bar␣bmpanel␣bmpanel2␣budgie-panel
 		cairo-dock␣dde-dock␣dmenu␣dockbarx␣docker␣docky␣dzen␣dzen2
 		fbpanel␣fspanel␣glx-dock␣gnome-panel␣hpanel␣i3bar␣icewmtray
@@ -2577,7 +2577,7 @@ qw(alltray␣awn␣bar␣bmpanel␣bmpanel2␣budgie-panel
 		ukui-panel␣vala-panel␣wbar␣wharf␣wingpanel␣witray
 		xfce4-panel␣xfce5-panel␣xmobar␣yabar);
 ----------
-Range: (703442,703802) (360)
+Range: (704010,704370) (360)
 qw(3dwm␣asc␣budgie-wm␣compiz␣compton␣deepin-wm␣dwc␣dcompmgr
 		enlightenment␣fireplace␣gnome-shell␣grefson␣kmscon␣kwin_wayland␣kwin_x11
 		liri␣marco␣metisse␣mir␣moblin␣motorcar␣muffin␣mutter
@@ -2585,55 +2585,55 @@ qw(3dwm␣asc␣budgie-wm␣compiz␣compton␣deepin-wm␣dwc␣dcompmgr
 		ukwm␣unagi␣unity-system-compositor
 		wavy␣waycooler␣way-cooler␣wayfire␣wayhouse␣westford␣weston␣xcompmgr);
 ----------
-Range: (704481,704574) (93)
+Range: (705049,705142) (93)
 #my␣$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/sysctl/obsd_6.1_sysctl_soekris6501_root.txt";
 ----------
-Range: (704577,704668) (91)
+Range: (705145,705236) (91)
 #my␣$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/sysctl/obsd_6.1sysctl_lenovot500_user.txt";
 ----------
-Range: (704853,704934) (81)
+Range: (705421,705502) (81)
 #my␣$file␣=␣"$ENV{'HOME'}/bin/scripts/inxi/data/sysctl/openbsd-5.6-sysctl-2.txt";
 ----------
-Range: (706009,706215) (206)
+Range: (706577,706783) (206)
 my␣($b_hub,$addr_id,$bus_id,$bus_id_alpha,$chip_id,$class_id,
 $device_id,$driver,$ids,$interfaces,$name,$path,$path_id,$product,
 $protocol_id,$serial,$speed,$subclass_id,$type,$version,$vendor,$vendor_id,);
 ----------
-Range: (707781,707873) (92)
+Range: (708349,708441) (92)
 #␣addr␣1:␣full␣speed,␣self␣powered,␣config␣1,␣UHCI␣root␣hub(0x0000),␣Intel(0x8086),␣rev␣1.00
 ----------
-Range: (707874,707976) (102)
+Range: (708442,708544) (102)
 #␣␣port␣1␣addr␣2:␣full␣speed,␣power␣98␣mA,␣config␣1,␣USB␣Receiver(0xc52b),␣Logitech(0x046d),␣rev␣12.01
 ----------
-Range: (708321,708425) (104)
+Range: (708889,708993) (104)
 /^addr\s([0-9]+):\s([^,]+),[^,]+,[^,]+,\s?([^,]+)\(0x([0-9a-f]{4})\),\s?([^,]+)\s?\(0x([0-9a-f]{4})\)/){
 ----------
-Range: (709088,709211) (123)
+Range: (709656,709779) (123)
 /^\s+port\s([0-9]+)\saddr\s([0-9]+):\s([^,]+),[^,]+,[^,]+,\s?([^,]+)\(0x([0-9a-f]{4})\),\s?([^,]+)\s?\(0x([0-9a-f]{4})\)/){
 ----------
-Range: (711006,711086) (80)
+Range: (711574,711654) (80)
 #␣we␣want␣to␣get␣rid␣of␣the␣hubs␣with␣x-0:␣syntax,␣those␣are␣hubs␣found␣in␣/usbx
 ----------
-Range: (713495,713571) (76)
+Range: (714063,714139) (76)
 #␣we␣don't␣want␣the␣device,␣it's␣probably␣a␣bad␣path␣in␣/sys/bus/usb/devices
 ----------
-Range: (714919,715026) (107)
+Range: (715487,715594) (107)
 }
 			#print␣"$path_id␣ids:␣$bus_id:$device_id␣driver:␣$driver␣ports:␣$ports\n==========\n";␣#␣if␣$test[6];;
 ----------
-Range: (719171,719248) (77)
+Range: (719739,719816) (77)
 }
 }
 
 ########################################################################
 ----------
-Range: (721580,721660) (80)
+Range: (722148,722228) (80)
 #␣Note:␣USBData␣is␣set␣internally␣in␣AudioData␣because␣it's␣only␣run␣in␣one␣case
 ----------
-Range: (726129,726209) (80)
+Range: (726697,726777) (80)
 }
 		#␣in␣some␣fringe␣cases␣size␣can␣be␣0␣so␣only␣assign␣'N/A'␣if␣no␣percents␣etc
 ----------
-Range: (735442,735519) (77)
+Range: (736010,736087) (77)
 #	$data{$data_name}[$index]{main::key($num++,0,1,'vc')}␣=␣$tty␣if␣$tty␣ne␣'';
 ----------

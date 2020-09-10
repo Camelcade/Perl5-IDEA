@@ -51,7 +51,23 @@
 #        see the CHANGES file.
 #
 ############################################################
-
+package Perl::Tidy::IOScalar;
+package Perl::Tidy::IOScalarArray;
+package Perl::Tidy::LineSource;
+package Perl::Tidy::LineSink;
+package Perl::Tidy::Diagnostics;
+package Perl::Tidy::Logger;
+package Perl::Tidy::DevNull;
+package Perl::Tidy::HtmlWriter;
+package Perl::Tidy::Formatter;
+package Perl::Tidy::IndentationItem;
+package Perl::Tidy::VerticalAligner::Line;
+package Perl::Tidy::VerticalAligner::Alignment;
+package Perl::Tidy::VerticalAligner;
+package Perl::Tidy::FileWriter;
+package Perl::Tidy::Debugger;
+package Perl::Tidy::LineBuffer;
+package Perl::Tidy::Tokenizer;
 package Perl::Tidy;
 
 # Actually should use a version later than about 5.8.5 to use
