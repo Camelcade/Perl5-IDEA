@@ -69,7 +69,7 @@ Perl5
                     PsiWhiteSpace(' ')
                     PsiElement(Perl5: =>)('=>')
                   PsiWhiteSpace(' ')
-                  PsiErrorElement:<expression>, Perl5: , or Perl5: => expected, got ']'
+                  PsiErrorElement:<comma> or <expression> expected, got ']'
                     PsiElement(Perl5: ])(']')
                   PsiElement(Perl5: ,)(',')
                   PsiWhiteSpace('\n    ')

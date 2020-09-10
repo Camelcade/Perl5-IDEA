@@ -10,7 +10,7 @@ Perl5
             PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
               PsiElement(Perl5: $$)('$')
               PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('class')
-        PsiErrorElement:Perl5: ,, Perl5: = or Perl5: => expected, got ':'
+        PsiErrorElement:<comma> or Perl5: = expected, got ':'
           PsiElement(Perl5: :)(':')
         PsiElement(Perl5: $$)('$')
         PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('x')

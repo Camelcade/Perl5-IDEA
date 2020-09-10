@@ -19,7 +19,7 @@ Perl5
           PsiPerlMethodImpl(Perl5: METHOD)
             PerlSubNameElementImpl(Perl5: subname)('something')
     PsiWhiteSpace(' ')
-    PsiErrorElement:<call arguments>, <statement modifier>, Perl5: (, Perl5: ,, Perl5: => or Perl5: package::name expected, got ':'
+    PsiErrorElement:<call arguments>, <comma>, <statement modifier>, Perl5: ( or Perl5: package::name expected, got ':'
       PsiElement(Perl5: :)(':')
     PsiErrorElement:Semicolon expected
       <empty list>

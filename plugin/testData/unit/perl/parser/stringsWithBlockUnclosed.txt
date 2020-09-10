@@ -19,7 +19,7 @@ Perl5
                 PsiPerlSubCallImpl(SUB_CALL)
                   PsiPerlMethodImpl(Perl5: METHOD)
                     PerlSubNameElementImpl(Perl5: subname)('thing')
-                PsiErrorElement:<call arguments>, <statement modifier>, Perl5: (, Perl5: ,, Perl5: => or Perl5: package::name expected, got '"'
+                PsiErrorElement:<call arguments>, <comma>, <statement modifier>, Perl5: ( or Perl5: package::name expected, got '"'
                   PsiElement(Perl5: QUOTE_DOUBLE_CLOSE)('"')
                 PsiElement(Perl5: ;)(';')
               PsiPerlStatementImpl(Perl5: STATEMENT)
@@ -38,7 +38,7 @@ Perl5
                         PsiPerlSubCallImpl(SUB_CALL)
                           PsiPerlMethodImpl(Perl5: METHOD)
                             PerlSubNameElementImpl(Perl5: subname)('thing')
-                        PsiErrorElement:<call arguments>, <statement modifier>, Perl5: (, Perl5: ,, Perl5: => or Perl5: package::name expected, got '`'
+                        PsiErrorElement:<call arguments>, <comma>, <statement modifier>, Perl5: ( or Perl5: package::name expected, got '`'
                           PsiElement(Perl5: QUOTE_TICK_CLOSE)('`')
                         PsiElement(Perl5: ;)(';')
                       PsiPerlStatementImpl(Perl5: STATEMENT)
@@ -57,7 +57,7 @@ Perl5
                                 PsiPerlSubCallImpl(SUB_CALL)
                                   PsiPerlMethodImpl(Perl5: METHOD)
                                     PerlSubNameElementImpl(Perl5: subname)('thing')
-                                PsiErrorElement:<call arguments>, <statement modifier>, Perl5: (, Perl5: ,, Perl5: => or Perl5: package::name expected, got '"'
+                                PsiErrorElement:<call arguments>, <comma>, <statement modifier>, Perl5: ( or Perl5: package::name expected, got '"'
                                   PsiElement(Perl5: QUOTE_DOUBLE_CLOSE)('"')
                                 PsiElement(Perl5: ;)(';')
                               PsiPerlStatementImpl(Perl5: STATEMENT)
@@ -76,7 +76,7 @@ Perl5
                                         PsiPerlSubCallImpl(SUB_CALL)
                                           PsiPerlMethodImpl(Perl5: METHOD)
                                             PerlSubNameElementImpl(Perl5: subname)('thing')
-                                        PsiErrorElement:<call arguments>, <statement modifier>, Perl5: (, Perl5: ,, Perl5: => or Perl5: package::name expected, got '`'
+                                        PsiErrorElement:<call arguments>, <comma>, <statement modifier>, Perl5: ( or Perl5: package::name expected, got '`'
                                           PsiElement(Perl5: QUOTE_TICK_CLOSE)('`')
                                         PsiElement(Perl5: ;)(';')
                                       PsiPerlStatementImpl(Perl5: STATEMENT)
@@ -96,7 +96,7 @@ Perl5
                                                 PsiPerlSubCallImpl(SUB_CALL)
                                                   PsiPerlMethodImpl(Perl5: METHOD)
                                                     PerlSubNameElementImpl(Perl5: subname)('thing')
-                                                PsiErrorElement:<call arguments>, <statement modifier>, Perl5: (, Perl5: ,, Perl5: => or Perl5: package::name expected, got '/'
+                                                PsiErrorElement:<call arguments>, <comma>, <statement modifier>, Perl5: ( or Perl5: package::name expected, got '/'
                                                   PsiElement(Perl5: QUOTE_DOUBLE_CLOSE)('/')
                                                 PsiElement(Perl5: ;)(';')
                                               PsiPerlStatementImpl(Perl5: STATEMENT)
@@ -116,7 +116,7 @@ Perl5
                                                         PsiPerlSubCallImpl(SUB_CALL)
                                                           PsiPerlMethodImpl(Perl5: METHOD)
                                                             PerlSubNameElementImpl(Perl5: subname)('thing')
-                                                        PsiErrorElement:<call arguments>, <statement modifier>, Perl5: (, Perl5: ,, Perl5: => or Perl5: package::name expected, got '/'
+                                                        PsiErrorElement:<call arguments>, <comma>, <statement modifier>, Perl5: ( or Perl5: package::name expected, got '/'
                                                           PsiElement(Perl5: QUOTE_TICK_CLOSE)('/')
                                                         PsiElement(Perl5: ;)(';')
                                                       PsiPerlStatementImpl(Perl5: STATEMENT)
@@ -136,7 +136,7 @@ Perl5
                                                                 PsiPerlSubCallImpl(SUB_CALL)
                                                                   PsiPerlMethodImpl(Perl5: METHOD)
                                                                     PerlSubNameElementImpl(Perl5: subname)('thing')
-                                                                PsiErrorElement:<call arguments>, <statement modifier>, Perl5: (, Perl5: ,, Perl5: => or Perl5: package::name expected, got '/'
+                                                                PsiErrorElement:<call arguments>, <comma>, <statement modifier>, Perl5: ( or Perl5: package::name expected, got '/'
                                                                   PsiElement(Perl5: QUOTE_DOUBLE_CLOSE)('/')
                                                                 PsiElement(Perl5: ;)(';')
                                                               PsiPerlStatementImpl(Perl5: STATEMENT)
@@ -156,7 +156,7 @@ Perl5
                                                                         PsiPerlSubCallImpl(SUB_CALL)
                                                                           PsiPerlMethodImpl(Perl5: METHOD)
                                                                             PerlSubNameElementImpl(Perl5: subname)('thing')
-                                                                        PsiErrorElement:<call arguments>, <statement modifier>, Perl5: (, Perl5: ,, Perl5: => or Perl5: package::name expected, got '/'
+                                                                        PsiErrorElement:<call arguments>, <comma>, <statement modifier>, Perl5: ( or Perl5: package::name expected, got '/'
                                                                           PsiElement(Perl5: QUOTE_TICK_CLOSE)('/')
                                                                         PsiElement(Perl5: ;)(';')
                                                                       PsiPerlStatementImpl(Perl5: STATEMENT)

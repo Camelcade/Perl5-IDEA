@@ -13,7 +13,7 @@ Perl5
           PsiPerlSubCallImpl(SUB_CALL)
             PsiPerlMethodImpl(Perl5: METHOD)
               PerlSubNameElementImpl(Perl5: subname)('somsd')
-          PsiErrorElement:<call arguments>, Perl5: (, Perl5: ,, Perl5: => or Perl5: package::name expected, got '"'
+          PsiErrorElement:<call arguments>, <comma>, Perl5: ( or Perl5: package::name expected, got '"'
             PsiElement(Perl5: QUOTE_DOUBLE_CLOSE)('"')
           PsiElement(Perl5: ;)(';')
           PsiElement(Perl5: say)('say')

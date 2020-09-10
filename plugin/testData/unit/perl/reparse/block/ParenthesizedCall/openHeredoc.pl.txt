@@ -68,7 +68,7 @@ Perl5
                   PsiPerlStringBareImpl(Perl5: STRING_BARE)
                     PerlStringContentElementImpl(Perl5: STRING_CONTENT)('EOM')
                 PsiElement(Perl5: ,)(',')
-              PsiErrorElement:<expression>, Perl5: ), Perl5: , or Perl5: => expected
+              PsiErrorElement:<comma>, <expression> or Perl5: ) expected
                 <empty list>
   PsiWhiteSpace('\n')
   PerlHeredocElementImpl(Perl5: HEREDOC_QQ)

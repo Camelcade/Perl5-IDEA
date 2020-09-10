@@ -49,7 +49,7 @@ Perl5
             PsiPerlBlockImpl(Perl5: BLOCK)
               PsiElement(Perl5: {)('{')
               PsiElement(Perl5: })('}')
-          PsiErrorElement:<statement modifier>, Perl5: , or Perl5: => expected, got ')'
+          PsiErrorElement:<comma> or <statement modifier> expected, got ')'
             PsiElement(Perl5: ))(')')
           PsiErrorElement:Semicolon expected
             <empty list>

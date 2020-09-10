@@ -42,7 +42,7 @@ Perl5
                 PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
                 PerlStringContentElementImpl(Perl5: STRING_CONTENT)(' ){\n    say ')
                 PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
-            PsiErrorElement:Perl5: , or Perl5: => expected, got 'hi'
+            PsiErrorElement:<comma> expected, got 'hi'
               PerlSubNameElementImpl(Perl5: subname)('hi')
             PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
             PerlStringContentElementImpl(Perl5: STRING_CONTENT)('\n  }\n}\n')

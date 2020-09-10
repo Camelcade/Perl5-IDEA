@@ -43,7 +43,7 @@ Perl5
                       PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('var')
                     PsiElement(Perl5: ,)(',')
                   PsiElement(Perl5: ))(')')
-          PsiErrorElement:<statement modifier>, Perl5: ,, Perl5: :, Perl5: => or Perl5: { expected, got ')'
+          PsiErrorElement:<comma>, <statement modifier>, Perl5: : or Perl5: { expected, got ')'
             PsiElement(Perl5: ))(')')
           PsiErrorElement:Semicolon expected
             <empty list>

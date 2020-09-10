@@ -1322,7 +1322,7 @@ hash_variable ::= '$%' {HASH_NAME | '%{' HASH_NAME '%}'} {name="hash"}
 code_variable ::= '$&' {method | '&{' method '&}'} {name="code"}
 glob_variable ::= '$*' {GLOB_NAME | '*{' GLOB_NAME '*}'} {name="typeglob"}
 
-private comma ::= ',' | '=>'
+private comma ::= ',' | '=>' {name="comma"}
 
 
 /********************************************** Extensions for Method::Signatures *************************************/
