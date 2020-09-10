@@ -1,0 +1,4 @@
+reverse;
+reverse $_;
+reverse "test";
+reverse %hash;

@@ -147,7 +147,7 @@ BARE_HANDLE_ACCEPTORS = "truncate"|"syswrite"|"sysseek"|"sysread"|"sysopen"|"sta
 NAMED_UNARY_BARE_HANDLE_ACCEPTORS = "write"|"telldir"|"tell"|"rewinddir"|"readdir"|"getc"|"fileno"|"eof"|"closedir"|"close"|"chdir"
 LIST_OPERATORS = "warn"|"waitpid"|"vec"|"utime"|"untie"|"tied"|"tie"|"system"|"syscall"|"symlink"|"substr"|"sprintf"|"socketpair"|"socket"|"shutdown"|"shmwrite"|"shmread"|"shmget"|"shmctl"|"setsockopt"|"setpriority"|"setpgrp"|"send"|"semop"|"semget"|"semctl"|"rindex"|"rename"|"recv"|"pipe"|"pack"|"msgsnd"|"msgrcv"|"msgget"|"msgctl"|"lock"|"listen"|"link"|"kill"|"join"|"index"|"getsockopt"|"getservbyport"|"getservbyname"|"getprotobynumber"|"getpriority"|"getnetbyaddr"|"gethostbyaddr"|"formline"|"exec"|"dump"|"die"|"dbmopen"|"dbmclose"|"crypt"|"connect"|"chown"|"chmod"|"bind"|"atan2"|"accept"
 NAMED_ARGUMENTLESS = "wait"|"times"|"time"|"setpwent"|"setgrent"|"getservent"|"getpwent"|"getprotoent"|"getppid"|"getnetent"|"getlogin"|"gethostent"|"getgrent"|"fork"|"endservent"|"endpwent"|"endprotoent"|"endnetent"|"endhostent"|"endgrent"|"break"
-IMPLICIT_USERS = "unpack"|"unlink"|"ucfirst"|"uc"|"study"|"stat"|"sqrt"|"sin"|"rmdir"|"reverse"|"ref"|"readpipe"|"readlink"|"quotemeta"|"pos"|"ord"|"oct"|"mkdir"|"lstat"|"log"|"length"|"lcfirst"|"lc"|"int"|"hex"|"glob"|"fc"|"exp"|"evalbytes"|"cos"|"chroot"|"chr"|"chop"|"chomp"|"alarm"|"abs"
+IMPLICIT_USERS = "unpack"|"unlink"|"ucfirst"|"uc"|"study"|"stat"|"sqrt"|"sin"|"rmdir"|"ref"|"readpipe"|"readlink"|"quotemeta"|"pos"|"ord"|"oct"|"mkdir"|"lstat"|"log"|"length"|"lcfirst"|"lc"|"int"|"hex"|"glob"|"fc"|"exp"|"evalbytes"|"cos"|"chroot"|"chr"|"chop"|"chomp"|"alarm"|"abs"
 CORE_LIST = "NEXT"|"bigrat"|"version"|"Win32"|"Memoize"|"experimental"|"bignum"|"bigint"|"autodie"|"Socket"|"DB_File"|"parent"|"Encode"|"Digest"|"Fatal"|"perlfaq"|"CPAN"|"encoding"
 AMBIGOUS_PACKAGES="version"|"JSON"|"YAML"|"Test"
 TEXT_OPERATORS = "x"|"and"|"or"|"xor"|"lt"|"gt"|"le"|"ge"|"ne"|"eq"|"cmp"|"isa"
@@ -1202,6 +1202,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 	{CORE_PREFIX}"defined" / {MAY_BE_SPACES_OR_COMMENTS} "//"	{ yybegin(AFTER_IDENTIFIER); return RESERVED_DEFINED;}
 	{CORE_PREFIX}"defined"	                                { yybegin(YYINITIAL); return RESERVED_DEFINED;}
 
+        {CORE_PREFIX}"reverse"   { yybegin(YYINITIAL); return BUILTIN_UNARY;}
 	{CORE_PREFIX}"scalar"	 { yybegin(YYINITIAL); return RESERVED_SCALAR;}
 	{CORE_PREFIX}"keys"	 { yybegin(YYINITIAL); return RESERVED_KEYS;}
 	{CORE_PREFIX}"values"	 { yybegin(YYINITIAL); return RESERVED_VALUES;}
