@@ -75,7 +75,7 @@ Perl5
                     PsiWhiteSpace(' ')
                     PsiElement(Perl5: =>)('=>')
                   PsiWhiteSpace(' ')
-                  PsiErrorElement:<expr>, <statement modifier>, Perl5: , or Perl5: => expected, got ')'
+                  PsiErrorElement:<expression>, <statement modifier>, Perl5: , or Perl5: => expected, got ')'
                     PsiElement(Perl5: ))(')')
                   PsiElement(Perl5: ;)(';')
                 PsiWhiteSpace('\n    ')

@@ -62,7 +62,7 @@ Perl5
                   PerlStringContentElementImpl(Perl5: STRING_CONTENT)('some')
                 PsiWhiteSpace(' ')
                 PsiElement(Perl5: =>)('=>')
-              PsiErrorElement:<expr>, Perl5: ), Perl5: , or Perl5: => expected, got '}'
+              PsiErrorElement:<expression>, Perl5: ), Perl5: , or Perl5: => expected, got '}'
                 <empty list>
         PsiWhiteSpace(' ')
         PsiElement(Perl5: })('}')

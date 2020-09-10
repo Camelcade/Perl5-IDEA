@@ -1008,7 +1008,7 @@ private assign_or_flow_expr ::=
 
 // fixme do we need to collapse tokens?
 assign_expr ::= expr ({'**='|'+='|'-='|'*='|'/='|'%='|'.='|'x='|'&='|'|='|'^='|'<<='|'>>='|'&&='|'||='|'//='|'='} expr ) + { rightAssociative=true }
-comma_sequence_expr ::= expr <<parseCommaSequence>> // fixme implement pinnning
+comma_sequence_expr ::= expr {comma [parse_scalar_expr]}+ {pin(".*")=1}
 lp_not_expr ::= 'not' expr { rightAssociative=true }
 lp_and_expr ::= expr ('and' expr)+
 lp_or_xor_expr ::= expr ({'or'|'xor'} expr)+
