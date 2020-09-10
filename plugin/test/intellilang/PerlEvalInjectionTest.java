@@ -83,6 +83,18 @@ public class PerlEvalInjectionTest extends PerlLightTestCase {
   @Test
   public void testExpressionsInStringQXAngles() {doTest();}
 
+  @Test
+  public void testNotInjectInConcat() {
+    initWithFileSmart();
+    assertNotInjected();
+  }
+
+  @Test
+  public void testInjectInAssign() {
+    initWithFileSmart();
+    assertInjected();
+  }
+
   private void doTest(boolean checkErrors) {
     doTestInjection(checkErrors);
   }

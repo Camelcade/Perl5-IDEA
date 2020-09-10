@@ -65,6 +65,35 @@ public interface PerlAssignExpression extends PsiPerlExpr {
   }
 
   /**
+   * @return the operator element on the right from assignment element
+   */
+  @Contract("null->null")
+  default @Nullable PsiElement getRightOperatorElement(@Nullable PsiElement assignmentElement) {
+    var assignmentElementRange = assignmentElement == null ? null : assignmentElement.getTextRange();
+    if (assignmentElementRange == null || !getTextRange().contains(assignmentElementRange)) {
+      return null;
+    }
+    PsiElement anchor = null;
+    for (PsiElement child : getChildren()) {
+      if (child.getTextRange().contains(assignmentElementRange)) {
+        anchor = child;
+        break;
+      }
+    }
+    if (anchor == null) {
+      return null;
+    }
+    PsiElement result = anchor.getPrevSibling();
+    while (result != null) {
+      if (!PerlPsiUtil.isCommentOrSpace(result)) {
+        return result;
+      }
+      result = result.getPrevSibling();
+    }
+    return null;
+  }
+
+  /**
    * @return a left counterpart of the assignment for the right side.
    * @implNote current implementation works properly only for simple a = b expressions.
    */

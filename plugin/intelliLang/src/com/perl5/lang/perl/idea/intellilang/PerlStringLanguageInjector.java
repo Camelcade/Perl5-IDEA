@@ -30,6 +30,7 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
+import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.Query;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.psi.*;
@@ -42,6 +43,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.OPERATOR_ASSIGN;
 
 
 public class PerlStringLanguageInjector extends PerlLiteralLanguageInjector {
@@ -95,6 +98,10 @@ public class PerlStringLanguageInjector extends PerlLiteralLanguageInjector {
     }
 
     if (!(parent instanceof PsiPerlAssignExpr)) {
+      return null;
+    }
+
+    if (PsiUtilCore.getElementType(((PsiPerlAssignExpr)parent).getRightOperatorElement(host)) != OPERATOR_ASSIGN) {
       return null;
     }
 
