@@ -153,7 +153,7 @@ AMBIGOUS_PACKAGES="version"|"JSON"|"YAML"|"Test"
 TEXT_OPERATORS = "x"|"and"|"or"|"xor"|"lt"|"gt"|"le"|"ge"|"ne"|"eq"|"cmp"|"isa"
 
 REGEX_COMMENT = "(?#"[^)]*")"
-REGEX_ARRAY_NEGATING = [\^\:\\\[\{\.\,\'\"]
+REGEX_ARRAY_NEGATING = [\^\:\\\[\{\.\,\'\"})]
 REGEX_HASH_NEGATING = [\^\:\\\[\{\.\,]
 HANDLE_NEGATING = {MAY_BE_SPACES_OR_COMMENTS} ("("|"->"|":")
 PRINT_HANDLE_NEGATING = {MAY_BE_SPACES_OR_COMMENTS} ("("|"->"|":"|";"|"=>"|"&&"|"||")
