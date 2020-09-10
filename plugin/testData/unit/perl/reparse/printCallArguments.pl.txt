@@ -19,8 +19,6 @@ Perl5
           PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
             PsiElement(Perl5: NUMBER)('42')
           PsiElement(Perl5: ,)(',')
-          PsiErrorElement:<expression> expected, got ')'
-            <empty list>
         PsiWhiteSpace(' ')
         PsiElement(Perl5: ))(')')
     PsiElement(Perl5: ;)(';')

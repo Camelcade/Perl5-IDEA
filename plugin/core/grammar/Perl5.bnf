@@ -1018,7 +1018,7 @@ print_parenthesized_call_arguments ::= print_parenthesized_call_arguments_body !
 private print_parenthesized_call_arguments_body ::= '(' [print_arguments_contents] ')' {pin=1}
 print_arguments ::= print_arguments_contents {elementType=call_arguments}
 print_arguments_contents ::= [perl_handle] [print_arguments_contents_tail] {extends=expr elementType=comma_sequence_expr}
-private print_arguments_contents_tail ::= parse_scalar_expr {comma parse_scalar_expr}* {pin(".*")=1}
+private print_arguments_contents_tail ::= parse_scalar_expr {comma [parse_scalar_expr]}*  {pin(".*")=1}
 
 
 sub_expr_simple ::= block !('->') {elementType=sub_expr}
