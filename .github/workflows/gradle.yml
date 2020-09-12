@@ -81,3 +81,9 @@ jobs:
             ./htmlmason/build/distributions/*.zip
             ./mojo/build/distributions/*.zip
             ./tt2/build/distributions/*.zip
+      - name: Publishing coverage results
+        uses: actions/upload-artifact@v2
+        with:
+          name: coverage
+          path: |
+            ./build/jacoco/test.exec
