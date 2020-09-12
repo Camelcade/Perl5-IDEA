@@ -29,10 +29,10 @@ include 'perl5.core.coverage'
 project(':perl5.core.coverage').projectDir = file('plugin/coverage')
 include 'perl5.core.intelliLang'
 project(':perl5.core.intelliLang').projectDir = file('plugin/intelliLang')
-include 'perl5.transport.docker'
-project(':perl5.transport.docker').projectDir = file('docker')
-include 'perl5.transport.wsl'
-project(':perl5.transport.wsl').projectDir = file('wsl')
+include 'perl5.core.docker'
+project(':perl5.core.docker').projectDir = file('plugin/docker')
+include 'perl5.core.wsl'
+project(':perl5.core.wsl').projectDir = file('plugin/wsl')
 include 'perl5.lang.tt2'
 project(':perl5.lang.tt2').projectDir=file('tt2')
 include 'perl5.lang.mojo'
