@@ -31,6 +31,7 @@
   <depends optional="true" config-file="perl-copyright.xml">com.intellij.copyright</depends>
   <depends optional="true" config-file="perl-coverage.xml">com.intellij.modules.coverage</depends>
 
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="perl-debugger.xml" xpointer="xpointer(/idea-plugin/*)"/>
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="perl-pod.xml" xpointer="xpointer(/idea-plugin/*)"/>
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="perl-berrybrew.xml" xpointer="xpointer(/idea-plugin/*)"/>
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="perl-perlbrew.xml" xpointer="xpointer(/idea-plugin/*)"/>
@@ -202,7 +203,6 @@
     <editorNotificationProvider implementation="com.perl5.lang.perl.idea.editor.notification.PerlAssociationEditorNotification"/>
 
     <virtualFileSystem key="perlhost" implementationClass="com.perl5.lang.perl.idea.sdk.host.PerlHostVirtualFileSystem"/>
-    <virtualFileSystem key="perl5_remote" implementationClass="com.perl5.lang.perl.idea.run.debugger.PerlRemoteFileSystem"/>
 
     <editorFactoryListener implementation="com.perl5.lang.perl.idea.configuration.settings.PerlEditorFactoryListener"/>
 
@@ -307,15 +307,8 @@
     <runConfigurationProducer implementation="com.perl5.lang.perl.idea.run.run.PerlRunConfigurationProducer"/>
     <programRunner implementation="com.perl5.lang.perl.idea.run.run.PerlRunProgramRunner"/>
 
-    <configurationType implementation="com.perl5.lang.perl.idea.run.remote.PerlRemoteDebuggingConfigurationType"/>
-
     <configurationType implementation="com.perl5.lang.perl.idea.run.prove.PerlTestRunConfigurationType"/>
     <runConfigurationProducer implementation="com.perl5.lang.perl.idea.run.prove.PerlTestRunConfigurationProducer"/>
-
-    <programRunner implementation="com.perl5.lang.perl.idea.run.debugger.PerlDebuggerProgramRunner"/>
-    <xdebugger.breakpointType
-        implementation="com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakpointType"/>
-    <xdebugger.settings implementation="com.perl5.lang.perl.idea.run.debugger.PerlDebuggerSettings"/>
 
     <lang.parserDefinition language="Perl5" implementationClass="com.perl5.lang.perl.PerlParserDefinition"/>
 

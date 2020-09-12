@@ -22,6 +22,7 @@ import com.intellij.execution.Executor;
 import com.intellij.execution.configurations.RunProfile;
 import com.intellij.execution.executors.DefaultDebugExecutor;
 import com.intellij.execution.runners.ExecutionEnvironment;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.xdebugger.XDebugProcess;
 import com.intellij.xdebugger.XDebugProcessStarter;
@@ -34,6 +35,7 @@ import org.jetbrains.annotations.Nullable;
 
 
 public class PerlDebuggerProgramRunner extends GenericPerlProgramRunner {
+  private static final Logger LOG = Logger.getInstance(PerlDebuggerProgramRunner.class);
   @Override
   public @NotNull String getRunnerId() {
     return "Perl Debugger";
@@ -41,7 +43,7 @@ public class PerlDebuggerProgramRunner extends GenericPerlProgramRunner {
 
   @Override
   public boolean canRun(@NotNull String executorId, @NotNull RunProfile profile) {
-    return executorId.equals(DefaultDebugExecutor.EXECUTOR_ID) && profile instanceof PerlDebuggableRunConfiguration;
+    return executorId.equals(DefaultDebugExecutor.EXECUTOR_ID) && profile instanceof PerlDebugOptions;
   }
 
   @Override
@@ -54,11 +56,15 @@ public class PerlDebuggerProgramRunner extends GenericPerlProgramRunner {
   public void execute(@NotNull ExecutionEnvironment env) throws ExecutionException {
     FileDocumentManager.getInstance().saveAllDocuments();
     ExecutionManager.getInstance(env.getProject()).startRunProfile(env, state -> {
+      if (!(state instanceof PerlDebugProfileStateBase)) {
+        LOG.error("PerlDebugProfileStateBase expected, got " + state + " for " + env);
+        throw new ExecutionException("Incorrect run state");
+      }
       XDebugSession xDebugSession = XDebuggerManager.getInstance(env.getProject()).startSession(env, new XDebugProcessStarter() {
         @Override
         public @NotNull XDebugProcess start(@NotNull XDebugSession session) throws ExecutionException {
-          return ((PerlDebuggableRunConfiguration)env.getRunProfile())
-            .createDebugProcess(((PerlDebuggableRunConfiguration)env.getRunProfile()).computeDebugAddress(null), session, null, env);
+          return new PerlDebugProcess(session, (PerlDebugProfileStateBase)state,
+                                      ((PerlDebugProfileStateBase)state).execute(env.getExecutor()));
         }
       });
       return xDebugSession.getRunContentDescriptor();

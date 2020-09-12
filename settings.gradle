@@ -25,6 +25,8 @@ include 'perl5.core.copyright'
 project(':perl5.core.copyright').projectDir = file('plugin/copyright')
 include 'perl5.core.profiler'
 project(':perl5.core.profiler').projectDir = file('plugin/profiler')
+include 'perl5.core.debugger'
+project(':perl5.core.debugger').projectDir = file('plugin/debugger')
 include 'perl5.core.coverage'
 project(':perl5.core.coverage').projectDir = file('plugin/coverage')
 include 'perl5.core.intelliLang'

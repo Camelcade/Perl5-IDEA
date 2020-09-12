@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,16 +17,15 @@
 package com.perl5.lang.perl.idea.run.debugger.protocol;
 
 
-public class PerlDebuggingTransactionWrapper {
-  private final int id;
-  private final Object data;
+public class PerlEvalResponseDescriptor {
+  private boolean error;
+  private PerlValueDescriptor result;
 
-  public PerlDebuggingTransactionWrapper(int transactionId, Object data) {
-    this.id = transactionId;
-    this.data = data;
+  public boolean isError() {
+    return error;
   }
 
-  public int getTransactionId() {
-    return id;
+  public PerlValueDescriptor getResult() {
+    return result;
   }
 }

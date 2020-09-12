@@ -27,7 +27,6 @@ import com.intellij.openapi.startup.StartupManager;
 import com.intellij.util.FileContentUtil;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.configuration.settings.PerlApplicationSettings;
-import com.perl5.lang.perl.idea.run.debugger.PerlRemoteFileSystem;
 import com.perl5.lang.perl.util.PerlPluginUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -64,7 +63,6 @@ public class Perl5ProjectStartupActivity implements StartupActivity {
         Notifications.Bus.notify(notification);
       });
     }
-    PerlRemoteFileSystem.getInstance().dropFiles();
     StartupManager.getInstance(project).runWhenProjectIsInitialized(() -> Perl5ProjectStartupActivity.initNamesWithRestart(project));
   }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,13 +24,13 @@ import java.util.List;
 
 
 public class PerlSetUpDescriptor {
-  private List<PerlLineBreakPointDescriptor> breakpoints;
-  private String charset;
-  private String startMode;
-  private boolean enableCompileTimeBreakpoints;
-  private boolean enableNonInteractiveMode;
-  private String initCode;
-  private List<PerlDebuggerSettings.Item> renderers;
+  private final List<PerlLineBreakPointDescriptor> breakpoints;
+  private final String charset;
+  private final String startMode;
+  private final boolean enableCompileTimeBreakpoints;
+  private final boolean enableNonInteractiveMode;
+  private final String initCode;
+  private final List<PerlDebuggerSettings.Item> renderers;
 
   public PerlSetUpDescriptor(List<PerlLineBreakPointDescriptor> breakpoints, PerlDebugOptions debugProfileState) {
     this.breakpoints = breakpoints;

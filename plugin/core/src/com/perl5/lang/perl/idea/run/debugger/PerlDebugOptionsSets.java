@@ -20,7 +20,9 @@ import gnu.trove.THashMap;
 
 import java.util.Map;
 
-
+/**
+ * fixme this need to be fixed with run configuration extension
+ */
 public class PerlDebugOptionsSets {
   public static final Map<String, String> STARTUP_OPTIONS = new THashMap<>();
   public static final Map<String, String> ROLE_OPTIONS = new THashMap<>();

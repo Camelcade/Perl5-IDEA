@@ -16,8 +16,6 @@
 
 package com.perl5.lang.perl.idea.run.remote;
 
-import com.intellij.execution.ExecutionException;
-import com.intellij.execution.ExecutionResult;
 import com.intellij.execution.Executor;
 import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.RunConfiguration;
@@ -31,20 +29,14 @@ import com.intellij.openapi.util.InvalidDataException;
 import com.intellij.openapi.util.WriteExternalException;
 import com.intellij.util.xmlb.XmlSerializer;
 import com.intellij.util.xmlb.annotations.Tag;
-import com.intellij.xdebugger.XDebugProcess;
-import com.intellij.xdebugger.XDebugSession;
-import com.perl5.lang.perl.idea.run.debugger.PerlDebugProcess;
-import com.perl5.lang.perl.idea.run.debugger.PerlDebuggableRunConfiguration;
+import com.perl5.lang.perl.idea.run.debugger.PerlDebugOptions;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.net.InetSocketAddress;
-import java.util.Objects;
-
 
 public class PerlRemoteDebuggingConfiguration extends RunConfigurationBase
-  implements RunConfigurationWithSuppressedDefaultRunAction, PerlDebuggableRunConfiguration {
+  implements RunConfigurationWithSuppressedDefaultRunAction, PerlDebugOptions {
   public String debugHost = LOCALHOST;
 
   public int debugPort = 12345;
@@ -185,14 +177,5 @@ public class PerlRemoteDebuggingConfiguration extends RunConfigurationBase
 
   public void setReconnect(boolean reconnect) {
     myIsReconnect = reconnect;
-  }
-
-  @Override
-  public @NotNull XDebugProcess createDebugProcess(@NotNull InetSocketAddress socketAddress,
-                                                   @NotNull XDebugSession session,
-                                                   @Nullable ExecutionResult executionResult,
-                                                   @NotNull ExecutionEnvironment environment) throws ExecutionException {
-    PerlRemoteDebuggingRunProfileState runProfileState = Objects.requireNonNull(getState(environment.getExecutor(), environment));
-    return new PerlDebugProcess(session, runProfileState, runProfileState.execute(environment.getExecutor()));
   }
 }

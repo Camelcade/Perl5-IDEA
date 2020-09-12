@@ -18,7 +18,6 @@ package com.perl5.lang.perl.idea.run;
 
 import com.intellij.execution.CommonProgramRunConfigurationParameters;
 import com.intellij.execution.ExecutionException;
-import com.intellij.execution.ExecutionResult;
 import com.intellij.execution.Executor;
 import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.LocatableConfigurationBase;
@@ -44,17 +43,11 @@ import com.intellij.util.Function;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.net.NetUtils;
 import com.intellij.util.xmlb.XmlSerializer;
-import com.intellij.xdebugger.XDebugProcess;
-import com.intellij.xdebugger.XDebugSession;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.execution.PerlTerminalExecutionConsole;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugOptions;
-import com.perl5.lang.perl.idea.run.debugger.PerlDebugProcess;
-import com.perl5.lang.perl.idea.run.debugger.PerlDebugProfileState;
-import com.perl5.lang.perl.idea.run.debugger.PerlDebuggableRunConfiguration;
-import com.perl5.lang.perl.idea.run.remote.PerlRunConsole;
 import com.perl5.lang.perl.idea.sdk.host.PerlConsoleView;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.util.PerlRunUtil;
@@ -65,7 +58,6 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.jps.model.serialization.PathMacroUtil;
 
 import java.io.File;
-import java.net.InetSocketAddress;
 import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
 import java.util.*;
@@ -76,7 +68,7 @@ import static com.intellij.execution.configurations.GeneralCommandLine.ParentEnv
 public abstract class GenericPerlRunConfiguration extends LocatableConfigurationBase implements
                                                                                      CommonProgramRunConfigurationParameters,
                                                                                      RunConfigurationWithSuppressedDefaultRunAction,
-                                                                                     PerlDebuggableRunConfiguration {
+                                                                                     PerlDebugOptions {
   public static final Function<String, List<String>> FILES_PARSER = text -> StringUtil.split(text.trim(), "||");
   public static final Function<List<String>, String> FILES_JOINER = strings ->
     StringUtil.join(ContainerUtil.filter(strings, StringUtil::isNotEmpty), "||");
@@ -422,18 +414,6 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
   @Override
   public void setInitCode(String initCode) {
     this.myInitCode = initCode;
-  }
-
-  @Override
-  public @NotNull XDebugProcess createDebugProcess(@NotNull InetSocketAddress socketAddress,
-                                                   @NotNull XDebugSession session,
-                                                   @Nullable ExecutionResult executionResult,
-                                                   @NotNull ExecutionEnvironment environment) throws ExecutionException {
-    PerlRunProfileState runProfileState = getState(environment.getExecutor(), environment);
-    if (!(runProfileState instanceof PerlDebugProfileState)) {
-      throw new ExecutionException("PerlDebugProfileState expected, got: " + runProfileState);
-    }
-    return new PerlDebugProcess(session, (PerlDebugProfileState)runProfileState, runProfileState.execute(environment.getExecutor()));
   }
 
   /**

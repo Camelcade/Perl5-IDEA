@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,14 +18,14 @@ package com.perl5.lang.perl.idea.run.debugger.values;
 
 import com.intellij.xdebugger.frame.XCompositeNode;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.idea.run.debugger.PerlDebugUtil;
 import com.perl5.lang.perl.idea.run.debugger.PerlStackFrame;
-import com.perl5.lang.perl.util.PerlDebugUtil;
 import org.jetbrains.annotations.NotNull;
 
 
 public class PerlXMainGroup extends PerlXValueGroup {
   private final int mySize;
-  private int[] offset = new int[]{0};
+  private final int[] offset = new int[]{0};
 
   public PerlXMainGroup(PerlStackFrame stackFrame, int size) {
     super("%main::", "Symbol Table", PerlIcons.MAIN_GUTTER_ICON, null, stackFrame, false);

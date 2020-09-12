@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,13 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.run.debugger;
+package com.perl5.lang.perl.idea.run.debugger.protocol;
 
-import org.jetbrains.debugger.DebuggableRunConfiguration;
 
-public interface PerlDebuggableRunConfiguration extends DebuggableRunConfiguration, PerlDebugOptions {
+public class PerlEvalRequestDescriptor {
+  private final String expression;
+
+  public PerlEvalRequestDescriptor(String expression) {
+    this.expression = expression;
+  }
 }

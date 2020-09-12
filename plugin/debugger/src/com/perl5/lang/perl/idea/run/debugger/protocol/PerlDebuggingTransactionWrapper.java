@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,23 +16,17 @@
 
 package com.perl5.lang.perl.idea.run.debugger.protocol;
 
-import com.intellij.xdebugger.frame.XSuspendContext;
-import com.perl5.lang.perl.idea.run.debugger.PerlSuspendContext;
 
+public class PerlDebuggingTransactionWrapper {
+  private final int id;
+  private final Object data;
 
-public class PerlDebuggingEventStop extends PerlDebuggingEventBase implements PerlDebuggingEvent {
-  private PerlStackFrameDescriptor[] frames;
-
-  public void setFrames(PerlStackFrameDescriptor[] frames) {
-    this.frames = frames;
+  public PerlDebuggingTransactionWrapper(int transactionId, Object data) {
+    this.id = transactionId;
+    this.data = data;
   }
 
-  public XSuspendContext getSuspendContext() {
-    return new PerlSuspendContext(frames, getDebugSession(), getDebugThread());
-  }
-
-  @Override
-  public void run() {
-    getDebugSession().positionReached(getSuspendContext());
+  public int getTransactionId() {
+    return id;
   }
 }

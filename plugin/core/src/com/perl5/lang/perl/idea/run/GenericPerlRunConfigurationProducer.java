@@ -28,11 +28,10 @@ import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiUtilCore;
-import com.perl5.lang.perl.idea.run.debugger.PerlRemoteFileSystem;
+import com.intellij.util.Consumer;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
-import java.util.function.Consumer;
 
 public abstract class GenericPerlRunConfigurationProducer<Configuration extends GenericPerlRunConfiguration>
   extends LazyRunConfigurationProducer<Configuration> {
@@ -44,7 +43,7 @@ public abstract class GenericPerlRunConfigurationProducer<Configuration extends 
     Consumer<Location<?>> locationConsumer = location -> {
       if (location != null) {
         VirtualFile virtualFile = location.getVirtualFile();
-        if (virtualFile != null && !(virtualFile instanceof PerlRemoteFileSystem.PerlRemoteVirtualFile) && isOurFile(virtualFile)) {
+        if (virtualFile != null && virtualFile.isInLocalFileSystem() && isOurFile(virtualFile)) {
           virtualFiles.add(virtualFile);
         }
       }
@@ -54,7 +53,7 @@ public abstract class GenericPerlRunConfigurationProducer<Configuration extends 
     Location<?>[] locations = Location.DATA_KEYS.getData(dataContext);
     if (locations != null) {
       for (Location<?> location : locations) {
-        locationConsumer.accept(location);
+        locationConsumer.consume(location);
       }
     }
 
@@ -70,7 +69,7 @@ public abstract class GenericPerlRunConfigurationProducer<Configuration extends 
       }
     }
 
-    locationConsumer.accept(configurationContext.getLocation());
+    locationConsumer.consume(configurationContext.getLocation());
 
     return new ArrayList<>(virtualFiles);
   }

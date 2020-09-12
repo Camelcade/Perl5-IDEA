@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.util;
+package com.perl5.lang.perl.idea.run.debugger;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
@@ -27,9 +27,6 @@ import com.intellij.xdebugger.XDebuggerManager;
 import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
 import com.intellij.xdebugger.frame.XCompositeNode;
 import com.intellij.xdebugger.frame.XValueChildrenList;
-import com.perl5.lang.perl.idea.run.debugger.PerlDebugThread;
-import com.perl5.lang.perl.idea.run.debugger.PerlRemoteFileSystem;
-import com.perl5.lang.perl.idea.run.debugger.PerlStackFrame;
 import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakpointProperties;
 import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakpointType;
 import com.perl5.lang.perl.idea.run.debugger.protocol.PerlDebuggingEventBreakpoint;

@@ -18,12 +18,11 @@ package com.perl5.lang.perl.idea.run.debugger.protocol;
 
 import com.intellij.xdebugger.XDebugSession;
 import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
-import com.perl5.lang.perl.util.PerlDebugUtil;
+import com.perl5.lang.perl.idea.run.debugger.PerlDebugUtil;
+import org.jetbrains.annotations.NotNull;
 
 
-public class PerlDebuggingEventBreakpointReached extends PerlDebuggingEventStop implements PerlDebuggingEventBreakpoint {
-  boolean suspend;
-  String logmessage;
+public abstract class PerlDebuggingEventBreakpointBase extends PerlDebuggingEventBase implements PerlDebuggingEventBreakpoint {
   private String path;
   private int line;
 
@@ -32,13 +31,11 @@ public class PerlDebuggingEventBreakpointReached extends PerlDebuggingEventStop 
     XDebugSession session = getDebugSession();
     XLineBreakpoint<?> breakpoint = PerlDebugUtil.findBreakpoint(session.getProject(), this);
     if (breakpoint != null) {
-      session.breakpointReached(breakpoint, logmessage, getSuspendContext());
-    }
-
-    if (suspend) {
-      super.run();
+      processBreakPoint(breakpoint, session);
     }
   }
+
+  protected abstract void processBreakPoint(@NotNull XLineBreakpoint<?> breakpoint, XDebugSession session);
 
   @Override
   public String getPath() {

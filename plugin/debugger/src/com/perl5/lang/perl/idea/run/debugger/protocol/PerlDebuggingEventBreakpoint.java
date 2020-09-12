@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,15 +17,8 @@
 package com.perl5.lang.perl.idea.run.debugger.protocol;
 
 
-public class PerlEvalResponseDescriptor {
-  private boolean error;
-  private PerlValueDescriptor result;
+public interface PerlDebuggingEventBreakpoint extends PerlDebuggingEvent {
+  String getPath();
 
-  public boolean isError() {
-    return error;
-  }
-
-  public PerlValueDescriptor getResult() {
-    return result;
-  }
+  int getLine();
 }

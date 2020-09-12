@@ -25,6 +25,7 @@ import com.intellij.execution.ui.ConsoleView;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.xdebugger.DefaultDebugProcessHandler;
+import com.perl5.lang.perl.idea.run.PerlRunConsole;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugProfileStateBase;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
