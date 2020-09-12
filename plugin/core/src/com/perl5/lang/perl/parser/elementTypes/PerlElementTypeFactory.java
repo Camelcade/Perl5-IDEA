@@ -485,6 +485,8 @@ public class PerlElementTypeFactory {
         return new PerlElementTypeEx(name, PsiPerlAnnotationTypeImpl.class);
       case "ANNOTATION_INJECT":
         return new PerlElementTypeEx(name, PsiPerlAnnotationInjectImpl.class);
+      case "ANNOTATION_NO_INJECT":
+        return new PerlElementTypeEx(name, PsiPerlAnnotationNoInjectImpl.class);
       case "ANNOTATION_NOINSPECTION":
         return new PerlElementTypeEx(name, PsiPerlAnnotationNoinspectionImpl.class);
       case "PARENTHESISED_CALL_ARGUMENTS":

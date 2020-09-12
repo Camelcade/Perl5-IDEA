@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.intellilang;
 
 import com.intellij.psi.PsiLanguageInjectionHost;
+import com.perl5.lang.perl.lexer.PerlAnnotations;
 import com.perl5.lang.perl.psi.PerlCompositeElement;
 import org.intellij.plugins.intelliLang.inject.AbstractLanguageInjectionSupport;
 import org.jetbrains.annotations.NotNull;
@@ -31,7 +32,7 @@ public class PerlInjectionSupport extends AbstractLanguageInjectionSupport {
 
   @Override
   public boolean isApplicableTo(PsiLanguageInjectionHost host) {
-    return host instanceof PerlCompositeElement;
+    return host instanceof PerlCompositeElement && !PerlAnnotations.isInjectionSuppressed(host);
   }
 
   @Override

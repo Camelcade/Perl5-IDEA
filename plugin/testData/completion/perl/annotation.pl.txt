@@ -10,6 +10,9 @@ Text: inject; Tail: null; Type: null; Icon: /annotation_gutter_icon.png; Type Ic
 Text: method; Tail: null; Type: null; Icon: /annotation_gutter_icon.png; Type Icon: null
 	Lookups: method
 	Export: Perl5: #@method
+Text: noinject; Tail: null; Type: null; Icon: /annotation_gutter_icon.png; Type Icon: null
+	Lookups: noinject
+	Export: Perl5: #@noinject
 Text: noinspection; Tail: null; Type: null; Icon: /annotation_gutter_icon.png; Type Icon: null
 	Lookups: noinspection
 	Export: Perl5: #@noinspection

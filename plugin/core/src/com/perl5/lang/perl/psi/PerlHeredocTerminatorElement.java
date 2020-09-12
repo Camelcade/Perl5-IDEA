@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,19 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
+import org.jetbrains.annotations.Nullable;
 
 
 public interface PerlHeredocTerminatorElement extends PsiElement, PerlReferenceOwner {
+
+  /**
+   * @return opener for the terminator element
+   */
+  default @Nullable PsiElement getOpener() {
+    var reference = getReference();
+    if (reference == null) {
+      return null;
+    }
+    return reference.resolve();
+  }
 }

@@ -18,10 +18,13 @@ package com.perl5.lang.perl.idea.intellilang;
 
 import com.intellij.lang.Language;
 import com.intellij.lang.injection.MultiHostRegistrar;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
+import com.perl5.lang.perl.lexer.PerlAnnotations;
 import com.perl5.lang.perl.psi.PerlHeredocTerminatorElement;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import org.jetbrains.annotations.NotNull;
@@ -32,6 +35,7 @@ import java.util.List;
 
 
 public class PerlHeredocLanguageInjector extends PerlLiteralLanguageInjector {
+  private static final Logger LOG = Logger.getInstance(PerlHeredocLanguageInjector.class);
   private static final List<? extends Class<? extends PsiElement>> ELEMENTS_TO_INJECT =
     Collections.singletonList(PerlHeredocElementImpl.class);
 
@@ -59,6 +63,18 @@ public class PerlHeredocLanguageInjector extends PerlLiteralLanguageInjector {
 
     if (terminator == null) {
       return null;
+    }
+
+    var heredocOpener = terminator.getOpener();
+    if (heredocOpener != null) {
+      if (PerlAnnotations.isInjectionSuppressed(heredocOpener)) {
+        return null;
+      }
+    }
+    else {
+      LOG.warn("Unable to find opener for terminator: " + terminator.getText() +
+               " " + terminator.getTextRange() +
+               " in " + PsiUtilCore.getVirtualFile(terminator));
     }
 
     String terminatorText = terminator.getText();

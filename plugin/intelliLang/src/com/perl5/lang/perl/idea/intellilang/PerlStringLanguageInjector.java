@@ -33,6 +33,7 @@ import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.Query;
 import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.lang.perl.lexer.PerlAnnotations;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.mixins.PerlStringMixin;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
@@ -50,7 +51,7 @@ import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.OPERATOR_ASSIG
 public class PerlStringLanguageInjector extends PerlLiteralLanguageInjector {
   @Override
   public void getLanguagesToInject(@NotNull MultiHostRegistrar registrar, @NotNull PsiElement host) {
-    if (!(host instanceof PerlStringMixin) || !((PerlStringMixin)host).isValidHost()) {
+    if (!(host instanceof PerlStringMixin) || !((PerlStringMixin)host).isValidHost() || PerlAnnotations.isInjectionSuppressed(host)) {
       return;
     }
     PerlStringMixin perlString = (PerlStringMixin)host;

@@ -27,6 +27,9 @@ public class PerlParserTest extends PerlParserTestBase {
   }
 
   @Test
+  public void testAnnotationNoInject() {doTest();}
+
+  @Test
   public void testIssue2308() {doTest();}
 
   @Test

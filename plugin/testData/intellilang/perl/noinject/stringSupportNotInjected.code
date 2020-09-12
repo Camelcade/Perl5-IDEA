@@ -1,0 +1,2 @@
+#@noinject
+say "<div>Hello<caret> there</div>";

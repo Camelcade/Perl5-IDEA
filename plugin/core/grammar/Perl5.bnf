@@ -414,6 +414,7 @@
     ANNOTATION_METHOD_KEY='#@method'
     ANNOTATION_ABSTRACT_KEY='#@abstract'
     ANNOTATION_INJECT_KEY='#@inject'
+    ANNOTATION_NO_INJECT_KEY='#@noinject'
     ANNOTATION_TYPE_KEY='#@type'
     ANNOTATION_NOINSPECTION_KEY='#@noinspection'
     ANNOTATION_UNKNOWN_KEY='#@unknown'
@@ -1378,12 +1379,14 @@ private annotation ::=
 	| annotation_returns
 	| annotation_type
 	| annotation_inject
+	| annotation_no_inject
 	| annotation_noinspection
 	| '#@unknown' {name="perl annotation"}
 
 annotation_abstract ::= '#@abstract' {pin=1}
 annotation_deprecated ::= '#@deprecated' {pin=1}
 annotation_method ::=  '#@method' {pin=1}
+annotation_no_inject ::=  '#@noinject' {pin=1}
 annotation_override ::=  '#@override' {pin=1}
 annotation_returns ::=  '#@returns' annotation_type_param {pin=1}
 private annotation_type_param ::=

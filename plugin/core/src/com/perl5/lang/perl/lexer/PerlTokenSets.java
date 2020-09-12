@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.lexer;
 
+import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.parser.moose.MooseElementTypes;
 
@@ -263,17 +264,7 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
     TRY_CATCH_KEYWORDS_TOKENSET
   );
 
-  TokenSet ANNOTATIONS_KEYS = TokenSet.create(
-    ANNOTATION_DEPRECATED_KEY,
-    ANNOTATION_RETURNS_KEY,
-    ANNOTATION_OVERRIDE_KEY,
-    ANNOTATION_METHOD_KEY,
-    ANNOTATION_ABSTRACT_KEY,
-    ANNOTATION_INJECT_KEY,
-    ANNOTATION_NOINSPECTION_KEY,
-    ANNOTATION_TYPE_KEY
-
-  );
+  TokenSet ANNOTATIONS_KEYS = TokenSet.create(PerlAnnotations.TOKENS_MAP.values().toArray(IElementType.EMPTY_ARRAY));
 
   TokenSet STRING_CONTENT_TOKENSET = TokenSet.create(STRING_CONTENT, STRING_CONTENT_XQ, STRING_CONTENT_QQ);
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2020 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,12 @@
 
 package com.perl5.lang.perl.lexer;
 
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.perl.psi.PsiPerlAnnotationNoInject;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import gnu.trove.THashMap;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
@@ -31,10 +35,18 @@ public class PerlAnnotations implements PerlElementTypes {
     TOKENS_MAP.put("type", ANNOTATION_TYPE_KEY);
     TOKENS_MAP.put("method", ANNOTATION_METHOD_KEY);
     TOKENS_MAP.put("inject", ANNOTATION_INJECT_KEY);
+    TOKENS_MAP.put("noinject", ANNOTATION_NO_INJECT_KEY);
 
     // these are parsed but not used
     TOKENS_MAP.put("override", ANNOTATION_OVERRIDE_KEY);
     TOKENS_MAP.put("abstract", ANNOTATION_ABSTRACT_KEY);
     TOKENS_MAP.put("noinspection", ANNOTATION_NOINSPECTION_KEY);
+  }
+
+  /**
+   * @return true iff injection for {@code host} is suppressed with {@code #@noinject} annotations
+   */
+  public static boolean isInjectionSuppressed(@NotNull PsiElement host) {
+    return PerlPsiUtil.getAnyAnnotationByClass(host, PsiPerlAnnotationNoInject.class) != null;
   }
 }

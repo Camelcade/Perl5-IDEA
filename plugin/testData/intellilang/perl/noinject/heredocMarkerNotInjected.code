@@ -1,0 +1,4 @@
+#@noinject
+say <<"HTML";
+Hello <caret>there
+HTML

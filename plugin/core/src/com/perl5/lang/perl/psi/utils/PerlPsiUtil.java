@@ -505,7 +505,7 @@ public class PerlPsiUtil implements PerlElementTypes {
   }
 
   /**
-   * Gets annotation before element, eol or statement
+   * Gets annotation before element, statement
    *
    * @param element         element to search for
    * @param annotationClass annotation class

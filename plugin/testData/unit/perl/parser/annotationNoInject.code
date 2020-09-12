@@ -1,0 +1,14 @@
+#@noinject
+say "<div>Hello there</div>";
+
+#@noinject
+say <<"HTML";
+Hello there
+HTML
+
+#@noinject
+eval 'say 42;';
+
+#@noinject
+my $code2 = 'say 42;';
+eval $code2;

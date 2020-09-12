@@ -1,0 +1,2 @@
+#@noinject
+eval 'say<caret> 42;';
