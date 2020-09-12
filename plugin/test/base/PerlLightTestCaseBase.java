@@ -448,8 +448,9 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     Application application = ApplicationManager.getApplication();
     application.invokeAndWait(() -> application.runWriteAction(
       () -> {
-        VirtualFile libdir = LocalFileSystem.getInstance().refreshAndFindFileByPath("../testData/testlib");
-        assert libdir != null;
+        var testLibPathName = getTestLibPath();
+        VirtualFile libdir = LocalFileSystem.getInstance().refreshAndFindFileByPath(testLibPathName);
+        assertNotNull("Directory does not exists: " + new File(testLibPathName).getAbsolutePath(), libdir);
 
         PerlProjectManager perlProjectManager = PerlProjectManager.getInstance(getProject());
         ProjectJdkImpl testSdk = PerlSdkTable.getInstance().createSdk("test");
@@ -463,6 +464,14 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
         CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
         PerlNamesCache.getInstance(getProject()).forceCacheUpdate();
       }));
+  }
+
+  protected @NotNull String getTestLibPath() {
+    return "../testData/testlib";
+  }
+
+  protected @NotNull String getTestLibPathFromNested() {
+    return "../../testData/testlib";
   }
 
   public abstract String getFileExtension();
