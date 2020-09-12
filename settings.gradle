@@ -33,6 +33,12 @@ include 'perl5.core.docker'
 project(':perl5.core.docker').projectDir = file('plugin/docker')
 include 'perl5.core.wsl'
 project(':perl5.core.wsl').projectDir = file('plugin/wsl')
+include 'perl5.core.perlbrew'
+project(':perl5.core.perlbrew').projectDir = file('plugin/perlbrew')
+include 'perl5.core.plenv'
+project(':perl5.core.plenv').projectDir = file('plugin/plenv')
+include 'perl5.core.berrybrew'
+project(':perl5.core.berrybrew').projectDir = file('plugin/berrybrew')
 include 'perl5.lang.tt2'
 project(':perl5.lang.tt2').projectDir=file('tt2')
 include 'perl5.lang.mojo'

@@ -23,6 +23,9 @@ dependencies{
   compile project(":perl5.core.intelliLang")
   compile project(":perl5.core.docker")
   compile project(":perl5.core.wsl")
+  compile project(":perl5.core.perlbrew")
+  compile project(":perl5.core.berrybrew")
+  compile project(":perl5.core.plenv")
 }
 
 intellij {

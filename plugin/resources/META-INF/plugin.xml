@@ -32,6 +32,9 @@
   <depends optional="true" config-file="perl-coverage.xml">com.intellij.modules.coverage</depends>
 
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="perl-pod.xml" xpointer="xpointer(/idea-plugin/*)"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="perl-berrybrew.xml" xpointer="xpointer(/idea-plugin/*)"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="perl-perlbrew.xml" xpointer="xpointer(/idea-plugin/*)"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="perl-plenv.xml" xpointer="xpointer(/idea-plugin/*)"/>
 
   <extensionPoints>
     <extensionPoint name="packageProcessor" beanClass="com.perl5.lang.perl.idea.EP.PerlPackageProcessorEP">
@@ -152,12 +155,6 @@
                            implementationClass="com.perl5.lang.perl.idea.sdk.implementation.porters.PerlPortersHandler"/>
     <versionManagerHandler key="system"
                            implementationClass="com.perl5.lang.perl.idea.sdk.versionManager.system.PerlSystemHandler"/>
-    <versionManagerHandler key="perlbrew"
-                           implementationClass="com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewHandler"/>
-    <versionManagerHandler key="berrybrew"
-                           implementationClass="com.perl5.lang.perl.idea.sdk.versionManager.berrybrew.BerryBrewHandler"/>
-    <versionManagerHandler key="plenv"
-                           implementationClass="com.perl5.lang.perl.idea.sdk.versionManager.plenv.PlenvHandler"/>
 
     <implicitSubsProvider implementation="com.perl5.lang.perl.psi.references.PerlCoreDeclarationsProvider"/>
     <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.typesStandard.TypesStandardImplicitDeclarationsProvider"/>
