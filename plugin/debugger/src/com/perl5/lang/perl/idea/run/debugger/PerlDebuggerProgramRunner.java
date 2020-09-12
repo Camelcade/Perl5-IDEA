@@ -28,6 +28,7 @@ import com.intellij.xdebugger.XDebugProcess;
 import com.intellij.xdebugger.XDebugProcessStarter;
 import com.intellij.xdebugger.XDebugSession;
 import com.intellij.xdebugger.XDebuggerManager;
+import com.perl5.lang.perl.idea.debugger.PerlDebugProcess;
 import com.perl5.lang.perl.idea.run.GenericPerlProgramRunner;
 import com.perl5.lang.perl.idea.run.PerlRunProfileState;
 import org.jetbrains.annotations.NotNull;

@@ -23,7 +23,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
-import com.perl5.lang.perl.idea.run.debugger.PerlDebuggerEditorsProvider;
+import com.perl5.lang.perl.idea.debugger.PerlDebuggerEditorsProvider;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import org.junit.Test;

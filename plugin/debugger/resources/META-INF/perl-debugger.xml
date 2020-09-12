@@ -18,12 +18,12 @@
   <extensions defaultExtensionNs="com.perl5">
   </extensions>
   <extensions defaultExtensionNs="com.intellij">
-    <virtualFileSystem key="perl5_remote" implementationClass="com.perl5.lang.perl.idea.run.debugger.PerlRemoteFileSystem"/>
+    <virtualFileSystem key="perl5_remote" implementationClass="com.perl5.lang.perl.idea.debugger.PerlRemoteFileSystem"/>
     <programRunner implementation="com.perl5.lang.perl.idea.run.debugger.PerlDebuggerProgramRunner"/>
     <xdebugger.breakpointType
-        implementation="com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakpointType"/>
-    <xdebugger.settings implementation="com.perl5.lang.perl.idea.run.debugger.PerlDebuggerSettings"/>
+        implementation="com.perl5.lang.perl.idea.debugger.breakpoints.PerlLineBreakpointType"/>
+    <xdebugger.settings implementation="com.perl5.lang.perl.idea.debugger.PerlDebuggerSettings"/>
 
-    <configurationType implementation="com.perl5.lang.perl.idea.run.remote.PerlRemoteDebuggingConfigurationType"/>
+    <configurationType implementation="com.perl5.lang.perl.idea.run.debugger.remote.PerlRemoteDebuggingConfigurationType"/>
   </extensions>
 </idea-plugin>
