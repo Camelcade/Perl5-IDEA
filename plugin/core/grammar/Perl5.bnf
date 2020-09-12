@@ -612,6 +612,7 @@ private statement_item ::=
         <<parseSemicolon>> +
         | nyi_statement
         | <<parseParserExtensionStatement>>
+        | named_definition
         | compound_statement
         | format_definition
         | <<parseUse>>
@@ -619,16 +620,18 @@ private statement_item ::=
         | block_compound
         | statement
         | annotation
-		| POD
-		| '__DATA__'
-		| '__END__'
-		| <<parseBadCharacters>> // Fallback for bad characters
+        | pod_section
+        | end_or_data
+        | <<parseBadCharacters>> // Fallback for bad characters
+
+private pod_section ::= POD {name="pod section"}
+private end_or_data ::= '__DATA__' | '__END__' {name="__END__ or __DATA__"}
 
 // invoked from PerlUseVarsDeclarationsParser
 private use_vars_declarations ::= {variable_declaration_element|glob_variable|code_variable}*
 
 namespace_definition ::= namespace_definition_name (block | <<parseSemicolon>> <<parseNamespaceContent>>) {pin=1 recoverWhile=recover_statement}
-private namespace_definition_name ::= 'package' any_package [perl_version] {pin=1 recoverWhile=recover_statement}
+private namespace_definition_name ::= 'package' any_package [perl_version] {pin=1 recoverWhile=recover_statement name="namespace definition"}
 namespace_content ::= real_namespace_content
 private real_namespace_content ::= {!'package' file_item} *  {extends=block recoverWhile=recover_statement} //
 
@@ -638,13 +641,21 @@ block ::= '{' block_content '}' {extraRoot=true pin=1}
 // this is uncertain or derivative block. should be not reparseable, may be a hash
 private block_content ::= file_item * {recoverWhile=recover_statement}
 
-nyi_statement ::= 'nyi'
-format_definition ::=  'format' ['subname'] '=' [FORMAT] FORMAT_TERMINATOR {pin=1}
+nyi_statement ::= 'nyi' {name="statement"}
+format_definition ::=  'format' ['subname'] '=' [FORMAT] FORMAT_TERMINATOR {pin=1 name="format definition"}
 
-private compound_statement ::=
+private named_definition ::=
     sub_definition
     | named_block
-    | if_compound
+    | method_definition
+    | func_definition
+    | before_modifier
+    | after_modifier
+    | around_modifier
+    | augment_modifier
+
+private compound_statement ::=
+    if_compound
     | unless_compound
     | given_compound
     | while_compound
@@ -652,18 +663,12 @@ private compound_statement ::=
     | for_or_foreach
     | when_compound
     | default_compound
-    | method_definition
-    | func_definition
-    | before_modifier
-    | after_modifier
-    | around_modifier
-    | augment_modifier
     | trycatch_compound
     | switch_compound
-    | cases_sequence
+    | cases_sequence {name="compound statement"}
 
 
-named_block ::= BLOCK_NAME block
+named_block ::= BLOCK_NAME block {name="named block"}
 
 if_compound ::=  'if' conditional_block if_compound_elsif * [if_compound_else]  {pin=1}
 unless_compound ::=  'unless' conditional_block if_compound_elsif * [if_compound_else]  {pin=1}
@@ -714,7 +719,7 @@ until_compound ::=  'until' parse_conditional_block [[POD] continue_block]  {pin
 continue_block ::= continue_block_opener block {pin=1}
 private continue_block_opener ::= 'continue' &'{'
 
-block_compound ::= parse_block_compound
+block_compound ::= parse_block_compound {named="code block"}
 private parse_block_compound ::= &('{') !(anon_hash_lookahead) block [[POD] continue_block] !('->')
 
 // for/foreach
@@ -1337,14 +1342,14 @@ private func_or_method_body ::= [sub_attributes] block
 
 private fp_modifier_named_body ::= sub_names_token method_signature func_or_method_body
 
-around_modifier ::= 'fp_around' sub_names_token around_signature func_or_method_body
+around_modifier ::= 'fp_around' sub_names_token around_signature func_or_method_body {name="around modifier"}
 private around_signature ::= <<parse_signature_content parse_around_signature_content>>
 private parse_around_signature_content ::= [around_signature_invocants] [func_signature_elements]
 around_signature_invocants ::= <<scalarDeclarationWrapper>> ',' <<scalarDeclarationWrapper>>  ':'
 
-after_modifier ::= 'fp_after' fp_modifier_named_body
-augment_modifier ::= 'fp_augment' fp_modifier_named_body // we should probably stub this one to navigate easier
-before_modifier ::= 'fp_before' fp_modifier_named_body
+after_modifier ::= 'fp_after' fp_modifier_named_body {name="after modifier"}
+augment_modifier ::= 'fp_augment' fp_modifier_named_body {name="augment modifier"} // we should probably stub this one to navigate easier
+before_modifier ::= 'fp_before' fp_modifier_named_body {name="before modifier"}
 
 private meta parse_signature_content ::= '(' <<signature_content <<x1>>>> ')' {pin=1}
 meta signature_content ::= <<x1>> {recoverWhile=recover_signature_content}
@@ -1374,7 +1379,7 @@ private annotation ::=
 	| annotation_type
 	| annotation_inject
 	| annotation_noinspection
-	| '#@unknown'
+	| '#@unknown' {name="perl annotation"}
 
 annotation_abstract ::= '#@abstract' {pin=1}
 annotation_deprecated ::= '#@deprecated' {pin=1}
