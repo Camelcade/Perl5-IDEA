@@ -56,7 +56,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 
-//@Category(Heavy.class)
+@Category(Heavy.class)
 public class PerlProfilerTest extends PerlPlatformTestCase {
   private Element myConfigurations;
 
