@@ -69,7 +69,7 @@ jobs:
       - name: Building plugins
         run: |
           ./gradlew buildPlugin
-      - name: Publishing artifacts
+      - name: Publishing plugins binaries
         uses: actions/upload-artifact@v2
         with:
           name: Plugins binaries
