@@ -86,4 +86,10 @@ jobs:
         with:
           name: coverage
           path: |
+            ./plugin/build/jacoco/test.exec
+            ./mason/mason2/build/jacoco/test.exec
+            ./mason/htmlmason/build/jacoco/test.exec
             ./build/jacoco/test.exec
+            ./embedded/build/jacoco/test.exec
+            ./mojo/build/jacoco/test.exec
+            ./tt2/build/jacoco/test.exec
