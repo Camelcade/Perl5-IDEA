@@ -58,7 +58,7 @@ final class PerlInjectionMarkersTable extends JBTable implements Configurable {
       .sorted()
       .collect(Collectors.toList());
     ComboBoxTableRenderer<String> roleComboBoxTableRenderer =
-      new ComboBoxTableRenderer<String>(ArrayUtil.toStringArray(languageIds)) {
+      new ComboBoxTableRenderer<>(ArrayUtil.toStringArray(languageIds)) {
         @Override
         public boolean isCellEditable(EventObject event) {
           if (event instanceof MouseEvent) {

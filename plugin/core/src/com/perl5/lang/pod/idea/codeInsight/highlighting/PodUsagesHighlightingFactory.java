@@ -55,7 +55,7 @@ public class PodUsagesHighlightingFactory extends HighlightUsagesHandlerFactoryB
     if (!(targetElement instanceof PodTitledSection)) {
       return null;
     }
-    return new HighlightUsagesHandlerBase<PsiElement>(editor, file) {
+    return new HighlightUsagesHandlerBase<>(editor, file) {
       @Override
       public @NotNull List<PsiElement> getTargets() {
         return Collections.singletonList(targetElement);

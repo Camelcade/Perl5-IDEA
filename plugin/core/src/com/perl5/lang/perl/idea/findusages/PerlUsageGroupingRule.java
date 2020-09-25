@@ -60,7 +60,7 @@ class PerlUsageGroupingRule extends SingleParentUsageGroupingRule {
 
     if (structuralParentElement instanceof PerlSubDefinitionElement) {
       String name = StringUtil.notNullize(((PerlSubDefinitionElement)structuralParentElement).getCanonicalName());
-      return new PsiNamedElementUsageGroupBase<PerlSubDefinitionElement>((PerlSubDefinitionElement)structuralParentElement) {
+      return new PsiNamedElementUsageGroupBase<>((PerlSubDefinitionElement)structuralParentElement) {
         @Override
         public @NotNull String getText(UsageView view) {
           return name;
@@ -73,7 +73,7 @@ class PerlUsageGroupingRule extends SingleParentUsageGroupingRule {
     }
 
     if (structuralParentElement instanceof PerlMethodModifier) {
-      return new PsiElementUsageGroupBase<PerlMethodModifier>((PerlMethodModifier)structuralParentElement) {
+      return new PsiElementUsageGroupBase<>((PerlMethodModifier)structuralParentElement) {
         @Override
         public @NotNull String getText(UsageView view) {
           PerlMethodModifier modifier = getElement();

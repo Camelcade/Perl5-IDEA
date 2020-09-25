@@ -195,7 +195,7 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
     final TableColumn secondColumn = customTagsTable.getColumnModel().getColumn(1);
 
     ComboBoxTableRenderer<HTMLMasonCustomTagRole> roleComboBoxTableRenderer =
-      new ComboBoxTableRenderer<HTMLMasonCustomTagRole>(HTMLMasonCustomTagRole.values()) {
+      new ComboBoxTableRenderer<>(HTMLMasonCustomTagRole.values()) {
         @Override
         protected String getTextFor(@NotNull HTMLMasonCustomTagRole value) {
           return value.getTitle();

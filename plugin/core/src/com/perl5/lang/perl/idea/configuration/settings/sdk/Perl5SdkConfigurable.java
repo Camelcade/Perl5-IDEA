@@ -97,7 +97,7 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
     // combo box
     JComboBox<Perl5SdkWrapper> sdkComboBox = myPanel.getSdkComboBox();
     sdkComboBox.setModel(new CollectionComboBoxModel<>(mySdkManipulator.getAllSdkWrappers()));
-    sdkComboBox.setRenderer(new ColoredListCellRenderer<Perl5SdkWrapper>() {
+    sdkComboBox.setRenderer(new ColoredListCellRenderer<>() {
       @Override
       protected void customizeCellRenderer(@NotNull JList<? extends Perl5SdkWrapper> list,
                                            Perl5SdkWrapper wrapper,

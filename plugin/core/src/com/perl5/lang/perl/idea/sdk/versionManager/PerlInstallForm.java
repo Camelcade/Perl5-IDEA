@@ -50,7 +50,7 @@ public class PerlInstallForm {
 
     myDistributionsComboBox.setModel(new CollectionComboBoxModel<>(distributionsList));
     myDistributionsComboBox.addActionListener(e -> updateState());
-    myDistributionsComboBox.setRenderer(new ColoredListCellRenderer<String>() {
+    myDistributionsComboBox.setRenderer(new ColoredListCellRenderer<>() {
       @Override
       protected void customizeCellRenderer(@NotNull JList<? extends String> list,
                                            @Nullable String value,
@@ -104,7 +104,7 @@ public class PerlInstallForm {
       threadsList.add(i);
     }
     threadsComboBox.setModel(new CollectionComboBoxModel<>(threadsList));
-    threadsComboBox.setRenderer(new ColoredListCellRenderer<Integer>() {
+    threadsComboBox.setRenderer(new ColoredListCellRenderer<>() {
       @Override
       protected void customizeCellRenderer(@NotNull JList<? extends Integer> list,
                                            Integer value,

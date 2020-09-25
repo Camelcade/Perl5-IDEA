@@ -32,7 +32,7 @@ public class PerlInjectionPatterns {
   public static @NotNull PerlElementPatterns.Capture<? super PsiLanguageInjectionHost> perlString(@NotNull String regexp) {
     final Pattern pattern = Pattern.compile(regexp, Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
 
-    return new PerlElementPatterns.Capture<>(new InitialPatternCondition<PsiLanguageInjectionHost>(PsiLanguageInjectionHost.class) {
+    return new PerlElementPatterns.Capture<>(new InitialPatternCondition<>(PsiLanguageInjectionHost.class) {
       @Override
       public boolean accepts(@Nullable Object o, ProcessingContext context) {
         if (!super.accepts(o, context) || !(o instanceof PerlCompositeElement)) {

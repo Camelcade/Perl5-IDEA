@@ -100,7 +100,7 @@ class PerlRemoteDebuggingConfigurationEditor extends PerlConfigurationEditorBase
     myPerlRole = new ComboBox<String>(new CollectionComboBoxModel<>(new ArrayList<>(PerlDebugOptionsSets.ROLE_OPTIONS.keySet()))) {
       @Override
       public void setRenderer(ListCellRenderer renderer) {
-        super.setRenderer(new ColoredListCellRenderer<String>() {
+        super.setRenderer(new ColoredListCellRenderer<>() {
           @Override
           protected void customizeCellRenderer(@NotNull JList list, String value, int index, boolean selected, boolean hasFocus) {
             append(PerlDebugOptionsSets.ROLE_OPTIONS.get(value));

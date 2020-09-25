@@ -76,7 +76,7 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
         IntroduceTargetChooser.showIntroduceTargetChooser(
           editor,
           targets,
-          new Pass<PerlIntroduceTarget>() {
+          new Pass<>() {
             @Override
             public void pass(PerlIntroduceTarget target) {
               selectOccurrences(target, editor, file, dataContext);
@@ -112,7 +112,7 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
         }.showChooser(
           target,
           allOccurrences,
-          new Pass<OccurrencesChooser.ReplaceChoice>() {
+          new Pass<>() {
             @Override
             public void pass(OccurrencesChooser.ReplaceChoice replaceChoice) {
               performIntroduce(target, allOccurrences, replaceChoice, editor, file, dataContext);

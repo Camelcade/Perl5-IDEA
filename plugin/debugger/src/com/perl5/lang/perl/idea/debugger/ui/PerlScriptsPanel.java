@@ -72,7 +72,7 @@ public class PerlScriptsPanel extends JPanel {
 
   private void init() {
     final JBList<PerlLoadedFileDescriptor> jbList = new JBList<>(myModel);
-    jbList.setCellRenderer(new SimpleListCellRenderer<PerlLoadedFileDescriptor>() {
+    jbList.setCellRenderer(new SimpleListCellRenderer<>() {
       @Override
       public void customize(@NotNull JList list, PerlLoadedFileDescriptor fileDescriptor, int index, boolean selected, boolean hasFocus) {
         String remotePath = fileDescriptor.getPath();

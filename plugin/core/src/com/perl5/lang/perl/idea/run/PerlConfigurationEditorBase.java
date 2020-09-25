@@ -88,10 +88,10 @@ public abstract class PerlConfigurationEditorBase<Settings extends PerlDebugOpti
     scriptCharset.setLabelLocation(BorderLayout.WEST);
     panel.add(scriptCharset);
 
-    myStartMode = new ComboBox<String>(new CollectionComboBoxModel<>(new ArrayList<>(PerlDebugOptionsSets.STARTUP_OPTIONS.keySet()))) {
+    myStartMode = new ComboBox<>(new CollectionComboBoxModel<>(new ArrayList<>(PerlDebugOptionsSets.STARTUP_OPTIONS.keySet()))) {
       @Override
       public void setRenderer(ListCellRenderer renderer) {
-        super.setRenderer(new ColoredListCellRenderer<String>() {
+        super.setRenderer(new ColoredListCellRenderer<>() {
           @Override
           protected void customizeCellRenderer(@NotNull JList list, String value, int index, boolean selected, boolean hasFocus) {
             append(PerlDebugOptionsSets.STARTUP_OPTIONS.get(value));

@@ -103,7 +103,7 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
 
     ComboBoxModel<PerlVersion> versionModel = new CollectionComboBoxModel<>(PerlVersion.ALL_VERSIONS);
     myTargetPerlVersionComboBox = new ComboBox<>(versionModel);
-    myTargetPerlVersionComboBox.setRenderer(new ColoredListCellRenderer<PerlVersion>() {
+    myTargetPerlVersionComboBox.setRenderer(new ColoredListCellRenderer<>() {
       @Override
       protected void customizeCellRenderer(@NotNull JList<? extends PerlVersion> list,
                                            PerlVersion value,
@@ -125,7 +125,7 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
     myLibsModel = new CollectionListModel<>();
     myLibsList = new JBList<>(myLibsModel);
     myLibsList.setVisibleRowCount(ourRowsCount);
-    myLibsList.setCellRenderer(new ColoredListCellRenderer<VirtualFile>() {
+    myLibsList.setCellRenderer(new ColoredListCellRenderer<>() {
       @Override
       protected void customizeCellRenderer(@NotNull JList<? extends VirtualFile> list,
                                            VirtualFile value,

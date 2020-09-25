@@ -33,7 +33,7 @@ import org.jetbrains.annotations.NotNull;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.STRING_CONTENT_TOKENSET;
 
 public class PerlSpellCheckingStrategy extends SpellcheckingStrategy {
-  private static final Tokenizer<PsiElement> IDENTIFIER_TOKENIZER = new Tokenizer<PsiElement>() {
+  private static final Tokenizer<PsiElement> IDENTIFIER_TOKENIZER = new Tokenizer<>() {
     @Override
     public void tokenize(@NotNull PsiElement element, TokenConsumer consumer) {
 
