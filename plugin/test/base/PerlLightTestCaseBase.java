@@ -346,10 +346,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
    */
   protected void removePerlSourceRoot(@NotNull VirtualFile libDir) {
     assertTrue(libDir.isValid() && libDir.isDirectory());
-    PerlModuleExtension
-      modifiableModel1 = (PerlModuleExtension)PerlModuleExtension.getInstance(myFixture.getModule()).getModifiableModel(true);
-    modifiableModel1.removeRoot(libDir);
-    modifiableModel1.commit();
+    PerlModuleExtension.modify(getModule(), it -> it.removeRoot(libDir));
   }
 
   /**
@@ -359,10 +356,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
    */
   protected void markAsLibRoot(@NotNull VirtualFile libDir, boolean removeAutomatically) {
     assertTrue(libDir.isValid() && libDir.isDirectory());
-    PerlModuleExtension
-      modifiableModel = (PerlModuleExtension)PerlModuleExtension.getInstance(myFixture.getModule()).getModifiableModel(true);
-    modifiableModel.setRoot(libDir, PerlLibrarySourceRootType.INSTANCE);
-    modifiableModel.commit();
+    PerlModuleExtension.modify(getModule(), it -> it.setRoot(libDir, PerlLibrarySourceRootType.INSTANCE));
     if (removeAutomatically) {
       addPerlTearDownListener(() -> removePerlSourceRoot(libDir));
     }

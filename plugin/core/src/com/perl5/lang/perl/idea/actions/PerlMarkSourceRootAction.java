@@ -75,10 +75,10 @@ public abstract class PerlMarkSourceRootAction extends PerlSourceRootAction {
   }
 
   public final void markRoot(@NotNull Module module, @NotNull VirtualFile... files) {
-    PerlModuleExtension modifiableModel = (PerlModuleExtension)PerlModuleExtension.getInstance(module).getModifiableModel(true);
-    for (VirtualFile virtualFile : files) {
-      modifiableModel.setRoot(virtualFile, myType);
-    }
-    modifiableModel.commit();
+    PerlModuleExtension.modify(module, it -> {
+      for (VirtualFile virtualFile : files) {
+        it.setRoot(virtualFile, myType);
+      }
+    });
   }
 }

@@ -75,12 +75,11 @@ public class PerlUnmarkSourceRootAction extends PerlSourceRootAction {
   @Override
   public void actionPerformed(@NotNull AnActionEvent e) {
     RootsSelection selection = getSelection(e);
-    PerlModuleExtension perlModuleExtension =
-      (PerlModuleExtension)PerlModuleExtension.getInstance(selection.myModule).getModifiableModel(true);
-    for (VirtualFile virtualFile : getFilesFromSelection(selection)) {
-      perlModuleExtension.removeRoot(virtualFile);
-    }
-    perlModuleExtension.commit();
+    PerlModuleExtension.modify(selection.myModule, it -> {
+      for (VirtualFile virtualFile : getFilesFromSelection(selection)) {
+        it.removeRoot(virtualFile);
+      }
+    });
   }
 
   @Override

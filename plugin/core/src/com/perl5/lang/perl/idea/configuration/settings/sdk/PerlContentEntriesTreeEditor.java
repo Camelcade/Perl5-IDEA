@@ -26,6 +26,8 @@ import com.intellij.openapi.actionSystem.ActionToolbar;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.actionSystem.Presentation;
 import com.intellij.openapi.actionSystem.ex.CustomComponentAction;
+import com.intellij.openapi.application.WriteAction;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
 import com.intellij.openapi.fileChooser.FileElement;
@@ -35,6 +37,7 @@ import com.intellij.openapi.fileChooser.ex.FileSystemTreeImpl;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.options.UnnamedConfigurable;
 import com.intellij.openapi.projectRoots.impl.PerlModuleExtension;
+import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.ui.configuration.actions.IconWithTextAction;
 import com.intellij.openapi.ui.VerticalFlowLayout;
@@ -57,11 +60,13 @@ import java.util.List;
 
 
 public class PerlContentEntriesTreeEditor implements UnnamedConfigurable, Disposable {
+  private static final Logger LOG = Logger.getInstance(PerlContentEntriesTreeEditor.class);
   private JPanel myTreePanel;
   private Tree myTree = new Tree();
   private FileSystemTreeImpl myFileSystemTree;
   private Module myModule;
   private DefaultActionGroup myEditingActionsGroup = new DefaultActionGroup();
+  private ModifiableRootModel myModifiableRootModel;
   private PerlModuleExtension myModifiableModel;
 
   public PerlContentEntriesTreeEditor(@NotNull Module module, @NotNull Disposable parentDisposable) {
@@ -147,17 +152,20 @@ public class PerlContentEntriesTreeEditor implements UnnamedConfigurable, Dispos
 
   @Override
   public void apply() {
-    assert myModifiableModel != null;
-    myModifiableModel.commit();
+    LOG.assertTrue(myModifiableRootModel != null);
+    LOG.assertTrue(myModifiableModel != null);
+    WriteAction.run(() -> myModifiableRootModel.commit());
   }
 
   @Override
   public void reset() {
-    if (myModifiableModel != null) {
-      myModifiableModel.dispose();
+    if (myModifiableRootModel != null) {
+      myModifiableRootModel.dispose();
+      myModifiableRootModel = null;
       myModifiableModel = null;
     }
-    myModifiableModel = (PerlModuleExtension)PerlModuleExtension.getInstance(myModule).getModifiableModel(true);
+    myModifiableRootModel = ModuleRootManager.getInstance(myModule).getModifiableModel();
+    myModifiableModel = myModifiableRootModel.getModuleExtension(PerlModuleExtension.class);
   }
 
   @Override
@@ -172,6 +180,9 @@ public class PerlContentEntriesTreeEditor implements UnnamedConfigurable, Dispos
   @Override
   public void dispose() {
     disposeUIResources();
+    if (myModifiableRootModel != null) {
+      myModifiableRootModel.dispose();
+    }
   }
 
   @NotNull

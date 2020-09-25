@@ -22,6 +22,7 @@ import com.intellij.openapi.components.PersistentStateComponentWithModificationT
 import com.intellij.openapi.components.impl.ModulePathMacroManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.module.Module;
+import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.roots.ModuleExtension;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.ex.ProjectRootManagerEx;
@@ -32,6 +33,7 @@ import com.intellij.util.containers.Predicate;
 import com.perl5.lang.perl.idea.modules.PerlSourceRootType;
 import gnu.trove.THashMap;
 import org.jdom.Element;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.jps.model.module.JpsModuleSourceRootType;
@@ -42,6 +44,7 @@ import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public class PerlModuleExtension extends ModuleExtension implements PersistentStateComponentWithModificationTracker<Element> {
@@ -69,11 +72,13 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
     myOriginal = original;
   }
 
+  @ApiStatus.OverrideOnly
   @Override
   public @NotNull ModuleExtension getModifiableModel(boolean writable) {
     return new PerlModuleExtension(this, writable);
   }
 
+  @ApiStatus.OverrideOnly
   @Override
   public void commit() {
     LOG.assertTrue(myOriginal != null, "Attempt to commit non-modifiable model");
@@ -193,6 +198,27 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
 
   public static PerlModuleExtension getInstance(@NotNull Module module) {
     return ModuleRootManager.getInstance(module).getModuleExtension(PerlModuleExtension.class);
+  }
+
+  /**
+   * Modifies {@link PerlModuleExtension} for the {@code module} using {@code mutator}. Incapsulates proper logic of working with modifiable
+   * model, described in {@link ModuleExtension#getModifiableModel(boolean) javadoc}.
+   *
+   * @see ModuleExtension#getModifiableModel(boolean)
+   */
+  public static void modify(@NotNull Module module, @NotNull Consumer<PerlModuleExtension> mutator) {
+    ModifiableRootModel modifiableModel = ModuleRootManager.getInstance(module).getModifiableModel();
+    PerlModuleExtension moduleExtensionModifiableModel = modifiableModel.getModuleExtension(PerlModuleExtension.class);
+    try {
+      mutator.accept(moduleExtensionModifiableModel);
+    }
+    catch (Throwable e) {
+      LOG.error(e);
+      modifiableModel.dispose();
+    }
+    finally {
+      WriteAction.run(modifiableModel::commit);
+    }
   }
 
   private static @Nullable JpsModuleSourceRootPropertiesSerializer<?> getSerializer(Predicate<JpsModuleSourceRootPropertiesSerializer<?>> predicate) {
