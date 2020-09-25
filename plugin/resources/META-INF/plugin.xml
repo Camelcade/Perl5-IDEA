@@ -31,11 +31,11 @@
   <depends optional="true" config-file="perl-copyright.xml">com.intellij.copyright</depends>
   <depends optional="true" config-file="perl-coverage.xml">com.intellij.modules.coverage</depends>
 
-  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="perl-debugger.xml" xpointer="xpointer(/idea-plugin/*)"/>
-  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="perl-pod.xml" xpointer="xpointer(/idea-plugin/*)"/>
-  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="perl-berrybrew.xml" xpointer="xpointer(/idea-plugin/*)"/>
-  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="perl-perlbrew.xml" xpointer="xpointer(/idea-plugin/*)"/>
-  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="perl-plenv.xml" xpointer="xpointer(/idea-plugin/*)"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="/META-INF/perl-pod.xml" xpointer="xpointer(/idea-plugin/*)"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="/META-INF/perl-berrybrew.xml" xpointer="xpointer(/idea-plugin/*)"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="/META-INF/perl-debugger.xml" xpointer="xpointer(/idea-plugin/*)"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="/META-INF/perl-perlbrew.xml" xpointer="xpointer(/idea-plugin/*)"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="/META-INF/perl-plenv.xml" xpointer="xpointer(/idea-plugin/*)"/>
 
   <extensionPoints>
     <extensionPoint name="packageProcessor" beanClass="com.perl5.lang.perl.idea.EP.PerlPackageProcessorEP">
