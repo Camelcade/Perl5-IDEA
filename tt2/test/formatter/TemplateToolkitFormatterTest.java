@@ -18,8 +18,10 @@ package formatter;
 
 
 import base.TemplateToolkitLightTestCase;
+import org.junit.Ignore;
 import org.junit.Test;
 
+@Ignore("TT2 formatter should be re-written properly")
 public class TemplateToolkitFormatterTest extends TemplateToolkitLightTestCase {
   TemplateToolkitTestSettings myTestSettings;
 
