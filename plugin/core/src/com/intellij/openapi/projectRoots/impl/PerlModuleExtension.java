@@ -41,6 +41,7 @@ import org.jetbrains.jps.model.serialization.JpsModelSerializerExtension;
 import org.jetbrains.jps.model.serialization.module.JpsModuleSourceRootPropertiesSerializer;
 
 import java.io.File;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -113,7 +114,7 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
   }
 
   public Map<VirtualFile, PerlSourceRootType> getRoots() {
-    return myRoots;
+    return Collections.unmodifiableMap(myRoots);
   }
 
   public synchronized List<VirtualFile> getRootsByType(@NotNull PerlSourceRootType type) {
