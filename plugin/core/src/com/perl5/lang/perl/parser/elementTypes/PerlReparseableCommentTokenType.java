@@ -20,8 +20,8 @@ import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.TextRange;
 import org.jetbrains.annotations.NotNull;
 
-public class PerlSelfReparseableTokenType extends PerlReparseableTokenType {
-  public PerlSelfReparseableTokenType(@NotNull String debugName, Class<? extends ASTNode> clazz) {
+public class PerlReparseableCommentTokenType extends PerlReparseableTokenType {
+  public PerlReparseableCommentTokenType(@NotNull String debugName, Class<? extends ASTNode> clazz) {
     super(debugName, clazz);
   }
 

@@ -71,7 +71,7 @@ public class PerlElementTypeFactory {
       case "VERSION_ELEMENT":
         return new PerlTokenTypeEx(name, PerlVersionElementImpl.class);
       case "COMMENT_LINE":
-        return new PerlSelfReparseableTokenType(name, PsiCommentImpl.class);
+        return new PerlReparseableCommentTokenType(name, PsiCommentImpl.class);
     }
     return new PerlTokenType(name);
   }

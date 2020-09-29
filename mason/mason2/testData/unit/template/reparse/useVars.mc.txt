@@ -1,8 +1,6 @@
 Reparsing block
 ----------
-PerlVariableNameElementImpl(Perl5: SCALAR_NAME)
-----------
-ff
+Full reparse
 ----------
 After typing
 ----------

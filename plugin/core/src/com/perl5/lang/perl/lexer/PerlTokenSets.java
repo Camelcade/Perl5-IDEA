@@ -404,4 +404,8 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
   TokenSet LAZY_REGEX_STRINGS = TokenSet.create(LP_STRING_QQ_RESTRICTED, LP_STRING_RE);
 
   TokenSet LAZY_CODE_BLOCKS = TokenSet.create(LP_CODE_BLOCK, LP_CODE_BLOCK_WITH_TRYCATCH);
+
+  TokenSet ELEMENTS_WITH_CUSTOM_DELIMITERS = TokenSet.orSet(
+    REGEX_OPERATIONS, QUOTED_STRINGS, TokenSet.create(STRING_LIST, TR_REGEX)
+  );
 }

@@ -28,6 +28,7 @@ import com.intellij.psi.impl.source.tree.TreeUtil;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.IReparseableLeafElementType;
 import com.perl5.lang.perl.lexer.PerlLexingContext;
+import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.lexer.adapters.PerlMergingLexerAdapter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -55,6 +56,7 @@ public abstract class PerlReparseableTokenType extends PerlTokenTypeEx implement
       LOG.debug("No confirmation range found for ", leaf);
       return false;
     }
+
     TextRange leafTextRange = leaf.getTextRange();
     if (!confirmationRange.contains(leafTextRange)) {
       LOG.error("Confirmation range must cover the leaf: " +
@@ -62,6 +64,19 @@ public abstract class PerlReparseableTokenType extends PerlTokenTypeEx implement
                 "; leaf: " + leaf +
                 "; leafRange: " + leafTextRange);
       return false;
+    }
+
+    var quoteLikeParent = TreeUtil.findParent(leaf, PerlTokenSets.ELEMENTS_WITH_CUSTOM_DELIMITERS);
+    while (quoteLikeParent != null) {
+      var nextQuoteLikeParent = TreeUtil.findParent(quoteLikeParent, PerlTokenSets.ELEMENTS_WITH_CUSTOM_DELIMITERS);
+      if (nextQuoteLikeParent == null) {
+        break;
+      }
+      quoteLikeParent = nextQuoteLikeParent;
+    }
+
+    if (quoteLikeParent != null) {
+      confirmationRange = confirmationRange.union(quoteLikeParent.getTextRange());
     }
 
     Lexer lexer = createLexer(leaf);
