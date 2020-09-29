@@ -79,8 +79,13 @@ public class PerlProfilerRunProfileState extends PerlRunProfileState {
   public Map<String, String> getAdditionalEnvironmentVariables() throws ExecutionException {
     Sdk effectiveSdk = ((GenericPerlRunConfiguration)getEnvironment().getRunProfile()).getEffectiveSdk();
     PerlHostData<?, ?> hostData = PerlHostData.notNullFrom(effectiveSdk);
+    var dumpLocalPath = getDumpFile().getAbsolutePath();
+    var remotePath = hostData.getRemotePath(dumpLocalPath);
+    if (StringUtil.isEmpty(remotePath)) {
+      throw new ExecutionException("Unable to compute remote path for: " + dumpLocalPath);
+    }
     var nytProfOptions = "stmts=0:calls=2:savesrc=0:slowops=1:sigexit=1:addpid=1" +
-                         ":file=" + hostData.getRemotePath(getDumpFile().getAbsolutePath()) +
+                         ":file=" + StringUtil.escapeChar(remotePath, ':') +
                          ":start=" + myProfilerConfigurationState.getStartupMode().getProfilerCommand();
     if (myProfilerConfigurationState.isOptimizerDisabled()) {
       nytProfOptions += ":optimize=0";
