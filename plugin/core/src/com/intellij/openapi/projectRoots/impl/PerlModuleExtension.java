@@ -29,9 +29,9 @@ import com.intellij.openapi.roots.ex.ProjectRootManagerEx;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.util.containers.Predicate;
 import com.perl5.lang.perl.idea.modules.PerlSourceRootType;
-import gnu.trove.THashMap;
 import org.jdom.Element;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
@@ -87,7 +87,7 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
       synchronized (myOriginal) {
         WriteAction.run(
           () -> ProjectRootManagerEx.getInstanceEx(myModule.getProject()).makeRootsChange(() -> {
-            myOriginal.myRoots = new THashMap<>(myRoots);
+            myOriginal.myRoots = new LinkedHashMap<>(myRoots);
             myOriginal.myModificationTracker++;
           }, false, true)
         );
@@ -155,14 +155,14 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
         continue;
       }
 
-      String collapsedPath = macroManager.collapsePath(root.getCanonicalPath());
-      if (StringUtil.isEmpty(collapsedPath)) {
+      String collapsedUrl = macroManager.collapsePath(root.getUrl());
+      if (StringUtil.isEmpty(collapsedUrl)) {
         continue;
       }
 
 
       Element pathElement = new Element(ELEMENT_PATH);
-      pathElement.setAttribute(ATTRIBUTE_VALUE, collapsedPath);
+      pathElement.setAttribute(ATTRIBUTE_VALUE, collapsedUrl);
       pathElement.setAttribute(ATTRIBUTE_TYPE, serializer.getTypeId());
       perlConfig.addContent(pathElement);
     }
@@ -189,8 +189,12 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
       if (serializer == null) {
         continue;
       }
-      String expandedPath = macroManager.expandPath(pathElement.getAttributeValue(ATTRIBUTE_VALUE));
-      VirtualFile libRoot = VfsUtil.findFileByIoFile(new File(expandedPath), false);
+      String expandedPathOrUrl = macroManager.expandPath(pathElement.getAttributeValue(ATTRIBUTE_VALUE));
+      var libRoot = VirtualFileManager.getInstance().findFileByUrl(expandedPathOrUrl);
+      if (libRoot == null) {
+        // fixme migration part, to be removed
+        libRoot = VfsUtil.findFileByIoFile(new File(expandedPathOrUrl), false);
+      }
       if (libRoot != null && libRoot.isValid() && libRoot.isDirectory()) {
         myRoots.put(libRoot, (PerlSourceRootType)serializer.getType());
       }
