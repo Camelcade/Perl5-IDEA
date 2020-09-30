@@ -155,14 +155,14 @@ public class PerlContentEntriesTreeEditor implements UnnamedConfigurable, Dispos
     LOG.assertTrue(myModifiableRootModel != null);
     LOG.assertTrue(myModifiableModel != null);
     WriteAction.run(() -> myModifiableRootModel.commit());
+    myModifiableRootModel = null;
+    reset();
   }
 
   @Override
   public void reset() {
     if (myModifiableRootModel != null) {
       myModifiableRootModel.dispose();
-      myModifiableRootModel = null;
-      myModifiableModel = null;
     }
     myModifiableRootModel = ModuleRootManager.getInstance(myModule).getModifiableModel();
     myModifiableModel = myModifiableRootModel.getModuleExtension(PerlModuleExtension.class);
