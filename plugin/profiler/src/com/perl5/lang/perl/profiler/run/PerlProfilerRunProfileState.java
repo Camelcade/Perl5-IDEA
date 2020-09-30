@@ -85,7 +85,7 @@ public class PerlProfilerRunProfileState extends PerlRunProfileState {
       throw new ExecutionException("Unable to compute remote path for: " + dumpLocalPath);
     }
     var nytProfOptions = "stmts=0:calls=2:savesrc=0:slowops=1:sigexit=1:addpid=1" +
-                         ":file=" + StringUtil.escapeChar(remotePath, ':') +
+                         ":file=" + StringUtil.escapeChar(FileUtil.toSystemIndependentName(remotePath), ':') +
                          ":start=" + myProfilerConfigurationState.getStartupMode().getProfilerCommand();
     if (myProfilerConfigurationState.isOptimizerDisabled()) {
       nytProfOptions += ":optimize=0";
