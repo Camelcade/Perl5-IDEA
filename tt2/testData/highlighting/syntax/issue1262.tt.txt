@@ -70,15 +70,7 @@ function
     HTML_CODE => TEXT
  
     HTML_CODE => TEXT
-calculate
-    HTML_CODE => TEXT
-(
-    HTML_CODE => TEXT
-a
-    HTML_CODE => TEXT
-)
-    HTML_CODE => TEXT
-{
+calculate(a){
     HTML_CODE => TEXT
 
     
@@ -90,9 +82,7 @@ a
 
         
     HTML_CODE => TEXT
-if
-    HTML_CODE => TEXT
-(
+if(
     HTML_CODE => TEXT
  
     HTML_CODE => TEXT
@@ -104,24 +94,12 @@ a
     HTML_CODE => TEXT
  
     HTML_CODE => TEXT
-0
-    HTML_CODE => TEXT
-)
-    HTML_CODE => TEXT
-{
+0){
     HTML_CODE => TEXT
 
             
     HTML_CODE => TEXT
-alert
-    HTML_CODE => TEXT
-(
-    HTML_CODE => TEXT
-'Negative'
-    HTML_CODE => TEXT
-)
-    HTML_CODE => TEXT
-;
+alert('Negative');
     HTML_CODE => TEXT
 
             
