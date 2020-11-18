@@ -1,5 +1,5 @@
 Matching value:
 	[--info]
 Completion items:
-	[--quiet]; [Turns off the most output]; /icons/perl5language.png; [cpanm --quiet --info]
-	[--verbose]; [Turns on chatty output]; /icons/perl5language.png; [cpanm --verbose --info]
+	[--quiet]; [Turns off the most output]; /perl5language.png; [cpanm --quiet --info]
+	[--verbose]; [Turns on chatty output]; /perl5language.png; [cpanm --verbose --info]

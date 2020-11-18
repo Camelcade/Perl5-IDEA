@@ -1,39 +1,39 @@
 Text<>
 
-=head1 header1<[header1, /perl5language.png, null]>
+=head1 header1<[header1, /perl5language.png]>
 
-Text<[header1, /perl5language.png, null]>
+Text<[header1, /perl5language.png]>
 
-=head2 header2<[header1, /perl5language.png, null]: [header2, /perl5language.png, null]>
+=head2 header2<[header1, /perl5language.png]: [header2, /perl5language.png]>
 
-Text<[header1, /perl5language.png, null]: [header2, /perl5language.png, null]>
+Text<[header1, /perl5language.png]: [header2, /perl5language.png]>
 
-=head3 header3<[header1, /perl5language.png, null]: [header2, /perl5language.png, null]: [header3, /perl5language.png, null]>
+=head3 header3<[header1, /perl5language.png]: [header2, /perl5language.png]: [header3, /perl5language.png]>
 
-Text<[header1, /perl5language.png, null]: [header2, /perl5language.png, null]: [header3, /perl5language.png, null]>
+Text<[header1, /perl5language.png]: [header2, /perl5language.png]: [header3, /perl5language.png]>
 
-=head4 header4<[header1, /perl5language.png, null]: [header2, /perl5language.png, null]: [header3, /perl5language.png, null]: [header4, /perl5language.png, null]>
+=head4 header4<[header1, /perl5language.png]: [header2, /perl5language.png]: [header3, /perl5language.png]: [header4, /perl5language.png]>
 
-=over<[header1, /perl5language.png, null]: [header2, /perl5language.png, null]: [header3, /perl5language.png, null]: [header4, /perl5language.png, null]>
+=over<[header1, /perl5language.png]: [header2, /perl5language.png]: [header3, /perl5language.png]: [header4, /perl5language.png]>
 
-text<[header1, /perl5language.png, null]: [header2, /perl5language.png, null]: [header3, /perl5language.png, null]: [header4, /perl5language.png, null]>
+text<[header1, /perl5language.png]: [header2, /perl5language.png]: [header3, /perl5language.png]: [header4, /perl5language.png]>
 
-=item Titled item<[header1, /perl5language.png, null]: [header2, /perl5language.png, null]: [header3, /perl5language.png, null]: [header4, /perl5language.png, null]: [Titled item, /perl5language.png, null]>
+=item Titled item<[header1, /perl5language.png]: [header2, /perl5language.png]: [header3, /perl5language.png]: [header4, /perl5language.png]: [Titled item, /perl5language.png]>
 
-Text<[header1, /perl5language.png, null]: [header2, /perl5language.png, null]: [header3, /perl5language.png, null]: [header4, /perl5language.png, null]: [Titled item, /perl5language.png, null]>
+Text<[header1, /perl5language.png]: [header2, /perl5language.png]: [header3, /perl5language.png]: [header4, /perl5language.png]: [Titled item, /perl5language.png]>
 
-=item Other titled item<[header1, /perl5language.png, null]: [header2, /perl5language.png, null]: [header3, /perl5language.png, null]: [header4, /perl5language.png, null]: [Other titled item, /perl5language.png, null]>
+=item Other titled item<[header1, /perl5language.png]: [header2, /perl5language.png]: [header3, /perl5language.png]: [header4, /perl5language.png]: [Other titled item, /perl5language.png]>
 
-Text<[header1, /perl5language.png, null]: [header2, /perl5language.png, null]: [header3, /perl5language.png, null]: [header4, /perl5language.png, null]: [Other titled item, /perl5language.png, null]>
+Text<[header1, /perl5language.png]: [header2, /perl5language.png]: [header3, /perl5language.png]: [header4, /perl5language.png]: [Other titled item, /perl5language.png]>
 
-=back<[header1, /perl5language.png, null]: [header2, /perl5language.png, null]: [header3, /perl5language.png, null]: [header4, /perl5language.png, null]>
+=back<[header1, /perl5language.png]: [header2, /perl5language.png]: [header3, /perl5language.png]: [header4, /perl5language.png]>
 
-=over<[header1, /perl5language.png, null]: [header2, /perl5language.png, null]: [header3, /perl5language.png, null]: [header4, /perl5language.png, null]>
+=over<[header1, /perl5language.png]: [header2, /perl5language.png]: [header3, /perl5language.png]: [header4, /perl5language.png]>
 
-text<[header1, /perl5language.png, null]: [header2, /perl5language.png, null]: [header3, /perl5language.png, null]: [header4, /perl5language.png, null]>
+text<[header1, /perl5language.png]: [header2, /perl5language.png]: [header3, /perl5language.png]: [header4, /perl5language.png]>
 
-=item *<[header1, /perl5language.png, null]: [header2, /perl5language.png, null]: [header3, /perl5language.png, null]: [header4, /perl5language.png, null]>
+=item *<[header1, /perl5language.png]: [header2, /perl5language.png]: [header3, /perl5language.png]: [header4, /perl5language.png]>
 
-Text<[header1, /perl5language.png, null]: [header2, /perl5language.png, null]: [header3, /perl5language.png, null]: [header4, /perl5language.png, null]>
+Text<[header1, /perl5language.png]: [header2, /perl5language.png]: [header3, /perl5language.png]: [header4, /perl5language.png]>
 
-=back<[header1, /perl5language.png, null]: [header2, /perl5language.png, null]: [header3, /perl5language.png, null]: [header4, /perl5language.png, null]>
+=back<[header1, /perl5language.png]: [header2, /perl5language.png]: [header3, /perl5language.png]: [header4, /perl5language.png]>

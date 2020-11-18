@@ -1,5 +1,5 @@
 Matching value:
 	[--help, --uninstall]
 Completion items:
-	[--quiet]; [Turns off the most output]; /icons/perl5language.png; [cpanm --quiet --uninstall]
-	[--verbose]; [Turns on chatty output]; /icons/perl5language.png; [cpanm --verbose --uninstall]
+	[--quiet]; [Turns off the most output]; /perl5language.png; [cpanm --quiet --uninstall]
+	[--verbose]; [Turns on chatty output]; /perl5language.png; [cpanm --verbose --uninstall]

@@ -1,30 +1,30 @@
 $self->helper(some_helper => sub{
-<[sub(), /perl5classic.png, null]>
+<[sub(), /perl5classic.png]>
 });
 <>
 sub somesub {
     sub {
-<[somesub(), /subroutine_gutter_icon.png: [sub(), /perl5classic.png, null]>
+<[somesub(), /subroutine_gutter_icon.png]: [sub(), /perl5classic.png]>
     };
-    <[somesub(), /subroutine_gutter_icon.png>
+    <[somesub(), /subroutine_gutter_icon.png]>
 }
 
 method somemethos {
-<[somemethos(), /method_gutter_icon.png>
+<[somemethos(), /method_gutter_icon.png]>
     sub {
-<[somemethos(), /method_gutter_icon.png: [sub(), /perl5classic.png, null]>
+<[somemethos(), /method_gutter_icon.png]: [sub(), /perl5classic.png]>
     };
 }
 
 func somefunc {
-    <[somefunc(), /subroutine_gutter_icon.png>
+    <[somefunc(), /subroutine_gutter_icon.png]>
     sub {
-<[somefunc(), /subroutine_gutter_icon.png: [sub(), /perl5classic.png, null]>
+<[somefunc(), /subroutine_gutter_icon.png]: [sub(), /perl5classic.png]>
     };
 }
 
 sub {
-<[sub(), /perl5classic.png, null]>
+<[sub(), /perl5classic.png]>
 };
 
 eval {

@@ -20,7 +20,7 @@ HtmlFile:mojoParserTest.ep
           XmlToken:XML_START_TAG_START('<')
           XmlToken:XML_NAME('title')
           XmlToken:XML_TAG_END('>')
-          XmlText
+          HtmlRawText
             XmlToken:XML_DATA_CHARACTERS('Simple')
           XmlToken:XML_END_TAG_START('</')
           XmlToken:XML_NAME('title')
