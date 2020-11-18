@@ -40,9 +40,4 @@ public class PerlTargetProcess implements AttachableTargetProcess {
   public @NotNull RunContentDescriptor getRunContentDescriptor() {
     return myRunContentDescriptor;
   }
-
-  @Override
-  public @NotNull String getPrettyHumanReadableNameWithoutPid() {
-    return myRunContentDescriptor.getDisplayName();
-  }
 }
