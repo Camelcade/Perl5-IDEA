@@ -139,7 +139,9 @@ import com.intellij.testFramework.fixtures.BasePlatformTestCase;
 import com.intellij.testFramework.fixtures.CodeInsightTestUtil;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.intellij.testFramework.utils.parameterInfo.MockCreateParameterInfoContext;
+import com.intellij.ui.DeferredIcon;
 import com.intellij.ui.components.breadcrumbs.Crumb;
+import com.intellij.ui.icons.RowIcon;
 import com.intellij.usageView.*;
 import com.intellij.usages.*;
 import com.intellij.usages.impl.UsageViewImpl;
@@ -744,7 +746,25 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     if (icon == null) {
       return "null";
     }
-    String iconString = icon.toString();
+    String iconString;
+    if (icon instanceof IconLoader.CachedImageIcon) {
+      iconString = ((IconLoader.CachedImageIcon)icon).getOriginalPath();
+    }
+    else if (icon instanceof DeferredIcon) {
+      return getIconText(((DeferredIcon)icon).getBaseIcon());
+    }
+    else if (icon instanceof RowIcon) {
+      List<String> iconStrings = new ArrayList<>();
+      for (Icon subIcon : ((RowIcon)icon).getAllIcons()) {
+        if (subIcon != null) {
+          iconStrings.add(getIconText(subIcon));
+        }
+      }
+      return String.join("; ", iconStrings);
+    }
+    else {
+      iconString = icon.toString();
+    }
     return iconString.substring(iconString.lastIndexOf('/'));
   }
 
@@ -1931,7 +1951,10 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       return "EMPTY";
     }
     String tooltip = crumb.getTooltip();
-    return "[" + crumb.getText() + (tooltip == null ? "" : "(" + tooltip + ")") + ", " + getIconText(crumb.getIcon());
+    return "[" +
+           crumb.getText() +
+           (tooltip == null ? "" : "(" + tooltip + ")") +
+           ", " + getIconText(crumb.getIcon()) + "]";
   }
 
   protected void doTestUsagesGrouping() {
@@ -2762,7 +2785,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       Icon icon = ReflectionUtil.getField(RunAnythingHelpItem.class, runAnythingItem, Icon.class, "myIcon");
       result = "[" + placeHolder + "]; " +
                "[" + description + "]; " +
-               icon + "; " +
+               getIconText(icon) + "; " +
                result;
     }
     return result;
