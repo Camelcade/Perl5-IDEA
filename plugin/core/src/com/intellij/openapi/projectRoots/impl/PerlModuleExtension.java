@@ -59,6 +59,7 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
   private PerlModuleExtension myOriginal;
   private Module myModule;
   private Map<VirtualFile, PerlSourceRootType> myRoots = new LinkedHashMap<>();
+  private Throwable myDisposalTrace;
 
   public PerlModuleExtension(Module module) {
     myModule = module;
@@ -97,6 +98,7 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
 
   @Override
   public boolean isChanged() {
+    assertNotDisposed();
     return !myRoots.equals(myOriginal.myRoots);
   }
 
@@ -128,11 +130,19 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
     return myRoots.get(virtualFile);
   }
 
+  private void assertNotDisposed() {
+    if (myDisposalTrace != null) {
+      throw new RuntimeException("Already disposed", myDisposalTrace);
+    }
+  }
+
   @Override
   public void dispose() {
+    assertNotDisposed();
     myOriginal = null;
     myModule = null;
     myRoots = null;
+    myDisposalTrace = new Throwable("Disposal trace");
   }
 
   @Override
