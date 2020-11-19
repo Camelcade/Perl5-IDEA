@@ -1,53 +1,53 @@
 Documentation in null; /perl5language.png -> POD file at 0 in perlsymbian.pod
 
-  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 178 in perlsymbian.pod
+  NAME in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 178 in perlsymbian.pod
 
-  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 235 in perlsymbian.pod
+  DESCRIPTION in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 235 in perlsymbian.pod
 
-    Compiling Perl on Symbian in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1088 in perlsymbian.pod
+    Compiling Perl on Symbian in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1088 in perlsymbian.pod
 
-    Compilation problems in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7615 in perlsymbian.pod
+    Compilation problems in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7615 in perlsymbian.pod
 
-    PerlApp in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8368 in perlsymbian.pod
+    PerlApp in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8368 in perlsymbian.pod
 
-    sisify.pl in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8996 in perlsymbian.pod
+    sisify.pl in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8996 in perlsymbian.pod
 
-    Using Perl in Symbian in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9440 in perlsymbian.pod
+    Using Perl in Symbian in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9440 in perlsymbian.pod
 
-  TO DO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 11509 in perlsymbian.pod
+  TO DO in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 11509 in perlsymbian.pod
 
-  WARNING in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 11552 in perlsymbian.pod
+  WARNING in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 11552 in perlsymbian.pod
 
-  NOTE in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 11803 in perlsymbian.pod
+  NOTE in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 11803 in perlsymbian.pod
 
-  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 12494 in perlsymbian.pod
+  AUTHOR in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 12494 in perlsymbian.pod
 
-  COPYRIGHT in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 12528 in perlsymbian.pod
+  COPYRIGHT in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 12528 in perlsymbian.pod
 
-  LICENSE in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 12644 in perlsymbian.pod
+  LICENSE in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 12644 in perlsymbian.pod
 
-  HISTORY in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 12727 in perlsymbian.pod
+  HISTORY in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 12727 in perlsymbian.pod
 
     0.1.0: April 2005  (This will show as "0.01" in the Symbian Installer.)   - The console window is a very simple console indeed: one can
- ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12752 in perlsymbian.pod
+ ... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12752 in perlsymbian.pod
 
     0.2.0: October 2005    - Perl 5.9.3 (patch level 25741)
   - Compress::Zlib and IO::Zlib supported
   - sisify.pl added
- We maintain the bi... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14299 in perlsymbian.pod
+ We maintain the bi... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14299 in perlsymbian.pod
 
     0.3.0: October 2005    - Perl 5.9.3 (patch level 25911)
   - Series 80 2.0 and UIQ 2.1 support
- We maintain the binary incompatibility. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14468 in perlsymbian.pod
+ We maintain the binary incompatibility. in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14468 in perlsymbian.pod
 
     0.4.0: November 2005    - Perl 5.9.3 (patch level 26052)
   - adding a sample Symbian extension
- We maintain the binary incompatibility. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14613 in perlsymbian.pod
+ We maintain the binary incompatibility. in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14613 in perlsymbian.pod
 
     0.4.1: December 2006    - Perl 5.9.5-to-be (patch level 30002)
   - added extensions: Compress/Raw/Zlib, Digest/SHA,
-    Hash/Util, Math/B... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14759 in perlsymbian.pod
+    Hash/Util, Math/B... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14759 in perlsymbian.pod
 
     0.4.2: March 2007    - catchup with Perl 5.9.5-to-be (patch level 30812)
-  - tested to build with Microsoft Visual C++ 2005 Express Editi... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15032 in perlsymbian.pod
+  - tested to build with Microsoft Visual C++ 2005 Express Editi... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15032 in perlsymbian.pod
 

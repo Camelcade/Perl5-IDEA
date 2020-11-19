@@ -1,287 +1,287 @@
 Documentation in null; /perl5language.png -> POD file at 0 in perlhacktips.pod
 
-  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 130 in perlhacktips.pod
+  NAME in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 130 in perlhacktips.pod
 
-  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 193 in perlhacktips.pod
+  DESCRIPTION in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 193 in perlhacktips.pod
 
-  COMMON PROBLEMS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 456 in perlhacktips.pod
+  COMMON PROBLEMS in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 456 in perlhacktips.pod
 
-    Perl environment problems in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 672 in perlhacktips.pod
+    Perl environment problems in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 672 in perlhacktips.pod
 
-      Not compiling with threading  Compiling with threading (-Duseithreads) completely rewrites the function prototypes of Perl.  You better t... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 715 in perlhacktips.pod
+      Not compiling with threading  Compiling with threading (-Duseithreads) completely rewrites the function prototypes of Perl.  You better t... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 715 in perlhacktips.pod
 
-      Not compiling with -DDEBUGGING  The DEBUGGING define exposes more code to the compiler, therefore more ways for things to go wrong.  You ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1400 in perlhacktips.pod
+      Not compiling with -DDEBUGGING  The DEBUGGING define exposes more code to the compiler, therefore more ways for things to go wrong.  You ... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1400 in perlhacktips.pod
 
-      Introducing (non-read-only) globals  Do not introduce any modifiable globals, truly global or file static. They are bad form and complica... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1562 in perlhacktips.pod
+      Introducing (non-read-only) globals  Do not introduce any modifiable globals, truly global or file static. They are bad form and complica... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1562 in perlhacktips.pod
 
-      Not exporting your new function  Some platforms (Win32, AIX, VMS, OS/2, to name a few) require any function that is part of the public AP... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2692 in perlhacktips.pod
+      Not exporting your new function  Some platforms (Win32, AIX, VMS, OS/2, to name a few) require any function that is part of the public AP... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2692 in perlhacktips.pod
 
-      Exporting your new function  The new shiny result of either genuine new functionality or your arduous refactoring is now ready and correc... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2958 in perlhacktips.pod
+      Exporting your new function  The new shiny result of either genuine new functionality or your arduous refactoring is now ready and correc... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2958 in perlhacktips.pod
 
-    Portability problems in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3680 in perlhacktips.pod
+    Portability problems in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3680 in perlhacktips.pod
 
       Casting pointers to integers or casting integers to pointers      void castaway(U8* p)
     {
       IV i = p;
- or      void castaway(U8* p... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5135 in perlhacktips.pod
+ or      void castaway(U8* p... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5135 in perlhacktips.pod
 
-      Casting between function pointers and data pointers  Technically speaking casting between function pointers and data pointers is unportab... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5466 in perlhacktips.pod
+      Casting between function pointers and data pointers  Technically speaking casting between function pointers and data pointers is unportab... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5466 in perlhacktips.pod
 
-      Assuming sizeof(int) == sizeof(long)  There are platforms where longs are 64 bits, and platforms where ints are 64 bits, and while we are... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5780 in perlhacktips.pod
+      Assuming sizeof(int) == sizeof(long)  There are platforms where longs are 64 bits, and platforms where ints are 64 bits, and while we are... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5780 in perlhacktips.pod
 
       Assuming one can dereference any type of pointer for any type of data    char *p = ...;
   long pony = *(long *)p;    /* BAD */
- Many plat... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6506 in perlhacktips.pod
+ Many plat... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6506 in perlhacktips.pod
 
       Lvalue casts    (int)*p = ...;    /* BAD */
- Simply not portable.  Get your lvalue to be of the right type, or maybe use temporary variab... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6768 in perlhacktips.pod
+ Simply not portable.  Get your lvalue to be of the right type, or maybe use temporary variab... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6768 in perlhacktips.pod
 
-      Assume anything about structs (especially the ones you don't control, like the ones coming from the system headers)    That a certain fie... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6949 in perlhacktips.pod
+      Assume anything about structs (especially the ones you don't control, like the ones coming from the system headers)    That a certain fie... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6949 in perlhacktips.pod
 
-        That a certain field exists in a struct in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7087 in perlhacktips.pod
+        That a certain field exists in a struct in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7087 in perlhacktips.pod
 
-        That no other fields exist besides the ones you know of in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7137 in perlhacktips.pod
+        That no other fields exist besides the ones you know of in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7137 in perlhacktips.pod
 
-        That a field is of certain signedness, sizeof, or type in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7203 in perlhacktips.pod
+        That a field is of certain signedness, sizeof, or type in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7203 in perlhacktips.pod
 
-        That the fields are in a certain order    While C guarantees the ordering specified in the struct definition, between different platforms... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7268 in perlhacktips.pod
+        That the fields are in a certain order    While C guarantees the ordering specified in the struct definition, between different platforms... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7268 in perlhacktips.pod
 
-          While C guarantees the ordering specified in the struct definition, between different platforms the definitions might differ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7326 in perlhacktips.pod
+          While C guarantees the ordering specified in the struct definition, between different platforms the definitions might differ in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7326 in perlhacktips.pod
 
-        That the sizeof(struct) or the alignments are the same everywhere    There might be padding bytes between the fields to align the fields ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7468 in perlhacktips.pod
+        That the sizeof(struct) or the alignments are the same everywhere    There might be padding bytes between the fields to align the fields ... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7468 in perlhacktips.pod
 
-          There might be padding bytes between the fields to align the fields - the bytes can be anything in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7553 in perlhacktips.pod
+          There might be padding bytes between the fields to align the fields - the bytes can be anything in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7553 in perlhacktips.pod
 
-          Structs are required to be aligned to the maximum alignment required by the fields - which for native types is for usually equivalent to ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7659 in perlhacktips.pod
+          Structs are required to be aligned to the maximum alignment required by the fields - which for native types is for usually equivalent to ... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7659 in perlhacktips.pod
 
-      Assuming the character set is ASCIIish  Perl can compile and run under EBCDIC platforms.  See perlebcdic. This is transparent for the mos... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7842 in perlhacktips.pod
+      Assuming the character set is ASCIIish  Perl can compile and run under EBCDIC platforms.  See perlebcdic. This is transparent for the mos... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7842 in perlhacktips.pod
 
-      Assuming the character set is just ASCII  ASCII is a 7 bit encoding, but bytes have 8 bits in them.  The 128 extra characters have differ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12443 in perlhacktips.pod
+      Assuming the character set is just ASCII  ASCII is a 7 bit encoding, but bytes have 8 bits in them.  The 128 extra characters have differ... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12443 in perlhacktips.pod
 
       Mixing #define and #ifdef    #define BURGLE(x) ... \
   #ifdef BURGLE_OLD_STYLE        /* BAD */
   ... do it the old way ... \
   #else
-  .... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12872 in perlhacktips.pod
+  .... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12872 in perlhacktips.pod
 
       Adding non-comment stuff after #endif or #else    #ifdef SNOSH
   ...
   #else !SNOSH    /* BAD */
   ...
   #endif SNOSH    /* BAD */
- The #... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13195 in perlhacktips.pod
+ The #... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13195 in perlhacktips.pod
 
       Having a comma after the last element of an enum list    enum color {
     CERULEAN,
     CHARTREUSE,
     CINNABAR,     /* BAD */
   };
- is ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13703 in perlhacktips.pod
+ is ... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13703 in perlhacktips.pod
 
       Using //-comments    // This function bamfoodles the zorklator.   /* BAD */
- That is C99 or C++.  Perl is C89.  Using the //-comments is ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14005 in perlhacktips.pod
+ That is C99 or C++.  Perl is C89.  Using the //-comments is ... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14005 in perlhacktips.pod
 
       Mixing declarations and code    void zorklator()
   {
     int n = 3;
     set_zorkmids(n);    /* BAD */
     int q = 4;
- That is C99 or C++.... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14283 in perlhacktips.pod
+ That is C99 or C++.... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14283 in perlhacktips.pod
 
       Introducing variables inside for()    for(int i = ...; ...; ...) {    /* BAD */
- That is C99 or C++.  While it would indeed be awfully ni... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14596 in perlhacktips.pod
+ That is C99 or C++.  While it would indeed be awfully ni... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14596 in perlhacktips.pod
 
       Mixing signed char pointers with unsigned char pointers    int foo(char *s) { ... }
   ...
   unsigned char *t = ...; /* Or U8* t = ... */
-... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14830 in perlhacktips.pod
+... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14830 in perlhacktips.pod
 
-      Macros that have string constants and their arguments as substrings of the string constants    #define FOO(n) printf("number = %d\n", n) ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15497 in perlhacktips.pod
+      Macros that have string constants and their arguments as substrings of the string constants    #define FOO(n) printf("number = %d\n", n) ... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15497 in perlhacktips.pod
 
       Using printf formats for non-basic C types     IV i = ...;
    printf("i = %d\n", i);    /* BAD */
- While this might by accident work in s... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15998 in perlhacktips.pod
+ While this might by accident work in s... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15998 in perlhacktips.pod
 
-      Blindly using variadic macros  gcc has had them for a while with its own syntax, and C99 brought them with a standardized syntax.  Don't ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17334 in perlhacktips.pod
+      Blindly using variadic macros  gcc has had them for a while with its own syntax, and C99 brought them with a standardized syntax.  Don't ... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17334 in perlhacktips.pod
 
-      Blindly passing va_list  Not all platforms support passing va_list to further varargs (stdarg) functions.  The right thing to do is to co... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17564 in perlhacktips.pod
+      Blindly passing va_list  Not all platforms support passing va_list to further varargs (stdarg) functions.  The right thing to do is to co... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17564 in perlhacktips.pod
 
       Using gcc statement expressions     val = ({...;...;...});    /* BAD */
- While a nice extension, it's not portable.  The Perl code does a... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17783 in perlhacktips.pod
+ While a nice extension, it's not portable.  The Perl code does a... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17783 in perlhacktips.pod
 
       Binding together several statements in a macro  Use the macros STMT_START and STMT_END.     STMT_START {
       ...
-   } STMT_END in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18049 in perlhacktips.pod
+   } STMT_END in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18049 in perlhacktips.pod
 
       Testing for operating systems or versions when should be testing for features    #ifdef __FOONIX__    /* BAD */
   foo = quux();
   #endif
-... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18188 in perlhacktips.pod
+... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18188 in perlhacktips.pod
 
-      Assuming the contents of static memory pointed to by the return values of Perl wrappers for C library functions doesn't change.  Many C l... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19569 in perlhacktips.pod
+      Assuming the contents of static memory pointed to by the return values of Perl wrappers for C library functions doesn't change.  Many C l... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19569 in perlhacktips.pod
 
-    Problematic System Interfaces in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21222 in perlhacktips.pod
+    Problematic System Interfaces in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21222 in perlhacktips.pod
 
-      malloc(0), realloc(0), calloc(0, 0) are non-portable.  To be portable allocate at least one byte.  (In general you should rarely need to ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21269 in perlhacktips.pod
+      malloc(0), realloc(0), calloc(0, 0) are non-portable.  To be portable allocate at least one byte.  (In general you should rarely need to ... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21269 in perlhacktips.pod
 
-      snprintf() - the return type is unportable.  Use my_snprintf() instead. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21486 in perlhacktips.pod
+      snprintf() - the return type is unportable.  Use my_snprintf() instead. in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21486 in perlhacktips.pod
 
-    Security problems in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21575 in perlhacktips.pod
+    Security problems in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21575 in perlhacktips.pod
 
-      Do not use gets()  Or we will publicly ridicule you.  Seriously. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21736 in perlhacktips.pod
+      Do not use gets()  Or we will publicly ridicule you.  Seriously. in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21736 in perlhacktips.pod
 
-      Do not use tmpfile()  Use mkstemp() instead. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21811 in perlhacktips.pod
+      Do not use tmpfile()  Use mkstemp() instead. in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21811 in perlhacktips.pod
 
-      Do not use strcpy() or strcat() or strncpy() or strncat()  Use my_strlcpy() and my_strlcat() instead: they either use the native implemen... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21866 in perlhacktips.pod
+      Do not use strcpy() or strcat() or strncpy() or strncat()  Use my_strlcpy() and my_strlcat() instead: they either use the native implemen... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21866 in perlhacktips.pod
 
-      Do not use sprintf() or vsprintf()  If you really want just plain byte strings, use my_snprintf() and my_vsnprintf() instead, which will ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22107 in perlhacktips.pod
+      Do not use sprintf() or vsprintf()  If you really want just plain byte strings, use my_snprintf() and my_vsnprintf() instead, which will ... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22107 in perlhacktips.pod
 
-      Do not use atoi()  Use grok_atoUV() instead.  atoi() has ill-defined behavior on overflows, and cannot be used for incremental parsing.  ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22853 in perlhacktips.pod
+      Do not use atoi()  Use grok_atoUV() instead.  atoi() has ill-defined behavior on overflows, and cannot be used for incremental parsing.  ... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22853 in perlhacktips.pod
 
-      Do not use strtol() or strtoul()  Use grok_atoUV() instead.  strtol() or strtoul() (or their IV/UV-friendly macro disguises, Strtol() and... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23045 in perlhacktips.pod
+      Do not use strtol() or strtoul()  Use grok_atoUV() instead.  strtol() or strtoul() (or their IV/UV-friendly macro disguises, Strtol() and... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23045 in perlhacktips.pod
 
-  DEBUGGING in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 23271 in perlhacktips.pod
+  DEBUGGING in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 23271 in perlhacktips.pod
 
-    Poking at Perl in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23706 in perlhacktips.pod
+    Poking at Perl in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23706 in perlhacktips.pod
 
-    Using a source-level debugger in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 25014 in perlhacktips.pod
+    Using a source-level debugger in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 25014 in perlhacktips.pod
 
-      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 25177 in perlhacktips.pod
+      null in null; /perl5language.png -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 25177 in perlhacktips.pod
 
-        We'll use gdb for our examples here; the principles will apply to any debugger (many vendors call their debugger dbx), but check the manu... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25186 in perlhacktips.pod
+        We'll use gdb for our examples here; the principles will apply to any debugger (many vendors call their debugger dbx), but check the manu... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25186 in perlhacktips.pod
 
-      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 25721 in perlhacktips.pod
+      null in null; /perl5language.png -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 25721 in perlhacktips.pod
 
-        run [args]  Run the program with the given arguments. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25730 in perlhacktips.pod
+        run [args]  Run the program with the given arguments. in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25730 in perlhacktips.pod
 
-        break function_name in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25793 in perlhacktips.pod
+        break function_name in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25793 in perlhacktips.pod
 
-        break source.c:xxx  Tells the debugger that we'll want to pause execution when we reach either the named function (but see perlguts/Inter... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25822 in perlhacktips.pod
+        break source.c:xxx  Tells the debugger that we'll want to pause execution when we reach either the named function (but see perlguts/Inter... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25822 in perlhacktips.pod
 
-        step  Steps through the program a line at a time. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26031 in perlhacktips.pod
+        step  Steps through the program a line at a time. in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26031 in perlhacktips.pod
 
-        next  Steps through the program a line at a time, without descending into functions. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26090 in perlhacktips.pod
+        next  Steps through the program a line at a time, without descending into functions. in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26090 in perlhacktips.pod
 
-        continue  Run until the next breakpoint. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26184 in perlhacktips.pod
+        continue  Run until the next breakpoint. in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26184 in perlhacktips.pod
 
-        finish  Run until the end of the current function, then stop again. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26234 in perlhacktips.pod
+        finish  Run until the end of the current function, then stop again. in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26234 in perlhacktips.pod
 
-        'enter'  Just pressing Enter will do the most recent operation again - it's a blessing when stepping through miles of source code. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26311 in perlhacktips.pod
+        'enter'  Just pressing Enter will do the most recent operation again - it's a blessing when stepping through miles of source code. in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26311 in perlhacktips.pod
 
         ptype  Prints the C definition of the argument given.    (gdb) ptype PL_op
   type = struct op {
       OP *op_next;
-      OP *op_sibparent... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26451 in perlhacktips.pod
+      OP *op_sibparent... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26451 in perlhacktips.pod
 
-        print  Execute the given C code and print its results.  WARNING: Perl makes heavy use of macros, and gdb does not necessarily support mac... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26935 in perlhacktips.pod
+        print  Execute the given C code and print its results.  WARNING: Perl makes heavy use of macros, and gdb does not necessarily support mac... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26935 in perlhacktips.pod
 
-    gdb macro support in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 27536 in perlhacktips.pod
+    gdb macro support in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 27536 in perlhacktips.pod
 
-    Dumping Perl Data Structures in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 27897 in perlhacktips.pod
+    Dumping Perl Data Structures in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 27897 in perlhacktips.pod
 
-    Using gdb to look at specific parts of a program in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 30903 in perlhacktips.pod
+    Using gdb to look at specific parts of a program in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 30903 in perlhacktips.pod
 
-    Using gdb to look at what the parser/lexer are doing in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31533 in perlhacktips.pod
+    Using gdb to look at what the parser/lexer are doing in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31533 in perlhacktips.pod
 
-  SOURCE CODE STATIC ANALYSIS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 31980 in perlhacktips.pod
+  SOURCE CODE STATIC ANALYSIS in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 31980 in perlhacktips.pod
 
-    lint in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 32542 in perlhacktips.pod
+    lint in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 32542 in perlhacktips.pod
 
-    Coverity in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 32904 in perlhacktips.pod
+    Coverity in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 32904 in perlhacktips.pod
 
-    HP-UX cadvise (Code Advisor) in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 33249 in perlhacktips.pod
+    HP-UX cadvise (Code Advisor) in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 33249 in perlhacktips.pod
 
-    cpd (cut-and-paste detector) in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 33637 in perlhacktips.pod
+    cpd (cut-and-paste detector) in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 33637 in perlhacktips.pod
 
-    gcc warnings in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 34496 in perlhacktips.pod
+    gcc warnings in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 34496 in perlhacktips.pod
 
-      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 35325 in perlhacktips.pod
+      null in null; /perl5language.png -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 35325 in perlhacktips.pod
 
-        -Wendif-labels in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35334 in perlhacktips.pod
+        -Wendif-labels in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35334 in perlhacktips.pod
 
-        -Wextra in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35362 in perlhacktips.pod
+        -Wextra in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35362 in perlhacktips.pod
 
-        -Wc++-compat in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35383 in perlhacktips.pod
+        -Wc++-compat in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35383 in perlhacktips.pod
 
-        -Wwrite-strings in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35409 in perlhacktips.pod
+        -Wwrite-strings in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35409 in perlhacktips.pod
 
-        -Werror=declaration-after-statement in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35438 in perlhacktips.pod
+        -Werror=declaration-after-statement in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35438 in perlhacktips.pod
 
-        -Werror=pointer-arith in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35487 in perlhacktips.pod
+        -Werror=pointer-arith in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35487 in perlhacktips.pod
 
-      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 35629 in perlhacktips.pod
+      null in null; /perl5language.png -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 35629 in perlhacktips.pod
 
-        -Wshadow in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35638 in perlhacktips.pod
+        -Wshadow in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35638 in perlhacktips.pod
 
-        -Wstrict-prototypes in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35660 in perlhacktips.pod
+        -Wstrict-prototypes in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35660 in perlhacktips.pod
 
-    Warnings of other C compilers in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 36201 in perlhacktips.pod
+    Warnings of other C compilers in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 36201 in perlhacktips.pod
 
-  MEMORY DEBUGGERS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 36531 in perlhacktips.pod
+  MEMORY DEBUGGERS in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 36531 in perlhacktips.pod
 
-    valgrind in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 37857 in perlhacktips.pod
+    valgrind in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 37857 in perlhacktips.pod
 
-    AddressSanitizer in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 39234 in perlhacktips.pod
+    AddressSanitizer in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 39234 in perlhacktips.pod
 
-      -Dcc=clang  This should be replaced by the full path to your clang executable if it is not in your path. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39922 in perlhacktips.pod
+      -Dcc=clang  This should be replaced by the full path to your clang executable if it is not in your path. in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39922 in perlhacktips.pod
 
-      -Accflags=-faddress-sanitizer  Compile perl and extensions sources with AddressSanitizer. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 40036 in perlhacktips.pod
+      -Accflags=-faddress-sanitizer  Compile perl and extensions sources with AddressSanitizer. in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 40036 in perlhacktips.pod
 
-      -Aldflags=-faddress-sanitizer  Link the perl executable with AddressSanitizer. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 40135 in perlhacktips.pod
+      -Aldflags=-faddress-sanitizer  Link the perl executable with AddressSanitizer. in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 40135 in perlhacktips.pod
 
-      -Alddlflags=-shared\ -faddress-sanitizer  Link dynamic extensions with AddressSanitizer.  You must manually specify -shared because using... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 40223 in perlhacktips.pod
+      -Alddlflags=-shared\ -faddress-sanitizer  Link dynamic extensions with AddressSanitizer.  You must manually specify -shared because using... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 40223 in perlhacktips.pod
 
-  PROFILING in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 40608 in perlhacktips.pod
+  PROFILING in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 40608 in perlhacktips.pod
 
-    Gprof Profiling in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 42146 in perlhacktips.pod
+    Gprof Profiling in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 42146 in perlhacktips.pod
 
-      -a  Suppress statically defined functions from the profile. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43028 in perlhacktips.pod
+      -a  Suppress statically defined functions from the profile. in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43028 in perlhacktips.pod
 
-      -b  Suppress the verbose descriptions in the profile. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43097 in perlhacktips.pod
+      -b  Suppress the verbose descriptions in the profile. in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43097 in perlhacktips.pod
 
-      -e routine  Exclude the given routine and its descendants from the profile. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43160 in perlhacktips.pod
+      -e routine  Exclude the given routine and its descendants from the profile. in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43160 in perlhacktips.pod
 
-      -f routine  Display only the given routine and its descendants in the profile. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43245 in perlhacktips.pod
+      -f routine  Display only the given routine and its descendants in the profile. in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43245 in perlhacktips.pod
 
-      -s  Generate a summary file called gmon.sum which then may be given to subsequent gprof runs to accumulate data over several runs. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43333 in perlhacktips.pod
+      -s  Generate a summary file called gmon.sum which then may be given to subsequent gprof runs to accumulate data over several runs. in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43333 in perlhacktips.pod
 
-      -z  Display routines that have zero usage. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43476 in perlhacktips.pod
+      -z  Display routines that have zero usage. in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43476 in perlhacktips.pod
 
-    GCC gcov Profiling in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 43658 in perlhacktips.pod
+    GCC gcov Profiling in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 43658 in perlhacktips.pod
 
-  MISCELLANEOUS TRICKS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 45487 in perlhacktips.pod
+  MISCELLANEOUS TRICKS in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 45487 in perlhacktips.pod
 
-    PERL_DESTRUCT_LEVEL in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 45516 in perlhacktips.pod
+    PERL_DESTRUCT_LEVEL in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 45516 in perlhacktips.pod
 
-    PERL_MEM_LOG in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 48382 in perlhacktips.pod
+    PERL_MEM_LOG in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 48382 in perlhacktips.pod
 
-    DDD over gdb in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 49605 in perlhacktips.pod
+    DDD over gdb in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 49605 in perlhacktips.pod
 
-    C backtrace in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 50611 in perlhacktips.pod
+    C backtrace in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 50611 in perlhacktips.pod
 
-      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 51796 in perlhacktips.pod
+      null in null; /perl5language.png -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 51796 in perlhacktips.pod
 
-        Linux in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51805 in perlhacktips.pod
+        Linux in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51805 in perlhacktips.pod
 
-        OS X in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52035 in perlhacktips.pod
+        OS X in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52035 in perlhacktips.pod
 
-      null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 53199 in perlhacktips.pod
+      null in null; /perl5language.png -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 53199 in perlhacktips.pod
 
-        get_c_backtrace in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53208 in perlhacktips.pod
+        get_c_backtrace in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53208 in perlhacktips.pod
 
-        free_c_backtrace in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53231 in perlhacktips.pod
+        free_c_backtrace in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53231 in perlhacktips.pod
 
-        get_c_backtrace_dump in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53255 in perlhacktips.pod
+        get_c_backtrace_dump in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53255 in perlhacktips.pod
 
-        dump_c_backtrace in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53283 in perlhacktips.pod
+        dump_c_backtrace in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53283 in perlhacktips.pod
 
-    Poison in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 53314 in perlhacktips.pod
+    Poison in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 53314 in perlhacktips.pod
 
-    Read-only optrees in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 53486 in perlhacktips.pod
+    Read-only optrees in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 53486 in perlhacktips.pod
 
-    When is a bool not a bool? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 54188 in perlhacktips.pod
+    When is a bool not a bool? in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 54188 in perlhacktips.pod
 
-    The .i Targets in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 55182 in perlhacktips.pod
+    The .i Targets in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 55182 in perlhacktips.pod
 
-  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 55351 in perlhacktips.pod
+  AUTHOR in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 55351 in perlhacktips.pod
 

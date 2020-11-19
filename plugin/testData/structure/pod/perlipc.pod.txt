@@ -1,84 +1,84 @@
 Documentation in null; /perl5language.png -> POD file at 0 in perlipc.pod
 
-  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlipc.pod
+  NAME in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlipc.pod
 
-  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 124 in perlipc.pod
+  DESCRIPTION in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 124 in perlipc.pod
 
-  Signals in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 345 in perlipc.pod
+  Signals in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 345 in perlipc.pod
 
-    Handling the SIGHUP Signal in Daemons in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6526 in perlipc.pod
+    Handling the SIGHUP Signal in Daemons in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6526 in perlipc.pod
 
-    Deferred Signals (Safe Signals) in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8099 in perlipc.pod
+    Deferred Signals (Safe Signals) in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8099 in perlipc.pod
 
-      Long-running opcodes in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10097 in perlipc.pod
+      Long-running opcodes in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10097 in perlipc.pod
 
-      Interrupting IO in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11254 in perlipc.pod
+      Interrupting IO in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11254 in perlipc.pod
 
-      Restartable system calls in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13244 in perlipc.pod
+      Restartable system calls in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13244 in perlipc.pod
 
-      Signals as "faults" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13866 in perlipc.pod
+      Signals as "faults" in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13866 in perlipc.pod
 
-      Signals triggered by operating system state in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14160 in perlipc.pod
+      Signals triggered by operating system state in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14160 in perlipc.pod
 
-  Named Pipes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 14955 in perlipc.pod
+  Named Pipes in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 14955 in perlipc.pod
 
-  Using open() for IPC in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 16978 in perlipc.pod
+  Using open() for IPC in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 16978 in perlipc.pod
 
-    Filehandles in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19997 in perlipc.pod
+    Filehandles in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19997 in perlipc.pod
 
-    Background Processes in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20410 in perlipc.pod
+    Background Processes in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20410 in perlipc.pod
 
-    Complete Dissociation of Child from Parent in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20718 in perlipc.pod
+    Complete Dissociation of Child from Parent in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20718 in perlipc.pod
 
-    Safe Pipe Opens in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 22106 in perlipc.pod
+    Safe Pipe Opens in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 22106 in perlipc.pod
 
-    Avoiding Pipe Deadlocks in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 29478 in perlipc.pod
+    Avoiding Pipe Deadlocks in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 29478 in perlipc.pod
 
-    Bidirectional Communication with Another Process in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 30647 in perlipc.pod
+    Bidirectional Communication with Another Process in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 30647 in perlipc.pod
 
-    Bidirectional Communication with Yourself in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 33274 in perlipc.pod
+    Bidirectional Communication with Yourself in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 33274 in perlipc.pod
 
-  Sockets: Client/Server Communication in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 35619 in perlipc.pod
+  Sockets: Client/Server Communication in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 35619 in perlipc.pod
 
-    Internet Line Terminators in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 37274 in perlipc.pod
+    Internet Line Terminators in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 37274 in perlipc.pod
 
-    Internet TCP Clients and Servers in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 37889 in perlipc.pod
+    Internet TCP Clients and Servers in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 37889 in perlipc.pod
 
-    Unix-Domain TCP Clients and Servers in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 45927 in perlipc.pod
+    Unix-Domain TCP Clients and Servers in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 45927 in perlipc.pod
 
-  TCP Clients with IO::Socket in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 49964 in perlipc.pod
+  TCP Clients with IO::Socket in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 49964 in perlipc.pod
 
-    A Simple Client in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 50416 in perlipc.pod
+    A Simple Client in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 50416 in perlipc.pod
 
-      Proto in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51155 in perlipc.pod
+      Proto in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51155 in perlipc.pod
 
-      PeerAddr in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51519 in perlipc.pod
+      PeerAddr in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51519 in perlipc.pod
 
-      PeerPort in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51958 in perlipc.pod
+      PeerPort in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51958 in perlipc.pod
 
-    A Webget Client in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 52883 in perlipc.pod
+    A Webget Client in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 52883 in perlipc.pod
 
-    Interactive Client with IO::Socket in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 55680 in perlipc.pod
+    Interactive Client with IO::Socket in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 55680 in perlipc.pod
 
-  TCP Servers with IO::Socket in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 58740 in perlipc.pod
+  TCP Servers with IO::Socket in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 58740 in perlipc.pod
 
-    Proto in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 59127 in perlipc.pod
+    Proto in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 59127 in perlipc.pod
 
-    LocalPort in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 59226 in perlipc.pod
+    LocalPort in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 59226 in perlipc.pod
 
-    Listen in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 59750 in perlipc.pod
+    Listen in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 59750 in perlipc.pod
 
-    Reuse in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 60041 in perlipc.pod
+    Reuse in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 60041 in perlipc.pod
 
-  UDP: Message Passing in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 62343 in perlipc.pod
+  UDP: Message Passing in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 62343 in perlipc.pod
 
-  SysV IPC in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 65179 in perlipc.pod
+  SysV IPC in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 65179 in perlipc.pod
 
-  NOTES in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 68505 in perlipc.pod
+  NOTES in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 68505 in perlipc.pod
 
-  BUGS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 69070 in perlipc.pod
+  BUGS in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 69070 in perlipc.pod
 
-  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 69503 in perlipc.pod
+  AUTHOR in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 69503 in perlipc.pod
 
-  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 69634 in perlipc.pod
+  SEE ALSO in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 69634 in perlipc.pod
 

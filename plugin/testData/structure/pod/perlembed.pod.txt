@@ -1,72 +1,72 @@
 Documentation in null; /perl5language.png -> POD file at 0 in perlembed.pod
 
-  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlembed.pod
+  NAME in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlembed.pod
 
-  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 62 in perlembed.pod
+  DESCRIPTION in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 62 in perlembed.pod
 
-    PREAMBLE in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 82 in perlembed.pod
+    PREAMBLE in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 82 in perlembed.pod
 
-      Use C from Perl? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 125 in perlembed.pod
+      Use C from Perl? in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 125 in perlembed.pod
 
-      Use a Unix program from Perl? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 221 in perlembed.pod
+      Use a Unix program from Perl? in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 221 in perlembed.pod
 
-      Use Perl from Perl? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 333 in perlembed.pod
+      Use Perl from Perl? in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 333 in perlembed.pod
 
-      Use C from C? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 456 in perlembed.pod
+      Use C from C? in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 456 in perlembed.pod
 
-      Use Perl from C? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 502 in perlembed.pod
+      Use Perl from C? in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 502 in perlembed.pod
 
-    ROADMAP in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 548 in perlembed.pod
+    ROADMAP in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 548 in perlembed.pod
 
-      Compiling your C program in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 573 in perlembed.pod
+      Compiling your C program in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 573 in perlembed.pod
 
-      Adding a Perl interpreter to your C program in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 608 in perlembed.pod
+      Adding a Perl interpreter to your C program in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 608 in perlembed.pod
 
-      Calling a Perl subroutine from your C program in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 662 in perlembed.pod
+      Calling a Perl subroutine from your C program in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 662 in perlembed.pod
 
-      Evaluating a Perl statement from your C program in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 718 in perlembed.pod
+      Evaluating a Perl statement from your C program in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 718 in perlembed.pod
 
-      Performing Perl pattern matches and substitutions from your C program in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 776 in perlembed.pod
+      Performing Perl pattern matches and substitutions from your C program in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 776 in perlembed.pod
 
-      Fiddling with the Perl stack from your C program in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 856 in perlembed.pod
+      Fiddling with the Perl stack from your C program in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 856 in perlembed.pod
 
-      Maintaining a persistent interpreter in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 915 in perlembed.pod
+      Maintaining a persistent interpreter in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 915 in perlembed.pod
 
-      Maintaining multiple interpreter instances in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 962 in perlembed.pod
+      Maintaining multiple interpreter instances in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 962 in perlembed.pod
 
-      Using Perl modules, which themselves use C libraries, from your C program in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1015 in perlembed.pod
+      Using Perl modules, which themselves use C libraries, from your C program in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1015 in perlembed.pod
 
-      Embedding Perl under Win32 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1099 in perlembed.pod
+      Embedding Perl under Win32 in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1099 in perlembed.pod
 
-    Compiling your C program in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1143 in perlembed.pod
+    Compiling your C program in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1143 in perlembed.pod
 
-    Adding a Perl interpreter to your C program in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4658 in perlembed.pod
+    Adding a Perl interpreter to your C program in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4658 in perlembed.pod
 
-    Calling a Perl subroutine from your C program in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7108 in perlembed.pod
+    Calling a Perl subroutine from your C program in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7108 in perlembed.pod
 
-    Evaluating a Perl statement from your C program in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9068 in perlembed.pod
+    Evaluating a Perl statement from your C program in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9068 in perlembed.pod
 
-    Performing Perl pattern matches and substitutions from your C program in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11544 in perlembed.pod
+    Performing Perl pattern matches and substitutions from your C program in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11544 in perlembed.pod
 
-    Fiddling with the Perl stack from your C program in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17644 in perlembed.pod
+    Fiddling with the Perl stack from your C program in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17644 in perlembed.pod
 
-    Maintaining a persistent interpreter in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20670 in perlembed.pod
+    Maintaining a persistent interpreter in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20670 in perlembed.pod
 
-    Execution of END blocks in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 26405 in perlembed.pod
+    Execution of END blocks in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 26405 in perlembed.pod
 
-    $0 assignments in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 26793 in perlembed.pod
+    $0 assignments in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 26793 in perlembed.pod
 
-    Maintaining multiple interpreter instances in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 27496 in perlembed.pod
+    Maintaining multiple interpreter instances in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 27496 in perlembed.pod
 
-    Using Perl modules, which themselves use C libraries, from your C program in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31758 in perlembed.pod
+    Using Perl modules, which themselves use C libraries, from your C program in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31758 in perlembed.pod
 
-    Using embedded Perl with POSIX locales in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 34493 in perlembed.pod
+    Using embedded Perl with POSIX locales in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 34493 in perlembed.pod
 
-  Hiding Perl_ in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 35866 in perlembed.pod
+  Hiding Perl_ in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 35866 in perlembed.pod
 
-  MORAL in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 36584 in perlembed.pod
+  MORAL in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 36584 in perlembed.pod
 
-  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 36762 in perlembed.pod
+  AUTHOR in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 36762 in perlembed.pod
 
-  COPYRIGHT in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 37406 in perlembed.pod
+  COPYRIGHT in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 37406 in perlembed.pod
 

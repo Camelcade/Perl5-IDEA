@@ -1,186 +1,186 @@
 Documentation in null; /perl5language.png -> POD file at 0 in perliol.pod
 
-  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perliol.pod
+  NAME in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perliol.pod
 
-  SYNOPSIS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 73 in perliol.pod
+  SYNOPSIS in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 73 in perliol.pod
 
-  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 147 in perliol.pod
+  DESCRIPTION in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 147 in perliol.pod
 
-    History and Background in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 306 in perliol.pod
+    History and Background in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 306 in perliol.pod
 
-    Basic Structure in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 788 in perliol.pod
+    Basic Structure in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 788 in perliol.pod
 
-    Layers vs Disciplines in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3200 in perliol.pod
+    Layers vs Disciplines in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3200 in perliol.pod
 
-    Data Structures in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3726 in perliol.pod
+    Data Structures in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3726 in perliol.pod
 
-      The functions and attributes of the "layer class". in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4807 in perliol.pod
+      The functions and attributes of the "layer class". in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4807 in perliol.pod
 
-      The per-instance data for a particular handle. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4869 in perliol.pod
+      The per-instance data for a particular handle. in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4869 in perliol.pod
 
-    Functions and Attributes in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4934 in perliol.pod
+    Functions and Attributes in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4934 in perliol.pod
 
-      Opening and setup functions in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7455 in perliol.pod
+      Opening and setup functions in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7455 in perliol.pod
 
-      Basic IO operations in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7494 in perliol.pod
+      Basic IO operations in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7494 in perliol.pod
 
-      Stdio class buffering options. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7525 in perliol.pod
+      Stdio class buffering options. in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7525 in perliol.pod
 
-      Functions to support Perl's traditional "fast" access to the buffer. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7567 in perliol.pod
+      Functions to support Perl's traditional "fast" access to the buffer. in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7567 in perliol.pod
 
-    Per-instance Data in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8063 in perliol.pod
+    Per-instance Data in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8063 in perliol.pod
 
-    Layers in action. in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8725 in perliol.pod
+    Layers in action. in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8725 in perliol.pod
 
-      If Unix level read/write/lseek is not appropriate for (say) sockets then the "unix" layer can be replaced (at open time or even dynamical... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9757 in perliol.pod
+      If Unix level read/write/lseek is not appropriate for (say) sockets then the "unix" layer can be replaced (at open time or even dynamical... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9757 in perliol.pod
 
-      Different handles can have different buffering schemes. The "top" layer could be the "mmap" layer if reading disk files was quicker using... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9940 in perliol.pod
+      Different handles can have different buffering schemes. The "top" layer could be the "mmap" layer if reading disk files was quicker using... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9940 in perliol.pod
 
-      Extra layers can be inserted to process the data as it flows through. This was the driving need for including the scheme in perl 5.7.0+ -... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10189 in perliol.pod
+      Extra layers can be inserted to process the data as it flows through. This was the driving need for including the scheme in perl 5.7.0+ -... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10189 in perliol.pod
 
-      A layer can be added that does "\n" to CRLF translation. This layer can be used on any platform, not just those that normally do such thi... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10605 in perliol.pod
+      A layer can be added that does "\n" to CRLF translation. This layer can be used on any platform, not just those that normally do such thi... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10605 in perliol.pod
 
-    Per-instance flag bits in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10764 in perliol.pod
+    Per-instance flag bits in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10764 in perliol.pod
 
-      PERLIO_F_EOF in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10965 in perliol.pod
+      PERLIO_F_EOF in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10965 in perliol.pod
 
-      PERLIO_F_CANWRITE in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10999 in perliol.pod
+      PERLIO_F_CANWRITE in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10999 in perliol.pod
 
-      PERLIO_F_CANREAD in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11087 in perliol.pod
+      PERLIO_F_CANREAD in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11087 in perliol.pod
 
-      PERLIO_F_ERROR in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11179 in perliol.pod
+      PERLIO_F_ERROR in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11179 in perliol.pod
 
-      PERLIO_F_TRUNCATE in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11249 in perliol.pod
+      PERLIO_F_TRUNCATE in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11249 in perliol.pod
 
-      PERLIO_F_APPEND in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11313 in perliol.pod
+      PERLIO_F_APPEND in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11313 in perliol.pod
 
-      PERLIO_F_CRLF in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11367 in perliol.pod
+      PERLIO_F_CRLF in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11367 in perliol.pod
 
-      PERLIO_F_UTF8 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11705 in perliol.pod
+      PERLIO_F_UTF8 in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11705 in perliol.pod
 
-      PERLIO_F_UNBUF in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11922 in perliol.pod
+      PERLIO_F_UNBUF in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11922 in perliol.pod
 
-      PERLIO_F_WRBUF in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12040 in perliol.pod
+      PERLIO_F_WRBUF in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12040 in perliol.pod
 
-      PERLIO_F_RDBUF in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12152 in perliol.pod
+      PERLIO_F_RDBUF in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12152 in perliol.pod
 
-      PERLIO_F_LINEBUF in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12256 in perliol.pod
+      PERLIO_F_LINEBUF in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12256 in perliol.pod
 
-      PERLIO_F_TEMP in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12428 in perliol.pod
+      PERLIO_F_TEMP in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12428 in perliol.pod
 
-      PERLIO_F_OPEN in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12515 in perliol.pod
+      PERLIO_F_OPEN in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12515 in perliol.pod
 
-      PERLIO_F_FASTGETS in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12553 in perliol.pod
+      PERLIO_F_FASTGETS in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12553 in perliol.pod
 
-    Methods in Detail in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13073 in perliol.pod
+    Methods in Detail in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13073 in perliol.pod
 
-      fsize in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13108 in perliol.pod
+      fsize in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13108 in perliol.pod
 
-      name in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13345 in perliol.pod
+      name in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13345 in perliol.pod
 
-      size in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13623 in perliol.pod
+      size in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13623 in perliol.pod
 
-      kind in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14199 in perliol.pod
+      kind in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14199 in perliol.pod
 
-        PERLIO_K_BUFFERED  The layer is buffered. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14231 in perliol.pod
+        PERLIO_K_BUFFERED  The layer is buffered. in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14231 in perliol.pod
 
-        PERLIO_K_RAW  The layer is acceptable to have in a binmode(FH) stack - i.e. it does not (or will configure itself not to) transform bytes... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14282 in perliol.pod
+        PERLIO_K_RAW  The layer is acceptable to have in a binmode(FH) stack - i.e. it does not (or will configure itself not to) transform bytes... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14282 in perliol.pod
 
-        PERLIO_K_CANCRLF  Layer can translate between "\n" and CRLF line ends. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14449 in perliol.pod
+        PERLIO_K_CANCRLF  Layer can translate between "\n" and CRLF line ends. in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14449 in perliol.pod
 
-        PERLIO_K_FASTGETS  Layer allows buffer snooping. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14529 in perliol.pod
+        PERLIO_K_FASTGETS  Layer allows buffer snooping. in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14529 in perliol.pod
 
-        PERLIO_K_MULTIARG  Used when the layer's open() accepts more arguments than usual. The extra arguments should come not before the MODE ar... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14587 in perliol.pod
+        PERLIO_K_MULTIARG  Used when the layer's open() accepts more arguments than usual. The extra arguments should come not before the MODE ar... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14587 in perliol.pod
 
-      Pushed in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14817 in perliol.pod
+      Pushed in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14817 in perliol.pod
 
-      Popped in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15513 in perliol.pod
+      Popped in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15513 in perliol.pod
 
-      Open in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16331 in perliol.pod
+      Open in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16331 in perliol.pod
 
-      Binmode in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19665 in perliol.pod
+      Binmode in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19665 in perliol.pod
 
-      Getarg in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20000 in perliol.pod
+      Getarg in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20000 in perliol.pod
 
-      Fileno in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20530 in perliol.pod
+      Fileno in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20530 in perliol.pod
 
-      Dup in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20854 in perliol.pod
+      Dup in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20854 in perliol.pod
 
-      Read in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21202 in perliol.pod
+      Read in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21202 in perliol.pod
 
-      Unread in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21515 in perliol.pod
+      Unread in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21515 in perliol.pod
 
-      Write in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21896 in perliol.pod
+      Write in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21896 in perliol.pod
 
-      Seek in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22038 in perliol.pod
+      Seek in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22038 in perliol.pod
 
-      Tell in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22266 in perliol.pod
+      Tell in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22266 in perliol.pod
 
-      Close in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22455 in perliol.pod
+      Close in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22455 in perliol.pod
 
-      Flush in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22757 in perliol.pod
+      Flush in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22757 in perliol.pod
 
-      Fill in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23104 in perliol.pod
+      Fill in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23104 in perliol.pod
 
-      Eof in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23404 in perliol.pod
+      Eof in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23404 in perliol.pod
 
-      Error in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23582 in perliol.pod
+      Error in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23582 in perliol.pod
 
-      Clearerr in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23784 in perliol.pod
+      Clearerr in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23784 in perliol.pod
 
-      Setlinebuf in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23971 in perliol.pod
+      Setlinebuf in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23971 in perliol.pod
 
-      Get_base in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24149 in perliol.pod
+      Get_base in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24149 in perliol.pod
 
-      Get_bufsiz in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24323 in perliol.pod
+      Get_bufsiz in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24323 in perliol.pod
 
-      Get_ptr in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24449 in perliol.pod
+      Get_ptr in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24449 in perliol.pod
 
-      Get_cnt in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24571 in perliol.pod
+      Get_cnt in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24571 in perliol.pod
 
-      Set_ptrcnt in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24692 in perliol.pod
+      Set_ptrcnt in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24692 in perliol.pod
 
-    Utilities in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24972 in perliol.pod
+    Utilities in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24972 in perliol.pod
 
-    Implementing PerlIO Layers in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 26522 in perliol.pod
+    Implementing PerlIO Layers in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 26522 in perliol.pod
 
-      C implementations  The perlio.c and perliol.h in the Perl core implement the "unix", "perlio", "stdio", "crlf", "utf8", "byte", "raw", "p... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26698 in perliol.pod
+      C implementations  The perlio.c and perliol.h in the Perl core implement the "unix", "perlio", "stdio", "crlf", "utf8", "byte", "raw", "p... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26698 in perliol.pod
 
-      Perl implementations  PerlIO::via::QuotedPrint in the Perl core and PerlIO::via::* on CPAN. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 27180 in perliol.pod
+      Perl implementations  PerlIO::via::QuotedPrint in the Perl core and PerlIO::via::* on CPAN. in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 27180 in perliol.pod
 
-    Core Layers in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 28755 in perliol.pod
+    Core Layers in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 28755 in perliol.pod
 
-      "unix" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28837 in perliol.pod
+      "unix" in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28837 in perliol.pod
 
-      "perlio" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29057 in perliol.pod
+      "perlio" in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29057 in perliol.pod
 
-      "stdio" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29588 in perliol.pod
+      "stdio" in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29588 in perliol.pod
 
-      "crlf" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29885 in perliol.pod
+      "crlf" in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29885 in perliol.pod
 
-      "mmap" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30395 in perliol.pod
+      "mmap" in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30395 in perliol.pod
 
-      "pending" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30785 in perliol.pod
+      "pending" in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30785 in perliol.pod
 
-      "raw" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31045 in perliol.pod
+      "raw" in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31045 in perliol.pod
 
-      "utf8" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31425 in perliol.pod
+      "utf8" in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31425 in perliol.pod
 
-    Extension Layers in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31806 in perliol.pod
+    Extension Layers in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31806 in perliol.pod
 
-      ":encoding" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32239 in perliol.pod
+      ":encoding" in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32239 in perliol.pod
 
-      ":scalar" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32482 in perliol.pod
+      ":scalar" in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32482 in perliol.pod
 
-      ":via" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32940 in perliol.pod
+      ":via" in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32940 in perliol.pod
 
-  TODO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 33152 in perliol.pod
+  TODO in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 33152 in perliol.pod
 
-    Explain how to make a valid fh without going through open()(i.e. apply a layer). For example if the file is not opened through perl, but ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 33227 in perliol.pod
+    Explain how to make a valid fh without going through open()(i.e. apply a layer). For example if the file is not opened through perl, but ... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 33227 in perliol.pod
 
-    fix/add the documentation in places marked as XXX. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 34085 in perliol.pod
+    fix/add the documentation in places marked as XXX. in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 34085 in perliol.pod
 
-    The handling of errors by the layer is not specified. e.g. when $! should be set explicitly, when the error handling should be just deleg... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 34146 in perliol.pod
+    The handling of errors by the layer is not specified. e.g. when $! should be set explicitly, when the error handling should be just deleg... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 34146 in perliol.pod
 
-    I think it would help to give some concrete examples to make it easier to understand the API. Of course I agree that the API has to be co... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 34402 in perliol.pod
+    I think it would help to give some concrete examples to make it easier to understand the API. Of course I agree that the API has to be co... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 34402 in perliol.pod
 

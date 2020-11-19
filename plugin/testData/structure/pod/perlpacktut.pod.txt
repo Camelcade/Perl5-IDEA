@@ -1,92 +1,92 @@
 Documentation in null; /perl5language.png -> POD file at 0 in perlpacktut.pod
 
-  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlpacktut.pod
+  NAME in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlpacktut.pod
 
-  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 62 in perlpacktut.pod
+  DESCRIPTION in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 62 in perlpacktut.pod
 
-  The Basic Principle in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 482 in perlpacktut.pod
+  The Basic Principle in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 482 in perlpacktut.pod
 
-  Packing Text in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3992 in perlpacktut.pod
+  Packing Text in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3992 in perlpacktut.pod
 
-    null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 7336 in perlpacktut.pod
+    null in null; /perl5language.png -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 7336 in perlpacktut.pod
 
-      Be warned, though, that unlike regular expressions, if the unpack template doesn't match the incoming data, Perl will scream and die. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7345 in perlpacktut.pod
+      Be warned, though, that unlike regular expressions, if the unpack template doesn't match the incoming data, Perl will scream and die. in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7345 in perlpacktut.pod
 
-    null in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 10473 in perlpacktut.pod
+    null in null; /perl5language.png -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 10473 in perlpacktut.pod
 
-      Use pack to go from several pieces of data to one fixed-width version; use unpack to turn a fixed-width-format string into several pieces... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10482 in perlpacktut.pod
+      Use pack to go from several pieces of data to one fixed-width version; use unpack to turn a fixed-width-format string into several pieces... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10482 in perlpacktut.pod
 
-      The pack format A means "any character"; if you're packing and you've run out of things to pack, pack will fill the rest up with spaces. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10646 in perlpacktut.pod
+      The pack format A means "any character"; if you're packing and you've run out of things to pack, pack will fill the rest up with spaces. in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10646 in perlpacktut.pod
 
-      x means "skip a byte" when unpacking; when packing, it means "introduce a null byte" - that's probably not what you mean if you're dealin... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10802 in perlpacktut.pod
+      x means "skip a byte" when unpacking; when packing, it means "introduce a null byte" - that's probably not what you mean if you're dealin... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10802 in perlpacktut.pod
 
-      You can follow the formats with numbers to say how many characters should be affected by that format: A12 means "take 12 characters"; x6 ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10977 in perlpacktut.pod
+      You can follow the formats with numbers to say how many characters should be affected by that format: A12 means "take 12 characters"; x6 ... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10977 in perlpacktut.pod
 
-      Instead of a number, you can use * to mean "consume everything else left".   Warning: when packing multiple pieces of data, * only means ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11178 in perlpacktut.pod
+      Instead of a number, you can use * to mean "consume everything else left".   Warning: when packing multiple pieces of data, * only means ... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11178 in perlpacktut.pod
 
-  Packing Numbers in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 11616 in perlpacktut.pod
+  Packing Numbers in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 11616 in perlpacktut.pod
 
-    Integers in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11902 in perlpacktut.pod
+    Integers in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11902 in perlpacktut.pod
 
-      the number of bytes used for storing the integer, in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12138 in perlpacktut.pod
+      the number of bytes used for storing the integer, in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12138 in perlpacktut.pod
 
-      whether the contents are interpreted as a signed or unsigned number, in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12198 in perlpacktut.pod
+      whether the contents are interpreted as a signed or unsigned number, in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12198 in perlpacktut.pod
 
-      the byte ordering: whether the first byte is the least or most significant byte (or: little-endian or big-endian, respectively). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12277 in perlpacktut.pod
+      the byte ordering: whether the first byte is the least or most significant byte (or: little-endian or big-endian, respectively). in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12277 in perlpacktut.pod
 
-    Unpacking a Stack Frame in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15200 in perlpacktut.pod
+    Unpacking a Stack Frame in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15200 in perlpacktut.pod
 
-    How to Eat an Egg on a Net in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17588 in perlpacktut.pod
+    How to Eat an Egg on a Net in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17588 in perlpacktut.pod
 
-    Byte-order modifiers in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18744 in perlpacktut.pod
+    Byte-order modifiers in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18744 in perlpacktut.pod
 
-    Floating point Numbers in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19961 in perlpacktut.pod
+    Floating point Numbers in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19961 in perlpacktut.pod
 
-  Exotic Templates in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 20960 in perlpacktut.pod
+  Exotic Templates in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 20960 in perlpacktut.pod
 
-    Bit Strings in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20986 in perlpacktut.pod
+    Bit Strings in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20986 in perlpacktut.pod
 
-    Uuencoding in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23277 in perlpacktut.pod
+    Uuencoding in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23277 in perlpacktut.pod
 
-    Doing Sums in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24307 in perlpacktut.pod
+    Doing Sums in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24307 in perlpacktut.pod
 
-    Unicode in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 25505 in perlpacktut.pod
+    Unicode in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 25505 in perlpacktut.pod
 
-    Another Portable Binary Encoding in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 27856 in perlpacktut.pod
+    Another Portable Binary Encoding in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 27856 in perlpacktut.pod
 
-  Template Grouping in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 28607 in perlpacktut.pod
+  Template Grouping in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 28607 in perlpacktut.pod
 
-  Lengths and Widths in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 30138 in perlpacktut.pod
+  Lengths and Widths in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 30138 in perlpacktut.pod
 
-    String Lengths in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 30165 in perlpacktut.pod
+    String Lengths in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 30165 in perlpacktut.pod
 
-    Dynamic Templates in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 33259 in perlpacktut.pod
+    Dynamic Templates in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 33259 in perlpacktut.pod
 
-    Counting Repetitions in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 34825 in perlpacktut.pod
+    Counting Repetitions in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 34825 in perlpacktut.pod
 
-    Intel HEX in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 35501 in perlpacktut.pod
+    Intel HEX in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 35501 in perlpacktut.pod
 
-  Packing and Unpacking C Structures in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 37664 in perlpacktut.pod
+  Packing and Unpacking C Structures in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 37664 in perlpacktut.pod
 
-    The Alignment Pit in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 38341 in perlpacktut.pod
+    The Alignment Pit in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 38341 in perlpacktut.pod
 
-    Dealing with Endian-ness in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 42980 in perlpacktut.pod
+    Dealing with Endian-ness in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 42980 in perlpacktut.pod
 
-    Alignment, Take 2 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 43991 in perlpacktut.pod
+    Alignment, Take 2 in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 43991 in perlpacktut.pod
 
-    Alignment, Take 3 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 44963 in perlpacktut.pod
+    Alignment, Take 3 in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 44963 in perlpacktut.pod
 
-    Pointers for How to Use Them in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 45395 in perlpacktut.pod
+    Pointers for How to Use Them in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 45395 in perlpacktut.pod
 
-      Do not use pack with p or P to obtain the address of variable that's bound to go out of scope (and thereby freeing its memory) before you... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49155 in perlpacktut.pod
+      Do not use pack with p or P to obtain the address of variable that's bound to go out of scope (and thereby freeing its memory) before you... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49155 in perlpacktut.pod
 
-      Be very careful with Perl operations that change the value of the variable. Appending something to the variable, for instance, might requ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49361 in perlpacktut.pod
+      Be very careful with Perl operations that change the value of the variable. Appending something to the variable, for instance, might requ... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49361 in perlpacktut.pod
 
-      Don't think that you can get the address of a Perl variable when it is stored as an integer or double number! pack('P', $x) will force th... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49589 in perlpacktut.pod
+      Don't think that you can get the address of a Perl variable when it is stored as an integer or double number! pack('P', $x) will force th... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49589 in perlpacktut.pod
 
-  Pack Recipes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 49960 in perlpacktut.pod
+  Pack Recipes in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 49960 in perlpacktut.pod
 
-  Funnies Section in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 50920 in perlpacktut.pod
+  Funnies Section in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 50920 in perlpacktut.pod
 
-  Authors in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 51235 in perlpacktut.pod
+  Authors in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 51235 in perlpacktut.pod
 

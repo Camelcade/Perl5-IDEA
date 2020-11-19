@@ -1,30 +1,30 @@
 Documentation in null; /perl5language.png -> POD file at 0 in perlvos.pod
 
-  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 178 in perlvos.pod
+  NAME in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 178 in perlvos.pod
 
-  SYNOPSIS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 227 in perlvos.pod
+  SYNOPSIS in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 227 in perlvos.pod
 
-  BUILDING PERL FOR OPENVOS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 843 in perlvos.pod
+  BUILDING PERL FOR OPENVOS in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 843 in perlvos.pod
 
-  INSTALLING PERL IN OPENVOS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1186 in perlvos.pod
+  INSTALLING PERL IN OPENVOS in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1186 in perlvos.pod
 
-    After you have built perl using the Configure script, ensure that you have modify and default write permission to >system>ported and all ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1230 in perlvos.pod
+    After you have built perl using the Configure script, ensure that you have modify and default write permission to >system>ported and all ... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1230 in perlvos.pod
 
-    While there are currently no architecture-specific extensions or modules distributed with perl, the following directories can be used to ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1431 in perlvos.pod
+    While there are currently no architecture-specific extensions or modules distributed with perl, the following directories can be used to ... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1431 in perlvos.pod
 
-    Site-specific perl extensions and modules can be installed in one of two places.  Put architecture-independent files into:       >system>... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1702 in perlvos.pod
+    Site-specific perl extensions and modules can be installed in one of two places.  Put architecture-independent files into:       >system>... in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1702 in perlvos.pod
 
-    You can examine the @INC variable from within a perl program to see the order in which Perl searches these directories. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2025 in perlvos.pod
+    You can examine the @INC variable from within a perl program to see the order in which Perl searches these directories. in null; /perl5language.png -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2025 in perlvos.pod
 
-  USING PERL IN OPENVOS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2162 in perlvos.pod
+  USING PERL IN OPENVOS in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2162 in perlvos.pod
 
-    Restrictions of Perl on OpenVOS in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2192 in perlvos.pod
+    Restrictions of Perl on OpenVOS in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2192 in perlvos.pod
 
-  TEST STATUS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2995 in perlvos.pod
+  TEST STATUS in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2995 in perlvos.pod
 
-  SUPPORT STATUS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3327 in perlvos.pod
+  SUPPORT STATUS in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3327 in perlvos.pod
 
-  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3747 in perlvos.pod
+  AUTHOR in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3747 in perlvos.pod
 
-  LAST UPDATE in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3799 in perlvos.pod
+  LAST UPDATE in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3799 in perlvos.pod
 
