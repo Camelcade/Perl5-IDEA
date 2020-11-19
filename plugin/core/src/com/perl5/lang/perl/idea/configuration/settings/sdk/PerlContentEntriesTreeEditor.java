@@ -67,7 +67,7 @@ public class PerlContentEntriesTreeEditor implements UnnamedConfigurable, Dispos
   private Module myModule;
   private DefaultActionGroup myEditingActionsGroup = new DefaultActionGroup();
   private ModifiableRootModel myModifiableRootModel;
-  private PerlModuleExtension myModifiableModel;
+  private Throwable myDisposeTrace;
 
   public PerlContentEntriesTreeEditor(@NotNull Module module, @NotNull Disposable parentDisposable) {
     Disposer.register(parentDisposable, this);
@@ -147,16 +147,14 @@ public class PerlContentEntriesTreeEditor implements UnnamedConfigurable, Dispos
 
   @Override
   public boolean isModified() {
-    return myModifiableModel.isChanged();
+    return getPerlModuleExtensionModifiableModel().isChanged();
   }
 
   @Override
   public void apply() {
     LOG.assertTrue(myModifiableRootModel != null);
-    LOG.assertTrue(myModifiableModel != null);
     WriteAction.run(() -> myModifiableRootModel.commit());
-    myModifiableRootModel = null;
-    reset();
+    myModifiableRootModel = ModuleRootManager.getInstance(myModule).getModifiableModel();
   }
 
   @Override
@@ -165,7 +163,6 @@ public class PerlContentEntriesTreeEditor implements UnnamedConfigurable, Dispos
       myModifiableRootModel.dispose();
     }
     myModifiableRootModel = ModuleRootManager.getInstance(myModule).getModifiableModel();
-    myModifiableModel = myModifiableRootModel.getModuleExtension(PerlModuleExtension.class);
   }
 
   @Override
@@ -180,9 +177,12 @@ public class PerlContentEntriesTreeEditor implements UnnamedConfigurable, Dispos
   @Override
   public void dispose() {
     disposeUIResources();
-    if (myModifiableRootModel != null) {
-      myModifiableRootModel.dispose();
+    if (myModifiableRootModel == null) {
+      throw new RuntimeException("Editor already disposed", myDisposeTrace);
     }
+    myModifiableRootModel.dispose();
+    myModifiableRootModel = null;
+    myDisposeTrace = new Throwable("Editor Disposal Trace");
   }
 
   @NotNull
@@ -208,8 +208,8 @@ public class PerlContentEntriesTreeEditor implements UnnamedConfigurable, Dispos
   }
 
   @NotNull
-  PerlModuleExtension getModifiableModel() {
-    return myModifiableModel;
+  PerlModuleExtension getPerlModuleExtensionModifiableModel() {
+    return myModifiableRootModel.getModuleExtension(PerlModuleExtension.class);
   }
 
   private static class MyNewFolderAction extends NewFolderAction implements CustomComponentAction {
@@ -247,20 +247,10 @@ public class PerlContentEntriesTreeEditor implements UnnamedConfigurable, Dispos
       if (file == null || !file.isDirectory()) {
         return;
       }
-      PerlSourceRootType rootType = myModifiableModel.getRootType(file);
+      PerlSourceRootType rootType = getPerlModuleExtensionModifiableModel().getRootType(file);
       if (rootType == null) {
         return;
       }
-      /*
-      final ContentEntry contentEntry = editor.getContentEntry();
-      if (contentEntry != null) {
-        final String prefix = getPresentablePrefix(contentEntry, file);
-        if (!prefix.isEmpty()) {
-          append(" (" + prefix + ")", new SimpleTextAttributes(SimpleTextAttributes.STYLE_PLAIN, JBColor.GRAY));
-        }
-        setIcon(updateIcon(contentEntry, file, getIcon()));
-      }
-      */
       setIcon(rootType.getEditHandler().getRootIcon());
     }
   }

@@ -47,12 +47,12 @@ public class PerlToggleSourceRootAction extends ToggleAction {
     if (files.length == 0) {
       return false;
     }
-    return myHandler.getRootType().equals(myEditor.getModifiableModel().getRootType(files[0]));
+    return myHandler.getRootType().equals(myEditor.getPerlModuleExtensionModifiableModel().getRootType(files[0]));
   }
 
   @Override
   public void setSelected(@NotNull AnActionEvent e, boolean state) {
-    PerlModuleExtension modifiableModel = myEditor.getModifiableModel();
+    PerlModuleExtension modifiableModel = myEditor.getPerlModuleExtensionModifiableModel();
     for (VirtualFile virtualFile : myEditor.getSelectedFiles()) {
       if (state) {
         modifiableModel.setRoot(virtualFile, myHandler.getRootType());
