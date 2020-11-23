@@ -19,13 +19,11 @@ package com.perl5.lang.perl.psi.impl;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.ResolveState;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.PerlCompositeElement;
 import com.perl5.lang.perl.psi.PsiPerlExpr;
-import com.perl5.lang.perl.psi.PsiPerlVisitor;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -44,10 +42,6 @@ public class PerlCompositeElementImpl extends ASTWrapperPsiElement implements Pe
                                      @NotNull PsiElement place) {
     return PerlResolveUtil.processChildren(this, processor, state, lastParent, place) &&
            processor.execute(this, state);
-  }
-
-  public void accept(@NotNull PsiPerlVisitor visitor) {
-    accept((PsiElementVisitor)visitor);
   }
 
   public @NotNull List<PsiPerlExpr> getExprList() {

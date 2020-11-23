@@ -19,7 +19,6 @@ package com.perl5.lang.perl.psi;
 import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.ResolveState;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.stubs.IStubElementType;
@@ -42,7 +41,7 @@ public class PerlStubBasedPsiElementBase<T extends StubElement<?>> extends StubB
 
   @Override
   public String toString() {
-    return getClass().getSimpleName() + "(" + getElementType() + ")";
+    return getClass().getSimpleName() + "(" + getElementType().toString() + ")";
   }
 
   @Override
@@ -53,10 +52,6 @@ public class PerlStubBasedPsiElementBase<T extends StubElement<?>> extends StubB
 
     return PerlResolveUtil.processChildren(this, processor, state, lastParent, place) &&
            processor.execute(this, state);
-  }
-
-  public void accept(@NotNull PsiPerlVisitor visitor) {
-    accept((PsiElementVisitor)visitor);
   }
 
   public @NotNull List<PsiPerlExpr> getExprList() {
