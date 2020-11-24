@@ -63,7 +63,7 @@ public class PerlRunProfileState extends CommandLineState {
 
   @Override
   protected @NotNull ProcessHandler startProcess() throws ExecutionException {
-    return PerlHostData.createConsoleProcessHandler(createCommandLine());
+    return PerlHostData.createConsoleProcessHandler(createCommandLine().withUserCommandLine(true));
   }
 
   protected @NotNull PerlCommandLine createCommandLine() throws ExecutionException {

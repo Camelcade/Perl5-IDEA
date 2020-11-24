@@ -57,6 +57,7 @@ class PerlDockerAdapter {
   private static final String RUN = "run";
   private static final String EXEC = "exec";
   private static final String WITH_AUTOREMOVE = "--rm";
+  private static final String WITH_ENTRYPOINT = "--entrypoint";
   private static final String AS_DAEMON = "-d";
   private static final String CONTAINER = "container";
   private static final String REMOVE = "rm";
@@ -100,8 +101,10 @@ class PerlDockerAdapter {
    */
   public @NotNull String createRunningContainer(@NotNull String containerNameSeed) throws ExecutionException {
     String containerName = createContainerName(containerNameSeed);
-    runCommand(RUN, AS_DAEMON, WITH_AUTOREMOVE, WITH_CONTAINER_NAME,
-               containerName, myData.getImageName(), "bash", "-c", "while true;do sleep 1000000;done");
+    runCommand(RUN, AS_DAEMON, WITH_AUTOREMOVE,
+               WITH_ENTRYPOINT, "",
+               WITH_CONTAINER_NAME, containerName,
+               myData.getImageName(), "bash", "-c", "while true;do sleep 1000000;done");
     return containerName;
   }
 
@@ -188,6 +191,10 @@ class PerlDockerAdapter {
 
     // mounting helpers
     dockerCommandLine.withParameters(WITH_VOLUME, PerlPluginUtil.getPluginHelpersRoot() + ':' + myData.getHelpersRootPath());
+
+    if (!commandLine.isUserCommandLine()) {
+      dockerCommandLine.withParameters(WITH_ENTRYPOINT, "");
+    }
 
     Project project = commandLine.getEffectiveProject();
     if (project != null) {

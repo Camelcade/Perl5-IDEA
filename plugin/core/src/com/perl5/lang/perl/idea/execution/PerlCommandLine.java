@@ -62,6 +62,11 @@ public class PerlCommandLine extends GeneralCommandLine {
 
   private boolean myWithMissingPackageListener = true;
 
+  /**
+   * Indicates that command line is user command line, not some internal one. E.g. command line from run configurations
+   */
+  private boolean myIsUserCommandLine = false;
+
   public PerlCommandLine() {
   }
 
@@ -89,6 +94,7 @@ public class PerlCommandLine extends GeneralCommandLine {
       myProcessListeners = new ArrayList<>(((PerlCommandLine)original).myProcessListeners);
       myProject = ((PerlCommandLine)original).myProject;
       myModule = ((PerlCommandLine)original).myModule;
+      myIsUserCommandLine = ((PerlCommandLine)original).myIsUserCommandLine;
     }
   }
 
@@ -260,6 +266,21 @@ public class PerlCommandLine extends GeneralCommandLine {
     Set<PortMapping> newMappings = ContainerUtil.newHashSet(mappings);
     newMappings.addAll(myPortMappings);
     myPortMappings = newMappings;
+    return this;
+  }
+
+  /**
+   * @see #myIsUserCommandLine
+   */
+  public boolean isUserCommandLine() {
+    return myIsUserCommandLine;
+  }
+
+  /**
+   * @see #myIsUserCommandLine
+   */
+  public PerlCommandLine withUserCommandLine(boolean userCommandLine) {
+    myIsUserCommandLine = userCommandLine;
     return this;
   }
 
