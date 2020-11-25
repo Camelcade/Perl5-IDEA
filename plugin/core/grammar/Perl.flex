@@ -156,7 +156,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 REGEX_ARRAY_NEGATING = [\^\:\\\[\{\.\,\'\"})]
 REGEX_HASH_NEGATING = [\^\:\\\[\{\.\,]
 HANDLE_NEGATING = {MAY_BE_SPACES_OR_COMMENTS} ("("|"->"|":")
-PRINT_HANDLE_NEGATING = {MAY_BE_SPACES_OR_COMMENTS} ("("|"->"|":"|";"|"=>"|"&&"|"||")
+PRINT_HANDLE_NEGATING = {MAY_BE_SPACES_OR_COMMENTS} ("("|"->"|":"|";"|"=>"|"&&"|"||"|",")
 
 BRACE_AFTER_SPACE_COMMENTS = {MAY_BE_SPACES_OR_COMMENTS}"{"
 

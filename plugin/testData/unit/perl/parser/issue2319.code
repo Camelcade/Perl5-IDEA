@@ -1,0 +1,4 @@
+use constant FORMAT => "Constant: %s\n";
+
+printf(FORMAT, 'Some parameter 4');
+printf FORMAT, 'Some parameter 5';
