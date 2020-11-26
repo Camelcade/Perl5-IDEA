@@ -48,14 +48,17 @@ public class PerlCompletionPopupTest extends PerlCompletionPopupTestCase {
 
   @Test
   public void testAutoColonUseEnabled() {
-    Perl5CodeInsightSettings.getInstance().AUTO_INSERT_COLON = true;
-    doTest("use Mojolicious<caret>", ":");
+    doTestWithAutoColon("use Mojolicious<caret>", ":", true);
   }
 
   @Test
   public void testAutoColonUseDisabled() {
-    Perl5CodeInsightSettings.getInstance().AUTO_INSERT_COLON = false;
-    doTestNegative("use Mojolicious<caret>", ":");
+    doTestWithoutAutoColon("use Mojolicious<caret>", ":", false);
+  }
+
+  @Test
+  public void testAutoColonUseDisabledCompletion() {
+    doTestWithoutAutoColon("use Mojolicious:<caret>", ":", true);
   }
 
   @Test
@@ -113,23 +116,23 @@ public class PerlCompletionPopupTest extends PerlCompletionPopupTestCase {
 
   @Test
   public void testStaticMethod() {
-    doTest("CORE:<caret>", ":");
+    doTestWithAutoColon("CORE:<caret>", ":", true);
   }
 
   @Test
-  public void testScalarColons() {doTest("$<caret>", ":");}
+  public void testScalarColons() {doTestWithAutoColon("$<caret>", ":", true);}
 
   @Test
-  public void testArrayColons() {doTest("@<caret>", ":");}
+  public void testArrayColons() {doTestWithAutoColon("@<caret>", ":", true);}
 
   @Test
-  public void testArraySizeColons() {doTest("$#<caret>", ":");}
+  public void testArraySizeColons() {doTestWithAutoColon("$#<caret>", ":", true);}
 
   @Test
-  public void testHashColons() {doTest("%<caret>", ":");}
+  public void testHashColons() {doTestWithAutoColon("%<caret>", ":", true);}
 
   @Test
-  public void testGlobColons() {doTest("*<caret>", ":");}
+  public void testGlobColons() {doTestWithAutoColon("*<caret>", ":", true);}
 
   @Test
   public void testScalarName() {

@@ -20,8 +20,10 @@ import com.intellij.codeInsight.lookup.LookupEx;
 import com.intellij.codeInsight.lookup.LookupManager;
 import com.intellij.codeInsight.template.impl.editorActions.ExpandLiveTemplateByTabAction;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.application.ReadAction;
 import com.intellij.testFramework.fixtures.CompletionAutoPopupTester;
 import com.intellij.util.ThrowableRunnable;
+import com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class PerlCompletionPopupTestCase extends PerlLightTestCaseBase {
@@ -83,7 +85,7 @@ public abstract class PerlCompletionPopupTestCase extends PerlLightTestCaseBase 
     myTester.typeWithPauses(textToType);
     LookupEx activeLookup = LookupManager.getActiveLookup(getEditor());
     if (result) {
-      assertNotNull(activeLookup);
+      assertNotNull("Editor text:\n" + ReadAction.compute(this::getEditorTextWithCaretsAndSelections), activeLookup);
     }
     else {
       assertNull(activeLookup);
@@ -99,5 +101,25 @@ public abstract class PerlCompletionPopupTestCase extends PerlLightTestCaseBase 
     myTester.joinAutopopup();
     myTester.joinCompletion();
     assertNotNull(LookupManager.getActiveLookup(getEditor()));
+  }
+
+  protected void doTestWithAutoColon(@NotNull String original, @NotNull String toType, boolean expected) {
+    Perl5CodeInsightSettings.getInstance().AUTO_INSERT_COLON = true;
+    if (expected) {
+      doTest(original, toType);
+    }
+    else {
+      doTestNegative(original, toType);
+    }
+  }
+
+  protected void doTestWithoutAutoColon(@NotNull String original, @NotNull String toType, boolean expected) {
+    Perl5CodeInsightSettings.getInstance().AUTO_INSERT_COLON = false;
+    if (expected) {
+      doTest(original, toType);
+    }
+    else {
+      doTestNegative(original, toType);
+    }
   }
 }

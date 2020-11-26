@@ -42,6 +42,8 @@ import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
+import com.perl5.lang.perl.psi.impl.PsiPerlPerlRegexImpl;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -101,14 +103,17 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
       return Result.STOP;
     }
 
-    if (c == ':' && Perl5CodeInsightSettings.getInstance().AUTO_INSERT_COLON && currentOffset > 0) {
-      if (isPreColonSuffix(prevPositionIterator)) {
+    if (c == ':') {
+      if (Perl5CodeInsightSettings.getInstance().AUTO_INSERT_COLON && currentOffset > 0 && shouldAddColon(prevPositionIterator, file)) {
         if (documentSequence.charAt(currentOffset - 1) != ':') {
           document.insertString(currentOffset, "::");
           caretModel.moveToOffset(currentOffset + 2);
         }
         AutoPopupController.getInstance(project).scheduleAutoPopup(editor);
         return Result.STOP;
+      }
+      else if (currentOffset > 1 && documentSequence.charAt(currentOffset - 1) == ':') {
+        AutoPopupController.getInstance(project).scheduleAutoPopup(editor);
       }
     }
 
@@ -127,23 +132,43 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
     return Result.CONTINUE;
   }
 
-  static final TokenSet COLON_HANDLING_TOKENS = TokenSet.orSet(
-    SIGILS, VARIABLE_NAMES, PACKAGE_LIKE_TOKENS
-  );
+  static final TokenSet COLON_HANDLING_VARIABLE_TOKENS = TokenSet.orSet(SIGILS, VARIABLE_NAMES);
 
   /**
    * @return true if we are at proper place for inserting two colons
    */
-  private boolean isPreColonSuffix(HighlighterIterator precedingIterator) {
+  private boolean shouldAddColon(@NotNull HighlighterIterator precedingIterator,
+                                 @NotNull PsiFile psiFile) {
     IElementType tokenType = precedingIterator.getTokenType();
-    if (COLON_HANDLING_TOKENS.contains(tokenType)) {
+    if (isPreColonSuffixBase(tokenType, precedingIterator.getStart(), psiFile)) {
       return true;
     }
-    if (tokenType != SUB_NAME) {
+    else if (tokenType != SUB_NAME) {
       return false;
     }
     precedingIterator.retreat();
     return !precedingIterator.atEnd() && precedingIterator.getTokenType() == QUALIFYING_PACKAGE;
+  }
+
+  /**
+   * @return {@code true} iff we should add/remove colon after the token starting at {@code elementOffset} in {@code psiFile} with
+   * {@code tokenType}.
+   */
+  public static boolean isPreColonSuffixBase(@Nullable IElementType tokenType,
+                                             int elementOffset,
+                                             @NotNull PsiFile psiFile) {
+    if (PACKAGE_LIKE_TOKENS.contains(tokenType)) {
+      return true;
+    }
+    else if (COLON_HANDLING_VARIABLE_TOKENS.contains(tokenType)) {
+      var perlLeafAtOffset = psiFile.getViewProvider().findElementAt(elementOffset, PerlLanguage.INSTANCE);
+      var perlVariable = perlLeafAtOffset == null ? null : perlLeafAtOffset.getParent();
+      var variableContainer = perlVariable == null ? null : perlVariable.getParent();
+      return !(variableContainer instanceof PerlString ||
+               variableContainer instanceof PerlHeredocElementImpl ||
+               variableContainer instanceof PsiPerlPerlRegexImpl);
+    }
+    return false;
   }
 
   private boolean isMyFile(@NotNull PsiFile file) {
