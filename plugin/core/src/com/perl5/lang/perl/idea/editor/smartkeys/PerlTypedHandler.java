@@ -127,8 +127,8 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
     return Result.CONTINUE;
   }
 
-  static final TokenSet COLON_HANDLING_TOKENS = TokenSet.create(
-    PACKAGE, QUALIFYING_PACKAGE, SCALAR_NAME, ARRAY_NAME, HASH_NAME, GLOB_NAME
+  static final TokenSet COLON_HANDLING_TOKENS = TokenSet.orSet(
+    SIGILS, VARIABLE_NAMES, PACKAGE_LIKE_TOKENS
   );
 
   /**

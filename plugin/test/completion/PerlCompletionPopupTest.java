@@ -117,6 +117,21 @@ public class PerlCompletionPopupTest extends PerlCompletionPopupTestCase {
   }
 
   @Test
+  public void testScalarColons() {doTest("$<caret>", ":");}
+
+  @Test
+  public void testArrayColons() {doTest("@<caret>", ":");}
+
+  @Test
+  public void testArraySizeColons() {doTest("$#<caret>", ":");}
+
+  @Test
+  public void testHashColons() {doTest("%<caret>", ":");}
+
+  @Test
+  public void testGlobColons() {doTest("*<caret>", ":");}
+
+  @Test
   public void testScalarName() {
     doTest("\n<caret>", "$");
   }

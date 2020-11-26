@@ -408,4 +408,6 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
   TokenSet ELEMENTS_WITH_CUSTOM_DELIMITERS = TokenSet.orSet(
     REGEX_OPERATIONS, QUOTED_STRINGS, TokenSet.create(STRING_LIST, TR_REGEX)
   );
+
+  TokenSet PACKAGE_LIKE_TOKENS = TokenSet.create(PACKAGE, QUALIFYING_PACKAGE);
 }

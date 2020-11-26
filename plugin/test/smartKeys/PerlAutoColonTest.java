@@ -26,6 +26,150 @@ public class PerlAutoColonTest extends PerlSmartKeysTestCase {
   }
 
   @Test
+  public void testDoubleColonAfterScalarSigil() {
+    enableAutoColon();
+    doTest("$<caret>", ":", "$::<caret>");
+  }
+
+  @Test
+  public void testDoubleColonAfterArraySigil() {
+    enableAutoColon();
+    doTest("@<caret>", ":", "@::<caret>");
+  }
+
+  @Test
+  public void testDoubleColonAfterHashSigil() {
+    enableAutoColon();
+    doTest("%<caret>", ":", "%::<caret>");
+  }
+
+  @Test
+  public void testDoubleColonAfterCodeSigil() {
+    enableAutoColon();
+    doTest("&<caret>", ":", "&::<caret>");
+  }
+
+  @Test
+  public void testDoubleColonAfterGlobSigil() {
+    enableAutoColon();
+    doTest("*<caret>", ":", "*::<caret>");
+  }
+
+  @Test
+  public void testDoubleColonAfterArraySizeSigil() {
+    enableAutoColon();
+    doTest("$#<caret>", ":", "$#::<caret>");
+  }
+
+  @Test
+  public void testDoubleColonAfterScalarSigilDisabled() {
+    disableAutoColon();
+    doTest("$<caret>", ":", "$:<caret>");
+  }
+
+  @Test
+  public void testDoubleColonAfterArraySigilDisabled() {
+    disableAutoColon();
+    doTest("@<caret>", ":", "@:<caret>");
+  }
+
+  @Test
+  public void testDoubleColonAfterHashSigilDisabled() {
+    disableAutoColon();
+    doTest("%<caret>", ":", "%:<caret>");
+  }
+
+  @Test
+  public void testDoubleColonAfterCodeSigilDisabled() {
+    disableAutoColon();
+    doTest("&<caret>", ":", "&:<caret>");
+  }
+
+  @Test
+  public void testDoubleColonAfterGlobSigilDisabled() {
+    disableAutoColon();
+    doTest("*<caret>", ":", "*:<caret>");
+  }
+
+  @Test
+  public void testDoubleColonAfterArraySizeSigilDisabled() {
+    disableAutoColon();
+    doTest("$#<caret>", ":", "$#:<caret>");
+  }
+
+  @Test
+  public void testRemoveDoubleColonAfterScalarSigil() {
+    enableAutoColon();
+    doTestBS("$::<caret>", "$<caret>");
+  }
+
+  @Test
+  public void testRemoveDoubleColonAfterArraySigil() {
+    enableAutoColon();
+    doTestBS("@::<caret>", "@<caret>");
+  }
+
+  @Test
+  public void testRemoveDoubleColonAfterHashSigil() {
+    enableAutoColon();
+    doTestBS("%::<caret>", "%<caret>");
+  }
+
+  @Test
+  public void testRemoveDoubleColonAfterCodeSigil() {
+    enableAutoColon();
+    doTestBS("&::<caret>", "&<caret>");
+  }
+
+  @Test
+  public void testRemoveDoubleColonAfterGlobSigil() {
+    enableAutoColon();
+    doTestBS("*::<caret>", "*<caret>");
+  }
+
+  @Test
+  public void testRemoveDoubleColonAfterArraySizeSigil() {
+    enableAutoColon();
+    doTestBS("$#::<caret>", "$#<caret>");
+  }
+
+  @Test
+  public void testRemoveDoubleColonAfterScalarSigilDisabled() {
+    disableAutoColon();
+    doTestBS("$::<caret>", "$:<caret>");
+  }
+
+  @Test
+  public void testRemoveDoubleColonAfterArraySigilDisabled() {
+    disableAutoColon();
+    doTestBS("@::<caret>", "@:<caret>");
+  }
+
+  @Test
+  public void testRemoveDoubleColonAfterHashSigilDisabled() {
+    disableAutoColon();
+    doTestBS("%::<caret>", "%:<caret>");
+  }
+
+  @Test
+  public void testRemoveDoubleColonAfterCodeSigilDisabled() {
+    disableAutoColon();
+    doTestBS("&::<caret>", "&:<caret>");
+  }
+
+  @Test
+  public void testRemoveDoubleColonAfterGlobSigilDisabled() {
+    disableAutoColon();
+    doTestBS("*::<caret>", "*:<caret>");
+  }
+
+  @Test
+  public void testRemoveDoubleColonAfterArraySizeSigilDisabled() {
+    disableAutoColon();
+    doTestBS("$#::<caret>", "$#:<caret>");
+  }
+
+  @Test
   public void testDoubleColonInUseEnabledAtEnd() {
     enableAutoColon();
     doTest("use Mojolicious<caret>", ":", "use Mojolicious::<caret>");
