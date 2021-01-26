@@ -1,0 +1,29 @@
+<p><a href="psi_element://Future%3A%3AAsyncAwait">Future::AsyncAwait</a>: <a href="psi_element://Future%3A%3AAsyncAwait%2FDESCRIPTION">DESCRIPTION</a></p><h2><code>async</code></h2><p style="padding-bottom: 10px;">The <code>async</code> keyword should appear just before the <code>sub</code> keyword that
+declares a new function. When present, this marks that the function performs
+its work in a <i>potentially</i> asynchronous fashion. This has two effects: it
+permits the body of the function to use the <code>await</code> expression, and it wraps
+the return value of the function in a <a href="psi_element://Future">Future</a> instance.</p>
+<div style="padding-bottom: 10px;"><pre><code>   async sub myfunc
+   {
+      return 123;
+   }
+
+   my $f = myfunc();
+   my $result = $f-&gt;get;</code></pre></div>
+<p style="padding-bottom: 10px;">This <code>async</code>-declared function always returns a <code>Future</code> instance when
+invoked. The returned future instance will eventually complete when the
+function returns, either by the <code>return</code> keyword or by falling off the end;
+the result of the future will be the return value from the function's code.
+Alternatively, if the function body throws an exception, this will cause the
+returned future to fail.</p>
+<p style="padding-bottom: 10px;">If the final expression in the body of the function returns a <code>Future</code>, don't
+forget to <code>await</code> it rather than simply returning it as it is, or else this
+return value will become double-wrapped - almost certainly not what you
+wanted.</p>
+<div style="padding-bottom: 10px;"><pre><code>   async sub otherfunc { ... }
+
+   async sub myfunc
+   {
+      ...
+      return await otherfunc();
+   }</code></pre></div>
