@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,8 +24,11 @@ import com.intellij.execution.process.ProcessOutput;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
+import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.application.ModalityState;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.Messages;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
@@ -165,11 +168,18 @@ public abstract class PerlVersionManagerAdapter {
   protected abstract @NotNull String getErrorNotificationTitle();
 
   private void notifyUser(@NotNull String message) {
-    Notifications.Bus.notify(new Notification(
-      getNotificationGroup(),
-      getErrorNotificationTitle(),
-      message,
-      NotificationType.ERROR
-    ));
+    ApplicationManager.getApplication().invokeLater(() -> {
+      if (ModalityState.current() != ModalityState.NON_MODAL) {
+        Messages.showErrorDialog(message, getErrorNotificationTitle());
+      }
+      else {
+        Notifications.Bus.notify(new Notification(
+          getNotificationGroup(),
+          getErrorNotificationTitle(),
+          message,
+          NotificationType.ERROR
+        ));
+      }
+    });
   }
 }
