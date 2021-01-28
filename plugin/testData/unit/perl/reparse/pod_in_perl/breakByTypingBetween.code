@@ -1,0 +1,18 @@
+
+=pod
+
+Pod is here
+
+=cut
+
+
+say 42;
+<caret>
+
+
+=pod
+
+Pod is here
+
+=cut
+

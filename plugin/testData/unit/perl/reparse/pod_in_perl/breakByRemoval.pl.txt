@@ -1,0 +1,19 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
+
+<caret>=head1"
+----------
+Psi structure
+----------
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('\n')
+  PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION)
+    PsiElement(Perl5 POD: =head1)('=head1')
+    PsiSectionTitleImpl(Perl5 POD: SECTION_TITLE)
+      PsiElement(Perl5 POD: ")('"')
+    PsiHead1SectionContentImpl(Perl5 POD: HEAD_1_SECTION_CONTENT)
+      <empty list>

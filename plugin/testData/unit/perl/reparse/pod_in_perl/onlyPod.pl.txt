@@ -1,0 +1,29 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
+=pod
+
+say 1<caret>
+
+=cut
+----------
+Psi structure
+----------
+POD file
+  PsiPodSectionImpl(Perl5 POD: POD_SECTION)
+    PsiElement(Perl5 POD: =pod)('=pod')
+  PsiElement(Perl5 POD: NL)('\n')
+  PsiWhiteSpace('\n')
+  PsiPodParagraphImpl(Perl5 POD: POD_PARAGRAPH)
+    PodIdentifierImpl(Perl5 POD: identifier)('say')
+    PsiWhiteSpace(' ')
+    PsiElement(Perl5 POD: number)('1')
+    PsiElement(Perl5 POD: NL)('\n')
+  PsiWhiteSpace('\n')
+  PsiCutSectionImpl(Perl5 POD: CUT_SECTION)
+    PsiElement(Perl5 POD: =cut)('=cut')
+    PsiSectionTitleImpl(Perl5 POD: SECTION_TITLE)
+      <empty list>

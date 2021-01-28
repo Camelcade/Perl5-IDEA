@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 package unit.reparse;
 
 import base.TemplateToolkitLightTestCase;
+import com.perl5.lang.tt2.TemplateToolkitLanguage;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
@@ -54,10 +55,10 @@ public class TemplateToolkitReparseTest extends TemplateToolkitLightTestCase {
   public void testTemplateTopClose() {doTest("[% END %]");}
 
   private void doTest(@NotNull String toType) {
-    doTestReparse(toType);
+    doTestReparse(toType, TemplateToolkitLanguage.INSTANCE);
   }
 
   private void doTestBs() {
-    doTestReparseBs();
+    doTestReparseBs(TemplateToolkitLanguage.INSTANCE);
   }
 }

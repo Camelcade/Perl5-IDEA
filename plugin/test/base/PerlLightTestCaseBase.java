@@ -2830,11 +2830,19 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   }
 
   protected void doTestReparse(@NotNull String textToInsert) {
+    doTestReparse(textToInsert, PerlLanguage.INSTANCE);
+  }
+
+  protected void doTestReparse(@NotNull String textToInsert, @NotNull Language language) {
     initWithFileSmart();
-    doTestReparseWithoutInit(textToInsert);
+    doTestReparseWithoutInit(textToInsert, language);
   }
 
   protected void doTestReparseBs() {
+    doTestReparseBs(PerlLanguage.INSTANCE);
+  }
+
+  protected void doTestReparseBs(@NotNull Language language) {
     initWithFileSmart();
     doTestReparseWithoutInit(() -> {
       Editor editor = getEditor();
@@ -2845,16 +2853,32 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
         document.deleteString(offset - 1, offset);
         caretModel.moveToOffset(offset - 1);
       }
-    });
+    }, language);
   }
 
   protected void doTestReparseWithoutInit(@NotNull String textToInsert) {
-    doTestReparseWithoutInit(() -> EditorModificationUtil.insertStringAtCaret(getEditor(), textToInsert));
+    doTestReparseWithoutInit(textToInsert, PerlLanguage.INSTANCE);
   }
 
-  protected void doTestReparseWithoutInit(@NotNull Runnable documentModifier) {
-    PsiFile psiFile = getFile();
-    assertInstanceOf(psiFile, PsiFileImpl.class);
+  protected void doTestReparseWithoutInit(@NotNull String textToInsert, @NotNull Language language) {
+    doTestReparseWithoutInit(() -> EditorModificationUtil.insertStringAtCaret(getEditor(), textToInsert), language);
+  }
+
+  protected void doTestReparseWithoutInit(@NotNull Runnable documentModifier,
+                                          @NotNull Language language) {
+    PsiFile psiFile = null;
+    var mainPsiFile = getFile();
+    for (PsiFile subTree : mainPsiFile.getViewProvider().getAllFiles()) {
+      if (subTree.getLanguage().isKindOf(language)) {
+        psiFile = subTree;
+        break;
+      }
+    }
+
+    assertNotNull("No psi file found for a language: " + language +
+                  "; got " + mainPsiFile +
+                  " with subtrees " + mainPsiFile.getViewProvider().getAllFiles(), psiFile);
+
     FileASTNode fileNode = psiFile.getNode();
     WriteCommandAction.runWriteCommandAction(getProject(), documentModifier);
     String newText = getEditorText();
@@ -2875,12 +2899,13 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     result.append(getEditorTextWithCaretsAndSelections());
     result.append(SEPARATOR_NEWLINES).append("Psi structure").append(SEPARATOR_NEWLINES);
     PsiDocumentManager.getInstance(getProject()).commitAllDocuments();
-    String psiString = DebugUtil.psiToString(getFile(), false, false);
+    String psiString = DebugUtil.psiToString(psiFile, false, false);
     result.append(psiString);
 
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), result.toString());
     if (!psiString.contains("PsiErrorElement")) {
-      WriteAction.run(() -> ParsingTestCase.ensureCorrectReparse(getFile()));
+      var finalPsiFile = psiFile;
+      WriteAction.run(() -> ParsingTestCase.ensureCorrectReparse(finalPsiFile));
     }
   }
 
