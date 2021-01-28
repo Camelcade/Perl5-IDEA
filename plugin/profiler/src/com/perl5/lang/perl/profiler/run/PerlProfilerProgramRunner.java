@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,9 +27,10 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.profiler.DefaultProfilerExecutorGroup;
 import com.intellij.profiler.ProfilerToolWindowManager;
-import com.perl5.lang.perl.profiler.configuration.PerlProfilerConfigurationState;
 import com.perl5.lang.perl.idea.run.GenericPerlProgramRunner;
+import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import com.perl5.lang.perl.idea.run.PerlRunProfileState;
+import com.perl5.lang.perl.profiler.configuration.PerlProfilerConfigurationState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -46,6 +47,9 @@ public class PerlProfilerProgramRunner extends GenericPerlProgramRunner {
 
   @Override
   public boolean canRun(@NotNull String executorId, @NotNull RunProfile profile) {
+    if (!(profile instanceof GenericPerlRunConfiguration)) {
+      return false;
+    }
     var executorSettings = getExecutorSettings(executorId);
     return executorSettings != null && executorSettings.canRun(profile);
   }
