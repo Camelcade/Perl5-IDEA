@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -351,7 +351,7 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
     StringBuilder sb = new StringBuilder();
     PerlLoadedFileDescriptor fileDescriptor = frameDescriptor.getFileDescriptor();
     sb.append("Name: ").append(fileDescriptor.getName()).append("; line: ").append(frameDescriptor.getLine()).append("\n");
-    sb.append("Main size: ").append(frameDescriptor.getMainSize()).append(SEPARATOR_NEWLINES);
+    sb.append("Main is not empty: ").append(frameDescriptor.getMainSize() > 0).append(SEPARATOR_NEWLINES);
     sb.append("Args:").append(SEPARATOR_NEWLINES).append(serializePerlValueDescriptors(frameDescriptor.getArgs()));
     sb.append("Lexicals:").append(SEPARATOR_NEWLINES).append(serializePerlValueDescriptors(frameDescriptor.getLexicals()));
     sb.append("Globals:").append(SEPARATOR_NEWLINES).append(serializePerlValueDescriptors(frameDescriptor.getGlobals()));

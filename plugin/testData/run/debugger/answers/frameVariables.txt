@@ -1,5 +1,5 @@
 Name: main::something; line: 21
-Main size: 165
+Main is not empty: true
 ----------
 Args:
 ----------
