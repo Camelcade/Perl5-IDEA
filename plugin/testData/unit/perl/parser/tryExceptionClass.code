@@ -1,7 +1,7 @@
 # https://metacpan.org/pod/Exception::Class::TryCatch
 
 say 'hi';
-
+package Exception::Class::Base;  # for proper lexing
 use Exception::Class::TryCatch;
 
 # simple usage of catch()
