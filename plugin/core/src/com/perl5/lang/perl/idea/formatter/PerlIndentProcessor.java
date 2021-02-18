@@ -35,6 +35,11 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.function.BiFunction;
+import java.util.function.BinaryOperator;
+import java.util.stream.Stream;
 
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.*;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
@@ -147,6 +152,10 @@ public class PerlIndentProcessor implements PerlElementTypes {
       return Indent.getNoneIndent();
     }
 
+    if (isWithinChainedArrayOperation(node)) {
+      return Indent.getNoneIndent();
+    }
+
     if (PerlFormattingTokenSets.COMMA_LIKE_SEQUENCES.contains(parentNodeType)) {
       return grandParentNodeType == STATEMENT ? Indent.getContinuationWithoutFirstIndent() : Indent.getContinuationIndent();
     }
@@ -160,6 +169,44 @@ public class PerlIndentProcessor implements PerlElementTypes {
     }
 
     return forceFirstIndent ? Indent.getContinuationIndent() : Indent.getContinuationWithoutFirstIndent();
+  }
+
+  private boolean isWithinChainedArrayOperation(ASTNode node) {
+    // check if were inside a multiline chained functional style call sequence using sort, map, grep or similar functions from List::Utils
+    Optional<ASTNode> nonSubParent = findFirstNonSubParent(node.getTreeParent());
+    Optional<ASTNode> nonSubGrandParent = nonSubParent.flatMap(n -> findFirstNonSubParent(n.getTreeParent()));
+
+    return Stream.of(nonSubParent, nonSubGrandParent)
+      .map(o -> o.map(ASTNode::getElementType).orElse(null))
+      .allMatch(CHAINED_ARRAY_OPERATION_TOKENS::contains);
+  }
+
+  private Optional<ASTNode> findFirstNonSubParent(ASTNode node) {
+    // find first parent of node not part of a subroutine arguments, this is the case of chaining list functions from List::Util or alike
+    // this got a little complicated but we want the first parent that is the actual SUB_CALL so wi can apply correct indentation there
+    return Stream.iterate(node, Objects::nonNull, ASTNode::getTreeParent)
+      .filter(this::notInsideArraySub)
+      .filter(this::notInsideBlockArraySub)
+      .findFirst();
+  }
+
+  private boolean notInsideArraySub(ASTNode n) {
+    return notDirectDescendingOf(n, COMMA_SEQUENCE_EXPR, CALL_ARGUMENTS, SUB_CALL);
+  }
+
+  private boolean notInsideBlockArraySub(ASTNode n) {
+    return notDirectDescendingOf(n, CALL_ARGUMENTS, SUB_CALL);
+  }
+
+  private boolean notDirectDescendingOf(ASTNode startNode, IElementType... types) {
+    // check if ancestor-types including startNode is exactly as specified types (up to length of types)
+    return Stream.of(types)
+      .reduce(Optional.of(startNode),
+         (currentNode, type) -> currentNode
+           .filter(n -> n.getElementType() == type)
+           .flatMap(n -> Optional.of(n.getTreeParent())),
+         (acc, node) -> acc.flatMap(n -> node))
+      .isEmpty();
   }
 
   public @Nullable Indent getChildIndent(@NotNull PerlAstBlock block, int newChildIndex) {
