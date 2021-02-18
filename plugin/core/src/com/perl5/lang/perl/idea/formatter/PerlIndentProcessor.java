@@ -37,8 +37,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.function.BiFunction;
-import java.util.function.BinaryOperator;
 import java.util.stream.Stream;
 
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.*;
