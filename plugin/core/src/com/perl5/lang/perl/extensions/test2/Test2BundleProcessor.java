@@ -16,14 +16,12 @@
 
 package com.perl5.lang.perl.extensions.test2;
 
-import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessorBase;
+
 import com.perl5.lang.perl.extensions.packageprocessor.PerlStrictProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlWarningsProvider;
-import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
-import org.jetbrains.annotations.NotNull;
 
-public class Test2V0Processor extends PerlPackageProcessorBase implements
-                                                               PerlStrictProvider,
-                                                               PerlWarningsProvider {
+public class Test2BundleProcessor extends Test2BaseProcessor implements
+                                                             PerlStrictProvider,
+                                                             PerlWarningsProvider {
 
 }

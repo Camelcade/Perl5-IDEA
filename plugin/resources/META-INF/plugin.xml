@@ -130,8 +130,14 @@
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.ListMoreUtilsProcessor"/>
     <packageProcessor key="Test::More"
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.TestMoreProcessor"/>
+    <packageProcessor key="Test2::Bundle::Extended"
+                      implementationClass="com.perl5.lang.perl.extensions.test2.Test2BundleProcessor"/>
+    <packageProcessor key="Test2::Bundle::More"
+                      implementationClass="com.perl5.lang.perl.extensions.test2.Test2BundleProcessor"/>
+    <packageProcessor key="Test2::Bundle::Simple"
+                      implementationClass="com.perl5.lang.perl.extensions.test2.Test2BundleProcessor"/>
     <packageProcessor key="Test2::V0"
-                      implementationClass="com.perl5.lang.perl.extensions.test2.Test2V0Processor"/>
+                      implementationClass="com.perl5.lang.perl.extensions.test2.Test2BundleProcessor"/>
     <packageProcessor key="Data::Printer"
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.DataPrinterProcessor"/>
     <packageProcessor key="DDP"
