@@ -1,0 +1,5 @@
+package Test2Test;
+use Test2::Bundle::Extende<caret>d;
+
+
+1;

@@ -1,0 +1,5 @@
+package Test2Test;
+use Test2::Bundle::Mor<caret>e;
+
+
+1;

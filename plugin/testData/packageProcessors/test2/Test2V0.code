@@ -1,0 +1,5 @@
+package Test2Test;
+use Test2::V<caret>0;
+
+
+1;
