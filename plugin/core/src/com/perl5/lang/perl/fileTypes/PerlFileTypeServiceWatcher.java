@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,7 +48,9 @@ class PerlFileTypeServiceWatcher implements StartupActivity, ModuleListener, Mod
   }
 
   @Override
-  public void modulesRenamed(@NotNull Project project, @NotNull List<Module> modules, @NotNull Function<Module, String> oldNameProvider) {
+  public void modulesRenamed(@NotNull Project project,
+                             @NotNull List<? extends Module> modules,
+                             @NotNull Function<? super Module, String> oldNameProvider) {
     reset();
   }
 
