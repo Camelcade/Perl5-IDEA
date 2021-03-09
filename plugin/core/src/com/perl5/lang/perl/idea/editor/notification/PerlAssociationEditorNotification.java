@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 
 package com.perl5.lang.perl.idea.editor.notification;
 
-import com.intellij.ide.plugins.PluginManagerConfigurableProxy;
+import com.intellij.ide.plugins.PluginManagerConfigurable;
 import com.intellij.ide.scratch.ScratchUtil;
 import com.intellij.openapi.fileEditor.FileEditor;
 import com.intellij.openapi.fileTypes.FileNameMatcher;
@@ -85,7 +85,7 @@ public class PerlAssociationEditorNotification extends EditorNotifications.Provi
 
     panel.createActionLabel(
       PerlBundle.message("perl.configure.plugins"),
-      () -> ShowSettingsUtil.getInstance().editConfigurable((Project)null, new PluginManagerConfigurableProxy())
+      () -> ShowSettingsUtil.getInstance().editConfigurable((Project)null, new PluginManagerConfigurable())
     );
     panel.createActionLabel(
       PerlBundle.message("perl.configure.associations"),
