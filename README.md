@@ -2,7 +2,6 @@
 
 [![Java CI with Gradle](https://github.com/Camelcade/Perl5-IDEA/workflows/Java%20CI%20with%20Gradle/badge.svg)](https://github.com/Camelcade/Perl5-IDEA/actions?query=workflow%3A%22Java+CI+with+Gradle%22)
 [![Coverage Status](https://coveralls.io/repos/github/Camelcade/Perl5-IDEA/badge.svg?branch=master)](https://coveralls.io/github/Camelcade/Perl5-IDEA?branch=master)
-[![Chat on gitter](https://badges.gitter.im/Camelcade/Perl5-IDEA.png)](https://gitter.im/IntelliJ-Plugin-Perl5/Lobby)
 
 [Support with PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HJCUADZKY5G7E)
 |
@@ -35,9 +34,7 @@ If you want to participate in development, don't forget to read our [contributio
 
 * [Camelcade twitter](https://twitter.com/CamelcadeIDE) - here you may find links to the most recent dev builds
 * [Camelcade wiki](https://github.com/hurricup/Perl5-IDEA/wiki)
-* [Gitter chat](https://gitter.im/IntelliJ-Plugin-Perl5/Lobby)
-* [Google group](https://groups.google.com/forum/#!forum/camelcade)
-* [Onion parsing comparison](http://evstigneev.com/onion_all.png)
+* [Discussions](https://github.com/Camelcade/Perl5-IDEA/discussions)
 
 YourKit supports open source projects with its full-featured <a href="https://www.yourkit.com/java/profiler/index.jsp">Java Profiler</a>.
 
