@@ -21,6 +21,7 @@ import com.intellij.formatting.Block;
 import com.intellij.formatting.Indent;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.TokenType;
 import com.intellij.psi.formatter.FormatterUtil;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
@@ -91,11 +92,11 @@ public class PerlIndentProcessor implements PerlElementTypes {
 
     if (isFirst && BLOCK_OPENERS.contains(nodeType)
         || isLast && BLOCK_CLOSERS.contains(nodeType)
-      ) {
+    ) {
       return Indent.getNoneIndent();
     }
 
-    if (VARIABLE_DECLARATIONS.contains(parentNodeType) && ( nodeType == LEFT_PAREN || nodeType == RIGHT_PAREN )) {
+    if (VARIABLE_DECLARATIONS.contains(parentNodeType) && (nodeType == LEFT_PAREN || nodeType == RIGHT_PAREN)) {
       return Indent.getNoneIndent();
     }
 
@@ -128,7 +129,7 @@ public class PerlIndentProcessor implements PerlElementTypes {
       return Indent.getNoneIndent();
     }
 
-    if (parentNodeType == STRING_LIST && ( nodeType == QUOTE_SINGLE_OPEN || nodeType == QUOTE_SINGLE_CLOSE )) {
+    if (parentNodeType == STRING_LIST && (nodeType == QUOTE_SINGLE_OPEN || nodeType == QUOTE_SINGLE_CLOSE)) {
       return Indent.getNoneIndent();
     }
 
@@ -142,7 +143,7 @@ public class PerlIndentProcessor implements PerlElementTypes {
       if (parentNodeType == SUB_DEFINITION) {
         if (nodeType == COLON && nextSiblingElementType == ATTRIBUTE ||
             nodeType == ATTRIBUTE && prevSiblingElementType != COLON
-          ) {
+        ) {
           return Indent.getContinuationIndent();
         }
       }
@@ -150,7 +151,7 @@ public class PerlIndentProcessor implements PerlElementTypes {
       return Indent.getNoneIndent();
     }
 
-    if (isWithinChainedArrayOperation(node)) {
+    if (shouldPreventChainedOperationIndent(node)) {
       return Indent.getNoneIndent();
     }
 
@@ -169,23 +170,34 @@ public class PerlIndentProcessor implements PerlElementTypes {
     return forceFirstIndent ? Indent.getContinuationIndent() : Indent.getContinuationWithoutFirstIndent();
   }
 
-  private boolean isWithinChainedArrayOperation(ASTNode node) {
+  private boolean shouldPreventChainedOperationIndent(ASTNode node) {
     // check if were inside a multiline chained functional style call sequence using sort, map, grep or similar functions from List::Utils
-    Optional<ASTNode> nonSubParent = findFirstNonSubParent(node.getTreeParent());
-    Optional<ASTNode> nonSubGrandParent = nonSubParent.flatMap(n -> findFirstNonSubParent(n.getTreeParent()));
+    // this got a little complicated but we want the first parent is outside a possible function call
+    Optional<ASTNode> nonSubParent = Stream.iterate(node.getTreeParent(), Objects::nonNull, ASTNode::getTreeParent)
+      .filter(this::notInsideArraySub)
+      .filter(this::notInsideBlockArraySub)
+      .filter(this::isFirstOnLine)
+      .findFirst();
 
-    return Stream.of(nonSubParent, nonSubGrandParent)
+    return Stream.of(Optional.of(node), nonSubParent)
       .map(o -> o.map(ASTNode::getElementType).orElse(null))
       .allMatch(CHAINED_ARRAY_OPERATION_TOKENS::contains);
   }
 
-  private Optional<ASTNode> findFirstNonSubParent(ASTNode node) {
-    // find first parent of node not part of a subroutine arguments, this is the case of chaining list functions from List::Util or alike
-    // this got a little complicated but we want the first parent that is the actual SUB_CALL so wi can apply correct indentation there
-    return Stream.iterate(node, Objects::nonNull, ASTNode::getTreeParent)
-      .filter(this::notInsideArraySub)
-      .filter(this::notInsideBlockArraySub)
-      .findFirst();
+  private boolean isFirstOnLine(ASTNode node) {
+    // hack to lock inside leading whitespace for newline character
+    ASTNode parent = node.getTreeParent();
+    return hasLeftWhitespaceWithNewline(node)
+           || parent != null
+              && parent.getElementType() == CALL_ARGUMENTS
+              && hasLeftWhitespaceWithNewline(parent);
+  }
+
+  private boolean hasLeftWhitespaceWithNewline(ASTNode node) {
+    ASTNode prev = node.getTreePrev();
+    return prev != null
+           && prev.getElementType() == TokenType.WHITE_SPACE
+           && (prev.textContains('\n') || prev.textContains('\r'));
   }
 
   private boolean notInsideArraySub(ASTNode n) {
@@ -200,10 +212,10 @@ public class PerlIndentProcessor implements PerlElementTypes {
     // check if ancestor-types including startNode is exactly as specified types (up to length of types)
     return Stream.of(types)
       .reduce(Optional.of(startNode),
-         (currentNode, type) -> currentNode
-           .filter(n -> n.getElementType() == type)
-           .flatMap(n -> Optional.of(n.getTreeParent())),
-         (acc, node) -> acc.flatMap(n -> node))
+              (currentNode, type) -> currentNode
+                .filter(n -> n.getElementType() == type)
+                .flatMap(n -> Optional.of(n.getTreeParent())),
+              (acc, node) -> acc.flatMap(n -> node))
       .isEmpty();
   }
 
@@ -262,6 +274,5 @@ public class PerlIndentProcessor implements PerlElementTypes {
 
     return null;
   }
-
 }
 

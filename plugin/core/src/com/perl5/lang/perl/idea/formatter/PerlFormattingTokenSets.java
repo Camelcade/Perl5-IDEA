@@ -421,7 +421,8 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     SPLICE_EXPR,
     ARRAY_VARIABLE,
     ARRAY_CAST_EXPR,
-    SUB_CALL
+    SUB_CALL,
+    CALL_ARGUMENTS
   );
 
 }

@@ -52,7 +52,7 @@ my @array =
 my @array = block_array_fn {}
         grep {}
         sort {}
-        @ARGV
+        @ARGV;
 
 my @array = array_fn
         grep {}
