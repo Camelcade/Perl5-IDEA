@@ -36,3 +36,33 @@ grep {}
         sort {}
         block_array_fn {}
         @ARGV;
+
+my @array =
+        grep {}
+        sort {}
+        block_array_fn {}
+        @ARGV;
+
+my @array =
+        block_array_fn {}
+        grep {}
+        sort {}
+        @ARGV;
+
+my @array = block_array_fn {}
+        grep {}
+        sort {}
+        @ARGV
+
+my @array = array_fn
+        grep {}
+        sort {}
+        @ARGV;
+
+my @array = array_fn grep {}
+        sort {}
+        @ARGV;
+
+my @array = grep {}
+        array_fn sort {}
+        @ARGV;
