@@ -72,9 +72,7 @@ Stuff:
    [% END %]
 [% END %]
 
-<html>
-<head>http://template-toolkit.org/docs/manual/Variables.html</head>
-<body>
+<div>http://template-toolkit.org/docs/manual/Variables.html</div>
 
 [% foo   = 'Foo'
    items = [ 'one', 'two', 'three' ]
