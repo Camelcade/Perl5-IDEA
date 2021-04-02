@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -3021,13 +3021,15 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     var result = new ArrayList<MultiHostInjector>();
     for (MultiHostInjector injector : MultiHostInjector.MULTIHOST_INJECTOR_EP_NAME.getExtensions(getProject())) {
       for (Class<? extends PsiElement> aClass : injector.elementsToInjectIn()) {
-        if (!aClass.equals(PsiLanguageInjectionHost.class) && aClass.isInstance(host)) {
+        if (!aClass.equals(PsiLanguageInjectionHost.class) && !aClass.equals(PsiElement.class) && aClass.isInstance(host)) {
           result.add(injector);
           break;
         }
       }
     }
-    assertSize(1, result);
+    if (result.size() != 1) {
+      fail("Expected a single injector for " + host.getClass() + " got: " + result);
+    }
     return result.get(0);
   }
 }
