@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,6 +35,7 @@ import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.actionSystem.LangDataKeys;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.application.impl.NonBlockingReadActionImpl;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
@@ -335,6 +336,7 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
       ADAPTER_KEY.set(executionEnvironment, capturingAdapter);
       latch.countDown();
     });
+    NonBlockingReadActionImpl.waitForAsyncTaskCompletion();
     if (!latch.await(60, TimeUnit.SECONDS)) {
       fail("Process failed to start");
     }
