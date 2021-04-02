@@ -55,6 +55,7 @@ import com.intellij.testFramework.HeavyPlatformTestCase;
 import com.intellij.testFramework.PlatformTestUtil;
 import com.intellij.testFramework.TestActionEvent;
 import com.intellij.testFramework.UsefulTestCase;
+import com.intellij.util.ui.UIUtil;
 import com.intellij.util.ui.tree.TreeUtil;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
@@ -98,6 +99,10 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
   protected void setUp() throws Exception {
     super.setUp();
     addPerlBrewSdk(getPerl532DistibutionId("plugin_test"));
+  }
+
+  protected void disposeOnPerlTearDown(@NotNull Disposable disposable) {
+    Disposer.register(myPerlLightTestCaseDisposable, disposable);
   }
 
   @Override
@@ -343,11 +348,12 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
     RunContentDescriptor runContentDescriptor = refRunContentDescriptor.get();
     ProcessHandler processHandler = runContentDescriptor.getProcessHandler();
     assertNotNull(processHandler);
-    Disposer.register(myPerlLightTestCaseDisposable, runContentDescriptor);
-    Disposer.register(myPerlLightTestCaseDisposable, () -> {
+    disposeOnPerlTearDown(runContentDescriptor);
+    disposeOnPerlTearDown(() -> {
       if (!processHandler.isProcessTerminated()) {
         processHandler.destroyProcess();
       }
+      UIUtil.dispatchAllInvocationEvents();
     });
     return Pair.create(executionEnvironment, runContentDescriptor);
   }

@@ -294,6 +294,11 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
       Pair<ExecutionEnvironment, RunContentDescriptor> pair = executeConfiguration(runConfiguration, DefaultDebugExecutor.EXECUTOR_ID);
       XDebugSession debugSession = XDebuggerManager.getInstance(getProject()).getDebugSession(pair.second.getExecutionConsole());
       assertNotNull(debugSession);
+      disposeOnPerlTearDown(() -> {
+        if (!debugSession.isStopped()) {
+          debugSession.stop();
+        }
+      });
       return Trinity.create(pair.first, pair.second, debugSession);
     }
     catch (InterruptedException e) {
