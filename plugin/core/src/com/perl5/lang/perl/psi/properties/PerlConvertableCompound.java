@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,7 +32,7 @@ public interface PerlConvertableCompound extends PerlCompound {
    * @return true if compound may be converted to the statement modifier
    */
   default boolean isConvertableToModifier() {
-    PsiPerlBlock mainBlock = getBlockSmart();
+    PsiPerlBlock mainBlock = getBlock();
     if (mainBlock == null) {
       return false;
     }

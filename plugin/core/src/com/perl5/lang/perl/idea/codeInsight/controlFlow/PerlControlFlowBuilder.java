@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -265,7 +265,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       }
     }
     else if (element instanceof PerlBlockOwner) {
-      PsiPerlBlock block = ((PerlBlockOwner)element).getBlockSmart();
+      PsiPerlBlock block = ((PerlBlockOwner)element).getBlock();
       if (block != null) {
         return block;
       }
@@ -354,7 +354,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
         acceptSafe(subExpr);
       }
       else {
-        acceptSafe(o.getBlockSmart());
+        acceptSafe(o.getBlock());
       }
     }
 
@@ -525,7 +525,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       TransparentInstruction nextInstruction = createNextInstruction(o);
       myLoopNextInstructions.put(o, nextInstruction);
       myLoopRedoInstructions.put(o, startTransparentNode(o, "redo"));
-      acceptSafe(o.getBlockSmart());
+      acceptSafe(o.getBlock());
       addNodeAndCheckPending(nextInstruction);
       acceptSafe(o.getContinueBlock());
       myLoopNextInstructions.remove(o);
@@ -554,7 +554,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
 
       myLoopNextInstructions.put(o, nextAnchor);
       myLoopRedoInstructions.put(o, startTransparentNode(o, "redo"));
-      acceptSafe(o.getBlockSmart());
+      acceptSafe(o.getBlock());
 
       if (mutator != null) {
         addNodeAndCheckPending(nextAnchor);
@@ -578,7 +578,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       myLoopNextInstructions.put(o, nextInstruction);
       startIteratorConditionalNode(sourceElement); // fake condition if iterator is not finished yet
       myLoopRedoInstructions.put(o, startTransparentNode(o, "redo"));
-      acceptSafe(o.getBlockSmart());
+      acceptSafe(o.getBlock());
       addNodeAndCheckPending(nextInstruction);
       acceptSafe(o.getContinueBlock());
       addEdge(prevInstruction, loopInstruction);
@@ -610,7 +610,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
 
       startConditionalNode(conditionExpr, conditionValue);
       myLoopRedoInstructions.put(o, startTransparentNode(o, "redo"));
-      acceptSafe(o.getBlockSmart());
+      acceptSafe(o.getBlock());
       addNodeAndCheckPending(nextInstruction);
       acceptSafe(o.getContinueBlock());
 
@@ -994,7 +994,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       acceptSafe(perlConditionExpr);
       Instruction elseFlow = prevInstruction;
       prevInstruction = startConditionalNode(perlConditionExpr, true);
-      acceptSafe(o.getBlockSmart());
+      acceptSafe(o.getBlock());
 
       createEdgeToTopicalizer(topicalizer);
       prevInstruction = elseFlow;

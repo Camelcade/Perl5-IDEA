@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -75,7 +75,7 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
                                        @NotNull PerlSubExpr elementSub) {
     super(delegate, name, elementType, nameIdentifier);
     myNamespaceName = namespaceName;
-    mySubDefinitionBody = elementSub.getBlockSmart();
+    mySubDefinitionBody = elementSub.getBlock();
     myAnnotationsProvider = AtomicNullableLazyValue.createValue(
       () -> PerlSubAnnotations.computeForLightElement(delegate, nameIdentifier));
     mySubArgumentsProvider = AtomicNotNullLazyValue.createValue(
