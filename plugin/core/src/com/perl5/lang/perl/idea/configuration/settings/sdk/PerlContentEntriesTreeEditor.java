@@ -108,16 +108,9 @@ public class PerlContentEntriesTreeEditor implements UnnamedConfigurable, Dispos
     descriptor.setShowFileSystemRoots(false);
     descriptor.setRoots(contentRoots);
 
-    myFileSystemTree = new FileSystemTreeImpl(module.getProject(),
-                                              descriptor,
-                                              myTree,
-                                              new MyTreeCellRenderer(),
-                                              () -> {
-                                                myFileSystemTree.updateTree();
-                                                //myFileSystemTree.select(file, null);
-                                              },
-                                              null) {
-    };
+    myFileSystemTree = new FileSystemTreeImpl(
+      module.getProject(), descriptor, myTree, new MyTreeCellRenderer(), () -> myFileSystemTree.updateTree(), null
+    );
     myFileSystemTree.showHiddens(true);
     Disposer.register(this, myFileSystemTree);
 
