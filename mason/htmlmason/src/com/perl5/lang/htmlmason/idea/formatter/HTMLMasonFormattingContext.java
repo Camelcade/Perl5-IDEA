@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,12 +16,9 @@
 
 package com.perl5.lang.htmlmason.idea.formatter;
 
-import com.intellij.formatting.FormattingMode;
+import com.intellij.formatting.FormattingContext;
 import com.intellij.formatting.SpacingBuilder;
 import com.intellij.lang.ASTNode;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
@@ -37,15 +34,12 @@ public class HTMLMasonFormattingContext extends AbstractMasonFormattingContext {
     HTML_MASON_CALL_FILTERING_OPENER
   );
 
-  public HTMLMasonFormattingContext(@NotNull PsiElement element,
-                                    @NotNull TextRange range,
-                                    @NotNull CodeStyleSettings settings,
-                                    @NotNull FormattingMode mode) {
-    super(element, range, settings, mode);
+  public HTMLMasonFormattingContext(@NotNull FormattingContext formattingContext) {
+    super(formattingContext, formattingContext.getPsiElement().getTextRange());
   }
 
   @Override
-  protected SpacingBuilder createSpacingBuilder() {
+  protected @NotNull SpacingBuilder createSpacingBuilder() {
     return super.createSpacingBuilder()
       .after(SIMPLE_OPENERS).spaces(1)
       .before(HTML_MASON_BLOCK_CLOSER).spaces(1)

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,12 +20,11 @@ import com.intellij.formatting.*;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Document;
+import com.intellij.openapi.util.NotNullLazyValue;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
 import com.intellij.psi.TokenType;
-import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.intellij.psi.impl.source.tree.CompositeElement;
 import com.intellij.psi.impl.source.tree.LeafElement;
@@ -62,6 +61,7 @@ import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
 
 public class PerlFormattingContext implements PerlFormattingTokenSets {
   private static final Logger LOG = Logger.getInstance(PerlFormattingContext.class);
+  private final @NotNull FormattingContext myFormattingContext;
   private final Map<ASTNode, Wrap> myWrapMap = new THashMap<>();
   private final Map<Integer, Alignment> myAssignmentsAlignmentsMap = new THashMap<>();
   private final TIntObjectHashMap<Alignment> myCommentsAlignmentMap = new TIntObjectHashMap<>();
@@ -140,11 +140,8 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
    * Contains a bitmask of lines with comments not started with newline
    */
   private final @Nullable Document myDocument;
-  private final @NotNull CommonCodeStyleSettings mySettings;
-  private final @NotNull PerlCodeStyleSettings myPerlSettings;
-  private final @NotNull SpacingBuilder mySpacingBuilder;
-  private final @NotNull TextRange myTextRange;
-  private final @NotNull FormattingMode myFormattingMode;
+  private final @NotNull NotNullLazyValue<SpacingBuilder> mySpacingBuilderProvider =
+    NotNullLazyValue.createValue(this::createSpacingBuilder);
   /**
    * Maps line numbers to the offset of first here-doc openers. Or {@link Integer.MAX_VALUE} if there is none
    */
@@ -162,33 +159,34 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     OPERATOR_COLLISIONS_MAP.putValue(OPERATOR_SMARTMATCH, OPERATOR_BITWISE_NOT);
   }
 
-  public PerlFormattingContext(@NotNull PsiElement element,
-                               @NotNull TextRange textRange,
-                               @NotNull CodeStyleSettings settings,
-                               @NotNull FormattingMode formattingMode) {
-    mySettings = settings.getCommonSettings(PerlLanguage.INSTANCE);
-    myPerlSettings = settings.getCustomSettings(PerlCodeStyleSettings.class);
-    mySpacingBuilder = createSpacingBuilder();
-    PsiFile containingFile = element.getContainingFile();
-    myDocument = containingFile == null ? null : containingFile.getViewProvider().getDocument();
-    myFormattingMode = formattingMode;
-    myTextRange = textRange;
+  public PerlFormattingContext(@NotNull FormattingContext formattingContext) {
+    myFormattingContext = formattingContext;
+    myDocument = myFormattingContext.getContainingFile().getViewProvider().getDocument();
   }
 
-  protected SpacingBuilder createSpacingBuilder() {
-    return PerlSpacingBuilderFactory.createSpacingBuilder(mySettings, myPerlSettings);
+  public PerlFormattingContext(@NotNull FormattingContext formattingContext, @NotNull TextRange adjustedRange) {
+    this(FormattingContext.create(
+      formattingContext.getPsiElement(),
+      adjustedRange,
+      formattingContext.getCodeStyleSettings(),
+      formattingContext.getFormattingMode()
+    ));
+  }
+
+  protected @NotNull SpacingBuilder createSpacingBuilder() {
+    return PerlSpacingBuilderFactory.createSpacingBuilder(getSettings(), getPerlSettings());
   }
 
   public @NotNull CommonCodeStyleSettings getSettings() {
-    return mySettings;
+    return myFormattingContext.getCodeStyleSettings().getCommonSettings(PerlLanguage.INSTANCE);
   }
 
   public @NotNull PerlCodeStyleSettings getPerlSettings() {
-    return myPerlSettings;
+    return myFormattingContext.getCodeStyleSettings().getCustomSettings(PerlCodeStyleSettings.class);
   }
 
   public @NotNull SpacingBuilder getSpacingBuilder() {
-    return mySpacingBuilder;
+    return mySpacingBuilderProvider.getValue();
   }
 
   private @Nullable Document getDocument() {
@@ -384,15 +382,16 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     IElementType parentNodeType = PsiUtilCore.getElementType(parentNode);
     IElementType childNodeType = PsiUtilCore.getElementType(childNode);
     PerlCodeStyleSettings perlCodeStyleSettings = getPerlSettings();
+    var commonCodeStyleSettings = getSettings();
     if (childNodeType == FAT_COMMA &&
         parentNodeType == COMMA_SEQUENCE_EXPR &&
         perlCodeStyleSettings.ALIGN_FAT_COMMA) {
       return myOperatorsAlignmentsMap.get(parentNode);
     }
-    else if (parentNodeType == TERNARY_EXPR && mySettings.ALIGN_MULTILINE_TERNARY_OPERATION) {
+    else if (parentNodeType == TERNARY_EXPR && commonCodeStyleSettings.ALIGN_MULTILINE_TERNARY_OPERATION) {
       return myElementsALignmentsMap.get(parentNode);
     }
-    else if (parentNodeType == DEREF_EXPR && mySettings.ALIGN_MULTILINE_CHAINED_METHODS) {
+    else if (parentNodeType == DEREF_EXPR && commonCodeStyleSettings.ALIGN_MULTILINE_CHAINED_METHODS) {
       if (perlCodeStyleSettings.METHOD_CALL_CHAIN_SIGN_NEXT_LINE) {
         if (childNodeType == OPERATOR_DEREFERENCE) {
           return myOperatorsAlignmentsMap.get(parentNode);
@@ -407,7 +406,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     else if (childNodeType == STRING_BARE && parentNodeType == STRING_LIST && perlCodeStyleSettings.ALIGN_QW_ELEMENTS) {
       return myStringListAlignmentMap.get(parentNode).get(childNode);
     }
-    else if (childNodeType == COMMENT_LINE && myPerlSettings.ALIGN_COMMENTS_ON_CONSEQUENT_LINES) {
+    else if (childNodeType == COMMENT_LINE && perlCodeStyleSettings.ALIGN_COMMENTS_ON_CONSEQUENT_LINES) {
       return getLineCommentAlignment(childNode);
     }
     else if (parentNodeType == COMMA_SEQUENCE_EXPR &&
@@ -415,34 +414,34 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
              childNodeType != FAT_COMMA) {
       IElementType grandParentNodeType = PsiUtilCore.getElementType(parentNode.getTreeParent());
       if (grandParentNodeType == CALL_ARGUMENTS || grandParentNodeType == PARENTHESISED_CALL_ARGUMENTS) {
-        if (mySettings.ALIGN_MULTILINE_PARAMETERS_IN_CALLS) {
+        if (commonCodeStyleSettings.ALIGN_MULTILINE_PARAMETERS_IN_CALLS) {
           return myElementsALignmentsMap.get(parentNode);
         }
       }
-      else if (mySettings.ALIGN_MULTILINE_ARRAY_INITIALIZER_EXPRESSION) {
+      else if (commonCodeStyleSettings.ALIGN_MULTILINE_ARRAY_INITIALIZER_EXPRESSION) {
         return myElementsALignmentsMap.get(parentNode);
       }
     }
     else if (parentNodeType == SIGNATURE_CONTENT) {
-      return mySettings.ALIGN_MULTILINE_PARAMETERS ? myElementsALignmentsMap.get(parentNode) : null;
+      return commonCodeStyleSettings.ALIGN_MULTILINE_PARAMETERS ? myElementsALignmentsMap.get(parentNode) : null;
     }
     else if ((childNodeType == VARIABLE_DECLARATION_ELEMENT ||
               (childNodeType == UNDEF_EXPR && PerlTokenSets.VARIABLE_DECLARATIONS.contains(parentNodeType))) &&
-             myPerlSettings.ALIGN_VARIABLE_DECLARATIONS) {
+             perlCodeStyleSettings.ALIGN_VARIABLE_DECLARATIONS) {
       return myElementsALignmentsMap.get(parentNode);
     }
-    else if (BINARY_EXPRESSIONS.contains(parentNodeType) && mySettings.ALIGN_MULTILINE_BINARY_OPERATION) {
+    else if (BINARY_EXPRESSIONS.contains(parentNodeType) && commonCodeStyleSettings.ALIGN_MULTILINE_BINARY_OPERATION) {
       return myElementsALignmentsMap.get(parentNode);
     }
     else if ((parentNodeType == ASSIGN_EXPR || parentNodeType == SIGNATURE_ELEMENT) && OPERATORS_ASSIGNMENT.contains(childNodeType)) {
-      if (myPerlSettings.ALIGN_CONSECUTIVE_ASSIGNMENTS == ALIGN_LINES) {
+      if (perlCodeStyleSettings.ALIGN_CONSECUTIVE_ASSIGNMENTS == ALIGN_LINES) {
         return getLineBasedAlignment(childNode, myAssignmentsAlignmentsMap);
       }
-      else if (myPerlSettings.ALIGN_CONSECUTIVE_ASSIGNMENTS == ALIGN_IN_STATEMENT) {
+      else if (perlCodeStyleSettings.ALIGN_CONSECUTIVE_ASSIGNMENTS == ALIGN_IN_STATEMENT) {
         return myAssignmentsElementAlignmentsMap.get(parentNodeType == SIGNATURE_ELEMENT ? parentNode.getTreeParent() : parentNode);
       }
     }
-    else if (myPerlSettings.ALIGN_ATTRIBUTES && parentNodeType == ATTRIBUTES &&
+    else if (perlCodeStyleSettings.ALIGN_ATTRIBUTES && parentNodeType == ATTRIBUTES &&
              (childNodeType == COLON || isAttributeWithoutColon(childNode))) {
       return myElementsALignmentsMap.get(parentNode);
     }
@@ -484,65 +483,67 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     ASTNode parentNode = childNode.getTreeParent();
     IElementType parentNodeType = PsiUtilCore.getElementType(parentNode);
     IElementType childNodeType = PsiUtilCore.getElementType(childNode);
+    var commonCodeStyleSettings = getSettings();
+    var perlCodeStyleSettings = getPerlSettings();
 
     if (isNewLineForbiddenAt(childNode)) {
       return null;
     }
     else if (childNodeType == COMMENT_LINE) {
-      return mySettings.WRAP_COMMENTS ? Wrap.createWrap(WRAP_AS_NEEDED, false) : Wrap.createWrap(NONE, false);
+      return commonCodeStyleSettings.WRAP_COMMENTS ? Wrap.createWrap(WRAP_AS_NEEDED, false) : Wrap.createWrap(NONE, false);
     }
     else if (parentNodeType == TERNARY_EXPR) {
-      if (mySettings.TERNARY_OPERATION_SIGNS_ON_NEXT_LINE) {
+      if (commonCodeStyleSettings.TERNARY_OPERATION_SIGNS_ON_NEXT_LINE) {
         if (childNodeType == COLON || childNodeType == QUESTION) {
-          return getWrapBySettings(parentNode, mySettings.TERNARY_OPERATION_WRAP, true);
+          return getWrapBySettings(parentNode, commonCodeStyleSettings.TERNARY_OPERATION_WRAP, true);
         }
       }
       else if (childNodeType != COLON && childNodeType != QUESTION) {
-        return getWrapBySettings(parentNode, mySettings.TERNARY_OPERATION_WRAP, false);
+        return getWrapBySettings(parentNode, commonCodeStyleSettings.TERNARY_OPERATION_WRAP, false);
       }
     }
     else if (parentNodeType == SIGNATURE_CONTENT && childNodeType != COMMA && childNodeType != FAT_COMMA) {
-      return getWrapBySettings(parentNode, mySettings.METHOD_PARAMETERS_WRAP, false);
+      return getWrapBySettings(parentNode, commonCodeStyleSettings.METHOD_PARAMETERS_WRAP, false);
     }
     else if (parentNodeType == COMMA_SEQUENCE_EXPR && childNodeType != COMMA && childNodeType != FAT_COMMA) {
       IElementType grandParentNodeType = PsiUtilCore.getElementType(parentNode.getTreeParent());
       if (grandParentNodeType == CALL_ARGUMENTS || grandParentNodeType == PARENTHESISED_CALL_ARGUMENTS) {
-        return getWrapBySettings(parentNode, mySettings.CALL_PARAMETERS_WRAP, false);
+        return getWrapBySettings(parentNode, commonCodeStyleSettings.CALL_PARAMETERS_WRAP, false);
       }
       else {
-        return getWrapBySettings(parentNode, mySettings.ARRAY_INITIALIZER_WRAP, false);
+        return getWrapBySettings(parentNode, commonCodeStyleSettings.ARRAY_INITIALIZER_WRAP, false);
       }
     }
     else if (parentNodeType == STRING_LIST && (childNodeType == STRING_BARE || childNodeType == QUOTE_SINGLE_CLOSE)) {
-      return getWrapBySettings(parentNode, myPerlSettings.QW_LIST_WRAP, false);
+      return getWrapBySettings(parentNode, perlCodeStyleSettings.QW_LIST_WRAP, false);
     }
     else if (childNodeType == VARIABLE_DECLARATION_ELEMENT && parentNodeType != SIGNATURE_ELEMENT ||
              (childNodeType == UNDEF_EXPR && PerlTokenSets.VARIABLE_DECLARATIONS.contains(parentNodeType))) {
-      return getWrapBySettings(parentNode, myPerlSettings.VARIABLE_DECLARATION_WRAP, false);
+      return getWrapBySettings(parentNode, perlCodeStyleSettings.VARIABLE_DECLARATION_WRAP, false);
     }
     else if (parentNodeType == DEREF_EXPR) {
-      if (myPerlSettings.METHOD_CALL_CHAIN_SIGN_NEXT_LINE) {
+      if (perlCodeStyleSettings.METHOD_CALL_CHAIN_SIGN_NEXT_LINE) {
         if (childNodeType == OPERATOR_DEREFERENCE) {
-          return getWrapBySettings(parentNode, mySettings.METHOD_CALL_CHAIN_WRAP, true);
+          return getWrapBySettings(parentNode, commonCodeStyleSettings.METHOD_CALL_CHAIN_WRAP, true);
         }
       }
       else {
         if (childNodeType != OPERATOR_DEREFERENCE) {
-          return getWrapBySettings(parentNode, mySettings.METHOD_CALL_CHAIN_WRAP, false);
+          return getWrapBySettings(parentNode, commonCodeStyleSettings.METHOD_CALL_CHAIN_WRAP, false);
         }
       }
     }
     else if (BINARY_EXPRESSIONS.contains(parentNodeType)) {
-      if (mySettings.BINARY_OPERATION_SIGN_ON_NEXT_LINE && BINARY_OPERATORS.contains(childNodeType)) {
-        return getWrapBySettings(parentNode, mySettings.BINARY_OPERATION_WRAP, true);
+      if (commonCodeStyleSettings.BINARY_OPERATION_SIGN_ON_NEXT_LINE && BINARY_OPERATORS.contains(childNodeType)) {
+        return getWrapBySettings(parentNode, commonCodeStyleSettings.BINARY_OPERATION_WRAP, true);
       }
-      else if (!mySettings.BINARY_OPERATION_SIGN_ON_NEXT_LINE && !BINARY_OPERATORS.contains(childNodeType)) {
-        return getWrapBySettings(parentNode, mySettings.BINARY_OPERATION_WRAP, false);
+      else if (!commonCodeStyleSettings.BINARY_OPERATION_SIGN_ON_NEXT_LINE && !BINARY_OPERATORS.contains(childNodeType)) {
+        return getWrapBySettings(parentNode, commonCodeStyleSettings.BINARY_OPERATION_WRAP, false);
       }
     }
     else if (parentNodeType == ASSIGN_EXPR &&
-             OPERATORS_ASSIGNMENT.contains(childNodeType) == mySettings.PLACE_ASSIGNMENT_SIGN_ON_NEXT_LINE) {
-      return getWrapBySettings(parentNode, mySettings.ASSIGNMENT_WRAP, OPERATORS_ASSIGNMENT.contains(childNodeType));
+             OPERATORS_ASSIGNMENT.contains(childNodeType) == commonCodeStyleSettings.PLACE_ASSIGNMENT_SIGN_ON_NEXT_LINE) {
+      return getWrapBySettings(parentNode, commonCodeStyleSettings.ASSIGNMENT_WRAP, OPERATORS_ASSIGNMENT.contains(childNodeType));
     }
     else if (parentNodeType == SIGNATURE_ELEMENT) {
       PsiElement signatureElement = parentNode.getPsi();
@@ -551,12 +552,12 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       PsiElement defaultValueElement = ((PerlSignatureElement)signatureElement).getDefaultValueElement();
       if (defaultValueElement != null && declarationElement != null &&
           declarationElement.getStartOffsetInParent() < childNode.getStartOffsetInParent() &&
-          (childNodeType == OPERATOR_ASSIGN) == mySettings.PLACE_ASSIGNMENT_SIGN_ON_NEXT_LINE) {
-        return getWrapBySettings(parentNode, mySettings.ASSIGNMENT_WRAP, true);
+          (childNodeType == OPERATOR_ASSIGN) == commonCodeStyleSettings.PLACE_ASSIGNMENT_SIGN_ON_NEXT_LINE) {
+        return getWrapBySettings(parentNode, commonCodeStyleSettings.ASSIGNMENT_WRAP, true);
       }
     }
     else if (parentNodeType == ATTRIBUTES && (childNodeType == COLON || isAttributeWithoutColon(childNode))) {
-      return getWrapBySettings(parentNode, myPerlSettings.ATTRIBUTES_WRAP, false);
+      return getWrapBySettings(parentNode, perlCodeStyleSettings.ATTRIBUTES_WRAP, false);
     }
     return null;
   }
@@ -595,8 +596,10 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     ASTNode node = block.getNode();
     IElementType elementType = PsiUtilCore.getElementType(node);
     ASTNode parentNode = node == null ? null : node.getTreeParent();
+    var commonCodeStyleSettings = getSettings();
+    var perlCodeStyleSettings = getPerlSettings();
 
-    if (myPerlSettings.ALIGN_CONSECUTIVE_ASSIGNMENTS != NO_ALIGN && elementType == SIGNATURE_ELEMENT) {
+    if (perlCodeStyleSettings.ALIGN_CONSECUTIVE_ASSIGNMENTS != NO_ALIGN && elementType == SIGNATURE_ELEMENT) {
       IElementType lastChildNodeType = PsiUtilCore.getElementType(node.getLastChildNode());
       if (lastChildNodeType == OPERATOR_ASSIGN) {
         return null;
@@ -604,24 +607,24 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       PsiElement psiElement = node.getPsi();
       assert psiElement instanceof PerlSignatureElement;
       if (((PerlSignatureElement)psiElement).hasDeclarationElement()) {
-        if (myPerlSettings.ALIGN_CONSECUTIVE_ASSIGNMENTS == ALIGN_IN_STATEMENT) {
+        if (perlCodeStyleSettings.ALIGN_CONSECUTIVE_ASSIGNMENTS == ALIGN_IN_STATEMENT) {
           return myAssignmentsElementAlignmentsMap.get(parentNode);
         }
-        else if (myPerlSettings.ALIGN_CONSECUTIVE_ASSIGNMENTS == ALIGN_LINES) {
+        else if (perlCodeStyleSettings.ALIGN_CONSECUTIVE_ASSIGNMENTS == ALIGN_LINES) {
           return getLineBasedAlignment(node, myAssignmentsAlignmentsMap);
         }
       }
     }
     if (elementType == SIGNATURE_CONTENT) {
-      return mySettings.ALIGN_MULTILINE_PARAMETERS ? myElementsALignmentsMap.get(block.getNode()) : null;
+      return commonCodeStyleSettings.ALIGN_MULTILINE_PARAMETERS ? myElementsALignmentsMap.get(block.getNode()) : null;
     }
-    if (elementType == ATTRIBUTES && myPerlSettings.ALIGN_ATTRIBUTES) {
+    if (elementType == ATTRIBUTES && perlCodeStyleSettings.ALIGN_ATTRIBUTES) {
       return myElementsALignmentsMap.get(node);
     }
     if (elementType == COMMA_SEQUENCE_EXPR) {
       IElementType parentNodeType = PsiUtilCore.getElementType(parentNode);
       if (parentNodeType == CALL_ARGUMENTS || parentNodeType == PARENTHESISED_CALL_ARGUMENTS) {
-        if (mySettings.ALIGN_MULTILINE_PARAMETERS_IN_CALLS) {
+        if (commonCodeStyleSettings.ALIGN_MULTILINE_PARAMETERS_IN_CALLS) {
           return myElementsALignmentsMap.get(node);
         }
       }
@@ -702,10 +705,10 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
   }
 
   public @NotNull FormattingMode getFormattingMode() {
-    return myFormattingMode;
+    return myFormattingContext.getFormattingMode();
   }
 
   public @NotNull TextRange getTextRange() {
-    return myTextRange;
+    return myFormattingContext.getFormattingRange();
   }
 }

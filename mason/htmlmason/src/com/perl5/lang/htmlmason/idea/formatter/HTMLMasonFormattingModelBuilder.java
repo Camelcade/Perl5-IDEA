@@ -28,10 +28,9 @@ public class HTMLMasonFormattingModelBuilder extends PerlTemplatingFormattingMod
   @Override
   public @NotNull FormattingModel createModel(@NotNull FormattingContext formattingContext) {
     var element = formattingContext.getPsiElement();
-    var settings = formattingContext.getCodeStyleSettings();
-    var mode = formattingContext.getFormattingMode();
     PerlFormattingBlock block = new HTMLMasonFormattingBlock(
-      element.getNode(), new HTMLMasonFormattingContext(element, element.getTextRange(), settings, mode));
-    return FormattingModelProvider.createFormattingModelForPsiFile(element.getContainingFile(), block, settings);
+      element.getNode(), new HTMLMasonFormattingContext(formattingContext));
+    return FormattingModelProvider.createFormattingModelForPsiFile(element.getContainingFile(), block,
+                                                                   formattingContext.getCodeStyleSettings());
   }
 }

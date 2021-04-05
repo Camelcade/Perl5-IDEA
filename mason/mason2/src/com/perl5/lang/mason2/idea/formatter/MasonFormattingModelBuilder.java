@@ -31,7 +31,7 @@ public class MasonFormattingModelBuilder extends PerlTemplatingFormattingModelBu
     var settings = formattingContext.getCodeStyleSettings();
     var mode = formattingContext.getFormattingMode();
     PerlFormattingBlock block = new MasonFormattingBlock(
-      element.getNode(), new MasonFormattingContext(element, element.getTextRange(), settings, mode));
+      element.getNode(), new MasonFormattingContext(formattingContext));
     return FormattingModelProvider.createFormattingModelForPsiFile(element.getContainingFile(), block, settings);
   }
 }

@@ -28,10 +28,8 @@ public class EmbeddedPerlFormattingModelBuilder extends PerlTemplatingFormatting
   @Override
   public @NotNull FormattingModel createModel(@NotNull FormattingContext formattingContext) {
     var element = formattingContext.getPsiElement();
-    var settings = formattingContext.getCodeStyleSettings();
-    var mode = formattingContext.getFormattingMode();
-    PerlFormattingBlock block = new EmbeddedPerlFormattingBlock(
-      element.getNode(), new EmbeddedPerlFormattingContext(element, element.getTextRange(), settings, mode));
-    return FormattingModelProvider.createFormattingModelForPsiFile(element.getContainingFile(), block, settings);
+    PerlFormattingBlock block = new EmbeddedPerlFormattingBlock(element.getNode(), new EmbeddedPerlFormattingContext(formattingContext));
+    return FormattingModelProvider.createFormattingModelForPsiFile(element.getContainingFile(), block,
+                                                                   formattingContext.getCodeStyleSettings());
   }
 }

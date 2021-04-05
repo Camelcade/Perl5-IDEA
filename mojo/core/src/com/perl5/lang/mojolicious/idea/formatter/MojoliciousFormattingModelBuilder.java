@@ -29,10 +29,9 @@ public class MojoliciousFormattingModelBuilder extends PerlTemplatingFormattingM
   @Override
   public @NotNull FormattingModel createModel(@NotNull FormattingContext formattingContext) {
     var element = formattingContext.getPsiElement();
-    var settings = formattingContext.getCodeStyleSettings();
-    var mode = formattingContext.getFormattingMode();
     PerlFormattingBlock block = new MojoliciousFormattingBlock(
-      element.getNode(), new MojoliciousFormattingContext(element, element.getTextRange(), settings, mode));
-    return FormattingModelProvider.createFormattingModelForPsiFile(element.getContainingFile(), block, settings);
+      element.getNode(), new MojoliciousFormattingContext(formattingContext));
+    return FormattingModelProvider.createFormattingModelForPsiFile(element.getContainingFile(), block,
+                                                                   formattingContext.getCodeStyleSettings());
   }
 }
