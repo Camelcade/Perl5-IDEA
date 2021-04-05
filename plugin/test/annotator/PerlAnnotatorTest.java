@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -115,6 +115,7 @@ public class PerlAnnotatorTest extends PerlLightTestCase {
   // duplicates caused by injection (double check)
   @Test
   public void testSpellChecker() {
+    //noinspection deprecation
     ExpectedHighlightingData.expectedDuplicatedHighlighting(() -> doInspectionTest(SpellCheckingInspection.class));
   }
 
@@ -284,6 +285,7 @@ public class PerlAnnotatorTest extends PerlLightTestCase {
   // Caused by multiple entities created from one identifier
   @Test
   public void testClassAccessorDeprecation() {
+    //noinspection deprecation
     ExpectedHighlightingData.expectedDuplicatedHighlighting(this::doDeprecationTest);
   }
 
