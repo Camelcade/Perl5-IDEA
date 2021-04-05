@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 package com.perl5.lang.htmlmason.idea.livetemplates;
 
+import com.intellij.codeInsight.template.TemplateActionContext;
 import com.intellij.codeInsight.template.TemplateContextType;
 import com.intellij.codeInsight.template.XmlContextType;
 import com.intellij.lang.Language;
@@ -38,10 +39,12 @@ public abstract class AbstractMasonTemplateContextType extends TemplateContextTy
   protected abstract boolean isMyFile(PsiFile file);
 
   @Override
-  public boolean isInContext(@NotNull PsiFile file, int offset) {
-    return isMyLanguage(PsiUtilCore.getLanguageAtOffset(file, offset))
-           && !XmlContextType.isEmbeddedContent(file, offset)
-           && isMyFile(file);
+  public boolean isInContext(@NotNull TemplateActionContext templateActionContext) {
+    var psiFile = templateActionContext.getFile();
+    var startOffset = templateActionContext.getStartOffset();
+    return isMyLanguage(PsiUtilCore.getLanguageAtOffset(psiFile, startOffset))
+           && !XmlContextType.isEmbeddedContent(psiFile, startOffset)
+           && isMyFile(psiFile);
   }
 
   static boolean isMyLanguage(Language language) {
