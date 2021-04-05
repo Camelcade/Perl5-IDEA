@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,15 +16,16 @@
 
 package com.perl5.lang.perl.idea.formatter;
 
-import com.intellij.formatting.*;
+import com.intellij.formatting.Block;
+import com.intellij.formatting.FormattingContext;
+import com.intellij.formatting.FormattingModel;
+import com.intellij.formatting.FormattingModelBuilder;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.Key;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import com.intellij.psi.codeStyle.CodeStyleSettings;
-import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.intellij.psi.impl.source.tree.FileElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlFormattingBlock;
@@ -36,22 +37,16 @@ import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.FORMATT
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.FORMATTING_SUFFICIENT_BLOCKS;
 
 
-public class PerlFormattingModelBuilder implements FormattingModelBuilderEx {
+public class PerlFormattingModelBuilder implements FormattingModelBuilder {
   private static final Logger LOG = Logger.getInstance(PerlFormattingModelBuilder.class);
   private static final Key<TextRange> COMPUTED_RANGE_KEY = Key.create("perl5.formatting.computed.range");
 
   @Override
-  public @NotNull FormattingModel createModel(@NotNull PsiElement element,
-                                              @NotNull CodeStyleSettings settings,
-                                              @NotNull FormattingMode mode) {
-    return createModel(element, element.getTextRange(), settings, mode);
-  }
-
-  @Override
-  public @NotNull FormattingModel createModel(@NotNull PsiElement element,
-                                              @NotNull TextRange range,
-                                              @NotNull CodeStyleSettings settings,
-                                              @NotNull FormattingMode mode) {
+  public @NotNull FormattingModel createModel(@NotNull FormattingContext formattingContext) {
+    var element = formattingContext.getPsiElement();
+    var range = formattingContext.getFormattingRange();
+    var settings = formattingContext.getCodeStyleSettings();
+    var mode = formattingContext.getFormattingMode();
     PerlTimeLogger logger = PerlTimeLogger.create(LOG);
     TextRange computedRange = COMPUTED_RANGE_KEY.get(element);
     COMPUTED_RANGE_KEY.set(element, null);
@@ -154,18 +149,6 @@ public class PerlFormattingModelBuilder implements FormattingModelBuilderEx {
     }
     LOG.debug("Could not find self-sufficient block, full range");
     return psiFile.getTextRange();
-  }
-
-  @Override
-  public @NotNull FormattingModel createModel(PsiElement element, CodeStyleSettings settings) {
-    return createModel(element, element.getTextRange(), settings, FormattingMode.REFORMAT);
-  }
-
-  @Override
-  public CommonCodeStyleSettings.@Nullable IndentOptions getIndentOptionsToUse(@NotNull PsiFile file,
-                                                                               @NotNull FormatTextRanges ranges,
-                                                                               @NotNull CodeStyleSettings settings) {
-    return null;
   }
 
   @Override

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,6 @@ import com.intellij.formatting.templateLanguages.DataLanguageBlockWrapper;
 import com.intellij.formatting.templateLanguages.TemplateLanguageBlock;
 import com.intellij.formatting.templateLanguages.TemplateLanguageFormattingModelBuilder;
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
@@ -53,14 +52,15 @@ public class TemplateToolkitFormattingModelBuilder extends TemplateLanguageForma
   private InjectedLanguageBlockBuilder myInjectedLanguageBlockBuilder;
 
   /**
-   * We have to override {@link com.intellij.formatting.templateLanguages.TemplateLanguageFormattingModelBuilder#createModel}
+   * We have to override {@link TemplateLanguageFormattingModelBuilder#createModel(com.intellij.formatting.FormattingContext)}
    * since after we delegate to some templated languages, those languages (xml/html for sure, potentially others)
    * delegate right back to us to format the TemplateToolkitElementTypes.TT2_OUTER token we tell them to ignore,
    * causing a stack-overflowing loop of polite format-delegation.
    */
-
   @Override
-  public @NotNull FormattingModel createModel(PsiElement element, CodeStyleSettings settings) {
+  public @NotNull FormattingModel createModel(@NotNull FormattingContext formattingContext) {
+    var settings = formattingContext.getCodeStyleSettings();
+    var element = formattingContext.getPsiElement();
     if (mySpacingBuilder == null) {
       createSpacingBuilder(settings);
     }
@@ -76,7 +76,7 @@ public class TemplateToolkitFormattingModelBuilder extends TemplateLanguageForma
     if (node.getElementType() == TemplateToolkitElementTypes.TT2_OUTER) {
       // If we're looking at a TemplateToolkitElementTypes.TT2_OUTER element, then we've been invoked by our templated
       // language.  Make a dummy block to allow that formatter to continue
-      return new SimpleTemplateLanguageFormattingModelBuilder().createModel(element, settings);
+      return new SimpleTemplateLanguageFormattingModelBuilder().createModel(formattingContext);
     }
     else {
       rootBlock = getRootBlock(file, file.getViewProvider(), settings);
