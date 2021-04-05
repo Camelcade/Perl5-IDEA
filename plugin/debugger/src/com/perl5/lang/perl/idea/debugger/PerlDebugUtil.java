@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -80,26 +80,28 @@ public class PerlDebugUtil {
     PerlDebugThread thread = perlStackFrame.getPerlExecutionStack().getSuspendContext().getDebugThread();
 
     final int frameSize = XCompositeNode.MAX_CHILDREN_TO_SHOW;
-    thread.sendCommandAndGetResponse("getchildren", new PerlValueRequestDescriptor(offset[0], frameSize, key),
-                                     new PerlDebuggingTransactionHandler() {
-                                       @Override
-                                       public void run(JsonObject jsonObject, JsonDeserializationContext jsonDeserializationContext) {
-                                         PerlValueDescriptor[] descriptors = jsonDeserializationContext.deserialize(
-                                           jsonObject.getAsJsonArray("data"), PerlValueDescriptor[].class
-                                         );
+    thread.sendCommandAndGetResponse(
+      "getchildren",
+      new PerlValueRequestDescriptor(offset[0], frameSize, key),
+      new PerlDebuggingTransactionHandler() {
+        @Override
+        public void run(JsonObject jsonObject, JsonDeserializationContext jsonDeserializationContext) {
+          PerlValueDescriptor[] descriptors = jsonDeserializationContext.deserialize(
+            jsonObject.getAsJsonArray("data"), PerlValueDescriptor[].class
+          );
 
-                                         XValueChildrenList list = new XValueChildrenList();
-                                         for (PerlValueDescriptor descriptor : descriptors) {
-                                           list.add(new PerlXNamedValue(descriptor, perlStackFrame));
+          XValueChildrenList list = new XValueChildrenList();
+          for (PerlValueDescriptor descriptor : descriptors) {
+            list.add(new PerlXNamedValue(descriptor, perlStackFrame));
 
-                                           offset[0]++;
-                                         }
-                                         boolean isLast = offset[0] >= size;
-                                         node.addChildren(list, isLast);
-                                         if (!isLast) {
-                                           node.tooManyChildren(size - offset[0]);
-                                         }
-                                       }
-                                     });
+            offset[0]++;
+          }
+          boolean isLast = offset[0] >= size;
+          node.addChildren(list, isLast);
+          if (!isLast) {
+            node.tooManyChildren(size - offset[0]);
+          }
+        }
+      });
   }
 }
