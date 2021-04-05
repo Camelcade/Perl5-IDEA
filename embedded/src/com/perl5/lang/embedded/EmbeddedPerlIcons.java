@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,12 +19,18 @@ package com.perl5.lang.embedded;
 import com.intellij.openapi.util.IconLoader;
 import com.intellij.ui.LayeredIcon;
 import com.perl5.PerlIcons;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 
 public final class EmbeddedPerlIcons {
-  public static final Icon EMBEDDED_PERL_FILE = IconLoader.getIcon("/icons/embeddedperl.png");
-  public static final Icon EMBEDDED_MODIFIER = IconLoader.getIcon("/icons/embedded-modifier.png");
+  public static final Icon EMBEDDED_PERL_FILE = load("/icons/embeddedperl.png");
+  public static final Icon EMBEDDED_MODIFIER = load("/icons/embedded-modifier.png");
+
+  private static @NotNull Icon load(@NotNull String resourcePath) {
+    return IconLoader.getIcon(resourcePath, EmbeddedPerlIcons.class);
+  }
+
   public static final Icon EMBEDDED_ROOT = new LayeredIcon(PerlIcons.TEMPLATE_ROOT, EMBEDDED_MODIFIER);
 
   private EmbeddedPerlIcons() {
