@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,7 +30,6 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
-import com.intellij.util.containers.Predicate;
 import com.perl5.lang.perl.idea.modules.PerlSourceRootType;
 import org.jdom.Element;
 import org.jetbrains.annotations.ApiStatus;
@@ -46,6 +45,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class PerlModuleExtension extends ModuleExtension implements PersistentStateComponentWithModificationTracker<Element> {
@@ -239,7 +239,7 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
   private static @Nullable JpsModuleSourceRootPropertiesSerializer<?> getSerializer(Predicate<JpsModuleSourceRootPropertiesSerializer<?>> predicate) {
     for (JpsModelSerializerExtension extension : JpsModelSerializerExtension.getExtensions()) {
       for (JpsModuleSourceRootPropertiesSerializer<?> serializer : extension.getModuleSourceRootPropertiesSerializers()) {
-        if (predicate.apply(serializer)) {
+        if (predicate.test(serializer)) {
           return serializer;
         }
       }
