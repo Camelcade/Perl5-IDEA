@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,11 +30,12 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
 
 class PerlDockerFileSystem extends PerlPluggableVirtualFileSystem {
   private static final Logger LOG = Logger.getInstance(PerlDockerFileSystem.class);
 
-  private final Map<String, VirtualFile> myFiles = ContainerUtil.newConcurrentMap();
+  private final Map<String, VirtualFile> myFiles = new ConcurrentHashMap<>();
 
   private final @NotNull PerlDockerFileTransfer myTransfer;
 
@@ -148,7 +149,7 @@ class PerlDockerFileSystem extends PerlPluggableVirtualFileSystem {
           it -> myFiles.computeIfAbsent(FileUtil.toSystemIndependentName(it.getPath()), it2 -> new PerlDockerVirtualFile(it)));
       }
       catch (IOException e) {
-        LOG.warn("Error reading children for " + toString(), e);
+        LOG.warn("Error reading children for " + this, e);
         return myChildren = VirtualFile.EMPTY_ARRAY;
       }
 
