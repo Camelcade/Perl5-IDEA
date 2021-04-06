@@ -543,6 +543,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   protected void doFormatTestWithoutInitialization(@NotNull String resultFileName, @NotNull String resultSuffix) {
     WriteCommandAction.writeCommandAction(getProject()).run(() -> {
       PsiFile file = myFixture.getFile();
+      //noinspection UnstableApiUsage
       if (file.getViewProvider() instanceof InjectedFileViewProvider) {
         //noinspection ConstantConditions
         file = file.getContext().getContainingFile();
@@ -1316,11 +1317,13 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
 
   protected void assertInjected() {
     assertInstanceOf(getEditor(), EditorWindow.class);
+    //noinspection UnstableApiUsage
     assertInstanceOf(getFile().getViewProvider(), InjectedFileViewProvider.class);
   }
 
   protected void assertNotInjected() {
     assertFalse("Editor is EditorWindow, looks like injected to me", getEditor() instanceof EditorWindow);
+    //noinspection UnstableApiUsage
     assertFalse("File is injected", getFile() instanceof InjectedFileViewProvider);
   }
 
