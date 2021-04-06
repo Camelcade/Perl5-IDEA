@@ -1338,7 +1338,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   protected @NotNull <T extends PsiElement> T getElementAtCaret(@NotNull Class<T> clazz) {
     int offset = myFixture.getEditor().getCaretModel().getOffset();
     PsiElement focused = myFixture.getFile().findElementAt(offset);
-    return ObjectUtils.assertNotNull(PsiTreeUtil.getParentOfType(focused, clazz, false));
+    return Objects.requireNonNull(PsiTreeUtil.getParentOfType(focused, clazz, false));
   }
 
   protected @NotNull <T extends PsiElement> T getTopLevelFileElementAtCaret(@NotNull Class<T> clazz) {
@@ -1346,11 +1346,11 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     var topLevelFile = getTopLevelFile();
     assertNotNull(topLevelFile);
     PsiElement focused = topLevelFile.findElementAt(offset);
-    return ObjectUtils.assertNotNull(PsiTreeUtil.getParentOfType(focused, clazz, false));
+    return Objects.requireNonNull(PsiTreeUtil.getParentOfType(focused, clazz, false));
   }
 
   protected <T extends PsiElement> T getElementAtCaretWithoutInjection(@NotNull Class<T> clazz) {
-    return ObjectUtils.assertNotNull(PsiTreeUtil.getParentOfType(getElementAtCaretWithoutInjection(), clazz, false));
+    return Objects.requireNonNull(PsiTreeUtil.getParentOfType(getElementAtCaretWithoutInjection(), clazz, false));
   }
 
   protected @NotNull PsiElement getElementAtCaretWithoutInjection() {
