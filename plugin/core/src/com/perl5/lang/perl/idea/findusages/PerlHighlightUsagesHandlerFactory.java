@@ -25,6 +25,7 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.*;
+import com.intellij.psi.impl.source.tree.injected.InjectedLanguageEditorUtil;
 import com.intellij.psi.impl.source.tree.injected.InjectedLanguageUtil;
 import com.intellij.psi.search.LocalSearchScope;
 import com.intellij.psi.search.searches.ReferencesSearch;
@@ -65,7 +66,8 @@ public class PerlHighlightUsagesHandlerFactory implements HighlightUsagesHandler
     private final @NotNull Editor myOriginalEditor;
 
     public PerlHighlightUsagesHandler(@NotNull Editor editor, @NotNull PsiFile file, @NotNull PsiElement element, int offsetInTopEditor) {
-      super(InjectedLanguageUtil.getTopLevelEditor(editor), InjectedLanguageUtil.getTopLevelFile(file));
+      super(InjectedLanguageEditorUtil.getTopLevelEditor(editor),
+            InjectedLanguageManager.getInstance(file.getProject()).getTopLevelFile(file));
       myElement = element;
       myOriginalEditorOffset = offsetInTopEditor;
       myOriginalEditor = editor;
