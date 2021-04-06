@@ -1246,7 +1246,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       List<Pair<Integer, String>> macroses = new ArrayList<>();
 
       for (RangeHighlighter highlighter : highlighters) {
-        TextAttributes attributes = highlighter.getTextAttributes();
+        TextAttributes attributes = highlighter.getTextAttributes(null);
         String type;
         if (attributes == myReadAttributes) {
           type = "READ";
