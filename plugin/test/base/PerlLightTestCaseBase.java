@@ -2394,11 +2394,11 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     Collections.sort(rangeSizes);
     int rangesSize = rangeSizes.size();
 
-    int maxRangeSize = rangeSizes.isEmpty() ? 0 : CollectionsKt.max(rangeSizes);
+    int maxRangeSize = rangeSizes.isEmpty() ? 0 : Collections.max(rangeSizes);
     StringBuilder result = new StringBuilder("File size: " + documentLength + "\n" +
                                              "Re-highlighted ranges: " + rangesSize + "\n" +
                                              "Avg range size: " + CollectionsKt.averageOfInt(rangeSizes) + "\n" +
-                                             "Min range size: " + CollectionsKt.min(rangeSizes) + "\n" +
+                                             "Min range size: " + Collections.min(rangeSizes) + "\n" +
                                              "Max range size: " + maxRangeSize + "\n");
 
     int percent = 10;
