@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ package com.perl5.lang.pod.idea.livetemplates;
 
 import com.intellij.codeInsight.template.TemplateSubstitutor;
 import com.intellij.codeInsight.template.impl.TemplateImpl;
-import com.intellij.psi.PsiFile;
+import com.intellij.codeInsight.template.impl.TemplateSubstitutionContext;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.parser.psi.PodSyntaxElements;
@@ -29,9 +29,12 @@ public class PodSmartEndLiveTemplateSubstitutor implements TemplateSubstitutor {
   private static final String POD_GROUP = "Perl5: POD";
 
   @Override
-  public @Nullable TemplateImpl substituteTemplate(@NotNull PsiFile file, int caretOffset, @NotNull TemplateImpl template) {
+  public @Nullable TemplateImpl substituteTemplate(@NotNull TemplateSubstitutionContext substitutionContext,
+                                                   @NotNull TemplateImpl template) {
+    int caretOffset = substitutionContext.getOffset();
     if (!POD_GROUP.equals(template.getGroupName()) ||
-        caretOffset > 0 && PsiUtilCore.getLanguageAtOffset(file, caretOffset - 1).isKindOf(PodLanguage.INSTANCE)) {
+        caretOffset > 0 &&
+        PsiUtilCore.getLanguageAtOffset(substitutionContext.getPsiFile(), caretOffset - 1).isKindOf(PodLanguage.INSTANCE)) {
       return null;
     }
     TemplateImpl copy = template.copy();
