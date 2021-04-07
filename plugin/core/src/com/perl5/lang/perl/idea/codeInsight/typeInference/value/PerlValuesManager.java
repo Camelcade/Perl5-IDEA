@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.containers.ContainerUtil;
-import com.intellij.util.containers.WeakInterner;
+import com.intellij.util.containers.Interner;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlBuiltInVariable;
 import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
@@ -118,7 +118,7 @@ public final class PerlValuesManager {
   // MUST stay here. Automatically changes on new element creation
   public static final int VERSION = id + 5;
 
-  private static final WeakInterner<PerlValue> INTERNER = new WeakInterner<>();
+  private static final Interner<PerlValue> INTERNER = Interner.createWeakInterner();
 
   public static PerlValue readValue(@NotNull StubInputStream dataStream) throws IOException {
     return new PerlValueDeserializer(dataStream).readValue();
