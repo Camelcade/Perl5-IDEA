@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,6 @@ package com.perl5.lang.perl.util;
 
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.Comparing;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.stubs.StubIndexKey;
@@ -29,6 +28,7 @@ import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
 import java.util.Set;
 
 
@@ -41,13 +41,13 @@ public final class PerlVariableUtil {
    * builds AST
    */
   public static boolean equal(@Nullable PerlVariable v1, @Nullable PerlVariable v2) {
-    if (Comparing.equal(v1, v2)) {
+    if (Objects.equals(v1, v2)) {
       return true;
     }
     assert v1 != null && v2 != null;
     return v1.getActualType().equals(v2.getActualType()) &&
-           Comparing.equal(v1.getExplicitNamespaceName(), v2.getExplicitNamespaceName()) &&
-           Comparing.equal(v1.getName(), v2.getName());
+           Objects.equals(v1.getExplicitNamespaceName(), v2.getExplicitNamespaceName()) &&
+           Objects.equals(v1.getName(), v2.getName());
   }
 
   /**
