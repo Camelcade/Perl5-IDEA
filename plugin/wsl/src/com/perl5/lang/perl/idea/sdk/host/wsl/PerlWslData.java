@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,9 +18,9 @@ package com.perl5.lang.perl.idea.sdk.host.wsl;
 
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.process.ProcessOutput;
+import com.intellij.execution.wsl.WSLCommandLineOptions;
 import com.intellij.execution.wsl.WSLDistribution;
-import com.intellij.execution.wsl.WSLDistributionWithRoot;
-import com.intellij.execution.wsl.WSLUtil;
+import com.intellij.execution.wsl.WslDistributionManager;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
@@ -39,7 +39,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
@@ -97,27 +96,13 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
     return hostFileSystem;
   }
 
-  @Nullable WSLDistribution getDistribution() {
-    return WSLUtil.getDistributionById(getDistributionId());
-  }
-
-  @NotNull
-  WSLDistributionWithRoot getNotNullDistribution() throws IOException {
-    WSLDistributionWithRoot distribution =
-      ObjectUtils.doIfNotNull(WSLUtil.getDistributionById(getDistributionId()), WSLDistributionWithRoot::new);
-    if (distribution != null) {
-      return distribution;
-    }
-    throw new IOException("No distribution for " + myDistributionId);
+  @NotNull WSLDistribution getDistribution() {
+    return WslDistributionManager.getInstance().getOrCreateDistributionByMsId(getDistributionId());
   }
 
   @Override
   public @NotNull String getHelpersRootPath() {
-    WSLDistribution distribution = getDistribution();
-    if (distribution == null) {
-      throw new RuntimeException("No distribution for " + myDistributionId);
-    }
-    return Objects.requireNonNull(distribution.getWslPath(PerlPluginUtil.getPluginHelpersRoot()));
+    return Objects.requireNonNull(getDistribution().getWslPath(PerlPluginUtil.getPluginHelpersRoot()));
   }
 
   @Override
@@ -192,16 +177,15 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
 
   private PerlCommandLine patchCommandLine(@NotNull PerlCommandLine perlCommandLine) throws ExecutionException {
     WSLDistribution distribution = getDistribution();
-    if (distribution == null) {
-      throw new ExecutionException(PerlWslBundle.message("perl.host.handler.distribution.unavailable", getDistributionId()));
-    }
     String workingDir = ObjectUtils.doIfNotNull(perlCommandLine.getWorkDirectory(), File::toString);
     perlCommandLine.withWorkDirectory((String)null);
     return distribution.patchCommandLine(
       perlCommandLine,
       perlCommandLine.getEffectiveProject(),
-      getRemotePath(workingDir),
-      false);
+      new WSLCommandLineOptions()
+        .setRemoteWorkingDirectory(workingDir)
+        .setSudo(false)
+    );
   }
 
   @Override

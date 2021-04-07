@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.idea.sdk.host.wsl;
 
 import com.intellij.execution.wsl.WSLDistribution;
-import com.intellij.execution.wsl.WSLDistributionWithRoot;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
@@ -44,9 +43,9 @@ import java.util.Objects;
 class PerlWslFileSystem extends PerlPluggableVirtualFileSystem {
   private static final Logger LOG = Logger.getInstance(PerlWslFileSystem.class);
 
-  private final @NotNull WSLDistributionWithRoot myDistribution;
+  private final @NotNull WSLDistribution myDistribution;
 
-  private PerlWslFileSystem(@NotNull WSLDistributionWithRoot distribution) {
+  private PerlWslFileSystem(@NotNull WSLDistribution distribution) {
     myDistribution = distribution;
   }
 
@@ -73,7 +72,7 @@ class PerlWslFileSystem extends PerlPluggableVirtualFileSystem {
   }
 
   static PerlWslFileSystem create(@NotNull WSLDistribution wslDistribution) {
-    return new PerlWslFileSystem(new WSLDistributionWithRoot(wslDistribution));
+    return new PerlWslFileSystem(wslDistribution);
   }
 
   private class WslVirtualFile extends PerlPluggableVirtualFile {
