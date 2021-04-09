@@ -165,30 +165,30 @@ public class PerlAnnotatorTest extends PerlLightTestCase {
 
   @Test
   public void testUseStrictures() {
-    doTestStirctAndWarnings();
+    doTestStrictAndWarnings();
   }
 
   @Test
   public void testUseTest2BundleExtended() {
-    doTestStirctAndWarnings();
+    doTestStrictAndWarnings();
   }
 
   @Test
   public void testUseTest2BundleMore() {
-    doTestStirctAndWarnings();
+    doTestStrictAndWarnings();
   }
 
   @Test
   public void testUseTest2BundleSimple() {
-    doTestStirctAndWarnings();
+    doTestStrictAndWarnings();
   }
 
   @Test
   public void testUseTest2V0() {
-    doTestStirctAndWarnings();
+    doTestStrictAndWarnings();
   }
 
-  private void doTestStirctAndWarnings() {
+  private void doTestStrictAndWarnings() {
     doInspectionTest(PerlUseStrictInspection.class, PerlUseWarningsInspection.class);
   }
 
