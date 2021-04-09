@@ -121,7 +121,15 @@
     <packageProcessor key="POSIX"
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.POSIXPackageProcessor"/>
     <packageProcessor key="strictures"
-                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.StricturesPackageProcessor"/>
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.BaseStrictWarningsProvidingProcessor"/>
+    <packageProcessor key="Test2::Bundle::More"
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.BaseStrictWarningsProvidingProcessor"/>
+    <packageProcessor key="Test2::Bundle::Extended"
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.BaseStrictWarningsProvidingProcessor"/>
+    <packageProcessor key="Test2::Bundle::Simple"
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.BaseStrictWarningsProvidingProcessor"/>
+    <packageProcessor key="Test2::Bundle::V0"
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.BaseStrictWarningsProvidingProcessor"/>
     <packageProcessor key="constant"
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.ConstantProcessor"/>
     <packageProcessor key="Exception::Class"

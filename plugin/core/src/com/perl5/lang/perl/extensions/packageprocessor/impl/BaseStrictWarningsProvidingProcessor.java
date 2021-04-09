@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,8 +20,10 @@ import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessorBase;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlStrictProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlWarningsProvider;
 
-
-public class StricturesPackageProcessor extends PerlPackageProcessorBase implements
-                                                                         PerlWarningsProvider,
-                                                                         PerlStrictProvider {
+/**
+ * This class intended to handle packages providing strict/warnings settings by including them.
+ */
+public class BaseStrictWarningsProvidingProcessor extends PerlPackageProcessorBase implements
+                                                                                   PerlWarningsProvider,
+                                                                                   PerlStrictProvider {
 }

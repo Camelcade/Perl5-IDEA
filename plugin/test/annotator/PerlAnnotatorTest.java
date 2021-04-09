@@ -160,10 +160,36 @@ public class PerlAnnotatorTest extends PerlLightTestCase {
   public void testCpanfile() {
     initWithCpanFile();
     assertInstanceOf(myFixture.getFile(), PerlFile.class);
-    addVirtualFileFilter();
-    myFixture.enableInspections(PerlUseStrictInspection.class, PerlUseWarningsInspection.class);
-    myFixture.checkHighlighting(true, false, false);
-    removeVirtualFileFilter();
+    doInspectionTestWithoutInit(PerlUseStrictInspection.class, PerlUseWarningsInspection.class);
+  }
+
+  @Test
+  public void testUseStrictures() {
+    doTestStirctAndWarnings();
+  }
+
+  @Test
+  public void testUseTest2BundleExtended() {
+    doTestStirctAndWarnings();
+  }
+
+  @Test
+  public void testUseTest2BundleMore() {
+    doTestStirctAndWarnings();
+  }
+
+  @Test
+  public void testUseTest2BundleSimple() {
+    doTestStirctAndWarnings();
+  }
+
+  @Test
+  public void testUseTest2BundleV0() {
+    doTestStirctAndWarnings();
+  }
+
+  private void doTestStirctAndWarnings() {
+    doInspectionTest(PerlUseStrictInspection.class, PerlUseWarningsInspection.class);
   }
 
   @Test

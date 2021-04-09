@@ -1668,11 +1668,17 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   }
 
 
-  protected void doInspectionTest(Class<? extends LocalInspectionTool> clazz) {
+  protected void doInspectionTest(@NotNull Class<? extends LocalInspectionTool>... clazz) {
     initWithFileSmart();
+    doInspectionTestWithoutInit(clazz);
+  }
+
+  protected void doInspectionTestWithoutInit(@NotNull Class<? extends LocalInspectionTool>... clazz) {
     addVirtualFileFilter();
-    //noinspection unchecked
-    myFixture.enableInspections(clazz);
+    for (Class<? extends LocalInspectionTool> aClass : clazz) {
+      //noinspection unchecked
+      myFixture.enableInspections(aClass);
+    }
     myFixture.checkHighlighting(true, false, false);
     removeVirtualFileFilter();
   }
