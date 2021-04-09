@@ -184,7 +184,7 @@ public class PerlAnnotatorTest extends PerlLightTestCase {
   }
 
   @Test
-  public void testUseTest2BundleV0() {
+  public void testUseTest2V0() {
     doTestStirctAndWarnings();
   }
 
