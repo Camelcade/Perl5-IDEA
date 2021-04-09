@@ -128,7 +128,7 @@
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.BaseStrictWarningsProvidingProcessor"/>
     <packageProcessor key="Test2::Bundle::Simple"
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.BaseStrictWarningsProvidingProcessor"/>
-    <packageProcessor key="Test2::Bundle::V0"
+    <packageProcessor key="Test2::V0"
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.BaseStrictWarningsProvidingProcessor"/>
     <packageProcessor key="constant"
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.ConstantProcessor"/>
