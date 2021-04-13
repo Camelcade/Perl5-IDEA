@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -255,12 +255,6 @@ runIde {
     args("traverseUI", "$project.rootDir.canonicalPath/resources/search/searchableOptions.xml")
   }
   jvmArgs("-Xmx2048m")
-}
-
-sourceSets {
-  test {
-    resources.srcDirs file('testData')
-  }
 }
 
 task publishAllPlugins {

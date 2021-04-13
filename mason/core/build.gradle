@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,17 +16,6 @@
 
 import org.jetbrains.grammarkit.tasks.GenerateLexer
 import org.jetbrains.grammarkit.tasks.GenerateParser
-
-sourceSets {
-  main {
-    java.srcDirs project.files('src')
-    resources.srcDir file('resources')
-  }
-  test {
-    java.srcDir file('test')
-    resources.srcDirs file('testData')
-  }
-}
 
 intellij{
   type 'IC'
