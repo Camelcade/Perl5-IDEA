@@ -1,0 +1,22 @@
+<div>
+<div>
+<?
+use                strict;
+use                warnings        FATAL        =>        'all';
+
+if        ($a)        {
+print        $a;
+}
+?>
+
+</div>
+</div>
+<?
+use        strict;
+use        warnings        FATAL        =>        'all';
+
+if        ($a)        {
+print        $a;
+}
+
+?>
