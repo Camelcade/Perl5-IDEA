@@ -121,7 +121,15 @@
     <packageProcessor key="POSIX"
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.POSIXPackageProcessor"/>
     <packageProcessor key="strictures"
-                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.StricturesPackageProcessor"/>
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.BaseStrictWarningsProvidingProcessor"/>
+    <packageProcessor key="Test2::Bundle::More"
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.BaseStrictWarningsProvidingProcessor"/>
+    <packageProcessor key="Test2::Bundle::Extended"
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.BaseStrictWarningsProvidingProcessor"/>
+    <packageProcessor key="Test2::Bundle::Simple"
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.BaseStrictWarningsProvidingProcessor"/>
+    <packageProcessor key="Test2::V0"
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.BaseStrictWarningsProvidingProcessor"/>
     <packageProcessor key="constant"
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.ConstantProcessor"/>
     <packageProcessor key="Exception::Class"
@@ -201,6 +209,8 @@
     <editorNotificationProvider
         implementation="com.perl5.lang.perl.idea.editor.notification.PerlInterpreterEditorNotification"/>
     <editorNotificationProvider implementation="com.perl5.lang.perl.idea.editor.notification.PerlAssociationEditorNotification"/>
+    <notificationGroup displayType="STICKY_BALLOON" id="perl5.plugin.update.notification.group" bundle="messages.PerlBundle"
+                       key="plugin.update.baloon.group" isLogByDefault="true"/>
 
     <virtualFileSystem key="perlhost" implementationClass="com.perl5.lang.perl.idea.sdk.host.PerlHostVirtualFileSystem"/>
 

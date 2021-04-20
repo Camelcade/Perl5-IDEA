@@ -267,13 +267,13 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 
 <CAPTURE_NON_EMPTY_HEREDOC_WITH_EMPTY_MARKER>{
 	.+ \R?	{}
-	\R		{yypushback(1);yybegin(CAPTURE_HEREDOC_WITH_EMPTY_MARKER);return heredocQueue.peekFirst().getTargetElement();}
-	<<EOF>>	{yybegin(YYINITIAL);return heredocQueue.peekFirst().getTargetElement();}
+	\R		{yypushback(1);yybegin(CAPTURE_HEREDOC_WITH_EMPTY_MARKER);return heredocQueue.peek().getTargetElement();}
+	<<EOF>>	{yybegin(YYINITIAL);return heredocQueue.peek().getTargetElement();}
 }
 
 <CAPTURE_HEREDOC_WITH_EMPTY_MARKER>{
 	\R		{
-		heredocQueue.pullFirst();
+		heredocQueue.poll();
 		popState();
 
 		if (!heredocQueue.isEmpty())
@@ -291,17 +291,17 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 		{
 			pullback(0);
 			yybegin(CAPTURE_HEREDOC);
-			return heredocQueue.peekFirst().getTargetElement();
+			return heredocQueue.peek().getTargetElement();
 		}
 	}
 	\R+			{}
-	<<EOF>>		{yybegin(YYINITIAL);return heredocQueue.peekFirst().getTargetElement();}
+	<<EOF>>		{yybegin(YYINITIAL);return heredocQueue.peek().getTargetElement();}
 }
 
 <CAPTURE_HEREDOC>{
 	.+		{
 		if( isCloseMarker()){
-			PerlHeredocQueueElement currentHeredoc = heredocQueue.pullFirst();
+			PerlHeredocQueueElement currentHeredoc = heredocQueue.poll();
 			if( currentHeredoc.isIndentable() ){
 			        pullback(0);
 			        yybegin(CAPTURE_HEREDOC_INDENTABLE_TERMINATOR);

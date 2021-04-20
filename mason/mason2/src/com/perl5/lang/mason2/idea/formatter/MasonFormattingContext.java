@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,10 +16,7 @@
 
 package com.perl5.lang.mason2.idea.formatter;
 
-import com.intellij.formatting.FormattingMode;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.codeStyle.CodeStyleSettings;
+import com.intellij.formatting.FormattingContext;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.htmlmason.idea.formatter.AbstractMasonFormattingContext;
 import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
@@ -28,11 +25,8 @@ import org.jetbrains.annotations.NotNull;
 import static com.perl5.lang.mason2.elementType.Mason2ElementTypes.MASON_LINE_OPENER;
 
 public class MasonFormattingContext extends AbstractMasonFormattingContext {
-  public MasonFormattingContext(@NotNull PsiElement element,
-                                @NotNull TextRange range,
-                                @NotNull CodeStyleSettings settings,
-                                @NotNull FormattingMode mode) {
-    super(element, range, settings, mode);
+  public MasonFormattingContext(@NotNull FormattingContext formattingContext) {
+    super(formattingContext, formattingContext.getPsiElement().getTextRange());
   }
 
   @Override

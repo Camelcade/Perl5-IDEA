@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ import org.jetbrains.jps.model.java.JavaSourceRootType;
 public class PerlModuleConfigurationEditorProvider implements ModuleConfigurationEditorProvider {
   @Override
   public ModuleConfigurationEditor[] createEditors(ModuleConfigurationState state) {
-    Module module = state.getRootModel().getModule();
+    Module module = state.getCurrentRootModel().getModule();
     if (ModuleType.get(module) instanceof PerlModuleType) {
       return new ModuleConfigurationEditor[]{
         new CommonContentEntriesEditor(module.getName(), state, JavaSourceRootType.SOURCE, JavaSourceRootType.TEST_SOURCE),

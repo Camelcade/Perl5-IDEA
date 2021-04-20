@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,6 @@ import com.intellij.execution.process.CapturingProcessAdapter;
 import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.ui.RunContentDescriptor;
-import com.intellij.openapi.util.Disposer;
 import com.intellij.testFramework.UsefulTestCase;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import com.pty4j.util.Pair;
@@ -60,7 +59,6 @@ public class PerlRunTest extends PerlPlatformTestCase {
       throw new RuntimeException(e);
     }
     RunContentDescriptor contentDescriptor = execResult.second;
-    Disposer.register(myPerlLightTestCaseDisposable, contentDescriptor);
     ProcessHandler processHandler = contentDescriptor.getProcessHandler();
     assertNotNull(processHandler);
     waitForProcessFinish(processHandler);

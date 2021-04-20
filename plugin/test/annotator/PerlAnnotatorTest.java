@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -115,6 +115,7 @@ public class PerlAnnotatorTest extends PerlLightTestCase {
   // duplicates caused by injection (double check)
   @Test
   public void testSpellChecker() {
+    //noinspection deprecation
     ExpectedHighlightingData.expectedDuplicatedHighlighting(() -> doInspectionTest(SpellCheckingInspection.class));
   }
 
@@ -159,10 +160,36 @@ public class PerlAnnotatorTest extends PerlLightTestCase {
   public void testCpanfile() {
     initWithCpanFile();
     assertInstanceOf(myFixture.getFile(), PerlFile.class);
-    addVirtualFileFilter();
-    myFixture.enableInspections(PerlUseStrictInspection.class, PerlUseWarningsInspection.class);
-    myFixture.checkHighlighting(true, false, false);
-    removeVirtualFileFilter();
+    doInspectionTestWithoutInit(PerlUseStrictInspection.class, PerlUseWarningsInspection.class);
+  }
+
+  @Test
+  public void testUseStrictures() {
+    doTestStrictAndWarnings();
+  }
+
+  @Test
+  public void testUseTest2BundleExtended() {
+    doTestStrictAndWarnings();
+  }
+
+  @Test
+  public void testUseTest2BundleMore() {
+    doTestStrictAndWarnings();
+  }
+
+  @Test
+  public void testUseTest2BundleSimple() {
+    doTestStrictAndWarnings();
+  }
+
+  @Test
+  public void testUseTest2V0() {
+    doTestStrictAndWarnings();
+  }
+
+  private void doTestStrictAndWarnings() {
+    doInspectionTest(PerlUseStrictInspection.class, PerlUseWarningsInspection.class);
   }
 
   @Test
@@ -284,6 +311,7 @@ public class PerlAnnotatorTest extends PerlLightTestCase {
   // Caused by multiple entities created from one identifier
   @Test
   public void testClassAccessorDeprecation() {
+    //noinspection deprecation
     ExpectedHighlightingData.expectedDuplicatedHighlighting(this::doDeprecationTest);
   }
 

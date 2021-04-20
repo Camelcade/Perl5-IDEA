@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -123,7 +123,7 @@ import com.intellij.psi.impl.PsiManagerEx;
 import com.intellij.psi.impl.source.PsiFileImpl;
 import com.intellij.psi.impl.source.tree.FileElement;
 import com.intellij.psi.impl.source.tree.injected.InjectedFileViewProvider;
-import com.intellij.psi.impl.source.tree.injected.InjectedLanguageUtil;
+import com.intellij.psi.impl.source.tree.injected.InjectedLanguageEditorUtil;
 import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
@@ -543,6 +543,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   protected void doFormatTestWithoutInitialization(@NotNull String resultFileName, @NotNull String resultSuffix) {
     WriteCommandAction.writeCommandAction(getProject()).run(() -> {
       PsiFile file = myFixture.getFile();
+      //noinspection UnstableApiUsage
       if (file.getViewProvider() instanceof InjectedFileViewProvider) {
         //noinspection ConstantConditions
         file = file.getContext().getContainingFile();
@@ -1050,7 +1051,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   }
 
   protected @NotNull Editor getTopLevelEditor() {
-    return InjectedLanguageUtil.getTopLevelEditor(getEditor());
+    return InjectedLanguageEditorUtil.getTopLevelEditor(getEditor());
   }
 
   /**
@@ -1246,7 +1247,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       List<Pair<Integer, String>> macroses = new ArrayList<>();
 
       for (RangeHighlighter highlighter : highlighters) {
-        TextAttributes attributes = highlighter.getTextAttributes();
+        TextAttributes attributes = highlighter.getTextAttributes(null);
         String type;
         if (attributes == myReadAttributes) {
           type = "READ";
@@ -1316,11 +1317,13 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
 
   protected void assertInjected() {
     assertInstanceOf(getEditor(), EditorWindow.class);
+    //noinspection UnstableApiUsage
     assertInstanceOf(getFile().getViewProvider(), InjectedFileViewProvider.class);
   }
 
   protected void assertNotInjected() {
     assertFalse("Editor is EditorWindow, looks like injected to me", getEditor() instanceof EditorWindow);
+    //noinspection UnstableApiUsage
     assertFalse("File is injected", getFile() instanceof InjectedFileViewProvider);
   }
 
@@ -1338,7 +1341,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   protected @NotNull <T extends PsiElement> T getElementAtCaret(@NotNull Class<T> clazz) {
     int offset = myFixture.getEditor().getCaretModel().getOffset();
     PsiElement focused = myFixture.getFile().findElementAt(offset);
-    return ObjectUtils.assertNotNull(PsiTreeUtil.getParentOfType(focused, clazz, false));
+    return Objects.requireNonNull(PsiTreeUtil.getParentOfType(focused, clazz, false));
   }
 
   protected @NotNull <T extends PsiElement> T getTopLevelFileElementAtCaret(@NotNull Class<T> clazz) {
@@ -1346,11 +1349,11 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     var topLevelFile = getTopLevelFile();
     assertNotNull(topLevelFile);
     PsiElement focused = topLevelFile.findElementAt(offset);
-    return ObjectUtils.assertNotNull(PsiTreeUtil.getParentOfType(focused, clazz, false));
+    return Objects.requireNonNull(PsiTreeUtil.getParentOfType(focused, clazz, false));
   }
 
   protected <T extends PsiElement> T getElementAtCaretWithoutInjection(@NotNull Class<T> clazz) {
-    return ObjectUtils.assertNotNull(PsiTreeUtil.getParentOfType(getElementAtCaretWithoutInjection(), clazz, false));
+    return Objects.requireNonNull(PsiTreeUtil.getParentOfType(getElementAtCaretWithoutInjection(), clazz, false));
   }
 
   protected @NotNull PsiElement getElementAtCaretWithoutInjection() {
@@ -1665,11 +1668,17 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   }
 
 
-  protected void doInspectionTest(Class<? extends LocalInspectionTool> clazz) {
+  protected void doInspectionTest(@NotNull Class<? extends LocalInspectionTool>... clazz) {
     initWithFileSmart();
+    doInspectionTestWithoutInit(clazz);
+  }
+
+  protected void doInspectionTestWithoutInit(@NotNull Class<? extends LocalInspectionTool>... clazz) {
     addVirtualFileFilter();
-    //noinspection unchecked
-    myFixture.enableInspections(clazz);
+    for (Class<? extends LocalInspectionTool> aClass : clazz) {
+      //noinspection unchecked
+      myFixture.enableInspections(aClass);
+    }
     myFixture.checkHighlighting(true, false, false);
     removeVirtualFileFilter();
   }
@@ -2394,11 +2403,11 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     Collections.sort(rangeSizes);
     int rangesSize = rangeSizes.size();
 
-    int maxRangeSize = rangeSizes.isEmpty() ? 0 : CollectionsKt.max(rangeSizes);
+    int maxRangeSize = rangeSizes.isEmpty() ? 0 : Collections.max(rangeSizes);
     StringBuilder result = new StringBuilder("File size: " + documentLength + "\n" +
                                              "Re-highlighted ranges: " + rangesSize + "\n" +
                                              "Avg range size: " + CollectionsKt.averageOfInt(rangeSizes) + "\n" +
-                                             "Min range size: " + CollectionsKt.min(rangeSizes) + "\n" +
+                                             "Min range size: " + Collections.min(rangeSizes) + "\n" +
                                              "Max range size: " + maxRangeSize + "\n");
 
     int percent = 10;
@@ -2830,11 +2839,19 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   }
 
   protected void doTestReparse(@NotNull String textToInsert) {
+    doTestReparse(textToInsert, PerlLanguage.INSTANCE);
+  }
+
+  protected void doTestReparse(@NotNull String textToInsert, @NotNull Language language) {
     initWithFileSmart();
-    doTestReparseWithoutInit(textToInsert);
+    doTestReparseWithoutInit(textToInsert, language);
   }
 
   protected void doTestReparseBs() {
+    doTestReparseBs(PerlLanguage.INSTANCE);
+  }
+
+  protected void doTestReparseBs(@NotNull Language language) {
     initWithFileSmart();
     doTestReparseWithoutInit(() -> {
       Editor editor = getEditor();
@@ -2845,16 +2862,32 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
         document.deleteString(offset - 1, offset);
         caretModel.moveToOffset(offset - 1);
       }
-    });
+    }, language);
   }
 
   protected void doTestReparseWithoutInit(@NotNull String textToInsert) {
-    doTestReparseWithoutInit(() -> EditorModificationUtil.insertStringAtCaret(getEditor(), textToInsert));
+    doTestReparseWithoutInit(textToInsert, PerlLanguage.INSTANCE);
   }
 
-  protected void doTestReparseWithoutInit(@NotNull Runnable documentModifier) {
-    PsiFile psiFile = getFile();
-    assertInstanceOf(psiFile, PsiFileImpl.class);
+  protected void doTestReparseWithoutInit(@NotNull String textToInsert, @NotNull Language language) {
+    doTestReparseWithoutInit(() -> EditorModificationUtil.insertStringAtCaret(getEditor(), textToInsert), language);
+  }
+
+  protected void doTestReparseWithoutInit(@NotNull Runnable documentModifier,
+                                          @NotNull Language language) {
+    PsiFile psiFile = null;
+    var mainPsiFile = getFile();
+    for (PsiFile subTree : mainPsiFile.getViewProvider().getAllFiles()) {
+      if (subTree.getLanguage().isKindOf(language)) {
+        psiFile = subTree;
+        break;
+      }
+    }
+
+    assertNotNull("No psi file found for a language: " + language +
+                  "; got " + mainPsiFile +
+                  " with subtrees " + mainPsiFile.getViewProvider().getAllFiles(), psiFile);
+
     FileASTNode fileNode = psiFile.getNode();
     WriteCommandAction.runWriteCommandAction(getProject(), documentModifier);
     String newText = getEditorText();
@@ -2875,12 +2908,13 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     result.append(getEditorTextWithCaretsAndSelections());
     result.append(SEPARATOR_NEWLINES).append("Psi structure").append(SEPARATOR_NEWLINES);
     PsiDocumentManager.getInstance(getProject()).commitAllDocuments();
-    String psiString = DebugUtil.psiToString(getFile(), false, false);
+    String psiString = DebugUtil.psiToString(psiFile, false, false);
     result.append(psiString);
 
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), result.toString());
     if (!psiString.contains("PsiErrorElement")) {
-      WriteAction.run(() -> ParsingTestCase.ensureCorrectReparse(getFile()));
+      var finalPsiFile = psiFile;
+      WriteAction.run(() -> ParsingTestCase.ensureCorrectReparse(finalPsiFile));
     }
   }
 
@@ -3021,13 +3055,15 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     var result = new ArrayList<MultiHostInjector>();
     for (MultiHostInjector injector : MultiHostInjector.MULTIHOST_INJECTOR_EP_NAME.getExtensions(getProject())) {
       for (Class<? extends PsiElement> aClass : injector.elementsToInjectIn()) {
-        if (!aClass.equals(PsiLanguageInjectionHost.class) && aClass.isInstance(host)) {
+        if (!aClass.equals(PsiLanguageInjectionHost.class) && !aClass.equals(PsiElement.class) && aClass.isInstance(host)) {
           result.add(injector);
           break;
         }
       }
     }
-    assertSize(1, result);
+    if (result.size() != 1) {
+      fail("Expected a single injector for " + host.getClass() + " got: " + result);
+    }
     return result.get(0);
   }
 }

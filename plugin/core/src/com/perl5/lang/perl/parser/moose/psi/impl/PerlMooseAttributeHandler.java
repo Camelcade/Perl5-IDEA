@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -131,7 +131,7 @@ public class PerlMooseAttributeHandler extends PerlSubCallHandlerWithEmptyData {
         Arrays.asList(PerlSubArgument.self(), PerlSubArgument.optionalScalar("new_value")),
         PerlSubAnnotations.tryToFindAnnotations(identifier, subCallElement.getParent()),
         valueProvider,
-        subExpr == null ? null : subExpr.getBlockSmart()
+        subExpr == null ? null : subExpr.getBlock()
       );
       result.add(newMethod);
     }

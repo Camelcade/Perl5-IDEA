@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,9 +18,9 @@ package com.perl5.errorHandler;
 
 import com.intellij.diagnostic.DiagnosticBundle;
 import com.intellij.diagnostic.IdeErrorsDialog;
-import com.intellij.diagnostic.ReportMessages;
 import com.intellij.ide.BrowserUtil;
 import com.intellij.ide.DataManager;
+import com.intellij.notification.NotificationGroupManager;
 import com.intellij.notification.NotificationListener;
 import com.intellij.notification.NotificationType;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
@@ -107,7 +107,6 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
       .append('\n');
     descBuilder.append("Java Vendor: ").append(SystemInfo.JAVA_VENDOR).append('\n');
     descBuilder.append("Java Version: ").append(SystemInfo.JAVA_VERSION).append('\n');
-    descBuilder.append("Java Arch: ").append(SystemInfo.is32Bit ? "32 bit" : "64 bit").append('\n');
     descBuilder.append("Java Runtime Version: ").append(SystemInfo.JAVA_RUNTIME_VERSION).append('\n');
     descBuilder.append("Perl Plugin Version: ").append(PerlPluginUtil.getPluginVersion()).append('\n');
     descBuilder.append("Description: ").append(StringUtil.notNullize(addInfo, "<none>"));
@@ -250,7 +249,8 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
         BrowserUtil.browse(url);
         notification.expire();
       } : null;
-      ReportMessages.GROUP.createNotification(ReportMessages.ERROR_REPORT, text.toString(), type, listener).notify(project);
+      NotificationGroupManager.getInstance().getNotificationGroup("Error Report")
+        .createNotification(DiagnosticBundle.message("error.report.title"), text.toString(), type, listener).notify(project);
     });
   }
 }

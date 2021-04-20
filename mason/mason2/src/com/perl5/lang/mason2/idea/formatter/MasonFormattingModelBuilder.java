@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,12 +16,9 @@
 
 package com.perl5.lang.mason2.idea.formatter;
 
-import com.intellij.formatting.FormattingMode;
+import com.intellij.formatting.FormattingContext;
 import com.intellij.formatting.FormattingModel;
 import com.intellij.formatting.FormattingModelProvider;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.perl5.lang.perl.idea.formatter.PerlTemplatingFormattingModelBuilder;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlFormattingBlock;
 import org.jetbrains.annotations.NotNull;
@@ -29,12 +26,12 @@ import org.jetbrains.annotations.NotNull;
 
 public class MasonFormattingModelBuilder extends PerlTemplatingFormattingModelBuilder {
   @Override
-  public @NotNull FormattingModel createModel(@NotNull PsiElement element,
-                                              @NotNull TextRange range,
-                                              @NotNull CodeStyleSettings settings,
-                                              @NotNull FormattingMode mode) {
+  public @NotNull FormattingModel createModel(@NotNull FormattingContext formattingContext) {
+    var element = formattingContext.getPsiElement();
+    var settings = formattingContext.getCodeStyleSettings();
+    var mode = formattingContext.getFormattingMode();
     PerlFormattingBlock block = new MasonFormattingBlock(
-      element.getNode(), new MasonFormattingContext(element, element.getTextRange(), settings, mode));
+      element.getNode(), new MasonFormattingContext(formattingContext));
     return FormattingModelProvider.createFormattingModelForPsiFile(element.getContainingFile(), block, settings);
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,9 @@
 
 package com.perl5.lang.htmlmason.idea.livetemplates;
 
+import com.intellij.codeInsight.template.TemplateActionContext;
 import com.intellij.codeInsight.template.TemplateContextType;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
 import com.perl5.lang.htmlmason.HTMLMasonElementPatterns;
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
 import com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType;
@@ -31,9 +31,11 @@ public class HTMLMasonTemplateContextType extends TemplateContextType implements
   }
 
   @Override
-  public boolean isInContext(@NotNull PsiFile file, int offset) {
-    if (file instanceof HTMLMasonFileImpl && offset > 0) {
-      PsiElement element = file.findElementAt(offset - 1);
+  public boolean isInContext(@NotNull TemplateActionContext templateActionContext) {
+    var psiFile = templateActionContext.getFile();
+    var startOffset = templateActionContext.getStartOffset();
+    if (psiFile instanceof HTMLMasonFileImpl && startOffset > 0) {
+      PsiElement element = psiFile.findElementAt(startOffset - 1);
       return HTML_MASON_TEMPLATE_CONTEXT_PATTERN.accepts(element) || HTML_MASON_TEMPLATE_CONTEXT_PATTERN_BROKEN.accepts(element);
     }
     return false;

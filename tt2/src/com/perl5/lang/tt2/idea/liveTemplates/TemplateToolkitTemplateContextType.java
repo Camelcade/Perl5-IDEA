@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 package com.perl5.lang.tt2.idea.liveTemplates;
 
 import com.intellij.codeInsight.template.EverywhereContextType;
+import com.intellij.codeInsight.template.TemplateActionContext;
 import com.intellij.codeInsight.template.TemplateContextType;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
@@ -45,7 +46,9 @@ public abstract class TemplateToolkitTemplateContextType extends TemplateContext
   protected abstract boolean isInContext(PsiElement element);
 
   @Override
-  public boolean isInContext(@NotNull PsiFile file, int offset) {
+  public boolean isInContext(@NotNull TemplateActionContext templateActionContext) {
+    var file = templateActionContext.getFile();
+    var offset = templateActionContext.getStartOffset();
     FileViewProvider viewProvider = file.getViewProvider();
     PsiFile ttFile = viewProvider.getPsi(TemplateToolkitLanguage.INSTANCE);
 

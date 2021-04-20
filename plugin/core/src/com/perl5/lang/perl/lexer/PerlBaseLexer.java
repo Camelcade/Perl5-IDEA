@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.lexer;
 
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.openapi.util.Pair;
@@ -24,7 +25,6 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.intellij.util.containers.Queue;
 import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.project.PerlNamesCache;
@@ -48,6 +48,7 @@ import static com.perl5.lang.perl.lexer.PerlLexer.*;
 
 public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElementTypes,
                                                                       MooseElementTypes {
+  private static final Logger LOG = Logger.getInstance(PerlBaseLexer.class);
   // fixme move somewhere
   public static final String STRING_UNDEF = "undef";
 
@@ -86,7 +87,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
   }
 
   static {
-    PerlParserExtension.EP_NAME.addExtensionPointListener(PerlBaseLexer::refreshExtensions, PerlPluginUtil.getUnloadAwareDisposable());
+    PerlParserExtension.EP_NAME.addChangeListener(PerlBaseLexer::refreshExtensions, PerlPluginUtil.getUnloadAwareDisposable());
     refreshExtensions();
   }
 
@@ -112,7 +113,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
   }
 
   // last captured heredoc marker
-  protected final Queue<PerlHeredocQueueElement> heredocQueue = new Queue<>(5);
+  protected final Queue<PerlHeredocQueueElement> heredocQueue = new ArrayDeque<>(5);
   protected final PerlBracesStack myBracesStack = new PerlBracesStack();
   protected final PerlBracesStack myBracketsStack = new PerlBracesStack();
   protected final PerlBracesStack myParensStack = new PerlBracesStack();
@@ -926,7 +927,9 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
 
   protected void startHeredocCapture() {
     pushState();
-    if (heredocQueue.peekFirst().getMarker().length() > 0) {
+    var headElement = heredocQueue.peek();
+    LOG.assertTrue(headElement != null);
+    if (headElement.getMarker().length() > 0) {
       yybegin(CAPTURE_HEREDOC);
     }
     else {
@@ -935,7 +938,8 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
   }
 
   protected boolean isCloseMarker() {
-    PerlHeredocQueueElement currentHeredoc = heredocQueue.peekFirst();
+    PerlHeredocQueueElement currentHeredoc = heredocQueue.peek();
+    LOG.assertTrue(currentHeredoc != null);
     CharSequence tokenText = yytext();
     CharSequence markerText = currentHeredoc.getMarker();
 
@@ -996,7 +1000,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
   public IElementType captureQuotedHeredocMarker(IElementType heredocElementType, int stringOpenerState, boolean isIndentable) {
     yybegin(AFTER_VALUE);
     pushState();
-    heredocQueue.addLast(new PerlHeredocQueueElement(heredocElementType, yytext().subSequence(1, yylength() - 1), isIndentable));
+    heredocQueue.add(new PerlHeredocQueueElement(heredocElementType, yytext().subSequence(1, yylength() - 1), isIndentable));
     yybegin(stringOpenerState);
     return captureString();
   }
@@ -1009,7 +1013,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
    */
   public IElementType captureBareHeredocMarker(IElementType heredocElementType, boolean isIndentable) {
     yybegin(AFTER_VALUE);
-    heredocQueue.addLast(new PerlHeredocQueueElement(heredocElementType, yytext(), isIndentable));
+    heredocQueue.add(new PerlHeredocQueueElement(heredocElementType, yytext(), isIndentable));
     return STRING_CONTENT;
   }
 

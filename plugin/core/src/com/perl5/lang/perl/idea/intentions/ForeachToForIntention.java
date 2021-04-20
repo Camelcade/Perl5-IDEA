@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -76,7 +76,7 @@ public class ForeachToForIntention extends PsiElementBaseIntentionAction {
     PsiPerlExpr iterableList = forCompound.getConditionExpr();
     assert iterableList != null;
 
-    PsiPerlBlock block = forCompound.getBlockSmart();
+    PsiPerlBlock block = forCompound.getBlock();
     assert block != null;
 
     PsiPerlForCompound indexedFor = createIndexedFor(project, (PsiPerlVariableDeclarationLexical)variableDeclaration, iterableList, block);

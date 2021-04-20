@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.Processor;
-import com.intellij.util.containers.Queue;
 import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.psi.properties.PerlIdentifierOwner;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -29,10 +28,7 @@ import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public interface PerlSubElement extends PerlSub, PsiElement, PerlIdentifierOwner {
   default @Nullable PerlSubElement getDirectSuperMethod() {
@@ -91,11 +87,11 @@ public interface PerlSubElement extends PerlSub, PsiElement, PerlIdentifierOwner
     }
     Set<String> recursionSet = new THashSet<>();
     Project project = getProject();
-    Queue<String> packagesToProcess = new Queue<>(5);
-    packagesToProcess.addLast(packageName);
+    Queue<String> packagesToProcess = new ArrayDeque<>(5);
+    packagesToProcess.add(packageName);
 
     while (!packagesToProcess.isEmpty()) {
-      packageName = packagesToProcess.pullFirst();
+      packageName = packagesToProcess.poll();
       NAMESPACE:
       for (PerlNamespaceDefinitionElement childNamespace : PerlPackageUtil.getChildNamespaces(project, packageName)) {
         String childNamespaceName = childNamespace.getNamespaceName();
@@ -106,7 +102,7 @@ public interface PerlSubElement extends PerlSub, PsiElement, PerlIdentifierOwner
               continue NAMESPACE;
             }
           }
-          packagesToProcess.addLast(childNamespaceName);
+          packagesToProcess.add(childNamespaceName);
         }
       }
     }

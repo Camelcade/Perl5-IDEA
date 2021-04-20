@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -52,7 +52,7 @@ public class PerlProfilerCollapsedDumpFileParser implements ProfilerDumpFilePars
     try (var fileInputStream = new FileInputStream(file);
          var gzipInputStream = new GZIPInputStream(fileInputStream, 1024 * 1024)
     ) {
-      dumpParser.readFromStreamFixed(gzipInputStream, indicator);
+      dumpParser.readFromStream(gzipInputStream, indicator);
     }
     catch (IOException e) {
       LOG.warn("Error reading collapsed dump: " + e.getMessage());

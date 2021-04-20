@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,7 +32,6 @@ import com.intellij.openapi.application.ReadAction;
 import com.intellij.openapi.application.WriteAction;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.CharsetToolkit;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.concurrency.Semaphore;
 import com.intellij.xdebugger.XDebugSession;
@@ -218,7 +217,7 @@ public class PerlDebugThread extends Thread {
         }
 
         if (DEV_MODE) {
-          LOG.debug("Got response " + response.size() + "\n" + new String(response.toNativeArray(), CharsetToolkit.UTF8_CHARSET));
+          LOG.debug("Got response " + response.size() + "\n" + new String(response.toNativeArray(), StandardCharsets.UTF_8));
         }
 
         processResponse(response);
@@ -247,7 +246,7 @@ public class PerlDebugThread extends Thread {
   }
 
   private void processResponse(TByteArrayList responseBytes) {
-    final String response = new String(responseBytes.toNativeArray(), CharsetToolkit.UTF8_CHARSET);
+    final String response = new String(responseBytes.toNativeArray(), StandardCharsets.UTF_8);
     final PerlDebuggingEvent newEvent = myGson.fromJson(response, PerlDebuggingEvent.class);
 
     if (newEvent != null) {

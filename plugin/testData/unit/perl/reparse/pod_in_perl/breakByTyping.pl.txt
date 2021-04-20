@@ -1,0 +1,18 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
+
+say 42;
+=h<caret>
+----------
+Psi structure
+----------
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('\nsay 42;\n')
+  PsiUnknownSectionImpl(Perl5 POD: UNKNOWN_SECTION)
+    PsiElement(Perl5 POD: =unknown)('=h')
+    PsiSectionTitleImpl(Perl5 POD: SECTION_TITLE)
+      <empty list>

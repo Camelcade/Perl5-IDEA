@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,8 +42,7 @@ public class PerlPackageProcessorEP extends KeyedLazyInstanceEP<PerlPackageProce
 
   static {
     //noinspection UnstableApiUsage
-    Objects.requireNonNull(EP.getPoint())
-      .addExtensionPointListener(VERSION_PROVIDER::drop, false, PerlPluginUtil.getUnloadAwareDisposable());
+    Objects.requireNonNull(EP.getPoint()).addChangeListener(VERSION_PROVIDER::drop, PerlPluginUtil.getUnloadAwareDisposable());
   }
 
   public static int getVersion() {

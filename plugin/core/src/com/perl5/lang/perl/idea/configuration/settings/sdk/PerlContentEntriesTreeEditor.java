@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -108,21 +108,9 @@ public class PerlContentEntriesTreeEditor implements UnnamedConfigurable, Dispos
     descriptor.setShowFileSystemRoots(false);
     descriptor.setRoots(contentRoots);
 
-    myFileSystemTree = new FileSystemTreeImpl(module.getProject(),
-                                              descriptor,
-                                              myTree,
-                                              new MyTreeCellRenderer(),
-                                              () -> {
-                                                myFileSystemTree.updateTree();
-                                                //myFileSystemTree.select(file, null);
-                                              },
-                                              null) {
-
-      @Override
-      protected boolean useNewAsyncModel() {
-        return true;
-      }
-    };
+    myFileSystemTree = new FileSystemTreeImpl(
+      module.getProject(), descriptor, myTree, new MyTreeCellRenderer(), () -> myFileSystemTree.updateTree(), null
+    );
     myFileSystemTree.showHiddens(true);
     Disposer.register(this, myFileSystemTree);
 

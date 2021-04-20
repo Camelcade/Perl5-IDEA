@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,6 @@ buildscript {
     classpath 'org.codehaus.groovy.modules.http-builder:http-builder:0.7.1'
     classpath 'org.apache.httpcomponents:httpmime:4.5.11'
     classpath 'org.eclipse.jgit:org.eclipse.jgit:5.5.1.201910021850-r'
-    classpath files("lib/coveralls-gradle-plugin-2020.1.jar")
   }
 }
 
@@ -31,6 +30,7 @@ plugins {
   id 'jacoco'
   id 'org.jetbrains.grammarkit' version "$grammarKitGradlePluginVersion"
   id 'idea'
+  id 'com.github.kt3k.coveralls' version "$coverallsGradlePluginVersion"
 }
 
 repositories {
@@ -255,12 +255,6 @@ runIde {
     args("traverseUI", "$project.rootDir.canonicalPath/resources/search/searchableOptions.xml")
   }
   jvmArgs("-Xmx2048m")
-}
-
-sourceSets {
-  test {
-    resources.srcDirs file('testData')
-  }
 }
 
 task publishAllPlugins {

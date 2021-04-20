@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,13 +16,11 @@
 
 package com.perl5.lang.perl.idea.codeInsight;
 
-import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.lang.parameterInfo.*;
 import com.intellij.openapi.util.Ref;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
-import com.intellij.util.ArrayUtil;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.psi.*;
@@ -74,16 +72,6 @@ public class PerlParameterInfoHandler implements ParameterInfoHandler<PsiPerlCal
   @Override
   public void updateUI(PerlParameterInfo parameterInfo, @NotNull ParameterInfoUIContext context) {
     parameterInfo.setUpUIPresentation(context);
-  }
-
-  @Override
-  public boolean couldShowInLookup() {
-    return false;
-  }
-
-  @Override
-  public @Nullable Object[] getParametersForLookup(LookupElement item, ParameterInfoContext context) {
-    return ArrayUtil.EMPTY_OBJECT_ARRAY;  // we don't
   }
 
   /**

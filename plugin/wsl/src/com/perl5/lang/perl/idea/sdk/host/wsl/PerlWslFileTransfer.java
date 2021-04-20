@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import com.intellij.execution.ExecutionException;
 import com.intellij.execution.process.ProcessAdapter;
 import com.intellij.execution.process.ProcessEvent;
 import com.intellij.execution.process.ProcessOutput;
-import com.intellij.execution.wsl.WSLDistributionWithRoot;
+import com.intellij.execution.wsl.WSLDistribution;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
@@ -62,7 +62,7 @@ class PerlWslFileTransfer extends PerlHostFileTransfer<PerlWslData> {
       return;
     }
 
-    WSLDistributionWithRoot distribution = myHostData.getNotNullDistribution();
+    WSLDistribution distribution = myHostData.getDistribution();
     remotePath = FileUtil.toSystemIndependentName(remotePath);
 
     try {
@@ -127,7 +127,7 @@ class PerlWslFileTransfer extends PerlHostFileTransfer<PerlWslData> {
       LOG.debug(myHostData + " file directly available: " + remotePath);
       return Collections.emptyList();
     }
-    PerlWslFileSystem wslFileSystem = PerlWslFileSystem.create(myHostData.getNotNullDistribution());
+    PerlWslFileSystem wslFileSystem = PerlWslFileSystem.create(myHostData.getDistribution());
     VirtualFile root = wslFileSystem.refreshAndFindFileByPath(remotePath);
     return root == null ? Collections.emptyList() : Collections.unmodifiableList(Arrays.asList(root.getChildren()));
   }

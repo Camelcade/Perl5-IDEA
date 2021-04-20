@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,11 +30,6 @@ public class PerlFileTypeDetector implements FileTypeRegistry.FileTypeDetector {
   public FileType detect(@NotNull VirtualFile file, @NotNull ByteSequence firstBytes, @Nullable CharSequence firstCharsIfText) {
     // todo add some detections for xs/pod/pm
     return FileUtil.isHashBangLine(firstCharsIfText, "perl") ? PerlFileTypeScript.INSTANCE : null;
-  }
-
-  @Override
-  public int getVersion() {
-    return 1;
   }
 }
 

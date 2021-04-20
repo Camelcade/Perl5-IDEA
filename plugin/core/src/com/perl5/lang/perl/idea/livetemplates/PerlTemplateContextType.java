@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,10 +17,10 @@
 package com.perl5.lang.perl.idea.livetemplates;
 
 import com.intellij.codeInsight.template.EverywhereContextType;
+import com.intellij.codeInsight.template.TemplateActionContext;
 import com.intellij.codeInsight.template.TemplateContextType;
 import com.intellij.psi.PsiComment;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
@@ -45,14 +45,16 @@ public abstract class PerlTemplateContextType extends TemplateContextType {
   }
 
   @Override
-  public boolean isInContext(@NotNull PsiFile psiFile, int fileOffset) {
-    if (!PsiUtilCore.getLanguageAtOffset(psiFile, fileOffset).isKindOf(PerlLanguage.INSTANCE)) {
+  public boolean isInContext(@NotNull TemplateActionContext templateActionContext) {
+    var psiFile = templateActionContext.getFile();
+    var startOffset = templateActionContext.getStartOffset();
+    if (!PsiUtilCore.getLanguageAtOffset(psiFile, startOffset).isKindOf(PerlLanguage.INSTANCE)) {
       return false;
     }
-    PsiElement element = psiFile.findElementAt(fileOffset);
+    PsiElement element = psiFile.findElementAt(startOffset);
 
     if (element == null) {
-      element = psiFile.findElementAt(fileOffset - 1);
+      element = psiFile.findElementAt(startOffset - 1);
     }
 
     if (element == null) {

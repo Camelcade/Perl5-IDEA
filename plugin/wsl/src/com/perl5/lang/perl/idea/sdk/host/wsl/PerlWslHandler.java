@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 package com.perl5.lang.perl.idea.sdk.host.wsl;
 
 import com.intellij.execution.wsl.WSLDistribution;
-import com.intellij.execution.wsl.WSLUtil;
+import com.intellij.execution.wsl.WslDistributionManager;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.util.ArrayUtil;
@@ -39,7 +39,8 @@ class PerlWslHandler extends PerlHostWithFileSystemHandler<PerlWslData, PerlWslH
 
   @Override
   protected @Nullable PerlWslData createDataInteractively() {
-    String[] ids = ArrayUtil.toStringArray(ContainerUtil.map(WSLUtil.getAvailableDistributions(), WSLDistribution::getId));
+    String[] ids =
+      ArrayUtil.toStringArray(ContainerUtil.map(WslDistributionManager.getInstance().getInstalledDistributions(), WSLDistribution::getId));
     if (ids.length < 1) {
       return null;
     }
@@ -72,7 +73,7 @@ class PerlWslHandler extends PerlHostWithFileSystemHandler<PerlWslData, PerlWslH
 
   @Override
   public boolean isApplicable() {
-    return WSLUtil.hasAvailableDistributions();
+    return !WslDistributionManager.getInstance().getInstalledDistributions().isEmpty();
   }
 
   @Override

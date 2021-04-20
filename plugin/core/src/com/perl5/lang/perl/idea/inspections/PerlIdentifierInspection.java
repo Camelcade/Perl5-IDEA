@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.idea.inspections;
 
 import com.intellij.codeInspection.ProblemsHolder;
-import com.intellij.openapi.vfs.CharsetToolkit;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiNameIdentifierOwner;
@@ -25,11 +24,13 @@ import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.*;
 import org.jetbrains.annotations.NotNull;
 
+import java.nio.charset.StandardCharsets;
+
 
 public class PerlIdentifierInspection extends PerlInspection {
   @Override
   public @NotNull PsiElementVisitor buildVisitor(final @NotNull ProblemsHolder holder, boolean isOnTheFly) {
-    boolean isUtf = holder.getFile().getVirtualFile().getCharset() == CharsetToolkit.UTF8_CHARSET;
+    boolean isUtf = holder.getFile().getVirtualFile().getCharset() == StandardCharsets.UTF_8;
     return new PerlVisitor() {
 
       @Override

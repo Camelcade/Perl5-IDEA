@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,8 +25,13 @@ import org.jetbrains.annotations.NotNull;
 import javax.swing.*;
 
 public final class MojoIcons {
-  public static final Icon MOJO_FILE = IconLoader.getIcon("/icons/mojolicious.png");
-  public static final Icon MOJO_LOGO = IconLoader.getIcon("/icons/mojolicious_color.png");
+  public static final Icon MOJO_FILE = load("/icons/mojolicious.png");
+  public static final Icon MOJO_LOGO = load("/icons/mojolicious_color.png");
+
+  private static @NotNull Icon load(@NotNull String resourcePath) {
+    return IconLoader.getIcon(resourcePath, MojoIcons.class);
+  }
+
   public static final Icon MOJO_APP_ICON = MOJO_LOGO;
   public static final Icon MOJO_LITE_APP_ICON = MOJO_LOGO;
   private static final NotNullLazyValue<Icon> MOJO_ROOT = PerlIcons.createLazyIconWithModifier(PerlIcons.TEMPLATE_ROOT, MOJO_LOGO);

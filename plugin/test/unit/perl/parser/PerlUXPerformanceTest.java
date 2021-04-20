@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@ import com.intellij.openapi.fileEditor.TextEditor;
 import com.intellij.openapi.fileEditor.impl.text.TextEditorProvider;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiFile;
-import com.intellij.psi.impl.PsiModificationTrackerImpl;
+import com.intellij.psi.PsiManager;
 import com.intellij.testFramework.PlatformTestUtil;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.intellij.util.ArrayUtil;
@@ -74,7 +74,7 @@ public class PerlUXPerformanceTest extends PerlLightTestCase {
     final int iterations = 30;
     for (int i = 0; i < iterations; i++) {
       codeAnalyzer.restart();
-      ((PsiModificationTrackerImpl)getPsiManager().getModificationTracker()).incCounter();
+      PsiManager.getInstance(getProject()).dropPsiCaches();
       codeAnalyzer.runPasses(file, editor.getDocument(), Collections.singletonList(textEditor), ArrayUtil.EMPTY_INT_ARRAY, false, null);
       codeAnalyzerEx.getFileLevelHighlights(project, file);
     }
@@ -84,7 +84,7 @@ public class PerlUXPerformanceTest extends PerlLightTestCase {
       long start = System.currentTimeMillis();
       for (int i = 0; i < iterations; i++) {
         codeAnalyzer.restart();
-        ((PsiModificationTrackerImpl)getPsiManager().getModificationTracker()).incCounter();
+        PsiManager.getInstance(getProject()).dropPsiCaches();
         codeAnalyzer.runPasses(file, editor.getDocument(), Collections.singletonList(textEditor), ArrayUtil.EMPTY_INT_ARRAY, false, null);
         DaemonCodeAnalyzerEx.getInstanceEx(project).getFileLevelHighlights(project, file);
       }

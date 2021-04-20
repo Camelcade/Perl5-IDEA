@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 package com.perl5.lang.pod.idea.livetemplates;
 
 import com.intellij.codeInsight.template.EverywhereContextType;
+import com.intellij.codeInsight.template.TemplateActionContext;
 import com.intellij.codeInsight.template.TemplateContextType;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.FileViewProvider;
@@ -48,17 +49,19 @@ public abstract class PodTemplateContextType extends TemplateContextType impleme
   }
 
   @Override
-  public boolean isInContext(@NotNull PsiFile file, int offset) {
-    PsiFile podFile = file.getViewProvider().getPsi(PodLanguage.INSTANCE);
+  public boolean isInContext(@NotNull TemplateActionContext templateActionContext) {
+    var psiFile = templateActionContext.getFile();
+    var startOffset = templateActionContext.getStartOffset();
+    PsiFile podFile = psiFile.getViewProvider().getPsi(PodLanguage.INSTANCE);
 
     if (podFile == null) {
       return false;
     }
 
-    PsiElement element = podFile.findElementAt(offset);
+    PsiElement element = podFile.findElementAt(startOffset);
 
     if (element == null) {
-      element = podFile.findElementAt(offset - 1);
+      element = podFile.findElementAt(startOffset - 1);
     }
 
     if (element == null) {

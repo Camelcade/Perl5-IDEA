@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,7 +41,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.openapi.vfs.CharsetToolkit;
 import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.search.FilenameIndex;
@@ -66,6 +65,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -210,7 +210,7 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
       LOG.warn("Unable to create deparser command line");
       return;
     }
-    commandLine.withCharset(CharsetToolkit.UTF8_CHARSET).withMissingPackageListener(false);
+    commandLine.withCharset(StandardCharsets.UTF_8).withMissingPackageListener(false);
 
     LOG.info("Deparsing: " + commandLine.getCommandLineString());
 

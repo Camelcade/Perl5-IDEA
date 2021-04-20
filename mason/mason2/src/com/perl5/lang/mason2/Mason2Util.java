@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,6 @@
 
 package com.perl5.lang.mason2;
 
-import com.intellij.openapi.project.DumbModeTask;
-import com.intellij.openapi.project.DumbServiceImpl;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -141,10 +139,7 @@ public class Mason2Util {
         }
       }
       if (index instanceof FileBasedIndexImpl) {
-        DumbModeTask changedFilesIndexingTask = FileBasedIndexProjectHandler.createChangedFilesIndexingTask(project);
-        if (changedFilesIndexingTask != null) {
-          DumbServiceImpl.getInstance(project).queueTask(changedFilesIndexingTask);
-        }
+        FileBasedIndexProjectHandler.scheduleReindexingInDumbMode(project);
       }
     }
   }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,9 +19,9 @@ package com.perl5.lang.pod.lexer;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.IFileElementType;
 import com.perl5.lang.pod.elementTypes.PodFileElementType;
-import com.perl5.lang.pod.elementTypes.PodTokenType;
+import com.perl5.lang.pod.elementTypes.PodOuterTokenType;
 
 public interface PodElementTypes extends PodElementTypesGenerated {
-  IElementType POD_OUTER = new PodTokenType("POD_OUTER");
+  IElementType POD_OUTER = new PodOuterTokenType();
   IFileElementType FILE = new PodFileElementType("Plain old document");
 }

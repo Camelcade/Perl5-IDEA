@@ -1,0 +1,16 @@
+Reparsing block
+----------
+PsiElement(Perl5 POD: POD_OUTER)
+----------
+
+say 
+----------
+After typing
+----------
+
+say 1<caret>
+----------
+Psi structure
+----------
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('\nsay 1')

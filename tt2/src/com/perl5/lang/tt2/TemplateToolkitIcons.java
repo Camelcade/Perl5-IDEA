@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,14 +19,19 @@ package com.perl5.lang.tt2;
 import com.intellij.openapi.util.IconLoader;
 import com.intellij.ui.LayeredIcon;
 import com.perl5.PerlIcons;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 
 public final class TemplateToolkitIcons {
-  public static final Icon TTK2_ICON = IconLoader.getIcon("/icons/template_toolkit_gutter_icon.png");
-  public static final Icon TTK2_MODIFIER = IconLoader.getIcon("/icons/tt-modifier.png");
+  public static final Icon TTK2_ICON = load("/icons/template_toolkit_gutter_icon.png");
+  public static final Icon TTK2_MODIFIER = load("/icons/tt-modifier.png");
+  public static final Icon TTK2_BLOCK_ICON = load("/icons/template_toolkit_block_gutter_icon.png");
   public static final Icon TTK2_ROOT = new LayeredIcon(PerlIcons.TEMPLATE_ROOT, TTK2_MODIFIER);
-  public static final Icon TTK2_BLOCK_ICON = IconLoader.getIcon("/icons/template_toolkit_block_gutter_icon.png");
+
+  private static @NotNull Icon load(@NotNull String resourcePath) {
+    return IconLoader.getIcon(resourcePath, TemplateToolkitIcons.class);
+  }
 
   private TemplateToolkitIcons() {
   }
