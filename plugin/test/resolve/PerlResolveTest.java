@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -60,13 +60,19 @@ public class PerlResolveTest extends PerlLightTestCase {
   public void testSimpleMainTrue() {doTestSimpleMain(true);}
 
   @Test
-  public void testSimpleMainFalse() {doTestSimpleMain(false);}
+  public void testSimpleMainFalse() { doTestSimpleMain(false); }
 
   private void doTestSimpleMain(boolean value) {
     myFixture.copyFileToProject("simpleMain2.pl");
     initWithFileSmartWithoutErrors("simpleMain");
     PerlSharedSettings.getInstance(getProject()).SIMPLE_MAIN_RESOLUTION = value;
     checkSerializedReferencesWithFile();
+  }
+
+  @Test
+  public void testMooseKeywords() {
+    withMoose();
+    doTest();
   }
 
   @Test

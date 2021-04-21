@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import com.perl5.lang.perl.extensions.packageprocessor.*;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -36,10 +37,16 @@ public class MooseProcessor extends PerlPackageProcessorBase implements
     PACKAGE_MOOSE_OBJECT, PACKAGE_CARP, PACKAGE_SCALAR_UTIL
   );
   protected static final List<String> PARENT_CLASSES = Collections.singletonList(PACKAGE_MOOSE_OBJECT);
-  static final List<PerlExportDescriptor> EXPORTS = Arrays.asList(
-    PerlExportDescriptor.create(PACKAGE_CARP, "confess"),
-    PerlExportDescriptor.create(PACKAGE_SCALAR_UTIL, "blessed")
-  );
+  static final List<PerlExportDescriptor> EXPORTS;
+
+  static {
+    List<PerlExportDescriptor> exports = new ArrayList<>();
+    exports.add(PerlExportDescriptor.create(PACKAGE_CARP, "confess"));
+    exports.add(PerlExportDescriptor.create(PACKAGE_SCALAR_UTIL, "blessed"));
+    Arrays.asList("extends", "with", "has", "before", "after", "around", "override", "augment").forEach(
+      it -> exports.add(PerlExportDescriptor.create(PACKAGE_MOOSE, it)));
+    EXPORTS = List.copyOf(exports);
+  }
 
   @Override
   public @NotNull List<String> getLoadedPackageNames(PerlUseStatementElement useStatement) {

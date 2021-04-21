@@ -2565,15 +2565,17 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
 
   protected void withFunctionParameters() {addTestLibrary("functionParameters");}
 
-  protected void withFuture() {addTestLibrary("future");}
+  protected void withFuture() { addTestLibrary("future"); }
 
-  protected void withPerlPod528() {addTestLibrary("perldoc528");}
+  protected void withPerlPod528() { addTestLibrary("perldoc528"); }
 
-  protected void withPerlPod532() {addTestLibrary("perldoc532");}
+  protected void withPerlPod532() { addTestLibrary("perldoc532"); }
 
-  protected void withCpanfile() {addTestLibrary("cpanfile");}
+  protected void withCpanfile() { addTestLibrary("cpanfile"); }
 
   protected void withLog4perl() { addTestLibrary("log4perl"); }
+
+  protected void withMoose() { addTestLibrary("moose"); }
 
   protected void withFileSpec() { addTestLibrary("fileSpec"); }
 

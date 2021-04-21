@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import com.intellij.psi.ResolveResult;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlCallObjectValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlCallValue;
+import com.perl5.lang.perl.parser.moose.MooseTokenSets;
 import com.perl5.lang.perl.psi.PerlMethod;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -48,10 +49,13 @@ public class PerlSubReference extends PerlSubReferenceSimple {
     if (parent instanceof PerlMethod) {
       perlValue = PerlCallValue.from(parent);
     }
-    else if (MODIFIER_DECLARATIONS_TOKENSET.contains(PsiUtilCore.getElementType(parent))) {
-      perlValue = PerlCallObjectValue.create(PerlPackageUtil.getContextNamespaceName(myElement),
-                                             myElement.getText(),
-                                             Collections.emptyList());
+    else {
+      var parentElementType = PsiUtilCore.getElementType(parent);
+      if (MODIFIER_DECLARATIONS_TOKENSET.contains(parentElementType) || MooseTokenSets.MOOSE_STATEMENTS.contains(parentElementType)) {
+        perlValue = PerlCallObjectValue.create(PerlPackageUtil.getContextNamespaceName(myElement),
+                                               myElement.getText(),
+                                               Collections.emptyList());
+      }
     }
 
     if (perlValue == null) {

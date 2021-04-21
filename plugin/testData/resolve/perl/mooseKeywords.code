@@ -1,0 +1,9 @@
+use Moose;
+has test => (is => 'lazy');
+extends 'Foo';
+with 'some';
+before foo => sub{};
+after foo => sub{};
+around foo => sub{inner;};
+override foo => sub{super;};
+augment foo => sub{};
