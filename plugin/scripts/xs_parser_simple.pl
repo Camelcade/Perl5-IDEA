@@ -7,15 +7,13 @@ File::Find::find( \&file_processor, @INC );
 my @packages = ();
 sub file_processor
 {
-    if ($File::Find::name =~ m{auto/(.+?)/([^/]+)(dll|so)$})
-    {
+    if ($File::Find::name =~ m{auto/(.+?)/([^/]+)(dll|so|bundle)$}) {
         my $name = $1;
         $name =~ s{/+}{::}g;
         return if $name =~ /\QType::Tiny::XS\E/; # see https://github.com/tobyink/p5-type-tiny-xs/issues/4
         #        print STDERR "Processing $name\n";
         eval "require $name;";
-        if (my $e = $@)
-        {
+        if (my $e = $@) {
             print STDERR "Error loading $name:\n$e\n";
         }
     }
