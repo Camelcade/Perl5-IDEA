@@ -39,4 +39,10 @@ public class EmbeddedPerlFormatterTest extends EmbeddedPerlLightTestCase {
   public void testSimpleIndented() {
     doFormatTest();
   }
+
+  @Test
+  public void testDoubleNesting() { doFormatTest(); }
+
+  @Test
+  public void testTripleNesting() { doFormatTest(); }
 }
