@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.sdk.host.wsl;
 
 import com.intellij.execution.wsl.WSLDistribution;
+import com.intellij.execution.wsl.WSLUtil;
 import com.intellij.execution.wsl.WslDistributionManager;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.ui.Messages;
@@ -73,7 +74,7 @@ class PerlWslHandler extends PerlHostWithFileSystemHandler<PerlWslData, PerlWslH
 
   @Override
   public boolean isApplicable() {
-    return !WslDistributionManager.getInstance().getInstalledDistributions().isEmpty();
+    return WSLUtil.isSystemCompatible() && !WslDistributionManager.getInstance().getInstalledDistributions().isEmpty();
   }
 
   @Override
