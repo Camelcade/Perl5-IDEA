@@ -1,0 +1,12 @@
+# PODNAME: Moose::Cookbook::Style
+# ABSTRACT: Expanded into Moose::Manual::BestPractices, so go read that
+
+=pod
+
+=head1 DESCRIPTION
+
+The style cookbook has been replaced by
+L<Moose::Manual::BestPractices>. This POD document still exists for
+the benefit of anyone out there who might've linked to it in the past.
+
+=cut

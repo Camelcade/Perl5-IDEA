@@ -1,0 +1,463 @@
+# PODNAME: Moose::Manual::Resources
+# ABSTRACT: Links to various tutorials, videos, blogs, presentations, interviews, etc...
+
+=pod
+
+=encoding utf8
+
+=head1 Resources
+
+This section is an attempt to collect and list some of the many Moose resources that can be found online. Additional information can be found at http://moose.perl.org/
+
+=head2 Videos
+
+=over 4
+
+=item
+
+A new object system for the Perl 5 core, Stevan Little
+L<https://www.youtube.com/watch?v=Gf0O6Ct7V1s>
+
+=item
+
+Stevan Little interviewed by Gabor Szabo for PerlMaven.com
+L<https://www.youtube.com/watch?v=shu-bVimOpM>
+
+=item
+
+Perl 6 OO vs. Moose, Herbert Breunung
+L<https://www.youtube.com/watch?v=Boh3109HVLo>
+
+=item
+
+Introduction To Moose, Mike Whitaker
+L<https://www.youtube.com/watch?v=YVtqa6zWXqY>
+
+=item
+
+"Dr. Strange... Moose or: How I Learned to Stop Worrying and Love Perl"
+L<https://www.youtube.com/watch?v=PNFiIU8S-7g>
+
+=item
+
+Evolving Software with Moose, Dave Cross
+L<https://www.youtube.com/watch?v=BIMREkoPYKA>
+
+=item
+
+Testing with Test::Class::Moose, Curtis Poe
+L<https://www.youtube.com/watch?v=kUHI1iRrfF4>
+
+=item
+
+"Moose is Perl" tutorial, OSCON 2014, Ricardo Signes
+L<https://www.youtube.com/watch?v=LKXvG6VKew4>
+
+=back
+
+=head2 Slide Shows
+
+=over 4
+
+=item
+
+Use Moose to create abstractions in the domain, Shawn M. Moore (sartak)
+L<https://speakerdeck.com/sartak/lifting-moose>
+
+=back
+
+=head2 Articles
+
+=over 4
+
+=item
+
+Perl.org Moose Whitepaper
+L<https://www.perl.org/about/whitepapers/perl-object-oriented.html>
+
+=item
+
+PerlMaven.com
+L<http://perlmaven.com/moose>
+
+=item
+
+Getting Started with Moose, brian d foy
+http://www.theperlreview.com/articles/moose.html
+
+=item
+
+Wikipedia.org
+L<http://en.wikipedia.org/wiki/Moose_(Perl)>
+
+=item
+
+Moose: A postmodern object system for Perl 5
+L<http://perltraining.com.au/tips/2010-01-27.html>
+
+=item
+
+Roles and Delegates and Refactoring
+L<http://blog.woobling.org/2009/10/roles-and-delegates-and-refactoring.html>
+
+=back
+
+=head1 Older Resources
+
+=head2 Articles
+
+=head3 2011
+
+=over 4
+
+=item
+
+Dave Rolsky reviews Perl Best Practices, Chapter 15, Objects 7 years later
+L<http://blog.urth.org/2011/03/reviewing-perl-best-practices-chapter-15-objects.html>
+
+=item
+
+Mark A. Stratman discusses subclassing non-Moose classes
+L<http://blogs.perl.org/users/mark_a_stratman/2011/03/subclassing-tricky-non-moose-classes-constructor-problems.html>
+
+=item
+
+Mark A. Stratman shows how to use delegation to work with non-Moose classes
+L<http://blogs.perl.org/users/mark_a_stratman/2011/03/subclassing-tricky-non-moose-classes-dont-do-it.html>
+
+=item
+
+The WebGUI folks talk about version 8.0 (which uses Moose)
+L<http://blogs.perl.org/users/preaction/2011/01/whats-new-in-webgui-80-1---psgiplack.html>
+
+=item
+
+chromatic discusses Parameterized roles with Moose
+L<http://www.modernperlbooks.com/mt/2011/01/the-parametric-role-of-my-mvc-plugin-system.html>
+
+=back
+
+=head3 2010
+
+=over 4
+
+=item
+
+Chris Prather discusses Moose and the Modern Perl movement
+L<http://chris.prather.org/been-there-done-that.md.html>
+
+=item
+
+Devin Austin talks about MooseX::App::Cmd
+L<http://www.catalyzed.org/2010/04/moosexappcmd-and-your-command-line-apps.html>
+
+=item
+
+JT Smith declares The Second Age of Perl
+L<http://blogs.perl.org/users/jt_smith/2010/04/the-second-age-of-perl.html>
+
+=item
+
+JT Smith talks about Lacuna Expanse (which uses Moose)
+L<http://blogs.perl.org/users/jt_smith/2010/10/why-the-lacuna-expanse-is-good-for-perl.html>
+
+=item
+
+Moose 1.00 is Released
+L<http://stevan-little.blogspot.com/2010/03/moose-100-is-released.html>
+
+=item
+
+Moritz Lenz asks What is "Modern Perl"?
+L<http://perlgeek.de/blog-en/perl-tips/what-is-modern-perl.html>
+
+=item
+
+Yuval Kogman declares "Moose has won".
+L<http://blog.woobling.org/2010/09/moose-has-won.html>
+
+=item
+
+chromatic discusses how Moose helps you write more correct code
+L<http://www.modernperlbooks.com/mt/2010/01/subtle-encouragement-toward-correctness.html>
+
+=item
+
+chromatic discusses the Moose deprecation policy
+L<http://www.modernperlbooks.com/mt/2010/09/the-right-approach-to-deprecation.html>
+
+=item
+
+chromatic talks about Class::MOP in relation to his Modern Perl book
+L<http://www.modernperlbooks.com/mt/2010/03/ill-get-the-mop.html>
+
+=item
+
+chromatic talks about Encapsulation and Moose
+L<http://www.modernperlbooks.com/mt/2010/09/what-you-can-and-cannot-teach-about-encapsulation.html>
+
+=back
+
+=head3 2009
+
+=over 4
+
+=item
+
+Bruno Vecchi praises Moose for making his protein analysis code easier
+L<http://zerothorder.blogspot.com/2009/04/chopping-proteins-with-moose.html>
+
+=item
+
+Chris Prather compares MooseX::Declare to Simula 67
+L<http://chris.prather.org/a-little-bit-of-history.md.html>
+
+=item
+
+Chris Prather rationalizes Moose's "post modern" label
+L<http://chris.prather.org/why-moose-is-post-modern.html>
+
+=item
+
+Dave Rolsky's post-mortem on his Moose documentation grant
+L<http://blog.urth.org/2009/04/moose-docs-grant-wrap-up.html>
+
+=item
+
+David McLaughlin experiments with extending Moose for MooseX::ChainedAccessors
+L<http://www.dmclaughlin.com/2009/05/15/chained-accessors-in-moose/>
+
+=item
+
+Sam Crawley summarizes his experience with roles
+L<http://samcrawley.wordpress.com/2009/05/03/getting-the-hang-of-moose-roles/>
+
+=item
+
+Shawn M Moore discusses Perl::Critic for Moose and linting with the MOP
+L<http://blog.sartak.org/2009/05/perl-critic-dynamic-moose.html>
+
+=item
+
+Shlomi Fish discovers a better way to Moose
+L<http://community.livejournal.com/shlomif_tech/38407.html>
+
+=item
+
+Stevan Little explains why you should make your Moose classes immutable
+L<http://stevan-little.blogspot.com/2009/06/why-makeimmutable-is-recommended-for_13.html>
+
+=item
+
+Tomas Doran interview about the new Moose-based Catalyst
+L<http://www.catalyzed.org/2009/04/catalyst-58-released.html>
+
+=item
+
+chromatic contrasts roles and duck-typing
+L<http://www.modernperlbooks.com/mt/2009/05/perl-roles-versus-duck-typing.html>
+
+=item
+
+chromatic contrasts roles and inheritance
+L<http://www.modernperlbooks.com/mt/2009/05/perl-roles-versus-inheritance.html>
+
+=item
+
+chromatic on The Why of Perl Roles
+L<http://www.modernperlbooks.com/mt/2009/04/the-why-of-perl-roles.html>
+
+=back
+
+=head3 2008
+
+=over 4
+
+=item
+
+Barry Walsh does an excellent comparison of Moose and Ruby (specifically the Doodle module)
+L<http://draegtun.wordpress.com/2008/03/12/doodling-with-moose-part-1/>
+
+=item
+
+Tim Bunce's excellent Perl Myths talk gives a shout out to Moose
+L<http://www.slideshare.net/Tim.Bunce/perl-myths-200802-with-notes/>
+
+=item
+
+chromatic suggests Moose and Mouse in his Beginners Introduction to Object-Oriented Programming with Perl article
+L<http://broadcast.oreilly.com/2008/11/beginners-introduction-to-obje.html>
+
+=back
+
+=head3 2007
+
+=over 4
+
+=item
+
+Larry mentioned Moose in 2007's State of the Onion speech
+L<http://www.perl.com/pub/a/2007/12/06/soto-11.html?page=3>
+
+=item
+
+Max Kanat-Alexander (of Bugzilla fame) has some nice things to say about Moose
+L<http://avatraxiom.livejournal.com/70947.html>
+
+=back
+
+=head3 2006
+
+=over 4
+
+=item
+
+Class::MOP Review (OnLAMP)
+L<http://www.oreillynet.com/onlamp/blog/2006/06/cpan_module_review_classmop.html>
+
+=back
+
+=head2 Presentations
+
+=head3 Perl Mongers Groups
+
+=over 4
+
+=item
+
+Doug Treder's Moose talk at Seattle Perl Users Group
+L<http://www.slideshare.net/dtreder/moose-527243>
+
+=item
+
+Hans Dieter Pearcey's Meta-Moose at PDX.pm
+L<http://www.weftsoar.net/~hdp/talk/meta-moose/slides/start.html>
+
+=item
+
+Piers Cawley's MooseX::Declare talk at London.pm (video)
+L<http://www.bofh.org.uk/2009/05/13/london-pm-presentation>
+
+=item
+
+Robert Boone's Moose talk at Houston.pm
+L<http://houston.pm.org/talks/2007talks/0704Talk/slides/start.html>
+
+=item
+
+hakobe's Moose presentation at Kansai.pm
+L<http://www.slideshare.net/hakobe/moose>
+
+=back
+
+=head3 2011
+
+=over 4
+
+=item
+
+SawyerX's FOSDEM 2011 Moose talk
+L<http://www.slideshare.net/xSawyer/moose-talk-at-fosdem-2011-perl-devroom>
+
+=back
+
+=head3 2010
+
+=over 4
+
+=item
+
+Drew Stephens gives a lighting talk on Moose at SHDH 36
+L<http://www.slideshare.net/dinomite/learning-moose-lightning>
+
+=item
+
+Jesse Luehrs's "Extending Moose" talk at YAPC::NA 2010
+L<http://tozt.net/talks/extending_moose_yapc_na_2010/>
+
+=item
+
+Shawn Moore's "Non-hierarchical osdc.tw
+L<http://sartak.org/talks/osdc.tw-2010/nonhierarchical-oop/nonhierarchical-oop.pdf>
+
+=item
+
+Ynon Perek's Perl Object Oriented Programming slides
+L<http://prezi.com/fgdoyw0smyqo/perl-object-oriented-programming/>
+
+=back
+
+=head3 2009
+
+=over 4
+
+=item
+
+Dave Rolsky's Introduction to Moose master class at YAPC::NA 2009 (delivered by Shawn Moore and Jonathan Rockway)
+L<http://yapc10.org/yn2009/talk/2047>
+
+=item
+
+Devin Austin's Intro to Moose at YAPC::NA 2009
+L<http://yapc10.org/yn2009/talk/1967>
+
+=item
+
+Hans Dieter Pearcey's Code Reuse with Moose at YAPC::NA 2009
+L<http://yapc10.org/yn2009/talk/1984>
+
+=item
+
+Mike Whitaker's Intro to Moose at Italian Perl Workshop
+L<http://www.slideshare.net/Penfold/introduction-to-moose-2437037>
+
+=item
+
+Mike Whitaker's Introduction to Moose at the Italian Perl Workshop
+L<http://conferences.yapceurope.org/ipw2009/talk/2371>
+
+=item
+
+Shawn M Moore's Intro to Moose at Frozen Perl
+L<http://sartak.org/talks/frozen-perl-2009/moose/>
+
+=item
+
+Shawn Moore's Extending Moose for Applications at YAPC::NA 2009
+L<http://sartak.org/talks/yapc-na-2009/extending-moose/extending-moose.pdf>
+
+=item
+
+Shawn Moore's Moose master class at YAPC::Asia 2009
+L<http://conferences.yapcasia.org/ya2009/talk/2192>
+
+=item
+
+Yuval Kogman's Why Moose at the Nordic Perl Workshop
+L<http://www.perlworkshop.no/npw2009/talk/1901>
+
+=back
+
+=head3 2008
+
+=over 4
+
+=item
+
+Mike Whitaker's Intro to Moose at the London Perl Workshop
+L<http://yapc.tv/2008/lpw/mike-whitaker-intro-moose/>
+
+=back
+
+=head3 2006
+
+=over 4
+
+=item
+
+Sam Vilain gives the very first Moose talk at YAPC::EU
+L<http://www.yapceurope.org/2006/talk/item/63.html>
+
+=back
+
+=cut

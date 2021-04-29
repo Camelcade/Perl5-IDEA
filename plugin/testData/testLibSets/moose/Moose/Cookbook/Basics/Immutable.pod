@@ -1,0 +1,34 @@
+# PODNAME: Moose::Cookbook::Basics::Immutable
+# ABSTRACT: Making Moose fast by making your class immutable
+
+=pod
+
+=head1 SYNOPSIS
+
+  package Point;
+  use Moose;
+
+  has 'x' => ( isa => 'Int', is => 'ro' );
+  has 'y' => ( isa => 'Int', is => 'rw' );
+
+  __PACKAGE__->meta->make_immutable;
+
+=head1 DESCRIPTION
+
+The Moose metaclass API provides a C<make_immutable()> method. Calling
+this method does two things to your class. First, it makes it
+faster. In particular, object construction and destruction are
+effectively "inlined" in your class, and no longer invoke the meta
+API.
+
+Second, you can no longer make changes via the metaclass API, such as
+adding attributes. In practice, this won't be a problem, as you rarely
+need to do this after first loading the class.
+
+=head1 CONCLUSION
+
+We strongly recommend you make your classes immutable. It makes your
+code much faster, with a small compile-time cost. This will be
+especially noticeable when creating many objects.
+
+=cut

@@ -1,15 +1,15 @@
 use strict;
 use warnings;
-package Moose; # git description: 2.2014-5-g83ef6774c
-our $VERSION = '2.2015';
+package Moose;
+our $VERSION = '2.2101';
 our $AUTHORITY = 'cpan:STEVAN';
 
 use 5.008003;
 
 use Scalar::Util ();
-use Carp 'carp';
+use Carp         'carp';
 use Module::Runtime 'module_notional_filename';
-use Class::Load 'is_class_loaded';
+use Class::Load  'is_class_loaded';
 
 use Moose::Deprecated;
 use Moose::Exporter;
@@ -43,8 +43,9 @@ use Moose::Meta::Attribute::Native;
 sub extends {
     my $meta = shift;
 
-    unless (@_) {
-        throw_exception(ExtendsMissingArgs => class_name => $meta->name);
+    unless ( @_ )
+    {
+        throw_exception( ExtendsMissingArgs => class_name => $meta->name );
     }
     # this checks the metaclass to make sure
     # it is correct, sometimes it can get out
@@ -68,9 +69,9 @@ sub has {
     my %context = Moose::Util::_caller_info;
     $context{context} = 'has declaration';
     $context{type} = 'class';
-    my @options = (definition_context => \%context, @_);
-    my $attrs = (ref($name) eq 'ARRAY') ? $name : [ ($name) ];
-    $meta->add_attribute($_, @options) for @$attrs;
+    my @options = ( definition_context => \%context, @_ );
+    my $attrs = ( ref($name) eq 'ARRAY' ) ? $name : [ ($name) ];
+    $meta->add_attribute( $_, @options ) for @$attrs;
 }
 
 sub before {
@@ -97,43 +98,41 @@ sub super {
     # This check avoids a recursion loop - see
     # t/bugs/super_recursion.t
     return if defined $SUPER_PACKAGE && $SUPER_PACKAGE ne caller();
-    return unless $SUPER_BODY;
-    $SUPER_BODY->(@SUPER_ARGS);
+    return unless $SUPER_BODY; $SUPER_BODY->(@SUPER_ARGS);
 }
 
 sub override {
     my $meta = shift;
-    my ($name, $method) = @_;
-    $meta->add_override_method_modifier($name => $method);
+    my ( $name, $method ) = @_;
+    $meta->add_override_method_modifier( $name => $method );
 }
 
 sub inner {
     my $pkg = caller();
-    our (%INNER_BODY, %INNER_ARGS);
+    our ( %INNER_BODY, %INNER_ARGS );
 
-    if (my $body = $INNER_BODY{$pkg}) {
-        my @args = @{$INNER_ARGS{$pkg}};
+    if ( my $body = $INNER_BODY{$pkg} ) {
+        my @args = @{ $INNER_ARGS{$pkg} };
         local $INNER_ARGS{$pkg};
         local $INNER_BODY{$pkg};
         return $body->(@args);
-    }
-    else {
+    } else {
         return;
     }
 }
 
 sub augment {
     my $meta = shift;
-    my ($name, $method) = @_;
-    $meta->add_augment_method_modifier($name => $method);
+    my ( $name, $method ) = @_;
+    $meta->add_augment_method_modifier( $name => $method );
 }
 
 Moose::Exporter->setup_import_methods(
     with_meta => [
-        qw(extends with has before after around override augment)
+        qw( extends with has before after around override augment )
     ],
-    as_is     => [
-        qw(super inner),
+    as_is => [
+        qw( super inner ),
         'Carp::confess',
         'Scalar::Util::blessed',
     ],
@@ -144,16 +143,16 @@ sub init_meta {
     my %args = @_;
 
     my $class = $args{for_class}
-        or throw_exception(InitMetaRequiresClass => params => \%args);
+        or throw_exception( InitMetaRequiresClass => params => \%args );
 
     my $base_class = $args{base_class} || 'Moose::Object';
-    my $metaclass = $args{metaclass} || 'Moose::Meta::Class';
-    my $meta_name = exists $args{meta_name} ? $args{meta_name} : 'meta';
+    my $metaclass  = $args{metaclass}  || 'Moose::Meta::Class';
+    my $meta_name  = exists $args{meta_name} ? $args{meta_name} : 'meta';
 
-    throw_exception(MetaclassNotLoaded => class_name => $metaclass)
+    throw_exception( MetaclassNotLoaded => class_name => $metaclass )
         unless is_class_loaded($metaclass);
 
-    throw_exception(MetaclassMustBeASubclassOfMooseMetaClass => class_name => $metaclass)
+    throw_exception( MetaclassMustBeASubclassOfMooseMetaClass => class_name => $metaclass )
         unless $metaclass->isa('Moose::Meta::Class');
 
     # make a subtype for each Moose class
@@ -162,29 +161,27 @@ sub init_meta {
 
     my $meta;
 
-    if ($meta = Class::MOP::get_metaclass_by_name($class)) {
-        unless ($meta->isa("Moose::Meta::Class")) {
-            if ($meta->isa('Moose::Meta::Role')) {
-                throw_exception(MetaclassIsARoleNotASubclassOfGivenMetaclass => role_name => $class,
-                    metaclass                                                => $metaclass,
-                    role                                                     => $meta
-                );
-            }
-            else {
-                throw_exception(MetaclassIsNotASubclassOfGivenMetaclass => class_name => $class,
-                    metaclass                                           => $metaclass,
-                    class                                               => $meta
-                );
+    if ( $meta = Class::MOP::get_metaclass_by_name($class) ) {
+        unless ( $meta->isa("Moose::Meta::Class") ) {
+            if ( $meta->isa('Moose::Meta::Role') ) {
+                throw_exception( MetaclassIsARoleNotASubclassOfGivenMetaclass => role_name => $class,
+                                                                                 metaclass => $metaclass,
+                                                                                 role      => $meta
+                               );
+            } else {
+                throw_exception( MetaclassIsNotASubclassOfGivenMetaclass => class_name => $class,
+                                                                            metaclass  => $metaclass,
+                                                                            class      => $meta
+                               );
             }
         }
-    }
-    else {
+    } else {
         # no metaclass
 
         # now we check whether our ancestors have metaclass, and if so borrow that
-        my (undef, @isa) = @{mro::get_linear_isa($class)};
+        my ( undef, @isa ) = @{ mro::get_linear_isa($class) };
 
-        foreach my $ancestor (@isa) {
+        foreach my $ancestor ( @isa ) {
             my $ancestor_meta = Class::MOP::get_metaclass_by_name($ancestor) || next;
 
             my $ancestor_meta_class = $ancestor_meta->_real_ref_name;
@@ -194,8 +191,8 @@ sub init_meta {
 
             # the case of having an ancestry is not very common, but arises in
             # e.g. Reaction
-            unless ($metaclass->isa($ancestor_meta_class)) {
-                if ($ancestor_meta_class->isa($metaclass)) {
+            unless ( $metaclass->isa( $ancestor_meta_class ) ) {
+                if ( $ancestor_meta_class->isa($metaclass) ) {
                     $metaclass = $ancestor_meta_class;
                 }
             }
@@ -212,19 +209,19 @@ sub init_meta {
         my $existing = $meta->get_method($meta_name);
         if ($existing && !$existing->isa('Class::MOP::Method::Meta')) {
             Carp::cluck "Moose is overwriting an existing method named "
-                . "$meta_name in class $class with a method "
-                . "which returns the class's metaclass. If this is "
-                . "actually what you want, you should remove the "
-                . "existing method, otherwise, you should rename or "
-                . "disable this generated method using the "
-                . "'-meta_name' option to 'use Moose'.";
+                      . "$meta_name in class $class with a method "
+                      . "which returns the class's metaclass. If this is "
+                      . "actually what you want, you should remove the "
+                      . "existing method, otherwise, you should rename or "
+                      . "disable this generated method using the "
+                      . "'-meta_name' option to 'use Moose'.";
         }
         $meta->_add_meta_method($meta_name);
     }
 
     # make sure they inherit from Moose::Object
     $meta->superclasses($base_class)
-        unless $meta->superclasses();
+      unless $meta->superclasses();
 
     return $meta;
 }
@@ -240,50 +237,50 @@ $_->make_immutable(
     inline_constructor => 1,
     constructor_name   => "_new",
     # these are Class::MOP accessors, so they need inlining
-    inline_accessors   => 1
-) for grep {$_->is_mutable}
-    map {$_->meta}
-        qw(
-            Moose::Meta::Attribute
-            Moose::Meta::Class
-            Moose::Meta::Instance
+    inline_accessors => 1
+    ) for grep { $_->is_mutable }
+    map { $_->meta }
+    qw(
+    Moose::Meta::Attribute
+    Moose::Meta::Class
+    Moose::Meta::Instance
 
-            Moose::Meta::TypeCoercion
-            Moose::Meta::TypeCoercion::Union
+    Moose::Meta::TypeCoercion
+    Moose::Meta::TypeCoercion::Union
 
-            Moose::Meta::Method
-            Moose::Meta::Method::Constructor
-            Moose::Meta::Method::Destructor
-            Moose::Meta::Method::Overridden
-            Moose::Meta::Method::Augmented
+    Moose::Meta::Method
+    Moose::Meta::Method::Constructor
+    Moose::Meta::Method::Destructor
+    Moose::Meta::Method::Overridden
+    Moose::Meta::Method::Augmented
 
-            Moose::Meta::Role
-            Moose::Meta::Role::Attribute
-            Moose::Meta::Role::Method
-            Moose::Meta::Role::Method::Required
-            Moose::Meta::Role::Method::Conflicting
+    Moose::Meta::Role
+    Moose::Meta::Role::Attribute
+    Moose::Meta::Role::Method
+    Moose::Meta::Role::Method::Required
+    Moose::Meta::Role::Method::Conflicting
 
-            Moose::Meta::Role::Composite
+    Moose::Meta::Role::Composite
 
-            Moose::Meta::Role::Application
-            Moose::Meta::Role::Application::RoleSummation
-            Moose::Meta::Role::Application::ToClass
-            Moose::Meta::Role::Application::ToRole
-            Moose::Meta::Role::Application::ToInstance
-        );
+    Moose::Meta::Role::Application
+    Moose::Meta::Role::Application::RoleSummation
+    Moose::Meta::Role::Application::ToClass
+    Moose::Meta::Role::Application::ToRole
+    Moose::Meta::Role::Application::ToInstance
+);
 
 $_->make_immutable(
     inline_constructor => 0,
     constructor_name   => undef,
     # these are Class::MOP accessors, so they need inlining
-    inline_accessors   => 1
-) for grep {$_->is_mutable}
-    map {$_->meta}
-        qw(
-            Moose::Meta::Method::Accessor
-            Moose::Meta::Method::Delegation
-            Moose::Meta::Mixin::AttributeCore
-        );
+    inline_accessors => 1
+    ) for grep { $_->is_mutable }
+    map { $_->meta }
+    qw(
+    Moose::Meta::Method::Accessor
+    Moose::Meta::Method::Delegation
+    Moose::Meta::Mixin::AttributeCore
+);
 
 1;
 
@@ -292,16 +289,6 @@ $_->make_immutable(
 __END__
 
 =pod
-
-=encoding UTF-8
-
-=head1 NAME
-
-Moose - A postmodern object system for Perl 5
-
-=head1 VERSION
-
-version 2.2015
 
 =head1 SYNOPSIS
 
@@ -1214,58 +1201,5 @@ Tom (dec) Lanyon
 Wallace (wreis) Reis
 
 ... and many other #moose folks
-
-=head1 AUTHORS
-
-=over 4
-
-=item *
-
-Stevan Little <stevan@cpan.org>
-
-=item *
-
-Dave Rolsky <autarch@urth.org>
-
-=item *
-
-Jesse Luehrs <doy@cpan.org>
-
-=item *
-
-Shawn M Moore <sartak@cpan.org>
-
-=item *
-
-יובל קוג'מן (Yuval Kogman) <nothingmuch@woobling.org>
-
-=item *
-
-Karen Etheridge <ether@cpan.org>
-
-=item *
-
-Florian Ragwitz <rafl@debian.org>
-
-=item *
-
-Hans Dieter Pearcey <hdp@cpan.org>
-
-=item *
-
-Chris Prather <chris@prather.org>
-
-=item *
-
-Matt S Trout <mstrout@cpan.org>
-
-=back
-
-=head1 COPYRIGHT AND LICENSE
-
-This software is copyright (c) 2006 by Infinity Interactive, Inc.
-
-This is free software; you can redistribute it and/or modify it under
-the same terms as the Perl 5 programming language system itself.
 
 =cut

@@ -1,0 +1,12 @@
+# PODNAME: Moose::Unsweetened
+# ABSTRACT: Moved to Moose::Manual::Unsweetened, so go read that
+
+=pod
+
+=head1 DESCRIPTION
+
+This document has been moved to L<Moose::Manual::Unsweetened>. This
+POD document still exists for the benefit of anyone out there who
+might've linked to it in the past.
+
+=cut

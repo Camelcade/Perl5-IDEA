@@ -1,9 +1,10 @@
 use Moose;
-has test => (is => 'lazy');
-extends 'Foo';
-with 'some';
-before foo => sub{};
+meta();
 after foo => sub{};
 around foo => sub{inner;};
-override foo => sub{super;};
 augment foo => sub{};
+before foo => sub{};
+extends 'Foo';
+has test => (is => 'lazy');
+override foo => sub{super;};
+with 'some';
