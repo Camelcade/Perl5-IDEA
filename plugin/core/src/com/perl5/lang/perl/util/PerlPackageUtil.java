@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -86,6 +86,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
   public static final String __PACKAGE__ = "__PACKAGE__";
   public static final String PACKAGE_CARP = "Carp";
   public static final String PACKAGE_SCALAR_UTIL = "Scalar::Util";
+  public static final String PACKAGE_CLASS_MOP_MIXIN = "Class::MOP::Mixin";
   public static final String PACKAGE_MOOSE = "Moose";
   public static final String PACKAGE_MOOSE_BASE = "Moose" + NAMESPACE_SEPARATOR;
   public static final String PACKAGE_MOOSE_X = PACKAGE_MOOSE + "X";

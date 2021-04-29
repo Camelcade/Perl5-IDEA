@@ -16,7 +16,9 @@
 
 package com.perl5.lang.perl.extensions.packageprocessor.impl;
 
-import com.perl5.lang.perl.extensions.packageprocessor.*;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageLoader;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageParentsProvider;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import org.jetbrains.annotations.NotNull;
 
@@ -25,14 +27,13 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static com.perl5.lang.perl.parser.moose.MooseSyntax.*;
 import static com.perl5.lang.perl.util.PerlPackageUtil.*;
 
 
-public class MooseProcessor extends PerlPackageProcessorBase implements
-                                                             PerlStrictProvider,
-                                                             PerlWarningsProvider,
-                                                             PerlPackageParentsProvider,
-                                                             PerlPackageLoader {
+public class MooseProcessor extends BaseStrictWarningsProvidingProcessor implements
+                                                                         PerlPackageParentsProvider,
+                                                                         PerlPackageLoader {
   protected static final List<String> LOADED_CLASSES = Arrays.asList(
     PACKAGE_MOOSE_OBJECT, PACKAGE_CARP, PACKAGE_SCALAR_UTIL
   );
@@ -43,7 +44,9 @@ public class MooseProcessor extends PerlPackageProcessorBase implements
     List<PerlExportDescriptor> exports = new ArrayList<>();
     exports.add(PerlExportDescriptor.create(PACKAGE_CARP, "confess"));
     exports.add(PerlExportDescriptor.create(PACKAGE_SCALAR_UTIL, "blessed"));
-    Arrays.asList("extends", "with", "has", "before", "after", "around", "override", "augment").forEach(
+    exports.add(PerlExportDescriptor.create(PACKAGE_CLASS_MOP_MIXIN, MOOSE_KEYWORD_META));
+    Arrays.asList(MOOSE_KEYWORD_AFTER, MOOSE_KEYWORD_AROUND, MOOSE_KEYWORD_AUGMENT, MOOSE_KEYWORD_BEFORE, MOOSE_KEYWORD_EXTENDS,
+                  MOOSE_KEYWORD_HAS, MOOSE_KEYWORD_OVERRIDE, MOOSE_KEYWORD_WITH).forEach(
       it -> exports.add(PerlExportDescriptor.create(PACKAGE_MOOSE, it)));
     EXPORTS = List.copyOf(exports);
   }

@@ -1042,6 +1042,9 @@ Text: main; Tail: null; Type: null; Icon: /perl5classic.png; Type Icon: null
 Text: map; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: map
 	PsiElement: Implicit sub: map()
+Text: meta; Tail: null; Type: Class::MOP::Mixin; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: meta
+	Export: &meta => &Class::MOP::Mixin::meta
 Text: mkdir; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: mkdir
 	PsiElement: Implicit sub: mkdir()
