@@ -23,7 +23,6 @@ import com.intellij.testFramework.ExpectedHighlightingData;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.inspections.*;
 import com.perl5.lang.perl.parser.moose.idea.inspections.MooseMultiAttributeAccessorInspection;
-import com.perl5.lang.perl.psi.PerlFile;
 import org.junit.Test;
 public class PerlAnnotatorTest extends PerlLightTestCase {
   @Override
@@ -154,49 +153,7 @@ public class PerlAnnotatorTest extends PerlLightTestCase {
   public void testFileLevelVariableInspection() {doInspectionTest(PerlFileLevelVariableInspection.class);}
 
   @Test
-  public void testBuiltInVariableRedeclarationInspection() {doInspectionTest(PerlBuiltinVariableRedeclarationInspection.class);}
-
-  @Test
-  public void testCpanfile() {
-    initWithCpanFile();
-    assertInstanceOf(myFixture.getFile(), PerlFile.class);
-    doInspectionTestWithoutInit(PerlUseStrictInspection.class, PerlUseWarningsInspection.class);
-  }
-
-  @Test
-  public void testUseStrictures() {
-    doTestStrictAndWarnings();
-  }
-
-  @Test
-  public void testUseTest2BundleExtended() {
-    doTestStrictAndWarnings();
-  }
-
-  @Test
-  public void testUseTest2BundleMore() {
-    doTestStrictAndWarnings();
-  }
-
-  @Test
-  public void testUseTest2BundleSimple() {
-    doTestStrictAndWarnings();
-  }
-
-  @Test
-  public void testUseTest2V0() {
-    doTestStrictAndWarnings();
-  }
-
-  private void doTestStrictAndWarnings() {
-    doInspectionTest(PerlUseStrictInspection.class, PerlUseWarningsInspection.class);
-  }
-
-  @Test
-  public void testUseStrictInspection() {doInspectionTest(PerlUseStrictInspection.class);}
-
-  @Test
-  public void testUseWarningsInspection() {doInspectionTest(PerlUseWarningsInspection.class);}
+  public void testBuiltInVariableRedeclarationInspection() { doInspectionTest(PerlBuiltinVariableRedeclarationInspection.class); }
 
   @Test
   public void testUnusedTypeGlobInspection() {doInspectionTest(PerlUnusedTypeGlobInspection.class);}

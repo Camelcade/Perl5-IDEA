@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,8 @@
 
 package com.perl5.lang.perl.extensions.packageprocessor.impl;
 
-import com.perl5.lang.perl.extensions.packageprocessor.*;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlUtfProvider;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import org.jetbrains.annotations.NotNull;
 
@@ -24,10 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class DancerPackageProcessor extends PerlPackageProcessorBase implements
-                                                                     PerlStrictProvider,
-                                                                     PerlUtfProvider,
-                                                                     PerlWarningsProvider {
+public class DancerPackageProcessor extends BaseStrictWarningsProvidingProcessor implements PerlUtfProvider {
   private static final List<PerlExportDescriptor> EXPORT_DESCRIPTORS = new ArrayList<>();
 
   static {

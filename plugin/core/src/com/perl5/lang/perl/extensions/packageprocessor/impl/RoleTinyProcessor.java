@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,22 +16,5 @@
 
 package com.perl5.lang.perl.extensions.packageprocessor.impl;
 
-import java.util.Collections;
-import java.util.List;
-
-
-public class MooProcessor extends MooseProcessor {
-  public static final String MOO_OBJECT = "Moo::Object";
-  protected static final List<String> LOADED_CLASSES = Collections.singletonList(MOO_OBJECT);
-  protected static final List<String> PARENT_CLASSES = LOADED_CLASSES;
-
-  @Override
-  public List<String> getLoadedClasses() {
-    return LOADED_CLASSES;
-  }
-
-  @Override
-  public List<String> getParentClasses() {
-    return PARENT_CLASSES;
-  }
+public class RoleTinyProcessor extends BaseStrictWarningsProvidingProcessor {
 }

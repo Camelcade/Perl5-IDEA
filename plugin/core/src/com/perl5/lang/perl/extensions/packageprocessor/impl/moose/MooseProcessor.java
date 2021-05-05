@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.extensions.packageprocessor.impl;
+package com.perl5.lang.perl.extensions.packageprocessor.impl.moose;
 
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageLoader;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageParentsProvider;
+import com.perl5.lang.perl.extensions.packageprocessor.impl.BaseStrictWarningsProvidingProcessor;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import org.jetbrains.annotations.NotNull;
 

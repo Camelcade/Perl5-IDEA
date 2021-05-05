@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,18 +14,31 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.extensions.packageprocessor.impl;
+package com.perl5.lang.perl.extensions.packageprocessor.impl.moose;
 
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
-import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessorBase;
+import com.perl5.lang.perl.extensions.packageprocessor.impl.BaseStrictWarningsProvidingProcessor;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class MooseDelegatedProcessor extends PerlPackageProcessorBase {
+import static com.perl5.lang.perl.util.PerlPackageUtil.PACKAGE_MOOSE_ROLE;
+
+public class MooseRoleProcessor extends BaseStrictWarningsProvidingProcessor {
+  static final List<PerlExportDescriptor> EXPORTS = new ArrayList<>(MooseProcessor.EXPORTS);
+
+  static {
+    EXPORTS.addAll(Arrays.asList(
+      PerlExportDescriptor.create(PACKAGE_MOOSE_ROLE, "requires"),
+      PerlExportDescriptor.create(PACKAGE_MOOSE_ROLE, "excludes")
+    ));
+  }
+
   @Override
   public @NotNull List<PerlExportDescriptor> getImports(@NotNull PerlUseStatementElement useStatement) {
-    return MooseProcessor.EXPORTS;
+    return EXPORTS;
   }
 }

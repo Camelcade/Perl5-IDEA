@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,10 @@
 
 package com.perl5.lang.perl.extensions.mojo;
 
-import com.perl5.lang.perl.extensions.packageprocessor.*;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlFeaturesProvider;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageParentsProvider;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlUtfProvider;
+import com.perl5.lang.perl.extensions.packageprocessor.impl.BaseStrictWarningsProvidingProcessor;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.*;
 import com.perl5.lang.perl.internals.PerlFeaturesTable;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
@@ -31,12 +34,10 @@ import java.util.List;
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.DELEGATE_METHOD_ARGUMENTS_LIST;
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
 
-public class MojoliciousLitePackageProcessor extends PerlPackageProcessorBase implements
-                                                                              PerlStrictProvider,
-                                                                              PerlUtfProvider,
-                                                                              PerlWarningsProvider,
-                                                                              PerlFeaturesProvider,
-                                                                              PerlPackageParentsProvider {
+public class MojoliciousLitePackageProcessor extends BaseStrictWarningsProvidingProcessor implements
+                                                                                          PerlUtfProvider,
+                                                                                          PerlFeaturesProvider,
+                                                                                          PerlPackageParentsProvider {
   public static final String MOJOLICIOUS_LITE = "Mojolicious::Lite";
   private static final List<String> ROUTES_METHODS = Arrays.asList(
     "any", "get", "options", "patch", "post", "put", "websocket",

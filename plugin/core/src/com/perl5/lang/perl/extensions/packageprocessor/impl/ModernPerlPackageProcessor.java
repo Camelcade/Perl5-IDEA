@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,9 @@
 
 package com.perl5.lang.perl.extensions.packageprocessor.impl;
 
-import com.perl5.lang.perl.extensions.packageprocessor.*;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlFeaturesProvider;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlMroProvider;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageLoader;
 import com.perl5.lang.perl.internals.PerlFeaturesTable;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
@@ -29,12 +31,10 @@ import java.util.List;
 /**
  * package processor for Modern::Perl module: http://search.cpan.org/~chromatic/Modern-Perl-1.20150127/lib/Modern/Perl.pm
  */
-public class ModernPerlPackageProcessor extends PerlPackageProcessorBase implements
-                                                                         PerlStrictProvider,
-                                                                         PerlWarningsProvider,
-                                                                         PerlMroProvider,
-                                                                         PerlPackageLoader,
-                                                                         PerlFeaturesProvider {
+public class ModernPerlPackageProcessor extends BaseStrictWarningsProvidingProcessor implements
+                                                                                     PerlMroProvider,
+                                                                                     PerlPackageLoader,
+                                                                                     PerlFeaturesProvider {
   private static final List<String> LOADED_PACKAGES = new ArrayList<>(Arrays.asList(
     "IO::File",
     "IO::Handle"

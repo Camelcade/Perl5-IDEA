@@ -91,27 +91,33 @@
     <packageProcessor key="Mojolicious::Lite"
                       implementationClass="com.perl5.lang.perl.extensions.mojo.MojoliciousLitePackageProcessor"/>
     <packageProcessor key="Moose"
-                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MooseProcessor"/>
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.moose.MooseProcessor"/>
     <packageProcessor key="Moose::Role"
-                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MooseRoleProcessor"/>
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.moose.MooseRoleProcessor"/>
     <packageProcessor key="Moose::Util::TypeConstraints"
-                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MooseUtilTypeConstraintsProcessor"/>
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.moose.MooseUtilTypeConstraintsProcessor"/>
     <packageProcessor key="MooseX::Types::CheckedUtilExports"
-                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MooseXTypesCheckedUtilExportsProcessor"/>
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.moose.MooseXTypesCheckedUtilExportsProcessor"/>
     <packageProcessor key="MooseX::ClassAttribute"
-                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MooseXClassAttributeProcessor"/>
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.moose.MooseXClassAttributeProcessor"/>
     <packageProcessor key="MooseX::Role::Parameterized"
-                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MooseXRoleParametrized"/>
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.moose.MooseXRoleParametrized"/>
     <packageProcessor key="MooseX::MethodAttributes::Role"
-                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MooseRoleDelegatedProcessor"/>
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.moose.MooseRoleDelegatedProcessor"/>
     <packageProcessor key="MooseX::Role::WithOverloading"
-                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MooseRoleDelegatedProcessor"/>
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.moose.MooseRoleDelegatedProcessor"/>
     <packageProcessor key="MooseX::MethodAttributes"
-                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MooseDelegatedProcessor"/>
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.moose.MooseDelegatedProcessor"/>
 
 
     <packageProcessor key="Moo"
-                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MooProcessor"/>
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.moo.MooProcessor"/>
+    <packageProcessor key="Moo::Role"
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.moo.MooRoleProcessor"/>
+
+    <packageProcessor key="Role::Tiny"
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.RoleTinyProcessor"/>
+
     <packageProcessor key="Dancer"
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.DancerPackageProcessor"/>
     <packageProcessor key="Dancer2"

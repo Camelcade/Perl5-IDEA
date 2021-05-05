@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,28 +14,21 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.extensions.packageprocessor.impl;
+package com.perl5.lang.perl.extensions.packageprocessor.impl.moose;
 
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
-import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessorBase;
+import com.perl5.lang.perl.extensions.packageprocessor.impl.BaseStrictWarningsProvidingProcessor;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
-import static com.perl5.lang.perl.util.PerlPackageUtil.PACKAGE_MOOSE_X_TYPES_CHECKEDUTILEXPORTS;
+import static com.perl5.lang.perl.util.PerlPackageUtil.PACKAGE_MOOSE_X_CLASSATTRIBUTE;
 
-public class MooseXTypesCheckedUtilExportsProcessor extends PerlPackageProcessorBase {
-  private static final List<PerlExportDescriptor> EXPORTS = new ArrayList<>();
-
-  static {
-    for (String name : Arrays
-      .asList("type", "subtype", "maybe_type", "duck_type", "enum", "coerce", "from", "as", "class_type", "role_type")) {
-      EXPORTS.add(PerlExportDescriptor.create(PACKAGE_MOOSE_X_TYPES_CHECKEDUTILEXPORTS, name));
-    }
-  }
+public class MooseXClassAttributeProcessor extends BaseStrictWarningsProvidingProcessor {
+  private static final List<PerlExportDescriptor> EXPORTS =
+    Collections.singletonList(PerlExportDescriptor.create(PACKAGE_MOOSE_X_CLASSATTRIBUTE, "class_has"));
 
   @Override
   public @NotNull List<PerlExportDescriptor> getImports(@NotNull PerlUseStatementElement useStatement) {

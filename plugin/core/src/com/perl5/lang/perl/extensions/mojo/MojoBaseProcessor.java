@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.extensions.mojo;
 
 import com.perl5.lang.perl.extensions.packageprocessor.*;
+import com.perl5.lang.perl.extensions.packageprocessor.impl.BaseStrictWarningsProvidingProcessor;
 import com.perl5.lang.perl.internals.PerlFeaturesTable;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import org.jetbrains.annotations.NotNull;
@@ -24,14 +25,12 @@ import org.jetbrains.annotations.NotNull;
 import java.util.*;
 
 
-public class MojoBaseProcessor extends PerlPackageProcessorBase implements
-                                                                PerlStrictProvider,
-                                                                PerlUtfProvider,
-                                                                PerlWarningsProvider,
-                                                                PerlFeaturesProvider,
-                                                                PerlPackageOptionsProvider,
-                                                                PerlPackageParentsProvider,
-                                                                PerlPackageLoader {
+public class MojoBaseProcessor extends BaseStrictWarningsProvidingProcessor implements
+                                                                            PerlUtfProvider,
+                                                                            PerlFeaturesProvider,
+                                                                            PerlPackageOptionsProvider,
+                                                                            PerlPackageParentsProvider,
+                                                                            PerlPackageLoader {
   public static final String MOJO_BASE = "Mojo::Base";
   public static final String IO_HANDLE = "IO::Handle";
 
