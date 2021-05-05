@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,10 +16,15 @@
 
 package com.perl5.lang.perl.idea.intellilang;
 
+import com.intellij.openapi.actionSystem.AnAction;
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiLanguageInjectionHost;
+import com.intellij.util.Consumer;
+import com.perl5.PerlIcons;
 import com.perl5.lang.perl.lexer.PerlAnnotations;
 import com.perl5.lang.perl.psi.PerlCompositeElement;
 import org.intellij.plugins.intelliLang.inject.AbstractLanguageInjectionSupport;
+import org.intellij.plugins.intelliLang.inject.config.BaseInjection;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlInjectionSupport extends AbstractLanguageInjectionSupport {
@@ -41,7 +46,16 @@ public class PerlInjectionSupport extends AbstractLanguageInjectionSupport {
   }
 
   @Override
-  public @NotNull Class<?>[] getPatternClasses() {
+  public @NotNull Class<?> @NotNull [] getPatternClasses() {
     return PATTERNS_CLASSES;
+  }
+
+  @Override
+  public AnAction[] createAddActions(Project project, Consumer<? super BaseInjection> consumer) {
+    var defaultAddAction = createDefaultAddAction(project, consumer, this);
+    var templatePresentation = defaultAddAction.getTemplatePresentation();
+    templatePresentation.setIcon(PerlIcons.PERL_LANGUAGE_ICON);
+    templatePresentation.setText(PerlIntelliLangBundle.message("settings.action.text"));
+    return new AnAction[]{defaultAddAction};
   }
 }
