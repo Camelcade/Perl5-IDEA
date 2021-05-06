@@ -16,16 +16,5 @@
 
 package com.perl5.lang.perl.extensions.moose;
 
-import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
-import com.perl5.lang.perl.extensions.packageprocessor.impl.BaseStrictWarningsProvidingProcessor;
-import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
-
-public class MooseRoleDelegatedProcessor extends BaseStrictWarningsProvidingProcessor {
-  @Override
-  public @NotNull List<PerlExportDescriptor> getImports(@NotNull PerlUseStatementElement useStatement) {
-    return MooseRoleProcessor.EXPORTS;
-  }
+public class MooseXMethodAttributesRoleProcessor extends MooseRoleProcessor {
 }

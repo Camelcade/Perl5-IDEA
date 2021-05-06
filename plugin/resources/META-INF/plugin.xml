@@ -103,11 +103,11 @@
     <packageProcessor key="MooseX::Role::Parameterized"
                       implementationClass="com.perl5.lang.perl.extensions.moose.MooseXRoleParametrized"/>
     <packageProcessor key="MooseX::MethodAttributes::Role"
-                      implementationClass="com.perl5.lang.perl.extensions.moose.MooseRoleDelegatedProcessor"/>
+                      implementationClass="com.perl5.lang.perl.extensions.moose.MooseXMethodAttributesRoleProcessor"/>
     <packageProcessor key="MooseX::Role::WithOverloading"
-                      implementationClass="com.perl5.lang.perl.extensions.moose.MooseRoleDelegatedProcessor"/>
+                      implementationClass="com.perl5.lang.perl.extensions.moose.MooseXRoleWithOverloadingProcessor"/>
     <packageProcessor key="MooseX::MethodAttributes"
-                      implementationClass="com.perl5.lang.perl.extensions.moose.MooseDelegatedProcessor"/>
+                      implementationClass="com.perl5.lang.perl.extensions.moose.MooseXMethodAttributesProcessor"/>
 
 
     <packageProcessor key="Moo"

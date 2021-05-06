@@ -20,21 +20,11 @@ import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import static com.perl5.lang.perl.util.PerlPackageUtil.PACKAGE_MOOSE_X_ROLE_PARAMETRIZIED;
-
-public class MooseXRoleParametrized extends MooseRoleProcessor {
-  private static final List<PerlExportDescriptor> EXPORTS = new ArrayList<>(MooseRoleProcessor.EXPORTS);
-
-  static {
-    EXPORTS.add(PerlExportDescriptor.create(PACKAGE_MOOSE_X_ROLE_PARAMETRIZIED, "parameter"));
-    EXPORTS.add(PerlExportDescriptor.create(PACKAGE_MOOSE_X_ROLE_PARAMETRIZIED, "role"));
-  }
-
+public class MooseXRoleWithOverloadingProcessor extends MooseRoleProcessor {
   @Override
   public @NotNull List<PerlExportDescriptor> getImports(@NotNull PerlUseStatementElement useStatement) {
-    return EXPORTS;
+    return MooseRoleProcessor.EXPORTS;
   }
 }
