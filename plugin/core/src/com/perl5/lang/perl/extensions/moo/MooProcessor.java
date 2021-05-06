@@ -14,13 +14,15 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.extensions.packageprocessor.impl.moose;
+package com.perl5.lang.perl.extensions.moo;
 
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageLoader;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageParentsProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.impl.BaseStrictWarningsProvidingProcessor;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
+import com.perl5.lang.perl.util.PerlPackageUtil;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -29,26 +31,21 @@ import java.util.Collections;
 import java.util.List;
 
 import static com.perl5.lang.perl.parser.moose.MooseSyntax.*;
-import static com.perl5.lang.perl.util.PerlPackageUtil.*;
 
 
-public class MooseProcessor extends BaseStrictWarningsProvidingProcessor implements
-                                                                         PerlPackageParentsProvider,
-                                                                         PerlPackageLoader {
-  protected static final List<String> LOADED_CLASSES = Arrays.asList(
-    PACKAGE_MOOSE_OBJECT, PACKAGE_CARP, PACKAGE_SCALAR_UTIL
-  );
-  protected static final List<String> PARENT_CLASSES = Collections.singletonList(PACKAGE_MOOSE_OBJECT);
+public class MooProcessor extends BaseStrictWarningsProvidingProcessor implements PerlPackageParentsProvider,
+                                                                                  PerlPackageLoader {
+  @NonNls public static final String MOO_OBJECT = PerlPackageUtil.PACKAGE_MOO + PerlPackageUtil.NAMESPACE_SEPARATOR + "Object";
+  protected static final List<String> LOADED_CLASSES = Collections.singletonList(MOO_OBJECT);
+  protected static final List<String> PARENT_CLASSES = LOADED_CLASSES;
+
   static final List<PerlExportDescriptor> EXPORTS;
 
   static {
     List<PerlExportDescriptor> exports = new ArrayList<>();
-    exports.add(PerlExportDescriptor.create(PACKAGE_CARP, "confess"));
-    exports.add(PerlExportDescriptor.create(PACKAGE_SCALAR_UTIL, "blessed"));
-    exports.add(PerlExportDescriptor.create(PACKAGE_CLASS_MOP_MIXIN, MOOSE_KEYWORD_META));
-    Arrays.asList(MOOSE_KEYWORD_AFTER, MOOSE_KEYWORD_AROUND, MOOSE_KEYWORD_AUGMENT, MOOSE_KEYWORD_BEFORE, MOOSE_KEYWORD_EXTENDS,
-                  MOOSE_KEYWORD_HAS, MOOSE_KEYWORD_OVERRIDE, MOOSE_KEYWORD_WITH).forEach(
-      it -> exports.add(PerlExportDescriptor.create(PACKAGE_MOOSE, it)));
+    Arrays.asList(
+      MOOSE_KEYWORD_AFTER, MOOSE_KEYWORD_AROUND, MOOSE_KEYWORD_BEFORE, MOOSE_KEYWORD_EXTENDS, MOOSE_KEYWORD_HAS, MOOSE_KEYWORD_WITH
+    ).forEach(it -> exports.add(PerlExportDescriptor.create(PerlPackageUtil.PACKAGE_MOO, it)));
     EXPORTS = List.copyOf(exports);
   }
 

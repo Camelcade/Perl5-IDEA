@@ -16,6 +16,9 @@ ARRAY in TestPackage; /array_gutter_icon.png; null
 @main::ARRAY
 ARRAY in scripts/test_script.pl; /array_gutter_icon.png; null
 ----------
+Moo::Role::meta
+meta in null; /subroutine_gutter_icon.png; null
+----------
 TestPackage::TEST_CONSTANT
 TEST_CONSTANT in TestPackage; /constant_gutter_icon.png; null
 ----------

@@ -111,9 +111,9 @@
 
 
     <packageProcessor key="Moo"
-                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.moo.MooProcessor"/>
+                      implementationClass="com.perl5.lang.perl.extensions.moo.MooProcessor"/>
     <packageProcessor key="Moo::Role"
-                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.moo.MooRoleProcessor"/>
+                      implementationClass="com.perl5.lang.perl.extensions.moo.MooRoleProcessor"/>
 
     <packageProcessor key="Role::Tiny"
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.RoleTinyProcessor"/>
@@ -175,6 +175,7 @@
     <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.typesStandard.TypesStandardImplicitDeclarationsProvider"/>
     <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.readonly.ReadonlyImplicitDeclarationsProvider"/>
     <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.log4perl.Log4PerlImplicitDeclarationsProvider"/>
+    <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.moo.MooImplicitSubsProvider"/>
   </extensions>
 
   <extensions defaultExtensionNs="com.intellij">

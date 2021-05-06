@@ -280,6 +280,9 @@ _validation($c, $name) in Mojolicious::Plugin::TagHelpers; /subroutine_gutter_ic
 Mojolicious::Plugin::TagHelpers::register
 register($app) in Mojolicious::Plugin::TagHelpers; /method_gutter_icon.png; null
 ----------
+Moo::Role::meta
+meta in null; /subroutine_gutter_icon.png; null
+----------
 MyTest::Constants::LIBRARY_CONST1
 LIBRARY_CONST1 in MyTest::Constants; /constant_gutter_icon.png; null
 ----------

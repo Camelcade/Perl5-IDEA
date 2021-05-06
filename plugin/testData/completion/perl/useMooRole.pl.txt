@@ -1,0 +1,24 @@
+Text: after; Tail: null; Type: Moo::Role; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: after
+	PsiElement: Implicit sub: after()
+Text: around; Tail: null; Type: Moo::Role; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: around
+	PsiElement: Implicit sub: around()
+Text: before; Tail: null; Type: Moo::Role; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: before
+	PsiElement: Implicit sub: before()
+Text: has; Tail: null; Type: Moo::Role; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: has
+	PsiElement: Implicit sub: has()
+Text: meta; Tail: null; Type: Moo::Role; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: meta
+	PsiElement: Implicit sub: meta()
+Text: meta; Tail: null; Type: Moo::Role; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: meta
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moo::Role::meta at 2915 in Role.pm
+Text: requires; Tail: null; Type: Moo::Role; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: requires
+	PsiElement: Implicit sub: requires()
+Text: with; Tail: null; Type: Moo::Role; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: with
+	PsiElement: Implicit sub: with()

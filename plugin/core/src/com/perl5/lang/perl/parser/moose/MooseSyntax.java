@@ -16,16 +16,19 @@
 
 package com.perl5.lang.perl.parser.moose;
 
+import org.jetbrains.annotations.NonNls;
+
 public final class MooseSyntax {
-  public static final String MOOSE_KEYWORD_EXTENDS = "extends";
-  public static final String MOOSE_KEYWORD_WITH = "with";
-  public static final String MOOSE_KEYWORD_HAS = "has";
-  public static final String MOOSE_KEYWORD_BEFORE = "before";
-  public static final String MOOSE_KEYWORD_AFTER = "after";
-  public static final String MOOSE_KEYWORD_AROUND = "around";
-  public static final String MOOSE_KEYWORD_OVERRIDE = "override";
-  public static final String MOOSE_KEYWORD_AUGMENT = "augment";
-  public static final String MOOSE_KEYWORD_META = "meta";
+  @NonNls public static final String MOOSE_KEYWORD_AFTER = "after";
+  @NonNls public static final String MOOSE_KEYWORD_AROUND = "around";
+  @NonNls public static final String MOOSE_KEYWORD_AUGMENT = "augment";
+  @NonNls public static final String MOOSE_KEYWORD_BEFORE = "before";
+  @NonNls public static final String MOOSE_KEYWORD_EXTENDS = "extends";
+  @NonNls public static final String MOOSE_KEYWORD_HAS = "has";
+  @NonNls public static final String MOOSE_KEYWORD_META = "meta";
+  @NonNls public static final String MOOSE_KEYWORD_OVERRIDE = "override";
+  @NonNls public static final String MOOSE_KEYWORD_REQUIRES = "requires";
+  @NonNls public static final String MOOSE_KEYWORD_WITH = "with";
 
   private MooseSyntax() {
   }

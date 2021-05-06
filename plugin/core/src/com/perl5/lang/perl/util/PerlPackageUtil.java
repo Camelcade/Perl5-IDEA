@@ -65,6 +65,7 @@ import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import gnu.trove.THashSet;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -86,6 +87,8 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
   public static final String __PACKAGE__ = "__PACKAGE__";
   public static final String PACKAGE_CARP = "Carp";
   public static final String PACKAGE_SCALAR_UTIL = "Scalar::Util";
+  @NonNls public static final String PACKAGE_MOO = "Moo";
+  @NonNls public static final String MOO_ROLE = PACKAGE_MOO + NAMESPACE_SEPARATOR + "Role";
   public static final String PACKAGE_CLASS_MOP_MIXIN = "Class::MOP::Mixin";
   public static final String PACKAGE_MOOSE = "Moose";
   public static final String PACKAGE_MOOSE_BASE = "Moose" + NAMESPACE_SEPARATOR;

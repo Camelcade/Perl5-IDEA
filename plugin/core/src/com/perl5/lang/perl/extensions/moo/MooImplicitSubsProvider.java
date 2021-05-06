@@ -14,9 +14,14 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.extensions.packageprocessor.impl.moo;
+package com.perl5.lang.perl.extensions.moo;
 
-import com.perl5.lang.perl.extensions.packageprocessor.impl.BaseStrictWarningsProvidingProcessor;
+import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsProvider;
+import org.jetbrains.annotations.NotNull;
 
-public class MooRoleProcessor extends BaseStrictWarningsProvidingProcessor {
+public class MooImplicitSubsProvider extends PerlImplicitDeclarationsProvider {
+  @Override
+  public @NotNull String getDataFileName() {
+    return "perlData/Moo.xml";
+  }
 }
