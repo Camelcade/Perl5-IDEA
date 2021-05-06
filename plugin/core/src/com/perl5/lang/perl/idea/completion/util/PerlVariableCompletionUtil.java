@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,6 +27,7 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.Processor;
 import com.intellij.util.containers.ContainerUtil;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.idea.PerlCompletionWeighter;
 import com.perl5.lang.perl.idea.completion.PerlInsertHandlers;
@@ -129,7 +130,7 @@ public class PerlVariableCompletionUtil {
       .withPresentableText(variableName);
 
     if (isBuiltIn) {
-      elementBuilder = elementBuilder.withTypeText("Built-in");
+      elementBuilder = elementBuilder.withTypeText(PerlBundle.message("built.in.type.text"));
     }
     else if (element.isGlobalDeclaration()) {
       elementBuilder = elementBuilder.withTypeText(element.getNamespaceName(), true);

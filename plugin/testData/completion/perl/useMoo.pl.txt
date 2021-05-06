@@ -1,0 +1,33 @@
+Text: after; Tail: null; Type: Moose; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: after
+	Export: &after => &Moose::after
+Text: around; Tail: null; Type: Moose; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: around
+	Export: &around => &Moose::around
+Text: augment; Tail: null; Type: Moose; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: augment
+	Export: &augment => &Moose::augment
+Text: before; Tail: null; Type: Moose; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: before
+	Export: &before => &Moose::before
+Text: blessed; Tail: null; Type: Scalar::Util; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: blessed
+	Export: &blessed => &Scalar::Util::blessed
+Text: confess; Tail: null; Type: Carp; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: confess
+	Export: &confess => &Carp::confess
+Text: extends; Tail: null; Type: Moose; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: extends
+	Export: &extends => &Moose::extends
+Text: has; Tail: null; Type: Moose; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: has
+	Export: &has => &Moose::has
+Text: meta; Tail: null; Type: Class::MOP::Mixin; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: meta
+	Export: &meta => &Class::MOP::Mixin::meta
+Text: override; Tail: null; Type: Moose; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: override
+	Export: &override => &Moose::override
+Text: with; Tail: null; Type: Moose; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: with
+	Export: &with => &Moose::with
