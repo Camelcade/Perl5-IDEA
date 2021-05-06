@@ -712,27 +712,27 @@ Text: abs; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon:
 Text: accept; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: accept
 	PsiElement: Implicit sub: accept()
-Text: after; Tail: null; Type: Moose; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Text: after; Tail: null; Type: Moose::Role; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: after
-	Export: &after => &Moose::after
+	Export: &after => &Moose::Role::after
 Text: alarm; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: alarm
 	PsiElement: Implicit sub: alarm()
-Text: around; Tail: null; Type: Moose; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Text: around; Tail: null; Type: Moose::Role; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: around
-	Export: &around => &Moose::around
+	Export: &around => &Moose::Role::around
 Text: atan2; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: atan2
 	PsiElement: Implicit sub: atan2()
-Text: augment; Tail: null; Type: Moose; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Text: augment; Tail: null; Type: Moose::Role; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: augment
-	Export: &augment => &Moose::augment
+	Export: &augment => &Moose::Role::augment
 Text: b; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
 	Lookups: $b, b
 	PsiElement: Built-in: $b
-Text: before; Tail: null; Type: Moose; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Text: before; Tail: null; Type: Moose::Role; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: before
-	Export: &before => &Moose::before
+	Export: &before => &Moose::Role::before
 Text: bind; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: bind
 	PsiElement: Implicit sub: bind()
@@ -862,9 +862,9 @@ Text: exit; Tail: ([$exit_code]); Type: CORE; Icon: /subroutine_gutter_icon.png;
 Text: exp; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: exp
 	PsiElement: Implicit sub: exp()
-Text: extends; Tail: null; Type: Moose; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Text: extends; Tail: null; Type: Moose::Role; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: extends
-	Export: &extends => &Moose::extends
+	Export: &extends => &Moose::Role::extends
 Text: fc; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: fc
 	PsiElement: Implicit sub: fc()
@@ -976,9 +976,9 @@ Text: goto; Tail: ($coderef_or_label); Type: CORE; Icon: /subroutine_gutter_icon
 Text: grep; Tail: ($expr_or_block, @list); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: grep
 	PsiElement: Implicit sub: grep($expr_or_block, @list)($expr_or_block, @list)
-Text: has; Tail: null; Type: Moose; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Text: has; Tail: null; Type: Moose::Role; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: has
-	Export: &has => &Moose::has
+	Export: &has => &Moose::Role::has
 Text: hex; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: hex
 	PsiElement: Implicit sub: hex()
@@ -988,6 +988,9 @@ Text: import; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Ic
 Text: index; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: index
 	PsiElement: Implicit sub: index()
+Text: inner; Tail: null; Type: Moose::Role; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: inner
+	Export: &inner => &Moose::Role::inner
 Text: int; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: int
 	PsiElement: Implicit sub: int()
@@ -1045,6 +1048,9 @@ Text: map; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon:
 Text: meta; Tail: null; Type: Class::MOP::Mixin; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: meta
 	Export: &meta => &Class::MOP::Mixin::meta
+Text: meta; Tail: null; Type: Moose::Role; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: meta
+	Export: &meta => &Moose::Role::meta
 Text: mkdir; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: mkdir
 	PsiElement: Implicit sub: mkdir()
@@ -1081,9 +1087,9 @@ Text: opendir; Tail: ($handle, $name); Type: CORE; Icon: /subroutine_gutter_icon
 Text: ord; Tail: ([$expr]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: ord
 	PsiElement: Implicit sub: ord([$expr])([$expr])
-Text: override; Tail: null; Type: Moose; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Text: override; Tail: null; Type: Moose::Role; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: override
-	Export: &override => &Moose::override
+	Export: &override => &Moose::Role::override
 Text: pack; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: pack
 	PsiElement: Implicit sub: pack()
@@ -1282,6 +1288,9 @@ Text: study; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Ico
 Text: substr; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: substr
 	PsiElement: Implicit sub: substr()
+Text: super; Tail: null; Type: Moose::Role; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: super
+	Export: &super => &Moose::Role::super
 Text: symlink; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: symlink
 	PsiElement: Implicit sub: symlink()
@@ -1372,9 +1381,9 @@ Text: wantarray; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type
 Text: warn; Tail: (@messages); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: warn
 	PsiElement: Implicit sub: warn(@messages)(@messages)
-Text: with; Tail: null; Type: Moose; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Text: with; Tail: null; Type: Moose::Role; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: with
-	Export: &with => &Moose::with
+	Export: &with => &Moose::Role::with
 Text: write; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: write
 	PsiElement: Implicit sub: write()

@@ -23,11 +23,14 @@ public final class MooseSyntax {
   @NonNls public static final String MOOSE_KEYWORD_AROUND = "around";
   @NonNls public static final String MOOSE_KEYWORD_AUGMENT = "augment";
   @NonNls public static final String MOOSE_KEYWORD_BEFORE = "before";
+  @NonNls public static final String MOOSE_KEYWORD_EXCLUDES = "excludes";
   @NonNls public static final String MOOSE_KEYWORD_EXTENDS = "extends";
   @NonNls public static final String MOOSE_KEYWORD_HAS = "has";
+  @NonNls public static final String MOOSE_KEYWORD_INNER = "inner";
   @NonNls public static final String MOOSE_KEYWORD_META = "meta";
   @NonNls public static final String MOOSE_KEYWORD_OVERRIDE = "override";
   @NonNls public static final String MOOSE_KEYWORD_REQUIRES = "requires";
+  @NonNls public static final String MOOSE_KEYWORD_SUPER = "super";
   @NonNls public static final String MOOSE_KEYWORD_WITH = "with";
 
   private MooseSyntax() {

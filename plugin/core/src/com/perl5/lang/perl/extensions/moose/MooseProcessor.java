@@ -47,7 +47,7 @@ public class MooseProcessor extends BaseStrictWarningsProvidingProcessor impleme
     exports.add(PerlExportDescriptor.create(PACKAGE_SCALAR_UTIL, "blessed"));
     exports.add(PerlExportDescriptor.create(PACKAGE_CLASS_MOP_MIXIN, MOOSE_KEYWORD_META));
     Arrays.asList(MOOSE_KEYWORD_AFTER, MOOSE_KEYWORD_AROUND, MOOSE_KEYWORD_AUGMENT, MOOSE_KEYWORD_BEFORE, MOOSE_KEYWORD_EXTENDS,
-                  MOOSE_KEYWORD_HAS, MOOSE_KEYWORD_OVERRIDE, MOOSE_KEYWORD_WITH).forEach(
+                  MOOSE_KEYWORD_HAS, MOOSE_KEYWORD_OVERRIDE, MOOSE_KEYWORD_WITH, MOOSE_KEYWORD_INNER, MOOSE_KEYWORD_SUPER).forEach(
       it -> exports.add(PerlExportDescriptor.create(PACKAGE_MOOSE, it)));
     EXPORTS = List.copyOf(exports);
   }

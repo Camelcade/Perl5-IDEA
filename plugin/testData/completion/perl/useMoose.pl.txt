@@ -22,12 +22,18 @@ Text: extends; Tail: ($meta); Type: Moose; Icon: /subroutine_gutter_icon.png; Ty
 Text: has; Tail: ($meta, $name); Type: Moose; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: has
 	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::has($meta, $name) at 1442 in Moose.pm
+Text: inner; Tail: null; Type: Moose; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: inner
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::inner at 2507 in Moose.pm
 Text: meta; Tail: null; Type: Class::MOP::Mixin; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: meta
 	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Class::MOP::Mixin::meta at 143 in Mixin.pm
 Text: override; Tail: ($meta, $name, $method); Type: Moose; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: override
 	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::override($meta, $name, $method) at 2374 in Moose.pm
+Text: super; Tail: null; Type: Moose; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: super
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::super at 2077 in Moose.pm
 Text: with; Tail: null; Type: Moose; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: with
 	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::with at 1310 in Moose.pm

@@ -988,6 +988,9 @@ Text: import; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Ic
 Text: index; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: index
 	PsiElement: Implicit sub: index()
+Text: inner; Tail: null; Type: Moose; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: inner
+	Export: &inner => &Moose::inner
 Text: int; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: int
 	PsiElement: Implicit sub: int()
@@ -1279,6 +1282,9 @@ Text: study; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Ico
 Text: substr; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: substr
 	PsiElement: Implicit sub: substr()
+Text: super; Tail: null; Type: Moose; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: super
+	Export: &super => &Moose::super
 Text: symlink; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: symlink
 	PsiElement: Implicit sub: symlink()

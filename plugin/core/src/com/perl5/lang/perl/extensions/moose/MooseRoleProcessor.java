@@ -25,16 +25,22 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.perl5.lang.perl.util.PerlPackageUtil.PACKAGE_MOOSE_ROLE;
+import static com.perl5.lang.perl.parser.moose.MooseSyntax.*;
+import static com.perl5.lang.perl.util.PerlPackageUtil.*;
 
 public class MooseRoleProcessor extends BaseStrictWarningsProvidingProcessor {
-  static final List<PerlExportDescriptor> EXPORTS = new ArrayList<>(MooseProcessor.EXPORTS);
+  static final List<PerlExportDescriptor> EXPORTS;
 
   static {
-    EXPORTS.addAll(Arrays.asList(
-      PerlExportDescriptor.create(PACKAGE_MOOSE_ROLE, "requires"),
-      PerlExportDescriptor.create(PACKAGE_MOOSE_ROLE, "excludes")
-    ));
+    List<PerlExportDescriptor> exports = new ArrayList<>();
+    exports.add(PerlExportDescriptor.create(PACKAGE_CARP, "confess"));
+    exports.add(PerlExportDescriptor.create(PACKAGE_SCALAR_UTIL, "blessed"));
+    exports.add(PerlExportDescriptor.create(PACKAGE_CLASS_MOP_MIXIN, MOOSE_KEYWORD_META));
+    Arrays.asList(MOOSE_KEYWORD_AFTER, MOOSE_KEYWORD_AROUND, MOOSE_KEYWORD_AUGMENT, MOOSE_KEYWORD_BEFORE, MOOSE_KEYWORD_EXCLUDES,
+                  MOOSE_KEYWORD_EXTENDS, MOOSE_KEYWORD_HAS, MOOSE_KEYWORD_INNER, MOOSE_KEYWORD_META, MOOSE_KEYWORD_OVERRIDE,
+                  MOOSE_KEYWORD_REQUIRES, MOOSE_KEYWORD_SUPER, MOOSE_KEYWORD_WITH).forEach(
+      it -> exports.add(PerlExportDescriptor.create(PACKAGE_MOOSE_ROLE, it)));
+    EXPORTS = List.copyOf(exports);
   }
 
   @Override
