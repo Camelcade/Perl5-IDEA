@@ -14,32 +14,18 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.extensions.packageprocessor.impl.moose;
+package com.perl5.lang.perl.extensions.moose;
 
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.extensions.packageprocessor.impl.BaseStrictWarningsProvidingProcessor;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import static com.perl5.lang.perl.util.PerlPackageUtil.PACKAGE_MOOSE_UTIL_TYPE_CONSTRAINTS;
-
-public class MooseUtilTypeConstraintsProcessor extends BaseStrictWarningsProvidingProcessor {
-  private static final List<PerlExportDescriptor> EXPORTS = new ArrayList<>();
-
-  static {
-    for (String name : Arrays.asList("type", "subtype", "class_type", "role_type", "maybe_type", "duck_type", "as", "where", "message",
-                                     "inline_as", "coerce", "from", "via", "enum", "union", "find_type_constraint",
-                                     "register_type_constraint", "match_on_type")) {
-      EXPORTS.add(PerlExportDescriptor.create(PACKAGE_MOOSE_UTIL_TYPE_CONSTRAINTS, name));
-    }
-  }
-
+public class MooseDelegatedProcessor extends BaseStrictWarningsProvidingProcessor {
   @Override
   public @NotNull List<PerlExportDescriptor> getImports(@NotNull PerlUseStatementElement useStatement) {
-    return EXPORTS;
+    return MooseProcessor.EXPORTS;
   }
 }

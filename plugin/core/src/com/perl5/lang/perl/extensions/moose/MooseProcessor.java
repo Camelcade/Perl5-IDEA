@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.extensions.packageprocessor.impl.moose;
+package com.perl5.lang.perl.extensions.moose;
 
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageLoader;

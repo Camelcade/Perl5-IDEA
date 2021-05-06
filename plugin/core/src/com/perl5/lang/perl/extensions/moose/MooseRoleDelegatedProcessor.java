@@ -14,24 +14,18 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.extensions.packageprocessor.impl.moose;
+package com.perl5.lang.perl.extensions.moose;
 
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.extensions.packageprocessor.impl.BaseStrictWarningsProvidingProcessor;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
 import java.util.List;
 
-import static com.perl5.lang.perl.util.PerlPackageUtil.PACKAGE_MOOSE_X_CLASSATTRIBUTE;
-
-public class MooseXClassAttributeProcessor extends BaseStrictWarningsProvidingProcessor {
-  private static final List<PerlExportDescriptor> EXPORTS =
-    Collections.singletonList(PerlExportDescriptor.create(PACKAGE_MOOSE_X_CLASSATTRIBUTE, "class_has"));
-
+public class MooseRoleDelegatedProcessor extends BaseStrictWarningsProvidingProcessor {
   @Override
   public @NotNull List<PerlExportDescriptor> getImports(@NotNull PerlUseStatementElement useStatement) {
-    return EXPORTS;
+    return MooseRoleProcessor.EXPORTS;
   }
 }
