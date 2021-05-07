@@ -20,5 +20,5 @@ intellij{
 }
 
 dependencies{
-  compileOnly project(":perl5.core")
+  compileOnly project(":plugin.core")
 }

@@ -18,12 +18,12 @@ import org.jetbrains.grammarkit.tasks.GenerateLexer
 import org.jetbrains.grammarkit.tasks.GenerateParser
 
 dependencies{
-  compile project(":perl5.lang.mojo.core")
-  compile project(":perl5.lang.mojo.idea")
-  testCompile project(":perl5.plugin").sourceSets.test.output
+  compile project(":lang.mojo.core")
+  compile project(":lang.mojo.idea")
+  testCompile project(":plugin").sourceSets.test.output
 }
 
 intellij{
   type 'IC'
-  plugins = [project(':perl5.plugin'), 'java']
+  plugins = [project(':plugin'), 'java']
 }

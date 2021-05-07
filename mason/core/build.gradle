@@ -19,10 +19,10 @@ import org.jetbrains.grammarkit.tasks.GenerateParser
 
 intellij{
   type 'IC'
-  plugins = [project(':perl5.plugin'), 'java']
+  plugins = [project(':plugin'), 'java']
 }
 
 dependencies{
-  compileOnly project(":perl5.core")
-  testCompile project(":perl5.plugin").sourceSets.test.output
+  compileOnly project(":plugin.core")
+  testCompile project(":plugin").sourceSets.test.output
 }

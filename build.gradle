@@ -208,13 +208,13 @@ tasks.coveralls {
 
 intellij {
   def pluginList = ["PsiViewer:$psiViewerVersion", intelliLangPlugin,
-                    project(':perl5.plugin'),
-                    project(':perl5.lang.tt2'),
-                    project(':perl5.lang.mojo'),
-                    project(':perl5.lang.embedded'),
-                    project(':perl5.lang.mason.framework'),
-                    project(':perl5.lang.mason.htmlmason'),
-                    project(':perl5.lang.mason.mason2'),
+                    project(':plugin'),
+                    project(':lang.tt2'),
+                    project(':lang.mojo'),
+                    project(':lang.embedded'),
+                    project(':lang.mason.framework'),
+                    project(':lang.mason.htmlmason'),
+                    project(':lang.mason.mason2'),
   ]
 
   def runWith = project.hasProperty("runWith") ? project.property("runWith") : ""

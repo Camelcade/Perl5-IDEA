@@ -18,8 +18,8 @@ import org.jetbrains.grammarkit.tasks.GenerateLexer
 import org.jetbrains.grammarkit.tasks.GenerateParser
 
 dependencies{
-  compileOnly project(":perl5.core")
-  compileOnly project(":perl5.lang.mojo.core")
+  compileOnly project(":plugin.core")
+  compileOnly project(":lang.mojo.core")
 }
 
 intellij {

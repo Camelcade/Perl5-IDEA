@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,45 +15,45 @@
  */
 
 rootProject.name = 'perl5'
-include 'perl5.plugin'
-project(':perl5.plugin').projectDir = file('plugin')
-include 'perl5.core'
-project(':perl5.core').projectDir = file('plugin/core')
-include 'perl5.core.idea'
-project(':perl5.core.idea').projectDir = file('plugin/idea')
-include 'perl5.core.copyright'
-project(':perl5.core.copyright').projectDir = file('plugin/copyright')
-include 'perl5.core.profiler'
-project(':perl5.core.profiler').projectDir = file('plugin/profiler')
-include 'perl5.core.debugger'
-project(':perl5.core.debugger').projectDir = file('plugin/debugger')
-include 'perl5.core.coverage'
-project(':perl5.core.coverage').projectDir = file('plugin/coverage')
-include 'perl5.core.intelliLang'
-project(':perl5.core.intelliLang').projectDir = file('plugin/intelliLang')
-include 'perl5.core.docker'
-project(':perl5.core.docker').projectDir = file('plugin/docker')
-include 'perl5.core.wsl'
-project(':perl5.core.wsl').projectDir = file('plugin/wsl')
-include 'perl5.core.perlbrew'
-project(':perl5.core.perlbrew').projectDir = file('plugin/perlbrew')
-include 'perl5.core.plenv'
-project(':perl5.core.plenv').projectDir = file('plugin/plenv')
-include 'perl5.core.berrybrew'
-project(':perl5.core.berrybrew').projectDir = file('plugin/berrybrew')
-include 'perl5.lang.tt2'
-project(':perl5.lang.tt2').projectDir=file('tt2')
-include 'perl5.lang.mojo'
-project(':perl5.lang.mojo').projectDir=file('mojo')
-include 'perl5.lang.mojo.core'
-project(':perl5.lang.mojo.core').projectDir=file('mojo/core')
-include 'perl5.lang.mojo.idea'
-project(':perl5.lang.mojo.idea').projectDir=file('mojo/idea')
-include 'perl5.lang.embedded'
-project(':perl5.lang.embedded').projectDir=file('embedded')
-include 'perl5.lang.mason.framework'
-project(':perl5.lang.mason.framework').projectDir=file('mason/core')
-include 'perl5.lang.mason.mason2'
-project(':perl5.lang.mason.mason2').projectDir=file('mason/mason2')
-include 'perl5.lang.mason.htmlmason'
-project(':perl5.lang.mason.htmlmason').projectDir=file('mason/htmlmason')
+include 'plugin'
+project(':plugin').projectDir = file('plugin')
+include 'plugin.core'
+project(':plugin.core').projectDir = file('plugin/core')
+include 'plugin.idea'
+project(':plugin.idea').projectDir = file('plugin/idea')
+include 'plugin.copyright'
+project(':plugin.copyright').projectDir = file('plugin/copyright')
+include 'plugin.profiler'
+project(':plugin.profiler').projectDir = file('plugin/profiler')
+include 'plugin.debugger'
+project(':plugin.debugger').projectDir = file('plugin/debugger')
+include 'plugin.coverage'
+project(':plugin.coverage').projectDir = file('plugin/coverage')
+include 'plugin.intelliLang'
+project(':plugin.intelliLang').projectDir = file('plugin/intelliLang')
+include 'plugin.docker'
+project(':plugin.docker').projectDir = file('plugin/docker')
+include 'plugin.wsl'
+project(':plugin.wsl').projectDir = file('plugin/wsl')
+include 'plugin.perlbrew'
+project(':plugin.perlbrew').projectDir = file('plugin/perlbrew')
+include 'plugin.plenv'
+project(':plugin.plenv').projectDir = file('plugin/plenv')
+include 'plugin.berrybrew'
+project(':plugin.berrybrew').projectDir = file('plugin/berrybrew')
+include 'lang.tt2'
+project(':lang.tt2').projectDir=file('tt2')
+include 'lang.mojo'
+project(':lang.mojo').projectDir=file('mojo')
+include 'lang.mojo.core'
+project(':lang.mojo.core').projectDir=file('mojo/core')
+include 'lang.mojo.idea'
+project(':lang.mojo.idea').projectDir=file('mojo/idea')
+include 'lang.embedded'
+project(':lang.embedded').projectDir=file('embedded')
+include 'lang.mason.framework'
+project(':lang.mason.framework').projectDir=file('mason/core')
+include 'lang.mason.mason2'
+project(':lang.mason.mason2').projectDir=file('mason/mason2')
+include 'lang.mason.htmlmason'
+project(':lang.mason.htmlmason').projectDir=file('mason/htmlmason')

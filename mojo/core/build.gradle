@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,11 +19,11 @@ import org.jetbrains.grammarkit.tasks.GenerateParser
 
 intellij{
   type 'IC'
-  plugins = [project(':perl5.plugin'), 'java']
+  plugins = [project(':plugin'), 'java']
 }
 
 dependencies{
-  compileOnly project(":perl5.core")
+  compileOnly project(":plugin.core")
 }
 
 task generateMojoliciousLexer(type: GenerateLexer) {
