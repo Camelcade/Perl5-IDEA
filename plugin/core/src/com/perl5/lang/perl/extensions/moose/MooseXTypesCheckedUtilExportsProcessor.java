@@ -32,7 +32,7 @@ public class MooseXTypesCheckedUtilExportsProcessor extends BaseStrictWarningsPr
 
   static {
     for (String name : Arrays
-      .asList("type", "subtype", "maybe_type", "duck_type", "enum", "coerce", "from", "as", "class_type", "role_type")) {
+      .asList("as", "class_type", "coerce", "duck_type", "enum", "from", "maybe_type", "role_type", "subtype", "type")) {
       EXPORTS.add(PerlExportDescriptor.create(PACKAGE_MOOSE_X_TYPES_CHECKEDUTILEXPORTS, name));
     }
   }

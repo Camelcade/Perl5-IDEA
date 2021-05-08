@@ -31,9 +31,9 @@ public class MooseUtilTypeConstraintsProcessor extends BaseStrictWarningsProvidi
   private static final List<PerlExportDescriptor> EXPORTS = new ArrayList<>();
 
   static {
-    for (String name : Arrays.asList("type", "subtype", "class_type", "role_type", "maybe_type", "duck_type", "as", "where", "message",
-                                     "inline_as", "coerce", "from", "via", "enum", "union", "find_type_constraint",
-                                     "register_type_constraint", "match_on_type")) {
+    for (String name : Arrays.asList(
+      "as", "class_type", "coerce", "duck_type", "enum", "find_type_constraint", "from", "inline_as", "match_on_type", "maybe_type",
+      "message", "register_type_constraint", "role_type", "subtype", "type", "union", "via", "where")) {
       EXPORTS.add(PerlExportDescriptor.create(PACKAGE_MOOSE_UTIL_TYPE_CONSTRAINTS, name));
     }
   }
