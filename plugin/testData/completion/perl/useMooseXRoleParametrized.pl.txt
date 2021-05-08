@@ -31,9 +31,6 @@ Text: inner; Tail: null; Type: Moose::Role; Icon: /subroutine_gutter_icon.png; T
 Text: meta; Tail: null; Type: Class::MOP::Mixin; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: meta
 	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Class::MOP::Mixin::meta at 143 in Mixin.pm
-Text: meta; Tail: null; Type: Moose::Role; Icon: /subroutine_gutter_icon.png; Type Icon: null
-	Lookups: meta
-	Export: &meta => &Moose::Role::meta
 Text: override; Tail: ($meta, $name, $code); Type: Moose::Role; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: override
 	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Role::override($meta, $name, $code) at 2050 in Role.pm

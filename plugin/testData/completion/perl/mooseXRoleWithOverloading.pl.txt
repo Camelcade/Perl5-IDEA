@@ -1051,9 +1051,6 @@ Text: map; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon:
 Text: meta; Tail: null; Type: Class::MOP::Mixin; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: meta
 	Export: &meta => &Class::MOP::Mixin::meta
-Text: meta; Tail: null; Type: Moose::Role; Icon: /subroutine_gutter_icon.png; Type Icon: null
-	Lookups: meta
-	Export: &meta => &Moose::Role::meta
 Text: mkdir; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: mkdir
 	PsiElement: Implicit sub: mkdir()
