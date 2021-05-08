@@ -37,15 +37,15 @@ Text: meta; Tail: null; Type: Moose::Role; Icon: /subroutine_gutter_icon.png; Ty
 Text: override; Tail: ($meta, $name, $code); Type: Moose::Role; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: override
 	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Role::override($meta, $name, $code) at 2050 in Role.pm
-Text: parameter; Tail: null; Type: MooseX::Role::Parameterized; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Text: parameter; Tail: ($caller); Type: MooseX::Role::Parameterized; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: parameter
-	Export: &parameter => &MooseX::Role::Parameterized::parameter
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@MooseX::Role::Parameterized::parameter($caller) at 935 in Parameterized.pm
 Text: requires; Tail: ($meta); Type: Moose::Role; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: requires
 	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Role::requires($meta) at 474 in Role.pm
-Text: role; Tail: null; Type: MooseX::Role::Parameterized; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Text: role; Tail: ($caller, $role_generator); Type: MooseX::Role::Parameterized; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: role
-	Export: &role => &MooseX::Role::Parameterized::role
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@MooseX::Role::Parameterized::role($caller, $role_generator) at 1352 in Parameterized.pm
 Text: super; Tail: null; Type: Moose::Role; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: super
 	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Role::super at 1951 in Role.pm

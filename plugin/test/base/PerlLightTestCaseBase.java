@@ -2579,6 +2579,11 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
 
   protected void withMoose() { addTestLibrary("moose"); }
 
+  protected void withMooseX() {
+    withMoose();
+    addTestLibrary("mooseX");
+  }
+
   protected void withRoleTiny() { addTestLibrary("roleTiny"); }
 
   protected void withMoo() { addTestLibrary("moo"); }

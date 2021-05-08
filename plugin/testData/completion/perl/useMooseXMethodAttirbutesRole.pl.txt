@@ -1,3 +1,6 @@
+Text: MODIFY_CODE_ATTRIBUTES; Tail: ($code, @attrs); Type: MooseX::MethodAttributes::Role::AttrContainer; Icon: /method_gutter_icon.png; Type Icon: null
+	Lookups: MODIFY_CODE_ATTRIBUTES
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@MooseX::MethodAttributes::Role::AttrContainer::MODIFY_CODE_ATTRIBUTES($class, $code, @attrs) at 402 in AttrContainer.pm
 Text: after; Tail: null; Type: Moose::Role; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: after
 	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Role::after at 1819 in Role.pm

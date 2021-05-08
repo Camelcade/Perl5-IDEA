@@ -1,0 +1,87 @@
+# PODNAME: MooseX::Role::Parameterized::Extending
+# ABSTRACT: extending MooseX::Role::Parameterized roles
+
+__END__
+
+=pod
+
+=encoding UTF-8
+
+=head1 NAME
+
+MooseX::Role::Parameterized::Extending - extending MooseX::Role::Parameterized roles
+
+=head1 VERSION
+
+version 1.11
+
+=head1 DESCRIPTION
+
+There are heaps of useful modules in the C<MooseX> namespace that you can use
+to make your roles more powerful. However, they do not always work out of the
+box with L<MooseX::Role::Parameterized>, but it's fairly straight-forward to
+achieve the functionality you desire.
+
+L<MooseX::Role::Parameterized> was designed to be as extensible as the rest of
+L<Moose>, and as such it is possible to apply custom traits to both the
+parameterizable role or the ordinary roles they generate. In this example, we
+will look at applying the fake trait C<MooseX::MagicRole> to a parameterizable
+role.
+
+First we need to define a new metaclass for our parameterizable role.
+
+    package MyApp::Meta::Role::Parameterizable;
+    use Moose;
+    extends 'MooseX::Role::Parameterized::Meta::Role::Parameterizable';
+    with 'MooseX::MagicRole';
+
+This is a class (observe that it uses L<Moose>, not L<Moose::Role>) which
+extends the class which governs parameterizable roles.
+L<MooseX::Role::Parameterized::Meta::Role::Parameterizable> is the metaclass
+that packages using L<MooseX::Role::Parameterized> receive by default.
+
+Note that the class we are extending,
+L<MooseX::Role::Parameterized::Meta::Role::ParameterizB<I<able>>|MooseX::Role::Parameterized::Meta::Role::Parameterizable>,
+is entirely distinct from the similarly-named class which governs the
+ordinary roles that parameterized roles generate. An instance of
+L<MooseX::Role::Parameterized::Meta::Role::ParameterizB<I<ed>>|MooseX::Role::Parameterized>
+represents a role with its parameters already bound.
+
+Now we can take advantage of our new subclass by specifying that we want to use
+C<MyApp::Meta::Role::Parameterizable> as our metaclass when importing
+L<MooseX::Role::Parameterized>:
+
+    package MyApp::Role;
+    use MooseX::Role::Parameterized -metaclass => 'MyApp::Meta::Role::Parameterizable';
+
+    role {
+        ...
+    }
+
+And there you go! C<MyApp::Role> now has the C<MooseX::MagicRole> trait applied.
+
+=head1 NAME
+
+=head1 SUPPORT
+
+Bugs may be submitted through L<the RT bug tracker|https://rt.cpan.org/Public/Dist/Display.html?Name=MooseX-Role-Parameterized>
+(or L<bug-MooseX-Role-Parameterized@rt.cpan.org|mailto:bug-MooseX-Role-Parameterized@rt.cpan.org>).
+
+There is also a mailing list available for users of this distribution, at
+L<http://lists.perl.org/list/moose.html>.
+
+There is also an irc channel available for users of this distribution, at
+L<C<#moose> on C<irc.perl.org>|irc://irc.perl.org/#moose>.
+
+=head1 AUTHOR
+
+Shawn M Moore <code@sartak.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2008 by Shawn M Moore.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut

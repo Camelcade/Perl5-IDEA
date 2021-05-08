@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import com.intellij.codeInsight.lookup.LookupElementPresentation;
 import com.intellij.openapi.util.text.StringUtil;
 import com.perl5.lang.perl.idea.project.PerlNamesCache;
 import org.jdom.Element;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.BiPredicate;
@@ -30,7 +31,7 @@ import java.util.function.BiPredicate;
 public abstract class PerlCompletionTestCase extends PerlLightTestCase {
   private Element myState;
 
-  protected static @NotNull BiPredicate<LookupElement, LookupElementPresentation> withType(@NotNull String type) {
+  protected static @NotNull BiPredicate<LookupElement, LookupElementPresentation> withType(@NonNls @NotNull String type) {
     return (__, presentation) -> StringUtil.contains(StringUtil.notNullize(presentation.getTypeText()), type);
   }
 

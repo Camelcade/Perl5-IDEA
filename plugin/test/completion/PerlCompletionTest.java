@@ -847,37 +847,37 @@ public class PerlCompletionTest extends PerlCompletionTestCase {
 
   @Test
   public void testUseMooseXClassAttirubte() {
-    withMoose();
+    withMooseX();
     doTestWithTypeText();
   }
 
   @Test
   public void testUseMooseXMethodAttirbutes() {
-    withMoose();
+    withMooseX();
     doTestWithTypeText();
   }
 
   @Test
   public void testUseMooseXMethodAttirbutesRole() {
-    withMoose();
+    withMooseX();
     doTestWithTypeText();
   }
 
   @Test
   public void testUseMooseXRoleParametrized() {
-    withMoose();
+    withMooseX();
     doTestWithTypeText();
   }
 
   @Test
   public void testUseMooseXRoleWithOverloading() {
-    withMoose();
+    withMooseX();
     doTestWithTypeText();
   }
 
   @Test
   public void testUseMooseXTypesCheckedUtilExports() {
-    withMoose();
+    withMooseX();
     doTestWithTypeText();
   }
 

@@ -1,9 +1,9 @@
 Text: as; Tail: null; Type: MooseX::Types::CheckedUtilExports; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: as
 	Export: &as => &MooseX::Types::CheckedUtilExports::as
-Text: class_type; Tail: null; Type: MooseX::Types::CheckedUtilExports; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Text: class_type; Tail: ($caller); Type: MooseX::Types::CheckedUtilExports; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: class_type
-	Export: &class_type => &MooseX::Types::CheckedUtilExports::class_type
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@MooseX::Types::CheckedUtilExports::class_type($caller) at 1789 in CheckedUtilExports.pm
 Text: coerce; Tail: null; Type: MooseX::Types::CheckedUtilExports; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: coerce
 	Export: &coerce => &MooseX::Types::CheckedUtilExports::coerce
@@ -19,9 +19,9 @@ Text: from; Tail: null; Type: MooseX::Types::CheckedUtilExports; Icon: /subrouti
 Text: maybe_type; Tail: null; Type: MooseX::Types::CheckedUtilExports; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: maybe_type
 	Export: &maybe_type => &MooseX::Types::CheckedUtilExports::maybe_type
-Text: role_type; Tail: null; Type: MooseX::Types::CheckedUtilExports; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Text: role_type; Tail: ($caller, $name, $opts); Type: MooseX::Types::CheckedUtilExports; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: role_type
-	Export: &role_type => &MooseX::Types::CheckedUtilExports::role_type
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@MooseX::Types::CheckedUtilExports::role_type($caller, $name, $opts) at 1928 in CheckedUtilExports.pm
 Text: subtype; Tail: null; Type: MooseX::Types::CheckedUtilExports; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: subtype
 	Export: &subtype => &MooseX::Types::CheckedUtilExports::subtype
