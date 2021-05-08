@@ -16,5 +16,24 @@
 
 package com.perl5.lang.perl.extensions.moose;
 
+import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
+import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class MooseXMethodAttributesRoleProcessor extends MooseRoleProcessor {
+  private static final List<PerlExportDescriptor> EXPORTS;
+
+  static {
+    List<PerlExportDescriptor> exports = new ArrayList<>(MooseRoleProcessor.EXPORTS);
+    exports.add(PerlExportDescriptor.create("MooseX::MethodAttributes::Role::AttrContainer", "MODIFY_CODE_ATTRIBUTES"));
+    EXPORTS = List.copyOf(exports);
+  }
+
+  @Override
+  public @NotNull List<PerlExportDescriptor> getImports(@NotNull PerlUseStatementElement useStatement) {
+    return EXPORTS;
+  }
 }
