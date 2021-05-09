@@ -1,0 +1,14 @@
+package Foo::Bar;
+
+use MooseX::Types::CheckedUtilExports;
+
+as();
+class_type();
+coerce();
+duck_type();
+enum();
+from();
+maybe_type();
+role_type();
+subtype();
+type();

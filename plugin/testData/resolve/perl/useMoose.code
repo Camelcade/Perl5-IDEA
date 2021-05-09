@@ -1,0 +1,17 @@
+package Foo::Bar;
+
+use Moose;
+
+after();
+around();
+augment();
+before();
+blessed();
+confess();
+extends();
+has();
+inner();
+meta();
+override();
+super();
+with();

@@ -1,0 +1,11 @@
+package Foo::Bar;
+
+use Moo;
+
+after();
+around();
+before();
+extends();
+has();
+with();
+

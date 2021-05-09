@@ -1,0 +1,9 @@
+package Foo::Bar;
+
+use Role::Tiny;
+
+after();
+around();
+before();
+requires();
+with();

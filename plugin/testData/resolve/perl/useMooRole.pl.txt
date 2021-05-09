@@ -1,0 +1,25 @@
+PerlNamespaceFileReference at (23,32); text in range: 'Moo::Role' => 1 results:
+	Perl5 at 0 in Role.pm
+
+PerlSubReference at (35,40); text in range: 'after' => 1 results:
+	Implicit sub: after()
+
+PerlSubReference at (44,50); text in range: 'around' => 1 results:
+	Implicit sub: around()
+
+PerlSubReference at (54,60); text in range: 'before' => 1 results:
+	Implicit sub: before()
+
+PerlSubReference at (64,67); text in range: 'has' => 1 results:
+	Implicit sub: has()
+
+PerlSubReference at (71,75); text in range: 'meta' => 2 results:
+	Implicit sub: meta()
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moo::Role::meta at 2915 in Role.pm
+
+PerlSubReference at (79,87); text in range: 'requires' => 1 results:
+	Implicit sub: requires()
+
+PerlSubReference at (91,95); text in range: 'with' => 1 results:
+	Implicit sub: with()
+

@@ -1,0 +1,22 @@
+package Foo::Bar;
+
+use MooseX::Role::Parameterized;
+
+after();
+around();
+augment();
+before();
+blessed();
+confess();
+excludes();
+extends();
+has();
+inner();
+meta();
+#method();
+override();
+parameter();
+requires();
+role();
+super();
+with();

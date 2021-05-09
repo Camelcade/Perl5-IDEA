@@ -1,0 +1,47 @@
+PerlNamespaceFileReference at (23,50); text in range: 'MooseX::Role::Parameterized' => 1 results:
+	Perl5 at 0 in Parameterized.pm
+
+PerlSubReference at (53,58); text in range: 'after' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Role::after at 1819 in Role.pm
+
+PerlSubReference at (62,68); text in range: 'around' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Role::around at 1870 in Role.pm
+
+PerlSubReference at (72,79); text in range: 'augment' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Role::augment at 2239 in Role.pm
+
+PerlSubReference at (83,89); text in range: 'before' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Role::before at 1768 in Role.pm
+
+PerlSubReference at (93,100); text in range: 'blessed' => 0 results:
+
+PerlSubReference at (104,111); text in range: 'confess' => 0 results:
+
+PerlSubReference at (115,123); text in range: 'excludes' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Role::excludes($meta) at 641 in Role.pm
+
+PerlSubReference at (127,134); text in range: 'extends' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Role::extends at 347 in Role.pm
+
+PerlSubReference at (138,141); text in range: 'has' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Role::has($meta, $name) at 804 in Role.pm
+
+PerlMooseInnerReference at (145,150); text in range: 'inner' => 0 results:
+
+PerlSubReference at (154,158); text in range: 'meta' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Class::MOP::Mixin::meta at 143 in Mixin.pm
+
+PerlSubReference at (185,194); text in range: 'parameter' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@MooseX::Role::Parameterized::parameter($caller) at 935 in Parameterized.pm
+
+PerlSubReference at (198,206); text in range: 'requires' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Role::requires($meta) at 474 in Role.pm
+
+PerlSubReference at (210,214); text in range: 'role' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@MooseX::Role::Parameterized::role($caller, $role_generator) at 1352 in Parameterized.pm
+
+PerlMooseSuperReference at (218,223); text in range: 'super' => 0 results:
+
+PerlSubReference at (227,231); text in range: 'with' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Role::with at 413 in Role.pm
+

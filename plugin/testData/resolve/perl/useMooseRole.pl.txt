@@ -1,0 +1,41 @@
+PerlNamespaceFileReference at (23,34); text in range: 'Moose::Role' => 1 results:
+	Perl5 at 0 in Role.pm
+
+PerlSubReference at (37,42); text in range: 'after' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Role::after at 1819 in Role.pm
+
+PerlSubReference at (46,52); text in range: 'around' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Role::around at 1870 in Role.pm
+
+PerlSubReference at (56,63); text in range: 'augment' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Role::augment at 2239 in Role.pm
+
+PerlSubReference at (67,73); text in range: 'before' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Role::before at 1768 in Role.pm
+
+PerlSubReference at (77,84); text in range: 'blessed' => 0 results:
+
+PerlSubReference at (88,95); text in range: 'confess' => 0 results:
+
+PerlSubReference at (99,107); text in range: 'excludes' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Role::excludes($meta) at 641 in Role.pm
+
+PerlSubReference at (111,118); text in range: 'extends' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Role::extends at 347 in Role.pm
+
+PerlSubReference at (122,125); text in range: 'has' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Role::has($meta, $name) at 804 in Role.pm
+
+PerlMooseInnerReference at (129,134); text in range: 'inner' => 0 results:
+
+PerlSubReference at (138,142); text in range: 'meta' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Class::MOP::Mixin::meta at 143 in Mixin.pm
+
+PerlSubReference at (158,166); text in range: 'requires' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Role::requires($meta) at 474 in Role.pm
+
+PerlMooseSuperReference at (170,175); text in range: 'super' => 0 results:
+
+PerlSubReference at (179,183); text in range: 'with' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Role::with at 413 in Role.pm
+

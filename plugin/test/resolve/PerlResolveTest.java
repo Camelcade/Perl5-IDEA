@@ -27,6 +27,79 @@ public class PerlResolveTest extends PerlLightTestCase {
     return "testData/resolve/perl";
   }
 
+
+  @Test
+  public void testUseMoo() {
+    withMoo();
+    doTest();
+  }
+
+  @Test
+  public void testUseMooRole() {
+    withMoo();
+    doTest();
+  }
+
+  @Test
+  public void testUseMoose() {
+    withMoose();
+    doTest();
+  }
+
+  @Test
+  public void testUseMooseRole() {
+    withMoose();
+    doTest();
+  }
+
+  @Test
+  public void testUseMooseUtilTypeConstraints() {
+    withMoose();
+    doTest();
+  }
+
+  @Test
+  public void testUseMooseXClassAttirubte() {
+    withMooseX();
+    doTest();
+  }
+
+  @Test
+  public void testUseMooseXMethodAttirbutes() {
+    withMooseX();
+    doTest();
+  }
+
+  @Test
+  public void testUseMooseXMethodAttirbutesRole() {
+    withMooseX();
+    doTest();
+  }
+
+  @Test
+  public void testUseMooseXRoleParametrized() {
+    withMooseX();
+    doTest();
+  }
+
+  @Test
+  public void testUseMooseXRoleWithOverloading() {
+    withMooseX();
+    doTest();
+  }
+
+  @Test
+  public void testUseMooseXTypesCheckedUtilExports() {
+    withMooseX();
+    doTest();
+  }
+
+  @Test
+  public void testUseRoleTiny() {
+    withRoleTiny();
+    doTest();
+  }
+
   @Test
   public void testAngledHandles() {
     doTest();

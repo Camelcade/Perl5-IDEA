@@ -1,0 +1,22 @@
+package Foo::Bar;
+
+use Moose::Util::TypeConstraints;
+
+as();
+class_type();
+coerce();
+duck_type();
+enum();
+find_type_constraint();
+from();
+inline_as();
+match_on_type();
+maybe_type();
+message();
+register_type_constraint();
+role_type();
+subtype();
+type();
+union();
+via();
+where();

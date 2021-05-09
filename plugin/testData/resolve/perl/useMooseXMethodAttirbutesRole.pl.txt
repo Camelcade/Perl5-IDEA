@@ -1,0 +1,44 @@
+PerlNamespaceFileReference at (23,53); text in range: 'MooseX::MethodAttributes::Role' => 1 results:
+	Perl5 at 0 in Role.pm
+
+PerlSubReference at (56,61); text in range: 'after' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Role::after at 1819 in Role.pm
+
+PerlSubReference at (65,71); text in range: 'around' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Role::around at 1870 in Role.pm
+
+PerlSubReference at (75,82); text in range: 'augment' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Role::augment at 2239 in Role.pm
+
+PerlSubReference at (86,92); text in range: 'before' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Role::before at 1768 in Role.pm
+
+PerlSubReference at (96,103); text in range: 'blessed' => 0 results:
+
+PerlSubReference at (107,114); text in range: 'confess' => 0 results:
+
+PerlSubReference at (118,126); text in range: 'excludes' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Role::excludes($meta) at 641 in Role.pm
+
+PerlSubReference at (130,137); text in range: 'extends' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Role::extends at 347 in Role.pm
+
+PerlSubReference at (141,144); text in range: 'has' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Role::has($meta, $name) at 804 in Role.pm
+
+PerlMooseInnerReference at (148,153); text in range: 'inner' => 0 results:
+
+PerlSubReference at (157,161); text in range: 'meta' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Class::MOP::Mixin::meta at 143 in Mixin.pm
+
+PerlSubReference at (177,185); text in range: 'requires' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Role::requires($meta) at 474 in Role.pm
+
+PerlMooseSuperReference at (189,194); text in range: 'super' => 0 results:
+
+PerlSubReference at (198,202); text in range: 'with' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Role::with at 413 in Role.pm
+
+PerlSubReference at (206,228); text in range: 'MODIFY_CODE_ATTRIBUTES' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@MooseX::MethodAttributes::Role::AttrContainer::MODIFY_CODE_ATTRIBUTES($class, $code, @attrs) at 402 in AttrContainer.pm
+

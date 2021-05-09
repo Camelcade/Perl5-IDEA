@@ -1,0 +1,20 @@
+package Foo::Bar;
+
+use MooseX::MethodAttributes::Role;
+
+after();
+around();
+augment();
+before();
+blessed();
+confess();
+excludes();
+extends();
+has();
+inner();
+meta();
+override();
+requires();
+super();
+with();
+MODIFY_CODE_ATTRIBUTES();

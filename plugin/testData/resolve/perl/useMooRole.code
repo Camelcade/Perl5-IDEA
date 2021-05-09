@@ -1,0 +1,12 @@
+package Foo::Bar;
+
+use Moo::Role;
+
+after();
+around();
+before();
+has();
+meta();
+requires();
+with();
+

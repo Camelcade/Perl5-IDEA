@@ -1,0 +1,21 @@
+PerlNamespaceFileReference at (23,26); text in range: 'Moo' => 1 results:
+	Perl5 at 0 in Moo.pm
+
+PerlSubReference at (29,34); text in range: 'after' => 1 results:
+	Implicit sub: after()
+
+PerlSubReference at (38,44); text in range: 'around' => 1 results:
+	Implicit sub: around()
+
+PerlSubReference at (48,54); text in range: 'before' => 1 results:
+	Implicit sub: before()
+
+PerlSubReference at (58,65); text in range: 'extends' => 1 results:
+	Implicit sub: extends()
+
+PerlSubReference at (69,72); text in range: 'has' => 1 results:
+	Implicit sub: has()
+
+PerlSubReference at (76,80); text in range: 'with' => 1 results:
+	Implicit sub: with()
+

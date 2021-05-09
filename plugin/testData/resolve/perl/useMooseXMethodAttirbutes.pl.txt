@@ -1,0 +1,35 @@
+PerlNamespaceFileReference at (23,47); text in range: 'MooseX::MethodAttributes' => 1 results:
+	Perl5 at 0 in MethodAttributes.pm
+
+PerlSubReference at (50,55); text in range: 'after' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::after at 1872 in Moose.pm
+
+PerlSubReference at (59,65); text in range: 'around' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::around at 1946 in Moose.pm
+
+PerlSubReference at (69,76); text in range: 'augment' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::augment($meta, $name, $method) at 2802 in Moose.pm
+
+PerlSubReference at (80,86); text in range: 'before' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::before at 1796 in Moose.pm
+
+PerlSubReference at (90,97); text in range: 'blessed' => 0 results:
+
+PerlSubReference at (101,108); text in range: 'confess' => 0 results:
+
+PerlSubReference at (112,119); text in range: 'extends' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::extends($meta) at 997 in Moose.pm
+
+PerlSubReference at (123,126); text in range: 'has' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::has($meta, $name) at 1442 in Moose.pm
+
+PerlMooseInnerReference at (130,135); text in range: 'inner' => 0 results:
+
+PerlSubReference at (139,143); text in range: 'meta' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Class::MOP::Mixin::meta at 143 in Mixin.pm
+
+PerlMooseSuperReference at (159,164); text in range: 'super' => 0 results:
+
+PerlSubReference at (168,172); text in range: 'with' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::with at 1310 in Moose.pm
+

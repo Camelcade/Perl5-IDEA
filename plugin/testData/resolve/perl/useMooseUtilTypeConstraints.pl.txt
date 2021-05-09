@@ -1,0 +1,61 @@
+PerlNamespaceFileReference at (23,51); text in range: 'Moose::Util::TypeConstraints' => 1 results:
+	Perl5 at 0 in TypeConstraints.pm
+
+PerlSubReference at (54,56); text in range: 'as' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Util::TypeConstraints::as at 11895 in TypeConstraints.pm
+
+PerlSubReference at (60,70); text in range: 'class_type' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Util::TypeConstraints::class_type at 10477 in TypeConstraints.pm
+
+PerlSubReference at (74,80); text in range: 'coerce' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Util::TypeConstraints::coerce($type_name, @coercion_map) at 11455 in TypeConstraints.pm
+
+PerlSubReference at (84,93); text in range: 'duck_type' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Util::TypeConstraints::duck_type($type_name, @methods) at 10765 in TypeConstraints.pm
+
+PerlSubReference at (97,101); text in range: 'enum' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Util::TypeConstraints::enum($type_name, @values) at 12120 in TypeConstraints.pm
+
+PerlSubReference at (105,125); text in range: 'find_type_constraint' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Util::TypeConstraints::find_type_constraint($type) at 9142 in TypeConstraints.pm
+
+PerlSubReference at (129,133); text in range: 'from' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Util::TypeConstraints::from at 12078 in TypeConstraints.pm
+
+PerlSubReference at (137,146); text in range: 'inline_as' => 2 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Util::TypeConstraints::inline_as at 12027 in TypeConstraints.pm
+	PsiPerlSubDeclarationImpl(SUB_DECLARATION)@Moose::Util::TypeConstraints::inline_as at 512 in TypeConstraints.pm
+
+PerlSubReference at (150,163); text in range: 'match_on_type' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Util::TypeConstraints::match_on_type($to_match, @cases) at 14209 in TypeConstraints.pm
+
+PerlSubReference at (167,177); text in range: 'maybe_type' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Util::TypeConstraints::maybe_type($type_parameter) at 10597 in TypeConstraints.pm
+
+PerlSubReference at (181,188); text in range: 'message' => 2 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Util::TypeConstraints::message at 11977 in TypeConstraints.pm
+	PsiPerlSubDeclarationImpl(SUB_DECLARATION)@Moose::Util::TypeConstraints::message at 495 in TypeConstraints.pm
+
+PerlSubReference at (192,216); text in range: 'register_type_constraint' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Util::TypeConstraints::register_type_constraint($constraint) at 9428 in TypeConstraints.pm
+
+PerlSubReference at (220,229); text in range: 'role_type' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Util::TypeConstraints::role_type at 10535 in TypeConstraints.pm
+
+PerlSubReference at (233,240); text in range: 'subtype' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Util::TypeConstraints::subtype at 9888 in TypeConstraints.pm
+
+PerlSubReference at (244,248); text in range: 'type' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Util::TypeConstraints::type($name) at 9708 in TypeConstraints.pm
+
+PerlSubReference at (252,257); text in range: 'union' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Util::TypeConstraints::union($type_name, @constraints) at 13111 in TypeConstraints.pm
+
+PerlSubReference at (261,264); text in range: 'via' => 2 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Util::TypeConstraints::via at 12097 in TypeConstraints.pm
+	PsiPerlSubDeclarationImpl(SUB_DECLARATION)@Moose::Util::TypeConstraints::via at 482 in TypeConstraints.pm
+
+PerlSubReference at (268,273); text in range: 'where' => 2 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Util::TypeConstraints::where at 11927 in TypeConstraints.pm
+	PsiPerlSubDeclarationImpl(SUB_DECLARATION)@Moose::Util::TypeConstraints::where at 467 in TypeConstraints.pm
+

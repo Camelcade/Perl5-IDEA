@@ -1,0 +1,25 @@
+PerlNamespaceFileReference at (23,56); text in range: 'MooseX::Types::CheckedUtilExports' => 1 results:
+	Perl5 at 0 in CheckedUtilExports.pm
+
+PerlSubReference at (59,61); text in range: 'as' => 0 results:
+
+PerlSubReference at (65,75); text in range: 'class_type' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@MooseX::Types::CheckedUtilExports::class_type($caller) at 1789 in CheckedUtilExports.pm
+
+PerlSubReference at (79,85); text in range: 'coerce' => 0 results:
+
+PerlSubReference at (89,98); text in range: 'duck_type' => 0 results:
+
+PerlSubReference at (102,106); text in range: 'enum' => 0 results:
+
+PerlSubReference at (110,114); text in range: 'from' => 0 results:
+
+PerlSubReference at (118,128); text in range: 'maybe_type' => 0 results:
+
+PerlSubReference at (132,141); text in range: 'role_type' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@MooseX::Types::CheckedUtilExports::role_type($caller, $name, $opts) at 1928 in CheckedUtilExports.pm
+
+PerlSubReference at (145,152); text in range: 'subtype' => 0 results:
+
+PerlSubReference at (156,160); text in range: 'type' => 0 results:
+

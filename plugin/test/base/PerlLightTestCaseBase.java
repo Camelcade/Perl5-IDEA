@@ -897,7 +897,10 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       .append('\n');
 
     //noinspection ConstantConditions
-    resolveResults.sort(Comparator.comparing(it -> Objects.requireNonNull(PsiUtilCore.getVirtualFile(it.getElement())).getPath()));
+    resolveResults.sort(Comparator.comparing(it -> {
+      var virtualFile = PsiUtilCore.getVirtualFile(it.getElement());
+      return virtualFile == null ? "" : virtualFile.getPath();
+    }));
 
     for (ResolveResult result : resolveResults) {
       if (!result.isValidResult()) {

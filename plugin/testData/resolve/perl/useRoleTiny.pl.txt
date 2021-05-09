@@ -1,0 +1,18 @@
+PerlNamespaceFileReference at (23,33); text in range: 'Role::Tiny' => 1 results:
+	Perl5 at 0 in Tiny.pm
+
+PerlSubReference at (36,41); text in range: 'after' => 1 results:
+	Implicit sub: after()
+
+PerlSubReference at (45,51); text in range: 'around' => 1 results:
+	Implicit sub: around()
+
+PerlSubReference at (55,61); text in range: 'before' => 1 results:
+	Implicit sub: before()
+
+PerlSubReference at (65,73); text in range: 'requires' => 1 results:
+	Implicit sub: requires()
+
+PerlSubReference at (77,81); text in range: 'with' => 1 results:
+	Implicit sub: with()
+

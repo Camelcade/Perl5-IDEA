@@ -1,0 +1,19 @@
+package Foo::Bar;
+
+use MooseX::Role::WithOverloading;
+
+after();
+around();
+augment();
+before();
+blessed();
+confess();
+excludes();
+extends();
+has();
+inner();
+meta();
+override();
+requires();
+super();
+with();

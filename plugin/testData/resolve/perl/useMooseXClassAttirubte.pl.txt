@@ -1,0 +1,6 @@
+PerlNamespaceFileReference at (23,45); text in range: 'MooseX::ClassAttribute' => 1 results:
+	Perl5 at 0 in ClassAttribute.pm
+
+PerlSubReference at (48,57); text in range: 'class_has' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@MooseX::ClassAttribute::class_has($meta, $name) at 992 in ClassAttribute.pm
+
