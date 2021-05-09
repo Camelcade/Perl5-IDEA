@@ -14,7 +14,14 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.extensions.packageprocessor.impl;
+package com.perl5.lang.perl.extensions.role.tiny;
 
-public class RoleTinyProcessor extends BaseStrictWarningsProvidingProcessor {
+import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsProvider;
+import org.jetbrains.annotations.NotNull;
+
+public class RoleTinyImplicitSubsProvider extends PerlImplicitDeclarationsProvider {
+  @Override
+  public @NotNull String getDataFileName() {
+    return "perlData/RoleTiny.xml";
+  }
 }

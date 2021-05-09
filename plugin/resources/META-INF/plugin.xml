@@ -116,7 +116,8 @@
                       implementationClass="com.perl5.lang.perl.extensions.moo.MooRoleProcessor"/>
 
     <packageProcessor key="Role::Tiny"
-                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.RoleTinyProcessor"/>
+                      implementationClass="com.perl5.lang.perl.extensions.role.tiny.RoleTinyProcessor"/>
+    <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.role.tiny.RoleTinyImplicitSubsProvider"/>
 
     <packageProcessor key="Dancer"
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.DancerPackageProcessor"/>

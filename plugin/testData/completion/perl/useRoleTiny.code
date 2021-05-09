@@ -2,3 +2,4 @@ package Foo::Bar;
 
 use Role::Tiny;
 
+<caret>

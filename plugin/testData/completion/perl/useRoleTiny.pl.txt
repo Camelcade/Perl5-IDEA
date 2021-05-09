@@ -1,0 +1,15 @@
+Text: after; Tail: null; Type: Role::Tiny; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: after
+	PsiElement: Implicit sub: after()
+Text: around; Tail: null; Type: Role::Tiny; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: around
+	PsiElement: Implicit sub: around()
+Text: before; Tail: null; Type: Role::Tiny; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: before
+	PsiElement: Implicit sub: before()
+Text: requires; Tail: null; Type: Role::Tiny; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: requires
+	PsiElement: Implicit sub: requires()
+Text: with; Tail: null; Type: Role::Tiny; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: with
+	PsiElement: Implicit sub: with()
