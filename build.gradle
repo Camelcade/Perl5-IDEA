@@ -40,13 +40,13 @@ repositories {
 def isCI = System.getenv("CI")
 
 Set pluginProjectsNames = [
-  "perl5.plugin",
-  "perl5.lang.tt2",
-  "perl5.lang.mojo",
-  "perl5.lang.embedded",
-  "perl5.lang.mason.framework",
-  "perl5.lang.mason.htmlmason",
-  "perl5.lang.mason.mason2"
+  "plugin",
+  "lang.tt2",
+  "lang.mojo",
+  "lang.embedded",
+  "lang.mason.framework",
+  "lang.mason.htmlmason",
+  "lang.mason.mason2"
 ]
 
 def pluginProjects = allprojects.findAll {
