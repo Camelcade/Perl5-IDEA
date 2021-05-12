@@ -61,11 +61,14 @@ public class PerlMooseAttributeHandler extends PerlSubCallHandlerWithEmptyData {
     READER_KEY, MUTATOR_KEY, ACCESSOR_KEY, PREDICATE_KEY, CLEARER_KEY
   );
   @NonNls private static final String RW_KEY = "rw";
+  @NonNls private static final String RWP_KEY = "rwp";
+  @NonNls private static final String LAZY_KEY = "lazy";
   @NonNls private static final String IS_KEY = "is";
   @NonNls private static final String ISA_KEY = "isa";
   @NonNls private static final String DOES_KEY = "does";
   @NonNls private static final String HANDLES_KEY = "handles";
   @NonNls private static final String NEW_VALUE_VALUE = "new_value";
+  @NonNls private static final String PROTECTED_MUTATOR_PREFIX = "_set_";
 
   @Override
   public @NotNull List<? extends PerlDelegatingLightNamedElement<?>> computeLightElementsFromPsi(@NotNull PerlSubCallElement subCallElement) {
@@ -167,7 +170,9 @@ public class PerlMooseAttributeHandler extends PerlSubCallHandlerWithEmptyData {
     Map<String, PerlHashEntry> parameters = PerlHashUtil.packToHash(listElements.subList(1, listElements.size()));
     // handling is
     PerlHashEntry isParameter = parameters.get(IS_KEY);
-    boolean isWritable = isParameter != null && StringUtil.equals(RW_KEY, isParameter.getValueString());
+    boolean isWritableProtected = isParameter != null && StringUtil.equals(RWP_KEY, isParameter.getValueString());
+    boolean isWritable = isParameter != null && (StringUtil.equals(RW_KEY, isParameter.getValueString()) || isWritableProtected);
+
     PsiElement forcedIdentifier = null;
 
     // handling isa and does
@@ -286,15 +291,18 @@ public class PerlMooseAttributeHandler extends PerlSubCallHandlerWithEmptyData {
       if (!subCallElement.isAcceptableIdentifierElement(identifier)) {
         continue;
       }
+      List<PerlSubArgument> subArguments = isWritable && !isWritableProtected
+                                           ? Arrays
+                                             .asList(PerlSubArgument.self(), PerlSubArgument.optionalScalar(NEW_VALUE_VALUE, valueClass))
+                                           : Collections.emptyList();
+      var identifierText = ElementManipulators.getValueText(identifier);
       PerlAttributeDefinition newElement = new PerlAttributeDefinition(
         subCallElement,
-        PerlAttributeDefinition.DEFAULT_NAME_COMPUTATION.fun(ElementManipulators.getValueText(identifier)),
+        PerlAttributeDefinition.DEFAULT_NAME_COMPUTATION.fun(identifierText),
         LIGHT_ATTRIBUTE_DEFINITION,
         identifier,
         packageName,
-        isWritable
-        ? Arrays.asList(PerlSubArgument.self(), PerlSubArgument.optionalScalar(NEW_VALUE_VALUE, valueClass))
-        : Collections.emptyList(),
+        subArguments,
         PerlSubAnnotations.tryToFindAnnotations(identifier, subCallElement.getParent())
       );
       if (valueClass != null) {
@@ -302,6 +310,24 @@ public class PerlMooseAttributeHandler extends PerlSubCallHandlerWithEmptyData {
         newElement.setReturnValueFromCode(returnValue);
       }
       result.add(newElement);
+
+      if (isWritableProtected) {
+        newElement = new PerlAttributeDefinition(
+          subCallElement,
+          PerlAttributeDefinition.DEFAULT_NAME_COMPUTATION.fun(PROTECTED_MUTATOR_PREFIX + identifierText),
+          LIGHT_ATTRIBUTE_DEFINITION,
+          identifier,
+          packageName,
+          Arrays.asList(PerlSubArgument.self(), PerlSubArgument.mandatoryScalar(NEW_VALUE_VALUE, StringUtil.notNullize(valueClass))),
+          PerlSubAnnotations.tryToFindAnnotations(identifier, subCallElement.getParent())
+        );
+        if (valueClass != null) {
+          PerlValue returnValue = PerlScalarValue.create(valueClass);
+          newElement.setReturnValueFromCode(returnValue);
+        }
+        result.add(newElement);
+      }
+
       result.addAll(secondaryResult);
       secondaryResult.clear();
     }

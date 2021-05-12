@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -157,7 +157,11 @@ public class PerlSubArgument {
   }
 
   public static PerlSubArgument mandatoryScalar(@NotNull String variableName) {
-    return mandatory(PerlVariableType.SCALAR, variableName);
+    return mandatoryScalar(variableName, "");
+  }
+
+  public static @NotNull PerlSubArgument mandatoryScalar(@NotNull String variableName, @NotNull String variableClass) {
+    return mandatory(PerlVariableType.SCALAR, variableName, variableClass);
   }
 
   public static PerlSubArgument mandatory(@NotNull PerlVariableType variableType, @NotNull String variableName) {
