@@ -1,0 +1,5 @@
+package MySomePackage;
+
+has test => is => 'rw', clearer => 1;
+
+has _underscored => is => 'rw', clearer => 1;

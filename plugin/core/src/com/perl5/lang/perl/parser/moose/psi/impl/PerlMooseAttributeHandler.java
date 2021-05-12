@@ -69,6 +69,8 @@ public class PerlMooseAttributeHandler extends PerlSubCallHandlerWithEmptyData {
   @NonNls private static final String HANDLES_KEY = "handles";
   @NonNls private static final String NEW_VALUE_VALUE = "new_value";
   @NonNls private static final String PROTECTED_MUTATOR_PREFIX = "_set_";
+  @NonNls private static final String MOO_CLEARER_PREFIX = "clear_";
+  @NonNls private static final String _MOO_CLEARER_PREFIX = "_" + MOO_CLEARER_PREFIX;
 
   @Override
   public @NotNull List<? extends PerlDelegatingLightNamedElement<?>> computeLightElementsFromPsi(@NotNull PerlSubCallElement subCallElement) {
@@ -190,6 +192,8 @@ public class PerlMooseAttributeHandler extends PerlSubCallHandlerWithEmptyData {
     }
 
     // handling accessor, reader, etc.
+    boolean createMooClearer = false;
+
     List<PerlLightMethodDefinitionElement<?>> secondaryResult = new ArrayList<>();
     for (String key : MOOSE_SUB_NAMES_KEYS) {
       PerlHashEntry entry = parameters.get(key);
@@ -199,6 +203,9 @@ public class PerlMooseAttributeHandler extends PerlSubCallHandlerWithEmptyData {
 
       String methodName = entry.getValueString();
       if (StringUtil.isEmpty(methodName)) {
+        if (key.equals(CLEARER_KEY) && entry.valueElement instanceof PsiPerlNumberConstant && "1".equals(entry.valueElement.getText())) {
+          createMooClearer = true;
+        }
         continue;
       }
 
@@ -296,6 +303,7 @@ public class PerlMooseAttributeHandler extends PerlSubCallHandlerWithEmptyData {
                                              .asList(PerlSubArgument.self(), PerlSubArgument.optionalScalar(NEW_VALUE_VALUE, valueClass))
                                            : Collections.emptyList();
       var identifierText = ElementManipulators.getValueText(identifier);
+      var identifierAnnotations = PerlSubAnnotations.tryToFindAnnotations(identifier, subCallElement.getParent());
       PerlAttributeDefinition newElement = new PerlAttributeDefinition(
         subCallElement,
         PerlAttributeDefinition.DEFAULT_NAME_COMPUTATION.fun(identifierText),
@@ -303,7 +311,7 @@ public class PerlMooseAttributeHandler extends PerlSubCallHandlerWithEmptyData {
         identifier,
         packageName,
         subArguments,
-        PerlSubAnnotations.tryToFindAnnotations(identifier, subCallElement.getParent())
+        identifierAnnotations
       );
       if (valueClass != null) {
         PerlValue returnValue = PerlScalarValue.create(valueClass);
@@ -319,13 +327,27 @@ public class PerlMooseAttributeHandler extends PerlSubCallHandlerWithEmptyData {
           identifier,
           packageName,
           Arrays.asList(PerlSubArgument.self(), PerlSubArgument.mandatoryScalar(NEW_VALUE_VALUE, StringUtil.notNullize(valueClass))),
-          PerlSubAnnotations.tryToFindAnnotations(identifier, subCallElement.getParent())
+          identifierAnnotations
         );
         if (valueClass != null) {
           PerlValue returnValue = PerlScalarValue.create(valueClass);
           newElement.setReturnValueFromCode(returnValue);
         }
         result.add(newElement);
+      }
+
+      if (createMooClearer) {
+        var clearerName = identifierText.startsWith("_") ?
+                          _MOO_CLEARER_PREFIX + identifierText.substring(1) : MOO_CLEARER_PREFIX + identifierText;
+        result.add(new PerlAttributeDefinition(
+          subCallElement,
+          PerlAttributeDefinition.DEFAULT_NAME_COMPUTATION.fun(clearerName),
+          LIGHT_ATTRIBUTE_DEFINITION,
+          identifier,
+          packageName,
+          Collections.emptyList(),
+          identifierAnnotations
+        ));
       }
 
       result.addAll(secondaryResult);

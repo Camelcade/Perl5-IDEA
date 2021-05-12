@@ -38,6 +38,9 @@ public class PerlLightElementsTest extends PerlLightTestCase {
   public void testMooRwpAttr() {doTest();}
 
   @Test
+  public void testMooGeneratedClearer() {doTest();}
+
+  @Test
   public void testConstants() {doTest();}
 
   @Test
