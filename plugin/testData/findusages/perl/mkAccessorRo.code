@@ -1,0 +1,8 @@
+package Foo::Bar;
+use parent 'Class::Accessor';
+
+__PACKAGE__->mk_ro_accessors(    'a<caret>ccessor1',    "accessor2" );
+__PACKAGE__->accessor1;
+__PACKAGE__->set_accessor1;
+__PACKAGE__->get_accessor1;
+

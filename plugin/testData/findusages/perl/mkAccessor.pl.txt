@@ -1,0 +1,5 @@
+Target: PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::accessor1($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 79 in mkAccessor.pl
+Total usages: 1
+	PerlSubNameElementImpl(Perl5: subname) at 123 in mkAccessor.pl, via: PerlSubReference at (123,132); text in range: 'accessor1' => 1 results:
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::accessor1($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 79 in mkAccessor.pl
+

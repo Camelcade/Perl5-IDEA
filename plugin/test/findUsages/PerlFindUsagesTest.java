@@ -26,6 +26,24 @@ public class PerlFindUsagesTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testMkAccessor() {doTest();}
+
+  @Test
+  public void testMkAccessorFbp() {doTest();}
+
+  @Test
+  public void testMkAccessorRo() {doTest();}
+
+  @Test
+  public void testMkAccessorRoFbp() {doTest();}
+
+  @Test
+  public void testMkAccessorWo() {doTest();}
+
+  @Test
+  public void testMkAccessorWoFbp() {doTest();}
+
+  @Test
   public void testMooRwpAttr() {doTest();}
 
   @Test
