@@ -1,5 +1,7 @@
 Target: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::clear_test; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 28 in mooGeneratedClearer.pl
-Total usages: 1
+Total usages: 2
 	PerlSubNameElementImpl(Perl5: subname) at 94 in mooGeneratedClearer.pl, via: PerlSubReference at (94,104); text in range: 'clear_test' => 1 results:
 	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::clear_test; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 28 in mooGeneratedClearer.pl
 
+	PerlSubNameElementImpl(Perl5: subname) at 115 in mooGeneratedClearer.pl, via: PerlSubReference at (115,119); text in range: 'test' => 1 results:
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 28 in mooGeneratedClearer.pl

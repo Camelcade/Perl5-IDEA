@@ -1,0 +1,4 @@
+Target: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::myclear_test; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 59 in mooCustomClearer.pl
+Total usages: 1
+	PerlSubNameElementImpl(Perl5: subname) at 107 in mooCustomClearer.pl, via: PerlSubReference at (107,119); text in range: 'myclear_test' => 1 results:
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::myclear_test; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 59 in mooCustomClearer.pl

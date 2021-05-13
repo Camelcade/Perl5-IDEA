@@ -1,0 +1,4 @@
+Target: PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 28 in mooCustomClearerBase.pl
+Total usages: 1
+	PerlSubNameElementImpl(Perl5: subname) at 130 in mooCustomClearerBase.pl, via: PerlSubReference at (130,134); text in range: 'test' => 1 results:
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 28 in mooCustomClearerBase.pl

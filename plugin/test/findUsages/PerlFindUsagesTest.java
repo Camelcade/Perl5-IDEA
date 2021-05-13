@@ -35,6 +35,15 @@ public class PerlFindUsagesTest extends PerlLightTestCase {
   public void testMooGeneratedClearer() {doTest();}
 
   @Test
+  public void testMooCustomClearer() {doTest();}
+
+  @Test
+  public void testMooCustomClearerBase() {doTest();}
+
+  @Test
+  public void testMooCustomClearerBaseRwp() {doTest();}
+
+  @Test
   public void testMooGeneratedClearerAll() {doTest();}
 
   @Test

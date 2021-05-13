@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,12 @@ import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.util.Processor;
 import com.perl5.lang.perl.psi.PerlHeredocOpener;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.impl.PerlPolyNamedElement;
+import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
+import com.perl5.lang.perl.psi.light.PerlLightSubDefinitionElement;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 import static com.perl5.lang.perl.util.PerlPackageUtil.__PACKAGE__;
 
@@ -41,6 +46,15 @@ public class PerlReferencesSearcher extends QueryExecutorBase<PsiReference, Refe
       String heredocName = ((PerlHeredocOpener)element).getName();
       if ("".equals(heredocName)) {
         queryParameters.getOptimizer().searchWord("\n", queryParameters.getEffectiveSearchScope(), true, element);
+      }
+    }
+    else if (element instanceof PerlLightSubDefinitionElement) {
+      PerlPolyNamedElement<?> delegate = ((PerlLightSubDefinitionElement<?>)element).getDelegate();
+      var identifyingElement = ((PerlLightSubDefinitionElement<?>)element).getIdentifyingElement();
+      for (PerlDelegatingLightNamedElement<?> lightElement : delegate.getLightElements()) {
+        if (Objects.equals(identifyingElement, lightElement.getIdentifyingElement())) {
+          queryParameters.getOptimizer().searchWord(lightElement.getName(), queryParameters.getEffectiveSearchScope(), true, delegate);
+        }
       }
     }
     else if (element instanceof PerlNamespaceDefinition) {

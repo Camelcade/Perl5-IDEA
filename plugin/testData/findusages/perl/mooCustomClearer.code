@@ -1,0 +1,7 @@
+package MySomePackage;
+
+has test => is => 'rw', clearer => 'myc<caret>lear_test';
+
+my MySomePackage $self;
+$self->myclear_test();
+$self->test();

@@ -1,0 +1,8 @@
+package MySomePackage;
+
+has t<caret>est => is => 'rwp', clearer => 'myclear_test';
+
+my MySomePackage $self;
+$self->myclear_test();
+$self->test();
+$self->_set_test();
