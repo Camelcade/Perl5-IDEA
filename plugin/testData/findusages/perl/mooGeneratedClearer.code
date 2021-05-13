@@ -1,0 +1,7 @@
+package MySomePackage;
+
+has test => is => 'rw', clearer => 1;
+
+my MySomePackage $self;
+$self->clea<caret>r_test();
+$self->test();

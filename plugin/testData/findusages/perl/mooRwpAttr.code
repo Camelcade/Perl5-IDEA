@@ -1,0 +1,7 @@
+package MySomePackage;
+
+has test => is => 'rwp';
+my MySomePackage $self;
+
+$self->test();
+$self->_set<caret>_test();

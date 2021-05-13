@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,6 +24,24 @@ public class PerlFindUsagesTest extends PerlLightTestCase {
   protected String getBaseDataPath() {
     return "testData/findusages/perl";
   }
+
+  @Test
+  public void testMooRwpAttr() {doTest();}
+
+  @Test
+  public void testMooRwpAttrAll() {doTest();}
+
+  @Test
+  public void testMooGeneratedClearer() {doTest();}
+
+  @Test
+  public void testMooGeneratedClearerAll() {doTest();}
+
+  @Test
+  public void testMooGeneratedClearerUnderscored() {doTest();}
+
+  @Test
+  public void testMooGeneratedClearerUnderscoredAll() {doTest();}
 
   @Test
   public void testPodIndexWithAngles() {doTest();}

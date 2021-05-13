@@ -1,0 +1,2 @@
+Target: PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::_underscored($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 28 in mooGeneratedClearerUnderscoredAll.pl
+Total usages: 0

@@ -1,0 +1,7 @@
+package MySomePackage;
+
+has _underscored => is => 'rw', clearer => 1;
+my MySomePackage $self;
+
+$self->_clea<caret>r_underscored();
+$self->underscored();
