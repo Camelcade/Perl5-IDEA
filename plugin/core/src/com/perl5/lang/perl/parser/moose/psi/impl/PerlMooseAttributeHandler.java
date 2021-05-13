@@ -320,29 +320,24 @@ public class PerlMooseAttributeHandler extends PerlSubCallHandlerWithEmptyData {
       result.add(newElement);
 
       if (isWritableProtected) {
-        newElement = new PerlAttributeDefinition(
+        result.add(new PerlLightMethodDefinitionElement<>(
           subCallElement,
-          PerlAttributeDefinition.DEFAULT_NAME_COMPUTATION.fun(PROTECTED_MUTATOR_PREFIX + identifierText),
-          LIGHT_ATTRIBUTE_DEFINITION,
+          PROTECTED_MUTATOR_PREFIX + identifierText,
+          LIGHT_METHOD_DEFINITION,
           identifier,
           packageName,
           Arrays.asList(PerlSubArgument.self(), PerlSubArgument.mandatoryScalar(NEW_VALUE_VALUE, StringUtil.notNullize(valueClass))),
           identifierAnnotations
-        );
-        if (valueClass != null) {
-          PerlValue returnValue = PerlScalarValue.create(valueClass);
-          newElement.setReturnValueFromCode(returnValue);
-        }
-        result.add(newElement);
+        ));
       }
 
       if (createMooClearer) {
         var clearerName = identifierText.startsWith("_") ?
                           _MOO_CLEARER_PREFIX + identifierText.substring(1) : MOO_CLEARER_PREFIX + identifierText;
-        result.add(new PerlAttributeDefinition(
+        result.add(new PerlLightMethodDefinitionElement<>(
           subCallElement,
-          PerlAttributeDefinition.DEFAULT_NAME_COMPUTATION.fun(clearerName),
-          LIGHT_ATTRIBUTE_DEFINITION,
+          clearerName,
+          LIGHT_METHOD_DEFINITION,
           identifier,
           packageName,
           Collections.emptyList(),

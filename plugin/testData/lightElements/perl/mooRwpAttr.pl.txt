@@ -1,4 +1,3 @@
 Poly-named provider: PsiPerlSubCallImpl(SUB_CALL) at 24 in mooRwpAttr.pl
 	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 28 in mooRwpAttr.pl
-	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::_set_test($self, $new_value); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 28 in mooRwpAttr.pl
-
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::_set_test($self, $new_value); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 28 in mooRwpAttr.pl
