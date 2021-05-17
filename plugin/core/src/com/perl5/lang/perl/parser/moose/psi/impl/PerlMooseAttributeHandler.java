@@ -62,7 +62,6 @@ public class PerlMooseAttributeHandler extends PerlSubCallHandlerWithEmptyData {
   );
   @NonNls private static final String RW_KEY = "rw";
   @NonNls private static final String RWP_KEY = "rwp";
-  @NonNls private static final String LAZY_KEY = "lazy";
   @NonNls private static final String IS_KEY = "is";
   @NonNls private static final String ISA_KEY = "isa";
   @NonNls private static final String DOES_KEY = "does";
