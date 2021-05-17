@@ -1,6 +1,5 @@
 
-package Foo::Bar;
-<caret>
+package Foo::B<caret>ar;
 use parent qw/MyTest::Constants/;
 
 

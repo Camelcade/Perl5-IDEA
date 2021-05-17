@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -107,9 +107,9 @@ class UpdatePerlPackageFileCopyright extends UpdatePsiFileCopyright {
   }
 
   @Override
-  protected String getCommentText(String prefix, String suffix) {
+  protected String getCommentText(String prefix, String suffix, String oldComment) {
     LanguageOptions languageOptions = getLanguageOptions();
-    String defaultText = super.getCommentText("", "");
+    String defaultText = super.getCommentText("", "", oldComment);
     if (languageOptions.isBlock()) {
       return prefix + StringUtil.trimStart(defaultText, "# \n") + suffix;
     }

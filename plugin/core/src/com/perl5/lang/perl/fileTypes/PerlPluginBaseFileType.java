@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import com.intellij.lang.Language;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.psi.PsiElement;
+import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -32,5 +33,10 @@ public abstract class PerlPluginBaseFileType extends LanguageFileType {
   protected static boolean isMyFile(@Nullable PsiElement element, @NotNull FileType fileType) {
     return element != null &&
            element.getContainingFile().getViewProvider().getVirtualFile().getFileType() == fileType;
+  }
+
+  @Override
+  public @Nls @NotNull String getDisplayName() {
+    return getName();
   }
 }

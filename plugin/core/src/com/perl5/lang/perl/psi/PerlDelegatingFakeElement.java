@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,6 +33,8 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collection;
+
 /**
  * Fake wrapper for PsiElements, allowing e.g. to override presentation
  */
@@ -54,7 +56,7 @@ public class PerlDelegatingFakeElement extends FakePsiElement {
   }
 
   @Override
-  public @NotNull Iterable<? extends @NotNull PsiSymbolReference> getOwnReferences() {
+  public @NotNull Collection<? extends @NotNull PsiSymbolReference> getOwnReferences() {
     return myDelegate.getOwnReferences();
   }
 

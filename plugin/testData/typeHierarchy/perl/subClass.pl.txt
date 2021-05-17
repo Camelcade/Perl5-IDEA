@@ -7,9 +7,9 @@ none
 ----------
 Tree: Subtypes of Foo::Bar
 PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bar at 1 in subClass.pl
-    PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::OtherBar at 56 in subClass.pl
-        PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::SomethingElse at 123 in subClass.pl
-    PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::SomethingElse at 123 in subClass.pl
+    PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::OtherBar at 55 in subClass.pl
+        PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::SomethingElse at 122 in subClass.pl
+    PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::SomethingElse at 122 in subClass.pl
 ----------
 Tree: Supertypes of Foo::Bar
 PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bar at 1 in subClass.pl

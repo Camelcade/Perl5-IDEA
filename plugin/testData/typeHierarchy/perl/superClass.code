@@ -7,9 +7,8 @@ use parent qw/MyTest::Constants/;
 package Foo::OtherBar;
 use parent qw/Foo::Bar MyTest::Constants/;
 
-package Foo::SomethingElse;
+package Foo::Something<caret>Else;
 use parent qw/Foo::OtherBar Foo::Bar MyTest::Constants/;
 
-<caret>
 
 1;

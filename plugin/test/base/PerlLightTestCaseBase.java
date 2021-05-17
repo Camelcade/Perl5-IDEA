@@ -85,7 +85,6 @@ import com.intellij.openapi.editor.colors.EditorColors;
 import com.intellij.openapi.editor.colors.EditorColorsManager;
 import com.intellij.openapi.editor.colors.EditorColorsScheme;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
-import com.intellij.openapi.editor.ex.EditorEx;
 import com.intellij.openapi.editor.ex.util.LayeredHighlighterIterator;
 import com.intellij.openapi.editor.ex.util.LexerEditorHighlighter;
 import com.intellij.openapi.editor.ex.util.SegmentArrayWithData;
@@ -765,6 +764,9 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       }
       return String.join("; ", iconStrings);
     }
+    else if (icon instanceof IconLoader.CachedImageIcon) {
+      return ((IconLoader.CachedImageIcon)icon).getOriginalPath();
+    }
     else {
       iconString = icon.toString();
     }
@@ -1205,7 +1207,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     initWithFileSmartWithoutErrors();
 
     Editor editor = getEditor();
-    EditorHighlighter highlighter = ((EditorEx)editor).getHighlighter();
+    EditorHighlighter highlighter = editor.getHighlighter();
     CharSequence charsSequence = editor.getDocument().getCharsSequence();
     HighlighterIterator highlighterIterator = highlighter.createIterator(0);
     int counter = 0;
@@ -1577,17 +1579,15 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
 
   protected void doTestTypeHierarchy() {
     initWithFileSmartWithoutErrors();
-    Editor editor = getEditor();
-    Object psiElement = FileEditorManager.getInstance(getProject())
-      .getData(CommonDataKeys.PSI_ELEMENT.getName(), editor, editor.getCaretModel().getCurrentCaret());
+    var psiElement = myFixture.getElementAtCaret();
     MapDataContext dataContext = new MapDataContext();
     dataContext.put(CommonDataKeys.PROJECT, getProject());
     dataContext.put(CommonDataKeys.EDITOR, getEditor());
-    dataContext.put(CommonDataKeys.PSI_ELEMENT, (PsiElement)psiElement);
+    dataContext.put(CommonDataKeys.PSI_ELEMENT, psiElement);
     dataContext.put(CommonDataKeys.PSI_FILE, getFile());
 
     HierarchyProvider hierarchyProvider =
-      BrowseHierarchyActionBase.findProvider(LanguageTypeHierarchy.INSTANCE, (PsiElement)psiElement, getFile(), dataContext);
+      BrowseHierarchyActionBase.findProvider(LanguageTypeHierarchy.INSTANCE, psiElement, getFile(), dataContext);
     assertNotNull(hierarchyProvider);
     StringBuilder sb = new StringBuilder();
     sb.append("Provider: ").append(hierarchyProvider.getClass().getSimpleName()).append("\n");
@@ -2024,7 +2024,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     if (usageGroup instanceof PsiElementUsageGroupBase) {
       return "PsiElement: " + serializePsiElement(((PsiElementUsageGroupBase<?>)usageGroup).getElement());
     }
-    return usageGroup.getClass().getSimpleName() + ": " + usageGroup.getText(null) + "; " + getIconText(usageGroup.getIcon(true));
+    return usageGroup.getClass().getSimpleName() + ": " + usageGroup.getText(null) + "; " + getIconText(usageGroup.getIcon());
   }
 
   /**
@@ -2338,7 +2338,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   }
 
   protected void doTestHighlighterWithoutInit() {
-    EditorHighlighter editorHighlighter = ((EditorEx)getEditor()).getHighlighter();
+    EditorHighlighter editorHighlighter = getEditor().getHighlighter();
     assertInstanceOf(editorHighlighter, LexerEditorHighlighter.class);
     HighlighterIterator highlighterIterator = editorHighlighter.createIterator(0);
 
@@ -2373,7 +2373,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   }
 
   protected void doTestHighlighterRestartWithoutInit() {
-    EditorHighlighter editorHighlighter = ((EditorEx)getEditor()).getHighlighter();
+    EditorHighlighter editorHighlighter = getEditor().getHighlighter();
     assertInstanceOf(editorHighlighter, LexerEditorHighlighter.class);
     SegmentArrayWithData segments = ((LexerEditorHighlighter)editorHighlighter).getSegments();
     assertNotNull(segments);
@@ -2924,7 +2924,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     result.append(getEditorTextWithCaretsAndSelections());
     result.append(SEPARATOR_NEWLINES).append("Psi structure").append(SEPARATOR_NEWLINES);
     PsiDocumentManager.getInstance(getProject()).commitAllDocuments();
-    String psiString = DebugUtil.psiToString(psiFile, false, false);
+    String psiString = DebugUtil.psiToString(psiFile, true, false);
     result.append(psiString);
 
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), result.toString());

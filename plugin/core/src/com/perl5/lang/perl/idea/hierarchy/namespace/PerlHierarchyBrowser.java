@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -70,7 +70,7 @@ public class PerlHierarchyBrowser extends TypeHierarchyBrowserBase {
   }
 
   @Override
-  protected void createTrees(@NotNull Map<String, JTree> trees) {
+  protected void createTrees(@NotNull Map<? super String, ? super JTree> trees) {
     trees.put(SUPERTYPES_HIERARCHY_TYPE, createTree(true));
     trees.put(SUBTYPES_HIERARCHY_TYPE, createTree(true));
     trees.put(TYPE_HIERARCHY_TYPE, createTree(true));
