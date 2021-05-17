@@ -1,0 +1,10 @@
+package Test::Namespace;
+
+use Moo;
+has testfield => is => 'rwp', clearer => 1, predicate => 1;
+has _underfield => is => 'rwp', clearer => 1, predicate => 1;
+
+package main;
+
+my $obj = Test::Namespace::->new();
+$obj-><caret>

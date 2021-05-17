@@ -1,0 +1,42 @@
+Text: _clear_underfield; Tail: null; Type: Test::Namespace; Icon: /method_gutter_icon.png; Type Icon: null
+	Lookups: _clear_underfield
+	PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Test::Namespace::_clear_underfield; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 99 in mooGenerated.pl
+Text: _has_underfield; Tail: null; Type: Test::Namespace; Icon: /method_gutter_icon.png; Type Icon: null
+	Lookups: _has_underfield
+	PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Test::Namespace::_has_underfield; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 99 in mooGenerated.pl
+Text: _set__underfield; Tail: ($new_value); Type: Test::Namespace; Icon: /method_gutter_icon.png; Type Icon: null
+	Lookups: _set__underfield
+	PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Test::Namespace::_set__underfield($self, $new_value); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 99 in mooGenerated.pl
+Text: _set_testfield; Tail: ($new_value); Type: Test::Namespace; Icon: /method_gutter_icon.png; Type Icon: null
+	Lookups: _set_testfield
+	PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Test::Namespace::_set_testfield($self, $new_value); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 39 in mooGenerated.pl
+Text: _underfield; Tail: null; Type: Test::Namespace; Icon: /method_gutter_icon.png; Type Icon: null
+	Lookups: _underfield
+	PsiElement: PerlAttributeDefinition(LIGHT_ATTRIBUTE)@Test::Namespace::_underfield; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 99 in mooGenerated.pl
+Text: after; Tail: null; Type: Moo; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: after
+	PsiElement: Implicit sub: after()
+Text: around; Tail: null; Type: Moo; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: around
+	PsiElement: Implicit sub: around()
+Text: before; Tail: null; Type: Moo; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: before
+	PsiElement: Implicit sub: before()
+Text: clear_testfield; Tail: null; Type: Test::Namespace; Icon: /method_gutter_icon.png; Type Icon: null
+	Lookups: clear_testfield
+	PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Test::Namespace::clear_testfield; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 39 in mooGenerated.pl
+Text: extends; Tail: null; Type: Moo; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: extends
+	PsiElement: Implicit sub: extends()
+Text: has; Tail: null; Type: Moo; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: has
+	PsiElement: Implicit sub: has()
+Text: has_testfield; Tail: null; Type: Test::Namespace; Icon: /method_gutter_icon.png; Type Icon: null
+	Lookups: has_testfield
+	PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Test::Namespace::has_testfield; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 39 in mooGenerated.pl
+Text: testfield; Tail: null; Type: Test::Namespace; Icon: /method_gutter_icon.png; Type Icon: null
+	Lookups: testfield
+	PsiElement: PerlAttributeDefinition(LIGHT_ATTRIBUTE)@Test::Namespace::testfield; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 39 in mooGenerated.pl
+Text: with; Tail: null; Type: Moo; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: with
+	PsiElement: Implicit sub: with()
