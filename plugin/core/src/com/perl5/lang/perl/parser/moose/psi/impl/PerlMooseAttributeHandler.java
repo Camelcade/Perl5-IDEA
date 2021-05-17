@@ -52,13 +52,13 @@ import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.LIGHT_ATTRIBUTE
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.LIGHT_METHOD_DEFINITION;
 
 public class PerlMooseAttributeHandler extends PerlSubCallHandlerWithEmptyData {
-  @NonNls private static final String MUTATOR_KEY = "writer";
+  @NonNls private static final String WRITER_KEY = "writer";
   @NonNls private static final String ACCESSOR_KEY = "accessor";
   @NonNls private static final String READER_KEY = "reader";
   @NonNls private static final String PREDICATE_KEY = "predicate";
   @NonNls private static final String CLEARER_KEY = "clearer";
   @NonNls private static final List<String> MOOSE_SUB_NAMES_KEYS = Arrays.asList(
-    READER_KEY, MUTATOR_KEY, ACCESSOR_KEY, PREDICATE_KEY, CLEARER_KEY
+    READER_KEY, WRITER_KEY, ACCESSOR_KEY, PREDICATE_KEY, CLEARER_KEY
   );
   @NonNls private static final String RW_KEY = "rw";
   @NonNls private static final String RWP_KEY = "rwp";
@@ -217,7 +217,7 @@ public class PerlMooseAttributeHandler extends PerlSubCallHandlerWithEmptyData {
         continue;
       }
 
-      if (!isWritable && key.equals(MUTATOR_KEY)) {
+      if (!isWritable && key.equals(WRITER_KEY)) {
         continue;
       }
 
@@ -238,8 +238,8 @@ public class PerlMooseAttributeHandler extends PerlSubCallHandlerWithEmptyData {
         LIGHT_METHOD_DEFINITION,
         identifier,
         packageName,
-        key.equals(MUTATOR_KEY) ? Arrays.asList(PerlSubArgument.self(), PerlSubArgument.optionalScalar(NEW_VALUE_VALUE, valueClass))
-                                : Collections.emptyList(),
+        key.equals(WRITER_KEY) ? Arrays.asList(PerlSubArgument.self(), PerlSubArgument.optionalScalar(NEW_VALUE_VALUE, valueClass))
+                               : Collections.emptyList(),
         PerlSubAnnotations.tryToFindAnnotations(identifier, entry.keyElement, subCallElement.getParent())
       );
 
