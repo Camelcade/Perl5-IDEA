@@ -41,6 +41,9 @@ public class PerlLightElementsTest extends PerlLightTestCase {
   public void testMooGeneratedClearer() {doTest();}
 
   @Test
+  public void testMooGeneratedPredicate() {doTest();}
+
+  @Test
   public void testConstants() {doTest();}
 
   @Test

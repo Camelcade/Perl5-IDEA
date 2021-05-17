@@ -1,0 +1,5 @@
+Target: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::_has_underscored; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 28 in mooGeneratedPredicateUnderscored.pl
+Total usages: 1
+	PerlSubNameElementImpl(Perl5: subname) at 104 in mooGeneratedPredicateUnderscored.pl, via: PerlSubReference at (104,120); text in range: '_has_underscored' => 1 results:
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::_has_underscored; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 28 in mooGeneratedPredicateUnderscored.pl
+

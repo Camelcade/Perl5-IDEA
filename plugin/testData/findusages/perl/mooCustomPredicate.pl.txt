@@ -1,0 +1,5 @@
+Target: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::myhas_test; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 61 in mooCustomPredicate.pl
+Total usages: 1
+	PerlSubNameElementImpl(Perl5: subname) at 107 in mooCustomPredicate.pl, via: PerlSubReference at (107,117); text in range: 'myhas_test' => 1 results:
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::myhas_test; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 61 in mooCustomPredicate.pl
+

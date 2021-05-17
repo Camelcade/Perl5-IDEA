@@ -1,0 +1,8 @@
+Poly-named provider: PsiPerlSubCallImpl(SUB_CALL) at 24 in mooGeneratedPredicate.pl
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 28 in mooGeneratedPredicate.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::has_test; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 28 in mooGeneratedPredicate.pl
+
+Poly-named provider: PsiPerlSubCallImpl(SUB_CALL) at 65 in mooGeneratedPredicate.pl
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::_underscored($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 69 in mooGeneratedPredicate.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::_has_underscored; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 69 in mooGeneratedPredicate.pl
+

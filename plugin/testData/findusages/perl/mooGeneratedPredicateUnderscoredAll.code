@@ -1,0 +1,7 @@
+package MySomePackage;
+
+has _under<caret>scored => is => 'rw', predicate => 1;
+my MySomePackage $self;
+
+$self->_has_underscored();
+$self->underscored();

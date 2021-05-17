@@ -53,6 +53,9 @@ public class PerlFindUsagesTest extends PerlLightTestCase {
   public void testMooGeneratedClearer() {doTest();}
 
   @Test
+  public void testMooGeneratedPredicate() {doTest();}
+
+  @Test
   public void testMooCustomClearer() {doTest();}
 
   @Test
@@ -62,6 +65,15 @@ public class PerlFindUsagesTest extends PerlLightTestCase {
   public void testMooCustomClearerBaseRwp() {doTest();}
 
   @Test
+  public void testMooCustomPredicate() {doTest();}
+
+  @Test
+  public void testMooCustomPredicateBase() {doTest();}
+
+  @Test
+  public void testMooCustomPredicateBaseRwp() {doTest();}
+
+  @Test
   public void testMooGeneratedClearerAll() {doTest();}
 
   @Test
@@ -69,6 +81,15 @@ public class PerlFindUsagesTest extends PerlLightTestCase {
 
   @Test
   public void testMooGeneratedClearerUnderscoredAll() {doTest();}
+
+  @Test
+  public void testMooGeneratedPredicateAll() {doTest();}
+
+  @Test
+  public void testMooGeneratedPredicateUnderscored() {doTest();}
+
+  @Test
+  public void testMooGeneratedPredicateUnderscoredAll() {doTest();}
 
   @Test
   public void testPodIndexWithAngles() {doTest();}

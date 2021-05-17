@@ -1,0 +1,7 @@
+package MySomePackage;
+
+has t<caret>est => is => 'rw', predicate => 'myhas_test';
+
+my MySomePackage $self;
+$self->myhas_test();
+$self->test();

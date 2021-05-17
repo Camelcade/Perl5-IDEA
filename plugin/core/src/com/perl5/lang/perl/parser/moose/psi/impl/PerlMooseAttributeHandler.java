@@ -71,6 +71,8 @@ public class PerlMooseAttributeHandler extends PerlSubCallHandlerWithEmptyData {
   @NonNls private static final String PROTECTED_MUTATOR_PREFIX = "_set_";
   @NonNls private static final String MOO_CLEARER_PREFIX = "clear_";
   @NonNls private static final String _MOO_CLEARER_PREFIX = "_" + MOO_CLEARER_PREFIX;
+  @NonNls private static final String MOO_PREDICATE_PREFIX = "has_";
+  @NonNls private static final String _MOO_PREDICATE_PREFIX = "_" + MOO_PREDICATE_PREFIX;
 
   @Override
   public @NotNull List<? extends PerlDelegatingLightNamedElement<?>> computeLightElementsFromPsi(@NotNull PerlSubCallElement subCallElement) {
@@ -193,6 +195,7 @@ public class PerlMooseAttributeHandler extends PerlSubCallHandlerWithEmptyData {
 
     // handling accessor, reader, etc.
     boolean createMooClearer = false;
+    boolean createMooPredicate = false;
 
     List<PerlLightMethodDefinitionElement<?>> secondaryResult = new ArrayList<>();
     for (String key : MOOSE_SUB_NAMES_KEYS) {
@@ -203,8 +206,13 @@ public class PerlMooseAttributeHandler extends PerlSubCallHandlerWithEmptyData {
 
       String methodName = entry.getValueString();
       if (StringUtil.isEmpty(methodName)) {
-        if (key.equals(CLEARER_KEY) && entry.valueElement instanceof PsiPerlNumberConstant && "1".equals(entry.valueElement.getText())) {
-          createMooClearer = true;
+        if (entry.valueElement instanceof PsiPerlNumberConstant && "1".equals(entry.valueElement.getText())) {
+          if (key.equals(CLEARER_KEY)) {
+            createMooClearer = true;
+          }
+          else if (key.equals(PREDICATE_KEY)) {
+            createMooPredicate = true;
+          }
         }
         continue;
       }
@@ -337,6 +345,19 @@ public class PerlMooseAttributeHandler extends PerlSubCallHandlerWithEmptyData {
         result.add(new PerlLightMethodDefinitionElement<>(
           subCallElement,
           clearerName,
+          LIGHT_METHOD_DEFINITION,
+          identifier,
+          packageName,
+          Collections.emptyList(),
+          identifierAnnotations
+        ));
+      }
+      if (createMooPredicate) {
+        var predicateName = identifierText.startsWith("_") ?
+                            _MOO_PREDICATE_PREFIX + identifierText.substring(1) : MOO_PREDICATE_PREFIX + identifierText;
+        result.add(new PerlLightMethodDefinitionElement<>(
+          subCallElement,
+          predicateName,
           LIGHT_METHOD_DEFINITION,
           identifier,
           packageName,

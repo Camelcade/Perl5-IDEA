@@ -1,0 +1,5 @@
+package MySomePackage;
+
+has test => is => 'rw', predicate => 1;
+
+has _underscored => is => 'rw', predicate => 1;
