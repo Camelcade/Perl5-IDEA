@@ -26,12 +26,11 @@ import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.formatter.xml.XmlFormattingPolicy;
 import com.intellij.psi.templateLanguages.SimpleTemplateLanguageFormattingModelBuilder;
 import com.intellij.xml.template.formatter.AbstractXmlTemplateFormattingModelBuilder;
-import com.perl5.lang.perl.idea.formatter.blocks.PerlFormattingBlock;
 import com.perl5.lang.perl.psi.PerlMultiplePsiFilesPerDocumentFileViewProvider;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class PerlXmlTemplateFormattingModelBuilder<Ctx extends PerlFormattingContext, Blk extends PerlFormattingBlock>
+public abstract class PerlXmlTemplateFormattingModelBuilder<Ctx extends PerlFormattingContext, Blk extends PerlTemplateLanguageBlock<Ctx>>
   extends AbstractXmlTemplateFormattingModelBuilder {
   private static final Logger LOG = Logger.getInstance(PerlXmlTemplateFormattingModelBuilder.class);
 
@@ -45,17 +44,27 @@ public abstract class PerlXmlTemplateFormattingModelBuilder<Ctx extends PerlForm
 
 
   @Override
-  protected Block createTemplateLanguageBlock(ASTNode node,
-                                              CodeStyleSettings settings,
-                                              XmlFormattingPolicy xmlFormattingPolicy,
-                                              Indent indent,
-                                              @Nullable Alignment alignment,
-                                              @Nullable Wrap wrap) {
+  protected final Block createTemplateLanguageBlock(@NotNull ASTNode node,
+                                                    CodeStyleSettings settings,
+                                                    XmlFormattingPolicy xmlFormattingPolicy,
+                                                    Indent indent,
+                                                    @Nullable Alignment alignment,
+                                                    @Nullable Wrap wrap) {
     // fixme we should not re-create a context each time. Probably we should override the parent class and copy-paste it.
-    return createBlock(node, FormattingContext.create(node.getPsi(), settings));
+    return createTemplateLanguageBlock(node,
+                                       settings,
+                                       xmlFormattingPolicy,
+                                       indent, alignment, wrap,
+                                       createContext(FormattingContext.create(node.getPsi(), settings)));
   }
 
-  protected abstract @NotNull Blk createBlock(ASTNode node, FormattingContext formattingContext);
+  protected abstract Blk createTemplateLanguageBlock(ASTNode node,
+                                                     CodeStyleSettings settings,
+                                                     XmlFormattingPolicy xmlFormattingPolicy,
+                                                     Indent indent,
+                                                     @Nullable Alignment alignment,
+                                                     @Nullable Wrap wrap,
+                                                     @NotNull Ctx context);
 
   protected abstract @NotNull Ctx createContext(@NotNull FormattingContext formattingContext);
 

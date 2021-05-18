@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,14 +16,26 @@
 
 package com.perl5.lang.embedded.idea.formatter;
 
+import com.intellij.formatting.Alignment;
+import com.intellij.formatting.Indent;
+import com.intellij.formatting.Wrap;
 import com.intellij.lang.ASTNode;
-import com.perl5.lang.perl.idea.formatter.PerlFormattingContext;
-import com.perl5.lang.perl.idea.formatter.blocks.PerlFormattingBlock;
+import com.intellij.psi.codeStyle.CodeStyleSettings;
+import com.intellij.psi.formatter.xml.XmlFormattingPolicy;
+import com.perl5.lang.perl.idea.formatter.PerlTemplateLanguageBlock;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 
-public class EmbeddedPerlFormattingBlock extends PerlFormattingBlock {
-  public EmbeddedPerlFormattingBlock(@NotNull ASTNode node, @NotNull PerlFormattingContext context) {
-    super(node, context);
+public class EmbeddedPerlFormattingBlock extends PerlTemplateLanguageBlock<EmbeddedPerlFormattingContext> {
+  public EmbeddedPerlFormattingBlock(EmbeddedPerlFormattingModelBuilder builder,
+                                     @NotNull ASTNode node,
+                                     @Nullable Wrap wrap,
+                                     @Nullable Alignment alignment,
+                                     CodeStyleSettings settings,
+                                     XmlFormattingPolicy xmlFormattingPolicy,
+                                     @Nullable Indent indent,
+                                     @NotNull EmbeddedPerlFormattingContext formattingContext) {
+    super(builder, node, wrap, alignment, settings, xmlFormattingPolicy, indent, formattingContext);
   }
 }

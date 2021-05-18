@@ -16,23 +16,36 @@
 
 package com.perl5.lang.embedded.idea.formatter;
 
+import com.intellij.formatting.Alignment;
 import com.intellij.formatting.FormattingContext;
+import com.intellij.formatting.Indent;
+import com.intellij.formatting.Wrap;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.codeStyle.CodeStyleSettings;
+import com.intellij.psi.formatter.xml.XmlFormattingPolicy;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.embedded.EmbeddedPerlLanguage;
 import com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes;
 import com.perl5.lang.perl.idea.formatter.PerlXmlTemplateFormattingModelBuilder;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 
 public class EmbeddedPerlFormattingModelBuilder
   extends PerlXmlTemplateFormattingModelBuilder<EmbeddedPerlFormattingContext, EmbeddedPerlFormattingBlock> {
 
+
   @Override
-  protected @NotNull EmbeddedPerlFormattingBlock createBlock(ASTNode node, FormattingContext formattingContext) {
-    return new EmbeddedPerlFormattingBlock(node, createContext(formattingContext));
+  protected EmbeddedPerlFormattingBlock createTemplateLanguageBlock(ASTNode node,
+                                                                    CodeStyleSettings settings,
+                                                                    XmlFormattingPolicy xmlFormattingPolicy,
+                                                                    Indent indent,
+                                                                    @Nullable Alignment alignment,
+                                                                    @Nullable Wrap wrap,
+                                                                    @NotNull EmbeddedPerlFormattingContext context) {
+    return new EmbeddedPerlFormattingBlock(this, node, wrap, alignment, settings, xmlFormattingPolicy, indent, context);
   }
 
   @Override
