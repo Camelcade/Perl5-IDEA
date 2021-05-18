@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,6 @@ import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.TokenType;
-import com.intellij.psi.formatter.FormatterUtil;
 import com.intellij.psi.formatter.common.AbstractBlock;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
@@ -53,9 +52,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 
   protected final @NotNull PerlFormattingContext myContext;
   private Indent myIndent;
-  private Boolean myIsFirst;
-  private Boolean myIsLast;
-  private Boolean myIsIncomple;
+  private Boolean myIsIncomplete;
   private final AtomicNotNullLazyValue<List<Block>> mySubBlocksProvider = AtomicNotNullLazyValue.createValue(
     () -> ContainerUtil.immutableList(buildSubBlocks())
   );
@@ -250,29 +247,15 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
     return myContext.getChildAttributes(this, newChildIndex);
   }
 
-  public boolean isLast() {
-    if (myIsLast == null) {
-      myIsLast = FormatterUtil.getNextNonWhitespaceSibling(myNode) == null;
-    }
-    return myIsLast;
-  }
-
-  public boolean isFirst() {
-    if (myIsFirst == null) {
-      myIsFirst = FormatterUtil.getPreviousNonWhitespaceSibling(myNode) == null;
-    }
-    return myIsFirst;
-  }
-
   @Override
   public final boolean isIncomplete() {
-    if (myIsIncomple == null) {
-      myIsIncomple = myContext.isIncomplete(this);
-      if (myIsIncomple == null) {
-        myIsIncomple = super.isIncomplete();
+    if (myIsIncomplete == null) {
+      myIsIncomplete = myContext.isIncomplete(this);
+      if (myIsIncomplete == null) {
+        myIsIncomplete = super.isIncomplete();
       }
     }
-    return myIsIncomple;
+    return myIsIncomplete;
   }
 
   protected boolean shouldCreateSubBlockFor(ASTNode node) {

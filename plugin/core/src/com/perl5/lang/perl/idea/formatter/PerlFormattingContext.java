@@ -26,6 +26,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
+import com.intellij.psi.formatter.FormatterUtil;
 import com.intellij.psi.impl.source.tree.CompositeElement;
 import com.intellij.psi.impl.source.tree.LeafElement;
 import com.intellij.psi.impl.source.tree.TreeUtil;
@@ -37,7 +38,6 @@ import com.intellij.util.containers.FactoryMap;
 import com.intellij.util.containers.MultiMap;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlAstBlock;
-import com.perl5.lang.perl.idea.formatter.blocks.PerlFormattingBlock;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlSyntheticBlock;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
@@ -243,7 +243,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
   }
 
 
-  public @Nullable Spacing getSpacing(@NotNull ASTBlock parent, @Nullable Block child1, @NotNull Block child2) {
+  public @Nullable Spacing getSpacing(@Nullable ASTBlock parent, @Nullable Block child1, @NotNull Block child2) {
     if (parent instanceof PerlSyntheticBlock) {
       parent = ((PerlSyntheticBlock)parent).getRealBlock();
     }
@@ -257,12 +257,16 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     }
 
     if (child1 instanceof ASTBlock && child2 instanceof ASTBlock) {
-      ASTNode parentNode = parent.getNode();
-      IElementType parentNodeType = PsiUtilCore.getElementType(parentNode);
       ASTNode child1Node = ((ASTBlock)child1).getNode();
       IElementType child1Type = PsiUtilCore.getElementType(child1Node);
       ASTNode child2Node = ((ASTBlock)child2).getNode();
       IElementType child2Type = PsiUtilCore.getElementType(child2Node);
+
+      ASTNode parentNode = parent != null ? parent.getNode() :
+                           child1Node != null ? child1Node.getTreeParent() :
+                           child2Node != null ? child2Node.getTreeParent() :
+                           null;
+      IElementType parentNodeType = PsiUtilCore.getElementType(parentNode);
 
       if (ALL_QUOTE_OPENERS.contains(child1Type) && child2Node != null) {
         CharSequence openerChars = child2Node.getChars();
@@ -307,8 +311,8 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       }
 
       if (BLOCK_LIKE_CONTAINERS.contains(parentNodeType)) {
-        boolean afterOpener = BLOCK_OPENERS.contains(child1Type) && ((PerlFormattingBlock)child1).isFirst();
-        boolean beforeCloser = BLOCK_CLOSERS.contains(child2Type) && ((PerlFormattingBlock)child2).isLast();
+        boolean afterOpener = BLOCK_OPENERS.contains(child1Type) && isFirst(child1);
+        boolean beforeCloser = BLOCK_CLOSERS.contains(child2Type) && isLast(child2);
         IElementType grandParentElementType = PsiUtilCore.getElementType(parentNode.getTreeParent());
         if (PerlTokenSets.CAST_EXPRESSIONS.contains(grandParentElementType)) {
           int spaces = getSettings().SPACE_WITHIN_CAST_PARENTHESES ? 1 : 0;
@@ -710,5 +714,15 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
 
   public @NotNull TextRange getTextRange() {
     return myFormattingContext.getFormattingRange();
+  }
+
+  private boolean isLast(@NotNull Block block) {
+    var astNode = ASTBlock.getNode(block);
+    return astNode != null && FormatterUtil.getNextNonWhitespaceSibling(astNode) == null;
+  }
+
+  private boolean isFirst(@NotNull Block block) {
+    var astNode = ASTBlock.getNode(block);
+    return astNode != null && FormatterUtil.getPreviousNonWhitespaceSibling(astNode) == null;
   }
 }
