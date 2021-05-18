@@ -21,10 +21,11 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.formatter.xml.XmlFormattingPolicy;
 import com.intellij.xml.template.formatter.TemplateLanguageBlock;
+import com.perl5.lang.perl.idea.formatter.blocks.PerlAstBlock;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class PerlTemplateLanguageBlock<Ctx extends PerlFormattingContext> extends TemplateLanguageBlock {
+public abstract class PerlTemplateLanguageBlock<Ctx extends PerlFormattingContext> extends TemplateLanguageBlock implements PerlAstBlock {
   private final @NotNull Ctx myFormattingContext;
 
   public PerlTemplateLanguageBlock(PerlXmlTemplateFormattingModelBuilder<Ctx, ?> builder,
@@ -39,6 +40,33 @@ public abstract class PerlTemplateLanguageBlock<Ctx extends PerlFormattingContex
     myFormattingContext = formattingContext;
   }
 
+  @Override
+  protected final @NotNull PerlXmlTemplateFormattingModelBuilder<Ctx, ?> getBuilder() {
+    //noinspection unchecked
+    return (PerlXmlTemplateFormattingModelBuilder<Ctx, ?>)super.getBuilder();
+  }
+
+  @Override
+  protected final PerlTemplateLanguageBlock<Ctx> createTemplateLanguageBlock(ASTNode child) {
+    return getBuilder().createTemplateLanguageBlock(
+      child, getSettings(), getXmlFormattingPolicy(), getChildIndent(child), getChildAlignment(child), getChildWrap(child),
+      myFormattingContext);
+  }
+
+  @Override
+  public @NotNull ChildAttributes getChildAttributes(int newChildIndex) {
+    return myFormattingContext.getChildAttributes(this, newChildIndex);
+  }
+
+  @Override
+  protected @Nullable Wrap getChildWrap(ASTNode child) {
+    return myFormattingContext.getWrap(child);
+  }
+
+  @Override
+  protected @Nullable Alignment getChildAlignment(ASTNode child) {
+    return myFormattingContext.getAlignment(child);
+  }
 
   @Override
   protected @NotNull Indent getChildIndent(@NotNull ASTNode node) {

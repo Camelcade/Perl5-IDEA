@@ -50,7 +50,6 @@ public abstract class PerlXmlTemplateFormattingModelBuilder<Ctx extends PerlForm
                                                     Indent indent,
                                                     @Nullable Alignment alignment,
                                                     @Nullable Wrap wrap) {
-    // fixme we should not re-create a context each time. Probably we should override the parent class and copy-paste it.
     return createTemplateLanguageBlock(node,
                                        settings,
                                        xmlFormattingPolicy,
