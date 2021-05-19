@@ -1,0 +1,53 @@
+<div>
+<% say 'Perl code'; %>
+<%= 'Perl expression, replaced with result' %>
+<%== 'Perl expression, replaced with XML escaped result' %>
+<%# Comment, useful for debugging %>
+<%% Replaced with block opener, useful for generating templates %>
+% say 'Perl code line, treated as "<% line =%>" (explained later)';
+%= 'Perl expression line, treated as "<%= line %>"'
+%== 'Perl expression line, treated as "<%== line %>"'
+%# Comment line, useful for debugging
+%% Replaced with line opener, useful for generating templates
+
+<div>
+<%= 'Perl expression, replaced with XML escaped result' %>
+<%== 'Perl expression, replaced with result' %>
+
+% use Mojo::ByteStream qw(b);
+<%= b('<div>excluded!</div>') %>
+<div>
+
+<% for (1 .. 3) { %>
+<%= 'Trim all whitespace characters around this expression' =%>
+<% } %>
+
+This is <%= 1 + 1 %> a\
+single line
+
+This will <%= 1 + 1 %> result\\
+in multiple\\
+lines
+
+There is <%= 1 + 1 %> no newline at the end here\
+
+<% my $block = begin %>
+<% my $name = shift; =%>
+Hello <%= $name %>.
+<% end %>
+<%= $block->('Baerbel') %>
+<%= $block->('Wolfgang') %>
+</div>
+
+% my $block = begin
+% my $name = shift;
+Hello <%= $name %>.
+% end
+%= $block->('Baerbel')
+%= $block->('Wolfgang')
+</div>
+
+% my ($foo, $bar) = @_;
+% my $x = shift;
+test 123 <%= $foo %>
+</div>
