@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,7 @@ import com.perl5.lang.perl.psi.light.PerlLightMethodDefinitionElement;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -34,8 +35,8 @@ import java.util.Collections;
 
 public class PerlClassAccessorMethod extends PerlLightMethodDefinitionElement<PerlSubCallElement>
   implements PerlRenameUsagesHelper {
-  public static final String GETTER_PREFIX = "get_";
-  public static final String SETTER_PREFIX = "set_";
+  @NonNls private static final String GETTER_PREFIX = "get_";
+  @NonNls private static final String SETTER_PREFIX = "set_";
 
   public static final Function<String, String> SIMPLE_COMPUTATION = name -> name;
   public static final Function<String, String> GETTER_COMPUTATION = name -> GETTER_PREFIX + name;
@@ -59,11 +60,11 @@ public class PerlClassAccessorMethod extends PerlLightMethodDefinitionElement<Pe
     withNameComputation(nameComputation);
     if (isFollowBestPractice()) {
       if (hasSetterName()) {
-        setSubArguments(Arrays.asList(PerlSubArgument.self(), PerlSubArgument.mandatoryScalar("new_value")));
+        setSubArguments(Arrays.asList(PerlSubArgument.self(), PerlSubArgument.mandatoryScalar(PerlSubArgument.NEW_VALUE_VALUE)));
       }
     }
     else {
-      setSubArguments(Arrays.asList(PerlSubArgument.self(), PerlSubArgument.optionalScalar("new_value")));
+      setSubArguments(Arrays.asList(PerlSubArgument.self(), PerlSubArgument.optionalScalar(PerlSubArgument.NEW_VALUE_VALUE)));
     }
   }
 

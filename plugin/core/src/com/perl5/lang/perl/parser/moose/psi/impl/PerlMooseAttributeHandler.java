@@ -66,7 +66,6 @@ public class PerlMooseAttributeHandler extends PerlSubCallHandlerWithEmptyData {
   @NonNls private static final String ISA_KEY = "isa";
   @NonNls private static final String DOES_KEY = "does";
   @NonNls private static final String HANDLES_KEY = "handles";
-  @NonNls private static final String NEW_VALUE_VALUE = "new_value";
   @NonNls private static final String PROTECTED_MUTATOR_PREFIX = "_set_";
   @NonNls private static final String MOO_CLEARER_PREFIX = "clear_";
   @NonNls private static final String _MOO_CLEARER_PREFIX = "_" + MOO_CLEARER_PREFIX;
@@ -143,7 +142,7 @@ public class PerlMooseAttributeHandler extends PerlSubCallHandlerWithEmptyData {
         LIGHT_METHOD_DEFINITION,
         identifier,
         namespaceName,
-        Arrays.asList(PerlSubArgument.self(), PerlSubArgument.optionalScalar(NEW_VALUE_VALUE)),
+        Arrays.asList(PerlSubArgument.self(), PerlSubArgument.optionalScalar(PerlSubArgument.NEW_VALUE_VALUE)),
         PerlSubAnnotations.tryToFindAnnotations(identifier, subCallElement.getParent()),
         valueProvider,
         subExpr == null ? null : subExpr.getBlock()
@@ -237,7 +236,8 @@ public class PerlMooseAttributeHandler extends PerlSubCallHandlerWithEmptyData {
         LIGHT_METHOD_DEFINITION,
         identifier,
         packageName,
-        key.equals(WRITER_KEY) ? Arrays.asList(PerlSubArgument.self(), PerlSubArgument.optionalScalar(NEW_VALUE_VALUE, valueClass))
+        key.equals(WRITER_KEY) ? Arrays
+          .asList(PerlSubArgument.self(), PerlSubArgument.optionalScalar(PerlSubArgument.NEW_VALUE_VALUE, valueClass))
                                : Collections.emptyList(),
         PerlSubAnnotations.tryToFindAnnotations(identifier, entry.keyElement, subCallElement.getParent())
       );
@@ -307,7 +307,8 @@ public class PerlMooseAttributeHandler extends PerlSubCallHandlerWithEmptyData {
       }
       List<PerlSubArgument> subArguments = isWritable && !isWritableProtected
                                            ? Arrays
-                                             .asList(PerlSubArgument.self(), PerlSubArgument.optionalScalar(NEW_VALUE_VALUE, valueClass))
+                                             .asList(PerlSubArgument.self(),
+                                                     PerlSubArgument.optionalScalar(PerlSubArgument.NEW_VALUE_VALUE, valueClass))
                                            : Collections.emptyList();
       var identifierText = ElementManipulators.getValueText(identifier);
       var identifierAnnotations = PerlSubAnnotations.tryToFindAnnotations(identifier, subCallElement.getParent());
@@ -333,7 +334,8 @@ public class PerlMooseAttributeHandler extends PerlSubCallHandlerWithEmptyData {
           LIGHT_METHOD_DEFINITION,
           identifier,
           packageName,
-          Arrays.asList(PerlSubArgument.self(), PerlSubArgument.mandatoryScalar(NEW_VALUE_VALUE, StringUtil.notNullize(valueClass))),
+          Arrays.asList(PerlSubArgument.self(),
+                        PerlSubArgument.mandatoryScalar(PerlSubArgument.NEW_VALUE_VALUE, StringUtil.notNullize(valueClass))),
           identifierAnnotations
         ));
       }
