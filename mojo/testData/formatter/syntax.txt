@@ -8,7 +8,7 @@
 
 <html>
 <head><title><%= $title #this is a titile 
-            %></title></head>
+        %></title></head>
 <body>
 test 123
 foo <% my $i = $num + 2; %>

@@ -1,4 +1,3 @@
-
 % sub {reverse($_[0])}, sub {reverse($_[0])} {{
      Hello
 % }}
@@ -108,11 +107,11 @@
 <%augment wrap>
 <html>
 <body>
-<%perl>
-    say $self;
-    say $orig;
-</%perl>
-<% say "hi there!" %>
+    <%perl>
+        say $self;
+        say $orig;
+    </%perl>
+    <% say "hi there!" %>
 </body>
 </html>
 </%augment>
@@ -180,9 +179,9 @@
 
 <%filter Row1 ($class)>
 <tr class="<% $class %>">
-    % foreach my $item (split(/\s/, $yield->())) {
+% foreach my $item (split(/\s/, $yield->())) {
 
-        <td><% $item %></td>
+    <td><% $item %></td>
 % }
 </tr>
 </%filter>
@@ -207,7 +206,7 @@
      %>
 
 <div>
-    % # comment
+% # comment
 </div>
 
 <%doc>

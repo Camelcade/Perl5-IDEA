@@ -50,11 +50,14 @@ public abstract class PerlXmlTemplateFormattingModelBuilder<Ctx extends PerlForm
                                                     Indent indent,
                                                     @Nullable Alignment alignment,
                                                     @Nullable Wrap wrap) {
+    var perlFormattingContext = createContext(FormattingContext.create(node.getPsi(), settings));
     return createTemplateLanguageBlock(node,
                                        settings,
                                        xmlFormattingPolicy,
-                                       indent, alignment, wrap,
-                                       createContext(FormattingContext.create(node.getPsi(), settings)));
+                                       perlFormattingContext.getIndentProcessor().getNodeIndent(node),
+                                       perlFormattingContext.getAlignment(node),
+                                       perlFormattingContext.getWrap(node),
+                                       perlFormattingContext);
   }
 
   protected abstract Blk createTemplateLanguageBlock(ASTNode node,
