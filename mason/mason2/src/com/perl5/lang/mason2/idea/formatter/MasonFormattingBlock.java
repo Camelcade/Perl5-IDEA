@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,21 +16,27 @@
 
 package com.perl5.lang.mason2.idea.formatter;
 
+import com.intellij.formatting.Alignment;
+import com.intellij.formatting.Indent;
+import com.intellij.formatting.Wrap;
 import com.intellij.lang.ASTNode;
-import com.perl5.lang.perl.idea.formatter.PerlFormattingContext;
-import com.perl5.lang.perl.idea.formatter.blocks.PerlFormattingBlock;
+import com.intellij.psi.codeStyle.CodeStyleSettings;
+import com.intellij.psi.formatter.xml.XmlFormattingPolicy;
+import com.perl5.lang.perl.idea.formatter.PerlTemplateLanguageBlock;
+import com.perl5.lang.perl.idea.formatter.PerlXmlTemplateFormattingModelBuilder;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 
-public class MasonFormattingBlock extends PerlFormattingBlock {
-  public MasonFormattingBlock(@NotNull ASTNode node, @NotNull PerlFormattingContext context
-  ) {
-    super(node, context);
-  }
-
-
-  @Override
-  protected PerlFormattingBlock createBlock(@NotNull ASTNode node) {
-    return new MasonFormattingBlock(node, myContext);
+public class MasonFormattingBlock extends PerlTemplateLanguageBlock<MasonFormattingContext> {
+  public MasonFormattingBlock(PerlXmlTemplateFormattingModelBuilder<MasonFormattingContext, ?> builder,
+                              @NotNull ASTNode node,
+                              @Nullable Wrap wrap,
+                              @Nullable Alignment alignment,
+                              CodeStyleSettings settings,
+                              XmlFormattingPolicy xmlFormattingPolicy,
+                              @Nullable Indent indent,
+                              @NotNull MasonFormattingContext formattingContext) {
+    super(builder, node, wrap, alignment, settings, xmlFormattingPolicy, indent, formattingContext);
   }
 }
