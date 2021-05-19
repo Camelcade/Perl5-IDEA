@@ -1,0 +1,1 @@
+<b><% $boomerang_sum %>%</b>

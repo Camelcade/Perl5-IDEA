@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,22 +16,27 @@
 
 package com.perl5.lang.htmlmason.idea.formatter;
 
+import com.intellij.formatting.Alignment;
+import com.intellij.formatting.Indent;
+import com.intellij.formatting.Wrap;
 import com.intellij.lang.ASTNode;
-import com.perl5.lang.htmlmason.HTMLMasonElementPatterns;
-import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
-import com.perl5.lang.perl.idea.formatter.PerlFormattingContext;
-import com.perl5.lang.perl.idea.formatter.blocks.PerlFormattingBlock;
+import com.intellij.psi.codeStyle.CodeStyleSettings;
+import com.intellij.psi.formatter.xml.XmlFormattingPolicy;
+import com.perl5.lang.perl.idea.formatter.PerlTemplateLanguageBlock;
+import com.perl5.lang.perl.idea.formatter.PerlXmlTemplateFormattingModelBuilder;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 
-public class HTMLMasonFormattingBlock extends PerlFormattingBlock implements HTMLMasonElementTypes, HTMLMasonElementPatterns {
-  public HTMLMasonFormattingBlock(@NotNull ASTNode node, @NotNull PerlFormattingContext context
-  ) {
-    super(node, context);
-  }
-
-  @Override
-  protected PerlFormattingBlock createBlock(@NotNull ASTNode node) {
-    return new HTMLMasonFormattingBlock(node, myContext);
+public class HTMLMasonFormattingBlock extends PerlTemplateLanguageBlock<HTMLMasonFormattingContext> {
+  public HTMLMasonFormattingBlock(PerlXmlTemplateFormattingModelBuilder<HTMLMasonFormattingContext, ?> builder,
+                                  @NotNull ASTNode node,
+                                  @Nullable Wrap wrap,
+                                  @Nullable Alignment alignment,
+                                  CodeStyleSettings settings,
+                                  XmlFormattingPolicy xmlFormattingPolicy,
+                                  @Nullable Indent indent,
+                                  @NotNull HTMLMasonFormattingContext formattingContext) {
+    super(builder, node, wrap, alignment, settings, xmlFormattingPolicy, indent, formattingContext);
   }
 }

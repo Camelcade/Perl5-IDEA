@@ -16,21 +16,53 @@
 
 package com.perl5.lang.htmlmason.idea.formatter;
 
+import com.intellij.formatting.Alignment;
 import com.intellij.formatting.FormattingContext;
-import com.intellij.formatting.FormattingModel;
-import com.intellij.formatting.FormattingModelProvider;
-import com.perl5.lang.perl.idea.formatter.PerlTemplatingFormattingModelBuilder;
-import com.perl5.lang.perl.idea.formatter.blocks.PerlFormattingBlock;
+import com.intellij.formatting.Indent;
+import com.intellij.formatting.Wrap;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.codeStyle.CodeStyleSettings;
+import com.intellij.psi.formatter.xml.XmlFormattingPolicy;
+import com.intellij.psi.util.PsiUtilCore;
+import com.perl5.lang.htmlmason.HTMLMasonLanguage;
+import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
+import com.perl5.lang.perl.idea.formatter.PerlXmlTemplateFormattingModelBuilder;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 
-public class HTMLMasonFormattingModelBuilder extends PerlTemplatingFormattingModelBuilder {
+public class HTMLMasonFormattingModelBuilder
+  extends PerlXmlTemplateFormattingModelBuilder<HTMLMasonFormattingContext, HTMLMasonFormattingBlock> {
   @Override
-  public @NotNull FormattingModel createModel(@NotNull FormattingContext formattingContext) {
-    var element = formattingContext.getPsiElement();
-    PerlFormattingBlock block = new HTMLMasonFormattingBlock(
-      element.getNode(), new HTMLMasonFormattingContext(formattingContext));
-    return FormattingModelProvider.createFormattingModelForPsiFile(element.getContainingFile(), block,
-                                                                   formattingContext.getCodeStyleSettings());
+  protected HTMLMasonFormattingBlock createTemplateLanguageBlock(ASTNode node,
+                                                                 CodeStyleSettings settings,
+                                                                 XmlFormattingPolicy xmlFormattingPolicy,
+                                                                 Indent indent,
+                                                                 @Nullable Alignment alignment,
+                                                                 @Nullable Wrap wrap,
+                                                                 @NotNull HTMLMasonFormattingContext context) {
+    return new HTMLMasonFormattingBlock(this, node, wrap, alignment, settings, xmlFormattingPolicy, indent, context);
+  }
+
+  @Override
+  protected @NotNull HTMLMasonFormattingContext createContext(@NotNull FormattingContext formattingContext) {
+    return new HTMLMasonFormattingContext(formattingContext);
+  }
+
+  @Override
+  protected boolean isTemplateFile(PsiFile file) {
+    return file.getLanguage().isKindOf(HTMLMasonLanguage.INSTANCE);
+  }
+
+  @Override
+  public boolean isOuterLanguageElement(PsiElement element) {
+    return PsiUtilCore.getElementType(element) == HTMLMasonElementTypes.HTML_MASON_OUTER_ELEMENT_TYPE;
+  }
+
+  @Override
+  public boolean isMarkupLanguageElement(PsiElement element) {
+    return PsiUtilCore.getElementType(element) == HTMLMasonElementTypes.HTML_MASON_TEMPLATE_BLOCK_HTML;
   }
 }

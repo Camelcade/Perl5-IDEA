@@ -1,0 +1,8 @@
+<html>
+
+<%text>
+% This is an example of a Perl line.
+<% This is an example of an expression block. %>
+</%text>
+
+</html>

@@ -1,0 +1,27 @@
+<html>
+
+
+<%method supermethod>
+<a href="http://www.<% $site %>.com"><% $label %></a>
+
+% say 'hi';
+
+</%method>
+
+<%method .li--nk>
+<a href="http://www.<% $site %>.com"><% $label %></a>
+
+</%method>
+
+<%method -li.nk>
+<a href="http://www.<% $site %>.com"><% $label %></a>
+
+</%method>
+
+<%method _li.n-k>
+<a href="http://www.<% $site %>.com"><% $label %></a>
+
+</%method>
+
+
+</html>

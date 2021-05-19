@@ -1,0 +1,16 @@
+<html>
+
+<%once>
+# Fetch article from database
+    my $dbh = DBI::connect;
+    my $sth = $dbh->prepare("select * from articles where id = ?");
+    $sth->execute($article_id);
+    my ($headline, $date, $author, $body) = $sth->fetchrow_array;
+    # Massage the fields
+    $headline = uc($headline);
+    my ($year, $month, $day) = split('-', $date);
+    $date = "$month/$day";
+</%once>
+
+
+</html>
