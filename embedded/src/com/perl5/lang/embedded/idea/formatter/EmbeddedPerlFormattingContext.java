@@ -27,7 +27,7 @@ public class EmbeddedPerlFormattingContext extends PerlFormattingContext {
   }
 
   @Override
-  public PerlIndentProcessor getIndentProcessor() {
+  public @NotNull PerlIndentProcessor getIndentProcessor() {
     return EmbeddedPerlIndentProcessor.INSTANCE;
   }
 }

@@ -25,7 +25,8 @@ import com.perl5.lang.perl.idea.formatter.blocks.PerlAstBlock;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class PerlTemplateLanguageBlock<Ctx extends PerlFormattingContext> extends TemplateLanguageBlock implements PerlAstBlock {
+public abstract class PerlTemplateLanguageBlock<Ctx extends PerlBaseFormattingContext> extends TemplateLanguageBlock
+  implements PerlAstBlock {
   private final @NotNull Ctx myFormattingContext;
 
   public PerlTemplateLanguageBlock(PerlXmlTemplateFormattingModelBuilder<Ctx, ?> builder,
@@ -70,7 +71,7 @@ public abstract class PerlTemplateLanguageBlock<Ctx extends PerlFormattingContex
 
   @Override
   protected @NotNull Indent getChildIndent(@NotNull ASTNode node) {
-    return myFormattingContext.getIndentProcessor().getNodeIndent(node);
+    return myFormattingContext.getNodeIndent(node);
   }
 
   @Override

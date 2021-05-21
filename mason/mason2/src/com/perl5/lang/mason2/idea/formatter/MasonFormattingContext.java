@@ -30,7 +30,7 @@ public class MasonFormattingContext extends AbstractMasonFormattingContext {
   }
 
   @Override
-  public PerlIndentProcessor getIndentProcessor() {
+  public @NotNull PerlIndentProcessor getIndentProcessor() {
     return MasonIndentProcessor.INSTANCE;
   }
 

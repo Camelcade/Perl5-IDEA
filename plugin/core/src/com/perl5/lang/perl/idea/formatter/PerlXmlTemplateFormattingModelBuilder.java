@@ -30,7 +30,7 @@ import com.perl5.lang.perl.psi.PerlMultiplePsiFilesPerDocumentFileViewProvider;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class PerlXmlTemplateFormattingModelBuilder<Ctx extends PerlFormattingContext, Blk extends PerlTemplateLanguageBlock<Ctx>>
+public abstract class PerlXmlTemplateFormattingModelBuilder<Ctx extends PerlBaseFormattingContext, Blk extends PerlTemplateLanguageBlock<Ctx>>
   extends AbstractXmlTemplateFormattingModelBuilder {
   private static final Logger LOG = Logger.getInstance(PerlXmlTemplateFormattingModelBuilder.class);
 
@@ -54,7 +54,7 @@ public abstract class PerlXmlTemplateFormattingModelBuilder<Ctx extends PerlForm
     return createTemplateLanguageBlock(node,
                                        settings,
                                        xmlFormattingPolicy,
-                                       perlFormattingContext.getIndentProcessor().getNodeIndent(node),
+                                       perlFormattingContext.getNodeIndent(node),
                                        perlFormattingContext.getAlignment(node),
                                        perlFormattingContext.getWrap(node),
                                        perlFormattingContext);

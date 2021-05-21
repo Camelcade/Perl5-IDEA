@@ -41,7 +41,7 @@ public class MojoliciousFormattingContext extends PerlFormattingContext {
   }
 
   @Override
-  public PerlIndentProcessor getIndentProcessor() {
+  public @NotNull PerlIndentProcessor getIndentProcessor() {
     return MojoliciousIndentProcessor.INSTANCE;
   }
 

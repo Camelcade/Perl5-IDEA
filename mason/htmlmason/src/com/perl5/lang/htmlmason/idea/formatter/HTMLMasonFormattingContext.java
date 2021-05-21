@@ -52,7 +52,7 @@ public class HTMLMasonFormattingContext extends AbstractMasonFormattingContext {
   }
 
   @Override
-  public PerlIndentProcessor getIndentProcessor() {
+  public @NotNull PerlIndentProcessor getIndentProcessor() {
     return HTMLMasonIndentProcessor.INSTANCE;
   }
 

@@ -20,7 +20,6 @@ import com.intellij.formatting.*;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.util.NotNullLazyValue;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
@@ -59,9 +58,8 @@ import static com.intellij.psi.codeStyle.CommonCodeStyleSettings.*;
 import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.*;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
 
-public class PerlFormattingContext implements PerlFormattingTokenSets {
+public class PerlFormattingContext extends PerlBaseFormattingContext implements PerlFormattingTokenSets {
   private static final Logger LOG = Logger.getInstance(PerlFormattingContext.class);
-  private final @NotNull FormattingContext myFormattingContext;
   private final Map<ASTNode, Wrap> myWrapMap = new THashMap<>();
   private final Map<Integer, Alignment> myAssignmentsAlignmentsMap = new THashMap<>();
   private final TIntObjectHashMap<Alignment> myCommentsAlignmentMap = new TIntObjectHashMap<>();
@@ -137,12 +135,6 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
   }
 
   /**
-   * Contains a bitmask of lines with comments not started with newline
-   */
-  private final @Nullable Document myDocument;
-  private final @NotNull NotNullLazyValue<SpacingBuilder> mySpacingBuilderProvider =
-    NotNullLazyValue.createValue(this::createSpacingBuilder);
-  /**
    * Maps line numbers to the offset of first here-doc openers. Or {@link Integer.MAX_VALUE} if there is none
    */
   private final TIntIntHashMap myHeredocForbiddenOffsets = new TIntIntHashMap();
@@ -160,8 +152,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
   }
 
   public PerlFormattingContext(@NotNull FormattingContext formattingContext) {
-    myFormattingContext = formattingContext;
-    myDocument = myFormattingContext.getContainingFile().getViewProvider().getDocument();
+    super(formattingContext);
   }
 
   public PerlFormattingContext(@NotNull FormattingContext formattingContext, @NotNull TextRange adjustedRange) {
@@ -173,28 +164,31 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     ));
   }
 
+  @Override
   protected @NotNull SpacingBuilder createSpacingBuilder() {
     return PerlSpacingBuilderFactory.createSpacingBuilder(getSettings(), getPerlSettings());
   }
 
   public @NotNull CommonCodeStyleSettings getSettings() {
-    return myFormattingContext.getCodeStyleSettings().getCommonSettings(PerlLanguage.INSTANCE);
+    return getCodeStyleSettings().getCommonSettings(PerlLanguage.INSTANCE);
   }
 
   public @NotNull PerlCodeStyleSettings getPerlSettings() {
-    return myFormattingContext.getCodeStyleSettings().getCustomSettings(PerlCodeStyleSettings.class);
+    return getCodeStyleSettings().getCustomSettings(PerlCodeStyleSettings.class);
   }
 
-  public @NotNull SpacingBuilder getSpacingBuilder() {
-    return mySpacingBuilderProvider.getValue();
-  }
-
-  private @Nullable Document getDocument() {
-    return myDocument;
-  }
-
-  public PerlIndentProcessor getIndentProcessor() {
+  public @NotNull PerlIndentProcessor getIndentProcessor() {
     return PerlIndentProcessor.INSTANCE;
+  }
+
+  @Override
+  public @NotNull Indent getNodeIndent(@NotNull ASTNode node) {
+    return getIndentProcessor().getNodeIndent(node);
+  }
+
+  @Override
+  public @Nullable Indent getChildIndent(@NotNull PerlAstBlock block, int newChildIndex) {
+    return getIndentProcessor().getChildIndent(block, newChildIndex);
   }
 
   /**
@@ -204,7 +198,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
    * @return check result
    */
   public boolean isNewLineForbiddenAt(@NotNull ASTNode node) {
-    if (myDocument == null) {
+    if (getDocument() == null) {
       return true;
     }
     int nodeLine = getNodeLine(node);
@@ -243,6 +237,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
   }
 
 
+  @Override
   public @Nullable Spacing getSpacing(@Nullable ASTBlock parent, @Nullable Block child1, @NotNull Block child2) {
     if (parent instanceof PerlSyntheticBlock) {
       parent = ((PerlSyntheticBlock)parent).getRealBlock();
@@ -358,7 +353,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       }
     }
 
-    return getSpacingBuilder().getSpacing(parent, child1, child2);
+    return super.getSpacing(parent, child1, child2);
   }
 
   /**
@@ -381,6 +376,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     return true;
   }
 
+  @Override
   public @Nullable Alignment getAlignment(@NotNull ASTNode childNode) {
     ASTNode parentNode = childNode.getTreeParent();
     IElementType parentNodeType = PsiUtilCore.getElementType(parentNode);
@@ -483,6 +479,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     return PsiUtilCore.getElementType(prevNode) != TokenType.WHITE_SPACE ? prevNode : prevNode.getTreePrev();
   }
 
+  @Override
   public @Nullable Wrap getWrap(@NotNull ASTNode childNode) {
     ASTNode parentNode = childNode.getTreeParent();
     IElementType parentNodeType = PsiUtilCore.getElementType(parentNode);
@@ -592,10 +589,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     return myWrapMap.computeIfAbsent(parentNode, key -> Wrap.createWrap(type, wrapFirst));
   }
 
-  public final @NotNull ChildAttributes getChildAttributes(@NotNull PerlAstBlock block, int newChildIndex) {
-    return new ChildAttributes(getIndentProcessor().getChildIndent(block, newChildIndex), getChildAlignment(block, newChildIndex));
-  }
-
+  @Override
   public @Nullable Alignment getChildAlignment(@NotNull PerlAstBlock block, int newChildIndex) {
     ASTNode node = block.getNode();
     IElementType elementType = PsiUtilCore.getElementType(node);
@@ -706,14 +700,6 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
   private int getNodeLine(@Nullable ASTNode node) {
     Document document = getDocument();
     return node == null || document == null ? -1 : document.getLineNumber(node.getStartOffset());
-  }
-
-  public @NotNull FormattingMode getFormattingMode() {
-    return myFormattingContext.getFormattingMode();
-  }
-
-  public @NotNull TextRange getTextRange() {
-    return myFormattingContext.getFormattingRange();
   }
 
   private boolean isLast(@NotNull Block block) {
