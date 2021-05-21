@@ -15,16 +15,28 @@
 
 
 <div>
-    [% META
+[% META
         title   = 'The Cat in the Hat'
         author  = 'Dr. Seuss'
         version = 1.23
+%]
+
+[% META title   = 'The Cat in the Hat'
+        author  = 'Dr. Seuss'
+        version = 1.23
+%]
+    <div>
+    [% META
+            title   = 'The Cat in the Hat'
+            author  = 'Dr. Seuss'
+            version = 1.23
     %]
 
-    [% META title = 'The Cat in the Hat'
-        author    = 'Dr. Seuss'
-        version   = 1.23
+    [% META title   = 'The Cat in the Hat'
+            author  = 'Dr. Seuss'
+            version = 1.23
     %]
+    </div>
 </div>
 
 </body>

@@ -20,6 +20,16 @@ somethingelse=42
 
 [% PROCESS      bar         foo             =   20        somethingelse   =         42%]
 
+<div>
+[% PROCESS
+bar
+foo              =  20
+somethingelse=42
+%]
+
+[% PROCESS      bar         foo             =   20        somethingelse   =         42%]
+
+</div>
 </div>
 
 </body>

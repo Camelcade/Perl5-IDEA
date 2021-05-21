@@ -16,19 +16,33 @@
 [% END %]
 
 <div>
+[% TRY %]
+...
     [% TRY %]
-        ...
+        [% INCLUDE $user.header %]
+    [% CATCH file %]
+        [% INCLUDE header %]
+    [% END %]
+...
+[% CATCH
+        DBI %]
+    [% INCLUDE database/error.html %]
+[% END %]
+    <div>
+    [% TRY %]
+    ...
         [% TRY %]
             [% INCLUDE $user.header %]
         [% CATCH file %]
             [% INCLUDE header %]
         [% END %]
-        ...
+    ...
     [% CATCH
             DBI %]
         [% INCLUDE database/error.html %]
     [% END %]
 
+    </div>
 </div>
 
 </body>

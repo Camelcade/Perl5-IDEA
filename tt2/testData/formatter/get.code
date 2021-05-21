@@ -9,6 +9,11 @@ foo %]
 [% GET foo %]
 [% GET
 foo %]
+<div>
+[% GET foo %]
+[% GET
+foo %]
+</div>
 </div>
 
 </body>

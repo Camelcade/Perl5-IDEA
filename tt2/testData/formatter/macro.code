@@ -30,6 +30,21 @@ n.chunk(-3).join(',') %]
 [% ELSE %]
 [% INCLUDE      header %]
 [% END %]
+<div>
+[% MACRO
+header
+INCLUDE
+header %]
+[% MACRO
+number(n)
+GET
+n.chunk(-3).join(',') %]
+[% MACRO        header        IF        frames %]
+[% INCLUDE          frames/header %]
+[% ELSE %]
+[% INCLUDE      header %]
+[% END %]
+</div>
 </div>
 
 </body>

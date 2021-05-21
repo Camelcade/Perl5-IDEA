@@ -6,9 +6,14 @@
 [% GET
         foo %]
 <div>
+[% GET foo %]
+[% GET
+        foo %]
+    <div>
     [% GET foo %]
     [% GET
-        foo %]
+            foo %]
+    </div>
 </div>
 
 </body>

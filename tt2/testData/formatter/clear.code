@@ -10,6 +10,11 @@ some.condition %]
 [% CLEAR
 IF
 some.condition %]
+<div>
+[% CLEAR
+IF
+some.condition %]
+</div>
 </div>
 
 </body>

@@ -25,8 +25,8 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.formatter.xml.XmlFormattingPolicy;
 import com.intellij.psi.templateLanguages.SimpleTemplateLanguageFormattingModelBuilder;
+import com.intellij.psi.templateLanguages.TemplateLanguageFileViewProvider;
 import com.intellij.xml.template.formatter.AbstractXmlTemplateFormattingModelBuilder;
-import com.perl5.lang.perl.psi.PerlMultiplePsiFilesPerDocumentFileViewProvider;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -72,7 +72,7 @@ public abstract class PerlXmlTemplateFormattingModelBuilder<Ctx extends PerlBase
 
   protected boolean useXmlFormattingModelBuilder(@NotNull PsiElement element) {
     FileViewProvider viewProvider = element.getContainingFile().getViewProvider();
-    LOG.assertTrue(viewProvider instanceof PerlMultiplePsiFilesPerDocumentFileViewProvider, "Got " + viewProvider);
-    return ((PerlMultiplePsiFilesPerDocumentFileViewProvider)viewProvider).getTemplateDataLanguage().isKindOf(XMLLanguage.INSTANCE);
+    LOG.assertTrue(viewProvider instanceof TemplateLanguageFileViewProvider, "Got " + viewProvider);
+    return ((TemplateLanguageFileViewProvider)viewProvider).getTemplateDataLanguage().isKindOf(XMLLanguage.INSTANCE);
   }
 }

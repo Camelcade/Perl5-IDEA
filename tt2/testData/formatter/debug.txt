@@ -11,12 +11,21 @@ directive debugging is off
 
 <div>
 
-    [% DEBUG
+[% DEBUG
         on %]
     directive debugging is on (assuming DEBUG option is set true)
-    [% DEBUG
+[% DEBUG
         off %]
     directive debugging is off
+    <div>
+
+    [% DEBUG
+            on %]
+        directive debugging is on (assuming DEBUG option is set true)
+    [% DEBUG
+            off %]
+        directive debugging is off
+    </div>
 </div>
 
 </body>

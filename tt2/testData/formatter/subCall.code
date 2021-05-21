@@ -31,6 +31,23 @@ bombomblah = 69,
 10,
 20,
 30) %]
+<div>
+
+[% myjoin(
+joint => ' * ',
+bom = 42,
+bombomblah = 69,
+10,
+20,
+30) %]
+
+
+[% myjoin(          joint => ' * ',         bom = 42,       bombomblah = 69,
+10,
+20,
+30) %]
+
+</div>
 
 </div>
 

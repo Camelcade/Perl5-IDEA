@@ -25,6 +25,24 @@
 ]
 %]
 [% END %]
+<div>
+[% cols = [
+'red',
+'green',
+'blue'
+]
+%]
+
+[% BLOCK 	name  %]
+[% cols= 	[
+'red',
+'green',
+'blue'
+]
+%]
+[% END %]
+
+</div>
 
 </div>
 

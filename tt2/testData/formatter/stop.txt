@@ -10,10 +10,17 @@
 
 <div>
 
-    [% STOP IF some.condition %]
-    [% STOP
+[% STOP IF some.condition %]
+[% STOP
         IF
                 some.condition %]
+    <div>
+
+    [% STOP IF some.condition %]
+    [% STOP
+            IF
+                    some.condition %]
+    </div>
 </div>
 
 </body>

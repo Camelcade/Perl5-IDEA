@@ -2,24 +2,35 @@
 <head></head>
 <body>
 
-[% USE Foo.Bar  %]     # => Template::Plugin::Foo::Bar
+[% USE Foo.Bar  %] # => Template::Plugin::Foo::Bar
 [% USE file = IO.File('/tmp/mydata') %]
 [% USE
-        Foo.Bar  %]     # => Template::Plugin::Foo::Bar
+        Foo.Bar  %] # => Template::Plugin::Foo::Bar
 [% USE
         file
         =
         IO.File('/tmp/mydata') %]
 
 <div>
-    [% USE Foo.Bar  %]     # => Template::Plugin::Foo::Bar
-    [% USE file = IO.File('/tmp/mydata') %]
-    [% USE
-        Foo.Bar  %]     # => Template::Plugin::Foo::Bar
-    [% USE
+[% USE Foo.Bar  %] # => Template::Plugin::Foo::Bar
+[% USE file = IO.File('/tmp/mydata') %]
+[% USE
+        Foo.Bar  %] # => Template::Plugin::Foo::Bar
+[% USE
         file
         =
         IO.File('/tmp/mydata') %]
+    <div>
+    [% USE Foo.Bar  %] # => Template::Plugin::Foo::Bar
+    [% USE file = IO.File('/tmp/mydata') %]
+    [% USE
+            Foo.Bar  %] # => Template::Plugin::Foo::Bar
+    [% USE
+            file
+            =
+            IO.File('/tmp/mydata') %]
+
+    </div>
 
 </div>
 

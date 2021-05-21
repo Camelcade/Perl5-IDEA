@@ -18,6 +18,15 @@ $legalese %]              # misc/legalese.txt
 [% INSERT
 legalese.txt +
 warning.txt %]
+<div>
+[% INSERT
+$legalese %]              # misc/legalese.txt
+[% INSERT
+"$language/$legalese" %]  # en/misc/legalese.txt
+[% INSERT
+legalese.txt +
+warning.txt %]
+</div>
 </div>
 
 </body>

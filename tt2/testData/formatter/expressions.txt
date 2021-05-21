@@ -112,6 +112,113 @@
 
 
 <div>
+[% foo = bar        %]
+[% foo == bar        %]
+[% foo != bar        %]
+[% foo < bar        %]
+[% foo <= bar        %]
+[% foo > bar        %]
+[% foo >= bar        %]
+[% foo && bar        %]
+[% foo and bar        %]
+[% foo AND bar        %]
+[% foo || bar        %]
+[% foo or bar        %]
+[% foo OR bar        %]
+[% !bar        %]
+[% not bar        %]
+[% NOT bar        %]
+[% foo ? bar : baz %]
+[% foo + bar        %]
+[% foo - bar        %]
+[% foo * bar        %]
+[% foo / bar        %]
+[% foo div bar        %]
+[% foo DIV bar        %]
+[% foo % bar        %]
+[% foo mod bar        %]
+[% foo MOD bar        %]
+[% copyright = '(C) Copyright' _ year _ '  ' _ author      %]
+[% copyright = "(C) Copyright $year $author" %]
+
+[% foo
+        = bar        %]
+[% foo
+        == bar        %]
+[% foo
+        != bar        %]
+[% foo
+        < bar        %]
+[% foo
+        <= bar        %]
+[% foo
+        > bar        %]
+[% foo
+        >= bar
+%]
+[% foo
+        && bar
+%]
+[% foo
+        and bar
+%]
+[% foo
+        AND bar
+%]
+[% foo
+        || bar
+%]
+[% foo
+        or bar
+%]
+[% foo
+        OR bar
+%]
+[% !bar
+%]
+[% not bar
+%]
+[% NOT bar
+%]
+[% foo
+        ? bar
+        : baz %]
+[% foo
+        + bar
+%]
+[% foo
+        - bar
+%]
+[% foo
+        * bar
+%]
+[% foo
+        / bar
+%]
+[% foo
+        div bar
+%]
+[% foo
+        DIV bar
+%]
+[% foo
+        % bar
+%]
+[% foo
+        mod bar
+%]
+[% foo
+        MOD bar
+%]
+[% copyright
+        = '(C) Copyright'
+        _ year
+        _ '  '
+        _ author
+%]
+[% copyright
+        = "(C) Copyright $year $author" %]
+    <div>
     [% foo = bar        %]
     [% foo == bar        %]
     [% foo != bar        %]
@@ -142,37 +249,37 @@
     [% copyright = "(C) Copyright $year $author" %]
 
     [% foo
-        = bar        %]
+            = bar        %]
     [% foo
-        == bar        %]
+            == bar        %]
     [% foo
-        != bar        %]
+            != bar        %]
     [% foo
-        < bar        %]
+            < bar        %]
     [% foo
-        <= bar        %]
+            <= bar        %]
     [% foo
-        > bar        %]
+            > bar        %]
     [% foo
-        >= bar
+            >= bar
     %]
     [% foo
-        && bar
+            && bar
     %]
     [% foo
-        and bar
+            and bar
     %]
     [% foo
-        AND bar
+            AND bar
     %]
     [% foo
-        || bar
+            || bar
     %]
     [% foo
-        or bar
+            or bar
     %]
     [% foo
-        OR bar
+            OR bar
     %]
     [% !bar
     %]
@@ -181,43 +288,44 @@
     [% NOT bar
     %]
     [% foo
-        ? bar
-        : baz %]
+            ? bar
+            : baz %]
     [% foo
-        + bar
+            + bar
     %]
     [% foo
-        - bar
+            - bar
     %]
     [% foo
-        * bar
+            * bar
     %]
     [% foo
-        / bar
+            / bar
     %]
     [% foo
-        div bar
+            div bar
     %]
     [% foo
-        DIV bar
+            DIV bar
     %]
     [% foo
-        % bar
+            % bar
     %]
     [% foo
-        mod bar
+            mod bar
     %]
     [% foo
-        MOD bar
+            MOD bar
     %]
     [% copyright
-        = '(C) Copyright'
-        _ year
-        _ '  '
-        _ author
+            = '(C) Copyright'
+            _ year
+            _ '  '
+            _ author
     %]
     [% copyright
-        = "(C) Copyright $year $author" %]
+            = "(C) Copyright $year $author" %]
+    </div>
 </div>
 
 

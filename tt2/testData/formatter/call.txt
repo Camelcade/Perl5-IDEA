@@ -11,13 +11,22 @@
 
 
 <div>
-    [% CALL
+[% CALL
         dbi.disconnect %]
 %% CALL dbi.disconnect
-    [% CALL
+[% CALL
         inc_page_counter(page_count) %]
 %% CALL inc_page_counter(page_count)
     <p>test</p>
+    <div>
+    [% CALL
+            dbi.disconnect %]
+%% CALL dbi.disconnect
+    [% CALL
+            inc_page_counter(page_count) %]
+%% CALL inc_page_counter(page_count)
+        <p>test</p>
+    </div>
 </div>
 
 </body>

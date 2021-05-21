@@ -16,6 +16,14 @@ IN
 items %]
 [% i %]
 [% END %]
+<div>
+[% FOREACH
+i
+IN
+items %]
+[% i %]
+[% END %]
+</div>
 </div>
 
 </body>

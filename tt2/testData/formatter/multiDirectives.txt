@@ -23,6 +23,25 @@ END
 
 
 <div>
+[% FOREACH
+        group
+        IN
+        grouplist;
+    # loop => group iterator
+    "Groups:\n" IF loop.first;
+
+    FOREACH user IN group.userlist;
+        # loop => user iterator
+        somefield; someotherfield;
+        "$loop.count: $user.name\n";
+    END;
+    # loop => group iterator
+    "End of Groups\n"
+            IF
+                    loop.last;
+END
+%]
+    <div>
     [% FOREACH
             group
             IN
@@ -41,6 +60,7 @@ END
                         loop.last;
     END
     %]
+    </div>
 </div>
 
 </body>
