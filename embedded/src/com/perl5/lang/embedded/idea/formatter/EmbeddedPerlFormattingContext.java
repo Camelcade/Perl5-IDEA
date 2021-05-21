@@ -17,11 +17,11 @@
 package com.perl5.lang.embedded.idea.formatter;
 
 import com.intellij.formatting.FormattingContext;
-import com.perl5.lang.perl.idea.formatter.PerlFormattingContext;
 import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
+import com.perl5.lang.perl.idea.formatter.PurePerlFormattingContext;
 import org.jetbrains.annotations.NotNull;
 
-public class EmbeddedPerlFormattingContext extends PerlFormattingContext {
+public class EmbeddedPerlFormattingContext extends PurePerlFormattingContext {
   public EmbeddedPerlFormattingContext(@NotNull FormattingContext formattingContext) {
     super(formattingContext, formattingContext.getPsiElement().getTextRange());
   }

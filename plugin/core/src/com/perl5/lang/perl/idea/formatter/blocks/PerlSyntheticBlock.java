@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.util.containers.ContainerUtil;
-import com.perl5.lang.perl.idea.formatter.PerlFormattingContext;
+import com.perl5.lang.perl.idea.formatter.PurePerlFormattingContext;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -36,7 +36,7 @@ public class PerlSyntheticBlock implements PerlAstBlock {
   private final @NotNull List<Block> mySubBlocks;
   private final @Nullable Wrap myWrap;
   private final @Nullable Alignment myAlignment;
-  private final @NotNull PerlFormattingContext myContext;
+  private final @NotNull PurePerlFormattingContext myContext;
   private final @NotNull AtomicNotNullLazyValue<TextRange> myRangeProvider = AtomicNotNullLazyValue.createValue(
     () -> TextRange.create(getFirstRealBlock().getTextRange().getStartOffset(), getLastRealBlock().getTextRange().getEndOffset())
   );
@@ -47,7 +47,7 @@ public class PerlSyntheticBlock implements PerlAstBlock {
                             @NotNull List<Block> subBlocks,
                             @Nullable Wrap wrap,
                             @Nullable Alignment alignment,
-                            @NotNull PerlFormattingContext context) {
+                            @NotNull PurePerlFormattingContext context) {
     if (subBlocks.isEmpty()) {
       throw new IllegalArgumentException("Subblocks should not be empty");
     }

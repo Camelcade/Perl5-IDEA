@@ -25,13 +25,13 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
-import com.perl5.lang.perl.idea.formatter.PerlFormattingContext;
 import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
+import com.perl5.lang.perl.idea.formatter.PurePerlFormattingContext;
 import org.jetbrains.annotations.NotNull;
 
 import static com.perl5.lang.mojolicious.MojoliciousElementTypes.*;
 
-public class MojoliciousFormattingContext extends PerlFormattingContext {
+public class MojoliciousFormattingContext extends PurePerlFormattingContext {
   private static final TokenSet LINE_OPENERS = TokenSet.create(
     MOJO_LINE_OPENER, MOJO_LINE_EXPR_OPENER, MOJO_LINE_EXPR_ESCAPED_OPENER
   );

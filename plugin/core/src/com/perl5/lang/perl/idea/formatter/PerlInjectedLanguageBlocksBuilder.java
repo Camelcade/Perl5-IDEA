@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,7 +38,7 @@ import java.util.List;
  * N.B. This implementation supposes that suffix and prefix are meaningless
  */
 public class PerlInjectedLanguageBlocksBuilder implements PsiLanguageInjectionHost.InjectedPsiVisitor {
-  private final @NotNull PerlFormattingContext myContext;
+  private final @NotNull PurePerlFormattingContext myContext;
 
   private final @NotNull List<Entry> myEntries = new ArrayList<>();
   private final @NotNull ASTNode myHostNode;
@@ -52,7 +52,7 @@ public class PerlInjectedLanguageBlocksBuilder implements PsiLanguageInjectionHo
   int injectedLength = 0;
   private @Nullable PsiFile myInjectedPsiFile;
 
-  private PerlInjectedLanguageBlocksBuilder(@NotNull PerlFormattingContext context,
+  private PerlInjectedLanguageBlocksBuilder(@NotNull PurePerlFormattingContext context,
                                             @NotNull ASTNode hostNode,
                                             @NotNull TextRange parentRange
   ) {
@@ -165,7 +165,7 @@ public class PerlInjectedLanguageBlocksBuilder implements PsiLanguageInjectionHo
     return myAbsoluteIndentAlignment;
   }
 
-  public static List<Block> compute(@NotNull PerlFormattingContext context,
+  public static List<Block> compute(@NotNull PurePerlFormattingContext context,
                                     @NotNull ASTNode hostNode,
                                     @NotNull TextRange rangeInHost
   ) {

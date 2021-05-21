@@ -24,10 +24,10 @@ import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.idea.formatter.PerlFormattingContext;
+import com.perl5.lang.perl.idea.formatter.PurePerlFormattingContext;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class AbstractMasonFormattingContext extends PerlFormattingContext {
+public abstract class AbstractMasonFormattingContext extends PurePerlFormattingContext {
   public AbstractMasonFormattingContext(@NotNull FormattingContext formattingContext,
                                         @NotNull TextRange adjustedRange) {
     super(formattingContext, adjustedRange);

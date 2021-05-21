@@ -26,7 +26,7 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.containers.ContainerUtil;
-import com.perl5.lang.perl.idea.formatter.PerlFormattingContext;
+import com.perl5.lang.perl.idea.formatter.PurePerlFormattingContext;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.PerlParserUtil;
 import org.jetbrains.annotations.NotNull;
@@ -50,14 +50,14 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
       PerlParserUtil.DUMMY_BLOCK
     );
 
-  protected final @NotNull PerlFormattingContext myContext;
+  protected final @NotNull PurePerlFormattingContext myContext;
   private Indent myIndent;
   private Boolean myIsIncomplete;
   private final AtomicNotNullLazyValue<List<Block>> mySubBlocksProvider = AtomicNotNullLazyValue.createValue(
     () -> ContainerUtil.immutableList(buildSubBlocks())
   );
 
-  public PerlFormattingBlock(@NotNull ASTNode node, @NotNull PerlFormattingContext context) {
+  public PerlFormattingBlock(@NotNull ASTNode node, @NotNull PurePerlFormattingContext context) {
     super(node, context.getWrap(node), context.getAlignment(node));
     myContext = context;
     myIndent = context.getNodeIndent(node);
@@ -68,7 +68,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
     myIndent = indent;
   }
 
-  protected final @NotNull PerlFormattingContext getContext() {
+  protected final @NotNull PurePerlFormattingContext getContext() {
     return myContext;
   }
 

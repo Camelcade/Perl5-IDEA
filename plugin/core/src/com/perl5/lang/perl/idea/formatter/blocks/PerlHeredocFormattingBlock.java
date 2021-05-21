@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,8 +20,8 @@ import com.intellij.formatting.Block;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.injection.InjectedLanguageManager;
 import com.intellij.openapi.util.TextRange;
-import com.perl5.lang.perl.idea.formatter.PerlFormattingContext;
 import com.perl5.lang.perl.idea.formatter.PerlInjectedLanguageBlocksBuilder;
+import com.perl5.lang.perl.idea.formatter.PurePerlFormattingContext;
 import com.perl5.lang.perl.psi.PerlHeredocTerminatorElement;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import org.jetbrains.annotations.NotNull;
@@ -32,7 +32,7 @@ import java.util.List;
 public class PerlHeredocFormattingBlock extends PerlFormattingBlock {
 
 
-  public PerlHeredocFormattingBlock(@NotNull ASTNode node, @NotNull PerlFormattingContext context) {
+  public PerlHeredocFormattingBlock(@NotNull ASTNode node, @NotNull PurePerlFormattingContext context) {
     super(node, context);
     assert node.getPsi() instanceof PerlHeredocElementImpl : "Got " + node + "instead of heredoc.";
   }

@@ -58,8 +58,8 @@ import static com.intellij.psi.codeStyle.CommonCodeStyleSettings.*;
 import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.*;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
 
-public class PerlFormattingContext extends PerlBaseFormattingContext implements PerlFormattingTokenSets {
-  private static final Logger LOG = Logger.getInstance(PerlFormattingContext.class);
+public class PurePerlFormattingContext extends PerlBaseFormattingContext implements PerlFormattingTokenSets {
+  private static final Logger LOG = Logger.getInstance(PurePerlFormattingContext.class);
   private final Map<ASTNode, Wrap> myWrapMap = new THashMap<>();
   private final Map<Integer, Alignment> myAssignmentsAlignmentsMap = new THashMap<>();
   private final TIntObjectHashMap<Alignment> myCommentsAlignmentMap = new TIntObjectHashMap<>();
@@ -151,11 +151,11 @@ public class PerlFormattingContext extends PerlBaseFormattingContext implements 
     OPERATOR_COLLISIONS_MAP.putValue(OPERATOR_SMARTMATCH, OPERATOR_BITWISE_NOT);
   }
 
-  public PerlFormattingContext(@NotNull FormattingContext formattingContext) {
+  public PurePerlFormattingContext(@NotNull FormattingContext formattingContext) {
     super(formattingContext);
   }
 
-  public PerlFormattingContext(@NotNull FormattingContext formattingContext, @NotNull TextRange adjustedRange) {
+  public PurePerlFormattingContext(@NotNull FormattingContext formattingContext, @NotNull TextRange adjustedRange) {
     this(FormattingContext.create(
       formattingContext.getPsiElement(),
       adjustedRange,

@@ -58,7 +58,7 @@ public class PerlFormattingModelBuilder implements FormattingModelBuilder {
       LOG.debug("No pre-computed range, trying to reduce provided:", range);
       range = computeFormattingRange(element.getContainingFile(), range);
     }
-    PerlFormattingBlock rootBlock = new PerlFormattingBlock(element.getNode(), new PerlFormattingContext(formattingContext, range));
+    PerlFormattingBlock rootBlock = new PerlFormattingBlock(element.getNode(), new PurePerlFormattingContext(formattingContext, range));
     PerlDocumentBasedFormattingModel model = new PerlDocumentBasedFormattingModel(rootBlock, element, settings);
     if (LOG.isDebugEnabled()) {
       logger.debug("Created model for: ", element.getNode(),
