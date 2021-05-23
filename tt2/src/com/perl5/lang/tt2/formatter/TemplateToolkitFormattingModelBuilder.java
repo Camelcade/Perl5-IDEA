@@ -16,10 +16,7 @@
 
 package com.perl5.lang.tt2.formatter;
 
-import com.intellij.formatting.Alignment;
-import com.intellij.formatting.FormattingContext;
-import com.intellij.formatting.Indent;
-import com.intellij.formatting.Wrap;
+import com.intellij.formatting.*;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
@@ -27,6 +24,7 @@ import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.formatter.xml.XmlFormattingPolicy;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.formatter.PerlXmlTemplateFormattingModelBuilder;
+import com.perl5.lang.perl.idea.formatter.blocks.PerlFormattingBlock;
 import com.perl5.lang.tt2.TemplateToolkitLanguage;
 import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
 import org.jetbrains.annotations.NotNull;
@@ -50,13 +48,19 @@ public class TemplateToolkitFormattingModelBuilder
   }
 
   @Override
-  protected TemplateToolkitFormattingBlock createTemplateLanguageBlock(ASTNode node,
-                                                                       CodeStyleSettings settings,
-                                                                       XmlFormattingPolicy xmlFormattingPolicy,
-                                                                       Indent indent,
-                                                                       @Nullable Alignment alignment,
-                                                                       @Nullable Wrap wrap,
-                                                                       @NotNull TemplateToolkitFormattingContext context) {
+  protected Block createTemplateLanguageBlock(ASTNode node,
+                                              CodeStyleSettings settings,
+                                              XmlFormattingPolicy xmlFormattingPolicy,
+                                              Indent indent,
+                                              @Nullable Alignment alignment,
+                                              @Nullable Wrap wrap,
+                                              @NotNull TemplateToolkitFormattingContext context) {
+    var nodeType = PsiUtilCore.getElementType(node);
+    if (nodeType == TemplateToolkitElementTypes.TT2_PERL_CODE || nodeType == TemplateToolkitElementTypes.TT2_RAWPERL_CODE) {
+      var perlBlock = new PerlFormattingBlock(node, context.getPurePerlContext());
+      perlBlock.setIndent(Indent.getNoneIndent());
+      return perlBlock;
+    }
     return new TemplateToolkitFormattingBlock(this, node, wrap, alignment, settings, xmlFormattingPolicy, indent, context);
   }
 

@@ -48,7 +48,7 @@ public abstract class PerlTemplateLanguageBlock<Ctx extends PerlBaseFormattingCo
   }
 
   @Override
-  protected final PerlTemplateLanguageBlock<Ctx> createTemplateLanguageBlock(ASTNode child) {
+  protected final Block createTemplateLanguageBlock(ASTNode child) {
     return getBuilder().createTemplateLanguageBlock(
       child, getSettings(), getXmlFormattingPolicy(), getChildIndent(child), getChildAlignment(child), getChildWrap(child),
       myFormattingContext);

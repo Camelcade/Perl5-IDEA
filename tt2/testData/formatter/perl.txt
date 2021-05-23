@@ -3,71 +3,68 @@
 <body>
 
 [% PERL %]
-print $context->include('myfile');
-print $stash;
-print $output;
-print $error;
+    print $context->include('myfile');
+    print $stash;
+    print $output;
+    print $error;
 [% END %]
 
 
 [% RAWPERL %]
-print $context->include('myfile');
-print $stash;
-print $output;
-if ($somethig)
-{
-use POSIX;
-POSIX::_exit();
-localtime;
-}
+    print $context->include('myfile');
+    print $stash;
+    print $output;
+    if ($somethig) {
+        use POSIX;
+        POSIX::_exit();
+        localtime;
+    }
 
-print $error;
+    print $error;
 [% END %]
 
 <div>
 [% PERL %]
-print $context->include('myfile');
-print $stash;
-print $output;
-print $error;
+    print $context->include('myfile');
+    print $stash;
+    print $output;
+    print $error;
 [% END %]
 
 
 [% RAWPERL %]
-print $context->include('myfile');
-print $stash;
-print $output;
-if ($somethig)
-{
-use POSIX;
-POSIX::_exit();
-localtime;
-}
+    print $context->include('myfile');
+    print $stash;
+    print $output;
+    if ($somethig) {
+        use POSIX;
+        POSIX::_exit();
+        localtime;
+    }
 
-print $error;
+    print $error;
 [% END %]
     <div>
     [% PERL %]
-print $context->include('myfile');
-print $stash;
-print $output;
-print $error;
-[% END %]
+        print $context->include('myfile');
+        print $stash;
+        print $output;
+        print $error;
+    [% END %]
 
 
     [% RAWPERL %]
-print $context->include('myfile');
-print $stash;
-print $output;
-if ($somethig)
-{
-use POSIX;
-POSIX::_exit();
-localtime;
-}
+        print $context->include('myfile');
+        print $stash;
+        print $output;
+        if ($somethig) {
+            use POSIX;
+            POSIX::_exit();
+            localtime;
+        }
 
-print $error;
-[% END %]
+        print $error;
+    [% END %]
 
     </div>
 

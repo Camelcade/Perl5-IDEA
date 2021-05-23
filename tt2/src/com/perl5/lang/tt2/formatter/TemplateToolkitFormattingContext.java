@@ -18,9 +18,11 @@ package com.perl5.lang.tt2.formatter;
 
 import com.intellij.formatting.*;
 import com.intellij.lang.ASTNode;
+import com.intellij.openapi.util.NotNullLazyValue;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.formatter.PerlBaseFormattingContext;
+import com.perl5.lang.perl.idea.formatter.PurePerlFormattingContext;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlAstBlock;
 import com.perl5.lang.tt2.TemplateToolkitLanguage;
 import com.perl5.lang.tt2.psi.impl.PsiExprImpl;
@@ -39,6 +41,14 @@ import static com.perl5.lang.tt2.lexer.TemplateToolkitSyntaxElements.KEYWORDS_TO
 
 final class TemplateToolkitFormattingContext extends PerlBaseFormattingContext {
   private final Map<ASTNode, Alignment> myAssignAlignmentMap = new THashMap<>();
+  private final NotNullLazyValue<PurePerlFormattingContext> myPurePerlContextProvider = NotNullLazyValue.createValue(
+    () -> new PurePerlFormattingContext(getFormattingContext()) {
+      @Override
+      public @NotNull Indent getNodeIndent(@NotNull ASTNode node) {
+        var parentType = PsiUtilCore.getElementType(node.getTreeParent());
+        return parentType == TT2_PERL_CODE || parentType == TT2_RAWPERL_CODE ? Indent.getNormalIndent() : super.getNodeIndent(node);
+      }
+    });
 
   public TemplateToolkitFormattingContext(@NotNull FormattingContext formattingContext) {
     super(formattingContext);
@@ -217,5 +227,9 @@ final class TemplateToolkitFormattingContext extends PerlBaseFormattingContext {
       }
       run = run.getTreeNext();
     }
+  }
+
+  public @NotNull PurePerlFormattingContext getPurePerlContext() {
+    return myPurePerlContextProvider.getValue();
   }
 }
