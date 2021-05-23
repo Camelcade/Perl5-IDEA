@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -234,7 +234,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
         }
 
         if (m != null) {
-          m.error("ttk2.unexpected.token");
+          m.error(TemplateToolkitBundle.message("ttk2.unexpected.token"));
         }
         // parseHardNewLine(b, l); // fixme this breaks lastMarker mechanism, need to figure out something
         if (b.getTokenType() == TT2_HARD_NEWLINE) {
