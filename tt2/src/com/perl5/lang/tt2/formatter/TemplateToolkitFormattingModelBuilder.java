@@ -30,6 +30,8 @@ import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import static com.perl5.lang.tt2.formatter.TemplateToolkitFormattingTokenSets.PERL_BLOCKS;
+
 public class TemplateToolkitFormattingModelBuilder
   extends PerlXmlTemplateFormattingModelBuilder<TemplateToolkitFormattingContext, TemplateToolkitFormattingBlock> {
   @Override
@@ -56,7 +58,7 @@ public class TemplateToolkitFormattingModelBuilder
                                               @Nullable Wrap wrap,
                                               @NotNull TemplateToolkitFormattingContext context) {
     var nodeType = PsiUtilCore.getElementType(node);
-    if (nodeType == TemplateToolkitElementTypes.TT2_PERL_CODE || nodeType == TemplateToolkitElementTypes.TT2_RAWPERL_CODE) {
+    if (PERL_BLOCKS.contains(nodeType)) {
       var perlBlock = new PerlFormattingBlock(node, context.getPurePerlContext());
       perlBlock.setIndent(Indent.getNoneIndent());
       return perlBlock;

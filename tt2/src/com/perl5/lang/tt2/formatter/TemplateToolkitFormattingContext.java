@@ -46,7 +46,11 @@ final class TemplateToolkitFormattingContext extends PerlBaseFormattingContext {
       @Override
       public @NotNull Indent getNodeIndent(@NotNull ASTNode node) {
         var parentType = PsiUtilCore.getElementType(node.getTreeParent());
-        return parentType == TT2_PERL_CODE || parentType == TT2_RAWPERL_CODE ? Indent.getNormalIndent() : super.getNodeIndent(node);
+        var perlIndent = super.getNodeIndent(node);
+        if (PERL_BLOCKS.contains(parentType) && !Indent.getAbsoluteNoneIndent().equals(perlIndent)) {
+          return Indent.getNormalIndent();
+        }
+        return perlIndent;
       }
     });
 

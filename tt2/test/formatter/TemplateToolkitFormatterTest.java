@@ -166,6 +166,11 @@ public class TemplateToolkitFormatterTest extends TemplateToolkitLightTestCase {
   }
 
   @Test
+  public void testPerlPod() {
+    doFormatTest();
+  }
+
+  @Test
   public void testProcess() {
     doFormatTest();
   }

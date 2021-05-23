@@ -17,23 +17,15 @@
 package com.perl5.lang.tt2.formatter;
 
 import com.intellij.formatting.Alignment;
-import com.intellij.formatting.Block;
 import com.intellij.formatting.Indent;
 import com.intellij.formatting.Wrap;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.formatter.xml.XmlFormattingPolicy;
-import com.intellij.psi.util.PsiUtilCore;
-import com.intellij.xml.template.formatter.FragmentedTemplateException;
 import com.perl5.lang.perl.idea.formatter.PerlTemplateLanguageBlock;
 import com.perl5.lang.perl.idea.formatter.PerlXmlTemplateFormattingModelBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Collections;
-import java.util.List;
-
-import static com.perl5.lang.tt2.formatter.TemplateToolkitFormattingTokenSets.LEAF_BLOCKS;
 
 public class TemplateToolkitFormattingBlock extends PerlTemplateLanguageBlock<TemplateToolkitFormattingContext> {
   public TemplateToolkitFormattingBlock(PerlXmlTemplateFormattingModelBuilder<TemplateToolkitFormattingContext, ?> builder,
@@ -45,22 +37,5 @@ public class TemplateToolkitFormattingBlock extends PerlTemplateLanguageBlock<Te
                                         @Nullable Indent indent,
                                         @NotNull TemplateToolkitFormattingContext formattingContext) {
     super(builder, node, wrap, alignment, settings, xmlFormattingPolicy, indent, formattingContext);
-  }
-
-  @Override
-  protected List<Block> buildChildrenWithMerge() throws FragmentedTemplateException {
-    if (shouldBeLeafBlock()) {
-      return Collections.emptyList();
-    }
-    return super.buildChildrenWithMerge();
-  }
-
-  @Override
-  public boolean isLeaf() {
-    return shouldBeLeafBlock() || super.isLeaf();
-  }
-
-  private boolean shouldBeLeafBlock() {
-    return LEAF_BLOCKS.contains(PsiUtilCore.getElementType(myNode));
   }
 }

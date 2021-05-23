@@ -96,7 +96,7 @@ final class TemplateToolkitFormattingTokenSets {
     ARRAY_EXPR,
     HASH_EXPR
   );
-  static final TokenSet LEAF_BLOCKS = TokenSet.create(
+  static final TokenSet PERL_BLOCKS = TokenSet.create(
     TT2_RAWPERL_CODE,
     TT2_PERL_CODE
   );
