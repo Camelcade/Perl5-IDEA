@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,8 +24,10 @@ import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterFactory;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.highlighter.PerlEditorHighlighterProviderBase;
 import com.perl5.lang.tt2.TemplateToolkitFileViewProvider;
+import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
 import com.perl5.lang.tt2.idea.highlighting.TemplateToolkitSyntaxHighlighter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -46,6 +48,10 @@ public class TemplateToolkitEditorHighlighterProvider extends PerlEditorHighligh
       ),
       ""
     ));
+    var perlLayerDescriptor = new LayerDescriptor(
+      SyntaxHighlighterFactory.getSyntaxHighlighter(PerlLanguage.INSTANCE, project, virtualFile), "");
+    highlighter.registerLayer(TemplateToolkitElementTypes.TT2_PERL_CODE, perlLayerDescriptor);
+    highlighter.registerLayer(TemplateToolkitElementTypes.TT2_RAWPERL_CODE, perlLayerDescriptor);
     return highlighter;
   }
 
