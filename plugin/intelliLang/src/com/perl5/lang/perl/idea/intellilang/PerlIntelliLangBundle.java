@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.intellilang;
 
 import com.intellij.DynamicBundle;
+import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.PropertyKey;
 
@@ -28,7 +29,7 @@ public class PerlIntelliLangBundle extends DynamicBundle {
     super(PATH_TO_BUNDLE);
   }
 
-  public static String message(@NotNull @PropertyKey(resourceBundle = PATH_TO_BUNDLE) String key, @NotNull Object... params) {
+  public static @Nls @NotNull String message(@NotNull @PropertyKey(resourceBundle = PATH_TO_BUNDLE) String key, @NotNull Object... params) {
     return INSTANCE.getMessage(key, params);
   }
 }
