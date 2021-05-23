@@ -1,27 +1,3 @@
-Text: Mojolicious::Controller; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
-	Lookups: Mojolicious::Controller
-	VirtualFile: Controller.pm
-Text: Mojolicious::Plugin::DefaultHelpers; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
-	Lookups: Mojolicious::Plugin::DefaultHelpers
-	VirtualFile: DefaultHelpers.pm
-Text: Mojolicious::Plugin::TagHelpers; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
-	Lookups: Mojolicious::Plugin::TagHelpers
-	VirtualFile: TagHelpers.pm
-Text: MyTest::ClassAccessor; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
-	Lookups: MyTest::ClassAccessor
-	VirtualFile: ClassAccessor.pm
-Text: MyTest::Constants; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
-	Lookups: MyTest::Constants
-	VirtualFile: Constants.pm
-Text: MyTest::Exceptions; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
-	Lookups: MyTest::Exceptions
-	VirtualFile: Exceptions.pm
-Text: MyTest::Some::Package; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
-	Lookups: MyTest::Some::Package
-	VirtualFile: Package.pm
-Text: MyTest::Something; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
-	Lookups: MyTest::Something
-	VirtualFile: Something.pm
 Text: v5.10; Tail: null; Type: bareword_filehandles indirect multidimensional say state switch; Icon: null; Type Icon: null
 	Lookups: v5.10
 	PerlVersion

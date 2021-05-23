@@ -37,6 +37,9 @@ public class PerlCompletionTest extends PerlCompletionTestCase {
   }
 
   @Test
+  public void testUseVersion() {doTest();}
+
+  @Test
   public void testMooGenerated() {doTestWithTypeText();}
 
   @Test
