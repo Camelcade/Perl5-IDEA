@@ -37,7 +37,6 @@ import com.perl5.lang.mason2.idea.configuration.VariableDescription;
 import com.perl5.lang.perl.parser.PerlParserUtil;
 import com.perl5.lang.perl.util.PerlConfigurationUtil;
 import gnu.trove.THashSet;
-import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -46,10 +45,7 @@ import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.EventObject;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 
 public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigurable {
@@ -102,8 +98,8 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
   }
 
   protected boolean isStructureModified() {
-    return !StringUtils.equals(mySettings.autoHandlerName, autohandlerName.getText()) ||
-           !StringUtils.equals(mySettings.defaultHandlerName, defaulthandlerName.getText()) ||
+    return !Objects.equals(mySettings.autoHandlerName, autohandlerName.getText()) ||
+           !Objects.equals(mySettings.defaultHandlerName, defaulthandlerName.getText()) ||
            !mySettings.customTags.equals(customTagsModel.getItems())
       ;
   }

@@ -16,13 +16,13 @@
 
 package com.perl5.lang.perl.extensions.packageprocessor.impl;
 
+import com.intellij.openapi.util.text.StringUtil;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageOptionsProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPragmaProcessorBase;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlWarningsProvider;
 import com.perl5.lang.perl.internals.warnings.PerlWarningTree;
 import com.perl5.lang.perl.internals.warnings.PerlWarningTreeLeaf;
 import com.perl5.lang.perl.internals.warnings.PerlWarningTreeNode;
-import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -53,7 +53,7 @@ public class WarningsProcessor extends PerlPragmaProcessorBase implements PerlPa
       OPTIONS_BUNDLES.put(option.getKey(),
                           option.getValue().getMinVersion().getStrictDottedVersion()
                           + ", "
-                          + StringUtils.join(subElements, " ")
+                          + StringUtil.join(subElements, " ")
       );
     }
   }

@@ -37,7 +37,6 @@ import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionReverseInd
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionsIndex;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import gnu.trove.THashSet;
-import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -221,8 +220,8 @@ public class PerlSubUtil implements PerlElementTypes {
       return "";
     }
 
-    String argumentListString = StringUtils.join(argumentsList, ", ");
-    String optionalArgumentsString = StringUtils.join(optionalAargumentsList, ", ");
+    String argumentListString = StringUtil.join(argumentsList, ", ");
+    String optionalArgumentsString = StringUtil.join(optionalAargumentsList, ", ");
 
     if (argumentListString.isEmpty()) {
       return "([" + optionalArgumentsString + "])";

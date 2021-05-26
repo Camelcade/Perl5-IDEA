@@ -36,7 +36,6 @@ import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.util.*;
-import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -174,7 +173,7 @@ public class ExceptionClassProcessor extends PerlPackageProcessorBase {
     if (aliasEntry != null && aliasEntry.isComplete()) {
       if (useStatementElement.isAcceptableIdentifierElement(aliasEntry.valueElement)) {
         String aliasName = aliasEntry.getValueString();
-        if (StringUtils.isNotEmpty(aliasName)) {
+        if (StringUtil.isNotEmpty(aliasName)) {
           result.add(new PerlLightSubDefinitionElement<>(
             useStatementElement,
             aliasName,
