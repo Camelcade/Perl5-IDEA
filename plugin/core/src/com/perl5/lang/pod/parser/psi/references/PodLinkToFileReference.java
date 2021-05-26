@@ -30,7 +30,6 @@ import com.perl5.lang.pod.filetypes.PodFileType;
 import com.perl5.lang.pod.parser.psi.PodLinkDescriptor;
 import com.perl5.lang.pod.parser.psi.mixin.PodFormatterL;
 import com.perl5.lang.pod.parser.psi.util.PodFileUtil;
-import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
 public class PodLinkToFileReference extends PerlCachingReference<PodFormatterL> {
@@ -63,7 +62,7 @@ public class PodLinkToFileReference extends PerlCachingReference<PodFormatterL> 
           (newElementName.endsWith("." + PerlFileTypePackage.EXTENSION) || newElementName.endsWith("." + PodFileType.EXTENSION))) {
         String[] nameChunks = currentName.split(PerlPackageUtil.NAMESPACE_SEPARATOR);
         nameChunks[nameChunks.length - 1] = newElementName.replaceFirst(PodFileUtil.PM_OR_POD_EXTENSION_PATTERN, "");
-        newElementName = StringUtils.join(nameChunks, PerlPackageUtil.NAMESPACE_SEPARATOR);
+        newElementName = StringUtil.join(nameChunks, PerlPackageUtil.NAMESPACE_SEPARATOR);
 
         return super.handleElementRename(newElementName);
       }

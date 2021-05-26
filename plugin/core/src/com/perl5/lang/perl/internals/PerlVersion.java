@@ -16,10 +16,10 @@
 
 package com.perl5.lang.perl.internals;
 
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
 import gnu.trove.THashMap;
-import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -192,7 +192,7 @@ public class PerlVersion implements PerlVersionRegexps, Comparable<PerlVersion> 
       result.add(Integer.toString(chunk));
     }
 
-    return "v" + StringUtils.join(result, ".");
+    return "v" + StringUtil.join(result, ".");
   }
 
   public String getStrictNumericVersion() {

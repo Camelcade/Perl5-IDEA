@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.psi.references;
 
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.PsiFile;
@@ -23,7 +24,6 @@ import com.intellij.psi.ResolveResult;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.util.PerlPackageUtil;
-import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlNamespaceFileReference extends PerlCachingReference<PerlNamespaceElement> {
@@ -54,7 +54,7 @@ public class PerlNamespaceFileReference extends PerlCachingReference<PerlNamespa
     if (currentName != null && newElementName.endsWith(".pm")) {
       String[] nameChunks = currentName.split(PerlPackageUtil.NAMESPACE_SEPARATOR);
       nameChunks[nameChunks.length - 1] = newElementName.replaceFirst("\\.pm$", "");
-      newElementName = StringUtils.join(nameChunks, PerlPackageUtil.NAMESPACE_SEPARATOR);
+      newElementName = StringUtil.join(nameChunks, PerlPackageUtil.NAMESPACE_SEPARATOR);
 
       return super.handleElementRename(newElementName);
     }

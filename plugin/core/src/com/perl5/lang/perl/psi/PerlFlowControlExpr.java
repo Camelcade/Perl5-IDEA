@@ -24,9 +24,10 @@ import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.idea.inspections.PerlLoopControlInspection;
 import com.perl5.lang.perl.psi.impl.PsiPerlStatementImpl;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
-import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Objects;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 import static com.perl5.lang.perl.psi.PerlBlock.LOOPS_CONTAINERS;
@@ -75,7 +76,7 @@ public interface PerlFlowControlExpr extends PsiPerlExpr {
         else {
           PsiElement potentialLabel = PerlPsiUtil.getPrevSignificantSibling(closestBlockContainer);
           if (potentialLabel instanceof PerlLabelDeclaration &&
-              StringUtils.equals(labelName, ((PerlLabelDeclaration)potentialLabel).getName())) {
+              Objects.equals(labelName, ((PerlLabelDeclaration)potentialLabel).getName())) {
             return closestBlockContainer;
           }
         }
