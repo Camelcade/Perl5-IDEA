@@ -71,9 +71,9 @@ public class PerlHierarchyBrowser extends TypeHierarchyBrowserBase {
 
   @Override
   protected void createTrees(@NotNull Map<? super String, ? super JTree> trees) {
-    trees.put(SUPERTYPES_HIERARCHY_TYPE, createTree(true));
-    trees.put(SUBTYPES_HIERARCHY_TYPE, createTree(true));
-    trees.put(TYPE_HIERARCHY_TYPE, createTree(true));
+    trees.put(getSubtypesHierarchyType(), createTree(true));
+    trees.put(getSubtypesHierarchyType(), createTree(true));
+    trees.put(getTypeHierarchyType(), createTree(true));
   }
 
   @Override
@@ -96,13 +96,13 @@ public class PerlHierarchyBrowser extends TypeHierarchyBrowserBase {
 
   @Override
   protected @Nullable HierarchyTreeStructure createHierarchyTreeStructure(@NotNull String typeName, @NotNull PsiElement psiElement) {
-    if (SUPERTYPES_HIERARCHY_TYPE.equals(typeName)) {
+    if (getSupertypesHierarchyType().equals(typeName)) {
       return getSuperTypesHierarchyStructure(psiElement);
     }
-    else if (SUBTYPES_HIERARCHY_TYPE.equals(typeName)) {
+    else if (getSubtypesHierarchyType().equals(typeName)) {
       return getSubTypesHierarchyStructure(psiElement);
     }
-    else if (TYPE_HIERARCHY_TYPE.equals(typeName)) {
+    else if (getTypeHierarchyType().equals(typeName)) {
       return getTypesHierarchyStructure(psiElement);
     }
     return null;
