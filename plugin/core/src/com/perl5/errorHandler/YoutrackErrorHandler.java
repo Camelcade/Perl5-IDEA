@@ -86,16 +86,16 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
     Task.Backgroundable task = new Task.Backgroundable(project, DiagnosticBundle.message("title.submitting.error.report")) {
       @Override
       public void run(@NotNull ProgressIndicator indicator) {
-        consumer.consume(doSubmit(events, additionalInfo, parentComponent));
+        consumer.consume(doSubmit(events, additionalInfo, project));
       }
     };
     task.queue();
     return true;
   }
 
-  private SubmittedReportInfo doSubmit(IdeaLoggingEvent[] ideaLoggingEvents, String addInfo, Component component) {
-    final DataContext dataContext = DataManager.getInstance().getDataContext(component);
-    final Project project = CommonDataKeys.PROJECT.getData(dataContext);
+  private SubmittedReportInfo doSubmit(IdeaLoggingEvent @NotNull [] ideaLoggingEvents,
+                                       @Nullable String addInfo,
+                                       @Nullable Project project) {
     final IdeaLoggingEvent ideaLoggingEvent = ideaLoggingEvents[0];
     final String throwableText = ideaLoggingEvent.getThrowableText();
     String description = throwableText.substring(0, Math.min(80, throwableText.length()));
@@ -219,7 +219,7 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
     return null;
   }
 
-  private static void popupResultInfo(final SubmittedReportInfo reportInfo, final Project project) {
+  private static void popupResultInfo(@NotNull SubmittedReportInfo reportInfo, final @Nullable Project project) {
     ApplicationManager.getApplication().invokeLater(() -> {
       StringBuilder text = new StringBuilder("<html>");
       final String url = reportInfo.getStatus() == SubmittedReportInfo.SubmissionStatus.FAILED || reportInfo.getLinkText() == null
