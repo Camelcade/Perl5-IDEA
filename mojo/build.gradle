@@ -18,8 +18,8 @@ import org.jetbrains.grammarkit.tasks.GenerateLexer
 import org.jetbrains.grammarkit.tasks.GenerateParser
 
 dependencies{
-  implementation project(":lang.mojo.core")
-  implementation project(":lang.mojo.idea")
+  compile project(":lang.mojo.core")
+  compile project(":lang.mojo.idea")
   testCompile project(":plugin").sourceSets.test.output
 }
 
