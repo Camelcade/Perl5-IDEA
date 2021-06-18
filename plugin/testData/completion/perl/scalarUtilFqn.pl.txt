@@ -1,0 +1,75 @@
+Text: EXPORT_FAIL; Tail: []; Type: Scalar::Util; Icon: /array_gutter_icon.png; Type Icon: null
+	Lookups: @Scalar::Util::EXPORT_FAIL, Scalar::Util::EXPORT_FAIL
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 700 in Util.pm
+Text: EXPORT_FAIL; Tail: []; Type: Scalar::Util; Icon: /scalar_gutter_icon.png; Type Icon: null
+	Lookups: $Scalar::Util::EXPORT_FAIL, Scalar::Util::EXPORT_FAIL
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 700 in Util.pm
+Text: EXPORT_FAIL; Tail: null; Type: Scalar::Util; Icon: /array_gutter_icon.png; Type Icon: null
+	Lookups: @Scalar::Util::EXPORT_FAIL, Scalar::Util::EXPORT_FAIL
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 700 in Util.pm
+Text: EXPORT_OK; Tail: []; Type: Scalar::Util; Icon: /array_gutter_icon.png; Type Icon: null
+	Lookups: @Scalar::Util::EXPORT_OK, Scalar::Util::EXPORT_OK
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 360 in Util.pm
+Text: EXPORT_OK; Tail: []; Type: Scalar::Util; Icon: /scalar_gutter_icon.png; Type Icon: null
+	Lookups: $Scalar::Util::EXPORT_OK, Scalar::Util::EXPORT_OK
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 360 in Util.pm
+Text: EXPORT_OK; Tail: null; Type: Scalar::Util; Icon: /array_gutter_icon.png; Type Icon: null
+	Lookups: @Scalar::Util::EXPORT_OK, Scalar::Util::EXPORT_OK
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 360 in Util.pm
+Text: ISA; Tail: []; Type: Scalar::Util; Icon: /array_gutter_icon.png; Type Icon: null
+	Lookups: @Scalar::Util::ISA, Scalar::Util::ISA
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 329 in Util.pm
+Text: ISA; Tail: []; Type: Scalar::Util; Icon: /scalar_gutter_icon.png; Type Icon: null
+	Lookups: $Scalar::Util::ISA, Scalar::Util::ISA
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 329 in Util.pm
+Text: ISA; Tail: null; Type: Scalar::Util; Icon: /array_gutter_icon.png; Type Icon: null
+	Lookups: @Scalar::Util::ISA, Scalar::Util::ISA
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 329 in Util.pm
+Text: VERSION; Tail: null; Type: Scalar::Util; Icon: /scalar_gutter_icon.png; Type Icon: null
+	Lookups: $Scalar::Util::VERSION, Scalar::Util::VERSION
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 523 in Util.pm
+Text: blessed; Tail: ($ref); Type: Scalar::Util; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: blessed
+	PsiElement: Implicit sub: blessed($ref)($ref)
+Text: dualvar; Tail: ($num, $string); Type: Scalar::Util; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: dualvar
+	PsiElement: Implicit sub: dualvar($num, $string)($num, $string)
+Text: export_fail; Tail: null; Type: Scalar::Util; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: export_fail
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Scalar::Util::export_fail at 918 in Util.pm
+Text: isdual; Tail: ($var); Type: Scalar::Util; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: isdual
+	PsiElement: Implicit sub: isdual($var)($var)
+Text: isvstring; Tail: ($var); Type: Scalar::Util; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: isvstring
+	PsiElement: Implicit sub: isvstring($var)($var)
+Text: isweak; Tail: ($ref); Type: Scalar::Util; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: isweak
+	PsiElement: Implicit sub: isweak($ref)($ref)
+Text: looks_like_number; Tail: ($var); Type: Scalar::Util; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: looks_like_number
+	PsiElement: Implicit sub: looks_like_number($var)($var)
+Text: openhandle; Tail: ($file_handle); Type: Scalar::Util; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: openhandle
+	PsiElement: Implicit sub: openhandle($file_handle)($file_handle)
+Text: readonly; Tail: ($var); Type: Scalar::Util; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: readonly
+	PsiElement: Implicit sub: readonly($var)($var)
+Text: refaddr; Tail: ($ref); Type: Scalar::Util; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: refaddr
+	PsiElement: Implicit sub: refaddr($ref)($ref)
+Text: reftype; Tail: ($ref); Type: Scalar::Util; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: reftype
+	PsiElement: Implicit sub: reftype($ref)($ref)
+Text: set_prototype; Tail: ($code, $proto); Type: Scalar::Util; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: set_prototype
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Scalar::Util::set_prototype($code, $proto) at 1293 in Util.pm
+Text: tainted; Tail: ($var); Type: Scalar::Util; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: tainted
+	PsiElement: Implicit sub: tainted($var)($var)
+Text: unweaken; Tail: ($ref); Type: Scalar::Util; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: unweaken
+	PsiElement: Implicit sub: unweaken($ref)($ref)
+Text: weaken; Tail: ($ref); Type: Scalar::Util; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: weaken
+	PsiElement: Implicit sub: weaken($ref)($ref)

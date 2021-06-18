@@ -1,0 +1,134 @@
+PerlNamespaceFileReference at (4,10); text in range: 'strict' => 1 results:
+	Perl5 at 0 in strict.pm
+
+PerlNamespaceFileReference at (16,24); text in range: 'warnings' => 1 results:
+	Perl5 at 0 in warnings.pm
+
+PerlNamespaceFileReference at (57,69); text in range: 'Scalar::Util' => 1 results:
+	Perl5 at 0 in Util.pm
+
+PerlNamespaceReference at (207,219); text in range: 'Scalar::Util' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Scalar::Util at 257 in Util.pm
+
+PerlSubReference at (221,228); text in range: 'blessed' => 1 results:
+	Implicit sub: blessed($ref)($ref)
+
+PerlNamespaceReference at (230,242); text in range: 'Scalar::Util' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Scalar::Util at 257 in Util.pm
+
+PerlSubReference at (244,251); text in range: 'refaddr' => 1 results:
+	Implicit sub: refaddr($ref)($ref)
+
+PerlNamespaceReference at (253,265); text in range: 'Scalar::Util' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Scalar::Util at 257 in Util.pm
+
+PerlSubReference at (267,274); text in range: 'reftype' => 1 results:
+	Implicit sub: reftype($ref)($ref)
+
+PerlNamespaceReference at (276,288); text in range: 'Scalar::Util' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Scalar::Util at 257 in Util.pm
+
+PerlSubReference at (290,296); text in range: 'weaken' => 1 results:
+	Implicit sub: weaken($ref)($ref)
+
+PerlNamespaceReference at (298,310); text in range: 'Scalar::Util' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Scalar::Util at 257 in Util.pm
+
+PerlSubReference at (312,320); text in range: 'unweaken' => 1 results:
+	Implicit sub: unweaken($ref)($ref)
+
+PerlNamespaceReference at (322,334); text in range: 'Scalar::Util' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Scalar::Util at 257 in Util.pm
+
+PerlSubReference at (336,342); text in range: 'isweak' => 1 results:
+	Implicit sub: isweak($ref)($ref)
+
+PerlNamespaceReference at (344,356); text in range: 'Scalar::Util' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Scalar::Util at 257 in Util.pm
+
+PerlSubReference at (358,365); text in range: 'dualvar' => 1 results:
+	Implicit sub: dualvar($num, $string)($num, $string)
+
+PerlNamespaceReference at (367,379); text in range: 'Scalar::Util' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Scalar::Util at 257 in Util.pm
+
+PerlSubReference at (381,387); text in range: 'isdual' => 1 results:
+	Implicit sub: isdual($var)($var)
+
+PerlNamespaceReference at (389,401); text in range: 'Scalar::Util' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Scalar::Util at 257 in Util.pm
+
+PerlSubReference at (403,412); text in range: 'isvstring' => 1 results:
+	Implicit sub: isvstring($var)($var)
+
+PerlNamespaceReference at (414,426); text in range: 'Scalar::Util' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Scalar::Util at 257 in Util.pm
+
+PerlSubReference at (428,445); text in range: 'looks_like_number' => 1 results:
+	Implicit sub: looks_like_number($var)($var)
+
+PerlNamespaceReference at (447,459); text in range: 'Scalar::Util' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Scalar::Util at 257 in Util.pm
+
+PerlSubReference at (461,471); text in range: 'openhandle' => 1 results:
+	Implicit sub: openhandle($file_handle)($file_handle)
+
+PerlNamespaceReference at (473,485); text in range: 'Scalar::Util' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Scalar::Util at 257 in Util.pm
+
+PerlSubReference at (487,495); text in range: 'readonly' => 1 results:
+	Implicit sub: readonly($var)($var)
+
+PerlNamespaceReference at (497,509); text in range: 'Scalar::Util' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Scalar::Util at 257 in Util.pm
+
+PerlSubReference at (511,524); text in range: 'set_prototype' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Scalar::Util::set_prototype($code, $proto) at 1293 in Util.pm
+
+PerlNamespaceReference at (526,538); text in range: 'Scalar::Util' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Scalar::Util at 257 in Util.pm
+
+PerlSubReference at (540,547); text in range: 'tainted' => 1 results:
+	Implicit sub: tainted($var)($var)
+
+PerlSubReference at (550,557); text in range: 'blessed' => 1 results:
+	Implicit sub: blessed($ref)($ref)
+
+PerlSubReference at (559,566); text in range: 'refaddr' => 1 results:
+	Implicit sub: refaddr($ref)($ref)
+
+PerlSubReference at (568,575); text in range: 'reftype' => 1 results:
+	Implicit sub: reftype($ref)($ref)
+
+PerlSubReference at (577,583); text in range: 'weaken' => 1 results:
+	Implicit sub: weaken($ref)($ref)
+
+PerlSubReference at (585,593); text in range: 'unweaken' => 1 results:
+	Implicit sub: unweaken($ref)($ref)
+
+PerlSubReference at (595,601); text in range: 'isweak' => 1 results:
+	Implicit sub: isweak($ref)($ref)
+
+PerlSubReference at (603,610); text in range: 'dualvar' => 1 results:
+	Implicit sub: dualvar($num, $string)($num, $string)
+
+PerlSubReference at (612,618); text in range: 'isdual' => 1 results:
+	Implicit sub: isdual($var)($var)
+
+PerlSubReference at (620,629); text in range: 'isvstring' => 1 results:
+	Implicit sub: isvstring($var)($var)
+
+PerlSubReference at (631,648); text in range: 'looks_like_number' => 1 results:
+	Implicit sub: looks_like_number($var)($var)
+
+PerlSubReference at (650,660); text in range: 'openhandle' => 1 results:
+	Implicit sub: openhandle($file_handle)($file_handle)
+
+PerlSubReference at (662,670); text in range: 'readonly' => 1 results:
+	Implicit sub: readonly($var)($var)
+
+PerlSubReference at (672,685); text in range: 'set_prototype' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Scalar::Util::set_prototype($code, $proto) at 1293 in Util.pm
+
+PerlSubReference at (687,694); text in range: 'tainted' => 1 results:
+	Implicit sub: tainted($var)($var)

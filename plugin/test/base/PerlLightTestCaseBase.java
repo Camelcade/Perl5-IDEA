@@ -386,7 +386,9 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
         VirtualFile libdir = LocalFileSystem.getInstance().refreshAndFindFileByPath(
           FileUtil.join("testData", "testLibSets", testLibraryName)
         );
-        assert libdir != null;
+        assertNotNull(libdir);
+        // fixme we should do this once per session
+        libdir.refresh(false, true);
 
         PerlProjectManager perlProjectManager = PerlProjectManager.getInstance(getProject());
         perlProjectManager.addExternalLibrary(libdir);
@@ -2588,6 +2590,8 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   }
 
   protected void withRoleTiny() { addTestLibrary("roleTiny"); }
+
+  protected void withPerl532() { addTestLibrary("perl5320"); }
 
   protected void withMoo() { addTestLibrary("moo"); }
 

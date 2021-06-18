@@ -1,0 +1,9 @@
+<p><a href="psi_element://Scalar%3A%3AUtil">Scalar::Util</a>: <a href="psi_element://Scalar%3A%3AUtil%2FFUNCTIONS+FOR+REFERENCES">FUNCTIONS FOR REFERENCES</a></p><h2>refaddr</h2><div style="padding-bottom: 10px;"><pre><code>    my $addr = refaddr( $ref );</code></pre></div>
+<p style="padding-bottom: 10px;">If <code>$ref</code> is reference, the internal memory address of the referenced value is
+returned as a plain integer. Otherwise <code>undef</code> is returned.</p>
+<div style="padding-bottom: 10px;"><pre><code>    $addr = refaddr &quot;string&quot;;           # undef
+    $addr = refaddr \$var;              # eg 12345678
+    $addr = refaddr [];                 # eg 23456784
+
+    $obj  = bless {}, &quot;Foo&quot;;
+    $addr = refaddr $obj;               # eg 88123488</code></pre></div>

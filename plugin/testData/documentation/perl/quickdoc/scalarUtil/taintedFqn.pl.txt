@@ -1,0 +1,4 @@
+<p><a href="psi_element://Scalar%3A%3AUtil">Scalar::Util</a>: <a href="psi_element://Scalar%3A%3AUtil%2FOTHER+FUNCTIONS">OTHER FUNCTIONS</a></p><h2>tainted</h2><div style="padding-bottom: 10px;"><pre><code>    my $t = tainted( $var );</code></pre></div>
+<p style="padding-bottom: 10px;">Return true if <code>$var</code> is tainted.</p>
+<div style="padding-bottom: 10px;"><pre><code>    $taint = tainted(&quot;constant&quot;);       # false
+    $taint = tainted($ENV{PWD});        # true if running under -T</code></pre></div>

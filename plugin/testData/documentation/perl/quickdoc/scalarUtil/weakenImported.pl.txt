@@ -1,0 +1,28 @@
+<p><a href="psi_element://Scalar%3A%3AUtil">Scalar::Util</a>: <a href="psi_element://Scalar%3A%3AUtil%2FFUNCTIONS+FOR+REFERENCES">FUNCTIONS FOR REFERENCES</a></p><h2>weaken</h2><div style="padding-bottom: 10px;"><pre><code>    weaken( $ref );</code></pre></div>
+<p style="padding-bottom: 10px;">The lvalue <code>$ref</code> will be turned into a weak reference. This means that it
+will not hold a reference count on the object it references. Also, when the
+reference count on that object reaches zero, the reference will be set to
+undef. This function mutates the lvalue passed as its argument and returns no
+value.</p>
+<p style="padding-bottom: 10px;">This is useful for keeping copies of references, but you don't want to prevent
+the object being DESTROY-ed at its usual time.</p>
+<div style="padding-bottom: 10px;"><pre><code>    {
+      my $var;
+      $ref = \$var;
+      weaken($ref);                     # Make $ref a weak reference
+    }
+    # $ref is now undef</code></pre></div>
+<p style="padding-bottom: 10px;">Note that if you take a copy of a scalar with a weakened reference, the copy
+will be a strong reference.</p>
+<div style="padding-bottom: 10px;"><pre><code>    my $var;
+    my $foo = \$var;
+    weaken($foo);                       # Make $foo a weak reference
+    my $bar = $foo;                     # $bar is now a strong reference</code></pre></div>
+<p style="padding-bottom: 10px;">This may be less obvious in other situations, such as <code>grep()</code>, for instance
+when grepping through a list of weakened references to objects that may have
+been destroyed already:</p>
+<div style="padding-bottom: 10px;"><pre><code>    @object = grep { defined } @object;</code></pre></div>
+<p style="padding-bottom: 10px;">This will indeed remove all references to destroyed objects, but the remaining
+references to objects will be strong, causing the remaining objects to never be
+destroyed because there is now always a strong reference to them in the @object
+array.</p>

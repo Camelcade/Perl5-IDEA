@@ -1,0 +1,14 @@
+<p><a href="psi_element://Scalar%3A%3AUtil">Scalar::Util</a>: <a href="psi_element://Scalar%3A%3AUtil%2FFUNCTIONS+FOR+REFERENCES">FUNCTIONS FOR REFERENCES</a></p><h2>reftype</h2><div style="padding-bottom: 10px;"><pre><code>    my $type = reftype( $ref );</code></pre></div>
+<p style="padding-bottom: 10px;">If <code>$ref</code> is a reference, the basic Perl type of the variable referenced is
+returned as a plain string (such as <code>ARRAY</code> or <code>HASH</code>). Otherwise <code>undef</code>
+is returned.</p>
+<div style="padding-bottom: 10px;"><pre><code>    $type = reftype &quot;string&quot;;           # undef
+    $type = reftype \$var;              # SCALAR
+    $type = reftype [];                 # ARRAY
+
+    $obj  = bless {}, &quot;Foo&quot;;
+    $type = reftype $obj;               # HASH</code></pre></div>
+<p style="padding-bottom: 10px;">Note that for internal reasons, all precompiled regexps (<code>qr/.../</code>) are
+blessed references; thus <code>ref()</code> returns the package name string <code>&quot;Regexp&quot;</code>
+on these but <code>reftype()</code> will return the underlying C structure type of
+<code>&quot;REGEXP&quot;</code> in all capitals.</p>

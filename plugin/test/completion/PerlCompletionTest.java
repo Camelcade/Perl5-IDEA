@@ -37,13 +37,25 @@ public class PerlCompletionTest extends PerlCompletionTestCase {
   }
 
   @Test
-  public void testUseVersion() {doTest();}
+  public void testScalarUtilFqn() {
+    withPerl532();
+    doTestWithTypeText();
+  }
 
   @Test
-  public void testMooGenerated() {doTestWithTypeText();}
+  public void testScalarUtilImported() {
+    withPerl532();
+    doTestWithTypeText();
+  }
 
   @Test
-  public void testUnicodeNames() {doTest();}
+  public void testUseVersion() { doTest(); }
+
+  @Test
+  public void testMooGenerated() { doTestWithTypeText(); }
+
+  @Test
+  public void testUnicodeNames() { doTest(); }
 
   @Test
   public void testHandleInOpen() {doTest();}

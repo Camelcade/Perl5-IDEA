@@ -27,6 +27,11 @@ public class PerlResolveTest extends PerlLightTestCase {
     return "testData/resolve/perl";
   }
 
+  @Test
+  public void testScalarUtil() {
+    withPerl532();
+    doTest();
+  }
 
   @Test
   public void testUseMoo() {

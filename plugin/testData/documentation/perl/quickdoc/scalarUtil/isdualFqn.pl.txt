@@ -1,0 +1,20 @@
+<p><a href="psi_element://Scalar%3A%3AUtil">Scalar::Util</a>: <a href="psi_element://Scalar%3A%3AUtil%2FOTHER+FUNCTIONS">OTHER FUNCTIONS</a></p><h2>isdual</h2><div style="padding-bottom: 10px;"><pre><code>    my $dual = isdual( $var );</code></pre></div>
+<p style="padding-bottom: 10px;"><i>Since version 1.26.</i></p>
+<p style="padding-bottom: 10px;">If <code>$var</code> is a scalar that has both numeric and string values, the result is
+true.</p>
+<div style="padding-bottom: 10px;"><pre><code>    $foo = dualvar 86, &quot;Nix&quot;;
+    $dual = isdual($foo);               # true</code></pre></div>
+<p style="padding-bottom: 10px;">Note that a scalar can be made to have both string and numeric content through
+numeric operations:</p>
+<div style="padding-bottom: 10px;"><pre><code>    $foo = &quot;10&quot;;
+    $dual = isdual($foo);               # false
+    $bar = $foo + 0;
+    $dual = isdual($foo);               # true</code></pre></div>
+<p style="padding-bottom: 10px;">Note that although <code>$!</code> appears to be a dual-valued variable, it is
+actually implemented as a magical variable inside the interpreter:</p>
+<div style="padding-bottom: 10px;"><pre><code>    $! = 1;
+    print(&quot;$!\n&quot;);                      # &quot;Operation not permitted&quot;
+    $dual = isdual($!);                 # false</code></pre></div>
+<p style="padding-bottom: 10px;">You can capture its numeric and string content using:</p>
+<div style="padding-bottom: 10px;"><pre><code>    $err = dualvar $!, $!;
+    $dual = isdual($err);               # true</code></pre></div>

@@ -1,0 +1,7 @@
+<p><a href="psi_element://Scalar%3A%3AUtil">Scalar::Util</a>: <a href="psi_element://Scalar%3A%3AUtil%2FOTHER+FUNCTIONS">OTHER FUNCTIONS</a></p><h2>openhandle</h2><div style="padding-bottom: 10px;"><pre><code>    my $fh = openhandle( $fh );</code></pre></div>
+<p style="padding-bottom: 10px;">Returns <code>$fh</code> itself, if <code>$fh</code> may be used as a filehandle and is open, or if
+it is a tied handle. Otherwise <code>undef</code> is returned.</p>
+<div style="padding-bottom: 10px;"><pre><code>    $fh = openhandle(*STDIN);           # \*STDIN
+    $fh = openhandle(\*STDIN);          # \*STDIN
+    $fh = openhandle(*NOTOPEN);         # undef
+    $fh = openhandle(&quot;scalar&quot;);         # undef</code></pre></div>
