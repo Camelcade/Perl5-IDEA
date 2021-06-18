@@ -42,6 +42,17 @@ public class PerlRunTest extends PerlPlatformTestCase {
   }
 
   @Test
+  public void testArgsPassing() {
+    copyDirToModule("argsInspector");
+    var runConfiguration = createOnlyRunConfiguration("script.pl");
+    assertNotNull(runConfiguration);
+    assertInstanceOf(runConfiguration, GenericPerlRunConfiguration.class);
+    runConfiguration.setProgramParameters(
+      "arg1 \"arg2 arg3\" \"arg4\\\"arg5\" \"arg6'arg7\" 'arg8 arg9' \"'arg10 arg11'\" \"arg12 arg13\" \\\"arg14 arg15\\\"");
+    runAndCompareOutput(runConfiguration);
+  }
+
+  @Test
   public void testRunTestDir() {
     copyDirToModule("testMore");
     runTestConfigurationWithExecutorAndCheckResultsWithFile(createTestRunConfiguration("t"), DefaultRunExecutor.EXECUTOR_ID);
@@ -50,7 +61,10 @@ public class PerlRunTest extends PerlPlatformTestCase {
   @Test
   public void testRunSimpleScript() {
     copyDirToModule("simple");
-    GenericPerlRunConfiguration runConfiguration = createOnlyRunConfiguration("simplescript.pl");
+    runAndCompareOutput(createOnlyRunConfiguration("simplescript.pl"));
+  }
+
+  private void runAndCompareOutput(GenericPerlRunConfiguration runConfiguration) {
     Pair<ExecutionEnvironment, RunContentDescriptor> execResult;
     try {
       execResult = executeConfiguration(runConfiguration, DefaultRunExecutor.EXECUTOR_ID);
@@ -66,5 +80,4 @@ public class PerlRunTest extends PerlPlatformTestCase {
     assertNotNull(capturingProcessAdapter);
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(""), serializeOutput(capturingProcessAdapter.getOutput()));
   }
-
 }

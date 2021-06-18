@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,6 +41,7 @@ import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.Function;
 import com.intellij.util.containers.ContainerUtil;
+import com.intellij.util.execution.ParametersListUtil;
 import com.intellij.util.net.NetUtils;
 import com.intellij.util.xmlb.XmlSerializer;
 import com.perl5.PerlBundle;
@@ -263,7 +264,7 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
 
   protected @NotNull List<String> getPerlParametersList() {
     String perlParameters = getPerlParameters();
-    return StringUtil.isEmpty(perlParameters) ? Collections.emptyList() : StringUtil.split(perlParameters, " ");
+    return StringUtil.isEmpty(perlParameters) ? Collections.emptyList() : ParametersListUtil.parse(perlParameters);
   }
 
   public void setPerlParameters(String PERL_PARAMETERS) {
@@ -403,7 +404,7 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
 
   protected @NotNull List<String> getScriptParameters() {
     String programParameters = getProgramParameters();
-    return StringUtil.isEmpty(programParameters) ? Collections.emptyList() : StringUtil.split(programParameters, " ");
+    return StringUtil.isEmpty(programParameters) ? Collections.emptyList() : ParametersListUtil.parse(programParameters);
   }
 
   @Override
