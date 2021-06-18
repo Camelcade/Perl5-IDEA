@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -183,16 +183,7 @@ public class PerlProjectManager implements Disposable {
       else {
         sdkLibrary = SyntheticLibrary.newImmutableLibrary(sdkLibs);
       }
-
-      List<VirtualFile> libraryRoots = getModulesLibraryRoots();
-
-      if (libraryRoots.isEmpty()) {
-        return Collections.singletonList(sdkLibrary);
-      }
-      List<SyntheticLibrary> result = new ArrayList<>();
-      result.add(SyntheticLibrary.newImmutableLibrary(libraryRoots));
-      result.add(sdkLibrary);
-      return result;
+      return Collections.singletonList(sdkLibrary);
     });
   }
 
