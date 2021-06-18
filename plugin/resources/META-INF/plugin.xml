@@ -119,6 +119,8 @@
                       implementationClass="com.perl5.lang.perl.extensions.role.tiny.RoleTinyProcessor"/>
     <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.role.tiny.RoleTinyImplicitSubsProvider"/>
 
+    <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.scalar.util.ScalarUtilImplicitSubsProvider"/>
+
     <packageProcessor key="Dancer"
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.DancerPackageProcessor"/>
     <packageProcessor key="Dancer2"

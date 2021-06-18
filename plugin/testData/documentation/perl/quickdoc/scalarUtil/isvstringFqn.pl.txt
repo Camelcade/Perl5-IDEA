@@ -1,0 +1,5 @@
+<p><a href="psi_element://Scalar%3A%3AUtil">Scalar::Util</a>: <a href="psi_element://Scalar%3A%3AUtil%2FOTHER+FUNCTIONS">OTHER FUNCTIONS</a></p><h2>isvstring</h2><div style="padding-bottom: 10px;"><pre><code>    my $vstring = isvstring( $var );</code></pre></div>
+<p style="padding-bottom: 10px;">If <code>$var</code> is a scalar which was coded as a vstring, the result is true.</p>
+<div style="padding-bottom: 10px;"><pre><code>    $vs   = v49.46.48;
+    $fmt  = isvstring($vs) ? &quot;%vd&quot; : &quot;%s&quot;; #true
+    printf($fmt,$vs);</code></pre></div>

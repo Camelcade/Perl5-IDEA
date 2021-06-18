@@ -13,7 +13,8 @@ PerlSubReference at (56,63); text in range: 'augment' => 1 results:
 PerlSubReference at (67,73); text in range: 'before' => 1 results:
 	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::Role::before at 1768 in Role.pm
 
-PerlSubReference at (77,84); text in range: 'blessed' => 0 results:
+PerlSubReference at (77,84); text in range: 'blessed' => 1 results:
+	Implicit sub: blessed($ref)($ref)
 
 PerlSubReference at (88,95); text in range: 'confess' => 0 results:
 

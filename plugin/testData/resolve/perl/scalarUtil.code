@@ -1,0 +1,35 @@
+use strict;
+use warnings FATAL => 'all';
+use v5.10;
+
+use Scalar::Util qw/blessed refaddr reftype weaken unweaken isweak dualvar isdual isvstring looks_like_number openhandle readonly set_prototype tainted/;
+Scalar::Util::blessed;
+Scalar::Util::refaddr;
+Scalar::Util::reftype;
+Scalar::Util::weaken;
+Scalar::Util::unweaken;
+Scalar::Util::isweak;
+Scalar::Util::dualvar;
+Scalar::Util::isdual;
+Scalar::Util::isvstring;
+Scalar::Util::looks_like_number;
+Scalar::Util::openhandle;
+Scalar::Util::readonly;
+Scalar::Util::set_prototype;
+Scalar::Util::tainted;
+
+blessed;
+refaddr;
+reftype;
+weaken;
+unweaken;
+isweak;
+dualvar;
+isdual;
+isvstring;
+looks_like_number;
+openhandle;
+readonly;
+set_prototype;
+tainted;
+

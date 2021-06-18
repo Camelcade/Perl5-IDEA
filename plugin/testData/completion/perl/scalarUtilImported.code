@@ -1,0 +1,3 @@
+use Scalar::Util qw/blessed refaddr reftype weaken unweaken isweak dualvar isdual isvstring looks_like_number openhandle readonly set_prototype tainted/;
+
+<caret>

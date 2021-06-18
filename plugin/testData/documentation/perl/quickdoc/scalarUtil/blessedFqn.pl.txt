@@ -1,0 +1,13 @@
+<p><a href="psi_element://Scalar%3A%3AUtil">Scalar::Util</a>: <a href="psi_element://Scalar%3A%3AUtil%2FFUNCTIONS+FOR+REFERENCES">FUNCTIONS FOR REFERENCES</a></p><h2>blessed</h2><div style="padding-bottom: 10px;"><pre><code>    my $pkg = blessed( $ref );</code></pre></div>
+<p style="padding-bottom: 10px;">If <code>$ref</code> is a blessed reference, the name of the package that it is blessed
+into is returned. Otherwise <code>undef</code> is returned.</p>
+<div style="padding-bottom: 10px;"><pre><code>    $scalar = &quot;foo&quot;;
+    $class  = blessed $scalar;           # undef
+
+    $ref    = [];
+    $class  = blessed $ref;              # undef
+
+    $obj    = bless [], &quot;Foo&quot;;
+    $class  = blessed $obj;              # &quot;Foo&quot;</code></pre></div>
+<p style="padding-bottom: 10px;">Take care when using this function simply as a truth test (such as in
+<code>if(blessed $ref)...</code>) because the package name <code>&quot;0&quot;</code> is defined yet false.</p>

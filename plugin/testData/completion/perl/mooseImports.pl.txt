@@ -742,9 +742,9 @@ Text: binmode; Tail: ($file_handle [, $layer]); Type: CORE; Icon: /subroutine_gu
 Text: bless; Tail: ($reference [, $namespace_name]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: bless
 	PsiElement: Implicit sub: bless($reference [, $namespace_name])($reference, [$namespace_name])
-Text: blessed; Tail: null; Type: Scalar::Util; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Text: blessed; Tail: ($ref); Type: Scalar::Util; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: blessed
-	Export: &blessed => &Scalar::Util::blessed
+	PsiElement: Implicit sub: blessed($ref)($ref)
 Text: break; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: break
 	PsiElement: Implicit sub: break()

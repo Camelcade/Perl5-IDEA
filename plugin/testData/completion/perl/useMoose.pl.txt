@@ -10,9 +10,9 @@ Text: augment; Tail: ($meta, $name, $method); Type: Moose; Icon: /subroutine_gut
 Text: before; Tail: null; Type: Moose; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: before
 	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Moose::before at 1796 in Moose.pm
-Text: blessed; Tail: null; Type: Scalar::Util; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Text: blessed; Tail: ($ref); Type: Scalar::Util; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: blessed
-	Export: &blessed => &Scalar::Util::blessed
+	PsiElement: Implicit sub: blessed($ref)($ref)
 Text: confess; Tail: null; Type: Carp; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: confess
 	Export: &confess => &Carp::confess
