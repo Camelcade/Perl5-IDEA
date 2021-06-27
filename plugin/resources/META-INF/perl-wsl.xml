@@ -28,4 +28,7 @@
     <consoleInputFilterProvider implementation="com.perl5.lang.perl.idea.sdk.host.wsl.PerlWslInputFilterProvider"/>
   </extensions>
 
+  <applicationListeners>
+    <listener class="com.perl5.lang.perl.idea.sdk.host.wsl.PerlWslPreloader" topic="com.intellij.ide.AppLifecycleListener"/>
+  </applicationListeners>
 </idea-plugin>
