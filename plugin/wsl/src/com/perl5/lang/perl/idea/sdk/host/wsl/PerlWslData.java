@@ -183,7 +183,7 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
       perlCommandLine,
       perlCommandLine.getEffectiveProject(),
       new WSLCommandLineOptions()
-        .setRemoteWorkingDirectory(workingDir)
+        .setRemoteWorkingDirectory(getRemotePath(workingDir))
         .setSudo(false)
     );
   }
