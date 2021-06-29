@@ -30,7 +30,7 @@
   </extensions>
 
   <extensions defaultExtensionNs="com.intellij">
-    <errorHandler implementation="com.perl5.errorHandler.YoutrackErrorHandler"/>
+    <errorHandler implementation="com.perl5.lang.embedded.EmbeddedPerlYoutrackErrorHandler"/>
     <stubElementTypeHolder class="com.perl5.lang.embedded.EmbeddedPerlParserDefinition"/>
     <internalFileTemplate name="Perl5 embedded"/>
     <fileType implementationClass="com.perl5.lang.embedded.filetypes.EmbeddedPerlFileType" fieldName="INSTANCE"

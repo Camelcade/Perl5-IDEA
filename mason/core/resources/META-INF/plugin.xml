@@ -30,7 +30,7 @@
   </extensions>
 
   <extensions defaultExtensionNs="com.intellij">
-    <errorHandler implementation="com.perl5.errorHandler.YoutrackErrorHandler"/>
+    <errorHandler implementation="com.perl5.lang.MasonFrameworkYoutrackErrorHandler"/>
   </extensions>
 
   <actions>

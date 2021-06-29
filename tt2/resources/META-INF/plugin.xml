@@ -32,7 +32,7 @@
   </extensions>
 
   <extensions defaultExtensionNs="com.intellij">
-    <errorHandler implementation="com.perl5.errorHandler.YoutrackErrorHandler"/>
+    <errorHandler implementation="com.perl5.lang.tt2.TemplateToolkitYoutrackErrorHandler"/>
     <fileType implementationClass="com.perl5.lang.tt2.filetypes.TemplateToolkitFileType" fieldName="INSTANCE"
               name="Template Toolkit" extensions="tt;tt2" language="Template Toolkit 2"/>
     <editorHighlighterProvider filetype="Template Toolkit"

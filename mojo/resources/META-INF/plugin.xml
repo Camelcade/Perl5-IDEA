@@ -35,7 +35,7 @@
   </extensions>
 
   <extensions defaultExtensionNs="com.intellij">
-    <errorHandler implementation="com.perl5.errorHandler.YoutrackErrorHandler"/>
+    <errorHandler implementation="com.perl5.lang.mojolicious.MojoYoutrackErrorHandler"/>
     <internalFileTemplate name="Perl5 mojolicious"/>
 
     <stubElementTypeHolder class="com.perl5.lang.mojolicious.MojoliciousElementTypes"/>
