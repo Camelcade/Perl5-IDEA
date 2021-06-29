@@ -62,10 +62,15 @@ public class Perl5ProjectStartupActivity implements StartupActivity {
         Notifications.Bus.notify(notification);
       });
     }
-    StartupManager.getInstance(project).runWhenProjectIsInitialized(() -> Perl5ProjectStartupActivity.initNamesWithRestart(project));
+    StartupManager.getInstance(project).runWhenProjectIsInitialized(() -> scheduleNamesUpdateWithReparse(project));
   }
 
-  private static void initNamesWithRestart(@NotNull Project project) {
+  private static void scheduleNamesUpdateWithReparse(@NotNull Project project) {
+    ApplicationManager.getApplication().executeOnPooledThread(() -> initNamesWithReparse(project));
+  }
+
+
+  private static void initNamesWithReparse(@NotNull Project project) {
     if (project.isDisposed()) {
       return;
     }
@@ -75,7 +80,7 @@ public class Perl5ProjectStartupActivity implements StartupActivity {
     }
     catch (ServiceNotReadyException e) {
       LOG.warn(e);
-      DumbService.getInstance(project).smartInvokeLater(() -> Perl5ProjectStartupActivity.initNamesWithRestart(project));
+      DumbService.getInstance(project).smartInvokeLater(() -> scheduleNamesUpdateWithReparse(project));
     }
   }
 }
