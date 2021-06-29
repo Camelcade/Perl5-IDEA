@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.project;
 import com.intellij.ProjectTopics;
 import com.intellij.ide.lightEdit.LightEdit;
 import com.intellij.openapi.Disposable;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.ReadAction;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressManager;
@@ -29,7 +30,6 @@ import com.intellij.openapi.roots.ModuleRootListener;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.PsiTreeChangeAdapter;
 import com.intellij.psi.PsiTreeChangeEvent;
-import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.messages.MessageBusConnection;
 import com.intellij.util.ui.update.MergingUpdateQueue;
 import com.intellij.util.ui.update.Update;
@@ -113,7 +113,7 @@ public class PerlNamesCache implements Disposable {
   }
 
   private void doUpdateSingleThread() {
-    if (myIsUpdating.compareAndSet(false, true)) {
+    if (!DumbService.isDumb(myProject) && myIsUpdating.compareAndSet(false, true)) {
       try {
         doUpdateCache();
       }
@@ -130,15 +130,10 @@ public class PerlNamesCache implements Disposable {
     if (LightEdit.owns(myProject)) {
       return;
     }
-    if (DumbService.isDumb(myProject)) {
-      queueUpdate();
-      return;
-    }
     ReadAction.nonBlocking(() -> {
       PerlTimeLogger logger = PerlTimeLogger.create(LOG);
       logger.debug("Starting to update names cache at");
 
-      GlobalSearchScope scope = GlobalSearchScope.allScope(myProject);
       PerlSubDeclarationIndex subDeclarationIndex = PerlSubDeclarationIndex.getInstance();
       Collection<String> declarationsNames = subDeclarationIndex.getAllNames(myProject);
       Set<String> subsSet = new HashSet<>(declarationsNames);
@@ -177,7 +172,9 @@ public class PerlNamesCache implements Disposable {
   }
 
   public void forceCacheUpdate() {
-    doUpdateSingleThread();
+    var application = ApplicationManager.getApplication();
+    LOG.assertTrue(!application.isDispatchThread() || application.isUnitTestMode());
+    doUpdateCache();
   }
 
   @Override
