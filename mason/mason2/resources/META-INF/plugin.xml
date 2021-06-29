@@ -32,7 +32,7 @@
   </extensions>
 
   <extensions defaultExtensionNs="com.intellij">
-    <errorHandler implementation="com.perl5.errorHandler.YoutrackErrorHandler"/>
+    <errorHandler implementation="com.perl5.lang.mason2.MasonYoutrackErrorHandler"/>
     <!--Mason2 settings -->
     <projectService serviceImplementation="com.perl5.lang.mason2.idea.configuration.MasonSettings"/>
 
