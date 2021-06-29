@@ -15,9 +15,6 @@
  */
 
 buildscript {
-  repositories {
-    maven { url 'http://dl.bintray.com/jetbrains/intellij-plugin-service' }
-  }
   dependencies{
     classpath 'org.codehaus.groovy.modules.http-builder:http-builder:0.7.1'
     classpath 'org.apache.httpcomponents:httpmime:4.5.11'
@@ -207,7 +204,7 @@ tasks.coveralls {
 }
 
 intellij {
-  def pluginList = ["PsiViewer:$psiViewerVersion", intelliLangPlugin,
+  def pluginList = [intelliLangPlugin,
                     project(':plugin'),
                     project(':lang.tt2'),
                     project(':lang.mojo'),
@@ -216,6 +213,10 @@ intellij {
                     project(':lang.mason.htmlmason'),
                     project(':lang.mason.mason2'),
   ]
+
+  if(!isCI){
+    pluginList.add("PsiViewer:$psiViewerVersion")
+  }
 
   def runWith = project.hasProperty("runWith") ? project.property("runWith") : ""
 
