@@ -31,7 +31,7 @@ dependencies{
 
 intellij {
   type 'IU'
-  intellij.plugins = ["PsiViewer:$psiViewerVersion", intelliLangPlugin, 'copyright', 'coverage', 'java']
+  intellij.plugins = [intelliLangPlugin, 'copyright', 'coverage', 'java']
 }
 
 prepareTestingSandbox{
