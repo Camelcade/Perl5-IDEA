@@ -250,7 +250,7 @@ public class PerlDebugThread extends Thread {
           }
           else {
             Notification notification = new Notification(
-              PerlBundle.message("perl.debugger.notification.group"),
+              PerlDebugProcess.PERL_DEBUGGER_NOTIFICATION_GROUP_ID,
               PerlBundle.message("perl.debugger.incorrect.version.title", DEBUG_PACKAGE),
               PerlBundle.message(
                 "perl.debugger.incorrect.version.message", DEBUG_PACKAGE, MODULE_VERSION_PREFIX,
