@@ -35,6 +35,7 @@ import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.actionSystem.LangDataKeys;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.application.WriteAction;
 import com.intellij.openapi.application.impl.NonBlockingReadActionImpl;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.module.Module;
@@ -64,7 +65,6 @@ import com.perl5.lang.perl.idea.run.prove.PerlTestRunConfiguration;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostHandler;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlRealVersionManagerHandler;
 import com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewTestUtil;
-import com.perl5.lang.perl.util.PerlRunUtil;
 import com.pty4j.util.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -162,9 +162,8 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
   }
 
   private void onSdkCreation(@NotNull Sdk sdk) {
-    PerlSdkTable.getInstance().addJdk(sdk, myPerlLightTestCaseDisposable);
+    disposeOnPerlTearDown(() -> WriteAction.run(() -> PerlSdkTable.getInstance().removeJdk(sdk)));
     PerlProjectManager.getInstance(getProject()).setProjectSdk(sdk);
-    PerlRunUtil.refreshSdkDirs(sdk, getProject());
   }
 
   protected @Nullable Sdk getSdk() {
