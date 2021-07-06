@@ -71,7 +71,6 @@ import static com.perl5.lang.perl.idea.run.debugger.PerlDebugProfileState.DEBUG_
 
 
 public class PerlDebugThread extends Thread {
-  static final boolean DEV_MODE = false;
   private static final Logger LOG = Logger.getInstance(PerlDebugThread.class);
   private final ExecutorService myExecutor = Executors.newSingleThreadExecutor();
   private final ExecutionResult myExecutionResult;
@@ -128,7 +127,7 @@ public class PerlDebugThread extends Thread {
 
   private void print(@NotNull @PropertyKey(resourceBundle = PATH_TO_BUNDLE) String key, @NotNull Object... params) {
     String textToPrint = PerlBundle.message(key, params);
-    LOG.debug("Printing: " + textToPrint);
+    LOG.debug("Printing: ", textToPrint);
     ((ConsoleView)myExecutionResult.getExecutionConsole()).print(
       textToPrint + "\n", ConsoleViewContentType.SYSTEM_OUTPUT);
   }
@@ -195,9 +194,7 @@ public class PerlDebugThread extends Thread {
       while (!myStop) {
         response.clear();
 
-        if (DEV_MODE) {
-          LOG.debug("Reading data");
-        }
+        LOG.debug("Reading data from the debugger");
 
         // reading bytes
         while (myInputStream != null) {
@@ -211,10 +208,6 @@ public class PerlDebugThread extends Thread {
           else {
             response.add((byte)dataByte);
           }
-        }
-
-        if (DEV_MODE) {
-          LOG.debug("Got response " + response.size() + "\n" + new String(response.toNativeArray(), StandardCharsets.UTF_8));
         }
 
         processResponse(response);
@@ -244,6 +237,7 @@ public class PerlDebugThread extends Thread {
 
   private void processResponse(TByteArrayList responseBytes) {
     final String response = new String(responseBytes.toNativeArray(), StandardCharsets.UTF_8);
+    LOG.debug("Got response: ", response);
 
     try {
       final PerlDebuggingEvent newEvent = myGson.fromJson(response, PerlDebuggingEvent.class);
@@ -298,15 +292,11 @@ public class PerlDebugThread extends Thread {
     string = string + "\n";
 
     try {
-      if (DEV_MODE) {
-        LOG.debug("Going to send string " + string);
-      }
+      LOG.debug("Going to send string " + string);
 
       lock.lock();
 
-      if (DEV_MODE) {
-        LOG.debug("Sent string " + string);
-      }
+      LOG.debug("Sent string " + string);
 
 
       myOutputStream.write(string.getBytes(StandardCharsets.UTF_8));
@@ -418,9 +408,7 @@ public class PerlDebugThread extends Thread {
   }
 
   public @Nullable VirtualFile loadRemoteSource(String filePath) {
-    if (DEV_MODE) {
-      LOG.debug("Loading file " + filePath);
-    }
+    LOG.debug("Loading file ", filePath);
     final Semaphore responseSemaphore = new Semaphore();
     responseSemaphore.down();
 
