@@ -16,10 +16,7 @@
 
 package com.perl5.lang.perl.idea.debugger;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonObject;
+import com.google.gson.*;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.ExecutionResult;
 import com.intellij.execution.actions.StopProcessAction;
@@ -247,40 +244,49 @@ public class PerlDebugThread extends Thread {
 
   private void processResponse(TByteArrayList responseBytes) {
     final String response = new String(responseBytes.toNativeArray(), StandardCharsets.UTF_8);
-    final PerlDebuggingEvent newEvent = myGson.fromJson(response, PerlDebuggingEvent.class);
 
-    if (newEvent != null) {
-      if (newEvent instanceof PerlDebuggingEventReady) {
-        if (((PerlDebuggingEventReady)newEvent).isValid()) {
-          isReady = true;
-          setUpDebugger();
-        }
-        else {
-          Notification notification = new Notification(
-            PerlBundle.message("perl.debugger.notification.group"),
-            PerlBundle.message("perl.debugger.incorrect.version.title", DEBUG_PACKAGE),
-            PerlBundle.message(
-              "perl.debugger.incorrect.version.message", DEBUG_PACKAGE, MODULE_VERSION_PREFIX, ((PerlDebuggingEventReady)newEvent).version),
-            NotificationType.ERROR
-          );
-          Project project = myDebugProfileState.getEnvironment().getProject();
-          if (myPerlDebugOptions instanceof PerlRemoteDebuggingConfiguration) {
-            Notifications.Bus.notify(notification, project);
+    try {
+      final PerlDebuggingEvent newEvent = myGson.fromJson(response, PerlDebuggingEvent.class);
+
+      if (newEvent != null) {
+        if (newEvent instanceof PerlDebuggingEventReady) {
+          if (((PerlDebuggingEventReady)newEvent).isValid()) {
+            isReady = true;
+            setUpDebugger();
           }
           else {
-            PerlRunUtil.addInstallActionsAndShow(
-              project, Objects.requireNonNull(PerlProjectManager.getSdk(project)),
-              Collections.singletonList(DEBUG_PACKAGE),
-              notification);
+            Notification notification = new Notification(
+              PerlBundle.message("perl.debugger.notification.group"),
+              PerlBundle.message("perl.debugger.incorrect.version.title", DEBUG_PACKAGE),
+              PerlBundle.message(
+                "perl.debugger.incorrect.version.message", DEBUG_PACKAGE, MODULE_VERSION_PREFIX,
+                ((PerlDebuggingEventReady)newEvent).version),
+              NotificationType.ERROR
+            );
+            Project project = myDebugProfileState.getEnvironment().getProject();
+            if (myPerlDebugOptions instanceof PerlRemoteDebuggingConfiguration) {
+              Notifications.Bus.notify(notification, project);
+            }
+            else {
+              PerlRunUtil.addInstallActionsAndShow(
+                project, Objects.requireNonNull(PerlProjectManager.getSdk(project)),
+                Collections.singletonList(DEBUG_PACKAGE),
+                notification);
+            }
+            setStop();
           }
-          setStop();
+        }
+        else {
+          newEvent.setDebugSession(mySession);
+          newEvent.setDebugThread(this);
+          myExecutor.execute(newEvent);
         }
       }
-      else {
-        newEvent.setDebugSession(mySession);
-        newEvent.setDebugThread(this);
-        myExecutor.execute(newEvent);
-      }
+    }
+    catch (JsonSyntaxException e) {
+      LOG.error("Error parsing JSON response: " + response, e);
+      print("perl.debug.error.parsing.response");
+      setStop();
     }
   }
 
