@@ -25,5 +25,6 @@
     <xdebugger.settings implementation="com.perl5.lang.perl.idea.debugger.PerlDebuggerSettings"/>
 
     <configurationType implementation="com.perl5.lang.perl.idea.run.debugger.remote.PerlRemoteDebuggingConfigurationType"/>
+    <notificationGroup displayType="BALLOON" id="PERL_DEBUGGER" bundle="messages.PerlBundle" key="perl.debugger.notification.group"/>
   </extensions>
 </idea-plugin>

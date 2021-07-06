@@ -46,6 +46,7 @@ import com.perl5.lang.perl.idea.debugger.breakpoints.PerlLineBreakpointType;
 import com.perl5.lang.perl.idea.run.PerlRunProfileState;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugOptions;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugProfileStateBase;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -57,6 +58,7 @@ public class PerlDebugProcess extends XDebugProcess {
   private final ExecutionResult myExecutionResult;
   private final PerlDebugThread myDebugThread;
   private final PerlRunProfileState myDebugProfileState;
+  @NonNls static final String PERL_DEBUGGER_NOTIFICATION_GROUP_ID = "PERL_DEBUGGER";
 
   public PerlDebugProcess(@NotNull XDebugSession session, PerlDebugProfileStateBase state, ExecutionResult executionResult) {
     super(session);
@@ -122,7 +124,7 @@ public class PerlDebugProcess extends XDebugProcess {
     }
     else {
       Notifications.Bus.notify(new Notification(
-        "PERL_DEBUGGER",
+        PERL_DEBUGGER_NOTIFICATION_GROUP_ID,
         PerlBundle.message("perl.run.pause.unavailable.title"),
         PerlBundle.message("perl.run.pause.unavailable.content"),
         NotificationType.INFORMATION
