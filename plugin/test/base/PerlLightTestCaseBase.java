@@ -2036,7 +2036,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     final List<UsageGroupingRuleProvider> providers = UsageGroupingRuleProvider.EP_NAME.getExtensionList();
     List<UsageGroupingRule> list = new ArrayList<>(providers.size());
     for (UsageGroupingRuleProvider provider : providers) {
-      ContainerUtil.addAll(list, provider.getActiveRules(getProject(), usageViewSettings));
+      ContainerUtil.addAll(list, provider.getActiveRules(getProject(), usageViewSettings, null));
     }
 
     list.sort(Comparator.comparingInt(UsageGroupingRule::getRank));
