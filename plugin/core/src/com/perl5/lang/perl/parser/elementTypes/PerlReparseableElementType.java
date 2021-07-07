@@ -86,7 +86,7 @@ public abstract class PerlReparseableElementType extends IReparseableElementType
       newChars);
 
     ASTNode result = PerlParserImpl.INSTANCE.parse(this, builder).getFirstChildNode();
-    logger.debug("Parsed: ", PerlTimeLogger.kb(newChars.length()), " kb of ", this);
+    logger.trace("Parsed: ", PerlTimeLogger.kb(newChars.length()), " kb of ", this);
     return result;
   }
 

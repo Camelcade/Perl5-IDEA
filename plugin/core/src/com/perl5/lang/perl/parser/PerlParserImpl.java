@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -52,7 +52,7 @@ public class PerlParserImpl extends PerlParserGenerated implements PerlParser {
   public void parseLight(IElementType root_, PsiBuilder builder_) {
     PerlTimeLogger logger = PerlTimeLogger.create(LOG);
     super.parseLight(root_, builder_);
-    logger.debug("Light parsed ", root_, " ", PerlTimeLogger.kb(builder_.getOriginalText().length()), " kb");
+    logger.trace("Light parsed ", root_, " ", PerlTimeLogger.kb(builder_.getOriginalText().length()), " kb");
   }
 
   @Override
