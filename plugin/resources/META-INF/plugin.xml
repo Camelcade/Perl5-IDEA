@@ -709,8 +709,6 @@
       <action id="perl5.FormatWithPerlTidy" class="com.perl5.lang.perl.idea.actions.PerlFormatWithPerlTidyAction"/>
       <action id="perl5.DeparseFile" class="com.perl5.lang.perl.idea.actions.PerlDeparseFileAction"/>
       <action id="perl5.sync.interpreter" class="com.perl5.lang.perl.idea.actions.PerlSynInterpreterAction"/>
-      <action id="perl5.perlbrew.createlib" class="com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewCreateLibraryAction"
-              icon="/icons/perlbrew.png"/>
     </group>
 
     <group id="perl5.install" text="Install" popup="true">
@@ -719,8 +717,6 @@
       <action id="perl5.install.with.cpan" class="com.perl5.lang.perl.idea.actions.PerlInstallPackagesWithCpanAction"/>
       <action id="perl5.intsall.cpanm" class="com.perl5.lang.perl.idea.actions.PerlInstallCpanmAction"/>
       <action id="perl5.install.perl" class="com.perl5.lang.perl.idea.sdk.versionManager.PerlInstallAction"/>
-      <action id="perl5.perlbrew.install.patchperl"
-              class="com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewInstallPatchPerlAction" icon="/icons/perlbrew.png"/>
     </group>
 
     <action id="Perl5.NewFile" class="com.perl5.lang.perl.idea.actions.PerlFileFromTemplateAction">

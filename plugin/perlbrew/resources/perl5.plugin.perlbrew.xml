@@ -21,4 +21,16 @@
   </extensions>
   <extensions defaultExtensionNs="com.intellij">
   </extensions>
+
+  <actions>
+    <action id="perl5.perlbrew.createlib" class="com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewCreateLibraryAction"
+            icon="/icons/perlbrew.png">
+      <add-to-group group-id="perl5.tools" anchor="last"/>
+    </action>
+
+    <action id="perl5.perlbrew.install.patchperl"
+            class="com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewInstallPatchPerlAction" icon="/icons/perlbrew.png">
+      <add-to-group group-id="perl5.install" anchor="last"/>
+    </action>
+  </actions>
 </idea-plugin>
