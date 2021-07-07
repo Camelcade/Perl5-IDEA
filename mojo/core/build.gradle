@@ -23,7 +23,7 @@ intellij{
 }
 
 dependencies{
-  compileOnly project(":plugin.core")
+  compileOnly project(":plugin:core")
 }
 
 task generateMojoliciousLexer(type: GenerateLexer) {

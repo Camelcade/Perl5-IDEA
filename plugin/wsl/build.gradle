@@ -20,5 +20,5 @@ intellij{
 }
 
 dependencies{
-  compileOnly project(":plugin.core")
+  compileOnly project(":plugin:core")
 }
