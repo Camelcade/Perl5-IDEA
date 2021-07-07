@@ -14,7 +14,7 @@
   ~ limitations under the License.
   -->
 
-<idea-plugin>
+<idea-plugin package="com.perl5.lang.perl.idea.configuration.module.idea">
     <dependencies>
         <plugin id="com.intellij.modules.java"/>
     </dependencies>
