@@ -15,18 +15,18 @@
  */
 
 dependencies{
-  compile project(":plugin.core")
-  compile project(":plugin.idea")
-  compile project(":plugin.profiler")
-  compile project(":plugin.coverage")
-  compile project(":plugin.debugger")
-  compile project(":plugin.copyright")
-  compile project(":plugin.intelliLang")
-  compile project(":plugin.docker")
-  compile project(":plugin.wsl")
-  compile project(":plugin.perlbrew")
-  compile project(":plugin.berrybrew")
-  compile project(":plugin.plenv")
+  compile project(":plugin:core")
+  compile project(":plugin:idea")
+  compile project(":plugin:profiler")
+  compile project(":plugin:coverage")
+  compile project(":plugin:debugger")
+  compile project(":plugin:copyright")
+  compile project(":plugin:intelliLang")
+  compile project(":plugin:docker")
+  compile project(":plugin:wsl")
+  compile project(":plugin:perlbrew")
+  compile project(":plugin:berrybrew")
+  compile project(":plugin:plenv")
 }
 
 intellij {

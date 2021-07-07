@@ -169,20 +169,20 @@ idea {
 }
 
 task jacocoMerge(type: JacocoMerge) {
-  dependsOn(subprojects.jacocoTestReport.dependsOn)
-  mustRunAfter(subprojects.jacocoTestReport.mustRunAfter)
+  dependsOn(allprojects.jacocoTestReport.dependsOn)
+  mustRunAfter(allprojects.jacocoTestReport.mustRunAfter)
   destinationFile = file("${buildDir}/jacoco/test.exec")
-  executionData = files(subprojects.jacocoTestReport.executionData)
+  executionData = files(allprojects.jacocoTestReport.executionData)
     .filter { f -> f.exists() }
 }
 
 task jacocoRootReport(type: JacocoReport, group: 'Coverage reports') {
-  description = 'Generates an aggregate report from all subprojects'
+  description = 'Generates an aggregate report from all projects'
   dependsOn jacocoMerge
 
-  additionalSourceDirs.setFrom files(subprojects.sourceSets.main.allSource.srcDirs)
-  sourceDirectories.setFrom files(subprojects.sourceSets.main.allSource.srcDirs)
-  classDirectories.setFrom files(subprojects.sourceSets.main.output)
+  additionalSourceDirs.setFrom files(allprojects.sourceSets.main.allSource.srcDirs)
+  sourceDirectories.setFrom files(allprojects.sourceSets.main.allSource.srcDirs)
+  classDirectories.setFrom files(allprojects.sourceSets.main.output)
   executionData jacocoMerge.destinationFile
 
   reports {
