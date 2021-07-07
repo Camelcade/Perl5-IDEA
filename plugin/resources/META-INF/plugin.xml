@@ -25,19 +25,22 @@
 
   <depends>com.intellij.modules.lang</depends>
 
-  <depends optional="true" config-file="perl-intellilang.xml">org.intellij.intelliLang</depends>
-  <depends optional="true" config-file="perl-idea.xml">com.intellij.modules.java</depends>
-  <depends optional="true" config-file="perl-copyright.xml">com.intellij.copyright</depends>
-  <depends optional="true" config-file="perl-coverage.xml">com.intellij.modules.coverage</depends>
-
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="/META-INF/perl-pod.xml" xpointer="xpointer(/idea-plugin/*)"/>
-  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="/META-INF/perl-berrybrew.xml" xpointer="xpointer(/idea-plugin/*)"/>
-  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="/META-INF/perl-debugger.xml" xpointer="xpointer(/idea-plugin/*)"/>
-  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="/META-INF/perl-perlbrew.xml" xpointer="xpointer(/idea-plugin/*)"/>
-  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="/META-INF/perl-plenv.xml" xpointer="xpointer(/idea-plugin/*)"/>
 
   <content>
+    <module name="perl5.plugin.copyright"/>
+    <module name="perl5.plugin.intelliLang"/>
+
+    <module name="perl5.plugin.idea"/>
+
+    <module name="perl5.plugin.berrybrew"/>
+    <module name="perl5.plugin.perlbrew"/>
+    <module name="perl5.plugin.plenv"/>
+
+    <module name="perl5.plugin.coverage"/>
+    <module name="perl5.plugin.debugger"/>
     <module name="perl5.plugin.profiler"/>
+
     <module name="perl5.plugin.docker"/>
     <module name="perl5.plugin.wsl"/>
   </content>
