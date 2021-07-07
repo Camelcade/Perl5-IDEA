@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+
 import org.jetbrains.grammarkit.tasks.GenerateLexer
 import org.jetbrains.grammarkit.tasks.GenerateParser
 
@@ -25,10 +26,12 @@ intellij{
   ]
 }
 
-dependencies{
-  compileOnly project(":plugin:core")
-  compileOnly project(":lang.mason.framework")
-  testCompile project(":plugin").sourceSets.test.output
+dependencies {
+  [
+    ":plugin:core",
+    ":lang.mason.framework"
+  ].each { compile project(it).sourceSets.main.output }
+  [":plugin"].each { testCompile project(it).sourceSets.test.output }
 }
 
 task generateHTMLMasonLexer(type: GenerateLexer) {

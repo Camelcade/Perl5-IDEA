@@ -26,9 +26,11 @@ intellij{
 }
 
 dependencies{
-  compileOnly project(":plugin:core")
-  compileOnly project(":lang.mason.framework")
-  testCompile project(":plugin").sourceSets.test.output
+  [
+    ":plugin:core",
+   ":lang.mason.framework"
+  ].each { compile project(it).sourceSets.main.output }
+  [":plugin"].each { testCompile project(it).sourceSets.test.output }
 }
 
 task generateMason2Lexer(type: GenerateLexer) {

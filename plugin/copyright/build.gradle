@@ -15,7 +15,7 @@
  */
 
 dependencies{
-  compileOnly project(":plugin:core")
+  [":plugin:core"].each { compile project(it).sourceSets.main.output }
 }
 
 intellij {
