@@ -13,14 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import org.jetbrains.grammarkit.tasks.GenerateLexer
-import org.jetbrains.grammarkit.tasks.GenerateParser
-
 dependencies{
-  compile project(":lang.mojo:core")
-  compile project(":lang.mojo:idea")
-  testCompile project(":plugin").sourceSets.test.output
+  [
+    ":lang.mojo:core",
+    ":lang.mojo:idea",
+  ].each {compile project(it).sourceSets.main.output}
+  [":plugin"].each { testCompile project(it).sourceSets.test.output }
 }
 
 intellij{

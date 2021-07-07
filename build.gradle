@@ -90,7 +90,10 @@ allprojects {
 
   def isPlugin = pluginProjectsNames.contains(project.name)
 
+  jar { onlyIf { isPlugin } }
   buildPlugin { onlyIf { isPlugin } }
+  prepareSandbox { onlyIf { isPlugin } }
+  prepareTestingSandbox { onlyIf { isPlugin } }
   patchPluginXml{ onlyIf { isPlugin } }
   buildSearchableOptions{ onlyIf { isPlugin } }
   publishPlugin{
@@ -157,6 +160,11 @@ pluginProjects.forEach {
     inputs.files(description, changes)
     pluginDescription(description.text)
     changeNotes(changes.text)
+  }
+
+  def projectModules = it.subprojects
+  it.jar {
+    from projectModules.sourceSets.main.output
   }
 }
 
