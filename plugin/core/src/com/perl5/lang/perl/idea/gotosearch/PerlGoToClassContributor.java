@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,23 +16,21 @@
 
 package com.perl5.lang.perl.idea.gotosearch;
 
-import com.intellij.navigation.ChooseByNameContributor;
 import com.intellij.navigation.GotoClassContributor;
 import com.intellij.navigation.NavigationItem;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.util.ArrayUtil;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
+import java.util.Collections;
 
 /**
  * GoToClassContributor looks up namespaces (packages names) - windows shortcut Ctrl+N
  */
-public class PerlGoToClassContributor implements ChooseByNameContributor, GotoClassContributor {
+public class PerlGoToClassContributor extends PerlChooseByNameContributor implements GotoClassContributor {
   @Override
   public @Nullable String getQualifiedName(NavigationItem navigationItem) {
     return navigationItem.getName();
@@ -44,19 +42,19 @@ public class PerlGoToClassContributor implements ChooseByNameContributor, GotoCl
   }
 
   @Override
-  public @NotNull String[] getNames(Project project, boolean b) {
-    return ArrayUtil.toStringArray(PerlPackageUtil.getKnownNamespaceNames(project));
+  protected @NotNull Collection<String> getNamesCollection(Project project, boolean includeNonProjectItems) {
+    return PerlPackageUtil.getKnownNamespaceNames(project);
   }
 
   @Override
-  public @NotNull NavigationItem[] getItemsByName(String packageName, String searchTerm, Project project, boolean includeNonProjectItems) {
+  protected @NotNull Collection<? extends NavigationItem> getItemsCollectionByName(String packageName,
+                                                                                   String pattern,
+                                                                                   Project project,
+                                                                                   boolean includeNonProjectItems) {
     if (PerlPackageUtil.MAIN_NAMESPACE_NAME.equals(packageName)) {
-      return NavigationItem.EMPTY_NAVIGATION_ITEM_ARRAY;
+      return Collections.emptyList();
     }
-    Collection<PerlNamespaceDefinitionElement> result = PerlPackageUtil.getNamespaceDefinitions(
-      project,
-      (includeNonProjectItems ? GlobalSearchScope.allScope(project) : GlobalSearchScope.projectScope(project)), packageName
-    );
-    return result.toArray(NavigationItem.EMPTY_NAVIGATION_ITEM_ARRAY);
+    var searchScope = includeNonProjectItems ? GlobalSearchScope.allScope(project) : GlobalSearchScope.projectScope(project);
+    return PerlPackageUtil.getNamespaceDefinitions(project, searchScope, packageName);
   }
 }

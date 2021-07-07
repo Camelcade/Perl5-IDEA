@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.psi;
 
+import com.intellij.navigation.NavigationItem;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.StubBasedPsiElement;
 import com.intellij.psi.util.PsiUtilCore;
@@ -36,8 +37,11 @@ import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.COLON;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.SIGNATURE_ELEMENT;
 
 
-public interface PerlVariableDeclarationElement
-  extends StubBasedPsiElement<PerlVariableDeclarationStub>, PerlIdentifierOwner, PerlCompositeElement, PerlVariableDeclaration {
+public interface PerlVariableDeclarationElement extends StubBasedPsiElement<PerlVariableDeclarationStub>,
+                                                        PerlIdentifierOwner,
+                                                        PerlCompositeElement,
+                                                        PerlVariableDeclaration,
+                                                        NavigationItem {
   /**
    * @return Returns declared variable object
    */

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,13 +16,18 @@
 
 package com.perl5.lang.perl.psi;
 
+import com.intellij.navigation.NavigationItem;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.properties.PerlIdentifierOwner;
 import com.perl5.lang.perl.psi.properties.PerlPackageMember;
 import com.perl5.lang.perl.psi.properties.PerlVariableNameElementContainer;
 
 
-public interface PerlGlobVariable extends PsiElement, PerlPackageMember, PerlVariableNameElementContainer, PerlIdentifierOwner {
+public interface PerlGlobVariable extends PsiElement,
+                                          PerlPackageMember,
+                                          PerlVariableNameElementContainer,
+                                          PerlIdentifierOwner,
+                                          NavigationItem {
   /**
    * Checks if this typeglob is left part of assignment
    *
