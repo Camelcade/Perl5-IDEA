@@ -89,10 +89,11 @@ allprojects {
   version = "${pluginVersion}${platformBranch}${pluginBuild}"
 
   def isPlugin = pluginProjectsNames.contains(project.name)
+  def isRoot = project == rootProject
 
-  jar { onlyIf { isPlugin } }
+  jar { onlyIf { isPlugin || isRoot } }
   buildPlugin { onlyIf { isPlugin } }
-  prepareSandbox { onlyIf { isPlugin } }
+  prepareSandbox { onlyIf { isPlugin || isRoot } }
   prepareTestingSandbox { onlyIf { isPlugin } }
   patchPluginXml{ onlyIf { isPlugin } }
   buildSearchableOptions{ onlyIf { isPlugin } }
