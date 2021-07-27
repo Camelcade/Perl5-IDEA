@@ -8,9 +8,9 @@ Lexicals:
 PerlValueDescriptor{
 	name='$array_ref'
 	type='ARRAY'
-	value='size = 3'
+	value='REF(...)'
 	ref_depth=1
-	size=3
+	size=1
 	expandable=true
 	blessed=false
 	is_utf=false
@@ -32,9 +32,9 @@ PerlValueDescriptor{
 PerlValueDescriptor{
 	name='$hash_ref'
 	type='HASH'
-	value='size = 2'
+	value='REF(...)'
 	ref_depth=1
-	size=2
+	size=1
 	expandable=true
 	blessed=false
 	is_utf=false
@@ -56,50 +56,50 @@ PerlValueDescriptor{
 PerlValueDescriptor{
 	name='$scalar_ref'
 	type='Foo::Bar=SCALAR'
-	value='"приветик"'
+	value='REF(...)'
 	ref_depth=1
-	size=0
-	expandable=false
-	blessed=true
-	is_utf=true
+	size=1
+	expandable=true
+	blessed=false
+	is_utf=false
 	fileno='null'
 	layers=null
 	tied_with=null}
 PerlValueDescriptor{
 	name='$stderr_ref'
 	type='GLOB'
-	value='*main::STDERR'
+	value='REF(...)'
 	ref_depth=1
-	size=2
+	size=1
 	expandable=true
 	blessed=false
 	is_utf=false
-	fileno='2'
-	layers=PerlLayersDescriptor{input=[PerlLayerDescriptor{name='unix', param='null', flags='2101760'}, PerlLayerDescriptor{name='perlio', param='null', flags='13177344'}], output=[PerlLayerDescriptor{name='unix', param='null', flags='2101760'}, PerlLayerDescriptor{name='perlio', param='null', flags='13177344'}]}
+	fileno='null'
+	layers=null
 	tied_with=null}
 PerlValueDescriptor{
 	name='$stdin_ref'
 	type='GLOB'
-	value='*main::STDIN'
+	value='REF(...)'
 	ref_depth=1
-	size=2
+	size=1
 	expandable=true
 	blessed=false
 	is_utf=false
-	fileno='0'
-	layers=PerlLayersDescriptor{input=[PerlLayerDescriptor{name='unix', param='null', flags='2098176'}, PerlLayerDescriptor{name='perlio', param='null', flags='13108224'}], output=null}
+	fileno='null'
+	layers=null
 	tied_with=null}
 PerlValueDescriptor{
 	name='$stdout_ref'
 	type='GLOB'
-	value='*main::STDOUT'
+	value='REF(...)'
 	ref_depth=1
-	size=2
+	size=1
 	expandable=true
 	blessed=false
 	is_utf=false
-	fileno='1'
-	layers=PerlLayersDescriptor{input=[PerlLayerDescriptor{name='unix', param='null', flags='2101760'}, PerlLayerDescriptor{name='perlio', param='null', flags='13242880'}], output=[PerlLayerDescriptor{name='unix', param='null', flags='2101760'}, PerlLayerDescriptor{name='perlio', param='null', flags='13242880'}]}
+	fileno='null'
+	layers=null
 	tied_with=null}
 PerlValueDescriptor{
 	name='$string'

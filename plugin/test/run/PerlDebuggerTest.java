@@ -360,7 +360,7 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
     sb.append("Args:").append(SEPARATOR_NEWLINES).append(serializePerlValueDescriptors(frameDescriptor.getArgs()));
     sb.append("Lexicals:").append(SEPARATOR_NEWLINES).append(serializePerlValueDescriptors(frameDescriptor.getLexicals()));
     sb.append("Globals:").append(SEPARATOR_NEWLINES).append(serializePerlValueDescriptors(frameDescriptor.getGlobals()));
-    return sb.toString();
+    return sb.toString().replaceAll("REF\\([^)]+\\)", "REF(...)");
   }
 
   private String serializePerlValueDescriptors(PerlValueDescriptor @NotNull [] descriptorsArray) {
