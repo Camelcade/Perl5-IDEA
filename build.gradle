@@ -86,7 +86,8 @@ allprojects {
   repositories {
     mavenCentral()
   }
-  version = "${pluginVersion}${platformBranch}${pluginBuild}"
+  version = pluginBranch ? "${pluginVersion}${pluginBranch}${pluginBuild}":
+            "${pluginVersion}${platformBranch}${pluginBuild}"
 
   def isPlugin = pluginProjectsNames.contains(project.name)
   def isRoot = project == rootProject
