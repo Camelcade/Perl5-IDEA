@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,11 +16,9 @@
 
 package com.perl5.lang.perl.idea.completion.providers;
 
-import com.intellij.codeInsight.completion.CompletionData;
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.patterns.StandardPatterns;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ProcessingContext;
@@ -45,12 +43,10 @@ public class PerlVariableNameCompletionProvider extends PerlCompletionProvider {
                              @NotNull CompletionResultSet resultSet) {
     PsiElement variableNameElement = parameters.getPosition();
 
-    PsiElement originalElement = parameters.getOriginalPosition();
     String namespaceName = null;
-    if (originalElement instanceof PerlVariableNameElement) {
-      resultSet = resultSet.withPrefixMatcher(
-        CompletionData.findPrefixDefault(originalElement, parameters.getOffset(), StandardPatterns.alwaysFalse()));
-      PsiElement variable = originalElement.getParent();
+    if (variableNameElement instanceof PerlVariableNameElement) {
+      resultSet = resultSet.withPrefixMatcher(getVariableNamePrefix(variableNameElement, parameters.getOffset()));
+      PsiElement variable = variableNameElement.getParent();
       if (variable instanceof PerlVariable) {
         namespaceName = ((PerlVariable)variable).getExplicitNamespaceName();
       }
@@ -105,5 +101,14 @@ public class PerlVariableNameCompletionProvider extends PerlCompletionProvider {
       timeLogger.debug("Filled with full qualified variables");
     }
     variableCompletionProcessor.logStatus(getClass());
+  }
+
+  private String getVariableNamePrefix(@NotNull PsiElement insertedElement, int offsetInFile) {
+    String substr = insertedElement.getText().substring(0, offsetInFile - insertedElement.getTextRange().getStartOffset());
+    if (substr.length() == 0 || Character.isWhitespace(substr.charAt(substr.length() - 1))) {
+      return "";
+    }
+
+    return substr.trim();
   }
 }
