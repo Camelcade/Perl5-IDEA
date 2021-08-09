@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.projectRoots.ProjectJdkTable;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.SdkTypeId;
@@ -33,6 +34,7 @@ import com.intellij.util.messages.MessageBus;
 import com.intellij.util.messages.Topic;
 import com.perl5.lang.perl.idea.PerlPathMacros;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
+import kotlinx.coroutines.repackaged.net.bytebuddy.implementation.bytecode.Throw;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -46,6 +48,7 @@ import java.util.List;
   storages = @Storage(PerlPathMacros.PERL5_APP_SETTINGS_FILE)
 )
 public class PerlSdkTable extends ProjectJdkTable implements PersistentStateComponent<Element> {
+  private static final Logger LOG = Logger.getInstance(PerlSdkTable.class);
   public static final Topic<Listener> PERL_TABLE_TOPIC = Topic.create("Perl Interpreters table", Listener.class);
 
   private static final String PERL = "perl";
@@ -63,8 +66,13 @@ public class PerlSdkTable extends ProjectJdkTable implements PersistentStateComp
 
     for (Element child : element.getChildren(PERL)) {
       ProjectJdkImpl sdk = new ProjectJdkImpl(null, null);
-      sdk.readExternal(child, this);
-      myInterpretersList.add(sdk);
+      try{
+        sdk.readExternal(child, this);
+        myInterpretersList.add(sdk);
+      }
+      catch (Throwable t){
+        LOG.warn("Error while loading sdk from " + child.getText(), t);
+      }
     }
   }
 

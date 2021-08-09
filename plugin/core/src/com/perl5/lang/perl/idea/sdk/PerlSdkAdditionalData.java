@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -85,7 +85,12 @@ public class PerlSdkAdditionalData implements SdkAdditionalData {
         versionManagerData,
         implementationData);
     }
-    return new UnknownSdkAdditionalData(source);
+    throw new RuntimeException("Error reading perl additional data: " +
+                               "hostData = " + hostData + "; " +
+                               "versionManagerData = " + versionManagerData + "; " +
+                               "implementationData = " + implementationData
+
+    );
   }
 
   private static class UnknownSdkAdditionalData implements SdkAdditionalData {
