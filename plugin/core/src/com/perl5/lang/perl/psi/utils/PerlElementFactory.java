@@ -186,6 +186,10 @@ public class PerlElementFactory {
     return Objects.requireNonNull(createFile(project, " ").getFirstChild());
   }
 
+  public static @NotNull PsiElement createComma(Project project) {
+    return Objects.requireNonNull(createFile(project, ",").getFirstChild());
+  }
+
   public static PerlFileImpl createFile(Project project, String text) {
     return createFile(project, text, PerlFileTypePackage.INSTANCE);
   }

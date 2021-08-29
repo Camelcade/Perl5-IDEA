@@ -857,4 +857,18 @@ public class PerlFormatterSpacingTest extends PerlFormatterTestCase {
 
   @Test
   public void testIssue1782() {doFormatTest();}
+
+  private void doTestOptionalComma(int optional_comma) {
+    getCustomSettings().OPTIONAL_COMMA = optional_comma;
+    doTestSingleSource("optionalComma");
+  }
+
+  @Test
+  public void testOptionalCommaBeforeNewlineForce() {doTestOptionalComma(FORCE);}
+
+  @Test
+  public void testOptionalCommaBeforeNewlineSuppress() {doTestOptionalComma(SUPPRESS);}
+
+  @Test
+  public void testOptionalCommaBeforeNewlineAsIs() {doTestOptionalComma(WHATEVER);}
 }
