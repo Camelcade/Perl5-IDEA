@@ -41,6 +41,8 @@ import java.util.regex.Pattern;
 public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeStyleSettings.OptionalConstructions, PerlElementTypes {
   private static final Pattern ASCII_IDENTIFIER_PATTERN = Pattern.compile("[_a-zA-Z][_\\w]*");
   private static final Pattern ASCII_BARE_STRING_PATTERN = Pattern.compile("-?[_a-zA-Z][_\\w]*");
+  private static final Pattern NEWLINE_BEFORE_RIGHT_PAREN_PATTERN =
+    Pattern.compile("\\r\\n|[\\n\\r\\u2028\\u2029\\u0085]\\s*[)}\\]]$", Pattern.DOTALL);
 
   protected final Project myProject;
   protected final PerlCodeStyleSettings myPerlSettings;
@@ -352,8 +354,53 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
     }
   }
 
+  @Override
+  public void visitCommaSequenceExpr(@NotNull PsiPerlCommaSequenceExpr o) {
+    if (!myRange.contains(o.getTextRange())) {
+      return;
+    }
+    if (myPerlSettings.OPTIONAL_COMMA == FORCE) {
+      processAddCommaEndOfExpr(o);
+    }
+    else if (myPerlSettings.OPTIONAL_COMMA == SUPPRESS) {
+      processSuppressCommaEndOfExpr(o);
+    }
+    super.visitCommaSequenceExpr(o);
+  }
+
+  protected void processAddCommaEndOfExpr(PsiElement o) {
+    boolean isFoundNewline = NEWLINE_BEFORE_RIGHT_PAREN_PATTERN.matcher(
+      ElementManipulators.getValueText(o.getParent())
+    ).find();
+
+    if (isFoundNewline) {
+      PsiElement lastChild = o.getLastChild();
+      if (isInHashOrArray(o) && lastChild.getNode().getElementType() != COMMA) {
+        insertElementAfter(PerlElementFactory.createComma(myProject), lastChild);
+      }
+    }
+    else {
+      processSuppressCommaEndOfExpr(o);
+    }
+  }
+
+  protected void processSuppressCommaEndOfExpr(PsiElement o) {
+    PsiElement lastChild = o.getLastChild();
+    if (lastChild.getNode().getElementType() == COMMA) {
+      removeElement(lastChild);
+    }
+  }
+
   protected void unquoteString(PerlString o) {
     replaceElement(o, PerlElementFactory.createBareString(myProject, ElementManipulators.getValueText(o)));
+  }
+
+  protected boolean isInHashOrArray(PsiElement o) {
+    PsiElement parent = o.getParent();
+    return parent instanceof PsiPerlParenthesisedExpr ||
+           parent instanceof PsiPerlParenthesisedCallArguments ||
+           parent instanceof PsiPerlAnonHash ||
+           parent instanceof PsiPerlAnonArray;
   }
 
   protected static boolean isStringSimple(PerlString o) {

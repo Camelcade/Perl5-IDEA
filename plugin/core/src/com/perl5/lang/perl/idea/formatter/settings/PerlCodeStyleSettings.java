@@ -39,6 +39,8 @@ public class PerlCodeStyleSettings extends CustomCodeStyleSettings {
 
   public int OPTIONAL_PARENTHESES = WHATEVER;
 
+  public int OPTIONAL_COMMA = WHATEVER;
+
   public int MAIN_FORMAT = WHATEVER;
 
   public boolean SPACE_AFTER_VARIABLE_DECLARATION_KEYWORD = true;

@@ -47,6 +47,7 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
   private static final String GROUP_COMMENT = CodeStyleSettingsCustomizableOptions.getInstance().WRAPPING_COMMENTS;
   private static final String GROUP_LIST = CodeStyleSettingsCustomizableOptions.getInstance().WRAPPING_ARRAY_INITIALIZER;
   private static final String GROUP_ATTRIBUTES_WRAP = PerlBundle.message("perl.formatting.wrap.attributes");
+  private static final String GROUP_COMMA = PerlBundle.message("perl.formatting.comma.after.hash.value");
 
   private static final String DEFAULT_CODE_SAMPLE = PerlBundle.message("perl.code.sample.nyi");
   private static final String SPACING_CODE_SAMPLE = readCodeSample("spaces");
@@ -319,6 +320,12 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
                                 PerlBundle.message("perl.formatting.main.format"),
                                 customizableOptions.SPACES_OTHER,
                                 OPTIONS_MAIN_FORMAT);
+
+      consumer.showCustomOption(PerlCodeStyleSettings.class,
+                                "OPTIONAL_COMMA",
+                                "Before newline of hash/array",
+                                GROUP_COMMA,
+                                OPTIONS_DEFAULT);
     }
   }
 
