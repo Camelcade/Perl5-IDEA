@@ -38,24 +38,24 @@ intellij {
 
 prepareTestingSandbox{
   inputs.dir('scripts')
-  outputs.dir("$it.destinationDir/$intellij.pluginName/perl/")
+  outputs.dir("$it.destinationDir/${intellij.pluginName.get()}/perl/")
 }
 
 prepareSandbox {
   inputs.dir('scripts')
-  outputs.dir("$it.destinationDir/$intellij.pluginName/perl/")
+  outputs.dir("$it.destinationDir/${intellij.pluginName.get()}/perl/")
 }
 
 project.afterEvaluate {
   prepareSandbox.doLast {
-    def targetPath = "$it.destinationDir/$intellij.pluginName/perl/"
+    def targetPath = "$it.destinationDir/${intellij.pluginName.get()}/perl/"
     copy {
       from 'scripts'
       into targetPath
     }
   }
   prepareTestingSandbox.doLast {
-    def targetPath = "$it.destinationDir/$intellij.pluginName/perl/"
+    def targetPath = "$it.destinationDir/${intellij.pluginName.get()}/perl/"
     copy {
       from 'scripts'
       into targetPath
