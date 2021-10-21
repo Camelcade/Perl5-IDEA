@@ -54,10 +54,6 @@ def pluginProjects = allprojects.findAll {
 allprojects {
   apply plugin: 'org.jetbrains.grammarkit'
 
-  grammarKit {
-    grammarKitRelease = "2021.1.2"
-  }
-
   apply plugin: 'jacoco'
 
   apply plugin: 'java'

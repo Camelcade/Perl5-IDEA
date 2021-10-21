@@ -15,7 +15,7 @@
  */
 
 
-import org.jetbrains.grammarkit.tasks.GenerateLexer
+import org.jetbrains.grammarkit.tasks.GenerateLexerTask
 
 intellij{
   type.set('IC')
@@ -33,7 +33,7 @@ dependencies {
   [":plugin"].each { testImplementation project(it).sourceSets.test.output }
 }
 
-task generateHTMLMasonLexer(type: GenerateLexer) {
+task generateHTMLMasonLexer(type: GenerateLexerTask) {
   source = "grammar/HTMLMason.flex"
   targetDir = "gen/com/perl5/lang/htmlmason/lexer/"
   targetClass = "HTMLMasonLexer"

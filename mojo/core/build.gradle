@@ -15,7 +15,7 @@
  */
 
 
-import org.jetbrains.grammarkit.tasks.GenerateLexer
+import org.jetbrains.grammarkit.tasks.GenerateLexerTask
 
 intellij{
   type.set('IC')
@@ -26,7 +26,7 @@ dependencies{
   [":plugin:core"].each { compileOnly project(it).sourceSets.main.output }
 }
 
-task generateMojoliciousLexer(type: GenerateLexer) {
+task generateMojoliciousLexer(type: GenerateLexerTask) {
   source = "grammar/Mojolicious.flex"
   targetDir = "gen/com/perl5/lang/mojolicious/lexer/"
   targetClass = "MojoliciousLexer"

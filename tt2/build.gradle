@@ -14,29 +14,29 @@
  * limitations under the License.
  */
 
-import org.jetbrains.grammarkit.tasks.GenerateLexer
-import org.jetbrains.grammarkit.tasks.GenerateParser
+import org.jetbrains.grammarkit.tasks.GenerateLexerTask
+import org.jetbrains.grammarkit.tasks.GenerateParserTask
 
-intellij{
+intellij {
   type.set('IC')
   plugins = [project(':plugin'), 'java']
 }
 
-dependencies{
+dependencies {
   [":plugin:core"].each { compileOnly project(it).sourceSets.main.output }
   [":plugin"].each { testImplementation project(it).sourceSets.test.output }
 }
 
-task generateTT2Parser(type: GenerateParser) {
+task generateTT2Parser(type: GenerateParserTask) {
   source = "grammar/TemplateToolkit.bnf"
   pathToParser = '/com/perl5/lang/tt2/parser/TemplateToolkitParserGenerated.java'
   pathToPsiRoot = '/com/perl5/lang/tt2/psi'
-  targetRoot = genRoot
+  targetRoot = genRoot.canonicalPath
   purgeOldFiles = true
 }
 
 
-task generateTT2Lexer(type: GenerateLexer) {
+task generateTT2Lexer(type: GenerateLexerTask) {
   dependsOn generateTT2Parser
   source = "grammar/TemplateToolkit.flex"
   targetDir = "gen/com/perl5/lang/tt2/lexer/"

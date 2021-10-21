@@ -15,7 +15,7 @@
  */
 
 
-import org.jetbrains.grammarkit.tasks.GenerateLexer
+import org.jetbrains.grammarkit.tasks.GenerateLexerTask
 
 intellij{
   type.set('IC')
@@ -33,7 +33,7 @@ dependencies{
   [":plugin"].each { testImplementation project(it).sourceSets.test.output }
 }
 
-task generateMason2Lexer(type: GenerateLexer) {
+task generateMason2Lexer(type: GenerateLexerTask) {
   source = "grammar/Mason2.flex"
   targetDir = "gen/com/perl5/lang/mason2/lexer/"
   targetClass = "Mason2TemplatingLexer"

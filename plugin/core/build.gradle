@@ -14,48 +14,48 @@
  * limitations under the License.
  */
 
-import org.jetbrains.grammarkit.tasks.GenerateLexer
-import org.jetbrains.grammarkit.tasks.GenerateParser
+import org.jetbrains.grammarkit.tasks.GenerateLexerTask
+import org.jetbrains.grammarkit.tasks.GenerateParserTask
 
 intellij {
   type.set('IC')
   intellij.plugins = ['java']
 }
 
-task generatePerl5Parser(type: GenerateParser) {
+task generatePerl5Parser(type: GenerateParserTask) {
   source = "grammar/Perl5.bnf"
   pathToParser = '/com/perl5/lang/perl/parser/PerlParserGenerated.java'
   pathToPsiRoot = '/com/perl5/lang/perl/psi'
 }
 
-task generatePodParser(type: GenerateParser) {
+task generatePodParser(type: GenerateParserTask) {
   source = "grammar/Pod.bnf"
   pathToParser = '/com/perl5/lang/pod/parser/PodParserGenerated.java'
   pathToPsiRoot = '/com/perl5/lang/pod/psi'
 }
 
 
-task generatePerlLexer(type: GenerateLexer) {
+task generatePerlLexer(type: GenerateLexerTask) {
   dependsOn generatePerl5Parser
   source = "grammar/Perl.flex"
   targetDir = "gen/com/perl5/lang/perl/lexer/"
   targetClass = "PerlLexer"
 }
 
-task generatePodLexer(type: GenerateLexer) {
+task generatePodLexer(type: GenerateLexerTask) {
   dependsOn generatePodParser
   source = "grammar/Pod.flex"
   targetDir = "gen/com/perl5/lang/pod/lexer/"
   targetClass = "PodLexerGenerated"
 }
 
-tasks.withType(GenerateLexer).each {
+tasks.withType(GenerateLexerTask).each {
   it.skeleton = rootProject.file(lexer_skeleton)
   it.purgeOldFiles = true
 }
 
-tasks.withType(GenerateParser).each {
-  it.targetRoot = genRoot
+tasks.withType(GenerateParserTask).each {
+  it.targetRoot = genRoot.canonicalPath
   it.purgeOldFiles = true
 }
 

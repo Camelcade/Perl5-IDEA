@@ -15,7 +15,7 @@
  */
 
 
-import org.jetbrains.grammarkit.tasks.GenerateLexer
+import org.jetbrains.grammarkit.tasks.GenerateLexerTask
 
 intellij{
   type.set('IC')
@@ -27,7 +27,7 @@ dependencies{
   [":plugin"].each { testImplementation project(it).sourceSets.test.output }
 }
 
-task generateEmbeddedPerlLexer(type: GenerateLexer) {
+task generateEmbeddedPerlLexer(type: GenerateLexerTask) {
   source = "grammar/EmbeddedPerl.flex"
   targetDir = "gen/com/perl5/lang/embedded/lexer/"
   targetClass = "EmbeddedPerlLexer"
