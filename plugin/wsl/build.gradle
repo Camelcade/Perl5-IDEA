@@ -20,5 +20,5 @@ intellij{
 }
 
 dependencies{
-  [":plugin:core"].each { compile project(it).sourceSets.main.output }
+  [":plugin:core"].each { implementation project(it).sourceSets.main.output }
 }

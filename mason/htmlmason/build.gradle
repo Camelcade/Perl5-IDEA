@@ -30,8 +30,8 @@ dependencies {
   [
     ":plugin:core",
     ":lang.mason.framework"
-  ].each { compile project(it).sourceSets.main.output }
-  [":plugin"].each { testCompile project(it).sourceSets.test.output }
+  ].each { implementation project(it).sourceSets.main.output }
+  [":plugin"].each { testImplementation project(it).sourceSets.test.output }
 }
 
 task generateHTMLMasonLexer(type: GenerateLexer) {

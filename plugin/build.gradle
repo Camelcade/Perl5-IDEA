@@ -28,7 +28,7 @@ dependencies{
     ":plugin:perlbrew",
     ":plugin:berrybrew",
     ":plugin:plenv",
-  ].each {compile project(it).sourceSets.main.output}
+  ].each { implementation project(it).sourceSets.main.output }
 }
 
 intellij {

@@ -23,8 +23,8 @@ intellij{
 }
 
 dependencies{
-  [":plugin:core"].each { compile project(it).sourceSets.main.output }
-  [":plugin"].each { testCompile project(it).sourceSets.test.output }
+  [":plugin:core"].each { implementation project(it).sourceSets.main.output }
+  [":plugin"].each { testImplementation project(it).sourceSets.test.output }
 }
 
 task generateTT2Parser(type: GenerateParser) {
