@@ -71,7 +71,7 @@ public class PerlHierarchyBrowser extends TypeHierarchyBrowserBase {
 
   @Override
   protected void createTrees(@NotNull Map<? super String, ? super JTree> trees) {
-    trees.put(getSubtypesHierarchyType(), createTree(true));
+    trees.put(getSupertypesHierarchyType(), createTree(true));
     trees.put(getSubtypesHierarchyType(), createTree(true));
     trees.put(getTypeHierarchyType(), createTree(true));
   }
