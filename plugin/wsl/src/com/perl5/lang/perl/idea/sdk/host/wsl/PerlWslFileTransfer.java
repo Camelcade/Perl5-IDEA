@@ -19,7 +19,6 @@ package com.perl5.lang.perl.idea.sdk.host.wsl;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.process.ProcessAdapter;
 import com.intellij.execution.process.ProcessEvent;
-import com.intellij.execution.process.ProcessOutput;
 import com.intellij.execution.wsl.WSLDistribution;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
@@ -66,7 +65,7 @@ class PerlWslFileTransfer extends PerlHostFileTransfer<PerlWslData> {
     remotePath = FileUtil.toSystemIndependentName(remotePath);
 
     try {
-      ProcessOutput output = distribution.copyFromWsl(
+      distribution.copyFromWsl(
         remotePath, localPath, ContainerUtil.newArrayList("--verbose", "--delete-before", "--exclude", "'*.so'", "--delete"),
         it -> it.addProcessListener(
           new ProcessAdapter() {
@@ -78,37 +77,29 @@ class PerlWslFileTransfer extends PerlHostFileTransfer<PerlWslData> {
               }
             }
           }));
-      int exitCode = output.getExitCode();
-      if (exitCode == 0) {
-        return;
-      }
-
-      LOG.warn("Error while copying: " + remotePath + "; Exit code: " + exitCode + "; Stderr: " + output.getStderr());
-      if (exitCode == 127) {
-        NOTIFICATIONS_QUEUE.queue(Update.create(this, () -> {
-          AnAction action = ActionManagerEx.getInstanceEx().getAction("perl5.sync.interpreter");
-          Notification notification = new Notification(
-            PerlWslBundle.message("perl.host.handler.wsl.notification.group"),
-            PerlWslBundle.message("perl.host.handler.wsl.missing.rsync.title"),
-            PerlWslBundle.message("perl.host.handler.wsl.missing.rsync.message"),
-            NotificationType.ERROR
-          );
-          Notifications.Bus.notify(notification.addAction(
-            new DumbAwareAction(action.getTemplatePresentation().getText()) {
-              @Override
-              public void actionPerformed(@NotNull AnActionEvent e) {
-                notification.expire();
-                action.update(e);
-                if (e.getPresentation().isEnabled()) {
-                  action.actionPerformed(e);
-                }
-              }
-            }));
-        }));
-      }
     }
     catch (ExecutionException e) {
-      throw new IOException(e);
+      LOG.warn("Error while copying: " + remotePath + "; message: " + e.getMessage());
+      NOTIFICATIONS_QUEUE.queue(Update.create(this, () -> {
+        AnAction action = ActionManagerEx.getInstanceEx().getAction("perl5.sync.interpreter");
+        Notification notification = new Notification(
+          PerlWslBundle.message("perl.host.handler.wsl.notification.group"),
+          PerlWslBundle.message("perl.host.handler.wsl.missing.rsync.title"),
+          PerlWslBundle.message("perl.host.handler.wsl.missing.rsync.message"),
+          NotificationType.ERROR
+        );
+        Notifications.Bus.notify(notification.addAction(
+          new DumbAwareAction(action.getTemplatePresentation().getText()) {
+            @Override
+            public void actionPerformed(@NotNull AnActionEvent e) {
+              notification.expire();
+              action.update(e);
+              if (e.getPresentation().isEnabled()) {
+                action.actionPerformed(e);
+              }
+            }
+          }));
+      }));
     }
   }
 
