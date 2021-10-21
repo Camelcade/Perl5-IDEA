@@ -21,7 +21,7 @@ dependencies{
 }
 
 intellij {
-  type 'IC'
+  type.set('IC')
   intellij.plugins = ['java']
 }
 

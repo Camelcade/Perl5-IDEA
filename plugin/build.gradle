@@ -32,7 +32,7 @@ dependencies{
 }
 
 intellij {
-  type 'IU'
+  type.set('IU')
   intellij.plugins = [intelliLangPlugin, 'copyright', 'coverage', 'java']
 }
 

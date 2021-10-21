@@ -16,10 +16,9 @@
 
 
 import org.jetbrains.grammarkit.tasks.GenerateLexer
-import org.jetbrains.grammarkit.tasks.GenerateParser
 
 intellij{
-  type 'IC'
+  type.set('IC')
   plugins = [project(':plugin'),
              project(':lang.mason.framework'),
              'java'

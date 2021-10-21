@@ -19,6 +19,6 @@ dependencies{
 }
 
 intellij {
-  type 'IC'
+  type.set('IC')
 }
 

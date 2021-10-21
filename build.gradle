@@ -90,7 +90,7 @@ allprojects {
   repositories {
     mavenCentral()
   }
-  version = pluginBranch ? "${pluginVersion}${pluginBranch}${pluginBuild}":
+  version = pluginBranch ? "${pluginVersion}${pluginBranch}${pluginBuild}" :
             "${pluginVersion}${platformBranch}${pluginBuild}"
 
   def isPlugin = pluginProjectsNames.contains(project.name)
@@ -100,16 +100,16 @@ allprojects {
   buildPlugin { onlyIf { isPlugin } }
   prepareSandbox { onlyIf { isPlugin || isRoot } }
   prepareTestingSandbox { onlyIf { isPlugin } }
-  patchPluginXml{ onlyIf { isPlugin } }
-  buildSearchableOptions{ onlyIf { isPlugin } }
+  patchPluginXml { onlyIf { isPlugin } }
+  buildSearchableOptions { onlyIf { isPlugin } }
   publishPlugin{
     onlyIf {isPlugin}
     token = project.findProperty('jbToken') ?: ''
   }
 
   intellij {
-    version "${platformVersion}${platformBranch}${platformBuild}"
-    updateSinceUntilBuild = true
+    version.set("${platformVersion}${platformBranch}${platformBuild}")
+    updateSinceUntilBuild.set(true)
 
     if (project.hasProperty('idea_sandbox')) {
       sandboxDirectory "${project.buildDir}/${project.idea_sandbox}"
@@ -164,8 +164,8 @@ pluginProjects.forEach {
   def changes = it.file(changesFile)
   it.patchPluginXml {
     inputs.files(description, changes)
-    pluginDescription(description.text)
-    changeNotes(changes.text)
+    pluginDescription.set(description.text)
+    changeNotes.set(changes.text)
   }
 
   def projectModules = it.subprojects
@@ -235,20 +235,20 @@ intellij {
   def runWith = project.hasProperty("runWith") ? project.property("runWith") : ""
 
   if( runWith == 'CL') {
-    type 'CL'
-    version = clionVersion
+    type.set('CL')
+    version.set(clionVersion)
   }
   else if( runWith == 'PC') {
-    type 'PC'
-    version = pycharmVersion
+    type.set('PC')
+    version.set(pycharmVersion)
   }
-  else if( runWith == 'PY'){
-    type 'PY'
-    version = pycharmVersion
+  else if( runWith == 'PY') {
+    type.set('PY')
+    version.set(pycharmVersion)
     pluginList.addAll(['Docker', 'remote-run'])
   }
   else{
-    type 'IU'
+    type.set('IU')
     pluginList.addAll(['coverage', 'Docker', 'remote-run'])
   }
   if (project.hasProperty('idea_path')) {
