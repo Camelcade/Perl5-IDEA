@@ -17,7 +17,7 @@ dependencies{
   [
     ":plugin:core",
     ":lang.mojo:core"
-  ].each { implementation project(it).sourceSets.main.output }
+  ].each { compileOnly project(it).sourceSets.main.output }
 }
 
 intellij {
