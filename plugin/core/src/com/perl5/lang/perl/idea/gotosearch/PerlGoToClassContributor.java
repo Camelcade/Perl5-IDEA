@@ -20,6 +20,7 @@ import com.intellij.navigation.GotoClassContributor;
 import com.intellij.navigation.NavigationItem;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.search.GlobalSearchScope;
+import com.perl5.lang.perl.psi.properties.PerlIdentifierOwner;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -33,7 +34,7 @@ import java.util.Collections;
 public class PerlGoToClassContributor extends PerlChooseByNameContributor implements GotoClassContributor {
   @Override
   public @Nullable String getQualifiedName(NavigationItem navigationItem) {
-    return navigationItem.getName();
+    return navigationItem instanceof PerlIdentifierOwner ? navigationItem.getName(): null;
   }
 
   @Override
