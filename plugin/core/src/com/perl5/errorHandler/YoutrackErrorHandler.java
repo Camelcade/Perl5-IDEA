@@ -16,6 +16,8 @@
 
 package com.perl5.errorHandler;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.intellij.diagnostic.DiagnosticBundle;
 import com.intellij.diagnostic.IdeErrorsDialog;
 import com.intellij.ide.BrowserUtil;
@@ -38,6 +40,7 @@ import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.util.PerlPluginUtil;
 import org.apache.http.Consts;
+import org.apache.http.client.entity.EntityBuilder;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
@@ -53,22 +56,21 @@ import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.regex.PatternSyntaxException;
 
 import static com.intellij.openapi.diagnostic.SubmittedReportInfo.SubmissionStatus.FAILED;
 import static com.intellij.openapi.diagnostic.SubmittedReportInfo.SubmissionStatus.NEW_ISSUE;
 import static com.intellij.openapi.util.text.StringUtil.isEmpty;
+import static com.perl5.errorHandler.YoutrackApi.YoutrackIssue;
+import static com.perl5.errorHandler.YoutrackApi.YoutrackIssueResponse;
 
 public class YoutrackErrorHandler extends ErrorReportSubmitter {
-  public static final String PROJECT = "CAMELCADE";
   private static final Logger LOGGER = Logger.getInstance(YoutrackErrorHandler.class);
-  @NonNls
-  private static final String SERVER_URL = "https://camelcade.myjetbrains.com/youtrack/";
-  private static final String SERVER_REST_URL = SERVER_URL + "rest/";
-  private static final String SERVER_ISSUE_URL = SERVER_REST_URL + "issue";
-  private static final String LOGIN_URL = SERVER_REST_URL + "user/login";
+  private static final @NonNls String SERVER_URL = "https://camelcade.myjetbrains.com/youtrack";
+  private static final String SERVER_REST_URL = SERVER_URL + "/api";
+  private static final String ISSUES_REST_URL = SERVER_REST_URL + "/issues";
+  private static final String SERVER_ISSUE_URL = ISSUES_REST_URL + "?fields=idReadable,id";
+  private static final String ACCESS_TOKEN = "Bearer perm:YXV0b3JlcG9ydGVy.NjEtMA==.iG2Zu7rMOzfjaGny7gFHyrOf9NEMCA";
+
 
   @Override
   public @NotNull String getReportActionText() {
@@ -120,98 +122,131 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
       ;
 
       Throwable throwable = e.getThrowable();
-      if (throwable instanceof ExceptionWithAttachments) {
-        ContainerUtil.addAll(attachments, ((ExceptionWithAttachments)throwable).getAttachments());
+
+      while (throwable != null) {
+        if (throwable instanceof ExceptionWithAttachments) {
+          ContainerUtil.addAll(attachments, ((ExceptionWithAttachments)throwable).getAttachments());
+        }
+        throwable = throwable.getCause();
       }
     }
 
-    String result = submit(description, descBuilder.toString(), PerlPluginUtil.getPluginVersion(), attachments);
-    LOGGER.info("Error submitted, response: " + result);
+    String issueNumber = submit(description, descBuilder.toString(), attachments);
+    LOGGER.info("Error submitted, response: " + issueNumber);
 
-    if (result == null) {
+    if (issueNumber == null) {
       return new SubmittedReportInfo(SERVER_ISSUE_URL, "", FAILED);
     }
 
-    String ResultString = null;
-    try {
-      Pattern regex = Pattern.compile("id=\"([^\"]+)\"", Pattern.DOTALL | Pattern.MULTILINE);
-      Matcher regexMatcher = regex.matcher(result);
-      if (regexMatcher.find()) {
-        ResultString = regexMatcher.group(1);
-      }
-    }
-    catch (PatternSyntaxException ex) {
-      // Syntax error in the regular expression
-    }
-
-    if (ResultString == null) {
-      return new SubmittedReportInfo(SERVER_ISSUE_URL, "", FAILED);
-    }
-
-
-    final SubmittedReportInfo reportInfo = new SubmittedReportInfo(SERVER_URL + "issue/" + ResultString, ResultString, NEW_ISSUE);
+    final SubmittedReportInfo reportInfo = new SubmittedReportInfo(SERVER_URL + "/issue/" + issueNumber, issueNumber, NEW_ISSUE);
 
     popupResultInfo(reportInfo, project);
 
     return reportInfo;
   }
 
+  /**
+   * @return human-readable issue number or null if failed to create one
+   */
   public @Nullable String submit(@Nullable String desc,
                                  @NotNull String body,
-                                 @Nullable String affectedVersion,
                                  @NotNull List<Attachment> attachments) {
     if (isEmpty(desc)) {
       throw new RuntimeException(DiagnosticBundle.message("error.report.failure.message"));
     }
 
+    var issueResponse = createIssue(desc, body);
+    if (issueResponse == null) {
+      return null;
+    }
+
+    attachFiles(issueResponse, attachments);
+
+    return issueResponse.idReadable;
+  }
+
+  private void attachFiles(@NotNull YoutrackIssueResponse issueResponse, @NotNull List<Attachment> attachments) {
+    if (attachments.isEmpty()) {
+      return;
+    }
+
+    MultipartEntityBuilder entityBuilder = MultipartEntityBuilder.create();
+
+    ContentType contentType = ContentType.create("text/plain", Consts.UTF_8);
+    for (Attachment it : attachments) {
+      entityBuilder.addBinaryBody("attachments[]", it.getBytes(), contentType, it.getName());
+    }
+
     try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
-      // logging on
-      HttpPost loginPost = new HttpPost(LOGIN_URL);
-      MultipartEntityBuilder builder = MultipartEntityBuilder.create()
-        .addTextBody("login", "autoreporter")
-        .addTextBody("password", "fdnjhtgjhn");
-      loginPost.setEntity(builder.build());
+      HttpPost issuePost = new HttpPost(String.join("/", ISSUES_REST_URL, issueResponse.id, "attachments"));
+      issuePost.setEntity(entityBuilder.build());
+      issuePost.addHeader("Authorization", ACCESS_TOKEN);
+
       CloseableHttpResponse response;
-      try {
-        response = httpClient.execute(loginPost);
-      }
-      catch (IOException ex) {
-        LOGGER.warn("Error logging on: " + ex.getMessage());
-        return null;
-      }
-      LOGGER.info(response.toString());
-
-      // posting an issue
-      ContentType encoding = ContentType.create("text/plain", Consts.UTF_8);
-      builder = MultipartEntityBuilder.create()
-        .addTextBody("project", PROJECT)
-        .addTextBody("assignee", "Unassigned")
-        .addTextBody("summary", desc.replaceAll("[\r\n]", ""), encoding)
-        .addTextBody("description", body, encoding)
-        .addTextBody("priority", "4")
-        .addTextBody("type", "Exception")
-      ;
-
-      if (StringUtil.isNotEmpty(affectedVersion)) {
-        builder.addTextBody("affectsVersion", affectedVersion);
-      }
-
-      for (Attachment it : attachments) {
-        builder.addBinaryBody("attachments[]", it.getBytes(), encoding, it.getName());
-      }
-
-      HttpPost issuePost = new HttpPost(SERVER_ISSUE_URL);
-      issuePost.setEntity(builder.build());
-
       try {
         response = httpClient.execute(issuePost);
       }
       catch (IOException ex) {
-        LOGGER.warn("Error posting an issue: " + ex.getMessage());
+        LOGGER.warn("Error attaching files to the issue: " + ex.getMessage() + "; issue id: " + issueResponse.idReadable);
+        return;
+      }
+
+      var statusLine = response.getStatusLine();
+      var responsePayload = EntityUtils.toString(response.getEntity());
+      if (statusLine.getStatusCode() != 200) {
+        LOGGER.warn("Error attaching files: status=" + statusLine +
+                    "; response: " + responsePayload +
+                    "; issue id: " + issueResponse.idReadable
+        );
+      }
+    }
+    catch (IOException e) {
+      LOGGER.warn(e.getMessage());
+    }
+  }
+
+  private @Nullable YoutrackIssueResponse createIssue(@NotNull String desc, @NotNull String body) {
+    try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
+      // posting an issue
+      var issue = new YoutrackIssue(
+        desc.replaceAll("[\r\n]", ""),
+        body
+      );
+
+      var gson = new Gson();
+      var requestContent = gson.toJson(issue);
+
+      HttpPost issuePost = new HttpPost(SERVER_ISSUE_URL);
+      issuePost.setEntity(EntityBuilder.create()
+                            .setContentType(ContentType.create("application/json", Consts.UTF_8))
+                            .setText(requestContent).build());
+      issuePost.addHeader("Authorization", ACCESS_TOKEN);
+
+      CloseableHttpResponse response;
+      try {
+        response = httpClient.execute(issuePost);
+      }
+      catch (IOException ex) {
+        LOGGER.warn("Error posting an issue: " + ex.getMessage() + "; request: " + requestContent);
         return null;
       }
 
-      return EntityUtils.toString(response.getEntity());
+      var statusLine = response.getStatusLine();
+      var responsePayload = EntityUtils.toString(response.getEntity());
+      if (statusLine.getStatusCode() != 200) {
+        LOGGER.warn("Error submitting report: status=" + statusLine +
+                    "; response: " + responsePayload +
+                    "; request: " + requestContent
+        );
+        return null;
+      }
+
+      try {
+        return gson.fromJson(responsePayload, YoutrackIssueResponse.class);
+      }
+      catch (JsonSyntaxException e) {
+        LOGGER.warn("Error decoding server response: " + responsePayload + "; request: " + requestContent);
+      }
     }
     catch (IOException e) {
       LOGGER.warn(e);
@@ -253,4 +288,6 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
         .createNotification(DiagnosticBundle.message("error.report.title"), text.toString(), type, listener).notify(project);
     });
   }
+
+
 }

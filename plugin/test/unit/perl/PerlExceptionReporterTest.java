@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,10 +20,8 @@ import base.PerlLightTestCase;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.diagnostic.Attachment;
 import com.intellij.openapi.diagnostic.IdeaLoggingEvent;
-import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiInvalidElementAccessException;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.concurrency.Semaphore;
 import com.perl5.errorHandler.YoutrackErrorHandler;
@@ -40,14 +38,14 @@ public class PerlExceptionReporterTest extends PerlLightTestCase {
     Throwable first = new Throwable();
     Throwable second = new Throwable(first);
     Throwable third = new Throwable(second);
-    String result = new YoutrackErrorHandler().submit(
-      "Test description и по-русски", "Test body и немного русского языка", "2019.2",
+    String issueNumber = new YoutrackErrorHandler().submit(
+      "Test description и по-русски", "Test body и немного русского языка",
       Arrays.asList(new Attachment("fist", first),
                     new Attachment("fist", second),
                     new Attachment("second", third),
                     new Attachment("последний", "русский аттачмент")
       ));
-    assertTrue(StringUtil.isNotEmpty(result));
+    assertNotNull(issueNumber);
   }
 
   @Test
@@ -61,7 +59,7 @@ public class PerlExceptionReporterTest extends PerlLightTestCase {
     try {
       PsiUtilCore.ensureValid(statement);
     }
-    catch (PsiInvalidElementAccessException e) {
+    catch (Exception e) {
       Semaphore semaphore = new Semaphore();
       semaphore.down();
       new YoutrackErrorHandler().submit(
