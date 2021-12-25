@@ -607,6 +607,9 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 
 //////////////////////////////////// END OF TRY-CATCH SYNTAXES /////////////////////////////////////////////////////////
 
+<STRING_QQ,STRING_RE> "@" [(|)] {return STRING_CONTENT_QQ;}
+<STRING_QX> "@" [(|)] {return STRING_CONTENT_XQ;}
+
 <STRING_QQ,STRING_RE,STRING_QX,MATCH_REGEX,MATCH_REGEX_X,MATCH_REGEX_XX,REGEX_QUOTED_X,REGEX_CHARCLASS_X,REGEX_CHARCLASS_XX>
 {
 	"@" /  {NON_SPACE_AHEAD} 	{pushState();yybegin(INTERPOLATED_VARIABLE_SUFFIX);return startUnbracedVariable(SIGIL_ARRAY);}
