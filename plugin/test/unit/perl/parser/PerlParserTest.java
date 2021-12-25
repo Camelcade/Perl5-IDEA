@@ -27,16 +27,19 @@ public class PerlParserTest extends PerlParserTestBase {
   }
 
   @Test
-  public void testIssue2319() {doTest();}
+  public void testIssue2439() { doTest(); }
 
   @Test
-  public void testAnnotationNoInject() {doTest();}
+  public void testIssue2319() { doTest(); }
 
   @Test
-  public void testIssue2308() {doTest();}
+  public void testAnnotationNoInject() { doTest(); }
 
   @Test
-  public void testIssue2298() {doTest();}
+  public void testIssue2308() { doTest(); }
+
+  @Test
+  public void testIssue2298() { doTest(); }
 
   @Test
   public void testIssue2306() {doTest();}

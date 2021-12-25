@@ -543,9 +543,9 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 	[^] 					{return REGEX_TOKEN;}
 
 <MATCH_REGEX, MATCH_REGEX_X,MATCH_REGEX_XX,REGEX_CHARCLASS_X,REGEX_CHARCLASS_XX,REGEX_QUOTED_X>{
-  "$" / {MAY_BE_SPACES_OR_COMMENTS}[()]      {return REGEX_TOKEN;}
-  "$#" / {MAY_BE_SPACES_OR_COMMENTS}[()]     {return REGEX_TOKEN;}
-  "@" / {MAY_BE_SPACES_OR_COMMENTS}[()]     {return REGEX_TOKEN;}
+  "$" / {MAY_BE_SPACES_OR_COMMENTS}[(|)]      {return REGEX_TOKEN;}
+  "$#" / {MAY_BE_SPACES_OR_COMMENTS}[(|)]     {return REGEX_TOKEN;}
+  "@" / {MAY_BE_SPACES_OR_COMMENTS}[(|)]     {return REGEX_TOKEN;}
 }
 
 //////////////////////////////////// END OF REGULAR EXPRESSION /////////////////////////////////////////////////////////
