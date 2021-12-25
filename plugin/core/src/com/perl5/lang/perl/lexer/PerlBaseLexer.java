@@ -40,7 +40,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static com.perl5.lang.perl.lexer.PerlLexer.*;
@@ -60,7 +59,6 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
 
   public static final Map<IElementType, String> ALLOWED_REGEXP_MODIFIERS = new THashMap<>();
   public static final String ALLOWED_TR_MODIFIERS = "cdsr";
-  public static final Pattern POSIX_CHAR_CLASS_PATTERN = Pattern.compile("\\[\\[:\\^?\\w*:\\]\\]");
   private static final List<IElementType> DQ_TOKENS = Arrays.asList(QUOTE_DOUBLE_OPEN, LP_STRING_QQ, QUOTE_DOUBLE_CLOSE, STRING_CONTENT_QQ);
   private static final List<IElementType> SQ_TOKENS = Arrays.asList(QUOTE_SINGLE_OPEN, LP_STRING_Q, QUOTE_SINGLE_CLOSE, STRING_CONTENT);
   private static final List<IElementType> XQ_TOKENS = Arrays.asList(QUOTE_TICK_OPEN, LP_STRING_QX, QUOTE_TICK_CLOSE, STRING_CONTENT_XQ);
@@ -746,13 +744,12 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
     return currentOffset;
   }
 
-  public int getRegexBlockEndOffset(int startOffset, char openingChar, boolean isSecondBlock) {
+  public int getRegexBlockEndOffset(int startOffset, char openingChar) {
     char closingChar = PerlString.getQuoteCloseChar(openingChar);
     CharSequence buffer = getBuffer();
     int bufferEnd = getBufferEnd();
 
     boolean isEscaped = false;
-    boolean isCharGroup = false;
     boolean isQuotesDiffers = closingChar != openingChar;
 
     int delimiterLevel = 0;
@@ -763,27 +760,11 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
 
       char currentChar = buffer.charAt(currentOffset);
 
-      if (delimiterLevel == 0 && !isCharGroup && !isEscaped && closingChar == currentChar) {
+      if (delimiterLevel == 0 && !isEscaped && closingChar == currentChar) {
         return currentOffset;
       }
 
-      if (!isSecondBlock) {
-        if (!isEscaped && !isCharGroup && currentChar == '[') {
-          Matcher m = POSIX_CHAR_CLASS_PATTERN.matcher(buffer.subSequence(currentOffset, bufferEnd));
-          if (m.lookingAt()) {
-            currentOffset += m.toMatchResult().group(0).length();
-            continue;
-          }
-          else {
-            isCharGroup = true;
-          }
-        }
-        else if (!isEscaped && isCharGroup && currentChar == ']') {
-          isCharGroup = false;
-        }
-      }
-
-      if (!isEscaped && isQuotesDiffers && !isCharGroup) {
+      if (!isEscaped && isQuotesDiffers) {
         if (currentChar == openingChar) {
           delimiterLevel++;
         }
@@ -818,7 +799,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
     pushPreparsedToken(currentOffset++, currentOffset, REGEX_QUOTE_OPEN);
 
     // find block 1
-    int firstBlockEndOffset = getRegexBlockEndOffset(currentOffset, firstBlockOpeningQuote, false);
+    int firstBlockEndOffset = getRegexBlockEndOffset(currentOffset, firstBlockOpeningQuote);
     CustomToken firstBlockToken = null;
     if (firstBlockEndOffset > currentOffset) {
       firstBlockToken = new CustomToken(currentOffset, firstBlockEndOffset, LP_REGEX);
@@ -854,7 +835,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
         }
 
         if (currentOffset < bufferEnd) {
-          int secondBlockEndOffset = getRegexBlockEndOffset(currentOffset, secondBlockOpeningQuote, true);
+          int secondBlockEndOffset = getRegexBlockEndOffset(currentOffset, secondBlockOpeningQuote);
 
           if (secondBlockEndOffset > currentOffset) {
             secondBlockToken = new CustomToken(
