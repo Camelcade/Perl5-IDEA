@@ -1,0 +1,31 @@
+tr/\t\n\r\f\b\a\e\x{263A}\X{ 263A }\x1b\N{DOLLAR SIGN}\N{U+263D}\c[\o{23072}\033/\t\n\r\f\b\a\e\x{263A}\X{ 263A }\x1b\N{DOLLAR SIGN}\N{U+263D}\c[\o{23072}\033/;
+tr{\t\n\r\f\b\a\e\x{263A}\X{ 263A }\x1b\N{DOLLAR SIGN}\N{U+263D}\c[\o{23072}\033}'\t\n\r\f\b\a\e\x{263A}\X{ 263A }\x1b\N{DOLLAR SIGN}\N{U+263D}\c[\o{23072}\033';
+tr'\t\n\r\f\b\a\e\x{263A}\X{ 263A }\x1b\N{DOLLAR SIGN}\N{U+263D}\c[\o{23072}\033'\t\n\r\f\b\a\e\x{263A}\X{ 263A }\x1b\N{DOLLAR SIGN}\N{U+263D}\c[\o{23072}\033';
+
+y/\t\n\r\f\b\a\e\x{263A}\X{ 263A }\x1b\N{DOLLAR SIGN}\N{U+263D}\c[\o{23072}\033/\t\n\r\f\b\a\e\x{263A}\X{ 263A }\x1b\N{DOLLAR SIGN}\N{U+263D}\c[\o{23072}\033/;
+y{\t\n\r\f\b\a\e\x{263A}\X{ 263A }\x1b\N{DOLLAR SIGN}\N{U+263D}\c[\o{23072}\033}'\t\n\r\f\b\a\e\x{263A}\X{ 263A }\x1b\N{DOLLAR SIGN}\N{U+263D}\c[\o{23072}\033';
+y'\t\n\r\f\b\a\e\x{263A}\X{ 263A }\x1b\N{DOLLAR SIGN}\N{U+263D}\c[\o{23072}\033'\t\n\r\f\b\a\e\x{263A}\X{ 263A }\x1b\N{DOLLAR SIGN}\N{U+263D}\c[\o{23072}\033';
+
+s/\t\n\r\f\b\a\e\x{263A}\X{ 263A }\x1b\N{DOLLAR SIGN}\N{U+263D}\c[\o{23072}\033/\t\n\r\f\b\a\e\x{263A}\X{ 263A }\x1b\N{DOLLAR SIGN}\N{U+263D}\c[\o{23072}\033/;
+s{\t\n\r\f\b\a\e\x{263A}\X{ 263A }\x1b\N{DOLLAR SIGN}\N{U+263D}\c[\o{23072}\033}'\t\n\r\f\b\a\e\x{263A}\X{ 263A }\x1b\N{DOLLAR SIGN}\N{U+263D}\c[\o{23072}\033';
+s'\t\n\r\f\b\a\e\x{263A}\X{ 263A }\x1b\N{DOLLAR SIGN}\N{U+263D}\c[\o{23072}\033'\t\n\r\f\b\a\e\x{263A}\X{ 263A }\x1b\N{DOLLAR SIGN}\N{U+263D}\c[\o{23072}\033';
+
+m/\t\n\r\f\b\a\e\x{263A}\X{ 263A }\x1b\N{DOLLAR SIGN}\N{U+263D}\c[\o{23072}\033/;
+m{\t\n\r\f\b\a\e\x{263A}\X{ 263A }\x1b\N{DOLLAR SIGN}\N{U+263D}\c[\o{23072}\033};
+m'\t\n\r\f\b\a\e\x{263A}\X{ 263A }\x1b\N{DOLLAR SIGN}\N{U+263D}\c[\o{23072}\033';
+
+qr/\t\n\r\f\b\a\e\x{263A}\X{ 263A }\x1b\N{DOLLAR SIGN}\N{U+263D}\c[\o{23072}\033/;
+qr{\t\n\r\f\b\a\e\x{263A}\X{ 263A }\x1b\N{DOLLAR SIGN}\N{U+263D}\c[\o{23072}\033};
+qr'\t\n\r\f\b\a\e\x{263A}\X{ 263A }\x1b\N{DOLLAR SIGN}\N{U+263D}\c[\o{23072}\033';
+
+q/\t\n\r\f\b\a\e\x{263A}\X{ 263A }\x1b\N{DOLLAR SIGN}\N{U+263D}\c[\o{23072}\033/;
+q{\t\n\r\f\b\a\e\x{263A}\X{ 263A }\x1b\N{DOLLAR SIGN}\N{U+263D}\c[\o{23072}\033};
+q'\t\n\r\f\b\a\e\x{263A}\X{ 263A }\x1b\N{DOLLAR SIGN}\N{U+263D}\c[\o{23072}\033';
+
+qq/\t\n\r\f\b\a\e\x{263A}\X{ 263A }\x1b\N{DOLLAR SIGN}\N{U+263D}\c[\o{23072}\033/;
+qq{\t\n\r\f\b\a\e\x{263A}\X{ 263A }\x1b\N{DOLLAR SIGN}\N{U+263D}\c[\o{23072}\033};
+qq'\t\n\r\f\b\a\e\x{263A}\X{ 263A }\x1b\N{DOLLAR SIGN}\N{U+263D}\c[\o{23072}\033';
+
+qx/\t\n\r\f\b\a\e\x{263A}\X{ 263A }\x1b\N{DOLLAR SIGN}\N{U+263D}\c[\o{23072}\033/;
+qx{\t\n\r\f\b\a\e\x{263A}\X{ 263A }\x1b\N{DOLLAR SIGN}\N{U+263D}\c[\o{23072}\033};
+qx'\t\n\r\f\b\a\e\x{263A}\X{ 263A }\x1b\N{DOLLAR SIGN}\N{U+263D}\c[\o{23072}\033';
