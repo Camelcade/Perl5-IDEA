@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -397,7 +397,7 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
     )
   );
 
-  TokenSet LAZY_PARSABLE_REGEX = TokenSet.create(LP_REGEX, LP_REGEX_X, LP_REGEX_XX);
+  TokenSet LAZY_PARSABLE_REGEX = TokenSet.create(LP_REGEX, LP_REGEX_X, LP_REGEX_XX, LP_REGEX_SQ, LP_REGEX_X_SQ, LP_REGEX_XX_SQ);
 
   TokenSet LAZY_TR_STRINGS = TokenSet.create(LP_STRING_TR, LP_STRING_QQ_RESTRICTED);
 

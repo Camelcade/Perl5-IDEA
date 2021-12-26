@@ -1,0 +1,49 @@
+use strict;
+use v5.10;
+use re 'debug';
+
+my $var = 'test';
+m/test [a b c] #comment
+    $var/;
+m'test [a b c] #comment
+    $var';
+qr/test [a b c] #comment
+    $var/;
+qr'test [a b c] #comment
+    $var';
+s/test [a b c] #comment
+    $var/replace $var/;
+s'test [a b c] #comment
+    $var'replace $var';
+s{test [a b c] #comment
+    $var}'replace $var';
+
+m/test [a b c] #comment
+    $var/x;
+m'test [a b c] #comment
+    $var'x;
+qr/test [a b c] #comment
+    $var/x;
+qr'test [a b c] #comment
+    $var'x;
+s/test [a b c] #comment
+    $var/replace $var/x;
+s'test [a b c] #comment
+    $var'replace $var'x;
+s{test [a b c] #comment
+    $var}'replace $var'x;
+
+m/test [a b c] #comment
+    $var/xx;
+m'test [a b c] #comment
+    $var'xx;
+qr/test [a b c] #comment
+    $var/xx;
+qr'test [a b c] #comment
+    $var'xx;
+s/test [a b c] #comment
+    $var/replace $var/xx;
+s'test [a b c] #comment
+    $var'replace $var'xx;
+s{test [a b c] #comment
+    $var}'replace $var'xx;

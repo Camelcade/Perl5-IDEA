@@ -433,6 +433,9 @@
     LP_REGEX = "LP_REGEX"
     LP_REGEX_X = "LP_REGEX_X"
     LP_REGEX_XX = "LP_REGEX_XX"
+    LP_REGEX_SQ = "LP_REGEX_SQ"
+    LP_REGEX_X_SQ = "LP_REGEX_X_SQ"
+    LP_REGEX_XX_SQ = "LP_REGEX_XX_SQ"
   ]
 
     extends(".+expr")=expr

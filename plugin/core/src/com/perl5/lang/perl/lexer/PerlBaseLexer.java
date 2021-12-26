@@ -796,13 +796,14 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
     int bufferEnd = getBufferEnd();
 
     char firstBlockOpeningQuote = buffer.charAt(currentOffset);
+    boolean isInterpolationAllowedInMatch = firstBlockOpeningQuote != '\'';
     pushPreparsedToken(currentOffset++, currentOffset, REGEX_QUOTE_OPEN);
 
     // find block 1
     int firstBlockEndOffset = getRegexBlockEndOffset(currentOffset, firstBlockOpeningQuote);
     CustomToken firstBlockToken = null;
     if (firstBlockEndOffset > currentOffset) {
-      firstBlockToken = new CustomToken(currentOffset, firstBlockEndOffset, LP_REGEX);
+      firstBlockToken = new CustomToken(currentOffset, firstBlockEndOffset, isInterpolationAllowedInMatch ? LP_REGEX : LP_REGEX_SQ);
       pushPreparsedToken(firstBlockToken);
     }
 
@@ -869,11 +870,11 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
       {
         if (firstBlockToken != null) {
           if (modifierEndOffset < bufferEnd && buffer.charAt(modifierEndOffset) == 'x') {
-            firstBlockToken.setTokenType(LP_REGEX_XX);
+            firstBlockToken.setTokenType(isInterpolationAllowedInMatch ? LP_REGEX_XX : LP_REGEX_XX_SQ);
             modifierEndOffset++;
           }
           else {
-            firstBlockToken.setTokenType(LP_REGEX_X);
+            firstBlockToken.setTokenType(isInterpolationAllowedInMatch ? LP_REGEX_X : LP_REGEX_X_SQ);
           }
         }
       }

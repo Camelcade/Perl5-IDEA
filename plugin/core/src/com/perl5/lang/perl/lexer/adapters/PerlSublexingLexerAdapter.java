@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2021 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,12 +51,15 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
     SUBLEXINGS_MAP.put(LP_STRING_QX, PerlLexer.STRING_QX);
     SUBLEXINGS_MAP.put(LP_STRING_QQ_RESTRICTED, PerlLexer.STRING_QQ_RESTRICTED);
     SUBLEXINGS_MAP.put(LP_STRING_QX_RESTRICTED, PerlLexer.STRING_QX_RESTRICTED);
-    SUBLEXINGS_MAP.put(LP_REGEX, PerlLexer.MATCH_REGEX);
     SUBLEXINGS_MAP.put(LP_CODE_BLOCK, PerlLexer.YYINITIAL);
     SUBLEXINGS_MAP.put(LP_CODE_BLOCK_WITH_TRYCATCH, PerlLexer.YYINITIAL);
     SUBLEXINGS_MAP.put(LP_STRING_QW, PerlLexer.STRING_LIST);
+    SUBLEXINGS_MAP.put(LP_REGEX, PerlLexer.MATCH_REGEX);
     SUBLEXINGS_MAP.put(LP_REGEX_X, PerlLexer.MATCH_REGEX_X);
     SUBLEXINGS_MAP.put(LP_REGEX_XX, PerlLexer.MATCH_REGEX_XX);
+    SUBLEXINGS_MAP.put(LP_REGEX_SQ, PerlLexer.MATCH_REGEX_SQ);
+    SUBLEXINGS_MAP.put(LP_REGEX_X_SQ, PerlLexer.MATCH_REGEX_X_SQ);
+    SUBLEXINGS_MAP.put(LP_REGEX_XX_SQ, PerlLexer.MATCH_REGEX_XX_SQ);
 
     ENFORCED_SUBLEXINGS_MAP.put(COMMENT_ANNOTATION, PerlLexer.ANNOTATION);
     ENFORCED_SUBLEXINGS_MAP.put(HEREDOC, PerlLexer.STRING_Q);
