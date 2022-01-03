@@ -323,7 +323,7 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "OPTIONAL_TRAILING_COMMA",
-                                "Before newline of hash/array",
+                                PerlBundle.message("label.before.newline.hash.array"),
                                 GROUP_COMMA,
                                 OPTIONS_DEFAULT);
     }
