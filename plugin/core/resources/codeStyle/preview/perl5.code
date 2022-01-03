@@ -3,6 +3,17 @@ my $hashref = {
     key2 => [ 69 ],
 };
 
+my $arrayref = [
+    'first',
+    'second',
+    'third'
+];
+
+some_method(
+  'arg1',
+  'arg2',
+);
+
 $hashref->{key3} = <<EOM;
     This is a test
 EOM
