@@ -7,14 +7,14 @@ Fakelib::dummy->new(
         fuga => "Foo",
 );
 Fakelib::dummy->new(hoge => 1, fuga => "Foo");
-Fakelib::dummy->new(hoge => 1, fuga => "Foo");
+Fakelib::dummy->new(hoge => 1, fuga => "Foo",);
 my @test = (1, 2, 3);
-my @test = (1, 2, 3);
-my @test = (1, 2, 3);
+my @test = (1, 2, 3,);
+my @test = (1, 2, 3,);
 my @test = (1,
         2, 3);
 my @test = (1,
-        2, 3);
+        2, 3,);
 my @test = (1, 2, 3,
 );
 my @test = (1, 2, 3,
@@ -31,11 +31,11 @@ my @test = (
 );
 
 my @test = [ 1, 2, 3 ];
-my @test = [ 1, 2, 3 ];
+my @test = [ 1, 2, 3, ];
 my @test = [ 1,
         2, 3 ];
 my @test = [ 1,
-        2, 3 ];
+        2, 3, ];
 my @test = [
         1,
         2,
@@ -82,7 +82,7 @@ my $test = {
 
 };
 my %test = (hoge => 10, fuga => "test");
-my %test = (hoge => 10, fuga => "test");
+my %test = (hoge => 10, fuga => "test",);
 my $test = {
         hoge => 10,
         fuga => [ 123, 456, "aaa" ],
@@ -111,7 +111,7 @@ my $test = {
         hoge => 10,
         fuga => [ 123, 456, "aaa" ],
         piyo => [ 123, 456,
-                "aaa" ],
+                "aaa", ],
 };
 my $test = {
         hoge => 10,
@@ -119,7 +119,7 @@ my $test = {
 };
 my $test = {
         hoge => 10,
-        piyo => [ 123, 456, "aaa" ],
+        piyo => [ 123, 456, "aaa", ],
 };
 my $test = {
         hoge => 10,
@@ -146,7 +146,7 @@ my $test = {
 my $test = { hoge => 10, fuga => "testComma2",
         foo       => 111, bar => 123 };
 my $test = { hoge => 10, fuga => "testComma2",
-        foo       => 111, bar => 123 };
+        foo       => 111, bar => 123, };
 has test => (
         is  => 'ro',
         isa => 'Str',
@@ -156,4 +156,4 @@ has test => (
         isa => 'Str',
 );
 has test => (is => 'ro', isa => 'Str');
-has test => (is => 'ro', isa => 'Str');
+has test => (is => 'ro', isa => 'Str',);

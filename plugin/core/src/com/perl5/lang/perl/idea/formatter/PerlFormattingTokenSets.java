@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -409,5 +409,12 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
    */
   TokenSet FORMATTING_RANGE_EDGE_ELEMENTS = TokenSet.orSet(
     COMPOUND_STATEMENTS, TokenSet.create(NAMESPACE_DEFINITION)
+  );
+
+  /**
+   * Pre-formatter may insert trailing comma to the comma sequence inside these containers
+   */
+  TokenSet COMMA_SEQUENCE_CONTAINERS_WITH_POSSIBLE_TRAILING_COMMA = TokenSet.create(
+    PARENTHESISED_EXPR, PARENTHESISED_CALL_ARGUMENTS, ANON_HASH, ANON_ARRAY
   );
 }

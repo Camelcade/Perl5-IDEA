@@ -20,10 +20,13 @@ import com.intellij.application.options.CodeStyle;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.TokenType;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.formatter.operations.*;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
@@ -37,12 +40,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.COMMA_SEQUENCE_CONTAINERS_WITH_POSSIBLE_TRAILING_COMMA;
+
 
 public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeStyleSettings.OptionalConstructions, PerlElementTypes {
   private static final Pattern ASCII_IDENTIFIER_PATTERN = Pattern.compile("[_a-zA-Z][_\\w]*");
   private static final Pattern ASCII_BARE_STRING_PATTERN = Pattern.compile("-?[_a-zA-Z][_\\w]*");
-  private static final Pattern NEWLINE_BEFORE_RIGHT_PAREN_PATTERN =
-    Pattern.compile("\\r\\n|[\\n\\r\\u2028\\u2029\\u0085]\\s*[)}\\]]$", Pattern.DOTALL);
 
   protected final Project myProject;
   protected final PerlCodeStyleSettings myPerlSettings;
@@ -359,48 +362,32 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
     if (!myRange.contains(o.getTextRange())) {
       return;
     }
-    if (myPerlSettings.OPTIONAL_TRAILING_COMMA == FORCE) {
-      processAddCommaEndOfExpr(o);
+    if (myPerlSettings.OPTIONAL_TRAILING_COMMA == FORCE && !hasTrailingComma(o)) {
+      addTrailingCommaIfFollowedByTheNewLine(o);
     }
-    else if (myPerlSettings.OPTIONAL_TRAILING_COMMA == SUPPRESS) {
-      processSuppressCommaEndOfExpr(o);
+    else if (myPerlSettings.OPTIONAL_TRAILING_COMMA == SUPPRESS && hasTrailingComma(o)) {
+      removeElement(o.getLastChild());
     }
     super.visitCommaSequenceExpr(o);
   }
 
-  protected void processAddCommaEndOfExpr(PsiElement o) {
-    boolean isFoundNewline = NEWLINE_BEFORE_RIGHT_PAREN_PATTERN.matcher(
-      ElementManipulators.getValueText(o.getParent())
-    ).find();
-
-    if (isFoundNewline) {
-      PsiElement lastChild = o.getLastChild();
-      if (isInHashOrArray(o) && lastChild.getNode().getElementType() != COMMA) {
-        insertElementAfter(PerlElementFactory.createComma(myProject), lastChild);
-      }
-    }
-    else {
-      processSuppressCommaEndOfExpr(o);
-    }
+  private boolean hasTrailingComma(@NotNull PsiPerlCommaSequenceExpr o) {
+    return PsiUtilCore.getElementType(o.getLastChild()) == COMMA;
   }
 
-  protected void processSuppressCommaEndOfExpr(PsiElement o) {
-    PsiElement lastChild = o.getLastChild();
-    if (lastChild.getNode().getElementType() == COMMA) {
-      removeElement(lastChild);
+  private void addTrailingCommaIfFollowedByTheNewLine(@NotNull PsiPerlCommaSequenceExpr o) {
+    var nextSibling = o.getNextSibling();
+    if (PsiUtilCore.getElementType(nextSibling) != TokenType.WHITE_SPACE ||
+        !StringUtil.containsLineBreak(nextSibling.getNode().getChars())) {
+      return;
+    }
+    if (COMMA_SEQUENCE_CONTAINERS_WITH_POSSIBLE_TRAILING_COMMA.contains(PsiUtilCore.getElementType(o.getParent()))) {
+      insertElementAfter(PerlElementFactory.createComma(myProject), o.getLastChild());
     }
   }
 
   protected void unquoteString(PerlString o) {
     replaceElement(o, PerlElementFactory.createBareString(myProject, ElementManipulators.getValueText(o)));
-  }
-
-  protected boolean isInHashOrArray(PsiElement o) {
-    PsiElement parent = o.getParent();
-    return parent instanceof PsiPerlParenthesisedExpr ||
-           parent instanceof PsiPerlParenthesisedCallArguments ||
-           parent instanceof PsiPerlAnonHash ||
-           parent instanceof PsiPerlAnonArray;
   }
 
   protected static boolean isStringSimple(PerlString o) {
