@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -359,10 +359,10 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
     if (!myRange.contains(o.getTextRange())) {
       return;
     }
-    if (myPerlSettings.OPTIONAL_COMMA == FORCE) {
+    if (myPerlSettings.OPTIONAL_TRAILING_COMMA == FORCE) {
       processAddCommaEndOfExpr(o);
     }
-    else if (myPerlSettings.OPTIONAL_COMMA == SUPPRESS) {
+    else if (myPerlSettings.OPTIONAL_TRAILING_COMMA == SUPPRESS) {
       processSuppressCommaEndOfExpr(o);
     }
     super.visitCommaSequenceExpr(o);

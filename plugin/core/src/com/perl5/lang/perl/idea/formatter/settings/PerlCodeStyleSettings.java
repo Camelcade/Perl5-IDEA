@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,7 +39,7 @@ public class PerlCodeStyleSettings extends CustomCodeStyleSettings {
 
   public int OPTIONAL_PARENTHESES = WHATEVER;
 
-  public int OPTIONAL_COMMA = WHATEVER;
+  public int OPTIONAL_TRAILING_COMMA = WHATEVER;
 
   public int MAIN_FORMAT = WHATEVER;
 
