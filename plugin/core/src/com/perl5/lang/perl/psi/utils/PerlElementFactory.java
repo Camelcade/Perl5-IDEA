@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -110,7 +110,7 @@ public class PerlElementFactory {
 
     PerlFileImpl newFile = createFile(originalElement.getProject(), sb.append(marker).toString());
     PerlHeredocElementImpl newElement = newFile.findChildByClass(originalElement.getClass());
-    assert newElement != null : "Can't find element " + originalElement.getClass() + " generated with: \n" + sb.toString();
+    assert newElement != null : "Can't find element " + originalElement.getClass() + " generated with: \n" + sb;
     return newElement;
   }
 
