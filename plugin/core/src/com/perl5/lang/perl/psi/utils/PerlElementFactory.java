@@ -186,15 +186,15 @@ public class PerlElementFactory {
     return Objects.requireNonNull(createFile(project, " ").getFirstChild());
   }
 
-  public static @NotNull PsiElement createComma(Project project) {
+  public static @NotNull PsiElement createComma(@NotNull Project project) {
     return Objects.requireNonNull(createFile(project, ",").getFirstChild());
   }
 
-  public static PerlFileImpl createFile(Project project, String text) {
+  public static PerlFileImpl createFile(@NotNull Project project, @NotNull String text) {
     return createFile(project, text, PerlFileTypePackage.INSTANCE);
   }
 
-  public static PerlFileImpl createFile(Project project, String text, FileType fileType) {
+  public static PerlFileImpl createFile(@NotNull Project project, @NotNull String text, @NotNull FileType fileType) {
     return (PerlFileImpl)PsiFileFactory.getInstance(project).
       createFileFromText("file.dummy", fileType, text);
   }
