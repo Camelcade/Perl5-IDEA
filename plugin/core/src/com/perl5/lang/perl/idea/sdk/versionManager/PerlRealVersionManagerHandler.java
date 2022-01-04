@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -122,7 +122,7 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
                                       @Nullable String selectedPath,
                                       @Nullable PerlHostData<?, ?> perlHostData,
                                       @Nullable Consumer<Sdk> sdkConsumer) {
-    if (!StringUtil.isNotEmpty(selectedPath) || perlHostData == null) {
+    if (StringUtil.isEmpty(selectedPath) || perlHostData == null) {
       return;
     }
     PerlVersionManagerAdapter vmAdapter = createAdapter(selectedPath, perlHostData);
