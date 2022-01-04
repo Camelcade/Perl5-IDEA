@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -95,10 +95,5 @@ public class TemplateToolkitParserDefinition implements ParserDefinition, Templa
   @Override
   public PsiFile createFile(FileViewProvider viewProvider) {
     return new TemplateToolkitFileImpl(viewProvider);
-  }
-
-  @Override
-  public SpaceRequirements spaceExistenceTypeBetweenTokens(ASTNode left, ASTNode right) {
-    return null;
   }
 }

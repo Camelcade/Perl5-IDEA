@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -138,7 +138,12 @@ public abstract class PerlHostFileTransfer<HostData extends PerlHostData<?, ?>> 
     File localDirFile = new File(localDir);
     FileUtil.createDirectory(localDirFile);
     Set<String> localFileNames = new HashSet<>();
-    for (File localFile : localDirFile.listFiles()) {
+    var existingFiles = localDirFile.listFiles();
+    if (existingFiles == null) {
+      LOG.warn("Unable to synchronize path, not a directory in cache: " + localDir);
+      return;
+    }
+    for (File localFile : existingFiles) {
       if (localFile.length() == 0 || !localFile.delete()) {
         localFileNames.add(localFile.getName());
       }

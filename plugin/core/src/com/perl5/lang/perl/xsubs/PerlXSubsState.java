@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,6 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.ReadAction;
 import com.intellij.openapi.application.WriteAction;
 import com.intellij.openapi.components.PersistentStateComponent;
-import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.openapi.diagnostic.Logger;
@@ -75,7 +74,6 @@ import java.util.Set;
   name = "Perl5XSubsState",
   storages = @Storage(PerlPathMacros.PERL5_PROJECT_SETTINGS_FILE)
 )
-
 public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> {
   private static final Logger LOG = Logger.getInstance(PerlXSubsState.class);
   @Transient
@@ -85,10 +83,10 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
   @Transient
   private Task.Backgroundable myParserTask = null;
   @Transient
-  private Project myProject;
+  private final @NotNull Project myProject;
 
-  public void setProject(Project myProject) {
-    this.myProject = myProject;
+  public PerlXSubsState(@NotNull Project project) {
+    myProject = project;
   }
 
   @Override
@@ -108,7 +106,7 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
     }
 
     GlobalSearchScope classRootsScope =
-      GlobalSearchScopesCore.directoriesScope(myProject, true, classesRoots.toArray(new VirtualFile[classesRoots.size()]));
+      GlobalSearchScopesCore.directoriesScope(myProject, true, classesRoots.toArray(VirtualFile.EMPTY_ARRAY));
 
     Set<VirtualFile> result = new THashSet<>();
     for (VirtualFile virtualFile : FilenameIndex.getAllFilesByExt(project, getXSBinaryExtension(), classRootsScope)) {
@@ -218,12 +216,13 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
       @Override
       public void run(@NotNull ProgressIndicator indicator) {
         indicator.setIndeterminate(true);
+        var project = PerlXSubsState.this.myProject;
         Map<String, Long> newFilesMap = ReadAction.compute(() -> {
-          if (myProject.isDisposed()) {
+          if (project.isDisposed()) {
             return null;
           }
           final Map<String, Long> result = new THashMap<>();
-          for (VirtualFile virtualFile : getAllXSFiles(myProject)) {
+          for (VirtualFile virtualFile : getAllXSFiles(project)) {
             if (virtualFile.isValid()) {
               String filePath = virtualFile.getCanonicalPath();
               if (filePath != null) {
@@ -271,11 +270,11 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
           Application application = ApplicationManager.getApplication();
           application.invokeAndWait(
             () -> WriteAction.run(() -> {
-              if (myProject.isDisposed()) {
+              if (project.isDisposed()) {
                 return;
               }
               try {
-                VirtualFile newFile = myProject.getBaseDir().findOrCreateChildData(this, DEPARSED_FILE_NAME);
+                VirtualFile newFile = project.getBaseDir().findOrCreateChildData(this, DEPARSED_FILE_NAME);
                 newFile.setWritable(true);
                 OutputStream outputStream = newFile.getOutputStream(null);
                 outputStream.write(stdout.getBytes());
@@ -331,13 +330,7 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
   }
 
   public static PerlXSubsState getInstance(@NotNull Project project) {
-    PerlXSubsState persisted = ServiceManager.getService(project, PerlXSubsState.class);
-    if (persisted == null) {
-      persisted = new PerlXSubsState();
-    }
-
-    persisted.setProject(project);
-    return persisted;
+    return project.getService(PerlXSubsState.class);
   }
 
   private static @NotNull String getXSBinaryExtension() {

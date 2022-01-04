@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,7 +29,6 @@ import com.intellij.openapi.progress.EmptyProgressIndicator;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowManager;
 import com.intellij.profiler.*;
-import com.intellij.profiler.ProfilerProcessPanel;
 import com.intellij.profiler.api.*;
 import com.intellij.profiler.api.configurations.ProfilerConfigurationState;
 import com.intellij.profiler.api.configurations.ProfilerRunConfigurationsManager;
@@ -38,18 +37,19 @@ import com.intellij.testFramework.UsefulTestCase;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import com.perl5.lang.perl.idea.run.prove.PerlTestRunConfiguration;
 import com.perl5.lang.perl.profiler.configuration.PerlProfilerConfigurationState;
-import com.perl5.lang.perl.profiler.parser.*;
+import com.perl5.lang.perl.profiler.parser.PerlProfilerCollapsedDumpFileParserProvider;
+import com.perl5.lang.perl.profiler.parser.PerlProfilerDumpFileParserProvider;
+import com.perl5.lang.perl.profiler.parser.PerlProfilerDumpWriter;
 import com.perl5.lang.perl.profiler.run.PerlProfilerProcess;
 import com.perl5.lang.perl.profiler.run.PerlProfilerRunProfileState;
 import com.perl5.lang.perl.profiler.run.PerlProfilerStartupMode;
 import com.pty4j.util.Pair;
+import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
-import org.jdom.Element;
 import org.junit.experimental.categories.Category;
 
 import java.io.File;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -112,6 +112,7 @@ public class PerlProfilerTest extends PerlPlatformTestCase {
     assertInstanceOf(runProfileState, PerlProfilerRunProfileState.class);
     var resultsPath = ((PerlProfilerRunProfileState)runProfileState).getProfilingResultsPath();
     var outputFiles = resultsPath.toFile().listFiles();
+    assertNotNull("Result directory is not a directory: " + resultsPath, outputFiles);
     if (outputFiles.length != 1) {
       fail("Expected one resulting file, got: " + Arrays.asList(outputFiles));
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -96,7 +96,7 @@ public class PerlBrewCreateLibraryAction extends PerlBrewActionBase implements D
           distirbutionId, perlBrewAdapter, sdk -> ApplicationManager.getApplication().invokeLater(
             () -> {
               PerlBrewData perlBrewData = PerlBrewData.from(sdk);
-              if (perlBrewData != null && Messages.showYesNoDialog(
+              if (perlBrewData != null && myProject != null && Messages.showYesNoDialog(
                 myProject,
                 PerlBundle.message("perl.vm.perlbrew.create.lib.select", perlBrewData.getDistributionId()),
                 PerlBundle.message("perl.vm.perlbrew.create.lib.title", perlBrewData.getPerlVersionString()), null) == Messages.YES) {

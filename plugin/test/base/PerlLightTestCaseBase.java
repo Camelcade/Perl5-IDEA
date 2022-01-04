@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -687,6 +687,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     List<String> result = new ArrayList<>();
     for (LookupElement lookupElement : elements) {
       LookupElementPresentation presentation = new LookupElementPresentation();
+      assertNotNull(lookupElement);
       lookupElement.renderElement(presentation);
 
       if (predicate != null && !predicate.test(lookupElement, presentation)) {
@@ -766,12 +767,10 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       }
       return String.join("; ", iconStrings);
     }
-    else if (icon instanceof IconLoader.CachedImageIcon) {
-      return ((IconLoader.CachedImageIcon)icon).getOriginalPath();
-    }
     else {
       iconString = icon.toString();
     }
+    assertNotNull("Could not find an icon string in " + icon, iconString);
     return iconString.substring(iconString.lastIndexOf('/'));
   }
 

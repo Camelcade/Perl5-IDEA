@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -76,10 +76,6 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
   public synchronized @Nullable PerlHostVirtualFileSystem getFileSystem(@NotNull Disposable disposable) {
     if (myFileSystem == null) {
       WSLDistribution distribution = getDistribution();
-      if (distribution == null) {
-        LOG.error(PerlWslBundle.message("perl.host.handler.distribution.unavailable", myDistributionId));
-        return null;
-      }
       myFileSystem = PerlWslFileSystem.create(distribution);
       Disposer.register(disposable, () -> {
         PerlWslFileSystem fileSystem = myFileSystem;
@@ -118,46 +114,20 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
     return cacheRoot.getAbsolutePath();
   }
 
-  /**
-   * @return true iff {@code remotePathName} is directly available in windows file system.
-   * @implNote it should be returned by {@link #doGetLocalPath(String)} and we don't need to download it
-   */
-  boolean isFileDirectlyAvailable(@NotNull String remotePathName) {
-    WSLDistribution distribution = getDistribution();
-    if (distribution == null) {
-      return false;
-    }
-    return distribution.getWindowsPath(remotePathName) != null;
-  }
-
   @Override
   public @Nullable String doGetLocalPath(@NotNull String remotePathName) {
-    WSLDistribution distribution = getDistribution();
-    if (distribution == null) {
-      LOG.warn("Distribution unavailable: " + myDistributionId);
-      return null;
-    }
-    String windowsPath = distribution.getWindowsPath(remotePathName);
-    return windowsPath != null ? windowsPath : FileUtil.toSystemDependentName(new File(getLocalCacheRoot(), remotePathName).getPath());
+    return getDistribution().getWindowsPath(remotePathName);
   }
 
   @Override
   public @Nullable String doGetRemotePath(@NotNull String localPathName) {
-    WSLDistribution distribution = getDistribution();
-    if (distribution == null) {
-      LOG.error(PerlWslBundle.message("perl.host.handler.distribution.unavailable", myDistributionId));
-      return null;
-    }
-    return distribution.getWslPath(localPathName);
+    return getDistribution().getWslPath(localPathName);
   }
 
 
   @Override
   public @Nullable File findFileByName(@NotNull String fileName) {
     WSLDistribution distribution = getDistribution();
-    if (distribution == null) {
-      return null;
-    }
     try {
       // fixme these commands should be handled by osHandler?
       ProcessOutput output = distribution.executeOnWsl(TIMEOUT, "bash", "-cl", "which " + fileName);

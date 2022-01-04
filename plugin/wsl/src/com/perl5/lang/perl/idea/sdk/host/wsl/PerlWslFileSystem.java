@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -52,7 +52,7 @@ class PerlWslFileSystem extends PerlPluggableVirtualFileSystem {
   @Override
   public @Nullable VirtualFile findFileByPath(@NotNull String path) {
     String windowsPath = myDistribution.getWindowsPath(path);
-    VirtualFile realFile = windowsPath == null ? null : VfsUtil.findFileByIoFile(new File(windowsPath), false);
+    VirtualFile realFile = VfsUtil.findFileByIoFile(new File(windowsPath), false);
     return realFile == null ? null : new WslVirtualFile(realFile, path);
   }
 
@@ -67,7 +67,7 @@ class PerlWslFileSystem extends PerlPluggableVirtualFileSystem {
   @Override
   public @Nullable VirtualFile refreshAndFindFileByPath(@NotNull String path) {
     String windowsPath = myDistribution.getWindowsPath(path);
-    VirtualFile realFile = windowsPath == null ? null : LocalFileSystem.getInstance().refreshAndFindFileByPath(windowsPath);
+    VirtualFile realFile = LocalFileSystem.getInstance().refreshAndFindFileByPath(windowsPath);
     return realFile == null ? null : new WslVirtualFile(realFile, path);
   }
 
