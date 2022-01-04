@@ -47,6 +47,12 @@ jobs:
           perlbrew exec -q --with perl-5.32.0 cpan App::cpanminus
           perlbrew lib create perl-5.32.0@plugin_test || true
           perlbrew exec -q --with perl-5.32.0@plugin_test cpanm --notest Mojolicious Devel::Camelcadedb Devel::Cover JSON App::Prove::Plugin::PassEnv TAP::Formatter::Camelcade Devel::NYTProf
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
       - name: Cache gradle data
         uses: actions/cache@v2
         env:
@@ -65,8 +71,10 @@ jobs:
           WITH_COVERAGE: true
           COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
           CI: GitHub
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          ./gradlew test -PincludeHeavy=1
+          ./gradlew build sonarqube --info -PincludeHeavy=1
           ./gradlew coveralls
       - name: Building plugins
         run: |
@@ -95,31 +103,3 @@ jobs:
             ./embedded/build/jacoco/test.exec
             ./mojo/build/jacoco/test.exec
             ./tt2/build/jacoco/test.exec
-  sonarcloud:
-    name: SonarCloud Analysis
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - name: Set up JDK 11
-        uses: actions/setup-java@v1
-        with:
-          java-version: 11
-      - name: Cache SonarCloud packages
-        uses: actions/cache@v1
-        with:
-          path: ~/.sonar/cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
-      - name: Cache Gradle packages
-        uses: actions/cache@v1
-        with:
-          path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}--${{ hashFiles('**gradle*.properties') }}
-          restore-keys: ${{ runner.os }}-gradle
-      - name: Build and analyze
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: ./gradlew build sonarqube --info
