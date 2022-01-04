@@ -74,8 +74,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          ./gradlew build sonarqube --info -PincludeHeavy=1
-          ./gradlew coveralls
+          ./gradlew test -PincludeHeavy=1 coveralls sonarqube --info
       - name: Building plugins
         run: |
           ./gradlew buildPlugin
