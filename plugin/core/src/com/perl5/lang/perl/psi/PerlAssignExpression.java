@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -319,7 +319,7 @@ public interface PerlAssignExpression extends PsiPerlExpr {
     @Override
     public String toString() {
       if (myElements.isEmpty()) {
-        return null;
+        return "Empty assign expression";
       }
       return StringUtil.join(ContainerUtil.map(myElements, PsiElement::toString), ", ") +
              (myStartIndex == 0 ? "" : " [" + myStartIndex + "]");
