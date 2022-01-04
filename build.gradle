@@ -28,6 +28,15 @@ plugins {
   id 'org.jetbrains.grammarkit' version "$grammarKitGradlePluginVersion"
   id 'idea'
   id 'com.github.kt3k.coveralls' version "$coverallsGradlePluginVersion"
+  id "org.sonarqube" version "$sonarQubeGradlePluginVersion"
+}
+
+sonarqube {
+  properties {
+    property "sonar.projectKey", "Camelcade_Perl5-IDEA"
+    property "sonar.organization", "camelcade"
+    property "sonar.host.url", "https://sonarcloud.io"
+  }
 }
 
 repositories {
