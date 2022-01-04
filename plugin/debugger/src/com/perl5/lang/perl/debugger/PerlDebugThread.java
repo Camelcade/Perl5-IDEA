@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -178,7 +178,7 @@ public class PerlDebugThread extends Thread {
   /**
    * @return true iff we've reached end of stream (interrupted from the script's side)
    */
-  private boolean doRun() {
+  private boolean doRun() throws InterruptedException {
     try {
       prepareAndConnect();
       if (myStop) {
@@ -213,7 +213,7 @@ public class PerlDebugThread extends Thread {
         processResponse(response);
       }
     }
-    catch (Exception e) {
+    catch (IOException | ExecutionException e) {
       LOG.warn(e);
     }
     return false;
@@ -229,6 +229,11 @@ public class PerlDebugThread extends Thread {
         ((XDebugSessionImpl)mySession).reset();
         ReadAction.run(mySession::initBreakpoints);
       }
+    }
+    catch (InterruptedException e) {
+      LOG.warn(e);
+      setStop();
+      Thread.currentThread().interrupt();
     }
     finally {
       setStop();
