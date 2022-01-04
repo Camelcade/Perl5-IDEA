@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Key;
+import com.intellij.openapi.util.Ref;
 import com.intellij.profiler.api.*;
 import com.intellij.profiler.ui.NativeCallStackElementRenderer;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
@@ -35,8 +36,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Parser for nytprof dump
@@ -90,16 +89,16 @@ public class PerlProfilerDumpFileParser implements ProfilerDumpFileParser {
     var dumpParser = new PerlCollapsedDumpParser();
 
     try {
-      CountDownLatch latch = new CountDownLatch(1);
-
       BaseProcessHandler<?> processHandler = PerlHostData.createProcessHandler(perlCommandLine);
+      Ref<String> errorRef = Ref.create();
       processHandler.addProcessListener(new ProcessAdapter() {
         @Override
         public void processTerminated(@NotNull ProcessEvent event) {
           if (event.getExitCode() != 0) {
-            LOG.warn("Dump reader exited with non-zero exit code: " + event.getExitCode() + " " + event.getText());
+            var message = "Error parsing NYTProf output. Exit code: " + event.getExitCode() + ". Message: " + event.getText();
+            errorRef.set(message);
+            LOG.warn(message);
           }
-          latch.countDown();
         }
 
         @Override
@@ -113,20 +112,14 @@ public class PerlProfilerDumpFileParser implements ProfilerDumpFileParser {
         }
       });
       processHandler.startNotify();
-      while (true) {
-        try {
-          if (latch.await(10, TimeUnit.MILLISECONDS)) {
-            break;
-          }
-        }
-        catch (InterruptedException e) {
-          LOG.error(e);
-          return new Failure(e.getMessage());
-        }
+      while (!processHandler.waitFor(10)) {
         indicator.checkCanceled();
       }
-      return new Success(
-        new NewCallTreeOnlyProfilerData(dumpParser.getCallTreeBuilder(), NativeCallStackElementRenderer.Companion.getINSTANCE()));
+      if (errorRef.isNull()) {
+        return new Success(
+          new NewCallTreeOnlyProfilerData(dumpParser.getCallTreeBuilder(), NativeCallStackElementRenderer.Companion.getINSTANCE()));
+      }
+      return new Failure(errorRef.get());
     }
     catch (ExecutionException e) {
       LOG.warn("Error parsing results: " + e.getMessage());
