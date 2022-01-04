@@ -31,14 +31,6 @@ plugins {
   id "org.sonarqube" version "$sonarQubeGradlePluginVersion"
 }
 
-sonarqube {
-  properties {
-    property "sonar.projectKey", "Camelcade_Perl5-IDEA"
-    property "sonar.organization", "camelcade"
-    property "sonar.host.url", "https://sonarcloud.io"
-  }
-}
-
 repositories {
   mavenCentral()
 }
@@ -215,9 +207,23 @@ task jacocoRootReport(type: JacocoReport, group: 'Coverage reports') {
   }
 }
 
+def coverageReportFile = "$buildDir/reports/jacoco/jacocoRootReport/jacocoRootReport.xml"
+apply plugin: 'org.sonarqube'
+sonarqube {
+  properties {
+    property "sonar.projectKey", "Camelcade_Perl5-IDEA"
+    property "sonar.organization", "camelcade"
+    property "sonar.host.url", "https://sonarcloud.io"
+    property 'sonar.coverage.jacoco.xmlReportPaths', coverageReportFile
+  }
+}
+tasks.sonarqube {
+  dependsOn jacocoRootReport
+}
+
 apply plugin: 'com.github.kt3k.coveralls'
-coveralls{
-  jacocoReportPath = "$buildDir/reports/jacoco/jacocoRootReport/jacocoRootReport.xml"
+coveralls {
+  jacocoReportPath = coverageReportFile
 }
 
 tasks.coveralls {
