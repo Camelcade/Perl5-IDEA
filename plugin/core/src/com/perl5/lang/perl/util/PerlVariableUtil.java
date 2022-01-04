@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,7 +40,7 @@ public final class PerlVariableUtil {
    * Compares two variables by actual type, packageName and name. They can be from different declarations
    * builds AST
    */
-  public static boolean equal(@Nullable PerlVariable v1, @Nullable PerlVariable v2) {
+  public static boolean equals(@Nullable PerlVariable v1, @Nullable PerlVariable v2) {
     if (Objects.equals(v1, v2)) {
       return true;
     }

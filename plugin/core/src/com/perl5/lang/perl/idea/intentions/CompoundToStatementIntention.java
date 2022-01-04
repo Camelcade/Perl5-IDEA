@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -125,7 +125,7 @@ public class CompoundToStatementIntention extends PsiElementBaseIntentionAction 
       statementExpr.accept(new PerlRecursiveVisitor() {
         @Override
         public void visitPerlVariable(@NotNull PerlVariable o) {
-          if (PerlVariableUtil.equal(o, finalVariable)) {
+          if (PerlVariableUtil.equals(o, finalVariable)) {
             varsToReplace.add(o);
           }
           super.visitPerlVariable(o);
