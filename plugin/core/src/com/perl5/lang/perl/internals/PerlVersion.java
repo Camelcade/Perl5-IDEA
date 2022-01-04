@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -243,6 +243,11 @@ public class PerlVersion implements PerlVersionRegexps, Comparable<PerlVersion> 
   @Override
   public boolean equals(Object o) {
     return o instanceof PerlVersion && (this == o || this.getDoubleVersion() == ((PerlVersion)o).getDoubleVersion());
+  }
+
+  @Override
+  public int hashCode() {
+    return Double.hashCode(getDoubleVersion());
   }
 
   public boolean lesserThan(PerlVersion o) {
