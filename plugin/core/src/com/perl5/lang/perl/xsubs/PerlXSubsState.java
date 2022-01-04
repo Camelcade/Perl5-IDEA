@@ -141,7 +141,7 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
               continue;
             }
 
-            indicator.setFraction(filesCounter / allXSFiles.size());
+            indicator.setFraction((double)filesCounter / allXSFiles.size());
 
             if (!isFileUpToDate(virtualFile)) {
               isActual = false;
