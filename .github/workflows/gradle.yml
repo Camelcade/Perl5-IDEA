@@ -120,35 +120,35 @@ jobs:
       - name: Uploading Perl plugin artifact
         uses: actions/upload-artifact@v2
         with:
-          path: |
-            ./plugin/build/distributions/*.zip
+          name: plugins
+          path: ./plugin/build/distributions/*.zip
       - name: Uploading Embedded Perl plugin artifact
         uses: actions/upload-artifact@v2
         with:
-          path: |
-            ./embedded/build/distributions/*.zip
+          name: plugins
+          path: ./embedded/build/distributions/*.zip
       - name: Uploading Mason Framework plugin artifact
         uses: actions/upload-artifact@v2
         with:
-          path: |
-            ./mason/core/build/distributions/*.zip
+          name: plugins
+          path: ./mason/core/build/distributions/*.zip
       - name: Uploading Mason2 plugin artifact
         uses: actions/upload-artifact@v2
         with:
-          path: |
-            ./mason/mason2/build/distributions/*.zip
+          name: plugins
+          path: ./mason/mason2/build/distributions/*.zip
       - name: Uploading HTML::Mason plugin artifact
         uses: actions/upload-artifact@v2
         with:
-          path: |
-            ./mason/htmlmason/build/distributions/*.zip
+          name: plugins
+          path: ./mason/htmlmason/build/distributions/*.zip
       - name: Uploading Mojolicious plugin artifact
         uses: actions/upload-artifact@v2
         with:
-          path: |
-            ./mojo/build/distributions/*.zip
+          name: plugins
+          path: ./mojo/build/distributions/*.zip
       - name: Uploading Template Toolkit plugin artifact
         uses: actions/upload-artifact@v2
         with:
-          path: |
-            ./tt2/build/distributions/*.zip
+          name: plugins
+          path: ./tt2/build/distributions/*.zip
