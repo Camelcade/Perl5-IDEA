@@ -13,6 +13,13 @@ jobs:
   test:
     name: Plugin tests
     runs-on: ubuntu-latest
+    env:
+      ORG_GRADLE_PROJECT_downloadIdeaSources: false
+      WITH_COVERAGE: true
+      COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+      CI: GitHub
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     steps:
       - uses: actions/checkout@v2
         with:
@@ -66,39 +73,82 @@ jobs:
             !~/.gradle/caches/**/plugin-resolution
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/build.gradle') }}-${{ hashFiles('**gradle*.properties') }}-${{ env.cache-version }}
       - name: Test with Gradle
-        env:
-          ORG_GRADLE_PROJECT_downloadIdeaSources: false
-          WITH_COVERAGE: true
-          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
-          CI: GitHub
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          ./gradlew test -PincludeHeavy=1 coveralls sonarqube --info
-      - name: Building plugins
-        run: |
-          ./gradlew buildPlugin
-      - name: Publishing plugins binaries
+          ./gradlew test -PincludeHeavy=1
+      - name: Uploading test results artifact
         uses: actions/upload-artifact@v2
         with:
-          name: Plugins binaries
+          name: test-results
           path: |
-            ./plugin/build/distributions/*.zip
-            ./embedded/build/distributions/*.zip
-            ./mason/core/build/distributions/*.zip
-            ./mason/mason2/build/distributions/*.zip
-            ./mason/htmlmason/build/distributions/*.zip
-            ./mojo/build/distributions/*.zip
-            ./tt2/build/distributions/*.zip
-      - name: Publishing coverage results
+            ./plugin/build/test-results/*
+            ./plugin/build/reports/tests/*
+            ./mason/mason2/build/test-results/*
+            ./mason/mason2/build/reports/tests/*
+            ./mason/htmlmason/build/test-results/*
+            ./mason/htmlmason/build/reports/tests/*
+            ./embedded/build/test-results/*
+            ./embedded/build/reports/tests/*
+            ./mojo/build/test-results/*
+            ./mojo/build/reports/tests/*
+            ./tt2/build/test-results/*
+            ./tt2/build/reports/tests/*
+      - name: Generating root coverage reports
+        run: |
+          ./gradlew jacocoRootReport
+      - name: Uploading coverage results artifact
         uses: actions/upload-artifact@v2
         with:
           name: coverage
           path: |
+            ./build/jacoco/test.exec
+            ./build/reports/jacoco/jacocoRootReport/*
             ./plugin/build/jacoco/test.exec
             ./mason/mason2/build/jacoco/test.exec
             ./mason/htmlmason/build/jacoco/test.exec
-            ./build/jacoco/test.exec
             ./embedded/build/jacoco/test.exec
             ./mojo/build/jacoco/test.exec
             ./tt2/build/jacoco/test.exec
+      - name: Upload coveralls data
+        run: |
+          ./gradlew coveralls
+      - name: SonarCube analysis
+        run: |
+          ./gradlew sonarqube --info
+      - name: Building plugins
+        run: |
+          ./gradlew buildPlugin
+      - name: Uploading Perl plugin artifact
+        uses: actions/upload-artifact@v2
+        with:
+          path: |
+            ./plugin/build/distributions/*.zip
+      - name: Uploading Embedded Perl plugin artifact
+        uses: actions/upload-artifact@v2
+        with:
+          path: |
+            ./embedded/build/distributions/*.zip
+      - name: Uploading Mason Framework plugin artifact
+        uses: actions/upload-artifact@v2
+        with:
+          path: |
+            ./mason/core/build/distributions/*.zip
+      - name: Uploading Mason2 plugin artifact
+        uses: actions/upload-artifact@v2
+        with:
+          path: |
+            ./mason/mason2/build/distributions/*.zip
+      - name: Uploading HTML::Mason plugin artifact
+        uses: actions/upload-artifact@v2
+        with:
+          path: |
+            ./mason/htmlmason/build/distributions/*.zip
+      - name: Uploading Mojolicious plugin artifact
+        uses: actions/upload-artifact@v2
+        with:
+          path: |
+            ./mojo/build/distributions/*.zip
+      - name: Uploading Template Toolkit plugin artifact
+        uses: actions/upload-artifact@v2
+        with:
+          path: |
+            ./tt2/build/distributions/*.zip
