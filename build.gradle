@@ -156,7 +156,7 @@ allprojects {
   }
 
   it.afterEvaluate {
-    coveralls.sourceDirs += it.sourceSets.main.java.srcDirs.findAll { file -> file.name == "src" }
+    coveralls.sourceDirs += it.sourceSets.main.java.srcDirs
   }
 }
 
