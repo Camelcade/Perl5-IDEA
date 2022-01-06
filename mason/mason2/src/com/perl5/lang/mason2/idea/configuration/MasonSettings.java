@@ -18,7 +18,6 @@ package com.perl5.lang.mason2.idea.configuration;
 
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.components.PersistentStateComponent;
-import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.openapi.project.Project;
@@ -44,6 +43,15 @@ public class MasonSettings extends AbstractMasonSettings implements PersistentSt
   public List<String> autobaseNames = new ArrayList<>(Arrays.asList("Base.mp", "Base.mc"));
 
   public MasonSettings() {
+    initInstance();
+  }
+
+  public MasonSettings(@NotNull Project project) {
+    super(project);
+    initInstance();
+  }
+
+  private void initInstance() {
     globalVariables.add(new VariableDescription("$m", "Mason::Request"));
     changeCounter++;
   }
@@ -65,12 +73,7 @@ public class MasonSettings extends AbstractMasonSettings implements PersistentSt
   }
 
   public static MasonSettings getInstance(@NotNull Project project) {
-    MasonSettings persisted = ServiceManager.getService(project, MasonSettings.class);
-    if (persisted == null) {
-      persisted = new MasonSettings();
-    }
-
-    return (MasonSettings)persisted.setProject(project);
+    return project.getService(MasonSettings.class);
   }
 
   @Override

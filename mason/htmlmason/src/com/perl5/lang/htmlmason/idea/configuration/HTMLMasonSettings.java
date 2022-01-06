@@ -59,11 +59,15 @@ public class HTMLMasonSettings extends AbstractMasonSettings implements Persiste
     ClearableLazyValue.createAtomic(this::computeCustomTagsMap);
 
   public HTMLMasonSettings(@NotNull Project project) {
-    this();
-    myProject = project;
+    super(project);
+    initInstance();
   }
 
   private HTMLMasonSettings() {
+    initInstance();
+  }
+
+  private void initInstance() {
     globalVariables.add(new VariableDescription("$m", "HTML::Mason::Request"));
     globalVariables.add(new VariableDescription("$r", "Apache::Request"));
     changeCounter++;

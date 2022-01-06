@@ -18,6 +18,7 @@ package com.perl5.lang.htmlmason.idea.configuration;
 
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.project.ProjectManager;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.EditorNotifications;
 import com.intellij.util.xmlb.annotations.Transient;
@@ -36,12 +37,14 @@ public abstract class AbstractMasonSettings {
   @Transient
   protected int changeCounter = 0;
 
-  @Transient
-  protected Project myProject;
+  @Transient protected final @NotNull Project myProject;
 
-  protected AbstractMasonSettings setProject(Project project) {
+  public AbstractMasonSettings() {
+    this(ProjectManager.getInstance().getDefaultProject());
+  }
+
+  public AbstractMasonSettings(@NotNull Project project) {
     myProject = project;
-    return this;
   }
 
   public void settingsUpdated() {

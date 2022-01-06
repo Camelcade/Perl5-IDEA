@@ -37,6 +37,7 @@ import com.intellij.openapi.progress.Task;
 import com.intellij.openapi.progress.util.ProgressIndicatorUtils;
 import com.intellij.openapi.progress.util.ReadTask;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.project.ProjectManager;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.util.text.StringUtil;
@@ -84,6 +85,10 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
   private Task.Backgroundable myParserTask = null;
   @Transient
   private final @NotNull Project myProject;
+
+  public PerlXSubsState() {
+    myProject = ProjectManager.getInstance().getDefaultProject();
+  }
 
   public PerlXSubsState(@NotNull Project project) {
     myProject = project;

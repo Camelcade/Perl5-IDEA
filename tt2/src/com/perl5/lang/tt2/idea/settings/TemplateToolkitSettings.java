@@ -19,7 +19,6 @@ package com.perl5.lang.tt2.idea.settings;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.WriteAction;
 import com.intellij.openapi.components.PersistentStateComponent;
-import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.openapi.fileTypes.FileNameMatcher;
@@ -27,6 +26,7 @@ import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.fileTypes.FileTypeManager;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.project.ProjectManager;
 import com.intellij.openapi.roots.ex.ProjectRootManagerEx;
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.openapi.util.EmptyRunnable;
@@ -60,7 +60,6 @@ public class TemplateToolkitSettings implements PersistentStateComponent<Templat
   public static final String DEFAULT_OUTLINE_TAG = "%%";
 
   public List<String> substitutedExtensions = new ArrayList<>();
-  public List<String> TEMPLATE_DIRS = new ArrayList<>();
   public String START_TAG = DEFAULT_START_TAG;
   public String END_TAG = DEFAULT_END_TAG;
   public String OUTLINE_TAG = DEFAULT_OUTLINE_TAG;
@@ -71,9 +70,14 @@ public class TemplateToolkitSettings implements PersistentStateComponent<Templat
   @Transient
   private transient AtomicNotNullLazyValue<Collection<PsiFileSystemItem>> myLazyPsiDirsRoots;
   @Transient
-  private transient Project myProject;
+  private final transient @NotNull Project myProject;
 
   public TemplateToolkitSettings() {
+    this(ProjectManager.getInstance().getDefaultProject());
+  }
+
+  public TemplateToolkitSettings(@NotNull Project project) {
+    myProject = project;
     createLazyObjects();
   }
 
@@ -81,10 +85,6 @@ public class TemplateToolkitSettings implements PersistentStateComponent<Templat
     createLazyObjects();
     ApplicationManager.getApplication().invokeLater(() -> WriteAction.run(
       () -> ProjectRootManagerEx.getInstanceEx(myProject).makeRootsChange(EmptyRunnable.getInstance(), true, true)));
-  }
-
-  protected void setProject(Project project) {
-    myProject = project;
   }
 
   private void createLazyObjects() {
@@ -159,13 +159,6 @@ public class TemplateToolkitSettings implements PersistentStateComponent<Templat
   }
 
   public static @NotNull TemplateToolkitSettings getInstance(@NotNull Project project) {
-    TemplateToolkitSettings persisted = ServiceManager.getService(project, TemplateToolkitSettings.class);
-
-    if (persisted == null) {
-      persisted = new TemplateToolkitSettings();
-    }
-    persisted.setProject(project);
-
-    return persisted;
+    return project.getService(TemplateToolkitSettings.class);
   }
 }
