@@ -19,7 +19,6 @@ package com.perl5.lang.pod.lexer;
 
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.pod.lexer.PodElementTypes;
 import com.perl5.lang.perl.lexer.PerlProtoLexer;
 import org.jetbrains.annotations.NotNull;
 

@@ -2,7 +2,6 @@ package com.perl5.lang.mason2.lexer;
 
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.mason2.lexer.Mason2TemplatingLexerBase;
 %%
 
 %class Mason2TemplatingLexer

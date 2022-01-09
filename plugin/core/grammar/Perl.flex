@@ -15,10 +15,8 @@
 */
 package com.perl5.lang.perl.lexer;
 
-import com.perl5.lang.perl.util.PerlSubUtil;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
-import org.jetbrains.annotations.NotNull;
 
 %%
 

@@ -2,7 +2,6 @@ package com.perl5.lang.htmlmason.lexer;
 
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.htmlmason.lexer.HTMLMasonBaseLexer;
 
 %%
 
