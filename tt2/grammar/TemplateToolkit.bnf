@@ -1,5 +1,6 @@
 // LALR grammar is at https://github.com/abw/Template2/blob/master/parser/Parser.yp
 {
+  generate=[psi-factory="no"]
   psiVisitorName="TemplateToolkitVisitorGenerated"
 
   tokenTypeClass="com.perl5.lang.tt2.elementTypes.TemplateToolkitTokenType"

@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 {
+  generate=[psi-factory="no"]
   parserImports=[ "static com.intellij.lang.WhitespacesBinders.*" ]
   elementTypeHolderClass="com.perl5.lang.perl.lexer.PerlElementTypesGenerated"
   parserClass="com.perl5.lang.perl.parser.PerlParserGenerated"
