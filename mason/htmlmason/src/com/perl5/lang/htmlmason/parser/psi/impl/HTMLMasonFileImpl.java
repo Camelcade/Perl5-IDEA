@@ -17,6 +17,7 @@
 package com.perl5.lang.htmlmason.parser.psi.impl;
 
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.NlsSafe;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -67,11 +68,9 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
   }
 
   /**
-   * Returns absolute path relative to the components root
-   *
-   * @return path
+   * @return absolute path relative to the components root
    */
-  public @Nullable String getAbsoluteComponentPath() {
+  public @NlsSafe @Nullable String getAbsoluteComponentPath() {
     VirtualFile componentFile = getComponentVirtualFile();
     VirtualFile componentRoot = getComponentRoot();
 
@@ -86,7 +85,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
    *
    * @return path
    */
-  public @Nullable String getAbsoluteComponentContainerPath() {
+  public @NlsSafe @Nullable String getAbsoluteComponentContainerPath() {
     VirtualFile componentFile = getComponentVirtualFile();
     VirtualFile componentRoot = getComponentRoot();
 

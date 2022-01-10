@@ -21,6 +21,7 @@ import com.intellij.lang.WhitespacesBinders;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import com.perl5.lang.htmlmason.HtmlMasonBundle;
 import org.jetbrains.annotations.NotNull;
 
 
@@ -120,14 +121,14 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
       blockMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
 
       if (b.eof()) {
-        b.mark().error("Unclosed filtering block");
+        b.mark().error(HtmlMasonBundle.message("parsing.error.unclosed.filtering.block"));
       }
       else {
         PsiBuilder.Marker tagMarker = b.mark();
         if (PerlParserUtil.consumeToken(b, HTML_MASON_CALL_CLOSE_TAG_START)) {
           string_bare(b, l);
           if (!PerlParserUtil.consumeToken(b, HTML_MASON_TAG_CLOSER)) {
-            b.mark().error("Incomplete close tag");
+            b.mark().error(HtmlMasonBundle.message("parsing.error.incomplete.close.tag"));
           }
           tagMarker.done(HTML_MASON_CALL_CLOSE_TAG);
         }

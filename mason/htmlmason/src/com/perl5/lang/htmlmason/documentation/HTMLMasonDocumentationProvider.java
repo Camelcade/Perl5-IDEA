@@ -17,8 +17,10 @@
 package com.perl5.lang.htmlmason.documentation;
 
 import com.intellij.lang.documentation.AbstractDocumentationProvider;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.htmlmason.HTMLMasonUtil;
+import com.perl5.lang.htmlmason.HtmlMasonBundle;
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
 import org.jetbrains.annotations.Nullable;
 
@@ -27,9 +29,9 @@ public class HTMLMasonDocumentationProvider extends AbstractDocumentationProvide
   @Override
   public @Nullable String getQuickNavigateInfo(PsiElement element, PsiElement originalElement) {
     if (element instanceof HTMLMasonFileImpl) {
-      return "HTML::Mason component:<br>" +
-             ((HTMLMasonFileImpl)element).getAbsoluteComponentPath() +
-             HTMLMasonUtil.getArgumentsListAsString((HTMLMasonFileImpl)element);
+      return HtmlMasonBundle.message("file.quick.navigation.info",
+                                     StringUtil.notNullize(((HTMLMasonFileImpl)element).getAbsoluteComponentPath()),
+                                     HTMLMasonUtil.getArgumentsListAsString((HTMLMasonFileImpl)element));
     }
     return super.getQuickNavigateInfo(element, originalElement);
   }

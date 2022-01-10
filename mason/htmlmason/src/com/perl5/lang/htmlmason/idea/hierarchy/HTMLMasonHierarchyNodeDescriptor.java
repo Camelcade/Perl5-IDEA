@@ -21,6 +21,7 @@ import com.intellij.ide.util.treeView.NodeDescriptor;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.roots.ui.util.CompositeAppearance;
 import com.intellij.psi.PsiElement;
+import com.perl5.lang.htmlmason.HtmlMasonBundle;
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
 import com.perl5.lang.perl.idea.hierarchy.namespace.PerlHierarchyNodeDescriptor;
 
@@ -36,9 +37,8 @@ public class HTMLMasonHierarchyNodeDescriptor extends PerlHierarchyNodeDescripto
 
     if (absoluteComponentPath != null) {
       appearance.getEnding().addText(
-        " in " + absoluteComponentPath,
+        HtmlMasonBundle.message("component.location.tail", absoluteComponentPath),
         HierarchyNodeDescriptor.getPackageNameAttributes()
-        //					UsageTreeColorsScheme.getInstance().getScheme().getAttributes(UsageTreeColors.USAGE_LOCATION)
       );
     }
   }

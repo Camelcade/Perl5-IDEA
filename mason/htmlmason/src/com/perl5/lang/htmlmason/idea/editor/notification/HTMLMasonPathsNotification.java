@@ -25,6 +25,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.ui.EditorNotificationPanel;
 import com.intellij.ui.EditorNotifications;
+import com.perl5.lang.htmlmason.HtmlMasonBundle;
 import com.perl5.lang.htmlmason.filetypes.HTMLMasonFileType;
 import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings;
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
@@ -54,19 +55,19 @@ public class HTMLMasonPathsNotification extends EditorNotifications.Provider<Edi
       String message = null;
 
       if (HTMLMasonSettings.getInstance(myProject).getComponentsRoots().isEmpty()) {
-        message = "HTML::Mason components roots are not configured";
+        message = HtmlMasonBundle.message("link.label.html.mason.components.roots.are.not.configured");
       }
       else {
         PsiFile psiFile = PsiManager.getInstance(myProject).findFile(file);
         if (psiFile instanceof HTMLMasonFileImpl && ((HTMLMasonFileImpl)psiFile).getComponentRoot() == null) {
-          message = "Component is not under one of configured roots";
+          message = HtmlMasonBundle.message("link.label.component.not.under.one.configured.roots");
         }
       }
 
       if (message != null) {
         EditorNotificationPanel panel = new EditorNotificationPanel();
         panel.setText(message);
-        panel.createActionLabel("Configure", () -> Perl5SettingsConfigurable.open(myProject));
+        panel.createActionLabel(HtmlMasonBundle.message("link.label.configure"), () -> Perl5SettingsConfigurable.open(myProject));
         return panel;
       }
     }

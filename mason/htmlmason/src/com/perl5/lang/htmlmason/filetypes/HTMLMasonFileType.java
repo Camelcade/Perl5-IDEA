@@ -20,6 +20,7 @@ import com.intellij.openapi.fileTypes.ex.FileTypeIdentifiableByVirtualFile;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.lang.htmlmason.HTMLMasonIcons;
 import com.perl5.lang.htmlmason.HTMLMasonLanguage;
+import com.perl5.lang.htmlmason.HtmlMasonBundle;
 import com.perl5.lang.perl.fileTypes.PerlFileType;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeService;
 import org.jetbrains.annotations.NotNull;
@@ -43,7 +44,7 @@ public class HTMLMasonFileType extends PerlFileType implements FileTypeIdentifia
 
   @Override
   public @NotNull String getDescription() {
-    return "HTML::Mason component";
+    return HtmlMasonBundle.message("label.html.mason.component");
   }
 
   @Override

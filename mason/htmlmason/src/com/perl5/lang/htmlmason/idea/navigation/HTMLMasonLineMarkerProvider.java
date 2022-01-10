@@ -23,6 +23,7 @@ import com.intellij.icons.AllIcons;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.perl5.lang.htmlmason.HtmlMasonBundle;
 import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonMethodDefinition;
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
@@ -41,7 +42,7 @@ public class HTMLMasonLineMarkerProvider extends RelatedItemLineMarkerProvider i
         NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
           .create(AllIcons.Gutter.ImplementingMethod)
           .setTargets(parentComponent)
-          .setTooltipText("Parent component");
+          .setTooltipText(HtmlMasonBundle.message("tooltip.parent.component"));
 
         result.add(builder.createLineMarkerInfo(element));
       }
@@ -51,7 +52,7 @@ public class HTMLMasonLineMarkerProvider extends RelatedItemLineMarkerProvider i
         NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
           .create(AllIcons.Gutter.ImplementedMethod)
           .setTargets(childComponents)
-          .setTooltipText("Child components");
+          .setTooltipText(HtmlMasonBundle.message("tooltip.child.components"));
 
         result.add(builder.createLineMarkerInfo(element));
       }
@@ -66,7 +67,7 @@ public class HTMLMasonLineMarkerProvider extends RelatedItemLineMarkerProvider i
           NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
             .create(AllIcons.Gutter.OverridingMethod)
             .setTargets(methodDefinition)
-            .setTooltipText("Overriding method");
+            .setTooltipText(HtmlMasonBundle.message("tooltip.overriding.method"));
 
           result.add(builder.createLineMarkerInfo(element));
         }
@@ -78,7 +79,7 @@ public class HTMLMasonLineMarkerProvider extends RelatedItemLineMarkerProvider i
           NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
             .create(AllIcons.Gutter.OverridenMethod)
             .setTargets(methodDefinitions)
-            .setTooltipText("Overridden methods");
+            .setTooltipText(HtmlMasonBundle.message("tooltip.overridden.methods"));
 
           result.add(builder.createLineMarkerInfo(element));
         }

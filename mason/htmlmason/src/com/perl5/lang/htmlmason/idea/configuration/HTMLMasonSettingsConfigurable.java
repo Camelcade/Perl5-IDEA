@@ -22,6 +22,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.ComboBoxTableRenderer;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.ui.VerticalFlowLayout;
+import com.intellij.openapi.util.NlsSafe;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.ui.CollectionListModel;
 import com.intellij.ui.TableUtil;
@@ -33,6 +34,7 @@ import com.intellij.util.ui.FormBuilder;
 import com.intellij.util.ui.JBUI;
 import com.intellij.util.ui.ListTableModel;
 import com.perl5.lang.htmlmason.HTMLMasonSyntaxElements;
+import com.perl5.lang.htmlmason.HtmlMasonBundle;
 import com.perl5.lang.mason2.idea.configuration.VariableDescription;
 import com.perl5.lang.perl.parser.PerlParserUtil;
 import com.perl5.lang.perl.util.PerlConfigurationUtil;
@@ -76,10 +78,10 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
     builder.getPanel().setLayout(new VerticalFlowLayout());
 
     defaulthandlerName = new JTextField();
-    builder.addLabeledComponent(new JLabel("Default handler name:"), defaulthandlerName);
+    builder.addLabeledComponent(new JLabel(HtmlMasonBundle.message("default.handler.name")), defaulthandlerName);
 
     autohandlerName = new JTextField();
-    builder.addLabeledComponent(new JLabel("Auto-handler name:"), autohandlerName);
+    builder.addLabeledComponent(new JLabel(HtmlMasonBundle.message("auto.handler.name")), autohandlerName);
 
     createGlobalsComponent(builder);
     createSubstitutedExtensionsComponent(builder);
@@ -173,7 +175,7 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
     substitutedExtensionsPanel =
       PerlConfigurationUtil.createSubstituteExtensionPanel(substitutedExtensionsModel, substitutedExtensionsList);
     builder.addLabeledComponent(
-      new JLabel("Extensions that should be handled as HTML::Mason components except *.mas (only in component roots):"),
+      new JLabel(HtmlMasonBundle.message("extensions.that.should.be.handled.as.html.mason.components.except.mas.only.in.component.roots")),
       substitutedExtensionsPanel);
   }
 
@@ -193,7 +195,7 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
     ComboBoxTableRenderer<HTMLMasonCustomTagRole> roleComboBoxTableRenderer =
       new ComboBoxTableRenderer<>(HTMLMasonCustomTagRole.values()) {
         @Override
-        protected String getTextFor(@NotNull HTMLMasonCustomTagRole value) {
+        protected @NlsSafe String getTextFor(@NotNull HTMLMasonCustomTagRole value) {
           return value.getTitle();
         }
 
@@ -210,7 +212,7 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
     secondColumn.setCellEditor(roleComboBoxTableRenderer);
 
 
-    builder.addLabeledComponent(new JLabel("Custom tags that mimics built-in HTML::Mason tags:"), ToolbarDecorator
+    builder.addLabeledComponent(new JLabel(HtmlMasonBundle.message("custom.tags.that.mimics.built.in.html.mason.tags")), ToolbarDecorator
       .createDecorator(customTagsTable)
       .setAddAction(anActionButton -> {
         final TableCellEditor cellEditor = customTagsTable.getCellEditor();
@@ -253,7 +255,7 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
     protected ListTableModel<HTMLMasonCustomTag> myCustomTagsModel;
 
     public myTagNameColumnInfo() {
-      super("Tag text (without surrounding <% >)");
+      super(HtmlMasonBundle.message("column.name.tag.text.without.surrounding"));
     }
 
     public void setCustomTagsModel(ListTableModel<HTMLMasonCustomTag> myCustomTagsModel) {
@@ -274,13 +276,16 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
     public void setValue(HTMLMasonCustomTag customTag, String value) {
       if (!StringUtil.equals(customTag.getText(), value)) {
         if (!PerlParserUtil.IDENTIFIER_PATTERN.matcher(value).matches()) {
-          Messages.showErrorDialog("Tag text should be a valid identifier", "Incorrect Tag Text");
+          Messages.showErrorDialog(HtmlMasonBundle.message("dialog.message.tag.text.should.be.valid.identifier"),
+                                   HtmlMasonBundle.message("dialog.title.incorrect.tag.text"));
         }
         else if (BUILTIN_TAGS.contains(value)) {
-          Messages.showErrorDialog("Tag <%" + value + "> is already defined in HTML::Mason", "Predefined Tag Text");
+          Messages.showErrorDialog(HtmlMasonBundle.message("dialog.message.tag.already.defined.in.html.mason", value),
+                                   HtmlMasonBundle.message("dialog.title.predefined.tag.text"));
         }
         else if (myCustomTagsModel.getItems().contains(new HTMLMasonCustomTag(value, HTMLMasonCustomTagRole.PERL))) {
-          Messages.showErrorDialog("Tag with such text already exists", "Duplicate Tag Text");
+          Messages.showErrorDialog(HtmlMasonBundle.message("dialog.message.tag.with.such.text.already.exists"),
+                                   HtmlMasonBundle.message("dialog.title.duplicate.tag.text"));
         }
         else {
           customTag.setText(value);
@@ -291,7 +296,7 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
 
   public static class myTagRoleColumInfo extends ColumnInfo<HTMLMasonCustomTag, HTMLMasonCustomTagRole> {
     public myTagRoleColumInfo() {
-      super("Parse");
+      super(HtmlMasonBundle.message("column.name.parse"));
     }
 
     @Override
