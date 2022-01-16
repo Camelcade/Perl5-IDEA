@@ -16,8 +16,8 @@
 
 package com.perl5.lang.perl.idea.codeInsight;
 
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.PersistentStateComponent;
-import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.util.xmlb.XmlSerializerUtil;
@@ -51,7 +51,7 @@ public class Perl5CodeInsightSettings implements PersistentStateComponent<Perl5C
   }
 
   public static Perl5CodeInsightSettings getInstance() {
-    return ServiceManager.getService(Perl5CodeInsightSettings.class);
+    return ApplicationManager.getApplication().getService(Perl5CodeInsightSettings.class);
   }
 
   @TestOnly

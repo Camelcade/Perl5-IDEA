@@ -16,8 +16,8 @@
 
 package com.perl5.lang.perl.idea.configuration.settings;
 
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.PersistentStateComponent;
-import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.openapi.util.text.StringUtil;
@@ -66,6 +66,6 @@ public class PerlApplicationSettings implements PersistentStateComponent<PerlApp
   }
 
   public static PerlApplicationSettings getInstance() {
-    return ServiceManager.getService(PerlApplicationSettings.class);
+    return ApplicationManager.getApplication().getService(PerlApplicationSettings.class);
   }
 }

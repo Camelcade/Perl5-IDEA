@@ -17,7 +17,7 @@
 package com.perl5.lang.perl.intellilang;
 
 import com.intellij.lang.Language;
-import com.intellij.openapi.components.ServiceManager;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.psi.PsiLanguageInjectionHost;
 import org.intellij.plugins.intelliLang.inject.InjectedLanguage;
 import org.intellij.plugins.intelliLang.inject.TemporaryPlacesRegistry;
@@ -33,6 +33,6 @@ public class PerlTemporaryInjectedLanguageDetector {
   }
 
   public static PerlTemporaryInjectedLanguageDetector getInstance() {
-    return ServiceManager.getService(PerlTemporaryInjectedLanguageDetector.class);
+    return ApplicationManager.getApplication().getService(PerlTemporaryInjectedLanguageDetector.class);
   }
 }

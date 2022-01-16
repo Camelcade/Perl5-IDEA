@@ -19,7 +19,6 @@ package com.intellij.openapi.projectRoots.impl;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.PersistentStateComponent;
-import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.openapi.projectRoots.ProjectJdkTable;
@@ -169,6 +168,6 @@ public class PerlSdkTable extends ProjectJdkTable implements PersistentStateComp
   }
 
   public static PerlSdkTable getInstance() {
-    return ServiceManager.getService(PerlSdkTable.class);
+    return ApplicationManager.getApplication().getService(PerlSdkTable.class);
   }
 }

@@ -16,7 +16,7 @@
 
 package com.perl5.lang.perl.idea.folding;
 
-import com.intellij.openapi.components.ServiceManager;
+import com.intellij.openapi.application.ApplicationManager;
 
 
 public class PerlFoldingSettings {
@@ -31,6 +31,6 @@ public class PerlFoldingSettings {
   public boolean COLLAPSE_CHAR_SUBSTITUTIONS = true;
 
   public static PerlFoldingSettings getInstance() {
-    return ServiceManager.getService(PerlFoldingSettings.class);
+    return ApplicationManager.getApplication().getService(PerlFoldingSettings.class);
   }
 }

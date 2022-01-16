@@ -17,8 +17,8 @@
 package com.perl5.lang.perl.fileTypes;
 
 import com.intellij.openapi.Disposable;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.ReadAction;
-import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
@@ -73,7 +73,7 @@ public class PerlFileTypeService implements Disposable {
   }
 
   public static PerlFileTypeService getInstance() {
-    return ServiceManager.getService(PerlFileTypeService.class);
+    return ApplicationManager.getApplication().getService(PerlFileTypeService.class);
   }
 
   public static @Nullable FileType getFileType(@Nullable VirtualFile virtualFile) {
