@@ -17,7 +17,6 @@
 package com.perl5.lang.htmlmason.idea.configuration;
 
 import com.intellij.openapi.components.PersistentStateComponent;
-import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.openapi.fileTypes.FileNameMatcher;
@@ -169,6 +168,6 @@ public class HTMLMasonSettings extends AbstractMasonSettings implements Persiste
   }
 
   public static @NotNull HTMLMasonSettings getInstance(@NotNull Project project) {
-    return ServiceManager.getService(project, HTMLMasonSettings.class);
+    return project.getService(HTMLMasonSettings.class);
   }
 }

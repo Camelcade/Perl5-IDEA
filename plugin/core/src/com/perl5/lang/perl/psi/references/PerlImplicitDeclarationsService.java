@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.psi.references;
 
-import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
@@ -199,6 +198,6 @@ public class PerlImplicitDeclarationsService {
   }
 
   public static @NotNull PerlImplicitDeclarationsService getInstance(@NotNull Project project) {
-    return ServiceManager.getService(project, PerlImplicitDeclarationsService.class);
+    return project.getService(PerlImplicitDeclarationsService.class);
   }
 }

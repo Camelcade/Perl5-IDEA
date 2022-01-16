@@ -24,7 +24,6 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.application.WriteAction;
-import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.module.ModuleUtilCore;
@@ -265,7 +264,7 @@ public class PerlProjectManager implements Disposable {
   }
 
   public static PerlProjectManager getInstance(@NotNull Project project) {
-    return ServiceManager.getService(project, PerlProjectManager.class);
+    return project.getService(PerlProjectManager.class);
   }
 
 

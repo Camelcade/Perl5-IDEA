@@ -20,7 +20,6 @@ import com.intellij.ide.projectView.ProjectView;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.ReadAction;
-import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProcessCanceledException;
 import com.intellij.openapi.progress.ProgressManager;
@@ -261,7 +260,7 @@ public class MojoProjectManager implements Disposable {
   }
 
   public static @NotNull MojoProjectManager getInstance(@NotNull Project project) {
-    return ServiceManager.getService(project, MojoProjectManager.class);
+    return project.getService(MojoProjectManager.class);
   }
 
   public static class Starter implements StartupActivity, DumbAware {

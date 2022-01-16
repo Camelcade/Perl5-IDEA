@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.psi.references;
 
-import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiManager;
 import com.intellij.util.Processor;
@@ -56,6 +55,6 @@ public class PerlBuiltInNamespacesService {
   }
 
   public static @NotNull PerlBuiltInNamespacesService getInstance(@NotNull Project project) {
-    return ServiceManager.getService(project, PerlBuiltInNamespacesService.class);
+    return project.getService(PerlBuiltInNamespacesService.class);
   }
 }

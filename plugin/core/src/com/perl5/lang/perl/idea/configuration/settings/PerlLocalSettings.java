@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.idea.configuration.settings;
 
 import com.intellij.openapi.components.PersistentStateComponent;
-import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.openapi.project.Project;
@@ -34,7 +33,6 @@ import java.util.List;
   name = "Perl5LocalSettings",
   storages = @Storage(PerlPathMacros.PERL5_PROJECT_SETTINGS_FILE)
 )
-
 public class PerlLocalSettings implements PersistentStateComponent<PerlLocalSettings> {
   public boolean DISABLE_NO_INTERPRETER_WARNING = false;
   public boolean DISABLE_ASSOCIATIONS_CHECKING = false;
@@ -68,8 +66,7 @@ public class PerlLocalSettings implements PersistentStateComponent<PerlLocalSett
     XmlSerializerUtil.copyBean(state, this);
   }
 
-  public static PerlLocalSettings getInstance(@NotNull Project project) {
-    PerlLocalSettings persisted = ServiceManager.getService(project, PerlLocalSettings.class);
-    return persisted != null ? persisted : new PerlLocalSettings();
+  public static @NotNull PerlLocalSettings getInstance(@NotNull Project project) {
+    return project.getService(PerlLocalSettings.class);
   }
 }

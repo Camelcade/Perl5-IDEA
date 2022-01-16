@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.idea.completion;
 
-import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.TestOnly;
@@ -43,6 +42,6 @@ public class PerlStringCompletionCache {
   }
 
   public static @NotNull PerlStringCompletionCache getInstance(@NotNull Project project) {
-    return ServiceManager.getService(project, PerlStringCompletionCache.class);
+    return project.getService(PerlStringCompletionCache.class);
   }
 }

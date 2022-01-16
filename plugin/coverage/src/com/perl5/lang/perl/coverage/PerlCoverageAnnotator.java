@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.coverage;
 
 import com.intellij.coverage.SimpleCoverageAnnotator;
-import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -30,7 +29,7 @@ public class PerlCoverageAnnotator extends SimpleCoverageAnnotator {
   }
 
   public static @NotNull PerlCoverageAnnotator getInstance(@NotNull Project project) {
-    return ServiceManager.getService(project, PerlCoverageAnnotator.class);
+    return project.getService(PerlCoverageAnnotator.class);
   }
 
   @Override

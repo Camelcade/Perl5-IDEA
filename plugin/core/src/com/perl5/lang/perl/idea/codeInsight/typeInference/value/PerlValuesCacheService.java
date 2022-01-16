@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.openapi.Disposable;
-import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Pair;
@@ -78,6 +77,6 @@ public class PerlValuesCacheService implements PsiModificationTracker.Listener, 
   }
 
   public static @NotNull PerlValuesCacheService getInstance(@NotNull Project project) {
-    return ServiceManager.getService(project, PerlValuesCacheService.class);
+    return project.getService(PerlValuesCacheService.class);
   }
 }

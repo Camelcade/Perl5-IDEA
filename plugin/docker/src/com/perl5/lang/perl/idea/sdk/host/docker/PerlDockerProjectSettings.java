@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.idea.sdk.host.docker;
 
 import com.intellij.openapi.components.PersistentStateComponent;
-import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.openapi.project.Project;
@@ -56,6 +55,6 @@ class PerlDockerProjectSettings implements PersistentStateComponent<PerlDockerPr
   }
 
   public static PerlDockerProjectSettings getInstance(@NotNull Project project) {
-    return ServiceManager.getService(project, PerlDockerProjectSettings.class);
+    return project.getService(PerlDockerProjectSettings.class);
   }
 }

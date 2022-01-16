@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.psi.references;
 
-import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
@@ -122,7 +121,7 @@ public class PerlBuiltInVariablesService {
   }
 
   public static @NotNull PerlBuiltInVariablesService getInstance(@NotNull Project project) {
-    return ServiceManager.getService(project, PerlBuiltInVariablesService.class);
+    return project.getService(PerlBuiltInVariablesService.class);
   }
 
   /**
