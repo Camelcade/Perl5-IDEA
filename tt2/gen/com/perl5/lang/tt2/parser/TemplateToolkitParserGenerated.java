@@ -655,13 +655,13 @@ public class TemplateToolkitParserGenerated implements PsiParser, LightPsiParser
   }
 
   /* ********************************************************** */
-  // <<parseBlockComment>> | <<parseDirective>>
+  // <<parseBlockComment>> | <<parseDirective directive>>
   static boolean element(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "element")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_);
     result_ = parseBlockComment(builder_, level_ + 1);
-    if (!result_) result_ = parseDirective(builder_, level_ + 1);
+    if (!result_) result_ = parseDirective(builder_, level_ + 1, TemplateToolkitParserGenerated::directive);
     exit_section_(builder_, marker_, null, result_);
     return result_;
   }
@@ -1401,13 +1401,13 @@ public class TemplateToolkitParserGenerated implements PsiParser, LightPsiParser
   }
 
   /* ********************************************************** */
-  // !(TT2_MACRO) <<parseMacroBody>>
+  // !(TT2_MACRO) <<parseMacroBody directive>>
   public static boolean macro_content(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "macro_content")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_, level_, _NONE_, MACRO_CONTENT, "<macro content>");
     result_ = macro_content_0(builder_, level_ + 1);
-    result_ = result_ && parseMacroBody(builder_, level_ + 1);
+    result_ = result_ && parseMacroBody(builder_, level_ + 1, TemplateToolkitParserGenerated::directive);
     exit_section_(builder_, level_, marker_, result_, false, null);
     return result_;
   }

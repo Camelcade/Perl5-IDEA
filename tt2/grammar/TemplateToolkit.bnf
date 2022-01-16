@@ -137,7 +137,7 @@
 }
 
 root ::= element *
-private element ::= <<parseBlockComment>> | <<parseDirective>>
+private element ::= <<parseBlockComment>> | <<parseDirective directive>>
 
 private directive ::=
 	block_directive |
@@ -261,7 +261,7 @@ filter_block ::= filter_directive element * end_directive // fake rule to genera
 
 macro_directive ::= TT2_MACRO macro_name macro_content {pin=1}
 macro_name ::= keyword_or_identifier_term [call_arguments]
-macro_content ::= !(TT2_MACRO) <<parseMacroBody>>
+macro_content ::= !(TT2_MACRO) <<parseMacroBody directive>>
 
 perl_directive ::= TT2_PERL
 rawperl_directive ::= TT2_RAWPERL

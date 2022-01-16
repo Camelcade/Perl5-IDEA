@@ -27,6 +27,7 @@ import com.perl5.lang.tt2.TemplateToolkitBundle;
 import com.perl5.lang.tt2.TemplateToolkitParserDefinition;
 import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
 import com.perl5.lang.tt2.lexer.TemplateToolkitSyntaxElements;
+import org.jetbrains.annotations.NotNull;
 
 
 @SuppressWarnings("Duplicates")
@@ -139,12 +140,12 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
     return false;
   }
 
-  public static boolean parseMacroBody(PsiBuilder b, int l) {
+  public static boolean parseMacroBody(@NotNull PsiBuilder b, int l, @NotNull Parser directiveParser) {
     boolean r = false;
     LighterASTNode latestDoneMarker = null;
     PsiBuilder.Marker outerMarker = b.mark();
 
-    if (TemplateToolkitParser.directive(b, l)) {
+    if (directiveParser.parse(b, l)) {
       latestDoneMarker = b.getLatestDoneMarker();
 
       PsiBuilder.Marker m = null;
@@ -175,7 +176,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
   }
 
 
-  public static boolean parseDirective(PsiBuilder b, int l) {
+  public static boolean parseDirective(@NotNull PsiBuilder b, int l, @NotNull Parser directiveParser) {
     IElementType tokenType = b.getTokenType();
     boolean r = false;
     LighterASTNode latestDoneMarker = null;
@@ -187,7 +188,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
         b.advanceLexer();
       }
 
-      if (TemplateToolkitParser.directive(b, l)) {
+      if (directiveParser.parse(b, l)) {
         latestDoneMarker = b.getLatestDoneMarker();
       }
 
@@ -215,7 +216,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
     else if (tokenType == TT2_OUTLINE_TAG) {
       b.advanceLexer();
 
-      if (TemplateToolkitParser.directive(b, l)) {
+      if (directiveParser.parse(b, l)) {
         latestDoneMarker = b.getLatestDoneMarker();
       }
 
