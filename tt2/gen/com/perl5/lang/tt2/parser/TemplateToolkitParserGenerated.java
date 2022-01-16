@@ -45,30 +45,6 @@ public class TemplateToolkitParserGenerated implements PsiParser, LightPsiParser
   };
 
   /* ********************************************************** */
-  // anon_block_directive element * end_directive
-  public static boolean anon_block(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "anon_block")) return false;
-    boolean result_;
-    Marker marker_ = enter_section_(builder_, level_, _NONE_, ANON_BLOCK, "<anon block>");
-    result_ = anon_block_directive(builder_, level_ + 1);
-    result_ = result_ && anon_block_1(builder_, level_ + 1);
-    result_ = result_ && end_directive(builder_, level_ + 1);
-    exit_section_(builder_, level_, marker_, result_, false, null);
-    return result_;
-  }
-
-  // element *
-  private static boolean anon_block_1(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "anon_block_1")) return false;
-    while (true) {
-      int pos_ = current_position_(builder_);
-      if (!element(builder_, level_ + 1)) break;
-      if (!empty_element_parsed_guard_(builder_, "anon_block_1", pos_)) break;
-    }
-    return true;
-  }
-
-  /* ********************************************************** */
   // identifier_expr TT2_ASSIGN !TT2_CLOSE_TAG TT2_BLOCK
   public static boolean anon_block_directive(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "anon_block_directive")) return false;
@@ -175,17 +151,6 @@ public class TemplateToolkitParserGenerated implements PsiParser, LightPsiParser
     if (!result_) result_ = throw_directive(builder_, level_ + 1);
     if (!result_) result_ = set_directive(builder_, level_ + 1);
     if (!result_) result_ = get_directive(builder_, level_ + 1);
-    return result_;
-  }
-
-  /* ********************************************************** */
-  // expr
-  public static boolean block_comment(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "block_comment")) return false;
-    boolean result_;
-    Marker marker_ = enter_section_(builder_, level_, _NONE_, BLOCK_COMMENT, "<block comment>");
-    result_ = expr(builder_, level_ + 1, -1);
-    exit_section_(builder_, level_, marker_, result_, false, null);
     return result_;
   }
 
@@ -350,30 +315,6 @@ public class TemplateToolkitParserGenerated implements PsiParser, LightPsiParser
   }
 
   /* ********************************************************** */
-  // case_directive element *
-  public static boolean case_block(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "case_block")) return false;
-    if (!nextTokenIs(builder_, TT2_CASE)) return false;
-    boolean result_;
-    Marker marker_ = enter_section_(builder_);
-    result_ = case_directive(builder_, level_ + 1);
-    result_ = result_ && case_block_1(builder_, level_ + 1);
-    exit_section_(builder_, marker_, CASE_BLOCK, result_);
-    return result_;
-  }
-
-  // element *
-  private static boolean case_block_1(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "case_block_1")) return false;
-    while (true) {
-      int pos_ = current_position_(builder_);
-      if (!element(builder_, level_ + 1)) break;
-      if (!empty_element_parsed_guard_(builder_, "case_block_1", pos_)) break;
-    }
-    return true;
-  }
-
-  /* ********************************************************** */
   // TT2_CASE [TT2_DEFAULT|expr]
   public static boolean case_directive(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "case_directive")) return false;
@@ -401,30 +342,6 @@ public class TemplateToolkitParserGenerated implements PsiParser, LightPsiParser
     result_ = consumeToken(builder_, TT2_DEFAULT);
     if (!result_) result_ = expr(builder_, level_ + 1, -1);
     return result_;
-  }
-
-  /* ********************************************************** */
-  // catch_directive element *
-  public static boolean catch_branch(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "catch_branch")) return false;
-    if (!nextTokenIs(builder_, TT2_CATCH)) return false;
-    boolean result_;
-    Marker marker_ = enter_section_(builder_);
-    result_ = catch_directive(builder_, level_ + 1);
-    result_ = result_ && catch_branch_1(builder_, level_ + 1);
-    exit_section_(builder_, marker_, CATCH_BRANCH, result_);
-    return result_;
-  }
-
-  // element *
-  private static boolean catch_branch_1(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "catch_branch_1")) return false;
-    while (true) {
-      int pos_ = current_position_(builder_);
-      if (!element(builder_, level_ + 1)) break;
-      if (!empty_element_parsed_guard_(builder_, "catch_branch_1", pos_)) break;
-    }
-    return true;
   }
 
   /* ********************************************************** */
@@ -667,30 +584,6 @@ public class TemplateToolkitParserGenerated implements PsiParser, LightPsiParser
   }
 
   /* ********************************************************** */
-  // else_directive element *
-  public static boolean else_branch(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "else_branch")) return false;
-    if (!nextTokenIs(builder_, TT2_ELSE)) return false;
-    boolean result_;
-    Marker marker_ = enter_section_(builder_);
-    result_ = else_directive(builder_, level_ + 1);
-    result_ = result_ && else_branch_1(builder_, level_ + 1);
-    exit_section_(builder_, marker_, ELSE_BRANCH, result_);
-    return result_;
-  }
-
-  // element *
-  private static boolean else_branch_1(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "else_branch_1")) return false;
-    while (true) {
-      int pos_ = current_position_(builder_);
-      if (!element(builder_, level_ + 1)) break;
-      if (!empty_element_parsed_guard_(builder_, "else_branch_1", pos_)) break;
-    }
-    return true;
-  }
-
-  /* ********************************************************** */
   // TT2_ELSE
   public static boolean else_directive(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "else_directive")) return false;
@@ -700,30 +593,6 @@ public class TemplateToolkitParserGenerated implements PsiParser, LightPsiParser
     result_ = consumeToken(builder_, TT2_ELSE);
     exit_section_(builder_, marker_, ELSE_DIRECTIVE, result_);
     return result_;
-  }
-
-  /* ********************************************************** */
-  // elsif_directive element *
-  public static boolean elsif_branch(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "elsif_branch")) return false;
-    if (!nextTokenIs(builder_, TT2_ELSIF)) return false;
-    boolean result_;
-    Marker marker_ = enter_section_(builder_);
-    result_ = elsif_directive(builder_, level_ + 1);
-    result_ = result_ && elsif_branch_1(builder_, level_ + 1);
-    exit_section_(builder_, marker_, ELSIF_BRANCH, result_);
-    return result_;
-  }
-
-  // element *
-  private static boolean elsif_branch_1(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "elsif_branch_1")) return false;
-    while (true) {
-      int pos_ = current_position_(builder_);
-      if (!element(builder_, level_ + 1)) break;
-      if (!empty_element_parsed_guard_(builder_, "elsif_branch_1", pos_)) break;
-    }
-    return true;
   }
 
   /* ********************************************************** */
@@ -821,31 +690,6 @@ public class TemplateToolkitParserGenerated implements PsiParser, LightPsiParser
   }
 
   /* ********************************************************** */
-  // filter_directive element * end_directive
-  public static boolean filter_block(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "filter_block")) return false;
-    if (!nextTokenIs(builder_, TT2_FILTER)) return false;
-    boolean result_;
-    Marker marker_ = enter_section_(builder_);
-    result_ = filter_directive(builder_, level_ + 1);
-    result_ = result_ && filter_block_1(builder_, level_ + 1);
-    result_ = result_ && end_directive(builder_, level_ + 1);
-    exit_section_(builder_, marker_, FILTER_BLOCK, result_);
-    return result_;
-  }
-
-  // element *
-  private static boolean filter_block_1(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "filter_block_1")) return false;
-    while (true) {
-      int pos_ = current_position_(builder_);
-      if (!element(builder_, level_ + 1)) break;
-      if (!empty_element_parsed_guard_(builder_, "filter_block_1", pos_)) break;
-    }
-    return true;
-  }
-
-  /* ********************************************************** */
   // TT2_FILTER filter_arguments [directive_postfix]
   public static boolean filter_directive(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "filter_directive")) return false;
@@ -899,30 +743,6 @@ public class TemplateToolkitParserGenerated implements PsiParser, LightPsiParser
   }
 
   /* ********************************************************** */
-  // final_directive element *
-  public static boolean final_branch(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "final_branch")) return false;
-    if (!nextTokenIs(builder_, TT2_FINAL)) return false;
-    boolean result_;
-    Marker marker_ = enter_section_(builder_);
-    result_ = final_directive(builder_, level_ + 1);
-    result_ = result_ && final_branch_1(builder_, level_ + 1);
-    exit_section_(builder_, marker_, FINAL_BRANCH, result_);
-    return result_;
-  }
-
-  // element *
-  private static boolean final_branch_1(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "final_branch_1")) return false;
-    while (true) {
-      int pos_ = current_position_(builder_);
-      if (!element(builder_, level_ + 1)) break;
-      if (!empty_element_parsed_guard_(builder_, "final_branch_1", pos_)) break;
-    }
-    return true;
-  }
-
-  /* ********************************************************** */
   // TT2_FINAL
   public static boolean final_directive(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "final_directive")) return false;
@@ -932,31 +752,6 @@ public class TemplateToolkitParserGenerated implements PsiParser, LightPsiParser
     result_ = consumeToken(builder_, TT2_FINAL);
     exit_section_(builder_, marker_, FINAL_DIRECTIVE, result_);
     return result_;
-  }
-
-  /* ********************************************************** */
-  // foreach_directive element * end_directive
-  public static boolean foreach_block(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "foreach_block")) return false;
-    if (!nextTokenIs(builder_, TT2_FOREACH)) return false;
-    boolean result_;
-    Marker marker_ = enter_section_(builder_);
-    result_ = foreach_directive(builder_, level_ + 1);
-    result_ = result_ && foreach_block_1(builder_, level_ + 1);
-    result_ = result_ && end_directive(builder_, level_ + 1);
-    exit_section_(builder_, marker_, FOREACH_BLOCK, result_);
-    return result_;
-  }
-
-  // element *
-  private static boolean foreach_block_1(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "foreach_block_1")) return false;
-    while (true) {
-      int pos_ = current_position_(builder_);
-      if (!element(builder_, level_ + 1)) break;
-      if (!empty_element_parsed_guard_(builder_, "foreach_block_1", pos_)) break;
-    }
-    return true;
   }
 
   /* ********************************************************** */
@@ -1191,43 +986,6 @@ public class TemplateToolkitParserGenerated implements PsiParser, LightPsiParser
   }
 
   /* ********************************************************** */
-  // if_branch if_sequence
-  public static boolean if_block(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "if_block")) return false;
-    if (!nextTokenIs(builder_, TT2_IF)) return false;
-    boolean result_;
-    Marker marker_ = enter_section_(builder_);
-    result_ = if_branch(builder_, level_ + 1);
-    result_ = result_ && if_sequence(builder_, level_ + 1);
-    exit_section_(builder_, marker_, IF_BLOCK, result_);
-    return result_;
-  }
-
-  /* ********************************************************** */
-  // if_directive element *
-  public static boolean if_branch(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "if_branch")) return false;
-    if (!nextTokenIs(builder_, TT2_IF)) return false;
-    boolean result_;
-    Marker marker_ = enter_section_(builder_);
-    result_ = if_directive(builder_, level_ + 1);
-    result_ = result_ && if_branch_1(builder_, level_ + 1);
-    exit_section_(builder_, marker_, IF_BRANCH, result_);
-    return result_;
-  }
-
-  // element *
-  private static boolean if_branch_1(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "if_branch_1")) return false;
-    while (true) {
-      int pos_ = current_position_(builder_);
-      if (!element(builder_, level_ + 1)) break;
-      if (!empty_element_parsed_guard_(builder_, "if_branch_1", pos_)) break;
-    }
-    return true;
-  }
-
-  /* ********************************************************** */
   // TT2_IF expr
   public static boolean if_directive(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "if_directive")) return false;
@@ -1239,37 +997,6 @@ public class TemplateToolkitParserGenerated implements PsiParser, LightPsiParser
     result_ = result_ && expr(builder_, level_ + 1, -1);
     exit_section_(builder_, level_, marker_, result_, pinned_, null);
     return result_ || pinned_;
-  }
-
-  /* ********************************************************** */
-  // elsif_branch * [else_branch] end_directive
-  static boolean if_sequence(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "if_sequence")) return false;
-    boolean result_;
-    Marker marker_ = enter_section_(builder_);
-    result_ = if_sequence_0(builder_, level_ + 1);
-    result_ = result_ && if_sequence_1(builder_, level_ + 1);
-    result_ = result_ && end_directive(builder_, level_ + 1);
-    exit_section_(builder_, marker_, null, result_);
-    return result_;
-  }
-
-  // elsif_branch *
-  private static boolean if_sequence_0(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "if_sequence_0")) return false;
-    while (true) {
-      int pos_ = current_position_(builder_);
-      if (!elsif_branch(builder_, level_ + 1)) break;
-      if (!empty_element_parsed_guard_(builder_, "if_sequence_0", pos_)) break;
-    }
-    return true;
-  }
-
-  // [else_branch]
-  private static boolean if_sequence_1(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "if_sequence_1")) return false;
-    else_branch(builder_, level_ + 1);
-    return true;
   }
 
   /* ********************************************************** */
@@ -1509,31 +1236,6 @@ public class TemplateToolkitParserGenerated implements PsiParser, LightPsiParser
   }
 
   /* ********************************************************** */
-  // block_directive element * end_directive
-  public static boolean named_block(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "named_block")) return false;
-    if (!nextTokenIs(builder_, TT2_BLOCK)) return false;
-    boolean result_;
-    Marker marker_ = enter_section_(builder_);
-    result_ = block_directive(builder_, level_ + 1);
-    result_ = result_ && named_block_1(builder_, level_ + 1);
-    result_ = result_ && end_directive(builder_, level_ + 1);
-    exit_section_(builder_, marker_, NAMED_BLOCK, result_);
-    return result_;
-  }
-
-  // element *
-  private static boolean named_block_1(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "named_block_1")) return false;
-    while (true) {
-      int pos_ = current_position_(builder_);
-      if (!element(builder_, level_ + 1)) break;
-      if (!empty_element_parsed_guard_(builder_, "named_block_1", pos_)) break;
-    }
-    return true;
-  }
-
-  /* ********************************************************** */
   // TT2_NEXT [directive_postfix]
   public static boolean next_directive(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "next_directive")) return false;
@@ -1555,7 +1257,7 @@ public class TemplateToolkitParserGenerated implements PsiParser, LightPsiParser
   }
 
   /* ********************************************************** */
-  // {string_argument | <<parseHashKey>>} TT2_ASSIGN !TT2_CLOSE_TAG expr
+  // {string_argument | <<parseHashKey keyword_or_identifier_term>>} TT2_ASSIGN !TT2_CLOSE_TAG expr
   public static boolean pair_expr(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "pair_expr")) return false;
     boolean result_;
@@ -1568,13 +1270,13 @@ public class TemplateToolkitParserGenerated implements PsiParser, LightPsiParser
     return result_;
   }
 
-  // string_argument | <<parseHashKey>>
+  // string_argument | <<parseHashKey keyword_or_identifier_term>>
   private static boolean pair_expr_0(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "pair_expr_0")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_);
     result_ = string_argument(builder_, level_ + 1);
-    if (!result_) result_ = parseHashKey(builder_, level_ + 1);
+    if (!result_) result_ = parseHashKey(builder_, level_ + 1, TemplateToolkitParserGenerated::keyword_or_identifier_term);
     exit_section_(builder_, marker_, null, result_);
     return result_;
   }
@@ -1649,19 +1351,6 @@ public class TemplateToolkitParserGenerated implements PsiParser, LightPsiParser
   }
 
   /* ********************************************************** */
-  // perl_directive end_directive
-  public static boolean perl_block(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "perl_block")) return false;
-    if (!nextTokenIs(builder_, TT2_PERL)) return false;
-    boolean result_;
-    Marker marker_ = enter_section_(builder_);
-    result_ = perl_directive(builder_, level_ + 1);
-    result_ = result_ && end_directive(builder_, level_ + 1);
-    exit_section_(builder_, marker_, PERL_BLOCK, result_);
-    return result_;
-  }
-
-  /* ********************************************************** */
   // TT2_PERL
   public static boolean perl_directive(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "perl_directive")) return false;
@@ -1705,19 +1394,6 @@ public class TemplateToolkitParserGenerated implements PsiParser, LightPsiParser
     if (!recursion_guard_(builder_, level_, "process_directive_3")) return false;
     directive_postfix(builder_, level_ + 1);
     return true;
-  }
-
-  /* ********************************************************** */
-  // rawperl_directive end_directive
-  public static boolean rawperl_block(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "rawperl_block")) return false;
-    if (!nextTokenIs(builder_, TT2_RAWPERL)) return false;
-    boolean result_;
-    Marker marker_ = enter_section_(builder_);
-    result_ = rawperl_directive(builder_, level_ + 1);
-    result_ = result_ && end_directive(builder_, level_ + 1);
-    exit_section_(builder_, marker_, RAWPERL_BLOCK, result_);
-    return result_;
   }
 
   /* ********************************************************** */
@@ -2045,7 +1721,7 @@ public class TemplateToolkitParserGenerated implements PsiParser, LightPsiParser
   }
 
   /* ********************************************************** */
-  // [TT2_SET] <<parseSetElement>> + [directive_postfix]
+  // [TT2_SET] <<parseSetElement parse_set_element>> + [directive_postfix]
   public static boolean set_directive(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "set_directive")) return false;
     boolean result_;
@@ -2064,15 +1740,15 @@ public class TemplateToolkitParserGenerated implements PsiParser, LightPsiParser
     return true;
   }
 
-  // <<parseSetElement>> +
+  // <<parseSetElement parse_set_element>> +
   private static boolean set_directive_1(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "set_directive_1")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_);
-    result_ = parseSetElement(builder_, level_ + 1);
+    result_ = parseSetElement(builder_, level_ + 1, TemplateToolkitParserGenerated::parse_set_element);
     while (result_) {
       int pos_ = current_position_(builder_);
-      if (!parseSetElement(builder_, level_ + 1)) break;
+      if (!parseSetElement(builder_, level_ + 1, TemplateToolkitParserGenerated::parse_set_element)) break;
       if (!empty_element_parsed_guard_(builder_, "set_directive_1", pos_)) break;
     }
     exit_section_(builder_, marker_, null, result_);
@@ -2194,31 +1870,6 @@ public class TemplateToolkitParserGenerated implements PsiParser, LightPsiParser
   }
 
   /* ********************************************************** */
-  // switch_directive case_block * end_directive
-  public static boolean switch_block(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "switch_block")) return false;
-    if (!nextTokenIs(builder_, TT2_SWITCH)) return false;
-    boolean result_;
-    Marker marker_ = enter_section_(builder_);
-    result_ = switch_directive(builder_, level_ + 1);
-    result_ = result_ && switch_block_1(builder_, level_ + 1);
-    result_ = result_ && end_directive(builder_, level_ + 1);
-    exit_section_(builder_, marker_, SWITCH_BLOCK, result_);
-    return result_;
-  }
-
-  // case_block *
-  private static boolean switch_block_1(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "switch_block_1")) return false;
-    while (true) {
-      int pos_ = current_position_(builder_);
-      if (!case_block(builder_, level_ + 1)) break;
-      if (!empty_element_parsed_guard_(builder_, "switch_block_1", pos_)) break;
-    }
-    return true;
-  }
-
-  /* ********************************************************** */
   // TT2_SWITCH expr
   public static boolean switch_directive(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "switch_directive")) return false;
@@ -2278,63 +1929,6 @@ public class TemplateToolkitParserGenerated implements PsiParser, LightPsiParser
   }
 
   /* ********************************************************** */
-  // try_directive element *
-  public static boolean try_branch(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "try_branch")) return false;
-    if (!nextTokenIs(builder_, TT2_TRY)) return false;
-    boolean result_;
-    Marker marker_ = enter_section_(builder_);
-    result_ = try_directive(builder_, level_ + 1);
-    result_ = result_ && try_branch_1(builder_, level_ + 1);
-    exit_section_(builder_, marker_, TRY_BRANCH, result_);
-    return result_;
-  }
-
-  // element *
-  private static boolean try_branch_1(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "try_branch_1")) return false;
-    while (true) {
-      int pos_ = current_position_(builder_);
-      if (!element(builder_, level_ + 1)) break;
-      if (!empty_element_parsed_guard_(builder_, "try_branch_1", pos_)) break;
-    }
-    return true;
-  }
-
-  /* ********************************************************** */
-  // try_branch catch_branch* [final_branch] end_directive
-  public static boolean try_catch_block(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "try_catch_block")) return false;
-    if (!nextTokenIs(builder_, TT2_TRY)) return false;
-    boolean result_;
-    Marker marker_ = enter_section_(builder_);
-    result_ = try_branch(builder_, level_ + 1);
-    result_ = result_ && try_catch_block_1(builder_, level_ + 1);
-    result_ = result_ && try_catch_block_2(builder_, level_ + 1);
-    result_ = result_ && end_directive(builder_, level_ + 1);
-    exit_section_(builder_, marker_, TRY_CATCH_BLOCK, result_);
-    return result_;
-  }
-
-  // catch_branch*
-  private static boolean try_catch_block_1(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "try_catch_block_1")) return false;
-    while (true) {
-      int pos_ = current_position_(builder_);
-      if (!catch_branch(builder_, level_ + 1)) break;
-      if (!empty_element_parsed_guard_(builder_, "try_catch_block_1", pos_)) break;
-    }
-    return true;
-  }
-
-  // [final_branch]
-  private static boolean try_catch_block_2(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "try_catch_block_2")) return false;
-    final_branch(builder_, level_ + 1);
-    return true;
-  }
-
-  /* ********************************************************** */
   // TT2_TRY
   public static boolean try_directive(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "try_directive")) return false;
@@ -2344,43 +1938,6 @@ public class TemplateToolkitParserGenerated implements PsiParser, LightPsiParser
     result_ = consumeToken(builder_, TT2_TRY);
     exit_section_(builder_, marker_, TRY_DIRECTIVE, result_);
     return result_;
-  }
-
-  /* ********************************************************** */
-  // unless_branch if_sequence
-  public static boolean unless_block(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "unless_block")) return false;
-    if (!nextTokenIs(builder_, TT2_UNLESS)) return false;
-    boolean result_;
-    Marker marker_ = enter_section_(builder_);
-    result_ = unless_branch(builder_, level_ + 1);
-    result_ = result_ && if_sequence(builder_, level_ + 1);
-    exit_section_(builder_, marker_, UNLESS_BLOCK, result_);
-    return result_;
-  }
-
-  /* ********************************************************** */
-  // unless_directive element *
-  public static boolean unless_branch(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "unless_branch")) return false;
-    if (!nextTokenIs(builder_, TT2_UNLESS)) return false;
-    boolean result_;
-    Marker marker_ = enter_section_(builder_);
-    result_ = unless_directive(builder_, level_ + 1);
-    result_ = result_ && unless_branch_1(builder_, level_ + 1);
-    exit_section_(builder_, marker_, UNLESS_BRANCH, result_);
-    return result_;
-  }
-
-  // element *
-  private static boolean unless_branch_1(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "unless_branch_1")) return false;
-    while (true) {
-      int pos_ = current_position_(builder_);
-      if (!element(builder_, level_ + 1)) break;
-      if (!empty_element_parsed_guard_(builder_, "unless_branch_1", pos_)) break;
-    }
-    return true;
   }
 
   /* ********************************************************** */
@@ -2551,31 +2108,6 @@ public class TemplateToolkitParserGenerated implements PsiParser, LightPsiParser
   }
 
   /* ********************************************************** */
-  // while_directive element* end_directive
-  public static boolean while_block(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "while_block")) return false;
-    if (!nextTokenIs(builder_, TT2_WHILE)) return false;
-    boolean result_;
-    Marker marker_ = enter_section_(builder_);
-    result_ = while_directive(builder_, level_ + 1);
-    result_ = result_ && while_block_1(builder_, level_ + 1);
-    result_ = result_ && end_directive(builder_, level_ + 1);
-    exit_section_(builder_, marker_, WHILE_BLOCK, result_);
-    return result_;
-  }
-
-  // element*
-  private static boolean while_block_1(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "while_block_1")) return false;
-    while (true) {
-      int pos_ = current_position_(builder_);
-      if (!element(builder_, level_ + 1)) break;
-      if (!empty_element_parsed_guard_(builder_, "while_block_1", pos_)) break;
-    }
-    return true;
-  }
-
-  /* ********************************************************** */
   // TT2_WHILE expr
   public static boolean while_directive(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "while_directive")) return false;
@@ -2587,31 +2119,6 @@ public class TemplateToolkitParserGenerated implements PsiParser, LightPsiParser
     result_ = result_ && expr(builder_, level_ + 1, -1);
     exit_section_(builder_, level_, marker_, result_, pinned_, null);
     return result_ || pinned_;
-  }
-
-  /* ********************************************************** */
-  // wrapper_directive element* end_directive
-  public static boolean wrapper_block(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "wrapper_block")) return false;
-    if (!nextTokenIs(builder_, TT2_WRAPPER)) return false;
-    boolean result_;
-    Marker marker_ = enter_section_(builder_);
-    result_ = wrapper_directive(builder_, level_ + 1);
-    result_ = result_ && wrapper_block_1(builder_, level_ + 1);
-    result_ = result_ && end_directive(builder_, level_ + 1);
-    exit_section_(builder_, marker_, WRAPPER_BLOCK, result_);
-    return result_;
-  }
-
-  // element*
-  private static boolean wrapper_block_1(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "wrapper_block_1")) return false;
-    while (true) {
-      int pos_ = current_position_(builder_);
-      if (!element(builder_, level_ + 1)) break;
-      if (!empty_element_parsed_guard_(builder_, "wrapper_block_1", pos_)) break;
-    }
-    return true;
   }
 
   /* ********************************************************** */
