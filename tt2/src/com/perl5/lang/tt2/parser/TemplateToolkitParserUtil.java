@@ -69,9 +69,9 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
     return false;
   }
 
-  public static boolean parseHashKey(PsiBuilder b, int l) {
+  public static boolean parseHashKey(@NotNull PsiBuilder b, int l, @NotNull Parser keywordOrIdentifierTermParser) {
     PsiBuilder.Marker m = b.mark();
-    if (TemplateToolkitParser.keyword_or_identifier_term(b, l)) {
+    if (keywordOrIdentifierTermParser.parse(b, l)) {
       m.collapse(TT2_STRING_CONTENT);
       m.precede().done(SQ_STRING_EXPR);
       return true;
@@ -537,9 +537,9 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
     return true;
   }
 
-  public static boolean parseSetElement(PsiBuilder b, int l) {
+  public static boolean parseSetElement(@NotNull PsiBuilder b, int l, @NotNull Parser setElementParser) {
     PsiBuilder.Marker m = b.mark();
-    if (TemplateToolkitParser.parse_set_element(b, l)) {
+    if (setElementParser.parse(b, l)) {
       m.done(ASSIGN_EXPR);
       return true;
     }

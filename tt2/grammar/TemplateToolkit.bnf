@@ -208,7 +208,7 @@ filter_element_expr ::= TT2_FILTER filter_arguments {pin=1}
 call_directive ::= TT2_CALL expr [directive_postfix] {pin=1}
 get_directive ::= [TT2_GET] expr [directive_postfix]
 
-set_directive ::= [TT2_SET] <<parseSetElement>> + [directive_postfix]
+set_directive ::= [TT2_SET] <<parseSetElement parse_set_element>> + [directive_postfix]
 private parse_set_element ::= identifier_expr TT2_ASSIGN !TT2_CLOSE_TAG {process_directive|expr}
 
 default_directive ::= TT2_DEFAULT assign_expr + [directive_postfix] {pin=1}
@@ -326,7 +326,7 @@ anon_block_directive ::= identifier_expr TT2_ASSIGN !TT2_CLOSE_TAG TT2_BLOCK {pi
 hash_expr ::= TT2_LEFT_BRACE hash_expr_content TT2_RIGHT_BRACE {pin=1}
 private hash_expr_content ::= {hash_expr_item [TT2_COMMA]} *
 private hash_expr_item ::= pair_expr {pin=2 recoverWhile=recover_hash_expr_item}
-pair_expr ::= {string_argument | <<parseHashKey>>} TT2_ASSIGN !TT2_CLOSE_TAG expr
+pair_expr ::= {string_argument | <<parseHashKey keyword_or_identifier_term>>} TT2_ASSIGN !TT2_CLOSE_TAG expr
 private recover_hash_expr_item ::= !(TT2_DQ_OPEN|TT2_SQ_OPEN|TT2_IDENTIFIER|TT2_FORMAT|TT2_ON|TT2|OFF|TT2_RIGHT_BRACE|TT2_COMMA|TT2_HARD_NEWLINE|[TT2_MINUS]TT2_CLOSE_TAG|TT2_SEMI)
 
 array_expr ::= TT2_LEFT_BRACKET array_expr_content TT2_RIGHT_BRACKET {pin=1}
