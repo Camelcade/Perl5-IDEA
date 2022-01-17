@@ -60,6 +60,7 @@ public class Perl5SdkPanel {
 
     ActionToolbarImpl toolbar =
       (ActionToolbarImpl)ActionManager.getInstance().createActionToolbar(ActionPlaces.NAVIGATION_BAR_TOOLBAR, toolbarActionGroup, true);
+    toolbar.setTargetComponent(null);
     toolbar.setReservePlaceAutoPopupIcon(false);
     toolbar.setLayoutPolicy(ActionToolbar.NOWRAP_LAYOUT_POLICY);
     toolbar.getComponent().setBorder(JBUI.Borders.empty());

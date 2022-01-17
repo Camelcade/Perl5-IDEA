@@ -93,6 +93,7 @@ public class PerlContentEntriesTreeEditor implements UnnamedConfigurable, Dispos
     myTreePanel = new JPanel(new GridBagLayout());
 
     ActionToolbar actionToolbar = ActionManager.getInstance().createActionToolbar("PerlContentEntries", myEditingActionsGroup, true);
+    actionToolbar.setTargetComponent(null);
     myTreePanel.add(new JLabel("Mark as:"), new GridBagConstraints(0, 0, 1, 1, 0, 0, GridBagConstraints.WEST, 0, JBUI.insets(0, 10), 0, 0));
     myTreePanel.add(actionToolbar.getComponent(),
                     new GridBagConstraints(1, 0, 1, 1, 1.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL,
