@@ -19,11 +19,9 @@ package com.perl5.lang.perl.idea.configuration.module.idea;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleConfigurationEditor;
 import com.intellij.openapi.module.ModuleType;
-import com.intellij.openapi.roots.ui.configuration.CommonContentEntriesEditor;
 import com.intellij.openapi.roots.ui.configuration.ModuleConfigurationEditorProvider;
 import com.intellij.openapi.roots.ui.configuration.ModuleConfigurationState;
 import com.perl5.lang.perl.idea.modules.PerlModuleType;
-import org.jetbrains.jps.model.java.JavaSourceRootType;
 
 
 public class PerlModuleConfigurationEditorProvider implements ModuleConfigurationEditorProvider {
@@ -32,7 +30,6 @@ public class PerlModuleConfigurationEditorProvider implements ModuleConfiguratio
     Module module = state.getCurrentRootModel().getModule();
     if (ModuleType.get(module) instanceof PerlModuleType) {
       return new ModuleConfigurationEditor[]{
-        new CommonContentEntriesEditor(module.getName(), state, JavaSourceRootType.SOURCE, JavaSourceRootType.TEST_SOURCE),
         new PerlDumbModuleConfigurable()
       };
     }

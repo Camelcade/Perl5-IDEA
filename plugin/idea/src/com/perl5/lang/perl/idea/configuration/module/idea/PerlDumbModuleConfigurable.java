@@ -24,8 +24,6 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 
 public class PerlDumbModuleConfigurable implements ModuleConfigurationEditor {
-  private JPanel myMainPanel;
-
   @Override
   public @Nls String getDisplayName() {
     return PerlBundle.message("perl.perl5");
@@ -33,7 +31,9 @@ public class PerlDumbModuleConfigurable implements ModuleConfigurationEditor {
 
   @Override
   public @Nullable JComponent createComponent() {
-    return myMainPanel;
+    var panel = new JPanel();
+    panel.add(new JLabel(PerlBundle.message("please.use.file.settings.languages.frameworks.perl5.to.configure.perl.module")));
+    return panel;
   }
 
   @Override
