@@ -24,6 +24,7 @@ import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.Key;
+import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.util.text.StringUtil;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.execution.PortMapping;
@@ -55,7 +56,8 @@ public class PerlDebugProfileState extends PerlDebugProfileStateBase {
         LOG.debug(outputType + ": " + eventText);
       }
       if (StringUtil.startsWith(eventText, PROCESS_START_MARKER_TEXT) ||
-          StringUtil.startsWith(eventText, "##teamcity") && StringUtil.contains(eventText, PROCESS_START_MARKER_TEXT)) {
+          StringUtil.startsWith(eventText, "##teamcity") && StringUtil.contains(eventText, PROCESS_START_MARKER_TEXT) ||
+          SystemInfo.isWindows && StringUtil.contains(eventText, PROCESS_START_MARKER_TEXT)) {
         LOG.debug("Marking as ready and removing listener");
         ProcessHandler processHandler = event.getProcessHandler();
         markAsReady(processHandler);
