@@ -22,7 +22,7 @@ import org.jetbrains.annotations.Nullable;
 
 
 public interface HTMLMasonFlagsStatement extends StubBasedPsiElement<HTMLMasonFlagsStatementStub> {
-  String UNDEF_RESULT = "undef";
+  String UNDEF_RESULT = "undefined component path";
 
   @Nullable
   String getParentComponentPath();

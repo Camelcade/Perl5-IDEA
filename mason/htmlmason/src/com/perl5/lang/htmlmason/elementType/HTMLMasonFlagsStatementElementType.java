@@ -32,6 +32,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
+import static com.perl5.lang.htmlmason.parser.psi.HTMLMasonFlagsStatement.UNDEF_RESULT;
+
 
 public class HTMLMasonFlagsStatementElementType extends IStubElementType<HTMLMasonFlagsStatementStub, HTMLMasonFlagsStatement>
   implements PsiElementProvider {
@@ -64,8 +66,7 @@ public class HTMLMasonFlagsStatementElementType extends IStubElementType<HTMLMas
   public void serialize(@NotNull HTMLMasonFlagsStatementStub stub, @NotNull StubOutputStream dataStream) throws IOException {
     String parentComponentPath = stub.getParentComponentPath();
 
-    //noinspection StringEquality
-    if (parentComponentPath == HTMLMasonFlagsStatement.UNDEF_RESULT) {
+    if (UNDEF_RESULT.equals(parentComponentPath)) {
       dataStream.writeBoolean(false);
       return;
     }
@@ -76,7 +77,7 @@ public class HTMLMasonFlagsStatementElementType extends IStubElementType<HTMLMas
   @Override
   public @NotNull HTMLMasonFlagsStatementStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
     if (!dataStream.readBoolean()) {
-      return new HTMLMasonFlagsStatementStubImpl(parentStub, this, HTMLMasonFlagsStatement.UNDEF_RESULT);
+      return new HTMLMasonFlagsStatementStubImpl(parentStub, this, UNDEF_RESULT);
     }
     StringRef nameRef = dataStream.readName();
     return new HTMLMasonFlagsStatementStubImpl(parentStub, this, nameRef == null ? null : nameRef.toString());
@@ -86,8 +87,7 @@ public class HTMLMasonFlagsStatementElementType extends IStubElementType<HTMLMas
   public void indexStub(@NotNull HTMLMasonFlagsStatementStub stub, @NotNull IndexSink sink) {
     String parentComponentPath = stub.getParentComponentPath();
 
-    //noinspection StringEquality
-    if (parentComponentPath != null && parentComponentPath != HTMLMasonFlagsStatement.UNDEF_RESULT) {
+    if (parentComponentPath != null && !UNDEF_RESULT.equals(parentComponentPath)) {
       sink.occurrence(HTMLMasonFlagsStubIndex.KEY, parentComponentPath);
     }
   }
