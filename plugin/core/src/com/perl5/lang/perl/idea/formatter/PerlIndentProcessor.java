@@ -172,7 +172,6 @@ public class PerlIndentProcessor implements PerlElementTypes {
     IElementType grandParentElementType = PsiUtilCore.getElementType(grandParentNode);
     if (grandParentElementType == SIGNATURE_ELEMENT && PsiUtilCore.getElementType(parentNode) == VARIABLE_DECLARATION_ELEMENT &&
         node.getTextRange().equals(grandParentNode.getTextRange())) {
-      node = grandParentNode;
       elementType = grandParentElementType;
     }
 
