@@ -21,7 +21,10 @@ import java.util.regex.Pattern;
 /**
  * regexps taken from verion/regex.pm original names are kept, but in camelcase
  */
-public interface PerlVersionRegexps {
+public final class PerlVersionRegexps {
+  private PerlVersionRegexps() {
+  }
+
   static final Pattern numericVersion = Pattern.compile(
     "(0|[1-9]\\d*)" +                // revision
     "(?:\\." +

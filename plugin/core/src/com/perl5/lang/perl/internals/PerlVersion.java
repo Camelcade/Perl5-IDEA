@@ -26,10 +26,12 @@ import java.util.*;
 import java.util.function.Predicate;
 import java.util.regex.Matcher;
 
+import static com.perl5.lang.perl.internals.PerlVersionRegexps.*;
+
 /**
  * Represents perl version
  */
-public class PerlVersion implements PerlVersionRegexps, Comparable<PerlVersion> {
+public class PerlVersion implements Comparable<PerlVersion> {
   public static final PerlVersion V5_10 = new PerlVersion(5.010);
   public static final PerlVersion V5_12 = new PerlVersion(5.012);
   public static final PerlVersion V5_14 = new PerlVersion(5.014);
