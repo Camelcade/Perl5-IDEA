@@ -155,7 +155,7 @@ public class PerlVersion implements Comparable<PerlVersion> {
       isValid = version > 0;
       if (isValid) {
         revision = (int)version;
-        longVersion = (longVersion - revision * 1000000);
+        longVersion = (longVersion - revision * 1000000L);
         major = (int)(longVersion / 1000);
         minor = (int)(longVersion % 1000);
       }
