@@ -38,7 +38,7 @@ public class PerlSimpleValueResolver extends PerlValueResolver {
 
   @Override
   public boolean equals(Object o) {
-    return o.getClass().equals(getClass()) && super.equals(o);
+    return o != null && o.getClass().equals(getClass()) && super.equals(o);
   }
 
   @Override
