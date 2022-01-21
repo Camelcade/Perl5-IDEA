@@ -40,7 +40,7 @@ public class MojoApp extends MojoProject {
   }
 
   public static class NameValidator extends MojoProject.NameValidator {
-    private static final Pattern NAME_PATTERN = Pattern.compile("^[A-Z](?:\\w|::)+$");
+    private static final Pattern NAME_PATTERN = Pattern.compile("^[A-Z](?:\\w|::)++$");
 
     @Override
     protected @NotNull Pattern getPattern() {
