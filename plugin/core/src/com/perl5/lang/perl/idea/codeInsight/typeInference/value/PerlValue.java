@@ -87,6 +87,7 @@ public abstract class PerlValue {
   /**
    * @return true iff {@code value} is null or {@link PerlValues#UNKNOWN_VALUE}
    */
+  @Contract(value = "null -> true", pure = true)
   public static boolean isUnknown(@Nullable PerlValue value) {
     return value == null || value.isUnknown();
   }
