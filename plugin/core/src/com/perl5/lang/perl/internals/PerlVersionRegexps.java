@@ -34,18 +34,18 @@ public final class PerlVersionRegexps {
 
   static final Pattern dottedVersion = Pattern.compile(
     "v(?:0|[1-9]\\d*)" +            // revision
-    "(?:\\.\\d+)*" +    // major, minor and others
+    "(?:\\.\\d+)*+" +    // major, minor and others
     "(_\\d+)?"        // alpha
   );
 
-  static final String fractionPart = "(?:\\.([0-9]+))";
+  static final String fractionPart = "(?:\\.(\\d++))";
 
-  static final String strictIntegerPart = "(0|[1-9][0-9]*)";
-  static final String strictDottedDecimalPart = "(?:\\.([0-9]{1,3}))";
+  static final String strictIntegerPart = "(0|[1-9]\\d*+)";
+  static final String strictDottedDecimalPart = "(?:\\.(\\d{1,3}+))";
 
-  static final String laxIntegerPart = "([0-9]+)";
-  static final String laxDottedDecimalPart = "(?:\\.([0-9]+))";
-  static final String laxAlphaPart = "(?:_([0-9]+))";
+  static final String laxIntegerPart = "(\\d++)";
+  static final String laxDottedDecimalPart = "(?:\\.(\\d++))";
+  static final String laxAlphaPart = "(?:_(\\d++))";
 
   // strict versions
   static final Pattern strictDecimalVersion = Pattern.compile(
