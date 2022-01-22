@@ -99,7 +99,7 @@ public class MojoProjectManager implements Disposable {
 
   @Override
   public void dispose() {
-
+    // nothing to dispose
   }
 
   /**
@@ -270,14 +270,12 @@ public class MojoProjectManager implements Disposable {
       if (project.isDefault()) {
         return;
       }
-      StartupManager.getInstance(project).runWhenProjectIsInitialized(() -> {
-        ReadAction.run(() -> {
-          if (!project.isDisposed()) {
-            LOG.debug("Project is initialized");
-            getInstance(project).scheduleUpdate();
-          }
-        });
-      });
+      StartupManager.getInstance(project).runWhenProjectIsInitialized(() -> ReadAction.run(() -> {
+        if (!project.isDisposed()) {
+          LOG.debug("Project is initialized");
+          getInstance(project).scheduleUpdate();
+        }
+      }));
     }
   }
 
