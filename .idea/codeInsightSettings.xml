@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaProjectCodeInsightSettings">
+    <excluded-names>
+      <name>com.google.common.base.Function</name>
+      <name>com.intellij.util.Function</name>
+      <name>com.twelvemonkeys.lang.StringUtil</name>
+      <name>io.netty.util.internal.StringUtil</name>
+      <name>net.jcip.annotations.Immutable</name>
+      <name>net.sf.cglib.core.internal.Function</name>
+      <name>org.codehaus.groovy.util.StringUtil</name>
+      <name>org.jsoup.helper.StringUtil</name>
+      <name>org.jsoup.internal.StringUtil</name>
+    </excluded-names>
+  </component>
+</project>

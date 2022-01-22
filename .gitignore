@@ -11,6 +11,7 @@ plugin/testData/**/svg/
 .idea/inspectionProfiles/
 .idea/.name
 .idea/sonarlint/
+!.idea/codeInsightSettings.xml
 tmp/
 temp/
 icons/*.psd
