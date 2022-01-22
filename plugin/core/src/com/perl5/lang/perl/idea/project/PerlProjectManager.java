@@ -84,11 +84,6 @@ public class PerlProjectManager implements Disposable {
     MessageBusConnection connection = myProject.getMessageBus().connect(this);
     connection.subscribe(PerlSdkTable.PERL_TABLE_TOPIC, new ProjectJdkTable.Listener() {
       @Override
-      public void jdkAdded(@NotNull Sdk jdk) {
-
-      }
-
-      @Override
       public void jdkRemoved(@NotNull Sdk sdk) {
         if (StringUtil.equals(sdk.getName(), myPerlSettings.getPerlInterpreter())) {
           setProjectSdk(null);
@@ -130,7 +125,7 @@ public class PerlProjectManager implements Disposable {
 
   @Override
   public void dispose() {
-
+    // nothing to dispose
   }
 
   private void resetProjectCaches() {
@@ -153,7 +148,7 @@ public class PerlProjectManager implements Disposable {
           result.add(virtualFile);
         }
       }
-      return result;
+      return Collections.unmodifiableList(result);
     });
     mySdkLibraryRootsProvider = AtomicNotNullLazyValue.createValue(() -> {
       List<VirtualFile> result = new ArrayList<>(getExternalLibraryRoots());
@@ -161,7 +156,7 @@ public class PerlProjectManager implements Disposable {
       if (projectSdk != null) {
         result.addAll(Arrays.asList(projectSdk.getRootProvider().getFiles(OrderRootType.CLASSES)));
       }
-      return result;
+      return Collections.unmodifiableList(result);
     });
     myLibraryRootsProvider = AtomicNotNullLazyValue.createValue(() -> {
       ArrayList<VirtualFile> result = new ArrayList<>(getModulesLibraryRoots());
