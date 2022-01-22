@@ -16,10 +16,10 @@
 
 package com.perl5.lang.perl.internals;
 
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
-import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -31,7 +31,8 @@ import static com.perl5.lang.perl.internals.PerlVersionRegexps.*;
 /**
  * Represents perl version
  */
-public class PerlVersion implements Comparable<PerlVersion> {
+public final class PerlVersion implements Comparable<PerlVersion> {
+  private static final Logger LOG = Logger.getInstance(PerlVersion.class);
   public static final PerlVersion V5_10 = new PerlVersion(5.010);
   public static final PerlVersion V5_12 = new PerlVersion(5.012);
   public static final PerlVersion V5_14 = new PerlVersion(5.014);
@@ -52,39 +53,42 @@ public class PerlVersion implements Comparable<PerlVersion> {
     V5_10, V5_12, V5_14, V5_16, V5_18, V5_20, V5_22, V5_24, V5_26, V5_28, V5_30, V5_32, V5_34
   );
 
-  public static final Map<PerlVersion, String> PERL_VERSION_DESCRIPTIONS = new THashMap<>();
+  public static final Map<PerlVersion, String> PERL_VERSION_DESCRIPTIONS;
 
   static {
-    PERL_VERSION_DESCRIPTIONS.put(V5_10, PerlBundle.message("perl.version.description.5.10"));
-    PERL_VERSION_DESCRIPTIONS.put(V5_12, PerlBundle.message("perl.version.description.5.12"));
-    PERL_VERSION_DESCRIPTIONS.put(V5_14, PerlBundle.message("perl.version.description.5.14"));
-    PERL_VERSION_DESCRIPTIONS.put(V5_16, PerlBundle.message("perl.version.description.5.16"));
-    PERL_VERSION_DESCRIPTIONS.put(V5_18, PerlBundle.message("perl.version.description.5.18"));
-    PERL_VERSION_DESCRIPTIONS.put(V5_20, PerlBundle.message("perl.version.description.5.20"));
-    PERL_VERSION_DESCRIPTIONS.put(V5_22, PerlBundle.message("perl.version.description.5.22"));
-    PERL_VERSION_DESCRIPTIONS.put(V5_24, PerlBundle.message("perl.version.description.5.24"));
-    PERL_VERSION_DESCRIPTIONS.put(V5_26, PerlBundle.message("perl.version.description.5.26"));
-    PERL_VERSION_DESCRIPTIONS.put(V5_28, PerlBundle.message("perl.version.description.5.28"));
-    PERL_VERSION_DESCRIPTIONS.put(V5_30, PerlBundle.message("perl.version.description.5.30"));
-    PERL_VERSION_DESCRIPTIONS.put(V5_32, PerlBundle.message("perl.version.description.5.32"));
-    PERL_VERSION_DESCRIPTIONS.put(V5_34, PerlBundle.message("perl.version.description.5.34"));
+    ContainerUtil.ImmutableMapBuilder<PerlVersion, String> versionsMapBuilder = ContainerUtil.immutableMapBuilder();
+    versionsMapBuilder.put(V5_10, PerlBundle.message("perl.version.description.5.10"));
+    versionsMapBuilder.put(V5_12, PerlBundle.message("perl.version.description.5.12"));
+    versionsMapBuilder.put(V5_14, PerlBundle.message("perl.version.description.5.14"));
+    versionsMapBuilder.put(V5_16, PerlBundle.message("perl.version.description.5.16"));
+    versionsMapBuilder.put(V5_18, PerlBundle.message("perl.version.description.5.18"));
+    versionsMapBuilder.put(V5_20, PerlBundle.message("perl.version.description.5.20"));
+    versionsMapBuilder.put(V5_22, PerlBundle.message("perl.version.description.5.22"));
+    versionsMapBuilder.put(V5_24, PerlBundle.message("perl.version.description.5.24"));
+    versionsMapBuilder.put(V5_26, PerlBundle.message("perl.version.description.5.26"));
+    versionsMapBuilder.put(V5_28, PerlBundle.message("perl.version.description.5.28"));
+    versionsMapBuilder.put(V5_30, PerlBundle.message("perl.version.description.5.30"));
+    versionsMapBuilder.put(V5_32, PerlBundle.message("perl.version.description.5.32"));
+    versionsMapBuilder.put(V5_34, PerlBundle.message("perl.version.description.5.34"));
+    PERL_VERSION_DESCRIPTIONS = versionsMapBuilder.build();
   }
 
-  protected boolean isAlpha;
-  protected boolean isStrict;
-  protected boolean isValid;
-  protected int revision;
-  protected int major;
-  protected int minor;
-  protected List<Integer> extraChunks = Collections.emptyList();
+  private boolean myIsAlpha;
+  private boolean myIsStrict;
+  private boolean myIsValid;
+  private int myRevision;
+  private int myMajor;
+  private int myMinor;
+  private List<Integer> myExtraChunks = Collections.emptyList();
 
-  private PerlVersion() {}
+  private PerlVersion() { }
 
   public PerlVersion(double version) {
     try {
       parseDoubleVersion(version);
     }
-    catch (Exception ignore) {
+    catch (NumberFormatException e) {
+      LOG.debug("Unable to parse version: ", version, "; message: ", e.getMessage());
     }
   }
 
@@ -98,79 +102,85 @@ public class PerlVersion implements Comparable<PerlVersion> {
 
       if (NUMERIC_VERSION.matcher(versionString).matches()) {
         parseDoubleVersion(Double.parseDouble(versionString.replace("_", "")));
-        isAlpha = versionString.contains("_"); // fixme not sure about this at all
+        myIsAlpha = versionString.contains("_");
       }
       else if ((matcher = DOTTED_VERSION.matcher(versionString)).matches()) {
-        List<String> versionChunks = new ArrayList<>(Arrays.asList(versionString.replace("v", "").replace('_', '.').split("\\.")));
-        isAlpha = matcher.group(1) != null;
-        revision = Integer.parseInt(versionChunks.remove(0));
-
-        if (!versionChunks.isEmpty()) {
-          if (versionChunks.get(0).length() > 3) {
-            throw new Exception();
-          }
-
-          major = Integer.parseInt(versionChunks.remove(0));
-
-          if (!versionChunks.isEmpty()) {
-            if (versionChunks.get(0).length() > 3) {
-              throw new Exception();
-            }
-
-            minor = Integer.parseInt(versionChunks.remove(0));
-
-            if (!versionChunks.isEmpty()) {
-              extraChunks = new ArrayList<>();
-              for (String chunk : versionChunks) {
-                if (chunk.length() > 3) {
-                  throw new Exception();
-                }
-                else {
-                  extraChunks.add(Integer.parseInt(chunk));
-                }
-              }
-            }
-          }
-        }
+        parseDottedVersion(versionString, matcher);
       }
       else {
-        isValid = false;
+        myIsValid = false;
         return;
       }
-      isStrict = STRICT_VERSION_PATTERN.matcher(versionString).matches();
-      isValid = true;
+      myIsStrict = STRICT_VERSION_PATTERN.matcher(versionString).matches();
+      myIsValid = true;
     }
-    catch (Exception e) // catching numberformat exception
-    {
-      isValid = isStrict = isAlpha = false;
-      revision = major = minor = 0;
+    catch (NumberFormatException e) {
+      myIsValid = myIsStrict = myIsAlpha = false;
+      myRevision = myMajor = myMinor = 0;
     }
   }
 
-  public void parseDoubleVersion(double version) throws Exception {
+  private void parseDottedVersion(String versionString, Matcher matcher) {
+    List<String> versionChunks = new ArrayList<>(Arrays.asList(versionString.replace("v", "").replace('_', '.').split("\\.")));
+    myIsAlpha = matcher.group(1) != null;
+    myRevision = Integer.parseInt(versionChunks.remove(0));
+
+    if (versionChunks.isEmpty()) {
+      return;
+    }
+    if (versionChunks.get(0).length() > 3) {
+      throw new NumberFormatException();
+    }
+
+    myMajor = Integer.parseInt(versionChunks.remove(0));
+
+    if (versionChunks.isEmpty()) {
+      return;
+    }
+    if (versionChunks.get(0).length() > 3) {
+      throw new NumberFormatException();
+    }
+
+    myMinor = Integer.parseInt(versionChunks.remove(0));
+
+    if (versionChunks.isEmpty()) {
+      return;
+    }
+    myExtraChunks = new ArrayList<>();
+    for (String chunk : versionChunks) {
+      if (chunk.length() > 3) {
+        throw new NumberFormatException();
+      }
+      else {
+        myExtraChunks.add(Integer.parseInt(chunk));
+      }
+    }
+  }
+
+  public void parseDoubleVersion(double version) throws NumberFormatException {
     if (version <= Integer.MAX_VALUE) {
       long longVersion = (long)(version * 1000000);
-      isStrict = true;
-      isAlpha = false;
-      isValid = version > 0;
-      if (isValid) {
-        revision = (int)version;
-        longVersion = (longVersion - revision * 1000000L);
-        major = (int)(longVersion / 1000);
-        minor = (int)(longVersion % 1000);
+      myIsStrict = true;
+      myIsAlpha = false;
+      myIsValid = version > 0;
+      if (myIsValid) {
+        myRevision = (int)version;
+        longVersion = (longVersion - myRevision * 1000000L);
+        myMajor = (int)(longVersion / 1000);
+        myMinor = (int)(longVersion % 1000);
       }
     }
     else {
-      throw new Exception("Version is too big");
+      throw new NumberFormatException("Version is too big");
     }
   }
 
   public double getDoubleVersion() {
-    double version = (double)revision + ((double)major / 1000) + ((double)minor / 1000000);
+    double version = myRevision + ((double)myMajor / 1000) + ((double)myMinor / 1000000);
 
-    if (!extraChunks.isEmpty()) {
+    if (!myExtraChunks.isEmpty()) {
       long divider = 1000000000;
-      for (Integer chunk : extraChunks) {
+      for (Integer chunk : myExtraChunks) {
         version += ((double)chunk) / divider;
         divider *= 1000;
       }
@@ -180,17 +190,17 @@ public class PerlVersion implements Comparable<PerlVersion> {
   }
 
   public String getStrictDottedVersion() {
-    List<String> result = new ArrayList<>(Collections.singletonList(Integer.toString(revision)));
+    List<String> result = new ArrayList<>(Collections.singletonList(Integer.toString(myRevision)));
 
-    if (major > 0 || minor > 0 || !extraChunks.isEmpty()) {
-      result.add(Integer.toString(major));
+    if (myMajor > 0 || myMinor > 0 || !myExtraChunks.isEmpty()) {
+      result.add(Integer.toString(myMajor));
     }
 
-    if (minor > 0 || !extraChunks.isEmpty()) {
-      result.add(Integer.toString(minor));
+    if (myMinor > 0 || !myExtraChunks.isEmpty()) {
+      result.add(Integer.toString(myMinor));
     }
 
-    for (Integer chunk : extraChunks) {
+    for (Integer chunk : myExtraChunks) {
       result.add(Integer.toString(chunk));
     }
 
@@ -202,39 +212,39 @@ public class PerlVersion implements Comparable<PerlVersion> {
   }
 
   public int getRevision() {
-    return revision;
+    return myRevision;
   }
 
   public void setRevision(int revision) {
-    this.revision = revision;
+    this.myRevision = revision;
   }
 
   public int getMajor() {
-    return major;
+    return myMajor;
   }
 
   public void setMajor(int major) {
-    this.major = major;
+    this.myMajor = major;
   }
 
   public int getMinor() {
-    return minor;
+    return myMinor;
   }
 
   public void setMinor(int minor) {
-    this.minor = minor;
+    this.myMinor = minor;
   }
 
   public boolean isAlpha() {
-    return isAlpha;
+    return myIsAlpha;
   }
 
   public boolean isStrict() {
-    return isStrict;
+    return myIsStrict;
   }
 
   public boolean isValid() {
-    return isValid;
+    return myIsValid;
   }
 
   @Override
