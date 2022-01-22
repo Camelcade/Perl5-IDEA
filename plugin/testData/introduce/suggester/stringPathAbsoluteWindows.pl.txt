@@ -1,3 +1,11 @@
 scalar
 value
-> string
+string
+path
+pathname
+> filename
+relative_path_to_filename
+path_to_filename
+filename_thtml
+relative_path_to_filename_thtml
+path_to_filename_thtml

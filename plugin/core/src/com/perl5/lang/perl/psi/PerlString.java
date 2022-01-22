@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.psi;
 
+import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
@@ -27,21 +28,20 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public interface PerlString extends PerlQuoted, PerlValuableEntity {
-  String FILE_PATH_PATTERN_TEXT = "\\.?[\\p{L}\\d\\-_]+(?:\\.[\\p{L}\\d\\-_]*)*+";
-  String FILE_PATH_DELIMITER_PATTERN_TEXT = "[\\\\/]++";
-  String OPTIONAL_FILE_PATH_DELIMITER_PATTERN_TEXT = "(?:" + FILE_PATH_DELIMITER_PATTERN_TEXT + ")?";
+  String FILE_NAME_PATTERN = "[^<>:;,?\"*|/\\\\]+";
+  String FILE_DELIMITER_PATTERN = "[\\\\/]+";
+  String OPTIONAL_ROOT_PATTERN = "(?:/+|[a-zA-Z]:[/\\\\]+)?";
   Pattern FILE_PATH_PATTERN = Pattern.compile(
-    OPTIONAL_FILE_PATH_DELIMITER_PATTERN_TEXT +
-    "(?:" + FILE_PATH_PATTERN_TEXT + FILE_PATH_DELIMITER_PATTERN_TEXT + ")++ ?" +
-    "(" + FILE_PATH_PATTERN_TEXT + ")" +
-    OPTIONAL_FILE_PATH_DELIMITER_PATTERN_TEXT
+    OPTIONAL_ROOT_PATTERN +
+    "(?:" + FILE_NAME_PATTERN + FILE_DELIMITER_PATTERN + ")*+" +
+    "(?:" + FILE_NAME_PATTERN + ")?"
   );
   String OPEN_QUOTES = "<[{(";
   String CLOSE_QUOTES = ">]})";
@@ -89,10 +89,7 @@ public interface PerlString extends PerlQuoted, PerlValuableEntity {
   @Contract(value = "null -> null", pure = true)
   static @Nullable String getContentFileName(@Nullable String text) {
     if (looksLikePath(text)) {
-      Matcher m = FILE_PATH_PATTERN.matcher(text);
-      if (m.matches()) {
-        return m.group(1);
-      }
+      return new File(FileUtil.toSystemIndependentName(text)).getName();
     }
     return null;
   }
