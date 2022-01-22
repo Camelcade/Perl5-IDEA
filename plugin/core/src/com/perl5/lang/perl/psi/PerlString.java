@@ -36,12 +36,14 @@ import static com.perl5.lang.perl.parser.PerlParserUtil.AMBIGUOUS_PACKAGE_PATTER
 
 
 public interface PerlString extends PerlQuoted, PerlValuableEntity {
-  String FILE_PATH_PATTERN_TEXT = "\\.?[\\p{L}\\d\\-_]+(?:\\.[\\p{L}\\d\\-_]*)*";
-  String FILE_PATH_DELIMITER_PATTERN_TEXT = "(?:\\\\+|/+)";
+  String FILE_PATH_PATTERN_TEXT = "\\.?[\\p{L}\\d\\-_]+(?:\\.[\\p{L}\\d\\-_]*)*+";
+  String FILE_PATH_DELIMITER_PATTERN_TEXT = "[\\\\/]++";
+  String OPTIONAL_FILE_PATH_DELIMITER_PATTERN_TEXT = "(?:" + FILE_PATH_DELIMITER_PATTERN_TEXT + ")?";
   Pattern FILE_PATH_PATTERN = Pattern.compile(
-    FILE_PATH_DELIMITER_PATTERN_TEXT + "*" +
-    "(?:" + FILE_PATH_PATTERN_TEXT + FILE_PATH_DELIMITER_PATTERN_TEXT + ")+ ?" +
-    "(" + FILE_PATH_PATTERN_TEXT + ")" + FILE_PATH_DELIMITER_PATTERN_TEXT + "?"
+    OPTIONAL_FILE_PATH_DELIMITER_PATTERN_TEXT +
+    "(?:" + FILE_PATH_PATTERN_TEXT + FILE_PATH_DELIMITER_PATTERN_TEXT + ")++ ?" +
+    "(" + FILE_PATH_PATTERN_TEXT + ")" +
+    OPTIONAL_FILE_PATH_DELIMITER_PATTERN_TEXT
   );
   String OPEN_QUOTES = "<[{(";
   String CLOSE_QUOTES = ">]})";

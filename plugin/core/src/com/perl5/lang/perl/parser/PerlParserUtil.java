@@ -48,22 +48,17 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
    **/
   private static final String BASIC_IDENTIFIER_PATTERN_TEXT = "[_\\p{L}\\d][_\\p{L}\\d]*";
   private static final String PACKAGE_SEPARATOR_PATTERN_TEXT =
-    "(?:" +
     "(?:::)+'?" +
     "|" +
-    "(?:::)*'" +
-    ")";
+    "(?:::)*'";
+  private static final String OPTIONAL_PACKAGE_SEPARATOR_PATTERN_TEXT =
+    "(?:" + PACKAGE_SEPARATOR_PATTERN_TEXT + ")?";
   public static final Pattern AMBIGUOUS_PACKAGE_PATTERN = Pattern.compile(
     "(" +
-    PACKAGE_SEPARATOR_PATTERN_TEXT + "?" +        // optional opening separator,
-    "(?:" +
-    BASIC_IDENTIFIER_PATTERN_TEXT +
-    PACKAGE_SEPARATOR_PATTERN_TEXT +
-    ")*" +
+    OPTIONAL_PACKAGE_SEPARATOR_PATTERN_TEXT +
+    "(?:" + BASIC_IDENTIFIER_PATTERN_TEXT + PACKAGE_SEPARATOR_PATTERN_TEXT + ")*+" +
     ")" +
-    "(" +
-    BASIC_IDENTIFIER_PATTERN_TEXT +
-    ")");
+    "(" + BASIC_IDENTIFIER_PATTERN_TEXT + ")");
   private static final WhitespacesAndCommentsBinder NAMESPACE_RIGHT_BINDER = (tokens, atStreamEdge, getter) -> {
     int result = tokens.size();
     if (atStreamEdge || tokens.isEmpty()) {
