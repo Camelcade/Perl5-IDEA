@@ -276,7 +276,7 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator {
     if (!StringUtil.isEmpty(name)) {
 
       for (String nameChunk : name.split("[ ,]+")) {
-        if (!nameChunk.isEmpty() && PerlParserUtil.IDENTIFIER_PATTERN.matcher(nameChunk).matches()) {
+        if (!nameChunk.isEmpty() && PerlParserUtil.isIdentifier(nameChunk)) {
           result.add(nameChunk);
         }
       }

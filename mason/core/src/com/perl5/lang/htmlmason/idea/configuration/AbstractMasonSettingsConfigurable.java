@@ -36,13 +36,9 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableModel;
-import java.util.regex.Pattern;
 
 
 public abstract class AbstractMasonSettingsConfigurable implements Configurable {
-  protected static final Pattern VARIABLE_CHECK_PATTERN = Pattern.compile(
-    "[$@%]" + PerlParserUtil.IDENTIFIER_PATTERN
-  );
 
   protected final Project myProject;
   protected final String windowTitle;
@@ -133,7 +129,7 @@ public abstract class AbstractMasonSettingsConfigurable implements Configurable 
     @Override
     public void setValue(VariableDescription variableDescription, String value) {
       if (StringUtil.isNotEmpty(value) && !containsVariableName(value)) {
-        if (VARIABLE_CHECK_PATTERN.matcher(value).matches()) {
+        if (PerlParserUtil.isVariableWithSigil(value)) {
           variableDescription.variableName = value;
           if (value.charAt(0) != '$') {
             variableDescription.variableType = "";
@@ -173,7 +169,7 @@ public abstract class AbstractMasonSettingsConfigurable implements Configurable 
     @Override
     public void setValue(VariableDescription variableDescription, String value) {
       if (StringUtil.isNotEmpty(value)) {
-        if (PerlParserUtil.AMBIGUOUS_PACKAGE_PATTERN.matcher(value).matches()) {
+        if (PerlParserUtil.isAmbiguousPackage(value)) {
           variableDescription.variableType = value;
         }
         else {

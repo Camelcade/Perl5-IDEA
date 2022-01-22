@@ -28,7 +28,9 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
 import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.regex.Pattern;
 
@@ -42,18 +44,18 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
     NUMBER,
     NUMBER_VERSION
   );
-  public static final Pattern IDENTIFIER_PATTERN = Pattern.compile("[_\\p{L}][_\\p{L}\\d]*");
+  private static final Pattern IDENTIFIER_PATTERN = Pattern.compile("[_\\p{L}][_\\p{L}\\d]*");
+
+  private static final Pattern VARIABLE_CHECK_PATTERN = Pattern.compile(
+    "[$@%]" + IDENTIFIER_PATTERN
+  );
   /**
    * something strange in Java with unicode props; Added digits to opener for package Encode::KR::2022_KR;
    **/
   private static final String BASIC_IDENTIFIER_PATTERN_TEXT = "[_\\p{L}\\d][_\\p{L}\\d]*";
-  private static final String PACKAGE_SEPARATOR_PATTERN_TEXT =
-    "(?:::)+'?" +
-    "|" +
-    "(?:::)*'";
-  private static final String OPTIONAL_PACKAGE_SEPARATOR_PATTERN_TEXT =
-    "(?:" + PACKAGE_SEPARATOR_PATTERN_TEXT + ")?";
-  public static final Pattern AMBIGUOUS_PACKAGE_PATTERN = Pattern.compile(
+  private static final String PACKAGE_SEPARATOR_PATTERN_TEXT = "(?:(?:::)++'?|')";
+  private static final String OPTIONAL_PACKAGE_SEPARATOR_PATTERN_TEXT = PACKAGE_SEPARATOR_PATTERN_TEXT + "?";
+  private static final Pattern AMBIGUOUS_PACKAGE_PATTERN = Pattern.compile(
     "(" +
     OPTIONAL_PACKAGE_SEPARATOR_PATTERN_TEXT +
     "(?:" + BASIC_IDENTIFIER_PATTERN_TEXT + PACKAGE_SEPARATOR_PATTERN_TEXT + ")*+" +
@@ -322,7 +324,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
   public static boolean parseLabelDeclaration(PsiBuilder b, @SuppressWarnings("unused") int l) {
     if (b.lookAhead(1) == COLON && b.getTokenType() != RESERVED_SUB) {
       String tokenText = b.getTokenText();
-      if (tokenText != null && IDENTIFIER_PATTERN.matcher(tokenText).matches()) {
+      if (tokenText != null && isIdentifier(tokenText)) {
         b.advanceLexer();
         b.advanceLexer();
         return true;
@@ -427,5 +429,29 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
         return true;
       }
     }
+  }
+
+  /**
+   * @return true iff {@code text} is valid perl identifier
+   */
+  @Contract(value = "null -> false", pure = true)
+  public static boolean isIdentifier(@Nullable String text) {
+    return StringUtil.isNotEmpty(text) && IDENTIFIER_PATTERN.matcher(text).matches();
+  }
+
+  /**
+   * @return true iff {@code text} looks like an ambiguous FQN, namespace name or method name, e.g. Foo::Bar
+   */
+  @Contract(value = "null -> false", pure = true)
+  public static boolean isAmbiguousPackage(@Nullable String text) {
+    return StringUtil.isNotEmpty(text) && AMBIGUOUS_PACKAGE_PATTERN.matcher(text).matches();
+  }
+
+  /**
+   * @return true iff {@code value} looks like a scalar variable without braces, with optional namespace
+   */
+  @Contract(value = "null -> false", pure = true)
+  public static boolean isVariableWithSigil(@Nullable String text) {
+    return StringUtil.isNotEmpty(text) && VARIABLE_CHECK_PATTERN.matcher(text).matches();
   }
 }

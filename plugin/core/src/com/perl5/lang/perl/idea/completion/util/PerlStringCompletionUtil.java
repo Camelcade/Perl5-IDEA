@@ -43,7 +43,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
-import static com.perl5.lang.perl.parser.PerlParserUtil.IDENTIFIER_PATTERN;
+import static com.perl5.lang.perl.parser.PerlParserUtil.isIdentifier;
 
 
 public class PerlStringCompletionUtil implements PerlElementPatterns {
@@ -110,7 +110,7 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
         protected void processStringElement(PerlStringContentElement stringContentElement) {
           String text = stringContentElement.getText();
           if (StringUtil.isNotEmpty(text) && hashIndexesCache.add(text) &&
-              completionProcessor.matches(text) && IDENTIFIER_PATTERN.matcher(text).matches()) {
+              completionProcessor.matches(text) && isIdentifier(text)) {
             completionProcessor.process(LookupElementBuilder.create(stringContentElement, text));
           }
         }

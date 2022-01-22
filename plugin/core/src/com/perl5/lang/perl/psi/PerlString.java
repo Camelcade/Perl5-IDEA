@@ -21,6 +21,7 @@ import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlScalarValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
+import com.perl5.lang.perl.parser.PerlParserUtil;
 import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -31,9 +32,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static com.perl5.lang.perl.parser.PerlParserUtil.AMBIGUOUS_PACKAGE_PATTERN;
-
 
 public interface PerlString extends PerlQuoted, PerlValuableEntity {
   String FILE_PATH_PATTERN_TEXT = "\\.?[\\p{L}\\d\\-_]+(?:\\.[\\p{L}\\d\\-_]*)*+";
@@ -78,17 +76,17 @@ public interface PerlString extends PerlQuoted, PerlValuableEntity {
     return PerlScalarValue.create(ElementManipulators.getValueText(this));
   }
 
-  @Contract("null->false")
+  @Contract(value = "null -> false", pure = true)
   static boolean looksLikePackage(@Nullable String text) {
-    return text != null && StringUtil.containsAnyChar(text, ":'") && AMBIGUOUS_PACKAGE_PATTERN.matcher(text).matches();
+    return StringUtil.isNotEmpty(text) && StringUtil.containsAnyChar(text, ":'") && PerlParserUtil.isAmbiguousPackage(text);
   }
 
-  @Contract("null->false")
+  @Contract(value = "null -> false", pure = true)
   static boolean looksLikePath(@Nullable String text) {
-    return text != null && FILE_PATH_PATTERN.matcher(text).matches();
+    return StringUtil.isNotEmpty(text) && FILE_PATH_PATTERN.matcher(text).matches();
   }
 
-  @Contract("null->null")
+  @Contract(value = "null -> null", pure = true)
   static @Nullable String getContentFileName(@Nullable String text) {
     if (looksLikePath(text)) {
       Matcher m = FILE_PATH_PATTERN.matcher(text);

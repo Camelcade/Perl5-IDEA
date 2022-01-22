@@ -32,13 +32,13 @@ import com.intellij.refactoring.rename.NameSuggestionProvider;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.idea.PerlNamesValidator;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlCallValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
 import com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
+import com.perl5.lang.perl.parser.PerlParserUtil;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.PerlAssignExpression.PerlAssignValueDescriptor;
 import com.perl5.lang.perl.psi.impl.PerlSubCallElement;
@@ -602,7 +602,7 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
 
   @Contract("null->null")
   private static @Nullable String validateName(@Nullable String name) {
-    return StringUtil.isNotEmpty(name) && name.length() <= MAX_GENERATED_NAME_LENGTH && PerlNamesValidator.isIdentifier(name) ? name : null;
+    return StringUtil.isNotEmpty(name) && name.length() <= MAX_GENERATED_NAME_LENGTH && PerlParserUtil.isIdentifier(name) ? name : null;
   }
 
   @Contract("null->null")

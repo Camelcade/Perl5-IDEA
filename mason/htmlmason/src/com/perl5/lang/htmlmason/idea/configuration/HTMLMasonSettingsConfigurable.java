@@ -275,7 +275,7 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
     @Override
     public void setValue(HTMLMasonCustomTag customTag, String value) {
       if (!StringUtil.equals(customTag.getText(), value)) {
-        if (!PerlParserUtil.IDENTIFIER_PATTERN.matcher(value).matches()) {
+        if (!PerlParserUtil.isIdentifier(value)) {
           Messages.showErrorDialog(HtmlMasonBundle.message("dialog.message.tag.text.should.be.valid.identifier"),
                                    HtmlMasonBundle.message("dialog.title.incorrect.tag.text"));
         }

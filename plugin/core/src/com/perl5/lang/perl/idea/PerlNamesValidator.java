@@ -26,20 +26,11 @@ public class PerlNamesValidator implements NamesValidator {
 
   @Override
   public boolean isKeyword(@NotNull String name, Project project) {
-    // todo what is this for?
     return false;
   }
 
   @Override
   public boolean isIdentifier(@NotNull String name, Project project) {
-    return isIdentifier(name) || isAmbiguousPackage(name);
-  }
-
-  public static boolean isIdentifier(@NotNull String name) {
-    return PerlParserUtil.IDENTIFIER_PATTERN.matcher(name).matches();
-  }
-
-  public static boolean isAmbiguousPackage(@NotNull String name) {
-    return PerlParserUtil.AMBIGUOUS_PACKAGE_PATTERN.matcher(name).matches();
+    return PerlParserUtil.isIdentifier(name) || PerlParserUtil.isAmbiguousPackage(name);
   }
 }
