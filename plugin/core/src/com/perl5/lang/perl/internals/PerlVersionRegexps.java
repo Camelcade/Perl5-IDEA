@@ -19,23 +19,23 @@ package com.perl5.lang.perl.internals;
 import java.util.regex.Pattern;
 
 /**
- * regexps taken from verion/regex.pm original names are kept, but in camelcase
+ * regexps taken from {@code version/regex.pm} original names are kept, but in camelcase
  */
 public final class PerlVersionRegexps {
   private PerlVersionRegexps() {
   }
 
   static final Pattern NUMERIC_VERSION = Pattern.compile(
-    "(0|[1-9]\\d*)" +                // revision
+    "(0|[1-9]\\d*)" +        // revision
     "(?:\\." +
     "([\\d_]+)" +            // major
     ")?"
   );
 
   static final Pattern DOTTED_VERSION = Pattern.compile(
-    "v(?:0|[1-9]\\d*)" +            // revision
+    "v(?:0|[1-9]\\d*)" + // revision
     "(?:\\.\\d+)*+" +    // major, minor and others
-    "(_\\d+)?"        // alpha
+    "(_\\d+)?"           // alpha
   );
 
   static final String FRACTION_PART = "(?:\\.(\\d++))";
