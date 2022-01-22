@@ -25,55 +25,55 @@ public final class PerlVersionRegexps {
   private PerlVersionRegexps() {
   }
 
-  static final Pattern numericVersion = Pattern.compile(
+  static final Pattern NUMERIC_VERSION = Pattern.compile(
     "(0|[1-9]\\d*)" +                // revision
     "(?:\\." +
     "([\\d_]+)" +            // major
     ")?"
   );
 
-  static final Pattern dottedVersion = Pattern.compile(
+  static final Pattern DOTTED_VERSION = Pattern.compile(
     "v(?:0|[1-9]\\d*)" +            // revision
     "(?:\\.\\d+)*+" +    // major, minor and others
     "(_\\d+)?"        // alpha
   );
 
-  static final String fractionPart = "(?:\\.(\\d++))";
+  static final String FRACTION_PART = "(?:\\.(\\d++))";
 
-  static final String strictIntegerPart = "(0|[1-9]\\d*+)";
-  static final String strictDottedDecimalPart = "(?:\\.(\\d{1,3}+))";
+  static final String STRICT_INTEGER_PART = "(0|[1-9]\\d*+)";
+  static final String STRICT_DOTTED_DECIMAL_PART = "(?:\\.(\\d{1,3}+))";
 
-  static final String laxIntegerPart = "(\\d++)";
-  static final String laxDottedDecimalPart = "(?:\\.(\\d++))";
-  static final String laxAlphaPart = "(?:_(\\d++))";
+  static final String LAX_INTEGER_PART = "(\\d++)";
+  static final String LAX_DOTTED_DECIMAL_PART = "(?:\\.(\\d++))";
+  static final String LAX_ALPHA_PART = "(?:_(\\d++))";
 
   // strict versions
-  static final Pattern strictDecimalVersion = Pattern.compile(
-    strictIntegerPart + fractionPart + "?"
+  static final Pattern STRICT_DECIMAL_VERSION_PATTERN = Pattern.compile(
+    STRICT_INTEGER_PART + FRACTION_PART + "?"
   );
 
-  static final Pattern strictDottedDecimalVersion = Pattern.compile(
-    "v" + strictIntegerPart + strictDottedDecimalPart + strictDottedDecimalPart + "+"
+  static final Pattern STRICT_DOTTED_DECIMAL_VERSION_PATTERN = Pattern.compile(
+    "v" + STRICT_INTEGER_PART + STRICT_DOTTED_DECIMAL_PART + STRICT_DOTTED_DECIMAL_PART + "++"
   );
 
-  static final Pattern strict = Pattern.compile(
-    strictDecimalVersion + "|" + strictDottedDecimalVersion
+  static final Pattern STRICT_VERSION_PATTERN = Pattern.compile(
+    STRICT_DECIMAL_VERSION_PATTERN + "|" + STRICT_DOTTED_DECIMAL_VERSION_PATTERN
   );
 
   // lax versions
-  static final Pattern laxDecimalVersion = Pattern.compile(
-    laxIntegerPart + "(?:\\.|" + fractionPart + laxAlphaPart + "?)?"
+  static final Pattern LAX_DECIMAL_VERSION_PATTERN = Pattern.compile(
+    LAX_INTEGER_PART + "(?:\\.|" + FRACTION_PART + LAX_ALPHA_PART + "?)?"
     + "|"
-    + fractionPart + laxAlphaPart + "?"
+    + FRACTION_PART + LAX_ALPHA_PART + "?"
   );
 
-  static final Pattern laxDottedDecimalVersion = Pattern.compile(
-    "v" + laxIntegerPart + "(?:" + laxDottedDecimalPart + laxAlphaPart + "?)?"
+  static final Pattern LAX_DOTTED_DECIMAL_VERSION_PATTERN = Pattern.compile(
+    "v" + LAX_INTEGER_PART + "(?:" + LAX_DOTTED_DECIMAL_PART + LAX_ALPHA_PART + "?)?"
     + "|"
-    + laxIntegerPart + "?" + laxDottedDecimalPart + laxDottedDecimalPart + "+" + laxAlphaPart + "?"
+    + LAX_INTEGER_PART + "?" + LAX_DOTTED_DECIMAL_PART + LAX_DOTTED_DECIMAL_PART + "++" + LAX_ALPHA_PART + "?"
   );
 
-  static final Pattern lax = Pattern.compile(
-    laxDecimalVersion + "|" + laxDottedDecimalVersion
+  static final Pattern LAX_VERSION_PATTERN = Pattern.compile(
+    LAX_DECIMAL_VERSION_PATTERN + "|" + LAX_DOTTED_DECIMAL_VERSION_PATTERN
   );
 }

@@ -96,11 +96,11 @@ public class PerlVersion implements Comparable<PerlVersion> {
     try {
       Matcher matcher;
 
-      if (numericVersion.matcher(versionString).matches()) {
+      if (NUMERIC_VERSION.matcher(versionString).matches()) {
         parseDoubleVersion(Double.parseDouble(versionString.replace("_", "")));
         isAlpha = versionString.contains("_"); // fixme not sure about this at all
       }
-      else if ((matcher = dottedVersion.matcher(versionString)).matches()) {
+      else if ((matcher = DOTTED_VERSION.matcher(versionString)).matches()) {
         List<String> versionChunks = new ArrayList<>(Arrays.asList(versionString.replace("v", "").replace('_', '.').split("\\.")));
         isAlpha = matcher.group(1) != null;
         revision = Integer.parseInt(versionChunks.remove(0));
@@ -137,7 +137,7 @@ public class PerlVersion implements Comparable<PerlVersion> {
         isValid = false;
         return;
       }
-      isStrict = strict.matcher(versionString).matches();
+      isStrict = STRICT_VERSION_PATTERN.matcher(versionString).matches();
       isValid = true;
     }
     catch (Exception e) // catching numberformat exception
