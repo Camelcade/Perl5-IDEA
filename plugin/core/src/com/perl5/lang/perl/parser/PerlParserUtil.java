@@ -38,14 +38,15 @@ import static com.intellij.lang.WhitespacesBinders.GREEDY_RIGHT_BINDER;
 
 public class PerlParserUtil extends GeneratedParserUtilBase implements PerlElementTypes {
 
-
   public static final TokenSet VERSION_TOKENS = TokenSet.create(
     NUMBER,
     NUMBER_VERSION
   );
   public static final Pattern IDENTIFIER_PATTERN = Pattern.compile("[_\\p{L}][_\\p{L}\\d]*");
+  /**
+   * something strange in Java with unicode props; Added digits to opener for package Encode::KR::2022_KR;
+   **/
   private static final String BASIC_IDENTIFIER_PATTERN_TEXT = "[_\\p{L}\\d][_\\p{L}\\d]*";
-  // something strange in Java with unicode props; Added digits to opener for package Encode::KR::2022_KR;
   private static final String PACKAGE_SEPARATOR_PATTERN_TEXT =
     "(?:" +
     "(?:::)+'?" +
@@ -94,7 +95,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
   public static PsiBuilder adapt_builder_(IElementType root, PsiBuilder builder, PsiParser parser, TokenSet[] extendsSets) {
     ErrorState state = new ErrorState();
     ErrorState.initState(state, builder, root, extendsSets);
-    //		builder.setDebugMode(true);
     return new PerlBuilder(builder, state, parser);
   }
 
@@ -116,7 +116,9 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
       PerlTokenData prevToken = ((PerlBuilder)b).lookupToken(-1);
       IElementType prevTokenType = prevToken == null ? null : prevToken.getTokenType();
 
-      // optional }->[ or ]->{
+      /**
+       * optional }->[ or ]->{
+       **/
       return (prevTokenType == RIGHT_BRACE || prevTokenType == RIGHT_BRACKET)
              && (tokenType == LEFT_BRACE || tokenType == LEFT_BRACKET || tokenType == LEFT_PAREN);
     }
@@ -195,7 +197,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
     boolean r;
     r = parser.parse(b, l);
 
-    // fixme prepend last done marker
     if (r) {
       m.setCustomEdgeTokenBinders(GREEDY_LEFT_BINDER, GREEDY_RIGHT_BINDER);
       m.collapse(PARSABLE_STRING_USE_VARS);
@@ -207,7 +208,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
     return r;
   }
 
-  // fixme replace with looking to upper frames ?
   public static boolean isUseVars(PsiBuilder b, @SuppressWarnings("unused") int l) {
     return ((PerlBuilder)b).isUseVarsContent();
   }
