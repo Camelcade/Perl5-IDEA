@@ -10,6 +10,7 @@ plugin/testData/**/svg/
 .idea/libraries/
 .idea/inspectionProfiles/
 .idea/.name
+.idea/sonarlint/
 tmp/
 temp/
 icons/*.psd
