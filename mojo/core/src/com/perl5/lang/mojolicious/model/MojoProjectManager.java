@@ -47,6 +47,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.TestOnly;
 
+import javax.annotation.concurrent.Immutable;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -280,6 +281,7 @@ public class MojoProjectManager implements Disposable {
     }
   }
 
+  @Immutable
   private static class Model {
     private final @NotNull Map<VirtualFile, MojoProject> myProjectRoots;
 
