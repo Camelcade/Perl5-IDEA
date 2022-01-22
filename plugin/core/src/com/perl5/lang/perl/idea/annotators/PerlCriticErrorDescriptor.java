@@ -23,7 +23,7 @@ import java.util.regex.Pattern;
 
 
 public class PerlCriticErrorDescriptor {
-  public static final Pattern PERL_CRITIC_MESSAGE_PATTERN = Pattern.compile("(.+?) at line (\\d+), column (\\d+)\\.\\s*( .+)");
+  public static final Pattern PERL_CRITIC_MESSAGE_PATTERN = Pattern.compile("(.+?) at line (\\d+), column (\\d+)\\.\\s*+(.+)");
   public static final Pattern PERL_CRITIC_MESSAGE_PATTERN_ALT = Pattern.compile("(.+?) at (.+?) line (\\d+),(.+)");
   private final int myLine;
   private final int myCol;
@@ -57,8 +57,7 @@ public class PerlCriticErrorDescriptor {
     Matcher m = PERL_CRITIC_MESSAGE_PATTERN.matcher(message);
     if (m.matches()) {
       StringBuilder realMessage = new StringBuilder();
-      realMessage.append(m.group(1));
-      realMessage.append(m.group(4));
+      realMessage.append(m.group(1)).append(" ").append(m.group(4));
       int line = Integer.parseInt(m.group(2));
       int pos = Integer.parseInt(m.group(3));
       return new PerlCriticErrorDescriptor(realMessage, line, pos);
