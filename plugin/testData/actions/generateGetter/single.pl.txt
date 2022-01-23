@@ -1,0 +1,5 @@
+package Foo::Bar;
+
+<caret>sub get_single {
+    return $_[0]->{single};
+}

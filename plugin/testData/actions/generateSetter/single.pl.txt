@@ -1,0 +1,7 @@
+package Foo::Bar;
+
+<caret>sub set_single {
+    my ($self, $new_value) = @_;
+    $$self{single} = $new_value;
+    return $self;
+}
