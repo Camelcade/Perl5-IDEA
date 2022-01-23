@@ -196,6 +196,17 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
     anAction.update(e);
     assertTrue("Action unavailable: " + anAction, e.getPresentation().isEnabled());
     anAction.actionPerformed(e);
+    PlatformTestUtil.dispatchAllEventsInIdeEventQueue();
+  }
+
+  protected void runActionWithTestEvent(@NotNull AnAction action) {
+    var actionEvent = new TestActionEvent(action);
+    action.update(actionEvent);
+    var eventPresentation = actionEvent.getPresentation();
+    assertTrue("Action is not visible: " + action, eventPresentation.isVisible());
+    assertTrue("Action is not enabled: " + action, eventPresentation.isEnabled());
+    action.actionPerformed(actionEvent);
+    PlatformTestUtil.dispatchAllEventsInIdeEventQueue();
   }
 
   protected static void assumePerlbrewAvailable() {
