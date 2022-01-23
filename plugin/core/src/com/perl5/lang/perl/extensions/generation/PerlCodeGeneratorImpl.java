@@ -49,14 +49,17 @@ import com.perl5.lang.perl.util.PerlPackageUtil;
 import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.TestOnly;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.function.UnaryOperator;
 
 
 public class PerlCodeGeneratorImpl implements PerlCodeGenerator {
+  private static UnaryOperator<List<PerlMethodMember>> ourTestChooser = null;
   public static final PerlCodeGenerator INSTANCE = new PerlCodeGeneratorImpl();
 
   @Override
@@ -178,46 +181,56 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator {
         }
       );
 
-      final MemberChooser<PerlMethodMember> chooser =
-        new MemberChooser<>(subDefinitions.toArray(new PerlMethodMember[subDefinitions.size()]), false, true,
-                            anchor.getProject()) {
-          @Override
-          protected SpeedSearchComparator getSpeedSearchComparator() {
-            return new SpeedSearchComparator(false) {
-              @Override
-              public @Nullable Iterable<TextRange> matchingFragments(@NotNull String pattern, @NotNull String text) {
-                return super.matchingFragments(PerlMethodMember.trimUnderscores(pattern), text);
-              }
-            };
-          }
-
-          @Override
-          protected ShowContainersAction getShowContainersAction() {
-            return new ShowContainersAction(() -> IdeBundle.message("action.show.classes"), PerlIcons.PACKAGE_GUTTER_ICON);
-          }
-        };
-
-      chooser.setTitle("Override/Implement Method");
-      chooser.setCopyJavadocVisible(false);
-      chooser.show();
-      if (chooser.getExitCode() != DialogWrapper.OK_EXIT_CODE) {
+      List<PerlMethodMember> selectedElements = getMembersToOverride(anchor, subDefinitions);
+      if (selectedElements == null) {
         return;
       }
-
       StringBuilder generatedCode = new StringBuilder();
+      for (PerlMethodMember methodMember : selectedElements) {
+        String code = getOverrideCodeText(methodMember.getPsiElement());
+        if (StringUtil.isNotEmpty(code)) {
+          generatedCode.append(code);
+          generatedCode.append("\n\n");
+        }
+      }
 
-      if (chooser.getSelectedElements() != null) {
-        for (PerlMethodMember methodMember : chooser.getSelectedElements()) {
-          String code = getOverrideCodeText(methodMember.getPsiElement());
-          if (StringUtil.isNotEmpty(code)) {
-            generatedCode.append(code);
-            generatedCode.append("\n\n");
-          }
+      insertCodeAfterElement(anchor, generatedCode.toString(), editor);
+    }
+  }
+
+  private @Nullable List<PerlMethodMember> getMembersToOverride(@NotNull PsiElement anchor,
+                                                                @NotNull List<PerlMethodMember> subDefinitions) {
+    if (ourTestChooser != null) {
+      return ourTestChooser.apply(subDefinitions);
+    }
+
+    final MemberChooser<PerlMethodMember> chooser =
+      new MemberChooser<>(subDefinitions.toArray(new PerlMethodMember[0]), false, true,
+                          anchor.getProject()) {
+        @Override
+        protected SpeedSearchComparator getSpeedSearchComparator() {
+          return new SpeedSearchComparator(false) {
+            @Override
+            public @Nullable Iterable<TextRange> matchingFragments(@NotNull String pattern, @NotNull String text) {
+              return super.matchingFragments(PerlMethodMember.trimUnderscores(pattern), text);
+            }
+          };
         }
 
-        insertCodeAfterElement(anchor, generatedCode.toString(), editor);
-      }
+        @Override
+        protected ShowContainersAction getShowContainersAction() {
+          return new ShowContainersAction(() -> IdeBundle.message("action.show.classes"), PerlIcons.PACKAGE_GUTTER_ICON);
+        }
+      };
+
+    chooser.setTitle("Override/Implement Method");
+    chooser.setCopyJavadocVisible(false);
+    chooser.show();
+    if (chooser.getExitCode() != DialogWrapper.OK_EXIT_CODE) {
+      return null;
     }
+
+    return chooser.getSelectedElements();
   }
 
   @Override
@@ -336,5 +349,16 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator {
            "	my $self = bless {}, $proto;\n" +
            "	return $self;\n" +
            "}\n\n";
+  }
+
+  @TestOnly
+  public static void withChooser(@NotNull UnaryOperator<List<PerlMethodMember>> testChooser, @NotNull Runnable runnable) {
+    ourTestChooser = testChooser;
+    try {
+      runnable.run();
+    }
+    finally {
+      ourTestChooser = null;
+    }
   }
 }

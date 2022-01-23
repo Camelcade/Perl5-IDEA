@@ -1,0 +1,18 @@
+package Bar::Baz;
+
+#@method
+sub annotated{
+}
+
+has something => {};
+
+has otherthing => isa => 'rw';
+
+sub implicit{
+  my $self = shift;
+}
+
+package Foo::Bar;
+use parent qw/Bar::Baz/;
+
+<caret>

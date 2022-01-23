@@ -1,0 +1,40 @@
+package Bar::Baz;
+
+#@method
+sub annotated{
+}
+
+has something => {};
+
+has otherthing => isa => 'rw';
+
+sub implicit{
+  my $self = shift;
+}
+
+package Foo::Bar;
+use parent qw/Bar::Baz/;
+
+<caret>#@override
+#@method
+sub annotated {
+    my ($self) = @_;
+}
+
+#@override
+sub something {
+    my ($self, $new_value) = @_;
+    $self->SUPER::something($new_value);
+}
+
+#@override
+sub otherthing {
+    my ($self) = @_;
+}
+
+#@override
+sub implicit {
+    my ($self) = @_;
+    $self->SUPER::implicit();
+}
+
