@@ -38,6 +38,8 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.WriteAction;
 import com.intellij.openapi.application.impl.NonBlockingReadActionImpl;
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.fileEditor.FileEditor;
+import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
@@ -228,6 +230,17 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
     assertNotNull("Unable to find virtual file for: " + file, virtualFile);
     virtualFile.refresh(false, true);
     copyDirContentsTo(virtualFile, getModuleRoot());
+  }
+
+  protected @NotNull VirtualFile getFileInModule(@NotNull String relativePath) {
+    var moduleRoot = getModuleRoot();
+    var result = moduleRoot.findFileByRelativePath(relativePath);
+    assertNotNull("Could not find file " + relativePath + " in module " + getModule(), result);
+    return result;
+  }
+
+  protected FileEditor @NotNull [] openModuleFileInEditor(@NotNull String relativePath) {
+    return FileEditorManager.getInstance(getProject()).openFile(getFileInModule(relativePath), true, true);
   }
 
   protected @NotNull VirtualFile getModuleRoot() {

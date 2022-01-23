@@ -1,0 +1,9 @@
+use strict;
+use warnings;
+sub BEGIN {
+    require v5.10;
+    ()
+}
+no feature ':all';
+use feature ':5.10';
+say 'hi';
