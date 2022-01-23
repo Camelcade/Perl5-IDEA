@@ -606,7 +606,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
                                         int invocationCount,
                                         @MagicConstant(valuesFromClass = Lookup.class) char completeChar) {
     doCompleteLookupString(lookupString, completionType, invocationCount, completeChar);
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithCaretsAndSelections());
+    checkEditorWithFile();
   }
 
   protected void doCompleteLookupString(@NotNull String lookupString,
@@ -1107,6 +1107,10 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
 
   protected void doTestTypingWithoutInit(@NotNull String toType) {
     myFixture.type(toType);
+    checkEditorWithFile();
+  }
+
+  protected final void checkEditorWithFile() {
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithCaretsAndSelections());
   }
 
@@ -1135,7 +1139,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
 
   protected void doTestEnterNoInit() {
     myFixture.type('\n');
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithCaretsAndSelections());
+    checkEditorWithFile();
   }
 
   protected String serializePsiElement(@Nullable PsiElement element) {
@@ -1907,7 +1911,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     initWithFileSmart();
     MultiCaretCodeInsightAction action = (MultiCaretCodeInsightAction)ActionManager.getInstance().getAction(IdeActions.ACTION_COMMENT_LINE);
     action.actionPerformedImpl(getProject(), myFixture.getEditor());
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithCaretsAndSelections());
+    checkEditorWithFile();
   }
 
   protected void doTestConsoleFilter(@NotNull com.intellij.execution.filters.Filter filter) {

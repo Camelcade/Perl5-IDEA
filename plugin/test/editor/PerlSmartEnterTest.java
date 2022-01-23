@@ -18,7 +18,6 @@ package editor;
 
 import base.PerlLightTestCase;
 import com.intellij.codeInsight.editorActions.smartEnter.SmartEnterAction;
-import com.intellij.testFramework.UsefulTestCase;
 import org.junit.Test;
 
 public class PerlSmartEnterTest extends PerlLightTestCase {
@@ -111,6 +110,6 @@ public class PerlSmartEnterTest extends PerlLightTestCase {
   private void doTest() {
     initWithFileSmart();
     myFixture.testAction(new SmartEnterAction());
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithCaretsAndSelections());
+    checkEditorWithFile();
   }
 }
