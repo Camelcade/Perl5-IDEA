@@ -1,0 +1,8 @@
+package Foo::Bar;
+
+<caret>sub new {
+    my ($proto) = @_;
+    my $self = bless {}, $proto;
+    return $self;
+}
+

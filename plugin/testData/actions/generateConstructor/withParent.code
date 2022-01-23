@@ -1,0 +1,12 @@
+package Foo::Boo;
+
+sub new {
+    my ($proto) = @_;
+    my $self = bless {}, $proto;
+    return $self;
+}
+
+package Foo::Bar;
+use parent qw/Foo::Boo/;
+
+<caret>
