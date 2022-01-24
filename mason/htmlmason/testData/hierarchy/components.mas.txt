@@ -1,0 +1,16 @@
+Provider: HTMLMasonTypeHierarchyProvider
+Target: HTML::Mason component
+Browser: HTMLMasonHierarchyBrowser
+----------
+Tree: Class kid.mas
+HTML::Mason component at 0 in parent.mas
+    HTML::Mason component at 0 in kid.mas
+        HTML::Mason component at 0 in kid2.mas
+----------
+Tree: Subtypes of kid.mas
+HTML::Mason component at 0 in kid.mas
+    HTML::Mason component at 0 in kid2.mas
+----------
+Tree: Supertypes of kid.mas
+HTML::Mason component at 0 in kid.mas
+    HTML::Mason component at 0 in parent.mas

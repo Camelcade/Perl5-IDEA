@@ -163,6 +163,7 @@ import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManage
 import com.perl5.lang.perl.idea.completion.PerlStringCompletionCache;
 import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
+import com.perl5.lang.perl.idea.hierarchy.namespace.PerlHierarchyBrowser;
 import com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService;
 import com.perl5.lang.perl.idea.manipulators.PerlBareStringManipulator;
 import com.perl5.lang.perl.idea.manipulators.PerlStringContentManipulator;
@@ -1476,6 +1477,10 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
 
   protected void doTestStructureView() {
     initWithFileSmartWithoutErrors();
+    doTestStructureViewWithoutInit();
+  }
+
+  protected void doTestStructureViewWithoutInit() {
     PsiFile psiFile = getFile();
     final VirtualFile virtualFile = psiFile.getVirtualFile();
     final FileEditor fileEditor = FileEditorManager.getInstance(getProject()).getSelectedEditor(virtualFile);
@@ -1589,7 +1594,10 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
 
   protected void doTestTypeHierarchy() {
     initWithFileSmartWithoutErrors();
-    var psiElement = myFixture.getElementAtCaret();
+    doTestTypeHierarchyWithoutInit(myFixture.getElementAtCaret());
+  }
+
+  protected void doTestTypeHierarchyWithoutInit(@NotNull PsiElement psiElement) {
     MapDataContext dataContext = new MapDataContext();
     dataContext.put(CommonDataKeys.PROJECT, getProject());
     dataContext.put(CommonDataKeys.EDITOR, getEditor());
@@ -1611,12 +1619,15 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     try {
       Field myType2Sheet = HierarchyBrowserBaseEx.class.getDeclaredField("myType2Sheet");
       myType2Sheet.setAccessible(true);
+      assertInstanceOf(browser, PerlHierarchyBrowser.class);
       Method createHierarchyTreeStructure =
-        browser.getClass().getDeclaredMethod("createHierarchyTreeStructure", String.class, PsiElement.class);
+        PerlHierarchyBrowser.class.getDeclaredMethod("createHierarchyTreeStructure", String.class, PsiElement.class);
       createHierarchyTreeStructure.setAccessible(true);
-      Method getContentDisplayName = browser.getClass().getDeclaredMethod("getContentDisplayName", String.class, PsiElement.class);
+      Method getContentDisplayName =
+        HierarchyBrowserBaseEx.class.getDeclaredMethod("getContentDisplayName", String.class, PsiElement.class);
       getContentDisplayName.setAccessible(true);
-      Method getElementFromDescriptor = browser.getClass().getDeclaredMethod("getElementFromDescriptor", HierarchyNodeDescriptor.class);
+      Method getElementFromDescriptor =
+        PerlHierarchyBrowser.class.getDeclaredMethod("getElementFromDescriptor", HierarchyNodeDescriptor.class);
       getElementFromDescriptor.setAccessible(true);
 
       Map<String, ?> subTrees = (Map<String, ?>)myType2Sheet.get(browser);

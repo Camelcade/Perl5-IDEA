@@ -57,11 +57,6 @@ public class PerlHierarchyBrowser extends TypeHierarchyBrowserBase {
   }
 
   @Override
-  protected @Nullable String getContentDisplayName(@NotNull String typeName, @NotNull PsiElement element) {
-    return super.getContentDisplayName(typeName, element);
-  }
-
-  @Override
   protected @Nullable PsiElement getElementFromDescriptor(@NotNull HierarchyNodeDescriptor descriptor) {
     if (!(descriptor instanceof PerlHierarchyNodeDescriptor)) {
       return null;

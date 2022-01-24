@@ -1,0 +1,3 @@
+<%flags>
+    inherit=>'./kid.mas'
+</%flags>
