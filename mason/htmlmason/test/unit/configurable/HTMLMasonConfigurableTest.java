@@ -17,12 +17,6 @@ public class HTMLMasonConfigurableTest extends HTMLMasonLightTestCase {
     settings.customTags.add(new HTMLMasonCustomTag("testMethod", HTMLMasonCustomTagRole.METHOD));
     settings.customTags.add(new HTMLMasonCustomTag("testDef", HTMLMasonCustomTagRole.DEF));
     settings.customTags.add(new HTMLMasonCustomTag("testArgs", HTMLMasonCustomTagRole.ARGS));
-    var configurable = new HTMLMasonSettingsConfigurable(getProject());
-    configurable.createComponent();
-    assertTrue(configurable.isModified());
-    configurable.reset();
-    assertFalse(configurable.isModified());
-    configurable.apply();
-    assertFalse(configurable.isModified());
+    doTestConfigurable(new HTMLMasonSettingsConfigurable(getProject()));
   }
 }

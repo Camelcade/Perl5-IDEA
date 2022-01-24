@@ -97,6 +97,8 @@ import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
+import com.intellij.openapi.options.ConfigurationException;
+import com.intellij.openapi.options.UnnamedConfigurable;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.impl.PerlModuleExtension;
 import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
@@ -3104,5 +3106,21 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       fail("Expected a single injector for " + host.getClass() + " got: " + result);
     }
     return result.get(0);
+  }
+
+  protected void doTestConfigurable(@NotNull UnnamedConfigurable configurable) {
+    var component = configurable.createComponent();
+    assertNotNull(component);
+    assertTrue(configurable.isModified());
+    configurable.reset();
+    assertFalse(configurable.isModified());
+    try {
+      configurable.apply();
+    }
+    catch (ConfigurationException e) {
+      fail(e.getMessage());
+    }
+    assertFalse(configurable.isModified());
+    configurable.disposeUIResources();
   }
 }
