@@ -72,7 +72,6 @@ public class PerlContentEntriesTreeEditor implements UnnamedConfigurable, Dispos
   public PerlContentEntriesTreeEditor(@NotNull Module module, @NotNull Disposable parentDisposable) {
     Disposer.register(parentDisposable, this);
 
-
     List<PerlSourceRootType> types = new ArrayList<>();
     Perl5SettingsConfigurableExtension.forEach(extension -> types.addAll(extension.getSourceRootTypes()));
 
@@ -88,7 +87,6 @@ public class PerlContentEntriesTreeEditor implements UnnamedConfigurable, Dispos
     myTree.setShowsRootHandles(true);
     TreeUtil.installActions(myTree);
     new TreeSpeedSearch(myTree);
-    //myTree.setPreferredSize(new Dimension(250, -1));
 
     myTreePanel = new JPanel(new GridBagLayout());
 
@@ -136,6 +134,9 @@ public class PerlContentEntriesTreeEditor implements UnnamedConfigurable, Dispos
 
   @Override
   public boolean isModified() {
+    if (myModifiableRootModel == null) {
+      return true;
+    }
     return getPerlModuleExtensionModifiableModel().isChanged();
   }
 
@@ -234,6 +235,9 @@ public class PerlContentEntriesTreeEditor implements UnnamedConfigurable, Dispos
       }
       final VirtualFile file = ((FileElement)element).getFile();
       if (file == null || !file.isDirectory()) {
+        return;
+      }
+      if (myModifiableRootModel == null) {
         return;
       }
       PerlSourceRootType rootType = getPerlModuleExtensionModifiableModel().getRootType(file);

@@ -3121,6 +3121,8 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       fail(e.getMessage());
     }
     assertFalse(configurable.isModified());
-    configurable.disposeUIResources();
+    if (!(configurable instanceof Disposable)) {
+      configurable.disposeUIResources();
+    }
   }
 }
