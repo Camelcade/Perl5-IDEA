@@ -16,7 +16,9 @@
 
 package base;
 
+import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.lang.htmlmason.filetypes.HTMLMasonFileType;
+import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSourceRootType;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class HTMLMasonLightTestCase extends PerlLightTestCase {
@@ -28,5 +30,9 @@ public abstract class HTMLMasonLightTestCase extends PerlLightTestCase {
   @Override
   protected @NotNull String getTestLibPath() {
     return super.getTestLibPathFromNested();
+  }
+
+  protected void markAsComponentRoot(@NotNull VirtualFile componentRoot) {
+    markAsPerlRoot(componentRoot, true, HTMLMasonSourceRootType.INSTANCE);
   }
 }

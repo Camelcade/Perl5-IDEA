@@ -168,6 +168,7 @@ import com.perl5.lang.perl.idea.manipulators.PerlBareStringManipulator;
 import com.perl5.lang.perl.idea.manipulators.PerlStringContentManipulator;
 import com.perl5.lang.perl.idea.manipulators.PerlStringManipulator;
 import com.perl5.lang.perl.idea.modules.PerlLibrarySourceRootType;
+import com.perl5.lang.perl.idea.modules.PerlSourceRootType;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationBase;
 import com.perl5.lang.perl.idea.project.PerlNamesCache;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
@@ -358,8 +359,12 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
    * @param removeAutomatically if true, this source root going to be unmarked automatically in the perl test tearDown
    */
   protected void markAsLibRoot(@NotNull VirtualFile libDir, boolean removeAutomatically) {
+    markAsPerlRoot(libDir, removeAutomatically, PerlLibrarySourceRootType.INSTANCE);
+  }
+
+  protected void markAsPerlRoot(@NotNull VirtualFile libDir, boolean removeAutomatically, @NotNull PerlSourceRootType rootType) {
     assertTrue(libDir.isValid() && libDir.isDirectory());
-    PerlModuleExtension.modify(getModule(), it -> it.setRoot(libDir, PerlLibrarySourceRootType.INSTANCE));
+    PerlModuleExtension.modify(getModule(), it -> it.setRoot(libDir, rootType));
     if (removeAutomatically) {
       addPerlTearDownListener(() -> removePerlSourceRoot(libDir));
     }

@@ -1,0 +1,7 @@
+<%flags>
+    inherit=>'/parent.mas'
+</%flags>
+
+<%attr>
+    other_color => 'red'
+</%attr>
