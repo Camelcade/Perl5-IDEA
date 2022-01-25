@@ -17,35 +17,38 @@
 package unit.perl;
 
 import base.PerlLightTestCase;
+import categories.Heavy;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.diagnostic.Attachment;
 import com.intellij.openapi.diagnostic.IdeaLoggingEvent;
+import com.intellij.openapi.diagnostic.RuntimeExceptionWithAttachments;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiUtilCore;
-import com.intellij.util.concurrency.Semaphore;
 import com.perl5.errorHandler.YoutrackErrorHandler;
-import org.junit.Ignore;
+import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-import javax.swing.*;
-import java.util.Arrays;
+import java.io.IOException;
 
-@Ignore("For manual testing only")
+import static com.perl5.errorHandler.YoutrackErrorHandler.YOUTRACK_PROPERTY_KEY;
+
+@Category(Heavy.class)
 public class PerlExceptionReporterTest extends PerlLightTestCase {
   @Test
   public void testReporting() {
     Throwable first = new Throwable();
     Throwable second = new Throwable(first);
     Throwable third = new Throwable(second);
-    String issueNumber = new YoutrackErrorHandler().submit(
-      "Test description и по-русски", "Test body и немного русского языка",
-      Arrays.asList(new Attachment("fist", first),
-                    new Attachment("fist", second),
-                    new Attachment("second", third),
-                    new Attachment("последний", "русский аттачмент")
-      ));
-    assertNotNull(issueNumber);
+
+    var mainException = new RuntimeExceptionWithAttachments("Test body и немного русского языка", new Attachment("fist", first),
+                                                            new Attachment("fist", second), new Attachment("second", third),
+                                                            new Attachment("последний", "русский аттачмент"));
+
+    var loggingEvents = new IdeaLoggingEvent[]{new IdeaLoggingEvent("Test description и по-русски", mainException)};
+
+    doTest(loggingEvents, "nothing", 4);
   }
 
   @Test
@@ -60,15 +63,34 @@ public class PerlExceptionReporterTest extends PerlLightTestCase {
       PsiUtilCore.ensureValid(statement);
     }
     catch (Exception e) {
-      Semaphore semaphore = new Semaphore();
-      semaphore.down();
-      new YoutrackErrorHandler().submit(
-        new IdeaLoggingEvent[]{new IdeaLoggingEvent("Test message", e)},
-        "No info",
-        new JPanel(),
-        info -> semaphore.up()
-      );
-      semaphore.waitFor();
+      var loggingEvents = new IdeaLoggingEvent[]{new IdeaLoggingEvent("Test message", e)};
+      var additionalInfo = "No info";
+      doTest(loggingEvents, additionalInfo, 1);
+    }
+  }
+
+  private void doTest(@NotNull IdeaLoggingEvent[] loggingEvents, @NotNull String additionalInfo, int expectedAttachments) {
+    var errorHandler = new YoutrackErrorHandler();
+    var submittingData = errorHandler.doSubmit(loggingEvents, additionalInfo, getProject());
+
+    var youtrackResponse = submittingData.second;
+    assertNotNull(youtrackResponse);
+    LOG.warn("Posted issue: " + youtrackResponse.idReadable);
+
+    assertEquals("Wrong attachments number: ", expectedAttachments, youtrackResponse.attachmentsAdded);
+
+    if (!YoutrackErrorHandler.hasAdminToken()) {
+      LOG.warn("Pass token via property to remove test issues automatically: " + YOUTRACK_PROPERTY_KEY);
+      return;
+    }
+
+    try {
+      var deleteResponse = errorHandler.deleteIssue(youtrackResponse);
+      assertEquals("Error removing issue: " + youtrackResponse + "; " + deleteResponse.getStatusLine(), 200,
+                   deleteResponse.getStatusLine().getStatusCode());
+    }
+    catch (IOException ex) {
+      fail("Error removing issue: " + ex.getMessage());
     }
   }
 }

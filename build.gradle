@@ -124,6 +124,11 @@ allprojects {
     if (project.hasProperty("overwrite")) {
       systemProperty "idea.tests.overwrite.data", "true"
     }
+
+    if (project.hasProperty("youtrack.token")) {
+      systemProperty "youtrack.token", project.getProperty("youtrack.token")
+    }
+
     useJUnit {
       if (project.hasProperty("runtest")) {
         include '**/' + project.property('runtest') + '.class'

@@ -33,6 +33,7 @@ import com.intellij.openapi.diagnostic.*;
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.Task;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.Consumer;
@@ -42,15 +43,14 @@ import com.perl5.lang.perl.util.PerlPluginUtil;
 import org.apache.http.Consts;
 import org.apache.http.client.entity.EntityBuilder;
 import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.*;
 
 import java.awt.*;
 import java.io.IOException;
@@ -69,6 +69,8 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
   private static final String SERVER_REST_URL = SERVER_URL + "/api";
   private static final String ISSUES_REST_URL = SERVER_REST_URL + "/issues";
   private static final String SERVER_ISSUE_URL = ISSUES_REST_URL + "?fields=idReadable,id";
+  public static final String YOUTRACK_PROPERTY_KEY = "youtrack.token";
+  private static final String ADMIN_TOKEN = "Bearer " + System.getProperty(YOUTRACK_PROPERTY_KEY);
   private static final String ACCESS_TOKEN = "Bearer perm:YXV0b3JlcG9ydGVy.NjEtMA==.iG2Zu7rMOzfjaGny7gFHyrOf9NEMCA";
 
 
@@ -88,16 +90,17 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
     Task.Backgroundable task = new Task.Backgroundable(project, DiagnosticBundle.message("title.submitting.error.report")) {
       @Override
       public void run(@NotNull ProgressIndicator indicator) {
-        consumer.consume(doSubmit(events, additionalInfo, project));
+        consumer.consume(doSubmit(events, additionalInfo, project).first);
       }
     };
     task.queue();
     return true;
   }
 
-  private SubmittedReportInfo doSubmit(IdeaLoggingEvent @NotNull [] ideaLoggingEvents,
-                                       @Nullable String addInfo,
-                                       @Nullable Project project) {
+  @VisibleForTesting
+  public @NotNull Pair<SubmittedReportInfo, YoutrackIssueResponse> doSubmit(IdeaLoggingEvent @NotNull [] ideaLoggingEvents,
+                                                                            @Nullable String addInfo,
+                                                                            @Nullable Project project) {
     final IdeaLoggingEvent ideaLoggingEvent = ideaLoggingEvents[0];
     final String throwableText = ideaLoggingEvent.getThrowableText();
     String description = throwableText.substring(0, Math.min(80, throwableText.length()));
@@ -131,38 +134,38 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
       }
     }
 
-    String issueNumber = submit(description, descBuilder.toString(), attachments);
-    LOGGER.info("Error submitted, response: " + issueNumber);
-
-    if (issueNumber == null) {
-      return new SubmittedReportInfo(SERVER_ISSUE_URL, "", FAILED);
+    var issueResponse = submit(description, descBuilder.toString(), attachments);
+    LOGGER.info("Error submitted, response: " + issueResponse);
+    if (issueResponse == null) {
+      return Pair.create(new SubmittedReportInfo(SERVER_ISSUE_URL, "", FAILED), null);
     }
+    var issueNumber = issueResponse.idReadable;
 
     final SubmittedReportInfo reportInfo = new SubmittedReportInfo(SERVER_URL + "/issue/" + issueNumber, issueNumber, NEW_ISSUE);
 
     popupResultInfo(reportInfo, project);
 
-    return reportInfo;
+    return Pair.create(reportInfo, issueResponse);
   }
 
   /**
    * @return human-readable issue number or null if failed to create one
    */
-  public @Nullable String submit(@Nullable String desc,
-                                 @NotNull String body,
-                                 @NotNull List<Attachment> attachments) {
+  private @Nullable YoutrackIssueResponse submit(@Nullable String desc,
+                                                 @NotNull String body,
+                                                 @NotNull List<Attachment> attachments) {
     if (isEmpty(desc)) {
-      throw new RuntimeException(DiagnosticBundle.message("error.report.failure.message"));
+      LOGGER.warn("Won't submit empty issue");
+      return null;
     }
 
     var issueResponse = createIssue(desc, body);
     if (issueResponse == null) {
       return null;
     }
-
     attachFiles(issueResponse, attachments);
 
-    return issueResponse.idReadable;
+    return issueResponse;
   }
 
   private void attachFiles(@NotNull YoutrackIssueResponse issueResponse, @NotNull List<Attachment> attachments) {
@@ -199,10 +202,30 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
                     "; issue id: " + issueResponse.idReadable
         );
       }
+      else {
+        issueResponse.attachmentsAdded = attachments.size();
+      }
     }
     catch (IOException e) {
       LOGGER.warn(e.getMessage());
     }
+  }
+
+  @TestOnly
+  public CloseableHttpResponse deleteIssue(@NotNull YoutrackIssueResponse issueResponse) throws IOException {
+    try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
+      var deleteRequest = new HttpDelete(String.join("/", ISSUES_REST_URL, issueResponse.id));
+      deleteRequest.addHeader("Authorization", ADMIN_TOKEN);
+      return httpClient.execute(deleteRequest);
+    }
+    catch (IOException e) {
+      throw new IOException(e);
+    }
+  }
+
+  @TestOnly
+  public static boolean hasAdminToken() {
+    return StringUtil.isNotEmpty(ADMIN_TOKEN);
   }
 
   private @Nullable YoutrackIssueResponse createIssue(@NotNull String desc, @NotNull String body) {
@@ -242,7 +265,9 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
       }
 
       try {
-        return gson.fromJson(responsePayload, YoutrackIssueResponse.class);
+        var issueResponse = gson.fromJson(responsePayload, YoutrackIssueResponse.class);
+        issueResponse.issue = issue;
+        return issueResponse;
       }
       catch (JsonSyntaxException e) {
         LOGGER.warn("Error decoding server response: " + responsePayload + "; request: " + requestContent);
@@ -288,6 +313,4 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
         .createNotification(DiagnosticBundle.message("error.report.title"), text.toString(), type, listener).notify(project);
     });
   }
-
-
 }

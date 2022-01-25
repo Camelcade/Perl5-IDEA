@@ -19,11 +19,13 @@ package com.perl5.errorHandler;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.intellij.util.containers.ContainerUtil;
+import org.jetbrains.annotations.VisibleForTesting;
 
 import java.util.ArrayList;
 import java.util.List;
 
-final class YoutrackApi {
+@VisibleForTesting
+public final class YoutrackApi {
   // https://camelcade.myjetbrains.com/youtrack/api/admin/projects
   private static final String PROJECT_ID = "81-0";
   private static final YoutrackProject PROJECT = new YoutrackProject(PROJECT_ID);
@@ -87,7 +89,8 @@ final class YoutrackApi {
     }
   }
 
-  static final class YoutrackIssue {
+  @VisibleForTesting
+  public static final class YoutrackIssue {
     @Expose
     public final YoutrackProject project = PROJECT;
     @Expose
@@ -103,9 +106,20 @@ final class YoutrackApi {
       customFields.add(PRIORITY);
       customFields.add(TYPE);
     }
+
+    @Override
+    public String toString() {
+      return "YoutrackIssue{" +
+             "project=" + project +
+             ", customFields=" + customFields +
+             ", summary='" + summary + '\'' +
+             ", description='" + description + '\'' +
+             '}';
+    }
   }
 
-  static final class YoutrackIssueResponse {
+  @VisibleForTesting
+  public static final class YoutrackIssueResponse {
     @Expose
     public String id;
     @Expose
@@ -113,5 +127,18 @@ final class YoutrackApi {
     @Expose
     @SerializedName("$type")
     public String type;
+
+    public YoutrackIssue issue;
+    public int attachmentsAdded = 0;
+
+    @Override
+    public String toString() {
+      return "YoutrackIssueResponse{" +
+             "id='" + id + '\'' +
+             ", idReadable='" + idReadable + '\'' +
+             ", type='" + type + '\'' +
+             ", issue=" + issue +
+             '}';
+    }
   }
 }
