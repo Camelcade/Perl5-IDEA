@@ -20,6 +20,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.NlsSafe;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
+import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
 import com.intellij.psi.scope.PsiScopeProcessor;
@@ -48,6 +49,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
+import static com.intellij.openapi.vfs.VfsUtilCore.VFS_SEPARATOR;
+import static com.intellij.openapi.vfs.VfsUtilCore.VFS_SEPARATOR_CHAR;
+
 public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
   protected List<PerlVariableDeclarationElement> myImplicitVariables = null;
   protected int myMasonChangeCounter;
@@ -72,7 +76,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
     VirtualFile componentRoot = getComponentRoot();
 
     if (componentFile != null && componentRoot != null) {
-      return '/' + VfsUtil.getRelativePath(componentFile, componentRoot);
+      return VFS_SEPARATOR + VfsUtil.getRelativePath(componentFile, componentRoot);
     }
     return null;
   }
@@ -171,45 +175,43 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
   }
 
   public @NotNull List<HTMLMasonFileImpl> getChildComponents() {
-    final List<HTMLMasonFileImpl> result = new ArrayList<>();
     VirtualFile containingFile = getComponentVirtualFile();
 
-    if (containingFile != null) {
-      VirtualFile componentRoot = getComponentRoot();
+    if (containingFile == null) {
+      return Collections.emptyList();
+    }
 
-      if (componentRoot != null) {
-        final String relativePath = VfsUtil.VFS_SEPARATOR_CHAR + VfsUtil.getRelativePath(containingFile, componentRoot);
-        final Project project = getProject();
-        final GlobalSearchScope scope = GlobalSearchScope.allScope(project);
-        final HTMLMasonFileImpl currentFile = this;
-        HTMLMasonSettings settings = HTMLMasonSettings.getInstance(project);
+    VirtualFile componentRoot = getComponentRoot();
 
-        // indexed children
-        for (String parentPath : StubIndex.getInstance().getAllKeys(HTMLMasonFlagsStubIndex.KEY, project)) {
-          boolean isEquals = StringUtil.equals(relativePath, parentPath);
-          boolean isRelative = parentPath.length() == 0 || parentPath.charAt(0) != VfsUtil.VFS_SEPARATOR_CHAR;
+    if (componentRoot == null) {
+      return Collections.emptyList();
+    }
 
-          for (HTMLMasonFlagsStatement statement : StubIndex.getElements(
-            HTMLMasonFlagsStubIndex.KEY,
-            parentPath,
-            project,
-            scope,
-            HTMLMasonFlagsStatement.class
-          )) {
-            PsiFile file = statement.getContainingFile();
-            if (file instanceof HTMLMasonFileImpl) {
-              if (isEquals || isRelative && currentFile.equals(((HTMLMasonFileImpl)file).getParentComponent())) {
-                result.add((HTMLMasonFileImpl)file);
-              }
-            }
-          }
-        }
+    final List<HTMLMasonFileImpl> result = new ArrayList<>();
+    final String relativePath = VFS_SEPARATOR + VfsUtilCore.getRelativePath(containingFile, componentRoot);
+    final Project project = getProject();
+    final GlobalSearchScope scope = GlobalSearchScope.allScope(project);
+    final HTMLMasonFileImpl currentFile = this;
+    HTMLMasonSettings settings = HTMLMasonSettings.getInstance(project);
 
-        // implicit auto-handled children
-        if (StringUtil.equals(containingFile.getName(), settings.autoHandlerName)) {
-          collectAutoHandledFiles(PsiManager.getInstance(project), containingFile.getParent(), result, settings.autoHandlerName, null);
+    // indexed children
+    for (String parentPath : StubIndex.getInstance().getAllKeys(HTMLMasonFlagsStubIndex.KEY, project)) {
+      boolean isEquals = StringUtil.equals(relativePath, parentPath);
+      boolean isRelative = parentPath.length() == 0 || parentPath.charAt(0) != VFS_SEPARATOR_CHAR;
+
+      for (HTMLMasonFlagsStatement statement : StubIndex.getElements(
+        HTMLMasonFlagsStubIndex.KEY, parentPath, project, scope, HTMLMasonFlagsStatement.class)) {
+        PsiFile file = statement.getContainingFile();
+        if (file instanceof HTMLMasonFileImpl &&
+            (isEquals || isRelative && currentFile.equals(((HTMLMasonFileImpl)file).getParentComponent()))) {
+          result.add((HTMLMasonFileImpl)file);
         }
       }
+    }
+
+    // implicit auto-handled children
+    if (StringUtil.equals(containingFile.getName(), settings.autoHandlerName)) {
+      collectAutoHandledFiles(PsiManager.getInstance(project), containingFile.getParent(), result, settings.autoHandlerName, null);
     }
 
     return result;
