@@ -10,8 +10,8 @@ public class HTMLMasonHierarchyTest extends HTMLMasonLightTestCase {
   }
 
   @Test
-  public void testComponents() {
-    var root = myFixture.copyDirectoryToProject("simple", "");
+  public void testSimple() {
+    var root = myFixture.copyDirectoryToProject(getTestName(true), "");
     assertNotNull(root);
     var componentsFile = root.findFileByRelativePath("components");
     assertNotNull(componentsFile);
@@ -20,6 +20,19 @@ public class HTMLMasonHierarchyTest extends HTMLMasonLightTestCase {
     markAsComponentRoot(componentsFile);
     markAsComponentRoot(otherComponentsFile);
     var kidFile = otherComponentsFile.findFileByRelativePath("kid.mas");
+    assertNotNull(kidFile);
+    myFixture.openFileInEditor(kidFile);
+    doTestTypeHierarchyWithoutInit(getFile());
+  }
+
+  @Test
+  public void testAutohandlers() {
+    var root = myFixture.copyDirectoryToProject(getTestName(true), "");
+    assertNotNull(root);
+    var componentsFile = root.findFileByRelativePath("components");
+    assertNotNull(componentsFile);
+    markAsComponentRoot(componentsFile);
+    var kidFile = componentsFile.findFileByRelativePath("autohandler");
     assertNotNull(kidFile);
     myFixture.openFileInEditor(kidFile);
     doTestTypeHierarchyWithoutInit(getFile());

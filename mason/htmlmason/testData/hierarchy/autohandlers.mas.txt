@@ -1,0 +1,26 @@
+Provider: HTMLMasonTypeHierarchyProvider
+Target: HTML::Mason component
+Browser: HTMLMasonHierarchyBrowser
+----------
+Tree: Class autohandler
+HTML::Mason component at 0 in autohandler
+    HTML::Mason component at 0 in autohandler
+        HTML::Mason component at 0 in dhandler
+        HTML::Mason component at 0 in third.mas
+        HTML::Mason component at 0 in dhandler
+        HTML::Mason component at 0 in first.mas
+    HTML::Mason component at 0 in top.mas
+    HTML::Mason component at 0 in dhandler
+----------
+Tree: Subtypes of autohandler
+HTML::Mason component at 0 in autohandler
+    HTML::Mason component at 0 in autohandler
+        HTML::Mason component at 0 in dhandler
+        HTML::Mason component at 0 in third.mas
+        HTML::Mason component at 0 in dhandler
+        HTML::Mason component at 0 in first.mas
+    HTML::Mason component at 0 in top.mas
+    HTML::Mason component at 0 in dhandler
+----------
+Tree: Supertypes of autohandler
+HTML::Mason component at 0 in autohandler
