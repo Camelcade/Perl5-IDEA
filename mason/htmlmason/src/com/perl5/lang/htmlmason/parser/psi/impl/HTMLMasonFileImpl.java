@@ -76,7 +76,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
     VirtualFile componentRoot = getComponentRoot();
 
     if (componentFile != null && componentRoot != null) {
-      return VFS_SEPARATOR + VfsUtil.getRelativePath(componentFile, componentRoot);
+      return VFS_SEPARATOR + VfsUtilCore.getRelativePath(componentFile, componentRoot);
     }
     return null;
   }
@@ -91,7 +91,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
     VirtualFile componentRoot = getComponentRoot();
 
     if (componentFile != null && componentRoot != null) {
-      return '/' + VfsUtil.getRelativePath(componentFile.getParent(), componentRoot);
+      return '/' + VfsUtilCore.getRelativePath(componentFile.getParent(), componentRoot);
     }
     return null;
   }
