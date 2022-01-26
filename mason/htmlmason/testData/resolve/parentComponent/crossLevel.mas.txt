@@ -1,0 +1,15 @@
+HTMLMasonComponentReference at (25,35); text in range: 'second.mas' => 1 results:
+	HTML::Mason component at 0 in second.mas
+
+HTMLMasonComponentReference at (42,60); text in range: './subdir/third.mas' => 1 results:
+	HTML::Mason component at 0 in third.mas
+
+HTMLMasonComponentReference at (67,92); text in range: '/zero/otherdir/fourth.mas' => 1 results:
+	HTML::Mason component at 0 in fourth.mas
+
+HTMLMasonComponentReference at (99,109); text in range: '../top.mas' => 1 results:
+	HTML::Mason component at 0 in top.mas
+
+HTMLMasonComponentReference at (116,124); text in range: '/top.mas' => 1 results:
+	HTML::Mason component at 0 in top.mas
+

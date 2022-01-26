@@ -1,0 +1,10 @@
+# top level component
+<& second.mas &>
+<& ./subdir/third.mas &>
+<& /zero/otherdir/fourth.mas &>
+<& ../top.mas &>
+<& /top.mas &>
+
+
+
+
