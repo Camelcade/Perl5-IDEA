@@ -82,9 +82,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
   }
 
   /**
-   * Returns absolute containing dir path relative to the components root
-   *
-   * @return path
+   * @return absolute containing dir path relative to the components root
    */
   public @NlsSafe @Nullable String getAbsoluteComponentContainerPath() {
     VirtualFile componentFile = getComponentVirtualFile();
@@ -98,7 +96,6 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
 
   @Override
   public @NotNull List<PerlVariableDeclarationElement> getImplicitVariables() {
-
     HTMLMasonSettings settings = HTMLMasonSettings.getInstance(getProject());
     if (myImplicitVariables == null || myMasonChangeCounter != settings.getChangeCounter()) {
       myImplicitVariables = buildImplicitVariables(settings);
@@ -121,8 +118,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
     HTMLMasonSettings settings = HTMLMasonSettings.getInstance(getProject());
     VirtualFile parentFile = null;
 
-    if (parentComponentPath == null) // auto-handler
-    {
+    if (parentComponentPath == null) {
       VirtualFile containingFile = getComponentVirtualFile();
       if (containingFile != null) {
         VirtualFile startDir = containingFile.getParent();
@@ -141,10 +137,8 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
         }
       }
     }
-    else if (!StringUtil.equals(parentComponentPath, HTMLMasonFlagsStatement.UNDEF_RESULT)) // Specific component
-    {
-      if (StringUtil.startsWith(parentComponentPath, "/")) // absolute path
-      {
+    else if (!StringUtil.equals(parentComponentPath, HTMLMasonFlagsStatement.UNDEF_RESULT)) {
+      if (StringUtil.startsWith(parentComponentPath, "/")) {
         parentComponentPath = parentComponentPath.substring(1);
         for (VirtualFile root : settings.getComponentsRoots()) {
           if ((parentFile = root.findFileByRelativePath(parentComponentPath)) != null) {
@@ -152,8 +146,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
           }
         }
       }
-      else // relative path
-      {
+      else {
         VirtualFile containingVirtualFile = getComponentVirtualFile();
         if (containingVirtualFile != null) {
           VirtualFile containingDir = containingVirtualFile.getParent();
@@ -209,7 +202,6 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
       }
     }
 
-    // implicit auto-handled children
     if (StringUtil.equals(containingFile.getName(), settings.autoHandlerName)) {
       collectAutoHandledFiles(PsiManager.getInstance(project), containingFile.getParent(), result, settings.autoHandlerName, null);
     }
@@ -320,8 +312,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
       checkInit = true;
       checkCode = true;
 
-      if (lastParent instanceof HTMLMasonCleanupBlockImpl) // change nature flow
-      {
+      if (lastParent instanceof HTMLMasonCleanupBlockImpl) {
         checkCleanup = true;
         cleanupAnchor = lastParent;
         lastParent = null;
@@ -587,7 +578,6 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
     });
   }
 
-  // fixme this is a cut version from PerlResolveUtil to make implicit vars checking in the last order
   public static boolean processChildren(@NotNull PsiElement element,
                                         @NotNull PsiScopeProcessor processor,
                                         @NotNull ResolveState resolveState,
