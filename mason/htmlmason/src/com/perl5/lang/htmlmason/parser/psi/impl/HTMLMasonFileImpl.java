@@ -46,10 +46,7 @@ import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
   protected List<PerlVariableDeclarationElement> myImplicitVariables = null;
@@ -218,44 +215,39 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
     return result;
   }
 
-  protected void collectAutoHandledFiles(
-    PsiManager manager,
-    VirtualFile dir,
-    List<HTMLMasonFileImpl> result,
-    String autoHandlerName,
-    @Nullable Set<VirtualFile> recursionMap
-  ) {
-    if (dir != null) {
-      if (recursionMap == null) // first iteration
-      {
-        recursionMap = new THashSet<>();
-      }
-      else // non-first iteration
-      {
-        VirtualFile autoHandlerVirtualFile = dir.findChild(autoHandlerName);
-        if (autoHandlerVirtualFile != null) {
-          PsiFile autoHandlerPsiFile = manager.findFile(autoHandlerVirtualFile);
-          if (autoHandlerPsiFile instanceof HTMLMasonFileImpl &&
-              this.equals(((HTMLMasonFileImpl)autoHandlerPsiFile).getParentComponent())) {
-            result.add((HTMLMasonFileImpl)autoHandlerPsiFile);
-          }
-          return;
+  protected void collectAutoHandledFiles(@NotNull PsiManager manager,
+                                         @Nullable VirtualFile dir,
+                                         @NotNull List<HTMLMasonFileImpl> result,
+                                         @NotNull String autoHandlerName,
+                                         @Nullable Set<VirtualFile> recursionMap) {
+    if (dir == null) {
+      return;
+    }
+    if (recursionMap == null) {
+      recursionMap = new HashSet<>();
+    }
+    else {
+      VirtualFile autoHandlerVirtualFile = dir.findChild(autoHandlerName);
+      if (autoHandlerVirtualFile != null) {
+        PsiFile autoHandlerPsiFile = manager.findFile(autoHandlerVirtualFile);
+        if (autoHandlerPsiFile instanceof HTMLMasonFileImpl &&
+            this.equals(((HTMLMasonFileImpl)autoHandlerPsiFile).getParentComponent())) {
+          result.add((HTMLMasonFileImpl)autoHandlerPsiFile);
         }
+        return;
       }
+    }
 
-      recursionMap.add(dir);
+    recursionMap.add(dir);
 
-      // all iterations
-      for (VirtualFile file : dir.getChildren()) {
-        if (file.isDirectory() && !recursionMap.contains(file)) {
-          collectAutoHandledFiles(manager, file, result, autoHandlerName, recursionMap);
-        }
-        else if (!StringUtil.equals(file.getName(), autoHandlerName)) // non auto-handler file
-        {
-          PsiFile psiFile = manager.findFile(file);
-          if (psiFile instanceof HTMLMasonFileImpl && this.equals(((HTMLMasonFileImpl)psiFile).getParentComponent())) {
-            result.add((HTMLMasonFileImpl)psiFile);
-          }
+    for (VirtualFile file : dir.getChildren()) {
+      if (file.isDirectory() && !recursionMap.contains(file)) {
+        collectAutoHandledFiles(manager, file, result, autoHandlerName, recursionMap);
+      }
+      else if (!StringUtil.equals(file.getName(), autoHandlerName)) {
+        PsiFile psiFile = manager.findFile(file);
+        if (psiFile instanceof HTMLMasonFileImpl && this.equals(((HTMLMasonFileImpl)psiFile).getParentComponent())) {
+          result.add((HTMLMasonFileImpl)psiFile);
         }
       }
     }
