@@ -27,16 +27,15 @@ import com.intellij.openapi.util.Trinity;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.testFramework.UsefulTestCase;
 import com.intellij.util.containers.ContainerUtil;
-import com.intellij.xdebugger.XDebugSession;
-import com.intellij.xdebugger.XDebuggerManager;
-import com.intellij.xdebugger.XDebuggerUtil;
-import com.intellij.xdebugger.XSourcePosition;
+import com.intellij.xdebugger.*;
 import com.intellij.xdebugger.breakpoints.XBreakpointManager;
 import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
 import com.intellij.xdebugger.frame.XExecutionStack;
 import com.intellij.xdebugger.frame.XStackFrame;
 import com.intellij.xdebugger.impl.XDebugSessionImpl;
 import com.intellij.xdebugger.impl.XSourcePositionImpl;
+import com.intellij.xdebugger.impl.ui.XDebugSessionData;
+import com.intellij.xdebugger.impl.ui.XDebugSessionTab;
 import com.perl5.lang.perl.debugger.PerlStackFrame;
 import com.perl5.lang.perl.debugger.breakpoints.PerlLineBreakpointProperties;
 import com.perl5.lang.perl.debugger.breakpoints.PerlLineBreakpointType;
@@ -151,7 +150,7 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
     int line = 21;
     runToLine(debugSession, line, false);
     assertStoppedAtLine(debugSession, line);
-    compareFrameWithFile((XDebugSessionImpl)debugSession);
+    compareSessionWithFile((XDebugSessionImpl)debugSession);
   }
 
   @Test
@@ -347,15 +346,19 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
     fail("There is no breakpoint at line " + line);
   }
 
-  private void compareFrameWithFile(XDebugSessionImpl debugSession) {
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(""), serializeCurrentFrame(debugSession));
+  private void compareSessionWithFile(XDebugSessionImpl debugSession) {
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(""), serializeSession(debugSession));
   }
 
-  private String serializeCurrentFrame(@NotNull XDebugSessionImpl debugSession) {
+  private String serializeSession(@NotNull XDebugSessionImpl debugSession) {
+    StringBuilder sb = new StringBuilder();
+    sb.append("Name: ").append(debugSession.getSessionName()).append("\n");
     var currentFrame = debugSession.getCurrentStackFrame();
     assertNotNull(currentFrame);
-    StringBuilder sb = new StringBuilder();
     sb.append(serializeFrame(currentFrame)).append(SEPARATOR_NEWLINES);
+
+    sb.append(serializeSessionData(debugSession.getSessionData())).append(SEPARATOR_NEWLINES);
+    sb.append(serializeSessionTab(debugSession.getSessionTab())).append(SEPARATOR_NEWLINES);
 
     assertInstanceOf(currentFrame, PerlStackFrame.class);
     PerlStackFrameDescriptor frameDescriptor = ((PerlStackFrame)currentFrame).getFrameDescriptor();
@@ -365,6 +368,26 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
     sb.append("Lexicals:").append(SEPARATOR_NEWLINES).append(serializePerlValueDescriptors(frameDescriptor.getLexicals()));
     sb.append("Globals:").append(SEPARATOR_NEWLINES).append(serializePerlValueDescriptors(frameDescriptor.getGlobals()));
     return sb.toString().replaceAll("REF\\([^)]+\\)", "REF(...)");
+  }
+
+  private @NotNull String serializeSessionData(@Nullable XDebugSessionData sessionData) {
+    if (sessionData == null) {
+      return "No session data";
+    }
+    return String.join(
+      "\n",
+      "Session data:",
+      "Configuration name: " + sessionData.getConfigurationName(),
+      "Watch expressions: " + serializeExpressions(sessionData.getWatchExpressions())
+    );
+  }
+
+  private @NotNull String serializeExpressions(@NotNull List<XExpression> expressions) {
+    return expressions.toString();
+  }
+
+  private @NotNull String serializeSessionTab(@Nullable XDebugSessionTab sessionTab) {
+    return "Session tab:";
   }
 
   private @NotNull String serializeFrame(@Nullable XStackFrame stackFrame) {

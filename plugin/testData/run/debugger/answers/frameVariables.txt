@@ -1,8 +1,15 @@
+Name: testscript.pl
 Name: main::something
 File name: testscript.pl
 Line: 21
 Offset: 545
 Main is not empty: true
+----------
+Session data:
+Configuration name: #PerlConfigurationType
+Watch expressions: []
+----------
+Session tab:
 ----------
 Args:
 ----------
