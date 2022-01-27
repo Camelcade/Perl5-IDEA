@@ -16,6 +16,7 @@
 
 package run;
 
+import base.PerlLightTestCaseBase;
 import base.PerlPlatformTestCase;
 import categories.Heavy;
 import com.intellij.execution.configurations.RunConfiguration;
@@ -24,7 +25,9 @@ import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.ui.RunContentDescriptor;
 import com.intellij.openapi.util.Trinity;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.testFramework.PlatformTestUtil;
 import com.intellij.testFramework.UsefulTestCase;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.xdebugger.*;
@@ -34,8 +37,15 @@ import com.intellij.xdebugger.frame.XExecutionStack;
 import com.intellij.xdebugger.frame.XStackFrame;
 import com.intellij.xdebugger.impl.XDebugSessionImpl;
 import com.intellij.xdebugger.impl.XSourcePositionImpl;
+import com.intellij.xdebugger.impl.frame.XWatchesView;
+import com.intellij.xdebugger.impl.frame.XWatchesViewImpl;
 import com.intellij.xdebugger.impl.ui.XDebugSessionData;
 import com.intellij.xdebugger.impl.ui.XDebugSessionTab;
+import com.intellij.xdebugger.impl.ui.tree.XDebuggerTree;
+import com.intellij.xdebugger.impl.ui.tree.nodes.XDebuggerTreeNode;
+import com.intellij.xdebugger.impl.ui.tree.nodes.XValueGroupNodeImpl;
+import com.intellij.xdebugger.impl.ui.tree.nodes.XValueNodeImpl;
+import com.intellij.xdebugger.impl.ui.tree.nodes.XValuePresentationUtil;
 import com.perl5.lang.perl.debugger.PerlStackFrame;
 import com.perl5.lang.perl.debugger.breakpoints.PerlLineBreakpointProperties;
 import com.perl5.lang.perl.debugger.breakpoints.PerlLineBreakpointType;
@@ -51,6 +61,7 @@ import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
+import javax.swing.tree.TreeNode;
 import java.io.File;
 import java.util.*;
 import java.util.function.Consumer;
@@ -357,17 +368,11 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
     assertNotNull(currentFrame);
     sb.append(serializeFrame(currentFrame)).append(SEPARATOR_NEWLINES);
 
-    sb.append(serializeSessionData(debugSession.getSessionData())).append(SEPARATOR_NEWLINES);
-    sb.append(serializeSessionTab(debugSession.getSessionTab())).append(SEPARATOR_NEWLINES);
+    sb.append(serializeSessionData(debugSession.getSessionData()))
+      .append(SEPARATOR_NEWLINES)
+      .append(serializeSessionTab(debugSession.getSessionTab()));
 
-    assertInstanceOf(currentFrame, PerlStackFrame.class);
-    PerlStackFrameDescriptor frameDescriptor = ((PerlStackFrame)currentFrame).getFrameDescriptor();
-    assertNotNull(frameDescriptor);
-
-    sb.append("Args:").append(SEPARATOR_NEWLINES).append(serializePerlValueDescriptors(frameDescriptor.getArgs()));
-    sb.append("Lexicals:").append(SEPARATOR_NEWLINES).append(serializePerlValueDescriptors(frameDescriptor.getLexicals()));
-    sb.append("Globals:").append(SEPARATOR_NEWLINES).append(serializePerlValueDescriptors(frameDescriptor.getGlobals()));
-    return sb.toString().replaceAll("REF\\([^)]+\\)", "REF(...)");
+    return sb.toString().replaceAll("(REF|IO)\\([^)]+\\)", "$1(...)");
   }
 
   private @NotNull String serializeSessionData(@Nullable XDebugSessionData sessionData) {
@@ -387,7 +392,70 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
   }
 
   private @NotNull String serializeSessionTab(@Nullable XDebugSessionTab sessionTab) {
-    return "Session tab:";
+    if (sessionTab == null) {
+      return "No session tab";
+    }
+    XWatchesView watchesView = sessionTab.getWatchesView();
+    assertInstanceOf(watchesView, XWatchesViewImpl.class);
+    return "Variables view:\n" + serializeDebuggerTree(((XWatchesViewImpl)watchesView).getTree());
+  }
+
+  private @NotNull String serializeDebuggerTree(@NotNull XDebuggerTree debuggerTree) {
+    PlatformTestUtil.waitWhileBusy(debuggerTree);
+    XDebuggerTreeNode rootNode = debuggerTree.getRoot();
+    StringBuilder result = new StringBuilder();
+    serializeDebuggerNodeRecursively(rootNode, result, "-");
+    return result.toString();
+  }
+
+  /**
+   * @implNote we need to serialize presentation better. Ideally with style and icon
+   */
+  private void serializeDebuggerNodeRecursively(@NotNull XDebuggerTreeNode node,
+                                                @NotNull StringBuilder result,
+                                                @NotNull String prefix) {
+    result.append(prefix).append(node);
+    if (node instanceof XValueNodeImpl) {
+      result.append("-").append(XValuePresentationUtil.computeValueText(((XValueNodeImpl)node).getValuePresentation()));
+    }
+    result.append("; icon: ").append(PerlLightTestCaseBase.getIconText(node.getIcon()));
+    result.append("\n");
+
+    if (!node.isLeaf() && !isMainGroup(node)) {
+      loadAllChildren(node);
+      if (prefix.length() < 10) {
+        List<? extends TreeNode> childNodes = node.getChildren();
+        for (TreeNode childNode : childNodes) {
+          assertInstanceOf(childNode, XDebuggerTreeNode.class);
+          serializeDebuggerNodeRecursively((XDebuggerTreeNode)childNode, result, " " + prefix);
+        }
+      }
+      else {
+        result.append(prefix).append("Has more children: ").append(node.getChildCount());
+      }
+    }
+  }
+
+  private boolean isMainGroup(@NotNull XDebuggerTreeNode node) {
+    return node instanceof XValueGroupNodeImpl && StringUtil.contains(node.toString(), "%main");
+  }
+
+  /**
+   * @implNote this method is lame. We should check last kid of the children for ...
+   */
+  private void loadAllChildren(@NotNull XDebuggerTreeNode node) {
+    if (node.isLeaf()) {
+      return;
+    }
+    node.getChildren();
+    PlatformTestUtil.dispatchAllEventsInIdeEventQueue();
+    try {
+      Thread.sleep(100);
+    }
+    catch (InterruptedException e) {
+      fail(e.getMessage());
+    }
+    PlatformTestUtil.dispatchAllEventsInIdeEventQueue();
   }
 
   private @NotNull String serializeFrame(@Nullable XStackFrame stackFrame) {

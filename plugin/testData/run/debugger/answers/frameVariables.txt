@@ -9,167 +9,67 @@ Session data:
 Configuration name: #PerlConfigurationType
 Watch expressions: []
 ----------
-Session tab:
-----------
-Args:
-----------
-Lexicals:
-----------
-PerlValueDescriptor{
-	name='$array_ref'
-	type='ARRAY'
-	value='REF(...)'
-	ref_depth=1
-	size=1
-	expandable=true
-	blessed=false
-	is_utf=false
-	fileno='null'
-	layers=null
-	tied_with=null}
-PerlValueDescriptor{
-	name='$encoded_string'
-	type='SCALAR'
-	value='"приветик"'
-	ref_depth=0
-	size=0
-	expandable=false
-	blessed=false
-	is_utf=true
-	fileno='null'
-	layers=null
-	tied_with=null}
-PerlValueDescriptor{
-	name='$hash_ref'
-	type='HASH'
-	value='REF(...)'
-	ref_depth=1
-	size=1
-	expandable=true
-	blessed=false
-	is_utf=false
-	fileno='null'
-	layers=null
-	tied_with=null}
-PerlValueDescriptor{
-	name='$scalar'
-	type='SCALAR'
-	value='"1"'
-	ref_depth=0
-	size=0
-	expandable=false
-	blessed=false
-	is_utf=false
-	fileno='null'
-	layers=null
-	tied_with=null}
-PerlValueDescriptor{
-	name='$scalar_ref'
-	type='Foo::Bar=SCALAR'
-	value='REF(...)'
-	ref_depth=1
-	size=1
-	expandable=true
-	blessed=false
-	is_utf=false
-	fileno='null'
-	layers=null
-	tied_with=null}
-PerlValueDescriptor{
-	name='$stderr_ref'
-	type='GLOB'
-	value='REF(...)'
-	ref_depth=1
-	size=1
-	expandable=true
-	blessed=false
-	is_utf=false
-	fileno='null'
-	layers=null
-	tied_with=null}
-PerlValueDescriptor{
-	name='$stdin_ref'
-	type='GLOB'
-	value='REF(...)'
-	ref_depth=1
-	size=1
-	expandable=true
-	blessed=false
-	is_utf=false
-	fileno='null'
-	layers=null
-	tied_with=null}
-PerlValueDescriptor{
-	name='$stdout_ref'
-	type='GLOB'
-	value='REF(...)'
-	ref_depth=1
-	size=1
-	expandable=true
-	blessed=false
-	is_utf=false
-	fileno='null'
-	layers=null
-	tied_with=null}
-PerlValueDescriptor{
-	name='$string'
-	type='Foo::Bar=SCALAR'
-	value='"приветик"'
-	ref_depth=0
-	size=0
-	expandable=false
-	blessed=true
-	is_utf=true
-	fileno='null'
-	layers=null
-	tied_with=null}
-PerlValueDescriptor{
-	name='$tied_scalar'
-	type='SCALAR'
-	value='undef'
-	ref_depth=0
-	size=0
-	expandable=false
-	blessed=false
-	is_utf=false
-	fileno='null'
-	layers=null
-	tied_with=PerlValueDescriptor{
-	name='object'
-	type='Tie::StdScalar=SCALAR'
-	value='undef'
-	ref_depth=0
-	size=0
-	expandable=false
-	blessed=true
-	is_utf=false
-	fileno='null'
-	layers=null
-	tied_with=null}}
-PerlValueDescriptor{
-	name='%hash'
-	type='HASH'
-	value='size = 2'
-	ref_depth=0
-	size=2
-	expandable=true
-	blessed=false
-	is_utf=false
-	fileno='null'
-	layers=null
-	tied_with=null}
-PerlValueDescriptor{
-	name='@array'
-	type='ARRAY'
-	value='size = 3'
-	ref_depth=0
-	size=3
-	expandable=true
-	blessed=false
-	is_utf=false
-	fileno='null'
-	layers=null
-	tied_with=null}
-----------
-Globals:
-----------
+Variables view:
+-; icon: null
+ -Group:%main::(166); icon: /main_gutter_icon.png
+ -Group:Lexical variables(12); icon: /my_gutter_icon.png
+  -$array_ref-REF(...); icon: /array_gutter_icon.png
+   -REF(...)-size = 3; icon: /array_gutter_icon.png
+    -[0]-"1"; icon: /scalar_gutter_icon.png
+    -[1]-"2"; icon: /scalar_gutter_icon.png
+    -[2]-"3"; icon: /scalar_gutter_icon.png
+  -$encoded_string-"приветик"; icon: /scalar_utf_gutter_icon.png
+  -$hash_ref-REF(...); icon: /hash_gutter_icon.png
+   -REF(...)-size = 2; icon: /hash_gutter_icon.png
+    -'4'-"5"; icon: /scalar_gutter_icon.png
+    -'6'-"7"; icon: /scalar_gutter_icon.png
+  -$scalar-"1"; icon: /scalar_gutter_icon.png
+  -$scalar_ref-REF(...); icon: null
+   -REF(...)-"приветик"; icon: /package_gutter_icon.png
+  -$stderr_ref-REF(...); icon: /glob_gutter_icon.png
+   -REF(...)-*main::STDERR; icon: /glob_gutter_icon.png
+    -IO Layers-; icon: /restore.svg
+     -Input-; icon: /import.svg
+      -[0]-:unix; icon: null
+      -[1]-:perlio; icon: null
+     -Output-; icon: /export.svg
+      -[0]-:unix; icon: null
+      -[1]-:perlio; icon: null
+    -SCALAR-REF(...); icon: /scalar_gutter_icon.png
+     -REF(...)-undef; icon: /scalar_gutter_icon.png
+    -IO-REF(...); icon: /handle_gutter_icon.png
+     -REF(...)-IO::File=IO(...); icon: /handle_gutter_icon.png
+  -$stdin_ref-REF(...); icon: /glob_gutter_icon.png
+   -REF(...)-*main::STDIN; icon: /glob_gutter_icon.png
+    -IO Layers-; icon: /restore.svg
+     -Input-; icon: /import.svg
+      -[0]-:unix; icon: null
+      -[1]-:perlio; icon: null
+    -SCALAR-REF(...); icon: /scalar_gutter_icon.png
+     -REF(...)-undef; icon: /scalar_gutter_icon.png
+    -IO-REF(...); icon: /handle_gutter_icon.png
+     -REF(...)-IO::File=IO(...); icon: /handle_gutter_icon.png
+  -$stdout_ref-REF(...); icon: /glob_gutter_icon.png
+   -REF(...)-*main::STDOUT; icon: /glob_gutter_icon.png
+    -IO Layers-; icon: /restore.svg
+     -Input-; icon: /import.svg
+      -[0]-:unix; icon: null
+      -[1]-:perlio; icon: null
+     -Output-; icon: /export.svg
+      -[0]-:unix; icon: null
+      -[1]-:perlio; icon: null
+    -SCALAR-REF(...); icon: /scalar_gutter_icon.png
+     -REF(...)-undef; icon: /scalar_gutter_icon.png
+    -IO-REF(...); icon: /handle_gutter_icon.png
+     -REF(...)-IO::File=IO(...); icon: /handle_gutter_icon.png
+  -$string-"приветик"; icon: /package_gutter_icon.png
+  -$tied_scalar-undef; icon: /scalar_gutter_icon.png
+   -Group:Tied with; icon: /toolWindowModuleDependencies.svg
+    -object-undef; icon: /package_gutter_icon.png
+  -%hash-size = 2; icon: /hash_gutter_icon.png
+   -'4'-"5"; icon: /scalar_gutter_icon.png
+   -'6'-"7"; icon: /scalar_gutter_icon.png
+  -@array-size = 3; icon: /array_gutter_icon.png
+   -[0]-"1"; icon: /scalar_gutter_icon.png
+   -[1]-"2"; icon: /scalar_gutter_icon.png
+   -[2]-"3"; icon: /scalar_gutter_icon.png

@@ -755,7 +755,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     return result;
   }
 
-  protected String getIconText(@Nullable Icon icon) {
+  public static String getIconText(@Nullable Icon icon) {
     if (icon == null) {
       return "null";
     }
