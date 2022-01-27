@@ -1,4 +1,7 @@
-Name: main::something; line: 21
+Name: main::something
+File name: testscript.pl
+Line: 21
+Offset: 545
 Main is not empty: true
 ----------
 Args:

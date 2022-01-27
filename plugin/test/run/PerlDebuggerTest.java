@@ -353,17 +353,42 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
 
   private String serializeCurrentFrame(@NotNull XDebugSessionImpl debugSession) {
     var currentFrame = debugSession.getCurrentStackFrame();
+    assertNotNull(currentFrame);
+    StringBuilder sb = new StringBuilder();
+    sb.append(serializeFrame(currentFrame)).append(SEPARATOR_NEWLINES);
+
     assertInstanceOf(currentFrame, PerlStackFrame.class);
     PerlStackFrameDescriptor frameDescriptor = ((PerlStackFrame)currentFrame).getFrameDescriptor();
     assertNotNull(frameDescriptor);
-    StringBuilder sb = new StringBuilder();
-    PerlLoadedFileDescriptor fileDescriptor = frameDescriptor.getFileDescriptor();
-    sb.append("Name: ").append(fileDescriptor.getName()).append("; line: ").append(frameDescriptor.getLine()).append("\n");
-    sb.append("Main is not empty: ").append(frameDescriptor.getMainSize() > 0).append(SEPARATOR_NEWLINES);
+
     sb.append("Args:").append(SEPARATOR_NEWLINES).append(serializePerlValueDescriptors(frameDescriptor.getArgs()));
     sb.append("Lexicals:").append(SEPARATOR_NEWLINES).append(serializePerlValueDescriptors(frameDescriptor.getLexicals()));
     sb.append("Globals:").append(SEPARATOR_NEWLINES).append(serializePerlValueDescriptors(frameDescriptor.getGlobals()));
     return sb.toString().replaceAll("REF\\([^)]+\\)", "REF(...)");
+  }
+
+  private @NotNull String serializeFrame(@Nullable XStackFrame stackFrame) {
+    if (stackFrame == null) {
+      return "No stack frame";
+    }
+    var sourcePosition = stackFrame.getSourcePosition();
+    if (sourcePosition == null) {
+      return "No source position";
+    }
+
+    assertInstanceOf(stackFrame, PerlStackFrame.class);
+    PerlStackFrameDescriptor frameDescriptor = ((PerlStackFrame)stackFrame).getFrameDescriptor();
+    assertNotNull(frameDescriptor);
+    PerlLoadedFileDescriptor fileDescriptor = frameDescriptor.getFileDescriptor();
+    assertNotNull(fileDescriptor);
+
+    return String.join(
+      "\n",
+      "Name: " + fileDescriptor.getName(),
+      "File name: " + sourcePosition.getFile().getName(),
+      "Line: " + sourcePosition.getLine(),
+      "Offset: " + sourcePosition.getOffset(),
+      "Main is not empty: " + (frameDescriptor.getMainSize() > 0));
   }
 
   private String serializePerlValueDescriptors(PerlValueDescriptor @NotNull [] descriptorsArray) {
