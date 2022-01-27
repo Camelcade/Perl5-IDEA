@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.debugger.values;
 
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
@@ -25,7 +24,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.ResolveState;
-import com.intellij.util.ReflectionUtil;
 import com.intellij.util.ThreeState;
 import com.intellij.xdebugger.XSourcePosition;
 import com.intellij.xdebugger.frame.*;
@@ -45,23 +43,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
 
 public class PerlXNamedValue extends XNamedValue {
-  private static final Logger LOG = Logger.getInstance(PerlXNamedValue.class);
-  private static final Method mySourcePositionMethod;
-  private static Method myLegacyMethod;
-
-  static {
-    mySourcePositionMethod = ReflectionUtil.getMethod(XInlineDebuggerDataCallback.class, "computed", XSourcePosition.class);
-    if (mySourcePositionMethod == null) {
-      myLegacyMethod =
-        ReflectionUtil.getMethod(XInlineDebuggerDataCallback.class, "computed", VirtualFile.class, Document.class, int.class);
-    }
-  }
-
   private final PerlStackFrame myStackFrame;
   private final PerlValueDescriptor myPerlValueDescriptor;
   private final int[] offset = new int[]{0};
@@ -254,21 +238,7 @@ public class PerlXNamedValue extends XNamedValue {
           }
 
           found[0] = true;
-
-          try {
-            if (mySourcePositionMethod != null) {
-              mySourcePositionMethod.invoke(callback, XSourcePositionImpl.createByElement(targetElement));
-            }
-            else if (myLegacyMethod != null) {
-              myLegacyMethod.invoke(callback, virtualFile, document, document.getLineNumber(targetElement.getTextOffset()));
-            }
-            else {
-              found[0] = false;
-            }
-          }
-          catch (InvocationTargetException | IllegalAccessException e) {
-            LOG.error(e);
-          }
+          callback.computed(XSourcePositionImpl.createByElement(targetElement));
         }
       };
 
