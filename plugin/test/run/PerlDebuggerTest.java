@@ -35,6 +35,7 @@ import com.intellij.xdebugger.breakpoints.XBreakpointManager;
 import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
 import com.intellij.xdebugger.frame.XExecutionStack;
 import com.intellij.xdebugger.frame.XStackFrame;
+import com.intellij.xdebugger.impl.XDebugSessionImpl;
 import com.intellij.xdebugger.impl.XSourcePositionImpl;
 import com.perl5.lang.perl.debugger.PerlStackFrame;
 import com.perl5.lang.perl.debugger.breakpoints.PerlLineBreakpointProperties;
@@ -146,10 +147,11 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
   @Test
   public void testFrameVariables() {
     XDebugSession debugSession = debugScript("variables", "testscript.pl", null);
+    assertInstanceOf(debugSession, XDebugSessionImpl.class);
     int line = 21;
     runToLine(debugSession, line, false);
     assertStoppedAtLine(debugSession, line);
-    compareFrameWithFile(debugSession.getCurrentStackFrame());
+    compareFrameWithFile((XDebugSessionImpl)debugSession);
   }
 
   @Test
@@ -345,14 +347,15 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
     fail("There is no breakpoint at line " + line);
   }
 
-  private void compareFrameWithFile(XStackFrame currentFrame) {
+  private void compareFrameWithFile(XDebugSessionImpl debugSession) {
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(""), serializeCurrentFrame(debugSession));
+  }
+
+  private String serializeCurrentFrame(@NotNull XDebugSessionImpl debugSession) {
+    var currentFrame = debugSession.getCurrentStackFrame();
     assertInstanceOf(currentFrame, PerlStackFrame.class);
     PerlStackFrameDescriptor frameDescriptor = ((PerlStackFrame)currentFrame).getFrameDescriptor();
     assertNotNull(frameDescriptor);
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(""), serializeFrameDescriptor(frameDescriptor));
-  }
-
-  private String serializeFrameDescriptor(@NotNull PerlStackFrameDescriptor frameDescriptor) {
     StringBuilder sb = new StringBuilder();
     PerlLoadedFileDescriptor fileDescriptor = frameDescriptor.getFileDescriptor();
     sb.append("Name: ").append(fileDescriptor.getName()).append("; line: ").append(frameDescriptor.getLine()).append("\n");
