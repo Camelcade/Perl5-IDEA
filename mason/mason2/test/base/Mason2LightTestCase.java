@@ -16,6 +16,8 @@
 
 package base;
 
+import com.intellij.openapi.vfs.VirtualFile;
+import com.perl5.lang.mason2.idea.configuration.Mason2SourceRootType;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class Mason2LightTestCase extends PerlLightTestCaseBase {
@@ -23,5 +25,9 @@ public abstract class Mason2LightTestCase extends PerlLightTestCaseBase {
   @Override
   protected @NotNull String getTestLibPath() {
     return super.getTestLibPathFromNested();
+  }
+
+  protected void markAsComponentRoot(@NotNull VirtualFile componentRoot) {
+    markAsPerlRoot(componentRoot, true, Mason2SourceRootType.INSTANCE);
   }
 }
