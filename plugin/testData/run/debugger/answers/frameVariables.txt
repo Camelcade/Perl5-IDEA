@@ -1,8 +1,8 @@
 Name: testscript.pl
 Name: main::something
 File name: testscript.pl
-Line: 21
-Offset: 545
+Line: 27
+Offset: 682
 Main is not empty: true
 ----------
 Session data:
@@ -11,18 +11,24 @@ Watch expressions: []
 ----------
 Variables view:
 -; icon: null
- -Group:%main::(166); icon: /main_gutter_icon.png
- -Group:Lexical variables(12); icon: /my_gutter_icon.png
+ -Group:%main::(168); icon: /main_gutter_icon.png
+ -Group:Lexical variables(15); icon: /my_gutter_icon.png
   -$array_ref-REF(...); icon: /array_gutter_icon.png
    -REF(...)-size = 3; icon: /array_gutter_icon.png
     -[0]-"1"; icon: /scalar_gutter_icon.png
     -[1]-"2"; icon: /scalar_gutter_icon.png
     -[2]-"3"; icon: /scalar_gutter_icon.png
+  -$code-REF(...); icon: /subroutine_gutter_icon.png
+   -REF(...)-CODE(...); icon: /subroutine_gutter_icon.png
   -$encoded_string-"приветик"; icon: /scalar_utf_gutter_icon.png
+  -$format-REF(...); icon: /format_gutter_icon.png
+   -REF(...)-FORMAT(...); icon: /format_gutter_icon.png
   -$hash_ref-REF(...); icon: /hash_gutter_icon.png
    -REF(...)-size = 2; icon: /hash_gutter_icon.png
     -'4'-"5"; icon: /scalar_gutter_icon.png
     -'6'-"7"; icon: /scalar_gutter_icon.png
+  -$regexp-REF(...); icon: /re_gutter_icon.png
+   -REF(...)-(?^:super\d+uper) ((?^:super\d+uper)); icon: /re_gutter_icon.png
   -$scalar-"1"; icon: /scalar_gutter_icon.png
   -$scalar_ref-REF(...); icon: null
    -REF(...)-"приветик"; icon: /package_gutter_icon.png

@@ -158,7 +158,7 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
   public void testFrameVariables() {
     XDebugSession debugSession = debugScript("variables", "testscript.pl", null);
     assertInstanceOf(debugSession, XDebugSessionImpl.class);
-    int line = 21;
+    int line = 27;
     runToLine(debugSession, line, false);
     assertStoppedAtLine(debugSession, line);
     compareSessionWithFile((XDebugSessionImpl)debugSession);
@@ -372,7 +372,7 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
       .append(SEPARATOR_NEWLINES)
       .append(serializeSessionTab(debugSession.getSessionTab()));
 
-    return sb.toString().replaceAll("(REF|IO)\\([^)]+\\)", "$1(...)");
+    return sb.toString().replaceAll("(REF|IO|CODE|FORMAT)\\([^)]+\\)", "$1(...)");
   }
 
   private @NotNull String serializeSessionData(@Nullable XDebugSessionData sessionData) {

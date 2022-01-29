@@ -19,6 +19,12 @@ sub something {
     my $stdout_ref = \*STDOUT;
     my $stderr_ref = \*STDERR;
     my $stdin_ref = \*STDIN;
+    my $regexp = qr/super\d+uper/;
+    my $code = sub {print 'hi'};
+    format testformat =
+test
+.
+    my $format = *testformat{FORMAT};
     print 'done';
 }
 
