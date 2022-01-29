@@ -3119,7 +3119,6 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   protected void doTestConfigurable(@NotNull UnnamedConfigurable configurable) {
     var component = configurable.createComponent();
     assertNotNull(component);
-    assertTrue(configurable.isModified());
     configurable.reset();
     assertFalse(configurable.isModified());
     try {
