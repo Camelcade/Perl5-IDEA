@@ -35,6 +35,7 @@ import com.perl5.PerlBundle;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.TestOnly;
 
 import javax.swing.*;
 import javax.swing.table.TableCellEditor;
@@ -71,6 +72,11 @@ public class PerlDebuggerSettings extends XDebuggerSettings<PerlDebuggerSettings
   @Override
   public void loadState(@NotNull PerlDebuggerSettings state) {
     myDataRenderers = new ArrayList<>(ContainerUtil.filter(state.myDataRenderers, Item::isValid));
+  }
+
+  @TestOnly
+  public void setDataRenderers(@NotNull List<Item> renderers) {
+    myDataRenderers = new ArrayList<>(renderers);
   }
 
   public static @NotNull PerlDebuggerSettings getInstance() {
