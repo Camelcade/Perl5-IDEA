@@ -6,21 +6,21 @@ Tree: Class autohandler
 HTML::Mason component at 0 in autohandler
     HTML::Mason component at 0 in autohandler
         HTML::Mason component at 0 in dhandler
-        HTML::Mason component at 0 in third.mas
         HTML::Mason component at 0 in dhandler
         HTML::Mason component at 0 in first.mas
-    HTML::Mason component at 0 in top.mas
+        HTML::Mason component at 0 in third.mas
     HTML::Mason component at 0 in dhandler
+    HTML::Mason component at 0 in top.mas
 ----------
 Tree: Subtypes of autohandler
 HTML::Mason component at 0 in autohandler
     HTML::Mason component at 0 in autohandler
         HTML::Mason component at 0 in dhandler
-        HTML::Mason component at 0 in third.mas
         HTML::Mason component at 0 in dhandler
         HTML::Mason component at 0 in first.mas
-    HTML::Mason component at 0 in top.mas
+        HTML::Mason component at 0 in third.mas
     HTML::Mason component at 0 in dhandler
+    HTML::Mason component at 0 in top.mas
 ----------
 Tree: Supertypes of autohandler
 HTML::Mason component at 0 in autohandler

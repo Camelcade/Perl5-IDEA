@@ -1606,7 +1606,6 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     dataContext.put(CommonDataKeys.PSI_ELEMENT, psiElement);
     dataContext.put(CommonDataKeys.PSI_FILE, getFile());
 
-    HierarchyBrowserManager.getSettings(getProject()).SORT_ALPHABETICALLY = true;
     HierarchyProvider hierarchyProvider =
       BrowseHierarchyActionBase.findProvider(LanguageTypeHierarchy.INSTANCE, psiElement, getFile(), dataContext);
     assertNotNull(hierarchyProvider);
@@ -1616,7 +1615,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     assertNotNull(target);
     sb.append("Target: ").append(target).append("\n");
     HierarchyBrowser browser = hierarchyProvider.createHierarchyBrowser(target);
-    sb.append("Browser: ").append(browser.getClass().getSimpleName()).append("\n");
+    sb.append("Browser: ").append(browser.getClass().getSimpleName());
     assertInstanceOf(browser, TypeHierarchyBrowserBase.class);
 
     try {
@@ -1637,26 +1636,24 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       List<String> treesNames = new ArrayList<>(subTrees.keySet());
       ContainerUtil.sort(treesNames);
       for (String treeName : treesNames) {
-        sb.append(SEPARATOR_NEW_LINE_AFTER)
-          .append("Tree: ").append(getContentDisplayName.invoke(browser, treeName, target)).append("\n");
+        sb.append(SEPARATOR_NEWLINES).append("Tree: ").append(getContentDisplayName.invoke(browser, treeName, target)).append("\n");
         HierarchyTreeStructure structure = (HierarchyTreeStructure)createHierarchyTreeStructure.invoke(browser, treeName, target);
         if (structure == null) {
-          sb.append("none\n");
+          sb.append("none");
           continue;
         }
-        serializeTreeStructure(structure,
-                               (HierarchyNodeDescriptor)structure.getRootElement(),
-                               node -> {
-                                 try {
-                                   return (PsiElement)getElementFromDescriptor.invoke(browser, node);
-                                 }
-                                 catch (Exception e) {
-                                   throw new RuntimeException(e);
-                                 }
-                               },
-                               sb,
-                               "",
-                               new THashSet<>());
+        sb.append(serializeTreeStructure(structure,
+                                         (HierarchyNodeDescriptor)structure.getRootElement(),
+                                         node -> {
+                                           try {
+                                             return (PsiElement)getElementFromDescriptor.invoke(browser, node);
+                                           }
+                                           catch (Exception e) {
+                                             throw new RuntimeException(e);
+                                           }
+                                         },
+                                         "",
+                                         new THashSet<>()));
       }
     }
     catch (Exception e) {
@@ -1665,27 +1662,37 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
   }
 
-  private void serializeTreeStructure(@NotNull HierarchyTreeStructure treeStructure,
-                                      @Nullable HierarchyNodeDescriptor currentElement,
-                                      @NotNull Function<HierarchyNodeDescriptor, PsiElement> elementProvider,
-                                      @NotNull StringBuilder sb,
-                                      @NotNull String prefix,
-                                      @NotNull Set<HierarchyNodeDescriptor> recursionSet
+  private @Nullable String serializeTreeStructure(@NotNull HierarchyTreeStructure treeStructure,
+                                                  @Nullable HierarchyNodeDescriptor currentElement,
+                                                  @NotNull Function<HierarchyNodeDescriptor, PsiElement> elementProvider,
+                                                  @NotNull String prefix,
+                                                  @NotNull Set<HierarchyNodeDescriptor> recursionSet
   ) {
     if (currentElement == null) {
-      return;
+      return null;
     }
+    StringBuilder sb = new StringBuilder();
     PsiElement psiElement = elementProvider.fun(currentElement);
     if (!recursionSet.add(currentElement)) {
-      sb.append(prefix).append("Recursion to: ").append(serializePsiElement(psiElement)).append("\n");
-      return;
+      sb.append(prefix).append("Recursion to: ").append(serializePsiElement(psiElement));
+      return sb.toString();
     }
-    sb.append(prefix).append(serializePsiElement(psiElement)).append("\n");
+    sb.append(prefix).append(serializePsiElement(psiElement));
+
+    var serializedKids = new ArrayList<String>();
     for (Object object : treeStructure.getChildElements(currentElement)) {
       assertInstanceOf(object, HierarchyNodeDescriptor.class);
-      serializeTreeStructure(treeStructure, (HierarchyNodeDescriptor)object, elementProvider, sb, prefix + "    ",
-                             new THashSet<>(recursionSet));
+      ContainerUtil.addIfNotNull(
+        serializedKids,
+        serializeTreeStructure(treeStructure, (
+          HierarchyNodeDescriptor)object, elementProvider, prefix + "    ", new HashSet<>(recursionSet)));
     }
+    if (!serializedKids.isEmpty()) {
+      sb.append("\n");
+      ContainerUtil.sort(serializedKids);
+      sb.append(String.join("\n", serializedKids));
+    }
+    return sb.toString();
   }
 
 
