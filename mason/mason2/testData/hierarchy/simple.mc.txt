@@ -7,13 +7,13 @@ none
 ----------
 Tree: Subtypes of /MC0::components::Base_mp
 MasonNamespaceDefinitionImpl(MASON_PACKAGE)@/MC0::components::Base_mp at 0 in Base.mp
-    MasonNamespaceDefinitionImpl(MASON_PACKAGE)@/MC0::components::main_mc at 0 in main.mc
-    MasonNamespaceDefinitionImpl(MASON_PACKAGE)@/MC0::components::flavors::Base_mc at 0 in Base.mc
-        MasonNamespaceDefinitionImpl(MASON_PACKAGE)@/MC0::components::flavors::somestuff_mi at 0 in somestuff.mi
-        MasonNamespaceDefinitionImpl(MASON_PACKAGE)@/MC0::components::flavors::chocolate_mc at 0 in chocolate.mc
-        MasonNamespaceDefinitionImpl(MASON_PACKAGE)@/MC0::components::flavors::vanilla_mc at 0 in vanilla.mc
-    MasonNamespaceDefinitionImpl(MASON_PACKAGE)@/MC0::components::colors::part_mi at 0 in part.mi
     MasonNamespaceDefinitionImpl(MASON_PACKAGE)@/MC0::components::colors::blue_mc at 0 in blue.mc
+    MasonNamespaceDefinitionImpl(MASON_PACKAGE)@/MC0::components::colors::part_mi at 0 in part.mi
+    MasonNamespaceDefinitionImpl(MASON_PACKAGE)@/MC0::components::flavors::Base_mc at 0 in Base.mc
+        MasonNamespaceDefinitionImpl(MASON_PACKAGE)@/MC0::components::flavors::vanilla_mc at 0 in vanilla.mc
+        MasonNamespaceDefinitionImpl(MASON_PACKAGE)@/MC0::components::flavors::chocolate_mc at 0 in chocolate.mc
+        MasonNamespaceDefinitionImpl(MASON_PACKAGE)@/MC0::components::flavors::somestuff_mi at 0 in somestuff.mi
+    MasonNamespaceDefinitionImpl(MASON_PACKAGE)@/MC0::components::main_mc at 0 in main.mc
     MasonNamespaceDefinitionImpl(MASON_PACKAGE)@/MC0::components::colors::red_mc at 0 in red.mc
 ----------
 Tree: Supertypes of /MC0::components::Base_mp
