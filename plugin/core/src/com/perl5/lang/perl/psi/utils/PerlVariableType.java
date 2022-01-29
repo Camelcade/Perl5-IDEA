@@ -18,6 +18,7 @@ package com.perl5.lang.perl.psi.utils;
 
 import com.perl5.PerlIcons;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
@@ -46,11 +47,19 @@ public enum PerlVariableType {
   }
 
   public static @NotNull PerlVariableType bySigil(char sigil) {
+    PerlVariableType value = bySigilOrNull(sigil);
+    if (value != null) {
+      return value;
+    }
+    throw new RuntimeException("Uknown sigil: " + sigil);
+  }
+
+  public static @Nullable PerlVariableType bySigilOrNull(char sigil) {
     for (PerlVariableType value : PerlVariableType.values()) {
       if (value.getSigil() == sigil) {
         return value;
       }
     }
-    throw new RuntimeException("Uknown sigil: " + sigil);
+    return null;
   }
 }

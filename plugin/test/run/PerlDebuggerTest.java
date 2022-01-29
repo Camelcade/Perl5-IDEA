@@ -414,6 +414,21 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
     result.append(prefix).append(node);
     if (node instanceof XValueNodeImpl) {
       result.append("-").append(XValuePresentationUtil.computeValueText(((XValueNodeImpl)node).getValuePresentation()));
+      var valueContainer = ((XValueNodeImpl)node).getValueContainer();
+      if (valueContainer.canNavigateToSource()) {
+        result.append("; navigates to source");
+      }
+      if (valueContainer.canNavigateToTypeSource()) {
+        result.append("; navigates to type source");
+      }
+      valueContainer.computeSourcePosition(sourcePosition -> {
+        if (sourcePosition != null) {
+          result.append("; source position: ")
+            .append(sourcePosition.getFile().getName())
+            .append(":").append(sourcePosition.getLine())
+            .append(":").append(sourcePosition.getOffset());
+        }
+      });
     }
     result.append("; icon: ").append(PerlLightTestCaseBase.getIconText(node.getIcon()));
     result.append("\n");

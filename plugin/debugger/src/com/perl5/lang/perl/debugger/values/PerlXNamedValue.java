@@ -170,7 +170,10 @@ public class PerlXNamedValue extends XNamedValue {
       return false;
     }
 
-    final PerlVariableType variableType = PerlVariableType.bySigil(name.charAt(0));
+    final PerlVariableType variableType = PerlVariableType.bySigilOrNull(name.charAt(0));
+    if (variableType == null) {
+      return false;
+    }
     if (variableType == PerlVariableType.CODE) {
       return false;
     }

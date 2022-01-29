@@ -13,69 +13,69 @@ Variables view:
 -; icon: null
  -Group:%main::(168); icon: /main_gutter_icon.png
  -Group:Lexical variables(15); icon: /my_gutter_icon.png
-  -$array_ref-REF(...); icon: /array_gutter_icon.png
-   -REF(...)-size = 3; icon: /array_gutter_icon.png
-    -[0]-"1"; icon: /scalar_gutter_icon.png
-    -[1]-"2"; icon: /scalar_gutter_icon.png
-    -[2]-"3"; icon: /scalar_gutter_icon.png
-  -$code-REF(...); icon: /subroutine_gutter_icon.png
-   -REF(...)-CODE(...); icon: /subroutine_gutter_icon.png
-  -$encoded_string-"приветик"; icon: /scalar_utf_gutter_icon.png
-  -$format-REF(...); icon: /format_gutter_icon.png
-   -REF(...)-FORMAT(...); icon: /format_gutter_icon.png
-  -$hash_ref-REF(...); icon: /hash_gutter_icon.png
-   -REF(...)-size = 2; icon: /hash_gutter_icon.png
-    -'4'-"5"; icon: /scalar_gutter_icon.png
-    -'6'-"7"; icon: /scalar_gutter_icon.png
-  -$regexp-REF(...); icon: /re_gutter_icon.png
-   -REF(...)-(?^:super\d+uper) ((?^:super\d+uper)); icon: /re_gutter_icon.png
-  -$scalar-"1"; icon: /scalar_gutter_icon.png
-  -$scalar_ref-REF(...); icon: null
-   -REF(...)-"приветик"; icon: /package_gutter_icon.png
-  -$stderr_ref-REF(...); icon: /glob_gutter_icon.png
-   -REF(...)-*main::STDERR; icon: /glob_gutter_icon.png
-    -IO Layers-; icon: /restore.svg
-     -Input-; icon: /import.svg
-      -[0]-:unix; icon: null
-      -[1]-:perlio; icon: null
-     -Output-; icon: /export.svg
-      -[0]-:unix; icon: null
-      -[1]-:perlio; icon: null
-    -SCALAR-REF(...); icon: /scalar_gutter_icon.png
-     -REF(...)-undef; icon: /scalar_gutter_icon.png
-    -IO-REF(...); icon: /handle_gutter_icon.png
-     -REF(...)-IO::File=IO(...); icon: /handle_gutter_icon.png
-  -$stdin_ref-REF(...); icon: /glob_gutter_icon.png
-   -REF(...)-*main::STDIN; icon: /glob_gutter_icon.png
-    -IO Layers-; icon: /restore.svg
-     -Input-; icon: /import.svg
-      -[0]-:unix; icon: null
-      -[1]-:perlio; icon: null
-    -SCALAR-REF(...); icon: /scalar_gutter_icon.png
-     -REF(...)-undef; icon: /scalar_gutter_icon.png
-    -IO-REF(...); icon: /handle_gutter_icon.png
-     -REF(...)-IO::File=IO(...); icon: /handle_gutter_icon.png
-  -$stdout_ref-REF(...); icon: /glob_gutter_icon.png
-   -REF(...)-*main::STDOUT; icon: /glob_gutter_icon.png
-    -IO Layers-; icon: /restore.svg
-     -Input-; icon: /import.svg
-      -[0]-:unix; icon: null
-      -[1]-:perlio; icon: null
-     -Output-; icon: /export.svg
-      -[0]-:unix; icon: null
-      -[1]-:perlio; icon: null
-    -SCALAR-REF(...); icon: /scalar_gutter_icon.png
-     -REF(...)-undef; icon: /scalar_gutter_icon.png
-    -IO-REF(...); icon: /handle_gutter_icon.png
-     -REF(...)-IO::File=IO(...); icon: /handle_gutter_icon.png
-  -$string-"приветик"; icon: /package_gutter_icon.png
-  -$tied_scalar-undef; icon: /scalar_gutter_icon.png
+  -$array_ref-REF(...); navigates to source; source position: testscript.pl:13:319; icon: /array_gutter_icon.png
+   -REF(...)-size = 3; navigates to source; icon: /array_gutter_icon.png
+    -[0]-"1"; navigates to source; icon: /scalar_gutter_icon.png
+    -[1]-"2"; navigates to source; icon: /scalar_gutter_icon.png
+    -[2]-"3"; navigates to source; icon: /scalar_gutter_icon.png
+  -$code-REF(...); navigates to source; source position: testscript.pl:22:588; icon: /subroutine_gutter_icon.png
+   -REF(...)-CODE(...); navigates to source; icon: /subroutine_gutter_icon.png
+  -$encoded_string-"приветик"; navigates to source; source position: testscript.pl:9:181; icon: /scalar_utf_gutter_icon.png
+  -$format-REF(...); navigates to source; source position: testscript.pl:26:652; icon: /format_gutter_icon.png
+   -REF(...)-FORMAT(...); navigates to source; icon: /format_gutter_icon.png
+  -$hash_ref-REF(...); navigates to source; source position: testscript.pl:14:348; icon: /hash_gutter_icon.png
+   -REF(...)-size = 2; navigates to source; icon: /hash_gutter_icon.png
+    -'4'-"5"; navigates to source; icon: /scalar_gutter_icon.png
+    -'6'-"7"; navigates to source; icon: /scalar_gutter_icon.png
+  -$regexp-REF(...); navigates to source; source position: testscript.pl:21:553; icon: /re_gutter_icon.png
+   -REF(...)-(?^:super\d+uper) ((?^:super\d+uper)); navigates to source; icon: /re_gutter_icon.png
+  -$scalar-"1"; navigates to source; source position: testscript.pl:5:76; icon: /scalar_gutter_icon.png
+  -$scalar_ref-REF(...); navigates to source; source position: testscript.pl:11:253; icon: null
+   -REF(...)-"приветик"; navigates to source; icon: /package_gutter_icon.png
+  -$stderr_ref-REF(...); navigates to source; source position: testscript.pl:19:493; icon: /glob_gutter_icon.png
+   -REF(...)-*main::STDERR; navigates to source; icon: /glob_gutter_icon.png
+    -IO Layers-; navigates to source; icon: /restore.svg
+     -Input-; navigates to source; icon: /import.svg
+      -[0]-:unix; navigates to source; icon: null
+      -[1]-:perlio; navigates to source; icon: null
+     -Output-; navigates to source; icon: /export.svg
+      -[0]-:unix; navigates to source; icon: null
+      -[1]-:perlio; navigates to source; icon: null
+    -SCALAR-REF(...); navigates to source; icon: /scalar_gutter_icon.png
+     -REF(...)-undef; navigates to source; icon: /scalar_gutter_icon.png
+    -IO-REF(...); navigates to source; icon: /handle_gutter_icon.png
+     -REF(...)-IO::File=IO(...); navigates to source; icon: /handle_gutter_icon.png
+  -$stdin_ref-REF(...); navigates to source; source position: testscript.pl:20:524; icon: /glob_gutter_icon.png
+   -REF(...)-*main::STDIN; navigates to source; icon: /glob_gutter_icon.png
+    -IO Layers-; navigates to source; icon: /restore.svg
+     -Input-; navigates to source; icon: /import.svg
+      -[0]-:unix; navigates to source; icon: null
+      -[1]-:perlio; navigates to source; icon: null
+    -SCALAR-REF(...); navigates to source; icon: /scalar_gutter_icon.png
+     -REF(...)-undef; navigates to source; icon: /scalar_gutter_icon.png
+    -IO-REF(...); navigates to source; icon: /handle_gutter_icon.png
+     -REF(...)-IO::File=IO(...); navigates to source; icon: /handle_gutter_icon.png
+  -$stdout_ref-REF(...); navigates to source; source position: testscript.pl:18:462; icon: /glob_gutter_icon.png
+   -REF(...)-*main::STDOUT; navigates to source; icon: /glob_gutter_icon.png
+    -IO Layers-; navigates to source; icon: /restore.svg
+     -Input-; navigates to source; icon: /import.svg
+      -[0]-:unix; navigates to source; icon: null
+      -[1]-:perlio; navigates to source; icon: null
+     -Output-; navigates to source; icon: /export.svg
+      -[0]-:unix; navigates to source; icon: null
+      -[1]-:perlio; navigates to source; icon: null
+    -SCALAR-REF(...); navigates to source; icon: /scalar_gutter_icon.png
+     -REF(...)-undef; navigates to source; icon: /scalar_gutter_icon.png
+    -IO-REF(...); navigates to source; icon: /handle_gutter_icon.png
+     -REF(...)-IO::File=IO(...); navigates to source; icon: /handle_gutter_icon.png
+  -$string-"приветик"; navigates to source; source position: testscript.pl:8:152; icon: /package_gutter_icon.png
+  -$tied_scalar-undef; navigates to source; source position: testscript.pl:16:396; icon: /scalar_gutter_icon.png
    -Group:Tied with; icon: /toolWindowModuleDependencies.svg
-    -object-undef; icon: /package_gutter_icon.png
-  -%hash-size = 2; icon: /hash_gutter_icon.png
-   -'4'-"5"; icon: /scalar_gutter_icon.png
-   -'6'-"7"; icon: /scalar_gutter_icon.png
-  -@array-size = 3; icon: /array_gutter_icon.png
-   -[0]-"1"; icon: /scalar_gutter_icon.png
-   -[1]-"2"; icon: /scalar_gutter_icon.png
-   -[2]-"3"; icon: /scalar_gutter_icon.png
+    -object-undef; navigates to source; icon: /package_gutter_icon.png
+  -%hash-size = 2; navigates to source; source position: testscript.pl:7:123; icon: /hash_gutter_icon.png
+   -'4'-"5"; navigates to source; icon: /scalar_gutter_icon.png
+   -'6'-"7"; navigates to source; icon: /scalar_gutter_icon.png
+  -@array-size = 3; navigates to source; source position: testscript.pl:6:96; icon: /array_gutter_icon.png
+   -[0]-"1"; navigates to source; icon: /scalar_gutter_icon.png
+   -[1]-"2"; navigates to source; icon: /scalar_gutter_icon.png
+   -[2]-"3"; navigates to source; icon: /scalar_gutter_icon.png
