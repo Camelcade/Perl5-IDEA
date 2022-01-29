@@ -1606,6 +1606,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     dataContext.put(CommonDataKeys.PSI_ELEMENT, psiElement);
     dataContext.put(CommonDataKeys.PSI_FILE, getFile());
 
+    HierarchyBrowserManager.getSettings(getProject()).SORT_ALPHABETICALLY = true;
     HierarchyProvider hierarchyProvider =
       BrowseHierarchyActionBase.findProvider(LanguageTypeHierarchy.INSTANCE, psiElement, getFile(), dataContext);
     assertNotNull(hierarchyProvider);
