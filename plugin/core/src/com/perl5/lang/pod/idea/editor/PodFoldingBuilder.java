@@ -80,11 +80,6 @@ public class PodFoldingBuilder extends PerlFoldingBuilderBase implements PodElem
       return myDescriptors;
     }
 
-    @Override
-    public void visitBeginSection(@NotNull PsiBeginSection o) {
-      addDescriptorFor(o);
-      super.visitBeginSection(o);
-    }
 
     @Override
     public void visitForSection(@NotNull PsiForSection o) {

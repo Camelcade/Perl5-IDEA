@@ -155,7 +155,6 @@ private any_level_item ::=
 	pod_section
 	| over_section
 	| pod_format_indexes
-//	| begin_section
 	| for_section
 	| encoding_section
 	| unknown_section
@@ -210,17 +209,6 @@ item_section ::= '=item' {
         } {pin=1}
 item_section_content ::= any_level_item +
 private recover_over_section ::= !(<<eof>>|'=back'|'=head1'|'=head2'|'=head3'|'=head4')
-
-// these are not commented to keep PSI elements, need to be reworked
-begin_section ::= '=begin' parse_begin_section_content begin_section_closer  {pin=1}
-private begin_section_closer ::= '=end' pod_section_format 'NL'* {pin=1}
-
-private parse_begin_section_content ::=
-	&':' pod_section_format begin_section_content
-	| pod_section_format <<parsePodSectionContent 'POD_END, BEGIN_SECTION_CONTENT, "Unclosed begin-end section"'>>
-
-begin_section_content ::= {pod_term|'NL'}* {recoverWhile=recover_begin_section} // fixme we should merge when no colon in format
-private recover_begin_section ::= !(<<eof>>|'=end'|'=head1'|'=head2'|'=head3'|'=head4')
 
 pod_section_format ::= ':' ? <<collapseNonSpaceTo 'POD_FORMAT_NAME '>>
 

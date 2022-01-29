@@ -39,7 +39,6 @@ public class PodParser implements PsiParser, LightPsiParser {
   // pod_section
   // 	| over_section
   // 	| pod_format_indexes
-  // //	| begin_section
   // 	| for_section
   // 	| encoding_section
   // 	| unknown_section
@@ -77,70 +76,6 @@ public class PodParser implements PsiParser, LightPsiParser {
       if (!empty_element_parsed_guard_(builder_, "any_level_item_9", pos_)) break;
     }
     exit_section_(builder_, marker_, null, result_);
-    return result_;
-  }
-
-  /* ********************************************************** */
-  // '=begin' parse_begin_section_content begin_section_closer
-  public static boolean begin_section(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "begin_section")) return false;
-    if (!nextTokenIs(builder_, POD_BEGIN)) return false;
-    boolean result_, pinned_;
-    Marker marker_ = enter_section_(builder_, level_, _NONE_, BEGIN_SECTION, null);
-    result_ = consumeToken(builder_, POD_BEGIN);
-    pinned_ = result_; // pin = 1
-    result_ = result_ && report_error_(builder_, parse_begin_section_content(builder_, level_ + 1));
-    result_ = pinned_ && begin_section_closer(builder_, level_ + 1) && result_;
-    exit_section_(builder_, level_, marker_, result_, pinned_, null);
-    return result_ || pinned_;
-  }
-
-  /* ********************************************************** */
-  // '=end' pod_section_format 'NL'*
-  static boolean begin_section_closer(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "begin_section_closer")) return false;
-    if (!nextTokenIs(builder_, POD_END)) return false;
-    boolean result_, pinned_;
-    Marker marker_ = enter_section_(builder_, level_, _NONE_);
-    result_ = consumeToken(builder_, POD_END);
-    pinned_ = result_; // pin = 1
-    result_ = result_ && report_error_(builder_, pod_section_format(builder_, level_ + 1));
-    result_ = pinned_ && begin_section_closer_2(builder_, level_ + 1) && result_;
-    exit_section_(builder_, level_, marker_, result_, pinned_, null);
-    return result_ || pinned_;
-  }
-
-  // 'NL'*
-  private static boolean begin_section_closer_2(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "begin_section_closer_2")) return false;
-    while (true) {
-      int pos_ = current_position_(builder_);
-      if (!consumeToken(builder_, POD_NEWLINE)) break;
-      if (!empty_element_parsed_guard_(builder_, "begin_section_closer_2", pos_)) break;
-    }
-    return true;
-  }
-
-  /* ********************************************************** */
-  // {pod_term|'NL'}*
-  public static boolean begin_section_content(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "begin_section_content")) return false;
-    Marker marker_ = enter_section_(builder_, level_, _NONE_, BEGIN_SECTION_CONTENT, "<begin section content>");
-    while (true) {
-      int pos_ = current_position_(builder_);
-      if (!begin_section_content_0(builder_, level_ + 1)) break;
-      if (!empty_element_parsed_guard_(builder_, "begin_section_content", pos_)) break;
-    }
-    exit_section_(builder_, level_, marker_, true, false, PodParser::recover_begin_section);
-    return true;
-  }
-
-  // pod_term|'NL'
-  private static boolean begin_section_content_0(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "begin_section_content_0")) return false;
-    boolean result_;
-    result_ = pod_term(builder_, level_ + 1);
-    if (!result_) result_ = consumeToken(builder_, POD_NEWLINE);
     return result_;
   }
 
@@ -1154,52 +1089,6 @@ public class PodParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // &':' pod_section_format begin_section_content
-  // 	| pod_section_format <<parsePodSectionContent 'POD_END, BEGIN_SECTION_CONTENT, "Unclosed begin-end section"'>>
-  static boolean parse_begin_section_content(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "parse_begin_section_content")) return false;
-    boolean result_;
-    Marker marker_ = enter_section_(builder_);
-    result_ = parse_begin_section_content_0(builder_, level_ + 1);
-    if (!result_) result_ = parse_begin_section_content_1(builder_, level_ + 1);
-    exit_section_(builder_, marker_, null, result_);
-    return result_;
-  }
-
-  // &':' pod_section_format begin_section_content
-  private static boolean parse_begin_section_content_0(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "parse_begin_section_content_0")) return false;
-    boolean result_;
-    Marker marker_ = enter_section_(builder_);
-    result_ = parse_begin_section_content_0_0(builder_, level_ + 1);
-    result_ = result_ && pod_section_format(builder_, level_ + 1);
-    result_ = result_ && begin_section_content(builder_, level_ + 1);
-    exit_section_(builder_, marker_, null, result_);
-    return result_;
-  }
-
-  // &':'
-  private static boolean parse_begin_section_content_0_0(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "parse_begin_section_content_0_0")) return false;
-    boolean result_;
-    Marker marker_ = enter_section_(builder_, level_, _AND_);
-    result_ = consumeToken(builder_, POD_COLON);
-    exit_section_(builder_, level_, marker_, result_, false, null);
-    return result_;
-  }
-
-  // pod_section_format <<parsePodSectionContent 'POD_END, BEGIN_SECTION_CONTENT, "Unclosed begin-end section"'>>
-  private static boolean parse_begin_section_content_1(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "parse_begin_section_content_1")) return false;
-    boolean result_;
-    Marker marker_ = enter_section_(builder_);
-    result_ = pod_section_format(builder_, level_ + 1);
-    result_ = result_ && parsePodSectionContent(builder_, level_ + 1, POD_END, BEGIN_SECTION_CONTENT, "Unclosed begin-end section");
-    exit_section_(builder_, marker_, null, result_);
-    return result_;
-  }
-
-  /* ********************************************************** */
   // <<parse_section_content default_formatting_section_item>>
   static boolean parse_default_section_content(PsiBuilder builder_, int level_) {
     return parse_section_content(builder_, level_ + 1, PodParser::default_formatting_section_item);
@@ -1834,32 +1723,6 @@ public class PodParser implements PsiParser, LightPsiParser {
     if (!result_) result_ = consumeToken(builder_, POD_ANGLE_RIGHT);
     if (!result_) result_ = consumeToken(builder_, POD_NEWLINE);
     if (!result_) result_ = consumeToken(builder_, POD_L);
-    exit_section_(builder_, marker_, null, result_);
-    return result_;
-  }
-
-  /* ********************************************************** */
-  // !(<<eof>>|'=end'|'=head1'|'=head2'|'=head3'|'=head4')
-  static boolean recover_begin_section(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "recover_begin_section")) return false;
-    boolean result_;
-    Marker marker_ = enter_section_(builder_, level_, _NOT_);
-    result_ = !recover_begin_section_0(builder_, level_ + 1);
-    exit_section_(builder_, level_, marker_, result_, false, null);
-    return result_;
-  }
-
-  // <<eof>>|'=end'|'=head1'|'=head2'|'=head3'|'=head4'
-  private static boolean recover_begin_section_0(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "recover_begin_section_0")) return false;
-    boolean result_;
-    Marker marker_ = enter_section_(builder_);
-    result_ = eof(builder_, level_ + 1);
-    if (!result_) result_ = consumeToken(builder_, POD_END);
-    if (!result_) result_ = consumeToken(builder_, POD_HEAD1);
-    if (!result_) result_ = consumeToken(builder_, POD_HEAD2);
-    if (!result_) result_ = consumeToken(builder_, POD_HEAD3);
-    if (!result_) result_ = consumeToken(builder_, POD_HEAD4);
     exit_section_(builder_, marker_, null, result_);
     return result_;
   }

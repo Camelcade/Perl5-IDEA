@@ -9,14 +9,6 @@ import com.perl5.lang.pod.parser.psi.PodSectionContent;
 
 public class PsiPodVisitorGenerated extends PsiElementVisitor {
 
-  public void visitBeginSection(@NotNull PsiBeginSection o) {
-    visitElement(o);
-  }
-
-  public void visitBeginSectionContent(@NotNull PsiBeginSectionContent o) {
-    visitPodSectionContent(o);
-  }
-
   public void visitCutSection(@NotNull PsiCutSection o) {
     visitElement(o);
   }

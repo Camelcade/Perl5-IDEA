@@ -9,8 +9,6 @@ import com.perl5.lang.pod.psi.impl.*;
 
 public interface PodElementTypesGenerated {
 
-  IElementType BEGIN_SECTION = PodElementTypeFactory.getElementType("BEGIN_SECTION");
-  IElementType BEGIN_SECTION_CONTENT = PodElementTypeFactory.getElementType("BEGIN_SECTION_CONTENT");
   IElementType CUT_SECTION = PodElementTypeFactory.getElementType("CUT_SECTION");
   IElementType ENCODING_SECTION = PodElementTypeFactory.getElementType("ENCODING_SECTION");
   IElementType FORMATTING_SECTION_CONTENT = PodElementTypeFactory.getElementType("FORMATTING_SECTION_CONTENT");

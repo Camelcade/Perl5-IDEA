@@ -47,23 +47,6 @@ public class PodElementTypeFactory {
     if (name.equals("POD_FORMAT_INDEX")) {
       return new PodFormatterXElementType(name);
     }
-    if (name.equals("BEGIN_SECTION")) {
-      return new PodElementType(name) {
-        @Override
-        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
-          return new PsiBeginSectionImpl(node);
-        }
-      };
-    }
-
-    if (name.equals("BEGIN_SECTION_CONTENT")) {
-      return new PodElementType(name) {
-        @Override
-        public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
-          return new PsiBeginSectionContentImpl(node);
-        }
-      };
-    }
 
     if (name.equals("CUT_SECTION")) {
       return new PodElementType(name) {
