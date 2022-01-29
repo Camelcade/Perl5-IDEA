@@ -1755,16 +1755,16 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
 
   protected void doElementDescriptionTest() {
     initWithFileSmartWithoutErrors();
-    doElementDescriptionCheck();
+    doElementDescriptionTestWithoutInit();
   }
 
   protected void doElementDescriptionTest(@NotNull String content) {
     initWithTextSmart(content);
     assertNoErrorElements();
-    doElementDescriptionCheck();
+    doElementDescriptionTestWithoutInit();
   }
 
-  private void doElementDescriptionCheck() {
+  protected void doElementDescriptionTestWithoutInit() {
     PsiElement elementAtCaret = myFixture.getElementAtCaret();
     assertNotNull(elementAtCaret);
     StringBuilder actualDump = new StringBuilder();

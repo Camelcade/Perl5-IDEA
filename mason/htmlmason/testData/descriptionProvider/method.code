@@ -1,0 +1,15 @@
+<%method .li<caret>nk>
+<a href="http://www.<% $site %>.com"><% $label %></a>
+
+    <%args>
+        $site
+        $label=>ucfirst($site)
+    </%args>
+</%method>
+
+Visit these sites:
+<ul>
+    <li><& .link, site=>'yahoo' &></li> <= this should be resolvable to def, but it isn't
+    <li><& .link, site=>'cmp', label=>'CMP Media' &></li>
+    <li><& .link, site=>'excite' &></li>
+</ul>

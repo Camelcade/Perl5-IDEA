@@ -1,0 +1,8 @@
+UsageViewShortNameLocation: .link($site [, $label])
+UsageViewLongNameLocation: /subdir/method.mas:.link
+UsageViewTypeLocation: HTML::Mason method
+UsageViewNodeTextLocation: .link($site [, $label])
+NonCodeSearchDescriptionLocation: HTML::Mason method for NonCodeSearchDescriptionLocation
+DeleteNameDescriptionLocation: HTML::Mason method for DeleteNameDescriptionLocation
+DeleteTypeDescriptionLocation: HTML::Mason method for DeleteTypeDescriptionLocation
+DeleteTypeDescriptionLocation: HTML::Mason method for DeleteTypeDescriptionLocation

@@ -1,0 +1,8 @@
+UsageViewShortNameLocation: .link($site [, $label])
+UsageViewLongNameLocation: /subdir/subcomponent.mas:.link
+UsageViewTypeLocation: HTML::Mason subcomponent
+UsageViewNodeTextLocation: .link($site [, $label])
+NonCodeSearchDescriptionLocation: HTML::Mason subcomponent for NonCodeSearchDescriptionLocation
+DeleteNameDescriptionLocation: HTML::Mason subcomponent for DeleteNameDescriptionLocation
+DeleteTypeDescriptionLocation: HTML::Mason subcomponent for DeleteTypeDescriptionLocation
+DeleteTypeDescriptionLocation: HTML::Mason subcomponent for DeleteTypeDescriptionLocation

@@ -33,35 +33,31 @@ import org.jetbrains.annotations.Nullable;
 public class HTMLMasonElementDescriptionProvider implements ElementDescriptionProvider {
   @Override
   public @Nullable String getElementDescription(@NotNull PsiElement element, @NotNull ElementDescriptionLocation location) {
-    if (element instanceof HTMLMasonNamedElement) {
-      if (location == UsageViewLongNameLocation.INSTANCE) // backref search results title "Find usages of {} in Project files
-      {
-        return ((HTMLMasonFileImpl)element.getContainingFile()).getAbsoluteComponentPath() +
-               ":" +
-               ((PsiNamedElement)element).getName();
+    if (!(element instanceof HTMLMasonNamedElement)) {
+      return null;
+    }
+    if (location == UsageViewLongNameLocation.INSTANCE) {
+      return ((HTMLMasonFileImpl)element.getContainingFile()).getAbsoluteComponentPath() +
+             ":" +
+             ((PsiNamedElement)element).getName();
+    }
+    else if (location == UsageViewNodeTextLocation.INSTANCE) {
+      return ((HTMLMasonNamedElement)element).getName() + HTMLMasonUtil.getArgumentsListAsString((HTMLMasonParametrizedEntity)element);
+    }
+    else if (location == UsageViewShortNameLocation.INSTANCE) {
+      return ((HTMLMasonNamedElement)element).getName() + HTMLMasonUtil.getArgumentsListAsString((HTMLMasonParametrizedEntity)element);
+    }
+    else if (element instanceof HTMLMasonMethodDefinition) {
+      if (location == UsageViewTypeLocation.INSTANCE) {
+        return "HTML::Mason method";
       }
-      else if (location == UsageViewNodeTextLocation.INSTANCE) // name inside type tree node
-      {
-        return ((HTMLMasonNamedElement)element).getName() + HTMLMasonUtil.getArgumentsListAsString((HTMLMasonParametrizedEntity)element);
+      return "HTML::Mason method for " + location.getClass().getSimpleName();
+    }
+    else if (element instanceof HTMLMasonSubcomponentDefitnition) {
+      if (location == UsageViewTypeLocation.INSTANCE) {
+        return "HTML::Mason subcomponent";
       }
-      else if (location == UsageViewShortNameLocation.INSTANCE) // ctrl+hover hint
-      {
-        return ((HTMLMasonNamedElement)element).getName() + HTMLMasonUtil.getArgumentsListAsString((HTMLMasonParametrizedEntity)element);
-      }
-      else if (element instanceof HTMLMasonMethodDefinition) {
-        if (location == UsageViewTypeLocation.INSTANCE) // type tree node in search results
-        {
-          return "HTML::Mason method";
-        }
-        return "HTML::Mason method for " + location;
-      }
-      else if (element instanceof HTMLMasonSubcomponentDefitnition) {
-        if (location == UsageViewTypeLocation.INSTANCE) // type tree node in search results
-        {
-          return "HTML::Mason subcomponent";
-        }
-        return "HTML::Mason subcomponent for " + location;
-      }
+      return "HTML::Mason subcomponent for " + location.getClass().getSimpleName();
     }
     return null;
   }
