@@ -29,7 +29,6 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.testFramework.PlatformTestUtil;
 import com.intellij.testFramework.UsefulTestCase;
-import com.intellij.util.containers.ContainerUtil;
 import com.intellij.xdebugger.*;
 import com.intellij.xdebugger.breakpoints.XBreakpointManager;
 import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
@@ -51,7 +50,6 @@ import com.perl5.lang.perl.debugger.breakpoints.PerlLineBreakpointProperties;
 import com.perl5.lang.perl.debugger.breakpoints.PerlLineBreakpointType;
 import com.perl5.lang.perl.debugger.protocol.PerlLoadedFileDescriptor;
 import com.perl5.lang.perl.debugger.protocol.PerlStackFrameDescriptor;
-import com.perl5.lang.perl.debugger.protocol.PerlValueDescriptor;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugOptionsSets;
 import com.perl5.lang.perl.idea.run.prove.PerlTestRunConfiguration;
@@ -67,7 +65,6 @@ import java.util.*;
 import java.util.function.Consumer;
 
 import static base.PerlLightTestCaseBase.SEPARATOR_NEWLINES;
-import static base.PerlLightTestCaseBase.SEPARATOR_NEW_LINE_AFTER;
 
 @Category(Heavy.class)
 public class PerlDebuggerTest extends PerlPlatformTestCase {
@@ -480,20 +477,5 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
       "Line: " + sourcePosition.getLine(),
       "Offset: " + sourcePosition.getOffset(),
       "Main is not empty: " + (frameDescriptor.getMainSize() > 0));
-  }
-
-  private String serializePerlValueDescriptors(PerlValueDescriptor @NotNull [] descriptorsArray) {
-    if (descriptorsArray.length == 0) {
-      return "";
-    }
-    List<PerlValueDescriptor> descriptors = new ArrayList<>();
-    ContainerUtil.addAll(descriptors, descriptorsArray);
-    descriptors.sort(Comparator.comparing(PerlValueDescriptor::getName));
-    StringBuilder sb = new StringBuilder();
-    for (PerlValueDescriptor descriptor : descriptors) {
-      sb.append(descriptor.testDebugString()).append("\n");
-    }
-    sb.append(SEPARATOR_NEW_LINE_AFTER);
-    return sb.toString();
   }
 }
