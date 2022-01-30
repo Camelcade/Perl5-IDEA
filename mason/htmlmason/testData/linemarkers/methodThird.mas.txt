@@ -1,0 +1,29 @@
+0 - 359: '<%flags>
+    inherit=>'../first.mas'
+</%flags>
+
+<%method somemethod>
+<a href="http://www.<% $site %>.com"><% $label %></a>
+
+    <%args>
+        $site
+        $label=>ucfirst($site)
+    </%args>
+</%method>
+
+<%def subcomponent>
+<a href="http://www.<% $site %>.com"><% $label %></a>
+
+    <%args>
+        $site
+        $label=>ucfirst($site)
+    </%args>
+</%def>
+': Parent component
+Targets: 1
+	HTML::Mason component at 0 in first.mas
+
+57 - 67: 'somemethod': Overriding method
+Targets: 1
+	HTMLMasonMethodDefinitionImpl(HTML_MASON_METHOD_DEFINITION) at 44 in first.mas
+

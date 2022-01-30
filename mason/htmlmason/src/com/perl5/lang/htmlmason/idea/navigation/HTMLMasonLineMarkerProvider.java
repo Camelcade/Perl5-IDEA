@@ -60,6 +60,9 @@ public class HTMLMasonLineMarkerProvider extends RelatedItemLineMarkerProvider i
     else if (element instanceof HTMLMasonMethodDefinition) {
       String methodName = ((HTMLMasonMethodDefinition)element).getName();
       PsiFile component = element.getContainingFile();
+      var identifier = ((HTMLMasonMethodDefinition)element).getNameIdentifier();
+      var markerTarget = identifier == null ? element.getFirstChild() : identifier;
+
       if (StringUtil.isNotEmpty(methodName) && component instanceof HTMLMasonFileImpl) {
         // method in parent components
         HTMLMasonMethodDefinition methodDefinition = ((HTMLMasonFileImpl)component).findMethodDefinitionByNameInParents(methodName);
@@ -69,7 +72,7 @@ public class HTMLMasonLineMarkerProvider extends RelatedItemLineMarkerProvider i
             .setTargets(methodDefinition)
             .setTooltipText(HtmlMasonBundle.message("tooltip.overriding.method"));
 
-          result.add(builder.createLineMarkerInfo(element));
+          result.add(builder.createLineMarkerInfo(markerTarget));
         }
 
         // method in subcomponents
@@ -81,7 +84,7 @@ public class HTMLMasonLineMarkerProvider extends RelatedItemLineMarkerProvider i
             .setTargets(methodDefinitions)
             .setTooltipText(HtmlMasonBundle.message("tooltip.overridden.methods"));
 
-          result.add(builder.createLineMarkerInfo(element));
+          result.add(builder.createLineMarkerInfo(markerTarget));
         }
       }
     }

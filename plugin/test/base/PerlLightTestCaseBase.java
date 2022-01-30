@@ -3139,6 +3139,10 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
 
   protected void doTestLineMarkers() {
     initWithFileSmart();
+    doTestLineMarkersWithoutInit();
+  }
+
+  protected void doTestLineMarkersWithoutInit() {
     List<GutterMark> allMarkers = myFixture.findAllGutters();
     String text = myFixture.getDocument(myFixture.getFile()).getText();
     StringBuilder b = new StringBuilder();

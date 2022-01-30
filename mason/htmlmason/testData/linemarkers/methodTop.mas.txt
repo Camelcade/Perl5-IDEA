@@ -1,0 +1,27 @@
+0 - 311: '<%method somemethod>
+<a href="http://www.<% $site %>.com"><% $label %></a>
+
+    <%args>
+        $site
+        $label=>ucfirst($site)
+    </%args>
+</%method>
+
+<%def subcomponent>
+<a href="http://www.<% $site %>.com"><% $label %></a>
+
+    <%args>
+        $site
+        $label=>ucfirst($site)
+    </%args>
+</%def>
+': Child components
+Targets: 2
+	HTML::Mason component at 0 in first.mas
+	HTML::Mason component at 0 in fourth.mas
+
+9 - 19: 'somemethod': Overridden methods
+Targets: 2
+	HTMLMasonMethodDefinitionImpl(HTML_MASON_METHOD_DEFINITION) at 44 in first.mas
+	HTMLMasonMethodDefinitionImpl(HTML_MASON_METHOD_DEFINITION) at 44 in fourth.mas
+
