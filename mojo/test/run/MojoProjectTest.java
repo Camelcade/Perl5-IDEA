@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package project;
+package run;
 
 import base.PerlPlatformTestCase;
 import categories.Heavy;
@@ -51,6 +51,7 @@ public class MojoProjectTest extends PerlPlatformTestCase {
     assertMojoAvailable();
     TestDialogManager.setTestInputDialog(message -> "Test::App");
     runAction(new MojoGenerateAppAction(), getMainContentRoot());
+    waitForAllDescriptorsToFinish();
     List<MojoProject> projects = refreshAndRescanForProjects().getMojoProjects();
     if (projects.size() != 1) {
       fail("Expected an application, got: " + projects);
@@ -65,6 +66,7 @@ public class MojoProjectTest extends PerlPlatformTestCase {
     VirtualFile mainContentRoot = getMainContentRoot();
     TestDialogManager.setTestInputDialog(message -> "my_lite_app.pl");
     runAction(new MojoGenerateLiteAppAction(), mainContentRoot);
+    waitForAllDescriptorsToFinish();
     refreshAndRescanForProjects().getMojoProjects();
     assertNotNull(mainContentRoot.findChild("my_lite_app.pl"));
   }
@@ -82,6 +84,7 @@ public class MojoProjectTest extends PerlPlatformTestCase {
     assertMojoAvailable();
     TestDialogManager.setTestInputDialog(message -> "Test::Plugin");
     runAction(new MojoGeneratePluginAction(), getMainContentRoot());
+    waitForAllDescriptorsToFinish();
     List<MojoProject> projects = refreshAndRescanForProjects().getMojoProjects();
     if (projects.size() != 1) {
       fail("Expected a plugin, got: " + projects);

@@ -69,6 +69,7 @@ import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.TestOnly;
 
 import java.io.File;
 import java.util.*;
@@ -86,6 +87,7 @@ public class PerlRunUtil {
   private static final String LEGACY_MODULE_PREFIX = "Can't locate ";
   private static final String LEGACY_MODULE_SUFFIX = " in @INC";
   public static final String BUNDLED_MODULE_NAME = "Bundle::Camelcade";
+  private static final List<RunContentDescriptor> TEST_CONSOLE_DESCRIPTORS = new ArrayList<>();
   // should be synchronized with https://github.com/Camelcade/Bundle-Camelcade/blob/master/dist.ini
   private static final Set<String> BUNDLED_MODULE_PARTS = Collections.unmodifiableSet(ContainerUtil.newHashSet(
     "App::cpanminus",
@@ -474,9 +476,8 @@ public class PerlRunUtil {
     if (processHandler != null) {
       consoleView.attachToProcess(processHandler);
       processHandler.startNotify();
-      if (isUnitTestMode) {
-        processHandler.waitFor();
-        Disposer.dispose(consoleView);
+      if (ApplicationManager.getApplication().isUnitTestMode()) {
+        TEST_CONSOLE_DESCRIPTORS.add(runContentDescriptor);
       }
     }
   }
@@ -608,5 +609,20 @@ public class PerlRunUtil {
         }
       }
     }.queue();
+  }
+
+  @TestOnly
+  public static @NotNull List<RunContentDescriptor> getTestConsoleDescriptors() {
+    return TEST_CONSOLE_DESCRIPTORS;
+  }
+
+  @TestOnly
+  public static void dropTestConsoleDescriptors() {
+    for (RunContentDescriptor descriptor : TEST_CONSOLE_DESCRIPTORS) {
+      var console = descriptor.getExecutionConsole();
+      Disposer.dispose(console);
+    }
+
+    TEST_CONSOLE_DESCRIPTORS.clear();
   }
 }

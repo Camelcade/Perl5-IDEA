@@ -67,6 +67,7 @@ import com.perl5.lang.perl.idea.run.prove.PerlTestRunConfiguration;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostHandler;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlRealVersionManagerHandler;
 import com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewTestUtil;
+import com.perl5.lang.perl.util.PerlRunUtil;
 import com.pty4j.util.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -133,6 +134,7 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
         projectManager.setExternalLibraries(Collections.emptyList());
       });
       Disposer.dispose(myPerlLightTestCaseDisposable);
+      PerlRunUtil.dropTestConsoleDescriptors();
     }
     finally {
       super.tearDown();
@@ -509,6 +511,17 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
       }
       catch (InterruptedException e) {
         throw new RuntimeException(e);
+      }
+    }
+  }
+
+  protected void waitForAllDescriptorsToFinish() {
+    var descriptors = PerlRunUtil.getTestConsoleDescriptors();
+    for (RunContentDescriptor descriptor : descriptors) {
+      var processHandler = descriptor.getProcessHandler();
+      if (processHandler != null) {
+        waitForProcessFinish(processHandler);
+        disposeOnPerlTearDown(descriptor.getExecutionConsole());
       }
     }
   }
