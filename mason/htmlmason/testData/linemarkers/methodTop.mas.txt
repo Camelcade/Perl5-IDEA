@@ -24,4 +24,3 @@ Targets: 2
 Targets: 2
 	HTMLMasonMethodDefinitionImpl(HTML_MASON_METHOD_DEFINITION) at 44 in first.mas
 	HTMLMasonMethodDefinitionImpl(HTML_MASON_METHOD_DEFINITION) at 44 in fourth.mas
-

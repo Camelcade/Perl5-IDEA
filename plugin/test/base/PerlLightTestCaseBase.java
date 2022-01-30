@@ -3164,13 +3164,14 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
 
         Collection<? extends GotoRelatedItem> gotoRelatedItems = ((RelatedItemLineMarkerInfo<?>)lineMarkerInfo).createGotoRelatedItems();
         b.append("Targets: ").append(gotoRelatedItems.size()).append("\n");
-
+        List<String> targetsTexts = new ArrayList<>();
         for (GotoRelatedItem gotoRelatedItem : gotoRelatedItems) {
           PsiElement element = gotoRelatedItem.getElement();
           if (element != null) {
-            b.append("\t").append(serializePsiElement(element)).append("\n");
+            targetsTexts.add("\t" + serializePsiElement(element));
           }
         }
+        b.append(String.join("\n", targetsTexts)).append("\n");
       }
       else {
         b.append(gutterMarker);
