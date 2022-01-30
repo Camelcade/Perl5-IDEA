@@ -63,10 +63,7 @@ import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceIndex;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceReverseIndex;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import gnu.trove.THashSet;
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.*;
 
 import java.io.File;
 import java.util.*;
@@ -719,7 +716,8 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
    * @param psiElement to resolve for
    * @return list of lib dirs
    */
-  private static @NotNull List<VirtualFile> getIncDirsForPsiElement(@NotNull PsiElement psiElement) {
+  @VisibleForTesting
+  public static @NotNull List<VirtualFile> getIncDirsForPsiElement(@NotNull PsiElement psiElement) {
     PsiFile psiFile = psiElement.getContainingFile().getOriginalFile();
     List<VirtualFile> result = new ArrayList<>();
 

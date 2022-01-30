@@ -53,13 +53,17 @@ import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
+import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.testFramework.HeavyPlatformTestCase;
 import com.intellij.testFramework.PlatformTestUtil;
 import com.intellij.testFramework.TestActionEvent;
 import com.intellij.testFramework.UsefulTestCase;
+import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.intellij.util.ui.UIUtil;
 import com.intellij.util.ui.tree.TreeUtil;
+import com.perl5.lang.perl.adapters.CpanminusAdapter;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import com.perl5.lang.perl.idea.run.prove.PerlSMTRunnerConsoleView;
@@ -67,6 +71,7 @@ import com.perl5.lang.perl.idea.run.prove.PerlTestRunConfiguration;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostHandler;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlRealVersionManagerHandler;
 import com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewTestUtil;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import com.pty4j.util.Pair;
 import org.jetbrains.annotations.NotNull;
@@ -523,6 +528,42 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
         waitForProcessFinish(processHandler);
         disposeOnPerlTearDown(descriptor.getExecutionConsole());
       }
+    }
+  }
+
+  protected @NotNull PsiFile getPackageFile(@NotNull PsiFile contextPsiFile, @NotNull String packageName) {
+    PsiFile packagePsiFile;
+    CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
+    packagePsiFile = PerlPackageUtil.resolvePackageNameToPsi(contextPsiFile, packageName);
+    assertNotNull("Package file is missing: " + packageName, packagePsiFile);
+    return packagePsiFile;
+  }
+
+  protected void assertPackageNotExists(@NotNull PsiFile contextPsiFile, @NotNull String packageName) {
+    var packagePsiFile = PerlPackageUtil.resolvePackageNameToPsi(contextPsiFile, packageName);
+    var packageVirtualFile = PsiUtilCore.getVirtualFile(packagePsiFile);
+    if (packageVirtualFile != null) {
+      packageVirtualFile.getParent().refresh(false, false);
+      packagePsiFile = PerlPackageUtil.resolvePackageNameToPsi(contextPsiFile, packageName);
+      packageVirtualFile = PsiUtilCore.getVirtualFile(packagePsiFile);
+    }
+    assertNull("Package presence is not expected to be installed, but got " + packageVirtualFile, packagePsiFile);
+  }
+
+  protected @NotNull PsiFile installPackageAndGetPackageFile(@NotNull PsiFile contextPsiFile, @NotNull String packageName) {
+    var sdk = getSdk();
+    assertNotNull(sdk);
+    var installAction = CpanminusAdapter.createInstallAction(sdk, getProject(), List.of(packageName), null);
+    assertNotNull(installAction);
+    runActionWithTestEvent(installAction);
+    waitForAllDescriptorsToFinish();
+    refreshIncDirsForPsiElement(contextPsiFile);
+    return getPackageFile(contextPsiFile, packageName);
+  }
+
+  protected void refreshIncDirsForPsiElement(@NotNull PsiFile contextPsiFile) {
+    for (VirtualFile incDir : PerlPackageUtil.getIncDirsForPsiElement(contextPsiFile)) {
+      incDir.refresh(false, true);
     }
   }
 }

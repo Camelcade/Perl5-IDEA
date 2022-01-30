@@ -38,7 +38,8 @@ import java.util.*;
 
 public abstract class PackageManagerAdapter {
   private static final MergingUpdateQueue QUEUE =
-    new MergingUpdateQueue("perl.installer.queue", 300, true, null, PerlPluginUtil.getUnloadAwareDisposable());
+    new MergingUpdateQueue("perl.installer.queue", 300, true, null, PerlPluginUtil.getUnloadAwareDisposable())
+      .usePassThroughInUnitTestMode();
 
   private final @NotNull Sdk mySdk;
 
