@@ -27,10 +27,8 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
-import com.intellij.psi.PsiReference;
 import com.intellij.psi.search.FileTypeIndex;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.psi.util.PsiTreeUtil;
@@ -51,7 +49,6 @@ import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.manipulators.PerlNamespaceElementManipulator;
 import com.perl5.lang.perl.idea.project.PerlDirectoryIndex;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
-import com.perl5.lang.perl.idea.refactoring.rename.RenameRefactoringQueue;
 import com.perl5.lang.perl.internals.PerlVersion;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
@@ -270,7 +267,6 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
     }
   }
 
-  // fixme shouldn't we have recursion protection here?
   public static @Nullable PerlNamespaceDefinitionElement getNamespaceContainerForElement(@Nullable PsiElement element) {
     if (element == null) {
       return null;
@@ -287,7 +283,6 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
     return namespaceContainer;
   }
 
-  // fixme take fileContext in account?
   public static PerlNamespaceDefinitionElement getContainingNamespace(PsiElement element) {
     return PsiTreeUtil.getStubOrPsiParentOfType(element, PerlNamespaceDefinitionElement.class);
   }
@@ -424,101 +419,6 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
       PATH_TO_PACKAGE_NAME_MAP.put(packagePath, result);
     }
     return result;
-  }
-
-  /**
-   * Adds to queue netsted namespaces, which names should be adjusted to the new package name/path
-   *
-   * @param queue   - RenameRefactoringQueue
-   * @param file    - file has been moved
-   * @param oldPath - previous filepath
-   */
-  public static void collectNestedPackageDefinitionsFromFile(@NotNull RenameRefactoringQueue queue, VirtualFile file, String oldPath) {
-    Project project = queue.getProject();
-    VirtualFile newInnermostRoot = getClosestIncRoot(project, file);
-
-    if (newInnermostRoot != null) {
-      String newRelativePath = VfsUtil.getRelativePath(file, newInnermostRoot);
-      String newPackageName = getPackageNameByPath(newRelativePath);
-
-      VirtualFile oldInnermostRoot = getClosestIncRoot(project, oldPath);
-
-      if (oldInnermostRoot != null) {
-        String oldRelativePath = oldPath.substring(oldInnermostRoot.getPath().length());
-        String oldPackageName = getPackageNameByPath(oldRelativePath);
-
-        if (!oldPackageName.equals(newPackageName)) {
-          PsiFile psiFile = PsiManager.getInstance(project).findFile(file);
-          if (psiFile != null) {
-            for (PerlNamespaceDefinitionElement namespaceDefinition : PsiTreeUtil
-              .findChildrenOfType(psiFile, PerlNamespaceDefinitionElement.class)) {
-              if (oldPackageName.equals(namespaceDefinition.getNamespaceName())) {
-                queue.addElement(namespaceDefinition, newPackageName);
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-
-  /**
-   * Searches for all pm files and add renaming of nested package definitions to the queue. Invoked after renaming
-   *
-   * @param queue     RenameRefactoringQueue object
-   * @param directory VirtualFile of renamed directory
-   * @param oldPath   old directory path
-   */
-  public static void collectNestedPackageDefinitions(RenameRefactoringQueue queue, VirtualFile directory, String oldPath) {
-    Project project = queue.getProject();
-    VirtualFile directorySourceRoot = getClosestIncRoot(project, directory);
-
-    if (directorySourceRoot != null) {
-      for (VirtualFile file : VfsUtil.collectChildrenRecursively(directory)) {
-        if (!file.isDirectory() &&
-            file.getFileType() == PerlFileTypePackage.INSTANCE &&
-            directorySourceRoot.equals(getClosestIncRoot(project, file))) {
-          String relativePath = VfsUtil.getRelativePath(file, directory);
-          String oldFilePath = oldPath + "/" + relativePath;
-          collectNestedPackageDefinitionsFromFile(queue, file, oldFilePath);
-        }
-      }
-    }
-  }
-
-  /**
-   * Searches for all pm files in directory to be renamed/moved, searches for references to those packages and add them to the renaming queue
-   *
-   * @param project   Project to be renamed
-   * @param directory VirtualFile of directory to be renamed
-   * @param newPath   new directory path
-   */
-  public static void adjustNestedFiles(Project project, VirtualFile directory, String newPath) {
-    VirtualFile oldDirectorySourceRoot = getClosestIncRoot(project, directory);
-    PsiManager psiManager = PsiManager.getInstance(project);
-
-    if (oldDirectorySourceRoot != null) {
-      for (VirtualFile file : VfsUtil.collectChildrenRecursively(directory)) {
-        if (!file.isDirectory() &&
-            file.getFileType() == PerlFileTypePackage.INSTANCE &&
-            oldDirectorySourceRoot.equals(getClosestIncRoot(project, file))) {
-          PsiFile psiFile = psiManager.findFile(file);
-
-          if (psiFile != null) {
-            for (PsiReference inboundReference : ReferencesSearch.search(psiFile)) {
-              String newPackagePath = newPath + "/" + VfsUtil.getRelativePath(file, directory);
-              VirtualFile newInnermostRoot = getClosestIncRoot(project, newPackagePath);
-              if (newInnermostRoot != null) {
-                String newRelativePath = newPackagePath.substring(newInnermostRoot.getPath().length());
-                String newPackageName = getPackageNameByPath(newRelativePath);
-
-                PerlPsiUtil.renameElement(inboundReference.getElement(), newPackageName);
-              }
-            }
-          }
-        }
-      }
-    }
   }
 
   public static boolean processPackageFilesForPsiElement(@NotNull PsiElement element,
@@ -721,7 +621,6 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
     PsiFile psiFile = psiElement.getContainingFile().getOriginalFile();
     List<VirtualFile> result = new ArrayList<>();
 
-    // libdirs providers fixme we need to use stubs or psi here
     for (PerlUseStatementElement useStatement : PsiTreeUtil.findChildrenOfType(psiFile, PerlUseStatementElement.class)) {
       PerlPackageProcessor packageProcessor = useStatement.getPackageProcessor();
       if (packageProcessor instanceof PerlLibProvider) {
