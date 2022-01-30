@@ -22,7 +22,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class PerlCriticErrorDescriptor {
+public final class PerlCriticErrorDescriptor {
   public static final Pattern PERL_CRITIC_MESSAGE_PATTERN = Pattern.compile("(.+?) at line (\\d+), column (\\d+)\\.\\s*+(.+)");
   public static final Pattern PERL_CRITIC_MESSAGE_PATTERN_ALT = Pattern.compile("(.+?) at (.+?) line (\\d+),(.+)");
   private final int myLine;
@@ -73,5 +73,14 @@ public class PerlCriticErrorDescriptor {
       }
     }
     return null;
+  }
+
+  @Override
+  public String toString() {
+    return "PerlCriticErrorDescriptor{" +
+           "myLine=" + myLine +
+           ", myCol=" + myCol +
+           ", myMessage=" + myMessage +
+           '}';
   }
 }

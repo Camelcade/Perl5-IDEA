@@ -566,4 +566,12 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
       incDir.refresh(false, true);
     }
   }
+
+  protected @NotNull VirtualFile openAndGetModuleFileInEditor(@NotNull String path) {
+    var editors = openModuleFileInEditor(path);
+    assertSize(1, editors);
+    var openedVirtualFile = editors[0].getFile();
+    assertNotNull(openedVirtualFile);
+    return openedVirtualFile;
+  }
 }
