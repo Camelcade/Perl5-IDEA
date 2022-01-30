@@ -3171,6 +3171,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
             targetsTexts.add("\t" + serializePsiElement(element));
           }
         }
+        ContainerUtil.sort(targetsTexts);
         b.append(String.join("\n", targetsTexts)).append("\n");
       }
       else {
