@@ -21,6 +21,7 @@ import com.intellij.execution.actions.ConfigurationContext;
 import com.intellij.execution.actions.ConfigurationFromContext;
 import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.RunConfiguration;
+import com.intellij.execution.executors.DefaultRunExecutor;
 import com.intellij.execution.process.*;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.runners.ProgramRunner;
@@ -316,6 +317,21 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
       }
       return additionalData.apply(dataId);
     };
+  }
+
+  protected @NotNull Pair<ExecutionEnvironment, RunContentDescriptor> runConfigurationAndWait(GenericPerlRunConfiguration runConfiguration) {
+    Pair<ExecutionEnvironment, RunContentDescriptor> execResult;
+    try {
+      execResult = executeConfiguration(runConfiguration, DefaultRunExecutor.EXECUTOR_ID);
+    }
+    catch (InterruptedException e) {
+      throw new RuntimeException(e);
+    }
+    RunContentDescriptor contentDescriptor = execResult.second;
+    ProcessHandler processHandler = contentDescriptor.getProcessHandler();
+    assertNotNull(processHandler);
+    waitForProcessFinish(processHandler);
+    return execResult;
   }
 
   /**

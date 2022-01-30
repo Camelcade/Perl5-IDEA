@@ -20,12 +20,16 @@ import base.PerlPlatformTestCase;
 import categories.Heavy;
 import com.intellij.execution.executors.DefaultRunExecutor;
 import com.intellij.execution.process.CapturingProcessAdapter;
-import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.ui.RunContentDescriptor;
+import com.intellij.notification.Notification;
+import com.intellij.notification.Notifications;
+import com.intellij.openapi.util.Ref;
 import com.intellij.testFramework.UsefulTestCase;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import com.pty4j.util.Pair;
+import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
@@ -64,18 +68,28 @@ public class PerlRunTest extends PerlPlatformTestCase {
     runAndCompareOutput(createOnlyRunConfiguration("simplescript.pl"));
   }
 
+  @Test
+  public void testMissingPackageNotification() {
+    copyDirToModule("missingpackage");
+    Ref<Notification> notificationRef = Ref.create();
+    getProject().getMessageBus().connect(myPerlLightTestCaseDisposable).subscribe(Notifications.TOPIC, new Notifications() {
+      @Override
+      public void notify(@NotNull Notification notification) {
+        notificationRef.set(notification);
+      }
+    });
+
+    runConfigurationAndWait(createOnlyRunConfiguration("simplescript.pl"));
+    var notification = notificationRef.get();
+    assertNotNull(notification);
+    assertEquals(PerlBundle.message("perl.missing.library.notification"), notification.getGroupId());
+    assertEquals(PerlBundle.message("perl.missing.library.notification.title", "Some::Missing::Module"), notification.getTitle());
+    assertSize(2, notification.getActions());
+    assertEquals(PerlBundle.message("perl.missing.library.notification.message"), notification.getContent());
+  }
+
   private void runAndCompareOutput(GenericPerlRunConfiguration runConfiguration) {
-    Pair<ExecutionEnvironment, RunContentDescriptor> execResult;
-    try {
-      execResult = executeConfiguration(runConfiguration, DefaultRunExecutor.EXECUTOR_ID);
-    }
-    catch (InterruptedException e) {
-      throw new RuntimeException(e);
-    }
-    RunContentDescriptor contentDescriptor = execResult.second;
-    ProcessHandler processHandler = contentDescriptor.getProcessHandler();
-    assertNotNull(processHandler);
-    waitForProcessFinish(processHandler);
+    Pair<ExecutionEnvironment, RunContentDescriptor> execResult = runConfigurationAndWait(runConfiguration);
     CapturingProcessAdapter capturingProcessAdapter = getCapturingAdapter(execResult.first);
     assertNotNull(capturingProcessAdapter);
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(""), serializeOutput(capturingProcessAdapter.getOutput()));
