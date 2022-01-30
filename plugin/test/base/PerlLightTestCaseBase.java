@@ -21,6 +21,9 @@ import com.intellij.codeInsight.actions.MultiCaretCodeInsightAction;
 import com.intellij.codeInsight.completion.CompletionType;
 import com.intellij.codeInsight.controlflow.ConditionalInstruction;
 import com.intellij.codeInsight.controlflow.Instruction;
+import com.intellij.codeInsight.daemon.GutterMark;
+import com.intellij.codeInsight.daemon.LineMarkerInfo;
+import com.intellij.codeInsight.daemon.RelatedItemLineMarkerInfo;
 import com.intellij.codeInsight.documentation.DocumentationManager;
 import com.intellij.codeInsight.editorActions.SelectWordHandler;
 import com.intellij.codeInsight.generation.surroundWith.SurroundWithHandler;
@@ -70,6 +73,7 @@ import com.intellij.lang.injection.InjectedLanguageManager;
 import com.intellij.lang.injection.MultiHostInjector;
 import com.intellij.lang.injection.MultiHostRegistrar;
 import com.intellij.lang.parameterInfo.ParameterInfoHandler;
+import com.intellij.navigation.GotoRelatedItem;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.navigation.NavigationItem;
 import com.intellij.openapi.Disposable;
@@ -3131,5 +3135,44 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     if (!(configurable instanceof Disposable)) {
       configurable.disposeUIResources();
     }
+  }
+
+  protected void doTestLineMarkers() {
+    initWithFileSmart();
+    List<GutterMark> allMarkers = myFixture.findAllGutters();
+    String text = myFixture.getDocument(myFixture.getFile()).getText();
+    StringBuilder b = new StringBuilder();
+    for (GutterMark gutterMarker : allMarkers) {
+      if (gutterMarker instanceof LineMarkerInfo.LineMarkerGutterIconRenderer) {
+        LineMarkerInfo<?> lineMarkerInfo = ((LineMarkerInfo.LineMarkerGutterIconRenderer<?>)gutterMarker).getLineMarkerInfo();
+        b.append(lineMarkerInfo.startOffset).append(" - ").append(lineMarkerInfo.endOffset).append(": ")
+          .append('\'')
+          .append(text, lineMarkerInfo.startOffset, lineMarkerInfo.endOffset)
+          .append('\'')
+          .append(": ")
+          .append(lineMarkerInfo.getLineMarkerTooltip())
+          .append("\n");
+
+        if (!(lineMarkerInfo instanceof RelatedItemLineMarkerInfo)) {
+          b.append("Uknown targets: ").append(lineMarkerInfo.getClass().getSimpleName()).append("\n");
+          continue;
+        }
+
+        Collection<? extends GotoRelatedItem> gotoRelatedItems = ((RelatedItemLineMarkerInfo<?>)lineMarkerInfo).createGotoRelatedItems();
+        b.append("Targets: ").append(gotoRelatedItems.size()).append("\n");
+
+        for (GotoRelatedItem gotoRelatedItem : gotoRelatedItems) {
+          PsiElement element = gotoRelatedItem.getElement();
+          if (element != null) {
+            b.append("\t").append(serializePsiElement(element)).append("\n");
+          }
+        }
+      }
+      else {
+        b.append(gutterMarker);
+      }
+      b.append("\n");
+    }
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), b.toString());
   }
 }
