@@ -9,6 +9,7 @@ import com.intellij.testFramework.UsefulTestCase;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.actions.PerlDeparseFileAction;
+import com.perl5.lang.perl.idea.actions.PerlFormatWithPerlTidyAction;
 import com.perl5.lang.perl.idea.actions.PerlRegenerateXSubsAction;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import com.perl5.lang.perl.xsubs.PerlXSubsState;
@@ -50,5 +51,19 @@ public class PerlHeavyActionsTest extends PerlPlatformTestCase {
     var deparsedFile = moduleRoot.findFileByRelativePath(PerlXSubsState.DEPARSED_FILE_NAME);
     assertNotNull(deparsedFile);
     CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
+  }
+
+  @Test
+  public void testReformatWithPerlTidy() {
+    CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
+    copyDirToModule("formatWithPerlTidy");
+    var editors = openModuleFileInEditor("./test.pl");
+    assertSize(1, editors);
+    var openedVirtualFile = editors[0].getFile();
+    assertNotNull(openedVirtualFile);
+    var openedDocument = FileDocumentManager.getInstance().getDocument(openedVirtualFile);
+    assertNotNull(openedDocument);
+    runActionWithTestEvent(new PerlFormatWithPerlTidyAction());
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(""), openedDocument.getText());
   }
 }

@@ -52,7 +52,7 @@ import java.util.Objects;
 
 public class PerlFormatWithPerlTidyAction extends PurePerlActionBase {
   private static final Logger LOG = Logger.getInstance(PerlFormatWithPerlTidyAction.class);
-  private static final String PACKAGE_NAME = "Perl::Tidy";
+  public static final String PERL_TIDY_PACKAGE_NAME = "Perl::Tidy";
   private static final String SCRIPT_NAME = "perltidy";
 
   public PerlFormatWithPerlTidyAction() {
@@ -82,7 +82,7 @@ public class PerlFormatWithPerlTidyAction extends PurePerlActionBase {
   private @Nullable PerlCommandLine getPerlTidyCommandLine(@NotNull Project project) {
     PerlSharedSettings sharedSettings = PerlSharedSettings.getInstance(project);
     VirtualFile perlTidyScript =
-      ReadAction.compute(() -> PerlRunUtil.findLibraryScriptWithNotification(project, SCRIPT_NAME, PACKAGE_NAME));
+      ReadAction.compute(() -> PerlRunUtil.findLibraryScriptWithNotification(project, SCRIPT_NAME, PERL_TIDY_PACKAGE_NAME));
     if (perlTidyScript == null) {
       return null;
     }

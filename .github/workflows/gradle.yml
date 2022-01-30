@@ -53,7 +53,7 @@ jobs:
           source ~/perl5/perlbrew/etc/bashrc
           perlbrew exec -q --with perl-5.32.0 cpan App::cpanminus
           perlbrew lib create perl-5.32.0@plugin_test || true
-          perlbrew exec -q --with perl-5.32.0@plugin_test cpanm --notest Mojolicious Devel::Camelcadedb Devel::Cover JSON App::Prove::Plugin::PassEnv TAP::Formatter::Camelcade Devel::NYTProf
+          perlbrew exec -q --with perl-5.32.0@plugin_test cpanm --notest Mojolicious Devel::Camelcadedb Devel::Cover JSON App::Prove::Plugin::PassEnv TAP::Formatter::Camelcade Devel::NYTProf Perl::Tidy Perl::Critic
       - name: Cache SonarCloud packages
         uses: actions/cache@v1
         with:
