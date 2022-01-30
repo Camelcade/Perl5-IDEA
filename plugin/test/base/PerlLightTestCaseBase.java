@@ -3145,8 +3145,9 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   protected void doTestLineMarkersWithoutInit() {
     List<GutterMark> allMarkers = myFixture.findAllGutters();
     String text = myFixture.getDocument(myFixture.getFile()).getText();
-    StringBuilder b = new StringBuilder();
+    List<String> markersLines = new ArrayList<>();
     for (GutterMark gutterMarker : allMarkers) {
+      StringBuilder b = new StringBuilder();
       if (gutterMarker instanceof LineMarkerInfo.LineMarkerGutterIconRenderer) {
         LineMarkerInfo<?> lineMarkerInfo = ((LineMarkerInfo.LineMarkerGutterIconRenderer<?>)gutterMarker).getLineMarkerInfo();
         b.append(lineMarkerInfo.startOffset).append(" - ").append(lineMarkerInfo.endOffset).append(": ")
@@ -3176,8 +3177,9 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       else {
         b.append(gutterMarker);
       }
-      b.append("\n");
+      markersLines.add(b.toString());
     }
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), b.toString());
+    ContainerUtil.sort(markersLines);
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), String.join("\n", markersLines));
   }
 }
