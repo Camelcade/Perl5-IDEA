@@ -1,0 +1,53 @@
+--------------------------------------------------------------------------------
+Caret offset: 0
+--------------------------------------------------------------------------------
+[% DEBUG <selection>on<caret></selection> %]^^ caret at start
+
+# Caret in the middle
+
+
+%% GET foo
+# should have a line opener
+
+
+# Caret in the end
+--------------------------------------------------------------------------------
+Caret offset: 41
+--------------------------------------------------------------------------------
+^^ caret at start
+
+# Caret in the middle
+[% DEBUG <selection>on<caret></selection> %]
+
+%% GET foo
+# should have a line opener
+
+
+# Caret in the end
+--------------------------------------------------------------------------------
+Caret offset: 82
+--------------------------------------------------------------------------------
+^^ caret at start
+
+# Caret in the middle
+
+
+%% GET foo
+# should have a line opener
+%% DEBUG <selection>on<caret></selection> 
+
+# Caret in the end
+--------------------------------------------------------------------------------
+Caret offset: 103
+--------------------------------------------------------------------------------
+^^ caret at start
+
+# Caret in the middle
+
+
+%% GET foo
+# should have a line opener
+
+
+# Caret in the end
+%% DEBUG <selection>on<caret></selection> 

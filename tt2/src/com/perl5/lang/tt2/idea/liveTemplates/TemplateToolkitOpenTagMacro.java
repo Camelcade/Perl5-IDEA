@@ -46,11 +46,7 @@ public class TemplateToolkitOpenTagMacro extends Macro implements TemplateToolki
     if (tokenType == TT2_OUTLINE_TAG) {
       return new TextResult(TemplateToolkitSettings.getInstance(project).OUTLINE_TAG);
     }
-    else if (tokenType == TT2_OPEN_TAG) {
       return new TextResult(TemplateToolkitSettings.getInstance(project).START_TAG);
-    }
-
-    return null;
   }
 
 

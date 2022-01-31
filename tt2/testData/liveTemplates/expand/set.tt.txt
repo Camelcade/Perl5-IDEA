@@ -1,0 +1,53 @@
+--------------------------------------------------------------------------------
+Caret offset: 0
+--------------------------------------------------------------------------------
+[% SET <selection>key<caret></selection> = value %]^^ caret at start
+
+# Caret in the middle
+
+
+%% GET foo
+# should have a line opener
+
+
+# Caret in the end
+--------------------------------------------------------------------------------
+Caret offset: 41
+--------------------------------------------------------------------------------
+^^ caret at start
+
+# Caret in the middle
+[% SET <selection>key<caret></selection> = value %]
+
+%% GET foo
+# should have a line opener
+
+
+# Caret in the end
+--------------------------------------------------------------------------------
+Caret offset: 82
+--------------------------------------------------------------------------------
+^^ caret at start
+
+# Caret in the middle
+
+
+%% GET foo
+# should have a line opener
+%% SET <selection>key<caret></selection> = value 
+
+# Caret in the end
+--------------------------------------------------------------------------------
+Caret offset: 103
+--------------------------------------------------------------------------------
+^^ caret at start
+
+# Caret in the middle
+
+
+%% GET foo
+# should have a line opener
+
+
+# Caret in the end
+%% SET <selection>key<caret></selection> = value 

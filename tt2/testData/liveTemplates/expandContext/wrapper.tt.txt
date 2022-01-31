@@ -1,0 +1,9 @@
+<available>^^ caret at start
+
+# Caret in the middle
+</available>
+%% GET foo
+<available># should have a line opener
+
+# Caret in the end
+</available>

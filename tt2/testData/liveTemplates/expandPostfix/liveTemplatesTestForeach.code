@@ -1,0 +1,23 @@
+[% FILTER format(format) <caret>  %]
+    test
+[% END %]
+
+[% WRAPPER section <caret> %]
+    test
+[% END %]
+
+[% DEFAULT key = value <caret> %]
+
+[% INSERT file <caret> %]
+
+[% INCLUDE fileorblock <caret> %]
+
+[% PROCESS fileorblock <caret> %]
+
+[% CALL element <caret> %]
+
+[% THROW type message <caret> %]
+
+[% SET key = value <caret> %]
+
+[% GET element <caret> %]

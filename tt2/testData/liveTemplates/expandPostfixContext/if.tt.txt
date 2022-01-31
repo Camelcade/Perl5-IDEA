@@ -1,0 +1,35 @@
+[% FILTER format(format)   %]
+    test
+[% END %]
+
+[% WRAPPER section  %]
+    test
+[% END %]
+
+[% DEBUG on  %]
+
+[% NEXT  %]
+
+[% LAST  %]
+
+[% RETURN  %]
+
+[% STOP  %]
+
+[% CLEAR  %]
+
+[% DEFAULT key = value  %]
+
+[% INSERT file  %]
+
+[% INCLUDE fileorblock  %]
+
+[% PROCESS fileorblock  %]
+
+[% CALL element  %]
+
+[% THROW type message  %]
+
+[% SET key = value  %]
+
+[% GET element  %]

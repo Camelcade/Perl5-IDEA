@@ -1,0 +1,61 @@
+--------------------------------------------------------------------------------
+Caret offset: 0
+--------------------------------------------------------------------------------
+[% FOREACH <selection>iterator<caret></selection> IN iterable %]
+    
+[% END %]^^ caret at start
+
+# Caret in the middle
+
+
+%% GET foo
+# should have a line opener
+
+
+# Caret in the end
+--------------------------------------------------------------------------------
+Caret offset: 41
+--------------------------------------------------------------------------------
+^^ caret at start
+
+# Caret in the middle
+[% FOREACH <selection>iterator<caret></selection> IN iterable %]
+    
+[% END %]
+
+%% GET foo
+# should have a line opener
+
+
+# Caret in the end
+--------------------------------------------------------------------------------
+Caret offset: 82
+--------------------------------------------------------------------------------
+^^ caret at start
+
+# Caret in the middle
+
+
+%% GET foo
+# should have a line opener
+%% FOREACH <selection>iterator<caret></selection> IN iterable 
+    
+%% END 
+
+# Caret in the end
+--------------------------------------------------------------------------------
+Caret offset: 103
+--------------------------------------------------------------------------------
+^^ caret at start
+
+# Caret in the middle
+
+
+%% GET foo
+# should have a line opener
+
+
+# Caret in the end
+%% FOREACH <selection>iterator<caret></selection> IN iterable 
+    
+%% END 

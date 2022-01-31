@@ -1,0 +1,431 @@
+--------------------------------------------------------------------------------
+Caret offset: 0
+--------------------------------------------------------------------------------
+<cat><caret></cat>^^ caret at start
+
+# Caret in the middle
+
+
+%% GET foo
+# should have a line opener
+
+
+[% TRY myvar %]
+
+[% END %]
+
+[% TRY myvar %]
+
+[%   CATCH 'value1' %]
+[% END %]
+
+[% TRY myvar %]
+[%   CATCH 'value1' %]
+
+[% END %]
+
+
+%% TRY myvar
+
+%% END
+
+%% TRY myvar
+
+%%   CATCH 'value1'
+%% END
+
+%% TRY myvar
+%%   CATCH 'value1'
+
+%% END
+
+
+# Caret in the end
+--------------------------------------------------------------------------------
+Caret offset: 41
+--------------------------------------------------------------------------------
+^^ caret at start
+
+# Caret in the middle
+<cat><caret></cat>
+
+%% GET foo
+# should have a line opener
+
+
+[% TRY myvar %]
+
+[% END %]
+
+[% TRY myvar %]
+
+[%   CATCH 'value1' %]
+[% END %]
+
+[% TRY myvar %]
+[%   CATCH 'value1' %]
+
+[% END %]
+
+
+%% TRY myvar
+
+%% END
+
+%% TRY myvar
+
+%%   CATCH 'value1'
+%% END
+
+%% TRY myvar
+%%   CATCH 'value1'
+
+%% END
+
+
+# Caret in the end
+--------------------------------------------------------------------------------
+Caret offset: 82
+--------------------------------------------------------------------------------
+^^ caret at start
+
+# Caret in the middle
+
+
+%% GET foo
+# should have a line opener
+<cat><caret></cat>
+
+[% TRY myvar %]
+
+[% END %]
+
+[% TRY myvar %]
+
+[%   CATCH 'value1' %]
+[% END %]
+
+[% TRY myvar %]
+[%   CATCH 'value1' %]
+
+[% END %]
+
+
+%% TRY myvar
+
+%% END
+
+%% TRY myvar
+
+%%   CATCH 'value1'
+%% END
+
+%% TRY myvar
+%%   CATCH 'value1'
+
+%% END
+
+
+# Caret in the end
+--------------------------------------------------------------------------------
+Caret offset: 100
+--------------------------------------------------------------------------------
+^^ caret at start
+
+# Caret in the middle
+
+
+%% GET foo
+# should have a line opener
+
+
+[% TRY myvar %]
+[% CATCH <selection>type<caret></selection> %]
+[% END %]
+
+[% TRY myvar %]
+
+[%   CATCH 'value1' %]
+[% END %]
+
+[% TRY myvar %]
+[%   CATCH 'value1' %]
+
+[% END %]
+
+
+%% TRY myvar
+
+%% END
+
+%% TRY myvar
+
+%%   CATCH 'value1'
+%% END
+
+%% TRY myvar
+%%   CATCH 'value1'
+
+%% END
+
+
+# Caret in the end
+--------------------------------------------------------------------------------
+Caret offset: 128
+--------------------------------------------------------------------------------
+^^ caret at start
+
+# Caret in the middle
+
+
+%% GET foo
+# should have a line opener
+
+
+[% TRY myvar %]
+
+[% END %]
+
+[% TRY myvar %]
+[% CATCH <selection>type<caret></selection> %]
+[%   CATCH 'value1' %]
+[% END %]
+
+[% TRY myvar %]
+[%   CATCH 'value1' %]
+
+[% END %]
+
+
+%% TRY myvar
+
+%% END
+
+%% TRY myvar
+
+%%   CATCH 'value1'
+%% END
+
+%% TRY myvar
+%%   CATCH 'value1'
+
+%% END
+
+
+# Caret in the end
+--------------------------------------------------------------------------------
+Caret offset: 202
+--------------------------------------------------------------------------------
+^^ caret at start
+
+# Caret in the middle
+
+
+%% GET foo
+# should have a line opener
+
+
+[% TRY myvar %]
+
+[% END %]
+
+[% TRY myvar %]
+
+[%   CATCH 'value1' %]
+[% END %]
+
+[% TRY myvar %]
+[%   CATCH 'value1' %]
+[% CATCH <selection>type<caret></selection> %]
+[% END %]
+
+
+%% TRY myvar
+
+%% END
+
+%% TRY myvar
+
+%%   CATCH 'value1'
+%% END
+
+%% TRY myvar
+%%   CATCH 'value1'
+
+%% END
+
+
+# Caret in the end
+--------------------------------------------------------------------------------
+Caret offset: 228
+--------------------------------------------------------------------------------
+^^ caret at start
+
+# Caret in the middle
+
+
+%% GET foo
+# should have a line opener
+
+
+[% TRY myvar %]
+
+[% END %]
+
+[% TRY myvar %]
+
+[%   CATCH 'value1' %]
+[% END %]
+
+[% TRY myvar %]
+[%   CATCH 'value1' %]
+
+[% END %]
+
+
+%% TRY myvar
+%% CATCH <selection>type<caret></selection> 
+%% END
+
+%% TRY myvar
+
+%%   CATCH 'value1'
+%% END
+
+%% TRY myvar
+%%   CATCH 'value1'
+
+%% END
+
+
+# Caret in the end
+--------------------------------------------------------------------------------
+Caret offset: 250
+--------------------------------------------------------------------------------
+^^ caret at start
+
+# Caret in the middle
+
+
+%% GET foo
+# should have a line opener
+
+
+[% TRY myvar %]
+
+[% END %]
+
+[% TRY myvar %]
+
+[%   CATCH 'value1' %]
+[% END %]
+
+[% TRY myvar %]
+[%   CATCH 'value1' %]
+
+[% END %]
+
+
+%% TRY myvar
+
+%% END
+
+%% TRY myvar
+%% CATCH <selection>type<caret></selection> 
+%%   CATCH 'value1'
+%% END
+
+%% TRY myvar
+%%   CATCH 'value1'
+
+%% END
+
+
+# Caret in the end
+--------------------------------------------------------------------------------
+Caret offset: 312
+--------------------------------------------------------------------------------
+^^ caret at start
+
+# Caret in the middle
+
+
+%% GET foo
+# should have a line opener
+
+
+[% TRY myvar %]
+
+[% END %]
+
+[% TRY myvar %]
+
+[%   CATCH 'value1' %]
+[% END %]
+
+[% TRY myvar %]
+[%   CATCH 'value1' %]
+
+[% END %]
+
+
+%% TRY myvar
+
+%% END
+
+%% TRY myvar
+
+%%   CATCH 'value1'
+%% END
+
+%% TRY myvar
+%%   CATCH 'value1'
+%% CATCH <selection>type<caret></selection> 
+%% END
+
+
+# Caret in the end
+--------------------------------------------------------------------------------
+Caret offset: 341
+--------------------------------------------------------------------------------
+^^ caret at start
+
+# Caret in the middle
+
+
+%% GET foo
+# should have a line opener
+
+
+[% TRY myvar %]
+
+[% END %]
+
+[% TRY myvar %]
+
+[%   CATCH 'value1' %]
+[% END %]
+
+[% TRY myvar %]
+[%   CATCH 'value1' %]
+
+[% END %]
+
+
+%% TRY myvar
+
+%% END
+
+%% TRY myvar
+
+%%   CATCH 'value1'
+%% END
+
+%% TRY myvar
+%%   CATCH 'value1'
+
+%% END
+
+
+# Caret in the end
+<cat><caret></cat>

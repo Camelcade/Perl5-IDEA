@@ -1,0 +1,53 @@
+--------------------------------------------------------------------------------
+Caret offset: 0
+--------------------------------------------------------------------------------
+[% THROW <selection>type<caret></selection> message %]^^ caret at start
+
+# Caret in the middle
+
+
+%% GET foo
+# should have a line opener
+
+
+# Caret in the end
+--------------------------------------------------------------------------------
+Caret offset: 41
+--------------------------------------------------------------------------------
+^^ caret at start
+
+# Caret in the middle
+[% THROW <selection>type<caret></selection> message %]
+
+%% GET foo
+# should have a line opener
+
+
+# Caret in the end
+--------------------------------------------------------------------------------
+Caret offset: 82
+--------------------------------------------------------------------------------
+^^ caret at start
+
+# Caret in the middle
+
+
+%% GET foo
+# should have a line opener
+%% THROW <selection>type<caret></selection> message 
+
+# Caret in the end
+--------------------------------------------------------------------------------
+Caret offset: 103
+--------------------------------------------------------------------------------
+^^ caret at start
+
+# Caret in the middle
+
+
+%% GET foo
+# should have a line opener
+
+
+# Caret in the end
+%% THROW <selection>type<caret></selection> message 

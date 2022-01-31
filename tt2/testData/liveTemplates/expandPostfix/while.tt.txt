@@ -1,0 +1,418 @@
+--------------------------------------------------------------------------------
+Caret offset: 25
+--------------------------------------------------------------------------------
+[% FILTER format(format) WHILE <selection>condition<caret></selection>  %]
+    test
+[% END %]
+
+[% WRAPPER section  %]
+    test
+[% END %]
+
+[% DEBUG on  %]
+
+[% NEXT  %]
+
+[% LAST  %]
+
+[% RETURN  %]
+
+[% STOP  %]
+
+[% CLEAR  %]
+
+[% DEFAULT key = value  %]
+
+[% INSERT file  %]
+
+[% INCLUDE fileorblock  %]
+
+[% PROCESS fileorblock  %]
+
+[% CALL element  %]
+
+[% THROW type message  %]
+
+[% SET key = value  %]
+
+[% GET element  %]
+--------------------------------------------------------------------------------
+Caret offset: 105
+--------------------------------------------------------------------------------
+[% FILTER format(format)   %]
+    test
+[% END %]
+
+[% WRAPPER section  %]
+    test
+[% END %]
+
+[% DEBUG on WHILE <selection>condition<caret></selection> %]
+
+[% NEXT  %]
+
+[% LAST  %]
+
+[% RETURN  %]
+
+[% STOP  %]
+
+[% CLEAR  %]
+
+[% DEFAULT key = value  %]
+
+[% INSERT file  %]
+
+[% INCLUDE fileorblock  %]
+
+[% PROCESS fileorblock  %]
+
+[% CALL element  %]
+
+[% THROW type message  %]
+
+[% SET key = value  %]
+
+[% GET element  %]
+--------------------------------------------------------------------------------
+Caret offset: 118
+--------------------------------------------------------------------------------
+[% FILTER format(format)   %]
+    test
+[% END %]
+
+[% WRAPPER section  %]
+    test
+[% END %]
+
+[% DEBUG on  %]
+
+[% NEXT WHILE <selection>condition<caret></selection> %]
+
+[% LAST  %]
+
+[% RETURN  %]
+
+[% STOP  %]
+
+[% CLEAR  %]
+
+[% DEFAULT key = value  %]
+
+[% INSERT file  %]
+
+[% INCLUDE fileorblock  %]
+
+[% PROCESS fileorblock  %]
+
+[% CALL element  %]
+
+[% THROW type message  %]
+
+[% SET key = value  %]
+
+[% GET element  %]
+--------------------------------------------------------------------------------
+Caret offset: 131
+--------------------------------------------------------------------------------
+[% FILTER format(format)   %]
+    test
+[% END %]
+
+[% WRAPPER section  %]
+    test
+[% END %]
+
+[% DEBUG on  %]
+
+[% NEXT  %]
+
+[% LAST WHILE <selection>condition<caret></selection> %]
+
+[% RETURN  %]
+
+[% STOP  %]
+
+[% CLEAR  %]
+
+[% DEFAULT key = value  %]
+
+[% INSERT file  %]
+
+[% INCLUDE fileorblock  %]
+
+[% PROCESS fileorblock  %]
+
+[% CALL element  %]
+
+[% THROW type message  %]
+
+[% SET key = value  %]
+
+[% GET element  %]
+--------------------------------------------------------------------------------
+Caret offset: 146
+--------------------------------------------------------------------------------
+[% FILTER format(format)   %]
+    test
+[% END %]
+
+[% WRAPPER section  %]
+    test
+[% END %]
+
+[% DEBUG on  %]
+
+[% NEXT  %]
+
+[% LAST  %]
+
+[% RETURN WHILE <selection>condition<caret></selection> %]
+
+[% STOP  %]
+
+[% CLEAR  %]
+
+[% DEFAULT key = value  %]
+
+[% INSERT file  %]
+
+[% INCLUDE fileorblock  %]
+
+[% PROCESS fileorblock  %]
+
+[% CALL element  %]
+
+[% THROW type message  %]
+
+[% SET key = value  %]
+
+[% GET element  %]
+--------------------------------------------------------------------------------
+Caret offset: 159
+--------------------------------------------------------------------------------
+[% FILTER format(format)   %]
+    test
+[% END %]
+
+[% WRAPPER section  %]
+    test
+[% END %]
+
+[% DEBUG on  %]
+
+[% NEXT  %]
+
+[% LAST  %]
+
+[% RETURN  %]
+
+[% STOP WHILE <selection>condition<caret></selection> %]
+
+[% CLEAR  %]
+
+[% DEFAULT key = value  %]
+
+[% INSERT file  %]
+
+[% INCLUDE fileorblock  %]
+
+[% PROCESS fileorblock  %]
+
+[% CALL element  %]
+
+[% THROW type message  %]
+
+[% SET key = value  %]
+
+[% GET element  %]
+--------------------------------------------------------------------------------
+Caret offset: 173
+--------------------------------------------------------------------------------
+[% FILTER format(format)   %]
+    test
+[% END %]
+
+[% WRAPPER section  %]
+    test
+[% END %]
+
+[% DEBUG on  %]
+
+[% NEXT  %]
+
+[% LAST  %]
+
+[% RETURN  %]
+
+[% STOP  %]
+
+[% CLEAR WHILE <selection>condition<caret></selection> %]
+
+[% DEFAULT key = value  %]
+
+[% INSERT file  %]
+
+[% INCLUDE fileorblock  %]
+
+[% PROCESS fileorblock  %]
+
+[% CALL element  %]
+
+[% THROW type message  %]
+
+[% SET key = value  %]
+
+[% GET element  %]
+--------------------------------------------------------------------------------
+Caret offset: 221
+--------------------------------------------------------------------------------
+[% FILTER format(format)   %]
+    test
+[% END %]
+
+[% WRAPPER section  %]
+    test
+[% END %]
+
+[% DEBUG on  %]
+
+[% NEXT  %]
+
+[% LAST  %]
+
+[% RETURN  %]
+
+[% STOP  %]
+
+[% CLEAR  %]
+
+[% DEFAULT key = value  %]
+
+[% INSERT file WHILE <selection>condition<caret></selection> %]
+
+[% INCLUDE fileorblock  %]
+
+[% PROCESS fileorblock  %]
+
+[% CALL element  %]
+
+[% THROW type message  %]
+
+[% SET key = value  %]
+
+[% GET element  %]
+--------------------------------------------------------------------------------
+Caret offset: 298
+--------------------------------------------------------------------------------
+[% FILTER format(format)   %]
+    test
+[% END %]
+
+[% WRAPPER section  %]
+    test
+[% END %]
+
+[% DEBUG on  %]
+
+[% NEXT  %]
+
+[% LAST  %]
+
+[% RETURN  %]
+
+[% STOP  %]
+
+[% CLEAR  %]
+
+[% DEFAULT key = value  %]
+
+[% INSERT file  %]
+
+[% INCLUDE fileorblock  %]
+
+[% PROCESS fileorblock  %]
+
+[% CALL element WHILE <selection>condition<caret></selection> %]
+
+[% THROW type message  %]
+
+[% SET key = value  %]
+
+[% GET element  %]
+--------------------------------------------------------------------------------
+Caret offset: 349
+--------------------------------------------------------------------------------
+[% FILTER format(format)   %]
+    test
+[% END %]
+
+[% WRAPPER section  %]
+    test
+[% END %]
+
+[% DEBUG on  %]
+
+[% NEXT  %]
+
+[% LAST  %]
+
+[% RETURN  %]
+
+[% STOP  %]
+
+[% CLEAR  %]
+
+[% DEFAULT key = value  %]
+
+[% INSERT file  %]
+
+[% INCLUDE fileorblock  %]
+
+[% PROCESS fileorblock  %]
+
+[% CALL element  %]
+
+[% THROW type message  %]
+
+[% SET key = value WHILE <selection>condition<caret></selection> %]
+
+[% GET element  %]
+--------------------------------------------------------------------------------
+Caret offset: 369
+--------------------------------------------------------------------------------
+[% FILTER format(format)   %]
+    test
+[% END %]
+
+[% WRAPPER section  %]
+    test
+[% END %]
+
+[% DEBUG on  %]
+
+[% NEXT  %]
+
+[% LAST  %]
+
+[% RETURN  %]
+
+[% STOP  %]
+
+[% CLEAR  %]
+
+[% DEFAULT key = value  %]
+
+[% INSERT file  %]
+
+[% INCLUDE fileorblock  %]
+
+[% PROCESS fileorblock  %]
+
+[% CALL element  %]
+
+[% THROW type message  %]
+
+[% SET key = value  %]
+
+[% GET element WHILE <selection>condition<caret></selection> %]

@@ -25,6 +25,7 @@ import com.intellij.psi.PsiErrorElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.tt2.TemplateToolkitLanguage;
 import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
 import com.perl5.lang.tt2.lexer.TemplateToolkitSyntaxElements;
@@ -80,7 +81,7 @@ public abstract class TemplateToolkitTemplateContextType extends TemplateContext
 
   public static class Postfix extends TemplateToolkitTemplateContextType.Generic {
     public Postfix() {
-      this(TemplateToolkitLanguage.NAME + ".posfix", "Postfix");
+      this(TemplateToolkitLanguage.NAME + ".postfix", "Postfix");
     }
 
     public Postfix(String id, String presentableName) {
@@ -115,27 +116,7 @@ public abstract class TemplateToolkitTemplateContextType extends TemplateContext
 
     @Override
     protected boolean isInContext(@NotNull PsiElement element) {
-      if (element.getPrevSibling() != null) {
-        return false;
-      }
-
-      PsiElement parent = element.getParent();
-      if (!(parent instanceof PsiIdentifierExprImpl)) {
-        return false;
-      }
-
-      PsiElement grandParent = parent.getParent();
-      if (!(grandParent instanceof PsiGetDirectiveImpl)) {
-        return false;
-      }
-
-      PsiElement prevSignificantSibling = TemplateToolkitPsiUtil.getPrevSignificantSibling(grandParent);
-
-      if (prevSignificantSibling == null) {
-        return grandParent.getParent() instanceof PsiMacroContentImpl;
-      }
-
-      return TemplateToolkitSyntaxElements.CONSTRUCTION_PREFIX.contains(prevSignificantSibling.getNode().getElementType());
+      return PsiUtilCore.getElementType(element) == TT2_HTML;
     }
   }
 

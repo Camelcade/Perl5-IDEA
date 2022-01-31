@@ -1,0 +1,41 @@
+<caret>^^ caret at start
+
+# Caret in the middle
+<caret>
+
+%% GET foo
+# should have a line opener
+<caret>
+
+[% TRY myvar %]
+<caret>
+[% END %]
+
+[% TRY myvar %]
+<caret>
+[%   CATCH 'value1' %]
+[% END %]
+
+[% TRY myvar %]
+[%   CATCH 'value1' %]
+<caret>
+[% END %]
+
+
+%% TRY myvar
+<caret>
+%% END
+
+%% TRY myvar
+<caret>
+%%   CATCH 'value1'
+%% END
+
+%% TRY myvar
+%%   CATCH 'value1'
+<caret>
+%% END
+
+
+# Caret in the end
+<caret>

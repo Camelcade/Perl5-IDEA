@@ -1,0 +1,30 @@
+^^ caret at start
+
+# Caret in the middle
+
+
+%% GET foo
+# should have a line opener
+
+
+[% SWITCH myvar %]
+test
+[% END %]
+
+[% SWITCH myvar %]
+test
+[%   CASE 'value1' %]
+test
+[% END %]
+
+%% SWITCH myvar
+test
+%% END
+
+%% SWITCH myvar
+test
+%%   CASE 'value1'
+test
+%% END
+
+# Caret in the end

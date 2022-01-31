@@ -15,130 +15,166 @@
   -->
 
 <templateSet group="Template Toolkit 2">
-    <template name="GET" value="GET $VAR$" description="GET directive" toReformat="false" toShortenFQNames="true">
+    <template name="ge" value="$OPENTAG$ GET $VAR$ $CLOSETAG$" description="GET directive" toReformat="false" toShortenFQNames="true">
         <variable name="VAR" expression="&quot;element&quot;" defaultValue="" alwaysStopAt="true"/>
+        <variable name="OPENTAG" expression="tt2OpenMarker()" defaultValue="" alwaysStopAt="false"/>
+        <variable name="CLOSETAG" expression="tt2CloseMarker()" defaultValue="" alwaysStopAt="false"/>
         <context>
             <option name="Template Toolkit 2.command" value="true"/>
         </context>
     </template>
-    <template name="SET" value="SET $KEY$ = $VALUE$" description="SET directive" toReformat="false"
+    <template name="se" value="$OPENTAG$ SET $KEY$ = $VALUE$ $CLOSETAG$" description="SET directive" toReformat="false"
               toShortenFQNames="true">
         <variable name="KEY" expression="&quot;key&quot;" defaultValue="" alwaysStopAt="true"/>
         <variable name="VALUE" expression="&quot;value&quot;" defaultValue="" alwaysStopAt="true"/>
+        <variable name="OPENTAG" expression="tt2OpenMarker()" defaultValue="" alwaysStopAt="false"/>
+        <variable name="CLOSETAG" expression="tt2CloseMarker()" defaultValue="" alwaysStopAt="false"/>
         <context>
             <option name="Template Toolkit 2.command" value="true"/>
         </context>
     </template>
-    <template name="CALL" value="CALL $VAR$" description="CALL directive" toReformat="false" toShortenFQNames="true">
+    <template name="ca" value="$OPENTAG$ CALL $VAR$ $CLOSETAG$" description="CALL directive" toReformat="false" toShortenFQNames="true">
         <variable name="VAR" expression="&quot;element&quot;" defaultValue="" alwaysStopAt="true"/>
+        <variable name="OPENTAG" expression="tt2OpenMarker()" defaultValue="" alwaysStopAt="false"/>
+        <variable name="CLOSETAG" expression="tt2CloseMarker()" defaultValue="" alwaysStopAt="false"/>
         <context>
             <option name="Template Toolkit 2.command" value="true"/>
         </context>
     </template>
-    <template name="DEFAULT" value="DEFAULT $KEY$ = $VALUE$" description="DEFAULT directive" toReformat="false"
+    <template name="def" value="$OPENTAG$ DEFAULT $KEY$ = $VALUE$ $CLOSETAG$" description="DEFAULT directive" toReformat="false"
               toShortenFQNames="true">
         <variable name="KEY" expression="&quot;key&quot;" defaultValue="" alwaysStopAt="true"/>
         <variable name="VALUE" expression="&quot;value&quot;" defaultValue="" alwaysStopAt="true"/>
+        <variable name="OPENTAG" expression="tt2OpenMarker()" defaultValue="" alwaysStopAt="false"/>
+        <variable name="CLOSETAG" expression="tt2CloseMarker()" defaultValue="" alwaysStopAt="false"/>
         <context>
             <option name="Template Toolkit 2.command" value="true"/>
         </context>
     </template>
-    <template name="INSERT" value="INSERT $VAR$" description="INSERT directive" toReformat="false"
+    <template name="ins" value="$OPENTAG$ INSERT $VAR$ $CLOSETAG$" description="INSERT directive" toReformat="false"
               toShortenFQNames="true">
         <variable name="VAR" expression="&quot;file&quot;" defaultValue="" alwaysStopAt="true"/>
+        <variable name="OPENTAG" expression="tt2OpenMarker()" defaultValue="" alwaysStopAt="false"/>
+        <variable name="CLOSETAG" expression="tt2CloseMarker()" defaultValue="" alwaysStopAt="false"/>
         <context>
             <option name="Template Toolkit 2.command" value="true"/>
         </context>
     </template>
-    <template name="INCLUDE" value="INCLUDE $VAR$" description="INCLUDE directive" toReformat="false"
+    <template name="inc" value="$OPENTAG$ INCLUDE $VAR$ $CLOSETAG$" description="INCLUDE directive" toReformat="false"
               toShortenFQNames="true">
         <variable name="VAR" expression="&quot;fileorblock&quot;" defaultValue="" alwaysStopAt="true"/>
+        <variable name="OPENTAG" expression="tt2OpenMarker()" defaultValue="" alwaysStopAt="false"/>
+        <variable name="CLOSETAG" expression="tt2CloseMarker()" defaultValue="" alwaysStopAt="false"/>
         <context>
             <option name="Template Toolkit 2.command" value="true"/>
         </context>
     </template>
-    <template name="PROCESS" value="PROCESS $VAR$" description="PROCESS directive" toReformat="false"
+    <template name="pro" value="$OPENTAG$ PROCESS $VAR$ $CLOSETAG$" description="PROCESS directive" toReformat="false"
               toShortenFQNames="true">
         <variable name="VAR" expression="&quot;fileorblock&quot;" defaultValue="" alwaysStopAt="true"/>
+        <variable name="OPENTAG" expression="tt2OpenMarker()" defaultValue="" alwaysStopAt="false"/>
+        <variable name="CLOSETAG" expression="tt2CloseMarker()" defaultValue="" alwaysStopAt="false"/>
         <context>
             <option name="Template Toolkit 2.command" value="true"/>
         </context>
     </template>
-    <template name="END" value="END" description="END directive" toReformat="false" toShortenFQNames="true">
+    <template name="en" value="$OPENTAG$ END $CLOSETAG$" description="END directive" toReformat="false" toShortenFQNames="true">
+        <variable name="OPENTAG" expression="tt2OpenMarker()" defaultValue="" alwaysStopAt="false"/>
+        <variable name="CLOSETAG" expression="tt2CloseMarker()" defaultValue="" alwaysStopAt="false"/>
         <context>
             <option name="Template Toolkit 2.command" value="true"/>
         </context>
     </template>
-    <template name="USE" value="USE $VAR$" description="USE directive" toReformat="false" toShortenFQNames="true">
+    <template name="us" value="$OPENTAG$ USE $VAR$ $CLOSETAG$" description="USE directive" toReformat="false" toShortenFQNames="true">
         <variable name="VAR" expression="&quot;module&quot;" defaultValue="" alwaysStopAt="true"/>
+        <variable name="OPENTAG" expression="tt2OpenMarker()" defaultValue="" alwaysStopAt="false"/>
+        <variable name="CLOSETAG" expression="tt2CloseMarker()" defaultValue="" alwaysStopAt="false"/>
         <context>
             <option name="Template Toolkit 2.command" value="true"/>
         </context>
     </template>
-    <template name="MACRO" value="MACRO $VAR$ $VALUE$" description="MACRO directive" toReformat="false"
+    <template name="mr" value="$OPENTAG$ MACRO $VAR$ $VALUE$ $CLOSETAG$" description="MACRO directive" toReformat="false"
               toShortenFQNames="true">
         <variable name="VAR" expression="&quot;name&quot;" defaultValue="" alwaysStopAt="true"/>
         <variable name="VALUE" expression="&quot;directive&quot;" defaultValue="" alwaysStopAt="true"/>
+        <variable name="OPENTAG" expression="tt2OpenMarker()" defaultValue="" alwaysStopAt="false"/>
+        <variable name="CLOSETAG" expression="tt2CloseMarker()" defaultValue="" alwaysStopAt="false"/>
         <context>
             <option name="Template Toolkit 2.command" value="true"/>
         </context>
     </template>
-    <template name="THROW" value="THROW $type$ $message$" description="THROW directive" toReformat="false"
+    <template name="th" value="$OPENTAG$ THROW $type$ $message$ $CLOSETAG$" description="THROW directive" toReformat="false"
               toShortenFQNames="true">
         <variable name="type" expression="&quot;type&quot;" defaultValue="" alwaysStopAt="true"/>
         <variable name="message" expression="&quot;message&quot;" defaultValue="" alwaysStopAt="true"/>
+        <variable name="OPENTAG" expression="tt2OpenMarker()" defaultValue="" alwaysStopAt="false"/>
+        <variable name="CLOSETAG" expression="tt2CloseMarker()" defaultValue="" alwaysStopAt="false"/>
         <context>
             <option name="Template Toolkit 2.command" value="true"/>
         </context>
     </template>
-    <template name="NEXT" value="NEXT" description="NEXT directive" toReformat="false" toShortenFQNames="true">
+    <template name="ne" value="$OPENTAG$ NEXT $CLOSETAG$" description="NEXT directive" toReformat="false" toShortenFQNames="true">
+        <variable name="OPENTAG" expression="tt2OpenMarker()" defaultValue="" alwaysStopAt="false"/>
+        <variable name="CLOSETAG" expression="tt2CloseMarker()" defaultValue="" alwaysStopAt="false"/>
         <context>
             <option name="Template Toolkit 2.command" value="true"/>
         </context>
     </template>
-    <template name="LAST" value="LAST" description="LAST directive" toReformat="false" toShortenFQNames="true">
+    <template name="la" value="$OPENTAG$ LAST $CLOSETAG$" description="LAST directive" toReformat="false" toShortenFQNames="true">
+        <variable name="OPENTAG" expression="tt2OpenMarker()" defaultValue="" alwaysStopAt="false"/>
+        <variable name="CLOSETAG" expression="tt2CloseMarker()" defaultValue="" alwaysStopAt="false"/>
         <context>
             <option name="Template Toolkit 2.command" value="true"/>
         </context>
     </template>
-    <template name="RETURN" value="RETURN" description="RETURN directive" toReformat="false" toShortenFQNames="true">
+    <template name="re" value="$OPENTAG$ RETURN $CLOSETAG$" description="RETURN directive" toReformat="false" toShortenFQNames="true">
+        <variable name="OPENTAG" expression="tt2OpenMarker()" defaultValue="" alwaysStopAt="false"/>
+        <variable name="CLOSETAG" expression="tt2CloseMarker()" defaultValue="" alwaysStopAt="false"/>
         <context>
             <option name="Template Toolkit 2.command" value="true"/>
         </context>
     </template>
-    <template name="STOP" value="STOP" description="STOP directive" toReformat="false" toShortenFQNames="true">
+    <template name="st" value="$OPENTAG$ STOP $CLOSETAG$" description="STOP directive" toReformat="false" toShortenFQNames="true">
+        <variable name="OPENTAG" expression="tt2OpenMarker()" defaultValue="" alwaysStopAt="false"/>
+        <variable name="CLOSETAG" expression="tt2CloseMarker()" defaultValue="" alwaysStopAt="false"/>
         <context>
             <option name="Template Toolkit 2.command" value="true"/>
         </context>
     </template>
-    <template name="CLEAR" value="CLEAR" description="CLEAR directive" toReformat="false" toShortenFQNames="true">
+    <template name="cl" value="$OPENTAG$ CLEAR $CLOSETAG$" description="CLEAR directive" toReformat="false" toShortenFQNames="true">
+        <variable name="OPENTAG" expression="tt2OpenMarker()" defaultValue="" alwaysStopAt="false"/>
+        <variable name="CLOSETAG" expression="tt2CloseMarker()" defaultValue="" alwaysStopAt="false"/>
         <context>
             <option name="Template Toolkit 2.command" value="true"/>
         </context>
     </template>
-    <template name="META" value="META $KEY$ = $VALUE$" description="META directive" toReformat="false"
+    <template name="me" value="$OPENTAG$ META $KEY$ = $VALUE$ $CLOSETAG$" description="META directive" toReformat="false"
               toShortenFQNames="true">
         <variable name="KEY" expression="&quot;key&quot;" defaultValue="" alwaysStopAt="true"/>
         <variable name="VALUE" expression="&quot;value&quot;" defaultValue="" alwaysStopAt="true"/>
+        <variable name="OPENTAG" expression="tt2OpenMarker()" defaultValue="" alwaysStopAt="false"/>
+        <variable name="CLOSETAG" expression="tt2CloseMarker()" defaultValue="" alwaysStopAt="false"/>
         <context>
             <option name="Template Toolkit 2.command" value="true"/>
         </context>
     </template>
-    <template name="TAGS" value="TAGS $OPENTAG$ $CLOSETAG$" description="TAGS directive" toReformat="false"
+    <template name="ta" value="$OPENTAG$ TAGS $OPENTAG$ $CLOSETAG$ $CLOSETAG$" description="TAGS directive" toReformat="false"
               toShortenFQNames="true">
-        <variable name="OPENTAG" expression="&quot;[%&quot;" defaultValue="" alwaysStopAt="true"/>
-        <variable name="CLOSETAG" expression="&quot;%]&quot;" defaultValue="" alwaysStopAt="true"/>
+        <variable name="OPENTAG" expression="tt2OpenMarker()" defaultValue="" alwaysStopAt="false"/>
+        <variable name="CLOSETAG" expression="tt2CloseMarker()" defaultValue="" alwaysStopAt="false"/>
         <context>
             <option name="Template Toolkit 2.command" value="true"/>
         </context>
     </template>
-    <template name="DEBUG" value="DEBUG $VAR$" description="DEBUG directive" toReformat="false" toShortenFQNames="true">
+    <template name="deb" value="$OPENTAG$ DEBUG $VAR$ $CLOSETAG$" description="DEBUG directive" toReformat="false" toShortenFQNames="true">
         <variable name="VAR" expression="&quot;on&quot;" defaultValue="" alwaysStopAt="true"/>
+        <variable name="OPENTAG" expression="tt2OpenMarker()" defaultValue="" alwaysStopAt="false"/>
+        <variable name="CLOSETAG" expression="tt2CloseMarker()" defaultValue="" alwaysStopAt="false"/>
         <context>
             <option name="Template Toolkit 2.command" value="true"/>
         </context>
     </template>
-    <template name="WRAPPER" value="WRAPPER $NAME$ $CLOSETAG$&#10;    $END$&#10;$OPENTAG$ END"
+    <template name="wr" value="$OPENTAG$ WRAPPER $NAME$ $CLOSETAG$&#10;    $END$&#10;$OPENTAG$ END $CLOSETAG$"
               description="WRAPPER directive" toReformat="false" toShortenFQNames="true">
         <variable name="NAME" expression="&quot;section&quot;" defaultValue="" alwaysStopAt="true"/>
         <variable name="CLOSETAG" expression="tt2CloseMarker()" defaultValue="" alwaysStopAt="false"/>
@@ -147,7 +183,7 @@
             <option name="Template Toolkit 2.command" value="true"/>
         </context>
     </template>
-    <template name="BLOCK" value="BLOCK $NAME$ $CLOSETAG$&#10;    $END$&#10;$OPENTAG$ END" description="BLOCK directive"
+    <template name="bl" value="$OPENTAG$ BLOCK $NAME$ $CLOSETAG$&#10;    $END$&#10;$OPENTAG$ END $CLOSETAG$" description="BLOCK directive"
               toReformat="false" toShortenFQNames="true">
         <variable name="NAME" expression="&quot;name&quot;" defaultValue="" alwaysStopAt="true"/>
         <variable name="CLOSETAG" expression="tt2CloseMarker()" defaultValue="" alwaysStopAt="false"/>
@@ -156,7 +192,7 @@
             <option name="Template Toolkit 2.command" value="true"/>
         </context>
     </template>
-    <template name="IF" value="IF $NAME$ $CLOSETAG$&#10;    $END$&#10;$OPENTAG$ END" description="IF block directive"
+    <template name="if" value="$OPENTAG$ IF $NAME$ $CLOSETAG$&#10;    $END$&#10;$OPENTAG$ END $CLOSETAG$" description="IF block directive"
               toReformat="false" toShortenFQNames="true">
         <variable name="NAME" expression="&quot;condition&quot;" defaultValue="" alwaysStopAt="true"/>
         <variable name="CLOSETAG" expression="tt2CloseMarker()" defaultValue="" alwaysStopAt="false"/>
@@ -165,7 +201,7 @@
             <option name="Template Toolkit 2.command" value="true"/>
         </context>
     </template>
-    <template name="UNLESS" value="UNLESS $NAME$ $CLOSETAG$&#10;    $END$&#10;$OPENTAG$ END"
+    <template name="un" value="$OPENTAG$ UNLESS $NAME$ $CLOSETAG$&#10;    $END$&#10;$OPENTAG$ END $CLOSETAG$"
               description="UNLESS block directive" toReformat="false" toShortenFQNames="true">
         <variable name="NAME" expression="&quot;condition&quot;" defaultValue="" alwaysStopAt="true"/>
         <variable name="CLOSETAG" expression="tt2CloseMarker()" defaultValue="" alwaysStopAt="false"/>
@@ -174,7 +210,7 @@
             <option name="Template Toolkit 2.command" value="true"/>
         </context>
     </template>
-    <template name="SWITCH" value="SWITCH $NAME$ $CLOSETAG$&#10;    $END$&#10;$OPENTAG$ END"
+    <template name="sw" value="$OPENTAG$ SWITCH $NAME$ $CLOSETAG$&#10;    $END$&#10;$OPENTAG$ END $CLOSETAG$"
               description="SWITCH directive" toReformat="false" toShortenFQNames="true">
         <variable name="NAME" expression="&quot;value&quot;" defaultValue="" alwaysStopAt="true"/>
         <variable name="CLOSETAG" expression="tt2CloseMarker()" defaultValue="" alwaysStopAt="false"/>
@@ -183,7 +219,7 @@
             <option name="Template Toolkit 2.command" value="true"/>
         </context>
     </template>
-    <template name="FOREACH" value="FOREACH $ITERATOR$ IN $ITERABLE$ $CLOSETAG$&#10;    $END$&#10;$OPENTAG$ END"
+    <template name="fe" value="$OPENTAG$ FOREACH $ITERATOR$ IN $ITERABLE$ $CLOSETAG$&#10;    $END$&#10;$OPENTAG$ END $CLOSETAG$"
               description="FOREACH directive" toReformat="false" toShortenFQNames="true">
         <variable name="ITERATOR" expression="&quot;iterator&quot;" defaultValue="" alwaysStopAt="true"/>
         <variable name="ITERABLE" expression="&quot;iterable&quot;" defaultValue="" alwaysStopAt="true"/>
@@ -193,7 +229,7 @@
             <option name="Template Toolkit 2.command" value="true"/>
         </context>
     </template>
-    <template name="WHILE" value="WHILE $CONDITION$ $CLOSETAG$&#10;    $END$&#10;$OPENTAG$ END"
+    <template name="wh" value="$OPENTAG$ WHILE $CONDITION$ $CLOSETAG$&#10;    $END$&#10;$OPENTAG$ END $CLOSETAG$"
               description="WHILE directive" toReformat="false" toShortenFQNames="true">
         <variable name="CONDITION" expression="&quot;condition&quot;" defaultValue="" alwaysStopAt="true"/>
         <variable name="CLOSETAG" expression="tt2CloseMarker()" defaultValue="" alwaysStopAt="false"/>
@@ -202,7 +238,7 @@
             <option name="Template Toolkit 2.command" value="true"/>
         </context>
     </template>
-    <template name="FILTER" value="FILTER $NAME$ $CLOSETAG$&#10;    $END$&#10;$OPENTAG$ END"
+    <template name="fi" value="$OPENTAG$ FILTER $NAME$ $CLOSETAG$&#10;    $END$&#10;$OPENTAG$ END $CLOSETAG$"
               description="FILTER directive" toReformat="false" toShortenFQNames="true">
         <variable name="NAME" expression="tt2FilterName()" defaultValue="" alwaysStopAt="true"/>
         <variable name="CLOSETAG" expression="tt2CloseMarker()" defaultValue="" alwaysStopAt="false"/>
@@ -211,7 +247,7 @@
             <option name="Template Toolkit 2.command" value="true"/>
         </context>
     </template>
-    <template name="PERL" value="PERL $CLOSETAG$&#10;    $END$&#10;$OPENTAG$ END" description="PERL block"
+    <template name="pe" value="$OPENTAG$ PERL $CLOSETAG$&#10;    $END$&#10;$OPENTAG$ END $CLOSETAG$" description="PERL block"
               toReformat="false" toShortenFQNames="true">
         <variable name="CLOSETAG" expression="tt2CloseMarker()" defaultValue="" alwaysStopAt="false"/>
         <variable name="OPENTAG" expression="tt2OpenMarker()" defaultValue="" alwaysStopAt="false"/>
@@ -219,7 +255,7 @@
             <option name="Template Toolkit 2.command" value="true"/>
         </context>
     </template>
-    <template name="RAWPERL" value="RAWPERL $CLOSETAG$&#10;    $END$&#10;$OPENTAG$ END" description="RAWPERL block"
+    <template name="rp" value="$OPENTAG$ RAWPERL $CLOSETAG$&#10;    $END$&#10;$OPENTAG$ END $CLOSETAG$" description="RAWPERL block"
               toReformat="false" toShortenFQNames="true">
         <variable name="CLOSETAG" expression="tt2CloseMarker()" defaultValue="" alwaysStopAt="false"/>
         <variable name="OPENTAG" expression="tt2OpenMarker()" defaultValue="" alwaysStopAt="false"/>
@@ -227,7 +263,7 @@
             <option name="Template Toolkit 2.command" value="true"/>
         </context>
     </template>
-    <template name="TRY" value="TRY $CLOSETAG$&#10;    $END$&#10;$OPENTAG$ END" description="TRY block"
+    <template name="try" value="$OPENTAG$ TRY $CLOSETAG$&#10;    $END$&#10;$OPENTAG$ END $CLOSETAG$" description="TRY block"
               toReformat="false" toShortenFQNames="true">
         <variable name="CLOSETAG" expression="tt2CloseMarker()" defaultValue="" alwaysStopAt="false"/>
         <variable name="OPENTAG" expression="tt2OpenMarker()" defaultValue="" alwaysStopAt="false"/>
@@ -235,36 +271,46 @@
             <option name="Template Toolkit 2.command" value="true"/>
         </context>
     </template>
-    <template name="ELSIF" value="ELSIF $CONDITION$" description="ELSIF block" toReformat="false"
+    <template name="eli" value="$OPENTAG$ ELSIF $CONDITION$ $CLOSETAG$" description="ELSIF block" toReformat="false"
               toShortenFQNames="true">
         <variable name="CONDITION" expression="&quot;condition&quot;" defaultValue="" alwaysStopAt="true"/>
+        <variable name="OPENTAG" expression="tt2OpenMarker()" defaultValue="" alwaysStopAt="false"/>
+        <variable name="CLOSETAG" expression="tt2CloseMarker()" defaultValue="" alwaysStopAt="false"/>
         <context>
             <option name="Template Toolkit 2.command" value="false"/>
             <option name="Template Toolkit 2.command.elsif" value="true"/>
         </context>
     </template>
-    <template name="ELSE" value="ELSE" description="ELSE" toReformat="false" toShortenFQNames="true">
+    <template name="el" value="$OPENTAG$ ELSE $CLOSETAG$" description="ELSE" toReformat="false" toShortenFQNames="true">
+        <variable name="OPENTAG" expression="tt2OpenMarker()" defaultValue="" alwaysStopAt="false"/>
+        <variable name="CLOSETAG" expression="tt2CloseMarker()" defaultValue="" alwaysStopAt="false"/>
         <context>
             <option name="Template Toolkit 2.command" value="false"/>
             <option name="Template Toolkit 2.command.elsif" value="true"/>
         </context>
     </template>
-    <template name="CASE" value="CASE $CONDITION$" description="CASE branch" toReformat="false" toShortenFQNames="true">
+    <template name="cas" value="$OPENTAG$ CASE $CONDITION$ $CLOSETAG$" description="CASE branch" toReformat="false" toShortenFQNames="true">
         <variable name="CONDITION" expression="&quot;condition&quot;" defaultValue="" alwaysStopAt="true"/>
+        <variable name="OPENTAG" expression="tt2OpenMarker()" defaultValue="" alwaysStopAt="false"/>
+        <variable name="CLOSETAG" expression="tt2CloseMarker()" defaultValue="" alwaysStopAt="false"/>
         <context>
             <option name="Template Toolkit 2.command" value="false"/>
             <option name="Template Toolkit 2.command.case" value="true"/>
         </context>
     </template>
-    <template name="CATCH" value="CATCH $TYPE$" description="CATCH branch" toReformat="false" toShortenFQNames="true">
+    <template name="cat" value="$OPENTAG$ CATCH $TYPE$ $CLOSETAG$" description="CATCH branch" toReformat="false" toShortenFQNames="true">
         <variable name="TYPE" expression="&quot;type&quot;" defaultValue="" alwaysStopAt="true"/>
+        <variable name="OPENTAG" expression="tt2OpenMarker()" defaultValue="" alwaysStopAt="false"/>
+        <variable name="CLOSETAG" expression="tt2CloseMarker()" defaultValue="" alwaysStopAt="false"/>
         <context>
             <option name="Template Toolkit 2.command" value="false"/>
             <option name="Template Toolkit 2.command.elsif" value="false"/>
             <option name="Template Toolkit 2.command.catch" value="true"/>
         </context>
     </template>
-    <template name="FINAL" value="FINAL" description="FINAL branch" toReformat="false" toShortenFQNames="true">
+    <template name="fin" value="$OPENTAG$ FINAL $CLOSETAG$" description="FINAL branch" toReformat="false" toShortenFQNames="true">
+        <variable name="OPENTAG" expression="tt2OpenMarker()" defaultValue="" alwaysStopAt="false"/>
+        <variable name="CLOSETAG" expression="tt2CloseMarker()" defaultValue="" alwaysStopAt="false"/>
         <context>
             <option name="Template Toolkit 2.command" value="false"/>
             <option name="Template Toolkit 2.command.elsif" value="false"/>

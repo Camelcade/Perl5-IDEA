@@ -40,9 +40,6 @@ public class TemplateToolkitCloseTagMacro extends TemplateToolkitOpenTagMacro {
     if (tokenType == TT2_OUTLINE_TAG) {
       return new TextResult("");
     }
-    else if (tokenType == TT2_OPEN_TAG) {
       return new TextResult(TemplateToolkitSettings.getInstance(project).END_TAG);
-    }
-    return null;
   }
 }

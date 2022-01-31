@@ -1,0 +1,1541 @@
+--------------------------------------------------------------------------------
+Caret offset: 0
+--------------------------------------------------------------------------------
+<el><caret></el>^^ caret at start
+
+# Caret in the middle
+
+
+%% GET foo
+# should have a line opener
+
+
+[% IF myvar %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% END %]
+
+[% IF myvar %]
+
+[% ELSIF 'value1' %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% ELSIF 'value1' %]
+
+[% END %]
+
+[% IF myvar %]
+
+[% ELSE %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% ELSE %]
+
+[% END %]
+
+%% IF myvar
+
+%% END
+
+%% UNLESS myvar
+
+%% END
+
+%% IF myvar
+
+%% ELSIF 'value1'
+
+%% END
+
+%% UNLESS myvar
+
+%% ELSIF 'value1'
+
+%% END
+
+%% IF myvar
+
+%% ELSE
+
+%% END
+
+%% UNLESS myvar
+
+%% ELSE
+
+%% END
+
+# Caret in the end
+--------------------------------------------------------------------------------
+Caret offset: 41
+--------------------------------------------------------------------------------
+^^ caret at start
+
+# Caret in the middle
+<el><caret></el>
+
+%% GET foo
+# should have a line opener
+
+
+[% IF myvar %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% END %]
+
+[% IF myvar %]
+
+[% ELSIF 'value1' %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% ELSIF 'value1' %]
+
+[% END %]
+
+[% IF myvar %]
+
+[% ELSE %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% ELSE %]
+
+[% END %]
+
+%% IF myvar
+
+%% END
+
+%% UNLESS myvar
+
+%% END
+
+%% IF myvar
+
+%% ELSIF 'value1'
+
+%% END
+
+%% UNLESS myvar
+
+%% ELSIF 'value1'
+
+%% END
+
+%% IF myvar
+
+%% ELSE
+
+%% END
+
+%% UNLESS myvar
+
+%% ELSE
+
+%% END
+
+# Caret in the end
+--------------------------------------------------------------------------------
+Caret offset: 82
+--------------------------------------------------------------------------------
+^^ caret at start
+
+# Caret in the middle
+
+
+%% GET foo
+# should have a line opener
+<el><caret></el>
+
+[% IF myvar %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% END %]
+
+[% IF myvar %]
+
+[% ELSIF 'value1' %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% ELSIF 'value1' %]
+
+[% END %]
+
+[% IF myvar %]
+
+[% ELSE %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% ELSE %]
+
+[% END %]
+
+%% IF myvar
+
+%% END
+
+%% UNLESS myvar
+
+%% END
+
+%% IF myvar
+
+%% ELSIF 'value1'
+
+%% END
+
+%% UNLESS myvar
+
+%% ELSIF 'value1'
+
+%% END
+
+%% IF myvar
+
+%% ELSE
+
+%% END
+
+%% UNLESS myvar
+
+%% ELSE
+
+%% END
+
+# Caret in the end
+--------------------------------------------------------------------------------
+Caret offset: 99
+--------------------------------------------------------------------------------
+^^ caret at start
+
+# Caret in the middle
+
+
+%% GET foo
+# should have a line opener
+
+
+[% IF myvar %]
+[% ELSE %]<caret>
+[% END %]
+
+[% UNLESS myvar %]
+
+[% END %]
+
+[% IF myvar %]
+
+[% ELSIF 'value1' %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% ELSIF 'value1' %]
+
+[% END %]
+
+[% IF myvar %]
+
+[% ELSE %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% ELSE %]
+
+[% END %]
+
+%% IF myvar
+
+%% END
+
+%% UNLESS myvar
+
+%% END
+
+%% IF myvar
+
+%% ELSIF 'value1'
+
+%% END
+
+%% UNLESS myvar
+
+%% ELSIF 'value1'
+
+%% END
+
+%% IF myvar
+
+%% ELSE
+
+%% END
+
+%% UNLESS myvar
+
+%% ELSE
+
+%% END
+
+# Caret in the end
+--------------------------------------------------------------------------------
+Caret offset: 130
+--------------------------------------------------------------------------------
+^^ caret at start
+
+# Caret in the middle
+
+
+%% GET foo
+# should have a line opener
+
+
+[% IF myvar %]
+
+[% END %]
+
+[% UNLESS myvar %]
+[% ELSE %]<caret>
+[% END %]
+
+[% IF myvar %]
+
+[% ELSIF 'value1' %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% ELSIF 'value1' %]
+
+[% END %]
+
+[% IF myvar %]
+
+[% ELSE %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% ELSE %]
+
+[% END %]
+
+%% IF myvar
+
+%% END
+
+%% UNLESS myvar
+
+%% END
+
+%% IF myvar
+
+%% ELSIF 'value1'
+
+%% END
+
+%% UNLESS myvar
+
+%% ELSIF 'value1'
+
+%% END
+
+%% IF myvar
+
+%% ELSE
+
+%% END
+
+%% UNLESS myvar
+
+%% ELSE
+
+%% END
+
+# Caret in the end
+--------------------------------------------------------------------------------
+Caret offset: 157
+--------------------------------------------------------------------------------
+^^ caret at start
+
+# Caret in the middle
+
+
+%% GET foo
+# should have a line opener
+
+
+[% IF myvar %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% END %]
+
+[% IF myvar %]
+[% ELSE %]<caret>
+[% ELSIF 'value1' %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% ELSIF 'value1' %]
+
+[% END %]
+
+[% IF myvar %]
+
+[% ELSE %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% ELSE %]
+
+[% END %]
+
+%% IF myvar
+
+%% END
+
+%% UNLESS myvar
+
+%% END
+
+%% IF myvar
+
+%% ELSIF 'value1'
+
+%% END
+
+%% UNLESS myvar
+
+%% ELSIF 'value1'
+
+%% END
+
+%% IF myvar
+
+%% ELSE
+
+%% END
+
+%% UNLESS myvar
+
+%% ELSE
+
+%% END
+
+# Caret in the end
+--------------------------------------------------------------------------------
+Caret offset: 179
+--------------------------------------------------------------------------------
+^^ caret at start
+
+# Caret in the middle
+
+
+%% GET foo
+# should have a line opener
+
+
+[% IF myvar %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% END %]
+
+[% IF myvar %]
+
+[% ELSIF 'value1' %]
+[% ELSE %]<caret>
+[% END %]
+
+[% UNLESS myvar %]
+
+[% ELSIF 'value1' %]
+
+[% END %]
+
+[% IF myvar %]
+
+[% ELSE %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% ELSE %]
+
+[% END %]
+
+%% IF myvar
+
+%% END
+
+%% UNLESS myvar
+
+%% END
+
+%% IF myvar
+
+%% ELSIF 'value1'
+
+%% END
+
+%% UNLESS myvar
+
+%% ELSIF 'value1'
+
+%% END
+
+%% IF myvar
+
+%% ELSE
+
+%% END
+
+%% UNLESS myvar
+
+%% ELSE
+
+%% END
+
+# Caret in the end
+--------------------------------------------------------------------------------
+Caret offset: 210
+--------------------------------------------------------------------------------
+^^ caret at start
+
+# Caret in the middle
+
+
+%% GET foo
+# should have a line opener
+
+
+[% IF myvar %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% END %]
+
+[% IF myvar %]
+
+[% ELSIF 'value1' %]
+
+[% END %]
+
+[% UNLESS myvar %]
+[% ELSE %]<caret>
+[% ELSIF 'value1' %]
+
+[% END %]
+
+[% IF myvar %]
+
+[% ELSE %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% ELSE %]
+
+[% END %]
+
+%% IF myvar
+
+%% END
+
+%% UNLESS myvar
+
+%% END
+
+%% IF myvar
+
+%% ELSIF 'value1'
+
+%% END
+
+%% UNLESS myvar
+
+%% ELSIF 'value1'
+
+%% END
+
+%% IF myvar
+
+%% ELSE
+
+%% END
+
+%% UNLESS myvar
+
+%% ELSE
+
+%% END
+
+# Caret in the end
+--------------------------------------------------------------------------------
+Caret offset: 232
+--------------------------------------------------------------------------------
+^^ caret at start
+
+# Caret in the middle
+
+
+%% GET foo
+# should have a line opener
+
+
+[% IF myvar %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% END %]
+
+[% IF myvar %]
+
+[% ELSIF 'value1' %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% ELSIF 'value1' %]
+[% ELSE %]<caret>
+[% END %]
+
+[% IF myvar %]
+
+[% ELSE %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% ELSE %]
+
+[% END %]
+
+%% IF myvar
+
+%% END
+
+%% UNLESS myvar
+
+%% END
+
+%% IF myvar
+
+%% ELSIF 'value1'
+
+%% END
+
+%% UNLESS myvar
+
+%% ELSIF 'value1'
+
+%% END
+
+%% IF myvar
+
+%% ELSE
+
+%% END
+
+%% UNLESS myvar
+
+%% ELSE
+
+%% END
+
+# Caret in the end
+--------------------------------------------------------------------------------
+Caret offset: 259
+--------------------------------------------------------------------------------
+^^ caret at start
+
+# Caret in the middle
+
+
+%% GET foo
+# should have a line opener
+
+
+[% IF myvar %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% END %]
+
+[% IF myvar %]
+
+[% ELSIF 'value1' %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% ELSIF 'value1' %]
+
+[% END %]
+
+[% IF myvar %]
+[% ELSE %]<caret>
+[% ELSE %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% ELSE %]
+
+[% END %]
+
+%% IF myvar
+
+%% END
+
+%% UNLESS myvar
+
+%% END
+
+%% IF myvar
+
+%% ELSIF 'value1'
+
+%% END
+
+%% UNLESS myvar
+
+%% ELSIF 'value1'
+
+%% END
+
+%% IF myvar
+
+%% ELSE
+
+%% END
+
+%% UNLESS myvar
+
+%% ELSE
+
+%% END
+
+# Caret in the end
+--------------------------------------------------------------------------------
+Caret offset: 302
+--------------------------------------------------------------------------------
+^^ caret at start
+
+# Caret in the middle
+
+
+%% GET foo
+# should have a line opener
+
+
+[% IF myvar %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% END %]
+
+[% IF myvar %]
+
+[% ELSIF 'value1' %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% ELSIF 'value1' %]
+
+[% END %]
+
+[% IF myvar %]
+
+[% ELSE %]
+
+[% END %]
+
+[% UNLESS myvar %]
+[% ELSE %]<caret>
+[% ELSE %]
+
+[% END %]
+
+%% IF myvar
+
+%% END
+
+%% UNLESS myvar
+
+%% END
+
+%% IF myvar
+
+%% ELSIF 'value1'
+
+%% END
+
+%% UNLESS myvar
+
+%% ELSIF 'value1'
+
+%% END
+
+%% IF myvar
+
+%% ELSE
+
+%% END
+
+%% UNLESS myvar
+
+%% ELSE
+
+%% END
+
+# Caret in the end
+--------------------------------------------------------------------------------
+Caret offset: 338
+--------------------------------------------------------------------------------
+^^ caret at start
+
+# Caret in the middle
+
+
+%% GET foo
+# should have a line opener
+
+
+[% IF myvar %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% END %]
+
+[% IF myvar %]
+
+[% ELSIF 'value1' %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% ELSIF 'value1' %]
+
+[% END %]
+
+[% IF myvar %]
+
+[% ELSE %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% ELSE %]
+
+[% END %]
+
+%% IF myvar
+%% ELSE <caret>
+%% END
+
+%% UNLESS myvar
+
+%% END
+
+%% IF myvar
+
+%% ELSIF 'value1'
+
+%% END
+
+%% UNLESS myvar
+
+%% ELSIF 'value1'
+
+%% END
+
+%% IF myvar
+
+%% ELSE
+
+%% END
+
+%% UNLESS myvar
+
+%% ELSE
+
+%% END
+
+# Caret in the end
+--------------------------------------------------------------------------------
+Caret offset: 363
+--------------------------------------------------------------------------------
+^^ caret at start
+
+# Caret in the middle
+
+
+%% GET foo
+# should have a line opener
+
+
+[% IF myvar %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% END %]
+
+[% IF myvar %]
+
+[% ELSIF 'value1' %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% ELSIF 'value1' %]
+
+[% END %]
+
+[% IF myvar %]
+
+[% ELSE %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% ELSE %]
+
+[% END %]
+
+%% IF myvar
+
+%% END
+
+%% UNLESS myvar
+%% ELSE <caret>
+%% END
+
+%% IF myvar
+
+%% ELSIF 'value1'
+
+%% END
+
+%% UNLESS myvar
+
+%% ELSIF 'value1'
+
+%% END
+
+%% IF myvar
+
+%% ELSE
+
+%% END
+
+%% UNLESS myvar
+
+%% ELSE
+
+%% END
+
+# Caret in the end
+--------------------------------------------------------------------------------
+Caret offset: 384
+--------------------------------------------------------------------------------
+^^ caret at start
+
+# Caret in the middle
+
+
+%% GET foo
+# should have a line opener
+
+
+[% IF myvar %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% END %]
+
+[% IF myvar %]
+
+[% ELSIF 'value1' %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% ELSIF 'value1' %]
+
+[% END %]
+
+[% IF myvar %]
+
+[% ELSE %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% ELSE %]
+
+[% END %]
+
+%% IF myvar
+
+%% END
+
+%% UNLESS myvar
+
+%% END
+
+%% IF myvar
+%% ELSE <caret>
+%% ELSIF 'value1'
+
+%% END
+
+%% UNLESS myvar
+
+%% ELSIF 'value1'
+
+%% END
+
+%% IF myvar
+
+%% ELSE
+
+%% END
+
+%% UNLESS myvar
+
+%% ELSE
+
+%% END
+
+# Caret in the end
+--------------------------------------------------------------------------------
+Caret offset: 403
+--------------------------------------------------------------------------------
+^^ caret at start
+
+# Caret in the middle
+
+
+%% GET foo
+# should have a line opener
+
+
+[% IF myvar %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% END %]
+
+[% IF myvar %]
+
+[% ELSIF 'value1' %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% ELSIF 'value1' %]
+
+[% END %]
+
+[% IF myvar %]
+
+[% ELSE %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% ELSE %]
+
+[% END %]
+
+%% IF myvar
+
+%% END
+
+%% UNLESS myvar
+
+%% END
+
+%% IF myvar
+
+%% ELSIF 'value1'
+%% ELSE <caret>
+%% END
+
+%% UNLESS myvar
+
+%% ELSIF 'value1'
+
+%% END
+
+%% IF myvar
+
+%% ELSE
+
+%% END
+
+%% UNLESS myvar
+
+%% ELSE
+
+%% END
+
+# Caret in the end
+--------------------------------------------------------------------------------
+Caret offset: 428
+--------------------------------------------------------------------------------
+^^ caret at start
+
+# Caret in the middle
+
+
+%% GET foo
+# should have a line opener
+
+
+[% IF myvar %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% END %]
+
+[% IF myvar %]
+
+[% ELSIF 'value1' %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% ELSIF 'value1' %]
+
+[% END %]
+
+[% IF myvar %]
+
+[% ELSE %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% ELSE %]
+
+[% END %]
+
+%% IF myvar
+
+%% END
+
+%% UNLESS myvar
+
+%% END
+
+%% IF myvar
+
+%% ELSIF 'value1'
+
+%% END
+
+%% UNLESS myvar
+%% ELSE <caret>
+%% ELSIF 'value1'
+
+%% END
+
+%% IF myvar
+
+%% ELSE
+
+%% END
+
+%% UNLESS myvar
+
+%% ELSE
+
+%% END
+
+# Caret in the end
+--------------------------------------------------------------------------------
+Caret offset: 447
+--------------------------------------------------------------------------------
+^^ caret at start
+
+# Caret in the middle
+
+
+%% GET foo
+# should have a line opener
+
+
+[% IF myvar %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% END %]
+
+[% IF myvar %]
+
+[% ELSIF 'value1' %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% ELSIF 'value1' %]
+
+[% END %]
+
+[% IF myvar %]
+
+[% ELSE %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% ELSE %]
+
+[% END %]
+
+%% IF myvar
+
+%% END
+
+%% UNLESS myvar
+
+%% END
+
+%% IF myvar
+
+%% ELSIF 'value1'
+
+%% END
+
+%% UNLESS myvar
+
+%% ELSIF 'value1'
+%% ELSE <caret>
+%% END
+
+%% IF myvar
+
+%% ELSE
+
+%% END
+
+%% UNLESS myvar
+
+%% ELSE
+
+%% END
+
+# Caret in the end
+--------------------------------------------------------------------------------
+Caret offset: 468
+--------------------------------------------------------------------------------
+^^ caret at start
+
+# Caret in the middle
+
+
+%% GET foo
+# should have a line opener
+
+
+[% IF myvar %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% END %]
+
+[% IF myvar %]
+
+[% ELSIF 'value1' %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% ELSIF 'value1' %]
+
+[% END %]
+
+[% IF myvar %]
+
+[% ELSE %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% ELSE %]
+
+[% END %]
+
+%% IF myvar
+
+%% END
+
+%% UNLESS myvar
+
+%% END
+
+%% IF myvar
+
+%% ELSIF 'value1'
+
+%% END
+
+%% UNLESS myvar
+
+%% ELSIF 'value1'
+
+%% END
+
+%% IF myvar
+%% ELSE <caret>
+%% ELSE
+
+%% END
+
+%% UNLESS myvar
+
+%% ELSE
+
+%% END
+
+# Caret in the end
+--------------------------------------------------------------------------------
+Caret offset: 502
+--------------------------------------------------------------------------------
+^^ caret at start
+
+# Caret in the middle
+
+
+%% GET foo
+# should have a line opener
+
+
+[% IF myvar %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% END %]
+
+[% IF myvar %]
+
+[% ELSIF 'value1' %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% ELSIF 'value1' %]
+
+[% END %]
+
+[% IF myvar %]
+
+[% ELSE %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% ELSE %]
+
+[% END %]
+
+%% IF myvar
+
+%% END
+
+%% UNLESS myvar
+
+%% END
+
+%% IF myvar
+
+%% ELSIF 'value1'
+
+%% END
+
+%% UNLESS myvar
+
+%% ELSIF 'value1'
+
+%% END
+
+%% IF myvar
+
+%% ELSE
+
+%% END
+
+%% UNLESS myvar
+%% ELSE <caret>
+%% ELSE
+
+%% END
+
+# Caret in the end
+--------------------------------------------------------------------------------
+Caret offset: 539
+--------------------------------------------------------------------------------
+^^ caret at start
+
+# Caret in the middle
+
+
+%% GET foo
+# should have a line opener
+
+
+[% IF myvar %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% END %]
+
+[% IF myvar %]
+
+[% ELSIF 'value1' %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% ELSIF 'value1' %]
+
+[% END %]
+
+[% IF myvar %]
+
+[% ELSE %]
+
+[% END %]
+
+[% UNLESS myvar %]
+
+[% ELSE %]
+
+[% END %]
+
+%% IF myvar
+
+%% END
+
+%% UNLESS myvar
+
+%% END
+
+%% IF myvar
+
+%% ELSIF 'value1'
+
+%% END
+
+%% UNLESS myvar
+
+%% ELSIF 'value1'
+
+%% END
+
+%% IF myvar
+
+%% ELSE
+
+%% END
+
+%% UNLESS myvar
+
+%% ELSE
+
+%% END
+
+# Caret in the end
+<el><caret></el>

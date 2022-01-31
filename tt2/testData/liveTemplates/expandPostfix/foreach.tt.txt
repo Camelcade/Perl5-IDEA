@@ -1,0 +1,130 @@
+--------------------------------------------------------------------------------
+Caret offset: 25
+--------------------------------------------------------------------------------
+[% FILTER format(format) FOREACH <selection>iterator<caret></selection> IN iterable  %]
+    test
+[% END %]
+
+[% WRAPPER section  %]
+    test
+[% END %]
+
+[% DEFAULT key = value  %]
+
+[% INSERT file  %]
+
+[% INCLUDE fileorblock  %]
+
+[% PROCESS fileorblock  %]
+
+[% CALL element  %]
+
+[% THROW type message  %]
+
+[% SET key = value  %]
+
+[% GET element  %]
+--------------------------------------------------------------------------------
+Caret offset: 136
+--------------------------------------------------------------------------------
+[% FILTER format(format)   %]
+    test
+[% END %]
+
+[% WRAPPER section  %]
+    test
+[% END %]
+
+[% DEFAULT key = value  %]
+
+[% INSERT file FOREACH <selection>iterator<caret></selection> IN iterable %]
+
+[% INCLUDE fileorblock  %]
+
+[% PROCESS fileorblock  %]
+
+[% CALL element  %]
+
+[% THROW type message  %]
+
+[% SET key = value  %]
+
+[% GET element  %]
+--------------------------------------------------------------------------------
+Caret offset: 213
+--------------------------------------------------------------------------------
+[% FILTER format(format)   %]
+    test
+[% END %]
+
+[% WRAPPER section  %]
+    test
+[% END %]
+
+[% DEFAULT key = value  %]
+
+[% INSERT file  %]
+
+[% INCLUDE fileorblock  %]
+
+[% PROCESS fileorblock  %]
+
+[% CALL element FOREACH <selection>iterator<caret></selection> IN iterable %]
+
+[% THROW type message  %]
+
+[% SET key = value  %]
+
+[% GET element  %]
+--------------------------------------------------------------------------------
+Caret offset: 264
+--------------------------------------------------------------------------------
+[% FILTER format(format)   %]
+    test
+[% END %]
+
+[% WRAPPER section  %]
+    test
+[% END %]
+
+[% DEFAULT key = value  %]
+
+[% INSERT file  %]
+
+[% INCLUDE fileorblock  %]
+
+[% PROCESS fileorblock  %]
+
+[% CALL element  %]
+
+[% THROW type message  %]
+
+[% SET key = value FOREACH <selection>iterator<caret></selection> IN iterable %]
+
+[% GET element  %]
+--------------------------------------------------------------------------------
+Caret offset: 284
+--------------------------------------------------------------------------------
+[% FILTER format(format)   %]
+    test
+[% END %]
+
+[% WRAPPER section  %]
+    test
+[% END %]
+
+[% DEFAULT key = value  %]
+
+[% INSERT file  %]
+
+[% INCLUDE fileorblock  %]
+
+[% PROCESS fileorblock  %]
+
+[% CALL element  %]
+
+[% THROW type message  %]
+
+[% SET key = value  %]
+
+[% GET element FOREACH <selection>iterator<caret></selection> IN iterable %]

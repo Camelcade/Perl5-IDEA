@@ -1,0 +1,61 @@
+--------------------------------------------------------------------------------
+Caret offset: 0
+--------------------------------------------------------------------------------
+[% WRAPPER <selection>section<caret></selection> %]
+    
+[% END %]^^ caret at start
+
+# Caret in the middle
+
+
+%% GET foo
+# should have a line opener
+
+
+# Caret in the end
+--------------------------------------------------------------------------------
+Caret offset: 41
+--------------------------------------------------------------------------------
+^^ caret at start
+
+# Caret in the middle
+[% WRAPPER <selection>section<caret></selection> %]
+    
+[% END %]
+
+%% GET foo
+# should have a line opener
+
+
+# Caret in the end
+--------------------------------------------------------------------------------
+Caret offset: 82
+--------------------------------------------------------------------------------
+^^ caret at start
+
+# Caret in the middle
+
+
+%% GET foo
+# should have a line opener
+%% WRAPPER <selection>section<caret></selection> 
+    
+%% END 
+
+# Caret in the end
+--------------------------------------------------------------------------------
+Caret offset: 103
+--------------------------------------------------------------------------------
+^^ caret at start
+
+# Caret in the middle
+
+
+%% GET foo
+# should have a line opener
+
+
+# Caret in the end
+%% WRAPPER <selection>section<caret></selection> 
+    
+%% END 

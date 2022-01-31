@@ -15,45 +15,45 @@
   -->
 
 <templateSet group="Template Toolkit 2 Postfix">
-    <template name="IF" value="IF $COND$" description="IF condition" toReformat="false" toShortenFQNames="true">
+    <template name="if" value="IF $COND$" description="IF condition" toReformat="false" toShortenFQNames="true">
         <variable name="COND" expression="&quot;condition&quot;" defaultValue="" alwaysStopAt="true"/>
         <context>
-            <option name="Template Toolkit 2.posfix" value="true"/>
+            <option name="Template Toolkit 2.postfix" value="true"/>
         </context>
     </template>
-    <template name="UNLESS" value="IF $COND$" description="UNLESS condition" toReformat="false" toShortenFQNames="true">
+    <template name="un" value="IF $COND$" description="UNLESS condition" toReformat="false" toShortenFQNames="true">
         <variable name="COND" expression="&quot;condition&quot;" defaultValue="" alwaysStopAt="true"/>
         <context>
-            <option name="Template Toolkit 2.posfix" value="true"/>
+            <option name="Template Toolkit 2.postfix" value="true"/>
         </context>
     </template>
-    <template name="FILTER" value="FILTER $NAME$" description="FILTER directive" toReformat="false"
+    <template name="fi" value="FILTER $NAME$" description="FILTER directive" toReformat="false"
               toShortenFQNames="true">
         <variable name="NAME" expression="tt2FilterName()" defaultValue="" alwaysStopAt="true"/>
         <context>
-            <option name="Template Toolkit 2.posfix" value="true"/>
+            <option name="Template Toolkit 2.postfix" value="true"/>
         </context>
     </template>
-    <template name="FOREACH" value="FOREACH $ITERATOR$ IN $ITERABLE$" description="FOREACH directive" toReformat="false"
+    <template name="fe" value="FOREACH $ITERATOR$ IN $ITERABLE$" description="FOREACH directive" toReformat="false"
               toShortenFQNames="true">
         <variable name="ITERATOR" expression="&quot;iterator&quot;" defaultValue="" alwaysStopAt="true"/>
         <variable name="ITERABLE" expression="&quot;iterable&quot;" defaultValue="" alwaysStopAt="true"/>
         <context>
-            <option name="Template Toolkit 2.posfix" value="true"/>
+            <option name="Template Toolkit 2.postfix" value="true"/>
         </context>
     </template>
-    <template name="WHILE" value="WHILE $CONDITION$" description="WHILE directive" toReformat="false"
+    <template name="wh" value="WHILE $CONDITION$" description="WHILE directive" toReformat="false"
               toShortenFQNames="true">
         <variable name="CONDITION" expression="&quot;condition&quot;" defaultValue="" alwaysStopAt="true"/>
         <context>
-            <option name="Template Toolkit 2.posfix" value="true"/>
+            <option name="Template Toolkit 2.postfix" value="true"/>
         </context>
     </template>
-    <template name="WRAPPER" value="WRAPPER $NAME$" description="WRAPPER directive" toReformat="false"
+    <template name="wr" value="WRAPPER $NAME$" description="WRAPPER directive" toReformat="false"
               toShortenFQNames="true">
         <variable name="NAME" expression="&quot;name&quot;" defaultValue="" alwaysStopAt="true"/>
         <context>
-            <option name="Template Toolkit 2.posfix" value="true"/>
+            <option name="Template Toolkit 2.postfix" value="true"/>
         </context>
     </template>
 </templateSet>

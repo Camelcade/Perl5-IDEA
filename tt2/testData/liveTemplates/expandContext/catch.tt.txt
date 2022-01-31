@@ -1,0 +1,30 @@
+^^ caret at start
+
+# Caret in the middle
+
+
+%% GET foo
+# should have a line opener
+
+
+[% TRY myvar %]<available>
+test</available>
+[% END %]
+
+[% TRY myvar %]<available>
+test</available>
+[%   CATCH 'value1' %]<available>
+test</available>
+[% END %]
+
+%% TRY myvar
+<available>test</available>
+%% END
+
+%% TRY myvar
+<available>test</available>
+%%   CATCH 'value1'
+<available>test</available>
+%% END
+
+# Caret in the end

@@ -1,0 +1,8 @@
+^^ caret at start
+
+# Caret in the middle
+
+%% GET foo
+# should have a line opener
+
+# Caret in the end

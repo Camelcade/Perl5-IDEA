@@ -1,0 +1,75 @@
+<caret>^^ caret at start
+
+# Caret in the middle
+<caret>
+
+%% GET foo
+# should have a line opener
+<caret>
+
+[% IF myvar %]
+<caret>
+[% END %]
+
+[% UNLESS myvar %]
+<caret>
+[% END %]
+
+[% IF myvar %]
+<caret>
+[% ELSIF 'value1' %]
+<caret>
+[% END %]
+
+[% UNLESS myvar %]
+<caret>
+[% ELSIF 'value1' %]
+<caret>
+[% END %]
+
+[% IF myvar %]
+<caret>
+[% ELSE %]
+<caret>
+[% END %]
+
+[% UNLESS myvar %]
+<caret>
+[% ELSE %]
+<caret>
+[% END %]
+
+%% IF myvar
+<caret>
+%% END
+
+%% UNLESS myvar
+<caret>
+%% END
+
+%% IF myvar
+<caret>
+%% ELSIF 'value1'
+<caret>
+%% END
+
+%% UNLESS myvar
+<caret>
+%% ELSIF 'value1'
+<caret>
+%% END
+
+%% IF myvar
+<caret>
+%% ELSE
+<caret>
+%% END
+
+%% UNLESS myvar
+<caret>
+%% ELSE
+<caret>
+%% END
+
+# Caret in the end
+<caret>

@@ -1,0 +1,75 @@
+sometext^^ caret at start
+
+# Caret in the middle
+sometext
+
+%% GET foo
+# should have a line opener
+sometext
+
+[% IF myvar %]<available>
+sometext</available>
+[% END %]
+
+[% UNLESS myvar %]<available>
+sometext</available>
+[% END %]
+
+[% IF myvar %]<available>
+sometext</available>
+[% ELSIF 'value1' %]<available>
+sometext</available>
+[% END %]
+
+[% UNLESS myvar %]<available>
+sometext</available>
+[% ELSIF 'value1' %]<available>
+sometext</available>
+[% END %]
+
+[% IF myvar %]<available>
+sometext</available>
+[% ELSE %]
+sometext
+[% END %]
+
+[% UNLESS myvar %]<available>
+sometext</available>
+[% ELSE %]
+sometext
+[% END %]
+
+%% IF myvar
+<available>sometext</available>
+%% END
+
+%% UNLESS myvar
+<available>sometext</available>
+%% END
+
+%% IF myvar
+<available>sometext</available>
+%% ELSIF 'value1'
+<available>sometext</available>
+%% END
+
+%% UNLESS myvar
+<available>sometext</available>
+%% ELSIF 'value1'
+<available>sometext</available>
+%% END
+
+%% IF myvar
+<available>sometext</available>
+%% ELSE
+sometext
+%% END
+
+%% UNLESS myvar
+<available>sometext</available>
+%% ELSE
+sometext
+%% END
+
+# Caret in the end
+sometext
