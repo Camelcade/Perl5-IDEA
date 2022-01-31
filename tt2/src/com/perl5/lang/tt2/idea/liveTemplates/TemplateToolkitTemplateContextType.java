@@ -43,7 +43,7 @@ public abstract class TemplateToolkitTemplateContextType extends TemplateContext
     super(id, presentableName, baseContextType);
   }
 
-  protected abstract boolean isInContext(PsiElement element);
+  protected abstract boolean isInContext(@NotNull PsiElement element);
 
   @Override
   public boolean isInContext(@NotNull TemplateActionContext templateActionContext) {
@@ -52,18 +52,15 @@ public abstract class TemplateToolkitTemplateContextType extends TemplateContext
     FileViewProvider viewProvider = file.getViewProvider();
     PsiFile ttFile = viewProvider.getPsi(TemplateToolkitLanguage.INSTANCE);
 
-    if (ttFile != null) {
-      PsiElement element = viewProvider.findElementAt(offset, TemplateToolkitLanguage.INSTANCE);
-      if (element == null && offset > 0) {
-        element = viewProvider.findElementAt(offset - 1, TemplateToolkitLanguage.INSTANCE);
-      }
-
-      if (element != null && element.getLanguage() == TemplateToolkitLanguage.INSTANCE) {
-        return isInContext(element);
-      }
+    if (ttFile == null) {
+      return false;
+    }
+    PsiElement element = viewProvider.findElementAt(offset, TemplateToolkitLanguage.INSTANCE);
+    if (element == null && offset > 0) {
+      element = viewProvider.findElementAt(offset - 1, TemplateToolkitLanguage.INSTANCE);
     }
 
-    return false;
+    return element != null && element.getLanguage() == TemplateToolkitLanguage.INSTANCE && isInContext(element);
   }
 
   public static class Generic extends TemplateToolkitTemplateContextType {
@@ -76,7 +73,7 @@ public abstract class TemplateToolkitTemplateContextType extends TemplateContext
     }
 
     @Override
-    protected boolean isInContext(PsiElement element) {
+    protected boolean isInContext(@NotNull PsiElement element) {
       return false;
     }
   }
@@ -91,11 +88,7 @@ public abstract class TemplateToolkitTemplateContextType extends TemplateContext
     }
 
     @Override
-    protected boolean isInContext(PsiElement element) {
-      if (element == null) {
-        return false;
-      }
-
+    protected boolean isInContext(@NotNull PsiElement element) {
       IElementType tokenType = element.getNode().getElementType();
       if (tokenType != TT2_IDENTIFIER) {
         return false;
@@ -121,7 +114,7 @@ public abstract class TemplateToolkitTemplateContextType extends TemplateContext
     }
 
     @Override
-    protected boolean isInContext(PsiElement element) {
+    protected boolean isInContext(@NotNull PsiElement element) {
       if (element.getPrevSibling() != null) {
         return false;
       }
@@ -156,7 +149,7 @@ public abstract class TemplateToolkitTemplateContextType extends TemplateContext
     }
 
     @Override
-    protected boolean isInContext(PsiElement element) {
+    protected boolean isInContext(@NotNull PsiElement element) {
       return super.isInContext(element) &&
              (PsiTreeUtil.getParentOfType(element, PsiIfBranchImpl.class) != null ||
               PsiTreeUtil.getParentOfType(element, PsiUnlessBranchImpl.class) != null ||
@@ -174,7 +167,7 @@ public abstract class TemplateToolkitTemplateContextType extends TemplateContext
     }
 
     @Override
-    protected boolean isInContext(PsiElement element) {
+    protected boolean isInContext(@NotNull PsiElement element) {
       return super.isInContext(element) && PsiTreeUtil.getParentOfType(element, PsiSwitchBlockImpl.class) != null;
     }
   }
@@ -189,7 +182,7 @@ public abstract class TemplateToolkitTemplateContextType extends TemplateContext
     }
 
     @Override
-    protected boolean isInContext(PsiElement element) {
+    protected boolean isInContext(@NotNull PsiElement element) {
       return super.isInContext(element) &&
              (PsiTreeUtil.getParentOfType(element, PsiTryBranchImpl.class) != null ||
               PsiTreeUtil.getParentOfType(element, PsiCatchBranchImpl.class) != null);
