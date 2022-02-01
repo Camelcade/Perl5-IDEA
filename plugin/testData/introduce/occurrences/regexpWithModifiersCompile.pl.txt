@@ -1,0 +1,3 @@
+<occurrence>qr/PATTERN/msixpodualn</occurrence>;
+m/PATTERN/msixpodualngc;
+s/<occurrence>PATTERN</occurrence>/string/msixpodualngcer;

@@ -1,0 +1,3 @@
+PsiPerlPerlRegexImpl(Perl5: PERL_REGEX) at 51 in regexpWithModifiersReplace.pl
+    (0,7)
+    'PATTERN'

@@ -53,22 +53,37 @@ public class PerlIntroduceVariableFromCaretTargetsTest extends PerlLightTestCase
   public void testHereDocOpener() {doTest();}
 
   @Test
-  public void testHereDocOpenerInSequence() {doTest();}
+  public void testHereDocOpenerInSequence() { doTest(); }
 
   @Test
-  public void testQwElementInList() {doTest();}
+  public void testQwElementInList() { doTest(); }
 
   @Test
-  public void testPackageExpr() {doTest();}
+  public void testPackageExpr() { doTest(); }
 
   @Test
-  public void testRegexpCompileEmpty() {doTest();}
+  public void testRegexpWithModifiersCompile() {
+    doTest();
+  }
 
   @Test
-  public void testRegexpCompileNotEmpty() {doTest();}
+  public void testRegexpWithModifiersMatch() {
+    doTest();
+  }
 
   @Test
-  public void testRegexpCompileVariable() {doTest();}
+  public void testRegexpWithModifiersReplace() {
+    doTest();
+  }
+
+  @Test
+  public void testRegexpCompileEmpty() { doTest(); }
+
+  @Test
+  public void testRegexpCompileNotEmpty() { doTest(); }
+
+  @Test
+  public void testRegexpCompileVariable() { doTest(); }
 
   @Test
   public void testRegexpMatchExplicitEmpty() {doTest();}

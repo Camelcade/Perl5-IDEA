@@ -30,16 +30,31 @@ public class PerlIntroduceVariableOccurrencesTest extends PerlLightTestCase {
   }
 
   @Test
-  public void testRegexExpr() {doTest();}
+  public void testRegexExpr() { doTest(); }
 
   @Test
-  public void testAddMulti() {doTest();}
+  public void testRegexpWithModifiersCompile() {
+    doTest();
+  }
 
   @Test
-  public void testAddMultiFromPart() {doTest();}
+  public void testRegexpWithModifiersMatch() {
+    doTest();
+  }
 
   @Test
-  public void testAddMultiFromPartEnd() {doTest();}
+  public void testRegexpWithModifiersReplace() {
+    doTest();
+  }
+
+  @Test
+  public void testAddMulti() { doTest(); }
+
+  @Test
+  public void testAddMultiFromPart() { doTest(); }
+
+  @Test
+  public void testAddMultiFromPartEnd() { doTest(); }
 
   @Test
   public void testAddMultiFromPartWrong() {doTest();}

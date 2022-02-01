@@ -1,0 +1,3 @@
+PsiPerlCompileRegexImpl(Perl5: COMPILE_REGEX) at 0 in regexpWithModifiersCompile.pl
+    (0,22)
+    'qr/PATTERN/msixpodualn'

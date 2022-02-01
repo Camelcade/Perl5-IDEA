@@ -20,6 +20,7 @@ package introduce;
 import base.PerlLightTestCase;
 import com.intellij.application.options.CodeStyle;
 import com.perl5.lang.perl.PerlLanguage;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static com.intellij.psi.codeStyle.CommonCodeStyleSettings.WRAP_AS_NEEDED;
@@ -63,22 +64,38 @@ public class PerlIntroduceVariableTest extends PerlLightTestCase {
   public void testDo() {doTest();}
 
   @Test
-  public void testEval() {doTest();}
+  public void testEval() { doTest(); }
 
   @Test
-  public void testAnonSub() {doTest();}
+  public void testAnonSub() { doTest(); }
 
   @Test
-  public void testAnonSubCall() {doTest();}
+  public void testAnonSubCall() { doTest(); }
 
   @Test
-  public void testRegexExprMatch() {doTest();}
+  public void testRegexpWithModifiersCompile() {
+    doTest();
+  }
+
+  @Ignore("This need to be fixed")
+  @Test
+  public void testRegexpWithModifiersMatch() {
+    doTest();
+  }
 
   @Test
-  public void testRegexExprReplace() {doTest();}
+  public void testRegexpWithModifiersReplace() {
+    doTest();
+  }
 
   @Test
-  public void testRegexExprTr() {doTest();}
+  public void testRegexExprMatch() { doTest(); }
+
+  @Test
+  public void testRegexExprReplace() { doTest(); }
+
+  @Test
+  public void testRegexExprTr() { doTest(); }
 
   @Test
   public void testRegexExprY() {doTest();}
