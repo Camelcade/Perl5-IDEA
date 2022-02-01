@@ -30,6 +30,8 @@ import com.intellij.execution.testframework.sm.runner.SMTestProxy;
 import com.intellij.execution.testframework.sm.runner.ui.SMTestRunnerResultsForm;
 import com.intellij.execution.ui.ExecutionConsole;
 import com.intellij.execution.ui.RunContentDescriptor;
+import com.intellij.notification.Notification;
+import com.intellij.notification.Notifications;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
@@ -589,5 +591,16 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
     var openedVirtualFile = editors[0].getFile();
     assertNotNull(openedVirtualFile);
     return openedVirtualFile;
+  }
+
+  protected @NotNull Ref<Notification> createNotificationSink() {
+    Ref<Notification> notificationRef = Ref.create();
+    getProject().getMessageBus().connect(myPerlLightTestCaseDisposable).subscribe(Notifications.TOPIC, new Notifications() {
+      @Override
+      public void notify(@NotNull Notification notification) {
+        notificationRef.set(notification);
+      }
+    });
+    return notificationRef;
   }
 }

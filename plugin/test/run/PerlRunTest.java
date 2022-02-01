@@ -23,13 +23,11 @@ import com.intellij.execution.process.CapturingProcessAdapter;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.ui.RunContentDescriptor;
 import com.intellij.notification.Notification;
-import com.intellij.notification.Notifications;
 import com.intellij.openapi.util.Ref;
 import com.intellij.testFramework.UsefulTestCase;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import com.pty4j.util.Pair;
-import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
@@ -71,16 +69,9 @@ public class PerlRunTest extends PerlPlatformTestCase {
   @Test
   public void testMissingPackageNotification() {
     copyDirToModule("missingpackage");
-    Ref<Notification> notificationRef = Ref.create();
-    getProject().getMessageBus().connect(myPerlLightTestCaseDisposable).subscribe(Notifications.TOPIC, new Notifications() {
-      @Override
-      public void notify(@NotNull Notification notification) {
-        notificationRef.set(notification);
-      }
-    });
-
+    Ref<Notification> notificationSink = createNotificationSink();
     runConfigurationAndWait(createOnlyRunConfiguration("simplescript.pl"));
-    var notification = notificationRef.get();
+    var notification = notificationSink.get();
     assertNotNull(notification);
     assertEquals(PerlBundle.message("perl.missing.library.notification"), notification.getGroupId());
     assertEquals(PerlBundle.message("perl.missing.library.notification.title", "Some::Missing::Module"), notification.getTitle());
