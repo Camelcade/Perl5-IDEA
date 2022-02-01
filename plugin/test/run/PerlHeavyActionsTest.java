@@ -11,6 +11,7 @@ import com.intellij.testFramework.LightVirtualFile;
 import com.intellij.testFramework.UsefulTestCase;
 import com.intellij.testFramework.fixtures.CodeInsightTestUtil;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
+import com.intellij.util.concurrency.Semaphore;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.actions.PerlDeparseFileAction;
 import com.perl5.lang.perl.idea.actions.PerlFormatWithPerlTidyAction;
@@ -51,6 +52,15 @@ public class PerlHeavyActionsTest extends PerlPlatformTestCase {
 
   @Test
   public void testDeparseXSubsFile() {
+    var notificationSink = createNotificationSink();
+    rescanXSubsSynchronously();
+    var notification = notificationSink.get();
+    assertNotNull("Expected notification about not up to date xsubs", notification);
+    assertEquals("Perl5 XSubs Deparser", notification.getGroupId());
+    assertEquals("XSubs Change Detected", notification.getTitle());
+    assertEquals("XSubs declarations file is absent or outdated.", notification.getContent());
+    assertSize(1, notification.getActions());
+
     runActionWithTestEvent(new PerlRegenerateXSubsAction());
 
     CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
@@ -60,7 +70,18 @@ public class PerlHeavyActionsTest extends PerlPlatformTestCase {
     moduleRoot.refresh(false, false);
     var deparsedFile = moduleRoot.findFileByRelativePath(PerlXSubsState.DEPARSED_FILE_NAME);
     assertNotNull(deparsedFile);
+
     CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
+    notificationSink.set(null);
+    rescanXSubsSynchronously();
+    assertNull("XSubs are expected be up to date, got notification: " + notification, notificationSink.get());
+  }
+
+  private void rescanXSubsSynchronously() {
+    var xSubsState = PerlXSubsState.getInstance(getProject());
+    var semaphore = new Semaphore(1);
+    xSubsState.rescanFiles(semaphore::up);
+    waitWithEventsDispatching("Rescanning hasn't finished in time", semaphore::isUp);
   }
 
   @Test

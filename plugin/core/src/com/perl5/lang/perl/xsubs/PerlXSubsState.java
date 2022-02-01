@@ -125,7 +125,7 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
     return result;
   }
 
-  public void rescanFiles() {
+  public void rescanFiles(@Nullable Runnable callback) {
     ProgressIndicatorUtils.scheduleWithWriteActionPriority(new ReadTask() {
       @Override
       public void computeInReadAction(@NotNull ProgressIndicator indicator) throws ProcessCanceledException {
@@ -174,11 +174,14 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
             })
           );
         }
+        if (callback != null) {
+          callback.run();
+        }
       }
 
       @Override
       public void onCanceled(@NotNull ProgressIndicator indicator) {
-        rescanFiles();
+        rescanFiles(null);
       }
     });
   }
