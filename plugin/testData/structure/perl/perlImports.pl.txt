@@ -1,36 +1,48 @@
 perlImports.pl in ; /perl5classic.png -> Perl5 at 0 in perlImports.pl
+SortKey: perlImports.pl
 Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
   Import in perlImports.pl; /package_gutter_icon.png; null -> PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Import at 0 in perlImports.pl
+  SortKey: Import
   Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
     multiconst1 in MyTest::Some::Package; /constant_gutter_icon.png; NOT_USED_ELEMENT_ATTRIBUTES -> PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@MyTest::Some::Package::multiconst1; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 307 in Package.pm
+    SortKey: multiconst1
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED
 
     somesub1 in MyTest::Some::Package; /subroutine_gutter_icon.png; NOT_USED_ELEMENT_ATTRIBUTES -> PsiPerlSubDefinitionImpl(SUB_DEFINITION)@MyTest::Some::Package::somesub1 at 199 in Package.pm
+    SortKey: somesub1
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED
 
     someconst1 in MyTest::Some::Package; /constant_gutter_icon.png; NOT_USED_ELEMENT_ATTRIBUTES -> PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@MyTest::Some::Package::someconst1; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 244 in Package.pm
+    SortKey: someconst1
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED
 
   ImportOk in perlImports.pl; /package_gutter_icon.png; null -> PsiPerlNamespaceDefinitionImpl(NAMESPACE)@ImportOk at 45 in perlImports.pl
+  SortKey: ImportOk
   Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
     somesub1 in MyTest::Some::Package; /subroutine_gutter_icon.png; NOT_USED_ELEMENT_ATTRIBUTES -> PsiPerlSubDefinitionImpl(SUB_DEFINITION)@MyTest::Some::Package::somesub1 at 199 in Package.pm
+    SortKey: somesub1
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED
 
     someconst1 in MyTest::Some::Package; /constant_gutter_icon.png; NOT_USED_ELEMENT_ATTRIBUTES -> PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@MyTest::Some::Package::someconst1; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 244 in Package.pm
+    SortKey: someconst1
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED
 
     multiconst1 in MyTest::Some::Package; /constant_gutter_icon.png; NOT_USED_ELEMENT_ATTRIBUTES -> PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@MyTest::Some::Package::multiconst1; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 307 in Package.pm
+    SortKey: multiconst1
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED
 
     somesub2 in MyTest::Some::Package; /subroutine_gutter_icon.png; NOT_USED_ELEMENT_ATTRIBUTES -> PsiPerlSubDefinitionImpl(SUB_DEFINITION)@MyTest::Some::Package::somesub2 at 215 in Package.pm
+    SortKey: somesub2
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED
 
     SOMECONST2 in MyTest::Some::Package; /constant_gutter_icon.png; NOT_USED_ELEMENT_ATTRIBUTES -> PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@MyTest::Some::Package::SOMECONST2; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 274 in Package.pm
+    SortKey: SOMECONST2
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED
 
     MULTICONST2 in MyTest::Some::Package; /constant_gutter_icon.png; NOT_USED_ELEMENT_ATTRIBUTES -> PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@MyTest::Some::Package::MULTICONST2; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 326 in Package.pm
+    SortKey: MULTICONST2
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED
 

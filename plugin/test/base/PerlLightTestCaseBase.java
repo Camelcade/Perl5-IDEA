@@ -1520,6 +1520,10 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     }
     sb.append("\n");
 
+    if (currentElement instanceof SortableTreeElement) {
+      sb.append(prefix).append("SortKey: ").append(((SortableTreeElement)currentElement).getAlphaSortKey()).append("\n");
+    }
+
     // filters
     if (structureViewModel.getFilters().length > 0) {
       List<String> passedFilters = new ArrayList<>();
