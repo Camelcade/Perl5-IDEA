@@ -1,0 +1,68 @@
+test.pl in ; /perl5classic.png -> Perl5 at 0 in test.pl
+SortKey: test.pl
+Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
+
+  MyChild in test.pl; /package_gutter_icon.png; null -> PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MyChild at 0 in test.pl
+  SortKey: MyChild
+  Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
+
+    parent_declaration in MyParent.pm; /sub_declaration_gutter_icon.png; NOT_USED_ELEMENT_ATTRIBUTES -> PsiPerlSubDeclarationImpl(SUB_DECLARATION)@MyParent::parent_declaration at 19 in MyParent.pm
+    SortKey: parent_declaration
+    Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_IMPORTED
+
+    parent_func() in MyParent; /subroutine_gutter_icon.png; NOT_USED_ELEMENT_ATTRIBUTES -> PsiPerlFuncDefinitionImpl(FUNC_DEFINITION)@MyParent::parent_func at 92 in MyParent.pm
+    SortKey: parent_func
+    Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_IMPORTED
+
+    parent_definition() in MyParent; /subroutine_gutter_icon.png; NOT_USED_ELEMENT_ATTRIBUTES -> PsiPerlSubDefinitionImpl(SUB_DEFINITION)@MyParent::parent_definition at 43 in MyParent.pm
+    SortKey: parent_definition
+    Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_IMPORTED
+
+    parent_method() in MyParent; /method_gutter_icon.png; NOT_USED_ELEMENT_ATTRIBUTES -> PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)@MyParent::parent_method at 67 in MyParent.pm
+    SortKey: parent_method
+    Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_DECLARATIONS, SHOW_IMPORTED
+
+    exported_scalar in MyExporter; /scalar_gutter_icon.png; NOT_USED_ELEMENT_ATTRIBUTES -> PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 214 in MyExporter.pm
+    SortKey: exported_scalar
+    Passed by filters: SHOW_POD, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED
+
+    exported_array in MyExporter; /array_gutter_icon.png; NOT_USED_ELEMENT_ATTRIBUTES -> PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 232 in MyExporter.pm
+    SortKey: exported_array
+    Passed by filters: SHOW_POD, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED
+
+    exported_hash in MyExporter; /hash_gutter_icon.png; NOT_USED_ELEMENT_ATTRIBUTES -> PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 249 in MyExporter.pm
+    SortKey: exported_hash
+    Passed by filters: SHOW_POD, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED
+
+    exported_definition in MyExporter; /subroutine_gutter_icon.png; NOT_USED_ELEMENT_ATTRIBUTES -> PsiPerlSubDefinitionImpl(SUB_DEFINITION)@MyExporter::exported_definition at 292 in MyExporter.pm
+    SortKey: exported_definition
+    Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED
+
+    exported_func in MyExporter; /subroutine_gutter_icon.png; NOT_USED_ELEMENT_ATTRIBUTES -> PsiPerlFuncDefinitionImpl(FUNC_DEFINITION)@MyExporter::exported_func at 347 in MyExporter.pm
+    SortKey: exported_func
+    Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED
+
+    exported_method in MyExporter; /method_gutter_icon.png; NOT_USED_ELEMENT_ATTRIBUTES -> PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)@MyExporter::exported_method at 319 in MyExporter.pm
+    SortKey: exported_method
+    Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_DECLARATIONS, SHOW_INHERITED
+
+    exported_declaration in MyExporter.pm; /sub_declaration_gutter_icon.png; NOT_USED_ELEMENT_ATTRIBUTES -> PsiPerlSubDeclarationImpl(SUB_DECLARATION)@MyExporter::exported_declaration at 266 in MyExporter.pm
+    SortKey: exported_declaration
+    Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_INHERITED
+
+    child_declaration in test.pl; /sub_declaration_gutter_icon.png; null -> PsiPerlSubDeclarationImpl(SUB_DECLARATION)@MyChild::child_declaration at 59 in test.pl
+    SortKey: child_declaration
+    Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_INHERITED, SHOW_IMPORTED
+
+    child_definition() in test.pl; /subroutine_gutter_icon.png; null -> PsiPerlSubDefinitionImpl(SUB_DEFINITION)@MyChild::child_definition at 82 in test.pl
+    SortKey: child_definition
+    Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
+
+    child_method() in test.pl; /method_gutter_icon.png; null -> PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)@MyChild::child_method at 105 in test.pl
+    SortKey: child_method
+    Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
+
+    child_func() in test.pl; /subroutine_gutter_icon.png; null -> PsiPerlFuncDefinitionImpl(FUNC_DEFINITION)@MyChild::child_func at 129 in test.pl
+    SortKey: child_func
+    Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
+

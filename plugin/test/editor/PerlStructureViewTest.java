@@ -40,13 +40,27 @@ public class PerlStructureViewTest extends PerlLightTestCase {
   public void testClassAccessor() {doTest();}
 
   @Test
-  public void testConstants() {doTest();}
+  public void testConstants() { doTest(); }
 
   @Test
-  public void testExceptionClass() {doTest();}
+  public void testExceptionClass() { doTest(); }
 
   @Test
-  public void testMooseAttrs() {doTest();}
+  public void testMooseAttrs() { doTest(); }
+
+  @Test
+  public void testParentsAndImports() {
+    var root = myFixture.copyDirectoryToProject("parentsAndImports", "");
+    assertNotNull(root);
+    var libDir = root.findFileByRelativePath("lib");
+    assertNotNull(libDir);
+    markAsLibRoot(libDir, true);
+    var testFile = root.findFileByRelativePath("test.pl");
+    assertNotNull(testFile);
+    myFixture.configureFromExistingVirtualFile(testFile);
+    doTestStructureViewWithoutInit();
+  }
+
 
   private void doTest() {
     doTestStructureView();
