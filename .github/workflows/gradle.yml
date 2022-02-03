@@ -54,6 +54,24 @@ jobs:
           perlbrew exec -q --with perl-5.32.0 cpan App::cpanminus
           perlbrew lib create perl-5.32.0@plugin_test || true
           perlbrew exec -q --with perl-5.32.0@plugin_test cpanm --notest Mojolicious Devel::Camelcadedb Devel::Cover JSON App::Prove::Plugin::PassEnv TAP::Formatter::Camelcade Devel::NYTProf Perl::Tidy Perl::Critic
+      - name: Cache plenv and installed perls
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-plenv
+          cache-version: 0
+        with:
+          path: |
+            ~/.plenv
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-v${{ env.cache-version }}
+      - name: Set up plenv and perl-5.32.0
+        env:
+          PLENV_VERSION: 5.32.0
+        run: |
+          git clone --depth 1 https://github.com/tokuhirom/plenv.git ~/.plenv
+          git clone --depth 1 https://github.com/tokuhirom/Perl-Build.git ~/.plenv/plugins/perl-build/
+          ~/.plenv/bin/plenv install ${{ env.PLENV_VERSION }} --noman -j 8
+          ~/.plenv/bin/plenv install-cpanm
+          ~/.plenv/bin/plenv exec cpanm --notest Mojolicious Devel::Camelcadedb Devel::Cover JSON App::Prove::Plugin::PassEnv TAP::Formatter::Camelcade Devel::NYTProf Perl::Tidy Perl::Critic
       - name: Cache SonarCloud packages
         uses: actions/cache@v1
         with:

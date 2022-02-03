@@ -107,7 +107,7 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
 
   @com.intellij.testFramework.Parameterized.Parameters(name = "{0}")
   public static Iterable<Object[]> realData(Class<?> clazz) {
-    return Arrays.asList(new Object[][]{{PerlBrewLocalInterpreterConfigurator.INSTANCE}});
+    return Arrays.asList(new Object[][]{{PerlBrewLocalInterpreterConfigurator.INSTANCE}, {PlenvLocalInterpreterConfigurator.INSTANCE}});
   }
 
   @Override
