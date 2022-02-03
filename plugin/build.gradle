@@ -33,7 +33,7 @@ dependencies{
 
 intellij {
   type.set('IU')
-  intellij.plugins = [intelliLangPlugin, 'copyright', 'coverage', 'java']
+  intellij.plugins = [intelliLangPlugin, 'copyright', 'coverage', 'java', 'remote-run']
 }
 
 prepareTestingSandbox{

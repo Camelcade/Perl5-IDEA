@@ -26,11 +26,13 @@ import com.intellij.openapi.ui.Messages;
 import com.intellij.util.ArrayUtil;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.sdk.PerlHandlerBean;
+import com.perl5.lang.perl.idea.sdk.host.PerlHostHandler;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostWithFileSystemHandler;
 import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandler;
 import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandlers;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.TestOnly;
 
 import javax.swing.*;
 import java.util.List;
@@ -114,5 +116,15 @@ class PerlDockerHandler extends PerlHostWithFileSystemHandler<PerlDockerData, Pe
   @Override
   public @Nullable Icon getIcon() {
     return PerlIcons.DOCKER_ICON;
+  }
+
+  @TestOnly
+  static @NotNull PerlDockerHandler getInstance() {
+    for (PerlHostHandler<?, ?> handler : PerlHostHandler.all()) {
+      if (handler instanceof PerlDockerHandler) {
+        return (PerlDockerHandler)handler;
+      }
+    }
+    throw new NullPointerException();
   }
 }

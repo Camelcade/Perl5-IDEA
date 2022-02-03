@@ -19,7 +19,10 @@ package com.perl5.lang.perl.idea.sdk.versionManager.plenv;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlRealVersionManagerHandler;
 import org.jetbrains.annotations.NotNull;
 
-public class PlenvTestUtil {
+public final class PlenvTestUtil {
+  private PlenvTestUtil() {
+  }
+
   public static @NotNull PerlRealVersionManagerHandler<?, ?> getVersionManagerHandler() {
     return PlenvHandler.getInstance();
   }

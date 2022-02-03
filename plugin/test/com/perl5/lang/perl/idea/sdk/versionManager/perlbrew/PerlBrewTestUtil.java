@@ -19,7 +19,10 @@ package com.perl5.lang.perl.idea.sdk.versionManager.perlbrew;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlRealVersionManagerHandler;
 import org.jetbrains.annotations.NotNull;
 
-public class PerlBrewTestUtil {
+public final class PerlBrewTestUtil {
+  private PerlBrewTestUtil() {
+  }
+
   public static @NotNull PerlRealVersionManagerHandler<?, ?> getVersionManagerHandler() {
     return PerlBrewHandler.getInstance();
   }

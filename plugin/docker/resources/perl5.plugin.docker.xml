@@ -16,7 +16,7 @@
 
 <idea-plugin package="com.perl5.lang.perl.idea.sdk.host.docker">
   <dependencies>
-    <module name="intellij.clouds.docker.remoteRun"/>
+    <plugin id="org.jetbrains.plugins.remote-run"/>
     <plugin id="com.intellij.modules.ultimate"/>
   </dependencies>
 

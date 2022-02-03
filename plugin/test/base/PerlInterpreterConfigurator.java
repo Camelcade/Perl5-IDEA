@@ -6,6 +6,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
 import com.intellij.openapi.util.Disposer;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
+import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostHandler;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlRealVersionManagerHandler;
 import org.jetbrains.annotations.NotNull;
@@ -21,12 +22,16 @@ public abstract class PerlInterpreterConfigurator {
                         @NotNull Disposable testDisposable) {
     versionManagerHandler.createInterpreter(
       distributionId,
-      versionManagerHandler.createAdapter(pathToVersionManager, PerlHostHandler.getDefaultHandler().createData()),
+      versionManagerHandler.createAdapter(pathToVersionManager, getHostData()),
       sdk -> {
         Disposer.register(testDisposable, () -> WriteAction.run(() -> PerlSdkTable.getInstance().removeJdk(sdk)));
         PerlProjectManager.getInstance(project).setProjectSdk(sdk);
       },
       project
     );
+  }
+
+  protected @NotNull PerlHostData<?, ?> getHostData() {
+    return PerlHostHandler.getDefaultHandler().createData();
   }
 }
