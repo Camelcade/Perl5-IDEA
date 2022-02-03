@@ -16,6 +16,7 @@
 
 package run;
 
+import base.PerlInterpreterConfigurator;
 import base.PerlLightTestCaseBase;
 import base.PerlPlatformTestCase;
 import categories.Heavy;
@@ -66,8 +67,13 @@ import java.util.function.Consumer;
 
 import static base.PerlLightTestCaseBase.SEPARATOR_NEWLINES;
 
+@SuppressWarnings("UnconstructableJUnitTestCase")
 @Category(Heavy.class)
 public class PerlDebuggerTest extends PerlPlatformTestCase {
+
+  public PerlDebuggerTest(@NotNull PerlInterpreterConfigurator interpreterConfigurator) {
+    super(interpreterConfigurator);
+  }
 
   @Override
   protected String getBaseDataPath() {

@@ -16,6 +16,7 @@
 
 package run;
 
+import base.PerlInterpreterConfigurator;
 import base.PerlPlatformTestCase;
 import categories.Heavy;
 import com.intellij.execution.ExecutionException;
@@ -56,9 +57,14 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 
+@SuppressWarnings("UnconstructableJUnitTestCase")
 @Category(Heavy.class)
 public class PerlProfilerTest extends PerlPlatformTestCase {
   private Element myConfigurations;
+
+  public PerlProfilerTest(@NotNull PerlInterpreterConfigurator interpreterConfigurator) {
+    super(interpreterConfigurator);
+  }
 
   @Override
   protected void setUp() throws Exception {

@@ -1,5 +1,6 @@
 package run;
 
+import base.PerlInterpreterConfigurator;
 import base.PerlPlatformTestCase;
 import categories.Heavy;
 import com.intellij.lang.annotation.Annotation;
@@ -21,14 +22,20 @@ import com.perl5.lang.perl.idea.annotators.PerlCriticErrorDescriptor;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import com.perl5.lang.perl.xsubs.PerlXSubsState;
+import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("UnconstructableJUnitTestCase")
 @Category(Heavy.class)
 public class PerlHeavyActionsTest extends PerlPlatformTestCase {
+  public PerlHeavyActionsTest(@NotNull PerlInterpreterConfigurator interpreterConfigurator) {
+    super(interpreterConfigurator);
+  }
+
   @Override
   protected String getBaseDataPath() {
     return "testData/run/actions";

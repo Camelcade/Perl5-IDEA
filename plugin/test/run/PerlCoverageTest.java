@@ -16,6 +16,7 @@
 
 package run;
 
+import base.PerlInterpreterConfigurator;
 import base.PerlLightTestCaseBase;
 import base.PerlPlatformTestCase;
 import categories.Heavy;
@@ -49,8 +50,13 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
+@SuppressWarnings("UnconstructableJUnitTestCase")
 @Category(Heavy.class)
 public class PerlCoverageTest extends PerlPlatformTestCase {
+  public PerlCoverageTest(@NotNull PerlInterpreterConfigurator interpreterConfigurator) {
+    super(interpreterConfigurator);
+  }
+
   @Override
   protected String getBaseDataPath() {
     return "testData/run/coverage";

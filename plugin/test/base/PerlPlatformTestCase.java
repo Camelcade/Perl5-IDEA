@@ -38,7 +38,6 @@ import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.actionSystem.LangDataKeys;
 import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.application.WriteAction;
 import com.intellij.openapi.application.impl.NonBlockingReadActionImpl;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.fileEditor.FileEditor;
@@ -46,23 +45,18 @@ import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.ModuleRootModificationUtil;
 import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.util.Key;
 import com.intellij.openapi.util.Ref;
-import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.util.PsiUtilCore;
-import com.intellij.testFramework.HeavyPlatformTestCase;
-import com.intellij.testFramework.PlatformTestUtil;
-import com.intellij.testFramework.TestActionEvent;
-import com.intellij.testFramework.UsefulTestCase;
+import com.intellij.testFramework.*;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.intellij.util.ui.UIUtil;
 import com.intellij.util.ui.tree.TreeUtil;
@@ -71,9 +65,6 @@ import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import com.perl5.lang.perl.idea.run.prove.PerlSMTRunnerConsoleView;
 import com.perl5.lang.perl.idea.run.prove.PerlTestRunConfiguration;
-import com.perl5.lang.perl.idea.sdk.host.PerlHostHandler;
-import com.perl5.lang.perl.idea.sdk.versionManager.PerlRealVersionManagerHandler;
-import com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewTestUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import com.pty4j.util.Pair;
@@ -83,10 +74,10 @@ import org.jetbrains.concurrency.Promise;
 import org.junit.Assume;
 import org.junit.runner.Description;
 import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -95,21 +86,34 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.BooleanSupplier;
 import java.util.function.Function;
 
-@RunWith(JUnit4.class)
+@RunWith(Parameterized.class)
 public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
   private static final int MAX_WAIT_TIME = 10_000;
   protected static final Logger LOG = Logger.getInstance(PerlPlatformTestCase.class);
-  private static final String PERLBREW_HOME = "~/perl5/perlbrew/bin/perlbrew";
-  private static final String PERL_532 = "perl-5.32.0";
-  private static final String MOJO_LIB_SEPARATOR = "@";
   private static final Key<CapturingProcessAdapter> ADAPTER_KEY = Key.create("process.adapter");
 
   protected final Disposable myPerlLightTestCaseDisposable = Disposer.newDisposable();
 
+  private @NotNull PerlInterpreterConfigurator myInterpreterConfigurator;
+
+  public PerlPlatformTestCase(@NotNull PerlInterpreterConfigurator interpreterConfigurator) {
+    myInterpreterConfigurator = interpreterConfigurator;
+  }
+
+  @org.junit.runners.Parameterized.Parameters(name = "sdk: {0}")
+  public static Iterable<Object[]> fakeData() {
+    return Collections.emptyList();
+  }
+
+  @com.intellij.testFramework.Parameterized.Parameters(name = "{0}")
+  public static Iterable<Object[]> realData(Class<?> clazz) {
+    return Arrays.asList(new Object[][]{{PerlBrewInterpreterConfigurator.INSTANCE}});
+  }
+
   @Override
   protected void setUp() throws Exception {
     super.setUp();
-    addPerlBrewSdk(getPerl532DistibutionId("plugin_test"));
+    myInterpreterConfigurator.setUpPerlInterpreter(myProject, myPerlLightTestCaseDisposable);
   }
 
   protected void disposeOnPerlTearDown(@NotNull Disposable disposable) {
@@ -158,32 +162,9 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
   protected void doEvaluate(@NotNull Description description) {
   }
 
-  protected void addPerlBrewSdk(@NotNull String distributionId) {
-    addSdk(getPerlbrewPath(), distributionId, PerlBrewTestUtil.getVersionManagerHandler());
-  }
-
-  protected void addSdk(@NotNull String pathToVersionManager,
-                        @NotNull String distributionId,
-                        @NotNull PerlRealVersionManagerHandler<?, ?> versionManagerHandler) {
-    versionManagerHandler.createInterpreter(
-      distributionId,
-      versionManagerHandler.createAdapter(pathToVersionManager, PerlHostHandler.getDefaultHandler().createData()),
-      this::onSdkCreation,
-      getProject()
-    );
-  }
-
-  private void onSdkCreation(@NotNull Sdk sdk) {
-    disposeOnPerlTearDown(() -> WriteAction.run(() -> PerlSdkTable.getInstance().removeJdk(sdk)));
-    PerlProjectManager.getInstance(getProject()).setProjectSdk(sdk);
-  }
 
   protected @Nullable Sdk getSdk() {
     return PerlProjectManager.getSdk(getModule());
-  }
-
-  protected @NotNull String getPerl532DistibutionId(@Nullable String libraryName) {
-    return StringUtil.isEmpty(libraryName) ? PERL_532 : PERL_532 + MOJO_LIB_SEPARATOR + libraryName;
   }
 
   protected void runAction(@NotNull AnAction anAction) {
@@ -219,19 +200,8 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
     PlatformTestUtil.dispatchAllEventsInIdeEventQueue();
   }
 
-  protected static void assumePerlbrewAvailable() {
-    Assume.assumeTrue(getPerlbrewFile() != null);
-  }
-
-  protected static @NotNull String getPerlbrewPath() {
-    assumePerlbrewAvailable();
-    return Objects.requireNonNull(getPerlbrewFile()).getPath();
-  }
-
-  protected static @Nullable File getPerlbrewFile() {
-    String perlbrewHome = FileUtil.expandUserHome(PERLBREW_HOME);
-    File perlbrewFile = new File(perlbrewHome);
-    return perlbrewFile.exists() ? perlbrewFile : null;
+  protected void assumePerlbrewAvailable() {
+    Assume.assumeTrue(myInterpreterConfigurator instanceof PerlBrewInterpreterConfigurator);
   }
 
   protected String getBaseDataPath() {

@@ -16,6 +16,7 @@
 
 package run;
 
+import base.PerlInterpreterConfigurator;
 import base.PerlPlatformTestCase;
 import categories.Heavy;
 import com.intellij.execution.executors.DefaultRunExecutor;
@@ -28,11 +29,17 @@ import com.intellij.testFramework.UsefulTestCase;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import com.pty4j.util.Pair;
+import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
+@SuppressWarnings("UnconstructableJUnitTestCase")
 @Category(Heavy.class)
 public class PerlRunTest extends PerlPlatformTestCase {
+  public PerlRunTest(@NotNull PerlInterpreterConfigurator interpreterConfigurator) {
+    super(interpreterConfigurator);
+  }
+
   @Override
   protected String getBaseDataPath() {
     return "testData/run/run";

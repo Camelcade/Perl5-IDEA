@@ -16,6 +16,7 @@
 
 package run;
 
+import base.PerlInterpreterConfigurator;
 import base.PerlPlatformTestCase;
 import categories.Heavy;
 import com.intellij.openapi.diagnostic.Logger;
@@ -37,9 +38,14 @@ import org.junit.runner.Description;
 
 import java.util.List;
 
+@SuppressWarnings("UnconstructableJUnitTestCase")
 @Category(Heavy.class)
 public class MojoProjectTest extends PerlPlatformTestCase {
   private static final Logger LOG = Logger.getInstance(MojoProjectTest.class);
+
+  public MojoProjectTest(@NotNull PerlInterpreterConfigurator interpreterConfigurator) {
+    super(interpreterConfigurator);
+  }
 
   @Override
   protected void doEvaluate(@NotNull Description description) {
