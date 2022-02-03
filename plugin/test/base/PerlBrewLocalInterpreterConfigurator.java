@@ -6,12 +6,12 @@ import com.intellij.openapi.util.io.FileUtil;
 import com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewTestUtil;
 import org.jetbrains.annotations.NotNull;
 
-public class PerlBrewInterpreterConfigurator extends PerlInterpreterConfigurator {
-  public static final PerlInterpreterConfigurator INSTANCE = new PerlBrewInterpreterConfigurator();
+public class PerlBrewLocalInterpreterConfigurator extends PerlInterpreterConfigurator {
+  public static final PerlInterpreterConfigurator INSTANCE = new PerlBrewLocalInterpreterConfigurator();
   private static final String PERLBREW_HOME = "~/perl5/perlbrew/bin/perlbrew";
   private static final String DISTRIBUTION_ID = "perl-5.32.0@plugin_test";
 
-  private PerlBrewInterpreterConfigurator() {
+  private PerlBrewLocalInterpreterConfigurator() {
   }
 
   @Override

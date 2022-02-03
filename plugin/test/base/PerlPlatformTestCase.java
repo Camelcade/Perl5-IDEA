@@ -107,7 +107,7 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
 
   @com.intellij.testFramework.Parameterized.Parameters(name = "{0}")
   public static Iterable<Object[]> realData(Class<?> clazz) {
-    return Arrays.asList(new Object[][]{{PerlBrewInterpreterConfigurator.INSTANCE}});
+    return Arrays.asList(new Object[][]{{PerlBrewLocalInterpreterConfigurator.INSTANCE}});
   }
 
   @Override
@@ -201,7 +201,7 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
   }
 
   protected void assumePerlbrewAvailable() {
-    Assume.assumeTrue(myInterpreterConfigurator instanceof PerlBrewInterpreterConfigurator);
+    Assume.assumeTrue(myInterpreterConfigurator instanceof PerlBrewLocalInterpreterConfigurator);
   }
 
   protected String getBaseDataPath() {
