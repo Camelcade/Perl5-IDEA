@@ -95,9 +95,12 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-      - name: Test with Gradle
+      - name: Pre-pull test images
         run: |
           docker --version
+          docker pull hurricup/camelcade-test:perl5
+      - name: Test with Gradle
+        run: |
           ./gradlew test -PincludeHeavy=1 -Pyoutrack.token=${{ secrets.YOUTRACK_TOKEN }}
       - name: Uploading test results artifact
         uses: actions/upload-artifact@v2
