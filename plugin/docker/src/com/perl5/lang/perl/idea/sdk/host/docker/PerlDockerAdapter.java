@@ -280,9 +280,11 @@ class PerlDockerAdapter {
 
     try {
       String command = sb.toString();
-      LOG.info("Executing in " + myData.getImageName());
-      StringUtil.split(command, "\n").forEach(it -> LOG.info("    " + it));
-      return ExecUtil.createTempExecutableScript("dockerWrapper", "", command);
+      LOG.debug("Executing in ", myData.getImageName());
+      StringUtil.split(command, "\n").forEach(it -> LOG.debug("    ", it));
+      var dockerWrapper = ExecUtil.createTempExecutableScript("dockerWrapper", "", command);
+      LOG.debug("Created docker wrapper: ", dockerWrapper);
+      return dockerWrapper;
     }
     catch (IOException e) {
       throw new ExecutionException(e);
