@@ -34,7 +34,6 @@ import com.perl5.lang.mojolicious.model.MojoProjectManager;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.junit.runner.Description;
 
 import java.util.List;
 
@@ -45,11 +44,6 @@ public class MojoProjectTest extends PerlPlatformTestCase {
 
   public MojoProjectTest(@NotNull PerlInterpreterConfigurator interpreterConfigurator) {
     super(interpreterConfigurator);
-  }
-
-  @Override
-  protected void doEvaluate(@NotNull Description description) {
-    assumePerlbrewAvailable();
   }
 
   @Test

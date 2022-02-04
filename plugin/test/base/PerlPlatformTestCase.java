@@ -72,7 +72,6 @@ import com.pty4j.util.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.concurrency.Promise;
-import org.junit.Assume;
 import org.junit.runner.Description;
 import org.junit.runner.RunWith;
 
@@ -203,10 +202,6 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
     assertTrue("Action is not enabled: " + action, eventPresentation.isEnabled());
     action.actionPerformed(actionEvent);
     PlatformTestUtil.dispatchAllEventsInIdeEventQueue();
-  }
-
-  protected void assumePerlbrewAvailable() {
-    Assume.assumeTrue(myInterpreterConfigurator instanceof PerlBrewLocalInterpreterConfigurator);
   }
 
   protected String getBaseDataPath() {
