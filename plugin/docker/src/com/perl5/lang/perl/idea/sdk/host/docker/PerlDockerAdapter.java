@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.sdk.host.docker;
 
+import com.intellij.execution.CommandLineUtil;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.process.ProcessOutput;
 import com.intellij.execution.util.ExecUtil;
@@ -33,6 +34,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.ArrayUtil;
+import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.sdk.host.PerlExecutionException;
@@ -273,8 +275,8 @@ class PerlDockerAdapter {
   private @NotNull File createCommandScript(@NotNull PerlCommandLine commandLine) throws ExecutionException {
     StringBuilder sb = new StringBuilder();
     commandLine.getEnvironment().forEach((key, val) -> sb.append("export ").append(key).append('=')
-      .append('\'').append(StringUtil.escapeChars(val, '\'')).append("'\n"));
-    sb.append(commandLine.getCommandLineString());
+      .append(CommandLineUtil.posixQuote(val)).append("\n"));
+    sb.append(String.join(" ", ContainerUtil.map(commandLine.getCommandLineList(null), CommandLineUtil::posixQuote)));
 
     try {
       String command = sb.toString();
