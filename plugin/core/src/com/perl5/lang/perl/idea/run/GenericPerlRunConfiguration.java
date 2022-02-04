@@ -29,8 +29,6 @@ import com.intellij.execution.runners.RunConfigurationWithSuppressedDefaultRunAc
 import com.intellij.execution.ui.ConsoleView;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
@@ -51,12 +49,12 @@ import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugOptions;
 import com.perl5.lang.perl.idea.sdk.host.PerlConsoleView;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
+import com.perl5.lang.perl.util.PerlFileUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jdom.Element;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.jps.model.serialization.PathMacroUtil;
 
 import java.io.File;
 import java.nio.charset.Charset;
@@ -395,9 +393,9 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
   }
 
   protected static @Nullable String computeWorkingDirectory(@NotNull Project project, @NotNull VirtualFile virtualFile) {
-    Module moduleForFile = ModuleUtilCore.findModuleForFile(virtualFile, project);
-    if (moduleForFile != null) {
-      return PathMacroUtil.getModuleDir(moduleForFile.getModuleFilePath());
+    var fileContentRoot = PerlFileUtil.getContentRoot(project, virtualFile);
+    if (fileContentRoot != null) {
+      return fileContentRoot.getPath();
     }
     return project.getBasePath();
   }

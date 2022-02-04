@@ -73,9 +73,9 @@ public class PerlHeavyActionsTest extends PerlPlatformTestCase {
     CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
     assertEmpty(PerlSubUtil.getSubDeclarations(getProject(), "Hash::StoredIterator::hash_get_iterator"));
 
-    var moduleRoot = getModuleRoot();
-    moduleRoot.refresh(false, false);
-    var deparsedFile = moduleRoot.findFileByRelativePath(PerlXSubsState.DEPARSED_FILE_NAME);
+    var deparsedFileRoot = getProject().getBaseDir();
+    deparsedFileRoot.refresh(false, false);
+    var deparsedFile = deparsedFileRoot.findFileByRelativePath(PerlXSubsState.DEPARSED_FILE_NAME);
     assertNotNull(deparsedFile);
 
     CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());

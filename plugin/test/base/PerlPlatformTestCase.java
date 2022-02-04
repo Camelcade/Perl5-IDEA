@@ -234,13 +234,15 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
     return FileEditorManager.getInstance(getProject()).openFile(getFileInModule(relativePath), true, true);
   }
 
+  /**
+   * @return current module only content root
+   */
   protected @NotNull VirtualFile getModuleRoot() {
-    try {
-      return getOrCreateModuleDir(getModule());
+    var contentRoots = ModuleRootManager.getInstance(getModule()).getContentRoots();
+    if (contentRoots.length != 1) {
+      fail("Expected a single root module, got: " + List.of(contentRoots));
     }
-    catch (IOException e) {
-      throw new RuntimeException(e);
-    }
+    return contentRoots[0];
   }
 
   protected @NotNull VirtualFile getModuleFile(@NotNull String relativePath) {

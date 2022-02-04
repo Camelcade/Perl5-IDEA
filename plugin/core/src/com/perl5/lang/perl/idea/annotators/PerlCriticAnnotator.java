@@ -26,7 +26,6 @@ import com.intellij.notification.Notifications;
 import com.intellij.openapi.application.ReadAction;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -38,6 +37,7 @@ import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.psi.PerlFile;
+import com.perl5.lang.perl.util.PerlFileUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -59,7 +59,8 @@ public class PerlCriticAnnotator extends ExternalAnnotator<PerlFile, List<PerlCr
            ? (PerlFile)file : null;
   }
 
-  protected @Nullable PerlCommandLine getPerlCriticCommandLine(Project project) {
+  protected @Nullable PerlCommandLine getPerlCriticCommandLine(@NotNull PsiFile fileToLint) {
+    var project = fileToLint.getProject();
     PerlSharedSettings sharedSettings = PerlSharedSettings.getInstance(project);
     VirtualFile perlCriticScript =
       ReadAction.compute(() -> PerlRunUtil.findLibraryScriptWithNotification(project, SCRIPT_NAME, PACKAGE_NAME));
@@ -70,7 +71,14 @@ public class PerlCriticAnnotator extends ExternalAnnotator<PerlFile, List<PerlCr
     if (commandLine == null) {
       return null;
     }
-    commandLine.withWorkDirectory(project.getBasePath());
+    var virtualFileToLint = PsiUtilCore.getVirtualFile(fileToLint);
+    var contentRoot = PerlFileUtil.getContentRoot(project, virtualFileToLint);
+    if (contentRoot != null) {
+      commandLine.withWorkDirectory(contentRoot.getPath());
+    }
+    else {
+      LOG.warn("No content root for perlcritic lint: " + virtualFileToLint + " - " + fileToLint + " in " + project);
+    }
 
     if (StringUtil.isNotEmpty(sharedSettings.PERL_CRITIC_ARGS)) {
       commandLine.addParameters(StringUtil.split(sharedSettings.PERL_CRITIC_ARGS, " "));
@@ -97,7 +105,7 @@ public class PerlCriticAnnotator extends ExternalAnnotator<PerlFile, List<PerlCr
     }
 
     try {
-      PerlCommandLine criticCommandLine = getPerlCriticCommandLine(sourcePsiFile.getProject());
+      PerlCommandLine criticCommandLine = getPerlCriticCommandLine(sourcePsiFile);
       if (criticCommandLine == null) {
         PerlSharedSettings.getInstance(sourcePsiFile.getProject()).PERL_CRITIC_ENABLED = false;
         return null;

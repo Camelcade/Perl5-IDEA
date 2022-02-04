@@ -23,6 +23,7 @@ import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -61,6 +62,7 @@ public class PerlFileUtil {
   /**
    * @return a content root for the {@code virtualFile} in the context of {@code project} or null if file is not in content
    */
+  @Contract("_, null -> null")
   public static @Nullable VirtualFile getContentRoot(@NotNull Project project, @Nullable VirtualFile virtualFile) {
     return virtualFile == null ? null : ProjectFileIndex.getInstance(project).getContentRootForFile(virtualFile);
   }

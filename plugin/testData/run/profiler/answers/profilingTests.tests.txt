@@ -3,7 +3,7 @@
     Bootstrap (failed test)
 ----------
 #   Failed test 'Bootstrap'
-#   at /DATA_PATH/t/bootstrap_failed.t line 5.
+#   at /DATA_PATH/testProfilingTests/t/bootstrap_failed.t line 5.
 #          got: 'teamcity[enteredTheMatrix timestamp='2019-03-10T12:56:49.973']
 # teamcity[testingStarted timestamp='2019-03-10T12:56:49.973']
 # teamcity[testSuiteStarted locationHint='myfile://testData/tests/is_failed_named.t' name='testData/tests/is_failed_named.t' timestamp='2019-03-10T12:56:49.973']
@@ -47,7 +47,7 @@
     with name (failed test)
 ----------
 #   Failed test 'with name'
-#   at /DATA_PATH/t/is_failed_named.t line 5.
+#   at /DATA_PATH/testProfilingTests/t/is_failed_named.t line 5.
 #          got: 'Actual ' 
 #  text'
 #     expected: 'Expe'cted
@@ -56,7 +56,7 @@
   t/is_failed_unnamed.t (failed suite)
     Unnamed test (#1) (failed test)
 ----------
-#   Failed test at /DATA_PATH/t/is_failed_unnamed.t line 5.
+#   Failed test at /DATA_PATH/testProfilingTests/t/is_failed_unnamed.t line 5.
 #          got: 'Actual ' 
 #  text'
 #     expected: 'Expe'cted
@@ -81,7 +81,7 @@
       with name (failed test)
 ----------
 #   Failed test 'with name'
-#   at /DATA_PATH/t/subtest_is_failed_named.t line 6.
+#   at /DATA_PATH/testProfilingTests/t/subtest_is_failed_named.t line 6.
 #          got: 'Actual ' 
 #  text'
 #     expected: 'Expe'cted
@@ -92,7 +92,7 @@
     Wrapping subtest (failed suite)
       Unnamed test (#1) (failed test)
 ----------
-#   Failed test at /DATA_PATH/t/subtest_is_failed_unnamed.t line 6.
+#   Failed test at /DATA_PATH/testProfilingTests/t/subtest_is_failed_unnamed.t line 6.
 #          got: 'Actual ' 
 #  text'
 #     expected: 'Expe'cted
