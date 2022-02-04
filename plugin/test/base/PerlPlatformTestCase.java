@@ -65,6 +65,7 @@ import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import com.perl5.lang.perl.idea.run.prove.PerlSMTRunnerConsoleView;
 import com.perl5.lang.perl.idea.run.prove.PerlTestRunConfiguration;
+import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import com.pty4j.util.Pair;
@@ -447,8 +448,14 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
     sb.append(")");
     String stacktrace = node.getStacktrace();
     if (StringUtil.isNotEmpty(stacktrace)) {
+      var localRoot = Objects.requireNonNull(getProject().getBasePath());
+      var sdk = getSdk();
+      assertNotNull(sdk);
+      PerlHostData<?, ?> hostData = PerlHostData.notNullFrom(sdk);
+      var remoteRoot = hostData.getRemotePath(localRoot);
+      assertNotNull("No remote root for local root: " + localRoot, remoteRoot);
       sb.append(PerlLightTestCaseBase.SEPARATOR_NEWLINES)
-        .append(stacktrace.replaceAll(Objects.requireNonNull(getProject().getBasePath()), "/DATA_PATH"))
+        .append(stacktrace.replaceAll(remoteRoot, "/DATA_PATH"))
         .append(PerlLightTestCaseBase.SEPARATOR_NEWLINES);
     }
     else {
