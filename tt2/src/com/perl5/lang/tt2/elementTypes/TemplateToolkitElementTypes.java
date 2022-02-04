@@ -21,6 +21,8 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.IFileElementType;
 import com.perl5.lang.tt2.TemplateToolkitLanguage;
 import com.perl5.lang.tt2.lexer.TemplateToolkitElementTypesGenerated;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 
 public interface TemplateToolkitElementTypes extends TemplateToolkitElementTypesGenerated {
@@ -31,7 +33,12 @@ public interface TemplateToolkitElementTypes extends TemplateToolkitElementTypes
     TemplateToolkitLanguage.INSTANCE,
     TT2_HTML,
     TT2_OUTER
-  );
+  ) {
+    @Override
+    protected boolean isInsertionToken(@Nullable IElementType tokenType, @NotNull CharSequence tokenSequence) {
+      return tokenType == TT2_OPEN_TAG || tokenType == TT2_OUTLINE_TAG;
+    }
+  };
 
   IElementType TT2_PERL_CODE = new TemplateToolkitPerlCodeElementType("PERL_CODE");
   IElementType TT2_RAWPERL_CODE = new TemplateToolkitRawPerlCodeElementType("RAW_PERL_CODE");

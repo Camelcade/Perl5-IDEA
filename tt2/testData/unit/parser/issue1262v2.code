@@ -1,0 +1,36 @@
+
+<script type="text/javascript">
+    var a = 5;
+    if([% b %] <= a) {
+        console.log("Hello world");
+    }
+</script>
+
+
+<script type="text/javascript">
+    var a = 5;
+    if(
+%% b
+        <= a) {
+        console.log("Hello world");
+    }
+</script>
+
+<script type="text/javascript">
+    [% comments = 1 %]
+    [% IF comments # some comment here %]
+    //javacript comment
+    [% END %]
+
+    function calculate(a){
+        [% IF negative %]
+        if( a < 0){
+            alert('Negative');
+            return false;
+        }
+        [% END %]
+        return a+10;
+    }
+
+</script>
+

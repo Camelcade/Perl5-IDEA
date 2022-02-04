@@ -287,6 +287,11 @@ public class TemplateToolkitParserTest extends PerlParserTestBase {
   }
 
   @Test
+  public void testIssue1262v2() {
+    doTest();
+  }
+
+  @Test
   public void testIssue1263() {
     doTest();
   }
