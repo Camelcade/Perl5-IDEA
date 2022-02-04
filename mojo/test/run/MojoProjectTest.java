@@ -21,9 +21,9 @@ import base.PerlPlatformTestCase;
 import categories.Heavy;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.ui.TestDialogManager;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.testFramework.PlatformTestUtil;
 import com.perl5.lang.mojolicious.MojoUtil;
+import com.perl5.lang.mojolicious.idea.actions.MojoGenerateAction;
 import com.perl5.lang.mojolicious.idea.actions.MojoGenerateAppAction;
 import com.perl5.lang.mojolicious.idea.actions.MojoGenerateLiteAppAction;
 import com.perl5.lang.mojolicious.idea.actions.MojoGeneratePluginAction;
@@ -50,9 +50,7 @@ public class MojoProjectTest extends PerlPlatformTestCase {
   public void testGenerateAppAction() {
     assertMojoAvailable();
     TestDialogManager.setTestInputDialog(message -> "Test::App");
-    runAction(new MojoGenerateAppAction(), getModuleRoot());
-    waitForAllDescriptorsToFinish();
-    List<MojoProject> projects = refreshAndRescanForProjects().getMojoProjects();
+    List<MojoProject> projects = runMojoGenerateActionAndGetProjects(new MojoGenerateAppAction());
     if (projects.size() != 1) {
       fail("Expected an application, got: " + projects);
     }
@@ -60,15 +58,21 @@ public class MojoProjectTest extends PerlPlatformTestCase {
     LOG.info("Got: " + projects.get(0));
   }
 
+  private @NotNull List<MojoProject> runMojoGenerateActionAndGetProjects(MojoGenerateAction action) {
+    var testSemaphore = action.runWithTestSemaphore(() -> {
+      runAction(action, getModuleRoot());
+    });
+    waitForAllDescriptorsToFinish();
+    waitWithEventsDispatching("Final callback hasn't finished", testSemaphore::isUp);
+    return refreshAndRescanForProjects().getMojoProjects();
+  }
+
   @Test
   public void testGenerateLiteAppAction() {
     assertMojoAvailable();
-    VirtualFile mainContentRoot = getModuleRoot();
     TestDialogManager.setTestInputDialog(message -> "my_lite_app.pl");
-    runAction(new MojoGenerateLiteAppAction(), mainContentRoot);
-    waitForAllDescriptorsToFinish();
-    refreshAndRescanForProjects().getMojoProjects();
-    assertNotNull(mainContentRoot.findChild("my_lite_app.pl"));
+    runMojoGenerateActionAndGetProjects(new MojoGenerateLiteAppAction());
+    assertNotNull(getModuleRoot().findChild("my_lite_app.pl"));
   }
 
   private @NotNull MojoProjectManager refreshAndRescanForProjects() {
@@ -83,9 +87,7 @@ public class MojoProjectTest extends PerlPlatformTestCase {
   public void testGeneratePluginAction() {
     assertMojoAvailable();
     TestDialogManager.setTestInputDialog(message -> "Test::Plugin");
-    runAction(new MojoGeneratePluginAction(), getModuleRoot());
-    waitForAllDescriptorsToFinish();
-    List<MojoProject> projects = refreshAndRescanForProjects().getMojoProjects();
+    List<MojoProject> projects = runMojoGenerateActionAndGetProjects(new MojoGeneratePluginAction());
     if (projects.size() != 1) {
       fail("Expected a plugin, got: " + projects);
     }
