@@ -137,10 +137,6 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
     return module;
   }
 
-  protected @NotNull VirtualFile getMainContentRoot() {
-    return ModuleRootManager.getInstance(getModule()).getContentRoots()[0];
-  }
-
   @Override
   protected void tearDown() throws Exception {
     try {
