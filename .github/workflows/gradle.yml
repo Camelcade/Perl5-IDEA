@@ -67,9 +67,9 @@ jobs:
         env:
           PLENV_VERSION: 5.32.0
         run: |
-          git clone --depth 1 https://github.com/tokuhirom/plenv.git ~/.plenv
-          git clone --depth 1 https://github.com/tokuhirom/Perl-Build.git ~/.plenv/plugins/perl-build/
-          ~/.plenv/bin/plenv install ${{ env.PLENV_VERSION }} --noman -j 8
+          git clone --depth 1 https://github.com/tokuhirom/plenv.git ~/.plenv || git -C $(realpath ~/.plenv) pull
+          git clone --depth 1 https://github.com/tokuhirom/Perl-Build.git ~/.plenv/plugins/perl-build/ || git -C $(realpath ~/.plenv/plugins/perl-build) pull
+          ~/.plenv/bin/plenv install ${{ env.PLENV_VERSION }} --noman -j 8 || true
           ~/.plenv/bin/plenv install-cpanm
           ~/.plenv/bin/plenv exec cpanm --notest Mojolicious Devel::Camelcadedb Devel::Cover JSON App::Prove::Plugin::PassEnv TAP::Formatter::Camelcade Devel::NYTProf Perl::Tidy Perl::Critic
       - name: Cache SonarCloud packages
