@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.sdk.host.local;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.PathEnvironmentVariableUtil;
 import com.intellij.openapi.Disposable;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFileSystem;
 import com.intellij.util.containers.ContainerUtil;
@@ -95,7 +96,7 @@ class PerlLocalHostData extends PerlHostData<PerlLocalHostData, PerlLocalHostHan
   }
 
   @Override
-  public void fixPermissionsRecursively(@NotNull String localPath) {
+  public void fixPermissionsRecursively(@NotNull String localPath, @Nullable Project project) {
 
   }
 }

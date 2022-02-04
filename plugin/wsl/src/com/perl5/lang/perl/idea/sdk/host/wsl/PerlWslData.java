@@ -24,6 +24,7 @@ import com.intellij.execution.wsl.WslDistributionManager;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.util.ObjectUtils;
@@ -169,7 +170,7 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
   }
 
   @Override
-  public void fixPermissionsRecursively(@NotNull String localPath) {
+  public void fixPermissionsRecursively(@NotNull String localPath, @Nullable Project project) {
 
   }
 }

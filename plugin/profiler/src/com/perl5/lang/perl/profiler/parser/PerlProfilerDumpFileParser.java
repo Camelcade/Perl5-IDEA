@@ -69,7 +69,7 @@ public class PerlProfilerDumpFileParser implements ProfilerDumpFileParser {
 
     PerlHostData<?, ?> hostData = PerlHostData.notNullFrom(perlSdk);
     try {
-      hostData.fixPermissionsRecursively(file.getAbsolutePath());
+      hostData.fixPermissionsRecursively(file.getAbsolutePath(), myProject);
     }
     catch (ExecutionException e) {
       LOG.warn("Failed to fix permissions for " + file, e);

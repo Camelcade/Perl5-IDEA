@@ -21,6 +21,7 @@ import com.intellij.execution.process.ProcessOutput;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.util.io.FileUtil;
@@ -159,20 +160,24 @@ class PerlDockerData extends PerlHostData<PerlDockerData, PerlDockerHandler> {
   }
 
   @Override
-  public void fixPermissionsRecursively(@NotNull String localPath) throws ExecutionException {
+  public void fixPermissionsRecursively(@NotNull String localPath, @Nullable Project project) throws ExecutionException {
     if (!SystemInfo.isUnix) {
+      LOG.debug("Can fix permissions only on unix systems");
       return;
     }
 
     var remotePath = getRemotePath(localPath);
     if (remotePath == null) {
-      LOG.warn("Unable to fix permissins, failed to map to remote path: " + localPath);
+      LOG.warn("Unable to fix permissions, failed to map to remote path: " + localPath);
       return;
     }
 
     UnixSystem system = new UnixSystem();
     long gid = system.getGid();
     long uid = system.getUid();
-    execAndGetOutput(new PerlCommandLine("chown", "-R", uid + ":" + gid, remotePath).withHostData(this));
+    var chownOutput = execAndGetOutput(new PerlCommandLine("chown", "-R", uid + ":" + gid, remotePath)
+                                         .withProject(project)
+                                         .withHostData(this));
+    LOG.debug("Executed permission change: ", chownOutput);
   }
 }

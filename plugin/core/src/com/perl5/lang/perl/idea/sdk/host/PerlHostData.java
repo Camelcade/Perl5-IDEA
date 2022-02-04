@@ -20,6 +20,7 @@ import com.intellij.execution.ExecutionException;
 import com.intellij.execution.process.*;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
 import com.intellij.openapi.util.SystemInfo;
@@ -235,7 +236,8 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
    * On unix systems updates permissions/ownership on {@code localPath} exposed to the remote (e.g. mount in docker) to be consistent
    * with current users.
    */
-  public abstract void fixPermissionsRecursively(@NotNull String localPath) throws ExecutionException;
+  public abstract void fixPermissionsRecursively(@NotNull String localPath,
+                                                 @Nullable Project project) throws ExecutionException;
 
   /**
    * @return path to the helpers root on the target host
