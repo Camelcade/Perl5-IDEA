@@ -81,12 +81,14 @@ public class PerlIdentifierInspection extends PerlInspection {
           return;
         }
 
-        boolean hasError = false;
-        StringBuilder formattedIdentifier = new StringBuilder();
         int length = text.length();
         if (length == 0) {
           return;
         }
+
+        boolean hasError = false;
+        StringBuilder formattedIdentifier = new StringBuilder();
+
         for (int i = 0; i < length; i++) {
           char currentChar = text.charAt(i);
           String escapedChar;
