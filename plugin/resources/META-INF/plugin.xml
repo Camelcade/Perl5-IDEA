@@ -651,7 +651,7 @@
                      enabledByDefault="true" level="WARNING"
                      implementationClass="com.perl5.lang.perl.idea.inspections.PerlUnresolvedLabelInspection"/>
     <localInspection language="Perl5"
-                     shortName="IdentifierInspection" displayName="Correct identifiers" groupName="Perl5"
+                     shortName="IdentifierInspection" displayName="Non-ASCII symbols in identifiers" groupName="Perl5"
                      enabledByDefault="true" level="ERROR"
                      implementationClass="com.perl5.lang.perl.idea.inspections.PerlIdentifierInspection"/>
     <localInspection language="Perl5"

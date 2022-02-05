@@ -24,13 +24,10 @@ import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.*;
 import org.jetbrains.annotations.NotNull;
 
-import java.nio.charset.StandardCharsets;
-
 
 public class PerlIdentifierInspection extends PerlInspection {
   @Override
   public @NotNull PsiElementVisitor buildVisitor(final @NotNull ProblemsHolder holder, boolean isOnTheFly) {
-    boolean isUtf = holder.getFile().getVirtualFile().getCharset() == StandardCharsets.UTF_8;
     return new PerlVisitor() {
 
       @Override
@@ -86,38 +83,36 @@ public class PerlIdentifierInspection extends PerlInspection {
 
         boolean hasError = false;
         StringBuilder formattedIdentifier = new StringBuilder();
-        if (!isUtf) {
-          int length = text.length();
-          if (length == 0) {
-            return;
+        int length = text.length();
+        if (length == 0) {
+          return;
+        }
+        for (int i = 0; i < length; i++) {
+          char currentChar = text.charAt(i);
+          String escapedChar;
+          if (currentChar == '<') {
+            escapedChar = "&lt;";
           }
-          for (int i = 0; i < length; i++) {
-            char currentChar = text.charAt(i);
-            String escapedChar;
-            if (currentChar == '<') {
-              escapedChar = "&lt;";
-            }
-            else if (currentChar == '>') {
-              escapedChar = "&gt;";
-            }
-            else {
-              escapedChar = "" + currentChar;
-            }
-
-            if (currentChar > 127) {
-              hasError = true;
-              formattedIdentifier.append("<b>");
-              formattedIdentifier.append(escapedChar);
-              formattedIdentifier.append("</b>");
-            }
-            else {
-              formattedIdentifier.append(escapedChar);
-            }
+          else if (currentChar == '>') {
+            escapedChar = "&gt;";
+          }
+          else {
+            escapedChar = "" + currentChar;
           }
 
-          if (hasError) {
-            registerError(holder, element, PerlBundle.message("perl.incorrect.ascii.identifier", formattedIdentifier.toString()));
+          if (currentChar > 127) {
+            hasError = true;
+            formattedIdentifier.append("<b>");
+            formattedIdentifier.append(escapedChar);
+            formattedIdentifier.append("</b>");
           }
+          else {
+            formattedIdentifier.append(escapedChar);
+          }
+        }
+
+        if (hasError) {
+          registerError(holder, element, PerlBundle.message("perl.incorrect.ascii.identifier", formattedIdentifier.toString()));
         }
       }
     };
