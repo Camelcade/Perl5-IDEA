@@ -17,12 +17,9 @@
 package com.perl5.lang.perl.documentation;
 
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.Ref;
-import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiRecursiveElementVisitor;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.GlobalSearchScope;
@@ -351,41 +348,6 @@ public class PerlDocUtil implements PerlElementTypes {
         return null;
       }
     }
-  }
-
-  /**
-   * Attempts to find a named section in the POD element and generates documentation from it.
-   *
-   * @param podElement POD element of the perl file
-   * @return generated documentation or null
-   */
-  public static @Nullable String renderPodElement(@NotNull PsiElement podElement) {
-    PsiFile podPsi = podElement.getContainingFile().getViewProvider().getPsi(PodLanguage.INSTANCE);
-    if (podPsi == null) {
-      return null;
-    }
-    TextRange podElementRange = podElement.getTextRange();
-    Ref<String> resultRef = Ref.create();
-    podPsi.accept(new PsiRecursiveElementVisitor() {
-      private boolean stopProcessing = false;
-
-      @Override
-      public void visitElement(@NotNull PsiElement element) {
-        if (stopProcessing) {
-          return;
-        }
-        if (!podElementRange.intersects(element.getTextRange())) {
-          return;
-        }
-        else if (element instanceof PodTitledSection && podElementRange.contains(element.getTextRange())) {
-          resultRef.set(renderElement((PodTitledSection)element));
-          stopProcessing = true;
-          return;
-        }
-        super.visitElement(element);
-      }
-    });
-    return resultRef.get();
   }
 
   @Contract("null->null")

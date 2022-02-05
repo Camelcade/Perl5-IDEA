@@ -45,8 +45,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.POD;
-
 public class PodDocumentationProvider extends PerlDocumentationProviderBase implements PodElementTypes {
   private static final Logger LOG = Logger.getInstance(PodDocumentationProvider.class);
 
@@ -117,9 +115,6 @@ public class PodDocumentationProvider extends PerlDocumentationProviderBase impl
     }
     else if (element instanceof PodSection) {
       return PerlDocUtil.renderElement((PodSection)element);
-    }
-    else if (PsiUtilCore.getElementType(element) == POD) {
-      return PerlDocUtil.renderPodElement(element);
     }
     return null;
   }
