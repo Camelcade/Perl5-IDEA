@@ -31,6 +31,11 @@ public class PerlIdentifierInspection extends PerlInspection {
     return new PerlVisitor() {
 
       @Override
+      protected boolean shouldVisitLightElements() {
+        return true;
+      }
+
+      @Override
       public void visitSubNameElement(@NotNull PerlSubNameElement o) {
         if (!(o.getParent() instanceof PerlSubDefinitionElement)) {
           checkPerlIdentifier(o);
