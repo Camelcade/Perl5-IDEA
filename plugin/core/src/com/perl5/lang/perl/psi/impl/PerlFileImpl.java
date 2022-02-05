@@ -28,15 +28,13 @@ import com.intellij.openapi.roots.impl.ProjectFileIndexImpl;
 import com.intellij.openapi.util.ClearableLazyValue;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.*;
+import com.intellij.psi.FileViewProvider;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.ResolveState;
 import com.intellij.psi.impl.source.PsiFileImpl;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.psi.stubs.ObjectStubTree;
-import com.intellij.psi.stubs.PsiFileStub;
 import com.intellij.psi.stubs.StubElement;
-import com.intellij.psi.stubs.StubTreeLoader;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.PerlLanguage;
@@ -45,14 +43,11 @@ import com.perl5.lang.perl.extensions.generation.PerlCodeGeneratorImpl;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlControlFlowBuilder;
-import com.perl5.lang.perl.psi.PerlDoExpr;
 import com.perl5.lang.perl.psi.PerlFile;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.references.PerlFileContextSubstitutor;
 import com.perl5.lang.perl.psi.stubs.PerlFileStub;
-import com.perl5.lang.perl.psi.stubs.imports.PerlUseStatementStub;
-import com.perl5.lang.perl.psi.stubs.imports.runtime.PerlRuntimeImportStub;
 import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -63,7 +58,6 @@ import javax.swing.*;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 
 public class PerlFileImpl extends PsiFileBase implements PerlFile {
@@ -138,92 +132,6 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
   @Override
   public @NotNull PerlMroType getMroType() {
     return PerlMroType.DFS;
-  }
-
-  @Override
-  public void collectIncludedFiles(Set<VirtualFile> includedVirtualFiles) {
-    if (!includedVirtualFiles.contains(getVirtualFile())) {
-      includedVirtualFiles.add(getVirtualFile());
-
-      StubElement<?> fileStub = getStub();
-
-      if (fileStub == null) {
-        collectRequiresFromPsi(this, includedVirtualFiles);
-      }
-      else {
-        collectRequiresFromStub(fileStub, includedVirtualFiles);
-      }
-    }
-  }
-
-  protected void collectRequiresFromVirtualFile(VirtualFile virtualFile, Set<VirtualFile> includedVirtualFiles) {
-    if (!includedVirtualFiles.contains(virtualFile)) {
-      includedVirtualFiles.add(virtualFile);
-
-      ObjectStubTree<?> objectStubTree = StubTreeLoader.getInstance().readOrBuild(getProject(), virtualFile, null);
-      if (objectStubTree != null) {
-        collectRequiresFromStub((PsiFileStub<?>)objectStubTree.getRoot(), includedVirtualFiles);
-      }
-      else {
-        PsiFile targetPsiFile = PsiManager.getInstance(getProject()).findFile(virtualFile);
-        if (targetPsiFile != null) {
-          collectRequiresFromPsi(targetPsiFile, includedVirtualFiles);
-        }
-      }
-    }
-  }
-
-  protected void collectRequiresFromStub(@NotNull StubElement<?> currentStub, Set<VirtualFile> includedVirtualFiles) {
-    VirtualFile virtualFile = null;
-    if (currentStub instanceof PerlUseStatementStub) {
-      String packageName = ((PerlUseStatementStub)currentStub).getPackageName();
-      virtualFile = PerlPackageUtil.resolvePackageNameToVirtualFile(this, packageName);
-    }
-    if (currentStub instanceof PerlRuntimeImportStub) {
-      String importPath = ((PerlRuntimeImportStub)currentStub).getImportPath();
-      if (importPath != null) {
-        virtualFile = PerlPackageUtil.resolveRelativePathToVirtualFile(this, importPath);
-      }
-    }
-
-    if (virtualFile != null) {
-      collectRequiresFromVirtualFile(virtualFile, includedVirtualFiles);
-    }
-
-    for (Object childStub : currentStub.getChildrenStubs()) {
-      assert childStub instanceof StubElement : childStub.getClass();
-      collectRequiresFromStub((StubElement<?>)childStub, includedVirtualFiles);
-    }
-  }
-
-
-  /**
-   * Collects required files from psi structure, used in currently modified document
-   *
-   * @param includedVirtualFiles set of already collected virtual files
-   */
-  protected void collectRequiresFromPsi(PsiFile psiFile, Set<VirtualFile> includedVirtualFiles) {
-    for (PsiElement importStatement : PsiTreeUtil.<PsiElement>findChildrenOfAnyType(psiFile, PerlUseStatementElement.class,
-                                                                                    PerlDoExpr.class)) {
-      VirtualFile virtualFile = null;
-      if (importStatement instanceof PerlUseStatementElement) {
-        String packageName = ((PerlUseStatementElement)importStatement).getPackageName();
-        if (packageName != null) {
-          virtualFile = PerlPackageUtil.resolvePackageNameToVirtualFile(this, packageName);
-        }
-      }
-      else if (importStatement instanceof PerlDoExpr) {
-        String importPath = ((PerlDoExpr)importStatement).getImportPath();
-
-        if (importPath != null) {
-          virtualFile = PerlPackageUtil.resolveRelativePathToVirtualFile(this, ((PerlDoExpr)importStatement).getImportPath());
-        }
-      }
-
-      if (virtualFile != null) {
-        collectRequiresFromVirtualFile(virtualFile, includedVirtualFiles);
-      }
-    }
   }
 
   @Override

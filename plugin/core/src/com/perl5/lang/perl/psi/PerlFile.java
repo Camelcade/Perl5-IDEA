@@ -18,7 +18,6 @@ package com.perl5.lang.perl.psi;
 
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.CachedValueProvider;
@@ -34,20 +33,10 @@ import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.pod.parser.psi.PodLinkTarget;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Set;
-
 
 public interface PerlFile
   extends PsiFile, PerlLexicalScope, PerlNamespaceDefinitionElement, PerlLabelScope, ItemPresentation, PodLinkTarget, PerlDieScope,
           PerlControlFlowOwner {
-  /**
-   * Recursively collects virtual files included in current file
-   *
-   * @param includedVirtualFiles set of already gathered files
-   */
-  void collectIncludedFiles(Set<VirtualFile> includedVirtualFiles);
-
-
   /**
    * @return namespace definition psi element from built-in service or synthetic one
    */
