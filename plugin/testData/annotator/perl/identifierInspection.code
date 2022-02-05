@@ -1,9 +1,9 @@
 
-package <error descr="For non-utf files perl identifier should match the regexp: '/ (?aa) (?!\d) \w+ /x', but got Foo::Bаar.">Foo::Bаar</error>;
-sub <error descr="For non-utf files perl identifier should match the regexp: '/ (?aa) (?!\d) \w+ /x', but got someеsub.">someеsub</error>{}
-sub <error descr="For non-utf files perl identifier should match the regexp: '/ (?aa) (?!\d) \w+ /x', but got someеohtersub.">someеohtersub</error>;
-my ($<error descr="For non-utf files perl identifier should match the regexp: '/ (?aa) (?!\d) \w+ /x', but got vaаr.">vaаr</error>, @<error descr="For non-utf files perl identifier should match the regexp: '/ (?aa) (?!\d) \w+ /x', but got vaаr.">vaаr</error>, %<error descr="For non-utf files perl identifier should match the regexp: '/ (?aa) (?!\d) \w+ /x', but got vaаr.">vaаr</error>);
-<error descr="For non-utf files perl identifier should match the regexp: '/ (?aa) (?!\d) \w+ /x', but got soоmesub.">soоmesub</error>();
-<error descr="For non-utf files perl identifier should match the regexp: '/ (?aa) (?!\d) \w+ /x', but got Foo::Bаar.">Foo::Bаar</error>-><error descr="For non-utf files perl identifier should match the regexp: '/ (?aa) (?!\d) \w+ /x', but got someеsub.">someеsub</error>();
-has <error descr="For non-utf files perl identifier should match the regexp: '/ (?aa) (?!\d) \w+ /x', but got sometаhing.">sometаhing</error> => is => 'rw';
-use Exception::Class '<error descr="For non-utf files perl identifier should match the regexp: '/ (?aa) (?!\d) \w+ /x', but got SomeExceеption.">SomeExceеption</error>';
+package <error descr="Non-ASCII symbols in identifier: Foo::Bаar.">Foo::Bаar</error>;
+sub <error descr="Non-ASCII symbols in identifier: someеsub.">someеsub</error>{}
+sub <error descr="Non-ASCII symbols in identifier: someеohtersub.">someеohtersub</error>;
+my ($<error descr="Non-ASCII symbols in identifier: vaаr.">vaаr</error>, @<error descr="Non-ASCII symbols in identifier: vaаr.">vaаr</error>, %<error descr="Non-ASCII symbols in identifier: vaаr.">vaаr</error>);
+<error descr="Non-ASCII symbols in identifier: soоmesub.">soоmesub</error>();
+<error descr="Non-ASCII symbols in identifier: Foo::Bаar.">Foo::Bаar</error>-><error descr="Non-ASCII symbols in identifier: someеsub.">someеsub</error>();
+has <error descr="Non-ASCII symbols in identifier: sometаhing.">sometаhing</error> => is => 'rw';
+use Exception::Class '<error descr="Non-ASCII symbols in identifier: SomeExceеption.">SomeExceеption</error>';

@@ -1,0 +1,20 @@
+package <error descr="Non-ASCII symbols in identifier: Supеr::Fоo::Bаr.">Supеr::Fоo::Bаr</error>;
+use Exception::Class qw/
+    <error descr="Non-ASCII symbols in identifier: Excеption1.">Excеption1</error>
+    <error descr="Non-ASCII symbols in identifier: Excеption2.">Excеption2</error>
+/;
+use constant SINGLE_ONE => 42;
+use constant {
+    <error descr="Non-ASCII symbols in identifier: MULТI_FIRST.">MULТI_FIRST</error>  => 42,
+    <error descr="Non-ASCII symbols in identifier: MULTI_SЕCOND.">MULTI_SЕCOND</error> => 69
+};
+<error descr="Non-ASCII symbols in identifier: Supеr::Fоo::Bаr.">Supеr::Fоo::Bаr</error>->foo;
+<error descr="Non-ASCII symbols in identifier: Supеr::Fоo::Bаr::.">Supеr::Fоo::Bаr</error>::->bar;
+sub <error descr="Non-ASCII symbols in identifier: sub_dеclaration.">sub_dеclaration</error>;
+sub <error descr="Non-ASCII symbols in identifier: sub_dеfinition.">sub_dеfinition</error>{}
+method <error descr="Non-ASCII symbols in identifier: methоd_definition.">methоd_definition</error>(){}
+func <error descr="Non-ASCII symbols in identifier: func_dеfinition.">func_dеfinition</error>(){}
+has <error descr="Non-ASCII symbols in identifier: attr_dеclaration.">attr_dеclaration</error> => isa => 'rw';
+$self->helper(somеhelper => sub{});
+
+

@@ -40,23 +40,37 @@ public class PerlAnnotatorTest extends PerlLightTestCase {
   public void testFunctionParametersFunDeprecated() {doDeprecationTest();}
 
   @Test
-  public void testTruthinessScalar() {doTruthinessTest();}
+  public void testTruthinessScalar() { doTruthinessTest(); }
 
   @Test
-  public void testTruthinessScalarCast() {doTruthinessTest();}
+  public void testTruthinessScalarCast() { doTruthinessTest(); }
 
   private void doTruthinessTest() {
     doInspectionTest(PerlTruthinessInspection.class);
   }
 
   @Test
-  public void testIssue1884() {doTestHashLoopInspection();}
+  public void testIdentifierInspection() {
+    doTestIdentifierInspection();
+  }
 
   @Test
-  public void testBreakContinue() {doTestSwitchInspection();}
+  public void testIdentifierInspection2() {
+    doTestIdentifierInspection();
+  }
+
+  private void doTestIdentifierInspection() {
+    doInspectionTest(PerlIdentifierInspection.class);
+  }
 
   @Test
-  public void testSwitchDefaultWhen() {doTestSwitchInspection();}
+  public void testIssue1884() { doTestHashLoopInspection(); }
+
+  @Test
+  public void testBreakContinue() { doTestSwitchInspection(); }
+
+  @Test
+  public void testSwitchDefaultWhen() { doTestSwitchInspection(); }
 
   private void doTestSwitchInspection() {
     doInspectionTest(PerlSwitchInspection.class);
