@@ -67,7 +67,7 @@ public class PerlIdentifierInspection extends PerlInspection {
         super.visitVariableNameElement(o);
       }
 
-      protected void checkPerlNamedElementIdentifier(@NotNull PsiNameIdentifierOwner namedElement) {
+      private void checkPerlNamedElementIdentifier(@NotNull PsiNameIdentifierOwner namedElement) {
         PsiElement nameIdentifier = namedElement.getNameIdentifier();
         if (nameIdentifier != null) {
           checkPerlIdentifier(namedElement.getName(), nameIdentifier);
@@ -75,11 +75,11 @@ public class PerlIdentifierInspection extends PerlInspection {
       }
 
 
-      protected void checkPerlIdentifier(@NotNull PsiElement element) {
+      private void checkPerlIdentifier(@NotNull PsiElement element) {
         checkPerlIdentifier(element.getNode().getChars(), element);
       }
 
-      protected void checkPerlIdentifier(CharSequence text, @NotNull PsiElement element) {
+      private void checkPerlIdentifier(CharSequence text, @NotNull PsiElement element) {
         if (text == null) {
           return;
         }
