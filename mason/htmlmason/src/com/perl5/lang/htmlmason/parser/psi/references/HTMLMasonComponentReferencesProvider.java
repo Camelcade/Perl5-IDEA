@@ -67,8 +67,7 @@ public class HTMLMasonComponentReferencesProvider extends PsiReferenceProvider i
           else if (StringUtil.equals(fileOrSlug, COMPONENT_SLUG_REQUEST)) {
             result.add(new HTMLMasonComponentSimpleReference((PerlString)element, componentRange));
           }
-          else // component or subcomponent
-          {
+          else {
             result.add(new HTMLMasonComponentReference((PerlString)element, componentRange));
           }
 

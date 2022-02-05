@@ -1,0 +1,30 @@
+Text: /top.mas; Tail: null; Type: null; Icon: /perl5classic.png; Type Icon: null
+	Lookups: /top.mas
+	VirtualFile: top.mas
+Text: /zero/autohandler; Tail: null; Type: null; Icon: /perl5classic.png; Type Icon: null
+	Lookups: /zero/autohandler
+	VirtualFile: autohandler
+Text: /zero/dhandler; Tail: null; Type: null; Icon: /perl5classic.png; Type Icon: null
+	Lookups: /zero/dhandler
+	VirtualFile: dhandler
+Text: /zero/first.mas; Tail: null; Type: null; Icon: /perl5classic.png; Type Icon: null
+	Lookups: /zero/first.mas
+	VirtualFile: first.mas
+Text: /zero/otherdir/autohandler; Tail: null; Type: null; Icon: /perl5classic.png; Type Icon: null
+	Lookups: /zero/otherdir/autohandler
+	VirtualFile: autohandler
+Text: /zero/otherdir/dhandler; Tail: null; Type: null; Icon: /perl5classic.png; Type Icon: null
+	Lookups: /zero/otherdir/dhandler
+	VirtualFile: dhandler
+Text: /zero/otherdir/fourth.mas; Tail: null; Type: null; Icon: /perl5classic.png; Type Icon: null
+	Lookups: /zero/otherdir/fourth.mas
+	VirtualFile: fourth.mas
+Text: /zero/second.mas; Tail: null; Type: null; Icon: /perl5classic.png; Type Icon: null
+	Lookups: /zero/second.mas
+	VirtualFile: second.mas
+Text: /zero/subdir/file.mas; Tail: null; Type: null; Icon: /perl5classic.png; Type Icon: null
+	Lookups: /zero/subdir/file.mas
+	VirtualFile: file.mas
+Text: /zero/subdir/third.mas; Tail: null; Type: null; Icon: /perl5classic.png; Type Icon: null
+	Lookups: /zero/subdir/third.mas
+	VirtualFile: third.mas

@@ -1,0 +1,42 @@
+Text: PARENT; Tail: null; Type: null; Icon: null; Type Icon: null
+	Lookups: PARENT
+	String: PARENT
+Text: REQUEST; Tail: null; Type: null; Icon: null; Type Icon: null
+	Lookups: REQUEST
+	String: REQUEST
+Text: SELF; Tail: null; Type: null; Icon: null; Type Icon: null
+	Lookups: SELF
+	String: SELF
+Text: file.mas; Tail: null; Type: null; Icon: /perl5classic.png; Type Icon: null
+	Lookups: file.mas
+	VirtualFile: file.mas
+Text: subcomponent; Tail: ($site [, $label]); Type: null; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: subcomponent
+	PsiElement: HTMLMasonSubcomponentDefitnitionImpl(HTML_MASON_DEF_DEFINITION) at 205 in file.mas
+Text: top.mas; Tail: null; Type: null; Icon: /perl5classic.png; Type Icon: null
+	Lookups: top.mas
+	VirtualFile: top.mas
+Text: zero/autohandler; Tail: null; Type: null; Icon: /perl5classic.png; Type Icon: null
+	Lookups: zero/autohandler
+	VirtualFile: autohandler
+Text: zero/dhandler; Tail: null; Type: null; Icon: /perl5classic.png; Type Icon: null
+	Lookups: zero/dhandler
+	VirtualFile: dhandler
+Text: zero/first.mas; Tail: null; Type: null; Icon: /perl5classic.png; Type Icon: null
+	Lookups: zero/first.mas
+	VirtualFile: first.mas
+Text: zero/otherdir/autohandler; Tail: null; Type: null; Icon: /perl5classic.png; Type Icon: null
+	Lookups: zero/otherdir/autohandler
+	VirtualFile: autohandler
+Text: zero/otherdir/dhandler; Tail: null; Type: null; Icon: /perl5classic.png; Type Icon: null
+	Lookups: zero/otherdir/dhandler
+	VirtualFile: dhandler
+Text: zero/otherdir/fourth.mas; Tail: null; Type: null; Icon: /perl5classic.png; Type Icon: null
+	Lookups: zero/otherdir/fourth.mas
+	VirtualFile: fourth.mas
+Text: zero/second.mas; Tail: null; Type: null; Icon: /perl5classic.png; Type Icon: null
+	Lookups: zero/second.mas
+	VirtualFile: second.mas
+Text: zero/subdir/third.mas; Tail: null; Type: null; Icon: /perl5classic.png; Type Icon: null
+	Lookups: zero/subdir/third.mas
+	VirtualFile: third.mas

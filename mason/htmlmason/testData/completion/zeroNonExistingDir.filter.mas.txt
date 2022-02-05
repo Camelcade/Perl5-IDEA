@@ -1,0 +1,15 @@
+Text: PARENT; Tail: null; Type: null; Icon: null; Type Icon: null
+	Lookups: PARENT
+	String: PARENT
+Text: REQUEST; Tail: null; Type: null; Icon: null; Type Icon: null
+	Lookups: REQUEST
+	String: REQUEST
+Text: SELF; Tail: null; Type: null; Icon: null; Type Icon: null
+	Lookups: SELF
+	String: SELF
+Text: file.mas; Tail: null; Type: null; Icon: /perl5classic.png; Type Icon: null
+	Lookups: file.mas
+	VirtualFile: file.mas
+Text: subcomponent; Tail: ($site [, $label]); Type: null; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: subcomponent
+	PsiElement: HTMLMasonSubcomponentDefitnitionImpl(HTML_MASON_DEF_DEFINITION) at 205 in file.mas

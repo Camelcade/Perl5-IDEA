@@ -1,0 +1,17 @@
+<%method topmethod>
+<a href="http://www.<% $site %>.com"><% $label %></a>
+
+    <%args>
+        $site
+        $label=>ucfirst($site)
+    </%args>
+</%method>
+
+<%def topsubcomponent>
+<a href="http://www.<% $site %>.com"><% $label %></a>
+
+    <%args>
+        $site
+        $label=>ucfirst($site)
+    </%args>
+</%def>

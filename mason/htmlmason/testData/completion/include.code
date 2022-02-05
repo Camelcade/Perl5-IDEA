@@ -1,0 +1,19 @@
+<& <caret> &>
+
+<%method somemethod>
+<a href="http://www.<% $site %>.com"><% $label %></a>
+
+    <%args>
+        $site
+        $label=>ucfirst($site)
+    </%args>
+</%method>
+
+<%def subcomponent>
+<a href="http://www.<% $site %>.com"><% $label %></a>
+
+    <%args>
+        $site
+        $label=>ucfirst($site)
+    </%args>
+</%def>

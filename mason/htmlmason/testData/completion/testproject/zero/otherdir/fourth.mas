@@ -1,0 +1,21 @@
+<%flags>
+    inherit=>'/top.mas'
+</%flags>
+
+<%method fourthsomemethod>
+<a href="http://www.<% $site %>.com"><% $label %></a>
+
+    <%args>
+        $site
+        $label=>ucfirst($site)
+    </%args>
+</%method>
+
+<%def fourthsubcomponent>
+<a href="http://www.<% $site %>.com"><% $label %></a>
+
+    <%args>
+        $site
+        $label=>ucfirst($site)
+    </%args>
+</%def>

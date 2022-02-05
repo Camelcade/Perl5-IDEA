@@ -1,0 +1,9 @@
+# top level default handler
+
+<%method zero_dhandler_method>
+<a href="http://www.<% $site %>.com"><% $label %></a>
+</%method>
+
+<%def zero_dhandler_subcomponent>
+<a href="http://www.<% $site %>.com"><% $label %></a>
+</%def>

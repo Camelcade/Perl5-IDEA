@@ -1,0 +1,9 @@
+# top level auto-handler
+
+<%method otherdir_autohandler_method>
+<a href="http://www.<% $site %>.com"><% $label %></a>
+</%method>
+
+<%def otherdir_autohandler_subcomponent>
+<a href="http://www.<% $site %>.com"><% $label %></a>
+</%def>
