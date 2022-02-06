@@ -16,18 +16,12 @@
 
 package com.perl5.lang.mojolicious.idea.editor.smartkeys;
 
-import com.intellij.lang.ASTNode;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.EditorModificationUtil;
 import com.intellij.openapi.editor.highlighter.HighlighterIterator;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.mojolicious.MojoliciousElementTypes;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 
 
@@ -77,19 +71,29 @@ public class MojoliciousSmartKeysUtil implements MojoliciousElementTypes, PerlEl
     }
   }
 
+  public static boolean addEndMarker(final @NotNull Editor editor, @NotNull String marker) {
+    var caretOffset = editor.getCaretModel().getOffset();
+    if (caretOffset < 5) {
+      return false;
+    }
+    var highlighterIterator = editor.getHighlighter().createIterator(caretOffset - 2);
+    if (highlighterIterator.getTokenType() != MOJO_BEGIN || hasEndMarkerAhead(highlighterIterator)) {
+      return false;
+    }
 
-  public static boolean addEndMarker(final @NotNull Editor editor, @NotNull PsiFile file, @NotNull String marker) {
-    PsiElement element = file.findElementAt(editor.getCaretModel().getOffset() - 2);
-    IElementType elementType = PsiUtilCore.getElementType(element);
-    if (elementType == MOJO_BEGIN) {
-      ASTNode nextSibling = PerlPsiUtil.getNextSignificantSibling(element.getNode());
-      if (nextSibling == null || nextSibling.getElementType() != BLOCK_BRACELESS ||
-          nextSibling.getTreeNext() == null || nextSibling.getTreeNext().getElementType() != MOJO_END
-      ) {
-        EditorModificationUtil.insertStringAtCaret(editor, marker, false, false);
+    EditorModificationUtil.insertStringAtCaret(editor, marker, false, false);
+    return true;
+  }
+
+  private static boolean hasEndMarkerAhead(@NotNull HighlighterIterator highlighterIterator) {
+    while (true) {
+      highlighterIterator.advance();
+      if (highlighterIterator.atEnd()) {
+        return false;
+      }
+      if (highlighterIterator.getTokenType() == MOJO_END) {
         return true;
       }
     }
-    return false;
   }
 }
