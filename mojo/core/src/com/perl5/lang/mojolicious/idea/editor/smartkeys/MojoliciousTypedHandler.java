@@ -20,12 +20,13 @@ import com.intellij.codeInsight.editorActions.TypedHandlerDelegate;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiFile;
-import com.perl5.lang.mojolicious.MojoliciousElementTypes;
 import com.perl5.lang.mojolicious.psi.MojoliciousFileViewProvider;
 import org.jetbrains.annotations.NotNull;
 
+import static com.perl5.lang.mojolicious.MojoliciousSyntaxElements.KEYWORD_MOJO_BLOCK_CLOSER;
 
-public class MojoliciousTypedHandler extends TypedHandlerDelegate implements MojoliciousElementTypes {
+
+public class MojoliciousTypedHandler extends TypedHandlerDelegate {
   @Override
   public @NotNull Result charTyped(char c, final @NotNull Project project, final @NotNull Editor editor, @NotNull PsiFile file) {
     if (file.getViewProvider() instanceof MojoliciousFileViewProvider) {
