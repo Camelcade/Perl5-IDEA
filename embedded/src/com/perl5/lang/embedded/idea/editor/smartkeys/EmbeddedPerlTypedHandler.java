@@ -29,7 +29,7 @@ public class EmbeddedPerlTypedHandler extends TypedHandlerDelegate {
   public @NotNull Result charTyped(char c, final @NotNull Project project, final @NotNull Editor editor, @NotNull PsiFile file) {
     if (file.getViewProvider() instanceof EmbeddedPerlFileViewProvider) {
       if (c == ' ') {
-        EmbeddedPerlSmartKeysUtil.addCloseMarker(editor, file, " ?>");
+        EmbeddedPerlSmartKeysUtil.addCloseMarker(editor, " ?>");
       }
     }
     return super.charTyped(c, project, editor, file);

@@ -18,45 +18,41 @@ package com.perl5.lang.embedded.idea.editor.smartkeys;
 
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.EditorModificationUtil;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.embedded.idea.completion.EmbeddedPerlPatterns;
+import com.intellij.openapi.editor.highlighter.HighlighterIterator;
 import com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import org.jetbrains.annotations.NotNull;
 
 
 public class EmbeddedPerlSmartKeysUtil implements EmbeddedPerlElementTypes, PerlElementTypes {
-  public static boolean addCloseMarker(final @NotNull Editor editor, @NotNull PsiFile file, @NotNull String marker) {
+  public static void addCloseMarker(final @NotNull Editor editor, @NotNull String marker) {
     int offset = editor.getCaretModel().getOffset();
 
     if (offset >= 2) {
-      PsiElement element = file.findElementAt(offset - 2);
-      if (element != null && element.getNode().getElementType() == EMBED_MARKER_OPEN && !hasCloseMarkerAhead(file, offset)) {
+      var highlighter = editor.getHighlighter();
+      var highlighterIterator = highlighter.createIterator(offset - 2);
+      if (highlighterIterator.getTokenType() == EMBED_MARKER_OPEN && !hasCloseMarkerAhead(highlighterIterator)) {
         EditorModificationUtil.insertStringAtCaret(editor, marker, false, false);
       }
     }
-    return false;
   }
 
-  public static boolean hasCloseMarkerAhead(@NotNull PsiFile psiFile, int startOffset) {
-    int docLength = psiFile.getTextLength();
-    while (startOffset < docLength) {
-      PsiElement element = psiFile.findElementAt(startOffset);
-      if (element == null) {
+  private static boolean hasCloseMarkerAhead(@NotNull HighlighterIterator highlighterIterator) {
+    while (true) {
+      highlighterIterator.advance();
+      if (highlighterIterator.atEnd()) {
         return false;
       }
-      IElementType tokenType = element.getNode().getElementType();
-      if (tokenType == EMBED_MARKER_CLOSE) {
+      var currentToken = highlighterIterator.getTokenType();
+      if (currentToken == EMBED_MARKER_CLOSE) {
         return true;
       }
-      else if (tokenType == EMBED_MARKER_OPEN ||
-               tokenType == QUESTION && EmbeddedPerlPatterns.BROKEN_OPEN_MARKER_PATTERN.accepts(element)) {
-        return false;
+      else if (currentToken == OPERATOR_LT_NUMERIC) {
+        highlighterIterator.advance();
+        if (!highlighterIterator.atEnd() && highlighterIterator.getTokenType() == QUESTION) {
+          return false;
+        }
       }
-      startOffset = element.getTextOffset() + element.getTextLength();
     }
-    return false;
   }
 }
