@@ -97,7 +97,7 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
   protected static final Logger LOG = Logger.getInstance(PerlPlatformTestCase.class);
   private static final Key<CapturingProcessAdapter> ADAPTER_KEY = Key.create("process.adapter");
 
-  protected final Disposable myPerlLightTestCaseDisposable = Disposer.newDisposable();
+  protected final Disposable myPerlTestCaseDisposable = Disposer.newDisposable();
 
   private @NotNull PerlInterpreterConfigurator myInterpreterConfigurator;
 
@@ -123,11 +123,11 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
   protected void setUp() throws Exception {
     super.setUp();
     myInterpreterConfigurator.setUpPerlInterpreter(myProject);
-    PerlRunUtil.setUpForTests(myPerlLightTestCaseDisposable);
+    PerlRunUtil.setUpForTests(myPerlTestCaseDisposable);
   }
 
   protected void disposeOnPerlTearDown(@NotNull Disposable disposable) {
-    Disposer.register(myPerlLightTestCaseDisposable, disposable);
+    Disposer.register(myPerlTestCaseDisposable, disposable);
   }
 
   @Override
@@ -157,7 +157,7 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
         }
       });
 
-      Disposer.dispose(myPerlLightTestCaseDisposable);
+      Disposer.dispose(myPerlTestCaseDisposable);
     }
     finally {
       super.tearDown();
@@ -596,7 +596,7 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
 
   protected @NotNull Ref<Notification> createNotificationSink() {
     Ref<Notification> notificationRef = Ref.create();
-    getProject().getMessageBus().connect(myPerlLightTestCaseDisposable).subscribe(Notifications.TOPIC, new Notifications() {
+    getProject().getMessageBus().connect(myPerlTestCaseDisposable).subscribe(Notifications.TOPIC, new Notifications() {
       @Override
       public void notify(@NotNull Notification notification) {
         notificationRef.set(notification);
