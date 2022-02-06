@@ -45,6 +45,7 @@ import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.ModuleRootModificationUtil;
 import com.intellij.openapi.util.Disposer;
@@ -58,8 +59,10 @@ import com.intellij.psi.PsiManager;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.testFramework.*;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
+import com.intellij.util.concurrency.Semaphore;
 import com.intellij.util.ui.UIUtil;
 import com.intellij.util.ui.tree.TreeUtil;
+import com.perl5.lang.perl.adapters.CpanAdapter;
 import com.perl5.lang.perl.adapters.CpanminusAdapter;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
@@ -72,6 +75,7 @@ import com.pty4j.util.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.concurrency.Promise;
+import org.junit.Assume;
 import org.junit.runner.Description;
 import org.junit.runner.RunWith;
 
@@ -83,6 +87,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
+import java.util.function.BiFunction;
 import java.util.function.BooleanSupplier;
 import java.util.function.Function;
 
@@ -151,8 +156,8 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
           sdkTable.removeJdk(sdk);
         }
       });
+
       Disposer.dispose(myPerlLightTestCaseDisposable);
-      PerlRunUtil.dropTestConsoleDescriptors();
     }
     finally {
       super.tearDown();
@@ -500,10 +505,14 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
   }
 
   protected void waitWithEventsDispatching(@NotNull String errorMessage, @NotNull BooleanSupplier condition) {
+    waitWithEventsDispatching(errorMessage, condition, MAX_WAIT_TIME);
+  }
+
+  protected void waitWithEventsDispatching(@NotNull String errorMessage, @NotNull BooleanSupplier condition, int maxWaitTime) {
     long start = System.currentTimeMillis();
     while (true) {
       try {
-        if (System.currentTimeMillis() - start > MAX_WAIT_TIME) {
+        if (System.currentTimeMillis() - start > maxWaitTime) {
           fail(errorMessage);
         }
         if (condition.getAsBoolean()) {
@@ -548,21 +557,33 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
     assertNull("Package presence is not expected to be installed, but got " + packageVirtualFile, packagePsiFile);
   }
 
-  protected @NotNull PsiFile installPackageAndGetPackageFile(@NotNull PsiFile contextPsiFile, @NotNull String packageName) {
+  protected @NotNull PsiFile installPackageWithCpanminusAndGetPackageFile(@NotNull PsiFile contextPsiFile, @NotNull String packageName) {
+    return installPackageAndGetPackageFile(
+      contextPsiFile, packageName,
+      (sdk, callback) -> CpanminusAdapter.createInstallAction(sdk, getProject(), List.of(packageName), callback)
+    );
+  }
+
+  protected @NotNull PsiFile installPackageWithCpanAndGetPackageFile(@NotNull PsiFile contextPsiFile, @NotNull String packageName) {
+    return installPackageAndGetPackageFile(
+      contextPsiFile, packageName, (sdk, callback) -> CpanAdapter.createInstallAction(sdk, getProject(), List.of(packageName), callback)
+    );
+  }
+
+  private @NotNull PsiFile installPackageAndGetPackageFile(@NotNull PsiFile contextPsiFile,
+                                                           @NotNull String packageName,
+                                                           @NotNull BiFunction<Sdk, Runnable, AnAction> actionFunction) {
     var sdk = getSdk();
     assertNotNull(sdk);
-    var installAction = CpanminusAdapter.createInstallAction(sdk, getProject(), List.of(packageName), null);
+    var semaphore = new Semaphore(1);
+    var installAction = actionFunction.apply(sdk, semaphore::up);
     assertNotNull(installAction);
     runActionWithTestEvent(installAction);
     waitForAllDescriptorsToFinish();
-    refreshIncDirsForPsiElement(contextPsiFile);
+    waitWithEventsDispatching("Install action hasn't finished in time", semaphore::isUp, 30_000);
+    var sdkRefreshSemaphore = PerlRunUtil.getSdkRefreshSemaphore();
+    waitWithEventsDispatching("Sdk refresh hasn't finished", sdkRefreshSemaphore::isUp);
     return getPackageFile(contextPsiFile, packageName);
-  }
-
-  protected void refreshIncDirsForPsiElement(@NotNull PsiFile contextPsiFile) {
-    for (VirtualFile incDir : PerlPackageUtil.getIncDirsForPsiElement(contextPsiFile)) {
-      incDir.refresh(false, true);
-    }
   }
 
   protected @NotNull VirtualFile openAndGetModuleFileInEditor(@NotNull String path) {
@@ -582,5 +603,9 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
       }
     });
     return notificationRef;
+  }
+
+  protected void assumeStatefulSdk() {
+    Assume.assumeTrue("Not applicable in stateless sdk", myInterpreterConfigurator.isStateful());
   }
 }

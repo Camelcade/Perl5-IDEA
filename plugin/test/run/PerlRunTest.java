@@ -25,6 +25,9 @@ import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.ui.RunContentDescriptor;
 import com.intellij.notification.Notification;
 import com.intellij.openapi.util.Ref;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiManager;
+import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.testFramework.UsefulTestCase;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
@@ -32,6 +35,8 @@ import com.pty4j.util.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+
+import java.util.function.BiFunction;
 
 @SuppressWarnings("UnconstructableJUnitTestCase")
 @Category(Heavy.class)
@@ -71,6 +76,31 @@ public class PerlRunTest extends PerlPlatformTestCase {
   public void testRunSimpleScript() {
     copyDirToModule("simple");
     runAndCompareOutput(createOnlyRunConfiguration("simplescript.pl"));
+  }
+
+  @Test
+  public void testInstallWithCpan() {
+    doTestInstall(this::installPackageWithCpanAndGetPackageFile);
+  }
+
+  @Test
+  public void testInstallWithCpanminus() {
+    doTestInstall(this::installPackageWithCpanminusAndGetPackageFile);
+  }
+
+  private void doTestInstall(@NotNull BiFunction<PsiFile, String, PsiFile> installer) {
+    assumeStatefulSdk();
+    copyDirToModule("simple");
+    var contextVirtualFile = openAndGetModuleFileInEditor("simplescript.pl");
+    var contextPsiFile = PsiManager.getInstance(getProject()).findFile(contextVirtualFile);
+    assertNotNull(contextPsiFile);
+    var packageName = "Class::Variable";
+    assertPackageNotExists(contextPsiFile, packageName);
+    var packageFile = installer.apply(contextPsiFile, packageName);
+    assertNotNull(packageFile);
+    var packageVirtualFile = PsiUtilCore.getVirtualFile(packageFile);
+    assertNotNull(packageVirtualFile);
+    delete(packageVirtualFile);
   }
 
   @Test

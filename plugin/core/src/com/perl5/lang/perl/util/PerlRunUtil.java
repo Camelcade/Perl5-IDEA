@@ -30,6 +30,7 @@ import com.intellij.execution.ui.RunContentManager;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
+import com.intellij.openapi.Disposable;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.application.ApplicationManager;
@@ -52,6 +53,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.ObjectUtils;
+import com.intellij.util.concurrency.Semaphore;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
 import com.perl5.PerlIcons;
@@ -88,6 +90,8 @@ public class PerlRunUtil {
   private static final String LEGACY_MODULE_SUFFIX = " in @INC";
   public static final String BUNDLED_MODULE_NAME = "Bundle::Camelcade";
   private static final List<RunContentDescriptor> TEST_CONSOLE_DESCRIPTORS = new ArrayList<>();
+  private static Semaphore ourTestSdkRefreshSemaphore;
+  private static Disposable ourTestDisposable;
   // should be synchronized with https://github.com/Camelcade/Bundle-Camelcade/blob/master/dist.ini
   private static final Set<String> BUNDLED_MODULE_PARTS = Collections.unmodifiableSet(ContainerUtil.newHashSet(
     "App::cpanminus",
@@ -477,7 +481,9 @@ public class PerlRunUtil {
       consoleView.attachToProcess(processHandler);
       processHandler.startNotify();
       if (ApplicationManager.getApplication().isUnitTestMode()) {
+        LOG.assertTrue(ourTestDisposable != null);
         TEST_CONSOLE_DESCRIPTORS.add(runContentDescriptor);
+        Disposer.register(ourTestDisposable, runContentDescriptor.getExecutionConsole());
       }
     }
   }
@@ -594,7 +600,10 @@ public class PerlRunUtil {
     if (sdk == null) {
       return;
     }
-
+    LOG.debug("Starting to refresh ", sdk, " on ", Thread.currentThread().getName());
+    if (ourTestSdkRefreshSemaphore != null) {
+      ourTestSdkRefreshSemaphore.down();
+    }
     new Task.Backgroundable(project, PerlBundle.message("perl.progress.refreshing.interpreter.information", sdk.getName()), false) {
       @Override
       public void run(@NotNull ProgressIndicator indicator) {
@@ -607,6 +616,10 @@ public class PerlRunUtil {
             }
           });
         }
+        if (ourTestSdkRefreshSemaphore != null) {
+          ourTestSdkRefreshSemaphore.up();
+        }
+        LOG.debug("Finished to refresh ", sdk, " on ", Thread.currentThread().getName());
       }
     }.queue();
   }
@@ -617,12 +630,18 @@ public class PerlRunUtil {
   }
 
   @TestOnly
-  public static void dropTestConsoleDescriptors() {
-    for (RunContentDescriptor descriptor : TEST_CONSOLE_DESCRIPTORS) {
-      var console = descriptor.getExecutionConsole();
-      Disposer.dispose(console);
-    }
+  public static @NotNull Semaphore getSdkRefreshSemaphore() {
+    return ourTestSdkRefreshSemaphore;
+  }
 
-    TEST_CONSOLE_DESCRIPTORS.clear();
+  @TestOnly
+  public static void setUpForTests(@NotNull Disposable testDisposable) {
+    ourTestDisposable = testDisposable;
+    ourTestSdkRefreshSemaphore = new Semaphore();
+    Disposer.register(testDisposable, () -> {
+      TEST_CONSOLE_DESCRIPTORS.clear();
+      ourTestSdkRefreshSemaphore = null;
+      ourTestDisposable = null;
+    });
   }
 }
